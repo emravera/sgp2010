@@ -1,0 +1,16 @@
+E:\Implementacion\GyCAP\Principal\bin\Debug\Principal.exe
+E:\Implementacion\GyCAP\Principal\bin\Debug\Principal.pdb
+E:\Implementacion\GyCAP\Principal\bin\Debug\BLL.dll
+E:\Implementacion\GyCAP\Principal\bin\Debug\Entidades.dll
+E:\Implementacion\GyCAP\Principal\bin\Debug\DAL.dll
+E:\Implementacion\GyCAP\Principal\bin\Debug\BLL.pdb
+E:\Implementacion\GyCAP\Principal\bin\Debug\Entidades.pdb
+E:\Implementacion\GyCAP\Principal\bin\Debug\DAL.pdb
+E:\Implementacion\GyCAP\Principal\obj\Debug\ResolveAssemblyReference.cache
+E:\Implementacion\GyCAP\Principal\obj\Debug\Principal.Principal.resources
+E:\Implementacion\GyCAP\Principal\obj\Debug\GyCAP.UI.Principal.Properties.Resources.resources
+E:\Implementacion\GyCAP\Principal\obj\Debug\Principal.csproj.GenerateResource.Cache
+E:\Implementacion\GyCAP\Principal\obj\Debug\Principal.exe
+E:\Implementacion\GyCAP\Principal\obj\Debug\Principal.pdb
+E:\Implementacion\GyCAP\Principal\bin\Debug\Soporte.exe
+E:\Implementacion\GyCAP\Principal\bin\Debug\Soporte.pdb

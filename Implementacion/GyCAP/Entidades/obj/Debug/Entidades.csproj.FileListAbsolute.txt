@@ -1,0 +1,5 @@
+E:\Implementacion\GyCAP\Entidades\bin\Debug\Entidades.dll
+E:\Implementacion\GyCAP\Entidades\bin\Debug\Entidades.pdb
+E:\Implementacion\GyCAP\Entidades\obj\Debug\ResolveAssemblyReference.cache
+E:\Implementacion\GyCAP\Entidades\obj\Debug\Entidades.dll
+E:\Implementacion\GyCAP\Entidades\obj\Debug\Entidades.pdb
