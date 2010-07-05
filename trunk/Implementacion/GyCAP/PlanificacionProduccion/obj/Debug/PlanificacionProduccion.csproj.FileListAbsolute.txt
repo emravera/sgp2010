@@ -1,0 +1,13 @@
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\PlanificacionProduccion.exe
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\PlanificacionProduccion.pdb
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\BLL.dll
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\Entidades.dll
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\DAL.dll
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\BLL.pdb
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\Entidades.pdb
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\DAL.pdb
+E:\Implementacion\GyCAP\PlanificacionProduccion\obj\Debug\ResolveAssemblyReference.cache
+E:\Implementacion\GyCAP\PlanificacionProduccion\obj\Debug\GyCAP.UI.PlanificacionProduccion.Properties.Resources.resources
+E:\Implementacion\GyCAP\PlanificacionProduccion\obj\Debug\PlanificacionProduccion.csproj.GenerateResource.Cache
+E:\Implementacion\GyCAP\PlanificacionProduccion\obj\Debug\PlanificacionProduccion.exe
+E:\Implementacion\GyCAP\PlanificacionProduccion\obj\Debug\PlanificacionProduccion.pdb

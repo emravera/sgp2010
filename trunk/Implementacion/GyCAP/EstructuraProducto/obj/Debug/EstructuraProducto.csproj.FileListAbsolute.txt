@@ -1,0 +1,13 @@
+E:\Implementacion\GyCAP\EstructuraProducto\bin\Debug\EstructuraProducto.exe
+E:\Implementacion\GyCAP\EstructuraProducto\bin\Debug\EstructuraProducto.pdb
+E:\Implementacion\GyCAP\EstructuraProducto\bin\Debug\BLL.dll
+E:\Implementacion\GyCAP\EstructuraProducto\bin\Debug\Entidades.dll
+E:\Implementacion\GyCAP\EstructuraProducto\bin\Debug\DAL.dll
+E:\Implementacion\GyCAP\EstructuraProducto\bin\Debug\BLL.pdb
+E:\Implementacion\GyCAP\EstructuraProducto\bin\Debug\Entidades.pdb
+E:\Implementacion\GyCAP\EstructuraProducto\bin\Debug\DAL.pdb
+E:\Implementacion\GyCAP\EstructuraProducto\obj\Debug\ResolveAssemblyReference.cache
+E:\Implementacion\GyCAP\EstructuraProducto\obj\Debug\GyCAP.UI.EstructuraProducto.Properties.Resources.resources
+E:\Implementacion\GyCAP\EstructuraProducto\obj\Debug\EstructuraProducto.csproj.GenerateResource.Cache
+E:\Implementacion\GyCAP\EstructuraProducto\obj\Debug\EstructuraProducto.exe
+E:\Implementacion\GyCAP\EstructuraProducto\obj\Debug\EstructuraProducto.pdb

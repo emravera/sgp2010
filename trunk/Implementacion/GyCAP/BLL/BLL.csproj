@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A0EA0794-16BA-4988-BCFF-00204902B7AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GyCAP.BLL</RootNamespace>
+    <AssemblyName>BLL</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CapacidadEmpleadoBLL.cs" />
+    <Compile Include="CausaFalloBLL.cs" />
+    <Compile Include="ClienteBLL.cs" />
+    <Compile Include="CocinaBLL.cs" />
+    <Compile Include="ColorBLL.cs" />
+    <Compile Include="ConjuntoBLL.cs" />
+    <Compile Include="DemandaAnualBLL.cs" />
+    <Compile Include="DesignacionBLL.cs" />
+    <Compile Include="DetalleOrdenTrabajoBLL.cs" />
+    <Compile Include="DetallePedidoBLL.cs" />
+    <Compile Include="DetallePlanMantenimientoBLL.cs" />
+    <Compile Include="DetallePlanMensualBLL.cs" />
+    <Compile Include="DetallePlanSemanalBLL.cs" />
+    <Compile Include="DomicilioBLL.cs" />
+    <Compile Include="EjemplarMaquinaBLL.cs" />
+    <Compile Include="EmpleadoBLL.cs" />
+    <Compile Include="EstadoCocinaBLL.cs" />
+    <Compile Include="EstadoDetalleMantenimientoBLL.cs" />
+    <Compile Include="EstadoDetallePedidoBLL.cs" />
+    <Compile Include="EstadoEmpleadoBLL.cs" />
+    <Compile Include="EstadoMaquinaBLL.cs" />
+    <Compile Include="EstadoOrdenTrabajoBLL.cs" />
+    <Compile Include="EstadoPedidoBLL.cs" />
+    <Compile Include="EstadoPlanMantenimientoBLL.cs" />
+    <Compile Include="EstadoUsuarioBLL.cs" />
+    <Compile Include="EstructuraBLL.cs" />
+    <Compile Include="FabricanteMaquinaBLL.cs" />
+    <Compile Include="LocalidadBLL.cs" />
+    <Compile Include="MantenimientoBLL.cs" />
+    <Compile Include="MaquinaBLL.cs" />
+    <Compile Include="MarcaBLL.cs" />
+    <Compile Include="MateriaPrimaBLL.cs" />
+    <Compile Include="ModeloCocinaBLL.cs" />
+    <Compile Include="ModeloMaquinaBLL.cs" />
+    <Compile Include="OrdenTrabajoBLL.cs" />
+    <Compile Include="PedidoBLL.cs" />
+    <Compile Include="PiezaBLL.cs" />
+    <Compile Include="PlanAnualBLL.cs" />
+    <Compile Include="PlanMantenimientoBLL.cs" />
+    <Compile Include="PlanMensualBLL.cs" />
+    <Compile Include="PlanSemanalBLL.cs" />
+    <Compile Include="ProcesoBLL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProveedorBLL.cs" />
+    <Compile Include="ProvinciaBLL.cs" />
+    <Compile Include="RepuestoBLL.cs" />
+    <Compile Include="SectorBLL.cs" />
+    <Compile Include="SistemaBLL.cs" />
+    <Compile Include="StockCocinaBLL.cs" />
+    <Compile Include="StockConjuntoBLL.cs" />
+    <Compile Include="StockMateriaPrimaBLL.cs" />
+    <Compile Include="StockPiezaBLL.cs" />
+    <Compile Include="StockRepuestoBLL.cs" />
+    <Compile Include="StockSubConjuntoBLL.cs" />
+    <Compile Include="SubConjuntoBLL.cs" />
+    <Compile Include="TareaBLL.cs" />
+    <Compile Include="TerminacionBLL.cs" />
+    <Compile Include="TipoMantenimientoBLL.cs" />
+    <Compile Include="TipoRepuestoBLL.cs" />
+    <Compile Include="TipoUnidadMedidaBLL.cs" />
+    <Compile Include="UnidadMedidaBLL.cs" />
+    <Compile Include="UsuarioBLL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{8A90D572-AFF5-43B3-AFBA-529A493DAAAE}</Project>
+      <Name>DAL %28DAL\DAL%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{BF769C01-D311-4BC9-813A-C63DC3B89319}</Project>
+      <Name>Entidades %28Entidades\Entidades%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
