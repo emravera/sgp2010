@@ -14,3 +14,5 @@ E:\Implementacion\GyCAP\Principal\obj\Debug\Principal.exe
 E:\Implementacion\GyCAP\Principal\obj\Debug\Principal.pdb
 E:\Implementacion\GyCAP\Principal\bin\Debug\Soporte.exe
 E:\Implementacion\GyCAP\Principal\bin\Debug\Soporte.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp2010\Implementacion\GyCAP\Principal\obj\Debug\Principal.exe
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp2010\Implementacion\GyCAP\Principal\obj\Debug\Principal.pdb
