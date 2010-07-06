@@ -2,7 +2,7 @@
 /* Table: CAPACIDAD_EMPLEADO                                    */
 /*==============================================================*/
 create table CAPACIDAD_EMPLEADO (
-   CEMP_CODIGO          numeric(10)          not null,
+   CEMP_CODIGO          numeric(10)          identity,
    CEMP_NOMBRE          varchar(30)          null,
    CEMP_DESCRIPCION     varchar(80)          null,
    constraint PK_CAPACIDAD_EMPLEADO primary key nonclustered (CEMP_CODIGO)
@@ -22,7 +22,7 @@ create table CAPACIDADXEMPLEADO (
 /* Table: CAUSA_FALLO                                           */
 /*==============================================================*/
 create table CAUSA_FALLO (
-   CF_CODIGO            numeric(10)          not null,
+   CF_CODIGO            numeric(10)          identity,
    CF_NOMBRE            varchar(25)          null,
    CF_DESCRPCION        varchar(100)         null,
    constraint PK_CAUSA_FALLO primary key nonclustered (CF_CODIGO)
@@ -32,7 +32,7 @@ create table CAUSA_FALLO (
 /* Table: CLIENTE                                               */
 /*==============================================================*/
 create table CLIENTE (
-   CLI_CODIGO           numeric(10)          not null,
+   CLI_CODIGO           numeric(10)          identity,
    CLI_RAZONSOCIAL      varchar(50)          null,
    CLI_TELEFONO         varchar(30)          null,
    CLI_FECHAALTA        datetime             null,
@@ -45,7 +45,7 @@ create table CLIENTE (
 /* Table: COCINA                                                */
 /*==============================================================*/
 create table COCINA (
-   COC_CODIGO           varchar(10)          not null,
+   COC_CODIGO           varchar(10)          identity,
    ESTR_CODIGO          numeric(10)          null,
    ECOC_CODIGO          numeric(10)          null,
    COL_CODIGO           numeric(3)           null,
@@ -62,7 +62,7 @@ create table COCINA (
 /* Table: COLORES                                               */
 /*==============================================================*/
 create table COLORES (
-   COL_CODIGO           numeric(3)           not null,
+   COL_CODIGO           numeric(3)           identity,
    COL_NOMBRE           varchar(25)          null,
    constraint PK_COLORES primary key nonclustered (COL_CODIGO)
 )
@@ -71,7 +71,7 @@ create table COLORES (
 /* Table: CONJUNTO                                              */
 /*==============================================================*/
 create table CONJUNTO (
-   CONJ_CODIGO          numeric(10)          not null,
+   CONJ_CODIGO          numeric(10)          identity,
    ESTR_CODIGO          numeric(10)          null,
    TE_CODIGO            numeric(10)          null,
    CONJ_CANTIDAD        int                  null,
@@ -85,7 +85,7 @@ create table CONJUNTO (
 /*==============================================================*/
 create table DEMANDA_ANUAL (
    DEMAN_ANO            int                  null,
-   DEMAN_CODIGO         numeric(10)          not null,
+   DEMAN_CODIGO         numeric(10)          identity,
    DEMAN_FECHACREACION  datetime             null,
    constraint PK_DEMANDA_ANUAL primary key nonclustered (DEMAN_CODIGO)
 )
@@ -94,7 +94,7 @@ create table DEMANDA_ANUAL (
 /* Table: DESIGNACION                                           */
 /*==============================================================*/
 create table DESIGNACION (
-   DESIG_CODIGO         numeric(10)          not null,
+   DESIG_CODIGO         numeric(10)          identity,
    MCA_CODIGO           numeric(10)          null,
    DESIG_NOMBRE         varchar(30)          null,
    constraint PK_DESIGNACION primary key nonclustered (DESIG_CODIGO)
@@ -181,7 +181,7 @@ create table DETALLE_PLAN_SEMANAL (
 /* Table: DOMICILIO                                             */
 /*==============================================================*/
 create table DOMICILIO (
-   DOM_CODIGO           numeric(10)          not null,
+   DOM_CODIGO           numeric(10)          identity,
    LOC_CODIGO           numeric(10)          not null,
    PROVE_CODIGO         numeric(10)          not null,
    DOM_CALLE            varchar(30)          null,
@@ -197,7 +197,7 @@ create table DOMICILIO (
 /* Table: EMPLEADO                                              */
 /*==============================================================*/
 create table EMPLEADO (
-   E_LEGAJO             numeric(10)          not null,
+   E_LEGAJO             numeric(10)          identity,
    EE_CODIGO            numeric(10)          not null,
    SEC_CODIGO           numeric(10)          null,
    E_APELLIDO           varchar(25)          null,
@@ -211,7 +211,7 @@ create table EMPLEADO (
 /* Table: ESTADO_COCINA                                         */
 /*==============================================================*/
 create table ESTADO_COCINA (
-   ECOC_CODIGO          numeric(10)          not null,
+   ECOC_CODIGO          numeric(10)          identity,
    ECOC_NOMBRE          varchar(30)          null,
    constraint PK_ESTADO_COCINA primary key nonclustered (ECOC_CODIGO)
 )
@@ -220,7 +220,7 @@ create table ESTADO_COCINA (
 /* Table: ESTADO_DETALLE_MANTENIMIENTO                          */
 /*==============================================================*/
 create table ESTADO_DETALLE_MANTENIMIENTO (
-   EDMAN_CODIGO         numeric(10)          not null,
+   EDMAN_CODIGO         numeric(10)          identity,
    EDMAN_NOMBRE         varchar(30)          null,
    EDMAN_DESCRIPCION    varchar(80)          null,
    constraint PK_ESTADO_DETALLE_MANTENIMIENT primary key nonclustered (EDMAN_CODIGO)
@@ -230,7 +230,7 @@ create table ESTADO_DETALLE_MANTENIMIENTO (
 /* Table: ESTADO_DETALLE_PEDIDO                                 */
 /*==============================================================*/
 create table ESTADO_DETALLE_PEDIDO (
-   EDPED_CODIGO         numeric(10)          not null,
+   EDPED_CODIGO         numeric(10)          identity,
    EDPED_NOMBRE         varchar(30)          null,
    EDPED_DESCRIPCION    varchar(80)          null,
    constraint PK_ESTADO_DETALLE_PEDIDO primary key nonclustered (EDPED_CODIGO)
@@ -240,7 +240,7 @@ create table ESTADO_DETALLE_PEDIDO (
 /* Table: ESTADO_EMPLEADO                                       */
 /*==============================================================*/
 create table ESTADO_EMPLEADO (
-   EE_CODIGO            numeric(10)          not null,
+   EE_CODIGO            numeric(10)          identity,
    EE_NOMBRE            varchar(30)          null,
    EE_DESCRIPCION       varchar(80)          null,
    constraint PK_ESTADO_EMPLEADO primary key nonclustered (EE_CODIGO)
@@ -250,7 +250,7 @@ create table ESTADO_EMPLEADO (
 /* Table: ESTADO_MAQUINA                                        */
 /*==============================================================*/
 create table ESTADO_MAQUINA (
-   EMAQ_CODIGO          numeric(10)          not null,
+   EMAQ_CODIGO          numeric(10)          identity,
    EMAQ_NOMBRE          varchar(30)          null,
    EMAQ_DESCRIPCION     varchar(80)          null,
    constraint PK_ESTADO_MAQUINA primary key nonclustered (EMAQ_CODIGO)
@@ -260,7 +260,7 @@ create table ESTADO_MAQUINA (
 /* Table: ESTADO_ORDEN_TRABAJO                                  */
 /*==============================================================*/
 create table ESTADO_ORDEN_TRABAJO (
-   EORD_CODIGO          numeric(10)          not null,
+   EORD_CODIGO          numeric(10)          identity,
    EORD_NOMBRE          varchar(30)          null,
    EORD_DESCRIPCION     varchar(80)          null,
    constraint PK_ESTADO_ORDEN_TRABAJO primary key nonclustered (EORD_CODIGO)
@@ -270,7 +270,7 @@ create table ESTADO_ORDEN_TRABAJO (
 /* Table: ESTADO_PEDIDO                                         */
 /*==============================================================*/
 create table ESTADO_PEDIDO (
-   EPED_CODIGO          numeric(10)          not null,
+   EPED_CODIGO          numeric(10)          identity,
    EPED_NOMBRE          varchar(30)          null,
    EPED_DESCRIPCION     varchar(80)          null,
    constraint PK_ESTADO_PEDIDO primary key nonclustered (EPED_CODIGO)
@@ -280,7 +280,7 @@ create table ESTADO_PEDIDO (
 /* Table: ESTADO_PLAN_MANTENIMIENTO                             */
 /*==============================================================*/
 create table ESTADO_PLAN_MANTENIMIENTO (
-   EPMAN_CODIGO         numeric(10)          not null,
+   EPMAN_CODIGO         numeric(10)          identity,
    EPMAN_NOMBRE         varchar(30)          null,
    EPMAN_DESCRIPCION    varchar(80)          null,
    constraint PK_ESTADO_PLAN_MANTENIMIENTO primary key nonclustered (EPMAN_CODIGO)
@@ -290,7 +290,7 @@ create table ESTADO_PLAN_MANTENIMIENTO (
 /* Table: ESTADO_USUARIO                                        */
 /*==============================================================*/
 create table ESTADO_USUARIO (
-   EU_CODIGO            numeric(10)          not null,
+   EU_CODIGO            numeric(10)          identity,
    EU_NOMBRE            varchar(30)          null,
    EU_DESCRIPCION       varchar(80)          null,
    constraint PK_ESTADO_USUARIO primary key nonclustered (EU_CODIGO)
@@ -300,7 +300,7 @@ create table ESTADO_USUARIO (
 /* Table: ESTRUCTURA                                            */
 /*==============================================================*/
 create table ESTRUCTURA (
-   ESTR_CODIGO          numeric(10)          not null,
+   ESTR_CODIGO          numeric(10)          identity,
    ESTR_NOMBRE          varchar(30)          null,
    PNO_CODIGO           numeric(10)          not null,            /*-MODIFICACION 05/07/2010-*/
    constraint PK_ESTRUCTURA primary key nonclustered (ESTR_CODIGO)
@@ -310,7 +310,7 @@ create table ESTRUCTURA (
 /* Table: FABRICANTE_MAQUINA                                    */
 /*==============================================================*/
 create table FABRICANTE_MAQUINA (
-   FAB_CODIGO           numeric(10)          not null,
+   FAB_CODIGO           numeric(10)          identity,
    FAB_RAZONSOCIAL      varchar(35)          null,
    constraint PK_FABRICANTE_MAQUINA primary key nonclustered (FAB_CODIGO)
 )
@@ -319,7 +319,7 @@ create table FABRICANTE_MAQUINA (
 /* Table: LOCALIDAD                                             */
 /*==============================================================*/
 create table LOCALIDAD (
-   LOC_CODIGO           numeric(10)          not null,
+   LOC_CODIGO           numeric(10)          identity,
    PCIA_CODIGO          numeric(2)           not null,
    LOC_NOMBRE           varchar(30)          null,
    constraint PK_LOCALIDAD primary key nonclustered (LOC_CODIGO)
@@ -329,7 +329,7 @@ create table LOCALIDAD (
 /* Table: MANTENIMIENTO                                         */
 /*==============================================================*/
 create table MANTENIMIENTO (
-   MAN_CODIGO           numeric(10)          not null,
+   MAN_CODIGO           numeric(10)          identity,
    TMAN_CODIGO          numeric(10)          not null,
    MAN_NOMBRE           varchar(30)          null,
    constraint PK_MANTENIMIENTO primary key nonclustered (MAN_CODIGO)
@@ -339,7 +339,7 @@ create table MANTENIMIENTO (
 /* Table: MAQUINA                                               */
 /*==============================================================*/
 create table MAQUINA (
-   MAQ_CODIGO           numeric(10)          not null,
+   MAQ_CODIGO           numeric(10)          identity,
    MODM_CODIGO          numeric(10)          not null,
    DPMAN_CODIGO         numeric(10)          not null,
    EMAQ_CODIGO          numeric(10)          not null,
@@ -355,7 +355,7 @@ create table MAQUINA (
 /* Table: MARCA                                                 */
 /*==============================================================*/
 create table MARCA (
-   MCA_CODIGO           numeric(10)          not null,
+   MCA_CODIGO           numeric(10)          identity,
    CLI_CODIGO           numeric(10)          not null,
    MCA_NOMBRE           varchar(25)          null,
    constraint PK_MARCA primary key nonclustered (MCA_CODIGO)
@@ -365,7 +365,7 @@ create table MARCA (
 /* Table: MATERIA_PRIMA                                         */
 /*==============================================================*/
 create table MATERIA_PRIMA (
-   MP_CODIGO            numeric(10)          not null,
+   MP_CODIGO            numeric(10)          identity,
    UMED_CODIGO          numeric(10)          null,
    MP_NOMBRE            varchar(30)          null,
    MP_DESCRIPCION       varchar(80)          null,
@@ -388,7 +388,7 @@ create table MATERIAPRIMAXPIEZA (
 /* Table: MODELO_COCINA                                         */
 /*==============================================================*/
 create table MODELO_COCINA (
-   MOD_CODIGO           numeric(10)          not null,
+   MOD_CODIGO           numeric(10)          identity,
    MOD_NOMBRE           varchar(25)          null,
    MOD_DESCRIPCION      varchar(80)          null,
    constraint PK_MODELO_COCINA primary key nonclustered (MOD_CODIGO)
@@ -398,7 +398,7 @@ create table MODELO_COCINA (
 /* Table: MODELO_MAQUINA                                        */
 /*==============================================================*/
 create table MODELO_MAQUINA (
-   MODM_CODIGO          numeric(10)          not null,
+   MODM_CODIGO          numeric(10)          identity,
    MODM_NOMBRE          varchar(30)          null,
    MODM_DESCRIPCION     varchar(80)          null,
    constraint PK_MODELO_MAQUINA primary key nonclustered (MODM_CODIGO)
@@ -431,7 +431,7 @@ create table PEDIDO (
 /* Table: PIEZAS                                                */
 /*==============================================================*/
 create table PIEZAS (
-   PZA_CODIGO           numeric(10)          not null,
+   PZA_CODIGO           numeric(10)          identity,
    TE_CODIGO            numeric(10)          null,
    PZA_CANTIDAD         int                  null,
    PZA_NOMBRE           varchar(25)          null,
@@ -453,7 +453,7 @@ create table PIEZASXSUBCONJUNTO (
 /* Table: PLAN_ANUAL                                            */
 /*==============================================================*/
 create table PLAN_ANUAL (
-   PAN_CODIGO           numeric(10)          not null,
+   PAN_CODIGO           numeric(10)          identity,
    DEMAN_CODIGO         numeric(10)          not null,
    PAN_FECHACREACION    datetime             null,
    constraint PK_PLAN_ANUAL primary key nonclustered (PAN_CODIGO)
@@ -496,7 +496,7 @@ create table PLAN_SEMANAL (
 /* Table: PROCESO                                               */
 /*==============================================================*/
 create table PROCESO (
-   PROC_CODIGO          numeric(10)          not null,
+   PROC_CODIGO          numeric(10)          identity,
    SEC_CODIGO           numeric(10)          null,
    PROC_NOMBRE          varchar(30)          null,
    constraint PK_PROCESO primary key nonclustered (PROC_CODIGO)
@@ -506,7 +506,7 @@ create table PROCESO (
 /* Table: PROVEEDOR                                             */
 /*==============================================================*/
 create table PROVEEDOR (
-   PROVE_CODIGO         numeric(10)          not null,
+   PROVE_CODIGO         numeric(10)          identity,
    SEC_CODIGO           numeric(10)          null,
    PROVE_RAZONSOCIAL    varchar(30)          null,
    constraint PK_PROVEEDOR primary key nonclustered (PROVE_CODIGO)
@@ -516,7 +516,7 @@ create table PROVEEDOR (
 /* Table: PROVINCIA                                             */
 /*==============================================================*/
 create table PROVINCIA (
-   PCIA_CODIGO          numeric(2)           not null,
+   PCIA_CODIGO          numeric(2)           identity,
    PCIA_NOMBRE          varchar(17)          null,
    constraint PK_PROVINCIA primary key nonclustered (PCIA_CODIGO)
 )
@@ -525,7 +525,7 @@ create table PROVINCIA (
 /* Table: REPUESTO                                              */
 /*==============================================================*/
 create table REPUESTO (
-   REP_CODIGO           numeric(10)          not null,
+   REP_CODIGO           numeric(10)          identity,
    TREP_CODIGO          numeric(10)          not null,
    REP_NOMBRE           varchar(30)          null,
    REP_DESCRIPCION      varchar(80)          null,
@@ -538,7 +538,7 @@ create table REPUESTO (
 /* Table: ROL                                                   */
 /*==============================================================*/
 create table ROL (
-   ROL_CODIGO           numeric(10)          not null,
+   ROL_CODIGO           numeric(10)          identity,
    ROL_NOMBRE           varchar(30)          null,
    ROL_DESCRIPCION      varchar(80)          null,
    ROL_PERMISO          varchar(30)          null,
@@ -549,7 +549,7 @@ create table ROL (
 /* Table: SECTOR                                                */
 /*==============================================================*/
 create table SECTOR (
-   SEC_CODIGO           numeric(10)          not null,
+   SEC_CODIGO           numeric(10)          identity,
    SEC_NOMBRE           varchar(30)          null,
    SEC_DESCRIPCION      varchar(80)          null,
    SEC_ABREVIATURA      varchar(10)          null,
@@ -560,7 +560,7 @@ create table SECTOR (
 /* Table: SUBCONJUNTO                                           */
 /*==============================================================*/
 create table SUBCONJUNTO (
-   SCONJ_CODIGO         numeric(10)          not null,
+   SCONJ_CODIGO         numeric(10)          identity,
    TE_CODIGO            numeric(10)          null,
    SCONJ_NOMBRE         varchar(30)          null,
    SCONJ_CANTIDAD       int                  null,
@@ -582,7 +582,7 @@ create table SUBCONJUNTOSXCONJUNTOS (
 /* Table: TAREA                                                 */
 /*==============================================================*/
 create table TAREA (
-   TA_CODIGO            numeric(10)          not null,
+   TA_CODIGO            numeric(10)          identity,
    TA_NOMBRE            varchar(30)          null,
    TA_DESCRIPCION       varchar(80)          null,
    TA_SECUENCIA         int                  null,
@@ -604,7 +604,7 @@ create table TAREASXPROCESO (
 /* Table: TERMINACIONES                                         */
 /*==============================================================*/
 create table TERMINACIONES (
-   TE_CODIGO            numeric(10)          not null,
+   TE_CODIGO            numeric(10)          identity,
    TE_NOMBRE            varchar(25)          null,
    TE_DESCRIPCION       varchar(80)          null,
    constraint PK_TERMINACIONES primary key nonclustered (TE_CODIGO)
@@ -614,7 +614,7 @@ create table TERMINACIONES (
 /* Table: TIPO_MANTENIMIENTO                                    */
 /*==============================================================*/
 create table TIPO_MANTENIMIENTO (
-   TMAN_CODIGO          numeric(10)          not null,
+   TMAN_CODIGO          numeric(10)          identity,
    TMAN_NOMBRE          varchar(30)          null,
    TMAN_DESCRIPCION     varchar(80)          null,
    constraint PK_TIPO_MANTENIMIENTO primary key nonclustered (TMAN_CODIGO)
@@ -624,7 +624,7 @@ create table TIPO_MANTENIMIENTO (
 /* Table: TIPO_REPUESTO                                         */
 /*==============================================================*/
 create table TIPO_REPUESTO (
-   TREP_CODIGO          numeric(10)          not null,
+   TREP_CODIGO          numeric(10)          identity,
    TREP_NOMBRE          varchar(30)          null,
    TREP_DESCRIPCION     varchar(80)          null,
    constraint PK_TIPO_REPUESTO primary key nonclustered (TREP_CODIGO)
@@ -634,7 +634,7 @@ create table TIPO_REPUESTO (
 /* Table: TIPO_UNIDAD_MEDIDA                                    */
 /*==============================================================*/
 create table TIPO_UNIDAD_MEDIDA (
-   TUMED_CODIGO         numeric(10)          not null,
+   TUMED_CODIGO         numeric(10)          identity,
    TUMED_NOMBRE         varchar(25)          null,
    TUMED_DESCRIPCION    varchar(80)          null,
    constraint PK_TIPO_UNIDAD_MEDIDA primary key nonclustered (TUMED_CODIGO)
@@ -644,7 +644,7 @@ create table TIPO_UNIDAD_MEDIDA (
 /* Table: UNIDAD_MEDIDA                                         */
 /*==============================================================*/
 create table UNIDAD_MEDIDA (
-   UMED_CODIGO          numeric(10)          not null,
+   UMED_CODIGO          numeric(10)          identity,
    TUMED_CODIGO         numeric(10)          null,
    UMED_NOMBRE          varchar(25)          null,
    UMED_ABREVIATURA     varchar(10)          null,
@@ -655,7 +655,7 @@ create table UNIDAD_MEDIDA (
 /* Table: USUARIO                                               */
 /*==============================================================*/
 create table USUARIO (
-   U_CODIGO             numeric(10)          not null,
+   U_CODIGO             numeric(10)          identity,
    EU_CODIGO            numeric(10)          not null,
    ROL_CODIGO           numeric(10)          not null,
    E_LEGAJO             numeric(10)          not null,
@@ -670,8 +670,8 @@ create table USUARIO (
 /* Table: PLANO                                                 */
 /*==============================================================*/
 create table PLANO (
-   PNO_CODIGO           numeric(10)          not null,
-   PNO_FECHACREACION    date                 null;
-   PNO_OBSERVACIONES    varchar(80)          null;
+   PNO_CODIGO           numeric(10)          identity,
+   PNO_FECHACREACION    date                 null,
+   PNO_OBSERVACIONES    varchar(80)          null,
    constraint PK_PLANO primary key nonclustered (PNO_CODIGO)
 )
