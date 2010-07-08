@@ -45,7 +45,7 @@ create table CLIENTE (
 /* Table: COCINA                                                */
 /*==============================================================*/
 create table COCINA (
-   COC_CODIGO           varchar(10)          identity,
+   COC_CODIGO           numeric(10)          identity,  /* Marce 07/07 antes varchar(10) */
    ESTR_CODIGO          numeric(10)          null,
    ECOC_CODIGO          numeric(10)          null,
    COL_CODIGO           numeric(3)           null,
@@ -54,7 +54,7 @@ create table COCINA (
    TE_CODIGO            numeric(10)          null,
    DESIG_CODIGO         numeric(10)          null,
    COC_CANTIDADSTOCK    int                  null,
-   COC_PRECIO           float(10)            null,
+   COC_PRECIO           numeric(10,2)        null,  /* Marce 07/07 antes float(10) */
    constraint PK_COCINA primary key nonclustered (COC_CODIGO)
 )
 
@@ -671,7 +671,12 @@ create table USUARIO (
 /*==============================================================*/
 create table PLANO (
    PNO_CODIGO           numeric(10)          identity,
-   PNO_FECHACREACION    date                 null,
+   PNO_FECHACREACION    datetime             null,
    PNO_OBSERVACIONES    varchar(80)          null,
    constraint PK_PLANO primary key nonclustered (PNO_CODIGO)
 )
+
+
+/* Marcelo: pibe cambie casi todos los campos codigos de cada tabla a identity, */
+/* o sea que se generan automaticamente, cambialo en la herramienta, o colga aca */
+/* el proyecto de la herramienta va a ser mejor */ 
