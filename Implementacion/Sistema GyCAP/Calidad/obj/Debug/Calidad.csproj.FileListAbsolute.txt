@@ -1,0 +1,30 @@
+E:\Implementacion\GyCAP\Calidad\bin\Debug\Calidad.exe
+E:\Implementacion\GyCAP\Calidad\bin\Debug\Calidad.pdb
+E:\Implementacion\GyCAP\Calidad\bin\Debug\BLL.dll
+E:\Implementacion\GyCAP\Calidad\bin\Debug\Entidades.dll
+E:\Implementacion\GyCAP\Calidad\bin\Debug\DAL.dll
+E:\Implementacion\GyCAP\Calidad\bin\Debug\BLL.pdb
+E:\Implementacion\GyCAP\Calidad\bin\Debug\Entidades.pdb
+E:\Implementacion\GyCAP\Calidad\bin\Debug\DAL.pdb
+E:\Implementacion\GyCAP\Calidad\obj\Debug\ResolveAssemblyReference.cache
+E:\Implementacion\GyCAP\Calidad\obj\Debug\GyCAP.UI.Calidad.Properties.Resources.resources
+E:\Implementacion\GyCAP\Calidad\obj\Debug\Calidad.csproj.GenerateResource.Cache
+E:\Implementacion\GyCAP\Calidad\obj\Debug\Calidad.exe
+E:\Implementacion\GyCAP\Calidad\obj\Debug\Calidad.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Calidad\bin\Debug\Calidad.exe
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Calidad\bin\Debug\Calidad.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Calidad\bin\Debug\BLL.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Calidad\bin\Debug\Entidades.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Calidad\bin\Debug\DAL.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Calidad\bin\Debug\BLL.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Calidad\bin\Debug\Entidades.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Calidad\bin\Debug\DAL.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Calidad\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Calidad\obj\Debug\GyCAP.UI.Calidad.Properties.Resources.resources
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Calidad\obj\Debug\Calidad.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Calidad\obj\Debug\Calidad.exe
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Calidad\obj\Debug\Calidad.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Calidad\bin\Debug\Data.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Calidad\bin\Debug\Data.pdb
+E:\Implementacion\GyCAP\Calidad\bin\Debug\Data.dll
+E:\Implementacion\GyCAP\Calidad\bin\Debug\Data.pdb

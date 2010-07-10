@@ -1,0 +1,32 @@
+E:\Implementacion\GyCAP\RecursosFabricacion\bin\Debug\RecursosFabricacion.exe
+E:\Implementacion\GyCAP\RecursosFabricacion\bin\Debug\RecursosFabricacion.pdb
+E:\Implementacion\GyCAP\RecursosFabricacion\bin\Debug\BLL.dll
+E:\Implementacion\GyCAP\RecursosFabricacion\bin\Debug\Entidades.dll
+E:\Implementacion\GyCAP\RecursosFabricacion\bin\Debug\DAL.dll
+E:\Implementacion\GyCAP\RecursosFabricacion\bin\Debug\BLL.pdb
+E:\Implementacion\GyCAP\RecursosFabricacion\bin\Debug\Entidades.pdb
+E:\Implementacion\GyCAP\RecursosFabricacion\bin\Debug\DAL.pdb
+E:\Implementacion\GyCAP\RecursosFabricacion\obj\Debug\ResolveAssemblyReference.cache
+E:\Implementacion\GyCAP\RecursosFabricacion\obj\Debug\GyCAP.UI.RecursosFabricacion.frmRecursosFabricacion.resources
+E:\Implementacion\GyCAP\RecursosFabricacion\obj\Debug\GyCAP.UI.RecursosFabricacion.Properties.Resources.resources
+E:\Implementacion\GyCAP\RecursosFabricacion\obj\Debug\RecursosFabricacion.csproj.GenerateResource.Cache
+E:\Implementacion\GyCAP\RecursosFabricacion\obj\Debug\RecursosFabricacion.exe
+E:\Implementacion\GyCAP\RecursosFabricacion\obj\Debug\RecursosFabricacion.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\RecursosFabricacion\bin\Debug\RecursosFabricacion.exe
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\RecursosFabricacion\bin\Debug\RecursosFabricacion.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\RecursosFabricacion\bin\Debug\BLL.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\RecursosFabricacion\bin\Debug\Entidades.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\RecursosFabricacion\bin\Debug\DAL.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\RecursosFabricacion\bin\Debug\BLL.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\RecursosFabricacion\bin\Debug\Entidades.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\RecursosFabricacion\bin\Debug\DAL.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\RecursosFabricacion\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\RecursosFabricacion\obj\Debug\GyCAP.UI.RecursosFabricacion.frmRecursosFabricacion.resources
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\RecursosFabricacion\obj\Debug\GyCAP.UI.RecursosFabricacion.Properties.Resources.resources
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\RecursosFabricacion\obj\Debug\RecursosFabricacion.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\RecursosFabricacion\obj\Debug\RecursosFabricacion.exe
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\RecursosFabricacion\obj\Debug\RecursosFabricacion.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\RecursosFabricacion\bin\Debug\Data.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\RecursosFabricacion\bin\Debug\Data.pdb
+E:\Implementacion\GyCAP\RecursosFabricacion\bin\Debug\Data.dll
+E:\Implementacion\GyCAP\RecursosFabricacion\bin\Debug\Data.pdb

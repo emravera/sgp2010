@@ -1,0 +1,4 @@
+E:\Implementacion\GyCAP\UI\obj\Debug\ResolveAssemblyReference.cache
+E:\Implementacion\GyCAP\UI\obj\Debug\GyCAP.UI.Principal.Principal.resources
+E:\Implementacion\GyCAP\UI\obj\Debug\GyCAP.UI.Principal.Properties.Resources.resources
+E:\Implementacion\GyCAP\UI\obj\Debug\Principal.csproj.GenerateResource.Cache
