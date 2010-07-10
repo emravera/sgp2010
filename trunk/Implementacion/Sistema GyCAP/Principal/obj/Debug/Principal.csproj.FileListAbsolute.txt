@@ -40,3 +40,23 @@ E:\Implementacion\GyCAP\Principal\bin\Debug\EstructuraProducto.pdb
 E:\Implementacion\GyCAP\Principal\bin\Debug\Data.pdb
 C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\Principal\obj\Debug\Principal.exe
 C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\Principal\obj\Debug\Principal.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\obj\Debug\Principal.exe
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\obj\Debug\Principal.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\bin\Debug\Principal.exe
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\bin\Debug\Principal.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\bin\Debug\BLL.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\bin\Debug\Entidades.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\bin\Debug\EstructuraProducto.exe
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\bin\Debug\Soporte.exe
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\bin\Debug\DAL.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\bin\Debug\Data.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\bin\Debug\BLL.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\bin\Debug\EstructuraProducto.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\bin\Debug\Soporte.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\bin\Debug\Entidades.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\bin\Debug\DAL.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\bin\Debug\Data.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\obj\Debug\ResolveAssemblyReference.cache
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\obj\Debug\Principal.Principal.resources
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\obj\Debug\GyCAP.UI.Principal.Properties.Resources.resources
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Principal\obj\Debug\Principal.csproj.GenerateResource.Cache

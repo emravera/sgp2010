@@ -28,3 +28,18 @@ C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º A
 C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionStock\bin\Debug\Data.pdb
 E:\Implementacion\GyCAP\GestionStock\bin\Debug\Data.dll
 E:\Implementacion\GyCAP\GestionStock\bin\Debug\Data.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionStock\bin\Debug\GestionStock.exe
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionStock\bin\Debug\GestionStock.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionStock\bin\Debug\BLL.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionStock\bin\Debug\Entidades.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionStock\bin\Debug\DAL.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionStock\bin\Debug\Data.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionStock\bin\Debug\BLL.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionStock\bin\Debug\Entidades.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionStock\bin\Debug\DAL.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionStock\bin\Debug\Data.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionStock\obj\Debug\ResolveAssemblyReference.cache
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionStock\obj\Debug\GestionStock.Properties.Resources.resources
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionStock\obj\Debug\GestionStock.csproj.GenerateResource.Cache
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionStock\obj\Debug\GestionStock.exe
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionStock\obj\Debug\GestionStock.pdb

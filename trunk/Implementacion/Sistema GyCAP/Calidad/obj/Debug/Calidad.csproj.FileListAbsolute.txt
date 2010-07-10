@@ -28,3 +28,18 @@ C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º A
 C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Calidad\bin\Debug\Data.pdb
 E:\Implementacion\GyCAP\Calidad\bin\Debug\Data.dll
 E:\Implementacion\GyCAP\Calidad\bin\Debug\Data.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Calidad\bin\Debug\Calidad.exe
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Calidad\bin\Debug\Calidad.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Calidad\bin\Debug\BLL.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Calidad\bin\Debug\Entidades.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Calidad\bin\Debug\DAL.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Calidad\bin\Debug\Data.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Calidad\bin\Debug\BLL.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Calidad\bin\Debug\Entidades.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Calidad\bin\Debug\DAL.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Calidad\bin\Debug\Data.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Calidad\obj\Debug\ResolveAssemblyReference.cache
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Calidad\obj\Debug\GyCAP.UI.Calidad.Properties.Resources.resources
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Calidad\obj\Debug\Calidad.csproj.GenerateResource.Cache
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Calidad\obj\Debug\Calidad.exe
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Calidad\obj\Debug\Calidad.pdb

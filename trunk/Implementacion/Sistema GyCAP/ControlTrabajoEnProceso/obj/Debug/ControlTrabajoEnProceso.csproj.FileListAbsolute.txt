@@ -28,3 +28,18 @@ C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º A
 C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\ControlTrabajoEnProceso\bin\Debug\Data.pdb
 E:\Implementacion\GyCAP\ControlTrabajoEnProceso\bin\Debug\Data.dll
 E:\Implementacion\GyCAP\ControlTrabajoEnProceso\bin\Debug\Data.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\ControlTrabajoEnProceso\bin\Debug\ControlTrabajoEnProceso.exe
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\ControlTrabajoEnProceso\bin\Debug\ControlTrabajoEnProceso.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\ControlTrabajoEnProceso\bin\Debug\BLL.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\ControlTrabajoEnProceso\bin\Debug\Entidades.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\ControlTrabajoEnProceso\bin\Debug\DAL.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\ControlTrabajoEnProceso\bin\Debug\Data.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\ControlTrabajoEnProceso\bin\Debug\BLL.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\ControlTrabajoEnProceso\bin\Debug\Entidades.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\ControlTrabajoEnProceso\bin\Debug\DAL.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\ControlTrabajoEnProceso\bin\Debug\Data.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\ControlTrabajoEnProceso\obj\Debug\ResolveAssemblyReference.cache
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\ControlTrabajoEnProceso\obj\Debug\GyCAP.UI.ControlTrabajoEnProceso.Properties.Resources.resources
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\ControlTrabajoEnProceso\obj\Debug\ControlTrabajoEnProceso.csproj.GenerateResource.Cache
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\ControlTrabajoEnProceso\obj\Debug\ControlTrabajoEnProceso.exe
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\ControlTrabajoEnProceso\obj\Debug\ControlTrabajoEnProceso.pdb
