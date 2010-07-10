@@ -38,3 +38,5 @@ E:\Implementacion\GyCAP\Principal\bin\Debug\EstructuraProducto.exe
 E:\Implementacion\GyCAP\Principal\bin\Debug\Data.dll
 E:\Implementacion\GyCAP\Principal\bin\Debug\EstructuraProducto.pdb
 E:\Implementacion\GyCAP\Principal\bin\Debug\Data.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\Principal\obj\Debug\Principal.exe
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\Principal\obj\Debug\Principal.pdb

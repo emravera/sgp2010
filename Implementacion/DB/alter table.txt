@@ -1,0 +1,356 @@
+/*==============================================================*/
+/* Table: CAPACIDADESXEMPLEADO                                  */
+/*==============================================================*/
+alter table CAPACIDADESXEMPLEADO
+   add constraint capacidadXEmpleado_capacidadEmpleado_fk foreign key (CEMP_CODIGO)
+      references CAPACIDAD_EMPLEADOS (CEMP_CODIGO)
+alter table CAPACIDADESXEMPLEADO
+   add constraint capacidadXEmpleado_empleado_fk foreign key (E_LEGAJO)
+      references EMPLEADOS (E_LEGAJO)
+
+/*==============================================================*/
+/* Table: COCINAS                                               */
+/*==============================================================*/
+alter table COCINAS
+   add constraint cocina_colores_fk foreign key (COL_CODIGO)
+      references COLORES (COL_CODIGO)
+alter table COCINAS
+   add constraint cocina_designacion_fk foreign key (DESIG_CODIGO)
+      references DESIGNACIONES (DESIG_CODIGO)
+alter table COCINAS
+   add constraint cocina_estadoCocina_fk foreign key (ECOC_CODIGO)
+      references ESTADO_COCINAS (ECOC_CODIGO)
+alter table COCINAS
+   add constraint cocina_marca_fk foreign key (MCA_CODIGO)
+      references MARCAS (MCA_CODIGO)
+alter table COCINAS
+   add constraint cocina_modeloCocina_fk foreign key (MOD_CODIGO)
+      references MODELOS_COCINAS (MOD_CODIGO)
+alter table COCINAS
+   add constraint cocina_terminaciones_fk foreign key (TE_CODIGO)
+      references TERMINACIONES (TE_CODIGO)
+
+/*==============================================================*/
+/* Table: CONJUNTOS                                             */
+/*==============================================================*/
+alter table CONJUNTOS
+   add constraint conjunto_estructura_fk foreign key (ESTR_CODIGO)
+      references ESTRUCTURAS (ESTR_CODIGO)
+alter table CONJUNTOS
+   add constraint conjunto_terminaciones_fk foreign key (TE_CODIGO)
+      references TERMINACIONES (TE_CODIGO)
+
+/*==============================================================*/
+/* Table: DESIGNACIONES                                          */
+/*==============================================================*/
+alter table DESIGNACIONES
+   add constraint designacion_marca_fk foreign key (MCA_CODIGO)
+      references MARCAS (MCA_CODIGO)
+
+/*==============================================================*/
+/* Table: DETALLE_DEMANDAS_ANUALES                              */
+/*==============================================================*/
+alter table DETALLE_DEMANDAS_ANUALES
+   add constraint detalleDemandaAnual_demandaAnual_fk foreign key (DEMAN_CODIGO)
+      references DEMANDAS_ANUALES (DEMAN_CODIGO)
+
+/*==============================================================*/
+/* Table: DETALLE_ORDENES_TRABAJO                               */
+/*==============================================================*/
+alter table DETALLE_ORDENES_TRABAJO
+   add constraint detalleOrdentrabajo_empleado_fk foreign key (E_LEGAJO)
+      references EMPLEADOS (E_LEGAJO)
+alter table DETALLE_ORDENES_TRABAJO
+   add constraint detalleOrdenTrabajo_ordenTrabajo_fk foreign key (OTJO_NUMERO)
+      references ORDENES_TRABAJO (OTJO_NUMERO)
+alter table DETALLE_ORDENES_TRABAJO
+   add constraint detalleOrdenTrabajo_proveedor_fk foreign key (PROVE_CODIGO)
+      references PROVEEDORES (PROVE_CODIGO)
+alter table DETALLE_ORDENES_TRABAJO
+   add constraint detalleOrdenTrabajo_tarea_fk foreign key (TA_CODIGO)
+      references TAREAS (TA_CODIGO)
+
+/*==============================================================*/
+/* Table: DETALLE_PEDIDOS                                       */
+/*==============================================================*/
+alter table DETALLE_PEDIDOS
+   add constraint detallePedido_estadoDetallePedido_fk foreign key (EDPED_CODIGO)
+      references ESTADO_DETALLE_PEDIDOS (EDPED_CODIGO)
+alter table DETALLE_PEDIDOS
+   add constraint detallePedido_pedido_fk foreign key (PED_NUMERO)
+      references PEDIDOS (PED_NUMERO)
+
+/*==============================================================*/
+/* Table: DETALLE_PLANES_MANTENIMIENTO                          */
+/*==============================================================*/
+alter table DETALLE_PLANES_MANTENIMIENTO
+   add constraint detallePlanMantenimiento_causaFallo_fk foreign key (CF_CODIGO)
+      references CAUSAS_FALLO (CF_CODIGO)
+alter table DETALLE_PLANES_MANTENIMIENTO
+   add constraint detallePlanMantenimiento_empleado_fk foreign key (E_LEGAJO)
+      references EMPLEADOS (E_LEGAJO)
+alter table DETALLE_PLANES_MANTENIMIENTO
+   add constraint detallePlanMantenimiento_estadoDetalleMantenimiento_fk foreign key (EDMAN_CODIGO)
+      references ESTADO_DETALLE_MANTENIMIENTOS (EDMAN_CODIGO)
+alter table DETALLE_PLANES_MANTENIMIENTO
+   add constraint detallePlanMantenimiento_mantenimiento_fk foreign key (MAN_CODIGO)
+      references MANTENIMIENTOS (MAN_CODIGO)
+alter table DETALLE_PLANES_MANTENIMIENTO
+   add constraint detallePlanMantenimiento_planMantenimiento_fk foreign key (PMAN_NUMERO)
+      references PLANES_MANTENIMIENTO (PMAN_NUMERO)
+alter table DETALLE_PLANES_MANTENIMIENTO
+   add constraint detallePlanMantenimiento_repuesto_fk foreign key (REP_CODIGO)
+      references REPUESTOS (REP_CODIGO)
+alter table DETALLE_PLANES_MANTENIMIENTO
+   add constraint detallePlanMantenimiento_maquina_fk foreign key (MAQ_CODIGO)    /*-MODIFICACION 09/07/2010-*/
+      references MAQUINAS (MAQ_CODIGO)
+
+/*==============================================================*/
+/* Table: DETALLE_PLANES_MENSUALES                              */
+/*==============================================================*/
+alter table DETALLE_PLANES_MENSUALES
+   add constraint detallePlanMensual_cocina_fk foreign key (COC_CODIGO)
+      references COCINAS (COC_CODIGO)
+alter table DETALLE_PLANES_MENSUALES
+   add constraint detallePlanMensual_planMensual_fk foreign key (PMES_CODIGO)
+      references PLANES_MENSUALES (PMES_CODIGO)
+
+/*==============================================================*/
+/* Table: DETALLE_PLANES_SEMANALES                              */
+/*==============================================================*/
+alter table DETALLE_PLANES_SEMANALES
+   add constraint detallePlanSemanal_cocina_fk foreign key (COC_CODIGO)
+      references COCINAS (COC_CODIGO)
+alter table DETALLE_PLANES_SEMANALES
+   add constraint detallePlanSemanal_ordenTrabajo_fk foreign key (OTJO_NUMERO)
+      references ORDENES_TRABAJO (OTJO_NUMERO)
+alter table DETALLE_PLANES_SEMANALES
+   add constraint detallePlanSemanal_planSemanal_fk foreign key (PSEM_CODIGO)
+      references PLANES_SEMANALES (PSEM_CODIGO)
+
+/*==============================================================*/
+/* Table: DOMICILIOS                                            */
+/*==============================================================*/
+alter table DOMICILIOS
+   add constraint domicilio_localidad_fk foreign key (LOC_CODIGO)
+      references LOCALIDADES (LOC_CODIGO)
+alter table DOMICILIOS
+   add constraint domicilio_proveedor_fk foreign key (PROVE_CODIGO)
+      references PROVEEDORES (PROVE_CODIGO)
+
+/*==============================================================*/
+/* Table: EMPLEADOS                                             */
+/*==============================================================*/
+alter table EMPLEADOS
+   add constraint empleado_estadoEmpleado_fk foreign key (EE_CODIGO)
+      references ESTADO_EMPLEADOS (EE_CODIGO)
+alter table EMPLEADOS
+   add constraint empleado_sector_fk foreign key (SEC_CODIGO)
+      references SECTORES (SEC_CODIGO)
+
+/*==============================================================*/
+/* Table: ESTRUCTURAS                                           */
+/*==============================================================*/
+
+/*-----------MODIFICACIONES 05/07/2010--------------*/
+
+alter table ESTRUCTURAS
+    add constraint estructura_plano_fk foreign key (PNO_CODIGO)
+       references PLANOS (PNO_CODIGO)
+alter table ESTRUCTURAS
+    add constraint estructura_cocina_fk foreign key (COC_CODIGO)  /*-MODIFICACION 09/07/2010-*/
+       references COCINAS (COC_CODIGO)
+
+/*==============================================================*/
+/* Table: LOCALIDADES                                           */
+/*==============================================================*/
+alter table LOCALIDADES
+   add constraint localidad_provincia_fk foreign key (PCIA_CODIGO)
+      references PROVINCIAS (PCIA_CODIGO)
+
+/*==============================================================*/
+/* Table: MANTENIMIENTOS                                        */
+/*==============================================================*/
+alter table MANTENIMIENTOS
+   add constraint mantenimiento_tipoMantenimiento_fk foreign key (TMAN_CODIGO)
+      references TIPOS_MANTENIMIENTOS (TMAN_CODIGO)
+
+/*==============================================================*/
+/* Table: MAQUINAS                                              */
+/*==============================================================*/
+alter table MAQUINAS
+   add constraint maquina_estadoMaquina_fk foreign key (EMAQ_CODIGO)
+      references ESTADO_MAQUINAS (EMAQ_CODIGO)
+alter table MAQUINAS
+   add constraint maquina_fabricanteMaquina_fk foreign key (FAB_CODIGO)
+      references FABRICANTE_MAQUINAS (FAB_CODIGO)
+alter table MAQUINAS
+   add constraint maquina_modeloMaquina_fk foreign key (MODM_CODIGO)
+      references MODELOS_MAQUINAS (MODM_CODIGO)
+
+/*==============================================================*/
+/* Table: MARCAS                                                */
+/*==============================================================*/
+alter table MARCAS
+   add constraint marca_cliente_fk foreign key (CLI_CODIGO)
+      references CLIENTES (CLI_CODIGO)
+
+/*==============================================================*/
+/* Table: MATERIAS_PRIMAS                                       */
+/*==============================================================*/
+alter table MATERIAS_PRIMAS
+   add constraint materiaPrima_unidadMedida_fk foreign key (UMED_CODIGO)
+      references UNIDADES_MEDIDA (UMED_CODIGO)
+
+
+/*-----------MODIFICACIONES 09/07/2010-------------*/
+
+/*==============================================================*/
+/* Table: MATERIASPRIMASPRINCIPALES                             */
+/*==============================================================*/
+alter table MATERIASPRIMASPRINCIPALES
+   add constraint materiaPrimaPrincipal_materiaPrima_fk foreign key (MP_CODIGO)
+      references MATERIAS_PRIMAS (MP_CODIGO)
+
+/*==============================================================*/
+/* Table: MATERIASPRIMASXPIEZA                                  */
+/*==============================================================*/
+alter table MATERIASPRIMASXPIEZA
+   add constraint materiaPrimaXPieza_materiaPrima_fk foreign key (MP_CODIGO)
+      references MATERIAS_PRIMAS (MP_CODIGO)
+alter table MATERIASPRIMASXPIEZA
+   add constraint materiaPrimaXPieza_piezas_fk foreign key (PZA_CODIGO)
+      references PIEZAS (PZA_CODIGO)
+
+/*==============================================================*/
+/* Table: ORDENES_TRABAJO                                       */
+/*==============================================================*/
+alter table ORDENES_TRABAJO
+   add constraint ordenTrabajo_estadoOrdenTrabajo_fk foreign key (EORD_CODIGO)
+      references ESTADO_ORDENES_TRABAJO (EORD_CODIGO)
+alter table ORDENES_TRABAJO
+   add constraint ordenTrabajo_proceso_fk foreign key (PROC_CODIGO)
+      references PROCESOS (PROC_CODIGO)
+
+/*==============================================================*/
+/* Table: PEDIDOS                                               */
+/*==============================================================*/
+alter table PEDIDOS
+   add constraint pedido_cliente_fk foreign key (CLI_CODIGO)
+      references CLIENTES (CLI_CODIGO)
+alter table PEDIDOS
+   add constraint pedido_estadoPedido_fk foreign key (EPED_CODIGO)
+      references ESTADO_PEDIDOS (EPED_CODIGO)
+
+/*==============================================================*/
+/* Table: PIEZAS                                                */
+/*==============================================================*/
+alter table PIEZAS
+   add constraint piezas_terminaciones_fk foreign key (TE_CODIGO)
+      references TERMINACIONES (TE_CODIGO)
+
+/*==============================================================*/
+/* Table: PIEZASXSUBCONJUNTO                                    */
+/*==============================================================*/
+alter table PIEZASXSUBCONJUNTO
+   add constraint piezasXSubconjuntos_piezas_fk foreign key (PZA_CODIGO)
+      references PIEZAS (PZA_CODIGO)
+alter table PIEZASXSUBCONJUNTO
+   add constraint piezasXSubconjuntos_subconjunto_fk foreign key (SCONJ_CODIGO)
+      references SUBCONJUNTOS (SCONJ_CODIGO)
+
+/*==============================================================*/
+/* Table: PLANES_ANUALES                                        */
+/*==============================================================*/
+alter table PLANES_ANUALES
+   add constraint planAnual_demandaAnual_fk foreign key (DEMAN_CODIGO)
+      references DEMANDAS_ANUALES (DEMAN_CODIGO)
+
+/*==============================================================*/
+/* Table: PLANES_MANTENIMIENTO                                  */
+/*==============================================================*/
+alter table PLANES_MANTENIMIENTO
+   add constraint planMantenimiento_estadoPlanMantenimiento_fk foreign key (EPMAN_CODIGO)
+      references ESTADO_PLANES_MANTENIMIENTO (EPMAN_CODIGO)
+
+/*==============================================================*/
+/* Table: PLANES_MENSUALES                                      */
+/*==============================================================*/
+alter table PLANES_MENSUALES
+   add constraint planMensual_planAnual_fk foreign key (PAN_CODIGO)
+      references PLANES_ANUALES (PAN_CODIGO)
+
+/*==============================================================*/
+/* Table: PLANES_SEMANALES                                      */
+/*==============================================================*/
+alter table PLANES_SEMANALES
+   add constraint planSemanal_planMensual_fk foreign key (PMES_CODIGO)
+      references PLANES_MENSUALES (PMES_CODIGO)
+
+/*==============================================================*/
+/* Table: PROCESOS                                              */
+/*==============================================================*/
+alter table PROCESOS
+   add constraint proceso_sector_fk foreign key (SEC_CODIGO)
+      references SECTORES (SEC_CODIGO)
+
+/*==============================================================*/
+/* Table: PROVEEDORES                                           */
+/*==============================================================*/
+alter table PROVEEDORES
+   add constraint proveedor_sector_fk foreign key (SEC_CODIGO)
+      references SECTORES (SEC_CODIGO)
+
+/*==============================================================*/
+/* Table: REPUESTOS                                             */
+/*==============================================================*/
+alter table REPUESTOS
+   add constraint repuesto_tipoRepuesto_fk foreign key (TREP_CODIGO)
+      references TIPOS_REPUESTOS (TREP_CODIGO)
+
+/*==============================================================*/
+/* Table: SUBCONJUNTOS                                          */
+/*==============================================================*/
+alter table SUBCONJUNTOS
+   add constraint subconjunto_terminaciones_fk foreign key (TE_CODIGO)
+      references TERMINACIONES (TE_CODIGO)
+
+/*==============================================================*/
+/* Table: SUBCONJUNTOSXCONJUNTOS                                */
+/*==============================================================*/
+alter table SUBCONJUNTOSXCONJUNTOS
+   add constraint subconjuntosXConjuntos_conjunto_fk foreign key (CONJ_CODIGO)
+      references CONJUNTOS (CONJ_CODIGO)
+alter table SUBCONJUNTOSXCONJUNTOS
+   add constraint subconjuntosXConjuntos_subconjunto_fk foreign key (SCONJ_CODIGO)
+      references SUBCONJUNTOS (SCONJ_CODIGO)
+
+/*==============================================================*/
+/* Table: TAREASXPROCESOS                                       */
+/*==============================================================*/
+alter table TAREASXPROCESOS
+   add constraint tareasxProceso_proceso_fk foreign key (PROC_CODIGO)
+      references PROCESOS (PROC_CODIGO)
+alter table TAREASXPROCESOS
+   add constraint tareasXProceso_tarea_fk foreign key (TA_CODIGO)
+      references TAREAS (TA_CODIGO)
+
+/*==============================================================*/
+/* Table: UNIDADES_MEDIDA                                       */
+/*==============================================================*/
+alter table UNIDADES_MEDIDA
+   add constraint unidadMedida_tipoUnidadMedida_fk foreign key (TUMED_CODIGO)
+      references TIPOS_UNIDADES_MEDIDA (TUMED_CODIGO)
+
+/*==============================================================*/
+/* Table: USUARIOS                                              */
+/*==============================================================*/
+alter table USUARIOS
+   add constraint usuario_empleado_fk foreign key (E_LEGAJO)
+      references EMPLEADOS (E_LEGAJO)
+alter table USUARIOS
+   add constraint usuario_estadoUsuario_fk foreign key (EU_CODIGO)
+      references ESTADO_USUARIOS (EU_CODIGO)
+alter table USUARIOS
+   add constraint usuario_rol_fk foreign key (ROL_CODIGO)
+      references ROLES (ROL_CODIGO)
