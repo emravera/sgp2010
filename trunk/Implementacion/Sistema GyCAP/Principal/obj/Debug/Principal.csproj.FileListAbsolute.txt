@@ -1,0 +1,40 @@
+E:\Implementacion\GyCAP\Principal\bin\Debug\Principal.exe
+E:\Implementacion\GyCAP\Principal\bin\Debug\Principal.pdb
+E:\Implementacion\GyCAP\Principal\bin\Debug\BLL.dll
+E:\Implementacion\GyCAP\Principal\bin\Debug\Entidades.dll
+E:\Implementacion\GyCAP\Principal\bin\Debug\DAL.dll
+E:\Implementacion\GyCAP\Principal\bin\Debug\BLL.pdb
+E:\Implementacion\GyCAP\Principal\bin\Debug\Entidades.pdb
+E:\Implementacion\GyCAP\Principal\bin\Debug\DAL.pdb
+E:\Implementacion\GyCAP\Principal\obj\Debug\ResolveAssemblyReference.cache
+E:\Implementacion\GyCAP\Principal\obj\Debug\Principal.Principal.resources
+E:\Implementacion\GyCAP\Principal\obj\Debug\GyCAP.UI.Principal.Properties.Resources.resources
+E:\Implementacion\GyCAP\Principal\obj\Debug\Principal.csproj.GenerateResource.Cache
+E:\Implementacion\GyCAP\Principal\obj\Debug\Principal.exe
+E:\Implementacion\GyCAP\Principal\obj\Debug\Principal.pdb
+E:\Implementacion\GyCAP\Principal\bin\Debug\Soporte.exe
+E:\Implementacion\GyCAP\Principal\bin\Debug\Soporte.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\obj\Debug\Principal.exe
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\obj\Debug\Principal.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\bin\Debug\Principal.exe
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\bin\Debug\Principal.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\bin\Debug\BLL.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\bin\Debug\Entidades.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\bin\Debug\Soporte.exe
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\bin\Debug\DAL.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\bin\Debug\BLL.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\bin\Debug\Soporte.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\bin\Debug\Entidades.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\bin\Debug\DAL.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\obj\Debug\Principal.Principal.resources
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\obj\Debug\GyCAP.UI.Principal.Properties.Resources.resources
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\obj\Debug\Principal.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\bin\Debug\EstructuraProducto.exe
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\bin\Debug\EstructuraProducto.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\bin\Debug\Data.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Principal\bin\Debug\Data.pdb
+E:\Implementacion\GyCAP\Principal\bin\Debug\EstructuraProducto.exe
+E:\Implementacion\GyCAP\Principal\bin\Debug\Data.dll
+E:\Implementacion\GyCAP\Principal\bin\Debug\EstructuraProducto.pdb
+E:\Implementacion\GyCAP\Principal\bin\Debug\Data.pdb

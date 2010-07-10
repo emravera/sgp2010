@@ -1,0 +1,30 @@
+E:\Implementacion\GyCAP\GestionStock\bin\Debug\GestionStock.exe
+E:\Implementacion\GyCAP\GestionStock\bin\Debug\GestionStock.pdb
+E:\Implementacion\GyCAP\GestionStock\bin\Debug\BLL.dll
+E:\Implementacion\GyCAP\GestionStock\bin\Debug\Entidades.dll
+E:\Implementacion\GyCAP\GestionStock\bin\Debug\DAL.dll
+E:\Implementacion\GyCAP\GestionStock\bin\Debug\BLL.pdb
+E:\Implementacion\GyCAP\GestionStock\bin\Debug\Entidades.pdb
+E:\Implementacion\GyCAP\GestionStock\bin\Debug\DAL.pdb
+E:\Implementacion\GyCAP\GestionStock\obj\Debug\ResolveAssemblyReference.cache
+E:\Implementacion\GyCAP\GestionStock\obj\Debug\GestionStock.Properties.Resources.resources
+E:\Implementacion\GyCAP\GestionStock\obj\Debug\GestionStock.csproj.GenerateResource.Cache
+E:\Implementacion\GyCAP\GestionStock\obj\Debug\GestionStock.exe
+E:\Implementacion\GyCAP\GestionStock\obj\Debug\GestionStock.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionStock\bin\Debug\GestionStock.exe
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionStock\bin\Debug\GestionStock.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionStock\bin\Debug\BLL.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionStock\bin\Debug\Entidades.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionStock\bin\Debug\DAL.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionStock\bin\Debug\BLL.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionStock\bin\Debug\Entidades.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionStock\bin\Debug\DAL.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionStock\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionStock\obj\Debug\GestionStock.Properties.Resources.resources
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionStock\obj\Debug\GestionStock.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionStock\obj\Debug\GestionStock.exe
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionStock\obj\Debug\GestionStock.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionStock\bin\Debug\Data.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionStock\bin\Debug\Data.pdb
+E:\Implementacion\GyCAP\GestionStock\bin\Debug\Data.dll
+E:\Implementacion\GyCAP\GestionStock\bin\Debug\Data.pdb

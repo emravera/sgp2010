@@ -1,0 +1,12 @@
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Data\bin\Debug\Data.dll.config
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Data\bin\Debug\Data.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Data\bin\Debug\Data.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Data\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Data\obj\Debug\Data.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Data\obj\Debug\Data.pdb
+E:\Implementacion\GyCAP\Data\bin\Debug\Data.dll.config
+E:\Implementacion\GyCAP\Data\bin\Debug\Data.dll
+E:\Implementacion\GyCAP\Data\bin\Debug\Data.pdb
+E:\Implementacion\GyCAP\Data\obj\Debug\ResolveAssemblyReference.cache
+E:\Implementacion\GyCAP\Data\obj\Debug\Data.dll
+E:\Implementacion\GyCAP\Data\obj\Debug\Data.pdb

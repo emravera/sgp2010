@@ -1,0 +1,31 @@
+E:\Implementacion\GyCAP\Soporte\obj\Debug\ResolveAssemblyReference.cache
+E:\Implementacion\GyCAP\Soporte\obj\Debug\GyCAP.UI.Soporte.Properties.Resources.resources
+E:\Implementacion\GyCAP\Soporte\obj\Debug\Soporte.csproj.GenerateResource.Cache
+E:\Implementacion\GyCAP\Soporte\bin\Debug\Soporte.exe
+E:\Implementacion\GyCAP\Soporte\bin\Debug\Soporte.pdb
+E:\Implementacion\GyCAP\Soporte\bin\Debug\BLL.dll
+E:\Implementacion\GyCAP\Soporte\bin\Debug\Entidades.dll
+E:\Implementacion\GyCAP\Soporte\bin\Debug\DAL.dll
+E:\Implementacion\GyCAP\Soporte\bin\Debug\BLL.pdb
+E:\Implementacion\GyCAP\Soporte\bin\Debug\Entidades.pdb
+E:\Implementacion\GyCAP\Soporte\bin\Debug\DAL.pdb
+E:\Implementacion\GyCAP\Soporte\obj\Debug\Soporte.exe
+E:\Implementacion\GyCAP\Soporte\obj\Debug\Soporte.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Soporte\bin\Debug\Soporte.exe
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Soporte\bin\Debug\Soporte.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Soporte\bin\Debug\BLL.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Soporte\bin\Debug\Entidades.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Soporte\bin\Debug\DAL.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Soporte\bin\Debug\BLL.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Soporte\bin\Debug\Entidades.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Soporte\bin\Debug\DAL.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Soporte\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Soporte\obj\Debug\GyCAP.UI.Soporte.Properties.Resources.resources
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Soporte\obj\Debug\Soporte.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Soporte\obj\Debug\Soporte.exe
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Soporte\obj\Debug\Soporte.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Soporte\bin\Debug\Data.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Soporte\bin\Debug\Data.pdb
+E:\Implementacion\GyCAP\Soporte\bin\Debug\Data.dll
+E:\Implementacion\GyCAP\Soporte\bin\Debug\Data.pdb
+E:\Implementacion\GyCAP\Soporte\obj\Debug\GyCAP.UI.Soporte.frmSoporte.resources
