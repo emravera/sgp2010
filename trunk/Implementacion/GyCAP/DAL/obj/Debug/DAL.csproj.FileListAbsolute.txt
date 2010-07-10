@@ -1,7 +1,0 @@
-E:\Implementacion\GyCAP\DAL\bin\Debug\DAL.dll
-E:\Implementacion\GyCAP\DAL\bin\Debug\DAL.pdb
-E:\Implementacion\GyCAP\DAL\bin\Debug\Entidades.dll
-E:\Implementacion\GyCAP\DAL\bin\Debug\Entidades.pdb
-E:\Implementacion\GyCAP\DAL\obj\Debug\ResolveAssemblyReference.cache
-E:\Implementacion\GyCAP\DAL\obj\Debug\DAL.dll
-E:\Implementacion\GyCAP\DAL\obj\Debug\DAL.pdb
