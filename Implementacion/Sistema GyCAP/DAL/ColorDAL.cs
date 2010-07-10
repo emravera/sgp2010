@@ -65,7 +65,7 @@ namespace GyCAP.DAL
 
         public static bool PuedeEliminarse(Entidades.Color color)
         {
-            string sql = "SELECT count(coc_codigo) FROM COCINA WHERE col_codigo = @p0";
+            string sql = "SELECT count(coc_codigo) FROM COCINAS WHERE col_codigo = @p0";
             object[] valorParametros = { color.Codigo };
             if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
             {

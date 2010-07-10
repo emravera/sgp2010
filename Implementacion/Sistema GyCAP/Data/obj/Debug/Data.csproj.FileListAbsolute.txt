@@ -10,3 +10,9 @@ E:\Implementacion\GyCAP\Data\bin\Debug\Data.pdb
 E:\Implementacion\GyCAP\Data\obj\Debug\ResolveAssemblyReference.cache
 E:\Implementacion\GyCAP\Data\obj\Debug\Data.dll
 E:\Implementacion\GyCAP\Data\obj\Debug\Data.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Data\bin\Debug\Data.dll.config
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Data\bin\Debug\Data.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Data\bin\Debug\Data.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Data\obj\Debug\ResolveAssemblyReference.cache
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Data\obj\Debug\Data.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Data\obj\Debug\Data.pdb
