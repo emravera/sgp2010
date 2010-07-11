@@ -19,7 +19,7 @@ namespace GyCAP.DAL
         static String conexionRaul = "Data Source=DESKTOP\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
         
         //Cambiar por la propia.
-        static String cadenaConexion = conexionRaul;
+        static String cadenaConexion = conexionGonzalo;
 
         //Obtiene la cadena de conexión a la base de datos.
         private static SqlConnection GetConexion()
