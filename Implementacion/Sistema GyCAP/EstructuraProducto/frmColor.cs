@@ -15,7 +15,7 @@ namespace GyCAP.UI.EstructuraProducto
         private Data.dsColor dsColor = new GyCAP.Data.dsColor();
         private DataView dvColor;
         private enum estadoUI {inicio, nuevo, consultar, modificar, };
-        estadoUI estadoInterface;
+        private estadoUI estadoInterface;
         
         public frmColor()
         {
@@ -174,11 +174,11 @@ namespace GyCAP.UI.EstructuraProducto
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
-                    catch (BLL.Excepciones.ElementoExistenteException ex)
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
-                    catch (BLL.Excepciones.BaseDeDatosException ex)
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
@@ -205,7 +205,7 @@ namespace GyCAP.UI.EstructuraProducto
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
-                    catch (BLL.Excepciones.BaseDeDatosException ex)
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
