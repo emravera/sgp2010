@@ -31,3 +31,14 @@ E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\BLL\bin\D
 E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\BLL\obj\Debug\ResolveAssemblyReference.cache
 E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\BLL\obj\Debug\BLL.dll
 E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\BLL\obj\Debug\BLL.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\BLL\bin\Debug\BLL.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\BLL\bin\Debug\BLL.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\BLL\bin\Debug\DAL.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\BLL\bin\Debug\Data.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\BLL\bin\Debug\Entidades.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\BLL\bin\Debug\DAL.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\BLL\bin\Debug\Entidades.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\BLL\bin\Debug\Data.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\BLL\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\BLL\obj\Debug\BLL.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\BLL\obj\Debug\BLL.pdb
