@@ -47,7 +47,6 @@
   <ItemGroup>
     <Compile Include="CapacidadEmpleado.cs" />
     <Compile Include="CausaFallo.cs" />
-    <Compile Include="clase.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Cocina.cs" />
     <Compile Include="Color.cs" />
