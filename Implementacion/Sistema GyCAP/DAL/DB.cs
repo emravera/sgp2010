@@ -100,7 +100,7 @@ namespace GyCAP.DAL
         {
             SqlCommand cmd = (SqlCommand)GetComando(sql, valorParametros, transaccion);
             object query = cmd.ExecuteScalar();
-            cmd.Connection.Close();
+            if (transaccion == null) { cmd.Connection.Close(); }
             return query;            
         }
 
@@ -118,7 +118,7 @@ namespace GyCAP.DAL
         {
             SqlCommand cmd = (SqlCommand)GetComando(sql, valorParametros, transaccion);
             int respuesta = cmd.ExecuteNonQuery();
-            cmd.Connection.Close();
+            if (transaccion == null) { cmd.Connection.Close(); }
             return respuesta;
         }
 
