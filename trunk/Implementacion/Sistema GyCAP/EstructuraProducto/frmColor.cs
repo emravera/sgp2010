@@ -69,15 +69,23 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            dsColor = BLL.ColorBLL.ObtenerTodos(txtNombreBuscar.Text);
-            //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
-            //por una consulta a la BD
-            dvColor.Table = dsColor.COLORES;
-            if (dsColor.COLORES.Rows.Count == 0) 
+            try
             {
-                MessageBox.Show("No se encontraron colores con el nombre ingresado.");
+                dsColor = BLL.ColorBLL.ObtenerTodos(txtNombreBuscar.Text);
+                //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
+                //por una consulta a la BD
+                dvColor.Table = dsColor.COLORES;
+                if (dsColor.COLORES.Rows.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron colores con el nombre ingresado.");
+                }
+                SetInterface(estadoUI.inicio);
             }
-            SetInterface(estadoUI.inicio);
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message);
+                SetInterface(estadoUI.inicio);
+            }
         }
         
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -116,11 +124,11 @@ namespace GyCAP.UI.EstructuraProducto
                         dsColor.COLORES.FindByCOL_CODIGO(color.Codigo).Delete();
                         dsColor.COLORES.AcceptChanges();
                     }
-                    catch (BLL.Excepciones.ElementoExistenteException ex)
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
-                    catch (BLL.Excepciones.BaseDeDatosException ex)
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
