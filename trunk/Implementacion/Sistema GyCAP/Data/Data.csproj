@@ -51,6 +51,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsColor.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsModeloCocina.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsModeloCocina.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -70,6 +75,17 @@
     </None>
     <None Include="dsColor.xss">
       <DependentUpon>dsColor.xsd</DependentUpon>
+    </None>
+    <None Include="dsModeloCocina.xsc">
+      <DependentUpon>dsModeloCocina.xsd</DependentUpon>
+    </None>
+    <None Include="dsModeloCocina.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsModeloCocina.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsModeloCocina.xss">
+      <DependentUpon>dsModeloCocina.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
