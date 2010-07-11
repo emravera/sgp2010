@@ -100,6 +100,54 @@
       <Name>Entidades %28Entidades\Entidades%29</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Warning-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Apply-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delete-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Find-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Floppy-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Information-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Open-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Page-Setup-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Password-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printer-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Question-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Salir-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\System-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\System.Set-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Text-Editor-25.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
