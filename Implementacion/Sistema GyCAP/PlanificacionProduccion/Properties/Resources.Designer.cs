@@ -59,5 +59,117 @@ namespace GyCAP.UI.PlanificacionProduccion.Properties {
                 resourceCulture = value;
             }
         }
+        
+        internal static System.Drawing.Bitmap Apply_25 {
+            get {
+                object obj = ResourceManager.GetObject("Apply_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Delete_25 {
+            get {
+                object obj = ResourceManager.GetObject("Delete_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Find_25 {
+            get {
+                object obj = ResourceManager.GetObject("Find_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Floppy_25 {
+            get {
+                object obj = ResourceManager.GetObject("Floppy_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Information_25 {
+            get {
+                object obj = ResourceManager.GetObject("Information_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap New_25 {
+            get {
+                object obj = ResourceManager.GetObject("New_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Open_25 {
+            get {
+                object obj = ResourceManager.GetObject("Open_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Page_Setup_25 {
+            get {
+                object obj = ResourceManager.GetObject("Page_Setup_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Password_25 {
+            get {
+                object obj = ResourceManager.GetObject("Password_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Printer_25 {
+            get {
+                object obj = ResourceManager.GetObject("Printer_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Question_25 {
+            get {
+                object obj = ResourceManager.GetObject("Question_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Salir_25 {
+            get {
+                object obj = ResourceManager.GetObject("Salir_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap System_25 {
+            get {
+                object obj = ResourceManager.GetObject("System_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap System_Set_25 {
+            get {
+                object obj = ResourceManager.GetObject("System_Set_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Text_Editor_25 {
+            get {
+                object obj = ResourceManager.GetObject("Text_Editor_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Warning_25 {
+            get {
+                object obj = ResourceManager.GetObject("Warning_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
