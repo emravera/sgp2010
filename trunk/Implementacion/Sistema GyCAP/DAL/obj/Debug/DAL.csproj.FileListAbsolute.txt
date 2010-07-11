@@ -25,3 +25,12 @@ E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\DAL\bin\D
 E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\DAL\obj\Debug\ResolveAssemblyReference.cache
 E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\DAL\obj\Debug\DAL.dll
 E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\DAL\obj\Debug\DAL.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\DAL\bin\Debug\DAL.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\DAL\bin\Debug\DAL.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\DAL\bin\Debug\Data.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\DAL\bin\Debug\Entidades.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\DAL\bin\Debug\Entidades.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\DAL\bin\Debug\Data.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\DAL\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\DAL\obj\Debug\DAL.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\DAL\obj\Debug\DAL.pdb
