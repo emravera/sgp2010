@@ -15,7 +15,7 @@ namespace GyCAP.UI.EstructuraProducto
         private Data.dsTerminacion dsTerminacion = new GyCAP.Data.dsTerminacion();
         private DataView dvTerminacion;
         private enum estadoUI { inicio, nuevo, consultar, modificar, };
-        estadoUI estadoInterface;
+        private estadoUI estadoInterface;
 
         public frmTerminacion()
         {
@@ -167,7 +167,7 @@ namespace GyCAP.UI.EstructuraProducto
                         //Creamos el objeto terminacion
                         int codigo = Convert.ToInt32(dvTerminacion[dgvLista.SelectedRows[0].Index]["TE_CODIGO"]);
                         //Lo eliminamos de la DB
-                        BLL.TerminacionBLL.Eliminar(codigo );
+                        BLL.TerminacionBLL.Eliminar(codigo);
                         //Lo eliminamos del dataset
                         dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigo).Delete();
                         dsTerminacion.TERMINACIONES.AcceptChanges();
@@ -188,6 +188,86 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            //Revisamos que escribió algo
+            if (txtNombre.Text != String.Empty)
+            {
+                Entidades.Terminacion terminacion = new GyCAP.Entidades.Terminacion();
+
+                //Revisamos que está haciendo
+                if (estadoInterface == estadoUI.nuevo)
+                {
+                    //Está cargando una terminacion nuevo
+                    terminacion.Nombre = txtNombre.Text;
+                    terminacion.Descripcion = txtDescripcion.Text;
+                    try
+                    {
+                        //Primero lo creamos en la db
+                        terminacion.Codigo = BLL.TerminacionBLL.Insertar(terminacion);
+                        //Ahora lo agregamos al dataset
+                        Data.dsTerminacion.TERMINACIONESRow rowTerminacion = dsTerminacion.TERMINACIONES.NewTERMINACIONESRow();
+                        //Indicamos que comienza la edición de la fila
+                        rowTerminacion.BeginEdit();
+                        rowTerminacion.TE_CODIGO = terminacion.Codigo;
+                        rowTerminacion.TE_NOMBRE = terminacion.Nombre;
+                        rowTerminacion.TE_DESCRIPCION = terminacion.Descripcion;
+                        //Termina la edición de la fila
+                        rowTerminacion.EndEdit();
+                        //Agregamos la fila al dataset y aceptamos los cambios
+                        dsTerminacion.TERMINACIONES.AddTERMINACIONESRow(rowTerminacion);
+                        dsTerminacion.TERMINACIONES.AcceptChanges();
+                        //Y por último seteamos el estado de la interfaz
+                        SetInterface(estadoUI.inicio);
+                    }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                {
+                    //Está modificando una terminacion
+                    //Primero obtenemos su código del dataview que está realacionado a la fila seleccionada
+                    terminacion.Codigo = Convert.ToInt32(dvTerminacion[dgvLista.SelectedRows[0].Index]["te_codigo"]);
+                    //Segundo obtenemos el nuevo nombre que ingresó el usuario
+                    terminacion.Nombre = txtNombre.Text; 
+                    try
+                    {
+                        //Lo actualizamos en la DB
+                        BLL.TerminacionBLL.Actualizar(terminacion);
+                        //Lo actualizamos en el dataset y aceptamos los cambios
+                        Data.dsTerminacion.TERMINACIONESRow rowTerminacion = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(terminacion.Codigo);
+                        rowTerminacion.BeginEdit();
+                        rowTerminacion.TE_NOMBRE = txtNombre.Text;
+                        rowTerminacion.TE_DESCRIPCION = txtDescripcion.Text; 
+                        rowTerminacion.EndEdit();
+                        dsTerminacion.TERMINACIONES.AcceptChanges(); 
+                        //Avisamos que estuvo todo ok
+                        MessageBox.Show("Elemento actualizado correctamente.", "Aviso");
+                        //Y por último seteamos el estado de la interfaz
+                        SetInterface(estadoUI.inicio);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe completar los datos.", "Aviso");
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.inicio);
+        }
 
     }
 }
