@@ -15,13 +15,13 @@ namespace GyCAP.BLL
             return DAL.TerminacionDAL.Insertar(terminacion);
         }
 
-        public static void Eliminar(Entidades.Terminacion terminacion)
+        public static void Eliminar(int codigo)
         {
             //Revisamos que no esté en alguna transacción
-            if (DAL.TerminacionDAL.PuedeEliminarse(terminacion))
+            if (DAL.TerminacionDAL.PuedeEliminarse(codigo ))
             {
                 //Puede eliminarse
-                DAL.TerminacionDAL.Eliminar(terminacion);
+                DAL.TerminacionDAL.Eliminar(codigo);
             }
             else
             {
