@@ -16,13 +16,13 @@ namespace GyCAP.BLL
             return DAL.ColorDAL.Insertar(color);
         }
 
-        public static void Eliminar(Entidades.Color color)
+        public static void Eliminar(int codigo)
         {
             //Revisamos que no esté en alguna transacción
-            if (DAL.ColorDAL.PuedeEliminarse(color))
+            if (DAL.ColorDAL.PuedeEliminarse(codigo))
             {
                 //Puede eliminarse
-                DAL.ColorDAL.Eliminar(color);
+                DAL.ColorDAL.Eliminar(codigo);
             }
             else
             {

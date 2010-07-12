@@ -20,10 +20,10 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static void Eliminar(Entidades.Color color)
+        public static void Eliminar(int codigo)
         {
             string sql = "DELETE FROM COLORES WHERE col_codigo = @p0";
-            object[] valorParametros = { color.Codigo };
+            object[] valorParametros = { codigo };
             try
             {
                 DB.executeNonQuery(sql, valorParametros, null);
@@ -87,10 +87,10 @@ namespace GyCAP.DAL
             }            
         }
 
-        public static bool PuedeEliminarse(Entidades.Color color)
+        public static bool PuedeEliminarse(int codigo)
         {
             string sql = "SELECT count(coc_codigo) FROM COCINAS WHERE col_codigo = @p0";
-            object[] valorParametros = { color.Codigo };
+            object[] valorParametros = { codigo };
             try
             {
                 if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)

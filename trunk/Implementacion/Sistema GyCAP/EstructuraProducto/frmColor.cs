@@ -113,15 +113,12 @@ namespace GyCAP.UI.EstructuraProducto
                 if (respuesta == DialogResult.Yes)
                 {
                     try
-                    {
-                        //Creamos el objeto color
-                        Entidades.Color color = new GyCAP.Entidades.Color();
-                        color.Codigo = Convert.ToInt32(dvColor[dgvLista.SelectedRows[0].Index]["col_codigo"]);
-                        color.Nombre = dsColor.COLORES.FindByCOL_CODIGO(color.Codigo).COL_NOMBRE;
+                    {                         
                         //Lo eliminamos de la DB
-                        BLL.ColorBLL.Eliminar(color);
+                        int codigo = Convert.ToInt32(dvColor[dgvLista.SelectedRows[0].Index]["col_codigo"]);
+                        BLL.ColorBLL.Eliminar(codigo);
                         //Lo eliminamos del dataset
-                        dsColor.COLORES.FindByCOL_CODIGO(color.Codigo).Delete();
+                        dsColor.COLORES.FindByCOL_CODIGO(codigo).Delete();
                         dsColor.COLORES.AcceptChanges();
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
