@@ -169,7 +169,7 @@ namespace GyCAP.UI.EstructuraProducto
                         //Lo eliminamos de la DB
                         BLL.TerminacionBLL.Eliminar(codigo );
                         //Lo eliminamos del dataset
-                        dsTerminacion.TERMINACIONES.FindByTE_CODIGO(terminacion.Codigo).Delete();
+                        dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigo).Delete();
                         dsTerminacion.TERMINACIONES.AcceptChanges();
                     }
                     catch (BLL.Excepciones.ElementoExistenteException ex)
