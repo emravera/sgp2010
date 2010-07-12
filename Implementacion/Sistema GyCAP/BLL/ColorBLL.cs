@@ -42,11 +42,9 @@ namespace GyCAP.BLL
             return DAL.ColorDAL.esColor(color);
         }
 
-        public static Data.dsColor ObtenerTodos(string nombre)
+        public static void ObtenerTodos(string nombre, Data.dsColor ds)
         {
-            Data.dsColor dscolor = new GyCAP.Data.dsColor();
-            DAL.ColorDAL.ObtenerColor(nombre, dscolor);
-            return dscolor;
+            DAL.ColorDAL.ObtenerColor(nombre, ds);
         }
 
         

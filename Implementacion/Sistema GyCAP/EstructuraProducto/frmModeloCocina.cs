@@ -69,7 +69,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             try
             {
-                dsModeloCocina = BLL.ModeloCocinaBLL.ObtenerTodos(txtNombreBuscar.Text);
+                BLL.ModeloCocinaBLL.ObtenerTodos(txtNombreBuscar.Text, dsModeloCocina);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
                 dvModeloCocina.Table = dsModeloCocina.MODELOS_COCINAS;
@@ -107,12 +107,12 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el modelo seleccionado?", "Confirmar eliminación", MessageBoxButtons.YesNo);
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el modelo de cocina seleccionado?", "Confirmar eliminación", MessageBoxButtons.YesNo);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
                     {
-                        //Creamos el objeto color
+                        //Creamos el objeto
                         Entidades.ModeloCocina modeloCocina = new GyCAP.Entidades.ModeloCocina();
                         modeloCocina.Codigo = Convert.ToInt32(dvModeloCocina[dgvLista.SelectedRows[0].Index]["mod_codigo"]);
                         modeloCocina.Nombre = dsModeloCocina.MODELOS_COCINAS.FindByMOD_CODIGO(modeloCocina.Codigo).MOD_NOMBRE;
