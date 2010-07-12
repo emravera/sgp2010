@@ -15,13 +15,13 @@ namespace GyCAP.BLL
             return DAL.ModeloCocinaDAL.Insertar(modeloCocina);
         }
 
-        public static void Eliminar(Entidades.ModeloCocina modeloCocina)
+        public static void Eliminar(int codigo)
         {
             //Revisamos que no esté en alguna transacción
-            if (DAL.ModeloCocinaDAL.PuedeEliminarse(modeloCocina))
+            if (DAL.ModeloCocinaDAL.PuedeEliminarse(codigo))
             {
                 //Puede eliminarse
-                DAL.ModeloCocinaDAL.Eliminar(modeloCocina);
+                DAL.ModeloCocinaDAL.Eliminar(codigo);
             }
             else
             {

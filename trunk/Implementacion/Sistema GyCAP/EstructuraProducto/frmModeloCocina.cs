@@ -113,13 +113,11 @@ namespace GyCAP.UI.EstructuraProducto
                     try
                     {
                         //Creamos el objeto
-                        Entidades.ModeloCocina modeloCocina = new GyCAP.Entidades.ModeloCocina();
-                        modeloCocina.Codigo = Convert.ToInt32(dvModeloCocina[dgvLista.SelectedRows[0].Index]["mod_codigo"]);
-                        modeloCocina.Nombre = dsModeloCocina.MODELOS_COCINAS.FindByMOD_CODIGO(modeloCocina.Codigo).MOD_NOMBRE;
+                        int codigo = Convert.ToInt32(dvModeloCocina[dgvLista.SelectedRows[0].Index]["mod_codigo"]);
                         //Lo eliminamos de la DB
-                        BLL.ModeloCocinaBLL.Eliminar(modeloCocina);
+                        BLL.ModeloCocinaBLL.Eliminar(codigo);
                         //Lo eliminamos del dataset
-                        dsModeloCocina.MODELOS_COCINAS.FindByMOD_CODIGO(modeloCocina.Codigo).Delete();
+                        dsModeloCocina.MODELOS_COCINAS.FindByMOD_CODIGO(codigo).Delete();
                         dsModeloCocina.MODELOS_COCINAS.AcceptChanges();
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
