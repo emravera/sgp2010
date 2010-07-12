@@ -77,7 +77,7 @@ namespace GyCAP.UI.EstructuraProducto
                 dvColor.Table = dsColor.COLORES;
                 if (dsColor.COLORES.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron colores con el nombre ingresado.");
+                    MessageBox.Show("No se encontraron colores con el nombre ingresado.", "Aviso");
                 }
                 SetInterface(estadoUI.inicio);
             }
@@ -136,7 +136,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un cliente de lalista.", "Aviso");
+                MessageBox.Show("Debe seleccionar un color de la lista.", "Aviso");
             }
         }
 
@@ -201,7 +201,7 @@ namespace GyCAP.UI.EstructuraProducto
                         rowColor.EndEdit();
                         dsColor.COLORES.AcceptChanges();
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.");
+                        MessageBox.Show("Elemento actualizado correctamente.", "Aviso");
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
@@ -213,7 +213,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             else
             {
-                MessageBox.Show("Debe completar los datos.");
+                MessageBox.Show("Debe completar los datos.", "Aviso");
             }
         }
 

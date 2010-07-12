@@ -105,8 +105,8 @@ namespace Principal
     
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            GyCAP.UI.EstructuraProducto.frmColor.Instancia.MdiParent = this;
-            GyCAP.UI.EstructuraProducto.frmColor.Instancia.Show();
+            GyCAP.UI.EstructuraProducto.frmModeloCocina.Instancia.MdiParent = this;
+            GyCAP.UI.EstructuraProducto.frmModeloCocina.Instancia.Show();
         }
     }
 }
