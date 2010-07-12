@@ -114,5 +114,11 @@ namespace Principal
             GyCAP.UI.EstructuraProducto.frmTerminacion.Instancia.MdiParent = this;
             GyCAP.UI.EstructuraProducto.frmTerminacion.Instancia.Show();
         }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            Form abm = new GyCAP.UI.PlanificacionProduccion.frmPlanAnual();
+            abm.Show();
+        }
     }
 }
