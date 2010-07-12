@@ -27,8 +27,8 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns.Add("TE_NOMBRE", "Nombre");
             dgvLista.Columns.Add("TE_DESCRIPCION", "Descripción");
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            dgvLista.Columns["COL_CODIGO"].DataPropertyName = "TE_CODIGO";
-            dgvLista.Columns["COL_NOMBRE"].DataPropertyName = "TE_NOMBRE";
+            dgvLista.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
+            dgvLista.Columns["TE_NOMBRE"].DataPropertyName = "TE_NOMBRE";
             dgvLista.Columns["TE_DESCRIPCION"].DataPropertyName = "TE_DESCRIPCION";
             //Creamos el dataview y lo asignamos a la grilla
             dvTerminacion = new DataView(dsTerminacion.TERMINACIONES);
