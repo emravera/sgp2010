@@ -23,6 +23,7 @@ namespace GyCAP.DAL
 
         public static void Eliminar(Entidades.ModeloCocina modeloCocina)
         {
+            //Metodo para eliminar modelo de cocinas
             string sql = "DELETE FROM MODELOS_COCINAS WHERE mod_codigo = @p0";
             object[] valorParametros = { modeloCocina.Codigo };
             try
