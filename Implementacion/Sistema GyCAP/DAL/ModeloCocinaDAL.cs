@@ -21,11 +21,11 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static void Eliminar(Entidades.ModeloCocina modeloCocina)
+        public static void Eliminar(int codigo)
         {
             //Metodo para eliminar modelo de cocinas
             string sql = "DELETE FROM MODELOS_COCINAS WHERE mod_codigo = @p0";
-            object[] valorParametros = { modeloCocina.Codigo };
+            object[] valorParametros = { codigo };
             try
             {
                 DB.executeNonQuery(sql, valorParametros, null);
@@ -92,10 +92,10 @@ namespace GyCAP.DAL
             }
         }
 
-        public static bool PuedeEliminarse(Entidades.ModeloCocina modeloCocina)
+        public static bool PuedeEliminarse(int codigo)
         {
             string sql = "SELECT count(coc_codigo) FROM COCINAS WHERE mod_codigo = @p0";
-            object[] valorParametros = { modeloCocina.Codigo };
+            object[] valorParametros = { codigo };
             try
             {
                 if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
