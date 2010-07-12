@@ -10,7 +10,7 @@ namespace GyCAP.BLL
         public static int Insertar(Entidades.Terminacion terminacion)
         {
             //Si existe lanzamos la excepción correspondiente
-            if (EsTerminacion(terminacion)) throw new Excepciones.ElementoExistenteException();
+            if (EsTerminacion(terminacion)) throw new Entidades.Excepciones.ElementoExistenteException ();
             //Como no existe lo creamos
             return DAL.TerminacionDAL.Insertar(terminacion);
         }
@@ -26,7 +26,7 @@ namespace GyCAP.BLL
             else
             {
                 //No puede eliminarse, lanzamos nuestra excepción
-                throw new BLL.Excepciones.ElementoEnTransaccionException();
+                throw new Entidades.Excepciones.ElementoEnTransaccionException();
             }
         }
 

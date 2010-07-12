@@ -172,11 +172,11 @@ namespace GyCAP.UI.EstructuraProducto
                         dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigo).Delete();
                         dsTerminacion.TERMINACIONES.AcceptChanges();
                     }
-                    catch (BLL.Excepciones.ElementoExistenteException ex)
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
-                    catch (BLL.Excepciones.BaseDeDatosException ex)
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
