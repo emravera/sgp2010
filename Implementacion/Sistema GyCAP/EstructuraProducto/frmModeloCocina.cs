@@ -28,9 +28,9 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns.Add("MOD_NOMBRE", "Nombre");
             dgvLista.Columns.Add("MOD_DESCRIPCION", "Descripción");
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            dgvLista.Columns["COL_CODIGO"].DataPropertyName = "MOD_CODIGO";
-            dgvLista.Columns["COL_NOMBRE"].DataPropertyName = "MOD_NOMBRE";
-            dgvLista.Columns["COL_DESCRIPCION"].DataPropertyName = "MOD_DESCRIPCION";
+            dgvLista.Columns["MOD_CODIGO"].DataPropertyName = "MOD_CODIGO";
+            dgvLista.Columns["MOD_NOMBRE"].DataPropertyName = "MOD_NOMBRE";
+            dgvLista.Columns["MOD_DESCRIPCION"].DataPropertyName = "MOD_DESCRIPCION";
             //Creamos el dataview y lo asignamos a la grilla
             dvModeloCocina = new DataView(dsModeloCocina.MODELOS_COCINAS);
             dgvLista.DataSource = dvModeloCocina;
@@ -75,7 +75,7 @@ namespace GyCAP.UI.EstructuraProducto
                 dvModeloCocina.Table = dsModeloCocina.MODELOS_COCINAS;
                 if (dsModeloCocina.MODELOS_COCINAS.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron modelos de cocina con el nombre ingresado.");
+                    MessageBox.Show("No se encontraron modelos de cocina con el nombre ingresado.", "Aviso");
                 }
                 SetInterface(estadoUI.inicio);
             }
@@ -83,6 +83,58 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 MessageBox.Show(ex.Message);
                 SetInterface(estadoUI.inicio);
+            }
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.nuevo);
+        }
+
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.consultar);
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.modificar);
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            //Controlamos que esté seleccionado algo
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Preguntamos si está seguro
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el modelo seleccionado?", "Confirmar eliminación", MessageBoxButtons.YesNo);
+                if (respuesta == DialogResult.Yes)
+                {
+                    try
+                    {
+                        //Creamos el objeto color
+                        Entidades.ModeloCocina modeloCocina = new GyCAP.Entidades.ModeloCocina();
+                        modeloCocina.Codigo = Convert.ToInt32(dvModeloCocina[dgvLista.SelectedRows[0].Index]["mod_codigo"]);
+                        modeloCocina.Nombre = dsModeloCocina.MODELOS_COCINAS.FindByMOD_CODIGO(modeloCocina.Codigo).MOD_NOMBRE;
+                        //Lo eliminamos de la DB
+                        BLL.ModeloCocinaBLL.Eliminar(modeloCocina);
+                        //Lo eliminamos del dataset
+                        dsModeloCocina.MODELOS_COCINAS.FindByMOD_CODIGO(modeloCocina.Codigo).Delete();
+                        dsModeloCocina.MODELOS_COCINAS.AcceptChanges();
+                    }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un modelo de cocina de la lista.", "Aviso");
             }
         }
 
@@ -151,7 +203,7 @@ namespace GyCAP.UI.EstructuraProducto
                         rowModeloCocina.EndEdit();
                         dsModeloCocina.MODELOS_COCINAS.AcceptChanges();
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.");
+                        MessageBox.Show("Elemento actualizado correctamente.", "Aviso");
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
@@ -163,7 +215,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             else
             {
-                MessageBox.Show("Debe completar los datos.");
+                MessageBox.Show("Debe completar los datos.", "Aviso");
             }
         }
 
