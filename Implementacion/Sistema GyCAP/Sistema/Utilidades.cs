@@ -7,6 +7,8 @@ namespace GyCAP.UI.Sistema
 {
     public class Utilidades
     {
-        
+        public void metodo1()
+        {
+        }
     }
 }
