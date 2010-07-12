@@ -108,5 +108,11 @@ namespace Principal
             //GyCAP.UI.EstructuraProducto.frmModeloCocina.Instancia.MdiParent = this;
             //GyCAP.UI.EstructuraProducto.frmModeloCocina.Instancia.Show();
         }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.EstructuraProducto.frmTerminacion.Instancia.MdiParent = this;
+            GyCAP.UI.EstructuraProducto.frmTerminacion.Instancia.Show();
+        }
     }
 }
