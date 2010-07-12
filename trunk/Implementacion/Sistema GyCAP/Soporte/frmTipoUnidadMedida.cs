@@ -26,6 +26,7 @@ namespace GyCAP.UI.Soporte
             //Agregamos las columnas
             dgvLista.Columns.Add("TUMED_CODIGO", "Código");
             dgvLista.Columns.Add("TUMED_NOMBRE", "Nombre");
+            
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["TUMED_CODIGO"].DataPropertyName = "TUMED_CODIGO";
             dgvLista.Columns["TUMED_NOMBRE"].DataPropertyName = "TUMED_NOMBRE";
