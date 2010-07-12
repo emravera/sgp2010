@@ -15,10 +15,10 @@ namespace GyCAP.DAL
             return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
         }
 
-        public static void Eliminar(Entidades.Terminacion terminacion)
+        public static void Eliminar(int codigo)
         {
             string sql = "DELETE FROM TERMINACIONES WHERE TE_CODIGO = @p0";
-            object[] valorParametros = { terminacion.Codigo };
+            object[] valorParametros = { codigo };
             DB.executeNonQuery(sql, valorParametros, null);
         }
 

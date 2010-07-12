@@ -165,12 +165,9 @@ namespace GyCAP.UI.EstructuraProducto
                     try
                     {
                         //Creamos el objeto terminacion
-                        Entidades.Terminacion terminacion = new GyCAP.Entidades.Terminacion();
-                        terminacion.Codigo = Convert.ToInt32(dvTerminacion[dgvLista.SelectedRows[0].Index]["TE_CODIGO"]);
-                        //terminacion.Nombre = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(terminacion.Codigo).TE_NOMBRE;
-                        //terminacion.Descripcion = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(terminacion.Descripcion).TE_DESCRIPCION; 
+                        int codigo = Convert.ToInt32(dvTerminacion[dgvLista.SelectedRows[0].Index]["TE_CODIGO"]);
                         //Lo eliminamos de la DB
-                        BLL.TerminacionBLL.Eliminar(terminacion);
+                        BLL.TerminacionBLL.Eliminar(codigo );
                         //Lo eliminamos del dataset
                         dsTerminacion.TERMINACIONES.FindByTE_CODIGO(terminacion.Codigo).Delete();
                         dsTerminacion.TERMINACIONES.AcceptChanges();
