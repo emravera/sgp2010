@@ -20,10 +20,10 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static void Eliminar(Entidades.TipoUnidadMedida tipoUnidadMedida)
+        public static void Eliminar(int codigo)
         {
             string sql = "DELETE FROM TIPOS_UNIDADES_MEDIDA WHERE tumed_codigo = @p0";
-            object[] valorParametros = { tipoUnidadMedida.Codigo };
+            object[] valorParametros = { codigo };
             try
             {
                 DB.executeNonQuery(sql, valorParametros, null);
@@ -87,10 +87,10 @@ namespace GyCAP.DAL
             }
         }
 
-        public static bool PuedeEliminarse(Entidades.TipoUnidadMedida tipoUnidadMedida)
+        public static bool PuedeEliminarse(int codigo)
         {
             string sql = "SELECT count(tumed_codigo) FROM UNIDADES_MEDIDA WHERE tumed_codigo = @p0";
-            object[] valorParametros = { tipoUnidadMedida.Codigo };
+            object[] valorParametros = { codigo };
             try
             {
                 if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)

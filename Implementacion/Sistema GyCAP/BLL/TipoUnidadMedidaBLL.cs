@@ -10,23 +10,23 @@ namespace GyCAP.BLL
         public static int Insertar(Entidades.TipoUnidadMedida tipoUnidadMedida)
         {
             //Si existe lanzamos la excepción correspondiente
-            if (EsTipoUnidadMedida(tipoUnidadMedida)) throw new Excepciones.ElementoExistenteException();
+            if (EsTipoUnidadMedida(tipoUnidadMedida)) throw new Entidades.Excepciones.ElementoExistenteException();
             //Como no existe lo creamos
             return DAL.TipoUnidadMedidaDAL.Insertar(tipoUnidadMedida);
         }
 
-        public static void Eliminar(Entidades.TipoUnidadMedida tipoUnidadMedida)
+        public static void Eliminar(int codigo)
         {
             //Revisamos que no esté en alguna transacción
-            if (DAL.TipoUnidadMedidaDAL.PuedeEliminarse(tipoUnidadMedida))
+            if (DAL.TipoUnidadMedidaDAL.PuedeEliminarse(codigo))
             {
                 //Puede eliminarse
-                DAL.TipoUnidadMedidaDAL.Eliminar(tipoUnidadMedida);
+                DAL.TipoUnidadMedidaDAL.Eliminar(codigo);
             }
             else
             {
                 //No puede eliminarse, lanzamos nuestra excepción
-                throw new BLL.Excepciones.ElementoEnTransaccionException();
+                throw new Entidades.Excepciones.ElementoEnTransaccionException();
             }
 
         }

@@ -11,7 +11,7 @@ namespace GyCAP.BLL
         public static int Insertar(Entidades.Color color)
         {
             //Si existe lanzamos la excepción correspondiente
-            if (EsColor(color)) throw new Excepciones.ElementoExistenteException();
+            if (EsColor(color)) throw new Entidades.Excepciones.ElementoExistenteException();
             //Como no existe lo creamos
             return DAL.ColorDAL.Insertar(color);
         }
@@ -27,7 +27,7 @@ namespace GyCAP.BLL
             else
             {
                 //No puede eliminarse, lanzamos nuestra excepción
-                throw new BLL.Excepciones.ElementoEnTransaccionException();
+                throw new Entidades.Excepciones.ElementoEnTransaccionException();
             }
 
         }

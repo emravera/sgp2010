@@ -112,13 +112,11 @@ namespace GyCAP.UI.Soporte
                     try
                     {
                         //Creamos el objeto
-                        Entidades.TipoUnidadMedida tipoUnidadMedida = new GyCAP.Entidades.TipoUnidadMedida();
-                        tipoUnidadMedida.Codigo = Convert.ToInt32(dvTipoUnidadMedida[dgvLista.SelectedRows[0].Index]["tumed_codigo"]);
-                        tipoUnidadMedida.Nombre = dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.FindByTUMED_CODIGO(tipoUnidadMedida.Codigo).TUMED_NOMBRE;
+                        int codigo = Convert.ToInt32(dvTipoUnidadMedida[dgvLista.SelectedRows[0].Index]["tumed_codigo"]);
                         //Lo eliminamos de la DB
-                        BLL.TipoUnidadMedidaBLL.Eliminar(tipoUnidadMedida);
+                        BLL.TipoUnidadMedidaBLL.Eliminar(codigo);
                         //Lo eliminamos del dataset
-                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.FindByTUMED_CODIGO(tipoUnidadMedida.Codigo).Delete();
+                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.FindByTUMED_CODIGO(codigo).Delete();
                         dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AcceptChanges();
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)

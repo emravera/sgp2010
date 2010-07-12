@@ -10,7 +10,7 @@ namespace GyCAP.BLL
         public static int Insertar(Entidades.ModeloCocina modeloCocina)
         {
             //Si existe lanzamos la excepción correspondiente
-            if (EsModeloCocina(modeloCocina)) throw new Excepciones.ElementoExistenteException();
+            if (EsModeloCocina(modeloCocina)) throw new Entidades.Excepciones.ElementoExistenteException();
             //Como no existe lo creamos
             return DAL.ModeloCocinaDAL.Insertar(modeloCocina);
         }
@@ -26,7 +26,7 @@ namespace GyCAP.BLL
             else
             {
                 //No puede eliminarse, lanzamos nuestra excepción
-                throw new BLL.Excepciones.ElementoEnTransaccionException();
+                throw new Entidades.Excepciones.ElementoEnTransaccionException();
             }
 
         }
