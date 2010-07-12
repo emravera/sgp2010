@@ -107,41 +107,50 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(439, 268);
+            this.btnEliminar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Delete_25;
+            this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEliminar.Location = new System.Drawing.Point(326, 266);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(75, 25);
+            this.btnEliminar.Size = new System.Drawing.Size(90, 35);
             this.btnEliminar.TabIndex = 4;
             this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEliminar.UseVisualStyleBackColor = true;
             // 
             // btnModificar
             // 
+            this.btnModificar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Text_Editor_25;
             this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnModificar.Location = new System.Drawing.Point(358, 268);
+            this.btnModificar.Location = new System.Drawing.Point(230, 266);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(75, 25);
+            this.btnModificar.Size = new System.Drawing.Size(90, 35);
             this.btnModificar.TabIndex = 3;
             this.btnModificar.Text = "Modificar";
+            this.btnModificar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnModificar.UseVisualStyleBackColor = true;
             // 
             // btnConsultar
             // 
+            this.btnConsultar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Open_25;
             this.btnConsultar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnConsultar.Location = new System.Drawing.Point(277, 268);
+            this.btnConsultar.Location = new System.Drawing.Point(134, 266);
             this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(75, 25);
+            this.btnConsultar.Size = new System.Drawing.Size(90, 35);
             this.btnConsultar.TabIndex = 2;
             this.btnConsultar.Text = "Consultar";
+            this.btnConsultar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnConsultar.UseVisualStyleBackColor = true;
             // 
             // btnNuevo
             // 
+            this.btnNuevo.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.New_25;
             this.btnNuevo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNuevo.Location = new System.Drawing.Point(196, 268);
+            this.btnNuevo.Location = new System.Drawing.Point(38, 266);
             this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(75, 25);
+            this.btnNuevo.Size = new System.Drawing.Size(90, 35);
             this.btnNuevo.TabIndex = 1;
             this.btnNuevo.Text = "Nuevo";
+            this.btnNuevo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNuevo.UseVisualStyleBackColor = true;
             // 
             // dgvLista
@@ -155,7 +164,7 @@
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.ReadOnly = true;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(476, 213);
+            this.dgvLista.Size = new System.Drawing.Size(476, 224);
             this.dgvLista.TabIndex = 0;
             // 
             // groupBox1
@@ -174,10 +183,11 @@
             // 
             // btnBuscar
             // 
+            this.btnBuscar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_25;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(398, 30);
+            this.btnBuscar.Location = new System.Drawing.Point(426, 30);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(88, 30);
+            this.btnBuscar.Size = new System.Drawing.Size(90, 35);
             this.btnBuscar.TabIndex = 6;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -290,10 +300,11 @@
             // 
             // btnSalir
             // 
+            this.btnSalir.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Salir_25;
             this.btnSalir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSalir.Location = new System.Drawing.Point(561, 454);
+            this.btnSalir.Location = new System.Drawing.Point(547, 450);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(88, 30);
+            this.btnSalir.Size = new System.Drawing.Size(90, 35);
             this.btnSalir.TabIndex = 6;
             this.btnSalir.Text = "Salir";
             this.btnSalir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
