@@ -41,11 +41,9 @@ namespace GyCAP.BLL
             return DAL.ModeloCocinaDAL.EsModeloCocina(modeloCocina);
         }
 
-        public static Data.dsModeloCocina ObtenerTodos(string nombre)
+        public static void ObtenerTodos(string nombre, Data.dsModeloCocina ds)
         {
-            Data.dsModeloCocina dsModeloCocina = new GyCAP.Data.dsModeloCocina();
-            DAL.ModeloCocinaDAL.ObtenerModeloCocina(nombre, dsModeloCocina);
-            return dsModeloCocina;
+            DAL.ModeloCocinaDAL.ObtenerModeloCocina(nombre, ds);
         } 
     }
 }

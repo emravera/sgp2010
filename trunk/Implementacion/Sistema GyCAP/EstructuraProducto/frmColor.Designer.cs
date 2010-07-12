@@ -184,7 +184,7 @@
             // 
             this.btnBuscar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_25;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(348, 30);
+            this.btnBuscar.Location = new System.Drawing.Point(348, 25);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(88, 30);
             this.btnBuscar.TabIndex = 6;
@@ -195,7 +195,7 @@
             // 
             // txtNombreBuscar
             // 
-            this.txtNombreBuscar.Location = new System.Drawing.Point(95, 35);
+            this.txtNombreBuscar.Location = new System.Drawing.Point(73, 30);
             this.txtNombreBuscar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(218, 24);
@@ -204,7 +204,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 38);
+            this.label1.Location = new System.Drawing.Point(13, 33);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 17);

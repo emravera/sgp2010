@@ -56,6 +56,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsModeloCocina.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsUnidadMedida.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsUnidadMedida.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -86,6 +91,17 @@
     </None>
     <None Include="dsModeloCocina.xss">
       <DependentUpon>dsModeloCocina.xsd</DependentUpon>
+    </None>
+    <None Include="dsUnidadMedida.xsc">
+      <DependentUpon>dsUnidadMedida.xsd</DependentUpon>
+    </None>
+    <None Include="dsUnidadMedida.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsUnidadMedida.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsUnidadMedida.xss">
+      <DependentUpon>dsUnidadMedida.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

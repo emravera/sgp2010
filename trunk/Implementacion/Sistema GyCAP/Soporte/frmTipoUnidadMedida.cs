@@ -7,53 +7,53 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace GyCAP.UI.EstructuraProducto
+namespace GyCAP.UI.Soporte
 {
-    public partial class frmColor : Form
+    public partial class frmTipoUnidadMedida : Form
     {
-        private static frmColor _frmColor = null;
-        private Data.dsColor dsColor = new GyCAP.Data.dsColor();
-        private DataView dvColor;
-        private enum estadoUI {inicio, nuevo, consultar, modificar, };
+        private static frmTipoUnidadMedida _frmTipoUnidadMedida = null;
+        private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
+        private DataView dvTipoUnidadMedida;
+        private enum estadoUI { inicio, nuevo, consultar, modificar, };
         private estadoUI estadoInterface;
         
-        public frmColor()
+        public frmTipoUnidadMedida()
         {
             InitializeComponent();
 
             //Para que no genere las columnas automáticamente
             dgvLista.AutoGenerateColumns = false;
             //Agregamos las columnas
-            dgvLista.Columns.Add("COL_CODIGO", "Código");
-            dgvLista.Columns.Add("COL_NOMBRE", "Nombre");
+            dgvLista.Columns.Add("TUMED_CODIGO", "Código");
+            dgvLista.Columns.Add("TUMED_NOMBRE", "Nombre");
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            dgvLista.Columns["COL_CODIGO"].DataPropertyName = "COL_CODIGO";
-            dgvLista.Columns["COL_NOMBRE"].DataPropertyName = "COL_NOMBRE";
+            dgvLista.Columns["TUMED_CODIGO"].DataPropertyName = "TUMED_CODIGO";
+            dgvLista.Columns["TUMED_NOMBRE"].DataPropertyName = "TUMED_NOMBRE";
             //Creamos el dataview y lo asignamos a la grilla
-            dvColor = new DataView(dsColor.COLORES);
-            dgvLista.DataSource = dvColor;
+            dvTipoUnidadMedida = new DataView(dsUnidadMedida.TIPOS_UNIDADES_MEDIDA);
+            dgvLista.DataSource = dvTipoUnidadMedida;
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
         }
 
         //Método para evitar la creación de más de una pantalla
-        public static frmColor Instancia
+        public static frmTipoUnidadMedida Instancia
         {
             get
             {
-                if (_frmColor == null || _frmColor.IsDisposed)
+                if (_frmTipoUnidadMedida == null || _frmTipoUnidadMedida.IsDisposed)
                 {
-                    _frmColor = new frmColor();
+                    _frmTipoUnidadMedida = new frmTipoUnidadMedida();
                 }
                 else
                 {
-                    _frmColor.BringToFront();
+                    _frmTipoUnidadMedida.BringToFront();
                 }
-                return _frmColor;
+                return _frmTipoUnidadMedida;
             }
             set
             {
-                _frmColor = value;
+                _frmTipoUnidadMedida = value;
             }
         }
 
@@ -62,22 +62,19 @@ namespace GyCAP.UI.EstructuraProducto
             this.Dispose(true);
         }
 
-        //Usando el comando #region NOMBRE y #endregion, se puede agrupar código relacionado para mostrarlo
-        //u ocultarlo y hacer más fácil la lectura
-
         #region Pestaña Buscar
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             try
             {
-                BLL.ColorBLL.ObtenerTodos(txtNombreBuscar.Text, dsColor);
+                BLL.TipoUnidadMedidaBLL.ObtenerTodos(txtNombreBuscar.Text, dsUnidadMedida);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
-                dvColor.Table = dsColor.COLORES;
-                if (dsColor.COLORES.Rows.Count == 0)
+                dvTipoUnidadMedida.Table = dsUnidadMedida.TIPOS_UNIDADES_MEDIDA;
+                if (dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron colores con el nombre ingresado.", "Aviso");
+                    MessageBox.Show("No se encontraron tipos de unidad de medida con el nombre ingresado.", "Aviso");
                 }
                 SetInterface(estadoUI.inicio);
             }
@@ -87,10 +84,10 @@ namespace GyCAP.UI.EstructuraProducto
                 SetInterface(estadoUI.inicio);
             }
         }
-        
+
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.nuevo);            
+            SetInterface(estadoUI.nuevo);
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)
@@ -109,20 +106,20 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el color seleccionado?", "Confirmar eliminación", MessageBoxButtons.YesNo);
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el tipo de unidad de medida seleccionado?", "Confirmar eliminación", MessageBoxButtons.YesNo);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
                     {
-                        //Creamos el objeto color
-                        Entidades.Color color = new GyCAP.Entidades.Color();
-                        color.Codigo = Convert.ToInt32(dvColor[dgvLista.SelectedRows[0].Index]["col_codigo"]);
-                        color.Nombre = dsColor.COLORES.FindByCOL_CODIGO(color.Codigo).COL_NOMBRE;
+                        //Creamos el objeto
+                        Entidades.TipoUnidadMedida tipoUnidadMedida = new GyCAP.Entidades.TipoUnidadMedida();
+                        tipoUnidadMedida.Codigo = Convert.ToInt32(dvTipoUnidadMedida[dgvLista.SelectedRows[0].Index]["tumed_codigo"]);
+                        tipoUnidadMedida.Nombre = dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.FindByTUMED_CODIGO(tipoUnidadMedida.Codigo).TUMED_NOMBRE;
                         //Lo eliminamos de la DB
-                        BLL.ColorBLL.Eliminar(color);
+                        BLL.TipoUnidadMedidaBLL.Eliminar(tipoUnidadMedida);
                         //Lo eliminamos del dataset
-                        dsColor.COLORES.FindByCOL_CODIGO(color.Codigo).Delete();
-                        dsColor.COLORES.AcceptChanges();
+                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.FindByTUMED_CODIGO(tipoUnidadMedida.Codigo).Delete();
+                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AcceptChanges();
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
@@ -136,7 +133,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un color de la lista.", "Aviso");
+                MessageBox.Show("Debe seleccionar un tipo de unidad de medida de la lista.", "Aviso");
             }
         }
 
@@ -149,28 +146,28 @@ namespace GyCAP.UI.EstructuraProducto
             //Revisamos que escribió algo
             if (txtNombre.Text != String.Empty)
             {
-                Entidades.Color color = new GyCAP.Entidades.Color();
-                
+                Entidades.TipoUnidadMedida tipoUnidadMedida = new GyCAP.Entidades.TipoUnidadMedida();
+
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo)
                 {
-                    //Está cargando un color nuevo
-                    color.Nombre = txtNombre.Text;
+                    //Está cargando uno nuevo
+                    tipoUnidadMedida.Nombre = txtNombre.Text;
                     try
                     {
                         //Primero lo creamos en la db
-                        color.Codigo = BLL.ColorBLL.Insertar(color);
+                        tipoUnidadMedida.Codigo = BLL.TipoUnidadMedidaBLL.Insertar(tipoUnidadMedida);
                         //Ahora lo agregamos al dataset
-                        Data.dsColor.COLORESRow rowColor = dsColor.COLORES.NewCOLORESRow();
+                        Data.dsUnidadMedida.TIPOS_UNIDADES_MEDIDARow rowTipoUnidadMedida = dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.NewTIPOS_UNIDADES_MEDIDARow();
                         //Indicamos que comienza la edición de la fila
-                        rowColor.BeginEdit();
-                        rowColor.COL_CODIGO = color.Codigo;
-                        rowColor.COL_NOMBRE = color.Nombre;
+                        rowTipoUnidadMedida.BeginEdit();
+                        rowTipoUnidadMedida.TUMED_CODIGO = tipoUnidadMedida.Codigo;
+                        rowTipoUnidadMedida.TUMED_NOMBRE = tipoUnidadMedida.Nombre;
                         //Termina la edición de la fila
-                        rowColor.EndEdit();
+                        rowTipoUnidadMedida.EndEdit();
                         //Agregamos la fila al dataset y aceptamos los cambios
-                        dsColor.COLORES.AddCOLORESRow(rowColor);
-                        dsColor.COLORES.AcceptChanges();
+                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AddTIPOS_UNIDADES_MEDIDARow(rowTipoUnidadMedida);
+                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
@@ -185,21 +182,21 @@ namespace GyCAP.UI.EstructuraProducto
                 }
                 else
                 {
-                    //Está modificando un color
+                    //Está modificando
                     //Primero obtenemos su código del dataview que está realacionado a la fila seleccionada
-                    color.Codigo = Convert.ToInt32(dvColor[dgvLista.SelectedRows[0].Index]["col_codigo"]);
+                    tipoUnidadMedida.Codigo = Convert.ToInt32(dvTipoUnidadMedida[dgvLista.SelectedRows[0].Index]["tumed_codigo"]);
                     //Segundo obtenemos el nuevo nombre que ingresó el usuario
-                    color.Nombre = txtNombre.Text;
+                    tipoUnidadMedida.Nombre = txtNombre.Text;
                     try
                     {
                         //Lo actualizamos en la DB
-                        BLL.ColorBLL.Actualizar(color);
+                        BLL.TipoUnidadMedidaBLL.Actualizar(tipoUnidadMedida);
                         //Lo actualizamos en el dataset y aceptamos los cambios
-                        Data.dsColor.COLORESRow rowColor = dsColor.COLORES.FindByCOL_CODIGO(color.Codigo);
-                        rowColor.BeginEdit();
-                        rowColor.COL_NOMBRE = txtNombre.Text;
-                        rowColor.EndEdit();
-                        dsColor.COLORES.AcceptChanges();
+                        Data.dsUnidadMedida.TIPOS_UNIDADES_MEDIDARow rowTipoUnidadMedida = dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.FindByTUMED_CODIGO(tipoUnidadMedida.Codigo);
+                        rowTipoUnidadMedida.BeginEdit();
+                        rowTipoUnidadMedida.TUMED_NOMBRE = txtNombre.Text;
+                        rowTipoUnidadMedida.EndEdit();
+                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AcceptChanges();
                         //Avisamos que estuvo todo ok
                         MessageBox.Show("Elemento actualizado correctamente.", "Aviso");
                         //Y por último seteamos el estado de la interfaz
@@ -226,7 +223,6 @@ namespace GyCAP.UI.EstructuraProducto
 
         #region Servicios
 
-        //Setea la pantalla de acuerdo al estado en que se encuentre
         private void SetInterface(estadoUI estado)
         {
             switch (estado)
@@ -234,7 +230,7 @@ namespace GyCAP.UI.EstructuraProducto
                 case estadoUI.inicio:
                     bool hayDatos;
 
-                    if (dsColor.COLORES.Rows.Count == 0)
+                    if (dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.Rows.Count == 0)
                     {
                         hayDatos = false;
                     }
@@ -242,12 +238,12 @@ namespace GyCAP.UI.EstructuraProducto
                     {
                         hayDatos = true;
                     }
-                    
+
                     btnModificar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
                     btnConsultar.Enabled = hayDatos;
                     estadoInterface = estadoUI.inicio;
-                    tcColor.SelectedTab = tpBuscar;                    
+                    tcTipoUnidadMedida.SelectedTab = tpBuscar;
                     break;
                 case estadoUI.nuevo:
                     txtNombre.ReadOnly = false;
@@ -255,19 +251,19 @@ namespace GyCAP.UI.EstructuraProducto
                     txtNombre.Text = String.Empty;
                     gbGuardarCancelar.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
-                    tcColor.SelectedTab = tpDatos;
+                    tcTipoUnidadMedida.SelectedTab = tpDatos;
                     break;
                 case estadoUI.consultar:
                     txtNombre.ReadOnly = true;
                     gbGuardarCancelar.Enabled = false;
                     estadoInterface = estadoUI.consultar;
-                    tcColor.SelectedTab = tpDatos;
+                    tcTipoUnidadMedida.SelectedTab = tpDatos;
                     break;
                 case estadoUI.modificar:
                     txtNombre.ReadOnly = false;
                     gbGuardarCancelar.Enabled = true;
                     estadoInterface = estadoUI.modificar;
-                    tcColor.SelectedTab = tpDatos;
+                    tcTipoUnidadMedida.SelectedTab = tpDatos;
                     break;
                 default:
                     break;
@@ -275,8 +271,8 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         //Controla la posibilidad de seleccionar o no las pestañas de acuerdo al estado de la interfaz
-        private void tcColor_Selecting(object sender, TabControlCancelEventArgs e)
-        {            
+        private void tcTipoUnidadMedida_Selecting(object sender, TabControlCancelEventArgs e)
+        {
             if (e.TabPage == tpDatos && estadoInterface == estadoUI.inicio)
             {
                 e.Cancel = true;
@@ -288,16 +284,16 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         //Método para colocar las pestañas en forma horizontal, ver en tutorial que atributos hay que setear
-        private void tcColor_DrawItem(object sender, DrawItemEventArgs e)
+        private void tcTipoUnidadMedida_DrawItem(object sender, DrawItemEventArgs e)
         {
             Graphics g = e.Graphics;
             Brush _TextBrush;
 
             // Get the item from the collection.
-            TabPage _TabPage = tcColor.TabPages[e.Index];
+            TabPage _TabPage = tcTipoUnidadMedida.TabPages[e.Index];
 
             // Get the real bounds for the tab rectangle.
-            Rectangle _TabBounds = tcColor.GetTabRect(e.Index);
+            Rectangle _TabBounds = tcTipoUnidadMedida.GetTabRect(e.Index);
 
             if (e.State == DrawItemState.Selected)
             {
@@ -323,7 +319,7 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         //Método para evitar que se cierrre la pantalla con la X o con ALT+F4
-        private void frmColor_FormClosing(object sender, FormClosingEventArgs e)
+        private void frmTipoUnidadMedida_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
@@ -335,9 +331,9 @@ namespace GyCAP.UI.EstructuraProducto
         //hace clic en alguna fila de la grilla
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            int codigoColor = Convert.ToInt32(dvColor[e.RowIndex]["col_codigo"]);
-            txtCodigo.Text = codigoColor.ToString();
-            txtNombre.Text = dsColor.COLORES.FindByCOL_CODIGO(codigoColor).COL_NOMBRE;
+            int codigoTipoUnidadMedida = Convert.ToInt32(dvTipoUnidadMedida[e.RowIndex]["tumed_codigo"]);
+            txtCodigo.Text = codigoTipoUnidadMedida.ToString();
+            txtNombre.Text = dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.FindByTUMED_CODIGO(codigoTipoUnidadMedida).TUMED_NOMBRE;
         }
 
         //Evento doble clic en la grilla, es igual que si hiciera clic en Consultar
@@ -347,6 +343,5 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
-
     }
 }
