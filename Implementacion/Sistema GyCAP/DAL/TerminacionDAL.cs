@@ -62,10 +62,10 @@ namespace GyCAP.DAL
             }
         }
 
-        public static bool PuedeEliminarse(Entidades.Terminacion terminacion)
+        public static bool PuedeEliminarse(int codigo)
         {
             string sql = "SELECT count(PZA_CODIGO) FROM COCINA WHERE TE_CODIGO = @p0";
-            object[] valorParametros = { terminacion.Codigo };
+            object[] valorParametros = { codigo };
             if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
             {
                 return true;
