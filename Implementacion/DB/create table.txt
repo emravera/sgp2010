@@ -110,6 +110,19 @@ create table DETALLE_DEMANDAS_ANUALES (
    constraint PK_DETALLE_DEMANDAS_ANUALES primary key nonclustered (DDEMAN_CODIGO)
 )
 
+/*-MODIFICACION 13/07/2010-*/
+
+/*==============================================================*/
+/* Table: DETALLE_MATERIA_PRIMA                                 */
+/*==============================================================*/
+create table DETALLE_MATERIA_PRIMA (
+   DMAT_CODIGO            numeric(10)          identity,
+   MP_CODIGO           numeric(10)          null,
+   PZA_CODIGO           numeric(10)          null,
+   DMAT_CANTIDAD          int                  null,
+   constraint PK_DETALLE_MATERIA_PRIMA primary key nonclustered (DMAT_CODIGO)
+)
+
 /*==============================================================*/
 /* Table: DETALLE_ORDENES_TRABAJO                               */
 /*==============================================================*/
@@ -131,6 +144,19 @@ create table DETALLE_PEDIDOS (
    EDPED_CODIGO         numeric(10)          not null,
    DPED_CANTIDAD        int                  null,
    constraint PK_DETALLE_PEDIDOS primary key nonclustered (DPED_CODIGO)
+)
+
+/*-MODIFICACION 12/07/2010-*/
+
+/*==============================================================*/
+/* Table: DETALLE_PIEZA                                         */
+/*==============================================================*/
+create table DETALLE_PIEZA (
+   DPZA_CODIGO          numeric(10)          identity,
+   PZA_CODIGO          numeric(10)          null,
+   SCONJ_CODIGO         numeric(10)          null,
+   DSCJ_CANTIDAD        numeric(10)          null,
+   constraint PK_DETALLE_PIEZA primary key nonclustered (DPZA_CODIGO)
 )
 
 /*==============================================================*/
@@ -172,9 +198,22 @@ create table DETALLE_PLANES_SEMANALES (
    OTJO_NUMERO          numeric(10)          null,
    PSEM_CODIGO          numeric(10)          not null,
    DPSEM_DIA            datetime             null,
-   DPSEM_CANTIDADESTIMADA int                  null,
+   DPSEM_CANTIDADESTIMADA int                null,
    DPSEM_CANTIDADREAL   int                  null,
    constraint PK_DETALLE_PLANES_SEMANALES primary key nonclustered (DPSEM_CODIGO)
+)
+
+/*-MODIFICACION 12/07/2010-*/
+
+/*==============================================================*/
+/* Table: DETALLE_SUBCONJUNTO                                   */
+/*==============================================================*/
+create table DETALLE_SUBCONJUNTO (
+   DSCJ_CODIGO          numeric(10)          identity,
+   CONJ_CODIGO          numeric(10)          null,
+   SCONJ_CODIGO         numeric(10)          null,
+   DSCJ_CANTIDAD        numeric(10)          null,
+   constraint PK_DETALLE_SUBCONJUNTO primary key nonclustered (DSCJ_CODIGO)
 )
 
 /*==============================================================*/
@@ -356,7 +395,7 @@ create table MAQUINAS (
 /*==============================================================*/
 create table MARCAS (
    MCA_CODIGO           numeric(10)          identity,
-   CLI_CODIGO           numeric(10)          not null,
+   CLI_CODIGO           numeric(10)          null,
    MCA_NOMBRE           varchar(25)          null,
    constraint PK_MARCAS primary key nonclustered (MCA_CODIGO)
 )
@@ -382,7 +421,7 @@ create table MATERIAS_PRIMAS (
 create table MATERIASPRIMASPRINCIPALES (
    MPPR_CODIGO          numeric(10)          identity,
    MP_CODIGO            numeric(10)          null,
-   MPPR_CANTIDAD        numeric(10,3)          null,
+   MPPR_CANTIDAD        numeric(10,3)        null,
    constraint PK_MATERIASPRIMASPRINCIPALES primary key nonclustered (MPPR_CODIGO)
 )
 
@@ -434,7 +473,7 @@ create table PEDIDOS (
    PED_NUMERO           numeric(10)          identity,
    CLI_CODIGO           numeric(10)          not null,
    EPED_CODIGO          numeric(10)          not null,
-   PED_FECHAENTREGAPREVISTA datetime             null,
+   PED_FECHAENTREGAPREVISTA datetime         null,
    PED_FECHAENTREGAREAL datetime             null,
    constraint PK_PEDIDOS primary key nonclustered (PED_NUMERO)
 )
@@ -466,6 +505,7 @@ create table PIEZASXSUBCONJUNTO (
 /*==============================================================*/
 create table PLANES_ANUALES (
    PAN_CODIGO           numeric(10)          identity,
+   PAN_ANIO             numeric(4)           not null,
    DEMAN_CODIGO         numeric(10)          not null,
    PAN_FECHACREACION    datetime             null,
    constraint PK_PLANES_ANUALES primary key nonclustered (PAN_CODIGO)
@@ -648,7 +688,6 @@ create table TIPOS_REPUESTOS (
 create table TIPOS_UNIDADES_MEDIDA (
    TUMED_CODIGO         numeric(10)          identity,
    TUMED_NOMBRE         varchar(25)          null,
-   TUMED_DESCRIPCION    varchar(80)          null,
    constraint PK_TIPOS_UNIDADES_MEDIDA primary key nonclustered (TUMED_CODIGO)
 )
 

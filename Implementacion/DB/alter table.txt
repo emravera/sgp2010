@@ -54,6 +54,18 @@ alter table DETALLE_DEMANDAS_ANUALES
    add constraint detalleDemandaAnual_demandaAnual_fk foreign key (DEMAN_CODIGO)
       references DEMANDAS_ANUALES (DEMAN_CODIGO)
 
+/*-MODIFICACION 13/07/2010-*/
+
+/*==============================================================*/
+/* Table: DETALLE_MATERIA_PRIMA                                      */
+/*==============================================================*/
+alter table DETALLE_MATERIA_PRIMA
+   add constraint detalleMateriaPrima_materiaPrima_fk foreign key (MP_CODIGO)
+      references MATERIAS_PRIMAS (MP_CODIGO)
+alter table DETALLE_MATERIA_PRIMA
+   add constraint detalleMateriaPrima_pieza_fk foreign key (PZA_CODIGO)
+      references PIEZAS (PZA_CODIGO)
+
 /*==============================================================*/
 /* Table: DETALLE_ORDENES_TRABAJO                               */
 /*==============================================================*/
@@ -79,6 +91,19 @@ alter table DETALLE_PEDIDOS
 alter table DETALLE_PEDIDOS
    add constraint detallePedido_pedido_fk foreign key (PED_NUMERO)
       references PEDIDOS (PED_NUMERO)
+
+
+/*-MODIFICACION 12/07/2010-*/
+
+/*==============================================================*/
+/* Table: DETALLE_PIEZA                                      */
+/*==============================================================*/
+alter table DETALLE_PIEZA
+   add constraint detallePieza_pieza_fk foreign key (PZA_CODIGO)
+      references PIEZAS (PZA_CODIGO)
+alter table DETALLE_PIEZA
+   add constraint detallePieza_subconjunto_fk foreign key (SCONJ_CODIGO)
+      references SUBCONJUNTOS (SCONJ_CODIGO)
 
 /*==============================================================*/
 /* Table: DETALLE_PLANES_MANTENIMIENTO                          */
@@ -127,6 +152,19 @@ alter table DETALLE_PLANES_SEMANALES
 alter table DETALLE_PLANES_SEMANALES
    add constraint detallePlanSemanal_planSemanal_fk foreign key (PSEM_CODIGO)
       references PLANES_SEMANALES (PSEM_CODIGO)
+
+/*-MODIFICACION 12/07/2010-*/
+
+/*==============================================================*/
+/* Table: DETALLE_SUBCONJUNTO                                      */
+/*==============================================================*/
+alter table DETALLE_SUBCONJUNTO
+   add constraint detalleSubconjunto_subconjunto_fk foreign key (CONJ_CODIGO)
+      references CONJUNTOS (CONJ_CODIGO)
+alter table DETALLE_SUBCONJUNTO
+   add constraint detalleSubconjunto_conjunto_fk foreign key (SCONJ_CODIGO)
+      references SUBCONJUNTOS (SCONJ_CODIGO)
+
 
 /*==============================================================*/
 /* Table: DOMICILIOS                                            */
