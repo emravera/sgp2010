@@ -44,7 +44,7 @@ namespace GyCAP.DAL
 
         public static bool EsTipoUnidadMedida(Entidades.TipoUnidadMedida tipoUnidadMedida)
         {
-            string sql = "SELECT count(tumed_codigo) FROM TIPOS_UNIDADES_MEDIDA WHERE col_nombre = @p0";
+            string sql = "SELECT count(tumed_codigo) FROM TIPOS_UNIDADES_MEDIDA WHERE tumed_nombre = @p0";
             object[] valorParametros = { tipoUnidadMedida.Nombre };
             try
             {

@@ -268,55 +268,7 @@ namespace GyCAP.UI.Soporte
                     break;
             }
         }
-
-        //Controla la posibilidad de seleccionar o no las pestañas de acuerdo al estado de la interfaz
-        private void tcTipoUnidadMedida_Selecting(object sender, TabControlCancelEventArgs e)
-        {
-            if (e.TabPage == tpDatos && estadoInterface == estadoUI.inicio)
-            {
-                e.Cancel = true;
-            }
-            else if (e.TabPage == tpBuscar && estadoInterface != estadoUI.inicio && estadoInterface != estadoUI.consultar)
-            {
-                e.Cancel = true;
-            }
-        }
-
-        //Método para colocar las pestañas en forma horizontal, ver en tutorial que atributos hay que setear
-        private void tcTipoUnidadMedida_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            Brush _TextBrush;
-
-            // Get the item from the collection.
-            TabPage _TabPage = tcTipoUnidadMedida.TabPages[e.Index];
-
-            // Get the real bounds for the tab rectangle.
-            Rectangle _TabBounds = tcTipoUnidadMedida.GetTabRect(e.Index);
-
-            if (e.State == DrawItemState.Selected)
-            {
-                // Draw a different background color, and don't paint a focus rectangle.
-                _TextBrush = new SolidBrush(Color.White);
-                g.FillRectangle(Brushes.Gray, e.Bounds);
-            }
-            else
-            {
-                _TextBrush = new System.Drawing.SolidBrush(e.ForeColor);
-                e.DrawBackground();
-            }
-
-            // Use our own font. Because we CAN.
-            Font _TabFont = new Font("Arial", 10, FontStyle.Bold, GraphicsUnit.Pixel);
-
-            // Draw string. Center the text.
-            StringFormat _StringFlags = new StringFormat();
-            _StringFlags.Alignment = StringAlignment.Center;
-            _StringFlags.LineAlignment = StringAlignment.Center;
-            g.DrawString(_TabPage.Text, _TabFont, _TextBrush, _TabBounds, new StringFormat(_StringFlags));
-
-        }
-
+               
         //Método para evitar que se cierrre la pantalla con la X o con ALT+F4
         private void frmTipoUnidadMedida_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -342,5 +294,6 @@ namespace GyCAP.UI.Soporte
         }
 
         #endregion
+
     }
 }
