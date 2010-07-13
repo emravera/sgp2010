@@ -241,6 +241,7 @@ namespace GyCAP.UI.Soporte
                     btnModificar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
                     btnConsultar.Enabled = hayDatos;
+                    btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcTipoUnidadMedida.SelectedTab = tpBuscar;
                     break;
@@ -250,6 +251,10 @@ namespace GyCAP.UI.Soporte
                     txtNombre.Text = String.Empty;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
+                    btnNuevo.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
                     tcTipoUnidadMedida.SelectedTab = tpDatos;
                     break;
@@ -262,7 +267,12 @@ namespace GyCAP.UI.Soporte
                     break;
                 case estadoUI.modificar:
                     txtNombre.ReadOnly = false;
-                    gbGuardarCancelar.Enabled = true;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = true;
+                    btnNuevo.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.modificar;
                     tcTipoUnidadMedida.SelectedTab = tpDatos;
                     break;

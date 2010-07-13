@@ -214,7 +214,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnVolver_Click(object sender, EventArgs e)
         {
             SetInterface(estadoUI.inicio);
         }
@@ -250,19 +250,30 @@ namespace GyCAP.UI.EstructuraProducto
                     txtNombre.ReadOnly = false;
                     txtCodigo.Text = String.Empty;
                     txtNombre.Text = String.Empty;
-                    gbGuardarCancelar.Enabled = true;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = true;
+                    btnNuevo.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
                     tcColor.SelectedTab = tpDatos;
                     break;
                 case estadoUI.consultar:
                     txtNombre.ReadOnly = true;
-                    gbGuardarCancelar.Enabled = false;
+                    btnGuardar.Enabled = false;
+                    btnVolver.Enabled = true;
                     estadoInterface = estadoUI.consultar;
                     tcColor.SelectedTab = tpDatos;
                     break;
                 case estadoUI.modificar:
                     txtNombre.ReadOnly = false;
-                    gbGuardarCancelar.Enabled = true;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = true;
+                    btnNuevo.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.modificar;
                     tcColor.SelectedTab = tpDatos;
                     break;
