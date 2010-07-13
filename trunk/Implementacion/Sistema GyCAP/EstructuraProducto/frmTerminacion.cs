@@ -291,5 +291,21 @@ namespace GyCAP.UI.EstructuraProducto
             SetInterface(estadoUI.inicio);
         }
 
+        //Evento RowEnter de la grilla, va cargando los datos en la pestaña Datos a medida que se
+        //hace clic en alguna fila de la grilla
+        private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            int codigoTerminacion = Convert.ToInt32(dvTerminacion[e.RowIndex]["te_codigo"]);
+            txtCodigo.Text = codigoTerminacion.ToString();
+            txtNombre.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_NOMBRE ;
+            txtDescripcion.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_DESCRIPCION ;
+        }
+
+        //Evento doble clic en la grilla, es igual que si hiciera clic en Consultar
+        private void dgvLista_DoubleClick(object sender, EventArgs e)
+        {
+            btnConsultar.PerformClick();
+        }
+
     }
 }
