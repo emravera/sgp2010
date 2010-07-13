@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
+using System.Configuration ;
+
 
 /// <summary>
 /// Provee los métodos de acceso a una base de datos SQlServer.
@@ -13,18 +15,26 @@ namespace GyCAP.DAL
 {
     class DB
     {
-        static String conexionGonzalo = "Data Source=NGA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
-        static String conexionEmanuel = "";
-        static String conexionMarcelo = "";
-        static String conexionRaul = "Data Source=DESKTOP\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
-        
-        //Cambiar por la propia.
-        static String cadenaConexion = conexionGonzalo;
+        static string conexionGonzalo = "Data Source=NGA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
+        static string conexionEmanuel = "";
+        static string conexionMarcelo = "Data Source=HOMERO;Initial Catalog=Proyecto;User ID=sa";
+        static string conexionRaul = "Data Source=DESKTOP\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
+
+        //static String nombrePC = System.Environment.MachineName;
+
+        static string cadenaConexion = conexionMarcelo;
 
         //Obtiene la cadena de conexión a la base de datos.
         private static SqlConnection GetConexion()
         {
-            return new SqlConnection(cadenaConexion);
+            //if (nombrePC == "HOMERO")
+            //{
+            //    return new SqlConnection(conexionMarcelo);
+            //}
+            //else 
+            //{
+            return new SqlConnection( cadenaConexion);
+            //} 
         }
 
         //Crea el comando necesario para interactuar con la base de datos.
