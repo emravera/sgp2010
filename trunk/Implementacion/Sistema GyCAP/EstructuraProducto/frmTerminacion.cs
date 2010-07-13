@@ -28,8 +28,11 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns.Add("TE_DESCRIPCION", "Descripción");
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
+            dgvLista.Columns["TE_CODIGO"].Width = 0;
             dgvLista.Columns["TE_NOMBRE"].DataPropertyName = "TE_NOMBRE";
+            dgvLista.Columns["TE_NOMBRE"].Width = 40;
             dgvLista.Columns["TE_DESCRIPCION"].DataPropertyName = "TE_DESCRIPCION";
+            dgvLista.Columns["TE_DESCRIPCION"].Width = 80;
             //Creamos el dataview y lo asignamos a la grilla
             dvTerminacion = new DataView(dsTerminacion.TERMINACIONES);
             dgvLista.DataSource = dsTerminacion;
@@ -59,26 +62,45 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
                     btnConsultar.Enabled = hayDatos;
+                    btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcABM.SelectedTab = tpBuscar;
                     break;
                 case estadoUI.nuevo:
                     txtNombre.ReadOnly = false;
+                    txtDescripcion.ReadOnly = false;
                     txtCodigo.Text = String.Empty;
                     txtNombre.Text = String.Empty;
-                    gbGuardarCancelar.Enabled = true;
+                    txtDescripcion.Text = string.Empty;
+                    //gbGuardarCancelar.Enabled = true;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = true;
+                    btnNuevo.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
                     tcABM.SelectedTab = tpDatos;
                     break;
                 case estadoUI.consultar:
                     txtNombre.ReadOnly = true;
-                    gbGuardarCancelar.Enabled = false;
+                    txtDescripcion.ReadOnly = true;
+                    //gbGuardarCancelar.Enabled = false;
+                    btnGuardar.Enabled = false;
+                    btnVolver.Enabled = true;
                     estadoInterface = estadoUI.consultar;
                     tcABM.SelectedTab = tpDatos;
                     break;
                 case estadoUI.modificar:
                     txtNombre.ReadOnly = false;
-                    gbGuardarCancelar.Enabled = true;
+                    txtDescripcion.ReadOnly = false;
+                    //gbGuardarCancelar.Enabled = true;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = true;
+                    btnNuevo.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.modificar;
                     tcABM.SelectedTab = tpDatos;
                     break;
@@ -115,7 +137,6 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 e.Cancel = true;
             }
-
         }
 
         #endregion
@@ -223,6 +244,7 @@ namespace GyCAP.UI.EstructuraProducto
                     terminacion.Codigo = Convert.ToInt32(dvTerminacion[dgvLista.SelectedRows[0].Index]["te_codigo"]);
                     //Segundo obtenemos el nuevo nombre que ingresó el usuario
                     terminacion.Nombre = txtNombre.Text;
+                    terminacion.Descripcion = txtDescripcion.Text;
                     try
                     {
                         //Lo actualizamos en la DB
