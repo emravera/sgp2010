@@ -111,8 +111,7 @@ namespace Principal
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            GyCAP.UI.EstructuraProducto.frmTerminacion.Instancia.MdiParent = this;
-            GyCAP.UI.EstructuraProducto.frmTerminacion.Instancia.Show();
+            
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
