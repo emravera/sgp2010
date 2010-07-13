@@ -213,7 +213,7 @@ namespace GyCAP.UI.Soporte
             }
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnVolver_Click(object sender, EventArgs e)
         {
             SetInterface(estadoUI.inicio);
         }
@@ -248,13 +248,15 @@ namespace GyCAP.UI.Soporte
                     txtNombre.ReadOnly = false;
                     txtCodigo.Text = String.Empty;
                     txtNombre.Text = String.Empty;
-                    gbGuardarCancelar.Enabled = true;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
                     tcTipoUnidadMedida.SelectedTab = tpDatos;
                     break;
                 case estadoUI.consultar:
                     txtNombre.ReadOnly = true;
-                    gbGuardarCancelar.Enabled = false;
+                    btnGuardar.Enabled = false;
+                    btnVolver.Enabled = true;
                     estadoInterface = estadoUI.consultar;
                     tcTipoUnidadMedida.SelectedTab = tpDatos;
                     break;
