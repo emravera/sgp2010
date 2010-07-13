@@ -20,21 +20,22 @@ namespace GyCAP.DAL
         static string conexionMarcelo = "Data Source=HOMERO;Initial Catalog=Proyecto;User ID=sa";
         static string conexionRaul = "Data Source=DESKTOP\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
 
-        //static String nombrePC = System.Environment.MachineName;
+        //Devuelve el nombre de la PC
+        static String nombrePC = System.Environment.MachineName;
 
         static string cadenaConexion = conexionGonzalo;
 
         //Obtiene la cadena de conexión a la base de datos.
         private static SqlConnection GetConexion()
         {
-            //if (nombrePC == "HOMERO")
-            //{
-            //    return new SqlConnection(conexionMarcelo);
-            //}
-            //else 
-            //{
-            return new SqlConnection( cadenaConexion);
-            //} 
+            if (nombrePC == "HOMERO") //PC - Marcelo
+            {
+                return new SqlConnection(conexionMarcelo);
+            }
+            else
+            {
+                return new SqlConnection(cadenaConexion);
+            } 
         }
 
         //Crea el comando necesario para interactuar con la base de datos.
