@@ -78,7 +78,8 @@ namespace GyCAP.Data {
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public TERMINACIONESDataTable TERMINACIONES {
-            get {
+            get 
+            {
                 return this.tableTERMINACIONES;
             }
         }
