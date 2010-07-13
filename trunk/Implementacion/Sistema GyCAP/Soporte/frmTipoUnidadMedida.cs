@@ -69,6 +69,7 @@ namespace GyCAP.UI.Soporte
         {
             try
             {
+                dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.Clear();
                 BLL.TipoUnidadMedidaBLL.ObtenerTodos(txtNombreBuscar.Text, dsUnidadMedida);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD

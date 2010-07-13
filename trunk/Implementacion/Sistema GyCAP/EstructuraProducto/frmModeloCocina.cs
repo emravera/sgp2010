@@ -69,6 +69,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             try
             {
+                dsModeloCocina.Clear();
                 BLL.ModeloCocinaBLL.ObtenerTodos(txtNombreBuscar.Text, dsModeloCocina);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
