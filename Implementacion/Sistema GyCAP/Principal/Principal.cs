@@ -120,5 +120,12 @@ namespace Principal
             Form abm = new GyCAP.UI.PlanificacionProduccion.frmPlanAnual();
             abm.Show();
         }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.EstructuraProducto.frmUnidadMedida.Instancia.MdiParent = this;
+            GyCAP.UI.EstructuraProducto.frmUnidadMedida.Instancia.Show();
+
+        }
     }
 }
