@@ -153,7 +153,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Image = global::GyCAP.UI.Soporte.Properties.Resources.Find_25;
+            this.btnBuscar.Image = global::GyCAP.UI.Soporte.Properties.Resources.lupa_25;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBuscar.Location = new System.Drawing.Point(394, 23);
             this.btnBuscar.Name = "btnBuscar";

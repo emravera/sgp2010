@@ -80,8 +80,6 @@
             this.tcColor.Size = new System.Drawing.Size(477, 309);
             this.tcColor.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcColor.TabIndex = 0;
-            this.tcColor.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tcColor_Selecting);
-            this.tcColor.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tcColor_DrawItem);
             // 
             // tpBuscar
             // 
@@ -141,7 +139,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_25;
+            this.btnBuscar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.lupa_25;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBuscar.Location = new System.Drawing.Point(348, 25);
             this.btnBuscar.Name = "btnBuscar";
