@@ -95,6 +95,13 @@ namespace GyCAP.UI.PlanificacionProduccion.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap lupa_25 {
+            get {
+                object obj = ResourceManager.GetObject("lupa_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap New_25 {
             get {
                 object obj = ResourceManager.GetObject("New_25", resourceCulture);
