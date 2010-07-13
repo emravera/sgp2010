@@ -71,6 +71,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             try
             {
+                dsColor.COLORES.Clear();
                 BLL.ColorBLL.ObtenerTodos(txtNombreBuscar.Text, dsColor);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD

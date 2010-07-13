@@ -147,7 +147,7 @@
             // 
             this.txtNombreBuscar.Location = new System.Drawing.Point(86, 31);
             this.txtNombreBuscar.Name = "txtNombreBuscar";
-            this.txtNombreBuscar.Size = new System.Drawing.Size(182, 24);
+            this.txtNombreBuscar.Size = new System.Drawing.Size(211, 24);
             this.txtNombreBuscar.TabIndex = 1;
             // 
             // label1
