@@ -1,0 +1,1 @@
+Todavia no arreglé el caso de uso EP20-Registrar Estructura del Producto.
