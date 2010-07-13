@@ -22,7 +22,7 @@ namespace GyCAP.DAL
 
         //static String nombrePC = System.Environment.MachineName;
 
-        static string cadenaConexion = conexionMarcelo;
+        static string cadenaConexion = conexionGonzalo;
 
         //Obtiene la cadena de conexión a la base de datos.
         private static SqlConnection GetConexion()

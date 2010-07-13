@@ -33,6 +33,9 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.txtAnioBuscar = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -49,9 +52,6 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.txtAnioBuscar = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.tcColor.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -121,6 +121,7 @@
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.txtAnioBuscar);
             this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(7, 7);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox1.Name = "groupBox1";
@@ -129,6 +130,36 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_25;
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscar.Location = new System.Drawing.Point(454, 24);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(90, 35);
+            this.btnBuscar.TabIndex = 9;
+            this.btnBuscar.Text = "Buscar  ";
+            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            // 
+            // txtAnioBuscar
+            // 
+            this.txtAnioBuscar.Location = new System.Drawing.Point(126, 31);
+            this.txtAnioBuscar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtAnioBuscar.Name = "txtAnioBuscar";
+            this.txtAnioBuscar.Size = new System.Drawing.Size(74, 24);
+            this.txtAnioBuscar.TabIndex = 8;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(66, 34);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(34, 17);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Año:";
             // 
             // tpDatos
             // 
@@ -189,7 +220,7 @@
             this.txtCodigo.Location = new System.Drawing.Point(65, 33);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.ReadOnly = true;
-            this.txtCodigo.Size = new System.Drawing.Size(213, 23);
+            this.txtCodigo.Size = new System.Drawing.Size(213, 24);
             this.txtCodigo.TabIndex = 4;
             // 
             // label3
@@ -197,7 +228,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(6, 38);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 15);
+            this.label3.Size = new System.Drawing.Size(50, 17);
             this.label3.TabIndex = 3;
             this.label3.Text = "Código:";
             // 
@@ -205,7 +236,7 @@
             // 
             this.txtNombre.Location = new System.Drawing.Point(65, 62);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(213, 23);
+            this.txtNombre.Size = new System.Drawing.Size(213, 24);
             this.txtNombre.TabIndex = 2;
             // 
             // label2
@@ -213,13 +244,14 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 70);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 15);
+            this.label2.Size = new System.Drawing.Size(58, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "Nombre:";
             // 
             // tsControles
             // 
             this.tsControles.BackColor = System.Drawing.Color.Silver;
+            this.tsControles.Font = new System.Drawing.Font("Calibri", 10F);
             this.tsControles.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNuevo,
             this.btnModificar,
@@ -294,36 +326,6 @@
             this.btnSalir.Text = "Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_25;
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(454, 24);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(90, 35);
-            this.btnBuscar.TabIndex = 9;
-            this.btnBuscar.Text = "Buscar  ";
-            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            // 
-            // txtAnioBuscar
-            // 
-            this.txtAnioBuscar.Location = new System.Drawing.Point(126, 31);
-            this.txtAnioBuscar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtAnioBuscar.Name = "txtAnioBuscar";
-            this.txtAnioBuscar.Size = new System.Drawing.Size(74, 23);
-            this.txtAnioBuscar.TabIndex = 8;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(66, 34);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 15);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Año:";
-            // 
             // frmPlanAnual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -331,7 +333,7 @@
             this.ClientSize = new System.Drawing.Size(592, 366);
             this.Controls.Add(this.tsControles);
             this.Controls.Add(this.tcColor);
-            this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmPlanAnual";
             this.Text = "Plan Anual";
             this.tcColor.ResumeLayout(false);
