@@ -120,11 +120,6 @@ namespace GyCAP.UI.EstructuraProducto
 
         #endregion
 
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            this.Dispose(true);
-        }
-
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             SetInterface(estadoUI.nuevo);
@@ -140,17 +135,9 @@ namespace GyCAP.UI.EstructuraProducto
             SetInterface(estadoUI.modificar);
         }
 
-        private void btnBuscar_Click(object sender, EventArgs e)
+        private void btnSalir_Click(object sender, EventArgs e)
         {
-            dsTerminacion = BLL.TerminacionBLL.ObtenerTodos(txtNombreBuscar.Text);
-            //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
-            //por una consulta a la BD
-            dvTerminacion.Table = dsTerminacion.TERMINACIONES;
-            if (dsTerminacion.TERMINACIONES.Rows.Count == 0)
-            {
-                MessageBox.Show("No se encontraron terminaciones con el nombre ingresado.");
-            }
-            SetInterface(estadoUI.inicio);
+            this.Dispose(true);
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -235,7 +222,7 @@ namespace GyCAP.UI.EstructuraProducto
                     //Primero obtenemos su código del dataview que está realacionado a la fila seleccionada
                     terminacion.Codigo = Convert.ToInt32(dvTerminacion[dgvLista.SelectedRows[0].Index]["te_codigo"]);
                     //Segundo obtenemos el nuevo nombre que ingresó el usuario
-                    terminacion.Nombre = txtNombre.Text; 
+                    terminacion.Nombre = txtNombre.Text;
                     try
                     {
                         //Lo actualizamos en la DB
@@ -244,9 +231,9 @@ namespace GyCAP.UI.EstructuraProducto
                         Data.dsTerminacion.TERMINACIONESRow rowTerminacion = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(terminacion.Codigo);
                         rowTerminacion.BeginEdit();
                         rowTerminacion.TE_NOMBRE = txtNombre.Text;
-                        rowTerminacion.TE_DESCRIPCION = txtDescripcion.Text; 
+                        rowTerminacion.TE_DESCRIPCION = txtDescripcion.Text;
                         rowTerminacion.EndEdit();
-                        dsTerminacion.TERMINACIONES.AcceptChanges(); 
+                        dsTerminacion.TERMINACIONES.AcceptChanges();
                         //Avisamos que estuvo todo ok
                         MessageBox.Show("Elemento actualizado correctamente.", "Aviso");
                         //Y por último seteamos el estado de la interfaz
@@ -264,8 +251,21 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnVolver_Click(object sender, EventArgs e)
         {
+            SetInterface(estadoUI.inicio);
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            dsTerminacion = BLL.TerminacionBLL.ObtenerTodos(txtNombreBuscar.Text);
+            //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
+            //por una consulta a la BD
+            dvTerminacion.Table = dsTerminacion.TERMINACIONES;
+            if (dsTerminacion.TERMINACIONES.Rows.Count == 0)
+            {
+                MessageBox.Show("No se encontraron terminaciones con el nombre ingresado.");
+            }
             SetInterface(estadoUI.inicio);
         }
 
