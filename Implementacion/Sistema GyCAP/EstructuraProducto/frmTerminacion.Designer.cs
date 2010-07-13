@@ -277,6 +277,8 @@
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(554, 176);
             this.dgvLista.TabIndex = 0;
+            this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
+            this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
             // 
             // tpBuscar
             // 
