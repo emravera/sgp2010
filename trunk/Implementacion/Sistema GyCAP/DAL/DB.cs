@@ -15,27 +15,45 @@ namespace GyCAP.DAL
 {
     class DB
     {
-        static string conexionGonzalo = "Data Source=NGA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
+        static string conexionGonzaloN = "Data Source=NGA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
+        static string conexionGonzaloD = "Data Source=DGA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
         static string conexionEmanuel = "";
         static string conexionMarcelo = "Data Source=HOMERO;Initial Catalog=Proyecto;User ID=sa";
-        static string conexionRaul = "Data Source=DESKTOP\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
+        static string conexionRaulD = "Data Source=DESKTOP\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
+        static string conexionRaulN = "Data Source=NOTEBOOK\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
+        static string cadenaConexion;
 
         //Devuelve el nombre de la PC
         static String nombrePC = System.Environment.MachineName;
 
-        static string cadenaConexion = conexionGonzalo;
-
         //Obtiene la cadena de conexión a la base de datos.
         private static SqlConnection GetConexion()
         {
-            if (nombrePC == "HOMERO") //PC - Marcelo
+            switch (nombrePC)
             {
-                return new SqlConnection(conexionMarcelo);
+                case "NGA": //notebook - gonzalo
+                    cadenaConexion = conexionGonzaloN;
+                    break;
+                case "DGA": //desktop - gonzalo
+                    cadenaConexion = conexionGonzaloD;
+                    break;
+                case "HOMERO": //pc - marcelo
+                    cadenaConexion = conexionMarcelo;
+                    break;
+                case "DESKTOP": //desktop - raul
+                    cadenaConexion = conexionRaulD;
+                    break;
+                case "NOTEBOOK": //notebook - raul
+                    cadenaConexion = conexionRaulN;
+                    break;
+                case "HP-EMA": //notebook - emanuel
+                    cadenaConexion = conexionEmanuel;
+                    break;
+                default:
+                    throw new Entidades.Excepciones.BaseDeDatosException();
             }
-            else
-            {
-                return new SqlConnection(cadenaConexion);
-            } 
+
+            return new SqlConnection(cadenaConexion);
         }
 
         //Crea el comando necesario para interactuar con la base de datos.
