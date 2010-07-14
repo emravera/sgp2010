@@ -8,7 +8,8 @@ namespace GyCAP.DAL
 {
     public class UnidadMedidaDAL
     {
-         //Metodo sobrecargado (3 Sobrecargas)
+       //BUSQUEDA
+       //Metodo sobrecargado (3 Sobrecargas)
        //Busqueda por nombre
         public static void ObtenerUnidad(string nombre, Data.dsUnidadMedida ds)
         {
@@ -52,6 +53,35 @@ namespace GyCAP.DAL
                 catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
         
-
+        //ELIMINACION
+        //Metodo que verifica que no este usado en otro lugar
+        public static bool PuedeEliminarse(int codigo)
+        {
+            string sql = "SELECT count(umed_codigo) FROM MATERIAS_PRIMAS WHERE umed_codigo = @p0";
+            object[] valorParametros = { codigo };
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+        //Metodo que elimina de la base de datos
+        public static void Eliminar(int codigo)
+        {
+            string sql = "DELETE FROM UNIDADES_MEDIDA WHERE umed_codigo = @p0";
+            object[] valorParametros = { codigo };
+            try
+            {
+                DB.executeNonQuery(sql, valorParametros, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
     }
 }
