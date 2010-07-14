@@ -280,16 +280,24 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            dsTerminacion.TERMINACIONES.Clear();
-            BLL.TerminacionBLL.ObtenerTodos(txtNombreBuscar.Text,dsTerminacion);
-            //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
-            //por una consulta a la BD
-            dvTerminacion.Table = dsTerminacion.TERMINACIONES;
-            if (dsTerminacion.TERMINACIONES.Rows.Count == 0)
+            try
             {
-                MessageBox.Show("No se encontraron terminaciones con el nombre ingresado.");
+                dsTerminacion.TERMINACIONES.Clear();
+                BLL.TerminacionBLL.ObtenerTodos(txtNombreBuscar.Text,dsTerminacion);
+                //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
+                //por una consulta a la BD
+                dvTerminacion.Table = dsTerminacion.TERMINACIONES;
+                if (dsTerminacion.TERMINACIONES.Rows.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron terminaciones con el nombre ingresado.");
+                }
+                SetInterface(estadoUI.inicio);
             }
-            SetInterface(estadoUI.inicio);
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message);
+                SetInterface(estadoUI.inicio);
+            }   
         }
 
         //Evento RowEnter de la grilla, va cargando los datos en la pestaña Datos a medida que se
@@ -308,7 +316,10 @@ namespace GyCAP.UI.EstructuraProducto
         //Evento doble clic en la grilla, es igual que si hiciera clic en Consultar
         private void dgvLista_DoubleClick(object sender, EventArgs e)
         {
-            btnConsultar.PerformClick();
+            if (dsTerminacion.TERMINACIONES.Rows.Count == 0)
+            {
+                btnConsultar.PerformClick();
+            }   
         }
 
     }
