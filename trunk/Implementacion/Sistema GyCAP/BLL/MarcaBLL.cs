@@ -15,11 +15,11 @@ namespace GyCAP.BLL
         }
         public static void ObtenerTodos(int idCliente, Data.dsMarca ds)
         {
-            DAL.MarcaDAL.ObtenerUnidad(idCliente, ds);
+            DAL.MarcaDAL.ObtenerMarca(idCliente, ds);
         }
         public static void ObtenerTodos(Data.dsMarca ds)
         {
-            DAL.MarcaDAL.ObtenerUnidad(ds);
+            DAL.MarcaDAL.ObtenerMarca(ds);
         }
 
 

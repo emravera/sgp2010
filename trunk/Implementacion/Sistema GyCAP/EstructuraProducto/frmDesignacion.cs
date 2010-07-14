@@ -34,13 +34,6 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns["MCA_CODIGO"].DataPropertyName = "TUMED_CODIGO";
             dgvLista.Columns["DESIG_NOMBRE"].DataPropertyName = "UMED_NOMBRE";
             
-            //Llena el Dataset con las marcas
-            BLL.m.ObtenerTodos(string.Empty, dsUnidadMedida);
-            //Creamos el dataview y lo asignamos a la grilla
-            dvListaUnidad = new DataView(dsUnidadMedida.UNIDADES_MEDIDA);
-            dgvLista.DataSource = dvListaUnidad;
-
-
         }
     }
 }
