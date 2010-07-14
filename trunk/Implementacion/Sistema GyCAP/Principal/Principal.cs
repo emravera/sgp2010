@@ -127,5 +127,11 @@ namespace Principal
             GyCAP.UI.EstructuraProducto.frmUnidadMedida.Instancia.Show();
 
         }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Soporte.frmMarca.Instancia.MdiParent = this;
+            GyCAP.UI.Soporte.frmMarca.Instancia.Show();
+        }
     }
 }

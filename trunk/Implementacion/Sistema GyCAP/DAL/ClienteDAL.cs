@@ -5,8 +5,20 @@ using System.Text;
 
 namespace GyCAP.DAL
 {
-    class ClienteDAL
+    public class ClienteDAL
     {
-        
+        //BUSQUEDA
+        //Trae todos los elementos
+        public static void ObtenerCliente(Data.dsMarca ds)
+        {
+            string sql = "SELECT cli_codigo, cli_razonsocial, cli_telefono, cli_fechaalta, cli_fechabaja, cli_motivobaja FROM CLIENTES";
+            try
+            {
+                DB.FillDataSet(ds, "CLIENTES", sql, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+   
+
     }
 }

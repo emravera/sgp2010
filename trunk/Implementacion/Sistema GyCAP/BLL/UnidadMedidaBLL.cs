@@ -40,5 +40,26 @@ namespace GyCAP.BLL
 
         }
 
+        //Guardado de Datos
+        public static int Insertar(Entidades.UnidadMedida unidadMedida)
+        {
+            //Si existe lanzamos la excepción correspondiente
+            if (EsUnidadMedida(unidadMedida)) throw new Entidades.Excepciones.ElementoExistenteException();
+            //Como no existe lo creamos
+            return DAL.UnidadMedidaDAL.Insertar(unidadMedida);
+        }
+
+        //Metodo que valida que no se este guardando algo que ya existe
+        public static bool EsUnidadMedida(Entidades.UnidadMedida unidadMedida)
+        {
+            return DAL.UnidadMedidaDAL.esUnidadMedida(unidadMedida);
+        }
+
+        //Actualización de los datos
+        public static void Actualizar(Entidades.UnidadMedida unidadMedida)
+        {
+            DAL.UnidadMedidaDAL.Actualizar(unidadMedida);
+        }
+
     }
 }

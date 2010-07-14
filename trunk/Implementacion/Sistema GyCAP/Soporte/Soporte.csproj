@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmMarca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMarca.Designer.cs">
+      <DependentUpon>frmMarca.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSoporte.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +68,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmMarca.resx">
+      <DependentUpon>frmMarca.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSoporte.resx">
       <DependentUpon>frmSoporte.cs</DependentUpon>
       <SubType>Designer</SubType>

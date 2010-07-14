@@ -1,6 +1,6 @@
 ﻿namespace GyCAP.UI.EstructuraProducto
 {
-    partial class frmUnidadMedida
+    partial class frmDesignacion
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcUnidadMedida = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -39,7 +35,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbNombre = new System.Windows.Forms.RadioButton();
             this.rbTipo = new System.Windows.Forms.RadioButton();
-            this.cbTipo = new System.Windows.Forms.ComboBox();
+            this.cbMarcaBuscar = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
@@ -49,19 +45,20 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
-            this.txtAbreviatura = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cbTipoUnidadDatos = new System.Windows.Forms.ComboBox();
+            this.cbMarcaDatos = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.btnModificar = new System.Windows.Forms.ToolStripButton();
+            this.btnConsultar = new System.Windows.Forms.ToolStripButton();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
-            this.btnConsultar = new System.Windows.Forms.ToolStripButton();
-            this.btnModificar = new System.Windows.Forms.ToolStripButton();
-            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcUnidadMedida.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -71,47 +68,8 @@
             this.gbGuardarCancelar.SuspendLayout();
             this.gbDatos.SuspendLayout();
             this.tsMenu.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(99, 74);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(170, 24);
-            this.txtNombre.TabIndex = 3;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 77);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 17);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Nombre:";
-            // 
-            // txtCodigo
-            // 
-            this.txtCodigo.Location = new System.Drawing.Point(99, 32);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.ReadOnly = true;
-            this.txtCodigo.Size = new System.Drawing.Size(170, 24);
-            this.txtCodigo.TabIndex = 2;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.tcUnidadMedida, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tsMenu, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(592, 366);
-            this.tableLayoutPanel1.TabIndex = 9;
             // 
             // tcUnidadMedida
             // 
@@ -151,7 +109,7 @@
             this.groupBox2.Size = new System.Drawing.Size(574, 213);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Listado de Unidades de Medida";
+            this.groupBox2.Text = "Listado de Designaciones";
             // 
             // dgvLista
             // 
@@ -165,15 +123,12 @@
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(554, 176);
             this.dgvLista.TabIndex = 0;
-            this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter_1);
-            this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
-            this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.rbNombre);
             this.groupBox1.Controls.Add(this.rbTipo);
-            this.groupBox1.Controls.Add(this.cbTipo);
+            this.groupBox1.Controls.Add(this.cbMarcaBuscar);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.txtNombreBuscar);
@@ -199,31 +154,30 @@
             // rbTipo
             // 
             this.rbTipo.AutoSize = true;
-            this.rbTipo.Location = new System.Drawing.Point(220, 31);
+            this.rbTipo.Location = new System.Drawing.Point(216, 32);
             this.rbTipo.Name = "rbTipo";
             this.rbTipo.Size = new System.Drawing.Size(14, 13);
             this.rbTipo.TabIndex = 5;
             this.rbTipo.TabStop = true;
             this.rbTipo.UseVisualStyleBackColor = true;
             // 
-            // cbTipo
+            // cbMarcaBuscar
             // 
-            this.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTipo.FormattingEnabled = true;
-            this.cbTipo.Location = new System.Drawing.Point(282, 26);
-            this.cbTipo.Name = "cbTipo";
-            this.cbTipo.Size = new System.Drawing.Size(131, 23);
-            this.cbTipo.TabIndex = 4;
-            this.cbTipo.SelectedIndexChanged += new System.EventHandler(this.cbTipo_SelectedIndexChanged);
+            this.cbMarcaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMarcaBuscar.FormattingEnabled = true;
+            this.cbMarcaBuscar.Location = new System.Drawing.Point(291, 25);
+            this.cbMarcaBuscar.Name = "cbMarcaBuscar";
+            this.cbMarcaBuscar.Size = new System.Drawing.Size(131, 23);
+            this.cbMarcaBuscar.TabIndex = 4;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(240, 29);
+            this.label4.Location = new System.Drawing.Point(236, 30);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 17);
+            this.label4.Size = new System.Drawing.Size(49, 17);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Tipo:";
+            this.label4.Text = "Marca:";
             // 
             // btnBuscar
             // 
@@ -236,7 +190,6 @@
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // txtNombreBuscar
             // 
@@ -244,7 +197,6 @@
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(112, 24);
             this.txtNombreBuscar.TabIndex = 1;
-            this.txtNombreBuscar.TextChanged += new System.EventHandler(this.txtNombreBuscar_TextChanged);
             // 
             // label1
             // 
@@ -287,7 +239,6 @@
             this.btnVolver.TabIndex = 1;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
-            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnGuardar
             // 
@@ -297,13 +248,10 @@
             this.btnGuardar.TabIndex = 0;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // gbDatos
             // 
-            this.gbDatos.Controls.Add(this.txtAbreviatura);
-            this.gbDatos.Controls.Add(this.label6);
-            this.gbDatos.Controls.Add(this.cbTipoUnidadDatos);
+            this.gbDatos.Controls.Add(this.cbMarcaDatos);
             this.gbDatos.Controls.Add(this.label5);
             this.gbDatos.Controls.Add(this.txtNombre);
             this.gbDatos.Controls.Add(this.txtCodigo);
@@ -316,49 +264,97 @@
             this.gbDatos.Size = new System.Drawing.Size(574, 225);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
-            this.gbDatos.Text = "Datos Unidad de Medida";
+            this.gbDatos.Text = "Datos Designacion";
             // 
-            // txtAbreviatura
+            // cbMarcaDatos
             // 
-            this.txtAbreviatura.Location = new System.Drawing.Point(99, 160);
-            this.txtAbreviatura.Name = "txtAbreviatura";
-            this.txtAbreviatura.Size = new System.Drawing.Size(170, 24);
-            this.txtAbreviatura.TabIndex = 7;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(15, 163);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(79, 17);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Abreviatura:";
-            // 
-            // cbTipoUnidadDatos
-            // 
-            this.cbTipoUnidadDatos.FormattingEnabled = true;
-            this.cbTipoUnidadDatos.Location = new System.Drawing.Point(99, 117);
-            this.cbTipoUnidadDatos.Name = "cbTipoUnidadDatos";
-            this.cbTipoUnidadDatos.Size = new System.Drawing.Size(170, 23);
-            this.cbTipoUnidadDatos.TabIndex = 5;
+            this.cbMarcaDatos.FormattingEnabled = true;
+            this.cbMarcaDatos.Location = new System.Drawing.Point(100, 70);
+            this.cbMarcaDatos.Name = "cbMarcaDatos";
+            this.cbMarcaDatos.Size = new System.Drawing.Size(170, 23);
+            this.cbMarcaDatos.TabIndex = 5;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 120);
+            this.label5.Location = new System.Drawing.Point(29, 73);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(79, 17);
+            this.label5.Size = new System.Drawing.Size(49, 17);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Tipo Unidad:";
+            this.label5.Text = "Marca:";
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Location = new System.Drawing.Point(100, 108);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(170, 24);
+            this.txtNombre.TabIndex = 3;
+            // 
+            // txtCodigo
+            // 
+            this.txtCodigo.Location = new System.Drawing.Point(100, 32);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.ReadOnly = true;
+            this.txtCodigo.Size = new System.Drawing.Size(170, 24);
+            this.txtCodigo.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(29, 111);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(58, 17);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Nombre:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 32);
+            this.label2.Location = new System.Drawing.Point(29, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "Código:";
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Salir_25;
+            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(37, 47);
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
+            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(58, 47);
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Text_Editor_25;
+            this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(66, 47);
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btnConsultar
+            // 
+            this.btnConsultar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_25;
+            this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnConsultar.Name = "btnConsultar";
+            this.btnConsultar.Size = new System.Drawing.Size(65, 47);
+            this.btnConsultar.Text = "Consultar";
+            this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // tsMenu
             // 
@@ -391,70 +387,37 @@
             this.btnNuevo.Size = new System.Drawing.Size(45, 47);
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
-            // 
-            // btnConsultar
-            // 
-            this.btnConsultar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_25;
-            this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(65, 47);
-            this.btnConsultar.Text = "Consultar";
-            this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Text_Editor_25;
-            this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(66, 47);
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
-            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(58, 47);
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
             // 
-            // btnSalir
+            // tableLayoutPanel1
             // 
-            this.btnSalir.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Salir_25;
-            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(37, 47);
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.tcUnidadMedida, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tsMenu, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(592, 366);
+            this.tableLayoutPanel1.TabIndex = 11;
             // 
-            // frmUnidadMedida
+            // frmDesignacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 366);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Calibri", 10F);
-            this.Name = "frmUnidadMedida";
-            this.Text = "Unidad Medida";
-            this.Load += new System.EventHandler(this.frmUnidadMedida_Load);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmUnidadMedida_FormClosing);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.Name = "frmDesignacion";
+            this.Text = "Designaciones";
             this.tcUnidadMedida.ResumeLayout(false);
             this.tpBuscar.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -467,21 +430,23 @@
             this.gbDatos.PerformLayout();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtCodigo;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TabControl tcUnidadMedida;
         private System.Windows.Forms.TabPage tpBuscar;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgvLista;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rbNombre;
+        private System.Windows.Forms.RadioButton rbTipo;
+        private System.Windows.Forms.ComboBox cbMarcaBuscar;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.TextBox txtNombreBuscar;
         private System.Windows.Forms.Label label1;
@@ -490,21 +455,20 @@
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.GroupBox gbDatos;
+        private System.Windows.Forms.ComboBox cbMarcaDatos;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.TextBox txtCodigo;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripButton btnSalir;
+        private System.Windows.Forms.ToolStripButton btnEliminar;
+        private System.Windows.Forms.ToolStripButton btnModificar;
+        private System.Windows.Forms.ToolStripButton btnConsultar;
         private System.Windows.Forms.ToolStrip tsMenu;
         private System.Windows.Forms.ToolStripButton btnNuevo;
-        private System.Windows.Forms.ToolStripButton btnConsultar;
-        private System.Windows.Forms.ToolStripButton btnModificar;
-        private System.Windows.Forms.ToolStripButton btnEliminar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton btnSalir;
-        private System.Windows.Forms.RadioButton rbNombre;
-        private System.Windows.Forms.RadioButton rbTipo;
-        private System.Windows.Forms.ComboBox cbTipo;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtAbreviatura;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox cbTipoUnidadDatos;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+
     }
 }

@@ -51,6 +51,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsColor.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsDesignacion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsDesignacion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsMarca.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsMarca.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsModeloCocina.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -85,6 +95,28 @@
     </None>
     <None Include="dsColor.xss">
       <DependentUpon>dsColor.xsd</DependentUpon>
+    </None>
+    <None Include="dsDesignacion.xsc">
+      <DependentUpon>dsDesignacion.xsd</DependentUpon>
+    </None>
+    <None Include="dsDesignacion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsDesignacion.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsDesignacion.xss">
+      <DependentUpon>dsDesignacion.xsd</DependentUpon>
+    </None>
+    <None Include="dsMarca.xsc">
+      <DependentUpon>dsMarca.xsd</DependentUpon>
+    </None>
+    <None Include="dsMarca.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsMarca.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsMarca.xss">
+      <DependentUpon>dsMarca.xsd</DependentUpon>
     </None>
     <None Include="dsModeloCocina.xsc">
       <DependentUpon>dsModeloCocina.xsd</DependentUpon>
