@@ -153,7 +153,7 @@
             this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(45, 47);
-            this.btnNuevo.Text = "Nuevo";
+            this.btnNuevo.Text = "&Nuevo";
             this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
@@ -164,7 +164,7 @@
             this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnConsultar.Name = "btnConsultar";
             this.btnConsultar.Size = new System.Drawing.Size(65, 47);
-            this.btnConsultar.Text = "Consultar";
+            this.btnConsultar.Text = "&Consultar";
             this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
@@ -175,7 +175,7 @@
             this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(66, 47);
-            this.btnModificar.Text = "Modificar";
+            this.btnModificar.Text = "&Modificar";
             this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
@@ -186,7 +186,7 @@
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(58, 47);
-            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.Text = "&Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
@@ -202,7 +202,7 @@
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(37, 47);
-            this.btnSalir.Text = "Salir";
+            this.btnSalir.Text = "&Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
@@ -384,6 +384,7 @@
             this.ClientSize = new System.Drawing.Size(592, 370);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "frmTerminacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
