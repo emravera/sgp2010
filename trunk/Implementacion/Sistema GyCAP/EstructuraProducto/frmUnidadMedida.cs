@@ -168,7 +168,7 @@ namespace GyCAP.UI.EstructuraProducto
         #endregion
 
         #region Pestaña Datos
-
+        //Programacion de Cada uno de los botones
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             SetInterface(estadoUI.nuevo);
@@ -185,6 +185,56 @@ namespace GyCAP.UI.EstructuraProducto
         {
             SetInterface(estadoUI.modificar);
         }
+        private void dgvLista_DoubleClick(object sender, EventArgs e)
+        {
+            btnConsultar.PerformClick();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            //Controlamos que esté seleccionado algo
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Preguntamos si está seguro
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar la Unidad de Medida seleccionado?", "Confirmar eliminación", MessageBoxButtons.YesNo);
+                if (respuesta == DialogResult.Yes)
+                {
+                    try
+                    {
+                        //Lo eliminamos de la DB
+                        int codigo = Convert.ToInt32(dvListaUnidad[dgvLista.SelectedRows[0].Index]["umed_codigo"]);
+                        BLL.UnidadMedidaBLL.Eliminar(codigo);
+                        //Lo eliminamos del dataset
+                        dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigo).Delete();
+                        dsUnidadMedida.UNIDADES_MEDIDA.AcceptChanges();
+                        btnVolver.PerformClick();
+                    }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un color de la lista.", "Aviso");
+            }
+        }
+        //Metodo que carga los datos desde la grilla hacia a los controles 
+        private void dgvLista_RowEnter_1(object sender, DataGridViewCellEventArgs e)
+        {
+            int codigoUnidad = Convert.ToInt32(dvListaUnidad[e.RowIndex]["umed_codigo"]);
+            txtCodigo.Text = codigoUnidad.ToString();
+            txtNombre.Text = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigoUnidad).UMED_NOMBRE;
+            txtAbreviatura.Text = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigoUnidad).UMED_ABREVIATURA;
+            cbTipo.SelectedValue = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigoUnidad).TUMED_CODIGO;
+        }
+
+
 
         #endregion
 
@@ -259,8 +309,21 @@ namespace GyCAP.UI.EstructuraProducto
                     break;
             }
         }
+        //Método para evitar que se cierrre la pantalla con la X o con ALT+F4
+        private void frmColor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+            }
+        }
         #endregion
 
+        
+
+        
+
+        
         
 
         

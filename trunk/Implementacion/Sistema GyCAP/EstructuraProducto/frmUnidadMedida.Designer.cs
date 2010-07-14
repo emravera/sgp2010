@@ -49,6 +49,10 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.txtAbreviatura = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cbTipoUnidadDatos = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
@@ -57,10 +61,6 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cbTipoUnidadDatos = new System.Windows.Forms.ComboBox();
-            this.txtAbreviatura = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcUnidadMedida.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -165,6 +165,8 @@
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(554, 176);
             this.dgvLista.TabIndex = 0;
+            this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter_1);
+            this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
             // groupBox1
@@ -315,6 +317,39 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Tipo Unidad de Medida";
             // 
+            // txtAbreviatura
+            // 
+            this.txtAbreviatura.Location = new System.Drawing.Point(99, 160);
+            this.txtAbreviatura.Name = "txtAbreviatura";
+            this.txtAbreviatura.Size = new System.Drawing.Size(170, 24);
+            this.txtAbreviatura.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(15, 163);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(79, 17);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Abreviatura:";
+            // 
+            // cbTipoUnidadDatos
+            // 
+            this.cbTipoUnidadDatos.FormattingEnabled = true;
+            this.cbTipoUnidadDatos.Location = new System.Drawing.Point(99, 117);
+            this.cbTipoUnidadDatos.Name = "cbTipoUnidadDatos";
+            this.cbTipoUnidadDatos.Size = new System.Drawing.Size(170, 23);
+            this.cbTipoUnidadDatos.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(15, 120);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(79, 17);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Tipo Unidad:";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -388,6 +423,7 @@
             this.btnEliminar.Size = new System.Drawing.Size(58, 47);
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // toolStripSeparator1
             // 
@@ -404,39 +440,6 @@
             this.btnSalir.Text = "Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 120);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(79, 17);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Tipo Unidad:";
-            // 
-            // cbTipoUnidadDatos
-            // 
-            this.cbTipoUnidadDatos.FormattingEnabled = true;
-            this.cbTipoUnidadDatos.Location = new System.Drawing.Point(99, 117);
-            this.cbTipoUnidadDatos.Name = "cbTipoUnidadDatos";
-            this.cbTipoUnidadDatos.Size = new System.Drawing.Size(170, 23);
-            this.cbTipoUnidadDatos.TabIndex = 5;
-            // 
-            // txtAbreviatura
-            // 
-            this.txtAbreviatura.Location = new System.Drawing.Point(99, 160);
-            this.txtAbreviatura.Name = "txtAbreviatura";
-            this.txtAbreviatura.Size = new System.Drawing.Size(170, 24);
-            this.txtAbreviatura.TabIndex = 7;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(15, 163);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(79, 17);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Abreviatura:";
             // 
             // frmUnidadMedida
             // 
