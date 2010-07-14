@@ -96,7 +96,7 @@
             // 
             this.btnBuscar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.lupa_25;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(394, 23);
+            this.btnBuscar.Location = new System.Drawing.Point(476, 23);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(88, 30);
             this.btnBuscar.TabIndex = 2;
@@ -384,9 +384,10 @@
             this.ClientSize = new System.Drawing.Size(592, 370);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaximizeBox = false;
             this.Name = "frmTerminacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmTerminacion";
+            this.Text = "Terminaciones";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmTerminacion_FormClosing);
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
