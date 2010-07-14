@@ -234,6 +234,96 @@ namespace GyCAP.UI.EstructuraProducto
             cbTipo.SelectedValue = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigoUnidad).TUMED_CODIGO;
         }
 
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            //Revisamos que escribió algo y selecciono algo en el combo
+            if (txtNombre.Text != String.Empty && txtAbreviatura.Text !=String.Empty && cbTipoUnidadDatos.SelectedIndex != -1)
+            {
+                Entidades.UnidadMedida unidadMedida = new GyCAP.Entidades.UnidadMedida();
+                Entidades.TipoUnidadMedida tipoUnidad = new GyCAP.Entidades.TipoUnidadMedida();
+
+                //Revisamos que está haciendo
+                if (estadoInterface == estadoUI.nuevo)
+                {
+                    //Está cargando un color nuevo
+                    unidadMedida.Nombre = txtNombre.Text;
+                    unidadMedida.Abreviatura = txtAbreviatura.Text;
+                    //Creo el objeto tipo unidad de medida y despues lo asigno
+                    tipoUnidad.Codigo = Convert.ToInt32(cbTipoUnidadDatos.SelectedValue);
+                    tipoUnidad.Nombre = cbTipoUnidadDatos.SelectedText.ToString();
+                    unidadMedida.Tipo = tipoUnidad;
+                    try
+                    {
+                        //Primero lo creamos en la db
+                        unidadMedida.Codigo = BLL.UnidadMedidaBLL.Insertar(unidadMedida);
+                        //Ahora lo agregamos al dataset
+                        Data.dsUnidadMedida.UNIDADES_MEDIDARow rowUnidadMedida = dsUnidadMedida.UNIDADES_MEDIDA.NewUNIDADES_MEDIDARow();
+                        //Indicamos que comienza la edición de la fila
+                        rowUnidadMedida.BeginEdit();
+                        rowUnidadMedida.UMED_CODIGO = unidadMedida.Codigo;
+                        rowUnidadMedida.UMED_NOMBRE = unidadMedida.Nombre;
+                        rowUnidadMedida.UMED_ABREVIATURA = unidadMedida.Abreviatura;
+                        rowUnidadMedida.TUMED_CODIGO = unidadMedida.Tipo.Codigo;
+                        //Termina la edición de la fila
+                        rowUnidadMedida.EndEdit();
+                        //Agregamos la fila al dataset y aceptamos los cambios
+                        dsUnidadMedida.UNIDADES_MEDIDA.AddUNIDADES_MEDIDARow(rowUnidadMedida);
+                        dsUnidadMedida.UNIDADES_MEDIDA.AcceptChanges();
+                        //Y por último seteamos el estado de la interfaz
+                        SetInterface(estadoUI.inicio);
+                    }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                {
+                    //Está modificando un color
+                    //Primero obtenemos su código del dataview que está realacionado a la fila seleccionada
+                    unidadMedida.Codigo = Convert.ToInt32(dvListaUnidad[dgvLista.SelectedRows[0].Index]["umed_codigo"]);
+                    //Segundo obtenemos los nuevos datos que ingresó el usuario
+                    unidadMedida.Nombre = txtNombre.Text;
+                    unidadMedida.Abreviatura = txtAbreviatura.Text;
+                    tipoUnidad.Codigo = Convert.ToInt32(cbTipoUnidadDatos.SelectedValue);
+                    tipoUnidad.Nombre = cbTipoUnidadDatos.SelectedText.ToString();
+                    unidadMedida.Tipo = tipoUnidad;
+
+                    try
+                    {
+                        //Lo actualizamos en la DB
+                        BLL.UnidadMedidaBLL.Actualizar(unidadMedida);
+                        //Lo actualizamos en el dataset y aceptamos los cambios
+                        Data.dsUnidadMedida.UNIDADES_MEDIDARow rowUnidadMedida = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(unidadMedida.Codigo);
+                        //Indicamos que comienza la edición de la fila
+                        rowUnidadMedida.BeginEdit();
+                        rowUnidadMedida.UMED_NOMBRE = unidadMedida.Nombre;
+                        rowUnidadMedida.UMED_ABREVIATURA = unidadMedida.Abreviatura;
+                        rowUnidadMedida.TUMED_CODIGO = unidadMedida.Tipo.Codigo;
+                        //Termina la edición de la fila
+                        rowUnidadMedida.EndEdit();
+                        //Agregamos la fila al dataset y aceptamos los cambios
+                        dsUnidadMedida.UNIDADES_MEDIDA.AcceptChanges();
+                        //Avisamos que estuvo todo ok
+                        MessageBox.Show("Elemento actualizado correctamente.", "Aviso");
+                        //Y por último seteamos el estado de la interfaz
+                        SetInterface(estadoUI.inicio);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe completar los datos.", "Aviso");
+            }
+        }
 
 
         #endregion
@@ -310,14 +400,18 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
         //Método para evitar que se cierrre la pantalla con la X o con ALT+F4
-        private void frmColor_FormClosing(object sender, FormClosingEventArgs e)
+        private void frmUnidadMedida_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = true;
             }
         }
+        
+       
         #endregion
+
+        
 
         
 

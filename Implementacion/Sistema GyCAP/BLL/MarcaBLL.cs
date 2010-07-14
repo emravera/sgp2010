@@ -5,7 +5,24 @@ using System.Text;
 
 namespace GyCAP.BLL
 {
-    class MarcaBLL
+    public class MarcaBLL
     {
+        //Busqueda
+        //Obtiene los datos de acuerdo a los criterios de busqueda
+        public static void ObtenerTodos(string nombre, Data.dsMarca ds)
+        {
+            DAL.MarcaDAL.ObtenerMarca(nombre, ds);
+        }
+        public static void ObtenerTodos(int idCliente, Data.dsMarca ds)
+        {
+            DAL.MarcaDAL.ObtenerUnidad(idCliente, ds);
+        }
+        public static void ObtenerTodos(Data.dsMarca ds)
+        {
+            DAL.MarcaDAL.ObtenerUnidad(ds);
+        }
+
+
+
     }
 }
