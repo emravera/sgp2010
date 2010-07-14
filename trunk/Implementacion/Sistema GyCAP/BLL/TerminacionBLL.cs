@@ -7,7 +7,7 @@ namespace GyCAP.BLL
 {
     public class TerminacionBLL
     {
-        public static int Insertar(Entidades.Terminacion terminacion)
+        public static long Insertar(Entidades.Terminacion terminacion)
         {
             //Si existe lanzamos la excepción correspondiente
             if (EsTerminacion(terminacion)) throw new Entidades.Excepciones.ElementoExistenteException ();
@@ -40,11 +40,9 @@ namespace GyCAP.BLL
             return DAL.TerminacionDAL.EsTeminacion(terminacion);
         }
 
-        public static Data.dsTerminacion ObtenerTodos(string nombre)
+        public static void ObtenerTodos(string nombre, Data.dsTerminacion dsTerminacion)
         {
-            Data.dsTerminacion dsTerminacion = new GyCAP.Data.dsTerminacion();
-            DAL.TerminacionDAL.ObtenerTerminacion(nombre, dsTerminacion);
-            return dsTerminacion;
+            DAL.TerminacionDAL.ObtenerTerminacion(nombre, dsTerminacion);            
         }
     }
 }

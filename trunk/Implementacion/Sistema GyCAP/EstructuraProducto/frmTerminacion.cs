@@ -280,7 +280,8 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            dsTerminacion = BLL.TerminacionBLL.ObtenerTodos(txtNombreBuscar.Text);
+            dsTerminacion.TERMINACIONES.Clear();
+            BLL.TerminacionBLL.ObtenerTodos(txtNombreBuscar.Text,dsTerminacion);
             //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
             //por una consulta a la BD
             dvTerminacion.Table = dsTerminacion.TERMINACIONES;
@@ -295,10 +296,13 @@ namespace GyCAP.UI.EstructuraProducto
         //hace clic en alguna fila de la grilla
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            int codigoTerminacion = Convert.ToInt32(dvTerminacion[e.RowIndex]["te_codigo"]);
-            txtCodigo.Text = codigoTerminacion.ToString();
-            txtNombre.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_NOMBRE ;
-            txtDescripcion.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_DESCRIPCION ;
+            if (e.RowIndex > 0)
+            {
+                long codigoTerminacion = Convert.ToInt64(dvTerminacion[e.RowIndex]["te_codigo"]);
+                txtCodigo.Text = codigoTerminacion.ToString();
+                txtNombre.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_NOMBRE;
+                txtDescripcion.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_DESCRIPCION;
+            }
         }
 
         //Evento doble clic en la grilla, es igual que si hiciera clic en Consultar

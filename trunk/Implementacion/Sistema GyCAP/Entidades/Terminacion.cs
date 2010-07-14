@@ -7,11 +7,11 @@ namespace GyCAP.Entidades
 {
     public class Terminacion
     {
-        private int codigo;
+        private long codigo;
         private String nombre;
         private String descripcion;
 
-        public int Codigo
+        public long Codigo
         {
             get { return codigo; }
             set { codigo = value; }
