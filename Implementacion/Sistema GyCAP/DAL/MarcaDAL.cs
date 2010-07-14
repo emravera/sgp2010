@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data.SqlClient;
 
 namespace GyCAP.DAL
 {
@@ -28,7 +29,7 @@ namespace GyCAP.DAL
             }
         }
         //Trae todos los elementos
-        public static void ObtenerMarca(Data.dsUnidadMedida ds)
+        public static void ObtenerMarca(Data.dsMarca ds)
         {
             string sql = "SELECT mca_codigo, cli_codigo, mca_nombre FROM MARCAS";
             try
@@ -38,7 +39,7 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
         //Busqueda por cliente
-        public static void ObtenerMarca(int idCliente, Data.dsUnidadMedida ds)
+        public static void ObtenerMarca(int idCliente, Data.dsMarca ds)
         {
             string sql = @"SELECT mca_codigo, cli_codigo, mca_nombre
                               FROM MARCAS

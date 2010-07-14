@@ -35,8 +35,8 @@ namespace GyCAP.UI.Soporte
             dgvLista.Columns["CLI_CODIGO"].DataPropertyName = "CLI_CODIGO";
             dgvLista.Columns["MCA_NOMBRE"].DataPropertyName = "MCA_NOMBRE";
             
-            //Llena el Dataset con Tipo Unidad Medida
-            BLL.TipoUnidadMedidaBLL.ObtenerTodos(dsMarca);
+            //Llena el Dataset con los clientes
+            BLL.ClienteBLL.ObtenerTodos(dsMarca);
             //Creamos el dataview y lo asignamos a la grilla
             dvListaMarca = new DataView(dsMarca.MARCAS);
             dgvLista.DataSource = dvListaMarca;
@@ -56,8 +56,8 @@ namespace GyCAP.UI.Soporte
             cbClienteDatos.DisplayMember = "CLI_RAZONSOCIAL";
             cbClienteDatos.ValueMember = "CLI_CODIGO";
             //Para que el combo no quede selecionado cuando arranca y que sea una lista
-            cbTipoUnidadDatos.SelectedIndex = -1;
-            cbTipoUnidadDatos.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbClienteDatos.SelectedIndex = -1;
+            cbClienteDatos.DropDownStyle = ComboBoxStyle.DropDownList;
 
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
@@ -132,23 +132,33 @@ namespace GyCAP.UI.Soporte
                     BLL.MarcaBLL.ObtenerTodos(txtNombreBuscar.Text, dsMarca);
 
                 }
-                else if (rbCliente.Checked == true && cbTipo.SelectedIndex != -1)
+                else if (rbCliente.Checked == true && cbClienteBuscar.SelectedIndex != -1)
                 {
-                    BLL.UnidadMedidaBLL.ObtenerTodos(Convert.ToInt32(cbTipo.SelectedValue), dsUnidadMedida);
+                    BLL.MarcaBLL.ObtenerTodos(Convert.ToInt32(cbClienteBuscar.SelectedValue), dsMarca);
                 }
                 else
                 {
-                    BLL.UnidadMedidaBLL.ObtenerTodos(dsUnidadMedida);
+                    BLL.MarcaBLL.ObtenerTodos(dsMarca);
                 }
 
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
-                dvListaUnidad.Table = dsUnidadMedida.UNIDADES_MEDIDA;
+                dvListaMarca.Table = dsMarca.MARCAS;
 
-                if (dsUnidadMedida.UNIDADES_MEDIDA.Rows.Count == 0)
+                if (dsMarca.MARCAS.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Unidades de Medida con el nombre ingresado.", "Aviso");
+                    if (rbNombre.Checked == true)
+                    {
+                        MessageBox.Show("No se encontraron Marcas con el nombre ingresado.", "Aviso");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontraron Marcas del cliente seleccionado.", "Aviso");
+                    }
+                    
                 }
+                           
+
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)

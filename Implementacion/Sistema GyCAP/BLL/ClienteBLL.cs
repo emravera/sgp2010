@@ -11,7 +11,7 @@ namespace GyCAP.BLL
         //Obtiene los datos de acuerdo a los criterios de busqueda (se debe sobrecargar)
         public static void ObtenerTodos(Data.dsMarca ds)
         {
-            DAL.ClienteDAL.ObtenerUnidad(ds);
+            DAL.ClienteDAL.ObtenerCliente(ds);
         }
 
 
