@@ -65,6 +65,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcABM.SelectedTab = tpBuscar;
+                    txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
                     txtNombre.ReadOnly = false;
@@ -81,6 +82,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
                     tcABM.SelectedTab = tpDatos;
+                    txtNombre.Focus();
                     break;
                 case estadoUI.consultar:
                     txtNombre.ReadOnly = true;
@@ -90,6 +92,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnVolver.Enabled = true;
                     estadoInterface = estadoUI.consultar;
                     tcABM.SelectedTab = tpDatos;
+                    btnVolver.Focus();
                     break;
                 case estadoUI.modificar:
                     txtNombre.ReadOnly = false;
@@ -103,6 +106,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.modificar;
                     tcABM.SelectedTab = tpDatos;
+                    txtNombre.Focus();
                     break;
                 default:
                     break;
@@ -320,6 +324,14 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 btnConsultar.PerformClick();
             }   
+        }
+
+        private void frmTerminacion_Activated(object sender, EventArgs e)
+        {
+            if (tcABM.SelectedTab == tpBuscar) 
+            {
+                txtNombreBuscar.Focus();
+            }
         }
 
     }
