@@ -429,6 +429,7 @@
             this.ClientSize = new System.Drawing.Size(592, 366);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Calibri", 10F);
+            this.MaximizeBox = false;
             this.Name = "frmMarca";
             this.Text = "Marcas";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMarca_FormClosing);
