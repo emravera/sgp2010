@@ -1,0 +1,2 @@
+Gente cambié en la base de datos la rejción entre las ESTRUCTURAS y los CONJUNTOS, porque ESTRUCTURAS es como un detalle de
+conjuntos X cocinas
