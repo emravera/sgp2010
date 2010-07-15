@@ -73,7 +73,9 @@
     <Compile Include="Estructura.cs" />
     <Compile Include="Excepciones\BaseDeDatosException.cs" />
     <Compile Include="Excepciones\ElementoEnTransaccionException.cs" />
-    <Compile Include="Excepciones\ItemExistenteException.cs" />
+    <Compile Include="Excepciones\ElementoInexistenteException.cs" />
+    <Compile Include="Excepciones\ElementoExistenteException.cs" />
+    <Compile Include="Excepciones\ValorNoNegativoException.cs" />
     <Compile Include="FabricanteMaquina.cs" />
     <Compile Include="Localidad.cs" />
     <Compile Include="Mantenimiento.cs" />

@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SlickInterface, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Sistema\SlickInterface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -53,6 +57,12 @@
     </Compile>
     <Compile Include="frmColor.Designer.cs">
       <DependentUpon>frmColor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConjunto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConjunto.Designer.cs">
+      <DependentUpon>frmConjunto.cs</DependentUpon>
     </Compile>
     <Compile Include="frmDesignacion.cs">
       <SubType>Form</SubType>
@@ -88,6 +98,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmColor.resx">
       <DependentUpon>frmColor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConjunto.resx">
+      <DependentUpon>frmConjunto.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDesignacion.resx">
@@ -194,6 +208,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\lupa-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Menos-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mas-25.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

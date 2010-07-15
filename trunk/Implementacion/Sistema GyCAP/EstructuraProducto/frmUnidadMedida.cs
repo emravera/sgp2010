@@ -327,8 +327,7 @@ namespace GyCAP.UI.EstructuraProducto
 
 
         #endregion
-
-
+        
         #region Servicios
         private void SetInterface(estadoUI estado)
         {

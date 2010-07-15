@@ -122,7 +122,7 @@ namespace GyCAP.UI.EstructuraProducto
                         dsColor.COLORES.FindByCOL_CODIGO(codigo).Delete();
                         dsColor.COLORES.AcceptChanges();
                     }
-                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
                         MessageBox.Show(ex.Message);
                     }

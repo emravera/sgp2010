@@ -117,8 +117,8 @@ namespace Principal
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            Form abm = new GyCAP.UI.PlanificacionProduccion.frmPlanAnual();
-            abm.Show();
+            GyCAP.UI.EstructuraProducto.frmConjunto.Instancia.MdiParent = this;
+            GyCAP.UI.EstructuraProducto.frmConjunto.Instancia.Show();
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)

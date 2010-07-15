@@ -14,7 +14,7 @@ namespace GyCAP.UI.Soporte
         private static frmTipoUnidadMedida _frmTipoUnidadMedida = null;
         private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
         private DataView dvTipoUnidadMedida;
-        private enum estadoUI { inicio, nuevo, consultar, modificar, };
+        private enum estadoUI { inicio, nuevo, consultar, modificar };
         private estadoUI estadoInterface;
         
         public frmTipoUnidadMedida()
@@ -113,7 +113,7 @@ namespace GyCAP.UI.Soporte
                 {
                     try
                     {
-                        //Creamos el objeto
+                        //Obtenemos
                         int codigo = Convert.ToInt32(dvTipoUnidadMedida[dgvLista.SelectedRows[0].Index]["tumed_codigo"]);
                         //Lo eliminamos de la DB
                         BLL.TipoUnidadMedidaBLL.Eliminar(codigo);
@@ -121,7 +121,7 @@ namespace GyCAP.UI.Soporte
                         dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.FindByTUMED_CODIGO(codigo).Delete();
                         dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AcceptChanges();
                     }
-                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
