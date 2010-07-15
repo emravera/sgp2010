@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tcUnidadMedida = new System.Windows.Forms.TabControl();
+            this.tcDesignacion = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbNombre = new System.Windows.Forms.RadioButton();
-            this.rbTipo = new System.Windows.Forms.RadioButton();
+            this.rbMarca = new System.Windows.Forms.RadioButton();
             this.cbMarcaBuscar = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -45,6 +45,8 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.cbMarcaDatos = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
@@ -59,7 +61,7 @@
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tcUnidadMedida.SuspendLayout();
+            this.tcDesignacion.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
@@ -71,22 +73,22 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tcUnidadMedida
+            // tcDesignacion
             // 
-            this.tcUnidadMedida.Appearance = System.Windows.Forms.TabAppearance.Buttons;
-            this.tcUnidadMedida.Controls.Add(this.tpBuscar);
-            this.tcUnidadMedida.Controls.Add(this.tpDatos);
-            this.tcUnidadMedida.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tcUnidadMedida.ItemSize = new System.Drawing.Size(0, 1);
-            this.tcUnidadMedida.Location = new System.Drawing.Point(2, 54);
-            this.tcUnidadMedida.Margin = new System.Windows.Forms.Padding(0);
-            this.tcUnidadMedida.Multiline = true;
-            this.tcUnidadMedida.Name = "tcUnidadMedida";
-            this.tcUnidadMedida.Padding = new System.Drawing.Point(0, 0);
-            this.tcUnidadMedida.SelectedIndex = 0;
-            this.tcUnidadMedida.Size = new System.Drawing.Size(588, 310);
-            this.tcUnidadMedida.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tcUnidadMedida.TabIndex = 8;
+            this.tcDesignacion.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.tcDesignacion.Controls.Add(this.tpBuscar);
+            this.tcDesignacion.Controls.Add(this.tpDatos);
+            this.tcDesignacion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcDesignacion.ItemSize = new System.Drawing.Size(0, 1);
+            this.tcDesignacion.Location = new System.Drawing.Point(2, 54);
+            this.tcDesignacion.Margin = new System.Windows.Forms.Padding(0);
+            this.tcDesignacion.Multiline = true;
+            this.tcDesignacion.Name = "tcDesignacion";
+            this.tcDesignacion.Padding = new System.Drawing.Point(0, 0);
+            this.tcDesignacion.SelectedIndex = 0;
+            this.tcDesignacion.Size = new System.Drawing.Size(588, 310);
+            this.tcDesignacion.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tcDesignacion.TabIndex = 8;
             // 
             // tpBuscar
             // 
@@ -123,11 +125,14 @@
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(554, 176);
             this.dgvLista.TabIndex = 0;
+            this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
+            this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
+            this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.rbNombre);
-            this.groupBox1.Controls.Add(this.rbTipo);
+            this.groupBox1.Controls.Add(this.rbMarca);
             this.groupBox1.Controls.Add(this.cbMarcaBuscar);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btnBuscar);
@@ -150,16 +155,18 @@
             this.rbNombre.TabIndex = 6;
             this.rbNombre.TabStop = true;
             this.rbNombre.UseVisualStyleBackColor = true;
+            this.rbNombre.CheckedChanged += new System.EventHandler(this.rbNombre_CheckedChanged);
             // 
-            // rbTipo
+            // rbMarca
             // 
-            this.rbTipo.AutoSize = true;
-            this.rbTipo.Location = new System.Drawing.Point(216, 32);
-            this.rbTipo.Name = "rbTipo";
-            this.rbTipo.Size = new System.Drawing.Size(14, 13);
-            this.rbTipo.TabIndex = 5;
-            this.rbTipo.TabStop = true;
-            this.rbTipo.UseVisualStyleBackColor = true;
+            this.rbMarca.AutoSize = true;
+            this.rbMarca.Location = new System.Drawing.Point(216, 32);
+            this.rbMarca.Name = "rbMarca";
+            this.rbMarca.Size = new System.Drawing.Size(14, 13);
+            this.rbMarca.TabIndex = 5;
+            this.rbMarca.TabStop = true;
+            this.rbMarca.UseVisualStyleBackColor = true;
+            this.rbMarca.CheckedChanged += new System.EventHandler(this.rbMarca_CheckedChanged);
             // 
             // cbMarcaBuscar
             // 
@@ -190,6 +197,7 @@
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click_1);
             // 
             // txtNombreBuscar
             // 
@@ -236,21 +244,25 @@
             this.btnVolver.Location = new System.Drawing.Point(301, 23);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 23);
-            this.btnVolver.TabIndex = 1;
+            this.btnVolver.TabIndex = 6;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnGuardar
             // 
             this.btnGuardar.Location = new System.Drawing.Point(199, 23);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
-            this.btnGuardar.TabIndex = 0;
+            this.btnGuardar.TabIndex = 5;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.txtDescripcion);
+            this.gbDatos.Controls.Add(this.label6);
             this.gbDatos.Controls.Add(this.cbMarcaDatos);
             this.gbDatos.Controls.Add(this.label5);
             this.gbDatos.Controls.Add(this.txtNombre);
@@ -266,18 +278,35 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Designacion";
             // 
+            // txtDescripcion
+            // 
+            this.txtDescripcion.Location = new System.Drawing.Point(100, 147);
+            this.txtDescripcion.Multiline = true;
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(170, 52);
+            this.txtDescripcion.TabIndex = 4;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(21, 150);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(77, 17);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Descripcion:";
+            // 
             // cbMarcaDatos
             // 
             this.cbMarcaDatos.FormattingEnabled = true;
             this.cbMarcaDatos.Location = new System.Drawing.Point(100, 70);
             this.cbMarcaDatos.Name = "cbMarcaDatos";
             this.cbMarcaDatos.Size = new System.Drawing.Size(170, 23);
-            this.cbMarcaDatos.TabIndex = 5;
+            this.cbMarcaDatos.TabIndex = 2;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(29, 73);
+            this.label5.Location = new System.Drawing.Point(21, 73);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(49, 17);
             this.label5.TabIndex = 4;
@@ -296,12 +325,12 @@
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.ReadOnly = true;
             this.txtCodigo.Size = new System.Drawing.Size(170, 24);
-            this.txtCodigo.TabIndex = 2;
+            this.txtCodigo.TabIndex = 1;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(29, 111);
+            this.label3.Location = new System.Drawing.Point(21, 111);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 17);
             this.label3.TabIndex = 1;
@@ -310,7 +339,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 32);
+            this.label2.Location = new System.Drawing.Point(21, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 17);
             this.label2.TabIndex = 0;
@@ -325,6 +354,7 @@
             this.btnSalir.Size = new System.Drawing.Size(37, 47);
             this.btnSalir.Text = "Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // btnEliminar
             // 
@@ -335,6 +365,7 @@
             this.btnEliminar.Size = new System.Drawing.Size(58, 47);
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnModificar
             // 
@@ -345,6 +376,7 @@
             this.btnModificar.Size = new System.Drawing.Size(66, 47);
             this.btnModificar.Text = "Modificar";
             this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnConsultar
             // 
@@ -355,6 +387,7 @@
             this.btnConsultar.Size = new System.Drawing.Size(65, 47);
             this.btnConsultar.Text = "Consultar";
             this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
             // tsMenu
             // 
@@ -387,6 +420,7 @@
             this.btnNuevo.Size = new System.Drawing.Size(45, 47);
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // toolStripSeparator1
             // 
@@ -398,7 +432,7 @@
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.tcUnidadMedida, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tcDesignacion, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tsMenu, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -418,7 +452,8 @@
             this.Font = new System.Drawing.Font("Calibri", 10F);
             this.Name = "frmDesignacion";
             this.Text = "Designaciones";
-            this.tcUnidadMedida.ResumeLayout(false);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmDesignacion_FormClosing);
+            this.tcDesignacion.ResumeLayout(false);
             this.tpBuscar.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
@@ -438,13 +473,13 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tcUnidadMedida;
+        private System.Windows.Forms.TabControl tcDesignacion;
         private System.Windows.Forms.TabPage tpBuscar;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgvLista;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton rbNombre;
-        private System.Windows.Forms.RadioButton rbTipo;
+        private System.Windows.Forms.RadioButton rbMarca;
         private System.Windows.Forms.ComboBox cbMarcaBuscar;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnBuscar;
@@ -469,6 +504,8 @@
         private System.Windows.Forms.ToolStripButton btnNuevo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TextBox txtDescripcion;
+        private System.Windows.Forms.Label label6;
 
     }
 }

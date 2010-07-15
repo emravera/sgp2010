@@ -53,6 +53,18 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        //Trae todos los elementos >> Dataset de Designacion
+        public static void ObtenerMarca(Data.dsDesignacion ds)
+        {
+            string sql = "SELECT mca_codigo, cli_codigo, mca_nombre FROM MARCAS";
+            try
+            {
+                DB.FillDataSet(ds, "MARCAS", sql, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
+
         //ELIMINACION
         //Metodo que verifica que no este usado en otro lugar
         public static bool PuedeEliminarse(int codigo)
@@ -121,7 +133,7 @@ namespace GyCAP.DAL
         //Metodo que modifica en la base de datos
         public static void Actualizar(Entidades.Marca marca)
         {
-            string sql = "UPDATE UNIDADES_MEDIDA SET mca_nombre = @p0, cli_codigo = @p1 WHERE mca_codigo = @p2";
+            string sql = "UPDATE MARCAS SET mca_nombre = @p0, cli_codigo = @p1 WHERE mca_codigo = @p2";
             object[] valorParametros = { marca.Nombre, marca.Cliente.Codigo, marca.Codigo };
             try
             {
