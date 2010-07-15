@@ -21,6 +21,12 @@ namespace GyCAP.BLL
         {
             DAL.MarcaDAL.ObtenerMarca(ds);
         }
+        //Metodo para usar desde el formulario de Designaciones (otro Dataset)
+        public static void ObtenerTodos(Data.dsDesignacion ds)
+        {
+            DAL.MarcaDAL.ObtenerMarca(ds);
+        }
+
 
         //Eliminacion
         public static void Eliminar(int codigo)
