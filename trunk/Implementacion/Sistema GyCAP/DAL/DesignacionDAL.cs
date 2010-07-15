@@ -5,7 +5,9 @@ using System.Text;
 
 namespace GyCAP.DAL
 {
-    class DesignacionDAL
+    public class DesignacionDAL
     {
+
+
     }
 }
