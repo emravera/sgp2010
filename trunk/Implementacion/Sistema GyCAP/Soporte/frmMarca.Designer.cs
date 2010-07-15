@@ -52,7 +52,7 @@
             this.rbNombre = new System.Windows.Forms.RadioButton();
             this.rbCliente = new System.Windows.Forms.RadioButton();
             this.cbClienteBuscar = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblClienteBuscar = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -156,6 +156,7 @@
             this.btnGuardar.TabIndex = 0;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // toolStripSeparator1
             // 
@@ -226,6 +227,7 @@
             this.btnEliminar.Size = new System.Drawing.Size(58, 47);
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnSalir
             // 
@@ -285,14 +287,16 @@
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(554, 176);
             this.dgvLista.TabIndex = 0;
+            this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
+            this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.rbNombre);
             this.groupBox1.Controls.Add(this.rbCliente);
             this.groupBox1.Controls.Add(this.cbClienteBuscar);
-            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.lblClienteBuscar);
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.txtNombreBuscar);
             this.groupBox1.Controls.Add(this.label1);
@@ -313,6 +317,7 @@
             this.rbNombre.TabIndex = 6;
             this.rbNombre.TabStop = true;
             this.rbNombre.UseVisualStyleBackColor = true;
+            this.rbNombre.CheckedChanged += new System.EventHandler(this.rbNombre_CheckedChanged);
             // 
             // rbCliente
             // 
@@ -323,6 +328,7 @@
             this.rbCliente.TabIndex = 5;
             this.rbCliente.TabStop = true;
             this.rbCliente.UseVisualStyleBackColor = true;
+            this.rbCliente.CheckedChanged += new System.EventHandler(this.rbCliente_CheckedChanged);
             // 
             // cbClienteBuscar
             // 
@@ -333,14 +339,14 @@
             this.cbClienteBuscar.Size = new System.Drawing.Size(131, 23);
             this.cbClienteBuscar.TabIndex = 4;
             // 
-            // label4
+            // lblClienteBuscar
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(240, 28);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 17);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Cliente:";
+            this.lblClienteBuscar.AutoSize = true;
+            this.lblClienteBuscar.Location = new System.Drawing.Point(240, 28);
+            this.lblClienteBuscar.Name = "lblClienteBuscar";
+            this.lblClienteBuscar.Size = new System.Drawing.Size(51, 17);
+            this.lblClienteBuscar.TabIndex = 3;
+            this.lblClienteBuscar.Text = "Cliente:";
             // 
             // btnBuscar
             // 
@@ -468,7 +474,7 @@
         private System.Windows.Forms.RadioButton rbNombre;
         private System.Windows.Forms.RadioButton rbCliente;
         private System.Windows.Forms.ComboBox cbClienteBuscar;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblClienteBuscar;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.TextBox txtNombreBuscar;
         private System.Windows.Forms.Label label1;

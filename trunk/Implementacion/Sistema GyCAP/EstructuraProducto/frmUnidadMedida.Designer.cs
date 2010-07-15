@@ -214,7 +214,6 @@
             this.cbTipo.Name = "cbTipo";
             this.cbTipo.Size = new System.Drawing.Size(131, 23);
             this.cbTipo.TabIndex = 4;
-            this.cbTipo.SelectedIndexChanged += new System.EventHandler(this.cbTipo_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -244,7 +243,6 @@
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(112, 24);
             this.txtNombreBuscar.TabIndex = 1;
-            this.txtNombreBuscar.TextChanged += new System.EventHandler(this.txtNombreBuscar_TextChanged);
             // 
             // label1
             // 
