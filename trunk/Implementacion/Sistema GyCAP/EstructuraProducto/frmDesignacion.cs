@@ -294,6 +294,7 @@ namespace GyCAP.UI.EstructuraProducto
 
 
         #region Pestaña Datos
+
         //Metodo para cargar los datos desde la grilla a los controles
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
