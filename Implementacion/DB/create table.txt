@@ -71,7 +71,6 @@ create table COLORES (
 /*==============================================================*/
 create table CONJUNTOS (
    CONJ_CODIGO          numeric(10)          identity,
-   ESTR_CODIGO          numeric(10)          null,
    TE_CODIGO            numeric(10)          null,
    CONJ_CANTIDAD        int                  null,
    CONJ_NOMBRE          varchar(50)          null,
@@ -343,6 +342,7 @@ create table ESTRUCTURAS (
    ESTR_NOMBRE          varchar(30)          null,
    COC_CODIGO           numeric(10)          not null,            /*-MODIFICACION 09/07/2010-*/
    PNO_CODIGO           numeric(10)          not null,            /*-MODIFICACION 05/07/2010-*/
+   CONJ_CODIGO          numeric(10)          not null,            /*-MODIFICACION 15/07/2010-*/
    constraint PK_ESTRUCTURAS primary key nonclustered (ESTR_CODIGO)
 )
 

@@ -34,9 +34,6 @@ alter table COCINAS
 /* Table: CONJUNTOS                                             */
 /*==============================================================*/
 alter table CONJUNTOS
-   add constraint conjunto_estructura_fk foreign key (ESTR_CODIGO)
-      references ESTRUCTURAS (ESTR_CODIGO)
-alter table CONJUNTOS
    add constraint conjunto_terminaciones_fk foreign key (TE_CODIGO)
       references TERMINACIONES (TE_CODIGO)
 
@@ -198,6 +195,9 @@ alter table ESTRUCTURAS
 alter table ESTRUCTURAS
     add constraint estructura_cocina_fk foreign key (COC_CODIGO)  /*-MODIFICACION 09/07/2010-*/
        references COCINAS (COC_CODIGO)
+alter table ESTRUCTURAS
+    add constraint estructura_conjunto_fk foreign key (CONJ_CODIGO)  /*-MODIFICACION 15/07/2010-*/
+       references CONJUNTOS (CONJ_CODIGO)
 
 /*==============================================================*/
 /* Table: LOCALIDADES                                           */
