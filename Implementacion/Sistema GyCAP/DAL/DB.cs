@@ -15,13 +15,14 @@ namespace GyCAP.DAL
 {
     class DB
     {
-        static string conexionGonzaloN = "Data Source=NGA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
-        static string conexionGonzaloD = "Data Source=DGA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
-        static string conexionEmanuel = "Data Source=HP-EMA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
-        static string conexionMarcelo = "Data Source=HOMERO;Initial Catalog=Proyecto;User ID=sa";
-        static string conexionRaulD = "Data Source=DESKTOP\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
-        static string conexionRaulN = "Data Source=NOTEBOOK\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
-        static string cadenaConexion;
+        private static string conexionGonzaloN = "Data Source=NGA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
+        private static string conexionGonzaloD = "Data Source=DGA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
+        private static string conexionEmanuel = "Data Source=HP-EMA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
+        private static string conexionMarcelo = "Data Source=HOMERO;Initial Catalog=Proyecto;User ID=sa";
+        private static string conexionRaulD = "Data Source=DESKTOP\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
+        private static string conexionRaulN = "Data Source=NOTEBOOK\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
+        private static string cadenaConexion;
+        private static SqlCommand cmdReader = null;
 
         //Devuelve el nombre de la PC
         static String nombrePC = System.Environment.MachineName;
@@ -97,7 +98,7 @@ namespace GyCAP.DAL
             SqlDataAdapter da = new SqlDataAdapter();
             da.SelectCommand = (SqlCommand)GetComando(sql, valorParametros, null);
             da.Fill(ds, nombreTabla);
-            da.SelectCommand.Connection.Close();
+            if (da.SelectCommand.Connection.State == ConnectionState.Open) { da.SelectCommand.Connection.Close(); }
         }
         
         /// <summary>
@@ -112,12 +113,13 @@ namespace GyCAP.DAL
             SqlDataAdapter da = new SqlDataAdapter();
             da.SelectCommand = (SqlCommand)GetComando(sql, valorParametros, null);
             da.Fill(dt);
-            da.SelectCommand.Connection.Close();
+            if (da.SelectCommand.Connection.State == ConnectionState.Open) { da.SelectCommand.Connection.Close(); }
         }
 
         /// <summary>
         /// Ejecuta una consulta sql con parámetros en la base de datos, puede utilizar transacción.
-        /// Debe utilizarse cuando el resultado devuelve un sólo dato, tipicamente un select de un sólo registro.
+        /// Debe utilizarse cuando el resultado esperado es un sólo dato, por ejemplo un select de un sólo registro 
+        /// de una sola columna.
         /// Pasar valor null en caso de no utilizar parámetros en la consulta y también null si no se usa transacción.
         /// </summary>
         /// <param name="sql">La consulta sql.</param>
@@ -129,7 +131,7 @@ namespace GyCAP.DAL
         {
             SqlCommand cmd = (SqlCommand)GetComando(sql, valorParametros, transaccion);
             object query = cmd.ExecuteScalar();
-            if (transaccion == null) { cmd.Connection.Close(); }
+            if (transaccion == null) { if (cmd.Connection.State == ConnectionState.Open) { cmd.Connection.Close();} }
             return query;            
         }
 
@@ -147,7 +149,7 @@ namespace GyCAP.DAL
         {
             SqlCommand cmd = (SqlCommand)GetComando(sql, valorParametros, transaccion);
             int respuesta = cmd.ExecuteNonQuery();
-            if (transaccion == null) { cmd.Connection.Close(); }
+            if (transaccion == null) { if (cmd.Connection.State == ConnectionState.Open) { cmd.Connection.Close(); } }
             return respuesta;
         }
 
@@ -169,15 +171,24 @@ namespace GyCAP.DAL
         /// <summary>
         /// Ejecuta una consulta sql a la base de datos con parámetros y puede utilizar transacción.
         /// Proporciona una forma de leer una secuencia de filas sólo hacia delante en una base de datos.
+        /// Deberá ejecutarse el método CloseReader una vez finalaza la lectura de datos.
         /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="valorParametros"></param>
-        /// <param name="transaccion"></param>
+        /// <param name="sql">La consulta sql.</param>
+        /// <param name="valorParametros">Los valos de los parámetros.</param>
+        /// <param name="transaccion">La transacción que controlará la consulta, puede indicarse null.</param>
         /// <returns></returns>
         public static SqlDataReader GetReader(string sql, object[] valorParametros, SqlTransaction transaccion)
         {
-            SqlCommand cmd = (SqlCommand)GetComando(sql, valorParametros, transaccion);
-            return cmd.ExecuteReader();
+            cmdReader = (SqlCommand)GetComando(sql, valorParametros, transaccion);
+            return cmdReader.ExecuteReader();
+        }
+
+        /// <summary>
+        /// Cierra la conexión a la base de datos del último GetReader ejecutado.
+        /// </summary>
+        public static void CloseReader()
+        {
+            if (cmdReader.Connection.State == ConnectionState.Open) { cmdReader.Connection.Close(); }
         }
     }
 }

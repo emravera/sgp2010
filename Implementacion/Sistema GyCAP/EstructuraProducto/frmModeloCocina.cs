@@ -121,7 +121,7 @@ namespace GyCAP.UI.EstructuraProducto
                         dsModeloCocina.MODELOS_COCINAS.FindByMOD_CODIGO(codigo).Delete();
                         dsModeloCocina.MODELOS_COCINAS.AcceptChanges();
                     }
-                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
                         MessageBox.Show(ex.Message);
                     }

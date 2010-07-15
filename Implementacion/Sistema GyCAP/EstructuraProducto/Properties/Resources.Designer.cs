@@ -102,6 +102,20 @@ namespace GyCAP.UI.EstructuraProducto.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Mas_25 {
+            get {
+                object obj = ResourceManager.GetObject("Mas_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Menos_25 {
+            get {
+                object obj = ResourceManager.GetObject("Menos_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap New_25 {
             get {
                 object obj = ResourceManager.GetObject("New_25", resourceCulture);
