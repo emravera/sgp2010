@@ -334,5 +334,20 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
+        private void txtNombreBuscar_Enter(object sender, EventArgs e)
+        {
+            txtNombreBuscar.SelectAll();
+        }
+
+        private void txtNombre_Enter(object sender, EventArgs e)
+        {
+            txtNombre.SelectAll();
+        }
+
+        private void txtDescripcion_Enter(object sender, EventArgs e)
+        {
+            txtDescripcion.SelectAll();
+        }
+
     }
 }
