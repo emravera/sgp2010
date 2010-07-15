@@ -1,0 +1,6 @@
+/*	Cambio pedido por Ema 15/07/2010 18hs	*/
+/*==========================================================*/
+/*    TABLE: DESIGNACIONES                                  */
+/*==========================================================*/
+alter table DESIGNACIONES
+     add DESIG_DESCRIPCION       varchar(15)

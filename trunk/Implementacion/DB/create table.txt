@@ -95,6 +95,7 @@ create table DESIGNACIONES (
    DESIG_CODIGO         numeric(10)          identity,
    MCA_CODIGO           numeric(10)          null,
    DESIG_NOMBRE         varchar(30)          null,
+   DESIG_DESCRIPCION    varchar(80)          null,
    constraint PK_DESIGNACIONES primary key nonclustered (DESIG_CODIGO)
 )
 
