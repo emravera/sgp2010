@@ -389,6 +389,7 @@
             this.Name = "frmTerminacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Terminaciones";
+            this.Activated += new System.EventHandler(this.frmTerminacion_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmTerminacion_FormClosing);
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
