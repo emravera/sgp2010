@@ -139,5 +139,11 @@ namespace Principal
             GyCAP.UI.EstructuraProducto.frmDesignacion.Instancia.MdiParent = this;
             GyCAP.UI.EstructuraProducto.frmDesignacion.Instancia.Show();
         }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Soporte.frmSectorTrabajo.Instancia.MdiParent = this;
+            GyCAP.UI.Soporte.frmSectorTrabajo.Instancia.Show();
+        }
     }
 }
