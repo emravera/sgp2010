@@ -217,6 +217,7 @@
             // 
             // txtDescripcion
             // 
+            this.txtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDescripcion.Location = new System.Drawing.Point(101, 97);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(289, 103);
