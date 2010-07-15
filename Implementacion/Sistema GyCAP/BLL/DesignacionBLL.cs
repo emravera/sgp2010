@@ -5,7 +5,9 @@ using System.Text;
 
 namespace GyCAP.BLL
 {
-    class DesignacionBLL
+    public class DesignacionBLL
     {
+
+
     }
 }

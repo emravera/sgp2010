@@ -33,7 +33,37 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns["DESIG_CODIGO"].DataPropertyName = "UMED_CODIGO";
             dgvLista.Columns["MCA_CODIGO"].DataPropertyName = "TUMED_CODIGO";
             dgvLista.Columns["DESIG_NOMBRE"].DataPropertyName = "UMED_NOMBRE";
+
+            //Llena el Dataset con las marcas
+            BLL.MarcaBLL.ObtenerTodos(dsDesignacion);
+            //Creamos el dataview y lo asignamos a la grilla
+            dvListaDesignacion = new DataView(dsDesignacion.DESIGNACIONES);
+            dgvLista.DataSource = dvListaMarca;
             
+            //CARGA DE COMBOS
+            //Creamos el Dataview y se lo asignamos al combo
+            dvComboDesignacion = new DataView(dsDesignacion.MARCAS);
+            cbMarcaBuscar.DataSource = dvComboMarca;
+            cbMarcaBuscar.DisplayMember = "MCA_NOMBRE";
+            cbClienteBuscar.ValueMember = "MCA_CODIGO";
+            //Para que el combo no quede selecionado cuando arranca y que sea una lista
+            cbMarcaBuscar.SelectedIndex = -1;
+            cbMarcaBuscar.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            //Combo de Datos
+            cbMarcaDatos.DataSource = dvComboMarca;
+            cbMarcaDatos.DisplayMember = "MCA_NOMBRE";
+            cbMarcaDatos.ValueMember = "MCA_CODIGO";
+            //Para que el combo no quede selecionado cuando arranca y que sea una lista
+            cbMarcaDatos.SelectedIndex = -1;
+            cbMarcaDatos.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            //Selecciono por defecto buscar por nombre
+            rbNombre.Checked = true;
+
+            //Seteamos el estado de la interfaz
+            SetInterface(estadoUI.inicio);
+           
         }
     }
 }
