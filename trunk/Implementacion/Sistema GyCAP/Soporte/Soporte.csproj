@@ -61,6 +61,7 @@
       <DependentUpon>frmSoporte.cs</DependentUpon>
     </Compile>
     <Compile Include="frmTipoUnidadMedida.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmTipoUnidadMedida.Designer.cs">
       <DependentUpon>frmTipoUnidadMedida.cs</DependentUpon>
