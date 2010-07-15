@@ -153,18 +153,19 @@ namespace GyCAP.UI.EstructuraProducto
             }
 
         }
-        private void cbTipo_SelectedIndexChanged(object sender, EventArgs e)
+       private void rbNombre_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbTipo.SelectedIndex != -1)
-            {
-                rbTipo.Checked = true;
-                txtNombreBuscar.Text = "";
-            }
+            cbTipo.SelectedIndex = -1;
+            cbTipo.Enabled = false;
+            txtNombreBuscar.Enabled = true;
         }
-        private void txtNombreBuscar_TextChanged(object sender, EventArgs e)
+
+        private void rbTipo_CheckedChanged(object sender, EventArgs e)
         {
-            rbNombre.Checked = true;
-         }
+            txtNombreBuscar.Enabled = false;
+            cbTipo.Enabled = true;
+        }
+
         #endregion
 
         #region Pestaña Datos
@@ -221,7 +222,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un color de la lista.", "Aviso");
+                MessageBox.Show("Debe seleccionar una Unidad de Medida de la lista.", "Aviso");
             }
         }
         //Metodo que carga los datos desde la grilla hacia a los controles 
@@ -245,7 +246,7 @@ namespace GyCAP.UI.EstructuraProducto
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo)
                 {
-                    //Está cargando un color nuevo
+                    //Está cargando una unidad de medida nueva
                     unidadMedida.Nombre = txtNombre.Text;
                     unidadMedida.Abreviatura = txtAbreviatura.Text;
                     //Creo el objeto tipo unidad de medida y despues lo asigno
@@ -283,7 +284,7 @@ namespace GyCAP.UI.EstructuraProducto
                 }
                 else
                 {
-                    //Está modificando un color
+                    //Está modificando una unidad de medida
                     //Primero obtenemos su código del dataview que está realacionado a la fila seleccionada
                     unidadMedida.Codigo = Convert.ToInt32(dvListaUnidad[dgvLista.SelectedRows[0].Index]["umed_codigo"]);
                     //Segundo obtenemos los nuevos datos que ingresó el usuario
@@ -410,6 +411,7 @@ namespace GyCAP.UI.EstructuraProducto
        
         #endregion
 
+       
         
 
         
