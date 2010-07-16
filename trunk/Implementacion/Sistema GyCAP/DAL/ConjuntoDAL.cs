@@ -244,7 +244,7 @@ namespace GyCAP.DAL
             string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_cantidadstock
                            FROM CONJUNTOS
                            WHERE te_codigo = @p0";
-            //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+            
             object[] valorParametros = { codigoTerminacion };
             try
             {
@@ -270,8 +270,13 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
-
-        ////Obtiene todos los subconjuntos desde la BD por los que está formado el conjunto
+        
+        /// <summary>
+        /// Obtiene todos los subconjuntos desde la BD por los que está formado el conjunto. Los carga
+        /// dentro de la tabla SUBCONJUNTOSXCONJUNTOS de un dataset del tipo dsEstructura.
+        /// </summary>
+        /// <param name="codigoConjunto">El código del conjunto cuya estructura se desea obtener.</param>
+        /// <param name="ds">El dataset del tipo dsEstructura.</param>
         public static void ObtenerEstructura(int codigoConjunto, Data.dsEstructura ds)
         {
             string sql = @"SELECT sxc_codigo, conj_codigo, sconj_codigo, sconj_cantidad
@@ -287,7 +292,7 @@ namespace GyCAP.DAL
                 {
                     //Como ya tenemos todos los códigos de los subconjuntos que necesitamos, directamente
                     //se los pedimos a SubConjuntoDAL
-                    subconjunto = DAL.SubConjuntoDAL.ObtenerSubconjunto(codigoConjunto);
+                    subconjunto = DAL.SubConjuntoDAL.ObtenerSubconjunto(Convert.ToInt32(row.SCONJ_CODIGO));
                     Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto = ds.SUBCONJUNTOS.NewSUBCONJUNTOSRow();
                     rowSubconjunto.BeginEdit();
                     rowSubconjunto.SCONJ_CODIGO = subconjunto.CodigoSubconjunto;

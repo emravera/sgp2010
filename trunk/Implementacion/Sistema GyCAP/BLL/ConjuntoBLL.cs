@@ -105,7 +105,7 @@ namespace GyCAP.BLL
         /// <summary>
         /// Obtiene todos los subconjuntos que forman el conjunto.
         /// </summary>
-        /// <param name="ds">El dataset con las tablas CONJUNTOS y SUBCONJUNTOSXCONJUNTOS</param>
+        /// <param name="ds">El dataset del tipo dsEstructura.</param>
         /// <param name="codigoConjunto">El código del conjunto.</param>
         /// <exception cref="ElementoInexistenteException">Si no existe el conjunto con el código ingresado.</exception>
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>

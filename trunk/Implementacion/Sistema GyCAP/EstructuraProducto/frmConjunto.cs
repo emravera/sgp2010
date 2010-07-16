@@ -186,6 +186,8 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            //FALTA GUARDAR LA IMAGEN            
+            
             //Revisamos que completó los datos
             if (txtNombre.Text != String.Empty && cbTerminacion.SelectedIndex != -1 && dgvSubconjuntosConjunto.Rows.Count != 0)
             {
@@ -412,6 +414,16 @@ namespace GyCAP.UI.EstructuraProducto
             
         }
 
+        private void btnImagen_Click(object sender, EventArgs e)
+        {
+            ofdImagen.ShowDialog();
+        }
+
+        private void ofdImagen_FileOk(object sender, CancelEventArgs e)
+        {
+            pbImagen.ImageLocation = ofdImagen.FileName;            
+        }
+
         #endregion
 
         #region Servicios
@@ -511,12 +523,14 @@ namespace GyCAP.UI.EstructuraProducto
         {
             panelDatos.Parent = slideDatos;
             panelAgregar.Parent = slideAgregar;
+            panelImagen.Parent = slideDatos;
             
             slideControl.AddSlide(slideAgregar);
             slideControl.AddSlide(slideDatos);
             slideControl.Selected = slideDatos;
             panelDatos.Location = new Point(0, 10);
             panelAgregar.Location = new Point(7, 7);
+            panelImagen.Location = new Point(405, 15);
         }
 
         private void setGrillasVistasCombo()
@@ -582,6 +596,10 @@ namespace GyCAP.UI.EstructuraProducto
             cbTerminacionBuscar.DisplayMember = "te_nombre";
             cbTerminacionBuscar.ValueMember = "te_codigo";
             cbTerminacionBuscar.SelectedIndex = -1;
+            
+            pbImagen.SizeMode = PictureBoxSizeMode.StretchImage;
+            
+            ofdImagen.Filter = "Archivos de imágenes (*.bmp, *.gif , *.ico, *.jpeg, *.png)|*.bmp;*.gif;*.ico;*.jpg;*.png|Todos los archivos (*.*)|*.*";
         }
 
         private void rbNombre_CheckedChanged(object sender, EventArgs e)
@@ -643,6 +661,8 @@ namespace GyCAP.UI.EstructuraProducto
         }
         
         #endregion        
+
+        
 
         
 
