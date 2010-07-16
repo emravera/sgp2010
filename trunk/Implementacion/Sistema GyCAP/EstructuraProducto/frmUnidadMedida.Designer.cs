@@ -78,7 +78,7 @@
             this.txtNombre.Location = new System.Drawing.Point(99, 74);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(170, 24);
-            this.txtNombre.TabIndex = 2;
+            this.txtNombre.TabIndex = 7;
             // 
             // label3
             // 
@@ -95,7 +95,7 @@
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.ReadOnly = true;
             this.txtCodigo.Size = new System.Drawing.Size(170, 24);
-            this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TabIndex = 6;
             // 
             // tableLayoutPanel1
             // 
@@ -231,7 +231,7 @@
             this.btnBuscar.Location = new System.Drawing.Point(476, 22);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(88, 30);
-            this.btnBuscar.TabIndex = 2;
+            this.btnBuscar.TabIndex = 5;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -242,7 +242,7 @@
             this.txtNombreBuscar.Location = new System.Drawing.Point(90, 25);
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(112, 24);
-            this.txtNombreBuscar.TabIndex = 1;
+            this.txtNombreBuscar.TabIndex = 2;
             // 
             // label1
             // 
@@ -250,7 +250,7 @@
             this.label1.Location = new System.Drawing.Point(26, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 17);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 1;
             this.label1.Text = "Nombre:";
             // 
             // tpDatos
@@ -282,7 +282,7 @@
             this.btnVolver.Location = new System.Drawing.Point(301, 23);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 23);
-            this.btnVolver.TabIndex = 6;
+            this.btnVolver.TabIndex = 11;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -292,7 +292,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(199, 23);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
-            this.btnGuardar.TabIndex = 5;
+            this.btnGuardar.TabIndex = 10;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -321,7 +321,7 @@
             this.txtAbreviatura.Location = new System.Drawing.Point(99, 160);
             this.txtAbreviatura.Name = "txtAbreviatura";
             this.txtAbreviatura.Size = new System.Drawing.Size(170, 24);
-            this.txtAbreviatura.TabIndex = 4;
+            this.txtAbreviatura.TabIndex = 9;
             // 
             // label6
             // 
@@ -334,11 +334,12 @@
             // 
             // cbTipoUnidadDatos
             // 
+            this.cbTipoUnidadDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoUnidadDatos.FormattingEnabled = true;
             this.cbTipoUnidadDatos.Location = new System.Drawing.Point(99, 117);
             this.cbTipoUnidadDatos.Name = "cbTipoUnidadDatos";
             this.cbTipoUnidadDatos.Size = new System.Drawing.Size(170, 23);
-            this.cbTipoUnidadDatos.TabIndex = 3;
+            this.cbTipoUnidadDatos.TabIndex = 8;
             // 
             // label5
             // 
