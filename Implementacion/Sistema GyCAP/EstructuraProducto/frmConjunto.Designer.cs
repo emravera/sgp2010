@@ -517,6 +517,7 @@
             // 
             // cbTerminacion
             // 
+            this.cbTerminacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTerminacion.FormattingEnabled = true;
             this.cbTerminacion.Location = new System.Drawing.Point(98, 116);
             this.cbTerminacion.Name = "cbTerminacion";
