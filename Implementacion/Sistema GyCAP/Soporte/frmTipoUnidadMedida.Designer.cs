@@ -209,7 +209,7 @@
             this.btnVolver.Location = new System.Drawing.Point(250, 23);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 23);
-            this.btnVolver.TabIndex = 1;
+            this.btnVolver.TabIndex = 6;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -219,7 +219,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(148, 23);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
-            this.btnGuardar.TabIndex = 0;
+            this.btnGuardar.TabIndex = 5;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -244,7 +244,7 @@
             this.txtNombre.Location = new System.Drawing.Point(100, 119);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(170, 24);
-            this.txtNombre.TabIndex = 3;
+            this.txtNombre.TabIndex = 4;
             // 
             // txtCodigo
             // 
@@ -252,7 +252,7 @@
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.ReadOnly = true;
             this.txtCodigo.Size = new System.Drawing.Size(170, 24);
-            this.txtCodigo.TabIndex = 2;
+            this.txtCodigo.TabIndex = 3;
             // 
             // label3
             // 

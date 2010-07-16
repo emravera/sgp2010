@@ -144,7 +144,7 @@
             this.btnBuscar.Location = new System.Drawing.Point(348, 25);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(88, 30);
-            this.btnBuscar.TabIndex = 6;
+            this.btnBuscar.TabIndex = 2;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -156,7 +156,7 @@
             this.txtNombreBuscar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(218, 24);
-            this.txtNombreBuscar.TabIndex = 3;
+            this.txtNombreBuscar.TabIndex = 1;
             // 
             // label1
             // 
@@ -196,7 +196,7 @@
             this.btnVolver.Location = new System.Drawing.Point(231, 23);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 25);
-            this.btnVolver.TabIndex = 1;
+            this.btnVolver.TabIndex = 6;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -206,7 +206,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(128, 23);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 25);
-            this.btnGuardar.TabIndex = 0;
+            this.btnGuardar.TabIndex = 5;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -231,7 +231,7 @@
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.ReadOnly = true;
             this.txtCodigo.Size = new System.Drawing.Size(213, 24);
-            this.txtCodigo.TabIndex = 4;
+            this.txtCodigo.TabIndex = 3;
             // 
             // label3
             // 
@@ -247,7 +247,7 @@
             this.txtNombre.Location = new System.Drawing.Point(104, 125);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(213, 24);
-            this.txtNombre.TabIndex = 2;
+            this.txtNombre.TabIndex = 4;
             // 
             // label2
             // 
