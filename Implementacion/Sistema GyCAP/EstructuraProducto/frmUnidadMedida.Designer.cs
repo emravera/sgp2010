@@ -366,7 +366,8 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tsMenu.BackColor = System.Drawing.Color.Silver;
             this.tsMenu.Dock = System.Windows.Forms.DockStyle.None;
-            this.tsMenu.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsMenu.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNuevo,
             this.btnConsultar,
@@ -449,7 +450,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Calibri", 10F);
             this.Name = "frmUnidadMedida";
-            this.Text = "Unidad Medida";
+            this.Text = "Unidades de Medidas";
             this.Load += new System.EventHandler(this.frmUnidadMedida_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmUnidadMedida_FormClosing);
             this.tableLayoutPanel1.ResumeLayout(false);

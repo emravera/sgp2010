@@ -193,7 +193,7 @@
             this.btnBuscar.Location = new System.Drawing.Point(444, 22);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(88, 30);
-            this.btnBuscar.TabIndex = 2;
+            this.btnBuscar.TabIndex = 5;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -204,7 +204,7 @@
             this.txtNombreBuscar.Location = new System.Drawing.Point(90, 25);
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(112, 24);
-            this.txtNombreBuscar.TabIndex = 1;
+            this.txtNombreBuscar.TabIndex = 2;
             // 
             // label1
             // 
@@ -212,7 +212,7 @@
             this.label1.Location = new System.Drawing.Point(26, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 17);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 1;
             this.label1.Text = "Nombre:";
             // 
             // tpDatos
@@ -243,8 +243,8 @@
             // 
             this.btnVolver.Location = new System.Drawing.Point(301, 23);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
-            this.btnVolver.TabIndex = 6;
+            this.btnVolver.Size = new System.Drawing.Size(75, 25);
+            this.btnVolver.TabIndex = 11;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -253,8 +253,8 @@
             // 
             this.btnGuardar.Location = new System.Drawing.Point(199, 23);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
-            this.btnGuardar.TabIndex = 5;
+            this.btnGuardar.Size = new System.Drawing.Size(75, 25);
+            this.btnGuardar.TabIndex = 10;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -283,8 +283,8 @@
             this.txtDescripcion.Location = new System.Drawing.Point(100, 147);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(170, 52);
-            this.txtDescripcion.TabIndex = 4;
+            this.txtDescripcion.Size = new System.Drawing.Size(309, 72);
+            this.txtDescripcion.TabIndex = 9;
             // 
             // label6
             // 
@@ -297,11 +297,12 @@
             // 
             // cbMarcaDatos
             // 
+            this.cbMarcaDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMarcaDatos.FormattingEnabled = true;
             this.cbMarcaDatos.Location = new System.Drawing.Point(100, 70);
             this.cbMarcaDatos.Name = "cbMarcaDatos";
             this.cbMarcaDatos.Size = new System.Drawing.Size(170, 23);
-            this.cbMarcaDatos.TabIndex = 2;
+            this.cbMarcaDatos.TabIndex = 7;
             // 
             // label5
             // 
@@ -317,7 +318,7 @@
             this.txtNombre.Location = new System.Drawing.Point(100, 108);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(170, 24);
-            this.txtNombre.TabIndex = 3;
+            this.txtNombre.TabIndex = 8;
             // 
             // txtCodigo
             // 
@@ -325,7 +326,7 @@
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.ReadOnly = true;
             this.txtCodigo.Size = new System.Drawing.Size(170, 24);
-            this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TabIndex = 6;
             // 
             // label3
             // 
@@ -351,7 +352,7 @@
             this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(37, 47);
+            this.btnSalir.Size = new System.Drawing.Size(36, 47);
             this.btnSalir.Text = "Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
@@ -396,7 +397,8 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tsMenu.BackColor = System.Drawing.Color.Silver;
             this.tsMenu.Dock = System.Windows.Forms.DockStyle.None;
-            this.tsMenu.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsMenu.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNuevo,
             this.btnConsultar,
@@ -417,7 +419,7 @@
             this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(45, 47);
+            this.btnNuevo.Size = new System.Drawing.Size(48, 47);
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);

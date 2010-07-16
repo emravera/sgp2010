@@ -78,7 +78,7 @@
             this.txtDescripcion.Location = new System.Drawing.Point(100, 147);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(170, 52);
+            this.txtDescripcion.Size = new System.Drawing.Size(348, 72);
             this.txtDescripcion.TabIndex = 3;
             // 
             // label5
@@ -86,7 +86,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(21, 116);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(75, 15);
+            this.label5.Size = new System.Drawing.Size(79, 17);
             this.label5.TabIndex = 4;
             this.label5.Text = "Abreviatura:";
             // 
@@ -94,7 +94,7 @@
             // 
             this.txtNombre.Location = new System.Drawing.Point(100, 78);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(170, 23);
+            this.txtNombre.Size = new System.Drawing.Size(170, 24);
             this.txtNombre.TabIndex = 1;
             // 
             // txtCodigo
@@ -102,7 +102,7 @@
             this.txtCodigo.Location = new System.Drawing.Point(100, 32);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.ReadOnly = true;
-            this.txtCodigo.Size = new System.Drawing.Size(170, 23);
+            this.txtCodigo.Size = new System.Drawing.Size(170, 24);
             this.txtCodigo.TabIndex = 0;
             // 
             // gbGuardarCancelar
@@ -121,7 +121,7 @@
             // 
             this.btnVolver.Location = new System.Drawing.Point(301, 23);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(75, 25);
             this.btnVolver.TabIndex = 5;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -131,7 +131,7 @@
             // 
             this.btnGuardar.Location = new System.Drawing.Point(199, 23);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.Size = new System.Drawing.Size(75, 25);
             this.btnGuardar.TabIndex = 4;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -182,12 +182,12 @@
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
             this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLista.Location = new System.Drawing.Point(10, 26);
+            this.dgvLista.Location = new System.Drawing.Point(10, 27);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.ReadOnly = true;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(554, 177);
+            this.dgvLista.Size = new System.Drawing.Size(554, 176);
             this.dgvLista.TabIndex = 0;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
@@ -213,7 +213,7 @@
             // 
             this.txtAbreviaturaBuscar.Location = new System.Drawing.Point(317, 28);
             this.txtAbreviaturaBuscar.Name = "txtAbreviaturaBuscar";
-            this.txtAbreviaturaBuscar.Size = new System.Drawing.Size(112, 23);
+            this.txtAbreviaturaBuscar.Size = new System.Drawing.Size(112, 24);
             this.txtAbreviaturaBuscar.TabIndex = 2;
             // 
             // rbNombre
@@ -243,7 +243,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(236, 32);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 15);
+            this.label4.Size = new System.Drawing.Size(79, 17);
             this.label4.TabIndex = 3;
             this.label4.Text = "Abreviatura:";
             // 
@@ -264,7 +264,7 @@
             // 
             this.txtNombreBuscar.Location = new System.Drawing.Point(90, 28);
             this.txtNombreBuscar.Name = "txtNombreBuscar";
-            this.txtNombreBuscar.Size = new System.Drawing.Size(112, 23);
+            this.txtNombreBuscar.Size = new System.Drawing.Size(112, 24);
             this.txtNombreBuscar.TabIndex = 1;
             // 
             // label1
@@ -272,7 +272,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(26, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 15);
+            this.label1.Size = new System.Drawing.Size(58, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre:";
             // 
@@ -311,7 +311,7 @@
             // 
             this.txtAbreviatura.Location = new System.Drawing.Point(100, 113);
             this.txtAbreviatura.Name = "txtAbreviatura";
-            this.txtAbreviatura.Size = new System.Drawing.Size(170, 23);
+            this.txtAbreviatura.Size = new System.Drawing.Size(170, 24);
             this.txtAbreviatura.TabIndex = 2;
             // 
             // label6
@@ -319,7 +319,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(21, 150);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(76, 15);
+            this.label6.Size = new System.Drawing.Size(77, 17);
             this.label6.TabIndex = 6;
             this.label6.Text = "Descripcion:";
             // 
@@ -328,7 +328,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(21, 78);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 15);
+            this.label3.Size = new System.Drawing.Size(58, 17);
             this.label3.TabIndex = 1;
             this.label3.Text = "Nombre:";
             // 
@@ -337,7 +337,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(21, 32);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 15);
+            this.label2.Size = new System.Drawing.Size(50, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "Código:";
             // 
@@ -348,7 +348,8 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tsMenu.BackColor = System.Drawing.Color.Silver;
             this.tsMenu.Dock = System.Windows.Forms.DockStyle.None;
-            this.tsMenu.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsMenu.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNuevo,
             this.btnConsultar,
@@ -369,7 +370,7 @@
             this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(45, 47);
+            this.btnNuevo.Size = new System.Drawing.Size(48, 47);
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
@@ -418,7 +419,7 @@
             this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(37, 47);
+            this.btnSalir.Size = new System.Drawing.Size(36, 47);
             this.btnSalir.Text = "Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
@@ -445,9 +446,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 366);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmSectorTrabajo";
-            this.Text = "Sector Trabajo";
+            this.Text = "Sectores de Trabajo";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSectorTrabajo_FormClosing);
             this.gbGuardarCancelar.ResumeLayout(false);
             this.tcSectorTrabajo.ResumeLayout(false);
