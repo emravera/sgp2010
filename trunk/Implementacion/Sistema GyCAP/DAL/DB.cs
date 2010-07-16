@@ -22,6 +22,7 @@ namespace GyCAP.DAL
         private static string conexionRaulD = "Data Source=DESKTOP\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionRaulN = "Data Source=NOTEBOOK\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
         private static string cadenaConexion;
+        private static SqlTransaction transaccion = null;
         private static SqlCommand cmdReader = null;
 
         //Devuelve el nombre de la PC
@@ -154,7 +155,8 @@ namespace GyCAP.DAL
         }
 
         /// <summary>
-        /// Abre una conexión a la BD e inicia una transacción.
+        /// Abre una conexión a la BD e inicia una transacción. Deberá ejecutarse FinalizarTransaccion al
+        /// terminar con la misma.
         /// </summary>
         /// <returns>
         /// La transacción ya iniciada.
@@ -165,7 +167,16 @@ namespace GyCAP.DAL
             SqlConnection cn = (SqlConnection)GetConexion();
 
             cn.Open();
-            return cn.BeginTransaction();
+            transaccion = cn.BeginTransaction();
+            return transaccion;
+        }
+
+        /// <summary>
+        /// Finaliza la última transacción llamada cerrando la conexión a la DB.
+        /// </summary>
+        public static void FinalizarTransaccion()
+        {
+            if (transaccion != null && transaccion.Connection.State == System.Data.ConnectionState.Open) { transaccion.Connection.Close(); }
         }
 
         /// <summary>

@@ -67,7 +67,7 @@
             this.cbTerminacion = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.slideControl = new SlickInterface.SlideControl();
-            this.dgvSCActuales = new System.Windows.Forms.DataGridView();
+            this.dgvSubconjuntosConjunto = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
@@ -91,7 +91,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSCDisponibles)).BeginInit();
             this.panelDatos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSCActuales)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSubconjuntosConjunto)).BeginInit();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,7 +100,7 @@
             this.txtNombre.Location = new System.Drawing.Point(98, 63);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(201, 24);
-            this.txtNombre.TabIndex = 3;
+            this.txtNombre.TabIndex = 7;
             // 
             // label3
             // 
@@ -117,7 +117,7 @@
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.ReadOnly = true;
             this.txtCodigo.Size = new System.Drawing.Size(201, 24);
-            this.txtCodigo.TabIndex = 2;
+            this.txtCodigo.TabIndex = 6;
             // 
             // tableLayoutPanel1
             // 
@@ -189,6 +189,7 @@
             this.dgvListaConjuntos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListaConjuntos.Size = new System.Drawing.Size(552, 318);
             this.dgvListaConjuntos.TabIndex = 0;
+            this.dgvListaConjuntos.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvListaConjuntos.DoubleClick += new System.EventHandler(this.dgvListaConjuntos_DoubleClick);
             // 
             // groupBox1
@@ -208,12 +209,13 @@
             // 
             // cbTerminacionBuscar
             // 
+            this.cbTerminacionBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTerminacionBuscar.Enabled = false;
             this.cbTerminacionBuscar.FormattingEnabled = true;
             this.cbTerminacionBuscar.Location = new System.Drawing.Point(128, 75);
             this.cbTerminacionBuscar.Name = "cbTerminacionBuscar";
             this.cbTerminacionBuscar.Size = new System.Drawing.Size(224, 23);
-            this.cbTerminacionBuscar.TabIndex = 5;
+            this.cbTerminacionBuscar.TabIndex = 4;
             // 
             // rbTerminacion
             // 
@@ -221,7 +223,7 @@
             this.rbTerminacion.Location = new System.Drawing.Point(22, 77);
             this.rbTerminacion.Name = "rbTerminacion";
             this.rbTerminacion.Size = new System.Drawing.Size(100, 21);
-            this.rbTerminacion.TabIndex = 4;
+            this.rbTerminacion.TabIndex = 3;
             this.rbTerminacion.Text = "Terminación:";
             this.rbTerminacion.UseVisualStyleBackColor = true;
             this.rbTerminacion.CheckedChanged += new System.EventHandler(this.rbTerminacion_CheckedChanged);
@@ -233,7 +235,7 @@
             this.rbNombre.Location = new System.Drawing.Point(22, 32);
             this.rbNombre.Name = "rbNombre";
             this.rbNombre.Size = new System.Drawing.Size(76, 21);
-            this.rbNombre.TabIndex = 3;
+            this.rbNombre.TabIndex = 1;
             this.rbNombre.TabStop = true;
             this.rbNombre.Text = "Nombre:";
             this.rbNombre.UseVisualStyleBackColor = true;
@@ -246,7 +248,7 @@
             this.btnBuscar.Location = new System.Drawing.Point(430, 42);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(88, 30);
-            this.btnBuscar.TabIndex = 2;
+            this.btnBuscar.TabIndex = 5;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -257,7 +259,7 @@
             this.txtNombreBuscar.Location = new System.Drawing.Point(128, 29);
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(224, 24);
-            this.txtNombreBuscar.TabIndex = 1;
+            this.txtNombreBuscar.TabIndex = 2;
             // 
             // tpDatos
             // 
@@ -306,7 +308,7 @@
             this.btnVolver.Location = new System.Drawing.Point(250, 23);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 23);
-            this.btnVolver.TabIndex = 1;
+            this.btnVolver.TabIndex = 17;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -316,7 +318,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(148, 23);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
-            this.btnGuardar.TabIndex = 0;
+            this.btnGuardar.TabIndex = 16;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -327,7 +329,7 @@
             this.gbDatos.Controls.Add(this.panelAgregar);
             this.gbDatos.Controls.Add(this.panelDatos);
             this.gbDatos.Controls.Add(this.slideControl);
-            this.gbDatos.Controls.Add(this.dgvSCActuales);
+            this.gbDatos.Controls.Add(this.dgvSubconjuntosConjunto);
             this.gbDatos.Controls.Add(this.label4);
             this.gbDatos.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbDatos.Location = new System.Drawing.Point(3, 3);
@@ -359,9 +361,10 @@
             this.btnRestar.Location = new System.Drawing.Point(23, 127);
             this.btnRestar.Name = "btnRestar";
             this.btnRestar.Size = new System.Drawing.Size(35, 35);
-            this.btnRestar.TabIndex = 3;
+            this.btnRestar.TabIndex = 12;
             this.btnRestar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRestar.UseVisualStyleBackColor = true;
+            this.btnRestar.Click += new System.EventHandler(this.btnRestar_Click);
             // 
             // btnSumar
             // 
@@ -372,9 +375,10 @@
             this.btnSumar.Location = new System.Drawing.Point(23, 84);
             this.btnSumar.Name = "btnSumar";
             this.btnSumar.Size = new System.Drawing.Size(35, 35);
-            this.btnSumar.TabIndex = 2;
+            this.btnSumar.TabIndex = 11;
             this.btnSumar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSumar.UseVisualStyleBackColor = true;
+            this.btnSumar.Click += new System.EventHandler(this.btnSumar_Click);
             // 
             // btnDelete
             // 
@@ -385,9 +389,10 @@
             this.btnDelete.Location = new System.Drawing.Point(23, 43);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(35, 35);
-            this.btnDelete.TabIndex = 1;
+            this.btnDelete.TabIndex = 10;
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnNew
             // 
@@ -398,7 +403,7 @@
             this.btnNew.Location = new System.Drawing.Point(23, 2);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(35, 35);
-            this.btnNew.TabIndex = 0;
+            this.btnNew.TabIndex = 9;
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
@@ -430,9 +435,10 @@
             this.btnAgregar.Location = new System.Drawing.Point(3, 73);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 25);
-            this.btnAgregar.TabIndex = 3;
+            this.btnAgregar.TabIndex = 14;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // label8
             // 
@@ -450,7 +456,7 @@
             this.btnHecho.Location = new System.Drawing.Point(3, 104);
             this.btnHecho.Name = "btnHecho";
             this.btnHecho.Size = new System.Drawing.Size(75, 25);
-            this.btnHecho.TabIndex = 4;
+            this.btnHecho.TabIndex = 15;
             this.btnHecho.Text = "Hecho";
             this.btnHecho.UseVisualStyleBackColor = true;
             this.btnHecho.Click += new System.EventHandler(this.btnHecho_Click);
@@ -461,7 +467,7 @@
             this.nudCantidad.Location = new System.Drawing.Point(3, 35);
             this.nudCantidad.Name = "nudCantidad";
             this.nudCantidad.Size = new System.Drawing.Size(75, 24);
-            this.nudCantidad.TabIndex = 2;
+            this.nudCantidad.TabIndex = 13;
             this.nudCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label9
@@ -485,6 +491,7 @@
             this.dgvSCDisponibles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSCDisponibles.Size = new System.Drawing.Size(423, 146);
             this.dgvSCDisponibles.TabIndex = 0;
+            this.dgvSCDisponibles.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSCDisponibles_CellFormatting);
             // 
             // panelDatos
             // 
@@ -514,7 +521,7 @@
             this.cbTerminacion.Location = new System.Drawing.Point(98, 116);
             this.cbTerminacion.Name = "cbTerminacion";
             this.cbTerminacion.Size = new System.Drawing.Size(201, 23);
-            this.cbTerminacion.TabIndex = 5;
+            this.cbTerminacion.TabIndex = 8;
             // 
             // label1
             // 
@@ -534,18 +541,19 @@
             this.slideControl.SlideSpeed = 250;
             this.slideControl.TabIndex = 8;
             // 
-            // dgvSCActuales
+            // dgvSubconjuntosConjunto
             // 
-            this.dgvSCActuales.AllowUserToAddRows = false;
-            this.dgvSCActuales.AllowUserToDeleteRows = false;
-            this.dgvSCActuales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSCActuales.Location = new System.Drawing.Point(37, 249);
-            this.dgvSCActuales.MultiSelect = false;
-            this.dgvSCActuales.Name = "dgvSCActuales";
-            this.dgvSCActuales.ReadOnly = true;
-            this.dgvSCActuales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSCActuales.Size = new System.Drawing.Size(423, 170);
-            this.dgvSCActuales.TabIndex = 7;
+            this.dgvSubconjuntosConjunto.AllowUserToAddRows = false;
+            this.dgvSubconjuntosConjunto.AllowUserToDeleteRows = false;
+            this.dgvSubconjuntosConjunto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSubconjuntosConjunto.Location = new System.Drawing.Point(37, 249);
+            this.dgvSubconjuntosConjunto.MultiSelect = false;
+            this.dgvSubconjuntosConjunto.Name = "dgvSubconjuntosConjunto";
+            this.dgvSubconjuntosConjunto.ReadOnly = true;
+            this.dgvSubconjuntosConjunto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvSubconjuntosConjunto.Size = new System.Drawing.Size(423, 170);
+            this.dgvSubconjuntosConjunto.TabIndex = 7;
+            this.dgvSubconjuntosConjunto.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSCActuales_CellFormatting);
             // 
             // label4
             // 
@@ -671,7 +679,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvSCDisponibles)).EndInit();
             this.panelDatos.ResumeLayout(false);
             this.panelDatos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSCActuales)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSubconjuntosConjunto)).EndInit();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -707,7 +715,7 @@
         private System.Windows.Forms.RadioButton rbTerminacion;
         private System.Windows.Forms.RadioButton rbNombre;
         private System.Windows.Forms.ComboBox cbTerminacionBuscar;
-        private System.Windows.Forms.DataGridView dgvSCActuales;
+        private System.Windows.Forms.DataGridView dgvSubconjuntosConjunto;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbTerminacion;
         private System.Windows.Forms.Label label1;

@@ -7,12 +7,18 @@ namespace GyCAP.BLL
 {
     public class ConjuntoBLL
     {
-        public static int Insertar(Entidades.Conjunto conjunto)
+        public static void Insertar(Data.dsEstructura dsEstructura)
         {
             //Si existe lanzamos la excepción correspondiente
+            Entidades.Conjunto conjunto = new GyCAP.Entidades.Conjunto();
+            //Así obtenemos el conjunto nuevo del dataset, indicamos la primer fila de la agregadas ya que es una sola y convertimos al tipo correcto
+            Data.dsEstructura.CONJUNTOSRow rowConjunto = dsEstructura.CONJUNTOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.CONJUNTOSRow;
+            conjunto.CodigoConjunto = Convert.ToInt32(rowConjunto.CONJ_CODIGO);
+            conjunto.Nombre = rowConjunto.CONJ_NOMBRE;
+            conjunto.CodigoTerminacion = Convert.ToInt32(rowConjunto.TE_CODIGO);
             if (EsConjunto(conjunto)) throw new Entidades.Excepciones.ElementoExistenteException();
             //Como no existe lo creamos
-            return DAL.ConjuntoDAL.Insertar(conjunto);
+            DAL.ConjuntoDAL.Insertar(dsEstructura);
         }
 
         public static void Eliminar(int codigo)
@@ -31,9 +37,9 @@ namespace GyCAP.BLL
 
         }
 
-        public static void Actualizar(Entidades.Conjunto conjunto)
+        public static void Actualizar(Data.dsEstructura dsEstructura)
         {
-            DAL.ConjuntoDAL.Actualizar(conjunto);
+            DAL.ConjuntoDAL.Actualizar(dsEstructura);
         }
 
         public static void ActualizarStock(int codigoConjunto, int cantidad)
@@ -48,6 +54,7 @@ namespace GyCAP.BLL
             }
         }
         
+        //Comprueba si existe un conjunto dado su nombre y terminación
         public static bool EsConjunto(Entidades.Conjunto conjunto)
         {
             return DAL.ConjuntoDAL.EsConjunto(conjunto);
