@@ -55,6 +55,7 @@
             this.btnModificar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.lv = new System.Windows.Forms.ListView();
             this.tsMenu.SuspendLayout();
             this.gbDatos.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -130,14 +131,14 @@
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.tsMenu.Size = new System.Drawing.Size(588, 50);
+            this.tsMenu.Size = new System.Drawing.Size(588, 76);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 76);
             // 
             // gbDatos
             // 
@@ -189,7 +190,7 @@
             // 
             this.groupBox2.Controls.Add(this.dgvLista);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(3, 89);
+            this.groupBox2.Location = new System.Drawing.Point(3, 242);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(10);
             this.groupBox2.Size = new System.Drawing.Size(574, 213);
@@ -201,27 +202,26 @@
             // 
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
-            this.dgvLista.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dgvLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLista.Location = new System.Drawing.Point(10, 27);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.ReadOnly = true;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(554, 176);
-            this.dgvLista.TabIndex = 0;
+            this.dgvLista.Size = new System.Drawing.Size(382, 176);
+            this.dgvLista.TabIndex = 2;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
             // 
             // tpBuscar
             // 
+            this.tpBuscar.Controls.Add(this.lv);
             this.tpBuscar.Controls.Add(this.groupBox2);
             this.tpBuscar.Controls.Add(this.groupBox1);
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(580, 305);
+            this.tpBuscar.Size = new System.Drawing.Size(580, 458);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
@@ -243,7 +243,7 @@
             this.txtNombreBuscar.Location = new System.Drawing.Point(83, 28);
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(224, 24);
-            this.txtNombreBuscar.TabIndex = 1;
+            this.txtNombreBuscar.TabIndex = 0;
             this.txtNombreBuscar.Enter += new System.EventHandler(this.txtNombreBuscar_Enter);
             // 
             // label1
@@ -262,13 +262,13 @@
             this.tcABM.Controls.Add(this.tpDatos);
             this.tcABM.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcABM.ItemSize = new System.Drawing.Size(0, 1);
-            this.tcABM.Location = new System.Drawing.Point(2, 54);
+            this.tcABM.Location = new System.Drawing.Point(2, 80);
             this.tcABM.Margin = new System.Windows.Forms.Padding(0);
             this.tcABM.Multiline = true;
             this.tcABM.Name = "tcABM";
             this.tcABM.Padding = new System.Drawing.Point(0, 0);
             this.tcABM.SelectedIndex = 0;
-            this.tcABM.Size = new System.Drawing.Size(588, 314);
+            this.tcABM.Size = new System.Drawing.Size(588, 467);
             this.tcABM.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcABM.TabIndex = 8;
             // 
@@ -309,7 +309,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(592, 370);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(592, 549);
             this.tableLayoutPanel1.TabIndex = 9;
             // 
             // btnBuscar
@@ -319,7 +319,7 @@
             this.btnBuscar.Location = new System.Drawing.Point(476, 23);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(88, 30);
-            this.btnBuscar.TabIndex = 2;
+            this.btnBuscar.TabIndex = 1;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -331,7 +331,7 @@
             this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(45, 47);
+            this.btnNuevo.Size = new System.Drawing.Size(45, 73);
             this.btnNuevo.Text = "&Nuevo";
             this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
@@ -342,7 +342,7 @@
             this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(65, 47);
+            this.btnConsultar.Size = new System.Drawing.Size(65, 73);
             this.btnConsultar.Text = "&Consultar";
             this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
@@ -353,7 +353,7 @@
             this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(66, 47);
+            this.btnModificar.Size = new System.Drawing.Size(66, 73);
             this.btnModificar.Text = "&Modificar";
             this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -364,7 +364,7 @@
             this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(58, 47);
+            this.btnEliminar.Size = new System.Drawing.Size(58, 73);
             this.btnEliminar.Text = "&Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
@@ -375,16 +375,24 @@
             this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(37, 47);
+            this.btnSalir.Size = new System.Drawing.Size(37, 73);
             this.btnSalir.Text = "&Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // lv
+            // 
+            this.lv.Location = new System.Drawing.Point(13, 86);
+            this.lv.Name = "lv";
+            this.lv.Size = new System.Drawing.Size(382, 148);
+            this.lv.TabIndex = 2;
+            this.lv.UseCompatibleStateImageBehavior = false;
             // 
             // frmTerminacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 370);
+            this.ClientSize = new System.Drawing.Size(592, 549);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyPreview = true;
@@ -441,6 +449,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListView lv;
 
     }
 }
