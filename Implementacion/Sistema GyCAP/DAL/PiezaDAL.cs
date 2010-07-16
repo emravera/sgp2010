@@ -11,7 +11,7 @@ namespace GyCAP.DAL
         public static void Insertar(Data.dsEstructura dsEstructura)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
-            string sqlInsertPiza = @"INSERT INTO [PIEZAS]
+            string sqlInsertPieza = @"INSERT INTO [PIEZAS]
                                         ([pza_nombre]
                                         ,[te_codigo]
                                         ,[pza_cantidadstock]) 
@@ -21,7 +21,7 @@ namespace GyCAP.DAL
             Data.dsEstructura.PIEZASRow rowPieza = dsEstructura.PIEZAS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.PIEZASRow;
             object[] valorParametros = { rowPieza.PZA_CODIGO, rowPieza.TE_CODIGO, 0 };
 
-            string sqlInsertEstructura = @"INSERT INTO [MATERIASPRIMASXPIEZAS] 
+            string sqlInsertEstructura = @"INSERT INTO [MATERIASPRIMASXPIEZA] 
                                         ([pza_codigo]
                                         ,[mp_codigo]
                                         ,[mp_cantidad])
@@ -36,7 +36,7 @@ namespace GyCAP.DAL
                 transaccion = DB.IniciarTransaccion();
                 //Insertamos la pieza y actualizamos su código en el dataset
                 rowPieza.BeginEdit();
-                rowPieza.PZA_CODIGO = Convert.ToInt32(DB.executeScalar(sqlInsertPiza, valorParametros, transaccion));
+                rowPieza.PZA_CODIGO = Convert.ToInt32(DB.executeScalar(sqlInsertPieza, valorParametros, transaccion));
                 rowPieza.EndEdit();
                 //Ahora insertamos su estructura, usamos el foreach para recorrer sólo los nuevos registros del dataset
                 foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow row in (Data.dsEstructura.MATERIASPRIMASXPIEZARow[])dsEstructura.MATERIASPRIMASXPIEZA.Select(null, null, System.Data.DataViewRowState.Added))
@@ -86,16 +86,16 @@ namespace GyCAP.DAL
             //Armemos todas las consultas
             string sqlUpdatePieza = "UPDATE PIEZAS SET pza_nombre = @p0, te_codigo = @p1 WHERE pza_codigo = @p2";
 
-            string sqlInsertEstructura = @"INSERT INTO [MATERIASPRIMASXPIEZAS] 
+            string sqlInsertEstructura = @"INSERT INTO [MATERIASPRIMASXPIEZA] 
                                         ([pza_codigo]
                                         ,[mp_codigo]
                                         ,[mp_cantidad])
                                         VALUES (@p0, @p1, @p2) SELECT @@Identity";
 
-            string sqlUpdateEstructura = @"UPDATE MATERIASPRIMASXPIEZAS SET mp_cantidad = @p0 
+            string sqlUpdateEstructura = @"UPDATE MATERIASPRIMASXPIEZA SET mp_cantidad = @p0 
                                           WHERE mpxp_codigo = @p0";
 
-            string sqlDeleteEstructura = "DELETE FROM MATERIASPRIMASXPIEZAS WHERE mpxp_codigo = @p0";
+            string sqlDeleteEstructura = "DELETE FROM MATERIASPRIMASXPIEZA WHERE mpxp_codigo = @p0";
 
             //Así obtenemos la pieza del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.PIEZASRow rowPieza = dsEstructura.PIEZAS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.PIEZASRow;
@@ -255,8 +255,8 @@ namespace GyCAP.DAL
 
         public static bool PuedeEliminarse(int codigo)
         {
-            string sqlMPXP = "SELECT count(pza_codigo) FROM MATERIASPRIMASXPIEZAS WHERE pza_codigo = @p0";
-            string sqlPXSC = "SELECT count(pza_codigo) FROM PIEZASXSUBCONJUNTOS WHERE pza_codigo = @p0";
+            string sqlMPXP = "SELECT count(pza_codigo) FROM MATERIASPRIMASXPIEZA WHERE pza_codigo = @p0";
+            string sqlPXSC = "SELECT count(pza_codigo) FROM PIEZASXSUBCONJUNTO WHERE pza_codigo = @p0";
 
             object[] valorParametros = { codigo };
             try
@@ -279,13 +279,13 @@ namespace GyCAP.DAL
         public static void ObtenerEstructura(int codigoPieza, Data.dsEstructura ds)
         {
             string sql = @"SELECT mpxp_codigo, pza_codigo, mp_codigo, mp_cantidad
-                         FROM MATERIASPRIMASXPIEZAS WHERE pza_codigo = @p0";
+                         FROM MATERIASPRIMASXPIEZA WHERE pza_codigo = @p0";
             
             object[] valorParametros = { codigoPieza };
             try
             {
                 //Primero obtenemos la tabla intermedia
-                DB.FillDataSet(ds, "MATERIASPRIMASXPIEZAS", sql, valorParametros);
+                DB.FillDataSet(ds, "MATERIASPRIMASXPIEZA", sql, valorParametros);
                 //Ahora los datos de las materias primas que estén en la consulta anterior
                 Entidades.MateriaPrima materiaPrima = new GyCAP.Entidades.MateriaPrima();
                 foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow row in ds.MATERIASPRIMASXPIEZA)
@@ -303,7 +303,7 @@ namespace GyCAP.DAL
                     rowMateriaPrima.EndEdit();
                     ds.MATERIAS_PRIMAS.AddMATERIAS_PRIMASRow(rowMateriaPrima);
                 }
-                ds.SUBCONJUNTOS.AcceptChanges();
+                ds.MATERIAS_PRIMAS.AcceptChanges();
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             catch (Entidades.Excepciones.ElementoInexistenteException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
