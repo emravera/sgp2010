@@ -20,22 +20,48 @@ namespace GyCAP.UI.EstructuraProducto
         public frmTerminacion()
         {
             InitializeComponent();
+            
             //Para que no genere las columnas automáticamente
             dgvLista.AutoGenerateColumns = false;
+            
             //Agregamos las columnas
             dgvLista.Columns.Add("TE_CODIGO", "Código");
             dgvLista.Columns.Add("TE_NOMBRE", "Nombre");
             dgvLista.Columns.Add("TE_DESCRIPCION", "Descripción");
+            
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
-            //dgvLista.Columns["TE_CODIGO"].Width = 0;
             dgvLista.Columns["TE_NOMBRE"].DataPropertyName = "TE_NOMBRE";
-            //dgvLista.Columns["TE_NOMBRE"].Width = 40;
             dgvLista.Columns["TE_DESCRIPCION"].DataPropertyName = "TE_DESCRIPCION";
-            //dgvLista.Columns["TE_DESCRIPCION"].Width = 80;
+
+            //Asignamos tamaño a las columnas
+            dgvLista.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            dgvLista.AutoSize = true;
+            //dgvLista.Columns["TE_CODIGO"].Width = 40;
+            //dgvLista.Columns["TE_NOMBRE"].Width = 80;
+            //dgvLista.Columns["TE_DESCRIPCION"].Width = 120;
+            dgvLista.Columns["TE_CODIGO"].Visible = false;
+            dgvLista.AutoResizeColumns();
+            //dgvLista.
+            //dgvLista.AutoResizeRows();
+
+
+            //LV
+            lv.View = View.Details;
+            lv.FullRowSelect = true;
+            lv.GridLines = true;
+            lv.LabelEdit = true;
+            lv.Columns.Clear();
+            lv.Items.Clear();
+            lv.Columns.Add ("Código", 0,  HorizontalAlignment.Right);
+            lv.Columns.Add("Nombre", 120, HorizontalAlignment.Left);
+            lv.Columns.Add("Descripción", 160, HorizontalAlignment.Left);
+
+
             //Creamos el dataview y lo asignamos a la grilla
             dvTerminacion = new DataView(dsTerminacion.TERMINACIONES);
-            dgvLista.DataSource = dsTerminacion;
+            dgvLista.DataSource = dvTerminacion;
+            
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
         }
@@ -144,6 +170,8 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
+
+        
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
@@ -295,6 +323,16 @@ namespace GyCAP.UI.EstructuraProducto
                 {
                     MessageBox.Show("No se encontraron terminaciones con el nombre ingresado.");
                 }
+
+                foreach (DataRow  dt in dvTerminacion.Table.Rows)
+                {
+                    ListViewItem item = new ListViewItem(dt["TE_CODIGO"].ToString());
+                    item.SubItems.Add(dt["TE_NOMBRE"].ToString());
+                    item.SubItems.Add(dt["TE_DESCRIPCION"].ToString());
+
+                    lv.Items.Add(item);
+                }
+
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
