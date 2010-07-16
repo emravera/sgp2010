@@ -27,6 +27,9 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns.Add("MOD_CODIGO", "Código");
             dgvLista.Columns.Add("MOD_NOMBRE", "Nombre");
             dgvLista.Columns.Add("MOD_DESCRIPCION", "Descripción");
+            dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["MOD_CODIGO"].DataPropertyName = "MOD_CODIGO";
             dgvLista.Columns["MOD_NOMBRE"].DataPropertyName = "MOD_NOMBRE";
