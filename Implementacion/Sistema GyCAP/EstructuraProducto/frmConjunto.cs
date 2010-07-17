@@ -65,7 +65,7 @@ namespace GyCAP.UI.EstructuraProducto
                 {
                     //No quiere guardar nada, descartamos los cambios
                     dsEstructura.SUBCONJUNTOS.RejectChanges();
-                    dsEstructura.SUBCONJUNTOSXCONJUNTOS.RejectChanges();
+                    dsEstructura.DETALLE_CONJUNTO.RejectChanges();
                     //Salimos
                     this.Dispose(true);
                 }
@@ -85,7 +85,7 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 dsEstructura.CONJUNTOS.Clear();
                 dsEstructura.SUBCONJUNTOS.Clear();
-                dsEstructura.SUBCONJUNTOSXCONJUNTOS.Clear();
+                dsEstructura.DETALLE_CONJUNTO.Clear();
 
                 if (rbNombre.Checked)
                 {
@@ -118,7 +118,7 @@ namespace GyCAP.UI.EstructuraProducto
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
                 dvListaConjuntos.Table = dsEstructura.CONJUNTOS;
-                dvListaSubconjuntosConjunto.Table = dsEstructura.SUBCONJUNTOSXCONJUNTOS;
+                dvListaSubconjuntosConjunto.Table = dsEstructura.DETALLE_CONJUNTO;
                 dvListaSubconjuntosDisponibles.Table = dsEstructura.SUBCONJUNTOS;
                 
                 SetInterface(estadoUI.inicio);
@@ -212,7 +212,7 @@ namespace GyCAP.UI.EstructuraProducto
                         BLL.ConjuntoBLL.Insertar(dsEstructura);                        
                         //Ahora si aceptamos los cambios
                         dsEstructura.CONJUNTOS.AcceptChanges();
-                        dsEstructura.SUBCONJUNTOSXCONJUNTOS.AcceptChanges();
+                        dsEstructura.DETALLE_CONJUNTO.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
@@ -246,7 +246,7 @@ namespace GyCAP.UI.EstructuraProducto
                         BLL.ConjuntoBLL.Actualizar(dsEstructura);
                         //El dataset ya se actualizó en las capas DAL y BLL, aceptamos los cambios
                         dsEstructura.CONJUNTOS.AcceptChanges();
-                        dsEstructura.SUBCONJUNTOSXCONJUNTOS.AcceptChanges();
+                        dsEstructura.DETALLE_CONJUNTO.AcceptChanges();
                         //Avisamos que estuvo todo ok
                         MessageBox.Show("Elemento actualizado correctamente.", "Aviso");
                         //Y por último seteamos el estado de la interfaz
@@ -277,9 +277,9 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvSubconjuntosConjunto.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Obtenemos el código
-                int codigoSxC = Convert.ToInt32(dvListaSubconjuntosConjunto[dgvSubconjuntosConjunto.SelectedRows[0].Index]["sxc_codigo"]);
+                int codigoDCJ = Convert.ToInt32(dvListaSubconjuntosConjunto[dgvSubconjuntosConjunto.SelectedRows[0].Index]["sxc_codigo"]);
                 //Lo borramos pero sólo del dataset
-                dsEstructura.SUBCONJUNTOSXCONJUNTOS.FindBySXC_CODIGO(codigoSxC).Delete();
+                dsEstructura.DETALLE_CONJUNTO.FindByDCJ_CODIGO(codigoDCJ).Delete();
             }
             else
             {
@@ -292,9 +292,9 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvSubconjuntosConjunto.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Obtenemos el código
-                int codigoSxC = Convert.ToInt32(dvListaSubconjuntosConjunto[dgvSubconjuntosConjunto.SelectedRows[0].Index]["sxc_codigo"]);
+                int codigoDCJ = Convert.ToInt32(dvListaSubconjuntosConjunto[dgvSubconjuntosConjunto.SelectedRows[0].Index]["sxc_codigo"]);
                 //Lo borramos pero sólo del dataset
-                dsEstructura.SUBCONJUNTOSXCONJUNTOS.FindBySXC_CODIGO(codigoSxC).SCONJ_CANTIDAD++; ;
+                dsEstructura.DETALLE_CONJUNTO.FindByDCJ_CODIGO(codigoDCJ).DCJ_CANTIDAD++; ;
             }
             else
             {
@@ -307,9 +307,9 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvSubconjuntosConjunto.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Obtenemos el código
-                int codigoSxC = Convert.ToInt32(dvListaSubconjuntosConjunto[dgvSubconjuntosConjunto.SelectedRows[0].Index]["sxc_codigo"]);
+                int codigoDCJ = Convert.ToInt32(dvListaSubconjuntosConjunto[dgvSubconjuntosConjunto.SelectedRows[0].Index]["sxc_codigo"]);
                 //Lo borramos pero sólo del dataset
-                dsEstructura.SUBCONJUNTOSXCONJUNTOS.FindBySXC_CODIGO(codigoSxC).SCONJ_CANTIDAD--; ;
+                dsEstructura.DETALLE_CONJUNTO.FindByDCJ_CODIGO(codigoDCJ).DCJ_CANTIDAD--; ;
             }
             else
             {
@@ -336,8 +336,8 @@ namespace GyCAP.UI.EstructuraProducto
                     //Algo tiene, comprobemos que no intente agregar el mismo subconjunto haciendo una consulta al dataset,
                     //no usamos el dataview porque no queremos volver a filtrar los datos y perderlos
                     string filtro = "conj_codigo = " + conjuntoCodigo + " AND sconj_codigo = " + subconjuntoCodigo;
-                    Data.dsEstructura.SUBCONJUNTOSXCONJUNTOSRow[] rows =
-                        (Data.dsEstructura.SUBCONJUNTOSXCONJUNTOSRow[])dsEstructura.SUBCONJUNTOSXCONJUNTOS.Select(filtro);
+                    Data.dsEstructura.DETALLE_CONJUNTORow[] rows =
+                        (Data.dsEstructura.DETALLE_CONJUNTORow[])dsEstructura.DETALLE_CONJUNTO.Select(filtro);
                     if (rows.Length > 0)
                     {
                         //Ya lo ha agregado, preguntemos si quiere aumentar la cantidad existente o descartar
@@ -345,7 +345,7 @@ namespace GyCAP.UI.EstructuraProducto
                         if (respuesta == DialogResult.Yes)
                         {
                             //Sumemos la cantidad ingresada a la existente, como hay una sola fila seleccionamos la 0 del array
-                            rows[0].SCONJ_CANTIDAD += nudCantidad.Value;
+                            rows[0].DCJ_CANTIDAD += nudCantidad.Value;
                         }
                         //Como ya existe marcamos que no debe agregarse
                         agregarSubconjunto = false;
@@ -365,17 +365,17 @@ namespace GyCAP.UI.EstructuraProducto
                 //Ahora comprobamos si debe agregarse el subconjunto o no
                 if (agregarSubconjunto)
                 {
-                    Data.dsEstructura.SUBCONJUNTOSXCONJUNTOSRow row = dsEstructura.SUBCONJUNTOSXCONJUNTOS.NewSUBCONJUNTOSXCONJUNTOSRow();
+                    Data.dsEstructura.DETALLE_CONJUNTORow row = dsEstructura.DETALLE_CONJUNTO.NewDETALLE_CONJUNTORow();
                     row.BeginEdit();
                     //Agregamos una fila nueva con código 0, luego al guardar en la db se actualizará
-                    row.SXC_CODIGO = 0;
+                    row.DCJ_CODIGO = 0;
                     row.CONJ_CODIGO = conjuntoCodigo;
                     row.SCONJ_CODIGO = subconjuntoCodigo;
-                    row.SCONJ_CANTIDAD = nudCantidad.Value;
+                    row.DCJ_CANTIDAD = nudCantidad.Value;
                     row.EndEdit();
                     //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
                     //todavia no vamos a insertar en la db hasta que no haga Guardar
-                    dsEstructura.SUBCONJUNTOSXCONJUNTOS.AddSUBCONJUNTOSXCONJUNTOSRow(row);
+                    dsEstructura.DETALLE_CONJUNTO.AddDETALLE_CONJUNTORow(row);
                 }
             }
             else
@@ -401,7 +401,7 @@ namespace GyCAP.UI.EstructuraProducto
                 {
                     //No quiere guardar nada, descartamos los cambios
                     dsEstructura.SUBCONJUNTOS.RejectChanges();
-                    dsEstructura.SUBCONJUNTOSXCONJUNTOS.RejectChanges();
+                    dsEstructura.DETALLE_CONJUNTO.RejectChanges();
                     //Seteamos la interfaz
                     SetInterface(estadoUI.inicio);
                 }
@@ -569,7 +569,7 @@ namespace GyCAP.UI.EstructuraProducto
             //Creamos el dataview y lo asignamos a la grilla
             dvListaConjuntos = new DataView(dsEstructura.CONJUNTOS);
             dgvListaConjuntos.DataSource = dvListaConjuntos;
-            dvListaSubconjuntosConjunto = new DataView(dsEstructura.SUBCONJUNTOSXCONJUNTOS);
+            dvListaSubconjuntosConjunto = new DataView(dsEstructura.DETALLE_CONJUNTO);
             dgvSubconjuntosConjunto.DataSource = dvListaSubconjuntosConjunto;
             dvListaSubconjuntosDisponibles = new DataView(dsEstructura.SUBCONJUNTOS);
             dgvSCDisponibles.DataSource = dvListaSubconjuntosDisponibles;

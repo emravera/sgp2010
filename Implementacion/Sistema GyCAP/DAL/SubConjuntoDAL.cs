@@ -21,10 +21,10 @@ namespace GyCAP.DAL
             Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto = dsEstructura.SUBCONJUNTOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.SUBCONJUNTOSRow;
             object[] valorParametros = { rowSubconjunto.SCONJ_CODIGO, rowSubconjunto.TE_CODIGO, 0 };
 
-            string sqlInsertEstructura = @"INSERT INTO [PIEZASXSUBCONJUNTO] 
+            string sqlInsertEstructura = @"INSERT INTO [DETALLE_SUBCONJUNTO] 
                                         ([sconj_codigo]
                                         ,[pza_codigo]
-                                        ,[pza_cantidad])
+                                        ,[dsc_cantidad])
                                         VALUES (@p0, @p1, @p2) SELECT @@Identity";
 
             //Declaramos el objeto transaccion
@@ -39,17 +39,17 @@ namespace GyCAP.DAL
                 rowSubconjunto.SCONJ_CODIGO = Convert.ToInt32(DB.executeScalar(sqlInsertSubconjunto, valorParametros, transaccion));
                 rowSubconjunto.EndEdit();
                 //Ahora insertamos su estructura, usamos el foreach para recorrer sólo los nuevos registros del dataset
-                foreach (Data.dsEstructura.PIEZASXSUBCONJUNTORow row in (Data.dsEstructura.PIEZASXSUBCONJUNTORow[])dsEstructura.PIEZASXSUBCONJUNTO.Select(null, null, System.Data.DataViewRowState.Added))
+                foreach (Data.dsEstructura.DETALLE_SUBCONJUNTORow row in (Data.dsEstructura.DETALLE_SUBCONJUNTORow[])dsEstructura.DETALLE_SUBCONJUNTO.Select(null, null, System.Data.DataViewRowState.Added))
                 {
                     //Primero actualizamos el código de el subconjunto nuevo en la tabla relacionada
                     row.BeginEdit();
                     row.SCONJ_CODIGO = rowSubconjunto.SCONJ_CODIGO;
                     row.EndEdit();
                     //Asignamos los valores a los parámetros
-                    valorParametros = new object[] { row.SCONJ_CODIGO, row.PZA_CODIGO, row.PZA_CANTIDAD };
+                    valorParametros = new object[] { row.SCONJ_CODIGO, row.PZA_CODIGO, row.DSC_CANTIDAD };
                     //Ahora si insertamos en la bd y actualizamos el código de la relación
                     row.BeginEdit();
-                    row.PXS_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertEstructura, valorParametros, transaccion));
+                    row.DSC_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertEstructura, valorParametros, transaccion));
                     row.EndEdit();
                 }
                 //Todo ok, commit
@@ -86,16 +86,16 @@ namespace GyCAP.DAL
             //Armemos todas las consultas
             string sqlUpdateSubconjunto = "UPDATE SUBCONJUNTOS SET sconj_nombre = @p0, te_codigo = @p1 WHERE sconj_codigo = @p2";
 
-            string sqlInsertEstructura = @"INSERT INTO [PIEZASXSUBCONJUNTO] 
+            string sqlInsertEstructura = @"INSERT INTO [DETALLE_SUBCONJUNTO] 
                                         ([sconj_codigo]
                                         ,[pza_codigo]
-                                        ,[pza_cantidad])
+                                        ,[dsc_cantidad])
                                         VALUES (@p0, @p1, @p2) SELECT @@Identity";
 
-            string sqlUpdateEstructura = @"UPDATE PIEZASXSUBCONJUNTO SET pza_cantidad = @p0 
-                                          WHERE pxs_codigo = @p0";
+            string sqlUpdateEstructura = @"UPDATE DETALLE_SUBCONJUNTO SET dsc_cantidad = @p0 
+                                          WHERE dsc_codigo = @p0";
 
-            string sqlDeleteEstructura = "DELETE FROM PIEZASXSUBCONJUNTO WHERE pxs_codigo = @p0";
+            string sqlDeleteEstructura = "DELETE FROM DETALLE_SUBCONJUNTO WHERE dsc_codigo = @p0";
 
             //Así obtenemos el subconjunto del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto = dsEstructura.SUBCONJUNTOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.SUBCONJUNTOSRow;
@@ -112,26 +112,26 @@ namespace GyCAP.DAL
                 //Actualizamos el subconjunto
                 DB.executeNonQuery(sqlUpdateSubconjunto, valorParametros, transaccion);
                 //Actualizamos la estructura, primero insertamos los nuevos
-                foreach (Data.dsEstructura.PIEZASXSUBCONJUNTORow row in (Data.dsEstructura.PIEZASXSUBCONJUNTORow[])dsEstructura.PIEZASXSUBCONJUNTO.Select(null, null, System.Data.DataViewRowState.Added))
+                foreach (Data.dsEstructura.DETALLE_SUBCONJUNTORow row in (Data.dsEstructura.DETALLE_SUBCONJUNTORow[])dsEstructura.DETALLE_SUBCONJUNTO.Select(null, null, System.Data.DataViewRowState.Added))
                 {
-                    valorParametros = new object[] { row.SCONJ_CODIGO, row.PZA_CODIGO, row.PZA_CANTIDAD };
+                    valorParametros = new object[] { row.SCONJ_CODIGO, row.PZA_CODIGO, row.DSC_CANTIDAD };
                     row.BeginEdit();
-                    row.PXS_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertEstructura, valorParametros, transaccion));
+                    row.DSC_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertEstructura, valorParametros, transaccion));
                     row.EndEdit();
                 }
 
                 //Segundo actualizamos los modificados
-                foreach (Data.dsEstructura.PIEZASXSUBCONJUNTORow row in (Data.dsEstructura.PIEZASXSUBCONJUNTORow[])dsEstructura.PIEZASXSUBCONJUNTO.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
+                foreach (Data.dsEstructura.DETALLE_SUBCONJUNTORow row in (Data.dsEstructura.DETALLE_SUBCONJUNTORow[])dsEstructura.DETALLE_SUBCONJUNTO.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
                 {
-                    valorParametros = new object[] { row.PZA_CANTIDAD, row.PXS_CODIGO };
+                    valorParametros = new object[] { row.DSC_CANTIDAD, row.DSC_CODIGO };
                     DB.executeScalar(sqlUpdateEstructura, valorParametros, transaccion);
                 }
 
                 //Tercero eliminamos
-                foreach (Data.dsEstructura.PIEZASXSUBCONJUNTORow row in (Data.dsEstructura.PIEZASXSUBCONJUNTORow[])dsEstructura.PIEZASXSUBCONJUNTO.Select(null, null, System.Data.DataViewRowState.Deleted))
+                foreach (Data.dsEstructura.DETALLE_SUBCONJUNTORow row in (Data.dsEstructura.DETALLE_SUBCONJUNTORow[])dsEstructura.DETALLE_SUBCONJUNTO.Select(null, null, System.Data.DataViewRowState.Deleted))
                 {
                     //Como la fila está eliminada y no tiene datos, tenemos que acceder a la versión original
-                    valorParametros = new object[] { row["pxs_codigo", System.Data.DataRowVersion.Original] };
+                    valorParametros = new object[] { row["dsc_codigo", System.Data.DataRowVersion.Original] };
                     Convert.ToDecimal(DB.executeScalar(sqlDeleteEstructura, valorParametros, transaccion));
                 }
 
@@ -204,15 +204,15 @@ namespace GyCAP.DAL
 
         public static bool PuedeEliminarse(int codigo)
         {
-            string sqlPXSC = "SELECT count(sconj_codigo) FROM PIEZASXSUBCONJUNTO WHERE sconj_codigo = @p0";
-            string sqlSCXC = "SELECT count(sconj_codigo) FROM SUBCONJUNTOSXCONJUNTO WHERE sconj_codigo = @p0";
+            string sqlDSCC = "SELECT count(sconj_codigo) FROM DETALLE_SUBCONJUNTO WHERE sconj_codigo = @p0";
+            string sqlSCXC = "SELECT count(sconj_codigo) FROM DETALLE_CONJUNTO WHERE sconj_codigo = @p0";
 
             object[] valorParametros = { codigo };
             try
             {
-                int resultadoPXSC = Convert.ToInt32(DB.executeScalar(sqlPXSC, valorParametros, null));
+                int resultadoDSCC = Convert.ToInt32(DB.executeScalar(sqlDSCC, valorParametros, null));
                 int resultadoSCXC = Convert.ToInt32(DB.executeScalar(sqlSCXC, valorParametros, null));
-                if (resultadoPXSC == 0 && resultadoSCXC == 0)
+                if (resultadoDSCC == 0 && resultadoSCXC == 0)
                 {
                     return true;
                 }
@@ -227,17 +227,17 @@ namespace GyCAP.DAL
         ////Obtiene todas las materias primas desde la BD por los que está formada el subconjunto
         public static void ObtenerEstructura(int codigoSubconjunto, Data.dsEstructura ds)
         {
-            string sql = @"SELECT pxs_codigo, sconj_codigo, pza_codigo, pza_cantidad
-                         FROM PIEZASXSUBCONJUNTO WHERE sconj_codigo = @p0";
+            string sql = @"SELECT dsc_codigo, sconj_codigo, pza_codigo, dsc_cantidad
+                         FROM DETALLE_SUBCONJUNTO WHERE sconj_codigo = @p0";
 
             object[] valorParametros = { codigoSubconjunto };
             try
             {
                 //Primero obtenemos la tabla intermedia
-                DB.FillDataSet(ds, "PIEZASXSUBCONJUNTO", sql, valorParametros);
+                DB.FillDataSet(ds, "DETALLE_SUBCONJUNTO", sql, valorParametros);
                 //Ahora los datos de las piezas que estén en la consulta anterior
                 Entidades.Pieza pieza = new GyCAP.Entidades.Pieza();
-                foreach (Data.dsEstructura.PIEZASXSUBCONJUNTORow row in ds.PIEZASXSUBCONJUNTO)
+                foreach (Data.dsEstructura.DETALLE_SUBCONJUNTORow row in ds.DETALLE_SUBCONJUNTO)
                 {
                     //Como ya tenemos todos los códigos de las materias primas que necesitamos, directamente
                     //se los pedimos a MateriaPrimaDAL
