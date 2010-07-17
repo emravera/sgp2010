@@ -27,8 +27,14 @@ namespace GyCAP.UI.Soporte
             //Agregamos las columnas
             dgvLista.Columns.Add("SEC_CODIGO", "Código");
             dgvLista.Columns.Add("SEC_NOMBRE", "Nombre");
-            dgvLista.Columns.Add("SEC_DESCRIPCION", "Descripcion");
             dgvLista.Columns.Add("SEC_ABREVIATURA", "Abreviatura");
+            dgvLista.Columns.Add("SEC_DESCRIPCION", "Descripcion");
+
+            //Seteamos el modo de tamaño de las columnas
+            dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["SEC_CODIGO"].DataPropertyName = "SEC_CODIGO";

@@ -2,9 +2,10 @@
 <xs:schema id="dsDesignacion" targetNamespace="http://tempuri.org/dsDesignacion.xsd" xmlns:mstns="http://tempuri.org/dsDesignacion.xsd" xmlns="http://tempuri.org/dsDesignacion.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
-      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
           <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ProyectoConnectionString3" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ProyectoConnectionString3 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.GyCAP.Data.Properties.Settings.GlobalReference.Default.ProyectoConnectionString3" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="Proyecto1ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="Proyecto1ConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.GyCAP.Data.Properties.Settings.GlobalReference.Default.Proyecto1ConnectionString" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="MARCASTableAdapter" GeneratorDataComponentClassName="MARCASTableAdapter" Name="MARCAS" UserDataComponentName="MARCASTableAdapter">
@@ -137,9 +138,9 @@ SELECT DESIG_CODIGO, MCA_CODIGO, DESIG_NOMBRE, DESIG_DESCRIPCION FROM DESIGNACIO
         <xs:element name="MARCAS" msprop:Generator_UserTableName="MARCAS" msprop:Generator_RowDeletedName="MARCASRowDeleted" msprop:Generator_RowChangedName="MARCASRowChanged" msprop:Generator_RowClassName="MARCASRow" msprop:Generator_RowChangingName="MARCASRowChanging" msprop:Generator_RowEvArgName="MARCASRowChangeEvent" msprop:Generator_RowEvHandlerName="MARCASRowChangeEventHandler" msprop:Generator_TableClassName="MARCASDataTable" msprop:Generator_TableVarName="tableMARCAS" msprop:Generator_RowDeletingName="MARCASRowDeleting" msprop:Generator_TablePropName="MARCAS">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="MCA_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="MCA_CODIGO" msprop:Generator_ColumnVarNameInTable="columnMCA_CODIGO" msprop:Generator_ColumnPropNameInRow="MCA_CODIGO" msprop:Generator_ColumnPropNameInTable="MCA_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="CLI_CODIGO" msprop:Generator_UserColumnName="CLI_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCLI_CODIGO" msprop:Generator_ColumnPropNameInRow="CLI_CODIGO" msprop:Generator_ColumnPropNameInTable="CLI_CODIGOColumn" type="xs:decimal" minOccurs="0" />
-              <xs:element name="MCA_NOMBRE" msprop:Generator_UserColumnName="MCA_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnMCA_NOMBRE" msprop:Generator_ColumnPropNameInRow="MCA_NOMBRE" msprop:Generator_ColumnPropNameInTable="MCA_NOMBREColumn" minOccurs="0">
+              <xs:element name="MCA_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="MCA_CODIGO" msprop:Generator_ColumnPropNameInRow="MCA_CODIGO" msprop:Generator_ColumnVarNameInTable="columnMCA_CODIGO" msprop:Generator_ColumnPropNameInTable="MCA_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="CLI_CODIGO" msprop:Generator_UserColumnName="CLI_CODIGO" msprop:Generator_ColumnPropNameInRow="CLI_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCLI_CODIGO" msprop:Generator_ColumnPropNameInTable="CLI_CODIGOColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="MCA_NOMBRE" msprop:Generator_UserColumnName="MCA_NOMBRE" msprop:Generator_ColumnPropNameInRow="MCA_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnMCA_NOMBRE" msprop:Generator_ColumnPropNameInTable="MCA_NOMBREColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="25" />
@@ -164,7 +165,7 @@ SELECT DESIG_CODIGO, MCA_CODIGO, DESIG_NOMBRE, DESIG_DESCRIPCION FROM DESIGNACIO
               <xs:element name="DESIG_DESCRIPCION" msprop:Generator_UserColumnName="DESIG_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="DESIG_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnDESIG_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="DESIG_DESCRIPCIONColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
+                    <xs:maxLength value="210" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

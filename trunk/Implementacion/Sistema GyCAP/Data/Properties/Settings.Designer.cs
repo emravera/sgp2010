@@ -62,5 +62,15 @@ namespace GyCAP.Data.Properties {
                 return ((string)(this["ProyectoConnectionString3"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=HP-EMA\\SQLEXPRESS;Initial Catalog=Proyecto1;Integrated Security=True")]
+        public string Proyecto1ConnectionString {
+            get {
+                return ((string)(this["Proyecto1ConnectionString"]));
+            }
+        }
     }
 }

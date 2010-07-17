@@ -13,11 +13,12 @@ namespace GyCAP.UI.EstructuraProducto
     {
         private static frmDesignacion _frmDesignacion = null;
         private Data.dsDesignacion dsDesignacion = new GyCAP.Data.dsDesignacion();
-        private DataView dvListaDesignacion, dvComboDesignacion;
+        private DataView dvListaDesignacion, dvComboDesignacion, dvComboDesignacionBuscar;
         private enum estadoUI { inicio, nuevo, consultar, modificar, };
         private estadoUI estadoInterface;
 
         #region Inicio
+
         public frmDesignacion()
         {
             InitializeComponent();
@@ -30,43 +31,52 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns.Add("MCA_CODIGO", "Marca");
             dgvLista.Columns.Add("DESIG_NOMBRE", "Nombre");
             dgvLista.Columns.Add("DESIG_DESCRIPCION", "Descripcion");
+                        
+            //Seteamos el modo de tamaño de las columnas
+            dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["DESIG_CODIGO"].DataPropertyName = "DESIG_CODIGO";
             dgvLista.Columns["MCA_CODIGO"].DataPropertyName = "MCA_CODIGO";
             dgvLista.Columns["DESIG_NOMBRE"].DataPropertyName = "DESIG_NOMBRE";
             dgvLista.Columns["DESIG_DESCRIPCION"].DataPropertyName = "DESIG_DESCRIPCION";
-
+            
+            //Alineacion de los numeros y las fechas en la grilla
+            dgvLista.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            
             //Llena el Dataset con las marcas
             BLL.MarcaBLL.ObtenerTodos(dsDesignacion);
+            
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDesignacion = new DataView(dsDesignacion.DESIGNACIONES);
             dgvLista.DataSource = dvListaDesignacion;
             
             //CARGA DE COMBOS
             //Creamos el Dataview y se lo asignamos al combo
-            dvComboDesignacion = new DataView(dsDesignacion.MARCAS);
-            cbMarcaBuscar.DataSource = dvComboDesignacion;
+            dvComboDesignacionBuscar = new DataView(dsDesignacion.MARCAS);
+            cbMarcaBuscar.DataSource = dvComboDesignacionBuscar;
             cbMarcaBuscar.DisplayMember = "MCA_NOMBRE";
             cbMarcaBuscar.ValueMember = "MCA_CODIGO";
             //Para que el combo no quede selecionado cuando arranca y que sea una lista
-            cbMarcaBuscar.SelectedIndex = -1;
+            cbMarcaBuscar.SelectedIndex = 0;
             cbMarcaBuscar.DropDownStyle = ComboBoxStyle.DropDownList;
 
             //Combo de Datos
+            dvComboDesignacion = new DataView(dsDesignacion.MARCAS);
             cbMarcaDatos.DataSource = dvComboDesignacion;
             cbMarcaDatos.DisplayMember = "MCA_NOMBRE";
             cbMarcaDatos.ValueMember = "MCA_CODIGO";
             //Para que el combo no quede selecionado cuando arranca y que sea una lista
-            cbMarcaDatos.SelectedIndex = -1;
+            cbMarcaDatos.SelectedIndex = 0;
             cbMarcaDatos.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            //Selecciono por defecto buscar por nombre
-            rbNombre.Checked = true;
-
             //Seteo el maxlenght de los textbox para que no de error en la bd
-            txtDescripcion.MaxLength = 50;
+            txtDescripcion.MaxLength = 200;
             txtNombre.MaxLength = 30;
+
 
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
@@ -103,14 +113,18 @@ namespace GyCAP.UI.EstructuraProducto
                 //Limpiamos el Dataset
                 dsDesignacion.DESIGNACIONES.Clear();
 
-                if (rbNombre.Checked == true && txtNombreBuscar.Text != string.Empty)
+                if ( txtNombreBuscar.Text != string.Empty && cbMarcaBuscar.SelectedIndex == -1)
                 {
                     BLL.DesignacionBLL.ObtenerTodos(txtNombreBuscar.Text, dsDesignacion);
 
                 }
-                else if (rbMarca.Checked == true && cbMarcaBuscar.SelectedIndex != -1)
+                else if (cbMarcaBuscar.SelectedIndex != -1 && txtNombreBuscar.Text== string.Empty)
                 {
                     BLL.DesignacionBLL.ObtenerTodos(Convert.ToInt32(cbMarcaBuscar.SelectedValue), dsDesignacion);
+                }
+                else if (cbMarcaBuscar.SelectedIndex != -1 && txtNombreBuscar.Text!= string.Empty)
+                {
+                    
                 }
                 else
                 {
@@ -123,15 +137,7 @@ namespace GyCAP.UI.EstructuraProducto
 
                 if (dsDesignacion.DESIGNACIONES.Rows.Count == 0)
                 {
-                    if (rbNombre.Checked == true)
-                    {
-                        MessageBox.Show("No se encontraron Designaciones con el nombre ingresado.", "Aviso");
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se encontraron Designaciones para la Marca seleccionada.", "Aviso");
-                    }
-
+                   MessageBox.Show("No se encontraron Designaciones con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
 
@@ -164,7 +170,7 @@ namespace GyCAP.UI.EstructuraProducto
         //Configuracion de los radio Buttons
         private void rbNombre_CheckedChanged(object sender, EventArgs e)
         {
-            cbMarcaDatos.SelectedIndex = -1;
+            cbMarcaBuscar.SelectedIndex = -1;
             cbMarcaBuscar.Enabled = false;
             txtNombreBuscar.Enabled = true;
         }
@@ -187,6 +193,7 @@ namespace GyCAP.UI.EstructuraProducto
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             SetInterface(estadoUI.nuevo);
+            
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)
@@ -236,12 +243,11 @@ namespace GyCAP.UI.EstructuraProducto
                     break;
                 case estadoUI.nuevo:
                     txtNombre.ReadOnly = false;
-                    txtCodigo.Text = String.Empty;
                     txtNombre.Text = String.Empty;
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Text=string.Empty;
                     cbMarcaDatos.Enabled = true;
-                    cbMarcaDatos.SelectedIndex = -1;
+                    cbMarcaDatos.SelectedIndex = 0;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -281,15 +287,6 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
-        //Método para evitar que se cierrre la pantalla con la X o con ALT+F4
-        private void frmDesignacion_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                e.Cancel = true;
-            }
-        }
-
         #endregion
 
 
@@ -299,7 +296,6 @@ namespace GyCAP.UI.EstructuraProducto
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             int codigoDesignacion = Convert.ToInt32(dvListaDesignacion[e.RowIndex]["desig_codigo"]);
-            txtCodigo.Text = codigoDesignacion.ToString();
             txtNombre.Text = dsDesignacion.DESIGNACIONES.FindByDESIG_CODIGO(codigoDesignacion).DESIG_NOMBRE;
             txtDescripcion.Text = dsDesignacion.DESIGNACIONES.FindByDESIG_CODIGO(codigoDesignacion).DESIG_DESCRIPCION;
             cbMarcaDatos.SelectedValue = dsDesignacion.DESIGNACIONES.FindByDESIG_CODIGO(codigoDesignacion).MCA_CODIGO;
@@ -311,7 +307,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar la Designación seleccionada?", "Confirmar eliminación", MessageBoxButtons.YesNo);
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar la Designación seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -326,17 +322,17 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text  + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Designacion de la lista.", "Aviso");
+                MessageBox.Show("Debe seleccionar una Designación de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information );
             }
         }
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -426,7 +422,7 @@ namespace GyCAP.UI.EstructuraProducto
                         //Agregamos la fila al dataset y aceptamos los cambios
                         dsDesignacion.DESIGNACIONES.AcceptChanges();
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Aviso");
+                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización " , MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
@@ -435,14 +431,26 @@ namespace GyCAP.UI.EstructuraProducto
                         MessageBox.Show(ex.Message);
                     }
                 }
+
+               //recarga de la grilla
+               dgvLista.Refresh();
             }
             else
             {
-                MessageBox.Show("Debe completar los datos.", "Aviso");
+                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         
         #endregion
+
+        private void frmDesignacion_Activated(object sender, EventArgs e)
+        {
+            if (txtNombreBuscar.Enabled == true)
+            {
+                txtNombreBuscar.Focus();
+            }
+
+        }
 
         
 

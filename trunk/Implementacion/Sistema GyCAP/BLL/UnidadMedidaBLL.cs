@@ -58,7 +58,9 @@ namespace GyCAP.BLL
         //Actualización de los datos
         public static void Actualizar(Entidades.UnidadMedida unidadMedida)
         {
-            DAL.UnidadMedidaDAL.Actualizar(unidadMedida);
+            //Si existe lanzamos la excepción correspondiente
+            if (EsUnidadMedida(unidadMedida)) throw new Entidades.Excepciones.ElementoExistenteException();
+            else DAL.UnidadMedidaDAL.Actualizar(unidadMedida);
         }
 
     }

@@ -720,7 +720,7 @@ namespace GyCAP.Data {
                 this.columnDESIG_CODIGO.ReadOnly = true;
                 this.columnDESIG_CODIGO.Unique = true;
                 this.columnDESIG_NOMBRE.MaxLength = 30;
-                this.columnDESIG_DESCRIPCION.MaxLength = 50;
+                this.columnDESIG_DESCRIPCION.MaxLength = 210;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

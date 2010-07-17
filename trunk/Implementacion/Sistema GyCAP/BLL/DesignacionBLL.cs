@@ -17,6 +17,10 @@ namespace GyCAP.BLL
         {
             DAL.DesignacionDAL.ObtenerDesignacion(idMarca, ds);
         }
+        /*public static void ObtenerTodos(int idMarca, string  Data.dsDesignacion ds)
+        {
+            DAL.DesignacionDAL.ObtenerDesignacion(idMarca, ds);
+        }*/
         public static void ObtenerTodos(Data.dsDesignacion ds)
         {
             DAL.DesignacionDAL.ObtenerDesignacion(ds);
@@ -56,7 +60,7 @@ namespace GyCAP.BLL
         //Actualización de los datos
         public static void Actualizar(Entidades.Designacion desig)
         {
-            DAL.DesignacionDAL.Actualizar(desig);
+           DAL.DesignacionDAL.Actualizar(desig);
         }
 
     }
