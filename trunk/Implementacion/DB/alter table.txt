@@ -54,13 +54,13 @@ alter table DETALLE_DEMANDAS_ANUALES
 /*-MODIFICACION 13/07/2010-*/
 
 /*==============================================================*/
-/* Table: DETALLE_MATERIA_PRIMA                                      */
+/* Table: DETALLE_PIEZA                                         */  /*-MODIFICACION 17/07/2010-*/
 /*==============================================================*/
-alter table DETALLE_MATERIA_PRIMA
-   add constraint detalleMateriaPrima_materiaPrima_fk foreign key (MP_CODIGO)
+alter table DETALLE_PIEZA
+   add constraint detallePieza_materiaPrima_fk foreign key (MP_CODIGO)
       references MATERIAS_PRIMAS (MP_CODIGO)
-alter table DETALLE_MATERIA_PRIMA
-   add constraint detalleMateriaPrima_pieza_fk foreign key (PZA_CODIGO)
+alter table DETALLE_PIEZA
+   add constraint detallePieza_pieza_fk foreign key (PZA_CODIGO)
       references PIEZAS (PZA_CODIGO)
 
 /*==============================================================*/
@@ -93,13 +93,13 @@ alter table DETALLE_PEDIDOS
 /*-MODIFICACION 12/07/2010-*/
 
 /*==============================================================*/
-/* Table: DETALLE_PIEZA                                      */
+/* Table: DETALLE_SUBCONJUNTO                                   */ /*-MODIFICACION 17/07/2010-*/
 /*==============================================================*/
-alter table DETALLE_PIEZA
-   add constraint detallePieza_pieza_fk foreign key (PZA_CODIGO)
+alter table DETALLE_SUBCONJUNTO
+   add constraint detalleSubconjunto_pieza_fk foreign key (PZA_CODIGO)
       references PIEZAS (PZA_CODIGO)
-alter table DETALLE_PIEZA
-   add constraint detallePieza_subconjunto_fk foreign key (SCONJ_CODIGO)
+alter table DETALLE_SUBCONJUNTO
+   add constraint detalleSubconjunto_subconjunto_fk foreign key (SCONJ_CODIGO)
       references SUBCONJUNTOS (SCONJ_CODIGO)
 
 /*==============================================================*/
@@ -153,13 +153,13 @@ alter table DETALLE_PLANES_SEMANALES
 /*-MODIFICACION 12/07/2010-*/
 
 /*==============================================================*/
-/* Table: DETALLE_SUBCONJUNTO                                      */
+/* Table: DETALLE_CONJUNTO                                      */  /*-MODIFICACION 17/07/2010-*/
 /*==============================================================*/
-alter table DETALLE_SUBCONJUNTO
-   add constraint detalleSubconjunto_subconjunto_fk foreign key (CONJ_CODIGO)
+alter table DETALLE_CONJUNTO
+   add constraint detalleconjunto_subconjunto_fk foreign key (CONJ_CODIGO)
       references CONJUNTOS (CONJ_CODIGO)
-alter table DETALLE_SUBCONJUNTO
-   add constraint detalleSubconjunto_conjunto_fk foreign key (SCONJ_CODIGO)
+alter table DETALLE_CONJUNTO
+   add constraint detalleconjunto_conjunto_fk foreign key (SCONJ_CODIGO)
       references SUBCONJUNTOS (SCONJ_CODIGO)
 
 
@@ -251,14 +251,14 @@ alter table MATERIASPRIMASPRINCIPALES
       references MATERIAS_PRIMAS (MP_CODIGO)
 
 /*==============================================================*/
-/* Table: MATERIASPRIMASXPIEZA                                  */
+/* Table: MATERIASPRIMASXESTRUCTURA                             */ /*-MODIFICACION 17/07/2010-*/
 /*==============================================================*/
-alter table MATERIASPRIMASXPIEZA
-   add constraint materiaPrimaXPieza_materiaPrima_fk foreign key (MP_CODIGO)
+alter table MATERIASPRIMASXESTRUCTURA
+   add constraint materiaPrimaXEstructura_estructura_fk foreign key (ESTR_CODIGO)
+      references ESTRUCTURAS (ESTR_CODIGO)
+alter table MATERIASPRIMASXESTRUCTURA
+   add constraint materiaPrimaXEstructura_materiaPrima_fk foreign key (MP_CODIGO)
       references MATERIAS_PRIMAS (MP_CODIGO)
-alter table MATERIASPRIMASXPIEZA
-   add constraint materiaPrimaXPieza_piezas_fk foreign key (PZA_CODIGO)
-      references PIEZAS (PZA_CODIGO)
 
 /*==============================================================*/
 /* Table: ORDENES_TRABAJO                                       */
@@ -288,14 +288,14 @@ alter table PIEZAS
       references TERMINACIONES (TE_CODIGO)
 
 /*==============================================================*/
-/* Table: PIEZASXSUBCONJUNTO                                    */
+/* Table: PIEZASXESTRUCTURA                                     */ /*-MODIFICACION 17/07/2010-*/
 /*==============================================================*/
-alter table PIEZASXSUBCONJUNTO
-   add constraint piezasXSubconjuntos_piezas_fk foreign key (PZA_CODIGO)
+alter table PIEZASXESTRUCTURA
+   add constraint piezasXEstructura_piezas_fk foreign key (PZA_CODIGO)
       references PIEZAS (PZA_CODIGO)
-alter table PIEZASXSUBCONJUNTO
-   add constraint piezasXSubconjuntos_subconjunto_fk foreign key (SCONJ_CODIGO)
-      references SUBCONJUNTOS (SCONJ_CODIGO)
+alter table PIEZASXESTRUCTURA
+   add constraint piezasXEstructura_estructura_fk foreign key (ESTR_CODIGO)
+      references ESTRUCTURAS (ESTR_CODIGO)
 
 /*==============================================================*/
 /* Table: PLANES_ANUALES                                        */
@@ -354,13 +354,13 @@ alter table SUBCONJUNTOS
       references TERMINACIONES (TE_CODIGO)
 
 /*==============================================================*/
-/* Table: SUBCONJUNTOSXCONJUNTOS                                */
+/* Table: SUBCONJUNTOSXESTRUCTURA                                */ /*-MODIFICACION 17/07/2010-*/
 /*==============================================================*/
-alter table SUBCONJUNTOSXCONJUNTOS
-   add constraint subconjuntosXConjuntos_conjunto_fk foreign key (CONJ_CODIGO)
-      references CONJUNTOS (CONJ_CODIGO)
-alter table SUBCONJUNTOSXCONJUNTOS
-   add constraint subconjuntosXConjuntos_subconjunto_fk foreign key (SCONJ_CODIGO)
+alter table SUBCONJUNTOSXESTRUCTURA
+   add constraint subconjuntosXestructura_estructura_fk foreign key (ESTR_CODIGO)
+      references ESTRUCTURAS (ESTR_CODIGO)
+alter table SUBCONJUNTOSXESTRUCTURA
+   add constraint subconjuntosXEstructura_subconjunto_fk foreign key (SCONJ_CODIGO)
       references SUBCONJUNTOS (SCONJ_CODIGO)
 
 /*==============================================================*/
