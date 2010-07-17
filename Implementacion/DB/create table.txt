@@ -417,7 +417,6 @@ create table MATERIAS_PRIMAS (
    MP_CANTIDADSTOCK     int                  null,
    MP_PRECIO            numeric(10,2)        null,            /*-MODIFICACION 09/07/2010-*/
    MP_IMAGEN            char(4)              null,            /*-MODIFICACION 17/07/2010-*/
-   MP_DESCRIPCION       varchar(200)         null,            /*-MODIFICACION 17/07/2010-*/
    constraint PK_MATERIAS_PRIMAS primary key nonclustered (MP_CODIGO)
 )
 
@@ -596,7 +595,6 @@ create table REPUESTOS (
    REP_CANTIDADSTOCK    int                  null,
    REP_PRECIO           float(10)            null,
    REP_IMAGEN           char(4)              null,            /*-MODIFICACION 17/07/2010-*/
-   REP_DESCRIPCION      varchar(200)         null,            /*-MODIFICACION 17/07/2010-*/
    constraint PK_REPUESTOS primary key nonclustered (REP_CODIGO)
 )
 
@@ -742,6 +740,32 @@ create table PLANOS (
    PNO_OBSERVACIONES    varchar(200)         null,
    constraint PK_PLANOS primary key nonclustered (PNO_CODIGO)
 )
+
+/*--------AGREGADO 17/07/2010--------*/
+
+/*==============================================================*/
+/* Table: PLANES_MATERIAS_PRIMAS_ANUALES                        */
+/*==============================================================*/
+create table PLANES_MATERIAS_PRIMAS_ANUALES (
+   PMPA_CODIGO          numeric(10)          identity,
+   PMPA_FECHACREACION   datetime             null,
+   constraint PK_PLANES_MATERIA_PRIMA_ANUAL primary key nonclustered (PMPA_CODIGO)
+)
+
+
+/*==============================================================*/
+/* Table: DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL                    */
+/*==============================================================*/
+create table DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL (
+   DPMPA_CODIGO         numeric(10)          identity,
+   PMPA_CODIGO          numeric(10)          null,
+   MPPR_CODIGO          numeric(10)          null,
+   DPMPA_CANTIDAD       numeric(10)          null,
+   DPMPA_MES            varchar(10)          null,
+   constraint PK_DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL primary key nonclustered (DPMPA_CODIGO)
+)
+
+
 
 
 /* Marcelo: pibe cambie casi todos los campos codigos de cada tabla a identity, */

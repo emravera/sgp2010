@@ -392,3 +392,17 @@ alter table USUARIOS
 alter table USUARIOS
    add constraint usuario_rol_fk foreign key (ROL_CODIGO)
       references ROLES (ROL_CODIGO)
+
+
+/*--------AGREGADO 17/07/2010--------*/
+
+
+/*==============================================================*/
+/* Table: DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL                    */
+/*==============================================================*/
+alter table DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL
+   add constraint detalleMateriaPrimaAnual_materiaPrimaPrincipal_fk foreign key (MPPR_CODIGO)
+      references MATERIASPRIMASPRINCIPALES (MPPR_CODIGO)
+alter table DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL
+   add constraint detalleMateriaPrimaAnual_planMateriaPrimaAnual_fk foreign key (PMPA_CODIGO)
+      references PLANES_MATERIAS_PRIMAS_ANUALES (PMPA_CODIGO)
