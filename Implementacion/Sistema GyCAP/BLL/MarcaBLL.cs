@@ -62,7 +62,8 @@ namespace GyCAP.BLL
         //Actualización de los datos
         public static void Actualizar(Entidades.Marca marca)
         {
-            DAL.MarcaDAL.Actualizar(marca);
+            if (EsMarca(marca)) throw new Entidades.Excepciones.ElementoExistenteException();
+            else DAL.MarcaDAL.Actualizar(marca);
         }
 
     }

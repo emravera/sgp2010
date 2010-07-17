@@ -29,6 +29,9 @@ namespace GyCAP.UI.Soporte
             dgvLista.Columns.Add("MCA_CODIGO", "Código");
             dgvLista.Columns.Add("CLI_CODIGO", "Cliente");
             dgvLista.Columns.Add("MCA_NOMBRE", "Nombre");
+            dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["MCA_CODIGO"].DataPropertyName = "MCA_CODIGO";

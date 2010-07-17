@@ -55,7 +55,9 @@ namespace GyCAP.BLL
         //Actualización de los datos
         public static void Actualizar(Entidades.Sector sector)
         {
-            DAL.SectorDAL.Actualizar(sector);
+            //Si existe lanzamos la excepción correspondiente
+            if (EsSector(sector)) throw new Entidades.Excepciones.ElementoExistenteException();
+            else DAL.SectorDAL.Actualizar(sector);
         }
 
 

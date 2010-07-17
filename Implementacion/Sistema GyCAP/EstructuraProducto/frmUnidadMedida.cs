@@ -13,7 +13,7 @@ namespace GyCAP.UI.EstructuraProducto
     {
         private static frmUnidadMedida _frmUnidadMedida = null;
         private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
-        private DataView dvListaUnidad, dvComboUnidad;
+        private DataView dvListaUnidad, dvComboUnidad, dvComboBuscarUnidad;
         private enum estadoUI { inicio, nuevo, consultar, modificar, };
         private estadoUI estadoInterface;
 
@@ -28,11 +28,19 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns.Add("TUMED_CODIGO", "Tipo");
             dgvLista.Columns.Add("UMED_NOMBRE", "Nombre");
             dgvLista.Columns.Add("UMED_ABREVIATURA", "Abreviatura");
+
+            //Setemaos las columnas
+            dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
             dgvLista.Columns["TUMED_CODIGO"].DataPropertyName = "TUMED_CODIGO";
             dgvLista.Columns["UMED_NOMBRE"].DataPropertyName = "UMED_NOMBRE";
             dgvLista.Columns["UMED_ABREVIATURA"].DataPropertyName = "UMED_ABREVIATURA";
+
             //Llena el Dataset con Tipo Unidad Medida
             BLL.TipoUnidadMedidaBLL.ObtenerTodos(string.Empty, dsUnidadMedida);            
             //Creamos el dataview y lo asignamos a la grilla
@@ -50,12 +58,21 @@ namespace GyCAP.UI.EstructuraProducto
             cbTipo.DropDownStyle = ComboBoxStyle.DropDownList;
 
             //Combo de Datos
-            cbTipoUnidadDatos.DataSource = dvComboUnidad;
+            dvComboBuscarUnidad = new DataView(dsUnidadMedida.TIPOS_UNIDADES_MEDIDA);
+            cbTipo.DataSource = dvComboBuscarUnidad;
             cbTipoUnidadDatos.DisplayMember = "TUMED_NOMBRE";
             cbTipoUnidadDatos.ValueMember = "TUMED_CODIGO";
             //Para que el combo no quede selecionado cuando arranca y que sea una lista
             cbTipoUnidadDatos.SelectedIndex = -1;
             cbTipoUnidadDatos.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            //Se setean las caracteristicas de los textbox
+            txtNombre.MaxLength = 80;
+            txtAbreviatura.MaxLength = 10;
+
+
+            //Seteo busqueda de nombre por defecto
+            rbNombre.Checked = true;
 
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
@@ -153,15 +170,16 @@ namespace GyCAP.UI.EstructuraProducto
             }
 
         }
-       private void rbNombre_CheckedChanged(object sender, EventArgs e)
+        private void rbNombre_CheckedChanged_1(object sender, EventArgs e)
         {
-            cbTipo.SelectedIndex = -1;
-            cbTipo.Enabled = false;
             txtNombreBuscar.Enabled = true;
+            cbTipo.Enabled = false;
+            cbTipo.SelectedIndex = -1;
         }
 
-        private void rbTipo_CheckedChanged(object sender, EventArgs e)
+        private void rbTipo_CheckedChanged_1(object sender, EventArgs e)
         {
+            txtNombreBuscar.Text = string.Empty;
             txtNombreBuscar.Enabled = false;
             cbTipo.Enabled = true;
         }
@@ -232,7 +250,7 @@ namespace GyCAP.UI.EstructuraProducto
             txtCodigo.Text = codigoUnidad.ToString();
             txtNombre.Text = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigoUnidad).UMED_NOMBRE;
             txtAbreviatura.Text = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigoUnidad).UMED_ABREVIATURA;
-            cbTipo.SelectedValue = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigoUnidad).TUMED_CODIGO;
+            cbTipoUnidadDatos.SelectedValue = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigoUnidad).TUMED_CODIGO;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -399,18 +417,11 @@ namespace GyCAP.UI.EstructuraProducto
                     break;
             }
         }
-        //Método para evitar que se cierrre la pantalla con la X o con ALT+F4
-        private void frmUnidadMedida_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                e.Cancel = true;
-            }
-        }
-        
+           
        
         #endregion
 
+       
        
         
 
