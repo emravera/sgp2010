@@ -81,6 +81,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcConjunto.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -346,7 +348,7 @@
             this.gbDatos.Size = new System.Drawing.Size(572, 425);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
-            this.gbDatos.Text = "Datos Tipo Unidad de Medida";
+            this.gbDatos.Text = "Datos del conjunto";
             // 
             // panelImagen
             // 
@@ -391,6 +393,8 @@
             // panelAcciones
             // 
             this.panelAcciones.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelAcciones.Controls.Add(this.label7);
+            this.panelAcciones.Controls.Add(this.label6);
             this.panelAcciones.Controls.Add(this.btnRestar);
             this.panelAcciones.Controls.Add(this.btnSumar);
             this.panelAcciones.Controls.Add(this.btnDelete);
@@ -406,7 +410,7 @@
             this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Menos_25;
             this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRestar.Location = new System.Drawing.Point(23, 127);
+            this.btnRestar.Location = new System.Drawing.Point(43, 128);
             this.btnRestar.Name = "btnRestar";
             this.btnRestar.Size = new System.Drawing.Size(35, 35);
             this.btnRestar.TabIndex = 12;
@@ -420,7 +424,7 @@
             this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSumar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Mas_25;
             this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSumar.Location = new System.Drawing.Point(23, 84);
+            this.btnSumar.Location = new System.Drawing.Point(3, 128);
             this.btnSumar.Name = "btnSumar";
             this.btnSumar.Size = new System.Drawing.Size(35, 35);
             this.btnSumar.TabIndex = 11;
@@ -434,7 +438,7 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(23, 43);
+            this.btnDelete.Location = new System.Drawing.Point(43, 43);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(35, 35);
             this.btnDelete.TabIndex = 10;
@@ -448,7 +452,7 @@
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_25;
             this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNew.Location = new System.Drawing.Point(23, 2);
+            this.btnNew.Location = new System.Drawing.Point(3, 43);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(35, 35);
             this.btnNew.TabIndex = 9;
@@ -609,9 +613,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(38, 229);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 17);
+            this.label4.Size = new System.Drawing.Size(215, 17);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Subconjuntos";
+            this.label4.Text = "Subconjuntos que forman el conjunto";
             // 
             // tsMenu
             // 
@@ -701,6 +705,28 @@
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(2, 23);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(77, 17);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Subconjunto";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(12, 108);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(58, 17);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Cantidad";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmConjunto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -729,6 +755,7 @@
             this.panelImagen.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).EndInit();
             this.panelAcciones.ResumeLayout(false);
+            this.panelAcciones.PerformLayout();
             this.panelAgregar.ResumeLayout(false);
             this.panelAgregar.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -799,5 +826,7 @@
         private System.Windows.Forms.Button btnImagen;
         private System.Windows.Forms.PictureBox pbImagen;
         private System.Windows.Forms.OpenFileDialog ofdImagen;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
     }
 }

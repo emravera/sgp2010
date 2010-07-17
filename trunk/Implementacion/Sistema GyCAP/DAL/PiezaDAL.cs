@@ -21,10 +21,10 @@ namespace GyCAP.DAL
             Data.dsEstructura.PIEZASRow rowPieza = dsEstructura.PIEZAS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.PIEZASRow;
             object[] valorParametros = { rowPieza.PZA_CODIGO, rowPieza.TE_CODIGO, 0 };
 
-            string sqlInsertEstructura = @"INSERT INTO [MATERIASPRIMASXPIEZA] 
+            string sqlInsertEstructura = @"INSERT INTO [DETALLE_PIEZA] 
                                         ([pza_codigo]
                                         ,[mp_codigo]
-                                        ,[mp_cantidad])
+                                        ,[dpza_cantidad])
                                         VALUES (@p0, @p1, @p2) SELECT @@Identity";
 
             //Declaramos el objeto transaccion
@@ -39,17 +39,17 @@ namespace GyCAP.DAL
                 rowPieza.PZA_CODIGO = Convert.ToInt32(DB.executeScalar(sqlInsertPieza, valorParametros, transaccion));
                 rowPieza.EndEdit();
                 //Ahora insertamos su estructura, usamos el foreach para recorrer sólo los nuevos registros del dataset
-                foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow row in (Data.dsEstructura.MATERIASPRIMASXPIEZARow[])dsEstructura.MATERIASPRIMASXPIEZA.Select(null, null, System.Data.DataViewRowState.Added))
+                foreach (Data.dsEstructura.DETALLE_PIEZARow row in (Data.dsEstructura.DETALLE_PIEZARow[])dsEstructura.DETALLE_PIEZA.Select(null, null, System.Data.DataViewRowState.Added))
                 {
                     //Primero actualizamos el código de la pieza nueva en la tabla relacionada
                     row.BeginEdit();
                     row.PZA_CODIGO = rowPieza.PZA_CODIGO;
                     row.EndEdit();
                     //Asignamos los valores a los parámetros
-                    valorParametros = new object[] { row.PZA_CODIGO, row.MP_CODIGO, row.MP_CANTIDAD };
+                    valorParametros = new object[] { row.PZA_CODIGO, row.MP_CODIGO, row.DPZA_CANTIDAD };
                     //Ahora si insertamos en la bd y actualizamos el código de la relación
                     row.BeginEdit();
-                    row.MPXP_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertEstructura, valorParametros, transaccion));
+                    row.DPZA_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertEstructura, valorParametros, transaccion));
                     row.EndEdit();
                 }
                 //Todo ok, commit
@@ -86,16 +86,16 @@ namespace GyCAP.DAL
             //Armemos todas las consultas
             string sqlUpdatePieza = "UPDATE PIEZAS SET pza_nombre = @p0, te_codigo = @p1 WHERE pza_codigo = @p2";
 
-            string sqlInsertEstructura = @"INSERT INTO [MATERIASPRIMASXPIEZA] 
+            string sqlInsertEstructura = @"INSERT INTO [DETALLE_PIEZA] 
                                         ([pza_codigo]
                                         ,[mp_codigo]
-                                        ,[mp_cantidad])
+                                        ,[dpza_cantidad])
                                         VALUES (@p0, @p1, @p2) SELECT @@Identity";
 
-            string sqlUpdateEstructura = @"UPDATE MATERIASPRIMASXPIEZA SET mp_cantidad = @p0 
-                                          WHERE mpxp_codigo = @p0";
+            string sqlUpdateEstructura = @"UPDATE DETALLE_PIEZA SET dpza_cantidad = @p0 
+                                          WHERE dpza_codigo = @p0";
 
-            string sqlDeleteEstructura = "DELETE FROM MATERIASPRIMASXPIEZA WHERE mpxp_codigo = @p0";
+            string sqlDeleteEstructura = "DELETE FROM DETALLE_PIEZA WHERE dpza_codigo = @p0";
 
             //Así obtenemos la pieza del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.PIEZASRow rowPieza = dsEstructura.PIEZAS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.PIEZASRow;
@@ -112,26 +112,26 @@ namespace GyCAP.DAL
                 //Actualizamos la pieza
                 DB.executeNonQuery(sqlUpdatePieza, valorParametros, transaccion);
                 //Actualizamos la estructura, primero insertamos los nuevos
-                foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow row in (Data.dsEstructura.MATERIASPRIMASXPIEZARow[])dsEstructura.MATERIASPRIMASXPIEZA.Select(null, null, System.Data.DataViewRowState.Added))
+                foreach (Data.dsEstructura.DETALLE_PIEZARow row in (Data.dsEstructura.DETALLE_PIEZARow[])dsEstructura.DETALLE_PIEZA.Select(null, null, System.Data.DataViewRowState.Added))
                 {
-                    valorParametros = new object[] { row.PZA_CODIGO, row.MP_CODIGO, row.MP_CANTIDAD };
+                    valorParametros = new object[] { row.PZA_CODIGO, row.MP_CODIGO, row.DPZA_CANTIDAD };
                     row.BeginEdit();
-                    row.MPXP_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertEstructura, valorParametros, transaccion));
+                    row.DPZA_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertEstructura, valorParametros, transaccion));
                     row.EndEdit();
                 }
 
                 //Segundo actualizamos los modificados
-                foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow row in (Data.dsEstructura.MATERIASPRIMASXPIEZARow[])dsEstructura.MATERIASPRIMASXPIEZA.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
+                foreach (Data.dsEstructura.DETALLE_PIEZARow row in (Data.dsEstructura.DETALLE_PIEZARow[])dsEstructura.DETALLE_PIEZA.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
                 {
-                    valorParametros = new object[] { row.MP_CANTIDAD, row.MPXP_CODIGO };
+                    valorParametros = new object[] { row.DPZA_CANTIDAD, row.DPZA_CODIGO };
                     DB.executeScalar(sqlUpdateEstructura, valorParametros, transaccion);
                 }
 
                 //Tercero eliminamos
-                foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow row in (Data.dsEstructura.MATERIASPRIMASXPIEZARow[])dsEstructura.MATERIASPRIMASXPIEZA.Select(null, null, System.Data.DataViewRowState.Deleted))
+                foreach (Data.dsEstructura.DETALLE_PIEZARow row in (Data.dsEstructura.DETALLE_PIEZARow[])dsEstructura.DETALLE_PIEZA.Select(null, null, System.Data.DataViewRowState.Deleted))
                 {
                     //Como la fila está eliminada y no tiene datos, tenemos que acceder a la versión original
-                    valorParametros = new object[] { row["mpxp_codigo", System.Data.DataRowVersion.Original] };
+                    valorParametros = new object[] { row["dpza_codigo", System.Data.DataRowVersion.Original] };
                     Convert.ToDecimal(DB.executeScalar(sqlDeleteEstructura, valorParametros, transaccion));
                 }
 
@@ -255,15 +255,15 @@ namespace GyCAP.DAL
 
         public static bool PuedeEliminarse(int codigo)
         {
-            string sqlMPXP = "SELECT count(pza_codigo) FROM MATERIASPRIMASXPIEZA WHERE pza_codigo = @p0";
+            string sqlDPZA = "SELECT count(pza_codigo) FROM DETALLE_PIEZA WHERE pza_codigo = @p0";
             string sqlPXSC = "SELECT count(pza_codigo) FROM PIEZASXSUBCONJUNTO WHERE pza_codigo = @p0";
 
             object[] valorParametros = { codigo };
             try
             {
-                int resultadoMPXP = Convert.ToInt32(DB.executeScalar(sqlMPXP, valorParametros, null));
+                int resultadoDPZA = Convert.ToInt32(DB.executeScalar(sqlDPZA, valorParametros, null));
                 int resultadoPXSC = Convert.ToInt32(DB.executeScalar(sqlPXSC, valorParametros, null));
-                if ( resultadoMPXP == 0 && resultadoPXSC == 0)
+                if ( resultadoDPZA == 0 && resultadoPXSC == 0)
                 {
                     return true;
                 }
@@ -278,17 +278,17 @@ namespace GyCAP.DAL
         ////Obtiene todas las materias primas desde la BD por los que está formada la pieza
         public static void ObtenerEstructura(int codigoPieza, Data.dsEstructura ds)
         {
-            string sql = @"SELECT mpxp_codigo, pza_codigo, mp_codigo, mp_cantidad
-                         FROM MATERIASPRIMASXPIEZA WHERE pza_codigo = @p0";
+            string sql = @"SELECT dpza_codigo, pza_codigo, mp_codigo, dpza_cantidad
+                         FROM DETALLE_PIEZA WHERE pza_codigo = @p0";
             
             object[] valorParametros = { codigoPieza };
             try
             {
                 //Primero obtenemos la tabla intermedia
-                DB.FillDataSet(ds, "MATERIASPRIMASXPIEZA", sql, valorParametros);
+                DB.FillDataSet(ds, "DETALLE_PIEZA", sql, valorParametros);
                 //Ahora los datos de las materias primas que estén en la consulta anterior
                 Entidades.MateriaPrima materiaPrima = new GyCAP.Entidades.MateriaPrima();
-                foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow row in ds.MATERIASPRIMASXPIEZA)
+                foreach (Data.dsEstructura.DETALLE_PIEZARow row in ds.DETALLE_PIEZA)
                 {
                     //Como ya tenemos todos los códigos de las materias primas que necesitamos, directamente
                     //se los pedimos a MateriaPrimaDAL
