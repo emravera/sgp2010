@@ -67,12 +67,11 @@ create table COLORES (
 )
 
 /*==============================================================*/
-/* Table: CONJUNTOS                                             */
+/* Table: CONJUNTOS                                             */  /*-MODIFICACION 17/07/2010-*/
 /*==============================================================*/
 create table CONJUNTOS (
    CONJ_CODIGO          numeric(10)          identity,
    TE_CODIGO            numeric(10)          null,
-   CONJ_CANTIDAD        int                  null,
    CONJ_NOMBRE          varchar(50)          null,
    CONJ_CANTIDADSTOCK   int                  null,
    constraint PK_CONJUNTOS primary key nonclustered (CONJ_CODIGO)
@@ -113,14 +112,14 @@ create table DETALLE_DEMANDAS_ANUALES (
 /*-MODIFICACION 13/07/2010-*/
 
 /*==============================================================*/
-/* Table: DETALLE_MATERIA_PRIMA                                 */
+/* Table: DETALLE_PIEZA                                         */ /*-MODIFICACION 17/07/2010-*/
 /*==============================================================*/
-create table DETALLE_MATERIA_PRIMA (
-   DMAT_CODIGO            numeric(10)          identity,
-   MP_CODIGO           numeric(10)          null,
+create table DETALLE_PIEZA (
+   DPZA_CODIGO          numeric(10)          identity,
+   MP_CODIGO            numeric(10)          null,
    PZA_CODIGO           numeric(10)          null,
-   DMAT_CANTIDAD          int                  null,
-   constraint PK_DETALLE_MATERIA_PRIMA primary key nonclustered (DMAT_CODIGO)
+   DPZA_CANTIDAD        int                  null,
+   constraint PK_DETALLE_PIEZA primary key nonclustered (DPZA_CODIGO)
 )
 
 /*==============================================================*/
@@ -149,14 +148,14 @@ create table DETALLE_PEDIDOS (
 /*-MODIFICACION 12/07/2010-*/
 
 /*==============================================================*/
-/* Table: DETALLE_PIEZA                                         */
+/* Table: DETALLE_sUBCONJUNTO                                   */  /*-MODIFICACION 17/07/2010-*/
 /*==============================================================*/
-create table DETALLE_PIEZA (
-   DPZA_CODIGO          numeric(10)          identity,
-   PZA_CODIGO          numeric(10)          null,
+create table DETALLE_SUBCONJUNTO (
+   DSC_CODIGO           numeric(10)          identity,
+   PZA_CODIGO           numeric(10)          null,
    SCONJ_CODIGO         numeric(10)          null,
-   DSCJ_CANTIDAD        numeric(10)          null,
-   constraint PK_DETALLE_PIEZA primary key nonclustered (DPZA_CODIGO)
+   DSC_CANTIDAD         numeric(10)          null,
+   constraint PK_DETALLE_SUBCONJUNTO primary key nonclustered (DSC_CODIGO)
 )
 
 /*==============================================================*/
@@ -206,14 +205,14 @@ create table DETALLE_PLANES_SEMANALES (
 /*-MODIFICACION 12/07/2010-*/
 
 /*==============================================================*/
-/* Table: DETALLE_SUBCONJUNTO                                   */
+/* Table: DETALLE_CONJUNTO                                      */ /*-MODIFICACION 17/07/2010-*/
 /*==============================================================*/
-create table DETALLE_SUBCONJUNTO (
-   DSCJ_CODIGO          numeric(10)          identity,
+create table DETALLE_CONJUNTO (
+   DCJ_CODIGO           numeric(10)          identity,
    CONJ_CODIGO          numeric(10)          null,
    SCONJ_CODIGO         numeric(10)          null,
-   DSCJ_CANTIDAD        numeric(10)          null,
-   constraint PK_DETALLE_SUBCONJUNTO primary key nonclustered (DSCJ_CODIGO)
+   DCJ_CANTIDAD         numeric(10)          null,
+   constraint PK_DETALLE_CONJUNTO primary key nonclustered (DCJ_CODIGO)
 )
 
 /*==============================================================*/
@@ -344,6 +343,7 @@ create table ESTRUCTURAS (
    COC_CODIGO           numeric(10)          not null,            /*-MODIFICACION 09/07/2010-*/
    PNO_CODIGO           numeric(10)          not null,            /*-MODIFICACION 05/07/2010-*/
    CONJ_CODIGO          numeric(10)          not null,            /*-MODIFICACION 15/07/2010-*/
+   ESTR_CANTIDAD        numeric(10)          null,                /*-MODIFICACION 17/07/2010-*/
    constraint PK_ESTRUCTURAS primary key nonclustered (ESTR_CODIGO)
 )
 
@@ -427,13 +427,14 @@ create table MATERIASPRIMASPRINCIPALES (
 )
 
 /*==============================================================*/
-/* Table: MATERIASPRIMASXPIEZA                                  */
+/* Table: MATERIASPRIMASXESTRUCTURA                             */ /*-MODIFICACION 17/07/2010-*/
 /*==============================================================*/
-create table MATERIASPRIMASXPIEZA (
-   MPP_CODIGO           numeric(10)          identity,
-   PZA_CODIGO           numeric(10)          null,
+create table MATERIASPRIMASXESTRUCTURA (
+   MPE_CODIGO           numeric(10)          identity,
    MP_CODIGO            numeric(10)          null,
-   constraint PK_MATERIASPRIMASXPIEZA primary key nonclustered (MPP_CODIGO)
+   ESTR_CODIGO          numeric(10)          null,
+   MPE_CANTIDAD         numeric(10)          null,
+   constraint PK_MATERIASPRIMASXPIEZA primary key nonclustered (MPE_CODIGO)
 )
 
 /*==============================================================*/
@@ -480,25 +481,25 @@ create table PEDIDOS (
 )
 
 /*==============================================================*/
-/* Table: PIEZAS                                                */
+/* Table: PIEZAS                                                */ /*-MODIFICACION 17/07/2010-*/
 /*==============================================================*/
 create table PIEZAS (
    PZA_CODIGO           numeric(10)          identity,
    TE_CODIGO            numeric(10)          null,
-   PZA_CANTIDAD         int                  null,
    PZA_NOMBRE           varchar(25)          null,
    PZA_CANTIDADSTOCK    int                  null,
    constraint PK_PIEZAS primary key nonclustered (PZA_CODIGO)
 )
 
 /*==============================================================*/
-/* Table: PIEZASXSUBCONJUNTO                                    */
+/* Table: PIEZASXESTRUCTURA                                     */ /*-MODIFICACION 17/07/2010-*/
 /*==============================================================*/
-create table PIEZASXSUBCONJUNTO (
-   PXS_CODIGO           numeric(10)          identity,
-   SCONJ_CODIGO         numeric(10)          null,
+create table PIEZASXESTRUCTURA (
+   PXE_CODIGO           numeric(10)          identity,
+   ESTR_CODIGO          numeric(10)          null,
    PZA_CODIGO           numeric(10)          null,
-   constraint PK_PIEZASXSUBCONJUNTO primary key nonclustered (PXS_CODIGO)
+   PXE_CANTIDAD         numeric(10)          null,
+   constraint PK_PIEZASXESTRUCTURA primary key nonclustered (PXE_CODIGO)
 )
 
 /*==============================================================*/
@@ -610,25 +611,25 @@ create table SECTORES (
 )
 
 /*==============================================================*/
-/* Table: SUBCONJUNTOS                                          */
+/* Table: SUBCONJUNTOS                                          */ /*-MODIFICACION 17/07/2010-*/
 /*==============================================================*/
 create table SUBCONJUNTOS (
    SCONJ_CODIGO         numeric(10)          identity,
    TE_CODIGO            numeric(10)          null,
    SCONJ_NOMBRE         varchar(30)          null,
-   SCONJ_CANTIDAD       int                  null,
    SCONJ_CANTIDADSTOCK  int                  null,
    constraint PK_SUBCONJUNTOS primary key nonclustered (SCONJ_CODIGO)
 )
 
 /*==============================================================*/
-/* Table: SUBCONJUNTOSXCONJUNTOS                                */
+/* Table: SUBCONJUNTOSXESTRUCTURA                                */ /*-MODIFICACION 17/07/2010-*/
 /*==============================================================*/
-create table SUBCONJUNTOSXCONJUNTOS (
-   SXC_CODIGO           numeric(10)          identity,
-   CONJ_CODIGO          numeric(10)          null,
+create table SUBCONJUNTOSXESTRUCTURA (
+   SXE_CODIGO           numeric(10)          identity,
+   ESTR_CODIGO          numeric(10)          null,
    SCONJ_CODIGO         numeric(10)          null,
-   constraint PK_SUBCONJUNTOSXCONJUNTOS primary key nonclustered (SXC_CODIGO)
+   SXE_CANTIDAD         numeric(10)          null,
+   constraint PK_SUBCONJUNTOSXESTRUCTURA primary key nonclustered (SXE_CODIGO)
 )
 
 /*==============================================================*/
