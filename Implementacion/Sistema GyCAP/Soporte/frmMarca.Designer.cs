@@ -32,10 +32,9 @@
             this.cbClienteDatos = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.chboxCliente = new System.Windows.Forms.CheckBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
@@ -49,8 +48,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbNombre = new System.Windows.Forms.RadioButton();
-            this.rbCliente = new System.Windows.Forms.RadioButton();
             this.cbClienteBuscar = new System.Windows.Forms.ComboBox();
             this.lblClienteBuscar = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -73,10 +70,10 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(301, 23);
+            this.btnVolver.Location = new System.Drawing.Point(493, 23);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 25);
-            this.btnVolver.TabIndex = 10;
+            this.btnVolver.TabIndex = 5;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -88,12 +85,12 @@
             this.cbClienteDatos.Location = new System.Drawing.Point(99, 73);
             this.cbClienteDatos.Name = "cbClienteDatos";
             this.cbClienteDatos.Size = new System.Drawing.Size(170, 23);
-            this.cbClienteDatos.TabIndex = 7;
+            this.cbClienteDatos.TabIndex = 3;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 76);
+            this.label5.Location = new System.Drawing.Point(21, 76);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(51, 17);
             this.label5.TabIndex = 4;
@@ -101,12 +98,11 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.chboxCliente);
             this.gbDatos.Controls.Add(this.cbClienteDatos);
             this.gbDatos.Controls.Add(this.label5);
             this.gbDatos.Controls.Add(this.txtNombre);
-            this.gbDatos.Controls.Add(this.txtCodigo);
             this.gbDatos.Controls.Add(this.label3);
-            this.gbDatos.Controls.Add(this.label2);
             this.gbDatos.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbDatos.Location = new System.Drawing.Point(3, 3);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
@@ -116,45 +112,38 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Marcas";
             // 
+            // chboxCliente
+            // 
+            this.chboxCliente.AutoSize = true;
+            this.chboxCliente.Location = new System.Drawing.Point(78, 79);
+            this.chboxCliente.Name = "chboxCliente";
+            this.chboxCliente.Size = new System.Drawing.Size(15, 14);
+            this.chboxCliente.TabIndex = 2;
+            this.chboxCliente.UseVisualStyleBackColor = true;
+            this.chboxCliente.CheckStateChanged += new System.EventHandler(this.chboxCliente_CheckStateChanged);
+            // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(99, 119);
+            this.txtNombre.Location = new System.Drawing.Point(99, 33);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(170, 24);
-            this.txtNombre.TabIndex = 8;
-            // 
-            // txtCodigo
-            // 
-            this.txtCodigo.Location = new System.Drawing.Point(99, 32);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.ReadOnly = true;
-            this.txtCodigo.Size = new System.Drawing.Size(170, 24);
-            this.txtCodigo.TabIndex = 6;
+            this.txtNombre.TabIndex = 1;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 122);
+            this.label3.Location = new System.Drawing.Point(15, 36);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 17);
             this.label3.TabIndex = 1;
             this.label3.Text = "Nombre:";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 32);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 17);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Código:";
-            // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(199, 23);
+            this.btnGuardar.Location = new System.Drawing.Point(412, 23);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 25);
-            this.btnGuardar.TabIndex = 9;
+            this.btnGuardar.TabIndex = 4;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -295,8 +284,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.rbNombre);
-            this.groupBox1.Controls.Add(this.rbCliente);
             this.groupBox1.Controls.Add(this.cbClienteBuscar);
             this.groupBox1.Controls.Add(this.lblClienteBuscar);
             this.groupBox1.Controls.Add(this.btnBuscar);
@@ -310,33 +297,11 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
-            // rbNombre
-            // 
-            this.rbNombre.AutoSize = true;
-            this.rbNombre.Location = new System.Drawing.Point(6, 31);
-            this.rbNombre.Name = "rbNombre";
-            this.rbNombre.Size = new System.Drawing.Size(14, 13);
-            this.rbNombre.TabIndex = 6;
-            this.rbNombre.TabStop = true;
-            this.rbNombre.UseVisualStyleBackColor = true;
-            this.rbNombre.CheckedChanged += new System.EventHandler(this.rbNombre_CheckedChanged);
-            // 
-            // rbCliente
-            // 
-            this.rbCliente.AutoSize = true;
-            this.rbCliente.Location = new System.Drawing.Point(220, 30);
-            this.rbCliente.Name = "rbCliente";
-            this.rbCliente.Size = new System.Drawing.Size(14, 13);
-            this.rbCliente.TabIndex = 5;
-            this.rbCliente.TabStop = true;
-            this.rbCliente.UseVisualStyleBackColor = true;
-            this.rbCliente.CheckedChanged += new System.EventHandler(this.rbCliente_CheckedChanged);
-            // 
             // cbClienteBuscar
             // 
             this.cbClienteBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbClienteBuscar.FormattingEnabled = true;
-            this.cbClienteBuscar.Location = new System.Drawing.Point(297, 25);
+            this.cbClienteBuscar.Location = new System.Drawing.Point(268, 25);
             this.cbClienteBuscar.Name = "cbClienteBuscar";
             this.cbClienteBuscar.Size = new System.Drawing.Size(131, 23);
             this.cbClienteBuscar.TabIndex = 4;
@@ -344,7 +309,7 @@
             // lblClienteBuscar
             // 
             this.lblClienteBuscar.AutoSize = true;
-            this.lblClienteBuscar.Location = new System.Drawing.Point(240, 28);
+            this.lblClienteBuscar.Location = new System.Drawing.Point(211, 28);
             this.lblClienteBuscar.Name = "lblClienteBuscar";
             this.lblClienteBuscar.Size = new System.Drawing.Size(51, 17);
             this.lblClienteBuscar.TabIndex = 3;
@@ -365,7 +330,7 @@
             // 
             // txtNombreBuscar
             // 
-            this.txtNombreBuscar.Location = new System.Drawing.Point(90, 25);
+            this.txtNombreBuscar.Location = new System.Drawing.Point(77, 24);
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(112, 24);
             this.txtNombreBuscar.TabIndex = 2;
@@ -373,7 +338,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 29);
+            this.label1.Location = new System.Drawing.Point(13, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 17);
             this.label1.TabIndex = 1;
@@ -431,10 +396,11 @@
             this.ClientSize = new System.Drawing.Size(592, 366);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Calibri", 10F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmMarca";
             this.Text = "Marcas";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMarca_FormClosing);
+            this.Activated += new System.EventHandler(this.frmMarca_Activated);
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
             this.tsMenu.ResumeLayout(false);
@@ -459,8 +425,6 @@
         private System.Windows.Forms.ComboBox cbClienteDatos;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox gbDatos;
-        private System.Windows.Forms.TextBox txtCodigo;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStrip tsMenu;
@@ -474,8 +438,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgvLista;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rbNombre;
-        private System.Windows.Forms.RadioButton rbCliente;
         private System.Windows.Forms.ComboBox cbClienteBuscar;
         private System.Windows.Forms.Label lblClienteBuscar;
         private System.Windows.Forms.Button btnBuscar;
@@ -486,5 +448,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox chboxCliente;
     }
 }

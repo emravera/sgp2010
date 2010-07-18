@@ -11,65 +11,79 @@ namespace GyCAP.DAL
         //BUSQUEDA
         //Metodo sobrecargado (3 Sobrecargas)
         //Busqueda por nombre
-        public static void ObtenerMarca(string nombre, Data.dsMarca ds)
-        {
-            if (nombre != String.Empty)
-            {
-                string sql = @"SELECT mca_codigo, cli_codigo, mca_nombre
-                              FROM MARCAS
-                              WHERE mca_nombre LIKE @p0";
-                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
-                nombre = "%" + nombre + "%";
-                object[] valorParametros = { nombre };
-                try
-                {
-                    DB.FillDataSet(ds, "MARCAS", sql, valorParametros);
-                }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-            }
-        }
-        //Trae todos los elementos
-        public static void ObtenerMarca(Data.dsMarca ds)
-        {
-            string sql = "SELECT mca_codigo, cli_codigo, mca_nombre FROM MARCAS";
-            try
-            {
-                DB.FillDataSet(ds, "MARCAS", sql, null);
-            }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
-        //Busqueda por cliente
-        public static void ObtenerMarca(int idCliente, Data.dsMarca ds)
+        public static void ObtenerMarca(string nombre, int idCliente, Data.dsMarca ds)
         {
             string sql = @"SELECT mca_codigo, cli_codigo, mca_nombre
-                              FROM MARCAS
-                              WHERE cli_codigo=@p0";
+                              FROM MARCAS";
 
-            object[] valorParametros = { idCliente };
+            object[] valorParametros = { null };
+            object[] valoresPram = { null, null };
+
+            //Si busca solo por el nombre
+            if (nombre != String.Empty && idCliente == 0)
+            {
+                //Agrego la busqueda por nombre
+                sql = sql + " WHERE mca_nombre LIKE @p0";
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                nombre = "%" + nombre + "%";
+                valorParametros.SetValue(nombre, 0);
+            }
+            else if (nombre == string.Empty && idCliente != 0)
+            {
+                //Agrego la busqueda por marca
+                sql = sql + " WHERE cli_codigo=@p0";
+                valorParametros.SetValue(idCliente, 0);
+            }
+            else if (nombre != string.Empty && idCliente != 0)
+            {
+                //Agrego la busqueda por marca
+                sql = sql + " WHERE cli_codigo=@p0 and mca_nombre LIKE @p1";
+                nombre = "%" + nombre + "%";
+                //Le doy valores a la estructura
+                valoresPram.SetValue(idCliente, 0);
+                valoresPram.SetValue(nombre, 1);
+            }
+
+            //Ejecuto el comando a la BD
             try
             {
-                DB.FillDataSet(ds, "MARCAS", sql, valorParametros);
+                if (valorParametros.GetValue(0) == null && valoresPram.GetValue(0) == null)
+                {
+                    //Se ejcuta normalmente y por defecto trae todos los elementos de la DB
+                    DB.FillDataSet(ds, "MARCAS", sql, null);
+                }
+                else
+                {
+                    if (valoresPram.GetValue(0) == null)
+                    {
+                        DB.FillDataSet(ds, "MARCAS", sql, valorParametros);
+                    }
+                    else
+                    {
+                        DB.FillDataSet(ds, "MARCAS", sql, valoresPram);
+                    }
+                }
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        //Trae todos los elementos >> Dataset de Designacion
         public static void ObtenerMarca(Data.dsDesignacion ds)
         {
-            string sql = "SELECT mca_codigo, cli_codigo, mca_nombre FROM MARCAS";
+            string sql = @"SELECT mca_codigo, cli_codigo, mca_nombre
+                              FROM MARCAS";
             try
             {
+                //Se llena el Dataset
                 DB.FillDataSet(ds, "MARCAS", sql, null);
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
-
 
         //ELIMINACION
         //Metodo que verifica que no este usado en otro lugar
         public static bool PuedeEliminarse(int codigo)
         {
-            string sql = "SELECT count(mca_codigo) FROM DESIGNACION WHERE mca_codigo = @p0";
+            string sql = "SELECT count(mca_codigo) FROM DESIGNACIONES WHERE mca_codigo = @p0";
             object[] valorParametros = { codigo };
             try
             {
@@ -84,6 +98,7 @@ namespace GyCAP.DAL
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+
         //Metodo que elimina de la base de datos
         public static void Eliminar(int codigo)
         {
@@ -122,6 +137,11 @@ namespace GyCAP.DAL
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
             string sql = "INSERT INTO [MARCAS] ([cli_codigo], [mca_nombre]) VALUES (@p0, @p1) SELECT @@Identity";
             object[] valorParametros = { marca.Cliente.Codigo, marca.Nombre };
+            if (marca.Cliente.Codigo == 0)
+            {
+                valorParametros.SetValue(System.Data.SqlTypes.SqlInt32.Null , 0);
+            }
+            
             try
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
@@ -135,6 +155,10 @@ namespace GyCAP.DAL
         {
             string sql = "UPDATE MARCAS SET mca_nombre = @p0, cli_codigo = @p1 WHERE mca_codigo = @p2";
             object[] valorParametros = { marca.Nombre, marca.Cliente.Codigo, marca.Codigo };
+            if (marca.Cliente.Codigo == 0)
+            {
+                valorParametros.SetValue(System.Data.SqlTypes.SqlInt32.Null, 1);
+            }
             try
             {
                 DB.executeNonQuery(sql, valorParametros, null);

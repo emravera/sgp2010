@@ -11,48 +11,62 @@ namespace GyCAP.DAL
         //BUSQUEDA
         //Metodo sobrecargado (3 Sobrecargas)
         //Busqueda por nombre
-        public static void ObtenerDesignacion(string nombre, Data.dsDesignacion ds)
-        {
-            if (nombre != String.Empty)
-            {
-                string sql = @"SELECT desig_codigo, mca_codigo, desig_nombre, desig_descripcion
-                              FROM DESIGNACIONES
-                              WHERE desig_nombre LIKE @p0";
-                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
-                nombre = "%" + nombre + "%";
-                object[] valorParametros = { nombre };
-                try
-                {
-                    DB.FillDataSet(ds, "DESIGNACIONES", sql, valorParametros);
-                }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-            }
-        }
-        //Trae todos los elementos
-        public static void ObtenerDesignacion(Data.dsDesignacion ds)
-        {
-            string sql = @"SELECT desig_codigo, mca_codigo, desig_nombre, desig_descripcion 
-                           FROM DESIGNACIONES";
-            try
-            {
-                DB.FillDataSet(ds, "DESIGNACIONES", sql, null);
-            }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
-        //Busqueda por marca
-        public static void ObtenerDesignacion(int idMarca, Data.dsDesignacion ds)
+        public static void ObtenerDesignacion(string nombre, int idMarca, Data.dsDesignacion ds)
         {
             string sql = @"SELECT desig_codigo, mca_codigo, desig_nombre, desig_descripcion
-                              FROM DESIGNACIONES
-                              WHERE mca_codigo=@p0";
+                              FROM DESIGNACIONES";
 
-            object[] valorParametros = { idMarca };
-            try
+            object [] valorParametros = { null };
+            object[] valoresPram = { null, null };               
+
+            //Si busca solo por el nombre
+            if (nombre != String.Empty && idMarca == 0)
             {
-                DB.FillDataSet(ds, "DESIGNACIONES", sql, valorParametros);
+                //Agrego la busqueda por nombre
+                sql = sql + " WHERE desig_nombre LIKE @p0";
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                nombre = "%" + nombre + "%";
+                valorParametros.SetValue(nombre, 0);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
+            else if (nombre == string.Empty && idMarca != 0)
+            {
+                //Agrego la busqueda por marca
+                sql = sql + " WHERE mca_codigo=@p0";
+                valorParametros.SetValue(idMarca, 0);
+            }
+            else if (nombre != string.Empty && idMarca != 0)
+            {
+                //Agrego la busqueda por marca
+                sql = sql + " WHERE mca_codigo=@p0 and desig_nombre LIKE @p1";
+                nombre = "%" + nombre + "%";
+                //Le doy valores a la estructura
+                valoresPram.SetValue(idMarca, 0);
+                valoresPram.SetValue(nombre,1);
+            }
+
+            //Ejecuto el comando a la BD
+                try
+                {
+                    if (valorParametros.GetValue(0) == null && valoresPram.GetValue (0) == null)
+                    {
+                        //Se ejcuta normalmente y por defecto trae todos los elementos de la DB
+                        DB.FillDataSet(ds, "DESIGNACIONES", sql, null);
+                    }
+                    else
+                    {
+                        if (valoresPram.GetValue(0) == null)
+                        {
+                            DB.FillDataSet(ds, "DESIGNACIONES", sql, valorParametros);
+                        }
+                        else
+                        {
+                            DB.FillDataSet(ds, "DESIGNACIONES", sql, valoresPram);
+                        }
+                    }   
+                }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+          }
+            
 
         //ELIMINACION
         //Metodo que verifica que no este usado en otro lugar

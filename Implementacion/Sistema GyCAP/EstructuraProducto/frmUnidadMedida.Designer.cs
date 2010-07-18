@@ -30,15 +30,12 @@
         {
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcUnidadMedida = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbNombre = new System.Windows.Forms.RadioButton();
-            this.rbTipo = new System.Windows.Forms.RadioButton();
             this.cbTipo = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -53,7 +50,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cbTipoUnidadDatos = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.btnConsultar = new System.Windows.Forms.ToolStripButton();
@@ -75,7 +71,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(99, 74);
+            this.txtNombre.Location = new System.Drawing.Point(104, 44);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(170, 24);
             this.txtNombre.TabIndex = 7;
@@ -83,19 +79,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 77);
+            this.label3.Location = new System.Drawing.Point(20, 47);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 17);
             this.label3.TabIndex = 1;
             this.label3.Text = "Nombre:";
-            // 
-            // txtCodigo
-            // 
-            this.txtCodigo.Location = new System.Drawing.Point(99, 32);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.ReadOnly = true;
-            this.txtCodigo.Size = new System.Drawing.Size(170, 24);
-            this.txtCodigo.TabIndex = 6;
             // 
             // tableLayoutPanel1
             // 
@@ -172,8 +160,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.rbNombre);
-            this.groupBox1.Controls.Add(this.rbTipo);
             this.groupBox1.Controls.Add(this.cbTipo);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btnBuscar);
@@ -186,28 +172,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
-            // 
-            // rbNombre
-            // 
-            this.rbNombre.AutoSize = true;
-            this.rbNombre.Location = new System.Drawing.Point(6, 31);
-            this.rbNombre.Name = "rbNombre";
-            this.rbNombre.Size = new System.Drawing.Size(14, 13);
-            this.rbNombre.TabIndex = 6;
-            this.rbNombre.TabStop = true;
-            this.rbNombre.UseVisualStyleBackColor = true;
-            this.rbNombre.CheckedChanged += new System.EventHandler(this.rbNombre_CheckedChanged_1);
-            // 
-            // rbTipo
-            // 
-            this.rbTipo.AutoSize = true;
-            this.rbTipo.Location = new System.Drawing.Point(220, 31);
-            this.rbTipo.Name = "rbTipo";
-            this.rbTipo.Size = new System.Drawing.Size(14, 13);
-            this.rbTipo.TabIndex = 5;
-            this.rbTipo.TabStop = true;
-            this.rbTipo.UseVisualStyleBackColor = true;
-            this.rbTipo.CheckedChanged += new System.EventHandler(this.rbTipo_CheckedChanged_1);
             // 
             // cbTipo
             // 
@@ -282,7 +246,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(301, 23);
+            this.btnVolver.Location = new System.Drawing.Point(493, 23);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 23);
             this.btnVolver.TabIndex = 11;
@@ -292,7 +256,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(199, 23);
+            this.btnGuardar.Location = new System.Drawing.Point(412, 23);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 10;
@@ -307,9 +271,7 @@
             this.gbDatos.Controls.Add(this.cbTipoUnidadDatos);
             this.gbDatos.Controls.Add(this.label5);
             this.gbDatos.Controls.Add(this.txtNombre);
-            this.gbDatos.Controls.Add(this.txtCodigo);
             this.gbDatos.Controls.Add(this.label3);
-            this.gbDatos.Controls.Add(this.label2);
             this.gbDatos.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbDatos.Location = new System.Drawing.Point(3, 3);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
@@ -321,7 +283,7 @@
             // 
             // txtAbreviatura
             // 
-            this.txtAbreviatura.Location = new System.Drawing.Point(99, 160);
+            this.txtAbreviatura.Location = new System.Drawing.Point(104, 103);
             this.txtAbreviatura.Name = "txtAbreviatura";
             this.txtAbreviatura.Size = new System.Drawing.Size(170, 24);
             this.txtAbreviatura.TabIndex = 9;
@@ -329,7 +291,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(15, 163);
+            this.label6.Location = new System.Drawing.Point(20, 105);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 17);
             this.label6.TabIndex = 6;
@@ -339,7 +301,7 @@
             // 
             this.cbTipoUnidadDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoUnidadDatos.FormattingEnabled = true;
-            this.cbTipoUnidadDatos.Location = new System.Drawing.Point(99, 117);
+            this.cbTipoUnidadDatos.Location = new System.Drawing.Point(104, 74);
             this.cbTipoUnidadDatos.Name = "cbTipoUnidadDatos";
             this.cbTipoUnidadDatos.Size = new System.Drawing.Size(170, 23);
             this.cbTipoUnidadDatos.TabIndex = 8;
@@ -347,20 +309,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 120);
+            this.label5.Location = new System.Drawing.Point(20, 77);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 17);
             this.label5.TabIndex = 4;
             this.label5.Text = "Tipo Unidad:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 32);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 17);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Código:";
             // 
             // tsMenu
             // 
@@ -452,10 +405,11 @@
             this.ClientSize = new System.Drawing.Size(592, 366);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Calibri", 10F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmUnidadMedida";
             this.Text = "Unidades de Medidas";
-            this.Load += new System.EventHandler(this.frmUnidadMedida_Load);
+            this.Activated += new System.EventHandler(this.frmUnidadMedida_Activated);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tcUnidadMedida.ResumeLayout(false);
@@ -478,7 +432,6 @@
 
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TabControl tcUnidadMedida;
         private System.Windows.Forms.TabPage tpBuscar;
@@ -493,7 +446,6 @@
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.GroupBox gbDatos;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStrip tsMenu;
         private System.Windows.Forms.ToolStripButton btnNuevo;
         private System.Windows.Forms.ToolStripButton btnConsultar;
@@ -501,8 +453,6 @@
         private System.Windows.Forms.ToolStripButton btnEliminar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnSalir;
-        private System.Windows.Forms.RadioButton rbNombre;
-        private System.Windows.Forms.RadioButton rbTipo;
         private System.Windows.Forms.ComboBox cbTipo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtAbreviatura;
