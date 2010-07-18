@@ -33,34 +33,26 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
             dgvLista.Columns["TE_NOMBRE"].DataPropertyName = "TE_NOMBRE";
             dgvLista.Columns["TE_DESCRIPCION"].DataPropertyName = "TE_DESCRIPCION";
+            
+            //Oculta la columna que contiene los encabezados
+            dgvLista.RowHeadersVisible = false;
 
-            //Asignamos tamaño a las columnas
+            //Setemaos las columnas
             dgvLista.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-            dgvLista.AutoSize = true;
-            //dgvLista.Columns["TE_CODIGO"].Width = 40;
-            //dgvLista.Columns["TE_NOMBRE"].Width = 80;
-            //dgvLista.Columns["TE_DESCRIPCION"].Width = 120;
-            dgvLista.Columns["TE_CODIGO"].Visible = false;
-            dgvLista.AutoResizeColumns();
-            //dgvLista.
-            //dgvLista.AutoResizeRows();
+            dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
-
-            //LV
-            lv.View = View.Details;
-            lv.FullRowSelect = true;
-            lv.GridLines = true;
-            lv.LabelEdit = true;
-            lv.Columns.Clear();
-            lv.Items.Clear();
-            lv.Columns.Add ("Código", 0,  HorizontalAlignment.Right);
-            lv.Columns.Add("Nombre", 120, HorizontalAlignment.Left);
-            lv.Columns.Add("Descripción", 160, HorizontalAlignment.Left);
-
+            //Alineacion de los numeros y las fechas en la grilla
+            dgvLista.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvTerminacion = new DataView(dsTerminacion.TERMINACIONES);
             dgvLista.DataSource = dvTerminacion;
+
+            //Seteo el maxlenght de los textbox para que no de error en la bd
+            txtDescripcion.MaxLength = 250;
+            txtNombre.MaxLength = 80;
             
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
@@ -96,7 +88,6 @@ namespace GyCAP.UI.EstructuraProducto
                 case estadoUI.nuevo:
                     txtNombre.ReadOnly = false;
                     txtDescripcion.ReadOnly = false;
-                    txtCodigo.Text = String.Empty;
                     txtNombre.Text = String.Empty;
                     txtDescripcion.Text = string.Empty;
                     //gbGuardarCancelar.Enabled = true;
@@ -161,13 +152,13 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         //Evita que el formulario se cierre desde la cruz
-        private void frmTerminacion_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                e.Cancel = true;
-            }
-        }
+        //private void frmTerminacion_FormClosing(object sender, FormClosingEventArgs e)
+        //{
+        //    if (e.CloseReason == CloseReason.UserClosing)
+        //    {
+        //        e.Cancel = true;
+        //    }
+        //}
 
         #endregion
 
@@ -324,15 +315,6 @@ namespace GyCAP.UI.EstructuraProducto
                     MessageBox.Show("No se encontraron terminaciones con el nombre ingresado.");
                 }
 
-                foreach (DataRow  dt in dvTerminacion.Table.Rows)
-                {
-                    ListViewItem item = new ListViewItem(dt["TE_CODIGO"].ToString());
-                    item.SubItems.Add(dt["TE_NOMBRE"].ToString());
-                    item.SubItems.Add(dt["TE_DESCRIPCION"].ToString());
-
-                    lv.Items.Add(item);
-                }
-
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -349,7 +331,6 @@ namespace GyCAP.UI.EstructuraProducto
             if (e.RowIndex > 0)
             {
                 long codigoTerminacion = Convert.ToInt64(dvTerminacion[e.RowIndex]["te_codigo"]);
-                txtCodigo.Text = codigoTerminacion.ToString();
                 txtNombre.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_NOMBRE;
                 txtDescripcion.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_DESCRIPCION;
             }
@@ -366,7 +347,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void frmTerminacion_Activated(object sender, EventArgs e)
         {
-            if (tcABM.SelectedTab == tpBuscar) 
+            if (tcABM.SelectedTab == tpBuscar && txtNombreBuscar.Enabled == true) 
             {
                 txtNombreBuscar.Focus();
             }
