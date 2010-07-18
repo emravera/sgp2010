@@ -11,47 +11,62 @@ namespace GyCAP.DAL
        //BUSQUEDA
        //Metodo sobrecargado (3 Sobrecargas)
        //Busqueda por nombre
-        public static void ObtenerUnidad(string nombre, Data.dsUnidadMedida ds)
+        public static void ObtenerUnidad(string nombre, int idTipo, Data.dsUnidadMedida ds)
         {
-            if (nombre != String.Empty)
+            string sql = @"SELECT umed_codigo,tumed_codigo, umed_nombre, umed_abreviatura
+                              FROM UNIDADES_MEDIDA";
+
+            object[] valorParametros = { null };
+            object[] valoresPram = { null, null };
+
+            //Si busca solo por el nombre
+            if (nombre != String.Empty && idTipo == 0)
             {
-                string sql = @"SELECT umed_codigo,tumed_codigo, umed_nombre, umed_abreviatura
-                              FROM UNIDADES_MEDIDA
-                              WHERE umed_nombre LIKE @p0";
+                //Agrego la busqueda por nombre
+                sql = sql + " WHERE umed_nombre LIKE @p0";
                 //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
                 nombre = "%" + nombre + "%";
-                object[] valorParametros = { nombre };
-                try
-                {
-                    DB.FillDataSet(ds, "UNIDADES_MEDIDA", sql, valorParametros);
-                }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                valorParametros.SetValue(nombre, 0);
             }
-         }
-        //Trae todos los elementos
-        public static void ObtenerUnidad(Data.dsUnidadMedida ds)
-        {
-             string sql = "SELECT umed_codigo,tumed_codigo, umed_nombre, umed_abreviatura FROM UNIDADES_MEDIDA";
-             try
-             {
-                 DB.FillDataSet(ds, "UNIDADES_MEDIDA", sql, null);
-             }
-             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
-        //Busqueda por tipo de unidad
-        public static void ObtenerUnidad(int tipoUnidad, Data.dsUnidadMedida ds)
-        {
-                string sql = @"SELECT umed_codigo,tumed_codigo, umed_nombre, umed_abreviatura
-                              FROM UNIDADES_MEDIDA
-                              WHERE tumed_codigo=@p0";
-                
-                object[] valorParametros = { tipoUnidad };
-                try
+            else if (nombre == string.Empty && idTipo != 0)
+            {
+                //Agrego la busqueda por marca
+                sql = sql + " WHERE tumed_codigo=@p0";
+                valorParametros.SetValue(idTipo, 0);
+            }
+            else if (nombre != string.Empty && idTipo != 0)
+            {
+                //Agrego la busqueda por marca
+                sql = sql + " WHERE tumed_codigo=@p0 and umed_nombre LIKE @p1";
+                nombre = "%" + nombre + "%";
+                //Le doy valores a la estructura
+                valoresPram.SetValue(idTipo, 0);
+                valoresPram.SetValue(nombre, 1);
+            }
+
+            //Ejecuto el comando a la BD
+            try
+            {
+                if (valorParametros.GetValue(0) == null && valoresPram.GetValue(0) == null)
                 {
-                    DB.FillDataSet(ds, "UNIDADES_MEDIDA", sql, valorParametros);
+                    //Se ejcuta normalmente y por defecto trae todos los elementos de la DB
+                    DB.FillDataSet(ds, "UNIDADES_MEDIDA", sql, null);
                 }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                else
+                {
+                    if (valoresPram.GetValue(0) == null)
+                    {
+                        DB.FillDataSet(ds, "UNIDADES_MEDIDA", sql, valorParametros);
+                    }
+                    else
+                    {
+                        DB.FillDataSet(ds, "UNIDADES_MEDIDA", sql, valoresPram);
+                    }
+                }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+
         
         //ELIMINACION
         //Metodo que verifica que no este usado en otro lugar

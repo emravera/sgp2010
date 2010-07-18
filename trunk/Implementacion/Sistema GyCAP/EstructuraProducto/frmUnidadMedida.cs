@@ -59,7 +59,7 @@ namespace GyCAP.UI.EstructuraProducto
 
             //Combo de Datos
             dvComboBuscarUnidad = new DataView(dsUnidadMedida.TIPOS_UNIDADES_MEDIDA);
-            cbTipo.DataSource = dvComboBuscarUnidad;
+            cbTipoUnidadDatos.DataSource = dvComboBuscarUnidad;
             cbTipoUnidadDatos.DisplayMember = "TUMED_NOMBRE";
             cbTipoUnidadDatos.ValueMember = "TUMED_CODIGO";
             //Para que el combo no quede selecionado cuando arranca y que sea una lista
@@ -69,10 +69,8 @@ namespace GyCAP.UI.EstructuraProducto
             //Se setean las caracteristicas de los textbox
             txtNombre.MaxLength = 80;
             txtAbreviatura.MaxLength = 10;
+            txtNombreBuscar.MaxLength = 50;
 
-
-            //Seteo busqueda de nombre por defecto
-            rbNombre.Checked = true;
 
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
@@ -99,11 +97,6 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
 
-        private void frmUnidadMedida_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Dispose(true);
@@ -111,6 +104,7 @@ namespace GyCAP.UI.EstructuraProducto
 
 
         #region Pestaña Buscar
+
         private void btnBuscar_Click(object sender, EventArgs e)
         {
           try
@@ -118,33 +112,22 @@ namespace GyCAP.UI.EstructuraProducto
               //Limpiamos el Dataset
                 dsUnidadMedida.UNIDADES_MEDIDA.Clear();
 
-                if (rbNombre.Checked == true && txtNombreBuscar.Text!= string.Empty )
-                {
-                    BLL.UnidadMedidaBLL.ObtenerTodos(txtNombreBuscar.Text, dsUnidadMedida);
-                    
-                }
-                else if (rbTipo.Checked == true && cbTipo.SelectedIndex != -1)
-                {
-                    BLL.UnidadMedidaBLL.ObtenerTodos(Convert.ToInt32(cbTipo.SelectedValue), dsUnidadMedida);
-                }
-                else
-                {
-                    BLL.UnidadMedidaBLL.ObtenerTodos(dsUnidadMedida);
-                }
-                    
+                //Metodo para la busqueda con todos los parámetros
+                BLL.UnidadMedidaBLL.ObtenerTodos(txtNombreBuscar.Text, Convert.ToInt32(cbTipo.SelectedValue) ,dsUnidadMedida);
+                
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
                 dvListaUnidad.Table = dsUnidadMedida.UNIDADES_MEDIDA;
                 
                     if (dsUnidadMedida.UNIDADES_MEDIDA.Rows.Count == 0)
                     {
-                        MessageBox.Show("No se encontraron Unidades de Medida con el nombre ingresado.", "Aviso");
+                        MessageBox.Show("No se encontraron Unidades de Medida con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     SetInterface(estadoUI.inicio);
                }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error: Unidades de Medida - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetInterface(estadoUI.inicio);
             }
 
@@ -170,20 +153,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
 
         }
-        private void rbNombre_CheckedChanged_1(object sender, EventArgs e)
-        {
-            txtNombreBuscar.Enabled = true;
-            cbTipo.Enabled = false;
-            cbTipo.SelectedIndex = -1;
-        }
-
-        private void rbTipo_CheckedChanged_1(object sender, EventArgs e)
-        {
-            txtNombreBuscar.Text = string.Empty;
-            txtNombreBuscar.Enabled = false;
-            cbTipo.Enabled = true;
-        }
-
+       
         #endregion
 
         #region Pestaña Datos
@@ -215,7 +185,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar la Unidad de Medida seleccionado?", "Confirmar eliminación", MessageBoxButtons.YesNo);
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar la Unidad de Medida seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -230,24 +200,23 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Unidad de Medida de la lista.", "Aviso");
+                MessageBox.Show("Debe seleccionar una Unidad de Medida de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         //Metodo que carga los datos desde la grilla hacia a los controles 
         private void dgvLista_RowEnter_1(object sender, DataGridViewCellEventArgs e)
         {
             int codigoUnidad = Convert.ToInt32(dvListaUnidad[e.RowIndex]["umed_codigo"]);
-            txtCodigo.Text = codigoUnidad.ToString();
             txtNombre.Text = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigoUnidad).UMED_NOMBRE;
             txtAbreviatura.Text = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigoUnidad).UMED_ABREVIATURA;
             cbTipoUnidadDatos.SelectedValue = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigoUnidad).TUMED_CODIGO;
@@ -293,11 +262,11 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -328,19 +297,19 @@ namespace GyCAP.UI.EstructuraProducto
                         //Agregamos la fila al dataset y aceptamos los cambios
                         dsUnidadMedida.UNIDADES_MEDIDA.AcceptChanges();
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Aviso");
+                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe completar los datos.", "Aviso");
+                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -369,11 +338,13 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = hayDatos;
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
+                    txtNombreBuscar.Text = String.Empty;
+                    cbTipo.SelectedIndex = -1;
                     tcUnidadMedida.SelectedTab = tpBuscar;
+                    txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
                     txtNombre.ReadOnly = false;
-                    txtCodigo.Text = String.Empty;
                     txtNombre.Text = String.Empty;
                     txtAbreviatura.Text = String.Empty;
                     txtAbreviatura.ReadOnly = false;
@@ -387,6 +358,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
                     tcUnidadMedida.SelectedTab = tpDatos;
+                    txtNombre.Focus();
                     break;
                 case estadoUI.consultar:
                     txtNombre.ReadOnly = true;
@@ -420,6 +392,15 @@ namespace GyCAP.UI.EstructuraProducto
            
        
         #endregion
+
+        private void frmUnidadMedida_Activated(object sender, EventArgs e)
+        {
+            if (txtNombreBuscar.Enabled == true)
+            {
+                txtNombreBuscar.Focus();
+            }
+        }
+
 
        
        

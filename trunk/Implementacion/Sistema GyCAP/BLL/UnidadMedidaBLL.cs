@@ -10,19 +10,11 @@ namespace GyCAP.BLL
     {
         //Busqueda
         //Obtiene los datos de acuerdo a los criterios de busqueda
-        public static void ObtenerTodos(string nombre, Data.dsUnidadMedida ds)
+        public static void ObtenerTodos(string nombre, int idTipo, Data.dsUnidadMedida ds)
         {
-            DAL.UnidadMedidaDAL.ObtenerUnidad(nombre,ds);
+            DAL.UnidadMedidaDAL.ObtenerUnidad(nombre, idTipo, ds);
         }
-        public static void ObtenerTodos(int tipoUnidad, Data.dsUnidadMedida ds)
-        {
-            DAL.UnidadMedidaDAL.ObtenerUnidad(tipoUnidad, ds);
-        }
-        public static void ObtenerTodos(Data.dsUnidadMedida ds)
-        {
-            DAL.UnidadMedidaDAL.ObtenerUnidad(ds);
-        }
-
+        
         //Eliminacion
         public static void Eliminar(int codigo)
         {
@@ -58,9 +50,7 @@ namespace GyCAP.BLL
         //Actualización de los datos
         public static void Actualizar(Entidades.UnidadMedida unidadMedida)
         {
-            //Si existe lanzamos la excepción correspondiente
-            if (EsUnidadMedida(unidadMedida)) throw new Entidades.Excepciones.ElementoExistenteException();
-            else DAL.UnidadMedidaDAL.Actualizar(unidadMedida);
+            DAL.UnidadMedidaDAL.Actualizar(unidadMedida);
         }
 
     }

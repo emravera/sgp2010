@@ -61,7 +61,7 @@ namespace GyCAP.UI.EstructuraProducto
             cbMarcaBuscar.DisplayMember = "MCA_NOMBRE";
             cbMarcaBuscar.ValueMember = "MCA_CODIGO";
             //Para que el combo no quede selecionado cuando arranca y que sea una lista
-            cbMarcaBuscar.SelectedIndex = 0;
+            cbMarcaBuscar.SelectedIndex = -1;
             cbMarcaBuscar.DropDownStyle = ComboBoxStyle.DropDownList;
 
             //Combo de Datos
@@ -113,24 +113,10 @@ namespace GyCAP.UI.EstructuraProducto
                 //Limpiamos el Dataset
                 dsDesignacion.DESIGNACIONES.Clear();
 
-                if ( txtNombreBuscar.Text != string.Empty && cbMarcaBuscar.SelectedIndex == -1)
-                {
-                    BLL.DesignacionBLL.ObtenerTodos(txtNombreBuscar.Text, dsDesignacion);
+                //Se llama a la funcion de busqueda con todos los parametros
+                BLL.DesignacionBLL.ObtenerTodos(txtNombreBuscar.Text,Convert.ToInt32(cbMarcaBuscar.SelectedValue), dsDesignacion);
 
-                }
-                else if (cbMarcaBuscar.SelectedIndex != -1 && txtNombreBuscar.Text== string.Empty)
-                {
-                    BLL.DesignacionBLL.ObtenerTodos(Convert.ToInt32(cbMarcaBuscar.SelectedValue), dsDesignacion);
-                }
-                else if (cbMarcaBuscar.SelectedIndex != -1 && txtNombreBuscar.Text!= string.Empty)
-                {
-                    
-                }
-                else
-                {
-                    BLL.DesignacionBLL.ObtenerTodos(dsDesignacion);
-                }
-
+                               
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
                 dvListaDesignacion.Table = dsDesignacion.DESIGNACIONES;
@@ -140,12 +126,11 @@ namespace GyCAP.UI.EstructuraProducto
                    MessageBox.Show("No se encontraron Designaciones con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error: Designacion - Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetInterface(estadoUI.inicio);
             }
         }
@@ -167,23 +152,7 @@ namespace GyCAP.UI.EstructuraProducto
 
             }
         }
-        //Configuracion de los radio Buttons
-        private void rbNombre_CheckedChanged(object sender, EventArgs e)
-        {
-            cbMarcaBuscar.SelectedIndex = -1;
-            cbMarcaBuscar.Enabled = false;
-            txtNombreBuscar.Enabled = true;
-        }
-
-        private void rbMarca_CheckedChanged(object sender, EventArgs e)
-        {
-            txtNombreBuscar.Enabled = false;
-            txtNombreBuscar.Text = String.Empty;
-            cbMarcaBuscar.Enabled = true;
-        }
-
-
-        #endregion
+       #endregion
 
         #region Botones
         private void btnSalir_Click(object sender, EventArgs e)
@@ -239,7 +208,10 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = hayDatos;
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
+                    txtNombreBuscar.Text = string.Empty;
+                    cbMarcaBuscar.SelectedIndex = -1;
                     tcDesignacion.SelectedTab = tpBuscar;
+                    txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
                     txtNombre.ReadOnly = false;
@@ -256,6 +228,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
                     tcDesignacion.SelectedTab = tpDatos;
+                    cbMarcaDatos.Focus();
                     break;
                 case estadoUI.consultar:
                     txtNombre.ReadOnly = true;
@@ -335,6 +308,7 @@ namespace GyCAP.UI.EstructuraProducto
                 MessageBox.Show("Debe seleccionar una Designación de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information );
             }
         }
+        //Metodo que guarda los datos
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisamos que escribió algo y selecciono algo en el combo
@@ -382,11 +356,11 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -428,7 +402,7 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
 
@@ -449,9 +423,9 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 txtNombreBuscar.Focus();
             }
-
         }
 
+        
         
 
        

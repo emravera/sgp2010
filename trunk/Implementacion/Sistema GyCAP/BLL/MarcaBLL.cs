@@ -9,18 +9,11 @@ namespace GyCAP.BLL
     {
         //Busqueda
         //Obtiene los datos de acuerdo a los criterios de busqueda
-        public static void ObtenerTodos(string nombre, Data.dsMarca ds)
+        public static void ObtenerTodos(string nombre, int idCliente, Data.dsMarca ds)
         {
-            DAL.MarcaDAL.ObtenerMarca(nombre, ds);
+            DAL.MarcaDAL.ObtenerMarca(nombre, idCliente, ds);
         }
-        public static void ObtenerTodos(int idCliente, Data.dsMarca ds)
-        {
-            DAL.MarcaDAL.ObtenerMarca(idCliente, ds);
-        }
-        public static void ObtenerTodos(Data.dsMarca ds)
-        {
-            DAL.MarcaDAL.ObtenerMarca(ds);
-        }
+       
         //Metodo para usar desde el formulario de Designaciones (otro Dataset)
         public static void ObtenerTodos(Data.dsDesignacion ds)
         {
@@ -35,7 +28,7 @@ namespace GyCAP.BLL
             if (DAL.MarcaDAL.PuedeEliminarse(codigo))
             {
                 //Puede eliminarse
-                DAL.UnidadMedidaDAL.Eliminar(codigo);
+                DAL.MarcaDAL.Eliminar(codigo);
             }
             else
             {
@@ -62,8 +55,7 @@ namespace GyCAP.BLL
         //Actualización de los datos
         public static void Actualizar(Entidades.Marca marca)
         {
-            if (EsMarca(marca)) throw new Entidades.Excepciones.ElementoExistenteException();
-            else DAL.MarcaDAL.Actualizar(marca);
+            DAL.MarcaDAL.Actualizar(marca);
         }
 
     }

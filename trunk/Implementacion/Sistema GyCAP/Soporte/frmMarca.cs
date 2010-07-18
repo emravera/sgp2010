@@ -13,7 +13,7 @@ namespace GyCAP.UI.Soporte
     {
         private static frmMarca _frmMarca = null;
         private Data.dsMarca dsMarca = new GyCAP.Data.dsMarca();
-        private DataView dvListaMarca, dvComboMarca;
+        private DataView dvListaMarca, dvComboMarcaDatos, dvComboMarcaBuscar;
         private enum estadoUI { inicio, nuevo, consultar, modificar, };
         private estadoUI estadoInterface;
 
@@ -27,8 +27,10 @@ namespace GyCAP.UI.Soporte
             dgvLista.AutoGenerateColumns = false;
             //Agregamos las columnas
             dgvLista.Columns.Add("MCA_CODIGO", "Código");
-            dgvLista.Columns.Add("CLI_CODIGO", "Cliente");
             dgvLista.Columns.Add("MCA_NOMBRE", "Nombre");
+            dgvLista.Columns.Add("CLI_CODIGO", "Cliente");
+
+            //Se setean los valores de las columnas 
             dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -40,14 +42,16 @@ namespace GyCAP.UI.Soporte
             
             //Llena el Dataset con los clientes
             BLL.ClienteBLL.ObtenerTodos(dsMarca);
+
             //Creamos el dataview y lo asignamos a la grilla
             dvListaMarca = new DataView(dsMarca.MARCAS);
             dgvLista.DataSource = dvListaMarca;
 
             //CARGA DE COMBOS
+            //Combo de la Busqueda
             //Creamos el Dataview y se lo asignamos al combo
-            dvComboMarca = new DataView(dsMarca.CLIENTES);
-            cbClienteBuscar.DataSource = dvComboMarca;
+            dvComboMarcaBuscar = new DataView(dsMarca.CLIENTES);
+            cbClienteBuscar.DataSource = dvComboMarcaBuscar;
             cbClienteBuscar.DisplayMember = "CLI_RAZONSOCIAL";
             cbClienteBuscar.ValueMember = "CLI_CODIGO";
             //Para que el combo no quede selecionado cuando arranca y que sea una lista
@@ -55,16 +59,18 @@ namespace GyCAP.UI.Soporte
             cbClienteBuscar.DropDownStyle = ComboBoxStyle.DropDownList;
 
             //Combo de Datos
-            cbClienteDatos.DataSource = dvComboMarca;
+            dvComboMarcaDatos = new DataView(dsMarca.CLIENTES);
+            cbClienteDatos.DataSource = dvComboMarcaDatos;
             cbClienteDatos.DisplayMember = "CLI_RAZONSOCIAL";
             cbClienteDatos.ValueMember = "CLI_CODIGO";
             //Para que el combo no quede selecionado cuando arranca y que sea una lista
             cbClienteDatos.SelectedIndex = -1;
             cbClienteDatos.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            //Selecciono por defecto buscar por nombre
-            rbNombre.Checked = true;
-
+            //Seteo de los Maxlengt
+            txtNombreBuscar.MaxLength = 30;
+            txtNombre.MaxLength = 30;
+            
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
 
@@ -133,43 +139,24 @@ namespace GyCAP.UI.Soporte
                 //Limpiamos el Dataset
                 dsMarca.MARCAS.Clear();
 
-                if (rbNombre.Checked == true && txtNombreBuscar.Text != string.Empty)
-                {
-                    BLL.MarcaBLL.ObtenerTodos(txtNombreBuscar.Text, dsMarca);
-
-                }
-                else if (rbCliente.Checked == true && cbClienteBuscar.SelectedIndex != -1)
-                {
-                    BLL.MarcaBLL.ObtenerTodos(Convert.ToInt32(cbClienteBuscar.SelectedValue), dsMarca);
-                }
-                else
-                {
-                    BLL.MarcaBLL.ObtenerTodos(dsMarca);
-                }
-
+                //Llamamos al método de búsqueda de datos
+                BLL.MarcaBLL.ObtenerTodos(txtNombreBuscar.Text, Convert.ToInt32(cbClienteBuscar.SelectedValue), dsMarca);
+                
+             
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
                 dvListaMarca.Table = dsMarca.MARCAS;
 
                 if (dsMarca.MARCAS.Rows.Count == 0)
                 {
-                    if (rbNombre.Checked == true)
-                    {
-                        MessageBox.Show("No se encontraron Marcas con el nombre ingresado.", "Aviso");
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se encontraron Marcas del cliente seleccionado.", "Aviso");
-                    }
-                    
+                    MessageBox.Show("No se encontraron Marcas con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                            
-
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error: Marcas - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetInterface(estadoUI.inicio);
             }
         }
@@ -193,21 +180,6 @@ namespace GyCAP.UI.Soporte
             }
         }
 
-        //Configuracion de los radio Buttons
-        private void rbNombre_CheckedChanged(object sender, EventArgs e)
-        {
-            cbClienteDatos.SelectedIndex = -1;
-            cbClienteBuscar.Enabled = false;
-            txtNombreBuscar.Enabled = true;
-
-        }
-
-        private void rbCliente_CheckedChanged(object sender, EventArgs e)
-        {
-            txtNombreBuscar.Enabled = false;
-            txtNombreBuscar.Text = String.Empty;
-            cbClienteBuscar.Enabled = true;             
-        }
         #endregion
 
         #region Pestaña Datos
@@ -216,9 +188,17 @@ namespace GyCAP.UI.Soporte
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             int codigoMarca = Convert.ToInt32(dvListaMarca[e.RowIndex]["mca_codigo"]);
-            txtCodigo.Text = codigoMarca.ToString();
             txtNombre.Text = dsMarca.MARCAS.FindByMCA_CODIGO(codigoMarca).MCA_NOMBRE;
-            cbClienteDatos.SelectedValue = dsMarca.MARCAS.FindByMCA_CODIGO(codigoMarca).CLI_CODIGO;
+
+            try
+            {
+                cbClienteDatos.SelectedValue = dsMarca.MARCAS.FindByMCA_CODIGO(codigoMarca).CLI_CODIGO;
+            }
+            catch 
+            {
+                cbClienteDatos.SelectedIndex = -1;
+            }
+            
         }
 
         //Metodo para eliminar
@@ -228,7 +208,7 @@ namespace GyCAP.UI.Soporte
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar la Marca seleccionada?", "Confirmar eliminación", MessageBoxButtons.YesNo);
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar la Marca seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -243,25 +223,26 @@ namespace GyCAP.UI.Soporte
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Marca de la lista.", "Aviso");
+                MessageBox.Show("Debe seleccionar una Marca de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
 
       //Guardado de los Datos  
       private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisamos que escribió algo y selecciono algo en el combo
-            if (txtNombre.Text != String.Empty &&  cbClienteDatos.SelectedIndex != -1)
+            if (txtNombre.Text != String.Empty)
             {
                 Entidades.Marca marca = new GyCAP.Entidades.Marca();
                 Entidades.Cliente cli = new GyCAP.Entidades.Cliente();
@@ -271,16 +252,24 @@ namespace GyCAP.UI.Soporte
                 {
                     //Está cargando una marca nueva
                     marca.Nombre = txtNombre.Text;
-                    
-                   
-                    //Creo el objeto cliente y despues lo asigno
-                    //Busco el codigo del cliente
-                    int idCliente = Convert.ToInt32(cbClienteDatos.SelectedValue);
-                    cli.Codigo =Convert.ToInt32(dsMarca.CLIENTES.FindByCLI_CODIGO(idCliente).CLI_CODIGO);
-                    cli.RazonSocial = dsMarca.CLIENTES.FindByCLI_CODIGO(idCliente).CLI_RAZONSOCIAL;
-                    cli.Telefono = dsMarca.CLIENTES.FindByCLI_CODIGO(idCliente).CLI_TELEFONO;
-                    cli.FechaAlta = dsMarca.CLIENTES.FindByCLI_CODIGO(idCliente).CLI_FECHAALTA;
-                    
+
+                    if (cbClienteDatos.SelectedIndex != -1)
+                    {
+                        //Es una marca con el cliente asociado
+                        //Creo el objeto cliente y despues lo asigno
+                        //Busco el codigo del cliente
+                        int idCliente = Convert.ToInt32(cbClienteDatos.SelectedValue);
+                        cli.Codigo = Convert.ToInt32(dsMarca.CLIENTES.FindByCLI_CODIGO(idCliente).CLI_CODIGO);
+                        cli.RazonSocial = dsMarca.CLIENTES.FindByCLI_CODIGO(idCliente).CLI_RAZONSOCIAL;
+                        cli.Telefono = dsMarca.CLIENTES.FindByCLI_CODIGO(idCliente).CLI_TELEFONO;
+                        cli.FechaAlta = dsMarca.CLIENTES.FindByCLI_CODIGO(idCliente).CLI_FECHAALTA;
+                    }
+                    else 
+                    {
+                        //Es una Marca que no tiene cliente asociado
+                        cli.Codigo = 0;
+                    }
+
                     //Asigno el cliente creado a cliente de la marca
                     marca.Cliente = cli;
                     
@@ -294,7 +283,10 @@ namespace GyCAP.UI.Soporte
                         rowMarcas.BeginEdit();
                         rowMarcas.MCA_CODIGO = marca.Codigo;
                         rowMarcas.MCA_NOMBRE = marca.Nombre;
-                        rowMarcas.CLI_CODIGO = marca.Cliente.Codigo;
+                        if (marca.Cliente.Codigo != 0)
+                        {
+                            rowMarcas.CLI_CODIGO = marca.Cliente.Codigo;
+                        }
                         //Termina la edición de la fila
                         rowMarcas.EndEdit();
                         //Agregamos la fila al dataset y aceptamos los cambios
@@ -320,13 +312,20 @@ namespace GyCAP.UI.Soporte
                     //Segundo obtenemos los nuevos datos que ingresó el usuario
                     marca.Nombre = txtNombre.Text;
 
-                    //Creo el objeto cliente
-                    int idCliente = Convert.ToInt32(cbClienteDatos.SelectedValue);
-                    cli.Codigo = Convert.ToInt32(dsMarca.CLIENTES.FindByCLI_CODIGO(idCliente).CLI_CODIGO);
-                    cli.RazonSocial = dsMarca.CLIENTES.FindByCLI_CODIGO(idCliente).CLI_RAZONSOCIAL;
-                    cli.Telefono = dsMarca.CLIENTES.FindByCLI_CODIGO(idCliente).CLI_TELEFONO;
-                    cli.FechaAlta = dsMarca.CLIENTES.FindByCLI_CODIGO(idCliente).CLI_FECHAALTA;
-                    
+                    if (cbClienteDatos.SelectedIndex != -1 && chboxCliente.Checked == true)
+                    {
+                        //Creo el objeto cliente
+                        int idCliente = Convert.ToInt32(cbClienteDatos.SelectedValue);
+                        cli.Codigo = Convert.ToInt32(dsMarca.CLIENTES.FindByCLI_CODIGO(idCliente).CLI_CODIGO);
+                        cli.RazonSocial = dsMarca.CLIENTES.FindByCLI_CODIGO(idCliente).CLI_RAZONSOCIAL;
+                        cli.Telefono = dsMarca.CLIENTES.FindByCLI_CODIGO(idCliente).CLI_TELEFONO;
+                        cli.FechaAlta = dsMarca.CLIENTES.FindByCLI_CODIGO(idCliente).CLI_FECHAALTA;
+                    }
+                    else
+                    {
+                        cli.Codigo = 0;
+                    }
+
                     //Asigno el cliente creado a cliente de la marca
                     marca.Cliente = cli;
 
@@ -339,7 +338,11 @@ namespace GyCAP.UI.Soporte
                         //Indicamos que comienza la edición de la fila
                         rowMarca.BeginEdit();
                         rowMarca.MCA_NOMBRE = marca.Nombre;
-                        rowMarca.CLI_CODIGO = marca.Cliente.Codigo;
+                        if (marca.Cliente.Codigo != 0)
+                        {
+                            rowMarca.CLI_CODIGO = marca.Cliente.Codigo;
+                        }
+
                         //Termina la edición de la fila
                         rowMarca.EndEdit();
                         //Agregamos la fila al dataset y aceptamos los cambios
@@ -354,6 +357,8 @@ namespace GyCAP.UI.Soporte
                         MessageBox.Show(ex.Message);
                     }
                 }
+                //Actualizamos la lista con las modificaciones
+                dgvLista.Refresh();
             }
             else
             {
@@ -361,8 +366,7 @@ namespace GyCAP.UI.Soporte
             }
         }
 
-
-        #endregion
+     #endregion
 
 
 
@@ -389,13 +393,14 @@ namespace GyCAP.UI.Soporte
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcMarca.SelectedTab = tpBuscar;
+                    txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
                     txtNombre.ReadOnly = false;
-                    txtCodigo.Text = String.Empty;
                     txtNombre.Text = String.Empty;
-                    cbClienteDatos.Enabled = true;
+                    cbClienteDatos.Enabled = false;
                     cbClienteDatos.SelectedIndex = -1;
+                    chboxCliente.Visible = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -404,10 +409,12 @@ namespace GyCAP.UI.Soporte
                     btnModificar.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
                     tcMarca.SelectedTab = tpDatos;
+                    txtNombre.Focus();
                     break;
                 case estadoUI.consultar:
                     txtNombre.ReadOnly = true;
                     cbClienteDatos.Enabled = false;
+                    chboxCliente.Visible = false;
                     btnGuardar.Enabled = false;
                     btnModificar.Enabled = true;
                     btnEliminar.Enabled = true;
@@ -418,7 +425,7 @@ namespace GyCAP.UI.Soporte
                     break;
                 case estadoUI.modificar:
                     txtNombre.ReadOnly = false;
-                    cbClienteDatos.Enabled = true;
+                    chboxCliente.Visible = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -427,23 +434,48 @@ namespace GyCAP.UI.Soporte
                     btnModificar.Enabled = false;
                     estadoInterface = estadoUI.modificar;
                     tcMarca.SelectedTab = tpDatos;
+                   
+                    if (cbClienteDatos.SelectedIndex != -1)
+                    {
+                        chboxCliente.Checked = true;
+                        cbClienteDatos.Enabled = true;
+                    }
+                    else chboxCliente.Checked = false;
                     break;
                 default:
                     break;
             }
         }
 
-        //Método para evitar que se cierrre la pantalla con la X o con ALT+F4
-        private void frmMarca_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                e.Cancel = true;
-            }
-
-        }
+        
         
 #endregion
+
+        private void frmMarca_Activated(object sender, EventArgs e)
+        {
+            if (txtNombreBuscar.Enabled == true)
+            {
+                txtNombreBuscar.Focus();
+            }
+        }
+
+        private void chboxCliente_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (chboxCliente.Checked == true)
+            {
+                cbClienteDatos.Enabled = true;
+            }
+            else
+            {
+                cbClienteDatos.Enabled = false;
+                if (estadoInterface != estadoUI.modificar)
+                {
+                    cbClienteDatos.SelectedIndex = -1;
+                }
+            }
+        }
+
+        
 
         
         

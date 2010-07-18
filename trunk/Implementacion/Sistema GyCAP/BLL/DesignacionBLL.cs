@@ -9,21 +9,9 @@ namespace GyCAP.BLL
     {
         //Busqueda
         //Obtiene los datos de acuerdo a los criterios de busqueda
-        public static void ObtenerTodos(string nombre, Data.dsDesignacion ds)
+        public static void ObtenerTodos(string nombre, int idMarca, Data.dsDesignacion ds)
         {
-            DAL.DesignacionDAL.ObtenerDesignacion(nombre, ds);
-        }
-        public static void ObtenerTodos(int idMarca, Data.dsDesignacion ds)
-        {
-            DAL.DesignacionDAL.ObtenerDesignacion(idMarca, ds);
-        }
-        /*public static void ObtenerTodos(int idMarca, string  Data.dsDesignacion ds)
-        {
-            DAL.DesignacionDAL.ObtenerDesignacion(idMarca, ds);
-        }*/
-        public static void ObtenerTodos(Data.dsDesignacion ds)
-        {
-            DAL.DesignacionDAL.ObtenerDesignacion(ds);
+            DAL.DesignacionDAL.ObtenerDesignacion(nombre, idMarca, ds);
         }
 
         //Eliminacion
