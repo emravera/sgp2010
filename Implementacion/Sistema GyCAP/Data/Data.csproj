@@ -46,6 +46,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="dsCapacidadEmpleado.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsCapacidadEmpleado.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsColor.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -95,6 +100,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="dsCapacidadEmpleado.xsc">
+      <DependentUpon>dsCapacidadEmpleado.xsd</DependentUpon>
+    </None>
+    <None Include="dsCapacidadEmpleado.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsCapacidadEmpleado.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsCapacidadEmpleado.xss">
+      <DependentUpon>dsCapacidadEmpleado.xsd</DependentUpon>
+    </None>
     <None Include="dsColor.xsc">
       <DependentUpon>dsColor.xsd</DependentUpon>
     </None>
