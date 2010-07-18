@@ -205,17 +205,19 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        //MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        //MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una terminación de la lista.", "Aviso");
+                MessageBox.Show("Debe seleccionar una " + this.Text + " de la lista.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -289,10 +291,12 @@ namespace GyCAP.UI.EstructuraProducto
                         MessageBox.Show(ex.Message);
                     }
                 }
+                //recarga de la grilla
+                dgvLista.Refresh();
             }
             else
             {
-                MessageBox.Show("Debe completar los datos.", "Aviso");
+                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -339,7 +343,7 @@ namespace GyCAP.UI.EstructuraProducto
         //Evento doble clic en la grilla, es igual que si hiciera clic en Consultar
         private void dgvLista_DoubleClick(object sender, EventArgs e)
         {
-            if (dsTerminacion.TERMINACIONES.Rows.Count == 0)
+            if (dsTerminacion.TERMINACIONES.Rows.Count != 0)
             {
                 btnConsultar.PerformClick();
             }   
