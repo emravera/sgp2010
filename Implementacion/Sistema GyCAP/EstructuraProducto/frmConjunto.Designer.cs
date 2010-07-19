@@ -194,7 +194,8 @@
             this.dgvConjuntos.Size = new System.Drawing.Size(556, 363);
             this.dgvConjuntos.TabIndex = 0;
             this.dgvConjuntos.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConjuntos_RowEnter);
-            this.dgvConjuntos.DoubleClick += new System.EventHandler(this.dgvListaConjuntos_DoubleClick);
+            this.dgvConjuntos.DoubleClick += new System.EventHandler(this.dgvConjuntos_DoubleClick);
+            this.dgvConjuntos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvConjuntos_CellFormatting);
             // 
             // groupBox1
             // 
@@ -246,7 +247,7 @@
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(88, 30);
             this.btnBuscar.TabIndex = 5;
-            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.Text = "&Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
