@@ -22,10 +22,8 @@ namespace Principal
 
         private void ShowNewForm(object sender, EventArgs e)
         {
-            Form childForm = new Form();
-            childForm.MdiParent = this;
-            childForm.Text = "Window " + childFormNumber++;
-            childForm.Show();
+            GyCAP.UI.EstructuraProducto.frmEstructuraProducto.Instancia.MdiParent = this;
+            GyCAP.UI.EstructuraProducto.frmEstructuraProducto.Instancia.Show();
         }
 
         private void OpenFile(object sender, EventArgs e)
