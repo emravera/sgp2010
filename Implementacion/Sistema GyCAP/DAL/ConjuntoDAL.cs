@@ -8,15 +8,7 @@ namespace GyCAP.DAL
 {
     public class ConjuntoDAL
     {
-        /// <summary>
-        /// Valor que indica que no se desea filtrar por nombre de conjunto.
-        /// </summary>
-        public static readonly int NoFiltrarTerminacion = -1;
-        /// <summary>
-        /// Valor que indica que no se desea filtrar por cósigo de terminación de conjunto.
-        /// </summary>
-        public static readonly string NoFiltrarNombre = string.Empty;
-        
+               
         public static void Insertar(Data.dsEstructura dsEstructura)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo

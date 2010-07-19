@@ -9,14 +9,6 @@ namespace GyCAP.BLL
     public class ConjuntoBLL
     {
         /// <summary>
-        /// Valor que indica que no se desea filtrar por nombre de conjunto.
-        /// </summary>
-        public static readonly int NoFiltrarTerminacion = -1;
-        /// <summary>
-        /// Valor que indica que no se desea filtrar por cósigo de terminación de conjunto.
-        /// </summary>
-        public static readonly string NoFiltrarNombre = string.Empty;
-        /// <summary>
         /// Setea el directorio que contiene las imágenes de los conjuntos en base al directorio en que
         /// se está ejecutando la aplicación.
         /// </summary>
