@@ -21,6 +21,9 @@ namespace GyCAP.UI.EstructuraProducto
         {
             InitializeComponent();
             
+            //Setea el nombre de la Lista
+            gpbLista.Text = "Listado de " + this.Text;
+
             //Para que no genere las columnas automáticamente
             dgvLista.AutoGenerateColumns = false;
             
@@ -316,7 +319,7 @@ namespace GyCAP.UI.EstructuraProducto
                 dvTerminacion.Table = dsTerminacion.TERMINACIONES;
                 if (dsTerminacion.TERMINACIONES.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron terminaciones con el nombre ingresado.");
+                    MessageBox.Show("No se encontraron terminaciones con el nombre ingresado.","Aviso",MessageBoxButtons.OK ,MessageBoxIcon.Information );
                 }
 
                 SetInterface(estadoUI.inicio);

@@ -7,5 +7,42 @@ namespace GyCAP.BLL
 {
     public class CapacidadEmpleadoBLL
     {
+        public static int Insertar(Entidades.CapacidadEmpleado capacidadEmpleado)
+        {
+            //Si existe lanzamos la excepción correspondiente
+            if (EsCapacidadEmpleado(capacidadEmpleado)) throw new Entidades.Excepciones.ElementoExistenteException();
+            //Como no existe lo creamos
+            return DAL.CapacidadEmpleadoDAL.Insertar(capacidadEmpleado);
+        }
+
+        public static void Eliminar(int codigo)
+        {
+            //Revisamos que no esté en alguna transacción
+            if (DAL.CapacidadEmpleadoDAL.PuedeEliminarse(codigo))
+            {
+                //Puede eliminarse
+                DAL.CapacidadEmpleadoDAL.Eliminar(codigo);
+            }
+            else
+            {
+                //No puede eliminarse, lanzamos nuestra excepción
+                throw new Entidades.Excepciones.ElementoEnTransaccionException();
+            }
+        }
+
+        public static void Actualizar(Entidades.CapacidadEmpleado capacidadEmpleado)
+        {
+            DAL.CapacidadEmpleadoDAL.Actualizar(capacidadEmpleado);
+        }
+
+        public static bool EsCapacidadEmpleado(Entidades.CapacidadEmpleado capacidadEmpleado)
+        {
+            return DAL.CapacidadEmpleadoDAL.EsCapacidadEmpleado(capacidadEmpleado);
+        }
+
+        public static void ObtenerTodos(string nombre, Data.dsCapacidadEmpleado dsCapacidadEmpleado)
+        {
+            DAL.CapacidadEmpleadoDAL.ObtenerCapacidadEmpleado(nombre, dsCapacidadEmpleado);
+        }
     }
 }

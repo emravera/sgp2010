@@ -42,7 +42,7 @@
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gpbLista = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -55,7 +55,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tsMenu.SuspendLayout();
             this.gbDatos.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gpbLista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             this.tpBuscar.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -219,17 +219,17 @@
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // groupBox2
+            // gpbLista
             // 
-            this.groupBox2.Controls.Add(this.dgvLista);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(3, 80);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox2.Size = new System.Drawing.Size(574, 213);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Listado de Tipo de Unidad de Medida";
+            this.gpbLista.Controls.Add(this.dgvLista);
+            this.gpbLista.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.gpbLista.Location = new System.Drawing.Point(3, 80);
+            this.gpbLista.Name = "gpbLista";
+            this.gpbLista.Padding = new System.Windows.Forms.Padding(10);
+            this.gpbLista.Size = new System.Drawing.Size(574, 213);
+            this.gpbLista.TabIndex = 1;
+            this.gpbLista.TabStop = false;
+            this.gpbLista.Text = "Listado";
             // 
             // dgvLista
             // 
@@ -248,7 +248,7 @@
             // 
             // tpBuscar
             // 
-            this.tpBuscar.Controls.Add(this.groupBox2);
+            this.tpBuscar.Controls.Add(this.gpbLista);
             this.tpBuscar.Controls.Add(this.groupBox1);
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
@@ -374,7 +374,7 @@
             this.tsMenu.PerformLayout();
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            this.gpbLista.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
             this.tpBuscar.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -403,7 +403,7 @@
         private System.Windows.Forms.ToolStripButton btnSalir;
         private System.Windows.Forms.GroupBox gbDatos;
         private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gpbLista;
         private System.Windows.Forms.DataGridView dgvLista;
         private System.Windows.Forms.TabPage tpBuscar;
         private System.Windows.Forms.GroupBox groupBox1;
