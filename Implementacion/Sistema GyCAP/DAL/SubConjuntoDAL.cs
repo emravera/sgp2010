@@ -14,12 +14,13 @@ namespace GyCAP.DAL
             string sqlInsertSubconjunto = @"INSERT INTO [SUBCONJUNTOS]
                                         ([sconj_nombre]
                                         ,[te_codigo]
+                                        ,[sconj_descripcion]
                                         ,[sconj_cantidadstock]) 
-                                        VALUES (@p0,@p1,@p2) SELECT @@Identity";
+                                        VALUES (@p0,@p1,@p2,@p3) SELECT @@Identity";
 
             //Así obtenemos el subconjunto nuevo del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto = dsEstructura.SUBCONJUNTOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.SUBCONJUNTOSRow;
-            object[] valorParametros = { rowSubconjunto.SCONJ_CODIGO, rowSubconjunto.TE_CODIGO, 0 };
+            object[] valorParametros = { rowSubconjunto.SCONJ_CODIGO, rowSubconjunto.TE_CODIGO, rowSubconjunto.SCONJ_DESCRIPCION,0 };
 
             string sqlInsertEstructura = @"INSERT INTO [DETALLE_SUBCONJUNTO] 
                                         ([sconj_codigo]
@@ -84,7 +85,11 @@ namespace GyCAP.DAL
             //Esto va a ser muy largo...empecemos
             //Primero actualizaremos el subconjunto y luego la estructura
             //Armemos todas las consultas
-            string sqlUpdateSubconjunto = "UPDATE SUBCONJUNTOS SET sconj_nombre = @p0, te_codigo = @p1 WHERE sconj_codigo = @p2";
+            string sqlUpdateSubconjunto = @"UPDATE SUBCONJUNTOS SET
+                                            sconj_nombre = @p0
+                                           ,te_codigo = @p1
+                                           ,sconj_descripcion = @p2
+                                            WHERE sconj_codigo = @p3";
 
             string sqlInsertEstructura = @"INSERT INTO [DETALLE_SUBCONJUNTO] 
                                         ([sconj_codigo]
@@ -99,7 +104,7 @@ namespace GyCAP.DAL
 
             //Así obtenemos el subconjunto del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto = dsEstructura.SUBCONJUNTOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.SUBCONJUNTOSRow;
-            object[] valorParametros = { rowSubconjunto.SCONJ_NOMBRE, rowSubconjunto.TE_CODIGO, rowSubconjunto.SCONJ_CODIGO };
+            object[] valorParametros = { rowSubconjunto.SCONJ_NOMBRE, rowSubconjunto.TE_CODIGO, rowSubconjunto.SCONJ_DESCRIPCION, rowSubconjunto.SCONJ_CODIGO };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
@@ -163,7 +168,53 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static void ObtenerSubconjuntos(Data.dsEstructura ds)
+        public static void ObtenerSubconjuntos(object nombre, object terminacion, Data.dsEstructura ds)
+        {
+            string sql = "SELECT sconj_codigo, sconj_nombre, te_codigo, sconj_descripcion, sconj_cantidadstock FROM SUBCONJUNTOS ";
+
+            //Sirve para armar el nombre de los parámetros
+            int cantidadParametros = 0;
+            //Un array de object para ir guardando los valores de los filtros, con tamaño = cantidad de filtros disponibles
+            object[] valoresFiltros = new object[2];
+            //Empecemos a armar la consulta, revisemos que filtros aplican
+            if (nombre != null && nombre.ToString() != string.Empty)
+            {
+                //Como es el primero no revisamos si está el WHERE y si aplica el filtro lo usamos
+                sql += "WHERE sconj_nombre LIKE @p" + cantidadParametros + " ";
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                nombre = "%" + nombre + "%";
+                valoresFiltros[cantidadParametros] = nombre;
+                cantidadParametros++;
+            }
+            //Revisamos si pasó algun valor y si es un integer
+            if (terminacion != null && terminacion.GetType() == cantidadParametros.GetType())
+            {
+                //Como es el segundo filtro si tiene que revisar si el anterior también aplica, busca si está el WHERE,
+                //si está agrega un AND, caso contrario el WHERE
+                if (sql.Contains("WHERE")) { sql += "AND te_codigo = @p" + cantidadParametros; }
+                else { sql += "WHERE te_codigo = @p" + cantidadParametros; }
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(terminacion);
+                cantidadParametros++;
+            }
+
+            if (cantidadParametros > 0)
+            {
+                //Buscamos con filtro, armemos el array de los valores de los parametros
+                object[] valorParametros = new object[cantidadParametros];
+                for (int i = 0; i < cantidadParametros; i++)
+                {
+                    valorParametros[i] = valoresFiltros[i];
+                }
+                DB.FillDataSet(ds, "SUBCONJUNTOS", sql, valorParametros);
+            }
+            else
+            {
+                //Buscamos sin filtro
+                DB.FillDataSet(ds, "SUBCONJUNTOS", sql, null);
+            }
+        }
+
+        /*public static void ObtenerSubconjuntos(Data.dsEstructura ds)
         {
             string sql = "SELECT sconj_codigo, sconj_nombre, te_codigo, sconj_cantidadstock FROM SUBCONJUNTOS";
             try
@@ -200,7 +251,7 @@ namespace GyCAP.DAL
                 DB.FillDataSet(ds, "SUBCONJUNTOS", sql, valorParametros);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
+        }*/
 
         public static bool PuedeEliminarse(int codigo)
         {
@@ -283,8 +334,8 @@ namespace GyCAP.DAL
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
         public static Entidades.SubConjunto ObtenerSubconjunto(int codigoSubconjunto)
         {
-            string sql = @"SELECT sconj_nombre, te_terminacion, sconj_cantidadstock
-                        FROM SUBCONJUNTOS WHERE sconj_codigo = @p0";
+            string sql = @"SELECT sconj_nombre, te_terminacion, sconj_descripcion, sconj_cantidadstock
+                         FROM SUBCONJUNTOS WHERE sconj_codigo = @p0";
             object[] valorParametros = { codigoSubconjunto };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
             Entidades.SubConjunto subconjunto = new GyCAP.Entidades.SubConjunto();
@@ -295,6 +346,7 @@ namespace GyCAP.DAL
                 subconjunto.CodigoSubconjunto = codigoSubconjunto;
                 subconjunto.Nombre = rdr["sconj_nombre"].ToString();
                 subconjunto.CodigoTerminacion = Convert.ToInt32(rdr["te_codigo"].ToString());
+                subconjunto.Descripcion = rdr["sconj_descripcion"].ToString();
                 subconjunto.CantidadStock = Convert.ToInt32(rdr["sconj_cantidadstock"].ToString());
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }

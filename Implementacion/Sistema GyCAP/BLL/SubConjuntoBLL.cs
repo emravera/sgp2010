@@ -2,11 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 namespace GyCAP.BLL
 {
     public class SubConjuntoBLL
     {
+        /// <summary>
+        /// Setea el directorio que contiene las imágenes de los subconjuntos en base al directorio en que
+        /// se está ejecutando la aplicación.
+        /// </summary>
+        private static readonly string directorioImagenes = SistemaBLL.WorkingPath + "BLL\\Img\\SCImg\\";
+        
         public static void Insertar(Data.dsEstructura dsEstructura)
         {
             //Si existe lanzamos la excepción correspondiente
@@ -73,7 +80,12 @@ namespace GyCAP.BLL
             return DAL.SubConjuntoDAL.ObtenerSubconjunto(codigoSubconjunto);
         }
 
-        public static void ObtenerTodos(Data.dsEstructura ds)
+        public static void ObtenerSubconjuntos(object nombre, object terminacion, Data.dsEstructura ds)
+        {
+            DAL.SubConjuntoDAL.ObtenerSubconjuntos(nombre, terminacion, ds);
+        }
+
+        /*public static void ObtenerTodos(Data.dsEstructura ds)
         {
             DAL.SubConjuntoDAL.ObtenerSubconjuntos(ds);
             //Ya tenemos los subconjuntos, ahora necesitamos las piezas que los forman
@@ -82,7 +94,7 @@ namespace GyCAP.BLL
                 ObtenerEstructura(Convert.ToInt32(rowSubconjunto.SCONJ_CODIGO.ToString()), ds);
             }
         }
-
+        
         public static void ObtenerTodos(string nombre, Data.dsEstructura ds)
         {
             DAL.SubConjuntoDAL.ObtenerSubconjuntos(nombre, ds);
@@ -101,7 +113,7 @@ namespace GyCAP.BLL
             {
                 ObtenerEstructura(Convert.ToInt32(rowSubconjunto.SCONJ_CODIGO.ToString()), ds);
             }
-        }
+        }*/
 
         /// <summary>
         /// Obtiene todas las piezas que forman el subconjunto.
@@ -116,6 +128,36 @@ namespace GyCAP.BLL
             subconjunto.CodigoSubconjunto = codigoSubconjunto;
             if (!EsSubconjunto(subconjunto)) { throw new Entidades.Excepciones.ElementoInexistenteException(); }
             DAL.SubConjuntoDAL.ObtenerEstructura(codigoSubconjunto, ds);
+        }
+
+        /// <summary>
+        /// Guarda una imagen de un subconjunto, si ya tiene una almacenada ésta se reemplaza.
+        /// Si se llama al método sin pasar la imagen, se guarda una por defecto con la leyenda
+        /// imagen no disponible.
+        /// </summary>
+        /// <param name="codigoSubConjunto">El código del subconjunto cuya imagen se quiere guardar.</param>
+        /// <param name="imagen">La imagen del subconjunto.</param>
+        public static void GuardarImagen(int codigoSubConjunto, Image imagen)
+        {
+            if (imagen == null) { imagen = BLL.Properties.Resources.sinimagen; }
+            string nombreImagen = "SC" + codigoSubConjunto + ".jpg";
+            imagen.Save(nombreImagen, System.Drawing.Imaging.ImageFormat.Jpeg);
+        }
+
+        /// <summary>
+        /// Obtiene la imagen de un subconjunto, en caso de no tenerla retorna una imagen por defecto con
+        /// la leyenda sin imagen.
+        /// </summary>
+        /// <param name="codigoSubConjunto">El código del subconjunto cuya imagen se quiere obtener.</param>
+        /// <returns>El objeto image con la imagen del subconjunto si la tiene, caso contrario una imagen por defecto.</returns>
+        public static Image ObtenerImagen(int codigoSubConjunto)
+        {
+            try
+            {
+                Image imagen = Image.FromFile(directorioImagenes + "SC" + codigoSubConjunto + ".jpg");
+                return imagen;
+            }
+            catch (System.IO.FileNotFoundException) { return BLL.Properties.Resources.sinimagen; }
         }
     }
 }

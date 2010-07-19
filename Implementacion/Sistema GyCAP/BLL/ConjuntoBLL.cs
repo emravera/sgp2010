@@ -149,7 +149,7 @@ namespace GyCAP.BLL
         /// la leyenda sin imagen.
         /// </summary>
         /// <param name="codigoConjunto">El código del conjunto cuya imagen se quiere obtener.</param>
-        /// <returns>El objeto image con la imagen del conjunto si la tiene, caso contrario retorna null.</returns>
+        /// <returns>El objeto image con la imagen del conjunto si la tiene, caso contrario una imagen por defecto.</returns>
         public static Image ObtenerImagen(int codigoConjunto)
         {
             try
