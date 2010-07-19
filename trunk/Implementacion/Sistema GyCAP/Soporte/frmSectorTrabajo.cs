@@ -46,9 +46,6 @@ namespace GyCAP.UI.Soporte
             dvListaSector = new DataView(dsSectorTrabajo.SECTORES);
             dgvLista.DataSource = dvListaSector;
 
-            //Selecciono por defecto buscar por nombre
-            rbNombre.Checked = true;
-
             //Seteo el maxlenght de los textbox para que no de error en la bd
             txtDescripcion.MaxLength = 80;
             txtNombre.MaxLength = 30;
@@ -121,19 +118,8 @@ namespace GyCAP.UI.Soporte
                 //Limpiamos el Dataset
                 dsSectorTrabajo.SECTORES.Clear();
 
-                if (rbNombre.Checked == true && txtNombreBuscar.Text != string.Empty)
-                {
-                    BLL.SectorBLL.ObtenerTodos(txtNombreBuscar.Text, dsSectorTrabajo, true);
-
-                }
-                else if (rbAbreviatura.Checked == true && txtAbreviaturaBuscar.Text!= string.Empty)
-                {
-                    BLL.SectorBLL.ObtenerTodos(txtAbreviaturaBuscar.Text, dsSectorTrabajo, false);
-                }
-                else
-                {
-                    BLL.SectorBLL.ObtenerTodos(dsSectorTrabajo);
-                }
+                //Función de búsqueda
+                BLL.SectorBLL.ObtenerTodos(txtNombreBuscar.Text, txtAbreviatura.Text, dsSectorTrabajo);
 
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
@@ -141,41 +127,18 @@ namespace GyCAP.UI.Soporte
 
                 if (dsSectorTrabajo.SECTORES.Rows.Count == 0)
                 {
-                    if (rbNombre.Checked == true)
-                    {
-                        MessageBox.Show("No se encontraron Sectores con el nombre ingresado.", "Aviso");
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se encontraron Sectores para la Abreviatura ingresada.", "Aviso");
-                    }
-
+                    MessageBox.Show("No se encontraron Sectores de Trabajo con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
 
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error: Sector de Trabajo - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetInterface(estadoUI.inicio);
             }
         }
-        //Configuracion de los Radiobuttons
-        private void rbNombre_CheckedChanged(object sender, EventArgs e)
-        {
-            txtAbreviaturaBuscar.Enabled = false;
-            txtNombreBuscar.Enabled = true;
-        }
-
-        private void rbAbreviatura_CheckedChanged(object sender, EventArgs e)
-        {
-            txtAbreviaturaBuscar.Enabled = true;
-            txtNombreBuscar.Enabled = false;
-        }
-
-
-
+       
 
         #endregion
 
@@ -204,9 +167,9 @@ namespace GyCAP.UI.Soporte
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcSectorTrabajo.SelectedTab = tpBuscar;
+                    txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
-                    txtCodigo.Text = String.Empty;
                     txtNombre.ReadOnly = false;
                     txtNombre.Text = String.Empty;
                     txtAbreviatura.Text = string.Empty;
@@ -221,12 +184,12 @@ namespace GyCAP.UI.Soporte
                     btnModificar.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
                     tcSectorTrabajo.SelectedTab = tpDatos;
+                    txtNombre.Focus();
                     break;
                 case estadoUI.consultar:
                     txtNombre.ReadOnly = true;
                     txtDescripcion.ReadOnly = true;
                     txtAbreviatura.ReadOnly = true;
-                    txtCodigo.ReadOnly = true;
                     btnGuardar.Enabled = false;
                     btnModificar.Enabled = true;
                     btnEliminar.Enabled = true;
@@ -236,7 +199,6 @@ namespace GyCAP.UI.Soporte
                     tcSectorTrabajo.SelectedTab = tpDatos;
                     break;
                 case estadoUI.modificar:
-                    txtCodigo.ReadOnly = true;
                     txtNombre.ReadOnly = false;
                     txtDescripcion.ReadOnly = false;
                     txtAbreviatura.ReadOnly = false;
@@ -254,14 +216,7 @@ namespace GyCAP.UI.Soporte
             }
         }
 
-        //Método para evitar que se cierrre la pantalla con la X o con ALT+F4
-        private void frmSectorTrabajo_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                e.Cancel = true;
-            }
-        }
+      
         #endregion
 
         #region Pestaña Datos
@@ -270,7 +225,6 @@ namespace GyCAP.UI.Soporte
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             int codigoSector = Convert.ToInt32(dvListaSector[e.RowIndex]["sec_codigo"]);
-            txtCodigo.Text = codigoSector.ToString();
             txtNombre.Text = dsSectorTrabajo.SECTORES.FindBySEC_CODIGO(codigoSector).SEC_NOMBRE;
             txtDescripcion.Text = dsSectorTrabajo.SECTORES.FindBySEC_CODIGO(codigoSector).SEC_DESCRIPCION;
             txtAbreviatura.Text = dsSectorTrabajo.SECTORES.FindBySEC_CODIGO(codigoSector).SEC_ABREVIATURA;
@@ -284,7 +238,7 @@ namespace GyCAP.UI.Soporte
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el Sector seleccionado?", "Confirmar eliminación", MessageBoxButtons.YesNo);
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el Sector de Trabajo seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -299,18 +253,19 @@ namespace GyCAP.UI.Soporte
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Sector de Trabajo de la lista.", "Aviso");
+                MessageBox.Show("Debe seleccionar un " + this.Text +  " de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -350,11 +305,11 @@ namespace GyCAP.UI.Soporte
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -384,24 +339,32 @@ namespace GyCAP.UI.Soporte
                         //Agregamos la fila al dataset y aceptamos los cambios
                         dsSectorTrabajo.SECTORES.AcceptChanges();
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Aviso");
+                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe completar los datos.", "Aviso");
+                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        private void frmSectorTrabajo_Activated(object sender, EventArgs e)
+        {
+            if (txtNombreBuscar.Enabled = true)
+            {
+                txtNombreBuscar.Focus();
             }
         }
 
         #endregion
 
+        
 
 
 

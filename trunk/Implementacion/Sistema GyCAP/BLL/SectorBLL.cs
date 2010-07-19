@@ -9,14 +9,11 @@ namespace GyCAP.BLL
     {
         //Busqueda
         //Obtiene los datos de acuerdo a los criterios de busqueda
-        public static void ObtenerTodos(string dato, Data.dsSectorTrabajo ds, bool esNombre)
+        public static void ObtenerTodos(string nombre, string abrev, Data.dsSectorTrabajo ds)
         {
-            DAL.SectorDAL.ObtenerSector(dato, ds , esNombre );
+            DAL.SectorDAL.ObtenerSector(nombre, abrev,ds);
         }
-        public static void ObtenerTodos(Data.dsSectorTrabajo ds)
-        {
-            DAL.SectorDAL.ObtenerSector(ds);
-        }
+        
 
         //Eliminacion
         public static void Eliminar(int codigo)

@@ -11,25 +11,16 @@ namespace GyCAP.DAL
         //BUSQUEDA
         //Metodo sobrecargado (3 Sobrecargas)
         //Busqueda por nombre o por abreviatura
-        public static void ObtenerSector(string dato, Data.dsSectorTrabajo ds, bool esNombre)
+        public static void ObtenerSector(string nombre, string abrev, Data.dsSectorTrabajo ds)
         {
-            if (dato != String.Empty)
-            {
-                string sql;
+           string sql, dato;
 
-                if (esNombre == true)
-                {
+            if (nombre != String.Empty && abrev == string.Empty)
+            {
                     sql = @"SELECT sec_codigo, sec_nombre, sec_descripcion, sec_abreviatura
                               FROM SECTORES
                               WHERE sec_nombre LIKE @p0";
-                }
-                else
-                {
-                    sql = @"SELECT sec_codigo, sec_nombre, sec_descripcion, sec_abreviatura
-                              FROM ABREVIATURAS
-                              WHERE sec_abreviatura LIKE @p0";
-                }
-
+                    dato= nombre;
                 //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
                 dato = "%" + dato + "%";
                 object[] valorParametros = { dato };
@@ -39,20 +30,51 @@ namespace GyCAP.DAL
                 }
                 catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
-        }
-        //Trae todos los elementos
-        public static void ObtenerSector(Data.dsSectorTrabajo ds)
-        {
-            string sql = @"SELECT sec_codigo, sec_nombre, sec_descripcion, sec_abreviatura
-                           FROM SECTORES";
-            try
+           
+            if (abrev != string.Empty && nombre == string.Empty)
             {
-                DB.FillDataSet(ds, "SECTORES", sql, null);
+                    sql = @"SELECT sec_codigo, sec_nombre, sec_descripcion, sec_abreviatura
+                              FROM SECTORES
+                              WHERE sec_abreviatura LIKE @p0";
+                    dato= abrev;
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                dato = "%" + dato + "%";
+                object[] valorParametros = { dato };
+                try
+                {
+                    DB.FillDataSet(ds, "SECTORES", sql, valorParametros);
+                }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            if (abrev != string.Empty && nombre != string.Empty)
+            {
+                 sql = @"SELECT sec_codigo, sec_nombre, sec_descripcion, sec_abreviatura
+                              FROM SECTORES
+                              WHERE sec_abreviatura LIKE @p0 and sec_nombre LIKE @p1";
+               
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                nombre = "%" + nombre + "%";           
+                abrev = "%" + abrev + "%";
+                object[] valorParametros = { nombre, abrev };
+                try
+                {
+                    DB.FillDataSet(ds, "SECTORES", sql, valorParametros);
+                }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            }
+            else
+            {
+                sql = @"SELECT sec_codigo, sec_nombre, sec_descripcion, sec_abreviatura
+                              FROM SECTORES";
+                try
+                {
+                    DB.FillDataSet(ds, "SECTORES", sql, null);
+                }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            }
+         
         }
-
-        
+                
         //ELIMINACION
         //Metodos que verifica que no este usado en otro lugar
 

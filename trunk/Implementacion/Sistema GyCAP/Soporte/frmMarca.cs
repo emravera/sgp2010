@@ -96,6 +96,15 @@ namespace GyCAP.UI.Soporte
                 _frmMarca = value;
             }
         }
+
+        private void frmMarca_Activated(object sender, EventArgs e)
+        {
+            if (txtNombreBuscar.Enabled == true)
+            {
+                txtNombreBuscar.Focus();
+            }
+        }
+
 #endregion
 
 #region Botones
@@ -151,7 +160,7 @@ namespace GyCAP.UI.Soporte
                 {
                     MessageBox.Show("No se encontraron Marcas con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                           
+                //Seteamos el estado de la interfaz           
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -170,7 +179,11 @@ namespace GyCAP.UI.Soporte
                 switch (dgvLista.Columns[e.ColumnIndex].Name)
                 {
                     case "CLI_CODIGO":
-                        nombre = dsMarca.CLIENTES.FindByCLI_CODIGO(Convert.ToInt32(e.Value)).CLI_RAZONSOCIAL;
+                        if (Convert.ToInt32(e.Value) != 0)
+                        {
+                            nombre = dsMarca.CLIENTES.FindByCLI_CODIGO(Convert.ToInt32(e.Value)).CLI_RAZONSOCIAL;
+                        }
+                        else nombre = "";
                         e.Value = nombre;
                         break;
                     default:
@@ -297,11 +310,11 @@ namespace GyCAP.UI.Soporte
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -342,19 +355,19 @@ namespace GyCAP.UI.Soporte
                         {
                             rowMarca.CLI_CODIGO = marca.Cliente.Codigo;
                         }
-
+                        else rowMarca.CLI_CODIGO = 0;
                         //Termina la edición de la fila
                         rowMarca.EndEdit();
                         //Agregamos la fila al dataset y aceptamos los cambios
                         dsMarca.MARCAS.AcceptChanges();
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Aviso");
+                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 //Actualizamos la lista con las modificaciones
@@ -362,9 +375,27 @@ namespace GyCAP.UI.Soporte
             }
             else
             {
-                MessageBox.Show("Debe completar los datos.", "Aviso");
+                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+
+      private void chboxCliente_CheckStateChanged(object sender, EventArgs e)
+      {
+          if (chboxCliente.Checked == true)
+          {
+              cbClienteDatos.Enabled = true;
+          }
+          else
+          {
+              cbClienteDatos.Enabled = false;
+              if (estadoInterface != estadoUI.modificar)
+              {
+                  cbClienteDatos.SelectedIndex = -1;
+              }
+          }
+      }
+
 
      #endregion
 
@@ -393,7 +424,9 @@ namespace GyCAP.UI.Soporte
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcMarca.SelectedTab = tpBuscar;
+                    txtNombreBuscar.Text = "";
                     txtNombreBuscar.Focus();
+                    cbClienteBuscar.SelectedIndex = -1;
                     break;
                 case estadoUI.nuevo:
                     txtNombre.ReadOnly = false;
@@ -401,6 +434,7 @@ namespace GyCAP.UI.Soporte
                     cbClienteDatos.Enabled = false;
                     cbClienteDatos.SelectedIndex = -1;
                     chboxCliente.Visible = true;
+                    chboxCliente.Checked = false;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -434,13 +468,17 @@ namespace GyCAP.UI.Soporte
                     btnModificar.Enabled = false;
                     estadoInterface = estadoUI.modificar;
                     tcMarca.SelectedTab = tpDatos;
-                   
+
                     if (cbClienteDatos.SelectedIndex != -1)
                     {
                         chboxCliente.Checked = true;
                         cbClienteDatos.Enabled = true;
                     }
-                    else chboxCliente.Checked = false;
+                    else
+                    {
+                        chboxCliente.Checked = false;
+                        cbClienteDatos.Enabled = false;
+                    }
                     break;
                 default:
                     break;
@@ -450,44 +488,5 @@ namespace GyCAP.UI.Soporte
         
         
 #endregion
-
-        private void frmMarca_Activated(object sender, EventArgs e)
-        {
-            if (txtNombreBuscar.Enabled == true)
-            {
-                txtNombreBuscar.Focus();
-            }
-        }
-
-        private void chboxCliente_CheckStateChanged(object sender, EventArgs e)
-        {
-            if (chboxCliente.Checked == true)
-            {
-                cbClienteDatos.Enabled = true;
-            }
-            else
-            {
-                cbClienteDatos.Enabled = false;
-                if (estadoInterface != estadoUI.modificar)
-                {
-                    cbClienteDatos.SelectedIndex = -1;
-                }
-            }
-        }
-
-        
-
-        
-        
-        
-
-        
-
-        
-        
-
-       
-       
-
     }
 }

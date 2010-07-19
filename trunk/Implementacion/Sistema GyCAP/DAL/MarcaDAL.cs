@@ -9,7 +9,6 @@ namespace GyCAP.DAL
     public class MarcaDAL
     {
         //BUSQUEDA
-        //Metodo sobrecargado (3 Sobrecargas)
         //Busqueda por nombre
         public static void ObtenerMarca(string nombre, int idCliente, Data.dsMarca ds)
         {
