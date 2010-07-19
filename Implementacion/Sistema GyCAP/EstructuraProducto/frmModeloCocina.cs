@@ -29,7 +29,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns.Add("MOD_DESCRIPCION", "Descripción");
             dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLista.Columns[2].Resizable = DataGridViewTriState.True;
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["MOD_CODIGO"].DataPropertyName = "MOD_CODIGO";
@@ -80,13 +80,13 @@ namespace GyCAP.UI.EstructuraProducto
                 dvModeloCocina.Table = dsModeloCocina.MODELOS_COCINAS;
                 if (dsModeloCocina.MODELOS_COCINAS.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron modelos de cocina con el nombre ingresado.", "Aviso");
+                    MessageBox.Show("No se encontraron Modelos de Cocina con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error: Modelos de Cocina - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetInterface(estadoUI.inicio);
             }
         }
@@ -112,7 +112,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el modelo de cocina seleccionado?", "Confirmar eliminación", MessageBoxButtons.YesNo);
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el Modelo de Cocina seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -127,17 +127,17 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un modelo de cocina de la lista.", "Aviso");
+                MessageBox.Show("Debe seleccionar un Modelo de Cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -179,11 +179,11 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -206,19 +206,19 @@ namespace GyCAP.UI.EstructuraProducto
                         rowModeloCocina.EndEdit();
                         dsModeloCocina.MODELOS_COCINAS.AcceptChanges();
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Aviso");
+                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe completar los datos.", "Aviso");
+                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -294,15 +294,6 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
-        //Método para evitar que se cierrre la pantalla con la X o con ALT+F4
-        private void frmModeloCocina_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                e.Cancel = true;
-            }
-        }
-
         //Evento RowEnter de la grilla, va cargando los datos en la pestaña Datos a medida que se
         //hace clic en alguna fila de la grilla
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -318,7 +309,32 @@ namespace GyCAP.UI.EstructuraProducto
             btnConsultar.PerformClick();
         }
 
-        #endregion
+        private void frmModeloCocina_Activated(object sender, EventArgs e)
+        {
+            if (txtNombreBuscar.Enabled == true)
+            {
+                txtNombreBuscar.Focus();
+            }
+        }
+
+        private void txtNombreBuscar_Enter(object sender, EventArgs e)
+        {
+            txtNombreBuscar.SelectAll();
+        }
+
+
+        private void txtNombre_Enter(object sender, EventArgs e)
+        {
+            txtNombre.SelectAll();
+        }
+
+        private void txtDescripcion_Enter(object sender, EventArgs e)
+        {
+            txtDescripcion.SelectAll();
+        }
+
+        #endregion       
+
  
     }
 }

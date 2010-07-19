@@ -72,8 +72,9 @@
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(104, 44);
+            this.txtNombre.MaxLength = 80;
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(170, 24);
+            this.txtNombre.Size = new System.Drawing.Size(208, 24);
             this.txtNombre.TabIndex = 7;
             // 
             // label3
@@ -199,7 +200,7 @@
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(88, 30);
             this.btnBuscar.TabIndex = 5;
-            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.Text = "&Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
@@ -207,9 +208,11 @@
             // txtNombreBuscar
             // 
             this.txtNombreBuscar.Location = new System.Drawing.Point(90, 25);
+            this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
-            this.txtNombreBuscar.Size = new System.Drawing.Size(112, 24);
+            this.txtNombreBuscar.Size = new System.Drawing.Size(123, 24);
             this.txtNombreBuscar.TabIndex = 2;
+            this.txtNombreBuscar.Enter += new System.EventHandler(this.txtNombreBuscar_Enter);
             // 
             // label1
             // 
@@ -248,9 +251,9 @@
             // 
             this.btnVolver.Location = new System.Drawing.Point(493, 23);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(75, 25);
             this.btnVolver.TabIndex = 11;
-            this.btnVolver.Text = "Volver";
+            this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
@@ -258,9 +261,9 @@
             // 
             this.btnGuardar.Location = new System.Drawing.Point(412, 23);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.Size = new System.Drawing.Size(75, 25);
             this.btnGuardar.TabIndex = 10;
-            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
@@ -279,19 +282,20 @@
             this.gbDatos.Size = new System.Drawing.Size(574, 225);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
-            this.gbDatos.Text = "Datos Unidad de Medida";
+            this.gbDatos.Text = "Datos de la Unidad de Medida";
             // 
             // txtAbreviatura
             // 
-            this.txtAbreviatura.Location = new System.Drawing.Point(104, 103);
+            this.txtAbreviatura.Location = new System.Drawing.Point(104, 139);
+            this.txtAbreviatura.MaxLength = 10;
             this.txtAbreviatura.Name = "txtAbreviatura";
-            this.txtAbreviatura.Size = new System.Drawing.Size(170, 24);
+            this.txtAbreviatura.Size = new System.Drawing.Size(208, 24);
             this.txtAbreviatura.TabIndex = 9;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(20, 105);
+            this.label6.Location = new System.Drawing.Point(20, 141);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 17);
             this.label6.TabIndex = 6;
@@ -301,15 +305,15 @@
             // 
             this.cbTipoUnidadDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoUnidadDatos.FormattingEnabled = true;
-            this.cbTipoUnidadDatos.Location = new System.Drawing.Point(104, 74);
+            this.cbTipoUnidadDatos.Location = new System.Drawing.Point(104, 91);
             this.cbTipoUnidadDatos.Name = "cbTipoUnidadDatos";
-            this.cbTipoUnidadDatos.Size = new System.Drawing.Size(170, 23);
+            this.cbTipoUnidadDatos.Size = new System.Drawing.Size(208, 23);
             this.cbTipoUnidadDatos.TabIndex = 8;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 77);
+            this.label5.Location = new System.Drawing.Point(20, 94);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 17);
             this.label5.TabIndex = 4;
@@ -408,6 +412,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmUnidadMedida";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Unidades de Medidas";
             this.Activated += new System.EventHandler(this.frmUnidadMedida_Activated);
             this.tableLayoutPanel1.ResumeLayout(false);
