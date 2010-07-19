@@ -117,8 +117,8 @@ namespace Principal
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            GyCAP.UI.EstructuraProducto.frmConjunto.Instancia.MdiParent = this;
-            GyCAP.UI.EstructuraProducto.frmConjunto.Instancia.Show();
+            GyCAP.UI.Soporte.frmTipoUnidadMedida.Instancia.MdiParent = this;
+            GyCAP.UI.Soporte.frmTipoUnidadMedida.Instancia.Show();
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)

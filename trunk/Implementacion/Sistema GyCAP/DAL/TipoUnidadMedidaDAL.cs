@@ -60,6 +60,17 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        public static void ObtenerTipoUnidadMedida(Data.dsUnidadMedida ds)
+        {          
+            string sql = "SELECT tumed_codigo, tumed_nombre FROM TIPOS_UNIDADES_MEDIDA";
+            try
+            {
+                DB.FillDataSet(ds, "TIPOS_UNIDADES_MEDIDA", sql, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            
+        }
+        
         public static void ObtenerTipoUnidadMedida(string nombre, Data.dsUnidadMedida ds)
         {
             if (nombre != String.Empty)
