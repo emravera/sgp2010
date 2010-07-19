@@ -287,10 +287,7 @@ namespace GyCAP.UI.EstructuraProducto
         //Método para evitar que se cierrre la pantalla con la X o con ALT+F4
         private void frmColor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                e.Cancel = true;
-            }
+
         }
 
         //Evento RowEnter de la grilla, va cargando los datos en la pestaña Datos a medida que se
@@ -308,7 +305,18 @@ namespace GyCAP.UI.EstructuraProducto
             btnConsultar.PerformClick();
         }
 
+        private void txtNombreBuscar_Enter(object sender, EventArgs e)
+        {
+            txtNombreBuscar.SelectAll();
+        }
+
+        private void txtNombre_Enter(object sender, EventArgs e)
+        {
+            txtNombre.SelectAll();
+        }
+
         #endregion
+
 
     }
 }

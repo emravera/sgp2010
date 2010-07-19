@@ -345,6 +345,7 @@ namespace GyCAP.UI.EstructuraProducto
                     //todavia no vamos a insertar en la db hasta que no haga Guardar
                     dsEstructura.DETALLE_PIEZA.AddDETALLE_PIEZARow(row);
                 }
+                nudCantidad.Value = 0;
             }
             else
             {

@@ -34,6 +34,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLista.Columns[3].Resizable = DataGridViewTriState.True;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
@@ -69,8 +70,7 @@ namespace GyCAP.UI.EstructuraProducto
             //Se setean las caracteristicas de los textbox
             txtNombre.MaxLength = 80;
             txtAbreviatura.MaxLength = 10;
-            txtNombreBuscar.MaxLength = 50;
-
+            txtNombreBuscar.MaxLength = 80;
 
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
@@ -200,7 +200,7 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
@@ -317,6 +317,7 @@ namespace GyCAP.UI.EstructuraProducto
         #endregion
         
         #region Servicios
+
         private void SetInterface(estadoUI estado)
         {
             switch (estado)
@@ -389,9 +390,6 @@ namespace GyCAP.UI.EstructuraProducto
                     break;
             }
         }
-           
-       
-        #endregion
 
         private void frmUnidadMedida_Activated(object sender, EventArgs e)
         {
@@ -400,6 +398,17 @@ namespace GyCAP.UI.EstructuraProducto
                 txtNombreBuscar.Focus();
             }
         }
+
+        private void txtNombreBuscar_Enter(object sender, EventArgs e)
+        {
+            txtNombreBuscar.SelectAll();
+        }
+       
+        #endregion
+
+        
+
+        
 
 
        

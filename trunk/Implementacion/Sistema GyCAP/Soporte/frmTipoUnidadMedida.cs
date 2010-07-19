@@ -285,10 +285,7 @@ namespace GyCAP.UI.Soporte
         //Método para evitar que se cierrre la pantalla con la X o con ALT+F4
         private void frmTipoUnidadMedida_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                e.Cancel = true;
-            }
+
         }
 
         //Evento RowEnter de la grilla, va cargando los datos en la pestaña Datos a medida que se
@@ -307,6 +304,14 @@ namespace GyCAP.UI.Soporte
         }
 
         #endregion
+
+        private void frmTipoUnidadMedida_Activated(object sender, EventArgs e)
+        {
+            if (txtNombreBuscar.Enabled == true)
+            {
+                txtNombreBuscar.Focus();
+            }
+        }
 
     }
 }
