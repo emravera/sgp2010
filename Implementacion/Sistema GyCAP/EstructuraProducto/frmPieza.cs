@@ -531,10 +531,13 @@ namespace GyCAP.UI.EstructuraProducto
 
             //Creamos el dataview y lo asignamos a la grilla
             dvPiezas = new DataView(dsEstructura.PIEZAS);
+            dvPiezas.Sort = "PZA_NOMBRE ASC";
             dgvPiezas.DataSource = dvPiezas;
             dvDetallePieza = new DataView(dsEstructura.DETALLE_PIEZA);
+            dvDetallePieza.Sort = "MP_NOMBRE ASC";
             dgvDetallePieza.DataSource = dvDetallePieza;
             dvMPDisponibles = new DataView(dsEstructura.MATERIAS_PRIMAS);
+            dvMPDisponibles.Sort = "MP_NOMBRE ASC";
             dgvMPDisponibles.DataSource = dvMPDisponibles;
             dvUnidadMedida = new DataView(dsUnidadMedida.UNIDADES_MEDIDA);
 
@@ -551,11 +554,13 @@ namespace GyCAP.UI.EstructuraProducto
             }
 
             dvTerminaciones = new DataView(dsTerminacion.TERMINACIONES);
+            dvTerminaciones.Sort = "TE_NOMBRE ASC";
             cbTerminacion.DataSource = dvTerminaciones;
             cbTerminacion.DisplayMember = "te_nombre";
             cbTerminacion.ValueMember = "te_codigo";
             cbTerminacion.SelectedIndex = -1;
             dvTerminacionBuscar = new DataView(dsTerminacion.TERMINACIONES);
+            dvTerminacionBuscar.Sort = "TE_NOMBRE ASC";
             cbTerminacionBuscar.DataSource = dvTerminacionBuscar;
             cbTerminacionBuscar.DisplayMember = "te_nombre";
             cbTerminacionBuscar.ValueMember = "te_codigo";

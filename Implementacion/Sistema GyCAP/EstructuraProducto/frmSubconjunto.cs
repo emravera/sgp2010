@@ -531,10 +531,13 @@ namespace GyCAP.UI.EstructuraProducto
 
             //Creamos el dataview y lo asignamos a la grilla
             dvSubconjuntos = new DataView(dsEstructura.SUBCONJUNTOS);
+            dvSubconjuntos.Sort = "SCONJ_NOMBRE ASC";
             dgvSubconjuntos.DataSource = dvSubconjuntos;
             dvDetalleSubconjunto = new DataView(dsEstructura.DETALLE_SUBCONJUNTO);
+            dvDetalleSubconjunto.Sort = "PZA_NOMBRE ASC";
             dgvDetalleSubconjunto.DataSource = dvDetalleSubconjunto;
             dvPiezasDisponibles = new DataView(dsEstructura.PIEZAS);
+            dvPiezasDisponibles.Sort = "PZA_NOMBRE ASC";
             dgvPiezasDisponibles.DataSource = dvPiezasDisponibles;
 
             //Obtenemos las terminaciones
@@ -550,11 +553,13 @@ namespace GyCAP.UI.EstructuraProducto
             }
 
             dvTerminaciones = new DataView(dsTerminacion.TERMINACIONES);
+            dvTerminaciones.Sort = "TE_NOMBRE ASC";
             cbTerminacion.DataSource = dvTerminaciones;
             cbTerminacion.DisplayMember = "te_nombre";
             cbTerminacion.ValueMember = "te_codigo";
             cbTerminacion.SelectedIndex = -1;
             dvTerminacionBuscar = new DataView(dsTerminacion.TERMINACIONES);
+            dvTerminacionBuscar.Sort = "TE_NOMBRE ASC";
             cbTerminacionBuscar.DataSource = dvTerminacionBuscar;
             cbTerminacionBuscar.DisplayMember = "te_nombre";
             cbTerminacionBuscar.ValueMember = "te_codigo";
