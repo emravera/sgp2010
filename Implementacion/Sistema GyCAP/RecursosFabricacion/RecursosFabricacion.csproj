@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEmpleado.Designer.cs">
+      <DependentUpon>frmEmpleado.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmRecursosFabricacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,6 +62,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmEmpleado.resx">
+      <DependentUpon>frmEmpleado.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmRecursosFabricacion.resx">
       <DependentUpon>frmRecursosFabricacion.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -84,6 +94,10 @@
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{A0EA0794-16BA-4988-BCFF-00204902B7AA}</Project>
       <Name>BLL %28BLL\BLL%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{B288FFDF-AF2E-41DA-AB2F-C17A4944E272}</Project>
+      <Name>Data %28Data\Data%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
       <Project>{BF769C01-D311-4BC9-813A-C63DC3B89319}</Project>
