@@ -71,6 +71,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsMarca.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsMateriaPrima.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsMateriaPrima.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsModeloCocina.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -154,6 +159,17 @@
     </None>
     <None Include="dsMarca.xss">
       <DependentUpon>dsMarca.xsd</DependentUpon>
+    </None>
+    <None Include="dsMateriaPrima.xsc">
+      <DependentUpon>dsMateriaPrima.xsd</DependentUpon>
+    </None>
+    <None Include="dsMateriaPrima.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsMateriaPrima.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsMateriaPrima.xss">
+      <DependentUpon>dsMateriaPrima.xsd</DependentUpon>
     </None>
     <None Include="dsModeloCocina.xsc">
       <DependentUpon>dsModeloCocina.xsd</DependentUpon>

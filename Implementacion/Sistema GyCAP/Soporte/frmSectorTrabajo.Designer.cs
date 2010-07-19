@@ -31,7 +31,6 @@
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -41,8 +40,6 @@
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtAbreviaturaBuscar = new System.Windows.Forms.TextBox();
-            this.rbNombre = new System.Windows.Forms.RadioButton();
-            this.rbAbreviatura = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
@@ -52,7 +49,6 @@
             this.txtAbreviatura = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.btnConsultar = new System.Windows.Forms.ToolStripButton();
@@ -75,7 +71,7 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(100, 147);
+            this.txtDescripcion.Location = new System.Drawing.Point(96, 108);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(348, 72);
@@ -84,7 +80,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(21, 116);
+            this.label5.Location = new System.Drawing.Point(17, 77);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 17);
             this.label5.TabIndex = 4;
@@ -92,18 +88,10 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(100, 78);
+            this.txtNombre.Location = new System.Drawing.Point(96, 39);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(170, 24);
             this.txtNombre.TabIndex = 1;
-            // 
-            // txtCodigo
-            // 
-            this.txtCodigo.Location = new System.Drawing.Point(100, 32);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.ReadOnly = true;
-            this.txtCodigo.Size = new System.Drawing.Size(170, 24);
-            this.txtCodigo.TabIndex = 0;
             // 
             // gbGuardarCancelar
             // 
@@ -119,7 +107,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(301, 23);
+            this.btnVolver.Location = new System.Drawing.Point(496, 23);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 25);
             this.btnVolver.TabIndex = 5;
@@ -129,7 +117,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(199, 23);
+            this.btnGuardar.Location = new System.Drawing.Point(415, 23);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 25);
             this.btnGuardar.TabIndex = 4;
@@ -195,8 +183,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txtAbreviaturaBuscar);
-            this.groupBox1.Controls.Add(this.rbNombre);
-            this.groupBox1.Controls.Add(this.rbAbreviatura);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.txtNombreBuscar);
@@ -211,37 +197,15 @@
             // 
             // txtAbreviaturaBuscar
             // 
-            this.txtAbreviaturaBuscar.Location = new System.Drawing.Point(317, 28);
+            this.txtAbreviaturaBuscar.Location = new System.Drawing.Point(297, 29);
             this.txtAbreviaturaBuscar.Name = "txtAbreviaturaBuscar";
             this.txtAbreviaturaBuscar.Size = new System.Drawing.Size(112, 24);
             this.txtAbreviaturaBuscar.TabIndex = 2;
             // 
-            // rbNombre
-            // 
-            this.rbNombre.AutoSize = true;
-            this.rbNombre.Location = new System.Drawing.Point(6, 33);
-            this.rbNombre.Name = "rbNombre";
-            this.rbNombre.Size = new System.Drawing.Size(14, 13);
-            this.rbNombre.TabIndex = 6;
-            this.rbNombre.TabStop = true;
-            this.rbNombre.UseVisualStyleBackColor = true;
-            this.rbNombre.CheckedChanged += new System.EventHandler(this.rbNombre_CheckedChanged);
-            // 
-            // rbAbreviatura
-            // 
-            this.rbAbreviatura.AutoSize = true;
-            this.rbAbreviatura.Location = new System.Drawing.Point(216, 33);
-            this.rbAbreviatura.Name = "rbAbreviatura";
-            this.rbAbreviatura.Size = new System.Drawing.Size(14, 13);
-            this.rbAbreviatura.TabIndex = 5;
-            this.rbAbreviatura.TabStop = true;
-            this.rbAbreviatura.UseVisualStyleBackColor = true;
-            this.rbAbreviatura.CheckedChanged += new System.EventHandler(this.rbAbreviatura_CheckedChanged);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(236, 32);
+            this.label4.Location = new System.Drawing.Point(212, 32);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(79, 17);
             this.label4.TabIndex = 3;
@@ -251,7 +215,7 @@
             // 
             this.btnBuscar.Image = global::GyCAP.UI.Soporte.Properties.Resources.lupa_25;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(444, 22);
+            this.btnBuscar.Location = new System.Drawing.Point(442, 24);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(88, 30);
             this.btnBuscar.TabIndex = 3;
@@ -262,7 +226,7 @@
             // 
             // txtNombreBuscar
             // 
-            this.txtNombreBuscar.Location = new System.Drawing.Point(90, 28);
+            this.txtNombreBuscar.Location = new System.Drawing.Point(70, 28);
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(112, 24);
             this.txtNombreBuscar.TabIndex = 1;
@@ -270,7 +234,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 32);
+            this.label1.Location = new System.Drawing.Point(6, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 17);
             this.label1.TabIndex = 0;
@@ -295,9 +259,7 @@
             this.gbDatos.Controls.Add(this.label6);
             this.gbDatos.Controls.Add(this.label5);
             this.gbDatos.Controls.Add(this.txtNombre);
-            this.gbDatos.Controls.Add(this.txtCodigo);
             this.gbDatos.Controls.Add(this.label3);
-            this.gbDatos.Controls.Add(this.label2);
             this.gbDatos.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbDatos.Location = new System.Drawing.Point(3, 3);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
@@ -305,11 +267,11 @@
             this.gbDatos.Size = new System.Drawing.Size(574, 225);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
-            this.gbDatos.Text = "Datos Designacion";
+            this.gbDatos.Text = "Datos Sector de Trabajo";
             // 
             // txtAbreviatura
             // 
-            this.txtAbreviatura.Location = new System.Drawing.Point(100, 113);
+            this.txtAbreviatura.Location = new System.Drawing.Point(96, 74);
             this.txtAbreviatura.Name = "txtAbreviatura";
             this.txtAbreviatura.Size = new System.Drawing.Size(170, 24);
             this.txtAbreviatura.TabIndex = 2;
@@ -317,7 +279,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(21, 150);
+            this.label6.Location = new System.Drawing.Point(17, 111);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 17);
             this.label6.TabIndex = 6;
@@ -326,20 +288,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 78);
+            this.label3.Location = new System.Drawing.Point(17, 39);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 17);
             this.label3.TabIndex = 1;
             this.label3.Text = "Nombre:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 32);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 17);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Código:";
             // 
             // tsMenu
             // 
@@ -447,10 +400,11 @@
             this.ClientSize = new System.Drawing.Size(592, 366);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmSectorTrabajo";
             this.Text = "Sectores de Trabajo";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSectorTrabajo_FormClosing);
+            this.Activated += new System.EventHandler(this.frmSectorTrabajo_Activated);
             this.gbGuardarCancelar.ResumeLayout(false);
             this.tcSectorTrabajo.ResumeLayout(false);
             this.tpBuscar.ResumeLayout(false);
@@ -474,7 +428,6 @@
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.GroupBox gbGuardarCancelar;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnGuardar;
@@ -483,8 +436,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgvLista;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rbNombre;
-        private System.Windows.Forms.RadioButton rbAbreviatura;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.TextBox txtNombreBuscar;
         private System.Windows.Forms.Label label1;
@@ -492,7 +443,6 @@
         private System.Windows.Forms.GroupBox gbDatos;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStrip tsMenu;
         private System.Windows.Forms.ToolStripButton btnNuevo;
         private System.Windows.Forms.ToolStripButton btnConsultar;
