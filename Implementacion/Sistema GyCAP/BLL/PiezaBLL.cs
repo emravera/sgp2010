@@ -16,6 +16,7 @@ namespace GyCAP.BLL
             pieza.CodigoPieza = Convert.ToInt32(rowPieza.PZA_CODIGO);
             pieza.Nombre = rowPieza.PZA_NOMBRE;
             pieza.CodigoTerminacion = Convert.ToInt32(rowPieza.TE_CODIGO);
+            pieza.Descripcion = rowPieza.PZA_DESCRIPCION;
             if (EsPieza(pieza)) throw new Entidades.Excepciones.ElementoExistenteException();
             //Como no existe lo creamos
             DAL.PiezaDAL.Insertar(dsEstructura);

@@ -8,18 +8,28 @@ namespace GyCAP.DAL
 {
     public class ConjuntoDAL
     {
+        /// <summary>
+        /// Valor que indica que no se desea filtrar por nombre de conjunto.
+        /// </summary>
+        public static readonly int NoFiltrarTerminacion = -1;
+        /// <summary>
+        /// Valor que indica que no se desea filtrar por cósigo de terminación de conjunto.
+        /// </summary>
+        public static readonly string NoFiltrarNombre = string.Empty;
+        
         public static void Insertar(Data.dsEstructura dsEstructura)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
             string sqlInsertConjunto = @"INSERT INTO [CONJUNTOS]
                                         ([conj_nombre]
                                         ,[te_codigo]
+                                        ,[conj_descripcion]
                                         ,[conj_cantidadstock]) 
-                                        VALUES (@p0,@p1,@p2) SELECT @@Identity";
+                                        VALUES (@p0,@p1,@p2,@p3) SELECT @@Identity";
 
             //Así obtenemos el conjunto nuevo del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.CONJUNTOSRow rowConjunto = dsEstructura.CONJUNTOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.CONJUNTOSRow;
-            object[] valorParametros = { rowConjunto.CONJ_NOMBRE, rowConjunto.TE_CODIGO, 0 };
+            object[] valorParametros = { rowConjunto.CONJ_NOMBRE, rowConjunto.TE_CODIGO, rowConjunto.CONJ_DESCRIPCION, 0 };
 
             string sqlInsertEstructura = @"INSERT INTO [DETALLE_CONJUNTO] 
                                         ([conj_codigo]
@@ -84,7 +94,11 @@ namespace GyCAP.DAL
             //Esto va a ser muy largo...empecemos
             //Primero actualizaremos el conjunto y luego la estructura
             //Armemos todas las consultas
-            string sqlUpdateConjunto = "UPDATE CONJUNTOS SET conj_nombre = @p0, te_codigo = @p1 WHERE conj_codigo = @p2";
+            string sqlUpdateConjunto = @"UPDATE CONJUNTOS SET
+                                         conj_nombre = @p0
+                                        ,te_codigo = @p1
+                                        ,conj_descripcion = @p2
+                                        WHERE conj_codigo = @p3";
             
             string sqlInsertEstructura = @"INSERT INTO [DETALLE_CONJUNTO] 
                                         ([conj_codigo]
@@ -99,7 +113,7 @@ namespace GyCAP.DAL
             
             //Así obtenemos el conjunto nuevo del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.CONJUNTOSRow rowConjunto = dsEstructura.CONJUNTOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.CONJUNTOSRow;
-            object[] valorParametros = { rowConjunto.CONJ_NOMBRE, rowConjunto.TE_CODIGO, rowConjunto.CONJ_CODIGO };
+            object[] valorParametros = { rowConjunto.CONJ_NOMBRE, rowConjunto.TE_CODIGO, rowConjunto.CONJ_DESCRIPCION, rowConjunto.CONJ_CODIGO };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;            
@@ -191,7 +205,7 @@ namespace GyCAP.DAL
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
         public static Entidades.Conjunto ObtenerConjunto(int codigoConjunto)
         {
-            string sql = @"SELECT conj_nombre, te_terminacion, conj_cantidadstock
+            string sql = @"SELECT conj_nombre, te_terminacion, conj_descripcion, conj_cantidadstock
                         FROM CONJUNTOS WHERE conj_codigo = @p0";
             object[] valorParametros = { codigoConjunto };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
@@ -203,6 +217,7 @@ namespace GyCAP.DAL
                 conjunto.CodigoConjunto = codigoConjunto;
                 conjunto.Nombre = rdr["conj_nombre"].ToString();
                 conjunto.CodigoTerminacion = Convert.ToInt32(rdr["te_codigo"].ToString());
+                conjunto.Descripcion = rdr["conj_descripcion"].ToString();
                 conjunto.CantidadStock = Convert.ToInt32(rdr["conj_cantidadstock"].ToString());
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
@@ -213,10 +228,54 @@ namespace GyCAP.DAL
             }
             return conjunto;
         }
-        
-        public static void ObtenerConjuntos(Data.dsEstructura ds)
+
+        public static void ObtenerConjuntos(object nombre, object terminacion, Data.dsEstructura ds)
         {
-            string sql = "SELECT conj_codigo, conj_nombre, te_codigo, conj_cantidadstock FROM CONJUNTOS";
+            string sql = "SELECT conj_codigo, conj_nombre, conj_descripcion, te_codigo, conj_cantidadstock FROM CONJUNTOS ";
+
+            //Sirve para armar el nombre de los parámetros
+            int cantidadParametros = 0;
+            //Un array de object para ir guardando los valores de los filtros, con tamaño = cantidad de filtros disponibles
+            object[] valoresFiltros = new object[2];
+            //Empecemos a armar la consulta, revisemos que filtros aplican
+            if (nombre != null && nombre.ToString() != string.Empty)
+            {
+                //Como es el primero no revisamos si está el WHERE y si aplica el filtro lo usamos
+                sql += "WHERE conj_nombre = @p" + cantidadParametros + " ";
+                valoresFiltros[cantidadParametros] = nombre;
+                cantidadParametros++;
+            }
+            //Revisamos si pasó algun valor y si es un integer
+            if (terminacion != null && terminacion.GetType() == cantidadParametros.GetType())
+            {
+                //Como es el segundo filtro si tiene que revisar si el anterior también aplica, busca si está el WHERE,
+                //si está agrega un AND, caso contrario el WHERE
+                if (sql.Contains("WHERE")) { sql += "AND te_codigo = @p" + cantidadParametros; }
+                else { sql += "WHERE te_codigo = @p" + cantidadParametros; }
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(terminacion);
+                cantidadParametros++;
+            }
+
+            if (cantidadParametros > 0)
+            {
+                //Buscamos con filtro, armemos el array de los valores de los parametros
+                object[] valorParametros = new object[cantidadParametros];
+                for (int i = 0; i < cantidadParametros; i++)
+                {
+                    valorParametros[i] = valoresFiltros[i];
+                }
+                DB.FillDataSet(ds, "CONJUNTOS", sql, valorParametros);
+            }
+            else
+            {
+                //Buscamos sin filtro
+                DB.FillDataSet(ds, "CONJUNTOS", sql, null);
+            }
+        }
+        
+        /*public static void ObtenerConjuntos(Data.dsEstructura ds)
+        {
+            string sql = "SELECT conj_codigo, conj_nombre, conj_descripcion, te_codigo, conj_cantidadstock FROM CONJUNTOS";
             try
             {
                 DB.FillDataSet(ds, "CONJUNTOS", sql, null);
@@ -226,7 +285,7 @@ namespace GyCAP.DAL
         
         public static void ObtenerConjuntos(string nombre, Data.dsEstructura ds)
         {
-            string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_cantidadstock
+            string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock
                            FROM CONJUNTOS
                            WHERE conj_nombre LIKE @p0";
             //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
@@ -241,7 +300,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerConjuntos(int codigoTerminacion, Data.dsEstructura ds)
         {
-            string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_cantidadstock
+            string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock
                            FROM CONJUNTOS
                            WHERE te_codigo = @p0";
             
@@ -251,7 +310,7 @@ namespace GyCAP.DAL
                 DB.FillDataSet(ds, "CONJUNTOS", sql, valorParametros);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }           
-        }
+        }*/
 
         public static bool PuedeEliminarse(int codigo)
         {
@@ -307,5 +366,7 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             catch (Entidades.Excepciones.ElementoInexistenteException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+
+        
     }
 }
