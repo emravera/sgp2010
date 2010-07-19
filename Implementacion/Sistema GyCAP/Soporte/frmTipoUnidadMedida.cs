@@ -14,7 +14,7 @@ namespace GyCAP.UI.Soporte
         private static frmTipoUnidadMedida _frmTipoUnidadMedida = null;
         private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
         private DataView dvTipoUnidadMedida;
-        private enum estadoUI { inicio, nuevo, consultar, modificar };
+        private enum estadoUI { inicio, modificar };
         private estadoUI estadoInterface;
         
         public frmTipoUnidadMedida()
@@ -24,14 +24,14 @@ namespace GyCAP.UI.Soporte
             //Para que no genere las columnas automáticamente
             dgvLista.AutoGenerateColumns = false;
             //Agregamos las columnas
-            dgvLista.Columns.Add("TUMED_CODIGO", "Código");
             dgvLista.Columns.Add("TUMED_NOMBRE", "Nombre");
-            
+            dgvLista.Columns["TUMED_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            dgvLista.Columns["TUMED_CODIGO"].DataPropertyName = "TUMED_CODIGO";
             dgvLista.Columns["TUMED_NOMBRE"].DataPropertyName = "TUMED_NOMBRE";
             //Creamos el dataview y lo asignamos a la grilla
+            BLL.TipoUnidadMedidaBLL.ObtenerTodos(dsUnidadMedida);
             dvTipoUnidadMedida = new DataView(dsUnidadMedida.TIPOS_UNIDADES_MEDIDA);
+            dvTipoUnidadMedida.Sort = "TUMED_NOMBRE ASC";
             dgvLista.DataSource = dvTipoUnidadMedida;
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
@@ -63,43 +63,21 @@ namespace GyCAP.UI.Soporte
             this.Dispose(true);
         }
 
-        #region Pestaña Buscar
-
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.Clear();
-                BLL.TipoUnidadMedidaBLL.ObtenerTodos(txtNombreBuscar.Text, dsUnidadMedida);
-                //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
-                //por una consulta a la BD
-                dvTipoUnidadMedida.Table = dsUnidadMedida.TIPOS_UNIDADES_MEDIDA;
-                if (dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.Rows.Count == 0)
-                {
-                    MessageBox.Show("No se encontraron tipos de unidad de medida con el nombre ingresado.", "Aviso");
-                }
-                SetInterface(estadoUI.inicio);
-            }
-            catch (Entidades.Excepciones.BaseDeDatosException ex)
-            {
-                MessageBox.Show(ex.Message);
-                SetInterface(estadoUI.inicio);
-            }
-        }
-
-        private void btnNuevo_Click(object sender, EventArgs e)
-        {
-            SetInterface(estadoUI.nuevo);
-        }
-
-        private void btnConsultar_Click(object sender, EventArgs e)
-        {
-            SetInterface(estadoUI.consultar);
-        }
+        #region Botones
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.modificar);
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int codigo = Convert.ToInt32(dvTipoUnidadMedida[dgvLista.SelectedRows[0].Index]["tumed_codigo"]);
+                txtNombre.Text = dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.FindByTUMED_CODIGO(codigo).TUMED_NOMBRE;
+                txtNombre.Focus();
+                SetInterface(estadoUI.modificar);
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Tipo de Unidad de Medida de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            } 
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -108,7 +86,7 @@ namespace GyCAP.UI.Soporte
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el tipo de unidad de medida seleccionado?", "Confirmar eliminación", MessageBoxButtons.YesNo);
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el Tipo de Unidad de Medida seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -123,23 +101,19 @@ namespace GyCAP.UI.Soporte
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un tipo de unidad de medida de la lista.", "Aviso");
+                MessageBox.Show("Debe seleccionar un Tipo de Unidad de Medida de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
-        #endregion
-
-        #region Pestaña Datos
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -149,7 +123,7 @@ namespace GyCAP.UI.Soporte
                 Entidades.TipoUnidadMedida tipoUnidadMedida = new GyCAP.Entidades.TipoUnidadMedida();
 
                 //Revisamos que está haciendo
-                if (estadoInterface == estadoUI.nuevo)
+                if (estadoInterface != estadoUI.modificar)
                 {
                     //Está cargando uno nuevo
                     tipoUnidadMedida.Nombre = txtNombre.Text;
@@ -173,11 +147,11 @@ namespace GyCAP.UI.Soporte
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -198,23 +172,24 @@ namespace GyCAP.UI.Soporte
                         rowTipoUnidadMedida.EndEdit();
                         dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AcceptChanges();
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Aviso");
+                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AcceptChanges();
             }
             else
             {
-                MessageBox.Show("Debe completar los datos.", "Aviso");
+                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        private void btnVolver_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
             SetInterface(estadoUI.inicio);
         }
@@ -241,77 +216,40 @@ namespace GyCAP.UI.Soporte
 
                     btnModificar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
-                    btnConsultar.Enabled = hayDatos;
-                    btnNuevo.Enabled = true;
-                    estadoInterface = estadoUI.inicio;
-                    tcTipoUnidadMedida.SelectedTab = tpBuscar;
-                    break;
-                case estadoUI.nuevo:
-                    txtNombre.ReadOnly = false;
-                    txtCodigo.Text = String.Empty;
                     txtNombre.Text = String.Empty;
-                    btnGuardar.Enabled = true;
-                    btnVolver.Enabled = true;
-                    btnNuevo.Enabled = false;
-                    btnConsultar.Enabled = false;
-                    btnModificar.Enabled = false;
-                    btnEliminar.Enabled = false;
-                    estadoInterface = estadoUI.nuevo;
-                    tcTipoUnidadMedida.SelectedTab = tpDatos;
-                    break;
-                case estadoUI.consultar:
-                    txtNombre.ReadOnly = true;
-                    btnGuardar.Enabled = false;
-                    btnVolver.Enabled = true;
-                    estadoInterface = estadoUI.consultar;
-                    tcTipoUnidadMedida.SelectedTab = tpDatos;
-                    break;
+                    btnCancelar.Enabled = false;
+                    dgvLista.Enabled = true;
+                    estadoInterface = estadoUI.inicio;
+                    break;                
                 case estadoUI.modificar:
                     txtNombre.ReadOnly = false;
-                    btnGuardar.Enabled = true;
-                    btnVolver.Enabled = true;
-                    btnNuevo.Enabled = false;
-                    btnConsultar.Enabled = false;
+                    btnCancelar.Enabled = true;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    dgvLista.Enabled = false;
                     estadoInterface = estadoUI.modificar;
-                    tcTipoUnidadMedida.SelectedTab = tpDatos;
                     break;
                 default:
                     break;
             }
-        }
-               
-        //Método para evitar que se cierrre la pantalla con la X o con ALT+F4
-        private void frmTipoUnidadMedida_FormClosing(object sender, FormClosingEventArgs e)
-        {
+        }         
 
-        }
-
-        //Evento RowEnter de la grilla, va cargando los datos en la pestaña Datos a medida que se
-        //hace clic en alguna fila de la grilla
-        private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
+        private void frmTipoUnidadMedida_Activated(object sender, EventArgs e)
         {
-            int codigoTipoUnidadMedida = Convert.ToInt32(dvTipoUnidadMedida[e.RowIndex]["tumed_codigo"]);
-            txtCodigo.Text = codigoTipoUnidadMedida.ToString();
-            txtNombre.Text = dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.FindByTUMED_CODIGO(codigoTipoUnidadMedida).TUMED_NOMBRE;
+            if (txtNombre.Enabled == true)
+            {
+                txtNombre.Focus();
+            }
         }
 
-        //Evento doble clic en la grilla, es igual que si hiciera clic en Consultar
-        private void dgvLista_DoubleClick(object sender, EventArgs e)
+        private void txtNombre_Enter(object sender, EventArgs e)
         {
-            btnConsultar.PerformClick();
+            txtNombre.SelectAll();
         }
 
         #endregion
 
-        private void frmTipoUnidadMedida_Activated(object sender, EventArgs e)
-        {
-            if (txtNombreBuscar.Enabled == true)
-            {
-                txtNombreBuscar.Focus();
-            }
-        }
+
 
     }
 }

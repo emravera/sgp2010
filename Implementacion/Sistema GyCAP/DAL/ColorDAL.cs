@@ -59,8 +59,18 @@ namespace GyCAP.DAL
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+
+        public static void ObtenerColores(Data.dsColor ds)
+        {
+            string sql = "SELECT col_codigo, col_nombre FROM COLORES";
+            try
+            {
+                DB.FillDataSet(ds, "COLORES", sql, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }            
+        }
         
-        public static void ObtenerColor(string nombre, Data.dsColor ds)
+        public static void ObtenerColores(string nombre, Data.dsColor ds)
         {
             if (nombre != String.Empty)
             {

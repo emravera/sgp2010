@@ -14,7 +14,7 @@ namespace GyCAP.UI.EstructuraProducto
         private static frmColor _frmColor = null;
         private Data.dsColor dsColor = new GyCAP.Data.dsColor();
         private DataView dvColor;
-        private enum estadoUI {inicio, nuevo, consultar, modificar, };
+        private enum estadoUI {inicio, modificar, };
         private estadoUI estadoInterface;
         
         public frmColor()
@@ -24,16 +24,18 @@ namespace GyCAP.UI.EstructuraProducto
             //Para que no genere las columnas automáticamente
             dgvLista.AutoGenerateColumns = false;
             //Agregamos las columnas
-            dgvLista.Columns.Add("COL_CODIGO", "Código");
             dgvLista.Columns.Add("COL_NOMBRE", "Nombre");
+            dgvLista.Columns["COL_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            dgvLista.Columns["COL_CODIGO"].DataPropertyName = "COL_CODIGO";
             dgvLista.Columns["COL_NOMBRE"].DataPropertyName = "COL_NOMBRE";
+            //Traemos todos los colores al principio
+            BLL.ColorBLL.ObtenerTodos(dsColor);
             //Creamos el dataview y lo asignamos a la grilla
             dvColor = new DataView(dsColor.COLORES);
+            dvColor.Sort = "COL_NOMBRE ASC";
             dgvLista.DataSource = dvColor;
             //Seteamos el estado de la interfaz
-            SetInterface(estadoUI.inicio);
+            SetInterface(estadoUI.inicio);            
         }
 
         //Método para evitar la creación de más de una pantalla
@@ -65,43 +67,21 @@ namespace GyCAP.UI.EstructuraProducto
         //Usando el comando #region NOMBRE y #endregion, se puede agrupar código relacionado para mostrarlo
         //u ocultarlo y hacer más fácil la lectura
 
-        #region Pestaña Buscar
-
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                dsColor.COLORES.Clear();
-                BLL.ColorBLL.ObtenerTodos(txtNombreBuscar.Text, dsColor);
-                //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
-                //por una consulta a la BD
-                dvColor.Table = dsColor.COLORES;
-                if (dsColor.COLORES.Rows.Count == 0)
-                {
-                    MessageBox.Show("No se encontraron colores con el nombre ingresado.", "Aviso");
-                }
-                SetInterface(estadoUI.inicio);
-            }
-            catch (Entidades.Excepciones.BaseDeDatosException ex)
-            {
-                MessageBox.Show(ex.Message);
-                SetInterface(estadoUI.inicio);
-            }
-        }
-        
-        private void btnNuevo_Click(object sender, EventArgs e)
-        {
-            SetInterface(estadoUI.nuevo);            
-        }
-
-        private void btnConsultar_Click(object sender, EventArgs e)
-        {
-            SetInterface(estadoUI.consultar);
-        }
+        #region Botones Principales
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.modificar);
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int codigo = Convert.ToInt32(dvColor[dgvLista.SelectedRows[0].Index]["col_codigo"]);
+                txtNombre.Text = dsColor.COLORES.FindByCOL_CODIGO(codigo).COL_NOMBRE;
+                txtNombre.Focus();
+                SetInterface(estadoUI.modificar);
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Color de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }            
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -110,7 +90,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el color seleccionado?", "Confirmar eliminación", MessageBoxButtons.YesNo);
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el Color seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -124,23 +104,19 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un color de la lista.", "Aviso");
+                MessageBox.Show("Debe seleccionar un Color de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-        }
-
-        #endregion
-
-        #region Pestaña Datos
+        }       
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -150,7 +126,7 @@ namespace GyCAP.UI.EstructuraProducto
                 Entidades.Color color = new GyCAP.Entidades.Color();
                 
                 //Revisamos que está haciendo
-                if (estadoInterface == estadoUI.nuevo)
+                if (estadoInterface != estadoUI.modificar)
                 {
                     //Está cargando un color nuevo
                     color.Nombre = txtNombre.Text;
@@ -170,15 +146,15 @@ namespace GyCAP.UI.EstructuraProducto
                         dsColor.COLORES.AddCOLORESRow(rowColor);
                         dsColor.COLORES.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
-                        SetInterface(estadoUI.inicio);
+                        SetInterface(estadoUI.inicio);                        
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -199,23 +175,24 @@ namespace GyCAP.UI.EstructuraProducto
                         rowColor.EndEdit();
                         dsColor.COLORES.AcceptChanges();
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Aviso");
+                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                dgvLista.Refresh();
             }
             else
             {
-                MessageBox.Show("Debe completar los datos.", "Aviso");
+                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        private void btnVolver_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
             SetInterface(estadoUI.inicio);
         }
@@ -243,77 +220,30 @@ namespace GyCAP.UI.EstructuraProducto
                     
                     btnModificar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
-                    btnConsultar.Enabled = hayDatos;
-                    estadoInterface = estadoUI.inicio;
-                    tcColor.SelectedTab = tpBuscar;                    
-                    break;
-                case estadoUI.nuevo:
-                    txtNombre.ReadOnly = false;
-                    txtCodigo.Text = String.Empty;
                     txtNombre.Text = String.Empty;
-                    btnGuardar.Enabled = true;
-                    btnVolver.Enabled = true;
-                    btnNuevo.Enabled = false;
-                    btnConsultar.Enabled = false;
-                    btnModificar.Enabled = false;
-                    btnEliminar.Enabled = false;
-                    estadoInterface = estadoUI.nuevo;
-                    tcColor.SelectedTab = tpDatos;
-                    break;
-                case estadoUI.consultar:
-                    txtNombre.ReadOnly = true;
-                    btnGuardar.Enabled = false;
-                    btnVolver.Enabled = true;
-                    estadoInterface = estadoUI.consultar;
-                    tcColor.SelectedTab = tpDatos;
+                    btnCancelar.Enabled = false;
+                    dgvLista.Enabled = true;
+                    estadoInterface = estadoUI.inicio;                                      
                     break;
                 case estadoUI.modificar:
-                    txtNombre.ReadOnly = false;
-                    btnGuardar.Enabled = true;
-                    btnVolver.Enabled = true;
-                    btnNuevo.Enabled = false;
-                    btnConsultar.Enabled = false;
+                    txtNombre.ReadOnly = false;                    
+                    btnCancelar.Enabled = true;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    dgvLista.Enabled = false;
                     estadoInterface = estadoUI.modificar;
-                    tcColor.SelectedTab = tpDatos;
                     break;
                 default:
                     break;
             }
-        }
-          
-
-        //Método para evitar que se cierrre la pantalla con la X o con ALT+F4
-        private void frmColor_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
-        }
-
-        //Evento RowEnter de la grilla, va cargando los datos en la pestaña Datos a medida que se
-        //hace clic en alguna fila de la grilla
-        private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            int codigoColor = Convert.ToInt32(dvColor[e.RowIndex]["col_codigo"]);
-            txtCodigo.Text = codigoColor.ToString();
-            txtNombre.Text = dsColor.COLORES.FindByCOL_CODIGO(codigoColor).COL_NOMBRE;
-        }
-
-        //Evento doble clic en la grilla, es igual que si hiciera clic en Consultar
-        private void dgvLista_DoubleClick(object sender, EventArgs e)
-        {
-            btnConsultar.PerformClick();
-        }
-
-        private void txtNombreBuscar_Enter(object sender, EventArgs e)
-        {
-            txtNombreBuscar.SelectAll();
-        }
+        }                 
 
         private void txtNombre_Enter(object sender, EventArgs e)
         {
             txtNombre.SelectAll();
         }
+
+        
 
         #endregion
 
