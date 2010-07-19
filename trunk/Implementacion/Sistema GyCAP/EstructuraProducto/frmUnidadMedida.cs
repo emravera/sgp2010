@@ -24,33 +24,31 @@ namespace GyCAP.UI.EstructuraProducto
             //Para que no genere las columnas automáticamente
             dgvLista.AutoGenerateColumns = false;
             //Agregamos las columnas
-            dgvLista.Columns.Add("UMED_CODIGO", "Código");
-            dgvLista.Columns.Add("TUMED_CODIGO", "Tipo");
             dgvLista.Columns.Add("UMED_NOMBRE", "Nombre");
+            dgvLista.Columns.Add("TUMED_CODIGO", "Tipo");            
             dgvLista.Columns.Add("UMED_ABREVIATURA", "Abreviatura");
 
             //Setemaos las columnas
-            dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvLista.Columns[3].Resizable = DataGridViewTriState.True;
-
+            dgvLista.Columns["UMED_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["TUMED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["UMED_ABREVIATURA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            dgvLista.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
-            dgvLista.Columns["TUMED_CODIGO"].DataPropertyName = "TUMED_CODIGO";
             dgvLista.Columns["UMED_NOMBRE"].DataPropertyName = "UMED_NOMBRE";
+            dgvLista.Columns["TUMED_CODIGO"].DataPropertyName = "TUMED_CODIGO";
             dgvLista.Columns["UMED_ABREVIATURA"].DataPropertyName = "UMED_ABREVIATURA";
 
             //Llena el Dataset con Tipo Unidad Medida
-            BLL.TipoUnidadMedidaBLL.ObtenerTodos(string.Empty, dsUnidadMedida);            
+            BLL.TipoUnidadMedidaBLL.ObtenerTodos(dsUnidadMedida);            
             //Creamos el dataview y lo asignamos a la grilla
             dvListaUnidad = new DataView(dsUnidadMedida.UNIDADES_MEDIDA);
+            dvListaUnidad.Sort = "UMED_NOMBRE ASC";
             dgvLista.DataSource = dvListaUnidad;
 
             //CARGA DE COMBOS
             //Creamos el Dataview y se lo asignamos al combo
             dvComboUnidad = new DataView(dsUnidadMedida.TIPOS_UNIDADES_MEDIDA);
+            dvComboUnidad.Sort = "TUMED_NOMBRE ASC";
             cbTipo.DataSource = dvComboUnidad;
             cbTipo.DisplayMember = "TUMED_NOMBRE";
             cbTipo.ValueMember = "TUMED_CODIGO";
@@ -60,6 +58,7 @@ namespace GyCAP.UI.EstructuraProducto
 
             //Combo de Datos
             dvComboBuscarUnidad = new DataView(dsUnidadMedida.TIPOS_UNIDADES_MEDIDA);
+            dvComboBuscarUnidad.Sort = "TUMED_NOMBRE ASC";
             cbTipoUnidadDatos.DataSource = dvComboBuscarUnidad;
             cbTipoUnidadDatos.DisplayMember = "TUMED_NOMBRE";
             cbTipoUnidadDatos.ValueMember = "TUMED_CODIGO";
@@ -75,6 +74,7 @@ namespace GyCAP.UI.EstructuraProducto
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
         }
+        
         //Método para evitar la creación de más de una pantalla
         public static frmUnidadMedida Instancia
         {
@@ -96,18 +96,16 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
-
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Dispose(true);
         }
 
-
         #region Pestaña Buscar
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-          try
+            try
             {
               //Limpiamos el Dataset
                 dsUnidadMedida.UNIDADES_MEDIDA.Clear();
@@ -119,21 +117,19 @@ namespace GyCAP.UI.EstructuraProducto
                 //por una consulta a la BD
                 dvListaUnidad.Table = dsUnidadMedida.UNIDADES_MEDIDA;
                 
-                    if (dsUnidadMedida.UNIDADES_MEDIDA.Rows.Count == 0)
-                    {
-                        MessageBox.Show("No se encontraron Unidades de Medida con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    SetInterface(estadoUI.inicio);
-               }
+                if (dsUnidadMedida.UNIDADES_MEDIDA.Rows.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron Unidades de Medida con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                SetInterface(estadoUI.inicio);
+            }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
                 MessageBox.Show(ex.Message, "Error: Unidades de Medida - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetInterface(estadoUI.inicio);
             }
-
-
-
         }
+        
         //Metodo para formatear la grilla que cambia las foreign keys por el nombre
         private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -149,14 +145,13 @@ namespace GyCAP.UI.EstructuraProducto
                     default:
                         break;
                 }
-
             }
-
         }
        
         #endregion
 
         #region Pestaña Datos
+        
         //Programacion de Cada uno de los botones
         private void btnNuevo_Click(object sender, EventArgs e)
         {
@@ -312,7 +307,6 @@ namespace GyCAP.UI.EstructuraProducto
                 MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
 
         #endregion
         

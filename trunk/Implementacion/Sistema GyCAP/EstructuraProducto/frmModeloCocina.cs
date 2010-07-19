@@ -24,19 +24,17 @@ namespace GyCAP.UI.EstructuraProducto
             //Para que no genere las columnas automáticamente
             dgvLista.AutoGenerateColumns = false;
             //Agregamos las columnas
-            dgvLista.Columns.Add("MOD_CODIGO", "Código");
             dgvLista.Columns.Add("MOD_NOMBRE", "Nombre");
             dgvLista.Columns.Add("MOD_DESCRIPCION", "Descripción");
-            dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvLista.Columns[2].Resizable = DataGridViewTriState.True;
+            dgvLista.Columns["MOD_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["MOD_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLista.Columns["MOD_DESCRIPCION"].Resizable = DataGridViewTriState.True;
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            dgvLista.Columns["MOD_CODIGO"].DataPropertyName = "MOD_CODIGO";
             dgvLista.Columns["MOD_NOMBRE"].DataPropertyName = "MOD_NOMBRE";
             dgvLista.Columns["MOD_DESCRIPCION"].DataPropertyName = "MOD_DESCRIPCION";
             //Creamos el dataview y lo asignamos a la grilla
             dvModeloCocina = new DataView(dsModeloCocina.MODELOS_COCINAS);
+            dvModeloCocina.Sort = "MOD_NOMBRE ASC";
             dgvLista.DataSource = dvModeloCocina;
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
