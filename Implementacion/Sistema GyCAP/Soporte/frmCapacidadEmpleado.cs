@@ -28,14 +28,14 @@ namespace GyCAP.UI.Soporte
             dgvLista.AutoGenerateColumns = false;
 
             //Agregamos las columnas
-            dgvLista.Columns.Add("TE_CODIGO", "Código");
-            dgvLista.Columns.Add("TE_NOMBRE", "Nombre");
-            dgvLista.Columns.Add("TE_DESCRIPCION", "Descripción");
+            dgvLista.Columns.Add("CEMP_CODIGO", "Código");
+            dgvLista.Columns.Add("CEMP_NOMBRE", "Nombre");
+            dgvLista.Columns.Add("CEMP_DESCRIPCION", "Descripción");
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            dgvLista.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
-            dgvLista.Columns["TE_NOMBRE"].DataPropertyName = "TE_NOMBRE";
-            dgvLista.Columns["TE_DESCRIPCION"].DataPropertyName = "TE_DESCRIPCION";
+            dgvLista.Columns["CEMP_CODIGO"].DataPropertyName = "CEMP_CODIGO";
+            dgvLista.Columns["CEMP_NOMBRE"].DataPropertyName = "CEMP_NOMBRE";
+            dgvLista.Columns["CEMP_DESCRIPCION"].DataPropertyName = "CEMP_DESCRIPCION";
 
             //Oculta la columna que contiene los encabezados
             dgvLista.RowHeadersVisible = false;
@@ -75,10 +75,12 @@ namespace GyCAP.UI.Soporte
                     if (dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.Rows.Count == 0)
                     {
                         hayDatos = false;
+                        txtNombreBuscar.Focus();
                     }
                     else
                     {
                         hayDatos = true;
+                        dgvLista.Focus();
                     }
 
                     btnModificar.Enabled = hayDatos;
@@ -87,7 +89,6 @@ namespace GyCAP.UI.Soporte
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcABM.SelectedTab = tpBuscar;
-                    txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
                     txtNombre.ReadOnly = false;
@@ -340,12 +341,9 @@ namespace GyCAP.UI.Soporte
 
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex > 0)
-            {
-                int codigoCapacidadEmpleado = Convert.ToInt32(dvCapacidadEmpleado[e.RowIndex]["CEMP_CODIGO"]);
-                txtNombre.Text = dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.FindByCEMP_CODIGO(codigoCapacidadEmpleado).CEMP_NOMBRE ;
-                txtDescripcion.Text = dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.FindByCEMP_CODIGO(codigoCapacidadEmpleado).CEMP_DESCRIPCION;
-            }
+            int codigoCapacidadEmpleado = Convert.ToInt32(dvCapacidadEmpleado[e.RowIndex]["CEMP_CODIGO"]);
+            txtNombre.Text = dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.FindByCEMP_CODIGO(codigoCapacidadEmpleado).CEMP_NOMBRE ;
+            txtDescripcion.Text = dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.FindByCEMP_CODIGO(codigoCapacidadEmpleado).CEMP_DESCRIPCION;
         }
 
         private void txtNombreBuscar_Enter(object sender, EventArgs e)

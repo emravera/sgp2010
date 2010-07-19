@@ -335,12 +335,12 @@ namespace GyCAP.UI.EstructuraProducto
         //hace clic en alguna fila de la grilla
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex > 0)
-            {
+            //if (e.RowIndex > 0)
+            //{
                 long codigoTerminacion = Convert.ToInt64(dvTerminacion[e.RowIndex]["te_codigo"]);
                 txtNombre.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_NOMBRE;
                 txtDescripcion.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_DESCRIPCION;
-            }
+            //}
         }
 
         //Evento doble clic en la grilla, es igual que si hiciera clic en Consultar
