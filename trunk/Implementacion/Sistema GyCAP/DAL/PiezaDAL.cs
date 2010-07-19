@@ -14,12 +14,13 @@ namespace GyCAP.DAL
             string sqlInsertPieza = @"INSERT INTO [PIEZAS]
                                         ([pza_nombre]
                                         ,[te_codigo]
+                                        ,[pza_descripcion]
                                         ,[pza_cantidadstock]) 
-                                        VALUES (@p0,@p1,@p2) SELECT @@Identity";
+                                        VALUES (@p0,@p1,@p2,@p3) SELECT @@Identity";
 
             //Así obtenemos la pieza nueva del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.PIEZASRow rowPieza = dsEstructura.PIEZAS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.PIEZASRow;
-            object[] valorParametros = { rowPieza.PZA_CODIGO, rowPieza.TE_CODIGO, 0 };
+            object[] valorParametros = { rowPieza.PZA_NOMBRE, rowPieza.TE_CODIGO, rowPieza.PZA_DESCRIPCION, 0 };
 
             string sqlInsertEstructura = @"INSERT INTO [DETALLE_PIEZA] 
                                         ([pza_codigo]
@@ -84,7 +85,7 @@ namespace GyCAP.DAL
             //Esto va a ser muy largo...empecemos
             //Primero actualizaremos la pieza y luego la estructura
             //Armemos todas las consultas
-            string sqlUpdatePieza = "UPDATE PIEZAS SET pza_nombre = @p0, te_codigo = @p1 WHERE pza_codigo = @p2";
+            string sqlUpdatePieza = "UPDATE PIEZAS SET pza_nombre = @p0, te_codigo = @p1, pza_descripcion = @p2 WHERE pza_codigo = @p3";
 
             string sqlInsertEstructura = @"INSERT INTO [DETALLE_PIEZA] 
                                         ([pza_codigo]
@@ -99,7 +100,7 @@ namespace GyCAP.DAL
 
             //Así obtenemos la pieza del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.PIEZASRow rowPieza = dsEstructura.PIEZAS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.PIEZASRow;
-            object[] valorParametros = { rowPieza.PZA_NOMBRE, rowPieza.TE_CODIGO, rowPieza.PZA_CODIGO };
+            object[] valorParametros = { rowPieza.PZA_NOMBRE, rowPieza.TE_CODIGO, rowPieza.PZA_DESCRIPCION, rowPieza.PZA_CODIGO };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
@@ -191,7 +192,7 @@ namespace GyCAP.DAL
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
         public static Entidades.Pieza ObtenerPieza(int codigoPieza)
         {
-            string sql = @"SELECT pza_nombre, te_terminacion, pza_cantidadstock
+            string sql = @"SELECT pza_nombre, te_terminacion, pza_descripcion, pza_cantidadstock
                         FROM PIEZAS WHERE pza_codigo = @p0";
             object[] valorParametros = { codigoPieza };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
@@ -203,6 +204,7 @@ namespace GyCAP.DAL
                 pieza.CodigoPieza = codigoPieza;
                 pieza.Nombre = rdr["pza_nombre"].ToString();
                 pieza.CodigoTerminacion = Convert.ToInt32(rdr["te_codigo"].ToString());
+                pieza.Descripcion = rdr["pza_descripcion"].ToString();
                 pieza.CantidadStock = Convert.ToInt32(rdr["pza_cantidadstock"].ToString());
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
@@ -214,9 +216,55 @@ namespace GyCAP.DAL
             return pieza;
         }
 
-        public static void ObtenerPiezas(Data.dsEstructura ds)
+        public static void ObtenerPiezas(object nombre, object terminacion, Data.dsEstructura ds)
         {
-            string sql = "SELECT pza_codigo, pza_nombre, te_codigo, pza_cantidadstock FROM PIEZAS";
+            string sql = "SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, pza_cantidadstock FROM PIEZAS ";
+
+            //Sirve para armar el nombre de los parámetros
+            int cantidadParametros = 0;
+            //Un array de object para ir guardando los valores de los filtros, con tamaño = cantidad de filtros disponibles
+            object[] valoresFiltros = new object[2];
+            //Empecemos a armar la consulta, revisemos que filtros aplican
+            if (nombre != null && nombre.ToString() != string.Empty)
+            {
+                //Como es el primero no revisamos si está el WHERE y si aplica el filtro lo usamos
+                sql += "WHERE pza_nombre LIKE @p" + cantidadParametros + " ";
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                nombre = "%" + nombre + "%";
+                valoresFiltros[cantidadParametros] = nombre;
+                cantidadParametros++;
+            }
+            //Revisamos si pasó algun valor y si es un integer
+            if (terminacion != null && terminacion.GetType() == cantidadParametros.GetType())
+            {
+                //Como es el segundo filtro si tiene que revisar si el anterior también aplica, busca si está el WHERE,
+                //si está agrega un AND, caso contrario el WHERE
+                if (sql.Contains("WHERE")) { sql += "AND te_codigo = @p" + cantidadParametros; }
+                else { sql += "WHERE te_codigo = @p" + cantidadParametros; }
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(terminacion);
+                cantidadParametros++;
+            }
+
+            if (cantidadParametros > 0)
+            {
+                //Buscamos con filtro, armemos el array de los valores de los parametros
+                object[] valorParametros = new object[cantidadParametros];
+                for (int i = 0; i < cantidadParametros; i++)
+                {
+                    valorParametros[i] = valoresFiltros[i];
+                }
+                DB.FillDataSet(ds, "PIEZAS", sql, valorParametros);
+            }
+            else
+            {
+                //Buscamos sin filtro
+                DB.FillDataSet(ds, "PIEZAS", sql, null);
+            }
+        }
+
+        /*public static void ObtenerPiezas(Data.dsEstructura ds)
+        {
+            string sql = "SELECT pza_codigo, pza_nombre, te_codigo, pza_descripcion, pza_cantidadstock FROM PIEZAS";
             try
             {
                 DB.FillDataSet(ds, "PIEZAS", sql, null);
@@ -251,7 +299,7 @@ namespace GyCAP.DAL
                 DB.FillDataSet(ds, "PIEZAS", sql, valorParametros);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
+        }*/
 
         public static bool PuedeEliminarse(int codigo)
         {

@@ -233,7 +233,9 @@ namespace GyCAP.DAL
             if (nombre != null && nombre.ToString() != string.Empty)
             {
                 //Como es el primero no revisamos si está el WHERE y si aplica el filtro lo usamos
-                sql += "WHERE conj_nombre = @p" + cantidadParametros + " ";
+                sql += "WHERE conj_nombre LIKE @p" + cantidadParametros + " ";
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                nombre = "%" + nombre + "%";
                 valoresFiltros[cantidadParametros] = nombre;
                 cantidadParametros++;
             }
