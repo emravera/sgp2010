@@ -360,6 +360,5 @@ namespace GyCAP.UI.Soporte
         {
             txtDescripcion.SelectAll();
         }
-
     }
 }
