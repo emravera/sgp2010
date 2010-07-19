@@ -151,5 +151,11 @@ namespace Principal
             GyCAP.UI.EstructuraProducto.frmMateriaPrimaPrincipal.Instancia.MdiParent = this;
             GyCAP.UI.EstructuraProducto.frmMateriaPrimaPrincipal.Instancia.Show();
         }
+
+        private void t9_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Soporte.frmCapacidadEmpleado.Instancia.MdiParent = this;
+            GyCAP.UI.Soporte.frmCapacidadEmpleado.Instancia.Show(); 
+        }
     }
 }
