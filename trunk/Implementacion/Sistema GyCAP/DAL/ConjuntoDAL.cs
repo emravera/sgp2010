@@ -103,7 +103,7 @@ namespace GyCAP.DAL
 
             string sqlDeleteEstructura = "DELETE FROM DETALLE_CONJUNTO WHERE dcj_codigo = @p0";
             
-            //Así obtenemos el conjunto nuevo del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
+            //Así obtenemos el conjunto modificado del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.CONJUNTOSRow rowConjunto = dsEstructura.CONJUNTOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.CONJUNTOSRow;
             object[] valorParametros = { rowConjunto.CONJ_NOMBRE, rowConjunto.TE_CODIGO, rowConjunto.CONJ_DESCRIPCION, rowConjunto.CONJ_CODIGO };
 
