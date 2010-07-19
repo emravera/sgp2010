@@ -35,6 +35,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -91,6 +92,11 @@
     <Compile Include="ProveedorBLL.cs" />
     <Compile Include="ProvinciaBLL.cs" />
     <Compile Include="RepuestoBLL.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SectorBLL.cs" />
     <Compile Include="SistemaBLL.cs" />
     <Compile Include="StockCocinaBLL.cs" />
@@ -121,6 +127,23 @@
       <Project>{BF769C01-D311-4BC9-813A-C63DC3B89319}</Project>
       <Name>Entidades %28Entidades\Entidades%29</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sinimagen.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Img\CImg\" />
+    <Folder Include="Img\MPImg\" />
+    <Folder Include="Img\PImg\" />
+    <Folder Include="Img\RImg\" />
+    <Folder Include="Img\SCImg\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

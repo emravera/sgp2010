@@ -16,6 +16,8 @@ namespace Principal
         public Principal()
         {
             InitializeComponent();
+            //Setea el directorio local de trabajo del sistema.
+            GyCAP.BLL.SistemaBLL.WorkingPath = Application.StartupPath;
         }
 
         private void ShowNewForm(object sender, EventArgs e)

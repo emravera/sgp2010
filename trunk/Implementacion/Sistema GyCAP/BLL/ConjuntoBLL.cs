@@ -2,11 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 namespace GyCAP.BLL
 {
     public class ConjuntoBLL
     {
+        /// <summary>
+        /// Valor que indica que no se desea filtrar por nombre de conjunto.
+        /// </summary>
+        public static readonly int NoFiltrarTerminacion = -1;
+        /// <summary>
+        /// Valor que indica que no se desea filtrar por cósigo de terminación de conjunto.
+        /// </summary>
+        public static readonly string NoFiltrarNombre = string.Empty;
+        /// <summary>
+        /// Setea el directorio que contiene las imágenes de los conjuntos en base al directorio en que
+        /// se está ejecutando la aplicación.
+        /// </summary>
+        private static readonly string directorioImagenes = SistemaBLL.WorkingPath + "BLL\\Img\\CImg\\";
+        
         public static void Insertar(Data.dsEstructura dsEstructura)
         {
             //Si existe lanzamos la excepción correspondiente
@@ -16,6 +31,7 @@ namespace GyCAP.BLL
             conjunto.CodigoConjunto = Convert.ToInt32(rowConjunto.CONJ_CODIGO);
             conjunto.Nombre = rowConjunto.CONJ_NOMBRE;
             conjunto.CodigoTerminacion = Convert.ToInt32(rowConjunto.TE_CODIGO);
+            conjunto.Descripcion = rowConjunto.CONJ_DESCRIPCION;
             if (EsConjunto(conjunto)) throw new Entidades.Excepciones.ElementoExistenteException();
             //Como no existe lo creamos
             DAL.ConjuntoDAL.Insertar(dsEstructura);
@@ -71,8 +87,13 @@ namespace GyCAP.BLL
         {
             return DAL.ConjuntoDAL.ObtenerConjunto(codigoConjunto);
         }
+
+        public static void ObtenerConjuntos(object nombre, object terminacion, Data.dsEstructura ds)
+        {
+            DAL.ConjuntoDAL.ObtenerConjuntos(nombre, terminacion, ds);
+        }
         
-        public static void ObtenerTodos(Data.dsEstructura ds)
+        /*public static void ObtenerTodos(Data.dsEstructura ds)
         {
             DAL.ConjuntoDAL.ObtenerConjuntos(ds);
             //Ya tenemos los conjuntos, ahora necesitamos los subconjuntos que los forman
@@ -100,7 +121,7 @@ namespace GyCAP.BLL
             {
                 ObtenerEstructura(Convert.ToInt32(rowConjunto.CONJ_CODIGO.ToString()), ds);
             } 
-        }
+        }*/
 
         /// <summary>
         /// Obtiene todos los subconjuntos que forman el conjunto.
@@ -115,6 +136,36 @@ namespace GyCAP.BLL
             conjunto.CodigoConjunto = codigoConjunto;
             if (!EsConjunto(conjunto)) { throw new Entidades.Excepciones.ElementoInexistenteException(); }
             DAL.ConjuntoDAL.ObtenerEstructura(codigoConjunto, ds);
+        }
+
+        /// <summary>
+        /// Guarda una imagen de un conjunto, si ya tiene una almacenada ésta se reemplaza.
+        /// Si se llama al método sin pasar la imagen, se guarda una por defecto con la leyenda
+        /// imagen no disponible.
+        /// </summary>
+        /// <param name="codigoConjunto">El código del conjunto cuya imagen se quiere guardar.</param>
+        /// <param name="imagen">La imagen del conjunto.</param>
+        public static void GuardarImagen(int codigoConjunto, Image imagen)
+        {
+            if (imagen == null) { imagen = BLL.Properties.Resources.sinimagen; }
+            string nombreImagen = "C" + codigoConjunto + ".jpg";
+            imagen.Save(nombreImagen, System.Drawing.Imaging.ImageFormat.Jpeg);
+        }
+
+        /// <summary>
+        /// Obtiene la imagen de un conjunto, en caso de no tenerla retorna una imagen por defecto con
+        /// la leyenda sin imagen.
+        /// </summary>
+        /// <param name="codigoConjunto">El código del conjunto cuya imagen se quiere obtener.</param>
+        /// <returns>El objeto image con la imagen del conjunto si la tiene, caso contrario retorna null.</returns>
+        public static Image ObtenerImagen(int codigoConjunto)
+        {
+            try
+            {
+                Image imagen = Image.FromFile(directorioImagenes + "C" + codigoConjunto + ".jpg");
+                return imagen;
+            }
+            catch (System.IO.FileNotFoundException) { return BLL.Properties.Resources.sinimagen; }            
         }
     }
 }

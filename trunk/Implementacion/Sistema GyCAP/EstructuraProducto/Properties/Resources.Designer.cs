@@ -165,6 +165,13 @@ namespace GyCAP.UI.EstructuraProducto.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap sinimagen {
+            get {
+                object obj = ResourceManager.GetObject("sinimagen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap System_25 {
             get {
                 object obj = ResourceManager.GetObject("System_25", resourceCulture);

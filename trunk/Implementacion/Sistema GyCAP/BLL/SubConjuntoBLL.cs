@@ -16,6 +16,7 @@ namespace GyCAP.BLL
             subconjunto.CodigoSubconjunto = Convert.ToInt32(rowSubconjunto.SCONJ_CODIGO);
             subconjunto.Nombre = rowSubconjunto.SCONJ_NOMBRE;
             subconjunto.CodigoTerminacion = Convert.ToInt32(rowSubconjunto.TE_CODIGO);
+            subconjunto.Descripcion = rowSubconjunto.SCONJ_DESCRIPCION;
             if (EsSubconjunto(subconjunto)) throw new Entidades.Excepciones.ElementoExistenteException();
             //Como no existe lo creamos
             DAL.SubConjuntoDAL.Insertar(dsEstructura);
