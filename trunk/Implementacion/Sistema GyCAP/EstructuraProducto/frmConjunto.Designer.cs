@@ -190,6 +190,7 @@
             this.dgvConjuntos.MultiSelect = false;
             this.dgvConjuntos.Name = "dgvConjuntos";
             this.dgvConjuntos.ReadOnly = true;
+            this.dgvConjuntos.RowHeadersVisible = false;
             this.dgvConjuntos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvConjuntos.Size = new System.Drawing.Size(556, 363);
             this.dgvConjuntos.TabIndex = 0;
@@ -565,6 +566,7 @@
             this.dgvSCDisponibles.MultiSelect = false;
             this.dgvSCDisponibles.Name = "dgvSCDisponibles";
             this.dgvSCDisponibles.ReadOnly = true;
+            this.dgvSCDisponibles.RowHeadersVisible = false;
             this.dgvSCDisponibles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSCDisponibles.Size = new System.Drawing.Size(423, 146);
             this.dgvSCDisponibles.TabIndex = 0;
