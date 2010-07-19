@@ -327,6 +327,7 @@
             this.dgvMPDisponibles.MultiSelect = false;
             this.dgvMPDisponibles.Name = "dgvMPDisponibles";
             this.dgvMPDisponibles.ReadOnly = true;
+            this.dgvMPDisponibles.RowHeadersVisible = false;
             this.dgvMPDisponibles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMPDisponibles.Size = new System.Drawing.Size(423, 146);
             this.dgvMPDisponibles.TabIndex = 0;
@@ -570,6 +571,7 @@
             this.dgvPiezas.MultiSelect = false;
             this.dgvPiezas.Name = "dgvPiezas";
             this.dgvPiezas.ReadOnly = true;
+            this.dgvPiezas.RowHeadersVisible = false;
             this.dgvPiezas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPiezas.Size = new System.Drawing.Size(556, 363);
             this.dgvPiezas.TabIndex = 0;
