@@ -54,7 +54,6 @@ create table COCINAS (
    DESIG_CODIGO         numeric(10)          null,
    COC_CANTIDADSTOCK    int                  null,
    COC_PRECIO           numeric(10,2)        null,  /* Marce 07/07 antes float(10) */
-   COC_IMAGEN           char(4)              null,            /*-MODIFICACION 17/07/2010-*/
    constraint PK_COCINAS primary key nonclustered (COC_CODIGO)
 )
 
@@ -76,7 +75,6 @@ create table CONJUNTOS (
    CONJ_NOMBRE          varchar(50)          null,
    CONJ_CANTIDADSTOCK   int                  null,
    CONJ_DESCRIPCION     varchar(200)         null,            /*-MODIFICACION 17/07/2010-*/
-   CONJ_IMAGEN          char(4)              null,            /*-MODIFICACION 17/07/2010-*/
    constraint PK_CONJUNTOS primary key nonclustered (CONJ_CODIGO)
 )
 
@@ -416,7 +414,6 @@ create table MATERIAS_PRIMAS (
    MP_DESCRIPCION       varchar(200)         null,
    MP_CANTIDADSTOCK     int                  null,
    MP_PRECIO            numeric(10,2)        null,            /*-MODIFICACION 09/07/2010-*/
-   MP_IMAGEN            char(4)              null,            /*-MODIFICACION 17/07/2010-*/
    constraint PK_MATERIAS_PRIMAS primary key nonclustered (MP_CODIGO)
 )
 
@@ -494,7 +491,6 @@ create table PIEZAS (
    TE_CODIGO            numeric(10)          null,
    PZA_NOMBRE           varchar(80)          null,
    PZA_CANTIDADSTOCK    int                  null,
-   PZA_IMAGEN           char(4)              null,            /*-MODIFICACION 17/07/2010-*/
    PZA_DESCRIPCION      varchar(200)         null,            /*-MODIFICACION 17/07/2010-*/
    constraint PK_PIEZAS primary key nonclustered (PZA_CODIGO)
 )
@@ -594,7 +590,6 @@ create table REPUESTOS (
    REP_DESCRIPCION      varchar(200)         null,
    REP_CANTIDADSTOCK    int                  null,
    REP_PRECIO           float(10)            null,
-   REP_IMAGEN           char(4)              null,            /*-MODIFICACION 17/07/2010-*/
    constraint PK_REPUESTOS primary key nonclustered (REP_CODIGO)
 )
 
@@ -628,7 +623,6 @@ create table SUBCONJUNTOS (
    TE_CODIGO            numeric(10)          null,
    SCONJ_NOMBRE         varchar(80)          null,
    SCONJ_CANTIDADSTOCK  int                  null,
-   SCONJ_IMAGEN         char(4)              null,            /*-MODIFICACION 17/07/2010-*/
    SCONJ_DESCRIPCION    varchar(200)         null,            /*-MODIFICACION 17/07/2010-*/
    constraint PK_SUBCONJUNTOS primary key nonclustered (SCONJ_CODIGO)
 )
