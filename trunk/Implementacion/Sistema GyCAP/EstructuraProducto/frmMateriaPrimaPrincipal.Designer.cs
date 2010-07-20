@@ -60,9 +60,9 @@
             // 
             this.btnAgregar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Mas_25;
             this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(476, 19);
+            this.btnAgregar.Location = new System.Drawing.Point(476, 18);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(88, 30);
+            this.btnAgregar.Size = new System.Drawing.Size(87, 30);
             this.btnAgregar.TabIndex = 3;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -91,7 +91,7 @@
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.tsMenu.Size = new System.Drawing.Size(588, 50);
+            this.tsMenu.Size = new System.Drawing.Size(587, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
@@ -148,7 +148,7 @@
             this.tcMateriaPrima.Name = "tcMateriaPrima";
             this.tcMateriaPrima.Padding = new System.Drawing.Point(0, 0);
             this.tcMateriaPrima.SelectedIndex = 0;
-            this.tcMateriaPrima.Size = new System.Drawing.Size(588, 310);
+            this.tcMateriaPrima.Size = new System.Drawing.Size(587, 310);
             this.tcMateriaPrima.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcMateriaPrima.TabIndex = 8;
             // 
@@ -159,7 +159,7 @@
             this.tpMP.Location = new System.Drawing.Point(4, 5);
             this.tpMP.Name = "tpMP";
             this.tpMP.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMP.Size = new System.Drawing.Size(580, 301);
+            this.tpMP.Size = new System.Drawing.Size(579, 301);
             this.tpMP.TabIndex = 0;
             this.tpMP.UseVisualStyleBackColor = true;
             // 
@@ -167,10 +167,10 @@
             // 
             this.gbLista.Controls.Add(this.dgvLista);
             this.gbLista.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbLista.Location = new System.Drawing.Point(3, 107);
+            this.gbLista.Location = new System.Drawing.Point(3, 106);
             this.gbLista.Name = "gbLista";
-            this.gbLista.Padding = new System.Windows.Forms.Padding(10);
-            this.gbLista.Size = new System.Drawing.Size(574, 191);
+            this.gbLista.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.gbLista.Size = new System.Drawing.Size(573, 192);
             this.gbLista.TabIndex = 1;
             this.gbLista.TabStop = false;
             this.gbLista.Text = "Listado de Materias Primas Principales";
@@ -186,8 +186,9 @@
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(554, 154);
+            this.dgvLista.Size = new System.Drawing.Size(553, 155);
             this.dgvLista.TabIndex = 0;
+            this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
             // gbAgregar
             // 
@@ -201,7 +202,7 @@
             this.gbAgregar.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbAgregar.Location = new System.Drawing.Point(3, 3);
             this.gbAgregar.Name = "gbAgregar";
-            this.gbAgregar.Size = new System.Drawing.Size(574, 98);
+            this.gbAgregar.Size = new System.Drawing.Size(573, 98);
             this.gbAgregar.TabIndex = 0;
             this.gbAgregar.TabStop = false;
             this.gbAgregar.Text = "Datos";
@@ -211,7 +212,7 @@
             this.btnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnVolver.Location = new System.Drawing.Point(476, 55);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(88, 30);
+            this.btnVolver.Size = new System.Drawing.Size(87, 30);
             this.btnVolver.TabIndex = 8;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -228,6 +229,11 @@
             // 
             // numCantidad
             // 
+            this.numCantidad.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.numCantidad.Location = new System.Drawing.Point(338, 24);
             this.numCantidad.Name = "numCantidad";
             this.numCantidad.Size = new System.Drawing.Size(65, 24);
@@ -264,14 +270,14 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(592, 366);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(591, 366);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
             // frmMateriaPrimaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 366);
+            this.ClientSize = new System.Drawing.Size(591, 366);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Calibri", 10F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
