@@ -156,6 +156,23 @@ namespace GyCAP.UI.EstructuraProducto
         #endregion
 
         #region Modelo Cocina
+
+        private void btnNuevoModeloCocina_Click(object sender, EventArgs e)
+        {
+            frmModeloCocina.Instancia.TopLevel = false;
+            frmModeloCocina.Instancia.Parent = areaTrabajo;
+            frmModeloCocina.Instancia.SetEstadoInicial(frmModeloCocina.estadoInicialNuevo);
+            frmModeloCocina.Instancia.Show();
+        }
+
+        private void btnConsultarModeloCocina_Click(object sender, EventArgs e)
+        {
+            frmModeloCocina.Instancia.TopLevel = false;
+            frmModeloCocina.Instancia.Parent = areaTrabajo;
+            frmModeloCocina.Instancia.SetEstadoInicial(frmModeloCocina.estadoInicialConsultar);
+            frmModeloCocina.Instancia.Show();
+        }
+
         #endregion
 
         #region Pieza
@@ -198,7 +215,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnListadoSubconjunto_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         #endregion
