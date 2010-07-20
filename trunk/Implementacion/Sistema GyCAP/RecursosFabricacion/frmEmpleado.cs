@@ -122,9 +122,10 @@ namespace GyCAP.UI.RecursosFabricacion
                     break;
                 case estadoUI.nuevo:
                     txtNombre.ReadOnly = false;
-                    txtDescripcion.ReadOnly = false;
+                    txtApellido.ReadOnly = false;
+
                     txtNombre.Text = String.Empty;
-                    txtDescripcion.Text = string.Empty;
+                    txtApellido.Text = string.Empty;
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -138,7 +139,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     break;
                 case estadoUI.consultar:
                     txtNombre.ReadOnly = true;
-                    txtDescripcion.ReadOnly = true;
+                    txtApellido.ReadOnly = true;
                     //gbGuardarCancelar.Enabled = false;
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
@@ -148,7 +149,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     break;
                 case estadoUI.modificar:
                     txtNombre.ReadOnly = false;
-                    txtDescripcion.ReadOnly = false;
+                    txtApellido.ReadOnly = false;
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -158,7 +159,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.modificar;
                     tcABM.SelectedTab = tpDatos;
-                    txtNombre.Focus();
+                    txtApellido.Focus();
                     break;
                 default:
                     break;
