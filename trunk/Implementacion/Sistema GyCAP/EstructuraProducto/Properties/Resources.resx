@@ -178,4 +178,13 @@
   <data name="sinimagen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sinimagen.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Find_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Find-48.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Listados_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Listados-48.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="New_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\New-48.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
