@@ -7,15 +7,25 @@ namespace GyCAP.Entidades
 {
     public class Empleado : Usuario
     {
-        private int legajo;
+        private long codigo;
+        private string legajo;
         private String nombre;
         private String apellido;
         private DateTime fechaNacimiento;
         private String telefono;
+        private DateTime fechaAlta;
+        private DateTime fechaBaja;
+
         private EstadoEmpleado estado;
         private Sector sector;
         
-        public int Legajo
+        public long Codigo
+        {
+            get { return codigo; }
+            set { codigo = value; }
+        }
+
+        public string Legajo
         {
             get { return legajo; }
             set { legajo = value; }
@@ -44,7 +54,19 @@ namespace GyCAP.Entidades
             get { return telefono; }
             set { telefono = value; }
         }
-        
+
+        public DateTime FechaAlta
+        {
+            get { return fechaAlta; }
+            set { fechaAlta = value; }
+        }
+
+        public DateTime FechaBaja
+        {
+            get { return fechaBaja; }
+            set { fechaBaja = value; }
+        }
+
         public EstadoEmpleado Estado
         {
             get { return estado; }
