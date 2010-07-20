@@ -5,8 +5,8 @@ alter table CAPACIDADESXEMPLEADO
    add constraint capacidadXEmpleado_capacidadEmpleado_fk foreign key (CEMP_CODIGO)
       references CAPACIDAD_EMPLEADOS (CEMP_CODIGO)
 alter table CAPACIDADESXEMPLEADO
-   add constraint capacidadXEmpleado_empleado_fk foreign key (E_LEGAJO)
-      references EMPLEADOS (E_LEGAJO)
+   add constraint capacidadXEmpleado_empleado_fk foreign key (E_CODIGO)
+      references EMPLEADOS (E_CODIGO)
 
 /*==============================================================*/
 /* Table: COCINAS                                               */
@@ -67,8 +67,8 @@ alter table DETALLE_PIEZA
 /* Table: DETALLE_ORDENES_TRABAJO                               */
 /*==============================================================*/
 alter table DETALLE_ORDENES_TRABAJO
-   add constraint detalleOrdentrabajo_empleado_fk foreign key (E_LEGAJO)
-      references EMPLEADOS (E_LEGAJO)
+   add constraint detalleOrdentrabajo_empleado_fk foreign key (E_CODIGO)
+      references EMPLEADOS (E_CODIGO)
 alter table DETALLE_ORDENES_TRABAJO
    add constraint detalleOrdenTrabajo_ordenTrabajo_fk foreign key (OTJO_NUMERO)
       references ORDENES_TRABAJO (OTJO_NUMERO)
@@ -109,8 +109,8 @@ alter table DETALLE_PLANES_MANTENIMIENTO
    add constraint detallePlanMantenimiento_causaFallo_fk foreign key (CF_CODIGO)
       references CAUSAS_FALLO (CF_CODIGO)
 alter table DETALLE_PLANES_MANTENIMIENTO
-   add constraint detallePlanMantenimiento_empleado_fk foreign key (E_LEGAJO)
-      references EMPLEADOS (E_LEGAJO)
+   add constraint detallePlanMantenimiento_empleado_fk foreign key (E_CODIGO)
+      references EMPLEADOS (E_CODIGO)
 alter table DETALLE_PLANES_MANTENIMIENTO
    add constraint detallePlanMantenimiento_estadoDetalleMantenimiento_fk foreign key (EDMAN_CODIGO)
       references ESTADO_DETALLE_MANTENIMIENTOS (EDMAN_CODIGO)
@@ -384,8 +384,8 @@ alter table UNIDADES_MEDIDA
 /* Table: USUARIOS                                              */
 /*==============================================================*/
 alter table USUARIOS
-   add constraint usuario_empleado_fk foreign key (E_LEGAJO)
-      references EMPLEADOS (E_LEGAJO)
+   add constraint usuario_empleado_fk foreign key (E_CODIGO)
+      references EMPLEADOS (E_CODIGO)
 alter table USUARIOS
    add constraint usuario_estadoUsuario_fk foreign key (EU_CODIGO)
       references ESTADO_USUARIOS (EU_CODIGO)

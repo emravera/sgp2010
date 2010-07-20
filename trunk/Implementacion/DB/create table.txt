@@ -13,7 +13,7 @@ create table CAPACIDAD_EMPLEADOS (
 /*==============================================================*/
 create table CAPACIDADESXEMPLEADO (
    CXE_CODIGO           numeric(10)          identity,
-   E_LEGAJO             numeric(10)          not null,
+   E_CODIGO             numeric(10)          not null,
    CEMP_CODIGO          numeric(10)          not null,
    constraint PK_CAPACIDADESXEMPLEADO primary key nonclustered (CXE_CODIGO)
 )
@@ -129,7 +129,7 @@ create table DETALLE_PIEZA (
 create table DETALLE_ORDENES_TRABAJO (
    DOTJO_CODIGO         numeric(10)          identity,
    PROVE_CODIGO         numeric(10)          null,
-   E_LEGAJO             numeric(10)          null,
+   E_CODIGO             numeric(10)          null,
    TA_CODIGO            numeric(10)          null,
    OTJO_NUMERO          numeric(10)          not null,
    constraint PK_DETALLE_ORDENES_TRABAJO primary key nonclustered (DOTJO_CODIGO)
@@ -168,7 +168,7 @@ create table DETALLE_PLANES_MANTENIMIENTO (
    PMAN_NUMERO          numeric(10)          not null,
    EDMAN_CODIGO         numeric(10)          not null,
    CF_CODIGO            numeric(10)          null,
-   E_LEGAJO             numeric(10)          not null,
+   E_CODIGO             numeric(10)          not null,
    REP_CODIGO           numeric(10)          null,
    MAN_CODIGO           numeric(10)          not null,
    DPMAN_FECHAREALIZACIONPREVISTA datetime             null,
@@ -236,14 +236,17 @@ create table DOMICILIOS (
 /* Table: EMPLEADOS                                             */
 /*==============================================================*/
 create table EMPLEADOS (
-   E_LEGAJO             numeric(10)          identity,
+   E_CODIGO             numeric(10)          identity,
+   E_LEGAJO             varchar(20)          unique,
    EE_CODIGO            numeric(10)          not null,
    SEC_CODIGO           numeric(10)          null,
    E_APELLIDO           varchar(80)          null,
    E_NOMBRE             varchar(80)          null,
    E_FECHANACIMIENTO    datetime             null,
    E_TELEFONO           varchar(15)          null,
-   constraint PK_EMPLEADOS primary key nonclustered (E_LEGAJO)
+   E_FECHA_ALTA         datetime             null,
+   E_FECHA_BAJA         datetime             null,
+   constraint PK_EMPLEADOS primary key nonclustered (E_CODIGO)
 )
 
 /*==============================================================*/
@@ -717,7 +720,7 @@ create table USUARIOS (
    U_CODIGO             numeric(10)          identity,
    EU_CODIGO            numeric(10)          not null,
    ROL_CODIGO           numeric(10)          not null,
-   E_LEGAJO             numeric(10)          not null,
+   E_CODIGO             numeric(10)          not null,
    U_USUARIO            varchar(80)          null,
    U_PASSWORD           varchar(80)          null,
    constraint PK_USUARIOS primary key nonclustered (U_CODIGO)
