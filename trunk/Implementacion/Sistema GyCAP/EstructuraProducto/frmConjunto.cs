@@ -74,7 +74,7 @@ namespace GyCAP.UI.EstructuraProducto
                     //No quiere guardar nada, descartamos los cambios
                     //dsEstructura.SUBCONJUNTOS.RejectChanges();
                     //dsEstructura.DETALLE_CONJUNTO.RejectChanges();
-                    //Salimos
+                    //Salimos            
                     this.Dispose(true);
                 //}
             //}
