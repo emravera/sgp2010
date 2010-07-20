@@ -44,7 +44,7 @@ namespace GyCAP.DAL
         //Metodo que obtiene todas las materias primas
         public static void ObtenerTodos(Data.dsMateriaPrima ds)
         {
-            string sql = @"SELECT mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_precio
+            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_precio
                         FROM MATERIAS_PRIMAS";
             try
             {

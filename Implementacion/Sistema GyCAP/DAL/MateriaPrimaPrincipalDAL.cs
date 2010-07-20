@@ -25,8 +25,8 @@ namespace GyCAP.DAL
         //Metodo que valida que no se quiera insertar algo que ya existe
         public static bool EsMateriaPrima(Entidades.MateriaPrimaPrincipal materiaPrima)
         {
-            string sql = "SELECT count(mppr_codigo) FROM MATERIASPRIMASPRINCIPALES WHERE mppr_nombre = @p0";
-            object[] valorParametros = { materiaPrima.Codigo };
+            string sql = "SELECT count(mppr_codigo) FROM MATERIASPRIMASPRINCIPALES WHERE mp_codigo = @p0";
+            object[] valorParametros = { materiaPrima.MateriaPrima.CodigoMateriaPrima };
             try
             {
                 if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
@@ -37,6 +37,19 @@ namespace GyCAP.DAL
                 {
                     return true;
                 }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+        }
+        //Metodo que trae todos los datos 
+        public static void ObtenerTodos(Data.dsMateriaPrima ds)
+        {
+            string sql = @"SELECT pr.mppr_codigo, pr.mp_codigo, pr.mppr_cantidad, mp.umed_codigo
+                        FROM MATERIASPRIMASPRINCIPALES as pr, MATERIAS_PRIMAS as mp
+                        WHERE mp.mp_codigo=pr.mp_codigo";
+            try
+            {
+                DB.FillDataSet(ds, "MATERIASPRIMASPRINCIPALES", sql, null);
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
