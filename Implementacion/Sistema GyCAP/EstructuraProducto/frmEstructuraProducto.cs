@@ -147,6 +147,23 @@ namespace GyCAP.UI.EstructuraProducto
         #endregion
 
         #region Designación
+
+        private void btnNuevoDesignacion_Click(object sender, EventArgs e)
+        {
+            frmDesignacion.Instancia.TopLevel = false;
+            frmDesignacion.Instancia.Parent = areaTrabajo;
+            frmDesignacion.Instancia.SetEstadoInicial(frmDesignacion.estadoInicialNuevo);
+            frmDesignacion.Instancia.Show();
+        }
+
+        private void btnConsultarDesignacion_Click(object sender, EventArgs e)
+        {
+            frmDesignacion.Instancia.TopLevel = false;
+            frmDesignacion.Instancia.Parent = areaTrabajo;
+            frmDesignacion.Instancia.SetEstadoInicial(frmDesignacion.estadoInicialConsultar);
+            frmDesignacion.Instancia.Show();
+        }
+
         #endregion
 
         #region Estructura Producto
@@ -242,5 +259,7 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
+
+        
     }
 }

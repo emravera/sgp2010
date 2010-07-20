@@ -14,8 +14,10 @@ namespace GyCAP.UI.EstructuraProducto
         private static frmDesignacion _frmDesignacion = null;
         private Data.dsDesignacion dsDesignacion = new GyCAP.Data.dsDesignacion();
         private DataView dvListaDesignacion, dvComboDesignacion, dvComboDesignacionBuscar;
-        private enum estadoUI { inicio, nuevo, consultar, modificar, };
+        private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, };
         private estadoUI estadoInterface;
+        public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
+        public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
 
         #region Inicio
 
@@ -103,6 +105,13 @@ namespace GyCAP.UI.EstructuraProducto
                 _frmDesignacion = value;
             }
         }
+
+        public void SetEstadoInicial(int estado)
+        {
+            if (estado == estadoInicialNuevo) { SetInterface(estadoUI.nuevoExterno); }
+            if (estado == estadoInicialConsultar) { SetInterface(estadoUI.inicio); }
+        }
+
         #endregion
 
         #region Pestaña Buscar
@@ -231,6 +240,23 @@ namespace GyCAP.UI.EstructuraProducto
                     tcDesignacion.SelectedTab = tpDatos;
                     cbMarcaDatos.Focus();
                     break;
+                case estadoUI.nuevoExterno:
+                    txtNombre.ReadOnly = false;
+                    txtNombre.Text = String.Empty;
+                    txtDescripcion.ReadOnly = false;
+                    txtDescripcion.Text = string.Empty;
+                    cbMarcaDatos.Enabled = true;
+                    cbMarcaDatos.SelectedIndex = 0;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = false;
+                    btnNuevo.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    estadoInterface = estadoUI.nuevoExterno;
+                    tcDesignacion.SelectedTab = tpDatos;
+                    cbMarcaDatos.Focus();
+                    break;
                 case estadoUI.consultar:
                     txtNombre.ReadOnly = true;
                     txtDescripcion.ReadOnly = true;
@@ -288,7 +314,6 @@ namespace GyCAP.UI.EstructuraProducto
 
 
         #endregion
-
 
         #region Pestaña Datos
 
@@ -379,7 +404,18 @@ namespace GyCAP.UI.EstructuraProducto
                         dsDesignacion.DESIGNACIONES.AddDESIGNACIONESRow(rowDesig);
                         dsDesignacion.DESIGNACIONES.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
-                        SetInterface(estadoUI.inicio);
+
+                        //Vemos cómo se inició el formulario para determinar la acción a seguir
+                        if (estadoInterface == estadoUI.nuevoExterno)
+                        {
+                            //Nuevo desde acceso directo, cerramos el formulario
+                            btnSalir.PerformClick();
+                        }
+                        else
+                        {
+                            //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
+                            SetInterface(estadoUI.inicio);
+                        }
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {

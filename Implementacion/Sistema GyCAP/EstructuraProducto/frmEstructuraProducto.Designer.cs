@@ -429,6 +429,7 @@
             this.btnConsultarDesignacion.Text = "Consultar";
             this.btnConsultarDesignacion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarDesignacion.UseVisualStyleBackColor = true;
+            this.btnConsultarDesignacion.Click += new System.EventHandler(this.btnConsultarDesignacion_Click);
             // 
             // btnNuevoDesignacion
             // 
@@ -447,6 +448,7 @@
             this.btnNuevoDesignacion.Text = " Nuevo";
             this.btnNuevoDesignacion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoDesignacion.UseVisualStyleBackColor = true;
+            this.btnNuevoDesignacion.Click += new System.EventHandler(this.btnNuevoDesignacion_Click);
             // 
             // btnEstructuraProducto
             // 
