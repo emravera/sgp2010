@@ -16,7 +16,7 @@ namespace GyCAP.UI.EstructuraProducto
         private DataView dvColor;
         private enum estadoUI {inicio, modificar, };
         private estadoUI estadoInterface;
-        
+                
         public frmColor()
         {
             InitializeComponent();
@@ -58,7 +58,7 @@ namespace GyCAP.UI.EstructuraProducto
                 _frmColor = value;
             }
         }
-
+        
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Dispose(true);
