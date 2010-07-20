@@ -14,8 +14,10 @@ namespace GyCAP.UI.EstructuraProducto
         private static frmTerminacion _frmABM = null;
         private Data.dsTerminacion dsTerminacion = new GyCAP.Data.dsTerminacion();
         private DataView dvTerminacion;
-        private enum estadoUI { inicio, nuevo, consultar, modificar, };
+        private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, };
         private estadoUI estadoInterface;
+        public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
+        public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
 
         public frmTerminacion()
         {
@@ -61,6 +63,12 @@ namespace GyCAP.UI.EstructuraProducto
             SetInterface(estadoUI.inicio);
         }
 
+        public void SetEstadoInicial(int estado)
+        {
+            if (estado == estadoInicialNuevo) { SetInterface(estadoUI.nuevoExterno); }
+            if (estado == estadoInicialConsultar) { SetInterface(estadoUI.inicio); }
+        }
+
         #region Servicios
 
         //Setea la pantalla de acuerdo al estado en que se encuentre
@@ -101,6 +109,22 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
+                    tcABM.SelectedTab = tpDatos;
+                    txtNombre.Focus();
+                    break;
+                case estadoUI.nuevoExterno:
+                    txtNombre.ReadOnly = false;
+                    txtDescripcion.ReadOnly = false;
+                    txtNombre.Text = String.Empty;
+                    txtDescripcion.Text = string.Empty;
+                    //gbGuardarCancelar.Enabled = true;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = false;
+                    btnNuevo.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    estadoInterface = estadoUI.nuevoExterno;
                     tcABM.SelectedTab = tpDatos;
                     txtNombre.Focus();
                     break;
@@ -206,10 +230,10 @@ namespace GyCAP.UI.EstructuraProducto
                         dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigo).Delete();
                         dsTerminacion.TERMINACIONES.AcceptChanges();
                     }
-                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
                         //MessageBox.Show(ex.Message);
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
@@ -232,7 +256,7 @@ namespace GyCAP.UI.EstructuraProducto
                 Entidades.Terminacion terminacion = new GyCAP.Entidades.Terminacion();
 
                 //Revisamos que está haciendo
-                if (estadoInterface == estadoUI.nuevo)
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
                     //Está cargando una terminacion nuevo
                     terminacion.Nombre = txtNombre.Text;
@@ -254,15 +278,26 @@ namespace GyCAP.UI.EstructuraProducto
                         dsTerminacion.TERMINACIONES.AddTERMINACIONESRow(rowTerminacion);
                         dsTerminacion.TERMINACIONES.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
-                        SetInterface(estadoUI.inicio);
+
+                        //Vemos cómo se inició el formulario para determinar la acción a seguir
+                        if (estadoInterface == estadoUI.nuevoExterno)
+                        {
+                            //Nuevo desde acceso directo, cerramos el formulario
+                            btnSalir.PerformClick();
+                        }
+                        else
+                        {
+                            //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
+                            SetInterface(estadoUI.inicio);
+                        }
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -285,13 +320,13 @@ namespace GyCAP.UI.EstructuraProducto
                         rowTerminacion.EndEdit();
                         dsTerminacion.TERMINACIONES.AcceptChanges();
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Aviso");
+                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 //recarga de la grilla
@@ -326,7 +361,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error: Terminación - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetInterface(estadoUI.inicio);
             }   
         }

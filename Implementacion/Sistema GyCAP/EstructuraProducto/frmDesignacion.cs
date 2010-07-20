@@ -371,7 +371,7 @@ namespace GyCAP.UI.EstructuraProducto
                 
 
                 //Revisamos que está haciendo
-                if (estadoInterface == estadoUI.nuevo)
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
                     //Está cargando una marca nueva
                     desig.Nombre = txtNombre.Text;

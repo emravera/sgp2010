@@ -18,7 +18,9 @@ namespace GyCAP.UI.EstructuraProducto
         private DataView dvModeloCocina;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
-        
+
+        #region Inicio
+
         public frmModeloCocina()
         {
             InitializeComponent();
@@ -72,7 +74,9 @@ namespace GyCAP.UI.EstructuraProducto
         {
             this.Dispose(true);
         }
-      
+
+        #endregion
+
         #region Pestaña Buscar
 
         private void btnBuscar_Click(object sender, EventArgs e)
