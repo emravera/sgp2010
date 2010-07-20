@@ -14,7 +14,11 @@ namespace GyCAP.BLL
         {
             DAL.UnidadMedidaDAL.ObtenerUnidad(nombre, idTipo, ds);
         }
-        
+        //Metodo que se llama desde materias primas principales
+        public static void ObtenerTodos(Data.dsMateriaPrima ds)
+        {
+            DAL.UnidadMedidaDAL.ObtenerTodos(ds);
+        }
         //Eliminacion
         public static void Eliminar(int codigo)
         {

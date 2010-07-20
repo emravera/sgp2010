@@ -44,6 +44,7 @@ namespace GyCAP.UI.Soporte
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListaSector = new DataView(dsSectorTrabajo.SECTORES);
+            dvListaSector.Sort = "SEC_NOMBRE ASC";
             dgvLista.DataSource = dvListaSector;
 
             //Seteo el maxlenght de los textbox para que no de error en la bd
@@ -215,7 +216,31 @@ namespace GyCAP.UI.Soporte
                     break;
             }
         }
+        //Metodos para seleccionar todo lo que contienen los textbox
+        private void txtNombreBuscar_Enter(object sender, EventArgs e)
+        {
+            txtNombreBuscar.SelectAll();
+        }
 
+        private void txtAbreviaturaBuscar_Enter(object sender, EventArgs e)
+        {
+            txtAbreviaturaBuscar.SelectAll();
+        }
+
+        private void txtNombre_Enter(object sender, EventArgs e)
+        {
+            txtNombre.SelectAll();
+        }
+
+        private void txtAbreviatura_Enter(object sender, EventArgs e)
+        {
+            txtAbreviatura.SelectAll();
+        }
+
+        private void txtDescripcion_Enter(object sender, EventArgs e)
+        {
+            txtDescripcion.SelectAll();
+        }
       
         #endregion
 
@@ -363,6 +388,8 @@ namespace GyCAP.UI.Soporte
         }
 
         #endregion
+
+       
 
         
 

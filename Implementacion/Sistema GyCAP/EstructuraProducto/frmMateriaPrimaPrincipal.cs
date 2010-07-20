@@ -13,6 +13,8 @@ namespace GyCAP.UI.EstructuraProducto
     {
         private static frmMateriaPrimaPrincipal _frmMateriaPrimaPrincipal = null;
         private Data.dsMateriaPrima dsMateriaPrimaPrincipal = new GyCAP.Data.dsMateriaPrima();
+        private enum estadoUI { inicio, agregar };
+        private DataView dvListaMateriaPrimaPrincipal, dvComboMP;
 
         public frmMateriaPrimaPrincipal()
         {
@@ -38,15 +40,24 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns["MPPR_CANTIDAD"].DataPropertyName = "MPPR_CANTIDAD";
             dgvLista.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
 
-            /*/Seteo el arranque de la pantalla
-            //Cambio la posicion y escondo la que agrega
-            gbLista.Location.X = 3;
-            gbLista.Location.Y = 3;
-            gbAgregar.Visible = false;
-            //Cambio los tamaños de la lista y el groupbox
-            gbLista.Size.Height = 300;
-            dgvLista.Size.Height = 280;*/
+            //Seteo el Dataview de la Lista
+            dvListaMateriaPrimaPrincipal = new DataView(dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES);
+            dgvLista.DataSource = dvListaMateriaPrimaPrincipal;
 
+            //Llena el Dataset con las Materias Primas
+            BLL.MateriaPrimaBLL.ObtenerTodos(dsMateriaPrimaPrincipal);
+
+            //Lleno el Dataset con las Unidades de Medida
+            BLL.UnidadMedidaBLL.ObtenerTodos(dsMateriaPrimaPrincipal);
+            
+            //Combo de Datos
+            dvComboMP = new DataView(dsMateriaPrimaPrincipal.MATERIAS_PRIMAS);
+            cbMateriaPrima.DataSource = dvComboMP;
+            cbMateriaPrima.DisplayMember = "MP_NOMBRE";
+            cbMateriaPrima.ValueMember = "MP_CODIGO";
+            //Para que el combo no quede selecionado cuando arranca y que sea una lista
+            cbMateriaPrima.SelectedIndex = -1;
+            cbMateriaPrima.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         public static frmMateriaPrimaPrincipal Instancia
@@ -74,8 +85,105 @@ namespace GyCAP.UI.EstructuraProducto
             this.Dispose(true);
         }
 
+        private void frmMateriaPrimaPrincipal_Activated(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.inicio);
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.agregar);
+        }
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.inicio);
+        }
+        private void SetInterface(estadoUI estado)
+        {
+            switch (estado)
+            {
+                case estadoUI.inicio:
+                    //Seteo el inicio de la pantalla sin que se vea el groupbox de agregar
+                    gbLista.Height = 300;
+                    gbAgregar.Visible = false;
+                    dgvLista.Height = 280;
+                    btnNuevo.Enabled = true;
+                    cbMateriaPrima.Visible = false;
+                    //Si hay datos que deje eliminar
+                    if (dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.Rows.Count != 0)
+                    {
+                        btnEliminar.Enabled = true;
+                    }
+                    else btnEliminar.Enabled = false;
+                    break;
+                case estadoUI.agregar:
+                    //Seteo el inicio de la pantalla sin que se vea el groupbox de agregar
+                    gbLista.Height = 190;
+                    gbAgregar.Visible = true;
+                    dgvLista.Height = 154;
+                    btnNuevo.Enabled = false;
+                    cbMateriaPrima.Visible = true;
+                    cbMateriaPrima.SelectedIndex = -1;
+                    numCantidad.Value = 0;
+                    //Si hay datos que deje eliminar
+                    if (dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.Rows.Count != 0)
+                    {
+                        btnEliminar.Enabled = true;
+                    }
+                    else btnEliminar.Enabled = false;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void cbMateriaPrima_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbMateriaPrima.Visible == true && cbMateriaPrima.SelectedValue != null )
+            {
+
+                int idMateriaPrima = Convert.ToInt32(cbMateriaPrima.SelectedValue);
+                int idUnidadMedida = Convert.ToInt32(dsMateriaPrimaPrincipal.MATERIAS_PRIMAS.FindByMP_CODIGO(idMateriaPrima).UMED_CODIGO);
+                string unidadMedida = dsMateriaPrimaPrincipal.UNIDADES_MEDIDA.FindByUMED_CODIGO(idUnidadMedida).UMED_ABREVIATURA;
+                lblUnidadMedida.Text = unidadMedida;
+            }
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            //Pregunto si tiene seleccionado algo
+            if (cbMateriaPrima.SelectedIndex != -1)
+            {
+                //Pregunto si la cantidad es mayor a cero
+                if (numCantidad.Value != 0)
+                {
+                    //Creamos los objetos a insertar
+                    Entidades.MateriaPrimaPrincipal mp = new GyCAP.Entidades.MateriaPrimaPrincipal();
+                    mp.Codigo = Convert.ToInt32(cbMateriaPrima.SelectedValue);
+                   
+
+
+
+                }
+                else
+                {
+                    MessageBox.Show("La cantidad debe ser mayor a cero (0)", "Información: Selección de Materia Prima", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una materia Prima", "Información: Selección de Materia Prima", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+
+
+        }
         
 
        
     }
+
+        
 }

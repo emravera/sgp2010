@@ -78,6 +78,7 @@
     <Compile Include="MaquinaBLL.cs" />
     <Compile Include="MarcaBLL.cs" />
     <Compile Include="MateriaPrimaBLL.cs" />
+    <Compile Include="MateriaPrimaPrincipalBLL.cs" />
     <Compile Include="ModeloCocinaBLL.cs" />
     <Compile Include="ModeloMaquinaBLL.cs" />
     <Compile Include="OrdenTrabajoBLL.cs" />

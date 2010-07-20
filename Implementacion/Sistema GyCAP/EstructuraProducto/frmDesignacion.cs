@@ -52,6 +52,7 @@ namespace GyCAP.UI.EstructuraProducto
             
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDesignacion = new DataView(dsDesignacion.DESIGNACIONES);
+            dvListaDesignacion.Sort = "DESIG_NOMBRE ASC";
             dgvLista.DataSource = dvListaDesignacion;
             
             //CARGA DE COMBOS
@@ -260,6 +261,32 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
+        private void frmDesignacion_Activated(object sender, EventArgs e)
+        {
+            if (txtNombreBuscar.Enabled == true)
+            {
+                txtNombreBuscar.Focus();
+            }
+        }
+
+        //Metodos que seleccionan lo que esta en los textbox
+        private void txtNombreBuscar_Enter(object sender, EventArgs e)
+        {
+            txtNombreBuscar.SelectAll();
+        }
+
+        private void txtNombre_Enter(object sender, EventArgs e)
+        {
+            txtNombre.SelectAll();
+        }
+
+        private void txtDescripcion_Enter(object sender, EventArgs e)
+        {
+            txtDescripcion.SelectAll();
+        }
+
+
+
         #endregion
 
 
@@ -417,14 +444,7 @@ namespace GyCAP.UI.EstructuraProducto
         
         #endregion
 
-        private void frmDesignacion_Activated(object sender, EventArgs e)
-        {
-            if (txtNombreBuscar.Enabled == true)
-            {
-                txtNombreBuscar.Focus();
-            }
-        }
-
+        
         
         
 

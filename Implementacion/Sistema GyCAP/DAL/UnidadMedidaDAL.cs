@@ -9,8 +9,6 @@ namespace GyCAP.DAL
     public class UnidadMedidaDAL
     {
        //BUSQUEDA
-       //Metodo sobrecargado (3 Sobrecargas)
-       //Busqueda por nombre
         public static void ObtenerUnidad(string nombre, int idTipo, Data.dsUnidadMedida ds)
         {
             string sql = @"SELECT umed_codigo,tumed_codigo, umed_nombre, umed_abreviatura
@@ -66,7 +64,18 @@ namespace GyCAP.DAL
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+        //Metodo para llenar desde materia primas principales
+        public static void ObtenerTodos(Data.dsMateriaPrima ds)
+        {
+            string sql = @"SELECT umed_codigo,tumed_codigo, umed_nombre, umed_abreviatura
+                              FROM UNIDADES_MEDIDA";
+            try
+            {
+                DB.FillDataSet(ds, "UNIDADES_MEDIDA", sql, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
+        }
         
         //ELIMINACION
         //Metodo que verifica que no este usado en otro lugar
