@@ -58,9 +58,32 @@ namespace GyCAP.UI.RecursosFabricacion
             //Alineacion de los numeros y las fechas en la grilla
             dgvLista.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
+            //Llena el Dataset con los estados
+            BLL.EstadoEmpleadoBLL.ObtenerTodos(dsEmpleado);
+
             //Creamos el dataview y lo asignamos a la grilla
-            //dvEmpleado = new DataView(dsEmpleado.);
+            dvEmpleado = new DataView(dsEmpleado.EMPLEADOS);
+            dvEmpleado.Sort = "E_APELLIDO, E_NOMBRE ASC";
             dgvLista.DataSource = dvEmpleado;
+
+            //CARGA DE COMBOS
+            //Creamos el Dataview y se lo asignamos al combo
+            dvComboEstadoEmpleado = new DataView(dsEmpleado.ESTADO_EMPLEADOS);
+            cboEstado.DataSource = dvComboEstadoEmpleado;
+            cboEstado.DisplayMember = "EE_NOMBRE";
+            cboEstado.ValueMember = "EE_CODIGO";
+            //Para que el combo no quede selecionado cuando arranca y que sea una lista
+            cboEstado.SelectedIndex = -1;
+            cboEstado.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            //Combo de Datos
+            //dvComboDesignacion = new DataView(dsDesignacion.MARCAS);
+            //cbMarcaDatos.DataSource = dvComboDesignacion;
+            //cbMarcaDatos.DisplayMember = "MCA_NOMBRE";
+            //cbMarcaDatos.ValueMember = "MCA_CODIGO";
+            ////Para que el combo no quede selecionado cuando arranca y que sea una lista
+            //cbMarcaDatos.SelectedIndex = 0;
+            //cbMarcaDatos.DropDownStyle = ComboBoxStyle.DropDownList;
 
             //Seteo el maxlenght de los textbox para que no de error en la bd
             //txtDescripcion.MaxLength = 250;
@@ -69,5 +92,106 @@ namespace GyCAP.UI.RecursosFabricacion
             //Seteamos el estado de la interfaz
             //SetInterface(estadoUI.inicio);
         }
+
+        #region Servicios
+
+        //Setea la pantalla de acuerdo al estado en que se encuentre
+        private void SetInterface(estadoUI estado)
+        {
+            switch (estado)
+            {
+                case estadoUI.inicio:
+                    bool hayDatos;
+
+                    if (dsEmpleado.EMPLEADOS.Rows.Count == 0)
+                    {
+                        hayDatos = false;
+                    }
+                    else
+                    {
+                        hayDatos = true;
+                    }
+
+                    btnModificar.Enabled = hayDatos;
+                    btnEliminar.Enabled = hayDatos;
+                    btnConsultar.Enabled = hayDatos;
+                    btnNuevo.Enabled = true;
+                    estadoInterface = estadoUI.inicio;
+                    tcABM.SelectedTab = tpBuscar;
+                    txtNombreBuscar.Focus();
+                    break;
+                case estadoUI.nuevo:
+                    txtNombre.ReadOnly = false;
+                    txtDescripcion.ReadOnly = false;
+                    txtNombre.Text = String.Empty;
+                    txtDescripcion.Text = string.Empty;
+                    //gbGuardarCancelar.Enabled = true;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = true;
+                    btnNuevo.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    estadoInterface = estadoUI.nuevo;
+                    tcABM.SelectedTab = tpDatos;
+                    txtNombre.Focus();
+                    break;
+                case estadoUI.consultar:
+                    txtNombre.ReadOnly = true;
+                    txtDescripcion.ReadOnly = true;
+                    //gbGuardarCancelar.Enabled = false;
+                    btnGuardar.Enabled = false;
+                    btnVolver.Enabled = true;
+                    estadoInterface = estadoUI.consultar;
+                    tcABM.SelectedTab = tpDatos;
+                    btnVolver.Focus();
+                    break;
+                case estadoUI.modificar:
+                    txtNombre.ReadOnly = false;
+                    txtDescripcion.ReadOnly = false;
+                    //gbGuardarCancelar.Enabled = true;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = true;
+                    btnNuevo.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    estadoInterface = estadoUI.modificar;
+                    tcABM.SelectedTab = tpDatos;
+                    txtNombre.Focus();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        //Método para evitar la creación de más de una pantalla
+        public static frmEmpleado Instancia
+        {
+            get
+            {
+                if (_frmEmpleado == null || _frmEmpleado.IsDisposed)
+                {
+                    _frmEmpleado = new frmEmpleado();
+                }
+                else
+                {
+                    _frmEmpleado.BringToFront();
+                }
+                return _frmEmpleado;
+            }
+            set
+            {
+                _frmEmpleado = value;
+            }
+        }
+
+        #endregion
+
+
+
+        
     }
+
+
 }

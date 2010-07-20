@@ -66,6 +66,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsEmpleado.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsEstadoEmpleado.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEstadoEmpleado.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsEstructura.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -153,6 +158,17 @@
     </None>
     <None Include="dsEmpleado.xss">
       <DependentUpon>dsEmpleado.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstadoEmpleado.xsc">
+      <DependentUpon>dsEstadoEmpleado.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstadoEmpleado.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEstadoEmpleado.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsEstadoEmpleado.xss">
+      <DependentUpon>dsEstadoEmpleado.xsd</DependentUpon>
     </None>
     <None Include="dsEstructura.xsc">
       <DependentUpon>dsEstructura.xsd</DependentUpon>
