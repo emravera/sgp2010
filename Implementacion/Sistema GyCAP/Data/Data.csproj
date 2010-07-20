@@ -66,6 +66,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsEmpleado.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsEstadoEmpleado.cs">
+      <DependentUpon>dsEstadoEmpleado.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="dsEstadoEmpleado.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
