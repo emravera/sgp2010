@@ -39,7 +39,6 @@
             this.btnColor = new System.Windows.Forms.Button();
             this.panelColor = new System.Windows.Forms.Panel();
             this.btnConsultarColor = new System.Windows.Forms.Button();
-            this.btnNuevoColor = new System.Windows.Forms.Button();
             this.btnConjunto = new System.Windows.Forms.Button();
             this.panelConjunto = new System.Windows.Forms.Panel();
             this.btnListadoConjunto = new System.Windows.Forms.Button();
@@ -269,13 +268,12 @@
             this.panelColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelColor.BackColor = System.Drawing.Color.Silver;
             this.panelColor.Controls.Add(this.btnConsultarColor);
-            this.panelColor.Controls.Add(this.btnNuevoColor);
             this.panelColor.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelColor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelColor.Location = new System.Drawing.Point(0, 282);
             this.panelColor.Margin = new System.Windows.Forms.Padding(0);
             this.panelColor.Name = "panelColor";
-            this.panelColor.Size = new System.Drawing.Size(158, 155);
+            this.panelColor.Size = new System.Drawing.Size(158, 88);
             this.panelColor.TabIndex = 2;
             this.panelColor.Visible = false;
             // 
@@ -288,7 +286,7 @@
             this.btnConsultarColor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConsultarColor.Image = ((System.Drawing.Image)(resources.GetObject("btnConsultarColor.Image")));
-            this.btnConsultarColor.Location = new System.Drawing.Point(42, 77);
+            this.btnConsultarColor.Location = new System.Drawing.Point(44, 10);
             this.btnConsultarColor.Name = "btnConsultarColor";
             this.btnConsultarColor.Size = new System.Drawing.Size(75, 75);
             this.btnConsultarColor.TabIndex = 1;
@@ -296,30 +294,12 @@
             this.btnConsultarColor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarColor.UseVisualStyleBackColor = true;
             // 
-            // btnNuevoColor
-            // 
-            this.btnNuevoColor.AutoSize = true;
-            this.btnNuevoColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnNuevoColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNuevoColor.FlatAppearance.BorderSize = 0;
-            this.btnNuevoColor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.btnNuevoColor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.btnNuevoColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevoColor.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevoColor.Image")));
-            this.btnNuevoColor.Location = new System.Drawing.Point(51, 2);
-            this.btnNuevoColor.Name = "btnNuevoColor";
-            this.btnNuevoColor.Size = new System.Drawing.Size(57, 75);
-            this.btnNuevoColor.TabIndex = 0;
-            this.btnNuevoColor.Text = " Nuevo";
-            this.btnNuevoColor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnNuevoColor.UseVisualStyleBackColor = true;
-            // 
             // btnConjunto
             // 
             this.btnConjunto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConjunto.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConjunto.Location = new System.Drawing.Point(0, 437);
+            this.btnConjunto.Location = new System.Drawing.Point(0, 370);
             this.btnConjunto.Margin = new System.Windows.Forms.Padding(0);
             this.btnConjunto.Name = "btnConjunto";
             this.btnConjunto.Size = new System.Drawing.Size(158, 25);
@@ -909,6 +889,7 @@
             this.btnConsultarTerminacion.Text = "Consultar";
             this.btnConsultarTerminacion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarTerminacion.UseVisualStyleBackColor = true;
+            this.btnConsultarTerminacion.Click += new System.EventHandler(this.btnConsultarTerminacion_Click);
             // 
             // btnNuevoTerminacion
             // 
@@ -927,6 +908,7 @@
             this.btnNuevoTerminacion.Text = "Nuevo";
             this.btnNuevoTerminacion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoTerminacion.UseVisualStyleBackColor = true;
+            this.btnNuevoTerminacion.Click += new System.EventHandler(this.btnNuevoTerminacion_Click);
             // 
             // btnUnidadMedida
             // 
@@ -1160,7 +1142,6 @@
         private System.Windows.Forms.Button btnConsultarCocina;
         private System.Windows.Forms.Button btnNuevoCocina;
         private System.Windows.Forms.Button btnConsultarColor;
-        private System.Windows.Forms.Button btnNuevoColor;
         private System.Windows.Forms.Button btnListadoConjunto;
         private System.Windows.Forms.Button btnConsultarConjunto;
         private System.Windows.Forms.Button btnNuevoConjunto;

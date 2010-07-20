@@ -224,6 +224,23 @@ namespace GyCAP.UI.EstructuraProducto
         #endregion
 
         #region Unidad Medida
+
+        private void btnNuevoTerminacion_Click(object sender, EventArgs e)
+        {
+            frmUnidadMedida.Instancia.TopLevel = false;
+            frmUnidadMedida.Instancia.Parent = areaTrabajo;
+            frmUnidadMedida.Instancia.SetEstadoInicial(frmUnidadMedida.estadoInicialNuevo);
+            frmUnidadMedida.Instancia.Show();
+        }
+
+        private void btnConsultarTerminacion_Click(object sender, EventArgs e)
+        {
+            frmUnidadMedida.Instancia.TopLevel = false;
+            frmUnidadMedida.Instancia.Parent = areaTrabajo;
+            frmUnidadMedida.Instancia.SetEstadoInicial(frmUnidadMedida.estadoInicialConsultar);
+            frmUnidadMedida.Instancia.Show();
+        }
+
         #endregion
     }
 }

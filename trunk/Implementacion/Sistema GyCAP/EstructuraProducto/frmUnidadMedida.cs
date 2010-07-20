@@ -14,8 +14,10 @@ namespace GyCAP.UI.EstructuraProducto
         private static frmUnidadMedida _frmUnidadMedida = null;
         private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
         private DataView dvListaUnidad, dvComboUnidad, dvComboBuscarUnidad;
-        private enum estadoUI { inicio, nuevo, consultar, modificar, };
+        private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, };
         private estadoUI estadoInterface;
+        public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
+        public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
 
         public frmUnidadMedida()
         {
@@ -94,6 +96,12 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 _frmUnidadMedida = value;
             }
+        }
+
+        public void SetEstadoInicial(int estado)
+        {
+            if (estado == estadoInicialNuevo) { SetInterface(estadoUI.nuevoExterno); }
+            if (estado == estadoInicialConsultar) { SetInterface(estadoUI.inicio); }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -226,7 +234,7 @@ namespace GyCAP.UI.EstructuraProducto
                 Entidades.TipoUnidadMedida tipoUnidad = new GyCAP.Entidades.TipoUnidadMedida();
 
                 //Revisamos que está haciendo
-                if (estadoInterface == estadoUI.nuevo)
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
                     //Está cargando una unidad de medida nueva
                     unidadMedida.Nombre = txtNombre.Text;
@@ -253,7 +261,18 @@ namespace GyCAP.UI.EstructuraProducto
                         dsUnidadMedida.UNIDADES_MEDIDA.AddUNIDADES_MEDIDARow(rowUnidadMedida);
                         dsUnidadMedida.UNIDADES_MEDIDA.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
-                        SetInterface(estadoUI.inicio);
+                        
+                        //Vemos cómo se inició el formulario para determinar la acción a seguir
+                        if (estadoInterface == estadoUI.nuevoExterno)
+                        {
+                            //Nuevo desde acceso directo, cerramos el formulario
+                            btnSalir.PerformClick();
+                        }
+                        else
+                        {
+                            //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
+                            SetInterface(estadoUI.inicio);
+                        }
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
@@ -352,6 +371,23 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
+                    tcUnidadMedida.SelectedTab = tpDatos;
+                    txtNombre.Focus();
+                    break;
+                case estadoUI.nuevoExterno:
+                    txtNombre.ReadOnly = false;
+                    txtNombre.Text = String.Empty;
+                    txtAbreviatura.Text = String.Empty;
+                    txtAbreviatura.ReadOnly = false;
+                    cbTipoUnidadDatos.Enabled = true;
+                    cbTipoUnidadDatos.SelectedIndex = -1;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = false;
+                    btnNuevo.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    estadoInterface = estadoUI.nuevoExterno;
                     tcUnidadMedida.SelectedTab = tpDatos;
                     txtNombre.Focus();
                     break;
