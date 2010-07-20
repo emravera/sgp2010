@@ -223,7 +223,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerConjuntos(object nombre, object terminacion, Data.dsEstructura ds)
         {
-            string sql = "SELECT conj_codigo, conj_nombre, conj_descripcion, te_codigo, conj_cantidadstock FROM CONJUNTOS ";
+            string sql = "SELECT conj_codigo, conj_nombre, conj_descripcion, te_codigo, conj_cantidadstock FROM CONJUNTOS WHERE 1=1";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
@@ -232,8 +232,8 @@ namespace GyCAP.DAL
             //Empecemos a armar la consulta, revisemos que filtros aplican
             if (nombre != null && nombre.ToString() != string.Empty)
             {
-                //Como es el primero no revisamos si está el WHERE y si aplica el filtro lo usamos
-                sql += "WHERE conj_nombre LIKE @p" + cantidadParametros + " ";
+                //Si aplica el filtro lo usamos
+                sql += " AND conj_nombre LIKE @p" + cantidadParametros;
                 //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
                 nombre = "%" + nombre + "%";
                 valoresFiltros[cantidadParametros] = nombre;
@@ -242,10 +242,7 @@ namespace GyCAP.DAL
             //Revisamos si pasó algun valor y si es un integer
             if (terminacion != null && terminacion.GetType() == cantidadParametros.GetType())
             {
-                //Como es el segundo filtro si tiene que revisar si el anterior también aplica, busca si está el WHERE,
-                //si está agrega un AND, caso contrario el WHERE
-                if (sql.Contains("WHERE")) { sql += "AND te_codigo = @p" + cantidadParametros; }
-                else { sql += "WHERE te_codigo = @p" + cantidadParametros; }
+                sql += " AND te_codigo = @p" + cantidadParametros; 
                 valoresFiltros[cantidadParametros] = Convert.ToInt32(terminacion);
                 cantidadParametros++;
             }
