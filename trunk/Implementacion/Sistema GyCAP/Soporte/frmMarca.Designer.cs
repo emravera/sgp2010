@@ -128,6 +128,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(170, 24);
             this.txtNombre.TabIndex = 1;
+            this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
             // 
             // label3
             // 
@@ -336,6 +337,7 @@
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(112, 24);
             this.txtNombreBuscar.TabIndex = 2;
+            this.txtNombreBuscar.Enter += new System.EventHandler(this.txtNombreBuscar_Enter);
             // 
             // label1
             // 

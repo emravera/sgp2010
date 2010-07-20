@@ -45,6 +45,7 @@ namespace GyCAP.UI.Soporte
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListaMarca = new DataView(dsMarca.MARCAS);
+            dvListaMarca.Sort = "MCA_NOMBRE ASC";
             dgvLista.DataSource = dvListaMarca;
 
             //CARGA DE COMBOS
@@ -484,9 +485,20 @@ namespace GyCAP.UI.Soporte
                     break;
             }
         }
+        //Metodos que controlan el enter de los textbox
+        private void txtNombreBuscar_Enter(object sender, EventArgs e)
+        {
+            txtNombreBuscar.SelectAll();
+        }
 
+        private void txtNombre_Enter(object sender, EventArgs e)
+        {
+            txtNombre.SelectAll();
+        }
         
         
 #endregion
+
+       
     }
 }

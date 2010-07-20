@@ -76,6 +76,7 @@
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(348, 72);
             this.txtDescripcion.TabIndex = 3;
+            this.txtDescripcion.Enter += new System.EventHandler(this.txtDescripcion_Enter);
             // 
             // label5
             // 
@@ -92,6 +93,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(170, 24);
             this.txtNombre.TabIndex = 1;
+            this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
             // 
             // gbGuardarCancelar
             // 
@@ -174,6 +176,7 @@
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.ReadOnly = true;
+            this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(554, 176);
             this.dgvLista.TabIndex = 0;
@@ -201,6 +204,7 @@
             this.txtAbreviaturaBuscar.Name = "txtAbreviaturaBuscar";
             this.txtAbreviaturaBuscar.Size = new System.Drawing.Size(112, 24);
             this.txtAbreviaturaBuscar.TabIndex = 2;
+            this.txtAbreviaturaBuscar.Enter += new System.EventHandler(this.txtAbreviaturaBuscar_Enter);
             // 
             // label4
             // 
@@ -230,6 +234,7 @@
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(112, 24);
             this.txtNombreBuscar.TabIndex = 1;
+            this.txtNombreBuscar.Enter += new System.EventHandler(this.txtNombreBuscar_Enter);
             // 
             // label1
             // 
@@ -275,6 +280,7 @@
             this.txtAbreviatura.Name = "txtAbreviatura";
             this.txtAbreviatura.Size = new System.Drawing.Size(170, 24);
             this.txtAbreviatura.TabIndex = 2;
+            this.txtAbreviatura.Enter += new System.EventHandler(this.txtAbreviatura_Enter);
             // 
             // label6
             // 

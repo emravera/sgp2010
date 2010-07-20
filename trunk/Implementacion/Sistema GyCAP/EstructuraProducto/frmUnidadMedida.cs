@@ -397,8 +397,19 @@ namespace GyCAP.UI.EstructuraProducto
         {
             txtNombreBuscar.SelectAll();
         }
+        private void txtNombre_Enter(object sender, EventArgs e)
+        {
+            txtNombre.SelectAll();
+        }
+
+        private void txtAbreviatura_Enter(object sender, EventArgs e)
+        {
+            txtAbreviatura.SelectAll();
+        }
        
         #endregion
+
+        
 
         
 

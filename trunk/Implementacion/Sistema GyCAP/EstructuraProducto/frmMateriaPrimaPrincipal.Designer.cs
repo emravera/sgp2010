@@ -40,10 +40,11 @@
             this.gbLista = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.gbAgregar = new System.Windows.Forms.GroupBox();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.lblUnidadMedida = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numCantidad = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbMateriaPrima = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tsMenu.SuspendLayout();
             this.tcMateriaPrima.SuspendLayout();
@@ -51,7 +52,7 @@
             this.gbLista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             this.gbAgregar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCantidad)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,13 +60,14 @@
             // 
             this.btnAgregar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Mas_25;
             this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(480, 23);
+            this.btnAgregar.Location = new System.Drawing.Point(476, 19);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(88, 40);
+            this.btnAgregar.Size = new System.Drawing.Size(88, 30);
             this.btnAgregar.TabIndex = 3;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // toolStripSeparator1
             // 
@@ -102,6 +104,7 @@
             this.btnNuevo.Size = new System.Drawing.Size(58, 47);
             this.btnNuevo.Text = "&Agregar";
             this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // btnEliminar
             // 
@@ -127,7 +130,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 34);
+            this.label1.Location = new System.Drawing.Point(7, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 17);
             this.label1.TabIndex = 0;
@@ -164,10 +167,10 @@
             // 
             this.gbLista.Controls.Add(this.dgvLista);
             this.gbLista.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbLista.Location = new System.Drawing.Point(3, 85);
+            this.gbLista.Location = new System.Drawing.Point(3, 107);
             this.gbLista.Name = "gbLista";
             this.gbLista.Padding = new System.Windows.Forms.Padding(10);
-            this.gbLista.Size = new System.Drawing.Size(574, 213);
+            this.gbLista.Size = new System.Drawing.Size(574, 191);
             this.gbLista.TabIndex = 1;
             this.gbLista.TabStop = false;
             this.gbLista.Text = "Listado de Materias Primas Principales";
@@ -183,57 +186,70 @@
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(554, 176);
+            this.dgvLista.Size = new System.Drawing.Size(554, 154);
             this.dgvLista.TabIndex = 0;
             // 
             // gbAgregar
             // 
+            this.gbAgregar.Controls.Add(this.btnVolver);
             this.gbAgregar.Controls.Add(this.lblUnidadMedida);
-            this.gbAgregar.Controls.Add(this.numericUpDown1);
+            this.gbAgregar.Controls.Add(this.numCantidad);
             this.gbAgregar.Controls.Add(this.label2);
-            this.gbAgregar.Controls.Add(this.comboBox1);
+            this.gbAgregar.Controls.Add(this.cbMateriaPrima);
             this.gbAgregar.Controls.Add(this.btnAgregar);
             this.gbAgregar.Controls.Add(this.label1);
             this.gbAgregar.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbAgregar.Location = new System.Drawing.Point(3, 3);
             this.gbAgregar.Name = "gbAgregar";
-            this.gbAgregar.Size = new System.Drawing.Size(574, 76);
+            this.gbAgregar.Size = new System.Drawing.Size(574, 98);
             this.gbAgregar.TabIndex = 0;
             this.gbAgregar.TabStop = false;
             this.gbAgregar.Text = "Datos";
             // 
+            // btnVolver
+            // 
+            this.btnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVolver.Location = new System.Drawing.Point(476, 55);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(88, 30);
+            this.btnVolver.TabIndex = 8;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
             // lblUnidadMedida
             // 
             this.lblUnidadMedida.AutoSize = true;
-            this.lblUnidadMedida.Location = new System.Drawing.Point(409, 34);
+            this.lblUnidadMedida.Location = new System.Drawing.Point(409, 27);
             this.lblUnidadMedida.Name = "lblUnidadMedida";
             this.lblUnidadMedida.Size = new System.Drawing.Size(48, 17);
             this.lblUnidadMedida.TabIndex = 7;
             this.lblUnidadMedida.Text = "Unidad";
             // 
-            // numericUpDown1
+            // numCantidad
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(338, 31);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(65, 24);
-            this.numericUpDown1.TabIndex = 6;
+            this.numCantidad.Location = new System.Drawing.Point(338, 24);
+            this.numCantidad.Name = "numCantidad";
+            this.numCantidad.Size = new System.Drawing.Size(65, 24);
+            this.numCantidad.TabIndex = 6;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(279, 34);
+            this.label2.Location = new System.Drawing.Point(279, 27);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 17);
             this.label2.TabIndex = 5;
             this.label2.Text = "Cantidad:";
             // 
-            // comboBox1
+            // cbMateriaPrima
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(105, 30);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(161, 23);
-            this.comboBox1.TabIndex = 4;
+            this.cbMateriaPrima.FormattingEnabled = true;
+            this.cbMateriaPrima.Location = new System.Drawing.Point(105, 23);
+            this.cbMateriaPrima.Name = "cbMateriaPrima";
+            this.cbMateriaPrima.Size = new System.Drawing.Size(161, 23);
+            this.cbMateriaPrima.TabIndex = 4;
+            this.cbMateriaPrima.SelectedIndexChanged += new System.EventHandler(this.cbMateriaPrima_SelectedIndexChanged);
             // 
             // tableLayoutPanel1
             // 
@@ -261,6 +277,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmMateriaPrimaPrincipal";
             this.Text = "Materia Prima Principal";
+            this.Activated += new System.EventHandler(this.frmMateriaPrimaPrincipal_Activated);
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.tcMateriaPrima.ResumeLayout(false);
@@ -269,7 +286,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
             this.gbAgregar.ResumeLayout(false);
             this.gbAgregar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCantidad)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -291,9 +308,10 @@
         private System.Windows.Forms.DataGridView dgvLista;
         private System.Windows.Forms.GroupBox gbAgregar;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.ComboBox cbMateriaPrima;
+        private System.Windows.Forms.NumericUpDown numCantidad;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblUnidadMedida;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

@@ -71,16 +71,17 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(104, 44);
+            this.txtNombre.Location = new System.Drawing.Point(106, 60);
             this.txtNombre.MaxLength = 80;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(208, 24);
             this.txtNombre.TabIndex = 7;
+            this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 47);
+            this.label3.Location = new System.Drawing.Point(22, 63);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 17);
             this.label3.TabIndex = 1;
@@ -286,16 +287,17 @@
             // 
             // txtAbreviatura
             // 
-            this.txtAbreviatura.Location = new System.Drawing.Point(104, 139);
+            this.txtAbreviatura.Location = new System.Drawing.Point(106, 118);
             this.txtAbreviatura.MaxLength = 10;
             this.txtAbreviatura.Name = "txtAbreviatura";
             this.txtAbreviatura.Size = new System.Drawing.Size(208, 24);
             this.txtAbreviatura.TabIndex = 9;
+            this.txtAbreviatura.Enter += new System.EventHandler(this.txtAbreviatura_Enter);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(20, 141);
+            this.label6.Location = new System.Drawing.Point(22, 120);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 17);
             this.label6.TabIndex = 6;
@@ -305,7 +307,7 @@
             // 
             this.cbTipoUnidadDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoUnidadDatos.FormattingEnabled = true;
-            this.cbTipoUnidadDatos.Location = new System.Drawing.Point(104, 91);
+            this.cbTipoUnidadDatos.Location = new System.Drawing.Point(106, 89);
             this.cbTipoUnidadDatos.Name = "cbTipoUnidadDatos";
             this.cbTipoUnidadDatos.Size = new System.Drawing.Size(208, 23);
             this.cbTipoUnidadDatos.TabIndex = 8;
@@ -313,7 +315,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 94);
+            this.label5.Location = new System.Drawing.Point(22, 92);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 17);
             this.label5.TabIndex = 4;

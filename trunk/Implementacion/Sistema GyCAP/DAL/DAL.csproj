@@ -79,6 +79,7 @@
     <Compile Include="MaquinaDAL.cs" />
     <Compile Include="MarcaDAL.cs" />
     <Compile Include="MateriaPrimaDAL.cs" />
+    <Compile Include="MateriaPrimaPrincipalDAL.cs" />
     <Compile Include="ModeloCocinaDAL.cs" />
     <Compile Include="ModeloMaquinaDAL.cs" />
     <Compile Include="OrdenTrabajoDAL.cs" />
