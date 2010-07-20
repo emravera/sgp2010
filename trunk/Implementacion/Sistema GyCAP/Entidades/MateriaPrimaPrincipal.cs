@@ -9,7 +9,13 @@ namespace GyCAP.Entidades
     {
         int codigo;
         Entidades.MateriaPrima materiaPrima;
-        double cantidad;
+        decimal cantidad;
+
+        public decimal Cantidad
+        {
+            get { return cantidad; }
+            set { cantidad = value; }
+        }
         
         public int Codigo
         {
@@ -24,12 +30,7 @@ namespace GyCAP.Entidades
             set { materiaPrima = value; }
         }
         
-        public double Cantidad
-        {
-            get { return cantidad; }
-            set { cantidad = value; }
-        }
-
+       
 
     }
 }

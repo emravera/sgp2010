@@ -54,5 +54,19 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
         }
+       
+        //Metodo que elimina de la base de datos
+        public static void Eliminar(int codigo)
+        {
+            string sql = "DELETE FROM MATERIASPRIMASPRINCIPALES WHERE mppr_codigo = @p0";
+            object[] valorParametros = { codigo };
+            try
+            {
+                DB.executeNonQuery(sql, valorParametros, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+        }
+
     }
 }

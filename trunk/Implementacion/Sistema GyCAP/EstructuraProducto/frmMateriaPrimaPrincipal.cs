@@ -29,10 +29,22 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns.Add("UMED_CODIGO", "Unidad de Medida");
 
             //Seteamos el modo de tamaño de las columnas
-            dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["MPPR_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["MP_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["MPPR_CANTIDAD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["UMED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+            //Habilito resize
+            dgvLista.Columns["MPPR_CODIGO"].Resizable = DataGridViewTriState.True;
+            dgvLista.Columns["MP_CODIGO"].Resizable = DataGridViewTriState.True;
+            dgvLista.Columns["MPPR_CANTIDAD"].Resizable = DataGridViewTriState.True;
+            dgvLista.Columns["UMED_CODIGO"].Resizable = DataGridViewTriState.True;
+
+            //Alineo la columna
+            dgvLista.Columns["MPPR_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            //Oculto el Codigo
+            dgvLista.Columns[0].Visible = false;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["MPPR_CODIGO"].DataPropertyName = "MPPR_CODIGO";
@@ -108,31 +120,35 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 case estadoUI.inicio:
                     //Seteo el inicio de la pantalla sin que se vea el groupbox de agregar
-                    gbLista.Height = 300;
+                    gbLista.Height = 250;
                     gbAgregar.Visible = false;
-                    dgvLista.Height = 280;
+                    dgvLista.Height = 235;
                     btnNuevo.Enabled = true;
                     cbMateriaPrima.Visible = false;
+                                      
+                    //Lleno el Dataset con las Materias Primas Principales Cargadas
+                    BLL.MateriaPrimaPrincipalBLL.ObtenerTodos(dsMateriaPrimaPrincipal);
+
                     //Si hay datos que deje eliminar
                     if (dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.Rows.Count != 0)
                     {
                         btnEliminar.Enabled = true;
                     }
                     else btnEliminar.Enabled = false;
-                    
-                    //Lleno el Dataset con las Materias Primas Principales Cargadas
-                    BLL.MateriaPrimaPrincipalBLL.ObtenerTodos(dsMateriaPrimaPrincipal);
-
                     break;
                 case estadoUI.agregar:
                     //Seteo el inicio de la pantalla sin que se vea el groupbox de agregar
-                    gbLista.Height = 190;
+                    gbLista.Height = 165;
                     gbAgregar.Visible = true;
-                    dgvLista.Height = 154;
+                    dgvLista.Height = 145;
                     btnNuevo.Enabled = false;
                     cbMateriaPrima.Visible = true;
                     cbMateriaPrima.SelectedIndex = -1;
                     numCantidad.Value = 0;
+
+                    //Lleno el Dataset con las Materias Primas Principales Cargadas
+                    BLL.MateriaPrimaPrincipalBLL.ObtenerTodos(dsMateriaPrimaPrincipal);
+
                     //Si hay datos que deje eliminar
                     if (dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.Rows.Count != 0)
                     {
@@ -169,7 +185,7 @@ namespace GyCAP.UI.EstructuraProducto
                     Entidades.MateriaPrimaPrincipal mp_prin = new GyCAP.Entidades.MateriaPrimaPrincipal();
                     Entidades.MateriaPrima mp = new GyCAP.Entidades.MateriaPrima();
 
-                    mp_prin.Cantidad = Convert.ToInt32(numCantidad.Value);
+                    mp_prin.Cantidad = Convert.ToDecimal(numCantidad.Value);
                     //Creo el objeto materia prima
                     mp.CodigoMateriaPrima = Convert.ToInt32(cbMateriaPrima.SelectedValue);
                     mp.Nombre = cbMateriaPrima.SelectedText.ToString();
@@ -198,7 +214,7 @@ namespace GyCAP.UI.EstructuraProducto
                         dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.AcceptChanges();
 
                         //Y por último seteamos el estado de la interfaz
-                        SetInterface(estadoUI.inicio);  
+                        SetInterface(estadoUI.agregar);  
 
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
@@ -233,7 +249,7 @@ namespace GyCAP.UI.EstructuraProducto
            
                 string nombre;
                 string unidadMedida;
-                string cantidad;
+                decimal cantidad;
 
                 if (e.Value.ToString() != string.Empty)
                 {
@@ -245,7 +261,8 @@ namespace GyCAP.UI.EstructuraProducto
                             e.Value = nombre;
                             break;
                         case "MPPR_CANTIDAD":
-                            cantidad = string.Format("{0:###,##}",e.Value);
+                            
+                            cantidad =Math.Round(Convert.ToDecimal(e.Value),2);
                             e.Value = cantidad;
                             break;
                         case "UMED_CODIGO":
@@ -257,6 +274,38 @@ namespace GyCAP.UI.EstructuraProducto
                     }
 
                 }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            //Controlamos que esté seleccionado algo
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Preguntamos si está seguro
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar la Materia Prima Principal seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (respuesta == DialogResult.Yes)
+                {
+                    try
+                    {
+                        //Lo eliminamos de la DB
+                        int codigo = Convert.ToInt32(dvListaMateriaPrimaPrincipal[dgvLista.SelectedRows[0].Index]["mppr_codigo"]);
+                        BLL.MateriaPrimaPrincipalBLL.Eliminar(codigo);
+                        //Lo eliminamos del dataset
+                        dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.FindByMPPR_CODIGO(codigo).Delete();
+                        dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.AcceptChanges();
+                    }
+                   catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una Materia Prima de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
+
         }
         
 
