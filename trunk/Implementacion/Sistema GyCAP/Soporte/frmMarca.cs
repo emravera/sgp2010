@@ -14,10 +14,12 @@ namespace GyCAP.UI.Soporte
         private static frmMarca _frmMarca = null;
         private Data.dsMarca dsMarca = new GyCAP.Data.dsMarca();
         private DataView dvListaMarca, dvComboMarcaDatos, dvComboMarcaBuscar;
-        private enum estadoUI { inicio, nuevo, consultar, modificar, };
+        private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, };
         private estadoUI estadoInterface;
+        public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
+        public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
 
-#region Inicio
+        #region Inicio
         public frmMarca()
         {
             InitializeComponent();
@@ -106,9 +108,15 @@ namespace GyCAP.UI.Soporte
             }
         }
 
-#endregion
+        public void SetEstadoInicial(int estado)
+        {
+            if (estado == estadoInicialNuevo) { SetInterface(estadoUI.nuevoExterno); }
+            if (estado == estadoInicialConsultar) { SetInterface(estadoUI.inicio); }
+        }
 
-#region Botones
+        #endregion
+
+        #region Botones
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Dispose(true);
@@ -262,7 +270,7 @@ namespace GyCAP.UI.Soporte
                 Entidades.Cliente cli = new GyCAP.Entidades.Cliente();
 
                 //Revisamos que está haciendo
-                if (estadoInterface == estadoUI.nuevo)
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
                     //Está cargando una marca nueva
                     marca.Nombre = txtNombre.Text;
@@ -307,7 +315,18 @@ namespace GyCAP.UI.Soporte
                         dsMarca.MARCAS.AddMARCASRow(rowMarcas);
                         dsMarca.MARCAS.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
-                        SetInterface(estadoUI.inicio);
+
+                        //Vemos cómo se inició el formulario para determinar la acción a seguir
+                        if (estadoInterface == estadoUI.nuevoExterno)
+                        {
+                            //Nuevo desde acceso directo, cerramos el formulario
+                            btnSalir.PerformClick();
+                        }
+                        else
+                        {
+                            //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
+                            SetInterface(estadoUI.inicio);
+                        }
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
@@ -443,6 +462,23 @@ namespace GyCAP.UI.Soporte
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
+                    tcMarca.SelectedTab = tpDatos;
+                    txtNombre.Focus();
+                    break;
+                case estadoUI.nuevoExterno:
+                    txtNombre.ReadOnly = false;
+                    txtNombre.Text = String.Empty;
+                    cbClienteDatos.Enabled = false;
+                    cbClienteDatos.SelectedIndex = -1;
+                    chboxCliente.Visible = true;
+                    chboxCliente.Checked = false;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = false;
+                    btnNuevo.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    estadoInterface = estadoUI.nuevoExterno;
                     tcMarca.SelectedTab = tpDatos;
                     txtNombre.Focus();
                     break;
