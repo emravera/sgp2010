@@ -19,39 +19,19 @@ namespace Principal
             //Setea el directorio local de trabajo del sistema.
             GyCAP.BLL.SistemaBLL.WorkingPath = Application.StartupPath;
         }
-
-        private void ShowNewForm(object sender, EventArgs e)
+         
+        
+        #region Menú Modulos
+        
+        private void menuItemEP_Click(object sender, EventArgs e)
         {
             GyCAP.UI.EstructuraProducto.frmEstructuraProducto.Instancia.MdiParent = this;
             GyCAP.UI.EstructuraProducto.frmEstructuraProducto.Instancia.Show();
         }
+        
+        #endregion
 
-        private void OpenFile(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
-            if (openFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                string FileName = openFileDialog.FileName;
-            }
-        }
-
-        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
-            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                string FileName = saveFileDialog.FileName;
-            }
-        }
-
-        private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        #region Menú Edición
 
         private void CutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -65,6 +45,10 @@ namespace Principal
         {
         }
 
+        #endregion
+
+        #region Menú Ver
+
         private void ToolBarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             toolStrip.Visible = toolBarToolStripMenuItem.Checked;
@@ -74,6 +58,14 @@ namespace Principal
         {
             statusStrip.Visible = statusBarToolStripMenuItem.Checked;
         }
+
+        #endregion
+
+        #region Menú Sistema
+
+        #endregion
+
+        #region Menú Ventana
 
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -89,12 +81,7 @@ namespace Principal
         {
             LayoutMdi(MdiLayout.TileHorizontal);
         }
-
-        private void ArrangeIconsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.ArrangeIcons);
-        }
-
+        
         private void CloseAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             foreach (Form childForm in MdiChildren)
@@ -102,7 +89,24 @@ namespace Principal
                 childForm.Close();
             }
         }
-    
+
+        #endregion
+
+        #region Menú Ayuda
+
+        #endregion
+
+        #region Salir
+        private void menuSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        #endregion
+
+        
+
+
+        //ELIMINAR LO QUE SIGUE
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             GyCAP.UI.EstructuraProducto.frmModeloCocina.Instancia.MdiParent = this;
@@ -163,5 +167,9 @@ namespace Principal
             GyCAP.UI.RecursosFabricacion.frmEmpleado.Instancia.MdiParent = this;
             GyCAP.UI.RecursosFabricacion.frmEmpleado.Instancia.Show();
         }
+
+        
+
+        
     }
 }
