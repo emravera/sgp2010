@@ -33,57 +33,58 @@
             this.flpMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCocina = new System.Windows.Forms.Button();
             this.panelCocina = new System.Windows.Forms.Panel();
+            this.btnColor = new System.Windows.Forms.Button();
+            this.panelColor = new System.Windows.Forms.Panel();
+            this.btnConjunto = new System.Windows.Forms.Button();
+            this.panelConjunto = new System.Windows.Forms.Panel();
+            this.btnDesignacion = new System.Windows.Forms.Button();
+            this.panelDesignacion = new System.Windows.Forms.Panel();
+            this.btnEstructuraProducto = new System.Windows.Forms.Button();
+            this.panelEstructuraProducto = new System.Windows.Forms.Panel();
+            this.btnMPPrincipal = new System.Windows.Forms.Button();
+            this.panelMPPrincipal = new System.Windows.Forms.Panel();
+            this.btnModeloCocina = new System.Windows.Forms.Button();
+            this.panelModeloCocina = new System.Windows.Forms.Panel();
+            this.btnPieza = new System.Windows.Forms.Button();
+            this.panelPieza = new System.Windows.Forms.Panel();
+            this.btnSubconjunto = new System.Windows.Forms.Button();
+            this.panelSubconjunto = new System.Windows.Forms.Panel();
+            this.btnTerminacion = new System.Windows.Forms.Button();
+            this.panelTerminacion = new System.Windows.Forms.Panel();
+            this.btnUnidadMedida = new System.Windows.Forms.Button();
+            this.panelUnidadMedida = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.scUp = new System.Windows.Forms.SplitContainer();
+            this.btnMenu = new System.Windows.Forms.Button();
             this.btnNuevoCocina = new System.Windows.Forms.Button();
             this.btnConsultarCocina = new System.Windows.Forms.Button();
             this.btnListadoCocina = new System.Windows.Forms.Button();
-            this.btnColor = new System.Windows.Forms.Button();
-            this.panelColor = new System.Windows.Forms.Panel();
             this.btnConsultarColor = new System.Windows.Forms.Button();
             this.btnNuevoColor = new System.Windows.Forms.Button();
-            this.btnConjunto = new System.Windows.Forms.Button();
-            this.panelConjunto = new System.Windows.Forms.Panel();
             this.btnListadoConjunto = new System.Windows.Forms.Button();
             this.btnConsultarConjunto = new System.Windows.Forms.Button();
             this.btnNuevoConjunto = new System.Windows.Forms.Button();
-            this.btnDesignacion = new System.Windows.Forms.Button();
-            this.panelDesignacion = new System.Windows.Forms.Panel();
             this.btnConsultarDesignacion = new System.Windows.Forms.Button();
             this.btnNuevoDesignacion = new System.Windows.Forms.Button();
-            this.btnEstructuraProducto = new System.Windows.Forms.Button();
-            this.panelEstructuraProducto = new System.Windows.Forms.Panel();
             this.btnListadoEstructuraProducto = new System.Windows.Forms.Button();
             this.btnConsultarEstructuraProducto = new System.Windows.Forms.Button();
             this.btnNuevoEstructuraProducto = new System.Windows.Forms.Button();
-            this.btnMPPrincipal = new System.Windows.Forms.Button();
-            this.panelMPPrincipal = new System.Windows.Forms.Panel();
             this.button15 = new System.Windows.Forms.Button();
             this.btnNuevoMPPrincipal = new System.Windows.Forms.Button();
-            this.btnModeloCocina = new System.Windows.Forms.Button();
-            this.panelModeloCocina = new System.Windows.Forms.Panel();
             this.btnConsultarModeloCocina = new System.Windows.Forms.Button();
             this.btnNuevoModeloCocina = new System.Windows.Forms.Button();
-            this.btnPieza = new System.Windows.Forms.Button();
-            this.panelPieza = new System.Windows.Forms.Panel();
             this.btnListadoPieza = new System.Windows.Forms.Button();
             this.btnConsultarPieza = new System.Windows.Forms.Button();
             this.btnNuevoPieza = new System.Windows.Forms.Button();
-            this.btnSubconjunto = new System.Windows.Forms.Button();
-            this.panelSubconjunto = new System.Windows.Forms.Panel();
             this.btnListadoSubconjunto = new System.Windows.Forms.Button();
             this.btnConsultarSubconjunto = new System.Windows.Forms.Button();
             this.btnNuevoSubconjunto = new System.Windows.Forms.Button();
-            this.btnTerminacion = new System.Windows.Forms.Button();
-            this.panelTerminacion = new System.Windows.Forms.Panel();
             this.btnConsultarTerminacion = new System.Windows.Forms.Button();
             this.btnNuevoTerminacion = new System.Windows.Forms.Button();
-            this.btnUnidadMedida = new System.Windows.Forms.Button();
-            this.panelUnidadMedida = new System.Windows.Forms.Panel();
             this.btnConsultarUnidadMedida = new System.Windows.Forms.Button();
             this.btnNuevoUnidadMedida = new System.Windows.Forms.Button();
-            this.panel12 = new System.Windows.Forms.Panel();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.scUp = new System.Windows.Forms.SplitContainer();
-            this.btnMenu = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.scDown.Panel1.SuspendLayout();
             this.scDown.Panel2.SuspendLayout();
             this.scDown.SuspendLayout();
@@ -190,6 +191,368 @@
             this.panelCocina.TabIndex = 1;
             this.panelCocina.Visible = false;
             // 
+            // btnColor
+            // 
+            this.btnColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColor.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnColor.Location = new System.Drawing.Point(0, 257);
+            this.btnColor.Margin = new System.Windows.Forms.Padding(0);
+            this.btnColor.Name = "btnColor";
+            this.btnColor.Size = new System.Drawing.Size(158, 25);
+            this.btnColor.TabIndex = 0;
+            this.btnColor.Text = "Color";
+            this.btnColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnColor.UseVisualStyleBackColor = true;
+            this.btnColor.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelColor
+            // 
+            this.panelColor.AutoSize = true;
+            this.panelColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelColor.BackColor = System.Drawing.Color.Silver;
+            this.panelColor.Controls.Add(this.btnConsultarColor);
+            this.panelColor.Controls.Add(this.btnNuevoColor);
+            this.panelColor.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelColor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelColor.Location = new System.Drawing.Point(0, 282);
+            this.panelColor.Margin = new System.Windows.Forms.Padding(0);
+            this.panelColor.Name = "panelColor";
+            this.panelColor.Size = new System.Drawing.Size(158, 155);
+            this.panelColor.TabIndex = 2;
+            this.panelColor.Visible = false;
+            // 
+            // btnConjunto
+            // 
+            this.btnConjunto.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConjunto.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConjunto.Location = new System.Drawing.Point(0, 437);
+            this.btnConjunto.Margin = new System.Windows.Forms.Padding(0);
+            this.btnConjunto.Name = "btnConjunto";
+            this.btnConjunto.Size = new System.Drawing.Size(158, 25);
+            this.btnConjunto.TabIndex = 3;
+            this.btnConjunto.Text = "Conjunto";
+            this.btnConjunto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnConjunto.UseVisualStyleBackColor = true;
+            this.btnConjunto.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelConjunto
+            // 
+            this.panelConjunto.AutoSize = true;
+            this.panelConjunto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelConjunto.BackColor = System.Drawing.Color.Silver;
+            this.panelConjunto.Controls.Add(this.btnListadoConjunto);
+            this.panelConjunto.Controls.Add(this.btnConsultarConjunto);
+            this.panelConjunto.Controls.Add(this.btnNuevoConjunto);
+            this.panelConjunto.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelConjunto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelConjunto.Location = new System.Drawing.Point(158, 0);
+            this.panelConjunto.Margin = new System.Windows.Forms.Padding(0);
+            this.panelConjunto.Name = "panelConjunto";
+            this.panelConjunto.Size = new System.Drawing.Size(158, 228);
+            this.panelConjunto.TabIndex = 4;
+            this.panelConjunto.Visible = false;
+            // 
+            // btnDesignacion
+            // 
+            this.btnDesignacion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDesignacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDesignacion.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDesignacion.Location = new System.Drawing.Point(158, 228);
+            this.btnDesignacion.Margin = new System.Windows.Forms.Padding(0);
+            this.btnDesignacion.Name = "btnDesignacion";
+            this.btnDesignacion.Size = new System.Drawing.Size(158, 25);
+            this.btnDesignacion.TabIndex = 5;
+            this.btnDesignacion.Text = "Designación";
+            this.btnDesignacion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDesignacion.UseVisualStyleBackColor = true;
+            this.btnDesignacion.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelDesignacion
+            // 
+            this.panelDesignacion.AutoSize = true;
+            this.panelDesignacion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelDesignacion.BackColor = System.Drawing.Color.Silver;
+            this.panelDesignacion.Controls.Add(this.btnConsultarDesignacion);
+            this.panelDesignacion.Controls.Add(this.btnNuevoDesignacion);
+            this.panelDesignacion.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelDesignacion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDesignacion.Location = new System.Drawing.Point(158, 253);
+            this.panelDesignacion.Margin = new System.Windows.Forms.Padding(0);
+            this.panelDesignacion.Name = "panelDesignacion";
+            this.panelDesignacion.Size = new System.Drawing.Size(158, 154);
+            this.panelDesignacion.TabIndex = 6;
+            this.panelDesignacion.Visible = false;
+            // 
+            // btnEstructuraProducto
+            // 
+            this.btnEstructuraProducto.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEstructuraProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEstructuraProducto.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEstructuraProducto.Location = new System.Drawing.Point(158, 407);
+            this.btnEstructuraProducto.Margin = new System.Windows.Forms.Padding(0);
+            this.btnEstructuraProducto.Name = "btnEstructuraProducto";
+            this.btnEstructuraProducto.Size = new System.Drawing.Size(158, 25);
+            this.btnEstructuraProducto.TabIndex = 7;
+            this.btnEstructuraProducto.Text = "Estructura de Producto";
+            this.btnEstructuraProducto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEstructuraProducto.UseVisualStyleBackColor = true;
+            this.btnEstructuraProducto.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelEstructuraProducto
+            // 
+            this.panelEstructuraProducto.AutoSize = true;
+            this.panelEstructuraProducto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelEstructuraProducto.BackColor = System.Drawing.Color.Silver;
+            this.panelEstructuraProducto.Controls.Add(this.btnListadoEstructuraProducto);
+            this.panelEstructuraProducto.Controls.Add(this.btnConsultarEstructuraProducto);
+            this.panelEstructuraProducto.Controls.Add(this.btnNuevoEstructuraProducto);
+            this.panelEstructuraProducto.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelEstructuraProducto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelEstructuraProducto.Location = new System.Drawing.Point(316, 0);
+            this.panelEstructuraProducto.Margin = new System.Windows.Forms.Padding(0);
+            this.panelEstructuraProducto.Name = "panelEstructuraProducto";
+            this.panelEstructuraProducto.Size = new System.Drawing.Size(158, 228);
+            this.panelEstructuraProducto.TabIndex = 8;
+            this.panelEstructuraProducto.Visible = false;
+            // 
+            // btnMPPrincipal
+            // 
+            this.btnMPPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMPPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMPPrincipal.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMPPrincipal.Location = new System.Drawing.Point(316, 228);
+            this.btnMPPrincipal.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMPPrincipal.Name = "btnMPPrincipal";
+            this.btnMPPrincipal.Size = new System.Drawing.Size(158, 25);
+            this.btnMPPrincipal.TabIndex = 9;
+            this.btnMPPrincipal.Text = "Materia Prima Principal";
+            this.btnMPPrincipal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMPPrincipal.UseVisualStyleBackColor = true;
+            this.btnMPPrincipal.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelMPPrincipal
+            // 
+            this.panelMPPrincipal.AutoSize = true;
+            this.panelMPPrincipal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelMPPrincipal.BackColor = System.Drawing.Color.Silver;
+            this.panelMPPrincipal.Controls.Add(this.button15);
+            this.panelMPPrincipal.Controls.Add(this.btnNuevoMPPrincipal);
+            this.panelMPPrincipal.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelMPPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMPPrincipal.Location = new System.Drawing.Point(316, 253);
+            this.panelMPPrincipal.Margin = new System.Windows.Forms.Padding(0);
+            this.panelMPPrincipal.Name = "panelMPPrincipal";
+            this.panelMPPrincipal.Size = new System.Drawing.Size(158, 156);
+            this.panelMPPrincipal.TabIndex = 10;
+            this.panelMPPrincipal.Visible = false;
+            // 
+            // btnModeloCocina
+            // 
+            this.btnModeloCocina.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnModeloCocina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModeloCocina.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModeloCocina.Location = new System.Drawing.Point(316, 409);
+            this.btnModeloCocina.Margin = new System.Windows.Forms.Padding(0);
+            this.btnModeloCocina.Name = "btnModeloCocina";
+            this.btnModeloCocina.Size = new System.Drawing.Size(158, 25);
+            this.btnModeloCocina.TabIndex = 11;
+            this.btnModeloCocina.Text = "Modelo de Cocina";
+            this.btnModeloCocina.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnModeloCocina.UseVisualStyleBackColor = true;
+            this.btnModeloCocina.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelModeloCocina
+            // 
+            this.panelModeloCocina.AutoSize = true;
+            this.panelModeloCocina.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelModeloCocina.BackColor = System.Drawing.Color.Silver;
+            this.panelModeloCocina.Controls.Add(this.btnConsultarModeloCocina);
+            this.panelModeloCocina.Controls.Add(this.btnNuevoModeloCocina);
+            this.panelModeloCocina.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelModeloCocina.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelModeloCocina.Location = new System.Drawing.Point(474, 0);
+            this.panelModeloCocina.Margin = new System.Windows.Forms.Padding(0);
+            this.panelModeloCocina.Name = "panelModeloCocina";
+            this.panelModeloCocina.Size = new System.Drawing.Size(158, 173);
+            this.panelModeloCocina.TabIndex = 12;
+            this.panelModeloCocina.Visible = false;
+            // 
+            // btnPieza
+            // 
+            this.btnPieza.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPieza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPieza.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPieza.Location = new System.Drawing.Point(474, 173);
+            this.btnPieza.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPieza.Name = "btnPieza";
+            this.btnPieza.Size = new System.Drawing.Size(158, 25);
+            this.btnPieza.TabIndex = 13;
+            this.btnPieza.Text = "Pieza";
+            this.btnPieza.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPieza.UseVisualStyleBackColor = true;
+            this.btnPieza.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelPieza
+            // 
+            this.panelPieza.AutoSize = true;
+            this.panelPieza.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelPieza.BackColor = System.Drawing.Color.Silver;
+            this.panelPieza.Controls.Add(this.btnListadoPieza);
+            this.panelPieza.Controls.Add(this.btnConsultarPieza);
+            this.panelPieza.Controls.Add(this.btnNuevoPieza);
+            this.panelPieza.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelPieza.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelPieza.Location = new System.Drawing.Point(474, 198);
+            this.panelPieza.Margin = new System.Windows.Forms.Padding(0);
+            this.panelPieza.Name = "panelPieza";
+            this.panelPieza.Size = new System.Drawing.Size(158, 228);
+            this.panelPieza.TabIndex = 14;
+            this.panelPieza.Visible = false;
+            // 
+            // btnSubconjunto
+            // 
+            this.btnSubconjunto.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSubconjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubconjunto.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubconjunto.Location = new System.Drawing.Point(474, 426);
+            this.btnSubconjunto.Margin = new System.Windows.Forms.Padding(0);
+            this.btnSubconjunto.Name = "btnSubconjunto";
+            this.btnSubconjunto.Size = new System.Drawing.Size(158, 25);
+            this.btnSubconjunto.TabIndex = 15;
+            this.btnSubconjunto.Text = "Subconjunto";
+            this.btnSubconjunto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubconjunto.UseVisualStyleBackColor = true;
+            this.btnSubconjunto.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelSubconjunto
+            // 
+            this.panelSubconjunto.AutoSize = true;
+            this.panelSubconjunto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelSubconjunto.BackColor = System.Drawing.Color.Silver;
+            this.panelSubconjunto.Controls.Add(this.btnListadoSubconjunto);
+            this.panelSubconjunto.Controls.Add(this.btnConsultarSubconjunto);
+            this.panelSubconjunto.Controls.Add(this.btnNuevoSubconjunto);
+            this.panelSubconjunto.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelSubconjunto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelSubconjunto.Location = new System.Drawing.Point(632, 0);
+            this.panelSubconjunto.Margin = new System.Windows.Forms.Padding(0);
+            this.panelSubconjunto.Name = "panelSubconjunto";
+            this.panelSubconjunto.Size = new System.Drawing.Size(158, 228);
+            this.panelSubconjunto.TabIndex = 16;
+            this.panelSubconjunto.Visible = false;
+            // 
+            // btnTerminacion
+            // 
+            this.btnTerminacion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTerminacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTerminacion.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTerminacion.Location = new System.Drawing.Point(632, 228);
+            this.btnTerminacion.Margin = new System.Windows.Forms.Padding(0);
+            this.btnTerminacion.Name = "btnTerminacion";
+            this.btnTerminacion.Size = new System.Drawing.Size(158, 25);
+            this.btnTerminacion.TabIndex = 17;
+            this.btnTerminacion.Text = "Terminación";
+            this.btnTerminacion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTerminacion.UseVisualStyleBackColor = true;
+            this.btnTerminacion.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelTerminacion
+            // 
+            this.panelTerminacion.AutoSize = true;
+            this.panelTerminacion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelTerminacion.BackColor = System.Drawing.Color.Silver;
+            this.panelTerminacion.Controls.Add(this.btnConsultarTerminacion);
+            this.panelTerminacion.Controls.Add(this.btnNuevoTerminacion);
+            this.panelTerminacion.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelTerminacion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTerminacion.Location = new System.Drawing.Point(632, 253);
+            this.panelTerminacion.Margin = new System.Windows.Forms.Padding(0);
+            this.panelTerminacion.Name = "panelTerminacion";
+            this.panelTerminacion.Size = new System.Drawing.Size(158, 153);
+            this.panelTerminacion.TabIndex = 18;
+            this.panelTerminacion.Visible = false;
+            // 
+            // btnUnidadMedida
+            // 
+            this.btnUnidadMedida.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUnidadMedida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUnidadMedida.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUnidadMedida.Location = new System.Drawing.Point(632, 406);
+            this.btnUnidadMedida.Margin = new System.Windows.Forms.Padding(0);
+            this.btnUnidadMedida.Name = "btnUnidadMedida";
+            this.btnUnidadMedida.Size = new System.Drawing.Size(158, 25);
+            this.btnUnidadMedida.TabIndex = 19;
+            this.btnUnidadMedida.Text = "Unidad de Medida";
+            this.btnUnidadMedida.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnUnidadMedida.UseVisualStyleBackColor = true;
+            this.btnUnidadMedida.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelUnidadMedida
+            // 
+            this.panelUnidadMedida.AutoSize = true;
+            this.panelUnidadMedida.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelUnidadMedida.BackColor = System.Drawing.Color.Silver;
+            this.panelUnidadMedida.Controls.Add(this.btnConsultarUnidadMedida);
+            this.panelUnidadMedida.Controls.Add(this.btnNuevoUnidadMedida);
+            this.panelUnidadMedida.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelUnidadMedida.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelUnidadMedida.Location = new System.Drawing.Point(790, 0);
+            this.panelUnidadMedida.Margin = new System.Windows.Forms.Padding(0);
+            this.panelUnidadMedida.Name = "panelUnidadMedida";
+            this.panelUnidadMedida.Size = new System.Drawing.Size(120, 159);
+            this.panelUnidadMedida.TabIndex = 20;
+            this.panelUnidadMedida.Visible = false;
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.button1);
+            this.panel12.Controls.Add(this.btnSalir);
+            this.panel12.Cursor = System.Windows.Forms.Cursors.Default;
+            this.flpMenu.SetFlowBreak(this.panel12, true);
+            this.panel12.Location = new System.Drawing.Point(790, 159);
+            this.panel12.Margin = new System.Windows.Forms.Padding(0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(120, 208);
+            this.panel12.TabIndex = 21;
+            // 
+            // scUp
+            // 
+            this.scUp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scUp.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.scUp.IsSplitterFixed = true;
+            this.scUp.Location = new System.Drawing.Point(0, 0);
+            this.scUp.Name = "scUp";
+            // 
+            // scUp.Panel1
+            // 
+            this.scUp.Panel1.AutoScroll = true;
+            this.scUp.Panel1.Controls.Add(this.btnMenu);
+            this.scUp.Panel1MinSize = 20;
+            // 
+            // scUp.Panel2
+            // 
+            this.scUp.Panel2.AutoScroll = true;
+            this.scUp.Panel2.AutoScrollMargin = new System.Drawing.Size(1000, 1000);
+            this.scUp.Size = new System.Drawing.Size(625, 568);
+            this.scUp.SplitterDistance = 20;
+            this.scUp.TabIndex = 0;
+            // 
+            // btnMenu
+            // 
+            this.btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
+            this.btnMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMenu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+            this.btnMenu.Location = new System.Drawing.Point(0, 0);
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(15, 568);
+            this.btnMenu.TabIndex = 0;
+            this.btnMenu.Text = "Menú";
+            this.btnMenu.UseVisualStyleBackColor = true;
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
+            // 
             // btnNuevoCocina
             // 
             this.btnNuevoCocina.AutoSize = true;
@@ -247,37 +610,6 @@
             this.btnListadoCocina.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnListadoCocina.UseVisualStyleBackColor = false;
             // 
-            // btnColor
-            // 
-            this.btnColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnColor.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnColor.Location = new System.Drawing.Point(0, 257);
-            this.btnColor.Margin = new System.Windows.Forms.Padding(0);
-            this.btnColor.Name = "btnColor";
-            this.btnColor.Size = new System.Drawing.Size(158, 25);
-            this.btnColor.TabIndex = 0;
-            this.btnColor.Text = "Color";
-            this.btnColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnColor.UseVisualStyleBackColor = true;
-            this.btnColor.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelColor
-            // 
-            this.panelColor.AutoSize = true;
-            this.panelColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelColor.BackColor = System.Drawing.Color.Silver;
-            this.panelColor.Controls.Add(this.btnConsultarColor);
-            this.panelColor.Controls.Add(this.btnNuevoColor);
-            this.panelColor.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelColor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelColor.Location = new System.Drawing.Point(0, 282);
-            this.panelColor.Margin = new System.Windows.Forms.Padding(0);
-            this.panelColor.Name = "panelColor";
-            this.panelColor.Size = new System.Drawing.Size(158, 155);
-            this.panelColor.TabIndex = 2;
-            this.panelColor.Visible = false;
-            // 
             // btnConsultarColor
             // 
             this.btnConsultarColor.AutoSize = true;
@@ -313,38 +645,6 @@
             this.btnNuevoColor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoColor.UseVisualStyleBackColor = true;
             // 
-            // btnConjunto
-            // 
-            this.btnConjunto.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConjunto.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConjunto.Location = new System.Drawing.Point(0, 437);
-            this.btnConjunto.Margin = new System.Windows.Forms.Padding(0);
-            this.btnConjunto.Name = "btnConjunto";
-            this.btnConjunto.Size = new System.Drawing.Size(158, 25);
-            this.btnConjunto.TabIndex = 3;
-            this.btnConjunto.Text = "Conjunto";
-            this.btnConjunto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnConjunto.UseVisualStyleBackColor = true;
-            this.btnConjunto.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelConjunto
-            // 
-            this.panelConjunto.AutoSize = true;
-            this.panelConjunto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelConjunto.BackColor = System.Drawing.Color.Silver;
-            this.panelConjunto.Controls.Add(this.btnListadoConjunto);
-            this.panelConjunto.Controls.Add(this.btnConsultarConjunto);
-            this.panelConjunto.Controls.Add(this.btnNuevoConjunto);
-            this.panelConjunto.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelConjunto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelConjunto.Location = new System.Drawing.Point(158, 0);
-            this.panelConjunto.Margin = new System.Windows.Forms.Padding(0);
-            this.panelConjunto.Name = "panelConjunto";
-            this.panelConjunto.Size = new System.Drawing.Size(158, 228);
-            this.panelConjunto.TabIndex = 4;
-            this.panelConjunto.Visible = false;
-            // 
             // btnListadoConjunto
             // 
             this.btnListadoConjunto.AutoSize = true;
@@ -362,6 +662,7 @@
             this.btnListadoConjunto.Text = "Listados";
             this.btnListadoConjunto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnListadoConjunto.UseVisualStyleBackColor = true;
+            this.btnListadoConjunto.Click += new System.EventHandler(this.btnListadoConjunto_Click);
             // 
             // btnConsultarConjunto
             // 
@@ -379,6 +680,7 @@
             this.btnConsultarConjunto.Text = "Consultar";
             this.btnConsultarConjunto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarConjunto.UseVisualStyleBackColor = true;
+            this.btnConsultarConjunto.Click += new System.EventHandler(this.btnConsultarConjunto_Click);
             // 
             // btnNuevoConjunto
             // 
@@ -397,37 +699,7 @@
             this.btnNuevoConjunto.Text = "Nuevo";
             this.btnNuevoConjunto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoConjunto.UseVisualStyleBackColor = true;
-            // 
-            // btnDesignacion
-            // 
-            this.btnDesignacion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDesignacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDesignacion.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDesignacion.Location = new System.Drawing.Point(158, 228);
-            this.btnDesignacion.Margin = new System.Windows.Forms.Padding(0);
-            this.btnDesignacion.Name = "btnDesignacion";
-            this.btnDesignacion.Size = new System.Drawing.Size(158, 25);
-            this.btnDesignacion.TabIndex = 5;
-            this.btnDesignacion.Text = "Designación";
-            this.btnDesignacion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDesignacion.UseVisualStyleBackColor = true;
-            this.btnDesignacion.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelDesignacion
-            // 
-            this.panelDesignacion.AutoSize = true;
-            this.panelDesignacion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelDesignacion.BackColor = System.Drawing.Color.Silver;
-            this.panelDesignacion.Controls.Add(this.btnConsultarDesignacion);
-            this.panelDesignacion.Controls.Add(this.btnNuevoDesignacion);
-            this.panelDesignacion.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelDesignacion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDesignacion.Location = new System.Drawing.Point(158, 253);
-            this.panelDesignacion.Margin = new System.Windows.Forms.Padding(0);
-            this.panelDesignacion.Name = "panelDesignacion";
-            this.panelDesignacion.Size = new System.Drawing.Size(158, 154);
-            this.panelDesignacion.TabIndex = 6;
-            this.panelDesignacion.Visible = false;
+            this.btnNuevoConjunto.Click += new System.EventHandler(this.btnNuevoConjunto_Click);
             // 
             // btnConsultarDesignacion
             // 
@@ -463,38 +735,6 @@
             this.btnNuevoDesignacion.Text = " Nuevo";
             this.btnNuevoDesignacion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoDesignacion.UseVisualStyleBackColor = true;
-            // 
-            // btnEstructuraProducto
-            // 
-            this.btnEstructuraProducto.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEstructuraProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEstructuraProducto.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEstructuraProducto.Location = new System.Drawing.Point(158, 407);
-            this.btnEstructuraProducto.Margin = new System.Windows.Forms.Padding(0);
-            this.btnEstructuraProducto.Name = "btnEstructuraProducto";
-            this.btnEstructuraProducto.Size = new System.Drawing.Size(158, 25);
-            this.btnEstructuraProducto.TabIndex = 7;
-            this.btnEstructuraProducto.Text = "Estructura de Producto";
-            this.btnEstructuraProducto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEstructuraProducto.UseVisualStyleBackColor = true;
-            this.btnEstructuraProducto.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelEstructuraProducto
-            // 
-            this.panelEstructuraProducto.AutoSize = true;
-            this.panelEstructuraProducto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelEstructuraProducto.BackColor = System.Drawing.Color.Silver;
-            this.panelEstructuraProducto.Controls.Add(this.btnListadoEstructuraProducto);
-            this.panelEstructuraProducto.Controls.Add(this.btnConsultarEstructuraProducto);
-            this.panelEstructuraProducto.Controls.Add(this.btnNuevoEstructuraProducto);
-            this.panelEstructuraProducto.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelEstructuraProducto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelEstructuraProducto.Location = new System.Drawing.Point(316, 0);
-            this.panelEstructuraProducto.Margin = new System.Windows.Forms.Padding(0);
-            this.panelEstructuraProducto.Name = "panelEstructuraProducto";
-            this.panelEstructuraProducto.Size = new System.Drawing.Size(158, 228);
-            this.panelEstructuraProducto.TabIndex = 8;
-            this.panelEstructuraProducto.Visible = false;
             // 
             // btnListadoEstructuraProducto
             // 
@@ -549,37 +789,6 @@
             this.btnNuevoEstructuraProducto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoEstructuraProducto.UseVisualStyleBackColor = true;
             // 
-            // btnMPPrincipal
-            // 
-            this.btnMPPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMPPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMPPrincipal.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMPPrincipal.Location = new System.Drawing.Point(316, 228);
-            this.btnMPPrincipal.Margin = new System.Windows.Forms.Padding(0);
-            this.btnMPPrincipal.Name = "btnMPPrincipal";
-            this.btnMPPrincipal.Size = new System.Drawing.Size(158, 25);
-            this.btnMPPrincipal.TabIndex = 9;
-            this.btnMPPrincipal.Text = "Materia Prima Principal";
-            this.btnMPPrincipal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMPPrincipal.UseVisualStyleBackColor = true;
-            this.btnMPPrincipal.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelMPPrincipal
-            // 
-            this.panelMPPrincipal.AutoSize = true;
-            this.panelMPPrincipal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelMPPrincipal.BackColor = System.Drawing.Color.Silver;
-            this.panelMPPrincipal.Controls.Add(this.button15);
-            this.panelMPPrincipal.Controls.Add(this.btnNuevoMPPrincipal);
-            this.panelMPPrincipal.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelMPPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMPPrincipal.Location = new System.Drawing.Point(316, 253);
-            this.panelMPPrincipal.Margin = new System.Windows.Forms.Padding(0);
-            this.panelMPPrincipal.Name = "panelMPPrincipal";
-            this.panelMPPrincipal.Size = new System.Drawing.Size(158, 156);
-            this.panelMPPrincipal.TabIndex = 10;
-            this.panelMPPrincipal.Visible = false;
-            // 
             // button15
             // 
             this.button15.AutoSize = true;
@@ -614,37 +823,6 @@
             this.btnNuevoMPPrincipal.Text = "Nuevo";
             this.btnNuevoMPPrincipal.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoMPPrincipal.UseVisualStyleBackColor = true;
-            // 
-            // btnModeloCocina
-            // 
-            this.btnModeloCocina.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnModeloCocina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModeloCocina.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModeloCocina.Location = new System.Drawing.Point(316, 409);
-            this.btnModeloCocina.Margin = new System.Windows.Forms.Padding(0);
-            this.btnModeloCocina.Name = "btnModeloCocina";
-            this.btnModeloCocina.Size = new System.Drawing.Size(158, 25);
-            this.btnModeloCocina.TabIndex = 11;
-            this.btnModeloCocina.Text = "Modelo de Cocina";
-            this.btnModeloCocina.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnModeloCocina.UseVisualStyleBackColor = true;
-            this.btnModeloCocina.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelModeloCocina
-            // 
-            this.panelModeloCocina.AutoSize = true;
-            this.panelModeloCocina.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelModeloCocina.BackColor = System.Drawing.Color.Silver;
-            this.panelModeloCocina.Controls.Add(this.btnConsultarModeloCocina);
-            this.panelModeloCocina.Controls.Add(this.btnNuevoModeloCocina);
-            this.panelModeloCocina.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelModeloCocina.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelModeloCocina.Location = new System.Drawing.Point(474, 0);
-            this.panelModeloCocina.Margin = new System.Windows.Forms.Padding(0);
-            this.panelModeloCocina.Name = "panelModeloCocina";
-            this.panelModeloCocina.Size = new System.Drawing.Size(158, 173);
-            this.panelModeloCocina.TabIndex = 12;
-            this.panelModeloCocina.Visible = false;
             // 
             // btnConsultarModeloCocina
             // 
@@ -681,38 +859,6 @@
             this.btnNuevoModeloCocina.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoModeloCocina.UseVisualStyleBackColor = true;
             // 
-            // btnPieza
-            // 
-            this.btnPieza.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPieza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPieza.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPieza.Location = new System.Drawing.Point(474, 173);
-            this.btnPieza.Margin = new System.Windows.Forms.Padding(0);
-            this.btnPieza.Name = "btnPieza";
-            this.btnPieza.Size = new System.Drawing.Size(158, 25);
-            this.btnPieza.TabIndex = 13;
-            this.btnPieza.Text = "Pieza";
-            this.btnPieza.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPieza.UseVisualStyleBackColor = true;
-            this.btnPieza.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelPieza
-            // 
-            this.panelPieza.AutoSize = true;
-            this.panelPieza.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelPieza.BackColor = System.Drawing.Color.Silver;
-            this.panelPieza.Controls.Add(this.btnListadoPieza);
-            this.panelPieza.Controls.Add(this.btnConsultarPieza);
-            this.panelPieza.Controls.Add(this.btnNuevoPieza);
-            this.panelPieza.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelPieza.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelPieza.Location = new System.Drawing.Point(474, 198);
-            this.panelPieza.Margin = new System.Windows.Forms.Padding(0);
-            this.panelPieza.Name = "panelPieza";
-            this.panelPieza.Size = new System.Drawing.Size(158, 228);
-            this.panelPieza.TabIndex = 14;
-            this.panelPieza.Visible = false;
-            // 
             // btnListadoPieza
             // 
             this.btnListadoPieza.AutoSize = true;
@@ -747,6 +893,7 @@
             this.btnConsultarPieza.Text = "Consultar";
             this.btnConsultarPieza.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarPieza.UseVisualStyleBackColor = true;
+            this.btnConsultarPieza.Click += new System.EventHandler(this.btnConsultarPieza_Click);
             // 
             // btnNuevoPieza
             // 
@@ -765,38 +912,7 @@
             this.btnNuevoPieza.Text = "Nuevo";
             this.btnNuevoPieza.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoPieza.UseVisualStyleBackColor = true;
-            // 
-            // btnSubconjunto
-            // 
-            this.btnSubconjunto.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSubconjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSubconjunto.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubconjunto.Location = new System.Drawing.Point(474, 426);
-            this.btnSubconjunto.Margin = new System.Windows.Forms.Padding(0);
-            this.btnSubconjunto.Name = "btnSubconjunto";
-            this.btnSubconjunto.Size = new System.Drawing.Size(158, 25);
-            this.btnSubconjunto.TabIndex = 15;
-            this.btnSubconjunto.Text = "Subconjunto";
-            this.btnSubconjunto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSubconjunto.UseVisualStyleBackColor = true;
-            this.btnSubconjunto.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelSubconjunto
-            // 
-            this.panelSubconjunto.AutoSize = true;
-            this.panelSubconjunto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelSubconjunto.BackColor = System.Drawing.Color.Silver;
-            this.panelSubconjunto.Controls.Add(this.btnListadoSubconjunto);
-            this.panelSubconjunto.Controls.Add(this.btnConsultarSubconjunto);
-            this.panelSubconjunto.Controls.Add(this.btnNuevoSubconjunto);
-            this.panelSubconjunto.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelSubconjunto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSubconjunto.Location = new System.Drawing.Point(632, 0);
-            this.panelSubconjunto.Margin = new System.Windows.Forms.Padding(0);
-            this.panelSubconjunto.Name = "panelSubconjunto";
-            this.panelSubconjunto.Size = new System.Drawing.Size(158, 228);
-            this.panelSubconjunto.TabIndex = 16;
-            this.panelSubconjunto.Visible = false;
+            this.btnNuevoPieza.Click += new System.EventHandler(this.btnNuevoPieza_Click);
             // 
             // btnListadoSubconjunto
             // 
@@ -815,6 +931,7 @@
             this.btnListadoSubconjunto.Text = "Listados";
             this.btnListadoSubconjunto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnListadoSubconjunto.UseVisualStyleBackColor = true;
+            this.btnListadoSubconjunto.Click += new System.EventHandler(this.btnListadoSubconjunto_Click);
             // 
             // btnConsultarSubconjunto
             // 
@@ -832,6 +949,7 @@
             this.btnConsultarSubconjunto.Text = "Consultar";
             this.btnConsultarSubconjunto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarSubconjunto.UseVisualStyleBackColor = true;
+            this.btnConsultarSubconjunto.Click += new System.EventHandler(this.btnConsultarSubconjunto_Click);
             // 
             // btnNuevoSubconjunto
             // 
@@ -850,37 +968,7 @@
             this.btnNuevoSubconjunto.Text = "Nuevo";
             this.btnNuevoSubconjunto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoSubconjunto.UseVisualStyleBackColor = true;
-            // 
-            // btnTerminacion
-            // 
-            this.btnTerminacion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTerminacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTerminacion.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTerminacion.Location = new System.Drawing.Point(632, 228);
-            this.btnTerminacion.Margin = new System.Windows.Forms.Padding(0);
-            this.btnTerminacion.Name = "btnTerminacion";
-            this.btnTerminacion.Size = new System.Drawing.Size(158, 25);
-            this.btnTerminacion.TabIndex = 17;
-            this.btnTerminacion.Text = "Terminación";
-            this.btnTerminacion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTerminacion.UseVisualStyleBackColor = true;
-            this.btnTerminacion.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelTerminacion
-            // 
-            this.panelTerminacion.AutoSize = true;
-            this.panelTerminacion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelTerminacion.BackColor = System.Drawing.Color.Silver;
-            this.panelTerminacion.Controls.Add(this.btnConsultarTerminacion);
-            this.panelTerminacion.Controls.Add(this.btnNuevoTerminacion);
-            this.panelTerminacion.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelTerminacion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelTerminacion.Location = new System.Drawing.Point(632, 253);
-            this.panelTerminacion.Margin = new System.Windows.Forms.Padding(0);
-            this.panelTerminacion.Name = "panelTerminacion";
-            this.panelTerminacion.Size = new System.Drawing.Size(158, 153);
-            this.panelTerminacion.TabIndex = 18;
-            this.panelTerminacion.Visible = false;
+            this.btnNuevoSubconjunto.Click += new System.EventHandler(this.btnNuevoSubconjunto_Click);
             // 
             // btnConsultarTerminacion
             // 
@@ -917,37 +1005,6 @@
             this.btnNuevoTerminacion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoTerminacion.UseVisualStyleBackColor = true;
             // 
-            // btnUnidadMedida
-            // 
-            this.btnUnidadMedida.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUnidadMedida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUnidadMedida.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUnidadMedida.Location = new System.Drawing.Point(632, 406);
-            this.btnUnidadMedida.Margin = new System.Windows.Forms.Padding(0);
-            this.btnUnidadMedida.Name = "btnUnidadMedida";
-            this.btnUnidadMedida.Size = new System.Drawing.Size(158, 25);
-            this.btnUnidadMedida.TabIndex = 19;
-            this.btnUnidadMedida.Text = "Unidad de Medida";
-            this.btnUnidadMedida.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUnidadMedida.UseVisualStyleBackColor = true;
-            this.btnUnidadMedida.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelUnidadMedida
-            // 
-            this.panelUnidadMedida.AutoSize = true;
-            this.panelUnidadMedida.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelUnidadMedida.BackColor = System.Drawing.Color.Silver;
-            this.panelUnidadMedida.Controls.Add(this.btnConsultarUnidadMedida);
-            this.panelUnidadMedida.Controls.Add(this.btnNuevoUnidadMedida);
-            this.panelUnidadMedida.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelUnidadMedida.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelUnidadMedida.Location = new System.Drawing.Point(790, 0);
-            this.panelUnidadMedida.Margin = new System.Windows.Forms.Padding(0);
-            this.panelUnidadMedida.Name = "panelUnidadMedida";
-            this.panelUnidadMedida.Size = new System.Drawing.Size(120, 159);
-            this.panelUnidadMedida.TabIndex = 20;
-            this.panelUnidadMedida.Visible = false;
-            // 
             // btnConsultarUnidadMedida
             // 
             this.btnConsultarUnidadMedida.AutoSize = true;
@@ -983,66 +1040,39 @@
             this.btnNuevoUnidadMedida.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoUnidadMedida.UseVisualStyleBackColor = true;
             // 
-            // panel12
-            // 
-            this.panel12.Controls.Add(this.btnSalir);
-            this.panel12.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flpMenu.SetFlowBreak(this.panel12, true);
-            this.panel12.Location = new System.Drawing.Point(790, 159);
-            this.panel12.Margin = new System.Windows.Forms.Padding(0);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(120, 100);
-            this.panel12.TabIndex = 21;
-            // 
             // btnSalir
             // 
             this.btnSalir.AutoSize = true;
+            this.btnSalir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnSalir.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSalir.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Salir_25;
-            this.btnSalir.Location = new System.Drawing.Point(37, 23);
+            this.btnSalir.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Exit_48;
+            this.btnSalir.Location = new System.Drawing.Point(31, 19);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(75, 62);
+            this.btnSalir.Size = new System.Drawing.Size(54, 75);
             this.btnSalir.TabIndex = 0;
-            this.btnSalir.Text = "Salir";
+            this.btnSalir.Text = " Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // scUp
+            // button1
             // 
-            this.scUp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scUp.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.scUp.IsSplitterFixed = true;
-            this.scUp.Location = new System.Drawing.Point(0, 0);
-            this.scUp.Name = "scUp";
-            // 
-            // scUp.Panel1
-            // 
-            this.scUp.Panel1.AutoScroll = true;
-            this.scUp.Panel1.Controls.Add(this.btnMenu);
-            this.scUp.Panel1MinSize = 20;
-            // 
-            // scUp.Panel2
-            // 
-            this.scUp.Panel2.AutoScroll = true;
-            this.scUp.Size = new System.Drawing.Size(625, 568);
-            this.scUp.SplitterDistance = 20;
-            this.scUp.TabIndex = 0;
-            // 
-            // btnMenu
-            // 
-            this.btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
-            this.btnMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMenu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
-            this.btnMenu.Location = new System.Drawing.Point(0, 0);
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(15, 568);
-            this.btnMenu.TabIndex = 0;
-            this.btnMenu.Text = "Menú";
-            this.btnMenu.UseVisualStyleBackColor = true;
-            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
+            this.button1.AutoSize = true;
+            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Exit_48;
+            this.button1.Location = new System.Drawing.Point(31, 125);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(54, 75);
+            this.button1.TabIndex = 1;
+            this.button1.Text = " Salir";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // frmEstructuraProducto
             // 
@@ -1151,6 +1181,7 @@
         private System.Windows.Forms.Button btnNuevoTerminacion;
         private System.Windows.Forms.Button btnConsultarUnidadMedida;
         private System.Windows.Forms.Button btnNuevoUnidadMedida;
+        private System.Windows.Forms.Button button1;
 
     }
 }

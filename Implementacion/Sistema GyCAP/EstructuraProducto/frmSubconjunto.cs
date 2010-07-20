@@ -16,8 +16,10 @@ namespace GyCAP.UI.EstructuraProducto
         private Data.dsTerminacion dsTerminacion = new GyCAP.Data.dsTerminacion();
         private DataView dvSubconjuntos, dvDetalleSubconjunto, dvPiezasDisponibles;
         private DataView dvTerminacionBuscar, dvTerminaciones;
-        private enum estadoUI { inicio, nuevo, consultar, modificar };
+        private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
         private estadoUI estadoInterface;
+        public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
+        public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
         
         public frmSubconjunto()
         {
@@ -52,6 +54,12 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 _frmSubconjunto = value;
             }
+        }
+
+        public void SetEstadoInicial(int estado)
+        {
+            if (estado == estadoInicialNuevo) { SetInterface(estadoUI.nuevoExterno); }
+            if (estado == estadoInicialConsultar) { SetInterface(estadoUI.inicio); }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -152,7 +160,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (txtNombre.Text != String.Empty && cbTerminacion.SelectedIndex != -1 && dgvDetalleSubconjunto.Rows.Count != 0)
             {
                 //Revisamos que está haciendo
-                if (estadoInterface == estadoUI.nuevo)
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
                     //Está cargando uno nuevo
                     try
@@ -176,7 +184,18 @@ namespace GyCAP.UI.EstructuraProducto
                         dsEstructura.SUBCONJUNTOS.AcceptChanges();
                         dsEstructura.DETALLE_SUBCONJUNTO.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
-                        SetInterface(estadoUI.inicio);
+
+                        //Vemos cómo se inició el formulario para determinar la acción a seguir
+                        if (estadoInterface == estadoUI.nuevoExterno)
+                        {
+                            //Nuevo desde acceso directo, cerramos el formulario
+                            btnSalir.PerformClick();
+                        }
+                        else
+                        {
+                            //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
+                            SetInterface(estadoUI.inicio);
+                        }
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
@@ -313,6 +332,7 @@ namespace GyCAP.UI.EstructuraProducto
                         {
                             //Sumemos la cantidad ingresada a la existente, como hay una sola fila seleccionamos la 0 del array
                             rows[0].DSC_CANTIDAD += nudCantidad.Value;
+                            nudCantidad.Value = 0;
                         }
                         //Como ya existe marcamos que no debe agregarse
                         agregarPieza = false;
@@ -343,6 +363,7 @@ namespace GyCAP.UI.EstructuraProducto
                     //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
                     //todavia no vamos a insertar en la db hasta que no haga Guardar
                     dsEstructura.DETALLE_SUBCONJUNTO.AddDETALLE_SUBCONJUNTORow(row);
+                    nudCantidad.Value = 0;
                 }
                 nudCantidad.Value = 0;
             }
@@ -354,6 +375,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnHecho_Click(object sender, EventArgs e)
         {
+            nudCantidad.Value = 0;
             slideControl.BackwardTo("slideDatos");
             panelAcciones.Enabled = true;
         }
@@ -422,6 +444,23 @@ namespace GyCAP.UI.EstructuraProducto
                     btnEliminar.Enabled = false;
                     panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
+                    tcConjunto.SelectedTab = tpDatos;
+                    break;
+                case estadoUI.nuevoExterno:
+                    txtNombre.ReadOnly = false;
+                    txtNombre.Text = String.Empty;
+                    cbTerminacion.Enabled = true;
+                    cbTerminacion.SelectedIndex = -1;
+                    txtDescripcion.ReadOnly = false;
+                    txtDescripcion.Text = string.Empty;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = false;
+                    btnNuevo.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    panelAcciones.Enabled = true;
+                    estadoInterface = estadoUI.nuevoExterno;
                     tcConjunto.SelectedTab = tpDatos;
                     break;
                 case estadoUI.consultar:
@@ -503,7 +542,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvDetalleSubconjunto.Columns.Add("PZA_NOMBRE", "Nombre");
             dgvDetalleSubconjunto.Columns.Add("TE_CODIGO", "Terminación");
             dgvDetalleSubconjunto.Columns.Add("DSC_CANTIDAD", "Cantidad");
-            dgvDetalleSubconjunto.Columns["SCONJ_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDetalleSubconjunto.Columns["PZA_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalleSubconjunto.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalleSubconjunto.Columns["DSC_CANTIDAD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalleSubconjunto.Columns["DSC_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -534,7 +573,7 @@ namespace GyCAP.UI.EstructuraProducto
             dvSubconjuntos.Sort = "SCONJ_NOMBRE ASC";
             dgvSubconjuntos.DataSource = dvSubconjuntos;
             dvDetalleSubconjunto = new DataView(dsEstructura.DETALLE_SUBCONJUNTO);
-            dvDetalleSubconjunto.Sort = "PZA_NOMBRE ASC";
+            
             dgvDetalleSubconjunto.DataSource = dvDetalleSubconjunto;
             dvPiezasDisponibles = new DataView(dsEstructura.PIEZAS);
             dvPiezasDisponibles.Sort = "PZA_NOMBRE ASC";

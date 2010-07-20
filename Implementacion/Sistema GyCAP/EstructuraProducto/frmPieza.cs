@@ -17,8 +17,10 @@ namespace GyCAP.UI.EstructuraProducto
         private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
         private DataView dvPiezas, dvDetallePieza, dvMPDisponibles, dvUnidadMedida;
         private DataView dvTerminacionBuscar, dvTerminaciones;
-        private enum estadoUI { inicio, nuevo, consultar, modificar };
+        private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
         private estadoUI estadoInterface;
+        public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
+        public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
         
         public frmPieza()
         {
@@ -53,6 +55,12 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 _frmPieza = value;
             }
+        }
+
+        public void SetEstadoInicial(int estado)
+        {
+            if (estado == estadoInicialNuevo) { SetInterface(estadoUI.nuevoExterno); }
+            if (estado == estadoInicialConsultar) { SetInterface(estadoUI.inicio); }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -153,7 +161,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (txtNombre.Text != String.Empty && cbTerminacion.SelectedIndex != -1 && dgvDetallePieza.Rows.Count != 0)
             {
                 //Revisamos que está haciendo
-                if (estadoInterface == estadoUI.nuevo)
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
                     //Está cargando uno nuevo
                     try
@@ -177,7 +185,18 @@ namespace GyCAP.UI.EstructuraProducto
                         dsEstructura.PIEZAS.AcceptChanges();
                         dsEstructura.DETALLE_PIEZA.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
-                        SetInterface(estadoUI.inicio);
+
+                        //Vemos cómo se inició el formulario para determinar la acción a seguir
+                        if (estadoInterface == estadoUI.nuevoExterno)
+                        {
+                            //Nuevo desde acceso directo, cerramos el formulario
+                            btnSalir.PerformClick();
+                        }
+                        else
+                        {
+                            //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
+                            SetInterface(estadoUI.inicio);
+                        }
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
@@ -314,6 +333,7 @@ namespace GyCAP.UI.EstructuraProducto
                         {
                             //Sumemos la cantidad ingresada a la existente, como hay una sola fila seleccionamos la 0 del array
                             rows[0].DPZA_CANTIDAD += Convert.ToInt32(nudCantidad.Value);
+                            nudCantidad.Value = 0;
                         }
                         //Como ya existe marcamos que no debe agregarse
                         agregarMP = false;
@@ -344,6 +364,7 @@ namespace GyCAP.UI.EstructuraProducto
                     //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
                     //todavia no vamos a insertar en la db hasta que no haga Guardar
                     dsEstructura.DETALLE_PIEZA.AddDETALLE_PIEZARow(row);
+                    nudCantidad.Value = 0;
                 }
                 nudCantidad.Value = 0;
             }
@@ -356,6 +377,7 @@ namespace GyCAP.UI.EstructuraProducto
         private void btnHecho_Click(object sender, EventArgs e)
         {
             slideControl.BackwardTo("slideDatos");
+            nudCantidad.Value = 0;
             panelAcciones.Enabled = true;
         }
 
@@ -422,6 +444,23 @@ namespace GyCAP.UI.EstructuraProducto
                     btnEliminar.Enabled = false;
                     panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
+                    tcConjunto.SelectedTab = tpDatos;
+                    break;
+                case estadoUI.nuevoExterno:
+                    txtNombre.ReadOnly = false;
+                    txtNombre.Text = String.Empty;
+                    cbTerminacion.Enabled = true;
+                    cbTerminacion.SelectedIndex = -1;
+                    txtDescripcion.ReadOnly = false;
+                    txtDescripcion.Text = string.Empty;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = false;
+                    btnNuevo.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    panelAcciones.Enabled = true;
+                    estadoInterface = estadoUI.nuevoExterno;
                     tcConjunto.SelectedTab = tpDatos;
                     break;
                 case estadoUI.consultar:
@@ -534,7 +573,7 @@ namespace GyCAP.UI.EstructuraProducto
             dvPiezas.Sort = "PZA_NOMBRE ASC";
             dgvPiezas.DataSource = dvPiezas;
             dvDetallePieza = new DataView(dsEstructura.DETALLE_PIEZA);
-            dvDetallePieza.Sort = "MP_NOMBRE ASC";
+            
             dgvDetallePieza.DataSource = dvDetallePieza;
             dvMPDisponibles = new DataView(dsEstructura.MATERIAS_PRIMAS);
             dvMPDisponibles.Sort = "MP_NOMBRE ASC";

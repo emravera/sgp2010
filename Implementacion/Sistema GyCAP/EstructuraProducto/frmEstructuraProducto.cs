@@ -19,7 +19,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             InitializeComponent();
 
-            areaTrabajo = scUp.Panel1;
+            areaTrabajo = scUp.Panel2;
             flpMenu.AutoScroll = false;
             btnCocina.Tag = panelCocina;
             btnColor.Tag = panelColor;
@@ -58,6 +58,8 @@ namespace GyCAP.UI.EstructuraProducto
         {
             this.WindowState = FormWindowState.Maximized;
         }
+
+        #region Menú Lateral
 
         private void btnMenu_Click(object sender, EventArgs e)
         {
@@ -110,6 +112,101 @@ namespace GyCAP.UI.EstructuraProducto
         {
             this.Dispose(true);
         }
+
+        #endregion
+
+        #region Cocina
+        #endregion
+
+        #region Color
+        #endregion
         
+        #region Conjunto
+
+        private void btnNuevoConjunto_Click(object sender, EventArgs e)
+        {
+            frmConjunto.Instancia.TopLevel = false;
+            frmConjunto.Instancia.Parent = areaTrabajo;
+            frmConjunto.Instancia.SetEstadoInicial(frmConjunto.estadoInicialNuevo);
+            frmConjunto.Instancia.Show();
+        }
+
+        private void btnConsultarConjunto_Click(object sender, EventArgs e)
+        {
+            frmConjunto.Instancia.TopLevel = false;
+            frmConjunto.Instancia.Parent = areaTrabajo;
+            frmConjunto.Instancia.SetEstadoInicial(frmConjunto.estadoInicialConsultar);
+            frmConjunto.Instancia.Show();
+        }
+
+        private void btnListadoConjunto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region Designación
+        #endregion
+
+        #region Estructura Producto
+        #endregion
+
+        #region Materia Prima Principal
+        #endregion
+
+        #region Modelo Cocina
+        #endregion
+
+        #region Pieza
+
+        private void btnNuevoPieza_Click(object sender, EventArgs e)
+        {
+            frmPieza.Instancia.TopLevel = false;
+            frmPieza.Instancia.Parent = areaTrabajo;
+            frmPieza.Instancia.SetEstadoInicial(frmPieza.estadoInicialNuevo);
+            frmPieza.Instancia.Show();
+        }
+
+        private void btnConsultarPieza_Click(object sender, EventArgs e)
+        {
+            frmPieza.Instancia.TopLevel = false;
+            frmPieza.Instancia.Parent = areaTrabajo;
+            frmPieza.Instancia.SetEstadoInicial(frmPieza.estadoInicialConsultar);
+            frmPieza.Instancia.Show();
+        }
+
+        #endregion
+
+        #region Subconjunto
+
+        private void btnNuevoSubconjunto_Click(object sender, EventArgs e)
+        {
+            frmSubconjunto.Instancia.TopLevel = false;
+            frmSubconjunto.Instancia.Parent = areaTrabajo;
+            frmSubconjunto.Instancia.SetEstadoInicial(frmSubconjunto.estadoInicialNuevo);
+            frmSubconjunto.Instancia.Show();
+        }
+
+        private void btnConsultarSubconjunto_Click(object sender, EventArgs e)
+        {
+            frmSubconjunto.Instancia.TopLevel = false;
+            frmSubconjunto.Instancia.Parent = areaTrabajo;
+            frmSubconjunto.Instancia.SetEstadoInicial(frmSubconjunto.estadoInicialConsultar);
+            frmSubconjunto.Instancia.Show();
+        }
+
+        private void btnListadoSubconjunto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region Terminación
+        #endregion
+
+        #region Unidad Medida
+        #endregion
     }
 }
