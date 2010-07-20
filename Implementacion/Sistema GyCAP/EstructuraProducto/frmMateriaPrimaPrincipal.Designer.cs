@@ -58,11 +58,11 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Mas_25;
+            this.btnAgregar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Apply_25;
             this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(476, 18);
+            this.btnAgregar.Location = new System.Drawing.Point(408, 16);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(87, 30);
+            this.btnAgregar.Size = new System.Drawing.Size(75, 26);
             this.btnAgregar.TabIndex = 3;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -81,7 +81,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tsMenu.BackColor = System.Drawing.Color.Silver;
             this.tsMenu.Dock = System.Windows.Forms.DockStyle.None;
-            this.tsMenu.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsMenu.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNuevo,
@@ -91,30 +91,31 @@
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.tsMenu.Size = new System.Drawing.Size(587, 50);
+            this.tsMenu.Size = new System.Drawing.Size(503, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
             // btnNuevo
             // 
-            this.btnNuevo.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Mas_25;
+            this.btnNuevo.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_25;
             this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(58, 47);
+            this.btnNuevo.Size = new System.Drawing.Size(50, 47);
             this.btnNuevo.Text = "&Agregar";
             this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Menos_25;
+            this.btnEliminar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
             this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(58, 47);
+            this.btnEliminar.Size = new System.Drawing.Size(47, 47);
             this.btnEliminar.Text = "&Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnSalir
             // 
@@ -122,7 +123,7 @@
             this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(36, 47);
+            this.btnSalir.Size = new System.Drawing.Size(31, 47);
             this.btnSalir.Text = "&Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
@@ -130,9 +131,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 27);
+            this.label1.Location = new System.Drawing.Point(6, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 17);
+            this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Materia Prima:";
             // 
@@ -148,7 +149,7 @@
             this.tcMateriaPrima.Name = "tcMateriaPrima";
             this.tcMateriaPrima.Padding = new System.Drawing.Point(0, 0);
             this.tcMateriaPrima.SelectedIndex = 0;
-            this.tcMateriaPrima.Size = new System.Drawing.Size(587, 310);
+            this.tcMateriaPrima.Size = new System.Drawing.Size(503, 261);
             this.tcMateriaPrima.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcMateriaPrima.TabIndex = 8;
             // 
@@ -159,7 +160,7 @@
             this.tpMP.Location = new System.Drawing.Point(4, 5);
             this.tpMP.Name = "tpMP";
             this.tpMP.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMP.Size = new System.Drawing.Size(579, 301);
+            this.tpMP.Size = new System.Drawing.Size(495, 252);
             this.tpMP.TabIndex = 0;
             this.tpMP.UseVisualStyleBackColor = true;
             // 
@@ -167,10 +168,10 @@
             // 
             this.gbLista.Controls.Add(this.dgvLista);
             this.gbLista.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbLista.Location = new System.Drawing.Point(3, 106);
+            this.gbLista.Location = new System.Drawing.Point(3, 90);
             this.gbLista.Name = "gbLista";
-            this.gbLista.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
-            this.gbLista.Size = new System.Drawing.Size(573, 192);
+            this.gbLista.Padding = new System.Windows.Forms.Padding(9);
+            this.gbLista.Size = new System.Drawing.Size(489, 159);
             this.gbLista.TabIndex = 1;
             this.gbLista.TabStop = false;
             this.gbLista.Text = "Listado de Materias Primas Principales";
@@ -179,14 +180,15 @@
             // 
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
+            this.dgvLista.AllowUserToResizeRows = false;
             this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLista.Location = new System.Drawing.Point(10, 27);
+            this.dgvLista.Location = new System.Drawing.Point(9, 23);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(553, 155);
+            this.dgvLista.Size = new System.Drawing.Size(471, 127);
             this.dgvLista.TabIndex = 0;
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
@@ -202,7 +204,7 @@
             this.gbAgregar.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbAgregar.Location = new System.Drawing.Point(3, 3);
             this.gbAgregar.Name = "gbAgregar";
-            this.gbAgregar.Size = new System.Drawing.Size(573, 98);
+            this.gbAgregar.Size = new System.Drawing.Size(489, 81);
             this.gbAgregar.TabIndex = 0;
             this.gbAgregar.TabStop = false;
             this.gbAgregar.Text = "Datos";
@@ -210,10 +212,10 @@
             // btnVolver
             // 
             this.btnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVolver.Location = new System.Drawing.Point(476, 55);
+            this.btnVolver.Location = new System.Drawing.Point(408, 48);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(87, 30);
-            this.btnVolver.TabIndex = 8;
+            this.btnVolver.Size = new System.Drawing.Size(75, 26);
+            this.btnVolver.TabIndex = 4;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -221,40 +223,41 @@
             // lblUnidadMedida
             // 
             this.lblUnidadMedida.AutoSize = true;
-            this.lblUnidadMedida.Location = new System.Drawing.Point(409, 27);
+            this.lblUnidadMedida.Location = new System.Drawing.Point(352, 23);
             this.lblUnidadMedida.Name = "lblUnidadMedida";
-            this.lblUnidadMedida.Size = new System.Drawing.Size(48, 17);
+            this.lblUnidadMedida.Size = new System.Drawing.Size(40, 13);
             this.lblUnidadMedida.TabIndex = 7;
             this.lblUnidadMedida.Text = "Unidad";
             // 
             // numCantidad
             // 
+            this.numCantidad.DecimalPlaces = 2;
             this.numCantidad.Increment = new decimal(new int[] {
             1,
             0,
             0,
             131072});
-            this.numCantidad.Location = new System.Drawing.Point(338, 24);
+            this.numCantidad.Location = new System.Drawing.Point(290, 21);
             this.numCantidad.Name = "numCantidad";
-            this.numCantidad.Size = new System.Drawing.Size(65, 24);
-            this.numCantidad.TabIndex = 6;
+            this.numCantidad.Size = new System.Drawing.Size(56, 21);
+            this.numCantidad.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(279, 27);
+            this.label2.Location = new System.Drawing.Point(239, 23);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 17);
+            this.label2.Size = new System.Drawing.Size(54, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "Cantidad:";
             // 
             // cbMateriaPrima
             // 
             this.cbMateriaPrima.FormattingEnabled = true;
-            this.cbMateriaPrima.Location = new System.Drawing.Point(105, 23);
+            this.cbMateriaPrima.Location = new System.Drawing.Point(90, 20);
             this.cbMateriaPrima.Name = "cbMateriaPrima";
-            this.cbMateriaPrima.Size = new System.Drawing.Size(161, 23);
-            this.cbMateriaPrima.TabIndex = 4;
+            this.cbMateriaPrima.Size = new System.Drawing.Size(139, 21);
+            this.cbMateriaPrima.TabIndex = 1;
             this.cbMateriaPrima.SelectedIndexChanged += new System.EventHandler(this.cbMateriaPrima_SelectedIndexChanged);
             // 
             // tableLayoutPanel1
@@ -268,19 +271,20 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(591, 366);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(507, 317);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
             // frmMateriaPrimaPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(591, 366);
+            this.ClientSize = new System.Drawing.Size(507, 317);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Font = new System.Drawing.Font("Calibri", 10F);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "frmMateriaPrimaPrincipal";
             this.Text = "Materia Prima Principal";
             this.Activated += new System.EventHandler(this.frmMateriaPrimaPrincipal_Activated);
