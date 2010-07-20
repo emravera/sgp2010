@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tcDesignacion = new System.Windows.Forms.TabControl();
+            this.tcABM = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.gpbLista = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
@@ -37,6 +37,7 @@
             this.cmbBuscarPor = new System.Windows.Forms.ComboBox();
             this.cboEstado = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tpDatos = new System.Windows.Forms.TabPage();
@@ -52,14 +53,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.btnConsultar = new System.Windows.Forms.ToolStripButton();
             this.btnModificar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.tcDesignacion.SuspendLayout();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tcABM.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.gpbLista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
@@ -71,22 +71,22 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tcDesignacion
+            // tcABM
             // 
-            this.tcDesignacion.Appearance = System.Windows.Forms.TabAppearance.Buttons;
-            this.tcDesignacion.Controls.Add(this.tpBuscar);
-            this.tcDesignacion.Controls.Add(this.tpDatos);
-            this.tcDesignacion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tcDesignacion.ItemSize = new System.Drawing.Size(0, 1);
-            this.tcDesignacion.Location = new System.Drawing.Point(2, 61);
-            this.tcDesignacion.Margin = new System.Windows.Forms.Padding(0);
-            this.tcDesignacion.Multiline = true;
-            this.tcDesignacion.Name = "tcDesignacion";
-            this.tcDesignacion.Padding = new System.Drawing.Point(0, 0);
-            this.tcDesignacion.SelectedIndex = 0;
-            this.tcDesignacion.Size = new System.Drawing.Size(586, 351);
-            this.tcDesignacion.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tcDesignacion.TabIndex = 8;
+            this.tcABM.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.tcABM.Controls.Add(this.tpBuscar);
+            this.tcABM.Controls.Add(this.tpDatos);
+            this.tcABM.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcABM.ItemSize = new System.Drawing.Size(0, 1);
+            this.tcABM.Location = new System.Drawing.Point(2, 61);
+            this.tcABM.Margin = new System.Windows.Forms.Padding(0);
+            this.tcABM.Multiline = true;
+            this.tcABM.Name = "tcABM";
+            this.tcABM.Padding = new System.Drawing.Point(0, 0);
+            this.tcABM.SelectedIndex = 0;
+            this.tcABM.Size = new System.Drawing.Size(586, 351);
+            this.tcABM.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tcABM.TabIndex = 8;
             // 
             // tpBuscar
             // 
@@ -175,6 +175,17 @@
             this.label4.Size = new System.Drawing.Size(50, 17);
             this.label4.TabIndex = 3;
             this.label4.Text = "Estado:";
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscar.Location = new System.Drawing.Point(476, 70);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(88, 30);
+            this.btnBuscar.TabIndex = 5;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBuscar.UseVisualStyleBackColor = true;
             // 
             // txtNombreBuscar
             // 
@@ -330,33 +341,6 @@
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.tcDesignacion, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tsMenu, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(590, 414);
-            this.tableLayoutPanel1.TabIndex = 12;
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(478, 70);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(88, 30);
-            this.btnBuscar.TabIndex = 5;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            // 
             // btnNuevo
             // 
             this.btnNuevo.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.New_25;
@@ -407,6 +391,22 @@
             this.btnSalir.Text = "&Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.tcABM, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tsMenu, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(590, 414);
+            this.tableLayoutPanel1.TabIndex = 12;
+            // 
             // frmEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -419,7 +419,7 @@
             this.MaximizeBox = false;
             this.Name = "frmEmpleado";
             this.Text = "Empleados";
-            this.tcDesignacion.ResumeLayout(false);
+            this.tcABM.ResumeLayout(false);
             this.tpBuscar.ResumeLayout(false);
             this.gpbLista.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
@@ -439,7 +439,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tcDesignacion;
+        private System.Windows.Forms.TabControl tcABM;
         private System.Windows.Forms.TabPage tpBuscar;
         private System.Windows.Forms.GroupBox gpbLista;
         private System.Windows.Forms.DataGridView dgvLista;

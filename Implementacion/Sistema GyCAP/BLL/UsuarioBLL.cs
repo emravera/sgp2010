@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GyCAP.BLL
 {
-    abstract class UsuarioBLL
+    public abstract class UsuarioBLL
     {
     }
 }

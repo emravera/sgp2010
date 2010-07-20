@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GyCAP.DAL
 {
-    abstract class UsuarioDAL
+    public abstract class UsuarioDAL
     {
     }
 }
