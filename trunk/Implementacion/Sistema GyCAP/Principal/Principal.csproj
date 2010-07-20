@@ -97,6 +97,10 @@
       <Project>{959ABFBF-7696-414D-B0CA-8807851367E8}</Project>
       <Name>PlanificacionProduccion</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RecursosFabricacion\RecursosFabricacion.csproj">
+      <Project>{3D17BB74-E9A2-435E-BED2-9C222B5F1DDD}</Project>
+      <Name>RecursosFabricacion</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sistema\Sistema.csproj">
       <Project>{9A02F786-F362-4FC0-A53D-83C51951D9DF}</Project>
       <Name>Sistema</Name>

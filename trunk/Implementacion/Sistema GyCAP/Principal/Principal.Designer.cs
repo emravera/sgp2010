@@ -83,6 +83,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.tLEmpleado = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -440,7 +441,8 @@
             this.toolStripButton6,
             this.toolStripButton7,
             this.toolStripButton8,
-            this.t9});
+            this.t9,
+            this.tLEmpleado});
             this.toolStrip.Location = new System.Drawing.Point(0, 25);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(792, 36);
@@ -552,6 +554,16 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(38, 17);
             this.toolStripStatusLabel.Text = "Status";
             // 
+            // tLEmpleado
+            // 
+            this.tLEmpleado.Image = ((System.Drawing.Image)(resources.GetObject("tLEmpleado.Image")));
+            this.tLEmpleado.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tLEmpleado.Name = "tLEmpleado";
+            this.tLEmpleado.Size = new System.Drawing.Size(62, 33);
+            this.tLEmpleado.Text = "Empleados";
+            this.tLEmpleado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tLEmpleado.Click += new System.EventHandler(this.tLEmpleado_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -631,6 +643,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.ToolStripButton toolStripButton8;
         private System.Windows.Forms.ToolStripButton t9;
+        private System.Windows.Forms.ToolStripButton tLEmpleado;
     }
 }
 

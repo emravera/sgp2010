@@ -157,5 +157,11 @@ namespace Principal
             GyCAP.UI.Soporte.frmCapacidadEmpleado.Instancia.MdiParent = this;
             GyCAP.UI.Soporte.frmCapacidadEmpleado.Instancia.Show(); 
         }
+
+        private void tLEmpleado_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.RecursosFabricacion.frmEmpleado.Instancia.MdiParent = this;
+            GyCAP.UI.RecursosFabricacion.frmEmpleado.Instancia.Show();
+        }
     }
 }
