@@ -82,7 +82,7 @@
             this.tcDesignacion.Name = "tcDesignacion";
             this.tcDesignacion.Padding = new System.Drawing.Point(0, 0);
             this.tcDesignacion.SelectedIndex = 0;
-            this.tcDesignacion.Size = new System.Drawing.Size(503, 261);
+            this.tcDesignacion.Size = new System.Drawing.Size(503, 269);
             this.tcDesignacion.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcDesignacion.TabIndex = 8;
             // 
@@ -93,7 +93,7 @@
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(495, 252);
+            this.tpBuscar.Size = new System.Drawing.Size(495, 260);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
@@ -101,9 +101,9 @@
             // 
             this.groupBox2.Controls.Add(this.dgvLista);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(3, 64);
+            this.groupBox2.Location = new System.Drawing.Point(3, 72);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(9, 9, 9, 9);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(9);
             this.groupBox2.Size = new System.Drawing.Size(489, 185);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
@@ -196,7 +196,7 @@
             this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDatos.Size = new System.Drawing.Size(495, 252);
+            this.tpDatos.Size = new System.Drawing.Size(495, 260);
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
@@ -205,7 +205,7 @@
             this.gbGuardarCancelar.Controls.Add(this.btnVolver);
             this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
             this.gbGuardarCancelar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 192);
+            this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 200);
             this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
             this.gbGuardarCancelar.Name = "gbGuardarCancelar";
             this.gbGuardarCancelar.Size = new System.Drawing.Size(489, 57);
@@ -251,17 +251,17 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(81, 86);
+            this.txtDescripcion.Location = new System.Drawing.Point(81, 96);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(265, 63);
+            this.txtDescripcion.Size = new System.Drawing.Size(265, 80);
             this.txtDescripcion.TabIndex = 9;
             this.txtDescripcion.Enter += new System.EventHandler(this.txtDescripcion_Enter);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 88);
+            this.label6.Location = new System.Drawing.Point(14, 98);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 13);
             this.label6.TabIndex = 6;
@@ -287,7 +287,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(81, 60);
+            this.txtNombre.Location = new System.Drawing.Point(81, 65);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(146, 20);
             this.txtNombre.TabIndex = 8;
@@ -296,7 +296,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 62);
+            this.label3.Location = new System.Drawing.Point(14, 67);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 1;
@@ -398,19 +398,21 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(507, 317);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(507, 325);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
             // frmDesignacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(507, 317);
+            this.ClientSize = new System.Drawing.Size(507, 325);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmDesignacion";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Designaciones";
             this.Activated += new System.EventHandler(this.frmDesignacion_Activated);
             this.tcDesignacion.ResumeLayout(false);

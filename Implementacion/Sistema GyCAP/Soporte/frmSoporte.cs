@@ -125,12 +125,20 @@ namespace GyCAP.UI.Soporte
 
         private void btnNuevoCapacidadEmpleado_Click(object sender, EventArgs e)
         {
-
+            frmCapacidadEmpleado.Instancia.TopLevel = false;
+            frmCapacidadEmpleado.Instancia.Parent = areaTrabajo;
+            frmCapacidadEmpleado.Instancia.Location = PosicionarFormulario();
+            frmCapacidadEmpleado.Instancia.SetEstadoInicial(frmCapacidadEmpleado.estadoInicialNuevo);
+            frmCapacidadEmpleado.Instancia.Show();
         }
 
         private void btnConsultarCapacidadEmpleado_Click(object sender, EventArgs e)
         {
-
+            frmCapacidadEmpleado.Instancia.TopLevel = false;
+            frmCapacidadEmpleado.Instancia.Parent = areaTrabajo;
+            frmCapacidadEmpleado.Instancia.Location = PosicionarFormulario();
+            frmCapacidadEmpleado.Instancia.SetEstadoInicial(frmCapacidadEmpleado.estadoInicialConsultar);
+            frmCapacidadEmpleado.Instancia.Show();
         }
 
         #endregion
@@ -170,12 +178,20 @@ namespace GyCAP.UI.Soporte
 
         private void btnNuevoSectorTrabajo_Click(object sender, EventArgs e)
         {
-
+            frmSectorTrabajo.Instancia.TopLevel = false;
+            frmSectorTrabajo.Instancia.Parent = areaTrabajo;
+            frmSectorTrabajo.Instancia.Location = PosicionarFormulario();
+            frmSectorTrabajo.Instancia.SetEstadoInicial(frmSectorTrabajo.estadoInicialNuevo);
+            frmSectorTrabajo.Instancia.Show();
         }
 
         private void btnConsultarSectorTrabajo_Click(object sender, EventArgs e)
         {
-
+            frmSectorTrabajo.Instancia.TopLevel = false;
+            frmSectorTrabajo.Instancia.Parent = areaTrabajo;
+            frmSectorTrabajo.Instancia.Location = PosicionarFormulario();
+            frmSectorTrabajo.Instancia.SetEstadoInicial(frmSectorTrabajo.estadoInicialConsultar);
+            frmSectorTrabajo.Instancia.Show();
         }
 
         #endregion
@@ -187,7 +203,10 @@ namespace GyCAP.UI.Soporte
 
         private void btnConsultarTUMED_Click(object sender, EventArgs e)
         {
-
+            frmTipoUnidadMedida.Instancia.TopLevel = false;
+            frmTipoUnidadMedida.Instancia.Parent = areaTrabajo;
+            frmTipoUnidadMedida.Instancia.Location = PosicionarFormulario();
+            frmTipoUnidadMedida.Instancia.Show();
         }
 
         #endregion

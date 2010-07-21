@@ -111,7 +111,7 @@
             // 
             this.btnVolver.Location = new System.Drawing.Point(418, 20);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(64, 22);
+            this.btnVolver.Size = new System.Drawing.Size(64, 25);
             this.btnVolver.TabIndex = 5;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -121,7 +121,7 @@
             // 
             this.btnGuardar.Location = new System.Drawing.Point(349, 20);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(64, 22);
+            this.btnGuardar.Size = new System.Drawing.Size(64, 25);
             this.btnGuardar.TabIndex = 4;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -151,7 +151,7 @@
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(495, 259);
+            this.tpBuscar.Size = new System.Drawing.Size(495, 252);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
@@ -159,9 +159,9 @@
             // 
             this.groupBox2.Controls.Add(this.dgvLista);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(3, 71);
+            this.groupBox2.Location = new System.Drawing.Point(3, 64);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(9, 9, 9, 9);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(9);
             this.groupBox2.Size = new System.Drawing.Size(489, 185);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
@@ -193,14 +193,14 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(489, 62);
+            this.groupBox1.Size = new System.Drawing.Size(489, 55);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
             // txtAbreviaturaBuscar
             // 
-            this.txtAbreviaturaBuscar.Location = new System.Drawing.Point(255, 25);
+            this.txtAbreviaturaBuscar.Location = new System.Drawing.Point(255, 23);
             this.txtAbreviaturaBuscar.Name = "txtAbreviaturaBuscar";
             this.txtAbreviaturaBuscar.Size = new System.Drawing.Size(97, 21);
             this.txtAbreviaturaBuscar.TabIndex = 2;
@@ -209,7 +209,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(182, 28);
+            this.label4.Location = new System.Drawing.Point(182, 26);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(68, 13);
             this.label4.TabIndex = 3;
@@ -219,7 +219,7 @@
             // 
             this.btnBuscar.Image = global::GyCAP.UI.Soporte.Properties.Resources.lupa_25;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(379, 21);
+            this.btnBuscar.Location = new System.Drawing.Point(379, 19);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
             this.btnBuscar.TabIndex = 3;
@@ -230,7 +230,7 @@
             // 
             // txtNombreBuscar
             // 
-            this.txtNombreBuscar.Location = new System.Drawing.Point(60, 24);
+            this.txtNombreBuscar.Location = new System.Drawing.Point(60, 22);
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(97, 21);
             this.txtNombreBuscar.TabIndex = 1;
@@ -239,7 +239,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 28);
+            this.label1.Location = new System.Drawing.Point(5, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 13);
             this.label1.TabIndex = 0;
@@ -269,7 +269,7 @@
             this.gbDatos.Location = new System.Drawing.Point(3, 3);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(489, 195);
+            this.gbDatos.Size = new System.Drawing.Size(489, 187);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Sector de Trabajo";
@@ -329,7 +329,7 @@
             this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(48, 47);
+            this.btnNuevo.Size = new System.Drawing.Size(42, 47);
             this.btnNuevo.Text = "&Nuevo";
             this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
@@ -340,7 +340,7 @@
             this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(65, 47);
+            this.btnConsultar.Size = new System.Drawing.Size(57, 47);
             this.btnConsultar.Text = "&Consultar";
             this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
@@ -351,7 +351,7 @@
             this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(66, 47);
+            this.btnModificar.Size = new System.Drawing.Size(54, 47);
             this.btnModificar.Text = "&Modificar";
             this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -362,7 +362,7 @@
             this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(58, 47);
+            this.btnEliminar.Size = new System.Drawing.Size(47, 47);
             this.btnEliminar.Text = "&Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
@@ -378,7 +378,7 @@
             this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(36, 47);
+            this.btnSalir.Size = new System.Drawing.Size(31, 47);
             this.btnSalir.Text = "&Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
@@ -409,6 +409,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmSectorTrabajo";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Sectores de Trabajo";
             this.Activated += new System.EventHandler(this.frmSectorTrabajo_Activated);
             this.gbGuardarCancelar.ResumeLayout(false);

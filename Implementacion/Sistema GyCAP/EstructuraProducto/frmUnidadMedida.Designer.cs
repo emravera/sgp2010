@@ -71,7 +71,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(91, 52);
+            this.txtNombre.Location = new System.Drawing.Point(91, 43);
             this.txtNombre.MaxLength = 80;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(179, 20);
@@ -81,7 +81,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 55);
+            this.label3.Location = new System.Drawing.Point(19, 46);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 1;
@@ -137,7 +137,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox2.Location = new System.Drawing.Point(3, 64);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(9, 9, 9, 9);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(9);
             this.groupBox2.Size = new System.Drawing.Size(489, 185);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
@@ -232,7 +232,7 @@
             this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDatos.Size = new System.Drawing.Size(495, 259);
+            this.tpDatos.Size = new System.Drawing.Size(495, 252);
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
@@ -241,7 +241,7 @@
             this.gbGuardarCancelar.Controls.Add(this.btnVolver);
             this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
             this.gbGuardarCancelar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 199);
+            this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 192);
             this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
             this.gbGuardarCancelar.Name = "gbGuardarCancelar";
             this.gbGuardarCancelar.Size = new System.Drawing.Size(489, 57);
@@ -252,7 +252,7 @@
             // 
             this.btnVolver.Location = new System.Drawing.Point(423, 20);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(64, 22);
+            this.btnVolver.Size = new System.Drawing.Size(64, 25);
             this.btnVolver.TabIndex = 11;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -262,7 +262,7 @@
             // 
             this.btnGuardar.Location = new System.Drawing.Point(353, 20);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(64, 22);
+            this.btnGuardar.Size = new System.Drawing.Size(64, 25);
             this.btnGuardar.TabIndex = 10;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -280,14 +280,14 @@
             this.gbDatos.Location = new System.Drawing.Point(3, 3);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(489, 195);
+            this.gbDatos.Size = new System.Drawing.Size(489, 187);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos de la Unidad de Medida";
             // 
             // txtAbreviatura
             // 
-            this.txtAbreviatura.Location = new System.Drawing.Point(91, 102);
+            this.txtAbreviatura.Location = new System.Drawing.Point(91, 116);
             this.txtAbreviatura.MaxLength = 10;
             this.txtAbreviatura.Name = "txtAbreviatura";
             this.txtAbreviatura.Size = new System.Drawing.Size(179, 20);
@@ -297,7 +297,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(19, 104);
+            this.label6.Location = new System.Drawing.Point(19, 118);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(68, 13);
             this.label6.TabIndex = 6;
@@ -307,7 +307,7 @@
             // 
             this.cbTipoUnidadDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoUnidadDatos.FormattingEnabled = true;
-            this.cbTipoUnidadDatos.Location = new System.Drawing.Point(91, 77);
+            this.cbTipoUnidadDatos.Location = new System.Drawing.Point(91, 79);
             this.cbTipoUnidadDatos.Name = "cbTipoUnidadDatos";
             this.cbTipoUnidadDatos.Size = new System.Drawing.Size(179, 21);
             this.cbTipoUnidadDatos.TabIndex = 8;
@@ -315,7 +315,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(19, 80);
+            this.label5.Location = new System.Drawing.Point(19, 82);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 13);
             this.label5.TabIndex = 4;

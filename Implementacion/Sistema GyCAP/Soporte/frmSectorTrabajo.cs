@@ -14,10 +14,13 @@ namespace GyCAP.UI.Soporte
         private static frmSectorTrabajo _frmSectorTrabajo = null;
         private Data.dsSectorTrabajo dsSectorTrabajo = new GyCAP.Data.dsSectorTrabajo();
         private DataView dvListaSector, dvComboSector;
-        private enum estadoUI { inicio, nuevo, consultar, modificar, };
+        private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, };
         private estadoUI estadoInterface;
+        public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
+        public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
 
         #region Inicio
+
         public frmSectorTrabajo()
         {
             InitializeComponent();
@@ -76,7 +79,14 @@ namespace GyCAP.UI.Soporte
                 _frmSectorTrabajo = value;
             }
         }
-#endregion
+
+        public void SetEstadoInicial(int estado)
+        {
+            if (estado == estadoInicialNuevo) { SetInterface(estadoUI.nuevoExterno); }
+            if (estado == estadoInicialConsultar) { SetInterface(estadoUI.inicio); }
+        }
+
+        #endregion
 
         #region Botones
         private void btnSalir_Click(object sender, EventArgs e)
@@ -184,6 +194,23 @@ namespace GyCAP.UI.Soporte
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
+                    tcSectorTrabajo.SelectedTab = tpDatos;
+                    txtNombre.Focus();
+                    break;
+                case estadoUI.nuevoExterno:
+                    txtNombre.ReadOnly = false;
+                    txtNombre.Text = String.Empty;
+                    txtAbreviatura.Text = string.Empty;
+                    txtAbreviatura.ReadOnly = false;
+                    txtDescripcion.ReadOnly = false;
+                    txtDescripcion.Text = string.Empty;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = false;
+                    btnNuevo.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    estadoInterface = estadoUI.nuevoExterno;
                     tcSectorTrabajo.SelectedTab = tpDatos;
                     txtNombre.Focus();
                     break;
@@ -301,7 +328,7 @@ namespace GyCAP.UI.Soporte
                 Entidades.Sector sector = new GyCAP.Entidades.Sector();
                
                 //Revisamos que está haciendo
-                if (estadoInterface == estadoUI.nuevo)
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
                     //Está cargando un sector nuevo
                     sector.Nombre = txtNombre.Text;
@@ -326,7 +353,18 @@ namespace GyCAP.UI.Soporte
                         dsSectorTrabajo.SECTORES.AddSECTORESRow(rowSector);
                         dsSectorTrabajo.SECTORES.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
-                        SetInterface(estadoUI.inicio);
+
+                        //Vemos cómo se inició el formulario para determinar la acción a seguir
+                        if (estadoInterface == estadoUI.nuevoExterno)
+                        {
+                            //Nuevo desde acceso directo, cerramos el formulario
+                            btnSalir.PerformClick();
+                        }
+                        else
+                        {
+                            //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
+                            SetInterface(estadoUI.inicio);
+                        }
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
