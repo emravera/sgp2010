@@ -580,7 +580,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvPiezasDisponibles.DataSource = dvPiezasDisponibles;
 
             //Obtenemos las terminaciones
-            //Codigo chancho por no pensar bien antes como trabajar
+            
             try
             {
                 BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsTerminacion);
@@ -588,7 +588,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             dvTerminaciones = new DataView(dsTerminacion.TERMINACIONES);

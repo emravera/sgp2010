@@ -616,7 +616,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvSCDisponibles.DataSource = dvSubconjuntosDisponibles;
             
             //Obtenemos las terminaciones
-            //Codigo chancho por no pensar bien antes como trabajar
+            
             try
             {
                 BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsTerminacion);
@@ -624,7 +624,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             dvTerminaciones = new DataView(dsTerminacion.TERMINACIONES);
@@ -644,6 +644,8 @@ namespace GyCAP.UI.EstructuraProducto
             pbImagen.SizeMode = PictureBoxSizeMode.StretchImage;
             
             ofdImagen.Filter = "Archivos de imágenes (*.bmp, *.gif , *.jpeg, *.png)|*.bmp;*.gif;*.jpg;*.png|Todos los archivos (*.*)|*.*";
+
+            
         }
 
         private void dgvConjuntos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
