@@ -13,7 +13,7 @@ namespace GyCAP.UI.Soporte
     {
         private static frmSectorTrabajo _frmSectorTrabajo = null;
         private Data.dsSectorTrabajo dsSectorTrabajo = new GyCAP.Data.dsSectorTrabajo();
-        private DataView dvListaSector, dvComboSector;
+        private DataView dvListaSector;//, dvComboSector;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
