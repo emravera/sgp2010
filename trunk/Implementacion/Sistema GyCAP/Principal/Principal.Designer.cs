@@ -187,6 +187,7 @@
             this.menuItemRF.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
             this.menuItemRF.Size = new System.Drawing.Size(307, 22);
             this.menuItemRF.Text = "&Recursos de Fabricación";
+            this.menuItemRF.Click += new System.EventHandler(this.menuItemRF_Click);
             // 
             // menuItemSO
             // 

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEstructuraProducto));
             this.scDown = new System.Windows.Forms.SplitContainer();
             this.flpMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCocina = new System.Windows.Forms.Button();
@@ -284,7 +283,7 @@
             this.btnConsultarColor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnConsultarColor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarColor.Image = ((System.Drawing.Image)(resources.GetObject("btnConsultarColor.Image")));
+            this.btnConsultarColor.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_48;
             this.btnConsultarColor.Location = new System.Drawing.Point(38, 9);
             this.btnConsultarColor.Name = "btnConsultarColor";
             this.btnConsultarColor.Size = new System.Drawing.Size(64, 71);
@@ -335,7 +334,7 @@
             this.btnListadoConjunto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnListadoConjunto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnListadoConjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnListadoConjunto.Image = ((System.Drawing.Image)(resources.GetObject("btnListadoConjunto.Image")));
+            this.btnListadoConjunto.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Listados_48;
             this.btnListadoConjunto.Location = new System.Drawing.Point(44, 130);
             this.btnListadoConjunto.Name = "btnListadoConjunto";
             this.btnListadoConjunto.Size = new System.Drawing.Size(56, 71);
@@ -353,7 +352,7 @@
             this.btnConsultarConjunto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnConsultarConjunto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarConjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarConjunto.Image = ((System.Drawing.Image)(resources.GetObject("btnConsultarConjunto.Image")));
+            this.btnConsultarConjunto.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_48;
             this.btnConsultarConjunto.Location = new System.Drawing.Point(40, 65);
             this.btnConsultarConjunto.Name = "btnConsultarConjunto";
             this.btnConsultarConjunto.Size = new System.Drawing.Size(64, 71);
@@ -372,7 +371,7 @@
             this.btnNuevoConjunto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnNuevoConjunto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnNuevoConjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevoConjunto.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevoConjunto.Image")));
+            this.btnNuevoConjunto.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_48;
             this.btnNuevoConjunto.Location = new System.Drawing.Point(45, 0);
             this.btnNuevoConjunto.Name = "btnNuevoConjunto";
             this.btnNuevoConjunto.Size = new System.Drawing.Size(54, 71);
@@ -421,7 +420,7 @@
             this.btnConsultarDesignacion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnConsultarDesignacion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarDesignacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarDesignacion.Image = ((System.Drawing.Image)(resources.GetObject("btnConsultarDesignacion.Image")));
+            this.btnConsultarDesignacion.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_48;
             this.btnConsultarDesignacion.Location = new System.Drawing.Point(35, 66);
             this.btnConsultarDesignacion.Name = "btnConsultarDesignacion";
             this.btnConsultarDesignacion.Size = new System.Drawing.Size(64, 71);
@@ -440,7 +439,7 @@
             this.btnNuevoDesignacion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnNuevoDesignacion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnNuevoDesignacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevoDesignacion.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevoDesignacion.Image")));
+            this.btnNuevoDesignacion.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_48;
             this.btnNuevoDesignacion.Location = new System.Drawing.Point(40, 1);
             this.btnNuevoDesignacion.Name = "btnNuevoDesignacion";
             this.btnNuevoDesignacion.Size = new System.Drawing.Size(54, 71);
@@ -491,7 +490,7 @@
             this.btnListadoEstructuraProducto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnListadoEstructuraProducto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnListadoEstructuraProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnListadoEstructuraProducto.Image = ((System.Drawing.Image)(resources.GetObject("btnListadoEstructuraProducto.Image")));
+            this.btnListadoEstructuraProducto.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Listados_48;
             this.btnListadoEstructuraProducto.Location = new System.Drawing.Point(39, 130);
             this.btnListadoEstructuraProducto.Name = "btnListadoEstructuraProducto";
             this.btnListadoEstructuraProducto.Size = new System.Drawing.Size(56, 71);
@@ -508,7 +507,7 @@
             this.btnConsultarEstructuraProducto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnConsultarEstructuraProducto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarEstructuraProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarEstructuraProducto.Image = ((System.Drawing.Image)(resources.GetObject("btnConsultarEstructuraProducto.Image")));
+            this.btnConsultarEstructuraProducto.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_48;
             this.btnConsultarEstructuraProducto.Location = new System.Drawing.Point(35, 65);
             this.btnConsultarEstructuraProducto.Name = "btnConsultarEstructuraProducto";
             this.btnConsultarEstructuraProducto.Size = new System.Drawing.Size(64, 71);
@@ -526,7 +525,7 @@
             this.btnNuevoEstructuraProducto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnNuevoEstructuraProducto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnNuevoEstructuraProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevoEstructuraProducto.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevoEstructuraProducto.Image")));
+            this.btnNuevoEstructuraProducto.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_48;
             this.btnNuevoEstructuraProducto.Location = new System.Drawing.Point(40, 0);
             this.btnNuevoEstructuraProducto.Name = "btnNuevoEstructuraProducto";
             this.btnNuevoEstructuraProducto.Size = new System.Drawing.Size(54, 71);
@@ -573,7 +572,7 @@
             this.button15.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.button15.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button15.Image = ((System.Drawing.Image)(resources.GetObject("button15.Image")));
+            this.button15.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_48;
             this.button15.Location = new System.Drawing.Point(36, 3);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(64, 71);
@@ -622,7 +621,7 @@
             this.btnConsultarModeloCocina.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnConsultarModeloCocina.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarModeloCocina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarModeloCocina.Image = ((System.Drawing.Image)(resources.GetObject("btnConsultarModeloCocina.Image")));
+            this.btnConsultarModeloCocina.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_48;
             this.btnConsultarModeloCocina.Location = new System.Drawing.Point(35, 82);
             this.btnConsultarModeloCocina.Name = "btnConsultarModeloCocina";
             this.btnConsultarModeloCocina.Size = new System.Drawing.Size(64, 71);
@@ -641,7 +640,7 @@
             this.btnNuevoModeloCocina.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnNuevoModeloCocina.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnNuevoModeloCocina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevoModeloCocina.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevoModeloCocina.Image")));
+            this.btnNuevoModeloCocina.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_48;
             this.btnNuevoModeloCocina.Location = new System.Drawing.Point(40, 12);
             this.btnNuevoModeloCocina.Name = "btnNuevoModeloCocina";
             this.btnNuevoModeloCocina.Size = new System.Drawing.Size(54, 71);
@@ -692,7 +691,7 @@
             this.btnListadoPieza.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnListadoPieza.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnListadoPieza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnListadoPieza.Image = ((System.Drawing.Image)(resources.GetObject("btnListadoPieza.Image")));
+            this.btnListadoPieza.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Listados_48;
             this.btnListadoPieza.Location = new System.Drawing.Point(39, 130);
             this.btnListadoPieza.Name = "btnListadoPieza";
             this.btnListadoPieza.Size = new System.Drawing.Size(56, 71);
@@ -710,7 +709,7 @@
             this.btnConsultarPieza.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnConsultarPieza.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarPieza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarPieza.Image = ((System.Drawing.Image)(resources.GetObject("btnConsultarPieza.Image")));
+            this.btnConsultarPieza.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_48;
             this.btnConsultarPieza.Location = new System.Drawing.Point(35, 65);
             this.btnConsultarPieza.Name = "btnConsultarPieza";
             this.btnConsultarPieza.Size = new System.Drawing.Size(64, 71);
@@ -729,7 +728,7 @@
             this.btnNuevoPieza.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnNuevoPieza.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnNuevoPieza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevoPieza.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevoPieza.Image")));
+            this.btnNuevoPieza.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_48;
             this.btnNuevoPieza.Location = new System.Drawing.Point(40, 0);
             this.btnNuevoPieza.Name = "btnNuevoPieza";
             this.btnNuevoPieza.Size = new System.Drawing.Size(54, 71);
@@ -780,7 +779,7 @@
             this.btnListadoSubconjunto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnListadoSubconjunto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnListadoSubconjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnListadoSubconjunto.Image = ((System.Drawing.Image)(resources.GetObject("btnListadoSubconjunto.Image")));
+            this.btnListadoSubconjunto.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Listados_48;
             this.btnListadoSubconjunto.Location = new System.Drawing.Point(39, 130);
             this.btnListadoSubconjunto.Name = "btnListadoSubconjunto";
             this.btnListadoSubconjunto.Size = new System.Drawing.Size(56, 71);
@@ -798,7 +797,7 @@
             this.btnConsultarSubconjunto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnConsultarSubconjunto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarSubconjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarSubconjunto.Image = ((System.Drawing.Image)(resources.GetObject("btnConsultarSubconjunto.Image")));
+            this.btnConsultarSubconjunto.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_48;
             this.btnConsultarSubconjunto.Location = new System.Drawing.Point(35, 65);
             this.btnConsultarSubconjunto.Name = "btnConsultarSubconjunto";
             this.btnConsultarSubconjunto.Size = new System.Drawing.Size(64, 71);
@@ -817,7 +816,7 @@
             this.btnNuevoSubconjunto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnNuevoSubconjunto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnNuevoSubconjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevoSubconjunto.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevoSubconjunto.Image")));
+            this.btnNuevoSubconjunto.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_48;
             this.btnNuevoSubconjunto.Location = new System.Drawing.Point(40, 0);
             this.btnNuevoSubconjunto.Name = "btnNuevoSubconjunto";
             this.btnNuevoSubconjunto.Size = new System.Drawing.Size(54, 71);
@@ -866,7 +865,7 @@
             this.btnConsultarTerminacion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnConsultarTerminacion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarTerminacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarTerminacion.Image = ((System.Drawing.Image)(resources.GetObject("btnConsultarTerminacion.Image")));
+            this.btnConsultarTerminacion.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_48;
             this.btnConsultarTerminacion.Location = new System.Drawing.Point(35, 65);
             this.btnConsultarTerminacion.Name = "btnConsultarTerminacion";
             this.btnConsultarTerminacion.Size = new System.Drawing.Size(64, 71);
@@ -885,7 +884,7 @@
             this.btnNuevoTerminacion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnNuevoTerminacion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnNuevoTerminacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevoTerminacion.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevoTerminacion.Image")));
+            this.btnNuevoTerminacion.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_48;
             this.btnNuevoTerminacion.Location = new System.Drawing.Point(40, 0);
             this.btnNuevoTerminacion.Name = "btnNuevoTerminacion";
             this.btnNuevoTerminacion.Size = new System.Drawing.Size(54, 71);
@@ -934,7 +933,7 @@
             this.btnConsultarUnidadMedida.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnConsultarUnidadMedida.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarUnidadMedida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarUnidadMedida.Image = ((System.Drawing.Image)(resources.GetObject("btnConsultarUnidadMedida.Image")));
+            this.btnConsultarUnidadMedida.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_48;
             this.btnConsultarUnidadMedida.Location = new System.Drawing.Point(35, 70);
             this.btnConsultarUnidadMedida.Name = "btnConsultarUnidadMedida";
             this.btnConsultarUnidadMedida.Size = new System.Drawing.Size(64, 71);
@@ -953,7 +952,7 @@
             this.btnNuevoUnidadMedida.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnNuevoUnidadMedida.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnNuevoUnidadMedida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevoUnidadMedida.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevoUnidadMedida.Image")));
+            this.btnNuevoUnidadMedida.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_48;
             this.btnNuevoUnidadMedida.Location = new System.Drawing.Point(40, 0);
             this.btnNuevoUnidadMedida.Name = "btnNuevoUnidadMedida";
             this.btnNuevoUnidadMedida.Size = new System.Drawing.Size(54, 71);
