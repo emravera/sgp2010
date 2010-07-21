@@ -35,6 +35,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -48,11 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmEstimarDemanda.cs">
+    <Compile Include="frmEstimarDemandaAnual.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEstimarDemanda.Designer.cs">
-      <DependentUpon>frmEstimarDemanda.cs</DependentUpon>
+    <Compile Include="frmEstimarDemandaAnual.Designer.cs">
+      <DependentUpon>frmEstimarDemandaAnual.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPlanAnual.cs">
       <SubType>Form</SubType>
@@ -68,8 +69,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmEstimarDemanda.resx">
-      <DependentUpon>frmEstimarDemanda.cs</DependentUpon>
+    <EmbeddedResource Include="frmEstimarDemandaAnual.resx">
+      <DependentUpon>frmEstimarDemandaAnual.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPlanAnual.resx">

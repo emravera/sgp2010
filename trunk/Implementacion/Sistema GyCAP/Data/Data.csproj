@@ -75,6 +75,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsEstadoEmpleado.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsEstimarDemanda.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEstimarDemanda.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsEstructura.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,6 +178,17 @@
     </None>
     <None Include="dsEstadoEmpleado.xss">
       <DependentUpon>dsEstadoEmpleado.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstimarDemanda.xsc">
+      <DependentUpon>dsEstimarDemanda.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstimarDemanda.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEstimarDemanda.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsEstimarDemanda.xss">
+      <DependentUpon>dsEstimarDemanda.xsd</DependentUpon>
     </None>
     <None Include="dsEstructura.xsc">
       <DependentUpon>dsEstructura.xsd</DependentUpon>
