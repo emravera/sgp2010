@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmEstimarDemanda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEstimarDemanda.Designer.cs">
+      <DependentUpon>frmEstimarDemanda.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPlanAnual.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +68,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmEstimarDemanda.resx">
+      <DependentUpon>frmEstimarDemanda.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPlanAnual.resx">
       <DependentUpon>frmPlanAnual.cs</DependentUpon>
       <SubType>Designer</SubType>
