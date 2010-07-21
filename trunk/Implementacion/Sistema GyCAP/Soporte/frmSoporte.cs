@@ -19,7 +19,7 @@ namespace GyCAP.UI.Soporte
         {
             InitializeComponent();
 
-            areaTrabajo = scUp.Panel1;
+            areaTrabajo = scUp.Panel2;
             flpMenu.AutoScroll = false;
             btnCapacidadEmpleado.Tag = panelCapacidadEmpleado;
             btnLocalidad.Tag = panelLocalidad;
@@ -142,12 +142,20 @@ namespace GyCAP.UI.Soporte
 
         private void btnNuevoMarca_Click(object sender, EventArgs e)
         {
-
+            frmMarca.Instancia.TopLevel = false;
+            frmMarca.Instancia.Parent = areaTrabajo;
+            frmMarca.Instancia.Location = PosicionarFormulario();
+            frmMarca.Instancia.SetEstadoInicial(frmMarca.estadoInicialNuevo);
+            frmMarca.Instancia.Show();
         }
 
         private void btnConsultarMarca_Click(object sender, EventArgs e)
         {
-
+            frmMarca.Instancia.TopLevel = false;
+            frmMarca.Instancia.Parent = areaTrabajo;
+            frmMarca.Instancia.Location = PosicionarFormulario();
+            frmMarca.Instancia.SetEstadoInicial(frmMarca.estadoInicialConsultar);
+            frmMarca.Instancia.Show();
         }
 
         #endregion
