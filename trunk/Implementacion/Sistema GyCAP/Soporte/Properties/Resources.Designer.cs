@@ -74,23 +74,9 @@ namespace GyCAP.UI.Soporte.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap Exit_48 {
-            get {
-                object obj = ResourceManager.GetObject("Exit-48", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap Find_25 {
             get {
                 object obj = ResourceManager.GetObject("Find_25", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap Find_48 {
-            get {
-                object obj = ResourceManager.GetObject("Find-48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -109,6 +95,13 @@ namespace GyCAP.UI.Soporte.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap lupa_20 {
+            get {
+                object obj = ResourceManager.GetObject("lupa_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap lupa_25 {
             get {
                 object obj = ResourceManager.GetObject("lupa_25", resourceCulture);
@@ -119,13 +112,6 @@ namespace GyCAP.UI.Soporte.Properties {
         internal static System.Drawing.Bitmap New_25 {
             get {
                 object obj = ResourceManager.GetObject("New_25", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap New_48 {
-            get {
-                object obj = ResourceManager.GetObject("New-48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -165,9 +151,30 @@ namespace GyCAP.UI.Soporte.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Restar_Gris_25 {
+            get {
+                object obj = ResourceManager.GetObject("Restar_Gris_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Salir_25 {
             get {
                 object obj = ResourceManager.GetObject("Salir_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap sinimagen {
+            get {
+                object obj = ResourceManager.GetObject("sinimagen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Sumar_Gris_25 {
+            get {
+                object obj = ResourceManager.GetObject("Sumar_Gris_25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -189,6 +196,13 @@ namespace GyCAP.UI.Soporte.Properties {
         internal static System.Drawing.Bitmap Text_Editor_25 {
             get {
                 object obj = ResourceManager.GetObject("Text_Editor_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Volver_25 {
+            get {
+                object obj = ResourceManager.GetObject("Volver_25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
