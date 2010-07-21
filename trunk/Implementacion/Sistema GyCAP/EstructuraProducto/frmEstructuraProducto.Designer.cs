@@ -56,7 +56,6 @@
             this.btnMPPrincipal = new System.Windows.Forms.Button();
             this.panelMPPrincipal = new System.Windows.Forms.Panel();
             this.button15 = new System.Windows.Forms.Button();
-            this.btnNuevoMPPrincipal = new System.Windows.Forms.Button();
             this.btnModeloCocina = new System.Windows.Forms.Button();
             this.panelModeloCocina = new System.Windows.Forms.Panel();
             this.btnConsultarModeloCocina = new System.Windows.Forms.Button();
@@ -556,13 +555,12 @@
             this.panelMPPrincipal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelMPPrincipal.BackColor = System.Drawing.Color.Silver;
             this.panelMPPrincipal.Controls.Add(this.button15);
-            this.panelMPPrincipal.Controls.Add(this.btnNuevoMPPrincipal);
             this.panelMPPrincipal.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelMPPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMPPrincipal.Location = new System.Drawing.Point(316, 253);
             this.panelMPPrincipal.Margin = new System.Windows.Forms.Padding(0);
             this.panelMPPrincipal.Name = "panelMPPrincipal";
-            this.panelMPPrincipal.Size = new System.Drawing.Size(158, 156);
+            this.panelMPPrincipal.Size = new System.Drawing.Size(158, 81);
             this.panelMPPrincipal.TabIndex = 10;
             this.panelMPPrincipal.Visible = false;
             // 
@@ -575,38 +573,21 @@
             this.button15.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button15.Image = ((System.Drawing.Image)(resources.GetObject("button15.Image")));
-            this.button15.Location = new System.Drawing.Point(42, 78);
+            this.button15.Location = new System.Drawing.Point(42, 3);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(75, 75);
             this.button15.TabIndex = 1;
             this.button15.Text = "Consultar";
             this.button15.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button15.UseVisualStyleBackColor = true;
-            // 
-            // btnNuevoMPPrincipal
-            // 
-            this.btnNuevoMPPrincipal.AutoSize = true;
-            this.btnNuevoMPPrincipal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnNuevoMPPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNuevoMPPrincipal.FlatAppearance.BorderSize = 0;
-            this.btnNuevoMPPrincipal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.btnNuevoMPPrincipal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.btnNuevoMPPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevoMPPrincipal.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevoMPPrincipal.Image")));
-            this.btnNuevoMPPrincipal.Location = new System.Drawing.Point(52, 3);
-            this.btnNuevoMPPrincipal.Name = "btnNuevoMPPrincipal";
-            this.btnNuevoMPPrincipal.Size = new System.Drawing.Size(54, 75);
-            this.btnNuevoMPPrincipal.TabIndex = 0;
-            this.btnNuevoMPPrincipal.Text = "Nuevo";
-            this.btnNuevoMPPrincipal.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnNuevoMPPrincipal.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // btnModeloCocina
             // 
             this.btnModeloCocina.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnModeloCocina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModeloCocina.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModeloCocina.Location = new System.Drawing.Point(316, 409);
+            this.btnModeloCocina.Location = new System.Drawing.Point(316, 334);
             this.btnModeloCocina.Margin = new System.Windows.Forms.Padding(0);
             this.btnModeloCocina.Name = "btnModeloCocina";
             this.btnModeloCocina.Size = new System.Drawing.Size(158, 25);
@@ -625,7 +606,7 @@
             this.panelModeloCocina.Controls.Add(this.btnNuevoModeloCocina);
             this.panelModeloCocina.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelModeloCocina.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelModeloCocina.Location = new System.Drawing.Point(474, 0);
+            this.panelModeloCocina.Location = new System.Drawing.Point(316, 359);
             this.panelModeloCocina.Margin = new System.Windows.Forms.Padding(0);
             this.panelModeloCocina.Name = "panelModeloCocina";
             this.panelModeloCocina.Size = new System.Drawing.Size(158, 173);
@@ -674,7 +655,7 @@
             this.btnPieza.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPieza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPieza.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPieza.Location = new System.Drawing.Point(474, 173);
+            this.btnPieza.Location = new System.Drawing.Point(474, 0);
             this.btnPieza.Margin = new System.Windows.Forms.Padding(0);
             this.btnPieza.Name = "btnPieza";
             this.btnPieza.Size = new System.Drawing.Size(158, 25);
@@ -694,7 +675,7 @@
             this.panelPieza.Controls.Add(this.btnNuevoPieza);
             this.panelPieza.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelPieza.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelPieza.Location = new System.Drawing.Point(474, 198);
+            this.panelPieza.Location = new System.Drawing.Point(474, 25);
             this.panelPieza.Margin = new System.Windows.Forms.Padding(0);
             this.panelPieza.Name = "panelPieza";
             this.panelPieza.Size = new System.Drawing.Size(158, 228);
@@ -761,7 +742,7 @@
             this.btnSubconjunto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSubconjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubconjunto.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubconjunto.Location = new System.Drawing.Point(474, 426);
+            this.btnSubconjunto.Location = new System.Drawing.Point(474, 253);
             this.btnSubconjunto.Margin = new System.Windows.Forms.Padding(0);
             this.btnSubconjunto.Name = "btnSubconjunto";
             this.btnSubconjunto.Size = new System.Drawing.Size(158, 25);
@@ -781,7 +762,7 @@
             this.panelSubconjunto.Controls.Add(this.btnNuevoSubconjunto);
             this.panelSubconjunto.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelSubconjunto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSubconjunto.Location = new System.Drawing.Point(632, 0);
+            this.panelSubconjunto.Location = new System.Drawing.Point(474, 278);
             this.panelSubconjunto.Margin = new System.Windows.Forms.Padding(0);
             this.panelSubconjunto.Name = "panelSubconjunto";
             this.panelSubconjunto.Size = new System.Drawing.Size(158, 228);
@@ -849,7 +830,7 @@
             this.btnTerminacion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTerminacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTerminacion.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTerminacion.Location = new System.Drawing.Point(632, 228);
+            this.btnTerminacion.Location = new System.Drawing.Point(474, 506);
             this.btnTerminacion.Margin = new System.Windows.Forms.Padding(0);
             this.btnTerminacion.Name = "btnTerminacion";
             this.btnTerminacion.Size = new System.Drawing.Size(158, 25);
@@ -868,7 +849,7 @@
             this.panelTerminacion.Controls.Add(this.btnNuevoTerminacion);
             this.panelTerminacion.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelTerminacion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelTerminacion.Location = new System.Drawing.Point(632, 253);
+            this.panelTerminacion.Location = new System.Drawing.Point(632, 0);
             this.panelTerminacion.Margin = new System.Windows.Forms.Padding(0);
             this.panelTerminacion.Name = "panelTerminacion";
             this.panelTerminacion.Size = new System.Drawing.Size(158, 153);
@@ -917,7 +898,7 @@
             this.btnUnidadMedida.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUnidadMedida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUnidadMedida.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUnidadMedida.Location = new System.Drawing.Point(632, 406);
+            this.btnUnidadMedida.Location = new System.Drawing.Point(632, 153);
             this.btnUnidadMedida.Margin = new System.Windows.Forms.Padding(0);
             this.btnUnidadMedida.Name = "btnUnidadMedida";
             this.btnUnidadMedida.Size = new System.Drawing.Size(158, 25);
@@ -936,10 +917,10 @@
             this.panelUnidadMedida.Controls.Add(this.btnNuevoUnidadMedida);
             this.panelUnidadMedida.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelUnidadMedida.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelUnidadMedida.Location = new System.Drawing.Point(790, 0);
+            this.panelUnidadMedida.Location = new System.Drawing.Point(632, 178);
             this.panelUnidadMedida.Margin = new System.Windows.Forms.Padding(0);
             this.panelUnidadMedida.Name = "panelUnidadMedida";
-            this.panelUnidadMedida.Size = new System.Drawing.Size(120, 159);
+            this.panelUnidadMedida.Size = new System.Drawing.Size(158, 159);
             this.panelUnidadMedida.TabIndex = 20;
             this.panelUnidadMedida.Visible = false;
             // 
@@ -985,7 +966,7 @@
             this.panel12.Controls.Add(this.button1);
             this.panel12.Cursor = System.Windows.Forms.Cursors.Default;
             this.flpMenu.SetFlowBreak(this.panel12, true);
-            this.panel12.Location = new System.Drawing.Point(790, 159);
+            this.panel12.Location = new System.Drawing.Point(632, 337);
             this.panel12.Margin = new System.Windows.Forms.Padding(0);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(120, 208);
@@ -1138,7 +1119,6 @@
         private System.Windows.Forms.Button btnConsultarEstructuraProducto;
         private System.Windows.Forms.Button btnNuevoEstructuraProducto;
         private System.Windows.Forms.Button button15;
-        private System.Windows.Forms.Button btnNuevoMPPrincipal;
         private System.Windows.Forms.Button btnConsultarModeloCocina;
         private System.Windows.Forms.Button btnNuevoModeloCocina;
         private System.Windows.Forms.Button btnListadoPieza;

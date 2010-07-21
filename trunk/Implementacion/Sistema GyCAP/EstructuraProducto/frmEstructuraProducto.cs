@@ -178,6 +178,14 @@ namespace GyCAP.UI.EstructuraProducto
         #endregion
 
         #region Materia Prima Principal
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            frmMateriaPrimaPrincipal.Instancia.TopLevel = false;
+            frmMateriaPrimaPrincipal.Instancia.Parent = areaTrabajo;
+            frmMateriaPrimaPrincipal.Instancia.Show();
+        }
+
         #endregion
 
         #region Modelo Cocina
@@ -286,6 +294,5 @@ namespace GyCAP.UI.EstructuraProducto
         #endregion
 
 
-        
     }
 }
