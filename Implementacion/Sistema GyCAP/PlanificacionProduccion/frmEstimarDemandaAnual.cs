@@ -9,13 +9,11 @@ using System.Windows.Forms;
 
 namespace GyCAP.UI.PlanificacionProduccion
 {
-    public partial class frmEstimarDemanda : Form
+    public partial class frmEstimarDemandaAnual : Form
     {
-        public frmEstimarDemanda()
+        public frmEstimarDemandaAnual()
         {
             InitializeComponent();
         }
-
-       
     }
 }
