@@ -73,7 +73,7 @@ namespace GyCAP.UI.EstructuraProducto
             cbMarcaDatos.DisplayMember = "MCA_NOMBRE";
             cbMarcaDatos.ValueMember = "MCA_CODIGO";
             //Para que el combo no quede selecionado cuando arranca y que sea una lista
-            cbMarcaDatos.SelectedIndex = 0;
+            cbMarcaDatos.SelectedIndex = -1;
             cbMarcaDatos.DropDownStyle = ComboBoxStyle.DropDownList;
 
             //Seteo el maxlenght de los textbox para que no de error en la bd
@@ -229,7 +229,7 @@ namespace GyCAP.UI.EstructuraProducto
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Text=string.Empty;
                     cbMarcaDatos.Enabled = true;
-                    cbMarcaDatos.SelectedIndex = 0;
+                    cbMarcaDatos.SelectedIndex = -1;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -246,7 +246,7 @@ namespace GyCAP.UI.EstructuraProducto
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Text = string.Empty;
                     cbMarcaDatos.Enabled = true;
-                    cbMarcaDatos.SelectedIndex = 0;
+                    cbMarcaDatos.SelectedIndex = -1;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
                     btnNuevo.Enabled = false;
