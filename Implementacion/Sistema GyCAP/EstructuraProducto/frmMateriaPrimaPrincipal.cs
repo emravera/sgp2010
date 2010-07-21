@@ -75,6 +75,7 @@ namespace GyCAP.UI.EstructuraProducto
             //Para que el combo no quede selecionado cuando arranca y que sea una lista
             cbMateriaPrima.SelectedIndex = -1;
             cbMateriaPrima.DropDownStyle = ComboBoxStyle.DropDownList;
+            SetInterface(estadoUI.inicio);
         }
 
         public static frmMateriaPrimaPrincipal Instancia

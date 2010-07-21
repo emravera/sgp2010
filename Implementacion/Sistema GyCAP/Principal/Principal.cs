@@ -11,7 +11,7 @@ namespace Principal
 {
     public partial class Principal : Form
     {
-        private int childFormNumber = 0;
+        
 
         public Principal()
         {

@@ -116,6 +116,13 @@ namespace GyCAP.UI.EstructuraProducto.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap lupa_20 {
+            get {
+                object obj = ResourceManager.GetObject("lupa_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap lupa_25 {
             get {
                 object obj = ResourceManager.GetObject("lupa_25", resourceCulture);
@@ -231,6 +238,20 @@ namespace GyCAP.UI.EstructuraProducto.Properties {
         internal static System.Drawing.Bitmap Text_Editor_25 {
             get {
                 object obj = ResourceManager.GetObject("Text_Editor_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Volver_20 {
+            get {
+                object obj = ResourceManager.GetObject("Volver_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Volver_25 {
+            get {
+                object obj = ResourceManager.GetObject("Volver_25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
