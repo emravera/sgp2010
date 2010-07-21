@@ -56,9 +56,29 @@ namespace GyCAP.UI.Soporte
             this.WindowState = FormWindowState.Maximized;
         }
 
+        private Point PosicionarFormulario()
+        {
+            int posicion = areaTrabajo.Controls.Count;
+            Point location = new Point(posicion * 15, posicion * 15);
+            return location;
+        }
+
+        #region Menú Lateral
+
         private void btnMenu_Click(object sender, EventArgs e)
         {
-
+            if (scDown.Panel1Collapsed == false)
+            {
+                scDown.Panel1Collapsed = true;
+                btnMenu.Cursor = System.Windows.Forms.Cursors.PanEast;
+                btnMenu.Refresh();
+            }
+            else
+            {
+                scDown.Panel1Collapsed = false;
+                btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
+                btnMenu.Refresh();
+            }
         }
 
         private void ShowHide(Panel panelClic)
@@ -98,5 +118,70 @@ namespace GyCAP.UI.Soporte
         {
             this.Dispose(true);
         }
+
+        #endregion
+
+        #region Capacidad Empleado
+
+        private void btnNuevoCapacidadEmpleado_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnConsultarCapacidadEmpleado_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region Localidad
+        #endregion
+
+        #region Marca
+
+        private void btnNuevoMarca_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnConsultarMarca_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region Proceso Fabricación
+        #endregion
+
+        #region Provincia
+        #endregion
+
+        #region Sector Trabajo
+
+        private void btnNuevoSectorTrabajo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnConsultarSectorTrabajo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region Tipo Repuesto
+        #endregion
+
+        #region TUMED
+
+        private void btnConsultarTUMED_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
     }
 }
