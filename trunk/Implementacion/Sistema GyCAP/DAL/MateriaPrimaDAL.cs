@@ -50,7 +50,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataSet(ds, "MATERIAS_PRIMAS", sql, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
         }
     }

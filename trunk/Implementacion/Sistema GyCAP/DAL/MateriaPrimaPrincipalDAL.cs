@@ -18,7 +18,7 @@ namespace GyCAP.DAL
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             
         }
 
@@ -38,7 +38,7 @@ namespace GyCAP.DAL
                     return true;
                 }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
         }
         //Metodo que trae todos los datos 
@@ -51,7 +51,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataSet(ds, "MATERIASPRIMASPRINCIPALES", sql, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
         }
        
@@ -64,7 +64,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
         }
 

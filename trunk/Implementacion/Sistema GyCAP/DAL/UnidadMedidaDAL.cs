@@ -62,7 +62,7 @@ namespace GyCAP.DAL
                     }
                 }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
         //Metodo para llenar desde materia primas principales
         public static void ObtenerTodos(Data.dsMateriaPrima ds)
@@ -73,7 +73,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataSet(ds, "UNIDADES_MEDIDA", sql, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
         }
         
@@ -94,7 +94,7 @@ namespace GyCAP.DAL
                     return false;
                 }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
         //Metodo que elimina de la base de datos
         public static void Eliminar(int codigo)
@@ -105,7 +105,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         //INSERTAR
@@ -125,7 +125,7 @@ namespace GyCAP.DAL
                     return true;
                 }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         //Metodo que inserta en la base de datos
@@ -138,7 +138,7 @@ namespace GyCAP.DAL
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         //MODIFICAR 
@@ -151,7 +151,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
     }
 }

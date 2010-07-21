@@ -17,7 +17,7 @@ namespace GyCAP.DAL
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void Eliminar(int codigo)
@@ -28,7 +28,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void Actualizar(Entidades.TipoUnidadMedida tipoUnidadMedida)
@@ -39,7 +39,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static bool EsTipoUnidadMedida(Entidades.TipoUnidadMedida tipoUnidadMedida)
@@ -57,7 +57,7 @@ namespace GyCAP.DAL
                     return true;
                 }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void ObtenerTipoUnidadMedida(Data.dsUnidadMedida ds)
@@ -67,7 +67,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataSet(ds, "TIPOS_UNIDADES_MEDIDA", sql, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             
         }
         
@@ -85,7 +85,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "TIPOS_UNIDADES_MEDIDA", sql, valorParametros);
                 }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
             else
             {
@@ -94,7 +94,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "TIPOS_UNIDADES_MEDIDA", sql, null);
                 }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
         }
 
@@ -113,7 +113,7 @@ namespace GyCAP.DAL
                     return false;
                 }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
     }
 }

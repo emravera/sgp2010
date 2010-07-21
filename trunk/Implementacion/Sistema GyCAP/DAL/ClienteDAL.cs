@@ -17,7 +17,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataSet(ds, "CLIENTES", sql, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
    
 
