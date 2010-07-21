@@ -11,9 +11,17 @@ namespace GyCAP.UI.PlanificacionProduccion
 {
     public partial class frmEstimarDemandaAnual : Form
     {
+        private static frmEstimarDemandaAnual _frmEstimarDemandaAnual = null;
+        private Data.dsEstimarDemanda dsEstimarDemanda = new GyCAP.Data.dsEstimarDemanda();
+        private enum estadoUI { inicio, nuevo,  modificar, };
         public frmEstimarDemandaAnual()
         {
             InitializeComponent();
+
+            //Inicializamos 
+
+
+
         }
     }
 }

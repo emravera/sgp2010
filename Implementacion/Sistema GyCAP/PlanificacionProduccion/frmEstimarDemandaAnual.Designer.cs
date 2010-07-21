@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tcDesignacion = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -79,22 +77,27 @@
             this.label6 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.tcDesignacion.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tpDatos.SuspendLayout();
             this.tsMenu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcDesignacion
@@ -116,6 +119,7 @@
             // 
             // tpBuscar
             // 
+            this.tpBuscar.Controls.Add(this.groupBox6);
             this.tpBuscar.Controls.Add(this.groupBox2);
             this.tpBuscar.Controls.Add(this.groupBox1);
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
@@ -275,7 +279,6 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.chart1);
             this.groupBox3.Location = new System.Drawing.Point(321, 118);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(300, 200);
@@ -285,6 +288,8 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.dateTimePicker1);
+            this.groupBox5.Controls.Add(this.label4);
             this.groupBox5.Controls.Add(this.button1);
             this.groupBox5.Controls.Add(this.numericUpDown1);
             this.groupBox5.Controls.Add(this.label2);
@@ -301,16 +306,16 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(331, 80);
+            this.button1.Location = new System.Drawing.Point(280, 80);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 23);
+            this.button1.Size = new System.Drawing.Size(94, 23);
             this.button1.TabIndex = 7;
             this.button1.Text = "Cargar Historico";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(471, 26);
+            this.numericUpDown1.Location = new System.Drawing.Point(527, 24);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(73, 20);
             this.numericUpDown1.TabIndex = 6;
@@ -335,7 +340,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(328, 26);
+            this.label3.Location = new System.Drawing.Point(384, 24);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(135, 13);
             this.label3.TabIndex = 2;
@@ -359,6 +364,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.textBox2);
+            this.groupBox4.Controls.Add(this.label18);
             this.groupBox4.Controls.Add(this.textBox14);
             this.groupBox4.Controls.Add(this.label16);
             this.groupBox4.Controls.Add(this.textBox13);
@@ -582,29 +589,15 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Enero";
             // 
-            // chart1
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            this.chart1.Location = new System.Drawing.Point(13, 22);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.IsVisibleInLegend = false;
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(269, 158);
-            this.chart1.TabIndex = 0;
-            this.chart1.Text = "chart1";
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dgvLista);
             this.groupBox2.Location = new System.Drawing.Point(6, 75);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(627, 227);
+            this.groupBox2.Size = new System.Drawing.Size(308, 227);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.groupBox2.Text = "Listado de Demandas Anuales";
             // 
             // dgvLista
             // 
@@ -616,8 +609,65 @@
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(593, 188);
+            this.dgvLista.Size = new System.Drawing.Size(278, 188);
             this.dgvLista.TabIndex = 1;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.Location = new System.Drawing.Point(16, 23);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(278, 188);
+            this.dataGridView1.TabIndex = 1;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.dataGridView1);
+            this.groupBox6.Location = new System.Drawing.Point(320, 75);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(310, 227);
+            this.groupBox6.TabIndex = 2;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Listado Detalle Demanda Anual";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(384, 60);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(86, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Fecha Comienzo";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(510, 56);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(90, 20);
+            this.dateTimePicker1.TabIndex = 9;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(77, 177);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(31, 13);
+            this.label18.TabIndex = 24;
+            this.label18.Text = "Total";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(114, 174);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 25;
             // 
             // frmEstimarDemandaAnual
             // 
@@ -636,15 +686,15 @@
             this.tsMenu.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -700,8 +750,13 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgvLista;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }
