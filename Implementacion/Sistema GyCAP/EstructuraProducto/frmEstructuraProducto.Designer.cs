@@ -81,7 +81,6 @@
             this.btnNuevoUnidadMedida = new System.Windows.Forms.Button();
             this.panel12 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
             this.scUp = new System.Windows.Forms.SplitContainer();
             this.btnMenu = new System.Windows.Forms.Button();
             this.scDown.Panel1.SuspendLayout();
@@ -293,6 +292,7 @@
             this.btnConsultarColor.Text = "Consultar";
             this.btnConsultarColor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarColor.UseVisualStyleBackColor = true;
+            this.btnConsultarColor.Click += new System.EventHandler(this.btnConsultarColor_Click);
             // 
             // btnConjunto
             // 
@@ -959,6 +959,7 @@
             this.btnConsultarUnidadMedida.Text = "Consultar";
             this.btnConsultarUnidadMedida.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarUnidadMedida.UseVisualStyleBackColor = true;
+            this.btnConsultarUnidadMedida.Click += new System.EventHandler(this.btnConsultarUnidadMedida_Click);
             // 
             // btnNuevoUnidadMedida
             // 
@@ -977,11 +978,11 @@
             this.btnNuevoUnidadMedida.Text = "Nuevo";
             this.btnNuevoUnidadMedida.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoUnidadMedida.UseVisualStyleBackColor = true;
+            this.btnNuevoUnidadMedida.Click += new System.EventHandler(this.btnNuevoUnidadMedida_Click);
             // 
             // panel12
             // 
             this.panel12.Controls.Add(this.button1);
-            this.panel12.Controls.Add(this.btnSalir);
             this.panel12.Cursor = System.Windows.Forms.Cursors.Default;
             this.flpMenu.SetFlowBreak(this.panel12, true);
             this.panel12.Location = new System.Drawing.Point(790, 159);
@@ -1000,29 +1001,14 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Exit_48;
-            this.button1.Location = new System.Drawing.Point(31, 125);
+            this.button1.Location = new System.Drawing.Point(52, 20);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(54, 75);
             this.button1.TabIndex = 1;
             this.button1.Text = " Salir";
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.AutoSize = true;
-            this.btnSalir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSalir.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSalir.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Exit_48;
-            this.btnSalir.Location = new System.Drawing.Point(31, 19);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(54, 75);
-            this.btnSalir.TabIndex = 0;
-            this.btnSalir.Text = " Salir";
-            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            this.button1.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // scUp
             // 
@@ -1139,7 +1125,6 @@
         private System.Windows.Forms.Button btnUnidadMedida;
         private System.Windows.Forms.Panel panelUnidadMedida;
         private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnListadoCocina;
         private System.Windows.Forms.Button btnConsultarCocina;
         private System.Windows.Forms.Button btnNuevoCocina;

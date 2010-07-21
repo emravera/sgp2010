@@ -16,6 +16,7 @@ namespace GyCAP.UI.EstructuraProducto
         private DataView dvColor;
         private enum estadoUI {inicio, modificar, };
         private estadoUI estadoInterface;
+
                 
         public frmColor()
         {
