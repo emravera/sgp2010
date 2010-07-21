@@ -419,7 +419,7 @@ namespace GyCAP.UI.Soporte
         }
         private void frmSectorTrabajo_Activated(object sender, EventArgs e)
         {
-            if (txtNombreBuscar.Enabled = true)
+            if (txtNombreBuscar.Enabled == true)
             {
                 txtNombreBuscar.Focus();
             }
