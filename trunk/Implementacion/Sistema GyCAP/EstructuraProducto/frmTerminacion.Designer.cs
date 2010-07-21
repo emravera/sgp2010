@@ -85,9 +85,9 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(423, 28);
+            this.btnVolver.Location = new System.Drawing.Point(423, 23);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(64, 20);
+            this.btnVolver.Size = new System.Drawing.Size(64, 25);
             this.btnVolver.TabIndex = 1;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -212,9 +212,9 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(353, 28);
+            this.btnGuardar.Location = new System.Drawing.Point(353, 23);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(64, 20);
+            this.btnGuardar.Size = new System.Drawing.Size(64, 25);
             this.btnGuardar.TabIndex = 0;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;

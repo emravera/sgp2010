@@ -82,7 +82,7 @@
             // 
             this.cbClienteDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbClienteDatos.FormattingEnabled = true;
-            this.cbClienteDatos.Location = new System.Drawing.Point(85, 63);
+            this.cbClienteDatos.Location = new System.Drawing.Point(85, 74);
             this.cbClienteDatos.Name = "cbClienteDatos";
             this.cbClienteDatos.Size = new System.Drawing.Size(146, 21);
             this.cbClienteDatos.TabIndex = 3;
@@ -90,7 +90,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 66);
+            this.label5.Location = new System.Drawing.Point(17, 77);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(44, 13);
             this.label5.TabIndex = 4;
@@ -107,7 +107,7 @@
             this.gbDatos.Location = new System.Drawing.Point(3, 3);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(489, 195);
+            this.gbDatos.Size = new System.Drawing.Size(489, 187);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Marcas";
@@ -115,7 +115,7 @@
             // chboxCliente
             // 
             this.chboxCliente.AutoSize = true;
-            this.chboxCliente.Location = new System.Drawing.Point(67, 68);
+            this.chboxCliente.Location = new System.Drawing.Point(67, 79);
             this.chboxCliente.Name = "chboxCliente";
             this.chboxCliente.Size = new System.Drawing.Size(15, 14);
             this.chboxCliente.TabIndex = 2;
@@ -294,7 +294,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(489, 62);
+            this.groupBox1.Size = new System.Drawing.Size(489, 55);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";

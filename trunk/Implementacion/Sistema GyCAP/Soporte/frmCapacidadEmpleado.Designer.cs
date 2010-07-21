@@ -72,7 +72,7 @@
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(555, 292);
+            this.tpBuscar.Size = new System.Drawing.Size(433, 256);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
@@ -80,10 +80,10 @@
             // 
             this.gpbLista.Controls.Add(this.dgvLista);
             this.gpbLista.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gpbLista.Location = new System.Drawing.Point(3, 76);
+            this.gpbLista.Location = new System.Drawing.Point(3, 68);
             this.gpbLista.Name = "gpbLista";
-            this.gpbLista.Padding = new System.Windows.Forms.Padding(10);
-            this.gpbLista.Size = new System.Drawing.Size(549, 213);
+            this.gpbLista.Padding = new System.Windows.Forms.Padding(9, 9, 9, 9);
+            this.gpbLista.Size = new System.Drawing.Size(427, 185);
             this.gpbLista.TabIndex = 1;
             this.gpbLista.TabStop = false;
             this.gpbLista.Text = "Listado";
@@ -94,12 +94,12 @@
             this.dgvLista.AllowUserToDeleteRows = false;
             this.dgvLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLista.Location = new System.Drawing.Point(10, 27);
+            this.dgvLista.Location = new System.Drawing.Point(9, 23);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.ReadOnly = true;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(529, 176);
+            this.dgvLista.Size = new System.Drawing.Size(409, 153);
             this.dgvLista.TabIndex = 2;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
@@ -112,7 +112,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(549, 71);
+            this.groupBox1.Size = new System.Drawing.Size(427, 62);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
@@ -121,9 +121,9 @@
             // 
             this.btnBuscar.Image = global::GyCAP.UI.Soporte.Properties.Resources.lupa_25;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(423, 23);
+            this.btnBuscar.Location = new System.Drawing.Point(343, 20);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(88, 30);
+            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
             this.btnBuscar.TabIndex = 1;
             this.btnBuscar.Text = "&Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -132,26 +132,26 @@
             // 
             // txtNombreBuscar
             // 
-            this.txtNombreBuscar.Location = new System.Drawing.Point(71, 28);
+            this.txtNombreBuscar.Location = new System.Drawing.Point(61, 24);
             this.txtNombreBuscar.Name = "txtNombreBuscar";
-            this.txtNombreBuscar.Size = new System.Drawing.Size(224, 24);
+            this.txtNombreBuscar.Size = new System.Drawing.Size(193, 21);
             this.txtNombreBuscar.TabIndex = 0;
             this.txtNombreBuscar.Enter += new System.EventHandler(this.txtNombreBuscar_Enter);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 31);
+            this.label1.Location = new System.Drawing.Point(6, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 17);
+            this.label1.Size = new System.Drawing.Size(48, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre:";
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(412, 32);
+            this.btnGuardar.Location = new System.Drawing.Point(287, 24);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.Size = new System.Drawing.Size(64, 25);
             this.btnGuardar.TabIndex = 0;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -162,18 +162,18 @@
             this.gbGuardarCancelar.Controls.Add(this.btnVolver);
             this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
             this.gbGuardarCancelar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 217);
+            this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 191);
             this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
             this.gbGuardarCancelar.Name = "gbGuardarCancelar";
-            this.gbGuardarCancelar.Size = new System.Drawing.Size(581, 72);
+            this.gbGuardarCancelar.Size = new System.Drawing.Size(427, 62);
             this.gbGuardarCancelar.TabIndex = 1;
             this.gbGuardarCancelar.TabStop = false;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(493, 32);
+            this.btnVolver.Location = new System.Drawing.Point(357, 24);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(64, 25);
             this.btnVolver.TabIndex = 1;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -187,7 +187,7 @@
             this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDatos.Size = new System.Drawing.Size(587, 292);
+            this.tpDatos.Size = new System.Drawing.Size(433, 256);
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
@@ -201,45 +201,45 @@
             this.gbDatos.Location = new System.Drawing.Point(3, 3);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(581, 225);
+            this.gbDatos.Size = new System.Drawing.Size(427, 186);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Tipo Unidad de Medida";
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(93, 73);
+            this.txtDescripcion.Location = new System.Drawing.Point(80, 76);
             this.txtDescripcion.MaxLength = 80;
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(365, 72);
+            this.txtDescripcion.Size = new System.Drawing.Size(313, 78);
             this.txtDescripcion.TabIndex = 5;
             this.txtDescripcion.Enter += new System.EventHandler(this.txtDescripcion_Enter);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 76);
+            this.label4.Location = new System.Drawing.Point(9, 79);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 17);
+            this.label4.Size = new System.Drawing.Size(65, 13);
             this.label4.TabIndex = 4;
             this.label4.Text = "Descripción:";
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(93, 43);
+            this.txtNombre.Location = new System.Drawing.Point(80, 37);
             this.txtNombre.MaxLength = 25;
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(365, 24);
+            this.txtNombre.Size = new System.Drawing.Size(313, 21);
             this.txtNombre.TabIndex = 3;
             this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 46);
+            this.label3.Location = new System.Drawing.Point(9, 40);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 17);
+            this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "Nombre:";
             // 
@@ -250,13 +250,13 @@
             this.tcABM.Controls.Add(this.tpDatos);
             this.tcABM.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcABM.ItemSize = new System.Drawing.Size(0, 1);
-            this.tcABM.Location = new System.Drawing.Point(2, 52);
+            this.tcABM.Location = new System.Drawing.Point(2, 54);
             this.tcABM.Margin = new System.Windows.Forms.Padding(0);
             this.tcABM.Multiline = true;
             this.tcABM.Name = "tcABM";
             this.tcABM.Padding = new System.Drawing.Point(0, 0);
             this.tcABM.SelectedIndex = 0;
-            this.tcABM.Size = new System.Drawing.Size(563, 301);
+            this.tcABM.Size = new System.Drawing.Size(441, 265);
             this.tcABM.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcABM.TabIndex = 8;
             // 
@@ -267,7 +267,8 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tsMenu.BackColor = System.Drawing.Color.Silver;
             this.tsMenu.Dock = System.Windows.Forms.DockStyle.None;
-            this.tsMenu.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsMenu.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNuevo,
             this.btnConsultar,
@@ -278,7 +279,7 @@
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.tsMenu.Size = new System.Drawing.Size(563, 48);
+            this.tsMenu.Size = new System.Drawing.Size(441, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
@@ -353,23 +354,26 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(567, 355);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(445, 321);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
             // frmCapacidadEmpleado
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(567, 355);
+            this.ClientSize = new System.Drawing.Size(445, 321);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "frmCapacidadEmpleado";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Capacidad de Empleado";
+            this.Load += new System.EventHandler(this.frmCapacidadEmpleado_Load);
             this.tpBuscar.ResumeLayout(false);
             this.gpbLista.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();

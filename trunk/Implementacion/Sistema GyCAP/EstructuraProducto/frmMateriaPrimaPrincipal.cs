@@ -68,6 +68,7 @@ namespace GyCAP.UI.EstructuraProducto
 
             //Combo de Datos
             dvComboMP = new DataView(dsMateriaPrimaPrincipal.MATERIAS_PRIMAS);
+            dvComboMP.Sort = "MP_NOMBRE ASC";
             cbMateriaPrima.DataSource = dvComboMP;
             cbMateriaPrima.DisplayMember = "MP_NOMBRE";
             cbMateriaPrima.ValueMember = "MP_CODIGO";

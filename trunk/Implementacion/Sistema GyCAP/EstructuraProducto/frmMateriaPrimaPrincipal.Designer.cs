@@ -286,6 +286,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmMateriaPrimaPrincipal";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Materia Prima Principal";
             this.Activated += new System.EventHandler(this.frmMateriaPrimaPrincipal_Activated);
             this.tsMenu.ResumeLayout(false);
