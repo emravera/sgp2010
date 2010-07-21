@@ -119,6 +119,14 @@ namespace GyCAP.UI.EstructuraProducto
         #endregion
 
         #region Color
+
+        private void btnConsultarColor_Click(object sender, EventArgs e)
+        {
+            frmColor.Instancia.TopLevel = false;
+            frmColor.Instancia.Parent = areaTrabajo;
+            frmColor.Instancia.Show();
+        }
+
         #endregion
         
         #region Conjunto
@@ -238,11 +246,28 @@ namespace GyCAP.UI.EstructuraProducto
         #endregion
 
         #region Terminación
+
+        private void btnNuevoTerminacion_Click(object sender, EventArgs e)
+        {
+            frmTerminacion.Instancia.TopLevel = false;
+            frmTerminacion.Instancia.Parent = areaTrabajo;
+            frmTerminacion.Instancia.SetEstadoInicial(frmTerminacion.estadoInicialNuevo);
+            frmTerminacion.Instancia.Show();
+        }
+
+        private void btnConsultarTerminacion_Click(object sender, EventArgs e)
+        {
+            frmTerminacion.Instancia.TopLevel = false;
+            frmTerminacion.Instancia.Parent = areaTrabajo;
+            frmTerminacion.Instancia.SetEstadoInicial(frmTerminacion.estadoInicialConsultar);
+            frmTerminacion.Instancia.Show();
+        }
+
         #endregion
 
         #region Unidad Medida
 
-        private void btnNuevoTerminacion_Click(object sender, EventArgs e)
+        private void btnNuevoUnidadMedida_Click(object sender, EventArgs e)
         {
             frmUnidadMedida.Instancia.TopLevel = false;
             frmUnidadMedida.Instancia.Parent = areaTrabajo;
@@ -250,7 +275,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmUnidadMedida.Instancia.Show();
         }
 
-        private void btnConsultarTerminacion_Click(object sender, EventArgs e)
+        private void btnConsultarUnidadMedida_Click(object sender, EventArgs e)
         {
             frmUnidadMedida.Instancia.TopLevel = false;
             frmUnidadMedida.Instancia.Parent = areaTrabajo;
@@ -259,6 +284,7 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
+
 
         
     }
