@@ -13,7 +13,7 @@ namespace GyCAP.UI.RecursosFabricacion
     {
         private static frmEmpleado _frmEmpleado = null;
         private Data.dsEmpleado dsEmpleado = new GyCAP.Data.dsEmpleado(); 
-        private DataView dvEmpleado, dvComboEstadoEmpleado, dvListaSectores;
+        private DataView dvEmpleado, dvEstadoEmpleado,dvEstadoEmpleadoBuscar, dvListaSectores;
         private enum estadoUI { inicio, nuevo, consultar, modificar, };
         private estadoUI estadoInterface;
 
@@ -68,29 +68,33 @@ namespace GyCAP.UI.RecursosFabricacion
 
             //CARGA DE COMBOS
             //Creamos el Dataview y se lo asignamos al combo
-            dvComboEstadoEmpleado = new DataView(dsEmpleado.ESTADO_EMPLEADOS);
-            cboEstado.DataSource = dvComboEstadoEmpleado;
-            cboEstado.DisplayMember = "EE_NOMBRE";
-            cboEstado.ValueMember = "EE_CODIGO";
+            dvEstadoEmpleadoBuscar = new DataView(dsEmpleado.ESTADO_EMPLEADOS);
+            cboBuscarEstado.DataSource = dvEstadoEmpleadoBuscar;
+            cboBuscarEstado.DisplayMember = "EE_NOMBRE";
+            cboBuscarEstado.ValueMember = "EE_CODIGO";
+
+            //Para que el combo no quede selecionado cuando arranca y que sea una lista
+            cboBuscarEstado.SelectedIndex = -1;
+            cboBuscarEstado.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            //Combo de Datos
+            dvEstadoEmpleado = new DataView(dsEmpleado.ESTADO_EMPLEADOS);
+            cboEstado.DataSource = dvEstadoEmpleado ;
+            cboEstado.DisplayMember = "MCA_NOMBRE";
+            cboEstado.ValueMember = "MCA_CODIGO";
+
             //Para que el combo no quede selecionado cuando arranca y que sea una lista
             cboEstado.SelectedIndex = -1;
             cboEstado.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            //Combo de Datos
-            //dvComboDesignacion = new DataView(dsDesignacion.MARCAS);
-            //cbMarcaDatos.DataSource = dvComboDesignacion;
-            //cbMarcaDatos.DisplayMember = "MCA_NOMBRE";
-            //cbMarcaDatos.ValueMember = "MCA_CODIGO";
-            ////Para que el combo no quede selecionado cuando arranca y que sea una lista
-            //cbMarcaDatos.SelectedIndex = 0;
-            //cbMarcaDatos.DropDownStyle = ComboBoxStyle.DropDownList;
-
             //Seteo el maxlenght de los textbox para que no de error en la bd
-            //txtDescripcion.MaxLength = 250;
-            //txtNombre.MaxLength = 80;
+            txtApellido.MaxLength = 80;
+            txtNombre.MaxLength = 80;
+            txtLegajo.MaxLength = 20;
+            txtTelefono.MaxLength = 15;            
 
             //Seteamos el estado de la interfaz
-            //SetInterface(estadoUI.inicio);
+            SetInterface(estadoUI.inicio);
         }
 
         #region Servicios
@@ -106,10 +110,12 @@ namespace GyCAP.UI.RecursosFabricacion
                     if (dsEmpleado.EMPLEADOS.Rows.Count == 0)
                     {
                         hayDatos = false;
+                        txtNombreBuscar.Focus();
                     }
                     else
                     {
                         hayDatos = true;
+                        dgvLista.Focus();
                     }
 
                     btnModificar.Enabled = hayDatos;
@@ -121,9 +127,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
-                    txtNombre.ReadOnly = false;
-                    txtApellido.ReadOnly = false;
-
+                    setBotones(false);
                     txtNombre.Text = String.Empty;
                     txtApellido.Text = string.Empty;
                     //gbGuardarCancelar.Enabled = true;
@@ -138,8 +142,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     txtNombre.Focus();
                     break;
                 case estadoUI.consultar:
-                    txtNombre.ReadOnly = true;
-                    txtApellido.ReadOnly = true;
+                    setBotones(true);
                     //gbGuardarCancelar.Enabled = false;
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
@@ -148,8 +151,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnVolver.Focus();
                     break;
                 case estadoUI.modificar:
-                    txtNombre.ReadOnly = false;
-                    txtApellido.ReadOnly = false;
+                    setBotones(false);
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -164,6 +166,17 @@ namespace GyCAP.UI.RecursosFabricacion
                 default:
                     break;
             }
+        }
+
+        private void setBotones(bool pValue) 
+        {
+            txtApellido.ReadOnly = pValue;
+            txtNombre.ReadOnly = pValue;
+            txtFechaNac.ReadOnly = pValue;
+            txtLegajo.ReadOnly = pValue;
+            txtTelefono.ReadOnly = pValue;
+            cboEstado.Enabled = ! pValue;
+            cboSector.Enabled = ! pValue;
         }
 
         //Método para evitar la creación de más de una pantalla
@@ -188,6 +201,26 @@ namespace GyCAP.UI.RecursosFabricacion
         }
 
         #endregion
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.nuevo);
+        }
+
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.consultar);
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.modificar);
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Dispose(true);
+        }
 
 
 

@@ -82,10 +82,12 @@ namespace GyCAP.UI.EstructuraProducto
                     if (dsTerminacion.TERMINACIONES.Rows.Count == 0)
                     {
                         hayDatos = false;
+                        txtNombreBuscar.Focus();
                     }
                     else
                     {
                         hayDatos = true;
+                        dgvLista.Focus();
                     }
 
                     btnModificar.Enabled = hayDatos;
