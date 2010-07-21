@@ -581,7 +581,7 @@ namespace GyCAP.UI.EstructuraProducto
             dvUnidadMedida = new DataView(dsUnidadMedida.UNIDADES_MEDIDA);
 
             //Obtenemos las terminaciones
-            //Codigo chancho por no pensar bien antes como trabajar
+            
             try
             {
                 BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsTerminacion);
@@ -589,7 +589,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             dvTerminaciones = new DataView(dsTerminacion.TERMINACIONES);
