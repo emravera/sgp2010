@@ -28,6 +28,12 @@ namespace Principal
             GyCAP.UI.EstructuraProducto.frmEstructuraProducto.Instancia.MdiParent = this;
             GyCAP.UI.EstructuraProducto.frmEstructuraProducto.Instancia.Show();
         }
+
+        private void menuItemSO_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Soporte.frmSoporte.Instancia.MdiParent = this;
+            GyCAP.UI.Soporte.frmSoporte.Instancia.Show();
+        }
         
         #endregion
 
@@ -167,6 +173,8 @@ namespace Principal
             GyCAP.UI.RecursosFabricacion.frmEmpleado.Instancia.MdiParent = this;
             GyCAP.UI.RecursosFabricacion.frmEmpleado.Instancia.Show();
         }
+
+       
 
         
 

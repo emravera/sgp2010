@@ -32,6 +32,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.menuModulos = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemQA = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCP = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemEP = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemGP = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemGS = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemMA = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemPP = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemRF = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSO = new System.Windows.Forms.ToolStripMenuItem();
             this.menuEdicion = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,6 +66,7 @@
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -71,16 +81,6 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.menuItemQA = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCP = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemEP = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemGP = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemGS = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemMA = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemPP = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemRF = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemSO = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -89,7 +89,7 @@
             // menuStrip
             // 
             this.menuStrip.AllowMerge = false;
-            this.menuStrip.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuStrip.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuModulos,
             this.menuEdicion,
@@ -101,7 +101,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.MdiWindowListItem = this.menuVentana;
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(792, 25);
+            this.menuStrip.Size = new System.Drawing.Size(792, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -120,8 +120,82 @@
             this.menuModulos.ImageTransparentColor = System.Drawing.SystemColors.ActiveBorder;
             this.menuModulos.Name = "menuModulos";
             this.menuModulos.ShortcutKeyDisplayString = "Ctrl + M";
-            this.menuModulos.Size = new System.Drawing.Size(68, 21);
+            this.menuModulos.Size = new System.Drawing.Size(63, 20);
             this.menuModulos.Text = "&Módulos";
+            // 
+            // menuItemQA
+            // 
+            this.menuItemQA.Name = "menuItemQA";
+            this.menuItemQA.ShortcutKeyDisplayString = "Ctrl + D";
+            this.menuItemQA.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.menuItemQA.Size = new System.Drawing.Size(307, 22);
+            this.menuItemQA.Text = "Calida&d";
+            // 
+            // menuItemCP
+            // 
+            this.menuItemCP.Name = "menuItemCP";
+            this.menuItemCP.ShortcutKeyDisplayString = "Ctrl + T";
+            this.menuItemCP.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
+            this.menuItemCP.Size = new System.Drawing.Size(307, 22);
+            this.menuItemCP.Text = "Control de &Trabajos en Proceso";
+            // 
+            // menuItemEP
+            // 
+            this.menuItemEP.Name = "menuItemEP";
+            this.menuItemEP.ShortcutKeyDisplayString = "Ctrl + E";
+            this.menuItemEP.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.menuItemEP.Size = new System.Drawing.Size(307, 22);
+            this.menuItemEP.Text = "&Estructura del Producto";
+            this.menuItemEP.Click += new System.EventHandler(this.menuItemEP_Click);
+            // 
+            // menuItemGP
+            // 
+            this.menuItemGP.Name = "menuItemGP";
+            this.menuItemGP.ShortcutKeyDisplayString = "Ctrl + P";
+            this.menuItemGP.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.menuItemGP.Size = new System.Drawing.Size(307, 22);
+            this.menuItemGP.Text = "&Pedidos";
+            // 
+            // menuItemGS
+            // 
+            this.menuItemGS.Name = "menuItemGS";
+            this.menuItemGS.ShortcutKeyDisplayString = "Ctrl + K";
+            this.menuItemGS.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.K)));
+            this.menuItemGS.Size = new System.Drawing.Size(307, 22);
+            this.menuItemGS.Text = "Stoc&k";
+            // 
+            // menuItemMA
+            // 
+            this.menuItemMA.Name = "menuItemMA";
+            this.menuItemMA.ShortcutKeyDisplayString = "Ctrl + A";
+            this.menuItemMA.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.menuItemMA.Size = new System.Drawing.Size(307, 22);
+            this.menuItemMA.Text = "M&antenimiento";
+            // 
+            // menuItemPP
+            // 
+            this.menuItemPP.Name = "menuItemPP";
+            this.menuItemPP.ShortcutKeyDisplayString = "Ctrl + L";
+            this.menuItemPP.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
+            this.menuItemPP.Size = new System.Drawing.Size(307, 22);
+            this.menuItemPP.Text = "P&lanificación de la Producción";
+            // 
+            // menuItemRF
+            // 
+            this.menuItemRF.Name = "menuItemRF";
+            this.menuItemRF.ShortcutKeyDisplayString = "Ctrl + R";
+            this.menuItemRF.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.menuItemRF.Size = new System.Drawing.Size(307, 22);
+            this.menuItemRF.Text = "&Recursos de Fabricación";
+            // 
+            // menuItemSO
+            // 
+            this.menuItemSO.Name = "menuItemSO";
+            this.menuItemSO.ShortcutKeyDisplayString = "Ctrl + O";
+            this.menuItemSO.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.menuItemSO.Size = new System.Drawing.Size(307, 22);
+            this.menuItemSO.Text = "S&oporte";
+            this.menuItemSO.Click += new System.EventHandler(this.menuItemSO_Click);
             // 
             // menuEdicion
             // 
@@ -135,7 +209,7 @@
             this.toolStripSeparator7,
             this.selectAllToolStripMenuItem});
             this.menuEdicion.Name = "menuEdicion";
-            this.menuEdicion.Size = new System.Drawing.Size(60, 21);
+            this.menuEdicion.Size = new System.Drawing.Size(57, 20);
             this.menuEdicion.Text = "&Edición";
             // 
             // undoToolStripMenuItem
@@ -209,7 +283,7 @@
             this.toolBarToolStripMenuItem,
             this.statusBarToolStripMenuItem});
             this.menuVer.Name = "menuVer";
-            this.menuVer.Size = new System.Drawing.Size(40, 21);
+            this.menuVer.Size = new System.Drawing.Size(38, 20);
             this.menuVer.Text = "&Ver";
             // 
             // toolBarToolStripMenuItem
@@ -218,7 +292,7 @@
             this.toolBarToolStripMenuItem.CheckOnClick = true;
             this.toolBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolBarToolStripMenuItem.Name = "toolBarToolStripMenuItem";
-            this.toolBarToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.toolBarToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.toolBarToolStripMenuItem.Text = "Barra de &Herramientas";
             this.toolBarToolStripMenuItem.Click += new System.EventHandler(this.ToolBarToolStripMenuItem_Click);
             // 
@@ -228,7 +302,7 @@
             this.statusBarToolStripMenuItem.CheckOnClick = true;
             this.statusBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.statusBarToolStripMenuItem.Name = "statusBarToolStripMenuItem";
-            this.statusBarToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.statusBarToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.statusBarToolStripMenuItem.Text = "Barra de &Estado";
             this.statusBarToolStripMenuItem.Click += new System.EventHandler(this.StatusBarToolStripMenuItem_Click);
             // 
@@ -237,13 +311,13 @@
             this.menuSistema.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem});
             this.menuSistema.Name = "menuSistema";
-            this.menuSistema.Size = new System.Drawing.Size(64, 21);
+            this.menuSistema.Size = new System.Drawing.Size(61, 20);
             this.menuSistema.Text = "&Sistema";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.optionsToolStripMenuItem.Text = "&Options";
             // 
             // menuVentana
@@ -255,7 +329,7 @@
             this.closeAllToolStripMenuItem});
             this.menuVentana.Name = "menuVentana";
             this.menuVentana.ShortcutKeyDisplayString = "Ctrl + V";
-            this.menuVentana.Size = new System.Drawing.Size(68, 21);
+            this.menuVentana.Size = new System.Drawing.Size(65, 20);
             this.menuVentana.Text = "&Ventana";
             // 
             // cascadeToolStripMenuItem
@@ -295,14 +369,14 @@
             this.toolStripSeparator8,
             this.aboutToolStripMenuItem});
             this.menuAyuda.Name = "menuAyuda";
-            this.menuAyuda.Size = new System.Drawing.Size(55, 21);
+            this.menuAyuda.Size = new System.Drawing.Size(53, 20);
             this.menuAyuda.Text = "&Ayuda";
             // 
             // contentsToolStripMenuItem
             // 
             this.contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
             this.contentsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
-            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.contentsToolStripMenuItem.Text = "&Contents";
             // 
             // indexToolStripMenuItem
@@ -310,7 +384,7 @@
             this.indexToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("indexToolStripMenuItem.Image")));
             this.indexToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.indexToolStripMenuItem.Name = "indexToolStripMenuItem";
-            this.indexToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.indexToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.indexToolStripMenuItem.Text = "&Index";
             // 
             // searchToolStripMenuItem
@@ -318,19 +392,27 @@
             this.searchToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("searchToolStripMenuItem.Image")));
             this.searchToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-            this.searchToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.searchToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.searchToolStripMenuItem.Text = "&Search";
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(178, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(179, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.aboutToolStripMenuItem.Text = "&About ... ...";
+            // 
+            // menuSalir
+            // 
+            this.menuSalir.Name = "menuSalir";
+            this.menuSalir.ShortcutKeyDisplayString = "Ctrl + R";
+            this.menuSalir.Size = new System.Drawing.Size(40, 20);
+            this.menuSalir.Text = "Sali&r";
+            this.menuSalir.Click += new System.EventHandler(this.menuSalir_Click);
             // 
             // toolStrip
             // 
@@ -345,7 +427,7 @@
             this.toolStripButton8,
             this.t9,
             this.tLEmpleado});
-            this.toolStrip.Location = new System.Drawing.Point(0, 25);
+            this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(792, 36);
             this.toolStrip.TabIndex = 1;
@@ -466,87 +548,6 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(38, 17);
             this.toolStripStatusLabel.Text = "Status";
             // 
-            // menuItemQA
-            // 
-            this.menuItemQA.Name = "menuItemQA";
-            this.menuItemQA.ShortcutKeyDisplayString = "Ctrl + D";
-            this.menuItemQA.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.menuItemQA.Size = new System.Drawing.Size(304, 22);
-            this.menuItemQA.Text = "Calida&d";
-            // 
-            // menuItemCP
-            // 
-            this.menuItemCP.Name = "menuItemCP";
-            this.menuItemCP.ShortcutKeyDisplayString = "Ctrl + T";
-            this.menuItemCP.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            this.menuItemCP.Size = new System.Drawing.Size(304, 22);
-            this.menuItemCP.Text = "Control de &Trabajos en Proceso";
-            // 
-            // menuItemEP
-            // 
-            this.menuItemEP.Name = "menuItemEP";
-            this.menuItemEP.ShortcutKeyDisplayString = "Ctrl + E";
-            this.menuItemEP.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.menuItemEP.Size = new System.Drawing.Size(304, 22);
-            this.menuItemEP.Text = "&Estructura del Producto";
-            this.menuItemEP.Click += new System.EventHandler(this.menuItemEP_Click);
-            // 
-            // menuItemGP
-            // 
-            this.menuItemGP.Name = "menuItemGP";
-            this.menuItemGP.ShortcutKeyDisplayString = "Ctrl + P";
-            this.menuItemGP.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.menuItemGP.Size = new System.Drawing.Size(304, 22);
-            this.menuItemGP.Text = "&Pedidos";
-            // 
-            // menuItemGS
-            // 
-            this.menuItemGS.Name = "menuItemGS";
-            this.menuItemGS.ShortcutKeyDisplayString = "Ctrl + K";
-            this.menuItemGS.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.K)));
-            this.menuItemGS.Size = new System.Drawing.Size(304, 22);
-            this.menuItemGS.Text = "Stoc&k";
-            // 
-            // menuItemMA
-            // 
-            this.menuItemMA.Name = "menuItemMA";
-            this.menuItemMA.ShortcutKeyDisplayString = "Ctrl + A";
-            this.menuItemMA.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.menuItemMA.Size = new System.Drawing.Size(304, 22);
-            this.menuItemMA.Text = "M&antenimiento";
-            // 
-            // menuItemPP
-            // 
-            this.menuItemPP.Name = "menuItemPP";
-            this.menuItemPP.ShortcutKeyDisplayString = "Ctrl + L";
-            this.menuItemPP.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.menuItemPP.Size = new System.Drawing.Size(304, 22);
-            this.menuItemPP.Text = "P&lanificación de la Producción";
-            // 
-            // menuItemRF
-            // 
-            this.menuItemRF.Name = "menuItemRF";
-            this.menuItemRF.ShortcutKeyDisplayString = "Ctrl + R";
-            this.menuItemRF.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.menuItemRF.Size = new System.Drawing.Size(304, 22);
-            this.menuItemRF.Text = "&Recursos de Fabricación";
-            // 
-            // menuItemSO
-            // 
-            this.menuItemSO.Name = "menuItemSO";
-            this.menuItemSO.ShortcutKeyDisplayString = "Ctrl + O";
-            this.menuItemSO.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.menuItemSO.Size = new System.Drawing.Size(304, 22);
-            this.menuItemSO.Text = "S&oporte";
-            // 
-            // menuSalir
-            // 
-            this.menuSalir.Name = "menuSalir";
-            this.menuSalir.ShortcutKeyDisplayString = "Ctrl + R";
-            this.menuSalir.Size = new System.Drawing.Size(44, 21);
-            this.menuSalir.Text = "Sali&r";
-            this.menuSalir.Click += new System.EventHandler(this.menuSalir_Click);
-            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -555,6 +556,7 @@
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "Principal";

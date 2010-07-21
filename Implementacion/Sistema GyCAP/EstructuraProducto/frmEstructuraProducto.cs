@@ -59,6 +59,13 @@ namespace GyCAP.UI.EstructuraProducto
             this.WindowState = FormWindowState.Maximized;
         }
 
+        private Point PosicionarFormulario()
+        {
+            int posicion = areaTrabajo.Controls.Count;
+            Point location = new Point(posicion*15, posicion*15);
+            return location;
+        }
+
         #region Menú Lateral
 
         private void btnMenu_Click(object sender, EventArgs e)
@@ -116,6 +123,9 @@ namespace GyCAP.UI.EstructuraProducto
         #endregion
 
         #region Cocina
+
+        //frmCocina.Instancia.Location = PosicionarFormulario();
+
         #endregion
 
         #region Color
@@ -124,6 +134,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             frmColor.Instancia.TopLevel = false;
             frmColor.Instancia.Parent = areaTrabajo;
+            frmColor.Instancia.Location = PosicionarFormulario();
             frmColor.Instancia.Show();
         }
 
@@ -135,6 +146,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             frmConjunto.Instancia.TopLevel = false;
             frmConjunto.Instancia.Parent = areaTrabajo;
+            frmConjunto.Instancia.Location = PosicionarFormulario();
             frmConjunto.Instancia.SetEstadoInicial(frmConjunto.estadoInicialNuevo);
             frmConjunto.Instancia.Show();
         }
@@ -143,6 +155,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             frmConjunto.Instancia.TopLevel = false;
             frmConjunto.Instancia.Parent = areaTrabajo;
+            frmConjunto.Instancia.Location = PosicionarFormulario();
             frmConjunto.Instancia.SetEstadoInicial(frmConjunto.estadoInicialConsultar);
             frmConjunto.Instancia.Show();
         }
@@ -160,6 +173,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             frmDesignacion.Instancia.TopLevel = false;
             frmDesignacion.Instancia.Parent = areaTrabajo;
+            frmDesignacion.Instancia.Location = PosicionarFormulario();
             frmDesignacion.Instancia.SetEstadoInicial(frmDesignacion.estadoInicialNuevo);
             frmDesignacion.Instancia.Show();
         }
@@ -168,6 +182,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             frmDesignacion.Instancia.TopLevel = false;
             frmDesignacion.Instancia.Parent = areaTrabajo;
+            frmDesignacion.Instancia.Location = PosicionarFormulario();
             frmDesignacion.Instancia.SetEstadoInicial(frmDesignacion.estadoInicialConsultar);
             frmDesignacion.Instancia.Show();
         }
@@ -175,6 +190,9 @@ namespace GyCAP.UI.EstructuraProducto
         #endregion
 
         #region Estructura Producto
+
+        //frmEstructuraProducto.Instancia.Location = PosicionarFormulario();
+
         #endregion
 
         #region Materia Prima Principal
@@ -183,6 +201,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             frmMateriaPrimaPrincipal.Instancia.TopLevel = false;
             frmMateriaPrimaPrincipal.Instancia.Parent = areaTrabajo;
+            frmMateriaPrimaPrincipal.Instancia.Location = PosicionarFormulario();
             frmMateriaPrimaPrincipal.Instancia.Show();
         }
 
@@ -194,6 +213,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             frmModeloCocina.Instancia.TopLevel = false;
             frmModeloCocina.Instancia.Parent = areaTrabajo;
+            frmModeloCocina.Instancia.Location = PosicionarFormulario();
             frmModeloCocina.Instancia.SetEstadoInicial(frmModeloCocina.estadoInicialNuevo);
             frmModeloCocina.Instancia.Show();
         }
@@ -202,6 +222,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             frmModeloCocina.Instancia.TopLevel = false;
             frmModeloCocina.Instancia.Parent = areaTrabajo;
+            frmModeloCocina.Instancia.Location = PosicionarFormulario();
             frmModeloCocina.Instancia.SetEstadoInicial(frmModeloCocina.estadoInicialConsultar);
             frmModeloCocina.Instancia.Show();
         }
@@ -214,6 +235,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             frmPieza.Instancia.TopLevel = false;
             frmPieza.Instancia.Parent = areaTrabajo;
+            frmPieza.Instancia.Location = PosicionarFormulario();
             frmPieza.Instancia.SetEstadoInicial(frmPieza.estadoInicialNuevo);
             frmPieza.Instancia.Show();
         }
@@ -222,8 +244,14 @@ namespace GyCAP.UI.EstructuraProducto
         {
             frmPieza.Instancia.TopLevel = false;
             frmPieza.Instancia.Parent = areaTrabajo;
+            frmPieza.Instancia.Location = PosicionarFormulario();
             frmPieza.Instancia.SetEstadoInicial(frmPieza.estadoInicialConsultar);
             frmPieza.Instancia.Show();
+        }
+
+        private void btnListadoPieza_Click(object sender, EventArgs e)
+        {
+            //frmPieza.Instancia.Location = PosicionarFormulario();
         }
 
         #endregion
@@ -234,6 +262,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             frmSubconjunto.Instancia.TopLevel = false;
             frmSubconjunto.Instancia.Parent = areaTrabajo;
+            frmSubconjunto.Instancia.Location = PosicionarFormulario();
             frmSubconjunto.Instancia.SetEstadoInicial(frmSubconjunto.estadoInicialNuevo);
             frmSubconjunto.Instancia.Show();
         }
@@ -242,13 +271,14 @@ namespace GyCAP.UI.EstructuraProducto
         {
             frmSubconjunto.Instancia.TopLevel = false;
             frmSubconjunto.Instancia.Parent = areaTrabajo;
+            frmSubconjunto.Instancia.Location = PosicionarFormulario();
             frmSubconjunto.Instancia.SetEstadoInicial(frmSubconjunto.estadoInicialConsultar);
             frmSubconjunto.Instancia.Show();
         }
 
         private void btnListadoSubconjunto_Click(object sender, EventArgs e)
         {
-            
+            //frmSubconjunto.Instancia.Location = PosicionarFormulario();
         }
 
         #endregion
@@ -259,6 +289,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             frmTerminacion.Instancia.TopLevel = false;
             frmTerminacion.Instancia.Parent = areaTrabajo;
+            frmTerminacion.Instancia.Location = PosicionarFormulario();
             frmTerminacion.Instancia.SetEstadoInicial(frmTerminacion.estadoInicialNuevo);
             frmTerminacion.Instancia.Show();
         }
@@ -267,6 +298,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             frmTerminacion.Instancia.TopLevel = false;
             frmTerminacion.Instancia.Parent = areaTrabajo;
+            frmTerminacion.Instancia.Location = PosicionarFormulario();
             frmTerminacion.Instancia.SetEstadoInicial(frmTerminacion.estadoInicialConsultar);
             frmTerminacion.Instancia.Show();
         }
@@ -279,6 +311,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             frmUnidadMedida.Instancia.TopLevel = false;
             frmUnidadMedida.Instancia.Parent = areaTrabajo;
+            frmUnidadMedida.Instancia.Location = PosicionarFormulario();
             frmUnidadMedida.Instancia.SetEstadoInicial(frmUnidadMedida.estadoInicialNuevo);
             frmUnidadMedida.Instancia.Show();
         }
@@ -287,6 +320,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             frmUnidadMedida.Instancia.TopLevel = false;
             frmUnidadMedida.Instancia.Parent = areaTrabajo;
+            frmUnidadMedida.Instancia.Location = PosicionarFormulario();
             frmUnidadMedida.Instancia.SetEstadoInicial(frmUnidadMedida.estadoInicialConsultar);
             frmUnidadMedida.Instancia.Show();
         }
