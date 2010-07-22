@@ -127,7 +127,7 @@ namespace GyCAP.UI.EstructuraProducto
                 {
                     try
                     {
-                        //Creamos el objeto
+                        //obtenemos el código
                         int codigo = Convert.ToInt32(dvModeloCocina[dgvLista.SelectedRows[0].Index]["mod_codigo"]);
                         //Lo eliminamos de la DB
                         BLL.ModeloCocinaBLL.Eliminar(codigo);

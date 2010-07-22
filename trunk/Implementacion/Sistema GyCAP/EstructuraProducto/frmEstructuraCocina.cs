@@ -12,16 +12,25 @@ namespace GyCAP.UI.EstructuraProducto
     public partial class frmEstructuraCocina : Form
     {
         private static frmEstructuraCocina _frmEstructuraCocina = null;
+        private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
+        private Data.dsTerminacion dsTerminacion = new GyCAP.Data.dsTerminacion();
+        private DataView dvCocinaBuscar, dvCocina, dvResponsableBuscar, dvResponsable, dvPlanoBuscar, dvPlano;
+        private DataView dvEstructuras, dvPartes, dvCD, dvCE, dvSCD, dvSCE, dvPD, dvPE, dvMPD, dvMPE;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
+        private int slideActual = 0; //0-Datos, 1-Conjuntos, 2-Subconjuntos, 3-Piezas, 4-MateriaPrima, 5-Árbol
 
         #region Inicio
 
         public frmEstructuraCocina()
         {
             InitializeComponent();
+
+            SetGrillasCombosVistas();
+            SetSlide();
+            SetInterface(estadoUI.inicio);
         }
 
         public static frmEstructuraCocina Instancia
@@ -50,15 +59,208 @@ namespace GyCAP.UI.EstructuraProducto
             if (estado == estadoInicialConsultar) { SetInterface(estadoUI.inicio); }
         }
 
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.nuevo);
+        }
+
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.consultar);
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.modificar);
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dgvEstructuras.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Preguntamos si está seguro
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar la Estructura seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (respuesta == DialogResult.Yes)
+                {
+                    try
+                    {
+                        //obtenemos el código
+                        int codigo = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]);
+                        //Lo eliminamos de la DB
+                        BLL.EstructuraBLL.Eliminar(codigo);
+                        //Lo eliminamos del dataset
+                        dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigo).Delete();
+                        dsEstructura.ESTRUCTURAS.AcceptChanges();
+                    }
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Modelo de Cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }            
+        }
+        
         private void btnSalir_Click(object sender, EventArgs e)
         {
+            this.Dispose(true);
+        }
 
+        #endregion Inicio
+
+        #region Buscar
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dsEstructura.Clear();
+                BLL.EstructuraBLL.ObtenerEstructuras(txtNombreBuscar.Text, cbPlanoBuscar.SelectedValue, dtpFechaAltaBuscar.Value, cbCocinaBuscar.SelectedValue, cbResponsableBuscar.SelectedValue, cbActivoBuscar.SelectedItem, dsEstructura);
+                //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
+                //por una consulta a la BD
+                dvEstructuras.Table = dsEstructura.ESTRUCTURAS;
+                if (dsEstructura.ESTRUCTURAS.Rows.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron Estructuras con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                SetInterface(estadoUI.inicio);
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message, "Error: Estructuras - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SetInterface(estadoUI.inicio);
+            }
         }
 
         #endregion
 
+        #region Datos
 
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            tcEstructuraCocina.SelectedTab = tpBuscar;
+        }
 
+        #endregion
+
+        #region Conjuntos
+        #endregion
+
+        #region Subconjuntos
+        #endregion
+
+        #region Piezas
+        #endregion
+
+        #region Materia Prima
+        #endregion
+
+        #region Árbol
+        #endregion
+
+        #region SlideControl
+
+        private void btnDatos_Click(object sender, EventArgs e)
+        {
+            if (slideActual != 0)
+            {
+                slideControl.BackwardTo("slideDatos");
+                SetTextBotones("Datos ^","Conjuntos >","Subconjuntos >","Piezas >","Materia Prima >");
+                slideActual = 0;
+            }
+        }        
+        
+        private void btnConjuntos_Click(object sender, EventArgs e)
+        {
+            if (slideActual != 1)
+            {
+                if (slideActual > 1) { slideControl.BackwardTo("slideConjuntos"); }
+                else { slideControl.ForwardTo("slideConjuntos"); }
+                SetTextBotones("< Datos", "Conjuntos ^", "Subconjuntos >", "Piezas >", "Materia Prima >");
+                slideActual = 1;
+            }
+        }
+
+        private void btnSubconjuntos_Click(object sender, EventArgs e)
+        {
+            if (slideActual != 2)
+            {
+                if (slideActual > 2) { slideControl.BackwardTo("slideSubconjuntos"); }
+                else { slideControl.ForwardTo("slideSubconjuntos"); }
+                SetTextBotones("< Datos", "< Conjuntos", "Subconjuntos ^", "Piezas >", "Materia Prima >");
+                slideActual = 2;
+            }
+        }
+
+        private void btnPiezas_Click(object sender, EventArgs e)
+        {
+            if (slideActual != 3)
+            {
+                if (slideActual > 3) { slideControl.BackwardTo("slidePiezas"); }
+                else { slideControl.ForwardTo("slidePiezas"); }
+                SetTextBotones("< Datos", "< Conjuntos", "< Subconjuntos", "Piezas ^", "Materia Prima >");
+                slideActual = 3;
+            }
+        }
+
+        private void btnMateriaPrima_Click(object sender, EventArgs e)
+        {
+            if (slideActual != 4)
+            {
+                if (slideActual > 4) { slideControl.BackwardTo("slideMateriaPrima"); }
+                else { slideControl.ForwardTo("slideMateriaPrima"); }
+                SetTextBotones("< Datos", "< Conjuntos", "< Subconjuntos", "< Piezas", "Materia Prima ^");
+                slideActual = 4;
+            }
+        }
+
+        private void SetTextBotones(string datos, string conjuntos, string subconjuntos, string piezas, string materiaPrima)
+        {
+            btnDatos.Text = datos;
+            btnConjuntos.Text = conjuntos;
+            btnSubconjuntos.Text = subconjuntos;
+            btnPiezas.Text = piezas;
+            btnMateriaPrima.Text = materiaPrima;
+        }
+
+        private void SetSlide()
+        {
+            gbDatos.Parent = slideDatos;
+            gbPartes.Parent = slideDatos;
+            gbVer.Parent = slideDatos;
+            gbCD.Parent = slideConjuntos;
+            gbAC.Parent = slideConjuntos;
+            gbCE.Parent = slideConjuntos;
+            gbOC.Parent = slideConjuntos;
+            gbSCD.Parent = slideSubconjuntos;
+            gbASC.Parent = slideSubconjuntos;
+            gbSCE.Parent = slideSubconjuntos;
+            gbOSC.Parent = slideSubconjuntos;
+            gbPD.Parent = slidePiezas;
+            gbAP.Parent = slidePiezas;
+            gbPE.Parent = slidePiezas;
+            gbOP.Parent = slidePiezas;
+            gbMPD.Parent = slideMateriaPrima;
+            gbAMP.Parent = slideMateriaPrima;
+            gbMPE.Parent = slideMateriaPrima;
+            gbOMP.Parent = slideMateriaPrima;
+            slideControl.AddSlide(slideDatos);
+            slideControl.AddSlide(slideConjuntos);
+            slideControl.AddSlide(slideSubconjuntos);
+            slideControl.AddSlide(slidePiezas);
+            slideControl.AddSlide(slideMateriaPrima);
+            slideControl.AddSlide(slideArbol);
+            slideControl.Selected = slideDatos;
+        }
+
+        #endregion SlideControl
 
         #region Servicios
 
@@ -68,9 +270,9 @@ namespace GyCAP.UI.EstructuraProducto
             switch (estado)
             {
                 case estadoUI.inicio:
-                    /*bool hayDatos;
+                    bool hayDatos;
 
-                    if (dsModeloCocina.MODELOS_COCINAS.Rows.Count == 0)
+                    if (dsEstructura.ESTRUCTURAS.Rows.Count == 0)
                     {
                         hayDatos = false;
                     }
@@ -84,46 +286,110 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = hayDatos;
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
-                    tcModeloCocina.SelectedTab = tpBuscar;*/
+                    tcEstructuraCocina.SelectedTab = tpBuscar;
                     break;
                 case estadoUI.nuevo:
-                    /* txtNombre.ReadOnly = false;
+                    txtNombre.ReadOnly = false;
+                    txtNombre.Clear();
+                    cbPlano.Enabled = true;
+                    cbPlano.SelectedIndex = -1;
+                    chkActivo.Enabled = true;
+                    chkActivo.Checked = false;
+                    dtpFechaAlta.Enabled = true;
+                    dtpFechaAlta.Value = DateTime.Today.Date;
+                    cbCocina.Enabled = true;
+                    cbCocina.SelectedIndex = -1;
+                    cbResponsable.Enabled = true;
+                    cbResponsable.SelectedIndex = -1;
+                    dtpFechaModificacion.Enabled = true;
                     txtDescripcion.ReadOnly = false;
-                    txtNombre.Text = String.Empty;
-                    txtDescripcion.Text = String.Empty;
+                    txtDescripcion.Clear();
+                    //LIMPIAR GRILLAS PARTES-CE-SCE-PE-MPE
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    gbAC.Enabled = true;
+                    gbASC.Enabled = true;
+                    gbAP.Enabled = true;
+                    gbAMP.Enabled = true;
+                    gbOC.Enabled = true;
+                    gbOSC.Enabled = true;
+                    gbOP.Enabled = true;
+                    gbOMP.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
-                    tcModeloCocina.SelectedTab = tpDatos;*/
+                    tcEstructuraCocina.SelectedTab = tpDatos;
                     break;
                 case estadoUI.nuevoExterno:
-                    /* txtNombre.ReadOnly = false;
+                    txtNombre.ReadOnly = false;
+                    txtNombre.Clear();
+                    cbPlano.Enabled = true;
+                    cbPlano.SelectedIndex = -1;
+                    chkActivo.Enabled = true;
+                    chkActivo.Checked = false;
+                    dtpFechaAlta.Enabled = true;
+                    dtpFechaAlta.Value = DateTime.Today.Date;
+                    cbCocina.Enabled = true;
+                    cbCocina.SelectedIndex = -1;
+                    cbResponsable.Enabled = true;
+                    cbResponsable.SelectedIndex = -1;
+                    dtpFechaModificacion.Enabled = true;
                     txtDescripcion.ReadOnly = false;
-                    txtNombre.Text = String.Empty;
-                    txtDescripcion.Text = String.Empty;
+                    txtDescripcion.Clear();
+                    //LIMPIAR GRILLAS PARTES-CE-SCE-PE-MPE
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
                     btnNuevo.Enabled = false;
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    gbAC.Enabled = true;
+                    gbASC.Enabled = true;
+                    gbAP.Enabled = true;
+                    gbAMP.Enabled = true;
+                    gbOC.Enabled = true;
+                    gbOSC.Enabled = true;
+                    gbOP.Enabled = true;
+                    gbOMP.Enabled = true;
                     estadoInterface = estadoUI.nuevoExterno;
-                    tcModeloCocina.SelectedTab = tpDatos;*/
+                    tcEstructuraCocina.SelectedTab = tpDatos;
                     break;
                 case estadoUI.consultar:
-                    /* txtNombre.ReadOnly = true;
+                    txtNombre.ReadOnly = true;
+                    cbPlano.Enabled = false;
+                    chkActivo.Enabled = false;
+                    dtpFechaAlta.Enabled = false;
+                    cbCocina.Enabled = false;
+                    cbResponsable.Enabled = false;
+                    dtpFechaModificacion.Enabled = false;
                     txtDescripcion.ReadOnly = true;
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
+                    btnNuevo.Enabled = true;
+                    btnConsultar.Enabled = true;
+                    btnModificar.Enabled = true;
+                    btnEliminar.Enabled = true;
+                    gbAC.Enabled = false;
+                    gbASC.Enabled = false;
+                    gbAP.Enabled = false;
+                    gbAMP.Enabled = false;
+                    gbOC.Enabled = false;
+                    gbOSC.Enabled = false;
+                    gbOP.Enabled = false;
+                    gbOMP.Enabled = false;
                     estadoInterface = estadoUI.consultar;
-                    tcModeloCocina.SelectedTab = tpDatos;*/
+                    tcEstructuraCocina.SelectedTab = tpDatos;
                     break;
                 case estadoUI.modificar:
-                    /* txtNombre.ReadOnly = false;
+                    txtNombre.ReadOnly = false;
+                    cbPlano.Enabled = true;
+                    chkActivo.Enabled = true;
+                    dtpFechaAlta.Enabled = true;
+                    cbCocina.Enabled = true;
+                    cbResponsable.Enabled = true;
+                    dtpFechaModificacion.Enabled = true;
                     txtDescripcion.ReadOnly = false;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -131,19 +397,253 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    gbAC.Enabled = true;
+                    gbASC.Enabled = true;
+                    gbAP.Enabled = true;
+                    gbAMP.Enabled = true;
+                    gbOC.Enabled = true;
+                    gbOSC.Enabled = true;
+                    gbOP.Enabled = true;
+                    gbOMP.Enabled = true;
                     estadoInterface = estadoUI.modificar;
-                    tcModeloCocina.SelectedTab = tpDatos;*/
+                    tcEstructuraCocina.SelectedTab = tpDatos;
                     break;
                 default:
                     break;
             }
         }
 
-        #endregion
-
-        private void btnBuscar_Click(object sender, EventArgs e)
+        private void txtNombre_Enter(object sender, EventArgs e)
         {
-            tcEstructuraCocina.SelectedTab = tpDatos;
+            txtNombre.SelectAll();
         }
+
+        private void txtDescripcion_Enter(object sender, EventArgs e)
+        {
+            txtDescripcion.SelectAll();
+        }
+
+        private void txtNombreBuscar_Enter(object sender, EventArgs e)
+        {
+            txtNombreBuscar.SelectAll();
+        }
+
+        private void SetGrillasCombosVistas()
+        {
+            //Obtenemos las terminaciones
+            try
+            {
+                BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsTerminacion);
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+            #region Buscar
+            //Grilla Listado Estructuras
+            dgvEstructuras.Columns.Add("ESTR_NOMBRE", "Nombre");
+            dgvEstructuras.Columns.Add("COC_COCINA", "Cocina");
+            dgvEstructuras.Columns.Add("PNO_CODIGO", "Plano");
+            dgvEstructuras.Columns.Add("E_LEGAJO", "Responsable");
+            dgvEstructuras.Columns["E_LEGAJO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvEstructuras.Columns.Add("ESTR_ACTIVO", "Activo");
+            dgvEstructuras.Columns.Add("ESTR_FECHA_ALTA", "Fecha alta");
+            dgvEstructuras.Columns["ESTR_FECHA_ALTA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvEstructuras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgvEstructuras.Columns["ESTR_NOMBRE"].DataPropertyName = "ESTR_NOMBRE";
+            dgvEstructuras.Columns["COC_COCINA"].DataPropertyName = "COC_COCINA";
+            dgvEstructuras.Columns["PNO_CODIGO"].DataPropertyName = "PNO_CODIGO";
+            dgvEstructuras.Columns["E_LEGAJO"].DataPropertyName = "E_LEGAJO";
+            dgvEstructuras.Columns["ESTR_ACTIVO"].DataPropertyName = "ESTR_ACTIVO";
+            dgvEstructuras.Columns["ESTR_FECHA_ALTA"].DataPropertyName = "ESTR_FECHA_ALTA";
+
+            //Dataviews
+            /*dvCocinaBuscar = new DataView();
+            dvCocinaBuscar.Sort = "ASC";           
+            dvResponsableBuscar = new DataView();
+            dvResponsableBuscar.Sort = "";
+            dvEstructuras = new DataView(dsEstructura.ESTRUCTURAS);
+            dvEstructuras.Sort = "ESTR_NOMBRE ASC";
+            dvPlanoBuscar = new DataView();*/
+
+            //ComboBoxs
+            /*cbCocinaBuscar.DataSource = dvCocinaBuscar;
+            cbCocinaBuscar.DisplayMember = "";
+            cbCocinaBuscar.ValueMember = "COC_CODIGO";
+            cbCocinaBuscar.SelectedIndex = -1;
+            cbResponsableBuscar.DataSource = dvResponsableBuscar;
+            cbResponsableBuscar.DisplayMember = "E_APELLIDO" + ", " + "E_NOMBRE";
+            cbResponsableBuscar.ValueMember = "E_LEGAJO";
+            cbResponsableBuscar.SelectedIndex = -1;
+            cbPlanoBuscar.DataSource = dvPlanoBuscar;
+            cbPlanoBuscar.DisplayMember = "";
+            cbPlanoBuscar.ValueMember = "PNO_CODIGO";
+            cbPlanoBuscar.SelectedIndex = -1;*/
+            cbActivoBuscar.Items.Add("SI");
+            cbActivoBuscar.Items.Add("NO");
+            cbActivoBuscar.SelectedIndex = -1;
+
+            #endregion Buscar
+
+            #region Datos
+            //Grilla Listado Partes
+
+            //Dataviews
+            /*dvCocina = new DataView();
+            dvCocina.Sort = "ASC";
+            dvResponsable = new DataView();
+            dvResponsable.Sort = "ASC";
+            dvPlano = new DataView();
+            dvPartes = new DataView();
+            dvPartes.Sort = "ASC";*/
+
+            //ComboBoxs
+            /*cbCocina.DataSource = dvCocina;
+            cbCocina.DisplayMember = "";
+            cbCocina.ValueMember = "COC_CODIGO";
+            cbCocina.SelectedIndex = -1;
+            cbResponsable.DataSource = dvResponsable;
+            cbResponsable.DisplayMember = "E_APELLIDO" + ", " + "E_NOMBRE";
+            cbResponsable.ValueMember = "E_LEGAJO";
+            cbResponsable.SelectedIndex = -1;
+            cbPlano.DataSource = dvPlano;
+            cbPlano.DisplayMember = "";
+            cbPlano.ValueMember = "PNO_CODIGO";
+            cbPlano.SelectedIndex = -1;*/
+            #endregion Datos
+
+            #region Conjuntos
+            //Grilla Listado Conjuntos Disponibles
+            dgvCD.Columns.Add("CONJ_NOMBRE", "Nombre");
+            dgvCD.Columns.Add("TE_CODIGO", "Terminación");
+            dgvCD.Columns.Add("CONJ_DESCRIPCION", "Descripción");
+            dgvCD.Columns["CONJ_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvCD.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvCD.Columns["CONJ_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvCD.Columns["CONJ_DESCRIPCION"].Resizable = DataGridViewTriState.True;
+            dgvCD.Columns["CONJ_NOMBRE"].DataPropertyName = "CONJ_NOMBRE";
+            dgvCD.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
+            dgvCD.Columns["CONJ_DESCRIPCION"].DataPropertyName = "CONJ_DESCRIPCION";
+
+            //Grilla Listado Conjuntos en Estructura
+            dgvCE.Columns.Add("CONJ_CODIGO", "Nombre");
+            dgvCE.Columns.Add("TE_NOMBRE", "Terminación");
+            dgvCE.Columns.Add("CXE_CANTIDAD", "Cantidad");
+            dgvCE.Columns.Add("GRP_CODIGO", "Grupo");
+            dgvCE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgvCE.Columns["CONJ_CODIGO"].DataPropertyName = "CONJ_CODIGO";
+            dgvCE.Columns["TE_NOMBRE"].DataPropertyName = "CONJ_CODIGO";
+            dgvCE.Columns["CXE_CANTIDAD"].DataPropertyName = "CXE_CANTIDAD";
+            dgvCE.Columns["GRP_CODIGO"].DataPropertyName = "GRP_CODIGO";
+
+            //Dataviews
+            dvCD = new DataView(dsEstructura.CONJUNTOS);
+            dvCD.Sort = "CONJ_NOMBRE ASC";
+            dvCE = new DataView(dsEstructura.CONJUNTOSXESTRUCTURA);
+            #endregion Conjuntos
+
+            #region Subconjuntos
+            //Grilla listado subconjuntos disponibles
+            dgvSCD.Columns.Add("SCONJ_NOMBRE", "Nombre");
+            dgvSCD.Columns.Add("TE_CODIGO", "Terminación");
+            dgvSCD.Columns.Add("SCONJ_DESCRIPCION", "Descripción");
+            dgvSCD.Columns["SCONJ_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvSCD.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvSCD.Columns["SCONJ_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvSCD.Columns["SCONJ_DESCRIPCION"].Resizable = DataGridViewTriState.True;
+            dgvSCD.Columns["SCONJ_NOMBRE"].DataPropertyName = "SCONJ_NOMBRE";
+            dgvSCD.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
+            dgvSCD.Columns["SCONJ_DESCRIPCION"].DataPropertyName = "SCONJ_DESCRIPCION";
+
+            //Grilla listado de subconjuntos en estructura
+            dgvSCE.Columns.Add("SCONJ_CODIGO", "Nombre");
+            dgvSCE.Columns.Add("TE_NOMBRE", "Terminación");
+            dgvSCE.Columns.Add("SCXE_CANTIDAD", "Cantidad");
+            dgvSCE.Columns.Add("GRP_CODIGO", "Grupo");
+            dgvSCE.Columns["SCONJ_CODIGO"].DataPropertyName = "SCONJ_CODIGO";
+            dgvSCE.Columns["TE_NOMBRE"].DataPropertyName = "SCONJ_CODIGO";
+            dgvSCE.Columns["SCXE_CANTIDAD"].DataPropertyName = "SCXE_CANTIDAD";
+            dgvSCE.Columns["GRP_CODIGO"].DataPropertyName = "GRP_CODIGO";
+
+            //Dataviews
+            dvSCD = new DataView(dsEstructura.SUBCONJUNTOS);
+            dvSCD.Sort = "SCONJ_NOMBRE ASC";
+            dvSCE = new DataView(dsEstructura.SUBCONJUNTOSXESTRUCTURA);
+            #endregion Subconjuntos
+
+            #region Piezas
+            //Grilla listado de piezas disponibles
+            
+            dgvPD.Columns.Add("PZA_NOMBRE", "Nombre");
+            dgvPD.Columns.Add("TE_CODIGO", "Terminación");
+            dgvPD.Columns.Add("PZA_DESCRIPCION", "Descripción");
+            dgvPD.Columns["PZA_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPD.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPD.Columns["PZA_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvPD.Columns["PZA_DESCRIPCION"].Resizable = DataGridViewTriState.True;
+            dgvPD.Columns["PZA_NOMBRE"].DataPropertyName = "PZA_NOMBRE";
+            dgvPD.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
+            dgvPD.Columns["PZA_DESCRIPCION"].DataPropertyName = "PZA_DESCRIPCION";
+
+            //Grilla Listado piezas en Estructura
+            dgvPE.Columns.Add("PZA_CODIGO", "Nombre");
+            dgvPE.Columns.Add("TE_NOMBRE", "Terminación");
+            dgvPE.Columns.Add("PXE_CANTIDAD", "Cantidad");
+            dgvPE.Columns.Add("GRP_CODIGO", "Grupo");
+            dgvPE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgvPE.Columns["PZA_CODIGO"].DataPropertyName = "PZA_CODIGO";
+            dgvPE.Columns["TE_NOMBRE"].DataPropertyName = "PZA_CODIGO";
+            dgvPE.Columns["PXE_CANTIDAD"].DataPropertyName = "PXE_CANTIDAD";
+            dgvPE.Columns["GRP_CODIGO"].DataPropertyName = "GRP_CODIGO";
+
+            //Dataviews
+            dvPD = new DataView(dsEstructura.PIEZAS);
+            dvPD.Sort = "PZA_NOMBRE ASC";
+            dvPE = new DataView(dsEstructura.PIEZASXESTRUCTURA);
+            #endregion Piezas
+
+            #region Materia Prima
+            //Grilla listado materia primas disponibles
+            dgvMPD.Columns.Add("MP_NOMBRE", "Nombre");
+            dgvMPD.Columns.Add("UMED_CODIGO", "Unidad Medida");
+            dgvMPD.Columns.Add("MP_DESCRIPCION", "Descripción");
+            dgvMPD.Columns["MP_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvMPD.Columns["UMED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvMPD.Columns["MP_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvMPD.Columns["MP_DESCRIPCION"].Resizable = DataGridViewTriState.True;
+            dgvMPD.Columns["MP_NOMBRE"].DataPropertyName = "MP_NOMBRE";
+            dgvMPD.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
+            dgvMPD.Columns["MP_DESCRIPCION"].DataPropertyName = "MP_DESCRIPCION";
+
+            //Grilla listado materias primas en estructura
+            dgvMPE.Columns.Add("MP_CODIGO", "Nombre");
+            dgvMPE.Columns.Add("UMED_NOMBRE", "Unidad Medida");
+            dgvMPE.Columns.Add("MPXE_CANTIDAD", "Cantidad");
+            dgvMPE.Columns.Add("GRP_CODIGO", "Grupo");
+            dgvMPE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgvMPE.Columns["MP_CODIGO"].DataPropertyName = "MP_CODIGO";
+            dgvMPE.Columns["UMED_NOMBRE"].DataPropertyName = "MP_CODIGO";
+            dgvMPE.Columns["MPXE_CANTIDAD"].DataPropertyName = "MPXE_CANTIDAD";
+            dgvMPE.Columns["GRP_CODIGO"].DataPropertyName = "GRP_CODIGO";
+
+            //Dataviews
+            dvMPD = new DataView(dsEstructura.MATERIAS_PRIMAS);
+            dvMPD.Sort = "MP_NOMBRE ASC";
+            dvMPE = new DataView(dsEstructura.MATERIASPRIMASXESTRUCTURA);
+            #endregion
+
+            #region Árbol
+            #endregion Árbol
+        }
+
+        #endregion Servicios
+
+        
+
+        
+
+        
+        
     }
 }
