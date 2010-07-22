@@ -48,12 +48,12 @@ namespace GyCAP.UI.RecursosFabricacion
 
             //Setemaos las columnas
             dgvLista.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-            dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            //dgvLista.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["E_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["E_LEGAJO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["E_APELLIDO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["E_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["SEC_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["EE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             //Alineacion de los numeros y las fechas en la grilla
             dgvLista.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -66,6 +66,12 @@ namespace GyCAP.UI.RecursosFabricacion
             dvEmpleado.Sort = "E_APELLIDO, E_NOMBRE ASC";
             dgvLista.DataSource = dvEmpleado;
 
+            //Carga de la Lista
+            dvListaSectores = new DataView(dsEmpleado.SECTORES);
+            
+
+
+
             //CARGA DE COMBOS
             //Creamos el Dataview y se lo asignamos al combo
             dvEstadoEmpleadoBuscar = new DataView(dsEmpleado.ESTADO_EMPLEADOS);
@@ -77,15 +83,24 @@ namespace GyCAP.UI.RecursosFabricacion
             cboBuscarEstado.SelectedIndex = -1;
             cboBuscarEstado.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            cboBuscarPor.Items.Add("Legajo");
+            cboBuscarPor.Items.Add("Nombre");
+            cboBuscarPor.Items.Add("Apellido");
+            cboBuscarPor.SelectedIndex = 0;
+
             //Combo de Datos
             dvEstadoEmpleado = new DataView(dsEmpleado.ESTADO_EMPLEADOS);
-            cboEstado.DataSource = dvEstadoEmpleado ;
-            cboEstado.DisplayMember = "MCA_NOMBRE";
-            cboEstado.ValueMember = "MCA_CODIGO";
-
-            //Para que el combo no quede selecionado cuando arranca y que sea una lista
-            cboEstado.SelectedIndex = -1;
             cboEstado.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboEstado.DataSource = dvEstadoEmpleado ;
+            cboEstado.DisplayMember = "EE_NOMBRE";
+            cboEstado.ValueMember = "EE_CODIGO";
+            cboEstado.SelectedIndex = -1;
+
+            dvListaSectores = new DataView(dsEmpleado.SECTORES);
+            cboSector.DataSource = dvListaSectores;
+            cboSector.DisplayMember = "SEC_NOMBRE";
+            cboSector.ValueMember = "SEC_CODIGO";
+
 
             //Seteo el maxlenght de los textbox para que no de error en la bd
             txtApellido.MaxLength = 80;
@@ -139,7 +154,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
                     tcABM.SelectedTab = tpDatos;
-                    txtNombre.Focus();
+                    txtLegajo.Focus();
                     break;
                 case estadoUI.consultar:
                     setBotones(true);
@@ -220,6 +235,44 @@ namespace GyCAP.UI.RecursosFabricacion
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Dispose(true);
+        }
+
+        private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != String.Empty)
+            {
+                string nombre;
+                switch (dgvLista.Columns[e.ColumnIndex].Name)
+                {
+                    case "EE_CODIGO":
+                        nombre = dsEmpleado.ESTADO_EMPLEADOS.FindByEE_CODIGO(Convert.ToInt32(e.Value)).EE_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "SEC_CODIGO":
+                        nombre = dsEmpleado.SECTORES.FindBySEC_CODIGO(Convert.ToInt32(e.Value)).SEC_NOMBRE;
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
+
+        private void dgvLista_DoubleClick(object sender, EventArgs e)
+        {
+            btnConsultar.PerformClick();
+        }
+
+        private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            int codigoEmpleado = Convert.ToInt32(dvEmpleado[e.RowIndex]["e_codigo"]);
+            txtApellido.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_APELLIDO;
+            txtNombre.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_NOMBRE;
+            txtLegajo.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_LEGAJO;
+            txtFechaNac.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_FECHANACIMIENTO.ToString();
+            txtTelefono.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_TELEFONO;
+            cboEstado.SelectedValue = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).EE_CODIGO;
+            cboEstado.SelectedValue = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).SEC_CODIGO;
         }
 
 
