@@ -25,7 +25,7 @@ namespace GyCAP.UI.EstructuraProducto
             btnColor.Tag = panelColor;
             btnConjunto.Tag = panelConjunto;
             btnDesignacion.Tag = panelDesignacion;
-            btnEstructuraProducto.Tag = panelEstructuraProducto;
+            btnEstructuraProducto.Tag = panelEstructuraCocina;
             btnMPPrincipal.Tag = panelMPPrincipal;
             btnModeloCocina.Tag = panelModeloCocina;
             btnPieza.Tag = panelPieza;
@@ -193,6 +193,13 @@ namespace GyCAP.UI.EstructuraProducto
 
         //frmEstructuraProducto.Instancia.Location = PosicionarFormulario();
 
+        private void btnConsultarEstructuraProducto_Click(object sender, EventArgs e)
+        {
+            frmEstructuraCocina.Instancia.TopLevel = false;
+            frmEstructuraCocina.Instancia.Parent = areaTrabajo;
+            frmEstructuraCocina.Instancia.Show();
+        }
+
         #endregion
 
         #region Materia Prima Principal
@@ -326,6 +333,8 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
+
+        
 
 
     }

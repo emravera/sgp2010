@@ -91,6 +91,7 @@
             // scUp.Panel2
             // 
             this.scUp.Panel2.AutoScroll = true;
+            this.scUp.Panel2.AutoScrollMargin = new System.Drawing.Size(1000, 1000);
             this.scUp.Size = new System.Drawing.Size(626, 568);
             this.scUp.SplitterDistance = 20;
             this.scUp.SplitterWidth = 3;
