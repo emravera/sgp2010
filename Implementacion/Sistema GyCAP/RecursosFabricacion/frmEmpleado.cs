@@ -66,9 +66,12 @@ namespace GyCAP.UI.RecursosFabricacion
             dvEmpleado.Sort = "E_APELLIDO, E_NOMBRE ASC";
             dgvLista.DataSource = dvEmpleado;
 
-            //Carga de la Lista
+            //Llena el Dataset con los Sectores
+            BLL.SectorBLL.ObtenerTodos(dsEmpleado);
+
+            //Carga de la Lista de Sectores
             dvListaSectores = new DataView(dsEmpleado.SECTORES);
-            
+            FuncionesAuxiliares.llenarListas(dvListaSectores, clbSectores);
 
 
 
@@ -273,6 +276,15 @@ namespace GyCAP.UI.RecursosFabricacion
             txtTelefono.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_TELEFONO;
             cboEstado.SelectedValue = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).EE_CODIGO;
             cboEstado.SelectedValue = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).SEC_CODIGO;
+        }
+
+        private void btnListado_Click(object sender, EventArgs e)
+        {
+            //frmVisorInformes visor = new frmVisorInformes();
+            //visor.ShowDialog();
+            BaseReporte.conectar("HOMERO", "Proyecto", "Sa", string.Empty);
+            BaseReporte.rutaRpt = "D:\\PROY\\trunk\\Implementacion\\Sistema GyCAP\\RecursosFabricacion\\Reportes" ;
+            BaseReporte.printRpt("rptEmpleados.rpt");
         }
 
 
