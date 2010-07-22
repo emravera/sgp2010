@@ -13,7 +13,11 @@ namespace GyCAP.BLL
         {
             DAL.SectorDAL.ObtenerSector(nombre, abrev,ds);
         }
-        
+
+        public static void ObtenerTodos(Data.dsEmpleado ds)
+        {
+            DAL.SectorDAL.ObtenerSector(ds);
+        }
 
         //Eliminacion
         public static void Eliminar(int codigo)

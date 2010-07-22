@@ -8,10 +8,17 @@ using System.Windows.Forms;
 
 namespace GyCAP.UI.RecursosFabricacion
 {
-    class FuncionesAuxiliares
+    public class FuncionesAuxiliares
     {
-        private void llenarListas(DataView dv,CheckedListBox control, int id, string nombre) 
+        public static void llenarListas(DataView dv,CheckedListBox control)
         {
+            control.Items.Clear();
+
+            foreach (DataRowView dr in dv ) 
+            {   
+                control.Items.Add(dr["SEC_NOMBRE"],true );
+            }
+
             
 
         }

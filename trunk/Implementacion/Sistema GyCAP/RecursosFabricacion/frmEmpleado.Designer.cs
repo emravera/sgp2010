@@ -68,6 +68,7 @@
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.clbCapacidades = new System.Windows.Forms.CheckedListBox();
+            this.btnListado = new System.Windows.Forms.ToolStripButton();
             this.tcABM.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.gpbLista.SuspendLayout();
@@ -442,6 +443,7 @@
             this.btnConsultar,
             this.btnModificar,
             this.btnEliminar,
+            this.btnListado,
             this.toolStripSeparator1,
             this.btnSalir});
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
@@ -530,6 +532,17 @@
             this.clbCapacidades.Size = new System.Drawing.Size(259, 169);
             this.clbCapacidades.TabIndex = 20;
             // 
+            // btnListado
+            // 
+            this.btnListado.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Floppy_25;
+            this.btnListado.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnListado.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnListado.Name = "btnListado";
+            this.btnListado.Size = new System.Drawing.Size(45, 47);
+            this.btnListado.Text = "&Listado";
+            this.btnListado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnListado.Click += new System.EventHandler(this.btnListado_Click);
+            // 
             // frmEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -603,5 +616,6 @@
         private System.Windows.Forms.TextBox txtLegajo;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckedListBox clbCapacidades;
+        private System.Windows.Forms.ToolStripButton btnListado;
     }
 }
