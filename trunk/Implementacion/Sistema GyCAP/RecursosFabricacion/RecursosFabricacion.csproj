@@ -60,6 +60,7 @@
     <Compile Include="frmRecursosFabricacion.Designer.cs">
       <DependentUpon>frmRecursosFabricacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="FuncionesAuxiliares.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmEmpleado.resx">
@@ -169,6 +170,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Listados-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Reportes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
