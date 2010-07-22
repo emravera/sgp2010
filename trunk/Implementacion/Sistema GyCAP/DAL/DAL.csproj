@@ -55,6 +55,7 @@
     <Compile Include="DB.cs" />
     <Compile Include="DemandaAnualDAL.cs" />
     <Compile Include="DesignacionDAL.cs" />
+    <Compile Include="DetalleDemandaAnualDAL.cs" />
     <Compile Include="DetalleOrdenTrabajoDAL.cs" />
     <Compile Include="DetallePedidoDAL.cs" />
     <Compile Include="DetallePlanMantenimientoDAL.cs" />

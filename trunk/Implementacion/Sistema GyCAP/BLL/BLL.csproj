@@ -54,6 +54,7 @@
     <Compile Include="ConjuntoBLL.cs" />
     <Compile Include="DemandaAnualBLL.cs" />
     <Compile Include="DesignacionBLL.cs" />
+    <Compile Include="DetalleDemandaAnualBLL.cs" />
     <Compile Include="DetalleOrdenTrabajoBLL.cs" />
     <Compile Include="DetallePedidoBLL.cs" />
     <Compile Include="DetallePlanMantenimientoBLL.cs" />

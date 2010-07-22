@@ -180,6 +180,13 @@ namespace Principal
             GyCAP.UI.RecursosFabricacion.frmEmpleado.Instancia.Show();
         }
 
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.PlanificacionProduccion.frmEstimarDemandaAnual.Instancia.MdiParent = this;
+            GyCAP.UI.PlanificacionProduccion.frmEstimarDemandaAnual.Instancia.Show();
+        }
+
+
         
 
        
