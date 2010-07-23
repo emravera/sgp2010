@@ -79,6 +79,18 @@ create table CONJUNTOS (
 )
 
 /*==============================================================*/
+/* Table: CONJUNTOSXESTRUCTURA                                  */ /*-MODIFICACION 23/07/2010-*/
+/*==============================================================*/
+create table CONJUNTOSXESTRUCTURA (
+   CXE_CODIGO           numeric(10)          identity,
+   ESTR_CODIGO          numeric(10)          null, 
+   CONJ_CODIGO          numeric(10)          null,
+   CXE_CANTIDAD         numeric(10)          null,
+   GRP_CODIGO           numeric(10)          null,
+   constraint PK_CONJUNTOSXESTRUCTURA primary key nonclustered (CXE_CODIGO)
+)
+
+/*==============================================================*/
 /* Table: DEMANDAS_ANUALES                                      */
 /*==============================================================*/
 create table DEMANDAS_ANUALES (
@@ -143,6 +155,7 @@ create table DETALLE_PEDIDOS (
    PED_NUMERO           numeric(10)          not null,
    EDPED_CODIGO         numeric(10)          not null,
    DPED_CANTIDAD        int                  null,
+   DPED_CANTIDADREAL    int                  null,
    constraint PK_DETALLE_PEDIDOS primary key nonclustered (DPED_CODIGO)
 )
 
@@ -347,9 +360,11 @@ create table ESTRUCTURAS (
    ESTR_NOMBRE          varchar(80)          null,
    COC_CODIGO           numeric(10)          not null,            /*-MODIFICACION 09/07/2010-*/
    PNO_CODIGO           numeric(10)          not null,            /*-MODIFICACION 05/07/2010-*/
-   CONJ_CODIGO          numeric(10)          not null,            /*-MODIFICACION 15/07/2010-*/
-   ESTR_CANTIDAD        numeric(10)          null,                /*-MODIFICACION 17/07/2010-*/
    ESTR_DESCRIPCION     varchar(200)         null,                /*-MODIFICACION 17/07/2010-*/
+   ESTR_ACTIVO          numeric(1)           not null,            /*-MODIFICACION 23/07/2010-*/
+   ESTR_FECHA_ALTA      datetime             not null,            /*-MODIFICACION 23/07/2010-*/
+   ESTR_FECHA_MODIFICACION      datetime             not null,            /*-MODIFICACION 23/07/2010-*/
+   E_CODIGO             numeric(10)          not null,
    constraint PK_ESTRUCTURAS primary key nonclustered (ESTR_CODIGO)
 )
 
@@ -360,6 +375,19 @@ create table FABRICANTE_MAQUINAS (
    FAB_CODIGO           numeric(10)          identity,
    FAB_RAZONSOCIAL      varchar(35)          null,
    constraint PK_FABRICANTE_MAQUINAS primary key nonclustered (FAB_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: GRUPOS_ESTRUCTURA                                     */ /*-MODIFICACION 23/07/2010-*/
+/*==============================================================*/
+create table GRUPOS_ESTRUCTURA (
+   GRP_CODIGO           numeric(10)          identity,
+   GRP_NUMERO           numeric(10)          not null,
+   ESTR_CODIGO          numeric(10)          not null,
+   GRP_PADRE_CODIGO     numeric(10)          null,
+   GRP_NOMBRE           varchar(80)          null,
+   GRP_DESCRIPCION      varchar(200)         null,
+   constraint PK_GRUPO_ESTRUCTURA primary key nonclustered (GRP_CODIGO)
 )
 
 /*==============================================================*/
@@ -437,9 +465,10 @@ create table MATERIASPRIMASPRINCIPALES (
 /*==============================================================*/
 create table MATERIASPRIMASXESTRUCTURA (
    MPE_CODIGO           numeric(10)          identity,
-   MP_CODIGO            numeric(10)          null,
-   ESTR_CODIGO          numeric(10)          null,
-   MPE_CANTIDAD         numeric(10)          null,
+   MP_CODIGO            numeric(10)          not null,
+   ESTR_CODIGO          numeric(10)          not null,
+   MPE_CANTIDAD         numeric(10)          not null,  
+   GRP_CODIGO           numeric(10)          not null,     /*-MODIFICACION 23/07/2010-*/
    constraint PK_MATERIASPRIMASXPIEZA primary key nonclustered (MPE_CODIGO)
 )
 
@@ -503,9 +532,10 @@ create table PIEZAS (
 /*==============================================================*/
 create table PIEZASXESTRUCTURA (
    PXE_CODIGO           numeric(10)          identity,
-   ESTR_CODIGO          numeric(10)          null,
-   PZA_CODIGO           numeric(10)          null,
-   PXE_CANTIDAD         numeric(10)          null,
+   ESTR_CODIGO          numeric(10)          not null,
+   PZA_CODIGO           numeric(10)          not null,
+   PXE_CANTIDAD         numeric(10)          not null,
+   GRP_CODIGO           numeric(10)          not null,   /*-MODIFICACION 23/07/2010-*/
    constraint PK_PIEZASXESTRUCTURA primary key nonclustered (PXE_CODIGO)
 )
 
@@ -634,11 +664,12 @@ create table SUBCONJUNTOS (
 /* Table: SUBCONJUNTOSXESTRUCTURA                                */ /*-MODIFICACION 17/07/2010-*/
 /*==============================================================*/
 create table SUBCONJUNTOSXESTRUCTURA (
-   SXE_CODIGO           numeric(10)          identity,
-   ESTR_CODIGO          numeric(10)          null,
-   SCONJ_CODIGO         numeric(10)          null,
-   SXE_CANTIDAD         numeric(10)          null,
-   constraint PK_SUBCONJUNTOSXESTRUCTURA primary key nonclustered (SXE_CODIGO)
+   SCXE_CODIGO          numeric(10)          identity,
+   ESTR_CODIGO          numeric(10)          not null,
+   SCONJ_CODIGO         numeric(10)          not null,
+   SCXE_CANTIDAD        numeric(10)          not null,
+   GRP_CODIGO           numeric(10)          not null,   /*-MODIFICACION 23/07/2010-*/
+   constraint PK_SUBCONJUNTOSXESTRUCTURA primary key nonclustered (SCXE_CODIGO)
 )
 
 /*==============================================================*/
