@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseReporte.cs" />
+    <Compile Include="BaseReporte2.cs" />
     <Compile Include="frmEmpleado.cs">
       <SubType>Form</SubType>
     </Compile>
