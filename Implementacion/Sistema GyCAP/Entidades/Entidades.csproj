@@ -54,6 +54,7 @@
     <Compile Include="Conjunto.cs" />
     <Compile Include="DemandaAnual.cs" />
     <Compile Include="Designacion.cs" />
+    <Compile Include="DetalleDemandaAnual.cs" />
     <Compile Include="DetalleOrdenTrabajo.cs" />
     <Compile Include="DetallePedido.cs" />
     <Compile Include="DetallePlanMantenimiento.cs" />

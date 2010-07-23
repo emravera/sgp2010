@@ -13,5 +13,11 @@ namespace GyCAP.BLL
             DAL.DetalleDemandaAnualDAL.ObtenerDetalle(idDemanda, ds);
         }
 
+        //Metodo para guardar el detalle
+        public static int Insertar(Entidades.DetalleDemandaAnual detalle)
+        {
+            return DAL.DetalleDemandaAnualDAL.Insertar(detalle);
+        }
+
     }
 }
