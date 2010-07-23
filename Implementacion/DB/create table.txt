@@ -46,13 +46,15 @@ create table CLIENTES (
 /*==============================================================*/
 create table COCINAS (
    COC_CODIGO           numeric(10)          identity,  /* Marce 07/07 antes varchar(10) */
-   ECOC_CODIGO          numeric(10)          null,
-   COL_CODIGO           numeric(3)           null,
-   MOD_CODIGO           numeric(10)          null,
-   MCA_CODIGO           numeric(10)          null,
-   TE_CODIGO            numeric(10)          null,
-   DESIG_CODIGO         numeric(10)          null,
-   COC_CANTIDADSTOCK    int                  null,
+   ECOC_CODIGO          numeric(10)          not null,	/*-MODIFICACION 23/07/2010-*/
+   COL_CODIGO           numeric(3)           not null,	/*-MODIFICACION 23/07/2010-*/
+   MOD_CODIGO           numeric(10)          not null,	/*-MODIFICACION 23/07/2010-*/
+   MCA_CODIGO           numeric(10)          not null,	/*-MODIFICACION 23/07/2010-*/
+   TE_CODIGO            numeric(10)          not null,	/*-MODIFICACION 23/07/2010-*/
+   DESIG_CODIGO         numeric(10)          not null,	/*-MODIFICACION 23/07/2010-*/
+   COC_CODIGO_PRODUCTO  varchar(80)          not null,	/*-MODIFICACION 23/07/2010-*/
+   COC_CANTIDADSTOCK    int                  not null,	/*-MODIFICACION 23/07/2010-*/
+   COC_ACTIVO           numeric(1)           not null,	/*-MODIFICACION 23/07/2010-*/
    COC_PRECIO           numeric(10,2)        null,  /* Marce 07/07 antes float(10) */
    constraint PK_COCINAS primary key nonclustered (COC_CODIGO)
 )
@@ -75,6 +77,8 @@ create table CONJUNTOS (
    CONJ_NOMBRE          varchar(50)          null,
    CONJ_CANTIDADSTOCK   int                  null,
    CONJ_DESCRIPCION     varchar(200)         null,            /*-MODIFICACION 17/07/2010-*/
+   PAR_CODIGO           numeric(10)          not null,	/*-MODIFICACION 17/07/2010-*/
+   PNO_CODIGO           numeric(10)          null,	/*-MODIFICACION 17/07/2010-*/
    constraint PK_CONJUNTOS primary key nonclustered (CONJ_CODIGO)
 )
 
@@ -83,10 +87,10 @@ create table CONJUNTOS (
 /*==============================================================*/
 create table CONJUNTOSXESTRUCTURA (
    CXE_CODIGO           numeric(10)          identity,
-   ESTR_CODIGO          numeric(10)          null, 
-   CONJ_CODIGO          numeric(10)          null,
-   CXE_CANTIDAD         numeric(10)          null,
-   GRP_CODIGO           numeric(10)          null,
+   ESTR_CODIGO          numeric(10)          not null, 
+   CONJ_CODIGO          numeric(10)          not null,
+   CXE_CANTIDAD         numeric(10)          not null,
+   GRP_CODIGO           numeric(10)          not null,
    constraint PK_CONJUNTOSXESTRUCTURA primary key nonclustered (CXE_CODIGO)
 )
 
@@ -363,8 +367,8 @@ create table ESTRUCTURAS (
    ESTR_DESCRIPCION     varchar(200)         null,                /*-MODIFICACION 17/07/2010-*/
    ESTR_ACTIVO          numeric(1)           not null,            /*-MODIFICACION 23/07/2010-*/
    ESTR_FECHA_ALTA      datetime             not null,            /*-MODIFICACION 23/07/2010-*/
-   ESTR_FECHA_MODIFICACION      datetime             not null,            /*-MODIFICACION 23/07/2010-*/
-   E_CODIGO             numeric(10)          not null,
+   ESTR_FECHA_MODIFICACION      datetime             null,            /*-MODIFICACION 23/07/2010-*/
+   E_CODIGO             numeric(10)          null,                /*-MODIFICACION 23/07/2010-*/
    constraint PK_ESTRUCTURAS primary key nonclustered (ESTR_CODIGO)
 )
 
@@ -387,6 +391,7 @@ create table GRUPOS_ESTRUCTURA (
    GRP_PADRE_CODIGO     numeric(10)          null,
    GRP_NOMBRE           varchar(80)          null,
    GRP_DESCRIPCION      varchar(200)         null,
+   GRP_CONCRETO         numeric(1)           not null,	/*-MODIFICACION 23/07/2010-*/
    constraint PK_GRUPO_ESTRUCTURA primary key nonclustered (GRP_CODIGO)
 )
 
@@ -464,12 +469,12 @@ create table MATERIASPRIMASPRINCIPALES (
 /* Table: MATERIASPRIMASXESTRUCTURA                             */ /*-MODIFICACION 17/07/2010-*/
 /*==============================================================*/
 create table MATERIASPRIMASXESTRUCTURA (
-   MPE_CODIGO           numeric(10)          identity,
+   MPXE_CODIGO          numeric(10)          identity,	/*-MODIFICACION 23/07/2010-*/
    MP_CODIGO            numeric(10)          not null,
    ESTR_CODIGO          numeric(10)          not null,
-   MPE_CANTIDAD         numeric(10)          not null,  
+   MPXE_CANTIDAD        numeric(10)          not null,  /*-MODIFICACION 23/07/2010-*/
    GRP_CODIGO           numeric(10)          not null,     /*-MODIFICACION 23/07/2010-*/
-   constraint PK_MATERIASPRIMASXPIEZA primary key nonclustered (MPE_CODIGO)
+   constraint PK_MATERIASPRIMASXPIEZA primary key nonclustered (MPXE_CODIGO)
 )
 
 /*==============================================================*/
@@ -524,6 +529,8 @@ create table PIEZAS (
    PZA_NOMBRE           varchar(80)          null,
    PZA_CANTIDADSTOCK    int                  null,
    PZA_DESCRIPCION      varchar(200)         null,            /*-MODIFICACION 17/07/2010-*/
+   PAR_CODIGO           numeric(10)          not null,	/*-MODIFICACION 17/07/2010-*/
+   PNO_CODIGO           numeric(10)          null,	/*-MODIFICACION 17/07/2010-*/
    constraint PK_PIEZAS primary key nonclustered (PZA_CODIGO)
 )
 
@@ -657,6 +664,8 @@ create table SUBCONJUNTOS (
    SCONJ_NOMBRE         varchar(80)          null,
    SCONJ_CANTIDADSTOCK  int                  null,
    SCONJ_DESCRIPCION    varchar(200)         null,            /*-MODIFICACION 17/07/2010-*/
+   PAR_CODIGO           numeric(10)          not null,	/*-MODIFICACION 17/07/2010-*/
+   PNO_CODIGO           numeric(10)          null,	/*-MODIFICACION 17/07/2010-*/
    constraint PK_SUBCONJUNTOS primary key nonclustered (SCONJ_CODIGO)
 )
 
@@ -760,12 +769,19 @@ create table USUARIOS (
 /*-----------MODIFICACIONES 05/07/2010-------------*/
 
 /*==============================================================*/
-/* Table: PLANOS                                                 */
+/* Table: PLANOS                                                */
 /*==============================================================*/
 create table PLANOS (
    PNO_CODIGO           numeric(10)          identity,
    PNO_FECHACREACION    datetime             null,
    PNO_OBSERVACIONES    varchar(200)         null,
+   PNO_NOMBRE           varchar(80)          null,	/*-MODIFICACION 23/07/2010-*/
+   PNO_NUMERO           varchar(10)          not null,	/*-MODIFICACION 23/07/2010-*/
+   PNO_HABILITADO       numeric(1)           not null,	/*-MODIFICACION 23/07/2010-*/
+   PNO_FECHA_HABILITADO datetime             null,	/*-MODIFICACION 23/07/2010-*/
+   PNO_FECHA_DESHABILITADO datetime          null,	/*-MODIFICACION 23/07/2010-*/
+   PNO_FECHA_MODIFICACION datetime           null,	/*-MODIFICACION 23/07/2010-*/
+   PNO_LETRA_CAMBIO     varchar(2)           null,	/*-MODIFICACION 23/07/2010-*/
    constraint PK_PLANOS primary key nonclustered (PNO_CODIGO)
 )
 
@@ -794,8 +810,14 @@ create table DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL (
 )
 
 
+/*--------AGREGADO 23/07/2010--------*/
 
-
-/* Marcelo: pibe cambie casi todos los campos codigos de cada tabla a identity, */
-/* o sea que se generan automaticamente, cambialo en la herramienta, o colga aca */
-/* el proyecto de la herramienta va a ser mejor */ 
+/*==============================================================*/
+/* Table: ESTADO_PARTES                                         */
+/*==============================================================*/
+create table ESTADO_PARTES (
+   PAR_CODIGO           numeric(10)          identity,
+   PAR_NOMBRE           varchar(80)          null,
+   PAR_DESCRIPCION      varchar(200)         null,
+   constraint PK_ESTADO_PARTES primary key nonclustered (PAR_CODIGO)
+)

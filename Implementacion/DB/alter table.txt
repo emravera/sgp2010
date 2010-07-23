@@ -29,6 +29,8 @@ alter table COCINAS
 alter table COCINAS
    add constraint cocina_terminaciones_fk foreign key (TE_CODIGO)
       references TERMINACIONES (TE_CODIGO)
+alter table COCINAS  with check add constraint activo_coc check  (COC_ACTIVO=(0) OR COC_ACTIVO=(1)) /*-MODIFICACION 23/07/2010-*/
+alter table COCINAS check constraint activo_coc       /*-MODIFICACION 23/07/2010-*/
 
 /*==============================================================*/
 /* Table: CONJUNTOS                                             */
@@ -36,6 +38,12 @@ alter table COCINAS
 alter table CONJUNTOS
    add constraint conjunto_terminaciones_fk foreign key (TE_CODIGO)
       references TERMINACIONES (TE_CODIGO)
+alter table CONJUNTOS
+   add constraint conjunto_estadoPartes_fk foreign key (PAR_CODIGO)	/*-MODIFICACION 23/07/2010-*/
+      references ESTADO_PARTES (PAR_CODIGO)
+alter table CONJUNTOS
+   add constraint conjunto_plano_fk foreign key (PNO_CODIGO)	/*-MODIFICACION 23/07/2010-*/
+      references PLANOS (PNO_CODIGO)
 
 /*==============================================================*/
 /* Table: CONJUNTOSXESTRUCTURA                                  */ /*-MODIFICACION 23/07/2010-*/
@@ -211,8 +219,8 @@ alter table ESTRUCTURAS
 alter table ESTRUCTURAS
     add constraint estructura_empleado_fk foreign key (E_CODIGO)  /*-MODIFICACION 23/07/2010-*/
        references EMPLEADOS (E_CODIGO)
-alter table ESTRUCTURAS  with check add constraint activo check  (ESTR_ACTIVO=(0) OR ESTR_ACTIVO=(1)) /*-MODIFICACION 23/07/2010-*/
-alter table ESTRUCTURAS check constraint activo       /*-MODIFICACION 23/07/2010-*/
+alter table ESTRUCTURAS  with check add constraint activo_estr check  (ESTR_ACTIVO=(0) OR ESTR_ACTIVO=(1)) /*-MODIFICACION 23/07/2010-*/
+alter table ESTRUCTURAS check constraint activo_estr       /*-MODIFICACION 23/07/2010-*/
 
 /*==============================================================*/
 /* Table: GRUPOS_ESTRUCTURA                                     */ /*-MODIFICACION 23/07/2010-*/
@@ -223,6 +231,8 @@ alter table GRUPOS_ESTRUCTURA
 alter table GRUPOS_ESTRUCTURA
     add constraint grupoEstructura_grupoEstructura_fk foreign key (GRP_CODIGO)
        references GRUPOS_ESTRUCTURA (GRP_CODIGO)
+alter table GRUPOS_ESTRUCTURA  with check add constraint concreto_grp check  (GRP_CONCRETO=(0) OR GRP_CONCRETO=(1)) /*-MODIFICACION 23/07/2010-*/
+alter table GRUPOS_ESTRUCTURA check constraint concreto_grp       /*-MODIFICACION 23/07/2010-*/
 
 /*==============================================================*/
 /* Table: LOCALIDADES                                           */
@@ -314,6 +324,12 @@ alter table PEDIDOS
 alter table PIEZAS
    add constraint piezas_terminaciones_fk foreign key (TE_CODIGO)
       references TERMINACIONES (TE_CODIGO)
+alter table PIEZAS
+   add constraint piezas_estadoPartes_fk foreign key (PAR_CODIGO)	/*-MODIFICACION 23/07/2010-*/
+      references ESTADO_PARTES (PAR_CODIGO)
+alter table PIEZAS
+   add constraint piezas_plano_fk foreign key (PNO_CODIGO)	/*-MODIFICACION 23/07/2010-*/
+      references PLANOS (PNO_CODIGO)
 
 /*==============================================================*/
 /* Table: PIEZASXESTRUCTURA                                     */ /*-MODIFICACION 17/07/2010-*/
@@ -357,6 +373,12 @@ alter table PLANES_SEMANALES
       references PLANES_MENSUALES (PMES_CODIGO)
 
 /*==============================================================*/
+/* Table: PLANOS                                                */	/*-MODIFICACION 23/07/2010-*/
+/*==============================================================*/
+alter table PLANOS  with check add constraint habilitado_pno check  (PNO_HABILITADO=(0) OR PNO_HABILITADO=(1)) /*-MODIFICACION 23/07/2010-*/
+alter table PLANOS check constraint habilitado_pno       /*-MODIFICACION 23/07/2010-*/
+
+/*==============================================================*/
 /* Table: PROCESOS                                              */
 /*==============================================================*/
 alter table PROCESOS
@@ -383,6 +405,12 @@ alter table REPUESTOS
 alter table SUBCONJUNTOS
    add constraint subconjunto_terminaciones_fk foreign key (TE_CODIGO)
       references TERMINACIONES (TE_CODIGO)
+alter table SUBCONJUNTOS
+   add constraint subconjunto_estadoPartes_fk foreign key (PAR_CODIGO)	/*-MODIFICACION 23/07/2010-*/
+      references ESTADO_PARTES (PAR_CODIGO)
+alter table SUBCONJUNTOS
+   add constraint subconjunto_plano_fk foreign key (PNO_CODIGO)	/*-MODIFICACION 23/07/2010-*/
+      references PLANOS (PNO_CODIGO)
 
 /*==============================================================*/
 /* Table: SUBCONJUNTOSXESTRUCTURA                                */ /*-MODIFICACION 17/07/2010-*/
