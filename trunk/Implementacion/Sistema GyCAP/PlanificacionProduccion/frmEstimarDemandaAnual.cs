@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace GyCAP.UI.PlanificacionProduccion
 {
@@ -15,6 +16,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         private Data.dsEstimarDemanda dsEstimarDemanda = new GyCAP.Data.dsEstimarDemanda();
         private DataView dvListaDemanda, dvListaDetalle, dvChAnios;
         private enum estadoUI { inicio, nuevo, modificar, cargaHistorico };
+        private static estadoUI estadoActual;
         
         public frmEstimarDemandaAnual()
         {
@@ -102,6 +104,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnModificar.Enabled = hayDatos;
                     gbGrillaDemanda.Visible = hayDatos;
                     tcDemanda.SelectedTab = tpBuscar;
+                    estadoActual = estadoUI.modificar;
                     break;
                 case estadoUI.nuevo:
                     btnConsultar.Enabled = false;
@@ -113,6 +116,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbDatosHistoricos.Visible = false;
                     gbDatosPrincipales.Enabled = true;
                     tcDemanda.SelectedTab = tpDatos;
+                    estadoActual = estadoUI.nuevo;
                     break;
                 case estadoUI.cargaHistorico:
                     btnConsultar.Enabled = false;
@@ -124,6 +128,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbBotones.Visible = true;
                     gbDatosPrincipales.Enabled = false;
                     tcDemanda.SelectedTab = tpDatos;
+                    estadoActual = estadoUI.cargaHistorico;
                     break;
 
                     default:
@@ -236,7 +241,14 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             //lleno el Dataset de demandas anuales
             BLL.DemandaAnualBLL.ObtenerTodos(dsEstimarDemanda);
+            
+            //Seteo la interface
+            SetInterface(estadoUI.nuevo);
 
+        }
+
+        private void CargarAñosBase()
+        {
             //Creo el dataview y lo asigno al control de cheklist
             dvChAnios = new DataView(dsEstimarDemanda.DEMANDAS_ANUALES);
             string anio;
@@ -245,9 +257,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                 anio = dvChAnios[i]["deman_anio"].ToString();
                 chListAnios.Items.Add(anio);
             }
-
-            //Seteo la interface
-            SetInterface(estadoUI.nuevo);
 
         }
 
@@ -260,8 +269,10 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.nuevo);
+            SetInterface(estadoUI.nuevo);            
         }
+
+
 
         private void Validar()
         {
@@ -277,6 +288,108 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             }
         }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (estadoActual == estadoUI.cargaHistorico)
+                {
+                    //Se definen los parámetros que se van a guardar
+
+                    //Creo el objeto de Demanda
+                    Entidades.DemandaAnual demanda = new GyCAP.Entidades.DemandaAnual();
+
+                    demanda.Anio = Convert.ToInt32(txtAnioHistorico.Text);
+                    demanda.Nombre = txtDenominacionHistorico.Text;
+                    demanda.ParametroCrecimiento = Convert.ToDecimal(numCrecimiento.Value);
+                    demanda.FechaCreacion = DateTime.Now;
+
+                    demanda.Codigo = BLL.DemandaAnualBLL.Insertar(demanda);
+
+                    //Meses
+                    int enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre;
+                    int octubre, noviembre, diciembre;
+                   
+                    //Se setean los valores que se van a pasar
+                    enero = Convert.ToInt32(numEnero.Value);
+                    febrero = Convert.ToInt32(numFebrero.Value);
+                    marzo = Convert.ToInt32(numMarzo.Value);
+                    abril = Convert.ToInt32(numAbril.Value);
+                    mayo = Convert.ToInt32(numMayo.Value);
+                    junio = Convert.ToInt32(numJunio.Value);
+                    julio = Convert.ToInt32(numJulio.Value);
+                    agosto = Convert.ToInt32(numAgosto.Value);
+                    septiembre = Convert.ToInt32(numSeptiembre.Value);
+                    octubre = Convert.ToInt32(numOctubre.Value);
+                    noviembre = Convert.ToInt32(numNoviembre.Value);
+                    diciembre = Convert.ToInt32(numDiciembre.Value);
+
+                    string[] Meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
+                    int[] Cantidad = { enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre };
+
+                    //Se crea la lista de objetos genericos
+                    IList detalle = new List<Entidades.DetalleDemandaAnual>();
+
+                    //Se van creando los objetos
+                    for (int i = 0; i < 12; i++)
+                    {
+                        Entidades.DetalleDemandaAnual objeto = new Entidades.DetalleDemandaAnual();
+                        objeto.Demanda = demanda;
+                        objeto.Cantidadmes = Cantidad[i];
+                        objeto.Mes = Meses[i];
+                        objeto.Codigo = BLL.DetalleDemandaAnualBLL.Insertar(objeto);
+                        detalle.Add(objeto);
+                    }
+
+                    //Se agrega todo al dataset
+                    //La demanda anual (cabecera)
+                    Data.dsEstimarDemanda.DEMANDAS_ANUALESRow rowDemanda = dsEstimarDemanda.DEMANDAS_ANUALES.NewDEMANDAS_ANUALESRow();
+                    rowDemanda.BeginEdit();
+                    rowDemanda.DEMAN_ANIO = demanda.Anio;
+                    rowDemanda.DEMAN_CODIGO = demanda.Codigo;
+                    rowDemanda.DEMAN_FECHACREACION = demanda.FechaCreacion;
+                    rowDemanda.DEMAN_NOMBRE = demanda.Nombre;
+                    rowDemanda.DEMAN_PARAMCRECIMIENTO = demanda.ParametroCrecimiento;
+                    rowDemanda.EndEdit();
+                    dsEstimarDemanda.DEMANDAS_ANUALES.AddDEMANDAS_ANUALESRow(rowDemanda);
+                    dsEstimarDemanda.DEMANDAS_ANUALES.AcceptChanges();
+
+                    //El detalle de la demanda anual
+
+                    foreach (Entidades.DetalleDemandaAnual obje in detalle)
+                    {
+                        Data.dsEstimarDemanda.DETALLE_DEMANDAS_ANUALESRow rowDDemanda = dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.NewDETALLE_DEMANDAS_ANUALESRow();
+                        rowDDemanda.BeginEdit();
+                        rowDDemanda.DDEMAN_CODIGO = obje.Codigo;
+                        rowDDemanda.DDEMAN_CANTIDADMES = obje.Cantidadmes;
+                        rowDDemanda.DDEMAN_MES = obje.Mes;
+                        rowDDemanda.DEMAN_CODIGO = obje.Demanda.Codigo;
+                        rowDDemanda.EndEdit();
+                        dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.AddDETALLE_DEMANDAS_ANUALESRow(rowDDemanda);
+                        dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.AcceptChanges();
+                    }
+
+                    //Se debe recargar el control de los años base
+                    CargarAñosBase();
+
+                   MessageBox.Show("Los datos se han almacenado correctamente", "Informacion: Demanda Anual - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    //Seteo el estado de la interface a nuevo
+                   SetInterface(estadoUI.nuevo);
+
+                }
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message, "Error: Demanda Anual - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+        }
+
        
 
        

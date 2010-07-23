@@ -22,5 +22,21 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        public static int Insertar(Entidades.DetalleDemandaAnual detalle)
+        {
+                      
+                //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
+                string sql = "INSERT INTO [DETALLE_DEMANDAS_ANUALES] ([deman_codigo], [ddeman_mes], [ddeman_cantidadmes]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
+                object[] valorParametros = { detalle.Demanda.Codigo, detalle.Mes, detalle.Cantidadmes };
+
+                try
+                {
+                    return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+                }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                       
+        }
+
+
     }
 }

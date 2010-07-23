@@ -15,7 +15,12 @@ namespace GyCAP.BLL
         {
             DAL.DemandaAnualDAL.ObtenerTodos(ds);
         }
+        public static int Insertar(Entidades.DemandaAnual demanda)
+        {
+            return DAL.DemandaAnualDAL.Insertar(demanda);
+        }
         
+
 
     }
 }
