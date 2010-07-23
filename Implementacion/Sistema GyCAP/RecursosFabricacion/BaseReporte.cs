@@ -35,6 +35,35 @@ namespace GyCAP.UI.RecursosFabricacion
             int i;
             ParameterFields parametros = new ParameterFields();
 
+            /*for (int c = 0; c <= matriz.Length - 1; c++)
+            {
+                //l = Strings.InStr(matriz[c].IndexOf(, ";");
+                //i = matriz[c].IndexOf(";");
+
+                if (i > 0)
+                {
+                    //p1 = Strings.Mid(matriz[c], 1, l - 1);
+                    //p1 = matriz[c].Substring(1, 1 - 1);
+
+                    //p2 = Strings.Mid(matriz[c], l + 1, Strings.Len(matriz[c]) - l);
+                    //p2 = matriz[c].Substring(1 + 1, matriz[c].Length - 1);
+
+                    ParameterField parametro = new ParameterField();
+
+                    ParameterDiscreteValue dVal = new ParameterDiscreteValue();
+
+                    parametro.ParameterFieldName = p1;
+
+                    dVal.Value = p2;
+
+                    parametro.CurrentValues.Add(dVal);
+
+                    parametros.Add(parametro);
+
+                }*/
+
+            
+
             return parametros[0];
 
             //Private Shared Function genpar ( ByVal ParamArray matriz() As String) As ParameterFields

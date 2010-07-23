@@ -282,9 +282,9 @@ namespace GyCAP.UI.RecursosFabricacion
         {
             //frmVisorInformes visor = new frmVisorInformes();
             //visor.ShowDialog();
-            BaseReporte.conectar("HOMERO", "Proyecto", "Sa", string.Empty);
-            BaseReporte.rutaRpt = "D:\\PROY\\trunk\\Implementacion\\Sistema GyCAP\\RecursosFabricacion\\Reportes" ;
-            BaseReporte.printRpt("rptEmpleados.rpt");
+            BaseReporte2.conectar("NGA", "Proyecto",string.Empty, string.Empty);
+            BaseReporte2.rutaRpt = "E:\\Repositorio\\Implementacion\\Sistema GyCAP\\RecursosFabricacion\\Reportes\\" ;
+            BaseReporte2.printrpt("rptEmpleados.rpt","marcelo");
         }
 
 
