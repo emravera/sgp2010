@@ -38,6 +38,19 @@ alter table CONJUNTOS
       references TERMINACIONES (TE_CODIGO)
 
 /*==============================================================*/
+/* Table: CONJUNTOSXESTRUCTURA                                  */ /*-MODIFICACION 23/07/2010-*/
+/*==============================================================*/
+alter table CONJUNTOSXESTRUCTURA
+   add constraint conjuntoXEstructura_conjunto_fk foreign key (CONJ_CODIGO)
+      references CONJUNTOS (CONJ_CODIGO)
+alter table CONJUNTOSXESTRUCTURA
+   add constraint conjuntoXEstructura_estructura_fk foreign key (ESTR_CODIGO)
+      references ESTRUCTURAS (ESTR_CODIGO)
+alter table CONJUNTOSXESTRUCTURA
+   add constraint conjuntoXEstructura_grupo_fk foreign key (GRP_CODIGO)
+      references GRUPOS_ESTRUCTURA (GRP_CODIGO)
+
+/*==============================================================*/
 /* Table: DESIGNACIONES                                          */
 /*==============================================================*/
 alter table DESIGNACIONES
@@ -196,8 +209,20 @@ alter table ESTRUCTURAS
     add constraint estructura_cocina_fk foreign key (COC_CODIGO)  /*-MODIFICACION 09/07/2010-*/
        references COCINAS (COC_CODIGO)
 alter table ESTRUCTURAS
-    add constraint estructura_conjunto_fk foreign key (CONJ_CODIGO)  /*-MODIFICACION 15/07/2010-*/
-       references CONJUNTOS (CONJ_CODIGO)
+    add constraint estructura_empleado_fk foreign key (E_CODIGO)  /*-MODIFICACION 23/07/2010-*/
+       references EMPLEADOS (E_CODIGO)
+alter table ESTRUCTURAS  with check add constraint activo check  (ESTR_ACTIVO=(0) OR ESTR_ACTIVO=(1)) /*-MODIFICACION 23/07/2010-*/
+alter table ESTRUCTURAS check constraint activo       /*-MODIFICACION 23/07/2010-*/
+
+/*==============================================================*/
+/* Table: GRUPOS_ESTRUCTURA                                     */ /*-MODIFICACION 23/07/2010-*/
+/*==============================================================*/
+alter table GRUPOS_ESTRUCTURA
+    add constraint grupoEstructura_estructura_fk foreign key (ESTR_CODIGO)
+       references ESTRUCTURAS (ESTR_CODIGO)
+alter table GRUPOS_ESTRUCTURA
+    add constraint grupoEstructura_grupoEstructura_fk foreign key (GRP_CODIGO)
+       references GRUPOS_ESTRUCTURA (GRP_CODIGO)
 
 /*==============================================================*/
 /* Table: LOCALIDADES                                           */
@@ -259,6 +284,9 @@ alter table MATERIASPRIMASXESTRUCTURA
 alter table MATERIASPRIMASXESTRUCTURA
    add constraint materiaPrimaXEstructura_materiaPrima_fk foreign key (MP_CODIGO)
       references MATERIAS_PRIMAS (MP_CODIGO)
+alter table MATERIASPRIMASXESTRUCTURA			/*-MODIFICACION 23/07/2010-*/
+   add constraint materiaPrimaXEstructura_grupoEstructura_fk foreign key (GRP_CODIGO)
+      references GRUPOS_ESTRUCTURA (GRP_CODIGO)
 
 /*==============================================================*/
 /* Table: ORDENES_TRABAJO                                       */
@@ -296,6 +324,9 @@ alter table PIEZASXESTRUCTURA
 alter table PIEZASXESTRUCTURA
    add constraint piezasXEstructura_estructura_fk foreign key (ESTR_CODIGO)
       references ESTRUCTURAS (ESTR_CODIGO)
+alter table PIEZASXESTRUCTURA			/*-MODIFICACION 23/07/2010-*/
+   add constraint piezasXEstructura_grupoEstructura_fk foreign key (GRP_CODIGO)
+      references GRUPOS_ESTRUCTURA (GRP_CODIGO)
 
 /*==============================================================*/
 /* Table: PLANES_ANUALES                                        */
@@ -362,6 +393,9 @@ alter table SUBCONJUNTOSXESTRUCTURA
 alter table SUBCONJUNTOSXESTRUCTURA
    add constraint subconjuntosXEstructura_subconjunto_fk foreign key (SCONJ_CODIGO)
       references SUBCONJUNTOS (SCONJ_CODIGO)
+alter table SUBCONJUNTOSXESTRUCTURA			/*-MODIFICACION 23/07/2010-*/
+   add constraint subconjuntosXEstructura_grupoEstructura_fk foreign key (GRP_CODIGO)
+      references GRUPOS_ESTRUCTURA (GRP_CODIGO)
 
 /*==============================================================*/
 /* Table: TAREASXPROCESOS                                       */
