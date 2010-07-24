@@ -13,7 +13,11 @@ namespace GyCAP.UI.EstructuraProducto
     {
         private static frmEstructuraCocina _frmEstructuraCocina = null;
         private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
-        private Data.dsTerminacion dsTerminacion = new GyCAP.Data.dsTerminacion();
+        private Data.dsCocina dsCocina = new GyCAP.Data.dsCocina();
+        private Data.dsEmpleado dsEmpleado = new GyCAP.Data.dsEmpleado();
+        private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
+        //Nombre objetos: CD=ConjuntosDisponibles - CE=ConjuntosEstructura - SCD=SubconjuntosDisponibles - SCE=SubconjuntosEstructura
+        //PD=PiezasDisponibles - PE=PiezasEstructura - MPD=MateriaPrimaDisponibles - MPE=MateriaPrimaEstructura
         private DataView dvCocinaBuscar, dvCocina, dvResponsableBuscar, dvResponsable, dvPlanoBuscar, dvPlano;
         private DataView dvEstructuras, dvPartes, dvCD, dvCE, dvSCD, dvSCE, dvPD, dvPE, dvMPD, dvMPE;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, };
@@ -21,6 +25,7 @@ namespace GyCAP.UI.EstructuraProducto
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
         private int slideActual = 0; //0-Datos, 1-Conjuntos, 2-Subconjuntos, 3-Piezas, 4-MateriaPrima, 5-Árbol
+        private int cxe = 0, scxe = 0, pxe = 0, mpxe = 0; //Variables para el manejo de inserciones en los dataset con códigos unique
 
         #region Inicio
 
@@ -145,7 +150,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            tcEstructuraCocina.SelectedTab = tpBuscar;
+            SetInterface(estadoUI.inicio);
         }
 
         #endregion
@@ -304,7 +309,7 @@ namespace GyCAP.UI.EstructuraProducto
                     dtpFechaModificacion.Enabled = true;
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
-                    //LIMPIAR GRILLAS PARTES-CE-SCE-PE-MPE
+                    //LIMPIAR GRILLAS PARTES-CE-SCE-PE-MPE - GONZALO
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -338,7 +343,7 @@ namespace GyCAP.UI.EstructuraProducto
                     dtpFechaModificacion.Enabled = true;
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
-                    //LIMPIAR GRILLAS PARTES-CE-SCE-PE-MPE
+                    //LIMPIAR GRILLAS PARTES-CE-SCE-PE-MPE - GONZALO
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
                     btnNuevo.Enabled = false;
@@ -433,7 +438,7 @@ namespace GyCAP.UI.EstructuraProducto
             //Obtenemos las terminaciones
             try
             {
-                BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsTerminacion);
+                BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsCocina.TERMINACIONES);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -442,11 +447,11 @@ namespace GyCAP.UI.EstructuraProducto
             
             #region Buscar
             //Grilla Listado Estructuras
+            dgvEstructuras.AutoGenerateColumns = false;
             dgvEstructuras.Columns.Add("ESTR_NOMBRE", "Nombre");
             dgvEstructuras.Columns.Add("COC_COCINA", "Cocina");
             dgvEstructuras.Columns.Add("PNO_CODIGO", "Plano");
-            dgvEstructuras.Columns.Add("E_LEGAJO", "Responsable");
-            dgvEstructuras.Columns["E_LEGAJO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvEstructuras.Columns.Add("E_CODIGO", "Responsable");
             dgvEstructuras.Columns.Add("ESTR_ACTIVO", "Activo");
             dgvEstructuras.Columns.Add("ESTR_FECHA_ALTA", "Fecha alta");
             dgvEstructuras.Columns["ESTR_FECHA_ALTA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -454,32 +459,35 @@ namespace GyCAP.UI.EstructuraProducto
             dgvEstructuras.Columns["ESTR_NOMBRE"].DataPropertyName = "ESTR_NOMBRE";
             dgvEstructuras.Columns["COC_COCINA"].DataPropertyName = "COC_COCINA";
             dgvEstructuras.Columns["PNO_CODIGO"].DataPropertyName = "PNO_CODIGO";
-            dgvEstructuras.Columns["E_LEGAJO"].DataPropertyName = "E_LEGAJO";
+            dgvEstructuras.Columns["E_CODIGO"].DataPropertyName = "E_LEGAJO";
             dgvEstructuras.Columns["ESTR_ACTIVO"].DataPropertyName = "ESTR_ACTIVO";
-            dgvEstructuras.Columns["ESTR_FECHA_ALTA"].DataPropertyName = "ESTR_FECHA_ALTA";
+            dgvEstructuras.Columns["ESTR_FECHA_ALTA"].DataPropertyName = "ESTR_FECHA_ALTA";            
 
             //Dataviews
-            /*dvCocinaBuscar = new DataView();
-            dvCocinaBuscar.Sort = "ASC";           
-            dvResponsableBuscar = new DataView();
-            dvResponsableBuscar.Sort = "";
             dvEstructuras = new DataView(dsEstructura.ESTRUCTURAS);
             dvEstructuras.Sort = "ESTR_NOMBRE ASC";
-            dvPlanoBuscar = new DataView();*/
+            dgvEstructuras.DataSource = dvEstructuras;
+            dvCocinaBuscar = new DataView(dsCocina.COCINAS);
+            dvCocinaBuscar.Sort = "COC_CODIGO_PRODUCTO ASC";            
+            dvResponsableBuscar = new DataView(dsEmpleado.EMPLEADOS);
+            dvResponsableBuscar.Sort = "E_APELLIDO ASC, E_NOMBRE ASC";            
+            
+            dvPlanoBuscar = new DataView(dsEstructura.PLANOS);
+            dvPlanoBuscar.Sort = "PNO_NOMBRE ASC";           
 
             //ComboBoxs
-            /*cbCocinaBuscar.DataSource = dvCocinaBuscar;
-            cbCocinaBuscar.DisplayMember = "";
+            cbCocinaBuscar.DataSource = dvCocinaBuscar;
+            cbCocinaBuscar.DisplayMember = "COC_CODIGO_PRODUCTO";
             cbCocinaBuscar.ValueMember = "COC_CODIGO";
             cbCocinaBuscar.SelectedIndex = -1;
             cbResponsableBuscar.DataSource = dvResponsableBuscar;
             cbResponsableBuscar.DisplayMember = "E_APELLIDO" + ", " + "E_NOMBRE";
-            cbResponsableBuscar.ValueMember = "E_LEGAJO";
+            cbResponsableBuscar.ValueMember = "E_CODIGO";
             cbResponsableBuscar.SelectedIndex = -1;
             cbPlanoBuscar.DataSource = dvPlanoBuscar;
-            cbPlanoBuscar.DisplayMember = "";
+            cbPlanoBuscar.DisplayMember = "PNO_NOMBRE";
             cbPlanoBuscar.ValueMember = "PNO_CODIGO";
-            cbPlanoBuscar.SelectedIndex = -1;*/
+            cbPlanoBuscar.SelectedIndex = -1;
             cbActivoBuscar.Items.Add("SI");
             cbActivoBuscar.Items.Add("NO");
             cbActivoBuscar.SelectedIndex = -1;
@@ -488,33 +496,46 @@ namespace GyCAP.UI.EstructuraProducto
 
             #region Datos
             //Grilla Listado Partes
+            dgvPartes.AutoGenerateColumns = false;
+            dgvPartes.Columns.Add("PAR_TIPO", "Nombre");
+            dgvPartes.Columns.Add("PAR_NOMBRE", "Nombre");
+            dgvPartes.Columns.Add("PAR_TERMINACION", "Terminación");
+            dgvPartes.Columns.Add("PAR_CANTIDAD", "Cantidad");
+            dgvPartes.Columns["PAR_TIPO"].DataPropertyName = "PAR_TIPO";
+            dgvPartes.Columns["PAR_NOMBRE"].DataPropertyName = "PAR_NOMBRE";
+            dgvPartes.Columns["PAR_TERMINACION"].DataPropertyName = "PAR_TERMINACION";
+            dgvPartes.Columns["PAR_CANTIDAD"].DataPropertyName = "PAR_CANTIDAD";
+            dgvPartes.Columns["PAR_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvPartes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;            
 
             //Dataviews
-            /*dvCocina = new DataView();
-            dvCocina.Sort = "ASC";
-            dvResponsable = new DataView();
-            dvResponsable.Sort = "ASC";
-            dvPlano = new DataView();
-            dvPartes = new DataView();
-            dvPartes.Sort = "ASC";*/
+            dvCocina = new DataView(dsCocina.COCINAS);
+            dvCocina.Sort = "COC_CODIGO_PRODUCTO ASC";
+            dvResponsable = new DataView(dsEmpleado.EMPLEADOS);
+            dvResponsable.Sort = "E_APELLIDO ASC, E_NOMBRE ASC";
+            dvPlano = new DataView(dsEstructura.PLANOS);
+            dvPlano.Sort = "PNO_NOMBRE ASC";
+            dvPartes = new DataView(dsEstructura.LISTA_PARTES);
+            //dvPartes.Sort = "PAR_NOMBRE ASC";
 
             //ComboBoxs
-            /*cbCocina.DataSource = dvCocina;
+            cbCocina.DataSource = dvCocina;
             cbCocina.DisplayMember = "";
             cbCocina.ValueMember = "COC_CODIGO";
             cbCocina.SelectedIndex = -1;
             cbResponsable.DataSource = dvResponsable;
             cbResponsable.DisplayMember = "E_APELLIDO" + ", " + "E_NOMBRE";
-            cbResponsable.ValueMember = "E_LEGAJO";
+            cbResponsable.ValueMember = "E_CODIGO";
             cbResponsable.SelectedIndex = -1;
             cbPlano.DataSource = dvPlano;
-            cbPlano.DisplayMember = "";
+            cbPlano.DisplayMember = "PNO_NOMBRE";
             cbPlano.ValueMember = "PNO_CODIGO";
-            cbPlano.SelectedIndex = -1;*/
+            cbPlano.SelectedIndex = -1;
             #endregion Datos
 
             #region Conjuntos
             //Grilla Listado Conjuntos Disponibles
+            dgvCD.AutoGenerateColumns = false;
             dgvCD.Columns.Add("CONJ_NOMBRE", "Nombre");
             dgvCD.Columns.Add("TE_CODIGO", "Terminación");
             dgvCD.Columns.Add("CONJ_DESCRIPCION", "Descripción");
@@ -527,9 +548,11 @@ namespace GyCAP.UI.EstructuraProducto
             dgvCD.Columns["CONJ_DESCRIPCION"].DataPropertyName = "CONJ_DESCRIPCION";
 
             //Grilla Listado Conjuntos en Estructura
+            dgvCE.AutoGenerateColumns = false;
             dgvCE.Columns.Add("CONJ_CODIGO", "Nombre");
             dgvCE.Columns.Add("TE_NOMBRE", "Terminación");
             dgvCE.Columns.Add("CXE_CANTIDAD", "Cantidad");
+            dgvCE.Columns["CXE_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvCE.Columns.Add("GRP_CODIGO", "Grupo");
             dgvCE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvCE.Columns["CONJ_CODIGO"].DataPropertyName = "CONJ_CODIGO";
@@ -541,10 +564,13 @@ namespace GyCAP.UI.EstructuraProducto
             dvCD = new DataView(dsEstructura.CONJUNTOS);
             dvCD.Sort = "CONJ_NOMBRE ASC";
             dvCE = new DataView(dsEstructura.CONJUNTOSXESTRUCTURA);
+            dgvCD.DataSource = dvCD;
+            dgvCE.DataSource = dvCE;
             #endregion Conjuntos
 
             #region Subconjuntos
             //Grilla listado subconjuntos disponibles
+            dgvSCD.AutoGenerateColumns = false;
             dgvSCD.Columns.Add("SCONJ_NOMBRE", "Nombre");
             dgvSCD.Columns.Add("TE_CODIGO", "Terminación");
             dgvSCD.Columns.Add("SCONJ_DESCRIPCION", "Descripción");
@@ -557,9 +583,11 @@ namespace GyCAP.UI.EstructuraProducto
             dgvSCD.Columns["SCONJ_DESCRIPCION"].DataPropertyName = "SCONJ_DESCRIPCION";
 
             //Grilla listado de subconjuntos en estructura
+            dgvSCE.AutoGenerateColumns = false;
             dgvSCE.Columns.Add("SCONJ_CODIGO", "Nombre");
             dgvSCE.Columns.Add("TE_NOMBRE", "Terminación");
             dgvSCE.Columns.Add("SCXE_CANTIDAD", "Cantidad");
+            dgvSCE.Columns["SCXE_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvSCE.Columns.Add("GRP_CODIGO", "Grupo");
             dgvSCE.Columns["SCONJ_CODIGO"].DataPropertyName = "SCONJ_CODIGO";
             dgvSCE.Columns["TE_NOMBRE"].DataPropertyName = "SCONJ_CODIGO";
@@ -570,11 +598,14 @@ namespace GyCAP.UI.EstructuraProducto
             dvSCD = new DataView(dsEstructura.SUBCONJUNTOS);
             dvSCD.Sort = "SCONJ_NOMBRE ASC";
             dvSCE = new DataView(dsEstructura.SUBCONJUNTOSXESTRUCTURA);
+            dgvSCD.DataSource = dvSCD;
+            dgvSCE.DataSource = dvSCE;
+
             #endregion Subconjuntos
 
             #region Piezas
             //Grilla listado de piezas disponibles
-            
+            dgvPD.AutoGenerateColumns = false;
             dgvPD.Columns.Add("PZA_NOMBRE", "Nombre");
             dgvPD.Columns.Add("TE_CODIGO", "Terminación");
             dgvPD.Columns.Add("PZA_DESCRIPCION", "Descripción");
@@ -587,9 +618,11 @@ namespace GyCAP.UI.EstructuraProducto
             dgvPD.Columns["PZA_DESCRIPCION"].DataPropertyName = "PZA_DESCRIPCION";
 
             //Grilla Listado piezas en Estructura
+            dgvPE.AutoGenerateColumns = false;
             dgvPE.Columns.Add("PZA_CODIGO", "Nombre");
             dgvPE.Columns.Add("TE_NOMBRE", "Terminación");
             dgvPE.Columns.Add("PXE_CANTIDAD", "Cantidad");
+            dgvPE.Columns["PXE_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvPE.Columns.Add("GRP_CODIGO", "Grupo");
             dgvPE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvPE.Columns["PZA_CODIGO"].DataPropertyName = "PZA_CODIGO";
@@ -601,10 +634,13 @@ namespace GyCAP.UI.EstructuraProducto
             dvPD = new DataView(dsEstructura.PIEZAS);
             dvPD.Sort = "PZA_NOMBRE ASC";
             dvPE = new DataView(dsEstructura.PIEZASXESTRUCTURA);
+            dgvPD.DataSource = dvPD;
+            dgvPE.DataSource = dvPE;
             #endregion Piezas
 
             #region Materia Prima
             //Grilla listado materia primas disponibles
+            dgvMPD.AutoGenerateColumns = false;
             dgvMPD.Columns.Add("MP_NOMBRE", "Nombre");
             dgvMPD.Columns.Add("UMED_CODIGO", "Unidad Medida");
             dgvMPD.Columns.Add("MP_DESCRIPCION", "Descripción");
@@ -617,9 +653,11 @@ namespace GyCAP.UI.EstructuraProducto
             dgvMPD.Columns["MP_DESCRIPCION"].DataPropertyName = "MP_DESCRIPCION";
 
             //Grilla listado materias primas en estructura
+            dgvMPE.AutoGenerateColumns = false;
             dgvMPE.Columns.Add("MP_CODIGO", "Nombre");
             dgvMPE.Columns.Add("UMED_NOMBRE", "Unidad Medida");
             dgvMPE.Columns.Add("MPXE_CANTIDAD", "Cantidad");
+            dgvMPE.Columns["MPXE_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvMPE.Columns.Add("GRP_CODIGO", "Grupo");
             dgvMPE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvMPE.Columns["MP_CODIGO"].DataPropertyName = "MP_CODIGO";
@@ -631,19 +669,68 @@ namespace GyCAP.UI.EstructuraProducto
             dvMPD = new DataView(dsEstructura.MATERIAS_PRIMAS);
             dvMPD.Sort = "MP_NOMBRE ASC";
             dvMPE = new DataView(dsEstructura.MATERIASPRIMASXESTRUCTURA);
+            dgvMPD.DataSource = dvMPD;
+            dgvMPE.DataSource = dvMPE;
             #endregion
 
             #region Árbol
             #endregion Árbol
         }
 
+        private void CargarListaPartes()
+        {
+            foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow row in dsEstructura.CONJUNTOSXESTRUCTURA)
+            {
+                Data.dsEstructura.LISTA_PARTESRow rowParte = dsEstructura.LISTA_PARTES.NewLISTA_PARTESRow();
+                rowParte.BeginEdit();
+                rowParte.PAR_TIPO = "Conjunto";
+                rowParte.PAR_NOMBRE = row.CONJUNTOSRow.CONJ_NOMBRE;
+                rowParte.PAR_TERMINACION = dsCocina.TERMINACIONES.FindByTE_CODIGO(row.CONJUNTOSRow.TE_CODIGO).TE_NOMBRE;
+                rowParte.PAR_CANTIDAD = row.CXE_CANTIDAD.ToString();
+                rowParte.EndEdit();
+                dsEstructura.LISTA_PARTES.AddLISTA_PARTESRow(rowParte);
+            }
+
+            foreach (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow row in dsEstructura.SUBCONJUNTOSXESTRUCTURA)
+            {
+                Data.dsEstructura.LISTA_PARTESRow rowParte = dsEstructura.LISTA_PARTES.NewLISTA_PARTESRow();
+                rowParte.BeginEdit();
+                rowParte.PAR_TIPO = "Subconjunto";
+                rowParte.PAR_NOMBRE = row.SUBCONJUNTOSRow.SCONJ_NOMBRE;
+                rowParte.PAR_TERMINACION = dsCocina.TERMINACIONES.FindByTE_CODIGO(row.SUBCONJUNTOSRow.TE_CODIGO).TE_NOMBRE;
+                rowParte.PAR_CANTIDAD = row.SCXE_CANTIDAD.ToString();
+                rowParte.EndEdit();
+                dsEstructura.LISTA_PARTES.AddLISTA_PARTESRow(rowParte);
+            }
+
+            foreach (Data.dsEstructura.PIEZASXESTRUCTURARow row in dsEstructura.PIEZASXESTRUCTURA)
+            {
+                Data.dsEstructura.LISTA_PARTESRow rowParte = dsEstructura.LISTA_PARTES.NewLISTA_PARTESRow();
+                rowParte.BeginEdit();
+                rowParte.PAR_TIPO = "Pieza";
+                rowParte.PAR_NOMBRE = row.PIEZASRow.PZA_NOMBRE;
+                rowParte.PAR_TERMINACION = dsCocina.TERMINACIONES.FindByTE_CODIGO(row.PIEZASRow.TE_CODIGO).TE_NOMBRE;
+                rowParte.PAR_CANTIDAD = row.PXE_CANTIDAD.ToString();
+                rowParte.EndEdit();
+                dsEstructura.LISTA_PARTES.AddLISTA_PARTESRow(rowParte);
+            }
+
+            foreach (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow row in dsEstructura.MATERIASPRIMASXESTRUCTURA)
+            {
+                Data.dsEstructura.LISTA_PARTESRow rowParte = dsEstructura.LISTA_PARTES.NewLISTA_PARTESRow();
+                rowParte.BeginEdit();
+                rowParte.PAR_TIPO = "Conjunto";
+                rowParte.PAR_NOMBRE = row.MATERIAS_PRIMASRow.MP_NOMBRE;
+                rowParte.PAR_TERMINACION = string.Empty;
+                rowParte.PAR_CANTIDAD = row.MPXE_CANTIDAD.ToString();
+                rowParte.EndEdit();
+                dsEstructura.LISTA_PARTES.AddLISTA_PARTESRow(rowParte);
+            }
+        }
+
         #endregion Servicios
 
-        
 
-        
-
-        
         
     }
 }
