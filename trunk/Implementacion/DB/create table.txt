@@ -795,6 +795,8 @@ create table PLANOS (
 create table PLANES_MATERIAS_PRIMAS_ANUALES (
    PMPA_CODIGO          numeric(10)          identity,
    PMPA_FECHACREACION   datetime             null,
+   PMPA_ANIO            numeric(4)           null,	/*-MODIFICACION 24/07/2010-*/
+   PMPA_NOMBRE          varchar              null,	/*-MODIFICACION 24/07/2010-*/
    constraint PK_PLANES_MATERIA_PRIMA_ANUAL primary key nonclustered (PMPA_CODIGO)
 )
 
@@ -805,7 +807,7 @@ create table PLANES_MATERIAS_PRIMAS_ANUALES (
 create table DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL (
    DPMPA_CODIGO         numeric(10)          identity,
    PMPA_CODIGO          numeric(10)          null,
-   MPPR_CODIGO          numeric(10)          null,
+   MP_CODIGO            numeric(10)          null,	/*-MODIFICACION 24/07/2010-*/
    DPMPA_CANTIDAD       numeric(10)          null,
    DPMPA_MES            varchar(10)          null,
    constraint PK_DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL primary key nonclustered (DPMPA_CODIGO)
