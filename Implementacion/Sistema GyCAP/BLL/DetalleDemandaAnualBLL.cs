@@ -18,6 +18,10 @@ namespace GyCAP.BLL
         {
             return DAL.DetalleDemandaAnualDAL.Insertar(detalle);
         }
-
+        //Metodo para calcular estimacion
+        public static int CantidadAñoMes(int año, string nombre, string mes)
+        {
+            return DAL.DetalleDemandaAnualDAL.ObtenerCantidadAñoMes(año,nombre,mes);
+        }
     }
 }

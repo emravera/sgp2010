@@ -22,6 +22,22 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        public static int ObtenerCantidadAñoMes(int año, string nombre, string mes)
+        {
+            string sql = @"SELECT det.ddeman_cantidadmes
+                        FROM DETALLE_DEMANDAS_ANUALES as det , DEMANDAS_ANUALES as dem
+                        WHERE det.deman_codigo=dem.deman_codigo and dem.deman_anio=@p0 and det.ddeman_mes=@p1 and dem.deman_nombre=@p2";
+
+            object[] valorParametros = { año, mes, nombre };
+
+            try
+            {
+                return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
+
         public static int Insertar(Entidades.DetalleDemandaAnual detalle)
         {
                       
