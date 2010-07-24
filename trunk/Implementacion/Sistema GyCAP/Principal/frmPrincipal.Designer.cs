@@ -1,6 +1,6 @@
 ﻿namespace Principal
 {
-    partial class Principal
+    partial class frmPrincipal
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.menuModulos = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemQA = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,12 +77,12 @@
             this.t9 = new System.Windows.Forms.ToolStripButton();
             this.tLEmpleado = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
-            this.statusStrip.SuspendLayout();
+            this.barraEstado.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -317,7 +317,7 @@
             // itemMenuOpciones
             // 
             this.itemMenuOpciones.Name = "itemMenuOpciones";
-            this.itemMenuOpciones.Size = new System.Drawing.Size(152, 22);
+            this.itemMenuOpciones.Size = new System.Drawing.Size(136, 22);
             this.itemMenuOpciones.Text = "&Opciones";
             this.itemMenuOpciones.Click += new System.EventHandler(this.itemMenuOpciones_Click);
             // 
@@ -522,15 +522,15 @@
             this.toolStripButton9.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
             // 
-            // statusStrip
+            // barraEstado
             // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.barraEstado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 548);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(792, 22);
-            this.statusStrip.TabIndex = 2;
-            this.statusStrip.Text = "StatusStrip";
+            this.barraEstado.Location = new System.Drawing.Point(0, 548);
+            this.barraEstado.Name = "barraEstado";
+            this.barraEstado.Size = new System.Drawing.Size(792, 22);
+            this.barraEstado.TabIndex = 2;
+            this.barraEstado.Text = "StatusStrip";
             // 
             // toolStripStatusLabel
             // 
@@ -538,26 +538,26 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(38, 17);
             this.toolStripStatusLabel.Text = "Status";
             // 
-            // Principal
+            // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 570);
-            this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.barraEstado);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
-            this.Name = "Principal";
+            this.Name = "frmPrincipal";
             this.Text = "GyCAP - Gestión y Control de Avance de la Producción";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
+            this.barraEstado.ResumeLayout(false);
+            this.barraEstado.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -567,7 +567,6 @@
 
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStrip toolStrip;
-        private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
@@ -615,6 +614,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemSO;
         private System.Windows.Forms.ToolStripMenuItem menuSalir;
         private System.Windows.Forms.ToolStripButton toolStripButton9;
+        public System.Windows.Forms.StatusStrip barraEstado;
     }
 }
 

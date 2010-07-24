@@ -397,10 +397,10 @@ namespace GyCAP.DAL
             }
         }
         
-        public static void ObtenerEstructuras(object nombre, object codPlano, object fechaCreacion, object codCocina, object legResponsable, object activoSiNo, Data.dsEstructura ds)
+        public static void ObtenerEstructuras(object nombre, object codPlano, object fechaCreacion, object codCocina, object codResponsable, object activoSiNo, Data.dsEstructura ds)
         {
-            string sql = @"SELECT estr_codigo, estr_nombre, coc_codigo, pno_codigo, estr_descripcion, estr_activo, estr_fecha_alta, estr_fecha_modificacion, e_legajo 
-                          FROM CONJUNTOS WHERE 1=1";
+            string sql = @"SELECT estr_codigo, estr_nombre, coc_codigo, pno_codigo, estr_descripcion, estr_activo, estr_fecha_alta, estr_fecha_modificacion, e_codigo 
+                          FROM ESTRUCTURAS WHERE 1=1";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
@@ -428,7 +428,7 @@ namespace GyCAP.DAL
             //FECHA CREACION
             if (fechaCreacion != null && fechaCreacion.GetType() == DateTime.Today.GetType())
             {
-                sql += " AND estr_fecha_creacion = @p" + cantidadParametros;
+                sql += " AND estr_fecha_alta = @p" + cantidadParametros;
                 valoresFiltros[cantidadParametros] = fechaCreacion.ToString();
                 cantidadParametros++;
             }
@@ -442,16 +442,19 @@ namespace GyCAP.DAL
             }
 
             //RESPONSABLE
-            if (legResponsable != null && legResponsable.GetType() == cantidadParametros.GetType())
+            if (codResponsable != null && codResponsable.GetType() == cantidadParametros.GetType())
             {
-                sql += " AND e_legajo = @p" + cantidadParametros;
-                valoresFiltros[cantidadParametros] = Convert.ToInt32(codPlano);
+                sql += " AND e_codigo = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(codResponsable);
                 cantidadParametros++;
             }
 
             //ACTIVO
             if (activoSiNo != null && activoSiNo.ToString() != string.Empty)
             {
+                if (activoSiNo.ToString().ToLower().CompareTo("si") == 0 || activoSiNo.ToString().CompareTo("1") == 0) { activoSiNo = 1; }
+                else if (activoSiNo.ToString().ToLower().CompareTo("no") == 0 || activoSiNo.ToString().CompareTo("0") == 0) { activoSiNo = 0; }
+                else { activoSiNo = 0; }
                 sql += " AND estr_activo = @p" + cantidadParametros;
                 valoresFiltros[cantidadParametros] = Convert.ToInt32(activoSiNo);
                 cantidadParametros++;
