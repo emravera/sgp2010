@@ -15,12 +15,14 @@ namespace GyCAP.DAL
                                         ([pza_nombre]
                                         ,[te_codigo]
                                         ,[pza_descripcion]
-                                        ,[pza_cantidadstock]) 
-                                        VALUES (@p0,@p1,@p2,@p3) SELECT @@Identity";
+                                        ,[pza_cantidadstock]
+                                        ,[par_codigo]
+                                        ,[pno_codigo]) 
+                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
 
             //Así obtenemos la pieza nueva del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.PIEZASRow rowPieza = dsEstructura.PIEZAS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.PIEZASRow;
-            object[] valorParametros = { rowPieza.PZA_NOMBRE, rowPieza.TE_CODIGO, rowPieza.PZA_DESCRIPCION, 0 };
+            object[] valorParametros = { rowPieza.PZA_NOMBRE, rowPieza.TE_CODIGO, rowPieza.PZA_DESCRIPCION, 0, rowPieza.PAR_CODIGO, rowPieza.PNO_CODIGO };
 
             string sqlInsertEstructura = @"INSERT INTO [DETALLE_PIEZA] 
                                         ([pza_codigo]
@@ -85,7 +87,13 @@ namespace GyCAP.DAL
             //Esto va a ser muy largo...empecemos
             //Primero actualizaremos la pieza y luego la estructura
             //Armemos todas las consultas
-            string sqlUpdatePieza = "UPDATE PIEZAS SET pza_nombre = @p0, te_codigo = @p1, pza_descripcion = @p2 WHERE pza_codigo = @p3";
+            string sqlUpdatePieza = @"UPDATE PIEZAS SET
+                                    pza_nombre = @p0
+                                    ,te_codigo = @p1
+                                    ,pza_descripcion = @p2
+                                    ,par_codigo = @p3
+                                    ,pno_codigo = @p4
+                                    WHERE pza_codigo = @p5";
 
             string sqlInsertEstructura = @"INSERT INTO [DETALLE_PIEZA] 
                                         ([pza_codigo]
@@ -100,7 +108,7 @@ namespace GyCAP.DAL
 
             //Así obtenemos la pieza del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.PIEZASRow rowPieza = dsEstructura.PIEZAS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.PIEZASRow;
-            object[] valorParametros = { rowPieza.PZA_NOMBRE, rowPieza.TE_CODIGO, rowPieza.PZA_DESCRIPCION, rowPieza.PZA_CODIGO };
+            object[] valorParametros = { rowPieza.PZA_NOMBRE, rowPieza.TE_CODIGO, rowPieza.PZA_DESCRIPCION, rowPieza.PAR_CODIGO, rowPieza.PNO_CODIGO, rowPieza.PZA_CODIGO };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
@@ -192,7 +200,7 @@ namespace GyCAP.DAL
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
         public static Entidades.Pieza ObtenerPieza(int codigoPieza)
         {
-            string sql = @"SELECT pza_nombre, te_terminacion, pza_descripcion, pza_cantidadstock
+            string sql = @"SELECT pza_nombre, te_terminacion, pza_descripcion, pza_cantidadstock, par_codigo, pno_codigo 
                         FROM PIEZAS WHERE pza_codigo = @p0";
             object[] valorParametros = { codigoPieza };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
@@ -206,6 +214,8 @@ namespace GyCAP.DAL
                 pieza.CodigoTerminacion = Convert.ToInt32(rdr["te_codigo"].ToString());
                 pieza.Descripcion = rdr["pza_descripcion"].ToString();
                 pieza.CantidadStock = Convert.ToInt32(rdr["pza_cantidadstock"].ToString());
+                pieza.CodigoEstado = Convert.ToInt32(rdr["par_codigo"].ToString());
+                pieza.CodigoPlano = Convert.ToInt32(rdr["pno_codigo"].ToString());
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             finally
@@ -218,7 +228,8 @@ namespace GyCAP.DAL
 
         public static void ObtenerPiezas(object nombre, object terminacion, Data.dsEstructura ds)
         {
-            string sql = "SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, pza_cantidadstock FROM PIEZAS WHERE 1=1";
+            string sql = @"SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, pza_cantidadstock, par_codigo, pno_codigo 
+                          FROM PIEZAS WHERE 1=1";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
@@ -301,14 +312,16 @@ namespace GyCAP.DAL
         public static bool PuedeEliminarse(int codigo)
         {
             string sqlDPZA = "SELECT count(pza_codigo) FROM DETALLE_PIEZA WHERE pza_codigo = @p0";
-            string sqlPXSC = "SELECT count(pza_codigo) FROM PIEZASXSUBCONJUNTO WHERE pza_codigo = @p0";
+            string sqlPXSC = "SELECT count(pza_codigo) FROM DETALLE_SUBCONJUNTO WHERE pza_codigo = @p0";
+            string sqlPXE = "SELECT count(pza_codigo) FROM PIEZASXESTRUCTURA WHERE pza_codigo = @p0";
 
             object[] valorParametros = { codigo };
             try
             {
                 int resultadoDPZA = Convert.ToInt32(DB.executeScalar(sqlDPZA, valorParametros, null));
                 int resultadoPXSC = Convert.ToInt32(DB.executeScalar(sqlPXSC, valorParametros, null));
-                if ( resultadoDPZA == 0 && resultadoPXSC == 0)
+                int resultadoPXE = Convert.ToInt32(DB.executeScalar(sqlPXE, valorParametros, null));
+                if ( resultadoDPZA == 0 && resultadoPXSC == 0 && resultadoPXE == 0)
                 {
                     return true;
                 }

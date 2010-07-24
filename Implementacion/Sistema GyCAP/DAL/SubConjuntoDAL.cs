@@ -15,12 +15,14 @@ namespace GyCAP.DAL
                                         ([sconj_nombre]
                                         ,[te_codigo]
                                         ,[sconj_descripcion]
-                                        ,[sconj_cantidadstock]) 
-                                        VALUES (@p0,@p1,@p2,@p3) SELECT @@Identity";
+                                        ,[sconj_cantidadstock]
+                                        ,[par_codigo]
+                                        ,[pno_codigo]) 
+                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
 
             //Así obtenemos el subconjunto nuevo del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto = dsEstructura.SUBCONJUNTOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.SUBCONJUNTOSRow;
-            object[] valorParametros = { rowSubconjunto.SCONJ_CODIGO, rowSubconjunto.TE_CODIGO, rowSubconjunto.SCONJ_DESCRIPCION,0 };
+            object[] valorParametros = { rowSubconjunto.SCONJ_CODIGO, rowSubconjunto.TE_CODIGO, rowSubconjunto.SCONJ_DESCRIPCION, 0, rowSubconjunto.PAR_CODIGO, rowSubconjunto.PNO_CODIGO };
 
             string sqlInsertEstructura = @"INSERT INTO [DETALLE_SUBCONJUNTO] 
                                         ([sconj_codigo]
@@ -88,8 +90,10 @@ namespace GyCAP.DAL
             string sqlUpdateSubconjunto = @"UPDATE SUBCONJUNTOS SET
                                             sconj_nombre = @p0
                                            ,te_codigo = @p1
-                                           ,sconj_descripcion = @p2
-                                            WHERE sconj_codigo = @p3";
+                                           ,sconj_descripcion = @p2 
+                                           ,par_codigo = @p3
+                                           ,pno_codigo = @p4
+                                            WHERE sconj_codigo = @p5";
 
             string sqlInsertEstructura = @"INSERT INTO [DETALLE_SUBCONJUNTO] 
                                         ([sconj_codigo]
@@ -104,7 +108,7 @@ namespace GyCAP.DAL
 
             //Así obtenemos el subconjunto del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto = dsEstructura.SUBCONJUNTOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.SUBCONJUNTOSRow;
-            object[] valorParametros = { rowSubconjunto.SCONJ_NOMBRE, rowSubconjunto.TE_CODIGO, rowSubconjunto.SCONJ_DESCRIPCION, rowSubconjunto.SCONJ_CODIGO };
+            object[] valorParametros = { rowSubconjunto.SCONJ_NOMBRE, rowSubconjunto.TE_CODIGO, rowSubconjunto.SCONJ_DESCRIPCION, rowSubconjunto.PAR_CODIGO, rowSubconjunto.PNO_CODIGO, rowSubconjunto.SCONJ_CODIGO };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
@@ -170,7 +174,8 @@ namespace GyCAP.DAL
 
         public static void ObtenerSubconjuntos(object nombre, object terminacion, Data.dsEstructura ds)
         {
-            string sql = "SELECT sconj_codigo, sconj_nombre, te_codigo, sconj_descripcion, sconj_cantidadstock FROM SUBCONJUNTOS WHERE 1=1";
+            string sql = @"SELECT sconj_codigo, sconj_nombre, te_codigo, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo 
+                        FROM SUBCONJUNTOS WHERE 1=1";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
@@ -254,13 +259,15 @@ namespace GyCAP.DAL
         {
             string sqlDSCC = "SELECT count(sconj_codigo) FROM DETALLE_SUBCONJUNTO WHERE sconj_codigo = @p0";
             string sqlSCXC = "SELECT count(sconj_codigo) FROM DETALLE_CONJUNTO WHERE sconj_codigo = @p0";
+            string sqlSCXE = "SELECT count(sconj_codigo) FROM SUBCONJUNTOSXESTRUCTURA WHERE sconj_codigo = @p0";
 
             object[] valorParametros = { codigo };
             try
             {
                 int resultadoDSCC = Convert.ToInt32(DB.executeScalar(sqlDSCC, valorParametros, null));
                 int resultadoSCXC = Convert.ToInt32(DB.executeScalar(sqlSCXC, valorParametros, null));
-                if (resultadoDSCC == 0 && resultadoSCXC == 0)
+                int resultadoSCXE = Convert.ToInt32(DB.executeScalar(sqlSCXE, valorParametros, null));
+                if (resultadoDSCC == 0 && resultadoSCXC == 0 && resultadoSCXE == 0)
                 {
                     return true;
                 }
@@ -306,8 +313,8 @@ namespace GyCAP.DAL
         
         public static bool EsSubConjunto(Entidades.SubConjunto subConjunto)
         {
-            string sql = "SELECT count(sconj_codigo) FROM SUBCONJUNTOS WHERE sconj_nombre = @p0";
-            object[] valorParametros = { subConjunto.Nombre };
+            string sql = "SELECT count(sconj_codigo) FROM SUBCONJUNTOS WHERE sconj_nombre = @p0 AND te_codigo = @p1";
+            object[] valorParametros = { subConjunto.Nombre, subConjunto.CodigoTerminacion };
             try
             {
                 if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
@@ -331,7 +338,7 @@ namespace GyCAP.DAL
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
         public static Entidades.SubConjunto ObtenerSubconjunto(int codigoSubconjunto)
         {
-            string sql = @"SELECT sconj_nombre, te_terminacion, sconj_descripcion, sconj_cantidadstock
+            string sql = @"SELECT sconj_nombre, te_terminacion, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo
                          FROM SUBCONJUNTOS WHERE sconj_codigo = @p0";
             object[] valorParametros = { codigoSubconjunto };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
@@ -345,6 +352,8 @@ namespace GyCAP.DAL
                 subconjunto.CodigoTerminacion = Convert.ToInt32(rdr["te_codigo"].ToString());
                 subconjunto.Descripcion = rdr["sconj_descripcion"].ToString();
                 subconjunto.CantidadStock = Convert.ToInt32(rdr["sconj_cantidadstock"].ToString());
+                subconjunto.CodigoEstado = Convert.ToInt32(rdr["par_codigo"].ToString());
+                subconjunto.CodigoPlano = Convert.ToInt32(rdr["pno_codigo"].ToString());
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             finally

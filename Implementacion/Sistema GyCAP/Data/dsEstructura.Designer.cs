@@ -41,8 +41,6 @@ namespace GyCAP.Data {
         
         private ESTRUCTURASDataTable tableESTRUCTURAS;
         
-        private PLANOSDataTable tablePLANOS;
-        
         private GRUPOS_ESTRUCTURADataTable tableGRUPOS_ESTRUCTURA;
         
         private CONJUNTOSDataTable tableCONJUNTOS;
@@ -53,17 +51,9 @@ namespace GyCAP.Data {
         
         private MATERIAS_PRIMASDataTable tableMATERIAS_PRIMAS;
         
+        private PLANOSDataTable tablePLANOS;
+        
         private LISTA_PARTESDataTable tableLISTA_PARTES;
-        
-        private global::System.Data.DataRelation relationpiezasXEstructura_estructura_fk;
-        
-        private global::System.Data.DataRelation relationsubconjuntosXestructura_estructura_fk;
-        
-        private global::System.Data.DataRelation relationmateriaPrimaXEstructura_estructura_fk;
-        
-        private global::System.Data.DataRelation relationconjuntoXEstructura_estructura_fk;
-        
-        private global::System.Data.DataRelation relationestructura_plano_fk;
         
         private global::System.Data.DataRelation relationpiezasXEstructura_grupoEstructura_fk;
         
@@ -73,13 +63,9 @@ namespace GyCAP.Data {
         
         private global::System.Data.DataRelation relationconjuntoXEstructura_grupo_fk;
         
-        private global::System.Data.DataRelation relationgrupoEstructura_estructura_fk;
-        
         private global::System.Data.DataRelation relationdetalleconjunto_subconjunto_fk;
         
         private global::System.Data.DataRelation relationconjuntoXEstructura_conjunto_fk;
-        
-        private global::System.Data.DataRelation relationconjunto_plano_fk;
         
         private global::System.Data.DataRelation relationdetalleconjunto_conjunto_fk;
         
@@ -87,19 +73,33 @@ namespace GyCAP.Data {
         
         private global::System.Data.DataRelation relationsubconjuntosXEstructura_subconjunto_fk;
         
-        private global::System.Data.DataRelation relationsubconjunto_plano_fk;
-        
         private global::System.Data.DataRelation relationdetalleSubconjunto_pieza_fk;
         
         private global::System.Data.DataRelation relationdetallePieza_pieza_fk;
         
         private global::System.Data.DataRelation relationpiezasXEstructura_piezas_fk;
         
-        private global::System.Data.DataRelation relationpiezas_plano_fk;
-        
         private global::System.Data.DataRelation relationdetallePieza_materiaPrima_fk;
         
         private global::System.Data.DataRelation relationmateriaPrimaXEstructura_materiaPrima_fk;
+        
+        private global::System.Data.DataRelation relationconjunto_plano_fk;
+        
+        private global::System.Data.DataRelation relationsubconjunto_plano_fk;
+        
+        private global::System.Data.DataRelation relationpiezas_plano_fk;
+        
+        private global::System.Data.DataRelation relationestructura_plano_fk;
+        
+        private global::System.Data.DataRelation relationgrupoEstructura_estructura_fk;
+        
+        private global::System.Data.DataRelation relationconjuntoXEstructura_estructura_fk;
+        
+        private global::System.Data.DataRelation relationmateriaPrimaXEstructura_estructura_fk;
+        
+        private global::System.Data.DataRelation relationsubconjuntosXestructura_estructura_fk;
+        
+        private global::System.Data.DataRelation relationpiezasXEstructura_estructura_fk;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -151,9 +151,6 @@ namespace GyCAP.Data {
                 if ((ds.Tables["ESTRUCTURAS"] != null)) {
                     base.Tables.Add(new ESTRUCTURASDataTable(ds.Tables["ESTRUCTURAS"]));
                 }
-                if ((ds.Tables["PLANOS"] != null)) {
-                    base.Tables.Add(new PLANOSDataTable(ds.Tables["PLANOS"]));
-                }
                 if ((ds.Tables["GRUPOS_ESTRUCTURA"] != null)) {
                     base.Tables.Add(new GRUPOS_ESTRUCTURADataTable(ds.Tables["GRUPOS_ESTRUCTURA"]));
                 }
@@ -168,6 +165,9 @@ namespace GyCAP.Data {
                 }
                 if ((ds.Tables["MATERIAS_PRIMAS"] != null)) {
                     base.Tables.Add(new MATERIAS_PRIMASDataTable(ds.Tables["MATERIAS_PRIMAS"]));
+                }
+                if ((ds.Tables["PLANOS"] != null)) {
+                    base.Tables.Add(new PLANOSDataTable(ds.Tables["PLANOS"]));
                 }
                 if ((ds.Tables["LISTA_PARTES"] != null)) {
                     base.Tables.Add(new LISTA_PARTESDataTable(ds.Tables["LISTA_PARTES"]));
@@ -265,15 +265,6 @@ namespace GyCAP.Data {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public PLANOSDataTable PLANOS {
-            get {
-                return this.tablePLANOS;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public GRUPOS_ESTRUCTURADataTable GRUPOS_ESTRUCTURA {
             get {
                 return this.tableGRUPOS_ESTRUCTURA;
@@ -313,6 +304,15 @@ namespace GyCAP.Data {
         public MATERIAS_PRIMASDataTable MATERIAS_PRIMAS {
             get {
                 return this.tableMATERIAS_PRIMAS;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public PLANOSDataTable PLANOS {
+            get {
+                return this.tablePLANOS;
             }
         }
         
@@ -408,9 +408,6 @@ namespace GyCAP.Data {
                 if ((ds.Tables["ESTRUCTURAS"] != null)) {
                     base.Tables.Add(new ESTRUCTURASDataTable(ds.Tables["ESTRUCTURAS"]));
                 }
-                if ((ds.Tables["PLANOS"] != null)) {
-                    base.Tables.Add(new PLANOSDataTable(ds.Tables["PLANOS"]));
-                }
                 if ((ds.Tables["GRUPOS_ESTRUCTURA"] != null)) {
                     base.Tables.Add(new GRUPOS_ESTRUCTURADataTable(ds.Tables["GRUPOS_ESTRUCTURA"]));
                 }
@@ -425,6 +422,9 @@ namespace GyCAP.Data {
                 }
                 if ((ds.Tables["MATERIAS_PRIMAS"] != null)) {
                     base.Tables.Add(new MATERIAS_PRIMASDataTable(ds.Tables["MATERIAS_PRIMAS"]));
+                }
+                if ((ds.Tables["PLANOS"] != null)) {
+                    base.Tables.Add(new PLANOSDataTable(ds.Tables["PLANOS"]));
                 }
                 if ((ds.Tables["LISTA_PARTES"] != null)) {
                     base.Tables.Add(new LISTA_PARTESDataTable(ds.Tables["LISTA_PARTES"]));
@@ -507,12 +507,6 @@ namespace GyCAP.Data {
                     this.tableESTRUCTURAS.InitVars();
                 }
             }
-            this.tablePLANOS = ((PLANOSDataTable)(base.Tables["PLANOS"]));
-            if ((initTable == true)) {
-                if ((this.tablePLANOS != null)) {
-                    this.tablePLANOS.InitVars();
-                }
-            }
             this.tableGRUPOS_ESTRUCTURA = ((GRUPOS_ESTRUCTURADataTable)(base.Tables["GRUPOS_ESTRUCTURA"]));
             if ((initTable == true)) {
                 if ((this.tableGRUPOS_ESTRUCTURA != null)) {
@@ -543,35 +537,41 @@ namespace GyCAP.Data {
                     this.tableMATERIAS_PRIMAS.InitVars();
                 }
             }
+            this.tablePLANOS = ((PLANOSDataTable)(base.Tables["PLANOS"]));
+            if ((initTable == true)) {
+                if ((this.tablePLANOS != null)) {
+                    this.tablePLANOS.InitVars();
+                }
+            }
             this.tableLISTA_PARTES = ((LISTA_PARTESDataTable)(base.Tables["LISTA_PARTES"]));
             if ((initTable == true)) {
                 if ((this.tableLISTA_PARTES != null)) {
                     this.tableLISTA_PARTES.InitVars();
                 }
             }
-            this.relationpiezasXEstructura_estructura_fk = this.Relations["piezasXEstructura_estructura_fk"];
-            this.relationsubconjuntosXestructura_estructura_fk = this.Relations["subconjuntosXestructura_estructura_fk"];
-            this.relationmateriaPrimaXEstructura_estructura_fk = this.Relations["materiaPrimaXEstructura_estructura_fk"];
-            this.relationconjuntoXEstructura_estructura_fk = this.Relations["conjuntoXEstructura_estructura_fk"];
-            this.relationestructura_plano_fk = this.Relations["estructura_plano_fk"];
             this.relationpiezasXEstructura_grupoEstructura_fk = this.Relations["piezasXEstructura_grupoEstructura_fk"];
             this.relationsubconjuntosXEstructura_grupoEstructura_fk = this.Relations["subconjuntosXEstructura_grupoEstructura_fk"];
             this.relationmateriaPrimaXEstructura_grupoEstructura_fk = this.Relations["materiaPrimaXEstructura_grupoEstructura_fk"];
             this.relationconjuntoXEstructura_grupo_fk = this.Relations["conjuntoXEstructura_grupo_fk"];
-            this.relationgrupoEstructura_estructura_fk = this.Relations["grupoEstructura_estructura_fk"];
             this.relationdetalleconjunto_subconjunto_fk = this.Relations["detalleconjunto_subconjunto_fk"];
             this.relationconjuntoXEstructura_conjunto_fk = this.Relations["conjuntoXEstructura_conjunto_fk"];
-            this.relationconjunto_plano_fk = this.Relations["conjunto_plano_fk"];
             this.relationdetalleconjunto_conjunto_fk = this.Relations["detalleconjunto_conjunto_fk"];
             this.relationdetalleSubconjunto_subconjunto_fk = this.Relations["detalleSubconjunto_subconjunto_fk"];
             this.relationsubconjuntosXEstructura_subconjunto_fk = this.Relations["subconjuntosXEstructura_subconjunto_fk"];
-            this.relationsubconjunto_plano_fk = this.Relations["subconjunto_plano_fk"];
             this.relationdetalleSubconjunto_pieza_fk = this.Relations["detalleSubconjunto_pieza_fk"];
             this.relationdetallePieza_pieza_fk = this.Relations["detallePieza_pieza_fk"];
             this.relationpiezasXEstructura_piezas_fk = this.Relations["piezasXEstructura_piezas_fk"];
-            this.relationpiezas_plano_fk = this.Relations["piezas_plano_fk"];
             this.relationdetallePieza_materiaPrima_fk = this.Relations["detallePieza_materiaPrima_fk"];
             this.relationmateriaPrimaXEstructura_materiaPrima_fk = this.Relations["materiaPrimaXEstructura_materiaPrima_fk"];
+            this.relationconjunto_plano_fk = this.Relations["conjunto_plano_fk"];
+            this.relationsubconjunto_plano_fk = this.Relations["subconjunto_plano_fk"];
+            this.relationpiezas_plano_fk = this.Relations["piezas_plano_fk"];
+            this.relationestructura_plano_fk = this.Relations["estructura_plano_fk"];
+            this.relationgrupoEstructura_estructura_fk = this.Relations["grupoEstructura_estructura_fk"];
+            this.relationconjuntoXEstructura_estructura_fk = this.Relations["conjuntoXEstructura_estructura_fk"];
+            this.relationmateriaPrimaXEstructura_estructura_fk = this.Relations["materiaPrimaXEstructura_estructura_fk"];
+            this.relationsubconjuntosXestructura_estructura_fk = this.Relations["subconjuntosXestructura_estructura_fk"];
+            this.relationpiezasXEstructura_estructura_fk = this.Relations["piezasXEstructura_estructura_fk"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -597,8 +597,6 @@ namespace GyCAP.Data {
             base.Tables.Add(this.tableCONJUNTOSXESTRUCTURA);
             this.tableESTRUCTURAS = new ESTRUCTURASDataTable();
             base.Tables.Add(this.tableESTRUCTURAS);
-            this.tablePLANOS = new PLANOSDataTable();
-            base.Tables.Add(this.tablePLANOS);
             this.tableGRUPOS_ESTRUCTURA = new GRUPOS_ESTRUCTURADataTable();
             base.Tables.Add(this.tableGRUPOS_ESTRUCTURA);
             this.tableCONJUNTOS = new CONJUNTOSDataTable();
@@ -609,28 +607,10 @@ namespace GyCAP.Data {
             base.Tables.Add(this.tablePIEZAS);
             this.tableMATERIAS_PRIMAS = new MATERIAS_PRIMASDataTable();
             base.Tables.Add(this.tableMATERIAS_PRIMAS);
+            this.tablePLANOS = new PLANOSDataTable();
+            base.Tables.Add(this.tablePLANOS);
             this.tableLISTA_PARTES = new LISTA_PARTESDataTable();
             base.Tables.Add(this.tableLISTA_PARTES);
-            this.relationpiezasXEstructura_estructura_fk = new global::System.Data.DataRelation("piezasXEstructura_estructura_fk", new global::System.Data.DataColumn[] {
-                        this.tableESTRUCTURAS.ESTR_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePIEZASXESTRUCTURA.ESTR_CODIGOColumn}, false);
-            this.Relations.Add(this.relationpiezasXEstructura_estructura_fk);
-            this.relationsubconjuntosXestructura_estructura_fk = new global::System.Data.DataRelation("subconjuntosXestructura_estructura_fk", new global::System.Data.DataColumn[] {
-                        this.tableESTRUCTURAS.ESTR_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSUBCONJUNTOSXESTRUCTURA.ESTR_CODIGOColumn}, false);
-            this.Relations.Add(this.relationsubconjuntosXestructura_estructura_fk);
-            this.relationmateriaPrimaXEstructura_estructura_fk = new global::System.Data.DataRelation("materiaPrimaXEstructura_estructura_fk", new global::System.Data.DataColumn[] {
-                        this.tableESTRUCTURAS.ESTR_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableMATERIASPRIMASXESTRUCTURA.ESTR_CODIGOColumn}, false);
-            this.Relations.Add(this.relationmateriaPrimaXEstructura_estructura_fk);
-            this.relationconjuntoXEstructura_estructura_fk = new global::System.Data.DataRelation("conjuntoXEstructura_estructura_fk", new global::System.Data.DataColumn[] {
-                        this.tableESTRUCTURAS.ESTR_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCONJUNTOSXESTRUCTURA.ESTR_CODIGOColumn}, false);
-            this.Relations.Add(this.relationconjuntoXEstructura_estructura_fk);
-            this.relationestructura_plano_fk = new global::System.Data.DataRelation("estructura_plano_fk", new global::System.Data.DataColumn[] {
-                        this.tablePLANOS.PNO_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableESTRUCTURAS.PNO_CODIGOColumn}, false);
-            this.Relations.Add(this.relationestructura_plano_fk);
             this.relationpiezasXEstructura_grupoEstructura_fk = new global::System.Data.DataRelation("piezasXEstructura_grupoEstructura_fk", new global::System.Data.DataColumn[] {
                         this.tableGRUPOS_ESTRUCTURA.GRP_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tablePIEZASXESTRUCTURA.GRP_CODIGOColumn}, false);
@@ -647,10 +627,6 @@ namespace GyCAP.Data {
                         this.tableGRUPOS_ESTRUCTURA.GRP_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableCONJUNTOSXESTRUCTURA.GRP_CODIGOColumn}, false);
             this.Relations.Add(this.relationconjuntoXEstructura_grupo_fk);
-            this.relationgrupoEstructura_estructura_fk = new global::System.Data.DataRelation("grupoEstructura_estructura_fk", new global::System.Data.DataColumn[] {
-                        this.tableESTRUCTURAS.ESTR_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableGRUPOS_ESTRUCTURA.ESTR_CODIGOColumn}, false);
-            this.Relations.Add(this.relationgrupoEstructura_estructura_fk);
             this.relationdetalleconjunto_subconjunto_fk = new global::System.Data.DataRelation("detalleconjunto_subconjunto_fk", new global::System.Data.DataColumn[] {
                         this.tableCONJUNTOS.CONJ_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableDETALLE_CONJUNTO.CONJ_CODIGOColumn}, false);
@@ -659,10 +635,6 @@ namespace GyCAP.Data {
                         this.tableCONJUNTOS.CONJ_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableCONJUNTOSXESTRUCTURA.CONJ_CODIGOColumn}, false);
             this.Relations.Add(this.relationconjuntoXEstructura_conjunto_fk);
-            this.relationconjunto_plano_fk = new global::System.Data.DataRelation("conjunto_plano_fk", new global::System.Data.DataColumn[] {
-                        this.tablePLANOS.PNO_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCONJUNTOS.PNO_CODIGOColumn}, false);
-            this.Relations.Add(this.relationconjunto_plano_fk);
             this.relationdetalleconjunto_conjunto_fk = new global::System.Data.DataRelation("detalleconjunto_conjunto_fk", new global::System.Data.DataColumn[] {
                         this.tableSUBCONJUNTOS.SCONJ_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableDETALLE_CONJUNTO.SCONJ_CODIGOColumn}, false);
@@ -675,10 +647,6 @@ namespace GyCAP.Data {
                         this.tableSUBCONJUNTOS.SCONJ_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableSUBCONJUNTOSXESTRUCTURA.SCONJ_CODIGOColumn}, false);
             this.Relations.Add(this.relationsubconjuntosXEstructura_subconjunto_fk);
-            this.relationsubconjunto_plano_fk = new global::System.Data.DataRelation("subconjunto_plano_fk", new global::System.Data.DataColumn[] {
-                        this.tablePLANOS.PNO_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSUBCONJUNTOS.PNO_CODIGOColumn}, false);
-            this.Relations.Add(this.relationsubconjunto_plano_fk);
             this.relationdetalleSubconjunto_pieza_fk = new global::System.Data.DataRelation("detalleSubconjunto_pieza_fk", new global::System.Data.DataColumn[] {
                         this.tablePIEZAS.PZA_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableDETALLE_SUBCONJUNTO.PZA_CODIGOColumn}, false);
@@ -691,10 +659,6 @@ namespace GyCAP.Data {
                         this.tablePIEZAS.PZA_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tablePIEZASXESTRUCTURA.PZA_CODIGOColumn}, false);
             this.Relations.Add(this.relationpiezasXEstructura_piezas_fk);
-            this.relationpiezas_plano_fk = new global::System.Data.DataRelation("piezas_plano_fk", new global::System.Data.DataColumn[] {
-                        this.tablePLANOS.PNO_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePIEZAS.PNO_CODIGOColumn}, false);
-            this.Relations.Add(this.relationpiezas_plano_fk);
             this.relationdetallePieza_materiaPrima_fk = new global::System.Data.DataRelation("detallePieza_materiaPrima_fk", new global::System.Data.DataColumn[] {
                         this.tableMATERIAS_PRIMAS.MP_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableDETALLE_PIEZA.MP_CODIGOColumn}, false);
@@ -703,6 +667,42 @@ namespace GyCAP.Data {
                         this.tableMATERIAS_PRIMAS.MP_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableMATERIASPRIMASXESTRUCTURA.MP_CODIGOColumn}, false);
             this.Relations.Add(this.relationmateriaPrimaXEstructura_materiaPrima_fk);
+            this.relationconjunto_plano_fk = new global::System.Data.DataRelation("conjunto_plano_fk", new global::System.Data.DataColumn[] {
+                        this.tablePLANOS.PNO_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCONJUNTOS.PNO_CODIGOColumn}, false);
+            this.Relations.Add(this.relationconjunto_plano_fk);
+            this.relationsubconjunto_plano_fk = new global::System.Data.DataRelation("subconjunto_plano_fk", new global::System.Data.DataColumn[] {
+                        this.tablePLANOS.PNO_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSUBCONJUNTOS.PNO_CODIGOColumn}, false);
+            this.Relations.Add(this.relationsubconjunto_plano_fk);
+            this.relationpiezas_plano_fk = new global::System.Data.DataRelation("piezas_plano_fk", new global::System.Data.DataColumn[] {
+                        this.tablePLANOS.PNO_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePIEZAS.PNO_CODIGOColumn}, false);
+            this.Relations.Add(this.relationpiezas_plano_fk);
+            this.relationestructura_plano_fk = new global::System.Data.DataRelation("estructura_plano_fk", new global::System.Data.DataColumn[] {
+                        this.tablePLANOS.PNO_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableESTRUCTURAS.PNO_CODIGOColumn}, false);
+            this.Relations.Add(this.relationestructura_plano_fk);
+            this.relationgrupoEstructura_estructura_fk = new global::System.Data.DataRelation("grupoEstructura_estructura_fk", new global::System.Data.DataColumn[] {
+                        this.tableESTRUCTURAS.ESTR_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableGRUPOS_ESTRUCTURA.ESTR_CODIGOColumn}, false);
+            this.Relations.Add(this.relationgrupoEstructura_estructura_fk);
+            this.relationconjuntoXEstructura_estructura_fk = new global::System.Data.DataRelation("conjuntoXEstructura_estructura_fk", new global::System.Data.DataColumn[] {
+                        this.tableESTRUCTURAS.ESTR_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCONJUNTOSXESTRUCTURA.ESTR_CODIGOColumn}, false);
+            this.Relations.Add(this.relationconjuntoXEstructura_estructura_fk);
+            this.relationmateriaPrimaXEstructura_estructura_fk = new global::System.Data.DataRelation("materiaPrimaXEstructura_estructura_fk", new global::System.Data.DataColumn[] {
+                        this.tableESTRUCTURAS.ESTR_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMATERIASPRIMASXESTRUCTURA.ESTR_CODIGOColumn}, false);
+            this.Relations.Add(this.relationmateriaPrimaXEstructura_estructura_fk);
+            this.relationsubconjuntosXestructura_estructura_fk = new global::System.Data.DataRelation("subconjuntosXestructura_estructura_fk", new global::System.Data.DataColumn[] {
+                        this.tableESTRUCTURAS.ESTR_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSUBCONJUNTOSXESTRUCTURA.ESTR_CODIGOColumn}, false);
+            this.Relations.Add(this.relationsubconjuntosXestructura_estructura_fk);
+            this.relationpiezasXEstructura_estructura_fk = new global::System.Data.DataRelation("piezasXEstructura_estructura_fk", new global::System.Data.DataColumn[] {
+                        this.tableESTRUCTURAS.ESTR_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePIEZASXESTRUCTURA.ESTR_CODIGOColumn}, false);
+            this.Relations.Add(this.relationpiezasXEstructura_estructura_fk);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -746,11 +746,6 @@ namespace GyCAP.Data {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializePLANOS() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeGRUPOS_ESTRUCTURA() {
             return false;
         }
@@ -772,6 +767,11 @@ namespace GyCAP.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeMATERIAS_PRIMAS() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializePLANOS() {
             return false;
         }
         
@@ -849,8 +849,6 @@ namespace GyCAP.Data {
         
         public delegate void ESTRUCTURASRowChangeEventHandler(object sender, ESTRUCTURASRowChangeEvent e);
         
-        public delegate void PLANOSRowChangeEventHandler(object sender, PLANOSRowChangeEvent e);
-        
         public delegate void GRUPOS_ESTRUCTURARowChangeEventHandler(object sender, GRUPOS_ESTRUCTURARowChangeEvent e);
         
         public delegate void CONJUNTOSRowChangeEventHandler(object sender, CONJUNTOSRowChangeEvent e);
@@ -860,6 +858,8 @@ namespace GyCAP.Data {
         public delegate void PIEZASRowChangeEventHandler(object sender, PIEZASRowChangeEvent e);
         
         public delegate void MATERIAS_PRIMASRowChangeEventHandler(object sender, MATERIAS_PRIMASRowChangeEvent e);
+        
+        public delegate void PLANOSRowChangeEventHandler(object sender, PLANOSRowChangeEvent e);
         
         public delegate void LISTA_PARTESRowChangeEventHandler(object sender, LISTA_PARTESRowChangeEvent e);
         
@@ -3273,366 +3273,6 @@ namespace GyCAP.Data {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class PLANOSDataTable : global::System.Data.TypedTableBase<PLANOSRow> {
-            
-            private global::System.Data.DataColumn columnPNO_CODIGO;
-            
-            private global::System.Data.DataColumn columnPNO_FECHACREACION;
-            
-            private global::System.Data.DataColumn columnPNO_OBSERVACIONES;
-            
-            private global::System.Data.DataColumn columnPNO_NOMBRE;
-            
-            private global::System.Data.DataColumn columnPNO_NUMERO;
-            
-            private global::System.Data.DataColumn columnPNO_HABILITADO;
-            
-            private global::System.Data.DataColumn columnPNO_FECHA_HABILITADO;
-            
-            private global::System.Data.DataColumn columnPNO_FECHA_DESHABILITADO;
-            
-            private global::System.Data.DataColumn columnPNO_FECHA_MODIFICACION;
-            
-            private global::System.Data.DataColumn columnPNO_LETRA_CAMBIO;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANOSDataTable() {
-                this.TableName = "PLANOS";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal PLANOSDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected PLANOSDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PNO_CODIGOColumn {
-                get {
-                    return this.columnPNO_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PNO_FECHACREACIONColumn {
-                get {
-                    return this.columnPNO_FECHACREACION;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PNO_OBSERVACIONESColumn {
-                get {
-                    return this.columnPNO_OBSERVACIONES;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PNO_NOMBREColumn {
-                get {
-                    return this.columnPNO_NOMBRE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PNO_NUMEROColumn {
-                get {
-                    return this.columnPNO_NUMERO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PNO_HABILITADOColumn {
-                get {
-                    return this.columnPNO_HABILITADO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PNO_FECHA_HABILITADOColumn {
-                get {
-                    return this.columnPNO_FECHA_HABILITADO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PNO_FECHA_DESHABILITADOColumn {
-                get {
-                    return this.columnPNO_FECHA_DESHABILITADO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PNO_FECHA_MODIFICACIONColumn {
-                get {
-                    return this.columnPNO_FECHA_MODIFICACION;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PNO_LETRA_CAMBIOColumn {
-                get {
-                    return this.columnPNO_LETRA_CAMBIO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANOSRow this[int index] {
-                get {
-                    return ((PLANOSRow)(this.Rows[index]));
-                }
-            }
-            
-            public event PLANOSRowChangeEventHandler PLANOSRowChanging;
-            
-            public event PLANOSRowChangeEventHandler PLANOSRowChanged;
-            
-            public event PLANOSRowChangeEventHandler PLANOSRowDeleting;
-            
-            public event PLANOSRowChangeEventHandler PLANOSRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddPLANOSRow(PLANOSRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANOSRow AddPLANOSRow(System.DateTime PNO_FECHACREACION, string PNO_OBSERVACIONES, string PNO_NOMBRE, string PNO_NUMERO, decimal PNO_HABILITADO, System.DateTime PNO_FECHA_HABILITADO, System.DateTime PNO_FECHA_DESHABILITADO, System.DateTime PNO_FECHA_MODIFICACION, string PNO_LETRA_CAMBIO) {
-                PLANOSRow rowPLANOSRow = ((PLANOSRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        PNO_FECHACREACION,
-                        PNO_OBSERVACIONES,
-                        PNO_NOMBRE,
-                        PNO_NUMERO,
-                        PNO_HABILITADO,
-                        PNO_FECHA_HABILITADO,
-                        PNO_FECHA_DESHABILITADO,
-                        PNO_FECHA_MODIFICACION,
-                        PNO_LETRA_CAMBIO};
-                rowPLANOSRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowPLANOSRow);
-                return rowPLANOSRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANOSRow FindByPNO_CODIGO(decimal PNO_CODIGO) {
-                return ((PLANOSRow)(this.Rows.Find(new object[] {
-                            PNO_CODIGO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                PLANOSDataTable cln = ((PLANOSDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new PLANOSDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnPNO_CODIGO = base.Columns["PNO_CODIGO"];
-                this.columnPNO_FECHACREACION = base.Columns["PNO_FECHACREACION"];
-                this.columnPNO_OBSERVACIONES = base.Columns["PNO_OBSERVACIONES"];
-                this.columnPNO_NOMBRE = base.Columns["PNO_NOMBRE"];
-                this.columnPNO_NUMERO = base.Columns["PNO_NUMERO"];
-                this.columnPNO_HABILITADO = base.Columns["PNO_HABILITADO"];
-                this.columnPNO_FECHA_HABILITADO = base.Columns["PNO_FECHA_HABILITADO"];
-                this.columnPNO_FECHA_DESHABILITADO = base.Columns["PNO_FECHA_DESHABILITADO"];
-                this.columnPNO_FECHA_MODIFICACION = base.Columns["PNO_FECHA_MODIFICACION"];
-                this.columnPNO_LETRA_CAMBIO = base.Columns["PNO_LETRA_CAMBIO"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnPNO_CODIGO = new global::System.Data.DataColumn("PNO_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPNO_CODIGO);
-                this.columnPNO_FECHACREACION = new global::System.Data.DataColumn("PNO_FECHACREACION", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPNO_FECHACREACION);
-                this.columnPNO_OBSERVACIONES = new global::System.Data.DataColumn("PNO_OBSERVACIONES", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPNO_OBSERVACIONES);
-                this.columnPNO_NOMBRE = new global::System.Data.DataColumn("PNO_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPNO_NOMBRE);
-                this.columnPNO_NUMERO = new global::System.Data.DataColumn("PNO_NUMERO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPNO_NUMERO);
-                this.columnPNO_HABILITADO = new global::System.Data.DataColumn("PNO_HABILITADO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPNO_HABILITADO);
-                this.columnPNO_FECHA_HABILITADO = new global::System.Data.DataColumn("PNO_FECHA_HABILITADO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPNO_FECHA_HABILITADO);
-                this.columnPNO_FECHA_DESHABILITADO = new global::System.Data.DataColumn("PNO_FECHA_DESHABILITADO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPNO_FECHA_DESHABILITADO);
-                this.columnPNO_FECHA_MODIFICACION = new global::System.Data.DataColumn("PNO_FECHA_MODIFICACION", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPNO_FECHA_MODIFICACION);
-                this.columnPNO_LETRA_CAMBIO = new global::System.Data.DataColumn("PNO_LETRA_CAMBIO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPNO_LETRA_CAMBIO);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnPNO_CODIGO}, true));
-                this.columnPNO_CODIGO.AutoIncrement = true;
-                this.columnPNO_CODIGO.AutoIncrementSeed = -1;
-                this.columnPNO_CODIGO.AutoIncrementStep = -1;
-                this.columnPNO_CODIGO.AllowDBNull = false;
-                this.columnPNO_CODIGO.ReadOnly = true;
-                this.columnPNO_CODIGO.Unique = true;
-                this.columnPNO_OBSERVACIONES.MaxLength = 200;
-                this.columnPNO_NOMBRE.MaxLength = 80;
-                this.columnPNO_NUMERO.AllowDBNull = false;
-                this.columnPNO_NUMERO.MaxLength = 10;
-                this.columnPNO_HABILITADO.AllowDBNull = false;
-                this.columnPNO_LETRA_CAMBIO.MaxLength = 2;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANOSRow NewPLANOSRow() {
-                return ((PLANOSRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new PLANOSRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(PLANOSRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.PLANOSRowChanged != null)) {
-                    this.PLANOSRowChanged(this, new PLANOSRowChangeEvent(((PLANOSRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.PLANOSRowChanging != null)) {
-                    this.PLANOSRowChanging(this, new PLANOSRowChangeEvent(((PLANOSRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.PLANOSRowDeleted != null)) {
-                    this.PLANOSRowDeleted(this, new PLANOSRowChangeEvent(((PLANOSRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.PLANOSRowDeleting != null)) {
-                    this.PLANOSRowDeleting(this, new PLANOSRowChangeEvent(((PLANOSRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemovePLANOSRow(PLANOSRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsEstructura ds = new dsEstructura();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "PLANOSDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class GRUPOS_ESTRUCTURADataTable : global::System.Data.TypedTableBase<GRUPOS_ESTRUCTURARow> {
             
             private global::System.Data.DataColumn columnGRP_CODIGO;
@@ -5223,6 +4863,366 @@ namespace GyCAP.Data {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class PLANOSDataTable : global::System.Data.TypedTableBase<PLANOSRow> {
+            
+            private global::System.Data.DataColumn columnPNO_CODIGO;
+            
+            private global::System.Data.DataColumn columnPNO_FECHACREACION;
+            
+            private global::System.Data.DataColumn columnPNO_OBSERVACIONES;
+            
+            private global::System.Data.DataColumn columnPNO_NOMBRE;
+            
+            private global::System.Data.DataColumn columnPNO_NUMERO;
+            
+            private global::System.Data.DataColumn columnPNO_HABILITADO;
+            
+            private global::System.Data.DataColumn columnPNO_FECHAHABILITADO;
+            
+            private global::System.Data.DataColumn columnPNO_FECHADESHABILITADO;
+            
+            private global::System.Data.DataColumn columnPNO_FECHAMODIFICACION;
+            
+            private global::System.Data.DataColumn columnPNO_LETRACAMBIO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANOSDataTable() {
+                this.TableName = "PLANOS";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal PLANOSDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected PLANOSDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PNO_CODIGOColumn {
+                get {
+                    return this.columnPNO_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PNO_FECHACREACIONColumn {
+                get {
+                    return this.columnPNO_FECHACREACION;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PNO_OBSERVACIONESColumn {
+                get {
+                    return this.columnPNO_OBSERVACIONES;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PNO_NOMBREColumn {
+                get {
+                    return this.columnPNO_NOMBRE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PNO_NUMEROColumn {
+                get {
+                    return this.columnPNO_NUMERO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PNO_HABILITADOColumn {
+                get {
+                    return this.columnPNO_HABILITADO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PNO_FECHAHABILITADOColumn {
+                get {
+                    return this.columnPNO_FECHAHABILITADO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PNO_FECHADESHABILITADOColumn {
+                get {
+                    return this.columnPNO_FECHADESHABILITADO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PNO_FECHAMODIFICACIONColumn {
+                get {
+                    return this.columnPNO_FECHAMODIFICACION;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PNO_LETRACAMBIOColumn {
+                get {
+                    return this.columnPNO_LETRACAMBIO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANOSRow this[int index] {
+                get {
+                    return ((PLANOSRow)(this.Rows[index]));
+                }
+            }
+            
+            public event PLANOSRowChangeEventHandler PLANOSRowChanging;
+            
+            public event PLANOSRowChangeEventHandler PLANOSRowChanged;
+            
+            public event PLANOSRowChangeEventHandler PLANOSRowDeleting;
+            
+            public event PLANOSRowChangeEventHandler PLANOSRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddPLANOSRow(PLANOSRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANOSRow AddPLANOSRow(System.DateTime PNO_FECHACREACION, string PNO_OBSERVACIONES, string PNO_NOMBRE, string PNO_NUMERO, decimal PNO_HABILITADO, System.DateTime PNO_FECHAHABILITADO, System.DateTime PNO_FECHADESHABILITADO, System.DateTime PNO_FECHAMODIFICACION, string PNO_LETRACAMBIO) {
+                PLANOSRow rowPLANOSRow = ((PLANOSRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        PNO_FECHACREACION,
+                        PNO_OBSERVACIONES,
+                        PNO_NOMBRE,
+                        PNO_NUMERO,
+                        PNO_HABILITADO,
+                        PNO_FECHAHABILITADO,
+                        PNO_FECHADESHABILITADO,
+                        PNO_FECHAMODIFICACION,
+                        PNO_LETRACAMBIO};
+                rowPLANOSRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowPLANOSRow);
+                return rowPLANOSRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANOSRow FindByPNO_CODIGO(decimal PNO_CODIGO) {
+                return ((PLANOSRow)(this.Rows.Find(new object[] {
+                            PNO_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                PLANOSDataTable cln = ((PLANOSDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new PLANOSDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnPNO_CODIGO = base.Columns["PNO_CODIGO"];
+                this.columnPNO_FECHACREACION = base.Columns["PNO_FECHACREACION"];
+                this.columnPNO_OBSERVACIONES = base.Columns["PNO_OBSERVACIONES"];
+                this.columnPNO_NOMBRE = base.Columns["PNO_NOMBRE"];
+                this.columnPNO_NUMERO = base.Columns["PNO_NUMERO"];
+                this.columnPNO_HABILITADO = base.Columns["PNO_HABILITADO"];
+                this.columnPNO_FECHAHABILITADO = base.Columns["PNO_FECHAHABILITADO"];
+                this.columnPNO_FECHADESHABILITADO = base.Columns["PNO_FECHADESHABILITADO"];
+                this.columnPNO_FECHAMODIFICACION = base.Columns["PNO_FECHAMODIFICACION"];
+                this.columnPNO_LETRACAMBIO = base.Columns["PNO_LETRACAMBIO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnPNO_CODIGO = new global::System.Data.DataColumn("PNO_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPNO_CODIGO);
+                this.columnPNO_FECHACREACION = new global::System.Data.DataColumn("PNO_FECHACREACION", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPNO_FECHACREACION);
+                this.columnPNO_OBSERVACIONES = new global::System.Data.DataColumn("PNO_OBSERVACIONES", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPNO_OBSERVACIONES);
+                this.columnPNO_NOMBRE = new global::System.Data.DataColumn("PNO_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPNO_NOMBRE);
+                this.columnPNO_NUMERO = new global::System.Data.DataColumn("PNO_NUMERO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPNO_NUMERO);
+                this.columnPNO_HABILITADO = new global::System.Data.DataColumn("PNO_HABILITADO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPNO_HABILITADO);
+                this.columnPNO_FECHAHABILITADO = new global::System.Data.DataColumn("PNO_FECHAHABILITADO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPNO_FECHAHABILITADO);
+                this.columnPNO_FECHADESHABILITADO = new global::System.Data.DataColumn("PNO_FECHADESHABILITADO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPNO_FECHADESHABILITADO);
+                this.columnPNO_FECHAMODIFICACION = new global::System.Data.DataColumn("PNO_FECHAMODIFICACION", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPNO_FECHAMODIFICACION);
+                this.columnPNO_LETRACAMBIO = new global::System.Data.DataColumn("PNO_LETRACAMBIO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPNO_LETRACAMBIO);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnPNO_CODIGO}, true));
+                this.columnPNO_CODIGO.AutoIncrement = true;
+                this.columnPNO_CODIGO.AutoIncrementSeed = -1;
+                this.columnPNO_CODIGO.AutoIncrementStep = -1;
+                this.columnPNO_CODIGO.AllowDBNull = false;
+                this.columnPNO_CODIGO.ReadOnly = true;
+                this.columnPNO_CODIGO.Unique = true;
+                this.columnPNO_OBSERVACIONES.MaxLength = 200;
+                this.columnPNO_NOMBRE.MaxLength = 80;
+                this.columnPNO_NUMERO.AllowDBNull = false;
+                this.columnPNO_NUMERO.MaxLength = 10;
+                this.columnPNO_HABILITADO.AllowDBNull = false;
+                this.columnPNO_LETRACAMBIO.MaxLength = 2;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANOSRow NewPLANOSRow() {
+                return ((PLANOSRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new PLANOSRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(PLANOSRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.PLANOSRowChanged != null)) {
+                    this.PLANOSRowChanged(this, new PLANOSRowChangeEvent(((PLANOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.PLANOSRowChanging != null)) {
+                    this.PLANOSRowChanging(this, new PLANOSRowChangeEvent(((PLANOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.PLANOSRowDeleted != null)) {
+                    this.PLANOSRowDeleted(this, new PLANOSRowChangeEvent(((PLANOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.PLANOSRowDeleting != null)) {
+                    this.PLANOSRowDeleting(this, new PLANOSRowChangeEvent(((PLANOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemovePLANOSRow(PLANOSRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsEstructura ds = new dsEstructura();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "PLANOSDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class LISTA_PARTESDataTable : global::System.Data.TypedTableBase<LISTA_PARTESRow> {
             
             private global::System.Data.DataColumn columnPAR_TIPO;
@@ -5908,16 +5908,6 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ESTRUCTURASRow ESTRUCTURASRow {
-                get {
-                    return ((ESTRUCTURASRow)(this.GetParentRow(this.Table.ParentRelations["piezasXEstructura_estructura_fk"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["piezasXEstructura_estructura_fk"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public GRUPOS_ESTRUCTURARow GRUPOS_ESTRUCTURARow {
                 get {
                     return ((GRUPOS_ESTRUCTURARow)(this.GetParentRow(this.Table.ParentRelations["piezasXEstructura_grupoEstructura_fk"])));
@@ -5934,6 +5924,16 @@ namespace GyCAP.Data {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["piezasXEstructura_piezas_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ESTRUCTURASRow ESTRUCTURASRow {
+                get {
+                    return ((ESTRUCTURASRow)(this.GetParentRow(this.Table.ParentRelations["piezasXEstructura_estructura_fk"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["piezasXEstructura_estructura_fk"]);
                 }
             }
         }
@@ -6003,16 +6003,6 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ESTRUCTURASRow ESTRUCTURASRow {
-                get {
-                    return ((ESTRUCTURASRow)(this.GetParentRow(this.Table.ParentRelations["subconjuntosXestructura_estructura_fk"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["subconjuntosXestructura_estructura_fk"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public GRUPOS_ESTRUCTURARow GRUPOS_ESTRUCTURARow {
                 get {
                     return ((GRUPOS_ESTRUCTURARow)(this.GetParentRow(this.Table.ParentRelations["subconjuntosXEstructura_grupoEstructura_fk"])));
@@ -6029,6 +6019,16 @@ namespace GyCAP.Data {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["subconjuntosXEstructura_subconjunto_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ESTRUCTURASRow ESTRUCTURASRow {
+                get {
+                    return ((ESTRUCTURASRow)(this.GetParentRow(this.Table.ParentRelations["subconjuntosXestructura_estructura_fk"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["subconjuntosXestructura_estructura_fk"]);
                 }
             }
         }
@@ -6098,16 +6098,6 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ESTRUCTURASRow ESTRUCTURASRow {
-                get {
-                    return ((ESTRUCTURASRow)(this.GetParentRow(this.Table.ParentRelations["materiaPrimaXEstructura_estructura_fk"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["materiaPrimaXEstructura_estructura_fk"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public GRUPOS_ESTRUCTURARow GRUPOS_ESTRUCTURARow {
                 get {
                     return ((GRUPOS_ESTRUCTURARow)(this.GetParentRow(this.Table.ParentRelations["materiaPrimaXEstructura_grupoEstructura_fk"])));
@@ -6124,6 +6114,16 @@ namespace GyCAP.Data {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["materiaPrimaXEstructura_materiaPrima_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ESTRUCTURASRow ESTRUCTURASRow {
+                get {
+                    return ((ESTRUCTURASRow)(this.GetParentRow(this.Table.ParentRelations["materiaPrimaXEstructura_estructura_fk"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["materiaPrimaXEstructura_estructura_fk"]);
                 }
             }
         }
@@ -6193,16 +6193,6 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ESTRUCTURASRow ESTRUCTURASRow {
-                get {
-                    return ((ESTRUCTURASRow)(this.GetParentRow(this.Table.ParentRelations["conjuntoXEstructura_estructura_fk"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["conjuntoXEstructura_estructura_fk"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public GRUPOS_ESTRUCTURARow GRUPOS_ESTRUCTURARow {
                 get {
                     return ((GRUPOS_ESTRUCTURARow)(this.GetParentRow(this.Table.ParentRelations["conjuntoXEstructura_grupo_fk"])));
@@ -6219,6 +6209,16 @@ namespace GyCAP.Data {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["conjuntoXEstructura_conjunto_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ESTRUCTURASRow ESTRUCTURASRow {
+                get {
+                    return ((ESTRUCTURASRow)(this.GetParentRow(this.Table.ParentRelations["conjuntoXEstructura_estructura_fk"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["conjuntoXEstructura_estructura_fk"]);
                 }
             }
         }
@@ -6398,32 +6398,12 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PIEZASXESTRUCTURARow[] GetPIEZASXESTRUCTURARows() {
-                if ((this.Table.ChildRelations["piezasXEstructura_estructura_fk"] == null)) {
-                    return new PIEZASXESTRUCTURARow[0];
+            public GRUPOS_ESTRUCTURARow[] GetGRUPOS_ESTRUCTURARows() {
+                if ((this.Table.ChildRelations["grupoEstructura_estructura_fk"] == null)) {
+                    return new GRUPOS_ESTRUCTURARow[0];
                 }
                 else {
-                    return ((PIEZASXESTRUCTURARow[])(base.GetChildRows(this.Table.ChildRelations["piezasXEstructura_estructura_fk"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SUBCONJUNTOSXESTRUCTURARow[] GetSUBCONJUNTOSXESTRUCTURARows() {
-                if ((this.Table.ChildRelations["subconjuntosXestructura_estructura_fk"] == null)) {
-                    return new SUBCONJUNTOSXESTRUCTURARow[0];
-                }
-                else {
-                    return ((SUBCONJUNTOSXESTRUCTURARow[])(base.GetChildRows(this.Table.ChildRelations["subconjuntosXestructura_estructura_fk"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MATERIASPRIMASXESTRUCTURARow[] GetMATERIASPRIMASXESTRUCTURARows() {
-                if ((this.Table.ChildRelations["materiaPrimaXEstructura_estructura_fk"] == null)) {
-                    return new MATERIASPRIMASXESTRUCTURARow[0];
-                }
-                else {
-                    return ((MATERIASPRIMASXESTRUCTURARow[])(base.GetChildRows(this.Table.ChildRelations["materiaPrimaXEstructura_estructura_fk"])));
+                    return ((GRUPOS_ESTRUCTURARow[])(base.GetChildRows(this.Table.ChildRelations["grupoEstructura_estructura_fk"])));
                 }
             }
             
@@ -6438,272 +6418,32 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public GRUPOS_ESTRUCTURARow[] GetGRUPOS_ESTRUCTURARows() {
-                if ((this.Table.ChildRelations["grupoEstructura_estructura_fk"] == null)) {
-                    return new GRUPOS_ESTRUCTURARow[0];
+            public MATERIASPRIMASXESTRUCTURARow[] GetMATERIASPRIMASXESTRUCTURARows() {
+                if ((this.Table.ChildRelations["materiaPrimaXEstructura_estructura_fk"] == null)) {
+                    return new MATERIASPRIMASXESTRUCTURARow[0];
                 }
                 else {
-                    return ((GRUPOS_ESTRUCTURARow[])(base.GetChildRows(this.Table.ChildRelations["grupoEstructura_estructura_fk"])));
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class PLANOSRow : global::System.Data.DataRow {
-            
-            private PLANOSDataTable tablePLANOS;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal PLANOSRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tablePLANOS = ((PLANOSDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal PNO_CODIGO {
-                get {
-                    return ((decimal)(this[this.tablePLANOS.PNO_CODIGOColumn]));
-                }
-                set {
-                    this[this.tablePLANOS.PNO_CODIGOColumn] = value;
+                    return ((MATERIASPRIMASXESTRUCTURARow[])(base.GetChildRows(this.Table.ChildRelations["materiaPrimaXEstructura_estructura_fk"])));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime PNO_FECHACREACION {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tablePLANOS.PNO_FECHACREACIONColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PNO_FECHACREACION\' in table \'PLANOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePLANOS.PNO_FECHACREACIONColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string PNO_OBSERVACIONES {
-                get {
-                    try {
-                        return ((string)(this[this.tablePLANOS.PNO_OBSERVACIONESColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PNO_OBSERVACIONES\' in table \'PLANOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePLANOS.PNO_OBSERVACIONESColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string PNO_NOMBRE {
-                get {
-                    try {
-                        return ((string)(this[this.tablePLANOS.PNO_NOMBREColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PNO_NOMBRE\' in table \'PLANOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePLANOS.PNO_NOMBREColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string PNO_NUMERO {
-                get {
-                    return ((string)(this[this.tablePLANOS.PNO_NUMEROColumn]));
-                }
-                set {
-                    this[this.tablePLANOS.PNO_NUMEROColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal PNO_HABILITADO {
-                get {
-                    return ((decimal)(this[this.tablePLANOS.PNO_HABILITADOColumn]));
-                }
-                set {
-                    this[this.tablePLANOS.PNO_HABILITADOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime PNO_FECHA_HABILITADO {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tablePLANOS.PNO_FECHA_HABILITADOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PNO_FECHA_HABILITADO\' in table \'PLANOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePLANOS.PNO_FECHA_HABILITADOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime PNO_FECHA_DESHABILITADO {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tablePLANOS.PNO_FECHA_DESHABILITADOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PNO_FECHA_DESHABILITADO\' in table \'PLANOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePLANOS.PNO_FECHA_DESHABILITADOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime PNO_FECHA_MODIFICACION {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tablePLANOS.PNO_FECHA_MODIFICACIONColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PNO_FECHA_MODIFICACION\' in table \'PLANOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePLANOS.PNO_FECHA_MODIFICACIONColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string PNO_LETRA_CAMBIO {
-                get {
-                    try {
-                        return ((string)(this[this.tablePLANOS.PNO_LETRA_CAMBIOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PNO_LETRA_CAMBIO\' in table \'PLANOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePLANOS.PNO_LETRA_CAMBIOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPNO_FECHACREACIONNull() {
-                return this.IsNull(this.tablePLANOS.PNO_FECHACREACIONColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPNO_FECHACREACIONNull() {
-                this[this.tablePLANOS.PNO_FECHACREACIONColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPNO_OBSERVACIONESNull() {
-                return this.IsNull(this.tablePLANOS.PNO_OBSERVACIONESColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPNO_OBSERVACIONESNull() {
-                this[this.tablePLANOS.PNO_OBSERVACIONESColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPNO_NOMBRENull() {
-                return this.IsNull(this.tablePLANOS.PNO_NOMBREColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPNO_NOMBRENull() {
-                this[this.tablePLANOS.PNO_NOMBREColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPNO_FECHA_HABILITADONull() {
-                return this.IsNull(this.tablePLANOS.PNO_FECHA_HABILITADOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPNO_FECHA_HABILITADONull() {
-                this[this.tablePLANOS.PNO_FECHA_HABILITADOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPNO_FECHA_DESHABILITADONull() {
-                return this.IsNull(this.tablePLANOS.PNO_FECHA_DESHABILITADOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPNO_FECHA_DESHABILITADONull() {
-                this[this.tablePLANOS.PNO_FECHA_DESHABILITADOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPNO_FECHA_MODIFICACIONNull() {
-                return this.IsNull(this.tablePLANOS.PNO_FECHA_MODIFICACIONColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPNO_FECHA_MODIFICACIONNull() {
-                this[this.tablePLANOS.PNO_FECHA_MODIFICACIONColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPNO_LETRA_CAMBIONull() {
-                return this.IsNull(this.tablePLANOS.PNO_LETRA_CAMBIOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPNO_LETRA_CAMBIONull() {
-                this[this.tablePLANOS.PNO_LETRA_CAMBIOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ESTRUCTURASRow[] GetESTRUCTURASRows() {
-                if ((this.Table.ChildRelations["estructura_plano_fk"] == null)) {
-                    return new ESTRUCTURASRow[0];
+            public SUBCONJUNTOSXESTRUCTURARow[] GetSUBCONJUNTOSXESTRUCTURARows() {
+                if ((this.Table.ChildRelations["subconjuntosXestructura_estructura_fk"] == null)) {
+                    return new SUBCONJUNTOSXESTRUCTURARow[0];
                 }
                 else {
-                    return ((ESTRUCTURASRow[])(base.GetChildRows(this.Table.ChildRelations["estructura_plano_fk"])));
+                    return ((SUBCONJUNTOSXESTRUCTURARow[])(base.GetChildRows(this.Table.ChildRelations["subconjuntosXestructura_estructura_fk"])));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CONJUNTOSRow[] GetCONJUNTOSRows() {
-                if ((this.Table.ChildRelations["conjunto_plano_fk"] == null)) {
-                    return new CONJUNTOSRow[0];
+            public PIEZASXESTRUCTURARow[] GetPIEZASXESTRUCTURARows() {
+                if ((this.Table.ChildRelations["piezasXEstructura_estructura_fk"] == null)) {
+                    return new PIEZASXESTRUCTURARow[0];
                 }
                 else {
-                    return ((CONJUNTOSRow[])(base.GetChildRows(this.Table.ChildRelations["conjunto_plano_fk"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SUBCONJUNTOSRow[] GetSUBCONJUNTOSRows() {
-                if ((this.Table.ChildRelations["subconjunto_plano_fk"] == null)) {
-                    return new SUBCONJUNTOSRow[0];
-                }
-                else {
-                    return ((SUBCONJUNTOSRow[])(base.GetChildRows(this.Table.ChildRelations["subconjunto_plano_fk"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PIEZASRow[] GetPIEZASRows() {
-                if ((this.Table.ChildRelations["piezas_plano_fk"] == null)) {
-                    return new PIEZASRow[0];
-                }
-                else {
-                    return ((PIEZASRow[])(base.GetChildRows(this.Table.ChildRelations["piezas_plano_fk"])));
+                    return ((PIEZASXESTRUCTURARow[])(base.GetChildRows(this.Table.ChildRelations["piezasXEstructura_estructura_fk"])));
                 }
             }
         }
@@ -7652,6 +7392,266 @@ namespace GyCAP.Data {
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class PLANOSRow : global::System.Data.DataRow {
+            
+            private PLANOSDataTable tablePLANOS;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal PLANOSRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablePLANOS = ((PLANOSDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal PNO_CODIGO {
+                get {
+                    return ((decimal)(this[this.tablePLANOS.PNO_CODIGOColumn]));
+                }
+                set {
+                    this[this.tablePLANOS.PNO_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime PNO_FECHACREACION {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tablePLANOS.PNO_FECHACREACIONColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PNO_FECHACREACION\' in table \'PLANOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePLANOS.PNO_FECHACREACIONColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PNO_OBSERVACIONES {
+                get {
+                    try {
+                        return ((string)(this[this.tablePLANOS.PNO_OBSERVACIONESColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PNO_OBSERVACIONES\' in table \'PLANOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePLANOS.PNO_OBSERVACIONESColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PNO_NOMBRE {
+                get {
+                    try {
+                        return ((string)(this[this.tablePLANOS.PNO_NOMBREColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PNO_NOMBRE\' in table \'PLANOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePLANOS.PNO_NOMBREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PNO_NUMERO {
+                get {
+                    return ((string)(this[this.tablePLANOS.PNO_NUMEROColumn]));
+                }
+                set {
+                    this[this.tablePLANOS.PNO_NUMEROColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal PNO_HABILITADO {
+                get {
+                    return ((decimal)(this[this.tablePLANOS.PNO_HABILITADOColumn]));
+                }
+                set {
+                    this[this.tablePLANOS.PNO_HABILITADOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime PNO_FECHAHABILITADO {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tablePLANOS.PNO_FECHAHABILITADOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PNO_FECHAHABILITADO\' in table \'PLANOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePLANOS.PNO_FECHAHABILITADOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime PNO_FECHADESHABILITADO {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tablePLANOS.PNO_FECHADESHABILITADOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PNO_FECHADESHABILITADO\' in table \'PLANOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePLANOS.PNO_FECHADESHABILITADOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime PNO_FECHAMODIFICACION {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tablePLANOS.PNO_FECHAMODIFICACIONColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PNO_FECHAMODIFICACION\' in table \'PLANOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePLANOS.PNO_FECHAMODIFICACIONColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PNO_LETRACAMBIO {
+                get {
+                    try {
+                        return ((string)(this[this.tablePLANOS.PNO_LETRACAMBIOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PNO_LETRACAMBIO\' in table \'PLANOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePLANOS.PNO_LETRACAMBIOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPNO_FECHACREACIONNull() {
+                return this.IsNull(this.tablePLANOS.PNO_FECHACREACIONColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPNO_FECHACREACIONNull() {
+                this[this.tablePLANOS.PNO_FECHACREACIONColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPNO_OBSERVACIONESNull() {
+                return this.IsNull(this.tablePLANOS.PNO_OBSERVACIONESColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPNO_OBSERVACIONESNull() {
+                this[this.tablePLANOS.PNO_OBSERVACIONESColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPNO_NOMBRENull() {
+                return this.IsNull(this.tablePLANOS.PNO_NOMBREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPNO_NOMBRENull() {
+                this[this.tablePLANOS.PNO_NOMBREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPNO_FECHAHABILITADONull() {
+                return this.IsNull(this.tablePLANOS.PNO_FECHAHABILITADOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPNO_FECHAHABILITADONull() {
+                this[this.tablePLANOS.PNO_FECHAHABILITADOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPNO_FECHADESHABILITADONull() {
+                return this.IsNull(this.tablePLANOS.PNO_FECHADESHABILITADOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPNO_FECHADESHABILITADONull() {
+                this[this.tablePLANOS.PNO_FECHADESHABILITADOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPNO_FECHAMODIFICACIONNull() {
+                return this.IsNull(this.tablePLANOS.PNO_FECHAMODIFICACIONColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPNO_FECHAMODIFICACIONNull() {
+                this[this.tablePLANOS.PNO_FECHAMODIFICACIONColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPNO_LETRACAMBIONull() {
+                return this.IsNull(this.tablePLANOS.PNO_LETRACAMBIOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPNO_LETRACAMBIONull() {
+                this[this.tablePLANOS.PNO_LETRACAMBIOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CONJUNTOSRow[] GetCONJUNTOSRows() {
+                if ((this.Table.ChildRelations["conjunto_plano_fk"] == null)) {
+                    return new CONJUNTOSRow[0];
+                }
+                else {
+                    return ((CONJUNTOSRow[])(base.GetChildRows(this.Table.ChildRelations["conjunto_plano_fk"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SUBCONJUNTOSRow[] GetSUBCONJUNTOSRows() {
+                if ((this.Table.ChildRelations["subconjunto_plano_fk"] == null)) {
+                    return new SUBCONJUNTOSRow[0];
+                }
+                else {
+                    return ((SUBCONJUNTOSRow[])(base.GetChildRows(this.Table.ChildRelations["subconjunto_plano_fk"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PIEZASRow[] GetPIEZASRows() {
+                if ((this.Table.ChildRelations["piezas_plano_fk"] == null)) {
+                    return new PIEZASRow[0];
+                }
+                else {
+                    return ((PIEZASRow[])(base.GetChildRows(this.Table.ChildRelations["piezas_plano_fk"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ESTRUCTURASRow[] GetESTRUCTURASRows() {
+                if ((this.Table.ChildRelations["estructura_plano_fk"] == null)) {
+                    return new ESTRUCTURASRow[0];
+                }
+                else {
+                    return ((ESTRUCTURASRow[])(base.GetChildRows(this.Table.ChildRelations["estructura_plano_fk"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public partial class LISTA_PARTESRow : global::System.Data.DataRow {
             
             private LISTA_PARTESDataTable tableLISTA_PARTES;
@@ -8015,37 +8015,6 @@ namespace GyCAP.Data {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class PLANOSRowChangeEvent : global::System.EventArgs {
-            
-            private PLANOSRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANOSRowChangeEvent(PLANOSRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANOSRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public class GRUPOS_ESTRUCTURARowChangeEvent : global::System.EventArgs {
             
             private GRUPOS_ESTRUCTURARow eventRow;
@@ -8184,6 +8153,37 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public MATERIAS_PRIMASRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class PLANOSRowChangeEvent : global::System.EventArgs {
+            
+            private PLANOSRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANOSRowChangeEvent(PLANOSRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANOSRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -11073,618 +11073,6 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class PLANOSTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public PLANOSTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "PLANOS";
-            tableMapping.ColumnMappings.Add("PNO_CODIGO", "PNO_CODIGO");
-            tableMapping.ColumnMappings.Add("PNO_FECHACREACION", "PNO_FECHACREACION");
-            tableMapping.ColumnMappings.Add("PNO_OBSERVACIONES", "PNO_OBSERVACIONES");
-            tableMapping.ColumnMappings.Add("PNO_NOMBRE", "PNO_NOMBRE");
-            tableMapping.ColumnMappings.Add("PNO_NUMERO", "PNO_NUMERO");
-            tableMapping.ColumnMappings.Add("PNO_HABILITADO", "PNO_HABILITADO");
-            tableMapping.ColumnMappings.Add("PNO_FECHA_HABILITADO", "PNO_FECHA_HABILITADO");
-            tableMapping.ColumnMappings.Add("PNO_FECHA_DESHABILITADO", "PNO_FECHA_DESHABILITADO");
-            tableMapping.ColumnMappings.Add("PNO_FECHA_MODIFICACION", "PNO_FECHA_MODIFICACION");
-            tableMapping.ColumnMappings.Add("PNO_LETRA_CAMBIO", "PNO_LETRA_CAMBIO");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[PLANOS] WHERE (([PNO_CODIGO] = @Original_PNO_CODIGO) AND ((@IsNull_PNO_FECHACREACION = 1 AND [PNO_FECHACREACION] IS NULL) OR ([PNO_FECHACREACION] = @Original_PNO_FECHACREACION)) AND ((@IsNull_PNO_OBSERVACIONES = 1 AND [PNO_OBSERVACIONES] IS NULL) OR ([PNO_OBSERVACIONES] = @Original_PNO_OBSERVACIONES)) AND ((@IsNull_PNO_NOMBRE = 1 AND [PNO_NOMBRE] IS NULL) OR ([PNO_NOMBRE] = @Original_PNO_NOMBRE)) AND ([PNO_NUMERO] = @Original_PNO_NUMERO) AND ([PNO_HABILITADO] = @Original_PNO_HABILITADO) AND ((@IsNull_PNO_FECHA_HABILITADO = 1 AND [PNO_FECHA_HABILITADO] IS NULL) OR ([PNO_FECHA_HABILITADO] = @Original_PNO_FECHA_HABILITADO)) AND ((@IsNull_PNO_FECHA_DESHABILITADO = 1 AND [PNO_FECHA_DESHABILITADO] IS NULL) OR ([PNO_FECHA_DESHABILITADO] = @Original_PNO_FECHA_DESHABILITADO)) AND ((@IsNull_PNO_FECHA_MODIFICACION = 1 AND [PNO_FECHA_MODIFICACION] IS NULL) OR ([PNO_FECHA_MODIFICACION] = @Original_PNO_FECHA_MODIFICACION)) AND ((@IsNull_PNO_LETRA_CAMBIO = 1 AND [PNO_LETRA_CAMBIO] IS NULL) OR ([PNO_LETRA_CAMBIO] = @Original_PNO_LETRA_CAMBIO)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_FECHACREACION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHACREACION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_FECHACREACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHACREACION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_OBSERVACIONES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_OBSERVACIONES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_OBSERVACIONES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_NUMERO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_HABILITADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PNO_HABILITADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_FECHA_HABILITADO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_HABILITADO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_FECHA_HABILITADO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_HABILITADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_FECHA_DESHABILITADO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_DESHABILITADO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_FECHA_DESHABILITADO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_DESHABILITADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_FECHA_MODIFICACION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_MODIFICACION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_FECHA_MODIFICACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_MODIFICACION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_LETRA_CAMBIO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_LETRA_CAMBIO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_LETRA_CAMBIO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_LETRA_CAMBIO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[PLANOS] ([PNO_FECHACREACION], [PNO_OBSERVACIONES], [PNO_NOMBRE], [PNO_NUMERO], [PNO_HABILITADO], [PNO_FECHA_HABILITADO], [PNO_FECHA_DESHABILITADO], [PNO_FECHA_MODIFICACION], [PNO_LETRA_CAMBIO]) VALUES (@PNO_FECHACREACION, @PNO_OBSERVACIONES, @PNO_NOMBRE, @PNO_NUMERO, @PNO_HABILITADO, @PNO_FECHA_HABILITADO, @PNO_FECHA_DESHABILITADO, @PNO_FECHA_MODIFICACION, @PNO_LETRA_CAMBIO);
-SELECT PNO_CODIGO, PNO_FECHACREACION, PNO_OBSERVACIONES, PNO_NOMBRE, PNO_NUMERO, PNO_HABILITADO, PNO_FECHA_HABILITADO, PNO_FECHA_DESHABILITADO, PNO_FECHA_MODIFICACION, PNO_LETRA_CAMBIO FROM PLANOS WHERE (PNO_CODIGO = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_FECHACREACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHACREACION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_OBSERVACIONES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_NUMERO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_HABILITADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PNO_HABILITADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_FECHA_HABILITADO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_HABILITADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_FECHA_DESHABILITADO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_DESHABILITADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_FECHA_MODIFICACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_MODIFICACION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_LETRA_CAMBIO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_LETRA_CAMBIO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[PLANOS] SET [PNO_FECHACREACION] = @PNO_FECHACREACION, [PNO_OBSERVAC" +
-                "IONES] = @PNO_OBSERVACIONES, [PNO_NOMBRE] = @PNO_NOMBRE, [PNO_NUMERO] = @PNO_NUM" +
-                "ERO, [PNO_HABILITADO] = @PNO_HABILITADO, [PNO_FECHA_HABILITADO] = @PNO_FECHA_HAB" +
-                "ILITADO, [PNO_FECHA_DESHABILITADO] = @PNO_FECHA_DESHABILITADO, [PNO_FECHA_MODIFI" +
-                "CACION] = @PNO_FECHA_MODIFICACION, [PNO_LETRA_CAMBIO] = @PNO_LETRA_CAMBIO WHERE " +
-                "(([PNO_CODIGO] = @Original_PNO_CODIGO) AND ((@IsNull_PNO_FECHACREACION = 1 AND [" +
-                "PNO_FECHACREACION] IS NULL) OR ([PNO_FECHACREACION] = @Original_PNO_FECHACREACIO" +
-                "N)) AND ((@IsNull_PNO_OBSERVACIONES = 1 AND [PNO_OBSERVACIONES] IS NULL) OR ([PN" +
-                "O_OBSERVACIONES] = @Original_PNO_OBSERVACIONES)) AND ((@IsNull_PNO_NOMBRE = 1 AN" +
-                "D [PNO_NOMBRE] IS NULL) OR ([PNO_NOMBRE] = @Original_PNO_NOMBRE)) AND ([PNO_NUME" +
-                "RO] = @Original_PNO_NUMERO) AND ([PNO_HABILITADO] = @Original_PNO_HABILITADO) AN" +
-                "D ((@IsNull_PNO_FECHA_HABILITADO = 1 AND [PNO_FECHA_HABILITADO] IS NULL) OR ([PN" +
-                "O_FECHA_HABILITADO] = @Original_PNO_FECHA_HABILITADO)) AND ((@IsNull_PNO_FECHA_D" +
-                "ESHABILITADO = 1 AND [PNO_FECHA_DESHABILITADO] IS NULL) OR ([PNO_FECHA_DESHABILI" +
-                "TADO] = @Original_PNO_FECHA_DESHABILITADO)) AND ((@IsNull_PNO_FECHA_MODIFICACION" +
-                " = 1 AND [PNO_FECHA_MODIFICACION] IS NULL) OR ([PNO_FECHA_MODIFICACION] = @Origi" +
-                "nal_PNO_FECHA_MODIFICACION)) AND ((@IsNull_PNO_LETRA_CAMBIO = 1 AND [PNO_LETRA_C" +
-                "AMBIO] IS NULL) OR ([PNO_LETRA_CAMBIO] = @Original_PNO_LETRA_CAMBIO)));\r\nSELECT " +
-                "PNO_CODIGO, PNO_FECHACREACION, PNO_OBSERVACIONES, PNO_NOMBRE, PNO_NUMERO, PNO_HA" +
-                "BILITADO, PNO_FECHA_HABILITADO, PNO_FECHA_DESHABILITADO, PNO_FECHA_MODIFICACION," +
-                " PNO_LETRA_CAMBIO FROM PLANOS WHERE (PNO_CODIGO = @PNO_CODIGO)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_FECHACREACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHACREACION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_OBSERVACIONES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_NUMERO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_HABILITADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PNO_HABILITADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_FECHA_HABILITADO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_HABILITADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_FECHA_DESHABILITADO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_DESHABILITADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_FECHA_MODIFICACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_MODIFICACION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_LETRA_CAMBIO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_LETRA_CAMBIO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_FECHACREACION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHACREACION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_FECHACREACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHACREACION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_OBSERVACIONES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_OBSERVACIONES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_OBSERVACIONES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_NUMERO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_HABILITADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PNO_HABILITADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_FECHA_HABILITADO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_HABILITADO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_FECHA_HABILITADO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_HABILITADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_FECHA_DESHABILITADO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_DESHABILITADO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_FECHA_DESHABILITADO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_DESHABILITADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_FECHA_MODIFICACION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_MODIFICACION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_FECHA_MODIFICACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHA_MODIFICACION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_LETRA_CAMBIO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_LETRA_CAMBIO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_LETRA_CAMBIO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_LETRA_CAMBIO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString1;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT PNO_CODIGO, PNO_FECHACREACION, PNO_OBSERVACIONES, PNO_NOMBRE, PNO_NUMERO, " +
-                "PNO_HABILITADO, PNO_FECHA_HABILITADO, PNO_FECHA_DESHABILITADO, PNO_FECHA_MODIFIC" +
-                "ACION, PNO_LETRA_CAMBIO FROM dbo.PLANOS";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsEstructura.PLANOSDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsEstructura.PLANOSDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsEstructura.PLANOSDataTable dataTable = new dsEstructura.PLANOSDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsEstructura.PLANOSDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsEstructura dataSet) {
-            return this.Adapter.Update(dataSet, "PLANOS");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_PNO_CODIGO, global::System.Nullable<global::System.DateTime> Original_PNO_FECHACREACION, string Original_PNO_OBSERVACIONES, string Original_PNO_NOMBRE, string Original_PNO_NUMERO, decimal Original_PNO_HABILITADO, global::System.Nullable<global::System.DateTime> Original_PNO_FECHA_HABILITADO, global::System.Nullable<global::System.DateTime> Original_PNO_FECHA_DESHABILITADO, global::System.Nullable<global::System.DateTime> Original_PNO_FECHA_MODIFICACION, string Original_PNO_LETRA_CAMBIO) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_PNO_CODIGO));
-            if ((Original_PNO_FECHACREACION.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((System.DateTime)(Original_PNO_FECHACREACION.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PNO_OBSERVACIONES == null)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_PNO_OBSERVACIONES));
-            }
-            if ((Original_PNO_NOMBRE == null)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_PNO_NOMBRE));
-            }
-            if ((Original_PNO_NUMERO == null)) {
-                throw new global::System.ArgumentNullException("Original_PNO_NUMERO");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((string)(Original_PNO_NUMERO));
-            }
-            this.Adapter.DeleteCommand.Parameters[8].Value = ((decimal)(Original_PNO_HABILITADO));
-            if ((Original_PNO_FECHA_HABILITADO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((System.DateTime)(Original_PNO_FECHA_HABILITADO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PNO_FECHA_DESHABILITADO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((System.DateTime)(Original_PNO_FECHA_DESHABILITADO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PNO_FECHA_MODIFICACION.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((System.DateTime)(Original_PNO_FECHA_MODIFICACION.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PNO_LETRA_CAMBIO == null)) {
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[16].Value = ((string)(Original_PNO_LETRA_CAMBIO));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<global::System.DateTime> PNO_FECHACREACION, string PNO_OBSERVACIONES, string PNO_NOMBRE, string PNO_NUMERO, decimal PNO_HABILITADO, global::System.Nullable<global::System.DateTime> PNO_FECHA_HABILITADO, global::System.Nullable<global::System.DateTime> PNO_FECHA_DESHABILITADO, global::System.Nullable<global::System.DateTime> PNO_FECHA_MODIFICACION, string PNO_LETRA_CAMBIO) {
-            if ((PNO_FECHACREACION.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((System.DateTime)(PNO_FECHACREACION.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((PNO_OBSERVACIONES == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(PNO_OBSERVACIONES));
-            }
-            if ((PNO_NOMBRE == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(PNO_NOMBRE));
-            }
-            if ((PNO_NUMERO == null)) {
-                throw new global::System.ArgumentNullException("PNO_NUMERO");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(PNO_NUMERO));
-            }
-            this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(PNO_HABILITADO));
-            if ((PNO_FECHA_HABILITADO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((System.DateTime)(PNO_FECHA_HABILITADO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((PNO_FECHA_DESHABILITADO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((System.DateTime)(PNO_FECHA_DESHABILITADO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((PNO_FECHA_MODIFICACION.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((System.DateTime)(PNO_FECHA_MODIFICACION.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((PNO_LETRA_CAMBIO == null)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((string)(PNO_LETRA_CAMBIO));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    global::System.Nullable<global::System.DateTime> PNO_FECHACREACION, 
-                    string PNO_OBSERVACIONES, 
-                    string PNO_NOMBRE, 
-                    string PNO_NUMERO, 
-                    decimal PNO_HABILITADO, 
-                    global::System.Nullable<global::System.DateTime> PNO_FECHA_HABILITADO, 
-                    global::System.Nullable<global::System.DateTime> PNO_FECHA_DESHABILITADO, 
-                    global::System.Nullable<global::System.DateTime> PNO_FECHA_MODIFICACION, 
-                    string PNO_LETRA_CAMBIO, 
-                    decimal Original_PNO_CODIGO, 
-                    global::System.Nullable<global::System.DateTime> Original_PNO_FECHACREACION, 
-                    string Original_PNO_OBSERVACIONES, 
-                    string Original_PNO_NOMBRE, 
-                    string Original_PNO_NUMERO, 
-                    decimal Original_PNO_HABILITADO, 
-                    global::System.Nullable<global::System.DateTime> Original_PNO_FECHA_HABILITADO, 
-                    global::System.Nullable<global::System.DateTime> Original_PNO_FECHA_DESHABILITADO, 
-                    global::System.Nullable<global::System.DateTime> Original_PNO_FECHA_MODIFICACION, 
-                    string Original_PNO_LETRA_CAMBIO, 
-                    decimal PNO_CODIGO) {
-            if ((PNO_FECHACREACION.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((System.DateTime)(PNO_FECHACREACION.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((PNO_OBSERVACIONES == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(PNO_OBSERVACIONES));
-            }
-            if ((PNO_NOMBRE == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(PNO_NOMBRE));
-            }
-            if ((PNO_NUMERO == null)) {
-                throw new global::System.ArgumentNullException("PNO_NUMERO");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(PNO_NUMERO));
-            }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(PNO_HABILITADO));
-            if ((PNO_FECHA_HABILITADO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(PNO_FECHA_HABILITADO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((PNO_FECHA_DESHABILITADO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(PNO_FECHA_DESHABILITADO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((PNO_FECHA_MODIFICACION.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(PNO_FECHA_MODIFICACION.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((PNO_LETRA_CAMBIO == null)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(PNO_LETRA_CAMBIO));
-            }
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(Original_PNO_CODIGO));
-            if ((Original_PNO_FECHACREACION.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(Original_PNO_FECHACREACION.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PNO_OBSERVACIONES == null)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_PNO_OBSERVACIONES));
-            }
-            if ((Original_PNO_NOMBRE == null)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_PNO_NOMBRE));
-            }
-            if ((Original_PNO_NUMERO == null)) {
-                throw new global::System.ArgumentNullException("Original_PNO_NUMERO");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_PNO_NUMERO));
-            }
-            this.Adapter.UpdateCommand.Parameters[17].Value = ((decimal)(Original_PNO_HABILITADO));
-            if ((Original_PNO_FECHA_HABILITADO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((System.DateTime)(Original_PNO_FECHA_HABILITADO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PNO_FECHA_DESHABILITADO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((System.DateTime)(Original_PNO_FECHA_DESHABILITADO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PNO_FECHA_MODIFICACION.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((System.DateTime)(Original_PNO_FECHA_MODIFICACION.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PNO_LETRA_CAMBIO == null)) {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((string)(Original_PNO_LETRA_CAMBIO));
-            }
-            this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(PNO_CODIGO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    global::System.Nullable<global::System.DateTime> PNO_FECHACREACION, 
-                    string PNO_OBSERVACIONES, 
-                    string PNO_NOMBRE, 
-                    string PNO_NUMERO, 
-                    decimal PNO_HABILITADO, 
-                    global::System.Nullable<global::System.DateTime> PNO_FECHA_HABILITADO, 
-                    global::System.Nullable<global::System.DateTime> PNO_FECHA_DESHABILITADO, 
-                    global::System.Nullable<global::System.DateTime> PNO_FECHA_MODIFICACION, 
-                    string PNO_LETRA_CAMBIO, 
-                    decimal Original_PNO_CODIGO, 
-                    global::System.Nullable<global::System.DateTime> Original_PNO_FECHACREACION, 
-                    string Original_PNO_OBSERVACIONES, 
-                    string Original_PNO_NOMBRE, 
-                    string Original_PNO_NUMERO, 
-                    decimal Original_PNO_HABILITADO, 
-                    global::System.Nullable<global::System.DateTime> Original_PNO_FECHA_HABILITADO, 
-                    global::System.Nullable<global::System.DateTime> Original_PNO_FECHA_DESHABILITADO, 
-                    global::System.Nullable<global::System.DateTime> Original_PNO_FECHA_MODIFICACION, 
-                    string Original_PNO_LETRA_CAMBIO) {
-            return this.Update(PNO_FECHACREACION, PNO_OBSERVACIONES, PNO_NOMBRE, PNO_NUMERO, PNO_HABILITADO, PNO_FECHA_HABILITADO, PNO_FECHA_DESHABILITADO, PNO_FECHA_MODIFICACION, PNO_LETRA_CAMBIO, Original_PNO_CODIGO, Original_PNO_FECHACREACION, Original_PNO_OBSERVACIONES, Original_PNO_NOMBRE, Original_PNO_NUMERO, Original_PNO_HABILITADO, Original_PNO_FECHA_HABILITADO, Original_PNO_FECHA_DESHABILITADO, Original_PNO_FECHA_MODIFICACION, Original_PNO_LETRA_CAMBIO, Original_PNO_CODIGO);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class GRUPOS_ESTRUCTURATableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
@@ -13885,6 +13273,618 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class PLANOSTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public PLANOSTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "PLANOS";
+            tableMapping.ColumnMappings.Add("PNO_CODIGO", "PNO_CODIGO");
+            tableMapping.ColumnMappings.Add("PNO_FECHACREACION", "PNO_FECHACREACION");
+            tableMapping.ColumnMappings.Add("PNO_OBSERVACIONES", "PNO_OBSERVACIONES");
+            tableMapping.ColumnMappings.Add("PNO_NOMBRE", "PNO_NOMBRE");
+            tableMapping.ColumnMappings.Add("PNO_NUMERO", "PNO_NUMERO");
+            tableMapping.ColumnMappings.Add("PNO_HABILITADO", "PNO_HABILITADO");
+            tableMapping.ColumnMappings.Add("PNO_FECHAHABILITADO", "PNO_FECHAHABILITADO");
+            tableMapping.ColumnMappings.Add("PNO_FECHADESHABILITADO", "PNO_FECHADESHABILITADO");
+            tableMapping.ColumnMappings.Add("PNO_FECHAMODIFICACION", "PNO_FECHAMODIFICACION");
+            tableMapping.ColumnMappings.Add("PNO_LETRACAMBIO", "PNO_LETRACAMBIO");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[PLANOS] WHERE (([PNO_CODIGO] = @Original_PNO_CODIGO) AND ((@IsNull_PNO_FECHACREACION = 1 AND [PNO_FECHACREACION] IS NULL) OR ([PNO_FECHACREACION] = @Original_PNO_FECHACREACION)) AND ((@IsNull_PNO_OBSERVACIONES = 1 AND [PNO_OBSERVACIONES] IS NULL) OR ([PNO_OBSERVACIONES] = @Original_PNO_OBSERVACIONES)) AND ((@IsNull_PNO_NOMBRE = 1 AND [PNO_NOMBRE] IS NULL) OR ([PNO_NOMBRE] = @Original_PNO_NOMBRE)) AND ([PNO_NUMERO] = @Original_PNO_NUMERO) AND ([PNO_HABILITADO] = @Original_PNO_HABILITADO) AND ((@IsNull_PNO_FECHAHABILITADO = 1 AND [PNO_FECHAHABILITADO] IS NULL) OR ([PNO_FECHAHABILITADO] = @Original_PNO_FECHAHABILITADO)) AND ((@IsNull_PNO_FECHADESHABILITADO = 1 AND [PNO_FECHADESHABILITADO] IS NULL) OR ([PNO_FECHADESHABILITADO] = @Original_PNO_FECHADESHABILITADO)) AND ((@IsNull_PNO_FECHAMODIFICACION = 1 AND [PNO_FECHAMODIFICACION] IS NULL) OR ([PNO_FECHAMODIFICACION] = @Original_PNO_FECHAMODIFICACION)) AND ((@IsNull_PNO_LETRACAMBIO = 1 AND [PNO_LETRACAMBIO] IS NULL) OR ([PNO_LETRACAMBIO] = @Original_PNO_LETRACAMBIO)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_FECHACREACION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHACREACION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_FECHACREACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHACREACION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_OBSERVACIONES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_OBSERVACIONES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_OBSERVACIONES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_NUMERO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_HABILITADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PNO_HABILITADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_FECHAHABILITADO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHAHABILITADO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_FECHAHABILITADO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHAHABILITADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_FECHADESHABILITADO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHADESHABILITADO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_FECHADESHABILITADO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHADESHABILITADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_FECHAMODIFICACION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHAMODIFICACION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_FECHAMODIFICACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHAMODIFICACION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_LETRACAMBIO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_LETRACAMBIO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_LETRACAMBIO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_LETRACAMBIO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[PLANOS] ([PNO_FECHACREACION], [PNO_OBSERVACIONES], [PNO_NOMBRE], [PNO_NUMERO], [PNO_HABILITADO], [PNO_FECHAHABILITADO], [PNO_FECHADESHABILITADO], [PNO_FECHAMODIFICACION], [PNO_LETRACAMBIO]) VALUES (@PNO_FECHACREACION, @PNO_OBSERVACIONES, @PNO_NOMBRE, @PNO_NUMERO, @PNO_HABILITADO, @PNO_FECHAHABILITADO, @PNO_FECHADESHABILITADO, @PNO_FECHAMODIFICACION, @PNO_LETRACAMBIO);
+SELECT PNO_CODIGO, PNO_FECHACREACION, PNO_OBSERVACIONES, PNO_NOMBRE, PNO_NUMERO, PNO_HABILITADO, PNO_FECHAHABILITADO, PNO_FECHADESHABILITADO, PNO_FECHAMODIFICACION, PNO_LETRACAMBIO FROM PLANOS WHERE (PNO_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_FECHACREACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHACREACION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_OBSERVACIONES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_NUMERO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_HABILITADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PNO_HABILITADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_FECHAHABILITADO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHAHABILITADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_FECHADESHABILITADO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHADESHABILITADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_FECHAMODIFICACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHAMODIFICACION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_LETRACAMBIO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_LETRACAMBIO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[PLANOS] SET [PNO_FECHACREACION] = @PNO_FECHACREACION, [PNO_OBSERVAC" +
+                "IONES] = @PNO_OBSERVACIONES, [PNO_NOMBRE] = @PNO_NOMBRE, [PNO_NUMERO] = @PNO_NUM" +
+                "ERO, [PNO_HABILITADO] = @PNO_HABILITADO, [PNO_FECHAHABILITADO] = @PNO_FECHAHABIL" +
+                "ITADO, [PNO_FECHADESHABILITADO] = @PNO_FECHADESHABILITADO, [PNO_FECHAMODIFICACIO" +
+                "N] = @PNO_FECHAMODIFICACION, [PNO_LETRACAMBIO] = @PNO_LETRACAMBIO WHERE (([PNO_C" +
+                "ODIGO] = @Original_PNO_CODIGO) AND ((@IsNull_PNO_FECHACREACION = 1 AND [PNO_FECH" +
+                "ACREACION] IS NULL) OR ([PNO_FECHACREACION] = @Original_PNO_FECHACREACION)) AND " +
+                "((@IsNull_PNO_OBSERVACIONES = 1 AND [PNO_OBSERVACIONES] IS NULL) OR ([PNO_OBSERV" +
+                "ACIONES] = @Original_PNO_OBSERVACIONES)) AND ((@IsNull_PNO_NOMBRE = 1 AND [PNO_N" +
+                "OMBRE] IS NULL) OR ([PNO_NOMBRE] = @Original_PNO_NOMBRE)) AND ([PNO_NUMERO] = @O" +
+                "riginal_PNO_NUMERO) AND ([PNO_HABILITADO] = @Original_PNO_HABILITADO) AND ((@IsN" +
+                "ull_PNO_FECHAHABILITADO = 1 AND [PNO_FECHAHABILITADO] IS NULL) OR ([PNO_FECHAHAB" +
+                "ILITADO] = @Original_PNO_FECHAHABILITADO)) AND ((@IsNull_PNO_FECHADESHABILITADO " +
+                "= 1 AND [PNO_FECHADESHABILITADO] IS NULL) OR ([PNO_FECHADESHABILITADO] = @Origin" +
+                "al_PNO_FECHADESHABILITADO)) AND ((@IsNull_PNO_FECHAMODIFICACION = 1 AND [PNO_FEC" +
+                "HAMODIFICACION] IS NULL) OR ([PNO_FECHAMODIFICACION] = @Original_PNO_FECHAMODIFI" +
+                "CACION)) AND ((@IsNull_PNO_LETRACAMBIO = 1 AND [PNO_LETRACAMBIO] IS NULL) OR ([P" +
+                "NO_LETRACAMBIO] = @Original_PNO_LETRACAMBIO)));\r\nSELECT PNO_CODIGO, PNO_FECHACRE" +
+                "ACION, PNO_OBSERVACIONES, PNO_NOMBRE, PNO_NUMERO, PNO_HABILITADO, PNO_FECHAHABIL" +
+                "ITADO, PNO_FECHADESHABILITADO, PNO_FECHAMODIFICACION, PNO_LETRACAMBIO FROM PLANO" +
+                "S WHERE (PNO_CODIGO = @PNO_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_FECHACREACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHACREACION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_OBSERVACIONES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_NUMERO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_HABILITADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PNO_HABILITADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_FECHAHABILITADO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHAHABILITADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_FECHADESHABILITADO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHADESHABILITADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_FECHAMODIFICACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHAMODIFICACION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_LETRACAMBIO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_LETRACAMBIO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_FECHACREACION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHACREACION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_FECHACREACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHACREACION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_OBSERVACIONES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_OBSERVACIONES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_OBSERVACIONES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_NUMERO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_HABILITADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PNO_HABILITADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_FECHAHABILITADO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHAHABILITADO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_FECHAHABILITADO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHAHABILITADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_FECHADESHABILITADO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHADESHABILITADO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_FECHADESHABILITADO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHADESHABILITADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_FECHAMODIFICACION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHAMODIFICACION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_FECHAMODIFICACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_FECHAMODIFICACION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_LETRACAMBIO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_LETRACAMBIO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_LETRACAMBIO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_LETRACAMBIO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString1;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT PNO_CODIGO, PNO_FECHACREACION, PNO_OBSERVACIONES, PNO_NOMBRE, PNO_NUMERO, " +
+                "PNO_HABILITADO, PNO_FECHAHABILITADO, PNO_FECHADESHABILITADO, PNO_FECHAMODIFICACI" +
+                "ON, PNO_LETRACAMBIO FROM dbo.PLANOS";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsEstructura.PLANOSDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsEstructura.PLANOSDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsEstructura.PLANOSDataTable dataTable = new dsEstructura.PLANOSDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsEstructura.PLANOSDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsEstructura dataSet) {
+            return this.Adapter.Update(dataSet, "PLANOS");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_PNO_CODIGO, global::System.Nullable<global::System.DateTime> Original_PNO_FECHACREACION, string Original_PNO_OBSERVACIONES, string Original_PNO_NOMBRE, string Original_PNO_NUMERO, decimal Original_PNO_HABILITADO, global::System.Nullable<global::System.DateTime> Original_PNO_FECHAHABILITADO, global::System.Nullable<global::System.DateTime> Original_PNO_FECHADESHABILITADO, global::System.Nullable<global::System.DateTime> Original_PNO_FECHAMODIFICACION, string Original_PNO_LETRACAMBIO) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_PNO_CODIGO));
+            if ((Original_PNO_FECHACREACION.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((System.DateTime)(Original_PNO_FECHACREACION.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PNO_OBSERVACIONES == null)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_PNO_OBSERVACIONES));
+            }
+            if ((Original_PNO_NOMBRE == null)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_PNO_NOMBRE));
+            }
+            if ((Original_PNO_NUMERO == null)) {
+                throw new global::System.ArgumentNullException("Original_PNO_NUMERO");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((string)(Original_PNO_NUMERO));
+            }
+            this.Adapter.DeleteCommand.Parameters[8].Value = ((decimal)(Original_PNO_HABILITADO));
+            if ((Original_PNO_FECHAHABILITADO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((System.DateTime)(Original_PNO_FECHAHABILITADO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PNO_FECHADESHABILITADO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((System.DateTime)(Original_PNO_FECHADESHABILITADO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PNO_FECHAMODIFICACION.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((System.DateTime)(Original_PNO_FECHAMODIFICACION.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PNO_LETRACAMBIO == null)) {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((string)(Original_PNO_LETRACAMBIO));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(global::System.Nullable<global::System.DateTime> PNO_FECHACREACION, string PNO_OBSERVACIONES, string PNO_NOMBRE, string PNO_NUMERO, decimal PNO_HABILITADO, global::System.Nullable<global::System.DateTime> PNO_FECHAHABILITADO, global::System.Nullable<global::System.DateTime> PNO_FECHADESHABILITADO, global::System.Nullable<global::System.DateTime> PNO_FECHAMODIFICACION, string PNO_LETRACAMBIO) {
+            if ((PNO_FECHACREACION.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((System.DateTime)(PNO_FECHACREACION.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((PNO_OBSERVACIONES == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(PNO_OBSERVACIONES));
+            }
+            if ((PNO_NOMBRE == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(PNO_NOMBRE));
+            }
+            if ((PNO_NUMERO == null)) {
+                throw new global::System.ArgumentNullException("PNO_NUMERO");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(PNO_NUMERO));
+            }
+            this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(PNO_HABILITADO));
+            if ((PNO_FECHAHABILITADO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((System.DateTime)(PNO_FECHAHABILITADO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((PNO_FECHADESHABILITADO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((System.DateTime)(PNO_FECHADESHABILITADO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((PNO_FECHAMODIFICACION.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((System.DateTime)(PNO_FECHAMODIFICACION.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((PNO_LETRACAMBIO == null)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((string)(PNO_LETRACAMBIO));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    global::System.Nullable<global::System.DateTime> PNO_FECHACREACION, 
+                    string PNO_OBSERVACIONES, 
+                    string PNO_NOMBRE, 
+                    string PNO_NUMERO, 
+                    decimal PNO_HABILITADO, 
+                    global::System.Nullable<global::System.DateTime> PNO_FECHAHABILITADO, 
+                    global::System.Nullable<global::System.DateTime> PNO_FECHADESHABILITADO, 
+                    global::System.Nullable<global::System.DateTime> PNO_FECHAMODIFICACION, 
+                    string PNO_LETRACAMBIO, 
+                    decimal Original_PNO_CODIGO, 
+                    global::System.Nullable<global::System.DateTime> Original_PNO_FECHACREACION, 
+                    string Original_PNO_OBSERVACIONES, 
+                    string Original_PNO_NOMBRE, 
+                    string Original_PNO_NUMERO, 
+                    decimal Original_PNO_HABILITADO, 
+                    global::System.Nullable<global::System.DateTime> Original_PNO_FECHAHABILITADO, 
+                    global::System.Nullable<global::System.DateTime> Original_PNO_FECHADESHABILITADO, 
+                    global::System.Nullable<global::System.DateTime> Original_PNO_FECHAMODIFICACION, 
+                    string Original_PNO_LETRACAMBIO, 
+                    decimal PNO_CODIGO) {
+            if ((PNO_FECHACREACION.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((System.DateTime)(PNO_FECHACREACION.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((PNO_OBSERVACIONES == null)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(PNO_OBSERVACIONES));
+            }
+            if ((PNO_NOMBRE == null)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(PNO_NOMBRE));
+            }
+            if ((PNO_NUMERO == null)) {
+                throw new global::System.ArgumentNullException("PNO_NUMERO");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(PNO_NUMERO));
+            }
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(PNO_HABILITADO));
+            if ((PNO_FECHAHABILITADO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(PNO_FECHAHABILITADO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((PNO_FECHADESHABILITADO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(PNO_FECHADESHABILITADO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((PNO_FECHAMODIFICACION.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(PNO_FECHAMODIFICACION.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((PNO_LETRACAMBIO == null)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(PNO_LETRACAMBIO));
+            }
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(Original_PNO_CODIGO));
+            if ((Original_PNO_FECHACREACION.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(Original_PNO_FECHACREACION.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PNO_OBSERVACIONES == null)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_PNO_OBSERVACIONES));
+            }
+            if ((Original_PNO_NOMBRE == null)) {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_PNO_NOMBRE));
+            }
+            if ((Original_PNO_NUMERO == null)) {
+                throw new global::System.ArgumentNullException("Original_PNO_NUMERO");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_PNO_NUMERO));
+            }
+            this.Adapter.UpdateCommand.Parameters[17].Value = ((decimal)(Original_PNO_HABILITADO));
+            if ((Original_PNO_FECHAHABILITADO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((System.DateTime)(Original_PNO_FECHAHABILITADO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PNO_FECHADESHABILITADO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((System.DateTime)(Original_PNO_FECHADESHABILITADO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PNO_FECHAMODIFICACION.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((System.DateTime)(Original_PNO_FECHAMODIFICACION.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PNO_LETRACAMBIO == null)) {
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((string)(Original_PNO_LETRACAMBIO));
+            }
+            this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(PNO_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    global::System.Nullable<global::System.DateTime> PNO_FECHACREACION, 
+                    string PNO_OBSERVACIONES, 
+                    string PNO_NOMBRE, 
+                    string PNO_NUMERO, 
+                    decimal PNO_HABILITADO, 
+                    global::System.Nullable<global::System.DateTime> PNO_FECHAHABILITADO, 
+                    global::System.Nullable<global::System.DateTime> PNO_FECHADESHABILITADO, 
+                    global::System.Nullable<global::System.DateTime> PNO_FECHAMODIFICACION, 
+                    string PNO_LETRACAMBIO, 
+                    decimal Original_PNO_CODIGO, 
+                    global::System.Nullable<global::System.DateTime> Original_PNO_FECHACREACION, 
+                    string Original_PNO_OBSERVACIONES, 
+                    string Original_PNO_NOMBRE, 
+                    string Original_PNO_NUMERO, 
+                    decimal Original_PNO_HABILITADO, 
+                    global::System.Nullable<global::System.DateTime> Original_PNO_FECHAHABILITADO, 
+                    global::System.Nullable<global::System.DateTime> Original_PNO_FECHADESHABILITADO, 
+                    global::System.Nullable<global::System.DateTime> Original_PNO_FECHAMODIFICACION, 
+                    string Original_PNO_LETRACAMBIO) {
+            return this.Update(PNO_FECHACREACION, PNO_OBSERVACIONES, PNO_NOMBRE, PNO_NUMERO, PNO_HABILITADO, PNO_FECHAHABILITADO, PNO_FECHADESHABILITADO, PNO_FECHAMODIFICACION, PNO_LETRACAMBIO, Original_PNO_CODIGO, Original_PNO_FECHACREACION, Original_PNO_OBSERVACIONES, Original_PNO_NOMBRE, Original_PNO_NUMERO, Original_PNO_HABILITADO, Original_PNO_FECHAHABILITADO, Original_PNO_FECHADESHABILITADO, Original_PNO_FECHAMODIFICACION, Original_PNO_LETRACAMBIO, Original_PNO_CODIGO);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -13913,8 +13913,6 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
         
         private ESTRUCTURASTableAdapter _eSTRUCTURASTableAdapter;
         
-        private PLANOSTableAdapter _pLANOSTableAdapter;
-        
         private GRUPOS_ESTRUCTURATableAdapter _gRUPOS_ESTRUCTURATableAdapter;
         
         private CONJUNTOSTableAdapter _cONJUNTOSTableAdapter;
@@ -13924,6 +13922,8 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
         private PIEZASTableAdapter _pIEZASTableAdapter;
         
         private MATERIAS_PRIMASTableAdapter _mATERIAS_PRIMASTableAdapter;
+        
+        private PLANOSTableAdapter _pLANOSTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -14047,19 +14047,6 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
             "", "System.Drawing.Design.UITypeEditor")]
-        public PLANOSTableAdapter PLANOSTableAdapter {
-            get {
-                return this._pLANOSTableAdapter;
-            }
-            set {
-                this._pLANOSTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
         public GRUPOS_ESTRUCTURATableAdapter GRUPOS_ESTRUCTURATableAdapter {
             get {
                 return this._gRUPOS_ESTRUCTURATableAdapter;
@@ -14122,6 +14109,19 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public PLANOSTableAdapter PLANOSTableAdapter {
+            get {
+                return this._pLANOSTableAdapter;
+            }
+            set {
+                this._pLANOSTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -14170,10 +14170,6 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
                             && (this._eSTRUCTURASTableAdapter.Connection != null))) {
                     return this._eSTRUCTURASTableAdapter.Connection;
                 }
-                if (((this._pLANOSTableAdapter != null) 
-                            && (this._pLANOSTableAdapter.Connection != null))) {
-                    return this._pLANOSTableAdapter.Connection;
-                }
                 if (((this._gRUPOS_ESTRUCTURATableAdapter != null) 
                             && (this._gRUPOS_ESTRUCTURATableAdapter.Connection != null))) {
                     return this._gRUPOS_ESTRUCTURATableAdapter.Connection;
@@ -14193,6 +14189,10 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
                 if (((this._mATERIAS_PRIMASTableAdapter != null) 
                             && (this._mATERIAS_PRIMASTableAdapter.Connection != null))) {
                     return this._mATERIAS_PRIMASTableAdapter.Connection;
+                }
+                if (((this._pLANOSTableAdapter != null) 
+                            && (this._pLANOSTableAdapter.Connection != null))) {
+                    return this._pLANOSTableAdapter.Connection;
                 }
                 return null;
             }
@@ -14230,9 +14230,6 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
                 if ((this._eSTRUCTURASTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._pLANOSTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._gRUPOS_ESTRUCTURATableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -14246,6 +14243,9 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
                     count = (count + 1);
                 }
                 if ((this._mATERIAS_PRIMASTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._pLANOSTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -14276,6 +14276,24 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._sUBCONJUNTOSTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SUBCONJUNTOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._sUBCONJUNTOSTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._cONJUNTOSTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.CONJUNTOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._cONJUNTOSTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._gRUPOS_ESTRUCTURATableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.GRUPOS_ESTRUCTURA.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -14294,30 +14312,12 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._cONJUNTOSTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.CONJUNTOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._cONJUNTOSTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._pIEZASTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.PIEZAS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._pIEZASTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._sUBCONJUNTOSTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SUBCONJUNTOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._sUBCONJUNTOSTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -14409,6 +14409,22 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._sUBCONJUNTOSTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SUBCONJUNTOS.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._sUBCONJUNTOSTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._cONJUNTOSTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.CONJUNTOS.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._cONJUNTOSTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._gRUPOS_ESTRUCTURATableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.GRUPOS_ESTRUCTURA.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -14425,27 +14441,11 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._cONJUNTOSTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.CONJUNTOS.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._cONJUNTOSTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._pIEZASTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.PIEZAS.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._pIEZASTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._sUBCONJUNTOSTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SUBCONJUNTOS.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._sUBCONJUNTOSTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -14570,27 +14570,11 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._sUBCONJUNTOSTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.SUBCONJUNTOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._sUBCONJUNTOSTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._pIEZASTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.PIEZAS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._pIEZASTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._cONJUNTOSTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.CONJUNTOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._cONJUNTOSTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -14607,6 +14591,22 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._gRUPOS_ESTRUCTURATableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._cONJUNTOSTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.CONJUNTOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._cONJUNTOSTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._sUBCONJUNTOSTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SUBCONJUNTOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._sUBCONJUNTOSTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -14703,11 +14703,6 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._pLANOSTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._pLANOSTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             if (((this._gRUPOS_ESTRUCTURATableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._gRUPOS_ESTRUCTURATableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
@@ -14730,6 +14725,11 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
             }
             if (((this._mATERIAS_PRIMASTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._mATERIAS_PRIMASTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._pLANOSTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._pLANOSTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -14837,15 +14837,6 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
                         adaptersWithAcceptChangesDuringUpdate.Add(this._eSTRUCTURASTableAdapter.Adapter);
                     }
                 }
-                if ((this._pLANOSTableAdapter != null)) {
-                    revertConnections.Add(this._pLANOSTableAdapter, this._pLANOSTableAdapter.Connection);
-                    this._pLANOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._pLANOSTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._pLANOSTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._pLANOSTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._pLANOSTableAdapter.Adapter);
-                    }
-                }
                 if ((this._gRUPOS_ESTRUCTURATableAdapter != null)) {
                     revertConnections.Add(this._gRUPOS_ESTRUCTURATableAdapter, this._gRUPOS_ESTRUCTURATableAdapter.Connection);
                     this._gRUPOS_ESTRUCTURATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -14889,6 +14880,15 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
                     if (this._mATERIAS_PRIMASTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._mATERIAS_PRIMASTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._mATERIAS_PRIMASTableAdapter.Adapter);
+                    }
+                }
+                if ((this._pLANOSTableAdapter != null)) {
+                    revertConnections.Add(this._pLANOSTableAdapter, this._pLANOSTableAdapter.Connection);
+                    this._pLANOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._pLANOSTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._pLANOSTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._pLANOSTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._pLANOSTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -14981,10 +14981,6 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
                     this._eSTRUCTURASTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._eSTRUCTURASTableAdapter]));
                     this._eSTRUCTURASTableAdapter.Transaction = null;
                 }
-                if ((this._pLANOSTableAdapter != null)) {
-                    this._pLANOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._pLANOSTableAdapter]));
-                    this._pLANOSTableAdapter.Transaction = null;
-                }
                 if ((this._gRUPOS_ESTRUCTURATableAdapter != null)) {
                     this._gRUPOS_ESTRUCTURATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._gRUPOS_ESTRUCTURATableAdapter]));
                     this._gRUPOS_ESTRUCTURATableAdapter.Transaction = null;
@@ -15004,6 +15000,10 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_P
                 if ((this._mATERIAS_PRIMASTableAdapter != null)) {
                     this._mATERIAS_PRIMASTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._mATERIAS_PRIMASTableAdapter]));
                     this._mATERIAS_PRIMASTableAdapter.Transaction = null;
+                }
+                if ((this._pLANOSTableAdapter != null)) {
+                    this._pLANOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._pLANOSTableAdapter]));
+                    this._pLANOSTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

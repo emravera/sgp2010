@@ -21,7 +21,7 @@ namespace GyCAP.DAL
                                         ,[estr_activo]
                                         ,[estr_fecha_alta]
                                         ,[estr_fecha_modificacion]
-                                        .[e_legajo]) 
+                                        .[e_codigo]) 
                                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7) SELECT @@Identity";
 
             //obtenemos la estructura nueva del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
@@ -31,8 +31,8 @@ namespace GyCAP.DAL
                                          rowEstructura.PNO_CODIGO,
                                          rowEstructura.ESTR_DESCRIPCION,
                                          rowEstructura.ESTR_ACTIVO,
-                                         rowEstructura.ESTR_FECHA_ALTA,
-                                         rowEstructura.ESTR_FECHA_MODIFICACION };
+                                         rowEstructura.ESTR_FECHA_ALTA.Date,
+                                         rowEstructura.ESTR_FECHA_MODIFICACION.Date };
 
             string sqlInsertGrupo = @"INSERT INTO [GRUPOS_ESTRUCTURA] 
                                     ([grp_numero]
@@ -202,14 +202,14 @@ namespace GyCAP.DAL
                                          rowEstructura.ESTR_NOMBRE,
                                          rowEstructura.ESTR_DESCRIPCION,
                                          rowEstructura.ESTR_ACTIVO,
-                                         rowEstructura.ESTR_FECHA_ALTA, 
-                                         rowEstructura.ESTR_FECHA_MODIFICACION };
+                                         rowEstructura.ESTR_FECHA_ALTA.Date, 
+                                         rowEstructura.ESTR_FECHA_MODIFICACION.Date };
 
             #endregion
 
             #region SqlGrupo
 
-            /*string sqlInsertGrupo = @"INSERT INTO [GRUPOS_ESTRUCTURA] 
+            string sqlInsertGrupo = @"INSERT INTO [GRUPOS_ESTRUCTURA] 
                                     ([grp_numero]
                                     ,[estr_codigo]
                                     ,[grp_padre_codigo]
@@ -219,7 +219,7 @@ namespace GyCAP.DAL
 
             string sqlDeleteGrupo = "DELETE FROM GRUPOS_ESTRUCTURA WHERE grp_codigo = @p0";
 
-            string sqlUpdateGrupo = @"UPDATE GRUPOS_ESTRUCTURA SET ";*/
+            //string sqlUpdateGrupo = @"UPDATE GRUPOS_ESTRUCTURA SET ";
 
             #endregion
 
@@ -232,7 +232,7 @@ namespace GyCAP.DAL
                                                 ,[grp_codigo])
                                                 VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
 
-            string sqlUpdateConjuntosEstructura = @"UPDATE CONJUNTOSXESTRUCTURA SET cxe_cantidad = @p0 WHERE cxe_codigo = @p1";
+            string sqlUpdateConjuntosEstructura = "UPDATE CONJUNTOSXESTRUCTURA SET cxe_cantidad = @p0 WHERE cxe_codigo = @p1";
             string sqlDeleteConjuntosEstructura = "DELETE FROM CONJUNTOSXESTRUCTURA WHERE cxe_codigo = @p0";
 
             #endregion
@@ -245,7 +245,7 @@ namespace GyCAP.DAL
                                                 ,[grp_codigo])
                                                 VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
 
-            string sqlUpdateSubconjuntosEstructura = @"UPDATE SUBCONJUNTOSXESTRUCTURA SET scxe_cantidad = @p0 WHERE scxe_codigo = @p1";
+            string sqlUpdateSubconjuntosEstructura = "UPDATE SUBCONJUNTOSXESTRUCTURA SET scxe_cantidad = @p0 WHERE scxe_codigo = @p1";
             string sqlDeleteSubconjuntosEstructura = "DELETE FROM SUBCONJUNTOSXESTRUCTURA WHERE scxe_codigo = @p0";
             #endregion
 
@@ -257,7 +257,7 @@ namespace GyCAP.DAL
                                                 ,[grp_codigo])
                                                 VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
 
-            string sqlUpdatePiezasEstructura = @"UPDATE PIEZASXESTRUCTURA SET pxe_cantidad = @p0 WHERE pxe_codigo = @p1";
+            string sqlUpdatePiezasEstructura = "UPDATE PIEZASXESTRUCTURA SET pxe_cantidad = @p0 WHERE pxe_codigo = @p1";
             string sqlDeletePiezasEstructura = "DELETE FROM PIEZASXESTRUCTURA WHERE pxe_codigo = @p0";
             #endregion
 
@@ -269,7 +269,7 @@ namespace GyCAP.DAL
                                                         ,[grp_codigo])
                                                         VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
 
-            string sqlUpdateMateriasPrimasEstructura = @"UPDATE MATERIASPRIMASXESTRUCTURA SET mpxe_cantidad = @p0 WHERE mpxe_codigo = @p1";
+            string sqlUpdateMateriasPrimasEstructura = "UPDATE MATERIASPRIMASXESTRUCTURA SET mpxe_cantidad = @p0 WHERE mpxe_codigo = @p1";
             string sqlDeleteMateriasPrimasEstructura = "DELETE FROM MATERIASPRIMASXESTRUCTURA WHERE mpxe_codigo = @p0";
 
             #endregion
@@ -429,7 +429,7 @@ namespace GyCAP.DAL
             if (fechaCreacion != null && fechaCreacion.GetType() == DateTime.Today.GetType())
             {
                 sql += " AND estr_fecha_alta = @p" + cantidadParametros;
-                valoresFiltros[cantidadParametros] = fechaCreacion.ToString();
+                valoresFiltros[cantidadParametros] = ((DateTime)fechaCreacion).Date;
                 cantidadParametros++;
             }
 
@@ -479,7 +479,11 @@ namespace GyCAP.DAL
         
         public static bool PuedeEliminarse(int codigoEstructura)
         {
-            return false;
+            string sql = "SELECT count(estr_codigo) FROM ESTRUCTURAS WHERE estr_codigo = @p0 AND estr_activo = 0";
+            object[] valorParametros = { codigoEstructura };
+
+            if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return true; }
+            else { return false; }
         }
     }
 }

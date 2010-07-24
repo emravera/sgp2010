@@ -127,8 +127,7 @@ namespace GyCAP.UI.EstructuraProducto
             try
             {
                 dsEstructura.Clear();
-                
-                BLL.EstructuraBLL.ObtenerEstructuras(txtNombreBuscar.Text, cbPlanoBuscar.SelectedValue, dtpFechaAltaBuscar.Value, cbCocinaBuscar.SelectedValue, cbResponsableBuscar.SelectedValue, cbActivoBuscar.SelectedItem, dsEstructura);
+                BLL.EstructuraBLL.ObtenerEstructuras(txtNombreBuscar.Text, cbPlanoBuscar.SelectedValue, dtpFechaAltaBuscar.Value.ToShortDateString(), cbCocinaBuscar.SelectedValue, cbResponsableBuscar.SelectedValue, cbActivoBuscar.SelectedItem, dsEstructura);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
                 dvEstructuras.Table = dsEstructura.ESTRUCTURAS;
@@ -454,7 +453,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvEstructuras.Columns.Add("PNO_CODIGO", "Plano");
             dgvEstructuras.Columns.Add("E_CODIGO", "Responsable");
             dgvEstructuras.Columns.Add("ESTR_ACTIVO", "Activo");
-            dgvEstructuras.Columns.Add("ESTR_FECHA_ALTA", "Fecha alta");
+            dgvEstructuras.Columns.Add("ESTR_FECHA_ALTA", "Fecha creación");
             dgvEstructuras.Columns["ESTR_FECHA_ALTA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvEstructuras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvEstructuras.Columns["ESTR_NOMBRE"].DataPropertyName = "ESTR_NOMBRE";
@@ -462,19 +461,19 @@ namespace GyCAP.UI.EstructuraProducto
             dgvEstructuras.Columns["PNO_CODIGO"].DataPropertyName = "PNO_CODIGO";
             dgvEstructuras.Columns["E_CODIGO"].DataPropertyName = "E_CODIGO";
             dgvEstructuras.Columns["ESTR_ACTIVO"].DataPropertyName = "ESTR_ACTIVO";
-            dgvEstructuras.Columns["ESTR_FECHA_ALTA"].DataPropertyName = "ESTR_FECHA_CREACION"; 
+            dgvEstructuras.Columns["ESTR_FECHA_ALTA"].DataPropertyName = "ESTR_FECHA_ALTA";
 
             //Dataviews
             dvEstructuras = new DataView(dsEstructura.ESTRUCTURAS);
             dvEstructuras.Sort = "ESTR_NOMBRE ASC";
             dgvEstructuras.DataSource = dvEstructuras;
             dvCocinaBuscar = new DataView(dsCocina.COCINAS);
-            dvCocinaBuscar.Sort = "COC_CODIGO_PRODUCTO ASC";            
+            dvCocinaBuscar.Sort = "COC_CODIGO_PRODUCTO ASC";
             dvResponsableBuscar = new DataView(dsEmpleado.EMPLEADOS);
-            dvResponsableBuscar.Sort = "E_APELLIDO ASC, E_NOMBRE ASC";            
+            dvResponsableBuscar.Sort = "E_APELLIDO ASC, E_NOMBRE ASC";
             
             dvPlanoBuscar = new DataView(dsEstructura.PLANOS);
-            dvPlanoBuscar.Sort = "PNO_NOMBRE ASC";           
+            dvPlanoBuscar.Sort = "PNO_NOMBRE ASC";
 
             //ComboBoxs
             cbCocinaBuscar.DataSource = dvCocinaBuscar;
@@ -488,7 +487,7 @@ namespace GyCAP.UI.EstructuraProducto
             cbPlanoBuscar.DataSource = dvPlanoBuscar;
             cbPlanoBuscar.DisplayMember = "PNO_NOMBRE";
             cbPlanoBuscar.ValueMember = "PNO_CODIGO";
-            cbPlanoBuscar.SelectedIndex = -1;            
+            cbPlanoBuscar.SelectedIndex = -1;
             cbActivoBuscar.Items.Add("SI");
             cbActivoBuscar.Items.Add("NO");
             cbActivoBuscar.SelectedIndex = -1;
@@ -521,7 +520,7 @@ namespace GyCAP.UI.EstructuraProducto
 
             //ComboBoxs
             cbCocina.DataSource = dvCocina;
-            cbCocina.DisplayMember = "";
+            cbCocina.DisplayMember = "COC_CODIGO_PRODUCTO";
             cbCocina.ValueMember = "COC_CODIGO";
             cbCocina.SelectedIndex = -1;
             cbResponsable.DataSource = dvResponsable;
@@ -729,9 +728,45 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
+        private void frmEstructuraCocina_Activated(object sender, EventArgs e)
+        {
+            if (txtNombreBuscar.Enabled) { txtNombreBuscar.Focus(); }
+        }
+
+        private void dgvEstructuras_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != string.Empty)
+            {
+                string nombre;
+                switch (dgvEstructuras.Columns[e.ColumnIndex].Name)
+                {
+                    case "COC_COCINA":
+                        nombre = dsCocina.COCINAS.FindByCOC_CODIGO(Convert.ToInt32(e.Value)).COC_CODIGO_PRODUCTO;
+                        e.Value = nombre;
+                        break;
+                    case "PNO_CODIGO":
+                        nombre = dsEstructura.PLANOS.FindByPNO_CODIGO(Convert.ToInt32(e.Value)).PNO_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "E_CODIGO":
+                        nombre = dsEmpleado.EMPLEADOS.FindByE_CODIGO(Convert.ToInt32(e.Value)).E_APELLIDO;
+                        nombre += ", " + dsEmpleado.EMPLEADOS.FindByE_CODIGO(Convert.ToInt32(e.Value)).E_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "ESTR_ACTIVO":
+                        nombre = "No";
+                        if (Convert.ToInt32(e.Value) == 1) { nombre = "Si"; }
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
         #endregion Servicios
 
-
+        
         
     }
 }

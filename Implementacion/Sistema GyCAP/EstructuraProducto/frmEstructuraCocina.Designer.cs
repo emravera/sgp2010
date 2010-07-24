@@ -262,7 +262,8 @@
             this.dgvEstructuras.RowHeadersVisible = false;
             this.dgvEstructuras.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEstructuras.Size = new System.Drawing.Size(768, 377);
-            this.dgvEstructuras.TabIndex = 0;
+            this.dgvEstructuras.TabIndex = 8;
+            this.dgvEstructuras.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvEstructuras_CellFormatting);
             // 
             // groupBox1
             // 
@@ -294,7 +295,7 @@
             this.cbResponsableBuscar.Location = new System.Drawing.Point(333, 60);
             this.cbResponsableBuscar.Name = "cbResponsableBuscar";
             this.cbResponsableBuscar.Size = new System.Drawing.Size(169, 21);
-            this.cbResponsableBuscar.TabIndex = 16;
+            this.cbResponsableBuscar.TabIndex = 5;
             // 
             // dtpFechaAltaBuscar
             // 
@@ -304,7 +305,7 @@
             this.dtpFechaAltaBuscar.Name = "dtpFechaAltaBuscar";
             this.dtpFechaAltaBuscar.ShowCheckBox = true;
             this.dtpFechaAltaBuscar.Size = new System.Drawing.Size(97, 21);
-            this.dtpFechaAltaBuscar.TabIndex = 13;
+            this.dtpFechaAltaBuscar.TabIndex = 3;
             // 
             // cbPlanoBuscar
             // 
@@ -313,15 +314,16 @@
             this.cbPlanoBuscar.Location = new System.Drawing.Point(333, 20);
             this.cbPlanoBuscar.Name = "cbPlanoBuscar";
             this.cbPlanoBuscar.Size = new System.Drawing.Size(169, 21);
-            this.cbPlanoBuscar.TabIndex = 11;
+            this.cbPlanoBuscar.TabIndex = 2;
             // 
             // cbActivoBuscar
             // 
+            this.cbActivoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbActivoBuscar.FormattingEnabled = true;
             this.cbActivoBuscar.Location = new System.Drawing.Point(574, 60);
             this.cbActivoBuscar.Name = "cbActivoBuscar";
             this.cbActivoBuscar.Size = new System.Drawing.Size(95, 21);
-            this.cbActivoBuscar.TabIndex = 10;
+            this.cbActivoBuscar.TabIndex = 6;
             // 
             // label13
             // 
@@ -365,7 +367,7 @@
             this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(166, 21);
-            this.txtNombreBuscar.TabIndex = 5;
+            this.txtNombreBuscar.TabIndex = 1;
             this.txtNombreBuscar.Enter += new System.EventHandler(this.txtNombreBuscar_Enter);
             // 
             // label5
@@ -384,7 +386,7 @@
             this.cbCocinaBuscar.Location = new System.Drawing.Point(67, 60);
             this.cbCocinaBuscar.Name = "cbCocinaBuscar";
             this.cbCocinaBuscar.Size = new System.Drawing.Size(166, 21);
-            this.cbCocinaBuscar.TabIndex = 3;
+            this.cbCocinaBuscar.TabIndex = 4;
             // 
             // btnBuscar
             // 
@@ -393,7 +395,7 @@
             this.btnBuscar.Location = new System.Drawing.Point(688, 35);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(80, 30);
-            this.btnBuscar.TabIndex = 2;
+            this.btnBuscar.TabIndex = 7;
             this.btnBuscar.Text = "&Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -1495,6 +1497,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Estructura de Cocina";
+            this.Activated += new System.EventHandler(this.frmEstructuraCocina_Activated);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tcEstructuraCocina.ResumeLayout(false);
