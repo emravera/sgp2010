@@ -6,7 +6,7 @@ using System.Data;
 using System.Windows.Forms;
 
 
-namespace GyCAP.UI.RecursosFabricacion
+namespace GyCAP.UI.Sistema
 {
     public class Item
     {
@@ -39,8 +39,6 @@ namespace GyCAP.UI.RecursosFabricacion
 
     public class FuncionesAuxiliares
     {
-        
-        
         public static void llenarListas(DataView dv,CheckedListBox control)
         {
             control.Items.Clear();
@@ -80,14 +78,15 @@ namespace GyCAP.UI.RecursosFabricacion
 
             //Agrego el primer item a mano
             Item filtro = new Item(titulo, 0);
-            control.Items.Add(filtro.Name);
+            
+            control.Items.Add(filtro);
 
             if (dv.Count != 0)
             {
                 foreach (DataRowView dr in dv)
                 {
                     Item item = new Item(dr[DisplayMember].ToString(), int.Parse(dr[ValueMember].ToString()));
-                    control.Items.Add(item.Name);
+                    control.Items.Add(item);
                 }
             }
             control.SelectedIndex = 0;

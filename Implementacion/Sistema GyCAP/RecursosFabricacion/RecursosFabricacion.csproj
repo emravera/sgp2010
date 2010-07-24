@@ -86,7 +86,6 @@
     <Compile Include="frmVisorInformes.Designer.cs">
       <DependentUpon>frmVisorInformes.cs</DependentUpon>
     </Compile>
-    <Compile Include="FuncionesAuxiliares.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ControlesUsuarios\Grilla.resx">

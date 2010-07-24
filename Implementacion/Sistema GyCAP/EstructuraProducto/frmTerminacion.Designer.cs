@@ -71,7 +71,7 @@
             this.txtNombre.MaxLength = 25;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(313, 20);
-            this.txtNombre.TabIndex = 3;
+            this.txtNombre.TabIndex = 4;
             this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
             // 
             // label3
@@ -88,7 +88,7 @@
             this.btnVolver.Location = new System.Drawing.Point(423, 23);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(64, 25);
-            this.btnVolver.TabIndex = 1;
+            this.btnVolver.TabIndex = 7;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -113,7 +113,7 @@
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
             this.tsMenu.Size = new System.Drawing.Size(507, 50);
-            this.tsMenu.TabIndex = 7;
+            this.tsMenu.TabIndex = 0;
             this.tsMenu.Text = "toolStrip1";
             // 
             // btnNuevo
@@ -215,7 +215,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(353, 23);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(64, 25);
-            this.btnGuardar.TabIndex = 0;
+            this.btnGuardar.TabIndex = 6;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -245,7 +245,7 @@
             this.dgvLista.ReadOnly = true;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(475, 165);
-            this.dgvLista.TabIndex = 2;
+            this.dgvLista.TabIndex = 3;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
             // 
@@ -281,7 +281,7 @@
             this.btnBuscar.Location = new System.Drawing.Point(404, 19);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscar.TabIndex = 1;
+            this.btnBuscar.TabIndex = 2;
             this.btnBuscar.Text = "&Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -292,7 +292,7 @@
             this.txtNombreBuscar.Location = new System.Drawing.Point(61, 24);
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(193, 20);
-            this.txtNombreBuscar.TabIndex = 0;
+            this.txtNombreBuscar.TabIndex = 1;
             this.txtNombreBuscar.Enter += new System.EventHandler(this.txtNombreBuscar_Enter);
             // 
             // label1
