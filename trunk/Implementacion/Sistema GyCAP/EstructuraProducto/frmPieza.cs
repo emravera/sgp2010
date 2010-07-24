@@ -21,6 +21,8 @@ namespace GyCAP.UI.EstructuraProducto
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
+        //Variable que simula el código autodecremental para el detalle, usa valores negativos para no tener problemas con valores existentes
+        int codigoDetalle = 0;
         
         public frmPieza()
         {
@@ -167,11 +169,11 @@ namespace GyCAP.UI.EstructuraProducto
                     try
                     {
                         //Como ahora tenemos más de una tabla y relacionadas vamos a trabajar diferente
-                        //Primero lo agregamos a la tabla Piezas del dataset con código 0, luego la entidad 
+                        //Primero lo agregamos a la tabla Piezas del dataset con código -1, luego la entidad 
                         //PiezaDAL se va a encargar de insertarle el código que corresponda y el stock inicial
                         Data.dsEstructura.PIEZASRow rowPieza = dsEstructura.PIEZAS.NewPIEZASRow();
                         rowPieza.BeginEdit();
-                        rowPieza.PZA_CODIGO = 0;
+                        rowPieza.PZA_CODIGO = -1;
                         rowPieza.PZA_NOMBRE = txtNombre.Text;
                         rowPieza.TE_CODIGO = Convert.ToInt32(cbTerminacion.SelectedValue.ToString());
                         rowPieza.EndEdit();
@@ -355,8 +357,8 @@ namespace GyCAP.UI.EstructuraProducto
                 {
                     Data.dsEstructura.DETALLE_PIEZARow row = dsEstructura.DETALLE_PIEZA.NewDETALLE_PIEZARow();
                     row.BeginEdit();
-                    //Agregamos una fila nueva con código 0, luego al guardar en la db se actualizará
-                    row.DPZA_CODIGO = 0;
+                    //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
+                    row.DPZA_CODIGO = codigoDetalle--; //-- para que se vaya autodecrementando en cada inserción
                     row.PZA_CODIGO = piezaCodigo;
                     row.MP_CODIGO = materiaPrimaCodigo;
                     row.DPZA_CANTIDAD = Convert.ToInt32(nudCantidad.Value);

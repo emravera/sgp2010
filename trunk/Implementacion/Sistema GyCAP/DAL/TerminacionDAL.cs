@@ -61,6 +61,35 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        public static void ObtenerTerminacion(string nombre, System.Data.DataTable dt)
+        {
+            if (nombre != String.Empty)
+            {
+                string sql = @"SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION
+                              FROM TERMINACIONES
+                              WHERE TE_NOMBRE LIKE @p0";
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                nombre = "%" + nombre + "%";
+                object[] valorParametros = { nombre };
+                try
+                {
+                    DB.FillDataTable(dt, sql, valorParametros);
+                }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+            }
+            else
+            {
+                string sql = "SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION FROM TERMINACIONES";
+                try
+                {
+                    DB.FillDataTable(dt, sql, null);
+                }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+            }
+        }
+        
         public static void ObtenerTerminacion(string nombre, Data.dsTerminacion ds)
         {
             if (nombre != String.Empty)

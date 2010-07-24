@@ -40,6 +40,11 @@ namespace GyCAP.BLL
             return DAL.TerminacionDAL.EsTeminacion(terminacion);
         }
 
+        public static void ObtenerTodos(string nombre, System.Data.DataTable dt)
+        {
+            DAL.TerminacionDAL.ObtenerTerminacion(nombre, dt);
+        }
+        
         public static void ObtenerTodos(string nombre, Data.dsTerminacion dsTerminacion)
         {
             DAL.TerminacionDAL.ObtenerTerminacion(nombre, dsTerminacion);            

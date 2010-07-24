@@ -20,6 +20,8 @@ namespace GyCAP.UI.EstructuraProducto
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
+        //Variable que simula el código autodecremental para el detalle, usa valores negativos para no tener problemas con valores existentes
+        int codigoDetalle = 0; 
                 
         public frmConjunto()
         {
@@ -184,11 +186,11 @@ namespace GyCAP.UI.EstructuraProducto
                     try
                     {
                         //Como ahora tenemos más de una tabla y relacionadas vamos a trabajar diferente
-                        //Primero lo agregamos a la tabla Conjuntos del dataset con código 0, luego la entidad 
+                        //Primero lo agregamos a la tabla Conjuntos del dataset con código -1, luego la entidad 
                         //ConjuntoDAL se va a encargar de insertarle el código que corresponda y el stock inicial
                         Data.dsEstructura.CONJUNTOSRow rowConjunto = dsEstructura.CONJUNTOS.NewCONJUNTOSRow();
                         rowConjunto.BeginEdit();
-                        rowConjunto.CONJ_CODIGO = 0;
+                        rowConjunto.CONJ_CODIGO = -1;
                         rowConjunto.CONJ_NOMBRE = txtNombre.Text;
                         rowConjunto.TE_CODIGO = Convert.ToInt32(cbTerminacion.SelectedValue.ToString());
                         rowConjunto.EndEdit();
@@ -372,8 +374,9 @@ namespace GyCAP.UI.EstructuraProducto
                 {
                     Data.dsEstructura.DETALLE_CONJUNTORow row = dsEstructura.DETALLE_CONJUNTO.NewDETALLE_CONJUNTORow();
                     row.BeginEdit();
-                    //Agregamos una fila nueva con código 0, luego al guardar en la db se actualizará
-                    row.DCJ_CODIGO = 0;
+                    //Modificado 23/07/2010
+                    //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
+                    row.DCJ_CODIGO = codigoDetalle--; //-- para que se vaya autodecrementando en cada inserción
                     row.CONJ_CODIGO = conjuntoCodigo;
                     row.SCONJ_CODIGO = subconjuntoCodigo;
                     row.DCJ_CANTIDAD = nudCantidad.Value;

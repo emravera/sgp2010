@@ -497,7 +497,7 @@
             // 
             this.gbVer.Controls.Add(this.btnArbol);
             this.gbVer.Controls.Add(this.clbVer);
-            this.gbVer.Location = new System.Drawing.Point(618, 179);
+            this.gbVer.Location = new System.Drawing.Point(618, 177);
             this.gbVer.Name = "gbVer";
             this.gbVer.Size = new System.Drawing.Size(156, 274);
             this.gbVer.TabIndex = 10;
@@ -533,7 +533,7 @@
             // gbPartes
             // 
             this.gbPartes.Controls.Add(this.dgvPartes);
-            this.gbPartes.Location = new System.Drawing.Point(3, 179);
+            this.gbPartes.Location = new System.Drawing.Point(3, 177);
             this.gbPartes.Name = "gbPartes";
             this.gbPartes.Size = new System.Drawing.Size(609, 277);
             this.gbPartes.TabIndex = 8;

@@ -20,6 +20,8 @@ namespace GyCAP.UI.EstructuraProducto
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
+        //Variable que simula el código autodecremental para el detalle, usa valores negativos para no tener problemas con valores existentes
+        int codigoDetalle = 0;
         
         public frmSubconjunto()
         {
@@ -166,11 +168,11 @@ namespace GyCAP.UI.EstructuraProducto
                     try
                     {
                         //Como ahora tenemos más de una tabla y relacionadas vamos a trabajar diferente
-                        //Primero lo agregamos a la tabla subonjuntos del dataset con código 0, luego la entidad 
+                        //Primero lo agregamos a la tabla subonjuntos del dataset con código -1, luego la entidad 
                         //SubconjuntoDAL se va a encargar de insertarle el código que corresponda y el stock inicial
                         Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto = dsEstructura.SUBCONJUNTOS.NewSUBCONJUNTOSRow();
                         rowSubconjunto.BeginEdit();
-                        rowSubconjunto.SCONJ_CODIGO = 0;
+                        rowSubconjunto.SCONJ_CODIGO = -1;
                         rowSubconjunto.SCONJ_NOMBRE = txtNombre.Text;
                         rowSubconjunto.TE_CODIGO = Convert.ToInt32(cbTerminacion.SelectedValue.ToString());
                         rowSubconjunto.EndEdit();
@@ -354,8 +356,8 @@ namespace GyCAP.UI.EstructuraProducto
                 {
                     Data.dsEstructura.DETALLE_SUBCONJUNTORow row = dsEstructura.DETALLE_SUBCONJUNTO.NewDETALLE_SUBCONJUNTORow();
                     row.BeginEdit();
-                    //Agregamos una fila nueva con código 0, luego al guardar en la db se actualizará
-                    row.DSC_CODIGO = 0;
+                    //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
+                    row.DSC_CODIGO = codigoDetalle--; //-- para que se vaya autodecrementando en cada inserción
                     row.SCONJ_CODIGO = subconjuntoCodigo;
                     row.PZA_CODIGO = piezaCodigo;
                     row.DSC_CANTIDAD = nudCantidad.Value;
