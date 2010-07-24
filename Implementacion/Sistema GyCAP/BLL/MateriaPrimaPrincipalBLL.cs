@@ -24,5 +24,12 @@ namespace GyCAP.BLL
         {
             DAL.MateriaPrimaPrincipalDAL.Eliminar(codigo);
         }
+        public static void Actualizar(Entidades.MateriaPrimaPrincipal materiaPrima)
+        {
+            if (DAL.MateriaPrimaPrincipalDAL.ModificarMateriaPrima(materiaPrima)) throw new Entidades.Excepciones.ElementoExistenteException();
+            //Si no existe la modifica en la Base de datos
+            else DAL.MateriaPrimaPrincipalDAL.Actualizar(materiaPrima);
+        }
+
     }
 }

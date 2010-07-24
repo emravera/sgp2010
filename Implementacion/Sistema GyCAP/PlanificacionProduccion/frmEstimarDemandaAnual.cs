@@ -73,8 +73,8 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             //Seteo el maxlenght de los textbox
             txtAnioBuscar.MaxLength = 4;
-            txtIdentificacion.MaxLength = 30;
-            txtDenominacionHistorico.MaxLength = 30;
+            txtIdentificacion.MaxLength = 80;
+            txtDenominacionHistorico.MaxLength = 80;
             txtAnio.MaxLength = 4;
             numCrecimiento.Increment =Convert.ToDecimal(0.01);
             numCrecimiento.DecimalPlaces = 2;
@@ -114,6 +114,10 @@ namespace GyCAP.UI.PlanificacionProduccion
                     estadoActual = estadoUI.modificar;
                     break;
                 case estadoUI.nuevo:
+                    txtIdentificacion.Text = string.Empty;
+                    txtAnio.Focus();
+                    txtAnio.Text = string.Empty;
+                    numCrecimiento.Value = 0;
                     btnConsultar.Enabled = false;
                     btnEliminar.Enabled = false;
                     btnModificar.Enabled = false;
@@ -408,18 +412,18 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             try
             {
+                string validacion= string.Empty;
+                //Creo el objeto de Demanda
+                Entidades.DemandaAnual demanda = new GyCAP.Entidades.DemandaAnual();
 
                 if (estadoActual == estadoUI.cargaHistorico)
                 {
-                    string validacion = Validar(estadoUI.cargaHistorico);
+                    validacion = Validar(estadoUI.cargaHistorico);
                     //Pregunto si esta todo escrito
                     if ( validacion == string.Empty)
                     {
 
                         //Se definen los parámetros que se van a guardar
-
-                        //Creo el objeto de Demanda
-                        Entidades.DemandaAnual demanda = new GyCAP.Entidades.DemandaAnual();
 
                         demanda.Anio = Convert.ToInt32(txtAnioHistorico.Text);
                         demanda.Nombre = txtDenominacionHistorico.Text;
@@ -427,7 +431,29 @@ namespace GyCAP.UI.PlanificacionProduccion
                         demanda.FechaCreacion = DateTime.Now;
 
                         demanda.Codigo = BLL.DemandaAnualBLL.Insertar(demanda);
+                    }
+                }
+                else if ( estadoActual == estadoUI.calcularEstimacion)
+                {
+                    validacion=string.Empty;
+                    validacion = Validar(estadoUI.calcularEstimacion);
 
+                    //Pregunto si esta todo escrito
+                    if ( validacion == string.Empty)
+                    {
+
+                        //Se definen los parámetros que se van a guardar
+
+                        demanda.Anio = Convert.ToInt32(txtAnio.Text);
+                        demanda.Nombre = txtIdentificacion.Text;
+                        demanda.ParametroCrecimiento = Convert.ToDecimal(numCrecimiento.Value);
+                        demanda.FechaCreacion = DateTime.Now;
+
+                        demanda.Codigo = BLL.DemandaAnualBLL.Insertar(demanda);
+                    }
+                }
+                if (validacion== string.Empty)
+                {
                         //Meses
                         int enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre;
                         int octubre, noviembre, diciembre;
@@ -499,13 +525,12 @@ namespace GyCAP.UI.PlanificacionProduccion
                         //Seteo el estado de la interface a nuevo
                         SetInterface(estadoUI.nuevo);
                     }
-                    else
+                else 
                     {
-                        MessageBox.Show("Debe completar los datos antes de guardar", "Error: Demanda Anual - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(validacion, "Error: Demanda Anual - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
                 }
-            }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
                 MessageBox.Show(ex.Message, "Error: Demanda Anual - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -597,11 +622,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
         }
 
-        private void numEnero_Enter(object sender, EventArgs e)
-        {
-            numEnero.Focus();
-        }
-
         private void btnModificarEstimacion_Click(object sender, EventArgs e)
         {
             //Se activan todos los controles que le permiten realizar modificaciones
@@ -626,14 +646,82 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Se lo asigno al texbox que lo muestra por pantalla
             txtTotal.Text = totalActual.ToString();
         }
+        #region Controles
 
         private void numFebrero_ValueChanged(object sender, EventArgs e)
         {
             CalculaTotal();
         }
 
+        private void numEnero_Enter_1(object sender, EventArgs e)
+        {
+            numEnero.Select(0, 10);
+        }
+
+        private void numFebrero_Enter(object sender, EventArgs e)
+        {
+            numFebrero.Select(0, 10);
+        }
+
+        private void numMarzo_Enter(object sender, EventArgs e)
+        {
+            numMarzo.Select(0, 10);
+        }
+
+        private void numAbril_Enter(object sender, EventArgs e)
+        {
+            numAbril.Select(0, 10);
+        }
+
+        private void numMayo_Enter(object sender, EventArgs e)
+        {
+            numMayo.Select(0, 10);
+        }
+
+        private void numJunio_Enter(object sender, EventArgs e)
+        {
+            numJunio.Select(0, 10);
+        }
+
+        private void numJulio_Enter(object sender, EventArgs e)
+        {
+            numJulio.Select(0, 10);
+        }
+
+        private void numAgosto_Enter(object sender, EventArgs e)
+        {
+            numAgosto.Select(0, 10);
+        }
+
+        private void numSeptiembre_Enter(object sender, EventArgs e)
+        {
+            numSeptiembre.Select(0, 10);
+        }
+
+        private void numOctubre_Enter(object sender, EventArgs e)
+        {
+            numOctubre.Select(0, 10);
+        }
+
+        private void numNoviembre_Enter(object sender, EventArgs e)
+        {
+            numNoviembre.Select(0, 10);
+        }
+
+        private void numDiciembre_Enter(object sender, EventArgs e)
+        {
+            numDiciembre.Select(0, 10);
+        }
+        private void numCrecimiento_Enter(object sender, EventArgs e)
+        {
+            numCrecimiento.Select(0, 10);
+        }
+        #endregion 
+
         
-      
+
+
+
 
 
 
