@@ -44,7 +44,6 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
-            this.clbCapacidades = new System.Windows.Forms.CheckedListBox();
             this.cboEstado = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtLegajo = new System.Windows.Forms.TextBox();
@@ -67,6 +66,8 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.button1 = new System.Windows.Forms.Button();
             this.dgvLista = new GyCAP.UI.RecursosFabricacion.Grilla();
             this.tcABM.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -123,6 +124,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.lvSectores);
             this.groupBox1.Controls.Add(this.cboBuscarPor);
             this.groupBox1.Controls.Add(this.cboBuscarEstado);
@@ -245,8 +247,9 @@
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(64, 26);
             this.btnVolver.TabIndex = 11;
-            this.btnVolver.Text = "Volver";
+            this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnGuardar
             // 
@@ -255,13 +258,13 @@
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(64, 26);
             this.btnGuardar.TabIndex = 10;
-            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // gbDatos
             // 
-            this.gbDatos.Controls.Add(this.clbCapacidades);
+            this.gbDatos.Controls.Add(this.listView1);
             this.gbDatos.Controls.Add(this.cboEstado);
             this.gbDatos.Controls.Add(this.label6);
             this.gbDatos.Controls.Add(this.txtLegajo);
@@ -285,14 +288,6 @@
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Empleado";
-            // 
-            // clbCapacidades
-            // 
-            this.clbCapacidades.FormattingEnabled = true;
-            this.clbCapacidades.Location = new System.Drawing.Point(253, 24);
-            this.clbCapacidades.Name = "clbCapacidades";
-            this.clbCapacidades.Size = new System.Drawing.Size(259, 169);
-            this.clbCapacidades.TabIndex = 20;
             // 
             // cboEstado
             // 
@@ -516,6 +511,24 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(562, 372);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(242, 24);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(294, 175);
+            this.listView1.TabIndex = 20;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(421, 30);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // dgvLista
             // 
             this.dgvLista.Columnas = null;
@@ -596,8 +609,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtLegajo;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.CheckedListBox clbCapacidades;
         private Grilla dgvLista;
         private System.Windows.Forms.ListView lvSectores;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button button1;
     }
 }

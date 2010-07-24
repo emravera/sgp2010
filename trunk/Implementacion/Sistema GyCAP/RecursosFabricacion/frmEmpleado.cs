@@ -71,7 +71,7 @@ namespace GyCAP.UI.RecursosFabricacion
             //CARGA DE COMBOS
             //Creamos el Dataview y se lo asignamos al combo
             dvEstadoEmpleadoBuscar = new DataView(dsEmpleado.ESTADO_EMPLEADOS);
-            FuncionesAuxiliares.llenarCombosFiltros(dvEstadoEmpleadoBuscar, cboBuscarEstado, "EE_CODIGO", "EE_NOMBRE", "-- TODOS --");
+            Sistema.FuncionesAuxiliares.llenarCombosFiltros(dvEstadoEmpleadoBuscar, cboBuscarEstado, "EE_CODIGO", "EE_NOMBRE", "-- TODOS --");
 
             cboBuscarPor.Items.Add("Legajo");
             cboBuscarPor.Items.Add("Nombre");
@@ -80,10 +80,10 @@ namespace GyCAP.UI.RecursosFabricacion
 
             //Combo de Datos
             dvEstadoEmpleado = new DataView(dsEmpleado.ESTADO_EMPLEADOS);
-            FuncionesAuxiliares.llenarCombos(dvEstadoEmpleado, cboEstado, "EE_CODIGO", "EE_NOMBRE");
+            Sistema.FuncionesAuxiliares.llenarCombos(dvEstadoEmpleado, cboEstado, "EE_CODIGO", "EE_NOMBRE");
 
             dvSectores = new DataView(dsEmpleado.SECTORES);
-            FuncionesAuxiliares.llenarCombos(dvSectores, cboSector, "SEC_CODIGO", "SEC_NOMBRE");
+            Sistema.FuncionesAuxiliares.llenarCombos(dvSectores, cboSector, "SEC_CODIGO", "SEC_NOMBRE");
 
             //Llenar listView
             dvListaSectores = new DataView(dsEmpleado.SECTORES);
@@ -287,6 +287,18 @@ namespace GyCAP.UI.RecursosFabricacion
                 }
 
             }
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.inicio);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Sistema.Item a = (Sistema.Item)cboBuscarEstado.SelectedItem;
+            MessageBox.Show(((Sistema.Item)cboBuscarEstado.SelectedItem).Value.ToString());
+            
         }
 
         

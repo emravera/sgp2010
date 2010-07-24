@@ -80,6 +80,7 @@
     <Compile Include="frmVisorReporte.Designer.cs">
       <DependentUpon>frmVisorReporte.cs</DependentUpon>
     </Compile>
+    <Compile Include="FuncionesAuxiliares.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmVisorReporte.resx">
