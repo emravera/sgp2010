@@ -148,6 +148,10 @@
       <Project>{BF769C01-D311-4BC9-813A-C63DC3B89319}</Project>
       <Name>Entidades %28Entidades\Entidades%29</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Sistema\Sistema.csproj">
+      <Project>{9A02F786-F362-4FC0-A53D-83C51951D9DF}</Project>
+      <Name>Sistema</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Warning-25.png" />

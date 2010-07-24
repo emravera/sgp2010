@@ -242,11 +242,17 @@ namespace GyCAP.UI.RecursosFabricacion
 
         private void btnListado_Click(object sender, EventArgs e)
         {
-            //frmVisorInformes visor = new frmVisorInformes();
+            /*//frmVisorInformes visor = new frmVisorInformes();
             //visor.ShowDialog();
             BaseReporte2.conectar("NGA", "Proyecto",string.Empty, string.Empty);
             BaseReporte2.rutaRpt = "E:\\Repositorio\\Implementacion\\Sistema GyCAP\\RecursosFabricacion\\Reportes\\" ;
-            BaseReporte2.printrpt("rptEmpleados.rpt","marcelo");
+            BaseReporte2.printrpt("rptEmpleados.rpt","marcelo");*/
+
+            Sistema.frmVisorReporte visor = new GyCAP.UI.Sistema.frmVisorReporte();
+            Data.Reportes.reporte report = new GyCAP.Data.Reportes.reporte();
+            report.SetDataSource(dsEmpleado);
+            visor.crvVisor.ReportSource = report;
+            visor.Show();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
