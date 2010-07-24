@@ -653,7 +653,7 @@ create table SECTORES (
    SEC_CODIGO           numeric(10)          identity,
    SEC_NOMBRE           varchar(80)          null,
    SEC_DESCRIPCION      varchar(200)         null,
-   SEC_ABREVIATURA      varchar(10)          null,
+   SEC_ABREVIATURA      varchar(20)          null,
    constraint PK_SECTORES primary key nonclustered (SEC_CODIGO)
 )
 
@@ -712,6 +712,7 @@ create table TERMINACIONES (
    TE_CODIGO            numeric(10)          identity,
    TE_NOMBRE            varchar(80)          null,
    TE_DESCRIPCION       varchar(200)         null,
+   TE_ABREVIATURA       varchar(20)          not null,
    constraint PK_TERMINACIONES primary key nonclustered (TE_CODIGO)
 )
 
@@ -780,10 +781,10 @@ create table PLANOS (
    PNO_NOMBRE           varchar(80)          null,	/*-MODIFICACION 23/07/2010-*/
    PNO_NUMERO           varchar(10)          not null,	/*-MODIFICACION 23/07/2010-*/
    PNO_HABILITADO       numeric(1)           not null,	/*-MODIFICACION 23/07/2010-*/
-   PNO_FECHA_HABILITADO datetime             null,	/*-MODIFICACION 23/07/2010-*/
-   PNO_FECHA_DESHABILITADO datetime          null,	/*-MODIFICACION 23/07/2010-*/
-   PNO_FECHA_MODIFICACION datetime           null,	/*-MODIFICACION 23/07/2010-*/
-   PNO_LETRA_CAMBIO     varchar(2)           null,	/*-MODIFICACION 23/07/2010-*/
+   PNO_FECHAHABILITADO  datetime             null,	/*-MODIFICACION 23/07/2010-*/
+   PNO_FECHADESHABILITADO datetime           null,	/*-MODIFICACION 23/07/2010-*/
+   PNO_FECHAMODIFICACION datetime            null,	/*-MODIFICACION 23/07/2010-*/
+   PNO_LETRACAMBIO      varchar(2)           null,	/*-MODIFICACION 23/07/2010-*/
    constraint PK_PLANOS primary key nonclustered (PNO_CODIGO)
 )
 
