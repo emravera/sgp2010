@@ -11,60 +11,85 @@ namespace GyCAP.DAL
         //BUSQUEDA
         //Metodo sobrecargado (3 Sobrecargas)
         //Busqueda por nombre
-        public static void ObtenerEmpleado(string nombre, int idEstadoEmpleado, Data.dsEmpleado ds)
+        public static void ObtenerEmpleado(string buscarPor, object nombre, int idEstadoEmpleado, Data.dsEmpleado ds)
         {
-            string sql = @"SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE
+            string sql = @"SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE,
                            E_FECHANACIMIENTO, E_TELEFONO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA 
                            FROM EMPLEADOS
                            WHERE 1 = 1 ";
 
-            object[] valorParametros = { null };
-            object[] valoresPram = { null, null };
+            //Sirve para armar el nombre de los parámetros
+            int cantidadParametros = 0;
+            //Un array de object para ir guardando los valores de los filtros, con tamaño = cantidad de filtros disponibles
+            object[] valoresFiltros = new object[2];
+            //Empecemos a armar la consulta, revisemos que filtros aplican
 
-            //Si busca solo por el nombre
-            if (nombre != String.Empty)
+            switch (buscarPor)
             {
-                //Agrego la busqueda por nombre
-                sql = sql + " AND E_NOMBRE LIKE @p0";
-                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
-                nombre = "%" + nombre + "%";
-                valorParametros.SetValue(nombre, 0);
+                case "Legajo":
+                    // LEGAJO
+                    if (nombre != null && nombre.ToString() != string.Empty)
+                    {
+                        //Si aplica el filtro lo usamos
+                        sql += " AND E_LEGAJO LIKE @p" + cantidadParametros;
+                        //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                        nombre = "%" + nombre + "%";
+                        valoresFiltros[cantidadParametros] = nombre;
+                        cantidadParametros++;
+                    }
+                    break;
+                case "Nombre":
+                    // NOMBRE
+                    if (nombre != null && nombre.ToString() != string.Empty)
+                    {
+                        //Si aplica el filtro lo usamos
+                        sql += " AND E_NOMBRE LIKE @p" + cantidadParametros;
+                        //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                        nombre = "%" + nombre + "%";
+                        valoresFiltros[cantidadParametros] = nombre;
+                        cantidadParametros++;
+                    }
+                    break;
+                case "Apellido":
+                    // APELLIDO
+                    if (nombre != null && nombre.ToString() != string.Empty)
+                    {
+                        //Si aplica el filtro lo usamos
+                        sql += " AND E_APELLIDO LIKE @p" + cantidadParametros;
+                        //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                        nombre = "%" + nombre + "%";
+                        valoresFiltros[cantidadParametros] = nombre;
+                        cantidadParametros++;
+                    }
+                    break;
+                default:
+                    break;
             }
-            
-            if (idEstadoEmpleado != 0)
-            {
-                //Agrego la busqueda por marca
-                sql = sql + " AND EE_CODIGO = @p0";
-                valorParametros.SetValue(idEstadoEmpleado, 0);
-            }
-            //else if (nombre != string.Empty && idEstadoEmpleado != 0)
-            //{
-            //    //Agrego la busqueda por marca
-            //    sql = sql + " WHERE mca_codigo=@p0 and desig_nombre LIKE @p1";
-            //    nombre = "%" + nombre + "%";
-            //    //Le doy valores a la estructura
-            //    valoresPram.SetValue(idEstadoEmpleado, 0);
-            //    valoresPram.SetValue(nombre, 1);
-            //}
 
-            //Ejecuto el comando a la BD
+            //ESTADO - Revisamos si es distinto de 0, o sea "todos"
+            if (idEstadoEmpleado != 0 )
+            {
+                sql += " AND EE_CODIGO = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(idEstadoEmpleado);
+                cantidadParametros++;
+            }
+
             try
             {
-                if (valorParametros.GetValue(0) == null && valoresPram.GetValue(0) == null)
+                if (cantidadParametros > 0)
                 {
-                    //Se ejcuta normalmente y por defecto trae todos los elementos de la DB
-                    DB.FillDataSet(ds, "EMPLEADOS", sql, null);
+                    //Buscamos con filtro, armemos el array de los valores de los parametros
+                    object[] valorParametros = new object[cantidadParametros];
+                    for (int i = 0; i < cantidadParametros; i++)
+                    {
+                        valorParametros[i] = valoresFiltros[i];
+                    }
+                    DB.FillDataSet(ds, "EMPLEADOS", sql, valorParametros);
                 }
                 else
                 {
-                    if (valoresPram.GetValue(0) == null)
-                    {
-                        DB.FillDataSet(ds, "EMPLEADOS", sql, valorParametros);
-                    }
-                    else
-                    {
-                        DB.FillDataSet(ds, "EMPLEADOS", sql, valoresPram);
-                    }
+                    //Buscamos sin filtro
+                    DB.FillDataSet(ds, "EMPLEADOS", sql, null);
                 }
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }

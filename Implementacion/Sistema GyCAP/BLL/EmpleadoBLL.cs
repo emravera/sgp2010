@@ -9,9 +9,9 @@ namespace GyCAP.BLL
     {
         //Busqueda
         //Obtiene los datos de acuerdo a los criterios de busqueda
-        public static void ObtenerTodos(string nombre, int idEstadoEmpleado, Data.dsEmpleado ds)
+        public static void ObtenerTodos(string buscarPor, object nombre, int idEstadoEmpleado, Data.dsEmpleado ds)
         {
-            DAL.EmpleadoDAL.ObtenerEmpleado(nombre, idEstadoEmpleado, ds);
+            DAL.EmpleadoDAL.ObtenerEmpleado(buscarPor, nombre, idEstadoEmpleado, ds);
         }
 
         //Eliminacion

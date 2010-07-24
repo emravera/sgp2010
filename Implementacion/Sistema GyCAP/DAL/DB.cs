@@ -201,5 +201,10 @@ namespace GyCAP.DAL
         {
             if (cmdReader.Connection.State == ConnectionState.Open) { cmdReader.Connection.Close(); }
         }
+
+
+
+
+
     }
 }

@@ -24,47 +24,25 @@ namespace GyCAP.UI.RecursosFabricacion
             //Setea el nombre de la Lista
             gpbLista.Text = "Listado de " + this.Text;
 
-            //Para que no genere las columnas automáticamente
-            dgvLista.AutoGenerateColumns = false;
-
             //Agregamos las columnas
-            dgvLista.Columns.Add("E_CODIGO", "Código");
-            dgvLista.Columns.Add("E_LEGAJO", "Legajo");
-            dgvLista.Columns.Add("E_APELLIDO", "Apellido");
-            dgvLista.Columns.Add("E_NOMBRE", "Nombre");
-            dgvLista.Columns.Add("SEC_CODIGO", "Sector");
-            dgvLista.Columns.Add("EE_CODIGO", "Estado");
+            ColumnasGrillas columnas = new ColumnasGrillas();
 
-            //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            dgvLista.Columns["E_CODIGO"].DataPropertyName = "E_CODIGO";
-            dgvLista.Columns["E_LEGAJO"].DataPropertyName = "E_LEGAJO";
-            dgvLista.Columns["E_APELLIDO"].DataPropertyName = "E_APELLIDO";
-            dgvLista.Columns["E_NOMBRE"].DataPropertyName = "E_NOMBRE";
-            dgvLista.Columns["SEC_CODIGO"].DataPropertyName = "SEC_CODIGO";
-            dgvLista.Columns["EE_CODIGO"].DataPropertyName = "EE_CODIGO";
+            columnas.Add("E_CODIGO", "Código",true);
+            columnas.Add("E_LEGAJO", "Legajo");
+            columnas.Add("E_APELLIDO", "Apellido");
+            columnas.Add("E_NOMBRE", "Nombre");
+            columnas.Add("SEC_CODIGO", "Sector");
+            columnas.Add("EE_CODIGO", "Estado");
 
-            //Oculta la columna que contiene los encabezados
-            dgvLista.RowHeadersVisible = false;
-
-            //Setemaos las columnas
-            dgvLista.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-            dgvLista.Columns["E_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["E_LEGAJO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["E_APELLIDO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["E_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["SEC_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["EE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
-            //Alineacion de los numeros y las fechas en la grilla
-            dgvLista.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            //Llena el Dataset con los estados
-            BLL.EstadoEmpleadoBLL.ObtenerTodos(dsEmpleado);
+            dgvLista.Columnas = columnas;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvEmpleado = new DataView(dsEmpleado.EMPLEADOS);
             dvEmpleado.Sort = "E_APELLIDO, E_NOMBRE ASC";
             dgvLista.DataSource = dvEmpleado;
+
+            //Llena el Dataset con los estados
+            BLL.EstadoEmpleadoBLL.ObtenerTodos(dsEmpleado);
 
             //Llena el Dataset con los Sectores
             BLL.SectorBLL.ObtenerTodos(dsEmpleado);
@@ -73,17 +51,20 @@ namespace GyCAP.UI.RecursosFabricacion
             dvListaSectores = new DataView(dsEmpleado.SECTORES);
             FuncionesAuxiliares.llenarListas(dvListaSectores, clbSectores);
 
-
-
             //CARGA DE COMBOS
             //Creamos el Dataview y se lo asignamos al combo
             dvEstadoEmpleadoBuscar = new DataView(dsEmpleado.ESTADO_EMPLEADOS);
+            dvEstadoEmpleadoBuscar.Sort = "EE_NOMBRE ASC";
+            DataRowView newDRV = dvEstadoEmpleadoBuscar.AddNew();
+            newDRV["EE_CODIGO"] = "0";
+            newDRV["EE_NOMBRE"] = "--- Todos ---";
+            newDRV.EndEdit();
             cboBuscarEstado.DataSource = dvEstadoEmpleadoBuscar;
             cboBuscarEstado.DisplayMember = "EE_NOMBRE";
             cboBuscarEstado.ValueMember = "EE_CODIGO";
 
             //Para que el combo no quede selecionado cuando arranca y que sea una lista
-            cboBuscarEstado.SelectedIndex = -1;
+            cboBuscarEstado.SelectedIndex = 0;
             cboBuscarEstado.DropDownStyle = ComboBoxStyle.DropDownList;
 
             cboBuscarPor.Items.Add("Legajo");
@@ -93,17 +74,19 @@ namespace GyCAP.UI.RecursosFabricacion
 
             //Combo de Datos
             dvEstadoEmpleado = new DataView(dsEmpleado.ESTADO_EMPLEADOS);
+
             cboEstado.DropDownStyle = ComboBoxStyle.DropDownList;
             cboEstado.DataSource = dvEstadoEmpleado ;
             cboEstado.DisplayMember = "EE_NOMBRE";
             cboEstado.ValueMember = "EE_CODIGO";
-            cboEstado.SelectedIndex = -1;
+            cboEstado.SelectedIndex = 0;
 
             dvListaSectores = new DataView(dsEmpleado.SECTORES);
+            cboSector.DropDownStyle = ComboBoxStyle.DropDownList;
             cboSector.DataSource = dvListaSectores;
             cboSector.DisplayMember = "SEC_NOMBRE";
             cboSector.ValueMember = "SEC_CODIGO";
-
+            cboSector.SelectedIndex = 0;
 
             //Seteo el maxlenght de los textbox para que no de error en la bd
             txtApellido.MaxLength = 80;
@@ -240,27 +223,6 @@ namespace GyCAP.UI.RecursosFabricacion
             this.Dispose(true);
         }
 
-        private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.Value.ToString() != String.Empty)
-            {
-                string nombre;
-                switch (dgvLista.Columns[e.ColumnIndex].Name)
-                {
-                    case "EE_CODIGO":
-                        nombre = dsEmpleado.ESTADO_EMPLEADOS.FindByEE_CODIGO(Convert.ToInt32(e.Value)).EE_NOMBRE;
-                        e.Value = nombre;
-                        break;
-                    case "SEC_CODIGO":
-                        nombre = dsEmpleado.SECTORES.FindBySEC_CODIGO(Convert.ToInt32(e.Value)).SEC_NOMBRE;
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-        }
-
         private void dgvLista_DoubleClick(object sender, EventArgs e)
         {
             btnConsultar.PerformClick();
@@ -286,6 +248,57 @@ namespace GyCAP.UI.RecursosFabricacion
             BaseReporte2.rutaRpt = "E:\\Repositorio\\Implementacion\\Sistema GyCAP\\RecursosFabricacion\\Reportes\\" ;
             BaseReporte2.printrpt("rptEmpleados.rpt","marcelo");
         }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dsEmpleado.EMPLEADOS.Clear();
+                BLL.EmpleadoBLL.ObtenerTodos(cboBuscarPor.Text,txtNombreBuscar.Text, int.Parse(cboBuscarEstado.SelectedValue.ToString()), dsEmpleado);
+                //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
+                //por una consulta a la BD
+                dvEmpleado.Table = dsEmpleado.EMPLEADOS;
+                if (dsEmpleado.EMPLEADOS.Rows.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron Empleados con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                SetInterface(estadoUI.inicio);
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message, "Error: Empleados - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SetInterface(estadoUI.inicio);
+            }
+        }
+
+        private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != String.Empty)
+            {
+                string nombre;
+                switch (dgvLista.Columnas[e.ColumnIndex].campo)
+                {
+                    case "EE_CODIGO":
+                        nombre = dsEmpleado.ESTADO_EMPLEADOS.FindByEE_CODIGO(Convert.ToInt32(e.Value)).EE_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "SEC_CODIGO":
+                        nombre = dsEmpleado.SECTORES.FindBySEC_CODIGO(Convert.ToInt32(e.Value)).SEC_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
+
+        
 
 
 
