@@ -101,6 +101,8 @@ create table DEMANDAS_ANUALES (
    DEMAN_ANIO           int                  null,
    DEMAN_CODIGO         numeric(10)          identity,
    DEMAN_FECHACREACION  datetime             null,
+   DEMAN_PARAMCRECIMIENTO numeric(10,3)      null,	/*MODIFICACION 24/07/2010*/
+   DEMAN_NOMBRE         varchar(80)          null,	/*MODIFICACION 24/07/2010*/
    constraint PK_DEMANDA_ANUALES primary key nonclustered (DEMAN_CODIGO)
 )
 
