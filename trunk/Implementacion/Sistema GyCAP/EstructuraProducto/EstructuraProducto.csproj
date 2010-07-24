@@ -59,7 +59,6 @@
       <DependentUpon>frmColor.cs</DependentUpon>
     </Compile>
     <Compile Include="frmConjunto.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmConjunto.Designer.cs">
       <DependentUpon>frmConjunto.cs</DependentUpon>

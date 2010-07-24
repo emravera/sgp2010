@@ -28,6 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tcDemanda = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.gbGrillaDetalle = new System.Windows.Forms.GroupBox();
@@ -39,7 +45,13 @@
             this.txtAnioBuscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tpDatos = new System.Windows.Forms.TabPage();
+            this.gbModificacion = new System.Windows.Forms.GroupBox();
+            this.lblTotalSistema = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.btnModificarEstimacion = new System.Windows.Forms.Button();
             this.gbDatosHistoricos = new System.Windows.Forms.GroupBox();
+            this.txtDenominacionHistorico = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.txtAnioHistorico = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.gbBotones = new System.Windows.Forms.GroupBox();
@@ -58,7 +70,7 @@
             this.numFebrero = new System.Windows.Forms.NumericUpDown();
             this.numJulio = new System.Windows.Forms.NumericUpDown();
             this.numEnero = new System.Windows.Forms.NumericUpDown();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtTotal = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -73,6 +85,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.gbDatosPrincipales = new System.Windows.Forms.GroupBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.btnCalcularEstimacion = new System.Windows.Forms.Button();
             this.txtIdentificacion = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnCargarHistorico = new System.Windows.Forms.Button();
@@ -91,8 +105,6 @@
             this.btnConsultar = new System.Windows.Forms.ToolStripButton();
             this.btnModificar = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtDenominacionHistorico = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
             this.tcDemanda.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.gbGrillaDetalle.SuspendLayout();
@@ -101,6 +113,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tpDatos.SuspendLayout();
+            this.gbModificacion.SuspendLayout();
             this.gbDatosHistoricos.SuspendLayout();
             this.gbBotones.SuspendLayout();
             this.gbEstimacionMes.SuspendLayout();
@@ -166,10 +179,34 @@
             this.dgvDetalle.AllowUserToAddRows = false;
             this.dgvDetalle.AllowUserToDeleteRows = false;
             this.dgvDetalle.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetalle.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDetalle.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDetalle.Location = new System.Drawing.Point(16, 23);
             this.dgvDetalle.MultiSelect = false;
             this.dgvDetalle.Name = "dgvDetalle";
             this.dgvDetalle.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetalle.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDetalle.RowHeadersVisible = false;
             this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDetalle.Size = new System.Drawing.Size(278, 188);
@@ -190,10 +227,34 @@
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
             this.dgvLista.AllowUserToResizeRows = false;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLista.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLista.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvLista.Location = new System.Drawing.Point(10, 19);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.ReadOnly = true;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLista.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(278, 188);
@@ -244,6 +305,7 @@
             // 
             // tpDatos
             // 
+            this.tpDatos.Controls.Add(this.gbModificacion);
             this.tpDatos.Controls.Add(this.gbDatosHistoricos);
             this.tpDatos.Controls.Add(this.gbBotones);
             this.tpDatos.Controls.Add(this.gbEstimacionMes);
@@ -257,25 +319,79 @@
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
+            // gbModificacion
+            // 
+            this.gbModificacion.Controls.Add(this.lblTotalSistema);
+            this.gbModificacion.Controls.Add(this.label21);
+            this.gbModificacion.Controls.Add(this.btnModificarEstimacion);
+            this.gbModificacion.Location = new System.Drawing.Point(4, 335);
+            this.gbModificacion.Name = "gbModificacion";
+            this.gbModificacion.Size = new System.Drawing.Size(302, 39);
+            this.gbModificacion.TabIndex = 15;
+            this.gbModificacion.TabStop = false;
+            // 
+            // lblTotalSistema
+            // 
+            this.lblTotalSistema.AutoSize = true;
+            this.lblTotalSistema.Location = new System.Drawing.Point(82, 16);
+            this.lblTotalSistema.Name = "lblTotalSistema";
+            this.lblTotalSistema.Size = new System.Drawing.Size(0, 13);
+            this.lblTotalSistema.TabIndex = 24;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(2, 16);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(74, 13);
+            this.label21.TabIndex = 23;
+            this.label21.Text = "Total Sistema:";
+            // 
+            // btnModificarEstimacion
+            // 
+            this.btnModificarEstimacion.Location = new System.Drawing.Point(180, 11);
+            this.btnModificarEstimacion.Name = "btnModificarEstimacion";
+            this.btnModificarEstimacion.Size = new System.Drawing.Size(116, 22);
+            this.btnModificarEstimacion.TabIndex = 23;
+            this.btnModificarEstimacion.Text = "Modificar Estimacion";
+            this.btnModificarEstimacion.UseVisualStyleBackColor = true;
+            this.btnModificarEstimacion.Click += new System.EventHandler(this.btnModificarEstimacion_Click);
+            // 
             // gbDatosHistoricos
             // 
             this.gbDatosHistoricos.Controls.Add(this.txtDenominacionHistorico);
             this.gbDatosHistoricos.Controls.Add(this.label19);
             this.gbDatosHistoricos.Controls.Add(this.txtAnioHistorico);
             this.gbDatosHistoricos.Controls.Add(this.label2);
-            this.gbDatosHistoricos.Location = new System.Drawing.Point(319, 120);
+            this.gbDatosHistoricos.Location = new System.Drawing.Point(325, 120);
             this.gbDatosHistoricos.Name = "gbDatosHistoricos";
             this.gbDatosHistoricos.Size = new System.Drawing.Size(296, 87);
             this.gbDatosHistoricos.TabIndex = 14;
             this.gbDatosHistoricos.TabStop = false;
             this.gbDatosHistoricos.Text = "Datos Historicos";
             // 
+            // txtDenominacionHistorico
+            // 
+            this.txtDenominacionHistorico.Location = new System.Drawing.Point(146, 50);
+            this.txtDenominacionHistorico.Name = "txtDenominacionHistorico";
+            this.txtDenominacionHistorico.Size = new System.Drawing.Size(136, 20);
+            this.txtDenominacionHistorico.TabIndex = 20;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(14, 53);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(113, 13);
+            this.label19.TabIndex = 4;
+            this.label19.Text = "Nombre Identificacion:";
+            // 
             // txtAnioHistorico
             // 
             this.txtAnioHistorico.Location = new System.Drawing.Point(146, 27);
             this.txtAnioHistorico.Name = "txtAnioHistorico";
             this.txtAnioHistorico.Size = new System.Drawing.Size(136, 20);
-            this.txtAnioHistorico.TabIndex = 3;
+            this.txtAnioHistorico.TabIndex = 19;
             // 
             // label2
             // 
@@ -290,28 +406,28 @@
             // 
             this.gbBotones.Controls.Add(this.btnVolver);
             this.gbBotones.Controls.Add(this.btnGuardar);
-            this.gbBotones.Location = new System.Drawing.Point(6, 335);
+            this.gbBotones.Location = new System.Drawing.Point(319, 335);
             this.gbBotones.Name = "gbBotones";
-            this.gbBotones.Size = new System.Drawing.Size(615, 39);
+            this.gbBotones.Size = new System.Drawing.Size(302, 39);
             this.gbBotones.TabIndex = 13;
             this.gbBotones.TabStop = false;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(533, 11);
+            this.btnVolver.Location = new System.Drawing.Point(218, 11);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(64, 22);
-            this.btnVolver.TabIndex = 13;
+            this.btnVolver.TabIndex = 22;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(463, 11);
+            this.btnGuardar.Location = new System.Drawing.Point(148, 11);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(64, 22);
-            this.btnGuardar.TabIndex = 12;
+            this.btnGuardar.TabIndex = 21;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -330,7 +446,7 @@
             this.gbEstimacionMes.Controls.Add(this.numFebrero);
             this.gbEstimacionMes.Controls.Add(this.numJulio);
             this.gbEstimacionMes.Controls.Add(this.numEnero);
-            this.gbEstimacionMes.Controls.Add(this.textBox2);
+            this.gbEstimacionMes.Controls.Add(this.txtTotal);
             this.gbEstimacionMes.Controls.Add(this.label18);
             this.gbEstimacionMes.Controls.Add(this.label16);
             this.gbEstimacionMes.Controls.Add(this.label15);
@@ -354,98 +470,183 @@
             // numDiciembre
             // 
             this.numDiciembre.Location = new System.Drawing.Point(208, 150);
+            this.numDiciembre.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.numDiciembre.Name = "numDiciembre";
             this.numDiciembre.Size = new System.Drawing.Size(86, 20);
-            this.numDiciembre.TabIndex = 37;
+            this.numDiciembre.TabIndex = 18;
+            this.numDiciembre.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numDiciembre.ValueChanged += new System.EventHandler(this.numFebrero_ValueChanged);
             // 
             // numNoviembre
             // 
             this.numNoviembre.Location = new System.Drawing.Point(208, 125);
+            this.numNoviembre.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.numNoviembre.Name = "numNoviembre";
             this.numNoviembre.Size = new System.Drawing.Size(86, 20);
-            this.numNoviembre.TabIndex = 36;
+            this.numNoviembre.TabIndex = 17;
+            this.numNoviembre.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numNoviembre.ValueChanged += new System.EventHandler(this.numFebrero_ValueChanged);
             // 
             // numOctubre
             // 
             this.numOctubre.Location = new System.Drawing.Point(208, 98);
+            this.numOctubre.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.numOctubre.Name = "numOctubre";
             this.numOctubre.Size = new System.Drawing.Size(86, 20);
-            this.numOctubre.TabIndex = 35;
+            this.numOctubre.TabIndex = 16;
+            this.numOctubre.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numOctubre.ValueChanged += new System.EventHandler(this.numFebrero_ValueChanged);
             // 
             // numSeptiembre
             // 
             this.numSeptiembre.Location = new System.Drawing.Point(208, 72);
+            this.numSeptiembre.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.numSeptiembre.Name = "numSeptiembre";
             this.numSeptiembre.Size = new System.Drawing.Size(86, 20);
-            this.numSeptiembre.TabIndex = 34;
+            this.numSeptiembre.TabIndex = 15;
+            this.numSeptiembre.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numSeptiembre.ValueChanged += new System.EventHandler(this.numFebrero_ValueChanged);
             // 
             // numAgosto
             // 
             this.numAgosto.Location = new System.Drawing.Point(208, 46);
+            this.numAgosto.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.numAgosto.Name = "numAgosto";
             this.numAgosto.Size = new System.Drawing.Size(86, 20);
-            this.numAgosto.TabIndex = 33;
+            this.numAgosto.TabIndex = 14;
+            this.numAgosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numAgosto.ValueChanged += new System.EventHandler(this.numFebrero_ValueChanged);
             // 
             // numJunio
             // 
             this.numJunio.Location = new System.Drawing.Point(52, 150);
+            this.numJunio.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.numJunio.Name = "numJunio";
             this.numJunio.Size = new System.Drawing.Size(86, 20);
-            this.numJunio.TabIndex = 32;
+            this.numJunio.TabIndex = 12;
+            this.numJunio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numJunio.ValueChanged += new System.EventHandler(this.numFebrero_ValueChanged);
             // 
             // numMayo
             // 
             this.numMayo.Location = new System.Drawing.Point(52, 125);
+            this.numMayo.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.numMayo.Name = "numMayo";
             this.numMayo.Size = new System.Drawing.Size(86, 20);
-            this.numMayo.TabIndex = 31;
+            this.numMayo.TabIndex = 11;
+            this.numMayo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numMayo.ValueChanged += new System.EventHandler(this.numFebrero_ValueChanged);
             // 
             // numAbril
             // 
             this.numAbril.Location = new System.Drawing.Point(52, 98);
+            this.numAbril.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.numAbril.Name = "numAbril";
             this.numAbril.Size = new System.Drawing.Size(86, 20);
-            this.numAbril.TabIndex = 30;
+            this.numAbril.TabIndex = 10;
+            this.numAbril.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numAbril.ValueChanged += new System.EventHandler(this.numFebrero_ValueChanged);
             // 
             // numMarzo
             // 
             this.numMarzo.Location = new System.Drawing.Point(52, 72);
+            this.numMarzo.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.numMarzo.Name = "numMarzo";
             this.numMarzo.Size = new System.Drawing.Size(86, 20);
-            this.numMarzo.TabIndex = 29;
+            this.numMarzo.TabIndex = 9;
+            this.numMarzo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numMarzo.ValueChanged += new System.EventHandler(this.numFebrero_ValueChanged);
             // 
             // numFebrero
             // 
             this.numFebrero.Location = new System.Drawing.Point(52, 46);
+            this.numFebrero.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.numFebrero.Name = "numFebrero";
             this.numFebrero.Size = new System.Drawing.Size(86, 20);
-            this.numFebrero.TabIndex = 28;
+            this.numFebrero.TabIndex = 8;
+            this.numFebrero.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numFebrero.ValueChanged += new System.EventHandler(this.numFebrero_ValueChanged);
             // 
             // numJulio
             // 
             this.numJulio.Location = new System.Drawing.Point(208, 19);
+            this.numJulio.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.numJulio.Name = "numJulio";
             this.numJulio.Size = new System.Drawing.Size(86, 20);
-            this.numJulio.TabIndex = 27;
+            this.numJulio.TabIndex = 13;
+            this.numJulio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numJulio.ValueChanged += new System.EventHandler(this.numFebrero_ValueChanged);
             // 
             // numEnero
             // 
             this.numEnero.Location = new System.Drawing.Point(52, 20);
+            this.numEnero.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.numEnero.Name = "numEnero";
             this.numEnero.Size = new System.Drawing.Size(86, 20);
-            this.numEnero.TabIndex = 26;
+            this.numEnero.TabIndex = 7;
+            this.numEnero.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numEnero.ValueChanged += new System.EventHandler(this.numFebrero_ValueChanged);
+            this.numEnero.Enter += new System.EventHandler(this.numEnero_Enter);
             // 
-            // textBox2
+            // txtTotal
             // 
-            this.textBox2.Location = new System.Drawing.Point(111, 176);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 25;
+            this.txtTotal.Location = new System.Drawing.Point(107, 176);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.Size = new System.Drawing.Size(100, 20);
+            this.txtTotal.TabIndex = 18;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(74, 179);
+            this.label18.Location = new System.Drawing.Point(70, 179);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(31, 13);
             this.label18.TabIndex = 24;
@@ -561,6 +762,8 @@
             // 
             // gbDatosPrincipales
             // 
+            this.gbDatosPrincipales.Controls.Add(this.label20);
+            this.gbDatosPrincipales.Controls.Add(this.btnCalcularEstimacion);
             this.gbDatosPrincipales.Controls.Add(this.txtIdentificacion);
             this.gbDatosPrincipales.Controls.Add(this.label4);
             this.gbDatosPrincipales.Controls.Add(this.btnCargarHistorico);
@@ -577,17 +780,37 @@
             this.gbDatosPrincipales.TabStop = false;
             this.gbDatosPrincipales.Text = "Datos Principales";
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(223, 84);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(16, 13);
+            this.label20.TabIndex = 9;
+            this.label20.Text = "%";
+            // 
+            // btnCalcularEstimacion
+            // 
+            this.btnCalcularEstimacion.Location = new System.Drawing.Point(491, 80);
+            this.btnCalcularEstimacion.Name = "btnCalcularEstimacion";
+            this.btnCalcularEstimacion.Size = new System.Drawing.Size(111, 23);
+            this.btnCalcularEstimacion.TabIndex = 6;
+            this.btnCalcularEstimacion.Text = "Calcular Estimacion";
+            this.btnCalcularEstimacion.UseVisualStyleBackColor = true;
+            this.btnCalcularEstimacion.Click += new System.EventHandler(this.btnCalcularEstimacion_Click);
+            // 
             // txtIdentificacion
             // 
-            this.txtIdentificacion.Location = new System.Drawing.Point(141, 50);
+            this.txtIdentificacion.Location = new System.Drawing.Point(147, 54);
             this.txtIdentificacion.Name = "txtIdentificacion";
             this.txtIdentificacion.Size = new System.Drawing.Size(136, 20);
-            this.txtIdentificacion.TabIndex = 9;
+            this.txtIdentificacion.TabIndex = 2;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(24, 53);
+            this.label4.Location = new System.Drawing.Point(30, 57);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(113, 13);
             this.label4.TabIndex = 8;
@@ -595,25 +818,36 @@
             // 
             // btnCargarHistorico
             // 
-            this.btnCargarHistorico.Location = new System.Drawing.Point(356, 73);
+            this.btnCargarHistorico.Location = new System.Drawing.Point(491, 51);
             this.btnCargarHistorico.Name = "btnCargarHistorico";
-            this.btnCargarHistorico.Size = new System.Drawing.Size(94, 23);
-            this.btnCargarHistorico.TabIndex = 7;
+            this.btnCargarHistorico.Size = new System.Drawing.Size(109, 23);
+            this.btnCargarHistorico.TabIndex = 5;
             this.btnCargarHistorico.Text = "Cargar Historico";
             this.btnCargarHistorico.UseVisualStyleBackColor = true;
             this.btnCargarHistorico.Click += new System.EventHandler(this.btnCargarHistorico_Click);
             // 
             // numCrecimiento
             // 
-            this.numCrecimiento.Location = new System.Drawing.Point(141, 76);
+            this.numCrecimiento.Location = new System.Drawing.Point(147, 80);
+            this.numCrecimiento.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numCrecimiento.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
             this.numCrecimiento.Name = "numCrecimiento";
             this.numCrecimiento.Size = new System.Drawing.Size(73, 20);
-            this.numCrecimiento.TabIndex = 6;
+            this.numCrecimiento.TabIndex = 3;
+            this.numCrecimiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblAñosBase
             // 
             this.lblAñosBase.AutoSize = true;
-            this.lblAñosBase.Location = new System.Drawing.Point(342, 23);
+            this.lblAñosBase.Location = new System.Drawing.Point(314, 10);
             this.lblAñosBase.Name = "lblAñosBase";
             this.lblAñosBase.Size = new System.Drawing.Size(129, 13);
             this.lblAñosBase.TabIndex = 5;
@@ -622,15 +856,15 @@
             // chListAnios
             // 
             this.chListAnios.FormattingEnabled = true;
-            this.chListAnios.Location = new System.Drawing.Point(476, 23);
+            this.chListAnios.Location = new System.Drawing.Point(316, 26);
             this.chListAnios.Name = "chListAnios";
-            this.chListAnios.Size = new System.Drawing.Size(136, 49);
+            this.chListAnios.Size = new System.Drawing.Size(154, 79);
             this.chListAnios.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 78);
+            this.label3.Location = new System.Drawing.Point(9, 82);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(138, 13);
             this.label3.TabIndex = 2;
@@ -638,7 +872,7 @@
             // 
             // txtAnio
             // 
-            this.txtAnio.Location = new System.Drawing.Point(141, 23);
+            this.txtAnio.Location = new System.Drawing.Point(147, 27);
             this.txtAnio.Name = "txtAnio";
             this.txtAnio.Size = new System.Drawing.Size(136, 20);
             this.txtAnio.TabIndex = 1;
@@ -646,7 +880,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(24, 26);
+            this.label17.Location = new System.Drawing.Point(30, 30);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(109, 13);
             this.label17.TabIndex = 0;
@@ -757,22 +991,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(648, 445);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
-            // txtDenominacionHistorico
-            // 
-            this.txtDenominacionHistorico.Location = new System.Drawing.Point(146, 50);
-            this.txtDenominacionHistorico.Name = "txtDenominacionHistorico";
-            this.txtDenominacionHistorico.Size = new System.Drawing.Size(136, 20);
-            this.txtDenominacionHistorico.TabIndex = 5;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(14, 53);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(113, 13);
-            this.label19.TabIndex = 4;
-            this.label19.Text = "Nombre Identificacion:";
-            // 
             // frmEstimarDemandaAnual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -790,6 +1008,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tpDatos.ResumeLayout(false);
+            this.gbModificacion.ResumeLayout(false);
+            this.gbModificacion.PerformLayout();
             this.gbDatosHistoricos.ResumeLayout(false);
             this.gbDatosHistoricos.PerformLayout();
             this.gbBotones.ResumeLayout(false);
@@ -857,7 +1077,7 @@
         private System.Windows.Forms.TextBox txtIdentificacion;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox gbEstimacionMes;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtTotal;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
@@ -885,5 +1105,11 @@
         private System.Windows.Forms.NumericUpDown numEnero;
         private System.Windows.Forms.TextBox txtDenominacionHistorico;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button btnCalcularEstimacion;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.GroupBox gbModificacion;
+        private System.Windows.Forms.Label lblTotalSistema;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Button btnModificarEstimacion;
     }
 }
