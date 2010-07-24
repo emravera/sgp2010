@@ -98,7 +98,7 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 MessageBox.Show(ex.Message, "Error: Modelos de Cocina - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetInterface(estadoUI.inicio);
-            }
+            }            
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)

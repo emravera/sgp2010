@@ -13,7 +13,7 @@ using System.Configuration ;
 
 namespace GyCAP.DAL
 {
-    class DB
+    public class DB
     {
         private static string conexionGonzaloN = "Data Source=NGA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionGonzaloD = "Data Source=DGA\\GONZALO;Initial Catalog=Proyecto;Integrated Security=True";
@@ -21,40 +21,64 @@ namespace GyCAP.DAL
         private static string conexionMarcelo = "Data Source=HOMERO;Initial Catalog=Proyecto;User ID=sa";
         private static string conexionRaulD = "Data Source=DESKTOP\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionRaulN = "Data Source=NOTEBOOK\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
+        private static string conexionRemota = "Data Source=proyecto.dyndns.org,1433\\Proyecto;Initial Catalog=Proyecto;User ID=sa;Password=spg2010";
+        private static string conexionInterna = "Data Source=Proyecto;Initial Catalog=Proyecto;User ID=sa;Password=spg2010";
         private static string cadenaConexion;
         private static SqlTransaction transaccion = null;
         private static SqlCommand cmdReader = null;
+        private static int tipoConexion;
+        public static readonly int tipoLocal = 0;
+        public static readonly int tipoRemota = 1;
+        public static readonly int tipoInterna = 2;
 
         //Devuelve el nombre de la PC
         static String nombrePC = System.Environment.MachineName;
 
+        //Setea el tipo de conexión
+        public static void SetTipoConexion(int tipo)
+        {
+            tipoConexion = tipo;
+        }
+        
         //Obtiene la cadena de conexión a la base de datos.
         private static SqlConnection GetConexion()
         {
-            switch (nombrePC)
+            switch (tipoConexion)
             {
-                case "NGA": //notebook - gonzalo
-                    cadenaConexion = conexionGonzaloN;
+                case 0: //Local
+                    switch (nombrePC)
+                    {
+                        case "NGA": //notebook - gonzalo
+                            cadenaConexion = conexionGonzaloN;
+                            break;
+                        case "DGA": //desktop - gonzalo
+                            cadenaConexion = conexionGonzaloD;
+                            break;
+                        case "HOMERO": //pc - marcelo
+                            cadenaConexion = conexionMarcelo;
+                            break;
+                        case "DESKTOP": //desktop - raul
+                            cadenaConexion = conexionRaulD;
+                            break;
+                        case "NOTEBOOK": //notebook - raul
+                            cadenaConexion = conexionRaulN;
+                            break;
+                        case "HP-EMA": //notebook - emanuel
+                            cadenaConexion = conexionEmanuel;
+                            break;
+                        default:
+                            throw new Entidades.Excepciones.BaseDeDatosException();
+                    }
                     break;
-                case "DGA": //desktop - gonzalo
-                    cadenaConexion = conexionGonzaloD;
+                case 1: //Interna
+                    cadenaConexion = conexionInterna;
                     break;
-                case "HOMERO": //pc - marcelo
-                    cadenaConexion = conexionMarcelo;
-                    break;
-                case "DESKTOP": //desktop - raul
-                    cadenaConexion = conexionRaulD;
-                    break;
-                case "NOTEBOOK": //notebook - raul
-                    cadenaConexion = conexionRaulN;
-                    break;
-                case "HP-EMA": //notebook - emanuel
-                    cadenaConexion = conexionEmanuel;
+                case 2: //Remota
+                    cadenaConexion = conexionRemota;
                     break;
                 default:
                     throw new Entidades.Excepciones.BaseDeDatosException();
             }
-
             return new SqlConnection(cadenaConexion);
         }
 
