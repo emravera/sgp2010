@@ -31,7 +31,7 @@
             this.tcABM = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.gpbLista = new System.Windows.Forms.GroupBox();
-            this.dgvLista = new System.Windows.Forms.DataGridView();
+            this.dgvLista = new GyCAP.UI.RecursosFabricacion.Grilla();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.clbSectores = new System.Windows.Forms.CheckedListBox();
             this.cboBuscarPor = new System.Windows.Forms.ComboBox();
@@ -45,6 +45,7 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.clbCapacidades = new System.Windows.Forms.CheckedListBox();
             this.cboEstado = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtLegajo = new System.Windows.Forms.TextBox();
@@ -65,14 +66,12 @@
             this.btnConsultar = new System.Windows.Forms.ToolStripButton();
             this.btnModificar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.btnListado = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.clbCapacidades = new System.Windows.Forms.CheckedListBox();
-            this.btnListado = new System.Windows.Forms.ToolStripButton();
             this.tcABM.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.gpbLista.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tpDatos.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
@@ -125,21 +124,12 @@
             // 
             // dgvLista
             // 
-            this.dgvLista.AllowUserToAddRows = false;
-            this.dgvLista.AllowUserToDeleteRows = false;
-            this.dgvLista.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLista.Location = new System.Drawing.Point(9, 22);
-            this.dgvLista.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgvLista.MultiSelect = false;
+            this.dgvLista.Columnas = null;
+            this.dgvLista.DataSource = null;
+            this.dgvLista.Location = new System.Drawing.Point(12, 24);
             this.dgvLista.Name = "dgvLista";
-            this.dgvLista.ReadOnly = true;
-            this.dgvLista.RowHeadersVisible = false;
-            this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(524, 166);
+            this.dgvLista.Size = new System.Drawing.Size(521, 161);
             this.dgvLista.TabIndex = 0;
-            this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
-            this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
             // groupBox1
@@ -211,6 +201,7 @@
             this.btnBuscar.Text = "&Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // txtNombreBuscar
             // 
@@ -273,6 +264,7 @@
             this.btnGuardar.TabIndex = 10;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // gbDatos
             // 
@@ -300,6 +292,14 @@
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Empleado";
+            // 
+            // clbCapacidades
+            // 
+            this.clbCapacidades.FormattingEnabled = true;
+            this.clbCapacidades.Location = new System.Drawing.Point(253, 24);
+            this.clbCapacidades.Name = "clbCapacidades";
+            this.clbCapacidades.Size = new System.Drawing.Size(259, 169);
+            this.clbCapacidades.TabIndex = 20;
             // 
             // cboEstado
             // 
@@ -496,6 +496,17 @@
             this.btnEliminar.Text = "&Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
+            // btnListado
+            // 
+            this.btnListado.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Floppy_25;
+            this.btnListado.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnListado.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnListado.Name = "btnListado";
+            this.btnListado.Size = new System.Drawing.Size(45, 47);
+            this.btnListado.Text = "&Listado";
+            this.btnListado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnListado.Click += new System.EventHandler(this.btnListado_Click);
+            // 
             // btnSalir
             // 
             this.btnSalir.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Salir_25;
@@ -524,25 +535,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(560, 359);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
-            // clbCapacidades
-            // 
-            this.clbCapacidades.FormattingEnabled = true;
-            this.clbCapacidades.Location = new System.Drawing.Point(253, 24);
-            this.clbCapacidades.Name = "clbCapacidades";
-            this.clbCapacidades.Size = new System.Drawing.Size(259, 169);
-            this.clbCapacidades.TabIndex = 20;
-            // 
-            // btnListado
-            // 
-            this.btnListado.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Floppy_25;
-            this.btnListado.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnListado.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnListado.Name = "btnListado";
-            this.btnListado.Size = new System.Drawing.Size(45, 47);
-            this.btnListado.Text = "&Listado";
-            this.btnListado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnListado.Click += new System.EventHandler(this.btnListado_Click);
-            // 
             // frmEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -559,7 +551,6 @@
             this.tcABM.ResumeLayout(false);
             this.tpBuscar.ResumeLayout(false);
             this.gpbLista.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tpDatos.ResumeLayout(false);
@@ -579,7 +570,6 @@
         private System.Windows.Forms.TabControl tcABM;
         private System.Windows.Forms.TabPage tpBuscar;
         private System.Windows.Forms.GroupBox gpbLista;
-        private System.Windows.Forms.DataGridView dgvLista;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox cboBuscarEstado;
         private System.Windows.Forms.Label label4;
@@ -617,5 +607,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckedListBox clbCapacidades;
         private System.Windows.Forms.ToolStripButton btnListado;
+        private Grilla dgvLista;
     }
 }
