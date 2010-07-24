@@ -31,9 +31,8 @@
             this.tcABM = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.gpbLista = new System.Windows.Forms.GroupBox();
-            this.dgvLista = new GyCAP.UI.RecursosFabricacion.Grilla();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.clbSectores = new System.Windows.Forms.CheckedListBox();
+            this.lvSectores = new System.Windows.Forms.ListView();
             this.cboBuscarPor = new System.Windows.Forms.ComboBox();
             this.cboBuscarEstado = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -66,9 +65,9 @@
             this.btnConsultar = new System.Windows.Forms.ToolStripButton();
             this.btnModificar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
-            this.btnListado = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvLista = new GyCAP.UI.RecursosFabricacion.Grilla();
             this.tcABM.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.gpbLista.SuspendLayout();
@@ -93,7 +92,7 @@
             this.tcABM.Name = "tcABM";
             this.tcABM.Padding = new System.Drawing.Point(0, 0);
             this.tcABM.SelectedIndex = 0;
-            this.tcABM.Size = new System.Drawing.Size(556, 303);
+            this.tcABM.Size = new System.Drawing.Size(558, 316);
             this.tcABM.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcABM.TabIndex = 8;
             // 
@@ -105,36 +104,26 @@
             this.tpBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tpBuscar.Size = new System.Drawing.Size(548, 294);
+            this.tpBuscar.Size = new System.Drawing.Size(550, 307);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
             // gpbLista
             // 
             this.gpbLista.Controls.Add(this.dgvLista);
-            this.gpbLista.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gpbLista.Location = new System.Drawing.Point(3, 95);
+            this.gpbLista.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gpbLista.Location = new System.Drawing.Point(3, 107);
             this.gpbLista.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gpbLista.Name = "gpbLista";
             this.gpbLista.Padding = new System.Windows.Forms.Padding(9);
-            this.gpbLista.Size = new System.Drawing.Size(542, 197);
+            this.gpbLista.Size = new System.Drawing.Size(544, 193);
             this.gpbLista.TabIndex = 1;
             this.gpbLista.TabStop = false;
             this.gpbLista.Text = "Listado";
             // 
-            // dgvLista
-            // 
-            this.dgvLista.Columnas = null;
-            this.dgvLista.DataSource = null;
-            this.dgvLista.Location = new System.Drawing.Point(12, 24);
-            this.dgvLista.Name = "dgvLista";
-            this.dgvLista.Size = new System.Drawing.Size(521, 161);
-            this.dgvLista.TabIndex = 0;
-            this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
-            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.clbSectores);
+            this.groupBox1.Controls.Add(this.lvSectores);
             this.groupBox1.Controls.Add(this.cboBuscarPor);
             this.groupBox1.Controls.Add(this.cboBuscarEstado);
             this.groupBox1.Controls.Add(this.label4);
@@ -146,25 +135,29 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(542, 93);
+            this.groupBox1.Size = new System.Drawing.Size(544, 105);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
-            // clbSectores
+            // lvSectores
             // 
-            this.clbSectores.FormattingEnabled = true;
-            this.clbSectores.Location = new System.Drawing.Point(9, 20);
-            this.clbSectores.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.clbSectores.Name = "clbSectores";
-            this.clbSectores.Size = new System.Drawing.Size(156, 64);
-            this.clbSectores.TabIndex = 7;
+            this.lvSectores.CheckBoxes = true;
+            this.lvSectores.FullRowSelect = true;
+            this.lvSectores.GridLines = true;
+            this.lvSectores.Location = new System.Drawing.Point(6, 17);
+            this.lvSectores.MultiSelect = false;
+            this.lvSectores.Name = "lvSectores";
+            this.lvSectores.Size = new System.Drawing.Size(138, 76);
+            this.lvSectores.TabIndex = 8;
+            this.lvSectores.UseCompatibleStateImageBehavior = false;
+            this.lvSectores.View = System.Windows.Forms.View.Details;
             // 
             // cboBuscarPor
             // 
             this.cboBuscarPor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboBuscarPor.FormattingEnabled = true;
-            this.cboBuscarPor.Location = new System.Drawing.Point(235, 63);
+            this.cboBuscarPor.Location = new System.Drawing.Point(222, 72);
             this.cboBuscarPor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboBuscarPor.Name = "cboBuscarPor";
             this.cboBuscarPor.Size = new System.Drawing.Size(85, 21);
@@ -174,7 +167,7 @@
             // 
             this.cboBuscarEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboBuscarEstado.FormattingEnabled = true;
-            this.cboBuscarEstado.Location = new System.Drawing.Point(235, 36);
+            this.cboBuscarEstado.Location = new System.Drawing.Point(222, 45);
             this.cboBuscarEstado.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboBuscarEstado.Name = "cboBuscarEstado";
             this.cboBuscarEstado.Size = new System.Drawing.Size(85, 21);
@@ -183,7 +176,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(172, 39);
+            this.label4.Location = new System.Drawing.Point(159, 48);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 3;
@@ -191,9 +184,9 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.lupa_25;
+            this.btnBuscar.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(458, 59);
+            this.btnBuscar.Location = new System.Drawing.Point(458, 68);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
@@ -205,7 +198,7 @@
             // 
             // txtNombreBuscar
             // 
-            this.txtNombreBuscar.Location = new System.Drawing.Point(326, 63);
+            this.txtNombreBuscar.Location = new System.Drawing.Point(313, 72);
             this.txtNombreBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(126, 20);
@@ -214,7 +207,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(172, 66);
+            this.label1.Location = new System.Drawing.Point(159, 75);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 1;
@@ -228,7 +221,7 @@
             this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tpDatos.Size = new System.Drawing.Size(548, 294);
+            this.tpDatos.Size = new System.Drawing.Size(550, 307);
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
@@ -237,11 +230,11 @@
             this.gbGuardarCancelar.Controls.Add(this.btnVolver);
             this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
             this.gbGuardarCancelar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 235);
+            this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 248);
             this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
             this.gbGuardarCancelar.Name = "gbGuardarCancelar";
             this.gbGuardarCancelar.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbGuardarCancelar.Size = new System.Drawing.Size(542, 57);
+            this.gbGuardarCancelar.Size = new System.Drawing.Size(544, 57);
             this.gbGuardarCancelar.TabIndex = 1;
             this.gbGuardarCancelar.TabStop = false;
             // 
@@ -250,7 +243,7 @@
             this.btnVolver.Location = new System.Drawing.Point(472, 20);
             this.btnVolver.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(64, 22);
+            this.btnVolver.Size = new System.Drawing.Size(64, 26);
             this.btnVolver.TabIndex = 11;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -260,7 +253,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(402, 20);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(64, 22);
+            this.btnGuardar.Size = new System.Drawing.Size(64, 26);
             this.btnGuardar.TabIndex = 10;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -288,7 +281,7 @@
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
             this.gbDatos.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbDatos.Size = new System.Drawing.Size(542, 232);
+            this.gbDatos.Size = new System.Drawing.Size(544, 232);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Empleado";
@@ -443,13 +436,12 @@
             this.btnConsultar,
             this.btnModificar,
             this.btnEliminar,
-            this.btnListado,
             this.toolStripSeparator1,
             this.btnSalir});
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.tsMenu.Size = new System.Drawing.Size(556, 50);
+            this.tsMenu.Size = new System.Drawing.Size(558, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
@@ -496,17 +488,6 @@
             this.btnEliminar.Text = "&Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // btnListado
-            // 
-            this.btnListado.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Floppy_25;
-            this.btnListado.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnListado.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnListado.Name = "btnListado";
-            this.btnListado.Size = new System.Drawing.Size(45, 47);
-            this.btnListado.Text = "&Listado";
-            this.btnListado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnListado.Click += new System.EventHandler(this.btnListado_Click);
-            // 
             // btnSalir
             // 
             this.btnSalir.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Salir_25;
@@ -532,14 +513,25 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(560, 359);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(562, 372);
             this.tableLayoutPanel1.TabIndex = 12;
+            // 
+            // dgvLista
+            // 
+            this.dgvLista.Columnas = null;
+            this.dgvLista.DataSource = null;
+            this.dgvLista.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgvLista.Location = new System.Drawing.Point(9, 22);
+            this.dgvLista.Name = "dgvLista";
+            this.dgvLista.Size = new System.Drawing.Size(526, 161);
+            this.dgvLista.TabIndex = 0;
+            this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
             // frmEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(560, 359);
+            this.ClientSize = new System.Drawing.Size(562, 372);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -593,7 +585,6 @@
         private System.Windows.Forms.ToolStripButton btnConsultar;
         private System.Windows.Forms.ToolStripButton btnModificar;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.CheckedListBox clbSectores;
         private System.Windows.Forms.ComboBox cboBuscarPor;
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.Label label8;
@@ -606,7 +597,7 @@
         private System.Windows.Forms.TextBox txtLegajo;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckedListBox clbCapacidades;
-        private System.Windows.Forms.ToolStripButton btnListado;
         private Grilla dgvLista;
+        private System.Windows.Forms.ListView lvSectores;
     }
 }
