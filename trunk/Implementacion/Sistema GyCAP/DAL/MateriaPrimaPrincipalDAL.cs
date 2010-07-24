@@ -26,6 +26,8 @@ namespace GyCAP.DAL
         public static bool EsMateriaPrima(Entidades.MateriaPrimaPrincipal materiaPrima)
         {
             string sql = "SELECT count(mppr_codigo) FROM MATERIASPRIMASPRINCIPALES WHERE mp_codigo = @p0";
+
+
             object[] valorParametros = { materiaPrima.MateriaPrima.CodigoMateriaPrima };
             try
             {
@@ -41,6 +43,28 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
         }
+        //Metodo que valida que no se quiera modificar algo que ya existe
+        public static bool ModificarMateriaPrima(Entidades.MateriaPrimaPrincipal materiaPrima)
+        {
+            string sql = "SELECT count(mppr_codigo) FROM MATERIASPRIMASPRINCIPALES WHERE mp_codigo = @p0 and mppr_cantidad=@p1";
+
+            object[] valorParametros = { materiaPrima.MateriaPrima.CodigoMateriaPrima, materiaPrima.Cantidad };
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+        }
+
+
         //Metodo que trae todos los datos 
         public static void ObtenerTodos(Data.dsMateriaPrima ds)
         {
@@ -66,6 +90,20 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
+        }
+
+        //MODIFICAR 
+        //Metodo que modifica en la base de datos
+        public static void Actualizar(Entidades.MateriaPrimaPrincipal materiaPrima)
+        {
+            string sql = @"UPDATE MATERIASPRIMASPRINCIPALES SET mp_codigo = @p0, mppr_cantidad = @p1
+                         WHERE mppr_codigo = @p2";
+            object[] valorParametros = { materiaPrima.MateriaPrima.CodigoMateriaPrima, materiaPrima.Cantidad, materiaPrima.Codigo };
+            try
+            {
+                DB.executeNonQuery(sql, valorParametros, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
     }

@@ -13,8 +13,9 @@ namespace GyCAP.UI.EstructuraProducto
     {
         private static frmMateriaPrimaPrincipal _frmMateriaPrimaPrincipal = null;
         private Data.dsMateriaPrima dsMateriaPrimaPrincipal = new GyCAP.Data.dsMateriaPrima();
-        private enum estadoUI { inicio, agregar };
+        private enum estadoUI { inicio, agregar, modificar };
         private DataView dvListaMateriaPrimaPrincipal, dvComboMP;
+        private static estadoUI estadoActual;
 
         public frmMateriaPrimaPrincipal()
         {
@@ -65,7 +66,6 @@ namespace GyCAP.UI.EstructuraProducto
             //Seteo la propiedad del Incremento de la cantidad
             numCantidad.Increment=Convert.ToDecimal(0.01);
            
-
             //Combo de Datos
             dvComboMP = new DataView(dsMateriaPrimaPrincipal.MATERIAS_PRIMAS);
             dvComboMP.Sort = "MP_NOMBRE ASC";
@@ -135,8 +135,14 @@ namespace GyCAP.UI.EstructuraProducto
                     if (dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.Rows.Count != 0)
                     {
                         btnEliminar.Enabled = true;
+                        btnModificar.Enabled = true;
                     }
-                    else btnEliminar.Enabled = false;
+                    else
+                    {
+                        btnEliminar.Enabled = false;
+                        btnModificar.Enabled = false;
+                    }
+                    estadoActual = estadoUI.inicio;
                     break;
                 case estadoUI.agregar:
                     //Seteo el inicio de la pantalla sin que se vea el groupbox de agregar
@@ -155,8 +161,38 @@ namespace GyCAP.UI.EstructuraProducto
                     if (dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.Rows.Count != 0)
                     {
                         btnEliminar.Enabled = true;
+                        btnModificar.Enabled = true;
                     }
-                    else btnEliminar.Enabled = false;
+                    else
+                    {
+                        btnEliminar.Enabled = false;
+                        btnModificar.Enabled = false;
+                    }
+                    estadoActual = estadoUI.agregar;
+                    break;
+                case estadoUI.modificar:
+                    //Seteo el inicio de la pantalla sin que se vea el groupbox de agregar
+                    gbLista.Height = 165;
+                    gbAgregar.Visible = true;
+                    dgvLista.Height = 145;
+                    btnNuevo.Enabled = false;
+                    cbMateriaPrima.Visible = true;
+                    
+                    //Lleno el Dataset con las Materias Primas Principales Cargadas
+                    BLL.MateriaPrimaPrincipalBLL.ObtenerTodos(dsMateriaPrimaPrincipal);
+
+                    //Si hay datos que deje eliminar
+                    if (dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.Rows.Count != 0)
+                    {
+                        btnEliminar.Enabled = true;
+                        btnModificar.Enabled = true;
+                    }
+                    else
+                    {
+                        btnEliminar.Enabled = false;
+                        btnModificar.Enabled = false;
+                    }
+                    estadoActual = estadoUI.modificar;
                     break;
                 default:
                     break;
@@ -183,6 +219,7 @@ namespace GyCAP.UI.EstructuraProducto
                 //Pregunto si la cantidad es mayor a cero
                 if (numCantidad.Value != 0)
                 {
+
                     //Creamos los objetos a insertar
                     Entidades.MateriaPrimaPrincipal mp_prin = new GyCAP.Entidades.MateriaPrimaPrincipal();
                     Entidades.MateriaPrima mp = new GyCAP.Entidades.MateriaPrima();
@@ -194,41 +231,85 @@ namespace GyCAP.UI.EstructuraProducto
                     
                     //Se lo asigno a la materia prima principal
                     mp_prin.MateriaPrima = mp;
-                    mp_prin.Codigo = 0;
-
-                    try
+                    
+                    
+                    if (estadoActual == estadoUI.agregar)
                     {
-                        //lo guardamos en la Base de datos
-                        mp_prin.Codigo = BLL.MateriaPrimaPrincipalBLL.Insertar(mp_prin);
-                        
-                        //Lo ponemos en el Dataset
-                        Data.dsMateriaPrima.MATERIASPRIMASPRINCIPALESRow rowMP_Prin = dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.NewMATERIASPRIMASPRINCIPALESRow();
-                        //Indicamos que comienza la edición de la fila
-                        rowMP_Prin.BeginEdit();
-                        rowMP_Prin.MPPR_CODIGO = mp_prin.Codigo;
-                        rowMP_Prin.MP_CODIGO = mp_prin.MateriaPrima.CodigoMateriaPrima;
-                        rowMP_Prin.MPPR_CANTIDAD = Convert.ToDecimal(mp_prin.Cantidad);
+                        try
+                        {
+                            //lo guardamos en la Base de datos
+                            mp_prin.Codigo = BLL.MateriaPrimaPrincipalBLL.Insertar(mp_prin);
 
-                        //Termina la edición de la fila
-                        rowMP_Prin.EndEdit();
-                        //Agregamos la fila al dataset y aceptamos los cambios
-                        dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.AddMATERIASPRIMASPRINCIPALESRow(rowMP_Prin);
-                        dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.AcceptChanges();
+                            //Lo ponemos en el Dataset
+                            Data.dsMateriaPrima.MATERIASPRIMASPRINCIPALESRow rowMP_Prin = dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.NewMATERIASPRIMASPRINCIPALESRow();
+                            //Indicamos que comienza la edición de la fila
+                            rowMP_Prin.BeginEdit();
+                            rowMP_Prin.MPPR_CODIGO = mp_prin.Codigo;
+                            rowMP_Prin.MP_CODIGO = mp_prin.MateriaPrima.CodigoMateriaPrima;
+                            rowMP_Prin.MPPR_CANTIDAD = Convert.ToDecimal(mp_prin.Cantidad);
 
-                        //Y por último seteamos el estado de la interfaz
-                        SetInterface(estadoUI.agregar);  
+                            //Termina la edición de la fila
+                            rowMP_Prin.EndEdit();
+                            //Agregamos la fila al dataset y aceptamos los cambios
+                            dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.AddMATERIASPRIMASPRINCIPALESRow(rowMP_Prin);
+                            dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.AcceptChanges();
+
+                            //Y por último seteamos el estado de la interfaz
+                            SetInterface(estadoUI.agregar);
+
+                        }
+
+                        catch (Entidades.Excepciones.ElementoExistenteException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        catch (Entidades.Excepciones.BaseDeDatosException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    if (estadoActual == estadoUI.modificar)
+                    {
+                        try
+                        {
+                            //Colocamos el valor del codigo de la materia prima que se esta modificando
+                            mp_prin.Codigo = Convert.ToInt32(dvListaMateriaPrimaPrincipal[dgvLista.SelectedRows[0].Index]["mppr_codigo"]);
+                            
+                            //lo modificamos en la Base de datos
+                           BLL.MateriaPrimaPrincipalBLL.Actualizar(mp_prin);
+
+                            //Lo ponemos en el Dataset
+                            Data.dsMateriaPrima.MATERIASPRIMASPRINCIPALESRow rowMP_Prin = dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.FindByMPPR_CODIGO(mp_prin.Codigo);
+                            //Indicamos que comienza la edición de la fila
+                            rowMP_Prin.BeginEdit();
+                            rowMP_Prin.MP_CODIGO = mp_prin.MateriaPrima.CodigoMateriaPrima;
+                            rowMP_Prin.MPPR_CANTIDAD = Convert.ToDecimal(mp_prin.Cantidad);
+
+                            //Termina la edición de la fila
+                            rowMP_Prin.EndEdit();
+                            //Agregamos la fila al dataset y aceptamos los cambios
+                            dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.AcceptChanges();
+
+                            //Avisamos que se actualizo todo
+                            MessageBox.Show("Elemento actualizado correctamente", "Información: Actualizació", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            //Y por último seteamos el estado de la interfaz
+                            SetInterface(estadoUI.inicio);
+
+                        }
+
+                        catch (Entidades.Excepciones.ElementoExistenteException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        catch (Entidades.Excepciones.BaseDeDatosException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
 
                     }
-                    catch (Entidades.Excepciones.ElementoExistenteException ex)
-                    {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    catch (Entidades.Excepciones.BaseDeDatosException ex)
-                    {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
-
+                 
                 }
                 else
                 {
@@ -245,7 +326,15 @@ namespace GyCAP.UI.EstructuraProducto
 
 
         }
-
+        
+        //Metodo para cargar los datos desde la grilla a los controles
+        private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            int codigoMPPrincipal = Convert.ToInt32(dvListaMateriaPrimaPrincipal[e.RowIndex]["mppr_codigo"]);
+            cbMateriaPrima.SelectedValue = Convert.ToInt32(dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.FindByMPPR_CODIGO(codigoMPPrincipal).MP_CODIGO);
+            numCantidad.Value = dsMateriaPrimaPrincipal.MATERIASPRIMASPRINCIPALES.FindByMPPR_CODIGO(codigoMPPrincipal).MPPR_CANTIDAD;
+        }
+        
         private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
            
@@ -308,6 +397,11 @@ namespace GyCAP.UI.EstructuraProducto
             }
             
 
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.modificar);
         }
         
 
