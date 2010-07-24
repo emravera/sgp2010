@@ -26,10 +26,10 @@ namespace GyCAP.DAL
         private static string cadenaConexion;
         private static SqlTransaction transaccion = null;
         private static SqlCommand cmdReader = null;
-        private static int tipoConexion;
-        public static readonly int tipoLocal = 0;
-        public static readonly int tipoRemota = 1;
-        public static readonly int tipoInterna = 2;
+        private static int tipoConexion = 2;
+        public static readonly int tipoLocal = 0;        
+        public static readonly int tipoInterna = 1;
+        public static readonly int tipoRemota = 2;
 
         //Devuelve el nombre de la PC
         static String nombrePC = System.Environment.MachineName;

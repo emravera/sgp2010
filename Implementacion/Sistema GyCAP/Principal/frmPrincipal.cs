@@ -9,17 +9,18 @@ using System.Windows.Forms;
 
 namespace Principal
 {
-    public partial class Principal : Form
+    public partial class frmPrincipal : Form
     {
         
 
-        public Principal()
+        public frmPrincipal()
         {
             InitializeComponent();
             //Setea el directorio local de trabajo del sistema.
             GyCAP.BLL.SistemaBLL.WorkingPath = Application.StartupPath;
+            
         }
-         
+
         
         #region Menú Modulos
         
@@ -68,7 +69,7 @@ namespace Principal
 
         private void StatusBarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            statusStrip.Visible = statusBarToolStripMenuItem.Checked;
+            barraEstado.Visible = statusBarToolStripMenuItem.Checked;
         }
 
         #endregion

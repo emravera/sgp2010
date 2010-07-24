@@ -127,6 +127,7 @@ namespace GyCAP.UI.EstructuraProducto
             try
             {
                 dsEstructura.Clear();
+                
                 BLL.EstructuraBLL.ObtenerEstructuras(txtNombreBuscar.Text, cbPlanoBuscar.SelectedValue, dtpFechaAltaBuscar.Value, cbCocinaBuscar.SelectedValue, cbResponsableBuscar.SelectedValue, cbActivoBuscar.SelectedItem, dsEstructura);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
@@ -459,9 +460,9 @@ namespace GyCAP.UI.EstructuraProducto
             dgvEstructuras.Columns["ESTR_NOMBRE"].DataPropertyName = "ESTR_NOMBRE";
             dgvEstructuras.Columns["COC_COCINA"].DataPropertyName = "COC_COCINA";
             dgvEstructuras.Columns["PNO_CODIGO"].DataPropertyName = "PNO_CODIGO";
-            dgvEstructuras.Columns["E_CODIGO"].DataPropertyName = "E_LEGAJO";
+            dgvEstructuras.Columns["E_CODIGO"].DataPropertyName = "E_CODIGO";
             dgvEstructuras.Columns["ESTR_ACTIVO"].DataPropertyName = "ESTR_ACTIVO";
-            dgvEstructuras.Columns["ESTR_FECHA_ALTA"].DataPropertyName = "ESTR_FECHA_ALTA";            
+            dgvEstructuras.Columns["ESTR_FECHA_ALTA"].DataPropertyName = "ESTR_FECHA_CREACION"; 
 
             //Dataviews
             dvEstructuras = new DataView(dsEstructura.ESTRUCTURAS);
@@ -487,7 +488,7 @@ namespace GyCAP.UI.EstructuraProducto
             cbPlanoBuscar.DataSource = dvPlanoBuscar;
             cbPlanoBuscar.DisplayMember = "PNO_NOMBRE";
             cbPlanoBuscar.ValueMember = "PNO_CODIGO";
-            cbPlanoBuscar.SelectedIndex = -1;
+            cbPlanoBuscar.SelectedIndex = -1;            
             cbActivoBuscar.Items.Add("SI");
             cbActivoBuscar.Items.Add("NO");
             cbActivoBuscar.SelectedIndex = -1;
@@ -719,7 +720,7 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 Data.dsEstructura.LISTA_PARTESRow rowParte = dsEstructura.LISTA_PARTES.NewLISTA_PARTESRow();
                 rowParte.BeginEdit();
-                rowParte.PAR_TIPO = "Conjunto";
+                rowParte.PAR_TIPO = "Materia Prima";
                 rowParte.PAR_NOMBRE = row.MATERIAS_PRIMASRow.MP_NOMBRE;
                 rowParte.PAR_TERMINACION = string.Empty;
                 rowParte.PAR_CANTIDAD = row.MPXE_CANTIDAD.ToString();

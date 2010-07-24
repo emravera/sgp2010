@@ -45,9 +45,18 @@ namespace GyCAP.UI.Principal
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (rbLocal.Checked) { BLL.DBBLL.SetTipoConexion(BLL.DBBLL.tipoLocal); }
-            else if (rbRemoto.Checked) { BLL.DBBLL.SetTipoConexion(BLL.DBBLL.tipoInterna); }
-            else if (rbInterna.Checked) { BLL.DBBLL.SetTipoConexion(BLL.DBBLL.tipoRemota); }
+            if (rbLocal.Checked)
+            { 
+                BLL.DBBLL.SetTipoConexion(BLL.DBBLL.tipoLocal);
+            }
+            else if (rbRemoto.Checked)
+            { 
+                BLL.DBBLL.SetTipoConexion(BLL.DBBLL.tipoInterna); 
+            }
+            else if (rbInterna.Checked)
+            {
+                BLL.DBBLL.SetTipoConexion(BLL.DBBLL.tipoRemota); 
+            }
             btnCerrar.PerformClick();
         }
     }
