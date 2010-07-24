@@ -13,7 +13,7 @@ namespace GyCAP.UI.RecursosFabricacion
     {
         private static frmEmpleado _frmEmpleado = null;
         private Data.dsEmpleado dsEmpleado = new GyCAP.Data.dsEmpleado(); 
-        private DataView dvEmpleado, dvEstadoEmpleado,dvEstadoEmpleadoBuscar, dvListaSectores;
+        private DataView dvEmpleado, dvEstadoEmpleado,dvEstadoEmpleadoBuscar, dvListaSectores, dvSectores;
         private enum estadoUI { inicio, nuevo, consultar, modificar, };
         private estadoUI estadoInterface;
 
@@ -49,23 +49,29 @@ namespace GyCAP.UI.RecursosFabricacion
 
             //Carga de la Lista de Sectores
             dvListaSectores = new DataView(dsEmpleado.SECTORES);
-            FuncionesAuxiliares.llenarListas(dvListaSectores, clbSectores);
+      
+            lvSectores.View = View.Details;
+            lvSectores.FullRowSelect = true;
+            lvSectores.MultiSelect = false;
+            lvSectores.CheckBoxes = true;
+            lvSectores.GridLines = true;
+            lvSectores.Columns.Add("Sectores", 120);
+            lvSectores.Columns.Add("Codigo", 0);
+            if (dvListaSectores.Count != 0)
+            {
+                foreach (DataRowView dr in dvListaSectores)
+                {
+                    ListViewItem li = new ListViewItem(dr["SEC_NOMBRE"].ToString());
+                    li.SubItems.Add(dr["SEC_CODIGO"].ToString());
+                    li.Checked = true;
+                    lvSectores.Items.Add(li);
+                }
+            }
 
             //CARGA DE COMBOS
             //Creamos el Dataview y se lo asignamos al combo
             dvEstadoEmpleadoBuscar = new DataView(dsEmpleado.ESTADO_EMPLEADOS);
-            dvEstadoEmpleadoBuscar.Sort = "EE_NOMBRE ASC";
-            DataRowView newDRV = dvEstadoEmpleadoBuscar.AddNew();
-            newDRV["EE_CODIGO"] = "0";
-            newDRV["EE_NOMBRE"] = "--- Todos ---";
-            newDRV.EndEdit();
-            cboBuscarEstado.DataSource = dvEstadoEmpleadoBuscar;
-            cboBuscarEstado.DisplayMember = "EE_NOMBRE";
-            cboBuscarEstado.ValueMember = "EE_CODIGO";
-
-            //Para que el combo no quede selecionado cuando arranca y que sea una lista
-            cboBuscarEstado.SelectedIndex = 0;
-            cboBuscarEstado.DropDownStyle = ComboBoxStyle.DropDownList;
+            FuncionesAuxiliares.llenarCombosFiltros(dvEstadoEmpleadoBuscar, cboBuscarEstado, "EE_CODIGO", "EE_NOMBRE", "-- TODOS --");
 
             cboBuscarPor.Items.Add("Legajo");
             cboBuscarPor.Items.Add("Nombre");
@@ -74,19 +80,13 @@ namespace GyCAP.UI.RecursosFabricacion
 
             //Combo de Datos
             dvEstadoEmpleado = new DataView(dsEmpleado.ESTADO_EMPLEADOS);
+            FuncionesAuxiliares.llenarCombos(dvEstadoEmpleado, cboEstado, "EE_CODIGO", "EE_NOMBRE");
 
-            cboEstado.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboEstado.DataSource = dvEstadoEmpleado ;
-            cboEstado.DisplayMember = "EE_NOMBRE";
-            cboEstado.ValueMember = "EE_CODIGO";
-            cboEstado.SelectedIndex = 0;
+            dvSectores = new DataView(dsEmpleado.SECTORES);
+            FuncionesAuxiliares.llenarCombos(dvSectores, cboSector, "SEC_CODIGO", "SEC_NOMBRE");
 
+            //Llenar listView
             dvListaSectores = new DataView(dsEmpleado.SECTORES);
-            cboSector.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboSector.DataSource = dvListaSectores;
-            cboSector.DisplayMember = "SEC_NOMBRE";
-            cboSector.ValueMember = "SEC_CODIGO";
-            cboSector.SelectedIndex = 0;
 
             //Seteo el maxlenght de los textbox para que no de error en la bd
             txtApellido.MaxLength = 80;
@@ -238,21 +238,6 @@ namespace GyCAP.UI.RecursosFabricacion
             txtTelefono.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_TELEFONO;
             cboEstado.SelectedValue = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).EE_CODIGO;
             cboEstado.SelectedValue = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).SEC_CODIGO;
-        }
-
-        private void btnListado_Click(object sender, EventArgs e)
-        {
-            /*//frmVisorInformes visor = new frmVisorInformes();
-            //visor.ShowDialog();
-            BaseReporte2.conectar("NGA", "Proyecto",string.Empty, string.Empty);
-            BaseReporte2.rutaRpt = "E:\\Repositorio\\Implementacion\\Sistema GyCAP\\RecursosFabricacion\\Reportes\\" ;
-            BaseReporte2.printrpt("rptEmpleados.rpt","marcelo");*/
-
-            Sistema.frmVisorReporte visor = new GyCAP.UI.Sistema.frmVisorReporte();
-            Data.Reportes.reporte report = new GyCAP.Data.Reportes.reporte();
-            report.SetDataSource(dsEmpleado);
-            visor.crvVisor.ReportSource = report;
-            visor.Show();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
