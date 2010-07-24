@@ -186,6 +186,12 @@ namespace Principal
             GyCAP.UI.PlanificacionProduccion.frmEstimarDemandaAnual.Instancia.Show();
         }
 
+        private void itemMenuOpciones_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Principal.frmOpciones.Instancia.MdiParent = this;
+            GyCAP.UI.Principal.frmOpciones.Instancia.Show();
+        }
+
 
         
 
