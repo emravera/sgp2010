@@ -138,9 +138,9 @@ SELECT DESIG_CODIGO, MCA_CODIGO, DESIG_NOMBRE, DESIG_DESCRIPCION FROM DESIGNACIO
         <xs:element name="MARCAS" msprop:Generator_UserTableName="MARCAS" msprop:Generator_RowDeletedName="MARCASRowDeleted" msprop:Generator_RowChangedName="MARCASRowChanged" msprop:Generator_RowClassName="MARCASRow" msprop:Generator_RowChangingName="MARCASRowChanging" msprop:Generator_RowEvArgName="MARCASRowChangeEvent" msprop:Generator_RowEvHandlerName="MARCASRowChangeEventHandler" msprop:Generator_TableClassName="MARCASDataTable" msprop:Generator_TableVarName="tableMARCAS" msprop:Generator_RowDeletingName="MARCASRowDeleting" msprop:Generator_TablePropName="MARCAS">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="MCA_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="MCA_CODIGO" msprop:Generator_ColumnPropNameInRow="MCA_CODIGO" msprop:Generator_ColumnVarNameInTable="columnMCA_CODIGO" msprop:Generator_ColumnPropNameInTable="MCA_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="CLI_CODIGO" msprop:Generator_UserColumnName="CLI_CODIGO" msprop:Generator_ColumnPropNameInRow="CLI_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCLI_CODIGO" msprop:Generator_ColumnPropNameInTable="CLI_CODIGOColumn" type="xs:decimal" minOccurs="0" />
-              <xs:element name="MCA_NOMBRE" msprop:Generator_UserColumnName="MCA_NOMBRE" msprop:Generator_ColumnPropNameInRow="MCA_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnMCA_NOMBRE" msprop:Generator_ColumnPropNameInTable="MCA_NOMBREColumn" minOccurs="0">
+              <xs:element name="MCA_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="MCA_CODIGO" msprop:Generator_ColumnVarNameInTable="columnMCA_CODIGO" msprop:Generator_ColumnPropNameInRow="MCA_CODIGO" msprop:Generator_ColumnPropNameInTable="MCA_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="CLI_CODIGO" msprop:Generator_UserColumnName="CLI_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCLI_CODIGO" msprop:Generator_ColumnPropNameInRow="CLI_CODIGO" msprop:Generator_ColumnPropNameInTable="CLI_CODIGOColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="MCA_NOMBRE" msprop:Generator_UserColumnName="MCA_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnMCA_NOMBRE" msprop:Generator_ColumnPropNameInRow="MCA_NOMBRE" msprop:Generator_ColumnPropNameInTable="MCA_NOMBREColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="25" />
@@ -150,19 +150,19 @@ SELECT DESIG_CODIGO, MCA_CODIGO, DESIG_NOMBRE, DESIG_DESCRIPCION FROM DESIGNACIO
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="DESIGNACIONES" msprop:Generator_UserTableName="DESIGNACIONES" msprop:Generator_RowDeletedName="DESIGNACIONESRowDeleted" msprop:Generator_TableClassName="DESIGNACIONESDataTable" msprop:Generator_RowChangedName="DESIGNACIONESRowChanged" msprop:Generator_RowClassName="DESIGNACIONESRow" msprop:Generator_RowChangingName="DESIGNACIONESRowChanging" msprop:Generator_RowEvArgName="DESIGNACIONESRowChangeEvent" msprop:Generator_RowEvHandlerName="DESIGNACIONESRowChangeEventHandler" msprop:Generator_TablePropName="DESIGNACIONES" msprop:Generator_TableVarName="tableDESIGNACIONES" msprop:Generator_RowDeletingName="DESIGNACIONESRowDeleting">
+        <xs:element name="DESIGNACIONES" msprop:Generator_UserTableName="DESIGNACIONES" msprop:Generator_RowDeletedName="DESIGNACIONESRowDeleted" msprop:Generator_RowChangedName="DESIGNACIONESRowChanged" msprop:Generator_RowClassName="DESIGNACIONESRow" msprop:Generator_RowChangingName="DESIGNACIONESRowChanging" msprop:Generator_RowEvArgName="DESIGNACIONESRowChangeEvent" msprop:Generator_RowEvHandlerName="DESIGNACIONESRowChangeEventHandler" msprop:Generator_TableClassName="DESIGNACIONESDataTable" msprop:Generator_TableVarName="tableDESIGNACIONES" msprop:Generator_RowDeletingName="DESIGNACIONESRowDeleting" msprop:Generator_TablePropName="DESIGNACIONES">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="DESIG_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="DESIG_CODIGO" msprop:Generator_ColumnPropNameInRow="DESIG_CODIGO" msprop:Generator_ColumnVarNameInTable="columnDESIG_CODIGO" msprop:Generator_ColumnPropNameInTable="DESIG_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="MCA_CODIGO" msprop:Generator_UserColumnName="MCA_CODIGO" msprop:Generator_ColumnPropNameInRow="MCA_CODIGO" msprop:Generator_ColumnVarNameInTable="columnMCA_CODIGO" msprop:Generator_ColumnPropNameInTable="MCA_CODIGOColumn" type="xs:decimal" minOccurs="0" />
-              <xs:element name="DESIG_NOMBRE" msprop:Generator_UserColumnName="DESIG_NOMBRE" msprop:Generator_ColumnPropNameInRow="DESIG_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnDESIG_NOMBRE" msprop:Generator_ColumnPropNameInTable="DESIG_NOMBREColumn" minOccurs="0">
+              <xs:element name="DESIG_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="DESIG_CODIGO" msprop:Generator_ColumnVarNameInTable="columnDESIG_CODIGO" msprop:Generator_ColumnPropNameInRow="DESIG_CODIGO" msprop:Generator_ColumnPropNameInTable="DESIG_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="MCA_CODIGO" msprop:Generator_UserColumnName="MCA_CODIGO" msprop:Generator_ColumnVarNameInTable="columnMCA_CODIGO" msprop:Generator_ColumnPropNameInRow="MCA_CODIGO" msprop:Generator_ColumnPropNameInTable="MCA_CODIGOColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DESIG_NOMBRE" msprop:Generator_UserColumnName="DESIG_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnDESIG_NOMBRE" msprop:Generator_ColumnPropNameInRow="DESIG_NOMBRE" msprop:Generator_ColumnPropNameInTable="DESIG_NOMBREColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="30" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="DESIG_DESCRIPCION" msprop:Generator_UserColumnName="DESIG_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="DESIG_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnDESIG_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="DESIG_DESCRIPCIONColumn" minOccurs="0">
+              <xs:element name="DESIG_DESCRIPCION" msprop:Generator_UserColumnName="DESIG_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnDESIG_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="DESIG_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="DESIG_DESCRIPCIONColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="210" />

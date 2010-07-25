@@ -70,6 +70,7 @@
     <Compile Include="EstadoEmpleadoDAL.cs" />
     <Compile Include="EstadoMaquinaDAL.cs" />
     <Compile Include="EstadoOrdenTrabajoDAL.cs" />
+    <Compile Include="EstadoParteDAL.cs" />
     <Compile Include="EstadoPedidoDAL.cs" />
     <Compile Include="EstadoPlanMantenimientoDAL.cs" />
     <Compile Include="EstadoUsuarioDAL.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="PlanAnualDAL.cs" />
     <Compile Include="PlanMantenimientoDAL.cs" />
     <Compile Include="PlanMensualDAL.cs" />
+    <Compile Include="PlanoDAL.cs" />
     <Compile Include="PlanSemanalDAL.cs" />
     <Compile Include="ProcesoDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

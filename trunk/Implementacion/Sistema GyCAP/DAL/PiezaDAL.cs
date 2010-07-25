@@ -22,7 +22,9 @@ namespace GyCAP.DAL
 
             //Así obtenemos la pieza nueva del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.PIEZASRow rowPieza = dsEstructura.PIEZAS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.PIEZASRow;
-            object[] valorParametros = { rowPieza.PZA_NOMBRE, rowPieza.TE_CODIGO, rowPieza.PZA_DESCRIPCION, 0, rowPieza.PAR_CODIGO, rowPieza.PNO_CODIGO };
+            object codPlano = null;
+            if (rowPieza.PNO_CODIGO != 0) { codPlano = rowPieza.PNO_CODIGO; }
+            object[] valorParametros = { rowPieza.PZA_NOMBRE, rowPieza.TE_CODIGO, rowPieza.PZA_DESCRIPCION, 0, rowPieza.PAR_CODIGO, codPlano };
 
             string sqlInsertEstructura = @"INSERT INTO [DETALLE_PIEZA] 
                                         ([pza_codigo]

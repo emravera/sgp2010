@@ -18,9 +18,15 @@ namespace GyCAP.BLL
         {
             return DAL.MateriaPrimaDAL.ObtenerMateriaPrima(codigoMateriaPrima);
         }
+        
         public static void ObtenerTodos(Data.dsMateriaPrima ds)
         {
             DAL.MateriaPrimaDAL.ObtenerTodos(ds);
+        }
+
+        public static void ObtenerTodos(System.Data.DataTable dtMateriaPrima)
+        {
+            DAL.MateriaPrimaDAL.ObtenerTodos(dtMateriaPrima);
         }
     }
 }

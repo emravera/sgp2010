@@ -145,15 +145,15 @@ SELECT CLI_CODIGO, CLI_RAZONSOCIAL, CLI_TELEFONO, CLI_FECHAALTA, CLI_FECHABAJA, 
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="dsMarca" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="dsMarca" msprop:Generator_UserDSName="dsMarca" msprop:EnableTableAdapterManager="true">
+  <xs:element name="dsMarca" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsMarca" msprop:Generator_DataSetName="dsMarca" msprop:EnableTableAdapterManager="true">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="MARCAS" msprop:Generator_UserTableName="MARCAS" msprop:Generator_RowDeletedName="MARCASRowDeleted" msprop:Generator_TableClassName="MARCASDataTable" msprop:Generator_RowChangedName="MARCASRowChanged" msprop:Generator_RowClassName="MARCASRow" msprop:Generator_RowChangingName="MARCASRowChanging" msprop:Generator_RowEvArgName="MARCASRowChangeEvent" msprop:Generator_RowEvHandlerName="MARCASRowChangeEventHandler" msprop:Generator_TablePropName="MARCAS" msprop:Generator_TableVarName="tableMARCAS" msprop:Generator_RowDeletingName="MARCASRowDeleting">
+        <xs:element name="MARCAS" msprop:Generator_UserTableName="MARCAS" msprop:Generator_RowDeletedName="MARCASRowDeleted" msprop:Generator_RowChangedName="MARCASRowChanged" msprop:Generator_RowClassName="MARCASRow" msprop:Generator_RowChangingName="MARCASRowChanging" msprop:Generator_RowEvArgName="MARCASRowChangeEvent" msprop:Generator_RowEvHandlerName="MARCASRowChangeEventHandler" msprop:Generator_TableClassName="MARCASDataTable" msprop:Generator_TableVarName="tableMARCAS" msprop:Generator_RowDeletingName="MARCASRowDeleting" msprop:Generator_TablePropName="MARCAS">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="MCA_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="MCA_CODIGO" msprop:Generator_ColumnPropNameInRow="MCA_CODIGO" msprop:Generator_ColumnVarNameInTable="columnMCA_CODIGO" msprop:Generator_ColumnPropNameInTable="MCA_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="CLI_CODIGO" msprop:Generator_UserColumnName="CLI_CODIGO" msprop:Generator_ColumnPropNameInRow="CLI_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCLI_CODIGO" msprop:Generator_ColumnPropNameInTable="CLI_CODIGOColumn" type="xs:decimal" minOccurs="0" />
-              <xs:element name="MCA_NOMBRE" msprop:Generator_UserColumnName="MCA_NOMBRE" msprop:Generator_ColumnPropNameInRow="MCA_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnMCA_NOMBRE" msprop:Generator_ColumnPropNameInTable="MCA_NOMBREColumn" minOccurs="0">
+              <xs:element name="MCA_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="MCA_CODIGO" msprop:Generator_ColumnVarNameInTable="columnMCA_CODIGO" msprop:Generator_ColumnPropNameInRow="MCA_CODIGO" msprop:Generator_ColumnPropNameInTable="MCA_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="CLI_CODIGO" msprop:Generator_UserColumnName="CLI_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCLI_CODIGO" msprop:Generator_ColumnPropNameInRow="CLI_CODIGO" msprop:Generator_ColumnPropNameInTable="CLI_CODIGOColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="MCA_NOMBRE" msprop:Generator_UserColumnName="MCA_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnMCA_NOMBRE" msprop:Generator_ColumnPropNameInRow="MCA_NOMBRE" msprop:Generator_ColumnPropNameInTable="MCA_NOMBREColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="25" />
@@ -163,27 +163,27 @@ SELECT CLI_CODIGO, CLI_RAZONSOCIAL, CLI_TELEFONO, CLI_FECHAALTA, CLI_FECHABAJA, 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="CLIENTES" msprop:Generator_UserTableName="CLIENTES" msprop:Generator_RowDeletedName="CLIENTESRowDeleted" msprop:Generator_TableClassName="CLIENTESDataTable" msprop:Generator_RowChangedName="CLIENTESRowChanged" msprop:Generator_RowClassName="CLIENTESRow" msprop:Generator_RowChangingName="CLIENTESRowChanging" msprop:Generator_RowEvArgName="CLIENTESRowChangeEvent" msprop:Generator_RowEvHandlerName="CLIENTESRowChangeEventHandler" msprop:Generator_TablePropName="CLIENTES" msprop:Generator_TableVarName="tableCLIENTES" msprop:Generator_RowDeletingName="CLIENTESRowDeleting">
+        <xs:element name="CLIENTES" msprop:Generator_UserTableName="CLIENTES" msprop:Generator_RowDeletedName="CLIENTESRowDeleted" msprop:Generator_RowChangedName="CLIENTESRowChanged" msprop:Generator_RowClassName="CLIENTESRow" msprop:Generator_RowChangingName="CLIENTESRowChanging" msprop:Generator_RowEvArgName="CLIENTESRowChangeEvent" msprop:Generator_RowEvHandlerName="CLIENTESRowChangeEventHandler" msprop:Generator_TableClassName="CLIENTESDataTable" msprop:Generator_TableVarName="tableCLIENTES" msprop:Generator_RowDeletingName="CLIENTESRowDeleting" msprop:Generator_TablePropName="CLIENTES">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="CLI_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="CLI_CODIGO" msprop:Generator_ColumnPropNameInRow="CLI_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCLI_CODIGO" msprop:Generator_ColumnPropNameInTable="CLI_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="CLI_RAZONSOCIAL" msprop:Generator_UserColumnName="CLI_RAZONSOCIAL" msprop:Generator_ColumnPropNameInRow="CLI_RAZONSOCIAL" msprop:Generator_ColumnVarNameInTable="columnCLI_RAZONSOCIAL" msprop:Generator_ColumnPropNameInTable="CLI_RAZONSOCIALColumn" minOccurs="0">
+              <xs:element name="CLI_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="CLI_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCLI_CODIGO" msprop:Generator_ColumnPropNameInRow="CLI_CODIGO" msprop:Generator_ColumnPropNameInTable="CLI_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="CLI_RAZONSOCIAL" msprop:Generator_UserColumnName="CLI_RAZONSOCIAL" msprop:Generator_ColumnVarNameInTable="columnCLI_RAZONSOCIAL" msprop:Generator_ColumnPropNameInRow="CLI_RAZONSOCIAL" msprop:Generator_ColumnPropNameInTable="CLI_RAZONSOCIALColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="CLI_TELEFONO" msprop:Generator_UserColumnName="CLI_TELEFONO" msprop:Generator_ColumnPropNameInRow="CLI_TELEFONO" msprop:Generator_ColumnVarNameInTable="columnCLI_TELEFONO" msprop:Generator_ColumnPropNameInTable="CLI_TELEFONOColumn" minOccurs="0">
+              <xs:element name="CLI_TELEFONO" msprop:Generator_UserColumnName="CLI_TELEFONO" msprop:Generator_ColumnVarNameInTable="columnCLI_TELEFONO" msprop:Generator_ColumnPropNameInRow="CLI_TELEFONO" msprop:Generator_ColumnPropNameInTable="CLI_TELEFONOColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="30" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="CLI_FECHAALTA" msprop:Generator_UserColumnName="CLI_FECHAALTA" msprop:Generator_ColumnPropNameInRow="CLI_FECHAALTA" msprop:Generator_ColumnVarNameInTable="columnCLI_FECHAALTA" msprop:Generator_ColumnPropNameInTable="CLI_FECHAALTAColumn" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="CLI_FECHABAJA" msprop:Generator_UserColumnName="CLI_FECHABAJA" msprop:Generator_ColumnPropNameInRow="CLI_FECHABAJA" msprop:Generator_ColumnVarNameInTable="columnCLI_FECHABAJA" msprop:Generator_ColumnPropNameInTable="CLI_FECHABAJAColumn" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="CLI_MOTIVOBAJA" msprop:Generator_UserColumnName="CLI_MOTIVOBAJA" msprop:Generator_ColumnPropNameInRow="CLI_MOTIVOBAJA" msprop:Generator_ColumnVarNameInTable="columnCLI_MOTIVOBAJA" msprop:Generator_ColumnPropNameInTable="CLI_MOTIVOBAJAColumn" minOccurs="0">
+              <xs:element name="CLI_FECHAALTA" msprop:Generator_UserColumnName="CLI_FECHAALTA" msprop:Generator_ColumnVarNameInTable="columnCLI_FECHAALTA" msprop:Generator_ColumnPropNameInRow="CLI_FECHAALTA" msprop:Generator_ColumnPropNameInTable="CLI_FECHAALTAColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CLI_FECHABAJA" msprop:Generator_UserColumnName="CLI_FECHABAJA" msprop:Generator_ColumnVarNameInTable="columnCLI_FECHABAJA" msprop:Generator_ColumnPropNameInRow="CLI_FECHABAJA" msprop:Generator_ColumnPropNameInTable="CLI_FECHABAJAColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CLI_MOTIVOBAJA" msprop:Generator_UserColumnName="CLI_MOTIVOBAJA" msprop:Generator_ColumnVarNameInTable="columnCLI_MOTIVOBAJA" msprop:Generator_ColumnPropNameInRow="CLI_MOTIVOBAJA" msprop:Generator_ColumnPropNameInTable="CLI_MOTIVOBAJAColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="80" />

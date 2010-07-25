@@ -639,7 +639,6 @@ namespace GyCAP.Data {
                 this.columnECOC_CODIGO.AutoIncrementSeed = -1;
                 this.columnECOC_CODIGO.AutoIncrementStep = -1;
                 this.columnECOC_CODIGO.AllowDBNull = false;
-                this.columnECOC_CODIGO.ReadOnly = true;
                 this.columnECOC_CODIGO.Unique = true;
                 this.columnECOC_NOMBRE.MaxLength = 80;
                 this.columnECOC_DESCRIPCION.MaxLength = 200;
@@ -891,7 +890,6 @@ namespace GyCAP.Data {
                 this.columnCOL_CODIGO.AutoIncrementSeed = -1;
                 this.columnCOL_CODIGO.AutoIncrementStep = -1;
                 this.columnCOL_CODIGO.AllowDBNull = false;
-                this.columnCOL_CODIGO.ReadOnly = true;
                 this.columnCOL_CODIGO.Unique = true;
                 this.columnCOL_NOMBRE.MaxLength = 80;
             }
@@ -1155,7 +1153,6 @@ namespace GyCAP.Data {
                 this.columnMOD_CODIGO.AutoIncrementSeed = -1;
                 this.columnMOD_CODIGO.AutoIncrementStep = -1;
                 this.columnMOD_CODIGO.AllowDBNull = false;
-                this.columnMOD_CODIGO.ReadOnly = true;
                 this.columnMOD_CODIGO.Unique = true;
                 this.columnMOD_NOMBRE.MaxLength = 80;
                 this.columnMOD_DESCRIPCION.MaxLength = 200;
@@ -1420,7 +1417,6 @@ namespace GyCAP.Data {
                 this.columnMCA_CODIGO.AutoIncrementSeed = -1;
                 this.columnMCA_CODIGO.AutoIncrementStep = -1;
                 this.columnMCA_CODIGO.AllowDBNull = false;
-                this.columnMCA_CODIGO.ReadOnly = true;
                 this.columnMCA_CODIGO.Unique = true;
                 this.columnMCA_NOMBRE.MaxLength = 80;
             }
@@ -1684,7 +1680,6 @@ namespace GyCAP.Data {
                 this.columnTE_CODIGO.AutoIncrementSeed = -1;
                 this.columnTE_CODIGO.AutoIncrementStep = -1;
                 this.columnTE_CODIGO.AllowDBNull = false;
-                this.columnTE_CODIGO.ReadOnly = true;
                 this.columnTE_CODIGO.Unique = true;
                 this.columnTE_NOMBRE.MaxLength = 80;
                 this.columnTE_DESCRIPCION.MaxLength = 200;
@@ -1965,7 +1960,6 @@ namespace GyCAP.Data {
                 this.columnDESIG_CODIGO.AutoIncrementSeed = -1;
                 this.columnDESIG_CODIGO.AutoIncrementStep = -1;
                 this.columnDESIG_CODIGO.AllowDBNull = false;
-                this.columnDESIG_CODIGO.ReadOnly = true;
                 this.columnDESIG_CODIGO.Unique = true;
                 this.columnDESIG_NOMBRE.MaxLength = 80;
                 this.columnDESIG_DESCRIPCION.MaxLength = 200;
@@ -2339,7 +2333,6 @@ namespace GyCAP.Data {
                 this.columnCOC_CODIGO.AutoIncrementSeed = -1;
                 this.columnCOC_CODIGO.AutoIncrementStep = -1;
                 this.columnCOC_CODIGO.AllowDBNull = false;
-                this.columnCOC_CODIGO.ReadOnly = true;
                 this.columnCOC_CODIGO.Unique = true;
                 this.columnECOC_CODIGO.AllowDBNull = false;
                 this.columnCOL_CODIGO.AllowDBNull = false;

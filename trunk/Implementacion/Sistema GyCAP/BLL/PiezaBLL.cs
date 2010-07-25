@@ -20,10 +20,10 @@ namespace GyCAP.BLL
             Entidades.Pieza pieza = new GyCAP.Entidades.Pieza();
             //Así obtenemos la pieza nueva del dataset, indicamos la primer fila de la agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.PIEZASRow rowPieza = dsEstructura.PIEZAS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.PIEZASRow;
+            //Creamos el objeto pieza para verificar si existe
             pieza.CodigoPieza = Convert.ToInt32(rowPieza.PZA_CODIGO);
             pieza.Nombre = rowPieza.PZA_NOMBRE;
             pieza.CodigoTerminacion = Convert.ToInt32(rowPieza.TE_CODIGO);
-            pieza.Descripcion = rowPieza.PZA_DESCRIPCION;
             if (EsPieza(pieza)) throw new Entidades.Excepciones.ElementoExistenteException();
             //Como no existe lo creamos
             DAL.PiezaDAL.Insertar(dsEstructura);

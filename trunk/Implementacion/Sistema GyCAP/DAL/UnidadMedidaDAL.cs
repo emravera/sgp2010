@@ -153,5 +153,16 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+
+        public static void ObtenerTodos(System.Data.DataTable dtUnidadMedida)
+        {
+            string sql = "SELECT umed_codigo,tumed_codigo, umed_nombre, umed_abreviatura FROM UNIDADES_MEDIDA";
+
+            try
+            {
+                DB.FillDataTable(dtUnidadMedida, sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
     }
 }
