@@ -53,6 +53,34 @@ namespace GyCAP.DAL
                        
         }
 
+        //MODIFICAR 
+        //Metodo que modifica en la base de datos
+        public static void Actualizar(Entidades.DetalleDemandaAnual detalle)
+        {
+            string sql = @"UPDATE DETALLE_DEMANDAS_ANUALES SET ddeman_cantidadmes = @p0
+                         WHERE deman_codigo = @p1 and ddeman_mes= @p2";
+            object[] valorParametros = { detalle.Cantidadmes , detalle.Demanda.Codigo, detalle.Mes };
+            
+            try
+            {
+                DB.executeNonQuery(sql, valorParametros, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+        //MODIFICAR 
+        //Metodo que devuelve el valor de la identidad
+        public static int ObtenerID(Entidades.DetalleDemandaAnual detalle)
+        {
+            string sql =@"SELECT ddeman_codigo FROM DETALLE_DEMANDAS_ANUALES
+                            WHERE deman_codigo=@p0 and ddeman_mes=@p1";
+            object[] valorParametros = {  detalle.Demanda.Codigo, detalle.Mes };
+
+            try
+            {
+                return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
 
     }
 }

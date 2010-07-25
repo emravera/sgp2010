@@ -23,5 +23,16 @@ namespace GyCAP.BLL
         {
             return DAL.DetalleDemandaAnualDAL.ObtenerCantidadAñoMes(año,nombre,mes);
         }
+        //Metodo para actualizar
+        public static void Actualizar(Entidades.DetalleDemandaAnual detalle)
+        {
+            DAL.DetalleDemandaAnualDAL.Actualizar(detalle);
+        }
+        //Metodo para buscar el ID
+        public static int ObtenerID(Entidades.DetalleDemandaAnual detalle)
+        {
+            return DAL.DetalleDemandaAnualDAL.ObtenerID(detalle);
+        }
+
     }
 }
