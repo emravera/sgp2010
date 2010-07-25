@@ -200,7 +200,10 @@ namespace GyCAP.DAL
         /// </summary>
         public static void FinalizarTransaccion()
         {
-            if (transaccion != null && transaccion.Connection.State == System.Data.ConnectionState.Open) { transaccion.Connection.Close(); }
+            if (transaccion.Connection != null)
+            {
+                if (transaccion.Connection.State == System.Data.ConnectionState.Open) { transaccion.Connection.Close(); }
+            }
         }
 
         /// <summary>
