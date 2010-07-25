@@ -66,6 +66,12 @@ namespace GyCAP.DAL
                 transaccion.Rollback();
                 throw new Entidades.Excepciones.BaseDeDatosException();
             }
+            catch (Exception)
+            {
+                //Error de algún tipo inesperado, descartamos los cambios
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.ErrorInesperadoException();
+            }
             finally
             {
                 //En cualquier caso finalizamos la transaccion para que se cierre la conexion
@@ -228,7 +234,7 @@ namespace GyCAP.DAL
             return pieza;
         }
 
-        public static void ObtenerPiezas(object nombre, object terminacion, Data.dsEstructura ds)
+        public static void ObtenerPiezas(object nombre, object codTerminacion, Data.dsEstructura ds)
         {
             string sql = @"SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, pza_cantidadstock, par_codigo, pno_codigo 
                           FROM PIEZAS WHERE 1=1";
@@ -248,10 +254,10 @@ namespace GyCAP.DAL
                 cantidadParametros++;
             }
             //Revisamos si pasó algun valor y si es un integer
-            if (terminacion != null && terminacion.GetType() == cantidadParametros.GetType())
+            if (codTerminacion != null && codTerminacion.GetType() == cantidadParametros.GetType())
             {
                 sql += " AND te_codigo = @p" + cantidadParametros; 
-                valoresFiltros[cantidadParametros] = Convert.ToInt32(terminacion);
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(codTerminacion);
                 cantidadParametros++;
             }
 
@@ -263,15 +269,35 @@ namespace GyCAP.DAL
                 {
                     valorParametros[i] = valoresFiltros[i];
                 }
-                DB.FillDataSet(ds, "PIEZAS", sql, valorParametros);
+                try
+                {
+                    DB.FillDataSet(ds, "PIEZAS", sql, valorParametros);
+                    ObtenerDetallePiezas(ds);
+                }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
             else
             {
-                //Buscamos sin filtro
-                DB.FillDataSet(ds, "PIEZAS", sql, null);
+                //Buscamos sin filtro - Desactivado 25-07-2010
+                //DB.FillDataSet(ds, "PIEZAS", sql, null);
             }
         }
 
+        //Obtiene el detalle de todas las piezas buscadas, de uso interno por el método buscador ObtenerPiezas
+        private static void ObtenerDetallePiezas(Data.dsEstructura ds)
+        {
+            string sql = @"SELECT dpza_codigo, pza_codigo, mp_codigo, dpza_cantidad
+                         FROM DETALLE_PIEZA WHERE pza_codigo = @p0";
+
+            object[] valorParametros; ;
+
+            foreach (Data.dsEstructura.PIEZASRow rowPieza in ds.PIEZAS)
+            {
+                valorParametros = new object[] { rowPieza.PZA_CODIGO };
+                DB.FillDataTable(ds.DETALLE_PIEZA, sql, valorParametros);
+            }
+        }
+        
         /*public static void ObtenerPiezas(Data.dsEstructura ds)
         {
             string sql = "SELECT pza_codigo, pza_nombre, te_codigo, pza_descripcion, pza_cantidadstock FROM PIEZAS";

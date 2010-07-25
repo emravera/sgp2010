@@ -85,7 +85,7 @@ namespace GyCAP.UI.Sistema
             {
                 foreach (DataRowView dr in dv)
                 {
-                    Item item = new Item(dr[DisplayMember].ToString(), int.Parse(dr[ValueMember].ToString()));
+                    Item item = new Item(dr[DisplayMember].ToString(), Convert.ToInt32(dr[ValueMember].ToString()));
                     control.Items.Add(item);
                 }
             }
