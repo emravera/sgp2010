@@ -68,21 +68,21 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="dsCapacidadEmpleado" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="dsCapacidadEmpleado" msprop:Generator_UserDSName="dsCapacidadEmpleado" msprop:EnableTableAdapterManager="true">
+  <xs:element name="dsCapacidadEmpleado" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsCapacidadEmpleado" msprop:Generator_DataSetName="dsCapacidadEmpleado" msprop:EnableTableAdapterManager="true">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="CAPACIDAD_EMPLEADO" msprop:Generator_UserTableName="CAPACIDAD_EMPLEADO" msprop:Generator_RowDeletedName="CAPACIDAD_EMPLEADORowDeleted" msprop:Generator_TableClassName="CAPACIDAD_EMPLEADODataTable" msprop:Generator_RowChangedName="CAPACIDAD_EMPLEADORowChanged" msprop:Generator_RowClassName="CAPACIDAD_EMPLEADORow" msprop:Generator_RowChangingName="CAPACIDAD_EMPLEADORowChanging" msprop:Generator_RowEvArgName="CAPACIDAD_EMPLEADORowChangeEvent" msprop:Generator_RowEvHandlerName="CAPACIDAD_EMPLEADORowChangeEventHandler" msprop:Generator_TablePropName="CAPACIDAD_EMPLEADO" msprop:Generator_TableVarName="tableCAPACIDAD_EMPLEADO" msprop:Generator_RowDeletingName="CAPACIDAD_EMPLEADORowDeleting">
+        <xs:element name="CAPACIDAD_EMPLEADO" msprop:Generator_UserTableName="CAPACIDAD_EMPLEADO" msprop:Generator_RowDeletedName="CAPACIDAD_EMPLEADORowDeleted" msprop:Generator_RowChangedName="CAPACIDAD_EMPLEADORowChanged" msprop:Generator_RowClassName="CAPACIDAD_EMPLEADORow" msprop:Generator_RowChangingName="CAPACIDAD_EMPLEADORowChanging" msprop:Generator_RowEvArgName="CAPACIDAD_EMPLEADORowChangeEvent" msprop:Generator_RowEvHandlerName="CAPACIDAD_EMPLEADORowChangeEventHandler" msprop:Generator_TableClassName="CAPACIDAD_EMPLEADODataTable" msprop:Generator_TableVarName="tableCAPACIDAD_EMPLEADO" msprop:Generator_RowDeletingName="CAPACIDAD_EMPLEADORowDeleting" msprop:Generator_TablePropName="CAPACIDAD_EMPLEADO">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="CEMP_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="CEMP_CODIGO" msprop:Generator_ColumnPropNameInRow="CEMP_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCEMP_CODIGO" msprop:Generator_ColumnPropNameInTable="CEMP_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="CEMP_NOMBRE" msprop:Generator_UserColumnName="CEMP_NOMBRE" msprop:Generator_ColumnPropNameInRow="CEMP_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnCEMP_NOMBRE" msprop:Generator_ColumnPropNameInTable="CEMP_NOMBREColumn" minOccurs="0">
+              <xs:element name="CEMP_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="CEMP_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCEMP_CODIGO" msprop:Generator_ColumnPropNameInRow="CEMP_CODIGO" msprop:Generator_ColumnPropNameInTable="CEMP_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="CEMP_NOMBRE" msprop:Generator_UserColumnName="CEMP_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnCEMP_NOMBRE" msprop:Generator_ColumnPropNameInRow="CEMP_NOMBRE" msprop:Generator_ColumnPropNameInTable="CEMP_NOMBREColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="80" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="CEMP_DESCRIPCION" msprop:Generator_UserColumnName="CEMP_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="CEMP_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnCEMP_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="CEMP_DESCRIPCIONColumn" minOccurs="0">
+              <xs:element name="CEMP_DESCRIPCION" msprop:Generator_UserColumnName="CEMP_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnCEMP_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="CEMP_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="CEMP_DESCRIPCIONColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="250" />

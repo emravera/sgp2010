@@ -72,18 +72,18 @@ SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION FROM TERMINACIONES WHERE (TE_CODIGO 
   <xs:element name="dsTerminacion" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsTerminacion" msprop:Generator_DataSetName="dsTerminacion" msprop:EnableTableAdapterManager="true">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="TERMINACIONES" msprop:Generator_UserTableName="TERMINACIONES" msprop:Generator_RowDeletedName="TERMINACIONESRowDeleted" msprop:Generator_TableClassName="TERMINACIONESDataTable" msprop:Generator_RowChangedName="TERMINACIONESRowChanged" msprop:Generator_RowClassName="TERMINACIONESRow" msprop:Generator_RowChangingName="TERMINACIONESRowChanging" msprop:Generator_RowEvArgName="TERMINACIONESRowChangeEvent" msprop:Generator_RowEvHandlerName="TERMINACIONESRowChangeEventHandler" msprop:Generator_TablePropName="TERMINACIONES" msprop:Generator_TableVarName="tableTERMINACIONES" msprop:Generator_RowDeletingName="TERMINACIONESRowDeleting">
+        <xs:element name="TERMINACIONES" msprop:Generator_UserTableName="TERMINACIONES" msprop:Generator_RowDeletedName="TERMINACIONESRowDeleted" msprop:Generator_RowChangedName="TERMINACIONESRowChanged" msprop:Generator_RowClassName="TERMINACIONESRow" msprop:Generator_RowChangingName="TERMINACIONESRowChanging" msprop:Generator_RowEvArgName="TERMINACIONESRowChangeEvent" msprop:Generator_RowEvHandlerName="TERMINACIONESRowChangeEventHandler" msprop:Generator_TableClassName="TERMINACIONESDataTable" msprop:Generator_TableVarName="tableTERMINACIONES" msprop:Generator_RowDeletingName="TERMINACIONESRowDeleting" msprop:Generator_TablePropName="TERMINACIONES">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="TE_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="TE_CODIGO" msprop:Generator_ColumnPropNameInRow="TE_CODIGO" msprop:Generator_ColumnVarNameInTable="columnTE_CODIGO" msprop:Generator_ColumnPropNameInTable="TE_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="TE_NOMBRE" msprop:Generator_UserColumnName="TE_NOMBRE" msprop:Generator_ColumnPropNameInRow="TE_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnTE_NOMBRE" msprop:Generator_ColumnPropNameInTable="TE_NOMBREColumn" minOccurs="0">
+              <xs:element name="TE_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="TE_CODIGO" msprop:Generator_ColumnVarNameInTable="columnTE_CODIGO" msprop:Generator_ColumnPropNameInRow="TE_CODIGO" msprop:Generator_ColumnPropNameInTable="TE_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="TE_NOMBRE" msprop:Generator_UserColumnName="TE_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnTE_NOMBRE" msprop:Generator_ColumnPropNameInRow="TE_NOMBRE" msprop:Generator_ColumnPropNameInTable="TE_NOMBREColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="80" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="TE_DESCRIPCION" msprop:Generator_UserColumnName="TE_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="TE_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnTE_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="TE_DESCRIPCIONColumn" minOccurs="0">
+              <xs:element name="TE_DESCRIPCION" msprop:Generator_UserColumnName="TE_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnTE_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="TE_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="TE_DESCRIPCIONColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="250" />

@@ -398,7 +398,6 @@ namespace GyCAP.Data {
                 this.columnMOD_CODIGO.AutoIncrementSeed = -1;
                 this.columnMOD_CODIGO.AutoIncrementStep = -1;
                 this.columnMOD_CODIGO.AllowDBNull = false;
-                this.columnMOD_CODIGO.ReadOnly = true;
                 this.columnMOD_CODIGO.Unique = true;
                 this.columnMOD_NOMBRE.MaxLength = 25;
                 this.columnMOD_DESCRIPCION.MaxLength = 80;

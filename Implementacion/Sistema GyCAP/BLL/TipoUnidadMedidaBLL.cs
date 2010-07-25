@@ -50,5 +50,10 @@ namespace GyCAP.BLL
         {
             DAL.TipoUnidadMedidaDAL.ObtenerTipoUnidadMedida(nombre, ds);
         }
+
+        public static void ObtenerTodos(System.Data.DataTable dtTipoUnidad)
+        {
+            DAL.TipoUnidadMedidaDAL.ObtenerTipoUnidadMedida(dtTipoUnidad);
+        }
     }
 }

@@ -98,6 +98,16 @@ namespace GyCAP.DAL
             }
         }
 
+        public static void ObtenerTipoUnidadMedida(System.Data.DataTable dtTipoUnidad)
+        {
+            string sql = "SELECT tumed_codigo, tumed_nombre FROM TIPOS_UNIDADES_MEDIDA";
+            try
+            {
+                DB.FillDataTable(dtTipoUnidad, sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
         public static bool PuedeEliminarse(int codigo)
         {
             string sql = "SELECT count(tumed_codigo) FROM UNIDADES_MEDIDA WHERE tumed_codigo = @p0";

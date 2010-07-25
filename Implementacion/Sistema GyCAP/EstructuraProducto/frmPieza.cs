@@ -13,10 +13,9 @@ namespace GyCAP.UI.EstructuraProducto
     {
         private static frmPieza _frmPieza = null;
         private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
-        private Data.dsTerminacion dsTerminacion = new GyCAP.Data.dsTerminacion();
         private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
         private DataView dvPiezas, dvDetallePieza, dvMPDisponibles, dvUnidadMedida;
-        private DataView dvTerminacionBuscar, dvTerminaciones;
+        private DataView dvTerminacionBuscar, dvTerminaciones, dvEstado, dvPlano;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
@@ -159,8 +158,14 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            //Revisamos que completó los datos
-            if (txtNombre.Text != String.Empty && cbTerminacion.SelectedIndex != -1 && dgvDetallePieza.Rows.Count != 0)
+            //Datos opcionales = plano, descripcion, imagen
+            //Revisamos que completó los datos obligatorios
+            bool datosOK = true;
+            if (txtNombre.Text == String.Empty) { datosOK = false; }
+            if (((Sistema.Item)cbTerminacion.SelectedItem).Value == 0) { datosOK = false; }
+            if (((Sistema.Item)cbEstado.SelectedItem).Value == 0) { datosOK = false; }
+            if (dgvDetallePieza.Rows.GetRowCount(DataGridViewElementStates.Selected) == 0) { datosOK = false; }
+            if (datosOK)
             {
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
@@ -175,7 +180,10 @@ namespace GyCAP.UI.EstructuraProducto
                         rowPieza.BeginEdit();
                         rowPieza.PZA_CODIGO = -1;
                         rowPieza.PZA_NOMBRE = txtNombre.Text;
-                        rowPieza.TE_CODIGO = Convert.ToInt32(cbTerminacion.SelectedValue.ToString());
+                        rowPieza.TE_CODIGO = ((Sistema.Item)cbTerminacion.SelectedItem).Value;
+                        rowPieza.PAR_CODIGO = ((Sistema.Item)cbEstado.SelectedItem).Value;
+                        rowPieza.PNO_CODIGO = ((Sistema.Item)cbEstado.SelectedItem).Value;
+                        rowPieza.PZA_DESCRIPCION = txtDescripcion.Text;
                         rowPieza.EndEdit();
                         dsEstructura.PIEZAS.AddPIEZASRow(rowPieza);
                         //Todavia no aceptamos los cambios porque necesitamos que queden marcadas como nuevas las filas
@@ -514,16 +522,14 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void SetSlide()
         {
-            panelDatos.Parent = slideDatos;
-            panelAgregar.Parent = slideAgregar;
-            panelImagen.Parent = slideDatos;
-
+            gbDatos.Parent = slideDatos;
+            gbMPDisponibles.Parent = slideAgregar;
             slideControl.AddSlide(slideAgregar);
             slideControl.AddSlide(slideDatos);
             slideControl.Selected = slideDatos;
-            panelDatos.Location = new Point(0, 10);
-            panelAgregar.Location = new Point(7, 7);
-            panelImagen.Location = new Point(405, 15);
+            //panelDatos.Location = new Point(0, 10);
+            //panelAgregar.Location = new Point(7, 7);
+            //panelImagen.Location = new Point(405, 15);
         }
 
         private void setGrillasVistasCombo()
@@ -535,12 +541,13 @@ namespace GyCAP.UI.EstructuraProducto
             //Agregamos las columnas y sus propiedades
             dgvPiezas.Columns.Add("PZA_NOMBRE", "Nombre");
             dgvPiezas.Columns.Add("TE_CODIGO", "Terminación");
-            dgvPiezas.Columns.Add("PZA_DESCRIPCION", "Descripción");
+            dgvPiezas.Columns.Add("PAR_CODIGO", "Estado");
+            dgvPiezas.Columns.Add("PNO_PLANO", "Plano");
             dgvPiezas.Columns["PZA_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPiezas.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPiezas.Columns["PZA_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvPiezas.Columns["PZA_DESCRIPCION"].Resizable = DataGridViewTriState.True;
-
+            dgvPiezas.Columns["PAR_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPiezas.Columns["PNO_PLANO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+           
             dgvDetallePieza.Columns.Add("MP_NOMBRE", "Nombre");
             dgvDetallePieza.Columns.Add("UMED_CODIGO", "Unidad Medida");
             dgvDetallePieza.Columns.Add("DPZA_CANTIDAD", "Cantidad");
@@ -560,10 +567,11 @@ namespace GyCAP.UI.EstructuraProducto
             //Indicamos de dónde van a sacar los datos cada columna
             dgvPiezas.Columns["PZA_NOMBRE"].DataPropertyName = "PZA_NOMBRE";
             dgvPiezas.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
-            dgvPiezas.Columns["PZA_DESCRIPCION"].DataPropertyName = "PZA_DESCRIPCION";
+            dgvPiezas.Columns["PAR_CODIGO"].DataPropertyName = "PAR_CODIGO";
+            dgvPiezas.Columns["PNO_PLANO"].DataPropertyName = "PAR_CODIGO";
 
             dgvDetallePieza.Columns["MP_NOMBRE"].DataPropertyName = "MP_CODIGO";
-            dgvDetallePieza.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
+            dgvDetallePieza.Columns["UMED_CODIGO"].DataPropertyName = "MP_CODIGO";
             dgvDetallePieza.Columns["DPZA_CANTIDAD"].DataPropertyName = "DPZA_CANTIDAD";
 
             dgvMPDisponibles.Columns["MP_NOMBRE"].DataPropertyName = "MP_NOMBRE";
@@ -581,31 +589,35 @@ namespace GyCAP.UI.EstructuraProducto
             dvMPDisponibles.Sort = "MP_NOMBRE ASC";
             dgvMPDisponibles.DataSource = dvMPDisponibles;
             dvUnidadMedida = new DataView(dsUnidadMedida.UNIDADES_MEDIDA);
+            dvEstado = new DataView(dsEstructura.ESTADO_PARTES);
+            dvEstado.Sort = "PAR_NOMBRE";
+            dvPlano = new DataView(dsEstructura.PLANOS);
+            dvPlano.Sort = "PNO_NOMBRE";
 
-            //Obtenemos las terminaciones
+            //Obtenemos las terminaciones, los planos, los estados de las piezas, las MP y las terminaciones
             
             try
             {
-                BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsTerminacion);
-
+                BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsEstructura.TERMINACIONES);
+                BLL.PlanoBLL.ObtenerTodos(dsEstructura.PLANOS);
+                BLL.EstadoParteBLL.ObtenerTodos(dsEstructura.ESTADO_PARTES);
+                BLL.MateriaPrimaBLL.ObtenerTodos(dsEstructura.MATERIAS_PRIMAS);
+                BLL.UnidadMedidaBLL.ObtenerTodos(dsUnidadMedida.UNIDADES_MEDIDA);
+                BLL.TipoUnidadMedidaBLL.ObtenerTodos(dsUnidadMedida.TIPOS_UNIDADES_MEDIDA);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
                 MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            dvTerminaciones = new DataView(dsTerminacion.TERMINACIONES);
+            dvTerminaciones = new DataView(dsEstructura.TERMINACIONES);
             dvTerminaciones.Sort = "TE_NOMBRE ASC";
-            cbTerminacion.DataSource = dvTerminaciones;
-            cbTerminacion.DisplayMember = "te_nombre";
-            cbTerminacion.ValueMember = "te_codigo";
-            cbTerminacion.SelectedIndex = -1;
-            dvTerminacionBuscar = new DataView(dsTerminacion.TERMINACIONES);
+            dvTerminacionBuscar = new DataView(dsEstructura.TERMINACIONES);
             dvTerminacionBuscar.Sort = "TE_NOMBRE ASC";
-            cbTerminacionBuscar.DataSource = dvTerminacionBuscar;
-            cbTerminacionBuscar.DisplayMember = "te_nombre";
-            cbTerminacionBuscar.ValueMember = "te_codigo";
-            cbTerminacionBuscar.SelectedIndex = -1;
+            Sistema.FuncionesAuxiliares.llenarCombosFiltros(dvTerminacionBuscar, cbTerminacionBuscar, "te_codigo", "te_nombre", "--TODOS--");
+            Sistema.FuncionesAuxiliares.llenarCombosFiltros(dvTerminaciones, cbTerminacion, "te_codigo", "te_nombre", "--SELECCIONE--");
+            Sistema.FuncionesAuxiliares.llenarCombosFiltros(dvEstado, cbEstado, "par_codigo", "par_nombre", "--SELECCIONE--");
+            Sistema.FuncionesAuxiliares.llenarCombosFiltros(dvPlano, cbPlano, "pno_codigo", "pno_nombre", "--SELECCIONE--");
 
             //Seteos para los controles de la imagen
             pbImagen.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -618,10 +630,23 @@ namespace GyCAP.UI.EstructuraProducto
             if (e.Value.ToString() != string.Empty)
             {
                 string nombre;
-                if (dgvPiezas.Columns[e.ColumnIndex].Name == "te_codigo")
+
+                switch (dgvPiezas.Columns[e.ColumnIndex].Name)
                 {
-                    nombre = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(Convert.ToInt32(e.Value.ToString())).TE_NOMBRE;
-                    e.Value = nombre;
+                    case "te_codigo":
+                        nombre = dsEstructura.TERMINACIONES.FindByTE_CODIGO(Convert.ToInt32(e.Value.ToString())).TE_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "par_codigo":
+                        nombre = dsEstructura.ESTADO_PARTES.FindByPAR_CODIGO(Convert.ToInt32(e.Value.ToString())).PAR_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "pno_codigo":
+                        nombre = dsEstructura.PLANOS.FindByPNO_CODIGO(Convert.ToInt32(e.Value.ToString())).PNO_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -631,10 +656,19 @@ namespace GyCAP.UI.EstructuraProducto
             if (e.Value.ToString() != string.Empty)
             {
                 string nombre;
-                if (dgvDetallePieza.Columns[e.ColumnIndex].Name == "umed_codigo")
+                switch (dgvDetallePieza.Columns[e.ColumnIndex].Name)
                 {
-                    nombre = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(Convert.ToInt32(e.Value.ToString())).UMED_NOMBRE;
-                    e.Value = nombre;                        
+                    case "MP_NOMBRE":
+                        nombre = dsEstructura.MATERIAS_PRIMAS.FindByMP_CODIGO(Convert.ToInt32(e.Value.ToString())).MP_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "UMED_CODIGO":
+                        decimal codigoUnidad = dsEstructura.MATERIAS_PRIMAS.FindByMP_CODIGO(Convert.ToInt32(e.Value.ToString())).UMED_CODIGO;
+                        nombre = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigoUnidad).UMED_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -644,7 +678,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (e.Value.ToString() != string.Empty)
             {
                 string nombre;
-                if (dgvDetallePieza.Columns[e.ColumnIndex].Name == "umed_codigo")
+                if (dgvDetallePieza.Columns[e.ColumnIndex].Name == "UMED_CODIGO")
                 {
                     nombre = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(Convert.ToInt32(e.Value.ToString())).UMED_NOMBRE;
                     e.Value = nombre;

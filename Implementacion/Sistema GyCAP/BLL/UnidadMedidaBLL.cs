@@ -57,5 +57,10 @@ namespace GyCAP.BLL
             DAL.UnidadMedidaDAL.Actualizar(unidadMedida);
         }
 
+        public static void ObtenerTodos(System.Data.DataTable dtUnidadMedida)
+        {
+            DAL.UnidadMedidaDAL.ObtenerTodos(dtUnidadMedida);
+        }
+
     }
 }

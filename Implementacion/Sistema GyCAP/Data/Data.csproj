@@ -90,6 +90,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsEstimarDemanda.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsEstructura.cs">
+      <DependentUpon>dsEstructura.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="dsEstructura.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

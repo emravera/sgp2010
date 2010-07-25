@@ -68,21 +68,21 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="dsEstadoEmpleado" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="dsEstadoEmpleado" msprop:Generator_UserDSName="dsEstadoEmpleado" msprop:EnableTableAdapterManager="true">
+  <xs:element name="dsEstadoEmpleado" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsEstadoEmpleado" msprop:Generator_DataSetName="dsEstadoEmpleado" msprop:EnableTableAdapterManager="true">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="ESTADO_EMPLEADOS" msprop:Generator_UserTableName="ESTADO_EMPLEADOS" msprop:Generator_RowDeletedName="ESTADO_EMPLEADOSRowDeleted" msprop:Generator_TableClassName="ESTADO_EMPLEADOSDataTable" msprop:Generator_RowChangedName="ESTADO_EMPLEADOSRowChanged" msprop:Generator_RowClassName="ESTADO_EMPLEADOSRow" msprop:Generator_RowChangingName="ESTADO_EMPLEADOSRowChanging" msprop:Generator_RowEvArgName="ESTADO_EMPLEADOSRowChangeEvent" msprop:Generator_RowEvHandlerName="ESTADO_EMPLEADOSRowChangeEventHandler" msprop:Generator_TablePropName="ESTADO_EMPLEADOS" msprop:Generator_TableVarName="tableESTADO_EMPLEADOS" msprop:Generator_RowDeletingName="ESTADO_EMPLEADOSRowDeleting">
+        <xs:element name="ESTADO_EMPLEADOS" msprop:Generator_UserTableName="ESTADO_EMPLEADOS" msprop:Generator_RowDeletedName="ESTADO_EMPLEADOSRowDeleted" msprop:Generator_RowChangedName="ESTADO_EMPLEADOSRowChanged" msprop:Generator_RowClassName="ESTADO_EMPLEADOSRow" msprop:Generator_RowChangingName="ESTADO_EMPLEADOSRowChanging" msprop:Generator_RowEvArgName="ESTADO_EMPLEADOSRowChangeEvent" msprop:Generator_RowEvHandlerName="ESTADO_EMPLEADOSRowChangeEventHandler" msprop:Generator_TableClassName="ESTADO_EMPLEADOSDataTable" msprop:Generator_TableVarName="tableESTADO_EMPLEADOS" msprop:Generator_RowDeletingName="ESTADO_EMPLEADOSRowDeleting" msprop:Generator_TablePropName="ESTADO_EMPLEADOS">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="EE_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="EE_CODIGO" msprop:Generator_ColumnPropNameInRow="EE_CODIGO" msprop:Generator_ColumnVarNameInTable="columnEE_CODIGO" msprop:Generator_ColumnPropNameInTable="EE_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="EE_NOMBRE" msprop:Generator_UserColumnName="EE_NOMBRE" msprop:Generator_ColumnPropNameInRow="EE_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnEE_NOMBRE" msprop:Generator_ColumnPropNameInTable="EE_NOMBREColumn" minOccurs="0">
+              <xs:element name="EE_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="EE_CODIGO" msprop:Generator_ColumnVarNameInTable="columnEE_CODIGO" msprop:Generator_ColumnPropNameInRow="EE_CODIGO" msprop:Generator_ColumnPropNameInTable="EE_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="EE_NOMBRE" msprop:Generator_UserColumnName="EE_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnEE_NOMBRE" msprop:Generator_ColumnPropNameInRow="EE_NOMBRE" msprop:Generator_ColumnPropNameInTable="EE_NOMBREColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="30" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="EE_DESCRIPCION" msprop:Generator_UserColumnName="EE_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="EE_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnEE_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="EE_DESCRIPCIONColumn" minOccurs="0">
+              <xs:element name="EE_DESCRIPCION" msprop:Generator_UserColumnName="EE_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnEE_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="EE_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="EE_DESCRIPCIONColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="80" />

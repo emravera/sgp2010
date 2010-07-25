@@ -70,6 +70,7 @@
     <Compile Include="EstadoEmpleadoBLL.cs" />
     <Compile Include="EstadoMaquinaBLL.cs" />
     <Compile Include="EstadoOrdenTrabajoBLL.cs" />
+    <Compile Include="EstadoParteBLL.cs" />
     <Compile Include="EstadoPedidoBLL.cs" />
     <Compile Include="EstadoPlanMantenimientoBLL.cs" />
     <Compile Include="EstadoUsuarioBLL.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="PlanAnualBLL.cs" />
     <Compile Include="PlanMantenimientoBLL.cs" />
     <Compile Include="PlanMensualBLL.cs" />
+    <Compile Include="PlanoBLL.cs" />
     <Compile Include="PlanSemanalBLL.cs" />
     <Compile Include="ProcesoBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

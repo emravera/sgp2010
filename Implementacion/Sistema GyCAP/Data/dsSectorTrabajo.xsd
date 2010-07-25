@@ -75,28 +75,28 @@ SELECT SEC_CODIGO, SEC_NOMBRE, SEC_DESCRIPCION, SEC_ABREVIATURA FROM SECTORES WH
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="dsSectorTrabajo" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="dsSectorTrabajo" msprop:Generator_UserDSName="dsSectorTrabajo" msprop:EnableTableAdapterManager="true">
+  <xs:element name="dsSectorTrabajo" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsSectorTrabajo" msprop:Generator_DataSetName="dsSectorTrabajo" msprop:EnableTableAdapterManager="true">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="SECTORES" msprop:Generator_UserTableName="SECTORES" msprop:Generator_RowDeletedName="SECTORESRowDeleted" msprop:Generator_TableClassName="SECTORESDataTable" msprop:Generator_RowChangedName="SECTORESRowChanged" msprop:Generator_RowClassName="SECTORESRow" msprop:Generator_RowChangingName="SECTORESRowChanging" msprop:Generator_RowEvArgName="SECTORESRowChangeEvent" msprop:Generator_RowEvHandlerName="SECTORESRowChangeEventHandler" msprop:Generator_TablePropName="SECTORES" msprop:Generator_TableVarName="tableSECTORES" msprop:Generator_RowDeletingName="SECTORESRowDeleting">
+        <xs:element name="SECTORES" msprop:Generator_UserTableName="SECTORES" msprop:Generator_RowDeletedName="SECTORESRowDeleted" msprop:Generator_RowChangedName="SECTORESRowChanged" msprop:Generator_RowClassName="SECTORESRow" msprop:Generator_RowChangingName="SECTORESRowChanging" msprop:Generator_RowEvArgName="SECTORESRowChangeEvent" msprop:Generator_RowEvHandlerName="SECTORESRowChangeEventHandler" msprop:Generator_TableClassName="SECTORESDataTable" msprop:Generator_TableVarName="tableSECTORES" msprop:Generator_RowDeletingName="SECTORESRowDeleting" msprop:Generator_TablePropName="SECTORES">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="SEC_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="SEC_CODIGO" msprop:Generator_ColumnPropNameInRow="SEC_CODIGO" msprop:Generator_ColumnVarNameInTable="columnSEC_CODIGO" msprop:Generator_ColumnPropNameInTable="SEC_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="SEC_NOMBRE" msprop:Generator_UserColumnName="SEC_NOMBRE" msprop:Generator_ColumnPropNameInRow="SEC_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnSEC_NOMBRE" msprop:Generator_ColumnPropNameInTable="SEC_NOMBREColumn" minOccurs="0">
+              <xs:element name="SEC_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="SEC_CODIGO" msprop:Generator_ColumnVarNameInTable="columnSEC_CODIGO" msprop:Generator_ColumnPropNameInRow="SEC_CODIGO" msprop:Generator_ColumnPropNameInTable="SEC_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="SEC_NOMBRE" msprop:Generator_UserColumnName="SEC_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnSEC_NOMBRE" msprop:Generator_ColumnPropNameInRow="SEC_NOMBRE" msprop:Generator_ColumnPropNameInTable="SEC_NOMBREColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="30" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="SEC_DESCRIPCION" msprop:Generator_UserColumnName="SEC_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="SEC_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnSEC_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="SEC_DESCRIPCIONColumn" minOccurs="0">
+              <xs:element name="SEC_DESCRIPCION" msprop:Generator_UserColumnName="SEC_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnSEC_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="SEC_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="SEC_DESCRIPCIONColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="80" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="SEC_ABREVIATURA" msprop:Generator_UserColumnName="SEC_ABREVIATURA" msprop:Generator_ColumnPropNameInRow="SEC_ABREVIATURA" msprop:Generator_ColumnVarNameInTable="columnSEC_ABREVIATURA" msprop:Generator_ColumnPropNameInTable="SEC_ABREVIATURAColumn" minOccurs="0">
+              <xs:element name="SEC_ABREVIATURA" msprop:Generator_UserColumnName="SEC_ABREVIATURA" msprop:Generator_ColumnVarNameInTable="columnSEC_ABREVIATURA" msprop:Generator_ColumnPropNameInRow="SEC_ABREVIATURA" msprop:Generator_ColumnPropNameInTable="SEC_ABREVIATURAColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="10" />
