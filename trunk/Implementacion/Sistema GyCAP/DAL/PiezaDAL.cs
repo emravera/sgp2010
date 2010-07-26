@@ -278,8 +278,9 @@ namespace GyCAP.DAL
             }
             else
             {
-                //Buscamos sin filtro - Desactivado 25-07-2010
-                //DB.FillDataSet(ds, "PIEZAS", sql, null);
+                //Buscamos sin filtro
+                DB.FillDataSet(ds, "PIEZAS", sql, null);
+                ObtenerDetallePiezas(ds);
             }
         }
 
