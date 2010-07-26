@@ -89,6 +89,11 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
             else { texto.Visible = false; }
         }
 
+        /// <summary>
+        /// Define el SelectedValue del combobox. Es decir que se seleccionará el item que posea el valor que
+        /// se pase por parámetro.
+        /// </summary>
+        /// <param name="valor">El valor a asignar a SelectedValue.</param>
         public void SetSelectedValue(int valor)
         {
             this.SelectedValue = valor;
