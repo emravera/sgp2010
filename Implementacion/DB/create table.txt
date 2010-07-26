@@ -826,3 +826,18 @@ create table ESTADO_PARTES (
    PAR_DESCRIPCION      varchar(200)         null,
    constraint PK_ESTADO_PARTES primary key nonclustered (PAR_CODIGO)
 )
+
+/*--------AGREGADO 26/07/2010--------*/
+
+/*==============================================================*/
+/* Table: DETALLE_PLAN_ANUAL                                    */
+/*==============================================================*/
+
+
+create table DETALLE_PLAN_ANUAL (
+   DPAN_CODIGO          numeric(10)          identity,
+   PAN_CODIGO           numeric(10)          not null,
+   DPAN_MES             varchar(10)          null,
+   DPAN_CANTIDADMES     numeric(10)          null,
+   constraint PK_DETALLE_PLAN_ANUAL primary key nonclustered (PAN_CODIGO)
+)
