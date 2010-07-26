@@ -80,11 +80,17 @@ namespace GyCAP.BLL
             return DAL.SubConjuntoDAL.ObtenerSubconjunto(codigoSubconjunto);
         }
 
-        public static void ObtenerSubconjuntos(object nombre, object terminacion, Data.dsEstructura ds)
+        public static void ObtenerSubconjuntos(object nombre, object codTerminacion, Data.dsEstructura ds, bool obtenerDetalle)
         {
-            DAL.SubConjuntoDAL.ObtenerSubconjuntos(nombre, terminacion, ds);
+            if (codTerminacion != null && Convert.ToInt32(codTerminacion.ToString()) <= 0) { codTerminacion = null; }
+            DAL.SubConjuntoDAL.ObtenerSubconjuntos(nombre, codTerminacion, ds, obtenerDetalle);
         }
 
+        public static void ObtenerSubconjuntos(System.Data.DataTable dtSubconjuntos)
+        {
+            DAL.SubConjuntoDAL.ObtenerSubconjuntos(dtSubconjuntos);
+        }
+        
         /*public static void ObtenerTodos(Data.dsEstructura ds)
         {
             DAL.SubConjuntoDAL.ObtenerSubconjuntos(ds);

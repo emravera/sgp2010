@@ -227,7 +227,7 @@ namespace GyCAP.DAL
             return conjunto;
         }
 
-        public static void ObtenerConjuntos(object nombre, object terminacion, Data.dsEstructura ds)
+        public static void ObtenerConjuntos(object nombre, object codTerminacion, Data.dsEstructura ds, bool obtenerDetalle)
         {
             string sql = @"SELECT conj_codigo, conj_nombre, conj_descripcion, te_codigo, conj_cantidadstock, par_codigo, pno_codigo 
                         FROM CONJUNTOS WHERE 1=1";
@@ -247,10 +247,10 @@ namespace GyCAP.DAL
                 cantidadParametros++;
             }
             //Revisamos si pasó algun valor y si es un integer
-            if (terminacion != null && terminacion.GetType() == cantidadParametros.GetType())
+            if (codTerminacion != null && codTerminacion.GetType() == cantidadParametros.GetType())
             {
                 sql += " AND te_codigo = @p" + cantidadParametros; 
-                valoresFiltros[cantidadParametros] = Convert.ToInt32(terminacion);
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(codTerminacion);
                 cantidadParametros++;
             }
 
@@ -262,12 +262,37 @@ namespace GyCAP.DAL
                 {
                     valorParametros[i] = valoresFiltros[i];
                 }
-                DB.FillDataSet(ds, "CONJUNTOS", sql, valorParametros);
+                try
+                {
+                    DB.FillDataSet(ds, "CONJUNTOS", sql, valorParametros);
+                    if (obtenerDetalle) { ObtenerDetalleConjuntos(ds); }
+                }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
             else
             {
                 //Buscamos sin filtro
-                DB.FillDataSet(ds, "CONJUNTOS", sql, null);
+                try
+                {
+                    DB.FillDataSet(ds, "CONJUNTOS", sql, null);
+                    if (obtenerDetalle) { ObtenerDetalleConjuntos(ds); }
+                }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            }
+        }
+
+        //Obtiene el detalle de todos los subconjuntos buscadas, de uso interno por el método buscador ObtenerSubconjuntos
+        private static void ObtenerDetalleConjuntos(Data.dsEstructura ds)
+        {
+            string sql = @"SELECT dcj_codigo, conj_codigo, sconj_codigo, dcj_cantidad
+                         FROM DETALLE_CONJUNTO WHERE conj_codigo = @p0";
+
+            object[] valorParametros; ;
+
+            foreach (Data.dsEstructura.CONJUNTOSRow rowConjunto in ds.CONJUNTOS)
+            {
+                valorParametros = new object[] { rowConjunto.CONJ_CODIGO };
+                DB.FillDataTable(ds.DETALLE_CONJUNTO, sql, valorParametros);
             }
         }
         

@@ -234,7 +234,7 @@ namespace GyCAP.DAL
             return pieza;
         }
 
-        public static void ObtenerPiezas(object nombre, object codTerminacion, Data.dsEstructura ds)
+        public static void ObtenerPiezas(object nombre, object codTerminacion, Data.dsEstructura ds, bool obtenerDetalle)
         {
             string sql = @"SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, pza_cantidadstock, par_codigo, pno_codigo 
                           FROM PIEZAS WHERE 1=1";
@@ -272,16 +272,32 @@ namespace GyCAP.DAL
                 try
                 {
                     DB.FillDataSet(ds, "PIEZAS", sql, valorParametros);
-                    ObtenerDetallePiezas(ds);
+                    if (obtenerDetalle) { ObtenerDetallePiezas(ds); }
                 }
                 catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
             else
             {
                 //Buscamos sin filtro
-                DB.FillDataSet(ds, "PIEZAS", sql, null);
-                ObtenerDetallePiezas(ds);
+                try
+                {
+                    DB.FillDataSet(ds, "PIEZAS", sql, null);
+                    if (obtenerDetalle) { ObtenerDetallePiezas(ds); }
+                }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
+        }
+
+        public static void ObtenerPiezas(System.Data.DataTable dtPiezas)
+        {
+            string sql = @"SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, pza_cantidadstock, par_codigo, pno_codigo 
+                          FROM PIEZAS";
+                   
+            try
+            {
+                DB.FillDataTable(dtPiezas, sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         //Obtiene el detalle de todas las piezas buscadas, de uso interno por el método buscador ObtenerPiezas

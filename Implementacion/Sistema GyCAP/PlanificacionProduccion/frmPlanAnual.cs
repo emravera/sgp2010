@@ -12,7 +12,7 @@ namespace GyCAP.UI.PlanificacionProduccion
     public partial class frmPlanAnual : Form
     {
         private static frmPlanAnual _frmPlanAnual = null;
-        private Data dsPlanAnual = new GyCAP.Data.dsEstimarDemanda();
+        //private Data dsPlanAnual = new GyCAP.Data.dsEstimarDemanda();
         private DataView dvListaPlanes, dvListaDetalle, dvChAnios, dvComboEstimaciones;
         private enum estadoUI { inicio, nuevo, buscar, modificar, calcularPlanificacion };
         private static estadoUI estadoActual;
@@ -47,7 +47,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvLista.Columns["PAN_FECHACREACION"].DataPropertyName = "PAN_FECHACREACION";
 
             //Creamos el dataview y lo asignamos a la grilla
-            dvListaPlanes= new DataView(dsEstimarDemanda.DEMANDAS_ANUALES);
+            dvListaPlanes = new DataView();//dsEstimarDemanda.DEMANDAS_ANUALES);
             dvListaPlanes.Sort = "PAN_ANIO ASC";
             dgvLista.DataSource = dvListaPlanes;
 

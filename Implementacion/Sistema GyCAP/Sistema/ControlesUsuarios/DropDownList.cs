@@ -128,6 +128,7 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
 
             if (dataview.Count > 0)
             {
+                dataview.Sort = displayMember + " ASC";
                 foreach (DataRowView dr in dataview)
                 {
                     lista.Add(new ItemLista(Convert.ToInt32(dr[valueMember].ToString()), dr[displayMember].ToString()));

@@ -80,9 +80,10 @@ namespace GyCAP.BLL
             return DAL.ConjuntoDAL.ObtenerConjunto(codigoConjunto);
         }
 
-        public static void ObtenerConjuntos(object nombre, object terminacion, Data.dsEstructura ds)
+        public static void ObtenerConjuntos(object nombre, object codTerminacion, Data.dsEstructura ds, bool obtenerDetalle)
         {
-            DAL.ConjuntoDAL.ObtenerConjuntos(nombre, terminacion, ds);
+            if (codTerminacion != null && Convert.ToInt32(codTerminacion.ToString()) <= 0) { codTerminacion = null; }
+            DAL.ConjuntoDAL.ObtenerConjuntos(nombre, codTerminacion, ds, obtenerDetalle);
         }
         
         /*public static void ObtenerTodos(Data.dsEstructura ds)

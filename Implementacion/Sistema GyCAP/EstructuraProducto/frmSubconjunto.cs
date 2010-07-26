@@ -13,15 +13,15 @@ namespace GyCAP.UI.EstructuraProducto
     {
         private static frmSubconjunto _frmSubconjunto = null;
         private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
-        private Data.dsTerminacion dsTerminacion = new GyCAP.Data.dsTerminacion();
+        //private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
         private DataView dvSubconjuntos, dvDetalleSubconjunto, dvPiezasDisponibles;
-        private DataView dvTerminacionBuscar, dvTerminaciones;
+        private DataView dvTerminacionBuscar, dvTerminaciones, dvEstados, dvPlanos;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
         //Variable que simula el código autodecremental para el detalle, usa valores negativos para no tener problemas con valores existentes
-        int codigoDetalle = 0;
+        int codigoDetalle = -1;
         
         public frmSubconjunto()
         {
@@ -76,11 +76,10 @@ namespace GyCAP.UI.EstructuraProducto
             try
             {
                 dsEstructura.SUBCONJUNTOS.Clear();
-                dsEstructura.PIEZAS.Clear();
                 dsEstructura.DETALLE_SUBCONJUNTO.Clear();
 
                 //Busquemos, no importa si ingresó algo o no, ya se encargarán las otras clases de verificarlo
-                BLL.SubConjuntoBLL.ObtenerSubconjuntos(txtNombreBuscar.Text, cbTerminacionBuscar.SelectedValue, dsEstructura);
+                BLL.SubConjuntoBLL.ObtenerSubconjuntos(txtNombreBuscar.Text, cbTerminacionBuscar.SelectedValue, dsEstructura, true);
 
                 if (dsEstructura.SUBCONJUNTOS.Rows.Count == 0)
                 {
@@ -158,8 +157,14 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            bool datosOK = true;
             //Revisamos que completó los datos
-            if (txtNombre.Text != String.Empty && cbTerminacion.SelectedIndex != -1 && dgvDetalleSubconjunto.Rows.Count != 0)
+            if (txtNombre.Text == string.Empty) { datosOK = false; }
+            if (cbTerminacion.SelectedIndex == -1) { datosOK = false; }
+            if (cbEstado.SelectedIndex == -1) { datosOK = false; }
+            if (cbPlano.SelectedIndex == -1) { datosOK = false; }
+            if (dgvDetalleSubconjunto.Rows.Count == 0) { datosOK = false; }
+            if (datosOK)
             {
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
@@ -175,6 +180,9 @@ namespace GyCAP.UI.EstructuraProducto
                         rowSubconjunto.SCONJ_CODIGO = -1;
                         rowSubconjunto.SCONJ_NOMBRE = txtNombre.Text;
                         rowSubconjunto.TE_CODIGO = Convert.ToInt32(cbTerminacion.SelectedValue.ToString());
+                        rowSubconjunto.PAR_CODIGO = Convert.ToInt32(cbEstado.SelectedValue.ToString());
+                        rowSubconjunto.PNO_CODIGO = Convert.ToInt32(cbPlano.SelectedValue.ToString());
+                        rowSubconjunto.SCONJ_DESCRIPCION = txtDescripcion.Text;
                         rowSubconjunto.EndEdit();
                         dsEstructura.SUBCONJUNTOS.AddSUBCONJUNTOSRow(rowSubconjunto);
                         //Todavia no aceptamos los cambios porque necesitamos que queden marcadas como nuevas las filas
@@ -223,6 +231,8 @@ namespace GyCAP.UI.EstructuraProducto
                     //actualizando en el dataset a medida que el usuario ejecutaba una acción
                     dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).SCONJ_NOMBRE = txtNombre.Text;
                     dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).TE_CODIGO = Convert.ToInt32(cbTerminacion.SelectedValue);
+                    dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).PAR_CODIGO = Convert.ToInt32(cbEstado.SelectedValue);
+                    dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).PNO_CODIGO = Convert.ToInt32(cbPlano.SelectedValue);
                     dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).SCONJ_DESCRIPCION = txtDescripcion.Text;
                     try
                     {
@@ -282,7 +292,7 @@ namespace GyCAP.UI.EstructuraProducto
                 //Obtenemos el código
                 int codigoDSC = Convert.ToInt32(dvDetalleSubconjunto[dgvDetalleSubconjunto.SelectedRows[0].Index]["dsc_codigo"]);
                 //Aumentamos la cantidad
-                dsEstructura.DETALLE_SUBCONJUNTO.FindByDSC_CODIGO(codigoDSC).DSC_CANTIDAD++; ;
+                dsEstructura.DETALLE_SUBCONJUNTO.FindByDSC_CODIGO(codigoDSC).DSC_CANTIDAD += Convert.ToDecimal(0.1);
             }
             else
             {
@@ -297,7 +307,7 @@ namespace GyCAP.UI.EstructuraProducto
                 //Obtenemos el código
                 int codigoDSC = Convert.ToInt32(dvDetalleSubconjunto[dgvDetalleSubconjunto.SelectedRows[0].Index]["dsc_codigo"]);
                 //Disminuimos la cantidad
-                dsEstructura.DETALLE_SUBCONJUNTO.FindByDSC_CODIGO(codigoDSC).DSC_CANTIDAD--; ;
+                dsEstructura.DETALLE_SUBCONJUNTO.FindByDSC_CODIGO(codigoDSC).DSC_CANTIDAD -= Convert.ToDecimal(0.1);
             }
             else
             {
@@ -429,13 +439,23 @@ namespace GyCAP.UI.EstructuraProducto
                     btnNuevo.Enabled = true;
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.inicio;
-                    tcConjunto.SelectedTab = tpBuscar;
+                    tcSubconjunto.SelectedTab = tpBuscar;
+                    txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
+                    txtCodigo.ReadOnly = false;
+                    txtCodigo.Clear();
+                    chkAutogenerar.Enabled = true;
+                    chkAutogenerar.Checked = false;
                     txtNombre.ReadOnly = false;
-                    txtNombre.Text = String.Empty;
+                    txtNombre.Clear();
                     cbTerminacion.Enabled = true;
-                    cbTerminacion.SelectedIndex = -1;
+                    cbTerminacion.SetTexto("Seleccione");
+                    cbEstado.Enabled = true;
+                    cbEstado.SetTexto("Seleccione");
+                    cbPlano.Enabled = true;
+                    cbPlano.SetTexto("Seleccione");
+                    dvDetalleSubconjunto.RowFilter = "DSC_CODIGO < 0";
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Text = string.Empty;
                     btnGuardar.Enabled = true;
@@ -446,13 +466,23 @@ namespace GyCAP.UI.EstructuraProducto
                     btnEliminar.Enabled = false;
                     panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
-                    tcConjunto.SelectedTab = tpDatos;
+                    tcSubconjunto.SelectedTab = tpDatos;
+                    txtCodigo.Focus();
                     break;
                 case estadoUI.nuevoExterno:
+                    txtCodigo.ReadOnly = false;
+                    txtCodigo.Clear();
+                    chkAutogenerar.Enabled = true;
+                    chkAutogenerar.Checked = false;
                     txtNombre.ReadOnly = false;
-                    txtNombre.Text = String.Empty;
+                    txtNombre.Clear();
                     cbTerminacion.Enabled = true;
-                    cbTerminacion.SelectedIndex = -1;
+                    cbTerminacion.SetTexto("Seleccione");
+                    cbEstado.Enabled = true;
+                    cbEstado.SetTexto("Seleccione");
+                    cbPlano.Enabled = true;
+                    cbPlano.SetTexto("Seleccione");
+                    dvDetalleSubconjunto.RowFilter = "DSC_CODIGO < 0";
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Text = string.Empty;
                     btnGuardar.Enabled = true;
@@ -463,20 +493,40 @@ namespace GyCAP.UI.EstructuraProducto
                     btnEliminar.Enabled = false;
                     panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.nuevoExterno;
-                    tcConjunto.SelectedTab = tpDatos;
+                    tcSubconjunto.SelectedTab = tpDatos;
+                    txtCodigo.Focus();
                     break;
                 case estadoUI.consultar:
+                    txtCodigo.ReadOnly = true;
+                    txtNombre.ReadOnly = true;
+                    chkAutogenerar.Enabled = false;
+                    chkAutogenerar.Checked = false;
                     cbTerminacion.Enabled = false;
+                    cbEstado.Enabled = false;
+                    cbPlano.Enabled = false;
+                    cbTerminacion.SetTexto(string.Empty);
+                    cbEstado.SetTexto(string.Empty);
+                    cbPlano.SetTexto(string.Empty);
                     txtDescripcion.ReadOnly = true;
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
                     panelAcciones.Enabled = false;
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.consultar;
-                    tcConjunto.SelectedTab = tpDatos;
+                    tcSubconjunto.SelectedTab = tpDatos;
                     break;
                 case estadoUI.modificar:
+                    txtCodigo.ReadOnly = false;
+                    chkAutogenerar.Enabled = true;
+                    chkAutogenerar.Checked = false;
+                    txtNombre.ReadOnly = false;
                     cbTerminacion.Enabled = true;
+                    cbEstado.Enabled = true;
+                    cbPlano.Enabled = true;
+                    cbTerminacion.Enabled = true;
+                    cbTerminacion.SetTexto(string.Empty);
+                    cbEstado.SetTexto(string.Empty);
+                    cbPlano.SetTexto(string.Empty);
                     txtDescripcion.ReadOnly = false;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -486,7 +536,8 @@ namespace GyCAP.UI.EstructuraProducto
                     btnEliminar.Enabled = false;
                     panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.modificar;
-                    tcConjunto.SelectedTab = tpDatos;
+                    tcSubconjunto.SelectedTab = tpDatos;
+                    txtCodigo.Focus();
                     break;
                 default:
                     break;
@@ -499,7 +550,9 @@ namespace GyCAP.UI.EstructuraProducto
         {
             int codigoSubconjunto = Convert.ToInt32(dvSubconjuntos[e.RowIndex]["sconj_codigo"]);
             txtNombre.Text = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).SCONJ_NOMBRE;
-            cbTerminacion.SelectedValue = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).TE_CODIGO;
+            cbTerminacion.SetSelectedValue(Convert.ToInt32(dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).TE_CODIGO));
+            cbEstado.SetSelectedValue(Convert.ToInt32(dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).PAR_CODIGO));
+            cbPlano.SetSelectedValue(Convert.ToInt32(dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).PNO_CODIGO));
             txtDescripcion.Text = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).SCONJ_DESCRIPCION;
             pbImagen.Image = BLL.SubConjuntoBLL.ObtenerImagen(codigoSubconjunto);
             //Usemos el filtro del dataview para mostrar sólo las piezas del subconjunto seleccionado
@@ -514,16 +567,11 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void SetSlide()
         {
-            panelDatos.Parent = slideDatos;
-            panelAgregar.Parent = slideAgregar;
-            panelImagen.Parent = slideDatos;
-
             slideControl.AddSlide(slideAgregar);
             slideControl.AddSlide(slideDatos);
+            gbDatos.Parent = slideDatos;
+            gbPD.Parent = slideAgregar;            
             slideControl.Selected = slideDatos;
-            panelDatos.Location = new Point(0, 10);
-            panelAgregar.Location = new Point(7, 7);
-            panelImagen.Location = new Point(405, 15);
         }
 
         private void setGrillasVistasCombo()
@@ -563,48 +611,45 @@ namespace GyCAP.UI.EstructuraProducto
             dgvSubconjuntos.Columns["SCONJ_DESCRIPCION"].DataPropertyName = "SCONJ_DESCRIPCION";
 
             dgvDetalleSubconjunto.Columns["PZA_NOMBRE"].DataPropertyName = "PZA_CODIGO";
-            //dgvDetalleSubconjunto.Columns["TE_CODIGO"].DataPropertyName = "PZA_CODIGO";
+            dgvDetalleSubconjunto.Columns["TE_CODIGO"].DataPropertyName = "PZA_CODIGO";
             dgvDetalleSubconjunto.Columns["DSC_CANTIDAD"].DataPropertyName = "DSC_CANTIDAD";
 
             dgvPiezasDisponibles.Columns["PZA_NOMBRE"].DataPropertyName = "PZA_NOMBRE";
             dgvPiezasDisponibles.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
-            dgvPiezasDisponibles.Columns["PZA_DESCRIPCION"].DataPropertyName = "PZA_DESCRIPCION";
-
-            //Creamos el dataview y lo asignamos a la grilla
-            dvSubconjuntos = new DataView(dsEstructura.SUBCONJUNTOS);
-            dvSubconjuntos.Sort = "SCONJ_NOMBRE ASC";
-            dgvSubconjuntos.DataSource = dvSubconjuntos;
-            dvDetalleSubconjunto = new DataView(dsEstructura.DETALLE_SUBCONJUNTO);
+            dgvPiezasDisponibles.Columns["PZA_DESCRIPCION"].DataPropertyName = "PZA_DESCRIPCION";        
             
-            dgvDetalleSubconjunto.DataSource = dvDetalleSubconjunto;
-            dvPiezasDisponibles = new DataView(dsEstructura.PIEZAS);
-            dvPiezasDisponibles.Sort = "PZA_NOMBRE ASC";
-            dgvPiezasDisponibles.DataSource = dvPiezasDisponibles;
-
-            //Obtenemos las terminaciones
+            //Obtenemos las terminaciones, estados, planos y piezas
             
             try
             {
-                BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsTerminacion);
-
+                BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsEstructura.TERMINACIONES);
+                BLL.PlanoBLL.ObtenerTodos(dsEstructura.PLANOS);
+                BLL.EstadoParteBLL.ObtenerTodos(dsEstructura.ESTADO_PARTES);
+                BLL.PiezaBLL.ObtenerPiezas(dsEstructura.PIEZAS);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
                 MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            dvTerminaciones = new DataView(dsTerminacion.TERMINACIONES);
-            dvTerminaciones.Sort = "TE_NOMBRE ASC";
-            cbTerminacion.DataSource = dvTerminaciones;
-            cbTerminacion.DisplayMember = "te_nombre";
-            cbTerminacion.ValueMember = "te_codigo";
-            cbTerminacion.SelectedIndex = -1;
-            dvTerminacionBuscar = new DataView(dsTerminacion.TERMINACIONES);
-            dvTerminacionBuscar.Sort = "TE_NOMBRE ASC";
-            cbTerminacionBuscar.DataSource = dvTerminacionBuscar;
-            cbTerminacionBuscar.DisplayMember = "te_nombre";
-            cbTerminacionBuscar.ValueMember = "te_codigo";
-            cbTerminacionBuscar.SelectedIndex = -1;
+            //Dataviews de grillas y asignación
+            dvSubconjuntos = new DataView(dsEstructura.SUBCONJUNTOS);
+            dvSubconjuntos.Sort = "SCONJ_NOMBRE ASC";
+            dgvSubconjuntos.DataSource = dvSubconjuntos;
+            dvDetalleSubconjunto = new DataView(dsEstructura.DETALLE_SUBCONJUNTO);
+            dgvDetalleSubconjunto.DataSource = dvDetalleSubconjunto;
+            dvPiezasDisponibles = new DataView(dsEstructura.PIEZAS);
+            dvPiezasDisponibles.Sort = "PZA_NOMBRE ASC";
+            dgvPiezasDisponibles.DataSource = dvPiezasDisponibles;
+            //Dataviews de combos
+            dvTerminaciones = new DataView(dsEstructura.TERMINACIONES);
+            dvTerminacionBuscar = new DataView(dsEstructura.TERMINACIONES);
+            dvEstados = new DataView(dsEstructura.ESTADO_PARTES);
+            dvPlanos = new DataView(dsEstructura.PLANOS);
+            cbTerminacionBuscar.SetDatos(dvTerminacionBuscar, "te_codigo", "te_nombre", "--TODOS--", true);
+            cbTerminacion.SetDatos(dvTerminaciones, "te_codigo", "te_nombre", "Seleccione", false);
+            cbEstado.SetDatos(dvEstados, "par_codigo", "par_nombre", "Seleccione", false);
+            cbPlano.SetDatos(dvPlanos, "pno_codigo", "pno_nombre", "Seleccione", false);
 
             //Seteos para los controles de la imagen
             pbImagen.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -612,14 +657,14 @@ namespace GyCAP.UI.EstructuraProducto
             ofdImagen.Filter = "Archivos de imágenes (*.bmp, *.gif , *.jpeg, *.png)|*.bmp;*.gif;*.jpg;*.png|Todos los archivos (*.*)|*.*";
         }
 
-        private void dgvConjuntos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgvSubconjuntos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value.ToString() != string.Empty)
             {
                 string nombre;
-                if (dgvSubconjuntos.Columns[e.ColumnIndex].Name == "te_codigo")
+                if (dgvSubconjuntos.Columns[e.ColumnIndex].Name == "TE_CODIGO")
                 {
-                    nombre = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(Convert.ToInt32(e.Value.ToString())).TE_NOMBRE;
+                    nombre = dsEstructura.TERMINACIONES.FindByTE_CODIGO(Convert.ToInt32(e.Value.ToString())).TE_NOMBRE;
                     e.Value = nombre;
                 }
             }
@@ -633,13 +678,13 @@ namespace GyCAP.UI.EstructuraProducto
                 int codigoPieza, codigoTerminacion;
                 switch (dgvDetalleSubconjunto.Columns[e.ColumnIndex].Name)
                 {
-                    case "te_codigo":
-                        codigoPieza = Convert.ToInt32(dvDetalleSubconjunto[e.RowIndex]["SCONJ_CODIGO"]);
-                        codigoTerminacion = Convert.ToInt32(dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigoPieza).TE_CODIGO.ToString()); ;
-                        nombre = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_NOMBRE;
+                    case "TE_CODIGO":
+                        codigoPieza = Convert.ToInt32(dvDetalleSubconjunto[e.RowIndex]["PZA_CODIGO"]);
+                        codigoTerminacion = Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).TE_CODIGO.ToString()); ;
+                        nombre = dsEstructura.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_NOMBRE;
                         e.Value = nombre;
                         break;
-                    case "pza_nombre":
+                    case "PZA_NOMBRE":
                         codigoPieza = Convert.ToInt32(dvDetalleSubconjunto[e.RowIndex]["PZA_CODIGO"]);
                         nombre = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_NOMBRE;
                         e.Value = nombre;
@@ -655,29 +700,23 @@ namespace GyCAP.UI.EstructuraProducto
             if (e.Value.ToString() != string.Empty)
             {
                 string nombre;
-                if (dgvPiezasDisponibles.Columns[e.ColumnIndex].Name == "te_codigo")
+                if (dgvPiezasDisponibles.Columns[e.ColumnIndex].Name == "TE_CODIGO")
                 {
-                    nombre = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(Convert.ToInt32(e.Value.ToString())).TE_NOMBRE;
+                    nombre = dsEstructura.TERMINACIONES.FindByTE_CODIGO(Convert.ToInt32(e.Value.ToString())).TE_NOMBRE;
                     e.Value = nombre;
                 }
             }
         }
 
-        private void txtNombreBuscar_Enter(object sender, EventArgs e)
+        private void control_Enter(object sender, EventArgs e)
         {
-            txtNombre.SelectAll();
-        }
-
-        private void txtNombre_Enter(object sender, EventArgs e)
-        {
-            txtNombreBuscar.SelectAll();
-        }
-
-        private void txtDescripcion_Enter(object sender, EventArgs e)
-        {
-            txtDescripcion.SelectAll();
-        }
+            if (sender.GetType().Equals(txtNombre.GetType())) { (sender as TextBox).SelectAll(); }
+            if (sender.GetType().Equals(txtDescripcion.GetType())) { (sender as RichTextBox).SelectAll(); }
+            if (sender.GetType().Equals(nudCantidad.GetType())) { (sender as NumericUpDown).Select(0, 20); }
+        }       
 
         #endregion 
+
+
     }
 }

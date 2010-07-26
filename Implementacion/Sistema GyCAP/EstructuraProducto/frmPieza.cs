@@ -74,13 +74,12 @@ namespace GyCAP.UI.EstructuraProducto
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             try
-            {
-                
+            {                
                 dsEstructura.PIEZAS.Clear();
                 dsEstructura.DETALLE_PIEZA.Clear();
 
                 //Busquemos, no importa si ingresó algo o no, ya se encargarán las otras clases de verificarlo
-                BLL.PiezaBLL.ObtenerPiezas(txtNombreBuscar.Text, cbTerminacionBuscar.SelectedValue, dsEstructura);
+                BLL.PiezaBLL.ObtenerPiezas(txtNombreBuscar.Text, cbTerminacionBuscar.SelectedValue, dsEstructura, true);
 
                 if (dsEstructura.PIEZAS.Rows.Count == 0)
                 {
@@ -162,9 +161,10 @@ namespace GyCAP.UI.EstructuraProducto
             //Revisamos que completó los datos obligatorios
             bool datosOK = true;
             if (txtNombre.Text == String.Empty) { datosOK = false; }
-            if (cbEstado.SelectedIndex != -1) { datosOK = false; }
-            if (cbTerminacion.SelectedIndex != -1) { datosOK = false; }
-            if (dgvDetallePieza.Rows.GetRowCount(DataGridViewElementStates.Selected) == 0) { datosOK = false; }
+            if (cbEstado.SelectedIndex == -1) { datosOK = false; }
+            if (cbTerminacion.SelectedIndex == -1) { datosOK = false; }
+            if (cbPlano.SelectedIndex == -1) { datosOK = false; }
+            if (dgvDetallePieza.Rows.Count == 0) { datosOK = false; }
             if (datosOK)
             {
                 //Revisamos que está haciendo
@@ -232,6 +232,8 @@ namespace GyCAP.UI.EstructuraProducto
                     //actualizando en el dataset a medida que el usuario ejecutaba una acción
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_NOMBRE = txtNombre.Text;
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).TE_CODIGO = Convert.ToInt32(cbTerminacion.SelectedValue);
+                    dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PAR_CODIGO = Convert.ToInt32(cbEstado.SelectedValue);
+                    dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PNO_CODIGO = Convert.ToInt32(cbPlano.SelectedValue);
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_DESCRIPCION = txtDescripcion.Text;
                     try
                     {
@@ -445,8 +447,13 @@ namespace GyCAP.UI.EstructuraProducto
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.inicio;
                     tcConjunto.SelectedTab = tpBuscar;
+                    txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
+                    txtCodigo.ReadOnly = false;
+                    txtCodigo.Clear();
+                    chkAutogenerar.Enabled = true;
+                    chkAutogenerar.Checked = false;
                     txtNombre.ReadOnly = false;
                     txtNombre.Clear();
                     cbTerminacion.Enabled = true;
@@ -467,8 +474,13 @@ namespace GyCAP.UI.EstructuraProducto
                     panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
                     tcConjunto.SelectedTab = tpDatos;
+                    txtCodigo.Focus();
                     break;
                 case estadoUI.nuevoExterno:
+                    txtCodigo.ReadOnly = false;
+                    txtCodigo.Clear();
+                    chkAutogenerar.Enabled = true;
+                    chkAutogenerar.Checked = false;
                     txtNombre.ReadOnly = false;
                     txtNombre.Clear();
                     cbTerminacion.Enabled = true;
@@ -477,6 +489,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbEstado.SetTexto("Seleccione");
                     cbPlano.Enabled = true;
                     cbPlano.SetTexto("Seleccione");
+                    dvDetallePieza.RowFilter = "DPZA_CODIGO < 0";
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
                     btnGuardar.Enabled = true;
@@ -488,8 +501,12 @@ namespace GyCAP.UI.EstructuraProducto
                     panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.nuevoExterno;
                     tcConjunto.SelectedTab = tpDatos;
+                    txtCodigo.Focus();
                     break;
                 case estadoUI.consultar:
+                    txtCodigo.ReadOnly = true;
+                    chkAutogenerar.Enabled = false;
+                    chkAutogenerar.Checked = false;
                     txtNombre.ReadOnly = true;
                     cbTerminacion.Enabled = false;
                     cbTerminacion.SetTexto(string.Empty);
@@ -506,10 +523,16 @@ namespace GyCAP.UI.EstructuraProducto
                     tcConjunto.SelectedTab = tpDatos;
                     break;
                 case estadoUI.modificar:
+                    txtCodigo.ReadOnly = false;
+                    chkAutogenerar.Enabled = true;
+                    chkAutogenerar.Checked = false;
                     txtNombre.ReadOnly = false;
                     cbTerminacion.Enabled = true;
                     cbEstado.Enabled = true;
                     cbPlano.Enabled = true;
+                    cbTerminacion.SetTexto(string.Empty);
+                    cbEstado.SetTexto(string.Empty);
+                    cbPlano.SetTexto(string.Empty);
                     txtDescripcion.ReadOnly = false;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -520,6 +543,7 @@ namespace GyCAP.UI.EstructuraProducto
                     panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.modificar;
                     tcConjunto.SelectedTab = tpDatos;
+                    txtCodigo.Focus();
                     break;
                 default:
                     break;
@@ -534,15 +558,7 @@ namespace GyCAP.UI.EstructuraProducto
             txtNombre.Text = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_NOMBRE;
             cbTerminacion.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).TE_CODIGO));
             cbEstado.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).ESTADO_PARTESRow.PAR_CODIGO));
-            if (dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).IsPNO_CODIGONull())
-            {
-                cbPlano.SelectedIndex = -1;
-            }
-            else
-            {
-                cbPlano.SelectedValue = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PNO_CODIGO;
-            }
-            
+            cbPlano.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PNO_CODIGO));
             txtDescripcion.Text = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_DESCRIPCION;
             pbImagen.Image = BLL.PiezaBLL.ObtenerImagen(codigoPieza);
             //Usemos el filtro del dataview para mostrar sólo las MP de la pieza seleccionada
@@ -630,7 +646,7 @@ namespace GyCAP.UI.EstructuraProducto
             dvPlano = new DataView(dsEstructura.PLANOS);
             dvPlano.Sort = "PNO_NOMBRE";
 
-            //Obtenemos las terminaciones, los planos, los estados de las piezas, las MP y las terminaciones
+            //Obtenemos las terminaciones, los planos, los estados de las piezas, las MP, unidades medidas
             
             try
             {
@@ -647,9 +663,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
 
             dvTerminaciones = new DataView(dsEstructura.TERMINACIONES);
-            dvTerminaciones.Sort = "TE_NOMBRE ASC";
             dvTerminacionBuscar = new DataView(dsEstructura.TERMINACIONES);
-            dvTerminacionBuscar.Sort = "TE_NOMBRE ASC";
             cbTerminacionBuscar.SetDatos(dvTerminacionBuscar, "te_codigo", "te_nombre", "--TODOS--", true);
             cbTerminacion.SetDatos(dvTerminaciones, "te_codigo", "te_nombre", string.Empty, false);
             cbEstado.SetDatos(dvEstado, "par_codigo", "par_nombre", string.Empty, false);
@@ -726,19 +740,11 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
-        private void txtNombreBuscar_Enter(object sender, EventArgs e)
+        private void control_Enter(object sender, EventArgs e)
         {
-            txtNombre.SelectAll();
-        }
-
-        private void txtNombre_Enter(object sender, EventArgs e)
-        {
-            txtNombreBuscar.SelectAll();
-        }
-
-        private void txtDescripcion_Enter(object sender, EventArgs e)
-        {
-            txtDescripcion.SelectAll();
+            if (sender.GetType().Equals(txtNombre.GetType())) { (sender as TextBox).SelectAll(); }
+            if (sender.GetType().Equals(txtDescripcion.GetType())) { (sender as RichTextBox).SelectAll(); }
+            if (sender.GetType().Equals(nudCantidad.GetType())) { (sender as NumericUpDown).Select(0, 20); }
         }
 
         #endregion 
