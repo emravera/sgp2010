@@ -71,7 +71,13 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         {
             if (!persistente) { texto.Visible = false; }
             base.OnGotFocus(e);
-        }        
+        }
+
+        protected override void OnLostFocus(EventArgs e)
+        {
+            if (!persistente && this.SelectedIndex == -1) { texto.Visible = true; }
+            base.OnLostFocus(e);
+        }
 
         /// <summary>
         /// Define el texto a mostrar en el combobox. Si se especifica un string.Empty se oculta.
@@ -85,6 +91,7 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
                 texto.Text = txt;
                 texto.Visible = true;
                 persistente = false;
+                this.SelectedIndex = -1;
             }
             else { texto.Visible = false; }
         }
