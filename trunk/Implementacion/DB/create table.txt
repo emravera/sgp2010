@@ -839,5 +839,5 @@ create table DETALLE_PLAN_ANUAL (
    PAN_CODIGO           numeric(10)          not null,
    DPAN_MES             varchar(10)          null,
    DPAN_CANTIDADMES     numeric(10)          null,
-   constraint PK_DETALLE_PLAN_ANUAL primary key nonclustered (PAN_CODIGO)
+   constraint PK_DETALLE_PLAN_ANUAL primary key nonclustered (DPAN_CODIGO)
 )
