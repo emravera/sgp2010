@@ -79,7 +79,7 @@ create table CONJUNTOS (
    CONJ_DESCRIPCION     varchar(200)         null,            /*-MODIFICACION 17/07/2010-*/
    PAR_CODIGO           numeric(10)          not null,	/*-MODIFICACION 17/07/2010-*/
    PNO_CODIGO           numeric(10)          null,	/*-MODIFICACION 17/07/2010-*/
-   CONJ_CODIGO_PARTE    varchar(80)          null,	/*-MODIFICACION 26/07/2010-*/
+   CONJ_CODIGOPARTE    varchar(80)          null,	/*-MODIFICACION 26/07/2010-*/
    constraint PK_CONJUNTOS primary key nonclustered (CONJ_CODIGO)
 )
 
@@ -534,7 +534,7 @@ create table PIEZAS (
    PZA_DESCRIPCION      varchar(200)         null,            /*-MODIFICACION 17/07/2010-*/
    PAR_CODIGO           numeric(10)          not null,	/*-MODIFICACION 17/07/2010-*/
    PNO_CODIGO           numeric(10)          null,	/*-MODIFICACION 17/07/2010-*/
-   PZA_CODIGO_PARTE     varchar(80)          null,	/*-MODIFICACION 26/07/2010-*/
+   PZA_CODIGOPARTE     varchar(80)          null,	/*-MODIFICACION 26/07/2010-*/
    constraint PK_PIEZAS primary key nonclustered (PZA_CODIGO)
 )
 
@@ -670,7 +670,7 @@ create table SUBCONJUNTOS (
    SCONJ_DESCRIPCION    varchar(200)         null,            /*-MODIFICACION 17/07/2010-*/
    PAR_CODIGO           numeric(10)          not null,	/*-MODIFICACION 17/07/2010-*/
    PNO_CODIGO           numeric(10)          null,	/*-MODIFICACION 17/07/2010-*/
-   SCONJ_CODIGO_PARTE   varchar(80)          null,	/*-MODIFICACION 26/07/2010-*/
+   SCONJ_CODIGOPARTE   varchar(80)          null,	/*-MODIFICACION 26/07/2010-*/
    constraint PK_SUBCONJUNTOS primary key nonclustered (SCONJ_CODIGO)
 )
 
