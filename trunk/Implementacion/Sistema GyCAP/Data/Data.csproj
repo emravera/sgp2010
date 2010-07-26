@@ -114,6 +114,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsModeloCocina.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsPlanAnual.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPlanAnual.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsSectorTrabajo.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -264,6 +269,17 @@
     </None>
     <None Include="dsModeloCocina.xss">
       <DependentUpon>dsModeloCocina.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanAnual.xsc">
+      <DependentUpon>dsPlanAnual.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanAnual.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPlanAnual.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsPlanAnual.xss">
+      <DependentUpon>dsPlanAnual.xsd</DependentUpon>
     </None>
     <None Include="dsSectorTrabajo.xsc">
       <DependentUpon>dsSectorTrabajo.xsd</DependentUpon>
