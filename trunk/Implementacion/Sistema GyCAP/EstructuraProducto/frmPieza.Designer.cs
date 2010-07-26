@@ -47,7 +47,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.dgvDetallePieza = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbTerminacionBuscar = new System.Windows.Forms.ComboBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.dgvPiezas = new System.Windows.Forms.DataGridView();
@@ -57,15 +56,12 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbDatos = new System.Windows.Forms.GroupBox();
-            this.cbPlano = new System.Windows.Forms.ComboBox();
-            this.cbEstado = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.RichTextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cbTerminacion = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panelImagen = new System.Windows.Forms.Panel();
             this.btnQuitarImagen = new System.Windows.Forms.Button();
@@ -87,6 +83,10 @@
             this.dgvMPDisponibles = new System.Windows.Forms.DataGridView();
             this.slideAgregar = new SlickInterface.Slide();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
+            this.cbTerminacionBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbPlano = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbTerminacion = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.panelAcciones.SuspendLayout();
             this.tsMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePieza)).BeginInit();
@@ -206,7 +206,7 @@
             this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(66, 47);
+            this.btnModificar.Size = new System.Drawing.Size(54, 47);
             this.btnModificar.Text = "&Modificar";
             this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -217,7 +217,7 @@
             this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(58, 47);
+            this.btnEliminar.Size = new System.Drawing.Size(47, 47);
             this.btnEliminar.Text = "&Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
@@ -233,7 +233,7 @@
             this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(36, 47);
+            this.btnSalir.Size = new System.Drawing.Size(31, 47);
             this.btnSalir.Text = "&Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
@@ -244,7 +244,7 @@
             this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(65, 47);
+            this.btnConsultar.Size = new System.Drawing.Size(57, 47);
             this.btnConsultar.Text = "&Consultar";
             this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
@@ -255,7 +255,7 @@
             this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(48, 47);
+            this.btnNuevo.Size = new System.Drawing.Size(42, 47);
             this.btnNuevo.Text = "&Nuevo";
             this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
@@ -329,9 +329,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbTerminacionBuscar);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.cbTerminacionBuscar);
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.txtNombreBuscar);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -342,20 +342,11 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
-            // cbTerminacionBuscar
-            // 
-            this.cbTerminacionBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTerminacionBuscar.FormattingEnabled = true;
-            this.cbTerminacionBuscar.Location = new System.Drawing.Point(259, 29);
-            this.cbTerminacionBuscar.Name = "cbTerminacionBuscar";
-            this.cbTerminacionBuscar.Size = new System.Drawing.Size(140, 21);
-            this.cbTerminacionBuscar.TabIndex = 4;
-            // 
             // btnBuscar
             // 
             this.btnBuscar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(425, 28);
+            this.btnBuscar.Location = new System.Drawing.Point(428, 23);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
             this.btnBuscar.TabIndex = 5;
@@ -366,7 +357,7 @@
             // 
             // txtNombreBuscar
             // 
-            this.txtNombreBuscar.Location = new System.Drawing.Point(61, 28);
+            this.txtNombreBuscar.Location = new System.Drawing.Point(60, 27);
             this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(112, 21);
@@ -443,7 +434,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox2.Location = new System.Drawing.Point(3, 84);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(9, 9, 9, 9);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(9);
             this.groupBox2.Size = new System.Drawing.Size(509, 385);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
@@ -468,13 +459,13 @@
             // 
             this.gbDatos.Controls.Add(this.cbPlano);
             this.gbDatos.Controls.Add(this.cbEstado);
+            this.gbDatos.Controls.Add(this.cbTerminacion);
             this.gbDatos.Controls.Add(this.label12);
             this.gbDatos.Controls.Add(this.label4);
             this.gbDatos.Controls.Add(this.txtDescripcion);
             this.gbDatos.Controls.Add(this.txtNombre);
             this.gbDatos.Controls.Add(this.label2);
             this.gbDatos.Controls.Add(this.label3);
-            this.gbDatos.Controls.Add(this.cbTerminacion);
             this.gbDatos.Controls.Add(this.label1);
             this.gbDatos.Controls.Add(this.panelImagen);
             this.gbDatos.Location = new System.Drawing.Point(5, 0);
@@ -484,22 +475,6 @@
             this.gbDatos.TabIndex = 15;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos de la pieza";
-            // 
-            // cbPlano
-            // 
-            this.cbPlano.FormattingEnabled = true;
-            this.cbPlano.Location = new System.Drawing.Point(81, 102);
-            this.cbPlano.Name = "cbPlano";
-            this.cbPlano.Size = new System.Drawing.Size(284, 21);
-            this.cbPlano.TabIndex = 19;
-            // 
-            // cbEstado
-            // 
-            this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(81, 75);
-            this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(284, 21);
-            this.cbEstado.TabIndex = 18;
             // 
             // label12
             // 
@@ -555,15 +530,6 @@
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 14;
             this.label3.Text = "Nombre:";
-            // 
-            // cbTerminacion
-            // 
-            this.cbTerminacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTerminacion.FormattingEnabled = true;
-            this.cbTerminacion.Location = new System.Drawing.Point(81, 49);
-            this.cbTerminacion.Name = "cbTerminacion";
-            this.cbTerminacion.Size = new System.Drawing.Size(284, 21);
-            this.cbTerminacion.TabIndex = 17;
             // 
             // label1
             // 
@@ -748,6 +714,12 @@
             // nudCantidad
             // 
             this.nudCantidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.nudCantidad.DecimalPlaces = 2;
+            this.nudCantidad.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.nudCantidad.Location = new System.Drawing.Point(3, 30);
             this.nudCantidad.Name = "nudCantidad";
             this.nudCantidad.Size = new System.Drawing.Size(64, 21);
@@ -783,6 +755,46 @@
             // ofdImagen
             // 
             this.ofdImagen.Title = "Seleccione una imagen";
+            // 
+            // cbTerminacionBuscar
+            // 
+            this.cbTerminacionBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTerminacionBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbTerminacionBuscar.FormattingEnabled = true;
+            this.cbTerminacionBuscar.Location = new System.Drawing.Point(258, 27);
+            this.cbTerminacionBuscar.Name = "cbTerminacionBuscar";
+            this.cbTerminacionBuscar.Size = new System.Drawing.Size(138, 21);
+            this.cbTerminacionBuscar.TabIndex = 8;
+            // 
+            // cbPlano
+            // 
+            this.cbPlano.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPlano.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbPlano.FormattingEnabled = true;
+            this.cbPlano.Location = new System.Drawing.Point(81, 101);
+            this.cbPlano.Name = "cbPlano";
+            this.cbPlano.Size = new System.Drawing.Size(284, 21);
+            this.cbPlano.TabIndex = 23;
+            // 
+            // cbEstado
+            // 
+            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbEstado.FormattingEnabled = true;
+            this.cbEstado.Location = new System.Drawing.Point(81, 74);
+            this.cbEstado.Name = "cbEstado";
+            this.cbEstado.Size = new System.Drawing.Size(284, 21);
+            this.cbEstado.TabIndex = 22;
+            // 
+            // cbTerminacion
+            // 
+            this.cbTerminacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTerminacion.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbTerminacion.FormattingEnabled = true;
+            this.cbTerminacion.Location = new System.Drawing.Point(81, 47);
+            this.cbTerminacion.Name = "cbTerminacion";
+            this.cbTerminacion.Size = new System.Drawing.Size(284, 21);
+            this.cbTerminacion.TabIndex = 21;
             // 
             // frmPieza
             // 
@@ -849,7 +861,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataGridView dgvDetallePieza;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox cbTerminacionBuscar;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.TextBox txtNombreBuscar;
         private System.Windows.Forms.DataGridView dgvPiezas;
@@ -874,20 +885,21 @@
         private System.Windows.Forms.GroupBox gbMPDisponibles;
         private SlickInterface.Slide slideAgregar;
         private System.Windows.Forms.GroupBox gbDatos;
-        private System.Windows.Forms.ComboBox cbPlano;
-        private System.Windows.Forms.ComboBox cbEstado;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RichTextBox txtDescripcion;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cbTerminacion;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelImagen;
         private System.Windows.Forms.Button btnQuitarImagen;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnImagen;
         private System.Windows.Forms.PictureBox pbImagen;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbTerminacionBuscar;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbPlano;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbEstado;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbTerminacion;
     }
 }
