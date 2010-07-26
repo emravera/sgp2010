@@ -77,6 +77,9 @@
     <Compile Include="ControlesUsuarios\DropDownList.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ControlesUsuarios\seleccionadorFecha.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="frmVisorReporte.cs">
       <SubType>Form</SubType>
     </Compile>
