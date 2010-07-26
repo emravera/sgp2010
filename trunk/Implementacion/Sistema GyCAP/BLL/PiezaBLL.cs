@@ -80,10 +80,15 @@ namespace GyCAP.BLL
             return DAL.PiezaDAL.ObtenerPieza(codigoPieza);
         }        
 
-        public static void ObtenerPiezas(object nombre, object codTerminacion, Data.dsEstructura ds)
+        public static void ObtenerPiezas(object nombre, object codTerminacion, Data.dsEstructura ds, bool obtenerDetalle)
         {
-            if (Convert.ToInt32(codTerminacion.ToString()) <= 0) codTerminacion = null;
-            DAL.PiezaDAL.ObtenerPiezas(nombre, codTerminacion, ds);
+            if (codTerminacion != null && Convert.ToInt32(codTerminacion.ToString()) <= 0) { codTerminacion = null; }
+            DAL.PiezaDAL.ObtenerPiezas(nombre, codTerminacion, ds, obtenerDetalle);
+        }
+
+        public static void ObtenerPiezas(System.Data.DataTable dtPiezas)
+        {
+            DAL.PiezaDAL.ObtenerPiezas(dtPiezas);
         }
         
         /*public static void ObtenerTodos(Data.dsEstructura ds)

@@ -22,7 +22,7 @@ namespace GyCAP.DAL
 
             //Así obtenemos el subconjunto nuevo del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto = dsEstructura.SUBCONJUNTOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.SUBCONJUNTOSRow;
-            object[] valorParametros = { rowSubconjunto.SCONJ_CODIGO, rowSubconjunto.TE_CODIGO, rowSubconjunto.SCONJ_DESCRIPCION, 0, rowSubconjunto.PAR_CODIGO, rowSubconjunto.PNO_CODIGO };
+            object[] valorParametros = { rowSubconjunto.SCONJ_NOMBRE, rowSubconjunto.TE_CODIGO, rowSubconjunto.SCONJ_DESCRIPCION, 0, rowSubconjunto.PAR_CODIGO, rowSubconjunto.PNO_CODIGO };
 
             string sqlInsertEstructura = @"INSERT INTO [DETALLE_SUBCONJUNTO] 
                                         ([sconj_codigo]
@@ -172,7 +172,19 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static void ObtenerSubconjuntos(object nombre, object terminacion, Data.dsEstructura ds)
+        public static void ObtenerSubconjuntos(System.Data.DataTable dtSubconjuntos)
+        {
+            string sql = @"SELECT sconj_codigo, sconj_nombre, te_codigo, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo 
+                        FROM SUBCONJUNTOS";
+
+            try
+            {
+                DB.FillDataTable(dtSubconjuntos, sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+        
+        public static void ObtenerSubconjuntos(object nombre, object codTerminacion, Data.dsEstructura ds, bool obtenerDetalle)
         {
             string sql = @"SELECT sconj_codigo, sconj_nombre, te_codigo, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo 
                         FROM SUBCONJUNTOS WHERE 1=1";
@@ -192,10 +204,10 @@ namespace GyCAP.DAL
                 cantidadParametros++;
             }
             //Revisamos si pasó algun valor y si es un integer
-            if (terminacion != null && terminacion.GetType() == cantidadParametros.GetType())
+            if (codTerminacion != null && codTerminacion.GetType() == cantidadParametros.GetType())
             {
                 sql += " AND te_codigo = @p" + cantidadParametros; 
-                valoresFiltros[cantidadParametros] = Convert.ToInt32(terminacion);
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(codTerminacion);
                 cantidadParametros++;
             }
 
@@ -207,12 +219,33 @@ namespace GyCAP.DAL
                 {
                     valorParametros[i] = valoresFiltros[i];
                 }
-                DB.FillDataSet(ds, "SUBCONJUNTOS", sql, valorParametros);
+                try
+                {
+                    DB.FillDataSet(ds, "SUBCONJUNTOS", sql, valorParametros);
+                    if(obtenerDetalle) { ObtenerDetalleSubconjuntos(ds); }
+                }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
             else
             {
                 //Buscamos sin filtro
                 DB.FillDataSet(ds, "SUBCONJUNTOS", sql, null);
+                if (obtenerDetalle) { ObtenerDetalleSubconjuntos(ds); }
+            }
+        }
+
+        //Obtiene el detalle de todos los subconjuntos buscadas, de uso interno por el método buscador ObtenerSubconjuntos
+        private static void ObtenerDetalleSubconjuntos(Data.dsEstructura ds)
+        {
+            string sql = @"SELECT dsc_codigo, sconj_codigo, pza_codigo, dsc_cantidad
+                         FROM DETALLE_SUBCONJUNTO WHERE sconj_codigo = @p0";
+
+            object[] valorParametros; ;
+
+            foreach (Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto in ds.SUBCONJUNTOS)
+            {
+                valorParametros = new object[] { rowSubconjunto.SCONJ_CODIGO };
+                DB.FillDataTable(ds.DETALLE_SUBCONJUNTO, sql, valorParametros);
             }
         }
 

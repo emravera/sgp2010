@@ -47,6 +47,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.dgvDetallePieza = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbTerminacionBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.dgvPiezas = new System.Windows.Forms.DataGridView();
@@ -56,6 +57,12 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.chkAutogenerar = new System.Windows.Forms.CheckBox();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cbPlano = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbTerminacion = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label12 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.RichTextBox();
@@ -83,10 +90,6 @@
             this.dgvMPDisponibles = new System.Windows.Forms.DataGridView();
             this.slideAgregar = new SlickInterface.Slide();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
-            this.cbTerminacionBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbPlano = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbTerminacion = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.panelAcciones.SuspendLayout();
             this.tsMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePieza)).BeginInit();
@@ -118,7 +121,7 @@
             this.panelAcciones.Controls.Add(this.btnSumar);
             this.panelAcciones.Controls.Add(this.btnDelete);
             this.panelAcciones.Controls.Add(this.btnNew);
-            this.panelAcciones.Location = new System.Drawing.Point(410, 20);
+            this.panelAcciones.Location = new System.Drawing.Point(410, 17);
             this.panelAcciones.Name = "panelAcciones";
             this.panelAcciones.Size = new System.Drawing.Size(78, 148);
             this.panelAcciones.TabIndex = 11;
@@ -289,7 +292,7 @@
             this.slideControl.Location = new System.Drawing.Point(3, 3);
             this.slideControl.Name = "slideControl";
             this.slideControl.Selected = null;
-            this.slideControl.Size = new System.Drawing.Size(509, 201);
+            this.slideControl.Size = new System.Drawing.Size(509, 232);
             this.slideControl.SlideSpeed = 250;
             this.slideControl.TabIndex = 8;
             // 
@@ -342,6 +345,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
+            // cbTerminacionBuscar
+            // 
+            this.cbTerminacionBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTerminacionBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbTerminacionBuscar.FormattingEnabled = true;
+            this.cbTerminacionBuscar.Location = new System.Drawing.Point(258, 27);
+            this.cbTerminacionBuscar.Name = "cbTerminacionBuscar";
+            this.cbTerminacionBuscar.Size = new System.Drawing.Size(138, 21);
+            this.cbTerminacionBuscar.TabIndex = 8;
+            // 
             // btnBuscar
             // 
             this.btnBuscar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.lupa_20;
@@ -362,7 +375,7 @@
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(112, 21);
             this.txtNombreBuscar.TabIndex = 2;
-            this.txtNombreBuscar.Enter += new System.EventHandler(this.txtNombreBuscar_Enter);
+            this.txtNombreBuscar.Enter += new System.EventHandler(this.control_Enter);
             // 
             // dgvPiezas
             // 
@@ -377,7 +390,7 @@
             this.dgvPiezas.ReadOnly = true;
             this.dgvPiezas.RowHeadersVisible = false;
             this.dgvPiezas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPiezas.Size = new System.Drawing.Size(491, 353);
+            this.dgvPiezas.Size = new System.Drawing.Size(491, 388);
             this.dgvPiezas.TabIndex = 0;
             this.dgvPiezas.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPiezas_RowEnter);
             this.dgvPiezas.DoubleClick += new System.EventHandler(this.dgvPiezas_DoubleClick);
@@ -396,7 +409,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(527, 537);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(527, 572);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
             // tcConjunto
@@ -413,7 +426,7 @@
             this.tcConjunto.Name = "tcConjunto";
             this.tcConjunto.Padding = new System.Drawing.Point(0, 0);
             this.tcConjunto.SelectedIndex = 0;
-            this.tcConjunto.Size = new System.Drawing.Size(523, 481);
+            this.tcConjunto.Size = new System.Drawing.Size(523, 516);
             this.tcConjunto.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcConjunto.TabIndex = 8;
             // 
@@ -424,7 +437,7 @@
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(515, 472);
+            this.tpBuscar.Size = new System.Drawing.Size(515, 507);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
@@ -435,7 +448,7 @@
             this.groupBox2.Location = new System.Drawing.Point(3, 84);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(9);
-            this.groupBox2.Size = new System.Drawing.Size(509, 385);
+            this.groupBox2.Size = new System.Drawing.Size(509, 420);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Listado de Piezas";
@@ -451,12 +464,15 @@
             this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDatos.Size = new System.Drawing.Size(515, 472);
+            this.tpDatos.Size = new System.Drawing.Size(515, 507);
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.chkAutogenerar);
+            this.gbDatos.Controls.Add(this.txtCodigo);
+            this.gbDatos.Controls.Add(this.label9);
             this.gbDatos.Controls.Add(this.cbPlano);
             this.gbDatos.Controls.Add(this.cbEstado);
             this.gbDatos.Controls.Add(this.cbTerminacion);
@@ -471,15 +487,72 @@
             this.gbDatos.Location = new System.Drawing.Point(5, 0);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(497, 199);
+            this.gbDatos.Size = new System.Drawing.Size(497, 241);
             this.gbDatos.TabIndex = 15;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos de la pieza";
             // 
+            // chkAutogenerar
+            // 
+            this.chkAutogenerar.AutoSize = true;
+            this.chkAutogenerar.Location = new System.Drawing.Point(284, 31);
+            this.chkAutogenerar.Name = "chkAutogenerar";
+            this.chkAutogenerar.Size = new System.Drawing.Size(87, 17);
+            this.chkAutogenerar.TabIndex = 26;
+            this.chkAutogenerar.Text = "Autogenerar";
+            this.chkAutogenerar.UseVisualStyleBackColor = true;
+            // 
+            // txtCodigo
+            // 
+            this.txtCodigo.Location = new System.Drawing.Point(81, 29);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(191, 21);
+            this.txtCodigo.TabIndex = 25;
+            this.txtCodigo.Enter += new System.EventHandler(this.control_Enter);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(5, 32);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(44, 13);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "Código:";
+            // 
+            // cbPlano
+            // 
+            this.cbPlano.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPlano.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbPlano.FormattingEnabled = true;
+            this.cbPlano.Location = new System.Drawing.Point(81, 142);
+            this.cbPlano.Name = "cbPlano";
+            this.cbPlano.Size = new System.Drawing.Size(284, 21);
+            this.cbPlano.TabIndex = 23;
+            // 
+            // cbEstado
+            // 
+            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbEstado.FormattingEnabled = true;
+            this.cbEstado.Location = new System.Drawing.Point(81, 115);
+            this.cbEstado.Name = "cbEstado";
+            this.cbEstado.Size = new System.Drawing.Size(284, 21);
+            this.cbEstado.TabIndex = 22;
+            // 
+            // cbTerminacion
+            // 
+            this.cbTerminacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTerminacion.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbTerminacion.FormattingEnabled = true;
+            this.cbTerminacion.Location = new System.Drawing.Point(81, 88);
+            this.cbTerminacion.Name = "cbTerminacion";
+            this.cbTerminacion.Size = new System.Drawing.Size(284, 21);
+            this.cbTerminacion.TabIndex = 21;
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(5, 105);
+            this.label12.Location = new System.Drawing.Point(5, 146);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(37, 13);
             this.label12.TabIndex = 20;
@@ -488,7 +561,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(5, 77);
+            this.label4.Location = new System.Drawing.Point(5, 118);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 19;
@@ -496,27 +569,27 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(81, 130);
+            this.txtDescripcion.Location = new System.Drawing.Point(81, 171);
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(284, 61);
             this.txtDescripcion.TabIndex = 20;
             this.txtDescripcion.Text = "";
-            this.txtDescripcion.Enter += new System.EventHandler(this.txtDescripcion_Enter);
+            this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(81, 20);
+            this.txtNombre.Location = new System.Drawing.Point(81, 59);
             this.txtNombre.MaxLength = 80;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(284, 21);
             this.txtNombre.TabIndex = 16;
-            this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
+            this.txtNombre.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 130);
+            this.label2.Location = new System.Drawing.Point(5, 171);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 13;
@@ -525,7 +598,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 23);
+            this.label3.Location = new System.Drawing.Point(5, 62);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 14;
@@ -534,7 +607,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 51);
+            this.label1.Location = new System.Drawing.Point(5, 92);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 13);
             this.label1.TabIndex = 15;
@@ -547,16 +620,16 @@
             this.panelImagen.Controls.Add(this.label5);
             this.panelImagen.Controls.Add(this.btnImagen);
             this.panelImagen.Controls.Add(this.pbImagen);
-            this.panelImagen.Location = new System.Drawing.Point(388, 20);
+            this.panelImagen.Location = new System.Drawing.Point(389, 30);
             this.panelImagen.Name = "panelImagen";
-            this.panelImagen.Size = new System.Drawing.Size(102, 171);
+            this.panelImagen.Size = new System.Drawing.Size(102, 170);
             this.panelImagen.TabIndex = 12;
             // 
             // btnQuitarImagen
             // 
             this.btnQuitarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuitarImagen.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuitarImagen.Location = new System.Drawing.Point(5, 132);
+            this.btnQuitarImagen.Location = new System.Drawing.Point(5, 130);
             this.btnQuitarImagen.Name = "btnQuitarImagen";
             this.btnQuitarImagen.Size = new System.Drawing.Size(86, 22);
             this.btnQuitarImagen.TabIndex = 22;
@@ -567,7 +640,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 10);
+            this.label5.Location = new System.Drawing.Point(3, 8);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 13);
             this.label5.TabIndex = 2;
@@ -577,7 +650,7 @@
             // 
             this.btnImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImagen.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImagen.Location = new System.Drawing.Point(5, 104);
+            this.btnImagen.Location = new System.Drawing.Point(5, 102);
             this.btnImagen.Name = "btnImagen";
             this.btnImagen.Size = new System.Drawing.Size(86, 22);
             this.btnImagen.TabIndex = 21;
@@ -589,7 +662,7 @@
             // 
             this.pbImagen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbImagen.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.sinimagen;
-            this.pbImagen.Location = new System.Drawing.Point(5, 27);
+            this.pbImagen.Location = new System.Drawing.Point(5, 25);
             this.pbImagen.Name = "pbImagen";
             this.pbImagen.Size = new System.Drawing.Size(86, 72);
             this.pbImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -600,7 +673,7 @@
             // 
             this.slideDatos.Location = new System.Drawing.Point(3, 3);
             this.slideDatos.Name = "slideDatos";
-            this.slideDatos.Size = new System.Drawing.Size(513, 201);
+            this.slideDatos.Size = new System.Drawing.Size(513, 232);
             this.slideDatos.SlideControl = null;
             this.slideDatos.TabIndex = 9;
             // 
@@ -608,7 +681,7 @@
             // 
             this.groupBox3.Controls.Add(this.dgvDetallePieza);
             this.groupBox3.Controls.Add(this.panelAcciones);
-            this.groupBox3.Location = new System.Drawing.Point(8, 209);
+            this.groupBox3.Location = new System.Drawing.Point(8, 245);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(497, 205);
             this.groupBox3.TabIndex = 13;
@@ -619,7 +692,7 @@
             // 
             this.gbGuardarCancelar.Controls.Add(this.btnVolver);
             this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
-            this.gbGuardarCancelar.Location = new System.Drawing.Point(8, 418);
+            this.gbGuardarCancelar.Location = new System.Drawing.Point(8, 454);
             this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
             this.gbGuardarCancelar.Name = "gbGuardarCancelar";
             this.gbGuardarCancelar.Size = new System.Drawing.Size(497, 47);
@@ -652,7 +725,7 @@
             this.tpMPDisponibles.Controls.Add(this.slideAgregar);
             this.tpMPDisponibles.Location = new System.Drawing.Point(4, 5);
             this.tpMPDisponibles.Name = "tpMPDisponibles";
-            this.tpMPDisponibles.Size = new System.Drawing.Size(515, 472);
+            this.tpMPDisponibles.Size = new System.Drawing.Size(515, 507);
             this.tpMPDisponibles.TabIndex = 2;
             this.tpMPDisponibles.UseVisualStyleBackColor = true;
             // 
@@ -674,7 +747,7 @@
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.btnHecho);
             this.panel1.Controls.Add(this.nudCantidad);
-            this.panel1.Location = new System.Drawing.Point(415, 41);
+            this.panel1.Location = new System.Drawing.Point(417, 41);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(73, 127);
             this.panel1.TabIndex = 6;
@@ -714,17 +787,23 @@
             // nudCantidad
             // 
             this.nudCantidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.nudCantidad.DecimalPlaces = 2;
+            this.nudCantidad.DecimalPlaces = 3;
             this.nudCantidad.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
             this.nudCantidad.Location = new System.Drawing.Point(3, 30);
+            this.nudCantidad.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nudCantidad.Name = "nudCantidad";
             this.nudCantidad.Size = new System.Drawing.Size(64, 21);
             this.nudCantidad.TabIndex = 30;
             this.nudCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudCantidad.Enter += new System.EventHandler(this.control_Enter);
             // 
             // dgvMPDisponibles
             // 
@@ -738,7 +817,7 @@
             this.dgvMPDisponibles.ReadOnly = true;
             this.dgvMPDisponibles.RowHeadersVisible = false;
             this.dgvMPDisponibles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMPDisponibles.Size = new System.Drawing.Size(401, 179);
+            this.dgvMPDisponibles.Size = new System.Drawing.Size(408, 179);
             this.dgvMPDisponibles.TabIndex = 0;
             this.dgvMPDisponibles.DoubleClick += new System.EventHandler(this.dgvPiezas_DoubleClick);
             this.dgvMPDisponibles.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvMPDisponibles_CellFormatting);
@@ -756,51 +835,11 @@
             // 
             this.ofdImagen.Title = "Seleccione una imagen";
             // 
-            // cbTerminacionBuscar
-            // 
-            this.cbTerminacionBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTerminacionBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbTerminacionBuscar.FormattingEnabled = true;
-            this.cbTerminacionBuscar.Location = new System.Drawing.Point(258, 27);
-            this.cbTerminacionBuscar.Name = "cbTerminacionBuscar";
-            this.cbTerminacionBuscar.Size = new System.Drawing.Size(138, 21);
-            this.cbTerminacionBuscar.TabIndex = 8;
-            // 
-            // cbPlano
-            // 
-            this.cbPlano.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPlano.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbPlano.FormattingEnabled = true;
-            this.cbPlano.Location = new System.Drawing.Point(81, 101);
-            this.cbPlano.Name = "cbPlano";
-            this.cbPlano.Size = new System.Drawing.Size(284, 21);
-            this.cbPlano.TabIndex = 23;
-            // 
-            // cbEstado
-            // 
-            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEstado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(81, 74);
-            this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(284, 21);
-            this.cbEstado.TabIndex = 22;
-            // 
-            // cbTerminacion
-            // 
-            this.cbTerminacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTerminacion.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbTerminacion.FormattingEnabled = true;
-            this.cbTerminacion.Location = new System.Drawing.Point(81, 47);
-            this.cbTerminacion.Name = "cbTerminacion";
-            this.cbTerminacion.Size = new System.Drawing.Size(284, 21);
-            this.cbTerminacion.TabIndex = 21;
-            // 
             // frmPieza
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(527, 537);
+            this.ClientSize = new System.Drawing.Size(527, 572);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -901,5 +940,8 @@
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbPlano;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbEstado;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbTerminacion;
+        private System.Windows.Forms.CheckBox chkAutogenerar;
+        private System.Windows.Forms.TextBox txtCodigo;
+        private System.Windows.Forms.Label label9;
     }
 }
