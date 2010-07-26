@@ -137,7 +137,7 @@ create table DETALLE_PIEZA (
    DPZA_CODIGO          numeric(10)          identity,
    MP_CODIGO            numeric(10)          null,
    PZA_CODIGO           numeric(10)          null,
-   DPZA_CANTIDAD        int                  null,
+   DPZA_CANTIDAD        numeric(10,3)        null,	/*-MODIFICACION 26/07/2010-*/
    constraint PK_DETALLE_PIEZA primary key nonclustered (DPZA_CODIGO)
 )
 
@@ -174,7 +174,7 @@ create table DETALLE_SUBCONJUNTO (
    DSC_CODIGO           numeric(10)          identity,
    PZA_CODIGO           numeric(10)          null,
    SCONJ_CODIGO         numeric(10)          null,
-   DSC_CANTIDAD         numeric(10)          null,
+   DSC_CANTIDAD         numeric(10,3)        null,	/*-MODIFICACION 26/07/2010-*/
    constraint PK_DETALLE_SUBCONJUNTO primary key nonclustered (DSC_CODIGO)
 )
 
@@ -231,7 +231,7 @@ create table DETALLE_CONJUNTO (
    DCJ_CODIGO           numeric(10)          identity,
    CONJ_CODIGO          numeric(10)          null,
    SCONJ_CODIGO         numeric(10)          null,
-   DCJ_CANTIDAD         numeric(10)          null,
+   DCJ_CANTIDAD         numeric(10,3)        null,	/*-MODIFICACION 26/07/2010-*/
    constraint PK_DETALLE_CONJUNTO primary key nonclustered (DCJ_CODIGO)
 )
 
