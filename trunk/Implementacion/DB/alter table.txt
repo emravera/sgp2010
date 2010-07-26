@@ -468,3 +468,13 @@ alter table DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL
 alter table DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL
    add constraint detalleMateriaPrimaAnual_planMateriaPrimaAnual_fk foreign key (PMPA_CODIGO)
       references PLANES_MATERIAS_PRIMAS_ANUALES (PMPA_CODIGO)
+
+/*--------AGREGADO 26/07/2010--------*/
+
+
+/*==============================================================*/
+/* Table: DETALLE_PLAN_ANUAL                                    */
+/*==============================================================*/
+alter table DETALLE_PLAN_ANUAL
+   add constraint detallePlanAnual_planAnual_fk foreign key (PAN_CODIGO)
+      references PLANES_ANUALES (PAN_CODIGO)
