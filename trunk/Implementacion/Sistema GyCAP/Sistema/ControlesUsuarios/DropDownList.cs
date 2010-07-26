@@ -75,7 +75,7 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
 
         /// <summary>
         /// Define el texto a mostrar en el combobox. Si se especifica un string.Empty se oculta.
-        /// El texto mostrado desaperece al desplegar la lista del combobox.
+        /// El texto mostrado desaperece al desplegar la lista del combobox u obtener el foco.
         /// </summary>
         /// <param name="txt">El texto a mostrar en el combobox.</param>
         public void SetTexto(string txt)
@@ -103,7 +103,8 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         /// Carga los datos al combobox desde un dataview según el displayMember y valueMemeber especificado.
         /// Contiene una cabecera que puede formar parte de los items del combobox o como un simple texto. 
         /// La cabecera persistente que forma parte de los items se carga con valor -1 y se selecciona por defecto.
-        /// La cabecera no persistente (como texto) desaparece al desplegar la lista del combobox, se selecciona por defecto el índice -1.
+        /// La cabecera no persistente (como texto) desaparece al desplegar la lista del combobox u obtener el foco,
+        /// se selecciona por defecto el índice -1.
         /// </summary>
         /// <param name="dataview">El dataview con los datos a cargar.</param>
         /// <param name="valueMember">El campo de dónde se tomará el valor.</param>
