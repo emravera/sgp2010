@@ -141,5 +141,52 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
             if (cabeceraPersistente) { this.SelectedIndex = 0; }
             else { this.SelectedIndex = -1; }
         }
+
+        /// <summary>
+        /// Ofrece la posibilidad de concatenar varios displayMember.
+        /// Carga los datos al combobox desde un dataview según el displayMember y valueMemeber especificado.
+        /// Contiene una cabecera que puede formar parte de los items del combobox o como un simple texto. 
+        /// La cabecera persistente que forma parte de los items se carga con valor -1 y se selecciona por defecto.
+        /// La cabecera no persistente (como texto) desaparece al desplegar la lista del combobox u obtener el foco,
+        /// se selecciona por defecto el índice -1.
+        /// </summary>
+        /// <param name="dataview">El dataview con los datos a cargar.</param>
+        /// <param name="valueMember">El campo de dónde se tomará el valor.</param>
+        /// <param name="displayMember">Un array de string con los campos de dónde se concatenará el string a mostrar.</param>
+        /// <param name="textoCabecera">El texto de la cabecera.</param>
+        /// <param name="cabeceraPersistente">True para que forme parte de los items, false para simple texto.</param>
+        public void SetDatos(DataView dataview, string valueMember, string[] displayMember, string textoCabecera, bool cabeceraPersistente)
+        {
+            persistente = cabeceraPersistente;
+            this.Items.Clear();
+            IList<ItemLista> lista = new List<ItemLista>();
+            if (cabeceraPersistente) { lista.Add(new ItemLista(-1, textoCabecera)); }
+            else { SetTexto(textoCabecera); }
+
+            if (dataview.Count > 0)
+            {
+                string cadenaAuxiliar = string.Empty;
+                for (int i = 0; i < displayMember.Length; i++)
+                {
+                    cadenaAuxiliar += displayMember[i] + " ASC ";
+                }
+                dataview.Sort = cadenaAuxiliar;
+                foreach (DataRowView dr in dataview)
+                {
+                    cadenaAuxiliar = string.Empty;
+                    for (int i = 0; i < displayMember.Length; i++)
+                    {
+                        cadenaAuxiliar += dr[displayMember[i]].ToString() + " ";
+                    }
+                    lista.Add(new ItemLista(Convert.ToInt32(dr[valueMember].ToString()), cadenaAuxiliar));
+                }
+            }
+            this.DataSource = lista;
+            this.DisplayMember = "Name";
+            this.ValueMember = "Value";
+
+            if (cabeceraPersistente) { this.SelectedIndex = 0; }
+            else { this.SelectedIndex = -1; }
+        }
     }
 }

@@ -15,10 +15,10 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
 		{
             this.Format = DateTimePickerFormat.Short;
             this.ShowCheckBox = false;
-            SetNull();
+            SetFechaNull();
 		}
 
-        public void SetNull()
+        public void SetFechaNull()
         {
             this.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.CustomFormat = " ";
@@ -30,10 +30,23 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
             return isNull;
         }
 
-        public void SetFecha()
+        private void SetFecha()
         {
             this.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.isNull = false;
+        }
+
+        public void SetFecha(DateTime fecha)
+        {
+            if (fecha != null)
+            {
+                this.Value = fecha;
+                this.isNull = false;
+            }
+            else
+            {
+                SetFechaNull();
+            }
         }
 
         protected override void OnCloseUp(EventArgs eventargs)

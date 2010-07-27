@@ -423,23 +423,8 @@ namespace GyCAP.UI.EstructuraProducto
             if (sender.GetType().Equals(txtNombre.GetType())) { (sender as TextBox).SelectAll(); }
             if (sender.GetType().Equals(txtDescripcion.GetType())) { (sender as RichTextBox).SelectAll(); }
             if (sender.GetType().Equals(nudC.GetType())) { (sender as NumericUpDown).Select(0, 20); }
-        } 
+        }     
         
-        private void txtNombre_Enter(object sender, EventArgs e)
-        {
-            txtNombre.SelectAll();
-        }
-
-        private void txtDescripcion_Enter(object sender, EventArgs e)
-        {
-            txtDescripcion.SelectAll();
-        }
-
-        private void txtNombreBuscar_Enter(object sender, EventArgs e)
-        {
-            txtNombreBuscar.SelectAll();
-        }
-
         private void SetGrillasCombosVistas()
         {
             //Obtenemos las terminaciones
@@ -483,21 +468,16 @@ namespace GyCAP.UI.EstructuraProducto
             dvPlanoBuscar.Sort = "PNO_NOMBRE ASC";
 
             //ComboBoxs
-            cbCocinaBuscar.DataSource = dvCocinaBuscar;
-            cbCocinaBuscar.DisplayMember = "COC_CODIGO_PRODUCTO";
-            cbCocinaBuscar.ValueMember = "COC_CODIGO";
-            cbCocinaBuscar.SelectedIndex = -1;
-            cbResponsableBuscar.DataSource = dvResponsableBuscar;
-            cbResponsableBuscar.DisplayMember = "E_APELLIDO" + ", " + "E_NOMBRE";
-            cbResponsableBuscar.ValueMember = "E_CODIGO";
-            cbResponsableBuscar.SelectedIndex = -1;
-            cbPlanoBuscar.DataSource = dvPlanoBuscar;
-            cbPlanoBuscar.DisplayMember = "PNO_NOMBRE";
-            cbPlanoBuscar.ValueMember = "PNO_CODIGO";
-            cbPlanoBuscar.SelectedIndex = -1;
-            cbActivoBuscar.Items.Add("SI");
-            cbActivoBuscar.Items.Add("NO");
-            cbActivoBuscar.SelectedIndex = -1;
+            cbCocinaBuscar.SetDatos(dvCocinaBuscar, "COC_CODIGO", "COC_CODIGO_PRODUCTO", "--TODOS--", true);
+            string[] displaymember = { "E_APELLIDO", "E_NOMBRE"};
+            cbResponsableBuscar.SetDatos(dvResponsableBuscar, "E_CODIGO", displaymember, "--TODOS--", true);
+            cbPlanoBuscar.SetDatos(dvPlanoBuscar, "PNO_CODIGO", "PNO_NOMBRE", "--TODOS--", true);
+            cbActivoBuscar.Items.Add(new Sistema.Item("--TODOS--", -1));
+            cbActivoBuscar.Items.Add(new Sistema.Item("SI", 1));
+            cbActivoBuscar.Items.Add(new Sistema.Item("NO", 0));
+            cbActivoBuscar.DisplayMember = "Name";
+            cbActivoBuscar.ValueMember = "Value";
+            cbActivoBuscar.SelectedIndex = 0;
 
             #endregion Buscar
 
@@ -528,18 +508,10 @@ namespace GyCAP.UI.EstructuraProducto
             //dvPartes.Sort = "PAR_NOMBRE ASC";
 
             //ComboBoxs
-            cbCocina.DataSource = dvCocina;
-            cbCocina.DisplayMember = "COC_CODIGO_PRODUCTO";
-            cbCocina.ValueMember = "COC_CODIGO";
-            cbCocina.SelectedIndex = -1;
-            cbResponsable.DataSource = dvResponsable;
-            cbResponsable.DisplayMember = "E_APELLIDO" + ", " + "E_NOMBRE";
-            cbResponsable.ValueMember = "E_CODIGO";
-            cbResponsable.SelectedIndex = -1;
-            cbPlano.DataSource = dvPlano;
-            cbPlano.DisplayMember = "PNO_NOMBRE";
-            cbPlano.ValueMember = "PNO_CODIGO";
-            cbPlano.SelectedIndex = -1;
+            cbCocina.SetDatos(dvCocina, "COC_CODIGO", "COC_CODIGO_PRODUCTO", "Seleccione", false);
+            cbResponsable.SetDatos(dvResponsable, "E_CODIGO", displaymember, "Seleccione", false);
+            cbPlano.SetDatos(dvPlano, "PNO_CODIGO", "PNO_NOMBRE", "Seleccione", false);
+           
             #endregion Datos
 
             #region Conjuntos
