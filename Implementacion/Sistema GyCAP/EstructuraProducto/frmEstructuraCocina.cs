@@ -504,7 +504,7 @@ namespace GyCAP.UI.EstructuraProducto
             #region Datos
             //Grilla Listado Partes
             dgvPartes.AutoGenerateColumns = false;
-            dgvPartes.Columns.Add("PAR_TIPO", "Nombre");
+            dgvPartes.Columns.Add("PAR_TIPO", "Tipo");
             dgvPartes.Columns.Add("PAR_NOMBRE", "Nombre");
             dgvPartes.Columns.Add("PAR_TERMINACION", "Terminación");
             dgvPartes.Columns.Add("PAR_CANTIDAD", "Cantidad");
