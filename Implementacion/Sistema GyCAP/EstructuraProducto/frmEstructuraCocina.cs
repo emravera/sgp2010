@@ -25,7 +25,7 @@ namespace GyCAP.UI.EstructuraProducto
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
         private int slideActual = 0; //0-Datos, 1-Conjuntos, 2-Subconjuntos, 3-Piezas, 4-MateriaPrima, 5-Árbol
-        private int cxe = 0, scxe = 0, pxe = 0, mpxe = 0; //Variables para el manejo de inserciones en los dataset con códigos unique
+        private int cxe = -1, scxe = -1, pxe = -1, mpxe = -1; //Variables para el manejo de inserciones en los dataset con códigos unique
 
         #region Inicio
 
@@ -418,6 +418,13 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
+        private void control_Enter(object sender, EventArgs e)
+        {
+            if (sender.GetType().Equals(txtNombre.GetType())) { (sender as TextBox).SelectAll(); }
+            if (sender.GetType().Equals(txtDescripcion.GetType())) { (sender as RichTextBox).SelectAll(); }
+            if (sender.GetType().Equals(nudC.GetType())) { (sender as NumericUpDown).Select(0, 20); }
+        } 
+        
         private void txtNombre_Enter(object sender, EventArgs e)
         {
             txtNombre.SelectAll();
@@ -501,10 +508,12 @@ namespace GyCAP.UI.EstructuraProducto
             dgvPartes.Columns.Add("PAR_NOMBRE", "Nombre");
             dgvPartes.Columns.Add("PAR_TERMINACION", "Terminación");
             dgvPartes.Columns.Add("PAR_CANTIDAD", "Cantidad");
+            dgvPartes.Columns.Add("PAR_UMED", "Unidad Medida");
             dgvPartes.Columns["PAR_TIPO"].DataPropertyName = "PAR_TIPO";
             dgvPartes.Columns["PAR_NOMBRE"].DataPropertyName = "PAR_NOMBRE";
             dgvPartes.Columns["PAR_TERMINACION"].DataPropertyName = "PAR_TERMINACION";
             dgvPartes.Columns["PAR_CANTIDAD"].DataPropertyName = "PAR_CANTIDAD";
+            dgvPartes.Columns["PAR_UMED"].DataPropertyName = "PAR_UMED";
             dgvPartes.Columns["PAR_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvPartes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;            
 
@@ -536,26 +545,31 @@ namespace GyCAP.UI.EstructuraProducto
             #region Conjuntos
             //Grilla Listado Conjuntos Disponibles
             dgvCD.AutoGenerateColumns = false;
+            dgvCD.Columns.Add("CONJ_CODIGOPARTE", "Código");
             dgvCD.Columns.Add("CONJ_NOMBRE", "Nombre");
-            dgvCD.Columns.Add("TE_CODIGO", "Terminación");
+            dgvCD.Columns.Add("TE_NOMBRE", "Terminación");
             dgvCD.Columns.Add("CONJ_DESCRIPCION", "Descripción");
+            dgvCD.Columns["CONJ_CODIGOPARTE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCD.Columns["CONJ_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCD.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvCD.Columns["TE_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCD.Columns["CONJ_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvCD.Columns["CONJ_DESCRIPCION"].Resizable = DataGridViewTriState.True;
+            dgvCD.Columns["CONJ_CODIGOPARTE"].DataPropertyName = "CONJ_CODIGOPARTE";
             dgvCD.Columns["CONJ_NOMBRE"].DataPropertyName = "CONJ_NOMBRE";
-            dgvCD.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
+            dgvCD.Columns["TE_NOMBRE"].DataPropertyName = "TE_CODIGO";
             dgvCD.Columns["CONJ_DESCRIPCION"].DataPropertyName = "CONJ_DESCRIPCION";
 
             //Grilla Listado Conjuntos en Estructura
             dgvCE.AutoGenerateColumns = false;
-            dgvCE.Columns.Add("CONJ_CODIGO", "Nombre");
+            dgvCE.Columns.Add("CONJ_CODIGOPARTE", "Código");
+            dgvCE.Columns.Add("CONJ_NOMBRE", "Nombre");
             dgvCE.Columns.Add("TE_NOMBRE", "Terminación");
             dgvCE.Columns.Add("CXE_CANTIDAD", "Cantidad");
             dgvCE.Columns["CXE_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvCE.Columns.Add("GRP_CODIGO", "Grupo");
             dgvCE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dgvCE.Columns["CONJ_CODIGO"].DataPropertyName = "CONJ_CODIGO";
+            dgvCE.Columns["CONJ_CODIGOPARTE"].DataPropertyName = "CONJ_CODIGO";
+            dgvCE.Columns["CONJ_NOMBRE"].DataPropertyName = "CONJ_CODIGO";
             dgvCE.Columns["TE_NOMBRE"].DataPropertyName = "CONJ_CODIGO";
             dgvCE.Columns["CXE_CANTIDAD"].DataPropertyName = "CXE_CANTIDAD";
             dgvCE.Columns["GRP_CODIGO"].DataPropertyName = "GRP_CODIGO";
@@ -571,25 +585,30 @@ namespace GyCAP.UI.EstructuraProducto
             #region Subconjuntos
             //Grilla listado subconjuntos disponibles
             dgvSCD.AutoGenerateColumns = false;
+            dgvSCD.Columns.Add("SCONJ_CODIGOPARTE", "Código");
             dgvSCD.Columns.Add("SCONJ_NOMBRE", "Nombre");
-            dgvSCD.Columns.Add("TE_CODIGO", "Terminación");
+            dgvSCD.Columns.Add("TE_NOMBRE", "Terminación");
             dgvSCD.Columns.Add("SCONJ_DESCRIPCION", "Descripción");
+            dgvSCD.Columns["SCONJ_CODIGOPARTE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvSCD.Columns["SCONJ_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvSCD.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvSCD.Columns["TE_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvSCD.Columns["SCONJ_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvSCD.Columns["SCONJ_DESCRIPCION"].Resizable = DataGridViewTriState.True;
+            dgvSCD.Columns["SCONJ_CODIGOPARTE"].DataPropertyName = "SCONJ_CODIGOPARTE";
             dgvSCD.Columns["SCONJ_NOMBRE"].DataPropertyName = "SCONJ_NOMBRE";
-            dgvSCD.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
+            dgvSCD.Columns["TE_NOMBRE"].DataPropertyName = "TE_CODIGO";
             dgvSCD.Columns["SCONJ_DESCRIPCION"].DataPropertyName = "SCONJ_DESCRIPCION";
 
             //Grilla listado de subconjuntos en estructura
             dgvSCE.AutoGenerateColumns = false;
-            dgvSCE.Columns.Add("SCONJ_CODIGO", "Nombre");
+            dgvSCE.Columns.Add("SCONJ_CODIGOPARTE", "Código");
+            dgvSCE.Columns.Add("SCONJ_NOMBRE", "Nombre");
             dgvSCE.Columns.Add("TE_NOMBRE", "Terminación");
             dgvSCE.Columns.Add("SCXE_CANTIDAD", "Cantidad");
             dgvSCE.Columns["SCXE_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvSCE.Columns.Add("GRP_CODIGO", "Grupo");
-            dgvSCE.Columns["SCONJ_CODIGO"].DataPropertyName = "SCONJ_CODIGO";
+            dgvSCE.Columns["SCONJ_CODIGOPARTE"].DataPropertyName = "SCONJ_CODIGO";
+            dgvSCE.Columns["SCONJ_NOMBRE"].DataPropertyName = "SCONJ_CODIGO";
             dgvSCE.Columns["TE_NOMBRE"].DataPropertyName = "SCONJ_CODIGO";
             dgvSCE.Columns["SCXE_CANTIDAD"].DataPropertyName = "SCXE_CANTIDAD";
             dgvSCE.Columns["GRP_CODIGO"].DataPropertyName = "GRP_CODIGO";
@@ -606,26 +625,31 @@ namespace GyCAP.UI.EstructuraProducto
             #region Piezas
             //Grilla listado de piezas disponibles
             dgvPD.AutoGenerateColumns = false;
+            dgvPD.Columns.Add("PZA_CODIGOPARTE", "Código");
             dgvPD.Columns.Add("PZA_NOMBRE", "Nombre");
-            dgvPD.Columns.Add("TE_CODIGO", "Terminación");
+            dgvPD.Columns.Add("TE_NOMBRE", "Terminación");
             dgvPD.Columns.Add("PZA_DESCRIPCION", "Descripción");
+            dgvPD.Columns["PZA_CODIGOPARTE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPD.Columns["PZA_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPD.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPD.Columns["TE_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPD.Columns["PZA_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvPD.Columns["PZA_DESCRIPCION"].Resizable = DataGridViewTriState.True;
+            dgvPD.Columns["PZA_CODIGOPARTE"].DataPropertyName = "PZA_CODIGOPARTE";
             dgvPD.Columns["PZA_NOMBRE"].DataPropertyName = "PZA_NOMBRE";
-            dgvPD.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
+            dgvPD.Columns["TE_NOMBRE"].DataPropertyName = "TE_CODIGO";
             dgvPD.Columns["PZA_DESCRIPCION"].DataPropertyName = "PZA_DESCRIPCION";
 
             //Grilla Listado piezas en Estructura
             dgvPE.AutoGenerateColumns = false;
-            dgvPE.Columns.Add("PZA_CODIGO", "Nombre");
+            dgvPE.Columns.Add("PZA_CODIGOPARTE", "Código");
+            dgvPE.Columns.Add("PZA_NOMBRE", "Nombre");
             dgvPE.Columns.Add("TE_NOMBRE", "Terminación");
             dgvPE.Columns.Add("PXE_CANTIDAD", "Cantidad");
             dgvPE.Columns["PXE_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvPE.Columns.Add("GRP_CODIGO", "Grupo");
             dgvPE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dgvPE.Columns["PZA_CODIGO"].DataPropertyName = "PZA_CODIGO";
+            dgvPE.Columns["PZA_CODIGOPARTE"].DataPropertyName = "PZA_CODIGO";
+            dgvPE.Columns["PZA_NOMBRE"].DataPropertyName = "PZA_CODIGO";
             dgvPE.Columns["TE_NOMBRE"].DataPropertyName = "PZA_CODIGO";
             dgvPE.Columns["PXE_CANTIDAD"].DataPropertyName = "PXE_CANTIDAD";
             dgvPE.Columns["GRP_CODIGO"].DataPropertyName = "GRP_CODIGO";
@@ -642,25 +666,25 @@ namespace GyCAP.UI.EstructuraProducto
             //Grilla listado materia primas disponibles
             dgvMPD.AutoGenerateColumns = false;
             dgvMPD.Columns.Add("MP_NOMBRE", "Nombre");
-            dgvMPD.Columns.Add("UMED_CODIGO", "Unidad Medida");
+            dgvMPD.Columns.Add("UMED_NOMBRE", "Unidad Medida");
             dgvMPD.Columns.Add("MP_DESCRIPCION", "Descripción");
             dgvMPD.Columns["MP_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvMPD.Columns["UMED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvMPD.Columns["UMED_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvMPD.Columns["MP_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvMPD.Columns["MP_DESCRIPCION"].Resizable = DataGridViewTriState.True;
             dgvMPD.Columns["MP_NOMBRE"].DataPropertyName = "MP_NOMBRE";
-            dgvMPD.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
+            dgvMPD.Columns["UMED_NOMBRE"].DataPropertyName = "UMED_CODIGO";
             dgvMPD.Columns["MP_DESCRIPCION"].DataPropertyName = "MP_DESCRIPCION";
 
             //Grilla listado materias primas en estructura
             dgvMPE.AutoGenerateColumns = false;
-            dgvMPE.Columns.Add("MP_CODIGO", "Nombre");
+            dgvMPE.Columns.Add("MP_NOMBRE", "Nombre");
             dgvMPE.Columns.Add("UMED_NOMBRE", "Unidad Medida");
             dgvMPE.Columns.Add("MPXE_CANTIDAD", "Cantidad");
             dgvMPE.Columns["MPXE_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvMPE.Columns.Add("GRP_CODIGO", "Grupo");
             dgvMPE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dgvMPE.Columns["MP_CODIGO"].DataPropertyName = "MP_CODIGO";
+            dgvMPE.Columns["MP_NOMBRE"].DataPropertyName = "MP_CODIGO";
             dgvMPE.Columns["UMED_NOMBRE"].DataPropertyName = "MP_CODIGO";
             dgvMPE.Columns["MPXE_CANTIDAD"].DataPropertyName = "MPXE_CANTIDAD";
             dgvMPE.Columns["GRP_CODIGO"].DataPropertyName = "GRP_CODIGO";
@@ -733,6 +757,10 @@ namespace GyCAP.UI.EstructuraProducto
             if (txtNombreBuscar.Enabled) { txtNombreBuscar.Focus(); }
         }
 
+        #endregion Servicios
+
+        #region Cell_Formatting
+
         private void dgvEstructuras_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value.ToString() != string.Empty)
@@ -763,10 +791,187 @@ namespace GyCAP.UI.EstructuraProducto
                 }
             }
         }
-
-        #endregion Servicios
-
         
-        
+        private void dgvCD_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != string.Empty)
+            {
+                string nombre;
+                if (dgvCD.Columns[e.ColumnIndex].Name == "TE_NOMBRE")
+                {
+                    nombre = dsEstructura.TERMINACIONES.FindByTE_CODIGO(Convert.ToInt32(e.Value.ToString())).TE_NOMBRE;
+                    e.Value = nombre;
+                }
+            }
+        }
+
+        private void dgvCE_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {            
+            if (e.Value.ToString() != string.Empty)
+            {
+                string nombre;
+                int codigo;
+                switch (dgvCE.Columns[e.ColumnIndex].Name)
+                {
+                    case "CONJ_CODIGOPARTE":
+                        codigo = Convert.ToInt32(e.Value.ToString());
+                        nombre = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigo).CONJ_CODIGOPARTE;
+                        e.Value = nombre;
+                        break;
+                    case "CONJ_NOMBRE":
+                        codigo = Convert.ToInt32(e.Value.ToString());
+                        nombre = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigo).CONJ_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "TE_NOMBRE":
+                        codigo = Convert.ToInt32(e.Value.ToString());
+                        nombre = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigo).TERMINACIONESRow.TE_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "GRP_CODIGO":
+                        codigo = Convert.ToInt32(e.Value.ToString());
+                        nombre = dsEstructura.GRUPOS_ESTRUCTURA.FindByGRP_CODIGO(codigo).GRP_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void dgvSCD_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != string.Empty)
+            {
+                string nombre;
+                if (dgvSCD.Columns[e.ColumnIndex].Name == "TE_NOMBRE")
+                {
+                    nombre = dsEstructura.TERMINACIONES.FindByTE_CODIGO(Convert.ToInt32(e.Value.ToString())).TE_NOMBRE;
+                    e.Value = nombre;
+                }
+            }
+        }
+
+        private void dgvSCE_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != string.Empty)
+            {
+                string nombre;
+                int codigo;
+                switch (dgvSCE.Columns[e.ColumnIndex].Name)
+                {
+                    case "SCONJ_CODIGOPARTE":
+                        codigo = Convert.ToInt32(e.Value.ToString());
+                        nombre = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigo).SCONJ_CODIGOPARTE;
+                        e.Value = nombre;
+                        break;
+                    case "SCONJ_NOMBRE":
+                        codigo = Convert.ToInt32(e.Value.ToString());
+                        nombre = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigo).SCONJ_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "TE_NOMBRE":
+                        codigo = Convert.ToInt32(e.Value.ToString());
+                        nombre = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigo).TERMINACIONESRow.TE_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "GRP_CODIGO":
+                        codigo = Convert.ToInt32(e.Value.ToString());
+                        nombre = dsEstructura.GRUPOS_ESTRUCTURA.FindByGRP_CODIGO(codigo).GRP_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void dgvPD_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != string.Empty)
+            {
+                string nombre;
+                if (dgvPD.Columns[e.ColumnIndex].Name == "TE_NOMBRE")
+                {
+                    nombre = dsEstructura.TERMINACIONES.FindByTE_CODIGO(Convert.ToInt32(e.Value.ToString())).TE_NOMBRE;
+                    e.Value = nombre;
+                }
+            }
+        }
+
+        private void dgvPE_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            string nombre;
+            int codigo;
+            switch (dgvPE.Columns[e.ColumnIndex].Name)
+            {
+                case "PZA_CODIGOPARTE":
+                    codigo = Convert.ToInt32(e.Value.ToString());
+                    nombre = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigo).PZA_CODIGOPARTE;
+                    e.Value = nombre;
+                    break;
+                case "PZA_NOMBRE":
+                    codigo = Convert.ToInt32(e.Value.ToString());
+                    nombre = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigo).PZA_NOMBRE;
+                    e.Value = nombre;
+                    break;
+                case "TE_NOMBRE":
+                    codigo = Convert.ToInt32(e.Value.ToString());
+                    nombre = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigo).TERMINACIONESRow.TE_NOMBRE;
+                    e.Value = nombre;
+                    break;
+                case "GRP_CODIGO":
+                    codigo = Convert.ToInt32(e.Value.ToString());
+                    nombre = dsEstructura.GRUPOS_ESTRUCTURA.FindByGRP_CODIGO(codigo).GRP_NOMBRE;
+                    e.Value = nombre;
+                    break;
+                default:
+                    break;
+            }
+        }        
+
+        private void dgvMPD_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != string.Empty)
+            {
+                string nombre;
+                if (dgvMPD.Columns[e.ColumnIndex].Name == "UMED_NOMBRE")
+                {
+                    nombre = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(Convert.ToInt32(e.Value.ToString())).UMED_NOMBRE;
+                    e.Value = nombre;
+                }
+            }
+        }
+
+        private void dgvMPE_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != string.Empty)
+            {
+                string nombre;
+                int codigo;
+                switch (dgvMPE.Columns[e.ColumnIndex].Name)
+                {
+                    case "MP_NOMBRE":
+                        codigo = Convert.ToInt32(e.Value.ToString());
+                        nombre = dsEstructura.MATERIAS_PRIMAS.FindByMP_CODIGO(codigo).MP_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "UMED_NOMBRE":
+                        codigo = Convert.ToInt32(dsEstructura.MATERIAS_PRIMAS.FindByMP_CODIGO(Convert.ToInt32(e.Value.ToString())).UMED_CODIGO);
+                        nombre = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigo).UMED_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "GRP_CODIGO":
+                        codigo = Convert.ToInt32(e.Value.ToString());
+                        nombre = dsEstructura.GRUPOS_ESTRUCTURA.FindByGRP_CODIGO(codigo).GRP_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        #endregion
     }
 }

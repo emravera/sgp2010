@@ -34,9 +34,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvEstructuras = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbResponsableBuscar = new System.Windows.Forms.ComboBox();
-            this.dtpFechaAltaBuscar = new System.Windows.Forms.DateTimePicker();
-            this.cbPlanoBuscar = new System.Windows.Forms.ComboBox();
             this.cbActivoBuscar = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -44,7 +41,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.cbCocinaBuscar = new System.Windows.Forms.ComboBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tpDatos = new System.Windows.Forms.TabPage();
@@ -61,11 +57,6 @@
             this.dgvPartes = new System.Windows.Forms.DataGridView();
             this.gbDatos = new System.Windows.Forms.GroupBox();
             this.chkActivo = new System.Windows.Forms.CheckBox();
-            this.cbResponsable = new System.Windows.Forms.ComboBox();
-            this.dtpFechaModificacion = new System.Windows.Forms.DateTimePicker();
-            this.dtpFechaAlta = new System.Windows.Forms.DateTimePicker();
-            this.cbPlano = new System.Windows.Forms.ComboBox();
-            this.cbCocina = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -141,6 +132,15 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.cbResponsableBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbPlanoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbCocinaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbResponsable = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbPlano = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbCocina = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.dtpFechaAltaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.dtpFechaAlta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.dtpFechaModificacion = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcEstructuraCocina.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -267,9 +267,10 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.cbResponsableBuscar);
             this.groupBox1.Controls.Add(this.dtpFechaAltaBuscar);
+            this.groupBox1.Controls.Add(this.cbResponsableBuscar);
             this.groupBox1.Controls.Add(this.cbPlanoBuscar);
+            this.groupBox1.Controls.Add(this.cbCocinaBuscar);
             this.groupBox1.Controls.Add(this.cbActivoBuscar);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.label12);
@@ -277,7 +278,6 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.txtNombreBuscar);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.cbCocinaBuscar);
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -287,34 +287,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de Búsqueda";
-            // 
-            // cbResponsableBuscar
-            // 
-            this.cbResponsableBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbResponsableBuscar.FormattingEnabled = true;
-            this.cbResponsableBuscar.Location = new System.Drawing.Point(333, 60);
-            this.cbResponsableBuscar.Name = "cbResponsableBuscar";
-            this.cbResponsableBuscar.Size = new System.Drawing.Size(169, 21);
-            this.cbResponsableBuscar.TabIndex = 5;
-            // 
-            // dtpFechaAltaBuscar
-            // 
-            this.dtpFechaAltaBuscar.Checked = false;
-            this.dtpFechaAltaBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaAltaBuscar.Location = new System.Drawing.Point(574, 19);
-            this.dtpFechaAltaBuscar.Name = "dtpFechaAltaBuscar";
-            this.dtpFechaAltaBuscar.ShowCheckBox = true;
-            this.dtpFechaAltaBuscar.Size = new System.Drawing.Size(97, 21);
-            this.dtpFechaAltaBuscar.TabIndex = 3;
-            // 
-            // cbPlanoBuscar
-            // 
-            this.cbPlanoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPlanoBuscar.FormattingEnabled = true;
-            this.cbPlanoBuscar.Location = new System.Drawing.Point(333, 20);
-            this.cbPlanoBuscar.Name = "cbPlanoBuscar";
-            this.cbPlanoBuscar.Size = new System.Drawing.Size(169, 21);
-            this.cbPlanoBuscar.TabIndex = 2;
             // 
             // cbActivoBuscar
             // 
@@ -368,7 +340,7 @@
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(166, 21);
             this.txtNombreBuscar.TabIndex = 1;
-            this.txtNombreBuscar.Enter += new System.EventHandler(this.txtNombreBuscar_Enter);
+            this.txtNombreBuscar.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label5
             // 
@@ -378,15 +350,6 @@
             this.label5.Size = new System.Drawing.Size(48, 13);
             this.label5.TabIndex = 4;
             this.label5.Text = "Nombre:";
-            // 
-            // cbCocinaBuscar
-            // 
-            this.cbCocinaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCocinaBuscar.FormattingEnabled = true;
-            this.cbCocinaBuscar.Location = new System.Drawing.Point(67, 60);
-            this.cbCocinaBuscar.Name = "cbCocinaBuscar";
-            this.cbCocinaBuscar.Size = new System.Drawing.Size(166, 21);
-            this.cbCocinaBuscar.TabIndex = 4;
             // 
             // btnBuscar
             // 
@@ -560,12 +523,12 @@
             // 
             // gbDatos
             // 
-            this.gbDatos.Controls.Add(this.chkActivo);
-            this.gbDatos.Controls.Add(this.cbResponsable);
             this.gbDatos.Controls.Add(this.dtpFechaModificacion);
             this.gbDatos.Controls.Add(this.dtpFechaAlta);
+            this.gbDatos.Controls.Add(this.cbResponsable);
             this.gbDatos.Controls.Add(this.cbPlano);
             this.gbDatos.Controls.Add(this.cbCocina);
+            this.gbDatos.Controls.Add(this.chkActivo);
             this.gbDatos.Controls.Add(this.label11);
             this.gbDatos.Controls.Add(this.label10);
             this.gbDatos.Controls.Add(this.label9);
@@ -594,52 +557,6 @@
             this.chkActivo.Text = "Activo:";
             this.chkActivo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkActivo.UseVisualStyleBackColor = true;
-            // 
-            // cbResponsable
-            // 
-            this.cbResponsable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbResponsable.FormattingEnabled = true;
-            this.cbResponsable.Location = new System.Drawing.Point(376, 57);
-            this.cbResponsable.Name = "cbResponsable";
-            this.cbResponsable.Size = new System.Drawing.Size(193, 21);
-            this.cbResponsable.TabIndex = 19;
-            // 
-            // dtpFechaModificacion
-            // 
-            this.dtpFechaModificacion.Checked = false;
-            this.dtpFechaModificacion.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaModificacion.Location = new System.Drawing.Point(658, 57);
-            this.dtpFechaModificacion.Name = "dtpFechaModificacion";
-            this.dtpFechaModificacion.ShowCheckBox = true;
-            this.dtpFechaModificacion.Size = new System.Drawing.Size(110, 21);
-            this.dtpFechaModificacion.TabIndex = 17;
-            // 
-            // dtpFechaAlta
-            // 
-            this.dtpFechaAlta.Checked = false;
-            this.dtpFechaAlta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaAlta.Location = new System.Drawing.Point(658, 23);
-            this.dtpFechaAlta.Name = "dtpFechaAlta";
-            this.dtpFechaAlta.ShowCheckBox = true;
-            this.dtpFechaAlta.Size = new System.Drawing.Size(110, 21);
-            this.dtpFechaAlta.TabIndex = 16;
-            // 
-            // cbPlano
-            // 
-            this.cbPlano.FormattingEnabled = true;
-            this.cbPlano.Location = new System.Drawing.Point(376, 28);
-            this.cbPlano.Name = "cbPlano";
-            this.cbPlano.Size = new System.Drawing.Size(127, 21);
-            this.cbPlano.TabIndex = 14;
-            // 
-            // cbCocina
-            // 
-            this.cbCocina.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCocina.FormattingEnabled = true;
-            this.cbCocina.Location = new System.Drawing.Point(79, 57);
-            this.cbCocina.Name = "cbCocina";
-            this.cbCocina.Size = new System.Drawing.Size(199, 21);
-            this.cbCocina.TabIndex = 13;
             // 
             // label11
             // 
@@ -695,7 +612,7 @@
             this.txtDescripcion.Size = new System.Drawing.Size(689, 69);
             this.txtDescripcion.TabIndex = 4;
             this.txtDescripcion.Text = "";
-            this.txtDescripcion.Enter += new System.EventHandler(this.txtDescripcion_Enter);
+            this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
             // 
             // txtNombre
             // 
@@ -704,7 +621,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(199, 21);
             this.txtNombre.TabIndex = 3;
-            this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
+            this.txtNombre.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label4
             // 
@@ -863,6 +780,7 @@
             this.nudC.Size = new System.Drawing.Size(90, 21);
             this.nudC.TabIndex = 0;
             this.nudC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudC.Enter += new System.EventHandler(this.control_Enter);
             // 
             // gbCE
             // 
@@ -889,6 +807,7 @@
             this.dgvCE.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCE.Size = new System.Drawing.Size(594, 185);
             this.dgvCE.TabIndex = 0;
+            this.dgvCE.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCE_CellFormatting);
             // 
             // gbCD
             // 
@@ -915,6 +834,7 @@
             this.dgvCD.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCD.Size = new System.Drawing.Size(594, 202);
             this.dgvCD.TabIndex = 0;
+            this.dgvCD.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCD_CellFormatting);
             // 
             // slideConjuntos
             // 
@@ -1016,6 +936,7 @@
             this.nudSC.Size = new System.Drawing.Size(90, 21);
             this.nudSC.TabIndex = 0;
             this.nudSC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudSC.Enter += new System.EventHandler(this.control_Enter);
             // 
             // gbSCE
             // 
@@ -1042,6 +963,7 @@
             this.dgvSCE.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSCE.Size = new System.Drawing.Size(594, 185);
             this.dgvSCE.TabIndex = 0;
+            this.dgvSCE.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSCE_CellFormatting);
             // 
             // gbSCD
             // 
@@ -1068,6 +990,7 @@
             this.dgvSCD.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSCD.Size = new System.Drawing.Size(594, 202);
             this.dgvSCD.TabIndex = 0;
+            this.dgvSCD.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSCD_CellFormatting);
             // 
             // slideSubconjuntos
             // 
@@ -1169,6 +1092,7 @@
             this.nudP.Size = new System.Drawing.Size(90, 21);
             this.nudP.TabIndex = 0;
             this.nudP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudP.Enter += new System.EventHandler(this.control_Enter);
             // 
             // gbPE
             // 
@@ -1195,6 +1119,7 @@
             this.dgvPE.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPE.Size = new System.Drawing.Size(594, 185);
             this.dgvPE.TabIndex = 0;
+            this.dgvPE.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPE_CellFormatting);
             // 
             // gbPD
             // 
@@ -1221,6 +1146,7 @@
             this.dgvPD.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPD.Size = new System.Drawing.Size(594, 202);
             this.dgvPD.TabIndex = 0;
+            this.dgvPD.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPD_CellFormatting);
             // 
             // slidePiezas
             // 
@@ -1319,11 +1245,18 @@
             // 
             // nudMP
             // 
+            this.nudMP.DecimalPlaces = 3;
+            this.nudMP.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.nudMP.Location = new System.Drawing.Point(32, 90);
             this.nudMP.Name = "nudMP";
             this.nudMP.Size = new System.Drawing.Size(90, 21);
             this.nudMP.TabIndex = 0;
             this.nudMP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudMP.Enter += new System.EventHandler(this.control_Enter);
             // 
             // gbMPE
             // 
@@ -1350,6 +1283,7 @@
             this.dgvMPE.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMPE.Size = new System.Drawing.Size(594, 185);
             this.dgvMPE.TabIndex = 0;
+            this.dgvMPE.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvMPE_CellFormatting);
             // 
             // gbMPD
             // 
@@ -1376,6 +1310,7 @@
             this.dgvMPD.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMPD.Size = new System.Drawing.Size(594, 202);
             this.dgvMPD.TabIndex = 0;
+            this.dgvMPD.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvMPD_CellFormatting);
             // 
             // slideMateriaPrima
             // 
@@ -1484,6 +1419,93 @@
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // cbResponsableBuscar
+            // 
+            this.cbResponsableBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbResponsableBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbResponsableBuscar.FormattingEnabled = true;
+            this.cbResponsableBuscar.Location = new System.Drawing.Point(333, 60);
+            this.cbResponsableBuscar.Name = "cbResponsableBuscar";
+            this.cbResponsableBuscar.Size = new System.Drawing.Size(166, 21);
+            this.cbResponsableBuscar.TabIndex = 12;
+            // 
+            // cbPlanoBuscar
+            // 
+            this.cbPlanoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPlanoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbPlanoBuscar.FormattingEnabled = true;
+            this.cbPlanoBuscar.Location = new System.Drawing.Point(333, 20);
+            this.cbPlanoBuscar.Name = "cbPlanoBuscar";
+            this.cbPlanoBuscar.Size = new System.Drawing.Size(166, 21);
+            this.cbPlanoBuscar.TabIndex = 11;
+            // 
+            // cbCocinaBuscar
+            // 
+            this.cbCocinaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCocinaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbCocinaBuscar.FormattingEnabled = true;
+            this.cbCocinaBuscar.Location = new System.Drawing.Point(67, 60);
+            this.cbCocinaBuscar.Name = "cbCocinaBuscar";
+            this.cbCocinaBuscar.Size = new System.Drawing.Size(166, 21);
+            this.cbCocinaBuscar.TabIndex = 10;
+            // 
+            // cbResponsable
+            // 
+            this.cbResponsable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbResponsable.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbResponsable.FormattingEnabled = true;
+            this.cbResponsable.Location = new System.Drawing.Point(376, 57);
+            this.cbResponsable.Name = "cbResponsable";
+            this.cbResponsable.Size = new System.Drawing.Size(193, 21);
+            this.cbResponsable.TabIndex = 23;
+            // 
+            // cbPlano
+            // 
+            this.cbPlano.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPlano.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbPlano.FormattingEnabled = true;
+            this.cbPlano.Location = new System.Drawing.Point(376, 28);
+            this.cbPlano.Name = "cbPlano";
+            this.cbPlano.Size = new System.Drawing.Size(121, 21);
+            this.cbPlano.TabIndex = 22;
+            // 
+            // cbCocina
+            // 
+            this.cbCocina.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCocina.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbCocina.FormattingEnabled = true;
+            this.cbCocina.Location = new System.Drawing.Point(79, 57);
+            this.cbCocina.Name = "cbCocina";
+            this.cbCocina.Size = new System.Drawing.Size(199, 21);
+            this.cbCocina.TabIndex = 21;
+            // 
+            // dtpFechaAltaBuscar
+            // 
+            this.dtpFechaAltaBuscar.CustomFormat = " ";
+            this.dtpFechaAltaBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaAltaBuscar.Location = new System.Drawing.Point(574, 20);
+            this.dtpFechaAltaBuscar.Name = "dtpFechaAltaBuscar";
+            this.dtpFechaAltaBuscar.Size = new System.Drawing.Size(95, 21);
+            this.dtpFechaAltaBuscar.TabIndex = 13;
+            // 
+            // dtpFechaAlta
+            // 
+            this.dtpFechaAlta.CustomFormat = " ";
+            this.dtpFechaAlta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaAlta.Location = new System.Drawing.Point(658, 23);
+            this.dtpFechaAlta.Name = "dtpFechaAlta";
+            this.dtpFechaAlta.Size = new System.Drawing.Size(107, 21);
+            this.dtpFechaAlta.TabIndex = 24;
+            // 
+            // dtpFechaModificacion
+            // 
+            this.dtpFechaModificacion.CustomFormat = " ";
+            this.dtpFechaModificacion.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaModificacion.Location = new System.Drawing.Point(658, 57);
+            this.dtpFechaModificacion.Name = "dtpFechaModificacion";
+            this.dtpFechaModificacion.Size = new System.Drawing.Size(107, 21);
+            this.dtpFechaModificacion.TabIndex = 25;
+            // 
             // frmEstructuraCocina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1570,17 +1592,13 @@
         private System.Windows.Forms.ToolStripButton btnEliminar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnSalir;
-        private System.Windows.Forms.ComboBox cbCocinaBuscar;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtNombreBuscar;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dtpFechaAltaBuscar;
-        private System.Windows.Forms.ComboBox cbPlanoBuscar;
         private System.Windows.Forms.ComboBox cbActivoBuscar;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox cbResponsableBuscar;
         private System.Windows.Forms.TabPage tpConjuntos;
         private System.Windows.Forms.TabPage tpSubconjuntos;
         private System.Windows.Forms.TabPage tpPiezas;
@@ -1595,11 +1613,6 @@
         private System.Windows.Forms.DataGridView dgvPartes;
         private System.Windows.Forms.GroupBox gbDatos;
         private System.Windows.Forms.CheckBox chkActivo;
-        private System.Windows.Forms.ComboBox cbResponsable;
-        private System.Windows.Forms.DateTimePicker dtpFechaModificacion;
-        private System.Windows.Forms.DateTimePicker dtpFechaAlta;
-        private System.Windows.Forms.ComboBox cbPlano;
-        private System.Windows.Forms.ComboBox cbCocina;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
@@ -1668,5 +1681,14 @@
         private System.Windows.Forms.GroupBox gbMPD;
         private System.Windows.Forms.DataGridView dgvMPD;
         private System.Windows.Forms.Button btnDatos;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbResponsableBuscar;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbPlanoBuscar;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbCocinaBuscar;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbResponsable;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbPlano;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbCocina;
+        private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha dtpFechaAltaBuscar;
+        private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha dtpFechaModificacion;
+        private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha dtpFechaAlta;
     }
 }

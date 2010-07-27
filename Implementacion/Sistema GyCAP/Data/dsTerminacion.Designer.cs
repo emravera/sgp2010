@@ -268,6 +268,8 @@ namespace GyCAP.Data {
             
             private global::System.Data.DataColumn columnTE_DESCRIPCION;
             
+            private global::System.Data.DataColumn columnTE_ABREVIATURA;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public TERMINACIONESDataTable() {
                 this.TableName = "TERMINACIONES";
@@ -320,6 +322,13 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TE_ABREVIATURAColumn {
+                get {
+                    return this.columnTE_ABREVIATURA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -348,12 +357,13 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TERMINACIONESRow AddTERMINACIONESRow(string TE_NOMBRE, string TE_DESCRIPCION) {
+            public TERMINACIONESRow AddTERMINACIONESRow(string TE_NOMBRE, string TE_DESCRIPCION, string TE_ABREVIATURA) {
                 TERMINACIONESRow rowTERMINACIONESRow = ((TERMINACIONESRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         TE_NOMBRE,
-                        TE_DESCRIPCION};
+                        TE_DESCRIPCION,
+                        TE_ABREVIATURA};
                 rowTERMINACIONESRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTERMINACIONESRow);
                 return rowTERMINACIONESRow;
@@ -382,6 +392,7 @@ namespace GyCAP.Data {
                 this.columnTE_CODIGO = base.Columns["TE_CODIGO"];
                 this.columnTE_NOMBRE = base.Columns["TE_NOMBRE"];
                 this.columnTE_DESCRIPCION = base.Columns["TE_DESCRIPCION"];
+                this.columnTE_ABREVIATURA = base.Columns["TE_ABREVIATURA"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -392,6 +403,8 @@ namespace GyCAP.Data {
                 base.Columns.Add(this.columnTE_NOMBRE);
                 this.columnTE_DESCRIPCION = new global::System.Data.DataColumn("TE_DESCRIPCION", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTE_DESCRIPCION);
+                this.columnTE_ABREVIATURA = new global::System.Data.DataColumn("TE_ABREVIATURA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTE_ABREVIATURA);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnTE_CODIGO}, true));
                 this.columnTE_CODIGO.AutoIncrement = true;
@@ -400,7 +413,8 @@ namespace GyCAP.Data {
                 this.columnTE_CODIGO.AllowDBNull = false;
                 this.columnTE_CODIGO.Unique = true;
                 this.columnTE_NOMBRE.MaxLength = 80;
-                this.columnTE_DESCRIPCION.MaxLength = 250;
+                this.columnTE_DESCRIPCION.MaxLength = 200;
+                this.columnTE_ABREVIATURA.MaxLength = 20;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -573,6 +587,21 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string TE_ABREVIATURA {
+                get {
+                    try {
+                        return ((string)(this[this.tableTERMINACIONES.TE_ABREVIATURAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TE_ABREVIATURA\' in table \'TERMINACIONES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTERMINACIONES.TE_ABREVIATURAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsTE_NOMBRENull() {
                 return this.IsNull(this.tableTERMINACIONES.TE_NOMBREColumn);
             }
@@ -590,6 +619,16 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetTE_DESCRIPCIONNull() {
                 this[this.tableTERMINACIONES.TE_DESCRIPCIONColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTE_ABREVIATURANull() {
+                return this.IsNull(this.tableTERMINACIONES.TE_ABREVIATURAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTE_ABREVIATURANull() {
+                this[this.tableTERMINACIONES.TE_ABREVIATURAColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -746,43 +785,51 @@ namespace GyCAP.Data.dsTerminacionTableAdapters {
             tableMapping.ColumnMappings.Add("TE_CODIGO", "TE_CODIGO");
             tableMapping.ColumnMappings.Add("TE_NOMBRE", "TE_NOMBRE");
             tableMapping.ColumnMappings.Add("TE_DESCRIPCION", "TE_DESCRIPCION");
+            tableMapping.ColumnMappings.Add("TE_ABREVIATURA", "TE_ABREVIATURA");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[TERMINACIONES] WHERE (([TE_CODIGO] = @Original_TE_CODIGO) AND ((@IsNull_TE_NOMBRE = 1 AND [TE_NOMBRE] IS NULL) OR ([TE_NOMBRE] = @Original_TE_NOMBRE)) AND ((@IsNull_TE_DESCRIPCION = 1 AND [TE_DESCRIPCION] IS NULL) OR ([TE_DESCRIPCION] = @Original_TE_DESCRIPCION)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[TERMINACIONES] WHERE (([TE_CODIGO] = @Original_TE_CODIGO) AND ((@IsNull_TE_NOMBRE = 1 AND [TE_NOMBRE] IS NULL) OR ([TE_NOMBRE] = @Original_TE_NOMBRE)) AND ((@IsNull_TE_DESCRIPCION = 1 AND [TE_DESCRIPCION] IS NULL) OR ([TE_DESCRIPCION] = @Original_TE_DESCRIPCION)) AND ((@IsNull_TE_ABREVIATURA = 1 AND [TE_ABREVIATURA] IS NULL) OR ([TE_ABREVIATURA] = @Original_TE_ABREVIATURA)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TE_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TE_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TE_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TE_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TE_ABREVIATURA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_ABREVIATURA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TE_ABREVIATURA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_ABREVIATURA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[TERMINACIONES] ([TE_NOMBRE], [TE_DESCRIPCION]) VALUES (@TE_NOM" +
-                "BRE, @TE_DESCRIPCION);\r\nSELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION FROM TERMINA" +
-                "CIONES WHERE (TE_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[TERMINACIONES] ([TE_NOMBRE], [TE_DESCRIPCION], [TE_ABREVIATURA" +
+                "]) VALUES (@TE_NOMBRE, @TE_DESCRIPCION, @TE_ABREVIATURA);\r\nSELECT TE_CODIGO, TE_" +
+                "NOMBRE, TE_DESCRIPCION, TE_ABREVIATURA FROM TERMINACIONES WHERE (TE_CODIGO = SCO" +
+                "PE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TE_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TE_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TE_ABREVIATURA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_ABREVIATURA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[TERMINACIONES] SET [TE_NOMBRE] = @TE_NOMBRE, [TE_DESCRIPCION] = @TE_DESCRIPCION WHERE (([TE_CODIGO] = @Original_TE_CODIGO) AND ((@IsNull_TE_NOMBRE = 1 AND [TE_NOMBRE] IS NULL) OR ([TE_NOMBRE] = @Original_TE_NOMBRE)) AND ((@IsNull_TE_DESCRIPCION = 1 AND [TE_DESCRIPCION] IS NULL) OR ([TE_DESCRIPCION] = @Original_TE_DESCRIPCION)));
-SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION FROM TERMINACIONES WHERE (TE_CODIGO = @TE_CODIGO)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[TERMINACIONES] SET [TE_NOMBRE] = @TE_NOMBRE, [TE_DESCRIPCION] = @TE_DESCRIPCION, [TE_ABREVIATURA] = @TE_ABREVIATURA WHERE (([TE_CODIGO] = @Original_TE_CODIGO) AND ((@IsNull_TE_NOMBRE = 1 AND [TE_NOMBRE] IS NULL) OR ([TE_NOMBRE] = @Original_TE_NOMBRE)) AND ((@IsNull_TE_DESCRIPCION = 1 AND [TE_DESCRIPCION] IS NULL) OR ([TE_DESCRIPCION] = @Original_TE_DESCRIPCION)) AND ((@IsNull_TE_ABREVIATURA = 1 AND [TE_ABREVIATURA] IS NULL) OR ([TE_ABREVIATURA] = @Original_TE_ABREVIATURA)));
+SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION, TE_ABREVIATURA FROM TERMINACIONES WHERE (TE_CODIGO = @TE_CODIGO)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TE_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TE_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TE_ABREVIATURA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_ABREVIATURA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TE_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TE_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TE_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TE_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TE_ABREVIATURA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_ABREVIATURA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TE_ABREVIATURA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_ABREVIATURA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TE_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString4;
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString5;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -790,7 +837,8 @@ SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION FROM TERMINACIONES WHERE (TE_CODIGO 
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION FROM dbo.TERMINACIONES";
+            this._commandCollection[0].CommandText = "SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION, TE_ABREVIATURA FROM dbo.TERMINACIONE" +
+                "S";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -844,7 +892,7 @@ SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION FROM TERMINACIONES WHERE (TE_CODIGO 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_TE_CODIGO, string Original_TE_NOMBRE, string Original_TE_DESCRIPCION) {
+        public virtual int Delete(decimal Original_TE_CODIGO, string Original_TE_NOMBRE, string Original_TE_DESCRIPCION, string Original_TE_ABREVIATURA) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_TE_CODIGO));
             if ((Original_TE_NOMBRE == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
@@ -861,6 +909,14 @@ SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION FROM TERMINACIONES WHERE (TE_CODIGO 
             else {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_TE_DESCRIPCION));
+            }
+            if ((Original_TE_ABREVIATURA == null)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_TE_ABREVIATURA));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -881,7 +937,7 @@ SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION FROM TERMINACIONES WHERE (TE_CODIGO 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string TE_NOMBRE, string TE_DESCRIPCION) {
+        public virtual int Insert(string TE_NOMBRE, string TE_DESCRIPCION, string TE_ABREVIATURA) {
             if ((TE_NOMBRE == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -893,6 +949,12 @@ SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION FROM TERMINACIONES WHERE (TE_CODIGO 
             }
             else {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((string)(TE_DESCRIPCION));
+            }
+            if ((TE_ABREVIATURA == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(TE_ABREVIATURA));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -913,7 +975,7 @@ SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION FROM TERMINACIONES WHERE (TE_CODIGO 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string TE_NOMBRE, string TE_DESCRIPCION, decimal Original_TE_CODIGO, string Original_TE_NOMBRE, string Original_TE_DESCRIPCION, decimal TE_CODIGO) {
+        public virtual int Update(string TE_NOMBRE, string TE_DESCRIPCION, string TE_ABREVIATURA, decimal Original_TE_CODIGO, string Original_TE_NOMBRE, string Original_TE_DESCRIPCION, string Original_TE_ABREVIATURA, decimal TE_CODIGO) {
             if ((TE_NOMBRE == null)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -926,24 +988,38 @@ SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION FROM TERMINACIONES WHERE (TE_CODIGO 
             else {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(TE_DESCRIPCION));
             }
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(Original_TE_CODIGO));
-            if ((Original_TE_NOMBRE == null)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            if ((TE_ABREVIATURA == null)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_TE_NOMBRE));
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(TE_ABREVIATURA));
+            }
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(Original_TE_CODIGO));
+            if ((Original_TE_NOMBRE == null)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_TE_NOMBRE));
             }
             if ((Original_TE_DESCRIPCION == null)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_TE_DESCRIPCION));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_TE_DESCRIPCION));
             }
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(TE_CODIGO));
+            if ((Original_TE_ABREVIATURA == null)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_TE_ABREVIATURA));
+            }
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(TE_CODIGO));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -963,8 +1039,8 @@ SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION FROM TERMINACIONES WHERE (TE_CODIGO 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string TE_NOMBRE, string TE_DESCRIPCION, decimal Original_TE_CODIGO, string Original_TE_NOMBRE, string Original_TE_DESCRIPCION) {
-            return this.Update(TE_NOMBRE, TE_DESCRIPCION, Original_TE_CODIGO, Original_TE_NOMBRE, Original_TE_DESCRIPCION, Original_TE_CODIGO);
+        public virtual int Update(string TE_NOMBRE, string TE_DESCRIPCION, string TE_ABREVIATURA, decimal Original_TE_CODIGO, string Original_TE_NOMBRE, string Original_TE_DESCRIPCION, string Original_TE_ABREVIATURA) {
+            return this.Update(TE_NOMBRE, TE_DESCRIPCION, TE_ABREVIATURA, Original_TE_CODIGO, Original_TE_NOMBRE, Original_TE_DESCRIPCION, Original_TE_ABREVIATURA, Original_TE_CODIGO);
         }
     }
     

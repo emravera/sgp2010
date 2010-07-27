@@ -23,9 +23,13 @@ namespace GyCAP.BLL
             conjunto.CodigoConjunto = Convert.ToInt32(rowConjunto.CONJ_CODIGO);
             conjunto.Nombre = rowConjunto.CONJ_NOMBRE;
             conjunto.CodigoTerminacion = Convert.ToInt32(rowConjunto.TE_CODIGO);
-            conjunto.Descripcion = rowConjunto.CONJ_DESCRIPCION;
             if (EsConjunto(conjunto)) throw new Entidades.Excepciones.ElementoExistenteException();
             //Como no existe lo creamos
+            //Primero armamos el código del producto si no está
+            if (rowConjunto.CONJ_CODIGOPARTE == string.Empty) 
+            {
+                rowConjunto.CONJ_CODIGOPARTE = "C" + rowConjunto.CONJ_CODIGO + "T" + rowConjunto.TE_CODIGO + "P" + rowConjunto.PNO_CODIGO;
+            }
             DAL.ConjuntoDAL.Insertar(dsEstructura);
         }
 

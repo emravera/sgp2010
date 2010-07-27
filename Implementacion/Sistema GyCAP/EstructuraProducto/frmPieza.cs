@@ -179,6 +179,7 @@ namespace GyCAP.UI.EstructuraProducto
                         Data.dsEstructura.PIEZASRow rowPieza = dsEstructura.PIEZAS.NewPIEZASRow();
                         rowPieza.BeginEdit();
                         rowPieza.PZA_CODIGO = -1;
+                        rowPieza.PZA_CODIGOPARTE = txtCodigo.Text;
                         rowPieza.PZA_NOMBRE = txtNombre.Text;
                         rowPieza.TE_CODIGO = Convert.ToInt32(cbTerminacion.SelectedValue);
                         rowPieza.PAR_CODIGO = Convert.ToInt32(cbEstado.SelectedValue);
@@ -230,6 +231,7 @@ namespace GyCAP.UI.EstructuraProducto
                     int codigoPieza = Convert.ToInt32(dvPiezas[dgvPiezas.SelectedRows[0].Index]["pza_codigo"]);
                     //Segundo obtenemos el resto de los datos que puede cambiar el usuario, la estructura se fué
                     //actualizando en el dataset a medida que el usuario ejecutaba una acción
+                    dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_CODIGOPARTE = txtCodigo.Text;
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_NOMBRE = txtNombre.Text;
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).TE_CODIGO = Convert.ToInt32(cbTerminacion.SelectedValue);
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PAR_CODIGO = Convert.ToInt32(cbEstado.SelectedValue);
@@ -555,6 +557,7 @@ namespace GyCAP.UI.EstructuraProducto
         private void dgvPiezas_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             int codigoPieza = Convert.ToInt32(dvPiezas[e.RowIndex]["pza_codigo"]);
+            txtCodigo.Text = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_CODIGOPARTE;
             txtNombre.Text = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_NOMBRE;
             cbTerminacion.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).TE_CODIGO));
             cbEstado.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).ESTADO_PARTESRow.PAR_CODIGO));
@@ -579,9 +582,6 @@ namespace GyCAP.UI.EstructuraProducto
             slideControl.AddSlide(slideAgregar);
             slideControl.AddSlide(slideDatos);
             slideControl.Selected = slideDatos;
-            //panelDatos.Location = new Point(0, 10);
-            //panelAgregar.Location = new Point(7, 7);
-            //panelImagen.Location = new Point(405, 15);
         }
 
         private void setGrillasVistasCombo()
@@ -591,10 +591,12 @@ namespace GyCAP.UI.EstructuraProducto
             dgvDetallePieza.AutoGenerateColumns = false;
             dgvMPDisponibles.AutoGenerateColumns = false;
             //Agregamos las columnas y sus propiedades
+            dgvPiezas.Columns.Add("PZA_CODIGOPARTE", "Código");
             dgvPiezas.Columns.Add("PZA_NOMBRE", "Nombre");
             dgvPiezas.Columns.Add("TE_CODIGO", "Terminación");
             dgvPiezas.Columns.Add("PAR_CODIGO", "Estado");
             dgvPiezas.Columns.Add("PNO_CODIGO", "Plano");
+            dgvPiezas.Columns["PZA_CODIGOPARTE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPiezas.Columns["PZA_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPiezas.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPiezas.Columns["PAR_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -617,6 +619,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvMPDisponibles.Columns["MP_DESCRIPCION"].Resizable = DataGridViewTriState.True;
 
             //Indicamos de dónde van a sacar los datos cada columna
+            dgvPiezas.Columns["PZA_CODIGOPARTE"].DataPropertyName = "PZA_CODIGOPARTE";
             dgvPiezas.Columns["PZA_NOMBRE"].DataPropertyName = "PZA_NOMBRE";
             dgvPiezas.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
             dgvPiezas.Columns["PAR_CODIGO"].DataPropertyName = "PAR_CODIGO";
@@ -681,17 +684,17 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 string nombre;
 
-                switch (dgvPiezas.Columns[e.ColumnIndex].Name.ToLower())
+                switch (dgvPiezas.Columns[e.ColumnIndex].Name)
                 {
-                    case "te_codigo":
+                    case "TE_CODIGO":
                         nombre = dsEstructura.TERMINACIONES.FindByTE_CODIGO(Convert.ToInt32(e.Value.ToString())).TE_NOMBRE;
                         e.Value = nombre;
                         break;
-                    case "par_codigo":
+                    case "PAR_CODIGO":
                         nombre = dsEstructura.ESTADO_PARTES.FindByPAR_CODIGO(Convert.ToInt32(e.Value.ToString())).PAR_NOMBRE;
                         e.Value = nombre;
                         break;
-                    case "pno_codigo":
+                    case "PNO_CODIGO":
                         nombre = dsEstructura.PLANOS.FindByPNO_CODIGO(Convert.ToInt32(e.Value.ToString())).PNO_NOMBRE;
                         e.Value = nombre;
                         break;

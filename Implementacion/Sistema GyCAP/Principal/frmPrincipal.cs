@@ -116,7 +116,12 @@ namespace Principal
         }
         #endregion
 
-        
+        private void itemMenuOpciones_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Principal.frmOpciones.Instancia.MdiParent = this;
+            GyCAP.UI.Principal.frmOpciones.Instancia.TopLevel = false;
+            GyCAP.UI.Principal.frmOpciones.Instancia.Show();
+        }
 
 
         //ELIMINAR LO QUE SIGUE
@@ -187,11 +192,7 @@ namespace Principal
             GyCAP.UI.PlanificacionProduccion.frmEstimarDemandaAnual.Instancia.Show();
         }
 
-        private void itemMenuOpciones_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.Principal.frmOpciones.Instancia.MdiParent = this;
-            GyCAP.UI.Principal.frmOpciones.Instancia.Show();
-        }
+        
 
 
         
