@@ -33,11 +33,13 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns.Add("TE_CODIGO", "Código");
             dgvLista.Columns.Add("TE_NOMBRE", "Nombre");
             dgvLista.Columns.Add("TE_DESCRIPCION", "Descripción");
+            dgvLista.Columns.Add("TE_ABREVIATURA", "Abreviatura");
             
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
             dgvLista.Columns["TE_NOMBRE"].DataPropertyName = "TE_NOMBRE";
             dgvLista.Columns["TE_DESCRIPCION"].DataPropertyName = "TE_DESCRIPCION";
+            dgvLista.Columns["TE_ABREVIATURA"].DataPropertyName = "TE_ABREVIATURA";
             
             //Oculta la columna que contiene los encabezados
             dgvLista.RowHeadersVisible = false;
@@ -47,6 +49,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["TE_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["TE_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["TE_ABREVIATURA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             //Alineacion de los numeros y las fechas en la grilla
             dgvLista.Columns["TE_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -58,6 +61,7 @@ namespace GyCAP.UI.EstructuraProducto
             //Seteo el maxlenght de los textbox para que no de error en la bd
             txtDescripcion.MaxLength = 250;
             txtNombre.MaxLength = 80;
+            txtAbreviatura.MaxLength = 80;
             
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
@@ -104,6 +108,8 @@ namespace GyCAP.UI.EstructuraProducto
                     txtNombre.Text = String.Empty;
                     txtDescripcion.Text = string.Empty;
                     //gbGuardarCancelar.Enabled = true;
+                    txtAbreviatura.ReadOnly = false;
+                    txtAbreviatura.Clear();
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -117,8 +123,10 @@ namespace GyCAP.UI.EstructuraProducto
                 case estadoUI.nuevoExterno:
                     txtNombre.ReadOnly = false;
                     txtDescripcion.ReadOnly = false;
+                    txtAbreviatura.ReadOnly = false;
                     txtNombre.Text = String.Empty;
                     txtDescripcion.Text = string.Empty;
+                    txtAbreviatura.Clear();
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
@@ -133,6 +141,7 @@ namespace GyCAP.UI.EstructuraProducto
                 case estadoUI.consultar:
                     txtNombre.ReadOnly = true;
                     txtDescripcion.ReadOnly = true;
+                    txtAbreviatura.ReadOnly = true;
                     //gbGuardarCancelar.Enabled = false;
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
@@ -143,6 +152,7 @@ namespace GyCAP.UI.EstructuraProducto
                 case estadoUI.modificar:
                     txtNombre.ReadOnly = false;
                     txtDescripcion.ReadOnly = false;
+                    txtAbreviatura.ReadOnly = false;
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -253,7 +263,7 @@ namespace GyCAP.UI.EstructuraProducto
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisamos que escribió algo
-            if (txtNombre.Text != String.Empty)
+            if (txtNombre.Text != String.Empty && txtAbreviatura.Text != string.Empty)
             {
                 Entidades.Terminacion terminacion = new GyCAP.Entidades.Terminacion();
 
@@ -263,6 +273,7 @@ namespace GyCAP.UI.EstructuraProducto
                     //Está cargando una terminacion nuevo
                     terminacion.Nombre = txtNombre.Text;
                     terminacion.Descripcion = txtDescripcion.Text;
+                    terminacion.Abreviatura = txtAbreviatura.Text;
                     try
                     {
                         //Primero lo creamos en la db
@@ -274,6 +285,7 @@ namespace GyCAP.UI.EstructuraProducto
                         rowTerminacion.TE_CODIGO = terminacion.Codigo;
                         rowTerminacion.TE_NOMBRE = terminacion.Nombre;
                         rowTerminacion.TE_DESCRIPCION = terminacion.Descripcion;
+                        rowTerminacion.TE_ABREVIATURA = terminacion.Abreviatura;
                         //Termina la edición de la fila
                         rowTerminacion.EndEdit();
                         //Agregamos la fila al dataset y aceptamos los cambios
@@ -310,6 +322,7 @@ namespace GyCAP.UI.EstructuraProducto
                     //Segundo obtenemos el nuevo nombre que ingresó el usuario
                     terminacion.Nombre = txtNombre.Text;
                     terminacion.Descripcion = txtDescripcion.Text;
+                    terminacion.Abreviatura = txtAbreviatura.Text;
                     try
                     {
                         //Lo actualizamos en la DB
@@ -319,6 +332,7 @@ namespace GyCAP.UI.EstructuraProducto
                         rowTerminacion.BeginEdit();
                         rowTerminacion.TE_NOMBRE = txtNombre.Text;
                         rowTerminacion.TE_DESCRIPCION = txtDescripcion.Text;
+                        rowTerminacion.TE_ABREVIATURA = txtAbreviatura.Text;
                         rowTerminacion.EndEdit();
                         dsTerminacion.TERMINACIONES.AcceptChanges();
                         //Avisamos que estuvo todo ok
@@ -377,6 +391,7 @@ namespace GyCAP.UI.EstructuraProducto
                 long codigoTerminacion = Convert.ToInt64(dvTerminacion[e.RowIndex]["te_codigo"]);
                 txtNombre.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_NOMBRE;
                 txtDescripcion.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_DESCRIPCION;
+                txtAbreviatura.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_ABREVIATURA;
             //}
         }
 
@@ -410,6 +425,11 @@ namespace GyCAP.UI.EstructuraProducto
         private void txtDescripcion_Enter(object sender, EventArgs e)
         {
             txtDescripcion.SelectAll();
+        }
+
+        private void txtAbreviatura_Enter(object sender, EventArgs e)
+        {
+            txtAbreviatura.SelectAll();
         }
 
     }

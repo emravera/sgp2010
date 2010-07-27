@@ -13,21 +13,24 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         
         public seleccionadorFecha() : base()
 		{
+            this.Format = DateTimePickerFormat.Short;
+            this.ShowCheckBox = false;
+            SetNull();
 		}
 
-        public void setNull()
+        public void SetNull()
         {
             this.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.CustomFormat = " ";
             this.isNull = true;
         }
 
-        public bool isValueNull()
+        public bool IsValueNull()
         {
             return isNull;
         }
 
-        public void setFecha()
+        public void SetFecha()
         {
             this.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.isNull = false;
@@ -37,7 +40,7 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         {
             if (MouseButtons == System.Windows.Forms.MouseButtons.None)
             {
-                this.setFecha();
+                this.SetFecha();
             }
             base.OnCloseUp(eventargs);
         }

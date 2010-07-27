@@ -53,6 +53,8 @@
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtAbreviatura = new System.Windows.Forms.TextBox();
             this.tsMenu.SuspendLayout();
             this.gbDatos.SuspendLayout();
             this.gpbLista.SuspendLayout();
@@ -67,17 +69,17 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(80, 37);
+            this.txtNombre.Location = new System.Drawing.Point(83, 30);
             this.txtNombre.MaxLength = 25;
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(313, 20);
+            this.txtNombre.Size = new System.Drawing.Size(310, 20);
             this.txtNombre.TabIndex = 4;
             this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 40);
+            this.label3.Location = new System.Drawing.Point(9, 33);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 1;
@@ -87,8 +89,8 @@
             // 
             this.btnVolver.Location = new System.Drawing.Point(423, 23);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(64, 25);
-            this.btnVolver.TabIndex = 7;
+            this.btnVolver.Size = new System.Drawing.Size(64, 26);
+            this.btnVolver.TabIndex = 8;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -178,6 +180,8 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.txtAbreviatura);
+            this.gbDatos.Controls.Add(this.label2);
             this.gbDatos.Controls.Add(this.txtDescripcion);
             this.gbDatos.Controls.Add(this.label4);
             this.gbDatos.Controls.Add(this.txtNombre);
@@ -193,18 +197,18 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(80, 74);
+            this.txtDescripcion.Location = new System.Drawing.Point(83, 97);
             this.txtDescripcion.MaxLength = 80;
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(313, 84);
-            this.txtDescripcion.TabIndex = 5;
+            this.txtDescripcion.Size = new System.Drawing.Size(310, 84);
+            this.txtDescripcion.TabIndex = 6;
             this.txtDescripcion.Enter += new System.EventHandler(this.txtDescripcion_Enter);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 77);
+            this.label4.Location = new System.Drawing.Point(9, 100);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 13);
             this.label4.TabIndex = 4;
@@ -214,8 +218,8 @@
             // 
             this.btnGuardar.Location = new System.Drawing.Point(353, 23);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(64, 25);
-            this.btnGuardar.TabIndex = 6;
+            this.btnGuardar.Size = new System.Drawing.Size(64, 26);
+            this.btnGuardar.TabIndex = 7;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -361,6 +365,23 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(511, 329);
             this.tableLayoutPanel1.TabIndex = 9;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 66);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Abreviatura:";
+            // 
+            // txtAbreviatura
+            // 
+            this.txtAbreviatura.Location = new System.Drawing.Point(83, 63);
+            this.txtAbreviatura.Name = "txtAbreviatura";
+            this.txtAbreviatura.Size = new System.Drawing.Size(310, 20);
+            this.txtAbreviatura.TabIndex = 5;
+            this.txtAbreviatura.Enter += new System.EventHandler(this.txtAbreviatura_Enter);
+            // 
             // frmTerminacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -421,6 +442,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtAbreviatura;
+        private System.Windows.Forms.Label label2;
 
     }
 }

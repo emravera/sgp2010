@@ -12,8 +12,8 @@ namespace GyCAP.DAL
         public static long Insertar(Entidades.Terminacion terminacion)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
-            string sql = "INSERT INTO TERMINACIONES (TE_NOMBRE, TE_DESCRIPCION) VALUES (@p0,@p1) SELECT @@Identity";
-            object[] valorParametros = { terminacion.Nombre, terminacion.Descripcion };
+            string sql = "INSERT INTO TERMINACIONES (TE_NOMBRE, TE_DESCRIPCION, TE_ABREVIATURA) VALUES (@p0,@p1,@p2) SELECT @@Identity";
+            object[] valorParametros = { terminacion.Nombre, terminacion.Descripcion, terminacion.Abreviatura };
             try
             {
                 return Convert.ToInt64(DB.executeScalar(sql, valorParametros, null));
@@ -34,8 +34,8 @@ namespace GyCAP.DAL
 
         public static void Actualizar(Entidades.Terminacion terminacion)
         {
-            string sql = "UPDATE TERMINACIONES SET TE_NOMBRE = @p1, TE_DESCRIPCION = @p2 WHERE TE_CODIGO = @p0";
-            object[] valorParametros = { terminacion.Codigo, terminacion.Nombre, terminacion.Descripcion };
+            string sql = "UPDATE TERMINACIONES SET TE_NOMBRE = @p1, TE_DESCRIPCION = @p2, TE_ABREVIATURA = @p3 WHERE TE_CODIGO = @p0";
+            object[] valorParametros = { terminacion.Codigo, terminacion.Nombre, terminacion.Descripcion, terminacion.Abreviatura };
             try
             {
                 DB.executeNonQuery(sql, valorParametros, null);
@@ -65,7 +65,7 @@ namespace GyCAP.DAL
         {
             if (nombre != String.Empty)
             {
-                string sql = @"SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION
+                string sql = @"SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION, TE_ABREVIATURA 
                               FROM TERMINACIONES
                               WHERE TE_NOMBRE LIKE @p0";
                 //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
@@ -80,7 +80,7 @@ namespace GyCAP.DAL
             }
             else
             {
-                string sql = "SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION FROM TERMINACIONES";
+                string sql = "SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION, TE_ABREVIATURA FROM TERMINACIONES";
                 try
                 {
                     DB.FillDataTable(dt, sql, null);
@@ -94,7 +94,7 @@ namespace GyCAP.DAL
         {
             if (nombre != String.Empty)
             {
-                string sql = @"SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION
+                string sql = @"SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION, TE_ABREVIATURA 
                               FROM TERMINACIONES
                               WHERE TE_NOMBRE LIKE @p0";
                 //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
@@ -109,7 +109,7 @@ namespace GyCAP.DAL
             }
             else
             {
-                string sql = "SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION FROM TERMINACIONES";
+                string sql = "SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION, TE_ABREVIATURA FROM TERMINACIONES";
                 try
                 {
                     DB.FillDataSet(ds, "TERMINACIONES", sql, null);

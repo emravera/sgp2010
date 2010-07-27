@@ -26,6 +26,11 @@ namespace GyCAP.BLL
             subconjunto.Descripcion = rowSubconjunto.SCONJ_DESCRIPCION;
             if (EsSubconjunto(subconjunto)) throw new Entidades.Excepciones.ElementoExistenteException();
             //Como no existe lo creamos
+            //Primero armamos el código de la parte si no lo tiene
+            if (rowSubconjunto.SCONJ_CODIGOPARTE == string.Empty)
+            {
+                rowSubconjunto.SCONJ_CODIGOPARTE = "SC" + rowSubconjunto.SCONJ_CODIGO + "T" + rowSubconjunto.TE_CODIGO + "P" + rowSubconjunto.PNO_CODIGO;
+            }
             DAL.SubConjuntoDAL.Insertar(dsEstructura);
         }
 

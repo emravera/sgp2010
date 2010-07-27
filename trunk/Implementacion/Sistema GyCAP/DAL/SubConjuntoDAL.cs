@@ -17,12 +17,13 @@ namespace GyCAP.DAL
                                         ,[sconj_descripcion]
                                         ,[sconj_cantidadstock]
                                         ,[par_codigo]
-                                        ,[pno_codigo]) 
-                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
+                                        ,[pno_codigo]
+                                        ,[sconj_codigoparte]) 
+                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6) SELECT @@Identity";
 
             //Así obtenemos el subconjunto nuevo del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto = dsEstructura.SUBCONJUNTOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.SUBCONJUNTOSRow;
-            object[] valorParametros = { rowSubconjunto.SCONJ_NOMBRE, rowSubconjunto.TE_CODIGO, rowSubconjunto.SCONJ_DESCRIPCION, 0, rowSubconjunto.PAR_CODIGO, rowSubconjunto.PNO_CODIGO };
+            object[] valorParametros = { rowSubconjunto.SCONJ_NOMBRE, rowSubconjunto.TE_CODIGO, rowSubconjunto.SCONJ_DESCRIPCION, 0, rowSubconjunto.PAR_CODIGO, rowSubconjunto.PNO_CODIGO, rowSubconjunto.SCONJ_CODIGOPARTE };
 
             string sqlInsertEstructura = @"INSERT INTO [DETALLE_SUBCONJUNTO] 
                                         ([sconj_codigo]
@@ -93,7 +94,8 @@ namespace GyCAP.DAL
                                            ,sconj_descripcion = @p2 
                                            ,par_codigo = @p3
                                            ,pno_codigo = @p4
-                                            WHERE sconj_codigo = @p5";
+                                           ,sconj_codigoparte + @p5
+                                            WHERE sconj_codigo = @p6";
 
             string sqlInsertEstructura = @"INSERT INTO [DETALLE_SUBCONJUNTO] 
                                         ([sconj_codigo]
@@ -108,7 +110,7 @@ namespace GyCAP.DAL
 
             //Así obtenemos el subconjunto del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto = dsEstructura.SUBCONJUNTOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.SUBCONJUNTOSRow;
-            object[] valorParametros = { rowSubconjunto.SCONJ_NOMBRE, rowSubconjunto.TE_CODIGO, rowSubconjunto.SCONJ_DESCRIPCION, rowSubconjunto.PAR_CODIGO, rowSubconjunto.PNO_CODIGO, rowSubconjunto.SCONJ_CODIGO };
+            object[] valorParametros = { rowSubconjunto.SCONJ_NOMBRE, rowSubconjunto.TE_CODIGO, rowSubconjunto.SCONJ_DESCRIPCION, rowSubconjunto.PAR_CODIGO, rowSubconjunto.PNO_CODIGO, rowSubconjunto.SCONJ_CODIGO, rowSubconjunto.SCONJ_CODIGOPARTE };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
@@ -174,7 +176,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerSubconjuntos(System.Data.DataTable dtSubconjuntos)
         {
-            string sql = @"SELECT sconj_codigo, sconj_nombre, te_codigo, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo 
+            string sql = @"SELECT sconj_codigo, sconj_nombre, te_codigo, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo, sconj_codigoparte  
                         FROM SUBCONJUNTOS";
 
             try
@@ -186,7 +188,7 @@ namespace GyCAP.DAL
         
         public static void ObtenerSubconjuntos(object nombre, object codTerminacion, Data.dsEstructura ds, bool obtenerDetalle)
         {
-            string sql = @"SELECT sconj_codigo, sconj_nombre, te_codigo, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo 
+            string sql = @"SELECT sconj_codigo, sconj_nombre, te_codigo, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo, sconj_codigoparte  
                         FROM SUBCONJUNTOS WHERE 1=1";
 
             //Sirve para armar el nombre de los parámetros
@@ -371,7 +373,7 @@ namespace GyCAP.DAL
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
         public static Entidades.SubConjunto ObtenerSubconjunto(int codigoSubconjunto)
         {
-            string sql = @"SELECT sconj_nombre, te_terminacion, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo
+            string sql = @"SELECT sconj_nombre, te_terminacion, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo, sconj_codigoparte 
                          FROM SUBCONJUNTOS WHERE sconj_codigo = @p0";
             object[] valorParametros = { codigoSubconjunto };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
@@ -381,6 +383,7 @@ namespace GyCAP.DAL
                 if (!rdr.HasRows) { throw new Entidades.Excepciones.ElementoInexistenteException(); }                
                 rdr.Read();
                 subconjunto.CodigoSubconjunto = codigoSubconjunto;
+                subconjunto.CodigoParte = rdr["sconj_codigoparte"].ToString();
                 subconjunto.Nombre = rdr["sconj_nombre"].ToString();
                 subconjunto.CodigoTerminacion = Convert.ToInt32(rdr["te_codigo"].ToString());
                 subconjunto.Descripcion = rdr["sconj_descripcion"].ToString();

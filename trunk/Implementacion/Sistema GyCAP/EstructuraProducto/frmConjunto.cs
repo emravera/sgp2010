@@ -143,7 +143,7 @@ namespace GyCAP.UI.EstructuraProducto
                 if (respuesta == DialogResult.Yes)
                 {
                     try
-                    {
+                    { 
                         //Obtenemos el codigo
                         int codigo = Convert.ToInt32(dvConjuntos[dgvConjuntos.SelectedRows[0].Index]["conj_codigo"]);
                         //Lo eliminamos de la DB
@@ -195,6 +195,7 @@ namespace GyCAP.UI.EstructuraProducto
                         Data.dsEstructura.CONJUNTOSRow rowConjunto = dsEstructura.CONJUNTOS.NewCONJUNTOSRow();
                         rowConjunto.BeginEdit();
                         rowConjunto.CONJ_CODIGO = -1;
+                        rowConjunto.CONJ_CODIGOPARTE = txtCodigo.Text;
                         rowConjunto.CONJ_NOMBRE = txtNombre.Text;
                         rowConjunto.TE_CODIGO = Convert.ToInt32(cbTerminacion.SelectedValue.ToString());
                         rowConjunto.PAR_CODIGO = Convert.ToInt32(cbEstado.SelectedValue.ToString());
@@ -246,6 +247,7 @@ namespace GyCAP.UI.EstructuraProducto
                     int codigoConjunto = Convert.ToInt32(dvConjuntos[dgvConjuntos.SelectedRows[0].Index]["conj_codigo"]);
                     //Segundo obtenemos el resto de los datos que puede cambiar el usuario, la estructura se fué
                     //actualizando en el dataset a medida que el usuario ejecutaba una acción
+                    dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigoConjunto).CONJ_CODIGOPARTE = txtCodigo.Text;
                     dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigoConjunto).CONJ_NOMBRE = txtNombre.Text;
                     dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigoConjunto).TE_CODIGO = Convert.ToInt32(cbTerminacion.SelectedValue);
                     dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigoConjunto).CONJ_DESCRIPCION = txtDescripcion.Text;
@@ -585,6 +587,7 @@ namespace GyCAP.UI.EstructuraProducto
         private void dgvConjuntos_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             int codigoConjunto = Convert.ToInt32(dvConjuntos[e.RowIndex]["conj_codigo"]);
+            txtCodigo.Text = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigoConjunto).CONJ_CODIGOPARTE;
             txtNombre.Text = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigoConjunto).CONJ_NOMBRE;
             cbTerminacion.SetSelectedValue(Convert.ToInt32(dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigoConjunto).TE_CODIGO));
             cbEstado.SetSelectedValue(Convert.ToInt32(dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigoConjunto).PAR_CODIGO));
@@ -617,39 +620,48 @@ namespace GyCAP.UI.EstructuraProducto
             dgvDetalleConjunto.AutoGenerateColumns = false;
             dgvSCDisponibles.AutoGenerateColumns = false;
             //Agregamos las columnas y sus propiedades
+            dgvConjuntos.Columns.Add("CONJ_CODIGOPARTE", "Código");
             dgvConjuntos.Columns.Add("CONJ_NOMBRE", "Nombre");
             dgvConjuntos.Columns.Add("TE_CODIGO", "Terminación");
             dgvConjuntos.Columns.Add("CONJ_DESCRIPCION", "Descripción");
+            dgvConjuntos.Columns["CONJ_CODIGOPARTE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvConjuntos.Columns["CONJ_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvConjuntos.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvConjuntos.Columns["CONJ_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvConjuntos.Columns["CONJ_DESCRIPCION"].Resizable = DataGridViewTriState.True;
 
+            dgvDetalleConjunto.Columns.Add("SCONJ_CODIGOPARTE", "Código");
             dgvDetalleConjunto.Columns.Add("SCONJ_NOMBRE", "Nombre");
             dgvDetalleConjunto.Columns.Add("TE_CODIGO", "Terminación");
             dgvDetalleConjunto.Columns.Add("DCJ_CANTIDAD", "Cantidad");
+            dgvDetalleConjunto.Columns["SCONJ_CODIGOPARTE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalleConjunto.Columns["SCONJ_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalleConjunto.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalleConjunto.Columns["DCJ_CANTIDAD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalleConjunto.Columns["DCJ_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
+            dgvSCDisponibles.Columns.Add("SCONJ_CODIGOPARTE", "Código");
             dgvSCDisponibles.Columns.Add("SCONJ_NOMBRE", "Nombre");
             dgvSCDisponibles.Columns.Add("TE_CODIGO", "Terminación");
             dgvSCDisponibles.Columns.Add("SCONJ_DESCRIPCION", "Descripción");
+            dgvSCDisponibles.Columns["SCONJ_CODIGOPARTE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvSCDisponibles.Columns["SCONJ_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvSCDisponibles.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvSCDisponibles.Columns["SCONJ_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvSCDisponibles.Columns["SCONJ_DESCRIPCION"].Resizable = DataGridViewTriState.True;
 
             //Indicamos de dónde van a sacar los datos cada columna
+            dgvConjuntos.Columns["CONJ_CODIGOPARTE"].DataPropertyName = "CONJ_CODIGOPARTE";
             dgvConjuntos.Columns["CONJ_NOMBRE"].DataPropertyName = "CONJ_NOMBRE";
             dgvConjuntos.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
             dgvConjuntos.Columns["CONJ_DESCRIPCION"].DataPropertyName = "CONJ_DESCRIPCION";
-            
+
+            dgvDetalleConjunto.Columns["SCONJ_CODIGOPARTE"].DataPropertyName = "SCONJ_CODIGO";
             dgvDetalleConjunto.Columns["SCONJ_NOMBRE"].DataPropertyName = "SCONJ_CODIGO";
             dgvDetalleConjunto.Columns["TE_CODIGO"].DataPropertyName = "SCONJ_CODIGO";
             dgvDetalleConjunto.Columns["DCJ_CANTIDAD"].DataPropertyName = "DCJ_CANTIDAD";
 
+            dgvSCDisponibles.Columns["SCONJ_CODIGOPARTE"].DataPropertyName = "SCONJ_CODIGOPARTE";
             dgvSCDisponibles.Columns["SCONJ_NOMBRE"].DataPropertyName = "SCONJ_NOMBRE";
             dgvSCDisponibles.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
             dgvSCDisponibles.Columns["SCONJ_DESCRIPCION"].DataPropertyName = "SCONJ_DESCRIPCION";
@@ -724,6 +736,11 @@ namespace GyCAP.UI.EstructuraProducto
                     case "SCONJ_NOMBRE":
                         codigoSubConjunto = Convert.ToInt32(dvDetalleConjunto[e.RowIndex]["SCONJ_CODIGO"]);
                         nombre = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubConjunto).SCONJ_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "SCONJ_CODIGOPARTE":
+                        codigoSubConjunto = Convert.ToInt32(dvDetalleConjunto[e.RowIndex]["SCONJ_CODIGO"]);
+                        nombre = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubConjunto).SCONJ_CODIGOPARTE;
                         e.Value = nombre;
                         break;
                     default:

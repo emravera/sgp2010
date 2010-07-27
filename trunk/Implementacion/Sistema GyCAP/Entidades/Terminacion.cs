@@ -8,8 +8,15 @@ namespace GyCAP.Entidades
     public class Terminacion
     {
         private long codigo;
-        private String nombre;
-        private String descripcion;
+        private string nombre;
+        private string descripcion;
+        private string abreviatura;
+
+        public string Abreviatura
+        {
+            get { return abreviatura; }
+            set { abreviatura = value; }
+        }
 
         public long Codigo
         {

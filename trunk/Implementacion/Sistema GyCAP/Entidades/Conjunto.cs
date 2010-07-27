@@ -15,6 +15,13 @@ namespace GyCAP.Entidades
         private int cantidadStock;
         private int codigoEstado;
         private int codigoPlano;
+        private string codigoParte;
+
+        public string CodigoParte
+        {
+            get { return codigoParte; }
+            set { codigoParte = value; }
+        }
 
         public int CodigoPlano
         {
