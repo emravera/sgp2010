@@ -10,6 +10,8 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
     public class seleccionadorFecha : System.Windows.Forms.DateTimePicker
     {
         private bool isNull = false;
+        private bool firstFocusHappend = false;
+        private bool keyPressed = false;
         
         public seleccionadorFecha() : base()
 		{
@@ -49,6 +51,27 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
             }
         }
 
+        public void SetFocus()
+        {
+            this.Focus();
+        }
+
+        protected override void OnGotFocus(EventArgs e)
+        {
+            if (firstFocusHappend == false && keyPressed == false)
+            {
+                firstFocusHappend = true;
+                SetFecha();
+            }
+            base.OnGotFocus(e);
+        }
+
+        protected override void OnLostFocus(EventArgs e)
+        {
+            if (!keyPressed) { firstFocusHappend = false; }
+            base.OnLostFocus(e);
+        }
+        
         protected override void OnCloseUp(EventArgs eventargs)
         {
             if (MouseButtons == System.Windows.Forms.MouseButtons.None)
@@ -56,6 +79,16 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
                 this.SetFecha();
             }
             base.OnCloseUp(eventargs);
+        }
+
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete || e.KeyCode == Keys.Back)
+            {
+                keyPressed = true;
+                SetFechaNull();
+            }
+            base.OnKeyUp(e);
         }
     }
 }
