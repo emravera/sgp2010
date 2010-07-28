@@ -155,7 +155,7 @@ namespace GyCAP.DAL
             string sql = @"INSERT INTO [EMPLEADOS] ([EE_CODIGO], [SEC_CODIGO], [E_APELLIDO],
                            [E_NOMBRE], [E_FECHANACIMIENTO], [E_TELEFONO],
                            [E_LEGAJO], [E_FECHA_ALTA], [E_FECHA_BAJA]) 
-                          VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9) SELECT @@Identity";
+                          VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8) SELECT @@Identity";
 
             object[] valorParametros = { empleado.Estado.Codigo, empleado.Sector.Codigo, empleado.Apellido, 
                                          empleado.Nombre, empleado.FechaNacimiento, empleado.Telefono, 
