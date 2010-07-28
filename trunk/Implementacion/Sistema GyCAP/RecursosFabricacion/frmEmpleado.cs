@@ -215,7 +215,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.modificar;
                     tcABM.SelectedTab = tpDatos;
-                    txtApellido.Focus();
+                    txtLegajo.Focus();
                     break;
                 default:
                     break;
@@ -276,8 +276,6 @@ namespace GyCAP.UI.RecursosFabricacion
         {
             this.Dispose(true);
         }
-
-        
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -444,21 +442,38 @@ namespace GyCAP.UI.RecursosFabricacion
         {
             try
             {
-                for (int i = 0; i < lvSectores.Items.Count ; i++)
-                {
-                    
-                }
+                ListView.CheckedListViewItemCollection chequeados = lvSectores.CheckedItems;
+                string cadSectores = string.Empty;
 
-                dsEmpleado.EMPLEADOS.Clear();
-                BLL.EmpleadoBLL.ObtenerTodos(cboBuscarPor.Text, txtNombreBuscar.Text, cboBuscarEstado.GetSelectedValueInt(), dsEmpleado);
-                //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
-                //por una consulta a la BD
-                dvEmpleado.Table = dsEmpleado.EMPLEADOS;
-                if (dsEmpleado.EMPLEADOS.Rows.Count == 0)
+                if (chequeados.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Empleados con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Seleccione al menos un Sector.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                SetInterface(estadoUI.inicio);
+                else
+                {
+                    foreach (ListViewItem item in chequeados)
+                    {
+                        if (cadSectores == string.Empty)
+                        {
+                            cadSectores = item.SubItems[1].Text;
+                        }
+                        else
+                        {
+                            cadSectores += ", " + item.SubItems[1].Text;
+                        }
+                    }
+
+                    dsEmpleado.EMPLEADOS.Clear();
+                    BLL.EmpleadoBLL.ObtenerTodos(cboBuscarPor.Text, txtNombreBuscar.Text, cboBuscarEstado.GetSelectedValueInt(), cadSectores, dsEmpleado);
+                    //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
+                    //por una consulta a la BD
+                    dvEmpleado.Table = dsEmpleado.EMPLEADOS;
+                    if (dsEmpleado.EMPLEADOS.Rows.Count == 0)
+                    {
+                        MessageBox.Show("No se encontraron Empleados con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    SetInterface(estadoUI.inicio);
+                }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
