@@ -43,6 +43,8 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.cboEstado = new System.Windows.Forms.ComboBox();
+            this.cboSector = new System.Windows.Forms.ComboBox();
             this.lvCapacidadEmpleado = new System.Windows.Forms.ListView();
             this.label6 = new System.Windows.Forms.Label();
             this.txtLegajo = new System.Windows.Forms.TextBox();
@@ -63,11 +65,9 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cboSector = new System.Windows.Forms.ComboBox();
-            this.cboEstado = new System.Windows.Forms.ComboBox();
-            this.dgvLista = new GyCAP.UI.RecursosFabricacion.Grilla();
             this.cboBuscarEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.sfFechaNac = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.dgvLista = new System.Windows.Forms.DataGridView();
             this.tcABM.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.gpbLista.SuspendLayout();
@@ -77,6 +77,7 @@
             this.gbDatos.SuspendLayout();
             this.tsMenu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             this.SuspendLayout();
             // 
             // tcABM
@@ -176,7 +177,7 @@
             // 
             this.btnBuscar.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(458, 68);
+            this.btnBuscar.Location = new System.Drawing.Point(460, 68);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
@@ -276,6 +277,24 @@
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Empleado";
+            // 
+            // cboEstado
+            // 
+            this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEstado.FormattingEnabled = true;
+            this.cboEstado.Location = new System.Drawing.Point(76, 174);
+            this.cboEstado.Name = "cboEstado";
+            this.cboEstado.Size = new System.Drawing.Size(146, 21);
+            this.cboEstado.TabIndex = 12;
+            // 
+            // cboSector
+            // 
+            this.cboSector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSector.FormattingEnabled = true;
+            this.cboSector.Location = new System.Drawing.Point(76, 147);
+            this.cboSector.Name = "cboSector";
+            this.cboSector.Size = new System.Drawing.Size(146, 21);
+            this.cboSector.TabIndex = 11;
             // 
             // lvCapacidadEmpleado
             // 
@@ -479,34 +498,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(562, 371);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
-            // cboSector
-            // 
-            this.cboSector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSector.FormattingEnabled = true;
-            this.cboSector.Location = new System.Drawing.Point(76, 147);
-            this.cboSector.Name = "cboSector";
-            this.cboSector.Size = new System.Drawing.Size(146, 21);
-            this.cboSector.TabIndex = 11;
-            // 
-            // cboEstado
-            // 
-            this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEstado.FormattingEnabled = true;
-            this.cboEstado.Location = new System.Drawing.Point(76, 174);
-            this.cboEstado.Name = "cboEstado";
-            this.cboEstado.Size = new System.Drawing.Size(146, 21);
-            this.cboEstado.TabIndex = 12;
-            // 
-            // dgvLista
-            // 
-            this.dgvLista.Columnas = null;
-            this.dgvLista.DataSource = null;
-            this.dgvLista.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dgvLista.Location = new System.Drawing.Point(9, 22);
-            this.dgvLista.Name = "dgvLista";
-            this.dgvLista.Size = new System.Drawing.Size(526, 161);
-            this.dgvLista.TabIndex = 0;
-            // 
             // cboBuscarEstado
             // 
             this.cboBuscarEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -525,6 +516,20 @@
             this.sfFechaNac.Name = "sfFechaNac";
             this.sfFechaNac.Size = new System.Drawing.Size(146, 20);
             this.sfFechaNac.TabIndex = 9;
+            // 
+            // dgvLista
+            // 
+            this.dgvLista.AllowUserToAddRows = false;
+            this.dgvLista.AllowUserToDeleteRows = false;
+            this.dgvLista.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgvLista.Location = new System.Drawing.Point(9, 22);
+            this.dgvLista.MultiSelect = false;
+            this.dgvLista.Name = "dgvLista";
+            this.dgvLista.ReadOnly = true;
+            this.dgvLista.RowHeadersVisible = false;
+            this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvLista.Size = new System.Drawing.Size(526, 156);
+            this.dgvLista.TabIndex = 1;
             // 
             // frmEmpleado
             // 
@@ -552,6 +557,7 @@
             this.tsMenu.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -594,9 +600,9 @@
         private System.Windows.Forms.ListView lvSectores;
         private System.Windows.Forms.ListView lvCapacidadEmpleado;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboBuscarEstado;
-        private Grilla dgvLista;
         private System.Windows.Forms.ComboBox cboSector;
         private System.Windows.Forms.ComboBox cboEstado;
         private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha sfFechaNac;
+        private System.Windows.Forms.DataGridView dgvLista;
     }
 }

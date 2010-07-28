@@ -159,7 +159,7 @@ namespace GyCAP.DAL
 
             object[] valorParametros = { empleado.Estado.Codigo, empleado.Sector.Codigo, empleado.Apellido, 
                                          empleado.Nombre, empleado.FechaNacimiento, empleado.Telefono, 
-                                         empleado.Legajo, empleado.FechaAlta, empleado.FechaBaja };
+                                         empleado.Legajo, empleado.FechaAlta, DBNull.Value };
             try
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));

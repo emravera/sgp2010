@@ -28,6 +28,8 @@ namespace GyCAP.UI.RecursosFabricacion
             }
         }
 
+
+
         ColumnasGrillas m_Columnas;
         public ColumnasGrillas Columnas 
         {
