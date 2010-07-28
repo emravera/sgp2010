@@ -141,6 +141,11 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
             return (this.SelectedItem as ItemLista).Name;
         }
 
+        public int GetSelectedIndex()
+        {
+            return this.SelectedIndex;
+        }
+
         /// <summary>
         /// Carga los datos al combobox desde un dataview según el displayMember y valueMemeber especificado.
         /// Contiene una cabecera que puede formar parte de los items del combobox o como un simple texto. 
