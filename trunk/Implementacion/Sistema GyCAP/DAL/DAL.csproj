@@ -60,6 +60,7 @@
     <Compile Include="DetalleDemandaAnualDAL.cs" />
     <Compile Include="DetalleOrdenTrabajoDAL.cs" />
     <Compile Include="DetallePedidoDAL.cs" />
+    <Compile Include="DetallePlanAnualDAL.cs" />
     <Compile Include="DetallePiezaDAL.cs" />
     <Compile Include="DetallePlanMantenimientoDAL.cs" />
     <Compile Include="DetallePlanMensualDAL.cs" />
