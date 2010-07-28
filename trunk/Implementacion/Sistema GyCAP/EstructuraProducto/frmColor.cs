@@ -30,7 +30,14 @@ namespace GyCAP.UI.EstructuraProducto
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["COL_NOMBRE"].DataPropertyName = "COL_NOMBRE";
             //Traemos todos los colores al principio
-            BLL.ColorBLL.ObtenerTodos(dsColor);
+            try
+            {
+                BLL.ColorBLL.ObtenerTodos(dsColor);
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             //Creamos el dataview y lo asignamos a la grilla
             dvColor = new DataView(dsColor.COLORES);
             dvColor.Sort = "COL_NOMBRE ASC";
@@ -149,9 +156,9 @@ namespace GyCAP.UI.EstructuraProducto
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);                        
                     }
-                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
