@@ -79,7 +79,7 @@ namespace GyCAP.UI.EstructuraProducto
                 dsEstructura.DETALLE_SUBCONJUNTO.Clear();
 
                 //Busquemos, no importa si ingresó algo o no, ya se encargarán las otras clases de verificarlo
-                BLL.SubConjuntoBLL.ObtenerSubconjuntos(txtNombreBuscar.Text, cbTerminacionBuscar.SelectedValue, dsEstructura, true);
+                BLL.SubConjuntoBLL.ObtenerSubconjuntos(txtNombreBuscar.Text, cbTerminacionBuscar.GetSelectedValueInt(), dsEstructura, true);
 
                 if (dsEstructura.SUBCONJUNTOS.Rows.Count == 0)
                 {
@@ -180,9 +180,9 @@ namespace GyCAP.UI.EstructuraProducto
                         rowSubconjunto.SCONJ_CODIGO = -1;
                         rowSubconjunto.SCONJ_CODIGOPARTE = txtCodigo.Text;
                         rowSubconjunto.SCONJ_NOMBRE = txtNombre.Text;
-                        rowSubconjunto.TE_CODIGO = Convert.ToInt32(cbTerminacion.SelectedValue.ToString());
-                        rowSubconjunto.PAR_CODIGO = Convert.ToInt32(cbEstado.SelectedValue.ToString());
-                        rowSubconjunto.PNO_CODIGO = Convert.ToInt32(cbPlano.SelectedValue.ToString());
+                        rowSubconjunto.TE_CODIGO = cbTerminacion.GetSelectedValueInt();
+                        rowSubconjunto.PAR_CODIGO = cbEstado.GetSelectedValueInt();
+                        rowSubconjunto.PNO_CODIGO = cbPlano.GetSelectedValueInt();
                         rowSubconjunto.SCONJ_DESCRIPCION = txtDescripcion.Text;
                         rowSubconjunto.EndEdit();
                         dsEstructura.SUBCONJUNTOS.AddSUBCONJUNTOSRow(rowSubconjunto);
@@ -232,9 +232,9 @@ namespace GyCAP.UI.EstructuraProducto
                     //actualizando en el dataset a medida que el usuario ejecutaba una acción
                     dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).SCONJ_CODIGOPARTE = txtCodigo.Text;
                     dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).SCONJ_NOMBRE = txtNombre.Text;
-                    dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).TE_CODIGO = Convert.ToInt32(cbTerminacion.SelectedValue);
-                    dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).PAR_CODIGO = Convert.ToInt32(cbEstado.SelectedValue);
-                    dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).PNO_CODIGO = Convert.ToInt32(cbPlano.SelectedValue);
+                    dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).TE_CODIGO = cbTerminacion.GetSelectedValueInt();
+                    dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).PAR_CODIGO = cbEstado.GetSelectedValueInt();
+                    dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).PNO_CODIGO = cbPlano.GetSelectedValueInt();
                     dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).SCONJ_DESCRIPCION = txtDescripcion.Text;
                     try
                     {

@@ -108,7 +108,7 @@ namespace GyCAP.DAL
 
             //Así obtenemos la pieza del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.PIEZASRow rowPieza = dsEstructura.PIEZAS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.PIEZASRow;
-            object[] valorParametros = { rowPieza.PZA_NOMBRE, rowPieza.TE_CODIGO, rowPieza.PZA_DESCRIPCION, rowPieza.PAR_CODIGO, rowPieza.PNO_CODIGO, rowPieza.PZA_CODIGO, rowPieza.PZA_CODIGOPARTE };
+            object[] valorParametros = { rowPieza.PZA_NOMBRE, rowPieza.TE_CODIGO, rowPieza.PZA_DESCRIPCION, rowPieza.PAR_CODIGO, rowPieza.PNO_CODIGO, rowPieza.PZA_CODIGOPARTE, rowPieza.PZA_CODIGO };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
