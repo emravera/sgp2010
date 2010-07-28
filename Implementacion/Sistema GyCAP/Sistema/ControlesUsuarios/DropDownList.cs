@@ -14,10 +14,10 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
             private int value;
             private string name;
 
-            public ItemLista(int cod, string nom)
+            public ItemLista(int val, string nom)
             {
                 this.name = nom;
-                this.value = cod;
+                this.value = val;
             }
             
             public int Value
@@ -30,6 +30,11 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
             {
                 get { return name; }
                 set { name = value; }
+            }
+
+            public override string ToString()
+            {
+                return name;
             }
         }
         
@@ -106,6 +111,36 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
             this.SelectedValue = valor;
         }
 
+        public object GetSelectedValue()
+        {
+            return this.SelectedValue;
+        }
+
+        public int GetSelectedValueInt()
+        {
+            return Convert.ToInt32(this.SelectedValue.ToString());
+        }
+
+        public string GetSelectedValueString()
+        {
+            return this.SelectedValue.ToString();
+        }
+
+        public decimal GetSelectedValueDecimal()
+        {
+            return Convert.ToDecimal(this.SelectedValue.ToString());
+        }
+
+        public DateTime GetSelectedValueDate()
+        {
+            return DateTime.Parse(this.SelectedValue.ToString());
+        }
+
+        public string GetSelectedText()
+        {
+            return (this.SelectedItem as ItemLista).Name;
+        }
+
         /// <summary>
         /// Carga los datos al combobox desde un dataview según el displayMember y valueMemeber especificado.
         /// Contiene una cabecera que puede formar parte de los items del combobox o como un simple texto. 
@@ -123,9 +158,9 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
             persistente = cabeceraPersistente;
             this.Items.Clear();
             IList<ItemLista> lista = new List<ItemLista>();
-            if (cabeceraPersistente) { lista.Add(new ItemLista(-1, textoCabecera)); }
+            if (cabeceraPersistente) { lista.Add(new ItemLista(-1, textoCabecera)); } 
             else { SetTexto(textoCabecera); }
-
+           
             if (dataview.Count > 0)
             {
                 dataview.Sort = displayMember + " ASC";
@@ -135,8 +170,8 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
                 }
             }
             this.DataSource = lista;
-            this.DisplayMember = "name";
-            this.ValueMember = "value";
+            this.DisplayMember = "Name";
+            this.ValueMember = "Value";
 
             if (cabeceraPersistente) { this.SelectedIndex = 0; }
             else { this.SelectedIndex = -1; }
@@ -155,7 +190,7 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         /// <param name="displayMember">Un array de string con los campos de dónde se concatenará el string a mostrar.</param>
         /// <param name="textoCabecera">El texto de la cabecera.</param>
         /// <param name="cabeceraPersistente">True para que forme parte de los items, false para simple texto.</param>
-        public void SetDatos(DataView dataview, string valueMember, string[] displayMember, string textoCabecera, bool cabeceraPersistente)
+        public void SetDatos(DataView dataview, string valueMember, string[] displayMember, string separadorConcatenado,string textoCabecera, bool cabeceraPersistente)
         {
             persistente = cabeceraPersistente;
             this.Items.Clear();
@@ -169,6 +204,7 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
                 for (int i = 0; i < displayMember.Length; i++)
                 {
                     cadenaAuxiliar += displayMember[i] + " ASC ";
+                    if (i + 1 < displayMember.Length) { cadenaAuxiliar += ","; }
                 }
                 dataview.Sort = cadenaAuxiliar;
                 foreach (DataRowView dr in dataview)
@@ -176,7 +212,8 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
                     cadenaAuxiliar = string.Empty;
                     for (int i = 0; i < displayMember.Length; i++)
                     {
-                        cadenaAuxiliar += dr[displayMember[i]].ToString() + " ";
+                        cadenaAuxiliar += dr[displayMember[i]].ToString();
+                        if (i + 1 < displayMember.Length) { cadenaAuxiliar += separadorConcatenado; }
                     }
                     lista.Add(new ItemLista(Convert.ToInt32(dr[valueMember].ToString()), cadenaAuxiliar));
                 }
