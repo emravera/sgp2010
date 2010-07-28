@@ -470,7 +470,7 @@ namespace GyCAP.UI.EstructuraProducto
             //ComboBoxs
             cbCocinaBuscar.SetDatos(dvCocinaBuscar, "COC_CODIGO", "COC_CODIGO_PRODUCTO", "--TODOS--", true);
             string[] displaymember = { "E_APELLIDO", "E_NOMBRE"};
-            cbResponsableBuscar.SetDatos(dvResponsableBuscar, "E_CODIGO", displaymember, "--TODOS--", true);
+            cbResponsableBuscar.SetDatos(dvResponsableBuscar, "E_CODIGO", displaymember, ", ", "--TODOS--", true);
             cbPlanoBuscar.SetDatos(dvPlanoBuscar, "PNO_CODIGO", "PNO_NOMBRE", "--TODOS--", true);
             cbActivoBuscar.Items.Add(new Sistema.Item("--TODOS--", -1));
             cbActivoBuscar.Items.Add(new Sistema.Item("SI", 1));
@@ -509,7 +509,7 @@ namespace GyCAP.UI.EstructuraProducto
 
             //ComboBoxs
             cbCocina.SetDatos(dvCocina, "COC_CODIGO", "COC_CODIGO_PRODUCTO", "Seleccione", false);
-            cbResponsable.SetDatos(dvResponsable, "E_CODIGO", displaymember, "Seleccione", false);
+            cbResponsable.SetDatos(dvResponsable, "E_CODIGO", displaymember, ", ", "Seleccione", false);
             cbPlano.SetDatos(dvPlano, "PNO_CODIGO", "PNO_NOMBRE", "Seleccione", false);
            
             #endregion Datos
@@ -945,5 +945,7 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
+
+        
     }
 }

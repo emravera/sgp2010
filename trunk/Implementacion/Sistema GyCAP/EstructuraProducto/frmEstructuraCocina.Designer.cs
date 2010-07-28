@@ -132,15 +132,15 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.dtpFechaAltaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.cbResponsableBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbPlanoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbCocinaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.dtpFechaModificacion = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.dtpFechaAlta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.cbResponsable = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbPlano = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbCocina = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.dtpFechaAltaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.dtpFechaAlta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.dtpFechaModificacion = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcEstructuraCocina.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -1419,6 +1419,15 @@
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // dtpFechaAltaBuscar
+            // 
+            this.dtpFechaAltaBuscar.CustomFormat = " ";
+            this.dtpFechaAltaBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaAltaBuscar.Location = new System.Drawing.Point(574, 20);
+            this.dtpFechaAltaBuscar.Name = "dtpFechaAltaBuscar";
+            this.dtpFechaAltaBuscar.Size = new System.Drawing.Size(95, 21);
+            this.dtpFechaAltaBuscar.TabIndex = 13;
+            // 
             // cbResponsableBuscar
             // 
             this.cbResponsableBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1449,6 +1458,24 @@
             this.cbCocinaBuscar.Size = new System.Drawing.Size(166, 21);
             this.cbCocinaBuscar.TabIndex = 10;
             // 
+            // dtpFechaModificacion
+            // 
+            this.dtpFechaModificacion.CustomFormat = " ";
+            this.dtpFechaModificacion.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaModificacion.Location = new System.Drawing.Point(658, 57);
+            this.dtpFechaModificacion.Name = "dtpFechaModificacion";
+            this.dtpFechaModificacion.Size = new System.Drawing.Size(107, 21);
+            this.dtpFechaModificacion.TabIndex = 25;
+            // 
+            // dtpFechaAlta
+            // 
+            this.dtpFechaAlta.CustomFormat = " ";
+            this.dtpFechaAlta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaAlta.Location = new System.Drawing.Point(658, 23);
+            this.dtpFechaAlta.Name = "dtpFechaAlta";
+            this.dtpFechaAlta.Size = new System.Drawing.Size(107, 21);
+            this.dtpFechaAlta.TabIndex = 24;
+            // 
             // cbResponsable
             // 
             this.cbResponsable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1478,33 +1505,6 @@
             this.cbCocina.Name = "cbCocina";
             this.cbCocina.Size = new System.Drawing.Size(199, 21);
             this.cbCocina.TabIndex = 21;
-            // 
-            // dtpFechaAltaBuscar
-            // 
-            this.dtpFechaAltaBuscar.CustomFormat = " ";
-            this.dtpFechaAltaBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaAltaBuscar.Location = new System.Drawing.Point(574, 20);
-            this.dtpFechaAltaBuscar.Name = "dtpFechaAltaBuscar";
-            this.dtpFechaAltaBuscar.Size = new System.Drawing.Size(95, 21);
-            this.dtpFechaAltaBuscar.TabIndex = 13;
-            // 
-            // dtpFechaAlta
-            // 
-            this.dtpFechaAlta.CustomFormat = " ";
-            this.dtpFechaAlta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaAlta.Location = new System.Drawing.Point(658, 23);
-            this.dtpFechaAlta.Name = "dtpFechaAlta";
-            this.dtpFechaAlta.Size = new System.Drawing.Size(107, 21);
-            this.dtpFechaAlta.TabIndex = 24;
-            // 
-            // dtpFechaModificacion
-            // 
-            this.dtpFechaModificacion.CustomFormat = " ";
-            this.dtpFechaModificacion.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaModificacion.Location = new System.Drawing.Point(658, 57);
-            this.dtpFechaModificacion.Name = "dtpFechaModificacion";
-            this.dtpFechaModificacion.Size = new System.Drawing.Size(107, 21);
-            this.dtpFechaModificacion.TabIndex = 25;
             // 
             // frmEstructuraCocina
             // 
