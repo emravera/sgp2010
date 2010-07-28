@@ -67,7 +67,7 @@ namespace GyCAP.DAL
             }
 
             //ESTADO - Revisamos si es distinto de 0, o sea "todos"
-            if (idEstadoEmpleado != 0 )
+            if (idEstadoEmpleado != -1 )
             {
                 sql += " AND EE_CODIGO = @p" + cantidadParametros;
                 valoresFiltros[cantidadParametros] = Convert.ToInt32(idEstadoEmpleado);
