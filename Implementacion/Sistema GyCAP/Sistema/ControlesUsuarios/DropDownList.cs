@@ -13,7 +13,8 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         {
             private int value;
             private string name;
-
+            
+          
             public ItemLista(int val, string nom)
             {
                 this.name = nom;

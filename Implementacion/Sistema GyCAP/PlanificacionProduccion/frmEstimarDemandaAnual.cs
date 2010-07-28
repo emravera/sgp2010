@@ -373,7 +373,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                     {
                         
                             //Se definen los parámetros que se van a guardar
-
+                            
+                            demanda.Codigo= Convert.ToInt32(dvListaDemanda[dgvLista.SelectedRows[0].Index]["deman_codigo"]);
                             demanda.Anio = Convert.ToInt32(txtAnio.Text);
                             demanda.Nombre = txtIdentificacion.Text;
                     }
@@ -479,6 +480,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                             foreach (Entidades.DetalleDemandaAnual obje in detalle)
                             {
+                                obje.Codigo = BLL.DetalleDemandaAnualBLL.ObtenerID(obje);
                                 Data.dsEstimarDemanda.DETALLE_DEMANDAS_ANUALESRow rowDDemanda = dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.FindByDDEMAN_CODIGO(obje.Codigo);
                                 rowDDemanda.BeginEdit();
                                 rowDDemanda.DDEMAN_CANTIDADMES = obje.Cantidadmes;
@@ -688,7 +690,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             for (int pointIndex = 0; pointIndex < promedio.Count(); pointIndex++)
             {
-                plotY = Convert.ToInt16(promedio[pointIndex]);
+                plotY = Convert.ToInt32(promedio[pointIndex]);
                 chartDemanda.Series[seriesGraficos.ToString()].Points.AddY(plotY);
             }
 

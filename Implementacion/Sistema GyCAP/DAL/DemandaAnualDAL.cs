@@ -176,14 +176,15 @@ namespace GyCAP.DAL
                 //Iniciamos la transaccion
                 transaccion = DB.IniciarTransaccion();
 
-                //Elimino la demanda
-                string sql = "DELETE FROM DEMANDAS_ANUALES WHERE deman_codigo = @p0";
+                //Elimino el detalle de la demanda
+                string sql = "DELETE FROM DETALLE_DEMANDAS_ANUALES WHERE deman_codigo = @p0";
                 object[] valorParametros = { codigo };
                 DB.executeNonQuery(sql, valorParametros, null);
 
-                //Elimino el detalle de la demanda
-                sql = "DELETE FROM DETALLE_DEMANDAS_ANUALES WHERE deman_codigo = @p0";
+                //Elimino la demanda
+                sql = "DELETE FROM DEMANDAS_ANUALES WHERE deman_codigo = @p0";                
                 DB.executeNonQuery(sql, valorParametros, null);
+
 
                 transaccion.Commit();
                 DB.FinalizarTransaccion();

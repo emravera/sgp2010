@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.numDiciembre = new System.Windows.Forms.NumericUpDown();
-            this.tcDemanda = new System.Windows.Forms.TabControl();
+            this.tcPlanAnual = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.gbGrillaDetalle = new System.Windows.Forms.GroupBox();
             this.dgvDetalle = new System.Windows.Forms.DataGridView();
@@ -78,13 +78,20 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.gbDatosPrincipales = new System.Windows.Forms.GroupBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.label23 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.chListAnios = new System.Windows.Forms.CheckedListBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.numCapacidadStock = new System.Windows.Forms.NumericUpDown();
+            this.numCapacidadProducción = new System.Windows.Forms.NumericUpDown();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.btnCalcularEstimacion = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.numCrecimiento = new System.Windows.Forms.NumericUpDown();
-            this.chListAnios = new System.Windows.Forms.CheckedListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtAnio = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -96,16 +103,9 @@
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.numCapacidadProducción = new System.Windows.Forms.NumericUpDown();
-            this.numCapacidadStock = new System.Windows.Forms.NumericUpDown();
-            this.dropDownList1 = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.label22 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label23 = new System.Windows.Forms.Label();
+            this.cbEstimacionDemanda = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             ((System.ComponentModel.ISupportInitialize)(this.numDiciembre)).BeginInit();
-            this.tcDemanda.SuspendLayout();
+            this.tcPlanAnual.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.gbGrillaDetalle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
@@ -130,12 +130,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.numJulio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numEnero)).BeginInit();
             this.gbDatosPrincipales.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCapacidadStock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCapacidadProducción)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCrecimiento)).BeginInit();
             this.tsMenu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numCapacidadProducción)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCapacidadStock)).BeginInit();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // numDiciembre
@@ -151,22 +151,22 @@
             this.numDiciembre.TabIndex = 18;
             this.numDiciembre.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // tcDemanda
+            // tcPlanAnual
             // 
-            this.tcDemanda.Appearance = System.Windows.Forms.TabAppearance.Buttons;
-            this.tcDemanda.Controls.Add(this.tpBuscar);
-            this.tcDemanda.Controls.Add(this.tpDatos);
-            this.tcDemanda.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tcDemanda.ItemSize = new System.Drawing.Size(0, 1);
-            this.tcDemanda.Location = new System.Drawing.Point(2, 54);
-            this.tcDemanda.Margin = new System.Windows.Forms.Padding(0);
-            this.tcDemanda.Multiline = true;
-            this.tcDemanda.Name = "tcDemanda";
-            this.tcDemanda.Padding = new System.Drawing.Point(0, 0);
-            this.tcDemanda.SelectedIndex = 0;
-            this.tcDemanda.Size = new System.Drawing.Size(738, 430);
-            this.tcDemanda.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tcDemanda.TabIndex = 8;
+            this.tcPlanAnual.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.tcPlanAnual.Controls.Add(this.tpBuscar);
+            this.tcPlanAnual.Controls.Add(this.tpDatos);
+            this.tcPlanAnual.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcPlanAnual.ItemSize = new System.Drawing.Size(0, 1);
+            this.tcPlanAnual.Location = new System.Drawing.Point(2, 54);
+            this.tcPlanAnual.Margin = new System.Windows.Forms.Padding(0);
+            this.tcPlanAnual.Multiline = true;
+            this.tcPlanAnual.Name = "tcPlanAnual";
+            this.tcPlanAnual.Padding = new System.Drawing.Point(0, 0);
+            this.tcPlanAnual.SelectedIndex = 0;
+            this.tcPlanAnual.Size = new System.Drawing.Size(738, 430);
+            this.tcPlanAnual.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tcPlanAnual.TabIndex = 8;
             // 
             // tpBuscar
             // 
@@ -176,7 +176,7 @@
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(730, 401);
+            this.tpBuscar.Size = new System.Drawing.Size(730, 421);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
@@ -254,6 +254,7 @@
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // txtAnioBuscar
             // 
@@ -298,13 +299,13 @@
             // 
             // chartDemanda
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartDemanda.ChartAreas.Add(chartArea1);
+            chartArea2.Name = "ChartArea1";
+            this.chartDemanda.ChartAreas.Add(chartArea2);
             this.chartDemanda.Location = new System.Drawing.Point(17, 17);
             this.chartDemanda.Name = "chartDemanda";
-            series1.ChartArea = "ChartArea1";
-            series1.Name = "Series1";
-            this.chartDemanda.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Name = "Series1";
+            this.chartDemanda.Series.Add(series2);
             this.chartDemanda.Size = new System.Drawing.Size(375, 207);
             this.chartDemanda.TabIndex = 0;
             this.chartDemanda.Text = "chart1";
@@ -681,7 +682,7 @@
             this.gbDatosPrincipales.Controls.Add(this.label23);
             this.gbDatosPrincipales.Controls.Add(this.groupBox2);
             this.gbDatosPrincipales.Controls.Add(this.label22);
-            this.gbDatosPrincipales.Controls.Add(this.dropDownList1);
+            this.gbDatosPrincipales.Controls.Add(this.cbEstimacionDemanda);
             this.gbDatosPrincipales.Controls.Add(this.numCapacidadStock);
             this.gbDatosPrincipales.Controls.Add(this.numCapacidadProducción);
             this.gbDatosPrincipales.Controls.Add(this.label19);
@@ -700,16 +701,27 @@
             this.gbDatosPrincipales.TabStop = false;
             this.gbDatosPrincipales.Text = "Datos Principales";
             // 
-            // radioButton2
+            // label23
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(147, 20);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(95, 17);
-            this.radioButton2.TabIndex = 11;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Otra Demanda";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(230, 106);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(51, 13);
+            this.label23.TabIndex = 21;
+            this.label23.Text = "Unidades";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.radioButton1);
+            this.groupBox2.Controls.Add(this.radioButton2);
+            this.groupBox2.Controls.Add(this.chListAnios);
+            this.groupBox2.Location = new System.Drawing.Point(323, 15);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(385, 49);
+            this.groupBox2.TabIndex = 20;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Demanda Año Siguiente";
             // 
             // radioButton1
             // 
@@ -721,6 +733,89 @@
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Demanda Actual";
             this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(147, 20);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(95, 17);
+            this.radioButton2.TabIndex = 11;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Otra Demanda";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // chListAnios
+            // 
+            this.chListAnios.FormattingEnabled = true;
+            this.chListAnios.Location = new System.Drawing.Point(248, 20);
+            this.chListAnios.Name = "chListAnios";
+            this.chListAnios.Size = new System.Drawing.Size(126, 20);
+            this.chListAnios.TabIndex = 4;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(555, 79);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(51, 13);
+            this.label22.TabIndex = 19;
+            this.label22.Text = "Unidades";
+            // 
+            // numCapacidadStock
+            // 
+            this.numCapacidadStock.Location = new System.Drawing.Point(151, 102);
+            this.numCapacidadStock.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numCapacidadStock.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.numCapacidadStock.Name = "numCapacidadStock";
+            this.numCapacidadStock.Size = new System.Drawing.Size(73, 21);
+            this.numCapacidadStock.TabIndex = 17;
+            this.numCapacidadStock.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // numCapacidadProducción
+            // 
+            this.numCapacidadProducción.Location = new System.Drawing.Point(476, 75);
+            this.numCapacidadProducción.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numCapacidadProducción.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.numCapacidadProducción.Name = "numCapacidadProducción";
+            this.numCapacidadProducción.Size = new System.Drawing.Size(73, 21);
+            this.numCapacidadProducción.TabIndex = 16;
+            this.numCapacidadProducción.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(17, 106);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(129, 13);
+            this.label19.TabIndex = 15;
+            this.label19.Text = "Capacidad Máxima Stock:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(325, 77);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(155, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Capacidad Máxima Producción:";
             // 
             // label20
             // 
@@ -767,14 +862,6 @@
             this.numCrecimiento.Size = new System.Drawing.Size(73, 21);
             this.numCrecimiento.TabIndex = 3;
             this.numCrecimiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // chListAnios
-            // 
-            this.chListAnios.FormattingEnabled = true;
-            this.chListAnios.Location = new System.Drawing.Point(248, 20);
-            this.chListAnios.Name = "chListAnios";
-            this.chListAnios.Size = new System.Drawing.Size(126, 20);
-            this.chListAnios.TabIndex = 4;
             // 
             // label3
             // 
@@ -884,7 +971,7 @@
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.tcDemanda, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tcPlanAnual, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tsMenu, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -895,101 +982,15 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(742, 486);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
-            // label2
+            // cbEstimacionDemanda
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(325, 77);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(155, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Capacidad Máxima Producción:";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(17, 106);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(129, 13);
-            this.label19.TabIndex = 15;
-            this.label19.Text = "Capacidad Máxima Stock:";
-            // 
-            // numCapacidadProducción
-            // 
-            this.numCapacidadProducción.Location = new System.Drawing.Point(476, 75);
-            this.numCapacidadProducción.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.numCapacidadProducción.Minimum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            -2147483648});
-            this.numCapacidadProducción.Name = "numCapacidadProducción";
-            this.numCapacidadProducción.Size = new System.Drawing.Size(73, 21);
-            this.numCapacidadProducción.TabIndex = 16;
-            this.numCapacidadProducción.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // numCapacidadStock
-            // 
-            this.numCapacidadStock.Location = new System.Drawing.Point(151, 102);
-            this.numCapacidadStock.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.numCapacidadStock.Minimum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            -2147483648});
-            this.numCapacidadStock.Name = "numCapacidadStock";
-            this.numCapacidadStock.Size = new System.Drawing.Size(73, 21);
-            this.numCapacidadStock.TabIndex = 17;
-            this.numCapacidadStock.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // dropDownList1
-            // 
-            this.dropDownList1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropDownList1.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.dropDownList1.FormattingEnabled = true;
-            this.dropDownList1.Location = new System.Drawing.Point(151, 47);
-            this.dropDownList1.Name = "dropDownList1";
-            this.dropDownList1.Size = new System.Drawing.Size(137, 21);
-            this.dropDownList1.TabIndex = 18;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(555, 79);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(51, 13);
-            this.label22.TabIndex = 19;
-            this.label22.Text = "Unidades";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.radioButton1);
-            this.groupBox2.Controls.Add(this.radioButton2);
-            this.groupBox2.Controls.Add(this.chListAnios);
-            this.groupBox2.Location = new System.Drawing.Point(323, 15);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(385, 49);
-            this.groupBox2.TabIndex = 20;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Demanda Año Siguiente";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(230, 106);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(51, 13);
-            this.label23.TabIndex = 21;
-            this.label23.Text = "Unidades";
+            this.cbEstimacionDemanda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstimacionDemanda.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbEstimacionDemanda.FormattingEnabled = true;
+            this.cbEstimacionDemanda.Location = new System.Drawing.Point(151, 47);
+            this.cbEstimacionDemanda.Name = "cbEstimacionDemanda";
+            this.cbEstimacionDemanda.Size = new System.Drawing.Size(137, 21);
+            this.cbEstimacionDemanda.TabIndex = 18;
             // 
             // frmPlanAnual
             // 
@@ -1001,7 +1002,7 @@
             this.Name = "frmPlanAnual";
             this.Text = "Plan Anual";
             ((System.ComponentModel.ISupportInitialize)(this.numDiciembre)).EndInit();
-            this.tcDemanda.ResumeLayout(false);
+            this.tcPlanAnual.ResumeLayout(false);
             this.tpBuscar.ResumeLayout(false);
             this.gbGrillaDetalle.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).EndInit();
@@ -1030,15 +1031,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.numEnero)).EndInit();
             this.gbDatosPrincipales.ResumeLayout(false);
             this.gbDatosPrincipales.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCapacidadStock)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCapacidadProducción)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCrecimiento)).EndInit();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numCapacidadProducción)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCapacidadStock)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1046,7 +1047,7 @@
         #endregion
 
         private System.Windows.Forms.NumericUpDown numDiciembre;
-        private System.Windows.Forms.TabControl tcDemanda;
+        private System.Windows.Forms.TabControl tcPlanAnual;
         private System.Windows.Forms.TabPage tpBuscar;
         private System.Windows.Forms.GroupBox gbGrillaDetalle;
         private System.Windows.Forms.DataGridView dgvDetalle;
@@ -1116,7 +1117,7 @@
         private System.Windows.Forms.NumericUpDown numCapacidadProducción;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label22;
-        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList dropDownList1;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbEstimacionDemanda;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.GroupBox groupBox2;
 
