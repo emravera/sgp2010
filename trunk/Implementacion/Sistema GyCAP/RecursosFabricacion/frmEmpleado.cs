@@ -182,8 +182,14 @@ namespace GyCAP.UI.RecursosFabricacion
                     break;
                 case estadoUI.nuevo:
                     setBotones(false);
-                    txtNombre.Text = String.Empty;
+                    txtNombre.Text = string.Empty;
                     txtApellido.Text = string.Empty;
+                    txtLegajo.Text = string.Empty;
+                    txtTelefono.Text = string.Empty;
+                    cboEstado.SelectedIndex = 0;
+                    cboSector.SelectedIndex = 0;
+                    
+
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
