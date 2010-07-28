@@ -127,7 +127,7 @@ namespace GyCAP.UI.EstructuraProducto
             try
             {
                 dsEstructura.Clear();                
-                BLL.EstructuraBLL.ObtenerEstructuras(txtNombreBuscar.Text, cbPlanoBuscar.GetSelectedValue(), dtpFechaAltaBuscar.Value.ToShortDateString(), cbCocinaBuscar.GetSelectedValue(), cbResponsableBuscar.GetSelectedValue(), cbActivoBuscar.SelectedItem, dsEstructura);
+                BLL.EstructuraBLL.ObtenerEstructuras(txtNombreBuscar.Text, cbPlanoBuscar.GetSelectedValue(), dtpFechaAltaBuscar.GetFecha(), cbCocinaBuscar.GetSelectedValue(), cbResponsableBuscar.GetSelectedValue(), cbActivoBuscar.SelectedItem, dsEstructura);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
                 dvEstructuras.Table = dsEstructura.ESTRUCTURAS;

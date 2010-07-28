@@ -10,19 +10,17 @@ namespace GyCAP.DAL
     {
         public static void Insertar(Data.dsEstructura dsEstructura)
         {
-            #region SQLs
-
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
-            string sqlInsertEstructura = @"INSERT INTO [ESTRUCTURAS]
-                                        ([estr_nombre]
-                                        ,[coc_codigo]
-                                        ,[pno_codigo]
-                                        ,[estr_descripcion]
-                                        ,[estr_activo]
-                                        ,[estr_fecha_alta]
-                                        ,[estr_fecha_modificacion]
-                                        .[e_codigo]) 
-                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7) SELECT @@Identity";
+            string sqlInsert = @"INSERT INTO [ESTRUCTURAS]
+                               ([estr_nombre]
+                               ,[coc_codigo]
+                               ,[pno_codigo]
+                               ,[estr_descripcion]
+                               ,[estr_activo]
+                               ,[estr_fecha_alta]
+                               ,[estr_fecha_modificacion]
+                               ,[e_codigo]) 
+                               VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7) SELECT @@Identity";
 
             //obtenemos la estructura nueva del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.ESTRUCTURASRow rowEstructura = dsEstructura.ESTRUCTURAS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.ESTRUCTURASRow;
@@ -32,45 +30,8 @@ namespace GyCAP.DAL
                                          rowEstructura.ESTR_DESCRIPCION,
                                          rowEstructura.ESTR_ACTIVO,
                                          rowEstructura.ESTR_FECHA_ALTA.Date,
-                                         rowEstructura.ESTR_FECHA_MODIFICACION.Date };
-
-            string sqlInsertGrupo = @"INSERT INTO [GRUPOS_ESTRUCTURA] 
-                                    ([grp_numero]
-                                    ,[estr_codigo]
-                                    ,[grp_padre_codigo]
-                                    ,[grp_nombre]
-                                    ,[grp_descripcion])
-                                    VALUES (@p0, @p1, @p2, @p3, @p4)";
-
-            string sqlInsertConjuntosEstructura = @"INSERT INTO [CONJUNTOSXESTRUCTURA] 
-                                                ([estr_codigo]
-                                                ,[conj_codigo]
-                                                ,[cxe_cantidad]
-                                                ,[grp_codigo])
-                                                VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
-
-            string sqlInsertSubconjuntosEstructura = @"INSERT INTO [SUBCONJUNTOSXESTRUCTURA] 
-                                                ([estr_codigo]
-                                                ,[sconj_codigo]
-                                                ,[scxe_cantidad]
-                                                ,[grp_codigo])
-                                                VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
-
-            string sqlInsertPiezasEstructura = @"INSERT INTO [PIEZASXESTRUCTURA] 
-                                                ([estr_codigo]
-                                                ,[pza_codigo]
-                                                ,[pxe_cantidad]
-                                                ,[grp_codigo])
-                                                VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
-
-            string sqlInsertMateriasPrimasEstructura = @"INSERT INTO [MATERIASPRIMASXESTRUCTURA] 
-                                                        ([estr_codigo]
-                                                        ,[mp_codigo]
-                                                        ,[mpxe_cantidad]
-                                                        ,[grp_codigo])
-                                                        VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
-
-            #endregion
+                                         rowEstructura.ESTR_FECHA_MODIFICACION.Date,
+                                         rowEstructura.E_CODIGO };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
@@ -81,76 +42,83 @@ namespace GyCAP.DAL
                 transaccion = DB.IniciarTransaccion();
                 //Insertamos el conjunto y actualizamos su código en el dataset
                 rowEstructura.BeginEdit();
-                rowEstructura.ESTR_CODIGO = Convert.ToInt32(DB.executeScalar(sqlInsertEstructura, valorParametros, transaccion));
+                rowEstructura.ESTR_CODIGO = Convert.ToInt32(DB.executeScalar(sqlInsert, valorParametros, transaccion));
                 rowEstructura.EndEdit();
                 //Ahora insertamos su estructura, usamos el foreach para recorrer sólo los nuevos registros del dataset
 
                 #region InsertGrupos
-
+                Entidades.GrupoEstructura grupoE = new GyCAP.Entidades.GrupoEstructura();
                 foreach (Data.dsEstructura.GRUPOS_ESTRUCTURARow row in (Data.dsEstructura.GRUPOS_ESTRUCTURARow[])dsEstructura.GRUPOS_ESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
                 {
-                    //Primero actualizamos el código del grupo nuevo en la tabla relacionada
+                    grupoE.CodigoEstructura = Convert.ToInt32(rowEstructura.ESTR_CODIGO);
+                    grupoE.Numero = Convert.ToInt32(row.GRP_NUMERO);
+                    grupoE.NombreGrupo = row.GRP_NOMBRE;
+                    grupoE.CodigoPadre = Convert.ToInt32(row.GRP_PADRE_CODIGO);
+                    grupoE.Descripcion = row.GRP_DESCRIPCION;
+                    grupoE.Concreto = Convert.ToInt32(row.GRP_CONCRETO);
+                    GrupoEstructuraDAL.Insertar(grupoE, transaccion);
                     row.BeginEdit();
-                    row.ESTR_CODIGO = rowEstructura.ESTR_CODIGO;
-                    row.EndEdit();
-                    //Asignamos los valores a los parámetros
-                    valorParametros = new object[] { row.GRP_NUMERO, row.ESTR_CODIGO, row.GRP_PADRE_CODIGO, row.GRP_NOMBRE, row.GRP_DESCRIPCION };
-                    //Ahora si insertamos en la bd y actualizamos el código de la relación
-                    row.BeginEdit();
-                    row.GRP_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertGrupo, valorParametros, transaccion));
+                    row.GRP_CODIGO = grupoE.CodigoGrupo;
                     row.EndEdit();
                 }
-
                 #endregion
 
                 #region InsertConjuntos
+                Entidades.ConjuntoEstructura conjuntoE = new GyCAP.Entidades.ConjuntoEstructura();
                 foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
                 {
+                    conjuntoE.CodigoEstructura = Convert.ToInt32(rowEstructura.ESTR_CODIGO);
+                    conjuntoE.CodigoConjunto = Convert.ToInt32(row.CONJ_CODIGO);
+                    conjuntoE.CantidadConjunto = Convert.ToInt32(row.CXE_CANTIDAD);
+                    conjuntoE.CodigoGrupo = Convert.ToInt32(row.GRP_CODIGO);
+                    DAL.ConjuntoEstructuraDAL.Insertar(conjuntoE, transaccion);                  
                     row.BeginEdit();
-                    row.ESTR_CODIGO = rowEstructura.ESTR_CODIGO;
-                    row.EndEdit();
-                    valorParametros = new object[] { row.ESTR_CODIGO, row.CONJ_CODIGO, row.CXE_CANTIDAD, row.GRP_CODIGO };
-                    row.BeginEdit();
-                    row.CXE_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertConjuntosEstructura, valorParametros, transaccion));
+                    row.CXE_CODIGO = conjuntoE.CodigoDetalle;
                     row.EndEdit();
                 }
                 #endregion
 
                 #region InsertSubconjuntos
+                Entidades.SubconjuntoEstructura subconjuntoE = new GyCAP.Entidades.SubconjuntoEstructura();
                 foreach (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow[])dsEstructura.SUBCONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
                 {
+                    subconjuntoE.CodigoEstructura = Convert.ToInt32(rowEstructura.ESTR_CODIGO);
+                    subconjuntoE.CodigoSubconjunto = Convert.ToInt32(row.SCONJ_CODIGO);
+                    subconjuntoE.CantidadSubconjunto = Convert.ToInt32(row.SCXE_CANTIDAD);                    
+                    subconjuntoE.CodigoGrupo = Convert.ToInt32(row.GRP_CODIGO);
+                    SubconjuntoEstructuraDAL.Insertar(subconjuntoE, transaccion);
                     row.BeginEdit();
-                    row.ESTR_CODIGO = rowEstructura.ESTR_CODIGO;
-                    row.EndEdit();
-                    valorParametros = new object[] { row.ESTR_CODIGO, row.SCONJ_CODIGO, row.SCXE_CANTIDAD, row.GRP_CODIGO };
-                    row.BeginEdit();
-                    row.SCXE_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertSubconjuntosEstructura, valorParametros, transaccion));
+                    row.SCXE_CODIGO = subconjuntoE.CodigoDetalle;
                     row.EndEdit();
                 }
                 #endregion
 
                 #region InsertPiezas
+                Entidades.PiezaEstructura piezaE = new GyCAP.Entidades.PiezaEstructura();
                 foreach (Data.dsEstructura.PIEZASXESTRUCTURARow row in (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
                 {
+                    piezaE.CodigoEstructura = Convert.ToInt32(rowEstructura.ESTR_CODIGO);
+                    piezaE.CodigPieza = Convert.ToInt32(row.PZA_CODIGO);
+                    piezaE.CantidadPieza = Convert.ToInt32(row.PXE_CANTIDAD);
+                    piezaE.CodigoGrupo = Convert.ToInt32(row.GRP_CODIGO);
+                    PiezaEstructuraDAL.Insertar(piezaE, transaccion);
                     row.BeginEdit();
-                    row.ESTR_CODIGO = rowEstructura.ESTR_CODIGO;
-                    row.EndEdit();
-                    valorParametros = new object[] { row.ESTR_CODIGO, row.PZA_CODIGO, row.PXE_CANTIDAD, row.GRP_CODIGO };
-                    row.BeginEdit();
-                    row.PXE_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertPiezasEstructura, valorParametros, transaccion));
+                    row.PXE_CODIGO = piezaE.CodigoDetalle;
                     row.EndEdit();
                 }
                 #endregion
 
                 #region InsertMateriaPrima
+                Entidades.MateriaPrimaEstructura mpE = new GyCAP.Entidades.MateriaPrimaEstructura();
                 foreach (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow row in (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow[])dsEstructura.MATERIASPRIMASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
                 {
+                    mpE.CodigoEstructura = Convert.ToInt32(rowEstructura.ESTR_CODIGO);
+                    mpE.CodigoMateriaPrima = Convert.ToInt32(row.MP_CODIGO);
+                    mpE.CantidadMateriaPrima = row.MPXE_CANTIDAD;
+                    mpE.CodigoGrupo = Convert.ToInt32(row.GRP_CODIGO);
+                    MateriaPrimaEstructuraDAL.Insertar(mpE, transaccion);
                     row.BeginEdit();
-                    row.ESTR_CODIGO = rowEstructura.ESTR_CODIGO;
-                    row.EndEdit();
-                    valorParametros = new object[] { row.ESTR_CODIGO, row.MP_CODIGO, row.MPXE_CANTIDAD, row.GRP_CODIGO };
-                    row.BeginEdit();
-                    row.MPXE_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertMateriasPrimasEstructura, valorParametros, transaccion));
+                    row.MPXE_CODIGO = mpE.CodigoDetalle;
                     row.EndEdit();
                 }
 
