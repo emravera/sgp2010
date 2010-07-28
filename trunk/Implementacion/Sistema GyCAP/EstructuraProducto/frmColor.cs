@@ -249,9 +249,7 @@ namespace GyCAP.UI.EstructuraProducto
         private void txtNombre_Enter(object sender, EventArgs e)
         {
             txtNombre.SelectAll();
-        }
-
-        
+        }        
 
         #endregion
 
