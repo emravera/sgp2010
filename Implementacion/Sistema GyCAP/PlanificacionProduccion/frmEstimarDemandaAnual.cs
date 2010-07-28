@@ -57,9 +57,10 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Agregamos la columnas
             dgvDetalle.Columns.Add("DDEMAN_CODIGO", "Código");
             dgvDetalle.Columns.Add("DDEMAN_MES", "Mes");
-            dgvDetalle.Columns.Add("DDEMAN_CANTIDADMES", "Fecha Inicio Plan");
+            dgvDetalle.Columns.Add("DDEMAN_CANTIDADMES", "Cantidad Mensual");
 
             //Seteamos el modo de tamaño de las columnas
+            dgvDetalle.Columns[0].Visible = false;
             dgvDetalle.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalle.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalle.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -236,7 +237,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Demanda Anual - Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error: Demanda Anual - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetInterface(estadoUI.inicio);
             }
             catch (Exception ex)
@@ -252,6 +253,11 @@ namespace GyCAP.UI.PlanificacionProduccion
         }
 
         private void dgvLista_DoubleClick(object sender, EventArgs e)
+        {
+            LlenarDetalle();
+        }
+
+        private void LlenarDetalle()
         {
             try
             {
@@ -338,8 +344,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                         demanda.ParametroCrecimiento = 0;
                         demanda.FechaCreacion = DateTime.Now;
 
-                        demanda.Codigo = BLL.DemandaAnualBLL.Insertar(demanda);
-                    }
+                     }
                 }
                 else if ( estadoActual == estadoUI.calcularEstimacion)
                 {
@@ -349,17 +354,15 @@ namespace GyCAP.UI.PlanificacionProduccion
                     //Pregunto si esta todo escrito
                     if ( validacion == string.Empty)
                     {
-
                         //Se definen los parámetros que se van a guardar
 
                         demanda.Anio = Convert.ToInt32(txtAnio.Text);
                         demanda.Nombre = txtIdentificacion.Text;
                         demanda.ParametroCrecimiento = Convert.ToDecimal(numCrecimiento.Value);
                         demanda.FechaCreacion = DateTime.Now;
-
-                        demanda.Codigo = BLL.DemandaAnualBLL.Insertar(demanda);
                     }
                 }
+
                 else if (estadoActual == estadoUI.modificar)
                 {
                     validacion = string.Empty;
@@ -373,18 +376,9 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                             demanda.Anio = Convert.ToInt32(txtAnio.Text);
                             demanda.Nombre = txtIdentificacion.Text;
-                            
-                            if (BLL.DemandaAnualBLL.ValidarModificacion(demanda) == true)
-                            {
-                                //lo Actualizo en la bd
-                                BLL.DemandaAnualBLL.Modificar(demanda);
-                            }
-                            else
-                            {
-                                throw new Exception();
-                            }
                     }
                 }
+
                 if (validacion== string.Empty)
                 {
                         //Meses
@@ -409,7 +403,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                         int[] Cantidad = { enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre };
 
                         //Se crea la lista de objetos genericos
-                        IList detalle = new List<Entidades.DetalleDemandaAnual>();
+                        IList<Entidades.DetalleDemandaAnual> detalle = new List<Entidades.DetalleDemandaAnual>();
 
                         //Se van creando los objetos
                         for (int i = 0; i < 12; i++)
@@ -418,13 +412,14 @@ namespace GyCAP.UI.PlanificacionProduccion
                             objeto.Demanda = demanda;
                             objeto.Cantidadmes = Cantidad[i];
                             objeto.Mes = Meses[i];
-                            if (estadoActual == estadoUI.modificar)
-                            {
-                                BLL.DetalleDemandaAnualBLL.Actualizar(objeto);
-                                objeto.Codigo = BLL.DetalleDemandaAnualBLL.ObtenerID(objeto);
-                            }
-                            else objeto.Codigo = BLL.DetalleDemandaAnualBLL.Insertar(objeto);
                             detalle.Add(objeto);
+                        }
+
+                        if (estadoActual == estadoUI.calcularEstimacion || estadoActual == estadoUI.cargaHistorico)
+                        {
+                            //Se guardan los datos en la BD
+                            detalle=BLL.DemandaAnualBLL.Insertar(demanda, detalle);
+                            demanda.Codigo = detalle[0].Demanda.Codigo;
                         }
 
                         //SI ESTA GUARDANDO UN HISTORICO O EN CALCULO
@@ -468,6 +463,9 @@ namespace GyCAP.UI.PlanificacionProduccion
                         }
                         else if (estadoActual == estadoUI.modificar)
                         {
+                            //Se modifica en la BD
+                            BLL.DemandaAnualBLL.Modificar(demanda, detalle);
+                            
                             //Se modifica el dataset
                             //La demanda anual (cabecera)
                             Data.dsEstimarDemanda.DEMANDAS_ANUALESRow rowDemanda = dsEstimarDemanda.DEMANDAS_ANUALES.FindByDEMAN_CODIGO(demanda.Codigo);
@@ -970,16 +968,13 @@ namespace GyCAP.UI.PlanificacionProduccion
                         //Pregunto si se puede eliminar
                         if (BLL.DemandaAnualBLL.PuedeEliminarse(codigo))
                         {
-                            //Elimino el Detalle de la demanda
-                            BLL.DemandaAnualBLL.EliminarDetalle(codigo);
+                            //Elimino la demanda anual y su detalle de la BD
+                            BLL.DemandaAnualBLL.Eliminar(codigo);
 
                             //Limpio el dataset de detalles
                             dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Clear();
 
-                            //Elimino la demanda anual 
-                            BLL.DemandaAnualBLL.Eliminar(codigo);
-
-                            //Lo eliminamos del dataset
+                           //Lo eliminamos del dataset
                             dsEstimarDemanda.DEMANDAS_ANUALES.FindByDEMAN_CODIGO(codigo).Delete();
                             dsEstimarDemanda.DEMANDAS_ANUALES.AcceptChanges();
 
@@ -1007,10 +1002,17 @@ namespace GyCAP.UI.PlanificacionProduccion
                 MessageBox.Show("Debe seleccionar una Designación de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-
-
         }
 
+        private void dgvLista_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            LlenarDetalle();
+        }
+
+        
+       
+
+       
        
 
         

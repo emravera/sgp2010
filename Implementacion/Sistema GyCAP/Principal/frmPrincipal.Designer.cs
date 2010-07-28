@@ -80,6 +80,7 @@
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnPlanAnual = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -426,7 +427,8 @@
             this.toolStripButton8,
             this.t9,
             this.tLEmpleado,
-            this.toolStripButton9});
+            this.toolStripButton9,
+            this.btnPlanAnual});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(792, 36);
@@ -538,6 +540,16 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(38, 17);
             this.toolStripStatusLabel.Text = "Status";
             // 
+            // btnPlanAnual
+            // 
+            this.btnPlanAnual.Image = ((System.Drawing.Image)(resources.GetObject("btnPlanAnual.Image")));
+            this.btnPlanAnual.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPlanAnual.Name = "btnPlanAnual";
+            this.btnPlanAnual.Size = new System.Drawing.Size(61, 33);
+            this.btnPlanAnual.Text = "Plan Anual";
+            this.btnPlanAnual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPlanAnual.Click += new System.EventHandler(this.btnPlanAnual_Click);
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -615,6 +627,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuSalir;
         private System.Windows.Forms.ToolStripButton toolStripButton9;
         public System.Windows.Forms.StatusStrip barraEstado;
+        private System.Windows.Forms.ToolStripButton btnPlanAnual;
     }
 }
 

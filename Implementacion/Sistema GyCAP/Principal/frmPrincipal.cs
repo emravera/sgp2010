@@ -194,6 +194,12 @@ namespace Principal
 
         
 
+        private void btnPlanAnual_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.PlanificacionProduccion.frmPlanAnual.Instancia.MdiParent = this;
+            GyCAP.UI.PlanificacionProduccion.frmPlanAnual.Instancia.Show();
+        }
+
 
         
 
