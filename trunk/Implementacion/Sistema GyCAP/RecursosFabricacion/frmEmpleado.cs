@@ -25,17 +25,47 @@ namespace GyCAP.UI.RecursosFabricacion
             //Setea el nombre de la Lista
             gpbLista.Text = "Listado de " + this.Text;
 
+            //Para que no genere las columnas automáticamente
+            dgvLista.AutoGenerateColumns = false;
             //Agregamos las columnas
-            ColumnasGrillas columnas = new ColumnasGrillas();
+            dgvLista.Columns.Add("E_CODIGO", "Código");
+            dgvLista.Columns.Add("E_LEGAJO", "Legajo");
+            dgvLista.Columns.Add("E_APELLIDO", "Apellido");
+            dgvLista.Columns.Add("E_NOMBRE", "Nombre");
+            dgvLista.Columns.Add("SEC_CODIGO", "Sector");
+            dgvLista.Columns.Add("EE_CODIGO", "Estado");
 
-            columnas.Add("E_CODIGO", "Código",true);
-            columnas.Add("E_LEGAJO", "Legajo");
-            columnas.Add("E_APELLIDO", "Apellido");
-            columnas.Add("E_NOMBRE", "Nombre");
-            columnas.Add("SEC_CODIGO", "Sector");
-            columnas.Add("EE_CODIGO", "Estado");
+            //Seteamos el modo de tamaño de las columnas
+            dgvLista.Columns["E_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["E_LEGAJO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["E_APELLIDO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["E_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["SEC_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["EE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
-            dgvLista.Columnas = columnas;
+            //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
+            dgvLista.Columns["E_CODIGO"].DataPropertyName = "E_CODIGO";
+            dgvLista.Columns["E_LEGAJO"].DataPropertyName = "E_LEGAJO";
+            dgvLista.Columns["E_APELLIDO"].DataPropertyName = "E_APELLIDO";
+            dgvLista.Columns["E_NOMBRE"].DataPropertyName = "E_NOMBRE";
+            dgvLista.Columns["SEC_CODIGO"].DataPropertyName = "SEC_CODIGO";
+            dgvLista.Columns["EE_CODIGO"].DataPropertyName = "EE_CODIGO";
+
+            //Alineacion de los numeros y las fechas en la grilla
+            dgvLista.Columns["E_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvLista.Columns["E_CODIGO"].Visible = false;
+
+            ////Agregamos las columnas
+            //ColumnasGrillas columnas = new ColumnasGrillas();
+
+            //columnas.Add("E_CODIGO", "Código",true);
+            //columnas.Add("E_LEGAJO", "Legajo");
+            //columnas.Add("E_APELLIDO", "Apellido");
+            //columnas.Add("E_NOMBRE", "Nombre");
+            //columnas.Add("SEC_CODIGO", "Sector");
+            //columnas.Add("EE_CODIGO", "Estado");
+
+            //dgvLista.Columnas = columnas;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvEmpleado = new DataView(dsEmpleado.EMPLEADOS);
@@ -249,20 +279,12 @@ namespace GyCAP.UI.RecursosFabricacion
 
         private void dgvLista_DoubleClick(object sender, EventArgs e)
         {
-            btnConsultar.PerformClick();
+
         }
 
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            int codigoEmpleado = Convert.ToInt32(dvEmpleado[e.RowIndex]["e_codigo"]);
-            txtApellido.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_APELLIDO;
-            txtNombre.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_NOMBRE;
-            txtLegajo.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_LEGAJO;
-            //txtFechaNac.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_FECHANACIMIENTO.ToString();
-            //sfFechaNac.Text == dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_FECHANACIMIENTO;
-            txtTelefono.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_TELEFONO;
-            cboEstado.SelectedValue = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).EE_CODIGO;
-            cboEstado.SelectedValue = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).SEC_CODIGO;
+
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -282,6 +304,7 @@ namespace GyCAP.UI.RecursosFabricacion
                 empleado.Legajo = txtLegajo.Text.Trim();
                 empleado.Nombre = txtNombre.Text.Trim();
                 empleado.Telefono = txtTelefono.Text.Trim();
+                //empleado.FechaAlta = BLL.DBBLL.GetFechaServidor();
 
                 //Creo el objeto Sector y despues lo asigno
                 int idSector = Convert.ToInt32(cboSector.SelectedValue);
@@ -348,11 +371,9 @@ namespace GyCAP.UI.RecursosFabricacion
             else
             {
                 //Está modificando una designacion
-                //Primero obtenemos su código del dataview que está realacionado a la fila seleccionada
-                empleado.Codigo = Convert.ToInt32(1);
+                //Primero obtenemos su código del dataview que está realacionado a la fila seleccionada                
+                empleado.Codigo = Convert.ToInt32(dvEmpleado[dgvLista.SelectedRows[0].Index]["e_codigo"]);
 
-                //empleado.Codigo = Convert.ToInt32(dvEmpleado[dgvLista.SelectedRows[0].Index]["e_codigo"]);
-                
                 //Segundo obtenemos los nuevos datos que ingresó el usuario
                 empleado.Apellido = txtApellido.Text.Trim();
                 empleado.FechaNacimiento = DateTime.Parse("03/11/1980");
@@ -414,6 +435,12 @@ namespace GyCAP.UI.RecursosFabricacion
         {
             try
             {
+                for (int i = 0; i < lvSectores.Items.Count ; i++)
+                {
+                    
+                }
+
+
                 dsEmpleado.EMPLEADOS.Clear();
                 BLL.EmpleadoBLL.ObtenerTodos(cboBuscarPor.Text, txtNombreBuscar.Text, cboBuscarEstado.GetSelectedValueInt(), dsEmpleado);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
@@ -434,24 +461,7 @@ namespace GyCAP.UI.RecursosFabricacion
 
         private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.Value.ToString() != String.Empty)
-            {
-                string nombre;
-                switch (dgvLista.Columnas[e.ColumnIndex].campo)
-                {
-                    case "EE_CODIGO":
-                        nombre = dsEmpleado.ESTADO_EMPLEADOS.FindByEE_CODIGO(Convert.ToInt32(e.Value)).EE_NOMBRE;
-                        e.Value = nombre;
-                        break;
-                    case "SEC_CODIGO":
-                        nombre = dsEmpleado.SECTORES.FindBySEC_CODIGO(Convert.ToInt32(e.Value)).SEC_NOMBRE;
-                        e.Value = nombre;
-                        break;
-                    default:
-                        break;
-                }
 
-            }
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
