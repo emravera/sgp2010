@@ -11,7 +11,7 @@ namespace GyCAP.Entidades
         private string legajo;
         private String nombre;
         private String apellido;
-        private DateTime fechaNacimiento;
+        private DateTime? fechaNacimiento;
         private String telefono;
         private DateTime fechaAlta;
         private DateTime fechaBaja;
@@ -43,7 +43,7 @@ namespace GyCAP.Entidades
             set { apellido = value; }
         }
         
-        public DateTime FechaNacimiento
+        public DateTime? FechaNacimiento
         {
             get { return fechaNacimiento; }
             set { fechaNacimiento = value; }

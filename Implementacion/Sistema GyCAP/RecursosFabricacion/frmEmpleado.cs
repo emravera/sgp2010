@@ -277,15 +277,7 @@ namespace GyCAP.UI.RecursosFabricacion
             this.Dispose(true);
         }
 
-        private void dgvLista_DoubleClick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -304,7 +296,7 @@ namespace GyCAP.UI.RecursosFabricacion
                 empleado.Legajo = txtLegajo.Text.Trim();
                 empleado.Nombre = txtNombre.Text.Trim();
                 empleado.Telefono = txtTelefono.Text.Trim();
-                //empleado.FechaAlta = BLL.DBBLL.GetFechaServidor();
+                empleado.FechaAlta = BLL.DBBLL.GetFechaServidor();
 
                 //Creo el objeto Sector y despues lo asigno
                 int idSector = Convert.ToInt32(cboSector.SelectedValue);
@@ -331,11 +323,21 @@ namespace GyCAP.UI.RecursosFabricacion
                     rowEmpleado.E_CODIGO = empleado.Codigo;
                     rowEmpleado.E_NOMBRE = empleado.Nombre;
                     rowEmpleado.E_APELLIDO = empleado.Apellido;
-                    rowEmpleado.E_FECHANACIMIENTO = empleado.FechaNacimiento;
+
+                    if (empleado.FechaNacimiento == null)
+                    {
+                        rowEmpleado.SetE_FECHANACIMIENTONull();
+                    }
+                    else 
+                    {
+                        rowEmpleado.E_FECHANACIMIENTO = DateTime.Parse( empleado.FechaNacimiento.ToString())  ;
+                    }
                     rowEmpleado.E_LEGAJO = empleado.Legajo;
                     rowEmpleado.E_TELEFONO = empleado.Telefono;
                     rowEmpleado.SEC_CODIGO = empleado.Sector.Codigo;
                     rowEmpleado.EE_CODIGO = empleado.Estado.Codigo;
+                    rowEmpleado.E_FECHA_ALTA = empleado.FechaAlta; 
+                    
                     //Termina la edición de la fila
                     rowEmpleado.EndEdit();
                     //Agregamos la fila al dataset y aceptamos los cambios
@@ -406,7 +408,14 @@ namespace GyCAP.UI.RecursosFabricacion
                     rowEmpleado.E_CODIGO = empleado.Codigo;
                     rowEmpleado.E_NOMBRE = empleado.Nombre;
                     rowEmpleado.E_APELLIDO = empleado.Apellido;
-                    rowEmpleado.E_FECHANACIMIENTO = empleado.FechaNacimiento;
+                    if (empleado.FechaNacimiento == null)
+                    {
+                        rowEmpleado.SetE_FECHANACIMIENTONull();
+                    }
+                    else
+                    {
+                        rowEmpleado.E_FECHANACIMIENTO = DateTime.Parse(empleado.FechaNacimiento.ToString());
+                    }
                     rowEmpleado.E_LEGAJO = empleado.Legajo;
                     rowEmpleado.E_TELEFONO = empleado.Telefono;
                     rowEmpleado.SEC_CODIGO = empleado.Sector.Codigo;
@@ -440,7 +449,6 @@ namespace GyCAP.UI.RecursosFabricacion
                     
                 }
 
-
                 dsEmpleado.EMPLEADOS.Clear();
                 BLL.EmpleadoBLL.ObtenerTodos(cboBuscarPor.Text, txtNombreBuscar.Text, cboBuscarEstado.GetSelectedValueInt(), dsEmpleado);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
@@ -459,18 +467,49 @@ namespace GyCAP.UI.RecursosFabricacion
             }
         }
 
-        private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-
-        }
-
         private void btnVolver_Click(object sender, EventArgs e)
         {
             SetInterface(estadoUI.inicio);
         }
 
-        
+        private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != String.Empty)
+            {
+                string nombre;
+                switch (dgvLista.Columns[e.ColumnIndex].Name)
+                {
+                    case "SEC_CODIGO":
+                        nombre = dsEmpleado.SECTORES.FindBySEC_CODIGO(Convert.ToInt32(e.Value)).SEC_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "EE_CODIGO":
+                        nombre = dsEmpleado.ESTADO_EMPLEADOS.FindByEE_CODIGO(Convert.ToInt32(e.Value)).EE_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
 
+            }
+        }
+
+        private void dgvLista_DoubleClick(object sender, EventArgs e)
+        {
+            btnConsultar.PerformClick();
+        }
+
+        private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            int codigoEmpleado = Convert.ToInt32(dvEmpleado[e.RowIndex]["e_codigo"]);
+            txtApellido.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_APELLIDO;
+            txtLegajo.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_LEGAJO;
+            txtNombre.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_NOMBRE;
+            txtTelefono.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_TELEFONO;
+            cboSector.SelectedValue = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).SEC_CODIGO;
+            cboEstado.SelectedValue = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).EE_CODIGO;  
+
+        }
         
     }
 
