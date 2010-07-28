@@ -11,7 +11,7 @@ namespace GyCAP.DAL
         //BUSQUEDA
         //Metodo sobrecargado (3 Sobrecargas)
         //Busqueda por nombre
-        public static void ObtenerEmpleado(string buscarPor, object nombre, int idEstadoEmpleado, Data.dsEmpleado ds)
+        public static void ObtenerEmpleado(string buscarPor, object nombre, int idEstadoEmpleado,string cadSectores, Data.dsEmpleado ds)
         {
             string sql = @"SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE,
                            E_FECHANACIMIENTO, E_TELEFONO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA 
@@ -21,7 +21,7 @@ namespace GyCAP.DAL
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
             //Un array de object para ir guardando los valores de los filtros, con tamaño = cantidad de filtros disponibles
-            object[] valoresFiltros = new object[2];
+            object[] valoresFiltros = new object[3];
             //Empecemos a armar la consulta, revisemos que filtros aplican
 
             switch (buscarPor)
@@ -72,6 +72,16 @@ namespace GyCAP.DAL
                 sql += " AND EE_CODIGO = @p" + cantidadParametros;
                 valoresFiltros[cantidadParametros] = Convert.ToInt32(idEstadoEmpleado);
                 cantidadParametros++;
+            }
+
+            if (cadSectores != string.Empty) 
+            {   //Ver como seria con parametros
+                //sql += " AND SEC_CODIGO IN (@p" + cantidadParametros + ")";
+                //valoresFiltros[cantidadParametros] = cadSectores;
+                //cantidadParametros++;
+
+                sql += " AND SEC_CODIGO IN (" + cadSectores + ")";
+
             }
 
             try
@@ -170,16 +180,15 @@ namespace GyCAP.DAL
         //MODIFICAR 
         //Metodo que modifica en la base de datos
         public static void Actualizar(Entidades.Empleado empleado)
-        {
-            string sql = @"UPDATE EMPLEADOS SET EE_CODIGO = @p1, SEC_CODIGO = @p2, E_APELLIDO = @p3
-                           E_NOMBRE = @p4, E_FECHANACIMIENTO = @p5, E_TELEFONO = @p6
-                           E_LEGAJO = @p7, E_FECHA_ALTA = @p8, E_FECHA_BAJA = @p9
-                         WHERE e_codigo = @p0";
+         {
+            string sql = @"UPDATE EMPLEADOS SET EE_CODIGO = @p1, SEC_CODIGO = @p2, E_APELLIDO = @p3, 
+                           E_NOMBRE = @p4, E_FECHANACIMIENTO = @p5, E_TELEFONO = @p6, E_LEGAJO = @p7
+                          WHERE e_codigo = @p0";
 
             object[] valorParametros = { empleado.Codigo, 
                                          empleado.Estado.Codigo, empleado.Sector.Codigo, empleado.Apellido, 
                                          empleado.Nombre, empleado.FechaNacimiento, empleado.Telefono, 
-                                         empleado.Legajo, empleado.FechaAlta, empleado.FechaBaja };
+                                         empleado.Legajo};
             try
             {
                 DB.executeNonQuery(sql, valorParametros, null);
