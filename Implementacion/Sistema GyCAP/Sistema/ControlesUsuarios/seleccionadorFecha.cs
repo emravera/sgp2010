@@ -20,6 +20,9 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
             SetFechaNull();
 		}
 
+        /// <summary>
+        /// Indica que no hay fecha seleccionada.
+        /// </summary>
         public void SetFechaNull()
         {
             this.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
@@ -27,6 +30,19 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
             this.isNull = true;
         }
 
+        /// <summary>
+        /// Determina si hay una fecha seleccionada.
+        /// </summary>
+        /// <returns>true fecha seleccionada, false en caso contrario.</returns>
+        public bool EsFechaNull()
+        {
+            return isNull;
+        }
+        
+        /// <summary>
+        /// Determina si hay una fecha seleccionada.
+        /// </summary>
+        /// <returns>true fecha seleccionada, false en caso contrario.</returns>
         public bool IsValueNull()
         {
             return isNull;
@@ -38,6 +54,10 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
             this.isNull = false;
         }
 
+        /// <summary>
+        /// Setea la fecha al control.
+        /// </summary>
+        /// <param name="fecha">La fecha a cargar.</param>
         public void SetFecha(DateTime fecha)
         {
             if (fecha != null)
@@ -51,6 +71,9 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
             }
         }
 
+        /// <summary>
+        /// Setea el foco al control.
+        /// </summary>
         public void SetFocus()
         {
             this.Focus();
@@ -89,6 +112,16 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
                 SetFechaNull();
             }
             base.OnKeyUp(e);
+        }
+
+        /// <summary>
+        /// Obtiene la fecha seleccionada, si no hay fecha seleccionada retorna null.
+        /// </summary>
+        /// <returns>Un object con la fecha seleccionada o null en caso contrario.</returns>
+        public object GetFecha()
+        {
+            if (EsFechaNull()) { return null; }
+            else { return this.Value; }
         }
     }
 }
