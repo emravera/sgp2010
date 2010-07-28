@@ -189,7 +189,6 @@ namespace GyCAP.UI.RecursosFabricacion
                     cboEstado.SelectedIndex = 0;
                     cboSector.SelectedIndex = 0;
                     
-
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
