@@ -229,9 +229,14 @@ namespace GyCAP.DAL
             if (cmdReader.Connection.State == ConnectionState.Open) { cmdReader.Connection.Close(); }
         }
 
-
-
-
-
+        /// <summary>
+        /// Obtiene la fecha del servidor de BD.
+        /// </summary>
+        /// <returns>Un objeto DateTime.</returns>
+        public static DateTime GetFechaServidor()
+        {
+            string sql = "SELECT GetDate()";
+            return DateTime.Parse(executeScalar(sql, null, null).ToString());
+        }
     }
 }

@@ -52,6 +52,7 @@
     <Compile Include="CocinaDAL.cs" />
     <Compile Include="ColorDAL.cs" />
     <Compile Include="ConjuntoDAL.cs" />
+    <Compile Include="ConjuntosEstructuraDAL.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="DemandaAnualDAL.cs" />
     <Compile Include="DesignacionDAL.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="EstadoUsuarioDAL.cs" />
     <Compile Include="EstructuraDAL.cs" />
     <Compile Include="FabricanteMaquinaDAL.cs" />
+    <Compile Include="GrupoEstructuraDAL.cs" />
     <Compile Include="LocalidadDAL.cs" />
     <Compile Include="MantenimientoDAL.cs" />
     <Compile Include="MaquinaDAL.cs" />
@@ -108,6 +110,7 @@
     <Compile Include="StockRepuestoDAL.cs" />
     <Compile Include="StockSubConjuntoDAL.cs" />
     <Compile Include="SubConjuntoDAL.cs" />
+    <Compile Include="SubconjuntosEstructuraDAL.cs" />
     <Compile Include="TareaDAL.cs" />
     <Compile Include="TerminacionDAL.cs" />
     <Compile Include="TipoMantenimientoDAL.cs" />
