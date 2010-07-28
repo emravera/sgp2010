@@ -22,7 +22,7 @@ namespace GyCAP.DAL
         private static string conexionRaulD = "Data Source=DESKTOP\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionRaulN = "Data Source=NOTEBOOK\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionRemota = "Data Source=proyecto.dyndns.org,2555\\Proyecto;Initial Catalog=Proyecto;User ID=sa;Password=spg2010";
-        private static string conexionInterna = "Data Source=Proyecto;Initial Catalog=Proyecto;User ID=sa;Password=spg2010";
+        private static string conexionInterna = "Data Source=Proyecto,2555;Initial Catalog=Proyecto;User ID=sa;Password=spg2010";
         private static string cadenaConexion;
         private static SqlTransaction transaccion = null;
         private static SqlCommand cmdReader = null;

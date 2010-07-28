@@ -98,17 +98,17 @@ namespace GyCAP.DAL
             //Primero actualizaremos el subconjunto y luego la estructura
             //Armemos todas las consultas
             string sqlUpdate = @"UPDATE SUBCONJUNTOS SET
-                               sconj_nombre = @p0
+                                sconj_nombre = @p0
                                ,te_codigo = @p1
                                ,sconj_descripcion = @p2 
                                ,par_codigo = @p3
                                ,pno_codigo = @p4
-                               ,sconj_codigoparte + @p5
+                               ,sconj_codigoparte = @p5
                                WHERE sconj_codigo = @p6";
 
             //Así obtenemos el subconjunto del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto = dsEstructura.SUBCONJUNTOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.SUBCONJUNTOSRow;
-            object[] valorParametros = { rowSubconjunto.SCONJ_NOMBRE, rowSubconjunto.TE_CODIGO, rowSubconjunto.SCONJ_DESCRIPCION, rowSubconjunto.PAR_CODIGO, rowSubconjunto.PNO_CODIGO, rowSubconjunto.SCONJ_CODIGO, rowSubconjunto.SCONJ_CODIGOPARTE };
+            object[] valorParametros = { rowSubconjunto.SCONJ_NOMBRE, rowSubconjunto.TE_CODIGO, rowSubconjunto.SCONJ_DESCRIPCION, rowSubconjunto.PAR_CODIGO, rowSubconjunto.PNO_CODIGO, rowSubconjunto.SCONJ_CODIGOPARTE, rowSubconjunto.SCONJ_CODIGO };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;

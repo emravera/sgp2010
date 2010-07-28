@@ -79,7 +79,7 @@ namespace GyCAP.UI.EstructuraProducto
                 dsEstructura.DETALLE_PIEZA.Clear();
 
                 //Busquemos, no importa si ingresó algo o no, ya se encargarán las otras clases de verificarlo
-                BLL.PiezaBLL.ObtenerPiezas(txtNombreBuscar.Text, cbTerminacionBuscar.SelectedValue, dsEstructura, true);
+                BLL.PiezaBLL.ObtenerPiezas(txtNombreBuscar.Text, cbTerminacionBuscar.GetSelectedValueInt(), dsEstructura, true);
 
                 if (dsEstructura.PIEZAS.Rows.Count == 0)
                 {
@@ -181,9 +181,9 @@ namespace GyCAP.UI.EstructuraProducto
                         rowPieza.PZA_CODIGO = -1;
                         rowPieza.PZA_CODIGOPARTE = txtCodigo.Text;
                         rowPieza.PZA_NOMBRE = txtNombre.Text;
-                        rowPieza.TE_CODIGO = Convert.ToInt32(cbTerminacion.SelectedValue);
-                        rowPieza.PAR_CODIGO = Convert.ToInt32(cbEstado.SelectedValue);
-                        rowPieza.PNO_CODIGO = Convert.ToInt32(cbPlano.SelectedValue);
+                        rowPieza.TE_CODIGO = cbTerminacion.GetSelectedValueInt();
+                        rowPieza.PAR_CODIGO = cbEstado.GetSelectedValueInt();
+                        rowPieza.PNO_CODIGO = cbPlano.GetSelectedValueInt();
                         rowPieza.PZA_DESCRIPCION = txtDescripcion.Text;
                         rowPieza.EndEdit();
                         dsEstructura.PIEZAS.AddPIEZASRow(rowPieza);
@@ -233,9 +233,9 @@ namespace GyCAP.UI.EstructuraProducto
                     //actualizando en el dataset a medida que el usuario ejecutaba una acción
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_CODIGOPARTE = txtCodigo.Text;
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_NOMBRE = txtNombre.Text;
-                    dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).TE_CODIGO = Convert.ToInt32(cbTerminacion.SelectedValue);
-                    dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PAR_CODIGO = Convert.ToInt32(cbEstado.SelectedValue);
-                    dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PNO_CODIGO = Convert.ToInt32(cbPlano.SelectedValue);
+                    dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).TE_CODIGO = cbTerminacion.GetSelectedValueInt();
+                    dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PAR_CODIGO = cbEstado.GetSelectedValueInt();
+                    dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PNO_CODIGO = cbPlano.GetSelectedValueInt();
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_DESCRIPCION = txtDescripcion.Text;
                     try
                     {
