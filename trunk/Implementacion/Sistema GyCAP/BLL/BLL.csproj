@@ -58,6 +58,7 @@
     <Compile Include="DetalleDemandaAnualBLL.cs" />
     <Compile Include="DetalleOrdenTrabajoBLL.cs" />
     <Compile Include="DetallePedidoBLL.cs" />
+    <Compile Include="DetallePlanAnualBLL.cs" />
     <Compile Include="DetallePlanMantenimientoBLL.cs" />
     <Compile Include="DetallePlanMensualBLL.cs" />
     <Compile Include="DetallePlanSemanalBLL.cs" />

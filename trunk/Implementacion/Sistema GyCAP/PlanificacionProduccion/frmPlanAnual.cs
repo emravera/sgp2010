@@ -70,7 +70,26 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         }
 
-        
+        //Método para evitar la creación de más de una pantalla
+        public static frmPlanAnual Instancia
+        {
+            get
+            {
+                if (_frmPlanAnual == null || _frmPlanAnual.IsDisposed)
+                {
+                    _frmPlanAnual = new frmPlanAnual();
+                }
+                else
+                {
+                    _frmPlanAnual.BringToFront();
+                }
+                return _frmPlanAnual;
+            }
+            set
+            {
+                _frmPlanAnual = value;
+            }
+        }
         
     }
 }

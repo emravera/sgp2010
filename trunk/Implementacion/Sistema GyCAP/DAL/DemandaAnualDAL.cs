@@ -24,7 +24,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerTodos(Data.dsEstimarDemanda ds)
         {
-            string sql = @"SELECT deman_codigo, deman_anio, deman_fechacreacion, deman_nombre, deman_paramcrecimiento
+            string sql = @"SELECT deman_codigo, deman_anio, deman_nombre, deman_fechacreacion, deman_paramcrecimiento
                         FROM DEMANDAS_ANUALES";
             try
             {
@@ -33,33 +33,102 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        //Metodo para insertar
-        public static int Insertar(Entidades.DemandaAnual demanda)
+        //Metodo para obtener todos desde el formulario de Plan Anual
+        public static void ObtenerTodos(Data.dsPlanAnual ds)
         {
+            string sql = @"SELECT deman_codigo, deman_anio, deman_fechacreacion, deman_nombre, deman_paramcrecimiento
+                        FROM DEMANDAS_ANUALES";
+            try
+            {
+                DB.FillDataSet(ds, "DEMANDAS_ANUALES", sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+        //Metodo para obtener un año a partir del id
+        public static int ObtenerAño(int idDemanda)
+        {
+            string sql = @"SELECT deman_anio
+                        FROM DEMANDAS_ANUALES WHERE deman_codigo=@p0";
 
-            //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
-            string sql = "INSERT INTO [DEMANDAS_ANUALES] ([deman_anio], [deman_fechacreacion], [deman_paramcrecimiento], [deman_nombre]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
-            object[] valorParametros = { demanda.Anio, demanda.FechaCreacion.ToShortDateString() , demanda.ParametroCrecimiento, demanda.Nombre };
+            object[] valorParametros = { idDemanda };
             try
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+        
+        //Metodo para insertar
+        public static IList<Entidades.DetalleDemandaAnual> Insertar(Entidades.DemandaAnual demanda, IList<Entidades.DetalleDemandaAnual> detalle)
+        {
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                //Inserto la demanda
+                transaccion = DB.IniciarTransaccion();
+
+                //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
+                string sql = "INSERT INTO [DEMANDAS_ANUALES] ([deman_anio], [deman_fechacreacion], [deman_paramcrecimiento], [deman_nombre]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+                object[] valorParametros = { demanda.Anio, demanda.FechaCreacion.ToShortDateString(), demanda.ParametroCrecimiento, demanda.Nombre };
+                demanda.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+
+                //Inserto el Detalle de Pedido
+                foreach (Entidades.DetalleDemandaAnual det in detalle)
+                {
+                    det.Demanda = demanda;
+                    det.Codigo= DAL.DetalleDemandaAnualDAL.Insertar(det);
+                }
+            }
+            catch (SqlException)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException();
+                
+            }
+            finally
+            {
+                transaccion.Commit();
+                DB.FinalizarTransaccion();
+            }
+            return detalle;
 
         }
 
         //MODIFICAR 
         //Metodo que modifica en la base de datos
-        public static void Actualizar(Entidades.DemandaAnual demanda)
+        public static void Actualizar(Entidades.DemandaAnual demanda, IList<Entidades.DetalleDemandaAnual> detalle)
         {
-            string sql = @"UPDATE DEMANDAS_ANUALES SET deman_anio = @p0, deman_nombre = @p1
-                         WHERE deman_codigo = @p2";
-            object[] valorParametros = {  demanda.Anio, demanda.Nombre, demanda.Codigo };
+            SqlTransaction transaccion = null;
+
             try
             {
+                //Abro la transaccion
+                transaccion = DB.IniciarTransaccion();
+
+                //Se modifica la demanda
+                string sql = @"UPDATE DEMANDAS_ANUALES SET deman_anio = @p0, deman_nombre = @p1
+                         WHERE deman_codigo = @p2";
+                object[] valorParametros = { demanda.Anio, demanda.Nombre, demanda.Codigo };
                 DB.executeNonQuery(sql, valorParametros, null);
+
+                //Se modifica el detalle
+                foreach (Entidades.DetalleDemandaAnual det in detalle)
+                {
+                    DAL.DetalleDemandaAnualDAL.Actualizar(det);
+                }
+
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException();
+            }
+            finally
+            {
+                transaccion.Commit();
+                DB.FinalizarTransaccion();
+            }
         }
        
         //Metodo que valida que se pueda actualizar
@@ -100,26 +169,33 @@ namespace GyCAP.DAL
         //Metodo que elimina de la base de datos
         public static void Eliminar(int codigo)
         {
-            string sql = "DELETE FROM DEMANDAS_ANUALES WHERE deman_codigo = @p0";
-            object[] valorParametros = { codigo };
-            try
-            {
-                DB.executeNonQuery(sql, valorParametros, null);
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
-        //Metodo que elimina de la base de datos el detalle
-        public static void EliminarDetalle(int codigo)
-        {
-            string sql = "DELETE FROM DETALLE_DEMANDAS_ANUALES WHERE deman_codigo = @p0";
-            object[] valorParametros = { codigo };
-            try
-            {
-                DB.executeNonQuery(sql, valorParametros, null);
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
+            SqlTransaction transaccion=null;
 
+            try
+            {
+                //Iniciamos la transaccion
+                transaccion = DB.IniciarTransaccion();
+
+                //Elimino la demanda
+                string sql = "DELETE FROM DEMANDAS_ANUALES WHERE deman_codigo = @p0";
+                object[] valorParametros = { codigo };
+                DB.executeNonQuery(sql, valorParametros, null);
+
+                //Elimino el detalle de la demanda
+                sql = "DELETE FROM DETALLE_DEMANDAS_ANUALES WHERE deman_codigo = @p0";
+                DB.executeNonQuery(sql, valorParametros, null);
+
+                transaccion.Commit();
+                DB.FinalizarTransaccion();
+            }
+            catch (SqlException)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException();
+            }
+           
+        }
+        
 
     }
 }

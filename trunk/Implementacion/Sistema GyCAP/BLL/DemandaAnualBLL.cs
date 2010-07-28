@@ -15,13 +15,23 @@ namespace GyCAP.BLL
         {
             DAL.DemandaAnualDAL.ObtenerTodos(ds);
         }
-        public static int Insertar(Entidades.DemandaAnual demanda)
+        //Metodo para obtener todo desde el formulario de Plan anual
+        public static void ObtenerTodos(Data.dsPlanAnual ds)
         {
-            return DAL.DemandaAnualDAL.Insertar(demanda);
+            DAL.DemandaAnualDAL.ObtenerTodos(ds);
         }
-        public static void Modificar(Entidades.DemandaAnual demanda)
+        //Metodo para obtener el año desde el formulario de Plan anual
+        public static int ObtenerAño(int idDemanda)
         {
-            DAL.DemandaAnualDAL.Actualizar(demanda);
+            return DAL.DemandaAnualDAL.ObtenerAño(idDemanda);
+        }
+        public static IList<Entidades.DetalleDemandaAnual> Insertar(Entidades.DemandaAnual demanda, IList<Entidades.DetalleDemandaAnual> detalle)
+        {
+            return DAL.DemandaAnualDAL.Insertar(demanda, detalle);
+        }
+        public static void Modificar(Entidades.DemandaAnual demanda, IList<Entidades.DetalleDemandaAnual> detalle)
+        {
+            DAL.DemandaAnualDAL.Actualizar(demanda, detalle);
         }
         public static bool ValidarModificacion(Entidades.DemandaAnual demanda)
         {
@@ -31,7 +41,6 @@ namespace GyCAP.BLL
         //Eliminacion
         public static void Eliminar(int codigo)
         {
-          //Puede eliminarse
           DAL.DemandaAnualDAL.Eliminar(codigo);
         }
 
@@ -39,12 +48,7 @@ namespace GyCAP.BLL
         {
             return DAL.DemandaAnualDAL.PuedeEliminarse(codigo);  
 
-        }
-
-        public static void EliminarDetalle(int codigo)
-        {
-            DAL.DemandaAnualDAL.EliminarDetalle(codigo);
-        }
+        }     
 
 
     }
