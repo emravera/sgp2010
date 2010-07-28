@@ -54,12 +54,15 @@
     <Compile Include="Conjunto.cs" />
     <Compile Include="DemandaAnual.cs" />
     <Compile Include="Designacion.cs" />
+    <Compile Include="DetalleConjunto.cs" />
     <Compile Include="DetalleDemandaAnual.cs" />
     <Compile Include="DetalleOrdenTrabajo.cs" />
     <Compile Include="DetallePedido.cs" />
+    <Compile Include="DetallePieza.cs" />
     <Compile Include="DetallePlanMantenimiento.cs" />
     <Compile Include="DetallePlanMensual.cs" />
     <Compile Include="DetallePlanSemanal.cs" />
+    <Compile Include="DetalleSubconjunto.cs" />
     <Compile Include="Domicilio.cs" />
     <Compile Include="EjemplarMaquina.cs" />
     <Compile Include="Empleado.cs" />

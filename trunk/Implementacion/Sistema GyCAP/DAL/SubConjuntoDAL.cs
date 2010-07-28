@@ -24,13 +24,7 @@ namespace GyCAP.DAL
             //Así obtenemos el subconjunto nuevo del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto = dsEstructura.SUBCONJUNTOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.SUBCONJUNTOSRow;
             object[] valorParametros = { rowSubconjunto.SCONJ_NOMBRE, rowSubconjunto.TE_CODIGO, rowSubconjunto.SCONJ_DESCRIPCION, 0, rowSubconjunto.PAR_CODIGO, rowSubconjunto.PNO_CODIGO, rowSubconjunto.SCONJ_CODIGOPARTE };
-
-            string sqlInsertEstructura = @"INSERT INTO [DETALLE_SUBCONJUNTO] 
-                                        ([sconj_codigo]
-                                        ,[pza_codigo]
-                                        ,[dsc_cantidad])
-                                        VALUES (@p0, @p1, @p2) SELECT @@Identity";
-
+            
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
 
@@ -43,17 +37,16 @@ namespace GyCAP.DAL
                 rowSubconjunto.SCONJ_CODIGO = Convert.ToInt32(DB.executeScalar(sqlInsertSubconjunto, valorParametros, transaccion));
                 rowSubconjunto.EndEdit();
                 //Ahora insertamos su estructura, usamos el foreach para recorrer sólo los nuevos registros del dataset
+                Entidades.DetalleSubconjunto detalle = new GyCAP.Entidades.DetalleSubconjunto();
                 foreach (Data.dsEstructura.DETALLE_SUBCONJUNTORow row in (Data.dsEstructura.DETALLE_SUBCONJUNTORow[])dsEstructura.DETALLE_SUBCONJUNTO.Select(null, null, System.Data.DataViewRowState.Added))
-                {
-                    //Primero actualizamos el código de el subconjunto nuevo en la tabla relacionada
+                {                    
+                    detalle.CodigoSubconjunto = Convert.ToInt32(rowSubconjunto.SCONJ_CODIGO);
+                    detalle.CodigoPieza = Convert.ToInt32(row.PZA_CODIGO);
+                    detalle.Cantidad = row.DSC_CANTIDAD;
+                    DetalleSubconjuntoDAL.Insertar(detalle, transaccion);                                        
                     row.BeginEdit();
-                    row.SCONJ_CODIGO = rowSubconjunto.SCONJ_CODIGO;
-                    row.EndEdit();
-                    //Asignamos los valores a los parámetros
-                    valorParametros = new object[] { row.SCONJ_CODIGO, row.PZA_CODIGO, row.DSC_CANTIDAD };
-                    //Ahora si insertamos en la bd y actualizamos el código de la relación
-                    row.BeginEdit();
-                    row.DSC_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertEstructura, valorParametros, transaccion));
+                    row.SCONJ_CODIGO = detalle.CodigoSubconjunto;
+                    row.DSC_CODIGO = detalle.CodigoDetalle;
                     row.EndEdit();
                 }
                 //Todo ok, commit
@@ -76,11 +69,27 @@ namespace GyCAP.DAL
         {
             string sql = "DELETE FROM SUBCONJUNTOS WHERE sconj_codigo = @p0";
             object[] valorParametros = { codigoSubconjunto };
+            
+            SqlTransaction transaccion = null;
             try
             {
-                DB.executeNonQuery(sql, valorParametros, null);
+                transaccion = DB.IniciarTransaccion();
+                //Primero los hijos
+                DetalleSubconjuntoDAL.EliminarDetalleDeSubconjunto(codigoSubconjunto, transaccion);
+                //Ahora el padre
+                DB.executeNonQuery(sql, valorParametros, transaccion);
+                //Todo OK
+                transaccion.Commit();
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException();
+            }
+            finally
+            {
+                DB.FinalizarTransaccion();
+            }
         }
 
         public static void Actualizar(Data.dsEstructura dsEstructura)
@@ -88,25 +97,14 @@ namespace GyCAP.DAL
             //Esto va a ser muy largo...empecemos
             //Primero actualizaremos el subconjunto y luego la estructura
             //Armemos todas las consultas
-            string sqlUpdateSubconjunto = @"UPDATE SUBCONJUNTOS SET
-                                            sconj_nombre = @p0
-                                           ,te_codigo = @p1
-                                           ,sconj_descripcion = @p2 
-                                           ,par_codigo = @p3
-                                           ,pno_codigo = @p4
-                                           ,sconj_codigoparte + @p5
-                                            WHERE sconj_codigo = @p6";
-
-            string sqlInsertEstructura = @"INSERT INTO [DETALLE_SUBCONJUNTO] 
-                                        ([sconj_codigo]
-                                        ,[pza_codigo]
-                                        ,[dsc_cantidad])
-                                        VALUES (@p0, @p1, @p2) SELECT @@Identity";
-
-            string sqlUpdateEstructura = @"UPDATE DETALLE_SUBCONJUNTO SET dsc_cantidad = @p0 
-                                          WHERE dsc_codigo = @p0";
-
-            string sqlDeleteEstructura = "DELETE FROM DETALLE_SUBCONJUNTO WHERE dsc_codigo = @p0";
+            string sqlUpdate = @"UPDATE SUBCONJUNTOS SET
+                               sconj_nombre = @p0
+                               ,te_codigo = @p1
+                               ,sconj_descripcion = @p2 
+                               ,par_codigo = @p3
+                               ,pno_codigo = @p4
+                               ,sconj_codigoparte + @p5
+                               WHERE sconj_codigo = @p6";
 
             //Así obtenemos el subconjunto del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto = dsEstructura.SUBCONJUNTOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.SUBCONJUNTOSRow;
@@ -121,34 +119,40 @@ namespace GyCAP.DAL
                 transaccion = DB.IniciarTransaccion();
 
                 //Actualizamos el subconjunto
-                DB.executeNonQuery(sqlUpdateSubconjunto, valorParametros, transaccion);
+                DB.executeNonQuery(sqlUpdate, valorParametros, transaccion);
                 //Actualizamos la estructura, primero insertamos los nuevos
+                Entidades.DetalleSubconjunto detalle = new GyCAP.Entidades.DetalleSubconjunto();
                 foreach (Data.dsEstructura.DETALLE_SUBCONJUNTORow row in (Data.dsEstructura.DETALLE_SUBCONJUNTORow[])dsEstructura.DETALLE_SUBCONJUNTO.Select(null, null, System.Data.DataViewRowState.Added))
                 {
-                    valorParametros = new object[] { row.SCONJ_CODIGO, row.PZA_CODIGO, row.DSC_CANTIDAD };
+                    detalle.CodigoSubconjunto = Convert.ToInt32(row.SCONJ_CODIGO);
+                    detalle.CodigoPieza = Convert.ToInt32(row.PZA_CODIGO);
+                    detalle.Cantidad = row.DSC_CANTIDAD;
+                    DetalleSubconjuntoDAL.Insertar(detalle, transaccion);
                     row.BeginEdit();
-                    row.DSC_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertEstructura, valorParametros, transaccion));
+                    row.DSC_CODIGO = detalle.CodigoDetalle;
                     row.EndEdit();
                 }
 
                 //Segundo actualizamos los modificados
                 foreach (Data.dsEstructura.DETALLE_SUBCONJUNTORow row in (Data.dsEstructura.DETALLE_SUBCONJUNTORow[])dsEstructura.DETALLE_SUBCONJUNTO.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
                 {
-                    valorParametros = new object[] { row.DSC_CANTIDAD, row.DSC_CODIGO };
-                    DB.executeScalar(sqlUpdateEstructura, valorParametros, transaccion);
+                    detalle.CodigoDetalle = Convert.ToInt32(row.DSC_CODIGO);
+                    detalle.CodigoSubconjunto = Convert.ToInt32(row.SCONJ_CODIGO);
+                    detalle.CodigoPieza = Convert.ToInt32(row.PZA_CODIGO);
+                    detalle.Cantidad = row.DSC_CANTIDAD;
+                    DetalleSubconjuntoDAL.Actualizar(detalle, transaccion);
                 }
 
                 //Tercero eliminamos
                 foreach (Data.dsEstructura.DETALLE_SUBCONJUNTORow row in (Data.dsEstructura.DETALLE_SUBCONJUNTORow[])dsEstructura.DETALLE_SUBCONJUNTO.Select(null, null, System.Data.DataViewRowState.Deleted))
                 {
                     //Como la fila está eliminada y no tiene datos, tenemos que acceder a la versión original
-                    valorParametros = new object[] { row["dsc_codigo", System.Data.DataRowVersion.Original] };
-                    Convert.ToDecimal(DB.executeScalar(sqlDeleteEstructura, valorParametros, transaccion));
+                    detalle.CodigoDetalle = Convert.ToInt32(row["dsc_codigo", System.Data.DataRowVersion.Original]);
+                    DetalleSubconjuntoDAL.Eliminar(detalle, transaccion);
                 }
 
                 //Si todo resulto correcto, commit
                 transaccion.Commit();
-
             }
             catch (SqlException)
             {
@@ -251,65 +255,18 @@ namespace GyCAP.DAL
             }
         }
 
-        /*public static void ObtenerSubconjuntos(Data.dsEstructura ds)
-        {
-            string sql = "SELECT sconj_codigo, sconj_nombre, te_codigo, sconj_cantidadstock FROM SUBCONJUNTOS";
-            try
-            {
-                DB.FillDataSet(ds, "SUBCONJUNTOS", sql, null);
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
-
-        public static void ObtenerSubconjuntos(string nombre, Data.dsEstructura ds)
-        {
-            string sql = @"SELECT sconj_codigo, sconj_nombre, te_codigo, sconj_cantidadstock
-                           FROM SUBCONJUNTOS
-                           WHERE sconj_nombre LIKE @p0";
-            //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
-            nombre = "%" + nombre + "%";
-            object[] valorParametros = { nombre };
-            try
-            {
-                DB.FillDataSet(ds, "SUBCONJUNTOS", sql, valorParametros);
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
-
-        public static void ObtenerSubconjuntos(int codigoTerminacion, Data.dsEstructura ds)
-        {
-            string sql = @"SELECT sconj_codigo, sconj_nombre, te_codigo, sconj_cantidadstock
-                           FROM SUBCONJUNTOS
-                           WHERE te_codigo = @p0";
-
-            object[] valorParametros = { codigoTerminacion };
-            try
-            {
-                DB.FillDataSet(ds, "SUBCONJUNTOS", sql, valorParametros);
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }*/
-
         public static bool PuedeEliminarse(int codigo)
         {
-            string sqlDSCC = "SELECT count(sconj_codigo) FROM DETALLE_SUBCONJUNTO WHERE sconj_codigo = @p0";
             string sqlSCXC = "SELECT count(sconj_codigo) FROM DETALLE_CONJUNTO WHERE sconj_codigo = @p0";
             string sqlSCXE = "SELECT count(sconj_codigo) FROM SUBCONJUNTOSXESTRUCTURA WHERE sconj_codigo = @p0";
 
             object[] valorParametros = { codigo };
             try
             {
-                int resultadoDSCC = Convert.ToInt32(DB.executeScalar(sqlDSCC, valorParametros, null));
                 int resultadoSCXC = Convert.ToInt32(DB.executeScalar(sqlSCXC, valorParametros, null));
                 int resultadoSCXE = Convert.ToInt32(DB.executeScalar(sqlSCXE, valorParametros, null));
-                if (resultadoDSCC == 0 && resultadoSCXC == 0 && resultadoSCXE == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                if (resultadoSCXC == 0 && resultadoSCXE == 0) { return true; }
+                else { return false; }
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
