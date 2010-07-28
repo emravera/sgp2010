@@ -31,9 +31,9 @@ namespace GyCAP.UI.EstructuraProducto
             
             //Agregamos las columnas
             dgvLista.Columns.Add("TE_CODIGO", "Código");
-            dgvLista.Columns.Add("TE_NOMBRE", "Nombre");
-            dgvLista.Columns.Add("TE_DESCRIPCION", "Descripción");
+            dgvLista.Columns.Add("TE_NOMBRE", "Nombre");            
             dgvLista.Columns.Add("TE_ABREVIATURA", "Abreviatura");
+            dgvLista.Columns.Add("TE_DESCRIPCION", "Descripción");
             
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
@@ -45,11 +45,11 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.RowHeadersVisible = false;
 
             //Setemaos las columnas
-            dgvLista.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             dgvLista.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["TE_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["TE_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["TE_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;            
             dgvLista.Columns["TE_ABREVIATURA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["TE_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLista.Columns["TE_DESCRIPCION"].Resizable = DataGridViewTriState.True;
 
             //Alineacion de los numeros y las fechas en la grilla
             dgvLista.Columns["TE_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;

@@ -154,11 +154,11 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: Conjunto - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error: Conjunto - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
