@@ -1426,7 +1426,7 @@
             this.dtpFechaAltaBuscar.Location = new System.Drawing.Point(574, 20);
             this.dtpFechaAltaBuscar.Name = "dtpFechaAltaBuscar";
             this.dtpFechaAltaBuscar.Size = new System.Drawing.Size(95, 21);
-            this.dtpFechaAltaBuscar.TabIndex = 13;
+            this.dtpFechaAltaBuscar.TabIndex = 4;
             // 
             // cbResponsableBuscar
             // 
@@ -1446,7 +1446,7 @@
             this.cbPlanoBuscar.Location = new System.Drawing.Point(333, 20);
             this.cbPlanoBuscar.Name = "cbPlanoBuscar";
             this.cbPlanoBuscar.Size = new System.Drawing.Size(166, 21);
-            this.cbPlanoBuscar.TabIndex = 11;
+            this.cbPlanoBuscar.TabIndex = 2;
             // 
             // cbCocinaBuscar
             // 
