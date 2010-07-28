@@ -15,5 +15,10 @@ namespace GyCAP.BLL
         {
             DAL.DB.SetTipoConexion(tipo);
         }
+
+        public static DateTime GetFechaServidor()
+        {
+            return DAL.DB.GetFechaServidor();
+        }
     }
 }

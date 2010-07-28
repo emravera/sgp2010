@@ -253,6 +253,5 @@ namespace GyCAP.UI.EstructuraProducto
 
         #endregion
 
-
     }
 }
