@@ -195,7 +195,7 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         /// <param name="displayMember">Un array de string con los campos de dónde se concatenará el string a mostrar.</param>
         /// <param name="textoCabecera">El texto de la cabecera.</param>
         /// <param name="cabeceraPersistente">True para que forme parte de los items, false para simple texto.</param>
-        public void SetDatos(DataView dataview, string valueMember, string[] displayMember, string separadorConcatenado,string textoCabecera, bool cabeceraPersistente)
+        public void SetDatos(DataView dataview, string valueMember, string[] displayMember, string separadorConcatenado, string textoCabecera, bool cabeceraPersistente)
         {
             persistente = cabeceraPersistente;
             this.Items.Clear();
