@@ -25,6 +25,20 @@ namespace GyCAP.DAL
             conjuntoEstructura.CodigoDetalle = Convert.ToInt32(DB.executeScalar(sqlInsert, valorParametros, transaccion));
         }
 
+        public static void Delete(Entidades.ConjuntoEstructura cE, SqlTransaction transaccion)
+        {
+            string sql = "DELETE FROM CONJUNTOSXESTRUCTURA WHERE cxe_codigo = @p0";
+            object[] valorParametros = { cE.CodigoDetalle };
+            DB.executeNonQuery(sql, valorParametros, transaccion);
+        }
+
+        public static void Actualizar(Entidades.ConjuntoEstructura cE, SqlTransaction transaccion)
+        {
+            string sql = "UPDATE CONJUNTOSXESTRUCTURA SET cxe_cantidad = @p0 WHERE cxe_codigo = @p1";
+            object[] valorParametros = { cE.CantidadConjunto, cE.CodigoDetalle };
+            DB.executeNonQuery(sql, valorParametros, transaccion);
+        }
+        
         public static void DeleteDetalleEstructura(int codigoEstructura, SqlTransaction transaccion)
         {
             string sql = "DELETE FROM CONJUNTOSXESTRUCTURA WHERE estr_codigo = @p0";

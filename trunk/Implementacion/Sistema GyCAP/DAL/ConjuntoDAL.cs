@@ -289,7 +289,7 @@ namespace GyCAP.DAL
             }
         }
 
-        //Obtiene el detalle de todos los subconjuntos buscadas, de uso interno por el método buscador ObtenerSubconjuntos
+        //Obtiene el detalle de todos los subconjuntos buscados, de uso interno por el método buscador ObtenerSubconjuntos
         private static void ObtenerDetalleConjuntos(Data.dsEstructura ds)
         {
             string sql = @"SELECT dcj_codigo, conj_codigo, sconj_codigo, dcj_cantidad
@@ -353,7 +353,6 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             catch (Entidades.Excepciones.ElementoInexistenteException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
-
         
     }
 }

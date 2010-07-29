@@ -25,6 +25,20 @@ namespace GyCAP.DAL
             materiaPrimaEstructura.CodigoDetalle = Convert.ToInt32(DB.executeScalar(sqlInsert, valorParametros, transaccion));
         }
 
+        public static void Delete(Entidades.MateriaPrimaEstructura mpE, SqlTransaction transaccion)
+        {
+            string sql = "DELETE FROM MATERIASPRIMASXESTRUCTURA WHERE mpxe_codigo = @p0";
+            object[] valorParametros = { mpE.CodigoDetalle };
+            DB.executeNonQuery(sql, valorParametros, transaccion);
+        }
+
+        public static void Actualizar(Entidades.MateriaPrimaEstructura mpE, SqlTransaction transaccion)
+        {
+            string sql = "UPDATE MATERIASPRIMASXESTRUCTURA SET mpxe_cantidad = @p0 WHERE mpxe_codigo = @p1";
+            object[] valorParametros = { mpE.CantidadMateriaPrima, mpE.CodigoDetalle };
+            DB.executeNonQuery(sql, valorParametros, transaccion);
+        }
+        
         public static void DeleteDetalleEstructura(int codigoEstructura, SqlTransaction transaccion)
         {
             string sql = "DELETE FROM MATERIASPRIMASXESTRUCTURA WHERE estr_codigo = @p0";

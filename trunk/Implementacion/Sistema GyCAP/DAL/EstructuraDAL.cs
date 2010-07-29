@@ -73,10 +73,11 @@ namespace GyCAP.DAL
                     conjuntoE.CodigoEstructura = Convert.ToInt32(rowEstructura.ESTR_CODIGO);
                     conjuntoE.CodigoConjunto = Convert.ToInt32(row.CONJ_CODIGO);
                     conjuntoE.CantidadConjunto = Convert.ToInt32(row.CXE_CANTIDAD);
-                    conjuntoE.CodigoGrupo = Convert.ToInt32(row.GRP_CODIGO);
+                    conjuntoE.CodigoGrupo = grupoE.CodigoGrupo;
                     DAL.ConjuntoEstructuraDAL.Insertar(conjuntoE, transaccion);                  
                     row.BeginEdit();
                     row.CXE_CODIGO = conjuntoE.CodigoDetalle;
+                    row.GRP_CODIGO = conjuntoE.CodigoGrupo;
                     row.EndEdit();
                 }
                 #endregion
@@ -88,10 +89,11 @@ namespace GyCAP.DAL
                     subconjuntoE.CodigoEstructura = Convert.ToInt32(rowEstructura.ESTR_CODIGO);
                     subconjuntoE.CodigoSubconjunto = Convert.ToInt32(row.SCONJ_CODIGO);
                     subconjuntoE.CantidadSubconjunto = Convert.ToInt32(row.SCXE_CANTIDAD);                    
-                    subconjuntoE.CodigoGrupo = Convert.ToInt32(row.GRP_CODIGO);
+                    subconjuntoE.CodigoGrupo = grupoE.CodigoGrupo;;
                     SubconjuntoEstructuraDAL.Insertar(subconjuntoE, transaccion);
                     row.BeginEdit();
                     row.SCXE_CODIGO = subconjuntoE.CodigoDetalle;
+                    row.GRP_CODIGO = subconjuntoE.CodigoGrupo;
                     row.EndEdit();
                 }
                 #endregion
@@ -101,12 +103,13 @@ namespace GyCAP.DAL
                 foreach (Data.dsEstructura.PIEZASXESTRUCTURARow row in (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
                 {
                     piezaE.CodigoEstructura = Convert.ToInt32(rowEstructura.ESTR_CODIGO);
-                    piezaE.CodigPieza = Convert.ToInt32(row.PZA_CODIGO);
+                    piezaE.CodigoPieza = Convert.ToInt32(row.PZA_CODIGO);
                     piezaE.CantidadPieza = Convert.ToInt32(row.PXE_CANTIDAD);
-                    piezaE.CodigoGrupo = Convert.ToInt32(row.GRP_CODIGO);
+                    piezaE.CodigoGrupo = grupoE.CodigoGrupo;
                     PiezaEstructuraDAL.Insertar(piezaE, transaccion);
                     row.BeginEdit();
                     row.PXE_CODIGO = piezaE.CodigoDetalle;
+                    row.GRP_CODIGO = piezaE.CodigoGrupo;
                     row.EndEdit();
                 }
                 #endregion
@@ -118,10 +121,11 @@ namespace GyCAP.DAL
                     mpE.CodigoEstructura = Convert.ToInt32(rowEstructura.ESTR_CODIGO);
                     mpE.CodigoMateriaPrima = Convert.ToInt32(row.MP_CODIGO);
                     mpE.CantidadMateriaPrima = row.MPXE_CANTIDAD;
-                    mpE.CodigoGrupo = Convert.ToInt32(row.GRP_CODIGO);
+                    mpE.CodigoGrupo = grupoE.CodigoGrupo;
                     MateriaPrimaEstructuraDAL.Insertar(mpE, transaccion);
                     row.BeginEdit();
                     row.MPXE_CODIGO = mpE.CodigoDetalle;
+                    row.GRP_CODIGO = mpE.CodigoGrupo;
                     row.EndEdit();
                 }
 
@@ -146,28 +150,36 @@ namespace GyCAP.DAL
         public static void Eliminar(int codigoEstructura)
         {
             string sql = "DELETE FROM ESTRUCTURAS WHERE estr_codigo = @p0";
-            //eliminar todo el detalle - gonzalo
-            
             object[] valorParametros = { codigoEstructura };
+            
+            SqlTransaction transaccion = null;
             try
             {
-                DB.executeNonQuery(sql, valorParametros, null);
+                transaccion = DB.IniciarTransaccion();
+                //Primero los hijos
+                MateriaPrimaEstructuraDAL.DeleteDetalleEstructura(codigoEstructura, transaccion);
+                PiezaEstructuraDAL.DeleteDetalleEstructura(codigoEstructura, transaccion);
+                SubconjuntoEstructuraDAL.DeleteDetalleEstructura(codigoEstructura, transaccion);
+                ConjuntoEstructuraDAL.DeleteDetalleEstructura(codigoEstructura, transaccion);
+                GrupoEstructuraDAL.DeleteGruposEstructura(codigoEstructura, transaccion);
+                //Ahora el padre
+                DB.executeNonQuery(sql, valorParametros, transaccion);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch(SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void Actualizar(Data.dsEstructura dsEstructura)
         {
-            #region SqlEstructura
-            string sqlUpdateEstructura = @"UPDATE ESTRUCTURAS SET
-                                         coc_codigo = @p0
-                                        ,pno_codigo = @p1
-                                        ,estr_nombre = @p2
-                                        ,estr_descripcion = @p3
-                                        ,estr_activo = @p4
-                                        ,estr_fecha_alta = @p5
-                                        ,estr_fecha_modificacion = @p6
-                                        WHERE estr_codigo = @p7";
+           string sql = @"UPDATE ESTRUCTURAS SET
+                        coc_codigo = @p0
+                        ,pno_codigo = @p1
+                        ,estr_nombre = @p2
+                        ,estr_descripcion = @p3
+                        ,estr_activo = @p4
+                        ,estr_fecha_alta = @p5
+                        ,estr_fecha_modificacion = @p6
+                        ,e_codigo = @p7
+                        WHERE estr_codigo = @p8";
 
             Data.dsEstructura.ESTRUCTURASRow rowEstructura = dsEstructura.ESTRUCTURAS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.ESTRUCTURASRow;
             object[] valorParametros = { rowEstructura.COC_CODIGO,
@@ -176,76 +188,9 @@ namespace GyCAP.DAL
                                          rowEstructura.ESTR_DESCRIPCION,
                                          rowEstructura.ESTR_ACTIVO,
                                          rowEstructura.ESTR_FECHA_ALTA.Date, 
-                                         rowEstructura.ESTR_FECHA_MODIFICACION.Date };
-
-            #endregion
-
-            #region SqlGrupo
-
-            string sqlInsertGrupo = @"INSERT INTO [GRUPOS_ESTRUCTURA] 
-                                    ([grp_numero]
-                                    ,[estr_codigo]
-                                    ,[grp_padre_codigo]
-                                    ,[grp_nombre]
-                                    ,[grp_descripcion])
-                                    VALUES (@p0, @p1, @p2, @p3, @p4)";
-
-            string sqlDeleteGrupo = "DELETE FROM GRUPOS_ESTRUCTURA WHERE grp_codigo = @p0";
-
-            //string sqlUpdateGrupo = @"UPDATE GRUPOS_ESTRUCTURA SET ";
-
-            #endregion
-
-            #region SqlConjuntos
-
-            string sqlInsertConjuntosEstructura = @"INSERT INTO [CONJUNTOSXESTRUCTURA] 
-                                                ([estr_codigo]
-                                                ,[conj_codigo]
-                                                ,[cxe_cantidad]
-                                                ,[grp_codigo])
-                                                VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
-
-            string sqlUpdateConjuntosEstructura = "UPDATE CONJUNTOSXESTRUCTURA SET cxe_cantidad = @p0 WHERE cxe_codigo = @p1";
-            string sqlDeleteConjuntosEstructura = "DELETE FROM CONJUNTOSXESTRUCTURA WHERE cxe_codigo = @p0";
-
-            #endregion
-
-            #region sqlSubconjuntos
-            string sqlInsertSubconjuntosEstructura = @"INSERT INTO [SUBCONJUNTOSXESTRUCTURA] 
-                                                ([estr_codigo]
-                                                ,[sconj_codigo]
-                                                ,[scxe_cantidad]
-                                                ,[grp_codigo])
-                                                VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
-
-            string sqlUpdateSubconjuntosEstructura = "UPDATE SUBCONJUNTOSXESTRUCTURA SET scxe_cantidad = @p0 WHERE scxe_codigo = @p1";
-            string sqlDeleteSubconjuntosEstructura = "DELETE FROM SUBCONJUNTOSXESTRUCTURA WHERE scxe_codigo = @p0";
-            #endregion
-
-            #region sqlPiezas
-            string sqlInsertPiezasEstructura = @"INSERT INTO [PIEZASXESTRUCTURA] 
-                                                ([estr_codigo]
-                                                ,[pza_codigo]
-                                                ,[pxe_cantidad]
-                                                ,[grp_codigo])
-                                                VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
-
-            string sqlUpdatePiezasEstructura = "UPDATE PIEZASXESTRUCTURA SET pxe_cantidad = @p0 WHERE pxe_codigo = @p1";
-            string sqlDeletePiezasEstructura = "DELETE FROM PIEZASXESTRUCTURA WHERE pxe_codigo = @p0";
-            #endregion
-
-            #region sqlMateria Prima
-            string sqlInsertMateriasPrimasEstructura = @"INSERT INTO [MATERIASPRIMASXESTRUCTURA] 
-                                                        ([estr_codigo]
-                                                        ,[mp_codigo]
-                                                        ,[mpxe_cantidad]
-                                                        ,[grp_codigo])
-                                                        VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
-
-            string sqlUpdateMateriasPrimasEstructura = "UPDATE MATERIASPRIMASXESTRUCTURA SET mpxe_cantidad = @p0 WHERE mpxe_codigo = @p1";
-            string sqlDeleteMateriasPrimasEstructura = "DELETE FROM MATERIASPRIMASXESTRUCTURA WHERE mpxe_codigo = @p0";
-
-            #endregion
+                                         rowEstructura.ESTR_FECHA_MODIFICACION.Date,
+                                         rowEstructura.E_CODIGO,
+                                         rowEstructura.ESTR_CODIGO };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
@@ -256,69 +201,118 @@ namespace GyCAP.DAL
                 transaccion = DB.IniciarTransaccion();
 
                 //Actualizamos la estructura
-                DB.executeNonQuery(sqlUpdateEstructura, valorParametros, transaccion);
+                DB.executeNonQuery(sql, valorParametros, transaccion);
                 //Actualizamos el resto, primero insertamos los nuevos
 
                 #region Inserts
-
+                Entidades.GrupoEstructura gE = new GyCAP.Entidades.GrupoEstructura();
+                foreach (Data.dsEstructura.GRUPOS_ESTRUCTURARow row in (Data.dsEstructura.GRUPOS_ESTRUCTURARow[])dsEstructura.GRUPOS_ESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
+                {
+                    gE.CodigoGrupo = Convert.ToInt32(row.GRP_CODIGO);
+                    gE.CodigoEstructura = Convert.ToInt32(row.ESTR_CODIGO);
+                    gE.CodigoPadre = Convert.ToInt32(row.GRP_PADRE_CODIGO);
+                    gE.Numero = Convert.ToInt32(row.GRP_NUMERO);
+                    gE.NombreGrupo = row.GRP_NOMBRE;
+                    gE.Descripcion = row.GRP_DESCRIPCION;
+                    gE.Concreto = Convert.ToInt32(row.GRP_CONCRETO);
+                    GrupoEstructuraDAL.Insertar(gE, transaccion);
+                    row.GRP_CODIGO = gE.CodigoGrupo;
+                }
+                Entidades.ConjuntoEstructura cE = new GyCAP.Entidades.ConjuntoEstructura();
                 foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
                 {
-                    valorParametros = new object[] { row.ESTR_CODIGO, row.CONJ_CODIGO, row.CXE_CANTIDAD, row.GRP_CODIGO };
+                    cE.CodigoEstructura = Convert.ToInt32(row.ESTR_CODIGO);
+                    cE.CodigoConjunto = Convert.ToInt32(row.CONJ_CODIGO);
+                    cE.CantidadConjunto = Convert.ToInt32(row.CXE_CANTIDAD);
+                    cE.CodigoGrupo = gE.CodigoGrupo;
+                    ConjuntoEstructuraDAL.Insertar(cE, transaccion);
                     row.BeginEdit();
-                    row.CXE_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertConjuntosEstructura, valorParametros, transaccion));
+                    row.CXE_CODIGO = cE.CodigoDetalle;
+                    row.GRP_CODIGO = cE.CodigoGrupo;
                     row.EndEdit();
                 }
-
+                Entidades.SubconjuntoEstructura scE = new GyCAP.Entidades.SubconjuntoEstructura();
                 foreach (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow[])dsEstructura.SUBCONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
                 {
-                    valorParametros = new object[] { row.ESTR_CODIGO, row.SCONJ_CODIGO, row.SCXE_CANTIDAD, row.GRP_CODIGO };
+                    scE.CodigoEstructura = Convert.ToInt32(row.ESTR_CODIGO);
+                    scE.CodigoSubconjunto = Convert.ToInt32(row.SCONJ_CODIGO);
+                    scE.CantidadSubconjunto = Convert.ToInt32(row.SCXE_CANTIDAD);
+                    scE.CodigoGrupo = gE.CodigoGrupo;
+                    SubconjuntoEstructuraDAL.Insertar(scE, transaccion);
                     row.BeginEdit();
-                    row.SCXE_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertSubconjuntosEstructura, valorParametros, transaccion));
+                    row.SCXE_CODIGO = scE.CodigoDetalle;
+                    row.GRP_CODIGO = scE.CodigoGrupo;
                     row.EndEdit();
                 }
-
+                Entidades.PiezaEstructura pE = new GyCAP.Entidades.PiezaEstructura();
                 foreach (Data.dsEstructura.PIEZASXESTRUCTURARow row in (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
                 {
-                    valorParametros = new object[] { row.ESTR_CODIGO, row.PZA_CODIGO, row.PXE_CANTIDAD, row.GRP_CODIGO };
+                    pE.CodigoEstructura = Convert.ToInt32(row.ESTR_CODIGO);
+                    pE.CodigoPieza = Convert.ToInt32(row.PZA_CODIGO);
+                    pE.CantidadPieza = Convert.ToInt32(row.PXE_CANTIDAD);
+                    pE.CodigoGrupo = gE.CodigoGrupo;
+                    PiezaEstructuraDAL.Insertar(pE, transaccion);
                     row.BeginEdit();
-                    row.PXE_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertPiezasEstructura, valorParametros, transaccion));
+                    row.PXE_CODIGO = pE.CodigoDetalle;
+                    row.GRP_CODIGO = pE.CodigoGrupo;
                     row.EndEdit();
                 }
-
+                Entidades.MateriaPrimaEstructura mpE = new GyCAP.Entidades.MateriaPrimaEstructura();
                 foreach (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow row in (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow[])dsEstructura.MATERIASPRIMASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
                 {
-                    valorParametros = new object[] { row.ESTR_CODIGO, row.MP_CODIGO, row.MPXE_CANTIDAD, row.GRP_CODIGO };
+                    mpE.CodigoEstructura = Convert.ToInt32(row.ESTR_CODIGO);
+                    mpE.CodigoMateriaPrima = Convert.ToInt32(row.MP_CODIGO);
+                    mpE.CantidadMateriaPrima = row.MPXE_CANTIDAD;
+                    mpE.CodigoGrupo = gE.CodigoGrupo;
+                    MateriaPrimaEstructuraDAL.Insertar(mpE, transaccion);
                     row.BeginEdit();
-                    row.MPXE_CODIGO = Convert.ToDecimal(DB.executeScalar(sqlInsertMateriasPrimasEstructura, valorParametros, transaccion));
+                    row.MPXE_CODIGO = mpE.CodigoDetalle;
+                    row.GRP_CODIGO = mpE.CodigoGrupo;
                     row.EndEdit();
                 }
 
                 #endregion
 
                 #region Updates
+
+                foreach (Data.dsEstructura.GRUPOS_ESTRUCTURARow row in (Data.dsEstructura.GRUPOS_ESTRUCTURARow[])dsEstructura.GRUPOS_ESTRUCTURA.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
+                {
+                    gE.CodigoGrupo = Convert.ToInt32(row.GRP_CODIGO);
+                    gE.CodigoEstructura = Convert.ToInt32(row.ESTR_CODIGO);
+                    gE.CodigoPadre = Convert.ToInt32(row.GRP_PADRE_CODIGO);
+                    gE.Numero = Convert.ToInt32(row.GRP_NUMERO);
+                    gE.NombreGrupo = row.GRP_NOMBRE;
+                    gE.Descripcion = row.GRP_DESCRIPCION;
+                    gE.Concreto = Convert.ToInt32(row.GRP_CONCRETO);
+                    GrupoEstructuraDAL.Actualizar(gE, transaccion);
+                }
                 
                 foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
                 {
-                    valorParametros = new object[] { row.CXE_CANTIDAD, row.CXE_CODIGO };
-                    DB.executeScalar(sqlUpdateConjuntosEstructura, valorParametros, transaccion);
+                    cE.CodigoDetalle = Convert.ToInt32(row.CXE_CODIGO);
+                    cE.CantidadConjunto = Convert.ToInt32(row.CXE_CANTIDAD);
+                    ConjuntoEstructuraDAL.Actualizar(cE, transaccion);
                 }
 
                 foreach (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
                 {
-                    valorParametros = new object[] { row.SCXE_CANTIDAD, row.SCXE_CODIGO };
-                    DB.executeScalar(sqlUpdateSubconjuntosEstructura, valorParametros, transaccion);
+                    scE.CodigoDetalle = Convert.ToInt32(row.SCXE_CODIGO);
+                    scE.CantidadSubconjunto = Convert.ToInt32(row.SCXE_CANTIDAD);
+                    SubconjuntoEstructuraDAL.Actualizar(scE, transaccion);
                 }
 
                 foreach (Data.dsEstructura.PIEZASXESTRUCTURARow row in (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
                 {
-                    valorParametros = new object[] { row.PXE_CANTIDAD, row.PXE_CODIGO };
-                    DB.executeScalar(sqlUpdatePiezasEstructura, valorParametros, transaccion);
+                    pE.CodigoDetalle = Convert.ToInt32(row.PXE_CODIGO);
+                    pE.CantidadPieza = Convert.ToInt32(row.PXE_CANTIDAD);
+                    PiezaEstructuraDAL.Actualizar(pE, transaccion);
                 }
 
                 foreach (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow row in (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow[])dsEstructura.MATERIASPRIMASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
                 {
-                    valorParametros = new object[] { row.MPXE_CANTIDAD, row.MPXE_CODIGO };
-                    DB.executeScalar(sqlUpdateMateriasPrimasEstructura, valorParametros, transaccion);
+                    mpE.CodigoDetalle = Convert.ToInt32(row.MPXE_CODIGO);
+                    mpE.CantidadMateriaPrima = row.MPXE_CANTIDAD;
+                    MateriaPrimaEstructuraDAL.Actualizar(mpE, transaccion);
                 }
 
                 #endregion
@@ -328,27 +322,27 @@ namespace GyCAP.DAL
                 foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Deleted))
                 {
                     //Como la fila está eliminada y no tiene datos, tenemos que acceder a la versión original
-                    valorParametros = new object[] { row["cxe_codigo", System.Data.DataRowVersion.Original] };
-                    Convert.ToDecimal(DB.executeScalar(sqlDeleteConjuntosEstructura, valorParametros, transaccion));
+                    cE.CodigoDetalle = Convert.ToInt32(row["cxe_codigo", System.Data.DataRowVersion.Original]);
+                    ConjuntoEstructuraDAL.Delete(cE, transaccion);                    
                 }
 
                 foreach (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow[])dsEstructura.SUBCONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Deleted))
                 {
                     //Como la fila está eliminada y no tiene datos, tenemos que acceder a la versión original
-                    valorParametros = new object[] { row["scxe_codigo", System.Data.DataRowVersion.Original] };
-                    Convert.ToDecimal(DB.executeScalar(sqlDeleteSubconjuntosEstructura, valorParametros, transaccion));
+                    scE.CodigoDetalle = Convert.ToInt32(row["scxe_codigo", System.Data.DataRowVersion.Original]);
+                    SubconjuntoEstructuraDAL.Delete(scE, transaccion);
                 }
                 foreach (Data.dsEstructura.PIEZASXESTRUCTURARow row in (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Deleted))
                 {
                     //Como la fila está eliminada y no tiene datos, tenemos que acceder a la versión original
-                    valorParametros = new object[] { row["pxe_codigo", System.Data.DataRowVersion.Original] };
-                    Convert.ToDecimal(DB.executeScalar(sqlDeletePiezasEstructura, valorParametros, transaccion));
+                    pE.CodigoDetalle = Convert.ToInt32(row["pxe_codigo", System.Data.DataRowVersion.Original]);
+                    PiezaEstructuraDAL.Delete(pE, transaccion);
                 }
                 foreach (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow row in (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow[])dsEstructura.MATERIASPRIMASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Deleted))
                 {
                     //Como la fila está eliminada y no tiene datos, tenemos que acceder a la versión original
-                    valorParametros = new object[] { row["mpxe_codigo", System.Data.DataRowVersion.Original] };
-                    Convert.ToDecimal(DB.executeScalar(sqlDeleteMateriasPrimasEstructura, valorParametros, transaccion));
+                    mpE.CodigoDetalle = Convert.ToInt32(row["mpxe_codigo", System.Data.DataRowVersion.Original]);
+                    MateriaPrimaEstructuraDAL.Delete(mpE, transaccion);
                 }
 
                 #endregion
@@ -467,6 +461,11 @@ namespace GyCAP.DAL
 
             if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return false; }
             else { return true; }
+        }
+
+        public static void ObtenerDetalleEstructura(int[] codigosEstructura, Data.dsEstructura dsEstructura)
+        {
+
         }
     }
 }
