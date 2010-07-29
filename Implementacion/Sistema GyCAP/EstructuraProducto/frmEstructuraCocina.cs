@@ -427,10 +427,13 @@ namespace GyCAP.UI.EstructuraProducto
         
         private void SetGrillasCombosVistas()
         {
-            //Obtenemos las terminaciones
+            //Obtenemos los datos iniciales necesarios: terminaciones, empleados, cocinas
             try
             {
                 BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsCocina.TERMINACIONES);
+                BLL.PlanoBLL.ObtenerTodos(dsEstructura.PLANOS);
+                BLL.CocinaBLL.ObtenerCocinas(dsCocina.COCINAS);
+                BLL.EmpleadoBLL.ObtenerEmpleados(dsEmpleado.EMPLEADOS);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
