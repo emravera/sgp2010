@@ -7,6 +7,9 @@ namespace GyCAP.BLL
 {
     public class EstructuraBLL
     {
+        public static readonly int EstructuraActiva = 1;
+        public static readonly int EstructuraInactiva = 0;
+        
         public static void Insertar(Data.dsEstructura ds)
         {
             DAL.EstructuraDAL.Insertar(ds);
