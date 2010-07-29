@@ -21,12 +21,12 @@ namespace GyCAP.Entidades
             get { return codigoEstructura; }
             set { codigoEstructura = value; }
         }
-        private int codigPieza;
+        private int codigoPieza;
 
-        public int CodigPieza
+        public int CodigoPieza
         {
-            get { return codigPieza; }
-            set { codigPieza = value; }
+            get { return codigoPieza; }
+            set { codigoPieza = value; }
         }
         private int cantidadPieza;
 
