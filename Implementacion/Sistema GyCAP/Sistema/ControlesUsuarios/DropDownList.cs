@@ -112,6 +112,16 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
             this.SelectedValue = valor;
         }
 
+        /// <summary>
+        /// Define el SelectedIndex del combo y oculta el texto de la cabecera no persistente.
+        /// </summary>
+        /// <param name="index">El índice a seleccionar.</param>
+        public void SetSelectedIndex(int index)
+        {
+            this.SelectedIndex = index;
+            if (!persistente) { texto.Visible = false; }
+        }
+
         public object GetSelectedValue()
         {
             return this.SelectedValue;
