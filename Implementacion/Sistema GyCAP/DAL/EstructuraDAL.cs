@@ -171,7 +171,7 @@ namespace GyCAP.DAL
         public static void Actualizar(Data.dsEstructura dsEstructura)
         {
            string sql = @"UPDATE ESTRUCTURAS SET
-                        coc_codigo = @p0
+                         coc_codigo = @p0
                         ,pno_codigo = @p1
                         ,estr_nombre = @p2
                         ,estr_descripcion = @p3
