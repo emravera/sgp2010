@@ -33,6 +33,7 @@
             this.gpbLista = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cboBuscarEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.lvSectores = new System.Windows.Forms.ListView();
             this.cboBuscarPor = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -44,8 +45,7 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
-            this.cboEstado = new System.Windows.Forms.ComboBox();
-            this.cboSector = new System.Windows.Forms.ComboBox();
+            this.sfFechaNac = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.lvCapacidadEmpleado = new System.Windows.Forms.ListView();
             this.label6 = new System.Windows.Forms.Label();
             this.txtLegajo = new System.Windows.Forms.TextBox();
@@ -66,8 +66,8 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cboBuscarEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.sfFechaNac = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboSector = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.tcABM.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.gpbLista.SuspendLayout();
@@ -157,6 +157,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
+            // 
+            // cboBuscarEstado
+            // 
+            this.cboBuscarEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboBuscarEstado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboBuscarEstado.FormattingEnabled = true;
+            this.cboBuscarEstado.Location = new System.Drawing.Point(222, 45);
+            this.cboBuscarEstado.Name = "cboBuscarEstado";
+            this.cboBuscarEstado.Size = new System.Drawing.Size(85, 21);
+            this.cboBuscarEstado.TabIndex = 2;
             // 
             // lvSectores
             // 
@@ -270,9 +280,9 @@
             // 
             // gbDatos
             // 
-            this.gbDatos.Controls.Add(this.sfFechaNac);
-            this.gbDatos.Controls.Add(this.cboEstado);
             this.gbDatos.Controls.Add(this.cboSector);
+            this.gbDatos.Controls.Add(this.cboEstado);
+            this.gbDatos.Controls.Add(this.sfFechaNac);
             this.gbDatos.Controls.Add(this.lvCapacidadEmpleado);
             this.gbDatos.Controls.Add(this.label6);
             this.gbDatos.Controls.Add(this.txtLegajo);
@@ -295,23 +305,14 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Empleado";
             // 
-            // cboEstado
+            // sfFechaNac
             // 
-            this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEstado.FormattingEnabled = true;
-            this.cboEstado.Location = new System.Drawing.Point(76, 174);
-            this.cboEstado.Name = "cboEstado";
-            this.cboEstado.Size = new System.Drawing.Size(146, 21);
-            this.cboEstado.TabIndex = 12;
-            // 
-            // cboSector
-            // 
-            this.cboSector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSector.FormattingEnabled = true;
-            this.cboSector.Location = new System.Drawing.Point(76, 147);
-            this.cboSector.Name = "cboSector";
-            this.cboSector.Size = new System.Drawing.Size(146, 21);
-            this.cboSector.TabIndex = 11;
+            this.sfFechaNac.CustomFormat = " ";
+            this.sfFechaNac.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.sfFechaNac.Location = new System.Drawing.Point(76, 97);
+            this.sfFechaNac.Name = "sfFechaNac";
+            this.sfFechaNac.Size = new System.Drawing.Size(146, 20);
+            this.sfFechaNac.TabIndex = 9;
             // 
             // lvCapacidadEmpleado
             // 
@@ -515,24 +516,25 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(562, 371);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
-            // cboBuscarEstado
+            // cboEstado
             // 
-            this.cboBuscarEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboBuscarEstado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboBuscarEstado.FormattingEnabled = true;
-            this.cboBuscarEstado.Location = new System.Drawing.Point(222, 45);
-            this.cboBuscarEstado.Name = "cboBuscarEstado";
-            this.cboBuscarEstado.Size = new System.Drawing.Size(85, 21);
-            this.cboBuscarEstado.TabIndex = 2;
+            this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEstado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboEstado.FormattingEnabled = true;
+            this.cboEstado.Location = new System.Drawing.Point(76, 174);
+            this.cboEstado.Name = "cboEstado";
+            this.cboEstado.Size = new System.Drawing.Size(146, 21);
+            this.cboEstado.TabIndex = 12;
             // 
-            // sfFechaNac
+            // cboSector
             // 
-            this.sfFechaNac.CustomFormat = " ";
-            this.sfFechaNac.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.sfFechaNac.Location = new System.Drawing.Point(76, 97);
-            this.sfFechaNac.Name = "sfFechaNac";
-            this.sfFechaNac.Size = new System.Drawing.Size(146, 20);
-            this.sfFechaNac.TabIndex = 9;
+            this.cboSector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSector.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboSector.FormattingEnabled = true;
+            this.cboSector.Location = new System.Drawing.Point(76, 147);
+            this.cboSector.Name = "cboSector";
+            this.cboSector.Size = new System.Drawing.Size(146, 21);
+            this.cboSector.TabIndex = 11;
             // 
             // frmEmpleado
             // 
@@ -603,9 +605,9 @@
         private System.Windows.Forms.ListView lvSectores;
         private System.Windows.Forms.ListView lvCapacidadEmpleado;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboBuscarEstado;
-        private System.Windows.Forms.ComboBox cboSector;
-        private System.Windows.Forms.ComboBox cboEstado;
         private System.Windows.Forms.DataGridView dgvLista;
         private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha sfFechaNac;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboEstado;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboSector;
     }
 }
