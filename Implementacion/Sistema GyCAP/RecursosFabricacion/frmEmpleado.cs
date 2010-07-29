@@ -133,10 +133,10 @@ namespace GyCAP.UI.RecursosFabricacion
 
             //Combo de Datos
             dvEstadoEmpleado = new DataView(dsEmpleado.ESTADO_EMPLEADOS);
-            Sistema.FuncionesAuxiliares.llenarCombos(dvEstadoEmpleado, cboEstado, "EE_CODIGO", "EE_NOMBRE");
+            cboEstado.SetDatos(dvEstadoEmpleado, "EE_CODIGO", "EE_NOMBRE", "Seleccione un Estado...", false);
 
             dvSectores = new DataView(dsEmpleado.SECTORES);
-            Sistema.FuncionesAuxiliares.llenarCombos(dvSectores, cboSector, "SEC_CODIGO", "SEC_NOMBRE");
+            cboSector.SetDatos(dvSectores, "SEC_CODIGO", "SEC_NOMBRE", "Seleccione un Sector...", false);
 
             //Llenar listView
             dvListaSectores = new DataView(dsEmpleado.SECTORES);
@@ -186,6 +186,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     txtApellido.Text = string.Empty;
                     txtLegajo.Text = string.Empty;
                     txtTelefono.Text = string.Empty;
+                    sfFechaNac.SetFechaNull();
                     cboEstado.SelectedIndex = 0;
                     cboSector.SelectedIndex = 0;
                     
@@ -284,163 +285,171 @@ namespace GyCAP.UI.RecursosFabricacion
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-
-            Entidades.Empleado empleado = new GyCAP.Entidades.Empleado();
-            Entidades.Sector sector = new GyCAP.Entidades.Sector();
-            Entidades.EstadoEmpleado estadoEmpleado = new GyCAP.Entidades.EstadoEmpleado();
-
-
-            //Revisamos que está haciendo
-            if (estadoInterface == estadoUI.nuevo ) //|| estadoInterface == estadoUI.nuevoExterno)
+            //Revisamos que escribió algo y selecciono algo en el combo
+            if (txtLegajo.Text != String.Empty && txtApellido.Text != String.Empty 
+                && cboSector.SelectedIndex != -1 && cboEstado.SelectedIndex != -1)
             {
-                //Está cargando un nuevo Empleado
-                empleado.Apellido = txtApellido.Text.Trim();
-                empleado.FechaNacimiento = DateTime.Parse("03/11/1980");
-                empleado.Legajo = txtLegajo.Text.Trim();
-                empleado.Nombre = txtNombre.Text.Trim();
-                empleado.Telefono = txtTelefono.Text.Trim();
-                empleado.FechaAlta = BLL.DBBLL.GetFechaServidor();
 
-                //Creo el objeto Sector y despues lo asigno
-                int idSector = Convert.ToInt32(cboSector.SelectedValue);
-                sector.Codigo = Convert.ToInt32(dsEmpleado.SECTORES.FindBySEC_CODIGO(idSector).SEC_CODIGO);
+                Entidades.Empleado empleado = new GyCAP.Entidades.Empleado();
+                Entidades.Sector sector = new GyCAP.Entidades.Sector();
+                Entidades.EstadoEmpleado estadoEmpleado = new GyCAP.Entidades.EstadoEmpleado();
 
-                //Asigno el Sector creado al Empleado 
-                empleado.Sector = sector;
-
-                //Creo el objeto Estado y despues lo asigno
-                int idEstado= Convert.ToInt32(cboEstado.SelectedValue);
-                estadoEmpleado.Codigo = Convert.ToInt32(dsEmpleado.ESTADO_EMPLEADOS.FindByEE_CODIGO(idEstado).EE_CODIGO);
-
-                //Asigno el Sector creado al Empleado 
-                empleado.Estado = estadoEmpleado;
-
-                try
+                //Revisamos que está haciendo
+                if (estadoInterface == estadoUI.nuevo) //|| estadoInterface == estadoUI.nuevoExterno)
                 {
-                    //Primero lo creamos en la db
-                    empleado.Codigo = BLL.EmpleadoBLL.Insertar(empleado);
-                    //Ahora lo agregamos al dataset
-                    Data.dsEmpleado.EMPLEADOSRow rowEmpleado = dsEmpleado.EMPLEADOS.NewEMPLEADOSRow();
-                    //Indicamos que comienza la edición de la fila
-                    rowEmpleado.BeginEdit();
-                    rowEmpleado.E_CODIGO = empleado.Codigo;
-                    rowEmpleado.E_NOMBRE = empleado.Nombre;
-                    rowEmpleado.E_APELLIDO = empleado.Apellido;
+                    //Está cargando un nuevo Empleado
+                    empleado.Apellido = txtApellido.Text.Trim();
+                    empleado.FechaNacimiento = DateTime.Parse(sfFechaNac.GetFecha().ToString()); //DateTime.Parse("03/11/1980");
+                    empleado.Legajo = txtLegajo.Text.Trim();
+                    empleado.Nombre = txtNombre.Text.Trim();
+                    empleado.Telefono = txtTelefono.Text.Trim();
+                    empleado.FechaAlta = BLL.DBBLL.GetFechaServidor();
 
-                    if (empleado.FechaNacimiento == null)
-                    {
-                        rowEmpleado.SetE_FECHANACIMIENTONull();
-                    }
-                    else 
-                    {
-                        rowEmpleado.E_FECHANACIMIENTO = DateTime.Parse( empleado.FechaNacimiento.ToString())  ;
-                    }
-                    rowEmpleado.E_LEGAJO = empleado.Legajo;
-                    rowEmpleado.E_TELEFONO = empleado.Telefono;
-                    rowEmpleado.SEC_CODIGO = empleado.Sector.Codigo;
-                    rowEmpleado.EE_CODIGO = empleado.Estado.Codigo;
-                    rowEmpleado.E_FECHA_ALTA = empleado.FechaAlta; 
-                    
-                    //Termina la edición de la fila
-                    rowEmpleado.EndEdit();
-                    //Agregamos la fila al dataset y aceptamos los cambios
-                    dsEmpleado.EMPLEADOS.AddEMPLEADOSRow(rowEmpleado);
-                    dsEmpleado.EMPLEADOS.AcceptChanges();
+                    //Creo el objeto Sector y despues lo asigno
+                    int idSector = Convert.ToInt32(cboSector.SelectedValue);
+                    sector.Codigo = Convert.ToInt32(dsEmpleado.SECTORES.FindBySEC_CODIGO(idSector).SEC_CODIGO);
 
-                    //Y por último seteamos el estado de la interfaz
+                    //Asigno el Sector creado al Empleado 
+                    empleado.Sector = sector;
 
-                    //Vemos cómo se inició el formulario para determinar la acción a seguir
-                    /*if (estadoInterface == estadoUI.nuevoExterno)
+                    //Creo el objeto Estado y despues lo asigno
+                    int idEstado = Convert.ToInt32(cboEstado.SelectedValue);
+                    estadoEmpleado.Codigo = Convert.ToInt32(dsEmpleado.ESTADO_EMPLEADOS.FindByEE_CODIGO(idEstado).EE_CODIGO);
+
+                    //Asigno el Sector creado al Empleado 
+                    empleado.Estado = estadoEmpleado;
+
+                    try
                     {
-                        //Nuevo desde acceso directo, cerramos el formulario
-                        btnSalir.PerformClick();
-                    }
-                    else
-                    {
-                        //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
+                        //Primero lo creamos en la db
+                        empleado.Codigo = BLL.EmpleadoBLL.Insertar(empleado);
+                        //Ahora lo agregamos al dataset
+                        Data.dsEmpleado.EMPLEADOSRow rowEmpleado = dsEmpleado.EMPLEADOS.NewEMPLEADOSRow();
+                        //Indicamos que comienza la edición de la fila
+                        rowEmpleado.BeginEdit();
+                        rowEmpleado.E_CODIGO = empleado.Codigo;
+                        rowEmpleado.E_NOMBRE = empleado.Nombre;
+                        rowEmpleado.E_APELLIDO = empleado.Apellido;
+
+                        if (empleado.FechaNacimiento == null)
+                        {
+                            rowEmpleado.SetE_FECHANACIMIENTONull();
+                        }
+                        else
+                        {
+                            rowEmpleado.E_FECHANACIMIENTO = DateTime.Parse(empleado.FechaNacimiento.ToString());
+                        }
+                        rowEmpleado.E_LEGAJO = empleado.Legajo;
+                        rowEmpleado.E_TELEFONO = empleado.Telefono;
+                        rowEmpleado.SEC_CODIGO = empleado.Sector.Codigo;
+                        rowEmpleado.EE_CODIGO = empleado.Estado.Codigo;
+                        rowEmpleado.E_FECHA_ALTA = empleado.FechaAlta;
+
+                        //Termina la edición de la fila
+                        rowEmpleado.EndEdit();
+                        //Agregamos la fila al dataset y aceptamos los cambios
+                        dsEmpleado.EMPLEADOS.AddEMPLEADOSRow(rowEmpleado);
+                        dsEmpleado.EMPLEADOS.AcceptChanges();
+
+                        //Y por último seteamos el estado de la interfaz
+
+                        //Vemos cómo se inició el formulario para determinar la acción a seguir
+                        /*if (estadoInterface == estadoUI.nuevoExterno)
+                        {
+                            //Nuevo desde acceso directo, cerramos el formulario
+                            btnSalir.PerformClick();
+                        }
+                        else
+                        {
+                            //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
+                            SetInterface(estadoUI.inicio);
+                        }*/
+
                         SetInterface(estadoUI.inicio);
-                    }*/
 
-                    SetInterface(estadoUI.inicio);
+                    }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    //Está modificando una designacion
+                    //Primero obtenemos su código del dataview que está realacionado a la fila seleccionada                
+                    empleado.Codigo = Convert.ToInt32(dvEmpleado[dgvLista.SelectedRows[0].Index]["e_codigo"]);
 
+                    //Segundo obtenemos los nuevos datos que ingresó el usuario
+                    empleado.Apellido = txtApellido.Text.Trim();
+                    empleado.FechaNacimiento = DateTime.Parse("03/11/1980");
+                    empleado.Legajo = txtLegajo.Text.Trim();
+                    empleado.Nombre = txtNombre.Text.Trim();
+                    empleado.Telefono = txtTelefono.Text.Trim();
+
+                    //Creo el objeto Sector y despues lo asigno
+                    int idSector = Convert.ToInt32(cboSector.SelectedValue);
+                    sector.Codigo = Convert.ToInt32(dsEmpleado.SECTORES.FindBySEC_CODIGO(idSector).SEC_CODIGO);
+
+                    //Asigno el Sector creado al Empleado 
+                    empleado.Sector = sector;
+
+                    //Creo el objeto Estado y despues lo asigno
+                    int idEstado = Convert.ToInt32(cboEstado.SelectedValue);
+                    estadoEmpleado.Codigo = Convert.ToInt32(dsEmpleado.ESTADO_EMPLEADOS.FindByEE_CODIGO(idEstado).EE_CODIGO);
+
+                    //Asigno el Sector creado al Empleado 
+                    empleado.Estado = estadoEmpleado;
+
+                    try
+                    {
+                        //Lo actualizamos en la DB
+                        BLL.EmpleadoBLL.Actualizar(empleado);
+                        //Lo actualizamos en el dataset y aceptamos los cambios
+                        Data.dsEmpleado.EMPLEADOSRow rowEmpleado = dsEmpleado.EMPLEADOS.FindByE_CODIGO(empleado.Codigo);
+                        //Indicamos que comienza la edición de la fila
+                        rowEmpleado.BeginEdit();
+                        rowEmpleado.E_CODIGO = empleado.Codigo;
+                        rowEmpleado.E_NOMBRE = empleado.Nombre;
+                        rowEmpleado.E_APELLIDO = empleado.Apellido;
+                        if (empleado.FechaNacimiento == null)
+                        {
+                            rowEmpleado.SetE_FECHANACIMIENTONull();
+                        }
+                        else
+                        {
+                            rowEmpleado.E_FECHANACIMIENTO = DateTime.Parse(empleado.FechaNacimiento.ToString());
+                        }
+                        rowEmpleado.E_LEGAJO = empleado.Legajo;
+                        rowEmpleado.E_TELEFONO = empleado.Telefono;
+                        rowEmpleado.SEC_CODIGO = empleado.Sector.Codigo;
+                        rowEmpleado.EE_CODIGO = empleado.Estado.Codigo;
+                        //Termina la edición de la fila
+                        rowEmpleado.EndEdit();
+                        //Agregamos la fila al dataset y aceptamos los cambios
+                        dsEmpleado.EMPLEADOS.AcceptChanges();
+                        //Avisamos que estuvo todo ok
+                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //Y por último seteamos el estado de la interfaz
+                        SetInterface(estadoUI.inicio);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                catch (Entidades.Excepciones.ElementoExistenteException ex)
-                {
-                    MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                catch (Entidades.Excepciones.BaseDeDatosException ex)
-                {
-                    MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+
+                //recarga de la grilla
+                dgvLista.Refresh();
+
             }
             else
             {
-                //Está modificando una designacion
-                //Primero obtenemos su código del dataview que está realacionado a la fila seleccionada                
-                empleado.Codigo = Convert.ToInt32(dvEmpleado[dgvLista.SelectedRows[0].Index]["e_codigo"]);
-
-                //Segundo obtenemos los nuevos datos que ingresó el usuario
-                empleado.Apellido = txtApellido.Text.Trim();
-                empleado.FechaNacimiento = DateTime.Parse("03/11/1980");
-                empleado.Legajo = txtLegajo.Text.Trim();
-                empleado.Nombre = txtNombre.Text.Trim();
-                empleado.Telefono = txtTelefono.Text.Trim();
-
-                //Creo el objeto Sector y despues lo asigno
-                int idSector = Convert.ToInt32(cboSector.SelectedValue);
-                sector.Codigo = Convert.ToInt32(dsEmpleado.SECTORES.FindBySEC_CODIGO(idSector).SEC_CODIGO);
-
-                //Asigno el Sector creado al Empleado 
-                empleado.Sector = sector;
-
-                //Creo el objeto Estado y despues lo asigno
-                int idEstado= Convert.ToInt32(cboEstado.SelectedValue);
-                estadoEmpleado.Codigo = Convert.ToInt32(dsEmpleado.ESTADO_EMPLEADOS.FindByEE_CODIGO(idEstado).EE_CODIGO);
-
-                //Asigno el Sector creado al Empleado 
-                empleado.Estado = estadoEmpleado;
-
-                try
-                {
-                    //Lo actualizamos en la DB
-                    BLL.EmpleadoBLL.Actualizar(empleado);
-                    //Lo actualizamos en el dataset y aceptamos los cambios
-                    Data.dsEmpleado.EMPLEADOSRow rowEmpleado = dsEmpleado.EMPLEADOS.FindByE_CODIGO(empleado.Codigo);
-                    //Indicamos que comienza la edición de la fila
-                    rowEmpleado.BeginEdit();
-                    rowEmpleado.E_CODIGO = empleado.Codigo;
-                    rowEmpleado.E_NOMBRE = empleado.Nombre;
-                    rowEmpleado.E_APELLIDO = empleado.Apellido;
-                    if (empleado.FechaNacimiento == null)
-                    {
-                        rowEmpleado.SetE_FECHANACIMIENTONull();
-                    }
-                    else
-                    {
-                        rowEmpleado.E_FECHANACIMIENTO = DateTime.Parse(empleado.FechaNacimiento.ToString());
-                    }
-                    rowEmpleado.E_LEGAJO = empleado.Legajo;
-                    rowEmpleado.E_TELEFONO = empleado.Telefono;
-                    rowEmpleado.SEC_CODIGO = empleado.Sector.Codigo;
-                    rowEmpleado.EE_CODIGO = empleado.Estado.Codigo;
-                    //Termina la edición de la fila
-                    rowEmpleado.EndEdit();
-                    //Agregamos la fila al dataset y aceptamos los cambios
-                    dsEmpleado.EMPLEADOS.AcceptChanges();
-                    //Avisamos que estuvo todo ok
-                    MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //Y por último seteamos el estado de la interfaz
-                    SetInterface(estadoUI.inicio);
-                }
-                catch (Entidades.Excepciones.BaseDeDatosException ex)
-                {
-                    MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            //recarga de la grilla
-            dgvLista.Refresh();
-
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -527,7 +536,8 @@ namespace GyCAP.UI.RecursosFabricacion
             txtNombre.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_NOMBRE;
             txtTelefono.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_TELEFONO;
             cboSector.SelectedValue = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).SEC_CODIGO;
-            cboEstado.SelectedValue = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).EE_CODIGO;  
+            cboEstado.SelectedValue = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).EE_CODIGO;
+            sfFechaNac.SetFecha(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_FECHANACIMIENTO);
 
         }
         
