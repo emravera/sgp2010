@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace GyCAP.BLL
 {
@@ -49,6 +50,15 @@ namespace GyCAP.BLL
         public static void Actualizar(Entidades.Empleado empleado)
         {
             DAL.EmpleadoDAL.Actualizar(empleado);
+        }
+
+        /// <summary>
+        /// Obtiene todos los empleados sin filtrar, los carga en una DataTable del tipo empleados.
+        /// </summary>
+        /// <param name="dtEmpleados">La tabla donde cargar los datos.</param>
+        public static void ObtenerEmpleados(DataTable dtEmpleados)
+        {
+            DAL.EmpleadoDAL.ObtenerEmpleados(dtEmpleados);
         }
     }
 }
