@@ -8,6 +8,9 @@ namespace GyCAP.DAL
 {
     public class EstructuraDAL
     {
+        public static readonly int EstructuraActiva = 1;
+        public static readonly int EstructuraInactiva = 0;
+        
         public static void Insertar(Data.dsEstructura dsEstructura)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
@@ -143,6 +146,8 @@ namespace GyCAP.DAL
         public static void Eliminar(int codigoEstructura)
         {
             string sql = "DELETE FROM ESTRUCTURAS WHERE estr_codigo = @p0";
+            //eliminar todo el detalle - gonzalo
+            
             object[] valorParametros = { codigoEstructura };
             try
             {
@@ -447,11 +452,21 @@ namespace GyCAP.DAL
         
         public static bool PuedeEliminarse(int codigoEstructura)
         {
-            string sql = "SELECT count(estr_codigo) FROM ESTRUCTURAS WHERE estr_codigo = @p0 AND estr_activo = 0";
+            //Determinar que condiciones necesita para poder eliminarse - gonzalo
+            string sql = "SELECT count(estr_codigo) FROM ESTRUCTURAS WHERE estr_codigo = @p0";
             object[] valorParametros = { codigoEstructura };
 
             if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return true; }
             else { return false; }
+        }
+
+        public static bool EsEstructuraActiva(int codigoEstructura)
+        {
+            string sql = "SELECT count(estr_codigo) FROM ESTRUCTURAS WHERE estr_codigo = @p0 AND estr_activo = @p1";
+            object[] valorParametros = { codigoEstructura, EstructuraActiva };
+
+            if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return false; }
+            else { return true; }
         }
     }
 }
