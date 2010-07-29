@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace GyCAP.DAL
@@ -57,5 +58,13 @@ namespace GyCAP.DAL
             DB.executeNonQuery(sql, valorParametros, transaccion);
         }
 
+        public static void ObtenerGruposEstructura(int[] codigosEstructura, Data.dsEstructura ds)
+        {
+            string sql = @"SELECT grp_codigo, grp_numero, estr_codigo, grp_padre_codigo, grp_nombre, grp_descripcion, grp_concreto 
+                         FROM GRUPOS_ESTRUCTURA WHERE estr_codigo IN (@p0)";
+
+            object[] valorParametros = { codigosEstructura };
+            DB.FillDataSet(ds, "GRUPOS_ESTRUCTURA", sql, valorParametros);
+        }
     }
 }

@@ -436,11 +436,13 @@ namespace GyCAP.DAL
                     valorParametros[i] = valoresFiltros[i];
                 }
                 DB.FillDataSet(ds, "ESTRUCTURAS", sql, valorParametros);
+                ObtenerDetalleEstructura(ds);
             }
             else
             {
                 //Buscamos sin filtro
                 DB.FillDataSet(ds, "ESTRUCTURAS", sql, null);
+                ObtenerDetalleEstructura(ds);
             }
         }
         
@@ -463,9 +465,21 @@ namespace GyCAP.DAL
             else { return true; }
         }
 
-        public static void ObtenerDetalleEstructura(int[] codigosEstructura, Data.dsEstructura dsEstructura)
+        private static void ObtenerDetalleEstructura(Data.dsEstructura dsEstructura)
         {
+            int[] codigosEstructuras = new int[dsEstructura.ESTRUCTURAS.Count];
+            int i = 0;
+            foreach (Data.dsEstructura.ESTRUCTURASRow row in dsEstructura.ESTRUCTURAS)
+            {
+                codigosEstructuras[i] = Convert.ToInt32(row.ESTR_CODIGO);
+                i++;
+            }
 
+            GrupoEstructuraDAL.ObtenerGruposEstructura(codigosEstructuras, dsEstructura);
+            ConjuntoEstructuraDAL.ObtenerConjuntosEstructura(codigosEstructuras, dsEstructura);
+            SubconjuntoEstructuraDAL.ObtenerSubconjuntosEstructura(codigosEstructuras, dsEstructura);
+            PiezaEstructuraDAL.ObtenerPiezasEstructura(codigosEstructuras, dsEstructura);
+            MateriaPrimaEstructuraDAL.ObtenerMateriasPrimasEstructura(codigosEstructuras, dsEstructura);
         }
     }
 }

@@ -45,5 +45,12 @@ namespace GyCAP.DAL
             object[] valorParametros = { codigoEstructura };
             DB.executeNonQuery(sql, valorParametros, transaccion);
         }
+
+        public static void ObtenerPiezasEstructura(int[] codigosEstructura, Data.dsEstructura ds)
+        {
+            string sql = "SELECT pxe_codigo, estr_codigo, pza_codigo, pxe_cantidad FROM PIEZASXESTRUCTURA WHERE estr_codigo IN (@p0)";
+            object[] valorParametros = { codigosEstructura };
+            DB.FillDataSet(ds, "PIEZASXESTRUCTURA", sql, valorParametros);
+        }
     }
 }
