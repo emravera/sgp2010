@@ -90,9 +90,27 @@ namespace GyCAP.DAL
 
             if (parametros != null)
             {
+                int[] tipo = { 1 };
                 for (int f = 0; f < parametros.Length; f++)
                 {
-                    cmd.Parameters.AddWithValue("p" + f.ToString(), parametros[f]);
+                    if (parametros[f].GetType() == tipo.GetType())
+                    {
+                        string newParam = "@pn0";
+                        tipo = (int[])parametros[f];
+                        cmd.Parameters.AddWithValue("pn0", tipo[0]);
+                        for (int i = 1; i < (parametros[f] as int[]).Length; i++)
+                        {
+                            newParam += ",@pn" + i;
+                            cmd.Parameters.AddWithValue("pn" + i, tipo[i]);
+                        }
+                        string buscar = "@p" + f;
+                        cmd.CommandText = sql.Replace(buscar, newParam);
+
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("p" + f.ToString(), parametros[f]);
+                    }
                 }
             }
 

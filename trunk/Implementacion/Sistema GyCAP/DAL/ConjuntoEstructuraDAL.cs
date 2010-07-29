@@ -45,5 +45,12 @@ namespace GyCAP.DAL
             object[] valorParametros = { codigoEstructura };
             DB.executeNonQuery(sql, valorParametros, transaccion);
         }
+
+        public static void ObtenerConjuntosEstructura(int[] codigosEstructura, Data.dsEstructura ds)
+        {
+            string sql = "SELECT cxe_codigo, estr_codigo, conj_codigo, cxe_cantidad FROM CONJUNTOSXESTRUCTURA WHERE estr_codigo IN (@p0)";
+            object[] valorParametros = { codigosEstructura };
+            DB.FillDataSet(ds, "CONJUNTOSXESTRUCTURA", sql, valorParametros);
+        }
     }
 }
