@@ -28,5 +28,12 @@ namespace GyCAP.DAL
             
             grupo.CodigoGrupo = Convert.ToInt32(DB.executeScalar(sqlInsert, valorParametros, transaccion));
         }
+
+        public static void DeleteGruposEstructura(int codigoEstructura, SqlTransaction transaccion)
+        {
+            string sql = "DELETE FROM GRUPOS_ESTRUCTURA WHERE estr_codigo = @p0";
+            object[] valorParametros = { codigoEstructura };
+            DB.executeNonQuery(sql, valorParametros, transaccion);
+        }
     }
 }

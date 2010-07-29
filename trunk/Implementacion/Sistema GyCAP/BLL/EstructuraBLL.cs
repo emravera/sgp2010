@@ -14,14 +14,25 @@ namespace GyCAP.BLL
         
         public static void Eliminar(int codigoEstructura)
         {
-            if(DAL.EstructuraDAL.PuedeEliminarse(codigoEstructura))
+            //De momento solo chequeamos si está activa o no, luego agregaremos las demás condiciones - gonzalo
+            if(!DAL.EstructuraDAL.EsEstructuraActiva(codigoEstructura))
+            {
+                DAL.EstructuraDAL.Eliminar(codigoEstructura);
+            }
+            else
+            {
+                throw new Entidades.Excepciones.ElementoActivoException();
+            }
+            
+            
+            /*if(DAL.EstructuraDAL.PuedeEliminarse(codigoEstructura))
             {
                 DAL.EstructuraDAL.Eliminar(codigoEstructura);
             }
             else
             {
                 throw new Entidades.Excepciones.ElementoEnTransaccionException();
-            }
+            }*/
         }
 
         public static void Actualizar(Data.dsEstructura ds)
