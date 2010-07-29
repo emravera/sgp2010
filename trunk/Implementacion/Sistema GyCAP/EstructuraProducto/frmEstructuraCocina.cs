@@ -148,6 +148,58 @@ namespace GyCAP.UI.EstructuraProducto
 
         #region Datos
 
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            //Revisemos que completó todos los datos obligatorios          
+            bool datosOK = true;
+            if (txtNombre.Text == string.Empty) { datosOK = false; }
+            if (cbPlano.GetSelectedIndex() == -1) { datosOK = false; }
+            if (cbCocina.GetSelectedIndex() == -1) { datosOK = false; }
+            if (cbResponsable.GetSelectedIndex() == -1) { datosOK = false; }
+            if (dtpFechaAlta.IsValueNull()) { datosOK = false; }
+            if (dgvPartes.Rows.Count == 0) { datosOK = false; } //que al menos haya cargado 1 parte
+            if (datosOK)
+            {
+                //Datos OK, revisemos que está haciendo
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
+                {
+                    //Creando uno nuevo
+                    try
+                    {
+                        Data.dsEstructura.ESTRUCTURASRow rowEstructura = dsEstructura.ESTRUCTURAS.NewESTRUCTURASRow();
+                        rowEstructura.BeginEdit();
+                        rowEstructura.ESTR_CODIGO = -1;
+                        rowEstructura.ESTR_NOMBRE = txtNombre.Text;
+                        rowEstructura.PNO_CODIGO = cbPlano.GetSelectedValueInt();
+                        rowEstructura.ESTR_ACTIVO = (chkActivo.Checked) ? BLL.EstructuraBLL.EstructuraActiva : BLL.EstructuraBLL.EstructuraInactiva;
+                        rowEstructura.ESTR_FECHA_ALTA = (DateTime)dtpFechaAlta.GetFecha();
+                        rowEstructura.COC_CODIGO = cbCocina.GetSelectedValueInt();
+                        rowEstructura.PNO_CODIGO = cbCocina.GetSelectedValueInt();
+                        rowEstructura.SetESTR_FECHA_MODIFICACIONNull();
+                        rowEstructura.ESTR_DESCRIPCION = txtDescripcion.Text;
+                        rowEstructura.EndEdit();
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        //Hubo problemas con la BD, descartamos los cambios de conjuntos ya que puede intentar
+                        //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
+                        
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    //Modificando
+                }
+            }
+            else
+            {
+                //le faltan completar datos, avisemos
+                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
+        }
+        
         private void btnVolver_Click(object sender, EventArgs e)
         {
             SetInterface(estadoUI.inicio);
@@ -948,6 +1000,8 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
+
+        
 
         
     }

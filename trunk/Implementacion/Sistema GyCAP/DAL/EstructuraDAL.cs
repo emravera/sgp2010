@@ -467,7 +467,7 @@ namespace GyCAP.DAL
 
         private static void ObtenerDetalleEstructura(Data.dsEstructura dsEstructura)
         {
-            int[] codigosEstructuras = new int[dsEstructura.ESTRUCTURAS.Count];
+            int[] codigosEstructuras = new int[dsEstructura.ESTRUCTURAS.Rows.Count];
             int i = 0;
             foreach (Data.dsEstructura.ESTRUCTURASRow row in dsEstructura.ESTRUCTURAS)
             {

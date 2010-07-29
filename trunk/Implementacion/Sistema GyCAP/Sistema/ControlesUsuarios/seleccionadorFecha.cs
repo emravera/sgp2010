@@ -40,9 +40,9 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         }
         
         /// <summary>
-        /// Determina si hay una fecha seleccionada.
+        /// Determina si hay una fecha seleccionada. true si hay seleccionada, false en caso contrario.
         /// </summary>
-        /// <returns>true fecha seleccionada, false en caso contrario.</returns>
+        /// <returns>true si hay fecha seleccionada, false en caso contrario.</returns>
         public bool IsValueNull()
         {
             return isNull;
