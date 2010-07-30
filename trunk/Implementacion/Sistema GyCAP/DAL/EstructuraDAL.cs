@@ -140,11 +140,11 @@ namespace GyCAP.DAL
                 //Todo ok, commit
                 transaccion.Commit();
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
                 //Error en alguna consulta, descartamos los cambios
                 transaccion.Rollback();
-                throw new Entidades.Excepciones.BaseDeDatosException();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
             }
             finally
             {

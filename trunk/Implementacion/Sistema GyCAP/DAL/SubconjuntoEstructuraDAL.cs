@@ -18,7 +18,7 @@ namespace GyCAP.DAL
                                VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
 
             object[] valorParametros = { subconjuntoEstructura.CodigoEstructura, 
-                                         subconjuntoEstructura.CantidadSubconjunto, 
+                                         subconjuntoEstructura.CodigoSubconjunto, 
                                          subconjuntoEstructura.CantidadSubconjunto, 
                                          subconjuntoEstructura.CodigoGrupo };
 

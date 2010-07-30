@@ -800,12 +800,6 @@
             // nudCantidad
             // 
             this.nudCantidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.nudCantidad.DecimalPlaces = 3;
-            this.nudCantidad.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
             this.nudCantidad.Location = new System.Drawing.Point(3, 30);
             this.nudCantidad.Maximum = new decimal(new int[] {
             1000,
