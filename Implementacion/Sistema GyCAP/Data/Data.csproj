@@ -103,6 +103,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsEstructura.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsMaquina.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsMaquina.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsMarca.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -240,6 +245,17 @@
     </None>
     <None Include="dsEstructura.xss">
       <DependentUpon>dsEstructura.xsd</DependentUpon>
+    </None>
+    <None Include="dsMaquina.xsc">
+      <DependentUpon>dsMaquina.xsd</DependentUpon>
+    </None>
+    <None Include="dsMaquina.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsMaquina.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsMaquina.xss">
+      <DependentUpon>dsMaquina.xsd</DependentUpon>
     </None>
     <None Include="dsMarca.xsc">
       <DependentUpon>dsMarca.xsd</DependentUpon>

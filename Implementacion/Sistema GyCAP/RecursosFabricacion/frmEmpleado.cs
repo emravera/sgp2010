@@ -107,11 +107,11 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvCapacidades.AutoGenerateColumns = false;
             //Agregamos las columnas
             dgvCapacidades.Columns.Add("CEMP_CODIGO", "Código");
-            dgvCapacidades.Columns.Add("CEMP_NOMBRE", "Nombre");
+            dgvCapacidades.Columns.Add("CEMP_NOMBRE", "Capacidades del empleado");
 
             //Seteamos el modo de tamaño de las columnas
             dgvCapacidades.Columns["CEMP_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCapacidades.Columns["CEMP_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvCapacidades.Columns["CEMP_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvCapacidades.Columns["CEMP_CODIGO"].DataPropertyName = "E_CODIGO";
@@ -139,8 +139,15 @@ namespace GyCAP.UI.RecursosFabricacion
             dvSectores = new DataView(dsEmpleado.SECTORES);
             cboSector.SetDatos(dvSectores, "SEC_CODIGO", "SEC_NOMBRE", "Seleccione un Sector...", false);
 
+            BLL.CapacidadEmpleadoBLL.ObtenerTodos(dsEmpleado);
+
+            //Creamos el dataview y lo asignamos a la grilla
+            dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDAD_EMPLEADOS);
+            dvCapacidadEmpleado.Sort = "CEMP_NOMBRE ASC";
+            dgvCapacidades.DataSource = dvCapacidadEmpleado;
+
             //Llenar listView
-            dvListaSectores = new DataView(dsEmpleado.SECTORES);
+            //dvListaSectores = new DataView(dsEmpleado.SECTORES);
 
             //Seteo el maxlenght de los textbox para que no de error en la bd
             txtApellido.MaxLength = 80;
@@ -233,12 +240,12 @@ namespace GyCAP.UI.RecursosFabricacion
         {
             txtApellido.ReadOnly = pValue;
             txtNombre.ReadOnly = pValue;
-            //sfFechaNac.Enabled != pValue;
+            sfFechaNac.Enabled = !pValue;
             //txtFechaNac.ReadOnly = pValue;
             txtLegajo.ReadOnly = pValue;
             txtTelefono.ReadOnly = pValue;
-            cboEstado.Enabled = ! pValue;
-            cboSector.Enabled = ! pValue;
+            cboEstado.Enabled = !pValue;
+            cboSector.Enabled = !pValue;
         }
 
         //Método para evitar la creación de más de una pantalla
@@ -540,12 +547,9 @@ namespace GyCAP.UI.RecursosFabricacion
             cboEstado.SetSelectedValue(int.Parse(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).EE_CODIGO.ToString()));
             sfFechaNac.SetFecha(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_FECHANACIMIENTO);
 
-            //BLL.CapacidadEmpleadoBLL.ObtenerCapacidadPorEmpleado(codigoEmpleado, dsEmpleado);
-
-            //Creamos el dataview y lo asignamos a la grilla
-            //dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDAD_EMPLEADO);
-            //dvCapacidadEmpleado.Sort = "CEMP_NOMBRE ASC";
-            //dgvLista.DataSource = dvCapacidadEmpleado;
+            //dvCapacidadEmpleado.RowFilter = " E_CODIGO = " + codigoEmpleado;
+            dgvCapacidades.Refresh(); 
+            
         }
         
     }

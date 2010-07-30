@@ -22,7 +22,7 @@ namespace GyCAP.UI.RecursosFabricacion
 
 
             //Carga de la Lista de Sectores
-            dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDAD_EMPLEADO);
+            dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDAD_EMPLEADOS);
             lvCapacidades.View = View.Details;
             lvCapacidades.FullRowSelect = true;
             lvCapacidades.MultiSelect = false;

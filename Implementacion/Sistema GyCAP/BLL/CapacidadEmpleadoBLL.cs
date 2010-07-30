@@ -45,6 +45,11 @@ namespace GyCAP.BLL
             DAL.CapacidadEmpleadoDAL.ObtenerCapacidadEmpleado(nombre, dsCapacidadEmpleado);
         }
 
+        public static void ObtenerTodos(Data.dsEmpleado dsEmpleado)
+        {
+            DAL.CapacidadEmpleadoDAL.ObtenerCapacidadEmpleado(dsEmpleado);
+        }
+
         public static void ObtenerCapacidadPorEmpleado(int E_CODIGO, Data.dsEmpleado dsEmpleado)
         {
             DAL.CapacidadEmpleadoDAL.ObtenerCapacidadPorEmpleado(E_CODIGO, dsEmpleado);
