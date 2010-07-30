@@ -27,13 +27,18 @@ namespace GyCAP.DAL
 
             //obtenemos la estructura nueva del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.ESTRUCTURASRow rowEstructura = dsEstructura.ESTRUCTURAS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.ESTRUCTURASRow;
+            //Controlemos los valores que pueden venir nulos
+            object fechaModificacion = DBNull.Value, responsable = DBNull.Value;
+            if (!rowEstructura.IsESTR_FECHA_MODIFICACIONNull()) { fechaModificacion = rowEstructura.ESTR_FECHA_MODIFICACION.Date; }
+            if (!rowEstructura.IsE_CODIGONull()) { responsable = rowEstructura.E_CODIGO; }
+            
             object[] valorParametros = { rowEstructura.ESTR_NOMBRE, 
                                          rowEstructura.COC_CODIGO,
                                          rowEstructura.PNO_CODIGO,
                                          rowEstructura.ESTR_DESCRIPCION,
                                          rowEstructura.ESTR_ACTIVO,
                                          rowEstructura.ESTR_FECHA_ALTA.Date,
-                                         rowEstructura.ESTR_FECHA_MODIFICACION.Date,
+                                         fechaModificacion,
                                          rowEstructura.E_CODIGO };
 
             //Declaramos el objeto transaccion
@@ -56,7 +61,8 @@ namespace GyCAP.DAL
                     grupoE.CodigoEstructura = Convert.ToInt32(rowEstructura.ESTR_CODIGO);
                     grupoE.Numero = Convert.ToInt32(row.GRP_NUMERO);
                     grupoE.NombreGrupo = row.GRP_NOMBRE;
-                    grupoE.CodigoPadre = Convert.ToInt32(row.GRP_PADRE_CODIGO);
+                    if (row.IsGRP_PADRE_CODIGONull()) { grupoE.CodigoPadre = -1; }
+                    else { grupoE.CodigoPadre = Convert.ToInt32(row.GRP_PADRE_CODIGO); }
                     grupoE.Descripcion = row.GRP_DESCRIPCION;
                     grupoE.Concreto = Convert.ToInt32(row.GRP_CONCRETO);
                     GrupoEstructuraDAL.Insertar(grupoE, transaccion);

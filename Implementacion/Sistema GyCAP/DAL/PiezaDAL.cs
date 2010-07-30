@@ -298,6 +298,18 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        public static void ObtenerPiezas(System.Data.DataTable dtPiezas, int estado)
+        {
+            string sql = @"SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, pza_cantidadstock, par_codigo, pno_codigo, pza_codigoparte  
+                          FROM PIEZAS WHERE par_codigo = @p0";
+            object[] valorParametros = { estado };
+            try
+            {
+                DB.FillDataTable(dtPiezas, sql, valorParametros);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
         //Obtiene el detalle de todas las piezas buscadas, de uso interno por el método buscador ObtenerPiezas
         private static void ObtenerDetallePiezas(Data.dsEstructura ds)
         {

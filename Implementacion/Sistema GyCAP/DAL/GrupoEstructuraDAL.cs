@@ -20,9 +20,11 @@ namespace GyCAP.DAL
                                     ,[grp_concreto])
                                     VALUES (@p0, @p1, @p2, @p3, @p4, @p5)";
 
+            object codPadre = DBNull.Value;
+            if (grupo.CodigoPadre != -1) { codPadre = grupo.CodigoPadre; }
             object[] valorParametros = { grupo.Numero, 
                                            grupo.CodigoEstructura, 
-                                           grupo.CodigoPadre, 
+                                           codPadre, 
                                            grupo.NombreGrupo, 
                                            grupo.Descripcion, 
                                            grupo.Concreto };

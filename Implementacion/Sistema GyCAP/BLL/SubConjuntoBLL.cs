@@ -13,7 +13,9 @@ namespace GyCAP.BLL
         /// se está ejecutando la aplicación.
         /// </summary>
         private static readonly string directorioImagenes = SistemaBLL.WorkingPath + "BLL\\Img\\SCImg\\";
-        
+        public static readonly int estadoActivo = 1;
+        public static readonly int estadoInactivo = 0;
+
         public static void Insertar(Data.dsEstructura dsEstructura)
         {
             //Si existe lanzamos la excepción correspondiente
@@ -94,6 +96,11 @@ namespace GyCAP.BLL
         public static void ObtenerSubconjuntos(System.Data.DataTable dtSubconjuntos)
         {
             DAL.SubConjuntoDAL.ObtenerSubconjuntos(dtSubconjuntos);
+        }
+
+        public static void ObtenerSubconjuntos(System.Data.DataTable dtSubconjuntos, int estado)
+        {
+            DAL.SubConjuntoDAL.ObtenerSubconjuntos(dtSubconjuntos, estado);
         }
         
         /*public static void ObtenerTodos(Data.dsEstructura ds)

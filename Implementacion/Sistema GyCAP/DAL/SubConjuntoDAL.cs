@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace GyCAP.DAL
 {
     public class SubConjuntoDAL
     {
+        public static readonly int estadoActivo = 1;
+        public static readonly int estadoInactivo = 0;
+        
         public static void Insertar(Data.dsEstructura dsEstructura)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
@@ -178,16 +182,28 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static void ObtenerSubconjuntos(System.Data.DataTable dtSubconjuntos)
+        public static void ObtenerSubconjuntos(DataTable dtSubconjuntos)
         {
             string sql = @"SELECT sconj_codigo, sconj_nombre, te_codigo, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo, sconj_codigoparte  
-                        FROM SUBCONJUNTOS";
+                         FROM SUBCONJUNTOS";
 
             try
             {
                 DB.FillDataTable(dtSubconjuntos, sql, null);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
+        public static void ObtenerSubconjuntos(DataTable dtSubconjuntos, int estado)
+        {
+            string sql = @"SELECT sconj_codigo, sconj_nombre, te_codigo, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo, sconj_codigoparte  
+                         FROM SUBCONJUNTOS WHERE par_codigo = @p0";
+            object[] valorParametros = { estado };
+            try
+            {
+                DB.FillDataTable(dtSubconjuntos, sql, valorParametros);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
         
         public static void ObtenerSubconjuntos(object nombre, object codTerminacion, Data.dsEstructura ds, bool obtenerDetalle)
@@ -330,7 +346,7 @@ namespace GyCAP.DAL
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
         public static Entidades.SubConjunto ObtenerSubconjunto(int codigoSubconjunto)
         {
-            string sql = @"SELECT sconj_nombre, te_terminacion, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo, sconj_codigoparte 
+            string sql = @"SELECT sconj_nombre, te_codigo, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo, sconj_codigoparte 
                          FROM SUBCONJUNTOS WHERE sconj_codigo = @p0";
             object[] valorParametros = { codigoSubconjunto };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
@@ -356,5 +372,7 @@ namespace GyCAP.DAL
             }
             return subconjunto;
         }
+
+
     }
 }

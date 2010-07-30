@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Data;
 
 namespace GyCAP.BLL
 {
     public class ConjuntoBLL
     {
+        public static readonly int estadoActivo = 1;
+        public static readonly int estadoInactivo = 0;      
+        
         /// <summary>
         /// Setea el directorio que contiene las imágenes de los conjuntos en base al directorio en que
         /// se está ejecutando la aplicación.
@@ -163,6 +167,16 @@ namespace GyCAP.BLL
                 return imagen;
             }
             catch (System.IO.FileNotFoundException) { return BLL.Properties.Resources.sinimagen; }            
+        }
+
+        public static void ObtenerConjuntos(DataTable dtConjunto)
+        {
+            DAL.ConjuntoDAL.ObtenerConjuntos(dtConjunto);
+        }
+
+        public static void ObtenerConjuntos(DataTable dtConjunto, int estado)
+        {
+            DAL.ConjuntoDAL.ObtenerConjuntos(dtConjunto, estado);
         }
     }
 }

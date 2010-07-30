@@ -11,7 +11,7 @@ namespace GyCAP.Entidades.Excepciones
                 
         public BaseDeDatosException() : base("Ocurrió un error con la base de datos.") {}
 
-        public BaseDeDatosException(string mensaje) : base("Ocurrió un error con la base de datos.\\n\\nError: " + mensaje) { }
+        public BaseDeDatosException(string mensaje) : base("Ocurrió un error con la base de datos.\n\nError: " + mensaje) { }
 
         public void SetMensajeExtendido(string mensaje)
         {

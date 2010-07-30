@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace GyCAP.DAL
 {
     public class ConjuntoDAL
     {
-               
+        public static readonly int estadoActivo = 1;
+        public static readonly int estadoInactivo = 0;
+
         public static void Insertar(Data.dsEstructura dsEstructura)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
@@ -208,7 +211,7 @@ namespace GyCAP.DAL
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
         public static Entidades.Conjunto ObtenerConjunto(int codigoConjunto)
         {
-            string sql = @"SELECT conj_nombre, te_terminacion, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo, conj_codigoparte
+            string sql = @"SELECT conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo, conj_codigoparte
                         FROM CONJUNTOS WHERE conj_codigo = @p0";
             object[] valorParametros = { codigoConjunto };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
@@ -352,6 +355,32 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             catch (Entidades.Excepciones.ElementoInexistenteException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
+        public static void ObtenerConjuntos(DataTable dtConjuntos)
+        {
+            string sql = @"SELECT conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo, conj_codigoparte
+                        FROM CONJUNTOS";
+            
+            try
+            {
+                DB.FillDataTable(dtConjuntos, sql, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static void ObtenerConjuntos(DataTable dtConjuntos, int estado)
+        {
+            string sql = @"SELECT conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo, conj_codigoparte
+                        FROM CONJUNTOS WHERE par_codigo = @p0 ";
+
+            object[] valorParametros = { estado };
+
+            try
+            {
+                DB.FillDataTable(dtConjuntos, sql, valorParametros);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
         
     }

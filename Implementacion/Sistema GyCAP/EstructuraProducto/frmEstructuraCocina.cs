@@ -281,15 +281,408 @@ namespace GyCAP.UI.EstructuraProducto
         #endregion
 
         #region Conjuntos
+
+        private void btnAC_Click(object sender, EventArgs e)
+        {
+            if (dgvCD.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0 && nudC.Value > 0)
+            {
+                bool agregarConjunto; //variable que indica si se debe agregar el conjunto al listado
+                //Obtenemos el código del conjunto según sea nuevo o modificado, lo hacemos acá porque lo vamos a usar mucho
+                int codigoEstructura;
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { codigoEstructura = -1; }
+                else { codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]); }
+                //Obtenemos el código del conjunto, también lo vamos a usar mucho
+                int codigoConjunto = Convert.ToInt32(dvCD[dgvCD.SelectedRows[0].Index]["conj_codigo"]);
+
+                //Primero vemos si la estructura tiene algún conjunto cargado, como ya hemos filtrado el dataview
+                //esté sabrá decirnos cuantas filas tiene la estructura seleccionado                
+                if (dvCE.Count > 0)
+                {
+                    //Algo tiene, comprobemos que no intente agregar el mismo conjunto haciendo una consulta al dataset,
+                    //no usamos el dataview porque no queremos volver a filtrar los datos y perderlos
+                    string filtro = "estr_codigo = " + codigoEstructura + " AND conj_codigo = " + codigoConjunto;
+                    Data.dsEstructura.CONJUNTOSXESTRUCTURARow[] rows =
+                        (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select(filtro);
+                    if (rows.Length > 0)
+                    {
+                        //Ya lo ha agregado, preguntemos si quiere aumentar la cantidad existente o descartar
+                        DialogResult respuesta = MessageBox.Show("La estructura ya posee el conjunto seleccionado. ¿Desea sumar la cantidad ingresada?", "Pregunta: Confirmar acción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (respuesta == DialogResult.Yes)
+                        {
+                            //Sumemos la cantidad ingresada a la existente, como hay una sola fila seleccionamos la 0 del array
+                            rows[0].CXE_CANTIDAD += nudC.Value;
+                        }
+                        //Como ya existe marcamos que no debe agregarse
+                        agregarConjunto = false;
+                    }
+                    else
+                    {
+                        //No lo ha agregado, marcamos que debe agregarse
+                        agregarConjunto = true;
+                    }
+                }
+                else
+                {
+                    //No tiene ningún conjunto agregado, marcamos que debe agregarse
+                    agregarConjunto = true;
+                }
+
+                //Ahora comprobamos si debe agregarse el conjunto o no
+                if (agregarConjunto)
+                {
+                    Data.dsEstructura.CONJUNTOSXESTRUCTURARow row = dsEstructura.CONJUNTOSXESTRUCTURA.NewCONJUNTOSXESTRUCTURARow();
+                    row.BeginEdit();
+                    //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
+                    row.CXE_CODIGO = cxe--; //-- para que se vaya autodecrementando en cada inserción
+                    row.ESTR_CODIGO = codigoEstructura;
+                    row.CONJ_CODIGO = codigoConjunto;
+                    row.CXE_CANTIDAD = nudC.Value;
+                    row.GRP_CODIGO = -1;
+                    row.EndEdit();
+                    //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
+                    //todavia no vamos a insertar en la db hasta que no haga Guardar
+                    dsEstructura.CONJUNTOSXESTRUCTURA.AddCONJUNTOSXESTRUCTURARow(row);
+                }
+                nudC.Value = 0;
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Conjunto de la lista y asignarle un valor mayor a 0.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnEC_Click(object sender, EventArgs e)
+        {
+            if (dgvCE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Obtenemos el código
+                int codigoC = Convert.ToInt32(dvCE[dgvCE.SelectedRows[0].Index]["cxe_codigo"]);
+                //Lo borramos pero sólo del dataset
+                dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoC).Delete();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Conjunto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnSC_Click(object sender, EventArgs e)
+        {
+            if (dgvCE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int codigoCXE = Convert.ToInt32(dvCE[dgvCE.SelectedRows[0].Index]["cxe_codigo"]);
+                dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CXE_CANTIDAD += 1;
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Conjunto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnRC_Click(object sender, EventArgs e)
+        {
+            if (dgvCE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int codigoCXE = Convert.ToInt32(dvCE[dgvCE.SelectedRows[0].Index]["cxe_codigo"]);
+                dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CXE_CANTIDAD -= 1;
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Conjunto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         #endregion
 
         #region Subconjuntos
+
+        private void btnASC_Click(object sender, EventArgs e)
+        {
+            if (dgvSCD.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0 && nudSC.Value > 0)
+            {
+                bool agregarSubconjunto;
+                int codigoEstructura;
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { codigoEstructura = -1; }
+                else { codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]); }
+                int codigoSubconjunto = Convert.ToInt32(dvSCD[dgvSCD.SelectedRows[0].Index]["sconj_codigo"]);
+
+                if (dvSCE.Count > 0)
+                {
+                    string filtro = "estr_codigo = " + codigoEstructura + " AND sconj_codigo = " + codigoSubconjunto;
+                    Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow[] rows =
+                        (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow[])dsEstructura.SUBCONJUNTOSXESTRUCTURA.Select(filtro);
+                    if (rows.Length > 0)
+                    {
+                        DialogResult respuesta = MessageBox.Show("La estructura ya posee el subconjunto seleccionado. ¿Desea sumar la cantidad ingresada?", "Pregunta: Confirmar acción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (respuesta == DialogResult.Yes)
+                        {
+                            rows[0].SCXE_CANTIDAD += nudSC.Value;
+                        }
+                        agregarSubconjunto = false;
+                    }
+                    else
+                    {
+                        agregarSubconjunto = true;
+                    }
+                }
+                else
+                {
+                    agregarSubconjunto = true;
+                }
+
+                if (agregarSubconjunto)
+                {
+                    Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow row = dsEstructura.SUBCONJUNTOSXESTRUCTURA.NewSUBCONJUNTOSXESTRUCTURARow();
+                    row.BeginEdit();
+                    row.SCXE_CODIGO = scxe--;
+                    row.ESTR_CODIGO = codigoEstructura;
+                    row.SCONJ_CODIGO = codigoSubconjunto;
+                    row.SCXE_CANTIDAD = nudSC.Value;
+                    row.GRP_CODIGO = -1;
+                    row.EndEdit();
+                    dsEstructura.SUBCONJUNTOSXESTRUCTURA.AddSUBCONJUNTOSXESTRUCTURARow(row);
+                }
+                nudSC.Value = 0;
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Subconjunto de la lista y asignarle un valor mayor a 0.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnESC_Click(object sender, EventArgs e)
+        {
+            if (dgvSCE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int codigoSC = Convert.ToInt32(dvSCE[dgvSCE.SelectedRows[0].Index]["scxe_codigo"]);
+                dsEstructura.SUBCONJUNTOSXESTRUCTURA.FindBySCXE_CODIGO(codigoSC).Delete();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Subconjunto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnSSC_Click(object sender, EventArgs e)
+        {
+            if (dgvSCE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int codigoSCXE = Convert.ToInt32(dvSCE[dgvSCE.SelectedRows[0].Index]["scxe_codigo"]);
+                dsEstructura.SUBCONJUNTOSXESTRUCTURA.FindBySCXE_CODIGO(codigoSCXE).SCXE_CANTIDAD += 1;
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Subconjunto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnRSC_Click(object sender, EventArgs e)
+        {
+            if (dgvSCE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int codigoSCXE = Convert.ToInt32(dvSCE[dgvSCE.SelectedRows[0].Index]["scxe_codigo"]);
+                dsEstructura.SUBCONJUNTOSXESTRUCTURA.FindBySCXE_CODIGO(codigoSCXE).SCXE_CANTIDAD -= 1;
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Subconjunto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         #endregion
 
         #region Piezas
+
+        private void btnAP_Click(object sender, EventArgs e)
+        {
+            if (dgvPD.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0 && nudP.Value > 0)
+            {
+                bool agregarPieza;
+                int codigoEstructura;
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { codigoEstructura = -1; }
+                else { codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]); }
+                int codigoPieza = Convert.ToInt32(dvPD[dgvPD.SelectedRows[0].Index]["pza_codigo"]);
+
+                if (dvPE.Count > 0)
+                {
+                    string filtro = "estr_codigo = " + codigoEstructura + " AND pza_codigo = " + codigoPieza;
+                    Data.dsEstructura.PIEZASXESTRUCTURARow[] rows =
+                        (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select(filtro);
+                    if (rows.Length > 0)
+                    {
+                        DialogResult respuesta = MessageBox.Show("La estructura ya posee la pieza seleccionada. ¿Desea sumar la cantidad ingresada?", "Pregunta: Confirmar acción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (respuesta == DialogResult.Yes)
+                        {
+                            rows[0].PXE_CANTIDAD += nudP.Value;
+                        }
+                        agregarPieza = false;
+                    }
+                    else
+                    {
+                        agregarPieza = true;
+                    }
+                }
+                else
+                {
+                    agregarPieza = true;
+                }
+
+                if (agregarPieza)
+                {
+                    Data.dsEstructura.PIEZASXESTRUCTURARow row = dsEstructura.PIEZASXESTRUCTURA.NewPIEZASXESTRUCTURARow();
+                    row.BeginEdit();
+                    row.PXE_CODIGO = pxe--;
+                    row.ESTR_CODIGO = codigoEstructura;
+                    row.PZA_CODIGO = codigoPieza;
+                    row.PXE_CANTIDAD = nudP.Value;
+                    row.GRP_CODIGO = -1;
+                    row.EndEdit();
+                    dsEstructura.PIEZASXESTRUCTURA.AddPIEZASXESTRUCTURARow(row);
+                }
+                nudP.Value = 0;
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una Pieza de la lista y asignarle un valor mayor a 0.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnEP_Click(object sender, EventArgs e)
+        {
+            if (dgvPE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int codigoP = Convert.ToInt32(dvPE[dgvPE.SelectedRows[0].Index]["pxe_codigo"]);
+                dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoP).Delete();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una Pieza de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnSP_Click(object sender, EventArgs e)
+        {
+            if (dgvPE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int codigoPXE = Convert.ToInt32(dvPE[dgvPE.SelectedRows[0].Index]["pxe_codigo"]);
+                dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoPXE).PXE_CANTIDAD += 1;
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una Pieza de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnRP_Click(object sender, EventArgs e)
+        {
+            if (dgvPE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int codigoPXE = Convert.ToInt32(dvPE[dgvPE.SelectedRows[0].Index]["pxe_codigo"]);
+                dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoPXE).PXE_CANTIDAD -= 1;
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una Pieza de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         #endregion
 
         #region Materia Prima
+
+        private void btnAMP_Click(object sender, EventArgs e)
+        {
+            if (dgvMPD.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0 && nudMP.Value > 0)
+            {
+                bool agregarMateriaPrima;
+                int codigoEstructura;
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { codigoEstructura = -1; }
+                else { codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]); }
+                int codigoMateriaPrima = Convert.ToInt32(dvMPD[dgvMPD.SelectedRows[0].Index]["mp_codigo"]);
+
+                if (dvMPE.Count > 0)
+                {
+                    string filtro = "estr_codigo = " + codigoEstructura + " AND mp_codigo = " + codigoMateriaPrima;
+                    Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow[] rows =
+                        (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow[])dsEstructura.MATERIASPRIMASXESTRUCTURA.Select(filtro);
+                    if (rows.Length > 0)
+                    {
+                        DialogResult respuesta = MessageBox.Show("La estructura ya posee la materia prima seleccionada. ¿Desea sumar la cantidad ingresada?", "Pregunta: Confirmar acción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (respuesta == DialogResult.Yes)
+                        {
+                            rows[0].MPXE_CANTIDAD += nudMP.Value;
+                        }
+                        agregarMateriaPrima = false;
+                    }
+                    else
+                    {
+                        agregarMateriaPrima = true;
+                    }
+                }
+                else
+                {
+                    agregarMateriaPrima = true;
+                }
+
+                if (agregarMateriaPrima)
+                {
+                    Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow row = dsEstructura.MATERIASPRIMASXESTRUCTURA.NewMATERIASPRIMASXESTRUCTURARow();
+                    row.BeginEdit();
+                    row.MPXE_CODIGO = mpxe--;
+                    row.ESTR_CODIGO = codigoEstructura;
+                    row.MP_CODIGO = codigoMateriaPrima;
+                    row.MPXE_CANTIDAD = nudMP.Value;
+                    row.GRP_CODIGO = -1;
+                    row.EndEdit();
+                    dsEstructura.MATERIASPRIMASXESTRUCTURA.AddMATERIASPRIMASXESTRUCTURARow(row);
+                }
+                nudMP.Value = 0;
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una materia prima de la lista y asignarle un valor mayor a 0.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnEMP_Click(object sender, EventArgs e)
+        {
+            if (dgvMPE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int codigoMP = Convert.ToInt32(dvMPE[dgvMPE.SelectedRows[0].Index]["mpxe_codigo"]);
+                dsEstructura.MATERIASPRIMASXESTRUCTURA.FindByMPXE_CODIGO(codigoMP).Delete();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una materia prima de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnSMP_Click(object sender, EventArgs e)
+        {
+            if (dgvMPE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int codigoMPXE = Convert.ToInt32(dvMPE[dgvMPE.SelectedRows[0].Index]["mpxe_codigo"]);
+                dsEstructura.MATERIASPRIMASXESTRUCTURA.FindByMPXE_CODIGO(codigoMPXE).MPXE_CANTIDAD += 1;
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una materia prima de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnRMP_Click(object sender, EventArgs e)
+        {
+            if (dgvMPE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int codigoMPXE = Convert.ToInt32(dvMPE[dgvMPE.SelectedRows[0].Index]["mpxe_codigo"]);
+                dsEstructura.MATERIASPRIMASXESTRUCTURA.FindByMPXE_CODIGO(codigoMPXE).MPXE_CANTIDAD -= 1;
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una materia prima de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         #endregion
 
         #region Árbol
@@ -451,6 +844,7 @@ namespace GyCAP.UI.EstructuraProducto
                     gbOP.Enabled = true;
                     gbOMP.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
+                    CargarCSCPMP();
                     tcEstructuraCocina.SelectedTab = tpDatos;
                     break;
                 case estadoUI.nuevoExterno:
@@ -486,6 +880,7 @@ namespace GyCAP.UI.EstructuraProducto
                     gbOP.Enabled = true;
                     gbOMP.Enabled = true;
                     estadoInterface = estadoUI.nuevoExterno;
+                    CargarCSCPMP();
                     tcEstructuraCocina.SelectedTab = tpDatos;
                     break;
                 case estadoUI.consultar:
@@ -538,6 +933,7 @@ namespace GyCAP.UI.EstructuraProducto
                     gbOP.Enabled = true;
                     gbOMP.Enabled = true;
                     estadoInterface = estadoUI.modificar;
+                    CargarCSCPMP();
                     tcEstructuraCocina.SelectedTab = tpDatos;
                     break;
                 default:
@@ -557,7 +953,7 @@ namespace GyCAP.UI.EstructuraProducto
             //Obtenemos los datos iniciales necesarios: terminaciones, empleados, cocinas
             try
             {
-                BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsCocina.TERMINACIONES);
+                BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsEstructura.TERMINACIONES);
                 BLL.PlanoBLL.ObtenerTodos(dsEstructura.PLANOS);
                 BLL.CocinaBLL.ObtenerCocinas(dsCocina.COCINAS);
                 BLL.EmpleadoBLL.ObtenerEmpleados(dsEmpleado.EMPLEADOS);
@@ -811,7 +1207,7 @@ namespace GyCAP.UI.EstructuraProducto
                 rowParte.BeginEdit();
                 rowParte.PAR_TIPO = "Conjunto";
                 rowParte.PAR_NOMBRE = row.CONJUNTOSRow.CONJ_NOMBRE;
-                rowParte.PAR_TERMINACION = dsCocina.TERMINACIONES.FindByTE_CODIGO(row.CONJUNTOSRow.TE_CODIGO).TE_NOMBRE;
+                rowParte.PAR_TERMINACION = dsEstructura.TERMINACIONES.FindByTE_CODIGO(row.CONJUNTOSRow.TE_CODIGO).TE_NOMBRE;
                 rowParte.PAR_CANTIDAD = row.CXE_CANTIDAD.ToString();
                 rowParte.EndEdit();
                 dsEstructura.LISTA_PARTES.AddLISTA_PARTESRow(rowParte);
@@ -823,7 +1219,7 @@ namespace GyCAP.UI.EstructuraProducto
                 rowParte.BeginEdit();
                 rowParte.PAR_TIPO = "Subconjunto";
                 rowParte.PAR_NOMBRE = row.SUBCONJUNTOSRow.SCONJ_NOMBRE;
-                rowParte.PAR_TERMINACION = dsCocina.TERMINACIONES.FindByTE_CODIGO(row.SUBCONJUNTOSRow.TE_CODIGO).TE_NOMBRE;
+                rowParte.PAR_TERMINACION = dsEstructura.TERMINACIONES.FindByTE_CODIGO(row.SUBCONJUNTOSRow.TE_CODIGO).TE_NOMBRE;
                 rowParte.PAR_CANTIDAD = row.SCXE_CANTIDAD.ToString();
                 rowParte.EndEdit();
                 dsEstructura.LISTA_PARTES.AddLISTA_PARTESRow(rowParte);
@@ -835,7 +1231,7 @@ namespace GyCAP.UI.EstructuraProducto
                 rowParte.BeginEdit();
                 rowParte.PAR_TIPO = "Pieza";
                 rowParte.PAR_NOMBRE = row.PIEZASRow.PZA_NOMBRE;
-                rowParte.PAR_TERMINACION = dsCocina.TERMINACIONES.FindByTE_CODIGO(row.PIEZASRow.TE_CODIGO).TE_NOMBRE;
+                rowParte.PAR_TERMINACION = dsEstructura.TERMINACIONES.FindByTE_CODIGO(row.PIEZASRow.TE_CODIGO).TE_NOMBRE;
                 rowParte.PAR_CANTIDAD = row.PXE_CANTIDAD.ToString();
                 rowParte.EndEdit();
                 dsEstructura.LISTA_PARTES.AddLISTA_PARTESRow(rowParte);
@@ -857,6 +1253,35 @@ namespace GyCAP.UI.EstructuraProducto
         private void frmEstructuraCocina_Activated(object sender, EventArgs e)
         {
             if (txtNombreBuscar.Enabled) { txtNombreBuscar.Focus(); }
+        }
+
+        private void CargarCSCPMP()
+        {
+            try
+            {
+                BLL.ConjuntoBLL.ObtenerConjuntos(dsEstructura.CONJUNTOS, BLL.ConjuntoBLL.estadoActivo);
+                BLL.SubConjuntoBLL.ObtenerSubconjuntos(dsEstructura.SUBCONJUNTOS, BLL.SubConjuntoBLL.estadoActivo);
+                BLL.PiezaBLL.ObtenerPiezas(dsEstructura.PIEZAS, BLL.PiezaBLL.estadoActivo);
+                BLL.MateriaPrimaBLL.ObtenerTodos(dsEstructura.MATERIAS_PRIMAS);
+                BLL.UnidadMedidaBLL.ObtenerTodos(dsUnidadMedida.UNIDADES_MEDIDA);
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Carga de partes", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //Agrego el grupo 0 que tiene toda estructura - cambiar de lugar - gonzalo
+            Data.dsEstructura.GRUPOS_ESTRUCTURARow row = dsEstructura.GRUPOS_ESTRUCTURA.NewGRUPOS_ESTRUCTURARow();
+            row.BeginEdit();
+            row.GRP_CODIGO = -1;
+            row.GRP_NOMBRE = "Grupo 0";
+            row.GRP_NUMERO = 0;
+            row.SetGRP_PADRE_CODIGONull();
+            row.GRP_DESCRIPCION = "grupo 0";
+            row.GRP_CONCRETO = 0;
+            row.ESTR_CODIGO = -1;
+            row.EndEdit();
+            dsEstructura.GRUPOS_ESTRUCTURA.AddGRUPOS_ESTRUCTURARow(row);
         }
 
         #endregion Servicios
@@ -1075,116 +1500,6 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
-
-        private void btnAC_Click(object sender, EventArgs e)
-        {
-            if (dgvCD.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0 && nudC.Value > 0)
-            {
-                bool agregarConjunto; //variable que indica si se debe agregar el conjunto al listado
-                //Obtenemos el código del conjunto según sea nuevo o modificado, lo hacemos acá porque lo vamos a usar mucho
-                int codigoEstructura;
-                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { codigoEstructura = -1; }
-                else { codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]); }
-                //Obtenemos el código del conjunto, también lo vamos a usar mucho
-                int codigoConjunto = Convert.ToInt32(dvCD[dgvCD.SelectedRows[0].Index]["conj_codigo"]);
-
-                //Primero vemos si la estructura tiene algún conjunto cargado, como ya hemos filtrado el dataview
-                //esté sabrá decirnos cuantas filas tiene la estructura seleccionado                
-                if (dvCE.Count > 0)
-                {
-                    //Algo tiene, comprobemos que no intente agregar el mismo conjunto haciendo una consulta al dataset,
-                    //no usamos el dataview porque no queremos volver a filtrar los datos y perderlos
-                    string filtro = "estr_codigo = " + codigoEstructura + " AND conj_codigo = " + codigoConjunto;
-                    Data.dsEstructura.CONJUNTOSXESTRUCTURARow[] rows =
-                        (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select(filtro);
-                    if (rows.Length > 0)
-                    {
-                        //Ya lo ha agregado, preguntemos si quiere aumentar la cantidad existente o descartar
-                        DialogResult respuesta = MessageBox.Show("La estructura ya posee el subconjunto seleccionado. ¿Desea sumar la cantidad ingresada?", "Pregunta: Confirmar acción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (respuesta == DialogResult.Yes)
-                        {
-                            //Sumemos la cantidad ingresada a la existente, como hay una sola fila seleccionamos la 0 del array
-                            rows[0].CXE_CANTIDAD += nudC.Value;
-                            nudC.Value = 0;
-                        }
-                        //Como ya existe marcamos que no debe agregarse
-                        agregarConjunto = false;
-                    }
-                    else
-                    {
-                        //No lo ha agregado, marcamos que debe agregarse
-                        agregarConjunto = true;
-                    }
-                }
-                else
-                {
-                    //No tiene ningún conjunto agregado, marcamos que debe agregarse
-                    agregarConjunto = true;
-                }
-
-                //Ahora comprobamos si debe agregarse el conjunto o no
-                if (agregarConjunto)
-                {
-                    Data.dsEstructura.CONJUNTOSXESTRUCTURARow row = dsEstructura.CONJUNTOSXESTRUCTURA.NewCONJUNTOSXESTRUCTURARow();
-                    row.BeginEdit();
-                    //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
-                    row.CXE_CODIGO = cxe--; //-- para que se vaya autodecrementando en cada inserción
-                    row.ESTR_CODIGO = codigoEstructura;
-                    row.CONJ_CODIGO = codigoConjunto;
-                    row.CXE_CANTIDAD = nudC.Value;
-                    row.EndEdit();
-                    //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
-                    //todavia no vamos a insertar en la db hasta que no haga Guardar
-                    dsEstructura.CONJUNTOSXESTRUCTURA.AddCONJUNTOSXESTRUCTURARow(row);
-                    nudC.Value = 0;
-                }
-                nudC.Value = 0;
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar un Conjunto de la lista y asignarle un valor mayor a 0.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void btnEC_Click(object sender, EventArgs e)
-        {
-            if(dgvCE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
-            {
-                //Obtenemos el código
-                int codigoC = Convert.ToInt32(dvCE[dgvCE.SelectedRows[0].Index]["cxe_codigo"]);
-                //Lo borramos pero sólo del dataset
-                dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoC).Delete();
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar un Conjunto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void btnSC_Click(object sender, EventArgs e)
-        {
-            if (dgvCE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
-            {
-                int codigoCXE = Convert.ToInt32(dvCE[dgvCE.SelectedRows[0].Index]["cxe_codigo"]);
-                dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CXE_CANTIDAD += 1;
-            }
-            {
-                MessageBox.Show("Debe seleccionar un Conjunto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void btnRC_Click(object sender, EventArgs e)
-        {
-            if (dgvCE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
-            {
-                int codigoCXE = Convert.ToInt32(dvCE[dgvCE.SelectedRows[0].Index]["cxe_codigo"]);
-                dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CXE_CANTIDAD -= 1;
-            }
-            {
-                MessageBox.Show("Debe seleccionar un Conjunto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
 
         
     }
