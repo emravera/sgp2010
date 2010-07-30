@@ -2,19 +2,22 @@
 <xs:schema id="dsEmpleado" targetNamespace="http://tempuri.org/dsEmpleado.xsd" xmlns:mstns="http://tempuri.org/dsEmpleado.xsd" xmlns="http://tempuri.org/dsEmpleado.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
-      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
           <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ProyectoConnectionString4" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ProyectoConnectionString4 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.GyCAP.Data.Properties.Settings.GlobalReference.Default.ProyectoConnectionString4" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ProyectoConnectionString7" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ProyectoConnectionString7 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.GyCAP.Data.Properties.Settings.GlobalReference.Default.ProyectoConnectionString7" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EMPLEADOSTableAdapter" GeneratorDataComponentClassName="EMPLEADOSTableAdapter" Name="EMPLEADOS" UserDataComponentName="EMPLEADOSTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="ProyectoConnectionString4 (Settings)" DbObjectName="Proyecto.dbo.EMPLEADOS" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="ProyectoConnectionString7 (Settings)" DbObjectName="Proyecto.dbo.EMPLEADOS" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>DELETE FROM [dbo].[EMPLEADOS] WHERE (([E_CODIGO] = @Original_E_CODIGO) AND ([EE_CODIGO] = @Original_EE_CODIGO) AND ((@IsNull_SEC_CODIGO = 1 AND [SEC_CODIGO] IS NULL) OR ([SEC_CODIGO] = @Original_SEC_CODIGO)) AND ((@IsNull_E_APELLIDO = 1 AND [E_APELLIDO] IS NULL) OR ([E_APELLIDO] = @Original_E_APELLIDO)) AND ((@IsNull_E_NOMBRE = 1 AND [E_NOMBRE] IS NULL) OR ([E_NOMBRE] = @Original_E_NOMBRE)) AND ((@IsNull_E_FECHANACIMIENTO = 1 AND [E_FECHANACIMIENTO] IS NULL) OR ([E_FECHANACIMIENTO] = @Original_E_FECHANACIMIENTO)) AND ((@IsNull_E_TELEFONO = 1 AND [E_TELEFONO] IS NULL) OR ([E_TELEFONO] = @Original_E_TELEFONO)) AND ((@IsNull_E_LEGAJO = 1 AND [E_LEGAJO] IS NULL) OR ([E_LEGAJO] = @Original_E_LEGAJO)) AND ((@IsNull_E_FECHA_ALTA = 1 AND [E_FECHA_ALTA] IS NULL) OR ([E_FECHA_ALTA] = @Original_E_FECHA_ALTA)) AND ((@IsNull_E_FECHA_BAJA = 1 AND [E_FECHA_BAJA] IS NULL) OR ([E_FECHA_BAJA] = @Original_E_FECHA_BAJA)))</CommandText>
+                    <CommandText>DELETE FROM [dbo].[EMPLEADOS] WHERE (([E_CODIGO] = @Original_E_CODIGO) AND ((@IsNull_E_LEGAJO = 1 AND [E_LEGAJO] IS NULL) OR ([E_LEGAJO] = @Original_E_LEGAJO)) AND ([EE_CODIGO] = @Original_EE_CODIGO) AND ((@IsNull_SEC_CODIGO = 1 AND [SEC_CODIGO] IS NULL) OR ([SEC_CODIGO] = @Original_SEC_CODIGO)) AND ((@IsNull_E_APELLIDO = 1 AND [E_APELLIDO] IS NULL) OR ([E_APELLIDO] = @Original_E_APELLIDO)) AND ((@IsNull_E_NOMBRE = 1 AND [E_NOMBRE] IS NULL) OR ([E_NOMBRE] = @Original_E_NOMBRE)) AND ((@IsNull_E_FECHANACIMIENTO = 1 AND [E_FECHANACIMIENTO] IS NULL) OR ([E_FECHANACIMIENTO] = @Original_E_FECHANACIMIENTO)) AND ((@IsNull_E_TELEFONO = 1 AND [E_TELEFONO] IS NULL) OR ([E_TELEFONO] = @Original_E_TELEFONO)) AND ((@IsNull_E_FECHA_ALTA = 1 AND [E_FECHA_ALTA] IS NULL) OR ([E_FECHA_ALTA] = @Original_E_FECHA_ALTA)) AND ((@IsNull_E_FECHA_BAJA = 1 AND [E_FECHA_BAJA] IS NULL) OR ([E_FECHA_BAJA] = @Original_E_FECHA_BAJA)))</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_E_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="E_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_E_LEGAJO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="E_LEGAJO" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_E_LEGAJO" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="E_LEGAJO" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_EE_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="EE_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_SEC_CODIGO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="SEC_CODIGO" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_SEC_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="SEC_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
@@ -26,8 +29,6 @@
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@Original_E_FECHANACIMIENTO" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="E_FECHANACIMIENTO" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_E_TELEFONO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="E_TELEFONO" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_E_TELEFONO" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="E_TELEFONO" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_E_LEGAJO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="E_LEGAJO" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_E_LEGAJO" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="E_LEGAJO" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_E_FECHA_ALTA" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="E_FECHA_ALTA" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@Original_E_FECHA_ALTA" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="E_FECHA_ALTA" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_E_FECHA_BAJA" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="E_FECHA_BAJA" SourceColumnNullMapping="true" SourceVersion="Original" />
@@ -37,16 +38,16 @@
                 </DeleteCommand>
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>INSERT INTO [dbo].[EMPLEADOS] ([EE_CODIGO], [SEC_CODIGO], [E_APELLIDO], [E_NOMBRE], [E_FECHANACIMIENTO], [E_TELEFONO], [E_LEGAJO], [E_FECHA_ALTA], [E_FECHA_BAJA]) VALUES (@EE_CODIGO, @SEC_CODIGO, @E_APELLIDO, @E_NOMBRE, @E_FECHANACIMIENTO, @E_TELEFONO, @E_LEGAJO, @E_FECHA_ALTA, @E_FECHA_BAJA);
-SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHANACIMIENTO, E_TELEFONO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA FROM EMPLEADOS WHERE (E_CODIGO = SCOPE_IDENTITY())</CommandText>
+                    <CommandText>INSERT INTO [dbo].[EMPLEADOS] ([E_LEGAJO], [EE_CODIGO], [SEC_CODIGO], [E_APELLIDO], [E_NOMBRE], [E_FECHANACIMIENTO], [E_TELEFONO], [E_FECHA_ALTA], [E_FECHA_BAJA]) VALUES (@E_LEGAJO, @EE_CODIGO, @SEC_CODIGO, @E_APELLIDO, @E_NOMBRE, @E_FECHANACIMIENTO, @E_TELEFONO, @E_FECHA_ALTA, @E_FECHA_BAJA);
+SELECT E_CODIGO, E_LEGAJO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHANACIMIENTO, E_TELEFONO, E_FECHA_ALTA, E_FECHA_BAJA FROM EMPLEADOS WHERE (E_CODIGO = SCOPE_IDENTITY())</CommandText>
                     <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@E_LEGAJO" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="E_LEGAJO" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@EE_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="EE_CODIGO" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@SEC_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="SEC_CODIGO" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@E_APELLIDO" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="E_APELLIDO" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@E_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="E_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@E_FECHANACIMIENTO" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="E_FECHANACIMIENTO" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@E_TELEFONO" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="E_TELEFONO" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@E_LEGAJO" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="E_LEGAJO" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@E_FECHA_ALTA" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="E_FECHA_ALTA" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@E_FECHA_BAJA" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="E_FECHA_BAJA" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
@@ -54,25 +55,27 @@ SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHANACIMIENTO,
                 </InsertCommand>
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHANACIMIENTO, E_TELEFONO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA FROM dbo.EMPLEADOS</CommandText>
+                    <CommandText>SELECT E_CODIGO, E_LEGAJO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHANACIMIENTO, E_TELEFONO, E_FECHA_ALTA, E_FECHA_BAJA FROM dbo.EMPLEADOS</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>UPDATE [dbo].[EMPLEADOS] SET [EE_CODIGO] = @EE_CODIGO, [SEC_CODIGO] = @SEC_CODIGO, [E_APELLIDO] = @E_APELLIDO, [E_NOMBRE] = @E_NOMBRE, [E_FECHANACIMIENTO] = @E_FECHANACIMIENTO, [E_TELEFONO] = @E_TELEFONO, [E_LEGAJO] = @E_LEGAJO, [E_FECHA_ALTA] = @E_FECHA_ALTA, [E_FECHA_BAJA] = @E_FECHA_BAJA WHERE (([E_CODIGO] = @Original_E_CODIGO) AND ([EE_CODIGO] = @Original_EE_CODIGO) AND ((@IsNull_SEC_CODIGO = 1 AND [SEC_CODIGO] IS NULL) OR ([SEC_CODIGO] = @Original_SEC_CODIGO)) AND ((@IsNull_E_APELLIDO = 1 AND [E_APELLIDO] IS NULL) OR ([E_APELLIDO] = @Original_E_APELLIDO)) AND ((@IsNull_E_NOMBRE = 1 AND [E_NOMBRE] IS NULL) OR ([E_NOMBRE] = @Original_E_NOMBRE)) AND ((@IsNull_E_FECHANACIMIENTO = 1 AND [E_FECHANACIMIENTO] IS NULL) OR ([E_FECHANACIMIENTO] = @Original_E_FECHANACIMIENTO)) AND ((@IsNull_E_TELEFONO = 1 AND [E_TELEFONO] IS NULL) OR ([E_TELEFONO] = @Original_E_TELEFONO)) AND ((@IsNull_E_LEGAJO = 1 AND [E_LEGAJO] IS NULL) OR ([E_LEGAJO] = @Original_E_LEGAJO)) AND ((@IsNull_E_FECHA_ALTA = 1 AND [E_FECHA_ALTA] IS NULL) OR ([E_FECHA_ALTA] = @Original_E_FECHA_ALTA)) AND ((@IsNull_E_FECHA_BAJA = 1 AND [E_FECHA_BAJA] IS NULL) OR ([E_FECHA_BAJA] = @Original_E_FECHA_BAJA)));
-SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHANACIMIENTO, E_TELEFONO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA FROM EMPLEADOS WHERE (E_CODIGO = @E_CODIGO)</CommandText>
+                    <CommandText>UPDATE [dbo].[EMPLEADOS] SET [E_LEGAJO] = @E_LEGAJO, [EE_CODIGO] = @EE_CODIGO, [SEC_CODIGO] = @SEC_CODIGO, [E_APELLIDO] = @E_APELLIDO, [E_NOMBRE] = @E_NOMBRE, [E_FECHANACIMIENTO] = @E_FECHANACIMIENTO, [E_TELEFONO] = @E_TELEFONO, [E_FECHA_ALTA] = @E_FECHA_ALTA, [E_FECHA_BAJA] = @E_FECHA_BAJA WHERE (([E_CODIGO] = @Original_E_CODIGO) AND ((@IsNull_E_LEGAJO = 1 AND [E_LEGAJO] IS NULL) OR ([E_LEGAJO] = @Original_E_LEGAJO)) AND ([EE_CODIGO] = @Original_EE_CODIGO) AND ((@IsNull_SEC_CODIGO = 1 AND [SEC_CODIGO] IS NULL) OR ([SEC_CODIGO] = @Original_SEC_CODIGO)) AND ((@IsNull_E_APELLIDO = 1 AND [E_APELLIDO] IS NULL) OR ([E_APELLIDO] = @Original_E_APELLIDO)) AND ((@IsNull_E_NOMBRE = 1 AND [E_NOMBRE] IS NULL) OR ([E_NOMBRE] = @Original_E_NOMBRE)) AND ((@IsNull_E_FECHANACIMIENTO = 1 AND [E_FECHANACIMIENTO] IS NULL) OR ([E_FECHANACIMIENTO] = @Original_E_FECHANACIMIENTO)) AND ((@IsNull_E_TELEFONO = 1 AND [E_TELEFONO] IS NULL) OR ([E_TELEFONO] = @Original_E_TELEFONO)) AND ((@IsNull_E_FECHA_ALTA = 1 AND [E_FECHA_ALTA] IS NULL) OR ([E_FECHA_ALTA] = @Original_E_FECHA_ALTA)) AND ((@IsNull_E_FECHA_BAJA = 1 AND [E_FECHA_BAJA] IS NULL) OR ([E_FECHA_BAJA] = @Original_E_FECHA_BAJA)));
+SELECT E_CODIGO, E_LEGAJO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHANACIMIENTO, E_TELEFONO, E_FECHA_ALTA, E_FECHA_BAJA FROM EMPLEADOS WHERE (E_CODIGO = @E_CODIGO)</CommandText>
                     <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@E_LEGAJO" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="E_LEGAJO" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@EE_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="EE_CODIGO" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@SEC_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="SEC_CODIGO" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@E_APELLIDO" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="E_APELLIDO" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@E_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="E_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@E_FECHANACIMIENTO" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="E_FECHANACIMIENTO" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@E_TELEFONO" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="E_TELEFONO" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@E_LEGAJO" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="E_LEGAJO" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@E_FECHA_ALTA" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="E_FECHA_ALTA" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@E_FECHA_BAJA" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="E_FECHA_BAJA" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_E_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="E_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_E_LEGAJO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="E_LEGAJO" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_E_LEGAJO" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="E_LEGAJO" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_EE_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="EE_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_SEC_CODIGO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="SEC_CODIGO" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_SEC_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="SEC_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
@@ -84,8 +87,6 @@ SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHANACIMIENTO,
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@Original_E_FECHANACIMIENTO" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="E_FECHANACIMIENTO" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_E_TELEFONO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="E_TELEFONO" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_E_TELEFONO" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="E_TELEFONO" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_E_LEGAJO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="E_LEGAJO" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_E_LEGAJO" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="E_LEGAJO" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_E_FECHA_ALTA" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="E_FECHA_ALTA" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@Original_E_FECHA_ALTA" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="E_FECHA_ALTA" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_E_FECHA_BAJA" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="E_FECHA_BAJA" SourceColumnNullMapping="true" SourceVersion="Original" />
@@ -98,21 +99,77 @@ SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHANACIMIENTO,
             </MainSource>
             <Mappings>
               <Mapping SourceColumn="E_CODIGO" DataSetColumn="E_CODIGO" />
+              <Mapping SourceColumn="E_LEGAJO" DataSetColumn="E_LEGAJO" />
               <Mapping SourceColumn="EE_CODIGO" DataSetColumn="EE_CODIGO" />
               <Mapping SourceColumn="SEC_CODIGO" DataSetColumn="SEC_CODIGO" />
               <Mapping SourceColumn="E_APELLIDO" DataSetColumn="E_APELLIDO" />
               <Mapping SourceColumn="E_NOMBRE" DataSetColumn="E_NOMBRE" />
               <Mapping SourceColumn="E_FECHANACIMIENTO" DataSetColumn="E_FECHANACIMIENTO" />
               <Mapping SourceColumn="E_TELEFONO" DataSetColumn="E_TELEFONO" />
-              <Mapping SourceColumn="E_LEGAJO" DataSetColumn="E_LEGAJO" />
               <Mapping SourceColumn="E_FECHA_ALTA" DataSetColumn="E_FECHA_ALTA" />
               <Mapping SourceColumn="E_FECHA_BAJA" DataSetColumn="E_FECHA_BAJA" />
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ESTADO_EMPLEADOSTableAdapter" GeneratorDataComponentClassName="ESTADO_EMPLEADOSTableAdapter" Name="ESTADO_EMPLEADOS" UserDataComponentName="ESTADO_EMPLEADOSTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ProyectoConnectionString7 (Settings)" DbObjectName="Proyecto.dbo.ESTADO_EMPLEADOS" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [dbo].[ESTADO_EMPLEADOS] WHERE (([EE_CODIGO] = @Original_EE_CODIGO) AND ((@IsNull_EE_NOMBRE = 1 AND [EE_NOMBRE] IS NULL) OR ([EE_NOMBRE] = @Original_EE_NOMBRE)) AND ((@IsNull_EE_DESCRIPCION = 1 AND [EE_DESCRIPCION] IS NULL) OR ([EE_DESCRIPCION] = @Original_EE_DESCRIPCION)))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_EE_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="EE_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_EE_NOMBRE" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="EE_NOMBRE" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_EE_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="EE_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_EE_DESCRIPCION" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="EE_DESCRIPCION" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_EE_DESCRIPCION" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="EE_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [dbo].[ESTADO_EMPLEADOS] ([EE_NOMBRE], [EE_DESCRIPCION]) VALUES (@EE_NOMBRE, @EE_DESCRIPCION);
+SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODIGO = SCOPE_IDENTITY())</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@EE_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="EE_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@EE_DESCRIPCION" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="EE_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM dbo.ESTADO_EMPLEADOS</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [dbo].[ESTADO_EMPLEADOS] SET [EE_NOMBRE] = @EE_NOMBRE, [EE_DESCRIPCION] = @EE_DESCRIPCION WHERE (([EE_CODIGO] = @Original_EE_CODIGO) AND ((@IsNull_EE_NOMBRE = 1 AND [EE_NOMBRE] IS NULL) OR ([EE_NOMBRE] = @Original_EE_NOMBRE)) AND ((@IsNull_EE_DESCRIPCION = 1 AND [EE_DESCRIPCION] IS NULL) OR ([EE_DESCRIPCION] = @Original_EE_DESCRIPCION)));
+SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODIGO = @EE_CODIGO)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@EE_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="EE_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@EE_DESCRIPCION" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="EE_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_EE_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="EE_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_EE_NOMBRE" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="EE_NOMBRE" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_EE_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="EE_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_EE_DESCRIPCION" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="EE_DESCRIPCION" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_EE_DESCRIPCION" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="EE_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="EE_CODIGO" ColumnName="EE_CODIGO" DataSourceName="" DataTypeServer="numeric" DbType="Decimal" Direction="Input" ParameterName="@EE_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="9" SourceColumn="EE_CODIGO" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="EE_CODIGO" DataSetColumn="EE_CODIGO" />
+              <Mapping SourceColumn="EE_NOMBRE" DataSetColumn="EE_NOMBRE" />
+              <Mapping SourceColumn="EE_DESCRIPCION" DataSetColumn="EE_DESCRIPCION" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SECTORESTableAdapter" GeneratorDataComponentClassName="SECTORESTableAdapter" Name="SECTORES" UserDataComponentName="SECTORESTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="ProyectoConnectionString4 (Settings)" DbObjectName="Proyecto.dbo.SECTORES" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="ProyectoConnectionString7 (Settings)" DbObjectName="Proyecto.dbo.SECTORES" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[SECTORES] WHERE (([SEC_CODIGO] = @Original_SEC_CODIGO) AND ((@IsNull_SEC_NOMBRE = 1 AND [SEC_NOMBRE] IS NULL) OR ([SEC_NOMBRE] = @Original_SEC_NOMBRE)) AND ((@IsNull_SEC_DESCRIPCION = 1 AND [SEC_DESCRIPCION] IS NULL) OR ([SEC_DESCRIPCION] = @Original_SEC_DESCRIPCION)) AND ((@IsNull_SEC_ABREVIATURA = 1 AND [SEC_ABREVIATURA] IS NULL) OR ([SEC_ABREVIATURA] = @Original_SEC_ABREVIATURA)))</CommandText>
@@ -173,100 +230,44 @@ SELECT SEC_CODIGO, SEC_NOMBRE, SEC_DESCRIPCION, SEC_ABREVIATURA FROM SECTORES WH
             </Mappings>
             <Sources />
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ESTADO_EMPLEADOSTableAdapter" GeneratorDataComponentClassName="ESTADO_EMPLEADOSTableAdapter" Name="ESTADO_EMPLEADOS" UserDataComponentName="ESTADO_EMPLEADOSTableAdapter">
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CAPACIDADESXEMPLEADOTableAdapter" GeneratorDataComponentClassName="CAPACIDADESXEMPLEADOTableAdapter" Name="CAPACIDADESXEMPLEADO" UserDataComponentName="CAPACIDADESXEMPLEADOTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="ProyectoConnectionString4 (Settings)" DbObjectName="Proyecto.dbo.ESTADO_EMPLEADOS" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="ProyectoConnectionString7 (Settings)" DbObjectName="Proyecto.dbo.CAPACIDADESXEMPLEADO" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>DELETE FROM [dbo].[ESTADO_EMPLEADOS] WHERE (([EE_CODIGO] = @Original_EE_CODIGO) AND ((@IsNull_EE_NOMBRE = 1 AND [EE_NOMBRE] IS NULL) OR ([EE_NOMBRE] = @Original_EE_NOMBRE)) AND ((@IsNull_EE_DESCRIPCION = 1 AND [EE_DESCRIPCION] IS NULL) OR ([EE_DESCRIPCION] = @Original_EE_DESCRIPCION)))</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_EE_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="EE_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_EE_NOMBRE" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="EE_NOMBRE" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_EE_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="EE_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_EE_DESCRIPCION" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="EE_DESCRIPCION" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_EE_DESCRIPCION" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="EE_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Original" />
-                    </Parameters>
-                  </DbCommand>
-                </DeleteCommand>
-                <InsertCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>INSERT INTO [dbo].[ESTADO_EMPLEADOS] ([EE_NOMBRE], [EE_DESCRIPCION]) VALUES (@EE_NOMBRE, @EE_DESCRIPCION);
-SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODIGO = SCOPE_IDENTITY())</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@EE_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="EE_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@EE_DESCRIPCION" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="EE_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </InsertCommand>
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM dbo.ESTADO_EMPLEADOS</CommandText>
-                    <Parameters />
-                  </DbCommand>
-                </SelectCommand>
-                <UpdateCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>UPDATE [dbo].[ESTADO_EMPLEADOS] SET [EE_NOMBRE] = @EE_NOMBRE, [EE_DESCRIPCION] = @EE_DESCRIPCION WHERE (([EE_CODIGO] = @Original_EE_CODIGO) AND ((@IsNull_EE_NOMBRE = 1 AND [EE_NOMBRE] IS NULL) OR ([EE_NOMBRE] = @Original_EE_NOMBRE)) AND ((@IsNull_EE_DESCRIPCION = 1 AND [EE_DESCRIPCION] IS NULL) OR ([EE_DESCRIPCION] = @Original_EE_DESCRIPCION)));
-SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODIGO = @EE_CODIGO)</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@EE_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="EE_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@EE_DESCRIPCION" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="EE_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_EE_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="EE_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_EE_NOMBRE" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="EE_NOMBRE" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_EE_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="EE_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_EE_DESCRIPCION" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="EE_DESCRIPCION" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_EE_DESCRIPCION" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="EE_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="EE_CODIGO" ColumnName="EE_CODIGO" DataSourceName="" DataTypeServer="numeric" DbType="Decimal" Direction="Input" ParameterName="@EE_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="9" SourceColumn="EE_CODIGO" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </UpdateCommand>
-              </DbSource>
-            </MainSource>
-            <Mappings>
-              <Mapping SourceColumn="EE_CODIGO" DataSetColumn="EE_CODIGO" />
-              <Mapping SourceColumn="EE_NOMBRE" DataSetColumn="EE_NOMBRE" />
-              <Mapping SourceColumn="EE_DESCRIPCION" DataSetColumn="EE_DESCRIPCION" />
-            </Mappings>
-            <Sources />
-          </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CAPACIDADXEMPLEADOTableAdapter" GeneratorDataComponentClassName="CAPACIDADXEMPLEADOTableAdapter" Name="CAPACIDADXEMPLEADO" UserDataComponentName="CAPACIDADXEMPLEADOTableAdapter">
-            <MainSource>
-              <DbSource ConnectionRef="ProyectoConnectionString4 (Settings)" DbObjectName="Proyecto.dbo.CAPACIDADXEMPLEADO" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
-                <DeleteCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>DELETE FROM [dbo].[CAPACIDADXEMPLEADO] WHERE (([CXE_CODIGO] = @Original_CXE_CODIGO) AND ([E_LEGAJO] = @Original_E_LEGAJO) AND ([CEMP_CODIGO] = @Original_CEMP_CODIGO))</CommandText>
+                    <CommandText>DELETE FROM [dbo].[CAPACIDADESXEMPLEADO] WHERE (([CXE_CODIGO] = @Original_CXE_CODIGO) AND ([E_CODIGO] = @Original_E_CODIGO) AND ([CEMP_CODIGO] = @Original_CEMP_CODIGO))</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_CXE_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="CXE_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_E_LEGAJO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="E_LEGAJO" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_E_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="E_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_CEMP_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="CEMP_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
                     </Parameters>
                   </DbCommand>
                 </DeleteCommand>
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>INSERT INTO [dbo].[CAPACIDADXEMPLEADO] ([E_LEGAJO], [CEMP_CODIGO]) VALUES (@E_LEGAJO, @CEMP_CODIGO);
-SELECT CXE_CODIGO, E_LEGAJO, CEMP_CODIGO FROM CAPACIDADXEMPLEADO WHERE (CXE_CODIGO = SCOPE_IDENTITY())</CommandText>
+                    <CommandText>INSERT INTO [dbo].[CAPACIDADESXEMPLEADO] ([E_CODIGO], [CEMP_CODIGO]) VALUES (@E_CODIGO, @CEMP_CODIGO);
+SELECT CXE_CODIGO, E_CODIGO, CEMP_CODIGO FROM CAPACIDADESXEMPLEADO WHERE (CXE_CODIGO = SCOPE_IDENTITY())</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@E_LEGAJO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="E_LEGAJO" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@E_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="E_CODIGO" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@CEMP_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="CEMP_CODIGO" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </InsertCommand>
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT CXE_CODIGO, E_LEGAJO, CEMP_CODIGO FROM dbo.CAPACIDADXEMPLEADO</CommandText>
+                    <CommandText>SELECT CXE_CODIGO, E_CODIGO, CEMP_CODIGO FROM dbo.CAPACIDADESXEMPLEADO</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>UPDATE [dbo].[CAPACIDADXEMPLEADO] SET [E_LEGAJO] = @E_LEGAJO, [CEMP_CODIGO] = @CEMP_CODIGO WHERE (([CXE_CODIGO] = @Original_CXE_CODIGO) AND ([E_LEGAJO] = @Original_E_LEGAJO) AND ([CEMP_CODIGO] = @Original_CEMP_CODIGO));
-SELECT CXE_CODIGO, E_LEGAJO, CEMP_CODIGO FROM CAPACIDADXEMPLEADO WHERE (CXE_CODIGO = @CXE_CODIGO)</CommandText>
+                    <CommandText>UPDATE [dbo].[CAPACIDADESXEMPLEADO] SET [E_CODIGO] = @E_CODIGO, [CEMP_CODIGO] = @CEMP_CODIGO WHERE (([CXE_CODIGO] = @Original_CXE_CODIGO) AND ([E_CODIGO] = @Original_E_CODIGO) AND ([CEMP_CODIGO] = @Original_CEMP_CODIGO));
+SELECT CXE_CODIGO, E_CODIGO, CEMP_CODIGO FROM CAPACIDADESXEMPLEADO WHERE (CXE_CODIGO = @CXE_CODIGO)</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@E_LEGAJO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="E_LEGAJO" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@E_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="E_CODIGO" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@CEMP_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="CEMP_CODIGO" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_CXE_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="CXE_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_E_LEGAJO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="E_LEGAJO" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_E_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="E_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_CEMP_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="CEMP_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="false" AutogeneratedName="CXE_CODIGO" ColumnName="CXE_CODIGO" DataSourceName="" DataTypeServer="numeric" DbType="Decimal" Direction="Input" ParameterName="@CXE_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="9" SourceColumn="CXE_CODIGO" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
@@ -276,17 +277,17 @@ SELECT CXE_CODIGO, E_LEGAJO, CEMP_CODIGO FROM CAPACIDADXEMPLEADO WHERE (CXE_CODI
             </MainSource>
             <Mappings>
               <Mapping SourceColumn="CXE_CODIGO" DataSetColumn="CXE_CODIGO" />
-              <Mapping SourceColumn="E_LEGAJO" DataSetColumn="E_LEGAJO" />
+              <Mapping SourceColumn="E_CODIGO" DataSetColumn="E_CODIGO" />
               <Mapping SourceColumn="CEMP_CODIGO" DataSetColumn="CEMP_CODIGO" />
             </Mappings>
             <Sources />
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CAPACIDAD_EMPLEADOTableAdapter" GeneratorDataComponentClassName="CAPACIDAD_EMPLEADOTableAdapter" Name="CAPACIDAD_EMPLEADO" UserDataComponentName="CAPACIDAD_EMPLEADOTableAdapter">
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CAPACIDAD_EMPLEADOSTableAdapter" GeneratorDataComponentClassName="CAPACIDAD_EMPLEADOSTableAdapter" Name="CAPACIDAD_EMPLEADOS" UserDataComponentName="CAPACIDAD_EMPLEADOSTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="ProyectoConnectionString4 (Settings)" DbObjectName="Proyecto.dbo.CAPACIDAD_EMPLEADO" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="ProyectoConnectionString7 (Settings)" DbObjectName="Proyecto.dbo.CAPACIDAD_EMPLEADOS" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>DELETE FROM [dbo].[CAPACIDAD_EMPLEADO] WHERE (([CEMP_CODIGO] = @Original_CEMP_CODIGO) AND ((@IsNull_CEMP_NOMBRE = 1 AND [CEMP_NOMBRE] IS NULL) OR ([CEMP_NOMBRE] = @Original_CEMP_NOMBRE)) AND ((@IsNull_CEMP_DESCRIPCION = 1 AND [CEMP_DESCRIPCION] IS NULL) OR ([CEMP_DESCRIPCION] = @Original_CEMP_DESCRIPCION)))</CommandText>
+                    <CommandText>DELETE FROM [dbo].[CAPACIDAD_EMPLEADOS] WHERE (([CEMP_CODIGO] = @Original_CEMP_CODIGO) AND ((@IsNull_CEMP_NOMBRE = 1 AND [CEMP_NOMBRE] IS NULL) OR ([CEMP_NOMBRE] = @Original_CEMP_NOMBRE)) AND ((@IsNull_CEMP_DESCRIPCION = 1 AND [CEMP_DESCRIPCION] IS NULL) OR ([CEMP_DESCRIPCION] = @Original_CEMP_DESCRIPCION)))</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_CEMP_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="CEMP_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_CEMP_NOMBRE" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CEMP_NOMBRE" SourceColumnNullMapping="true" SourceVersion="Original" />
@@ -298,8 +299,8 @@ SELECT CXE_CODIGO, E_LEGAJO, CEMP_CODIGO FROM CAPACIDADXEMPLEADO WHERE (CXE_CODI
                 </DeleteCommand>
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>INSERT INTO [dbo].[CAPACIDAD_EMPLEADO] ([CEMP_NOMBRE], [CEMP_DESCRIPCION]) VALUES (@CEMP_NOMBRE, @CEMP_DESCRIPCION);
-SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE (CEMP_CODIGO = SCOPE_IDENTITY())</CommandText>
+                    <CommandText>INSERT INTO [dbo].[CAPACIDAD_EMPLEADOS] ([CEMP_NOMBRE], [CEMP_DESCRIPCION]) VALUES (@CEMP_NOMBRE, @CEMP_DESCRIPCION);
+SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADOS WHERE (CEMP_CODIGO = SCOPE_IDENTITY())</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@CEMP_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="CEMP_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@CEMP_DESCRIPCION" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="CEMP_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -308,14 +309,14 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
                 </InsertCommand>
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM dbo.CAPACIDAD_EMPLEADO</CommandText>
+                    <CommandText>SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM dbo.CAPACIDAD_EMPLEADOS</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>UPDATE [dbo].[CAPACIDAD_EMPLEADO] SET [CEMP_NOMBRE] = @CEMP_NOMBRE, [CEMP_DESCRIPCION] = @CEMP_DESCRIPCION WHERE (([CEMP_CODIGO] = @Original_CEMP_CODIGO) AND ((@IsNull_CEMP_NOMBRE = 1 AND [CEMP_NOMBRE] IS NULL) OR ([CEMP_NOMBRE] = @Original_CEMP_NOMBRE)) AND ((@IsNull_CEMP_DESCRIPCION = 1 AND [CEMP_DESCRIPCION] IS NULL) OR ([CEMP_DESCRIPCION] = @Original_CEMP_DESCRIPCION)));
-SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE (CEMP_CODIGO = @CEMP_CODIGO)</CommandText>
+                    <CommandText>UPDATE [dbo].[CAPACIDAD_EMPLEADOS] SET [CEMP_NOMBRE] = @CEMP_NOMBRE, [CEMP_DESCRIPCION] = @CEMP_DESCRIPCION WHERE (([CEMP_CODIGO] = @Original_CEMP_CODIGO) AND ((@IsNull_CEMP_NOMBRE = 1 AND [CEMP_NOMBRE] IS NULL) OR ([CEMP_NOMBRE] = @Original_CEMP_NOMBRE)) AND ((@IsNull_CEMP_DESCRIPCION = 1 AND [CEMP_DESCRIPCION] IS NULL) OR ([CEMP_DESCRIPCION] = @Original_CEMP_DESCRIPCION)));
+SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADOS WHERE (CEMP_CODIGO = @CEMP_CODIGO)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@CEMP_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="CEMP_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@CEMP_DESCRIPCION" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="CEMP_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -345,23 +346,30 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
   <xs:element name="dsEmpleado" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsEmpleado" msprop:Generator_DataSetName="dsEmpleado" msprop:EnableTableAdapterManager="true">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="EMPLEADOS" msprop:Generator_UserTableName="EMPLEADOS" msprop:Generator_RowDeletedName="EMPLEADOSRowDeleted" msprop:Generator_RowChangedName="EMPLEADOSRowChanged" msprop:Generator_RowClassName="EMPLEADOSRow" msprop:Generator_RowChangingName="EMPLEADOSRowChanging" msprop:Generator_RowEvArgName="EMPLEADOSRowChangeEvent" msprop:Generator_RowEvHandlerName="EMPLEADOSRowChangeEventHandler" msprop:Generator_TableClassName="EMPLEADOSDataTable" msprop:Generator_TableVarName="tableEMPLEADOS" msprop:Generator_RowDeletingName="EMPLEADOSRowDeleting" msprop:Generator_TablePropName="EMPLEADOS">
+        <xs:element name="EMPLEADOS" msprop:Generator_UserTableName="EMPLEADOS" msprop:Generator_RowDeletedName="EMPLEADOSRowDeleted" msprop:Generator_TableClassName="EMPLEADOSDataTable" msprop:Generator_RowChangedName="EMPLEADOSRowChanged" msprop:Generator_RowClassName="EMPLEADOSRow" msprop:Generator_RowChangingName="EMPLEADOSRowChanging" msprop:Generator_RowEvArgName="EMPLEADOSRowChangeEvent" msprop:Generator_RowEvHandlerName="EMPLEADOSRowChangeEventHandler" msprop:Generator_TablePropName="EMPLEADOS" msprop:Generator_TableVarName="tableEMPLEADOS" msprop:Generator_RowDeletingName="EMPLEADOSRowDeleting">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="E_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="E_CODIGO" msprop:Generator_ColumnPropNameInRow="E_CODIGO" msprop:Generator_ColumnVarNameInTable="columnE_CODIGO" msprop:Generator_ColumnPropNameInTable="E_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="E_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="E_CODIGO" msprop:Generator_ColumnPropNameInRow="E_CODIGO" msprop:Generator_ColumnVarNameInTable="columnE_CODIGO" msprop:Generator_ColumnPropNameInTable="E_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="E_LEGAJO" msprop:Generator_UserColumnName="E_LEGAJO" msprop:Generator_ColumnPropNameInRow="E_LEGAJO" msprop:Generator_ColumnVarNameInTable="columnE_LEGAJO" msprop:Generator_ColumnPropNameInTable="E_LEGAJOColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
               <xs:element name="EE_CODIGO" msprop:Generator_UserColumnName="EE_CODIGO" msprop:Generator_ColumnPropNameInRow="EE_CODIGO" msprop:Generator_ColumnVarNameInTable="columnEE_CODIGO" msprop:Generator_ColumnPropNameInTable="EE_CODIGOColumn" type="xs:decimal" />
               <xs:element name="SEC_CODIGO" msprop:Generator_UserColumnName="SEC_CODIGO" msprop:Generator_ColumnPropNameInRow="SEC_CODIGO" msprop:Generator_ColumnVarNameInTable="columnSEC_CODIGO" msprop:Generator_ColumnPropNameInTable="SEC_CODIGOColumn" type="xs:decimal" minOccurs="0" />
               <xs:element name="E_APELLIDO" msprop:Generator_UserColumnName="E_APELLIDO" msprop:Generator_ColumnPropNameInRow="E_APELLIDO" msprop:Generator_ColumnVarNameInTable="columnE_APELLIDO" msprop:Generator_ColumnPropNameInTable="E_APELLIDOColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="25" />
+                    <xs:maxLength value="80" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
               <xs:element name="E_NOMBRE" msprop:Generator_UserColumnName="E_NOMBRE" msprop:Generator_ColumnPropNameInRow="E_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnE_NOMBRE" msprop:Generator_ColumnPropNameInTable="E_NOMBREColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="25" />
+                    <xs:maxLength value="80" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -373,77 +381,70 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="E_LEGAJO" msprop:Generator_UserColumnName="E_LEGAJO" msprop:Generator_ColumnPropNameInRow="E_LEGAJO" msprop:Generator_ColumnVarNameInTable="columnE_LEGAJO" msprop:Generator_ColumnPropNameInTable="E_LEGAJOColumn" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="20" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
               <xs:element name="E_FECHA_ALTA" msprop:Generator_UserColumnName="E_FECHA_ALTA" msprop:Generator_ColumnPropNameInRow="E_FECHA_ALTA" msprop:Generator_ColumnVarNameInTable="columnE_FECHA_ALTA" msprop:Generator_ColumnPropNameInTable="E_FECHA_ALTAColumn" type="xs:dateTime" minOccurs="0" />
               <xs:element name="E_FECHA_BAJA" msprop:Generator_UserColumnName="E_FECHA_BAJA" msprop:Generator_ColumnPropNameInRow="E_FECHA_BAJA" msprop:Generator_ColumnVarNameInTable="columnE_FECHA_BAJA" msprop:Generator_ColumnPropNameInTable="E_FECHA_BAJAColumn" type="xs:dateTime" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SECTORES" msprop:Generator_UserTableName="SECTORES" msprop:Generator_RowDeletedName="SECTORESRowDeleted" msprop:Generator_RowChangedName="SECTORESRowChanged" msprop:Generator_RowClassName="SECTORESRow" msprop:Generator_RowChangingName="SECTORESRowChanging" msprop:Generator_RowEvArgName="SECTORESRowChangeEvent" msprop:Generator_RowEvHandlerName="SECTORESRowChangeEventHandler" msprop:Generator_TableClassName="SECTORESDataTable" msprop:Generator_TableVarName="tableSECTORES" msprop:Generator_RowDeletingName="SECTORESRowDeleting" msprop:Generator_TablePropName="SECTORES">
+        <xs:element name="ESTADO_EMPLEADOS" msprop:Generator_UserTableName="ESTADO_EMPLEADOS" msprop:Generator_RowDeletedName="ESTADO_EMPLEADOSRowDeleted" msprop:Generator_TableClassName="ESTADO_EMPLEADOSDataTable" msprop:Generator_RowChangedName="ESTADO_EMPLEADOSRowChanged" msprop:Generator_RowClassName="ESTADO_EMPLEADOSRow" msprop:Generator_RowChangingName="ESTADO_EMPLEADOSRowChanging" msprop:Generator_RowEvArgName="ESTADO_EMPLEADOSRowChangeEvent" msprop:Generator_RowEvHandlerName="ESTADO_EMPLEADOSRowChangeEventHandler" msprop:Generator_TablePropName="ESTADO_EMPLEADOS" msprop:Generator_TableVarName="tableESTADO_EMPLEADOS" msprop:Generator_RowDeletingName="ESTADO_EMPLEADOSRowDeleting">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="SEC_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="SEC_CODIGO" msprop:Generator_ColumnPropNameInRow="SEC_CODIGO" msprop:Generator_ColumnVarNameInTable="columnSEC_CODIGO" msprop:Generator_ColumnPropNameInTable="SEC_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="SEC_NOMBRE" msprop:Generator_UserColumnName="SEC_NOMBRE" msprop:Generator_ColumnPropNameInRow="SEC_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnSEC_NOMBRE" msprop:Generator_ColumnPropNameInTable="SEC_NOMBREColumn" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="30" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="SEC_DESCRIPCION" msprop:Generator_UserColumnName="SEC_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="SEC_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnSEC_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="SEC_DESCRIPCIONColumn" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="80" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="SEC_ABREVIATURA" msprop:Generator_UserColumnName="SEC_ABREVIATURA" msprop:Generator_ColumnPropNameInRow="SEC_ABREVIATURA" msprop:Generator_ColumnVarNameInTable="columnSEC_ABREVIATURA" msprop:Generator_ColumnPropNameInTable="SEC_ABREVIATURAColumn" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="10" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="ESTADO_EMPLEADOS" msprop:Generator_UserTableName="ESTADO_EMPLEADOS" msprop:Generator_RowDeletedName="ESTADO_EMPLEADOSRowDeleted" msprop:Generator_RowChangedName="ESTADO_EMPLEADOSRowChanged" msprop:Generator_RowClassName="ESTADO_EMPLEADOSRow" msprop:Generator_RowChangingName="ESTADO_EMPLEADOSRowChanging" msprop:Generator_RowEvArgName="ESTADO_EMPLEADOSRowChangeEvent" msprop:Generator_RowEvHandlerName="ESTADO_EMPLEADOSRowChangeEventHandler" msprop:Generator_TableClassName="ESTADO_EMPLEADOSDataTable" msprop:Generator_TableVarName="tableESTADO_EMPLEADOS" msprop:Generator_RowDeletingName="ESTADO_EMPLEADOSRowDeleting" msprop:Generator_TablePropName="ESTADO_EMPLEADOS">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="EE_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="EE_CODIGO" msprop:Generator_ColumnPropNameInRow="EE_CODIGO" msprop:Generator_ColumnVarNameInTable="columnEE_CODIGO" msprop:Generator_ColumnPropNameInTable="EE_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="EE_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="EE_CODIGO" msprop:Generator_ColumnPropNameInRow="EE_CODIGO" msprop:Generator_ColumnVarNameInTable="columnEE_CODIGO" msprop:Generator_ColumnPropNameInTable="EE_CODIGOColumn" type="xs:decimal" />
               <xs:element name="EE_NOMBRE" msprop:Generator_UserColumnName="EE_NOMBRE" msprop:Generator_ColumnPropNameInRow="EE_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnEE_NOMBRE" msprop:Generator_ColumnPropNameInTable="EE_NOMBREColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="30" />
+                    <xs:maxLength value="80" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
               <xs:element name="EE_DESCRIPCION" msprop:Generator_UserColumnName="EE_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="EE_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnEE_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="EE_DESCRIPCIONColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="80" />
+                    <xs:maxLength value="200" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="CAPACIDADXEMPLEADO" msprop:Generator_UserTableName="CAPACIDADXEMPLEADO" msprop:Generator_RowDeletedName="CAPACIDADXEMPLEADORowDeleted" msprop:Generator_TableClassName="CAPACIDADXEMPLEADODataTable" msprop:Generator_RowChangedName="CAPACIDADXEMPLEADORowChanged" msprop:Generator_RowClassName="CAPACIDADXEMPLEADORow" msprop:Generator_RowChangingName="CAPACIDADXEMPLEADORowChanging" msprop:Generator_RowEvArgName="CAPACIDADXEMPLEADORowChangeEvent" msprop:Generator_RowEvHandlerName="CAPACIDADXEMPLEADORowChangeEventHandler" msprop:Generator_TablePropName="CAPACIDADXEMPLEADO" msprop:Generator_TableVarName="tableCAPACIDADXEMPLEADO" msprop:Generator_RowDeletingName="CAPACIDADXEMPLEADORowDeleting">
+        <xs:element name="SECTORES" msprop:Generator_UserTableName="SECTORES" msprop:Generator_RowDeletedName="SECTORESRowDeleted" msprop:Generator_TableClassName="SECTORESDataTable" msprop:Generator_RowChangedName="SECTORESRowChanged" msprop:Generator_RowClassName="SECTORESRow" msprop:Generator_RowChangingName="SECTORESRowChanging" msprop:Generator_RowEvArgName="SECTORESRowChangeEvent" msprop:Generator_RowEvHandlerName="SECTORESRowChangeEventHandler" msprop:Generator_TablePropName="SECTORES" msprop:Generator_TableVarName="tableSECTORES" msprop:Generator_RowDeletingName="SECTORESRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SEC_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="SEC_CODIGO" msprop:Generator_ColumnPropNameInRow="SEC_CODIGO" msprop:Generator_ColumnVarNameInTable="columnSEC_CODIGO" msprop:Generator_ColumnPropNameInTable="SEC_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="SEC_NOMBRE" msprop:Generator_UserColumnName="SEC_NOMBRE" msprop:Generator_ColumnPropNameInRow="SEC_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnSEC_NOMBRE" msprop:Generator_ColumnPropNameInTable="SEC_NOMBREColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="80" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SEC_DESCRIPCION" msprop:Generator_UserColumnName="SEC_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="SEC_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnSEC_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="SEC_DESCRIPCIONColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SEC_ABREVIATURA" msprop:Generator_UserColumnName="SEC_ABREVIATURA" msprop:Generator_ColumnPropNameInRow="SEC_ABREVIATURA" msprop:Generator_ColumnVarNameInTable="columnSEC_ABREVIATURA" msprop:Generator_ColumnPropNameInTable="SEC_ABREVIATURAColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CAPACIDADESXEMPLEADO" msprop:Generator_UserTableName="CAPACIDADESXEMPLEADO" msprop:Generator_RowDeletedName="CAPACIDADESXEMPLEADORowDeleted" msprop:Generator_TableClassName="CAPACIDADESXEMPLEADODataTable" msprop:Generator_RowChangedName="CAPACIDADESXEMPLEADORowChanged" msprop:Generator_RowClassName="CAPACIDADESXEMPLEADORow" msprop:Generator_RowChangingName="CAPACIDADESXEMPLEADORowChanging" msprop:Generator_RowEvArgName="CAPACIDADESXEMPLEADORowChangeEvent" msprop:Generator_RowEvHandlerName="CAPACIDADESXEMPLEADORowChangeEventHandler" msprop:Generator_TablePropName="CAPACIDADESXEMPLEADO" msprop:Generator_TableVarName="tableCAPACIDADESXEMPLEADO" msprop:Generator_RowDeletingName="CAPACIDADESXEMPLEADORowDeleting">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="CXE_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="CXE_CODIGO" msprop:Generator_ColumnPropNameInRow="CXE_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCXE_CODIGO" msprop:Generator_ColumnPropNameInTable="CXE_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="E_LEGAJO" msprop:Generator_UserColumnName="E_LEGAJO" msprop:Generator_ColumnPropNameInRow="E_LEGAJO" msprop:Generator_ColumnVarNameInTable="columnE_LEGAJO" msprop:Generator_ColumnPropNameInTable="E_LEGAJOColumn" type="xs:decimal" />
+              <xs:element name="E_CODIGO" msprop:Generator_UserColumnName="E_CODIGO" msprop:Generator_ColumnPropNameInRow="E_CODIGO" msprop:Generator_ColumnVarNameInTable="columnE_CODIGO" msprop:Generator_ColumnPropNameInTable="E_CODIGOColumn" type="xs:decimal" />
               <xs:element name="CEMP_CODIGO" msprop:Generator_UserColumnName="CEMP_CODIGO" msprop:Generator_ColumnPropNameInRow="CEMP_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCEMP_CODIGO" msprop:Generator_ColumnPropNameInTable="CEMP_CODIGOColumn" type="xs:decimal" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="CAPACIDAD_EMPLEADO" msprop:Generator_UserTableName="CAPACIDAD_EMPLEADO" msprop:Generator_RowDeletedName="CAPACIDAD_EMPLEADORowDeleted" msprop:Generator_TableClassName="CAPACIDAD_EMPLEADODataTable" msprop:Generator_RowChangedName="CAPACIDAD_EMPLEADORowChanged" msprop:Generator_RowClassName="CAPACIDAD_EMPLEADORow" msprop:Generator_RowChangingName="CAPACIDAD_EMPLEADORowChanging" msprop:Generator_RowEvArgName="CAPACIDAD_EMPLEADORowChangeEvent" msprop:Generator_RowEvHandlerName="CAPACIDAD_EMPLEADORowChangeEventHandler" msprop:Generator_TablePropName="CAPACIDAD_EMPLEADO" msprop:Generator_TableVarName="tableCAPACIDAD_EMPLEADO" msprop:Generator_RowDeletingName="CAPACIDAD_EMPLEADORowDeleting">
+        <xs:element name="CAPACIDAD_EMPLEADOS" msprop:Generator_UserTableName="CAPACIDAD_EMPLEADOS" msprop:Generator_RowDeletedName="CAPACIDAD_EMPLEADOSRowDeleted" msprop:Generator_TableClassName="CAPACIDAD_EMPLEADOSDataTable" msprop:Generator_RowChangedName="CAPACIDAD_EMPLEADOSRowChanged" msprop:Generator_RowClassName="CAPACIDAD_EMPLEADOSRow" msprop:Generator_RowChangingName="CAPACIDAD_EMPLEADOSRowChanging" msprop:Generator_RowEvArgName="CAPACIDAD_EMPLEADOSRowChangeEvent" msprop:Generator_RowEvHandlerName="CAPACIDAD_EMPLEADOSRowChangeEventHandler" msprop:Generator_TablePropName="CAPACIDAD_EMPLEADOS" msprop:Generator_TableVarName="tableCAPACIDAD_EMPLEADOS" msprop:Generator_RowDeletingName="CAPACIDAD_EMPLEADOSRowDeleting">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="CEMP_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="CEMP_CODIGO" msprop:Generator_ColumnPropNameInRow="CEMP_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCEMP_CODIGO" msprop:Generator_ColumnPropNameInTable="CEMP_CODIGOColumn" type="xs:decimal" />
@@ -457,7 +458,7 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
               <xs:element name="CEMP_DESCRIPCION" msprop:Generator_UserColumnName="CEMP_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="CEMP_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnCEMP_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="CEMP_DESCRIPCIONColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="250" />
+                    <xs:maxLength value="200" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -470,29 +471,29 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
       <xs:selector xpath=".//mstns:EMPLEADOS" />
       <xs:field xpath="mstns:E_CODIGO" />
     </xs:unique>
-    <xs:unique name="SECTORES_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:SECTORES" />
-      <xs:field xpath="mstns:SEC_CODIGO" />
-    </xs:unique>
     <xs:unique name="ESTADO_EMPLEADOS_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:ESTADO_EMPLEADOS" />
       <xs:field xpath="mstns:EE_CODIGO" />
     </xs:unique>
-    <xs:unique name="CAPACIDADXEMPLEADO_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:CAPACIDADXEMPLEADO" />
+    <xs:unique name="SECTORES_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:SECTORES" />
+      <xs:field xpath="mstns:SEC_CODIGO" />
+    </xs:unique>
+    <xs:unique name="CAPACIDADESXEMPLEADO_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:CAPACIDADESXEMPLEADO" />
       <xs:field xpath="mstns:CXE_CODIGO" />
     </xs:unique>
-    <xs:unique name="CAPACIDAD_EMPLEADO_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:CAPACIDAD_EMPLEADO" />
+    <xs:unique name="CAPACIDAD_EMPLEADOS_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:CAPACIDAD_EMPLEADOS" />
       <xs:field xpath="mstns:CEMP_CODIGO" />
     </xs:unique>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="empleado_sector_fk" msdata:parent="SECTORES" msdata:child="EMPLEADOS" msdata:parentkey="SEC_CODIGO" msdata:childkey="SEC_CODIGO" msprop:Generator_UserRelationName="empleado_sector_fk" msprop:Generator_RelationVarName="relationempleado_sector_fk" msprop:Generator_UserChildTable="EMPLEADOS" msprop:Generator_UserParentTable="SECTORES" msprop:Generator_ParentPropName="SECTORESRow" msprop:Generator_ChildPropName="GetEMPLEADOSRows" />
       <msdata:Relationship name="empleado_estadoEmpleado_fk" msdata:parent="ESTADO_EMPLEADOS" msdata:child="EMPLEADOS" msdata:parentkey="EE_CODIGO" msdata:childkey="EE_CODIGO" msprop:Generator_UserRelationName="empleado_estadoEmpleado_fk" msprop:Generator_RelationVarName="relationempleado_estadoEmpleado_fk" msprop:Generator_UserChildTable="EMPLEADOS" msprop:Generator_UserParentTable="ESTADO_EMPLEADOS" msprop:Generator_ParentPropName="ESTADO_EMPLEADOSRow" msprop:Generator_ChildPropName="GetEMPLEADOSRows" />
-      <msdata:Relationship name="capacidadXEmpleado_empleado_fk" msdata:parent="EMPLEADOS" msdata:child="CAPACIDADXEMPLEADO" msdata:parentkey="E_CODIGO" msdata:childkey="E_LEGAJO" msprop:Generator_UserRelationName="capacidadXEmpleado_empleado_fk" msprop:Generator_RelationVarName="relationcapacidadXEmpleado_empleado_fk" msprop:Generator_UserChildTable="CAPACIDADXEMPLEADO" msprop:Generator_UserParentTable="EMPLEADOS" msprop:Generator_ParentPropName="EMPLEADOSRow" msprop:Generator_ChildPropName="GetCAPACIDADXEMPLEADORows" />
-      <msdata:Relationship name="capacidadXEmpleado_capacidadEmpleado_fk" msdata:parent="CAPACIDAD_EMPLEADO" msdata:child="CAPACIDADXEMPLEADO" msdata:parentkey="CEMP_CODIGO" msdata:childkey="CEMP_CODIGO" msprop:Generator_UserRelationName="capacidadXEmpleado_capacidadEmpleado_fk" msprop:Generator_RelationVarName="relationcapacidadXEmpleado_capacidadEmpleado_fk" msprop:Generator_UserChildTable="CAPACIDADXEMPLEADO" msprop:Generator_UserParentTable="CAPACIDAD_EMPLEADO" msprop:Generator_ParentPropName="CAPACIDAD_EMPLEADORow" msprop:Generator_ChildPropName="GetCAPACIDADXEMPLEADORows" />
+      <msdata:Relationship name="empleado_sector_fk" msdata:parent="SECTORES" msdata:child="EMPLEADOS" msdata:parentkey="SEC_CODIGO" msdata:childkey="SEC_CODIGO" msprop:Generator_UserRelationName="empleado_sector_fk" msprop:Generator_RelationVarName="relationempleado_sector_fk" msprop:Generator_UserChildTable="EMPLEADOS" msprop:Generator_UserParentTable="SECTORES" msprop:Generator_ParentPropName="SECTORESRow" msprop:Generator_ChildPropName="GetEMPLEADOSRows" />
+      <msdata:Relationship name="capacidadXEmpleado_empleado_fk" msdata:parent="EMPLEADOS" msdata:child="CAPACIDADESXEMPLEADO" msdata:parentkey="E_CODIGO" msdata:childkey="E_CODIGO" msprop:Generator_UserRelationName="capacidadXEmpleado_empleado_fk" msprop:Generator_RelationVarName="relationcapacidadXEmpleado_empleado_fk" msprop:Generator_UserChildTable="CAPACIDADESXEMPLEADO" msprop:Generator_UserParentTable="EMPLEADOS" msprop:Generator_ParentPropName="EMPLEADOSRow" msprop:Generator_ChildPropName="GetCAPACIDADESXEMPLEADORows" />
+      <msdata:Relationship name="capacidadXEmpleado_capacidadEmpleado_fk" msdata:parent="CAPACIDAD_EMPLEADOS" msdata:child="CAPACIDADESXEMPLEADO" msdata:parentkey="CEMP_CODIGO" msdata:childkey="CEMP_CODIGO" msprop:Generator_UserRelationName="capacidadXEmpleado_capacidadEmpleado_fk" msprop:Generator_RelationVarName="relationcapacidadXEmpleado_capacidadEmpleado_fk" msprop:Generator_UserChildTable="CAPACIDADESXEMPLEADO" msprop:Generator_UserParentTable="CAPACIDAD_EMPLEADOS" msprop:Generator_ParentPropName="CAPACIDAD_EMPLEADOSRow" msprop:Generator_ChildPropName="GetCAPACIDADESXEMPLEADORows" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>
