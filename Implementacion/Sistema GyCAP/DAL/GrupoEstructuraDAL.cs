@@ -18,11 +18,11 @@ namespace GyCAP.DAL
                                     ,[grp_nombre]
                                     ,[grp_descripcion]
                                     ,[grp_concreto])
-                                    VALUES (@p0, @p1, @p2, @p3, @p4, @p5)";
+                                    VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
 
             object codPadre = DBNull.Value;
             if (grupo.CodigoPadre != -1) { codPadre = grupo.CodigoPadre; }
-            object[] valorParametros = { grupo.Numero, 
+            object[] valorParametros = {   grupo.Numero, 
                                            grupo.CodigoEstructura, 
                                            codPadre, 
                                            grupo.NombreGrupo, 

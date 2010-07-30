@@ -64,6 +64,7 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
             {
                 this.Value = fecha;
                 this.isNull = false;
+                this.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             }
             else
             {

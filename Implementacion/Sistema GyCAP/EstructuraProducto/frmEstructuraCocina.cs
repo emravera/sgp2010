@@ -25,7 +25,7 @@ namespace GyCAP.UI.EstructuraProducto
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
         private int slideActual = 0; //0-Datos, 1-Conjuntos, 2-Subconjuntos, 3-Piezas, 4-MateriaPrima, 5-Árbol
-        private int cxe = 0, scxe = 0, pxe = 0, mpxe = 0; //Variables para el manejo de inserciones en los dataset con códigos unique
+        private int cxe = -1, scxe = -1, pxe = -1, mpxe = -1; //Variables para el manejo de inserciones en los dataset con códigos unique
 
         #region Inicio
 
@@ -384,7 +384,10 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvCE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 int codigoCXE = Convert.ToInt32(dvCE[dgvCE.SelectedRows[0].Index]["cxe_codigo"]);
-                dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CXE_CANTIDAD -= 1;
+                if (dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CXE_CANTIDAD > 1)
+                {                    
+                    dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CXE_CANTIDAD -= 1;
+                }
             }
             else
             {
@@ -481,7 +484,10 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvSCE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 int codigoSCXE = Convert.ToInt32(dvSCE[dgvSCE.SelectedRows[0].Index]["scxe_codigo"]);
-                dsEstructura.SUBCONJUNTOSXESTRUCTURA.FindBySCXE_CODIGO(codigoSCXE).SCXE_CANTIDAD -= 1;
+                if (dsEstructura.SUBCONJUNTOSXESTRUCTURA.FindBySCXE_CODIGO(codigoSCXE).SCXE_CANTIDAD > 1)
+                {                    
+                    dsEstructura.SUBCONJUNTOSXESTRUCTURA.FindBySCXE_CODIGO(codigoSCXE).SCXE_CANTIDAD -= 1;
+                }
             }
             else
             {
@@ -578,7 +584,10 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvPE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 int codigoPXE = Convert.ToInt32(dvPE[dgvPE.SelectedRows[0].Index]["pxe_codigo"]);
-                dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoPXE).PXE_CANTIDAD -= 1;
+                if (dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoPXE).PXE_CANTIDAD > 1)
+                {
+                    dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoPXE).PXE_CANTIDAD -= 1;
+                }
             }
             else
             {
@@ -662,7 +671,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvMPE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 int codigoMPXE = Convert.ToInt32(dvMPE[dgvMPE.SelectedRows[0].Index]["mpxe_codigo"]);
-                dsEstructura.MATERIASPRIMASXESTRUCTURA.FindByMPXE_CODIGO(codigoMPXE).MPXE_CANTIDAD += 1;
+                dsEstructura.MATERIASPRIMASXESTRUCTURA.FindByMPXE_CODIGO(codigoMPXE).MPXE_CANTIDAD += Convert.ToDecimal(0.1);
             }
             else
             {
@@ -675,7 +684,10 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvMPE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 int codigoMPXE = Convert.ToInt32(dvMPE[dgvMPE.SelectedRows[0].Index]["mpxe_codigo"]);
-                dsEstructura.MATERIASPRIMASXESTRUCTURA.FindByMPXE_CODIGO(codigoMPXE).MPXE_CANTIDAD -= 1;
+                if (dsEstructura.MATERIASPRIMASXESTRUCTURA.FindByMPXE_CODIGO(codigoMPXE).MPXE_CANTIDAD > Convert.ToDecimal(0.1))
+                {
+                    dsEstructura.MATERIASPRIMASXESTRUCTURA.FindByMPXE_CODIGO(codigoMPXE).MPXE_CANTIDAD -= Convert.ToDecimal(0.1);
+                }
             }
             else
             {
@@ -697,6 +709,7 @@ namespace GyCAP.UI.EstructuraProducto
                 slideControl.BackwardTo("slideDatos");
                 SetTextBotones("Datos ^","Conjuntos >","Subconjuntos >","Piezas >","Materia Prima >");
                 slideActual = 0;
+                CargarListaPartes();
             }
         }        
         
@@ -907,6 +920,7 @@ namespace GyCAP.UI.EstructuraProducto
                     gbOP.Enabled = false;
                     gbOMP.Enabled = false;
                     estadoInterface = estadoUI.consultar;
+                    CargarListaPartes();
                     tcEstructuraCocina.SelectedTab = tpDatos;
                     break;
                 case estadoUI.modificar:
@@ -934,6 +948,7 @@ namespace GyCAP.UI.EstructuraProducto
                     gbOMP.Enabled = true;
                     estadoInterface = estadoUI.modificar;
                     CargarCSCPMP();
+                    CargarListaPartes();
                     tcEstructuraCocina.SelectedTab = tpDatos;
                     break;
                 default:
@@ -1031,7 +1046,7 @@ namespace GyCAP.UI.EstructuraProducto
             dvPlano = new DataView(dsEstructura.PLANOS);
             dvPlano.Sort = "PNO_NOMBRE ASC";
             dvPartes = new DataView(dsEstructura.LISTA_PARTES);
-            //dvPartes.Sort = "PAR_NOMBRE ASC";
+            dgvPartes.DataSource = dvPartes;
 
             //ComboBoxs
             cbCocina.SetDatos(dvCocina, "COC_CODIGO", "COC_CODIGO_PRODUCTO", "Seleccione", false);
@@ -1248,6 +1263,8 @@ namespace GyCAP.UI.EstructuraProducto
                 rowParte.EndEdit();
                 dsEstructura.LISTA_PARTES.AddLISTA_PARTESRow(rowParte);
             }
+
+            dvPartes.Table = dsEstructura.LISTA_PARTES;
         }
 
         private void frmEstructuraCocina_Activated(object sender, EventArgs e)
@@ -1292,7 +1309,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             if (e.Value.ToString() != string.Empty)
             {
-                string nombre;
+                string nombre; //tira error despues de guardar - gonzalo
                 switch (dgvEstructuras.Columns[e.ColumnIndex].Name)
                 {
                     case "COC_COCINA":

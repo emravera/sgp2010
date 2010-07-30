@@ -211,7 +211,7 @@ namespace GyCAP.DAL
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
         public static Entidades.Conjunto ObtenerConjunto(int codigoConjunto)
         {
-            string sql = @"SELECT conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo, conj_codigoparte
+            string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo, conj_codigoparte
                         FROM CONJUNTOS WHERE conj_codigo = @p0";
             object[] valorParametros = { codigoConjunto };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
@@ -359,7 +359,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerConjuntos(DataTable dtConjuntos)
         {
-            string sql = @"SELECT conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo, conj_codigoparte
+            string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo, conj_codigoparte
                         FROM CONJUNTOS";
             
             try
@@ -371,7 +371,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerConjuntos(DataTable dtConjuntos, int estado)
         {
-            string sql = @"SELECT conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo, conj_codigoparte
+            string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo, conj_codigoparte
                         FROM CONJUNTOS WHERE par_codigo = @p0 ";
 
             object[] valorParametros = { estado };

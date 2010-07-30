@@ -311,7 +311,7 @@ namespace GyCAP.UI.EstructuraProducto
                 //Obtenemos el código
                 int codigoDCJ = Convert.ToInt32(dvDetalleConjunto[dgvDetalleConjunto.SelectedRows[0].Index]["dcj_codigo"]);
                 //Aumentamos la cantidad
-                dsEstructura.DETALLE_CONJUNTO.FindByDCJ_CODIGO(codigoDCJ).DCJ_CANTIDAD += Convert.ToDecimal(0.1);
+                dsEstructura.DETALLE_CONJUNTO.FindByDCJ_CODIGO(codigoDCJ).DCJ_CANTIDAD += 1;
             }
             else
             {
@@ -325,8 +325,11 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 //Obtenemos el código
                 int codigoDCJ = Convert.ToInt32(dvDetalleConjunto[dgvDetalleConjunto.SelectedRows[0].Index]["dcj_codigo"]);
-                //Disminuimos la cantidad
-                dsEstructura.DETALLE_CONJUNTO.FindByDCJ_CODIGO(codigoDCJ).DCJ_CANTIDAD -= Convert.ToDecimal(0.1);
+                //Disminuimos la cantidad si es mayor que 1 ya que no admitimos valores negativos
+                if (dsEstructura.DETALLE_CONJUNTO.FindByDCJ_CODIGO(codigoDCJ).DCJ_CANTIDAD > 1)
+                {
+                    dsEstructura.DETALLE_CONJUNTO.FindByDCJ_CODIGO(codigoDCJ).DCJ_CANTIDAD -= 1;
+                }
             }
             else
             {

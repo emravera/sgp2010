@@ -317,7 +317,10 @@ namespace GyCAP.UI.EstructuraProducto
                 //Obtenemos el código
                 int codigoDPZA = Convert.ToInt32(dvDetallePieza[dgvDetallePieza.SelectedRows[0].Index]["dpza_codigo"]);
                 //Disminuimos la cantidad
-                dsEstructura.DETALLE_PIEZA.FindByDPZA_CODIGO(codigoDPZA).DPZA_CANTIDAD -= Convert.ToDecimal(0.1);
+                if (dsEstructura.DETALLE_PIEZA.FindByDPZA_CODIGO(codigoDPZA).DPZA_CANTIDAD > Convert.ToDecimal(0.1))
+                {
+                    dsEstructura.DETALLE_PIEZA.FindByDPZA_CODIGO(codigoDPZA).DPZA_CANTIDAD -= Convert.ToDecimal(0.1);
+                }
             }
             else
             {
