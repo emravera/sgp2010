@@ -540,12 +540,12 @@ namespace GyCAP.UI.RecursosFabricacion
             cboEstado.SetSelectedValue(int.Parse(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).EE_CODIGO.ToString()));
             sfFechaNac.SetFecha(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_FECHANACIMIENTO);
 
-            BLL.CapacidadEmpleadoBLL.ObtenerCapacidadPorEmpleado(codigoEmpleado, dsEmpleado);
+            //BLL.CapacidadEmpleadoBLL.ObtenerCapacidadPorEmpleado(codigoEmpleado, dsEmpleado);
 
             //Creamos el dataview y lo asignamos a la grilla
-            dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDAD_EMPLEADO);
-            dvCapacidadEmpleado.Sort = "CEMP_NOMBRE ASC";
-            dgvLista.DataSource = dvCapacidadEmpleado;
+            //dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDAD_EMPLEADO);
+            //dvCapacidadEmpleado.Sort = "CEMP_NOMBRE ASC";
+            //dgvLista.DataSource = dvCapacidadEmpleado;
         }
         
     }
