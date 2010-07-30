@@ -533,6 +533,7 @@
             this.clbVer.Name = "clbVer";
             this.clbVer.Size = new System.Drawing.Size(124, 64);
             this.clbVer.TabIndex = 3;
+            this.clbVer.SelectedValueChanged += new System.EventHandler(this.clbVer_SelectedValueChanged);
             // 
             // gbPartes
             // 
@@ -813,6 +814,7 @@
             this.btnRC.Text = "Disminuir\r\nCantidad";
             this.btnRC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRC.UseVisualStyleBackColor = true;
+            this.btnRC.Click += new System.EventHandler(this.btnRC_Click);
             // 
             // btnSC
             // 
@@ -826,6 +828,7 @@
             this.btnSC.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSC.UseVisualStyleBackColor = true;
+            this.btnSC.Click += new System.EventHandler(this.btnSC_Click);
             // 
             // btnEC
             // 
@@ -838,6 +841,7 @@
             this.btnEC.Text = "Eliminar";
             this.btnEC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEC.UseVisualStyleBackColor = true;
+            this.btnEC.Click += new System.EventHandler(this.btnEC_Click);
             // 
             // gbAC
             // 
@@ -860,6 +864,7 @@
             this.btnAC.Text = "Agregar";
             this.btnAC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAC.UseVisualStyleBackColor = true;
+            this.btnAC.Click += new System.EventHandler(this.btnAC_Click);
             // 
             // nudC
             // 

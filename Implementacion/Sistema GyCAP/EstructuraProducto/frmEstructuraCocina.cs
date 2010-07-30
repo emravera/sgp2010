@@ -25,7 +25,7 @@ namespace GyCAP.UI.EstructuraProducto
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
         private int slideActual = 0; //0-Datos, 1-Conjuntos, 2-Subconjuntos, 3-Piezas, 4-MateriaPrima, 5-Árbol
-        private int cxe = -1, scxe = -1, pxe = -1, mpxe = -1; //Variables para el manejo de inserciones en los dataset con códigos unique
+        private int cxe = 0, scxe = 0, pxe = 0, mpxe = 0; //Variables para el manejo de inserciones en los dataset con códigos unique
 
         #region Inicio
 
@@ -151,14 +151,14 @@ namespace GyCAP.UI.EstructuraProducto
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisemos que completó todos los datos obligatorios          
-            bool datosOK = true;
-            if (txtNombre.Text == string.Empty) { datosOK = false; }
-            if (cbPlano.GetSelectedIndex() == -1) { datosOK = false; }
-            if (cbCocina.GetSelectedIndex() == -1) { datosOK = false; }
-            if (cbResponsable.GetSelectedIndex() == -1) { datosOK = false; }
-            if (dtpFechaAlta.IsValueNull()) { datosOK = false; }
-            if (dgvPartes.Rows.Count == 0) { datosOK = false; } //que al menos haya cargado 1 parte
-            if (datosOK)
+            string datosFaltantes = string.Empty;
+            if (txtNombre.Text == string.Empty) { datosFaltantes += "* Nombre\n"; }
+            if (cbPlano.GetSelectedIndex() == -1) { datosFaltantes += "* Plano\n"; }
+            if (cbCocina.GetSelectedIndex() == -1) { datosFaltantes += "* Cocina\n"; }
+            //if (cbResponsable.GetSelectedIndex() == -1) { datosOK = false; datosFaltantes += "\\n* Responsable"; } Por ahora opcional
+            //if (dtpFechaAlta.IsValueNull()) { dtpFechaAlta.SetFecha(BLL.DBBLL.GetFechaServidor()); } Opcional por ahora
+            if (dgvPartes.Rows.Count == 0) { datosFaltantes += "* El detalle de la estructura\n"; } //que al menos haya cargado 1 parte
+            if (datosFaltantes == string.Empty)
             {
                 //Datos OK, revisemos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
@@ -172,37 +172,110 @@ namespace GyCAP.UI.EstructuraProducto
                         rowEstructura.ESTR_NOMBRE = txtNombre.Text;
                         rowEstructura.PNO_CODIGO = cbPlano.GetSelectedValueInt();
                         rowEstructura.ESTR_ACTIVO = (chkActivo.Checked) ? BLL.EstructuraBLL.EstructuraActiva : BLL.EstructuraBLL.EstructuraInactiva;
-                        rowEstructura.ESTR_FECHA_ALTA = (DateTime)dtpFechaAlta.GetFecha();
+                        if (dtpFechaAlta.IsValueNull()) { rowEstructura.ESTR_FECHA_ALTA = BLL.DBBLL.GetFechaServidor(); }
+                        else { rowEstructura.ESTR_FECHA_ALTA = (DateTime)dtpFechaAlta.GetFecha(); }
                         rowEstructura.COC_CODIGO = cbCocina.GetSelectedValueInt();
-                        rowEstructura.PNO_CODIGO = cbCocina.GetSelectedValueInt();
-                        rowEstructura.SetESTR_FECHA_MODIFICACIONNull();
+                        if (cbResponsable.GetSelectedIndex() == -1) rowEstructura.SetE_CODIGONull();
+                        else { rowEstructura.E_CODIGO = cbResponsable.GetSelectedValueInt(); }
+                        if (dtpFechaModificacion.IsValueNull()) { rowEstructura.SetESTR_FECHA_MODIFICACIONNull(); }
+                        else { rowEstructura.ESTR_FECHA_MODIFICACION = (DateTime)dtpFechaModificacion.GetFecha(); }
                         rowEstructura.ESTR_DESCRIPCION = txtDescripcion.Text;
                         rowEstructura.EndEdit();
+                        dsEstructura.ESTRUCTURAS.AddESTRUCTURASRow(rowEstructura);
+                        BLL.EstructuraBLL.Insertar(dsEstructura);
+                        dsEstructura.ESTRUCTURAS.AcceptChanges();
+                        dsEstructura.GRUPOS_ESTRUCTURA.AcceptChanges();
+                        dsEstructura.CONJUNTOSXESTRUCTURA.AcceptChanges();
+                        dsEstructura.SUBCONJUNTOSXESTRUCTURA.AcceptChanges();
+                        dsEstructura.PIEZASXESTRUCTURA.AcceptChanges();
+                        dsEstructura.MATERIASPRIMASXESTRUCTURA.AcceptChanges();
+
+                        //Vemos cómo se inició el formulario para determinar la acción a seguir
+                        if (estadoInterface == estadoUI.nuevoExterno)
+                        {
+                            //Nuevo desde acceso directo, cerramos el formulario
+                            btnSalir.PerformClick();
+                        }
+                        else
+                        {
+                            //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
+                            SetInterface(estadoUI.inicio);
+                        }
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        //Hubo problemas con la BD, descartamos los cambios de conjuntos ya que puede intentar
+                        //Hubo problemas con la BD, descartamos los cambios de estructuras ya que puede intentar
                         //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
-                        
+                        dsEstructura.ESTRUCTURAS.RejectChanges();
                         MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
                     //Modificando
+                    try
+                    {
+                        int codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]);
+                        dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_NOMBRE = txtNombre.Text;
+                        dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).PNO_CODIGO = cbPlano.GetSelectedValueInt();
+                        if (chkActivo.Checked) { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_ACTIVO = BLL.EstructuraBLL.EstructuraActiva; }
+                        else { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_ACTIVO = BLL.EstructuraBLL.EstructuraInactiva; }
+                        dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_FECHA_ALTA = (DateTime)dtpFechaAlta.GetFecha();
+                        dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).COC_CODIGO = cbCocina.GetSelectedValueInt();
+                        if (cbResponsable.GetSelectedIndex() == -1) { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).SetE_CODIGONull(); }
+                        else { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).E_CODIGO = cbResponsable.GetSelectedValueInt(); }
+                        if (dtpFechaModificacion.IsValueNull()) { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).SetESTR_FECHA_MODIFICACIONNull(); }
+                        else { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_FECHA_MODIFICACION = (DateTime)dtpFechaModificacion.GetFecha(); }
+                        dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_DESCRIPCION = txtDescripcion.Text;
+                        BLL.EstructuraBLL.Actualizar(dsEstructura);
+                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        //Hubo problemas con la BD, descartamos los cambios de estructuras ya que puede intentar
+                        //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
+                        dsEstructura.ESTRUCTURAS.RejectChanges();
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             else
             {
                 //le faltan completar datos, avisemos
-                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debe completar los datos:\n\n" + datosFaltantes, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             
         }
         
         private void btnVolver_Click(object sender, EventArgs e)
         {
+            //Descartamos los cambios realizamos hasta el momento sin guardar
+            dsEstructura.MATERIASPRIMASXESTRUCTURA.RejectChanges();
+            dsEstructura.PIEZASXESTRUCTURA.RejectChanges();
+            dsEstructura.SUBCONJUNTOSXESTRUCTURA.RejectChanges();
+            dsEstructura.CONJUNTOSXESTRUCTURA.RejectChanges();
+            dsEstructura.GRUPOS_ESTRUCTURA.RejectChanges();
+            dsEstructura.ESTRUCTURAS.RejectChanges();
+            dsEstructura.LISTA_PARTES.Clear();
             SetInterface(estadoUI.inicio);
+        }
+
+        private void clbVer_SelectedValueChanged(object sender, EventArgs e)
+        {
+            string filtro = string.Empty;
+            if (clbVer.GetItemChecked(0)) { filtro = "PAR_TIPO <> Conjunto "; }
+            else { filtro = "PAR_TIPO = Conjuntos"; }
+
+            if (clbVer.GetItemChecked(1)) { filtro += " AND PAR_TIPO <> Subconjunto"; }
+            else { filtro += " AND PAR_TIPO = Subconjunto"; }
+
+            if (clbVer.GetItemChecked(2)) { filtro += " AND PAR_TIPO <> Pieza"; }
+            else { filtro += " AND PAR_TIPO = Subconjunto"; }
+
+            if (clbVer.GetItemChecked(3)) { filtro += " AND PAR_TIPO <> Materia Prima"; }
+            else { filtro += " AND PAR_TIPO = Subconjunto"; }
+
+            dvPartes.RowFilter = filtro;
         }
 
         #endregion
@@ -353,7 +426,7 @@ namespace GyCAP.UI.EstructuraProducto
                     chkActivo.Enabled = true;
                     chkActivo.Checked = false;
                     dtpFechaAlta.Enabled = true;
-                    dtpFechaAlta.Value = DateTime.Today.Date;
+                    dtpFechaAlta.Value = BLL.DBBLL.GetFechaServidor();
                     cbCocina.Enabled = true;
                     cbCocina.SelectedIndex = -1;
                     cbResponsable.Enabled = true;
@@ -362,6 +435,7 @@ namespace GyCAP.UI.EstructuraProducto
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
                     //LIMPIAR GRILLAS PARTES-CE-SCE-PE-MPE - GONZALO
+                    dsEstructura.LISTA_PARTES.Clear();
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -387,7 +461,7 @@ namespace GyCAP.UI.EstructuraProducto
                     chkActivo.Enabled = true;
                     chkActivo.Checked = false;
                     dtpFechaAlta.Enabled = true;
-                    dtpFechaAlta.Value = DateTime.Today.Date;
+                    dtpFechaAlta.Value = BLL.DBBLL.GetFechaServidor();
                     cbCocina.Enabled = true;
                     cbCocina.SelectedIndex = -1;
                     cbResponsable.Enabled = true;
@@ -396,6 +470,7 @@ namespace GyCAP.UI.EstructuraProducto
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
                     //LIMPIAR GRILLAS PARTES-CE-SCE-PE-MPE - GONZALO
+                    dsEstructura.LISTA_PARTES.Clear();
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
                     btnNuevo.Enabled = false;
@@ -1001,7 +1076,115 @@ namespace GyCAP.UI.EstructuraProducto
 
         #endregion
 
-        
+        private void btnAC_Click(object sender, EventArgs e)
+        {
+            if (dgvCD.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0 && nudC.Value > 0)
+            {
+                bool agregarConjunto; //variable que indica si se debe agregar el conjunto al listado
+                //Obtenemos el código del conjunto según sea nuevo o modificado, lo hacemos acá porque lo vamos a usar mucho
+                int codigoEstructura;
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { codigoEstructura = -1; }
+                else { codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]); }
+                //Obtenemos el código del conjunto, también lo vamos a usar mucho
+                int codigoConjunto = Convert.ToInt32(dvCD[dgvCD.SelectedRows[0].Index]["conj_codigo"]);
+
+                //Primero vemos si la estructura tiene algún conjunto cargado, como ya hemos filtrado el dataview
+                //esté sabrá decirnos cuantas filas tiene la estructura seleccionado                
+                if (dvCE.Count > 0)
+                {
+                    //Algo tiene, comprobemos que no intente agregar el mismo conjunto haciendo una consulta al dataset,
+                    //no usamos el dataview porque no queremos volver a filtrar los datos y perderlos
+                    string filtro = "estr_codigo = " + codigoEstructura + " AND conj_codigo = " + codigoConjunto;
+                    Data.dsEstructura.CONJUNTOSXESTRUCTURARow[] rows =
+                        (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select(filtro);
+                    if (rows.Length > 0)
+                    {
+                        //Ya lo ha agregado, preguntemos si quiere aumentar la cantidad existente o descartar
+                        DialogResult respuesta = MessageBox.Show("La estructura ya posee el subconjunto seleccionado. ¿Desea sumar la cantidad ingresada?", "Pregunta: Confirmar acción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (respuesta == DialogResult.Yes)
+                        {
+                            //Sumemos la cantidad ingresada a la existente, como hay una sola fila seleccionamos la 0 del array
+                            rows[0].CXE_CANTIDAD += nudC.Value;
+                            nudC.Value = 0;
+                        }
+                        //Como ya existe marcamos que no debe agregarse
+                        agregarConjunto = false;
+                    }
+                    else
+                    {
+                        //No lo ha agregado, marcamos que debe agregarse
+                        agregarConjunto = true;
+                    }
+                }
+                else
+                {
+                    //No tiene ningún conjunto agregado, marcamos que debe agregarse
+                    agregarConjunto = true;
+                }
+
+                //Ahora comprobamos si debe agregarse el conjunto o no
+                if (agregarConjunto)
+                {
+                    Data.dsEstructura.CONJUNTOSXESTRUCTURARow row = dsEstructura.CONJUNTOSXESTRUCTURA.NewCONJUNTOSXESTRUCTURARow();
+                    row.BeginEdit();
+                    //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
+                    row.CXE_CODIGO = cxe--; //-- para que se vaya autodecrementando en cada inserción
+                    row.ESTR_CODIGO = codigoEstructura;
+                    row.CONJ_CODIGO = codigoConjunto;
+                    row.CXE_CANTIDAD = nudC.Value;
+                    row.EndEdit();
+                    //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
+                    //todavia no vamos a insertar en la db hasta que no haga Guardar
+                    dsEstructura.CONJUNTOSXESTRUCTURA.AddCONJUNTOSXESTRUCTURARow(row);
+                    nudC.Value = 0;
+                }
+                nudC.Value = 0;
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Conjunto de la lista y asignarle un valor mayor a 0.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnEC_Click(object sender, EventArgs e)
+        {
+            if(dgvCE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Obtenemos el código
+                int codigoC = Convert.ToInt32(dvCE[dgvCE.SelectedRows[0].Index]["cxe_codigo"]);
+                //Lo borramos pero sólo del dataset
+                dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoC).Delete();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Conjunto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnSC_Click(object sender, EventArgs e)
+        {
+            if (dgvCE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int codigoCXE = Convert.ToInt32(dvCE[dgvCE.SelectedRows[0].Index]["cxe_codigo"]);
+                dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CXE_CANTIDAD += 1;
+            }
+            {
+                MessageBox.Show("Debe seleccionar un Conjunto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnRC_Click(object sender, EventArgs e)
+        {
+            if (dgvCE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int codigoCXE = Convert.ToInt32(dvCE[dgvCE.SelectedRows[0].Index]["cxe_codigo"]);
+                dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CXE_CANTIDAD -= 1;
+            }
+            {
+                MessageBox.Show("Debe seleccionar un Conjunto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
 
         
     }
