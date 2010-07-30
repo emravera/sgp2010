@@ -110,6 +110,7 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         public void SetSelectedValue(int valor)
         {
             this.SelectedValue = valor;
+            if (!persistente) { texto.Visible = false; }
         }
 
         /// <summary>
