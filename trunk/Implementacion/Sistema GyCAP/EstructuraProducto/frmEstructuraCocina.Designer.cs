@@ -693,11 +693,12 @@
             // 
             // txtDescripcion
             // 
+            this.txtDescripcion.AutoWordSelection = true;
             this.txtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDescripcion.Location = new System.Drawing.Point(79, 87);
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(689, 69);
+            this.txtDescripcion.Size = new System.Drawing.Size(686, 69);
             this.txtDescripcion.TabIndex = 4;
             this.txtDescripcion.Text = "";
             this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
@@ -974,6 +975,7 @@
             this.btnRSC.Text = "Disminuir\r\nCantidad";
             this.btnRSC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRSC.UseVisualStyleBackColor = true;
+            this.btnRSC.Click += new System.EventHandler(this.btnRSC_Click);
             // 
             // btnSSC
             // 
@@ -987,6 +989,7 @@
             this.btnSSC.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSSC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSSC.UseVisualStyleBackColor = true;
+            this.btnSSC.Click += new System.EventHandler(this.btnSSC_Click);
             // 
             // btnESC
             // 
@@ -999,6 +1002,7 @@
             this.btnESC.Text = "Eliminar";
             this.btnESC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnESC.UseVisualStyleBackColor = true;
+            this.btnESC.Click += new System.EventHandler(this.btnESC_Click);
             // 
             // gbASC
             // 
@@ -1021,6 +1025,7 @@
             this.btnASC.Text = "Agregar";
             this.btnASC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnASC.UseVisualStyleBackColor = true;
+            this.btnASC.Click += new System.EventHandler(this.btnASC_Click);
             // 
             // nudSC
             // 
@@ -1130,6 +1135,7 @@
             this.btnRP.Text = "Disminuir\r\nCantidad";
             this.btnRP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRP.UseVisualStyleBackColor = true;
+            this.btnRP.Click += new System.EventHandler(this.btnRP_Click);
             // 
             // btnSP
             // 
@@ -1143,6 +1149,7 @@
             this.btnSP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSP.UseVisualStyleBackColor = true;
+            this.btnSP.Click += new System.EventHandler(this.btnSP_Click);
             // 
             // btnEP
             // 
@@ -1155,6 +1162,7 @@
             this.btnEP.Text = "Eliminar";
             this.btnEP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEP.UseVisualStyleBackColor = true;
+            this.btnEP.Click += new System.EventHandler(this.btnEP_Click);
             // 
             // gbAP
             // 
@@ -1177,6 +1185,7 @@
             this.btnAP.Text = "Agregar";
             this.btnAP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAP.UseVisualStyleBackColor = true;
+            this.btnAP.Click += new System.EventHandler(this.btnAP_Click);
             // 
             // nudP
             // 
@@ -1287,6 +1296,7 @@
             this.btnRMP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRMP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRMP.UseVisualStyleBackColor = true;
+            this.btnRMP.Click += new System.EventHandler(this.btnRMP_Click);
             // 
             // btnSMP
             // 
@@ -1300,6 +1310,7 @@
             this.btnSMP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSMP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSMP.UseVisualStyleBackColor = true;
+            this.btnSMP.Click += new System.EventHandler(this.btnSMP_Click);
             // 
             // btnEMP
             // 
@@ -1313,6 +1324,7 @@
             this.btnEMP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEMP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEMP.UseVisualStyleBackColor = true;
+            this.btnEMP.Click += new System.EventHandler(this.btnEMP_Click);
             // 
             // gbAMP
             // 
@@ -1335,6 +1347,7 @@
             this.btnAMP.Text = "Agregar";
             this.btnAMP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAMP.UseVisualStyleBackColor = true;
+            this.btnAMP.Click += new System.EventHandler(this.btnAMP_Click);
             // 
             // nudMP
             // 
