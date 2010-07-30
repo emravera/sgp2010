@@ -21,7 +21,7 @@ namespace GyCAP.UI.EstructuraProducto
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
         //Variable que simula el código autodecremental para el detalle, usa valores negativos para no tener problemas con valores existentes
-        int codigoDetalle = -1;
+        int codigoDetalle = 0;
         
         public frmPieza()
         {
@@ -157,15 +157,15 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            //Datos opcionales = plano, descripcion, imagen
+            //Datos opcionales = descripcion, imagen
             //Revisamos que completó los datos obligatorios
-            bool datosOK = true;
-            if (txtNombre.Text == String.Empty) { datosOK = false; }
-            if (cbEstado.SelectedIndex == -1) { datosOK = false; }
-            if (cbTerminacion.SelectedIndex == -1) { datosOK = false; }
-            if (cbPlano.SelectedIndex == -1) { datosOK = false; }
-            if (dgvDetallePieza.Rows.Count == 0) { datosOK = false; }
-            if (datosOK)
+            string datosFaltantes = string.Empty;
+            if (txtNombre.Text == string.Empty) { datosFaltantes += "* Nombre\n"; }
+            if (cbEstado.SelectedIndex == -1) { datosFaltantes += "* Estado\n"; }
+            if (cbTerminacion.SelectedIndex == -1) { datosFaltantes += "* Terminación\n"; }
+            if (cbPlano.SelectedIndex == -1) { datosFaltantes += "* Plano\n"; }
+            if (dgvDetallePieza.Rows.Count == 0) { datosFaltantes += "* El detalle de la pieza\n"; }
+            if (datosFaltantes == string.Empty)
             {
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
@@ -270,7 +270,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             else
             {
-                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debe completar los datos:\n\n" + datosFaltantes, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -332,7 +332,7 @@ namespace GyCAP.UI.EstructuraProducto
                 bool agregarMP; //variable que indica si se debe agregar la materia prima al listado
                 //Obtenemos el código de la pieza según sea nueva o modificada, lo hacemos acá porque lo vamos a usar mucho
                 int piezaCodigo;
-                if (estadoInterface == estadoUI.nuevo) { piezaCodigo = 0; }
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { piezaCodigo = -1; }
                 else { piezaCodigo = Convert.ToInt32(dvPiezas[dgvPiezas.SelectedRows[0].Index]["pza_codigo"]); }
                 //Obtenemos el código de la materia prima, también lo vamos a usar mucho
                 int materiaPrimaCodigo = Convert.ToInt32(dvMPDisponibles[dgvMPDisponibles.SelectedRows[0].Index]["mp_codigo"]);
@@ -403,7 +403,10 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
-        {            
+        {
+            //Descartamos los cambios realizamos hasta el momento sin guardar
+            dsEstructura.PIEZAS.RejectChanges();
+            dsEstructura.DETALLE_PIEZA.RejectChanges();
             SetInterface(estadoUI.inicio);
         }
 

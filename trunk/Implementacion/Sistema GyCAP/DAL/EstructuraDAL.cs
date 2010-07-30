@@ -202,7 +202,7 @@ namespace GyCAP.DAL
 
                 //Actualizamos la estructura
                 DB.executeNonQuery(sql, valorParametros, transaccion);
-                //Actualizamos el resto, primero insertamos los nuevos
+                //Actualizamos el resto, primero insertamos los nuevos, luego los updates y por último los deletes - Falta grupos - gonzalo
 
                 #region Inserts
                 Entidades.GrupoEstructura gE = new GyCAP.Entidades.GrupoEstructura();

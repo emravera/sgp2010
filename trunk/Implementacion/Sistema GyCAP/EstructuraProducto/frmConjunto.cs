@@ -20,7 +20,7 @@ namespace GyCAP.UI.EstructuraProducto
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
         //Variable que simula el código autodecremental para el detalle, usa valores negativos para no tener problemas con valores existentes
-        int codigoDetalle = -1; 
+        int codigoDetalle = 0; 
                 
         public frmConjunto()
         {
@@ -174,14 +174,14 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            bool datosOK = true;
+            string datosFaltantes = string.Empty;
             //Revisamos que completó los datos
-            if (txtNombre.Text == string.Empty) { datosOK = false; }
-            if (cbTerminacion.SelectedIndex == -1) { datosOK = false; }
-            if (cbEstado.SelectedIndex == -1) { datosOK = false; }
-            if (cbPlano.SelectedIndex == -1) { datosOK = false; }
-            if (dgvDetalleConjunto.Rows.Count == 0) { datosOK = false; }
-            if (datosOK)
+            if (txtNombre.Text == string.Empty) { datosFaltantes += "* Nombre\n"; }
+            if (cbTerminacion.SelectedIndex == -1) { datosFaltantes += "* Terminación\n"; }
+            if (cbEstado.SelectedIndex == -1) { datosFaltantes += "* Estado\n"; }
+            if (cbPlano.SelectedIndex == -1) { datosFaltantes += "* Plano\n"; }
+            if (dgvDetalleConjunto.Rows.Count == 0) { datosFaltantes += "* El detalle del conjunto\n"; }
+            if (datosFaltantes == string.Empty)
             {
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
@@ -279,7 +279,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             else
             {
-                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debe completar los datos:\n\n" + datosFaltantes, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         
@@ -315,7 +315,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Pieza de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debe seleccionar un Subconjunto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -341,7 +341,7 @@ namespace GyCAP.UI.EstructuraProducto
                 bool agregarSubconjunto; //variable que indica si se debe agregar el subconjunto al listado
                 //Obtenemos el código del conjunto según sea nuevo o modificado, lo hacemos acá porque lo vamos a usar mucho
                 int conjuntoCodigo;
-                if (estadoInterface == estadoUI.nuevo) { conjuntoCodigo = 0; }
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { conjuntoCodigo = -1; }
                 else { conjuntoCodigo = Convert.ToInt32(dvConjuntos[dgvConjuntos.SelectedRows[0].Index]["conj_codigo"]); }
                 //Obtenemos el código del subconjunto, también lo vamos a usar mucho
                 int subconjuntoCodigo = Convert.ToInt32(dvSubconjuntosDisponibles[dgvSCDisponibles.SelectedRows[0].Index]["sconj_codigo"]);
@@ -421,9 +421,9 @@ namespace GyCAP.UI.EstructuraProducto
                 //DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea volver, se perderán todos los cambios efectuados?", "Confirmar", MessageBoxButtons.YesNo);
                 //if (respuesta == DialogResult.Yes)
                 //{
-                    //No quiere guardar nada, descartamos los cambios
-                    //dsEstructura.SUBCONJUNTOS.RejectChanges();
-                    //dsEstructura.DETALLE_CONJUNTO.RejectChanges();
+                    //descartamos los cambios realizados hasta el momento sin guardar
+                    dsEstructura.SUBCONJUNTOS.RejectChanges();
+                    dsEstructura.DETALLE_CONJUNTO.RejectChanges();
                     //Seteamos la interfaz
                     SetInterface(estadoUI.inicio);
                 //}
