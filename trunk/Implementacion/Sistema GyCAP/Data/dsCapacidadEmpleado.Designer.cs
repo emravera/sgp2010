@@ -25,7 +25,7 @@ namespace GyCAP.Data {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class dsCapacidadEmpleado : global::System.Data.DataSet {
         
-        private CAPACIDAD_EMPLEADODataTable tableCAPACIDAD_EMPLEADO;
+        private CAPACIDAD_EMPLEADOSDataTable tableCAPACIDAD_EMPLEADOS;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -53,8 +53,8 @@ namespace GyCAP.Data {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["CAPACIDAD_EMPLEADO"] != null)) {
-                    base.Tables.Add(new CAPACIDAD_EMPLEADODataTable(ds.Tables["CAPACIDAD_EMPLEADO"]));
+                if ((ds.Tables["CAPACIDAD_EMPLEADOS"] != null)) {
+                    base.Tables.Add(new CAPACIDAD_EMPLEADOSDataTable(ds.Tables["CAPACIDAD_EMPLEADOS"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -77,9 +77,9 @@ namespace GyCAP.Data {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public CAPACIDAD_EMPLEADODataTable CAPACIDAD_EMPLEADO {
+        public CAPACIDAD_EMPLEADOSDataTable CAPACIDAD_EMPLEADOS {
             get {
-                return this.tableCAPACIDAD_EMPLEADO;
+                return this.tableCAPACIDAD_EMPLEADOS;
             }
         }
         
@@ -142,8 +142,8 @@ namespace GyCAP.Data {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["CAPACIDAD_EMPLEADO"] != null)) {
-                    base.Tables.Add(new CAPACIDAD_EMPLEADODataTable(ds.Tables["CAPACIDAD_EMPLEADO"]));
+                if ((ds.Tables["CAPACIDAD_EMPLEADOS"] != null)) {
+                    base.Tables.Add(new CAPACIDAD_EMPLEADOSDataTable(ds.Tables["CAPACIDAD_EMPLEADOS"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -175,10 +175,10 @@ namespace GyCAP.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         internal void InitVars(bool initTable) {
-            this.tableCAPACIDAD_EMPLEADO = ((CAPACIDAD_EMPLEADODataTable)(base.Tables["CAPACIDAD_EMPLEADO"]));
+            this.tableCAPACIDAD_EMPLEADOS = ((CAPACIDAD_EMPLEADOSDataTable)(base.Tables["CAPACIDAD_EMPLEADOS"]));
             if ((initTable == true)) {
-                if ((this.tableCAPACIDAD_EMPLEADO != null)) {
-                    this.tableCAPACIDAD_EMPLEADO.InitVars();
+                if ((this.tableCAPACIDAD_EMPLEADOS != null)) {
+                    this.tableCAPACIDAD_EMPLEADOS.InitVars();
                 }
             }
         }
@@ -190,12 +190,12 @@ namespace GyCAP.Data {
             this.Namespace = "http://tempuri.org/dsCapacidadEmpleado.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableCAPACIDAD_EMPLEADO = new CAPACIDAD_EMPLEADODataTable();
-            base.Tables.Add(this.tableCAPACIDAD_EMPLEADO);
+            this.tableCAPACIDAD_EMPLEADOS = new CAPACIDAD_EMPLEADOSDataTable();
+            base.Tables.Add(this.tableCAPACIDAD_EMPLEADOS);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeCAPACIDAD_EMPLEADO() {
+        private bool ShouldSerializeCAPACIDAD_EMPLEADOS() {
             return false;
         }
         
@@ -252,7 +252,7 @@ namespace GyCAP.Data {
             return type;
         }
         
-        public delegate void CAPACIDAD_EMPLEADORowChangeEventHandler(object sender, CAPACIDAD_EMPLEADORowChangeEvent e);
+        public delegate void CAPACIDAD_EMPLEADOSRowChangeEventHandler(object sender, CAPACIDAD_EMPLEADOSRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -260,7 +260,7 @@ namespace GyCAP.Data {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class CAPACIDAD_EMPLEADODataTable : global::System.Data.TypedTableBase<CAPACIDAD_EMPLEADORow> {
+        public partial class CAPACIDAD_EMPLEADOSDataTable : global::System.Data.TypedTableBase<CAPACIDAD_EMPLEADOSRow> {
             
             private global::System.Data.DataColumn columnCEMP_CODIGO;
             
@@ -269,15 +269,15 @@ namespace GyCAP.Data {
             private global::System.Data.DataColumn columnCEMP_DESCRIPCION;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CAPACIDAD_EMPLEADODataTable() {
-                this.TableName = "CAPACIDAD_EMPLEADO";
+            public CAPACIDAD_EMPLEADOSDataTable() {
+                this.TableName = "CAPACIDAD_EMPLEADOS";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal CAPACIDAD_EMPLEADODataTable(global::System.Data.DataTable table) {
+            internal CAPACIDAD_EMPLEADOSDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -293,7 +293,7 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected CAPACIDAD_EMPLEADODataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected CAPACIDAD_EMPLEADOSDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -328,53 +328,53 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CAPACIDAD_EMPLEADORow this[int index] {
+            public CAPACIDAD_EMPLEADOSRow this[int index] {
                 get {
-                    return ((CAPACIDAD_EMPLEADORow)(this.Rows[index]));
+                    return ((CAPACIDAD_EMPLEADOSRow)(this.Rows[index]));
                 }
             }
             
-            public event CAPACIDAD_EMPLEADORowChangeEventHandler CAPACIDAD_EMPLEADORowChanging;
+            public event CAPACIDAD_EMPLEADOSRowChangeEventHandler CAPACIDAD_EMPLEADOSRowChanging;
             
-            public event CAPACIDAD_EMPLEADORowChangeEventHandler CAPACIDAD_EMPLEADORowChanged;
+            public event CAPACIDAD_EMPLEADOSRowChangeEventHandler CAPACIDAD_EMPLEADOSRowChanged;
             
-            public event CAPACIDAD_EMPLEADORowChangeEventHandler CAPACIDAD_EMPLEADORowDeleting;
+            public event CAPACIDAD_EMPLEADOSRowChangeEventHandler CAPACIDAD_EMPLEADOSRowDeleting;
             
-            public event CAPACIDAD_EMPLEADORowChangeEventHandler CAPACIDAD_EMPLEADORowDeleted;
+            public event CAPACIDAD_EMPLEADOSRowChangeEventHandler CAPACIDAD_EMPLEADOSRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddCAPACIDAD_EMPLEADORow(CAPACIDAD_EMPLEADORow row) {
+            public void AddCAPACIDAD_EMPLEADOSRow(CAPACIDAD_EMPLEADOSRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CAPACIDAD_EMPLEADORow AddCAPACIDAD_EMPLEADORow(string CEMP_NOMBRE, string CEMP_DESCRIPCION) {
-                CAPACIDAD_EMPLEADORow rowCAPACIDAD_EMPLEADORow = ((CAPACIDAD_EMPLEADORow)(this.NewRow()));
+            public CAPACIDAD_EMPLEADOSRow AddCAPACIDAD_EMPLEADOSRow(string CEMP_NOMBRE, string CEMP_DESCRIPCION) {
+                CAPACIDAD_EMPLEADOSRow rowCAPACIDAD_EMPLEADOSRow = ((CAPACIDAD_EMPLEADOSRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         CEMP_NOMBRE,
                         CEMP_DESCRIPCION};
-                rowCAPACIDAD_EMPLEADORow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowCAPACIDAD_EMPLEADORow);
-                return rowCAPACIDAD_EMPLEADORow;
+                rowCAPACIDAD_EMPLEADOSRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowCAPACIDAD_EMPLEADOSRow);
+                return rowCAPACIDAD_EMPLEADOSRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CAPACIDAD_EMPLEADORow FindByCEMP_CODIGO(decimal CEMP_CODIGO) {
-                return ((CAPACIDAD_EMPLEADORow)(this.Rows.Find(new object[] {
+            public CAPACIDAD_EMPLEADOSRow FindByCEMP_CODIGO(decimal CEMP_CODIGO) {
+                return ((CAPACIDAD_EMPLEADOSRow)(this.Rows.Find(new object[] {
                             CEMP_CODIGO})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public override global::System.Data.DataTable Clone() {
-                CAPACIDAD_EMPLEADODataTable cln = ((CAPACIDAD_EMPLEADODataTable)(base.Clone()));
+                CAPACIDAD_EMPLEADOSDataTable cln = ((CAPACIDAD_EMPLEADOSDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new CAPACIDAD_EMPLEADODataTable();
+                return new CAPACIDAD_EMPLEADOSDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -398,60 +398,61 @@ namespace GyCAP.Data {
                 this.columnCEMP_CODIGO.AutoIncrementSeed = -1;
                 this.columnCEMP_CODIGO.AutoIncrementStep = -1;
                 this.columnCEMP_CODIGO.AllowDBNull = false;
+                this.columnCEMP_CODIGO.ReadOnly = true;
                 this.columnCEMP_CODIGO.Unique = true;
                 this.columnCEMP_NOMBRE.MaxLength = 80;
-                this.columnCEMP_DESCRIPCION.MaxLength = 250;
+                this.columnCEMP_DESCRIPCION.MaxLength = 200;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CAPACIDAD_EMPLEADORow NewCAPACIDAD_EMPLEADORow() {
-                return ((CAPACIDAD_EMPLEADORow)(this.NewRow()));
+            public CAPACIDAD_EMPLEADOSRow NewCAPACIDAD_EMPLEADOSRow() {
+                return ((CAPACIDAD_EMPLEADOSRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new CAPACIDAD_EMPLEADORow(builder);
+                return new CAPACIDAD_EMPLEADOSRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override global::System.Type GetRowType() {
-                return typeof(CAPACIDAD_EMPLEADORow);
+                return typeof(CAPACIDAD_EMPLEADOSRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.CAPACIDAD_EMPLEADORowChanged != null)) {
-                    this.CAPACIDAD_EMPLEADORowChanged(this, new CAPACIDAD_EMPLEADORowChangeEvent(((CAPACIDAD_EMPLEADORow)(e.Row)), e.Action));
+                if ((this.CAPACIDAD_EMPLEADOSRowChanged != null)) {
+                    this.CAPACIDAD_EMPLEADOSRowChanged(this, new CAPACIDAD_EMPLEADOSRowChangeEvent(((CAPACIDAD_EMPLEADOSRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.CAPACIDAD_EMPLEADORowChanging != null)) {
-                    this.CAPACIDAD_EMPLEADORowChanging(this, new CAPACIDAD_EMPLEADORowChangeEvent(((CAPACIDAD_EMPLEADORow)(e.Row)), e.Action));
+                if ((this.CAPACIDAD_EMPLEADOSRowChanging != null)) {
+                    this.CAPACIDAD_EMPLEADOSRowChanging(this, new CAPACIDAD_EMPLEADOSRowChangeEvent(((CAPACIDAD_EMPLEADOSRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.CAPACIDAD_EMPLEADORowDeleted != null)) {
-                    this.CAPACIDAD_EMPLEADORowDeleted(this, new CAPACIDAD_EMPLEADORowChangeEvent(((CAPACIDAD_EMPLEADORow)(e.Row)), e.Action));
+                if ((this.CAPACIDAD_EMPLEADOSRowDeleted != null)) {
+                    this.CAPACIDAD_EMPLEADOSRowDeleted(this, new CAPACIDAD_EMPLEADOSRowChangeEvent(((CAPACIDAD_EMPLEADOSRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.CAPACIDAD_EMPLEADORowDeleting != null)) {
-                    this.CAPACIDAD_EMPLEADORowDeleting(this, new CAPACIDAD_EMPLEADORowChangeEvent(((CAPACIDAD_EMPLEADORow)(e.Row)), e.Action));
+                if ((this.CAPACIDAD_EMPLEADOSRowDeleting != null)) {
+                    this.CAPACIDAD_EMPLEADOSRowDeleting(this, new CAPACIDAD_EMPLEADOSRowChangeEvent(((CAPACIDAD_EMPLEADOSRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveCAPACIDAD_EMPLEADORow(CAPACIDAD_EMPLEADORow row) {
+            public void RemoveCAPACIDAD_EMPLEADOSRow(CAPACIDAD_EMPLEADOSRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -477,7 +478,7 @@ namespace GyCAP.Data {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "CAPACIDAD_EMPLEADODataTable";
+                attribute2.FixedValue = "CAPACIDAD_EMPLEADOSDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -522,23 +523,23 @@ namespace GyCAP.Data {
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class CAPACIDAD_EMPLEADORow : global::System.Data.DataRow {
+        public partial class CAPACIDAD_EMPLEADOSRow : global::System.Data.DataRow {
             
-            private CAPACIDAD_EMPLEADODataTable tableCAPACIDAD_EMPLEADO;
+            private CAPACIDAD_EMPLEADOSDataTable tableCAPACIDAD_EMPLEADOS;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal CAPACIDAD_EMPLEADORow(global::System.Data.DataRowBuilder rb) : 
+            internal CAPACIDAD_EMPLEADOSRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableCAPACIDAD_EMPLEADO = ((CAPACIDAD_EMPLEADODataTable)(this.Table));
+                this.tableCAPACIDAD_EMPLEADOS = ((CAPACIDAD_EMPLEADOSDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public decimal CEMP_CODIGO {
                 get {
-                    return ((decimal)(this[this.tableCAPACIDAD_EMPLEADO.CEMP_CODIGOColumn]));
+                    return ((decimal)(this[this.tableCAPACIDAD_EMPLEADOS.CEMP_CODIGOColumn]));
                 }
                 set {
-                    this[this.tableCAPACIDAD_EMPLEADO.CEMP_CODIGOColumn] = value;
+                    this[this.tableCAPACIDAD_EMPLEADOS.CEMP_CODIGOColumn] = value;
                 }
             }
             
@@ -546,14 +547,15 @@ namespace GyCAP.Data {
             public string CEMP_NOMBRE {
                 get {
                     try {
-                        return ((string)(this[this.tableCAPACIDAD_EMPLEADO.CEMP_NOMBREColumn]));
+                        return ((string)(this[this.tableCAPACIDAD_EMPLEADOS.CEMP_NOMBREColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CEMP_NOMBRE\' de la tabla \'CAPACIDAD_EMPLEADO\' es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CEMP_NOMBRE\' de la tabla \'CAPACIDAD_EMPLEADOS\' es DBNull." +
+                                "", e);
                     }
                 }
                 set {
-                    this[this.tableCAPACIDAD_EMPLEADO.CEMP_NOMBREColumn] = value;
+                    this[this.tableCAPACIDAD_EMPLEADOS.CEMP_NOMBREColumn] = value;
                 }
             }
             
@@ -561,36 +563,36 @@ namespace GyCAP.Data {
             public string CEMP_DESCRIPCION {
                 get {
                     try {
-                        return ((string)(this[this.tableCAPACIDAD_EMPLEADO.CEMP_DESCRIPCIONColumn]));
+                        return ((string)(this[this.tableCAPACIDAD_EMPLEADOS.CEMP_DESCRIPCIONColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CEMP_DESCRIPCION\' de la tabla \'CAPACIDAD_EMPLEADO\' es DBN" +
-                                "ull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CEMP_DESCRIPCION\' de la tabla \'CAPACIDAD_EMPLEADOS\' es DB" +
+                                "Null.", e);
                     }
                 }
                 set {
-                    this[this.tableCAPACIDAD_EMPLEADO.CEMP_DESCRIPCIONColumn] = value;
+                    this[this.tableCAPACIDAD_EMPLEADOS.CEMP_DESCRIPCIONColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsCEMP_NOMBRENull() {
-                return this.IsNull(this.tableCAPACIDAD_EMPLEADO.CEMP_NOMBREColumn);
+                return this.IsNull(this.tableCAPACIDAD_EMPLEADOS.CEMP_NOMBREColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetCEMP_NOMBRENull() {
-                this[this.tableCAPACIDAD_EMPLEADO.CEMP_NOMBREColumn] = global::System.Convert.DBNull;
+                this[this.tableCAPACIDAD_EMPLEADOS.CEMP_NOMBREColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsCEMP_DESCRIPCIONNull() {
-                return this.IsNull(this.tableCAPACIDAD_EMPLEADO.CEMP_DESCRIPCIONColumn);
+                return this.IsNull(this.tableCAPACIDAD_EMPLEADOS.CEMP_DESCRIPCIONColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetCEMP_DESCRIPCIONNull() {
-                this[this.tableCAPACIDAD_EMPLEADO.CEMP_DESCRIPCIONColumn] = global::System.Convert.DBNull;
+                this[this.tableCAPACIDAD_EMPLEADOS.CEMP_DESCRIPCIONColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -598,20 +600,20 @@ namespace GyCAP.Data {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class CAPACIDAD_EMPLEADORowChangeEvent : global::System.EventArgs {
+        public class CAPACIDAD_EMPLEADOSRowChangeEvent : global::System.EventArgs {
             
-            private CAPACIDAD_EMPLEADORow eventRow;
+            private CAPACIDAD_EMPLEADOSRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CAPACIDAD_EMPLEADORowChangeEvent(CAPACIDAD_EMPLEADORow row, global::System.Data.DataRowAction action) {
+            public CAPACIDAD_EMPLEADOSRowChangeEvent(CAPACIDAD_EMPLEADOSRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CAPACIDAD_EMPLEADORow Row {
+            public CAPACIDAD_EMPLEADOSRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -639,7 +641,7 @@ namespace GyCAP.Data.dsCapacidadEmpleadoTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class CAPACIDAD_EMPLEADOTableAdapter : global::System.ComponentModel.Component {
+    public partial class CAPACIDAD_EMPLEADOSTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -652,7 +654,7 @@ namespace GyCAP.Data.dsCapacidadEmpleadoTableAdapters {
         private bool _clearBeforeFill;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public CAPACIDAD_EMPLEADOTableAdapter() {
+        public CAPACIDAD_EMPLEADOSTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -743,14 +745,14 @@ namespace GyCAP.Data.dsCapacidadEmpleadoTableAdapters {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "CAPACIDAD_EMPLEADO";
+            tableMapping.DataSetTable = "CAPACIDAD_EMPLEADOS";
             tableMapping.ColumnMappings.Add("CEMP_CODIGO", "CEMP_CODIGO");
             tableMapping.ColumnMappings.Add("CEMP_NOMBRE", "CEMP_NOMBRE");
             tableMapping.ColumnMappings.Add("CEMP_DESCRIPCION", "CEMP_DESCRIPCION");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[CAPACIDAD_EMPLEADO] WHERE (([CEMP_CODIGO] = @Original_CEMP_CODIGO) AND ((@IsNull_CEMP_NOMBRE = 1 AND [CEMP_NOMBRE] IS NULL) OR ([CEMP_NOMBRE] = @Original_CEMP_NOMBRE)) AND ((@IsNull_CEMP_DESCRIPCION = 1 AND [CEMP_DESCRIPCION] IS NULL) OR ([CEMP_DESCRIPCION] = @Original_CEMP_DESCRIPCION)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[CAPACIDAD_EMPLEADOS] WHERE (([CEMP_CODIGO] = @Original_CEMP_CODIGO) AND ((@IsNull_CEMP_NOMBRE = 1 AND [CEMP_NOMBRE] IS NULL) OR ([CEMP_NOMBRE] = @Original_CEMP_NOMBRE)) AND ((@IsNull_CEMP_DESCRIPCION = 1 AND [CEMP_DESCRIPCION] IS NULL) OR ([CEMP_DESCRIPCION] = @Original_CEMP_DESCRIPCION)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CEMP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CEMP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CEMP_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CEMP_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -759,16 +761,16 @@ namespace GyCAP.Data.dsCapacidadEmpleadoTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CEMP_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CEMP_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[CAPACIDAD_EMPLEADO] ([CEMP_NOMBRE], [CEMP_DESCRIPCION]) VALUES" +
-                " (@CEMP_NOMBRE, @CEMP_DESCRIPCION);\r\nSELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCR" +
-                "IPCION FROM CAPACIDAD_EMPLEADO WHERE (CEMP_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[CAPACIDAD_EMPLEADOS] ([CEMP_NOMBRE], [CEMP_DESCRIPCION]) VALUE" +
+                "S (@CEMP_NOMBRE, @CEMP_DESCRIPCION);\r\nSELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESC" +
+                "RIPCION FROM CAPACIDAD_EMPLEADOS WHERE (CEMP_CODIGO = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CEMP_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CEMP_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CEMP_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CEMP_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[CAPACIDAD_EMPLEADO] SET [CEMP_NOMBRE] = @CEMP_NOMBRE, [CEMP_DESCRIPCION] = @CEMP_DESCRIPCION WHERE (([CEMP_CODIGO] = @Original_CEMP_CODIGO) AND ((@IsNull_CEMP_NOMBRE = 1 AND [CEMP_NOMBRE] IS NULL) OR ([CEMP_NOMBRE] = @Original_CEMP_NOMBRE)) AND ((@IsNull_CEMP_DESCRIPCION = 1 AND [CEMP_DESCRIPCION] IS NULL) OR ([CEMP_DESCRIPCION] = @Original_CEMP_DESCRIPCION)));
-SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE (CEMP_CODIGO = @CEMP_CODIGO)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[CAPACIDAD_EMPLEADOS] SET [CEMP_NOMBRE] = @CEMP_NOMBRE, [CEMP_DESCRIPCION] = @CEMP_DESCRIPCION WHERE (([CEMP_CODIGO] = @Original_CEMP_CODIGO) AND ((@IsNull_CEMP_NOMBRE = 1 AND [CEMP_NOMBRE] IS NULL) OR ([CEMP_NOMBRE] = @Original_CEMP_NOMBRE)) AND ((@IsNull_CEMP_DESCRIPCION = 1 AND [CEMP_DESCRIPCION] IS NULL) OR ([CEMP_DESCRIPCION] = @Original_CEMP_DESCRIPCION)));
+SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADOS WHERE (CEMP_CODIGO = @CEMP_CODIGO)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CEMP_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CEMP_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CEMP_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CEMP_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -783,7 +785,7 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString4;
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString7;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -791,14 +793,14 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM dbo.CAPACIDAD_EMPLEADO";
+            this._commandCollection[0].CommandText = "SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM dbo.CAPACIDAD_EMPLEADOS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsCapacidadEmpleado.CAPACIDAD_EMPLEADODataTable dataTable) {
+        public virtual int Fill(dsCapacidadEmpleado.CAPACIDAD_EMPLEADOSDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -810,23 +812,23 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsCapacidadEmpleado.CAPACIDAD_EMPLEADODataTable GetData() {
+        public virtual dsCapacidadEmpleado.CAPACIDAD_EMPLEADOSDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsCapacidadEmpleado.CAPACIDAD_EMPLEADODataTable dataTable = new dsCapacidadEmpleado.CAPACIDAD_EMPLEADODataTable();
+            dsCapacidadEmpleado.CAPACIDAD_EMPLEADOSDataTable dataTable = new dsCapacidadEmpleado.CAPACIDAD_EMPLEADOSDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsCapacidadEmpleado.CAPACIDAD_EMPLEADODataTable dataTable) {
+        public virtual int Update(dsCapacidadEmpleado.CAPACIDAD_EMPLEADOSDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual int Update(dsCapacidadEmpleado dataSet) {
-            return this.Adapter.Update(dataSet, "CAPACIDAD_EMPLEADO");
+            return this.Adapter.Update(dataSet, "CAPACIDAD_EMPLEADOS");
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -982,7 +984,7 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
         
         private UpdateOrderOption _updateOrder;
         
-        private CAPACIDAD_EMPLEADOTableAdapter _cAPACIDAD_EMPLEADOTableAdapter;
+        private CAPACIDAD_EMPLEADOSTableAdapter _cAPACIDAD_EMPLEADOSTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -1002,12 +1004,12 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
             "", "System.Drawing.Design.UITypeEditor")]
-        public CAPACIDAD_EMPLEADOTableAdapter CAPACIDAD_EMPLEADOTableAdapter {
+        public CAPACIDAD_EMPLEADOSTableAdapter CAPACIDAD_EMPLEADOSTableAdapter {
             get {
-                return this._cAPACIDAD_EMPLEADOTableAdapter;
+                return this._cAPACIDAD_EMPLEADOSTableAdapter;
             }
             set {
-                this._cAPACIDAD_EMPLEADOTableAdapter = value;
+                this._cAPACIDAD_EMPLEADOSTableAdapter = value;
             }
         }
         
@@ -1028,9 +1030,9 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
                 if ((this._connection != null)) {
                     return this._connection;
                 }
-                if (((this._cAPACIDAD_EMPLEADOTableAdapter != null) 
-                            && (this._cAPACIDAD_EMPLEADOTableAdapter.Connection != null))) {
-                    return this._cAPACIDAD_EMPLEADOTableAdapter.Connection;
+                if (((this._cAPACIDAD_EMPLEADOSTableAdapter != null) 
+                            && (this._cAPACIDAD_EMPLEADOSTableAdapter.Connection != null))) {
+                    return this._cAPACIDAD_EMPLEADOSTableAdapter.Connection;
                 }
                 return null;
             }
@@ -1044,7 +1046,7 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
-                if ((this._cAPACIDAD_EMPLEADOTableAdapter != null)) {
+                if ((this._cAPACIDAD_EMPLEADOSTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -1057,12 +1059,12 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateUpdatedRows(dsCapacidadEmpleado dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._cAPACIDAD_EMPLEADOTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.CAPACIDAD_EMPLEADO.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._cAPACIDAD_EMPLEADOSTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.CAPACIDAD_EMPLEADOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._cAPACIDAD_EMPLEADOTableAdapter.Update(updatedRows));
+                    result = (result + this._cAPACIDAD_EMPLEADOSTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -1075,11 +1077,11 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateInsertedRows(dsCapacidadEmpleado dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._cAPACIDAD_EMPLEADOTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.CAPACIDAD_EMPLEADO.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._cAPACIDAD_EMPLEADOSTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.CAPACIDAD_EMPLEADOS.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._cAPACIDAD_EMPLEADOTableAdapter.Update(addedRows));
+                    result = (result + this._cAPACIDAD_EMPLEADOSTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -1092,11 +1094,11 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateDeletedRows(dsCapacidadEmpleado dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._cAPACIDAD_EMPLEADOTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.CAPACIDAD_EMPLEADO.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._cAPACIDAD_EMPLEADOSTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.CAPACIDAD_EMPLEADOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._cAPACIDAD_EMPLEADOTableAdapter.Update(deletedRows));
+                    result = (result + this._cAPACIDAD_EMPLEADOSTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -1137,8 +1139,8 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
-            if (((this._cAPACIDAD_EMPLEADOTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._cAPACIDAD_EMPLEADOTableAdapter.Connection) == false))) {
+            if (((this._cAPACIDAD_EMPLEADOSTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._cAPACIDAD_EMPLEADOSTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
                         "sma cadena de conexión.");
             }
@@ -1174,13 +1176,13 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
             try {
                 // ---- Prepare for update -----------
                 //
-                if ((this._cAPACIDAD_EMPLEADOTableAdapter != null)) {
-                    revertConnections.Add(this._cAPACIDAD_EMPLEADOTableAdapter, this._cAPACIDAD_EMPLEADOTableAdapter.Connection);
-                    this._cAPACIDAD_EMPLEADOTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._cAPACIDAD_EMPLEADOTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._cAPACIDAD_EMPLEADOTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._cAPACIDAD_EMPLEADOTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._cAPACIDAD_EMPLEADOTableAdapter.Adapter);
+                if ((this._cAPACIDAD_EMPLEADOSTableAdapter != null)) {
+                    revertConnections.Add(this._cAPACIDAD_EMPLEADOSTableAdapter, this._cAPACIDAD_EMPLEADOSTableAdapter.Connection);
+                    this._cAPACIDAD_EMPLEADOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._cAPACIDAD_EMPLEADOSTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._cAPACIDAD_EMPLEADOSTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._cAPACIDAD_EMPLEADOSTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._cAPACIDAD_EMPLEADOSTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -1241,9 +1243,9 @@ SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION FROM CAPACIDAD_EMPLEADO WHERE 
                 if (workConnOpened) {
                     workConnection.Close();
                 }
-                if ((this._cAPACIDAD_EMPLEADOTableAdapter != null)) {
-                    this._cAPACIDAD_EMPLEADOTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cAPACIDAD_EMPLEADOTableAdapter]));
-                    this._cAPACIDAD_EMPLEADOTableAdapter.Transaction = null;
+                if ((this._cAPACIDAD_EMPLEADOSTableAdapter != null)) {
+                    this._cAPACIDAD_EMPLEADOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cAPACIDAD_EMPLEADOSTableAdapter]));
+                    this._cAPACIDAD_EMPLEADOSTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

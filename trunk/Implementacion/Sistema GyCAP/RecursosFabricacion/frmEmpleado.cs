@@ -103,23 +103,40 @@ namespace GyCAP.UI.RecursosFabricacion
             }
 
 
+            ////Para que no genere las columnas automáticamente
+            //dgvCapacidades.AutoGenerateColumns = false;
+            ////Agregamos las columnas
+            //dgvCapacidades.Columns.Add("CEMP_CODIGO", "Código");
+            //dgvCapacidades.Columns.Add("CEMP_NOMBRE", "Capacidades del empleado");
+
+            ////Seteamos el modo de tamaño de las columnas
+            //dgvCapacidades.Columns["CEMP_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvCapacidades.Columns["CEMP_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            ////Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
+            //dgvCapacidades.Columns["CEMP_CODIGO"].DataPropertyName = "E_CODIGO";
+            //dgvCapacidades.Columns["CEMP_NOMBRE"].DataPropertyName = "E_NOMBRE";
+
+            ////Alineacion de los numeros y las fechas en la grilla
+            //dgvCapacidades.Columns["CEMP_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //dgvCapacidades.Columns["CEMP_CODIGO"].Visible = false;
             //Para que no genere las columnas automáticamente
             dgvCapacidades.AutoGenerateColumns = false;
             //Agregamos las columnas
-            dgvCapacidades.Columns.Add("CEMP_CODIGO", "Código");
-            dgvCapacidades.Columns.Add("CEMP_NOMBRE", "Capacidades del empleado");
+            dgvCapacidades.Columns.Add("E_CODIGO", "Código");
+            dgvCapacidades.Columns.Add("CEMP_CODIGO", "Capacidades del empleado");
 
             //Seteamos el modo de tamaño de las columnas
-            dgvCapacidades.Columns["CEMP_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCapacidades.Columns["CEMP_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvCapacidades.Columns["E_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvCapacidades.Columns["CEMP_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            dgvCapacidades.Columns["CEMP_CODIGO"].DataPropertyName = "E_CODIGO";
-            dgvCapacidades.Columns["CEMP_NOMBRE"].DataPropertyName = "E_NOMBRE";
+            dgvCapacidades.Columns["E_CODIGO"].DataPropertyName = "E_CODIGO";
+            dgvCapacidades.Columns["CEMP_CODIGO"].DataPropertyName = "CEMP_NOMBRE";
 
             //Alineacion de los numeros y las fechas en la grilla
-            dgvCapacidades.Columns["CEMP_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvCapacidades.Columns["CEMP_CODIGO"].Visible = false;
+            dgvCapacidades.Columns["E_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvCapacidades.Columns["E_CODIGO"].Visible = false;
 
 
             //CARGA DE COMBOS
@@ -142,9 +159,9 @@ namespace GyCAP.UI.RecursosFabricacion
             BLL.CapacidadEmpleadoBLL.ObtenerTodos(dsEmpleado);
 
             //Creamos el dataview y lo asignamos a la grilla
-            dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDAD_EMPLEADOS);
-            dvCapacidadEmpleado.Sort = "CEMP_NOMBRE ASC";
-            dgvCapacidades.DataSource = dvCapacidadEmpleado;
+            //dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDAD_EMPLEADOS);
+            //dvCapacidadEmpleado.Sort = "CEMP_NOMBRE ASC";
+            //dgvCapacidades.DataSource = dvCapacidadEmpleado;
 
             //Llenar listView
             //dvListaSectores = new DataView(dsEmpleado.SECTORES);
@@ -490,6 +507,16 @@ namespace GyCAP.UI.RecursosFabricacion
                     //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                     //por una consulta a la BD
                     dvEmpleado.Table = dsEmpleado.EMPLEADOS;
+
+                    //BLL.CA
+
+                    //Creamos el dataview y lo asignamos a la grilla
+                    dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDADESXEMPLEADO);
+                    //dvCapacidadEmpleado.Sort = "CEMP_NOMBRE ASC";
+                    dgvCapacidades.DataSource = dvCapacidadEmpleado;
+
+
+
                     if (dsEmpleado.EMPLEADOS.Rows.Count == 0)
                     {
                         MessageBox.Show("No se encontraron Empleados con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -548,8 +575,25 @@ namespace GyCAP.UI.RecursosFabricacion
             sfFechaNac.SetFecha(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_FECHANACIMIENTO);
 
             //dvCapacidadEmpleado.RowFilter = " E_CODIGO = " + codigoEmpleado;
-            dgvCapacidades.Refresh(); 
-            
+            dgvCapacidades.DataSource = dvCapacidadEmpleado;
+            dgvCapacidades.Refresh();
+        }
+
+        private void dgvCapacidades_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != String.Empty)
+            {
+                string nombre;
+                switch (dgvCapacidades.Columns[e.ColumnIndex].Name)
+                {
+                    case "CEMP_CODIGO":
+                        nombre = dsEmpleado.CAPACIDAD_EMPLEADOS.FindByCEMP_CODIGO(Convert.ToInt32(e.Value)).CEMP_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
         
     }

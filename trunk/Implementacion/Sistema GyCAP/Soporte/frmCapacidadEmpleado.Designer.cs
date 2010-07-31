@@ -204,7 +204,7 @@
             this.gbDatos.Size = new System.Drawing.Size(427, 186);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
-            this.gbDatos.Text = "Datos Tipo Unidad de Medida";
+            this.gbDatos.Text = "Capacidad del empleado";
             // 
             // txtDescripcion
             // 

@@ -46,13 +46,13 @@ namespace GyCAP.UI.Soporte
             dgvLista.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             //Alineacion de los numeros y las fechas en la grilla
             dgvLista.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             //Creamos el dataview y lo asignamos a la grilla
-            dvCapacidadEmpleado = new DataView(dsCapacidadEmpleado.CAPACIDAD_EMPLEADO);
+            dvCapacidadEmpleado = new DataView(dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS);
             dvCapacidadEmpleado.Sort = "CEMP_NOMBRE ASC";
             dgvLista.DataSource = dvCapacidadEmpleado;
 
@@ -81,7 +81,7 @@ namespace GyCAP.UI.Soporte
                 case estadoUI.inicio:
                     bool hayDatos;
 
-                    if (dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.Rows.Count == 0)
+                    if (dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.Rows.Count == 0)
                     {
                         hayDatos = false;
                         txtNombreBuscar.Focus();
@@ -223,8 +223,8 @@ namespace GyCAP.UI.Soporte
                         //Lo eliminamos de la DB
                         BLL.CapacidadEmpleadoBLL.Eliminar(codigo);
                         //Lo eliminamos del dataset
-                        dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.FindByCEMP_CODIGO(codigo).Delete();
-                        dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.AcceptChanges();
+                        dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.FindByCEMP_CODIGO(codigo).Delete();
+                        dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.AcceptChanges();
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
@@ -258,12 +258,12 @@ namespace GyCAP.UI.Soporte
         {
             try
             {
-                dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.Clear();
+                dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.Clear();
                 BLL.CapacidadEmpleadoBLL.ObtenerTodos(txtNombreBuscar.Text, dsCapacidadEmpleado);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
-                dvCapacidadEmpleado.Table = dsCapacidadEmpleado.CAPACIDAD_EMPLEADO;
-                if (dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.Rows.Count == 0)
+                dvCapacidadEmpleado.Table = dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS;
+                if (dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.Rows.Count == 0)
                 {
                     MessageBox.Show("No se encontraron Capacidades de Empleado con el nombre ingresado.","Aviso",MessageBoxButtons.OK,MessageBoxIcon.Information );
                 }
@@ -295,7 +295,7 @@ namespace GyCAP.UI.Soporte
                         //Primero lo creamos en la db
                         capacidadEmpleado.Codigo = BLL.CapacidadEmpleadoBLL.Insertar(capacidadEmpleado);
                         //Ahora lo agregamos al dataset
-                        Data.dsCapacidadEmpleado.CAPACIDAD_EMPLEADORow rowCapacidadEmpleado = dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.NewCAPACIDAD_EMPLEADORow();
+                        Data.dsCapacidadEmpleado.CAPACIDAD_EMPLEADOSRow rowCapacidadEmpleado = dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.NewCAPACIDAD_EMPLEADOSRow();
                         //Indicamos que comienza la edición de la fila
                         rowCapacidadEmpleado.BeginEdit();
                         rowCapacidadEmpleado.CEMP_CODIGO = capacidadEmpleado.Codigo;
@@ -304,8 +304,8 @@ namespace GyCAP.UI.Soporte
                         //Termina la edición de la fila
                         rowCapacidadEmpleado.EndEdit();
                         //Agregamos la fila al dataset y aceptamos los cambios
-                        dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.AddCAPACIDAD_EMPLEADORow(rowCapacidadEmpleado);
-                        dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.AcceptChanges();
+                        dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.AddCAPACIDAD_EMPLEADOSRow(rowCapacidadEmpleado);
+                        dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
 
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
@@ -342,12 +342,12 @@ namespace GyCAP.UI.Soporte
                         //Lo actualizamos en la DB
                         BLL.CapacidadEmpleadoBLL.Actualizar(capacidadEmpleado);
                         //Lo actualizamos en el dataset y aceptamos los cambios
-                        Data.dsCapacidadEmpleado.CAPACIDAD_EMPLEADORow rowCapacidadEmpleado = dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.FindByCEMP_CODIGO(capacidadEmpleado.Codigo);
+                        Data.dsCapacidadEmpleado.CAPACIDAD_EMPLEADOSRow rowCapacidadEmpleado = dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.FindByCEMP_CODIGO(capacidadEmpleado.Codigo);
                         rowCapacidadEmpleado.BeginEdit();
                         rowCapacidadEmpleado.CEMP_NOMBRE = txtNombre.Text;
                         rowCapacidadEmpleado.CEMP_DESCRIPCION = txtDescripcion.Text;
                         rowCapacidadEmpleado.EndEdit();
-                        dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.AcceptChanges();
+                        dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.AcceptChanges();
                         //Avisamos que estuvo todo ok
                         MessageBox.Show("Elemento actualizado correctamente.", "Aviso");
                         //Y por último seteamos el estado de la interfaz
@@ -369,7 +369,7 @@ namespace GyCAP.UI.Soporte
 
         private void dgvLista_DoubleClick(object sender, EventArgs e)
         {
-            if (dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.Rows.Count != 0)
+            if (dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.Rows.Count != 0)
             {
                 btnConsultar.PerformClick();
             }   
@@ -378,8 +378,8 @@ namespace GyCAP.UI.Soporte
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             int codigoCapacidadEmpleado = Convert.ToInt32(dvCapacidadEmpleado[e.RowIndex]["CEMP_CODIGO"]);
-            txtNombre.Text = dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.FindByCEMP_CODIGO(codigoCapacidadEmpleado).CEMP_NOMBRE ;
-            txtDescripcion.Text = dsCapacidadEmpleado.CAPACIDAD_EMPLEADO.FindByCEMP_CODIGO(codigoCapacidadEmpleado).CEMP_DESCRIPCION;
+            txtNombre.Text = dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.FindByCEMP_CODIGO(codigoCapacidadEmpleado).CEMP_NOMBRE ;
+            txtDescripcion.Text = dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.FindByCEMP_CODIGO(codigoCapacidadEmpleado).CEMP_DESCRIPCION;
         }
 
         private void txtNombreBuscar_Enter(object sender, EventArgs e)
