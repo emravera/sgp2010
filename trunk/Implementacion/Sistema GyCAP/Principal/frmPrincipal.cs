@@ -192,21 +192,17 @@ namespace Principal
             GyCAP.UI.PlanificacionProduccion.frmEstimarDemandaAnual.Instancia.Show();
         }
 
-        
-
         private void btnPlanAnual_Click(object sender, EventArgs e)
         {
             GyCAP.UI.PlanificacionProduccion.frmPlanAnual.Instancia.MdiParent = this;
             GyCAP.UI.PlanificacionProduccion.frmPlanAnual.Instancia.Show();
         }
 
-
-        
-
-       
-
-        
-
+        private void tsMaquinas_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.RecursosFabricacion.frmRFMaquina.Instancia.MdiParent = this;
+            GyCAP.UI.RecursosFabricacion.frmRFMaquina.Instancia.Show();
+        }
         
     }
 }

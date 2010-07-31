@@ -77,10 +77,11 @@
             this.t9 = new System.Windows.Forms.ToolStripButton();
             this.tLEmpleado = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
+            this.btnPlanAnual = new System.Windows.Forms.ToolStripButton();
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.btnPlanAnual = new System.Windows.Forms.ToolStripButton();
+            this.tsMaquinas = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -428,7 +429,8 @@
             this.t9,
             this.tLEmpleado,
             this.toolStripButton9,
-            this.btnPlanAnual});
+            this.btnPlanAnual,
+            this.tsMaquinas});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(792, 36);
@@ -524,6 +526,16 @@
             this.toolStripButton9.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
             // 
+            // btnPlanAnual
+            // 
+            this.btnPlanAnual.Image = ((System.Drawing.Image)(resources.GetObject("btnPlanAnual.Image")));
+            this.btnPlanAnual.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPlanAnual.Name = "btnPlanAnual";
+            this.btnPlanAnual.Size = new System.Drawing.Size(61, 33);
+            this.btnPlanAnual.Text = "Plan Anual";
+            this.btnPlanAnual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPlanAnual.Click += new System.EventHandler(this.btnPlanAnual_Click);
+            // 
             // barraEstado
             // 
             this.barraEstado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -540,15 +552,15 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(38, 17);
             this.toolStripStatusLabel.Text = "Status";
             // 
-            // btnPlanAnual
+            // tsMaquinas
             // 
-            this.btnPlanAnual.Image = ((System.Drawing.Image)(resources.GetObject("btnPlanAnual.Image")));
-            this.btnPlanAnual.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPlanAnual.Name = "btnPlanAnual";
-            this.btnPlanAnual.Size = new System.Drawing.Size(61, 33);
-            this.btnPlanAnual.Text = "Plan Anual";
-            this.btnPlanAnual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPlanAnual.Click += new System.EventHandler(this.btnPlanAnual_Click);
+            this.tsMaquinas.Image = ((System.Drawing.Image)(resources.GetObject("tsMaquinas.Image")));
+            this.tsMaquinas.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsMaquinas.Name = "tsMaquinas";
+            this.tsMaquinas.Size = new System.Drawing.Size(56, 33);
+            this.tsMaquinas.Text = "Maquinas";
+            this.tsMaquinas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsMaquinas.Click += new System.EventHandler(this.tsMaquinas_Click);
             // 
             // frmPrincipal
             // 
@@ -628,6 +640,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton9;
         public System.Windows.Forms.StatusStrip barraEstado;
         private System.Windows.Forms.ToolStripButton btnPlanAnual;
+        private System.Windows.Forms.ToolStripButton tsMaquinas;
     }
 }
 

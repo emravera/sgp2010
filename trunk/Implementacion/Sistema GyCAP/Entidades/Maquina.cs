@@ -9,9 +9,12 @@ namespace GyCAP.Entidades
     {
         private int codigo;
         private String nombre;
+        private string numeroSerie;
+        private DateTime fechaAlta;
         private ModeloMaquina modelo;
         private FabricanteMaquina fabricante;
-        private Marca marca;
+        private string marca;
+        private EstadoMaquina estado;
 
         public int Codigo
         {
@@ -24,7 +27,19 @@ namespace GyCAP.Entidades
             get { return nombre; }
             set { nombre = value; }
         }
- 
+
+        public string NumeroSerie
+        {
+            get { return numeroSerie; }
+            set { numeroSerie = value; }
+        }
+
+        public DateTime FechaAlta
+        {
+            get { return fechaAlta; }
+            set { fechaAlta = value; }
+        }
+
         public ModeloMaquina Modelo
         {
             get { return modelo; }
@@ -36,11 +51,17 @@ namespace GyCAP.Entidades
             get { return fabricante; }
             set { fabricante = value; }
         }
-        
-        public Marca Marca
+
+        public string Marca
         {
             get { return marca; }
             set { marca = value; }
+        }
+
+        public EstadoMaquina Estado
+        {
+            get { return estado; }
+            set { estado = value; }
         }
     }
 }

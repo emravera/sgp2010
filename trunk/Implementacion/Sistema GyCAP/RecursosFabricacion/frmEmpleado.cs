@@ -78,8 +78,8 @@ namespace GyCAP.UI.RecursosFabricacion
             //Llena el Dataset con los Sectores
             BLL.SectorBLL.ObtenerTodos(dsEmpleado);
 
-            //Llena el Dataset con las Capacidades
-            BLL.SectorBLL.ObtenerTodos(dsEmpleado);
+            ////Llena el Dataset con las Capacidades
+            //BLL.SectorBLL.ObtenerTodos(dsEmpleado);
 
             //Carga de la Lista de Sectores
             dvListaSectores = new DataView(dsEmpleado.SECTORES);
@@ -595,7 +595,22 @@ namespace GyCAP.UI.RecursosFabricacion
                 }
             }
         }
-        
+
+        private void txtLegajo_Enter(object sender, EventArgs e)
+        {
+            txtLegajo.SelectAll(); 
+        }
+
+        private void txtApellido_Enter(object sender, EventArgs e)
+        {
+            txtApellido.SelectAll();
+        }
+
+        private void txtNombre_Enter(object sender, EventArgs e)
+        {
+            txtNombre.SelectAll(); 
+        }
+
     }
 
 
