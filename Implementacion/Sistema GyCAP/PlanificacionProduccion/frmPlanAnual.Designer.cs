@@ -78,20 +78,33 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.gbDatosPrincipales = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label30 = new System.Windows.Forms.Label();
+            this.numPuntoEquilibrio = new System.Windows.Forms.NumericUpDown();
+            this.label28 = new System.Windows.Forms.Label();
+            this.numPrecioVenta = new System.Windows.Forms.NumericUpDown();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.numCostoVariable = new System.Windows.Forms.NumericUpDown();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.numCostofijo = new System.Windows.Forms.NumericUpDown();
+            this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.rbDemandaActual = new System.Windows.Forms.RadioButton();
+            this.rbOtraDemanda = new System.Windows.Forms.RadioButton();
             this.chListAnios = new System.Windows.Forms.CheckedListBox();
             this.label22 = new System.Windows.Forms.Label();
+            this.cbEstimacionDemanda = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.numCapacidadStock = new System.Windows.Forms.NumericUpDown();
             this.numCapacidadProducción = new System.Windows.Forms.NumericUpDown();
             this.label19 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.btnCalcularEstimacion = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.numCrecimiento = new System.Windows.Forms.NumericUpDown();
+            this.numAdelantamiento = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.txtAnio = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -102,8 +115,10 @@
             this.btnConsultar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
+            this.btnPlanificar = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cbEstimacionDemanda = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.txtDemandaNoCubierta = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numDiciembre)).BeginInit();
             this.tcPlanAnual.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -130,10 +145,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.numJulio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numEnero)).BeginInit();
             this.gbDatosPrincipales.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numPuntoEquilibrio)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPrecioVenta)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCostoVariable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCostofijo)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCapacidadStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCapacidadProducción)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCrecimiento)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAdelantamiento)).BeginInit();
             this.tsMenu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -164,7 +184,7 @@
             this.tcPlanAnual.Name = "tcPlanAnual";
             this.tcPlanAnual.Padding = new System.Drawing.Point(0, 0);
             this.tcPlanAnual.SelectedIndex = 0;
-            this.tcPlanAnual.Size = new System.Drawing.Size(738, 430);
+            this.tcPlanAnual.Size = new System.Drawing.Size(738, 480);
             this.tcPlanAnual.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcPlanAnual.TabIndex = 8;
             // 
@@ -176,7 +196,7 @@
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(730, 421);
+            this.tpBuscar.Size = new System.Drawing.Size(730, 471);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
@@ -229,6 +249,7 @@
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(376, 290);
             this.dgvLista.TabIndex = 1;
+            this.dgvLista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellClick);
             // 
             // groupBox1
             // 
@@ -283,14 +304,14 @@
             this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDatos.Size = new System.Drawing.Size(730, 421);
+            this.tpDatos.Size = new System.Drawing.Size(730, 471);
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
             // gbGraficoEstimacion
             // 
             this.gbGraficoEstimacion.Controls.Add(this.chartDemanda);
-            this.gbGraficoEstimacion.Location = new System.Drawing.Point(325, 146);
+            this.gbGraficoEstimacion.Location = new System.Drawing.Point(318, 189);
             this.gbGraficoEstimacion.Name = "gbGraficoEstimacion";
             this.gbGraficoEstimacion.Size = new System.Drawing.Size(399, 230);
             this.gbGraficoEstimacion.TabIndex = 11;
@@ -314,7 +335,7 @@
             // 
             this.gbBotones.Controls.Add(this.btnVolver);
             this.gbBotones.Controls.Add(this.btnGuardar);
-            this.gbBotones.Location = new System.Drawing.Point(325, 375);
+            this.gbBotones.Location = new System.Drawing.Point(318, 424);
             this.gbBotones.Name = "gbBotones";
             this.gbBotones.Size = new System.Drawing.Size(399, 40);
             this.gbBotones.TabIndex = 13;
@@ -328,6 +349,7 @@
             this.btnVolver.TabIndex = 22;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnGuardar
             // 
@@ -343,7 +365,7 @@
             this.gbModificacion.Controls.Add(this.lblTotalSistema);
             this.gbModificacion.Controls.Add(this.label21);
             this.gbModificacion.Controls.Add(this.btnModificarPlanificacion);
-            this.gbModificacion.Location = new System.Drawing.Point(6, 375);
+            this.gbModificacion.Location = new System.Drawing.Point(6, 424);
             this.gbModificacion.Name = "gbModificacion";
             this.gbModificacion.Size = new System.Drawing.Size(302, 40);
             this.gbModificacion.TabIndex = 15;
@@ -374,9 +396,12 @@
             this.btnModificarPlanificacion.TabIndex = 23;
             this.btnModificarPlanificacion.Text = "Modificar Planificacion";
             this.btnModificarPlanificacion.UseVisualStyleBackColor = true;
+            this.btnModificarPlanificacion.Click += new System.EventHandler(this.btnModificarPlanificacion_Click);
             // 
             // gbEstimacionMes
             // 
+            this.gbEstimacionMes.Controls.Add(this.txtDemandaNoCubierta);
+            this.gbEstimacionMes.Controls.Add(this.label31);
             this.gbEstimacionMes.Controls.Add(this.numDiciembre);
             this.gbEstimacionMes.Controls.Add(this.numNoviembre);
             this.gbEstimacionMes.Controls.Add(this.numOctubre);
@@ -403,7 +428,7 @@
             this.gbEstimacionMes.Controls.Add(this.label7);
             this.gbEstimacionMes.Controls.Add(this.label6);
             this.gbEstimacionMes.Controls.Add(this.label5);
-            this.gbEstimacionMes.Location = new System.Drawing.Point(6, 145);
+            this.gbEstimacionMes.Location = new System.Drawing.Point(6, 188);
             this.gbEstimacionMes.Name = "gbEstimacionMes";
             this.gbEstimacionMes.Size = new System.Drawing.Size(300, 230);
             this.gbEstimacionMes.TabIndex = 12;
@@ -555,7 +580,7 @@
             // 
             // txtTotal
             // 
-            this.txtTotal.Location = new System.Drawing.Point(194, 200);
+            this.txtTotal.Location = new System.Drawing.Point(192, 204);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(100, 21);
             this.txtTotal.TabIndex = 18;
@@ -563,7 +588,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(143, 203);
+            this.label18.Location = new System.Drawing.Point(224, 188);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(31, 13);
             this.label18.TabIndex = 24;
@@ -679,6 +704,7 @@
             // 
             // gbDatosPrincipales
             // 
+            this.gbDatosPrincipales.Controls.Add(this.groupBox3);
             this.gbDatosPrincipales.Controls.Add(this.label23);
             this.gbDatosPrincipales.Controls.Add(this.groupBox2);
             this.gbDatosPrincipales.Controls.Add(this.label22);
@@ -688,24 +714,172 @@
             this.gbDatosPrincipales.Controls.Add(this.label19);
             this.gbDatosPrincipales.Controls.Add(this.label2);
             this.gbDatosPrincipales.Controls.Add(this.label20);
-            this.gbDatosPrincipales.Controls.Add(this.btnCalcularEstimacion);
             this.gbDatosPrincipales.Controls.Add(this.label4);
-            this.gbDatosPrincipales.Controls.Add(this.numCrecimiento);
+            this.gbDatosPrincipales.Controls.Add(this.numAdelantamiento);
             this.gbDatosPrincipales.Controls.Add(this.label3);
             this.gbDatosPrincipales.Controls.Add(this.txtAnio);
             this.gbDatosPrincipales.Controls.Add(this.label17);
             this.gbDatosPrincipales.Location = new System.Drawing.Point(3, 3);
             this.gbDatosPrincipales.Name = "gbDatosPrincipales";
-            this.gbDatosPrincipales.Size = new System.Drawing.Size(721, 136);
+            this.gbDatosPrincipales.Size = new System.Drawing.Size(721, 180);
             this.gbDatosPrincipales.TabIndex = 10;
             this.gbDatosPrincipales.TabStop = false;
             this.gbDatosPrincipales.Text = "Datos Principales";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Controls.Add(this.label30);
+            this.groupBox3.Controls.Add(this.numPuntoEquilibrio);
+            this.groupBox3.Controls.Add(this.label28);
+            this.groupBox3.Controls.Add(this.numPrecioVenta);
+            this.groupBox3.Controls.Add(this.label29);
+            this.groupBox3.Controls.Add(this.label26);
+            this.groupBox3.Controls.Add(this.numCostoVariable);
+            this.groupBox3.Controls.Add(this.label27);
+            this.groupBox3.Controls.Add(this.label25);
+            this.groupBox3.Controls.Add(this.numCostofijo);
+            this.groupBox3.Controls.Add(this.label24);
+            this.groupBox3.Location = new System.Drawing.Point(323, 70);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(385, 101);
+            this.groupBox3.TabIndex = 22;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Calculo Punto de Equilibrio";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(265, 67);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Calcular";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(254, 17);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(99, 13);
+            this.label30.TabIndex = 18;
+            this.label30.Text = "Punto de Equilibrio:";
+            // 
+            // numPuntoEquilibrio
+            // 
+            this.numPuntoEquilibrio.Location = new System.Drawing.Point(265, 36);
+            this.numPuntoEquilibrio.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numPuntoEquilibrio.Name = "numPuntoEquilibrio";
+            this.numPuntoEquilibrio.Size = new System.Drawing.Size(73, 21);
+            this.numPuntoEquilibrio.TabIndex = 13;
+            this.numPuntoEquilibrio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(168, 71);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(16, 13);
+            this.label28.TabIndex = 16;
+            this.label28.Text = "$ ";
+            // 
+            // numPrecioVenta
+            // 
+            this.numPrecioVenta.Location = new System.Drawing.Point(89, 69);
+            this.numPrecioVenta.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numPrecioVenta.Name = "numPrecioVenta";
+            this.numPrecioVenta.Size = new System.Drawing.Size(73, 21);
+            this.numPrecioVenta.TabIndex = 12;
+            this.numPrecioVenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(13, 71);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(71, 13);
+            this.label29.TabIndex = 14;
+            this.label29.Text = "Precio Venta:";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(168, 44);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(50, 13);
+            this.label26.TabIndex = 13;
+            this.label26.Text = "$/Unidad";
+            // 
+            // numCostoVariable
+            // 
+            this.numCostoVariable.Location = new System.Drawing.Point(89, 42);
+            this.numCostoVariable.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numCostoVariable.Name = "numCostoVariable";
+            this.numCostoVariable.Size = new System.Drawing.Size(73, 21);
+            this.numCostoVariable.TabIndex = 11;
+            this.numCostoVariable.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(13, 44);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(80, 13);
+            this.label27.TabIndex = 11;
+            this.label27.Text = "Costo Variable:";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(168, 17);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(60, 13);
+            this.label25.TabIndex = 10;
+            this.label25.Text = "$/Semanas";
+            // 
+            // numCostofijo
+            // 
+            this.numCostofijo.Location = new System.Drawing.Point(89, 15);
+            this.numCostofijo.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numCostofijo.Name = "numCostofijo";
+            this.numCostofijo.Size = new System.Drawing.Size(73, 21);
+            this.numCostofijo.TabIndex = 10;
+            this.numCostofijo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(13, 17);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(59, 13);
+            this.label24.TabIndex = 4;
+            this.label24.Text = "Costo Fijo:";
             // 
             // label23
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(230, 106);
+            this.label23.Location = new System.Drawing.Point(245, 106);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(51, 13);
             this.label23.TabIndex = 21;
@@ -713,8 +887,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.radioButton1);
-            this.groupBox2.Controls.Add(this.radioButton2);
+            this.groupBox2.Controls.Add(this.rbDemandaActual);
+            this.groupBox2.Controls.Add(this.rbOtraDemanda);
             this.groupBox2.Controls.Add(this.chListAnios);
             this.groupBox2.Location = new System.Drawing.Point(323, 15);
             this.groupBox2.Name = "groupBox2";
@@ -723,86 +897,88 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Demanda Año Siguiente";
             // 
-            // radioButton1
+            // rbDemandaActual
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(16, 20);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(103, 17);
-            this.radioButton1.TabIndex = 10;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Demanda Actual";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbDemandaActual.AutoSize = true;
+            this.rbDemandaActual.Location = new System.Drawing.Point(6, 20);
+            this.rbDemandaActual.Name = "rbDemandaActual";
+            this.rbDemandaActual.Size = new System.Drawing.Size(103, 17);
+            this.rbDemandaActual.TabIndex = 6;
+            this.rbDemandaActual.TabStop = true;
+            this.rbDemandaActual.Text = "Demanda Actual";
+            this.rbDemandaActual.UseVisualStyleBackColor = true;
+            this.rbDemandaActual.CheckedChanged += new System.EventHandler(this.rbDemandaActual_CheckedChanged);
             // 
-            // radioButton2
+            // rbOtraDemanda
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(147, 20);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(95, 17);
-            this.radioButton2.TabIndex = 11;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Otra Demanda";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbOtraDemanda.AutoSize = true;
+            this.rbOtraDemanda.Location = new System.Drawing.Point(115, 20);
+            this.rbOtraDemanda.Name = "rbOtraDemanda";
+            this.rbOtraDemanda.Size = new System.Drawing.Size(95, 17);
+            this.rbOtraDemanda.TabIndex = 7;
+            this.rbOtraDemanda.TabStop = true;
+            this.rbOtraDemanda.Text = "Otra Demanda";
+            this.rbOtraDemanda.UseVisualStyleBackColor = true;
+            this.rbOtraDemanda.CheckedChanged += new System.EventHandler(this.rbOtraDemanda_CheckedChanged);
             // 
             // chListAnios
             // 
             this.chListAnios.FormattingEnabled = true;
-            this.chListAnios.Location = new System.Drawing.Point(248, 20);
+            this.chListAnios.Location = new System.Drawing.Point(212, 17);
             this.chListAnios.Name = "chListAnios";
-            this.chListAnios.Size = new System.Drawing.Size(126, 20);
-            this.chListAnios.TabIndex = 4;
+            this.chListAnios.Size = new System.Drawing.Size(167, 20);
+            this.chListAnios.TabIndex = 9;
             // 
             // label22
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(555, 79);
+            this.label22.Location = new System.Drawing.Point(245, 133);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(51, 13);
             this.label22.TabIndex = 19;
             this.label22.Text = "Unidades";
             // 
+            // cbEstimacionDemanda
+            // 
+            this.cbEstimacionDemanda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstimacionDemanda.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbEstimacionDemanda.FormattingEnabled = true;
+            this.cbEstimacionDemanda.Location = new System.Drawing.Point(166, 47);
+            this.cbEstimacionDemanda.Name = "cbEstimacionDemanda";
+            this.cbEstimacionDemanda.Size = new System.Drawing.Size(137, 21);
+            this.cbEstimacionDemanda.TabIndex = 2;
+            // 
             // numCapacidadStock
             // 
-            this.numCapacidadStock.Location = new System.Drawing.Point(151, 102);
+            this.numCapacidadStock.Location = new System.Drawing.Point(166, 102);
             this.numCapacidadStock.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
-            this.numCapacidadStock.Minimum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            -2147483648});
             this.numCapacidadStock.Name = "numCapacidadStock";
             this.numCapacidadStock.Size = new System.Drawing.Size(73, 21);
-            this.numCapacidadStock.TabIndex = 17;
+            this.numCapacidadStock.TabIndex = 4;
             this.numCapacidadStock.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // numCapacidadProducción
             // 
-            this.numCapacidadProducción.Location = new System.Drawing.Point(476, 75);
+            this.numCapacidadProducción.Location = new System.Drawing.Point(166, 129);
             this.numCapacidadProducción.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
-            this.numCapacidadProducción.Minimum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            -2147483648});
             this.numCapacidadProducción.Name = "numCapacidadProducción";
             this.numCapacidadProducción.Size = new System.Drawing.Size(73, 21);
-            this.numCapacidadProducción.TabIndex = 16;
+            this.numCapacidadProducción.TabIndex = 5;
             this.numCapacidadProducción.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(17, 106);
+            this.label19.Location = new System.Drawing.Point(6, 110);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(129, 13);
             this.label19.TabIndex = 15;
@@ -811,7 +987,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(325, 77);
+            this.label2.Location = new System.Drawing.Point(6, 135);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(155, 13);
             this.label2.TabIndex = 13;
@@ -821,52 +997,38 @@
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(230, 80);
+            this.label20.Location = new System.Drawing.Point(245, 80);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(50, 13);
             this.label20.TabIndex = 9;
             this.label20.Text = "Semanas";
             // 
-            // btnCalcularEstimacion
-            // 
-            this.btnCalcularEstimacion.Location = new System.Drawing.Point(580, 107);
-            this.btnCalcularEstimacion.Name = "btnCalcularEstimacion";
-            this.btnCalcularEstimacion.Size = new System.Drawing.Size(128, 23);
-            this.btnCalcularEstimacion.TabIndex = 6;
-            this.btnCalcularEstimacion.Text = "Calcular Planificación";
-            this.btnCalcularEstimacion.UseVisualStyleBackColor = true;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 51);
+            this.label4.Location = new System.Drawing.Point(6, 55);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(124, 13);
             this.label4.TabIndex = 8;
             this.label4.Text = "Estimación de Demanda:";
             // 
-            // numCrecimiento
+            // numAdelantamiento
             // 
-            this.numCrecimiento.Location = new System.Drawing.Point(151, 74);
-            this.numCrecimiento.Maximum = new decimal(new int[] {
-            10000000,
+            this.numAdelantamiento.Location = new System.Drawing.Point(166, 74);
+            this.numAdelantamiento.Maximum = new decimal(new int[] {
+            52,
             0,
             0,
             0});
-            this.numCrecimiento.Minimum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            -2147483648});
-            this.numCrecimiento.Name = "numCrecimiento";
-            this.numCrecimiento.Size = new System.Drawing.Size(73, 21);
-            this.numCrecimiento.TabIndex = 3;
-            this.numCrecimiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numAdelantamiento.Name = "numAdelantamiento";
+            this.numAdelantamiento.Size = new System.Drawing.Size(73, 21);
+            this.numAdelantamiento.TabIndex = 3;
+            this.numAdelantamiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 79);
+            this.label3.Location = new System.Drawing.Point(6, 83);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(141, 13);
             this.label3.TabIndex = 2;
@@ -874,7 +1036,7 @@
             // 
             // txtAnio
             // 
-            this.txtAnio.Location = new System.Drawing.Point(151, 20);
+            this.txtAnio.Location = new System.Drawing.Point(166, 20);
             this.txtAnio.Name = "txtAnio";
             this.txtAnio.Size = new System.Drawing.Size(136, 21);
             this.txtAnio.TabIndex = 1;
@@ -882,7 +1044,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(8, 23);
+            this.label17.Location = new System.Drawing.Point(6, 27);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(117, 13);
             this.label17.TabIndex = 0;
@@ -922,6 +1084,7 @@
             this.btnNuevo.Size = new System.Drawing.Size(42, 47);
             this.btnNuevo.Text = "&Nuevo";
             this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // btnConsultar
             // 
@@ -932,6 +1095,7 @@
             this.btnConsultar.Size = new System.Drawing.Size(43, 47);
             this.btnConsultar.Text = "&Buscar";
             this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
             // btnSalir
             // 
@@ -942,6 +1106,7 @@
             this.btnSalir.Size = new System.Drawing.Size(31, 47);
             this.btnSalir.Text = "&Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // tsMenu
             // 
@@ -957,6 +1122,7 @@
             this.btnConsultar,
             this.btnModificar,
             this.btnEliminar,
+            this.btnPlanificar,
             this.toolStripSeparator1,
             this.btnSalir});
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
@@ -965,6 +1131,17 @@
             this.tsMenu.Size = new System.Drawing.Size(738, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
+            // 
+            // btnPlanificar
+            // 
+            this.btnPlanificar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.System_25;
+            this.btnPlanificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnPlanificar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPlanificar.Name = "btnPlanificar";
+            this.btnPlanificar.Size = new System.Drawing.Size(54, 47);
+            this.btnPlanificar.Text = "Planificar";
+            this.btnPlanificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPlanificar.Click += new System.EventHandler(this.btnPlanificar_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -979,24 +1156,30 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(742, 486);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(742, 536);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
-            // cbEstimacionDemanda
+            // txtDemandaNoCubierta
             // 
-            this.cbEstimacionDemanda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEstimacionDemanda.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbEstimacionDemanda.FormattingEnabled = true;
-            this.cbEstimacionDemanda.Location = new System.Drawing.Point(151, 47);
-            this.cbEstimacionDemanda.Name = "cbEstimacionDemanda";
-            this.cbEstimacionDemanda.Size = new System.Drawing.Size(137, 21);
-            this.cbEstimacionDemanda.TabIndex = 18;
+            this.txtDemandaNoCubierta.Location = new System.Drawing.Point(20, 203);
+            this.txtDemandaNoCubierta.Name = "txtDemandaNoCubierta";
+            this.txtDemandaNoCubierta.Size = new System.Drawing.Size(100, 21);
+            this.txtDemandaNoCubierta.TabIndex = 25;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(15, 188);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(112, 13);
+            this.label31.TabIndex = 26;
+            this.label31.Text = "Demanda No Cubierta";
             // 
             // frmPlanAnual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(742, 486);
+            this.ClientSize = new System.Drawing.Size(742, 536);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmPlanAnual";
@@ -1031,11 +1214,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.numEnero)).EndInit();
             this.gbDatosPrincipales.ResumeLayout(false);
             this.gbDatosPrincipales.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numPuntoEquilibrio)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPrecioVenta)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCostoVariable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCostofijo)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCapacidadStock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCapacidadProducción)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCrecimiento)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAdelantamiento)).EndInit();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -1095,9 +1284,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox gbDatosPrincipales;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Button btnCalcularEstimacion;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.NumericUpDown numCrecimiento;
+        private System.Windows.Forms.NumericUpDown numAdelantamiento;
         private System.Windows.Forms.CheckedListBox chListAnios;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtAnio;
@@ -1110,8 +1298,8 @@
         private System.Windows.Forms.ToolStripButton btnSalir;
         private System.Windows.Forms.ToolStrip tsMenu;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rbOtraDemanda;
+        private System.Windows.Forms.RadioButton rbDemandaActual;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numCapacidadStock;
         private System.Windows.Forms.NumericUpDown numCapacidadProducción;
@@ -1120,6 +1308,22 @@
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbEstimacionDemanda;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.NumericUpDown numPuntoEquilibrio;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.NumericUpDown numPrecioVenta;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.NumericUpDown numCostoVariable;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.NumericUpDown numCostofijo;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.ToolStripButton btnPlanificar;
+        private System.Windows.Forms.TextBox txtDemandaNoCubierta;
+        private System.Windows.Forms.Label label31;
 
 
 
