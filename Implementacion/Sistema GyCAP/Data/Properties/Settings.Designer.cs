@@ -107,12 +107,13 @@ namespace GyCAP.Data.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=Proyecto.dyndns.org,2555;Initial Catalog=Proyecto;User ID=sa;Password" +
-            "=spg2010")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=Proyecto,2555;Initial Catalog=Proyecto;Persist Security Info=True;Use" +
+            "r ID=sa;Password=spg2010")]
         public string ProyectoConnectionString7 {
             get {
                 return ((string)(this["ProyectoConnectionString7"]));
             }
         }
+
     }
 }
