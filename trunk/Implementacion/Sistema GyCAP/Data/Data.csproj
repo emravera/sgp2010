@@ -89,6 +89,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsEstadoEmpleado.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsEstadoMaquina.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEstadoMaquina.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsEstimarDemanda.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -102,6 +107,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsEstructura.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsFabricanteMaquina.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsFabricanteMaquina.xsd</DependentUpon>
     </Compile>
     <Compile Include="dsMaquina.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -122,6 +132,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsModeloCocina.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsModeloMaquina.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsModeloMaquina.xsd</DependentUpon>
     </Compile>
     <Compile Include="dsPlanAnual.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -224,6 +239,17 @@
     <None Include="dsEstadoEmpleado.xss">
       <DependentUpon>dsEstadoEmpleado.xsd</DependentUpon>
     </None>
+    <None Include="dsEstadoMaquina.xsc">
+      <DependentUpon>dsEstadoMaquina.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstadoMaquina.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEstadoMaquina.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsEstadoMaquina.xss">
+      <DependentUpon>dsEstadoMaquina.xsd</DependentUpon>
+    </None>
     <None Include="dsEstimarDemanda.xsc">
       <DependentUpon>dsEstimarDemanda.xsd</DependentUpon>
     </None>
@@ -245,6 +271,17 @@
     </None>
     <None Include="dsEstructura.xss">
       <DependentUpon>dsEstructura.xsd</DependentUpon>
+    </None>
+    <None Include="dsFabricanteMaquina.xsc">
+      <DependentUpon>dsFabricanteMaquina.xsd</DependentUpon>
+    </None>
+    <None Include="dsFabricanteMaquina.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsFabricanteMaquina.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsFabricanteMaquina.xss">
+      <DependentUpon>dsFabricanteMaquina.xsd</DependentUpon>
     </None>
     <None Include="dsMaquina.xsc">
       <DependentUpon>dsMaquina.xsd</DependentUpon>
@@ -289,6 +326,17 @@
     </None>
     <None Include="dsModeloCocina.xss">
       <DependentUpon>dsModeloCocina.xsd</DependentUpon>
+    </None>
+    <None Include="dsModeloMaquina.xsc">
+      <DependentUpon>dsModeloMaquina.xsd</DependentUpon>
+    </None>
+    <None Include="dsModeloMaquina.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsModeloMaquina.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsModeloMaquina.xss">
+      <DependentUpon>dsModeloMaquina.xsd</DependentUpon>
     </None>
     <None Include="dsPlanAnual.xsc">
       <DependentUpon>dsPlanAnual.xsd</DependentUpon>
