@@ -71,9 +71,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalle.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-            
-
-
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDetalle = new DataView(dsPlanAnual.DETALLE_PLAN_ANUAL);
             dgvDetalle.DataSource = dvListaDetalle;
@@ -197,8 +194,23 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbGraficoEstimacion.Visible = true;
                     gbEstimacionMes.Visible = true;
                     gbBotones.Visible = true;
+                    gbDatosPrincipales.Enabled = true;
+                    cbEstimacionDemanda.SelectedIndex = -1;                    
                     tcPlanAnual.SelectedTab = tpDatos;
                     estadoActual = estadoUI.modificar;
+                    DesactivaControles(false);
+                    //Escondo los controles que no se tienen que ver
+                    numAdelantamiento.Visible = false;
+                    numCapacidadProducción.Visible = false;
+                    numCapacidadStock.Visible = false;
+                    gbDemandaAñoSiguiente.Visible = false;
+                    gbPuntoEquilibrio.Visible = false;
+                    lblAdelantamiento.Visible = false;
+                    lblCapacidadProduccion.Visible = false;
+                    lblCapacidadStock.Visible = false;
+                    lblUnidad1.Visible = false;
+                    lblUnidad2.Visible = false;
+                    lblUnidad3.Visible = false;
                     break;
 
                 case estadoUI.nuevo:
@@ -229,6 +241,18 @@ namespace GyCAP.UI.PlanificacionProduccion
                     numCapacidadStock.Value = 0;
                     numCostofijo.Value = 0;
                     numCostoVariable.Value = 0;
+                    //Escondo los controles que no se tienen que ver
+                    numAdelantamiento.Visible = true;
+                    numCapacidadProducción.Visible = true;
+                    numCapacidadStock.Visible = true;
+                    gbDemandaAñoSiguiente.Visible = true;
+                    gbPuntoEquilibrio.Visible = true;
+                    lblAdelantamiento.Visible = true;
+                    lblCapacidadProduccion.Visible = true;
+                    lblCapacidadStock.Visible = true;
+                    lblUnidad1.Visible = true;
+                    lblUnidad2.Visible = true;
+                    lblUnidad3.Visible = true;
                     break;
                 case estadoUI.calcularPlanificacion:
                     btnPlanificar.Enabled = false;
@@ -243,7 +267,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     tcPlanAnual.SelectedTab = tpDatos;
                     estadoActual = estadoUI.calcularPlanificacion;
                     DesactivaControles(true);
-                    break;
+                    break;            
 
                 
                 default:
@@ -278,9 +302,21 @@ namespace GyCAP.UI.PlanificacionProduccion
                     else if (chListAnios.CheckedItems.Count > 1) strError = strError + "-Debe seleccionar solo una demanda para el próximo año\n";
                 }
                 if (Convert.ToInt32(numPuntoEquilibrio.Value) == 0) strError = strError + "-Debe realizar el Cálculo del punto de equilibrio para determinar minimo\n";
+                if (Convert.ToInt32(cbEstimacionDemanda.GetSelectedIndex()) == -1) strError = strError + "-Debe seleccionar una Demanda\n";
 
             }
+            else if (estado == estadoUI.modificar)
+            {
+                //Validacion del año
+                if (txtAnio.Text.Length != 4) strError = strError + "-El año no tiene el tamaño adecuado\n";
 
+                try
+                {
+                    int anio = Convert.ToInt32(txtAnio.Text);
+                }
+                catch (Exception) { strError = strError + "-El año no es un numero\n"; }
+                if (Convert.ToInt32(cbEstimacionDemanda.GetSelectedIndex()) == -1) strError = strError + "-Debe seleccionar una Demanda\n";
+            }
             if (strError != string.Empty)
             {
                 strError = "Errores de Validación:\n" + strError;
@@ -290,18 +326,21 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void DesactivaControles(bool estado)
         {
-            numEnero.ReadOnly = estado;
-            numFebrero.ReadOnly = estado;
-            numMarzo.ReadOnly = estado;
-            numAbril.ReadOnly = estado;
-            numMayo.ReadOnly = estado;
-            numJunio.ReadOnly = estado;
-            numJulio.ReadOnly = estado;
-            numAgosto.ReadOnly = estado;
-            numSeptiembre.ReadOnly = estado;
-            numOctubre.ReadOnly = estado;
-            numNoviembre.ReadOnly = estado;
-            numDiciembre.ReadOnly = estado;
+            if (estado == true) estado = false;
+            if (estado == false) estado = true;
+
+            numEnero.Enabled = estado;
+            numFebrero.Enabled = estado;
+            numMarzo.Enabled = estado;
+            numAbril.Enabled = estado;
+            numMayo.Enabled = estado;
+            numJunio.Enabled = estado;
+            numJulio.Enabled = estado;
+            numAgosto.Enabled = estado;
+            numSeptiembre.Enabled = estado;
+            numOctubre.Enabled = estado;
+            numNoviembre.Enabled = estado;
+            numDiciembre.Enabled = estado;
         }
 
         private void LimpiarControles()
@@ -321,6 +360,11 @@ namespace GyCAP.UI.PlanificacionProduccion
         }
         private void CalculaTotal()
         {
+            int totalDemanda=0;
+            if (txtTotal.Text != string.Empty && txtDemandaNoCubierta.Text != string.Empty)
+            {
+                totalDemanda = Convert.ToInt32(txtTotal.Text) + Convert.ToInt32(txtDemandaNoCubierta.Text);
+            }
             totalActual = 0;
             totalActual += Convert.ToDecimal(numEnero.Value);
             totalActual += Convert.ToDecimal(numFebrero.Value);
@@ -337,6 +381,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             //Se lo asigno al texbox que lo muestra por pantalla
             txtTotal.Text = totalActual.ToString();
+            txtDemandaNoCubierta.Text = Convert.ToString(totalDemanda - totalActual); 
         }
         private void GenerarGrafico(int[] Plan)
         {
@@ -712,7 +757,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                                 int falta = minimo - demandaActCantSemana[i];
 
                                 //me fijo si hay capacidad de stock
-                                if (capacidadStock > 0)
+                                if (capacidadStock > falta)
                                 {
                                     //Debo producir el minimo para cubrir los costos
                                     demandaActCantSemana[i] = minimo;
@@ -812,7 +857,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     lblTotalSistema.Text = planMeses.Sum().ToString();
 
                     //Muestro lo que no se pudo asignar
-                    txtDemandaNoCubierta.Text = demandaNoCubierta.ToString();
+                    txtDemandaNoCubierta.Text =(BLL.DetalleDemandaAnualBLL.ObtenerTotal(demandaActual.Codigo)- Convert.ToInt16(txtTotal.Text)).ToString(); ;
 
                     //Generamos el Grafico de Planificacion
                     GenerarGrafico(planMeses);
@@ -970,14 +1015,296 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void btnModificarPlanificacion_Click(object sender, EventArgs e)
         {
-            DesactivaControles(false);
+            SetInterface(estadoUI.modificar);
         }
 
-       
-        
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
 
-       
+            try
+            {
+                string validacion = string.Empty;
+                //Creo el objeto de Demanda
+                Entidades.PlanAnual planAnual = new GyCAP.Entidades.PlanAnual();
+                Entidades.DemandaAnual demanda = new GyCAP.Entidades.DemandaAnual();
+                //Se crea la lista de objetos genericos
+                IList<Entidades.DetallePlanAnual> detalle = new List<Entidades.DetallePlanAnual>();
+                
+                if(estadoActual== estadoUI.calcularPlanificacion)
+                {
+                    validacion = Validar(estadoUI.nuevo);
+                    //Pregunto si esta todo escrito
+                    if (validacion == string.Empty)
+                    {
 
-        
+                        //Se definen los parámetros que se van a guardar
+                        planAnual.Anio = Convert.ToInt32(txtAnio.Text);
+                        planAnual.FechaCreacion =  BLL.DBBLL.GetFechaServidor();
+                                             
+                        demanda= ObtenerDemanda(true);                        
+                        planAnual.Demanda=demanda;
+                    }
+                }
+                else if (estadoActual == estadoUI.modificar)
+                {
+                    validacion = string.Empty;
+                    validacion = Validar(estadoUI.modificar);
+
+                    //Pregunto si esta todo escrito
+                    if (validacion == string.Empty)
+                    {
+                        //Se definen los parámetros que se van a guardar
+                        planAnual.Codigo= Convert.ToInt32(dvListaDetalle[dgvLista.SelectedRows[0].Index]["pan_codigo"]);
+                        planAnual.Anio = Convert.ToInt32(txtAnio.Text);
+                        demanda = ObtenerDemanda(true);
+                        planAnual.Demanda = demanda;
+                    }
+                }
+
+                if (validacion == string.Empty)
+                {
+                    //Meses
+                    int enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre;
+                    int octubre, noviembre, diciembre;
+
+                    //Se setean los valores que se van a pasar
+                    enero = Convert.ToInt32(numEnero.Value);
+                    febrero = Convert.ToInt32(numFebrero.Value);
+                    marzo = Convert.ToInt32(numMarzo.Value);
+                    abril = Convert.ToInt32(numAbril.Value);
+                    mayo = Convert.ToInt32(numMayo.Value);
+                    junio = Convert.ToInt32(numJunio.Value);
+                    julio = Convert.ToInt32(numJulio.Value);
+                    agosto = Convert.ToInt32(numAgosto.Value);
+                    septiembre = Convert.ToInt32(numSeptiembre.Value);
+                    octubre = Convert.ToInt32(numOctubre.Value);
+                    noviembre = Convert.ToInt32(numNoviembre.Value);
+                    diciembre = Convert.ToInt32(numDiciembre.Value);
+
+                    string[] Meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
+                    int[] Cantidad = { enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre };
+
+                    //Se crea la lista de objetos genericos
+                    //IList<Entidades.DetallePlanAnual> detalle = new List<Entidades.DetallePlanAnual>();
+
+                    //Se van creando los objetos
+                    for (int i = 0; i < 12; i++)
+                    {
+                        Entidades.DetallePlanAnual objeto = new Entidades.DetallePlanAnual();
+                        objeto.PlanAnual = planAnual;
+                        objeto.CantidadMes = Cantidad[i];
+                        objeto.Mes = Meses[i];
+                        detalle.Add(objeto);
+                    }
+
+                    if (estadoActual == estadoUI.calcularPlanificacion)
+                    {
+                        //Se guardan los datos en la BD
+                        detalle = BLL.PlanAnualBLL.Insertar(planAnual, detalle);
+                        planAnual.Codigo = detalle[0].PlanAnual.Codigo;
+                    }
+
+                    //SI ESTA GUARDANDO 
+                    if (estadoActual == estadoUI.calcularPlanificacion)
+                    {
+                        //Se agrega todo al dataset
+                        //La demanda anual (cabecera)
+                        Data.dsPlanAnual.PLANES_ANUALESRow rowPlan = dsPlanAnual.PLANES_ANUALES.NewPLANES_ANUALESRow();
+                        rowPlan.BeginEdit();
+                        rowPlan.PAN_CODIGO = planAnual.Codigo;
+                        rowPlan.PAN_ANIO = planAnual.Anio;
+                        rowPlan.PAN_FECHACREACION = planAnual.FechaCreacion;
+                        rowPlan.DEMAN_CODIGO = planAnual.Demanda.Codigo;
+                        rowPlan.EndEdit();
+                        dsPlanAnual.PLANES_ANUALES.AddPLANES_ANUALESRow(rowPlan);
+                        dsPlanAnual.PLANES_ANUALES.AcceptChanges();
+
+                        //El detalle de la demanda anual
+
+                        foreach (Entidades.DetallePlanAnual obje in detalle)
+                        {
+                            Data.dsPlanAnual.DETALLE_PLAN_ANUALRow rowDPlan = dsPlanAnual.DETALLE_PLAN_ANUAL.NewDETALLE_PLAN_ANUALRow();
+                            rowDPlan.BeginEdit();
+                            rowDPlan.DPAN_CODIGO = obje.Codigo;
+                            rowDPlan.DPAN_CANTIDADMES = obje.CantidadMes;
+                            rowDPlan.DPAN_MES = obje.Mes;
+                            rowDPlan.PAN_CODIGO = obje.PlanAnual.Codigo;
+                            rowDPlan.EndEdit();
+                            dsPlanAnual.DETALLE_PLAN_ANUAL.AddDETALLE_PLAN_ANUALRow(rowDPlan);
+                            dsPlanAnual.DETALLE_PLAN_ANUAL.AcceptChanges();
+                        }
+
+
+                        MessageBox.Show("Los datos se han almacenado correctamente", "Informacion: Demanda Anual - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        //Seteo el estado de la interface a nuevo
+                        SetInterface(estadoUI.nuevo);
+
+                    }
+                    else if (estadoActual == estadoUI.modificar)
+                    {
+                        //Se modifica en la BD
+                        BLL.PlanAnualBLL.Modificar(planAnual, detalle);
+
+                        //Se modifica el dataset
+                        //La demanda anual (cabecera)
+                        Data.dsPlanAnual.PLANES_ANUALESRow rowPlan = dsPlanAnual.PLANES_ANUALES.FindByPAN_CODIGO(planAnual.Codigo);
+                        rowPlan.BeginEdit();
+                        rowPlan.DEMAN_CODIGO = planAnual.Demanda.Codigo;
+                        rowPlan.PAN_ANIO = planAnual.Anio;
+                        rowPlan.EndEdit();
+                        dsPlanAnual.PLANES_ANUALES.AcceptChanges();
+
+                        //El detalle de la demanda anual
+
+                        foreach (Entidades.DetallePlanAnual obje in detalle)
+                        {
+                            obje.Codigo = BLL.DetallePlanAnualBLL.ObtenerID(obje);
+                            Data.dsPlanAnual.DETALLE_PLAN_ANUALRow rowDPlan = dsPlanAnual.DETALLE_PLAN_ANUAL.FindByDPAN_CODIGO(obje.Codigo);
+                            rowDPlan.BeginEdit();
+                            rowDPlan.DPAN_CANTIDADMES = obje.CantidadMes;
+                            rowDPlan.EndEdit();
+                            dsPlanAnual.DETALLE_PLAN_ANUAL.AcceptChanges();
+                        }
+
+                        MessageBox.Show("Los datos se han Actualizado correctamente", "Informacion: Demanda Anual - Actualizacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        //Pongo la interface en el estado de busqueda
+                        SetInterface(estadoUI.buscar);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(validacion, "Error: Plan Anual - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message, "Error: Plan Anual - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia: Plan Anual - Modificación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            //Selecciono el codigo de la demanda anual
+            int codigo = Convert.ToInt32(dvListaPlanes[dgvLista.SelectedRows[0].Index]["pan_codigo"]);
+            txtAnio.Text = dsPlanAnual.PLANES_ANUALES.FindByPAN_CODIGO(codigo).PAN_ANIO.ToString();
+            cbEstimacionDemanda.SetSelectedValue(Convert.ToInt32(dsPlanAnual.PLANES_ANUALES.FindByPAN_CODIGO(codigo).DEMAN_CODIGO));
+
+
+            int[] promedio= new int[12];
+            int cont=0;
+            foreach (Data.dsPlanAnual.DETALLE_PLAN_ANUALRow dr in dsPlanAnual.DETALLE_PLAN_ANUAL.Rows)
+            {
+                promedio[cont] =Convert.ToInt32(dr.DPAN_CANTIDADMES);
+                cont += 1;
+            }
+            //Asigno los valores
+            //Se asignan los valores calculados a los textbox
+            numEnero.Value = promedio[0];
+            numFebrero.Value = promedio[1];
+            numMarzo.Value = promedio[2];
+            numAbril.Value = promedio[3];
+            numMayo.Value = promedio[4];
+            numJunio.Value = promedio[5];
+            numJulio.Value = promedio[6];
+            numAgosto.Value = promedio[7];
+            numSeptiembre.Value = promedio[8];
+            numOctubre.Value = promedio[9];
+            numNoviembre.Value = promedio[10];
+            numDiciembre.Value = promedio[11];
+
+            //Se genera el grafico
+            GenerarGrafico(promedio);
+
+            //se setea el estado
+            SetInterface(estadoUI.modificar);
+
+        }
+
+        private void numEnero_ValueChanged(object sender, EventArgs e)
+        {
+            CalculaTotal();
+
+            if (estadoActual == estadoUI.modificar || estadoActual == estadoUI.calcularPlanificacion)
+            {
+                //lleno de nuevo un array con los datos
+                int[] promedio = new int[12];
+
+                //Se asignan los valores calculados a los textbox
+                promedio[0] = Convert.ToInt32(numEnero.Value);
+                promedio[1] = Convert.ToInt32(numFebrero.Value);
+                promedio[2] = Convert.ToInt32(numMarzo.Value);
+                promedio[3] = Convert.ToInt32(numAbril.Value);
+                promedio[4] = Convert.ToInt32(numMayo.Value);
+                promedio[5] = Convert.ToInt32(numJunio.Value);
+                promedio[6] = Convert.ToInt32(numJulio.Value);
+                promedio[7] = Convert.ToInt32(numAgosto.Value);
+                promedio[8] = Convert.ToInt32(numSeptiembre.Value);
+                promedio[9] = Convert.ToInt32(numOctubre.Value);
+                promedio[10] = Convert.ToInt32(numNoviembre.Value);
+                promedio[11] = Convert.ToInt32(numDiciembre.Value);
+
+                //creo el grafico
+                GenerarGrafico(promedio);
+        }    
     }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            //Controlamos que esté seleccionado algo
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Preguntamos si está seguro
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar la Plan Anual seleccionada y todo su detalle ?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (respuesta == DialogResult.Yes)
+                {
+                    try
+                    {
+                        //Obtengo el Codigo del plan
+                        int codigo = Convert.ToInt32(dvListaDetalle[dgvLista.SelectedRows[0].Index]["pan_codigo"]);
+
+                        //Pregunto si se puede eliminar
+                        if (BLL.PlanAnualBLL.PuedeEliminarse(codigo))
+                        {
+                            //Elimino el plan anual y su detalle de la BD
+                            BLL.PlanAnualBLL.Eliminar(codigo);
+
+                            //Limpio el dataset de detalles
+                            dsPlanAnual.DETALLE_PLAN_ANUAL.Clear();
+
+                            //Lo eliminamos del dataset
+                            dsPlanAnual.PLANES_ANUALES.FindByPAN_CODIGO(codigo).Delete();
+                            dsPlanAnual.PLANES_ANUALES.AcceptChanges();
+
+                            //Avisamos que se elimino 
+                            MessageBox.Show("Se han eliminado los datos correctamente", "Información: Elemento Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            //Ponemos la ventana en el estado inicial
+                            SetInterface(estadoUI.inicio);
+                        }
+                        else { throw new Entidades.Excepciones.ElementoEnTransaccionException(); }
+
+                    }
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una Designación de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        }
 }

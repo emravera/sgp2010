@@ -12,7 +12,12 @@ namespace GyCAP.BLL
         {
             DAL.DetallePlanAnualDAL.ObtenerDetalle(idPlan, ds);
         }
+        //Metodo para buscar el ID
+        public static int ObtenerID(Entidades.DetallePlanAnual detalle)
+        {
+            return DAL.DetallePlanAnualDAL.ObtenerID(detalle);
+        }
 
-
+        
     }
 }

@@ -12,7 +12,11 @@ namespace GyCAP.BLL
         {
             DAL.DetalleDemandaAnualDAL.ObtenerDetalle(idDemanda, ds);
         }
-
+        //metodo para traer el detalle de una cabecera
+        public static int ObtenerTotal(int idDemanda)
+        {
+           return DAL.DetalleDemandaAnualDAL.ObtenerTotal(idDemanda);
+        }
         //Metodo para guardar el detalle
         public static int Insertar(Entidades.DetalleDemandaAnual detalle)
         {
