@@ -52,6 +52,11 @@ namespace GyCAP.BLL
             DAL.ColorDAL.ObtenerColores(nombre, ds);
         }
 
+        public static void ObtenerTodos(DataTable dtColor)
+        {
+            DAL.ColorDAL.ObtenerColores(dtColor);
+        }
+
         
     }
 }

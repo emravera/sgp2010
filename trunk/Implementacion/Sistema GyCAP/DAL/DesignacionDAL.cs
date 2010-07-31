@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace GyCAP.DAL
 {
@@ -142,6 +143,17 @@ namespace GyCAP.DAL
             try
             {
                 DB.executeNonQuery(sql, valorParametros, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
+        public static void ObtenerTodos(DataTable dtDesignacion)
+        {
+            string sql = @"SELECT desig_codigo, mca_codigo, desig_nombre, desig_descripcion FROM DESIGNACIONES";
+
+            try
+            {
+                DB.FillDataTable(dtDesignacion, sql, null);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }

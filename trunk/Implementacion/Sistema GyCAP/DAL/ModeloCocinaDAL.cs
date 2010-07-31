@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace GyCAP.DAL
 {
@@ -108,6 +109,16 @@ namespace GyCAP.DAL
                 }
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
+        public static void ObtenerModeloCocina(DataTable dtModelos)
+        {
+            string sql = "SELECT mod_codigo, mod_nombre, mod_descripcion FROM MODELOS_COCINAS";
+            try
+            {
+                DB.FillDataTable(dtModelos, sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }            
         }
     }
 }

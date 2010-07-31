@@ -67,7 +67,29 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            /*try
+            {
+                //Limpiamos el Dataset
+                dsCocina.COCINAS.Clear();
 
+                //Metodo para la busqueda con todos los parámetros
+                
+
+                //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
+                //por una consulta a la BD
+                dvListaUnidad.Table = dsUnidadMedida.UNIDADES_MEDIDA;
+
+                if (dsUnidadMedida.UNIDADES_MEDIDA.Rows.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron Unidades de Medida con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                SetInterface(estadoUI.inicio);
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message, "Error: Unidades de Medida - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SetInterface(estadoUI.inicio);
+            }*/
         }
 
         private void dgvListaCocina_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -220,7 +242,9 @@ namespace GyCAP.UI.EstructuraProducto
                 BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsCocina.TERMINACIONES);
                 BLL.MarcaBLL.ObtenerTodos(dsCocina.MARCAS);
                 BLL.EstadoCocinaBLL.ObtenerEstados(dsCocina.ESTADO_COCINAS);
-                
+                BLL.ModeloCocinaBLL.ObtenerTodos(dsCocina.MODELOS_COCINAS);
+                BLL.DesignacionBLL.ObtenerTodos(dsCocina.DESIGNACIONES);
+                BLL.ColorBLL.ObtenerTodos(dsCocina.COLORES);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
