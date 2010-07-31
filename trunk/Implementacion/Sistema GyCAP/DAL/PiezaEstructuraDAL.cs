@@ -48,7 +48,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerPiezasEstructura(int[] codigosEstructura, Data.dsEstructura ds)
         {
-            string sql = "SELECT pxe_codigo, estr_codigo, pza_codigo, pxe_cantidad FROM PIEZASXESTRUCTURA WHERE estr_codigo IN (@p0)";
+            string sql = "SELECT pxe_codigo, estr_codigo, pza_codigo, pxe_cantidad, grp_codigo FROM PIEZASXESTRUCTURA WHERE estr_codigo IN (@p0)";
             object[] valorParametros = { codigosEstructura };
             DB.FillDataSet(ds, "PIEZASXESTRUCTURA", sql, valorParametros);
         }
