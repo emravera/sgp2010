@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace GyCAP.BLL
 {
@@ -44,6 +45,11 @@ namespace GyCAP.BLL
         public static void ObtenerTodos(string nombre, Data.dsModeloCocina ds)
         {
             DAL.ModeloCocinaDAL.ObtenerModeloCocina(nombre, ds);
-        } 
+        }
+
+        public static void ObtenerTodos(DataTable dtModelos)
+        {
+            DAL.ModeloCocinaDAL.ObtenerModeloCocina(dtModelos);
+        }
     }
 }

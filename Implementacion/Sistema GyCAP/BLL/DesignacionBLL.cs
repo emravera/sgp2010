@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace GyCAP.BLL
 {
@@ -49,6 +50,11 @@ namespace GyCAP.BLL
         public static void Actualizar(Entidades.Designacion desig)
         {
            DAL.DesignacionDAL.Actualizar(desig);
+        }
+
+        public static void ObtenerTodos(DataTable dtDesignacion)
+        {
+            DAL.DesignacionDAL.ObtenerTodos(dtDesignacion);
         }
 
     }

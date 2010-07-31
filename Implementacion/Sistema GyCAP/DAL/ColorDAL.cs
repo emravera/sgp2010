@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace GyCAP.DAL
 {
@@ -68,6 +69,16 @@ namespace GyCAP.DAL
                 DB.FillDataSet(ds, "COLORES", sql, null);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }            
+        }
+
+        public static void ObtenerColores(DataTable dtColor)
+        {
+            string sql = "SELECT col_codigo, col_nombre FROM COLORES";
+            try
+            {
+                DB.FillDataTable(dtColor, sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
         
         public static void ObtenerColores(string nombre, Data.dsColor ds)
