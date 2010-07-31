@@ -219,6 +219,8 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsCocina.TERMINACIONES);
                 BLL.MarcaBLL.ObtenerTodos(dsCocina.MARCAS);
+                BLL.EstadoCocinaBLL.ObtenerEstados(dsCocina.ESTADO_COCINAS);
+                
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
