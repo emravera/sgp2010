@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace GyCAP.DAL
 {
@@ -74,6 +75,16 @@ namespace GyCAP.DAL
             {
                 //Se llena el Dataset
                 DB.FillDataSet(ds, "MARCAS", sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
+        public static void ObtenerMarca(DataTable dtMarca)
+        {
+            string sql = "SELECT mca_codigo, cli_codigo, mca_nombre FROM MARCAS";
+            try
+            {
+                DB.FillDataTable(dtMarca, sql, null);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }

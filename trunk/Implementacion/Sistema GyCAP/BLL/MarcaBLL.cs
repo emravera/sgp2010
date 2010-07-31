@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace GyCAP.BLL
 {
@@ -12,6 +13,11 @@ namespace GyCAP.BLL
         public static void ObtenerTodos(string nombre, int idCliente, Data.dsMarca ds)
         {
             DAL.MarcaDAL.ObtenerMarca(nombre, idCliente, ds);
+        }
+
+        public static void ObtenerTodos(DataTable dtMarca)
+        {
+            DAL.MarcaDAL.ObtenerMarca(dtMarca);
         }
        
         //Metodo para usar desde el formulario de Designaciones (otro Dataset)
