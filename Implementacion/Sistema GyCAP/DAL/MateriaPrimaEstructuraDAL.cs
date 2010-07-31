@@ -48,7 +48,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerMateriasPrimasEstructura(int[] codigosEstructura, Data.dsEstructura ds)
         {
-            string sql = "SELECT mpxe_codigo, estr_codigo, mp_codigo, mpxe_cantidad FROM MATERIASPRIMASXESTRUCTURA WHERE estr_codigo IN (@p0)";
+            string sql = "SELECT mpxe_codigo, estr_codigo, mp_codigo, mpxe_cantidad, grp_codigo FROM MATERIASPRIMASXESTRUCTURA WHERE estr_codigo IN (@p0)";
             object[] valorParametros = { codigosEstructura };
             DB.FillDataSet(ds, "MATERIASPRIMASXESTRUCTURA", sql, valorParametros);
         }

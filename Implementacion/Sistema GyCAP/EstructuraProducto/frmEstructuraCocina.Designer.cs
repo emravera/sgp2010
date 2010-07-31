@@ -56,7 +56,6 @@
             this.btnPiezas = new System.Windows.Forms.Button();
             this.gbVer = new System.Windows.Forms.GroupBox();
             this.btnArbol = new System.Windows.Forms.Button();
-            this.clbVer = new System.Windows.Forms.CheckedListBox();
             this.gbPartes = new System.Windows.Forms.GroupBox();
             this.dgvPartes = new System.Windows.Forms.DataGridView();
             this.gbDatos = new System.Windows.Forms.GroupBox();
@@ -141,6 +140,10 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.chkConjunto = new System.Windows.Forms.CheckBox();
+            this.chkSubconjunto = new System.Windows.Forms.CheckBox();
+            this.chkPieza = new System.Windows.Forms.CheckBox();
+            this.chkMateriaPrima = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcEstructuraCocina.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -263,6 +266,7 @@
             this.dgvEstructuras.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEstructuras.Size = new System.Drawing.Size(768, 377);
             this.dgvEstructuras.TabIndex = 8;
+            this.dgvEstructuras.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEstructuras_RowEnter);
             this.dgvEstructuras.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvEstructuras_CellFormatting);
             // 
             // groupBox1
@@ -499,8 +503,11 @@
             // 
             // gbVer
             // 
+            this.gbVer.Controls.Add(this.chkMateriaPrima);
+            this.gbVer.Controls.Add(this.chkPieza);
+            this.gbVer.Controls.Add(this.chkSubconjunto);
+            this.gbVer.Controls.Add(this.chkConjunto);
             this.gbVer.Controls.Add(this.btnArbol);
-            this.gbVer.Controls.Add(this.clbVer);
             this.gbVer.Location = new System.Drawing.Point(618, 177);
             this.gbVer.Name = "gbVer";
             this.gbVer.Size = new System.Drawing.Size(156, 274);
@@ -518,22 +525,6 @@
             this.btnArbol.TabIndex = 4;
             this.btnArbol.Text = "Árbol de\r\nEstructura";
             this.btnArbol.UseVisualStyleBackColor = true;
-            // 
-            // clbVer
-            // 
-            this.clbVer.BackColor = System.Drawing.SystemColors.Control;
-            this.clbVer.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.clbVer.FormattingEnabled = true;
-            this.clbVer.Items.AddRange(new object[] {
-            "Conjuntos",
-            "Subconjuntos",
-            "Piezas",
-            "Materia Prima"});
-            this.clbVer.Location = new System.Drawing.Point(19, 46);
-            this.clbVer.Name = "clbVer";
-            this.clbVer.Size = new System.Drawing.Size(124, 64);
-            this.clbVer.TabIndex = 3;
-            this.clbVer.SelectedValueChanged += new System.EventHandler(this.clbVer_SelectedValueChanged);
             // 
             // gbPartes
             // 
@@ -1525,6 +1516,58 @@
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // chkConjunto
+            // 
+            this.chkConjunto.AutoSize = true;
+            this.chkConjunto.Checked = true;
+            this.chkConjunto.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkConjunto.Location = new System.Drawing.Point(29, 37);
+            this.chkConjunto.Name = "chkConjunto";
+            this.chkConjunto.Size = new System.Drawing.Size(70, 17);
+            this.chkConjunto.TabIndex = 5;
+            this.chkConjunto.Text = "Conjunto";
+            this.chkConjunto.UseVisualStyleBackColor = true;
+            this.chkConjunto.CheckedChanged += new System.EventHandler(this.chkVer);
+            // 
+            // chkSubconjunto
+            // 
+            this.chkSubconjunto.AutoSize = true;
+            this.chkSubconjunto.Checked = true;
+            this.chkSubconjunto.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSubconjunto.Location = new System.Drawing.Point(29, 60);
+            this.chkSubconjunto.Name = "chkSubconjunto";
+            this.chkSubconjunto.Size = new System.Drawing.Size(86, 17);
+            this.chkSubconjunto.TabIndex = 6;
+            this.chkSubconjunto.Text = "Subconjunto";
+            this.chkSubconjunto.UseVisualStyleBackColor = true;
+            this.chkSubconjunto.CheckedChanged += new System.EventHandler(this.chkVer);
+            // 
+            // chkPieza
+            // 
+            this.chkPieza.AutoSize = true;
+            this.chkPieza.Checked = true;
+            this.chkPieza.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPieza.Location = new System.Drawing.Point(29, 83);
+            this.chkPieza.Name = "chkPieza";
+            this.chkPieza.Size = new System.Drawing.Size(51, 17);
+            this.chkPieza.TabIndex = 7;
+            this.chkPieza.Text = "Pieza";
+            this.chkPieza.UseVisualStyleBackColor = true;
+            this.chkPieza.CheckedChanged += new System.EventHandler(this.chkVer);
+            // 
+            // chkMateriaPrima
+            // 
+            this.chkMateriaPrima.AutoSize = true;
+            this.chkMateriaPrima.Checked = true;
+            this.chkMateriaPrima.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMateriaPrima.Location = new System.Drawing.Point(29, 106);
+            this.chkMateriaPrima.Name = "chkMateriaPrima";
+            this.chkMateriaPrima.Size = new System.Drawing.Size(91, 17);
+            this.chkMateriaPrima.TabIndex = 8;
+            this.chkMateriaPrima.Text = "Materia Prima";
+            this.chkMateriaPrima.UseVisualStyleBackColor = true;
+            this.chkMateriaPrima.CheckedChanged += new System.EventHandler(this.chkVer);
+            // 
             // frmEstructuraCocina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1550,6 +1593,7 @@
             this.tpDatos.ResumeLayout(false);
             this.gbCSCPMP.ResumeLayout(false);
             this.gbVer.ResumeLayout(false);
+            this.gbVer.PerformLayout();
             this.gbPartes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartes)).EndInit();
             this.gbDatos.ResumeLayout(false);
@@ -1627,7 +1671,6 @@
         private System.Windows.Forms.Button btnMateriaPrima;
         private System.Windows.Forms.GroupBox gbVer;
         private System.Windows.Forms.Button btnArbol;
-        private System.Windows.Forms.CheckedListBox clbVer;
         private System.Windows.Forms.GroupBox gbPartes;
         private System.Windows.Forms.DataGridView dgvPartes;
         private System.Windows.Forms.GroupBox gbDatos;
@@ -1709,5 +1752,9 @@
         private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha dtpFechaAltaBuscar;
         private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha dtpFechaModificacion;
         private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha dtpFechaAlta;
+        private System.Windows.Forms.CheckBox chkMateriaPrima;
+        private System.Windows.Forms.CheckBox chkPieza;
+        private System.Windows.Forms.CheckBox chkSubconjunto;
+        private System.Windows.Forms.CheckBox chkConjunto;
     }
 }

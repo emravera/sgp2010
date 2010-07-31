@@ -43,9 +43,14 @@ namespace GyCAP.BLL
             DAL.EstructuraDAL.Actualizar(ds);
         }
         
-        public static void ObtenerEstructuras(object nombre, object codPlano, object fechaCreacion, object codCocina, object legResponsable, object activoSiNo, Data.dsEstructura ds)
+        public static void ObtenerEstructuras(object nombre, object codPlano, object fechaCreacion, object codCocina, object codResponsable, object activoSiNo, Data.dsEstructura ds)
         {
-            DAL.EstructuraDAL.ObtenerEstructuras(nombre, codPlano, fechaCreacion, codCocina, legResponsable, activoSiNo, ds);
+            object plano = null, cocina = null, responsable = null, activo = null;
+            if (codPlano != null && Convert.ToInt32(codPlano.ToString()) > 0) { plano = codPlano; }
+            if (codCocina != null && Convert.ToInt32(codCocina.ToString()) > 0) { cocina = codCocina; }
+            if (codResponsable != null && Convert.ToInt32(codResponsable.ToString()) > 0) { responsable = codResponsable; }
+            if (activoSiNo != null && Convert.ToInt32(activoSiNo) > -1) { activo = activoSiNo; }
+            DAL.EstructuraDAL.ObtenerEstructuras(nombre, plano, fechaCreacion, cocina, responsable, activo, ds);
         }
         
         

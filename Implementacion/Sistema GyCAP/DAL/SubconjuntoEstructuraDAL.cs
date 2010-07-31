@@ -48,7 +48,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerSubconjuntosEstructura(int[] codigosEstructura, Data.dsEstructura ds)
         {
-            string sql = "SELECT scxe_codigo, estr_codigo, sconj_codigo, scxe_cantidad FROM SUBCONJUNTOSXESTRUCTURA WHERE estr_codigo IN (@p0)";
+            string sql = "SELECT scxe_codigo, estr_codigo, sconj_codigo, scxe_cantidad, grp_codigo FROM SUBCONJUNTOSXESTRUCTURA WHERE estr_codigo IN (@p0)";
             object[] valorParametros = { codigosEstructura };
             DB.FillDataSet(ds, "SUBCONJUNTOSXESTRUCTURA", sql, valorParametros);
         }
