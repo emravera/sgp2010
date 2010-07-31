@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.cboFabricante = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.label7 = new System.Windows.Forms.Label();
             this.cboModelo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtLegajo = new System.Windows.Forms.TextBox();
+            this.txtNroSerie = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtMarca = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,6 +47,7 @@
             this.gpbLista = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lvModelos = new System.Windows.Forms.ListView();
             this.cboBuscarEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.lvFabricantes = new System.Windows.Forms.ListView();
             this.label4 = new System.Windows.Forms.Label();
@@ -62,9 +65,6 @@
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnModificar = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lvModelos = new System.Windows.Forms.ListView();
-            this.cboFabricante = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.label7 = new System.Windows.Forms.Label();
             this.gbDatos.SuspendLayout();
             this.tcABM.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -84,7 +84,7 @@
             this.gbDatos.Controls.Add(this.cboModelo);
             this.gbDatos.Controls.Add(this.cboEstado);
             this.gbDatos.Controls.Add(this.label6);
-            this.gbDatos.Controls.Add(this.txtLegajo);
+            this.gbDatos.Controls.Add(this.txtNroSerie);
             this.gbDatos.Controls.Add(this.label9);
             this.gbDatos.Controls.Add(this.txtMarca);
             this.gbDatos.Controls.Add(this.label2);
@@ -100,6 +100,25 @@
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Empleado";
+            // 
+            // cboFabricante
+            // 
+            this.cboFabricante.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFabricante.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboFabricante.FormattingEnabled = true;
+            this.cboFabricante.Location = new System.Drawing.Point(76, 124);
+            this.cboFabricante.Name = "cboFabricante";
+            this.cboFabricante.Size = new System.Drawing.Size(190, 21);
+            this.cboFabricante.TabIndex = 11;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(9, 154);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 13);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "Estado:";
             // 
             // cboModelo
             // 
@@ -130,13 +149,14 @@
             this.label6.TabIndex = 18;
             this.label6.Text = "Fabricante:";
             // 
-            // txtLegajo
+            // txtNroSerie
             // 
-            this.txtLegajo.Location = new System.Drawing.Point(76, 72);
-            this.txtLegajo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtLegajo.Name = "txtLegajo";
-            this.txtLegajo.Size = new System.Drawing.Size(190, 20);
-            this.txtLegajo.TabIndex = 9;
+            this.txtNroSerie.Location = new System.Drawing.Point(76, 72);
+            this.txtNroSerie.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtNroSerie.Name = "txtNroSerie";
+            this.txtNroSerie.Size = new System.Drawing.Size(190, 20);
+            this.txtNroSerie.TabIndex = 9;
+            this.txtNroSerie.Enter += new System.EventHandler(this.txtNroSerie_Enter);
             // 
             // label9
             // 
@@ -154,6 +174,7 @@
             this.txtMarca.Name = "txtMarca";
             this.txtMarca.Size = new System.Drawing.Size(190, 20);
             this.txtMarca.TabIndex = 8;
+            this.txtMarca.Enter += new System.EventHandler(this.txtMarca_Enter);
             // 
             // label2
             // 
@@ -180,6 +201,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(190, 20);
             this.txtNombre.TabIndex = 7;
+            this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
             // 
             // label3
             // 
@@ -245,11 +267,13 @@
             this.dgvLista.Location = new System.Drawing.Point(9, 22);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
-            this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(557, 156);
             this.dgvLista.TabIndex = 6;
+            this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
+            this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
+            this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
             // groupBox1
             // 
@@ -270,12 +294,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
+            // lvModelos
+            // 
+            this.lvModelos.CheckBoxes = true;
+            this.lvModelos.FullRowSelect = true;
+            this.lvModelos.GridLines = true;
+            this.lvModelos.Location = new System.Drawing.Point(150, 17);
+            this.lvModelos.MultiSelect = false;
+            this.lvModelos.Name = "lvModelos";
+            this.lvModelos.Size = new System.Drawing.Size(138, 76);
+            this.lvModelos.TabIndex = 2;
+            this.lvModelos.UseCompatibleStateImageBehavior = false;
+            this.lvModelos.View = System.Windows.Forms.View.Details;
+            // 
             // cboBuscarEstado
             // 
             this.cboBuscarEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboBuscarEstado.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboBuscarEstado.FormattingEnabled = true;
-            this.cboBuscarEstado.Location = new System.Drawing.Point(359, 44);
+            this.cboBuscarEstado.Location = new System.Drawing.Point(348, 44);
             this.cboBuscarEstado.Name = "cboBuscarEstado";
             this.cboBuscarEstado.Size = new System.Drawing.Size(85, 21);
             this.cboBuscarEstado.TabIndex = 3;
@@ -296,7 +333,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(305, 47);
+            this.label4.Location = new System.Drawing.Point(298, 47);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 3;
@@ -314,10 +351,11 @@
             this.btnBuscar.Text = "&Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // txtNombreBuscar
             // 
-            this.txtNombreBuscar.Location = new System.Drawing.Point(359, 71);
+            this.txtNombreBuscar.Location = new System.Drawing.Point(348, 71);
             this.txtNombreBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(126, 20);
@@ -326,7 +364,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(305, 74);
+            this.label1.Location = new System.Drawing.Point(294, 74);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 13);
             this.label1.TabIndex = 1;
@@ -366,6 +404,7 @@
             this.btnVolver.TabIndex = 14;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnGuardar
             // 
@@ -376,6 +415,7 @@
             this.btnGuardar.TabIndex = 13;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnSalir
             // 
@@ -386,6 +426,7 @@
             this.btnSalir.Size = new System.Drawing.Size(31, 47);
             this.btnSalir.Text = "&Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // btnNuevo
             // 
@@ -396,6 +437,7 @@
             this.btnNuevo.Size = new System.Drawing.Size(42, 47);
             this.btnNuevo.Text = "&Nuevo";
             this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // btnConsultar
             // 
@@ -406,6 +448,7 @@
             this.btnConsultar.Size = new System.Drawing.Size(57, 47);
             this.btnConsultar.Text = "&Consultar";
             this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
             // btnEliminar
             // 
@@ -416,6 +459,7 @@
             this.btnEliminar.Size = new System.Drawing.Size(47, 47);
             this.btnEliminar.Text = "&Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // tsMenu
             // 
@@ -449,6 +493,7 @@
             this.btnModificar.Size = new System.Drawing.Size(54, 47);
             this.btnModificar.Text = "&Modificar";
             this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -466,38 +511,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(593, 374);
             this.tableLayoutPanel1.TabIndex = 13;
-            // 
-            // lvModelos
-            // 
-            this.lvModelos.CheckBoxes = true;
-            this.lvModelos.FullRowSelect = true;
-            this.lvModelos.GridLines = true;
-            this.lvModelos.Location = new System.Drawing.Point(150, 17);
-            this.lvModelos.MultiSelect = false;
-            this.lvModelos.Name = "lvModelos";
-            this.lvModelos.Size = new System.Drawing.Size(138, 76);
-            this.lvModelos.TabIndex = 2;
-            this.lvModelos.UseCompatibleStateImageBehavior = false;
-            this.lvModelos.View = System.Windows.Forms.View.Details;
-            // 
-            // cboFabricante
-            // 
-            this.cboFabricante.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboFabricante.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboFabricante.FormattingEnabled = true;
-            this.cboFabricante.Location = new System.Drawing.Point(76, 124);
-            this.cboFabricante.Name = "cboFabricante";
-            this.cboFabricante.Size = new System.Drawing.Size(190, 21);
-            this.cboFabricante.TabIndex = 11;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 154);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(62, 13);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "Fabricante:";
             // 
             // frmRFMaquina
             // 
@@ -534,7 +547,7 @@
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboModelo;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboEstado;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtLegajo;
+        private System.Windows.Forms.TextBox txtNroSerie;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtMarca;
         private System.Windows.Forms.Label label2;

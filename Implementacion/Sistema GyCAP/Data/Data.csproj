@@ -113,6 +113,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsFabricanteMaquina.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsMaquina.cs">
+      <DependentUpon>dsMaquina.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="dsMaquina.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
