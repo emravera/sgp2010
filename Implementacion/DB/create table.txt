@@ -475,7 +475,7 @@ create table MATERIASPRIMASXESTRUCTURA (
    MPXE_CODIGO          numeric(10)          identity,	/*-MODIFICACION 23/07/2010-*/
    MP_CODIGO            numeric(10)          not null,
    ESTR_CODIGO          numeric(10)          not null,
-   MPXE_CANTIDAD        numeric(10)          not null,  /*-MODIFICACION 23/07/2010-*/
+   MPXE_CANTIDAD        numeric(10,3)        not null,  /*-MODIFICACION 31/07/2010-*/
    GRP_CODIGO           numeric(10)          not null,     /*-MODIFICACION 23/07/2010-*/
    constraint PK_MATERIASPRIMASXPIEZA primary key nonclustered (MPXE_CODIGO)
 )
