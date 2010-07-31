@@ -454,7 +454,7 @@ namespace GyCAP.UI.RecursosFabricacion
 
                 if (ModelosChequeados.Count == 0)
                 {
-                    MessageBox.Show("Seleccione al menos un Fabricante.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Seleccione al menos un Modelo.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -532,8 +532,8 @@ namespace GyCAP.UI.RecursosFabricacion
             txtMarca.Text = dsMaquina.MAQUINAS.FindByMAQ_CODIGO(codigoMaquina).MAQ_MARCA;
             txtNroSerie.Text = dsMaquina.MAQUINAS.FindByMAQ_CODIGO(codigoMaquina).MAQ_NUMEROSERIE;
             cboEstado.SetSelectedValue(int.Parse(dsMaquina.MAQUINAS.FindByMAQ_CODIGO(codigoMaquina).EMAQ_CODIGO.ToString()));
-            cboFabricante.SetSelectedValue(int.Parse(dsMaquina.FABRICANTE_MAQUINAS.FindByFAB_CODIGO(codigoMaquina).FAB_CODIGO.ToString()));
-            cboModelo.SetSelectedValue(int.Parse(dsMaquina.MODELOS_MAQUINAS.FindByMODM_CODIGO(codigoMaquina).MODM_CODIGO.ToString()));
+            cboFabricante.SetSelectedValue(int.Parse(dsMaquina.MAQUINAS.FindByMAQ_CODIGO(codigoMaquina).FAB_CODIGO.ToString()));
+            cboModelo.SetSelectedValue(int.Parse(dsMaquina.MAQUINAS.FindByMAQ_CODIGO(codigoMaquina).MODM_CODIGO.ToString()));
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
