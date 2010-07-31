@@ -359,7 +359,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                         demanda.Anio = Convert.ToInt32(txtAnio.Text);
                         demanda.Nombre = txtIdentificacion.Text;
                         demanda.ParametroCrecimiento = Convert.ToDecimal(numCrecimiento.Value);
-                        demanda.FechaCreacion = DateTime.Now;
+                        demanda.FechaCreacion = BLL.DBBLL.GetFechaServidor();
                     }
                 }
 
