@@ -21,7 +21,19 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+        public static int ObtenerTotal(int idCodigo)
+        {
+            string sql = @"SELECT sum(ddeman_cantidadmes)
+                        FROM DETALLE_DEMANDAS_ANUALES WHERE deman_codigo=@p0";
 
+            object[] valorParametros = { idCodigo };
+
+            try
+            {
+                return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
         public static int ObtenerCantidadAñoMes(int año, string nombre, string mes)
         {
             string sql = @"SELECT det.ddeman_cantidadmes

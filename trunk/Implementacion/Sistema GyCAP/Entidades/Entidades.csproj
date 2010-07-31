@@ -60,6 +60,7 @@
     <Compile Include="DetalleOrdenTrabajo.cs" />
     <Compile Include="DetallePedido.cs" />
     <Compile Include="DetallePieza.cs" />
+    <Compile Include="DetallePlanAnual.cs" />
     <Compile Include="DetallePlanMantenimiento.cs" />
     <Compile Include="DetallePlanMensual.cs" />
     <Compile Include="DetallePlanSemanal.cs" />
