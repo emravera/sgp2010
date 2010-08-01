@@ -462,8 +462,8 @@ namespace GyCAP.DAL
         
         public static bool PuedeEliminarse(int codigoEstructura)
         {
-            //Determinar que condiciones necesita para poder eliminarse - gonzalo
-            string sql = "SELECT count(estr_codigo) FROM ESTRUCTURAS WHERE estr_codigo = @p0";
+            //Determinar que condiciones necesita para poder eliminarse, de momento que no sea activa - gonzalo
+            string sql = "SELECT estr_activo FROM ESTRUCTURAS WHERE estr_codigo = @p0";
             object[] valorParametros = { codigoEstructura };
 
             try
