@@ -19,6 +19,8 @@ namespace GyCAP.UI.RecursosFabricacion
         {
             InitializeComponent();
 
+            //Llena el Dataset con los estados
+            BLL.CapacidadEmpleadoBLL.ObtenerTodos(dsEmpleado);
 
 
             //Carga de la Lista de Sectores
@@ -28,7 +30,7 @@ namespace GyCAP.UI.RecursosFabricacion
             lvCapacidades.MultiSelect = false;
             lvCapacidades.CheckBoxes = true;
             lvCapacidades.GridLines = true;
-            lvCapacidades.Columns.Add("Capacidades", 220);
+            lvCapacidades.Columns.Add("Capacidades", 310);
             lvCapacidades.Columns.Add("Codigo", 0);
             if (dvCapacidadEmpleado.Count != 0)
             {
@@ -36,7 +38,7 @@ namespace GyCAP.UI.RecursosFabricacion
                 {
                     ListViewItem li = new ListViewItem(dr["CEMP_NOMBRE"].ToString());
                     li.SubItems.Add(dr["CEMP_CODIGO"].ToString());
-                    li.Checked = true;
+                    li.Checked = false;
                     lvCapacidades.Items.Add(li);
                 }
             }
@@ -45,6 +47,31 @@ namespace GyCAP.UI.RecursosFabricacion
             //Creamos el Dataview y se lo asignamos al combo
             dvEmpleado = new DataView(dsEmpleado.EMPLEADOS);
             cboEmpleado.SetDatos(dvEmpleado, "e_codigo", "e_nombre", "Seleccione un Empleado...", true);
+        }
+
+        public static frmRFAsignarCapacidad Instancia
+        {
+            get
+            {
+                if (_frmRFAsignarCapacidad == null || _frmRFAsignarCapacidad.IsDisposed)
+                {
+                    _frmRFAsignarCapacidad = new frmRFAsignarCapacidad();
+                }
+                else
+                {
+                    _frmRFAsignarCapacidad.BringToFront();
+                }
+                return _frmRFAsignarCapacidad;
+            }
+            set
+            {
+                _frmRFAsignarCapacidad = value;
+            }
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Dispose(true);
         }
     }
 }

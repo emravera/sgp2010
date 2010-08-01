@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cboEmpleado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.lvCapacidades = new System.Windows.Forms.ListView();
             this.label6 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.lvCapacidades = new System.Windows.Forms.ListView();
+            this.cboEmpleado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -50,55 +50,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btnVolver);
-            this.groupBox2.Controls.Add(this.btnGuardar);
-            this.groupBox2.Location = new System.Drawing.Point(12, 276);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(412, 55);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            // 
-            // cboEmpleado
-            // 
-            this.cboEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEmpleado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboEmpleado.FormattingEnabled = true;
-            this.cboEmpleado.Location = new System.Drawing.Point(73, 19);
-            this.cboEmpleado.Name = "cboEmpleado";
-            this.cboEmpleado.Size = new System.Drawing.Size(330, 21);
-            this.cboEmpleado.TabIndex = 19;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 22);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 13);
-            this.label6.TabIndex = 20;
-            this.label6.Text = "Empleado:";
-            // 
-            // btnVolver
-            // 
-            this.btnVolver.Location = new System.Drawing.Point(339, 18);
-            this.btnVolver.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(64, 26);
-            this.btnVolver.TabIndex = 17;
-            this.btnVolver.Text = "&Volver";
-            this.btnVolver.UseVisualStyleBackColor = true;
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Location = new System.Drawing.Point(269, 18);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(64, 26);
-            this.btnGuardar.TabIndex = 16;
-            this.btnGuardar.Text = "&Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            // 
             // lvCapacidades
             // 
             this.lvCapacidades.CheckBoxes = true;
@@ -111,6 +62,56 @@
             this.lvCapacidades.TabIndex = 21;
             this.lvCapacidades.UseCompatibleStateImageBehavior = false;
             this.lvCapacidades.View = System.Windows.Forms.View.Details;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(10, 22);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(57, 13);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Empleado:";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnVolver);
+            this.groupBox2.Controls.Add(this.btnGuardar);
+            this.groupBox2.Location = new System.Drawing.Point(12, 276);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(412, 55);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.Location = new System.Drawing.Point(339, 18);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(64, 26);
+            this.btnVolver.TabIndex = 17;
+            this.btnVolver.Text = "&Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Location = new System.Drawing.Point(269, 18);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(64, 26);
+            this.btnGuardar.TabIndex = 16;
+            this.btnGuardar.Text = "&Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            // 
+            // cboEmpleado
+            // 
+            this.cboEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEmpleado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboEmpleado.FormattingEnabled = true;
+            this.cboEmpleado.Location = new System.Drawing.Point(73, 19);
+            this.cboEmpleado.Name = "cboEmpleado";
+            this.cboEmpleado.Size = new System.Drawing.Size(330, 21);
+            this.cboEmpleado.TabIndex = 19;
             // 
             // frmRFAsignarCapacidad
             // 

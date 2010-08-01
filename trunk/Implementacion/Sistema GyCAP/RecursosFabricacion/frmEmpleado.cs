@@ -611,6 +611,13 @@ namespace GyCAP.UI.RecursosFabricacion
             txtNombre.SelectAll(); 
         }
 
+        private void btnAsignarCapacidad_Click(object sender, EventArgs e)
+        {
+            //GyCAP.UI.RecursosFabricacion.frmRFAsignarCapacidad.Instancia.MdiParent = GyCAP.UI;
+            //GyCAP.UI.RecursosFabricacion.frmRFAsignarCapacidad.Instancia.Show();
+            frmRFAsignarCapacidad.Instancia.Show();
+        }
+
     }
 
 
