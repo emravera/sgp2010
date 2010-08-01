@@ -124,7 +124,28 @@ namespace GyCAP.UI.EstructuraProducto
 
         #region Cocina
 
-        //frmCocina.Instancia.Location = PosicionarFormulario();
+        private void btnConsultarCocina_Click(object sender, EventArgs e)
+        {
+            frmCocina.Instancia.TopLevel = false;
+            frmCocina.Instancia.Parent = areaTrabajo;
+            frmCocina.Instancia.Location = PosicionarFormulario();
+            frmCocina.Instancia.SetEstadoInicial(frmCocina.estadoInicialConsultar);
+            frmCocina.Instancia.Show();
+        }
+
+        private void btnNuevoCocina_Click(object sender, EventArgs e)
+        {
+            frmCocina.Instancia.TopLevel = false;
+            frmCocina.Instancia.Parent = areaTrabajo;
+            frmCocina.Instancia.Location = PosicionarFormulario();
+            frmCocina.Instancia.SetEstadoInicial(frmCocina.estadoInicialNuevo);
+            frmCocina.Instancia.Show();
+        }
+
+        private void btnListadoCocina_Click(object sender, EventArgs e)
+        {
+
+        }
 
         #endregion
 
@@ -189,14 +210,23 @@ namespace GyCAP.UI.EstructuraProducto
 
         #endregion
 
-        #region Estructura Producto
+        #region Estructura Cocina
 
-        //frmEstructuraProducto.Instancia.Location = PosicionarFormulario();
+        private void btnNuevoEstructuraProducto_Click(object sender, EventArgs e)
+        {
+            frmEstructuraCocina.Instancia.TopLevel = false;
+            frmEstructuraCocina.Instancia.Parent = areaTrabajo;
+            frmEstructuraCocina.Instancia.Location = PosicionarFormulario();
+            frmEstructuraCocina.Instancia.SetEstadoInicial(frmEstructuraCocina.estadoInicialNuevo);
+            frmEstructuraCocina.Instancia.Show();
+        }
 
         private void btnConsultarEstructuraProducto_Click(object sender, EventArgs e)
         {
             frmEstructuraCocina.Instancia.TopLevel = false;
             frmEstructuraCocina.Instancia.Parent = areaTrabajo;
+            frmEstructuraCocina.Instancia.Location = PosicionarFormulario();
+            frmEstructuraCocina.Instancia.SetEstadoInicial(frmEstructuraCocina.estadoInicialConsultar);
             frmEstructuraCocina.Instancia.Show();
         }
 
@@ -333,18 +363,6 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
-
-        private void btnConsultarCocina_Click(object sender, EventArgs e)
-        {
-            frmCocina.Instancia.TopLevel = false;
-            frmCocina.Instancia.Parent = areaTrabajo;
-            frmCocina.Instancia.Location = PosicionarFormulario();
-            frmCocina.Instancia.SetEstadoInicial(frmCocina.estadoInicialConsultar);
-            frmCocina.Instancia.Show();
-        }
-
-        
-
 
     }
 }

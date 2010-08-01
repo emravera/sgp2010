@@ -428,6 +428,11 @@ namespace GyCAP.UI.EstructuraProducto
             pbImagen.Image = EstructuraProducto.Properties.Resources.sinimagen;
         }
 
+        private void ofdImagen_FileOk_1(object sender, CancelEventArgs e)
+        {
+            pbImagen.ImageLocation = ofdImagen.FileName;
+        }
+
         #endregion
 
         #region Servicios
@@ -757,5 +762,7 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion 
+
+        
     }
 }

@@ -9,6 +9,83 @@ namespace GyCAP.DAL
 {
     public class CocinaDAL
     {
+        public static int Insertar(Entidades.Cocina cocina)
+        {
+            string sql = @"INSERT INTO [COCINAS] 
+                        ([ecoc_codigo]
+                        ,[col_codigo]
+                        ,[mod_codigo]
+                        ,[mca_codigo]
+                        ,[te_codigo]
+                        ,[desig_codigo]
+                        ,[coc_codigo_producto]
+                        ,[coc_cantidadstock]
+                        ,[coc_activo]
+                        ,[coc_precio])
+                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9)";
+
+            object[] valorParametros = { cocina.Estado.Codigo,
+                                         cocina.Color.Codigo,
+                                         cocina.Modelo.Codigo,
+                                         cocina.Marca.Codigo,
+                                         cocina.TerminacionHorno.Codigo,
+                                         cocina.Designacion.Codigo,
+                                         cocina.CodigoProducto,
+                                         0,
+                                         1, //hasta ver si va o no le ponemos un valor por defecto
+                                         cocina.Precio };
+
+            try
+            {
+                return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static void Actualizar(Entidades.Cocina cocina)
+        {
+            string sql = @"UPDATE COCINAS SET 
+                         ecoc_codigo = @p0
+                        ,col_codigo = @p1
+                        ,mod_codigo = @p2
+                        ,mca_codigo = @p3
+                        ,te_codigo = @p4
+                        ,desig_codigo = @p5
+                        ,coc_codigo_producto = @p6
+                        ,coc_activo = @p7
+                        ,coc_precio = @p8
+                        WHERE coc_codigo = @p9";
+
+            object[] valorParametros = { cocina.Estado.Codigo,
+                                         cocina.Color.Codigo,
+                                         cocina.Modelo.Codigo,
+                                         cocina.Marca.Codigo,
+                                         cocina.TerminacionHorno.Codigo,
+                                         cocina.Designacion.Codigo,
+                                         cocina.CodigoProducto,
+                                         1, //hasta ver si va o no le ponemos un valor por defecto
+                                         cocina.Precio,
+                                         cocina.CodigoCocina };
+
+            try
+            {
+                DB.executeNonQuery(sql, valorParametros, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static void Eliminar(int codigoCocina)
+        {
+            string sql = "DELETE FROM COCINAS WHERE coc_codigo = @p0";
+            object[] valorParametros = { codigoCocina };
+            
+            try
+            {
+                DB.executeNonQuery(sql, valorParametros, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+        
         //Obtiene todas las cocinas, sin filtrar
         public static void ObtenerCocinas(DataTable dtCocina)
         {
@@ -88,6 +165,24 @@ namespace GyCAP.DAL
                 }
                 catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
+        }
+
+        public static bool PuedeEliminarse(int codigoCocina)
+        {
+            string sql = "SELECT count(coc_codigo) FROM ESTRUCTURAS WHERE coc_codigo = @p0";
+            object[] valorParametros = { codigoCocina };
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
     }
 }

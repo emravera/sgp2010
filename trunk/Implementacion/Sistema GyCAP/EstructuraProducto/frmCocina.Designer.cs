@@ -43,29 +43,31 @@
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.gbImagen = new System.Windows.Forms.GroupBox();
+            this.btnQuitar = new System.Windows.Forms.Button();
+            this.btnImagen = new System.Windows.Forms.Button();
+            this.pbImagen = new System.Windows.Forms.PictureBox();
+            this.nudPrecio = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvListaCocina = new System.Windows.Forms.DataGridView();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtCodigoBuscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tcCocina = new System.Windows.Forms.TabControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.nudPrecio = new System.Windows.Forms.NumericUpDown();
-            this.gbImagen = new System.Windows.Forms.GroupBox();
-            this.pbImagen = new System.Windows.Forms.PictureBox();
-            this.btnImagen = new System.Windows.Forms.Button();
-            this.btnQuitar = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.btnGenerar = new System.Windows.Forms.Button();
+            this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
             this.cbMarcaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbEstadoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbTerminacionBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
@@ -79,15 +81,15 @@
             this.gbGuardarCancelar.SuspendLayout();
             this.tpDatos.SuspendLayout();
             this.gbDatos.SuspendLayout();
+            this.gbImagen.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaCocina)).BeginInit();
             this.tpBuscar.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tcCocina.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).BeginInit();
-            this.gbImagen.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
             this.SuspendLayout();
             // 
             // label6
@@ -116,6 +118,7 @@
             this.btnVolver.TabIndex = 18;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnGuardar
             // 
@@ -125,14 +128,16 @@
             this.btnGuardar.TabIndex = 17;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // txtCodigo
             // 
             this.txtCodigo.Location = new System.Drawing.Point(123, 43);
             this.txtCodigo.MaxLength = 80;
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(179, 20);
+            this.txtCodigo.Size = new System.Drawing.Size(138, 20);
             this.txtCodigo.TabIndex = 7;
+            this.txtCodigo.Enter += new System.EventHandler(this.txtCodigo_Enter);
             // 
             // tsMenu
             // 
@@ -166,6 +171,7 @@
             this.btnNuevo.Size = new System.Drawing.Size(42, 47);
             this.btnNuevo.Text = "&Nuevo";
             this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // btnConsultar
             // 
@@ -176,6 +182,7 @@
             this.btnConsultar.Size = new System.Drawing.Size(57, 47);
             this.btnConsultar.Text = "&Consultar";
             this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
             // btnModificar
             // 
@@ -186,6 +193,7 @@
             this.btnModificar.Size = new System.Drawing.Size(54, 47);
             this.btnModificar.Text = "&Modificar";
             this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar
             // 
@@ -196,6 +204,7 @@
             this.btnEliminar.Size = new System.Drawing.Size(47, 47);
             this.btnEliminar.Text = "&Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // toolStripSeparator1
             // 
@@ -239,6 +248,7 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.btnGenerar);
             this.gbDatos.Controls.Add(this.cbEstado);
             this.gbDatos.Controls.Add(this.cbTerminacion);
             this.gbDatos.Controls.Add(this.cbColor);
@@ -264,6 +274,116 @@
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos de la Cocina";
+            // 
+            // gbImagen
+            // 
+            this.gbImagen.Controls.Add(this.btnQuitar);
+            this.gbImagen.Controls.Add(this.btnImagen);
+            this.gbImagen.Controls.Add(this.pbImagen);
+            this.gbImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gbImagen.Location = new System.Drawing.Point(353, 43);
+            this.gbImagen.Name = "gbImagen";
+            this.gbImagen.Size = new System.Drawing.Size(214, 272);
+            this.gbImagen.TabIndex = 21;
+            this.gbImagen.TabStop = false;
+            this.gbImagen.Text = "Imagen";
+            // 
+            // btnQuitar
+            // 
+            this.btnQuitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnQuitar.Location = new System.Drawing.Point(131, 231);
+            this.btnQuitar.Name = "btnQuitar";
+            this.btnQuitar.Size = new System.Drawing.Size(75, 23);
+            this.btnQuitar.TabIndex = 16;
+            this.btnQuitar.Text = "Quitar";
+            this.btnQuitar.UseVisualStyleBackColor = true;
+            this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
+            // 
+            // btnImagen
+            // 
+            this.btnImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImagen.Location = new System.Drawing.Point(6, 231);
+            this.btnImagen.Name = "btnImagen";
+            this.btnImagen.Size = new System.Drawing.Size(75, 23);
+            this.btnImagen.TabIndex = 15;
+            this.btnImagen.Text = "Seleccionar";
+            this.btnImagen.UseVisualStyleBackColor = true;
+            this.btnImagen.Click += new System.EventHandler(this.btnImagen_Click);
+            // 
+            // pbImagen
+            // 
+            this.pbImagen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbImagen.Location = new System.Drawing.Point(6, 25);
+            this.pbImagen.Name = "pbImagen";
+            this.pbImagen.Size = new System.Drawing.Size(200, 200);
+            this.pbImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbImagen.TabIndex = 0;
+            this.pbImagen.TabStop = false;
+            // 
+            // nudPrecio
+            // 
+            this.nudPrecio.DecimalPlaces = 2;
+            this.nudPrecio.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudPrecio.Location = new System.Drawing.Point(123, 295);
+            this.nudPrecio.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+            this.nudPrecio.Name = "nudPrecio";
+            this.nudPrecio.Size = new System.Drawing.Size(201, 20);
+            this.nudPrecio.TabIndex = 14;
+            this.nudPrecio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudPrecio.Enter += new System.EventHandler(this.nudPrecio_Enter);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(18, 227);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(99, 13);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "Terminación horno:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(18, 117);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(40, 13);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "Marca:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(18, 81);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(45, 13);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Modelo:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(18, 192);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(36, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Color:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(18, 263);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Estado:";
             // 
             // label3
             // 
@@ -300,6 +420,7 @@
             this.dgvListaCocina.Size = new System.Drawing.Size(561, 292);
             this.dgvListaCocina.TabIndex = 6;
             this.dgvListaCocina.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListaCocina_RowEnter);
+            this.dgvListaCocina.DoubleClick += new System.EventHandler(this.dgvListaCocina_DoubleClick);
             this.dgvListaCocina.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvListaCocina_CellFormatting);
             // 
             // tpBuscar
@@ -332,6 +453,24 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(22, 47);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(64, 26);
+            this.label12.TabIndex = 7;
+            this.label12.Text = "Terminación\r\nde horno:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(263, 56);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(44, 13);
+            this.label11.TabIndex = 6;
+            this.label11.Text = "Estado:";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -361,6 +500,7 @@
             this.txtCodigoBuscar.Name = "txtCodigoBuscar";
             this.txtCodigoBuscar.Size = new System.Drawing.Size(151, 20);
             this.txtCodigoBuscar.TabIndex = 1;
+            this.txtCodigoBuscar.Enter += new System.EventHandler(this.txtCodigoBuscar_Enter);
             // 
             // label1
             // 
@@ -404,123 +544,21 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(597, 480);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
-            // label2
+            // btnGenerar
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 263);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Estado:";
+            this.btnGenerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerar.Location = new System.Drawing.Point(267, 42);
+            this.btnGenerar.Name = "btnGenerar";
+            this.btnGenerar.Size = new System.Drawing.Size(57, 21);
+            this.btnGenerar.TabIndex = 22;
+            this.btnGenerar.Text = "Generar";
+            this.btnGenerar.UseVisualStyleBackColor = true;
+            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
             // 
-            // label7
+            // ofdImagen
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(18, 192);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 13);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Color:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(18, 81);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(45, 13);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "Modelo:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(18, 117);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(40, 13);
-            this.label9.TabIndex = 13;
-            this.label9.Text = "Marca:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(18, 227);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(99, 13);
-            this.label10.TabIndex = 14;
-            this.label10.Text = "Terminación horno:";
-            // 
-            // nudPrecio
-            // 
-            this.nudPrecio.DecimalPlaces = 2;
-            this.nudPrecio.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nudPrecio.Location = new System.Drawing.Point(123, 295);
-            this.nudPrecio.Name = "nudPrecio";
-            this.nudPrecio.Size = new System.Drawing.Size(179, 20);
-            this.nudPrecio.TabIndex = 14;
-            this.nudPrecio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // gbImagen
-            // 
-            this.gbImagen.Controls.Add(this.btnQuitar);
-            this.gbImagen.Controls.Add(this.btnImagen);
-            this.gbImagen.Controls.Add(this.pbImagen);
-            this.gbImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gbImagen.Location = new System.Drawing.Point(353, 43);
-            this.gbImagen.Name = "gbImagen";
-            this.gbImagen.Size = new System.Drawing.Size(214, 272);
-            this.gbImagen.TabIndex = 21;
-            this.gbImagen.TabStop = false;
-            this.gbImagen.Text = "Imagen";
-            // 
-            // pbImagen
-            // 
-            this.pbImagen.Location = new System.Drawing.Point(6, 25);
-            this.pbImagen.Name = "pbImagen";
-            this.pbImagen.Size = new System.Drawing.Size(200, 200);
-            this.pbImagen.TabIndex = 0;
-            this.pbImagen.TabStop = false;
-            // 
-            // btnImagen
-            // 
-            this.btnImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImagen.Location = new System.Drawing.Point(6, 231);
-            this.btnImagen.Name = "btnImagen";
-            this.btnImagen.Size = new System.Drawing.Size(75, 23);
-            this.btnImagen.TabIndex = 15;
-            this.btnImagen.Text = "Seleccionar";
-            this.btnImagen.UseVisualStyleBackColor = true;
-            // 
-            // btnQuitar
-            // 
-            this.btnQuitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnQuitar.Location = new System.Drawing.Point(131, 231);
-            this.btnQuitar.Name = "btnQuitar";
-            this.btnQuitar.Size = new System.Drawing.Size(75, 23);
-            this.btnQuitar.TabIndex = 16;
-            this.btnQuitar.Text = "Quitar";
-            this.btnQuitar.UseVisualStyleBackColor = true;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(263, 56);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(44, 13);
-            this.label11.TabIndex = 6;
-            this.label11.Text = "Estado:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(22, 47);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(64, 26);
-            this.label12.TabIndex = 7;
-            this.label12.Text = "Terminación\r\nde horno:";
+            this.ofdImagen.Title = "Seleccione una imagen";
+            this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk);
             // 
             // cbMarcaBuscar
             // 
@@ -559,7 +597,7 @@
             this.cbEstado.FormattingEnabled = true;
             this.cbEstado.Location = new System.Drawing.Point(123, 260);
             this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(179, 21);
+            this.cbEstado.Size = new System.Drawing.Size(201, 21);
             this.cbEstado.TabIndex = 13;
             // 
             // cbTerminacion
@@ -569,7 +607,7 @@
             this.cbTerminacion.FormattingEnabled = true;
             this.cbTerminacion.Location = new System.Drawing.Point(123, 224);
             this.cbTerminacion.Name = "cbTerminacion";
-            this.cbTerminacion.Size = new System.Drawing.Size(179, 21);
+            this.cbTerminacion.Size = new System.Drawing.Size(201, 21);
             this.cbTerminacion.TabIndex = 12;
             // 
             // cbColor
@@ -579,7 +617,7 @@
             this.cbColor.FormattingEnabled = true;
             this.cbColor.Location = new System.Drawing.Point(123, 189);
             this.cbColor.Name = "cbColor";
-            this.cbColor.Size = new System.Drawing.Size(179, 21);
+            this.cbColor.Size = new System.Drawing.Size(201, 21);
             this.cbColor.TabIndex = 11;
             // 
             // cbDesignacion
@@ -589,7 +627,7 @@
             this.cbDesignacion.FormattingEnabled = true;
             this.cbDesignacion.Location = new System.Drawing.Point(123, 152);
             this.cbDesignacion.Name = "cbDesignacion";
-            this.cbDesignacion.Size = new System.Drawing.Size(179, 21);
+            this.cbDesignacion.Size = new System.Drawing.Size(201, 21);
             this.cbDesignacion.TabIndex = 10;
             // 
             // cbMarca
@@ -599,7 +637,7 @@
             this.cbMarca.FormattingEnabled = true;
             this.cbMarca.Location = new System.Drawing.Point(123, 114);
             this.cbMarca.Name = "cbMarca";
-            this.cbMarca.Size = new System.Drawing.Size(179, 21);
+            this.cbMarca.Size = new System.Drawing.Size(201, 21);
             this.cbMarca.TabIndex = 9;
             // 
             // cbModelo
@@ -609,7 +647,7 @@
             this.cbModelo.FormattingEnabled = true;
             this.cbModelo.Location = new System.Drawing.Point(123, 78);
             this.cbModelo.Name = "cbModelo";
-            this.cbModelo.Size = new System.Drawing.Size(179, 21);
+            this.cbModelo.Size = new System.Drawing.Size(201, 21);
             this.cbModelo.TabIndex = 8;
             // 
             // frmCocina
@@ -631,6 +669,9 @@
             this.tpDatos.ResumeLayout(false);
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
+            this.gbImagen.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaCocina)).EndInit();
             this.tpBuscar.ResumeLayout(false);
@@ -639,9 +680,6 @@
             this.tcCocina.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).EndInit();
-            this.gbImagen.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -695,5 +733,7 @@
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbMarcaBuscar;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbEstadoBuscar;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbTerminacionBuscar;
+        private System.Windows.Forms.Button btnGenerar;
+        private System.Windows.Forms.OpenFileDialog ofdImagen;
     }
 }

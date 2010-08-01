@@ -206,6 +206,7 @@
             this.btnNuevoCocina.Text = " Nuevo";
             this.btnNuevoCocina.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoCocina.UseVisualStyleBackColor = false;
+            this.btnNuevoCocina.Click += new System.EventHandler(this.btnNuevoCocina_Click);
             // 
             // btnConsultarCocina
             // 
@@ -245,6 +246,7 @@
             this.btnListadoCocina.Text = "Listados";
             this.btnListadoCocina.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnListadoCocina.UseVisualStyleBackColor = false;
+            this.btnListadoCocina.Click += new System.EventHandler(this.btnListadoCocina_Click);
             // 
             // btnColor
             // 
@@ -535,6 +537,7 @@
             this.btnNuevoEstructuraProducto.Text = "Nuevo";
             this.btnNuevoEstructuraProducto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoEstructuraProducto.UseVisualStyleBackColor = true;
+            this.btnNuevoEstructuraProducto.Click += new System.EventHandler(this.btnNuevoEstructuraProducto_Click);
             // 
             // btnMPPrincipal
             // 
@@ -1039,7 +1042,6 @@
             this.Controls.Add(this.scDown);
             this.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
             this.Name = "frmEstructuraProducto";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
