@@ -15,8 +15,10 @@ namespace GyCAP.UI.RecursosFabricacion
         private Data.dsEmpleado dsEmpleado = new GyCAP.Data.dsEmpleado(); 
         private DataView dvEmpleado, dvEstadoEmpleado,dvEstadoEmpleadoBuscar, 
                          dvListaSectores, dvSectores, dvCapacidadEmpleado;
-        private enum estadoUI { inicio, nuevo, consultar, modificar, };
+        private enum estadoUI { inicio, nuevo, consultar, modificar, nuevoExterno};
         private estadoUI estadoInterface;
+        public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
+        public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
 
         public frmEmpleado()
         {
@@ -178,6 +180,12 @@ namespace GyCAP.UI.RecursosFabricacion
             SetInterface(estadoUI.inicio);
         }
 
+        public void SetEstadoInicial(int estado)
+        {
+            if (estado == estadoInicialNuevo) { SetInterface(estadoUI.nuevoExterno); }
+            if (estado == estadoInicialConsultar) { SetInterface(estadoUI.inicio); }
+        }
+
         #region Servicios
 
         //Setea la pantalla de acuerdo al estado en que se encuentre
@@ -227,6 +235,28 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnEliminar.Enabled = false;
                     btnAsignarCapacidad.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
+                    tcABM.SelectedTab = tpDatos;
+                    txtLegajo.Focus();
+                    break;
+                case estadoUI.nuevoExterno:
+                    setControles(false);
+                    txtNombre.Text = string.Empty;
+                    txtApellido.Text = string.Empty;
+                    txtLegajo.Text = string.Empty;
+                    txtTelefono.Text = string.Empty;
+                    sfFechaNac.SetFechaNull();
+                    cboEstado.SelectedIndex = 0;
+                    cboSector.SelectedIndex = 0;
+
+                    //gbGuardarCancelar.Enabled = true;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = false;
+                    btnNuevo.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    btnAsignarCapacidad.Enabled = false;
+                    estadoInterface = estadoUI.nuevoExterno;
                     tcABM.SelectedTab = tpDatos;
                     txtLegajo.Focus();
                     break;
@@ -328,7 +358,7 @@ namespace GyCAP.UI.RecursosFabricacion
                 Entidades.EstadoEmpleado estadoEmpleado = new GyCAP.Entidades.EstadoEmpleado();
 
                 //Revisamos que está haciendo
-                if (estadoInterface == estadoUI.nuevo) //|| estadoInterface == estadoUI.nuevoExterno)
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
                     //Está cargando un nuevo Empleado
                     empleado.Apellido = txtApellido.Text.Trim();
@@ -387,7 +417,7 @@ namespace GyCAP.UI.RecursosFabricacion
                         //Y por último seteamos el estado de la interfaz
 
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
-                        /*if (estadoInterface == estadoUI.nuevoExterno)
+                        if (estadoInterface == estadoUI.nuevoExterno)
                         {
                             //Nuevo desde acceso directo, cerramos el formulario
                             btnSalir.PerformClick();
@@ -396,9 +426,7 @@ namespace GyCAP.UI.RecursosFabricacion
                         {
                             //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
                             SetInterface(estadoUI.inicio);
-                        }*/
-
-                        SetInterface(estadoUI.inicio);
+                        }
 
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
