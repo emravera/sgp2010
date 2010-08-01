@@ -200,13 +200,14 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnModificar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
                     btnConsultar.Enabled = hayDatos;
+                    btnAsignarCapacidad.Enabled = hayDatos; 
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcABM.SelectedTab = tpBuscar;
                     txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
-                    setBotones(false);
+                    setControles(false);
                     txtNombre.Text = string.Empty;
                     txtApellido.Text = string.Empty;
                     txtLegajo.Text = string.Empty;
@@ -222,12 +223,13 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    btnAsignarCapacidad.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
                     tcABM.SelectedTab = tpDatos;
                     txtLegajo.Focus();
                     break;
                 case estadoUI.consultar:
-                    setBotones(true);
+                    setControles(true);
                     //gbGuardarCancelar.Enabled = false;
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
@@ -236,7 +238,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnVolver.Focus();
                     break;
                 case estadoUI.modificar:
-                    setBotones(false);
+                    setControles(false);
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -244,6 +246,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    btnAsignarCapacidad.Enabled = false;
                     estadoInterface = estadoUI.modificar;
                     tcABM.SelectedTab = tpDatos;
                     txtLegajo.Focus();
@@ -253,7 +256,7 @@ namespace GyCAP.UI.RecursosFabricacion
             }
         }
 
-        private void setBotones(bool pValue) 
+        private void setControles(bool pValue) 
         {
             txtApellido.ReadOnly = pValue;
             txtNombre.ReadOnly = pValue;
@@ -574,14 +577,18 @@ namespace GyCAP.UI.RecursosFabricacion
             cboEstado.SetSelectedValue(int.Parse(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).EE_CODIGO.ToString()));
             sfFechaNac.SetFecha(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_FECHANACIMIENTO);
 
-            //dvCapacidadEmpleado.RowFilter = " E_CODIGO = " + codigoEmpleado;
+            //Creamos el dataview y lo asignamos a la grilla
+
+            BLL.CapacidadEmpleadoBLL.ObtenerCapacidadPorEmpleado(dsEmpleado);
+
+            dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDADESXEMPLEADO);
+            dvCapacidadEmpleado.RowFilter = " E_CODIGO = " + codigoEmpleado;
             dgvCapacidades.DataSource = dvCapacidadEmpleado;
-            dgvCapacidades.Refresh();
         }
 
         private void dgvCapacidades_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.Value.ToString() != String.Empty)
+            if (e.Value != null && e.Value.ToString() != String.Empty)
             {
                 string nombre;
                 switch (dgvCapacidades.Columns[e.ColumnIndex].Name)

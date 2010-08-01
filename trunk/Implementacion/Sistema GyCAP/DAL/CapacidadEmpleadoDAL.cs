@@ -129,6 +129,20 @@ namespace GyCAP.DAL
             }
         }
 
+        public static void ObtenerCapacidadPorEmpleado(Data.dsEmpleado ds)
+        {
+            string sql = @"SELECT CXE_CODIGO, CAPACIDADESXEMPLEADO.CEMP_CODIGO, E_CODIGO
+                           FROM CAPACIDAD_EMPLEADOS,CAPACIDADESXEMPLEADO 
+                           WHERE CAPACIDAD_EMPLEADOS.CEMP_CODIGO = CAPACIDADESXEMPLEADO.CEMP_CODIGO ";
+
+            try
+            {
+                DB.FillDataSet(ds, "CAPACIDADESXEMPLEADO", sql, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            
+        }
+
         public static bool PuedeEliminarse(int codigo)
         {
             string sql = "SELECT count(CXE_CODIGO) FROM CAPACIDADESXEMPLEADO WHERE CEMP_CODIGO = @p0";
