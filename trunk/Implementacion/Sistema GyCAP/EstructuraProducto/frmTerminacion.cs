@@ -53,6 +53,7 @@ namespace GyCAP.UI.EstructuraProducto
 
             //Alineacion de los numeros y las fechas en la grilla
             dgvLista.Columns["TE_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvLista.Columns["TE_CODIGO"].Visible = false;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvTerminacion = new DataView(dsTerminacion.TERMINACIONES);

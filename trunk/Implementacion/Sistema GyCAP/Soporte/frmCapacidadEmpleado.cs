@@ -50,6 +50,7 @@ namespace GyCAP.UI.Soporte
 
             //Alineacion de los numeros y las fechas en la grilla
             dgvLista.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvLista.Columns[0].Visible = false;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvCapacidadEmpleado = new DataView(dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS);

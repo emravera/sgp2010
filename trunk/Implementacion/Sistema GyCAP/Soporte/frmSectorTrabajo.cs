@@ -39,6 +39,8 @@ namespace GyCAP.UI.Soporte
             dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
+            dgvLista.Columns["SEC_CODIGO"].Visible = false;
+
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["SEC_CODIGO"].DataPropertyName = "SEC_CODIGO";
             dgvLista.Columns["SEC_ABREVIATURA"].DataPropertyName = "SEC_ABREVIATURA";
