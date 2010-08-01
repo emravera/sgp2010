@@ -16,14 +16,14 @@ namespace GyCAP.Data.Reportes {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class reporte : ReportClass {
+    public class crPartesEstructura : ReportClass {
         
-        public reporte() {
+        public crPartesEstructura() {
         }
         
         public override string ResourceName {
             get {
-                return "reporte.rpt";
+                return "crPartesEstructura.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace GyCAP.Data.Reportes {
         
         public override string FullResourceName {
             get {
-                return "GyCAP.Data.Reportes.reporte.rpt";
+                return "GyCAP.Data.Reportes.crPartesEstructura.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace GyCAP.Data.Reportes {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class Cachedreporte : Component, ICachedReport {
+    public class CachedcrPartesEstructura : Component, ICachedReport {
         
-        public Cachedreporte() {
+        public CachedcrPartesEstructura() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace GyCAP.Data.Reportes {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            reporte rpt = new reporte();
+            crPartesEstructura rpt = new crPartesEstructura();
             rpt.Site = this.Site;
             return rpt;
         }

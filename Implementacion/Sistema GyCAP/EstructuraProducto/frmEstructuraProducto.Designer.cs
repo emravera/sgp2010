@@ -501,6 +501,7 @@
             this.btnListadoEstructuraProducto.Text = "Listados";
             this.btnListadoEstructuraProducto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnListadoEstructuraProducto.UseVisualStyleBackColor = true;
+            this.btnListadoEstructuraProducto.Click += new System.EventHandler(this.btnListadoEstructuraProducto_Click);
             // 
             // btnConsultarEstructuraProducto
             // 

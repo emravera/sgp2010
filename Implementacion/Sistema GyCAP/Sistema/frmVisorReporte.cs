@@ -15,5 +15,7 @@ namespace GyCAP.UI.Sistema
         {
             InitializeComponent();
         }
+
+        
     }
 }

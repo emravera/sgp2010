@@ -52,7 +52,10 @@ namespace GyCAP.BLL
             if (activoSiNo != null && Convert.ToInt32(activoSiNo) > -1) { activo = activoSiNo; }
             DAL.EstructuraDAL.ObtenerEstructuras(nombre, plano, fechaCreacion, cocina, responsable, activo, ds);
         }
-        
-        
+
+        public static void ObtenerEstructuraCocina(int codigoCocina, Data.dsEstructura ds, bool detalle)
+        {
+            DAL.EstructuraDAL.ObtenerEstructuraCocina(codigoCocina, ds, detalle);
+        }
     }
 }

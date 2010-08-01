@@ -230,6 +230,14 @@ namespace GyCAP.UI.EstructuraProducto
             frmEstructuraCocina.Instancia.Show();
         }
 
+        private void btnListadoEstructuraProducto_Click(object sender, EventArgs e)
+        {
+            frmListadoEstructura.Instancia.TopLevel = false;
+            frmListadoEstructura.Instancia.Parent = areaTrabajo;
+            frmListadoEstructura.Instancia.Location = PosicionarFormulario();
+            frmListadoEstructura.Instancia.Show();
+        }
+
         #endregion
 
         #region Materia Prima Principal
@@ -363,6 +371,8 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
+
+        
 
     }
 }
