@@ -334,6 +334,15 @@ namespace GyCAP.UI.EstructuraProducto
 
         #endregion
 
+        private void btnConsultarCocina_Click(object sender, EventArgs e)
+        {
+            frmCocina.Instancia.TopLevel = false;
+            frmCocina.Instancia.Parent = areaTrabajo;
+            frmCocina.Instancia.Location = PosicionarFormulario();
+            frmCocina.Instancia.SetEstadoInicial(frmCocina.estadoInicialConsultar);
+            frmCocina.Instancia.Show();
+        }
+
         
 
 

@@ -67,39 +67,69 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            /*try
+            try
             {
                 //Limpiamos el Dataset
                 dsCocina.COCINAS.Clear();
 
                 //Metodo para la busqueda con todos los parámetros
-                
+                BLL.CocinaBLL.ObtenerCocinas(txtCodigoBuscar.Text, cbMarcaBuscar.GetSelectedValueInt(), cbTerminacionBuscar.GetSelectedValueInt(), cbEstadoBuscar.GetSelectedValueInt(), dsCocina.COCINAS);
 
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
-                dvListaUnidad.Table = dsUnidadMedida.UNIDADES_MEDIDA;
+                dvCocinas.Table = dsCocina.COCINAS;
 
-                if (dsUnidadMedida.UNIDADES_MEDIDA.Rows.Count == 0)
+                if (dsCocina.COCINAS.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Unidades de Medida con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("No se encontraron Cocinas con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Unidades de Medida - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error: Cocinas - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetInterface(estadoUI.inicio);
-            }*/
+            }
         }
 
         private void dgvListaCocina_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-
+            
+            if (e.Value.ToString() != string.Empty)
+            {
+                string nombre = string.Empty;
+                switch (dgvListaCocina.Columns[e.ColumnIndex].Name)
+                {
+                    case "MOD_CODIGO":
+                        nombre = dsCocina.MODELOS_COCINAS.FindByMOD_CODIGO(Convert.ToInt32(e.Value)).MOD_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "MCA_CODIGO":
+                        nombre = dsCocina.MARCAS.FindByMCA_CODIGO(Convert.ToInt32(e.Value)).MCA_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "ECOC_CODIGO":
+                        nombre = dsCocina.ESTADO_COCINAS.FindByECOC_CODIGO(Convert.ToInt32(e.Value)).ECOC_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         private void dgvListaCocina_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-
+            int codigoCocina = Convert.ToInt32(dvCocinas[e.RowIndex]["coc_codigo"]);
+            txtCodigo.Text = dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COC_CODIGO_PRODUCTO;
+            cbModelo.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).MOD_CODIGO));
+            cbMarca.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).MCA_CODIGO));
+            cbDesignacion.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).DESIG_CODIGO));
+            cbColor.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COL_CODIGO));
+            cbTerminacion.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).TE_CODIGO));
+            cbEstado.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).ECOC_CODIGO));
+            nudPrecio.Value = dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COC_PRECIO;
+            //Cargar imagen - gonzalo
         }
 
         #endregion
@@ -250,9 +280,10 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
-            
-            //Grilla
+
+
+            //Grilla 
+            dgvListaCocina.AutoGenerateColumns = false;
             dgvListaCocina.Columns.Add("COC_CODIGO_PRODUCTO","Código");
             dgvListaCocina.Columns.Add("MOD_CODIGO", "Modelo");
             dgvListaCocina.Columns.Add("MCA_CODIGO", "Marca");
