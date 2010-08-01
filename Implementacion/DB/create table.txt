@@ -813,7 +813,7 @@ create table DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL (
    PMPA_CODIGO          numeric(10)          null,
    MP_CODIGO            numeric(10)          null,	/*-MODIFICACION 24/07/2010-*/
    DPMPA_CANTIDAD       numeric(10)          null,
-   DPMPA_MES            varchar(10)          null,
+   PMPA_MES             varchar(10)          null,	/*-MODIFICACION 01/08/2010-*/
    constraint PK_DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL primary key nonclustered (DPMPA_CODIGO)
 )
 
