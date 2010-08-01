@@ -83,9 +83,9 @@ namespace GyCAP.UI.EstructuraProducto
                 BLL.PlanoBLL.ObtenerTodos(dsEstructura.PLANOS);
                 BLL.CocinaBLL.ObtenerCocinas(dsCocina.COCINAS);
                 BLL.EmpleadoBLL.ObtenerEmpleados(dsEmpleado.EMPLEADOS);
-                BLL.ConjuntoBLL.ObtenerConjuntos(dsEstructura.CONJUNTOS, BLL.ConjuntoBLL.estadoActivo);
-                BLL.SubConjuntoBLL.ObtenerSubconjuntos(dsEstructura.SUBCONJUNTOS, BLL.SubConjuntoBLL.estadoActivo);
-                BLL.PiezaBLL.ObtenerPiezas(dsEstructura.PIEZAS, BLL.PiezaBLL.estadoActivo);
+                BLL.ConjuntoBLL.ObtenerConjuntos(dsEstructura.CONJUNTOS);
+                BLL.SubConjuntoBLL.ObtenerSubconjuntos(dsEstructura.SUBCONJUNTOS);
+                BLL.PiezaBLL.ObtenerPiezas(dsEstructura.PIEZAS);
                 BLL.MateriaPrimaBLL.ObtenerTodos(dsEstructura.MATERIAS_PRIMAS);
                 BLL.UnidadMedidaBLL.ObtenerTodos(dsUnidadMedida.UNIDADES_MEDIDA);
             }
@@ -206,7 +206,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             if (e.Value.ToString() != string.Empty)
             {
-                string nombre; //tira error despues de guardar - gonzalo
+                string nombre;
                 switch (dgvEstructuras.Columns[e.ColumnIndex].Name)
                 {
                     case "COC_CODIGO":
