@@ -59,5 +59,19 @@ namespace GyCAP.UI.Principal.Properties {
                 resourceCulture = value;
             }
         }
+        
+        internal static System.Drawing.Bitmap Logo_Florencia {
+            get {
+                object obj = ResourceManager.GetObject("Logo_Florencia", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap macoser {
+            get {
+                object obj = ResourceManager.GetObject("macoser", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

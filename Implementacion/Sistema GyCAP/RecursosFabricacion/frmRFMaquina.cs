@@ -17,8 +17,10 @@ namespace GyCAP.UI.RecursosFabricacion
         private DataView dvMaquina, dvEstadoMaquina, dvEstadoMaquinaBuscar,
                          dvListaModelos, dvModelo,
                          dvListaFabricante, dvFabricante;
-        private enum estadoUI { inicio, nuevo, consultar, modificar, };
+        private enum estadoUI { inicio, nuevo, consultar, modificar, nuevoExterno};
         private estadoUI estadoInterface;
+        public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
+        public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
 
         public frmRFMaquina()
         {
@@ -141,6 +143,12 @@ namespace GyCAP.UI.RecursosFabricacion
 
         }
 
+        public void SetEstadoInicial(int estado)
+        {
+            if (estado == estadoInicialNuevo) { SetInterface(estadoUI.nuevoExterno); }
+            if (estado == estadoInicialConsultar) { SetInterface(estadoUI.inicio); }
+        }
+
         #region Servicios
 
         //Setea la pantalla de acuerdo al estado en que se encuentre
@@ -182,6 +190,26 @@ namespace GyCAP.UI.RecursosFabricacion
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
+                    btnNuevo.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    estadoInterface = estadoUI.nuevo;
+                    tcABM.SelectedTab = tpDatos;
+                    txtNombre.Focus();
+                    break;
+                case estadoUI.nuevoExterno:
+                    setBotones(false);
+                    txtNombre.Text = string.Empty;
+                    txtMarca.Text = string.Empty;
+                    txtNroSerie.Text = string.Empty;
+                    cboEstado.SelectedIndex = -1;
+                    cboFabricante.SelectedIndex = -1;
+                    cboModelo.SelectedIndex = -1;
+
+                    //gbGuardarCancelar.Enabled = true;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = false;
                     btnNuevo.Enabled = false;
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
@@ -282,7 +310,7 @@ namespace GyCAP.UI.RecursosFabricacion
                 Entidades.EstadoMaquina estado = new GyCAP.Entidades.EstadoMaquina();
 
                 //Revisamos que está haciendo
-                if (estadoInterface == estadoUI.nuevo )
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
                     //Está cargando una marca nueva
                     maquina.Nombre = txtNombre.Text;
@@ -331,16 +359,16 @@ namespace GyCAP.UI.RecursosFabricacion
                         //Y por último seteamos el estado de la interfaz
 
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
-                        //if (estadoInterface == estadoUI.nuevoExterno)
-                        //{
-                        //    //Nuevo desde acceso directo, cerramos el formulario
-                        //    btnSalir.PerformClick();
-                        //}
-                        //else
-                        //{
-                        //    //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
-                        SetInterface(estadoUI.inicio);
-                        //}
+                        if (estadoInterface == estadoUI.nuevoExterno)
+                        {
+                            //Nuevo desde acceso directo, cerramos el formulario
+                            btnSalir.PerformClick();
+                        }
+                        else
+                        {
+                            //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
+                            SetInterface(estadoUI.inicio);
+                        }
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {

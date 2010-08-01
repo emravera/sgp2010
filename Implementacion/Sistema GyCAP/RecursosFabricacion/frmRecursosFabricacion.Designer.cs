@@ -152,6 +152,7 @@
             // 
             this.btnConsultarEmpleado.AutoSize = true;
             this.btnConsultarEmpleado.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConsultarEmpleado.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConsultarEmpleado.FlatAppearance.BorderSize = 0;
             this.btnConsultarEmpleado.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnConsultarEmpleado.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -170,6 +171,7 @@
             // 
             this.btnNuevoEmpleado.AutoSize = true;
             this.btnNuevoEmpleado.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNuevoEmpleado.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNuevoEmpleado.FlatAppearance.BorderSize = 0;
             this.btnNuevoEmpleado.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnNuevoEmpleado.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -268,6 +270,7 @@
             // 
             this.btnConsultarMaquina.AutoSize = true;
             this.btnConsultarMaquina.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConsultarMaquina.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConsultarMaquina.FlatAppearance.BorderSize = 0;
             this.btnConsultarMaquina.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnConsultarMaquina.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -286,6 +289,7 @@
             // 
             this.btnNuevoMaquina.AutoSize = true;
             this.btnNuevoMaquina.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNuevoMaquina.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNuevoMaquina.FlatAppearance.BorderSize = 0;
             this.btnNuevoMaquina.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnNuevoMaquina.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -351,6 +355,7 @@
             // 
             this.btnIndiceProductividad.AutoSize = true;
             this.btnIndiceProductividad.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnIndiceProductividad.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnIndiceProductividad.FlatAppearance.BorderSize = 0;
             this.btnIndiceProductividad.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnIndiceProductividad.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;

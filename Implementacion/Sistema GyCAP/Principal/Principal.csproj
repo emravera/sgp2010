@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmFondoPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFondoPrincipal.Designer.cs">
+      <DependentUpon>frmFondoPrincipal.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmOpciones.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +68,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmFondoPrincipal.resx">
+      <DependentUpon>frmFondoPrincipal.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmOpciones.resx">
       <DependentUpon>frmOpciones.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -119,6 +129,12 @@
       <Project>{E62237F2-4821-4526-BE7C-45263EE307C5}</Project>
       <Name>Soporte</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\macoser.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo Florencia.JPG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
