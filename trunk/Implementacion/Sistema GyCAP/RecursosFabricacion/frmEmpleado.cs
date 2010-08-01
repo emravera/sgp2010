@@ -132,7 +132,7 @@ namespace GyCAP.UI.RecursosFabricacion
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvCapacidades.Columns["E_CODIGO"].DataPropertyName = "E_CODIGO";
-            dgvCapacidades.Columns["CEMP_CODIGO"].DataPropertyName = "CEMP_NOMBRE";
+            dgvCapacidades.Columns["CEMP_CODIGO"].DataPropertyName = "CEMP_CODIGO";
 
             //Alineacion de los numeros y las fechas en la grilla
             dgvCapacidades.Columns["E_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -157,6 +157,8 @@ namespace GyCAP.UI.RecursosFabricacion
             cboSector.SetDatos(dvSectores, "SEC_CODIGO", "SEC_NOMBRE", "Seleccione un Sector...", false);
 
             BLL.CapacidadEmpleadoBLL.ObtenerTodos(dsEmpleado);
+
+            BLL.CapacidadEmpleadoBLL.ObtenerCapacidadPorEmpleado(dsEmpleado);
 
             //Creamos el dataview y lo asignamos a la grilla
             //dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDAD_EMPLEADOS);
@@ -578,8 +580,6 @@ namespace GyCAP.UI.RecursosFabricacion
             sfFechaNac.SetFecha(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_FECHANACIMIENTO);
 
             //Creamos el dataview y lo asignamos a la grilla
-
-            BLL.CapacidadEmpleadoBLL.ObtenerCapacidadPorEmpleado(dsEmpleado);
 
             dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDADESXEMPLEADO);
             dvCapacidadEmpleado.RowFilter = " E_CODIGO = " + codigoEmpleado;
