@@ -1005,12 +1005,9 @@ namespace GyCAP.UI.EstructuraProducto
             dvEstructuras.Sort = "ESTR_NOMBRE ASC";
             dgvEstructuras.DataSource = dvEstructuras;
             dvCocinaBuscar = new DataView(dsCocina.COCINAS);
-            dvCocinaBuscar.Sort = "COC_CODIGO_PRODUCTO ASC";
             dvResponsableBuscar = new DataView(dsEmpleado.EMPLEADOS);
             dvResponsableBuscar.Sort = "E_APELLIDO ASC, E_NOMBRE ASC";
-            
             dvPlanoBuscar = new DataView(dsEstructura.PLANOS);
-            dvPlanoBuscar.Sort = "PNO_NOMBRE ASC";
 
             //ComboBoxs
             cbCocinaBuscar.SetDatos(dvCocinaBuscar, "COC_CODIGO", "COC_CODIGO_PRODUCTO", "--TODOS--", true);
@@ -1311,7 +1308,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         #endregion Servicios
 
-        #region Cell_Formatting
+        #region Cell_Formatting y RowEnter
 
         private void dgvEstructuras_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -1524,8 +1521,6 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
-        #endregion
-
         private void dgvEstructuras_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             int codEstructura = Convert.ToInt32(dvEstructuras[e.RowIndex]["estr_codigo"]);
@@ -1547,6 +1542,8 @@ namespace GyCAP.UI.EstructuraProducto
             else { dtpFechaModificacion.SetFechaNull(); }
             txtDescripcion.Text = dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_DESCRIPCION;
         }
+
+        #endregion
 
 
     }

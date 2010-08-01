@@ -441,14 +441,22 @@ namespace GyCAP.DAL
                 {
                     valorParametros[i] = valoresFiltros[i];
                 }
-                DB.FillDataSet(ds, "ESTRUCTURAS", sql, valorParametros);
-                ObtenerDetalleEstructura(ds);
+                try
+                {
+                    DB.FillDataSet(ds, "ESTRUCTURAS", sql, valorParametros);
+                    ObtenerDetalleEstructura(ds);
+                }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
             else
             {
-                //Buscamos sin filtro
-                DB.FillDataSet(ds, "ESTRUCTURAS", sql, null);
-                ObtenerDetalleEstructura(ds);
+                try
+                {
+                    //Buscamos sin filtro
+                    DB.FillDataSet(ds, "ESTRUCTURAS", sql, null);
+                    ObtenerDetalleEstructura(ds);
+                }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
         }
         
@@ -458,8 +466,12 @@ namespace GyCAP.DAL
             string sql = "SELECT count(estr_codigo) FROM ESTRUCTURAS WHERE estr_codigo = @p0";
             object[] valorParametros = { codigoEstructura };
 
-            if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return true; }
-            else { return false; }
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return true; }
+                else { return false; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static bool EsEstructuraActiva(int codigoEstructura)
@@ -467,8 +479,12 @@ namespace GyCAP.DAL
             string sql = "SELECT count(estr_codigo) FROM ESTRUCTURAS WHERE estr_codigo = @p0 AND estr_activo = @p1";
             object[] valorParametros = { codigoEstructura, EstructuraActiva };
 
-            if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return false; }
-            else { return true; }
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return false; }
+                else { return true; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         private static void ObtenerDetalleEstructura(Data.dsEstructura dsEstructura)
@@ -486,6 +502,24 @@ namespace GyCAP.DAL
             SubconjuntoEstructuraDAL.ObtenerSubconjuntosEstructura(codigosEstructuras, dsEstructura);
             PiezaEstructuraDAL.ObtenerPiezasEstructura(codigosEstructuras, dsEstructura);
             MateriaPrimaEstructuraDAL.ObtenerMateriasPrimasEstructura(codigosEstructuras, dsEstructura);
+        }
+
+        public static void ObtenerEstructuraCocina(int codigoCocina, Data.dsEstructura ds, bool detalle)
+        {
+            string sql = @"SELECT estr_codigo, estr_nombre, coc_codigo, pno_codigo, estr_descripcion, estr_activo, estr_fecha_alta, estr_fecha_modificacion, e_codigo 
+                          FROM ESTRUCTURAS WHERE coc_codigo = @p0";
+
+            object[] valorParametros = { codigoCocina };
+            
+            try
+            {
+                DB.FillDataSet(ds, "ESTRUCTURAS", sql, valorParametros);
+                if (detalle)
+                {                    
+                    ObtenerDetalleEstructura(ds);
+                }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
     }
 }
