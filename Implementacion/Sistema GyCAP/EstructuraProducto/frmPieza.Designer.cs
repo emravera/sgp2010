@@ -834,6 +834,7 @@
             // ofdImagen
             // 
             this.ofdImagen.Title = "Seleccione una imagen";
+            this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk_1);
             // 
             // frmPieza
             // 

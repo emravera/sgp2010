@@ -7,19 +7,46 @@ namespace GyCAP.Entidades
 {
     public class Cocina
     {
-        private String codigo;
+        private int codigoCocina;        
+        private string codigoProducto;
         private Color color;
         private Designacion designacion;
         private EstadoCocina estado;
-        private Estructura estructura;
         private Marca marca;
         private ModeloCocina modelo;
         private Terminacion terminacionHorno;
+        private int activo;
+        private decimal precio;
+        private int cantidadStock;
 
-        public String Codigo
+        public int Activo
         {
-            get { return codigo; }
-            set { codigo = value; }
+            get { return activo; }
+            set { activo = value; }
+        }
+        
+        public decimal Precio
+        {
+            get { return precio; }
+            set { precio = value; }
+        }
+        
+        public int CantidadStock
+        {
+            get { return cantidadStock; }
+            set { cantidadStock = value; }
+        }
+
+        public int CodigoCocina
+        {
+            get { return codigoCocina; }
+            set { codigoCocina = value; }
+        }
+        
+        public string CodigoProducto
+        {
+            get { return codigoProducto; }
+            set { codigoProducto = value; }
         }
         
         public Color Color
@@ -38,12 +65,6 @@ namespace GyCAP.Entidades
         {
             get { return estado; }
             set { estado = value; }
-        }
-        
-        public Estructura Estructura
-        {
-            get { return estructura; }
-            set { estructura = value; }
         }
         
         public Marca Marca

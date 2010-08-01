@@ -201,7 +201,7 @@ namespace GyCAP.UI.EstructuraProducto
                         dsUnidadMedida.UNIDADES_MEDIDA.AcceptChanges();
                         btnVolver.PerformClick();
                     }
-                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
                         MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }

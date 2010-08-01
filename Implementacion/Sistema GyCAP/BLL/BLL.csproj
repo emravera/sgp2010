@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Img\CImg\" />
+    <Folder Include="Img\CocImg\" />
     <Folder Include="Img\MPImg\" />
     <Folder Include="Img\PImg\" />
     <Folder Include="Img\RImg\" />
