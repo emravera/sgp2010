@@ -41,7 +41,7 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvLista.Columns["E_APELLIDO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["E_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["SEC_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["EE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["EE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["E_CODIGO"].DataPropertyName = "E_CODIGO";
@@ -215,8 +215,8 @@ namespace GyCAP.UI.RecursosFabricacion
                     txtLegajo.Text = string.Empty;
                     txtTelefono.Text = string.Empty;
                     sfFechaNac.SetFechaNull();
-                    cboEstado.SelectedIndex = 0;
-                    cboSector.SelectedIndex = 0;
+                    cboEstado.SelectedIndex = -1;
+                    cboSector.SelectedIndex = -1;
                     
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
@@ -296,6 +296,9 @@ namespace GyCAP.UI.RecursosFabricacion
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             SetInterface(estadoUI.nuevo);
+            dvCapacidadEmpleado = new DataView();
+            dgvCapacidades.DataSource = dvCapacidadEmpleado;
+            
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)
@@ -357,7 +360,7 @@ namespace GyCAP.UI.RecursosFabricacion
                         Data.dsEmpleado.EMPLEADOSRow rowEmpleado = dsEmpleado.EMPLEADOS.NewEMPLEADOSRow();
                         //Indicamos que comienza la edición de la fila
                         rowEmpleado.BeginEdit();
-                        rowEmpleado.E_CODIGO = empleado.Codigo;
+                        //rowEmpleado.E_CODIGO = empleado.Codigo;
                         rowEmpleado.E_NOMBRE = empleado.Nombre;
                         rowEmpleado.E_APELLIDO = empleado.Apellido;
 
@@ -442,7 +445,7 @@ namespace GyCAP.UI.RecursosFabricacion
                         Data.dsEmpleado.EMPLEADOSRow rowEmpleado = dsEmpleado.EMPLEADOS.FindByE_CODIGO(empleado.Codigo);
                         //Indicamos que comienza la edición de la fila
                         rowEmpleado.BeginEdit();
-                        rowEmpleado.E_CODIGO = empleado.Codigo;
+                        //rowEmpleado.E_CODIGO = empleado.Codigo;
                         rowEmpleado.E_NOMBRE = empleado.Nombre;
                         rowEmpleado.E_APELLIDO = empleado.Apellido;
                         if (empleado.FechaNacimiento == null)
@@ -580,10 +583,10 @@ namespace GyCAP.UI.RecursosFabricacion
             sfFechaNac.SetFecha(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_FECHANACIMIENTO);
 
             //Creamos el dataview y lo asignamos a la grilla
-
             dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDADESXEMPLEADO);
             dvCapacidadEmpleado.RowFilter = " E_CODIGO = " + codigoEmpleado;
             dgvCapacidades.DataSource = dvCapacidadEmpleado;
+            
         }
 
         private void dgvCapacidades_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

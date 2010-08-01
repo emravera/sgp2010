@@ -45,7 +45,7 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvLista.Columns["MAQ_MARCA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["MODM_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["FAB_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["EMAQ_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["EMAQ_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["MAQ_CODIGO"].DataPropertyName = "MAQ_CODIGO";
