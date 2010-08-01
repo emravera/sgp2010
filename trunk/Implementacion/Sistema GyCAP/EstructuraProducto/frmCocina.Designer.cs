@@ -66,15 +66,15 @@
             this.btnQuitar = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.cbModelo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbMarca = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbDesignacion = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbColor = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbTerminacion = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbTerminacionBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbEstadoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbMarcaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbEstadoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbTerminacionBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbTerminacion = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbColor = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbDesignacion = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbMarca = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbModelo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.tsMenu.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.tpDatos.SuspendLayout();
@@ -211,6 +211,7 @@
             this.btnSalir.Size = new System.Drawing.Size(31, 47);
             this.btnSalir.Text = "&Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // gbGuardarCancelar
             // 
@@ -521,75 +522,15 @@
             this.label12.TabIndex = 7;
             this.label12.Text = "Terminación\r\nde horno:";
             // 
-            // cbModelo
+            // cbMarcaBuscar
             // 
-            this.cbModelo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbModelo.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbModelo.FormattingEnabled = true;
-            this.cbModelo.Location = new System.Drawing.Point(123, 78);
-            this.cbModelo.Name = "cbModelo";
-            this.cbModelo.Size = new System.Drawing.Size(179, 21);
-            this.cbModelo.TabIndex = 8;
-            // 
-            // cbMarca
-            // 
-            this.cbMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMarca.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbMarca.FormattingEnabled = true;
-            this.cbMarca.Location = new System.Drawing.Point(123, 114);
-            this.cbMarca.Name = "cbMarca";
-            this.cbMarca.Size = new System.Drawing.Size(179, 21);
-            this.cbMarca.TabIndex = 9;
-            // 
-            // cbDesignacion
-            // 
-            this.cbDesignacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDesignacion.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbDesignacion.FormattingEnabled = true;
-            this.cbDesignacion.Location = new System.Drawing.Point(123, 152);
-            this.cbDesignacion.Name = "cbDesignacion";
-            this.cbDesignacion.Size = new System.Drawing.Size(179, 21);
-            this.cbDesignacion.TabIndex = 10;
-            // 
-            // cbColor
-            // 
-            this.cbColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbColor.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbColor.FormattingEnabled = true;
-            this.cbColor.Location = new System.Drawing.Point(123, 189);
-            this.cbColor.Name = "cbColor";
-            this.cbColor.Size = new System.Drawing.Size(179, 21);
-            this.cbColor.TabIndex = 11;
-            // 
-            // cbTerminacion
-            // 
-            this.cbTerminacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTerminacion.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbTerminacion.FormattingEnabled = true;
-            this.cbTerminacion.Location = new System.Drawing.Point(123, 224);
-            this.cbTerminacion.Name = "cbTerminacion";
-            this.cbTerminacion.Size = new System.Drawing.Size(179, 21);
-            this.cbTerminacion.TabIndex = 12;
-            // 
-            // cbEstado
-            // 
-            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEstado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(123, 260);
-            this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(179, 21);
-            this.cbEstado.TabIndex = 13;
-            // 
-            // cbTerminacionBuscar
-            // 
-            this.cbTerminacionBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTerminacionBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbTerminacionBuscar.FormattingEnabled = true;
-            this.cbTerminacionBuscar.Location = new System.Drawing.Point(92, 53);
-            this.cbTerminacionBuscar.Name = "cbTerminacionBuscar";
-            this.cbTerminacionBuscar.Size = new System.Drawing.Size(151, 21);
-            this.cbTerminacionBuscar.TabIndex = 8;
+            this.cbMarcaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMarcaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbMarcaBuscar.FormattingEnabled = true;
+            this.cbMarcaBuscar.Location = new System.Drawing.Point(319, 22);
+            this.cbMarcaBuscar.Name = "cbMarcaBuscar";
+            this.cbMarcaBuscar.Size = new System.Drawing.Size(143, 21);
+            this.cbMarcaBuscar.TabIndex = 10;
             // 
             // cbEstadoBuscar
             // 
@@ -601,15 +542,75 @@
             this.cbEstadoBuscar.Size = new System.Drawing.Size(143, 21);
             this.cbEstadoBuscar.TabIndex = 9;
             // 
-            // cbMarcaBuscar
+            // cbTerminacionBuscar
             // 
-            this.cbMarcaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMarcaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbMarcaBuscar.FormattingEnabled = true;
-            this.cbMarcaBuscar.Location = new System.Drawing.Point(319, 22);
-            this.cbMarcaBuscar.Name = "cbMarcaBuscar";
-            this.cbMarcaBuscar.Size = new System.Drawing.Size(143, 21);
-            this.cbMarcaBuscar.TabIndex = 10;
+            this.cbTerminacionBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTerminacionBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbTerminacionBuscar.FormattingEnabled = true;
+            this.cbTerminacionBuscar.Location = new System.Drawing.Point(92, 53);
+            this.cbTerminacionBuscar.Name = "cbTerminacionBuscar";
+            this.cbTerminacionBuscar.Size = new System.Drawing.Size(151, 21);
+            this.cbTerminacionBuscar.TabIndex = 8;
+            // 
+            // cbEstado
+            // 
+            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbEstado.FormattingEnabled = true;
+            this.cbEstado.Location = new System.Drawing.Point(123, 260);
+            this.cbEstado.Name = "cbEstado";
+            this.cbEstado.Size = new System.Drawing.Size(179, 21);
+            this.cbEstado.TabIndex = 13;
+            // 
+            // cbTerminacion
+            // 
+            this.cbTerminacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTerminacion.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbTerminacion.FormattingEnabled = true;
+            this.cbTerminacion.Location = new System.Drawing.Point(123, 224);
+            this.cbTerminacion.Name = "cbTerminacion";
+            this.cbTerminacion.Size = new System.Drawing.Size(179, 21);
+            this.cbTerminacion.TabIndex = 12;
+            // 
+            // cbColor
+            // 
+            this.cbColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbColor.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbColor.FormattingEnabled = true;
+            this.cbColor.Location = new System.Drawing.Point(123, 189);
+            this.cbColor.Name = "cbColor";
+            this.cbColor.Size = new System.Drawing.Size(179, 21);
+            this.cbColor.TabIndex = 11;
+            // 
+            // cbDesignacion
+            // 
+            this.cbDesignacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDesignacion.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbDesignacion.FormattingEnabled = true;
+            this.cbDesignacion.Location = new System.Drawing.Point(123, 152);
+            this.cbDesignacion.Name = "cbDesignacion";
+            this.cbDesignacion.Size = new System.Drawing.Size(179, 21);
+            this.cbDesignacion.TabIndex = 10;
+            // 
+            // cbMarca
+            // 
+            this.cbMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMarca.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbMarca.FormattingEnabled = true;
+            this.cbMarca.Location = new System.Drawing.Point(123, 114);
+            this.cbMarca.Name = "cbMarca";
+            this.cbMarca.Size = new System.Drawing.Size(179, 21);
+            this.cbMarca.TabIndex = 9;
+            // 
+            // cbModelo
+            // 
+            this.cbModelo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbModelo.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbModelo.FormattingEnabled = true;
+            this.cbModelo.Location = new System.Drawing.Point(123, 78);
+            this.cbModelo.Name = "cbModelo";
+            this.cbModelo.Size = new System.Drawing.Size(179, 21);
+            this.cbModelo.TabIndex = 8;
             // 
             // frmCocina
             // 
