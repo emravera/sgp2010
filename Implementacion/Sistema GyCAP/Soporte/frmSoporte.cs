@@ -130,6 +130,7 @@ namespace GyCAP.UI.Soporte
             frmCapacidadEmpleado.Instancia.Location = PosicionarFormulario();
             frmCapacidadEmpleado.Instancia.SetEstadoInicial(frmCapacidadEmpleado.estadoInicialNuevo);
             frmCapacidadEmpleado.Instancia.Show();
+            frmCapacidadEmpleado.Instancia.Focus();
         }
 
         private void btnConsultarCapacidadEmpleado_Click(object sender, EventArgs e)
@@ -139,6 +140,7 @@ namespace GyCAP.UI.Soporte
             frmCapacidadEmpleado.Instancia.Location = PosicionarFormulario();
             frmCapacidadEmpleado.Instancia.SetEstadoInicial(frmCapacidadEmpleado.estadoInicialConsultar);
             frmCapacidadEmpleado.Instancia.Show();
+            frmCapacidadEmpleado.Instancia.Focus();
         }
 
         #endregion
@@ -155,6 +157,7 @@ namespace GyCAP.UI.Soporte
             frmMarca.Instancia.Location = PosicionarFormulario();
             frmMarca.Instancia.SetEstadoInicial(frmMarca.estadoInicialNuevo);
             frmMarca.Instancia.Show();
+            frmMarca.Instancia.Focus();
         }
 
         private void btnConsultarMarca_Click(object sender, EventArgs e)
@@ -164,6 +167,7 @@ namespace GyCAP.UI.Soporte
             frmMarca.Instancia.Location = PosicionarFormulario();
             frmMarca.Instancia.SetEstadoInicial(frmMarca.estadoInicialConsultar);
             frmMarca.Instancia.Show();
+            frmMarca.Instancia.Focus();
         }
 
         #endregion
@@ -183,6 +187,7 @@ namespace GyCAP.UI.Soporte
             frmSectorTrabajo.Instancia.Location = PosicionarFormulario();
             frmSectorTrabajo.Instancia.SetEstadoInicial(frmSectorTrabajo.estadoInicialNuevo);
             frmSectorTrabajo.Instancia.Show();
+            frmSectorTrabajo.Instancia.Focus();
         }
 
         private void btnConsultarSectorTrabajo_Click(object sender, EventArgs e)
@@ -192,6 +197,7 @@ namespace GyCAP.UI.Soporte
             frmSectorTrabajo.Instancia.Location = PosicionarFormulario();
             frmSectorTrabajo.Instancia.SetEstadoInicial(frmSectorTrabajo.estadoInicialConsultar);
             frmSectorTrabajo.Instancia.Show();
+            frmSectorTrabajo.Instancia.Focus();
         }
 
         #endregion
@@ -207,6 +213,7 @@ namespace GyCAP.UI.Soporte
             frmTipoUnidadMedida.Instancia.Parent = areaTrabajo;
             frmTipoUnidadMedida.Instancia.Location = PosicionarFormulario();
             frmTipoUnidadMedida.Instancia.Show();
+            frmTipoUnidadMedida.Instancia.Focus();
         }
 
         #endregion

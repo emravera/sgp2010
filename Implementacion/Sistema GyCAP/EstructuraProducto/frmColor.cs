@@ -231,7 +231,8 @@ namespace GyCAP.UI.EstructuraProducto
                     txtNombre.Text = String.Empty;
                     btnCancelar.Enabled = false;
                     dgvLista.Enabled = true;
-                    estadoInterface = estadoUI.inicio;                                      
+                    estadoInterface = estadoUI.inicio;
+                    txtNombre.Focus();
                     break;
                 case estadoUI.modificar:
                     txtNombre.ReadOnly = false;                    

@@ -131,6 +131,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmCocina.Instancia.Location = PosicionarFormulario();
             frmCocina.Instancia.SetEstadoInicial(frmCocina.estadoInicialConsultar);
             frmCocina.Instancia.Show();
+            frmCocina.Instancia.Focus();
         }
 
         private void btnNuevoCocina_Click(object sender, EventArgs e)
@@ -140,6 +141,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmCocina.Instancia.Location = PosicionarFormulario();
             frmCocina.Instancia.SetEstadoInicial(frmCocina.estadoInicialNuevo);
             frmCocina.Instancia.Show();
+            frmCocina.Instancia.Focus();
         }
 
         private void btnListadoCocina_Click(object sender, EventArgs e)
@@ -157,6 +159,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmColor.Instancia.Parent = areaTrabajo;
             frmColor.Instancia.Location = PosicionarFormulario();
             frmColor.Instancia.Show();
+            frmColor.Instancia.Focus();
         }
 
         #endregion
@@ -170,6 +173,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmConjunto.Instancia.Location = PosicionarFormulario();
             frmConjunto.Instancia.SetEstadoInicial(frmConjunto.estadoInicialNuevo);
             frmConjunto.Instancia.Show();
+            frmConjunto.Instancia.Focus();
         }
 
         private void btnConsultarConjunto_Click(object sender, EventArgs e)
@@ -179,6 +183,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmConjunto.Instancia.Location = PosicionarFormulario();
             frmConjunto.Instancia.SetEstadoInicial(frmConjunto.estadoInicialConsultar);
             frmConjunto.Instancia.Show();
+            frmConjunto.Instancia.Focus();
         }
 
         private void btnListadoConjunto_Click(object sender, EventArgs e)
@@ -197,6 +202,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmDesignacion.Instancia.Location = PosicionarFormulario();
             frmDesignacion.Instancia.SetEstadoInicial(frmDesignacion.estadoInicialNuevo);
             frmDesignacion.Instancia.Show();
+            frmDesignacion.Instancia.Focus();
         }
 
         private void btnConsultarDesignacion_Click(object sender, EventArgs e)
@@ -206,6 +212,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmDesignacion.Instancia.Location = PosicionarFormulario();
             frmDesignacion.Instancia.SetEstadoInicial(frmDesignacion.estadoInicialConsultar);
             frmDesignacion.Instancia.Show();
+            frmDesignacion.Instancia.Focus();
         }
 
         #endregion
@@ -219,6 +226,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmEstructuraCocina.Instancia.Location = PosicionarFormulario();
             frmEstructuraCocina.Instancia.SetEstadoInicial(frmEstructuraCocina.estadoInicialNuevo);
             frmEstructuraCocina.Instancia.Show();
+            frmEstructuraCocina.Instancia.Focus();
         }
 
         private void btnConsultarEstructuraProducto_Click(object sender, EventArgs e)
@@ -228,6 +236,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmEstructuraCocina.Instancia.Location = PosicionarFormulario();
             frmEstructuraCocina.Instancia.SetEstadoInicial(frmEstructuraCocina.estadoInicialConsultar);
             frmEstructuraCocina.Instancia.Show();
+            frmEstructuraCocina.Instancia.Focus();
         }
 
         private void btnListadoEstructuraProducto_Click(object sender, EventArgs e)
@@ -236,6 +245,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmListadoEstructura.Instancia.Parent = areaTrabajo;
             frmListadoEstructura.Instancia.Location = PosicionarFormulario();
             frmListadoEstructura.Instancia.Show();
+            frmEstructuraCocina.Instancia.Focus();
         }
 
         #endregion
@@ -248,6 +258,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmMateriaPrimaPrincipal.Instancia.Parent = areaTrabajo;
             frmMateriaPrimaPrincipal.Instancia.Location = PosicionarFormulario();
             frmMateriaPrimaPrincipal.Instancia.Show();
+            frmMateriaPrimaPrincipal.Instancia.Focus();
         }
 
         #endregion
@@ -261,6 +272,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmModeloCocina.Instancia.Location = PosicionarFormulario();
             frmModeloCocina.Instancia.SetEstadoInicial(frmModeloCocina.estadoInicialNuevo);
             frmModeloCocina.Instancia.Show();
+            frmModeloCocina.Instancia.Focus();
         }
 
         private void btnConsultarModeloCocina_Click(object sender, EventArgs e)
@@ -270,6 +282,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmModeloCocina.Instancia.Location = PosicionarFormulario();
             frmModeloCocina.Instancia.SetEstadoInicial(frmModeloCocina.estadoInicialConsultar);
             frmModeloCocina.Instancia.Show();
+            frmModeloCocina.Instancia.Focus();
         }
 
         #endregion
@@ -283,6 +296,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmPieza.Instancia.Location = PosicionarFormulario();
             frmPieza.Instancia.SetEstadoInicial(frmPieza.estadoInicialNuevo);
             frmPieza.Instancia.Show();
+            frmPieza.Instancia.Focus();
         }
 
         private void btnConsultarPieza_Click(object sender, EventArgs e)
@@ -292,6 +306,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmPieza.Instancia.Location = PosicionarFormulario();
             frmPieza.Instancia.SetEstadoInicial(frmPieza.estadoInicialConsultar);
             frmPieza.Instancia.Show();
+            frmPieza.Instancia.Focus();
         }
 
         private void btnListadoPieza_Click(object sender, EventArgs e)
@@ -310,6 +325,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmSubconjunto.Instancia.Location = PosicionarFormulario();
             frmSubconjunto.Instancia.SetEstadoInicial(frmSubconjunto.estadoInicialNuevo);
             frmSubconjunto.Instancia.Show();
+            frmSubconjunto.Instancia.Focus();
         }
 
         private void btnConsultarSubconjunto_Click(object sender, EventArgs e)
@@ -319,6 +335,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmSubconjunto.Instancia.Location = PosicionarFormulario();
             frmSubconjunto.Instancia.SetEstadoInicial(frmSubconjunto.estadoInicialConsultar);
             frmSubconjunto.Instancia.Show();
+            frmSubconjunto.Instancia.Focus();
         }
 
         private void btnListadoSubconjunto_Click(object sender, EventArgs e)
@@ -337,6 +354,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmTerminacion.Instancia.Location = PosicionarFormulario();
             frmTerminacion.Instancia.SetEstadoInicial(frmTerminacion.estadoInicialNuevo);
             frmTerminacion.Instancia.Show();
+            frmTerminacion.Instancia.Focus();
         }
 
         private void btnConsultarTerminacion_Click(object sender, EventArgs e)
@@ -346,6 +364,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmTerminacion.Instancia.Location = PosicionarFormulario();
             frmTerminacion.Instancia.SetEstadoInicial(frmTerminacion.estadoInicialConsultar);
             frmTerminacion.Instancia.Show();
+            frmTerminacion.Instancia.Focus();
         }
 
         #endregion
@@ -359,6 +378,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmUnidadMedida.Instancia.Location = PosicionarFormulario();
             frmUnidadMedida.Instancia.SetEstadoInicial(frmUnidadMedida.estadoInicialNuevo);
             frmUnidadMedida.Instancia.Show();
+            frmUnidadMedida.Instancia.Focus();
         }
 
         private void btnConsultarUnidadMedida_Click(object sender, EventArgs e)
@@ -368,6 +388,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmUnidadMedida.Instancia.Location = PosicionarFormulario();
             frmUnidadMedida.Instancia.SetEstadoInicial(frmUnidadMedida.estadoInicialConsultar);
             frmUnidadMedida.Instancia.Show();
+            frmUnidadMedida.Instancia.Focus();
         }
 
         #endregion
