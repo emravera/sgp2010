@@ -656,6 +656,30 @@ namespace GyCAP.UI.RecursosFabricacion
             frmRFAsignarCapacidad.Instancia.Show();
         }
 
+        private void frmEmpleado_Activated(object sender, EventArgs e)
+        {
+            if (tcABM.SelectedTab == tpBuscar)
+            {
+                btnBuscar.Focus();
+            }
+            else
+            {
+                txtLegajo.Focus();
+            }
+        }
+
+        private void frmEmpleado_Load(object sender, EventArgs e)
+        {
+            if (tcABM.SelectedTab == tpBuscar)
+            {
+                btnBuscar.Focus();
+            }
+            else
+            {
+                txtLegajo.Focus();
+            }
+        }
+
     }
 
 
