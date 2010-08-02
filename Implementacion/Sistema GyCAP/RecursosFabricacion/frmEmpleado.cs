@@ -245,8 +245,8 @@ namespace GyCAP.UI.RecursosFabricacion
                     txtLegajo.Text = string.Empty;
                     txtTelefono.Text = string.Empty;
                     sfFechaNac.SetFechaNull();
-                    cboEstado.SelectedIndex = 0;
-                    cboSector.SelectedIndex = 0;
+                    cboEstado.SelectedIndex = -1;
+                    cboSector.SelectedIndex = -1;
 
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
