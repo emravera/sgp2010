@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             this.tsMenu = new System.Windows.Forms.ToolStrip();
-            this.btnNuevo = new System.Windows.Forms.ToolStripButton();
-            this.btnConsultar = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cbOrdenPor = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbOrdenForma = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnGenerar = new System.Windows.Forms.Button();
@@ -44,13 +43,11 @@
             this.chkConjunto = new System.Windows.Forms.CheckBox();
             this.chkSubconjunto = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbCocinaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvEstructuras = new System.Windows.Forms.DataGridView();
-            this.cbOrdenPor = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbOrdenForma = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbCocinaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.tsMenu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -69,9 +66,6 @@
             this.tsMenu.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnNuevo,
-            this.btnConsultar,
-            this.toolStripSeparator1,
             this.btnSalir});
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
             this.tsMenu.Name = "tsMenu";
@@ -79,31 +73,6 @@
             this.tsMenu.Size = new System.Drawing.Size(613, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
-            // 
-            // btnNuevo
-            // 
-            this.btnNuevo.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_25;
-            this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(42, 47);
-            this.btnNuevo.Text = "&Nuevo";
-            this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnConsultar
-            // 
-            this.btnConsultar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_25;
-            this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(57, 47);
-            this.btnConsultar.Text = "&Consultar";
-            this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
             // 
             // btnSalir
             // 
@@ -155,6 +124,26 @@
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Opciones de listado";
+            // 
+            // cbOrdenPor
+            // 
+            this.cbOrdenPor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbOrdenPor.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbOrdenPor.FormattingEnabled = true;
+            this.cbOrdenPor.Location = new System.Drawing.Point(95, 50);
+            this.cbOrdenPor.Name = "cbOrdenPor";
+            this.cbOrdenPor.Size = new System.Drawing.Size(136, 21);
+            this.cbOrdenPor.TabIndex = 20;
+            // 
+            // cbOrdenForma
+            // 
+            this.cbOrdenForma.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbOrdenForma.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbOrdenForma.FormattingEnabled = true;
+            this.cbOrdenForma.Location = new System.Drawing.Point(297, 50);
+            this.cbOrdenForma.Name = "cbOrdenForma";
+            this.cbOrdenForma.Size = new System.Drawing.Size(121, 21);
+            this.cbOrdenForma.TabIndex = 19;
             // 
             // label4
             // 
@@ -256,6 +245,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Seleccione la cocina";
             // 
+            // cbCocinaBuscar
+            // 
+            this.cbCocinaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCocinaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbCocinaBuscar.FormattingEnabled = true;
+            this.cbCocinaBuscar.Location = new System.Drawing.Point(95, 18);
+            this.cbCocinaBuscar.Name = "cbCocinaBuscar";
+            this.cbCocinaBuscar.Size = new System.Drawing.Size(268, 21);
+            this.cbCocinaBuscar.TabIndex = 10;
+            // 
             // btnBuscar
             // 
             this.btnBuscar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.lupa_20;
@@ -305,36 +304,6 @@
             this.dgvEstructuras.TabIndex = 0;
             this.dgvEstructuras.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvEstructuras_CellFormatting);
             // 
-            // cbOrdenPor
-            // 
-            this.cbOrdenPor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbOrdenPor.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbOrdenPor.FormattingEnabled = true;
-            this.cbOrdenPor.Location = new System.Drawing.Point(95, 50);
-            this.cbOrdenPor.Name = "cbOrdenPor";
-            this.cbOrdenPor.Size = new System.Drawing.Size(136, 21);
-            this.cbOrdenPor.TabIndex = 20;
-            // 
-            // cbOrdenForma
-            // 
-            this.cbOrdenForma.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbOrdenForma.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbOrdenForma.FormattingEnabled = true;
-            this.cbOrdenForma.Location = new System.Drawing.Point(297, 50);
-            this.cbOrdenForma.Name = "cbOrdenForma";
-            this.cbOrdenForma.Size = new System.Drawing.Size(121, 21);
-            this.cbOrdenForma.TabIndex = 19;
-            // 
-            // cbCocinaBuscar
-            // 
-            this.cbCocinaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCocinaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbCocinaBuscar.FormattingEnabled = true;
-            this.cbCocinaBuscar.Location = new System.Drawing.Point(95, 18);
-            this.cbCocinaBuscar.Name = "cbCocinaBuscar";
-            this.cbCocinaBuscar.Size = new System.Drawing.Size(268, 21);
-            this.cbCocinaBuscar.TabIndex = 10;
-            // 
             // frmListadoEstructura
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -365,9 +334,6 @@
         #endregion
 
         private System.Windows.Forms.ToolStrip tsMenu;
-        private System.Windows.Forms.ToolStripButton btnNuevo;
-        private System.Windows.Forms.ToolStripButton btnConsultar;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnSalir;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox groupBox1;
