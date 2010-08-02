@@ -125,6 +125,7 @@ namespace GyCAP.UI.RecursosFabricacion
             frmEmpleado.Instancia.Location = PosicionarFormulario();
             frmEmpleado.Instancia.SetEstadoInicial(frmEmpleado.estadoInicialNuevo);
             frmEmpleado.Instancia.Show();
+            frmEmpleado.Instancia.Focus();
         }
 
         private void btnConsultarEmpleado_Click(object sender, EventArgs e)
@@ -134,6 +135,7 @@ namespace GyCAP.UI.RecursosFabricacion
             frmEmpleado.Instancia.Location = PosicionarFormulario();
             frmEmpleado.Instancia.SetEstadoInicial(frmEmpleado.estadoInicialConsultar);
             frmEmpleado.Instancia.Show();
+            frmEmpleado.Instancia.Focus();
         }
 
         private void btnListadoEmpleado_Click(object sender, EventArgs e)
@@ -152,6 +154,7 @@ namespace GyCAP.UI.RecursosFabricacion
             frmRFMaquina.Instancia.Location = PosicionarFormulario();
             frmRFMaquina.Instancia.SetEstadoInicial(frmRFMaquina.estadoInicialNuevo);
             frmRFMaquina.Instancia.Show();
+            frmRFMaquina.Instancia.Focus();
         }
 
         private void btnConsultarMaquina_Click(object sender, EventArgs e)
@@ -161,6 +164,7 @@ namespace GyCAP.UI.RecursosFabricacion
             frmRFMaquina.Instancia.Location = PosicionarFormulario();
             frmRFMaquina.Instancia.SetEstadoInicial(frmRFMaquina.estadoInicialConsultar);
             frmRFMaquina.Instancia.Show();
+            frmRFMaquina.Instancia.Focus();
         }
 
         private void btnListadoMaquina_Click(object sender, EventArgs e)
