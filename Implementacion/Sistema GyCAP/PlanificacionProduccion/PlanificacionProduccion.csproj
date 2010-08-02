@@ -171,6 +171,18 @@
   <ItemGroup>
     <None Include="Resources\lupa-25.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Find-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Listados-48.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

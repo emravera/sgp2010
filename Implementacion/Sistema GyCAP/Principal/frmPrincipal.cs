@@ -206,6 +206,12 @@ namespace Principal
             GyCAP.UI.RecursosFabricacion.frmRFMaquina.Instancia.MdiParent = this;
             GyCAP.UI.RecursosFabricacion.frmRFMaquina.Instancia.Show();
         }
+
+        private void menuItemPP_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.PlanificacionProduccion.frmPlanificacionProduccion.Instancia.MdiParent = this;
+            GyCAP.UI.PlanificacionProduccion.frmPlanificacionProduccion.Instancia.Show();
+        }
         
     }
 }
