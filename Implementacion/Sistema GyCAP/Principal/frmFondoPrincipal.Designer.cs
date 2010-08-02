@@ -55,6 +55,7 @@
             this.Name = "frmFondoPrincipal";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.SizeChanged += new System.EventHandler(this.frmFondoPrincipal_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
