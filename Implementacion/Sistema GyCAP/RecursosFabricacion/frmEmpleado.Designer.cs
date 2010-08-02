@@ -572,6 +572,8 @@
             this.MaximizeBox = false;
             this.Name = "frmEmpleado";
             this.Text = "Empleados";
+            this.Load += new System.EventHandler(this.frmEmpleado_Load);
+            this.Activated += new System.EventHandler(this.frmEmpleado_Activated);
             this.tcABM.ResumeLayout(false);
             this.tpBuscar.ResumeLayout(false);
             this.gpbLista.ResumeLayout(false);
