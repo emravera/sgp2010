@@ -43,7 +43,6 @@
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbDatos = new System.Windows.Forms.GroupBox();
-            this.chkAutogenerar = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
@@ -90,6 +89,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
+            this.btnGenerar = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcConjunto.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -297,7 +297,7 @@
             // 
             // gbDatos
             // 
-            this.gbDatos.Controls.Add(this.chkAutogenerar);
+            this.gbDatos.Controls.Add(this.btnGenerar);
             this.gbDatos.Controls.Add(this.label12);
             this.gbDatos.Controls.Add(this.label9);
             this.gbDatos.Controls.Add(this.cbEstado);
@@ -319,16 +319,6 @@
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del conjunto";
-            // 
-            // chkAutogenerar
-            // 
-            this.chkAutogenerar.AutoSize = true;
-            this.chkAutogenerar.Location = new System.Drawing.Point(302, 29);
-            this.chkAutogenerar.Name = "chkAutogenerar";
-            this.chkAutogenerar.Size = new System.Drawing.Size(87, 17);
-            this.chkAutogenerar.TabIndex = 5;
-            this.chkAutogenerar.Text = "Autogenerar";
-            this.chkAutogenerar.UseVisualStyleBackColor = true;
             // 
             // label12
             // 
@@ -382,7 +372,7 @@
             // 
             this.txtCodigo.Location = new System.Drawing.Point(81, 27);
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(204, 20);
+            this.txtCodigo.Size = new System.Drawing.Size(224, 20);
             this.txtCodigo.TabIndex = 4;
             this.txtCodigo.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -852,6 +842,16 @@
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk);
             // 
+            // btnGenerar
+            // 
+            this.btnGenerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerar.Location = new System.Drawing.Point(311, 26);
+            this.btnGenerar.Name = "btnGenerar";
+            this.btnGenerar.Size = new System.Drawing.Size(75, 21);
+            this.btnGenerar.TabIndex = 20;
+            this.btnGenerar.Text = "Generar";
+            this.btnGenerar.UseVisualStyleBackColor = true;
+            // 
             // frmConjunto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -944,7 +944,6 @@
         private System.Windows.Forms.Button btnQuitarImagen;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbTerminacionBuscar;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.CheckBox chkAutogenerar;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label9;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbEstado;
@@ -961,5 +960,6 @@
         private System.Windows.Forms.Button btnHecho;
         private System.Windows.Forms.NumericUpDown nudCantidad;
         private SlickInterface.Slide slideAgregar;
+        private System.Windows.Forms.Button btnGenerar;
     }
 }
