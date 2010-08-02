@@ -452,8 +452,6 @@ namespace GyCAP.UI.EstructuraProducto
                 case estadoUI.nuevo:
                     txtCodigo.ReadOnly = false;
                     txtCodigo.Clear();
-                    chkAutogenerar.Enabled = true;
-                    chkAutogenerar.Checked = false;
                     txtNombre.ReadOnly = false;
                     txtNombre.Clear();
                     cbTerminacion.Enabled = true;
@@ -479,8 +477,6 @@ namespace GyCAP.UI.EstructuraProducto
                 case estadoUI.nuevoExterno:
                     txtCodigo.ReadOnly = false;
                     txtCodigo.Clear();
-                    chkAutogenerar.Enabled = true;
-                    chkAutogenerar.Checked = false;
                     txtNombre.ReadOnly = false;
                     txtNombre.Clear();
                     cbTerminacion.Enabled = true;
@@ -506,8 +502,6 @@ namespace GyCAP.UI.EstructuraProducto
                 case estadoUI.consultar:
                     txtCodigo.ReadOnly = true;
                     txtNombre.ReadOnly = true;
-                    chkAutogenerar.Enabled = false;
-                    chkAutogenerar.Checked = false;
                     cbTerminacion.Enabled = false;
                     cbEstado.Enabled = false;
                     cbPlano.Enabled = false;
@@ -524,8 +518,6 @@ namespace GyCAP.UI.EstructuraProducto
                     break;
                 case estadoUI.modificar:
                     txtCodigo.ReadOnly = false;
-                    chkAutogenerar.Enabled = true;
-                    chkAutogenerar.Checked = false;
                     txtNombre.ReadOnly = false;
                     cbTerminacion.Enabled = true;
                     cbEstado.Enabled = true;
