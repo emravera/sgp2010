@@ -401,7 +401,6 @@
             this.Controls.Add(this.scDown);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
             this.Name = "frmRecursosFabricacion";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
