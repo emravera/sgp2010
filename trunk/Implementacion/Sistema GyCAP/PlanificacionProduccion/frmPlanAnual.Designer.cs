@@ -1198,7 +1198,10 @@
             this.ClientSize = new System.Drawing.Size(742, 536);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmPlanAnual";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Plan Anual";
             ((System.ComponentModel.ISupportInitialize)(this.numDiciembre)).EndInit();
             this.tcPlanAnual.ResumeLayout(false);
@@ -1309,7 +1312,6 @@
         private System.Windows.Forms.ToolStripButton btnEliminar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnModificar;
-        private System.Windows.Forms.ToolStripButton btnNuevo;
         private System.Windows.Forms.ToolStripButton btnConsultar;
         private System.Windows.Forms.ToolStripButton btnSalir;
         private System.Windows.Forms.ToolStrip tsMenu;
@@ -1340,6 +1342,7 @@
         private System.Windows.Forms.ToolStripButton btnPlanificar;
         private System.Windows.Forms.TextBox txtDemandaNoCubierta;
         private System.Windows.Forms.Label label31;
+        public System.Windows.Forms.ToolStripButton btnNuevo;
 
 
 
