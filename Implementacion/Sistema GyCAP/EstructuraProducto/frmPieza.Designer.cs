@@ -89,7 +89,6 @@
             this.dgvMPDisponibles = new System.Windows.Forms.DataGridView();
             this.slideAgregar = new SlickInterface.Slide();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
-            this.btnGenerar = new System.Windows.Forms.Button();
             this.panelAcciones.SuspendLayout();
             this.tsMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePieza)).BeginInit();
@@ -470,7 +469,6 @@
             // 
             // gbDatos
             // 
-            this.gbDatos.Controls.Add(this.btnGenerar);
             this.gbDatos.Controls.Add(this.txtCodigo);
             this.gbDatos.Controls.Add(this.label9);
             this.gbDatos.Controls.Add(this.cbPlano);
@@ -496,7 +494,7 @@
             // 
             this.txtCodigo.Location = new System.Drawing.Point(81, 29);
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(203, 21);
+            this.txtCodigo.Size = new System.Drawing.Size(284, 21);
             this.txtCodigo.TabIndex = 25;
             this.txtCodigo.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -826,16 +824,6 @@
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk_1);
             // 
-            // btnGenerar
-            // 
-            this.btnGenerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGenerar.Location = new System.Drawing.Point(290, 29);
-            this.btnGenerar.Name = "btnGenerar";
-            this.btnGenerar.Size = new System.Drawing.Size(75, 21);
-            this.btnGenerar.TabIndex = 26;
-            this.btnGenerar.Text = "Generar";
-            this.btnGenerar.UseVisualStyleBackColor = true;
-            // 
             // frmPieza
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -943,6 +931,5 @@
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbTerminacion;
         private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button btnGenerar;
     }
 }

@@ -89,7 +89,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
-            this.btnGenerar = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcConjunto.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -297,7 +296,6 @@
             // 
             // gbDatos
             // 
-            this.gbDatos.Controls.Add(this.btnGenerar);
             this.gbDatos.Controls.Add(this.label12);
             this.gbDatos.Controls.Add(this.label9);
             this.gbDatos.Controls.Add(this.cbEstado);
@@ -372,7 +370,7 @@
             // 
             this.txtCodigo.Location = new System.Drawing.Point(81, 27);
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(224, 20);
+            this.txtCodigo.Size = new System.Drawing.Size(305, 20);
             this.txtCodigo.TabIndex = 4;
             this.txtCodigo.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -842,16 +840,6 @@
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk);
             // 
-            // btnGenerar
-            // 
-            this.btnGenerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGenerar.Location = new System.Drawing.Point(311, 26);
-            this.btnGenerar.Name = "btnGenerar";
-            this.btnGenerar.Size = new System.Drawing.Size(75, 21);
-            this.btnGenerar.TabIndex = 20;
-            this.btnGenerar.Text = "Generar";
-            this.btnGenerar.UseVisualStyleBackColor = true;
-            // 
             // frmConjunto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -960,6 +948,5 @@
         private System.Windows.Forms.Button btnHecho;
         private System.Windows.Forms.NumericUpDown nudCantidad;
         private SlickInterface.Slide slideAgregar;
-        private System.Windows.Forms.Button btnGenerar;
     }
 }
