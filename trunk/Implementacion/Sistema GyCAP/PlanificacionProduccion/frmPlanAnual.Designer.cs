@@ -171,6 +171,7 @@
             this.numDiciembre.TabIndex = 18;
             this.numDiciembre.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numDiciembre.ValueChanged += new System.EventHandler(this.numEnero_ValueChanged);
+            this.numDiciembre.Enter += new System.EventHandler(this.numDiciembre_Enter);
             // 
             // tcPlanAnual
             // 
@@ -250,6 +251,7 @@
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(376, 290);
             this.dgvLista.TabIndex = 1;
+            this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             this.dgvLista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellClick);
             // 
             // groupBox1
@@ -467,6 +469,7 @@
             this.numNoviembre.TabIndex = 17;
             this.numNoviembre.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numNoviembre.ValueChanged += new System.EventHandler(this.numEnero_ValueChanged);
+            this.numNoviembre.Enter += new System.EventHandler(this.numNoviembre_Enter);
             // 
             // numOctubre
             // 
@@ -481,6 +484,7 @@
             this.numOctubre.TabIndex = 16;
             this.numOctubre.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numOctubre.ValueChanged += new System.EventHandler(this.numEnero_ValueChanged);
+            this.numOctubre.Enter += new System.EventHandler(this.numOctubre_Enter);
             // 
             // numSeptiembre
             // 
@@ -495,6 +499,7 @@
             this.numSeptiembre.TabIndex = 15;
             this.numSeptiembre.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numSeptiembre.ValueChanged += new System.EventHandler(this.numEnero_ValueChanged);
+            this.numSeptiembre.Enter += new System.EventHandler(this.numSeptiembre_Enter);
             // 
             // numAgosto
             // 
@@ -509,6 +514,7 @@
             this.numAgosto.TabIndex = 14;
             this.numAgosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numAgosto.ValueChanged += new System.EventHandler(this.numEnero_ValueChanged);
+            this.numAgosto.Enter += new System.EventHandler(this.numAgosto_Enter);
             // 
             // numJunio
             // 
@@ -523,6 +529,7 @@
             this.numJunio.TabIndex = 12;
             this.numJunio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numJunio.ValueChanged += new System.EventHandler(this.numEnero_ValueChanged);
+            this.numJunio.Enter += new System.EventHandler(this.numJunio_Enter);
             // 
             // numMayo
             // 
@@ -537,6 +544,7 @@
             this.numMayo.TabIndex = 11;
             this.numMayo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numMayo.ValueChanged += new System.EventHandler(this.numEnero_ValueChanged);
+            this.numMayo.Enter += new System.EventHandler(this.numMayo_Enter);
             // 
             // numAbril
             // 
@@ -551,6 +559,7 @@
             this.numAbril.TabIndex = 10;
             this.numAbril.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numAbril.ValueChanged += new System.EventHandler(this.numEnero_ValueChanged);
+            this.numAbril.Enter += new System.EventHandler(this.numAbril_Enter);
             // 
             // numMarzo
             // 
@@ -565,6 +574,7 @@
             this.numMarzo.TabIndex = 9;
             this.numMarzo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numMarzo.ValueChanged += new System.EventHandler(this.numEnero_ValueChanged);
+            this.numMarzo.Enter += new System.EventHandler(this.numMarzo_Enter);
             // 
             // numFebrero
             // 
@@ -579,6 +589,7 @@
             this.numFebrero.TabIndex = 8;
             this.numFebrero.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numFebrero.ValueChanged += new System.EventHandler(this.numEnero_ValueChanged);
+            this.numFebrero.Enter += new System.EventHandler(this.numFebrero_Enter);
             // 
             // numJulio
             // 
@@ -593,6 +604,7 @@
             this.numJulio.TabIndex = 13;
             this.numJulio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numJulio.ValueChanged += new System.EventHandler(this.numEnero_ValueChanged);
+            this.numJulio.Enter += new System.EventHandler(this.numJulio_Enter);
             // 
             // numEnero
             // 
@@ -607,6 +619,7 @@
             this.numEnero.TabIndex = 7;
             this.numEnero.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numEnero.ValueChanged += new System.EventHandler(this.numEnero_ValueChanged);
+            this.numEnero.Enter += new System.EventHandler(this.numEnero_Enter);
             // 
             // txtTotal
             // 
@@ -808,6 +821,7 @@
             this.numPuntoEquilibrio.Size = new System.Drawing.Size(73, 21);
             this.numPuntoEquilibrio.TabIndex = 13;
             this.numPuntoEquilibrio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numPuntoEquilibrio.Enter += new System.EventHandler(this.numPuntoEquilibrio_Enter);
             // 
             // label28
             // 
@@ -831,6 +845,7 @@
             this.numPrecioVenta.Size = new System.Drawing.Size(73, 21);
             this.numPrecioVenta.TabIndex = 12;
             this.numPrecioVenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numPrecioVenta.Enter += new System.EventHandler(this.numPrecioVenta_Enter);
             // 
             // label29
             // 
@@ -863,6 +878,7 @@
             this.numCostoVariable.Size = new System.Drawing.Size(73, 21);
             this.numCostoVariable.TabIndex = 11;
             this.numCostoVariable.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numCostoVariable.Enter += new System.EventHandler(this.numCostoVariable_Enter);
             // 
             // label27
             // 
@@ -895,6 +911,7 @@
             this.numCostofijo.Size = new System.Drawing.Size(73, 21);
             this.numCostofijo.TabIndex = 10;
             this.numCostofijo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numCostofijo.Enter += new System.EventHandler(this.numCostofijo_Enter);
             // 
             // label24
             // 
@@ -991,6 +1008,7 @@
             this.numCapacidadStock.Size = new System.Drawing.Size(73, 21);
             this.numCapacidadStock.TabIndex = 4;
             this.numCapacidadStock.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numCapacidadStock.Enter += new System.EventHandler(this.numCapacidadStock_Enter);
             // 
             // numCapacidadProducción
             // 
@@ -1004,6 +1022,7 @@
             this.numCapacidadProducción.Size = new System.Drawing.Size(73, 21);
             this.numCapacidadProducción.TabIndex = 5;
             this.numCapacidadProducción.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numCapacidadProducción.Enter += new System.EventHandler(this.numCapacidadProducción_Enter);
             // 
             // lblCapacidadStock
             // 
@@ -1054,6 +1073,7 @@
             this.numAdelantamiento.Size = new System.Drawing.Size(73, 21);
             this.numAdelantamiento.TabIndex = 3;
             this.numAdelantamiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numAdelantamiento.Enter += new System.EventHandler(this.numAdelantamiento_Enter);
             // 
             // lblAdelantamiento
             // 

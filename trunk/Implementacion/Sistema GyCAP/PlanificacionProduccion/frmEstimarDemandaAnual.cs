@@ -58,9 +58,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns.Add("DDEMAN_CODIGO", "Código");
             dgvDetalle.Columns.Add("DDEMAN_MES", "Mes");
             dgvDetalle.Columns.Add("DDEMAN_CANTIDADMES", "Cantidad Mensual");
-
+            dgvDetalle.Columns["DDEMAN_CODIGO"].Visible = false;
             //Seteamos el modo de tamaño de las columnas
-            dgvDetalle.Columns[0].Visible = false;
+            
             dgvDetalle.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalle.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalle.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -69,11 +69,14 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns["DDEMAN_CODIGO"].DataPropertyName = "DDEMAN_CODIGO";
             dgvDetalle.Columns["DDEMAN_MES"].DataPropertyName = "DDEMAN_MES";
             dgvDetalle.Columns["DDEMAN_CANTIDADMES"].DataPropertyName = "DDEMAN_CANTIDADMES";
-
+                        
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDetalle = new DataView(dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES);
-            dvListaDetalle.Sort = "DDEMAN_CODIGO ASC";
             dgvDetalle.DataSource = dvListaDetalle;
+
+            //Escondemos los codigos
+            dgvDetalle.Columns["DDEMAN_CODIGO"].Visible = false;
+            dgvLista.Columns["DEMAN_CODIGO"].Visible=false;
 
             //Seteo el maxlenght de los textbox
             txtAnioBuscar.MaxLength = 4;
@@ -311,7 +314,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            if (estadoActual == estadoUI.calcularEstimacion)
+            if (estadoActual == estadoUI.calcularEstimacion || estadoActual == estadoUI.cargaHistorico)
             {
                 SetInterface(estadoUI.nuevo);
             }
