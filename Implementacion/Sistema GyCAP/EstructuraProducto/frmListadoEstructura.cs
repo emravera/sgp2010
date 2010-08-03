@@ -147,6 +147,7 @@ namespace GyCAP.UI.EstructuraProducto
                 Data.dsEstructura.LISTA_PARTESRow rowParte = dsEstructura.LISTA_PARTES.NewLISTA_PARTESRow();
                 rowParte.BeginEdit();
                 rowParte.PAR_TIPO = "Conjunto";
+                rowParte.PAR_CODIGO = row.CONJUNTOSRow.CONJ_CODIGOPARTE;
                 rowParte.PAR_NOMBRE = row.CONJUNTOSRow.CONJ_NOMBRE;
                 rowParte.PAR_TERMINACION = dsEstructura.TERMINACIONES.FindByTE_CODIGO(row.CONJUNTOSRow.TE_CODIGO).TE_NOMBRE;
                 rowParte.PAR_CANTIDAD = row.CXE_CANTIDAD.ToString();
@@ -160,6 +161,7 @@ namespace GyCAP.UI.EstructuraProducto
                 Data.dsEstructura.LISTA_PARTESRow rowParte = dsEstructura.LISTA_PARTES.NewLISTA_PARTESRow();
                 rowParte.BeginEdit();
                 rowParte.PAR_TIPO = "Subconjunto";
+                rowParte.PAR_CODIGO = row.SUBCONJUNTOSRow.SCONJ_CODIGOPARTE;
                 rowParte.PAR_NOMBRE = row.SUBCONJUNTOSRow.SCONJ_NOMBRE;
                 rowParte.PAR_TERMINACION = dsEstructura.TERMINACIONES.FindByTE_CODIGO(row.SUBCONJUNTOSRow.TE_CODIGO).TE_NOMBRE;
                 rowParte.PAR_CANTIDAD = row.SCXE_CANTIDAD.ToString();
@@ -173,6 +175,7 @@ namespace GyCAP.UI.EstructuraProducto
                 Data.dsEstructura.LISTA_PARTESRow rowParte = dsEstructura.LISTA_PARTES.NewLISTA_PARTESRow();
                 rowParte.BeginEdit();
                 rowParte.PAR_TIPO = "Pieza";
+                rowParte.PAR_CODIGO = row.PIEZASRow.PZA_CODIGOPARTE;
                 rowParte.PAR_NOMBRE = row.PIEZASRow.PZA_NOMBRE;
                 rowParte.PAR_TERMINACION = dsEstructura.TERMINACIONES.FindByTE_CODIGO(row.PIEZASRow.TE_CODIGO).TE_NOMBRE;
                 rowParte.PAR_CANTIDAD = row.PXE_CANTIDAD.ToString();
@@ -186,6 +189,7 @@ namespace GyCAP.UI.EstructuraProducto
                 Data.dsEstructura.LISTA_PARTESRow rowParte = dsEstructura.LISTA_PARTES.NewLISTA_PARTESRow();
                 rowParte.BeginEdit();
                 rowParte.PAR_TIPO = "Materia Prima";
+                rowParte.PAR_CODIGO = string.Empty;
                 rowParte.PAR_NOMBRE = row.MATERIAS_PRIMASRow.MP_NOMBRE;
                 rowParte.PAR_TERMINACION = string.Empty;
                 rowParte.PAR_CANTIDAD = row.MPXE_CANTIDAD.ToString();
@@ -285,7 +289,7 @@ namespace GyCAP.UI.EstructuraProducto
                 dvPartes.Sort = columnaOrden + formaOrden;
                 dvPartes.RowFilter = filtro;
                 //Creamos el reporte y le asignamos el source
-                Data.Reportes.crPartesEstructura reporte = new GyCAP.Data.Reportes.crPartesEstructura();
+                Data.Reportes.crPartesEstructura2 reporte = new GyCAP.Data.Reportes.crPartesEstructura2();
 
                 reporte.SetDataSource(dvPartes);
                 //Creamos la pantalla que muestra todos los reportes y le asignamos el reporte
