@@ -5929,7 +5929,11 @@ namespace GyCAP.Data {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class LISTA_PARTESDataTable : global::System.Data.TypedTableBase<LISTA_PARTESRow> {
             
+            private global::System.Data.DataColumn columnESTR_CODIGO;
+            
             private global::System.Data.DataColumn columnPAR_TIPO;
+            
+            private global::System.Data.DataColumn columnPAR_CODIGO;
             
             private global::System.Data.DataColumn columnPAR_NOMBRE;
             
@@ -5970,9 +5974,23 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ESTR_CODIGOColumn {
+                get {
+                    return this.columnESTR_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn PAR_TIPOColumn {
                 get {
                     return this.columnPAR_TIPO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PAR_CODIGOColumn {
+                get {
+                    return this.columnPAR_CODIGO;
                 }
             }
             
@@ -6033,10 +6051,12 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public LISTA_PARTESRow AddLISTA_PARTESRow(string PAR_TIPO, string PAR_NOMBRE, string PAR_TERMINACION, string PAR_CANTIDAD, string PAR_UMED) {
+            public LISTA_PARTESRow AddLISTA_PARTESRow(string ESTR_CODIGO, string PAR_TIPO, string PAR_CODIGO, string PAR_NOMBRE, string PAR_TERMINACION, string PAR_CANTIDAD, string PAR_UMED) {
                 LISTA_PARTESRow rowLISTA_PARTESRow = ((LISTA_PARTESRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
+                        ESTR_CODIGO,
                         PAR_TIPO,
+                        PAR_CODIGO,
                         PAR_NOMBRE,
                         PAR_TERMINACION,
                         PAR_CANTIDAD,
@@ -6060,7 +6080,9 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             internal void InitVars() {
+                this.columnESTR_CODIGO = base.Columns["ESTR_CODIGO"];
                 this.columnPAR_TIPO = base.Columns["PAR_TIPO"];
+                this.columnPAR_CODIGO = base.Columns["PAR_CODIGO"];
                 this.columnPAR_NOMBRE = base.Columns["PAR_NOMBRE"];
                 this.columnPAR_TERMINACION = base.Columns["PAR_TERMINACION"];
                 this.columnPAR_CANTIDAD = base.Columns["PAR_CANTIDAD"];
@@ -6069,8 +6091,12 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             private void InitClass() {
+                this.columnESTR_CODIGO = new global::System.Data.DataColumn("ESTR_CODIGO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnESTR_CODIGO);
                 this.columnPAR_TIPO = new global::System.Data.DataColumn("PAR_TIPO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPAR_TIPO);
+                this.columnPAR_CODIGO = new global::System.Data.DataColumn("PAR_CODIGO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPAR_CODIGO);
                 this.columnPAR_NOMBRE = new global::System.Data.DataColumn("PAR_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPAR_NOMBRE);
                 this.columnPAR_TERMINACION = new global::System.Data.DataColumn("PAR_TERMINACION", typeof(string), null, global::System.Data.MappingType.Element);
@@ -8600,17 +8626,47 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string PAR_TIPO {
+            public string ESTR_CODIGO {
                 get {
                     try {
-                        return ((string)(this[this.tableLISTA_PARTES.PAR_TIPOColumn]));
+                        return ((string)(this[this.tableLISTA_PARTES.ESTR_CODIGOColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PAR_TIPO\' in table \'LISTA_PARTES\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ESTR_CODIGO\' in table \'LISTA_PARTES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableLISTA_PARTES.ESTR_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PAR_TIPO {
+                get {
+                    if (this.IsPAR_TIPONull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableLISTA_PARTES.PAR_TIPOColumn]));
                     }
                 }
                 set {
                     this[this.tableLISTA_PARTES.PAR_TIPOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PAR_CODIGO {
+                get {
+                    if (this.IsPAR_CODIGONull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableLISTA_PARTES.PAR_CODIGOColumn]));
+                    }
+                }
+                set {
+                    this[this.tableLISTA_PARTES.PAR_CODIGOColumn] = value;
                 }
             }
             
@@ -8632,11 +8688,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string PAR_TERMINACION {
                 get {
-                    try {
-                        return ((string)(this[this.tableLISTA_PARTES.PAR_TERMINACIONColumn]));
+                    if (this.IsPAR_TERMINACIONNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PAR_TERMINACION\' in table \'LISTA_PARTES\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableLISTA_PARTES.PAR_TERMINACIONColumn]));
                     }
                 }
                 set {
@@ -8647,11 +8703,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string PAR_CANTIDAD {
                 get {
-                    try {
-                        return ((string)(this[this.tableLISTA_PARTES.PAR_CANTIDADColumn]));
+                    if (this.IsPAR_CANTIDADNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PAR_CANTIDAD\' in table \'LISTA_PARTES\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableLISTA_PARTES.PAR_CANTIDADColumn]));
                     }
                 }
                 set {
@@ -8662,16 +8718,26 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string PAR_UMED {
                 get {
-                    try {
-                        return ((string)(this[this.tableLISTA_PARTES.PAR_UMEDColumn]));
+                    if (this.IsPAR_UMEDNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PAR_UMED\' in table \'LISTA_PARTES\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableLISTA_PARTES.PAR_UMEDColumn]));
                     }
                 }
                 set {
                     this[this.tableLISTA_PARTES.PAR_UMEDColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsESTR_CODIGONull() {
+                return this.IsNull(this.tableLISTA_PARTES.ESTR_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetESTR_CODIGONull() {
+                this[this.tableLISTA_PARTES.ESTR_CODIGOColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8682,6 +8748,16 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetPAR_TIPONull() {
                 this[this.tableLISTA_PARTES.PAR_TIPOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPAR_CODIGONull() {
+                return this.IsNull(this.tableLISTA_PARTES.PAR_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPAR_CODIGONull() {
+                this[this.tableLISTA_PARTES.PAR_CODIGOColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

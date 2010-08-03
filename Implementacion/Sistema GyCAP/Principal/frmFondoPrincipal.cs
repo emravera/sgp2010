@@ -18,7 +18,7 @@ namespace GyCAP.UI.Principal
 
         private void frmFondoPrincipal_SizeChanged(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            if (this.Visible) { this.WindowState = FormWindowState.Maximized; }
         }
     }
 }

@@ -67,9 +67,37 @@ namespace GyCAP.UI.EstructuraProducto.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap arriba1_15 {
+            get {
+                object obj = ResourceManager.GetObject("arriba1_15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap arriba3_20 {
+            get {
+                object obj = ResourceManager.GetObject("arriba3_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Delete_25 {
             get {
                 object obj = ResourceManager.GetObject("Delete_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap derecha1_15 {
+            get {
+                object obj = ResourceManager.GetObject("derecha1_15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap derecha3_20 {
+            get {
+                object obj = ResourceManager.GetObject("derecha3_20", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -105,6 +133,20 @@ namespace GyCAP.UI.EstructuraProducto.Properties {
         internal static System.Drawing.Bitmap Information_25 {
             get {
                 object obj = ResourceManager.GetObject("Information_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap izquierda1_15 {
+            get {
+                object obj = ResourceManager.GetObject("izquierda1_15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap izquierda3_20 {
+            get {
+                object obj = ResourceManager.GetObject("izquierda3_20", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
