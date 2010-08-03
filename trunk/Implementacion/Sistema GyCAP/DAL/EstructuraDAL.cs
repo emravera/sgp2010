@@ -187,19 +187,24 @@ namespace GyCAP.DAL
                         ,e_codigo = @p7
                         WHERE estr_codigo = @p8";
 
-            Data.dsEstructura.ESTRUCTURASRow rowEstructura = dsEstructura.ESTRUCTURAS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.ESTRUCTURASRow;
-            object[] valorParametros = { rowEstructura.COC_CODIGO,
-                                         rowEstructura.PNO_CODIGO,
-                                         rowEstructura.ESTR_NOMBRE,
-                                         rowEstructura.ESTR_DESCRIPCION,
-                                         rowEstructura.ESTR_ACTIVO,
-                                         rowEstructura.ESTR_FECHA_ALTA.Date, 
-                                         rowEstructura.ESTR_FECHA_MODIFICACION.Date,
-                                         rowEstructura.E_CODIGO,
-                                         rowEstructura.ESTR_CODIGO };
+           Data.dsEstructura.ESTRUCTURASRow rowEstructura = dsEstructura.ESTRUCTURAS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.ESTRUCTURASRow;
+           //Controlemos los valores que pueden venir nulos
+           object fechaModificacion = DBNull.Value, responsable = DBNull.Value;
+           if (!rowEstructura.IsESTR_FECHA_MODIFICACIONNull()) { fechaModificacion = rowEstructura.ESTR_FECHA_MODIFICACION.Date; }
+           if (!rowEstructura.IsE_CODIGONull()) { responsable = rowEstructura.E_CODIGO; }
+            
+           object[] valorParametros = { rowEstructura.COC_CODIGO,
+                                        rowEstructura.PNO_CODIGO,
+                                        rowEstructura.ESTR_NOMBRE,
+                                        rowEstructura.ESTR_DESCRIPCION,
+                                        rowEstructura.ESTR_ACTIVO,
+                                        rowEstructura.ESTR_FECHA_ALTA.Date, 
+                                        fechaModificacion,
+                                        responsable,
+                                        rowEstructura.ESTR_CODIGO };
 
-            //Declaramos el objeto transaccion
-            SqlTransaction transaccion = null;
+           //Declaramos el objeto transaccion
+           SqlTransaction transaccion = null;
 
             try
             {
@@ -230,11 +235,12 @@ namespace GyCAP.DAL
                     cE.CodigoEstructura = Convert.ToInt32(row.ESTR_CODIGO);
                     cE.CodigoConjunto = Convert.ToInt32(row.CONJ_CODIGO);
                     cE.CantidadConjunto = Convert.ToInt32(row.CXE_CANTIDAD);
-                    cE.CodigoGrupo = gE.CodigoGrupo;
+                    if (gE.CodigoGrupo != 0) { cE.CodigoGrupo = gE.CodigoGrupo; }
+                    else { cE.CodigoGrupo = Convert.ToInt32(row.GRP_CODIGO); }
                     ConjuntoEstructuraDAL.Insertar(cE, transaccion);
                     row.BeginEdit();
                     row.CXE_CODIGO = cE.CodigoDetalle;
-                    row.GRP_CODIGO = cE.CodigoGrupo;
+                    if (gE.CodigoGrupo != 0) { row.GRP_CODIGO = cE.CodigoGrupo; }
                     row.EndEdit();
                 }
                 Entidades.SubconjuntoEstructura scE = new GyCAP.Entidades.SubconjuntoEstructura();
@@ -243,11 +249,12 @@ namespace GyCAP.DAL
                     scE.CodigoEstructura = Convert.ToInt32(row.ESTR_CODIGO);
                     scE.CodigoSubconjunto = Convert.ToInt32(row.SCONJ_CODIGO);
                     scE.CantidadSubconjunto = Convert.ToInt32(row.SCXE_CANTIDAD);
-                    scE.CodigoGrupo = gE.CodigoGrupo;
+                    if (gE.CodigoGrupo != 0) { scE.CodigoGrupo = gE.CodigoGrupo; }
+                    else { scE.CodigoGrupo = Convert.ToInt32(row.GRP_CODIGO); }
                     SubconjuntoEstructuraDAL.Insertar(scE, transaccion);
                     row.BeginEdit();
                     row.SCXE_CODIGO = scE.CodigoDetalle;
-                    row.GRP_CODIGO = scE.CodigoGrupo;
+                    if (gE.CodigoGrupo != 0) { row.GRP_CODIGO = scE.CodigoGrupo; }
                     row.EndEdit();
                 }
                 Entidades.PiezaEstructura pE = new GyCAP.Entidades.PiezaEstructura();
@@ -256,11 +263,12 @@ namespace GyCAP.DAL
                     pE.CodigoEstructura = Convert.ToInt32(row.ESTR_CODIGO);
                     pE.CodigoPieza = Convert.ToInt32(row.PZA_CODIGO);
                     pE.CantidadPieza = Convert.ToInt32(row.PXE_CANTIDAD);
-                    pE.CodigoGrupo = gE.CodigoGrupo;
+                    if (gE.CodigoGrupo != 0) { pE.CodigoGrupo = gE.CodigoGrupo; }
+                    else { pE.CodigoGrupo = Convert.ToInt32(row.GRP_CODIGO); }
                     PiezaEstructuraDAL.Insertar(pE, transaccion);
                     row.BeginEdit();
                     row.PXE_CODIGO = pE.CodigoDetalle;
-                    row.GRP_CODIGO = pE.CodigoGrupo;
+                    if (gE.CodigoGrupo != 0) { row.GRP_CODIGO = pE.CodigoGrupo; }
                     row.EndEdit();
                 }
                 Entidades.MateriaPrimaEstructura mpE = new GyCAP.Entidades.MateriaPrimaEstructura();
@@ -269,11 +277,12 @@ namespace GyCAP.DAL
                     mpE.CodigoEstructura = Convert.ToInt32(row.ESTR_CODIGO);
                     mpE.CodigoMateriaPrima = Convert.ToInt32(row.MP_CODIGO);
                     mpE.CantidadMateriaPrima = row.MPXE_CANTIDAD;
-                    mpE.CodigoGrupo = gE.CodigoGrupo;
+                    if (gE.CodigoGrupo != 0) { mpE.CodigoGrupo = gE.CodigoGrupo; }
+                    else { mpE.CodigoGrupo = Convert.ToInt32(row.GRP_CODIGO); }
                     MateriaPrimaEstructuraDAL.Insertar(mpE, transaccion);
                     row.BeginEdit();
                     row.MPXE_CODIGO = mpE.CodigoDetalle;
-                    row.GRP_CODIGO = mpE.CodigoGrupo;
+                    if (gE.CodigoGrupo != 0) { row.GRP_CODIGO = mpE.CodigoGrupo; }
                     row.EndEdit();
                 }
 
@@ -300,7 +309,7 @@ namespace GyCAP.DAL
                     ConjuntoEstructuraDAL.Actualizar(cE, transaccion);
                 }
 
-                foreach (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
+                foreach (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow[])dsEstructura.SUBCONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
                 {
                     scE.CodigoDetalle = Convert.ToInt32(row.SCXE_CODIGO);
                     scE.CantidadSubconjunto = Convert.ToInt32(row.SCXE_CANTIDAD);
@@ -357,11 +366,11 @@ namespace GyCAP.DAL
                 transaccion.Commit();
 
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
                 //Error en alguna consulta, descartamos los cambios
                 transaccion.Rollback();
-                throw new Entidades.Excepciones.BaseDeDatosException();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
             }
             finally
             {

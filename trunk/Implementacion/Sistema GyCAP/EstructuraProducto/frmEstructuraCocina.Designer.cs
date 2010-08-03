@@ -55,6 +55,10 @@
             this.btnSubconjuntos = new System.Windows.Forms.Button();
             this.btnPiezas = new System.Windows.Forms.Button();
             this.gbVer = new System.Windows.Forms.GroupBox();
+            this.chkMateriaPrima = new System.Windows.Forms.CheckBox();
+            this.chkPieza = new System.Windows.Forms.CheckBox();
+            this.chkSubconjunto = new System.Windows.Forms.CheckBox();
+            this.chkConjunto = new System.Windows.Forms.CheckBox();
             this.btnArbol = new System.Windows.Forms.Button();
             this.gbPartes = new System.Windows.Forms.GroupBox();
             this.dgvPartes = new System.Windows.Forms.DataGridView();
@@ -85,6 +89,7 @@
             this.btnSC = new System.Windows.Forms.Button();
             this.btnEC = new System.Windows.Forms.Button();
             this.gbAC = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.btnAC = new System.Windows.Forms.Button();
             this.nudC = new System.Windows.Forms.NumericUpDown();
             this.gbCE = new System.Windows.Forms.GroupBox();
@@ -98,6 +103,7 @@
             this.btnSSC = new System.Windows.Forms.Button();
             this.btnESC = new System.Windows.Forms.Button();
             this.gbASC = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.btnASC = new System.Windows.Forms.Button();
             this.nudSC = new System.Windows.Forms.NumericUpDown();
             this.gbSCE = new System.Windows.Forms.GroupBox();
@@ -111,6 +117,7 @@
             this.btnSP = new System.Windows.Forms.Button();
             this.btnEP = new System.Windows.Forms.Button();
             this.gbAP = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.btnAP = new System.Windows.Forms.Button();
             this.nudP = new System.Windows.Forms.NumericUpDown();
             this.gbPE = new System.Windows.Forms.GroupBox();
@@ -124,6 +131,7 @@
             this.btnSMP = new System.Windows.Forms.Button();
             this.btnEMP = new System.Windows.Forms.Button();
             this.gbAMP = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.btnAMP = new System.Windows.Forms.Button();
             this.nudMP = new System.Windows.Forms.NumericUpDown();
             this.gbMPE = new System.Windows.Forms.GroupBox();
@@ -140,10 +148,6 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.chkConjunto = new System.Windows.Forms.CheckBox();
-            this.chkSubconjunto = new System.Windows.Forms.CheckBox();
-            this.chkPieza = new System.Windows.Forms.CheckBox();
-            this.chkMateriaPrima = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcEstructuraCocina.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -449,55 +453,66 @@
             // btnDatos
             // 
             this.btnDatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDatos.Location = new System.Drawing.Point(41, 16);
+            this.btnDatos.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.arriba1_15;
+            this.btnDatos.Location = new System.Drawing.Point(5, 15);
             this.btnDatos.Name = "btnDatos";
-            this.btnDatos.Size = new System.Drawing.Size(93, 23);
+            this.btnDatos.Size = new System.Drawing.Size(115, 28);
             this.btnDatos.TabIndex = 10;
-            this.btnDatos.Text = "Datos ^";
+            this.btnDatos.Text = "Datos";
+            this.btnDatos.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnDatos.UseVisualStyleBackColor = true;
             this.btnDatos.Click += new System.EventHandler(this.btnDatos_Click);
             // 
             // btnConjuntos
             // 
             this.btnConjuntos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConjuntos.Location = new System.Drawing.Point(140, 16);
+            this.btnConjuntos.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.derecha1_15;
+            this.btnConjuntos.Location = new System.Drawing.Point(126, 15);
             this.btnConjuntos.Name = "btnConjuntos";
-            this.btnConjuntos.Size = new System.Drawing.Size(93, 23);
+            this.btnConjuntos.Size = new System.Drawing.Size(115, 28);
             this.btnConjuntos.TabIndex = 4;
-            this.btnConjuntos.Text = "Conjuntos >";
+            this.btnConjuntos.Text = "Conjuntos";
+            this.btnConjuntos.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnConjuntos.UseVisualStyleBackColor = true;
             this.btnConjuntos.Click += new System.EventHandler(this.btnConjuntos_Click);
             // 
             // btnMateriaPrima
             // 
             this.btnMateriaPrima.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMateriaPrima.Location = new System.Drawing.Point(437, 16);
+            this.btnMateriaPrima.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.derecha1_15;
+            this.btnMateriaPrima.Location = new System.Drawing.Point(486, 15);
             this.btnMateriaPrima.Name = "btnMateriaPrima";
-            this.btnMateriaPrima.Size = new System.Drawing.Size(93, 23);
+            this.btnMateriaPrima.Size = new System.Drawing.Size(115, 28);
             this.btnMateriaPrima.TabIndex = 9;
-            this.btnMateriaPrima.Text = "Materia Prima >";
+            this.btnMateriaPrima.Text = "Materia Prima";
+            this.btnMateriaPrima.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnMateriaPrima.UseVisualStyleBackColor = true;
             this.btnMateriaPrima.Click += new System.EventHandler(this.btnMateriaPrima_Click);
             // 
             // btnSubconjuntos
             // 
             this.btnSubconjuntos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSubconjuntos.Location = new System.Drawing.Point(239, 16);
+            this.btnSubconjuntos.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.derecha1_15;
+            this.btnSubconjuntos.Location = new System.Drawing.Point(247, 15);
             this.btnSubconjuntos.Name = "btnSubconjuntos";
-            this.btnSubconjuntos.Size = new System.Drawing.Size(93, 23);
+            this.btnSubconjuntos.Size = new System.Drawing.Size(115, 28);
             this.btnSubconjuntos.TabIndex = 6;
-            this.btnSubconjuntos.Text = "Subconjuntos >";
+            this.btnSubconjuntos.Text = "Subconjuntos";
+            this.btnSubconjuntos.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnSubconjuntos.UseVisualStyleBackColor = true;
             this.btnSubconjuntos.Click += new System.EventHandler(this.btnSubconjuntos_Click);
             // 
             // btnPiezas
             // 
+            this.btnPiezas.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnPiezas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPiezas.Location = new System.Drawing.Point(338, 16);
+            this.btnPiezas.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.derecha1_15;
+            this.btnPiezas.Location = new System.Drawing.Point(368, 15);
             this.btnPiezas.Name = "btnPiezas";
-            this.btnPiezas.Size = new System.Drawing.Size(93, 23);
+            this.btnPiezas.Size = new System.Drawing.Size(115, 28);
             this.btnPiezas.TabIndex = 7;
-            this.btnPiezas.Text = "Piezas >";
+            this.btnPiezas.Text = "Piezas";
+            this.btnPiezas.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnPiezas.UseVisualStyleBackColor = true;
             this.btnPiezas.Click += new System.EventHandler(this.btnPiezas_Click);
             // 
@@ -515,16 +530,69 @@
             this.gbVer.TabStop = false;
             this.gbVer.Text = "Ver";
             // 
+            // chkMateriaPrima
+            // 
+            this.chkMateriaPrima.AutoSize = true;
+            this.chkMateriaPrima.Checked = true;
+            this.chkMateriaPrima.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMateriaPrima.Location = new System.Drawing.Point(29, 137);
+            this.chkMateriaPrima.Name = "chkMateriaPrima";
+            this.chkMateriaPrima.Size = new System.Drawing.Size(91, 17);
+            this.chkMateriaPrima.TabIndex = 8;
+            this.chkMateriaPrima.Text = "Materia Prima";
+            this.chkMateriaPrima.UseVisualStyleBackColor = true;
+            this.chkMateriaPrima.CheckedChanged += new System.EventHandler(this.chkVer);
+            // 
+            // chkPieza
+            // 
+            this.chkPieza.AutoSize = true;
+            this.chkPieza.Checked = true;
+            this.chkPieza.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPieza.Location = new System.Drawing.Point(29, 114);
+            this.chkPieza.Name = "chkPieza";
+            this.chkPieza.Size = new System.Drawing.Size(51, 17);
+            this.chkPieza.TabIndex = 7;
+            this.chkPieza.Text = "Pieza";
+            this.chkPieza.UseVisualStyleBackColor = true;
+            this.chkPieza.CheckedChanged += new System.EventHandler(this.chkVer);
+            // 
+            // chkSubconjunto
+            // 
+            this.chkSubconjunto.AutoSize = true;
+            this.chkSubconjunto.Checked = true;
+            this.chkSubconjunto.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSubconjunto.Location = new System.Drawing.Point(29, 91);
+            this.chkSubconjunto.Name = "chkSubconjunto";
+            this.chkSubconjunto.Size = new System.Drawing.Size(86, 17);
+            this.chkSubconjunto.TabIndex = 6;
+            this.chkSubconjunto.Text = "Subconjunto";
+            this.chkSubconjunto.UseVisualStyleBackColor = true;
+            this.chkSubconjunto.CheckedChanged += new System.EventHandler(this.chkVer);
+            // 
+            // chkConjunto
+            // 
+            this.chkConjunto.AutoSize = true;
+            this.chkConjunto.Checked = true;
+            this.chkConjunto.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkConjunto.Location = new System.Drawing.Point(29, 68);
+            this.chkConjunto.Name = "chkConjunto";
+            this.chkConjunto.Size = new System.Drawing.Size(70, 17);
+            this.chkConjunto.TabIndex = 5;
+            this.chkConjunto.Text = "Conjunto";
+            this.chkConjunto.UseVisualStyleBackColor = true;
+            this.chkConjunto.CheckedChanged += new System.EventHandler(this.chkVer);
+            // 
             // btnArbol
             // 
             this.btnArbol.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnArbol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnArbol.Location = new System.Drawing.Point(33, 158);
+            this.btnArbol.Location = new System.Drawing.Point(28, 173);
             this.btnArbol.Name = "btnArbol";
             this.btnArbol.Size = new System.Drawing.Size(92, 47);
             this.btnArbol.TabIndex = 4;
             this.btnArbol.Text = "Árbol de\r\nEstructura";
             this.btnArbol.UseVisualStyleBackColor = true;
+            this.btnArbol.Visible = false;
             // 
             // gbPartes
             // 
@@ -837,6 +905,7 @@
             // 
             // gbAC
             // 
+            this.gbAC.Controls.Add(this.label14);
             this.gbAC.Controls.Add(this.btnAC);
             this.gbAC.Controls.Add(this.nudC);
             this.gbAC.Location = new System.Drawing.Point(615, 3);
@@ -845,11 +914,20 @@
             this.gbAC.TabIndex = 3;
             this.gbAC.TabStop = false;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(29, 58);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(50, 13);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "Cantidad";
+            // 
             // btnAC
             // 
             this.btnAC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAC.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_25;
-            this.btnAC.Location = new System.Drawing.Point(32, 131);
+            this.btnAC.Location = new System.Drawing.Point(32, 115);
             this.btnAC.Name = "btnAC";
             this.btnAC.Size = new System.Drawing.Size(90, 50);
             this.btnAC.TabIndex = 1;
@@ -860,7 +938,7 @@
             // 
             // nudC
             // 
-            this.nudC.Location = new System.Drawing.Point(32, 90);
+            this.nudC.Location = new System.Drawing.Point(32, 74);
             this.nudC.Name = "nudC";
             this.nudC.Size = new System.Drawing.Size(90, 21);
             this.nudC.TabIndex = 0;
@@ -997,6 +1075,7 @@
             // 
             // gbASC
             // 
+            this.gbASC.Controls.Add(this.label15);
             this.gbASC.Controls.Add(this.btnASC);
             this.gbASC.Controls.Add(this.nudSC);
             this.gbASC.Location = new System.Drawing.Point(615, 3);
@@ -1005,11 +1084,20 @@
             this.gbASC.TabIndex = 7;
             this.gbASC.TabStop = false;
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(29, 62);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(50, 13);
+            this.label15.TabIndex = 3;
+            this.label15.Text = "Cantidad";
+            // 
             // btnASC
             // 
             this.btnASC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnASC.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_25;
-            this.btnASC.Location = new System.Drawing.Point(32, 131);
+            this.btnASC.Location = new System.Drawing.Point(32, 119);
             this.btnASC.Name = "btnASC";
             this.btnASC.Size = new System.Drawing.Size(90, 50);
             this.btnASC.TabIndex = 1;
@@ -1020,7 +1108,7 @@
             // 
             // nudSC
             // 
-            this.nudSC.Location = new System.Drawing.Point(32, 90);
+            this.nudSC.Location = new System.Drawing.Point(32, 78);
             this.nudSC.Name = "nudSC";
             this.nudSC.Size = new System.Drawing.Size(90, 21);
             this.nudSC.TabIndex = 0;
@@ -1157,6 +1245,7 @@
             // 
             // gbAP
             // 
+            this.gbAP.Controls.Add(this.label16);
             this.gbAP.Controls.Add(this.btnAP);
             this.gbAP.Controls.Add(this.nudP);
             this.gbAP.Location = new System.Drawing.Point(615, 3);
@@ -1165,11 +1254,20 @@
             this.gbAP.TabIndex = 7;
             this.gbAP.TabStop = false;
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(29, 60);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(50, 13);
+            this.label16.TabIndex = 3;
+            this.label16.Text = "Cantidad";
+            // 
             // btnAP
             // 
             this.btnAP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAP.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_25;
-            this.btnAP.Location = new System.Drawing.Point(32, 131);
+            this.btnAP.Location = new System.Drawing.Point(32, 117);
             this.btnAP.Name = "btnAP";
             this.btnAP.Size = new System.Drawing.Size(90, 50);
             this.btnAP.TabIndex = 1;
@@ -1180,7 +1278,7 @@
             // 
             // nudP
             // 
-            this.nudP.Location = new System.Drawing.Point(32, 90);
+            this.nudP.Location = new System.Drawing.Point(32, 76);
             this.nudP.Name = "nudP";
             this.nudP.Size = new System.Drawing.Size(90, 21);
             this.nudP.TabIndex = 0;
@@ -1319,6 +1417,7 @@
             // 
             // gbAMP
             // 
+            this.gbAMP.Controls.Add(this.label17);
             this.gbAMP.Controls.Add(this.btnAMP);
             this.gbAMP.Controls.Add(this.nudMP);
             this.gbAMP.Location = new System.Drawing.Point(615, 3);
@@ -1327,11 +1426,20 @@
             this.gbAMP.TabIndex = 7;
             this.gbAMP.TabStop = false;
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(29, 62);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(50, 13);
+            this.label17.TabIndex = 3;
+            this.label17.Text = "Cantidad";
+            // 
             // btnAMP
             // 
             this.btnAMP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAMP.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_25;
-            this.btnAMP.Location = new System.Drawing.Point(32, 131);
+            this.btnAMP.Location = new System.Drawing.Point(32, 119);
             this.btnAMP.Name = "btnAMP";
             this.btnAMP.Size = new System.Drawing.Size(90, 50);
             this.btnAMP.TabIndex = 1;
@@ -1348,7 +1456,7 @@
             0,
             0,
             65536});
-            this.nudMP.Location = new System.Drawing.Point(32, 90);
+            this.nudMP.Location = new System.Drawing.Point(32, 78);
             this.nudMP.Name = "nudMP";
             this.nudMP.Size = new System.Drawing.Size(90, 21);
             this.nudMP.TabIndex = 0;
@@ -1516,58 +1624,6 @@
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // chkConjunto
-            // 
-            this.chkConjunto.AutoSize = true;
-            this.chkConjunto.Checked = true;
-            this.chkConjunto.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkConjunto.Location = new System.Drawing.Point(29, 37);
-            this.chkConjunto.Name = "chkConjunto";
-            this.chkConjunto.Size = new System.Drawing.Size(70, 17);
-            this.chkConjunto.TabIndex = 5;
-            this.chkConjunto.Text = "Conjunto";
-            this.chkConjunto.UseVisualStyleBackColor = true;
-            this.chkConjunto.CheckedChanged += new System.EventHandler(this.chkVer);
-            // 
-            // chkSubconjunto
-            // 
-            this.chkSubconjunto.AutoSize = true;
-            this.chkSubconjunto.Checked = true;
-            this.chkSubconjunto.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkSubconjunto.Location = new System.Drawing.Point(29, 60);
-            this.chkSubconjunto.Name = "chkSubconjunto";
-            this.chkSubconjunto.Size = new System.Drawing.Size(86, 17);
-            this.chkSubconjunto.TabIndex = 6;
-            this.chkSubconjunto.Text = "Subconjunto";
-            this.chkSubconjunto.UseVisualStyleBackColor = true;
-            this.chkSubconjunto.CheckedChanged += new System.EventHandler(this.chkVer);
-            // 
-            // chkPieza
-            // 
-            this.chkPieza.AutoSize = true;
-            this.chkPieza.Checked = true;
-            this.chkPieza.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPieza.Location = new System.Drawing.Point(29, 83);
-            this.chkPieza.Name = "chkPieza";
-            this.chkPieza.Size = new System.Drawing.Size(51, 17);
-            this.chkPieza.TabIndex = 7;
-            this.chkPieza.Text = "Pieza";
-            this.chkPieza.UseVisualStyleBackColor = true;
-            this.chkPieza.CheckedChanged += new System.EventHandler(this.chkVer);
-            // 
-            // chkMateriaPrima
-            // 
-            this.chkMateriaPrima.AutoSize = true;
-            this.chkMateriaPrima.Checked = true;
-            this.chkMateriaPrima.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMateriaPrima.Location = new System.Drawing.Point(29, 106);
-            this.chkMateriaPrima.Name = "chkMateriaPrima";
-            this.chkMateriaPrima.Size = new System.Drawing.Size(91, 17);
-            this.chkMateriaPrima.TabIndex = 8;
-            this.chkMateriaPrima.Text = "Materia Prima";
-            this.chkMateriaPrima.UseVisualStyleBackColor = true;
-            this.chkMateriaPrima.CheckedChanged += new System.EventHandler(this.chkVer);
-            // 
             // frmEstructuraCocina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1602,6 +1658,7 @@
             this.tpConjuntos.ResumeLayout(false);
             this.gbOC.ResumeLayout(false);
             this.gbAC.ResumeLayout(false);
+            this.gbAC.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudC)).EndInit();
             this.gbCE.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCE)).EndInit();
@@ -1610,6 +1667,7 @@
             this.tpSubconjuntos.ResumeLayout(false);
             this.gbOSC.ResumeLayout(false);
             this.gbASC.ResumeLayout(false);
+            this.gbASC.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSC)).EndInit();
             this.gbSCE.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSCE)).EndInit();
@@ -1618,6 +1676,7 @@
             this.tpPiezas.ResumeLayout(false);
             this.gbOP.ResumeLayout(false);
             this.gbAP.ResumeLayout(false);
+            this.gbAP.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudP)).EndInit();
             this.gbPE.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPE)).EndInit();
@@ -1626,6 +1685,7 @@
             this.tpMateriaPrima.ResumeLayout(false);
             this.gbOMP.ResumeLayout(false);
             this.gbAMP.ResumeLayout(false);
+            this.gbAMP.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMP)).EndInit();
             this.gbMPE.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMPE)).EndInit();
@@ -1756,5 +1816,9 @@
         private System.Windows.Forms.CheckBox chkPieza;
         private System.Windows.Forms.CheckBox chkSubconjunto;
         private System.Windows.Forms.CheckBox chkConjunto;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
     }
 }
