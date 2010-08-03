@@ -237,6 +237,8 @@ namespace GyCAP.UI.EstructuraProducto
                         rowCocina.TE_CODIGO = cocina.TerminacionHorno.Codigo;
                         rowCocina.DESIG_CODIGO = cocina.Designacion.Codigo;
                         rowCocina.COC_PRECIO = cocina.Precio;
+                        rowCocina.COC_CANTIDADSTOCK = 0;
+                        rowCocina.COC_ACTIVO = cbEstado.GetSelectedValueInt();
                         rowCocina.EndEdit();
                         dsCocina.COCINAS.AddCOCINASRow(rowCocina);
                         dsCocina.COCINAS.AcceptChanges();
