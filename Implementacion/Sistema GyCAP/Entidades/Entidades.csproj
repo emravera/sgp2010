@@ -62,6 +62,7 @@
     <Compile Include="DetallePieza.cs" />
     <Compile Include="DetallePlanAnual.cs" />
     <Compile Include="DetallePlanMantenimiento.cs" />
+    <Compile Include="DetallePlanMateriasPrimas.cs" />
     <Compile Include="DetallePlanMensual.cs" />
     <Compile Include="DetallePlanSemanal.cs" />
     <Compile Include="DetalleSubconjunto.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="PiezaEstructura.cs" />
     <Compile Include="PlanAnual.cs" />
     <Compile Include="PlanMantenimiento.cs" />
+    <Compile Include="PlanMateriaPrima.cs" />
     <Compile Include="PlanMensual.cs" />
     <Compile Include="PlanSemanal.cs" />
     <Compile Include="Proceso.cs" />

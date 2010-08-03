@@ -97,6 +97,7 @@
     <Compile Include="PiezaEstructuraDAL.cs" />
     <Compile Include="PlanAnualDAL.cs" />
     <Compile Include="PlanMantenimientoDAL.cs" />
+    <Compile Include="PlanMateriasPrimasDAL.cs" />
     <Compile Include="PlanMensualDAL.cs" />
     <Compile Include="PlanoDAL.cs" />
     <Compile Include="PlanSemanalDAL.cs" />

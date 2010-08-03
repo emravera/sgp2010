@@ -162,12 +162,19 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void btnNuevoMPPrincipal_Click(object sender, EventArgs e)
         {
-
+            frmPlanificarMateriasPrimas.Instancia.TopLevel = false;
+            frmPlanificarMateriasPrimas.Instancia.Parent = areaTrabajo;
+            frmPlanificarMateriasPrimas.Instancia.Location = PosicionarFormulario();
+            frmPlanificarMateriasPrimas.Instancia.btnNuevo.PerformClick();
+            frmPlanificarMateriasPrimas.Instancia.Show();  
         }
 
         private void btnConsultarMPPrincipal_Click(object sender, EventArgs e)
         {
-
+            frmPlanificarMateriasPrimas.Instancia.TopLevel = false;
+            frmPlanificarMateriasPrimas.Instancia.Parent = areaTrabajo;
+            frmPlanificarMateriasPrimas.Instancia.Location = PosicionarFormulario();
+            frmPlanificarMateriasPrimas.Instancia.Show();
         }
 
         #endregion

@@ -76,6 +76,19 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
         }
+
+        //Metodo para llenar desde planificacion  materia primas principales
+        public static void ObtenerUnidades(Data.dsPlanMateriasPrimas ds)
+        {
+            string sql = @"SELECT umed_codigo,tumed_codigo, umed_nombre, umed_abreviatura
+                              FROM UNIDADES_MEDIDA";
+            try
+            {
+                DB.FillDataSet(ds, "UNIDADES_MEDIDA", sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+        }
         
         //ELIMINACION
         //Metodo que verifica que no este usado en otro lugar

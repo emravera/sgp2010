@@ -16,7 +16,11 @@ namespace GyCAP.BLL
         {
             DAL.PlanAnualDAL.ObtenerTodos(ds);
         }
-
+        public static void ObtenerTodos(Data.dsPlanMateriasPrimas ds)
+        {
+            DAL.PlanAnualDAL.ObtenerTodos(ds);
+        }
+        
         //Insertar
         public static IList<Entidades.DetallePlanAnual> Insertar(Entidades.PlanAnual planAnual, IList<Entidades.DetallePlanAnual> detalle)
         {

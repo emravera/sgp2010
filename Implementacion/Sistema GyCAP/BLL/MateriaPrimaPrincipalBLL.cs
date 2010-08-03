@@ -19,6 +19,12 @@ namespace GyCAP.BLL
         {
             DAL.MateriaPrimaPrincipalDAL.ObtenerTodos(ds);
         }
+        //MEtodo que se llama desde plan MP Anual
+        public static void ObtenerMPPrincipales(Data.dsPlanMateriasPrimas ds)
+        {
+            DAL.MateriaPrimaPrincipalDAL.ObtenerMPPrincipales(ds);
+        }
+
 
         public static void Eliminar(int codigo)
         {
