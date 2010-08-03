@@ -22,7 +22,7 @@ namespace GyCAP.DAL
                                         ,[conj_cantidadstock]
                                         ,[par_codigo]
                                         ,[pno_codigo]
-                                        .[conj_codigoparte]) 
+                                        ,[conj_codigoparte]) 
                                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6) SELECT @@Identity";
 
             //Así obtenemos el conjunto nuevo del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
@@ -58,11 +58,11 @@ namespace GyCAP.DAL
                 //Todo ok, commit
                 transaccion.Commit();                
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
                 //Error en alguna consulta, descartamos los cambios
                 transaccion.Rollback();
-                throw new Entidades.Excepciones.BaseDeDatosException();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
             }
             finally
             {
