@@ -78,7 +78,21 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
         }
-       
+
+        //Metodo que trae todos los datos 
+        public static void ObtenerMPPrincipales(Data.dsPlanMateriasPrimas ds)
+        {
+            string sql = @"SELECT pr.mppr_codigo, pr.mp_codigo, pr.mppr_cantidad, mp.umed_codigo
+                        FROM MATERIASPRIMASPRINCIPALES as pr, MATERIAS_PRIMAS as mp
+                        WHERE mp.mp_codigo=pr.mp_codigo";
+            try
+            {
+                DB.FillDataSet(ds, "MATERIASPRIMASPRINCIPALES", sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+        }
+
         //Metodo que elimina de la base de datos
         public static void Eliminar(int codigo)
         {

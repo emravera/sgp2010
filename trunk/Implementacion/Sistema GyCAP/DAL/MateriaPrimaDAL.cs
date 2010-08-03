@@ -55,6 +55,19 @@ namespace GyCAP.DAL
 
         }
 
+        //Metodo que obtiene todas las materias primas
+        public static void ObtenerMP(Data.dsPlanMateriasPrimas ds)
+        {
+            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_precio
+                        FROM MATERIAS_PRIMAS";
+            try
+            {
+                DB.FillDataSet(ds, "MATERIAS_PRIMAS", sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+        }
+
         public static void ObtenerTodos(System.Data.DataTable dt)
         {
             string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_precio

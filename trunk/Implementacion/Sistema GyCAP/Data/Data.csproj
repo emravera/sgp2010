@@ -152,6 +152,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPlanAnual.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsPlanMateriasPrimas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPlanMateriasPrimas.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsSectorTrabajo.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -368,6 +373,17 @@
     </None>
     <None Include="dsPlanAnual.xss">
       <DependentUpon>dsPlanAnual.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanMateriasPrimas.xsc">
+      <DependentUpon>dsPlanMateriasPrimas.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanMateriasPrimas.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPlanMateriasPrimas.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsPlanMateriasPrimas.xss">
+      <DependentUpon>dsPlanMateriasPrimas.xsd</DependentUpon>
     </None>
     <None Include="dsSectorTrabajo.xsc">
       <DependentUpon>dsSectorTrabajo.xsd</DependentUpon>

@@ -90,6 +90,7 @@
     <Compile Include="PiezaBLL.cs" />
     <Compile Include="PlanAnualBLL.cs" />
     <Compile Include="PlanMantenimientoBLL.cs" />
+    <Compile Include="PlanMateriaPrimaBLL.cs" />
     <Compile Include="PlanMensualBLL.cs" />
     <Compile Include="PlanoBLL.cs" />
     <Compile Include="PlanSemanalBLL.cs" />

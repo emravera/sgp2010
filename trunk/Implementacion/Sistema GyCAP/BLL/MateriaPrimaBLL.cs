@@ -23,7 +23,11 @@ namespace GyCAP.BLL
         {
             DAL.MateriaPrimaDAL.ObtenerTodos(ds);
         }
-
+        //Metodo que se llama desde el formulario planificacion materias primas
+        public static void ObtenerMP(Data.dsPlanMateriasPrimas ds)
+        {
+            DAL.MateriaPrimaDAL.ObtenerMP(ds);
+        }
         public static void ObtenerTodos(System.Data.DataTable dtMateriaPrima)
         {
             DAL.MateriaPrimaDAL.ObtenerTodos(dtMateriaPrima);

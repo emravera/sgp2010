@@ -18,6 +18,12 @@ namespace GyCAP.BLL
             return DAL.DetallePlanAnualDAL.ObtenerID(detalle);
         }
 
+        //Metodo que devuelve una fila del plan anual
+        public static void ObtenerFila(Data.dsPlanMateriasPrimas ds, int codigo)
+        {
+            DAL.DetallePlanAnualDAL.ObtenerDetalle(ds,codigo);
+        }
+
         
     }
 }

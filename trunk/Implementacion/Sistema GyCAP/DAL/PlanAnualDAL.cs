@@ -34,6 +34,16 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        public static void ObtenerTodos(Data.dsPlanMateriasPrimas ds)
+        {
+            string sql = @"SELECT pan_codigo, pan_anio, deman_codigo, pan_fechacreacion
+                        FROM PLANES_ANUALES";
+            try
+            {
+                DB.FillDataSet(ds, "PLANES_ANUALES", sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
         //Metodo para insertar
         public static IList<Entidades.DetallePlanAnual> Insertar(Entidades.PlanAnual planAnual, IList<Entidades.DetallePlanAnual> detalle)
         {
