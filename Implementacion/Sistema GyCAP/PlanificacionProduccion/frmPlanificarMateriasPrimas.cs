@@ -37,7 +37,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["PMPA_CODIGO"].DataPropertyName = "PMPA_CODIGO";
@@ -69,7 +69,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns["DPMPA_CANTIDAD"].DataPropertyName = "DPMPA_CANTIDAD";
             dgvDetalle.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
 
-            //dgvDetalle.Columns["DPMPA_CODIGO"].Visible = false;
+            dgvLista.Columns["PMPA_CODIGO"].Visible = false;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDetalle = new DataView(dsPlanMP.DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL);
@@ -149,8 +149,14 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbBuscar.Visible = true;
                     gbDatosPrincipales.Visible = false;
                     btnNuevo.Enabled = true;
-                    btnConsultar.Enabled = false;
-                    btnEliminar.Enabled = false;
+                    bool hayDatos;
+                    if (dsPlanMP.PLANES_MATERIAS_PRIMAS_ANUALES.Rows.Count > 0)
+                    {
+                        hayDatos = true;
+                    }
+                    else hayDatos = false;
+                    btnConsultar.Enabled = hayDatos;
+                    btnEliminar.Enabled = hayDatos;
                     estadoActual = estadoUI.inicio;
                     break;
                 case estadoUI.calcular:

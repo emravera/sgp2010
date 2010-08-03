@@ -75,6 +75,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             dvListaDetalle = new DataView(dsPlanAnual.DETALLE_PLAN_ANUAL);
             dgvDetalle.DataSource = dvListaDetalle;
 
+            //Ponemos las columnas en visible false
+            dgvLista.Columns["PAN_CODIGO"].Visible = false;
+            dgvDetalle.Columns["DPAN_CODIGO"].Visible = false;
 
             //Llenamos el dataset con las estimaciones
             BLL.DemandaAnualBLL.ObtenerTodos(dsPlanAnual);
@@ -266,7 +269,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbModificacion.Visible = true;
                     tcPlanAnual.SelectedTab = tpDatos;
                     estadoActual = estadoUI.calcularPlanificacion;
-                    DesactivaControles(true);
+                    DesactivaControles(false);
                     break;            
 
                 
@@ -857,7 +860,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     lblTotalSistema.Text = planMeses.Sum().ToString();
 
                     //Muestro lo que no se pudo asignar
-                    txtDemandaNoCubierta.Text =(BLL.DetalleDemandaAnualBLL.ObtenerTotal(demandaActual.Codigo)- Convert.ToInt16(txtTotal.Text)).ToString(); ;
+                    txtDemandaNoCubierta.Text =(BLL.DetalleDemandaAnualBLL.ObtenerTotal(demandaActual.Codigo)- Convert.ToInt32(txtTotal.Text)).ToString(); ;
 
                     //Generamos el Grafico de Planificacion
                     GenerarGrafico(planMeses);
@@ -1306,5 +1309,126 @@ namespace GyCAP.UI.PlanificacionProduccion
                 MessageBox.Show("Debe seleccionar una Designación de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        #region Controles
+        private void numAdelantamiento_Enter(object sender, EventArgs e)
+        {
+            numAdelantamiento.Select(0, 10);
         }
+
+        private void numCapacidadStock_Enter(object sender, EventArgs e)
+        {
+            numCapacidadStock.Select(0, 10);
+        }
+
+        private void numCapacidadProducción_Enter(object sender, EventArgs e)
+        {
+            numCapacidadProducción.Select(0, 10);
+        }
+
+        private void numCostofijo_Enter(object sender, EventArgs e)
+        {
+            numCostofijo.Select(0, 10);
+        }
+
+        private void numCostoVariable_Enter(object sender, EventArgs e)
+        {
+            numCostoVariable.Select(0, 10);
+        }
+
+        private void numPrecioVenta_Enter(object sender, EventArgs e)
+        {
+            numPrecioVenta.Select(0, 10);
+        }
+
+        private void numPuntoEquilibrio_Enter(object sender, EventArgs e)
+        {
+            numPuntoEquilibrio.Select(0, 10);
+        }
+
+        private void numEnero_Enter(object sender, EventArgs e)
+        {
+            numEnero.Select(0, 10);
+        }
+
+        private void numFebrero_Enter(object sender, EventArgs e)
+        {
+            numFebrero.Select(0, 10);
+        }
+
+        private void numMarzo_Enter(object sender, EventArgs e)
+        {
+            numMarzo.Select(0, 10);
+        }
+
+        private void numAbril_Enter(object sender, EventArgs e)
+        {
+            numAbril.Select(0, 10);
+        }
+
+        private void numMayo_Enter(object sender, EventArgs e)
+        {
+            numMayo.Select(0, 10);
+        }
+
+        private void numJunio_Enter(object sender, EventArgs e)
+        {
+            numJunio.Select(0, 10);
+        }
+
+        private void numJulio_Enter(object sender, EventArgs e)
+        {
+            numJulio.Select(0, 10);
+        }
+
+        private void numAgosto_Enter(object sender, EventArgs e)
+        {
+            numAgosto.Select(0, 10);
+        }
+
+        private void numSeptiembre_Enter(object sender, EventArgs e)
+        {
+            numSeptiembre.Select(0, 10);
+        }
+
+        private void numOctubre_Enter(object sender, EventArgs e)
+        {
+            numOctubre.Select(0, 10);
+        }
+
+        private void numNoviembre_Enter(object sender, EventArgs e)
+        {
+            numNoviembre.Select(0, 10);
+        }
+
+        private void numDiciembre_Enter(object sender, EventArgs e)
+        {
+            numDiciembre.Select(0, 10);
+        }
+        #endregion
+
+        private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != String.Empty)
+            {
+
+                switch (dgvLista.Columns[e.ColumnIndex].Name)
+                {
+                    case "DEMAN_CODIGO":
+                        string nombre = dsPlanAnual.DEMANDAS_ANUALES.FindByDEMAN_CODIGO(Convert.ToInt32(e.Value)).DEMAN_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+
+
+        }
+
+
+
+    }
 }
