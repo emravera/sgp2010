@@ -14,6 +14,8 @@ namespace GyCAP.BLL
         /// se está ejecutando la aplicación.
         /// </summary>
         private static readonly string directorioImagenes = SistemaBLL.WorkingPath + "BLL\\Img\\CocImg\\";
+        public static readonly int CocinaActiva = 1;
+        public static readonly int CocinaInactiva = 0;
 
         public static int Insertar(Entidades.Cocina cocina)
         {
@@ -45,7 +47,7 @@ namespace GyCAP.BLL
             object marca = null, terminacion = null, estado = null;
             if (codMarca != null && Convert.ToInt32(codMarca.ToString()) > 0) { marca = codMarca; }
             if (codTerminacion != null && Convert.ToInt32(codTerminacion.ToString()) > 0) { terminacion = codTerminacion; }
-            if (codEstado != null && Convert.ToInt32(codEstado.ToString()) > 0) { estado = codEstado; }
+            if (codEstado != null && Convert.ToInt32(codEstado.ToString()) > -1) { estado = codEstado; }
             DAL.CocinaDAL.ObtenerCocinas(codigo, marca, terminacion, estado, dtCocina);
         }
 

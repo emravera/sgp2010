@@ -9,11 +9,13 @@ namespace GyCAP.DAL
 {
     public class CocinaDAL
     {
+        public static readonly int CocinaActiva = 1;
+        public static readonly int CocinaInactiva = 0;
+        
         public static int Insertar(Entidades.Cocina cocina)
         {
             string sql = @"INSERT INTO [COCINAS] 
-                        ([ecoc_codigo]
-                        ,[col_codigo]
+                        ([col_codigo]
                         ,[mod_codigo]
                         ,[mca_codigo]
                         ,[te_codigo]
@@ -22,17 +24,16 @@ namespace GyCAP.DAL
                         ,[coc_cantidadstock]
                         ,[coc_activo]
                         ,[coc_precio])
-                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9)";
+                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8)";
 
-            object[] valorParametros = { cocina.Estado.Codigo,
-                                         cocina.Color.Codigo,
+            object[] valorParametros = { cocina.Color.Codigo,
                                          cocina.Modelo.Codigo,
                                          cocina.Marca.Codigo,
                                          cocina.TerminacionHorno.Codigo,
                                          cocina.Designacion.Codigo,
                                          cocina.CodigoProducto,
                                          0,
-                                         1, //hasta ver si va o no le ponemos un valor por defecto
+                                         cocina.Activo, //0-Inactivo , 1-Activo
                                          cocina.Precio };
 
             try
@@ -45,25 +46,23 @@ namespace GyCAP.DAL
         public static void Actualizar(Entidades.Cocina cocina)
         {
             string sql = @"UPDATE COCINAS SET 
-                         ecoc_codigo = @p0
-                        ,col_codigo = @p1
-                        ,mod_codigo = @p2
-                        ,mca_codigo = @p3
-                        ,te_codigo = @p4
-                        ,desig_codigo = @p5
-                        ,coc_codigo_producto = @p6
-                        ,coc_activo = @p7
-                        ,coc_precio = @p8
-                        WHERE coc_codigo = @p9";
+                         col_codigo = @p0
+                        ,mod_codigo = @p1
+                        ,mca_codigo = @p2
+                        ,te_codigo = @p3
+                        ,desig_codigo = @p4
+                        ,coc_codigo_producto = @p5
+                        ,coc_activo = @p6
+                        ,coc_precio = @p7
+                        WHERE coc_codigo = @p8";
 
-            object[] valorParametros = { cocina.Estado.Codigo,
-                                         cocina.Color.Codigo,
+            object[] valorParametros = { cocina.Color.Codigo,
                                          cocina.Modelo.Codigo,
                                          cocina.Marca.Codigo,
                                          cocina.TerminacionHorno.Codigo,
                                          cocina.Designacion.Codigo,
                                          cocina.CodigoProducto,
-                                         1, //hasta ver si va o no le ponemos un valor por defecto
+                                         cocina.Activo, //0-Inactivo , 1-Activo
                                          cocina.Precio,
                                          cocina.CodigoCocina };
 
@@ -89,7 +88,7 @@ namespace GyCAP.DAL
         //Obtiene todas las cocinas, sin filtrar
         public static void ObtenerCocinas(DataTable dtCocina)
         {
-            string sql = @"SELECT coc_codigo, ecoc_codigo, col_codigo, mod_codigo, mca_codigo, te_codigo, desig_codigo, 
+            string sql = @"SELECT coc_codigo, col_codigo, mod_codigo, mca_codigo, te_codigo, desig_codigo, 
                          coc_codigo_producto, coc_cantidadstock, coc_activo, coc_precio FROM COCINAS";
 
             try
@@ -102,7 +101,7 @@ namespace GyCAP.DAL
         //Obtiene todas las cocinas que coincidan con los filtros
         public static void ObtenerCocinas(object codigo, object codMarca, object codTerminacion, object codEstado, DataTable dtCocina)
         {
-            string sql = @"SELECT coc_codigo, ecoc_codigo, col_codigo, mod_codigo, mca_codigo, te_codigo, desig_codigo, 
+            string sql = @"SELECT coc_codigo, col_codigo, mod_codigo, mca_codigo, te_codigo, desig_codigo, 
                         coc_codigo_producto, coc_cantidadstock, coc_activo, coc_precio FROM COCINAS WHERE 1=1 ";
 
             //Sirve para armar el nombre de los parámetros
@@ -138,7 +137,7 @@ namespace GyCAP.DAL
             //Revisamos si pasó algun valor y si es un integer
             if (codEstado != null && codEstado.GetType() == cantidadParametros.GetType())
             {
-                sql += " AND ecoc_codigo = @p" + cantidadParametros;
+                sql += " AND coc_activo = @p" + cantidadParametros;
                 valoresFiltros[cantidadParametros] = Convert.ToInt32(codEstado);
                 cantidadParametros++;
             }

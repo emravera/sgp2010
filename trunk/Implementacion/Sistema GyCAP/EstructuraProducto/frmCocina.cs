@@ -158,9 +158,9 @@ namespace GyCAP.UI.EstructuraProducto
                         nombre = dsCocina.MARCAS.FindByMCA_CODIGO(Convert.ToInt32(e.Value)).MCA_NOMBRE;
                         e.Value = nombre;
                         break;
-                    case "ECOC_CODIGO":
-                        nombre = dsCocina.ESTADO_COCINAS.FindByECOC_CODIGO(Convert.ToInt32(e.Value)).ECOC_NOMBRE;
-                        e.Value = nombre;
+                    case "COC_ESTADO":
+                        if (Convert.ToInt32(e.Value) == 1) { e.Value = "Activa"; }
+                        else if (Convert.ToInt32(e.Value) == 0) { e.Value = "Inactiva"; }
                         break;
                     default:
                         break;
@@ -177,7 +177,7 @@ namespace GyCAP.UI.EstructuraProducto
             cbDesignacion.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).DESIG_CODIGO));
             cbColor.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COL_CODIGO));
             cbTerminacion.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).TE_CODIGO));
-            cbEstado.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).ECOC_CODIGO));
+            cbEstado.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COC_ACTIVO));
             nudPrecio.Value = dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COC_PRECIO;
             pbImagen.Image = BLL.CocinaBLL.ObtenerImagen(codigoCocina);
         }
@@ -217,8 +217,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cocina.Color.Codigo = cbColor.GetSelectedValueInt();
                     cocina.TerminacionHorno = new GyCAP.Entidades.Terminacion();
                     cocina.TerminacionHorno.Codigo = cbTerminacion.GetSelectedValueInt();
-                    cocina.Estado = new GyCAP.Entidades.EstadoCocina();
-                    cocina.Estado.Codigo = cbEstado.GetSelectedValueInt();
+                    cocina.Activo = cbEstado.GetSelectedValueInt();
                     cocina.Precio = nudPrecio.Value;
 
                     try
@@ -229,7 +228,6 @@ namespace GyCAP.UI.EstructuraProducto
                         Data.dsCocina.COCINASRow rowCocina = dsCocina.COCINAS.NewCOCINASRow();
                         rowCocina.BeginEdit();
                         rowCocina.COC_CODIGO = cocina.CodigoCocina;
-                        rowCocina.ECOC_CODIGO = cocina.Estado.Codigo;
                         rowCocina.MOD_CODIGO = cocina.Modelo.Codigo;
                         rowCocina.MCA_CODIGO = cocina.Marca.Codigo;
                         rowCocina.COL_CODIGO = cocina.Color.Codigo;
@@ -238,7 +236,7 @@ namespace GyCAP.UI.EstructuraProducto
                         rowCocina.DESIG_CODIGO = cocina.Designacion.Codigo;
                         rowCocina.COC_PRECIO = cocina.Precio;
                         rowCocina.COC_CANTIDADSTOCK = 0;
-                        rowCocina.COC_ACTIVO = cbEstado.GetSelectedValueInt();
+                        rowCocina.COC_ACTIVO = cocina.Activo;
                         rowCocina.EndEdit();
                         dsCocina.COCINAS.AddCOCINASRow(rowCocina);
                         dsCocina.COCINAS.AcceptChanges();
@@ -281,8 +279,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cocina.Color.Codigo = cbColor.GetSelectedValueInt();
                     cocina.TerminacionHorno = new GyCAP.Entidades.Terminacion();
                     cocina.TerminacionHorno.Codigo = cbTerminacion.GetSelectedValueInt();
-                    cocina.Estado = new GyCAP.Entidades.EstadoCocina();
-                    cocina.Estado.Codigo = cbEstado.GetSelectedValueInt();
+                    cocina.Activo = cbEstado.GetSelectedValueInt();
                     cocina.Precio = nudPrecio.Value;
 
                     try
@@ -293,13 +290,13 @@ namespace GyCAP.UI.EstructuraProducto
                         Data.dsCocina.COCINASRow rowCocina = dsCocina.COCINAS.FindByCOC_CODIGO(cocina.CodigoCocina);
                         rowCocina.BeginEdit();
                         rowCocina.COC_CODIGO = cocina.CodigoCocina;
-                        rowCocina.ECOC_CODIGO = cocina.Estado.Codigo;
                         rowCocina.MOD_CODIGO = cocina.Modelo.Codigo;
                         rowCocina.MCA_CODIGO = cocina.Marca.Codigo;
                         rowCocina.COL_CODIGO = cocina.Color.Codigo;
                         rowCocina.COC_CODIGO_PRODUCTO = cocina.CodigoProducto;
                         rowCocina.TE_CODIGO = cocina.TerminacionHorno.Codigo;
                         rowCocina.DESIG_CODIGO = cocina.Designacion.Codigo;
+                        rowCocina.COC_ACTIVO = cocina.Activo;
                         rowCocina.COC_PRECIO = cocina.Precio;
                         rowCocina.EndEdit();
                         dsCocina.COCINAS.AcceptChanges();
@@ -497,7 +494,6 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsCocina.TERMINACIONES);
                 BLL.MarcaBLL.ObtenerTodos(dsCocina.MARCAS);
-                BLL.EstadoCocinaBLL.ObtenerEstados(dsCocina.ESTADO_COCINAS);
                 BLL.ModeloCocinaBLL.ObtenerTodos(dsCocina.MODELOS_COCINAS);
                 BLL.DesignacionBLL.ObtenerTodos(dsCocina.DESIGNACIONES);
                 BLL.ColorBLL.ObtenerTodos(dsCocina.COLORES);
@@ -513,20 +509,19 @@ namespace GyCAP.UI.EstructuraProducto
             dgvListaCocina.Columns.Add("COC_CODIGO_PRODUCTO","Código");
             dgvListaCocina.Columns.Add("MOD_CODIGO", "Modelo");
             dgvListaCocina.Columns.Add("MCA_CODIGO", "Marca");
-            dgvListaCocina.Columns.Add("ECOC_CODIGO", "Estado");
+            dgvListaCocina.Columns.Add("COC_ESTADO", "Estado");
             dgvListaCocina.Columns["COC_CODIGO_PRODUCTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListaCocina.Columns["MOD_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListaCocina.Columns["MCA_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvListaCocina.Columns["ECOC_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvListaCocina.Columns["COC_ESTADO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             //dgvListaCocina.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvListaCocina.Columns["COC_CODIGO_PRODUCTO"].DataPropertyName = "COC_CODIGO_PRODUCTO";
             dgvListaCocina.Columns["MOD_CODIGO"].DataPropertyName = "MOD_CODIGO";
             dgvListaCocina.Columns["MCA_CODIGO"].DataPropertyName = "MCA_CODIGO";
-            dgvListaCocina.Columns["ECOC_CODIGO"].DataPropertyName = "ECOC_CODIGO";
+            dgvListaCocina.Columns["COC_ESTADO"].DataPropertyName = "COC_ACTIVO";
             
             //Dataviews
             dvMarcaBuscar = new DataView(dsCocina.MARCAS);
-            dvEstadoBuscar = new DataView(dsCocina.ESTADO_COCINAS);
             dvTerminacionBuscar = new DataView(dsCocina.TERMINACIONES);
             dvCocinas = new DataView(dsCocina.COCINAS);
             dvCocinas.Sort = "COC_CODIGO_PRODUCTO";
@@ -536,14 +531,15 @@ namespace GyCAP.UI.EstructuraProducto
             dvDesignacion = new DataView(dsCocina.DESIGNACIONES);
             dvColor = new DataView(dsCocina.COLORES);
             dvTerminacion = new DataView(dsCocina.TERMINACIONES);
-            dvEstado = new DataView(dsCocina.ESTADO_COCINAS);
-
+            
             //Combos
             cbMarcaBuscar.SetDatos(dvMarcaBuscar, "MCA_CODIGO", "MCA_NOMBRE", "--TODOS--", true);
-            cbEstadoBuscar.SetDatos(dvEstadoBuscar, "ECOC_CODIGO", "ECOC_NOMBRE", "--TODOS--", true);
+            string[] nombres = { "Activa", "Inactiva"};
+            int[] valores = {1, 0 };
+            cbEstadoBuscar.SetDatos(nombres, valores, "--TODOS--", true);
             cbTerminacionBuscar.SetDatos(dvTerminacionBuscar, "TE_CODIGO", "TE_NOMBRE", "--TODOS--", true);
             cbMarca.SetDatos(dvMarca, "MCA_CODIGO", "MCA_NOMBRE", "Seleccione", false);
-            cbEstado.SetDatos(dvEstado, "ECOC_CODIGO", "ECOC_NOMBRE", "Seleccione", false);
+            cbEstado.SetDatos(nombres, valores, "Seleccione", false);
             cbTerminacion.SetDatos(dvTerminacion, "TE_CODIGO", "TE_NOMBRE", "Seleccione", false);            
             cbModelo.SetDatos(dvModelo, "MOD_CODIGO", "MOD_NOMBRE", "Seleccione", false);
             cbDesignacion.SetDatos(dvDesignacion, "DESIG_CODIGO", "DESIG_NOMBRE", "Seleccione", false);
