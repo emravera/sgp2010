@@ -242,5 +242,40 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
             if (cabeceraPersistente) { this.SelectedIndex = 0; }
             else { this.SelectedIndex = -1; }
         }
+
+        /// <summary>
+        /// Carga los datos al combobox desde un array.
+        /// Contiene una cabecera que puede formar parte de los items del combobox o como un simple texto. 
+        /// La cabecera persistente que forma parte de los items se carga con valor -1 y se selecciona por defecto.
+        /// La cabecera no persistente (como texto) desaparece al desplegar la lista del combobox u obtener el foco,
+        /// se selecciona por defecto el índice -1.
+        /// </summary>
+        /// <param name="dataview">El dataview con los datos a cargar.</param>
+        /// <param name="valueMember">El campo de dónde se tomará el valor.</param>
+        /// <param name="displayMember">El campo de dónde se tomará el string a mostrar.</param>
+        /// <param name="textoCabecera">El texto de la cabecera.</param>
+        /// <param name="cabeceraPersistente">True para que forme parte de los items, false para simple texto.</param>
+        public void SetDatos(string[] nombres, int[] valores, string textoCabecera, bool cabeceraPersistente)
+        {
+            persistente = cabeceraPersistente;
+            this.Items.Clear();
+            IList<ItemLista> lista = new List<ItemLista>();
+            if (cabeceraPersistente) { lista.Add(new ItemLista(-1, textoCabecera)); }
+            else { SetTexto(textoCabecera); }
+
+            if (nombres.Length > 0 && valores.Length > 0 && nombres.Length == valores.Length)
+            {
+                for (int i = 0; i < valores.Length; i++)
+                {
+                    lista.Add(new ItemLista(valores[i], nombres[i]));
+                }
+            }
+            this.DataSource = lista;
+            this.DisplayMember = "Name";
+            this.ValueMember = "Value";
+
+            if (cabeceraPersistente) { this.SelectedIndex = 0; }
+            else { this.SelectedIndex = -1; }
+        }
     }
 }
