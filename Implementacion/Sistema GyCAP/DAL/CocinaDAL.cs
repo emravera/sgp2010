@@ -24,7 +24,7 @@ namespace GyCAP.DAL
                         ,[coc_cantidadstock]
                         ,[coc_activo]
                         ,[coc_precio])
-                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8)";
+                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8) SELECT @@Identity";
 
             object[] valorParametros = { cocina.Color.Codigo,
                                          cocina.Modelo.Codigo,

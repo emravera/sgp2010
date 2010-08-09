@@ -8,7 +8,7 @@ namespace GyCAP.Entidades
     public class Provincia
     {
         private int codigo;
-        private String nombre;
+        private string nombre;
 
         public int Codigo
         {
@@ -16,7 +16,7 @@ namespace GyCAP.Entidades
             set { codigo = value; }
         }
         
-        public String Nombre
+        public string Nombre
         {
             get { return nombre; }
             set { nombre = value; }

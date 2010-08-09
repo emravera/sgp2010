@@ -54,11 +54,23 @@
     <Compile Include="frmCapacidadEmpleado.Designer.cs">
       <DependentUpon>frmCapacidadEmpleado.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmLocalidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLocalidad.Designer.cs">
+      <DependentUpon>frmLocalidad.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMarca.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMarca.Designer.cs">
       <DependentUpon>frmMarca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProvincia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProvincia.Designer.cs">
+      <DependentUpon>frmProvincia.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSectorTrabajo.cs">
       <SubType>Form</SubType>
@@ -84,8 +96,16 @@
       <DependentUpon>frmCapacidadEmpleado.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmLocalidad.resx">
+      <DependentUpon>frmLocalidad.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMarca.resx">
       <DependentUpon>frmMarca.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProvincia.resx">
+      <DependentUpon>frmProvincia.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSectorTrabajo.resx">

@@ -37,6 +37,8 @@
             this.scDown = new System.Windows.Forms.SplitContainer();
             this.flpMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.panelLocalidad = new System.Windows.Forms.Panel();
+            this.btnConsultarLocalidad = new System.Windows.Forms.Button();
+            this.btnNuevoLocalidad = new System.Windows.Forms.Button();
             this.btnMarca = new System.Windows.Forms.Button();
             this.panelMarca = new System.Windows.Forms.Panel();
             this.btnConsultarMarca = new System.Windows.Forms.Button();
@@ -45,6 +47,7 @@
             this.panelProcesoFabricacion = new System.Windows.Forms.Panel();
             this.btnProvincia = new System.Windows.Forms.Button();
             this.panelProvincia = new System.Windows.Forms.Panel();
+            this.btnConsultarProvincia = new System.Windows.Forms.Button();
             this.btnSectorTrabajo = new System.Windows.Forms.Button();
             this.panelSectorTrabajo = new System.Windows.Forms.Panel();
             this.btnConsultarSectorTrabajo = new System.Windows.Forms.Button();
@@ -63,7 +66,9 @@
             this.scDown.Panel2.SuspendLayout();
             this.scDown.SuspendLayout();
             this.flpMenu.SuspendLayout();
+            this.panelLocalidad.SuspendLayout();
             this.panelMarca.SuspendLayout();
+            this.panelProvincia.SuspendLayout();
             this.panelSectorTrabajo.SuspendLayout();
             this.panelTipoUnidadMedida.SuspendLayout();
             this.panelSalir.SuspendLayout();
@@ -121,6 +126,7 @@
             // 
             this.btnConsultarCapacidadEmpleado.AutoSize = true;
             this.btnConsultarCapacidadEmpleado.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConsultarCapacidadEmpleado.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConsultarCapacidadEmpleado.FlatAppearance.BorderSize = 0;
             this.btnConsultarCapacidadEmpleado.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnConsultarCapacidadEmpleado.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -139,6 +145,7 @@
             // 
             this.btnNuevoCapacidadEmpleado.AutoSize = true;
             this.btnNuevoCapacidadEmpleado.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNuevoCapacidadEmpleado.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNuevoCapacidadEmpleado.FlatAppearance.BorderSize = 0;
             this.btnNuevoCapacidadEmpleado.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnNuevoCapacidadEmpleado.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -205,21 +212,64 @@
             // 
             // panelLocalidad
             // 
+            this.panelLocalidad.AutoSize = true;
+            this.panelLocalidad.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelLocalidad.BackColor = System.Drawing.Color.Silver;
+            this.panelLocalidad.Controls.Add(this.btnConsultarLocalidad);
+            this.panelLocalidad.Controls.Add(this.btnNuevoLocalidad);
             this.panelLocalidad.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelLocalidad.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelLocalidad.Location = new System.Drawing.Point(0, 204);
             this.panelLocalidad.Margin = new System.Windows.Forms.Padding(0);
             this.panelLocalidad.Name = "panelLocalidad";
-            this.panelLocalidad.Size = new System.Drawing.Size(158, 87);
+            this.panelLocalidad.Size = new System.Drawing.Size(158, 152);
             this.panelLocalidad.TabIndex = 2;
             this.panelLocalidad.Visible = false;
+            // 
+            // btnConsultarLocalidad
+            // 
+            this.btnConsultarLocalidad.AutoSize = true;
+            this.btnConsultarLocalidad.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConsultarLocalidad.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConsultarLocalidad.FlatAppearance.BorderSize = 0;
+            this.btnConsultarLocalidad.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnConsultarLocalidad.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarLocalidad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsultarLocalidad.Image = global::GyCAP.UI.Soporte.Properties.Resources.Find_48;
+            this.btnConsultarLocalidad.Location = new System.Drawing.Point(48, 78);
+            this.btnConsultarLocalidad.Name = "btnConsultarLocalidad";
+            this.btnConsultarLocalidad.Size = new System.Drawing.Size(63, 71);
+            this.btnConsultarLocalidad.TabIndex = 3;
+            this.btnConsultarLocalidad.Text = "Consultar";
+            this.btnConsultarLocalidad.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultarLocalidad.UseVisualStyleBackColor = true;
+            this.btnConsultarLocalidad.Click += new System.EventHandler(this.btnConsultarLocalidad_Click);
+            // 
+            // btnNuevoLocalidad
+            // 
+            this.btnNuevoLocalidad.AutoSize = true;
+            this.btnNuevoLocalidad.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNuevoLocalidad.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNuevoLocalidad.FlatAppearance.BorderSize = 0;
+            this.btnNuevoLocalidad.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnNuevoLocalidad.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnNuevoLocalidad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNuevoLocalidad.Image = global::GyCAP.UI.Soporte.Properties.Resources.New_48;
+            this.btnNuevoLocalidad.Location = new System.Drawing.Point(52, 0);
+            this.btnNuevoLocalidad.Name = "btnNuevoLocalidad";
+            this.btnNuevoLocalidad.Size = new System.Drawing.Size(54, 71);
+            this.btnNuevoLocalidad.TabIndex = 2;
+            this.btnNuevoLocalidad.Text = " Nuevo";
+            this.btnNuevoLocalidad.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNuevoLocalidad.UseVisualStyleBackColor = true;
+            this.btnNuevoLocalidad.Click += new System.EventHandler(this.btnNuevoLocalidad_Click);
             // 
             // btnMarca
             // 
             this.btnMarca.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMarca.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMarca.Location = new System.Drawing.Point(0, 291);
+            this.btnMarca.Location = new System.Drawing.Point(0, 356);
             this.btnMarca.Margin = new System.Windows.Forms.Padding(0);
             this.btnMarca.Name = "btnMarca";
             this.btnMarca.Size = new System.Drawing.Size(158, 25);
@@ -238,7 +288,7 @@
             this.panelMarca.Controls.Add(this.btnNuevoMarca);
             this.panelMarca.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelMarca.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMarca.Location = new System.Drawing.Point(0, 316);
+            this.panelMarca.Location = new System.Drawing.Point(0, 381);
             this.panelMarca.Margin = new System.Windows.Forms.Padding(0);
             this.panelMarca.Name = "panelMarca";
             this.panelMarca.Size = new System.Drawing.Size(158, 151);
@@ -249,6 +299,7 @@
             // 
             this.btnConsultarMarca.AutoSize = true;
             this.btnConsultarMarca.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConsultarMarca.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConsultarMarca.FlatAppearance.BorderSize = 0;
             this.btnConsultarMarca.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnConsultarMarca.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -267,6 +318,7 @@
             // 
             this.btnNuevoMarca.AutoSize = true;
             this.btnNuevoMarca.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNuevoMarca.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNuevoMarca.FlatAppearance.BorderSize = 0;
             this.btnNuevoMarca.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnNuevoMarca.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -286,7 +338,7 @@
             this.btnProcesoFabricacion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnProcesoFabricacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProcesoFabricacion.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProcesoFabricacion.Location = new System.Drawing.Point(0, 467);
+            this.btnProcesoFabricacion.Location = new System.Drawing.Point(0, 532);
             this.btnProcesoFabricacion.Margin = new System.Windows.Forms.Padding(0);
             this.btnProcesoFabricacion.Name = "btnProcesoFabricacion";
             this.btnProcesoFabricacion.Size = new System.Drawing.Size(158, 25);
@@ -324,21 +376,44 @@
             // 
             // panelProvincia
             // 
+            this.panelProvincia.AutoSize = true;
+            this.panelProvincia.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelProvincia.BackColor = System.Drawing.Color.Silver;
+            this.panelProvincia.Controls.Add(this.btnConsultarProvincia);
             this.panelProvincia.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelProvincia.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelProvincia.Location = new System.Drawing.Point(158, 112);
             this.panelProvincia.Margin = new System.Windows.Forms.Padding(0);
             this.panelProvincia.Name = "panelProvincia";
-            this.panelProvincia.Size = new System.Drawing.Size(158, 87);
+            this.panelProvincia.Size = new System.Drawing.Size(158, 82);
             this.panelProvincia.TabIndex = 8;
             this.panelProvincia.Visible = false;
+            // 
+            // btnConsultarProvincia
+            // 
+            this.btnConsultarProvincia.AutoSize = true;
+            this.btnConsultarProvincia.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConsultarProvincia.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConsultarProvincia.FlatAppearance.BorderSize = 0;
+            this.btnConsultarProvincia.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnConsultarProvincia.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarProvincia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsultarProvincia.Image = global::GyCAP.UI.Soporte.Properties.Resources.Find_48;
+            this.btnConsultarProvincia.Location = new System.Drawing.Point(48, 8);
+            this.btnConsultarProvincia.Name = "btnConsultarProvincia";
+            this.btnConsultarProvincia.Size = new System.Drawing.Size(63, 71);
+            this.btnConsultarProvincia.TabIndex = 2;
+            this.btnConsultarProvincia.Text = "Consultar";
+            this.btnConsultarProvincia.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultarProvincia.UseVisualStyleBackColor = true;
+            this.btnConsultarProvincia.Click += new System.EventHandler(this.btnConsultarProvincia_Click);
             // 
             // btnSectorTrabajo
             // 
             this.btnSectorTrabajo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSectorTrabajo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSectorTrabajo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSectorTrabajo.Location = new System.Drawing.Point(158, 199);
+            this.btnSectorTrabajo.Location = new System.Drawing.Point(158, 194);
             this.btnSectorTrabajo.Margin = new System.Windows.Forms.Padding(0);
             this.btnSectorTrabajo.Name = "btnSectorTrabajo";
             this.btnSectorTrabajo.Size = new System.Drawing.Size(158, 25);
@@ -357,7 +432,7 @@
             this.panelSectorTrabajo.Controls.Add(this.btnNuevoSectorTrabajo);
             this.panelSectorTrabajo.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelSectorTrabajo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSectorTrabajo.Location = new System.Drawing.Point(158, 224);
+            this.panelSectorTrabajo.Location = new System.Drawing.Point(158, 219);
             this.panelSectorTrabajo.Margin = new System.Windows.Forms.Padding(0);
             this.panelSectorTrabajo.Name = "panelSectorTrabajo";
             this.panelSectorTrabajo.Size = new System.Drawing.Size(158, 156);
@@ -368,6 +443,7 @@
             // 
             this.btnConsultarSectorTrabajo.AutoSize = true;
             this.btnConsultarSectorTrabajo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConsultarSectorTrabajo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConsultarSectorTrabajo.FlatAppearance.BorderSize = 0;
             this.btnConsultarSectorTrabajo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnConsultarSectorTrabajo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -386,6 +462,7 @@
             // 
             this.btnNuevoSectorTrabajo.AutoSize = true;
             this.btnNuevoSectorTrabajo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNuevoSectorTrabajo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNuevoSectorTrabajo.FlatAppearance.BorderSize = 0;
             this.btnNuevoSectorTrabajo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnNuevoSectorTrabajo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -405,7 +482,7 @@
             this.btnTipoRepuesto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTipoRepuesto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTipoRepuesto.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTipoRepuesto.Location = new System.Drawing.Point(158, 380);
+            this.btnTipoRepuesto.Location = new System.Drawing.Point(158, 375);
             this.btnTipoRepuesto.Margin = new System.Windows.Forms.Padding(0);
             this.btnTipoRepuesto.Name = "btnTipoRepuesto";
             this.btnTipoRepuesto.Size = new System.Drawing.Size(158, 25);
@@ -419,7 +496,7 @@
             // 
             this.panelTipoRepuesto.BackColor = System.Drawing.Color.Silver;
             this.panelTipoRepuesto.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelTipoRepuesto.Location = new System.Drawing.Point(158, 405);
+            this.panelTipoRepuesto.Location = new System.Drawing.Point(158, 400);
             this.panelTipoRepuesto.Margin = new System.Windows.Forms.Padding(0);
             this.panelTipoRepuesto.Name = "panelTipoRepuesto";
             this.panelTipoRepuesto.Size = new System.Drawing.Size(158, 87);
@@ -431,7 +508,7 @@
             this.btnTipoUnidadMedida.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTipoUnidadMedida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTipoUnidadMedida.Font = new System.Drawing.Font("Tahoma", 7.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTipoUnidadMedida.Location = new System.Drawing.Point(158, 492);
+            this.btnTipoUnidadMedida.Location = new System.Drawing.Point(158, 487);
             this.btnTipoUnidadMedida.Margin = new System.Windows.Forms.Padding(0);
             this.btnTipoUnidadMedida.Name = "btnTipoUnidadMedida";
             this.btnTipoUnidadMedida.Size = new System.Drawing.Size(158, 25);
@@ -460,6 +537,7 @@
             // 
             this.btnConsultarTUMED.AutoSize = true;
             this.btnConsultarTUMED.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConsultarTUMED.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConsultarTUMED.FlatAppearance.BorderSize = 0;
             this.btnConsultarTUMED.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnConsultarTUMED.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -560,8 +638,12 @@
             this.scDown.ResumeLayout(false);
             this.flpMenu.ResumeLayout(false);
             this.flpMenu.PerformLayout();
+            this.panelLocalidad.ResumeLayout(false);
+            this.panelLocalidad.PerformLayout();
             this.panelMarca.ResumeLayout(false);
             this.panelMarca.PerformLayout();
+            this.panelProvincia.ResumeLayout(false);
+            this.panelProvincia.PerformLayout();
             this.panelSectorTrabajo.ResumeLayout(false);
             this.panelSectorTrabajo.PerformLayout();
             this.panelTipoUnidadMedida.ResumeLayout(false);
@@ -605,6 +687,9 @@
         private System.Windows.Forms.Button btnNuevoMarca;
         private System.Windows.Forms.Button btnConsultarCapacidadEmpleado;
         private System.Windows.Forms.Button btnNuevoCapacidadEmpleado;
+        private System.Windows.Forms.Button btnConsultarLocalidad;
+        private System.Windows.Forms.Button btnNuevoLocalidad;
+        private System.Windows.Forms.Button btnConsultarProvincia;
 
 
     }
