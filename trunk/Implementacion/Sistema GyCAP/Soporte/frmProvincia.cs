@@ -9,52 +9,47 @@ using System.Windows.Forms;
 
 namespace GyCAP.UI.Soporte
 {
-    public partial class frmTipoUnidadMedida : Form
+    public partial class frmProvincia : Form
     {
-        private static frmTipoUnidadMedida _frmTipoUnidadMedida = null;
-        private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
-        private DataView dvTipoUnidadMedida;
+        private static frmProvincia _frmProvincia = null;
+        Data.dsProveedor dsProvincia = new GyCAP.Data.dsProveedor();
+        private DataView dvProvincias;
         private enum estadoUI { inicio, modificar };
         private estadoUI estadoInterface;
         
-        public frmTipoUnidadMedida()
+        public frmProvincia()
         {
             InitializeComponent();
 
-            //Para que no genere las columnas automáticamente
             dgvLista.AutoGenerateColumns = false;
-            //Agregamos las columnas
-            dgvLista.Columns.Add("TUMED_NOMBRE", "Nombre");
-            dgvLista.Columns["TUMED_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            dgvLista.Columns["TUMED_NOMBRE"].DataPropertyName = "TUMED_NOMBRE";
-            //Creamos el dataview y lo asignamos a la grilla
-            BLL.TipoUnidadMedidaBLL.ObtenerTodos(dsUnidadMedida);
-            dvTipoUnidadMedida = new DataView(dsUnidadMedida.TIPOS_UNIDADES_MEDIDA);
-            dvTipoUnidadMedida.Sort = "TUMED_NOMBRE ASC";
-            dgvLista.DataSource = dvTipoUnidadMedida;
-            //Seteamos el estado de la interfaz
+            dgvLista.Columns.Add("PCIA_NOMBRE", "Nombre");
+            dgvLista.Columns["PCIA_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLista.Columns["PCIA_NOMBRE"].DataPropertyName = "PCIA_NOMBRE";
+            BLL.ProvinciaBLL.ObtenerProvincias(dsProvincia.PROVINCIAS);
+            dvProvincias = new DataView(dsProvincia.PROVINCIAS);
+            dvProvincias.Sort = "PCIA_NOMBRE ASC";
+            dgvLista.DataSource = dvProvincias;
+            
             SetInterface(estadoUI.inicio);
         }
 
-        //Método para evitar la creación de más de una pantalla
-        public static frmTipoUnidadMedida Instancia
+        public static frmProvincia Instancia
         {
             get
             {
-                if (_frmTipoUnidadMedida == null || _frmTipoUnidadMedida.IsDisposed)
+                if (_frmProvincia == null || _frmProvincia.IsDisposed)
                 {
-                    _frmTipoUnidadMedida = new frmTipoUnidadMedida();
+                    _frmProvincia = new frmProvincia();
                 }
                 else
                 {
-                    _frmTipoUnidadMedida.BringToFront();
+                    _frmProvincia.BringToFront();
                 }
-                return _frmTipoUnidadMedida;
+                return _frmProvincia;
             }
             set
             {
-                _frmTipoUnidadMedida = value;
+                _frmProvincia = value;
             }
         }
 
@@ -69,15 +64,15 @@ namespace GyCAP.UI.Soporte
         {
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
-                int codigo = Convert.ToInt32(dvTipoUnidadMedida[dgvLista.SelectedRows[0].Index]["tumed_codigo"]);
-                txtNombre.Text = dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.FindByTUMED_CODIGO(codigo).TUMED_NOMBRE;
+                int codigo = Convert.ToInt32(dvProvincias[dgvLista.SelectedRows[0].Index]["pcia_codigo"]);
+                txtNombre.Text = dsProvincia.PROVINCIAS.FindByPCIA_CODIGO(codigo).PCIA_NOMBRE;
                 txtNombre.Focus();
                 SetInterface(estadoUI.modificar);
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Tipo de Unidad de Medida de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            } 
+                MessageBox.Show("Debe seleccionar una Provincia de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -86,18 +81,18 @@ namespace GyCAP.UI.Soporte
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el Tipo de Unidad de Medida seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar la Provincia seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
                     {
                         //Obtenemos
-                        int codigo = Convert.ToInt32(dvTipoUnidadMedida[dgvLista.SelectedRows[0].Index]["tumed_codigo"]);
+                        int codigo = Convert.ToInt32(dvProvincias[dgvLista.SelectedRows[0].Index]["pcia_codigo"]);
                         //Lo eliminamos de la DB
-                        BLL.TipoUnidadMedidaBLL.Eliminar(codigo);
+                        BLL.ProvinciaBLL.Eliminar(codigo);
                         //Lo eliminamos del dataset
-                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.FindByTUMED_CODIGO(codigo).Delete();
-                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AcceptChanges();
+                        dsProvincia.PROVINCIAS.FindByPCIA_CODIGO(codigo).Delete();
+                        dsProvincia.PROVINCIAS.AcceptChanges();
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
@@ -105,13 +100,13 @@ namespace GyCAP.UI.Soporte
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Tipo de Unidad de Medida de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debe seleccionar una Provincia de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -120,28 +115,25 @@ namespace GyCAP.UI.Soporte
             //Revisamos que escribió algo
             if (txtNombre.Text != String.Empty)
             {
-                Entidades.TipoUnidadMedida tipoUnidadMedida = new GyCAP.Entidades.TipoUnidadMedida();
-
                 //Revisamos que está haciendo
                 if (estadoInterface != estadoUI.modificar)
                 {
                     //Está cargando uno nuevo
-                    tipoUnidadMedida.Nombre = txtNombre.Text;
                     try
                     {
                         //Primero lo creamos en la db
-                        tipoUnidadMedida.Codigo = BLL.TipoUnidadMedidaBLL.Insertar(tipoUnidadMedida);
+                        int codigo = BLL.ProvinciaBLL.Insertar(txtNombre.Text);
                         //Ahora lo agregamos al dataset
-                        Data.dsUnidadMedida.TIPOS_UNIDADES_MEDIDARow rowTipoUnidadMedida = dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.NewTIPOS_UNIDADES_MEDIDARow();
+                        Data.dsProveedor.PROVINCIASRow row = dsProvincia.PROVINCIAS.NewPROVINCIASRow();
                         //Indicamos que comienza la edición de la fila
-                        rowTipoUnidadMedida.BeginEdit();
-                        rowTipoUnidadMedida.TUMED_CODIGO = tipoUnidadMedida.Codigo;
-                        rowTipoUnidadMedida.TUMED_NOMBRE = tipoUnidadMedida.Nombre;
+                        row.BeginEdit();
+                        row.PCIA_CODIGO = codigo;
+                        row.PCIA_NOMBRE = txtNombre.Text;
                         //Termina la edición de la fila
-                        rowTipoUnidadMedida.EndEdit();
+                        row.EndEdit();
                         //Agregamos la fila al dataset y aceptamos los cambios
-                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AddTIPOS_UNIDADES_MEDIDARow(rowTipoUnidadMedida);
-                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AcceptChanges();
+                        dsProvincia.PROVINCIAS.AddPROVINCIASRow(row);
+                        dsProvincia.PROVINCIAS.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
@@ -158,19 +150,20 @@ namespace GyCAP.UI.Soporte
                 {
                     //Está modificando
                     //Primero obtenemos su código del dataview que está realacionado a la fila seleccionada
-                    tipoUnidadMedida.Codigo = Convert.ToInt32(dvTipoUnidadMedida[dgvLista.SelectedRows[0].Index]["tumed_codigo"]);
+                    Entidades.Provincia provincia = new GyCAP.Entidades.Provincia();
+                    provincia.Codigo = Convert.ToInt32(dvProvincias[dgvLista.SelectedRows[0].Index]["pcia_codigo"]);
                     //Segundo obtenemos el nuevo nombre que ingresó el usuario
-                    tipoUnidadMedida.Nombre = txtNombre.Text;
+                    provincia.Nombre = txtNombre.Text;
                     try
                     {
                         //Lo actualizamos en la DB
-                        BLL.TipoUnidadMedidaBLL.Actualizar(tipoUnidadMedida);
+                        BLL.ProvinciaBLL.Actualizar(provincia);
                         //Lo actualizamos en el dataset y aceptamos los cambios
-                        Data.dsUnidadMedida.TIPOS_UNIDADES_MEDIDARow rowTipoUnidadMedida = dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.FindByTUMED_CODIGO(tipoUnidadMedida.Codigo);
-                        rowTipoUnidadMedida.BeginEdit();
-                        rowTipoUnidadMedida.TUMED_NOMBRE = txtNombre.Text;
-                        rowTipoUnidadMedida.EndEdit();
-                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AcceptChanges();
+                        Data.dsProveedor.PROVINCIASRow row = dsProvincia.PROVINCIAS.FindByPCIA_CODIGO(provincia.Codigo);
+                        row.BeginEdit();
+                        row.PCIA_NOMBRE = txtNombre.Text;
+                        row.EndEdit();
+                        dsProvincia.PROVINCIAS.AcceptChanges();
                         //Avisamos que estuvo todo ok
                         MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //Y por último seteamos el estado de la interfaz
@@ -181,7 +174,6 @@ namespace GyCAP.UI.Soporte
                         MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AcceptChanges();
             }
             else
             {
@@ -205,7 +197,7 @@ namespace GyCAP.UI.Soporte
                 case estadoUI.inicio:
                     bool hayDatos;
 
-                    if (dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.Rows.Count == 0)
+                    if (dsProvincia.PROVINCIAS.Rows.Count == 0)
                     {
                         hayDatos = false;
                     }
@@ -220,7 +212,7 @@ namespace GyCAP.UI.Soporte
                     btnCancelar.Enabled = false;
                     dgvLista.Enabled = true;
                     estadoInterface = estadoUI.inicio;
-                    break;                
+                    break;
                 case estadoUI.modificar:
                     txtNombre.ReadOnly = false;
                     btnCancelar.Enabled = true;
@@ -232,9 +224,9 @@ namespace GyCAP.UI.Soporte
                 default:
                     break;
             }
-        }         
+        }
 
-        private void frmTipoUnidadMedida_Activated(object sender, EventArgs e)
+        private void frmProvincia_Activated(object sender, EventArgs e)
         {
             if (txtNombre.Enabled == true)
             {
@@ -248,8 +240,5 @@ namespace GyCAP.UI.Soporte
         }
 
         #endregion
-
-
-
     }
 }

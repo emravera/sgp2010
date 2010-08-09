@@ -146,6 +146,27 @@ namespace GyCAP.UI.Soporte
         #endregion
 
         #region Localidad
+
+        private void btnNuevoLocalidad_Click(object sender, EventArgs e)
+        {
+            frmLocalidad.Instancia.TopLevel = false;
+            frmLocalidad.Instancia.Parent = areaTrabajo;
+            frmLocalidad.Instancia.Location = PosicionarFormulario();
+            frmLocalidad.Instancia.SetEstadoInicial(frmLocalidad.estadoInicialNuevo);
+            frmLocalidad.Instancia.Show();
+            frmLocalidad.Instancia.Focus();
+        }
+
+        private void btnConsultarLocalidad_Click(object sender, EventArgs e)
+        {
+            frmLocalidad.Instancia.TopLevel = false;
+            frmLocalidad.Instancia.Parent = areaTrabajo;
+            frmLocalidad.Instancia.Location = PosicionarFormulario();
+            frmLocalidad.Instancia.SetEstadoInicial(frmLocalidad.estadoInicialConsultar);
+            frmLocalidad.Instancia.Show();
+            frmLocalidad.Instancia.Focus();
+        }
+
         #endregion
 
         #region Marca
@@ -176,6 +197,16 @@ namespace GyCAP.UI.Soporte
         #endregion
 
         #region Provincia
+
+        private void btnConsultarProvincia_Click(object sender, EventArgs e)
+        {
+            frmProvincia.Instancia.TopLevel = false;
+            frmProvincia.Instancia.Parent = areaTrabajo;
+            frmProvincia.Instancia.Location = PosicionarFormulario();
+            frmProvincia.Instancia.Show();
+            frmProvincia.Instancia.Focus();
+        }
+
         #endregion
 
         #region Sector Trabajo
@@ -217,5 +248,6 @@ namespace GyCAP.UI.Soporte
         }
 
         #endregion
+ 
     }
 }
