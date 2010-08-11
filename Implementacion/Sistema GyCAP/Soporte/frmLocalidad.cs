@@ -285,7 +285,6 @@ namespace GyCAP.UI.Soporte
                     btnConsultar.Enabled = hayDatos;
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
-                    txtNombreBuscar.Text = String.Empty;
                     tcLocalidad.SelectedTab = tpBuscar;
                     txtNombreBuscar.Focus();
                     break;
