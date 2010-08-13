@@ -17,9 +17,9 @@ alter table COCINAS
 alter table COCINAS
    add constraint cocina_designacion_fk foreign key (DESIG_CODIGO)
       references DESIGNACIONES (DESIG_CODIGO)
-alter table COCINAS
+/*alter table COCINAS
    add constraint cocina_estadoCocina_fk foreign key (ECOC_CODIGO)
-      references ESTADO_COCINAS (ECOC_CODIGO)
+      references ESTADO_COCINAS (ECOC_CODIGO)*/	/*-MODIFICACION 13/08/2010-*/
 alter table COCINAS
    add constraint cocina_marca_fk foreign key (MCA_CODIGO)
       references MARCAS (MCA_CODIGO)
@@ -478,3 +478,26 @@ alter table DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL
 alter table DETALLE_PLAN_ANUAL
    add constraint detallePlanAnual_planAnual_fk foreign key (PAN_CODIGO)
       references PLANES_ANUALES (PAN_CODIGO)
+
+
+
+/*--------AGREGADO 13/08/2010--------*/
+
+
+/*==============================================================*/
+/* Table: EJEMPLARES_COCINA                                     */
+/*==============================================================*/
+alter table EJEMPLARES_COCINA
+   add constraint ejemplarCocina_cocina_fk foreign key (COC_CODIGO)
+      references COCINAS (COC_CODIGO)
+alter table EJEMPLARES_COCINA
+   add constraint ejemplarCocina_estadoCocina_fk foreign key (ECOC_CODIGO)
+      references ESTADO_COCINAS (ECOC_CODIGO)
+
+
+/*==============================================================*/
+/* Table: LOTES_COCINA                                          */
+/*==============================================================*/
+alter table LOTES_COCINA
+   add constraint loteCocina_cocina_fk foreign key (COC_CODIGO)
+      references COCINAS (COC_CODIGO)
