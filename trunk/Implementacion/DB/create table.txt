@@ -46,7 +46,7 @@ create table CLIENTES (
 /*==============================================================*/
 create table COCINAS (
    COC_CODIGO           numeric(10)          identity,  /* Marce 07/07 antes varchar(10) */
-   ECOC_CODIGO          numeric(10)          not null,	/*-MODIFICACION 23/07/2010-*/
+ /*ECOC_CODIGO          numeric(10)          not null,*/	/*-MODIFICACION 13/08/2010-*/
    COL_CODIGO           numeric(3)           not null,	/*-MODIFICACION 23/07/2010-*/
    MOD_CODIGO           numeric(10)          not null,	/*-MODIFICACION 23/07/2010-*/
    MCA_CODIGO           numeric(10)          not null,	/*-MODIFICACION 23/07/2010-*/
@@ -843,4 +843,49 @@ create table DETALLE_PLAN_ANUAL (
    DPAN_MES             varchar(10)          null,
    DPAN_CANTIDADMES     numeric(10)          null,
    constraint PK_DETALLE_PLAN_ANUAL primary key nonclustered (DPAN_CODIGO)
+)
+
+/*--------AGREGADO 13/08/2010--------*/
+
+/*==============================================================*/
+/* Table: EJEMPLARES_COCINA                                     */
+/*==============================================================*/
+
+
+create table EJEMPLARES_COCINA (
+   EJC_CODIGO           numeric(10)       identity,
+   COC_CODIGO           numeric(10)       not null,
+   EJC_NUMEROSERIE      varchar(80)       null,
+   ECOC_CODIGO          numeric(10)       null,
+   LOT_CODIGO           numeric(10)       null,
+   constraint PK_EJEMPLARES_COCINA primary key nonclustered (EJC_CODIGO)
+)
+
+/*--------AGREGADO 13/08/2010--------*/
+
+/*==============================================================*/
+/* Table: LOTES_COCINA                                          */
+/*==============================================================*/
+
+
+create table LOTES_COCINA (
+   LOT_CODIGO           numeric(10)       identity,
+   COC_CODIGO           numeric(10)       not null,
+   LOT_NOMBRE           varchar(80)       null,
+   LOT_DESDENUMEROSERIE varchar(80)       null,
+   LOT_HASTANUMEROSERIE varchar(80)       null,
+   constraint PK_LOTES_COCINA primary key nonclustered (LOT_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: LOTES_COCINA                                          */
+/*==============================================================*/
+
+
+create table TURNOS_TRABAJO(
+   TURNO_CODIGO         numeric(10)       identity,
+   TURNO_DENOMINACION   varchar(80)       not null,
+   TURNO_HORA_INICIO    numeric(10)       not null,
+   TURNO_HORA_FIN       numeric(10)       not null,
+   constraint PK_TURNOS_TRABAJO primary key nonclustered (TURNO_CODIGO)
 )
