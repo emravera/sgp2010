@@ -124,6 +124,12 @@
     <Compile Include="frmPieza.Designer.cs">
       <DependentUpon>frmPieza.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmProcesoFabricacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProcesoFabricacion.Designer.cs">
+      <DependentUpon>frmProcesoFabricacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSubconjunto.cs">
       <SubType>Form</SubType>
     </Compile>
