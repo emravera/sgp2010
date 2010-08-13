@@ -1,4 +1,4 @@
-﻿namespace GyCAP.UI.Soporte
+﻿namespace GyCAP.UI.RecursosFabricacion
 {
     partial class frmSectorTrabajo
     {
@@ -217,7 +217,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Image = global::GyCAP.UI.Soporte.Properties.Resources.lupa_20;
+            this.btnBuscar.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBuscar.Location = new System.Drawing.Point(379, 19);
             this.btnBuscar.Name = "btnBuscar";
@@ -325,7 +325,7 @@
             // 
             // btnNuevo
             // 
-            this.btnNuevo.Image = global::GyCAP.UI.Soporte.Properties.Resources.New_25;
+            this.btnNuevo.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.New_25;
             this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNuevo.Name = "btnNuevo";
@@ -336,7 +336,7 @@
             // 
             // btnConsultar
             // 
-            this.btnConsultar.Image = global::GyCAP.UI.Soporte.Properties.Resources.Find_25;
+            this.btnConsultar.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Find_25;
             this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnConsultar.Name = "btnConsultar";
@@ -347,7 +347,7 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Image = global::GyCAP.UI.Soporte.Properties.Resources.Text_Editor_25;
+            this.btnModificar.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Text_Editor_25;
             this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnModificar.Name = "btnModificar";
@@ -358,7 +358,7 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Image = global::GyCAP.UI.Soporte.Properties.Resources.Delete_25;
+            this.btnEliminar.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Delete_25;
             this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
@@ -374,7 +374,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Image = global::GyCAP.UI.Soporte.Properties.Resources.Salir_25;
+            this.btnSalir.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Salir_25;
             this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";

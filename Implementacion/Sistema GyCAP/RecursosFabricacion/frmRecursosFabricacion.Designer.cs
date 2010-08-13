@@ -36,8 +36,6 @@
             this.btnConsultarEmpleado = new System.Windows.Forms.Button();
             this.btnNuevoEmpleado = new System.Windows.Forms.Button();
             this.btnMaquina = new System.Windows.Forms.Button();
-            this.panelSalir = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.panelMaquina = new System.Windows.Forms.Panel();
             this.btnListadoMaquina = new System.Windows.Forms.Button();
             this.btnConsultarMaquina = new System.Windows.Forms.Button();
@@ -47,16 +45,23 @@
             this.panelProductividad = new System.Windows.Forms.Panel();
             this.btnIndiceProductividad = new System.Windows.Forms.Button();
             this.scDown = new System.Windows.Forms.SplitContainer();
+            this.btnSectorTrabajo = new System.Windows.Forms.Button();
+            this.panelSectorTrabajo = new System.Windows.Forms.Panel();
+            this.btnConsultarSectorTrabajo = new System.Windows.Forms.Button();
+            this.btnNuevoSectorTrabajo = new System.Windows.Forms.Button();
+            this.panelSalir = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.scUp.Panel1.SuspendLayout();
             this.scUp.SuspendLayout();
             this.panelEmpleado.SuspendLayout();
-            this.panelSalir.SuspendLayout();
             this.panelMaquina.SuspendLayout();
             this.flpMenu.SuspendLayout();
             this.panelProductividad.SuspendLayout();
             this.scDown.Panel1.SuspendLayout();
             this.scDown.Panel2.SuspendLayout();
             this.scDown.SuspendLayout();
+            this.panelSectorTrabajo.SuspendLayout();
+            this.panelSalir.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnEmpleado
@@ -201,34 +206,6 @@
             this.btnMaquina.UseVisualStyleBackColor = true;
             this.btnMaquina.Click += new System.EventHandler(this.btn_Click);
             // 
-            // panelSalir
-            // 
-            this.panelSalir.Controls.Add(this.button1);
-            this.panelSalir.Location = new System.Drawing.Point(158, 79);
-            this.panelSalir.Margin = new System.Windows.Forms.Padding(0);
-            this.panelSalir.Name = "panelSalir";
-            this.panelSalir.Size = new System.Drawing.Size(158, 87);
-            this.panelSalir.TabIndex = 15;
-            // 
-            // button1
-            // 
-            this.button1.AutoSize = true;
-            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Exit_48;
-            this.button1.Location = new System.Drawing.Point(48, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(54, 71);
-            this.button1.TabIndex = 2;
-            this.button1.Text = " Salir";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
             // panelMaquina
             // 
             this.panelMaquina.AutoSize = true;
@@ -313,6 +290,8 @@
             this.flpMenu.Controls.Add(this.panelMaquina);
             this.flpMenu.Controls.Add(this.btnProductividad);
             this.flpMenu.Controls.Add(this.panelProductividad);
+            this.flpMenu.Controls.Add(this.btnSectorTrabajo);
+            this.flpMenu.Controls.Add(this.panelSectorTrabajo);
             this.flpMenu.Controls.Add(this.panelSalir);
             this.flpMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpMenu.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -393,6 +372,101 @@
             this.scDown.SplitterWidth = 3;
             this.scDown.TabIndex = 3;
             // 
+            // btnSectorTrabajo
+            // 
+            this.btnSectorTrabajo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSectorTrabajo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSectorTrabajo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSectorTrabajo.Location = new System.Drawing.Point(158, 79);
+            this.btnSectorTrabajo.Margin = new System.Windows.Forms.Padding(0);
+            this.btnSectorTrabajo.Name = "btnSectorTrabajo";
+            this.btnSectorTrabajo.Size = new System.Drawing.Size(158, 25);
+            this.btnSectorTrabajo.TabIndex = 20;
+            this.btnSectorTrabajo.Text = "Sector de Trabajo";
+            this.btnSectorTrabajo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSectorTrabajo.UseVisualStyleBackColor = true;
+            // 
+            // panelSectorTrabajo
+            // 
+            this.panelSectorTrabajo.AutoSize = true;
+            this.panelSectorTrabajo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelSectorTrabajo.BackColor = System.Drawing.Color.Silver;
+            this.panelSectorTrabajo.Controls.Add(this.btnConsultarSectorTrabajo);
+            this.panelSectorTrabajo.Controls.Add(this.btnNuevoSectorTrabajo);
+            this.panelSectorTrabajo.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelSectorTrabajo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelSectorTrabajo.Location = new System.Drawing.Point(158, 104);
+            this.panelSectorTrabajo.Margin = new System.Windows.Forms.Padding(0);
+            this.panelSectorTrabajo.Name = "panelSectorTrabajo";
+            this.panelSectorTrabajo.Size = new System.Drawing.Size(158, 156);
+            this.panelSectorTrabajo.TabIndex = 21;
+            this.panelSectorTrabajo.Visible = false;
+            // 
+            // btnConsultarSectorTrabajo
+            // 
+            this.btnConsultarSectorTrabajo.AutoSize = true;
+            this.btnConsultarSectorTrabajo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConsultarSectorTrabajo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConsultarSectorTrabajo.FlatAppearance.BorderSize = 0;
+            this.btnConsultarSectorTrabajo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnConsultarSectorTrabajo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarSectorTrabajo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsultarSectorTrabajo.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Find_48;
+            this.btnConsultarSectorTrabajo.Location = new System.Drawing.Point(48, 82);
+            this.btnConsultarSectorTrabajo.Name = "btnConsultarSectorTrabajo";
+            this.btnConsultarSectorTrabajo.Size = new System.Drawing.Size(63, 71);
+            this.btnConsultarSectorTrabajo.TabIndex = 1;
+            this.btnConsultarSectorTrabajo.Text = "Consultar";
+            this.btnConsultarSectorTrabajo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultarSectorTrabajo.UseVisualStyleBackColor = true;
+            this.btnConsultarSectorTrabajo.Click += new System.EventHandler(this.btnConsultarSectorTrabajo_Click);
+            // 
+            // btnNuevoSectorTrabajo
+            // 
+            this.btnNuevoSectorTrabajo.AutoSize = true;
+            this.btnNuevoSectorTrabajo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNuevoSectorTrabajo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNuevoSectorTrabajo.FlatAppearance.BorderSize = 0;
+            this.btnNuevoSectorTrabajo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnNuevoSectorTrabajo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnNuevoSectorTrabajo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNuevoSectorTrabajo.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.New_48;
+            this.btnNuevoSectorTrabajo.Location = new System.Drawing.Point(52, 5);
+            this.btnNuevoSectorTrabajo.Name = "btnNuevoSectorTrabajo";
+            this.btnNuevoSectorTrabajo.Size = new System.Drawing.Size(54, 71);
+            this.btnNuevoSectorTrabajo.TabIndex = 0;
+            this.btnNuevoSectorTrabajo.Text = " Nuevo";
+            this.btnNuevoSectorTrabajo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNuevoSectorTrabajo.UseVisualStyleBackColor = true;
+            this.btnNuevoSectorTrabajo.Click += new System.EventHandler(this.btnNuevoSectorTrabajo_Click);
+            // 
+            // panelSalir
+            // 
+            this.panelSalir.Controls.Add(this.button1);
+            this.panelSalir.Location = new System.Drawing.Point(158, 260);
+            this.panelSalir.Margin = new System.Windows.Forms.Padding(0);
+            this.panelSalir.Name = "panelSalir";
+            this.panelSalir.Size = new System.Drawing.Size(158, 87);
+            this.panelSalir.TabIndex = 22;
+            // 
+            // button1
+            // 
+            this.button1.AutoSize = true;
+            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Exit_48;
+            this.button1.Location = new System.Drawing.Point(48, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(54, 71);
+            this.button1.TabIndex = 2;
+            this.button1.Text = " Salir";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // frmRecursosFabricacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -410,8 +484,6 @@
             this.scUp.ResumeLayout(false);
             this.panelEmpleado.ResumeLayout(false);
             this.panelEmpleado.PerformLayout();
-            this.panelSalir.ResumeLayout(false);
-            this.panelSalir.PerformLayout();
             this.panelMaquina.ResumeLayout(false);
             this.panelMaquina.PerformLayout();
             this.flpMenu.ResumeLayout(false);
@@ -421,6 +493,10 @@
             this.scDown.Panel1.ResumeLayout(false);
             this.scDown.Panel2.ResumeLayout(false);
             this.scDown.ResumeLayout(false);
+            this.panelSectorTrabajo.ResumeLayout(false);
+            this.panelSectorTrabajo.PerformLayout();
+            this.panelSalir.ResumeLayout(false);
+            this.panelSalir.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -431,14 +507,12 @@
         private System.Windows.Forms.SplitContainer scUp;
         private System.Windows.Forms.Button btnMenu;
         private System.Windows.Forms.Button btnNuevoMaquina;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnIndiceProductividad;
         private System.Windows.Forms.Button btnConsultarMaquina;
         private System.Windows.Forms.Panel panelEmpleado;
         private System.Windows.Forms.Button btnConsultarEmpleado;
         private System.Windows.Forms.Button btnNuevoEmpleado;
         private System.Windows.Forms.Button btnMaquina;
-        private System.Windows.Forms.Panel panelSalir;
         private System.Windows.Forms.Panel panelMaquina;
         private System.Windows.Forms.FlowLayoutPanel flpMenu;
         private System.Windows.Forms.Button btnProductividad;
@@ -446,5 +520,11 @@
         private System.Windows.Forms.SplitContainer scDown;
         private System.Windows.Forms.Button btnListadoEmpleado;
         private System.Windows.Forms.Button btnListadoMaquina;
+        private System.Windows.Forms.Button btnSectorTrabajo;
+        private System.Windows.Forms.Panel panelSectorTrabajo;
+        private System.Windows.Forms.Button btnConsultarSectorTrabajo;
+        private System.Windows.Forms.Button btnNuevoSectorTrabajo;
+        private System.Windows.Forms.Panel panelSalir;
+        private System.Windows.Forms.Button button1;
     }
 }
