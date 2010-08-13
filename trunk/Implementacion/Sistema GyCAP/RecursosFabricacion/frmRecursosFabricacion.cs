@@ -23,7 +23,8 @@ namespace GyCAP.UI.RecursosFabricacion
             flpMenu.AutoScroll = false;
             btnEmpleado.Tag = panelEmpleado;
             btnMaquina.Tag = panelMaquina;            
-            btnProductividad.Tag = panelProductividad;           
+            btnProductividad.Tag = panelProductividad;
+            btnSectorTrabajo.Tag = panelSectorTrabajo;
         }
 
         private void frmRecursosFabricacion_Load(object sender, EventArgs e)
@@ -183,6 +184,28 @@ namespace GyCAP.UI.RecursosFabricacion
 
         #endregion
 
-        
+        #region Sector Trabajo
+
+        private void btnNuevoSectorTrabajo_Click(object sender, EventArgs e)
+        {
+            frmSectorTrabajo.Instancia.TopLevel = false;
+            frmSectorTrabajo.Instancia.Parent = areaTrabajo;
+            frmSectorTrabajo.Instancia.Location = PosicionarFormulario();
+            frmSectorTrabajo.Instancia.SetEstadoInicial(frmSectorTrabajo.estadoInicialNuevo);
+            frmSectorTrabajo.Instancia.Show();
+            frmSectorTrabajo.Instancia.Focus();
+        }
+
+        private void btnConsultarSectorTrabajo_Click(object sender, EventArgs e)
+        {
+            frmSectorTrabajo.Instancia.TopLevel = false;
+            frmSectorTrabajo.Instancia.Parent = areaTrabajo;
+            frmSectorTrabajo.Instancia.Location = PosicionarFormulario();
+            frmSectorTrabajo.Instancia.SetEstadoInicial(frmSectorTrabajo.estadoInicialConsultar);
+            frmSectorTrabajo.Instancia.Show();
+            frmSectorTrabajo.Instancia.Focus();
+        }
+
+        #endregion
     }
 }

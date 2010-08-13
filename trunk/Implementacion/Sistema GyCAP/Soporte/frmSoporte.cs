@@ -23,10 +23,8 @@ namespace GyCAP.UI.Soporte
             flpMenu.AutoScroll = false;
             btnCapacidadEmpleado.Tag = panelCapacidadEmpleado;
             btnLocalidad.Tag = panelLocalidad;
-            btnMarca.Tag = panelMarca;
-            btnProcesoFabricacion.Tag = panelProcesoFabricacion;
-            btnProvincia.Tag = panelProvincia;
-            btnSectorTrabajo.Tag = panelSectorTrabajo;
+            btnMarca.Tag = panelMarca;           
+            btnProvincia.Tag = panelProvincia;            
             btnTipoRepuesto.Tag = panelTipoRepuesto;
             btnTipoUnidadMedida.Tag = panelTipoUnidadMedida;
         }
@@ -193,9 +191,6 @@ namespace GyCAP.UI.Soporte
 
         #endregion
 
-        #region Proceso Fabricación
-        #endregion
-
         #region Provincia
 
         private void btnConsultarProvincia_Click(object sender, EventArgs e)
@@ -205,30 +200,6 @@ namespace GyCAP.UI.Soporte
             frmProvincia.Instancia.Location = PosicionarFormulario();
             frmProvincia.Instancia.Show();
             frmProvincia.Instancia.Focus();
-        }
-
-        #endregion
-
-        #region Sector Trabajo
-
-        private void btnNuevoSectorTrabajo_Click(object sender, EventArgs e)
-        {
-            frmSectorTrabajo.Instancia.TopLevel = false;
-            frmSectorTrabajo.Instancia.Parent = areaTrabajo;
-            frmSectorTrabajo.Instancia.Location = PosicionarFormulario();
-            frmSectorTrabajo.Instancia.SetEstadoInicial(frmSectorTrabajo.estadoInicialNuevo);
-            frmSectorTrabajo.Instancia.Show();
-            frmSectorTrabajo.Instancia.Focus();
-        }
-
-        private void btnConsultarSectorTrabajo_Click(object sender, EventArgs e)
-        {
-            frmSectorTrabajo.Instancia.TopLevel = false;
-            frmSectorTrabajo.Instancia.Parent = areaTrabajo;
-            frmSectorTrabajo.Instancia.Location = PosicionarFormulario();
-            frmSectorTrabajo.Instancia.SetEstadoInicial(frmSectorTrabajo.estadoInicialConsultar);
-            frmSectorTrabajo.Instancia.Show();
-            frmSectorTrabajo.Instancia.Focus();
         }
 
         #endregion
