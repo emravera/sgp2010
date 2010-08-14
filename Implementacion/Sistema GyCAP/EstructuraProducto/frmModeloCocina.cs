@@ -12,7 +12,7 @@ namespace GyCAP.UI.EstructuraProducto
     public partial class frmModeloCocina : Form
     {
         private static frmModeloCocina _frmModeloCocina = null;
-        private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, };
+        private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
         private estadoUI estadoInterface;
         private Data.dsModeloCocina dsModeloCocina = new GyCAP.Data.dsModeloCocina();
         private DataView dvModeloCocina;

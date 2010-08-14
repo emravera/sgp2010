@@ -60,6 +60,20 @@ namespace GyCAP.UI.Principal.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap calidad {
+            get {
+                object obj = ResourceManager.GetObject("calidad", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap estructura_producto {
+            get {
+                object obj = ResourceManager.GetObject("estructura_producto", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Logo_Florencia {
             get {
                 object obj = ResourceManager.GetObject("Logo_Florencia", resourceCulture);
@@ -70,6 +84,90 @@ namespace GyCAP.UI.Principal.Properties {
         internal static System.Drawing.Bitmap macoser {
             get {
                 object obj = ResourceManager.GetObject("macoser", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap mantenimiento {
+            get {
+                object obj = ResourceManager.GetObject("mantenimiento", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pedido {
+            get {
+                object obj = ResourceManager.GetObject("pedido", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pedido2 {
+            get {
+                object obj = ResourceManager.GetObject("pedido2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap planificacion {
+            get {
+                object obj = ResourceManager.GetObject("planificacion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap planificacion2 {
+            get {
+                object obj = ResourceManager.GetObject("planificacion2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap recursoFabricacion {
+            get {
+                object obj = ResourceManager.GetObject("recursoFabricacion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap recursoFabricacion2 {
+            get {
+                object obj = ResourceManager.GetObject("recursoFabricacion2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap reporte {
+            get {
+                object obj = ResourceManager.GetObject("reporte", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap soporte {
+            get {
+                object obj = ResourceManager.GetObject("soporte", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap stock_25 {
+            get {
+                object obj = ResourceManager.GetObject("stock_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap trabajoEnProceso {
+            get {
+                object obj = ResourceManager.GetObject("trabajoEnProceso", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap trabajoEnProceso2 {
+            get {
+                object obj = ResourceManager.GetObject("trabajoEnProceso2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
