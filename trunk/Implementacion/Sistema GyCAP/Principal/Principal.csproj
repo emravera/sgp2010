@@ -136,6 +136,48 @@
   <ItemGroup>
     <None Include="Resources\Logo Florencia.JPG" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\estructura-producto.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stock-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pedido.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\soporte.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mantenimiento.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trabajoEnProceso.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\planificacion.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trabajoEnProceso2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calidad.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pedido2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\planificacion2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recursoFabricacion2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recursoFabricacion.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reporte.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

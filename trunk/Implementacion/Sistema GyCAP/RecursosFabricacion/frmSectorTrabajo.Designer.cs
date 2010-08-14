@@ -57,6 +57,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.gbGuardarCancelar.SuspendLayout();
             this.tcSectorTrabajo.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -71,17 +72,17 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(82, 94);
+            this.txtDescripcion.Location = new System.Drawing.Point(14, 75);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(299, 63);
+            this.txtDescripcion.Size = new System.Drawing.Size(446, 63);
             this.txtDescripcion.TabIndex = 3;
             this.txtDescripcion.Enter += new System.EventHandler(this.txtDescripcion_Enter);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 67);
+            this.label5.Location = new System.Drawing.Point(217, 24);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(68, 13);
             this.label5.TabIndex = 4;
@@ -89,7 +90,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(82, 34);
+            this.txtNombre.Location = new System.Drawing.Point(65, 21);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(146, 21);
             this.txtNombre.TabIndex = 1;
@@ -259,6 +260,7 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.checkBox1);
             this.gbDatos.Controls.Add(this.txtAbreviatura);
             this.gbDatos.Controls.Add(this.txtDescripcion);
             this.gbDatos.Controls.Add(this.label6);
@@ -269,23 +271,23 @@
             this.gbDatos.Location = new System.Drawing.Point(3, 3);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(489, 187);
+            this.gbDatos.Size = new System.Drawing.Size(489, 150);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Sector de Trabajo";
             // 
             // txtAbreviatura
             // 
-            this.txtAbreviatura.Location = new System.Drawing.Point(82, 64);
+            this.txtAbreviatura.Location = new System.Drawing.Point(291, 21);
             this.txtAbreviatura.Name = "txtAbreviatura";
-            this.txtAbreviatura.Size = new System.Drawing.Size(146, 21);
+            this.txtAbreviatura.Size = new System.Drawing.Size(66, 21);
             this.txtAbreviatura.TabIndex = 2;
             this.txtAbreviatura.Enter += new System.EventHandler(this.txtAbreviatura_Enter);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(15, 96);
+            this.label6.Location = new System.Drawing.Point(11, 59);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 13);
             this.label6.TabIndex = 6;
@@ -294,7 +296,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 34);
+            this.label3.Location = new System.Drawing.Point(11, 24);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 1;
@@ -399,6 +401,17 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(507, 317);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBox1.Location = new System.Drawing.Point(363, 23);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(56, 17);
+            this.checkBox1.TabIndex = 7;
+            this.checkBox1.Text = "Activo";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // frmSectorTrabajo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -462,5 +475,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtAbreviaturaBuscar;
         private System.Windows.Forms.TextBox txtAbreviatura;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
