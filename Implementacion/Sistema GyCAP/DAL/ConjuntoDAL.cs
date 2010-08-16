@@ -22,12 +22,14 @@ namespace GyCAP.DAL
                                         ,[conj_cantidadstock]
                                         ,[par_codigo]
                                         ,[pno_codigo]
-                                        ,[conj_codigoparte]) 
-                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6) SELECT @@Identity";
+                                        ,[conj_codigoparte]
+                                        ,[conj_costo]
+                                        ,[hr_codigo]) 
+                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8) SELECT @@Identity";
 
             //Así obtenemos el conjunto nuevo del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.CONJUNTOSRow rowConjunto = dsEstructura.CONJUNTOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.CONJUNTOSRow;
-            object[] valorParametros = { rowConjunto.CONJ_NOMBRE, rowConjunto.TE_CODIGO, rowConjunto.CONJ_DESCRIPCION, 0, rowConjunto.PAR_CODIGO, rowConjunto.PNO_CODIGO, rowConjunto.CONJ_CODIGOPARTE };
+            object[] valorParametros = { rowConjunto.CONJ_NOMBRE, rowConjunto.TE_CODIGO, rowConjunto.CONJ_DESCRIPCION, 0, rowConjunto.PAR_CODIGO, rowConjunto.PNO_CODIGO, rowConjunto.CONJ_CODIGOPARTE, rowConjunto.CONJ_COSTO, DBNull.Value };
                         
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
@@ -40,8 +42,10 @@ namespace GyCAP.DAL
                 rowConjunto.BeginEdit();
                 rowConjunto.CONJ_CODIGO = Convert.ToInt32(DB.executeScalar(sqlInsert, valorParametros, transaccion));
                 rowConjunto.EndEdit();
-                //Ahora insertamos su estructura, 
-                Entidades.DetalleConjunto detalle = new GyCAP.Entidades.DetalleConjunto();
+                //Ahora insertamos su estructura
+
+                #region DetalleConjunto IT1
+                /*Entidades.DetalleConjunto detalle = new GyCAP.Entidades.DetalleConjunto();
                 foreach (Data.dsEstructura.DETALLE_CONJUNTORow row in (Data.dsEstructura.DETALLE_CONJUNTORow[])dsEstructura.DETALLE_CONJUNTO.Select(null, null, System.Data.DataViewRowState.Added))
                 {                    
                     detalle.CodigoConjunto = Convert.ToInt32(rowConjunto.CONJ_CODIGO);
@@ -53,8 +57,36 @@ namespace GyCAP.DAL
                     row.CONJ_CODIGO = detalle.CodigoConjunto;
                     row.DCJ_CODIGO = detalle.CodigoDetalle;
                     row.EndEdit();
+                }*/
+                #endregion
+
+                Entidades.PiezasxConjunto pxc = new GyCAP.Entidades.PiezasxConjunto();
+                Entidades.SubconjuntosxConjunto scxc = new GyCAP.Entidades.SubconjuntosxConjunto();
+
+                foreach (Data.dsEstructura.SUBCONJUNTOSXCONJUNTORow row in (Data.dsEstructura.SUBCONJUNTOSXCONJUNTORow[])dsEstructura.SUBCONJUNTOSXCONJUNTO.Select(null, null, DataViewRowState.Added))
+                {
+                    scxc.CodigoConjunto = Convert.ToInt32(rowConjunto.CONJ_CODIGO);
+                    scxc.CodigoSubconjunto = Convert.ToInt32(row.SCONJ_CODIGO);
+                    scxc.Cantidad = Convert.ToInt32(row.SCXCJ_CANTIDAD);
+                    DetalleConjuntoDAL.Insertar(scxc, transaccion);
+                    row.BeginEdit();
+                    row.CONJ_CODIGO = scxc.CodigoConjunto;
+                    row.SCXCJ_CODIGO = scxc.CodigoDetalle;
+                    row.EndEdit();
                 }
-      
+                
+                foreach (Data.dsEstructura.PIEZASXCONJUNTORow row in (Data.dsEstructura.PIEZASXCONJUNTORow[]) dsEstructura.PIEZASXCONJUNTO.Select(null, null, DataViewRowState.Added))
+                {
+                    pxc.CodigoConjunto = Convert.ToInt32(rowConjunto.CONJ_CODIGO);
+                    pxc.CodigoPieza = Convert.ToInt32(row.PZA_CODIGO);
+                    pxc.Cantidad = Convert.ToInt32(row.PXCJ_CANTIDAD);
+                    DetalleConjuntoDAL.Insertar(pxc, transaccion);
+                    row.BeginEdit();
+                    row.CONJ_CODIGO = pxc.CodigoConjunto;
+                    row.PXCJ_CODIGO = pxc.CodigoDetalle;
+                    row.EndEdit();
+                }
+
                 //Todo ok, commit
                 transaccion.Commit();                
             }
@@ -109,11 +141,21 @@ namespace GyCAP.DAL
                                         ,par_codigo = @p3
                                         ,pno_codigo = @p4
                                         ,conj_codigoparte = @p5
-                                        WHERE conj_codigo = @p6";
+                                        ,conj_costo = @p6
+                                        ,hr_codigo = @p7
+                                        WHERE conj_codigo = @p8";
 
             //Así obtenemos el conjunto modificado del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.CONJUNTOSRow rowConjunto = dsEstructura.CONJUNTOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.CONJUNTOSRow;
-            object[] valorParametros = { rowConjunto.CONJ_NOMBRE, rowConjunto.TE_CODIGO, rowConjunto.CONJ_DESCRIPCION, rowConjunto.PAR_CODIGO, rowConjunto.PNO_CODIGO, rowConjunto.CONJ_CODIGOPARTE, rowConjunto.CONJ_CODIGO };
+            object[] valorParametros = { rowConjunto.CONJ_NOMBRE, 
+                                           rowConjunto.TE_CODIGO, 
+                                           rowConjunto.CONJ_DESCRIPCION, 
+                                           rowConjunto.PAR_CODIGO, 
+                                           rowConjunto.PNO_CODIGO, 
+                                           rowConjunto.CONJ_CODIGOPARTE, 
+                                           rowConjunto.CONJ_COSTO, 
+                                           DBNull.Value, 
+                                           rowConjunto.CONJ_CODIGO };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;            
@@ -125,8 +167,10 @@ namespace GyCAP.DAL
 
                 //Actualizamos el conjunto
                 DB.executeNonQuery(sqlUpdateConjunto, valorParametros, transaccion);
-                //Actualizamos la estructura, primero insertamos los nuevos
-                Entidades.DetalleConjunto detalle = new GyCAP.Entidades.DetalleConjunto();            
+                //Actualizamos la estructura, en el orden: insertar, actualizar, eliminar
+
+                #region DetalleConjunto IT1
+                /*Entidades.DetalleConjunto detalle = new GyCAP.Entidades.DetalleConjunto();            
                 foreach (Data.dsEstructura.DETALLE_CONJUNTORow row in (Data.dsEstructura.DETALLE_CONJUNTORow[])dsEstructura.DETALLE_CONJUNTO.Select(null, null, System.Data.DataViewRowState.Added))
                 {
                     detalle.CodigoConjunto = Convert.ToInt32(row.CONJ_CODIGO);
@@ -154,6 +198,61 @@ namespace GyCAP.DAL
                     //Como la fila está eliminada y no tiene datos, tenemos que acceder a la versión original
                     detalle.CodigoDetalle = Convert.ToInt32(row["dcj_codigo", System.Data.DataRowVersion.Original]);
                     DetalleConjuntoDAL.Eliminar(detalle, transaccion);
+                }*/
+                #endregion
+
+                Entidades.SubconjuntosxConjunto scxc = new GyCAP.Entidades.SubconjuntosxConjunto();
+                Entidades.PiezasxConjunto pxc = new GyCAP.Entidades.PiezasxConjunto();
+                foreach (Data.dsEstructura.SUBCONJUNTOSXCONJUNTORow row in (Data.dsEstructura.SUBCONJUNTOSXCONJUNTORow[])dsEstructura.SUBCONJUNTOSXCONJUNTO.Select(null, null, DataViewRowState.Added))
+                {
+                    scxc.CodigoConjunto = Convert.ToInt32(row.CONJ_CODIGO);
+                    scxc.CodigoSubconjunto = Convert.ToInt32(row.SCONJ_CODIGO);
+                    scxc.Cantidad = Convert.ToInt32(row.SCXCJ_CANTIDAD);
+                    DetalleConjuntoDAL.Insertar(scxc, transaccion);
+                    row.BeginEdit();
+                    row.SCXCJ_CODIGO = scxc.CodigoDetalle;
+                    row.EndEdit();                                      
+                }
+
+                foreach (Data.dsEstructura.PIEZASXCONJUNTORow row in (Data.dsEstructura.PIEZASXCONJUNTORow[])dsEstructura.PIEZASXCONJUNTO.Select(null, null, DataViewRowState.Added))
+                {
+                    pxc.CodigoConjunto = Convert.ToInt32(row.CONJ_CODIGO);
+                    pxc.CodigoPieza = Convert.ToInt32(row.PZA_CODIGO);
+                    pxc.Cantidad = Convert.ToInt32(row.PXCJ_CANTIDAD);
+                    DetalleConjuntoDAL.Insertar(pxc, transaccion);
+                    row.BeginEdit();
+                    row.PXCJ_CODIGO = pxc.CodigoDetalle;
+                    row.EndEdit();                     
+                }
+
+                foreach (Data.dsEstructura.SUBCONJUNTOSXCONJUNTORow row in (Data.dsEstructura.SUBCONJUNTOSXCONJUNTORow[])dsEstructura.SUBCONJUNTOSXCONJUNTO.Select(null, null, DataViewRowState.ModifiedCurrent))
+                {
+                    scxc.CodigoDetalle = Convert.ToInt32(row.SCXCJ_CODIGO);
+                    scxc.CodigoConjunto = Convert.ToInt32(row.CONJ_CODIGO);
+                    scxc.CodigoSubconjunto = Convert.ToInt32(row.SCONJ_CODIGO);
+                    scxc.Cantidad = Convert.ToInt32(row.SCXCJ_CANTIDAD);
+                    DetalleConjuntoDAL.Actualizar(scxc, transaccion); 
+                }
+
+                foreach (Data.dsEstructura.PIEZASXCONJUNTORow row in (Data.dsEstructura.PIEZASXCONJUNTORow[])dsEstructura.PIEZASXCONJUNTO.Select(null, null, DataViewRowState.ModifiedCurrent))
+                {
+                    pxc.CodigoDetalle = Convert.ToInt32(row.PXCJ_CODIGO);
+                    pxc.CodigoConjunto = Convert.ToInt32(row.CONJ_CODIGO);
+                    pxc.CodigoPieza = Convert.ToInt32(row.PZA_CODIGO);
+                    pxc.Cantidad = Convert.ToInt32(row.PXCJ_CANTIDAD);
+                    DetalleConjuntoDAL.Actualizar(pxc, transaccion); 
+                }
+
+                foreach (Data.dsEstructura.SUBCONJUNTOSXCONJUNTORow row in (Data.dsEstructura.SUBCONJUNTOSXCONJUNTORow[])dsEstructura.SUBCONJUNTOSXCONJUNTO.Select(null, null, DataViewRowState.Deleted))
+                {
+                    scxc.CodigoDetalle = Convert.ToInt32(row["scxcj_codigo", System.Data.DataRowVersion.Original]);
+                    DetalleConjuntoDAL.Eliminar(scxc, transaccion);
+                }
+
+                foreach (Data.dsEstructura.PIEZASXCONJUNTORow row in (Data.dsEstructura.PIEZASXCONJUNTORow[])dsEstructura.PIEZASXCONJUNTO.Select(null, null, DataViewRowState.Deleted))
+                {
+                    pxc.CodigoDetalle = Convert.ToInt32(row["pxcj_codigo", System.Data.DataRowVersion.Original]);
+                    DetalleConjuntoDAL.Eliminar(pxc, transaccion);
                 }
 
                 //Si todo resulto correcto, commit
@@ -211,8 +310,9 @@ namespace GyCAP.DAL
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
         public static Entidades.Conjunto ObtenerConjunto(int codigoConjunto)
         {
-            string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo, conj_codigoparte
-                        FROM CONJUNTOS WHERE conj_codigo = @p0";
+            string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo
+                                 ,conj_codigoparte, conj_costo                         
+                         FROM CONJUNTOS WHERE conj_codigo = @p0";
             object[] valorParametros = { codigoConjunto };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
             Entidades.Conjunto conjunto = new GyCAP.Entidades.Conjunto();
@@ -228,6 +328,7 @@ namespace GyCAP.DAL
                 conjunto.CantidadStock = Convert.ToInt32(rdr["conj_cantidadstock"].ToString());
                 conjunto.CodigoEstado = Convert.ToInt32(rdr["par_codigo"].ToString());
                 conjunto.CodigoPlano = Convert.ToInt32(rdr["pno_codigo"].ToString());
+                conjunto.Costo = Convert.ToDecimal(rdr["conj_costo"].ToString());
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             finally
@@ -240,7 +341,8 @@ namespace GyCAP.DAL
 
         public static void ObtenerConjuntos(object nombre, object codTerminacion, Data.dsEstructura ds, bool obtenerDetalle)
         {
-            string sql = @"SELECT conj_codigo, conj_nombre, conj_descripcion, te_codigo, conj_cantidadstock, par_codigo, pno_codigo, conj_codigoparte 
+            string sql = @"SELECT conj_codigo, conj_nombre, conj_descripcion, te_codigo, conj_cantidadstock, par_codigo, pno_codigo
+                                  ,conj_codigoparte , conj_costo 
                         FROM CONJUNTOS WHERE 1=1";
 
             //Sirve para armar el nombre de los parámetros
@@ -292,20 +394,7 @@ namespace GyCAP.DAL
             }
         }
 
-        //Obtiene el detalle de todos los subconjuntos buscados, de uso interno por el método buscador ObtenerSubconjuntos
-        private static void ObtenerDetalleConjuntos(Data.dsEstructura ds)
-        {
-            string sql = @"SELECT dcj_codigo, conj_codigo, sconj_codigo, dcj_cantidad
-                         FROM DETALLE_CONJUNTO WHERE conj_codigo = @p0";
-
-            object[] valorParametros; ;
-
-            foreach (Data.dsEstructura.CONJUNTOSRow rowConjunto in ds.CONJUNTOS)
-            {
-                valorParametros = new object[] { rowConjunto.CONJ_CODIGO };
-                DB.FillDataTable(ds.DETALLE_CONJUNTO, sql, valorParametros);
-            }
-        }
+        
 
         public static bool PuedeEliminarse(int codigo)
         {
@@ -318,6 +407,42 @@ namespace GyCAP.DAL
                 else { return false; }
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
+        //Obtiene el detalle de todos los subconjuntos buscados, de uso interno por el método buscador ObtenerSubconjuntos
+        private static void ObtenerDetalleConjuntos(Data.dsEstructura ds)
+        {
+            string sql = @"SELECT scxcj_codigo, conj_codigo, sconj_codigo, scxcj_cantidad
+                         FROM SUBCONJUNTOSXCONJUNTO WHERE conj_codigo = @p0";
+
+            string sql2 = @"SELECT pxcj_codigo, conj_codigo, pza_codigo, pxcj_cantidad
+                         FROM PIEZASXCONJUNTO WHERE conj_codigo = @p0";
+
+            object[] valorParametros; 
+
+            foreach (Data.dsEstructura.CONJUNTOSRow rowConjunto in ds.CONJUNTOS)
+            {
+                valorParametros = new object[] { rowConjunto.CONJ_CODIGO };
+                DB.FillDataTable(ds.SUBCONJUNTOSXCONJUNTO, sql, valorParametros);
+                DB.FillDataTable(ds.PIEZASXCONJUNTO, sql2, valorParametros);
+            }
+        }
+        
+        #region ObtenerDetalles IT1
+
+        //Obtiene el detalle de todos los subconjuntos buscados, de uso interno por el método buscador ObtenerSubconjuntos
+        /*private static void ObtenerDetalleConjuntos(Data.dsEstructura ds)
+        {
+            string sql = @"SELECT dcj_codigo, conj_codigo, sconj_codigo, dcj_cantidad
+                         FROM DETALLE_CONJUNTO WHERE conj_codigo = @p0";
+
+            object[] valorParametros; 
+
+            foreach (Data.dsEstructura.CONJUNTOSRow rowConjunto in ds.CONJUNTOS)
+            {
+                valorParametros = new object[] { rowConjunto.CONJ_CODIGO };
+                DB.FillDataTable(ds.DETALLE_CONJUNTO, sql, valorParametros);
+            }
         }
         
         /// <summary>
@@ -355,11 +480,13 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             catch (Entidades.Excepciones.ElementoInexistenteException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
+        }*/
+        #endregion
 
         public static void ObtenerConjuntos(DataTable dtConjuntos)
         {
-            string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo, conj_codigoparte
+            string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo,
+                                  conj_codigoparte, conj_costo 
                         FROM CONJUNTOS";
             
             try
@@ -371,7 +498,8 @@ namespace GyCAP.DAL
 
         public static void ObtenerConjuntos(DataTable dtConjuntos, int estado)
         {
-            string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo, conj_codigoparte
+            string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo
+                                  ,conj_codigoparte, conj_costo
                         FROM CONJUNTOS WHERE par_codigo = @p0 ";
 
             object[] valorParametros = { estado };

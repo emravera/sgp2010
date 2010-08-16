@@ -140,13 +140,13 @@ namespace GyCAP.BLL
         /// <param name="codigoConjunto">El código de la pieza.</param>
         /// <exception cref="ElementoInexistenteException">Si no existe la pieza con el código ingresado.</exception>
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
-        public static void ObtenerEstructura(int codigoPieza, Data.dsEstructura ds)
-        {
-            Entidades.Pieza pieza = new GyCAP.Entidades.Pieza();
-            pieza.CodigoPieza = codigoPieza;
-            if (!EsPieza(pieza)) { throw new Entidades.Excepciones.ElementoInexistenteException(); }
-            DAL.PiezaDAL.ObtenerEstructura(codigoPieza, ds);
-        }
+       // public static void ObtenerEstructura(int codigoPieza, Data.dsEstructura ds)
+       // {
+        //    Entidades.Pieza pieza = new GyCAP.Entidades.Pieza();
+        //    pieza.CodigoPieza = codigoPieza;
+       //     if (!EsPieza(pieza)) { throw new Entidades.Excepciones.ElementoInexistenteException(); }
+       //     DAL.PiezaDAL.ObtenerEstructura(codigoPieza, ds);
+        //}
 
         /// <summary>
         /// Guarda una imagen de una pieza, si ya tiene una almacenada ésta se reemplaza.

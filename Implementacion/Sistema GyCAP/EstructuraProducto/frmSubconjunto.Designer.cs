@@ -89,6 +89,8 @@
             this.nudCantidad = new System.Windows.Forms.NumericUpDown();
             this.slideAgregar = new SlickInterface.Slide();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
+            this.nudCosto = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
             this.panelImagen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
             this.panelAcciones.SuspendLayout();
@@ -109,11 +111,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPiezasDisponibles)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCosto)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(80, 50);
+            this.txtNombre.Location = new System.Drawing.Point(80, 41);
             this.txtNombre.MaxLength = 80;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(287, 20);
@@ -350,10 +353,10 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(80, 166);
+            this.txtDescripcion.Location = new System.Drawing.Point(80, 179);
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(287, 65);
+            this.txtDescripcion.Size = new System.Drawing.Size(287, 55);
             this.txtDescripcion.TabIndex = 10;
             this.txtDescripcion.Text = "";
             this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
@@ -361,7 +364,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 164);
+            this.label2.Location = new System.Drawing.Point(6, 177);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 0;
@@ -370,7 +373,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 79);
+            this.label1.Location = new System.Drawing.Point(6, 70);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 13);
             this.label1.TabIndex = 4;
@@ -488,7 +491,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 53);
+            this.label3.Location = new System.Drawing.Point(6, 44);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 1;
@@ -569,7 +572,7 @@
             // 
             this.groupBox3.Controls.Add(this.dgvDetalleSubconjunto);
             this.groupBox3.Controls.Add(this.panelAcciones);
-            this.groupBox3.Location = new System.Drawing.Point(6, 250);
+            this.groupBox3.Location = new System.Drawing.Point(6, 253);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(497, 205);
             this.groupBox3.TabIndex = 2;
@@ -609,6 +612,8 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.label13);
+            this.gbDatos.Controls.Add(this.nudCosto);
             this.gbDatos.Controls.Add(this.txtCodigo);
             this.gbDatos.Controls.Add(this.cbPlano);
             this.gbDatos.Controls.Add(this.cbEstado);
@@ -626,14 +631,14 @@
             this.gbDatos.Location = new System.Drawing.Point(5, -2);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(497, 241);
+            this.gbDatos.Size = new System.Drawing.Size(497, 245);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del subconjunto";
             // 
             // txtCodigo
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(80, 24);
+            this.txtCodigo.Location = new System.Drawing.Point(80, 15);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(287, 20);
             this.txtCodigo.TabIndex = 4;
@@ -644,7 +649,7 @@
             this.cbPlano.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPlano.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbPlano.FormattingEnabled = true;
-            this.cbPlano.Location = new System.Drawing.Point(80, 134);
+            this.cbPlano.Location = new System.Drawing.Point(80, 125);
             this.cbPlano.Name = "cbPlano";
             this.cbPlano.Size = new System.Drawing.Size(287, 21);
             this.cbPlano.TabIndex = 9;
@@ -654,7 +659,7 @@
             this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEstado.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(80, 105);
+            this.cbEstado.Location = new System.Drawing.Point(80, 96);
             this.cbEstado.Name = "cbEstado";
             this.cbEstado.Size = new System.Drawing.Size(287, 21);
             this.cbEstado.TabIndex = 8;
@@ -664,7 +669,7 @@
             this.cbTerminacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTerminacion.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbTerminacion.FormattingEnabled = true;
-            this.cbTerminacion.Location = new System.Drawing.Point(80, 76);
+            this.cbTerminacion.Location = new System.Drawing.Point(80, 67);
             this.cbTerminacion.Name = "cbTerminacion";
             this.cbTerminacion.Size = new System.Drawing.Size(287, 21);
             this.cbTerminacion.TabIndex = 7;
@@ -672,7 +677,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 137);
+            this.label12.Location = new System.Drawing.Point(6, 128);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(37, 13);
             this.label12.TabIndex = 15;
@@ -681,7 +686,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 108);
+            this.label9.Location = new System.Drawing.Point(6, 99);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(44, 13);
             this.label9.TabIndex = 14;
@@ -690,7 +695,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 27);
+            this.label4.Location = new System.Drawing.Point(6, 18);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 13;
@@ -700,7 +705,7 @@
             // 
             this.slideDatos.Location = new System.Drawing.Point(-3, 0);
             this.slideDatos.Name = "slideDatos";
-            this.slideDatos.Size = new System.Drawing.Size(509, 243);
+            this.slideDatos.Size = new System.Drawing.Size(509, 249);
             this.slideDatos.SlideControl = null;
             this.slideDatos.TabIndex = 9;
             // 
@@ -813,6 +818,35 @@
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk);
             // 
+            // nudCosto
+            // 
+            this.nudCosto.DecimalPlaces = 2;
+            this.nudCosto.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudCosto.Location = new System.Drawing.Point(80, 153);
+            this.nudCosto.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudCosto.Name = "nudCosto";
+            this.nudCosto.Size = new System.Drawing.Size(287, 20);
+            this.nudCosto.TabIndex = 16;
+            this.nudCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudCosto.Enter += new System.EventHandler(this.control_Enter);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 155);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(39, 13);
+            this.label13.TabIndex = 17;
+            this.label13.Text = "Costo:";
+            // 
             // frmSubconjunto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -853,6 +887,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCosto)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -920,5 +955,7 @@
         private System.Windows.Forms.Button btnHecho;
         private System.Windows.Forms.NumericUpDown nudCantidad;
         private SlickInterface.Slide slideAgregar;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.NumericUpDown nudCosto;
     }
 }

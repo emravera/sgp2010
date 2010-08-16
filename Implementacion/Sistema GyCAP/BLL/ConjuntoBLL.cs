@@ -131,13 +131,13 @@ namespace GyCAP.BLL
         /// <param name="codigoConjunto">El código del conjunto.</param>
         /// <exception cref="ElementoInexistenteException">Si no existe el conjunto con el código ingresado.</exception>
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
-        public static void ObtenerEstructura(int codigoConjunto, Data.dsEstructura ds)
-        {
-            Entidades.Conjunto conjunto = new GyCAP.Entidades.Conjunto();
-            conjunto.CodigoConjunto = codigoConjunto;
-            if (!EsConjunto(conjunto)) { throw new Entidades.Excepciones.ElementoInexistenteException(); }
-            DAL.ConjuntoDAL.ObtenerEstructura(codigoConjunto, ds);
-        }
+        //public static void ObtenerEstructura(int codigoConjunto, Data.dsEstructura ds)
+        //{
+            //Entidades.Conjunto conjunto = new GyCAP.Entidades.Conjunto();
+            //conjunto.CodigoConjunto = codigoConjunto;
+           // if (!EsConjunto(conjunto)) { throw new Entidades.Excepciones.ElementoInexistenteException(); }
+            //DAL.ConjuntoDAL.ObtenerEstructura(codigoConjunto, ds);
+        //}
 
         /// <summary>
         /// Guarda una imagen de un conjunto, si ya tiene una almacenada ésta se reemplaza.

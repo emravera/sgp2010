@@ -12,7 +12,7 @@ namespace GyCAP.Entidades
         private string nombre;
         private string descripcion;
         private int cantidadStock;
-        private decimal precio;
+        private decimal costo;
 
         public int CodigoMateriaPrima
         {
@@ -44,10 +44,10 @@ namespace GyCAP.Entidades
             set { cantidadStock = value; }
         }
   
-        public decimal Precio
+        public decimal Costo
         {
-            get { return precio; }
-            set { precio = value; }
+            get { return costo; }
+            set { costo = value; }
         }
     }
 }

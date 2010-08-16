@@ -76,7 +76,7 @@ namespace GyCAP.UI.EstructuraProducto
             try
             {                
                 dsEstructura.PIEZAS.Clear();
-                dsEstructura.DETALLE_PIEZA.Clear();
+                dsEstructura.MATERIASPRIMASXPIEZA.Clear();
 
                 //Busquemos, no importa si ingresó algo o no, ya se encargarán las otras clases de verificarlo
                 BLL.PiezaBLL.ObtenerPiezas(txtNombreBuscar.Text, cbTerminacionBuscar.GetSelectedValueInt(), dsEstructura, true);
@@ -89,7 +89,7 @@ namespace GyCAP.UI.EstructuraProducto
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
                 dvPiezas.Table = dsEstructura.PIEZAS;
-                dvDetallePieza.Table = dsEstructura.DETALLE_PIEZA;
+                dvDetallePieza.Table = dsEstructura.MATERIASPRIMASXPIEZA;
                 dvMPDisponibles.Table = dsEstructura.MATERIAS_PRIMAS;
                 
                 SetInterface(estadoUI.inicio);
@@ -184,6 +184,7 @@ namespace GyCAP.UI.EstructuraProducto
                         rowPieza.TE_CODIGO = cbTerminacion.GetSelectedValueInt();
                         rowPieza.PAR_CODIGO = cbEstado.GetSelectedValueInt();
                         rowPieza.PNO_CODIGO = cbPlano.GetSelectedValueInt();
+                        rowPieza.PZA_COSTO = nudCosto.Value;
                         rowPieza.PZA_DESCRIPCION = txtDescripcion.Text;
                         rowPieza.EndEdit();
                         dsEstructura.PIEZAS.AddPIEZASRow(rowPieza);
@@ -194,7 +195,7 @@ namespace GyCAP.UI.EstructuraProducto
                         BLL.PiezaBLL.GuardarImagen(Convert.ToInt32(rowPieza.PZA_CODIGO), pbImagen.Image);
                         //Ahora si aceptamos los cambios
                         dsEstructura.PIEZAS.AcceptChanges();
-                        dsEstructura.DETALLE_PIEZA.AcceptChanges();
+                        dsEstructura.MATERIASPRIMASXPIEZA.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
 
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
@@ -237,13 +238,14 @@ namespace GyCAP.UI.EstructuraProducto
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PAR_CODIGO = cbEstado.GetSelectedValueInt();
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PNO_CODIGO = cbPlano.GetSelectedValueInt();
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_DESCRIPCION = txtDescripcion.Text;
+                    dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_COSTO = nudCosto.Value;
                     try
                     {
                         //Lo actualizamos en la DB
                         BLL.PiezaBLL.Actualizar(dsEstructura);
                         //El dataset ya se actualizó en las capas DAL y BLL, aceptamos los cambios
                         dsEstructura.PIEZAS.AcceptChanges();
-                        dsEstructura.DETALLE_PIEZA.AcceptChanges();
+                        dsEstructura.MATERIASPRIMASXPIEZA.AcceptChanges();
                         //Actualizamos la imagen
                         BLL.PiezaBLL.GuardarImagen(codigoPieza, pbImagen.Image);
                         //Avisamos que estuvo todo ok
@@ -285,9 +287,9 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvDetallePieza.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Obtenemos el código
-                int codigoDPZA = Convert.ToInt32(dvDetallePieza[dgvDetallePieza.SelectedRows[0].Index]["dpza_codigo"]);
+                int codigoDPZA = Convert.ToInt32(dvDetallePieza[dgvDetallePieza.SelectedRows[0].Index]["mpxp_codigo"]);
                 //Lo borramos pero sólo del dataset
-                dsEstructura.DETALLE_PIEZA.FindByDPZA_CODIGO(codigoDPZA).Delete();
+                dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).Delete();
             }
             else
             {
@@ -300,9 +302,9 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvDetallePieza.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Obtenemos el código
-                int codigoDPZA = Convert.ToInt32(dvDetallePieza[dgvDetallePieza.SelectedRows[0].Index]["dpza_codigo"]);
+                int codigoDPZA = Convert.ToInt32(dvDetallePieza[dgvDetallePieza.SelectedRows[0].Index]["mpxp_codigo"]);
                 //Aumentamos la cantidad
-                dsEstructura.DETALLE_PIEZA.FindByDPZA_CODIGO(codigoDPZA).DPZA_CANTIDAD += Convert.ToDecimal(0.1);
+                dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).MPXP_CANTIDAD += Convert.ToDecimal(0.1);
             }
             else
             {
@@ -315,11 +317,11 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvDetallePieza.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Obtenemos el código
-                int codigoDPZA = Convert.ToInt32(dvDetallePieza[dgvDetallePieza.SelectedRows[0].Index]["dpza_codigo"]);
+                int codigoDPZA = Convert.ToInt32(dvDetallePieza[dgvDetallePieza.SelectedRows[0].Index]["mpxp_codigo"]);
                 //Disminuimos la cantidad
-                if (dsEstructura.DETALLE_PIEZA.FindByDPZA_CODIGO(codigoDPZA).DPZA_CANTIDAD > Convert.ToDecimal(0.1))
+                if (dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).MPXP_CANTIDAD > Convert.ToDecimal(0.1))
                 {
-                    dsEstructura.DETALLE_PIEZA.FindByDPZA_CODIGO(codigoDPZA).DPZA_CANTIDAD -= Convert.ToDecimal(0.1);
+                    dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).MPXP_CANTIDAD -= Convert.ToDecimal(0.1);
                 }
             }
             else
@@ -347,8 +349,8 @@ namespace GyCAP.UI.EstructuraProducto
                     //Algo tiene, comprobemos que no intente agregar la misma materia prima haciendo una consulta al dataset,
                     //no usamos el dataview porque no queremos volver a filtrar los datos y perderlos
                     string filtro = "pza_codigo = " + piezaCodigo + " AND mp_codigo = " + materiaPrimaCodigo;
-                    Data.dsEstructura.DETALLE_PIEZARow[] rows =
-                        (Data.dsEstructura.DETALLE_PIEZARow[])dsEstructura.DETALLE_PIEZA.Select(filtro);
+                    Data.dsEstructura.MATERIASPRIMASXPIEZARow[] rows =
+                        (Data.dsEstructura.MATERIASPRIMASXPIEZARow[])dsEstructura.MATERIASPRIMASXPIEZA.Select(filtro);
                     if (rows.Length > 0)
                     {
                         //Ya lo ha agregado, preguntemos si quiere aumentar la cantidad existente o descartar
@@ -356,7 +358,7 @@ namespace GyCAP.UI.EstructuraProducto
                         if (respuesta == DialogResult.Yes)
                         {
                             //Sumemos la cantidad ingresada a la existente, como hay una sola fila seleccionamos la 0 del array
-                            rows[0].DPZA_CANTIDAD += nudCantidad.Value;
+                            rows[0].MPXP_CANTIDAD += nudCantidad.Value;
                             nudCantidad.Value = 0;
                         }
                         //Como ya existe marcamos que no debe agregarse
@@ -377,17 +379,17 @@ namespace GyCAP.UI.EstructuraProducto
                 //Ahora comprobamos si debe agregarse la materia prima o no
                 if (agregarMP)
                 {
-                    Data.dsEstructura.DETALLE_PIEZARow row = dsEstructura.DETALLE_PIEZA.NewDETALLE_PIEZARow();
+                    Data.dsEstructura.MATERIASPRIMASXPIEZARow row = dsEstructura.MATERIASPRIMASXPIEZA.NewMATERIASPRIMASXPIEZARow();
                     row.BeginEdit();
                     //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
-                    row.DPZA_CODIGO = codigoDetalle--; //-- para que se vaya autodecrementando en cada inserción
+                    row.MPXP_CODIGO = codigoDetalle--; //-- para que se vaya autodecrementando en cada inserción
                     row.PZA_CODIGO = piezaCodigo;
                     row.MP_CODIGO = materiaPrimaCodigo;
-                    row.DPZA_CANTIDAD = nudCantidad.Value;
+                    row.MPXP_CANTIDAD = nudCantidad.Value;
                     row.EndEdit();
                     //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
                     //todavia no vamos a insertar en la db hasta que no haga Guardar
-                    dsEstructura.DETALLE_PIEZA.AddDETALLE_PIEZARow(row);
+                    dsEstructura.MATERIASPRIMASXPIEZA.AddMATERIASPRIMASXPIEZARow(row);
                     nudCantidad.Value = 0;
                 }
                 nudCantidad.Value = 0;
@@ -409,7 +411,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             //Descartamos los cambios realizamos hasta el momento sin guardar
             dsEstructura.PIEZAS.RejectChanges();
-            dsEstructura.DETALLE_PIEZA.RejectChanges();
+            dsEstructura.MATERIASPRIMASXPIEZA.RejectChanges();
             SetInterface(estadoUI.inicio);
         }
 
@@ -473,7 +475,9 @@ namespace GyCAP.UI.EstructuraProducto
                     cbPlano.Enabled = true;
                     cbPlano.SetTexto("Seleccione");
                     cbEstado.SetTexto("Seleccione");
-                    dvDetallePieza.RowFilter = "DPZA_CODIGO < 0";
+                    dvDetallePieza.RowFilter = "MPXP_CODIGO < 0";
+                    nudCosto.Enabled = true;
+                    nudCosto.Value = 0;
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
                     btnGuardar.Enabled = true;
@@ -498,7 +502,9 @@ namespace GyCAP.UI.EstructuraProducto
                     cbEstado.SetTexto("Seleccione");
                     cbPlano.Enabled = true;
                     cbPlano.SetTexto("Seleccione");
-                    dvDetallePieza.RowFilter = "DPZA_CODIGO < 0";
+                    dvDetallePieza.RowFilter = "MPXP_CODIGO < 0";
+                    nudCosto.Enabled = true;
+                    nudCosto.Value = 0;
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
                     btnGuardar.Enabled = true;
@@ -521,6 +527,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbEstado.SetTexto(string.Empty);
                     cbPlano.Enabled = false;
                     cbPlano.SetTexto(string.Empty);
+                    nudCosto.Enabled = false;
                     txtDescripcion.ReadOnly = true;
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
@@ -538,6 +545,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbTerminacion.SetTexto(string.Empty);
                     cbEstado.SetTexto(string.Empty);
                     cbPlano.SetTexto(string.Empty);
+                    nudCosto.Enabled = true;
                     txtDescripcion.ReadOnly = false;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -565,6 +573,7 @@ namespace GyCAP.UI.EstructuraProducto
             cbTerminacion.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).TE_CODIGO));
             cbEstado.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).ESTADO_PARTESRow.PAR_CODIGO));
             cbPlano.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PNO_CODIGO));
+            nudCosto.Value = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_COSTO;
             txtDescripcion.Text = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_DESCRIPCION;
             pbImagen.Image = BLL.PiezaBLL.ObtenerImagen(codigoPieza);
             //Usemos el filtro del dataview para mostrar sólo las MP de la pieza seleccionada
@@ -599,25 +608,29 @@ namespace GyCAP.UI.EstructuraProducto
             dgvPiezas.Columns.Add("TE_CODIGO", "Terminación");
             dgvPiezas.Columns.Add("PAR_CODIGO", "Estado");
             dgvPiezas.Columns.Add("PNO_CODIGO", "Plano");
+            dgvPiezas.Columns.Add("PZA_COSTO", "Costo");
             dgvPiezas.Columns["PZA_CODIGOPARTE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPiezas.Columns["PZA_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPiezas.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPiezas.Columns["PAR_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPiezas.Columns["PNO_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPiezas.Columns["PZA_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
            
             dgvDetallePieza.Columns.Add("MP_NOMBRE", "Nombre");
             dgvDetallePieza.Columns.Add("UMED_CODIGO", "Unidad Medida");
-            dgvDetallePieza.Columns.Add("DPZA_CANTIDAD", "Cantidad");
+            dgvDetallePieza.Columns.Add("MPXP_CANTIDAD", "Cantidad");
             dgvDetallePieza.Columns["MP_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetallePieza.Columns["UMED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetallePieza.Columns["DPZA_CANTIDAD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetallePieza.Columns["DPZA_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDetallePieza.Columns["MPXP_CANTIDAD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDetallePieza.Columns["MPXP_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             dgvMPDisponibles.Columns.Add("MP_NOMBRE", "Nombre");
             dgvMPDisponibles.Columns.Add("UMED_CODIGO", "Unidad Medida");
+            dgvMPDisponibles.Columns.Add("MP_COSTO", "Costo");
             dgvMPDisponibles.Columns.Add("MP_DESCRIPCION", "Descripción");
             dgvMPDisponibles.Columns["MP_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvMPDisponibles.Columns["UMED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvMPDisponibles.Columns["MP_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvMPDisponibles.Columns["MP_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvMPDisponibles.Columns["MP_DESCRIPCION"].Resizable = DataGridViewTriState.True;
 
@@ -627,20 +640,22 @@ namespace GyCAP.UI.EstructuraProducto
             dgvPiezas.Columns["TE_CODIGO"].DataPropertyName = "TE_CODIGO";
             dgvPiezas.Columns["PAR_CODIGO"].DataPropertyName = "PAR_CODIGO";
             dgvPiezas.Columns["PNO_CODIGO"].DataPropertyName = "PNO_CODIGO";
+            dgvPiezas.Columns["PZA_COSTO"].DataPropertyName = "PZA_COSTO";
 
             dgvDetallePieza.Columns["MP_NOMBRE"].DataPropertyName = "MP_CODIGO";
             dgvDetallePieza.Columns["UMED_CODIGO"].DataPropertyName = "MP_CODIGO";
-            dgvDetallePieza.Columns["DPZA_CANTIDAD"].DataPropertyName = "DPZA_CANTIDAD";
+            dgvDetallePieza.Columns["MPXP_CANTIDAD"].DataPropertyName = "MPXP_CANTIDAD";
 
             dgvMPDisponibles.Columns["MP_NOMBRE"].DataPropertyName = "MP_NOMBRE";
             dgvMPDisponibles.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
             dgvMPDisponibles.Columns["MP_DESCRIPCION"].DataPropertyName = "MP_DESCRIPCION";
+            dgvMPDisponibles.Columns["MP_COSTO"].DataPropertyName = "MP_COSTO";
 
             //Creamos el dataview y lo asignamos a la grilla
             dvPiezas = new DataView(dsEstructura.PIEZAS);
             dvPiezas.Sort = "PZA_NOMBRE ASC";
             dgvPiezas.DataSource = dvPiezas;
-            dvDetallePieza = new DataView(dsEstructura.DETALLE_PIEZA);
+            dvDetallePieza = new DataView(dsEstructura.MATERIASPRIMASXPIEZA);
             
             dgvDetallePieza.DataSource = dvDetallePieza;
             dvMPDisponibles = new DataView(dsEstructura.MATERIAS_PRIMAS);
