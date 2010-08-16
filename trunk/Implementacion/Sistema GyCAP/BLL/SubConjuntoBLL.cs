@@ -140,13 +140,13 @@ namespace GyCAP.BLL
         /// <param name="codigoConjunto">El código del subconjunto.</param>
         /// <exception cref="ElementoInexistenteException">Si no existe el subconjunto con el código ingresado.</exception>
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
-        public static void ObtenerEstructura(int codigoSubconjunto, Data.dsEstructura ds)
-        {
-            Entidades.SubConjunto subconjunto = new GyCAP.Entidades.SubConjunto();
-            subconjunto.CodigoSubconjunto = codigoSubconjunto;
-            if (!EsSubconjunto(subconjunto)) { throw new Entidades.Excepciones.ElementoInexistenteException(); }
-            DAL.SubConjuntoDAL.ObtenerEstructura(codigoSubconjunto, ds);
-        }
+        //public static void ObtenerEstructura(int codigoSubconjunto, Data.dsEstructura ds)
+        //{
+            //Entidades.SubConjunto subconjunto = new GyCAP.Entidades.SubConjunto();
+            //subconjunto.CodigoSubconjunto = codigoSubconjunto;
+            //if (!EsSubconjunto(subconjunto)) { throw new Entidades.Excepciones.ElementoInexistenteException(); }
+           // DAL.SubConjuntoDAL.ObtenerEstructura(codigoSubconjunto, ds);
+        //}
 
         /// <summary>
         /// Guarda una imagen de un subconjunto, si ya tiene una almacenada ésta se reemplaza.

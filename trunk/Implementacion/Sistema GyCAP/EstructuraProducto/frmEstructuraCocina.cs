@@ -748,7 +748,6 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 if (slideActual > 2) { slideControl.BackwardTo("slideSubconjuntos"); }
                 else { slideControl.ForwardTo("slideSubconjuntos"); }
-                //SetTextBotones("< Datos", "< Conjuntos", "Subconjuntos ^", "Piezas >", "Materia Prima >");
                 SetBotones(-1, btnDatos);
                 SetBotones(-1, btnConjuntos);
                 SetBotones(0, btnSubconjuntos);
@@ -764,7 +763,6 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 if (slideActual > 3) { slideControl.BackwardTo("slidePiezas"); }
                 else { slideControl.ForwardTo("slidePiezas"); }
-                //SetTextBotones("< Datos", "< Conjuntos", "< Subconjuntos", "Piezas ^", "Materia Prima >");
                 SetBotones(-1, btnDatos);
                 SetBotones(-1, btnConjuntos);
                 SetBotones(-1, btnSubconjuntos);
@@ -780,7 +778,6 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 if (slideActual > 4) { slideControl.BackwardTo("slideMateriaPrima"); }
                 else { slideControl.ForwardTo("slideMateriaPrima"); }
-                //SetTextBotones("< Datos", "< Conjuntos", "< Subconjuntos", "< Piezas", "Materia Prima ^");
                 SetBotones(-1, btnDatos);
                 SetBotones(-1, btnConjuntos);
                 SetBotones(-1, btnSubconjuntos);
@@ -788,15 +785,6 @@ namespace GyCAP.UI.EstructuraProducto
                 SetBotones(0, btnMateriaPrima);
                 slideActual = 4;
             }
-        }
-
-        private void SetTextBotones(string datos, string conjuntos, string subconjuntos, string piezas, string materiaPrima)
-        {
-            btnDatos.Text = datos;
-            btnConjuntos.Text = conjuntos;
-            btnSubconjuntos.Text = subconjuntos;
-            btnPiezas.Text = piezas;
-            btnMateriaPrima.Text = materiaPrima;
         }
 
         private void SetBotones(int orientacion, Button boton)
@@ -921,6 +909,7 @@ namespace GyCAP.UI.EstructuraProducto
                     CargarCSCPMP();
                     slideControl.Selected = slideDatos;
                     tcEstructuraCocina.SelectedTab = tpDatos;
+                    btnDatos.PerformClick();
                     break;
                 case estadoUI.nuevoExterno:
                     txtNombre.ReadOnly = false;
@@ -966,6 +955,7 @@ namespace GyCAP.UI.EstructuraProducto
                     CargarCSCPMP();
                     slideControl.Selected = slideDatos;
                     tcEstructuraCocina.SelectedTab = tpDatos;
+                    btnDatos.PerformClick();
                     break;
                 case estadoUI.consultar:
                     txtNombre.ReadOnly = true;
@@ -994,6 +984,7 @@ namespace GyCAP.UI.EstructuraProducto
                     CargarCSCPMP();
                     CargarListaPartes();
                     slideControl.Selected = slideDatos;
+                    btnDatos.PerformClick();
                     tcEstructuraCocina.SelectedTab = tpDatos;
                     break;
                 case estadoUI.modificar:
@@ -1023,6 +1014,7 @@ namespace GyCAP.UI.EstructuraProducto
                     CargarCSCPMP();
                     CargarListaPartes();
                     slideControl.Selected = slideDatos;
+                    btnDatos.PerformClick();
                     tcEstructuraCocina.SelectedTab = tpDatos;
                     break;
                 default:

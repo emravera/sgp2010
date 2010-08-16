@@ -42,7 +42,15 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnDatos = new System.Windows.Forms.Button();
+            this.btnPiezas = new System.Windows.Forms.Button();
+            this.btnSubconjuntos = new System.Windows.Forms.Button();
+            this.gbPartesConjunto = new System.Windows.Forms.GroupBox();
+            this.dgvPartes = new System.Windows.Forms.DataGridView();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.nudCosto = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
@@ -58,29 +66,39 @@
             this.btnImagen = new System.Windows.Forms.Button();
             this.pbImagen = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.panelAcciones = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btnRestar = new System.Windows.Forms.Button();
-            this.btnSumar = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
-            this.dgvDetalleConjunto = new System.Windows.Forms.DataGridView();
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.slideDatos = new SlickInterface.Slide();
             this.slideControl = new SlickInterface.SlideControl();
-            this.tpAgregar = new System.Windows.Forms.TabPage();
+            this.tpSubconjuntos = new System.Windows.Forms.TabPage();
+            this.gbSCC = new System.Windows.Forms.GroupBox();
+            this.panelAccionesSubconjunto = new System.Windows.Forms.Panel();
+            this.btnRestarSubconjunto = new System.Windows.Forms.Button();
+            this.btnSumarSubconjunto = new System.Windows.Forms.Button();
+            this.btnDeleteSubconjunto = new System.Windows.Forms.Button();
+            this.dgvSubconjuntosConjunto = new System.Windows.Forms.DataGridView();
             this.gbSCD = new System.Windows.Forms.GroupBox();
             this.dgvSCDisponibles = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnAgregar = new System.Windows.Forms.Button();
+            this.panelAgregarSubconjunto = new System.Windows.Forms.Panel();
+            this.btnAgregarSubconjunto = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.btnHecho = new System.Windows.Forms.Button();
-            this.nudCantidad = new System.Windows.Forms.NumericUpDown();
-            this.slideAgregar = new SlickInterface.Slide();
+            this.nudCantidadSubconjunto = new System.Windows.Forms.NumericUpDown();
+            this.slideSubconjuntos = new SlickInterface.Slide();
+            this.tpPiezas = new System.Windows.Forms.TabPage();
+            this.gbPC = new System.Windows.Forms.GroupBox();
+            this.panelAccionesPieza = new System.Windows.Forms.Panel();
+            this.btnRestarPieza = new System.Windows.Forms.Button();
+            this.btnSumarPieza = new System.Windows.Forms.Button();
+            this.btnDeletePieza = new System.Windows.Forms.Button();
+            this.dgvPiezasConjunto = new System.Windows.Forms.DataGridView();
+            this.gbPD = new System.Windows.Forms.GroupBox();
+            this.dgvPDisponibles = new System.Windows.Forms.DataGridView();
+            this.panelAgregarPieza = new System.Windows.Forms.Panel();
+            this.btnAgregarPieza = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.nudCantidadPieza = new System.Windows.Forms.NumericUpDown();
+            this.slidePiezas = new SlickInterface.Slide();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.btnConsultar = new System.Windows.Forms.ToolStripButton();
@@ -96,24 +114,36 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvConjuntos)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tpDatos.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.gbPartesConjunto.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPartes)).BeginInit();
             this.gbDatos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCosto)).BeginInit();
             this.panelImagen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
-            this.groupBox3.SuspendLayout();
-            this.panelAcciones.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleConjunto)).BeginInit();
             this.gbGuardarCancelar.SuspendLayout();
-            this.tpAgregar.SuspendLayout();
+            this.tpSubconjuntos.SuspendLayout();
+            this.gbSCC.SuspendLayout();
+            this.panelAccionesSubconjunto.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSubconjuntosConjunto)).BeginInit();
             this.gbSCD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSCDisponibles)).BeginInit();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
+            this.panelAgregarSubconjunto.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadSubconjunto)).BeginInit();
+            this.tpPiezas.SuspendLayout();
+            this.gbPC.SuspendLayout();
+            this.panelAccionesPieza.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPiezasConjunto)).BeginInit();
+            this.gbPD.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPDisponibles)).BeginInit();
+            this.panelAgregarPieza.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadPieza)).BeginInit();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(81, 53);
+            this.txtNombre.Location = new System.Drawing.Point(81, 46);
             this.txtNombre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNombre.MaxLength = 80;
             this.txtNombre.Name = "txtNombre";
@@ -124,7 +154,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 56);
+            this.label3.Location = new System.Drawing.Point(7, 49);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 1;
@@ -152,7 +182,8 @@
             this.tcConjunto.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.tcConjunto.Controls.Add(this.tpBuscar);
             this.tcConjunto.Controls.Add(this.tpDatos);
-            this.tcConjunto.Controls.Add(this.tpAgregar);
+            this.tcConjunto.Controls.Add(this.tpSubconjuntos);
+            this.tcConjunto.Controls.Add(this.tpPiezas);
             this.tcConjunto.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcConjunto.ItemSize = new System.Drawing.Size(0, 1);
             this.tcConjunto.Location = new System.Drawing.Point(2, 54);
@@ -281,8 +312,9 @@
             // 
             // tpDatos
             // 
-            this.tpDatos.Controls.Add(this.gbDatos);
             this.tpDatos.Controls.Add(this.groupBox3);
+            this.tpDatos.Controls.Add(this.gbPartesConjunto);
+            this.tpDatos.Controls.Add(this.gbDatos);
             this.tpDatos.Controls.Add(this.gbGuardarCancelar);
             this.tpDatos.Controls.Add(this.slideDatos);
             this.tpDatos.Controls.Add(this.slideControl);
@@ -294,8 +326,84 @@
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnDatos);
+            this.groupBox3.Controls.Add(this.btnPiezas);
+            this.groupBox3.Controls.Add(this.btnSubconjuntos);
+            this.groupBox3.Location = new System.Drawing.Point(6, 472);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(350, 57);
+            this.groupBox3.TabIndex = 11;
+            this.groupBox3.TabStop = false;
+            // 
+            // btnDatos
+            // 
+            this.btnDatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDatos.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.arriba1_15;
+            this.btnDatos.Location = new System.Drawing.Point(19, 20);
+            this.btnDatos.Name = "btnDatos";
+            this.btnDatos.Size = new System.Drawing.Size(100, 25);
+            this.btnDatos.TabIndex = 15;
+            this.btnDatos.Text = "Datos";
+            this.btnDatos.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnDatos.UseVisualStyleBackColor = true;
+            this.btnDatos.Click += new System.EventHandler(this.btnDatos_Click);
+            // 
+            // btnPiezas
+            // 
+            this.btnPiezas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPiezas.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.derecha1_15;
+            this.btnPiezas.Location = new System.Drawing.Point(231, 20);
+            this.btnPiezas.Name = "btnPiezas";
+            this.btnPiezas.Size = new System.Drawing.Size(100, 25);
+            this.btnPiezas.TabIndex = 17;
+            this.btnPiezas.Text = "Piezas";
+            this.btnPiezas.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnPiezas.UseVisualStyleBackColor = true;
+            this.btnPiezas.Click += new System.EventHandler(this.btnPiezas_Click);
+            // 
+            // btnSubconjuntos
+            // 
+            this.btnSubconjuntos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubconjuntos.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.derecha1_15;
+            this.btnSubconjuntos.Location = new System.Drawing.Point(125, 20);
+            this.btnSubconjuntos.Name = "btnSubconjuntos";
+            this.btnSubconjuntos.Size = new System.Drawing.Size(100, 25);
+            this.btnSubconjuntos.TabIndex = 16;
+            this.btnSubconjuntos.Text = "Subconjuntos";
+            this.btnSubconjuntos.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnSubconjuntos.UseVisualStyleBackColor = true;
+            this.btnSubconjuntos.Click += new System.EventHandler(this.btnSubconjuntos_Click);
+            // 
+            // gbPartesConjunto
+            // 
+            this.gbPartesConjunto.Controls.Add(this.dgvPartes);
+            this.gbPartesConjunto.Location = new System.Drawing.Point(4, 244);
+            this.gbPartesConjunto.Name = "gbPartesConjunto";
+            this.gbPartesConjunto.Size = new System.Drawing.Size(516, 225);
+            this.gbPartesConjunto.TabIndex = 10;
+            this.gbPartesConjunto.TabStop = false;
+            this.gbPartesConjunto.Text = "Partes del conjunto";
+            // 
+            // dgvPartes
+            // 
+            this.dgvPartes.AllowUserToAddRows = false;
+            this.dgvPartes.AllowUserToDeleteRows = false;
+            this.dgvPartes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPartes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPartes.Location = new System.Drawing.Point(3, 16);
+            this.dgvPartes.MultiSelect = false;
+            this.dgvPartes.Name = "dgvPartes";
+            this.dgvPartes.RowHeadersVisible = false;
+            this.dgvPartes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPartes.Size = new System.Drawing.Size(510, 206);
+            this.dgvPartes.TabIndex = 14;
+            // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.nudCosto);
+            this.gbDatos.Controls.Add(this.label13);
             this.gbDatos.Controls.Add(this.label12);
             this.gbDatos.Controls.Add(this.label9);
             this.gbDatos.Controls.Add(this.cbEstado);
@@ -313,15 +421,44 @@
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
             this.gbDatos.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbDatos.Size = new System.Drawing.Size(516, 230);
+            this.gbDatos.Size = new System.Drawing.Size(516, 235);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del conjunto";
             // 
+            // nudCosto
+            // 
+            this.nudCosto.DecimalPlaces = 2;
+            this.nudCosto.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudCosto.Location = new System.Drawing.Point(81, 154);
+            this.nudCosto.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudCosto.Name = "nudCosto";
+            this.nudCosto.Size = new System.Drawing.Size(305, 20);
+            this.nudCosto.TabIndex = 10;
+            this.nudCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudCosto.Enter += new System.EventHandler(this.control_Enter);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(7, 156);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(39, 13);
+            this.label13.TabIndex = 20;
+            this.label13.Text = "Costo:";
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(7, 137);
+            this.label12.Location = new System.Drawing.Point(7, 130);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(37, 13);
             this.label12.TabIndex = 19;
@@ -330,7 +467,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(7, 108);
+            this.label9.Location = new System.Drawing.Point(7, 101);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(44, 13);
             this.label9.TabIndex = 18;
@@ -341,7 +478,7 @@
             this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEstado.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(81, 105);
+            this.cbEstado.Location = new System.Drawing.Point(81, 98);
             this.cbEstado.Name = "cbEstado";
             this.cbEstado.Size = new System.Drawing.Size(305, 21);
             this.cbEstado.TabIndex = 8;
@@ -351,7 +488,7 @@
             this.cbPlano.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPlano.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbPlano.FormattingEnabled = true;
-            this.cbPlano.Location = new System.Drawing.Point(81, 134);
+            this.cbPlano.Location = new System.Drawing.Point(81, 127);
             this.cbPlano.Name = "cbPlano";
             this.cbPlano.Size = new System.Drawing.Size(305, 21);
             this.cbPlano.TabIndex = 9;
@@ -361,14 +498,14 @@
             this.cbTerminacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTerminacion.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbTerminacion.FormattingEnabled = true;
-            this.cbTerminacion.Location = new System.Drawing.Point(81, 78);
+            this.cbTerminacion.Location = new System.Drawing.Point(81, 71);
             this.cbTerminacion.Name = "cbTerminacion";
             this.cbTerminacion.Size = new System.Drawing.Size(305, 21);
             this.cbTerminacion.TabIndex = 7;
             // 
             // txtCodigo
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(81, 27);
+            this.txtCodigo.Location = new System.Drawing.Point(81, 20);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(305, 20);
             this.txtCodigo.TabIndex = 4;
@@ -377,7 +514,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 30);
+            this.label4.Location = new System.Drawing.Point(7, 23);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 13;
@@ -385,19 +522,19 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(81, 160);
+            this.txtDescripcion.Location = new System.Drawing.Point(81, 179);
             this.txtDescripcion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(305, 61);
-            this.txtDescripcion.TabIndex = 10;
+            this.txtDescripcion.Size = new System.Drawing.Size(305, 49);
+            this.txtDescripcion.TabIndex = 11;
             this.txtDescripcion.Text = "";
             this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 160);
+            this.label2.Location = new System.Drawing.Point(6, 179);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 0;
@@ -423,7 +560,7 @@
             this.btnQuitarImagen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnQuitarImagen.Name = "btnQuitarImagen";
             this.btnQuitarImagen.Size = new System.Drawing.Size(86, 22);
-            this.btnQuitarImagen.TabIndex = 12;
+            this.btnQuitarImagen.TabIndex = 13;
             this.btnQuitarImagen.Text = "&Quitar";
             this.btnQuitarImagen.UseVisualStyleBackColor = true;
             this.btnQuitarImagen.Click += new System.EventHandler(this.btnQuitarImagen_Click);
@@ -444,7 +581,7 @@
             this.btnImagen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnImagen.Name = "btnImagen";
             this.btnImagen.Size = new System.Drawing.Size(86, 22);
-            this.btnImagen.TabIndex = 11;
+            this.btnImagen.TabIndex = 12;
             this.btnImagen.Text = "&Seleccionar";
             this.btnImagen.UseVisualStyleBackColor = true;
             this.btnImagen.Click += new System.EventHandler(this.btnImagen_Click);
@@ -464,166 +601,42 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 81);
+            this.label1.Location = new System.Drawing.Point(7, 74);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "Terminación:";
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.panelAcciones);
-            this.groupBox3.Controls.Add(this.dgvDetalleConjunto);
-            this.groupBox3.Location = new System.Drawing.Point(6, 241);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(514, 228);
-            this.groupBox3.TabIndex = 14;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Subconjuntos que forman el conjunto";
-            // 
-            // panelAcciones
-            // 
-            this.panelAcciones.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelAcciones.Controls.Add(this.label7);
-            this.panelAcciones.Controls.Add(this.label6);
-            this.panelAcciones.Controls.Add(this.btnRestar);
-            this.panelAcciones.Controls.Add(this.btnSumar);
-            this.panelAcciones.Controls.Add(this.btnDelete);
-            this.panelAcciones.Controls.Add(this.btnNew);
-            this.panelAcciones.Location = new System.Drawing.Point(435, 43);
-            this.panelAcciones.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panelAcciones.Name = "panelAcciones";
-            this.panelAcciones.Size = new System.Drawing.Size(73, 148);
-            this.panelAcciones.TabIndex = 11;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(11, 86);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(50, 13);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Cantidad";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(2, 13);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 13);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "Subconjunto";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnRestar
-            // 
-            this.btnRestar.FlatAppearance.BorderSize = 0;
-            this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRestar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Restar_Gris_25;
-            this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRestar.Location = new System.Drawing.Point(35, 103);
-            this.btnRestar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnRestar.Name = "btnRestar";
-            this.btnRestar.Size = new System.Drawing.Size(30, 30);
-            this.btnRestar.TabIndex = 17;
-            this.btnRestar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRestar.UseVisualStyleBackColor = true;
-            this.btnRestar.Click += new System.EventHandler(this.btnRestar_Click);
-            // 
-            // btnSumar
-            // 
-            this.btnSumar.FlatAppearance.BorderSize = 0;
-            this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSumar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Sumar_Gris_25;
-            this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSumar.Location = new System.Drawing.Point(2, 103);
-            this.btnSumar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSumar.Name = "btnSumar";
-            this.btnSumar.Size = new System.Drawing.Size(30, 30);
-            this.btnSumar.TabIndex = 16;
-            this.btnSumar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSumar.UseVisualStyleBackColor = true;
-            this.btnSumar.Click += new System.EventHandler(this.btnSumar_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.FlatAppearance.BorderSize = 0;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
-            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(36, 30);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(30, 30);
-            this.btnDelete.TabIndex = 15;
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnNew
-            // 
-            this.btnNew.FlatAppearance.BorderSize = 0;
-            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNew.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_25;
-            this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNew.Location = new System.Drawing.Point(2, 30);
-            this.btnNew.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(30, 30);
-            this.btnNew.TabIndex = 14;
-            this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            // 
-            // dgvDetalleConjunto
-            // 
-            this.dgvDetalleConjunto.AllowUserToAddRows = false;
-            this.dgvDetalleConjunto.AllowUserToDeleteRows = false;
-            this.dgvDetalleConjunto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetalleConjunto.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dgvDetalleConjunto.Location = new System.Drawing.Point(3, 16);
-            this.dgvDetalleConjunto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgvDetalleConjunto.MultiSelect = false;
-            this.dgvDetalleConjunto.Name = "dgvDetalleConjunto";
-            this.dgvDetalleConjunto.ReadOnly = true;
-            this.dgvDetalleConjunto.RowHeadersVisible = false;
-            this.dgvDetalleConjunto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetalleConjunto.Size = new System.Drawing.Size(426, 209);
-            this.dgvDetalleConjunto.TabIndex = 13;
-            this.dgvDetalleConjunto.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetalleConjunto_CellFormatting);
-            // 
             // gbGuardarCancelar
             // 
             this.gbGuardarCancelar.Controls.Add(this.btnVolver);
             this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
-            this.gbGuardarCancelar.Location = new System.Drawing.Point(8, 473);
+            this.gbGuardarCancelar.Location = new System.Drawing.Point(360, 473);
             this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
             this.gbGuardarCancelar.Name = "gbGuardarCancelar";
             this.gbGuardarCancelar.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbGuardarCancelar.Size = new System.Drawing.Size(512, 57);
+            this.gbGuardarCancelar.Size = new System.Drawing.Size(160, 57);
             this.gbGuardarCancelar.TabIndex = 1;
             this.gbGuardarCancelar.TabStop = false;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(442, 17);
+            this.btnVolver.Location = new System.Drawing.Point(84, 19);
             this.btnVolver.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(64, 26);
-            this.btnVolver.TabIndex = 17;
+            this.btnVolver.TabIndex = 19;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(372, 17);
+            this.btnGuardar.Location = new System.Drawing.Point(14, 19);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(64, 26);
-            this.btnGuardar.TabIndex = 16;
+            this.btnGuardar.TabIndex = 18;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -633,7 +646,7 @@
             this.slideDatos.Location = new System.Drawing.Point(3, 5);
             this.slideDatos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.slideDatos.Name = "slideDatos";
-            this.slideDatos.Size = new System.Drawing.Size(517, 239);
+            this.slideDatos.Size = new System.Drawing.Size(517, 468);
             this.slideDatos.SlideControl = null;
             this.slideDatos.TabIndex = 9;
             // 
@@ -643,24 +656,113 @@
             this.slideControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.slideControl.Name = "slideControl";
             this.slideControl.Selected = null;
-            this.slideControl.Size = new System.Drawing.Size(522, 240);
+            this.slideControl.Size = new System.Drawing.Size(522, 468);
             this.slideControl.SlideSpeed = 250;
             this.slideControl.TabIndex = 8;
             // 
-            // tpAgregar
+            // tpSubconjuntos
             // 
-            this.tpAgregar.Controls.Add(this.gbSCD);
-            this.tpAgregar.Controls.Add(this.slideAgregar);
-            this.tpAgregar.Location = new System.Drawing.Point(4, 5);
-            this.tpAgregar.Name = "tpAgregar";
-            this.tpAgregar.Size = new System.Drawing.Size(525, 532);
-            this.tpAgregar.TabIndex = 2;
-            this.tpAgregar.UseVisualStyleBackColor = true;
+            this.tpSubconjuntos.Controls.Add(this.gbSCC);
+            this.tpSubconjuntos.Controls.Add(this.gbSCD);
+            this.tpSubconjuntos.Controls.Add(this.slideSubconjuntos);
+            this.tpSubconjuntos.Location = new System.Drawing.Point(4, 5);
+            this.tpSubconjuntos.Name = "tpSubconjuntos";
+            this.tpSubconjuntos.Size = new System.Drawing.Size(525, 532);
+            this.tpSubconjuntos.TabIndex = 2;
+            this.tpSubconjuntos.UseVisualStyleBackColor = true;
+            // 
+            // gbSCC
+            // 
+            this.gbSCC.Controls.Add(this.panelAccionesSubconjunto);
+            this.gbSCC.Controls.Add(this.dgvSubconjuntosConjunto);
+            this.gbSCC.Location = new System.Drawing.Point(3, 244);
+            this.gbSCC.Name = "gbSCC";
+            this.gbSCC.Size = new System.Drawing.Size(514, 228);
+            this.gbSCC.TabIndex = 16;
+            this.gbSCC.TabStop = false;
+            this.gbSCC.Text = "Subconjuntos que forman el conjunto";
+            // 
+            // panelAccionesSubconjunto
+            // 
+            this.panelAccionesSubconjunto.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelAccionesSubconjunto.Controls.Add(this.btnRestarSubconjunto);
+            this.panelAccionesSubconjunto.Controls.Add(this.btnSumarSubconjunto);
+            this.panelAccionesSubconjunto.Controls.Add(this.btnDeleteSubconjunto);
+            this.panelAccionesSubconjunto.Location = new System.Drawing.Point(435, 43);
+            this.panelAccionesSubconjunto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelAccionesSubconjunto.Name = "panelAccionesSubconjunto";
+            this.panelAccionesSubconjunto.Size = new System.Drawing.Size(73, 148);
+            this.panelAccionesSubconjunto.TabIndex = 11;
+            // 
+            // btnRestarSubconjunto
+            // 
+            this.btnRestarSubconjunto.AutoSize = true;
+            this.btnRestarSubconjunto.FlatAppearance.BorderSize = 0;
+            this.btnRestarSubconjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRestarSubconjunto.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Restar_Gris_25;
+            this.btnRestarSubconjunto.Location = new System.Drawing.Point(5, 95);
+            this.btnRestarSubconjunto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRestarSubconjunto.Name = "btnRestarSubconjunto";
+            this.btnRestarSubconjunto.Size = new System.Drawing.Size(60, 48);
+            this.btnRestarSubconjunto.TabIndex = 25;
+            this.btnRestarSubconjunto.Text = "Cantidad";
+            this.btnRestarSubconjunto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRestarSubconjunto.UseVisualStyleBackColor = true;
+            this.btnRestarSubconjunto.Click += new System.EventHandler(this.btnRestarSubconjunto_Click);
+            // 
+            // btnSumarSubconjunto
+            // 
+            this.btnSumarSubconjunto.AutoSize = true;
+            this.btnSumarSubconjunto.FlatAppearance.BorderSize = 0;
+            this.btnSumarSubconjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSumarSubconjunto.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Sumar_Gris_25;
+            this.btnSumarSubconjunto.Location = new System.Drawing.Point(4, 50);
+            this.btnSumarSubconjunto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSumarSubconjunto.Name = "btnSumarSubconjunto";
+            this.btnSumarSubconjunto.Size = new System.Drawing.Size(60, 48);
+            this.btnSumarSubconjunto.TabIndex = 24;
+            this.btnSumarSubconjunto.Text = "Cantidad";
+            this.btnSumarSubconjunto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSumarSubconjunto.UseVisualStyleBackColor = true;
+            this.btnSumarSubconjunto.Click += new System.EventHandler(this.btnSumarSubconjunto_Click);
+            // 
+            // btnDeleteSubconjunto
+            // 
+            this.btnDeleteSubconjunto.AutoSize = true;
+            this.btnDeleteSubconjunto.FlatAppearance.BorderSize = 0;
+            this.btnDeleteSubconjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteSubconjunto.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
+            this.btnDeleteSubconjunto.Location = new System.Drawing.Point(9, 2);
+            this.btnDeleteSubconjunto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDeleteSubconjunto.Name = "btnDeleteSubconjunto";
+            this.btnDeleteSubconjunto.Size = new System.Drawing.Size(53, 50);
+            this.btnDeleteSubconjunto.TabIndex = 23;
+            this.btnDeleteSubconjunto.Text = "Eliminar";
+            this.btnDeleteSubconjunto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDeleteSubconjunto.UseVisualStyleBackColor = true;
+            this.btnDeleteSubconjunto.Click += new System.EventHandler(this.btnDeleteSubconjunto_Click);
+            // 
+            // dgvSubconjuntosConjunto
+            // 
+            this.dgvSubconjuntosConjunto.AllowUserToAddRows = false;
+            this.dgvSubconjuntosConjunto.AllowUserToDeleteRows = false;
+            this.dgvSubconjuntosConjunto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSubconjuntosConjunto.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dgvSubconjuntosConjunto.Location = new System.Drawing.Point(3, 16);
+            this.dgvSubconjuntosConjunto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvSubconjuntosConjunto.MultiSelect = false;
+            this.dgvSubconjuntosConjunto.Name = "dgvSubconjuntosConjunto";
+            this.dgvSubconjuntosConjunto.ReadOnly = true;
+            this.dgvSubconjuntosConjunto.RowHeadersVisible = false;
+            this.dgvSubconjuntosConjunto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvSubconjuntosConjunto.Size = new System.Drawing.Size(426, 209);
+            this.dgvSubconjuntosConjunto.TabIndex = 22;
+            this.dgvSubconjuntosConjunto.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSubconjuntosConjunto_CellFormatting);
             // 
             // gbSCD
             // 
             this.gbSCD.Controls.Add(this.dgvSCDisponibles);
-            this.gbSCD.Controls.Add(this.panel1);
+            this.gbSCD.Controls.Add(this.panelAgregarSubconjunto);
             this.gbSCD.Location = new System.Drawing.Point(4, 3);
             this.gbSCD.Name = "gbSCD";
             this.gbSCD.Size = new System.Drawing.Size(513, 235);
@@ -682,75 +784,242 @@
             this.dgvSCDisponibles.RowHeadersVisible = false;
             this.dgvSCDisponibles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSCDisponibles.Size = new System.Drawing.Size(424, 216);
-            this.dgvSCDisponibles.TabIndex = 18;
+            this.dgvSCDisponibles.TabIndex = 35;
             this.dgvSCDisponibles.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSCDisponibles_CellFormatting);
             // 
-            // panel1
+            // panelAgregarSubconjunto
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.btnAgregar);
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.btnHecho);
-            this.panel1.Controls.Add(this.nudCantidad);
-            this.panel1.Location = new System.Drawing.Point(433, 57);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(73, 127);
-            this.panel1.TabIndex = 6;
+            this.panelAgregarSubconjunto.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelAgregarSubconjunto.Controls.Add(this.btnAgregarSubconjunto);
+            this.panelAgregarSubconjunto.Controls.Add(this.label8);
+            this.panelAgregarSubconjunto.Controls.Add(this.nudCantidadSubconjunto);
+            this.panelAgregarSubconjunto.Location = new System.Drawing.Point(433, 57);
+            this.panelAgregarSubconjunto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelAgregarSubconjunto.Name = "panelAgregarSubconjunto";
+            this.panelAgregarSubconjunto.Size = new System.Drawing.Size(73, 127);
+            this.panelAgregarSubconjunto.TabIndex = 6;
             // 
-            // btnAgregar
+            // btnAgregarSubconjunto
             // 
-            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAgregar.Location = new System.Drawing.Point(3, 63);
-            this.btnAgregar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(64, 22);
-            this.btnAgregar.TabIndex = 20;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            this.btnAgregarSubconjunto.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAgregarSubconjunto.Location = new System.Drawing.Point(3, 72);
+            this.btnAgregarSubconjunto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAgregarSubconjunto.Name = "btnAgregarSubconjunto";
+            this.btnAgregarSubconjunto.Size = new System.Drawing.Size(64, 22);
+            this.btnAgregarSubconjunto.TabIndex = 21;
+            this.btnAgregarSubconjunto.Text = "Agregar";
+            this.btnAgregarSubconjunto.UseVisualStyleBackColor = true;
+            this.btnAgregarSubconjunto.Click += new System.EventHandler(this.btnAgregarSubconjunto_Click);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.label8.Location = new System.Drawing.Point(0, 13);
+            this.label8.Location = new System.Drawing.Point(0, 22);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(50, 13);
             this.label8.TabIndex = 1;
             this.label8.Text = "Cantidad";
             // 
-            // btnHecho
+            // nudCantidadSubconjunto
             // 
-            this.btnHecho.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnHecho.Location = new System.Drawing.Point(3, 90);
-            this.btnHecho.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnHecho.Name = "btnHecho";
-            this.btnHecho.Size = new System.Drawing.Size(64, 22);
-            this.btnHecho.TabIndex = 21;
-            this.btnHecho.Text = "Hecho";
-            this.btnHecho.UseVisualStyleBackColor = true;
-            this.btnHecho.Click += new System.EventHandler(this.btnHecho_Click);
+            this.nudCantidadSubconjunto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.nudCantidadSubconjunto.Location = new System.Drawing.Point(3, 39);
+            this.nudCantidadSubconjunto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.nudCantidadSubconjunto.Name = "nudCantidadSubconjunto";
+            this.nudCantidadSubconjunto.Size = new System.Drawing.Size(64, 20);
+            this.nudCantidadSubconjunto.TabIndex = 20;
+            this.nudCantidadSubconjunto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudCantidadSubconjunto.Enter += new System.EventHandler(this.control_Enter);
             // 
-            // nudCantidad
+            // slideSubconjuntos
             // 
-            this.nudCantidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.nudCantidad.Location = new System.Drawing.Point(3, 30);
-            this.nudCantidad.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.nudCantidad.Name = "nudCantidad";
-            this.nudCantidad.Size = new System.Drawing.Size(64, 20);
-            this.nudCantidad.TabIndex = 19;
-            this.nudCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudCantidad.Enter += new System.EventHandler(this.control_Enter);
+            this.slideSubconjuntos.Location = new System.Drawing.Point(3, 2);
+            this.slideSubconjuntos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.slideSubconjuntos.Name = "slideSubconjuntos";
+            this.slideSubconjuntos.Size = new System.Drawing.Size(517, 468);
+            this.slideSubconjuntos.SlideControl = null;
+            this.slideSubconjuntos.TabIndex = 15;
             // 
-            // slideAgregar
+            // tpPiezas
             // 
-            this.slideAgregar.Location = new System.Drawing.Point(3, 2);
-            this.slideAgregar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.slideAgregar.Name = "slideAgregar";
-            this.slideAgregar.Size = new System.Drawing.Size(517, 239);
-            this.slideAgregar.SlideControl = null;
-            this.slideAgregar.TabIndex = 15;
+            this.tpPiezas.Controls.Add(this.gbPC);
+            this.tpPiezas.Controls.Add(this.gbPD);
+            this.tpPiezas.Controls.Add(this.slidePiezas);
+            this.tpPiezas.Location = new System.Drawing.Point(4, 5);
+            this.tpPiezas.Name = "tpPiezas";
+            this.tpPiezas.Size = new System.Drawing.Size(525, 532);
+            this.tpPiezas.TabIndex = 3;
+            this.tpPiezas.UseVisualStyleBackColor = true;
+            // 
+            // gbPC
+            // 
+            this.gbPC.Controls.Add(this.panelAccionesPieza);
+            this.gbPC.Controls.Add(this.dgvPiezasConjunto);
+            this.gbPC.Location = new System.Drawing.Point(2, 244);
+            this.gbPC.Name = "gbPC";
+            this.gbPC.Size = new System.Drawing.Size(514, 228);
+            this.gbPC.TabIndex = 18;
+            this.gbPC.TabStop = false;
+            this.gbPC.Text = "Piezas que forman el conjunto";
+            // 
+            // panelAccionesPieza
+            // 
+            this.panelAccionesPieza.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelAccionesPieza.Controls.Add(this.btnRestarPieza);
+            this.panelAccionesPieza.Controls.Add(this.btnSumarPieza);
+            this.panelAccionesPieza.Controls.Add(this.btnDeletePieza);
+            this.panelAccionesPieza.Location = new System.Drawing.Point(435, 43);
+            this.panelAccionesPieza.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelAccionesPieza.Name = "panelAccionesPieza";
+            this.panelAccionesPieza.Size = new System.Drawing.Size(73, 148);
+            this.panelAccionesPieza.TabIndex = 11;
+            // 
+            // btnRestarPieza
+            // 
+            this.btnRestarPieza.AutoSize = true;
+            this.btnRestarPieza.FlatAppearance.BorderSize = 0;
+            this.btnRestarPieza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRestarPieza.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Restar_Gris_25;
+            this.btnRestarPieza.Location = new System.Drawing.Point(5, 95);
+            this.btnRestarPieza.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRestarPieza.Name = "btnRestarPieza";
+            this.btnRestarPieza.Size = new System.Drawing.Size(60, 48);
+            this.btnRestarPieza.TabIndex = 32;
+            this.btnRestarPieza.Text = "Cantidad";
+            this.btnRestarPieza.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRestarPieza.UseVisualStyleBackColor = true;
+            this.btnRestarPieza.Click += new System.EventHandler(this.btnRestarPieza_Click);
+            // 
+            // btnSumarPieza
+            // 
+            this.btnSumarPieza.AutoSize = true;
+            this.btnSumarPieza.FlatAppearance.BorderSize = 0;
+            this.btnSumarPieza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSumarPieza.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Sumar_Gris_25;
+            this.btnSumarPieza.Location = new System.Drawing.Point(-9, 51);
+            this.btnSumarPieza.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSumarPieza.Name = "btnSumarPieza";
+            this.btnSumarPieza.Size = new System.Drawing.Size(85, 48);
+            this.btnSumarPieza.TabIndex = 31;
+            this.btnSumarPieza.Text = "Cantidad";
+            this.btnSumarPieza.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSumarPieza.UseVisualStyleBackColor = true;
+            this.btnSumarPieza.Click += new System.EventHandler(this.btnSumarPieza_Click);
+            // 
+            // btnDeletePieza
+            // 
+            this.btnDeletePieza.AutoSize = true;
+            this.btnDeletePieza.FlatAppearance.BorderSize = 0;
+            this.btnDeletePieza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeletePieza.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
+            this.btnDeletePieza.Location = new System.Drawing.Point(9, 3);
+            this.btnDeletePieza.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDeletePieza.Name = "btnDeletePieza";
+            this.btnDeletePieza.Size = new System.Drawing.Size(53, 48);
+            this.btnDeletePieza.TabIndex = 30;
+            this.btnDeletePieza.Text = "Eliminar";
+            this.btnDeletePieza.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDeletePieza.UseVisualStyleBackColor = true;
+            this.btnDeletePieza.Click += new System.EventHandler(this.btnDeletePieza_Click);
+            // 
+            // dgvPiezasConjunto
+            // 
+            this.dgvPiezasConjunto.AllowUserToAddRows = false;
+            this.dgvPiezasConjunto.AllowUserToDeleteRows = false;
+            this.dgvPiezasConjunto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPiezasConjunto.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dgvPiezasConjunto.Location = new System.Drawing.Point(3, 16);
+            this.dgvPiezasConjunto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvPiezasConjunto.MultiSelect = false;
+            this.dgvPiezasConjunto.Name = "dgvPiezasConjunto";
+            this.dgvPiezasConjunto.ReadOnly = true;
+            this.dgvPiezasConjunto.RowHeadersVisible = false;
+            this.dgvPiezasConjunto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPiezasConjunto.Size = new System.Drawing.Size(426, 209);
+            this.dgvPiezasConjunto.TabIndex = 29;
+            this.dgvPiezasConjunto.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPiezasConjunto_CellFormatting);
+            // 
+            // gbPD
+            // 
+            this.gbPD.Controls.Add(this.dgvPDisponibles);
+            this.gbPD.Controls.Add(this.panelAgregarPieza);
+            this.gbPD.Location = new System.Drawing.Point(3, 3);
+            this.gbPD.Name = "gbPD";
+            this.gbPD.Size = new System.Drawing.Size(513, 235);
+            this.gbPD.TabIndex = 17;
+            this.gbPD.TabStop = false;
+            this.gbPD.Text = "Piezas disponibles";
+            // 
+            // dgvPDisponibles
+            // 
+            this.dgvPDisponibles.AllowUserToAddRows = false;
+            this.dgvPDisponibles.AllowUserToDeleteRows = false;
+            this.dgvPDisponibles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPDisponibles.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dgvPDisponibles.Location = new System.Drawing.Point(3, 16);
+            this.dgvPDisponibles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvPDisponibles.MultiSelect = false;
+            this.dgvPDisponibles.Name = "dgvPDisponibles";
+            this.dgvPDisponibles.ReadOnly = true;
+            this.dgvPDisponibles.RowHeadersVisible = false;
+            this.dgvPDisponibles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPDisponibles.Size = new System.Drawing.Size(424, 216);
+            this.dgvPDisponibles.TabIndex = 35;
+            this.dgvPDisponibles.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPDisponibles_CellFormatting);
+            // 
+            // panelAgregarPieza
+            // 
+            this.panelAgregarPieza.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelAgregarPieza.Controls.Add(this.btnAgregarPieza);
+            this.panelAgregarPieza.Controls.Add(this.label16);
+            this.panelAgregarPieza.Controls.Add(this.nudCantidadPieza);
+            this.panelAgregarPieza.Location = new System.Drawing.Point(433, 57);
+            this.panelAgregarPieza.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelAgregarPieza.Name = "panelAgregarPieza";
+            this.panelAgregarPieza.Size = new System.Drawing.Size(73, 127);
+            this.panelAgregarPieza.TabIndex = 6;
+            // 
+            // btnAgregarPieza
+            // 
+            this.btnAgregarPieza.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAgregarPieza.Location = new System.Drawing.Point(3, 73);
+            this.btnAgregarPieza.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAgregarPieza.Name = "btnAgregarPieza";
+            this.btnAgregarPieza.Size = new System.Drawing.Size(64, 22);
+            this.btnAgregarPieza.TabIndex = 28;
+            this.btnAgregarPieza.Text = "Agregar";
+            this.btnAgregarPieza.UseVisualStyleBackColor = true;
+            this.btnAgregarPieza.Click += new System.EventHandler(this.btnAgregarPieza_Click);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label16.Location = new System.Drawing.Point(0, 23);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(50, 13);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "Cantidad";
+            // 
+            // nudCantidadPieza
+            // 
+            this.nudCantidadPieza.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.nudCantidadPieza.Location = new System.Drawing.Point(3, 40);
+            this.nudCantidadPieza.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.nudCantidadPieza.Name = "nudCantidadPieza";
+            this.nudCantidadPieza.Size = new System.Drawing.Size(64, 20);
+            this.nudCantidadPieza.TabIndex = 27;
+            this.nudCantidadPieza.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudCantidadPieza.Enter += new System.EventHandler(this.control_Enter);
+            // 
+            // slidePiezas
+            // 
+            this.slidePiezas.Location = new System.Drawing.Point(3, 3);
+            this.slidePiezas.Name = "slidePiezas";
+            this.slidePiezas.Size = new System.Drawing.Size(517, 468);
+            this.slidePiezas.SlideControl = null;
+            this.slidePiezas.TabIndex = 0;
             // 
             // tsMenu
             // 
@@ -863,22 +1132,36 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tpDatos.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.gbPartesConjunto.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPartes)).EndInit();
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCosto)).EndInit();
             this.panelImagen.ResumeLayout(false);
             this.panelImagen.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.panelAcciones.ResumeLayout(false);
-            this.panelAcciones.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleConjunto)).EndInit();
             this.gbGuardarCancelar.ResumeLayout(false);
-            this.tpAgregar.ResumeLayout(false);
+            this.tpSubconjuntos.ResumeLayout(false);
+            this.gbSCC.ResumeLayout(false);
+            this.panelAccionesSubconjunto.ResumeLayout(false);
+            this.panelAccionesSubconjunto.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSubconjuntosConjunto)).EndInit();
             this.gbSCD.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSCDisponibles)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();
+            this.panelAgregarSubconjunto.ResumeLayout(false);
+            this.panelAgregarSubconjunto.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadSubconjunto)).EndInit();
+            this.tpPiezas.ResumeLayout(false);
+            this.gbPC.ResumeLayout(false);
+            this.panelAccionesPieza.ResumeLayout(false);
+            this.panelAccionesPieza.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPiezasConjunto)).EndInit();
+            this.gbPD.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPDisponibles)).EndInit();
+            this.panelAgregarPieza.ResumeLayout(false);
+            this.panelAgregarPieza.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadPieza)).EndInit();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -910,28 +1193,19 @@
         private System.Windows.Forms.ToolStripButton btnEliminar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnSalir;
-        private System.Windows.Forms.DataGridView dgvDetalleConjunto;
         private System.Windows.Forms.Label label1;
         private SlickInterface.Slide slideDatos;
         private SlickInterface.SlideControl slideControl;
-        private System.Windows.Forms.Panel panelAcciones;
-        private System.Windows.Forms.Button btnRestar;
-        private System.Windows.Forms.Button btnSumar;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Panel panelImagen;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnImagen;
         private System.Windows.Forms.PictureBox pbImagen;
         private System.Windows.Forms.OpenFileDialog ofdImagen;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.RichTextBox txtDescripcion;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnQuitarImagen;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbTerminacionBuscar;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label9;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbEstado;
@@ -939,14 +1213,41 @@
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbTerminacion;
         private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TabPage tpAgregar;
+        private System.Windows.Forms.TabPage tpSubconjuntos;
         private System.Windows.Forms.GroupBox gbSCD;
         private System.Windows.Forms.DataGridView dgvSCDisponibles;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.Panel panelAgregarSubconjunto;
+        private System.Windows.Forms.Button btnAgregarSubconjunto;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button btnHecho;
-        private System.Windows.Forms.NumericUpDown nudCantidad;
-        private SlickInterface.Slide slideAgregar;
+        private System.Windows.Forms.NumericUpDown nudCantidadSubconjunto;
+        private SlickInterface.Slide slideSubconjuntos;
+        private System.Windows.Forms.NumericUpDown nudCosto;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TabPage tpPiezas;
+        private System.Windows.Forms.GroupBox gbSCC;
+        private System.Windows.Forms.Panel panelAccionesSubconjunto;
+        private System.Windows.Forms.Button btnRestarSubconjunto;
+        private System.Windows.Forms.Button btnSumarSubconjunto;
+        private System.Windows.Forms.Button btnDeleteSubconjunto;
+        private System.Windows.Forms.DataGridView dgvSubconjuntosConjunto;
+        private System.Windows.Forms.GroupBox gbPC;
+        private System.Windows.Forms.Panel panelAccionesPieza;
+        private System.Windows.Forms.Button btnRestarPieza;
+        private System.Windows.Forms.Button btnSumarPieza;
+        private System.Windows.Forms.Button btnDeletePieza;
+        private System.Windows.Forms.DataGridView dgvPiezasConjunto;
+        private System.Windows.Forms.GroupBox gbPD;
+        private System.Windows.Forms.DataGridView dgvPDisponibles;
+        private System.Windows.Forms.Panel panelAgregarPieza;
+        private System.Windows.Forms.Button btnAgregarPieza;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.NumericUpDown nudCantidadPieza;
+        private SlickInterface.Slide slidePiezas;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox gbPartesConjunto;
+        private System.Windows.Forms.Button btnDatos;
+        private System.Windows.Forms.Button btnPiezas;
+        private System.Windows.Forms.Button btnSubconjuntos;
+        private System.Windows.Forms.DataGridView dgvPartes;
     }
 }
