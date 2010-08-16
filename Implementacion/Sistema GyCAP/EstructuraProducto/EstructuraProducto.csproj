@@ -94,6 +94,12 @@
     <Compile Include="frmEstructuraCocina.Designer.cs">
       <DependentUpon>frmEstructuraCocina.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmEstructuraCocinaIT1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEstructuraCocinaIT1.Designer.cs">
+      <DependentUpon>frmEstructuraCocinaIT1.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmEstructuraProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +174,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEstructuraCocina.resx">
       <DependentUpon>frmEstructuraCocina.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEstructuraCocinaIT1.resx">
+      <DependentUpon>frmEstructuraCocinaIT1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEstructuraProducto.resx">

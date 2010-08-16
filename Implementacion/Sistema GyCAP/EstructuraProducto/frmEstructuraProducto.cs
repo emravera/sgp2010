@@ -245,7 +245,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmListadoEstructura.Instancia.Parent = areaTrabajo;
             frmListadoEstructura.Instancia.Location = PosicionarFormulario();
             frmListadoEstructura.Instancia.Show();
-            frmEstructuraCocina.Instancia.Focus();
+            frmListadoEstructura.Instancia.Focus();
         }
 
         #endregion
