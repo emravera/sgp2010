@@ -88,8 +88,8 @@ namespace GyCAP.DAL
                 }
                 #endregion
 
-                #region InsertSubconjuntos
-                Entidades.SubconjuntoEstructura subconjuntoE = new GyCAP.Entidades.SubconjuntoEstructura();
+                #region InsertSubconjuntos -Desactivado en IT2-
+                /*Entidades.SubconjuntoEstructura subconjuntoE = new GyCAP.Entidades.SubconjuntoEstructura();
                 foreach (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow[])dsEstructura.SUBCONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
                 {
                     subconjuntoE.CodigoEstructura = Convert.ToInt32(rowEstructura.ESTR_CODIGO);
@@ -101,7 +101,7 @@ namespace GyCAP.DAL
                     row.SCXE_CODIGO = subconjuntoE.CodigoDetalle;
                     row.GRP_CODIGO = subconjuntoE.CodigoGrupo;
                     row.EndEdit();
-                }
+                }*/
                 #endregion
 
                 #region InsertPiezas
@@ -120,8 +120,8 @@ namespace GyCAP.DAL
                 }
                 #endregion
 
-                #region InsertMateriaPrima
-                Entidades.MateriaPrimaEstructura mpE = new GyCAP.Entidades.MateriaPrimaEstructura();
+                #region InsertMateriaPrima -Desactivado en IT2-
+                /*Entidades.MateriaPrimaEstructura mpE = new GyCAP.Entidades.MateriaPrimaEstructura();
                 foreach (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow row in (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow[])dsEstructura.MATERIASPRIMASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
                 {
                     mpE.CodigoEstructura = Convert.ToInt32(rowEstructura.ESTR_CODIGO);
@@ -133,7 +133,7 @@ namespace GyCAP.DAL
                     row.MPXE_CODIGO = mpE.CodigoDetalle;
                     row.GRP_CODIGO = mpE.CodigoGrupo;
                     row.EndEdit();
-                }
+                }*/
 
                 #endregion
                 
@@ -163,9 +163,9 @@ namespace GyCAP.DAL
             {
                 transaccion = DB.IniciarTransaccion();
                 //Primero los hijos
-                MateriaPrimaEstructuraDAL.DeleteDetalleEstructura(codigoEstructura, transaccion);
+                //MateriaPrimaEstructuraDAL.DeleteDetalleEstructura(codigoEstructura, transaccion); desactivado IT2
                 PiezaEstructuraDAL.DeleteDetalleEstructura(codigoEstructura, transaccion);
-                SubconjuntoEstructuraDAL.DeleteDetalleEstructura(codigoEstructura, transaccion);
+                //SubconjuntoEstructuraDAL.DeleteDetalleEstructura(codigoEstructura, transaccion); desactivado IT2
                 ConjuntoEstructuraDAL.DeleteDetalleEstructura(codigoEstructura, transaccion);
                 GrupoEstructuraDAL.DeleteGruposEstructura(codigoEstructura, transaccion);
                 //Ahora el padre
@@ -243,7 +243,9 @@ namespace GyCAP.DAL
                     if (gE.CodigoGrupo != 0) { row.GRP_CODIGO = cE.CodigoGrupo; }
                     row.EndEdit();
                 }
-                Entidades.SubconjuntoEstructura scE = new GyCAP.Entidades.SubconjuntoEstructura();
+
+                #region SC Desactivado en IT2
+                /*Entidades.SubconjuntoEstructura scE = new GyCAP.Entidades.SubconjuntoEstructura();
                 foreach (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow[])dsEstructura.SUBCONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
                 {
                     scE.CodigoEstructura = Convert.ToInt32(row.ESTR_CODIGO);
@@ -256,7 +258,9 @@ namespace GyCAP.DAL
                     row.SCXE_CODIGO = scE.CodigoDetalle;
                     if (gE.CodigoGrupo != 0) { row.GRP_CODIGO = scE.CodigoGrupo; }
                     row.EndEdit();
-                }
+                }*/
+                #endregion
+
                 Entidades.PiezaEstructura pE = new GyCAP.Entidades.PiezaEstructura();
                 foreach (Data.dsEstructura.PIEZASXESTRUCTURARow row in (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
                 {
@@ -271,7 +275,9 @@ namespace GyCAP.DAL
                     if (gE.CodigoGrupo != 0) { row.GRP_CODIGO = pE.CodigoGrupo; }
                     row.EndEdit();
                 }
-                Entidades.MateriaPrimaEstructura mpE = new GyCAP.Entidades.MateriaPrimaEstructura();
+
+                #region MP Desactivado en IT2
+                /*Entidades.MateriaPrimaEstructura mpE = new GyCAP.Entidades.MateriaPrimaEstructura();
                 foreach (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow row in (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow[])dsEstructura.MATERIASPRIMASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
                 {
                     mpE.CodigoEstructura = Convert.ToInt32(row.ESTR_CODIGO);
@@ -284,8 +290,9 @@ namespace GyCAP.DAL
                     row.MPXE_CODIGO = mpE.CodigoDetalle;
                     if (gE.CodigoGrupo != 0) { row.GRP_CODIGO = mpE.CodigoGrupo; }
                     row.EndEdit();
-                }
-
+                }*/
+                #endregion
+                
                 #endregion
 
                 #region Updates
@@ -309,12 +316,14 @@ namespace GyCAP.DAL
                     ConjuntoEstructuraDAL.Actualizar(cE, transaccion);
                 }
 
-                foreach (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow[])dsEstructura.SUBCONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
+                #region SC Desactivado en IT2
+                /*foreach (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow[])dsEstructura.SUBCONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
                 {
                     scE.CodigoDetalle = Convert.ToInt32(row.SCXE_CODIGO);
                     scE.CantidadSubconjunto = Convert.ToInt32(row.SCXE_CANTIDAD);
                     SubconjuntoEstructuraDAL.Actualizar(scE, transaccion);
-                }
+                }*/
+                #endregion
 
                 foreach (Data.dsEstructura.PIEZASXESTRUCTURARow row in (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
                 {
@@ -323,42 +332,50 @@ namespace GyCAP.DAL
                     PiezaEstructuraDAL.Actualizar(pE, transaccion);
                 }
 
-                foreach (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow row in (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow[])dsEstructura.MATERIASPRIMASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
+                #region MP desactivado en IT2
+                /*foreach (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow row in (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow[])dsEstructura.MATERIASPRIMASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
                 {
                     mpE.CodigoDetalle = Convert.ToInt32(row.MPXE_CODIGO);
                     mpE.CantidadMateriaPrima = row.MPXE_CANTIDAD;
                     MateriaPrimaEstructuraDAL.Actualizar(mpE, transaccion);
-                }
+                }*/
+                #endregion
 
                 #endregion
 
                 #region Deletes
-               
+
                 foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Deleted))
                 {
                     //Como la fila está eliminada y no tiene datos, tenemos que acceder a la versión original
                     cE.CodigoDetalle = Convert.ToInt32(row["cxe_codigo", System.Data.DataRowVersion.Original]);
-                    ConjuntoEstructuraDAL.Delete(cE, transaccion);                    
+                    ConjuntoEstructuraDAL.Delete(cE, transaccion);
                 }
 
-                foreach (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow[])dsEstructura.SUBCONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Deleted))
+                #region SC desactivado en IT2
+                /*foreach (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow[])dsEstructura.SUBCONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Deleted))
                 {
                     //Como la fila está eliminada y no tiene datos, tenemos que acceder a la versión original
                     scE.CodigoDetalle = Convert.ToInt32(row["scxe_codigo", System.Data.DataRowVersion.Original]);
                     SubconjuntoEstructuraDAL.Delete(scE, transaccion);
-                }
+                }*/
+                #endregion
+
                 foreach (Data.dsEstructura.PIEZASXESTRUCTURARow row in (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Deleted))
                 {
                     //Como la fila está eliminada y no tiene datos, tenemos que acceder a la versión original
                     pE.CodigoDetalle = Convert.ToInt32(row["pxe_codigo", System.Data.DataRowVersion.Original]);
                     PiezaEstructuraDAL.Delete(pE, transaccion);
                 }
-                foreach (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow row in (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow[])dsEstructura.MATERIASPRIMASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Deleted))
+
+                #region MP desactivado en IT2
+                /*foreach (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow row in (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow[])dsEstructura.MATERIASPRIMASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Deleted))
                 {
                     //Como la fila está eliminada y no tiene datos, tenemos que acceder a la versión original
                     mpE.CodigoDetalle = Convert.ToInt32(row["mpxe_codigo", System.Data.DataRowVersion.Original]);
                     MateriaPrimaEstructuraDAL.Delete(mpE, transaccion);
-                }
+                }*/
+                #endregion
 
                 #endregion
 
@@ -508,9 +525,9 @@ namespace GyCAP.DAL
 
             GrupoEstructuraDAL.ObtenerGruposEstructura(codigosEstructuras, dsEstructura);
             ConjuntoEstructuraDAL.ObtenerConjuntosEstructura(codigosEstructuras, dsEstructura);
-            SubconjuntoEstructuraDAL.ObtenerSubconjuntosEstructura(codigosEstructuras, dsEstructura);
+            //SubconjuntoEstructuraDAL.ObtenerSubconjuntosEstructura(codigosEstructuras, dsEstructura); desactivado en IT2
             PiezaEstructuraDAL.ObtenerPiezasEstructura(codigosEstructuras, dsEstructura);
-            MateriaPrimaEstructuraDAL.ObtenerMateriasPrimasEstructura(codigosEstructuras, dsEstructura);
+            //MateriaPrimaEstructuraDAL.ObtenerMateriasPrimasEstructura(codigosEstructuras, dsEstructura); desactivado en IT2
         }
 
         public static void ObtenerEstructuraCocina(int codigoCocina, Data.dsEstructura ds, bool detalle)

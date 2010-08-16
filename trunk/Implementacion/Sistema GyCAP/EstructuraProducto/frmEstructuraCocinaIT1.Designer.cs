@@ -1,6 +1,6 @@
 ﻿namespace GyCAP.UI.EstructuraProducto
 {
-    partial class frmEstructuraCocina
+    partial class frmEstructuraCocinaIT1
     {
         /// <summary>
         /// Required designer variable.

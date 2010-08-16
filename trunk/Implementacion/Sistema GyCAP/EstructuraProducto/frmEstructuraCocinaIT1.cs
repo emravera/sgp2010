@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace GyCAP.UI.EstructuraProducto
 {
-    public partial class frmEstructuraCocina : Form
+    public partial class frmEstructuraCocinaIT1 : Form
     {
-        private static frmEstructuraCocina _frmEstructuraCocina = null;
+        private static frmEstructuraCocinaIT1 _frmEstructuraCocina = null;
         private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
         private Data.dsCocina dsCocina = new GyCAP.Data.dsCocina();
         private Data.dsEmpleado dsEmpleado = new GyCAP.Data.dsEmpleado();
@@ -29,7 +29,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         #region Inicio
 
-        public frmEstructuraCocina()
+        public frmEstructuraCocinaIT1()
         {
             InitializeComponent();
 
@@ -38,13 +38,13 @@ namespace GyCAP.UI.EstructuraProducto
             SetInterface(estadoUI.inicio);
         }
 
-        public static frmEstructuraCocina Instancia
+        public static frmEstructuraCocinaIT1 Instancia
         {
             get
             {
                 if (_frmEstructuraCocina == null || _frmEstructuraCocina.IsDisposed)
                 {
-                    _frmEstructuraCocina = new frmEstructuraCocina();
+                    _frmEstructuraCocina = new frmEstructuraCocinaIT1();
                 }
                 else
                 {
