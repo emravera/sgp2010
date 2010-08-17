@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             this.btnDemanda = new System.Windows.Forms.Button();
-            this.btnConsultarPlanAnual = new System.Windows.Forms.Button();
-            this.btnNuevoPlanAnual = new System.Windows.Forms.Button();
             this.flpMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.panelDemanda = new System.Windows.Forms.Panel();
-            this.btnConsultarDemanda = new System.Windows.Forms.Button();
-            this.btnNuevoDemanda = new System.Windows.Forms.Button();
             this.btnPlanAnual = new System.Windows.Forms.Button();
             this.panelPlanAnual = new System.Windows.Forms.Panel();
             this.btnMPPrincipal = new System.Windows.Forms.Button();
             this.panelMPPrincipal = new System.Windows.Forms.Panel();
-            this.btnConsultarMPPrincipal = new System.Windows.Forms.Button();
-            this.btnNuevoMPPrincipal = new System.Windows.Forms.Button();
             this.panelSalir = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
             this.scUp = new System.Windows.Forms.SplitContainer();
             this.scDown = new System.Windows.Forms.SplitContainer();
+            this.btnConsultarDemanda = new System.Windows.Forms.Button();
+            this.btnNuevoDemanda = new System.Windows.Forms.Button();
+            this.btnConsultarPlanAnual = new System.Windows.Forms.Button();
+            this.btnNuevoPlanAnual = new System.Windows.Forms.Button();
+            this.btnConsultarMPPrincipal = new System.Windows.Forms.Button();
+            this.btnNuevoMPPrincipal = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.flpMenu.SuspendLayout();
             this.panelDemanda.SuspendLayout();
             this.panelPlanAnual.SuspendLayout();
@@ -62,7 +62,8 @@
             // 
             this.btnDemanda.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDemanda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDemanda.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDemanda.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDemanda.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDemanda.Location = new System.Drawing.Point(0, 0);
             this.btnDemanda.Margin = new System.Windows.Forms.Padding(0);
             this.btnDemanda.Name = "btnDemanda";
@@ -70,50 +71,9 @@
             this.btnDemanda.TabIndex = 0;
             this.btnDemanda.Text = "Demanda";
             this.btnDemanda.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDemanda.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDemanda.UseVisualStyleBackColor = true;
             this.btnDemanda.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // btnConsultarPlanAnual
-            // 
-            this.btnConsultarPlanAnual.AutoSize = true;
-            this.btnConsultarPlanAnual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnConsultarPlanAnual.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConsultarPlanAnual.FlatAppearance.BorderSize = 0;
-            this.btnConsultarPlanAnual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnConsultarPlanAnual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.btnConsultarPlanAnual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarPlanAnual.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_48;
-            this.btnConsultarPlanAnual.Location = new System.Drawing.Point(48, 74);
-            this.btnConsultarPlanAnual.Name = "btnConsultarPlanAnual";
-            this.btnConsultarPlanAnual.Size = new System.Drawing.Size(63, 71);
-            this.btnConsultarPlanAnual.TabIndex = 1;
-            this.btnConsultarPlanAnual.Text = "Consultar";
-            this.btnConsultarPlanAnual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnConsultarPlanAnual.UseVisualStyleBackColor = true;
-            this.btnConsultarPlanAnual.Click += new System.EventHandler(this.btnConsultarPlanAnual_Click);
-            this.btnConsultarPlanAnual.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnConsultarPlanAnual.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnNuevoPlanAnual
-            // 
-            this.btnNuevoPlanAnual.AutoSize = true;
-            this.btnNuevoPlanAnual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnNuevoPlanAnual.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNuevoPlanAnual.FlatAppearance.BorderSize = 0;
-            this.btnNuevoPlanAnual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnNuevoPlanAnual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.btnNuevoPlanAnual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevoPlanAnual.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.New_48;
-            this.btnNuevoPlanAnual.Location = new System.Drawing.Point(52, 3);
-            this.btnNuevoPlanAnual.Name = "btnNuevoPlanAnual";
-            this.btnNuevoPlanAnual.Size = new System.Drawing.Size(54, 71);
-            this.btnNuevoPlanAnual.TabIndex = 0;
-            this.btnNuevoPlanAnual.Text = " Nuevo";
-            this.btnNuevoPlanAnual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnNuevoPlanAnual.UseVisualStyleBackColor = true;
-            this.btnNuevoPlanAnual.Click += new System.EventHandler(this.btnNuevoPlanAnual_Click);
-            this.btnNuevoPlanAnual.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnNuevoPlanAnual.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // flpMenu
             // 
@@ -146,53 +106,12 @@
             this.panelDemanda.Size = new System.Drawing.Size(158, 148);
             this.panelDemanda.TabIndex = 1;
             // 
-            // btnConsultarDemanda
-            // 
-            this.btnConsultarDemanda.AutoSize = true;
-            this.btnConsultarDemanda.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnConsultarDemanda.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConsultarDemanda.FlatAppearance.BorderSize = 0;
-            this.btnConsultarDemanda.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnConsultarDemanda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.btnConsultarDemanda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarDemanda.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_48;
-            this.btnConsultarDemanda.Location = new System.Drawing.Point(48, 74);
-            this.btnConsultarDemanda.Name = "btnConsultarDemanda";
-            this.btnConsultarDemanda.Size = new System.Drawing.Size(63, 71);
-            this.btnConsultarDemanda.TabIndex = 1;
-            this.btnConsultarDemanda.Text = "Consultar";
-            this.btnConsultarDemanda.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnConsultarDemanda.UseVisualStyleBackColor = true;
-            this.btnConsultarDemanda.Click += new System.EventHandler(this.btnConsultarDemanda_Click);
-            this.btnConsultarDemanda.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnConsultarDemanda.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnNuevoDemanda
-            // 
-            this.btnNuevoDemanda.AutoSize = true;
-            this.btnNuevoDemanda.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnNuevoDemanda.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNuevoDemanda.FlatAppearance.BorderSize = 0;
-            this.btnNuevoDemanda.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnNuevoDemanda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.btnNuevoDemanda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevoDemanda.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.New_48;
-            this.btnNuevoDemanda.Location = new System.Drawing.Point(52, 3);
-            this.btnNuevoDemanda.Name = "btnNuevoDemanda";
-            this.btnNuevoDemanda.Size = new System.Drawing.Size(54, 71);
-            this.btnNuevoDemanda.TabIndex = 0;
-            this.btnNuevoDemanda.Text = " Nuevo";
-            this.btnNuevoDemanda.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnNuevoDemanda.UseVisualStyleBackColor = true;
-            this.btnNuevoDemanda.Click += new System.EventHandler(this.btnNuevoDemanda_Click);
-            this.btnNuevoDemanda.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnNuevoDemanda.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
             // btnPlanAnual
             // 
             this.btnPlanAnual.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPlanAnual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPlanAnual.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPlanAnual.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPlanAnual.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnPlanAnual.Location = new System.Drawing.Point(0, 173);
             this.btnPlanAnual.Margin = new System.Windows.Forms.Padding(0);
             this.btnPlanAnual.Name = "btnPlanAnual";
@@ -200,6 +119,7 @@
             this.btnPlanAnual.TabIndex = 3;
             this.btnPlanAnual.Text = "Plan Anual";
             this.btnPlanAnual.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPlanAnual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPlanAnual.UseVisualStyleBackColor = true;
             this.btnPlanAnual.Click += new System.EventHandler(this.btn_Click);
             // 
@@ -221,7 +141,8 @@
             // 
             this.btnMPPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMPPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMPPrincipal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMPPrincipal.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMPPrincipal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMPPrincipal.Location = new System.Drawing.Point(0, 346);
             this.btnMPPrincipal.Margin = new System.Windows.Forms.Padding(0);
             this.btnMPPrincipal.Name = "btnMPPrincipal";
@@ -229,6 +150,7 @@
             this.btnMPPrincipal.TabIndex = 9;
             this.btnMPPrincipal.Text = "Materia Prima Principal";
             this.btnMPPrincipal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMPPrincipal.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnMPPrincipal.UseVisualStyleBackColor = true;
             this.btnMPPrincipal.Click += new System.EventHandler(this.btn_Click);
             // 
@@ -246,48 +168,6 @@
             this.panelMPPrincipal.Size = new System.Drawing.Size(158, 152);
             this.panelMPPrincipal.TabIndex = 10;
             // 
-            // btnConsultarMPPrincipal
-            // 
-            this.btnConsultarMPPrincipal.AutoSize = true;
-            this.btnConsultarMPPrincipal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnConsultarMPPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConsultarMPPrincipal.FlatAppearance.BorderSize = 0;
-            this.btnConsultarMPPrincipal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnConsultarMPPrincipal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.btnConsultarMPPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarMPPrincipal.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_48;
-            this.btnConsultarMPPrincipal.Location = new System.Drawing.Point(48, 73);
-            this.btnConsultarMPPrincipal.Name = "btnConsultarMPPrincipal";
-            this.btnConsultarMPPrincipal.Size = new System.Drawing.Size(63, 71);
-            this.btnConsultarMPPrincipal.TabIndex = 2;
-            this.btnConsultarMPPrincipal.Text = "Consultar";
-            this.btnConsultarMPPrincipal.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnConsultarMPPrincipal.UseVisualStyleBackColor = true;
-            this.btnConsultarMPPrincipal.Click += new System.EventHandler(this.btnConsultarMPPrincipal_Click);
-            this.btnConsultarMPPrincipal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnConsultarMPPrincipal.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnNuevoMPPrincipal
-            // 
-            this.btnNuevoMPPrincipal.AutoSize = true;
-            this.btnNuevoMPPrincipal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnNuevoMPPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNuevoMPPrincipal.FlatAppearance.BorderSize = 0;
-            this.btnNuevoMPPrincipal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnNuevoMPPrincipal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.btnNuevoMPPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevoMPPrincipal.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.New_48;
-            this.btnNuevoMPPrincipal.Location = new System.Drawing.Point(52, 3);
-            this.btnNuevoMPPrincipal.Name = "btnNuevoMPPrincipal";
-            this.btnNuevoMPPrincipal.Size = new System.Drawing.Size(54, 71);
-            this.btnNuevoMPPrincipal.TabIndex = 0;
-            this.btnNuevoMPPrincipal.Text = "Nuevo";
-            this.btnNuevoMPPrincipal.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnNuevoMPPrincipal.UseVisualStyleBackColor = true;
-            this.btnNuevoMPPrincipal.Click += new System.EventHandler(this.btnNuevoMPPrincipal_Click);
-            this.btnNuevoMPPrincipal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnNuevoMPPrincipal.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
             // panelSalir
             // 
             this.panelSalir.Controls.Add(this.button1);
@@ -296,28 +176,6 @@
             this.panelSalir.Name = "panelSalir";
             this.panelSalir.Size = new System.Drawing.Size(158, 87);
             this.panelSalir.TabIndex = 15;
-            // 
-            // button1
-            // 
-            this.button1.AutoSize = true;
-            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Exit_48;
-            this.button1.Location = new System.Drawing.Point(48, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(54, 71);
-            this.button1.TabIndex = 2;
-            this.button1.Text = " Salir";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btnSalir_Click);
-            this.button1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.button1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnMenu
             // 
@@ -378,6 +236,154 @@
             this.scDown.SplitterDistance = 161;
             this.scDown.SplitterWidth = 3;
             this.scDown.TabIndex = 4;
+            // 
+            // btnConsultarDemanda
+            // 
+            this.btnConsultarDemanda.AutoSize = true;
+            this.btnConsultarDemanda.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConsultarDemanda.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConsultarDemanda.FlatAppearance.BorderSize = 0;
+            this.btnConsultarDemanda.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarDemanda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarDemanda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsultarDemanda.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_48;
+            this.btnConsultarDemanda.Location = new System.Drawing.Point(48, 74);
+            this.btnConsultarDemanda.Name = "btnConsultarDemanda";
+            this.btnConsultarDemanda.Size = new System.Drawing.Size(63, 71);
+            this.btnConsultarDemanda.TabIndex = 1;
+            this.btnConsultarDemanda.Text = "Consultar";
+            this.btnConsultarDemanda.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultarDemanda.UseVisualStyleBackColor = true;
+            this.btnConsultarDemanda.Click += new System.EventHandler(this.btnConsultarDemanda_Click);
+            this.btnConsultarDemanda.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnConsultarDemanda.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnNuevoDemanda
+            // 
+            this.btnNuevoDemanda.AutoSize = true;
+            this.btnNuevoDemanda.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNuevoDemanda.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNuevoDemanda.FlatAppearance.BorderSize = 0;
+            this.btnNuevoDemanda.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnNuevoDemanda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnNuevoDemanda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNuevoDemanda.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.New_48;
+            this.btnNuevoDemanda.Location = new System.Drawing.Point(52, 3);
+            this.btnNuevoDemanda.Name = "btnNuevoDemanda";
+            this.btnNuevoDemanda.Size = new System.Drawing.Size(54, 71);
+            this.btnNuevoDemanda.TabIndex = 0;
+            this.btnNuevoDemanda.Text = " Nuevo";
+            this.btnNuevoDemanda.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNuevoDemanda.UseVisualStyleBackColor = true;
+            this.btnNuevoDemanda.Click += new System.EventHandler(this.btnNuevoDemanda_Click);
+            this.btnNuevoDemanda.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnNuevoDemanda.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnConsultarPlanAnual
+            // 
+            this.btnConsultarPlanAnual.AutoSize = true;
+            this.btnConsultarPlanAnual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConsultarPlanAnual.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConsultarPlanAnual.FlatAppearance.BorderSize = 0;
+            this.btnConsultarPlanAnual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarPlanAnual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarPlanAnual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsultarPlanAnual.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_48;
+            this.btnConsultarPlanAnual.Location = new System.Drawing.Point(48, 74);
+            this.btnConsultarPlanAnual.Name = "btnConsultarPlanAnual";
+            this.btnConsultarPlanAnual.Size = new System.Drawing.Size(63, 71);
+            this.btnConsultarPlanAnual.TabIndex = 1;
+            this.btnConsultarPlanAnual.Text = "Consultar";
+            this.btnConsultarPlanAnual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultarPlanAnual.UseVisualStyleBackColor = true;
+            this.btnConsultarPlanAnual.Click += new System.EventHandler(this.btnConsultarPlanAnual_Click);
+            this.btnConsultarPlanAnual.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnConsultarPlanAnual.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnNuevoPlanAnual
+            // 
+            this.btnNuevoPlanAnual.AutoSize = true;
+            this.btnNuevoPlanAnual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNuevoPlanAnual.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNuevoPlanAnual.FlatAppearance.BorderSize = 0;
+            this.btnNuevoPlanAnual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnNuevoPlanAnual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnNuevoPlanAnual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNuevoPlanAnual.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.New_48;
+            this.btnNuevoPlanAnual.Location = new System.Drawing.Point(52, 3);
+            this.btnNuevoPlanAnual.Name = "btnNuevoPlanAnual";
+            this.btnNuevoPlanAnual.Size = new System.Drawing.Size(54, 71);
+            this.btnNuevoPlanAnual.TabIndex = 0;
+            this.btnNuevoPlanAnual.Text = " Nuevo";
+            this.btnNuevoPlanAnual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNuevoPlanAnual.UseVisualStyleBackColor = true;
+            this.btnNuevoPlanAnual.Click += new System.EventHandler(this.btnNuevoPlanAnual_Click);
+            this.btnNuevoPlanAnual.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnNuevoPlanAnual.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnConsultarMPPrincipal
+            // 
+            this.btnConsultarMPPrincipal.AutoSize = true;
+            this.btnConsultarMPPrincipal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConsultarMPPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConsultarMPPrincipal.FlatAppearance.BorderSize = 0;
+            this.btnConsultarMPPrincipal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarMPPrincipal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarMPPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsultarMPPrincipal.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_48;
+            this.btnConsultarMPPrincipal.Location = new System.Drawing.Point(48, 73);
+            this.btnConsultarMPPrincipal.Name = "btnConsultarMPPrincipal";
+            this.btnConsultarMPPrincipal.Size = new System.Drawing.Size(63, 71);
+            this.btnConsultarMPPrincipal.TabIndex = 2;
+            this.btnConsultarMPPrincipal.Text = "Consultar";
+            this.btnConsultarMPPrincipal.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultarMPPrincipal.UseVisualStyleBackColor = true;
+            this.btnConsultarMPPrincipal.Click += new System.EventHandler(this.btnConsultarMPPrincipal_Click);
+            this.btnConsultarMPPrincipal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnConsultarMPPrincipal.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnNuevoMPPrincipal
+            // 
+            this.btnNuevoMPPrincipal.AutoSize = true;
+            this.btnNuevoMPPrincipal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNuevoMPPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNuevoMPPrincipal.FlatAppearance.BorderSize = 0;
+            this.btnNuevoMPPrincipal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnNuevoMPPrincipal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnNuevoMPPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNuevoMPPrincipal.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.New_48;
+            this.btnNuevoMPPrincipal.Location = new System.Drawing.Point(52, 3);
+            this.btnNuevoMPPrincipal.Name = "btnNuevoMPPrincipal";
+            this.btnNuevoMPPrincipal.Size = new System.Drawing.Size(54, 71);
+            this.btnNuevoMPPrincipal.TabIndex = 0;
+            this.btnNuevoMPPrincipal.Text = "Nuevo";
+            this.btnNuevoMPPrincipal.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNuevoMPPrincipal.UseVisualStyleBackColor = true;
+            this.btnNuevoMPPrincipal.Click += new System.EventHandler(this.btnNuevoMPPrincipal_Click);
+            this.btnNuevoMPPrincipal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnNuevoMPPrincipal.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // button1
+            // 
+            this.button1.AutoSize = true;
+            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Exit_48;
+            this.button1.Location = new System.Drawing.Point(48, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(54, 71);
+            this.button1.TabIndex = 2;
+            this.button1.Text = " Salir";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnSalir_Click);
+            this.button1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.button1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // frmPlanificacionProduccion
             // 
