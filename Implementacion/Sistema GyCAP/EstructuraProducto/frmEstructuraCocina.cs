@@ -845,17 +845,14 @@ namespace GyCAP.UI.EstructuraProducto
             dgvCD.AutoGenerateColumns = false;
             dgvCD.Columns.Add("CONJ_CODIGOPARTE", "Código");
             dgvCD.Columns.Add("CONJ_NOMBRE", "Nombre");
-            dgvCD.Columns.Add("TE_NOMBRE", "Terminación");
             dgvCD.Columns.Add("CONJ_COSTO", "Costo");
             dgvCD.Columns.Add("CONJ_DESCRIPCION", "Descripción");
             dgvCD.Columns["CONJ_CODIGOPARTE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCD.Columns["CONJ_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCD.Columns["TE_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCD.Columns["CONJ_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCD.Columns["CONJ_DESCRIPCION"].Resizable = DataGridViewTriState.True;
             dgvCD.Columns["CONJ_CODIGOPARTE"].DataPropertyName = "CONJ_CODIGOPARTE";
             dgvCD.Columns["CONJ_NOMBRE"].DataPropertyName = "CONJ_NOMBRE";
-            dgvCD.Columns["TE_NOMBRE"].DataPropertyName = "TE_CODIGO";
             dgvCD.Columns["CONJ_COSTO"].DataPropertyName = "CONJ_COSTO";
             dgvCD.Columns["CONJ_DESCRIPCION"].DataPropertyName = "CONJ_DESCRIPCION";
 
@@ -863,15 +860,13 @@ namespace GyCAP.UI.EstructuraProducto
             dgvCE.AutoGenerateColumns = false;
             dgvCE.Columns.Add("CONJ_CODIGOPARTE", "Código");
             dgvCE.Columns.Add("CONJ_NOMBRE", "Nombre");
-            dgvCE.Columns.Add("TE_NOMBRE", "Terminación");
             dgvCE.Columns.Add("CXE_CANTIDAD", "Cantidad");
             dgvCE.Columns["CXE_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvCE.Columns.Add("GRP_CODIGO", "Grupo");
             dgvCE.Columns["GRP_CODIGO"].Visible = false;
-            dgvCE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvCE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvCE.Columns["CONJ_CODIGOPARTE"].DataPropertyName = "CONJ_CODIGO";
             dgvCE.Columns["CONJ_NOMBRE"].DataPropertyName = "CONJ_CODIGO";
-            dgvCE.Columns["TE_NOMBRE"].DataPropertyName = "CONJ_CODIGO";
             dgvCE.Columns["CXE_CANTIDAD"].DataPropertyName = "CXE_CANTIDAD";
             dgvCE.Columns["GRP_CODIGO"].DataPropertyName = "GRP_CODIGO";
 
@@ -911,7 +906,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvPE.Columns["PXE_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvPE.Columns.Add("GRP_CODIGO", "Grupo");
             dgvPE.Columns["GRP_CODIGO"].Visible = false;
-            dgvPE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvPE.Columns["PZA_CODIGOPARTE"].DataPropertyName = "PZA_CODIGO";
             dgvPE.Columns["PZA_NOMBRE"].DataPropertyName = "PZA_CODIGO";
             dgvPE.Columns["TE_NOMBRE"].DataPropertyName = "PZA_CODIGO";
@@ -944,7 +939,7 @@ namespace GyCAP.UI.EstructuraProducto
                 rowParte.PAR_TIPO = "Conjunto";
                 rowParte.PAR_CODIGO = row.CONJUNTOSRow.CONJ_CODIGOPARTE;
                 rowParte.PAR_NOMBRE = row.CONJUNTOSRow.CONJ_NOMBRE;
-                rowParte.PAR_TERMINACION = dsEstructura.TERMINACIONES.FindByTE_CODIGO(row.CONJUNTOSRow.TE_CODIGO).TE_NOMBRE;
+                rowParte.PAR_TERMINACION = string.Empty;
                 rowParte.PAR_CANTIDAD = row.CXE_CANTIDAD.ToString();
                 rowParte.PAR_UMED = "Unidad";
                 rowParte.EndEdit();
@@ -980,9 +975,7 @@ namespace GyCAP.UI.EstructuraProducto
             try
             {
                 BLL.ConjuntoBLL.ObtenerConjuntos(dsEstructura.CONJUNTOS, BLL.ConjuntoBLL.estadoActivo);
-                //BLL.SubConjuntoBLL.ObtenerSubconjuntos(dsEstructura.SUBCONJUNTOS, BLL.SubConjuntoBLL.estadoActivo);
                 BLL.PiezaBLL.ObtenerPiezas(dsEstructura.PIEZAS, BLL.PiezaBLL.estadoActivo);
-                //BLL.MateriaPrimaBLL.ObtenerTodos(dsEstructura.MATERIAS_PRIMAS);
                 BLL.UnidadMedidaBLL.ObtenerTodos(dsUnidadMedida.UNIDADES_MEDIDA);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -1044,15 +1037,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void dgvCD_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.Value.ToString() != string.Empty)
-            {
-                string nombre;
-                if (dgvCD.Columns[e.ColumnIndex].Name == "TE_NOMBRE")
-                {
-                    nombre = dsEstructura.TERMINACIONES.FindByTE_CODIGO(Convert.ToInt32(e.Value.ToString())).TE_NOMBRE;
-                    e.Value = nombre;
-                }
-            }
+            
         }
 
         private void dgvCE_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -1071,11 +1056,6 @@ namespace GyCAP.UI.EstructuraProducto
                     case "CONJ_NOMBRE":
                         codigo = Convert.ToInt32(e.Value.ToString());
                         nombre = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigo).CONJ_NOMBRE;
-                        e.Value = nombre;
-                        break;
-                    case "TE_NOMBRE":
-                        codigo = Convert.ToInt32(e.Value.ToString());
-                        nombre = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigo).TERMINACIONESRow.TE_NOMBRE;
                         e.Value = nombre;
                         break;
                     case "GRP_CODIGO":

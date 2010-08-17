@@ -24,15 +24,9 @@ namespace GyCAP.BLL
             Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto = dsEstructura.SUBCONJUNTOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.SUBCONJUNTOSRow;
             subconjunto.CodigoSubconjunto = Convert.ToInt32(rowSubconjunto.SCONJ_CODIGO);
             subconjunto.Nombre = rowSubconjunto.SCONJ_NOMBRE;
-            subconjunto.CodigoTerminacion = Convert.ToInt32(rowSubconjunto.TE_CODIGO);
             subconjunto.Descripcion = rowSubconjunto.SCONJ_DESCRIPCION;
             if (EsSubconjunto(subconjunto)) throw new Entidades.Excepciones.ElementoExistenteException();
             //Como no existe lo creamos
-            //Primero armamos el código de la parte si no lo tiene
-            if (rowSubconjunto.SCONJ_CODIGOPARTE == string.Empty)
-            {
-                rowSubconjunto.SCONJ_CODIGOPARTE = "SC" + rowSubconjunto.SCONJ_CODIGO + "T" + rowSubconjunto.TE_CODIGO + "P" + rowSubconjunto.PNO_CODIGO;
-            }
             DAL.SubConjuntoDAL.Insertar(dsEstructura);
         }
 
@@ -87,10 +81,9 @@ namespace GyCAP.BLL
             return DAL.SubConjuntoDAL.ObtenerSubconjunto(codigoSubconjunto);
         }
 
-        public static void ObtenerSubconjuntos(object nombre, object codTerminacion, Data.dsEstructura ds, bool obtenerDetalle)
+        public static void ObtenerSubconjuntos(object nombre, Data.dsEstructura ds, bool obtenerDetalle)
         {
-            if (codTerminacion != null && Convert.ToInt32(codTerminacion.ToString()) <= 0) { codTerminacion = null; }
-            DAL.SubConjuntoDAL.ObtenerSubconjuntos(nombre, codTerminacion, ds, obtenerDetalle);
+            DAL.SubConjuntoDAL.ObtenerSubconjuntos(nombre, ds, obtenerDetalle);
         }
 
         public static void ObtenerSubconjuntos(System.Data.DataTable dtSubconjuntos)

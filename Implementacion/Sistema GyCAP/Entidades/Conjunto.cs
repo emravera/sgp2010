@@ -10,7 +10,6 @@ namespace GyCAP.Entidades
     {
         private int codigoConjunto;
         private string nombre;
-        private int codigoTerminacion;
         private string descripcion;
         private int cantidadStock;
         private int codigoEstado;
@@ -65,12 +64,6 @@ namespace GyCAP.Entidades
         {
             get { return nombre; }
             set { nombre = value; }
-        }
-        
-        public int CodigoTerminacion
-        {
-            get { return codigoTerminacion; }
-            set { codigoTerminacion = value; }
         }
         
         public int CantidadStock

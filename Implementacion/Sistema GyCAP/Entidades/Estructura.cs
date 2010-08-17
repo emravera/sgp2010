@@ -16,6 +16,13 @@ namespace GyCAP.Entidades
         private DateTime fechaAlta;
         private DateTime fechaModificacion;
         private int codigoEmpleado;
+        private decimal costo;
+
+        public decimal Costo
+        {
+            get { return costo; }
+            set { costo = value; }
+        }
 
         public int CodigoEstructura
         {

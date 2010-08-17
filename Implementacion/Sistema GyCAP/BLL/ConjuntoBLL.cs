@@ -26,14 +26,8 @@ namespace GyCAP.BLL
             Data.dsEstructura.CONJUNTOSRow rowConjunto = dsEstructura.CONJUNTOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.CONJUNTOSRow;
             conjunto.CodigoConjunto = Convert.ToInt32(rowConjunto.CONJ_CODIGO);
             conjunto.Nombre = rowConjunto.CONJ_NOMBRE;
-            conjunto.CodigoTerminacion = Convert.ToInt32(rowConjunto.TE_CODIGO);
             if (EsConjunto(conjunto)) throw new Entidades.Excepciones.ElementoExistenteException();
             //Como no existe lo creamos
-            //Primero armamos el código del producto si no está
-            if (rowConjunto.CONJ_CODIGOPARTE == string.Empty) 
-            {
-                rowConjunto.CONJ_CODIGOPARTE = "C" + rowConjunto.CONJ_CODIGO + "T" + rowConjunto.TE_CODIGO + "P" + rowConjunto.PNO_CODIGO;
-            }
             DAL.ConjuntoDAL.Insertar(dsEstructura);
         }
 
@@ -88,10 +82,9 @@ namespace GyCAP.BLL
             return DAL.ConjuntoDAL.ObtenerConjunto(codigoConjunto);
         }
 
-        public static void ObtenerConjuntos(object nombre, object codTerminacion, Data.dsEstructura ds, bool obtenerDetalle)
+        public static void ObtenerConjuntos(object nombre, Data.dsEstructura ds, bool obtenerDetalle)
         {
-            if (codTerminacion != null && Convert.ToInt32(codTerminacion.ToString()) <= 0) { codTerminacion = null; }
-            DAL.ConjuntoDAL.ObtenerConjuntos(nombre, codTerminacion, ds, obtenerDetalle);
+            DAL.ConjuntoDAL.ObtenerConjuntos(nombre, ds, obtenerDetalle);
         }
         
         /*public static void ObtenerTodos(Data.dsEstructura ds)

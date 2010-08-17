@@ -28,11 +28,6 @@ namespace GyCAP.BLL
             pieza.CodigoTerminacion = Convert.ToInt32(rowPieza.TE_CODIGO);
             if (EsPieza(pieza)) throw new Entidades.Excepciones.ElementoExistenteException();
             //Como no existe lo creamos
-            //Primero armamos el código de la parte si no lo tiene
-            if (rowPieza.PZA_CODIGOPARTE == string.Empty)
-            {
-                rowPieza.PZA_CODIGOPARTE = "P" + rowPieza.PZA_CODIGO + "T" + rowPieza.TE_CODIGO + "P" + rowPieza.PNO_CODIGO;
-            }
             DAL.PiezaDAL.Insertar(dsEstructura);
         }
 
