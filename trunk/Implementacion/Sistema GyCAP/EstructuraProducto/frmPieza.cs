@@ -21,7 +21,7 @@ namespace GyCAP.UI.EstructuraProducto
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
         //Variable que simula el código autodecremental para el detalle, usa valores negativos para no tener problemas con valores existentes
-        int codigoDetalle = 0;
+        int codigoDetalle = -1;
         
         public frmPieza()
         {
@@ -288,7 +288,13 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 //Obtenemos el código
                 int codigoDPZA = Convert.ToInt32(dvDetallePieza[dgvDetallePieza.SelectedRows[0].Index]["mpxp_codigo"]);
-                //Lo borramos pero sólo del dataset
+                //Lo borramos pero sólo del dataset                
+                if (!chkCostoFijo.Checked)
+                {
+                    decimal costo = dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).MATERIAS_PRIMASRow.MP_COSTO;
+                    decimal cantidad = dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).MPXP_CANTIDAD;
+                    nudCosto.Value -= (costo * cantidad);
+                }
                 dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).Delete();
             }
             else
@@ -303,8 +309,14 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 //Obtenemos el código
                 int codigoDPZA = Convert.ToInt32(dvDetallePieza[dgvDetallePieza.SelectedRows[0].Index]["mpxp_codigo"]);
-                //Aumentamos la cantidad
+                //Aumentamos la cantidad                
                 dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).MPXP_CANTIDAD += Convert.ToDecimal(0.1);
+                
+                if (!chkCostoFijo.Checked)
+                {
+                    decimal costo = dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).MATERIAS_PRIMASRow.MP_COSTO;
+                    nudCosto.Value += (costo * Convert.ToDecimal(0.1));
+                }
             }
             else
             {
@@ -321,7 +333,9 @@ namespace GyCAP.UI.EstructuraProducto
                 //Disminuimos la cantidad
                 if (dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).MPXP_CANTIDAD > Convert.ToDecimal(0.1))
                 {
+                    decimal costo = dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).MATERIAS_PRIMASRow.MP_COSTO;
                     dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).MPXP_CANTIDAD -= Convert.ToDecimal(0.1);
+                    nudCosto.Value -= (costo * Convert.ToDecimal(0.1));
                 }
             }
             else
@@ -359,6 +373,7 @@ namespace GyCAP.UI.EstructuraProducto
                         {
                             //Sumemos la cantidad ingresada a la existente, como hay una sola fila seleccionamos la 0 del array
                             rows[0].MPXP_CANTIDAD += nudCantidad.Value;
+                            if (!chkCostoFijo.Checked) { nudCosto.Value += (rows[0].MATERIAS_PRIMASRow.MP_COSTO * nudCantidad.Value); }
                             nudCantidad.Value = 0;
                         }
                         //Como ya existe marcamos que no debe agregarse
@@ -390,6 +405,7 @@ namespace GyCAP.UI.EstructuraProducto
                     //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
                     //todavia no vamos a insertar en la db hasta que no haga Guardar
                     dsEstructura.MATERIASPRIMASXPIEZA.AddMATERIASPRIMASXPIEZARow(row);
+                    if (!chkCostoFijo.Checked) { nudCosto.Value += (row.MATERIAS_PRIMASRow.MP_COSTO * row.MPXP_CANTIDAD); }
                     nudCantidad.Value = 0;
                 }
                 nudCantidad.Value = 0;
@@ -648,8 +664,8 @@ namespace GyCAP.UI.EstructuraProducto
 
             dgvMPDisponibles.Columns["MP_NOMBRE"].DataPropertyName = "MP_NOMBRE";
             dgvMPDisponibles.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
-            dgvMPDisponibles.Columns["MP_DESCRIPCION"].DataPropertyName = "MP_DESCRIPCION";
             dgvMPDisponibles.Columns["MP_COSTO"].DataPropertyName = "MP_COSTO";
+            dgvMPDisponibles.Columns["MP_DESCRIPCION"].DataPropertyName = "MP_DESCRIPCION";            
 
             //Creamos el dataview y lo asignamos a la grilla
             dvPiezas = new DataView(dsEstructura.PIEZAS);
@@ -753,7 +769,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (e.Value.ToString() != string.Empty)
             {
                 string nombre;
-                if (dgvDetallePieza.Columns[e.ColumnIndex].Name == "UMED_CODIGO")
+                if (dgvMPDisponibles.Columns[e.ColumnIndex].Name == "UMED_CODIGO")
                 {
                     nombre = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(Convert.ToInt32(e.Value.ToString())).UMED_NOMBRE;
                     e.Value = nombre;

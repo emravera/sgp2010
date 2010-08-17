@@ -44,7 +44,7 @@ namespace GyCAP.DAL
                 rowConjunto.EndEdit();
                 //Ahora insertamos su estructura
 
-                #region DetalleConjunto IT1
+                #region DetalleConjunto modificado en IT2
                 /*Entidades.DetalleConjunto detalle = new GyCAP.Entidades.DetalleConjunto();
                 foreach (Data.dsEstructura.DETALLE_CONJUNTORow row in (Data.dsEstructura.DETALLE_CONJUNTORow[])dsEstructura.DETALLE_CONJUNTO.Select(null, null, System.Data.DataViewRowState.Added))
                 {                    
@@ -169,7 +169,7 @@ namespace GyCAP.DAL
                 DB.executeNonQuery(sqlUpdateConjunto, valorParametros, transaccion);
                 //Actualizamos la estructura, en el orden: insertar, actualizar, eliminar
 
-                #region DetalleConjunto IT1
+                #region DetalleConjunto modificado en IT2
                 /*Entidades.DetalleConjunto detalle = new GyCAP.Entidades.DetalleConjunto();            
                 foreach (Data.dsEstructura.DETALLE_CONJUNTORow row in (Data.dsEstructura.DETALLE_CONJUNTORow[])dsEstructura.DETALLE_CONJUNTO.Select(null, null, System.Data.DataViewRowState.Added))
                 {
@@ -392,9 +392,7 @@ namespace GyCAP.DAL
                 }
                 catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
-        }
-
-        
+        }        
 
         public static bool PuedeEliminarse(int codigo)
         {
@@ -428,7 +426,7 @@ namespace GyCAP.DAL
             }
         }
         
-        #region ObtenerDetalles IT1
+        #region ObtenerDetalles modificado en IT2
 
         //Obtiene el detalle de todos los subconjuntos buscados, de uso interno por el método buscador ObtenerSubconjuntos
         /*private static void ObtenerDetalleConjuntos(Data.dsEstructura ds)
@@ -486,8 +484,7 @@ namespace GyCAP.DAL
         public static void ObtenerConjuntos(DataTable dtConjuntos)
         {
             string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo,
-                                  conj_codigoparte, conj_costo 
-                        FROM CONJUNTOS";
+                                  conj_codigoparte, conj_costo FROM CONJUNTOS";
             
             try
             {
@@ -499,8 +496,7 @@ namespace GyCAP.DAL
         public static void ObtenerConjuntos(DataTable dtConjuntos, int estado)
         {
             string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo
-                                  ,conj_codigoparte, conj_costo
-                        FROM CONJUNTOS WHERE par_codigo = @p0 ";
+                                  ,conj_codigoparte, conj_costo FROM CONJUNTOS WHERE par_codigo = @p0 ";
 
             object[] valorParametros = { estado };
 
