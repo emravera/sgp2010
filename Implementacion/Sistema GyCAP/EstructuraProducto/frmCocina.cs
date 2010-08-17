@@ -13,8 +13,8 @@ namespace GyCAP.UI.EstructuraProducto
     {
         private static frmCocina _frmCocina = null;
         Data.dsCocina dsCocina = new GyCAP.Data.dsCocina();
-        DataView dvCocinas, dvMarcaBuscar, dvEstadoBuscar, dvTerminacionBuscar;
-        DataView dvModelo, dvMarca, dvDesignacion, dvColor, dvTerminacion, dvEstado;
+        DataView dvCocinas, dvMarcaBuscar, dvTerminacionBuscar;
+        DataView dvModelo, dvMarca, dvDesignacion, dvColor, dvTerminacion;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
