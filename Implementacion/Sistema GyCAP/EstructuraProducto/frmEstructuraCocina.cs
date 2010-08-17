@@ -821,7 +821,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvPartes.Columns["PAR_CANTIDAD"].DataPropertyName = "PAR_CANTIDAD";
             dgvPartes.Columns["PAR_UMED"].DataPropertyName = "PAR_UMED";
             dgvPartes.Columns["PAR_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvPartes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPartes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
 
             //Dataviews
             dvCocina = new DataView(dsCocina.COCINAS);
@@ -846,15 +846,17 @@ namespace GyCAP.UI.EstructuraProducto
             dgvCD.Columns.Add("CONJ_CODIGOPARTE", "Código");
             dgvCD.Columns.Add("CONJ_NOMBRE", "Nombre");
             dgvCD.Columns.Add("TE_NOMBRE", "Terminación");
+            dgvCD.Columns.Add("CONJ_COSTO", "Costo");
             dgvCD.Columns.Add("CONJ_DESCRIPCION", "Descripción");
             dgvCD.Columns["CONJ_CODIGOPARTE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCD.Columns["CONJ_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCD.Columns["TE_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCD.Columns["CONJ_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvCD.Columns["CONJ_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCD.Columns["CONJ_DESCRIPCION"].Resizable = DataGridViewTriState.True;
             dgvCD.Columns["CONJ_CODIGOPARTE"].DataPropertyName = "CONJ_CODIGOPARTE";
             dgvCD.Columns["CONJ_NOMBRE"].DataPropertyName = "CONJ_NOMBRE";
             dgvCD.Columns["TE_NOMBRE"].DataPropertyName = "TE_CODIGO";
+            dgvCD.Columns["CONJ_COSTO"].DataPropertyName = "CONJ_COSTO";
             dgvCD.Columns["CONJ_DESCRIPCION"].DataPropertyName = "CONJ_DESCRIPCION";
 
             //Grilla Listado Conjuntos en Estructura
@@ -887,15 +889,17 @@ namespace GyCAP.UI.EstructuraProducto
             dgvPD.Columns.Add("PZA_CODIGOPARTE", "Código");
             dgvPD.Columns.Add("PZA_NOMBRE", "Nombre");
             dgvPD.Columns.Add("TE_NOMBRE", "Terminación");
+            dgvPD.Columns.Add("PZA_COSTO", "Costo");
             dgvPD.Columns.Add("PZA_DESCRIPCION", "Descripción");
             dgvPD.Columns["PZA_CODIGOPARTE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPD.Columns["PZA_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPD.Columns["TE_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPD.Columns["PZA_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvPD.Columns["PZA_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPD.Columns["PZA_DESCRIPCION"].Resizable = DataGridViewTriState.True;
             dgvPD.Columns["PZA_CODIGOPARTE"].DataPropertyName = "PZA_CODIGOPARTE";
             dgvPD.Columns["PZA_NOMBRE"].DataPropertyName = "PZA_NOMBRE";
             dgvPD.Columns["TE_NOMBRE"].DataPropertyName = "TE_CODIGO";
+            dgvPD.Columns["PZA_COSTO"].DataPropertyName = "PZA_COSTO";
             dgvPD.Columns["PZA_DESCRIPCION"].DataPropertyName = "PZA_DESCRIPCION";
 
             //Grilla Listado piezas en Estructura

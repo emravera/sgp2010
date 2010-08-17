@@ -71,6 +71,8 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.nudCosto = new System.Windows.Forms.NumericUpDown();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.cbPlano = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
@@ -89,8 +91,6 @@
             this.nudCantidad = new System.Windows.Forms.NumericUpDown();
             this.slideAgregar = new SlickInterface.Slide();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
-            this.nudCosto = new System.Windows.Forms.NumericUpDown();
-            this.label13 = new System.Windows.Forms.Label();
             this.panelImagen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
             this.panelAcciones.SuspendLayout();
@@ -106,12 +106,12 @@
             this.groupBox3.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.gbDatos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCosto)).BeginInit();
             this.tpAgregar.SuspendLayout();
             this.gbPD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPiezasDisponibles)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCosto)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNombre
@@ -636,6 +636,35 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del subconjunto";
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 155);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(48, 13);
+            this.label13.TabIndex = 17;
+            this.label13.Text = "Costo $:";
+            // 
+            // nudCosto
+            // 
+            this.nudCosto.DecimalPlaces = 2;
+            this.nudCosto.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudCosto.Location = new System.Drawing.Point(80, 153);
+            this.nudCosto.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudCosto.Name = "nudCosto";
+            this.nudCosto.Size = new System.Drawing.Size(287, 20);
+            this.nudCosto.TabIndex = 16;
+            this.nudCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudCosto.Enter += new System.EventHandler(this.control_Enter);
+            // 
             // txtCodigo
             // 
             this.txtCodigo.Location = new System.Drawing.Point(80, 15);
@@ -818,35 +847,6 @@
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk);
             // 
-            // nudCosto
-            // 
-            this.nudCosto.DecimalPlaces = 2;
-            this.nudCosto.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nudCosto.Location = new System.Drawing.Point(80, 153);
-            this.nudCosto.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.nudCosto.Name = "nudCosto";
-            this.nudCosto.Size = new System.Drawing.Size(287, 20);
-            this.nudCosto.TabIndex = 16;
-            this.nudCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudCosto.Enter += new System.EventHandler(this.control_Enter);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 155);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(39, 13);
-            this.label13.TabIndex = 17;
-            this.label13.Text = "Costo:";
-            // 
             // frmSubconjunto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -881,13 +881,13 @@
             this.gbGuardarCancelar.ResumeLayout(false);
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCosto)).EndInit();
             this.tpAgregar.ResumeLayout(false);
             this.gbPD.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPiezasDisponibles)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCosto)).EndInit();
             this.ResumeLayout(false);
 
         }

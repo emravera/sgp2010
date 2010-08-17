@@ -218,6 +218,7 @@
             this.dgvEstructuras.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEstructuras.Size = new System.Drawing.Size(766, 378);
             this.dgvEstructuras.TabIndex = 8;
+            this.dgvEstructuras.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEstructuras_RowEnter);
             this.dgvEstructuras.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvEstructuras_CellFormatting);
             // 
             // groupBox1

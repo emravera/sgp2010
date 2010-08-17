@@ -91,6 +91,7 @@
             this.dgvMPDisponibles = new System.Windows.Forms.DataGridView();
             this.slideAgregar = new SlickInterface.Slide();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
+            this.chkCostoFijo = new System.Windows.Forms.CheckBox();
             this.panelAcciones.SuspendLayout();
             this.tsMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePieza)).BeginInit();
@@ -472,6 +473,7 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.chkCostoFijo);
             this.gbDatos.Controls.Add(this.nudCosto);
             this.gbDatos.Controls.Add(this.label13);
             this.gbDatos.Controls.Add(this.txtCodigo);
@@ -510,7 +512,7 @@
             0,
             0});
             this.nudCosto.Name = "nudCosto";
-            this.nudCosto.Size = new System.Drawing.Size(284, 21);
+            this.nudCosto.Size = new System.Drawing.Size(196, 21);
             this.nudCosto.TabIndex = 27;
             this.nudCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCosto.Enter += new System.EventHandler(this.control_Enter);
@@ -520,9 +522,9 @@
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(8, 163);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(39, 13);
+            this.label13.Size = new System.Drawing.Size(48, 13);
             this.label13.TabIndex = 26;
-            this.label13.Text = "Costo:";
+            this.label13.Text = "Costo $:";
             // 
             // txtCodigo
             // 
@@ -858,6 +860,17 @@
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk_1);
             // 
+            // chkCostoFijo
+            // 
+            this.chkCostoFijo.AutoSize = true;
+            this.chkCostoFijo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkCostoFijo.Location = new System.Drawing.Point(296, 162);
+            this.chkCostoFijo.Name = "chkCostoFijo";
+            this.chkCostoFijo.Size = new System.Drawing.Size(72, 17);
+            this.chkCostoFijo.TabIndex = 28;
+            this.chkCostoFijo.Text = "Costo fijo";
+            this.chkCostoFijo.UseVisualStyleBackColor = true;
+            // 
             // frmPieza
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -968,5 +981,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown nudCosto;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.CheckBox chkCostoFijo;
     }
 }
