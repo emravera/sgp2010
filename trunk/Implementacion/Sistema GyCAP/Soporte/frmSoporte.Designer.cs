@@ -101,7 +101,6 @@
             // 
             // panelCapacidadEmpleado
             // 
-            this.panelCapacidadEmpleado.AutoSize = true;
             this.panelCapacidadEmpleado.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelCapacidadEmpleado.BackColor = System.Drawing.Color.Silver;
             this.panelCapacidadEmpleado.Controls.Add(this.btnConsultarCapacidadEmpleado);
@@ -113,7 +112,6 @@
             this.panelCapacidadEmpleado.Name = "panelCapacidadEmpleado";
             this.panelCapacidadEmpleado.Size = new System.Drawing.Size(158, 154);
             this.panelCapacidadEmpleado.TabIndex = 1;
-            this.panelCapacidadEmpleado.Visible = false;
             // 
             // btnConsultarCapacidadEmpleado
             // 
@@ -121,11 +119,11 @@
             this.btnConsultarCapacidadEmpleado.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnConsultarCapacidadEmpleado.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConsultarCapacidadEmpleado.FlatAppearance.BorderSize = 0;
-            this.btnConsultarCapacidadEmpleado.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnConsultarCapacidadEmpleado.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnConsultarCapacidadEmpleado.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarCapacidadEmpleado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConsultarCapacidadEmpleado.Image = global::GyCAP.UI.Soporte.Properties.Resources.Find_48;
-            this.btnConsultarCapacidadEmpleado.Location = new System.Drawing.Point(48, 80);
+            this.btnConsultarCapacidadEmpleado.Location = new System.Drawing.Point(48, 75);
             this.btnConsultarCapacidadEmpleado.Name = "btnConsultarCapacidadEmpleado";
             this.btnConsultarCapacidadEmpleado.Size = new System.Drawing.Size(63, 71);
             this.btnConsultarCapacidadEmpleado.TabIndex = 1;
@@ -133,6 +131,8 @@
             this.btnConsultarCapacidadEmpleado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarCapacidadEmpleado.UseVisualStyleBackColor = true;
             this.btnConsultarCapacidadEmpleado.Click += new System.EventHandler(this.btnConsultarCapacidadEmpleado_Click);
+            this.btnConsultarCapacidadEmpleado.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnConsultarCapacidadEmpleado.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnNuevoCapacidadEmpleado
             // 
@@ -140,7 +140,7 @@
             this.btnNuevoCapacidadEmpleado.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnNuevoCapacidadEmpleado.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNuevoCapacidadEmpleado.FlatAppearance.BorderSize = 0;
-            this.btnNuevoCapacidadEmpleado.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnNuevoCapacidadEmpleado.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnNuevoCapacidadEmpleado.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnNuevoCapacidadEmpleado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNuevoCapacidadEmpleado.Image = global::GyCAP.UI.Soporte.Properties.Resources.New_48;
@@ -152,6 +152,8 @@
             this.btnNuevoCapacidadEmpleado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoCapacidadEmpleado.UseVisualStyleBackColor = true;
             this.btnNuevoCapacidadEmpleado.Click += new System.EventHandler(this.btnNuevoCapacidadEmpleado_Click);
+            this.btnNuevoCapacidadEmpleado.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnNuevoCapacidadEmpleado.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // scDown
             // 
@@ -201,7 +203,6 @@
             // 
             // panelLocalidad
             // 
-            this.panelLocalidad.AutoSize = true;
             this.panelLocalidad.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelLocalidad.BackColor = System.Drawing.Color.Silver;
             this.panelLocalidad.Controls.Add(this.btnConsultarLocalidad);
@@ -213,7 +214,6 @@
             this.panelLocalidad.Name = "panelLocalidad";
             this.panelLocalidad.Size = new System.Drawing.Size(158, 152);
             this.panelLocalidad.TabIndex = 2;
-            this.panelLocalidad.Visible = false;
             // 
             // btnConsultarLocalidad
             // 
@@ -221,11 +221,11 @@
             this.btnConsultarLocalidad.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnConsultarLocalidad.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConsultarLocalidad.FlatAppearance.BorderSize = 0;
-            this.btnConsultarLocalidad.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnConsultarLocalidad.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnConsultarLocalidad.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarLocalidad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConsultarLocalidad.Image = global::GyCAP.UI.Soporte.Properties.Resources.Find_48;
-            this.btnConsultarLocalidad.Location = new System.Drawing.Point(48, 78);
+            this.btnConsultarLocalidad.Location = new System.Drawing.Point(48, 73);
             this.btnConsultarLocalidad.Name = "btnConsultarLocalidad";
             this.btnConsultarLocalidad.Size = new System.Drawing.Size(63, 71);
             this.btnConsultarLocalidad.TabIndex = 3;
@@ -233,6 +233,8 @@
             this.btnConsultarLocalidad.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarLocalidad.UseVisualStyleBackColor = true;
             this.btnConsultarLocalidad.Click += new System.EventHandler(this.btnConsultarLocalidad_Click);
+            this.btnConsultarLocalidad.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnConsultarLocalidad.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnNuevoLocalidad
             // 
@@ -240,7 +242,7 @@
             this.btnNuevoLocalidad.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnNuevoLocalidad.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNuevoLocalidad.FlatAppearance.BorderSize = 0;
-            this.btnNuevoLocalidad.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnNuevoLocalidad.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnNuevoLocalidad.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnNuevoLocalidad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNuevoLocalidad.Image = global::GyCAP.UI.Soporte.Properties.Resources.New_48;
@@ -252,6 +254,8 @@
             this.btnNuevoLocalidad.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoLocalidad.UseVisualStyleBackColor = true;
             this.btnNuevoLocalidad.Click += new System.EventHandler(this.btnNuevoLocalidad_Click);
+            this.btnNuevoLocalidad.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnNuevoLocalidad.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnMarca
             // 
@@ -270,7 +274,6 @@
             // 
             // panelMarca
             // 
-            this.panelMarca.AutoSize = true;
             this.panelMarca.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelMarca.BackColor = System.Drawing.Color.Silver;
             this.panelMarca.Controls.Add(this.btnConsultarMarca);
@@ -282,7 +285,6 @@
             this.panelMarca.Name = "panelMarca";
             this.panelMarca.Size = new System.Drawing.Size(158, 151);
             this.panelMarca.TabIndex = 4;
-            this.panelMarca.Visible = false;
             // 
             // btnConsultarMarca
             // 
@@ -290,11 +292,11 @@
             this.btnConsultarMarca.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnConsultarMarca.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConsultarMarca.FlatAppearance.BorderSize = 0;
-            this.btnConsultarMarca.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnConsultarMarca.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnConsultarMarca.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConsultarMarca.Image = global::GyCAP.UI.Soporte.Properties.Resources.Find_48;
-            this.btnConsultarMarca.Location = new System.Drawing.Point(48, 77);
+            this.btnConsultarMarca.Location = new System.Drawing.Point(48, 72);
             this.btnConsultarMarca.Name = "btnConsultarMarca";
             this.btnConsultarMarca.Size = new System.Drawing.Size(63, 71);
             this.btnConsultarMarca.TabIndex = 1;
@@ -302,6 +304,8 @@
             this.btnConsultarMarca.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarMarca.UseVisualStyleBackColor = true;
             this.btnConsultarMarca.Click += new System.EventHandler(this.btnConsultarMarca_Click);
+            this.btnConsultarMarca.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnConsultarMarca.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnNuevoMarca
             // 
@@ -309,7 +313,7 @@
             this.btnNuevoMarca.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnNuevoMarca.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNuevoMarca.FlatAppearance.BorderSize = 0;
-            this.btnNuevoMarca.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnNuevoMarca.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnNuevoMarca.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnNuevoMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNuevoMarca.Image = global::GyCAP.UI.Soporte.Properties.Resources.New_48;
@@ -321,6 +325,8 @@
             this.btnNuevoMarca.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoMarca.UseVisualStyleBackColor = true;
             this.btnNuevoMarca.Click += new System.EventHandler(this.btnNuevoMarca_Click);
+            this.btnNuevoMarca.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnNuevoMarca.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnProvincia
             // 
@@ -339,7 +345,6 @@
             // 
             // panelProvincia
             // 
-            this.panelProvincia.AutoSize = true;
             this.panelProvincia.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelProvincia.BackColor = System.Drawing.Color.Silver;
             this.panelProvincia.Controls.Add(this.btnConsultarProvincia);
@@ -350,7 +355,6 @@
             this.panelProvincia.Name = "panelProvincia";
             this.panelProvincia.Size = new System.Drawing.Size(158, 82);
             this.panelProvincia.TabIndex = 8;
-            this.panelProvincia.Visible = false;
             // 
             // btnConsultarProvincia
             // 
@@ -358,11 +362,11 @@
             this.btnConsultarProvincia.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnConsultarProvincia.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConsultarProvincia.FlatAppearance.BorderSize = 0;
-            this.btnConsultarProvincia.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnConsultarProvincia.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnConsultarProvincia.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarProvincia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConsultarProvincia.Image = global::GyCAP.UI.Soporte.Properties.Resources.Find_48;
-            this.btnConsultarProvincia.Location = new System.Drawing.Point(48, 8);
+            this.btnConsultarProvincia.Location = new System.Drawing.Point(48, 4);
             this.btnConsultarProvincia.Name = "btnConsultarProvincia";
             this.btnConsultarProvincia.Size = new System.Drawing.Size(63, 71);
             this.btnConsultarProvincia.TabIndex = 2;
@@ -370,6 +374,8 @@
             this.btnConsultarProvincia.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarProvincia.UseVisualStyleBackColor = true;
             this.btnConsultarProvincia.Click += new System.EventHandler(this.btnConsultarProvincia_Click);
+            this.btnConsultarProvincia.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnConsultarProvincia.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnTipoRepuesto
             // 
@@ -395,7 +401,6 @@
             this.panelTipoRepuesto.Name = "panelTipoRepuesto";
             this.panelTipoRepuesto.Size = new System.Drawing.Size(158, 87);
             this.panelTipoRepuesto.TabIndex = 12;
-            this.panelTipoRepuesto.Visible = false;
             // 
             // btnTipoUnidadMedida
             // 
@@ -414,7 +419,6 @@
             // 
             // panelTipoUnidadMedida
             // 
-            this.panelTipoUnidadMedida.AutoSize = true;
             this.panelTipoUnidadMedida.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelTipoUnidadMedida.BackColor = System.Drawing.Color.Silver;
             this.panelTipoUnidadMedida.Controls.Add(this.btnConsultarTUMED);
@@ -425,7 +429,6 @@
             this.panelTipoUnidadMedida.Name = "panelTipoUnidadMedida";
             this.panelTipoUnidadMedida.Size = new System.Drawing.Size(158, 77);
             this.panelTipoUnidadMedida.TabIndex = 14;
-            this.panelTipoUnidadMedida.Visible = false;
             // 
             // btnConsultarTUMED
             // 
@@ -433,11 +436,11 @@
             this.btnConsultarTUMED.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnConsultarTUMED.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConsultarTUMED.FlatAppearance.BorderSize = 0;
-            this.btnConsultarTUMED.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnConsultarTUMED.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnConsultarTUMED.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarTUMED.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConsultarTUMED.Image = global::GyCAP.UI.Soporte.Properties.Resources.Find_48;
-            this.btnConsultarTUMED.Location = new System.Drawing.Point(51, 3);
+            this.btnConsultarTUMED.Location = new System.Drawing.Point(51, 1);
             this.btnConsultarTUMED.Name = "btnConsultarTUMED";
             this.btnConsultarTUMED.Size = new System.Drawing.Size(63, 71);
             this.btnConsultarTUMED.TabIndex = 0;
@@ -445,6 +448,8 @@
             this.btnConsultarTUMED.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarTUMED.UseVisualStyleBackColor = true;
             this.btnConsultarTUMED.Click += new System.EventHandler(this.btnConsultarTUMED_Click);
+            this.btnConsultarTUMED.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnConsultarTUMED.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // panelSalir
             // 
@@ -461,11 +466,12 @@
             this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(48, 12);
+            this.button1.Location = new System.Drawing.Point(52, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(54, 71);
             this.button1.TabIndex = 2;
@@ -473,6 +479,8 @@
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.btnSalir_Click);
+            this.button1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.button1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // scUp
             // 
@@ -531,7 +539,6 @@
             this.scDown.Panel2.ResumeLayout(false);
             this.scDown.ResumeLayout(false);
             this.flpMenu.ResumeLayout(false);
-            this.flpMenu.PerformLayout();
             this.panelLocalidad.ResumeLayout(false);
             this.panelLocalidad.PerformLayout();
             this.panelMarca.ResumeLayout(false);
