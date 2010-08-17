@@ -178,7 +178,7 @@ namespace GyCAP.UI.EstructuraProducto
             cbColor.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COL_CODIGO));
             cbTerminacion.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).TE_CODIGO));
             cbEstado.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COC_ACTIVO));
-            nudPrecio.Value = dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COC_PRECIO;
+            nudCosto.Value = dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COC_COSTO;
             pbImagen.Image = BLL.CocinaBLL.ObtenerImagen(codigoCocina);
         }
 
@@ -197,7 +197,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (cbColor.GetSelectedIndex() == -1) { datosCompletar += "* Color"; }
             if (cbTerminacion.GetSelectedIndex() == -1) { datosCompletar += "* "; }
             if (cbEstado.GetSelectedIndex() == -1) { datosCompletar += "* Estado"; }
-            if (nudPrecio.Value == 0) { datosCompletar += "* Precio"; }
+            if (nudCosto.Value == 0) { datosCompletar += "* Costo"; }
 
             if (datosCompletar == string.Empty)
             {
@@ -218,7 +218,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cocina.TerminacionHorno = new GyCAP.Entidades.Terminacion();
                     cocina.TerminacionHorno.Codigo = cbTerminacion.GetSelectedValueInt();
                     cocina.Activo = cbEstado.GetSelectedValueInt();
-                    cocina.Precio = nudPrecio.Value;
+                    cocina.Costo = nudCosto.Value;
 
                     try
                     {
@@ -234,7 +234,7 @@ namespace GyCAP.UI.EstructuraProducto
                         rowCocina.COC_CODIGO_PRODUCTO = cocina.CodigoProducto;
                         rowCocina.TE_CODIGO = cocina.TerminacionHorno.Codigo;
                         rowCocina.DESIG_CODIGO = cocina.Designacion.Codigo;
-                        rowCocina.COC_PRECIO = cocina.Precio;
+                        rowCocina.COC_COSTO = cocina.Costo;
                         rowCocina.COC_CANTIDADSTOCK = 0;
                         rowCocina.COC_ACTIVO = cocina.Activo;
                         rowCocina.EndEdit();
@@ -280,7 +280,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cocina.TerminacionHorno = new GyCAP.Entidades.Terminacion();
                     cocina.TerminacionHorno.Codigo = cbTerminacion.GetSelectedValueInt();
                     cocina.Activo = cbEstado.GetSelectedValueInt();
-                    cocina.Precio = nudPrecio.Value;
+                    cocina.Costo = nudCosto.Value;
 
                     try
                     {
@@ -297,7 +297,7 @@ namespace GyCAP.UI.EstructuraProducto
                         rowCocina.TE_CODIGO = cocina.TerminacionHorno.Codigo;
                         rowCocina.DESIG_CODIGO = cocina.Designacion.Codigo;
                         rowCocina.COC_ACTIVO = cocina.Activo;
-                        rowCocina.COC_PRECIO = cocina.Precio;
+                        rowCocina.COC_COSTO = cocina.Costo;
                         rowCocina.EndEdit();
                         dsCocina.COCINAS.AcceptChanges();
                         //Actualizamos la imagen
@@ -311,26 +311,6 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                 }
                 dgvListaCocina.Refresh();
-            }
-            else
-            {
-                MessageBox.Show("Debe completar los datos:\n\n" + datosCompletar, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void btnGenerar_Click(object sender, EventArgs e)
-        {
-            string datosCompletar = string.Empty, codigo = string.Empty;
-            if (cbMarca.GetSelectedIndex() == -1) { datosCompletar += "* Marca"; }
-            if (cbModelo.GetSelectedIndex() == -1) { datosCompletar += "* Modelo"; }
-            if (cbTerminacion.GetSelectedIndex() == -1) { datosCompletar += "* "; }
-            if (cbDesignacion.GetSelectedIndex() == -1) { datosCompletar += "* Designación"; }
-            if (datosCompletar == string.Empty)
-            {
-                txtCodigo.Text = dsCocina.MARCAS.FindByMCA_CODIGO(cbMarca.GetSelectedValueInt()).MCA_NOMBRE;
-                txtCodigo.Text += dsCocina.MODELOS_COCINAS.FindByMOD_CODIGO(cbModelo.GetSelectedValueInt()).MOD_NOMBRE;
-                txtCodigo.Text += dsCocina.TERMINACIONES.FindByTE_CODIGO(cbTerminacion.GetSelectedValueInt()).TE_ABREVIATURA;
-                txtCodigo.Text += dsCocina.DESIGNACIONES.FindByDESIG_CODIGO(cbDesignacion.GetSelectedValueInt()).DESIG_NOMBRE;
             }
             else
             {
@@ -395,7 +375,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbColor.Enabled = true;
                     cbTerminacion.Enabled = true;
                     cbEstado.Enabled = true;
-                    nudPrecio.Enabled = true;
+                    nudCosto.Enabled = true;
                     gbImagen.Enabled = true;                    
                     cbModelo.SetTexto("Seleccione");
                     cbMarca.SetTexto("Seleccione");
@@ -403,7 +383,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbColor.SetTexto("Seleccione");
                     cbTerminacion.SetTexto("Seleccione");
                     cbEstado.SetTexto("Seleccione");
-                    nudPrecio.Value = 0;
+                    nudCosto.Value = 0;
                     pbImagen.Image = null;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -424,7 +404,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbColor.Enabled = true;
                     cbTerminacion.Enabled = true;
                     cbEstado.Enabled = true;
-                    nudPrecio.Enabled = true;
+                    nudCosto.Enabled = true;
                     gbImagen.Enabled = true;
                     cbModelo.SetTexto("Seleccione");
                     cbMarca.SetTexto("Seleccione");
@@ -432,7 +412,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbColor.SetTexto("Seleccione");
                     cbTerminacion.SetTexto("Seleccione");
                     cbEstado.SetTexto("Seleccione");
-                    nudPrecio.Value = 0;
+                    nudCosto.Value = 0;
                     pbImagen.Image = null;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
@@ -452,7 +432,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbColor.Enabled = false;
                     cbTerminacion.Enabled = false;
                     cbEstado.Enabled = false;
-                    nudPrecio.Enabled = false;
+                    nudCosto.Enabled = false;
                     gbImagen.Enabled = false;
                     btnGuardar.Enabled = false;
                     btnModificar.Enabled = true;
@@ -470,7 +450,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbColor.Enabled = true;
                     cbTerminacion.Enabled = true;
                     cbEstado.Enabled = true;
-                    nudPrecio.Enabled = true;
+                    nudCosto.Enabled = true;
                     gbImagen.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -565,18 +545,13 @@ namespace GyCAP.UI.EstructuraProducto
             txtCodigo.SelectAll();
         }
 
-        private void nudPrecio_Enter(object sender, EventArgs e)
+        private void nudCosto_Enter(object sender, EventArgs e)
         {
-            nudPrecio.Select(0, 20);
+            nudCosto.Select(0, 20);
         }
 
         #endregion Servicios
 
-        
-
-        
-
-        
 
     }
 }

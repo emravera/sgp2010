@@ -16,7 +16,7 @@ namespace GyCAP.Entidades
         private ModeloCocina modelo;
         private Terminacion terminacionHorno;
         private int activo;
-        private decimal precio;
+        private decimal costo;
         private int cantidadStock;
 
         public int Activo
@@ -25,10 +25,10 @@ namespace GyCAP.Entidades
             set { activo = value; }
         }
         
-        public decimal Precio
+        public decimal Costo
         {
-            get { return precio; }
-            set { precio = value; }
+            get { return costo; }
+            set { costo = value; }
         }
         
         public int CantidadStock

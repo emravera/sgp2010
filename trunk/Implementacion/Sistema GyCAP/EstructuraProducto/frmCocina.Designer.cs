@@ -43,7 +43,6 @@
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbDatos = new System.Windows.Forms.GroupBox();
-            this.btnGenerar = new System.Windows.Forms.Button();
             this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbTerminacion = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbColor = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
@@ -54,7 +53,7 @@
             this.btnQuitar = new System.Windows.Forms.Button();
             this.btnImagen = new System.Windows.Forms.Button();
             this.pbImagen = new System.Windows.Forms.PictureBox();
-            this.nudPrecio = new System.Windows.Forms.NumericUpDown();
+            this.nudCosto = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -83,7 +82,7 @@
             this.gbDatos.SuspendLayout();
             this.gbImagen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCosto)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaCocina)).BeginInit();
             this.tpBuscar.SuspendLayout();
@@ -97,9 +96,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(18, 297);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(49, 13);
+            this.label6.Size = new System.Drawing.Size(48, 13);
             this.label6.TabIndex = 6;
-            this.label6.Text = "Precio $:";
+            this.label6.Text = "Costo $:";
             // 
             // label5
             // 
@@ -135,7 +134,7 @@
             this.txtCodigo.Location = new System.Drawing.Point(123, 43);
             this.txtCodigo.MaxLength = 80;
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(138, 20);
+            this.txtCodigo.Size = new System.Drawing.Size(201, 20);
             this.txtCodigo.TabIndex = 7;
             this.txtCodigo.Enter += new System.EventHandler(this.txtCodigo_Enter);
             // 
@@ -248,7 +247,6 @@
             // 
             // gbDatos
             // 
-            this.gbDatos.Controls.Add(this.btnGenerar);
             this.gbDatos.Controls.Add(this.cbEstado);
             this.gbDatos.Controls.Add(this.cbTerminacion);
             this.gbDatos.Controls.Add(this.cbColor);
@@ -256,7 +254,7 @@
             this.gbDatos.Controls.Add(this.cbMarca);
             this.gbDatos.Controls.Add(this.cbModelo);
             this.gbDatos.Controls.Add(this.gbImagen);
-            this.gbDatos.Controls.Add(this.nudPrecio);
+            this.gbDatos.Controls.Add(this.nudCosto);
             this.gbDatos.Controls.Add(this.label10);
             this.gbDatos.Controls.Add(this.label9);
             this.gbDatos.Controls.Add(this.label8);
@@ -274,17 +272,6 @@
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos de la Cocina";
-            // 
-            // btnGenerar
-            // 
-            this.btnGenerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGenerar.Location = new System.Drawing.Point(267, 42);
-            this.btnGenerar.Name = "btnGenerar";
-            this.btnGenerar.Size = new System.Drawing.Size(57, 21);
-            this.btnGenerar.TabIndex = 22;
-            this.btnGenerar.Text = "Generar";
-            this.btnGenerar.UseVisualStyleBackColor = true;
-            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
             // 
             // cbEstado
             // 
@@ -391,25 +378,25 @@
             this.pbImagen.TabIndex = 0;
             this.pbImagen.TabStop = false;
             // 
-            // nudPrecio
+            // nudCosto
             // 
-            this.nudPrecio.DecimalPlaces = 2;
-            this.nudPrecio.Increment = new decimal(new int[] {
+            this.nudCosto.DecimalPlaces = 2;
+            this.nudCosto.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.nudPrecio.Location = new System.Drawing.Point(123, 295);
-            this.nudPrecio.Maximum = new decimal(new int[] {
+            this.nudCosto.Location = new System.Drawing.Point(123, 295);
+            this.nudCosto.Maximum = new decimal(new int[] {
             5000,
             0,
             0,
             0});
-            this.nudPrecio.Name = "nudPrecio";
-            this.nudPrecio.Size = new System.Drawing.Size(201, 20);
-            this.nudPrecio.TabIndex = 14;
-            this.nudPrecio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudPrecio.Enter += new System.EventHandler(this.nudPrecio_Enter);
+            this.nudCosto.Name = "nudCosto";
+            this.nudCosto.Size = new System.Drawing.Size(201, 20);
+            this.nudCosto.TabIndex = 14;
+            this.nudCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudCosto.Enter += new System.EventHandler(this.nudCosto_Enter);
             // 
             // label10
             // 
@@ -672,7 +659,7 @@
             this.gbDatos.PerformLayout();
             this.gbImagen.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCosto)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaCocina)).EndInit();
             this.tpBuscar.ResumeLayout(false);
@@ -720,7 +707,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox gbImagen;
         private System.Windows.Forms.PictureBox pbImagen;
-        private System.Windows.Forms.NumericUpDown nudPrecio;
+        private System.Windows.Forms.NumericUpDown nudCosto;
         private System.Windows.Forms.Button btnQuitar;
         private System.Windows.Forms.Button btnImagen;
         private System.Windows.Forms.Label label12;
@@ -734,7 +721,6 @@
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbMarcaBuscar;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbEstadoBuscar;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbTerminacionBuscar;
-        private System.Windows.Forms.Button btnGenerar;
         private System.Windows.Forms.OpenFileDialog ofdImagen;
     }
 }
