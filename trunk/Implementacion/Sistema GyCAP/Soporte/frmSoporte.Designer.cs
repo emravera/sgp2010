@@ -123,7 +123,7 @@
             this.btnConsultarCapacidadEmpleado.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarCapacidadEmpleado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConsultarCapacidadEmpleado.Image = global::GyCAP.UI.Soporte.Properties.Resources.Find_48;
-            this.btnConsultarCapacidadEmpleado.Location = new System.Drawing.Point(48, 75);
+            this.btnConsultarCapacidadEmpleado.Location = new System.Drawing.Point(48, 72);
             this.btnConsultarCapacidadEmpleado.Name = "btnConsultarCapacidadEmpleado";
             this.btnConsultarCapacidadEmpleado.Size = new System.Drawing.Size(63, 71);
             this.btnConsultarCapacidadEmpleado.TabIndex = 1;
@@ -144,7 +144,7 @@
             this.btnNuevoCapacidadEmpleado.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnNuevoCapacidadEmpleado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNuevoCapacidadEmpleado.Image = global::GyCAP.UI.Soporte.Properties.Resources.New_48;
-            this.btnNuevoCapacidadEmpleado.Location = new System.Drawing.Point(52, 3);
+            this.btnNuevoCapacidadEmpleado.Location = new System.Drawing.Point(52, 1);
             this.btnNuevoCapacidadEmpleado.Name = "btnNuevoCapacidadEmpleado";
             this.btnNuevoCapacidadEmpleado.Size = new System.Drawing.Size(54, 71);
             this.btnNuevoCapacidadEmpleado.TabIndex = 0;
@@ -225,7 +225,7 @@
             this.btnConsultarLocalidad.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarLocalidad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConsultarLocalidad.Image = global::GyCAP.UI.Soporte.Properties.Resources.Find_48;
-            this.btnConsultarLocalidad.Location = new System.Drawing.Point(48, 73);
+            this.btnConsultarLocalidad.Location = new System.Drawing.Point(48, 70);
             this.btnConsultarLocalidad.Name = "btnConsultarLocalidad";
             this.btnConsultarLocalidad.Size = new System.Drawing.Size(63, 71);
             this.btnConsultarLocalidad.TabIndex = 3;
@@ -296,7 +296,7 @@
             this.btnConsultarMarca.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConsultarMarca.Image = global::GyCAP.UI.Soporte.Properties.Resources.Find_48;
-            this.btnConsultarMarca.Location = new System.Drawing.Point(48, 72);
+            this.btnConsultarMarca.Location = new System.Drawing.Point(48, 69);
             this.btnConsultarMarca.Name = "btnConsultarMarca";
             this.btnConsultarMarca.Size = new System.Drawing.Size(63, 71);
             this.btnConsultarMarca.TabIndex = 1;
@@ -317,7 +317,7 @@
             this.btnNuevoMarca.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnNuevoMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNuevoMarca.Image = global::GyCAP.UI.Soporte.Properties.Resources.New_48;
-            this.btnNuevoMarca.Location = new System.Drawing.Point(52, 3);
+            this.btnNuevoMarca.Location = new System.Drawing.Point(52, 1);
             this.btnNuevoMarca.Name = "btnNuevoMarca";
             this.btnNuevoMarca.Size = new System.Drawing.Size(54, 71);
             this.btnNuevoMarca.TabIndex = 0;
