@@ -17,7 +17,6 @@ namespace GyCAP.DAL
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
             string sqlInsert = @"INSERT INTO [CONJUNTOS]
                                         ([conj_nombre]
-                                        ,[te_codigo]
                                         ,[conj_descripcion]
                                         ,[conj_cantidadstock]
                                         ,[par_codigo]
@@ -25,11 +24,18 @@ namespace GyCAP.DAL
                                         ,[conj_codigoparte]
                                         ,[conj_costo]
                                         ,[hr_codigo]) 
-                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8) SELECT @@Identity";
+                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7) SELECT @@Identity";
 
             //Así obtenemos el conjunto nuevo del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.CONJUNTOSRow rowConjunto = dsEstructura.CONJUNTOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.CONJUNTOSRow;
-            object[] valorParametros = { rowConjunto.CONJ_NOMBRE, rowConjunto.TE_CODIGO, rowConjunto.CONJ_DESCRIPCION, 0, rowConjunto.PAR_CODIGO, rowConjunto.PNO_CODIGO, rowConjunto.CONJ_CODIGOPARTE, rowConjunto.CONJ_COSTO, DBNull.Value };
+            object[] valorParametros = { rowConjunto.CONJ_NOMBRE,
+                                           rowConjunto.CONJ_DESCRIPCION, 
+                                           0, 
+                                           rowConjunto.PAR_CODIGO, 
+                                           rowConjunto.PNO_CODIGO, 
+                                           rowConjunto.CONJ_CODIGOPARTE, 
+                                           rowConjunto.CONJ_COSTO, 
+                                           DBNull.Value };
                         
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
@@ -136,19 +142,17 @@ namespace GyCAP.DAL
             //Armemos todas las consultas
             string sqlUpdateConjunto = @"UPDATE CONJUNTOS SET
                                          conj_nombre = @p0
-                                        ,te_codigo = @p1
-                                        ,conj_descripcion = @p2
-                                        ,par_codigo = @p3
-                                        ,pno_codigo = @p4
-                                        ,conj_codigoparte = @p5
-                                        ,conj_costo = @p6
-                                        ,hr_codigo = @p7
-                                        WHERE conj_codigo = @p8";
+                                        ,conj_descripcion = @p1
+                                        ,par_codigo = @p2
+                                        ,pno_codigo = @p3
+                                        ,conj_codigoparte = @p4
+                                        ,conj_costo = @p5
+                                        ,hr_codigo = @p6
+                                        WHERE conj_codigo = @p7";
 
             //Así obtenemos el conjunto modificado del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.CONJUNTOSRow rowConjunto = dsEstructura.CONJUNTOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.CONJUNTOSRow;
             object[] valorParametros = { rowConjunto.CONJ_NOMBRE, 
-                                           rowConjunto.TE_CODIGO, 
                                            rowConjunto.CONJ_DESCRIPCION, 
                                            rowConjunto.PAR_CODIGO, 
                                            rowConjunto.PNO_CODIGO, 
@@ -285,8 +289,8 @@ namespace GyCAP.DAL
         //Determina si existe un conjunto dado su nombre y terminación
         public static bool EsConjunto(Entidades.Conjunto conjunto)
         {
-            string sql = "SELECT count(conj_codigo) FROM CONJUNTOS WHERE conj_nombre = @p0 AND te_codigo = @p1";
-            object[] valorParametros = { conjunto.Nombre, conjunto.CodigoTerminacion };
+            string sql = "SELECT count(conj_codigo) FROM CONJUNTOS WHERE conj_nombre = @p0";
+            object[] valorParametros = { conjunto.Nombre };
             try
             {
                 if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
@@ -310,9 +314,8 @@ namespace GyCAP.DAL
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
         public static Entidades.Conjunto ObtenerConjunto(int codigoConjunto)
         {
-            string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo
-                                 ,conj_codigoparte, conj_costo                         
-                         FROM CONJUNTOS WHERE conj_codigo = @p0";
+            string sql = @"SELECT conj_codigo, conj_nombre, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo
+                                 ,conj_codigoparte, conj_costo FROM CONJUNTOS WHERE conj_codigo = @p0";
             object[] valorParametros = { codigoConjunto };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
             Entidades.Conjunto conjunto = new GyCAP.Entidades.Conjunto();
@@ -323,7 +326,6 @@ namespace GyCAP.DAL
                 conjunto.CodigoConjunto = codigoConjunto;
                 conjunto.CodigoParte = rdr["conj_codigoparte"].ToString();
                 conjunto.Nombre = rdr["conj_nombre"].ToString();
-                conjunto.CodigoTerminacion = Convert.ToInt32(rdr["te_codigo"].ToString());
                 conjunto.Descripcion = rdr["conj_descripcion"].ToString();
                 conjunto.CantidadStock = Convert.ToInt32(rdr["conj_cantidadstock"].ToString());
                 conjunto.CodigoEstado = Convert.ToInt32(rdr["par_codigo"].ToString());
@@ -339,11 +341,10 @@ namespace GyCAP.DAL
             return conjunto;
         }
 
-        public static void ObtenerConjuntos(object nombre, object codTerminacion, Data.dsEstructura ds, bool obtenerDetalle)
+        public static void ObtenerConjuntos(object nombre, Data.dsEstructura ds, bool obtenerDetalle)
         {
-            string sql = @"SELECT conj_codigo, conj_nombre, conj_descripcion, te_codigo, conj_cantidadstock, par_codigo, pno_codigo
-                                  ,conj_codigoparte , conj_costo 
-                        FROM CONJUNTOS WHERE 1=1";
+            string sql = @"SELECT conj_codigo, conj_nombre, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo
+                                  ,conj_codigoparte , conj_costo FROM CONJUNTOS WHERE 1=1";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
@@ -357,13 +358,6 @@ namespace GyCAP.DAL
                 //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
                 nombre = "%" + nombre + "%";
                 valoresFiltros[cantidadParametros] = nombre;
-                cantidadParametros++;
-            }
-            //Revisamos si pasó algun valor y si es un integer
-            if (codTerminacion != null && codTerminacion.GetType() == cantidadParametros.GetType())
-            {
-                sql += " AND te_codigo = @p" + cantidadParametros; 
-                valoresFiltros[cantidadParametros] = Convert.ToInt32(codTerminacion);
                 cantidadParametros++;
             }
 
@@ -483,7 +477,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerConjuntos(DataTable dtConjuntos)
         {
-            string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo,
+            string sql = @"SELECT conj_codigo, conj_nombre, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo,
                                   conj_codigoparte, conj_costo FROM CONJUNTOS";
             
             try
@@ -495,7 +489,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerConjuntos(DataTable dtConjuntos, int estado)
         {
-            string sql = @"SELECT conj_codigo, conj_nombre, te_codigo, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo
+            string sql = @"SELECT conj_codigo, conj_nombre, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo
                                   ,conj_codigoparte, conj_costo FROM CONJUNTOS WHERE par_codigo = @p0 ";
 
             object[] valorParametros = { estado };

@@ -149,7 +149,7 @@ namespace GyCAP.UI.EstructuraProducto
                 rowParte.PAR_TIPO = "Conjunto";
                 rowParte.PAR_CODIGO = row.CONJUNTOSRow.CONJ_CODIGOPARTE;
                 rowParte.PAR_NOMBRE = row.CONJUNTOSRow.CONJ_NOMBRE;
-                rowParte.PAR_TERMINACION = dsEstructura.TERMINACIONES.FindByTE_CODIGO(row.CONJUNTOSRow.TE_CODIGO).TE_NOMBRE;
+                rowParte.PAR_TERMINACION = string.Empty;
                 rowParte.PAR_CANTIDAD = row.CXE_CANTIDAD.ToString();
                 rowParte.PAR_UMED = "Unidad";
                 rowParte.EndEdit();
@@ -163,7 +163,7 @@ namespace GyCAP.UI.EstructuraProducto
                 rowParte.PAR_TIPO = "Subconjunto";
                 rowParte.PAR_CODIGO = row.SUBCONJUNTOSRow.SCONJ_CODIGOPARTE;
                 rowParte.PAR_NOMBRE = row.SUBCONJUNTOSRow.SCONJ_NOMBRE;
-                rowParte.PAR_TERMINACION = dsEstructura.TERMINACIONES.FindByTE_CODIGO(row.SUBCONJUNTOSRow.TE_CODIGO).TE_NOMBRE;
+                rowParte.PAR_TERMINACION = string.Empty;
                 rowParte.PAR_CANTIDAD = row.SCXE_CANTIDAD.ToString();
                 rowParte.PAR_UMED = "Unidad";
                 rowParte.EndEdit();

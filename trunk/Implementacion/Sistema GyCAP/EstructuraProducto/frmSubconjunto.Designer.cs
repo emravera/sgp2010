@@ -50,13 +50,10 @@
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.txtDescripcion = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.slideControl = new SlickInterface.SlideControl();
-            this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.dgvDetalleSubconjunto = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbTerminacionBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.dgvSubconjuntos = new System.Windows.Forms.DataGridView();
@@ -76,7 +73,6 @@
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.cbPlano = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbTerminacion = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -91,6 +87,7 @@
             this.nudCantidad = new System.Windows.Forms.NumericUpDown();
             this.slideAgregar = new SlickInterface.Slide();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
+            this.chkCostoFijo = new System.Windows.Forms.CheckBox();
             this.panelImagen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
             this.panelAcciones.SuspendLayout();
@@ -370,15 +367,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Descripción:";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 70);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Terminación:";
-            // 
             // slideControl
             // 
             this.slideControl.Location = new System.Drawing.Point(3, 3);
@@ -387,15 +375,6 @@
             this.slideControl.Size = new System.Drawing.Size(509, 240);
             this.slideControl.SlideSpeed = 250;
             this.slideControl.TabIndex = 8;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(192, 32);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(68, 13);
-            this.label11.TabIndex = 7;
-            this.label11.Text = "Terminación:";
             // 
             // label10
             // 
@@ -424,8 +403,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.cbTerminacionBuscar);
-            this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.txtNombreBuscar);
@@ -436,16 +413,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
-            // 
-            // cbTerminacionBuscar
-            // 
-            this.cbTerminacionBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTerminacionBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbTerminacionBuscar.FormattingEnabled = true;
-            this.cbTerminacionBuscar.Location = new System.Drawing.Point(266, 29);
-            this.cbTerminacionBuscar.Name = "cbTerminacionBuscar";
-            this.cbTerminacionBuscar.Size = new System.Drawing.Size(121, 21);
-            this.cbTerminacionBuscar.TabIndex = 2;
             // 
             // btnBuscar
             // 
@@ -465,7 +432,7 @@
             this.txtNombreBuscar.Location = new System.Drawing.Point(66, 30);
             this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
-            this.txtNombreBuscar.Size = new System.Drawing.Size(121, 20);
+            this.txtNombreBuscar.Size = new System.Drawing.Size(249, 20);
             this.txtNombreBuscar.TabIndex = 1;
             this.txtNombreBuscar.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -612,12 +579,12 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.chkCostoFijo);
             this.gbDatos.Controls.Add(this.label13);
             this.gbDatos.Controls.Add(this.nudCosto);
             this.gbDatos.Controls.Add(this.txtCodigo);
             this.gbDatos.Controls.Add(this.cbPlano);
             this.gbDatos.Controls.Add(this.cbEstado);
-            this.gbDatos.Controls.Add(this.cbTerminacion);
             this.gbDatos.Controls.Add(this.label12);
             this.gbDatos.Controls.Add(this.label9);
             this.gbDatos.Controls.Add(this.label4);
@@ -626,7 +593,6 @@
             this.gbDatos.Controls.Add(this.panelImagen);
             this.gbDatos.Controls.Add(this.label2);
             this.gbDatos.Controls.Add(this.label3);
-            this.gbDatos.Controls.Add(this.label1);
             this.gbDatos.Controls.Add(this.slideDatos);
             this.gbDatos.Location = new System.Drawing.Point(5, -2);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
@@ -660,7 +626,7 @@
             0,
             0});
             this.nudCosto.Name = "nudCosto";
-            this.nudCosto.Size = new System.Drawing.Size(287, 20);
+            this.nudCosto.Size = new System.Drawing.Size(209, 20);
             this.nudCosto.TabIndex = 16;
             this.nudCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCosto.Enter += new System.EventHandler(this.control_Enter);
@@ -692,16 +658,6 @@
             this.cbEstado.Name = "cbEstado";
             this.cbEstado.Size = new System.Drawing.Size(287, 21);
             this.cbEstado.TabIndex = 8;
-            // 
-            // cbTerminacion
-            // 
-            this.cbTerminacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTerminacion.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbTerminacion.FormattingEnabled = true;
-            this.cbTerminacion.Location = new System.Drawing.Point(80, 67);
-            this.cbTerminacion.Name = "cbTerminacion";
-            this.cbTerminacion.Size = new System.Drawing.Size(287, 21);
-            this.cbTerminacion.TabIndex = 7;
             // 
             // label12
             // 
@@ -847,6 +803,17 @@
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk);
             // 
+            // chkCostoFijo
+            // 
+            this.chkCostoFijo.AutoSize = true;
+            this.chkCostoFijo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkCostoFijo.Location = new System.Drawing.Point(295, 154);
+            this.chkCostoFijo.Name = "chkCostoFijo";
+            this.chkCostoFijo.Size = new System.Drawing.Size(72, 17);
+            this.chkCostoFijo.TabIndex = 18;
+            this.chkCostoFijo.Text = "Costo fijo";
+            this.chkCostoFijo.UseVisualStyleBackColor = true;
+            // 
             // frmSubconjunto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -916,9 +883,7 @@
         private System.Windows.Forms.ToolStrip tsMenu;
         private System.Windows.Forms.RichTextBox txtDescripcion;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private SlickInterface.SlideControl slideControl;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataGridView dgvDetalleSubconjunto;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -937,13 +902,11 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.GroupBox gbDatos;
         private System.Windows.Forms.OpenFileDialog ofdImagen;
-        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbTerminacionBuscar;
         private System.Windows.Forms.TabPage tpAgregar;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txtCodigo;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbPlano;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbEstado;
-        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbTerminacion;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label4;
@@ -957,5 +920,6 @@
         private SlickInterface.Slide slideAgregar;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.NumericUpDown nudCosto;
+        private System.Windows.Forms.CheckBox chkCostoFijo;
     }
 }

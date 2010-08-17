@@ -293,7 +293,8 @@ namespace GyCAP.UI.EstructuraProducto
                 {
                     decimal costo = dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).MATERIAS_PRIMASRow.MP_COSTO;
                     decimal cantidad = dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).MPXP_CANTIDAD;
-                    nudCosto.Value -= (costo * cantidad);
+                    try { nudCosto.Value -= (costo * cantidad); }
+                    catch (System.ArgumentOutOfRangeException) { nudCosto.Value = 0; }
                 }
                 dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).Delete();
             }
@@ -335,7 +336,8 @@ namespace GyCAP.UI.EstructuraProducto
                 {
                     decimal costo = dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).MATERIAS_PRIMASRow.MP_COSTO;
                     dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).MPXP_CANTIDAD -= Convert.ToDecimal(0.1);
-                    nudCosto.Value -= (costo * Convert.ToDecimal(0.1));
+                    try { nudCosto.Value -= (costo * Convert.ToDecimal(0.1)); }
+                    catch (System.ArgumentOutOfRangeException) { nudCosto.Value = 0; }
                 }
             }
             else
@@ -494,6 +496,7 @@ namespace GyCAP.UI.EstructuraProducto
                     dvDetallePieza.RowFilter = "MPXP_CODIGO < 0";
                     nudCosto.Enabled = true;
                     nudCosto.Value = 0;
+                    chkCostoFijo.Enabled = true;
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
                     btnGuardar.Enabled = true;
@@ -521,6 +524,7 @@ namespace GyCAP.UI.EstructuraProducto
                     dvDetallePieza.RowFilter = "MPXP_CODIGO < 0";
                     nudCosto.Enabled = true;
                     nudCosto.Value = 0;
+                    chkCostoFijo.Enabled = true;
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
                     btnGuardar.Enabled = true;
@@ -544,6 +548,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbPlano.Enabled = false;
                     cbPlano.SetTexto(string.Empty);
                     nudCosto.Enabled = false;
+                    chkCostoFijo.Enabled = false;
                     txtDescripcion.ReadOnly = true;
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
@@ -562,6 +567,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbEstado.SetTexto(string.Empty);
                     cbPlano.SetTexto(string.Empty);
                     nudCosto.Enabled = true;
+                    chkCostoFijo.Enabled = true;
                     txtDescripcion.ReadOnly = false;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;

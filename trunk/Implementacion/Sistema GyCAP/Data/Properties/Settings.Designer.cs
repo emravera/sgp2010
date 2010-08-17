@@ -38,7 +38,18 @@ namespace GyCAP.Data.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=Proyecto,2555;Initial Catalog=Proyecto;Persist Security Info=True;Use" +
-            "r ID=sa")]
+            "r ID=sa;Password=spg2010")]
+        public string ProyectoConnectionString2 {
+            get {
+                return ((string)(this["ProyectoConnectionString2"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=Proyecto,2555;Initial Catalog=Proyecto;Persist Security Info=True;Use" +
+            "r ID=sa;Password=spg2010")]
         public string ProyectoConnectionString1 {
             get {
                 return ((string)(this["ProyectoConnectionString1"]));
@@ -49,7 +60,7 @@ namespace GyCAP.Data.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=Proyecto,2555;Initial Catalog=Proyecto;Persist Security Info=True;Use" +
-            "r ID=sa")]
+            "r ID=sa;Password=spg2010")]
         public string ProyectoConnectionString4 {
             get {
                 return ((string)(this["ProyectoConnectionString4"]));
@@ -60,7 +71,7 @@ namespace GyCAP.Data.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=Proyecto,2555;Initial Catalog=Proyecto;Persist Security Info=True;Use" +
-            "r ID=sa")]
+            "r ID=sa;Password=spg2010")]
         public string ProyectoConnectionString5 {
             get {
                 return ((string)(this["ProyectoConnectionString5"]));
@@ -71,7 +82,7 @@ namespace GyCAP.Data.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=Proyecto,2555;Initial Catalog=Proyecto;Persist Security Info=True;Use" +
-            "r ID=sa")]
+            "r ID=sa;Password=spg2010")]
         public string ProyectoConnectionString7 {
             get {
                 return ((string)(this["ProyectoConnectionString7"]));
@@ -82,21 +93,10 @@ namespace GyCAP.Data.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=Proyecto,2555;Initial Catalog=Proyecto;Persist Security Info=True;Use" +
-            "r ID=sa")]
+            "r ID=sa;Password=spg2010")]
         public string ProyectoConnectionString {
             get {
                 return ((string)(this["ProyectoConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=Proyecto,2555;Initial Catalog=Proyecto;Persist Security Info=True;Use" +
-            "r ID=sa;Password=spg2010")]
-        public string ProyectoConnectionString2 {
-            get {
-                return ((string)(this["ProyectoConnectionString2"]));
             }
         }
     }
