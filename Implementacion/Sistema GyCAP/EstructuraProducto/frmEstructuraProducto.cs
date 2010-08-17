@@ -32,6 +32,18 @@ namespace GyCAP.UI.EstructuraProducto
             btnSubconjunto.Tag = panelSubconjunto;
             btnTerminacion.Tag = panelTerminacion;
             btnUnidadMedida.Tag = panelUnidadMedida;
+            Size size = new Size(panelCocina.Size.Width, 0);
+            panelCocina.Size = size;
+            panelColor.Size = size;
+            panelConjunto.Size = size;
+            panelDesignacion.Size = size;
+            panelEstructuraCocina.Size = size;
+            panelModeloCocina.Size = size;
+            panelMPPrincipal.Size = size;
+            panelPieza.Size = size;
+            panelSubconjunto.Size = size;
+            panelTerminacion.Size = size;
+            panelUnidadMedida.Size = size;
         }
 
         public static frmEstructuraProducto Instancia
@@ -80,6 +92,7 @@ namespace GyCAP.UI.EstructuraProducto
                 scDown.Panel1Collapsed = false;
                 btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
             }
+            btnMenu.Parent.Focus();
         }
 
         private void ShowHide(Panel panelClic)
@@ -89,27 +102,85 @@ namespace GyCAP.UI.EstructuraProducto
                 if (activo != panelClic) //Son distintos
                 {
                     //Ocultamos el actual
-                    activo.Visible = false;
+                    //activo.Visible = false; Cambio en IT2
+                    EfectoPanel(activo, 0);
                     //Mostramos el que viene y lo asignamos como activo
-                    panelClic.Visible = true;
+                    //panelClic.Visible = true; Cambio en IT2
+                    EfectoPanel(panelClic, 1);
                     activo = panelClic;
                 }
                 else //Son iguales
                 {
                     //Lo ocultamos y nadie queda activo
-                    activo.Visible = false;
+                    //activo.Visible = false; Cambio en IT2
+                    EfectoPanel(activo, 0);
                     activo = null;
                 }
             }
             else //No se está mostrando ninguno
             {
-                //Lo mostramos y lo asignamos como activo
+                //Lo mostramos y lo asignamos como activo                
                 activo = panelClic;
-                activo.Visible = true;
+                EfectoPanel(panelClic, 1);
+                //activo.Visible = true; Cambio en IT2
             }
             
         }
 
+        private void EfectoPanel(Panel panel, int efecto)
+        {
+            int finalSize;
+            switch (panel.Controls.Count)
+            {
+                case 0:
+                    finalSize = 80;
+                    break;
+                case 1:
+                    finalSize = 80;
+                    break;
+                case 2:
+                    finalSize = 145;
+                    break;
+                case 3:
+                    finalSize = 210;
+                    break;
+                default:
+                    finalSize = panel.Controls.Count * 70;
+                    break;
+            }
+            Size sizePanel = new Size(panel.Size.Width, panel.Size.Height);
+            if (efecto == 0)
+            {
+                //Ocultar
+                while (panel.Size.Height > 0)
+                {
+                    sizePanel.Height -= 5;
+                    panel.Size = sizePanel;
+                }
+            }
+            else
+            {
+                //Mostrar
+                while (panel.Size.Height < finalSize)
+                {
+                    sizePanel.Height += 5;
+                    panel.Size = sizePanel;
+                }
+            }
+        }
+
+        private void button_MouseDown(object sender, MouseEventArgs e)
+        {
+            Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
+            (sender as Button).Location = punto;
+        }
+
+        private void button_MouseUp(object sender, MouseEventArgs e)
+        {
+            Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
+            (sender as Button).Location = punto;
+        }
+        
         private void btn_Click(object sender, EventArgs e)
         {
             ShowHide(((Button)sender).Tag as Panel);
@@ -393,7 +464,6 @@ namespace GyCAP.UI.EstructuraProducto
 
         #endregion
 
-        
 
     }
 }
