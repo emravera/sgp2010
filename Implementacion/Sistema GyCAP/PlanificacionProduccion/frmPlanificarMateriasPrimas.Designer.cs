@@ -197,7 +197,7 @@
             this.dgvLista.Size = new System.Drawing.Size(334, 290);
             this.dgvLista.TabIndex = 1;
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
-            this.dgvLista.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellContentClick);
+            this.dgvLista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellContentClick);
             // 
             // gbBuscar
             // 
@@ -319,6 +319,7 @@
             this.btnConsultar.Size = new System.Drawing.Size(43, 47);
             this.btnConsultar.Text = "&Buscar";
             this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
             // btnSalir
             // 

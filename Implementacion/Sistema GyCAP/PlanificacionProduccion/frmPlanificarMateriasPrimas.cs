@@ -138,7 +138,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbBuscar.Visible = false;
                     gbDatosPrincipales.Visible = true;
                     btnNuevo.Enabled = true;
-                    btnConsultar.Enabled = false;
+                    btnConsultar.Enabled = true;
                     btnEliminar.Enabled = false;
                     estadoActual = estadoUI.inicio;
                     break;
@@ -166,7 +166,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbBuscar.Visible = false;
                     gbDatosPrincipales.Visible = true;
                     btnNuevo.Enabled = true;
-                    btnConsultar.Enabled = false;
+                    btnConsultar.Enabled = true;
                     btnEliminar.Enabled = false;
                     estadoActual = estadoUI.inicio;
                     break;
@@ -389,10 +389,10 @@ namespace GyCAP.UI.PlanificacionProduccion
                         foreach (DataRowView dr in dvListaPlanMP)
                         {
 
-                            int codigo = Convert.ToInt32(dvListaPlanMP[cont]["pmpa_codigo"]);
+                            int codigo = Convert.ToInt32(dvListaPlanMP[0]["pmpa_codigo"]);
                             //Elimino la planificacion de las materias primas
-                            BLL.DemandaAnualBLL.Eliminar(codigo);
-                            cont += 1;
+                            BLL.PlanMateriaPrimaBLL.Eliminar(codigo);
+                           
 
                             //Lo eliminamos del dataset
                             dsPlanMP.PLANES_MATERIAS_PRIMAS_ANUALES.FindByPMPA_CODIGO(codigo).Delete();
@@ -438,22 +438,27 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                     //Se llama a la funcion de busqueda con todos los parametros
                     BLL.PlanMateriaPrimaBLL.ObtenerTodos(anio, dsPlanMP);
+
+                    //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
+                    //por una consulta a la BD
+                    dvListaPlanMP.Table = dsPlanMP.PLANES_MATERIAS_PRIMAS_ANUALES;
+
+                    //Seteamos el estado de la interface
+                    SetInterface(estadoUI.buscar);
+
+                    if (dsPlanMP.PLANES_MATERIAS_PRIMAS_ANUALES.Rows.Count == 0)
+                    {
+                        MessageBox.Show("No se encontraron Planes anuales con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        SetInterface(estadoUI.inicio);
+                    }
+
                 }
                 else
                 {
-                    //Se llama a la funcion de busqueda para que traiga todos los valores
-                    BLL.PlanMateriaPrimaBLL.ObtenerTodos(dsPlanMP);
+                    MessageBox.Show("Es necesario que se ingrese un año para traer el plan anual de materias Primas Correspondiente", "Información: Validación - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
                 }
-                //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
-                //por una consulta a la BD
-                dvListaPlanMP.Table = dsPlanMP.PLANES_MATERIAS_PRIMAS_ANUALES;
-
-                if (dsPlanMP.PLANES_MATERIAS_PRIMAS_ANUALES.Rows.Count == 0)
-                {
-                    MessageBox.Show("No se encontraron Planes anuales con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
-                SetInterface(estadoUI.buscar);
+                
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -490,6 +495,11 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             }
            
+        }
+
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.inicio);
         }
 
        
