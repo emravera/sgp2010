@@ -161,6 +161,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPlanMateriasPrimas.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsPlanMensual.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPlanMensual.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsProveedor.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -175,6 +180,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsTerminacion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsTurnosTrabajo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsTurnosTrabajo.xsd</DependentUpon>
     </Compile>
     <Compile Include="dsUnidadMedida.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -411,6 +421,17 @@
     <None Include="dsPlanMateriasPrimas.xss">
       <DependentUpon>dsPlanMateriasPrimas.xsd</DependentUpon>
     </None>
+    <None Include="dsPlanMensual.xsc">
+      <DependentUpon>dsPlanMensual.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanMensual.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPlanMensual.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsPlanMensual.xss">
+      <DependentUpon>dsPlanMensual.xsd</DependentUpon>
+    </None>
     <None Include="dsProveedor.xsc">
       <DependentUpon>dsProveedor.xsd</DependentUpon>
     </None>
@@ -443,6 +464,17 @@
     </None>
     <None Include="dsTerminacion.xss">
       <DependentUpon>dsTerminacion.xsd</DependentUpon>
+    </None>
+    <None Include="dsTurnosTrabajo.xsc">
+      <DependentUpon>dsTurnosTrabajo.xsd</DependentUpon>
+    </None>
+    <None Include="dsTurnosTrabajo.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsTurnosTrabajo.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsTurnosTrabajo.xss">
+      <DependentUpon>dsTurnosTrabajo.xsd</DependentUpon>
     </None>
     <None Include="dsUnidadMedida.xsc">
       <DependentUpon>dsUnidadMedida.xsd</DependentUpon>

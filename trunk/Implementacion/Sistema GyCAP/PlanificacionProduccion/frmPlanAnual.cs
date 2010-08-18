@@ -57,7 +57,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Agregamos la columnas
             dgvDetalle.Columns.Add("DPAN_CODIGO", "Código");
             dgvDetalle.Columns.Add("DPAN_MES", "Mes");
-            dgvDetalle.Columns.Add("DPAN_CANTIDADMES", "Fecha Inicio Plan");
+            dgvDetalle.Columns.Add("DPAN_CANTIDADMES", "Cantidad Mes");
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvDetalle.Columns["DPAN_CODIGO"].DataPropertyName = "DPAN_CODIGO";
@@ -455,7 +455,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             catch (Exception ex)
             {
-                MessageBox.Show("El año no tiene el formato Correcto", "Error: Demanda Anual - Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("El año no tiene el formato Correcto", "Error: Plan Anual - Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
 

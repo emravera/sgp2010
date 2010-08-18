@@ -22,6 +22,19 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        public static void ObtenerDetalle(Data.dsPlanMensual ds)
+        {
+            string sql = @"SELECT dpan_codigo, dpan_mes, dpan_cantidadmes, pan_codigo
+                        FROM DETALLE_PLAN_ANUAL";
+
+            try
+            {
+                DB.FillDataSet(ds, "DETALLE_PLAN_ANUAL", sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
+
         public static void ObtenerDetalle(Data.dsPlanMateriasPrimas ds, int idCodigo)
         {
             string sql = @"SELECT dpan_codigo, dpan_mes, dpan_cantidadmes, pan_codigo

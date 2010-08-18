@@ -5,7 +5,16 @@ using System.Text;
 
 namespace GyCAP.BLL
 {
-    class PlanMensualBLL
+    public class PlanMensualBLL
     {
+        //METODO DE BUSQUEDA
+        public static void ObtenerTodos(int anio, string mes, Data.dsPlanMensual ds)
+        {
+            DAL.PlanMensualDAL.ObtenerTodos(anio, mes, ds);
+        }
+
+
+
+
     }
 }

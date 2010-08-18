@@ -129,7 +129,7 @@ namespace GyCAP.DAL
                 DB.executeNonQuery(sql, valorParametros, null);
 
                 //Elimino la demanda
-                sql = "DELETE FROM PLANES_ANUALES WHERE pmpa_codigo= @p0";
+                sql = "DELETE FROM PLANES_MATERIAS_PRIMAS_ANUALES WHERE pmpa_codigo= @p0";
                 DB.executeNonQuery(sql, valorParametros, null);
 
 

@@ -211,6 +211,14 @@ namespace Principal
             GyCAP.UI.PlanificacionProduccion.frmPlanificacionProduccion.Instancia.MdiParent = this;
             GyCAP.UI.PlanificacionProduccion.frmPlanificacionProduccion.Instancia.Show();
         }
+
+        private void btnPlanMensual_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.PlanificacionProduccion.frmPlanMensual.Instancia.MdiParent = this;
+            GyCAP.UI.PlanificacionProduccion.frmPlanMensual.Instancia.Show();
+        }
+
+        
         
     }
 }
