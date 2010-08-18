@@ -155,7 +155,6 @@ namespace GyCAP.UI.RecursosFabricacion
 
         #endregion
 
-
         #region Servicios
 
         private void SetInterface(estadoUI estado)
@@ -428,13 +427,6 @@ namespace GyCAP.UI.RecursosFabricacion
         }
 
         #endregion
-
-       
-
-        
-
-
-
 
 
     }
