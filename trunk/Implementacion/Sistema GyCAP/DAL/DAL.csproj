@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="CapacidadEmpleadoDAL.cs" />
     <Compile Include="CausaFalloDAL.cs" />
+    <Compile Include="CentroTrabajoDAL.cs" />
     <Compile Include="ClienteDAL.cs" />
     <Compile Include="CocinaDAL.cs" />
     <Compile Include="ColorDAL.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="TipoMantenimientoDAL.cs" />
     <Compile Include="TipoRepuestoDAL.cs" />
     <Compile Include="TipoUnidadMedidaDAL.cs" />
+    <Compile Include="TurnoTrabajoDAL.cs" />
     <Compile Include="UnidadMedidaDAL.cs" />
     <Compile Include="UsuarioDAL.cs" />
   </ItemGroup>

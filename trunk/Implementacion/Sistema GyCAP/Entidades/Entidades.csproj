@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="CapacidadEmpleado.cs" />
     <Compile Include="CausaFallo.cs" />
+    <Compile Include="CentroTrabajo.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Cocina.cs" />
     <Compile Include="Color.cs" />
@@ -111,7 +112,7 @@
     <Compile Include="Proveedor.cs" />
     <Compile Include="Provincia.cs" />
     <Compile Include="Repuesto.cs" />
-    <Compile Include="Sector.cs" />
+    <Compile Include="SectorTrabajo.cs" />
     <Compile Include="Sistema.cs" />
     <Compile Include="Stock.cs" />
     <Compile Include="StockCocina.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="TipoMantenimiento.cs" />
     <Compile Include="TipoRepuesto.cs" />
     <Compile Include="TipoUnidadMedida.cs" />
+    <Compile Include="TurnoTrabajo.cs" />
     <Compile Include="UnidadMedida.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>

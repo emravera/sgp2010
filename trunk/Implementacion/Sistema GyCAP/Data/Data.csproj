@@ -56,6 +56,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsCapacidadEmpleado.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsCentroTrabajo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsCentroTrabajo.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsCliente.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -222,6 +227,17 @@
     </None>
     <None Include="dsCapacidadEmpleado.xss">
       <DependentUpon>dsCapacidadEmpleado.xsd</DependentUpon>
+    </None>
+    <None Include="dsCentroTrabajo.xsc">
+      <DependentUpon>dsCentroTrabajo.xsd</DependentUpon>
+    </None>
+    <None Include="dsCentroTrabajo.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsCentroTrabajo.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsCentroTrabajo.xss">
+      <DependentUpon>dsCentroTrabajo.xsd</DependentUpon>
     </None>
     <None Include="dsCliente.xsc">
       <DependentUpon>dsCliente.xsd</DependentUpon>

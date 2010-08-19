@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="CapacidadEmpleadoBLL.cs" />
     <Compile Include="CausaFalloBLL.cs" />
+    <Compile Include="CentroTrabajoBLL.cs" />
     <Compile Include="ClienteBLL.cs" />
     <Compile Include="CocinaBLL.cs" />
     <Compile Include="ColorBLL.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="TipoMantenimientoBLL.cs" />
     <Compile Include="TipoRepuestoBLL.cs" />
     <Compile Include="TipoUnidadMedidaBLL.cs" />
+    <Compile Include="TurnoTrabajoBLL.cs" />
     <Compile Include="UnidadMedidaBLL.cs" />
     <Compile Include="UsuarioBLL.cs" />
   </ItemGroup>
