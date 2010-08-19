@@ -17,7 +17,7 @@ namespace GyCAP.Entidades
         private DateTime fechaBaja;
 
         private EstadoEmpleado estado;
-        private Sector sector;
+        private SectorTrabajo sector;
         
         public long Codigo
         {
@@ -73,7 +73,7 @@ namespace GyCAP.Entidades
             set { estado = value; }
         }
         
-        public Sector Sector
+        public SectorTrabajo Sector
         {
             get { return sector; }
             set { sector = value; }

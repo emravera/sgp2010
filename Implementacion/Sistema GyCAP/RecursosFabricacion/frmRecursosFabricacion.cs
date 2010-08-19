@@ -25,6 +25,13 @@ namespace GyCAP.UI.RecursosFabricacion
             btnMaquina.Tag = panelMaquina;            
             btnProductividad.Tag = panelProductividad;
             btnSectorTrabajo.Tag = panelSectorTrabajo;
+            btnCentroTrabajo.Tag = panelCentroTrabajo;
+            Size size = new Size(panelEmpleado.Size.Width, 0);
+            panelEmpleado.Size = size;
+            panelMaquina.Size = size;
+            panelProductividad.Size = size;
+            panelSectorTrabajo.Size = size;
+            panelCentroTrabajo.Size = size;
         }
 
         private void frmRecursosFabricacion_Load(object sender, EventArgs e)
@@ -67,14 +74,13 @@ namespace GyCAP.UI.RecursosFabricacion
             {
                 scDown.Panel1Collapsed = true;
                 btnMenu.Cursor = System.Windows.Forms.Cursors.PanEast;
-                btnMenu.Refresh();
             }
             else
             {
                 scDown.Panel1Collapsed = false;
                 btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
-                btnMenu.Refresh();
             }
+            btnMenu.Parent.Focus();
         }
 
         private void ShowHide(Panel panelClic)
@@ -84,25 +90,83 @@ namespace GyCAP.UI.RecursosFabricacion
                 if (activo != panelClic) //Son distintos
                 {
                     //Ocultamos el actual
-                    activo.Visible = false;
+                    //activo.Visible = false; Cambio en IT2
+                    EfectoPanel(activo, 0);
                     //Mostramos el que viene y lo asignamos como activo
-                    panelClic.Visible = true;
+                    //panelClic.Visible = true; Cambio en IT2
+                    EfectoPanel(panelClic, 1);
                     activo = panelClic;
                 }
                 else //Son iguales
                 {
                     //Lo ocultamos y nadie queda activo
-                    activo.Visible = false;
+                    //activo.Visible = false; Cambio en IT2
+                    EfectoPanel(activo, 0);
                     activo = null;
                 }
             }
             else //No se está mostrando ninguno
             {
-                //Lo mostramos y lo asignamos como activo
+                //Lo mostramos y lo asignamos como activo                
                 activo = panelClic;
-                activo.Visible = true;
+                EfectoPanel(panelClic, 1);
+                //activo.Visible = true; Cambio en IT2
             }
 
+        }
+
+        private void EfectoPanel(Panel panel, int efecto)
+        {
+            int finalSize;
+            switch (panel.Controls.Count)
+            {
+                case 0:
+                    finalSize = 80;
+                    break;
+                case 1:
+                    finalSize = 80;
+                    break;
+                case 2:
+                    finalSize = 145;
+                    break;
+                case 3:
+                    finalSize = 210;
+                    break;
+                default:
+                    finalSize = panel.Controls.Count * 70;
+                    break;
+            }
+            Size sizePanel = new Size(panel.Size.Width, panel.Size.Height);
+            if (efecto == 0)
+            {
+                //Ocultar
+                while (panel.Size.Height > 0)
+                {
+                    sizePanel.Height -= 5;
+                    panel.Size = sizePanel;
+                }
+            }
+            else
+            {
+                //Mostrar
+                while (panel.Size.Height < finalSize)
+                {
+                    sizePanel.Height += 5;
+                    panel.Size = sizePanel;
+                }
+            }
+        }
+
+        private void button_MouseDown(object sender, MouseEventArgs e)
+        {
+            Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
+            (sender as Button).Location = punto;
+        }
+
+        private void button_MouseUp(object sender, MouseEventArgs e)
+        {
+            Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
+            (sender as Button).Location = punto;
         }
 
         private void btn_Click(object sender, EventArgs e)
@@ -113,6 +177,35 @@ namespace GyCAP.UI.RecursosFabricacion
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Dispose(true);
+        }
+
+        #endregion
+
+        #region Centro de Trabajo
+
+        private void btnListadoCentroTrabajo_Click(object sender, EventArgs e)
+        {
+            frmCentroTrabajo.Instancia.TopLevel = false;
+            frmCentroTrabajo.Instancia.Parent = areaTrabajo;
+            frmCentroTrabajo.Instancia.Location = PosicionarFormulario();
+            frmCentroTrabajo.Instancia.SetEstadoInicial(frmCentroTrabajo.estadoInicialNuevo);
+            frmCentroTrabajo.Instancia.Show();
+            frmCentroTrabajo.Instancia.Focus();
+        }
+
+        private void btnConsultarCentroTrabajo_Click(object sender, EventArgs e)
+        {
+            frmCentroTrabajo.Instancia.TopLevel = false;
+            frmCentroTrabajo.Instancia.Parent = areaTrabajo;
+            frmCentroTrabajo.Instancia.Location = PosicionarFormulario();
+            frmCentroTrabajo.Instancia.SetEstadoInicial(frmCentroTrabajo.estadoInicialConsultar);
+            frmCentroTrabajo.Instancia.Show();
+            frmCentroTrabajo.Instancia.Focus();
+        }
+
+        private void btnNuevoCentroTrabajo_Click(object sender, EventArgs e)
+        {
+
         }
 
         #endregion
@@ -208,7 +301,6 @@ namespace GyCAP.UI.RecursosFabricacion
 
         #endregion
 
-       
 
     }
 }

@@ -326,7 +326,7 @@ namespace GyCAP.UI.RecursosFabricacion
             //Revisamos que escribió algo y selecciono algo en el combo
             if (txtNombre.Text != String.Empty && txtAbreviatura.Text != String.Empty && txtDescripcion.Text != String.Empty)
             {
-                Entidades.Sector sector = new GyCAP.Entidades.Sector();
+                Entidades.SectorTrabajo sector = new GyCAP.Entidades.SectorTrabajo();
                
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)

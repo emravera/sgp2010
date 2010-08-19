@@ -354,7 +354,7 @@ namespace GyCAP.UI.RecursosFabricacion
             {
 
                 Entidades.Empleado empleado = new GyCAP.Entidades.Empleado();
-                Entidades.Sector sector = new GyCAP.Entidades.Sector();
+                Entidades.SectorTrabajo sector = new GyCAP.Entidades.SectorTrabajo();
                 Entidades.EstadoEmpleado estadoEmpleado = new GyCAP.Entidades.EstadoEmpleado();
 
                 //Revisamos que está haciendo

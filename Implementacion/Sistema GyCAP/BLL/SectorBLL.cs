@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace GyCAP.BLL
 {
@@ -17,6 +18,11 @@ namespace GyCAP.BLL
         public static void ObtenerTodos(Data.dsEmpleado ds)
         {
             DAL.SectorDAL.ObtenerSector(ds);
+        }
+
+        public static void ObtenerTodos(DataTable dtSectores)
+        {
+            DAL.SectorDAL.ObtenerSector(dtSectores);
         }
 
         //Eliminacion
@@ -40,7 +46,7 @@ namespace GyCAP.BLL
 
         }
         //Guardado de Datos
-        public static int Insertar(Entidades.Sector sector)
+        public static int Insertar(Entidades.SectorTrabajo sector)
         {
             //Si existe lanzamos la excepción correspondiente
             if (EsSector(sector)) throw new Entidades.Excepciones.ElementoExistenteException();
@@ -49,12 +55,12 @@ namespace GyCAP.BLL
         }
 
         //Metodo que valida que no se este guardando algo que ya existe
-        public static bool EsSector(Entidades.Sector sector)
+        public static bool EsSector(Entidades.SectorTrabajo sector)
         {
             return DAL.SectorDAL.esSector(sector);
         }
         //Actualización de los datos
-        public static void Actualizar(Entidades.Sector sector)
+        public static void Actualizar(Entidades.SectorTrabajo sector)
         {
             //Si existe lanzamos la excepción correspondiente
             if (EsSector(sector)) throw new Entidades.Excepciones.ElementoExistenteException();
