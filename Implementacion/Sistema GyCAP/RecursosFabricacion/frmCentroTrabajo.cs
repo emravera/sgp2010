@@ -121,7 +121,8 @@ namespace GyCAP.UI.RecursosFabricacion
             try
             {
                 dsCentroTrabajo.CENTROS_TRABAJOS.Clear();
-                dsCentroTrabajo.TURNOSXCENTROTRABAJO.Clear();                
+                dsCentroTrabajo.TURNOSXCENTROTRABAJO.Clear();
+                dvCentrosTrabajo.Table = null;
                 BLL.CentroTrabajoBLL.ObetenerCentrosTrabajo(txtNombreBuscar.Text, cbTipoBuscar.GetSelectedValue(), cbSectorBuscar.GetSelectedValue(), cbActivoBuscar.GetSelectedValueInt(), dsCentroTrabajo);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
