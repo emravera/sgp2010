@@ -101,10 +101,12 @@ namespace GyCAP.UI.Soporte
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
+                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.RejectChanges();
                         MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
+                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.RejectChanges();
                         MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -147,10 +149,12 @@ namespace GyCAP.UI.Soporte
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
+                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.RejectChanges();
                         MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
+                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.RejectChanges();
                         MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -181,7 +185,6 @@ namespace GyCAP.UI.Soporte
                         MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AcceptChanges();
             }
             else
             {
