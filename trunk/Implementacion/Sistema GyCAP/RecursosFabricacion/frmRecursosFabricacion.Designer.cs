@@ -31,7 +31,6 @@
             this.scUp = new System.Windows.Forms.SplitContainer();
             this.btnMenu = new System.Windows.Forms.Button();
             this.flpMenu = new System.Windows.Forms.FlowLayoutPanel();
-            this.scDown = new System.Windows.Forms.SplitContainer();
             this.btnCentroTrabajo = new System.Windows.Forms.Button();
             this.panelCentroTrabajo = new System.Windows.Forms.Panel();
             this.btnListadoCentroTrabajo = new System.Windows.Forms.Button();
@@ -54,20 +53,25 @@
             this.panelSectorTrabajo = new System.Windows.Forms.Panel();
             this.btnConsultarSectorTrabajo = new System.Windows.Forms.Button();
             this.btnNuevoSectorTrabajo = new System.Windows.Forms.Button();
-            this.panelSalir = new System.Windows.Forms.Panel();
+            this.btnTurnoTrabajo = new System.Windows.Forms.Button();
+            this.panelTurnoTrabajo = new System.Windows.Forms.Panel();
+            this.btnConsultarTurnoTrabajo = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.scDown = new System.Windows.Forms.SplitContainer();
             this.scUp.Panel1.SuspendLayout();
             this.scUp.SuspendLayout();
             this.flpMenu.SuspendLayout();
-            this.scDown.Panel1.SuspendLayout();
-            this.scDown.Panel2.SuspendLayout();
-            this.scDown.SuspendLayout();
             this.panelCentroTrabajo.SuspendLayout();
             this.panelEmpleado.SuspendLayout();
             this.panelMaquina.SuspendLayout();
             this.panelProductividad.SuspendLayout();
             this.panelSectorTrabajo.SuspendLayout();
-            this.panelSalir.SuspendLayout();
+            this.panelTurnoTrabajo.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.scDown.Panel1.SuspendLayout();
+            this.scDown.Panel2.SuspendLayout();
+            this.scDown.SuspendLayout();
             this.SuspendLayout();
             // 
             // scUp
@@ -120,36 +124,15 @@
             this.flpMenu.Controls.Add(this.panelProductividad);
             this.flpMenu.Controls.Add(this.btnSectorTrabajo);
             this.flpMenu.Controls.Add(this.panelSectorTrabajo);
-            this.flpMenu.Controls.Add(this.panelSalir);
+            this.flpMenu.Controls.Add(this.btnTurnoTrabajo);
+            this.flpMenu.Controls.Add(this.panelTurnoTrabajo);
+            this.flpMenu.Controls.Add(this.panel1);
             this.flpMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpMenu.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpMenu.Location = new System.Drawing.Point(0, 0);
             this.flpMenu.Name = "flpMenu";
             this.flpMenu.Size = new System.Drawing.Size(157, 568);
             this.flpMenu.TabIndex = 0;
-            // 
-            // scDown
-            // 
-            this.scDown.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.scDown.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scDown.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.scDown.IsSplitterFixed = true;
-            this.scDown.Location = new System.Drawing.Point(0, 0);
-            this.scDown.Name = "scDown";
-            // 
-            // scDown.Panel1
-            // 
-            this.scDown.Panel1.AutoScroll = true;
-            this.scDown.Panel1.Controls.Add(this.flpMenu);
-            // 
-            // scDown.Panel2
-            // 
-            this.scDown.Panel2.AutoScroll = true;
-            this.scDown.Panel2.Controls.Add(this.scUp);
-            this.scDown.Size = new System.Drawing.Size(794, 572);
-            this.scDown.SplitterDistance = 161;
-            this.scDown.SplitterWidth = 3;
-            this.scDown.TabIndex = 3;
             // 
             // btnCentroTrabajo
             // 
@@ -553,14 +536,63 @@
             this.btnNuevoSectorTrabajo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoSectorTrabajo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
-            // panelSalir
+            // btnTurnoTrabajo
             // 
-            this.panelSalir.Controls.Add(this.btnSalir);
-            this.panelSalir.Location = new System.Drawing.Point(316, 0);
-            this.panelSalir.Margin = new System.Windows.Forms.Padding(0);
-            this.panelSalir.Name = "panelSalir";
-            this.panelSalir.Size = new System.Drawing.Size(158, 87);
-            this.panelSalir.TabIndex = 33;
+            this.btnTurnoTrabajo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTurnoTrabajo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTurnoTrabajo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTurnoTrabajo.Location = new System.Drawing.Point(158, 504);
+            this.btnTurnoTrabajo.Margin = new System.Windows.Forms.Padding(0);
+            this.btnTurnoTrabajo.Name = "btnTurnoTrabajo";
+            this.btnTurnoTrabajo.Size = new System.Drawing.Size(158, 25);
+            this.btnTurnoTrabajo.TabIndex = 34;
+            this.btnTurnoTrabajo.Text = "Turno de Trabajo";
+            this.btnTurnoTrabajo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTurnoTrabajo.UseVisualStyleBackColor = true;
+            this.btnTurnoTrabajo.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelTurnoTrabajo
+            // 
+            this.panelTurnoTrabajo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelTurnoTrabajo.BackColor = System.Drawing.Color.Silver;
+            this.panelTurnoTrabajo.Controls.Add(this.btnConsultarTurnoTrabajo);
+            this.panelTurnoTrabajo.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelTurnoTrabajo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTurnoTrabajo.Location = new System.Drawing.Point(316, 0);
+            this.panelTurnoTrabajo.Margin = new System.Windows.Forms.Padding(0);
+            this.panelTurnoTrabajo.Name = "panelTurnoTrabajo";
+            this.panelTurnoTrabajo.Size = new System.Drawing.Size(158, 80);
+            this.panelTurnoTrabajo.TabIndex = 35;
+            // 
+            // btnConsultarTurnoTrabajo
+            // 
+            this.btnConsultarTurnoTrabajo.AutoSize = true;
+            this.btnConsultarTurnoTrabajo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConsultarTurnoTrabajo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConsultarTurnoTrabajo.FlatAppearance.BorderSize = 0;
+            this.btnConsultarTurnoTrabajo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarTurnoTrabajo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarTurnoTrabajo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsultarTurnoTrabajo.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Find_48;
+            this.btnConsultarTurnoTrabajo.Location = new System.Drawing.Point(48, 3);
+            this.btnConsultarTurnoTrabajo.Name = "btnConsultarTurnoTrabajo";
+            this.btnConsultarTurnoTrabajo.Size = new System.Drawing.Size(63, 71);
+            this.btnConsultarTurnoTrabajo.TabIndex = 1;
+            this.btnConsultarTurnoTrabajo.Text = "Consultar";
+            this.btnConsultarTurnoTrabajo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultarTurnoTrabajo.UseVisualStyleBackColor = true;
+            this.btnConsultarTurnoTrabajo.Click += new System.EventHandler(this.btnConsultarTurnoTrabajo_Click);
+            this.btnConsultarTurnoTrabajo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnConsultarTurnoTrabajo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnSalir);
+            this.panel1.Location = new System.Drawing.Point(316, 80);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(158, 87);
+            this.panel1.TabIndex = 36;
             // 
             // btnSalir
             // 
@@ -584,6 +616,29 @@
             this.btnSalir.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnSalir.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
+            // scDown
+            // 
+            this.scDown.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.scDown.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scDown.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.scDown.IsSplitterFixed = true;
+            this.scDown.Location = new System.Drawing.Point(0, 0);
+            this.scDown.Name = "scDown";
+            // 
+            // scDown.Panel1
+            // 
+            this.scDown.Panel1.AutoScroll = true;
+            this.scDown.Panel1.Controls.Add(this.flpMenu);
+            // 
+            // scDown.Panel2
+            // 
+            this.scDown.Panel2.AutoScroll = true;
+            this.scDown.Panel2.Controls.Add(this.scUp);
+            this.scDown.Size = new System.Drawing.Size(794, 572);
+            this.scDown.SplitterDistance = 161;
+            this.scDown.SplitterWidth = 3;
+            this.scDown.TabIndex = 3;
+            // 
             // frmRecursosFabricacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -600,9 +655,6 @@
             this.scUp.Panel1.ResumeLayout(false);
             this.scUp.ResumeLayout(false);
             this.flpMenu.ResumeLayout(false);
-            this.scDown.Panel1.ResumeLayout(false);
-            this.scDown.Panel2.ResumeLayout(false);
-            this.scDown.ResumeLayout(false);
             this.panelCentroTrabajo.ResumeLayout(false);
             this.panelCentroTrabajo.PerformLayout();
             this.panelEmpleado.ResumeLayout(false);
@@ -613,8 +665,13 @@
             this.panelProductividad.PerformLayout();
             this.panelSectorTrabajo.ResumeLayout(false);
             this.panelSectorTrabajo.PerformLayout();
-            this.panelSalir.ResumeLayout(false);
-            this.panelSalir.PerformLayout();
+            this.panelTurnoTrabajo.ResumeLayout(false);
+            this.panelTurnoTrabajo.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.scDown.Panel1.ResumeLayout(false);
+            this.scDown.Panel2.ResumeLayout(false);
+            this.scDown.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -647,7 +704,10 @@
         private System.Windows.Forms.Panel panelSectorTrabajo;
         private System.Windows.Forms.Button btnConsultarSectorTrabajo;
         private System.Windows.Forms.Button btnNuevoSectorTrabajo;
-        private System.Windows.Forms.Panel panelSalir;
+        private System.Windows.Forms.Button btnTurnoTrabajo;
+        private System.Windows.Forms.Panel panelTurnoTrabajo;
+        private System.Windows.Forms.Button btnConsultarTurnoTrabajo;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnSalir;
     }
 }

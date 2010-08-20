@@ -8,9 +8,9 @@ namespace GyCAP.BLL
 {
     public class TurnoTrabajoBLL
     {
-        public static void Insertar(Entidades.TurnoTrabajo turno)
+        public static int Insertar(Entidades.TurnoTrabajo turno)
         {
-            DAL.TurnoTrabajoDAL.Insertar(turno);
+            return DAL.TurnoTrabajoDAL.Insertar(turno);
         }
 
         public static void Actualizar(Entidades.TurnoTrabajo turno)
@@ -20,6 +20,7 @@ namespace GyCAP.BLL
 
         public static void Eliminar(int codigoTurno)
         {
+            if (!DAL.TurnoTrabajoDAL.PuedeEliminarse(codigoTurno)) throw new Entidades.Excepciones.ElementoEnTransaccionException();
             DAL.TurnoTrabajoDAL.Eliminar(codigoTurno);
         }
 

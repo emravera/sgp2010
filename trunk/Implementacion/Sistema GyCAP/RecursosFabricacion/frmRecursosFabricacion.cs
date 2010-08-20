@@ -26,12 +26,14 @@ namespace GyCAP.UI.RecursosFabricacion
             btnProductividad.Tag = panelProductividad;
             btnSectorTrabajo.Tag = panelSectorTrabajo;
             btnCentroTrabajo.Tag = panelCentroTrabajo;
+            btnTurnoTrabajo.Tag = panelTurnoTrabajo;
             Size size = new Size(panelEmpleado.Size.Width, 0);
             panelEmpleado.Size = size;
             panelMaquina.Size = size;
             panelProductividad.Size = size;
             panelSectorTrabajo.Size = size;
             panelCentroTrabajo.Size = size;
+            panelTurnoTrabajo.Size = size;
         }
 
         private void frmRecursosFabricacion_Load(object sender, EventArgs e)
@@ -301,6 +303,17 @@ namespace GyCAP.UI.RecursosFabricacion
 
         #endregion
 
+        #region Turno Trabajo
 
+        private void btnConsultarTurnoTrabajo_Click(object sender, EventArgs e)
+        {
+            frmTurnoTrabajo.Instancia.TopLevel = false;
+            frmTurnoTrabajo.Instancia.Parent = areaTrabajo;
+            frmTurnoTrabajo.Instancia.Location = PosicionarFormulario();
+            frmTurnoTrabajo.Instancia.Show();
+            frmTurnoTrabajo.Instancia.Focus();
+        }
+
+        #endregion
     }
 }

@@ -75,21 +75,26 @@ namespace GyCAP.UI.RecursosFabricacion
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             //Controlamos que esté seleccionado algo
-            /*if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el Modelo de Cocina seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el Centro de Trabajo seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
                     {
                         //obtenemos el código
-                        int codigo = Convert.ToInt32(dvModeloCocina[dgvLista.SelectedRows[0].Index]["mod_codigo"]);
+                        int codigo = Convert.ToInt32(dvCentrosTrabajo[dgvLista.SelectedRows[0].Index]["cto_codigo"]);
                         //Lo eliminamos de la DB
-                        BLL.ModeloCocinaBLL.Eliminar(codigo);
+                        BLL.CentroTrabajoBLL.Eliminar(codigo);
                         //Lo eliminamos del dataset
-                        dsModeloCocina.MODELOS_COCINAS.FindByMOD_CODIGO(codigo).Delete();
-                        dsModeloCocina.MODELOS_COCINAS.AcceptChanges();
+                        dsCentroTrabajo.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigo).Delete();
+                        foreach (Data.dsCentroTrabajo.TURNOSXCENTROTRABAJORow row in (Data.dsCentroTrabajo.TURNOSXCENTROTRABAJORow[])dsCentroTrabajo.TURNOSXCENTROTRABAJO.Select("cto_codigo = " + codigo))
+                        {
+                            row.Delete();
+                        }
+                        dsCentroTrabajo.CENTROS_TRABAJOS.AcceptChanges();
+                        dsCentroTrabajo.TURNOSXCENTROTRABAJO.AcceptChanges();
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
@@ -103,8 +108,8 @@ namespace GyCAP.UI.RecursosFabricacion
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Modelo de Cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }*/
+                MessageBox.Show("Debe seleccionar un Centro de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         
         private void btnSalir_Click(object sender, EventArgs e)
