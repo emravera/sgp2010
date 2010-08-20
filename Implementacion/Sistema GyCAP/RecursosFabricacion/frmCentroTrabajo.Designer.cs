@@ -35,6 +35,9 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbActivoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbTipoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbSectorBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -48,7 +51,6 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.txtHorasNormal = new System.Windows.Forms.MaskedTextBox();
             this.nudTiempoDespues = new System.Windows.Forms.NumericUpDown();
             this.nudTiempoAntes = new System.Windows.Forms.NumericUpDown();
             this.nudCapacidadCiclo = new System.Windows.Forms.NumericUpDown();
@@ -63,12 +65,15 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.cbActivo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.lvTurnos = new System.Windows.Forms.ListView();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.cbSector = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbTipo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -82,13 +87,8 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.cbActivoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbTipoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbSectorBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbActivo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbSector = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbTipo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.txtHorasExtendido = new System.Windows.Forms.MaskedTextBox();
+            this.nudHorasNormal = new System.Windows.Forms.NumericUpDown();
+            this.nudHorasExtendido = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcCentroTrabajo.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -108,6 +108,8 @@
             this.gbGuardarCancelar.SuspendLayout();
             this.gbDatos.SuspendLayout();
             this.tsMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHorasNormal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHorasExtendido)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNombre
@@ -207,6 +209,36 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de Búsqueda";
+            // 
+            // cbActivoBuscar
+            // 
+            this.cbActivoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbActivoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbActivoBuscar.FormattingEnabled = true;
+            this.cbActivoBuscar.Location = new System.Drawing.Point(321, 55);
+            this.cbActivoBuscar.Name = "cbActivoBuscar";
+            this.cbActivoBuscar.Size = new System.Drawing.Size(138, 21);
+            this.cbActivoBuscar.TabIndex = 8;
+            // 
+            // cbTipoBuscar
+            // 
+            this.cbTipoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTipoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbTipoBuscar.FormattingEnabled = true;
+            this.cbTipoBuscar.Location = new System.Drawing.Point(321, 23);
+            this.cbTipoBuscar.Name = "cbTipoBuscar";
+            this.cbTipoBuscar.Size = new System.Drawing.Size(138, 21);
+            this.cbTipoBuscar.TabIndex = 7;
+            // 
+            // cbSectorBuscar
+            // 
+            this.cbSectorBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSectorBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbSectorBuscar.FormattingEnabled = true;
+            this.cbSectorBuscar.Location = new System.Drawing.Point(96, 55);
+            this.cbSectorBuscar.Name = "cbSectorBuscar";
+            this.cbSectorBuscar.Size = new System.Drawing.Size(161, 21);
+            this.cbSectorBuscar.TabIndex = 6;
             // 
             // label21
             // 
@@ -364,17 +396,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Capacidad del Centro de Trabajo";
             // 
-            // txtHorasNormal
-            // 
-            this.txtHorasNormal.AllowPromptAsInput = false;
-            this.txtHorasNormal.Location = new System.Drawing.Point(401, 23);
-            this.txtHorasNormal.Mask = "00:00";
-            this.txtHorasNormal.Name = "txtHorasNormal";
-            this.txtHorasNormal.Size = new System.Drawing.Size(86, 21);
-            this.txtHorasNormal.TabIndex = 10;
-            this.txtHorasNormal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtHorasNormal.ValidatingType = typeof(System.DateTime);
-            // 
             // nudTiempoDespues
             // 
             this.nudTiempoDespues.DecimalPlaces = 2;
@@ -383,7 +404,7 @@
             0,
             0,
             65536});
-            this.nudTiempoDespues.Location = new System.Drawing.Point(412, 54);
+            this.nudTiempoDespues.Location = new System.Drawing.Point(434, 54);
             this.nudTiempoDespues.Name = "nudTiempoDespues";
             this.nudTiempoDespues.Size = new System.Drawing.Size(120, 21);
             this.nudTiempoDespues.TabIndex = 9;
@@ -398,7 +419,7 @@
             0,
             0,
             65536});
-            this.nudTiempoAntes.Location = new System.Drawing.Point(412, 25);
+            this.nudTiempoAntes.Location = new System.Drawing.Point(434, 25);
             this.nudTiempoAntes.Name = "nudTiempoAntes";
             this.nudTiempoAntes.Size = new System.Drawing.Size(120, 21);
             this.nudTiempoAntes.TabIndex = 8;
@@ -482,18 +503,18 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(263, 29);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(130, 13);
+            this.label8.Size = new System.Drawing.Size(152, 13);
             this.label8.TabIndex = 1;
-            this.label8.Text = "Tiempo antes producción:";
+            this.label8.Text = "Tiempo antes producción (hs):";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(263, 56);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(143, 13);
+            this.label7.Size = new System.Drawing.Size(165, 13);
             this.label7.TabIndex = 0;
-            this.label7.Text = "Tiempo después producción:";
+            this.label7.Text = "Tiempo después producción (hs):";
             // 
             // gbGuardarCancelar
             // 
@@ -514,6 +535,7 @@
             this.btnVolver.TabIndex = 6;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnGuardar
             // 
@@ -523,11 +545,12 @@
             this.btnGuardar.TabIndex = 5;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // gbDatos
             // 
-            this.gbDatos.Controls.Add(this.txtHorasExtendido);
-            this.gbDatos.Controls.Add(this.txtHorasNormal);
+            this.gbDatos.Controls.Add(this.nudHorasExtendido);
+            this.gbDatos.Controls.Add(this.nudHorasNormal);
             this.gbDatos.Controls.Add(this.cbActivo);
             this.gbDatos.Controls.Add(this.lvTurnos);
             this.gbDatos.Controls.Add(this.label13);
@@ -552,6 +575,16 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del Centro de Trabajo";
             // 
+            // cbActivo
+            // 
+            this.cbActivo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbActivo.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbActivo.FormattingEnabled = true;
+            this.cbActivo.Location = new System.Drawing.Point(401, 80);
+            this.cbActivo.Name = "cbActivo";
+            this.cbActivo.Size = new System.Drawing.Size(151, 21);
+            this.cbActivo.TabIndex = 19;
+            // 
             // lvTurnos
             // 
             this.lvTurnos.CheckBoxes = true;
@@ -563,6 +596,7 @@
             this.lvTurnos.Size = new System.Drawing.Size(253, 60);
             this.lvTurnos.TabIndex = 18;
             this.lvTurnos.UseCompatibleStateImageBehavior = false;
+            this.lvTurnos.View = System.Windows.Forms.View.Details;
             // 
             // label13
             // 
@@ -603,11 +637,31 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(296, 54);
+            this.label9.Location = new System.Drawing.Point(296, 55);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(99, 13);
             this.label9.TabIndex = 12;
             this.label9.Text = "Trabajo extendido:";
+            // 
+            // cbSector
+            // 
+            this.cbSector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSector.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbSector.FormattingEnabled = true;
+            this.cbSector.Location = new System.Drawing.Point(98, 80);
+            this.cbSector.Name = "cbSector";
+            this.cbSector.Size = new System.Drawing.Size(186, 21);
+            this.cbSector.TabIndex = 10;
+            // 
+            // cbTipo
+            // 
+            this.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTipo.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbTipo.FormattingEnabled = true;
+            this.cbTipo.Location = new System.Drawing.Point(98, 52);
+            this.cbTipo.Name = "cbTipo";
+            this.cbTipo.Size = new System.Drawing.Size(186, 21);
+            this.cbTipo.TabIndex = 9;
             // 
             // label6
             // 
@@ -744,76 +798,43 @@
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // cbActivoBuscar
+            // nudHorasNormal
             // 
-            this.cbActivoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbActivoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbActivoBuscar.FormattingEnabled = true;
-            this.cbActivoBuscar.Location = new System.Drawing.Point(321, 55);
-            this.cbActivoBuscar.Name = "cbActivoBuscar";
-            this.cbActivoBuscar.Size = new System.Drawing.Size(138, 21);
-            this.cbActivoBuscar.TabIndex = 8;
+            this.nudHorasNormal.DecimalPlaces = 2;
+            this.nudHorasNormal.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudHorasNormal.Location = new System.Drawing.Point(401, 24);
+            this.nudHorasNormal.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudHorasNormal.Name = "nudHorasNormal";
+            this.nudHorasNormal.Size = new System.Drawing.Size(86, 21);
+            this.nudHorasNormal.TabIndex = 20;
+            this.nudHorasNormal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // cbTipoBuscar
+            // nudHorasExtendido
             // 
-            this.cbTipoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTipoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbTipoBuscar.FormattingEnabled = true;
-            this.cbTipoBuscar.Location = new System.Drawing.Point(321, 23);
-            this.cbTipoBuscar.Name = "cbTipoBuscar";
-            this.cbTipoBuscar.Size = new System.Drawing.Size(138, 21);
-            this.cbTipoBuscar.TabIndex = 7;
-            // 
-            // cbSectorBuscar
-            // 
-            this.cbSectorBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSectorBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbSectorBuscar.FormattingEnabled = true;
-            this.cbSectorBuscar.Location = new System.Drawing.Point(96, 55);
-            this.cbSectorBuscar.Name = "cbSectorBuscar";
-            this.cbSectorBuscar.Size = new System.Drawing.Size(161, 21);
-            this.cbSectorBuscar.TabIndex = 6;
-            // 
-            // cbActivo
-            // 
-            this.cbActivo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbActivo.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbActivo.FormattingEnabled = true;
-            this.cbActivo.Location = new System.Drawing.Point(401, 80);
-            this.cbActivo.Name = "cbActivo";
-            this.cbActivo.Size = new System.Drawing.Size(151, 21);
-            this.cbActivo.TabIndex = 19;
-            // 
-            // cbSector
-            // 
-            this.cbSector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSector.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbSector.FormattingEnabled = true;
-            this.cbSector.Location = new System.Drawing.Point(98, 80);
-            this.cbSector.Name = "cbSector";
-            this.cbSector.Size = new System.Drawing.Size(186, 21);
-            this.cbSector.TabIndex = 10;
-            // 
-            // cbTipo
-            // 
-            this.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTipo.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbTipo.FormattingEnabled = true;
-            this.cbTipo.Location = new System.Drawing.Point(98, 52);
-            this.cbTipo.Name = "cbTipo";
-            this.cbTipo.Size = new System.Drawing.Size(186, 21);
-            this.cbTipo.TabIndex = 9;
-            // 
-            // txtHorasExtendido
-            // 
-            this.txtHorasExtendido.AllowPromptAsInput = false;
-            this.txtHorasExtendido.Location = new System.Drawing.Point(401, 52);
-            this.txtHorasExtendido.Mask = "00:00";
-            this.txtHorasExtendido.Name = "txtHorasExtendido";
-            this.txtHorasExtendido.Size = new System.Drawing.Size(86, 21);
-            this.txtHorasExtendido.TabIndex = 20;
-            this.txtHorasExtendido.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtHorasExtendido.ValidatingType = typeof(System.DateTime);
+            this.nudHorasExtendido.DecimalPlaces = 2;
+            this.nudHorasExtendido.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudHorasExtendido.Location = new System.Drawing.Point(401, 52);
+            this.nudHorasExtendido.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudHorasExtendido.Name = "nudHorasExtendido";
+            this.nudHorasExtendido.Size = new System.Drawing.Size(86, 21);
+            this.nudHorasExtendido.TabIndex = 21;
+            this.nudHorasExtendido.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // frmCentroTrabajo
             // 
@@ -853,6 +874,8 @@
             this.gbDatos.PerformLayout();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHorasNormal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHorasExtendido)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -918,7 +941,7 @@
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbTipoBuscar;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbSectorBuscar;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbActivo;
-        private System.Windows.Forms.MaskedTextBox txtHorasNormal;
-        private System.Windows.Forms.MaskedTextBox txtHorasExtendido;
+        private System.Windows.Forms.NumericUpDown nudHorasExtendido;
+        private System.Windows.Forms.NumericUpDown nudHorasNormal;
     }
 }

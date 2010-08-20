@@ -42,5 +42,13 @@ namespace GyCAP.BLL
             if (estado != null && Convert.ToInt32(estado.ToString()) < 0) { estado = null; }
             DAL.CentroTrabajoDAL.ObetenerCentrosTrabajo(nombre, tipo, sector, estado, dtCentrosTrabajo);
         }
+
+        public static void ObetenerCentrosTrabajo(object nombre, object tipo, object sector, object estado, Data.dsCentroTrabajo ds)
+        {
+            if (tipo != null && Convert.ToInt32(tipo.ToString()) <= 0) { tipo = null; }
+            if (sector != null && Convert.ToInt32(sector.ToString()) <= 0) { sector = null; }
+            if (estado != null && Convert.ToInt32(estado.ToString()) < 0) { estado = null; }
+            DAL.CentroTrabajoDAL.ObetenerCentrosTrabajo(nombre, tipo, sector, estado, ds);
+        }
     }
 }

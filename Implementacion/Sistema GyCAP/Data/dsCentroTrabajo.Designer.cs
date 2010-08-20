@@ -1086,8 +1086,6 @@ namespace GyCAP.Data {
             
             private global::System.Data.DataColumn columnCTO_CODIGO;
             
-            private global::System.Data.DataColumn columnTXCT_ACTIVO;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public TURNOSXCENTROTRABAJODataTable() {
                 this.TableName = "TURNOSXCENTROTRABAJO";
@@ -1140,13 +1138,6 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn TXCT_ACTIVOColumn {
-                get {
-                    return this.columnTXCT_ACTIVO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1175,13 +1166,12 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TURNOSXCENTROTRABAJORow AddTURNOSXCENTROTRABAJORow(TURNOS_TRABAJORow parentTURNOS_TRABAJORowByTURNOS_TRABAJO_TURNOSXCENTROTRABAJO, CENTROS_TRABAJOSRow parentCENTROS_TRABAJOSRowByCENTROS_TRABAJOS_TURNOSXCENTROTRABAJO, decimal TXCT_ACTIVO) {
+            public TURNOSXCENTROTRABAJORow AddTURNOSXCENTROTRABAJORow(TURNOS_TRABAJORow parentTURNOS_TRABAJORowByTURNOS_TRABAJO_TURNOSXCENTROTRABAJO, CENTROS_TRABAJOSRow parentCENTROS_TRABAJOSRowByCENTROS_TRABAJOS_TURNOSXCENTROTRABAJO) {
                 TURNOSXCENTROTRABAJORow rowTURNOSXCENTROTRABAJORow = ((TURNOSXCENTROTRABAJORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
-                        null,
-                        TXCT_ACTIVO};
+                        null};
                 if ((parentTURNOS_TRABAJORowByTURNOS_TRABAJO_TURNOSXCENTROTRABAJO != null)) {
                     columnValuesArray[1] = parentTURNOS_TRABAJORowByTURNOS_TRABAJO_TURNOSXCENTROTRABAJO[0];
                 }
@@ -1216,7 +1206,6 @@ namespace GyCAP.Data {
                 this.columnTXCT_CODIGO = base.Columns["TXCT_CODIGO"];
                 this.columnTUR_CODIGO = base.Columns["TUR_CODIGO"];
                 this.columnCTO_CODIGO = base.Columns["CTO_CODIGO"];
-                this.columnTXCT_ACTIVO = base.Columns["TXCT_ACTIVO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1227,8 +1216,6 @@ namespace GyCAP.Data {
                 base.Columns.Add(this.columnTUR_CODIGO);
                 this.columnCTO_CODIGO = new global::System.Data.DataColumn("CTO_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCTO_CODIGO);
-                this.columnTXCT_ACTIVO = new global::System.Data.DataColumn("TXCT_ACTIVO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTXCT_ACTIVO);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnTXCT_CODIGO}, true));
                 this.columnTXCT_CODIGO.AutoIncrement = true;
@@ -1238,7 +1225,6 @@ namespace GyCAP.Data {
                 this.columnTXCT_CODIGO.Unique = true;
                 this.columnTUR_CODIGO.AllowDBNull = false;
                 this.columnCTO_CODIGO.AllowDBNull = false;
-                this.columnTXCT_ACTIVO.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2183,16 +2169,6 @@ namespace GyCAP.Data {
                 }
                 set {
                     this[this.tableTURNOSXCENTROTRABAJO.CTO_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal TXCT_ACTIVO {
-                get {
-                    return ((decimal)(this[this.tableTURNOSXCENTROTRABAJO.TXCT_ACTIVOColumn]));
-                }
-                set {
-                    this[this.tableTURNOSXCENTROTRABAJO.TXCT_ACTIVOColumn] = value;
                 }
             }
             
@@ -3772,40 +3748,34 @@ SELECT SEC_CODIGO, SEC_NOMBRE, SEC_DESCRIPCION, SEC_ABREVIATURA FROM SECTORES WH
             tableMapping.ColumnMappings.Add("TXCT_CODIGO", "TXCT_CODIGO");
             tableMapping.ColumnMappings.Add("TUR_CODIGO", "TUR_CODIGO");
             tableMapping.ColumnMappings.Add("CTO_CODIGO", "CTO_CODIGO");
-            tableMapping.ColumnMappings.Add("TXCT_ACTIVO", "TXCT_ACTIVO");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[TURNOSXCENTROTRABAJO] WHERE (([TXCT_CODIGO] = @Original_TXCT_C" +
-                "ODIGO) AND ([TUR_CODIGO] = @Original_TUR_CODIGO) AND ([CTO_CODIGO] = @Original_C" +
-                "TO_CODIGO) AND ([TXCT_ACTIVO] = @Original_TXCT_ACTIVO))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [TURNOSXCENTROTRABAJO] WHERE (([TXCT_CODIGO] = @Original_TXCT_CODIGO)" +
+                " AND ([TUR_CODIGO] = @Original_TUR_CODIGO) AND ([CTO_CODIGO] = @Original_CTO_COD" +
+                "IGO))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TXCT_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TXCT_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TUR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TUR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TXCT_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TXCT_ACTIVO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[TURNOSXCENTROTRABAJO] ([TUR_CODIGO], [CTO_CODIGO], [TXCT_ACTIV" +
-                "O]) VALUES (@TUR_CODIGO, @CTO_CODIGO, @TXCT_ACTIVO);\r\nSELECT TXCT_CODIGO, TUR_CO" +
-                "DIGO, CTO_CODIGO, TXCT_ACTIVO FROM TURNOSXCENTROTRABAJO WHERE (TXCT_CODIGO = SCO" +
-                "PE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [TURNOSXCENTROTRABAJO] ([TUR_CODIGO], [CTO_CODIGO]) VALUES (@TUR_CODI" +
+                "GO, @CTO_CODIGO);\r\nSELECT TXCT_CODIGO, TUR_CODIGO, CTO_CODIGO FROM TURNOSXCENTRO" +
+                "TRABAJO WHERE (TXCT_CODIGO = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TUR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TUR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TXCT_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TXCT_ACTIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[TURNOSXCENTROTRABAJO] SET [TUR_CODIGO] = @TUR_CODIGO, [CTO_CODIGO] = @CTO_CODIGO, [TXCT_ACTIVO] = @TXCT_ACTIVO WHERE (([TXCT_CODIGO] = @Original_TXCT_CODIGO) AND ([TUR_CODIGO] = @Original_TUR_CODIGO) AND ([CTO_CODIGO] = @Original_CTO_CODIGO) AND ([TXCT_ACTIVO] = @Original_TXCT_ACTIVO));
-SELECT TXCT_CODIGO, TUR_CODIGO, CTO_CODIGO, TXCT_ACTIVO FROM TURNOSXCENTROTRABAJO WHERE (TXCT_CODIGO = @TXCT_CODIGO)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [TURNOSXCENTROTRABAJO] SET [TUR_CODIGO] = @TUR_CODIGO, [CTO_CODIGO] = @CTO_CODIGO WHERE (([TXCT_CODIGO] = @Original_TXCT_CODIGO) AND ([TUR_CODIGO] = @Original_TUR_CODIGO) AND ([CTO_CODIGO] = @Original_CTO_CODIGO));
+SELECT TXCT_CODIGO, TUR_CODIGO, CTO_CODIGO FROM TURNOSXCENTROTRABAJO WHERE (TXCT_CODIGO = @TXCT_CODIGO)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TUR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TUR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TXCT_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TXCT_ACTIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TXCT_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TXCT_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TUR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TUR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TXCT_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TXCT_ACTIVO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TXCT_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "TXCT_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -3820,8 +3790,7 @@ SELECT TXCT_CODIGO, TUR_CODIGO, CTO_CODIGO, TXCT_ACTIVO FROM TURNOSXCENTROTRABAJ
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT TXCT_CODIGO, TUR_CODIGO, CTO_CODIGO, TXCT_ACTIVO FROM dbo.TURNOSXCENTROTRA" +
-                "BAJO";
+            this._commandCollection[0].CommandText = "SELECT TXCT_CODIGO, TUR_CODIGO, CTO_CODIGO FROM TURNOSXCENTROTRABAJO";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -3875,11 +3844,10 @@ SELECT TXCT_CODIGO, TUR_CODIGO, CTO_CODIGO, TXCT_ACTIVO FROM TURNOSXCENTROTRABAJ
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_TXCT_CODIGO, decimal Original_TUR_CODIGO, decimal Original_CTO_CODIGO, decimal Original_TXCT_ACTIVO) {
+        public virtual int Delete(decimal Original_TXCT_CODIGO, decimal Original_TUR_CODIGO, decimal Original_CTO_CODIGO) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_TXCT_CODIGO));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_TUR_CODIGO));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_CTO_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[3].Value = ((decimal)(Original_TXCT_ACTIVO));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3899,10 +3867,9 @@ SELECT TXCT_CODIGO, TUR_CODIGO, CTO_CODIGO, TXCT_ACTIVO FROM TURNOSXCENTROTRABAJ
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(decimal TUR_CODIGO, decimal CTO_CODIGO, decimal TXCT_ACTIVO) {
+        public virtual int Insert(decimal TUR_CODIGO, decimal CTO_CODIGO) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(TUR_CODIGO));
             this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(CTO_CODIGO));
-            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(TXCT_ACTIVO));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3922,15 +3889,13 @@ SELECT TXCT_CODIGO, TUR_CODIGO, CTO_CODIGO, TXCT_ACTIVO FROM TURNOSXCENTROTRABAJ
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal TUR_CODIGO, decimal CTO_CODIGO, decimal TXCT_ACTIVO, decimal Original_TXCT_CODIGO, decimal Original_TUR_CODIGO, decimal Original_CTO_CODIGO, decimal Original_TXCT_ACTIVO, decimal TXCT_CODIGO) {
+        public virtual int Update(decimal TUR_CODIGO, decimal CTO_CODIGO, decimal Original_TXCT_CODIGO, decimal Original_TUR_CODIGO, decimal Original_CTO_CODIGO, decimal TXCT_CODIGO) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(TUR_CODIGO));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(CTO_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(TXCT_ACTIVO));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(Original_TXCT_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(Original_TUR_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(Original_CTO_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_TXCT_ACTIVO));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(TXCT_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(Original_TXCT_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(Original_TUR_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(Original_CTO_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(TXCT_CODIGO));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3950,8 +3915,8 @@ SELECT TXCT_CODIGO, TUR_CODIGO, CTO_CODIGO, TXCT_ACTIVO FROM TURNOSXCENTROTRABAJ
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal TUR_CODIGO, decimal CTO_CODIGO, decimal TXCT_ACTIVO, decimal Original_TXCT_CODIGO, decimal Original_TUR_CODIGO, decimal Original_CTO_CODIGO, decimal Original_TXCT_ACTIVO) {
-            return this.Update(TUR_CODIGO, CTO_CODIGO, TXCT_ACTIVO, Original_TXCT_CODIGO, Original_TUR_CODIGO, Original_CTO_CODIGO, Original_TXCT_ACTIVO, Original_TXCT_CODIGO);
+        public virtual int Update(decimal TUR_CODIGO, decimal CTO_CODIGO, decimal Original_TXCT_CODIGO, decimal Original_TUR_CODIGO, decimal Original_CTO_CODIGO) {
+            return this.Update(TUR_CODIGO, CTO_CODIGO, Original_TXCT_CODIGO, Original_TUR_CODIGO, Original_CTO_CODIGO, Original_TXCT_CODIGO);
         }
     }
     

@@ -243,8 +243,9 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnVolver_Click(object sender, EventArgs e)
         {
+            dsModeloCocina.MODELOS_COCINAS.RejectChanges();
             SetInterface(estadoUI.inicio);
         }
 

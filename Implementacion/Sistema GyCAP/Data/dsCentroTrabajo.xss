@@ -8,7 +8,7 @@
   <Shapes>
     <Shape ID="DesignTable:CENTROS_TRABAJOS" ZOrder="7" X="405" Y="188" Height="360" Width="263" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="298" />
     <Shape ID="DesignTable:SECTORES" ZOrder="6" X="79" Y="213" Height="139" Width="201" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="92" />
-    <Shape ID="DesignTable:TURNOSXCENTROTRABAJO" ZOrder="5" X="774" Y="199" Height="139" Width="297" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="92" />
+    <Shape ID="DesignTable:TURNOSXCENTROTRABAJO" ZOrder="5" X="774" Y="199" Height="122" Width="297" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="75" />
     <Shape ID="DesignTable:TURNOS_TRABAJO" ZOrder="2" X="801" Y="448" Height="139" Width="250" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="92" />
   </Shapes>
   <Connectors>
@@ -44,7 +44,7 @@
         </Point>
         <Point>
           <X>926</X>
-          <Y>338</Y>
+          <Y>321</Y>
         </Point>
       </RoutePoints>
     </Connector>
