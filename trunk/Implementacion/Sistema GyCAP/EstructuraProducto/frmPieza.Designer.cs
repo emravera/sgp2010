@@ -52,7 +52,7 @@
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.dgvPiezas = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tcConjunto = new System.Windows.Forms.TabControl();
+            this.tcPieza = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
@@ -98,7 +98,7 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPiezas)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tcConjunto.SuspendLayout();
+            this.tcPieza.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tpDatos.SuspendLayout();
@@ -420,7 +420,7 @@
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.tcConjunto, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tcPieza, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tsMenu, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -431,23 +431,23 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(586, 572);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
-            // tcConjunto
+            // tcPieza
             // 
-            this.tcConjunto.Appearance = System.Windows.Forms.TabAppearance.Buttons;
-            this.tcConjunto.Controls.Add(this.tpBuscar);
-            this.tcConjunto.Controls.Add(this.tpDatos);
-            this.tcConjunto.Controls.Add(this.tpMPDisponibles);
-            this.tcConjunto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tcConjunto.ItemSize = new System.Drawing.Size(0, 1);
-            this.tcConjunto.Location = new System.Drawing.Point(2, 54);
-            this.tcConjunto.Margin = new System.Windows.Forms.Padding(0);
-            this.tcConjunto.Multiline = true;
-            this.tcConjunto.Name = "tcConjunto";
-            this.tcConjunto.Padding = new System.Drawing.Point(0, 0);
-            this.tcConjunto.SelectedIndex = 0;
-            this.tcConjunto.Size = new System.Drawing.Size(582, 516);
-            this.tcConjunto.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tcConjunto.TabIndex = 8;
+            this.tcPieza.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.tcPieza.Controls.Add(this.tpBuscar);
+            this.tcPieza.Controls.Add(this.tpDatos);
+            this.tcPieza.Controls.Add(this.tpMPDisponibles);
+            this.tcPieza.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcPieza.ItemSize = new System.Drawing.Size(0, 1);
+            this.tcPieza.Location = new System.Drawing.Point(2, 54);
+            this.tcPieza.Margin = new System.Windows.Forms.Padding(0);
+            this.tcPieza.Multiline = true;
+            this.tcPieza.Name = "tcPieza";
+            this.tcPieza.Padding = new System.Drawing.Point(0, 0);
+            this.tcPieza.SelectedIndex = 0;
+            this.tcPieza.Size = new System.Drawing.Size(582, 516);
+            this.tcPieza.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tcPieza.TabIndex = 8;
             // 
             // tpBuscar
             // 
@@ -786,7 +786,7 @@
             this.gbMPDisponibles.Controls.Add(this.dgvMPDisponibles);
             this.gbMPDisponibles.Location = new System.Drawing.Point(5, 0);
             this.gbMPDisponibles.Name = "gbMPDisponibles";
-            this.gbMPDisponibles.Size = new System.Drawing.Size(563, 199);
+            this.gbMPDisponibles.Size = new System.Drawing.Size(563, 220);
             this.gbMPDisponibles.TabIndex = 12;
             this.gbMPDisponibles.TabStop = false;
             this.gbMPDisponibles.Text = "Materias primas disponibles";
@@ -868,7 +868,7 @@
             this.dgvMPDisponibles.ReadOnly = true;
             this.dgvMPDisponibles.RowHeadersVisible = false;
             this.dgvMPDisponibles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMPDisponibles.Size = new System.Drawing.Size(444, 179);
+            this.dgvMPDisponibles.Size = new System.Drawing.Size(444, 200);
             this.dgvMPDisponibles.TabIndex = 0;
             this.dgvMPDisponibles.DoubleClick += new System.EventHandler(this.dgvPiezas_DoubleClick);
             this.dgvMPDisponibles.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvMPDisponibles_CellFormatting);
@@ -878,7 +878,7 @@
             this.slideAgregar.Dock = System.Windows.Forms.DockStyle.Top;
             this.slideAgregar.Location = new System.Drawing.Point(0, 0);
             this.slideAgregar.Name = "slideAgregar";
-            this.slideAgregar.Size = new System.Drawing.Size(574, 201);
+            this.slideAgregar.Size = new System.Drawing.Size(574, 229);
             this.slideAgregar.SlideControl = null;
             this.slideAgregar.TabIndex = 13;
             // 
@@ -910,7 +910,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPiezas)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.tcConjunto.ResumeLayout(false);
+            this.tcPieza.ResumeLayout(false);
             this.tpBuscar.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.tpDatos.ResumeLayout(false);
@@ -957,7 +957,7 @@
         private System.Windows.Forms.TextBox txtNombreBuscar;
         private System.Windows.Forms.DataGridView dgvPiezas;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TabControl tcConjunto;
+        private System.Windows.Forms.TabControl tcPieza;
         private System.Windows.Forms.TabPage tpBuscar;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TabPage tpDatos;

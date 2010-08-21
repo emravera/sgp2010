@@ -479,7 +479,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnNuevo.Enabled = true;
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.inicio;
-                    tcConjunto.SelectedTab = tpBuscar;
+                    tcPieza.SelectedTab = tpBuscar;
                     txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
@@ -508,7 +508,7 @@ namespace GyCAP.UI.EstructuraProducto
                     panelAcciones.Enabled = true;
                     panelImagen.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
-                    tcConjunto.SelectedTab = tpDatos;
+                    tcPieza.SelectedTab = tpDatos;
                     txtCodigo.Focus();
                     break;
                 case estadoUI.nuevoExterno:
@@ -537,7 +537,7 @@ namespace GyCAP.UI.EstructuraProducto
                     panelAcciones.Enabled = true;
                     panelImagen.Enabled = true;
                     estadoInterface = estadoUI.nuevoExterno;
-                    tcConjunto.SelectedTab = tpDatos;
+                    tcPieza.SelectedTab = tpDatos;
                     txtCodigo.Focus();
                     break;
                 case estadoUI.consultar:
@@ -558,7 +558,7 @@ namespace GyCAP.UI.EstructuraProducto
                     panelImagen.Enabled = false;
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.consultar;
-                    tcConjunto.SelectedTab = tpDatos;
+                    tcPieza.SelectedTab = tpDatos;
                     break;
                 case estadoUI.modificar:
                     txtCodigo.ReadOnly = false;
@@ -581,7 +581,7 @@ namespace GyCAP.UI.EstructuraProducto
                     panelAcciones.Enabled = true;
                     panelImagen.Enabled = true;
                     estadoInterface = estadoUI.modificar;
-                    tcConjunto.SelectedTab = tpDatos;
+                    tcPieza.SelectedTab = tpDatos;
                     txtCodigo.Focus();
                     break;
                 default:
