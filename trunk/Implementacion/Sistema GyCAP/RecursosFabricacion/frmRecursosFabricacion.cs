@@ -14,6 +14,7 @@ namespace GyCAP.UI.RecursosFabricacion
         private static frmRecursosFabricacion _frmRecursosFabricacion = null;
         private SplitterPanel areaTrabajo;
         private Panel activo = null;
+        int distanciaSeparador = 0;
         
         public frmRecursosFabricacion()
         {
@@ -34,6 +35,8 @@ namespace GyCAP.UI.RecursosFabricacion
             panelSectorTrabajo.Size = size;
             panelCentroTrabajo.Size = size;
             panelTurnoTrabajo.Size = size;
+            scDown.SplitterDistance = 160;
+            scDown.Panel1MinSize = 0;
         }
 
         private void frmRecursosFabricacion_Load(object sender, EventArgs e)
@@ -70,6 +73,29 @@ namespace GyCAP.UI.RecursosFabricacion
 
         #region Menú Lateral
 
+        private void btnMenu_Click2(object sender, EventArgs e)
+        {
+            if (scDown.SplitterDistance == 0)
+            {
+                //Hay que mostrarlo
+                while (scDown.SplitterDistance < 160)
+                {
+                    scDown.SplitterDistance += 5;
+                }
+                btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
+            }
+            else
+            {
+                //Hay que ocultarlo
+                while (scDown.SplitterDistance > 0)
+                {
+                    scDown.SplitterDistance -= 5;
+                }
+                btnMenu.Cursor = System.Windows.Forms.Cursors.PanEast;
+            }
+            btnMenu.Parent.Focus();
+        }
+        
         private void btnMenu_Click(object sender, EventArgs e)
         {
             if (scDown.Panel1Collapsed == false)
@@ -315,5 +341,6 @@ namespace GyCAP.UI.RecursosFabricacion
         }
 
         #endregion
+
     }
 }
