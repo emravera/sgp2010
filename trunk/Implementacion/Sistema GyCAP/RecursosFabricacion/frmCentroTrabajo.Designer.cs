@@ -65,6 +65,8 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.nudHorasExtendido = new System.Windows.Forms.NumericUpDown();
+            this.nudHorasNormal = new System.Windows.Forms.NumericUpDown();
             this.cbActivo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.lvTurnos = new System.Windows.Forms.ListView();
             this.label13 = new System.Windows.Forms.Label();
@@ -87,8 +89,6 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.nudHorasNormal = new System.Windows.Forms.NumericUpDown();
-            this.nudHorasExtendido = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcCentroTrabajo.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -107,9 +107,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudTiempoCiclo)).BeginInit();
             this.gbGuardarCancelar.SuspendLayout();
             this.gbDatos.SuspendLayout();
-            this.tsMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHorasNormal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHorasExtendido)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHorasNormal)).BeginInit();
+            this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtNombre
@@ -118,7 +118,7 @@
             this.txtNombre.MaxLength = 80;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(185, 21);
-            this.txtNombre.TabIndex = 3;
+            this.txtNombre.TabIndex = 7;
             this.txtNombre.Enter += new System.EventHandler(this.control_Enter);
             // 
             // tableLayoutPanel1
@@ -187,7 +187,7 @@
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(560, 323);
-            this.dgvLista.TabIndex = 0;
+            this.dgvLista.TabIndex = 6;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
@@ -218,7 +218,7 @@
             this.cbActivoBuscar.Location = new System.Drawing.Point(321, 55);
             this.cbActivoBuscar.Name = "cbActivoBuscar";
             this.cbActivoBuscar.Size = new System.Drawing.Size(138, 21);
-            this.cbActivoBuscar.TabIndex = 8;
+            this.cbActivoBuscar.TabIndex = 4;
             // 
             // cbTipoBuscar
             // 
@@ -228,7 +228,7 @@
             this.cbTipoBuscar.Location = new System.Drawing.Point(321, 23);
             this.cbTipoBuscar.Name = "cbTipoBuscar";
             this.cbTipoBuscar.Size = new System.Drawing.Size(138, 21);
-            this.cbTipoBuscar.TabIndex = 7;
+            this.cbTipoBuscar.TabIndex = 2;
             // 
             // cbSectorBuscar
             // 
@@ -238,7 +238,7 @@
             this.cbSectorBuscar.Location = new System.Drawing.Point(96, 55);
             this.cbSectorBuscar.Name = "cbSectorBuscar";
             this.cbSectorBuscar.Size = new System.Drawing.Size(161, 21);
-            this.cbSectorBuscar.TabIndex = 6;
+            this.cbSectorBuscar.TabIndex = 3;
             // 
             // label21
             // 
@@ -274,7 +274,7 @@
             this.btnBuscar.Location = new System.Drawing.Point(485, 35);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscar.TabIndex = 2;
+            this.btnBuscar.TabIndex = 5;
             this.btnBuscar.Text = "&Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -340,7 +340,7 @@
             0});
             this.nudCostoCiclo.Name = "nudCostoCiclo";
             this.nudCostoCiclo.Size = new System.Drawing.Size(120, 21);
-            this.nudCostoCiclo.TabIndex = 3;
+            this.nudCostoCiclo.TabIndex = 21;
             this.nudCostoCiclo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCostoCiclo.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -355,7 +355,7 @@
             this.nudCostoHora.Location = new System.Drawing.Point(121, 27);
             this.nudCostoHora.Name = "nudCostoHora";
             this.nudCostoHora.Size = new System.Drawing.Size(120, 21);
-            this.nudCostoHora.TabIndex = 2;
+            this.nudCostoHora.TabIndex = 20;
             this.nudCostoHora.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCostoHora.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -407,7 +407,7 @@
             this.nudTiempoDespues.Location = new System.Drawing.Point(434, 54);
             this.nudTiempoDespues.Name = "nudTiempoDespues";
             this.nudTiempoDespues.Size = new System.Drawing.Size(120, 21);
-            this.nudTiempoDespues.TabIndex = 9;
+            this.nudTiempoDespues.TabIndex = 18;
             this.nudTiempoDespues.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudTiempoDespues.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -422,7 +422,7 @@
             this.nudTiempoAntes.Location = new System.Drawing.Point(434, 25);
             this.nudTiempoAntes.Name = "nudTiempoAntes";
             this.nudTiempoAntes.Size = new System.Drawing.Size(120, 21);
-            this.nudTiempoAntes.TabIndex = 8;
+            this.nudTiempoAntes.TabIndex = 16;
             this.nudTiempoAntes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudTiempoAntes.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -437,7 +437,7 @@
             this.nudCapacidadCiclo.Location = new System.Drawing.Point(121, 25);
             this.nudCapacidadCiclo.Name = "nudCapacidadCiclo";
             this.nudCapacidadCiclo.Size = new System.Drawing.Size(120, 21);
-            this.nudCapacidadCiclo.TabIndex = 7;
+            this.nudCapacidadCiclo.TabIndex = 15;
             this.nudCapacidadCiclo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCapacidadCiclo.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -452,7 +452,7 @@
             this.nudEficiencia.Location = new System.Drawing.Point(121, 83);
             this.nudEficiencia.Name = "nudEficiencia";
             this.nudEficiencia.Size = new System.Drawing.Size(120, 21);
-            this.nudEficiencia.TabIndex = 6;
+            this.nudEficiencia.TabIndex = 19;
             this.nudEficiencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudEficiencia.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -467,7 +467,7 @@
             this.nudTiempoCiclo.Location = new System.Drawing.Point(121, 54);
             this.nudTiempoCiclo.Name = "nudTiempoCiclo";
             this.nudTiempoCiclo.Size = new System.Drawing.Size(120, 21);
-            this.nudTiempoCiclo.TabIndex = 5;
+            this.nudTiempoCiclo.TabIndex = 17;
             this.nudTiempoCiclo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudTiempoCiclo.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -532,7 +532,7 @@
             this.btnVolver.Location = new System.Drawing.Point(496, 18);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(64, 26);
-            this.btnVolver.TabIndex = 6;
+            this.btnVolver.TabIndex = 23;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -542,7 +542,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(426, 18);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(64, 26);
-            this.btnGuardar.TabIndex = 5;
+            this.btnGuardar.TabIndex = 22;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -575,6 +575,44 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del Centro de Trabajo";
             // 
+            // nudHorasExtendido
+            // 
+            this.nudHorasExtendido.DecimalPlaces = 2;
+            this.nudHorasExtendido.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudHorasExtendido.Location = new System.Drawing.Point(401, 52);
+            this.nudHorasExtendido.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudHorasExtendido.Name = "nudHorasExtendido";
+            this.nudHorasExtendido.Size = new System.Drawing.Size(86, 21);
+            this.nudHorasExtendido.TabIndex = 10;
+            this.nudHorasExtendido.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // nudHorasNormal
+            // 
+            this.nudHorasNormal.DecimalPlaces = 2;
+            this.nudHorasNormal.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudHorasNormal.Location = new System.Drawing.Point(401, 24);
+            this.nudHorasNormal.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudHorasNormal.Name = "nudHorasNormal";
+            this.nudHorasNormal.Size = new System.Drawing.Size(86, 21);
+            this.nudHorasNormal.TabIndex = 8;
+            this.nudHorasNormal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // cbActivo
             // 
             this.cbActivo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -583,7 +621,7 @@
             this.cbActivo.Location = new System.Drawing.Point(401, 80);
             this.cbActivo.Name = "cbActivo";
             this.cbActivo.Size = new System.Drawing.Size(151, 21);
-            this.cbActivo.TabIndex = 19;
+            this.cbActivo.TabIndex = 12;
             // 
             // lvTurnos
             // 
@@ -594,7 +632,7 @@
             this.lvTurnos.Name = "lvTurnos";
             this.lvTurnos.ShowGroups = false;
             this.lvTurnos.Size = new System.Drawing.Size(253, 60);
-            this.lvTurnos.TabIndex = 18;
+            this.lvTurnos.TabIndex = 14;
             this.lvTurnos.UseCompatibleStateImageBehavior = false;
             this.lvTurnos.View = System.Windows.Forms.View.Details;
             // 
@@ -651,7 +689,7 @@
             this.cbSector.Location = new System.Drawing.Point(98, 80);
             this.cbSector.Name = "cbSector";
             this.cbSector.Size = new System.Drawing.Size(186, 21);
-            this.cbSector.TabIndex = 10;
+            this.cbSector.TabIndex = 11;
             // 
             // cbTipo
             // 
@@ -697,7 +735,7 @@
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(271, 62);
-            this.txtDescripcion.TabIndex = 4;
+            this.txtDescripcion.TabIndex = 13;
             this.txtDescripcion.Text = "";
             this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -798,44 +836,6 @@
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // nudHorasNormal
-            // 
-            this.nudHorasNormal.DecimalPlaces = 2;
-            this.nudHorasNormal.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nudHorasNormal.Location = new System.Drawing.Point(401, 24);
-            this.nudHorasNormal.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.nudHorasNormal.Name = "nudHorasNormal";
-            this.nudHorasNormal.Size = new System.Drawing.Size(86, 21);
-            this.nudHorasNormal.TabIndex = 20;
-            this.nudHorasNormal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // nudHorasExtendido
-            // 
-            this.nudHorasExtendido.DecimalPlaces = 2;
-            this.nudHorasExtendido.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nudHorasExtendido.Location = new System.Drawing.Point(401, 52);
-            this.nudHorasExtendido.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.nudHorasExtendido.Name = "nudHorasExtendido";
-            this.nudHorasExtendido.Size = new System.Drawing.Size(86, 21);
-            this.nudHorasExtendido.TabIndex = 21;
-            this.nudHorasExtendido.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // frmCentroTrabajo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -872,10 +872,10 @@
             this.gbGuardarCancelar.ResumeLayout(false);
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHorasExtendido)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHorasNormal)).EndInit();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHorasNormal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHorasExtendido)).EndInit();
             this.ResumeLayout(false);
 
         }
