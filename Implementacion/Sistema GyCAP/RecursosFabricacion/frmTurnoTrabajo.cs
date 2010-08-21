@@ -57,8 +57,8 @@ namespace GyCAP.UI.RecursosFabricacion
             {
                 int codigo = Convert.ToInt32(dvTurnos[dgvLista.SelectedRows[0].Index]["tur_codigo"]);
                 txtNombre.Text = dsTurnos.TURNOS_TRABAJO.FindByTUR_CODIGO(codigo).TUR_NOMBRE;
-                dtpHoraInicio.Value = DateTime.Parse(dsTurnos.TURNOS_TRABAJO.FindByTUR_CODIGO(codigo).TUR_HORAINICIO.ToString().Replace(",", ":"));
-                dtpHoraFin.Value = DateTime.Parse(dsTurnos.TURNOS_TRABAJO.FindByTUR_CODIGO(codigo).TUR_HORAFIN.ToString().Replace(",", ":"));
+                dtpHoraInicio.Value = Sistema.FuncionesAuxiliares.DecimalToDateTime(dsTurnos.TURNOS_TRABAJO.FindByTUR_CODIGO(codigo).TUR_HORAINICIO);
+                dtpHoraFin.Value = Sistema.FuncionesAuxiliares.DecimalToDateTime(dsTurnos.TURNOS_TRABAJO.FindByTUR_CODIGO(codigo).TUR_HORAFIN);
                 txtNombre.Focus();
                 SetInterface(estadoUI.modificar);
             }
@@ -121,8 +121,8 @@ namespace GyCAP.UI.RecursosFabricacion
                 {
                     //Está cargando uno nuevo
                     turno.Nombre = txtNombre.Text;
-                    turno.HoraInicio = Convert.ToDecimal(dtpHoraInicio.Value.ToShortTimeString().Replace(":", ","));
-                    turno.HoraFin = Convert.ToDecimal(dtpHoraFin.Value.ToShortTimeString().Replace(":", ","));
+                    turno.HoraInicio = Sistema.FuncionesAuxiliares.StringHourToDecimal(dtpHoraInicio.Value.ToShortTimeString());
+                    turno.HoraFin = Sistema.FuncionesAuxiliares.StringHourToDecimal(dtpHoraFin.Value.ToShortTimeString());
                     try
                     {
                         //Primero lo creamos en la db
@@ -130,10 +130,10 @@ namespace GyCAP.UI.RecursosFabricacion
                         //Ahora lo agregamos al dataset
                         Data.dsCentroTrabajo.TURNOS_TRABAJORow row = dsTurnos.TURNOS_TRABAJO.NewTURNOS_TRABAJORow();
                         row.BeginEdit();
-                        row.TUR_CODIGO = -1;
-                        row.TUR_NOMBRE = txtNombre.Text;
-                        row.TUR_HORAINICIO = Convert.ToDecimal(dtpHoraInicio.Value.ToShortTimeString().Replace(":", ","));
-                        row.TUR_HORAFIN = Convert.ToDecimal(dtpHoraFin.Value.ToShortTimeString().Replace(":", ","));
+                        row.TUR_CODIGO = turno.Codigo;
+                        row.TUR_NOMBRE = turno.Nombre;
+                        row.TUR_HORAINICIO = turno.HoraInicio;
+                        row.TUR_HORAFIN = turno.HoraFin;
                         row.EndEdit();
                         dsTurnos.TURNOS_TRABAJO.AddTURNOS_TRABAJORow(row);
                         dsTurnos.TURNOS_TRABAJO.AcceptChanges();
@@ -156,8 +156,8 @@ namespace GyCAP.UI.RecursosFabricacion
                     //Está modificando
                     turno.Codigo = Convert.ToInt32(dvTurnos[dgvLista.SelectedRows[0].Index]["tur_codigo"]);
                     turno.Nombre = txtNombre.Text;
-                    turno.HoraInicio = Convert.ToDecimal(dtpHoraInicio.Value.ToShortTimeString().Replace(":", ","));
-                    turno.HoraFin = Convert.ToDecimal(dtpHoraFin.Value.ToShortTimeString().Replace(":", ","));
+                    turno.HoraInicio = Sistema.FuncionesAuxiliares.StringHourToDecimal(dtpHoraInicio.Value.ToShortTimeString());
+                    turno.HoraFin = Sistema.FuncionesAuxiliares.StringHourToDecimal(dtpHoraFin.Value.ToShortTimeString());
                     try
                     {
                         //Lo actualizamos en la DB
@@ -165,9 +165,9 @@ namespace GyCAP.UI.RecursosFabricacion
                         //Lo actualizamos en el dataset y aceptamos los cambios
                         Data.dsCentroTrabajo.TURNOS_TRABAJORow row = dsTurnos.TURNOS_TRABAJO.FindByTUR_CODIGO(turno.Codigo);
                         row.BeginEdit();
-                        row.TUR_NOMBRE = txtNombre.Text;
-                        row.TUR_HORAINICIO = Convert.ToDecimal(dtpHoraInicio.Value.ToShortTimeString().Replace(":", ","));
-                        row.TUR_HORAFIN = Convert.ToDecimal(dtpHoraFin.Value.ToShortTimeString().Replace(":", ","));
+                        row.TUR_NOMBRE = turno.Nombre;
+                        row.TUR_HORAINICIO = turno.HoraInicio;
+                        row.TUR_HORAFIN = turno.HoraFin;
                         row.EndEdit();
                         dsTurnos.TURNOS_TRABAJO.AcceptChanges();
                         //Avisamos que estuvo todo ok
@@ -278,9 +278,7 @@ namespace GyCAP.UI.RecursosFabricacion
             dvTurnos = new DataView(dsTurnos.TURNOS_TRABAJO);
             dvTurnos.Sort = "TUR_NOMBRE ASC";
             dgvLista.DataSource = dvTurnos;
-        }
-
-        #endregion
+        }        
 
         private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -290,11 +288,11 @@ namespace GyCAP.UI.RecursosFabricacion
                 switch (dgvLista.Columns[e.ColumnIndex].Name)
                 {
                     case "TUR_HORAINICIO":
-                        nombre = e.Value.ToString().Replace(",", ":");
+                        nombre = Sistema.FuncionesAuxiliares.DecimalHourToString(decimal.Parse(e.Value.ToString()));
                         e.Value = nombre;
                         break;
                     case "TUR_HORAFIN":
-                        nombre = e.Value.ToString().Replace(",", ":");
+                        nombre = Sistema.FuncionesAuxiliares.DecimalHourToString(decimal.Parse(e.Value.ToString()));
                         e.Value = nombre;
                         break;
                     default:
@@ -302,11 +300,7 @@ namespace GyCAP.UI.RecursosFabricacion
                 }
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(dtpHoraInicio.Value.ToShortTimeString());
-        }
+        #endregion
 
     }
 }
