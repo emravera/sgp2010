@@ -13,9 +13,10 @@ namespace GyCAP.UI.PlanificacionProduccion
     {
         private static frmPlanMensual _frmPlanMensual = null;
         private Data.dsPlanMensual dsPlanMensual = new GyCAP.Data.dsPlanMensual();
-        private DataView dvListaPlanes, dvListaDetalle, dvComboPlanesAnuales, dvComboCocinas;
+        private DataView dvListaPlanes, dvListaDetalle, dvListaDatos, dvComboPlanesAnuales, dvComboCocinas;
         private enum estadoUI { inicio, nuevo, buscar, modificar, cargaDetalle };
         private static estadoUI estadoActual;
+        private static int cantidadPlanificada; int codigoDetalle = -1;
         
         public frmPlanMensual()
         {
@@ -30,6 +31,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Agregamos la columnas
             dgvLista.Columns.Add("PMES_CODIGO", "Código");
             dgvLista.Columns.Add("PAN_CODIGO", "Plan Anual");
+            dgvLista.Columns.Add("PAN_ANIO", "Anio Plan Anual");
             dgvLista.Columns.Add("PMES_MES", "Mes del Plan Mensual");
             dgvLista.Columns.Add("PMES_FECHACREACION", "Fecha Creación Plan Mensual");
 
@@ -37,24 +39,24 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["PMES_CODIGO"].DataPropertyName = "PMES_CODIGO";
             dgvLista.Columns["PAN_CODIGO"].DataPropertyName = "PAN_CODIGO";
+            dgvLista.Columns["PAN_ANIO"].DataPropertyName = "PAN_ANIO";
             dgvLista.Columns["PMES_MES"].DataPropertyName = "PMES_MES";
             dgvLista.Columns["PMES_FECHACREACION"].DataPropertyName = "PMES_FECHACREACION";
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListaPlanes = new DataView(dsPlanMensual.PLANES_MENSUALES);
-            dvListaPlanes.Sort = "PMES_CODIGO ASC";
             dgvLista.DataSource = dvListaPlanes;
 
             //Lista de Detalles
             //Agregamos la columnas
             dgvDetalle.Columns.Add("DPMES_CODIGO", "Código");
             dgvDetalle.Columns.Add("PMES_CODIGO", "Mes");
-            dgvDetalle.Columns.Add("COC_CODIGO", "Mes");
+            dgvDetalle.Columns.Add("COC_CODIGO", "Cocina Codigo");
             dgvDetalle.Columns.Add("DPMES_CANTIDADESTIMADA", "Cantidad Estimada");
             dgvDetalle.Columns.Add("DPMES_CANTIDADREAL", "Cantidad Real");
 
@@ -70,17 +72,42 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalle.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalle.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetalle.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDetalle.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvDetalle.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-            //Creamos el dataview y lo asignamos a la grilla
+             //Creamos el dataview y lo asignamos a la grilla
             dvListaDetalle = new DataView(dsPlanMensual.DETALLE_PLANES_MENSUALES);
             dgvDetalle.DataSource = dvListaDetalle;
 
-            //Ponemos las columnas en visible false
-            dgvLista.Columns["PMES_CODIGO"].Visible = false;
-            dgvDetalle.Columns["DPMES_CODIGO"].Visible = false;
+            //Lista de Datos
+            //Agregamos la columnas
+            dgvDatos.Columns.Add("DPMES_CODIGO", "Código");
+            dgvDatos.Columns.Add("PMES_CODIGO", "Mes");
+            dgvDatos.Columns.Add("COC_CODIGO", "Cocina Codigo");
+            dgvDatos.Columns.Add("DPMES_CANTIDADESTIMADA", "Cantidad Estimada");
+            dgvDatos.Columns.Add("DPMES_CANTIDADREAL", "Cantidad Real");
 
+            //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
+            dgvDatos.Columns["DPMES_CODIGO"].DataPropertyName = "DPMES_CODIGO";
+            dgvDatos.Columns["PMES_CODIGO"].DataPropertyName = "PMES_CODIGO";
+            dgvDatos.Columns["COC_CODIGO"].DataPropertyName = "COC_CODIGO";
+            dgvDatos.Columns["DPMES_CANTIDADESTIMADA"].DataPropertyName = "DPMES_CANTIDADESTIMADA";
+            dgvDatos.Columns["DPMES_CANTIDADREAL"].DataPropertyName = "DPMES_CANTIDADREAL";
+
+            //Seteamos el modo de tamaño de las columnas
+            dgvDatos.Columns[0].Visible = false;
+            dgvDatos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDatos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDatos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDatos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvDatos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            //Creamos el dataview y lo asignamos a la grilla
+            dvListaDatos = new DataView(dsPlanMensual.DETALLE_PLANES_MENSUALES);
+            dgvDatos.DataSource = dvListaDatos;
+
+
+            //LLenado de Datasets
             //Llenamos el dataset con los planes anuales
             BLL.PlanAnualBLL.ObtenerTodos(dsPlanMensual);
 
@@ -105,6 +132,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             dvComboPlanesAnuales = new DataView(dsPlanMensual.PLANES_ANUALES);
             cbPlanAnual.SetDatos(dvComboPlanesAnuales, "pan_codigo", "pan_anio", "Seleccione", false);
 
+            //Cargo el combo con las cocinas
+            dvComboCocinas = new DataView(dsPlanMensual.COCINAS);
+            cbCocinas.SetDatos(dvComboCocinas, "coc_codigo", "coc_codigo_producto", "Seleccione", false);
 
             //Cargo los combos de los meses
             cbMes.SetDatos(Meses, valores, "Seleccione", false);
@@ -173,7 +203,48 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbGrillaDemanda.Visible = hayDatos;
                     tcPlanAnual.SelectedTab = tpBuscar;
                     estadoActual = estadoUI.buscar;
+                    //Columnas de las grillas
+                    //Ponemos las columnas de las grillas en visible false
+                    dgvLista.Columns["PMES_CODIGO"].Visible = false;
+                    dgvLista.Columns["PAN_CODIGO"].Visible = false;
+                    dgvDetalle.Columns["DPMES_CODIGO"].Visible = false;
+                    dgvDetalle.Columns["PMES_CODIGO"].Visible = false;
+                    dgvDetalle.Columns["DPMES_CANTIDADREAL"].Visible = false;
                     break;
+                //Cuando se carga el Detalle
+                case estadoUI.cargaDetalle:
+                    btnNuevo.Enabled = true;
+                    btnConsultar.Enabled = true;
+                    btnEliminar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    tcPlanAnual.SelectedTab = tpDatos;
+                    estadoActual = estadoUI.cargaDetalle;
+                    //Manejo de Controles
+                    //Groupbox
+                    gbDatosPrincipales.Enabled = false;
+                    gbCantidades.Visible = true;
+                    gbCargaDetalle.Visible = true;
+                    gbDetalleGrilla.Visible = true;
+                    gbBotones.Visible = true;
+                    //Textbox
+                    txtCantAPlanificar.Text = string.Empty;
+                    txtCantPlanificada.Text = string.Empty;
+                    txtRestaPlanificar.Text = string.Empty;
+                    txtCantAPlanificar.Enabled = false;
+                    txtCantPlanificada.Enabled = false;
+                    txtRestaPlanificar.Enabled = false;
+                    //Combo
+                    cbCocinas.SelectedIndex = -1;
+                    //Numeric 
+                    numPorcentaje.Value = 0;
+                    //Radiobuttons
+                    rbUnidades.Checked = true;
+                    //Escondo las columnas que no quiero mostrar de la grilla
+                    dgvDatos.Columns["DPMES_CODIGO"].Visible = false;
+                    dgvDatos.Columns["PMES_CODIGO"].Visible = false;
+                    dgvDatos.Columns["DPMES_CANTIDADREAL"].Visible = false;
+                    break;
+
 
                 case estadoUI.modificar:
                     btnNuevo.Enabled = true;
@@ -192,6 +263,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     tcPlanAnual.SelectedTab = tpDatos;
                     cbMesDatos.SelectedIndex = -1;
                     cbPlanAnual.SelectedIndex = -1;
+                    gbDatosPrincipales.Enabled = true;
                     gbCantidades.Visible = false;
                     gbCargaDetalle.Visible = false;
                     gbDetalleGrilla.Visible = false;
@@ -258,9 +330,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 MessageBox.Show("El año no tiene el formato Correcto", "Error: Plan Mensual - Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
-
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -277,6 +346,255 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             SetInterface(estadoUI.inicio);
         }
+
+        private void dgvLista_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                //Se programa la busqueda del detalle
+                //Limpiamos el Dataset
+                dsPlanMensual.DETALLE_PLANES_MENSUALES.Clear();
+
+                int codigo = Convert.ToInt32(dvListaPlanes[dgvLista.SelectedRows[0].Index]["pmes_codigo"]);
+
+                //Se llama a la funcion de busqueda del detalle
+                BLL.DetallePlanMensualBLL.ObtenerDetalle(codigo, dsPlanMensual);
+
+                //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
+                //por una consulta a la BD
+                dvListaDetalle.Table = dsPlanMensual.DETALLE_PLANES_MENSUALES;
+
+                if (dsPlanMensual.DETALLE_PLANES_MENSUALES.Rows.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron Detalles para ese Plan Mensual.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    SetInterface(estadoUI.buscar);
+                    gbGrillaDetalle.Visible = true;
+                }
+
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message, "Error: Plan Mensual - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SetInterface(estadoUI.inicio);
+            }
+        }
+
+        private void dgvDetalle_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
+            if (e.Value.ToString() != String.Empty)
+            {
+                switch (dgvDetalle.Columns[e.ColumnIndex].Name)
+                {
+                    case "COC_CODIGO":
+                        string nombre = dsPlanMensual.COCINAS.FindByCOC_CODIGO(Convert.ToInt32(e.Value)).COC_CODIGO_PRODUCTO;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
+
+        private void btnCargaDetalle_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Seteo la variable global a cero
+                cantidadPlanificada = 0;
+
+                //Limpiamos el dataset de detalles
+                dsPlanMensual.DETALLE_PLAN_ANUAL.Clear();
+
+                if (cbPlanAnual.SelectedIndex != -1 && cbMesDatos.SelectedIndex != -1)
+                {
+                    int anio = Convert.ToInt32(cbPlanAnual.GetSelectedText());
+                    string mes = cbMesDatos.GetSelectedText();
+
+                    //Verifico que no exista ningun plan mensual para esos datos
+                    if (BLL.PlanMensualBLL.ExistePlanMensual(anio, mes) == true)
+                    {
+                        SetInterface(estadoUI.cargaDetalle);
+
+                        //Cargo el valor que debe planificar para ese mes
+                        int cantidad = BLL.PlanAnualBLL.ObtenerTodos(anio, mes);
+                        txtCantAPlanificar.Text = cantidad.ToString();
+                        txtCantPlanificada.Text =Convert.ToString(0);
+                        txtRestaPlanificar.Text = cantidad.ToString();
+
+                        //Borro los detalles del dataset
+                        dsPlanMensual.DETALLE_PLANES_MENSUALES.Clear();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ya existe un plan Mensual para ese año y mes seleccionado", "Error: Plan Mensual - Carga de Detalle", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe seleccionar un Plan Anual y un Mes para Cargar el Detalle", "Error: Plan Mensual - Carga de Detalle", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message, "Error: Plan Mensual - Carga Detalle", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SetInterface(estadoUI.cargaDetalle);
+            }
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.nuevo);
+        }
+
+        private void rbUnidades_CheckedChanged(object sender, EventArgs e)
+        {
+            numUnidades.Visible = true;
+            numPorcentaje.Visible = false;
+            numPorcentaje.Value = 0;
+            numUnidades.Value = 0;
+        }
+
+        private void rbPorcentaje_CheckedChanged(object sender, EventArgs e)
+        {
+            numUnidades.Visible = false;
+            numPorcentaje.Visible = true;
+            numPorcentaje.Value = 0;
+            numUnidades.Value = 0;
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            int codigoPlan=-1; int cantidad;
+            try
+            {
+                //Ejecutamos la validacion para verificar que este todo OK
+                ValidarDetalle();
+
+                //Comenzamos con la edición de la fila en si misma
+                Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row = dsPlanMensual.DETALLE_PLANES_MENSUALES.NewDETALLE_PLANES_MENSUALESRow();
+                row.BeginEdit();
+                row.DPMES_CODIGO = codigoDetalle--;
+                row.PMES_CODIGO = codigoPlan;
+                row.COC_CODIGO =Convert.ToInt32(cbCocinas.GetSelectedValue());
+                if (rbUnidades.Checked == true)
+                {
+                    cantidad= Convert.ToInt32(numUnidades.Value);
+                    row.DPMES_CANTIDADESTIMADA =cantidad;                    
+                }
+                else
+                {
+                    cantidad = Convert.ToInt32(Convert.ToInt32(txtCantAPlanificar.Text) * (numPorcentaje.Value / 100));
+                    row.DPMES_CANTIDADESTIMADA = cantidad;
+                    
+                }
+                row.EndEdit();
+                dsPlanMensual.DETALLE_PLANES_MENSUALES.AddDETALLE_PLANES_MENSUALESRow(row);
+
+                //Metodo que recalcula los valores Ingresados
+                CalcularCantidades(cantidad);
+
+                //Seteamos la interface al estado de carga de detalle
+                cbCocinas.SelectedIndex = -1;
+                numPorcentaje.Value = 0;
+                numUnidades.Value = 0;
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error: Validación - Carga Detalle", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void CalcularCantidades(int cantidadDetalle)
+        {
+            //Tengo los valores
+            int cantidadAPlanificar = Convert.ToInt32(txtCantAPlanificar.Text);
+            cantidadPlanificada = cantidadPlanificada + cantidadDetalle;
+            int restaPlanificar =cantidadAPlanificar - cantidadPlanificada;
+
+            //Los asigno a los textbox
+            txtCantPlanificada.Text = cantidadPlanificada.ToString();
+            txtRestaPlanificar.Text = restaPlanificar.ToString();
+        }
+
+        private void ValidarDetalle()
+        {
+            string msjerror=string.Empty;
+
+            if (cbCocinas.SelectedIndex == -1) msjerror = msjerror + "-Debe seleccionar un modelo de cocina\n";
+            if (rbUnidades.Checked == true)
+            {
+                if (numUnidades.Value == 0) msjerror = msjerror + "-La cantidad en unidades debe ser mayor a cero\n";
+            }
+            if (rbPorcentaje.Checked == true)
+            {
+                if (numPorcentaje.Value == 0) msjerror = msjerror + "-El porcentaje debe ser mayor a cero\n";
+            }
+
+            if (rbUnidades.Checked == true)
+            {
+                if(numUnidades.Value > (Convert.ToInt32(txtCantAPlanificar.Text) - Convert.ToInt32(txtCantPlanificada.Text))) msjerror = msjerror + "-La cantidad de unidades no puede ser mayor de lo que resta planificar\n";
+                
+            }
+            else
+            {
+                int cantidad = Convert.ToInt32(Convert.ToInt32(txtCantAPlanificar.Text) * (numPorcentaje.Value / 100));
+                if (cantidad > (Convert.ToInt32(txtCantAPlanificar.Text) - Convert.ToInt32(txtCantPlanificada.Text))) msjerror = msjerror + "-La cantidad de unidades no puede ser mayor de lo que resta planificar\n";
+            }
+
+            //Validamos que no se quiera agregar un modelo que ya está en el dataset
+            foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in dsPlanMensual.DETALLE_PLANES_MENSUALES.Rows)
+            {
+                if (row["COC_CODIGO"].ToString() == Convert.ToString(cbCocinas.GetSelectedValue()))
+                {
+                    msjerror = msjerror + "-El modelo de cocina que intenta agregar ya se encuentra en la planificación\n";
+                }
+            }
+            
+            if (msjerror.Length > 0)
+            {
+                msjerror = "Los errores encontrados son:\n" + msjerror;
+                throw new Exception(msjerror);
+            }
+        }
+
+        private void dgvDatos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != String.Empty)
+            {
+                switch (dgvDatos.Columns[e.ColumnIndex].Name)
+                {
+                    case "COC_CODIGO":
+                        string nombre = dsPlanMensual.COCINAS.FindByCOC_CODIGO(Convert.ToInt32(e.Value)).COC_CODIGO_PRODUCTO;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
+
+        
+        
+
+        
+
+        
+
+       
+
+        
+
+        
 
       
         
