@@ -488,6 +488,16 @@ namespace GyCAP.UI.RecursosFabricacion
                 nud.Enabled = activar;
                 if (reiniciar) { nud.Value = 0; }
             }
+            if (activar)
+            {
+                lblHorasSemanaNormal.BackColor = System.Drawing.Color.White;
+                lblHorasSemanaExtendido.BackColor = System.Drawing.Color.White;
+            }
+            else
+            {
+                lblHorasSemanaNormal.BackColor = System.Drawing.Color.Empty;
+                lblHorasSemanaExtendido.BackColor = System.Drawing.Color.Empty;
+            }
         }
 
         private void control_Enter(object sender, EventArgs e)
@@ -548,7 +558,8 @@ namespace GyCAP.UI.RecursosFabricacion
             cbActivoBuscar.SetDatos(nombres, valores, "--TODOS--", true);
             cbActivo.SetDatos(nombres, valores, "Seleccione", false);
             dvTurnoTrabajo = new DataView(dsCentroTrabajo.TURNOS_TRABAJO);
-            dvTurnoTrabajo.Sort = "TUR_NOMBRE ASC";            
+            dvTurnoTrabajo.Sort = "TUR_NOMBRE ASC";
+
         }
 
         private void CargarTurnos()
