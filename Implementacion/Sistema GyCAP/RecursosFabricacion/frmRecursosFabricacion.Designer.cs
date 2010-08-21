@@ -92,7 +92,7 @@
             // 
             this.scUp.Panel2.AutoScroll = true;
             this.scUp.Panel2.AutoScrollMargin = new System.Drawing.Size(1000, 1000);
-            this.scUp.Size = new System.Drawing.Size(626, 568);
+            this.scUp.Size = new System.Drawing.Size(627, 568);
             this.scUp.SplitterDistance = 20;
             this.scUp.SplitterWidth = 3;
             this.scUp.TabIndex = 0;
@@ -131,7 +131,7 @@
             this.flpMenu.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpMenu.Location = new System.Drawing.Point(0, 0);
             this.flpMenu.Name = "flpMenu";
-            this.flpMenu.Size = new System.Drawing.Size(157, 568);
+            this.flpMenu.Size = new System.Drawing.Size(156, 568);
             this.flpMenu.TabIndex = 0;
             // 
             // btnCentroTrabajo
@@ -635,7 +635,7 @@
             this.scDown.Panel2.AutoScroll = true;
             this.scDown.Panel2.Controls.Add(this.scUp);
             this.scDown.Size = new System.Drawing.Size(794, 572);
-            this.scDown.SplitterDistance = 161;
+            this.scDown.SplitterDistance = 160;
             this.scDown.SplitterWidth = 3;
             this.scDown.TabIndex = 3;
             // 
