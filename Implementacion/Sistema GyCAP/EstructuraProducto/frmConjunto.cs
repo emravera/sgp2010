@@ -1117,6 +1117,18 @@ namespace GyCAP.UI.EstructuraProducto
 
             dvPartes.Table = dsEstructura.LISTA_PARTES;
         }
+
+        private void button_MouseDown(object sender, MouseEventArgs e)
+        {
+            Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
+            (sender as Button).Location = punto;
+        }
+
+        private void button_MouseUp(object sender, MouseEventArgs e)
+        {
+            Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
+            (sender as Button).Location = punto;
+        }
         
         #endregion        
 
