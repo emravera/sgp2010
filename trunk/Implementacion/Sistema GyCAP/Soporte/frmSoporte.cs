@@ -151,10 +151,18 @@ namespace GyCAP.UI.Soporte
             else
             {
                 //Mostrar
+                foreach (Control item in panel.Controls)
+                {
+                    item.Hide();
+                }
                 while (panel.Size.Height < finalSize)
                 {
                     sizePanel.Height += 5;
                     panel.Size = sizePanel;
+                }
+                foreach (Control item in panel.Controls)
+                {
+                    item.Show();
                 }
             }
         }
