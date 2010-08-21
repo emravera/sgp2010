@@ -114,14 +114,19 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         }
 
         /// <summary>
-        /// Define el SelectedIndex del combo y oculta el texto de la cabecera no persistente.
+        /// Define el SelectedIndex del combo.
+        /// Si la cabecera es no persistente y el índice es -1 se muestra el texto. 
+        /// Si la cabecera es no persistente y el índice es mayor a 0, se selecciona ese índice y oculta el texto.
+        /// Si la cabecera es persistente y el índice es -1 o 0, se selecciona el primer elemento y oculta el texto.
+        /// Si la cabecera es persistente y el índice es mayor a 0, se selecciona ese índice y oculta el texto.
         /// </summary>
         /// <param name="index">El índice a seleccionar.</param>
         public void SetSelectedIndex(int index)
         {
             this.SelectedIndex = index;
-            if (!persistente) { texto.Visible = false; }
-            if (index == -1) { SetTexto(this.texto); }
+            if (index > 0) { texto.Visible = false; }
+            if (index == -1 && persistente == false) { SetTexto(this.texto.Text); }
+            if (index <= 0 && persistente == true) { this.SelectedIndex = 0; }
         }
 
         public object GetSelectedValue()
