@@ -38,8 +38,8 @@ namespace GyCAP.DAL
             else if (mes != string.Empty && anio != 0)
             {
                 //Agrego la busqueda por marca
-                sql = sql + " and pa.pan_anio=@p0 and pm.pmes LIKE @p1";
-                mes = "%" + anio + "%";
+                sql = sql + " and pa.pan_anio=@p0 and pm.pmes_mes LIKE @p1";
+                mes = "%" + mes + "%";
                 //Le doy valores a la estructura
                 valoresPram.SetValue(anio, 0);
                 valoresPram.SetValue(mes, 1);
@@ -67,6 +67,24 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+
+        //Metodo que valida que se pueda actualizar
+        public static bool Validar(int anio, string mes)
+        {
+            string sql = @"SELECT count(pm.pmes_codigo)
+                           FROM PLANES_MENSUALES as pm, PLANES_ANUALES as pa
+                           WHERE pa.pan_anio=@p0 and pm.pmes_mes LIKE @p1";
+            object[] valorParametros = { anio, mes};
+            try
+            {
+                int cantidad = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+                if (cantidad == 0) return true;
+                else return false;
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
+
 
     }
 }

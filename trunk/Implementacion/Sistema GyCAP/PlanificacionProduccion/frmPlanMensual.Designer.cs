@@ -30,8 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPlanMensual));
             this.gbDatosPrincipales = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCargaDetalle = new System.Windows.Forms.Button();
+            this.cbPlanAnual = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label3 = new System.Windows.Forms.Label();
+            this.cbMesDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
             this.btnConsultar = new System.Windows.Forms.ToolStripButton();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
@@ -43,20 +45,21 @@
             this.gbGrillaDemanda = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbMes = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label2 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtAnioBuscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbCantidades = new System.Windows.Forms.GroupBox();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.txtRestaPlanificar = new System.Windows.Forms.TextBox();
+            this.txtCantPlanificada = new System.Windows.Forms.TextBox();
+            this.txtCantAPlanificar = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.gbDetalleGrilla = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvDatos = new System.Windows.Forms.DataGridView();
             this.panelAcciones = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.btnRestar = new System.Windows.Forms.Button();
@@ -64,11 +67,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.gbCargaDetalle = new System.Windows.Forms.GroupBox();
-            this.btnCargar = new System.Windows.Forms.Button();
+            this.btnAgregar = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.numUnidades = new System.Windows.Forms.NumericUpDown();
+            this.numPorcentaje = new System.Windows.Forms.NumericUpDown();
+            this.rbPorcentaje = new System.Windows.Forms.RadioButton();
+            this.rbUnidades = new System.Windows.Forms.RadioButton();
+            this.cbCocinas = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label5 = new System.Windows.Forms.Label();
             this.gbBotones = new System.Windows.Forms.GroupBox();
             this.btnVolver = new System.Windows.Forms.Button();
@@ -78,10 +83,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcPlanAnual = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
-            this.cbMes = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbCocinas = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbPlanAnual = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbMesDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.gbDatosPrincipales.SuspendLayout();
             this.tsMenu.SuspendLayout();
             this.gbGrillaDemanda.SuspendLayout();
@@ -89,15 +90,13 @@
             this.groupBox1.SuspendLayout();
             this.tpDatos.SuspendLayout();
             this.gbCantidades.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.gbDetalleGrilla.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.panelAcciones.SuspendLayout();
             this.gbCargaDetalle.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUnidades)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPorcentaje)).BeginInit();
             this.gbBotones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
             this.gbGrillaDetalle.SuspendLayout();
@@ -108,7 +107,7 @@
             // 
             // gbDatosPrincipales
             // 
-            this.gbDatosPrincipales.Controls.Add(this.button1);
+            this.gbDatosPrincipales.Controls.Add(this.btnCargaDetalle);
             this.gbDatosPrincipales.Controls.Add(this.cbPlanAnual);
             this.gbDatosPrincipales.Controls.Add(this.label3);
             this.gbDatosPrincipales.Controls.Add(this.cbMesDatos);
@@ -120,28 +119,49 @@
             this.gbDatosPrincipales.TabStop = false;
             this.gbDatosPrincipales.Text = "Datos Principales";
             // 
-            // button1
+            // btnCargaDetalle
             // 
-            this.button1.Location = new System.Drawing.Point(625, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(82, 23);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "Cargar Detalle";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnCargaDetalle.Location = new System.Drawing.Point(625, 19);
+            this.btnCargaDetalle.Name = "btnCargaDetalle";
+            this.btnCargaDetalle.Size = new System.Drawing.Size(82, 23);
+            this.btnCargaDetalle.TabIndex = 25;
+            this.btnCargaDetalle.Text = "Cargar Detalle";
+            this.btnCargaDetalle.UseVisualStyleBackColor = true;
+            this.btnCargaDetalle.Click += new System.EventHandler(this.btnCargaDetalle_Click);
+            // 
+            // cbPlanAnual
+            // 
+            this.cbPlanAnual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPlanAnual.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbPlanAnual.FormattingEnabled = true;
+            this.cbPlanAnual.Location = new System.Drawing.Point(166, 20);
+            this.cbPlanAnual.Name = "cbPlanAnual";
+            this.cbPlanAnual.Size = new System.Drawing.Size(94, 21);
+            this.cbPlanAnual.TabIndex = 23;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 19);
+            this.label3.Location = new System.Drawing.Point(20, 24);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(124, 13);
             this.label3.TabIndex = 24;
             this.label3.Text = "Plan Anual Planificación:";
             // 
+            // cbMesDatos
+            // 
+            this.cbMesDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMesDatos.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbMesDatos.FormattingEnabled = true;
+            this.cbMesDatos.Location = new System.Drawing.Point(445, 20);
+            this.cbMesDatos.Name = "cbMesDatos";
+            this.cbMesDatos.Size = new System.Drawing.Size(137, 21);
+            this.cbMesDatos.TabIndex = 2;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(350, 19);
+            this.label4.Location = new System.Drawing.Point(337, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(93, 13);
             this.label4.TabIndex = 8;
@@ -251,6 +271,7 @@
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(376, 290);
             this.dgvLista.TabIndex = 1;
+            this.dgvLista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellClick);
             // 
             // groupBox1
             // 
@@ -266,6 +287,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
+            // 
+            // cbMes
+            // 
+            this.cbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMes.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbMes.FormattingEnabled = true;
+            this.cbMes.Location = new System.Drawing.Point(247, 20);
+            this.cbMes.Name = "cbMes";
+            this.cbMes.Size = new System.Drawing.Size(128, 21);
+            this.cbMes.TabIndex = 7;
             // 
             // label2
             // 
@@ -322,12 +353,12 @@
             // 
             // gbCantidades
             // 
-            this.gbCantidades.Controls.Add(this.numericUpDown4);
+            this.gbCantidades.Controls.Add(this.txtRestaPlanificar);
+            this.gbCantidades.Controls.Add(this.txtCantPlanificada);
+            this.gbCantidades.Controls.Add(this.txtCantAPlanificar);
             this.gbCantidades.Controls.Add(this.label10);
-            this.gbCantidades.Controls.Add(this.numericUpDown3);
             this.gbCantidades.Controls.Add(this.label9);
             this.gbCantidades.Controls.Add(this.label8);
-            this.gbCantidades.Controls.Add(this.numericUpDown2);
             this.gbCantidades.Location = new System.Drawing.Point(9, 72);
             this.gbCantidades.Name = "gbCantidades";
             this.gbCantidades.Size = new System.Drawing.Size(350, 98);
@@ -335,12 +366,26 @@
             this.gbCantidades.TabStop = false;
             this.gbCantidades.Text = "Cantidades a Planificar";
             // 
-            // numericUpDown4
+            // txtRestaPlanificar
             // 
-            this.numericUpDown4.Location = new System.Drawing.Point(160, 71);
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(111, 20);
-            this.numericUpDown4.TabIndex = 7;
+            this.txtRestaPlanificar.Location = new System.Drawing.Point(142, 71);
+            this.txtRestaPlanificar.Name = "txtRestaPlanificar";
+            this.txtRestaPlanificar.Size = new System.Drawing.Size(135, 20);
+            this.txtRestaPlanificar.TabIndex = 9;
+            // 
+            // txtCantPlanificada
+            // 
+            this.txtCantPlanificada.Location = new System.Drawing.Point(142, 45);
+            this.txtCantPlanificada.Name = "txtCantPlanificada";
+            this.txtCantPlanificada.Size = new System.Drawing.Size(135, 20);
+            this.txtCantPlanificada.TabIndex = 8;
+            // 
+            // txtCantAPlanificar
+            // 
+            this.txtCantAPlanificar.Location = new System.Drawing.Point(142, 19);
+            this.txtCantAPlanificar.Name = "txtCantAPlanificar";
+            this.txtCantAPlanificar.Size = new System.Drawing.Size(135, 20);
+            this.txtCantAPlanificar.TabIndex = 7;
             // 
             // label10
             // 
@@ -350,13 +395,6 @@
             this.label10.Size = new System.Drawing.Size(84, 13);
             this.label10.TabIndex = 6;
             this.label10.Text = "Resta Planificar:";
-            // 
-            // numericUpDown3
-            // 
-            this.numericUpDown3.Location = new System.Drawing.Point(160, 45);
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(111, 20);
-            this.numericUpDown3.TabIndex = 5;
             // 
             // label9
             // 
@@ -376,16 +414,9 @@
             this.label8.TabIndex = 3;
             this.label8.Text = "Cantidad a Planificar:";
             // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(160, 19);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(111, 20);
-            this.numericUpDown2.TabIndex = 2;
-            // 
             // gbDetalleGrilla
             // 
-            this.gbDetalleGrilla.Controls.Add(this.dataGridView1);
+            this.gbDetalleGrilla.Controls.Add(this.dgvDatos);
             this.gbDetalleGrilla.Controls.Add(this.panelAcciones);
             this.gbDetalleGrilla.Location = new System.Drawing.Point(372, 70);
             this.gbDetalleGrilla.Name = "gbDetalleGrilla";
@@ -394,13 +425,18 @@
             this.gbDetalleGrilla.TabStop = false;
             this.gbDetalleGrilla.Text = "Detalle";
             // 
-            // dataGridView1
+            // dgvDatos
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(5, 24);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(268, 220);
-            this.dataGridView1.TabIndex = 5;
+            this.dgvDatos.AllowUserToAddRows = false;
+            this.dgvDatos.AllowUserToDeleteRows = false;
+            this.dgvDatos.AllowUserToResizeRows = false;
+            this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDatos.Location = new System.Drawing.Point(5, 24);
+            this.dgvDatos.Name = "dgvDatos";
+            this.dgvDatos.RowHeadersVisible = false;
+            this.dgvDatos.Size = new System.Drawing.Size(268, 220);
+            this.dgvDatos.TabIndex = 5;
+            this.dgvDatos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDatos_CellFormatting);
             // 
             // panelAcciones
             // 
@@ -478,7 +514,7 @@
             // 
             // gbCargaDetalle
             // 
-            this.gbCargaDetalle.Controls.Add(this.btnCargar);
+            this.gbCargaDetalle.Controls.Add(this.btnAgregar);
             this.gbCargaDetalle.Controls.Add(this.groupBox3);
             this.gbCargaDetalle.Controls.Add(this.cbCocinas);
             this.gbCargaDetalle.Controls.Add(this.label5);
@@ -489,55 +525,83 @@
             this.gbCargaDetalle.TabStop = false;
             this.gbCargaDetalle.Text = "Carga Detalle del Plan Mensual";
             // 
-            // btnCargar
+            // btnAgregar
             // 
-            this.btnCargar.Location = new System.Drawing.Point(249, 125);
-            this.btnCargar.Name = "btnCargar";
-            this.btnCargar.Size = new System.Drawing.Size(104, 23);
-            this.btnCargar.TabIndex = 13;
-            this.btnCargar.Text = "Agregar";
-            this.btnCargar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Location = new System.Drawing.Point(249, 136);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(104, 23);
+            this.btnAgregar.TabIndex = 13;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.numericUpDown1);
-            this.groupBox3.Controls.Add(this.radioButton2);
-            this.groupBox3.Controls.Add(this.radioButton1);
-            this.groupBox3.Location = new System.Drawing.Point(3, 50);
+            this.groupBox3.Controls.Add(this.numUnidades);
+            this.groupBox3.Controls.Add(this.numPorcentaje);
+            this.groupBox3.Controls.Add(this.rbPorcentaje);
+            this.groupBox3.Controls.Add(this.rbUnidades);
+            this.groupBox3.Location = new System.Drawing.Point(24, 46);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(350, 57);
+            this.groupBox3.Size = new System.Drawing.Size(264, 88);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Cantidad";
             // 
-            // numericUpDown1
+            // numUnidades
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(224, 20);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(111, 20);
-            this.numericUpDown1.TabIndex = 2;
+            this.numUnidades.Location = new System.Drawing.Point(125, 19);
+            this.numUnidades.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.numUnidades.Name = "numUnidades";
+            this.numUnidades.Size = new System.Drawing.Size(120, 20);
+            this.numUnidades.TabIndex = 3;
+            this.numUnidades.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // radioButton2
+            // numPorcentaje
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(125, 20);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(93, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Porcentaje (%)";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.numPorcentaje.Location = new System.Drawing.Point(125, 51);
+            this.numPorcentaje.Name = "numPorcentaje";
+            this.numPorcentaje.Size = new System.Drawing.Size(120, 20);
+            this.numPorcentaje.TabIndex = 2;
+            this.numPorcentaje.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // radioButton1
+            // rbPorcentaje
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(15, 20);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(105, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Unidades Fisicas";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbPorcentaje.AutoSize = true;
+            this.rbPorcentaje.Location = new System.Drawing.Point(15, 51);
+            this.rbPorcentaje.Name = "rbPorcentaje";
+            this.rbPorcentaje.Size = new System.Drawing.Size(93, 17);
+            this.rbPorcentaje.TabIndex = 1;
+            this.rbPorcentaje.TabStop = true;
+            this.rbPorcentaje.Text = "Porcentaje (%)";
+            this.rbPorcentaje.UseVisualStyleBackColor = true;
+            this.rbPorcentaje.CheckedChanged += new System.EventHandler(this.rbPorcentaje_CheckedChanged);
+            // 
+            // rbUnidades
+            // 
+            this.rbUnidades.AutoSize = true;
+            this.rbUnidades.Location = new System.Drawing.Point(15, 20);
+            this.rbUnidades.Name = "rbUnidades";
+            this.rbUnidades.Size = new System.Drawing.Size(105, 17);
+            this.rbUnidades.TabIndex = 0;
+            this.rbUnidades.TabStop = true;
+            this.rbUnidades.Text = "Unidades Fisicas";
+            this.rbUnidades.UseVisualStyleBackColor = true;
+            this.rbUnidades.CheckedChanged += new System.EventHandler(this.rbUnidades_CheckedChanged);
+            // 
+            // cbCocinas
+            // 
+            this.cbCocinas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCocinas.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbCocinas.FormattingEnabled = true;
+            this.cbCocinas.Location = new System.Drawing.Point(105, 19);
+            this.cbCocinas.Name = "cbCocinas";
+            this.cbCocinas.Size = new System.Drawing.Size(212, 21);
+            this.cbCocinas.TabIndex = 1;
             // 
             // label5
             // 
@@ -566,6 +630,7 @@
             this.btnVolver.TabIndex = 22;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnGuardar
             // 
@@ -591,6 +656,7 @@
             this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDetalle.Size = new System.Drawing.Size(291, 290);
             this.dgvDetalle.TabIndex = 1;
+            this.dgvDetalle.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetalle_CellFormatting);
             // 
             // gbGrillaDetalle
             // 
@@ -647,46 +713,6 @@
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
-            // cbMes
-            // 
-            this.cbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMes.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbMes.FormattingEnabled = true;
-            this.cbMes.Location = new System.Drawing.Point(247, 20);
-            this.cbMes.Name = "cbMes";
-            this.cbMes.Size = new System.Drawing.Size(128, 21);
-            this.cbMes.TabIndex = 7;
-            // 
-            // cbCocinas
-            // 
-            this.cbCocinas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCocinas.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbCocinas.FormattingEnabled = true;
-            this.cbCocinas.Location = new System.Drawing.Point(105, 19);
-            this.cbCocinas.Name = "cbCocinas";
-            this.cbCocinas.Size = new System.Drawing.Size(162, 21);
-            this.cbCocinas.TabIndex = 1;
-            // 
-            // cbPlanAnual
-            // 
-            this.cbPlanAnual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPlanAnual.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbPlanAnual.FormattingEnabled = true;
-            this.cbPlanAnual.Location = new System.Drawing.Point(166, 16);
-            this.cbPlanAnual.Name = "cbPlanAnual";
-            this.cbPlanAnual.Size = new System.Drawing.Size(137, 21);
-            this.cbPlanAnual.TabIndex = 23;
-            // 
-            // cbMesDatos
-            // 
-            this.cbMesDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMesDatos.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbMesDatos.FormattingEnabled = true;
-            this.cbMesDatos.Location = new System.Drawing.Point(458, 16);
-            this.cbMesDatos.Name = "cbMesDatos";
-            this.cbMesDatos.Size = new System.Drawing.Size(137, 21);
-            this.cbMesDatos.TabIndex = 2;
-            // 
             // frmPlanMensual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -706,18 +732,16 @@
             this.tpDatos.ResumeLayout(false);
             this.gbCantidades.ResumeLayout(false);
             this.gbCantidades.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.gbDetalleGrilla.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.panelAcciones.ResumeLayout(false);
             this.panelAcciones.PerformLayout();
             this.gbCargaDetalle.ResumeLayout(false);
             this.gbCargaDetalle.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUnidades)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPorcentaje)).EndInit();
             this.gbBotones.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).EndInit();
             this.gbGrillaDetalle.ResumeLayout(false);
@@ -759,15 +783,15 @@
         private System.Windows.Forms.TabPage tpBuscar;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbPlanAnual;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCargaDetalle;
         private System.Windows.Forms.GroupBox gbCargaDetalle;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbCocinas;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.NumericUpDown numPorcentaje;
+        private System.Windows.Forms.RadioButton rbPorcentaje;
+        private System.Windows.Forms.RadioButton rbUnidades;
+        private System.Windows.Forms.DataGridView dgvDatos;
         private System.Windows.Forms.Panel panelAcciones;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label label6;
@@ -775,14 +799,15 @@
         private System.Windows.Forms.Button btnRestar;
         private System.Windows.Forms.Button btnSumar;
         private System.Windows.Forms.GroupBox gbDetalleGrilla;
-        private System.Windows.Forms.Button btnCargar;
+        private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.GroupBox gbCantidades;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.Label label9;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbMes;
+        private System.Windows.Forms.TextBox txtRestaPlanificar;
+        private System.Windows.Forms.TextBox txtCantPlanificada;
+        private System.Windows.Forms.TextBox txtCantAPlanificar;
+        private System.Windows.Forms.NumericUpDown numUnidades;
     }
 }

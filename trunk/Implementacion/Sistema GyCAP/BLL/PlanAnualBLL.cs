@@ -24,7 +24,12 @@ namespace GyCAP.BLL
         {
             DAL.PlanAnualDAL.ObtenerTodos(ds);
         }
-        
+        //Metodo que se llama desde el formulario de plan mensual
+        public static int ObtenerTodos(int anio, string mes)
+        {
+           return DAL.PlanAnualDAL.ObtenerCantidad(anio,mes);
+        }
+
         //Insertar
         public static IList<Entidades.DetallePlanAnual> Insertar(Entidades.PlanAnual planAnual, IList<Entidades.DetallePlanAnual> detalle)
         {
