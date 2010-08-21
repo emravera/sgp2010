@@ -71,8 +71,8 @@
             this.lvTurnos = new System.Windows.Forms.ListView();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lblHorasSemanaExtendido = new System.Windows.Forms.Label();
+            this.lblHorasSemanaNormal = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.cbSector = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbTipo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
@@ -549,14 +549,12 @@
             // 
             // gbDatos
             // 
-            this.gbDatos.Controls.Add(this.nudHorasExtendido);
-            this.gbDatos.Controls.Add(this.nudHorasNormal);
             this.gbDatos.Controls.Add(this.cbActivo);
             this.gbDatos.Controls.Add(this.lvTurnos);
             this.gbDatos.Controls.Add(this.label13);
             this.gbDatos.Controls.Add(this.label12);
-            this.gbDatos.Controls.Add(this.label11);
-            this.gbDatos.Controls.Add(this.label10);
+            this.gbDatos.Controls.Add(this.lblHorasSemanaExtendido);
+            this.gbDatos.Controls.Add(this.lblHorasSemanaNormal);
             this.gbDatos.Controls.Add(this.label9);
             this.gbDatos.Controls.Add(this.cbSector);
             this.gbDatos.Controls.Add(this.cbTipo);
@@ -567,6 +565,8 @@
             this.gbDatos.Controls.Add(this.txtNombre);
             this.gbDatos.Controls.Add(this.label4);
             this.gbDatos.Controls.Add(this.label3);
+            this.gbDatos.Controls.Add(this.nudHorasNormal);
+            this.gbDatos.Controls.Add(this.nudHorasExtendido);
             this.gbDatos.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbDatos.Location = new System.Drawing.Point(3, 3);
             this.gbDatos.Name = "gbDatos";
@@ -590,9 +590,8 @@
             0,
             0});
             this.nudHorasExtendido.Name = "nudHorasExtendido";
-            this.nudHorasExtendido.Size = new System.Drawing.Size(86, 21);
+            this.nudHorasExtendido.Size = new System.Drawing.Size(151, 21);
             this.nudHorasExtendido.TabIndex = 10;
-            this.nudHorasExtendido.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // nudHorasNormal
             // 
@@ -609,9 +608,8 @@
             0,
             0});
             this.nudHorasNormal.Name = "nudHorasNormal";
-            this.nudHorasNormal.Size = new System.Drawing.Size(86, 21);
+            this.nudHorasNormal.Size = new System.Drawing.Size(151, 21);
             this.nudHorasNormal.TabIndex = 8;
-            this.nudHorasNormal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // cbActivo
             // 
@@ -654,23 +652,25 @@
             this.label12.TabIndex = 16;
             this.label12.Text = "Estado:";
             // 
-            // label11
+            // lblHorasSemanaExtendido
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(493, 55);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(59, 13);
-            this.label11.TabIndex = 15;
-            this.label11.Text = "hs/semana";
+            this.lblHorasSemanaExtendido.AutoSize = true;
+            this.lblHorasSemanaExtendido.BackColor = System.Drawing.Color.White;
+            this.lblHorasSemanaExtendido.Location = new System.Drawing.Point(467, 56);
+            this.lblHorasSemanaExtendido.Name = "lblHorasSemanaExtendido";
+            this.lblHorasSemanaExtendido.Size = new System.Drawing.Size(59, 13);
+            this.lblHorasSemanaExtendido.TabIndex = 15;
+            this.lblHorasSemanaExtendido.Text = "hs/semana";
             // 
-            // label10
+            // lblHorasSemanaNormal
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(493, 26);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(59, 13);
-            this.label10.TabIndex = 14;
-            this.label10.Text = "hs/semana";
+            this.lblHorasSemanaNormal.AutoSize = true;
+            this.lblHorasSemanaNormal.BackColor = System.Drawing.Color.White;
+            this.lblHorasSemanaNormal.Location = new System.Drawing.Point(467, 27);
+            this.lblHorasSemanaNormal.Name = "lblHorasSemanaNormal";
+            this.lblHorasSemanaNormal.Size = new System.Drawing.Size(59, 13);
+            this.lblHorasSemanaNormal.TabIndex = 14;
+            this.lblHorasSemanaNormal.Text = "hs/semana";
             // 
             // label9
             // 
@@ -916,8 +916,8 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblHorasSemanaExtendido;
+        private System.Windows.Forms.Label lblHorasSemanaNormal;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ListView lvTurnos;
         private System.Windows.Forms.Label label13;
