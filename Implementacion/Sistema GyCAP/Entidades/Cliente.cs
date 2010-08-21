@@ -13,6 +13,8 @@ namespace GyCAP.Entidades
         private DateTime fechaAlta;
         private DateTime fechaBaja;
         private string motivoBaja;
+        private string mail;
+        private string estado;
 
         public int Codigo
         {
@@ -26,7 +28,6 @@ namespace GyCAP.Entidades
             set { razonSocial = value; }
         }
        
-
         public string Telefono
         {
             get { return telefono; }
@@ -51,6 +52,16 @@ namespace GyCAP.Entidades
             set { motivoBaja = value; }
         }
 
+        public string Mail
+        {
+            get { return mail; }
+            set { mail = value; }
+        }
 
+        public string Estado
+        {
+            get { return estado; }
+            set { estado = value; }
+        }
     }
 }
