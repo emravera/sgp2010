@@ -106,7 +106,6 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-
         //ELIMINACION
         //Metodo que verifica que no este usado en otro lugar
         public static bool PuedeEliminarse(long codigo)
