@@ -506,6 +506,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     panelAcciones.Enabled = true;
+                    panelImagen.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
                     tcConjunto.SelectedTab = tpDatos;
                     txtCodigo.Focus();
@@ -534,6 +535,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     panelAcciones.Enabled = true;
+                    panelImagen.Enabled = true;
                     estadoInterface = estadoUI.nuevoExterno;
                     tcConjunto.SelectedTab = tpDatos;
                     txtCodigo.Focus();
@@ -553,6 +555,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
                     panelAcciones.Enabled = false;
+                    panelImagen.Enabled = false;
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.consultar;
                     tcConjunto.SelectedTab = tpDatos;
@@ -576,6 +579,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     panelAcciones.Enabled = true;
+                    panelImagen.Enabled = true;
                     estadoInterface = estadoUI.modificar;
                     tcConjunto.SelectedTab = tpDatos;
                     txtCodigo.Focus();
@@ -788,6 +792,18 @@ namespace GyCAP.UI.EstructuraProducto
             if (sender.GetType().Equals(txtNombre.GetType())) { (sender as TextBox).SelectAll(); }
             if (sender.GetType().Equals(txtDescripcion.GetType())) { (sender as RichTextBox).SelectAll(); }
             if (sender.GetType().Equals(nudCantidad.GetType())) { (sender as NumericUpDown).Select(0, 20); }
+        }
+
+        private void button_MouseDown(object sender, MouseEventArgs e)
+        {
+            Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
+            (sender as Button).Location = punto;
+        }
+
+        private void button_MouseUp(object sender, MouseEventArgs e)
+        {
+            Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
+            (sender as Button).Location = punto;
         }
 
         #endregion 

@@ -68,6 +68,7 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.chkCostoFijo = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.nudCosto = new System.Windows.Forms.NumericUpDown();
             this.txtCodigo = new System.Windows.Forms.TextBox();
@@ -87,7 +88,6 @@
             this.nudCantidad = new System.Windows.Forms.NumericUpDown();
             this.slideAgregar = new SlickInterface.Slide();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
-            this.chkCostoFijo = new System.Windows.Forms.CheckBox();
             this.panelImagen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
             this.panelAcciones.SuspendLayout();
@@ -113,7 +113,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(80, 41);
+            this.txtNombre.Location = new System.Drawing.Point(76, 41);
             this.txtNombre.MaxLength = 80;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(287, 20);
@@ -123,9 +123,9 @@
             // btnQuitarImagen
             // 
             this.btnQuitarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnQuitarImagen.Location = new System.Drawing.Point(6, 132);
+            this.btnQuitarImagen.Location = new System.Drawing.Point(101, 190);
             this.btnQuitarImagen.Name = "btnQuitarImagen";
-            this.btnQuitarImagen.Size = new System.Drawing.Size(86, 22);
+            this.btnQuitarImagen.Size = new System.Drawing.Size(80, 22);
             this.btnQuitarImagen.TabIndex = 12;
             this.btnQuitarImagen.Text = "&Quitar";
             this.btnQuitarImagen.UseVisualStyleBackColor = true;
@@ -134,7 +134,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 9);
+            this.label5.Location = new System.Drawing.Point(3, 2);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 13);
             this.label5.TabIndex = 2;
@@ -143,9 +143,9 @@
             // btnImagen
             // 
             this.btnImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImagen.Location = new System.Drawing.Point(6, 104);
+            this.btnImagen.Location = new System.Drawing.Point(6, 190);
             this.btnImagen.Name = "btnImagen";
-            this.btnImagen.Size = new System.Drawing.Size(86, 22);
+            this.btnImagen.Size = new System.Drawing.Size(80, 22);
             this.btnImagen.TabIndex = 11;
             this.btnImagen.Text = "&Seleccionar";
             this.btnImagen.UseVisualStyleBackColor = true;
@@ -158,18 +158,18 @@
             this.panelImagen.Controls.Add(this.label5);
             this.panelImagen.Controls.Add(this.btnImagen);
             this.panelImagen.Controls.Add(this.pbImagen);
-            this.panelImagen.Location = new System.Drawing.Point(384, 26);
+            this.panelImagen.Location = new System.Drawing.Point(370, 15);
             this.panelImagen.Name = "panelImagen";
-            this.panelImagen.Size = new System.Drawing.Size(102, 171);
+            this.panelImagen.Size = new System.Drawing.Size(189, 219);
             this.panelImagen.TabIndex = 12;
             // 
             // pbImagen
             // 
             this.pbImagen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbImagen.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.sinimagen;
-            this.pbImagen.Location = new System.Drawing.Point(5, 26);
+            this.pbImagen.Location = new System.Drawing.Point(5, 18);
             this.pbImagen.Name = "pbImagen";
-            this.pbImagen.Size = new System.Drawing.Size(86, 72);
+            this.pbImagen.Size = new System.Drawing.Size(176, 166);
             this.pbImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbImagen.TabIndex = 0;
             this.pbImagen.TabStop = false;
@@ -183,7 +183,7 @@
             this.panelAcciones.Controls.Add(this.btnSumar);
             this.panelAcciones.Controls.Add(this.btnDelete);
             this.panelAcciones.Controls.Add(this.btnNew);
-            this.panelAcciones.Location = new System.Drawing.Point(413, 37);
+            this.panelAcciones.Location = new System.Drawing.Point(481, 37);
             this.panelAcciones.Name = "panelAcciones";
             this.panelAcciones.Size = new System.Drawing.Size(73, 148);
             this.panelAcciones.TabIndex = 11;
@@ -213,6 +213,8 @@
             // btnRestar
             // 
             this.btnRestar.FlatAppearance.BorderSize = 0;
+            this.btnRestar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnRestar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Restar_Gris_25;
             this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -223,10 +225,14 @@
             this.btnRestar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRestar.UseVisualStyleBackColor = true;
             this.btnRestar.Click += new System.EventHandler(this.btnRestar_Click);
+            this.btnRestar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnRestar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnSumar
             // 
             this.btnSumar.FlatAppearance.BorderSize = 0;
+            this.btnSumar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnSumar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSumar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Sumar_Gris_25;
             this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -237,10 +243,14 @@
             this.btnSumar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSumar.UseVisualStyleBackColor = true;
             this.btnSumar.Click += new System.EventHandler(this.btnSumar_Click);
+            this.btnSumar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnSumar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnDelete
             // 
             this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -251,10 +261,14 @@
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnDelete.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnNew
             // 
             this.btnNew.FlatAppearance.BorderSize = 0;
+            this.btnNew.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnNew.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_25;
             this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -264,6 +278,8 @@
             this.btnNew.TabIndex = 14;
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            this.btnNew.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnNew.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // toolStripSeparator1
             // 
@@ -289,7 +305,7 @@
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.tsMenu.Size = new System.Drawing.Size(524, 50);
+            this.tsMenu.Size = new System.Drawing.Size(582, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
@@ -350,7 +366,7 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(80, 179);
+            this.txtDescripcion.Location = new System.Drawing.Point(76, 179);
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(287, 55);
@@ -372,7 +388,7 @@
             this.slideControl.Location = new System.Drawing.Point(3, 3);
             this.slideControl.Name = "slideControl";
             this.slideControl.Selected = null;
-            this.slideControl.Size = new System.Drawing.Size(509, 240);
+            this.slideControl.Size = new System.Drawing.Size(571, 248);
             this.slideControl.SlideSpeed = 250;
             this.slideControl.TabIndex = 8;
             // 
@@ -397,7 +413,7 @@
             this.dgvDetalleSubconjunto.ReadOnly = true;
             this.dgvDetalleSubconjunto.RowHeadersVisible = false;
             this.dgvDetalleSubconjunto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetalleSubconjunto.Size = new System.Drawing.Size(404, 186);
+            this.dgvDetalleSubconjunto.Size = new System.Drawing.Size(472, 186);
             this.dgvDetalleSubconjunto.TabIndex = 13;
             this.dgvDetalleSubconjunto.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetalleSubconjunto_CellFormatting);
             // 
@@ -409,7 +425,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(510, 75);
+            this.groupBox1.Size = new System.Drawing.Size(568, 75);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
@@ -449,7 +465,7 @@
             this.dgvSubconjuntos.ReadOnly = true;
             this.dgvSubconjuntos.RowHeadersVisible = false;
             this.dgvSubconjuntos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSubconjuntos.Size = new System.Drawing.Size(492, 403);
+            this.dgvSubconjuntos.Size = new System.Drawing.Size(550, 403);
             this.dgvSubconjuntos.TabIndex = 4;
             this.dgvSubconjuntos.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSubconjuntos_RowEnter);
             this.dgvSubconjuntos.DoubleClick += new System.EventHandler(this.dgvSubconjuntos_DoubleClick);
@@ -477,7 +493,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(528, 586);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(586, 586);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
             // tcSubconjunto
@@ -494,7 +510,7 @@
             this.tcSubconjunto.Name = "tcSubconjunto";
             this.tcSubconjunto.Padding = new System.Drawing.Point(0, 0);
             this.tcSubconjunto.SelectedIndex = 0;
-            this.tcSubconjunto.Size = new System.Drawing.Size(524, 530);
+            this.tcSubconjunto.Size = new System.Drawing.Size(582, 530);
             this.tcSubconjunto.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcSubconjunto.TabIndex = 8;
             // 
@@ -505,7 +521,7 @@
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(516, 521);
+            this.tpBuscar.Size = new System.Drawing.Size(574, 521);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
@@ -516,7 +532,7 @@
             this.groupBox2.Location = new System.Drawing.Point(3, 84);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(9);
-            this.groupBox2.Size = new System.Drawing.Size(510, 434);
+            this.groupBox2.Size = new System.Drawing.Size(568, 434);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Listado de Subconjuntos";
@@ -531,7 +547,7 @@
             this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDatos.Size = new System.Drawing.Size(516, 521);
+            this.tpDatos.Size = new System.Drawing.Size(574, 521);
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
@@ -539,9 +555,9 @@
             // 
             this.groupBox3.Controls.Add(this.dgvDetalleSubconjunto);
             this.groupBox3.Controls.Add(this.panelAcciones);
-            this.groupBox3.Location = new System.Drawing.Point(6, 253);
+            this.groupBox3.Location = new System.Drawing.Point(6, 254);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(497, 205);
+            this.groupBox3.Size = new System.Drawing.Size(562, 205);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Piezas que forman el subconjunto";
@@ -553,13 +569,13 @@
             this.gbGuardarCancelar.Location = new System.Drawing.Point(6, 459);
             this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
             this.gbGuardarCancelar.Name = "gbGuardarCancelar";
-            this.gbGuardarCancelar.Size = new System.Drawing.Size(494, 57);
+            this.gbGuardarCancelar.Size = new System.Drawing.Size(562, 57);
             this.gbGuardarCancelar.TabIndex = 1;
             this.gbGuardarCancelar.TabStop = false;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(423, 20);
+            this.btnVolver.Location = new System.Drawing.Point(484, 20);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(64, 26);
             this.btnVolver.TabIndex = 19;
@@ -569,7 +585,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(354, 20);
+            this.btnGuardar.Location = new System.Drawing.Point(415, 20);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(64, 26);
             this.btnGuardar.TabIndex = 18;
@@ -594,13 +610,24 @@
             this.gbDatos.Controls.Add(this.label2);
             this.gbDatos.Controls.Add(this.label3);
             this.gbDatos.Controls.Add(this.slideDatos);
-            this.gbDatos.Location = new System.Drawing.Point(5, -2);
+            this.gbDatos.Location = new System.Drawing.Point(5, -1);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(497, 245);
+            this.gbDatos.Size = new System.Drawing.Size(563, 244);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del subconjunto";
+            // 
+            // chkCostoFijo
+            // 
+            this.chkCostoFijo.AutoSize = true;
+            this.chkCostoFijo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkCostoFijo.Location = new System.Drawing.Point(291, 154);
+            this.chkCostoFijo.Name = "chkCostoFijo";
+            this.chkCostoFijo.Size = new System.Drawing.Size(72, 17);
+            this.chkCostoFijo.TabIndex = 18;
+            this.chkCostoFijo.Text = "Costo fijo";
+            this.chkCostoFijo.UseVisualStyleBackColor = true;
             // 
             // label13
             // 
@@ -619,7 +646,7 @@
             0,
             0,
             65536});
-            this.nudCosto.Location = new System.Drawing.Point(80, 153);
+            this.nudCosto.Location = new System.Drawing.Point(76, 153);
             this.nudCosto.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -633,7 +660,7 @@
             // 
             // txtCodigo
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(80, 15);
+            this.txtCodigo.Location = new System.Drawing.Point(76, 15);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(287, 20);
             this.txtCodigo.TabIndex = 4;
@@ -644,7 +671,7 @@
             this.cbPlano.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPlano.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbPlano.FormattingEnabled = true;
-            this.cbPlano.Location = new System.Drawing.Point(80, 125);
+            this.cbPlano.Location = new System.Drawing.Point(76, 125);
             this.cbPlano.Name = "cbPlano";
             this.cbPlano.Size = new System.Drawing.Size(287, 21);
             this.cbPlano.TabIndex = 9;
@@ -654,7 +681,7 @@
             this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEstado.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(80, 96);
+            this.cbEstado.Location = new System.Drawing.Point(76, 96);
             this.cbEstado.Name = "cbEstado";
             this.cbEstado.Size = new System.Drawing.Size(287, 21);
             this.cbEstado.TabIndex = 8;
@@ -690,7 +717,7 @@
             // 
             this.slideDatos.Location = new System.Drawing.Point(-3, 0);
             this.slideDatos.Name = "slideDatos";
-            this.slideDatos.Size = new System.Drawing.Size(509, 249);
+            this.slideDatos.Size = new System.Drawing.Size(572, 251);
             this.slideDatos.SlideControl = null;
             this.slideDatos.TabIndex = 9;
             // 
@@ -700,7 +727,7 @@
             this.tpAgregar.Controls.Add(this.slideAgregar);
             this.tpAgregar.Location = new System.Drawing.Point(4, 5);
             this.tpAgregar.Name = "tpAgregar";
-            this.tpAgregar.Size = new System.Drawing.Size(516, 521);
+            this.tpAgregar.Size = new System.Drawing.Size(574, 521);
             this.tpAgregar.TabIndex = 2;
             this.tpAgregar.UseVisualStyleBackColor = true;
             // 
@@ -708,9 +735,9 @@
             // 
             this.gbPD.Controls.Add(this.dgvPiezasDisponibles);
             this.gbPD.Controls.Add(this.panel1);
-            this.gbPD.Location = new System.Drawing.Point(4, 3);
+            this.gbPD.Location = new System.Drawing.Point(4, 1);
             this.gbPD.Name = "gbPD";
-            this.gbPD.Size = new System.Drawing.Size(497, 227);
+            this.gbPD.Size = new System.Drawing.Size(564, 240);
             this.gbPD.TabIndex = 14;
             this.gbPD.TabStop = false;
             this.gbPD.Text = "Piezas Disponibles";
@@ -727,7 +754,7 @@
             this.dgvPiezasDisponibles.ReadOnly = true;
             this.dgvPiezasDisponibles.RowHeadersVisible = false;
             this.dgvPiezasDisponibles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPiezasDisponibles.Size = new System.Drawing.Size(409, 208);
+            this.dgvPiezasDisponibles.Size = new System.Drawing.Size(460, 221);
             this.dgvPiezasDisponibles.TabIndex = 20;
             this.dgvPiezasDisponibles.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPiezasDisponibles_CellFormatting);
             // 
@@ -738,7 +765,7 @@
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.btnHecho);
             this.panel1.Controls.Add(this.nudCantidad);
-            this.panel1.Location = new System.Drawing.Point(418, 54);
+            this.panel1.Location = new System.Drawing.Point(482, 54);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(73, 127);
             this.panel1.TabIndex = 6;
@@ -794,7 +821,7 @@
             // 
             this.slideAgregar.Location = new System.Drawing.Point(3, 3);
             this.slideAgregar.Name = "slideAgregar";
-            this.slideAgregar.Size = new System.Drawing.Size(509, 240);
+            this.slideAgregar.Size = new System.Drawing.Size(568, 240);
             this.slideAgregar.SlideControl = null;
             this.slideAgregar.TabIndex = 15;
             // 
@@ -803,22 +830,11 @@
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk);
             // 
-            // chkCostoFijo
-            // 
-            this.chkCostoFijo.AutoSize = true;
-            this.chkCostoFijo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkCostoFijo.Location = new System.Drawing.Point(295, 154);
-            this.chkCostoFijo.Name = "chkCostoFijo";
-            this.chkCostoFijo.Size = new System.Drawing.Size(72, 17);
-            this.chkCostoFijo.TabIndex = 18;
-            this.chkCostoFijo.Text = "Costo fijo";
-            this.chkCostoFijo.UseVisualStyleBackColor = true;
-            // 
             // frmSubconjunto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(528, 586);
+            this.ClientSize = new System.Drawing.Size(586, 586);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

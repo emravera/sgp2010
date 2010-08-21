@@ -47,6 +47,7 @@
             this.gbPartesConjunto = new System.Windows.Forms.GroupBox();
             this.dgvPartes = new System.Windows.Forms.DataGridView();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.chkCostoFijo = new System.Windows.Forms.CheckBox();
             this.nudCosto = new System.Windows.Forms.NumericUpDown();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -103,7 +104,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
-            this.chkCostoFijo = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcConjunto.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -144,7 +144,7 @@
             this.txtNombre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNombre.MaxLength = 80;
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(305, 20);
+            this.txtNombre.Size = new System.Drawing.Size(278, 20);
             this.txtNombre.TabIndex = 6;
             this.txtNombre.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -171,7 +171,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(537, 597);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(586, 597);
             this.tableLayoutPanel1.TabIndex = 9;
             // 
             // tcConjunto
@@ -189,7 +189,7 @@
             this.tcConjunto.Name = "tcConjunto";
             this.tcConjunto.Padding = new System.Drawing.Point(0, 0);
             this.tcConjunto.SelectedIndex = 0;
-            this.tcConjunto.Size = new System.Drawing.Size(533, 541);
+            this.tcConjunto.Size = new System.Drawing.Size(582, 541);
             this.tcConjunto.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcConjunto.TabIndex = 8;
             // 
@@ -201,7 +201,7 @@
             this.tpBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tpBuscar.Size = new System.Drawing.Size(525, 532);
+            this.tpBuscar.Size = new System.Drawing.Size(574, 532);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
@@ -213,7 +213,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(9);
-            this.groupBox2.Size = new System.Drawing.Size(519, 448);
+            this.groupBox2.Size = new System.Drawing.Size(568, 448);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Listado de Conjuntos";
@@ -232,7 +232,7 @@
             this.dgvConjuntos.ReadOnly = true;
             this.dgvConjuntos.RowHeadersVisible = false;
             this.dgvConjuntos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvConjuntos.Size = new System.Drawing.Size(501, 417);
+            this.dgvConjuntos.Size = new System.Drawing.Size(550, 417);
             this.dgvConjuntos.TabIndex = 0;
             this.dgvConjuntos.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConjuntos_RowEnter);
             this.dgvConjuntos.DoubleClick += new System.EventHandler(this.dgvConjuntos_DoubleClick);
@@ -248,7 +248,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(519, 76);
+            this.groupBox1.Size = new System.Drawing.Size(568, 76);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
@@ -256,7 +256,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 30);
+            this.label10.Location = new System.Drawing.Point(30, 30);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(48, 13);
             this.label10.TabIndex = 6;
@@ -266,7 +266,7 @@
             // 
             this.btnBuscar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(410, 24);
+            this.btnBuscar.Location = new System.Drawing.Point(410, 25);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
@@ -278,7 +278,7 @@
             // 
             // txtNombreBuscar
             // 
-            this.txtNombreBuscar.Location = new System.Drawing.Point(61, 28);
+            this.txtNombreBuscar.Location = new System.Drawing.Point(85, 28);
             this.txtNombreBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
@@ -298,7 +298,7 @@
             this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tpDatos.Size = new System.Drawing.Size(525, 532);
+            this.tpDatos.Size = new System.Drawing.Size(574, 532);
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
@@ -307,9 +307,9 @@
             this.groupBox3.Controls.Add(this.btnDatos);
             this.groupBox3.Controls.Add(this.btnPiezas);
             this.groupBox3.Controls.Add(this.btnSubconjuntos);
-            this.groupBox3.Location = new System.Drawing.Point(6, 472);
+            this.groupBox3.Location = new System.Drawing.Point(7, 472);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(350, 57);
+            this.groupBox3.Size = new System.Drawing.Size(396, 57);
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
             // 
@@ -317,7 +317,7 @@
             // 
             this.btnDatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDatos.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.arriba1_15;
-            this.btnDatos.Location = new System.Drawing.Point(19, 20);
+            this.btnDatos.Location = new System.Drawing.Point(21, 20);
             this.btnDatos.Name = "btnDatos";
             this.btnDatos.Size = new System.Drawing.Size(100, 25);
             this.btnDatos.TabIndex = 15;
@@ -330,7 +330,7 @@
             // 
             this.btnPiezas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPiezas.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.derecha1_15;
-            this.btnPiezas.Location = new System.Drawing.Point(231, 20);
+            this.btnPiezas.Location = new System.Drawing.Point(267, 20);
             this.btnPiezas.Name = "btnPiezas";
             this.btnPiezas.Size = new System.Drawing.Size(100, 25);
             this.btnPiezas.TabIndex = 17;
@@ -343,7 +343,7 @@
             // 
             this.btnSubconjuntos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubconjuntos.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.derecha1_15;
-            this.btnSubconjuntos.Location = new System.Drawing.Point(125, 20);
+            this.btnSubconjuntos.Location = new System.Drawing.Point(145, 20);
             this.btnSubconjuntos.Name = "btnSubconjuntos";
             this.btnSubconjuntos.Size = new System.Drawing.Size(100, 25);
             this.btnSubconjuntos.TabIndex = 16;
@@ -357,7 +357,7 @@
             this.gbPartesConjunto.Controls.Add(this.dgvPartes);
             this.gbPartesConjunto.Location = new System.Drawing.Point(4, 244);
             this.gbPartesConjunto.Name = "gbPartesConjunto";
-            this.gbPartesConjunto.Size = new System.Drawing.Size(516, 225);
+            this.gbPartesConjunto.Size = new System.Drawing.Size(562, 225);
             this.gbPartesConjunto.TabIndex = 10;
             this.gbPartesConjunto.TabStop = false;
             this.gbPartesConjunto.Text = "Partes del conjunto";
@@ -373,7 +373,7 @@
             this.dgvPartes.Name = "dgvPartes";
             this.dgvPartes.RowHeadersVisible = false;
             this.dgvPartes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPartes.Size = new System.Drawing.Size(510, 206);
+            this.dgvPartes.Size = new System.Drawing.Size(556, 206);
             this.dgvPartes.TabIndex = 14;
             // 
             // gbDatos
@@ -396,10 +396,21 @@
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
             this.gbDatos.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbDatos.Size = new System.Drawing.Size(516, 235);
+            this.gbDatos.Size = new System.Drawing.Size(562, 235);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del conjunto";
+            // 
+            // chkCostoFijo
+            // 
+            this.chkCostoFijo.AutoSize = true;
+            this.chkCostoFijo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkCostoFijo.Location = new System.Drawing.Point(287, 131);
+            this.chkCostoFijo.Name = "chkCostoFijo";
+            this.chkCostoFijo.Size = new System.Drawing.Size(72, 17);
+            this.chkCostoFijo.TabIndex = 21;
+            this.chkCostoFijo.Text = "Costo fijo";
+            this.chkCostoFijo.UseVisualStyleBackColor = true;
             // 
             // nudCosto
             // 
@@ -416,7 +427,7 @@
             0,
             0});
             this.nudCosto.Name = "nudCosto";
-            this.nudCosto.Size = new System.Drawing.Size(227, 20);
+            this.nudCosto.Size = new System.Drawing.Size(200, 20);
             this.nudCosto.TabIndex = 10;
             this.nudCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCosto.Enter += new System.EventHandler(this.control_Enter);
@@ -455,7 +466,7 @@
             this.cbEstado.FormattingEnabled = true;
             this.cbEstado.Location = new System.Drawing.Point(81, 74);
             this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(305, 21);
+            this.cbEstado.Size = new System.Drawing.Size(278, 21);
             this.cbEstado.TabIndex = 8;
             // 
             // cbPlano
@@ -465,14 +476,14 @@
             this.cbPlano.FormattingEnabled = true;
             this.cbPlano.Location = new System.Drawing.Point(81, 103);
             this.cbPlano.Name = "cbPlano";
-            this.cbPlano.Size = new System.Drawing.Size(305, 21);
+            this.cbPlano.Size = new System.Drawing.Size(278, 21);
             this.cbPlano.TabIndex = 9;
             // 
             // txtCodigo
             // 
             this.txtCodigo.Location = new System.Drawing.Point(81, 20);
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(305, 20);
+            this.txtCodigo.Size = new System.Drawing.Size(278, 20);
             this.txtCodigo.TabIndex = 4;
             this.txtCodigo.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -491,7 +502,7 @@
             this.txtDescripcion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(305, 49);
+            this.txtDescripcion.Size = new System.Drawing.Size(278, 49);
             this.txtDescripcion.TabIndex = 11;
             this.txtDescripcion.Text = "";
             this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
@@ -512,19 +523,19 @@
             this.panelImagen.Controls.Add(this.label5);
             this.panelImagen.Controls.Add(this.btnImagen);
             this.panelImagen.Controls.Add(this.pbImagen);
-            this.panelImagen.Location = new System.Drawing.Point(404, 28);
+            this.panelImagen.Location = new System.Drawing.Point(364, 20);
             this.panelImagen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelImagen.Name = "panelImagen";
-            this.panelImagen.Size = new System.Drawing.Size(102, 163);
+            this.panelImagen.Size = new System.Drawing.Size(192, 208);
             this.panelImagen.TabIndex = 12;
             // 
             // btnQuitarImagen
             // 
             this.btnQuitarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnQuitarImagen.Location = new System.Drawing.Point(5, 127);
+            this.btnQuitarImagen.Location = new System.Drawing.Point(105, 180);
             this.btnQuitarImagen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnQuitarImagen.Name = "btnQuitarImagen";
-            this.btnQuitarImagen.Size = new System.Drawing.Size(86, 22);
+            this.btnQuitarImagen.Size = new System.Drawing.Size(80, 22);
             this.btnQuitarImagen.TabIndex = 13;
             this.btnQuitarImagen.Text = "&Quitar";
             this.btnQuitarImagen.UseVisualStyleBackColor = true;
@@ -533,7 +544,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 7);
+            this.label5.Location = new System.Drawing.Point(3, 1);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 13);
             this.label5.TabIndex = 2;
@@ -542,10 +553,10 @@
             // btnImagen
             // 
             this.btnImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImagen.Location = new System.Drawing.Point(5, 101);
+            this.btnImagen.Location = new System.Drawing.Point(6, 180);
             this.btnImagen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnImagen.Name = "btnImagen";
-            this.btnImagen.Size = new System.Drawing.Size(86, 22);
+            this.btnImagen.Size = new System.Drawing.Size(80, 22);
             this.btnImagen.TabIndex = 12;
             this.btnImagen.Text = "&Seleccionar";
             this.btnImagen.UseVisualStyleBackColor = true;
@@ -555,10 +566,10 @@
             // 
             this.pbImagen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbImagen.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.sinimagen;
-            this.pbImagen.Location = new System.Drawing.Point(5, 24);
+            this.pbImagen.Location = new System.Drawing.Point(5, 16);
             this.pbImagen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pbImagen.Name = "pbImagen";
-            this.pbImagen.Size = new System.Drawing.Size(86, 72);
+            this.pbImagen.Size = new System.Drawing.Size(180, 160);
             this.pbImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbImagen.TabIndex = 0;
             this.pbImagen.TabStop = false;
@@ -567,7 +578,7 @@
             // 
             this.gbGuardarCancelar.Controls.Add(this.btnVolver);
             this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
-            this.gbGuardarCancelar.Location = new System.Drawing.Point(360, 473);
+            this.gbGuardarCancelar.Location = new System.Drawing.Point(407, 472);
             this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
             this.gbGuardarCancelar.Name = "gbGuardarCancelar";
             this.gbGuardarCancelar.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -602,7 +613,7 @@
             this.slideDatos.Location = new System.Drawing.Point(3, 5);
             this.slideDatos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.slideDatos.Name = "slideDatos";
-            this.slideDatos.Size = new System.Drawing.Size(517, 468);
+            this.slideDatos.Size = new System.Drawing.Size(568, 468);
             this.slideDatos.SlideControl = null;
             this.slideDatos.TabIndex = 9;
             // 
@@ -612,7 +623,7 @@
             this.slideControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.slideControl.Name = "slideControl";
             this.slideControl.Selected = null;
-            this.slideControl.Size = new System.Drawing.Size(522, 468);
+            this.slideControl.Size = new System.Drawing.Size(571, 468);
             this.slideControl.SlideSpeed = 250;
             this.slideControl.TabIndex = 8;
             // 
@@ -623,7 +634,7 @@
             this.tpSubconjuntos.Controls.Add(this.slideSubconjuntos);
             this.tpSubconjuntos.Location = new System.Drawing.Point(4, 5);
             this.tpSubconjuntos.Name = "tpSubconjuntos";
-            this.tpSubconjuntos.Size = new System.Drawing.Size(525, 532);
+            this.tpSubconjuntos.Size = new System.Drawing.Size(574, 532);
             this.tpSubconjuntos.TabIndex = 2;
             this.tpSubconjuntos.UseVisualStyleBackColor = true;
             // 
@@ -631,9 +642,9 @@
             // 
             this.gbSCC.Controls.Add(this.panelAccionesSubconjunto);
             this.gbSCC.Controls.Add(this.dgvSubconjuntosConjunto);
-            this.gbSCC.Location = new System.Drawing.Point(3, 244);
+            this.gbSCC.Location = new System.Drawing.Point(3, 238);
             this.gbSCC.Name = "gbSCC";
-            this.gbSCC.Size = new System.Drawing.Size(514, 228);
+            this.gbSCC.Size = new System.Drawing.Size(565, 228);
             this.gbSCC.TabIndex = 16;
             this.gbSCC.TabStop = false;
             this.gbSCC.Text = "Subconjuntos que forman el conjunto";
@@ -644,7 +655,7 @@
             this.panelAccionesSubconjunto.Controls.Add(this.btnRestarSubconjunto);
             this.panelAccionesSubconjunto.Controls.Add(this.btnSumarSubconjunto);
             this.panelAccionesSubconjunto.Controls.Add(this.btnDeleteSubconjunto);
-            this.panelAccionesSubconjunto.Location = new System.Drawing.Point(435, 43);
+            this.panelAccionesSubconjunto.Location = new System.Drawing.Point(474, 43);
             this.panelAccionesSubconjunto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelAccionesSubconjunto.Name = "panelAccionesSubconjunto";
             this.panelAccionesSubconjunto.Size = new System.Drawing.Size(73, 148);
@@ -654,6 +665,8 @@
             // 
             this.btnRestarSubconjunto.AutoSize = true;
             this.btnRestarSubconjunto.FlatAppearance.BorderSize = 0;
+            this.btnRestarSubconjunto.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnRestarSubconjunto.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnRestarSubconjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestarSubconjunto.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Restar_Gris_25;
             this.btnRestarSubconjunto.Location = new System.Drawing.Point(5, 95);
@@ -665,11 +678,15 @@
             this.btnRestarSubconjunto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnRestarSubconjunto.UseVisualStyleBackColor = true;
             this.btnRestarSubconjunto.Click += new System.EventHandler(this.btnRestarSubconjunto_Click);
+            this.btnRestarSubconjunto.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnRestarSubconjunto.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnSumarSubconjunto
             // 
             this.btnSumarSubconjunto.AutoSize = true;
             this.btnSumarSubconjunto.FlatAppearance.BorderSize = 0;
+            this.btnSumarSubconjunto.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnSumarSubconjunto.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnSumarSubconjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSumarSubconjunto.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Sumar_Gris_25;
             this.btnSumarSubconjunto.Location = new System.Drawing.Point(4, 50);
@@ -681,11 +698,15 @@
             this.btnSumarSubconjunto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSumarSubconjunto.UseVisualStyleBackColor = true;
             this.btnSumarSubconjunto.Click += new System.EventHandler(this.btnSumarSubconjunto_Click);
+            this.btnSumarSubconjunto.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnSumarSubconjunto.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnDeleteSubconjunto
             // 
             this.btnDeleteSubconjunto.AutoSize = true;
             this.btnDeleteSubconjunto.FlatAppearance.BorderSize = 0;
+            this.btnDeleteSubconjunto.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnDeleteSubconjunto.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnDeleteSubconjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteSubconjunto.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
             this.btnDeleteSubconjunto.Location = new System.Drawing.Point(9, 2);
@@ -697,6 +718,8 @@
             this.btnDeleteSubconjunto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDeleteSubconjunto.UseVisualStyleBackColor = true;
             this.btnDeleteSubconjunto.Click += new System.EventHandler(this.btnDeleteSubconjunto_Click);
+            this.btnDeleteSubconjunto.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnDeleteSubconjunto.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // dgvSubconjuntosConjunto
             // 
@@ -711,7 +734,7 @@
             this.dgvSubconjuntosConjunto.ReadOnly = true;
             this.dgvSubconjuntosConjunto.RowHeadersVisible = false;
             this.dgvSubconjuntosConjunto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSubconjuntosConjunto.Size = new System.Drawing.Size(426, 209);
+            this.dgvSubconjuntosConjunto.Size = new System.Drawing.Size(451, 209);
             this.dgvSubconjuntosConjunto.TabIndex = 22;
             this.dgvSubconjuntosConjunto.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSubconjuntosConjunto_CellFormatting);
             // 
@@ -721,7 +744,7 @@
             this.gbSCD.Controls.Add(this.panelAgregarSubconjunto);
             this.gbSCD.Location = new System.Drawing.Point(4, 3);
             this.gbSCD.Name = "gbSCD";
-            this.gbSCD.Size = new System.Drawing.Size(513, 235);
+            this.gbSCD.Size = new System.Drawing.Size(564, 235);
             this.gbSCD.TabIndex = 14;
             this.gbSCD.TabStop = false;
             this.gbSCD.Text = "Subconjuntos disponibles";
@@ -739,7 +762,7 @@
             this.dgvSCDisponibles.ReadOnly = true;
             this.dgvSCDisponibles.RowHeadersVisible = false;
             this.dgvSCDisponibles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSCDisponibles.Size = new System.Drawing.Size(424, 216);
+            this.dgvSCDisponibles.Size = new System.Drawing.Size(450, 216);
             this.dgvSCDisponibles.TabIndex = 35;
             this.dgvSCDisponibles.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSCDisponibles_CellFormatting);
             // 
@@ -749,7 +772,7 @@
             this.panelAgregarSubconjunto.Controls.Add(this.btnAgregarSubconjunto);
             this.panelAgregarSubconjunto.Controls.Add(this.label8);
             this.panelAgregarSubconjunto.Controls.Add(this.nudCantidadSubconjunto);
-            this.panelAgregarSubconjunto.Location = new System.Drawing.Point(433, 57);
+            this.panelAgregarSubconjunto.Location = new System.Drawing.Point(474, 57);
             this.panelAgregarSubconjunto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelAgregarSubconjunto.Name = "panelAgregarSubconjunto";
             this.panelAgregarSubconjunto.Size = new System.Drawing.Size(73, 127);
@@ -793,7 +816,7 @@
             this.slideSubconjuntos.Location = new System.Drawing.Point(3, 2);
             this.slideSubconjuntos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.slideSubconjuntos.Name = "slideSubconjuntos";
-            this.slideSubconjuntos.Size = new System.Drawing.Size(517, 468);
+            this.slideSubconjuntos.Size = new System.Drawing.Size(571, 483);
             this.slideSubconjuntos.SlideControl = null;
             this.slideSubconjuntos.TabIndex = 15;
             // 
@@ -804,7 +827,7 @@
             this.tpPiezas.Controls.Add(this.slidePiezas);
             this.tpPiezas.Location = new System.Drawing.Point(4, 5);
             this.tpPiezas.Name = "tpPiezas";
-            this.tpPiezas.Size = new System.Drawing.Size(525, 532);
+            this.tpPiezas.Size = new System.Drawing.Size(574, 532);
             this.tpPiezas.TabIndex = 3;
             this.tpPiezas.UseVisualStyleBackColor = true;
             // 
@@ -812,9 +835,9 @@
             // 
             this.gbPC.Controls.Add(this.panelAccionesPieza);
             this.gbPC.Controls.Add(this.dgvPiezasConjunto);
-            this.gbPC.Location = new System.Drawing.Point(2, 244);
+            this.gbPC.Location = new System.Drawing.Point(2, 239);
             this.gbPC.Name = "gbPC";
-            this.gbPC.Size = new System.Drawing.Size(514, 228);
+            this.gbPC.Size = new System.Drawing.Size(566, 228);
             this.gbPC.TabIndex = 18;
             this.gbPC.TabStop = false;
             this.gbPC.Text = "Piezas que forman el conjunto";
@@ -825,7 +848,7 @@
             this.panelAccionesPieza.Controls.Add(this.btnRestarPieza);
             this.panelAccionesPieza.Controls.Add(this.btnSumarPieza);
             this.panelAccionesPieza.Controls.Add(this.btnDeletePieza);
-            this.panelAccionesPieza.Location = new System.Drawing.Point(435, 43);
+            this.panelAccionesPieza.Location = new System.Drawing.Point(474, 44);
             this.panelAccionesPieza.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelAccionesPieza.Name = "panelAccionesPieza";
             this.panelAccionesPieza.Size = new System.Drawing.Size(73, 148);
@@ -835,6 +858,8 @@
             // 
             this.btnRestarPieza.AutoSize = true;
             this.btnRestarPieza.FlatAppearance.BorderSize = 0;
+            this.btnRestarPieza.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnRestarPieza.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnRestarPieza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestarPieza.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Restar_Gris_25;
             this.btnRestarPieza.Location = new System.Drawing.Point(5, 95);
@@ -846,11 +871,15 @@
             this.btnRestarPieza.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnRestarPieza.UseVisualStyleBackColor = true;
             this.btnRestarPieza.Click += new System.EventHandler(this.btnRestarPieza_Click);
+            this.btnRestarPieza.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnRestarPieza.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnSumarPieza
             // 
             this.btnSumarPieza.AutoSize = true;
             this.btnSumarPieza.FlatAppearance.BorderSize = 0;
+            this.btnSumarPieza.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnSumarPieza.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnSumarPieza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSumarPieza.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Sumar_Gris_25;
             this.btnSumarPieza.Location = new System.Drawing.Point(-9, 51);
@@ -862,11 +891,15 @@
             this.btnSumarPieza.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSumarPieza.UseVisualStyleBackColor = true;
             this.btnSumarPieza.Click += new System.EventHandler(this.btnSumarPieza_Click);
+            this.btnSumarPieza.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnSumarPieza.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnDeletePieza
             // 
             this.btnDeletePieza.AutoSize = true;
             this.btnDeletePieza.FlatAppearance.BorderSize = 0;
+            this.btnDeletePieza.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnDeletePieza.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnDeletePieza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeletePieza.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
             this.btnDeletePieza.Location = new System.Drawing.Point(9, 3);
@@ -878,6 +911,8 @@
             this.btnDeletePieza.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDeletePieza.UseVisualStyleBackColor = true;
             this.btnDeletePieza.Click += new System.EventHandler(this.btnDeletePieza_Click);
+            this.btnDeletePieza.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnDeletePieza.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // dgvPiezasConjunto
             // 
@@ -892,7 +927,7 @@
             this.dgvPiezasConjunto.ReadOnly = true;
             this.dgvPiezasConjunto.RowHeadersVisible = false;
             this.dgvPiezasConjunto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPiezasConjunto.Size = new System.Drawing.Size(426, 209);
+            this.dgvPiezasConjunto.Size = new System.Drawing.Size(447, 209);
             this.dgvPiezasConjunto.TabIndex = 29;
             this.dgvPiezasConjunto.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPiezasConjunto_CellFormatting);
             // 
@@ -902,7 +937,7 @@
             this.gbPD.Controls.Add(this.panelAgregarPieza);
             this.gbPD.Location = new System.Drawing.Point(3, 3);
             this.gbPD.Name = "gbPD";
-            this.gbPD.Size = new System.Drawing.Size(513, 235);
+            this.gbPD.Size = new System.Drawing.Size(565, 235);
             this.gbPD.TabIndex = 17;
             this.gbPD.TabStop = false;
             this.gbPD.Text = "Piezas disponibles";
@@ -920,7 +955,7 @@
             this.dgvPDisponibles.ReadOnly = true;
             this.dgvPDisponibles.RowHeadersVisible = false;
             this.dgvPDisponibles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPDisponibles.Size = new System.Drawing.Size(424, 216);
+            this.dgvPDisponibles.Size = new System.Drawing.Size(446, 216);
             this.dgvPDisponibles.TabIndex = 35;
             this.dgvPDisponibles.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPDisponibles_CellFormatting);
             // 
@@ -930,7 +965,7 @@
             this.panelAgregarPieza.Controls.Add(this.btnAgregarPieza);
             this.panelAgregarPieza.Controls.Add(this.label16);
             this.panelAgregarPieza.Controls.Add(this.nudCantidadPieza);
-            this.panelAgregarPieza.Location = new System.Drawing.Point(433, 57);
+            this.panelAgregarPieza.Location = new System.Drawing.Point(474, 57);
             this.panelAgregarPieza.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelAgregarPieza.Name = "panelAgregarPieza";
             this.panelAgregarPieza.Size = new System.Drawing.Size(73, 127);
@@ -973,7 +1008,7 @@
             // 
             this.slidePiezas.Location = new System.Drawing.Point(3, 3);
             this.slidePiezas.Name = "slidePiezas";
-            this.slidePiezas.Size = new System.Drawing.Size(517, 468);
+            this.slidePiezas.Size = new System.Drawing.Size(575, 468);
             this.slidePiezas.SlideControl = null;
             this.slidePiezas.TabIndex = 0;
             // 
@@ -996,7 +1031,7 @@
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.tsMenu.Size = new System.Drawing.Size(533, 50);
+            this.tsMenu.Size = new System.Drawing.Size(582, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
@@ -1065,22 +1100,11 @@
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk);
             // 
-            // chkCostoFijo
-            // 
-            this.chkCostoFijo.AutoSize = true;
-            this.chkCostoFijo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkCostoFijo.Location = new System.Drawing.Point(314, 131);
-            this.chkCostoFijo.Name = "chkCostoFijo";
-            this.chkCostoFijo.Size = new System.Drawing.Size(72, 17);
-            this.chkCostoFijo.TabIndex = 21;
-            this.chkCostoFijo.Text = "Costo fijo";
-            this.chkCostoFijo.UseVisualStyleBackColor = true;
-            // 
             // frmConjunto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(537, 597);
+            this.ClientSize = new System.Drawing.Size(586, 597);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
