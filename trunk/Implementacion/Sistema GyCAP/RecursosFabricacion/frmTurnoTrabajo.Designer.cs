@@ -38,14 +38,14 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dtpHoraFin = new System.Windows.Forms.DateTimePicker();
+            this.dtpHoraInicio = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dtpHoraInicio = new System.Windows.Forms.DateTimePicker();
-            this.dtpHoraFin = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel1.SuspendLayout();
             this.tsMenu.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -187,6 +187,46 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos del Turno de Trabajo";
             // 
+            // dtpHoraFin
+            // 
+            this.dtpHoraFin.CustomFormat = "HH:mm";
+            this.dtpHoraFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpHoraFin.Location = new System.Drawing.Point(84, 78);
+            this.dtpHoraFin.Name = "dtpHoraFin";
+            this.dtpHoraFin.ShowUpDown = true;
+            this.dtpHoraFin.Size = new System.Drawing.Size(167, 21);
+            this.dtpHoraFin.TabIndex = 3;
+            this.dtpHoraFin.Value = new System.DateTime(2010, 8, 20, 0, 0, 0, 0);
+            // 
+            // dtpHoraInicio
+            // 
+            this.dtpHoraInicio.CustomFormat = "HH:mm";
+            this.dtpHoraInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpHoraInicio.Location = new System.Drawing.Point(84, 51);
+            this.dtpHoraInicio.Name = "dtpHoraInicio";
+            this.dtpHoraInicio.ShowUpDown = true;
+            this.dtpHoraInicio.Size = new System.Drawing.Size(167, 21);
+            this.dtpHoraInicio.TabIndex = 2;
+            this.dtpHoraInicio.Value = new System.DateTime(2010, 8, 28, 0, 0, 0, 0);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 82);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Hora fin:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(18, 55);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Hora inicio:";
+            // 
             // btnCancelar
             // 
             this.btnCancelar.Location = new System.Drawing.Point(294, 65);
@@ -225,46 +265,6 @@
             this.label1.Size = new System.Drawing.Size(48, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 55);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Hora inicio:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 82);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Hora fin:";
-            // 
-            // dtpHoraInicio
-            // 
-            this.dtpHoraInicio.CustomFormat = "HH:mm";
-            this.dtpHoraInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpHoraInicio.Location = new System.Drawing.Point(84, 51);
-            this.dtpHoraInicio.Name = "dtpHoraInicio";
-            this.dtpHoraInicio.ShowUpDown = true;
-            this.dtpHoraInicio.Size = new System.Drawing.Size(167, 21);
-            this.dtpHoraInicio.TabIndex = 2;
-            this.dtpHoraInicio.Value = new System.DateTime(2010, 8, 28, 0, 0, 0, 0);
-            // 
-            // dtpHoraFin
-            // 
-            this.dtpHoraFin.CustomFormat = "HH:mm";
-            this.dtpHoraFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpHoraFin.Location = new System.Drawing.Point(84, 78);
-            this.dtpHoraFin.Name = "dtpHoraFin";
-            this.dtpHoraFin.ShowUpDown = true;
-            this.dtpHoraFin.Size = new System.Drawing.Size(167, 21);
-            this.dtpHoraFin.TabIndex = 3;
-            this.dtpHoraFin.Value = new System.DateTime(2010, 8, 20, 0, 0, 0, 0);
             // 
             // frmTurnoTrabajo
             // 
