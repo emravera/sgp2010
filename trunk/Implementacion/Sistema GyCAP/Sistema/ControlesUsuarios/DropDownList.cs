@@ -121,6 +121,7 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         {
             this.SelectedIndex = index;
             if (!persistente) { texto.Visible = false; }
+            if (index == -1) { SetTexto(this.texto); }
         }
 
         public object GetSelectedValue()
