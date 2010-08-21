@@ -60,6 +60,13 @@ namespace GyCAP.UI.EstructuraProducto.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap abajo1_15 {
+            get {
+                object obj = ResourceManager.GetObject("abajo1_15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Apply_25 {
             get {
                 object obj = ResourceManager.GetObject("Apply_25", resourceCulture);
