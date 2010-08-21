@@ -73,28 +73,44 @@ namespace GyCAP.UI.RecursosFabricacion
 
         #region Menú Lateral
 
-        private void btnMenu_Click2(object sender, EventArgs e)
+        /*private void btnMenu_Click2(object sender, EventArgs e)
         {
             if (scDown.SplitterDistance == 0)
             {
                 //Hay que mostrarlo
+                foreach (Control item in areaTrabajo.Controls)
+                {
+                    item.Hide();
+                }
                 while (scDown.SplitterDistance < 160)
                 {
                     scDown.SplitterDistance += 5;
+                }
+                foreach (Control item in areaTrabajo.Controls)
+                {
+                    item.Show();
                 }
                 btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
             }
             else
             {
+                foreach (Control item in areaTrabajo.Controls)
+                {
+                    item.Hide();
+                }
                 //Hay que ocultarlo
                 while (scDown.SplitterDistance > 0)
                 {
                     scDown.SplitterDistance -= 5;
                 }
+                foreach (Control item in areaTrabajo.Controls)
+                {
+                    item.Show();
+                }
                 btnMenu.Cursor = System.Windows.Forms.Cursors.PanEast;
             }
             btnMenu.Parent.Focus();
-        }
+        }*/
         
         private void btnMenu_Click(object sender, EventArgs e)
         {
@@ -177,10 +193,18 @@ namespace GyCAP.UI.RecursosFabricacion
             else
             {
                 //Mostrar
+                foreach (Control item in panel.Controls)
+                {
+                    item.Hide();
+                }
                 while (panel.Size.Height < finalSize)
                 {
                     sizePanel.Height += 5;
                     panel.Size = sizePanel;
+                }
+                foreach (Control item in panel.Controls)
+                {
+                    item.Show();
                 }
             }
         }
