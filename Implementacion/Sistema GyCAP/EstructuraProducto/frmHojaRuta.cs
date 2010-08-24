@@ -22,9 +22,12 @@ namespace GyCAP.UI.EstructuraProducto
         int codigoDetalle = -1;
 
         #region Inicio
+
         public frmHojaRuta()
         {
-            InitializeComponent();
+            InitializeComponent(); 
+            InicializarDatos();
+            SetSlide();
         }
 
         public static frmHojaRuta Instancia
@@ -59,6 +62,95 @@ namespace GyCAP.UI.EstructuraProducto
         }
         #endregion
 
+        #region Buscar
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dsHojaRuta.HOJAS_RUTA.Clear();
+                dsHojaRuta.CENTROSXHOJARUTA.Clear();
+                dvHojasRuta.Table = null;
+                dvDetalleHoja.Table = null;
+
+                //Busquemos, no importa si ingresó algo o no, ya se encargarán las otras clases de verificarlo
+                BLL.HojaRutaBLL.ObetenerHojasRuta(txtNombreBuscar.Text, cbActivaBuscar.GetSelectedValueInt(), dsHojaRuta);
+
+                if (dsHojaRuta.HOJAS_RUTA.Rows.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron Hojas de Ruta con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
+                //por una consulta a la BD
+                dvHojasRuta.Table = dsHojaRuta.HOJAS_RUTA;
+                dvDetalleHoja.Table = dsHojaRuta.CENTROSXHOJARUTA;
+
+                SetInterface(estadoUI.inicio);
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message, "Error: Hoja de Ruta - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SetInterface(estadoUI.inicio);
+            }
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.nuevo);
+        }
+
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.consultar);
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.modificar);
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            //Controlamos que esté seleccionado algo
+            if (dgvHojasRuta.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Preguntamos si está seguro
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar la Hoja de Ruta seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (respuesta == DialogResult.Yes)
+                {
+                    try
+                    {
+                        //Obtenemos el codigo
+                        int codigo = Convert.ToInt32(dvHojasRuta[dgvHojasRuta.SelectedRows[0].Index]["hr_codigo"]);
+                        //Lo eliminamos de la DB
+                        BLL.HojaRutaBLL.Eliminar(codigo);
+                        //Lo eliminamos de la tabla conjuntos del dataset
+                        dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigo).Delete();
+                        dsHojaRuta.HOJAS_RUTA.AcceptChanges();
+                    }
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error: Hoja de Ruta - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error: Hoja de Ruta - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una Hoja de Ruta de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        #endregion
+
+        #region Datos
+
+
+        #endregion
 
         #region Servicios
 
@@ -167,7 +259,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvHojasRuta.AutoGenerateColumns = false;
             dgvHojasRuta.Columns.Add("HR_NOMBRE", "Nombre");
             dgvHojasRuta.Columns.Add("HR_FECHAALTA", "Fecha Creación");
-            dgvHojasRuta.Columns.Add("HR_ACTIVO", "Activa");
+            dgvHojasRuta.Columns.Add("HR_ACTIVO", "Estado");
             dgvHojasRuta.Columns.Add("HR_DESCRIPCION", "Descripción");
             dgvHojasRuta.Columns["HR_NOMBRE"].DataPropertyName = "HR_NOMBRE";
             dgvHojasRuta.Columns["HR_FECHAALTA"].DataPropertyName = "HR_FECHAALTA";
@@ -197,8 +289,118 @@ namespace GyCAP.UI.EstructuraProducto
             dgvCentrosTrabajo.Columns["CTO_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             dgvCentrosTrabajo.Columns["CTO_DESCRIPCION"].Resizable = DataGridViewTriState.True;
 
-            //Dataviews
+            //Dataviews, combos y carga de datos iniciales
+            dvHojasRuta = new DataView(dsHojaRuta.HOJAS_RUTA);
+            dvHojasRuta.Sort = "HR_NOMBRE ASC";
+            dgvHojasRuta.DataSource = dvHojasRuta;
+            dvDetalleHoja = new DataView(dsHojaRuta.CENTROSXHOJARUTA);
+            dgvDetalleHoja.DataSource = dvDetalleHoja;            
+            string[] nombres = { "Activa", "Inactiva" };
+            int[] valores = { BLL.HojaRutaBLL.hojaRutaActiva, BLL.HojaRutaBLL.hojaRutaInactiva };
+            cbActivaBuscar.SetDatos(nombres, valores, "--TODOS--", true);
 
+            try
+            {
+                BLL.CentroTrabajoBLL.ObetenerCentrosTrabajo(null, null, null, BLL.CentroTrabajoBLL.CentroActivo, dsHojaRuta.CENTROS_TRABAJOS);
+                BLL.SectorBLL.ObtenerTodos(dsHojaRuta.SECTORES);
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            dvCentrosTrabajo = new DataView(dsHojaRuta.CENTROS_TRABAJOS);
+            dvCentrosTrabajo.Sort = "CTO_NOMBRE ASC";
+            dgvCentrosTrabajo.DataSource = dvCentrosTrabajo;
+        }        
+
+        private void dgvHojasRuta_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            int codigo = Convert.ToInt32(dvHojasRuta[e.RowIndex]["hr_codigo"]);
+        }
+
+        private void dgvHojasRuta_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != string.Empty)
+            {
+                string nombre = string.Empty;
+
+                if (dgvHojasRuta.Columns[e.ColumnIndex].Name == "HR_ACTIVO")
+                {
+                    if (Convert.ToInt32(e.Value.ToString()) == BLL.HojaRutaBLL.hojaRutaActiva) { nombre = "Activa"; }
+                    else if (Convert.ToInt32(e.Value.ToString()) == BLL.HojaRutaBLL.hojaRutaInactiva) { nombre = "Inactiva"; }
+                    e.Value = nombre;
+                }
+            }
+        }
+
+        private void SetSlide()
+        {
+            gbDatos.Parent = slideDatos;
+            gbCentrosTrabajo.Parent = slideAgregar;
+            slideControl.AddSlide(slideAgregar);
+            slideControl.AddSlide(slideDatos);
+            slideControl.Selected = slideDatos;
+        }
+
+        private void control_Enter(object sender, EventArgs e)
+        {
+            if (sender.GetType().Equals(txtNombre.GetType())) { (sender as TextBox).SelectAll(); }
+            if (sender.GetType().Equals(txtDescripcion.GetType())) { (sender as RichTextBox).SelectAll(); }
+            //if (sender.GetType().Equals(nudCantidad.GetType())) { (sender as NumericUpDown).Select(0, 20); }
+        }
+
+        private void button_MouseDown(object sender, MouseEventArgs e)
+        {
+            Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
+            (sender as Button).Location = punto;
+        }
+
+        private void button_MouseUp(object sender, MouseEventArgs e)
+        {
+            Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
+            (sender as Button).Location = punto;
+        }        
+
+        private void dgvDetalleHoja_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != string.Empty)
+            {
+                string nombre;
+
+                switch (dgvDetalleHoja.Columns[e.ColumnIndex].Name)
+                {
+                    case "CTO_CODIGO":
+                        nombre = dsHojaRuta.CENTROS_TRABAJOS.FindByCTO_CODIGO(Convert.ToInt32(e.Value.ToString())).CTO_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }        
+
+        private void dgvCentrosTrabajo_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != string.Empty)
+            {
+                string nombre = string.Empty;
+
+                switch (dgvCentrosTrabajo.Columns[e.ColumnIndex].Name)
+                {
+                    case "CTO_TIPO":
+                        if (Convert.ToInt32(e.Value.ToString()) == BLL.CentroTrabajoBLL.TipoHombre) { nombre = "Hombre"; }
+                        else if (Convert.ToInt32(e.Value.ToString()) == BLL.CentroTrabajoBLL.TipoMaquina) { nombre = "Máquina"; }
+                        e.Value = nombre;
+                        break;
+                    case "SEC_CODIGO":
+                        nombre = dsHojaRuta.SECTORES.FindBySEC_CODIGO(Convert.ToInt32(e.Value.ToString())).SEC_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         #endregion

@@ -78,6 +78,7 @@
     <Compile Include="EstadoUsuarioBLL.cs" />
     <Compile Include="EstructuraBLL.cs" />
     <Compile Include="FabricanteMaquinaBLL.cs" />
+    <Compile Include="HojaRutaBLL.cs" />
     <Compile Include="LocalidadBLL.cs" />
     <Compile Include="MantenimientoBLL.cs" />
     <Compile Include="MaquinaBLL.cs" />

@@ -13,19 +13,25 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         {
             private int value;
             private string name;
-            
+            private object valueAlternativo;
           
             public ItemLista(int val, string nom)
             {
                 this.name = nom;
                 this.value = val;
             }
-            
+
+            public ItemLista(object val, string nom)
+            {
+                this.name = nom;
+                this.valueAlternativo = val;
+            }
+
             public int Value
             {
                 get { return this.value; }
                 set { this.value = value; }
-            }            
+            }
 
             public string Name
             {
@@ -33,6 +39,12 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
                 set { name = value; }
             }
 
+            public object ValueAlternativo
+            {
+                get { return this.valueAlternativo; }
+                set { this.valueAlternativo = value; }
+            }
+            
             public override string ToString()
             {
                 return name;
@@ -256,12 +268,45 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         /// La cabecera no persistente (como texto) desaparece al desplegar la lista del combobox u obtener el foco,
         /// se selecciona por defecto el índice -1.
         /// </summary>
-        /// <param name="dataview">El dataview con los datos a cargar.</param>
-        /// <param name="valueMember">El campo de dónde se tomará el valor.</param>
-        /// <param name="displayMember">El campo de dónde se tomará el string a mostrar.</param>
+        /// <param name="valores">El array de dónde se tomará el valor.</param>
+        /// <param name="nombres">El array de dónde se tomará el string a mostrar.</param>
         /// <param name="textoCabecera">El texto de la cabecera.</param>
         /// <param name="cabeceraPersistente">True para que forme parte de los items, false para simple texto.</param>
         public void SetDatos(string[] nombres, int[] valores, string textoCabecera, bool cabeceraPersistente)
+        {
+            persistente = cabeceraPersistente;
+            this.Items.Clear();
+            IList<ItemLista> lista = new List<ItemLista>();
+            if (cabeceraPersistente) { lista.Add(new ItemLista(-1, textoCabecera)); }
+            else { SetTexto(textoCabecera); }
+
+            if (nombres.Length > 0 && valores.Length > 0 && nombres.Length == valores.Length)
+            {
+                for (int i = 0; i < valores.Length; i++)
+                {
+                    lista.Add(new ItemLista(valores[i], nombres[i]));
+                }
+            }
+            this.DataSource = lista;
+            this.DisplayMember = "Name";
+            this.ValueMember = "Value";
+
+            if (cabeceraPersistente) { this.SelectedIndex = 0; }
+            else { this.SelectedIndex = -1; }
+        }
+
+        /// <summary>
+        /// Carga los datos al combobox desde un array, recibe cualquier tipo de dato en valueMemeber.
+        /// Contiene una cabecera que puede formar parte de los items del combobox o como un simple texto. 
+        /// La cabecera persistente que forma parte de los items se carga con valor -1 y se selecciona por defecto.
+        /// La cabecera no persistente (como texto) desaparece al desplegar la lista del combobox u obtener el foco,
+        /// se selecciona por defecto el índice -1.
+        /// </summary>
+        /// <param name="valores">El array de object con los valores.</param>
+        /// <param name="nombres">El array de dónde se tomará el string a mostrar.</param>
+        /// <param name="textoCabecera">El texto de la cabecera.</param>
+        /// <param name="cabeceraPersistente">True para que forme parte de los items, false para simple texto.</param>
+        public void SetDatos(string[] nombres, object[] valores, string textoCabecera, bool cabeceraPersistente)
         {
             persistente = cabeceraPersistente;
             this.Items.Clear();
