@@ -83,6 +83,7 @@
     <Compile Include="EstructuraDAL.cs" />
     <Compile Include="FabricanteMaquinaDAL.cs" />
     <Compile Include="GrupoEstructuraDAL.cs" />
+    <Compile Include="HojaRutaDAL.cs" />
     <Compile Include="LocalidadDAL.cs" />
     <Compile Include="MantenimientoDAL.cs" />
     <Compile Include="MaquinaDAL.cs" />

@@ -122,7 +122,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvPiezas.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar la pieza seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar la Pieza seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -694,7 +694,6 @@ namespace GyCAP.UI.EstructuraProducto
             dvPlano.Sort = "PNO_NOMBRE";
 
             //Obtenemos las terminaciones, los planos, los estados de las piezas, las MP, unidades medidas
-            
             try
             {
                 BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsEstructura.TERMINACIONES);
