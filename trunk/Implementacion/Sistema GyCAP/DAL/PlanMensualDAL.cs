@@ -68,7 +68,7 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        //Metodo que valida que se pueda actualizar
+        //Metodo que valida que no exista un plan mensual para ese año y mes ya creado
         public static bool Validar(int anio, string mes)
         {
             string sql = @"SELECT count(pm.pmes_codigo)
@@ -84,7 +84,165 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        //Metodo que valida que no existan planes semanales de ese plan mensual para que se pueda modificar
+        public static bool ValidarActualizar(int codigoPlan)
+        {
+            string sql = @"SELECT count(ps.pmes_codigo)
+                           FROM PLANES_MENSUALES as pm, PLANES_SEMANALES as ps, 
+                           WHERE pm.pmes_codigo=ps.pmes_codigo and pm.pmes_codigo=@p0";
+            object[] valorParametros = { codigoPlan };
+            try
+            {
+                int cantidad = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+                if (cantidad == 0) return true;
+                else return false;
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
 
+        //METODO QUE GUARDA LOS DATOS   
+        public static void GuardarPlan(Entidades.PlanMensual plan, Data.dsPlanMensual planMensual)
+        {
+
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                //Inserto la demanda
+                transaccion = DB.IniciarTransaccion();
+
+                //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
+                string sql = "INSERT INTO [PLANES_MENSUALES] ([pan_codigo], [pmes_mes], [pmes_fechacreacion]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
+                object[] valorParametros = { plan.PlanAnual.Codigo, plan.Mes, plan.FechaCreacion };
+                plan.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+
+                //Inserto el Detalle
+                sql = "INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
+                foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[]) planMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.Added))
+                {
+                    object[] valorParam = { plan.Codigo,row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA };
+                    row.BeginEdit();
+                    row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, null));
+                    row.PMES_CODIGO = plan.Codigo;
+                    row.EndEdit();                    
+                }
+
+                transaccion.Commit();
+                DB.FinalizarTransaccion();
+                
+            }
+            catch (SqlException)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException();
+
+            }
+          
+        }
+        //METODO QUE GUARDA LOS DATOS DEL PLAN MODIFICADOS   
+        public static void GuardarPlanModificado(Entidades.PlanMensual plan, Data.dsPlanMensual planMensual)
+        {
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                //Inserto la demanda
+                transaccion = DB.IniciarTransaccion();
+
+                string sql = string.Empty;
+
+                //Inserto los detalles nuevos
+                sql = "INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
+                foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])planMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.Added))
+                {
+                    object[] valorParam = { plan.Codigo, row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA };
+                    row.BeginEdit();
+                    row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, null));
+                    row.PMES_CODIGO = plan.Codigo;
+                    row.EndEdit();
+                }
+                //Guardo las modificaciones
+                sql = "UPDATE [DETALLE_PLANES_MENSUALES] SET dpmes_cantidadestimada=@p0 ";
+                foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])planMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
+                {
+                    object[] valorParam = { row.DPMES_CANTIDADESTIMADA };
+                }
+
+                //Elimino las que fueron sacadas
+                sql = "DELETE FROM [DETALLE_PLANES_MENSUALES] WHERE dpmes_codigo=@p0 ";
+                foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])planMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.Deleted))
+                {
+                    object[] valorParam = {Convert.ToInt32(row["DPMES_CODIGO", System.Data.DataRowVersion.Original])};
+                }
+
+                transaccion.Commit();
+                DB.FinalizarTransaccion();
+
+
+            }
+            catch (SqlException)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException();
+
+            }
+            
+        }
+        //METODO PARA ELIMINAR DATOS DE LA BASE DE DATOS
+        //Metodo que elimina de la base de datos
+        public static void EliminarPlan(int codigoPlan)
+        {
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                //Iniciamos la transaccion
+                transaccion = DB.IniciarTransaccion();
+
+                //Elimino el detalle del plan mensual
+                string sql = "DELETE FROM DETALLE_PLANES_MENSUALES WHERE pmes_codigo = @p0";
+                object[] valorParametros = { codigoPlan };
+                DB.executeNonQuery(sql, valorParametros, null);
+
+                //Elimino la demanda
+                sql = "DELETE FROM PLANES_MENSUALES WHERE pmes_codigo = @p0";
+                DB.executeNonQuery(sql, valorParametros, null);
+
+
+                transaccion.Commit();
+                DB.FinalizarTransaccion();
+            }
+            catch (SqlException)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException();
+            }
+
+        }
+
+
+
+        public static int ObtenerCantidad(int anio, string mes)
+        {
+            int cantidad=0;
+
+            string sql = @"SELECT sum(det.dpmes_cantidadestimada)
+                        FROM PLANES_MENSUALES as pm, PLANES_ANUALES as pa, DETALLE_PLANES_MENSUALES as det
+                        WHERE pa.pan_codigo=pm.pan_codigo and pm.pmes_codigo=det.pmes_codigo and
+                              pa.pan_anio=@p0 and pm.pmes_mes LIKE @p1";
+            
+            
+            mes = "%" + mes + "%";
+            object[] parametros = { anio, mes };
+
+            try
+            {
+               cantidad=Convert.ToInt32(DB.executeScalar(sql, parametros, null));
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+            return cantidad;
+        }
 
     }
 }

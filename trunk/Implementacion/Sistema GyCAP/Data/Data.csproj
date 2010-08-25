@@ -166,6 +166,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPlanMateriasPrimas.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsPlanMensual.cs">
+      <DependentUpon>dsPlanMensual.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="dsPlanMensual.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
