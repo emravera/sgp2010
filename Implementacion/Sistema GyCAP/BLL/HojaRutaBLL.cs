@@ -18,7 +18,7 @@ namespace GyCAP.BLL
             DAL.HojaRutaDAL.ObtenerHojasRuta(nombre, estado, dsHojaRuta, obtenerDetalle);
         }
 
-        public static void ObttenerHojasRuta(DataTable dtHojasRuta)
+        public static void ObtenerHojasRuta(DataTable dtHojasRuta)
         {
             DAL.HojaRutaDAL.ObtenerHojasRuta(dtHojasRuta);
         }
