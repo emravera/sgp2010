@@ -282,6 +282,7 @@ namespace GyCAP.UI.EstructuraProducto
                 int codigo = Convert.ToInt32(dvDetalleHoja[dgvDetalleHoja.SelectedRows[0].Index]["cxhr_codigo"]);
                 //Aumentamos la cantidad                
                 dsHojaRuta.CENTROSXHOJARUTA.FindByCXHR_CODIGO(codigo).CXHR_SECUENCIA += 1;
+                dvDetalleHoja.Sort = "CXHR_SECUENCIA ASC";
             }
             else
             {
@@ -299,6 +300,7 @@ namespace GyCAP.UI.EstructuraProducto
                 {
                     //Aumentamos la cantidad                
                     dsHojaRuta.CENTROSXHOJARUTA.FindByCXHR_CODIGO(codigo).CXHR_SECUENCIA -= 1;
+                    dvDetalleHoja.Sort = "CXHR_SECUENCIA ASC";
                 }
             }
             else
@@ -528,7 +530,8 @@ namespace GyCAP.UI.EstructuraProducto
             dvHojasRuta.Sort = "HR_NOMBRE ASC";
             dgvHojasRuta.DataSource = dvHojasRuta;
             dvDetalleHoja = new DataView(dsHojaRuta.CENTROSXHOJARUTA);
-            dgvDetalleHoja.DataSource = dvDetalleHoja;            
+            dgvDetalleHoja.DataSource = dvDetalleHoja;
+            dvDetalleHoja.Sort = "CXHR_SECUENCIA ASC";
             string[] nombres = { "Activa", "Inactiva" };
             int[] valores = { BLL.HojaRutaBLL.hojaRutaActiva, BLL.HojaRutaBLL.hojaRutaInactiva };
             cbActivaBuscar.SetDatos(nombres, valores, "--TODOS--", true);
