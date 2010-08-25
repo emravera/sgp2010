@@ -26,6 +26,7 @@ namespace GyCAP.UI.EstructuraProducto
             btnConjunto.Tag = panelConjunto;
             btnDesignacion.Tag = panelDesignacion;
             btnEstructuraProducto.Tag = panelEstructuraCocina;
+            btnHojaRuta.Tag = panelHojaRuta;
             btnMPPrincipal.Tag = panelMPPrincipal;
             btnModeloCocina.Tag = panelModeloCocina;
             btnPieza.Tag = panelPieza;
@@ -38,6 +39,7 @@ namespace GyCAP.UI.EstructuraProducto
             panelConjunto.Size = size;
             panelDesignacion.Size = size;
             panelEstructuraCocina.Size = size;
+            panelHojaRuta.Size = size;
             panelModeloCocina.Size = size;
             panelMPPrincipal.Size = size;
             panelPieza.Size = size;
@@ -329,9 +331,33 @@ namespace GyCAP.UI.EstructuraProducto
 
         #endregion
 
+        #region Hoja Ruta
+
+        private void btnNuevoHojaRuta_Click(object sender, EventArgs e)
+        {
+            frmHojaRuta.Instancia.TopLevel = false;
+            frmHojaRuta.Instancia.Parent = areaTrabajo;
+            frmHojaRuta.Instancia.Location = PosicionarFormulario();
+            frmHojaRuta.Instancia.SetEstadoInicial(frmHojaRuta.estadoInicialNuevo);
+            frmHojaRuta.Instancia.Show();
+            frmHojaRuta.Instancia.Focus();
+        }
+
+        private void btnConsultarhojaRuta_Click(object sender, EventArgs e)
+        {
+            frmHojaRuta.Instancia.TopLevel = false;
+            frmHojaRuta.Instancia.Parent = areaTrabajo;
+            frmHojaRuta.Instancia.Location = PosicionarFormulario();
+            frmHojaRuta.Instancia.SetEstadoInicial(frmHojaRuta.estadoInicialConsultar);
+            frmHojaRuta.Instancia.Show();
+            frmHojaRuta.Instancia.Focus();
+        }
+
+        #endregion
+
         #region Materia Prima Principal
 
-        private void button15_Click(object sender, EventArgs e)
+        private void btnConsultarMPPrincipal_Click(object sender, EventArgs e)
         {
             frmMateriaPrimaPrincipal.Instancia.TopLevel = false;
             frmMateriaPrimaPrincipal.Instancia.Parent = areaTrabajo;
@@ -472,6 +498,6 @@ namespace GyCAP.UI.EstructuraProducto
 
         #endregion
 
-
+        
     }
 }

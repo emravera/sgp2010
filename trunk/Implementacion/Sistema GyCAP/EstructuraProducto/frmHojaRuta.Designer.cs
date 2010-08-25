@@ -38,6 +38,7 @@
             this.chkActivo = new System.Windows.Forms.CheckBox();
             this.slideDatos = new SlickInterface.Slide();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.dtpFechaAlta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.label9 = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.RichTextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
@@ -63,6 +64,7 @@
             this.dgvHojasRuta = new System.Windows.Forms.DataGridView();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbActivaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -76,8 +78,6 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cbActivaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.dtpFechaAlta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.panelAcciones.SuspendLayout();
             this.gbDatos.SuspendLayout();
             this.tpDatos.SuspendLayout();
@@ -148,6 +148,7 @@
             this.btnBajar.TabIndex = 27;
             this.btnBajar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnBajar.UseVisualStyleBackColor = true;
+            this.btnBajar.Click += new System.EventHandler(this.btnBajar_Click);
             this.btnBajar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnBajar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
@@ -165,6 +166,7 @@
             this.btnSubir.TabIndex = 26;
             this.btnSubir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSubir.UseVisualStyleBackColor = true;
+            this.btnSubir.Click += new System.EventHandler(this.btnSubir_Click);
             this.btnSubir.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnSubir.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
@@ -182,6 +184,7 @@
             this.btnDelete.TabIndex = 25;
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             this.btnDelete.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnDelete.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
@@ -198,6 +201,7 @@
             this.btnNew.Size = new System.Drawing.Size(30, 30);
             this.btnNew.TabIndex = 24;
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             this.btnNew.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNew.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
@@ -205,7 +209,7 @@
             // 
             this.chkActivo.AutoSize = true;
             this.chkActivo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkActivo.Location = new System.Drawing.Point(9, 81);
+            this.chkActivo.Location = new System.Drawing.Point(325, 28);
             this.chkActivo.Name = "chkActivo";
             this.chkActivo.Size = new System.Drawing.Size(56, 17);
             this.chkActivo.TabIndex = 28;
@@ -237,6 +241,15 @@
             this.gbDatos.TabIndex = 15;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos de la hoja de Ruta";
+            // 
+            // dtpFechaAlta
+            // 
+            this.dtpFechaAlta.CustomFormat = " ";
+            this.dtpFechaAlta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaAlta.Location = new System.Drawing.Point(97, 53);
+            this.dtpFechaAlta.Name = "dtpFechaAlta";
+            this.dtpFechaAlta.Size = new System.Drawing.Size(200, 21);
+            this.dtpFechaAlta.TabIndex = 29;
             // 
             // label9
             // 
@@ -345,6 +358,7 @@
             this.btnVolver.TabIndex = 29;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnGuardar
             // 
@@ -354,6 +368,7 @@
             this.btnGuardar.TabIndex = 28;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // slideControl
             // 
@@ -390,6 +405,7 @@
             this.btnAgregar.TabIndex = 31;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // slideAgregar
             // 
@@ -431,6 +447,7 @@
             this.btnHecho.TabIndex = 32;
             this.btnHecho.Text = "Hecho";
             this.btnHecho.UseVisualStyleBackColor = true;
+            this.btnHecho.Click += new System.EventHandler(this.btnHecho_Click);
             // 
             // nudSecuencia
             // 
@@ -445,6 +462,7 @@
             this.nudSecuencia.Size = new System.Drawing.Size(64, 21);
             this.nudSecuencia.TabIndex = 30;
             this.nudSecuencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudSecuencia.Enter += new System.EventHandler(this.control_Enter);
             // 
             // gbCentrosTrabajo
             // 
@@ -493,7 +511,7 @@
             this.dgvHojasRuta.RowHeadersVisible = false;
             this.dgvHojasRuta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvHojasRuta.Size = new System.Drawing.Size(550, 388);
-            this.dgvHojasRuta.TabIndex = 0;
+            this.dgvHojasRuta.TabIndex = 4;
             this.dgvHojasRuta.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHojasRuta_RowEnter);
             this.dgvHojasRuta.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvHojasRuta_CellFormatting);
             // 
@@ -523,6 +541,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
+            // cbActivaBuscar
+            // 
+            this.cbActivaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbActivaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbActivaBuscar.FormattingEnabled = true;
+            this.cbActivaBuscar.Location = new System.Drawing.Point(280, 27);
+            this.cbActivaBuscar.Name = "cbActivaBuscar";
+            this.cbActivaBuscar.Size = new System.Drawing.Size(150, 21);
+            this.cbActivaBuscar.TabIndex = 2;
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -548,7 +576,7 @@
             this.btnBuscar.Location = new System.Drawing.Point(474, 25);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscar.TabIndex = 5;
+            this.btnBuscar.TabIndex = 3;
             this.btnBuscar.Text = "&Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -560,7 +588,7 @@
             this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(167, 21);
-            this.txtNombreBuscar.TabIndex = 2;
+            this.txtNombreBuscar.TabIndex = 1;
             this.txtNombreBuscar.Enter += new System.EventHandler(this.control_Enter);
             // 
             // tcHojaRuta
@@ -680,25 +708,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(586, 570);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
-            // cbActivaBuscar
-            // 
-            this.cbActivaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbActivaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbActivaBuscar.FormattingEnabled = true;
-            this.cbActivaBuscar.Location = new System.Drawing.Point(280, 27);
-            this.cbActivaBuscar.Name = "cbActivaBuscar";
-            this.cbActivaBuscar.Size = new System.Drawing.Size(150, 21);
-            this.cbActivaBuscar.TabIndex = 8;
-            // 
-            // dtpFechaAlta
-            // 
-            this.dtpFechaAlta.CustomFormat = " ";
-            this.dtpFechaAlta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaAlta.Location = new System.Drawing.Point(97, 53);
-            this.dtpFechaAlta.Name = "dtpFechaAlta";
-            this.dtpFechaAlta.Size = new System.Drawing.Size(200, 21);
-            this.dtpFechaAlta.TabIndex = 29;
-            // 
             // frmHojaRuta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -712,6 +721,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Hoja de Ruta";
+            this.Activated += new System.EventHandler(this.frmHojaRuta_Activated);
             this.panelAcciones.ResumeLayout(false);
             this.panelAcciones.PerformLayout();
             this.gbDatos.ResumeLayout(false);

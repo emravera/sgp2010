@@ -62,7 +62,7 @@ namespace GyCAP.UI.EstructuraProducto
         }
         #endregion
 
-        #region Buscar
+        #region Buscar y botones menú
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -74,7 +74,7 @@ namespace GyCAP.UI.EstructuraProducto
                 dvDetalleHoja.Table = null;
 
                 //Busquemos, no importa si ingresó algo o no, ya se encargarán las otras clases de verificarlo
-                BLL.HojaRutaBLL.ObetenerHojasRuta(txtNombreBuscar.Text, cbActivaBuscar.GetSelectedValueInt(), dsHojaRuta);
+                BLL.HojaRutaBLL.ObtenerHojasRuta(txtNombreBuscar.Text, cbActivaBuscar.GetSelectedValueInt(), dsHojaRuta, true);
 
                 if (dsHojaRuta.HOJAS_RUTA.Rows.Count == 0)
                 {
@@ -149,6 +149,239 @@ namespace GyCAP.UI.EstructuraProducto
 
         #region Datos
 
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            //Datos opcionales = descripcion, 
+            //Revisamos que completó los datos obligatorios
+            string datosFaltantes = string.Empty;
+            if (txtNombre.Text == string.Empty) { datosFaltantes += "* Nombre\n"; }
+            if (dtpFechaAlta.IsValueNull()) { datosFaltantes += "* Fecha de creación\n"; }            
+            if (dgvDetalleHoja.Rows.Count == 0) { datosFaltantes += "* El detalle de la Hoja de Ruta\n"; }
+            if (datosFaltantes == string.Empty)
+            {
+                //Revisamos que está haciendo
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
+                {
+                    //Está cargando uno nuevo
+                    try
+                    {
+                        //Como ahora tenemos más de una tabla y relacionadas vamos a trabajar diferente
+                        //Primero lo agregamos a la tabla del dataset con código -1, luego la entidad 
+                        //DAL se va a encargar de insertarle el código que corresponda
+                        Data.dsProduccion.HOJAS_RUTARow rowHoja = dsHojaRuta.HOJAS_RUTA.NewHOJAS_RUTARow();
+                        rowHoja.BeginEdit();
+                        rowHoja.HR_CODIGO = -1;
+                        rowHoja.HR_NOMBRE = txtNombre.Text;
+                        rowHoja.HR_DESCRIPCION = txtDescripcion.Text;
+                        rowHoja.HR_FECHAALTA = DateTime.Parse(dtpFechaAlta.GetFecha().ToString());
+                        if (chkActivo.Checked) { rowHoja.HR_ACTIVO = BLL.HojaRutaBLL.hojaRutaActiva; }
+                        else { rowHoja.HR_ACTIVO = BLL.HojaRutaBLL.hojaRutaInactiva; }
+                        rowHoja.EndEdit();
+                        dsHojaRuta.HOJAS_RUTA.AddHOJAS_RUTARow(rowHoja);
+                        //Todavia no aceptamos los cambios porque necesitamos que queden marcadas como nuevas las filas
+                        //para que la entidad BLL y DAL sepan cuales insertar
+                        BLL.HojaRutaBLL.Insertar(dsHojaRuta);
+                        //Ahora si aceptamos los cambios
+                        dsHojaRuta.HOJAS_RUTA.AcceptChanges();
+                        dsHojaRuta.CENTROSXHOJARUTA.AcceptChanges();
+                        //Y por último seteamos el estado de la interfaz
+
+                        //Vemos cómo se inició el formulario para determinar la acción a seguir
+                        if (estadoInterface == estadoUI.nuevoExterno)
+                        {
+                            //Nuevo desde acceso directo, cerramos el formulario
+                            btnSalir.PerformClick();
+                        }
+                        else
+                        {
+                            //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
+                            SetInterface(estadoUI.inicio);
+                        }
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        //Hubo problemas con la BD, descartamos los cambios de hoja ruta ya que puede intentar
+                        //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
+                        dsHojaRuta.HOJAS_RUTA.RejectChanges();
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    //Está modificando
+                    //Primero obtenemos su código del dataview que está relacionado a la fila seleccionada
+                    int codigoHoja = Convert.ToInt32(dvHojasRuta[dgvHojasRuta.SelectedRows[0].Index]["hr_codigo"]);
+                    //Segundo obtenemos el resto de los datos que puede cambiar el usuario, la estructura se fué
+                    //actualizando en el dataset a medida que el usuario ejecutaba una acción
+                    dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigoHoja).HR_NOMBRE = txtNombre.Text;
+                    dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigoHoja).HR_DESCRIPCION = txtDescripcion.Text;
+                    dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigoHoja).HR_FECHAALTA = DateTime.Parse(dtpFechaAlta.GetFecha().ToString());
+                    if (chkActivo.Checked) { dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigoHoja).HR_ACTIVO = BLL.HojaRutaBLL.hojaRutaActiva; }
+                    else { dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigoHoja).HR_ACTIVO = BLL.HojaRutaBLL.hojaRutaInactiva; }
+                    try
+                    {
+                        //Lo actualizamos en la DB
+                        BLL.HojaRutaBLL.Actualizar(dsHojaRuta);
+                        //El dataset ya se actualizó en las capas DAL y BLL, aceptamos los cambios
+                        dsHojaRuta.HOJAS_RUTA.AcceptChanges();
+                        dsHojaRuta.CENTROSXHOJARUTA.AcceptChanges();
+                        //Avisamos que estuvo todo ok
+                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //Y por último seteamos el estado de la interfaz
+                        SetInterface(estadoUI.inicio);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        //Hubo problemas con la BD, descartamos los cambios de hoja ruta ya que puede intentar
+                        //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
+                        dsHojaRuta.HOJAS_RUTA.RejectChanges();
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    catch (Entidades.Excepciones.ErrorInesperadoException ex)
+                    {
+                        //Hubo problemas no esperados, descartamos los cambios de hoja ruta ya que puede intentar
+                        //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
+                        dsHojaRuta.HOJAS_RUTA.RejectChanges();
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                dgvHojasRuta.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Debe completar los datos:\n\n" + datosFaltantes, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            slideControl.ForwardTo("slideAgregar");
+            panelAcciones.Enabled = false;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvDetalleHoja.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Obtenemos el código
+                int codigo = Convert.ToInt32(dvDetalleHoja[dgvDetalleHoja.SelectedRows[0].Index]["cxhr_codigo"]);
+                //Lo borramos pero sólo del dataset
+                dsHojaRuta.CENTROSXHOJARUTA.FindByCXHR_CODIGO(codigo).Delete();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Centro de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        
+        private void btnSubir_Click(object sender, EventArgs e)
+        {
+            if (dgvDetalleHoja.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Obtenemos el código
+                int codigo = Convert.ToInt32(dvDetalleHoja[dgvDetalleHoja.SelectedRows[0].Index]["cxhr_codigo"]);
+                //Aumentamos la cantidad                
+                dsHojaRuta.CENTROSXHOJARUTA.FindByCXHR_CODIGO(codigo).CXHR_SECUENCIA += 1;
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Centro de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnBajar_Click(object sender, EventArgs e)
+        {
+            if (dgvDetalleHoja.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Obtenemos el código
+                int codigo = Convert.ToInt32(dvDetalleHoja[dgvDetalleHoja.SelectedRows[0].Index]["cxhr_codigo"]);
+                if (dsHojaRuta.CENTROSXHOJARUTA.FindByCXHR_CODIGO(codigo).CXHR_SECUENCIA > 0)
+                {
+                    //Aumentamos la cantidad                
+                    dsHojaRuta.CENTROSXHOJARUTA.FindByCXHR_CODIGO(codigo).CXHR_SECUENCIA -= 1;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Centro de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            if (dgvCentrosTrabajo.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                bool agregar; //variable que indica si se debe agregar al listado
+                //Obtenemos el código según sea nueva o modificada, lo hacemos acá porque lo vamos a usar mucho
+                int hojaCodigo;
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { hojaCodigo = -1; }
+                else { hojaCodigo = Convert.ToInt32(dvHojasRuta[dgvHojasRuta.SelectedRows[0].Index]["hr_codigo"]); }
+                //Obtenemos el código del centro trabajo, también lo vamos a usar mucho
+                int centroCodigo = Convert.ToInt32(dvCentrosTrabajo[dgvCentrosTrabajo.SelectedRows[0].Index]["cto_codigo"]);
+
+                if (dvDetalleHoja.Count > 0)
+                {
+                    //Algo tiene, comprobemos que no intente agregar lo mismo haciendo una consulta al dataset,
+                    //no usamos el dataview porque no queremos volver a filtrar los datos y perderlos
+                    string filtro = "hr_codigo = " + hojaCodigo + " AND cto_codigo = " + centroCodigo;
+                    Data.dsProduccion.CENTROSXHOJARUTARow[] rows =
+                        (Data.dsProduccion.CENTROSXHOJARUTARow[])dsHojaRuta.CENTROSXHOJARUTA.Select(filtro);
+                    if (rows.Length > 0)
+                    {
+                        //Ya lo ha agregado, avisemos
+                        MessageBox.Show("La Hoja de Ruta ya posee el Centro de Tarbajo seleccionado.", "Información: elemento duplicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //Como ya existe marcamos que no debe agregarse
+                        agregar = false;
+                    }
+                    else
+                    {
+                        //No lo ha agregado, marcamos que debe agregarse
+                        agregar = true;
+                    }
+                }
+                else
+                {
+                    //No tiene ningún centro agregado, marcamos que debe agregarse
+                    agregar = true;
+                }
+
+                //Ahora comprobamos si debe agregarse la materia prima o no
+                if (agregar)
+                {
+                    Data.dsProduccion.CENTROSXHOJARUTARow row = dsHojaRuta.CENTROSXHOJARUTA.NewCENTROSXHOJARUTARow();
+                    row.BeginEdit();
+                    //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
+                    row.CXHR_CODIGO = codigoDetalle--; //-- para que se vaya autodecrementando en cada inserción
+                    row.HR_CODIGO = hojaCodigo;
+                    row.CTO_CODIGO = centroCodigo;
+                    row.CXHR_SECUENCIA = nudSecuencia.Value;
+                    row.EndEdit();
+                    //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
+                    //todavia no vamos a insertar en la db hasta que no haga Guardar
+                    dsHojaRuta.CENTROSXHOJARUTA.AddCENTROSXHOJARUTARow(row);
+                }
+                nudSecuencia.Value = 0;
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Centro de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        
+        private void btnHecho_Click(object sender, EventArgs e)
+        {
+            slideControl.BackwardTo("slideDatos");
+            nudSecuencia.Value = 0;
+            panelAcciones.Enabled = true;
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            //Descartamos los cambios realizamos hasta el momento sin guardar
+            dsHojaRuta.HOJAS_RUTA.RejectChanges();
+            dsHojaRuta.CENTROSXHOJARUTA.RejectChanges();
+            SetInterface(estadoUI.inicio);
+        }
 
         #endregion
 
@@ -277,6 +510,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvDetalleHoja.Columns["CTO_CODIGO"].DataPropertyName = "CTO_CODIGO";
             dgvDetalleHoja.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
+            dgvCentrosTrabajo.AutoGenerateColumns = false;
             dgvCentrosTrabajo.Columns.Add("CTO_NOMBRE", "Nombre");
             dgvCentrosTrabajo.Columns.Add("CTO_TIPO", "Tipo");
             dgvCentrosTrabajo.Columns.Add("SEC_CODIGO", "Sector");
@@ -317,6 +551,12 @@ namespace GyCAP.UI.EstructuraProducto
         private void dgvHojasRuta_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             int codigo = Convert.ToInt32(dvHojasRuta[e.RowIndex]["hr_codigo"]);
+            txtNombre.Text = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigo).HR_NOMBRE;
+            txtDescripcion.Text = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigo).HR_DESCRIPCION;
+            dtpFechaAlta.SetFecha(dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigo).HR_FECHAALTA);
+            if (dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigo).HR_ACTIVO == BLL.HojaRutaBLL.hojaRutaActiva) { chkActivo.Checked = true; }
+            else { chkActivo.Checked = false; }
+            dvDetalleHoja.RowFilter = "hr_codigo = " + codigo;
         }
 
         private void dgvHojasRuta_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -325,11 +565,19 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 string nombre = string.Empty;
 
-                if (dgvHojasRuta.Columns[e.ColumnIndex].Name == "HR_ACTIVO")
+                switch (dgvHojasRuta.Columns[e.ColumnIndex].Name)
                 {
-                    if (Convert.ToInt32(e.Value.ToString()) == BLL.HojaRutaBLL.hojaRutaActiva) { nombre = "Activa"; }
+                    case "HR_ACTIVO":
+                        if (Convert.ToInt32(e.Value.ToString()) == BLL.HojaRutaBLL.hojaRutaActiva) { nombre = "Activa"; }
                     else if (Convert.ToInt32(e.Value.ToString()) == BLL.HojaRutaBLL.hojaRutaInactiva) { nombre = "Inactiva"; }
                     e.Value = nombre;
+                        break;
+                    case "HR+FECHAALTA":
+                        nombre = DateTime.Parse(e.Value.ToString()).ToShortDateString();
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -401,6 +649,11 @@ namespace GyCAP.UI.EstructuraProducto
                         break;
                 }
             }
+        }
+
+        private void frmHojaRuta_Activated(object sender, EventArgs e)
+        {
+            txtNombre.Focus();
         }
 
         #endregion
