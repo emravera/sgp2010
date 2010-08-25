@@ -11,12 +11,32 @@ namespace GyCAP.BLL
         public static readonly int hojaRutaActiva = 1;
         public static readonly int hojaRutaInactiva = 0;
 
-        public static void ObetenerHojasRuta(object nombre, object activa, Data.dsProduccion dsHojaRuta)
+        public static void ObtenerHojasRuta(object nombre, object activa, Data.dsProduccion dsHojaRuta, bool obtenerDetalle)
         {
+            object estado = null;
+            if (activa != null && Convert.ToInt32(activa.ToString()) == hojaRutaActiva || Convert.ToInt32(activa.ToString()) == hojaRutaInactiva) { estado = activa; };
+            DAL.HojaRutaDAL.ObtenerHojasRuta(nombre, estado, dsHojaRuta, obtenerDetalle);
+        }
+
+        public static void ObttenerHojasRuta(DataTable dtHojasRuta)
+        {
+            DAL.HojaRutaDAL.ObtenerHojasRuta(dtHojasRuta);
+        }
+
+        public static void Insertar(Data.dsProduccion dsHojaRuta)
+        {
+            DAL.HojaRutaDAL.Insertar(dsHojaRuta);
+        }
+        
+        public static void Actualizar(Data.dsProduccion dsHojaRuta)
+        {
+            DAL.HojaRutaDAL.Actualizar(dsHojaRuta);
         }
 
         public static void Eliminar(int codigoHoja)
         {
+            if (!DAL.HojaRutaDAL.PuedeEliminarse(codigoHoja)) throw new Entidades.Excepciones.ElementoEnTransaccionException();
+            DAL.HojaRutaDAL.Eliminar(codigoHoja);
         }
     }
 }

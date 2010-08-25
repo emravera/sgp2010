@@ -89,6 +89,7 @@
     <Compile Include="Excepciones\ValorNoNegativoException.cs" />
     <Compile Include="FabricanteMaquina.cs" />
     <Compile Include="GrupoEstructura.cs" />
+    <Compile Include="HojaRuta.cs" />
     <Compile Include="Localidad.cs" />
     <Compile Include="Mantenimiento.cs" />
     <Compile Include="Maquina.cs" />

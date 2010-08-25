@@ -27,8 +27,6 @@ namespace GyCAP.Data {
         
         private CENTROS_TRABAJOSDataTable tableCENTROS_TRABAJOS;
         
-        private CENTROSXHOJARUTADataTable tableCENTROSXHOJARUTA;
-        
         private HOJAS_RUTADataTable tableHOJAS_RUTA;
         
         private SECTORESDataTable tableSECTORES;
@@ -39,17 +37,19 @@ namespace GyCAP.Data {
         
         private SUBCONJUNTOSDataTable tableSUBCONJUNTOS;
         
+        private CENTROSXHOJARUTADataTable tableCENTROSXHOJARUTA;
+        
         private global::System.Data.DataRelation relationSECTORES_CENTROS_TRABAJOS;
-        
-        private global::System.Data.DataRelation relationCENTROS_TRABAJOS_CENTROSXHOJARUTA;
-        
-        private global::System.Data.DataRelation relationHOJAS_RUTA_CENTROSXHOJARUTA;
         
         private global::System.Data.DataRelation relationHOJAS_RUTA_CONJUNTOS;
         
         private global::System.Data.DataRelation relationHOJAS_RUTA_PIEZAS;
         
         private global::System.Data.DataRelation relationHOJAS_RUTA_SUBCONJUNTOS;
+        
+        private global::System.Data.DataRelation relationCENTROS_TRABAJOS_CENTROSXHOJARUTA;
+        
+        private global::System.Data.DataRelation relationHOJAS_RUTA_CENTROSXHOJARUTA;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -80,9 +80,6 @@ namespace GyCAP.Data {
                 if ((ds.Tables["CENTROS_TRABAJOS"] != null)) {
                     base.Tables.Add(new CENTROS_TRABAJOSDataTable(ds.Tables["CENTROS_TRABAJOS"]));
                 }
-                if ((ds.Tables["CENTROSXHOJARUTA"] != null)) {
-                    base.Tables.Add(new CENTROSXHOJARUTADataTable(ds.Tables["CENTROSXHOJARUTA"]));
-                }
                 if ((ds.Tables["HOJAS_RUTA"] != null)) {
                     base.Tables.Add(new HOJAS_RUTADataTable(ds.Tables["HOJAS_RUTA"]));
                 }
@@ -97,6 +94,9 @@ namespace GyCAP.Data {
                 }
                 if ((ds.Tables["SUBCONJUNTOS"] != null)) {
                     base.Tables.Add(new SUBCONJUNTOSDataTable(ds.Tables["SUBCONJUNTOS"]));
+                }
+                if ((ds.Tables["CENTROSXHOJARUTA"] != null)) {
+                    base.Tables.Add(new CENTROSXHOJARUTADataTable(ds.Tables["CENTROSXHOJARUTA"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -122,15 +122,6 @@ namespace GyCAP.Data {
         public CENTROS_TRABAJOSDataTable CENTROS_TRABAJOS {
             get {
                 return this.tableCENTROS_TRABAJOS;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public CENTROSXHOJARUTADataTable CENTROSXHOJARUTA {
-            get {
-                return this.tableCENTROSXHOJARUTA;
             }
         }
         
@@ -176,6 +167,15 @@ namespace GyCAP.Data {
         public SUBCONJUNTOSDataTable SUBCONJUNTOS {
             get {
                 return this.tableSUBCONJUNTOS;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public CENTROSXHOJARUTADataTable CENTROSXHOJARUTA {
+            get {
+                return this.tableCENTROSXHOJARUTA;
             }
         }
         
@@ -241,9 +241,6 @@ namespace GyCAP.Data {
                 if ((ds.Tables["CENTROS_TRABAJOS"] != null)) {
                     base.Tables.Add(new CENTROS_TRABAJOSDataTable(ds.Tables["CENTROS_TRABAJOS"]));
                 }
-                if ((ds.Tables["CENTROSXHOJARUTA"] != null)) {
-                    base.Tables.Add(new CENTROSXHOJARUTADataTable(ds.Tables["CENTROSXHOJARUTA"]));
-                }
                 if ((ds.Tables["HOJAS_RUTA"] != null)) {
                     base.Tables.Add(new HOJAS_RUTADataTable(ds.Tables["HOJAS_RUTA"]));
                 }
@@ -258,6 +255,9 @@ namespace GyCAP.Data {
                 }
                 if ((ds.Tables["SUBCONJUNTOS"] != null)) {
                     base.Tables.Add(new SUBCONJUNTOSDataTable(ds.Tables["SUBCONJUNTOS"]));
+                }
+                if ((ds.Tables["CENTROSXHOJARUTA"] != null)) {
+                    base.Tables.Add(new CENTROSXHOJARUTADataTable(ds.Tables["CENTROSXHOJARUTA"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -295,12 +295,6 @@ namespace GyCAP.Data {
                     this.tableCENTROS_TRABAJOS.InitVars();
                 }
             }
-            this.tableCENTROSXHOJARUTA = ((CENTROSXHOJARUTADataTable)(base.Tables["CENTROSXHOJARUTA"]));
-            if ((initTable == true)) {
-                if ((this.tableCENTROSXHOJARUTA != null)) {
-                    this.tableCENTROSXHOJARUTA.InitVars();
-                }
-            }
             this.tableHOJAS_RUTA = ((HOJAS_RUTADataTable)(base.Tables["HOJAS_RUTA"]));
             if ((initTable == true)) {
                 if ((this.tableHOJAS_RUTA != null)) {
@@ -331,12 +325,18 @@ namespace GyCAP.Data {
                     this.tableSUBCONJUNTOS.InitVars();
                 }
             }
+            this.tableCENTROSXHOJARUTA = ((CENTROSXHOJARUTADataTable)(base.Tables["CENTROSXHOJARUTA"]));
+            if ((initTable == true)) {
+                if ((this.tableCENTROSXHOJARUTA != null)) {
+                    this.tableCENTROSXHOJARUTA.InitVars();
+                }
+            }
             this.relationSECTORES_CENTROS_TRABAJOS = this.Relations["SECTORES_CENTROS_TRABAJOS"];
-            this.relationCENTROS_TRABAJOS_CENTROSXHOJARUTA = this.Relations["CENTROS_TRABAJOS_CENTROSXHOJARUTA"];
-            this.relationHOJAS_RUTA_CENTROSXHOJARUTA = this.Relations["HOJAS_RUTA_CENTROSXHOJARUTA"];
             this.relationHOJAS_RUTA_CONJUNTOS = this.Relations["HOJAS_RUTA_CONJUNTOS"];
             this.relationHOJAS_RUTA_PIEZAS = this.Relations["HOJAS_RUTA_PIEZAS"];
             this.relationHOJAS_RUTA_SUBCONJUNTOS = this.Relations["HOJAS_RUTA_SUBCONJUNTOS"];
+            this.relationCENTROS_TRABAJOS_CENTROSXHOJARUTA = this.Relations["CENTROS_TRABAJOS_CENTROSXHOJARUTA"];
+            this.relationHOJAS_RUTA_CENTROSXHOJARUTA = this.Relations["HOJAS_RUTA_CENTROSXHOJARUTA"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -348,8 +348,6 @@ namespace GyCAP.Data {
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableCENTROS_TRABAJOS = new CENTROS_TRABAJOSDataTable();
             base.Tables.Add(this.tableCENTROS_TRABAJOS);
-            this.tableCENTROSXHOJARUTA = new CENTROSXHOJARUTADataTable();
-            base.Tables.Add(this.tableCENTROSXHOJARUTA);
             this.tableHOJAS_RUTA = new HOJAS_RUTADataTable();
             base.Tables.Add(this.tableHOJAS_RUTA);
             this.tableSECTORES = new SECTORESDataTable();
@@ -360,18 +358,12 @@ namespace GyCAP.Data {
             base.Tables.Add(this.tablePIEZAS);
             this.tableSUBCONJUNTOS = new SUBCONJUNTOSDataTable();
             base.Tables.Add(this.tableSUBCONJUNTOS);
+            this.tableCENTROSXHOJARUTA = new CENTROSXHOJARUTADataTable();
+            base.Tables.Add(this.tableCENTROSXHOJARUTA);
             this.relationSECTORES_CENTROS_TRABAJOS = new global::System.Data.DataRelation("SECTORES_CENTROS_TRABAJOS", new global::System.Data.DataColumn[] {
                         this.tableSECTORES.SEC_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableCENTROS_TRABAJOS.SEC_CODIGOColumn}, false);
             this.Relations.Add(this.relationSECTORES_CENTROS_TRABAJOS);
-            this.relationCENTROS_TRABAJOS_CENTROSXHOJARUTA = new global::System.Data.DataRelation("CENTROS_TRABAJOS_CENTROSXHOJARUTA", new global::System.Data.DataColumn[] {
-                        this.tableCENTROS_TRABAJOS.CTO_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCENTROSXHOJARUTA.CTO_CODIGOColumn}, false);
-            this.Relations.Add(this.relationCENTROS_TRABAJOS_CENTROSXHOJARUTA);
-            this.relationHOJAS_RUTA_CENTROSXHOJARUTA = new global::System.Data.DataRelation("HOJAS_RUTA_CENTROSXHOJARUTA", new global::System.Data.DataColumn[] {
-                        this.tableHOJAS_RUTA.HR_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCENTROSXHOJARUTA.HR_CODIGOColumn}, false);
-            this.Relations.Add(this.relationHOJAS_RUTA_CENTROSXHOJARUTA);
             this.relationHOJAS_RUTA_CONJUNTOS = new global::System.Data.DataRelation("HOJAS_RUTA_CONJUNTOS", new global::System.Data.DataColumn[] {
                         this.tableHOJAS_RUTA.HR_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableCONJUNTOS.HR_CODIGOColumn}, false);
@@ -384,15 +376,18 @@ namespace GyCAP.Data {
                         this.tableHOJAS_RUTA.HR_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableSUBCONJUNTOS.HR_CODIGOColumn}, false);
             this.Relations.Add(this.relationHOJAS_RUTA_SUBCONJUNTOS);
+            this.relationCENTROS_TRABAJOS_CENTROSXHOJARUTA = new global::System.Data.DataRelation("CENTROS_TRABAJOS_CENTROSXHOJARUTA", new global::System.Data.DataColumn[] {
+                        this.tableCENTROS_TRABAJOS.CTO_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCENTROSXHOJARUTA.CTO_CODIGOColumn}, false);
+            this.Relations.Add(this.relationCENTROS_TRABAJOS_CENTROSXHOJARUTA);
+            this.relationHOJAS_RUTA_CENTROSXHOJARUTA = new global::System.Data.DataRelation("HOJAS_RUTA_CENTROSXHOJARUTA", new global::System.Data.DataColumn[] {
+                        this.tableHOJAS_RUTA.HR_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCENTROSXHOJARUTA.HR_CODIGOColumn}, false);
+            this.Relations.Add(this.relationHOJAS_RUTA_CENTROSXHOJARUTA);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeCENTROS_TRABAJOS() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeCENTROSXHOJARUTA() {
             return false;
         }
         
@@ -418,6 +413,11 @@ namespace GyCAP.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeSUBCONJUNTOS() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeCENTROSXHOJARUTA() {
             return false;
         }
         
@@ -476,8 +476,6 @@ namespace GyCAP.Data {
         
         public delegate void CENTROS_TRABAJOSRowChangeEventHandler(object sender, CENTROS_TRABAJOSRowChangeEvent e);
         
-        public delegate void CENTROSXHOJARUTARowChangeEventHandler(object sender, CENTROSXHOJARUTARowChangeEvent e);
-        
         public delegate void HOJAS_RUTARowChangeEventHandler(object sender, HOJAS_RUTARowChangeEvent e);
         
         public delegate void SECTORESRowChangeEventHandler(object sender, SECTORESRowChangeEvent e);
@@ -487,6 +485,8 @@ namespace GyCAP.Data {
         public delegate void PIEZASRowChangeEventHandler(object sender, PIEZASRowChangeEvent e);
         
         public delegate void SUBCONJUNTOSRowChangeEventHandler(object sender, SUBCONJUNTOSRowChangeEvent e);
+        
+        public delegate void CENTROSXHOJARUTARowChangeEventHandler(object sender, CENTROSXHOJARUTARowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -871,276 +871,6 @@ namespace GyCAP.Data {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "CENTROS_TRABAJOSDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class CENTROSXHOJARUTADataTable : global::System.Data.TypedTableBase<CENTROSXHOJARUTARow> {
-            
-            private global::System.Data.DataColumn columnCXHR_CODIGO;
-            
-            private global::System.Data.DataColumn columnCTO_CODIGO;
-            
-            private global::System.Data.DataColumn columnHR_CODIGO;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CENTROSXHOJARUTADataTable() {
-                this.TableName = "CENTROSXHOJARUTA";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal CENTROSXHOJARUTADataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected CENTROSXHOJARUTADataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CXHR_CODIGOColumn {
-                get {
-                    return this.columnCXHR_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CTO_CODIGOColumn {
-                get {
-                    return this.columnCTO_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn HR_CODIGOColumn {
-                get {
-                    return this.columnHR_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CENTROSXHOJARUTARow this[int index] {
-                get {
-                    return ((CENTROSXHOJARUTARow)(this.Rows[index]));
-                }
-            }
-            
-            public event CENTROSXHOJARUTARowChangeEventHandler CENTROSXHOJARUTARowChanging;
-            
-            public event CENTROSXHOJARUTARowChangeEventHandler CENTROSXHOJARUTARowChanged;
-            
-            public event CENTROSXHOJARUTARowChangeEventHandler CENTROSXHOJARUTARowDeleting;
-            
-            public event CENTROSXHOJARUTARowChangeEventHandler CENTROSXHOJARUTARowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddCENTROSXHOJARUTARow(CENTROSXHOJARUTARow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CENTROSXHOJARUTARow AddCENTROSXHOJARUTARow(CENTROS_TRABAJOSRow parentCENTROS_TRABAJOSRowByCENTROS_TRABAJOS_CENTROSXHOJARUTA, HOJAS_RUTARow parentHOJAS_RUTARowByHOJAS_RUTA_CENTROSXHOJARUTA) {
-                CENTROSXHOJARUTARow rowCENTROSXHOJARUTARow = ((CENTROSXHOJARUTARow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        null,
-                        null};
-                if ((parentCENTROS_TRABAJOSRowByCENTROS_TRABAJOS_CENTROSXHOJARUTA != null)) {
-                    columnValuesArray[1] = parentCENTROS_TRABAJOSRowByCENTROS_TRABAJOS_CENTROSXHOJARUTA[0];
-                }
-                if ((parentHOJAS_RUTARowByHOJAS_RUTA_CENTROSXHOJARUTA != null)) {
-                    columnValuesArray[2] = parentHOJAS_RUTARowByHOJAS_RUTA_CENTROSXHOJARUTA[0];
-                }
-                rowCENTROSXHOJARUTARow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowCENTROSXHOJARUTARow);
-                return rowCENTROSXHOJARUTARow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CENTROSXHOJARUTARow FindByCXHR_CODIGO(decimal CXHR_CODIGO) {
-                return ((CENTROSXHOJARUTARow)(this.Rows.Find(new object[] {
-                            CXHR_CODIGO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                CENTROSXHOJARUTADataTable cln = ((CENTROSXHOJARUTADataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new CENTROSXHOJARUTADataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnCXHR_CODIGO = base.Columns["CXHR_CODIGO"];
-                this.columnCTO_CODIGO = base.Columns["CTO_CODIGO"];
-                this.columnHR_CODIGO = base.Columns["HR_CODIGO"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnCXHR_CODIGO = new global::System.Data.DataColumn("CXHR_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCXHR_CODIGO);
-                this.columnCTO_CODIGO = new global::System.Data.DataColumn("CTO_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCTO_CODIGO);
-                this.columnHR_CODIGO = new global::System.Data.DataColumn("HR_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnHR_CODIGO);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnCXHR_CODIGO}, true));
-                this.columnCXHR_CODIGO.AutoIncrement = true;
-                this.columnCXHR_CODIGO.AutoIncrementSeed = -1;
-                this.columnCXHR_CODIGO.AutoIncrementStep = -1;
-                this.columnCXHR_CODIGO.AllowDBNull = false;
-                this.columnCXHR_CODIGO.Unique = true;
-                this.columnCTO_CODIGO.AllowDBNull = false;
-                this.columnHR_CODIGO.AllowDBNull = false;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CENTROSXHOJARUTARow NewCENTROSXHOJARUTARow() {
-                return ((CENTROSXHOJARUTARow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new CENTROSXHOJARUTARow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(CENTROSXHOJARUTARow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.CENTROSXHOJARUTARowChanged != null)) {
-                    this.CENTROSXHOJARUTARowChanged(this, new CENTROSXHOJARUTARowChangeEvent(((CENTROSXHOJARUTARow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.CENTROSXHOJARUTARowChanging != null)) {
-                    this.CENTROSXHOJARUTARowChanging(this, new CENTROSXHOJARUTARowChangeEvent(((CENTROSXHOJARUTARow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.CENTROSXHOJARUTARowDeleted != null)) {
-                    this.CENTROSXHOJARUTARowDeleted(this, new CENTROSXHOJARUTARowChangeEvent(((CENTROSXHOJARUTARow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.CENTROSXHOJARUTARowDeleting != null)) {
-                    this.CENTROSXHOJARUTARowDeleting(this, new CENTROSXHOJARUTARowChangeEvent(((CENTROSXHOJARUTARow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveCENTROSXHOJARUTARow(CENTROSXHOJARUTARow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsProduccion ds = new dsProduccion();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "CENTROSXHOJARUTADataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -2804,6 +2534,290 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class CENTROSXHOJARUTADataTable : global::System.Data.TypedTableBase<CENTROSXHOJARUTARow> {
+            
+            private global::System.Data.DataColumn columnCXHR_CODIGO;
+            
+            private global::System.Data.DataColumn columnCTO_CODIGO;
+            
+            private global::System.Data.DataColumn columnHR_CODIGO;
+            
+            private global::System.Data.DataColumn columnCXHR_SECUENCIA;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CENTROSXHOJARUTADataTable() {
+                this.TableName = "CENTROSXHOJARUTA";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal CENTROSXHOJARUTADataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected CENTROSXHOJARUTADataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CXHR_CODIGOColumn {
+                get {
+                    return this.columnCXHR_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CTO_CODIGOColumn {
+                get {
+                    return this.columnCTO_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn HR_CODIGOColumn {
+                get {
+                    return this.columnHR_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CXHR_SECUENCIAColumn {
+                get {
+                    return this.columnCXHR_SECUENCIA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CENTROSXHOJARUTARow this[int index] {
+                get {
+                    return ((CENTROSXHOJARUTARow)(this.Rows[index]));
+                }
+            }
+            
+            public event CENTROSXHOJARUTARowChangeEventHandler CENTROSXHOJARUTARowChanging;
+            
+            public event CENTROSXHOJARUTARowChangeEventHandler CENTROSXHOJARUTARowChanged;
+            
+            public event CENTROSXHOJARUTARowChangeEventHandler CENTROSXHOJARUTARowDeleting;
+            
+            public event CENTROSXHOJARUTARowChangeEventHandler CENTROSXHOJARUTARowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddCENTROSXHOJARUTARow(CENTROSXHOJARUTARow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CENTROSXHOJARUTARow AddCENTROSXHOJARUTARow(CENTROS_TRABAJOSRow parentCENTROS_TRABAJOSRowByCENTROS_TRABAJOS_CENTROSXHOJARUTA, HOJAS_RUTARow parentHOJAS_RUTARowByHOJAS_RUTA_CENTROSXHOJARUTA, decimal CXHR_SECUENCIA) {
+                CENTROSXHOJARUTARow rowCENTROSXHOJARUTARow = ((CENTROSXHOJARUTARow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        null,
+                        CXHR_SECUENCIA};
+                if ((parentCENTROS_TRABAJOSRowByCENTROS_TRABAJOS_CENTROSXHOJARUTA != null)) {
+                    columnValuesArray[1] = parentCENTROS_TRABAJOSRowByCENTROS_TRABAJOS_CENTROSXHOJARUTA[0];
+                }
+                if ((parentHOJAS_RUTARowByHOJAS_RUTA_CENTROSXHOJARUTA != null)) {
+                    columnValuesArray[2] = parentHOJAS_RUTARowByHOJAS_RUTA_CENTROSXHOJARUTA[0];
+                }
+                rowCENTROSXHOJARUTARow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowCENTROSXHOJARUTARow);
+                return rowCENTROSXHOJARUTARow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CENTROSXHOJARUTARow FindByCXHR_CODIGO(decimal CXHR_CODIGO) {
+                return ((CENTROSXHOJARUTARow)(this.Rows.Find(new object[] {
+                            CXHR_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                CENTROSXHOJARUTADataTable cln = ((CENTROSXHOJARUTADataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new CENTROSXHOJARUTADataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnCXHR_CODIGO = base.Columns["CXHR_CODIGO"];
+                this.columnCTO_CODIGO = base.Columns["CTO_CODIGO"];
+                this.columnHR_CODIGO = base.Columns["HR_CODIGO"];
+                this.columnCXHR_SECUENCIA = base.Columns["CXHR_SECUENCIA"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnCXHR_CODIGO = new global::System.Data.DataColumn("CXHR_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCXHR_CODIGO);
+                this.columnCTO_CODIGO = new global::System.Data.DataColumn("CTO_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCTO_CODIGO);
+                this.columnHR_CODIGO = new global::System.Data.DataColumn("HR_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnHR_CODIGO);
+                this.columnCXHR_SECUENCIA = new global::System.Data.DataColumn("CXHR_SECUENCIA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCXHR_SECUENCIA);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnCXHR_CODIGO}, true));
+                this.columnCXHR_CODIGO.AutoIncrement = true;
+                this.columnCXHR_CODIGO.AutoIncrementSeed = -1;
+                this.columnCXHR_CODIGO.AutoIncrementStep = -1;
+                this.columnCXHR_CODIGO.AllowDBNull = false;
+                this.columnCXHR_CODIGO.Unique = true;
+                this.columnCTO_CODIGO.AllowDBNull = false;
+                this.columnHR_CODIGO.AllowDBNull = false;
+                this.columnCXHR_SECUENCIA.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CENTROSXHOJARUTARow NewCENTROSXHOJARUTARow() {
+                return ((CENTROSXHOJARUTARow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new CENTROSXHOJARUTARow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(CENTROSXHOJARUTARow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.CENTROSXHOJARUTARowChanged != null)) {
+                    this.CENTROSXHOJARUTARowChanged(this, new CENTROSXHOJARUTARowChangeEvent(((CENTROSXHOJARUTARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.CENTROSXHOJARUTARowChanging != null)) {
+                    this.CENTROSXHOJARUTARowChanging(this, new CENTROSXHOJARUTARowChangeEvent(((CENTROSXHOJARUTARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.CENTROSXHOJARUTARowDeleted != null)) {
+                    this.CENTROSXHOJARUTARowDeleted(this, new CENTROSXHOJARUTARowChangeEvent(((CENTROSXHOJARUTARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.CENTROSXHOJARUTARowDeleting != null)) {
+                    this.CENTROSXHOJARUTARowDeleting(this, new CENTROSXHOJARUTARowChangeEvent(((CENTROSXHOJARUTARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveCENTROSXHOJARUTARow(CENTROSXHOJARUTARow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsProduccion ds = new dsProduccion();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "CENTROSXHOJARUTADataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -3204,71 +3218,6 @@ namespace GyCAP.Data {
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class CENTROSXHOJARUTARow : global::System.Data.DataRow {
-            
-            private CENTROSXHOJARUTADataTable tableCENTROSXHOJARUTA;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal CENTROSXHOJARUTARow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableCENTROSXHOJARUTA = ((CENTROSXHOJARUTADataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CXHR_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableCENTROSXHOJARUTA.CXHR_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableCENTROSXHOJARUTA.CXHR_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CTO_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableCENTROSXHOJARUTA.CTO_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableCENTROSXHOJARUTA.CTO_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal HR_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableCENTROSXHOJARUTA.HR_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableCENTROSXHOJARUTA.HR_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CENTROS_TRABAJOSRow CENTROS_TRABAJOSRow {
-                get {
-                    return ((CENTROS_TRABAJOSRow)(this.GetParentRow(this.Table.ParentRelations["CENTROS_TRABAJOS_CENTROSXHOJARUTA"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["CENTROS_TRABAJOS_CENTROSXHOJARUTA"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public HOJAS_RUTARow HOJAS_RUTARow {
-                get {
-                    return ((HOJAS_RUTARow)(this.GetParentRow(this.Table.ParentRelations["HOJAS_RUTA_CENTROSXHOJARUTA"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["HOJAS_RUTA_CENTROSXHOJARUTA"]);
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public partial class HOJAS_RUTARow : global::System.Data.DataRow {
             
             private HOJAS_RUTADataTable tableHOJAS_RUTA;
@@ -3390,16 +3339,6 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CENTROSXHOJARUTARow[] GetCENTROSXHOJARUTARows() {
-                if ((this.Table.ChildRelations["HOJAS_RUTA_CENTROSXHOJARUTA"] == null)) {
-                    return new CENTROSXHOJARUTARow[0];
-                }
-                else {
-                    return ((CENTROSXHOJARUTARow[])(base.GetChildRows(this.Table.ChildRelations["HOJAS_RUTA_CENTROSXHOJARUTA"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public CONJUNTOSRow[] GetCONJUNTOSRows() {
                 if ((this.Table.ChildRelations["HOJAS_RUTA_CONJUNTOS"] == null)) {
                     return new CONJUNTOSRow[0];
@@ -3426,6 +3365,16 @@ namespace GyCAP.Data {
                 }
                 else {
                     return ((SUBCONJUNTOSRow[])(base.GetChildRows(this.Table.ChildRelations["HOJAS_RUTA_SUBCONJUNTOS"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CENTROSXHOJARUTARow[] GetCENTROSXHOJARUTARows() {
+                if ((this.Table.ChildRelations["HOJAS_RUTA_CENTROSXHOJARUTA"] == null)) {
+                    return new CENTROSXHOJARUTARow[0];
+                }
+                else {
+                    return ((CENTROSXHOJARUTARow[])(base.GetChildRows(this.Table.ChildRelations["HOJAS_RUTA_CENTROSXHOJARUTA"])));
                 }
             }
         }
@@ -4226,6 +4175,81 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class CENTROSXHOJARUTARow : global::System.Data.DataRow {
+            
+            private CENTROSXHOJARUTADataTable tableCENTROSXHOJARUTA;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal CENTROSXHOJARUTARow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableCENTROSXHOJARUTA = ((CENTROSXHOJARUTADataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CXHR_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableCENTROSXHOJARUTA.CXHR_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableCENTROSXHOJARUTA.CXHR_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CTO_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableCENTROSXHOJARUTA.CTO_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableCENTROSXHOJARUTA.CTO_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal HR_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableCENTROSXHOJARUTA.HR_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableCENTROSXHOJARUTA.HR_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CXHR_SECUENCIA {
+                get {
+                    return ((decimal)(this[this.tableCENTROSXHOJARUTA.CXHR_SECUENCIAColumn]));
+                }
+                set {
+                    this[this.tableCENTROSXHOJARUTA.CXHR_SECUENCIAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CENTROS_TRABAJOSRow CENTROS_TRABAJOSRow {
+                get {
+                    return ((CENTROS_TRABAJOSRow)(this.GetParentRow(this.Table.ParentRelations["CENTROS_TRABAJOS_CENTROSXHOJARUTA"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["CENTROS_TRABAJOS_CENTROSXHOJARUTA"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public HOJAS_RUTARow HOJAS_RUTARow {
+                get {
+                    return ((HOJAS_RUTARow)(this.GetParentRow(this.Table.ParentRelations["HOJAS_RUTA_CENTROSXHOJARUTA"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["HOJAS_RUTA_CENTROSXHOJARUTA"]);
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -4243,37 +4267,6 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public CENTROS_TRABAJOSRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class CENTROSXHOJARUTARowChangeEvent : global::System.EventArgs {
-            
-            private CENTROSXHOJARUTARow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CENTROSXHOJARUTARowChangeEvent(CENTROSXHOJARUTARow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CENTROSXHOJARUTARow Row {
                 get {
                     return this.eventRow;
                 }
@@ -4429,6 +4422,37 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SUBCONJUNTOSRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class CENTROSXHOJARUTARowChangeEvent : global::System.EventArgs {
+            
+            private CENTROSXHOJARUTARow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CENTROSXHOJARUTARowChangeEvent(CENTROSXHOJARUTARow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CENTROSXHOJARUTARow Row {
                 get {
                     return this.eventRow;
                 }
@@ -5312,296 +5336,6 @@ SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO
                     global::System.Nullable<decimal> Original_CTO_COSTOHORA, 
                     global::System.Nullable<decimal> Original_CTO_COSTOCICLO) {
             return this.Update(CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO_HORASTRABAJOEXTENDIDO, CTO_ACTIVO, CTO_DESCRIPCION, CTO_CAPACIDADCICLO, CTO_HORASCICLO, CTO_TIEMPOANTES, CTO_TIEMPODESPUES, CTO_EFICIENCIA, CTO_COSTOHORA, CTO_COSTOCICLO, Original_CTO_CODIGO, Original_CTO_NOMBRE, Original_SEC_CODIGO, Original_CTO_TIPO, Original_CTO_HORASTRABAJONORMAL, Original_CTO_HORASTRABAJOEXTENDIDO, Original_CTO_ACTIVO, Original_CTO_DESCRIPCION, Original_CTO_CAPACIDADCICLO, Original_CTO_HORASCICLO, Original_CTO_TIEMPOANTES, Original_CTO_TIEMPODESPUES, Original_CTO_EFICIENCIA, Original_CTO_COSTOHORA, Original_CTO_COSTOCICLO, Original_CTO_CODIGO);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class CENTROSXHOJARUTATableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public CENTROSXHOJARUTATableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "CENTROSXHOJARUTA";
-            tableMapping.ColumnMappings.Add("CXHR_CODIGO", "CXHR_CODIGO");
-            tableMapping.ColumnMappings.Add("CTO_CODIGO", "CTO_CODIGO");
-            tableMapping.ColumnMappings.Add("HR_CODIGO", "HR_CODIGO");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[CENTROSXHOJARUTA] WHERE (([CXHR_CODIGO] = @Original_CXHR_CODIG" +
-                "O) AND ([CTO_CODIGO] = @Original_CTO_CODIGO) AND ([HR_CODIGO] = @Original_HR_COD" +
-                "IGO))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CXHR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CXHR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[CENTROSXHOJARUTA] ([CTO_CODIGO], [HR_CODIGO]) VALUES (@CTO_COD" +
-                "IGO, @HR_CODIGO);\r\nSELECT CXHR_CODIGO, CTO_CODIGO, HR_CODIGO FROM CENTROSXHOJARU" +
-                "TA WHERE (CXHR_CODIGO = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[CENTROSXHOJARUTA] SET [CTO_CODIGO] = @CTO_CODIGO, [HR_CODIGO] = @HR_CODIGO WHERE (([CXHR_CODIGO] = @Original_CXHR_CODIGO) AND ([CTO_CODIGO] = @Original_CTO_CODIGO) AND ([HR_CODIGO] = @Original_HR_CODIGO));
-SELECT CXHR_CODIGO, CTO_CODIGO, HR_CODIGO FROM CENTROSXHOJARUTA WHERE (CXHR_CODIGO = @CXHR_CODIGO)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CXHR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CXHR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CXHR_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "CXHR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT CXHR_CODIGO, CTO_CODIGO, HR_CODIGO FROM dbo.CENTROSXHOJARUTA";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsProduccion.CENTROSXHOJARUTADataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsProduccion.CENTROSXHOJARUTADataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsProduccion.CENTROSXHOJARUTADataTable dataTable = new dsProduccion.CENTROSXHOJARUTADataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsProduccion.CENTROSXHOJARUTADataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsProduccion dataSet) {
-            return this.Adapter.Update(dataSet, "CENTROSXHOJARUTA");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_CXHR_CODIGO, decimal Original_CTO_CODIGO, decimal Original_HR_CODIGO) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_CXHR_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_CTO_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_HR_CODIGO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(decimal CTO_CODIGO, decimal HR_CODIGO) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(CTO_CODIGO));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(HR_CODIGO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal CTO_CODIGO, decimal HR_CODIGO, decimal Original_CXHR_CODIGO, decimal Original_CTO_CODIGO, decimal Original_HR_CODIGO, decimal CXHR_CODIGO) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(CTO_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(HR_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(Original_CXHR_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(Original_CTO_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(Original_HR_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(CXHR_CODIGO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal CTO_CODIGO, decimal HR_CODIGO, decimal Original_CXHR_CODIGO, decimal Original_CTO_CODIGO, decimal Original_HR_CODIGO) {
-            return this.Update(CTO_CODIGO, HR_CODIGO, Original_CXHR_CODIGO, Original_CTO_CODIGO, Original_HR_CODIGO, Original_CXHR_CODIGO);
         }
     }
     
@@ -8108,6 +7842,307 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class CENTROSXHOJARUTATableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public CENTROSXHOJARUTATableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "CENTROSXHOJARUTA";
+            tableMapping.ColumnMappings.Add("CXHR_CODIGO", "CXHR_CODIGO");
+            tableMapping.ColumnMappings.Add("CTO_CODIGO", "CTO_CODIGO");
+            tableMapping.ColumnMappings.Add("HR_CODIGO", "HR_CODIGO");
+            tableMapping.ColumnMappings.Add("CXHR_SECUENCIA", "CXHR_SECUENCIA");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[CENTROSXHOJARUTA] WHERE (([CXHR_CODIGO] = @Original_CXHR_CODIG" +
+                "O) AND ([CTO_CODIGO] = @Original_CTO_CODIGO) AND ([HR_CODIGO] = @Original_HR_COD" +
+                "IGO) AND ([CXHR_SECUENCIA] = @Original_CXHR_SECUENCIA))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CXHR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CXHR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CXHR_SECUENCIA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 0, "CXHR_SECUENCIA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[CENTROSXHOJARUTA] ([CTO_CODIGO], [HR_CODIGO], [CXHR_SECUENCIA]" +
+                ") VALUES (@CTO_CODIGO, @HR_CODIGO, @CXHR_SECUENCIA);\r\nSELECT CXHR_CODIGO, CTO_CO" +
+                "DIGO, HR_CODIGO, CXHR_SECUENCIA FROM CENTROSXHOJARUTA WHERE (CXHR_CODIGO = SCOPE" +
+                "_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CXHR_SECUENCIA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 0, "CXHR_SECUENCIA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[CENTROSXHOJARUTA] SET [CTO_CODIGO] = @CTO_CODIGO, [HR_CODIGO] = @HR_CODIGO, [CXHR_SECUENCIA] = @CXHR_SECUENCIA WHERE (([CXHR_CODIGO] = @Original_CXHR_CODIGO) AND ([CTO_CODIGO] = @Original_CTO_CODIGO) AND ([HR_CODIGO] = @Original_HR_CODIGO) AND ([CXHR_SECUENCIA] = @Original_CXHR_SECUENCIA));
+SELECT CXHR_CODIGO, CTO_CODIGO, HR_CODIGO, CXHR_SECUENCIA FROM CENTROSXHOJARUTA WHERE (CXHR_CODIGO = @CXHR_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CXHR_SECUENCIA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 0, "CXHR_SECUENCIA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CXHR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CXHR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CXHR_SECUENCIA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 0, "CXHR_SECUENCIA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CXHR_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "CXHR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT CXHR_CODIGO, CTO_CODIGO, HR_CODIGO, CXHR_SECUENCIA FROM dbo.CENTROSXHOJARU" +
+                "TA";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsProduccion.CENTROSXHOJARUTADataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsProduccion.CENTROSXHOJARUTADataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsProduccion.CENTROSXHOJARUTADataTable dataTable = new dsProduccion.CENTROSXHOJARUTADataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsProduccion.CENTROSXHOJARUTADataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsProduccion dataSet) {
+            return this.Adapter.Update(dataSet, "CENTROSXHOJARUTA");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_CXHR_CODIGO, decimal Original_CTO_CODIGO, decimal Original_HR_CODIGO, decimal Original_CXHR_SECUENCIA) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_CXHR_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_CTO_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_HR_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((decimal)(Original_CXHR_SECUENCIA));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal CTO_CODIGO, decimal HR_CODIGO, decimal CXHR_SECUENCIA) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(CTO_CODIGO));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(HR_CODIGO));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(CXHR_SECUENCIA));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(decimal CTO_CODIGO, decimal HR_CODIGO, decimal CXHR_SECUENCIA, decimal Original_CXHR_CODIGO, decimal Original_CTO_CODIGO, decimal Original_HR_CODIGO, decimal Original_CXHR_SECUENCIA, decimal CXHR_CODIGO) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(CTO_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(HR_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(CXHR_SECUENCIA));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(Original_CXHR_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(Original_CTO_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(Original_HR_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_CXHR_SECUENCIA));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(CXHR_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(decimal CTO_CODIGO, decimal HR_CODIGO, decimal CXHR_SECUENCIA, decimal Original_CXHR_CODIGO, decimal Original_CTO_CODIGO, decimal Original_HR_CODIGO, decimal Original_CXHR_SECUENCIA) {
+            return this.Update(CTO_CODIGO, HR_CODIGO, CXHR_SECUENCIA, Original_CXHR_CODIGO, Original_CTO_CODIGO, Original_HR_CODIGO, Original_CXHR_SECUENCIA, Original_CXHR_CODIGO);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -8122,8 +8157,6 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
         
         private CENTROS_TRABAJOSTableAdapter _cENTROS_TRABAJOSTableAdapter;
         
-        private CENTROSXHOJARUTATableAdapter _cENTROSXHOJARUTATableAdapter;
-        
         private HOJAS_RUTATableAdapter _hOJAS_RUTATableAdapter;
         
         private SECTORESTableAdapter _sECTORESTableAdapter;
@@ -8133,6 +8166,8 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
         private PIEZASTableAdapter _pIEZASTableAdapter;
         
         private SUBCONJUNTOSTableAdapter _sUBCONJUNTOSTableAdapter;
+        
+        private CENTROSXHOJARUTATableAdapter _cENTROSXHOJARUTATableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -8158,19 +8193,6 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
             }
             set {
                 this._cENTROS_TRABAJOSTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
-        public CENTROSXHOJARUTATableAdapter CENTROSXHOJARUTATableAdapter {
-            get {
-                return this._cENTROSXHOJARUTATableAdapter;
-            }
-            set {
-                this._cENTROSXHOJARUTATableAdapter = value;
             }
         }
         
@@ -8240,6 +8262,19 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public CENTROSXHOJARUTATableAdapter CENTROSXHOJARUTATableAdapter {
+            get {
+                return this._cENTROSXHOJARUTATableAdapter;
+            }
+            set {
+                this._cENTROSXHOJARUTATableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -8259,10 +8294,6 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
                 if (((this._cENTROS_TRABAJOSTableAdapter != null) 
                             && (this._cENTROS_TRABAJOSTableAdapter.Connection != null))) {
                     return this._cENTROS_TRABAJOSTableAdapter.Connection;
-                }
-                if (((this._cENTROSXHOJARUTATableAdapter != null) 
-                            && (this._cENTROSXHOJARUTATableAdapter.Connection != null))) {
-                    return this._cENTROSXHOJARUTATableAdapter.Connection;
                 }
                 if (((this._hOJAS_RUTATableAdapter != null) 
                             && (this._hOJAS_RUTATableAdapter.Connection != null))) {
@@ -8284,6 +8315,10 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
                             && (this._sUBCONJUNTOSTableAdapter.Connection != null))) {
                     return this._sUBCONJUNTOSTableAdapter.Connection;
                 }
+                if (((this._cENTROSXHOJARUTATableAdapter != null) 
+                            && (this._cENTROSXHOJARUTATableAdapter.Connection != null))) {
+                    return this._cENTROSXHOJARUTATableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -8299,9 +8334,6 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
                 if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._cENTROSXHOJARUTATableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._hOJAS_RUTATableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -8315,6 +8347,9 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
                     count = (count + 1);
                 }
                 if ((this._sUBCONJUNTOSTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._cENTROSXHOJARUTATableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -8354,15 +8389,6 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._pIEZASTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.PIEZAS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._pIEZASTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._sUBCONJUNTOSTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.SUBCONJUNTOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -8387,6 +8413,15 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._cONJUNTOSTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._pIEZASTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.PIEZAS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._pIEZASTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -8423,14 +8458,6 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._pIEZASTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.PIEZAS.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._pIEZASTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._sUBCONJUNTOSTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.SUBCONJUNTOS.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -8455,6 +8482,14 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._pIEZASTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.PIEZAS.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._pIEZASTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             return result;
         }
         
@@ -8464,6 +8499,14 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateDeletedRows(dsProduccion dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
+            if ((this._pIEZASTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.PIEZAS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._pIEZASTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._cONJUNTOSTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.CONJUNTOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -8485,14 +8528,6 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._sUBCONJUNTOSTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._pIEZASTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.PIEZAS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._pIEZASTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -8562,11 +8597,6 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._cENTROSXHOJARUTATableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._cENTROSXHOJARUTATableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             if (((this._hOJAS_RUTATableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._hOJAS_RUTATableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
@@ -8589,6 +8619,11 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
             }
             if (((this._sUBCONJUNTOSTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._sUBCONJUNTOSTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._cENTROSXHOJARUTATableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._cENTROSXHOJARUTATableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -8631,15 +8666,6 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
                     if (this._cENTROS_TRABAJOSTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._cENTROS_TRABAJOSTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._cENTROS_TRABAJOSTableAdapter.Adapter);
-                    }
-                }
-                if ((this._cENTROSXHOJARUTATableAdapter != null)) {
-                    revertConnections.Add(this._cENTROSXHOJARUTATableAdapter, this._cENTROSXHOJARUTATableAdapter.Connection);
-                    this._cENTROSXHOJARUTATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._cENTROSXHOJARUTATableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._cENTROSXHOJARUTATableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._cENTROSXHOJARUTATableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._cENTROSXHOJARUTATableAdapter.Adapter);
                     }
                 }
                 if ((this._hOJAS_RUTATableAdapter != null)) {
@@ -8685,6 +8711,15 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
                     if (this._sUBCONJUNTOSTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._sUBCONJUNTOSTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._sUBCONJUNTOSTableAdapter.Adapter);
+                    }
+                }
+                if ((this._cENTROSXHOJARUTATableAdapter != null)) {
+                    revertConnections.Add(this._cENTROSXHOJARUTATableAdapter, this._cENTROSXHOJARUTATableAdapter.Connection);
+                    this._cENTROSXHOJARUTATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._cENTROSXHOJARUTATableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._cENTROSXHOJARUTATableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._cENTROSXHOJARUTATableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._cENTROSXHOJARUTATableAdapter.Adapter);
                     }
                 }
                 // 
@@ -8749,10 +8784,6 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
                     this._cENTROS_TRABAJOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cENTROS_TRABAJOSTableAdapter]));
                     this._cENTROS_TRABAJOSTableAdapter.Transaction = null;
                 }
-                if ((this._cENTROSXHOJARUTATableAdapter != null)) {
-                    this._cENTROSXHOJARUTATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cENTROSXHOJARUTATableAdapter]));
-                    this._cENTROSXHOJARUTATableAdapter.Transaction = null;
-                }
                 if ((this._hOJAS_RUTATableAdapter != null)) {
                     this._hOJAS_RUTATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._hOJAS_RUTATableAdapter]));
                     this._hOJAS_RUTATableAdapter.Transaction = null;
@@ -8772,6 +8803,10 @@ SELECT SCONJ_CODIGO, SCONJ_NOMBRE, SCONJ_CANTIDADSTOCK, SCONJ_DESCRIPCION, PAR_C
                 if ((this._sUBCONJUNTOSTableAdapter != null)) {
                     this._sUBCONJUNTOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._sUBCONJUNTOSTableAdapter]));
                     this._sUBCONJUNTOSTableAdapter.Transaction = null;
+                }
+                if ((this._cENTROSXHOJARUTATableAdapter != null)) {
+                    this._cENTROSXHOJARUTATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cENTROSXHOJARUTATableAdapter]));
+                    this._cENTROSXHOJARUTATableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

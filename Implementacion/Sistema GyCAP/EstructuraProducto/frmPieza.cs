@@ -164,7 +164,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (cbEstado.SelectedIndex == -1) { datosFaltantes += "* Estado\n"; }
             if (cbTerminacion.SelectedIndex == -1) { datosFaltantes += "* Terminación\n"; }
             if (cbPlano.SelectedIndex == -1) { datosFaltantes += "* Plano\n"; }
-            if (dgvDetallePieza.Rows.Count == 0) { datosFaltantes += "* El detalle de la pieza\n"; }
+            if (dgvDetallePieza.Rows.Count == 0) { datosFaltantes += "* El detalle de la Pieza\n"; }
             if (datosFaltantes == string.Empty)
             {
                 //Revisamos que está haciendo
@@ -255,7 +255,7 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        //Hubo problemas con la BD, descartamos los cambios de conjuntos ya que puede intentar
+                        //Hubo problemas con la BD, descartamos los cambios de piezas ya que puede intentar
                         //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
                         dsEstructura.PIEZAS.RejectChanges();
                         MessageBox.Show(ex.Message, "Error: " + this.Text + " - Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Error);

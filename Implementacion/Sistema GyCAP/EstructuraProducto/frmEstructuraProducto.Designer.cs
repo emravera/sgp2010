@@ -52,9 +52,13 @@
             this.btnListadoEstructuraProducto = new System.Windows.Forms.Button();
             this.btnConsultarEstructuraProducto = new System.Windows.Forms.Button();
             this.btnNuevoEstructuraProducto = new System.Windows.Forms.Button();
+            this.btnHojaRuta = new System.Windows.Forms.Button();
+            this.panelHojaRuta = new System.Windows.Forms.Panel();
+            this.btnConsultarhojaRuta = new System.Windows.Forms.Button();
+            this.btnNuevoHojaRuta = new System.Windows.Forms.Button();
             this.btnMPPrincipal = new System.Windows.Forms.Button();
             this.panelMPPrincipal = new System.Windows.Forms.Panel();
-            this.button15 = new System.Windows.Forms.Button();
+            this.btnConsultarMPPrincipal = new System.Windows.Forms.Button();
             this.btnModeloCocina = new System.Windows.Forms.Button();
             this.panelModeloCocina = new System.Windows.Forms.Panel();
             this.btnConsultarModeloCocina = new System.Windows.Forms.Button();
@@ -90,6 +94,7 @@
             this.panelConjunto.SuspendLayout();
             this.panelDesignacion.SuspendLayout();
             this.panelEstructuraCocina.SuspendLayout();
+            this.panelHojaRuta.SuspendLayout();
             this.panelMPPrincipal.SuspendLayout();
             this.panelModeloCocina.SuspendLayout();
             this.panelPieza.SuspendLayout();
@@ -137,6 +142,8 @@
             this.flpMenu.Controls.Add(this.panelDesignacion);
             this.flpMenu.Controls.Add(this.btnEstructuraProducto);
             this.flpMenu.Controls.Add(this.panelEstructuraCocina);
+            this.flpMenu.Controls.Add(this.btnHojaRuta);
+            this.flpMenu.Controls.Add(this.panelHojaRuta);
             this.flpMenu.Controls.Add(this.btnMPPrincipal);
             this.flpMenu.Controls.Add(this.panelMPPrincipal);
             this.flpMenu.Controls.Add(this.btnModeloCocina);
@@ -554,16 +561,86 @@
             this.btnNuevoEstructuraProducto.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoEstructuraProducto.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
+            // btnHojaRuta
+            // 
+            this.btnHojaRuta.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHojaRuta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHojaRuta.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHojaRuta.Location = new System.Drawing.Point(316, 204);
+            this.btnHojaRuta.Margin = new System.Windows.Forms.Padding(0);
+            this.btnHojaRuta.Name = "btnHojaRuta";
+            this.btnHojaRuta.Size = new System.Drawing.Size(158, 25);
+            this.btnHojaRuta.TabIndex = 22;
+            this.btnHojaRuta.Text = "Hoja de Ruta";
+            this.btnHojaRuta.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnHojaRuta.UseVisualStyleBackColor = true;
+            this.btnHojaRuta.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelHojaRuta
+            // 
+            this.panelHojaRuta.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelHojaRuta.BackColor = System.Drawing.Color.Silver;
+            this.panelHojaRuta.Controls.Add(this.btnConsultarhojaRuta);
+            this.panelHojaRuta.Controls.Add(this.btnNuevoHojaRuta);
+            this.panelHojaRuta.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelHojaRuta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelHojaRuta.Location = new System.Drawing.Point(316, 229);
+            this.panelHojaRuta.Margin = new System.Windows.Forms.Padding(0);
+            this.panelHojaRuta.Name = "panelHojaRuta";
+            this.panelHojaRuta.Size = new System.Drawing.Size(158, 144);
+            this.panelHojaRuta.TabIndex = 23;
+            // 
+            // btnConsultarhojaRuta
+            // 
+            this.btnConsultarhojaRuta.AutoSize = true;
+            this.btnConsultarhojaRuta.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConsultarhojaRuta.FlatAppearance.BorderSize = 0;
+            this.btnConsultarhojaRuta.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarhojaRuta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarhojaRuta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsultarhojaRuta.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_48;
+            this.btnConsultarhojaRuta.Location = new System.Drawing.Point(47, 70);
+            this.btnConsultarhojaRuta.Name = "btnConsultarhojaRuta";
+            this.btnConsultarhojaRuta.Size = new System.Drawing.Size(64, 71);
+            this.btnConsultarhojaRuta.TabIndex = 1;
+            this.btnConsultarhojaRuta.Text = "Consultar";
+            this.btnConsultarhojaRuta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultarhojaRuta.UseVisualStyleBackColor = true;
+            this.btnConsultarhojaRuta.Click += new System.EventHandler(this.btnConsultarhojaRuta_Click);
+            this.btnConsultarhojaRuta.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnConsultarhojaRuta.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnNuevoHojaRuta
+            // 
+            this.btnNuevoHojaRuta.AutoSize = true;
+            this.btnNuevoHojaRuta.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNuevoHojaRuta.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNuevoHojaRuta.FlatAppearance.BorderSize = 0;
+            this.btnNuevoHojaRuta.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnNuevoHojaRuta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnNuevoHojaRuta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNuevoHojaRuta.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_48;
+            this.btnNuevoHojaRuta.Location = new System.Drawing.Point(52, 0);
+            this.btnNuevoHojaRuta.Name = "btnNuevoHojaRuta";
+            this.btnNuevoHojaRuta.Size = new System.Drawing.Size(54, 71);
+            this.btnNuevoHojaRuta.TabIndex = 0;
+            this.btnNuevoHojaRuta.Text = "Nuevo";
+            this.btnNuevoHojaRuta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNuevoHojaRuta.UseVisualStyleBackColor = true;
+            this.btnNuevoHojaRuta.Click += new System.EventHandler(this.btnNuevoHojaRuta_Click);
+            this.btnNuevoHojaRuta.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnNuevoHojaRuta.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
             // btnMPPrincipal
             // 
             this.btnMPPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMPPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMPPrincipal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMPPrincipal.Location = new System.Drawing.Point(316, 204);
+            this.btnMPPrincipal.Location = new System.Drawing.Point(316, 373);
             this.btnMPPrincipal.Margin = new System.Windows.Forms.Padding(0);
             this.btnMPPrincipal.Name = "btnMPPrincipal";
             this.btnMPPrincipal.Size = new System.Drawing.Size(158, 25);
-            this.btnMPPrincipal.TabIndex = 9;
+            this.btnMPPrincipal.TabIndex = 24;
             this.btnMPPrincipal.Text = "Materia Prima Principal";
             this.btnMPPrincipal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMPPrincipal.UseVisualStyleBackColor = true;
@@ -573,45 +650,45 @@
             // 
             this.panelMPPrincipal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelMPPrincipal.BackColor = System.Drawing.Color.Silver;
-            this.panelMPPrincipal.Controls.Add(this.button15);
+            this.panelMPPrincipal.Controls.Add(this.btnConsultarMPPrincipal);
             this.panelMPPrincipal.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelMPPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMPPrincipal.Location = new System.Drawing.Point(316, 229);
+            this.panelMPPrincipal.Location = new System.Drawing.Point(316, 398);
             this.panelMPPrincipal.Margin = new System.Windows.Forms.Padding(0);
             this.panelMPPrincipal.Name = "panelMPPrincipal";
             this.panelMPPrincipal.Size = new System.Drawing.Size(158, 77);
-            this.panelMPPrincipal.TabIndex = 10;
+            this.panelMPPrincipal.TabIndex = 25;
             // 
-            // button15
+            // btnConsultarMPPrincipal
             // 
-            this.button15.AutoSize = true;
-            this.button15.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button15.FlatAppearance.BorderSize = 0;
-            this.button15.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.button15.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button15.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_48;
-            this.button15.Location = new System.Drawing.Point(47, 3);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(64, 71);
-            this.button15.TabIndex = 1;
-            this.button15.Text = "Consultar";
-            this.button15.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
-            this.button15.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.button15.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            this.btnConsultarMPPrincipal.AutoSize = true;
+            this.btnConsultarMPPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConsultarMPPrincipal.FlatAppearance.BorderSize = 0;
+            this.btnConsultarMPPrincipal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarMPPrincipal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarMPPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsultarMPPrincipal.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_48;
+            this.btnConsultarMPPrincipal.Location = new System.Drawing.Point(47, 3);
+            this.btnConsultarMPPrincipal.Name = "btnConsultarMPPrincipal";
+            this.btnConsultarMPPrincipal.Size = new System.Drawing.Size(64, 71);
+            this.btnConsultarMPPrincipal.TabIndex = 1;
+            this.btnConsultarMPPrincipal.Text = "Consultar";
+            this.btnConsultarMPPrincipal.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultarMPPrincipal.UseVisualStyleBackColor = true;
+            this.btnConsultarMPPrincipal.Click += new System.EventHandler(this.btnConsultarMPPrincipal_Click);
+            this.btnConsultarMPPrincipal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnConsultarMPPrincipal.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnModeloCocina
             // 
             this.btnModeloCocina.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnModeloCocina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModeloCocina.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModeloCocina.Location = new System.Drawing.Point(316, 306);
+            this.btnModeloCocina.Location = new System.Drawing.Point(316, 475);
             this.btnModeloCocina.Margin = new System.Windows.Forms.Padding(0);
             this.btnModeloCocina.Name = "btnModeloCocina";
             this.btnModeloCocina.Size = new System.Drawing.Size(158, 25);
-            this.btnModeloCocina.TabIndex = 11;
+            this.btnModeloCocina.TabIndex = 26;
             this.btnModeloCocina.Text = "Modelo de Cocina";
             this.btnModeloCocina.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnModeloCocina.UseVisualStyleBackColor = true;
@@ -625,11 +702,11 @@
             this.panelModeloCocina.Controls.Add(this.btnNuevoModeloCocina);
             this.panelModeloCocina.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelModeloCocina.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelModeloCocina.Location = new System.Drawing.Point(316, 331);
+            this.panelModeloCocina.Location = new System.Drawing.Point(474, 0);
             this.panelModeloCocina.Margin = new System.Windows.Forms.Padding(0);
             this.panelModeloCocina.Name = "panelModeloCocina";
             this.panelModeloCocina.Size = new System.Drawing.Size(158, 156);
-            this.panelModeloCocina.TabIndex = 12;
+            this.panelModeloCocina.TabIndex = 27;
             // 
             // btnConsultarModeloCocina
             // 
@@ -677,11 +754,11 @@
             this.btnPieza.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPieza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPieza.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPieza.Location = new System.Drawing.Point(316, 487);
+            this.btnPieza.Location = new System.Drawing.Point(474, 156);
             this.btnPieza.Margin = new System.Windows.Forms.Padding(0);
             this.btnPieza.Name = "btnPieza";
             this.btnPieza.Size = new System.Drawing.Size(158, 25);
-            this.btnPieza.TabIndex = 13;
+            this.btnPieza.TabIndex = 28;
             this.btnPieza.Text = "Pieza";
             this.btnPieza.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnPieza.UseVisualStyleBackColor = true;
@@ -696,11 +773,11 @@
             this.panelPieza.Controls.Add(this.btnNuevoPieza);
             this.panelPieza.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelPieza.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelPieza.Location = new System.Drawing.Point(474, 0);
+            this.panelPieza.Location = new System.Drawing.Point(474, 181);
             this.panelPieza.Margin = new System.Windows.Forms.Padding(0);
             this.panelPieza.Name = "panelPieza";
             this.panelPieza.Size = new System.Drawing.Size(158, 204);
-            this.panelPieza.TabIndex = 14;
+            this.panelPieza.TabIndex = 29;
             // 
             // btnListadoPieza
             // 
@@ -769,11 +846,11 @@
             this.btnSubconjunto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSubconjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubconjunto.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubconjunto.Location = new System.Drawing.Point(474, 204);
+            this.btnSubconjunto.Location = new System.Drawing.Point(474, 385);
             this.btnSubconjunto.Margin = new System.Windows.Forms.Padding(0);
             this.btnSubconjunto.Name = "btnSubconjunto";
             this.btnSubconjunto.Size = new System.Drawing.Size(158, 25);
-            this.btnSubconjunto.TabIndex = 15;
+            this.btnSubconjunto.TabIndex = 30;
             this.btnSubconjunto.Text = "Subconjunto";
             this.btnSubconjunto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSubconjunto.UseVisualStyleBackColor = true;
@@ -788,11 +865,11 @@
             this.panelSubconjunto.Controls.Add(this.btnNuevoSubconjunto);
             this.panelSubconjunto.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelSubconjunto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSubconjunto.Location = new System.Drawing.Point(474, 229);
+            this.panelSubconjunto.Location = new System.Drawing.Point(632, 0);
             this.panelSubconjunto.Margin = new System.Windows.Forms.Padding(0);
             this.panelSubconjunto.Name = "panelSubconjunto";
             this.panelSubconjunto.Size = new System.Drawing.Size(158, 204);
-            this.panelSubconjunto.TabIndex = 16;
+            this.panelSubconjunto.TabIndex = 31;
             // 
             // btnListadoSubconjunto
             // 
@@ -861,11 +938,11 @@
             this.btnTerminacion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTerminacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTerminacion.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTerminacion.Location = new System.Drawing.Point(474, 433);
+            this.btnTerminacion.Location = new System.Drawing.Point(632, 204);
             this.btnTerminacion.Margin = new System.Windows.Forms.Padding(0);
             this.btnTerminacion.Name = "btnTerminacion";
             this.btnTerminacion.Size = new System.Drawing.Size(158, 25);
-            this.btnTerminacion.TabIndex = 17;
+            this.btnTerminacion.TabIndex = 32;
             this.btnTerminacion.Text = "Terminación";
             this.btnTerminacion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTerminacion.UseVisualStyleBackColor = true;
@@ -879,11 +956,11 @@
             this.panelTerminacion.Controls.Add(this.btnNuevoTerminacion);
             this.panelTerminacion.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelTerminacion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelTerminacion.Location = new System.Drawing.Point(632, 0);
+            this.panelTerminacion.Location = new System.Drawing.Point(632, 229);
             this.panelTerminacion.Margin = new System.Windows.Forms.Padding(0);
             this.panelTerminacion.Name = "panelTerminacion";
             this.panelTerminacion.Size = new System.Drawing.Size(158, 139);
-            this.panelTerminacion.TabIndex = 18;
+            this.panelTerminacion.TabIndex = 33;
             // 
             // btnConsultarTerminacion
             // 
@@ -931,11 +1008,11 @@
             this.btnUnidadMedida.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUnidadMedida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUnidadMedida.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUnidadMedida.Location = new System.Drawing.Point(632, 139);
+            this.btnUnidadMedida.Location = new System.Drawing.Point(632, 368);
             this.btnUnidadMedida.Margin = new System.Windows.Forms.Padding(0);
             this.btnUnidadMedida.Name = "btnUnidadMedida";
             this.btnUnidadMedida.Size = new System.Drawing.Size(158, 25);
-            this.btnUnidadMedida.TabIndex = 19;
+            this.btnUnidadMedida.TabIndex = 34;
             this.btnUnidadMedida.Text = "Unidad de Medida";
             this.btnUnidadMedida.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnUnidadMedida.UseVisualStyleBackColor = true;
@@ -949,11 +1026,11 @@
             this.panelUnidadMedida.Controls.Add(this.btnNuevoUnidadMedida);
             this.panelUnidadMedida.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelUnidadMedida.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelUnidadMedida.Location = new System.Drawing.Point(632, 164);
+            this.panelUnidadMedida.Location = new System.Drawing.Point(632, 393);
             this.panelUnidadMedida.Margin = new System.Windows.Forms.Padding(0);
             this.panelUnidadMedida.Name = "panelUnidadMedida";
             this.panelUnidadMedida.Size = new System.Drawing.Size(158, 144);
-            this.panelUnidadMedida.TabIndex = 20;
+            this.panelUnidadMedida.TabIndex = 35;
             // 
             // btnConsultarUnidadMedida
             // 
@@ -1001,11 +1078,11 @@
             this.panel12.Controls.Add(this.button1);
             this.panel12.Cursor = System.Windows.Forms.Cursors.Default;
             this.flpMenu.SetFlowBreak(this.panel12, true);
-            this.panel12.Location = new System.Drawing.Point(632, 308);
+            this.panel12.Location = new System.Drawing.Point(790, 0);
             this.panel12.Margin = new System.Windows.Forms.Padding(0);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(158, 103);
-            this.panel12.TabIndex = 21;
+            this.panel12.TabIndex = 36;
             // 
             // button1
             // 
@@ -1093,6 +1170,8 @@
             this.panelDesignacion.PerformLayout();
             this.panelEstructuraCocina.ResumeLayout(false);
             this.panelEstructuraCocina.PerformLayout();
+            this.panelHojaRuta.ResumeLayout(false);
+            this.panelHojaRuta.PerformLayout();
             this.panelMPPrincipal.ResumeLayout(false);
             this.panelMPPrincipal.PerformLayout();
             this.panelModeloCocina.ResumeLayout(false);
@@ -1130,19 +1209,6 @@
         private System.Windows.Forms.Panel panelDesignacion;
         private System.Windows.Forms.Button btnEstructuraProducto;
         private System.Windows.Forms.Panel panelEstructuraCocina;
-        private System.Windows.Forms.Button btnMPPrincipal;
-        private System.Windows.Forms.Panel panelMPPrincipal;
-        private System.Windows.Forms.Button btnModeloCocina;
-        private System.Windows.Forms.Panel panelModeloCocina;
-        private System.Windows.Forms.Button btnPieza;
-        private System.Windows.Forms.Panel panelPieza;
-        private System.Windows.Forms.Button btnSubconjunto;
-        private System.Windows.Forms.Panel panelSubconjunto;
-        private System.Windows.Forms.Button btnTerminacion;
-        private System.Windows.Forms.Panel panelTerminacion;
-        private System.Windows.Forms.Button btnUnidadMedida;
-        private System.Windows.Forms.Panel panelUnidadMedida;
-        private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Button btnListadoCocina;
         private System.Windows.Forms.Button btnConsultarCocina;
         private System.Windows.Forms.Button btnNuevoCocina;
@@ -1155,19 +1221,36 @@
         private System.Windows.Forms.Button btnListadoEstructuraProducto;
         private System.Windows.Forms.Button btnConsultarEstructuraProducto;
         private System.Windows.Forms.Button btnNuevoEstructuraProducto;
-        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button btnHojaRuta;
+        private System.Windows.Forms.Panel panelHojaRuta;
+        private System.Windows.Forms.Button btnConsultarhojaRuta;
+        private System.Windows.Forms.Button btnNuevoHojaRuta;
+        private System.Windows.Forms.Button btnMPPrincipal;
+        private System.Windows.Forms.Panel panelMPPrincipal;
+        private System.Windows.Forms.Button btnConsultarMPPrincipal;
+        private System.Windows.Forms.Button btnModeloCocina;
+        private System.Windows.Forms.Panel panelModeloCocina;
         private System.Windows.Forms.Button btnConsultarModeloCocina;
         private System.Windows.Forms.Button btnNuevoModeloCocina;
+        private System.Windows.Forms.Button btnPieza;
+        private System.Windows.Forms.Panel panelPieza;
         private System.Windows.Forms.Button btnListadoPieza;
         private System.Windows.Forms.Button btnConsultarPieza;
         private System.Windows.Forms.Button btnNuevoPieza;
+        private System.Windows.Forms.Button btnSubconjunto;
+        private System.Windows.Forms.Panel panelSubconjunto;
         private System.Windows.Forms.Button btnListadoSubconjunto;
         private System.Windows.Forms.Button btnConsultarSubconjunto;
         private System.Windows.Forms.Button btnNuevoSubconjunto;
+        private System.Windows.Forms.Button btnTerminacion;
+        private System.Windows.Forms.Panel panelTerminacion;
         private System.Windows.Forms.Button btnConsultarTerminacion;
         private System.Windows.Forms.Button btnNuevoTerminacion;
+        private System.Windows.Forms.Button btnUnidadMedida;
+        private System.Windows.Forms.Panel panelUnidadMedida;
         private System.Windows.Forms.Button btnConsultarUnidadMedida;
         private System.Windows.Forms.Button btnNuevoUnidadMedida;
+        private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Button button1;
 
     }
