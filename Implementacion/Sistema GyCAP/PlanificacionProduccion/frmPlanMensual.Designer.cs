@@ -232,6 +232,7 @@
             this.btnModificar.Size = new System.Drawing.Size(54, 47);
             this.btnModificar.Text = "&Modificar";
             this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar
             // 
@@ -242,6 +243,7 @@
             this.btnEliminar.Size = new System.Drawing.Size(47, 47);
             this.btnEliminar.Text = "&Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // toolStripSeparator1
             // 
@@ -296,7 +298,7 @@
             this.cbMes.Location = new System.Drawing.Point(247, 20);
             this.cbMes.Name = "cbMes";
             this.cbMes.Size = new System.Drawing.Size(128, 21);
-            this.cbMes.TabIndex = 7;
+            this.cbMes.TabIndex = 3;
             // 
             // label2
             // 
@@ -314,7 +316,7 @@
             this.btnBuscar.Location = new System.Drawing.Point(471, 18);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscar.TabIndex = 5;
+            this.btnBuscar.TabIndex = 4;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -434,6 +436,7 @@
             this.dgvDatos.Location = new System.Drawing.Point(5, 24);
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.RowHeadersVisible = false;
+            this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDatos.Size = new System.Drawing.Size(268, 220);
             this.dgvDatos.TabIndex = 5;
             this.dgvDatos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDatos_CellFormatting);
@@ -474,6 +477,7 @@
             this.btnRestar.TabIndex = 19;
             this.btnRestar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRestar.UseVisualStyleBackColor = true;
+            this.btnRestar.Click += new System.EventHandler(this.btnRestar_Click);
             // 
             // btnSumar
             // 
@@ -488,6 +492,7 @@
             this.btnSumar.TabIndex = 18;
             this.btnSumar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSumar.UseVisualStyleBackColor = true;
+            this.btnSumar.Click += new System.EventHandler(this.btnSumar_Click);
             // 
             // label6
             // 
@@ -511,6 +516,7 @@
             this.btnDelete.TabIndex = 15;
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // gbCargaDetalle
             // 
@@ -640,6 +646,7 @@
             this.btnGuardar.TabIndex = 21;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // dgvDetalle
             // 
@@ -666,7 +673,7 @@
             this.gbGrillaDetalle.Size = new System.Drawing.Size(308, 320);
             this.gbGrillaDetalle.TabIndex = 2;
             this.gbGrillaDetalle.TabStop = false;
-            this.gbGrillaDetalle.Text = "Listado Detalle Planes Mensual";
+            this.gbGrillaDetalle.Text = "Listado Detalle Planes Mensuales";
             // 
             // tableLayoutPanel1
             // 

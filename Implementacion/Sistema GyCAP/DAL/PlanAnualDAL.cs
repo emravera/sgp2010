@@ -192,12 +192,12 @@ namespace GyCAP.DAL
                 //Iniciamos la transaccion
                 transaccion = DB.IniciarTransaccion();
 
-                //Elimino el detalle de la demanda
+                //Elimino el detalle del plan anual
                 string sql = "DELETE FROM DETALLE_PLAN_ANUAL WHERE pan_codigo = @p0";
                 object[] valorParametros = { codigo };
                 DB.executeNonQuery(sql, valorParametros, null);
 
-                //Elimino la demanda
+                //Elimino el plan anual
                 sql = "DELETE FROM PLANES_ANUALES WHERE pan_codigo = @p0";
                 DB.executeNonQuery(sql, valorParametros, null);
 

@@ -98,6 +98,19 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
+        //Obtiene todas las cocinas, sin filtrar
+        public static void ObtenerCocinaSinCosto(DataTable dtCocina)
+        {
+            string sql = @"SELECT coc_codigo, col_codigo, mod_codigo, mca_codigo, te_codigo, desig_codigo, 
+                         coc_codigo_producto, coc_cantidadstock, coc_activo FROM COCINAS";
+
+            try
+            {
+                DB.FillDataTable(dtCocina, sql, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
         //Obtiene todas las cocinas que coincidan con los filtros
         public static void ObtenerCocinas(object codigo, object codMarca, object codTerminacion, object codEstado, DataTable dtCocina)
         {
