@@ -15,7 +15,7 @@ namespace GyCAP.UI.EstructuraProducto
         private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
         private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
         private DataView dvPiezas, dvDetallePieza, dvMPDisponibles, dvUnidadMedida;
-        private DataView dvTerminacionBuscar, dvTerminaciones, dvEstado, dvPlano;
+        private DataView dvTerminacionBuscar, dvTerminaciones, dvEstado, dvPlano, dvHojaRuta;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
@@ -185,6 +185,8 @@ namespace GyCAP.UI.EstructuraProducto
                         rowPieza.PAR_CODIGO = cbEstado.GetSelectedValueInt();
                         rowPieza.PNO_CODIGO = cbPlano.GetSelectedValueInt();
                         rowPieza.PZA_COSTO = nudCosto.Value;
+                        if (cbHojaRuta.GetSelectedIndex() != -1) { rowPieza.HR_CODIGO = cbHojaRuta.GetSelectedValueInt(); }
+                        else { rowPieza.SetHR_CODIGONull(); }
                         rowPieza.PZA_DESCRIPCION = txtDescripcion.Text;
                         rowPieza.EndEdit();
                         dsEstructura.PIEZAS.AddPIEZASRow(rowPieza);
@@ -239,6 +241,8 @@ namespace GyCAP.UI.EstructuraProducto
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PNO_CODIGO = cbPlano.GetSelectedValueInt();
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_DESCRIPCION = txtDescripcion.Text;
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_COSTO = nudCosto.Value;
+                    if (cbHojaRuta.GetSelectedIndex() != -1) { dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).HR_CODIGO = cbHojaRuta.GetSelectedValueInt(); }
+                    else { dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).SetHR_CODIGONull(); }
                     try
                     {
                         //Lo actualizamos en la DB
@@ -318,6 +322,7 @@ namespace GyCAP.UI.EstructuraProducto
                     decimal costo = dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDPZA).MATERIAS_PRIMASRow.MP_COSTO;
                     nudCosto.Value += (costo * Convert.ToDecimal(0.1));
                 }
+                dgvDetallePieza.Refresh();
             }
             else
             {
@@ -339,6 +344,7 @@ namespace GyCAP.UI.EstructuraProducto
                     try { nudCosto.Value -= (costo * Convert.ToDecimal(0.1)); }
                     catch (System.ArgumentOutOfRangeException) { nudCosto.Value = 0; }
                 }
+                dgvDetallePieza.Refresh();
             }
             else
             {
@@ -493,6 +499,8 @@ namespace GyCAP.UI.EstructuraProducto
                     cbPlano.Enabled = true;
                     cbPlano.SetTexto("Seleccione");
                     cbEstado.SetTexto("Seleccione");
+                    cbHojaRuta.Enabled = true;
+                    cbHojaRuta.SetTexto("Seleccione");
                     dvDetallePieza.RowFilter = "MPXP_CODIGO < 0";
                     nudCosto.Enabled = true;
                     nudCosto.Value = 0;
@@ -522,6 +530,8 @@ namespace GyCAP.UI.EstructuraProducto
                     cbEstado.SetTexto("Seleccione");
                     cbPlano.Enabled = true;
                     cbPlano.SetTexto("Seleccione");
+                    cbHojaRuta.Enabled = true;
+                    cbHojaRuta.SetTexto("Seleccione");
                     dvDetallePieza.RowFilter = "MPXP_CODIGO < 0";
                     nudCosto.Enabled = true;
                     nudCosto.Value = 0;
@@ -549,6 +559,8 @@ namespace GyCAP.UI.EstructuraProducto
                     cbEstado.SetTexto(string.Empty);
                     cbPlano.Enabled = false;
                     cbPlano.SetTexto(string.Empty);
+                    cbHojaRuta.Enabled = false;
+                    cbHojaRuta.SetTexto(string.Empty);
                     nudCosto.Enabled = false;
                     chkCostoFijo.Enabled = false;
                     txtDescripcion.ReadOnly = true;
@@ -569,6 +581,8 @@ namespace GyCAP.UI.EstructuraProducto
                     cbTerminacion.SetTexto(string.Empty);
                     cbEstado.SetTexto(string.Empty);
                     cbPlano.SetTexto(string.Empty);
+                    cbHojaRuta.Enabled = true;
+                    cbHojaRuta.SetTexto(string.Empty);
                     nudCosto.Enabled = true;
                     chkCostoFijo.Enabled = true;
                     txtDescripcion.ReadOnly = false;
@@ -601,6 +615,10 @@ namespace GyCAP.UI.EstructuraProducto
             cbPlano.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PNO_CODIGO));
             nudCosto.Value = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_COSTO;
             txtDescripcion.Text = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_DESCRIPCION;
+
+            if (dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).IsHR_CODIGONull()) { cbHojaRuta.SetSelectedIndex(-1); }
+            else { cbHojaRuta.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).HR_CODIGO)); }
+            
             pbImagen.Image = BLL.PiezaBLL.ObtenerImagen(codigoPieza);
             //Usemos el filtro del dataview para mostrar sólo las MP de la pieza seleccionada
             dvDetallePieza.RowFilter = "pza_codigo = " + codigoPieza;
@@ -641,14 +659,18 @@ namespace GyCAP.UI.EstructuraProducto
             dgvPiezas.Columns["PAR_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPiezas.Columns["PNO_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPiezas.Columns["PZA_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPiezas.Columns["PZA_COSTO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
            
             dgvDetallePieza.Columns.Add("MP_NOMBRE", "Nombre");
             dgvDetallePieza.Columns.Add("UMED_CODIGO", "Unidad Medida");
             dgvDetallePieza.Columns.Add("MPXP_CANTIDAD", "Cantidad");
+            dgvDetallePieza.Columns.Add("COSTO", "Costo");
             dgvDetallePieza.Columns["MP_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetallePieza.Columns["UMED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetallePieza.Columns["MPXP_CANTIDAD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetallePieza.Columns["MPXP_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDetallePieza.Columns["COSTO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDetallePieza.Columns["COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             dgvMPDisponibles.Columns.Add("MP_NOMBRE", "Nombre");
             dgvMPDisponibles.Columns.Add("UMED_CODIGO", "Unidad Medida");
@@ -657,6 +679,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvMPDisponibles.Columns["MP_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvMPDisponibles.Columns["UMED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvMPDisponibles.Columns["MP_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvMPDisponibles.Columns["MP_COSTO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvMPDisponibles.Columns["MP_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvMPDisponibles.Columns["MP_DESCRIPCION"].Resizable = DataGridViewTriState.True;
 
@@ -671,6 +694,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvDetallePieza.Columns["MP_NOMBRE"].DataPropertyName = "MP_CODIGO";
             dgvDetallePieza.Columns["UMED_CODIGO"].DataPropertyName = "MP_CODIGO";
             dgvDetallePieza.Columns["MPXP_CANTIDAD"].DataPropertyName = "MPXP_CANTIDAD";
+            dgvDetallePieza.Columns["COSTO"].DataPropertyName = "MPXP_CODIGO";
 
             dgvMPDisponibles.Columns["MP_NOMBRE"].DataPropertyName = "MP_NOMBRE";
             dgvMPDisponibles.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
@@ -693,7 +717,7 @@ namespace GyCAP.UI.EstructuraProducto
             dvPlano = new DataView(dsEstructura.PLANOS);
             dvPlano.Sort = "PNO_NOMBRE";
 
-            //Obtenemos las terminaciones, los planos, los estados de las piezas, las MP, unidades medidas
+            //Obtenemos las terminaciones, los planos, los estados de las piezas, las MP, unidades medidas, hojas ruta
             try
             {
                 BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsEstructura.TERMINACIONES);
@@ -702,6 +726,7 @@ namespace GyCAP.UI.EstructuraProducto
                 BLL.MateriaPrimaBLL.ObtenerTodos(dsEstructura.MATERIAS_PRIMAS);
                 BLL.UnidadMedidaBLL.ObtenerTodos(dsUnidadMedida.UNIDADES_MEDIDA);
                 BLL.TipoUnidadMedidaBLL.ObtenerTodos(dsUnidadMedida.TIPOS_UNIDADES_MEDIDA);
+                BLL.HojaRutaBLL.ObtenerHojasRuta(dsEstructura.HOJAS_RUTA);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -710,10 +735,12 @@ namespace GyCAP.UI.EstructuraProducto
 
             dvTerminaciones = new DataView(dsEstructura.TERMINACIONES);
             dvTerminacionBuscar = new DataView(dsEstructura.TERMINACIONES);
+            dvHojaRuta = new DataView(dsEstructura.HOJAS_RUTA);
             cbTerminacionBuscar.SetDatos(dvTerminacionBuscar, "te_codigo", "te_nombre", "--TODOS--", true);
             cbTerminacion.SetDatos(dvTerminaciones, "te_codigo", "te_nombre", string.Empty, false);
             cbEstado.SetDatos(dvEstado, "par_codigo", "par_nombre", string.Empty, false);
             cbPlano.SetDatos(dvPlano, "pno_codigo", "pno_nombre", string.Empty, false);
+            cbHojaRuta.SetDatos(dvHojaRuta, "hr_codigo", "hr_nombre", "Seleccione", false);
 
             //Seteos para los controles de la imagen
             pbImagen.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -739,6 +766,10 @@ namespace GyCAP.UI.EstructuraProducto
                         break;
                     case "PNO_CODIGO":
                         nombre = dsEstructura.PLANOS.FindByPNO_CODIGO(Convert.ToInt32(e.Value.ToString())).PNO_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "PZA_COSTO":
+                        nombre = "$ " + e.Value.ToString();
                         e.Value = nombre;
                         break;
                     default:
@@ -767,6 +798,11 @@ namespace GyCAP.UI.EstructuraProducto
                         nombre = dsEstructura.PLANOS.FindByPNO_CODIGO(Convert.ToInt32(e.Value.ToString())).PNO_NOMBRE;
                         e.Value = nombre;
                         break;
+                    case "COSTO":
+                        int cod = Convert.ToInt32(e.Value.ToString());
+                        decimal costo = Math.Round(dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(cod).MATERIAS_PRIMASRow.MP_COSTO * dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(cod).MPXP_CANTIDAD, 2);
+                        e.Value = "$ " + costo.ToString();
+                        break;
                     default:
                         break;
                 }
@@ -778,10 +814,18 @@ namespace GyCAP.UI.EstructuraProducto
             if (e.Value.ToString() != string.Empty)
             {
                 string nombre;
-                if (dgvMPDisponibles.Columns[e.ColumnIndex].Name == "UMED_CODIGO")
+                switch (dgvMPDisponibles.Columns[e.ColumnIndex].Name)
                 {
-                    nombre = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(Convert.ToInt32(e.Value.ToString())).UMED_NOMBRE;
+                    case "UMED_CODIGO":
+                        nombre = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(Convert.ToInt32(e.Value.ToString())).UMED_NOMBRE;
                     e.Value = nombre;
+                        break;
+                    case "MP_COSTO":
+                        nombre = "$ " + e.Value.ToString();
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -803,10 +847,29 @@ namespace GyCAP.UI.EstructuraProducto
         {
             Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
             (sender as Button).Location = punto;
+        }         
+
+        private void chkCostoFijo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!chkCostoFijo.Checked) { nudCosto.Value = CalcularCosto(); }
+            else { nudCosto.Value = 0; }
         }
 
-        #endregion 
+        private decimal CalcularCosto()
+        {
+            decimal costo = 0;
+            int codigoPieza = 0;
+            if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { codigoPieza = -1; }
+            else { codigoPieza = Convert.ToInt32(dvPiezas[dgvPiezas.SelectedRows[0].Index]["pza_codigo"]); }
 
-        
+            foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow row in
+                (Data.dsEstructura.MATERIASPRIMASXPIEZARow[])dsEstructura.MATERIASPRIMASXPIEZA.Select("PZA_CODIGO = " + codigoPieza))
+            {
+                costo += (row.MATERIAS_PRIMASRow.MP_COSTO * row.MPXP_CANTIDAD);
+            }
+
+            return costo;
+        }
+        #endregion
     }
 }

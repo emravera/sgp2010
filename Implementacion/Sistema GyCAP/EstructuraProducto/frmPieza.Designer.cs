@@ -47,7 +47,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.dgvDetallePieza = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbTerminacionBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.dgvPiezas = new System.Windows.Forms.DataGridView();
@@ -62,9 +61,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.cbPlano = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbTerminacion = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label12 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.RichTextBox();
@@ -92,6 +88,12 @@
             this.dgvMPDisponibles = new System.Windows.Forms.DataGridView();
             this.slideAgregar = new SlickInterface.Slide();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
+            this.label14 = new System.Windows.Forms.Label();
+            this.cbTerminacionBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbHojaRuta = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbPlano = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbTerminacion = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.panelAcciones.SuspendLayout();
             this.tsMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePieza)).BeginInit();
@@ -124,7 +126,7 @@
             this.panelAcciones.Controls.Add(this.btnSumar);
             this.panelAcciones.Controls.Add(this.btnDelete);
             this.panelAcciones.Controls.Add(this.btnNew);
-            this.panelAcciones.Location = new System.Drawing.Point(471, 36);
+            this.panelAcciones.Location = new System.Drawing.Point(471, 22);
             this.panelAcciones.Name = "panelAcciones";
             this.panelAcciones.Size = new System.Drawing.Size(78, 148);
             this.panelAcciones.TabIndex = 11;
@@ -311,7 +313,7 @@
             this.slideControl.Location = new System.Drawing.Point(3, 3);
             this.slideControl.Name = "slideControl";
             this.slideControl.Selected = null;
-            this.slideControl.Size = new System.Drawing.Size(568, 242);
+            this.slideControl.Size = new System.Drawing.Size(568, 252);
             this.slideControl.SlideSpeed = 250;
             this.slideControl.TabIndex = 8;
             // 
@@ -345,7 +347,7 @@
             this.dgvDetallePieza.ReadOnly = true;
             this.dgvDetallePieza.RowHeadersVisible = false;
             this.dgvDetallePieza.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetallePieza.Size = new System.Drawing.Size(462, 185);
+            this.dgvDetallePieza.Size = new System.Drawing.Size(462, 175);
             this.dgvDetallePieza.TabIndex = 23;
             this.dgvDetallePieza.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetallePieza_CellFormatting);
             // 
@@ -363,16 +365,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
-            // 
-            // cbTerminacionBuscar
-            // 
-            this.cbTerminacionBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTerminacionBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbTerminacionBuscar.FormattingEnabled = true;
-            this.cbTerminacionBuscar.Location = new System.Drawing.Point(307, 27);
-            this.cbTerminacionBuscar.Name = "cbTerminacionBuscar";
-            this.cbTerminacionBuscar.Size = new System.Drawing.Size(150, 21);
-            this.cbTerminacionBuscar.TabIndex = 8;
             // 
             // btnBuscar
             // 
@@ -489,6 +481,8 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.cbHojaRuta);
+            this.gbDatos.Controls.Add(this.label14);
             this.gbDatos.Controls.Add(this.chkCostoFijo);
             this.gbDatos.Controls.Add(this.nudCosto);
             this.gbDatos.Controls.Add(this.label13);
@@ -505,10 +499,10 @@
             this.gbDatos.Controls.Add(this.label3);
             this.gbDatos.Controls.Add(this.label1);
             this.gbDatos.Controls.Add(this.panelImagen);
-            this.gbDatos.Location = new System.Drawing.Point(5, 0);
+            this.gbDatos.Location = new System.Drawing.Point(5, -2);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(563, 245);
+            this.gbDatos.Size = new System.Drawing.Size(563, 253);
             this.gbDatos.TabIndex = 15;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos de la pieza";
@@ -517,12 +511,13 @@
             // 
             this.chkCostoFijo.AutoSize = true;
             this.chkCostoFijo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkCostoFijo.Location = new System.Drawing.Point(296, 162);
+            this.chkCostoFijo.Location = new System.Drawing.Point(295, 146);
             this.chkCostoFijo.Name = "chkCostoFijo";
             this.chkCostoFijo.Size = new System.Drawing.Size(72, 17);
             this.chkCostoFijo.TabIndex = 28;
             this.chkCostoFijo.Text = "Costo fijo";
             this.chkCostoFijo.UseVisualStyleBackColor = true;
+            this.chkCostoFijo.CheckedChanged += new System.EventHandler(this.chkCostoFijo_CheckedChanged);
             // 
             // nudCosto
             // 
@@ -532,7 +527,7 @@
             0,
             0,
             65536});
-            this.nudCosto.Location = new System.Drawing.Point(84, 161);
+            this.nudCosto.Location = new System.Drawing.Point(84, 144);
             this.nudCosto.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -547,7 +542,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(8, 163);
+            this.label13.Location = new System.Drawing.Point(8, 146);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(48, 13);
             this.label13.TabIndex = 26;
@@ -570,40 +565,10 @@
             this.label9.TabIndex = 24;
             this.label9.Text = "Código:";
             // 
-            // cbPlano
-            // 
-            this.cbPlano.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPlano.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbPlano.FormattingEnabled = true;
-            this.cbPlano.Location = new System.Drawing.Point(84, 132);
-            this.cbPlano.Name = "cbPlano";
-            this.cbPlano.Size = new System.Drawing.Size(284, 21);
-            this.cbPlano.TabIndex = 23;
-            // 
-            // cbEstado
-            // 
-            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEstado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(84, 105);
-            this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(284, 21);
-            this.cbEstado.TabIndex = 22;
-            // 
-            // cbTerminacion
-            // 
-            this.cbTerminacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTerminacion.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbTerminacion.FormattingEnabled = true;
-            this.cbTerminacion.Location = new System.Drawing.Point(84, 78);
-            this.cbTerminacion.Name = "cbTerminacion";
-            this.cbTerminacion.Size = new System.Drawing.Size(284, 21);
-            this.cbTerminacion.TabIndex = 21;
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(8, 136);
+            this.label12.Location = new System.Drawing.Point(8, 123);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(37, 13);
             this.label12.TabIndex = 20;
@@ -612,7 +577,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 108);
+            this.label4.Location = new System.Drawing.Point(8, 97);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 19;
@@ -620,7 +585,7 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(84, 188);
+            this.txtDescripcion.Location = new System.Drawing.Point(84, 193);
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(284, 50);
@@ -630,7 +595,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(84, 49);
+            this.txtNombre.Location = new System.Drawing.Point(84, 44);
             this.txtNombre.MaxLength = 80;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(284, 21);
@@ -640,7 +605,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 188);
+            this.label2.Location = new System.Drawing.Point(8, 193);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 13;
@@ -649,7 +614,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 52);
+            this.label3.Location = new System.Drawing.Point(8, 47);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 14;
@@ -658,7 +623,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 82);
+            this.label1.Location = new System.Drawing.Point(8, 73);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 13);
             this.label1.TabIndex = 15;
@@ -673,14 +638,14 @@
             this.panelImagen.Controls.Add(this.pbImagen);
             this.panelImagen.Location = new System.Drawing.Point(374, 20);
             this.panelImagen.Name = "panelImagen";
-            this.panelImagen.Size = new System.Drawing.Size(183, 215);
+            this.panelImagen.Size = new System.Drawing.Size(183, 223);
             this.panelImagen.TabIndex = 12;
             // 
             // btnQuitarImagen
             // 
             this.btnQuitarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuitarImagen.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuitarImagen.Location = new System.Drawing.Point(96, 184);
+            this.btnQuitarImagen.Location = new System.Drawing.Point(96, 194);
             this.btnQuitarImagen.Name = "btnQuitarImagen";
             this.btnQuitarImagen.Size = new System.Drawing.Size(80, 22);
             this.btnQuitarImagen.TabIndex = 22;
@@ -701,7 +666,7 @@
             // 
             this.btnImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImagen.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImagen.Location = new System.Drawing.Point(5, 184);
+            this.btnImagen.Location = new System.Drawing.Point(3, 194);
             this.btnImagen.Name = "btnImagen";
             this.btnImagen.Size = new System.Drawing.Size(80, 22);
             this.btnImagen.TabIndex = 21;
@@ -715,7 +680,7 @@
             this.pbImagen.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.sinimagen;
             this.pbImagen.Location = new System.Drawing.Point(5, 18);
             this.pbImagen.Name = "pbImagen";
-            this.pbImagen.Size = new System.Drawing.Size(171, 160);
+            this.pbImagen.Size = new System.Drawing.Size(171, 166);
             this.pbImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbImagen.TabIndex = 0;
             this.pbImagen.TabStop = false;
@@ -724,7 +689,7 @@
             // 
             this.slideDatos.Location = new System.Drawing.Point(3, 3);
             this.slideDatos.Name = "slideDatos";
-            this.slideDatos.Size = new System.Drawing.Size(565, 242);
+            this.slideDatos.Size = new System.Drawing.Size(565, 251);
             this.slideDatos.SlideControl = null;
             this.slideDatos.TabIndex = 9;
             // 
@@ -732,9 +697,9 @@
             // 
             this.groupBox3.Controls.Add(this.dgvDetallePieza);
             this.groupBox3.Controls.Add(this.panelAcciones);
-            this.groupBox3.Location = new System.Drawing.Point(8, 249);
+            this.groupBox3.Location = new System.Drawing.Point(8, 259);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(560, 205);
+            this.groupBox3.Size = new System.Drawing.Size(560, 195);
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Materias primas que forman la pieza";
@@ -786,7 +751,7 @@
             this.gbMPDisponibles.Controls.Add(this.dgvMPDisponibles);
             this.gbMPDisponibles.Location = new System.Drawing.Point(5, 0);
             this.gbMPDisponibles.Name = "gbMPDisponibles";
-            this.gbMPDisponibles.Size = new System.Drawing.Size(563, 220);
+            this.gbMPDisponibles.Size = new System.Drawing.Size(563, 250);
             this.gbMPDisponibles.TabIndex = 12;
             this.gbMPDisponibles.TabStop = false;
             this.gbMPDisponibles.Text = "Materias primas disponibles";
@@ -798,7 +763,7 @@
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.btnHecho);
             this.panel1.Controls.Add(this.nudCantidad);
-            this.panel1.Location = new System.Drawing.Point(473, 41);
+            this.panel1.Location = new System.Drawing.Point(471, 67);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(73, 127);
             this.panel1.TabIndex = 6;
@@ -868,7 +833,7 @@
             this.dgvMPDisponibles.ReadOnly = true;
             this.dgvMPDisponibles.RowHeadersVisible = false;
             this.dgvMPDisponibles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMPDisponibles.Size = new System.Drawing.Size(444, 200);
+            this.dgvMPDisponibles.Size = new System.Drawing.Size(444, 230);
             this.dgvMPDisponibles.TabIndex = 0;
             this.dgvMPDisponibles.DoubleClick += new System.EventHandler(this.dgvPiezas_DoubleClick);
             this.dgvMPDisponibles.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvMPDisponibles_CellFormatting);
@@ -878,7 +843,7 @@
             this.slideAgregar.Dock = System.Windows.Forms.DockStyle.Top;
             this.slideAgregar.Location = new System.Drawing.Point(0, 0);
             this.slideAgregar.Name = "slideAgregar";
-            this.slideAgregar.Size = new System.Drawing.Size(574, 229);
+            this.slideAgregar.Size = new System.Drawing.Size(574, 251);
             this.slideAgregar.SlideControl = null;
             this.slideAgregar.TabIndex = 13;
             // 
@@ -886,6 +851,65 @@
             // 
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk_1);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(8, 171);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(74, 13);
+            this.label14.TabIndex = 29;
+            this.label14.Text = "Hoja de Ruta:";
+            // 
+            // cbTerminacionBuscar
+            // 
+            this.cbTerminacionBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTerminacionBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbTerminacionBuscar.FormattingEnabled = true;
+            this.cbTerminacionBuscar.Location = new System.Drawing.Point(307, 27);
+            this.cbTerminacionBuscar.Name = "cbTerminacionBuscar";
+            this.cbTerminacionBuscar.Size = new System.Drawing.Size(150, 21);
+            this.cbTerminacionBuscar.TabIndex = 8;
+            // 
+            // cbHojaRuta
+            // 
+            this.cbHojaRuta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbHojaRuta.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbHojaRuta.FormattingEnabled = true;
+            this.cbHojaRuta.Location = new System.Drawing.Point(84, 168);
+            this.cbHojaRuta.Name = "cbHojaRuta";
+            this.cbHojaRuta.Size = new System.Drawing.Size(284, 21);
+            this.cbHojaRuta.TabIndex = 30;
+            // 
+            // cbPlano
+            // 
+            this.cbPlano.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPlano.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbPlano.FormattingEnabled = true;
+            this.cbPlano.Location = new System.Drawing.Point(84, 119);
+            this.cbPlano.Name = "cbPlano";
+            this.cbPlano.Size = new System.Drawing.Size(284, 21);
+            this.cbPlano.TabIndex = 23;
+            // 
+            // cbEstado
+            // 
+            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbEstado.FormattingEnabled = true;
+            this.cbEstado.Location = new System.Drawing.Point(84, 94);
+            this.cbEstado.Name = "cbEstado";
+            this.cbEstado.Size = new System.Drawing.Size(284, 21);
+            this.cbEstado.TabIndex = 22;
+            // 
+            // cbTerminacion
+            // 
+            this.cbTerminacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTerminacion.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbTerminacion.FormattingEnabled = true;
+            this.cbTerminacion.Location = new System.Drawing.Point(84, 69);
+            this.cbTerminacion.Name = "cbTerminacion";
+            this.cbTerminacion.Size = new System.Drawing.Size(284, 21);
+            this.cbTerminacion.TabIndex = 21;
             // 
             // frmPieza
             // 
@@ -998,5 +1022,7 @@
         private System.Windows.Forms.NumericUpDown nudCosto;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.CheckBox chkCostoFijo;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbHojaRuta;
+        private System.Windows.Forms.Label label14;
     }
 }
