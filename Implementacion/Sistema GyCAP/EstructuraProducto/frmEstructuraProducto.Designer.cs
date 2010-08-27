@@ -32,59 +32,59 @@
             this.flpMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCocina = new System.Windows.Forms.Button();
             this.panelCocina = new System.Windows.Forms.Panel();
-            this.btnColor = new System.Windows.Forms.Button();
-            this.panelColor = new System.Windows.Forms.Panel();
-            this.btnConjunto = new System.Windows.Forms.Button();
-            this.panelConjunto = new System.Windows.Forms.Panel();
-            this.btnDesignacion = new System.Windows.Forms.Button();
-            this.panelDesignacion = new System.Windows.Forms.Panel();
-            this.btnEstructuraProducto = new System.Windows.Forms.Button();
-            this.panelEstructuraCocina = new System.Windows.Forms.Panel();
-            this.btnHojaRuta = new System.Windows.Forms.Button();
-            this.panelHojaRuta = new System.Windows.Forms.Panel();
-            this.btnMPPrincipal = new System.Windows.Forms.Button();
-            this.panelMPPrincipal = new System.Windows.Forms.Panel();
-            this.btnModeloCocina = new System.Windows.Forms.Button();
-            this.panelModeloCocina = new System.Windows.Forms.Panel();
-            this.btnPieza = new System.Windows.Forms.Button();
-            this.panelPieza = new System.Windows.Forms.Panel();
-            this.btnSubconjunto = new System.Windows.Forms.Button();
-            this.panelSubconjunto = new System.Windows.Forms.Panel();
-            this.btnTerminacion = new System.Windows.Forms.Button();
-            this.panelTerminacion = new System.Windows.Forms.Panel();
-            this.btnUnidadMedida = new System.Windows.Forms.Button();
-            this.panelUnidadMedida = new System.Windows.Forms.Panel();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.scUp = new System.Windows.Forms.SplitContainer();
-            this.btnMenu = new System.Windows.Forms.Button();
             this.btnNuevoCocina = new System.Windows.Forms.Button();
             this.btnConsultarCocina = new System.Windows.Forms.Button();
             this.btnListadoCocina = new System.Windows.Forms.Button();
+            this.btnColor = new System.Windows.Forms.Button();
+            this.panelColor = new System.Windows.Forms.Panel();
             this.btnConsultarColor = new System.Windows.Forms.Button();
+            this.btnConjunto = new System.Windows.Forms.Button();
+            this.panelConjunto = new System.Windows.Forms.Panel();
             this.btnListadoConjunto = new System.Windows.Forms.Button();
             this.btnConsultarConjunto = new System.Windows.Forms.Button();
             this.btnNuevoConjunto = new System.Windows.Forms.Button();
+            this.btnDesignacion = new System.Windows.Forms.Button();
+            this.panelDesignacion = new System.Windows.Forms.Panel();
             this.btnConsultarDesignacion = new System.Windows.Forms.Button();
             this.btnNuevoDesignacion = new System.Windows.Forms.Button();
+            this.btnEstructuraProducto = new System.Windows.Forms.Button();
+            this.panelEstructuraCocina = new System.Windows.Forms.Panel();
             this.btnListadoEstructuraProducto = new System.Windows.Forms.Button();
             this.btnConsultarEstructuraProducto = new System.Windows.Forms.Button();
             this.btnNuevoEstructuraProducto = new System.Windows.Forms.Button();
+            this.btnHojaRuta = new System.Windows.Forms.Button();
+            this.panelHojaRuta = new System.Windows.Forms.Panel();
             this.btnConsultarhojaRuta = new System.Windows.Forms.Button();
             this.btnNuevoHojaRuta = new System.Windows.Forms.Button();
+            this.btnMPPrincipal = new System.Windows.Forms.Button();
+            this.panelMPPrincipal = new System.Windows.Forms.Panel();
             this.btnConsultarMPPrincipal = new System.Windows.Forms.Button();
+            this.btnModeloCocina = new System.Windows.Forms.Button();
+            this.panelModeloCocina = new System.Windows.Forms.Panel();
             this.btnConsultarModeloCocina = new System.Windows.Forms.Button();
             this.btnNuevoModeloCocina = new System.Windows.Forms.Button();
+            this.btnPieza = new System.Windows.Forms.Button();
+            this.panelPieza = new System.Windows.Forms.Panel();
             this.btnListadoPieza = new System.Windows.Forms.Button();
             this.btnConsultarPieza = new System.Windows.Forms.Button();
             this.btnNuevoPieza = new System.Windows.Forms.Button();
+            this.btnSubconjunto = new System.Windows.Forms.Button();
+            this.panelSubconjunto = new System.Windows.Forms.Panel();
             this.btnListadoSubconjunto = new System.Windows.Forms.Button();
             this.btnConsultarSubconjunto = new System.Windows.Forms.Button();
             this.btnNuevoSubconjunto = new System.Windows.Forms.Button();
+            this.btnTerminacion = new System.Windows.Forms.Button();
+            this.panelTerminacion = new System.Windows.Forms.Panel();
             this.btnConsultarTerminacion = new System.Windows.Forms.Button();
             this.btnNuevoTerminacion = new System.Windows.Forms.Button();
+            this.btnUnidadMedida = new System.Windows.Forms.Button();
+            this.panelUnidadMedida = new System.Windows.Forms.Panel();
             this.btnConsultarUnidadMedida = new System.Windows.Forms.Button();
             this.btnNuevoUnidadMedida = new System.Windows.Forms.Button();
+            this.panel12 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.scUp = new System.Windows.Forms.SplitContainer();
+            this.btnMenu = new System.Windows.Forms.Button();
             this.scDown.Panel1.SuspendLayout();
             this.scDown.Panel2.SuspendLayout();
             this.scDown.SuspendLayout();
@@ -193,375 +193,6 @@
             this.panelCocina.Size = new System.Drawing.Size(158, 207);
             this.panelCocina.TabIndex = 1;
             // 
-            // btnColor
-            // 
-            this.btnColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnColor.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnColor.Location = new System.Drawing.Point(0, 232);
-            this.btnColor.Margin = new System.Windows.Forms.Padding(0);
-            this.btnColor.Name = "btnColor";
-            this.btnColor.Size = new System.Drawing.Size(158, 25);
-            this.btnColor.TabIndex = 0;
-            this.btnColor.Text = "Color";
-            this.btnColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnColor.UseVisualStyleBackColor = true;
-            this.btnColor.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelColor
-            // 
-            this.panelColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelColor.BackColor = System.Drawing.Color.Silver;
-            this.panelColor.Controls.Add(this.btnConsultarColor);
-            this.panelColor.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelColor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelColor.Location = new System.Drawing.Point(0, 257);
-            this.panelColor.Margin = new System.Windows.Forms.Padding(0);
-            this.panelColor.Name = "panelColor";
-            this.panelColor.Size = new System.Drawing.Size(158, 83);
-            this.panelColor.TabIndex = 2;
-            // 
-            // btnConjunto
-            // 
-            this.btnConjunto.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConjunto.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConjunto.Location = new System.Drawing.Point(0, 340);
-            this.btnConjunto.Margin = new System.Windows.Forms.Padding(0);
-            this.btnConjunto.Name = "btnConjunto";
-            this.btnConjunto.Size = new System.Drawing.Size(158, 25);
-            this.btnConjunto.TabIndex = 3;
-            this.btnConjunto.Text = "Conjunto";
-            this.btnConjunto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnConjunto.UseVisualStyleBackColor = true;
-            this.btnConjunto.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelConjunto
-            // 
-            this.panelConjunto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelConjunto.BackColor = System.Drawing.Color.Silver;
-            this.panelConjunto.Controls.Add(this.btnListadoConjunto);
-            this.panelConjunto.Controls.Add(this.btnConsultarConjunto);
-            this.panelConjunto.Controls.Add(this.btnNuevoConjunto);
-            this.panelConjunto.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelConjunto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelConjunto.Location = new System.Drawing.Point(158, 0);
-            this.panelConjunto.Margin = new System.Windows.Forms.Padding(0);
-            this.panelConjunto.Name = "panelConjunto";
-            this.panelConjunto.Size = new System.Drawing.Size(158, 204);
-            this.panelConjunto.TabIndex = 4;
-            // 
-            // btnDesignacion
-            // 
-            this.btnDesignacion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDesignacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDesignacion.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDesignacion.Location = new System.Drawing.Point(158, 204);
-            this.btnDesignacion.Margin = new System.Windows.Forms.Padding(0);
-            this.btnDesignacion.Name = "btnDesignacion";
-            this.btnDesignacion.Size = new System.Drawing.Size(158, 25);
-            this.btnDesignacion.TabIndex = 5;
-            this.btnDesignacion.Text = "Designación";
-            this.btnDesignacion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDesignacion.UseVisualStyleBackColor = true;
-            this.btnDesignacion.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelDesignacion
-            // 
-            this.panelDesignacion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelDesignacion.BackColor = System.Drawing.Color.Silver;
-            this.panelDesignacion.Controls.Add(this.btnConsultarDesignacion);
-            this.panelDesignacion.Controls.Add(this.btnNuevoDesignacion);
-            this.panelDesignacion.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelDesignacion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDesignacion.Location = new System.Drawing.Point(158, 229);
-            this.panelDesignacion.Margin = new System.Windows.Forms.Padding(0);
-            this.panelDesignacion.Name = "panelDesignacion";
-            this.panelDesignacion.Size = new System.Drawing.Size(158, 140);
-            this.panelDesignacion.TabIndex = 6;
-            // 
-            // btnEstructuraProducto
-            // 
-            this.btnEstructuraProducto.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEstructuraProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEstructuraProducto.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEstructuraProducto.Location = new System.Drawing.Point(158, 369);
-            this.btnEstructuraProducto.Margin = new System.Windows.Forms.Padding(0);
-            this.btnEstructuraProducto.Name = "btnEstructuraProducto";
-            this.btnEstructuraProducto.Size = new System.Drawing.Size(158, 25);
-            this.btnEstructuraProducto.TabIndex = 7;
-            this.btnEstructuraProducto.Text = "Estructura de Cocina";
-            this.btnEstructuraProducto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEstructuraProducto.UseVisualStyleBackColor = true;
-            this.btnEstructuraProducto.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelEstructuraCocina
-            // 
-            this.panelEstructuraCocina.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelEstructuraCocina.BackColor = System.Drawing.Color.Silver;
-            this.panelEstructuraCocina.Controls.Add(this.btnListadoEstructuraProducto);
-            this.panelEstructuraCocina.Controls.Add(this.btnConsultarEstructuraProducto);
-            this.panelEstructuraCocina.Controls.Add(this.btnNuevoEstructuraProducto);
-            this.panelEstructuraCocina.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelEstructuraCocina.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelEstructuraCocina.Location = new System.Drawing.Point(316, 0);
-            this.panelEstructuraCocina.Margin = new System.Windows.Forms.Padding(0);
-            this.panelEstructuraCocina.Name = "panelEstructuraCocina";
-            this.panelEstructuraCocina.Size = new System.Drawing.Size(158, 204);
-            this.panelEstructuraCocina.TabIndex = 8;
-            // 
-            // btnHojaRuta
-            // 
-            this.btnHojaRuta.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHojaRuta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHojaRuta.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHojaRuta.Location = new System.Drawing.Point(316, 204);
-            this.btnHojaRuta.Margin = new System.Windows.Forms.Padding(0);
-            this.btnHojaRuta.Name = "btnHojaRuta";
-            this.btnHojaRuta.Size = new System.Drawing.Size(158, 25);
-            this.btnHojaRuta.TabIndex = 22;
-            this.btnHojaRuta.Text = "Hoja de Ruta";
-            this.btnHojaRuta.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnHojaRuta.UseVisualStyleBackColor = true;
-            this.btnHojaRuta.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelHojaRuta
-            // 
-            this.panelHojaRuta.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelHojaRuta.BackColor = System.Drawing.Color.Silver;
-            this.panelHojaRuta.Controls.Add(this.btnConsultarhojaRuta);
-            this.panelHojaRuta.Controls.Add(this.btnNuevoHojaRuta);
-            this.panelHojaRuta.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelHojaRuta.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelHojaRuta.Location = new System.Drawing.Point(316, 229);
-            this.panelHojaRuta.Margin = new System.Windows.Forms.Padding(0);
-            this.panelHojaRuta.Name = "panelHojaRuta";
-            this.panelHojaRuta.Size = new System.Drawing.Size(158, 144);
-            this.panelHojaRuta.TabIndex = 23;
-            // 
-            // btnMPPrincipal
-            // 
-            this.btnMPPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMPPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMPPrincipal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMPPrincipal.Location = new System.Drawing.Point(316, 373);
-            this.btnMPPrincipal.Margin = new System.Windows.Forms.Padding(0);
-            this.btnMPPrincipal.Name = "btnMPPrincipal";
-            this.btnMPPrincipal.Size = new System.Drawing.Size(158, 25);
-            this.btnMPPrincipal.TabIndex = 24;
-            this.btnMPPrincipal.Text = "Materia Prima Principal";
-            this.btnMPPrincipal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMPPrincipal.UseVisualStyleBackColor = true;
-            this.btnMPPrincipal.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelMPPrincipal
-            // 
-            this.panelMPPrincipal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelMPPrincipal.BackColor = System.Drawing.Color.Silver;
-            this.panelMPPrincipal.Controls.Add(this.btnConsultarMPPrincipal);
-            this.panelMPPrincipal.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelMPPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMPPrincipal.Location = new System.Drawing.Point(316, 398);
-            this.panelMPPrincipal.Margin = new System.Windows.Forms.Padding(0);
-            this.panelMPPrincipal.Name = "panelMPPrincipal";
-            this.panelMPPrincipal.Size = new System.Drawing.Size(158, 77);
-            this.panelMPPrincipal.TabIndex = 25;
-            // 
-            // btnModeloCocina
-            // 
-            this.btnModeloCocina.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnModeloCocina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModeloCocina.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModeloCocina.Location = new System.Drawing.Point(316, 475);
-            this.btnModeloCocina.Margin = new System.Windows.Forms.Padding(0);
-            this.btnModeloCocina.Name = "btnModeloCocina";
-            this.btnModeloCocina.Size = new System.Drawing.Size(158, 25);
-            this.btnModeloCocina.TabIndex = 26;
-            this.btnModeloCocina.Text = "Modelo de Cocina";
-            this.btnModeloCocina.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnModeloCocina.UseVisualStyleBackColor = true;
-            this.btnModeloCocina.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelModeloCocina
-            // 
-            this.panelModeloCocina.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelModeloCocina.BackColor = System.Drawing.Color.Silver;
-            this.panelModeloCocina.Controls.Add(this.btnConsultarModeloCocina);
-            this.panelModeloCocina.Controls.Add(this.btnNuevoModeloCocina);
-            this.panelModeloCocina.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelModeloCocina.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelModeloCocina.Location = new System.Drawing.Point(474, 0);
-            this.panelModeloCocina.Margin = new System.Windows.Forms.Padding(0);
-            this.panelModeloCocina.Name = "panelModeloCocina";
-            this.panelModeloCocina.Size = new System.Drawing.Size(158, 156);
-            this.panelModeloCocina.TabIndex = 27;
-            // 
-            // btnPieza
-            // 
-            this.btnPieza.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPieza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPieza.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPieza.Location = new System.Drawing.Point(474, 156);
-            this.btnPieza.Margin = new System.Windows.Forms.Padding(0);
-            this.btnPieza.Name = "btnPieza";
-            this.btnPieza.Size = new System.Drawing.Size(158, 25);
-            this.btnPieza.TabIndex = 28;
-            this.btnPieza.Text = "Pieza";
-            this.btnPieza.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPieza.UseVisualStyleBackColor = true;
-            this.btnPieza.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelPieza
-            // 
-            this.panelPieza.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelPieza.BackColor = System.Drawing.Color.Silver;
-            this.panelPieza.Controls.Add(this.btnListadoPieza);
-            this.panelPieza.Controls.Add(this.btnConsultarPieza);
-            this.panelPieza.Controls.Add(this.btnNuevoPieza);
-            this.panelPieza.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelPieza.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelPieza.Location = new System.Drawing.Point(474, 181);
-            this.panelPieza.Margin = new System.Windows.Forms.Padding(0);
-            this.panelPieza.Name = "panelPieza";
-            this.panelPieza.Size = new System.Drawing.Size(158, 204);
-            this.panelPieza.TabIndex = 29;
-            // 
-            // btnSubconjunto
-            // 
-            this.btnSubconjunto.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSubconjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSubconjunto.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubconjunto.Location = new System.Drawing.Point(474, 385);
-            this.btnSubconjunto.Margin = new System.Windows.Forms.Padding(0);
-            this.btnSubconjunto.Name = "btnSubconjunto";
-            this.btnSubconjunto.Size = new System.Drawing.Size(158, 25);
-            this.btnSubconjunto.TabIndex = 30;
-            this.btnSubconjunto.Text = "Subconjunto";
-            this.btnSubconjunto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSubconjunto.UseVisualStyleBackColor = true;
-            this.btnSubconjunto.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelSubconjunto
-            // 
-            this.panelSubconjunto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelSubconjunto.BackColor = System.Drawing.Color.Silver;
-            this.panelSubconjunto.Controls.Add(this.btnListadoSubconjunto);
-            this.panelSubconjunto.Controls.Add(this.btnConsultarSubconjunto);
-            this.panelSubconjunto.Controls.Add(this.btnNuevoSubconjunto);
-            this.panelSubconjunto.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelSubconjunto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSubconjunto.Location = new System.Drawing.Point(632, 0);
-            this.panelSubconjunto.Margin = new System.Windows.Forms.Padding(0);
-            this.panelSubconjunto.Name = "panelSubconjunto";
-            this.panelSubconjunto.Size = new System.Drawing.Size(158, 204);
-            this.panelSubconjunto.TabIndex = 31;
-            // 
-            // btnTerminacion
-            // 
-            this.btnTerminacion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTerminacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTerminacion.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTerminacion.Location = new System.Drawing.Point(632, 204);
-            this.btnTerminacion.Margin = new System.Windows.Forms.Padding(0);
-            this.btnTerminacion.Name = "btnTerminacion";
-            this.btnTerminacion.Size = new System.Drawing.Size(158, 25);
-            this.btnTerminacion.TabIndex = 32;
-            this.btnTerminacion.Text = "Terminación";
-            this.btnTerminacion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTerminacion.UseVisualStyleBackColor = true;
-            this.btnTerminacion.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelTerminacion
-            // 
-            this.panelTerminacion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelTerminacion.BackColor = System.Drawing.Color.Silver;
-            this.panelTerminacion.Controls.Add(this.btnConsultarTerminacion);
-            this.panelTerminacion.Controls.Add(this.btnNuevoTerminacion);
-            this.panelTerminacion.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelTerminacion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelTerminacion.Location = new System.Drawing.Point(632, 229);
-            this.panelTerminacion.Margin = new System.Windows.Forms.Padding(0);
-            this.panelTerminacion.Name = "panelTerminacion";
-            this.panelTerminacion.Size = new System.Drawing.Size(158, 139);
-            this.panelTerminacion.TabIndex = 33;
-            // 
-            // btnUnidadMedida
-            // 
-            this.btnUnidadMedida.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUnidadMedida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUnidadMedida.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUnidadMedida.Location = new System.Drawing.Point(632, 368);
-            this.btnUnidadMedida.Margin = new System.Windows.Forms.Padding(0);
-            this.btnUnidadMedida.Name = "btnUnidadMedida";
-            this.btnUnidadMedida.Size = new System.Drawing.Size(158, 25);
-            this.btnUnidadMedida.TabIndex = 34;
-            this.btnUnidadMedida.Text = "Unidad de Medida";
-            this.btnUnidadMedida.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUnidadMedida.UseVisualStyleBackColor = true;
-            this.btnUnidadMedida.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelUnidadMedida
-            // 
-            this.panelUnidadMedida.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelUnidadMedida.BackColor = System.Drawing.Color.Silver;
-            this.panelUnidadMedida.Controls.Add(this.btnConsultarUnidadMedida);
-            this.panelUnidadMedida.Controls.Add(this.btnNuevoUnidadMedida);
-            this.panelUnidadMedida.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelUnidadMedida.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelUnidadMedida.Location = new System.Drawing.Point(632, 393);
-            this.panelUnidadMedida.Margin = new System.Windows.Forms.Padding(0);
-            this.panelUnidadMedida.Name = "panelUnidadMedida";
-            this.panelUnidadMedida.Size = new System.Drawing.Size(158, 144);
-            this.panelUnidadMedida.TabIndex = 35;
-            // 
-            // panel12
-            // 
-            this.panel12.Controls.Add(this.button1);
-            this.panel12.Cursor = System.Windows.Forms.Cursors.Default;
-            this.flpMenu.SetFlowBreak(this.panel12, true);
-            this.panel12.Location = new System.Drawing.Point(790, 0);
-            this.panel12.Margin = new System.Windows.Forms.Padding(0);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(158, 103);
-            this.panel12.TabIndex = 36;
-            // 
-            // scUp
-            // 
-            this.scUp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scUp.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.scUp.IsSplitterFixed = true;
-            this.scUp.Location = new System.Drawing.Point(0, 0);
-            this.scUp.Name = "scUp";
-            // 
-            // scUp.Panel1
-            // 
-            this.scUp.Panel1.AutoScroll = true;
-            this.scUp.Panel1.Controls.Add(this.btnMenu);
-            this.scUp.Panel1MinSize = 20;
-            // 
-            // scUp.Panel2
-            // 
-            this.scUp.Panel2.AutoScroll = true;
-            this.scUp.Panel2.AutoScrollMargin = new System.Drawing.Size(1000, 1000);
-            this.scUp.Size = new System.Drawing.Size(626, 568);
-            this.scUp.SplitterDistance = 20;
-            this.scUp.SplitterWidth = 3;
-            this.scUp.TabIndex = 0;
-            // 
-            // btnMenu
-            // 
-            this.btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
-            this.btnMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMenu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
-            this.btnMenu.Location = new System.Drawing.Point(0, 0);
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(13, 568);
-            this.btnMenu.TabIndex = 0;
-            this.btnMenu.Text = "Menú";
-            this.btnMenu.UseVisualStyleBackColor = true;
-            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
-            // 
             // btnNuevoCocina
             // 
             this.btnNuevoCocina.AutoSize = true;
@@ -628,6 +259,34 @@
             this.btnListadoCocina.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnListadoCocina.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
+            // btnColor
+            // 
+            this.btnColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColor.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnColor.Location = new System.Drawing.Point(0, 232);
+            this.btnColor.Margin = new System.Windows.Forms.Padding(0);
+            this.btnColor.Name = "btnColor";
+            this.btnColor.Size = new System.Drawing.Size(158, 25);
+            this.btnColor.TabIndex = 0;
+            this.btnColor.Text = "Color";
+            this.btnColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnColor.UseVisualStyleBackColor = true;
+            this.btnColor.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelColor
+            // 
+            this.panelColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelColor.BackColor = System.Drawing.Color.Silver;
+            this.panelColor.Controls.Add(this.btnConsultarColor);
+            this.panelColor.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelColor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelColor.Location = new System.Drawing.Point(0, 257);
+            this.panelColor.Margin = new System.Windows.Forms.Padding(0);
+            this.panelColor.Name = "panelColor";
+            this.panelColor.Size = new System.Drawing.Size(158, 83);
+            this.panelColor.TabIndex = 2;
+            // 
             // btnConsultarColor
             // 
             this.btnConsultarColor.AutoSize = true;
@@ -647,6 +306,36 @@
             this.btnConsultarColor.Click += new System.EventHandler(this.btnConsultarColor_Click);
             this.btnConsultarColor.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnConsultarColor.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnConjunto
+            // 
+            this.btnConjunto.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConjunto.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConjunto.Location = new System.Drawing.Point(0, 340);
+            this.btnConjunto.Margin = new System.Windows.Forms.Padding(0);
+            this.btnConjunto.Name = "btnConjunto";
+            this.btnConjunto.Size = new System.Drawing.Size(158, 25);
+            this.btnConjunto.TabIndex = 3;
+            this.btnConjunto.Text = "Conjunto";
+            this.btnConjunto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnConjunto.UseVisualStyleBackColor = true;
+            this.btnConjunto.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelConjunto
+            // 
+            this.panelConjunto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelConjunto.BackColor = System.Drawing.Color.Silver;
+            this.panelConjunto.Controls.Add(this.btnListadoConjunto);
+            this.panelConjunto.Controls.Add(this.btnConsultarConjunto);
+            this.panelConjunto.Controls.Add(this.btnNuevoConjunto);
+            this.panelConjunto.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelConjunto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelConjunto.Location = new System.Drawing.Point(158, 0);
+            this.panelConjunto.Margin = new System.Windows.Forms.Padding(0);
+            this.panelConjunto.Name = "panelConjunto";
+            this.panelConjunto.Size = new System.Drawing.Size(158, 204);
+            this.panelConjunto.TabIndex = 4;
             // 
             // btnListadoConjunto
             // 
@@ -710,6 +399,35 @@
             this.btnNuevoConjunto.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoConjunto.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
+            // btnDesignacion
+            // 
+            this.btnDesignacion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDesignacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDesignacion.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDesignacion.Location = new System.Drawing.Point(158, 204);
+            this.btnDesignacion.Margin = new System.Windows.Forms.Padding(0);
+            this.btnDesignacion.Name = "btnDesignacion";
+            this.btnDesignacion.Size = new System.Drawing.Size(158, 25);
+            this.btnDesignacion.TabIndex = 5;
+            this.btnDesignacion.Text = "Designación";
+            this.btnDesignacion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDesignacion.UseVisualStyleBackColor = true;
+            this.btnDesignacion.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelDesignacion
+            // 
+            this.panelDesignacion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelDesignacion.BackColor = System.Drawing.Color.Silver;
+            this.panelDesignacion.Controls.Add(this.btnConsultarDesignacion);
+            this.panelDesignacion.Controls.Add(this.btnNuevoDesignacion);
+            this.panelDesignacion.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelDesignacion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDesignacion.Location = new System.Drawing.Point(158, 229);
+            this.panelDesignacion.Margin = new System.Windows.Forms.Padding(0);
+            this.panelDesignacion.Name = "panelDesignacion";
+            this.panelDesignacion.Size = new System.Drawing.Size(158, 140);
+            this.panelDesignacion.TabIndex = 6;
+            // 
             // btnConsultarDesignacion
             // 
             this.btnConsultarDesignacion.AutoSize = true;
@@ -750,6 +468,36 @@
             this.btnNuevoDesignacion.Click += new System.EventHandler(this.btnNuevoDesignacion_Click);
             this.btnNuevoDesignacion.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoDesignacion.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnEstructuraProducto
+            // 
+            this.btnEstructuraProducto.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEstructuraProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEstructuraProducto.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEstructuraProducto.Location = new System.Drawing.Point(158, 369);
+            this.btnEstructuraProducto.Margin = new System.Windows.Forms.Padding(0);
+            this.btnEstructuraProducto.Name = "btnEstructuraProducto";
+            this.btnEstructuraProducto.Size = new System.Drawing.Size(158, 25);
+            this.btnEstructuraProducto.TabIndex = 7;
+            this.btnEstructuraProducto.Text = "Estructura de Cocina";
+            this.btnEstructuraProducto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEstructuraProducto.UseVisualStyleBackColor = true;
+            this.btnEstructuraProducto.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelEstructuraCocina
+            // 
+            this.panelEstructuraCocina.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelEstructuraCocina.BackColor = System.Drawing.Color.Silver;
+            this.panelEstructuraCocina.Controls.Add(this.btnListadoEstructuraProducto);
+            this.panelEstructuraCocina.Controls.Add(this.btnConsultarEstructuraProducto);
+            this.panelEstructuraCocina.Controls.Add(this.btnNuevoEstructuraProducto);
+            this.panelEstructuraCocina.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelEstructuraCocina.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelEstructuraCocina.Location = new System.Drawing.Point(316, 0);
+            this.panelEstructuraCocina.Margin = new System.Windows.Forms.Padding(0);
+            this.panelEstructuraCocina.Name = "panelEstructuraCocina";
+            this.panelEstructuraCocina.Size = new System.Drawing.Size(158, 204);
+            this.panelEstructuraCocina.TabIndex = 8;
             // 
             // btnListadoEstructuraProducto
             // 
@@ -813,6 +561,35 @@
             this.btnNuevoEstructuraProducto.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoEstructuraProducto.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
+            // btnHojaRuta
+            // 
+            this.btnHojaRuta.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHojaRuta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHojaRuta.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHojaRuta.Location = new System.Drawing.Point(316, 204);
+            this.btnHojaRuta.Margin = new System.Windows.Forms.Padding(0);
+            this.btnHojaRuta.Name = "btnHojaRuta";
+            this.btnHojaRuta.Size = new System.Drawing.Size(158, 25);
+            this.btnHojaRuta.TabIndex = 22;
+            this.btnHojaRuta.Text = "Hoja de Ruta";
+            this.btnHojaRuta.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnHojaRuta.UseVisualStyleBackColor = true;
+            this.btnHojaRuta.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelHojaRuta
+            // 
+            this.panelHojaRuta.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelHojaRuta.BackColor = System.Drawing.Color.Silver;
+            this.panelHojaRuta.Controls.Add(this.btnConsultarhojaRuta);
+            this.panelHojaRuta.Controls.Add(this.btnNuevoHojaRuta);
+            this.panelHojaRuta.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelHojaRuta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelHojaRuta.Location = new System.Drawing.Point(316, 229);
+            this.panelHojaRuta.Margin = new System.Windows.Forms.Padding(0);
+            this.panelHojaRuta.Name = "panelHojaRuta";
+            this.panelHojaRuta.Size = new System.Drawing.Size(158, 144);
+            this.panelHojaRuta.TabIndex = 23;
+            // 
             // btnConsultarhojaRuta
             // 
             this.btnConsultarhojaRuta.AutoSize = true;
@@ -854,6 +631,34 @@
             this.btnNuevoHojaRuta.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoHojaRuta.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
+            // btnMPPrincipal
+            // 
+            this.btnMPPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMPPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMPPrincipal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMPPrincipal.Location = new System.Drawing.Point(316, 373);
+            this.btnMPPrincipal.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMPPrincipal.Name = "btnMPPrincipal";
+            this.btnMPPrincipal.Size = new System.Drawing.Size(158, 25);
+            this.btnMPPrincipal.TabIndex = 24;
+            this.btnMPPrincipal.Text = "Materia Prima Principal";
+            this.btnMPPrincipal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMPPrincipal.UseVisualStyleBackColor = true;
+            this.btnMPPrincipal.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelMPPrincipal
+            // 
+            this.panelMPPrincipal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelMPPrincipal.BackColor = System.Drawing.Color.Silver;
+            this.panelMPPrincipal.Controls.Add(this.btnConsultarMPPrincipal);
+            this.panelMPPrincipal.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelMPPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMPPrincipal.Location = new System.Drawing.Point(316, 398);
+            this.panelMPPrincipal.Margin = new System.Windows.Forms.Padding(0);
+            this.panelMPPrincipal.Name = "panelMPPrincipal";
+            this.panelMPPrincipal.Size = new System.Drawing.Size(158, 77);
+            this.panelMPPrincipal.TabIndex = 25;
+            // 
             // btnConsultarMPPrincipal
             // 
             this.btnConsultarMPPrincipal.AutoSize = true;
@@ -873,6 +678,35 @@
             this.btnConsultarMPPrincipal.Click += new System.EventHandler(this.btnConsultarMPPrincipal_Click);
             this.btnConsultarMPPrincipal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnConsultarMPPrincipal.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnModeloCocina
+            // 
+            this.btnModeloCocina.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnModeloCocina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModeloCocina.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModeloCocina.Location = new System.Drawing.Point(316, 475);
+            this.btnModeloCocina.Margin = new System.Windows.Forms.Padding(0);
+            this.btnModeloCocina.Name = "btnModeloCocina";
+            this.btnModeloCocina.Size = new System.Drawing.Size(158, 25);
+            this.btnModeloCocina.TabIndex = 26;
+            this.btnModeloCocina.Text = "Modelo de Cocina";
+            this.btnModeloCocina.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnModeloCocina.UseVisualStyleBackColor = true;
+            this.btnModeloCocina.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelModeloCocina
+            // 
+            this.panelModeloCocina.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelModeloCocina.BackColor = System.Drawing.Color.Silver;
+            this.panelModeloCocina.Controls.Add(this.btnConsultarModeloCocina);
+            this.panelModeloCocina.Controls.Add(this.btnNuevoModeloCocina);
+            this.panelModeloCocina.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelModeloCocina.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelModeloCocina.Location = new System.Drawing.Point(474, 0);
+            this.panelModeloCocina.Margin = new System.Windows.Forms.Padding(0);
+            this.panelModeloCocina.Name = "panelModeloCocina";
+            this.panelModeloCocina.Size = new System.Drawing.Size(158, 156);
+            this.panelModeloCocina.TabIndex = 27;
             // 
             // btnConsultarModeloCocina
             // 
@@ -914,6 +748,36 @@
             this.btnNuevoModeloCocina.Click += new System.EventHandler(this.btnNuevoModeloCocina_Click);
             this.btnNuevoModeloCocina.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoModeloCocina.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnPieza
+            // 
+            this.btnPieza.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPieza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPieza.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPieza.Location = new System.Drawing.Point(474, 156);
+            this.btnPieza.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPieza.Name = "btnPieza";
+            this.btnPieza.Size = new System.Drawing.Size(158, 25);
+            this.btnPieza.TabIndex = 28;
+            this.btnPieza.Text = "Pieza";
+            this.btnPieza.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPieza.UseVisualStyleBackColor = true;
+            this.btnPieza.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelPieza
+            // 
+            this.panelPieza.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelPieza.BackColor = System.Drawing.Color.Silver;
+            this.panelPieza.Controls.Add(this.btnListadoPieza);
+            this.panelPieza.Controls.Add(this.btnConsultarPieza);
+            this.panelPieza.Controls.Add(this.btnNuevoPieza);
+            this.panelPieza.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelPieza.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelPieza.Location = new System.Drawing.Point(474, 181);
+            this.panelPieza.Margin = new System.Windows.Forms.Padding(0);
+            this.panelPieza.Name = "panelPieza";
+            this.panelPieza.Size = new System.Drawing.Size(158, 204);
+            this.panelPieza.TabIndex = 29;
             // 
             // btnListadoPieza
             // 
@@ -977,6 +841,36 @@
             this.btnNuevoPieza.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoPieza.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
+            // btnSubconjunto
+            // 
+            this.btnSubconjunto.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSubconjunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubconjunto.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubconjunto.Location = new System.Drawing.Point(474, 385);
+            this.btnSubconjunto.Margin = new System.Windows.Forms.Padding(0);
+            this.btnSubconjunto.Name = "btnSubconjunto";
+            this.btnSubconjunto.Size = new System.Drawing.Size(158, 25);
+            this.btnSubconjunto.TabIndex = 30;
+            this.btnSubconjunto.Text = "Subconjunto";
+            this.btnSubconjunto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSubconjunto.UseVisualStyleBackColor = true;
+            this.btnSubconjunto.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelSubconjunto
+            // 
+            this.panelSubconjunto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelSubconjunto.BackColor = System.Drawing.Color.Silver;
+            this.panelSubconjunto.Controls.Add(this.btnListadoSubconjunto);
+            this.panelSubconjunto.Controls.Add(this.btnConsultarSubconjunto);
+            this.panelSubconjunto.Controls.Add(this.btnNuevoSubconjunto);
+            this.panelSubconjunto.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelSubconjunto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelSubconjunto.Location = new System.Drawing.Point(632, 0);
+            this.panelSubconjunto.Margin = new System.Windows.Forms.Padding(0);
+            this.panelSubconjunto.Name = "panelSubconjunto";
+            this.panelSubconjunto.Size = new System.Drawing.Size(158, 204);
+            this.panelSubconjunto.TabIndex = 31;
+            // 
             // btnListadoSubconjunto
             // 
             this.btnListadoSubconjunto.AutoSize = true;
@@ -1039,6 +933,35 @@
             this.btnNuevoSubconjunto.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoSubconjunto.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
+            // btnTerminacion
+            // 
+            this.btnTerminacion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTerminacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTerminacion.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTerminacion.Location = new System.Drawing.Point(632, 204);
+            this.btnTerminacion.Margin = new System.Windows.Forms.Padding(0);
+            this.btnTerminacion.Name = "btnTerminacion";
+            this.btnTerminacion.Size = new System.Drawing.Size(158, 25);
+            this.btnTerminacion.TabIndex = 32;
+            this.btnTerminacion.Text = "Terminación";
+            this.btnTerminacion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTerminacion.UseVisualStyleBackColor = true;
+            this.btnTerminacion.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelTerminacion
+            // 
+            this.panelTerminacion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelTerminacion.BackColor = System.Drawing.Color.Silver;
+            this.panelTerminacion.Controls.Add(this.btnConsultarTerminacion);
+            this.panelTerminacion.Controls.Add(this.btnNuevoTerminacion);
+            this.panelTerminacion.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelTerminacion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTerminacion.Location = new System.Drawing.Point(632, 229);
+            this.panelTerminacion.Margin = new System.Windows.Forms.Padding(0);
+            this.panelTerminacion.Name = "panelTerminacion";
+            this.panelTerminacion.Size = new System.Drawing.Size(158, 139);
+            this.panelTerminacion.TabIndex = 33;
+            // 
             // btnConsultarTerminacion
             // 
             this.btnConsultarTerminacion.AutoSize = true;
@@ -1079,6 +1002,35 @@
             this.btnNuevoTerminacion.Click += new System.EventHandler(this.btnNuevoTerminacion_Click);
             this.btnNuevoTerminacion.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoTerminacion.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnUnidadMedida
+            // 
+            this.btnUnidadMedida.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUnidadMedida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUnidadMedida.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUnidadMedida.Location = new System.Drawing.Point(632, 368);
+            this.btnUnidadMedida.Margin = new System.Windows.Forms.Padding(0);
+            this.btnUnidadMedida.Name = "btnUnidadMedida";
+            this.btnUnidadMedida.Size = new System.Drawing.Size(158, 25);
+            this.btnUnidadMedida.TabIndex = 34;
+            this.btnUnidadMedida.Text = "Unidad de Medida";
+            this.btnUnidadMedida.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnUnidadMedida.UseVisualStyleBackColor = true;
+            this.btnUnidadMedida.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelUnidadMedida
+            // 
+            this.panelUnidadMedida.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelUnidadMedida.BackColor = System.Drawing.Color.Silver;
+            this.panelUnidadMedida.Controls.Add(this.btnConsultarUnidadMedida);
+            this.panelUnidadMedida.Controls.Add(this.btnNuevoUnidadMedida);
+            this.panelUnidadMedida.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelUnidadMedida.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelUnidadMedida.Location = new System.Drawing.Point(632, 393);
+            this.panelUnidadMedida.Margin = new System.Windows.Forms.Padding(0);
+            this.panelUnidadMedida.Name = "panelUnidadMedida";
+            this.panelUnidadMedida.Size = new System.Drawing.Size(158, 144);
+            this.panelUnidadMedida.TabIndex = 35;
             // 
             // btnConsultarUnidadMedida
             // 
@@ -1121,6 +1073,17 @@
             this.btnNuevoUnidadMedida.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoUnidadMedida.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.button1);
+            this.panel12.Cursor = System.Windows.Forms.Cursors.Default;
+            this.flpMenu.SetFlowBreak(this.panel12, true);
+            this.panel12.Location = new System.Drawing.Point(790, 0);
+            this.panel12.Margin = new System.Windows.Forms.Padding(0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(158, 103);
+            this.panel12.TabIndex = 36;
+            // 
             // button1
             // 
             this.button1.AutoSize = true;
@@ -1142,6 +1105,44 @@
             this.button1.Click += new System.EventHandler(this.btnSalir_Click);
             this.button1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.button1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // scUp
+            // 
+            this.scUp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scUp.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.scUp.IsSplitterFixed = true;
+            this.scUp.Location = new System.Drawing.Point(0, 0);
+            this.scUp.Name = "scUp";
+            // 
+            // scUp.Panel1
+            // 
+            this.scUp.Panel1.AutoScroll = true;
+            this.scUp.Panel1.Controls.Add(this.btnMenu);
+            this.scUp.Panel1MinSize = 20;
+            // 
+            // scUp.Panel2
+            // 
+            this.scUp.Panel2.AutoScroll = true;
+            this.scUp.Panel2.AutoScrollMargin = new System.Drawing.Size(1000, 1000);
+            this.scUp.Panel2.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.scUp_Panel2_ControlRemoved);
+            this.scUp.Size = new System.Drawing.Size(626, 568);
+            this.scUp.SplitterDistance = 20;
+            this.scUp.SplitterWidth = 3;
+            this.scUp.TabIndex = 0;
+            // 
+            // btnMenu
+            // 
+            this.btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
+            this.btnMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMenu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMenu.Location = new System.Drawing.Point(0, 0);
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(13, 568);
+            this.btnMenu.TabIndex = 0;
+            this.btnMenu.Text = "Menú";
+            this.btnMenu.UseVisualStyleBackColor = true;
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
             // 
             // frmEstructuraProducto
             // 

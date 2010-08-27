@@ -444,6 +444,7 @@ namespace GyCAP.UI.EstructuraProducto
         private void btnQuitarImagen_Click(object sender, EventArgs e)
         {
             pbImagen.Image = EstructuraProducto.Properties.Resources.sinimagen;
+            ActualizarImagen();
         }
 
         #endregion
@@ -472,6 +473,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnNuevo.Enabled = true;
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.inicio;
+                    btnZoomOut.PerformClick();
                     tcSubconjunto.SelectedTab = tpBuscar;
                     txtNombreBuscar.Focus();
                     break;
@@ -499,8 +501,10 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     panelAcciones.Enabled = true;
-                    panelImagen.Enabled = true;
+                    btnAbrirImagen.Enabled = true;
+                    btnQuitarImagen.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
+                    btnZoomOut.PerformClick();
                     tcSubconjunto.SelectedTab = tpDatos;
                     txtCodigo.Focus();
                     break;
@@ -528,8 +532,10 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     panelAcciones.Enabled = true;
-                    panelImagen.Enabled = true;
+                    btnAbrirImagen.Enabled = true;
+                    btnQuitarImagen.Enabled = true;
                     estadoInterface = estadoUI.nuevoExterno;
+                    btnZoomOut.PerformClick();
                     tcSubconjunto.SelectedTab = tpDatos;
                     txtCodigo.Focus();
                     break;
@@ -548,9 +554,11 @@ namespace GyCAP.UI.EstructuraProducto
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
                     panelAcciones.Enabled = false;
-                    panelImagen.Enabled = false;
+                    btnAbrirImagen.Enabled = false;
+                    btnQuitarImagen.Enabled = false;
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.consultar;
+                    btnZoomOut.PerformClick();
                     tcSubconjunto.SelectedTab = tpDatos;
                     break;
                 case estadoUI.modificar:
@@ -572,8 +580,10 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     panelAcciones.Enabled = true;
-                    panelImagen.Enabled = true;
+                    btnAbrirImagen.Enabled = true;
+                    btnQuitarImagen.Enabled = true;
                     estadoInterface = estadoUI.modificar;
+                    btnZoomOut.PerformClick();
                     tcSubconjunto.SelectedTab = tpDatos;
                     txtCodigo.Focus();
                     break;
@@ -836,6 +846,19 @@ namespace GyCAP.UI.EstructuraProducto
         private void btnZoomOut_Click(object sender, EventArgs e)
         {
             animador.CerrarFormulario();
+        }
+
+        private void ActualizarImagen()
+        {
+            if (animador.EsVisible())
+            {
+                (animador.GetForm() as Sistema.frmImagenZoom).SetImagen(pbImagen.Image, "Imagen de la Pieza");
+            }
+        }
+
+        private void pbImagen_LoadCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            ActualizarImagen();
         }
 
         #endregion

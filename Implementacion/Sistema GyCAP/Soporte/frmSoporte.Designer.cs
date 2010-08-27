@@ -500,6 +500,7 @@
             // 
             this.scUp.Panel2.AutoScroll = true;
             this.scUp.Panel2.AutoScrollMargin = new System.Drawing.Size(1000, 1000);
+            this.scUp.Panel2.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.scUp_Panel2_ControlRemoved);
             this.scUp.Size = new System.Drawing.Size(626, 568);
             this.scUp.SplitterDistance = 20;
             this.scUp.SplitterWidth = 3;
@@ -510,7 +511,7 @@
             this.btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
             this.btnMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMenu.Font = new System.Drawing.Font("Calibri", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+            this.btnMenu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
             this.btnMenu.Location = new System.Drawing.Point(0, 0);
             this.btnMenu.Name = "btnMenu";
             this.btnMenu.Size = new System.Drawing.Size(13, 568);

@@ -12,6 +12,7 @@ namespace GyCAP.UI.EstructuraProducto
     public partial class frmCocina : Form
     {
         private static frmCocina _frmCocina = null;
+        private Sistema.ControlesUsuarios.AnimadorFormulario animador = new GyCAP.UI.Sistema.ControlesUsuarios.AnimadorFormulario();
         Data.dsCocina dsCocina = new GyCAP.Data.dsCocina();
         DataView dvCocinas, dvMarcaBuscar, dvTerminacionBuscar;
         DataView dvModelo, dvMarca, dvDesignacion, dvColor, dvTerminacion;
@@ -58,6 +59,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
+            this.Close();
             this.Dispose(true);
         }
 
@@ -161,6 +163,10 @@ namespace GyCAP.UI.EstructuraProducto
                     case "COC_ESTADO":
                         if (Convert.ToInt32(e.Value) == 1) { e.Value = "Activa"; }
                         else if (Convert.ToInt32(e.Value) == 0) { e.Value = "Inactiva"; }
+                        break;
+                    case "COC_COSTO":
+                        nombre = "$ " + e.Value.ToString();
+                        e.Value = nombre;
                         break;
                     default:
                         break;
@@ -331,6 +337,7 @@ namespace GyCAP.UI.EstructuraProducto
         private void btnQuitar_Click(object sender, EventArgs e)
         {
             pbImagen.Image = EstructuraProducto.Properties.Resources.sinimagen;
+            ActualizarImagen();
         }
 
         private void ofdImagen_FileOk(object sender, CancelEventArgs e)
@@ -363,6 +370,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = hayDatos;
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
+                    btnZoomOut.PerformClick();
                     tcCocina.SelectedTab = tpBuscar;
                     txtCodigoBuscar.Focus();
                     break;
@@ -376,7 +384,8 @@ namespace GyCAP.UI.EstructuraProducto
                     cbTerminacion.Enabled = true;
                     cbEstado.Enabled = true;
                     nudCosto.Enabled = true;
-                    gbImagen.Enabled = true;                    
+                    btnAbrirImagen.Enabled = true;
+                    btnQuitarImagen.Enabled = true;                   
                     cbModelo.SetTexto("Seleccione");
                     cbMarca.SetTexto("Seleccione");
                     cbDesignacion.SetTexto("Seleccione");
@@ -384,7 +393,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbTerminacion.SetTexto("Seleccione");
                     cbEstado.SetTexto("Seleccione");
                     nudCosto.Value = 0;
-                    pbImagen.Image = null;
+                    pbImagen.Image = EstructuraProducto.Properties.Resources.sinimagen;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -392,6 +401,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
+                    btnZoomOut.PerformClick();
                     tcCocina.SelectedTab = tpDatos;
                     txtCodigo.Focus();
                     break;
@@ -405,7 +415,8 @@ namespace GyCAP.UI.EstructuraProducto
                     cbTerminacion.Enabled = true;
                     cbEstado.Enabled = true;
                     nudCosto.Enabled = true;
-                    gbImagen.Enabled = true;
+                    btnAbrirImagen.Enabled = true;
+                    btnQuitarImagen.Enabled = true;
                     cbModelo.SetTexto("Seleccione");
                     cbMarca.SetTexto("Seleccione");
                     cbDesignacion.SetTexto("Seleccione");
@@ -413,7 +424,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbTerminacion.SetTexto("Seleccione");
                     cbEstado.SetTexto("Seleccione");
                     nudCosto.Value = 0;
-                    pbImagen.Image = null;
+                    pbImagen.Image = EstructuraProducto.Properties.Resources.sinimagen;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
                     btnNuevo.Enabled = false;
@@ -421,6 +432,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     estadoInterface = estadoUI.nuevoExterno;
+                    btnZoomOut.PerformClick();
                     tcCocina.SelectedTab = tpDatos;
                     txtCodigo.Focus();
                     break;
@@ -433,13 +445,15 @@ namespace GyCAP.UI.EstructuraProducto
                     cbTerminacion.Enabled = false;
                     cbEstado.Enabled = false;
                     nudCosto.Enabled = false;
-                    gbImagen.Enabled = false;
+                    btnAbrirImagen.Enabled = false;
+                    btnQuitarImagen.Enabled = false;
                     btnGuardar.Enabled = false;
                     btnModificar.Enabled = true;
                     btnEliminar.Enabled = true;
                     btnNuevo.Enabled = true;
                     btnVolver.Enabled = true;
                     estadoInterface = estadoUI.consultar;
+                    btnZoomOut.PerformClick();
                     tcCocina.SelectedTab = tpDatos;
                     break;
                 case estadoUI.modificar:
@@ -451,7 +465,8 @@ namespace GyCAP.UI.EstructuraProducto
                     cbTerminacion.Enabled = true;
                     cbEstado.Enabled = true;
                     nudCosto.Enabled = true;
-                    gbImagen.Enabled = true;
+                    btnAbrirImagen.Enabled = true;
+                    btnQuitarImagen.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -459,6 +474,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     estadoInterface = estadoUI.modificar;
+                    btnZoomOut.PerformClick();
                     tcCocina.SelectedTab = tpDatos;
                     txtCodigo.Focus();
                     break;
@@ -490,15 +506,18 @@ namespace GyCAP.UI.EstructuraProducto
             dgvListaCocina.Columns.Add("MOD_CODIGO", "Modelo");
             dgvListaCocina.Columns.Add("MCA_CODIGO", "Marca");
             dgvListaCocina.Columns.Add("COC_ESTADO", "Estado");
+            dgvListaCocina.Columns.Add("COC_COSTO", "Costo");
             dgvListaCocina.Columns["COC_CODIGO_PRODUCTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListaCocina.Columns["MOD_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListaCocina.Columns["MCA_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvListaCocina.Columns["COC_ESTADO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            //dgvListaCocina.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvListaCocina.Columns["COC_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvListaCocina.Columns["COC_COSTO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvListaCocina.Columns["COC_ESTADO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListaCocina.Columns["COC_CODIGO_PRODUCTO"].DataPropertyName = "COC_CODIGO_PRODUCTO";
             dgvListaCocina.Columns["MOD_CODIGO"].DataPropertyName = "MOD_CODIGO";
             dgvListaCocina.Columns["MCA_CODIGO"].DataPropertyName = "MCA_CODIGO";
             dgvListaCocina.Columns["COC_ESTADO"].DataPropertyName = "COC_ACTIVO";
+            dgvListaCocina.Columns["COC_COSTO"].DataPropertyName = "COC_COSTO";
             
             //Dataviews
             dvMarcaBuscar = new DataView(dsCocina.MARCAS);
@@ -548,6 +567,43 @@ namespace GyCAP.UI.EstructuraProducto
         private void nudCosto_Enter(object sender, EventArgs e)
         {
             nudCosto.Select(0, 20);
+        }
+
+        private void btnZoomIn_Click(object sender, EventArgs e)
+        {
+            Sistema.frmImagenZoom.Instancia.SetImagen(pbImagen.Image, "Imagen de la Pieza");
+            animador.SetFormulario(Sistema.frmImagenZoom.Instancia, this, Sistema.ControlesUsuarios.AnimadorFormulario.animacionDerecha, 300, true);
+            animador.MostrarFormulario();
+        }
+
+        private void btnZoomOut_Click(object sender, EventArgs e)
+        {
+            animador.CerrarFormulario();
+        }
+
+        private void ActualizarImagen()
+        {
+            if (animador.EsVisible())
+            {
+                (animador.GetForm() as Sistema.frmImagenZoom).SetImagen(pbImagen.Image, "Imagen de la Pieza");
+            }
+        }
+
+        private void pbImagen_LoadCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            ActualizarImagen();
+        }
+
+        private void button_MouseDown(object sender, MouseEventArgs e)
+        {
+            Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
+            (sender as Button).Location = punto;
+        }
+
+        private void button_MouseUp(object sender, MouseEventArgs e)
+        {
+            Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
+            (sender as Button).Location = punto;
         }
 
         #endregion Servicios

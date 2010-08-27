@@ -104,6 +104,17 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
             acoplado = false;
         }
 
+        public bool EsVisible()
+        {
+            if (animador != null) return true;
+            return false;
+        }
+
+        public Form GetForm()
+        {
+            return animador.Form;
+        }
+
         #endregion
 
         #region Métodos privados

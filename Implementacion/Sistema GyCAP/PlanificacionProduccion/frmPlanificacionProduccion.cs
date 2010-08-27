@@ -62,6 +62,11 @@ namespace GyCAP.UI.PlanificacionProduccion
             return location;
         }
 
+        private void scUp_Panel2_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            areaTrabajo.Focus();
+        }
+
         #region Menú Lateral
 
         private void btnMenu_Click(object sender, EventArgs e)
@@ -239,6 +244,8 @@ namespace GyCAP.UI.PlanificacionProduccion
         }
 
         #endregion
+
+        
 
     }
 

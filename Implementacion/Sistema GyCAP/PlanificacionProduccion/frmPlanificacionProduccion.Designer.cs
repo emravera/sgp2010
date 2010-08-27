@@ -31,21 +31,21 @@
             this.btnDemanda = new System.Windows.Forms.Button();
             this.flpMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.panelDemanda = new System.Windows.Forms.Panel();
+            this.btnConsultarDemanda = new System.Windows.Forms.Button();
+            this.btnNuevoDemanda = new System.Windows.Forms.Button();
             this.btnPlanAnual = new System.Windows.Forms.Button();
             this.panelPlanAnual = new System.Windows.Forms.Panel();
+            this.btnConsultarPlanAnual = new System.Windows.Forms.Button();
+            this.btnNuevoPlanAnual = new System.Windows.Forms.Button();
             this.btnMPPrincipal = new System.Windows.Forms.Button();
             this.panelMPPrincipal = new System.Windows.Forms.Panel();
+            this.btnConsultarMPPrincipal = new System.Windows.Forms.Button();
+            this.btnNuevoMPPrincipal = new System.Windows.Forms.Button();
             this.panelSalir = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
             this.scUp = new System.Windows.Forms.SplitContainer();
             this.scDown = new System.Windows.Forms.SplitContainer();
-            this.btnConsultarDemanda = new System.Windows.Forms.Button();
-            this.btnNuevoDemanda = new System.Windows.Forms.Button();
-            this.btnConsultarPlanAnual = new System.Windows.Forms.Button();
-            this.btnNuevoPlanAnual = new System.Windows.Forms.Button();
-            this.btnConsultarMPPrincipal = new System.Windows.Forms.Button();
-            this.btnNuevoMPPrincipal = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.flpMenu.SuspendLayout();
             this.panelDemanda.SuspendLayout();
             this.panelPlanAnual.SuspendLayout();
@@ -106,137 +106,6 @@
             this.panelDemanda.Size = new System.Drawing.Size(158, 148);
             this.panelDemanda.TabIndex = 1;
             // 
-            // btnPlanAnual
-            // 
-            this.btnPlanAnual.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPlanAnual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPlanAnual.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPlanAnual.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPlanAnual.Location = new System.Drawing.Point(0, 173);
-            this.btnPlanAnual.Margin = new System.Windows.Forms.Padding(0);
-            this.btnPlanAnual.Name = "btnPlanAnual";
-            this.btnPlanAnual.Size = new System.Drawing.Size(158, 25);
-            this.btnPlanAnual.TabIndex = 3;
-            this.btnPlanAnual.Text = "Plan Anual";
-            this.btnPlanAnual.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPlanAnual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPlanAnual.UseVisualStyleBackColor = true;
-            this.btnPlanAnual.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelPlanAnual
-            // 
-            this.panelPlanAnual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelPlanAnual.BackColor = System.Drawing.Color.Silver;
-            this.panelPlanAnual.Controls.Add(this.btnConsultarPlanAnual);
-            this.panelPlanAnual.Controls.Add(this.btnNuevoPlanAnual);
-            this.panelPlanAnual.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelPlanAnual.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelPlanAnual.Location = new System.Drawing.Point(0, 198);
-            this.panelPlanAnual.Margin = new System.Windows.Forms.Padding(0);
-            this.panelPlanAnual.Name = "panelPlanAnual";
-            this.panelPlanAnual.Size = new System.Drawing.Size(158, 148);
-            this.panelPlanAnual.TabIndex = 4;
-            // 
-            // btnMPPrincipal
-            // 
-            this.btnMPPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMPPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMPPrincipal.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMPPrincipal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMPPrincipal.Location = new System.Drawing.Point(0, 346);
-            this.btnMPPrincipal.Margin = new System.Windows.Forms.Padding(0);
-            this.btnMPPrincipal.Name = "btnMPPrincipal";
-            this.btnMPPrincipal.Size = new System.Drawing.Size(158, 25);
-            this.btnMPPrincipal.TabIndex = 9;
-            this.btnMPPrincipal.Text = "Materia Prima Principal";
-            this.btnMPPrincipal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMPPrincipal.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnMPPrincipal.UseVisualStyleBackColor = true;
-            this.btnMPPrincipal.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelMPPrincipal
-            // 
-            this.panelMPPrincipal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelMPPrincipal.BackColor = System.Drawing.Color.Silver;
-            this.panelMPPrincipal.Controls.Add(this.btnConsultarMPPrincipal);
-            this.panelMPPrincipal.Controls.Add(this.btnNuevoMPPrincipal);
-            this.panelMPPrincipal.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelMPPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMPPrincipal.Location = new System.Drawing.Point(0, 371);
-            this.panelMPPrincipal.Margin = new System.Windows.Forms.Padding(0);
-            this.panelMPPrincipal.Name = "panelMPPrincipal";
-            this.panelMPPrincipal.Size = new System.Drawing.Size(158, 152);
-            this.panelMPPrincipal.TabIndex = 10;
-            // 
-            // panelSalir
-            // 
-            this.panelSalir.Controls.Add(this.button1);
-            this.panelSalir.Location = new System.Drawing.Point(158, 0);
-            this.panelSalir.Margin = new System.Windows.Forms.Padding(0);
-            this.panelSalir.Name = "panelSalir";
-            this.panelSalir.Size = new System.Drawing.Size(158, 87);
-            this.panelSalir.TabIndex = 15;
-            // 
-            // btnMenu
-            // 
-            this.btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
-            this.btnMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMenu.Font = new System.Drawing.Font("Calibri", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
-            this.btnMenu.Location = new System.Drawing.Point(0, 0);
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(13, 566);
-            this.btnMenu.TabIndex = 0;
-            this.btnMenu.Text = "Menú";
-            this.btnMenu.UseVisualStyleBackColor = true;
-            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
-            // 
-            // scUp
-            // 
-            this.scUp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scUp.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.scUp.IsSplitterFixed = true;
-            this.scUp.Location = new System.Drawing.Point(0, 0);
-            this.scUp.Name = "scUp";
-            // 
-            // scUp.Panel1
-            // 
-            this.scUp.Panel1.AutoScroll = true;
-            this.scUp.Panel1.Controls.Add(this.btnMenu);
-            this.scUp.Panel1MinSize = 20;
-            // 
-            // scUp.Panel2
-            // 
-            this.scUp.Panel2.AutoScroll = true;
-            this.scUp.Panel2.AutoScrollMargin = new System.Drawing.Size(1000, 1000);
-            this.scUp.Size = new System.Drawing.Size(624, 566);
-            this.scUp.SplitterDistance = 20;
-            this.scUp.SplitterWidth = 3;
-            this.scUp.TabIndex = 0;
-            // 
-            // scDown
-            // 
-            this.scDown.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.scDown.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scDown.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.scDown.IsSplitterFixed = true;
-            this.scDown.Location = new System.Drawing.Point(0, 0);
-            this.scDown.Name = "scDown";
-            // 
-            // scDown.Panel1
-            // 
-            this.scDown.Panel1.AutoScroll = true;
-            this.scDown.Panel1.Controls.Add(this.flpMenu);
-            // 
-            // scDown.Panel2
-            // 
-            this.scDown.Panel2.AutoScroll = true;
-            this.scDown.Panel2.Controls.Add(this.scUp);
-            this.scDown.Size = new System.Drawing.Size(792, 570);
-            this.scDown.SplitterDistance = 161;
-            this.scDown.SplitterWidth = 3;
-            this.scDown.TabIndex = 4;
-            // 
             // btnConsultarDemanda
             // 
             this.btnConsultarDemanda.AutoSize = true;
@@ -278,6 +147,37 @@
             this.btnNuevoDemanda.Click += new System.EventHandler(this.btnNuevoDemanda_Click);
             this.btnNuevoDemanda.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoDemanda.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnPlanAnual
+            // 
+            this.btnPlanAnual.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPlanAnual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPlanAnual.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPlanAnual.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPlanAnual.Location = new System.Drawing.Point(0, 173);
+            this.btnPlanAnual.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPlanAnual.Name = "btnPlanAnual";
+            this.btnPlanAnual.Size = new System.Drawing.Size(158, 25);
+            this.btnPlanAnual.TabIndex = 3;
+            this.btnPlanAnual.Text = "Plan Anual";
+            this.btnPlanAnual.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPlanAnual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPlanAnual.UseVisualStyleBackColor = true;
+            this.btnPlanAnual.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelPlanAnual
+            // 
+            this.panelPlanAnual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelPlanAnual.BackColor = System.Drawing.Color.Silver;
+            this.panelPlanAnual.Controls.Add(this.btnConsultarPlanAnual);
+            this.panelPlanAnual.Controls.Add(this.btnNuevoPlanAnual);
+            this.panelPlanAnual.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelPlanAnual.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelPlanAnual.Location = new System.Drawing.Point(0, 198);
+            this.panelPlanAnual.Margin = new System.Windows.Forms.Padding(0);
+            this.panelPlanAnual.Name = "panelPlanAnual";
+            this.panelPlanAnual.Size = new System.Drawing.Size(158, 148);
+            this.panelPlanAnual.TabIndex = 4;
             // 
             // btnConsultarPlanAnual
             // 
@@ -321,6 +221,37 @@
             this.btnNuevoPlanAnual.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoPlanAnual.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
+            // btnMPPrincipal
+            // 
+            this.btnMPPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMPPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMPPrincipal.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMPPrincipal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMPPrincipal.Location = new System.Drawing.Point(0, 346);
+            this.btnMPPrincipal.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMPPrincipal.Name = "btnMPPrincipal";
+            this.btnMPPrincipal.Size = new System.Drawing.Size(158, 25);
+            this.btnMPPrincipal.TabIndex = 9;
+            this.btnMPPrincipal.Text = "Materia Prima Principal";
+            this.btnMPPrincipal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMPPrincipal.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnMPPrincipal.UseVisualStyleBackColor = true;
+            this.btnMPPrincipal.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelMPPrincipal
+            // 
+            this.panelMPPrincipal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelMPPrincipal.BackColor = System.Drawing.Color.Silver;
+            this.panelMPPrincipal.Controls.Add(this.btnConsultarMPPrincipal);
+            this.panelMPPrincipal.Controls.Add(this.btnNuevoMPPrincipal);
+            this.panelMPPrincipal.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelMPPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMPPrincipal.Location = new System.Drawing.Point(0, 371);
+            this.panelMPPrincipal.Margin = new System.Windows.Forms.Padding(0);
+            this.panelMPPrincipal.Name = "panelMPPrincipal";
+            this.panelMPPrincipal.Size = new System.Drawing.Size(158, 152);
+            this.panelMPPrincipal.TabIndex = 10;
+            // 
             // btnConsultarMPPrincipal
             // 
             this.btnConsultarMPPrincipal.AutoSize = true;
@@ -363,6 +294,15 @@
             this.btnNuevoMPPrincipal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoMPPrincipal.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
+            // panelSalir
+            // 
+            this.panelSalir.Controls.Add(this.button1);
+            this.panelSalir.Location = new System.Drawing.Point(158, 0);
+            this.panelSalir.Margin = new System.Windows.Forms.Padding(0);
+            this.panelSalir.Name = "panelSalir";
+            this.panelSalir.Size = new System.Drawing.Size(158, 87);
+            this.panelSalir.TabIndex = 15;
+            // 
             // button1
             // 
             this.button1.AutoSize = true;
@@ -384,6 +324,67 @@
             this.button1.Click += new System.EventHandler(this.btnSalir_Click);
             this.button1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.button1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnMenu
+            // 
+            this.btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
+            this.btnMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMenu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+            this.btnMenu.Location = new System.Drawing.Point(0, 0);
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(13, 566);
+            this.btnMenu.TabIndex = 0;
+            this.btnMenu.Text = "Menú";
+            this.btnMenu.UseVisualStyleBackColor = true;
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
+            // 
+            // scUp
+            // 
+            this.scUp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scUp.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.scUp.IsSplitterFixed = true;
+            this.scUp.Location = new System.Drawing.Point(0, 0);
+            this.scUp.Name = "scUp";
+            // 
+            // scUp.Panel1
+            // 
+            this.scUp.Panel1.AutoScroll = true;
+            this.scUp.Panel1.Controls.Add(this.btnMenu);
+            this.scUp.Panel1MinSize = 20;
+            // 
+            // scUp.Panel2
+            // 
+            this.scUp.Panel2.AutoScroll = true;
+            this.scUp.Panel2.AutoScrollMargin = new System.Drawing.Size(1000, 1000);
+            this.scUp.Panel2.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.scUp_Panel2_ControlRemoved);
+            this.scUp.Size = new System.Drawing.Size(624, 566);
+            this.scUp.SplitterDistance = 20;
+            this.scUp.SplitterWidth = 3;
+            this.scUp.TabIndex = 0;
+            // 
+            // scDown
+            // 
+            this.scDown.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.scDown.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scDown.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.scDown.IsSplitterFixed = true;
+            this.scDown.Location = new System.Drawing.Point(0, 0);
+            this.scDown.Name = "scDown";
+            // 
+            // scDown.Panel1
+            // 
+            this.scDown.Panel1.AutoScroll = true;
+            this.scDown.Panel1.Controls.Add(this.flpMenu);
+            // 
+            // scDown.Panel2
+            // 
+            this.scDown.Panel2.AutoScroll = true;
+            this.scDown.Panel2.Controls.Add(this.scUp);
+            this.scDown.Size = new System.Drawing.Size(792, 570);
+            this.scDown.SplitterDistance = 161;
+            this.scDown.SplitterWidth = 3;
+            this.scDown.TabIndex = 4;
             // 
             // frmPlanificacionProduccion
             // 
