@@ -71,6 +71,11 @@ namespace GyCAP.UI.RecursosFabricacion
             return location;
         }
 
+        private void scUp_Panel2_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            areaTrabajo.Focus();
+        }
+
         #region Menú Lateral
 
         /*private void btnMenu_Click2(object sender, EventArgs e)

@@ -202,6 +202,11 @@ namespace GyCAP.UI.EstructuraProducto
             this.Dispose(true);
         }
 
+        private void scUp_Panel2_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            areaTrabajo.Focus();
+        }
+
         #endregion
 
         #region Cocina
@@ -498,6 +503,8 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
+
+        
 
         
     }
