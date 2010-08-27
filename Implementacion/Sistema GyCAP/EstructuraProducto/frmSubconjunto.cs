@@ -12,6 +12,7 @@ namespace GyCAP.UI.EstructuraProducto
     public partial class frmSubconjunto : Form
     {
         private static frmSubconjunto _frmSubconjunto = null;
+        private Sistema.ControlesUsuarios.AnimadorFormulario animador = new GyCAP.UI.Sistema.ControlesUsuarios.AnimadorFormulario();
         private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
         //private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
         private DataView dvSubconjuntos, dvDetalleSubconjunto, dvPiezasDisponibles;
@@ -66,6 +67,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
+            this.Close();
             this.Dispose(true);                     
         }
 
@@ -822,9 +824,20 @@ namespace GyCAP.UI.EstructuraProducto
             }
 
             return costo;
+        }        
+
+        private void btnZoomIn_Click(object sender, EventArgs e)
+        {
+            Sistema.frmImagenZoom.Instancia.SetImagen(pbImagen.Image, "Imagen del Subconjunto");
+            animador.SetFormulario(Sistema.frmImagenZoom.Instancia, this, Sistema.ControlesUsuarios.AnimadorFormulario.animacionDerecha, 300, true);
+            animador.MostrarFormulario();
+        }
+
+        private void btnZoomOut_Click(object sender, EventArgs e)
+        {
+            animador.CerrarFormulario();
         }
 
         #endregion
-
     }
 }

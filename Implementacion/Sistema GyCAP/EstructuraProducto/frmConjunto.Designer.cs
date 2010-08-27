@@ -106,6 +106,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
+            this.btnZoomIn = new System.Windows.Forms.Button();
+            this.btnZoomOut = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcConjunto.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -543,6 +545,8 @@
             // panelImagen
             // 
             this.panelImagen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelImagen.Controls.Add(this.btnZoomOut);
+            this.panelImagen.Controls.Add(this.btnZoomIn);
             this.panelImagen.Controls.Add(this.btnQuitarImagen);
             this.panelImagen.Controls.Add(this.label5);
             this.panelImagen.Controls.Add(this.btnImagen);
@@ -555,15 +559,22 @@
             // 
             // btnQuitarImagen
             // 
+            this.btnQuitarImagen.AutoSize = true;
+            this.btnQuitarImagen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQuitarImagen.FlatAppearance.BorderSize = 0;
+            this.btnQuitarImagen.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnQuitarImagen.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnQuitarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnQuitarImagen.Location = new System.Drawing.Point(105, 180);
+            this.btnQuitarImagen.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
+            this.btnQuitarImagen.Location = new System.Drawing.Point(43, 171);
             this.btnQuitarImagen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnQuitarImagen.Name = "btnQuitarImagen";
-            this.btnQuitarImagen.Size = new System.Drawing.Size(80, 22);
+            this.btnQuitarImagen.Size = new System.Drawing.Size(31, 31);
             this.btnQuitarImagen.TabIndex = 13;
-            this.btnQuitarImagen.Text = "&Quitar";
             this.btnQuitarImagen.UseVisualStyleBackColor = true;
             this.btnQuitarImagen.Click += new System.EventHandler(this.btnQuitarImagen_Click);
+            this.btnQuitarImagen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnQuitarImagen.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // label5
             // 
@@ -576,15 +587,22 @@
             // 
             // btnImagen
             // 
+            this.btnImagen.AutoSize = true;
+            this.btnImagen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnImagen.FlatAppearance.BorderSize = 0;
+            this.btnImagen.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnImagen.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImagen.Location = new System.Drawing.Point(6, 180);
+            this.btnImagen.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Abrir_25;
+            this.btnImagen.Location = new System.Drawing.Point(6, 171);
             this.btnImagen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnImagen.Name = "btnImagen";
-            this.btnImagen.Size = new System.Drawing.Size(80, 22);
+            this.btnImagen.Size = new System.Drawing.Size(31, 31);
             this.btnImagen.TabIndex = 12;
-            this.btnImagen.Text = "&Seleccionar";
             this.btnImagen.UseVisualStyleBackColor = true;
             this.btnImagen.Click += new System.EventHandler(this.btnImagen_Click);
+            this.btnImagen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnImagen.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // pbImagen
             // 
@@ -593,7 +611,7 @@
             this.pbImagen.Location = new System.Drawing.Point(5, 16);
             this.pbImagen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pbImagen.Name = "pbImagen";
-            this.pbImagen.Size = new System.Drawing.Size(180, 160);
+            this.pbImagen.Size = new System.Drawing.Size(180, 155);
             this.pbImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbImagen.TabIndex = 0;
             this.pbImagen.TabStop = false;
@@ -1124,6 +1142,42 @@
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk);
             // 
+            // btnZoomIn
+            // 
+            this.btnZoomIn.AutoSize = true;
+            this.btnZoomIn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnZoomIn.FlatAppearance.BorderSize = 0;
+            this.btnZoomIn.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnZoomIn.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnZoomIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZoomIn.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Zoom_In_25;
+            this.btnZoomIn.Location = new System.Drawing.Point(121, 171);
+            this.btnZoomIn.Name = "btnZoomIn";
+            this.btnZoomIn.Size = new System.Drawing.Size(31, 31);
+            this.btnZoomIn.TabIndex = 14;
+            this.btnZoomIn.UseVisualStyleBackColor = true;
+            this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+            this.btnZoomIn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnZoomIn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnZoomOut
+            // 
+            this.btnZoomOut.AutoSize = true;
+            this.btnZoomOut.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnZoomOut.FlatAppearance.BorderSize = 0;
+            this.btnZoomOut.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnZoomOut.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnZoomOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZoomOut.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Zoom_Out_25;
+            this.btnZoomOut.Location = new System.Drawing.Point(151, 171);
+            this.btnZoomOut.Name = "btnZoomOut";
+            this.btnZoomOut.Size = new System.Drawing.Size(31, 31);
+            this.btnZoomOut.TabIndex = 15;
+            this.btnZoomOut.UseVisualStyleBackColor = true;
+            this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
+            this.btnZoomOut.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnZoomOut.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
             // frmConjunto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1263,5 +1317,7 @@
         private System.Windows.Forms.CheckBox chkCostoFijo;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbHojaRuta;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnZoomOut;
+        private System.Windows.Forms.Button btnZoomIn;
     }
 }

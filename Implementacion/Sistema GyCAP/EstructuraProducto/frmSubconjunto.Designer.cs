@@ -68,6 +68,8 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.cbHojaRuta = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.label1 = new System.Windows.Forms.Label();
             this.chkCostoFijo = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.nudCosto = new System.Windows.Forms.NumericUpDown();
@@ -88,8 +90,8 @@
             this.nudCantidad = new System.Windows.Forms.NumericUpDown();
             this.slideAgregar = new SlickInterface.Slide();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbHojaRuta = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.btnZoomIn = new System.Windows.Forms.Button();
+            this.btnZoomOut = new System.Windows.Forms.Button();
             this.panelImagen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
             this.panelAcciones.SuspendLayout();
@@ -124,14 +126,21 @@
             // 
             // btnQuitarImagen
             // 
+            this.btnQuitarImagen.AutoSize = true;
+            this.btnQuitarImagen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQuitarImagen.FlatAppearance.BorderSize = 0;
+            this.btnQuitarImagen.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnQuitarImagen.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnQuitarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnQuitarImagen.Location = new System.Drawing.Point(101, 190);
+            this.btnQuitarImagen.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
+            this.btnQuitarImagen.Location = new System.Drawing.Point(42, 184);
             this.btnQuitarImagen.Name = "btnQuitarImagen";
-            this.btnQuitarImagen.Size = new System.Drawing.Size(80, 22);
+            this.btnQuitarImagen.Size = new System.Drawing.Size(31, 31);
             this.btnQuitarImagen.TabIndex = 12;
-            this.btnQuitarImagen.Text = "&Quitar";
             this.btnQuitarImagen.UseVisualStyleBackColor = true;
             this.btnQuitarImagen.Click += new System.EventHandler(this.btnQuitarImagen_Click);
+            this.btnQuitarImagen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnQuitarImagen.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // label5
             // 
@@ -144,18 +153,27 @@
             // 
             // btnImagen
             // 
+            this.btnImagen.AutoSize = true;
+            this.btnImagen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnImagen.FlatAppearance.BorderSize = 0;
+            this.btnImagen.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnImagen.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImagen.Location = new System.Drawing.Point(6, 190);
+            this.btnImagen.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Abrir_25;
+            this.btnImagen.Location = new System.Drawing.Point(5, 184);
             this.btnImagen.Name = "btnImagen";
-            this.btnImagen.Size = new System.Drawing.Size(80, 22);
+            this.btnImagen.Size = new System.Drawing.Size(31, 31);
             this.btnImagen.TabIndex = 11;
-            this.btnImagen.Text = "&Seleccionar";
             this.btnImagen.UseVisualStyleBackColor = true;
             this.btnImagen.Click += new System.EventHandler(this.btnImagen_Click);
+            this.btnImagen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnImagen.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // panelImagen
             // 
             this.panelImagen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelImagen.Controls.Add(this.btnZoomOut);
+            this.panelImagen.Controls.Add(this.btnZoomIn);
             this.panelImagen.Controls.Add(this.btnQuitarImagen);
             this.panelImagen.Controls.Add(this.label5);
             this.panelImagen.Controls.Add(this.btnImagen);
@@ -622,6 +640,25 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del subconjunto";
             // 
+            // cbHojaRuta
+            // 
+            this.cbHojaRuta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbHojaRuta.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbHojaRuta.FormattingEnabled = true;
+            this.cbHojaRuta.Location = new System.Drawing.Point(76, 151);
+            this.cbHojaRuta.Name = "cbHojaRuta";
+            this.cbHojaRuta.Size = new System.Drawing.Size(287, 21);
+            this.cbHojaRuta.TabIndex = 20;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 154);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 13);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Hoja de ruta:";
+            // 
             // chkCostoFijo
             // 
             this.chkCostoFijo.AutoSize = true;
@@ -835,24 +872,41 @@
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk);
             // 
-            // label1
+            // btnZoomIn
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 154);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 13);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Hoja de ruta:";
+            this.btnZoomIn.AutoSize = true;
+            this.btnZoomIn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnZoomIn.FlatAppearance.BorderSize = 0;
+            this.btnZoomIn.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnZoomIn.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnZoomIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZoomIn.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Zoom_In_25;
+            this.btnZoomIn.Location = new System.Drawing.Point(117, 184);
+            this.btnZoomIn.Name = "btnZoomIn";
+            this.btnZoomIn.Size = new System.Drawing.Size(31, 31);
+            this.btnZoomIn.TabIndex = 13;
+            this.btnZoomIn.UseVisualStyleBackColor = true;
+            this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+            this.btnZoomIn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnZoomIn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
-            // cbHojaRuta
+            // btnZoomOut
             // 
-            this.cbHojaRuta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbHojaRuta.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbHojaRuta.FormattingEnabled = true;
-            this.cbHojaRuta.Location = new System.Drawing.Point(76, 151);
-            this.cbHojaRuta.Name = "cbHojaRuta";
-            this.cbHojaRuta.Size = new System.Drawing.Size(287, 21);
-            this.cbHojaRuta.TabIndex = 20;
+            this.btnZoomOut.AutoSize = true;
+            this.btnZoomOut.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnZoomOut.FlatAppearance.BorderSize = 0;
+            this.btnZoomOut.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnZoomOut.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnZoomOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZoomOut.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Zoom_Out_25;
+            this.btnZoomOut.Location = new System.Drawing.Point(147, 184);
+            this.btnZoomOut.Name = "btnZoomOut";
+            this.btnZoomOut.Size = new System.Drawing.Size(31, 31);
+            this.btnZoomOut.TabIndex = 14;
+            this.btnZoomOut.UseVisualStyleBackColor = true;
+            this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
+            this.btnZoomOut.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnZoomOut.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // frmSubconjunto
             // 
@@ -963,5 +1017,7 @@
         private System.Windows.Forms.CheckBox chkCostoFijo;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbHojaRuta;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnZoomOut;
+        private System.Windows.Forms.Button btnZoomIn;
     }
 }
