@@ -88,6 +88,8 @@
             this.nudCantidad = new System.Windows.Forms.NumericUpDown();
             this.slideAgregar = new SlickInterface.Slide();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbHojaRuta = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.panelImagen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
             this.panelAcciones.SuspendLayout();
@@ -595,6 +597,8 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.cbHojaRuta);
+            this.gbDatos.Controls.Add(this.label1);
             this.gbDatos.Controls.Add(this.chkCostoFijo);
             this.gbDatos.Controls.Add(this.label13);
             this.gbDatos.Controls.Add(this.nudCosto);
@@ -622,17 +626,18 @@
             // 
             this.chkCostoFijo.AutoSize = true;
             this.chkCostoFijo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkCostoFijo.Location = new System.Drawing.Point(291, 154);
+            this.chkCostoFijo.Location = new System.Drawing.Point(291, 124);
             this.chkCostoFijo.Name = "chkCostoFijo";
             this.chkCostoFijo.Size = new System.Drawing.Size(72, 17);
             this.chkCostoFijo.TabIndex = 18;
             this.chkCostoFijo.Text = "Costo fijo";
             this.chkCostoFijo.UseVisualStyleBackColor = true;
+            this.chkCostoFijo.CheckedChanged += new System.EventHandler(this.chkCostoFijo_CheckedChanged);
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 155);
+            this.label13.Location = new System.Drawing.Point(6, 125);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(48, 13);
             this.label13.TabIndex = 17;
@@ -646,7 +651,7 @@
             0,
             0,
             65536});
-            this.nudCosto.Location = new System.Drawing.Point(76, 153);
+            this.nudCosto.Location = new System.Drawing.Point(76, 123);
             this.nudCosto.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -671,7 +676,7 @@
             this.cbPlano.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPlano.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbPlano.FormattingEnabled = true;
-            this.cbPlano.Location = new System.Drawing.Point(76, 125);
+            this.cbPlano.Location = new System.Drawing.Point(76, 95);
             this.cbPlano.Name = "cbPlano";
             this.cbPlano.Size = new System.Drawing.Size(287, 21);
             this.cbPlano.TabIndex = 9;
@@ -681,7 +686,7 @@
             this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEstado.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(76, 96);
+            this.cbEstado.Location = new System.Drawing.Point(76, 66);
             this.cbEstado.Name = "cbEstado";
             this.cbEstado.Size = new System.Drawing.Size(287, 21);
             this.cbEstado.TabIndex = 8;
@@ -689,7 +694,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 128);
+            this.label12.Location = new System.Drawing.Point(6, 98);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(37, 13);
             this.label12.TabIndex = 15;
@@ -698,7 +703,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 99);
+            this.label9.Location = new System.Drawing.Point(6, 69);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(44, 13);
             this.label9.TabIndex = 14;
@@ -830,6 +835,25 @@
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 154);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 13);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Hoja de ruta:";
+            // 
+            // cbHojaRuta
+            // 
+            this.cbHojaRuta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbHojaRuta.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbHojaRuta.FormattingEnabled = true;
+            this.cbHojaRuta.Location = new System.Drawing.Point(76, 151);
+            this.cbHojaRuta.Name = "cbHojaRuta";
+            this.cbHojaRuta.Size = new System.Drawing.Size(287, 21);
+            this.cbHojaRuta.TabIndex = 20;
+            // 
             // frmSubconjunto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -937,5 +961,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.NumericUpDown nudCosto;
         private System.Windows.Forms.CheckBox chkCostoFijo;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbHojaRuta;
+        private System.Windows.Forms.Label label1;
     }
 }

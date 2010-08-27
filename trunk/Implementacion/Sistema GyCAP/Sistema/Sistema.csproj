@@ -74,9 +74,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlesUsuarios\AnimadorFormulario.cs" />
     <Compile Include="ControlesUsuarios\DropDownList.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ControlesUsuarios\FormAnimator.cs" />
     <Compile Include="ControlesUsuarios\Grilla.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -85,6 +87,12 @@
     </Compile>
     <Compile Include="ControlesUsuarios\seleccionadorFecha.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="frmImagenZoom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImagenZoom.Designer.cs">
+      <DependentUpon>frmImagenZoom.cs</DependentUpon>
     </Compile>
     <Compile Include="frmVisorReporte.cs">
       <SubType>Form</SubType>
@@ -97,6 +105,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ControlesUsuarios\Grilla.resx">
       <DependentUpon>Grilla.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImagenZoom.resx">
+      <DependentUpon>frmImagenZoom.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVisorReporte.resx">

@@ -15,7 +15,7 @@ namespace GyCAP.UI.EstructuraProducto
         private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
         //private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
         private DataView dvSubconjuntos, dvDetalleSubconjunto, dvPiezasDisponibles;
-        private DataView dvEstados, dvPlanos;
+        private DataView dvEstados, dvPlanos, dvHojaRuta;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
@@ -183,6 +183,8 @@ namespace GyCAP.UI.EstructuraProducto
                         rowSubconjunto.PNO_CODIGO = cbPlano.GetSelectedValueInt();
                         rowSubconjunto.SCONJ_COSTO = nudCosto.Value;
                         rowSubconjunto.SCONJ_DESCRIPCION = txtDescripcion.Text;
+                        if (cbHojaRuta.GetSelectedIndex() != -1) { rowSubconjunto.HR_CODIGO = cbHojaRuta.GetSelectedValueInt(); }
+                        else { rowSubconjunto.SetHR_CODIGONull(); }
                         rowSubconjunto.EndEdit();
                         dsEstructura.SUBCONJUNTOS.AddSUBCONJUNTOSRow(rowSubconjunto);
                         //Todavia no aceptamos los cambios porque necesitamos que queden marcadas como nuevas las filas
@@ -235,6 +237,8 @@ namespace GyCAP.UI.EstructuraProducto
                     dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).PNO_CODIGO = cbPlano.GetSelectedValueInt();
                     dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).SCONJ_DESCRIPCION = txtDescripcion.Text;
                     dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).SCONJ_COSTO = nudCosto.Value;
+                    if (cbHojaRuta.GetSelectedIndex() != -1) { dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).HR_CODIGO = cbHojaRuta.GetSelectedValueInt(); }
+                    else { dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).SetHR_CODIGONull(); }
                     try
                     {
                         //Lo actualizamos en la DB
@@ -303,9 +307,9 @@ namespace GyCAP.UI.EstructuraProducto
                 dsEstructura.PIEZASXSUBCONJUNTO.FindByPXSC_CODIGO(codigoDSC).PXSC_CANTIDAD += 1;
                 if (!chkCostoFijo.Checked)
                 {
-                    decimal costo = dsEstructura.PIEZASXSUBCONJUNTO.FindByPXSC_CODIGO(codigoDSC).PIEZASRow.PZA_COSTO;
-                    nudCosto.Value += costo;
+                    nudCosto.Value += dsEstructura.PIEZASXSUBCONJUNTO.FindByPXSC_CODIGO(codigoDSC).PIEZASRow.PZA_COSTO;
                 }
+                dgvDetalleSubconjunto.Refresh();
             }
             else
             {
@@ -329,6 +333,7 @@ namespace GyCAP.UI.EstructuraProducto
                         try { nudCosto.Value -= costo; }
                         catch (System.ArgumentOutOfRangeException) { nudCosto.Value = 0; }
                     }
+                    dgvDetalleSubconjunto.Refresh();
                 }
             }
             else
@@ -477,6 +482,8 @@ namespace GyCAP.UI.EstructuraProducto
                     cbEstado.SetTexto("Seleccione");
                     cbPlano.Enabled = true;
                     cbPlano.SetTexto("Seleccione");
+                    cbHojaRuta.Enabled = true;
+                    cbHojaRuta.SetTexto("Seleccione");
                     dvDetalleSubconjunto.RowFilter = "PXSC_CODIGO < 0";
                     nudCosto.Enabled = true;
                     nudCosto.Value = 0;
@@ -504,6 +511,8 @@ namespace GyCAP.UI.EstructuraProducto
                     cbEstado.SetTexto("Seleccione");
                     cbPlano.Enabled = true;
                     cbPlano.SetTexto("Seleccione");
+                    cbHojaRuta.Enabled = true;
+                    cbHojaRuta.SetTexto("Seleccione");
                     dvDetalleSubconjunto.RowFilter = "PXSC_CODIGO < 0";
                     nudCosto.Enabled = true;
                     nudCosto.Value = 0;
@@ -527,6 +536,8 @@ namespace GyCAP.UI.EstructuraProducto
                     txtNombre.ReadOnly = true;
                     cbEstado.Enabled = false;
                     cbPlano.Enabled = false;
+                    cbHojaRuta.Enabled = false;
+                    cbHojaRuta.SetTexto(string.Empty);
                     cbEstado.SetTexto(string.Empty);
                     cbPlano.SetTexto(string.Empty);
                     nudCosto.Enabled = false;
@@ -547,6 +558,8 @@ namespace GyCAP.UI.EstructuraProducto
                     cbPlano.Enabled = true;
                     cbEstado.SetTexto(string.Empty);
                     cbPlano.SetTexto(string.Empty);
+                    cbHojaRuta.Enabled = true;
+                    cbHojaRuta.SetTexto(string.Empty);
                     nudCosto.Enabled = true;
                     chkCostoFijo.Enabled = true;
                     txtDescripcion.ReadOnly = false;
@@ -578,6 +591,9 @@ namespace GyCAP.UI.EstructuraProducto
             cbPlano.SetSelectedValue(Convert.ToInt32(dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).PNO_CODIGO));
             nudCosto.Value = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).SCONJ_COSTO;
             txtDescripcion.Text = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).SCONJ_DESCRIPCION;
+            if (!dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).IsHR_CODIGONull())
+                { cbHojaRuta.SetSelectedValue(Convert.ToInt32(dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).HR_CODIGO)); }
+            else { cbHojaRuta.SetSelectedIndex(-1); }
             pbImagen.Image = BLL.SubConjuntoBLL.ObtenerImagen(codigoSubconjunto);
             //Usemos el filtro del dataview para mostrar sólo las piezas del subconjunto seleccionado
             dvDetalleSubconjunto.RowFilter = "sconj_codigo = " + codigoSubconjunto;
@@ -612,6 +628,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvSubconjuntos.Columns["SCONJ_CODIGOPARTE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvSubconjuntos.Columns["SCONJ_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvSubconjuntos.Columns["SCONJ_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvSubconjuntos.Columns["SCONJ_COSTO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvSubconjuntos.Columns["SCONJ_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvSubconjuntos.Columns["SCONJ_DESCRIPCION"].Resizable = DataGridViewTriState.True;
 
@@ -619,11 +636,14 @@ namespace GyCAP.UI.EstructuraProducto
             dgvDetalleSubconjunto.Columns.Add("PZA_NOMBRE", "Nombre");
             dgvDetalleSubconjunto.Columns.Add("TE_CODIGO", "Terminación");
             dgvDetalleSubconjunto.Columns.Add("PXSC_CANTIDAD", "Cantidad");
+            dgvDetalleSubconjunto.Columns.Add("COSTO", "Costo");
             dgvDetalleSubconjunto.Columns["PZA_CODIGOPARTE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalleSubconjunto.Columns["PZA_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalleSubconjunto.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalleSubconjunto.Columns["PXSC_CANTIDAD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalleSubconjunto.Columns["PXSC_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDetalleSubconjunto.Columns["COSTO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDetalleSubconjunto.Columns["COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             dgvPiezasDisponibles.Columns.Add("PZA_CODIGOPARTE", "Código");
             dgvPiezasDisponibles.Columns.Add("PZA_NOMBRE", "Nombre");
@@ -634,6 +654,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvPiezasDisponibles.Columns["PZA_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPiezasDisponibles.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPiezasDisponibles.Columns["PZA_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPiezasDisponibles.Columns["PZA_COSTO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvPiezasDisponibles.Columns["PZA_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvPiezasDisponibles.Columns["PZA_DESCRIPCION"].Resizable = DataGridViewTriState.True;
 
@@ -647,6 +668,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvDetalleSubconjunto.Columns["PZA_NOMBRE"].DataPropertyName = "PZA_CODIGO";
             dgvDetalleSubconjunto.Columns["TE_CODIGO"].DataPropertyName = "PZA_CODIGO";
             dgvDetalleSubconjunto.Columns["PXSC_CANTIDAD"].DataPropertyName = "PXSC_CANTIDAD";
+            dgvDetalleSubconjunto.Columns["COSTO"].DataPropertyName = "PXSC_CODIGO";
 
             dgvPiezasDisponibles.Columns["PZA_CODIGOPARTE"].DataPropertyName = "PZA_CODIGOPARTE";
             dgvPiezasDisponibles.Columns["PZA_NOMBRE"].DataPropertyName = "PZA_NOMBRE";
@@ -654,7 +676,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvPiezasDisponibles.Columns["PZA_COSTO"].DataPropertyName = "PZA_COSTO";
             dgvPiezasDisponibles.Columns["PZA_DESCRIPCION"].DataPropertyName = "PZA_DESCRIPCION";        
             
-            //Obtenemos las terminaciones, estados, planos y piezas
+            //Obtenemos las terminaciones, estados, planos, piezas, hoja ruta
             
             try
             {
@@ -662,6 +684,7 @@ namespace GyCAP.UI.EstructuraProducto
                 BLL.PlanoBLL.ObtenerTodos(dsEstructura.PLANOS);
                 BLL.EstadoParteBLL.ObtenerTodos(dsEstructura.ESTADO_PARTES);
                 BLL.PiezaBLL.ObtenerPiezas(dsEstructura.PIEZAS);
+                BLL.HojaRutaBLL.ObtenerHojasRuta(dsEstructura.HOJAS_RUTA);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -680,8 +703,10 @@ namespace GyCAP.UI.EstructuraProducto
             //Dataviews de combos
             dvEstados = new DataView(dsEstructura.ESTADO_PARTES);
             dvPlanos = new DataView(dsEstructura.PLANOS);
+            dvHojaRuta = new DataView(dsEstructura.HOJAS_RUTA);
             cbEstado.SetDatos(dvEstados, "par_codigo", "par_nombre", "Seleccione", false);
             cbPlano.SetDatos(dvPlanos, "pno_codigo", "pno_nombre", "Seleccione", false);
+            cbHojaRuta.SetDatos(dvHojaRuta, "hr_codigo", "hr_nombre", "Seleccione", false);
 
             //Seteos para los controles de la imagen
             pbImagen.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -691,7 +716,15 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void dgvSubconjuntos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            
+            if (e.Value.ToString() != string.Empty)
+            {
+                string nombre = string.Empty;
+                if (dgvSubconjuntos.Columns[e.ColumnIndex].Name == "SCONJ_COSTO")
+                {
+                    nombre = "$ " + e.Value.ToString();
+                    e.Value = nombre;
+                }
+            }
         }
         
         private void dgvDetalleSubconjunto_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -718,6 +751,11 @@ namespace GyCAP.UI.EstructuraProducto
                         nombre = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_CODIGOPARTE;
                         e.Value = nombre;
                         break;
+                    case "COSTO":
+                        int cod = Convert.ToInt32(e.Value.ToString());
+                        decimal costo = (dsEstructura.PIEZASXSUBCONJUNTO.FindByPXSC_CODIGO(cod).PIEZASRow.PZA_COSTO * dsEstructura.PIEZASXSUBCONJUNTO.FindByPXSC_CODIGO(cod).PXSC_CANTIDAD);
+                        e.Value = "$ " + costo.ToString();
+                        break;
                     default:
                         break;
                 }
@@ -729,11 +767,19 @@ namespace GyCAP.UI.EstructuraProducto
             if (e.Value.ToString() != string.Empty)
             {
                 string nombre;
-                if (dgvPiezasDisponibles.Columns[e.ColumnIndex].Name == "TE_CODIGO")
-                {
-                    nombre = dsEstructura.TERMINACIONES.FindByTE_CODIGO(Convert.ToInt32(e.Value.ToString())).TE_NOMBRE;
+                switch (dgvPiezasDisponibles.Columns[e.ColumnIndex].Name)
+	            {
+		            case "TE_CODIGO":
+                        nombre = dsEstructura.TERMINACIONES.FindByTE_CODIGO(Convert.ToInt32(e.Value.ToString())).TE_NOMBRE;
                     e.Value = nombre;
-                }
+                        break;
+                    case "PZA_COSTO":
+                        nombre = "$ " + e.Value.ToString();
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+	            }
             }
         }
 
@@ -755,8 +801,30 @@ namespace GyCAP.UI.EstructuraProducto
             Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
             (sender as Button).Location = punto;
         }
+        
+        private void chkCostoFijo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!chkCostoFijo.Checked) { nudCosto.Value = CalcularCosto(); }
+            else { nudCosto.Value = 0; }
+        }
 
-        #endregion 
+        private decimal CalcularCosto()
+        {
+            decimal costo = 0;
+            int codigoSC = 0;
+            if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { codigoSC = -1; }
+            else { codigoSC = Convert.ToInt32(dvSubconjuntos[dgvSubconjuntos.SelectedRows[0].Index]["sconj_codigo"]); }
+
+            foreach (Data.dsEstructura.PIEZASXSUBCONJUNTORow row in
+                (Data.dsEstructura.PIEZASXSUBCONJUNTORow[])dsEstructura.PIEZASXSUBCONJUNTO.Select("SCONJ_CODIGO = " + codigoSC))
+            {
+                costo += (row.PIEZASRow.PZA_COSTO * row.PXSC_CANTIDAD);
+            }
+
+            return costo;
+        }
+
+        #endregion
 
     }
 }
