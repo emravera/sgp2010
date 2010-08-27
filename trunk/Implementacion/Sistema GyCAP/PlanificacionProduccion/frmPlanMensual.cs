@@ -109,7 +109,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             //LLenado de Datasets
             //Llenamos el dataset con los planes anuales
-            BLL.PlanAnualBLL.ObtenerTodos(dsPlanMensual);
+            BLL.PlanAnualBLL.ObtenerTodos(dsPlanMensual.PLANES_ANUALES);
 
             //Llenamos el detalle del Plan Anual
             BLL.DetallePlanAnualBLL.ObtenerDetalle(dsPlanMensual);
@@ -694,13 +694,12 @@ namespace GyCAP.UI.PlanificacionProduccion
             int codigo = Convert.ToInt32(dvListaPlanes[dgvLista.SelectedRows[0].Index]["pmes_codigo"]);
 
             //Verificamos si se puede modificar el plan
-            if (BLL.PlanMensualBLL.ExistePlanSemanal(codigo)==true)
+            if (BLL.PlanMensualBLL.ExistePlanSemanal(codigo) == true)
             {
                 int codigoPlanAnual = Convert.ToInt32(dsPlanMensual.PLANES_MENSUALES.FindByPMES_CODIGO(codigo).PAN_CODIGO);
                 int anio = Convert.ToInt32(dsPlanMensual.PLANES_ANUALES.FindByPAN_CODIGO(codigoPlanAnual).PAN_ANIO);
 
                 cbPlanAnual.SetSelectedValue(Convert.ToInt32(dsPlanMensual.PLANES_MENSUALES.FindByPMES_CODIGO(codigo).PAN_CODIGO));
-
 
                 string mes = dsPlanMensual.PLANES_MENSUALES.FindByPMES_CODIGO(codigo).PMES_MES.ToString();
 
@@ -728,6 +727,11 @@ namespace GyCAP.UI.PlanificacionProduccion
                 int restaPlanificar = cantidad - Convert.ToInt32(txtCantPlanificada.Text);
                 if (restaPlanificar > 0) txtRestaPlanificar.Text = restaPlanificar.ToString();
                 else txtRestaPlanificar.Text = Convert.ToString(0);
+            }
+            else
+            {
+                MessageBox.Show("El Plan Mensual no se puede modificar porque tiene planes semanales hijos" , "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                SetInterface(estadoUI.inicio);
             }
 
         }

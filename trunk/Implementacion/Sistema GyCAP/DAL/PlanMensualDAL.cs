@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace GyCAP.DAL
 {
@@ -67,6 +68,30 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+        //Metodo que obtiene todos los planes mensuales
+        public static void ObtenerTodos(DataTable dtPlanesMensuales)
+        {
+            string sql = @"SELECT pmes_codigo, pan_codigo, pmes_mes, pmes_fechacreacion
+                        FROM PLANES_MENSUALES";
+            try
+            {
+                DB.FillDataTable(dtPlanesMensuales, sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+        //Metodo que obtiene los planes mensuales de un plan anual determinado
+        public static void ObtenerPMAnio(DataTable dtPlanesMensuales, int codigoPlanAnual)
+        {
+            string sql = @"SELECT pmes_codigo, pan_codigo, pmes_mes, pmes_fechacreacion
+                        FROM PLANES_MENSUALES where pan_codigo=@p0";
+
+            object[] valorParametros = { codigoPlanAnual };
+            try
+            {
+                DB.FillDataTable(dtPlanesMensuales, sql, valorParametros);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
 
         //Metodo que valida que no exista un plan mensual para ese año y mes ya creado
         public static bool Validar(int anio, string mes)
@@ -87,8 +112,8 @@ namespace GyCAP.DAL
         //Metodo que valida que no existan planes semanales de ese plan mensual para que se pueda modificar
         public static bool ValidarActualizar(int codigoPlan)
         {
-            string sql = @"SELECT count(ps.pmes_codigo)
-                           FROM PLANES_MENSUALES as pm, PLANES_SEMANALES as ps, 
+            string sql = @"SELECT count(pm.pmes_codigo)
+                           FROM PLANES_MENSUALES as pm, PLANES_SEMANALES as ps 
                            WHERE pm.pmes_codigo=ps.pmes_codigo and pm.pmes_codigo=@p0";
             object[] valorParametros = { codigoPlan };
             try

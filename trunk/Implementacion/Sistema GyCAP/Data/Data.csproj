@@ -175,6 +175,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPlanMensual.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsPlanSemanal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPlanSemanal.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsProduccion.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -456,6 +461,17 @@
     </None>
     <None Include="dsPlanMensual.xss">
       <DependentUpon>dsPlanMensual.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanSemanal.xsc">
+      <DependentUpon>dsPlanSemanal.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanSemanal.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPlanSemanal.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsPlanSemanal.xss">
+      <DependentUpon>dsPlanSemanal.xsd</DependentUpon>
     </None>
     <None Include="dsProduccion.xsc">
       <DependentUpon>dsProduccion.xsd</DependentUpon>
