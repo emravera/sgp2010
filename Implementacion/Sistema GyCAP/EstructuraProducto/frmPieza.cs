@@ -11,6 +11,7 @@ namespace GyCAP.UI.EstructuraProducto
 {
     public partial class frmPieza : Form
     {
+        private Sistema.ControlesUsuarios.AnimadorFormulario animador = new GyCAP.UI.Sistema.ControlesUsuarios.AnimadorFormulario();
         private static frmPieza _frmPieza = null;
         private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
         private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
@@ -65,7 +66,8 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
-        {            
+        {
+            this.Close();
             this.Dispose(true);                     
         }
 
@@ -870,6 +872,19 @@ namespace GyCAP.UI.EstructuraProducto
 
             return costo;
         }
+        
+        private void btnZoomIn_Click(object sender, EventArgs e)
+        {
+            Sistema.frmImagenZoom.Instancia.SetImagen(pbImagen.Image, "Imagen de la Pieza");
+            animador.SetFormulario(Sistema.frmImagenZoom.Instancia, this, Sistema.ControlesUsuarios.AnimadorFormulario.animacionDerecha, 300, true);
+            animador.MostrarFormulario();
+        }
+
+        private void btnZoomOut_Click(object sender, EventArgs e)
+        {
+            animador.CerrarFormulario();
+        }
+
         #endregion
     }
 }

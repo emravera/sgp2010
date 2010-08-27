@@ -371,6 +371,15 @@
   <ItemGroup>
     <None Include="Resources\abajo1-15.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zoom-In-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Abrir-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zoom-Out-25.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

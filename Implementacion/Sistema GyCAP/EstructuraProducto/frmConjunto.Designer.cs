@@ -47,11 +47,15 @@
             this.gbPartesConjunto = new System.Windows.Forms.GroupBox();
             this.dgvPartes = new System.Windows.Forms.DataGridView();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.cbHojaRuta = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.label1 = new System.Windows.Forms.Label();
             this.chkCostoFijo = new System.Windows.Forms.CheckBox();
             this.nudCosto = new System.Windows.Forms.NumericUpDown();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbPlano = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.RichTextBox();
@@ -102,10 +106,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbHojaRuta = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbPlano = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcConjunto.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -405,6 +405,25 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del conjunto";
             // 
+            // cbHojaRuta
+            // 
+            this.cbHojaRuta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbHojaRuta.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbHojaRuta.FormattingEnabled = true;
+            this.cbHojaRuta.Location = new System.Drawing.Point(81, 146);
+            this.cbHojaRuta.Name = "cbHojaRuta";
+            this.cbHojaRuta.Size = new System.Drawing.Size(277, 21);
+            this.cbHojaRuta.TabIndex = 23;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 149);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 13);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Hoja de ruta:";
+            // 
             // chkCostoFijo
             // 
             this.chkCostoFijo.AutoSize = true;
@@ -463,6 +482,26 @@
             this.label9.Size = new System.Drawing.Size(44, 13);
             this.label9.TabIndex = 18;
             this.label9.Text = "Estado:";
+            // 
+            // cbEstado
+            // 
+            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbEstado.FormattingEnabled = true;
+            this.cbEstado.Location = new System.Drawing.Point(81, 69);
+            this.cbEstado.Name = "cbEstado";
+            this.cbEstado.Size = new System.Drawing.Size(278, 21);
+            this.cbEstado.TabIndex = 8;
+            // 
+            // cbPlano
+            // 
+            this.cbPlano.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPlano.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbPlano.FormattingEnabled = true;
+            this.cbPlano.Location = new System.Drawing.Point(81, 95);
+            this.cbPlano.Name = "cbPlano";
+            this.cbPlano.Size = new System.Drawing.Size(278, 21);
+            this.cbPlano.TabIndex = 9;
             // 
             // txtCodigo
             // 
@@ -1084,45 +1123,6 @@
             // 
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 146);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "Hoja ruta:";
-            // 
-            // cbHojaRuta
-            // 
-            this.cbHojaRuta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbHojaRuta.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbHojaRuta.FormattingEnabled = true;
-            this.cbHojaRuta.Location = new System.Drawing.Point(81, 146);
-            this.cbHojaRuta.Name = "cbHojaRuta";
-            this.cbHojaRuta.Size = new System.Drawing.Size(277, 21);
-            this.cbHojaRuta.TabIndex = 23;
-            // 
-            // cbEstado
-            // 
-            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEstado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(81, 69);
-            this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(278, 21);
-            this.cbEstado.TabIndex = 8;
-            // 
-            // cbPlano
-            // 
-            this.cbPlano.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPlano.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbPlano.FormattingEnabled = true;
-            this.cbPlano.Location = new System.Drawing.Point(81, 95);
-            this.cbPlano.Name = "cbPlano";
-            this.cbPlano.Size = new System.Drawing.Size(278, 21);
-            this.cbPlano.TabIndex = 9;
             // 
             // frmConjunto
             // 

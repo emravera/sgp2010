@@ -31,23 +31,13 @@
             this.panelAcciones = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.btnRestar = new System.Windows.Forms.Button();
-            this.btnSumar = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
-            this.btnModificar = new System.Windows.Forms.ToolStripButton();
-            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.btnConsultar = new System.Windows.Forms.ToolStripButton();
-            this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.slideControl = new SlickInterface.SlideControl();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.dgvDetallePieza = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.dgvPiezas = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -56,6 +46,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.chkCostoFijo = new System.Windows.Forms.CheckBox();
             this.nudCosto = new System.Windows.Forms.NumericUpDown();
             this.label13 = new System.Windows.Forms.Label();
@@ -71,8 +62,7 @@
             this.panelImagen = new System.Windows.Forms.Panel();
             this.btnQuitarImagen = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnImagen = new System.Windows.Forms.Button();
-            this.pbImagen = new System.Windows.Forms.PictureBox();
+            this.btnAbrirImagen = new System.Windows.Forms.Button();
             this.slideDatos = new SlickInterface.Slide();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
@@ -88,7 +78,19 @@
             this.dgvMPDisponibles = new System.Windows.Forms.DataGridView();
             this.slideAgregar = new SlickInterface.Slide();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
-            this.label14 = new System.Windows.Forms.Label();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.pbImagen = new System.Windows.Forms.PictureBox();
+            this.btnRestar = new System.Windows.Forms.Button();
+            this.btnSumar = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.btnNuevo = new System.Windows.Forms.ToolStripButton();
+            this.btnConsultar = new System.Windows.Forms.ToolStripButton();
+            this.btnModificar = new System.Windows.Forms.ToolStripButton();
+            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.btnZoomIn = new System.Windows.Forms.Button();
+            this.btnZoomOut = new System.Windows.Forms.Button();
             this.cbTerminacionBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbHojaRuta = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbPlano = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
@@ -107,7 +109,6 @@
             this.gbDatos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCosto)).BeginInit();
             this.panelImagen.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.tpMPDisponibles.SuspendLayout();
@@ -115,6 +116,7 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMPDisponibles)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
             this.SuspendLayout();
             // 
             // panelAcciones
@@ -153,136 +155,10 @@
             this.label6.Text = "Materia Prima";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnRestar
-            // 
-            this.btnRestar.FlatAppearance.BorderSize = 0;
-            this.btnRestar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnRestar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRestar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Restar_Gris_25;
-            this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRestar.Location = new System.Drawing.Point(37, 103);
-            this.btnRestar.Name = "btnRestar";
-            this.btnRestar.Size = new System.Drawing.Size(30, 30);
-            this.btnRestar.TabIndex = 27;
-            this.btnRestar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRestar.UseVisualStyleBackColor = true;
-            this.btnRestar.Click += new System.EventHandler(this.btnRestar_Click);
-            this.btnRestar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnRestar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnSumar
-            // 
-            this.btnSumar.FlatAppearance.BorderSize = 0;
-            this.btnSumar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnSumar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSumar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Sumar_Gris_25;
-            this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSumar.Location = new System.Drawing.Point(3, 103);
-            this.btnSumar.Name = "btnSumar";
-            this.btnSumar.Size = new System.Drawing.Size(30, 30);
-            this.btnSumar.TabIndex = 26;
-            this.btnSumar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSumar.UseVisualStyleBackColor = true;
-            this.btnSumar.Click += new System.EventHandler(this.btnSumar_Click);
-            this.btnSumar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnSumar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.FlatAppearance.BorderSize = 0;
-            this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
-            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(37, 30);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(30, 30);
-            this.btnDelete.TabIndex = 25;
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            this.btnDelete.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnDelete.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnNew
-            // 
-            this.btnNew.FlatAppearance.BorderSize = 0;
-            this.btnNew.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnNew.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNew.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_25;
-            this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNew.Location = new System.Drawing.Point(3, 30);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(30, 30);
-            this.btnNew.TabIndex = 24;
-            this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            this.btnNew.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnNew.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Text_Editor_25;
-            this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(54, 47);
-            this.btnModificar.Text = "&Modificar";
-            this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
-            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(47, 47);
-            this.btnEliminar.Text = "&Eliminar";
-            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Salir_25;
-            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(31, 47);
-            this.btnSalir.Text = "&Salir";
-            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // btnConsultar
-            // 
-            this.btnConsultar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_25;
-            this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(57, 47);
-            this.btnConsultar.Text = "&Consultar";
-            this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
-            // 
-            // btnNuevo
-            // 
-            this.btnNuevo.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_25;
-            this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(42, 47);
-            this.btnNuevo.Text = "&Nuevo";
-            this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // tsMenu
             // 
@@ -365,19 +241,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.lupa_20;
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(474, 25);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscar.TabIndex = 5;
-            this.btnBuscar.Text = "&Buscar";
-            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // txtNombreBuscar
             // 
@@ -507,6 +370,15 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos de la pieza";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(8, 171);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(74, 13);
+            this.label14.TabIndex = 29;
+            this.label14.Text = "Hoja de Ruta:";
+            // 
             // chkCostoFijo
             // 
             this.chkCostoFijo.AutoSize = true;
@@ -632,9 +504,11 @@
             // panelImagen
             // 
             this.panelImagen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelImagen.Controls.Add(this.btnZoomOut);
+            this.panelImagen.Controls.Add(this.btnZoomIn);
             this.panelImagen.Controls.Add(this.btnQuitarImagen);
             this.panelImagen.Controls.Add(this.label5);
-            this.panelImagen.Controls.Add(this.btnImagen);
+            this.panelImagen.Controls.Add(this.btnAbrirImagen);
             this.panelImagen.Controls.Add(this.pbImagen);
             this.panelImagen.Location = new System.Drawing.Point(374, 20);
             this.panelImagen.Name = "panelImagen";
@@ -643,15 +517,22 @@
             // 
             // btnQuitarImagen
             // 
+            this.btnQuitarImagen.AutoSize = true;
+            this.btnQuitarImagen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQuitarImagen.FlatAppearance.BorderSize = 0;
+            this.btnQuitarImagen.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnQuitarImagen.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnQuitarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuitarImagen.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuitarImagen.Location = new System.Drawing.Point(96, 194);
+            this.btnQuitarImagen.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
+            this.btnQuitarImagen.Location = new System.Drawing.Point(41, 185);
             this.btnQuitarImagen.Name = "btnQuitarImagen";
-            this.btnQuitarImagen.Size = new System.Drawing.Size(80, 22);
+            this.btnQuitarImagen.Size = new System.Drawing.Size(31, 31);
             this.btnQuitarImagen.TabIndex = 22;
-            this.btnQuitarImagen.Text = "&Quitar";
             this.btnQuitarImagen.UseVisualStyleBackColor = true;
             this.btnQuitarImagen.Click += new System.EventHandler(this.btnQuitarImagen_Click);
+            this.btnQuitarImagen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnQuitarImagen.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // label5
             // 
@@ -662,28 +543,24 @@
             this.label5.TabIndex = 2;
             this.label5.Text = "Imagen";
             // 
-            // btnImagen
+            // btnAbrirImagen
             // 
-            this.btnImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImagen.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImagen.Location = new System.Drawing.Point(3, 194);
-            this.btnImagen.Name = "btnImagen";
-            this.btnImagen.Size = new System.Drawing.Size(80, 22);
-            this.btnImagen.TabIndex = 21;
-            this.btnImagen.Text = "&Seleccionar";
-            this.btnImagen.UseVisualStyleBackColor = true;
-            this.btnImagen.Click += new System.EventHandler(this.btnImagen_Click);
-            // 
-            // pbImagen
-            // 
-            this.pbImagen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbImagen.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.sinimagen;
-            this.pbImagen.Location = new System.Drawing.Point(5, 18);
-            this.pbImagen.Name = "pbImagen";
-            this.pbImagen.Size = new System.Drawing.Size(171, 166);
-            this.pbImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbImagen.TabIndex = 0;
-            this.pbImagen.TabStop = false;
+            this.btnAbrirImagen.AutoSize = true;
+            this.btnAbrirImagen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAbrirImagen.FlatAppearance.BorderSize = 0;
+            this.btnAbrirImagen.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnAbrirImagen.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnAbrirImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAbrirImagen.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAbrirImagen.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Abrir_25;
+            this.btnAbrirImagen.Location = new System.Drawing.Point(4, 185);
+            this.btnAbrirImagen.Name = "btnAbrirImagen";
+            this.btnAbrirImagen.Size = new System.Drawing.Size(31, 31);
+            this.btnAbrirImagen.TabIndex = 21;
+            this.btnAbrirImagen.UseVisualStyleBackColor = true;
+            this.btnAbrirImagen.Click += new System.EventHandler(this.btnImagen_Click);
+            this.btnAbrirImagen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnAbrirImagen.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // slideDatos
             // 
@@ -852,14 +729,191 @@
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk_1);
             // 
-            // label14
+            // btnBuscar
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(8, 171);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(74, 13);
-            this.label14.TabIndex = 29;
-            this.label14.Text = "Hoja de Ruta:";
+            this.btnBuscar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.lupa_20;
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscar.Location = new System.Drawing.Point(474, 25);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
+            this.btnBuscar.TabIndex = 5;
+            this.btnBuscar.Text = "&Buscar";
+            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // pbImagen
+            // 
+            this.pbImagen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbImagen.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.sinimagen;
+            this.pbImagen.Location = new System.Drawing.Point(5, 18);
+            this.pbImagen.Name = "pbImagen";
+            this.pbImagen.Size = new System.Drawing.Size(171, 166);
+            this.pbImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbImagen.TabIndex = 0;
+            this.pbImagen.TabStop = false;
+            // 
+            // btnRestar
+            // 
+            this.btnRestar.FlatAppearance.BorderSize = 0;
+            this.btnRestar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnRestar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRestar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Restar_Gris_25;
+            this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRestar.Location = new System.Drawing.Point(37, 103);
+            this.btnRestar.Name = "btnRestar";
+            this.btnRestar.Size = new System.Drawing.Size(30, 30);
+            this.btnRestar.TabIndex = 27;
+            this.btnRestar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRestar.UseVisualStyleBackColor = true;
+            this.btnRestar.Click += new System.EventHandler(this.btnRestar_Click);
+            this.btnRestar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnRestar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnSumar
+            // 
+            this.btnSumar.FlatAppearance.BorderSize = 0;
+            this.btnSumar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnSumar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSumar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Sumar_Gris_25;
+            this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSumar.Location = new System.Drawing.Point(3, 103);
+            this.btnSumar.Name = "btnSumar";
+            this.btnSumar.Size = new System.Drawing.Size(30, 30);
+            this.btnSumar.TabIndex = 26;
+            this.btnSumar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSumar.UseVisualStyleBackColor = true;
+            this.btnSumar.Click += new System.EventHandler(this.btnSumar_Click);
+            this.btnSumar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnSumar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
+            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDelete.Location = new System.Drawing.Point(37, 30);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(30, 30);
+            this.btnDelete.TabIndex = 25;
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnDelete.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnNew
+            // 
+            this.btnNew.FlatAppearance.BorderSize = 0;
+            this.btnNew.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnNew.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNew.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_25;
+            this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNew.Location = new System.Drawing.Point(3, 30);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(30, 30);
+            this.btnNew.TabIndex = 24;
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            this.btnNew.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnNew.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnNuevo
+            // 
+            this.btnNuevo.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_25;
+            this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(42, 47);
+            this.btnNuevo.Text = "&Nuevo";
+            this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
+            // 
+            // btnConsultar
+            // 
+            this.btnConsultar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Find_25;
+            this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnConsultar.Name = "btnConsultar";
+            this.btnConsultar.Size = new System.Drawing.Size(57, 47);
+            this.btnConsultar.Text = "&Consultar";
+            this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Text_Editor_25;
+            this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(54, 47);
+            this.btnModificar.Text = "&Modificar";
+            this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
+            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(47, 47);
+            this.btnEliminar.Text = "&Eliminar";
+            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Salir_25;
+            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(31, 47);
+            this.btnSalir.Text = "&Salir";
+            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // btnZoomIn
+            // 
+            this.btnZoomIn.AutoSize = true;
+            this.btnZoomIn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnZoomIn.FlatAppearance.BorderSize = 0;
+            this.btnZoomIn.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnZoomIn.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnZoomIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZoomIn.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Zoom_In_25;
+            this.btnZoomIn.Location = new System.Drawing.Point(111, 186);
+            this.btnZoomIn.Name = "btnZoomIn";
+            this.btnZoomIn.Size = new System.Drawing.Size(31, 31);
+            this.btnZoomIn.TabIndex = 23;
+            this.btnZoomIn.UseVisualStyleBackColor = true;
+            this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+            this.btnZoomIn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnZoomIn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnZoomOut
+            // 
+            this.btnZoomOut.AutoSize = true;
+            this.btnZoomOut.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnZoomOut.FlatAppearance.BorderSize = 0;
+            this.btnZoomOut.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnZoomOut.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnZoomOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZoomOut.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Zoom_Out_25;
+            this.btnZoomOut.Location = new System.Drawing.Point(142, 185);
+            this.btnZoomOut.Name = "btnZoomOut";
+            this.btnZoomOut.Size = new System.Drawing.Size(31, 31);
+            this.btnZoomOut.TabIndex = 24;
+            this.btnZoomOut.UseVisualStyleBackColor = true;
+            this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
+            this.btnZoomOut.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnZoomOut.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // cbTerminacionBuscar
             // 
@@ -943,7 +997,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudCosto)).EndInit();
             this.panelImagen.ResumeLayout(false);
             this.panelImagen.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.gbGuardarCancelar.ResumeLayout(false);
             this.tpMPDisponibles.ResumeLayout(false);
@@ -952,6 +1005,7 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMPDisponibles)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1011,7 +1065,7 @@
         private System.Windows.Forms.Panel panelImagen;
         private System.Windows.Forms.Button btnQuitarImagen;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnImagen;
+        private System.Windows.Forms.Button btnAbrirImagen;
         private System.Windows.Forms.PictureBox pbImagen;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbTerminacionBuscar;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbPlano;
@@ -1024,5 +1078,7 @@
         private System.Windows.Forms.CheckBox chkCostoFijo;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbHojaRuta;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button btnZoomOut;
+        private System.Windows.Forms.Button btnZoomIn;
     }
 }
