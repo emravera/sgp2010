@@ -12,6 +12,7 @@ namespace GyCAP.UI.EstructuraProducto
     public partial class frmConjunto : Form
     {
         private static frmConjunto _frmConjunto = null;
+        private Sistema.ControlesUsuarios.AnimadorFormulario animador = new GyCAP.UI.Sistema.ControlesUsuarios.AnimadorFormulario();
         private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
         private DataView dvConjuntos, dvSubconjuntosConjunto, dvSubconjuntosDisponibles, dvPiezasConjunto, dvPiezasDisponibles;
         private DataView dvEstados, dvPlanos, dvPartes, dvHojaRuta;
@@ -66,25 +67,8 @@ namespace GyCAP.UI.EstructuraProducto
                 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            //Vemos si hay cambios sin guardar
-            //if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.modificar)
-            //{
-                //Hay cambios sin guardar, preguntemos si igual quiere salir
-                //DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea salir, se perderán todos los cambios efectuados?", "Confirmar", MessageBoxButtons.YesNo);
-                //if (respuesta == DialogResult.Yes)
-                //{
-                    //No quiere guardar nada, descartamos los cambios
-                    //dsEstructura.SUBCONJUNTOS.RejectChanges();
-                    //dsEstructura.DETALLE_CONJUNTO.RejectChanges();
-                    //Salimos            
-                    this.Dispose(true);
-                //}
-            //}
-            //else
-            //{
-                //No hay cambios sin guardar, Salimos
-                //this.Dispose(true);
-            //}            
+            this.Close();
+            this.Dispose(true);            
         }
 
         #region Pestaña Buscar
@@ -1233,6 +1217,18 @@ namespace GyCAP.UI.EstructuraProducto
             }
 
             return costo;
+        }       
+
+        private void btnZoomIn_Click(object sender, EventArgs e)
+        {
+            Sistema.frmImagenZoom.Instancia.SetImagen(pbImagen.Image, "Imagen del Conjunto");
+            animador.SetFormulario(Sistema.frmImagenZoom.Instancia, this, Sistema.ControlesUsuarios.AnimadorFormulario.animacionDerecha, 300, true);
+            animador.MostrarFormulario();
+        }
+
+        private void btnZoomOut_Click(object sender, EventArgs e)
+        {
+            animador.CerrarFormulario();
         }
 
         #endregion
