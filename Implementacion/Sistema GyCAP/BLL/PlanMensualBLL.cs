@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace GyCAP.BLL
 {
@@ -12,6 +13,16 @@ namespace GyCAP.BLL
         {
             DAL.PlanMensualDAL.ObtenerTodos(anio, mes, ds);
         }
+        public static void ObtenerTodos(DataTable dtPlanMensual)
+        {
+            DAL.PlanMensualDAL.ObtenerTodos(dtPlanMensual);
+        }
+        //Metodo que obtiene todos los planes mensuales de un plan anual
+        public static void ObtenerPMAnio(DataTable dtPlanMensual, int codigoPA)
+        {
+            DAL.PlanMensualDAL.ObtenerPMAnio(dtPlanMensual, codigoPA);
+        }
+
         //Metodo que valida que no exista un plan mensual para el mismo mes y año
         public static bool ExistePlanMensual(int anio, string mes)
         {

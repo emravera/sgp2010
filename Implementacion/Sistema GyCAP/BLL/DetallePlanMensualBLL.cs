@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace GyCAP.BLL
 {
@@ -12,7 +13,11 @@ namespace GyCAP.BLL
         {
             DAL.DetallePlanMensualDAL.ObtenerDetalle(idPlan, ds);
         }
-
+        //metodo para traer todos los detalles
+        public static void ObtenerDetalle(DataTable dtDetalle)
+        {
+            DAL.DetallePlanMensualDAL.ObtenerDetalle(dtDetalle);
+        }
 
     }
 }

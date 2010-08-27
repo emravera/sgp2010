@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace GyCAP.DAL
 {
@@ -45,13 +46,13 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static void ObtenerTodos(Data.dsPlanMensual ds)
+        public static void ObtenerTodos(DataTable dtPlanesAnuales)
         {
             string sql = @"SELECT pan_codigo, pan_anio, deman_codigo, pan_fechacreacion
                         FROM PLANES_ANUALES";
             try
             {
-                DB.FillDataSet(ds, "PLANES_ANUALES", sql, null);
+                DB.FillDataTable(dtPlanesAnuales, sql, null);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }

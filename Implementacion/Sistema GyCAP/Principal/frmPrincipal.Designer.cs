@@ -80,6 +80,7 @@
             this.btnPlanAnual = new System.Windows.Forms.ToolStripButton();
             this.tsMaquinas = new System.Windows.Forms.ToolStripButton();
             this.btnPlanMensual = new System.Windows.Forms.ToolStripButton();
+            this.btnPlanSemanal = new System.Windows.Forms.ToolStripButton();
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -443,7 +444,8 @@
             this.toolStripButton9,
             this.btnPlanAnual,
             this.tsMaquinas,
-            this.btnPlanMensual});
+            this.btnPlanMensual,
+            this.btnPlanSemanal});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(792, 36);
@@ -569,6 +571,16 @@
             this.btnPlanMensual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPlanMensual.Click += new System.EventHandler(this.btnPlanMensual_Click);
             // 
+            // btnPlanSemanal
+            // 
+            this.btnPlanSemanal.Image = ((System.Drawing.Image)(resources.GetObject("btnPlanSemanal.Image")));
+            this.btnPlanSemanal.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPlanSemanal.Name = "btnPlanSemanal";
+            this.btnPlanSemanal.Size = new System.Drawing.Size(74, 33);
+            this.btnPlanSemanal.Text = "Plan Semanal";
+            this.btnPlanSemanal.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPlanSemanal.Click += new System.EventHandler(this.btnPlanSemanal_Click);
+            // 
             // barraEstado
             // 
             this.barraEstado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -666,6 +678,7 @@
         private System.Windows.Forms.ToolStripButton btnPlanAnual;
         private System.Windows.Forms.ToolStripButton tsMaquinas;
         private System.Windows.Forms.ToolStripButton btnPlanMensual;
+        private System.Windows.Forms.ToolStripButton btnPlanSemanal;
     }
 }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace GyCAP.BLL
 {
@@ -20,9 +21,9 @@ namespace GyCAP.BLL
         {
             DAL.PlanAnualDAL.ObtenerTodos(ds);
         }
-        public static void ObtenerTodos(Data.dsPlanMensual ds)
+        public static void ObtenerTodos(DataTable dtPlanAnual)
         {
-            DAL.PlanAnualDAL.ObtenerTodos(ds);
+            DAL.PlanAnualDAL.ObtenerTodos(dtPlanAnual);
         }
         //Metodo que se llama desde el formulario de plan mensual
         public static int ObtenerTodos(int anio, string mes)
