@@ -14,6 +14,7 @@ namespace GyCAP.UI.EstructuraProducto
         private static frmEstructuraProducto _frmEstructuraProducto = null;
         private SplitterPanel areaTrabajo;
         private Panel activo = null;
+        private Sistema.ControlesUsuarios.AnimadorFormulario animador = new GyCAP.UI.Sistema.ControlesUsuarios.AnimadorFormulario();
         
         public frmEstructuraProducto()
         {
