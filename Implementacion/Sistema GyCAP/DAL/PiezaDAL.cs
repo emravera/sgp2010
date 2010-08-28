@@ -20,8 +20,9 @@ namespace GyCAP.DAL
                                ,[pno_codigo]
                                ,[pza_codigoparte]
                                ,[pza_costo]
-                               ,[hr_codigo]) 
-                               VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8) SELECT @@Identity";
+                               ,[hr_codigo]
+                               ,[pza_costofijo]) 
+                               VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9) SELECT @@Identity";
 
             //Así obtenemos la pieza nueva del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.PIEZASRow rowPieza = dsEstructura.PIEZAS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.PIEZASRow;
@@ -35,7 +36,8 @@ namespace GyCAP.DAL
                                            rowPieza.PNO_CODIGO, 
                                            rowPieza.PZA_CODIGOPARTE, 
                                            rowPieza.PZA_COSTO, 
-                                           hojaRuta };
+                                           hojaRuta,
+                                           rowPieza.PZA_COSTOFIJO };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
@@ -118,7 +120,8 @@ namespace GyCAP.DAL
                                ,pza_codigoparte = @p5
                                ,pza_costo = @p6
                                ,hr_codigo = @p7
-                               WHERE pza_codigo = @p8";
+                               ,pza_costo = @p8
+                               WHERE pza_codigo = @p9";
 
             //Así obtenemos la pieza del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.PIEZASRow rowPieza = dsEstructura.PIEZAS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.PIEZASRow;
@@ -132,6 +135,7 @@ namespace GyCAP.DAL
                                          rowPieza.PZA_CODIGOPARTE, 
                                          rowPieza.PZA_COSTO, 
                                          hojaRuta, 
+                                         rowPieza.PZA_COSTOFIJO,
                                          rowPieza.PZA_CODIGO };
 
             //Declaramos el objeto transaccion
@@ -230,7 +234,7 @@ namespace GyCAP.DAL
         public static Entidades.Pieza ObtenerPieza(int codigoPieza)
         {
             string sql = @"SELECT pza_nombre, te_terminacion, pza_descripcion, pza_cantidadstock, par_codigo, pno_codigo, pza_codigoparte 
-                                  ,pza_costo, hr_codigo FROM PIEZAS WHERE pza_codigo = @p0";
+                                  ,pza_costo, hr_codigo, pza_costofijo FROM PIEZAS WHERE pza_codigo = @p0";
             object[] valorParametros = { codigoPieza };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
             Entidades.Pieza pieza = new GyCAP.Entidades.Pieza();
@@ -248,6 +252,7 @@ namespace GyCAP.DAL
                 pieza.CodigoPlano = Convert.ToInt32(rdr["pno_codigo"].ToString());
                 pieza.Costo = Convert.ToDecimal(rdr["pza_costo"].ToString());
                 if (rdr["hr_codigo"] != DBNull.Value) { pieza.CodigoHojaRuta = Convert.ToInt32(rdr["hr_codigo"].ToString()); }
+                pieza.CostoFijo = Convert.ToInt32(rdr["pza_costofijo"].ToString());
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             finally
@@ -261,7 +266,7 @@ namespace GyCAP.DAL
         public static void ObtenerPiezas(object nombre, object codTerminacion, Data.dsEstructura ds, bool obtenerDetalle)
         {
             string sql = @"SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, pza_cantidadstock, par_codigo, pno_codigo
-                                 , pza_codigoparte, pza_costo, hr_codigo FROM PIEZAS WHERE 1=1";
+                                 , pza_codigoparte, pza_costo, hr_codigo, pza_costofijo FROM PIEZAS WHERE 1=1";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
@@ -315,7 +320,7 @@ namespace GyCAP.DAL
         public static void ObtenerPiezas(System.Data.DataTable dtPiezas)
         {
             string sql = @"SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, pza_cantidadstock, par_codigo, pno_codigo
-                                , pza_codigoparte, pza_costo, hr_codigo FROM PIEZAS";
+                                , pza_codigoparte, pza_costo, hr_codigo, pza_costofijo FROM PIEZAS";
                    
             try
             {
@@ -327,7 +332,7 @@ namespace GyCAP.DAL
         public static void ObtenerPiezas(System.Data.DataTable dtPiezas, int estado)
         {
             string sql = @"SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, pza_cantidadstock, par_codigo, pno_codigo
-                                , pza_codigoparte, pza_costo, hr_codigo FROM PIEZAS WHERE par_codigo = @p0";
+                                , pza_codigoparte, pza_costo, hr_codigo, pza_costofijo FROM PIEZAS WHERE par_codigo = @p0";
             object[] valorParametros = { estado };
             try
             {

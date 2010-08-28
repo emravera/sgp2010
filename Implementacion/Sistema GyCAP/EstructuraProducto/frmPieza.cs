@@ -163,9 +163,9 @@ namespace GyCAP.UI.EstructuraProducto
             //Revisamos que completó los datos obligatorios
             string datosFaltantes = string.Empty;
             if (txtNombre.Text == string.Empty) { datosFaltantes += "* Nombre\n"; }
-            if (cbEstado.SelectedIndex == -1) { datosFaltantes += "* Estado\n"; }
-            if (cbTerminacion.SelectedIndex == -1) { datosFaltantes += "* Terminación\n"; }
-            if (cbPlano.SelectedIndex == -1) { datosFaltantes += "* Plano\n"; }
+            if (cbEstado.GetSelectedIndex() == -1) { datosFaltantes += "* Estado\n"; }
+            if (cbTerminacion.GetSelectedIndex() == -1) { datosFaltantes += "* Terminación\n"; }
+            if (cbPlano.GetSelectedIndex() == -1) { datosFaltantes += "* Plano\n"; }
             if (dgvDetallePieza.Rows.Count == 0) { datosFaltantes += "* El detalle de la Pieza\n"; }
             if (datosFaltantes == string.Empty)
             {
@@ -190,6 +190,7 @@ namespace GyCAP.UI.EstructuraProducto
                         if (cbHojaRuta.GetSelectedIndex() != -1) { rowPieza.HR_CODIGO = cbHojaRuta.GetSelectedValueInt(); }
                         else { rowPieza.SetHR_CODIGONull(); }
                         rowPieza.PZA_DESCRIPCION = txtDescripcion.Text;
+                        rowPieza.PZA_COSTOFIJO = (chkCostoFijo.Checked) ? 1 : 0;
                         rowPieza.EndEdit();
                         dsEstructura.PIEZAS.AddPIEZASRow(rowPieza);
                         //Todavia no aceptamos los cambios porque necesitamos que queden marcadas como nuevas las filas
@@ -243,6 +244,7 @@ namespace GyCAP.UI.EstructuraProducto
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PNO_CODIGO = cbPlano.GetSelectedValueInt();
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_DESCRIPCION = txtDescripcion.Text;
                     dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_COSTO = nudCosto.Value;
+                    dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_COSTOFIJO = (chkCostoFijo.Checked) ? 1 : 0;
                     if (cbHojaRuta.GetSelectedIndex() != -1) { dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).HR_CODIGO = cbHojaRuta.GetSelectedValueInt(); }
                     else { dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).SetHR_CODIGONull(); }
                     try
@@ -422,7 +424,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una materia prima de la lista y asignarle una cantidad mayor a 0.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debe seleccionar una Materia Prima de la lista y asignarle una cantidad mayor a 0.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -503,7 +505,9 @@ namespace GyCAP.UI.EstructuraProducto
                     dvDetallePieza.RowFilter = "MPXP_CODIGO < 0";
                     nudCosto.Enabled = true;
                     nudCosto.Value = 0;
+                    lblSigno.BackColor = System.Drawing.Color.White;
                     chkCostoFijo.Enabled = true;
+                    chkCostoFijo.Checked = false;
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
                     pbImagen.Image = EstructuraProducto.Properties.Resources.sinimagen;
@@ -537,7 +541,9 @@ namespace GyCAP.UI.EstructuraProducto
                     dvDetallePieza.RowFilter = "MPXP_CODIGO < 0";
                     nudCosto.Enabled = true;
                     nudCosto.Value = 0;
+                    lblSigno.BackColor = System.Drawing.Color.White;
                     chkCostoFijo.Enabled = true;
+                    chkCostoFijo.Checked = false;
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
                     pbImagen.Image = EstructuraProducto.Properties.Resources.sinimagen;
@@ -568,6 +574,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbHojaRuta.SetTexto(string.Empty);
                     nudCosto.Enabled = false;
                     chkCostoFijo.Enabled = false;
+                    lblSigno.BackColor = System.Drawing.Color.Empty;
                     txtDescripcion.ReadOnly = true;
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
@@ -591,6 +598,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbHojaRuta.Enabled = true;
                     cbHojaRuta.SetTexto(string.Empty);
                     nudCosto.Enabled = true;
+                    lblSigno.BackColor = System.Drawing.Color.White;
                     chkCostoFijo.Enabled = true;
                     txtDescripcion.ReadOnly = false;
                     btnGuardar.Enabled = true;
@@ -627,7 +635,8 @@ namespace GyCAP.UI.EstructuraProducto
 
             if (dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).IsHR_CODIGONull()) { cbHojaRuta.SetSelectedIndex(-1); }
             else { cbHojaRuta.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).HR_CODIGO)); }
-            
+            if (dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_COSTOFIJO == 0) { chkCostoFijo.Checked = false; }
+            else { chkCostoFijo.Checked = true; }
             pbImagen.Image = BLL.PiezaBLL.ObtenerImagen(codigoPieza);
             //Usemos el filtro del dataview para mostrar sólo las MP de la pieza seleccionada
             dvDetallePieza.RowFilter = "pza_codigo = " + codigoPieza;

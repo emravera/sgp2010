@@ -23,7 +23,7 @@ namespace GyCAP.UI.EstructuraProducto
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
-        private int slideActual = 0; //0-Datos, 1-Conjuntos, 2-Subconjuntos, 3-Piezas, 4-MateriaPrima, 5-Árbol
+        private int slideActual = 0; //0-Datos, 1-Conjuntos, 2-Piezas
         private int cxe = -1, pxe = -1; //Variables para el manejo de inserciones en los dataset con códigos unique
 
         #region Inicio
@@ -160,6 +160,7 @@ namespace GyCAP.UI.EstructuraProducto
             //if (cbResponsable.GetSelectedIndex() == -1) { datosOK = false; datosFaltantes += "\\n* Responsable"; } Por ahora opcional
             //if (dtpFechaAlta.IsValueNull()) { dtpFechaAlta.SetFecha(BLL.DBBLL.GetFechaServidor()); } Opcional por ahora
             if (dgvPartes.Rows.Count == 0) { datosFaltantes += "* El detalle de la estructura\n"; } //que al menos haya cargado 1 parte
+            if (cbEstado.GetSelectedIndex() == -1) { datosFaltantes += "* Estado\n"; }
             if (datosFaltantes == string.Empty)
             {
                 //Datos OK, revisemos que está haciendo
@@ -173,7 +174,7 @@ namespace GyCAP.UI.EstructuraProducto
                         rowEstructura.ESTR_CODIGO = -1;
                         rowEstructura.ESTR_NOMBRE = txtNombre.Text;
                         rowEstructura.PNO_CODIGO = cbPlano.GetSelectedValueInt();
-                        rowEstructura.ESTR_ACTIVO = (chkActivo.Checked) ? BLL.EstructuraBLL.EstructuraActiva : BLL.EstructuraBLL.EstructuraInactiva;
+                        rowEstructura.ESTR_ACTIVO = cbEstado.GetSelectedValueInt(); ;
                         if (dtpFechaAlta.IsValueNull()) { rowEstructura.ESTR_FECHA_ALTA = BLL.DBBLL.GetFechaServidor(); }
                         else { rowEstructura.ESTR_FECHA_ALTA = (DateTime)dtpFechaAlta.GetFecha(); }
                         rowEstructura.COC_CODIGO = cbCocina.GetSelectedValueInt();
@@ -181,7 +182,9 @@ namespace GyCAP.UI.EstructuraProducto
                         else { rowEstructura.E_CODIGO = cbResponsable.GetSelectedValueInt(); }
                         if (dtpFechaModificacion.IsValueNull()) { rowEstructura.SetESTR_FECHA_MODIFICACIONNull(); }
                         else { rowEstructura.ESTR_FECHA_MODIFICACION = (DateTime)dtpFechaModificacion.GetFecha(); }
+                        rowEstructura.ESTR_COSTO = nudcosto.Value;
                         rowEstructura.ESTR_DESCRIPCION = txtDescripcion.Text;
+                        rowEstructura.ESTR_COSTOFIJO = (chkFijo.Checked) ? 1 : 0;
                         rowEstructura.EndEdit();
                         dsEstructura.ESTRUCTURAS.AddESTRUCTURASRow(rowEstructura);
                         BLL.EstructuraBLL.Insertar(dsEstructura);
@@ -218,8 +221,7 @@ namespace GyCAP.UI.EstructuraProducto
                         int codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]);
                         dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_NOMBRE = txtNombre.Text;
                         dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).PNO_CODIGO = cbPlano.GetSelectedValueInt();
-                        if (chkActivo.Checked) { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_ACTIVO = BLL.EstructuraBLL.EstructuraActiva; }
-                        else { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_ACTIVO = BLL.EstructuraBLL.EstructuraInactiva; }
+                        dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_ACTIVO = cbEstado.GetSelectedValueInt();
                         if (dtpFechaAlta.IsValueNull()) { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_FECHA_ALTA = BLL.DBBLL.GetFechaServidor(); }
                         else { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_FECHA_ALTA = (DateTime)dtpFechaAlta.GetFecha(); }
                         dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).COC_CODIGO = cbCocina.GetSelectedValueInt();
@@ -228,6 +230,8 @@ namespace GyCAP.UI.EstructuraProducto
                         if (dtpFechaModificacion.IsValueNull()) { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).SetESTR_FECHA_MODIFICACIONNull(); }
                         else { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_FECHA_MODIFICACION = (DateTime)dtpFechaModificacion.GetFecha(); }
                         dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_DESCRIPCION = txtDescripcion.Text;
+                        dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_COSTO = nudcosto.Value;
+                        dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_COSTOFIJO = (chkFijo.Checked) ? 1 : 0;
                         BLL.EstructuraBLL.Actualizar(dsEstructura);
                         MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -262,14 +266,9 @@ namespace GyCAP.UI.EstructuraProducto
         private void chkVer(object sender, EventArgs e)
         {
             string filtro = string.Empty, mostrar = string.Empty;
-
-            if (chkConjunto.Checked) { mostrar += "'Conjunto'"; }
-            if (chkSubconjunto.Checked && mostrar != string.Empty) { mostrar += ",'Subconjunto'"; }
-            else if (chkSubconjunto.Checked && mostrar == string.Empty) { mostrar += "'Subconjunto'"; }
+            if (chkConjunto.Checked) { mostrar += "'Conjunto'"; }            
             if (chkPieza.Checked && mostrar != string.Empty) { mostrar += ",'Pieza'"; }
-            else if (chkPieza.Checked && mostrar == string.Empty) { mostrar += "'Pieza'"; }
-            if (chkMateriaPrima.Checked && mostrar != string.Empty) { mostrar += ",'Materia Prima'"; }
-            else if (chkMateriaPrima.Checked && mostrar == string.Empty) { mostrar += "'Materia Prima'"; }
+            else if (chkPieza.Checked && mostrar == string.Empty) { mostrar += "'Pieza'"; }           
             filtro = "PAR_TIPO IN (" + mostrar + ")";
             if (mostrar != string.Empty) { dvPartes.RowFilter = filtro; }
             else { dvPartes.RowFilter = "PAR_TIPO = 'ocultar todo'"; }
@@ -308,6 +307,10 @@ namespace GyCAP.UI.EstructuraProducto
                         {
                             //Sumemos la cantidad ingresada a la existente, como hay una sola fila seleccionamos la 0 del array
                             rows[0].CXE_CANTIDAD += nudC.Value;
+                            if (!chkFijo.Checked)
+                            {
+                                nudcosto.Value += (nudC.Value * rows[0].CONJUNTOSRow.CONJ_COSTO);
+                            }
                         }
                         //Como ya existe marcamos que no debe agregarse
                         agregarConjunto = false;
@@ -340,6 +343,10 @@ namespace GyCAP.UI.EstructuraProducto
                     //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
                     //todavia no vamos a insertar en la db hasta que no haga Guardar
                     dsEstructura.CONJUNTOSXESTRUCTURA.AddCONJUNTOSXESTRUCTURARow(row);
+                    if (!chkFijo.Checked)
+                    {
+                        nudcosto.Value += (row.CONJUNTOSRow.CONJ_COSTO * row.CXE_CANTIDAD);
+                    }
                 }
                 nudC.Value = 0;
             }
@@ -356,7 +363,11 @@ namespace GyCAP.UI.EstructuraProducto
                 //Obtenemos el código
                 int codigoC = Convert.ToInt32(dvCE[dgvCE.SelectedRows[0].Index]["cxe_codigo"]);
                 //Lo borramos pero sólo del dataset
-                dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoC).Delete();
+                if (!chkFijo.Checked)
+                {
+                    nudcosto.Value -= dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoC).CONJUNTOSRow.CONJ_COSTO * dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoC).CXE_CANTIDAD;
+                }
+                dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoC).Delete();                
             }
             else
             {
@@ -370,6 +381,10 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 int codigoCXE = Convert.ToInt32(dvCE[dgvCE.SelectedRows[0].Index]["cxe_codigo"]);
                 dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CXE_CANTIDAD += 1;
+                if (!chkFijo.Checked)
+                {
+                    nudcosto.Value += dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CONJUNTOSRow.CONJ_COSTO;
+                }
             }
             else
             {
@@ -385,6 +400,10 @@ namespace GyCAP.UI.EstructuraProducto
                 if (dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CXE_CANTIDAD > 1)
                 {
                     dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CXE_CANTIDAD -= 1;
+                    if (!chkFijo.Checked)
+                    {
+                        nudcosto.Value -= dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CONJUNTOSRow.CONJ_COSTO;
+                    }
                 }
             }
             else
@@ -418,6 +437,7 @@ namespace GyCAP.UI.EstructuraProducto
                         if (respuesta == DialogResult.Yes)
                         {
                             rows[0].PXE_CANTIDAD += nudP.Value;
+                            if (!chkFijo.Checked) { nudcosto.Value += (nudP.Value * rows[0].PXE_CANTIDAD); }
                         }
                         agregarPieza = false;
                     }
@@ -443,6 +463,10 @@ namespace GyCAP.UI.EstructuraProducto
                     else { row.GRP_CODIGO = Convert.ToInt32(dsEstructura.GRUPOS_ESTRUCTURA[0]["GRP_CODIGO"]); }
                     row.EndEdit();
                     dsEstructura.PIEZASXESTRUCTURA.AddPIEZASXESTRUCTURARow(row);
+                    if (!chkFijo.Checked)
+                    {
+                        nudcosto.Value += (row.PXE_CANTIDAD * row.PIEZASRow.PZA_COSTO);
+                    }
                 }
                 nudP.Value = 0;
             }
@@ -457,6 +481,10 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvPE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 int codigoP = Convert.ToInt32(dvPE[dgvPE.SelectedRows[0].Index]["pxe_codigo"]);
+                if (!chkFijo.Checked)
+                {
+                    nudcosto.Value -= (dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoP).PIEZASRow.PZA_COSTO * dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoP).PXE_CANTIDAD);
+                }
                 dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoP).Delete();
             }
             else
@@ -471,6 +499,10 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 int codigoPXE = Convert.ToInt32(dvPE[dgvPE.SelectedRows[0].Index]["pxe_codigo"]);
                 dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoPXE).PXE_CANTIDAD += 1;
+                if (!chkFijo.Checked)
+                {
+                    nudcosto.Value += dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoPXE).PIEZASRow.PZA_COSTO;
+                }
             }
             else
             {
@@ -486,6 +518,10 @@ namespace GyCAP.UI.EstructuraProducto
                 if (dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoPXE).PXE_CANTIDAD > 1)
                 {
                     dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoPXE).PXE_CANTIDAD -= 1;
+                    if (!chkFijo.Checked)
+                    {
+                        nudcosto.Value -= dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoPXE).PIEZASRow.PZA_COSTO;
+                    }
                 }
             }
             else
@@ -609,8 +645,8 @@ namespace GyCAP.UI.EstructuraProducto
                     txtNombre.Clear();
                     cbPlano.Enabled = true;
                     cbPlano.SelectedIndex = -1;
-                    chkActivo.Enabled = true;
-                    chkActivo.Checked = false;
+                    cbEstado.Enabled = true;
+                    cbEstado.SetTexto("Seleccione");
                     dtpFechaAlta.Enabled = true;
                     try
                     {
@@ -623,6 +659,11 @@ namespace GyCAP.UI.EstructuraProducto
                     cbResponsable.SelectedIndex = -1;
                     dtpFechaModificacion.Enabled = true;
                     txtDescripcion.ReadOnly = false;
+                    nudcosto.Value = 0;
+                    nudcosto.Enabled = true;
+                    lblPeso.BackColor = System.Drawing.Color.White;
+                    chkFijo.Enabled = true;
+                    chkFijo.Checked = false;
                     txtDescripcion.Clear();
                     dsEstructura.LISTA_PARTES.Clear();
                     dvCE.RowFilter = "ESTR_CODIGO = -1";
@@ -649,8 +690,8 @@ namespace GyCAP.UI.EstructuraProducto
                     txtNombre.Clear();
                     cbPlano.Enabled = true;
                     cbPlano.SelectedIndex = -1;
-                    chkActivo.Enabled = true;
-                    chkActivo.Checked = false;
+                    cbEstado.Enabled = true;
+                    cbEstado.SetTexto("Seleccione");
                     dtpFechaAlta.Enabled = true;
                     try
                     {
@@ -664,6 +705,11 @@ namespace GyCAP.UI.EstructuraProducto
                     dtpFechaModificacion.Enabled = true;
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
+                    nudcosto.Enabled = true;
+                    nudcosto.Value = 0;
+                    lblPeso.BackColor = System.Drawing.Color.White;
+                    chkFijo.Enabled = true;
+                    chkFijo.Checked = false;
                     dsEstructura.LISTA_PARTES.Clear();
                     dvCE.RowFilter = "ESTR_CODIGO = -1";
                     dvPE.RowFilter = "ESTR_CODIGO = -1";
@@ -687,12 +733,15 @@ namespace GyCAP.UI.EstructuraProducto
                 case estadoUI.consultar:
                     txtNombre.ReadOnly = true;
                     cbPlano.Enabled = false;
-                    chkActivo.Enabled = false;
+                    cbEstado.Enabled = false;
                     dtpFechaAlta.Enabled = false;
                     cbCocina.Enabled = false;
                     cbResponsable.Enabled = false;
                     dtpFechaModificacion.Enabled = false;
                     txtDescripcion.ReadOnly = true;
+                    nudcosto.Enabled = false;
+                    lblPeso.BackColor = System.Drawing.Color.Empty;
+                    chkFijo.Enabled = false;
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = true;
@@ -713,12 +762,15 @@ namespace GyCAP.UI.EstructuraProducto
                 case estadoUI.modificar:
                     txtNombre.ReadOnly = false;
                     cbPlano.Enabled = true;
-                    chkActivo.Enabled = true;
+                    cbEstado.Enabled = true;
                     dtpFechaAlta.Enabled = true;
                     cbCocina.Enabled = true;
                     cbResponsable.Enabled = true;
                     dtpFechaModificacion.Enabled = true;
                     txtDescripcion.ReadOnly = false;
+                    nudcosto.Enabled = true;
+                    lblPeso.BackColor = System.Drawing.Color.White;
+                    chkFijo.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -837,6 +889,9 @@ namespace GyCAP.UI.EstructuraProducto
             cbCocina.SetDatos(dvCocina, "COC_CODIGO", "COC_CODIGO_PRODUCTO", "Seleccione", false);
             cbResponsable.SetDatos(dvResponsable, "E_CODIGO", displaymember, ", ", "Seleccione", false);
             cbPlano.SetDatos(dvPlano, "PNO_CODIGO", "PNO_NOMBRE", "Seleccione", false);
+            string[] nombres = { "Activa", "Inactiva" };
+            int[] valores = { BLL.EstructuraBLL.EstructuraActiva, BLL.EstructuraBLL.EstructuraInactiva };
+            cbEstado.SetDatos(nombres, valores, "Seleccione", false);
 
             #endregion Datos
 
@@ -1000,6 +1055,34 @@ namespace GyCAP.UI.EstructuraProducto
             dsEstructura.GRUPOS_ESTRUCTURA.AddGRUPOS_ESTRUCTURARow(row);
         }
 
+        private decimal CalcularCosto()
+        {
+            decimal costo = 0;
+            int codigoEstructura = 0;
+            if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { codigoEstructura = -1; }
+            else { codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]); }
+
+            foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow row in
+                (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select("ESTR_CODIGO = " + codigoEstructura))
+            {
+                costo += (row.CONJUNTOSRow.CONJ_COSTO * row.CXE_CANTIDAD);
+            }
+
+            foreach (Data.dsEstructura.PIEZASXESTRUCTURARow row in
+                (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select("ESTR_CODIGO = " + codigoEstructura))
+            {
+                costo += (row.PIEZASRow.PZA_COSTO * row.PXE_CANTIDAD);
+            }
+
+            return costo;
+        }
+
+        private void chkFijo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!chkFijo.Checked) { nudcosto.Value = CalcularCosto(); }
+            else { nudcosto.Value = 0; }
+        }
+
         #endregion Servicios
 
         #region Cell_Formatting y RowEnter
@@ -1118,8 +1201,7 @@ namespace GyCAP.UI.EstructuraProducto
             int codEstructura = Convert.ToInt32(dvEstructuras[e.RowIndex]["estr_codigo"]);
             txtNombre.Text = dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_NOMBRE;
             cbPlano.SetSelectedValue(Convert.ToInt32(dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).PLANOSRow.PNO_CODIGO));
-            if (dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_ACTIVO == 1) { chkActivo.Checked = true; }
-            else { chkActivo.Checked = false; }
+            cbEstado.SetSelectedValue(Convert.ToInt32(dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_ACTIVO));
             dtpFechaAlta.SetFecha(dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_FECHA_ALTA);
             cbCocina.SetSelectedValue(Convert.ToInt32(dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).COC_CODIGO));
             if (!dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).IsE_CODIGONull())
@@ -1133,12 +1215,16 @@ namespace GyCAP.UI.EstructuraProducto
             }
             else { dtpFechaModificacion.SetFechaNull(); }
             txtDescripcion.Text = dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_DESCRIPCION;
+            nudcosto.Value = dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_COSTO;
+            if (dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_COSTOFIJO == 0) { chkFijo.Checked = false; }
+            else { chkFijo.Checked = true; }
             dvCE.RowFilter = "ESTR_CODIGO = " + codEstructura;
             dvPE.RowFilter = "ESTR_CODIGO = " + codEstructura;
         }
 
         #endregion
 
+        
 
     }
 }

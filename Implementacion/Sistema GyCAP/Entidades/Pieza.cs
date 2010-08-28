@@ -17,6 +17,13 @@ namespace GyCAP.Entidades
         private string codigoParte;
         private decimal costo;
         private int codigoHojaRuta;
+        private int costoFijo;
+
+        public int CostoFijo
+        {
+            get { return costoFijo; }
+            set { costoFijo = value; }
+        }
 
         public decimal Costo
         {
