@@ -113,6 +113,10 @@
       <Project>{9102F252-4267-45D1-B148-DD3BE4D709E4}</Project>
       <Name>EstructuraProducto</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GestionPedido\GestionPedido.csproj">
+      <Project>{9260777F-2789-458E-924E-163DC946C9E1}</Project>
+      <Name>GestionPedido</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PlanificacionProduccion\PlanificacionProduccion.csproj">
       <Project>{959ABFBF-7696-414D-B0CA-8807851367E8}</Project>
       <Name>PlanificacionProduccion</Name>

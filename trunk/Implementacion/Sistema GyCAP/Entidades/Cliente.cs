@@ -7,7 +7,7 @@ namespace GyCAP.Entidades
 {
     public class Cliente
     {
-        private int codigo;
+        private long codigo;
         private string razonSocial;
         private string telefono;
         private DateTime fechaAlta;
@@ -16,7 +16,7 @@ namespace GyCAP.Entidades
         private string mail;
         private string estado;
 
-        public int Codigo
+        public long Codigo
         {
             get { return codigo; }
             set { codigo = value; }
