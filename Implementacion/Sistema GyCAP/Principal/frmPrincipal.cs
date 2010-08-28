@@ -224,7 +224,11 @@ namespace Principal
             GyCAP.UI.PlanificacionProduccion.frmPlanSemanal.Instancia.Show();
         }
 
-        
+        private void toolCliente_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionPedido.frmCliente.Instancia.MdiParent = this;
+            GyCAP.UI.GestionPedido.frmCliente.Instancia.Show();
+        }
         
     }
 }
