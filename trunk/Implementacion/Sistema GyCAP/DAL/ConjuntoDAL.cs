@@ -23,21 +23,23 @@ namespace GyCAP.DAL
                                         ,[pno_codigo]
                                         ,[conj_codigoparte]
                                         ,[conj_costo]
-                                        ,[hr_codigo]) 
-                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7) SELECT @@Identity";
+                                        ,[hr_codigo]
+                                        ,[conj_costofijo]) 
+                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8) SELECT @@Identity";
 
             //Así obtenemos el conjunto nuevo del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.CONJUNTOSRow rowConjunto = dsEstructura.CONJUNTOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.CONJUNTOSRow;
             object hojaRuta = DBNull.Value;
             if (!rowConjunto.IsHR_CODIGONull()) { hojaRuta = rowConjunto.HR_CODIGO; }
             object[] valorParametros = { rowConjunto.CONJ_NOMBRE,
-                                           rowConjunto.CONJ_DESCRIPCION, 
-                                           0, 
-                                           rowConjunto.PAR_CODIGO, 
-                                           rowConjunto.PNO_CODIGO, 
-                                           rowConjunto.CONJ_CODIGOPARTE, 
-                                           rowConjunto.CONJ_COSTO, 
-                                           hojaRuta };
+                                         rowConjunto.CONJ_DESCRIPCION, 
+                                         0, 
+                                         rowConjunto.PAR_CODIGO, 
+                                         rowConjunto.PNO_CODIGO, 
+                                         rowConjunto.CONJ_CODIGOPARTE, 
+                                         rowConjunto.CONJ_COSTO, 
+                                         hojaRuta,
+                                         rowConjunto.CONJ_COSTOFIJO };
                         
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
@@ -150,7 +152,8 @@ namespace GyCAP.DAL
                                         ,conj_codigoparte = @p4
                                         ,conj_costo = @p5
                                         ,hr_codigo = @p6
-                                        WHERE conj_codigo = @p7";
+                                        ,conj_costofijo = @p7
+                                        WHERE conj_codigo = @p8";
 
             //Así obtenemos el conjunto modificado del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.CONJUNTOSRow rowConjunto = dsEstructura.CONJUNTOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.CONJUNTOSRow;
@@ -163,6 +166,7 @@ namespace GyCAP.DAL
                                            rowConjunto.CONJ_CODIGOPARTE, 
                                            rowConjunto.CONJ_COSTO, 
                                            hojaRuta, 
+                                           rowConjunto.CONJ_COSTOFIJO,
                                            rowConjunto.CONJ_CODIGO };
 
             //Declaramos el objeto transaccion
@@ -319,7 +323,7 @@ namespace GyCAP.DAL
         public static Entidades.Conjunto ObtenerConjunto(int codigoConjunto)
         {
             string sql = @"SELECT conj_codigo, conj_nombre, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo
-                                 ,conj_codigoparte, conj_costo, hr_codigo FROM CONJUNTOS WHERE conj_codigo = @p0";
+                                 ,conj_codigoparte, conj_costo, hr_codigo, conj_costofijo FROM CONJUNTOS WHERE conj_codigo = @p0";
             object[] valorParametros = { codigoConjunto };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
             Entidades.Conjunto conjunto = new GyCAP.Entidades.Conjunto();
@@ -336,6 +340,7 @@ namespace GyCAP.DAL
                 conjunto.CodigoPlano = Convert.ToInt32(rdr["pno_codigo"].ToString());
                 conjunto.Costo = Convert.ToDecimal(rdr["conj_costo"].ToString());
                 if (rdr["hr_codigo"] != DBNull.Value) { conjunto.CodigoHojaRuta = Convert.ToInt32(rdr["hr_codigo"].ToString()); }
+                conjunto.CostoFijo = Convert.ToInt32(rdr["conj_costofijo"].ToString());
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             finally
@@ -349,7 +354,7 @@ namespace GyCAP.DAL
         public static void ObtenerConjuntos(object nombre, Data.dsEstructura ds, bool obtenerDetalle)
         {
             string sql = @"SELECT conj_codigo, conj_nombre, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo
-                                  ,conj_codigoparte , conj_costo, hr_codigo FROM CONJUNTOS WHERE 1=1";
+                                  ,conj_codigoparte , conj_costo, hr_codigo, conj_costofijo FROM CONJUNTOS WHERE 1=1";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
@@ -483,7 +488,7 @@ namespace GyCAP.DAL
         public static void ObtenerConjuntos(DataTable dtConjuntos)
         {
             string sql = @"SELECT conj_codigo, conj_nombre, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo,
-                                  conj_codigoparte, conj_costo, hr_codigo FROM CONJUNTOS";
+                                  conj_codigoparte, conj_costo, hr_codigo, conj_costofijo FROM CONJUNTOS";
             
             try
             {
@@ -495,7 +500,7 @@ namespace GyCAP.DAL
         public static void ObtenerConjuntos(DataTable dtConjuntos, int estado)
         {
             string sql = @"SELECT conj_codigo, conj_nombre, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo
-                                  ,conj_codigoparte, conj_costo, hr_codigo FROM CONJUNTOS WHERE par_codigo = @p0 ";
+                                  ,conj_codigoparte, conj_costo, hr_codigo, conj_costofijo FROM CONJUNTOS WHERE par_codigo = @p0 ";
 
             object[] valorParametros = { estado };
 

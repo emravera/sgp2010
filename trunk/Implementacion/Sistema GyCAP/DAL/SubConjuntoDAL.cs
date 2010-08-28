@@ -23,11 +23,14 @@ namespace GyCAP.DAL
                                         ,[pno_codigo]
                                         ,[sconj_codigoparte]
                                         ,[sconj_costo]
-                                        ,[hr_codigo]) 
-                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7) SELECT @@Identity";
+                                        ,[hr_codigo]
+                                        ,[sconj_costofijo]) 
+                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8) SELECT @@Identity";
 
             //Así obtenemos el subconjunto nuevo del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto = dsEstructura.SUBCONJUNTOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.SUBCONJUNTOSRow;
+            object hojaRuta = DBNull.Value;
+            if (!rowSubconjunto.IsHR_CODIGONull()) { hojaRuta = rowSubconjunto.HR_CODIGO; }
             object[] valorParametros = { rowSubconjunto.SCONJ_NOMBRE,
                                            rowSubconjunto.SCONJ_DESCRIPCION, 
                                            0, 
@@ -35,7 +38,8 @@ namespace GyCAP.DAL
                                            rowSubconjunto.PNO_CODIGO, 
                                            rowSubconjunto.SCONJ_CODIGOPARTE,
                                            rowSubconjunto.SCONJ_COSTO,
-                                           DBNull.Value };
+                                           hojaRuta,
+                                           rowSubconjunto.SCONJ_COSTOFIJO };
             
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
@@ -117,17 +121,21 @@ namespace GyCAP.DAL
                                ,sconj_codigoparte = @p4
                                ,sconj_costo = @p5
                                ,hr_codigo = @p6
-                               WHERE sconj_codigo = @p7";
+                               ,sconj_costofijo = @p7
+                               WHERE sconj_codigo = @p8";
 
             //Así obtenemos el subconjunto del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto = dsEstructura.SUBCONJUNTOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.SUBCONJUNTOSRow;
+            object hojaRuta = DBNull.Value;
+            if (!rowSubconjunto.IsHR_CODIGONull()) { hojaRuta = rowSubconjunto.HR_CODIGO; }
             object[] valorParametros = { rowSubconjunto.SCONJ_NOMBRE,
                                            rowSubconjunto.SCONJ_DESCRIPCION, 
                                            rowSubconjunto.PAR_CODIGO, 
                                            rowSubconjunto.PNO_CODIGO, 
                                            rowSubconjunto.SCONJ_CODIGOPARTE, 
                                            rowSubconjunto.SCONJ_COSTO,
-                                           DBNull.Value,
+                                           hojaRuta,
+                                           rowSubconjunto.SCONJ_COSTOFIJO,
                                            rowSubconjunto.SCONJ_CODIGO };
 
             //Declaramos el objeto transaccion
@@ -201,7 +209,7 @@ namespace GyCAP.DAL
         public static void ObtenerSubconjuntos(DataTable dtSubconjuntos)
         {
             string sql = @"SELECT sconj_codigo, sconj_nombre, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo, 
-                                  sconj_codigoparte, sconj_costo FROM SUBCONJUNTOS";
+                                  sconj_codigoparte, sconj_costo, hr_codigo, sconj_costofijo FROM SUBCONJUNTOS";
 
             try
             {
@@ -213,7 +221,7 @@ namespace GyCAP.DAL
         public static void ObtenerSubconjuntos(DataTable dtSubconjuntos, int estado)
         {
             string sql = @"SELECT sconj_codigo, sconj_nombre, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo, 
-                                  sconj_codigoparte, sconj_costo FROM SUBCONJUNTOS WHERE par_codigo = @p0";
+                                  sconj_codigoparte, sconj_costo, hr_codigo, sconj_costofijo FROM SUBCONJUNTOS WHERE par_codigo = @p0";
             object[] valorParametros = { estado };
             try
             {
@@ -225,7 +233,7 @@ namespace GyCAP.DAL
         public static void ObtenerSubconjuntos(object nombre, Data.dsEstructura ds, bool obtenerDetalle)
         {
             string sql = @"SELECT sconj_codigo, sconj_nombre, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo, 
-                                  sconj_codigoparte, sconj_costo FROM SUBCONJUNTOS WHERE 1=1";
+                                  sconj_codigoparte, sconj_costo, hr_codigo, sconj_costofijo FROM SUBCONJUNTOS WHERE 1=1";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
@@ -374,7 +382,7 @@ namespace GyCAP.DAL
         public static Entidades.SubConjunto ObtenerSubconjunto(int codigoSubconjunto)
         {
             string sql = @"SELECT sconj_nombre, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo, 
-                                  sconj_codigoparte, sconj_costo FROM SUBCONJUNTOS WHERE sconj_codigo = @p0";
+                                  sconj_codigoparte, sconj_costo, hr_codigo, sconj_costofijo FROM SUBCONJUNTOS WHERE sconj_codigo = @p0";
             object[] valorParametros = { codigoSubconjunto };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
             Entidades.SubConjunto subconjunto = new GyCAP.Entidades.SubConjunto();
@@ -390,6 +398,8 @@ namespace GyCAP.DAL
                 subconjunto.CodigoEstado = Convert.ToInt32(rdr["par_codigo"].ToString());
                 subconjunto.CodigoPlano = Convert.ToInt32(rdr["pno_codigo"].ToString());
                 subconjunto.Costo = Convert.ToDecimal(rdr["sconj_costo"].ToString());
+                if (rdr["hr_codigo"] != DBNull.Value) { subconjunto.CodigoHojaRuta = Convert.ToInt32(rdr["hr_codigo"].ToString()); }
+                subconjunto.CostoFijo = Convert.ToInt32(rdr["sconj_costofijo"].ToString());
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             finally

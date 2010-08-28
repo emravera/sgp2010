@@ -162,8 +162,8 @@ namespace GyCAP.UI.EstructuraProducto
             string datosFaltantes = string.Empty;
             //Revisamos que completó los datos
             if (txtNombre.Text == string.Empty) { datosFaltantes += "* Nombre\n"; }
-            if (cbEstado.SelectedIndex == -1) { datosFaltantes += "* Estado\n"; }
-            if (cbPlano.SelectedIndex == -1) { datosFaltantes += "* Plano\n"; }
+            if (cbEstado.GetSelectedIndex() == -1) { datosFaltantes += "* Estado\n"; }
+            if (cbPlano.GetSelectedIndex() == -1) { datosFaltantes += "* Plano\n"; }
             if (dgvDetalleSubconjunto.Rows.Count == 0) { datosFaltantes += "* El detalle del subconjunto\n"; }
             if (datosFaltantes == string.Empty)
             {
@@ -185,6 +185,7 @@ namespace GyCAP.UI.EstructuraProducto
                         rowSubconjunto.PNO_CODIGO = cbPlano.GetSelectedValueInt();
                         rowSubconjunto.SCONJ_COSTO = nudCosto.Value;
                         rowSubconjunto.SCONJ_DESCRIPCION = txtDescripcion.Text;
+                        rowSubconjunto.SCONJ_COSTOFIJO = (chkCostoFijo.Checked) ? 1 : 0;
                         if (cbHojaRuta.GetSelectedIndex() != -1) { rowSubconjunto.HR_CODIGO = cbHojaRuta.GetSelectedValueInt(); }
                         else { rowSubconjunto.SetHR_CODIGONull(); }
                         rowSubconjunto.EndEdit();
@@ -239,6 +240,7 @@ namespace GyCAP.UI.EstructuraProducto
                     dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).PNO_CODIGO = cbPlano.GetSelectedValueInt();
                     dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).SCONJ_DESCRIPCION = txtDescripcion.Text;
                     dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).SCONJ_COSTO = nudCosto.Value;
+                    dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).SCONJ_COSTOFIJO = (chkCostoFijo.Checked) ? 1 : 0;
                     if (cbHojaRuta.GetSelectedIndex() != -1) { dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).HR_CODIGO = cbHojaRuta.GetSelectedValueInt(); }
                     else { dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).SetHR_CODIGONull(); }
                     try
@@ -492,6 +494,7 @@ namespace GyCAP.UI.EstructuraProducto
                     nudCosto.Enabled = true;
                     nudCosto.Value = 0;
                     chkCostoFijo.Enabled = true;
+                    chkCostoFijo.Checked = false;
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Text = string.Empty;
                     btnGuardar.Enabled = true;
@@ -523,6 +526,7 @@ namespace GyCAP.UI.EstructuraProducto
                     nudCosto.Enabled = true;
                     nudCosto.Value = 0;
                     chkCostoFijo.Enabled = true;
+                    chkCostoFijo.Checked = false;
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Text = string.Empty;
                     btnGuardar.Enabled = true;
@@ -606,6 +610,8 @@ namespace GyCAP.UI.EstructuraProducto
             if (!dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).IsHR_CODIGONull())
                 { cbHojaRuta.SetSelectedValue(Convert.ToInt32(dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).HR_CODIGO)); }
             else { cbHojaRuta.SetSelectedIndex(-1); }
+            if (dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoSubconjunto).SCONJ_COSTOFIJO == 0) { chkCostoFijo.Checked = false; }
+            else { chkCostoFijo.Checked = true; }
             pbImagen.Image = BLL.SubConjuntoBLL.ObtenerImagen(codigoSubconjunto);
             //Usemos el filtro del dataview para mostrar sólo las piezas del subconjunto seleccionado
             dvDetalleSubconjunto.RowFilter = "sconj_codigo = " + codigoSubconjunto;
