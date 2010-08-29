@@ -234,6 +234,8 @@ namespace GyCAP.UI.EstructuraProducto
                         dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_COSTOFIJO = (chkFijo.Checked) ? 1 : 0;
                         BLL.EstructuraBLL.Actualizar(dsEstructura);
                         MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
