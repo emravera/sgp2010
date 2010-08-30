@@ -59,6 +59,7 @@ namespace GyCAP.UI.GestionPedido
             dgvLista.DataSource = dvCliente;
 
             //CARGA DE COMBOS
+            cboBuscarEstado.Items.Add("Todos");
             cboBuscarEstado.Items.Add("Activo");
             cboBuscarEstado.Items.Add("Inactivo");
             cboBuscarEstado.SelectedIndex = 0;
@@ -238,8 +239,20 @@ namespace GyCAP.UI.GestionPedido
         {
             try
             {
+                string estado;
+                estado = string.Empty;
+                switch (cboBuscarEstado.Text.Substring(0, 1))
+                {
+                    case "A":
+                        estado = "A";
+                        break;
+                    case "I":
+                        estado = "I";
+                        break;
+                }
+
                 dsCliente.CLIENTES.Clear();
-                BLL.ClienteBLL.ObtenerTodos(txtRazonSocialBuscar.Text, cboBuscarEstado.GetSelectedValueString(), dsCliente);
+                BLL.ClienteBLL.ObtenerTodos(txtRazonSocialBuscar.Text, estado, dsCliente);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
                 dvCliente.Table = dsCliente.CLIENTES;

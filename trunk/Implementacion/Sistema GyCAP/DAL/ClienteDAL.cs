@@ -56,7 +56,7 @@ namespace GyCAP.DAL
             if (estadoCliente != string.Empty)
             {
                 sql += " AND CLI_ESTADO = @p" + cantidadParametros;
-                valoresFiltros[cantidadParametros] = Convert.ToInt32(estadoCliente);
+                valoresFiltros[cantidadParametros] = estadoCliente;
                 cantidadParametros++;
             }
 
