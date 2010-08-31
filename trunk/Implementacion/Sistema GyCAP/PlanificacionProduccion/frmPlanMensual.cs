@@ -693,9 +693,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Selecciono el codigo de la demanda anual
             int codigo = Convert.ToInt32(dvListaPlanes[dgvLista.SelectedRows[0].Index]["pmes_codigo"]);
 
-            //Verificamos si se puede modificar el plan
-            if (BLL.PlanMensualBLL.ExistePlanSemanal(codigo) == true)
-            {
                 int codigoPlanAnual = Convert.ToInt32(dsPlanMensual.PLANES_MENSUALES.FindByPMES_CODIGO(codigo).PAN_CODIGO);
                 int anio = Convert.ToInt32(dsPlanMensual.PLANES_ANUALES.FindByPAN_CODIGO(codigoPlanAnual).PAN_ANIO);
 
@@ -727,13 +724,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                 int restaPlanificar = cantidad - Convert.ToInt32(txtCantPlanificada.Text);
                 if (restaPlanificar > 0) txtRestaPlanificar.Text = restaPlanificar.ToString();
                 else txtRestaPlanificar.Text = Convert.ToString(0);
-            }
-            else
-            {
-                MessageBox.Show("El Plan Mensual no se puede modificar porque tiene planes semanales hijos" , "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                SetInterface(estadoUI.inicio);
-            }
-
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)

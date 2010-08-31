@@ -275,7 +275,7 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         public void SetDatos(string[] nombres, int[] valores, string textoCabecera, bool cabeceraPersistente)
         {
             persistente = cabeceraPersistente;
-            this.Items.Clear();
+            //this.Items.Clear();
             IList<ItemLista> lista = new List<ItemLista>();
             if (cabeceraPersistente) { lista.Add(new ItemLista(-1, textoCabecera)); }
             else { SetTexto(textoCabecera); }

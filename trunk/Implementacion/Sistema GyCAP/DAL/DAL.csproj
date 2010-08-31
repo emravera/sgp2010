@@ -67,6 +67,7 @@
     <Compile Include="DetallePlanMensualDAL.cs" />
     <Compile Include="DetallePlanSemanalDAL.cs" />
     <Compile Include="DetalleSubconjuntoDAL.cs" />
+    <Compile Include="DiasPlanSemanalDAL.cs" />
     <Compile Include="DomicilioDAL.cs" />
     <Compile Include="EjemplarMaquinaDAL.cs" />
     <Compile Include="EmpleadoDAL.cs" />

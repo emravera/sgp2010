@@ -8,6 +8,7 @@ namespace GyCAP.DAL
 {
     public class DetallePlanAnualDAL
     {
+        //Metodo de Busqueda de un detalle
         public static void ObtenerDetalle(int idCodigo, Data.dsPlanAnual ds)
         {
             string sql = @"SELECT dpan_codigo, dpan_mes, dpan_cantidadmes, pan_codigo

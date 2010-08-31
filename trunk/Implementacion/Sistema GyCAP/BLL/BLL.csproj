@@ -63,6 +63,7 @@
     <Compile Include="DetallePlanMantenimientoBLL.cs" />
     <Compile Include="DetallePlanMensualBLL.cs" />
     <Compile Include="DetallePlanSemanalBLL.cs" />
+    <Compile Include="DiasPlanSemanalBLL.cs" />
     <Compile Include="DomicilioBLL.cs" />
     <Compile Include="EjemplarMaquinaBLL.cs" />
     <Compile Include="EmpleadoBLL.cs" />

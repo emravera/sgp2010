@@ -23,6 +23,24 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+
+        //Metodo de Busqueda
+        public static void ObtenerDetallePM(int idCodigoAnio, string mes, DataTable dtDetalle)
+        {
+            string sql = @"SELECT det.dpmes_codigo, det.pmes_codigo, det.coc_codigo, det.dpmes_cantidadEstimada, det.dpmes_cantidadReal
+                        FROM DETALLE_PLANES_MENSUALES as det, PLANES_MENSUALES as pm
+                        WHERE det.pmes_codigo=pm.pmes_codigo and pm.pan_codigo=@p0 and pm.pmes_mes LIKE @p1";
+
+            mes = "%" + mes + "%";
+            object[] parametros = { idCodigoAnio, mes };
+
+            try
+            {
+                DB.FillDataTable(dtDetalle, sql, parametros);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
         //Metodo de Busqueda
         public static void ObtenerDetalle(DataTable dtDetalle)
         {
