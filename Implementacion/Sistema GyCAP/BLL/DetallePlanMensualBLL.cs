@@ -13,6 +13,13 @@ namespace GyCAP.BLL
         {
             DAL.DetallePlanMensualDAL.ObtenerDetalle(idPlan, ds);
         }
+
+        //metodo que trae los detalles de un plan mensual
+        public static void ObtenerDetallePM(int idPlanAnual, string mes, DataTable dtDetalle)
+        {
+            DAL.DetallePlanMensualDAL.ObtenerDetallePM(idPlanAnual, mes, dtDetalle);
+        }
+
         //metodo para traer todos los detalles
         public static void ObtenerDetalle(DataTable dtDetalle)
         {

@@ -17,7 +17,7 @@ namespace GyCAP.DAL
     {
         private static string conexionGonzaloN = "Data Source=NGA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionGonzaloD = "Data Source=DGA\\GONZALO;Initial Catalog=Proyecto;Integrated Security=True";
-        private static string conexionEmanuel = "Data Source=HP-EMA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
+        private static string conexionEmanuel = "Data Source=HP-EMA\\SQLEXPRESS;Initial Catalog=Proyecto1;Integrated Security=True";
         private static string conexionMarcelo = "Data Source=HOMERO;Initial Catalog=Proyecto;User ID=sa";
         private static string conexionRaulD = "Data Source=DESKTOP\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionRaulN = "Data Source=NOTEBOOK\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";

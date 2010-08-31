@@ -98,17 +98,15 @@ namespace GyCAP.DAL
                     det.PlanAnual = planAnual;
                     det.Codigo = DAL.DetallePlanAnualDAL.Insertar(det);
                 }
+
+                transaccion.Commit();
+                DB.FinalizarTransaccion();
             }
             catch (SqlException)
             {
                 transaccion.Rollback();
                 throw new Entidades.Excepciones.BaseDeDatosException();
 
-            }
-            finally
-            {
-                transaccion.Commit();
-                DB.FinalizarTransaccion();
             }
             return detalle;
 
