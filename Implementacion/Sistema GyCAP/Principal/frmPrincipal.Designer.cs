@@ -81,10 +81,10 @@
             this.tsMaquinas = new System.Windows.Forms.ToolStripButton();
             this.btnPlanMensual = new System.Windows.Forms.ToolStripButton();
             this.btnPlanSemanal = new System.Windows.Forms.ToolStripButton();
+            this.toolCliente = new System.Windows.Forms.ToolStripButton();
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.toolCliente = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -459,8 +459,8 @@
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(80, 33);
-            this.toolStripButton1.Text = "Modelo Cocina";
+            this.toolStripButton1.Size = new System.Drawing.Size(79, 33);
+            this.toolStripButton1.Text = "Orden trabajo";
             this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
@@ -583,6 +583,16 @@
             this.btnPlanSemanal.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPlanSemanal.Click += new System.EventHandler(this.btnPlanSemanal_Click);
             // 
+            // toolCliente
+            // 
+            this.toolCliente.Image = ((System.Drawing.Image)(resources.GetObject("toolCliente.Image")));
+            this.toolCliente.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolCliente.Name = "toolCliente";
+            this.toolCliente.Size = new System.Drawing.Size(44, 33);
+            this.toolCliente.Text = "Cliente";
+            this.toolCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolCliente.Click += new System.EventHandler(this.toolCliente_Click);
+            // 
             // barraEstado
             // 
             this.barraEstado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -598,16 +608,6 @@
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(38, 17);
             this.lblEstado.Text = "Status";
-            // 
-            // toolCliente
-            // 
-            this.toolCliente.Image = ((System.Drawing.Image)(resources.GetObject("toolCliente.Image")));
-            this.toolCliente.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolCliente.Name = "toolCliente";
-            this.toolCliente.Size = new System.Drawing.Size(44, 33);
-            this.toolCliente.Text = "Cliente";
-            this.toolCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolCliente.Click += new System.EventHandler(this.toolCliente_Click);
             // 
             // frmPrincipal
             // 

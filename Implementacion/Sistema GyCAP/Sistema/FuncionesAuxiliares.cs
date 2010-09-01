@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Windows.Forms;
-
+using System.Runtime.InteropServices;
 
 namespace GyCAP.UI.Sistema
 {
@@ -39,6 +39,32 @@ namespace GyCAP.UI.Sistema
 
     public class FuncionesAuxiliares
     {
+        #region Propiedades para el método que quita los checkbox de un TreeNode
+        public const int TVIF_STATE = 0x8;
+        public const int TVIS_STATEIMAGEMASK = 0xF000;
+        public const int TV_FIRST = 0x1100;
+        public const int TVM_SETITEM = TV_FIRST + 63;
+
+        public struct TVITEM
+        {
+            public int mask;
+            public IntPtr hItem;
+            public int state;
+            public int stateMask;
+            [MarshalAs(UnmanagedType.LPTStr)]
+            public String lpszText;
+            public int cchTextMax;
+            public int iImage;
+            public int iSelectedImage;
+            public int cChildren;
+            public IntPtr lParam;
+
+        }
+
+        [DllImport("user32.dll")]
+        static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        #endregion
+
         public static void llenarListas(DataView dv,CheckedListBox control)
         {
             control.Items.Clear();
@@ -140,6 +166,23 @@ namespace GyCAP.UI.Sistema
         {
             TimeSpan tspan = TimeSpan.FromHours((double)hora);
             return new DateTime(2000, 1, 1, tspan.Hours, tspan.Minutes, 0);
+        }
+
+        /// <summary>
+        /// Remueve el checkbox de un nodo de un TreeView.
+        /// </summary>
+        /// <param name="nodo">El Treenode (nodo) al cual se debe quitar el checkbox.</param>
+        /// <param name="treeview">El TreeView al que pertenece el nodo.</param>
+        public static void QuitarCheckBox(TreeNode nodo, TreeView treeview)
+        {
+            TVITEM tvi = new TVITEM();
+            tvi.hItem = nodo.Handle;
+            tvi.mask = TVIF_STATE;
+            tvi.stateMask = TVIS_STATEIMAGEMASK;
+            tvi.state = 0;
+            IntPtr lparam = Marshal.AllocHGlobal(Marshal.SizeOf(tvi));
+            Marshal.StructureToPtr(tvi, lparam, false);
+            SendMessage(treeview.Handle, TVM_SETITEM, IntPtr.Zero, lparam);
         }
 
     }

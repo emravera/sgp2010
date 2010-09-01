@@ -191,6 +191,7 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         public void SetDatos(DataView dataview, string valueMember, string displayMember, string textoCabecera, bool cabeceraPersistente)
         {
             persistente = cabeceraPersistente;
+            this.DataSource = null;
             this.Items.Clear();
             IList<ItemLista> lista = new List<ItemLista>();
             if (cabeceraPersistente) { lista.Add(new ItemLista(-1, textoCabecera)); } 
@@ -228,6 +229,7 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         public void SetDatos(DataView dataview, string valueMember, string[] displayMember, string separadorConcatenado, string textoCabecera, bool cabeceraPersistente)
         {
             persistente = cabeceraPersistente;
+            this.DataSource = null;
             this.Items.Clear();
             IList<ItemLista> lista = new List<ItemLista>();
             if (cabeceraPersistente) { lista.Add(new ItemLista(-1, textoCabecera)); }
@@ -275,7 +277,8 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         public void SetDatos(string[] nombres, int[] valores, string textoCabecera, bool cabeceraPersistente)
         {
             persistente = cabeceraPersistente;
-            //this.Items.Clear();
+            this.DataSource = null;
+            this.Items.Clear();
             IList<ItemLista> lista = new List<ItemLista>();
             if (cabeceraPersistente) { lista.Add(new ItemLista(-1, textoCabecera)); }
             else { SetTexto(textoCabecera); }
@@ -309,6 +312,7 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
         public void SetDatos(string[] nombres, object[] valores, string textoCabecera, bool cabeceraPersistente)
         {
             persistente = cabeceraPersistente;
+            this.DataSource = null;
             this.Items.Clear();
             IList<ItemLista> lista = new List<ItemLista>();
             if (cabeceraPersistente) { lista.Add(new ItemLista(-1, textoCabecera)); }
