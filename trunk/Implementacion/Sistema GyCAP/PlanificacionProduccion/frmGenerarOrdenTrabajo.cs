@@ -20,6 +20,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         public static readonly int estadoInicialNuevoManual = 2; //Para generar OT de forma manual
         Data.dsPlanSemanal dsPlanSemanal = new GyCAP.Data.dsPlanSemanal();
         Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
+        Data.dsOrdenTrabajo dsOrdenTrabajo = new GyCAP.Data.dsOrdenTrabajo();
         DataView dvPlanAnual, dvMensual, dvPlanSemanal, dvOrdenTrabajo;
 
         #region Inicio
@@ -153,8 +154,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnConsultar.Enabled = false;
-                    btnModificar.Enabled = false;
-                    btnEliminar.Enabled = false;
+                    
                     estadoInterface = estadoUI.nuevoManual;
                     tcOrdenTrabajo.SelectedTab = tpDatos;
                     break;
@@ -164,8 +164,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
                     btnConsultar.Enabled = false;
-                    btnModificar.Enabled = false;
-                    btnEliminar.Enabled = false;
+                    
                     estadoInterface = estadoUI.modificar;
                     tcOrdenTrabajo.SelectedTab = tpDatos;
                     break;
@@ -177,6 +176,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         private void InicializarDatos()
         {
             //Grilla ordenes trabajo
+            dgvListaOrdenTrabajo.Columns.Add("ORD_NUMERO", "Número");
             dgvListaOrdenTrabajo.Columns.Add("ORD_CODIGO", "Código");
             dgvListaOrdenTrabajo.Columns.Add("ORD_FECHAALTA", "Fecha creación");
             dgvListaOrdenTrabajo.Columns.Add("ORD_ORIGEN", "Origen");
@@ -185,6 +185,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvListaOrdenTrabajo.Columns.Add("ORD_FECHAINICIOESTIMADA", "Fecha inicio");
             dgvListaOrdenTrabajo.Columns.Add("ORD_FECHAFINESTIMADA", "Fecha fin");
             dgvListaOrdenTrabajo.Columns.Add("EORD_CODIGO", "Estado");
+            dgvListaOrdenTrabajo.Columns["ORD_NUMERO"].DataPropertyName = "ORD_NUMERO";
             dgvListaOrdenTrabajo.Columns["ORD_CODIGO"].DataPropertyName = "ORD_CODIGO";
             dgvListaOrdenTrabajo.Columns["ORD_FECHAALTA"].DataPropertyName = "ORD_FECHAALTA";
             dgvListaOrdenTrabajo.Columns["ORD_ORIGEN"].DataPropertyName = "ORD_ORIGEN";
@@ -205,8 +206,9 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             try
             {
-                    BLL.PlanAnualBLL.ObtenerTodos(dsPlanSemanal.PLANES_ANUALES);
-                    BLL.CocinaBLL.ObtenerCocinas(dsPlanSemanal.COCINAS);
+                BLL.PlanAnualBLL.ObtenerTodos(dsPlanSemanal.PLANES_ANUALES);
+                BLL.CocinaBLL.ObtenerCocinas(dsPlanSemanal.COCINAS);
+                BLL.EstadoOrdenTrabajoBLL.ObtenerEstadosOrden(dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
