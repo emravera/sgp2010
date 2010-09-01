@@ -127,6 +127,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsFabricanteMaquina.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsHojaRuta.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsHojaRuta.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsMaquina.cs">
       <DependentUpon>dsMaquina.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -179,11 +184,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPlanSemanal.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="dsProduccion.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsProduccion.xsd</DependentUpon>
     </Compile>
     <Compile Include="dsProveedor.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -374,6 +374,17 @@
     <None Include="dsFabricanteMaquina.xss">
       <DependentUpon>dsFabricanteMaquina.xsd</DependentUpon>
     </None>
+    <None Include="dsHojaRuta.xsc">
+      <DependentUpon>dsHojaRuta.xsd</DependentUpon>
+    </None>
+    <None Include="dsHojaRuta.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsHojaRuta.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsHojaRuta.xss">
+      <DependentUpon>dsHojaRuta.xsd</DependentUpon>
+    </None>
     <None Include="dsMaquina.xsc">
       <DependentUpon>dsMaquina.xsd</DependentUpon>
     </None>
@@ -472,17 +483,6 @@
     </None>
     <None Include="dsPlanSemanal.xss">
       <DependentUpon>dsPlanSemanal.xsd</DependentUpon>
-    </None>
-    <None Include="dsProduccion.xsc">
-      <DependentUpon>dsProduccion.xsd</DependentUpon>
-    </None>
-    <None Include="dsProduccion.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsProduccion.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="dsProduccion.xss">
-      <DependentUpon>dsProduccion.xsd</DependentUpon>
     </None>
     <None Include="dsProveedor.xsc">
       <DependentUpon>dsProveedor.xsd</DependentUpon>

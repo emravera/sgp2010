@@ -11,7 +11,7 @@ namespace GyCAP.BLL
         public static readonly int hojaRutaActiva = 1;
         public static readonly int hojaRutaInactiva = 0;
 
-        public static void ObtenerHojasRuta(object nombre, object activa, Data.dsProduccion dsHojaRuta, bool obtenerDetalle)
+        public static void ObtenerHojasRuta(object nombre, object activa, Data.dsHojaRuta dsHojaRuta, bool obtenerDetalle)
         {
             object estado = null;
             if (activa != null && Convert.ToInt32(activa.ToString()) == hojaRutaActiva || Convert.ToInt32(activa.ToString()) == hojaRutaInactiva) { estado = activa; };
@@ -23,12 +23,12 @@ namespace GyCAP.BLL
             DAL.HojaRutaDAL.ObtenerHojasRuta(dtHojasRuta);
         }
 
-        public static void Insertar(Data.dsProduccion dsHojaRuta)
+        public static void Insertar(Data.dsHojaRuta dsHojaRuta)
         {
             DAL.HojaRutaDAL.Insertar(dsHojaRuta);
         }
         
-        public static void Actualizar(Data.dsProduccion dsHojaRuta)
+        public static void Actualizar(Data.dsHojaRuta dsHojaRuta)
         {
             DAL.HojaRutaDAL.Actualizar(dsHojaRuta);
         }
