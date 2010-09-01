@@ -177,30 +177,31 @@ namespace GyCAP.UI.PlanificacionProduccion
         private void InicializarDatos()
         {
             //Grilla ordenes trabajo
-            dgvListaOrdenTrbajo.Columns.Add("ORD_CODIGO", "Código");
-            dgvListaOrdenTrbajo.Columns.Add("CTO_CODIGO", "Centro de trabajo");
-            dgvListaOrdenTrbajo.Columns.Add("PAR_CODIGO", "Parte");
-            dgvListaOrdenTrbajo.Columns.Add("ORD_CANTIDADESTIMADA", "Cantidad");
-            dgvListaOrdenTrbajo.Columns.Add("UMED_CODIGO", "Unidad medida");
-            dgvListaOrdenTrbajo.Columns.Add("ORD_FECHAINICIOESTIMADA", "Fecha inicio");
-            dgvListaOrdenTrbajo.Columns.Add("ORD_FECHAFINESTIMADA", "Fecha fin");
-            dgvListaOrdenTrbajo.Columns["ORD_CODIGO"].DataPropertyName = "ORD_CODIGO";
-            dgvListaOrdenTrbajo.Columns["CTO_CODIGO"].DataPropertyName = "CTO_CODIGO";
-            dgvListaOrdenTrbajo.Columns["PAR_CODIGO"].DataPropertyName = "PAR_CODIGO";
-            dgvListaOrdenTrbajo.Columns["ORD_CANTIDADESTIMADA"].DataPropertyName = "ORD_CANTIDADESTIMADA";
-            dgvListaOrdenTrbajo.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
-            dgvListaOrdenTrbajo.Columns["ORD_FECHAINICIOESTIMADA"].DataPropertyName = "ORD_FECHAINICIOESTIMADA";
-            dgvListaOrdenTrbajo.Columns["ORD_FECHAFINESTIMADA"].DataPropertyName = "ORD_FECHAFINESTIMADA";
-            dgvListaOrdenTrbajo.Columns["ORD_CANTIDADESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvListaOrdenTrbajo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dgvListaOrdenTrbajo.AllowUserToResizeColumns = true;            
+            dgvListaOrdenTrabajo.Columns.Add("ORD_CODIGO", "Código");
+            dgvListaOrdenTrabajo.Columns.Add("ORD_FECHAALTA", "Fecha creación");
+            dgvListaOrdenTrabajo.Columns.Add("ORD_ORIGEN", "Origen");
+            dgvListaOrdenTrabajo.Columns.Add("COCINA", "Cocina");
+            dgvListaOrdenTrabajo.Columns.Add("CANTIDAD", "Cantidad");
+            dgvListaOrdenTrabajo.Columns.Add("ORD_FECHAINICIOESTIMADA", "Fecha inicio");
+            dgvListaOrdenTrabajo.Columns.Add("ORD_FECHAFINESTIMADA", "Fecha fin");
+            dgvListaOrdenTrabajo.Columns.Add("EORD_CODIGO", "Estado");
+            dgvListaOrdenTrabajo.Columns["ORD_CODIGO"].DataPropertyName = "ORD_CODIGO";
+            dgvListaOrdenTrabajo.Columns["ORD_FECHAALTA"].DataPropertyName = "ORD_FECHAALTA";
+            dgvListaOrdenTrabajo.Columns["ORD_ORIGEN"].DataPropertyName = "ORD_ORIGEN";
+            dgvListaOrdenTrabajo.Columns["COCINA"].DataPropertyName = "DPSEM_CODIGO";
+            dgvListaOrdenTrabajo.Columns["CANTIDAD"].DataPropertyName = "DPSEM_CODIGO";
+            dgvListaOrdenTrabajo.Columns["ORD_FECHAINICIOESTIMADA"].DataPropertyName = "ORD_FECHAINICIOESTIMADA";
+            dgvListaOrdenTrabajo.Columns["ORD_FECHAFINESTIMADA"].DataPropertyName = "ORD_FECHAFINESTIMADA";
+            dgvListaOrdenTrabajo.Columns["EORD_CODIGO"].DataPropertyName = "EORD_CODIGO";
+            dgvListaOrdenTrabajo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgvListaOrdenTrabajo.AllowUserToResizeColumns = true;
 
             //Dataviews
             dvPlanAnual = new DataView(dsPlanSemanal.PLANES_ANUALES);
             dvMensual = new DataView(dsPlanSemanal.PLANES_MENSUALES);
             dvPlanSemanal = new DataView(dsPlanSemanal.PLANES_SEMANALES);
             
-            dgvListaOrdenTrbajo.DataSource = dvOrdenTrabajo;
+            dgvListaOrdenTrabajo.DataSource = dvOrdenTrabajo;
 
             try
             {

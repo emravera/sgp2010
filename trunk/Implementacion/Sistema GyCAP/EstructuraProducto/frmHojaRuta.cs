@@ -12,7 +12,7 @@ namespace GyCAP.UI.EstructuraProducto
     public partial class frmHojaRuta : Form
     {
         private static frmHojaRuta _frmHojaRuta = null;
-        private Data.dsProduccion dsHojaRuta = new GyCAP.Data.dsProduccion();
+        private Data.dsHojaRuta dsHojaRuta = new GyCAP.Data.dsHojaRuta();
         private DataView dvHojasRuta, dvDetalleHoja, dvCentrosTrabajo;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
         private estadoUI estadoInterface;
@@ -168,7 +168,7 @@ namespace GyCAP.UI.EstructuraProducto
                         //Como ahora tenemos más de una tabla y relacionadas vamos a trabajar diferente
                         //Primero lo agregamos a la tabla del dataset con código -1, luego la entidad 
                         //DAL se va a encargar de insertarle el código que corresponda
-                        Data.dsProduccion.HOJAS_RUTARow rowHoja = dsHojaRuta.HOJAS_RUTA.NewHOJAS_RUTARow();
+                        Data.dsHojaRuta.HOJAS_RUTARow rowHoja = dsHojaRuta.HOJAS_RUTA.NewHOJAS_RUTARow();
                         rowHoja.BeginEdit();
                         rowHoja.HR_CODIGO = -1;
                         rowHoja.HR_NOMBRE = txtNombre.Text;
@@ -326,8 +326,8 @@ namespace GyCAP.UI.EstructuraProducto
                     //Algo tiene, comprobemos que no intente agregar lo mismo haciendo una consulta al dataset,
                     //no usamos el dataview porque no queremos volver a filtrar los datos y perderlos
                     string filtro = "hr_codigo = " + hojaCodigo + " AND cto_codigo = " + centroCodigo;
-                    Data.dsProduccion.CENTROSXHOJARUTARow[] rows =
-                        (Data.dsProduccion.CENTROSXHOJARUTARow[])dsHojaRuta.CENTROSXHOJARUTA.Select(filtro);
+                    Data.dsHojaRuta.CENTROSXHOJARUTARow[] rows =
+                        (Data.dsHojaRuta.CENTROSXHOJARUTARow[])dsHojaRuta.CENTROSXHOJARUTA.Select(filtro);
                     if (rows.Length > 0)
                     {
                         //Ya lo ha agregado, avisemos
@@ -350,7 +350,7 @@ namespace GyCAP.UI.EstructuraProducto
                 //Ahora comprobamos si debe agregarse la materia prima o no
                 if (agregar)
                 {
-                    Data.dsProduccion.CENTROSXHOJARUTARow row = dsHojaRuta.CENTROSXHOJARUTA.NewCENTROSXHOJARUTARow();
+                    Data.dsHojaRuta.CENTROSXHOJARUTARow row = dsHojaRuta.CENTROSXHOJARUTA.NewCENTROSXHOJARUTARow();
                     row.BeginEdit();
                     //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
                     row.CXHR_CODIGO = codigoDetalle--; //-- para que se vaya autodecrementando en cada inserción

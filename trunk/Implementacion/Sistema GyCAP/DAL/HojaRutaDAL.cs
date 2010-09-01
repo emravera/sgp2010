@@ -9,14 +9,14 @@ namespace GyCAP.DAL
 {
     public class HojaRutaDAL
     {
-        public static void Insertar(Data.dsProduccion dsHojaRuta)
+        public static void Insertar(Data.dsHojaRuta dsHojaRuta)
         {
             string sqlHoja = @"INSERT INTO [HOJAS_RUTA] ([hr_nombre], [hr_descripcion], [hr_activo], [hr_fechaAlta]) 
                               VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
 
             string sqlDetalle = "INSERT INTO [CENTROSXHOJARUTA] ([cto_codigo], [hr_codigo], [cxhr_secuencia]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
 
-            Data.dsProduccion.HOJAS_RUTARow rowhoja = dsHojaRuta.HOJAS_RUTA.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsProduccion.HOJAS_RUTARow;
+            Data.dsHojaRuta.HOJAS_RUTARow rowhoja = dsHojaRuta.HOJAS_RUTA.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsHojaRuta.HOJAS_RUTARow;
             object[] valorParametros = { rowhoja.HR_NOMBRE, rowhoja.HR_DESCRIPCION, rowhoja.HR_ACTIVO, rowhoja.HR_FECHAALTA };
 
             SqlTransaction transaccion = null;
@@ -27,7 +27,7 @@ namespace GyCAP.DAL
                 rowhoja.HR_CODIGO = Convert.ToInt32(DB.executeScalar(sqlHoja, valorParametros, transaccion));
                 rowhoja.EndEdit();
 
-                foreach (Data.dsProduccion.CENTROSXHOJARUTARow row in (Data.dsProduccion.CENTROSXHOJARUTARow[])dsHojaRuta.CENTROSXHOJARUTA.Select(null, null, DataViewRowState.Added))
+                foreach (Data.dsHojaRuta.CENTROSXHOJARUTARow row in (Data.dsHojaRuta.CENTROSXHOJARUTARow[])dsHojaRuta.CENTROSXHOJARUTA.Select(null, null, DataViewRowState.Added))
                 {
                     valorParametros = new object[] { row.CTO_CODIGO, rowhoja.HR_CODIGO, row.CXHR_SECUENCIA };
                     row.BeginEdit();
@@ -49,13 +49,13 @@ namespace GyCAP.DAL
             }
         }
 
-        public static void Actualizar(Data.dsProduccion dsHojaRuta)
+        public static void Actualizar(Data.dsHojaRuta dsHojaRuta)
         {
             string sqlHoja = "UPDATE HOJAS_RUTA SET hr_nombre = @p0, hr_descripcion = @p1, hr_activo = @p2, hr_fechaalta = @p3 WHERE hr_codigo = @p4";
             string sqlIDetalle = "INSERT INTO [CENTROSXHOJARUTA] ([cto_codigo], [hr_codigo], [cxhr_secuencia]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
             string sqlUDetalle = "UPDATE CENTROSXHOJARUTA SET cxhr_secuencia = @p0 WHERE cxhr_codigo = @p1";
             string sqlDDetalle = "DELETE FROM CENTROSXHOJARUTA WHERE cxhr_codigo = @p0";
-            Data.dsProduccion.HOJAS_RUTARow rowHoja = dsHojaRuta.HOJAS_RUTA.GetChanges(DataRowState.Modified).Rows[0] as Data.dsProduccion.HOJAS_RUTARow;
+            Data.dsHojaRuta.HOJAS_RUTARow rowHoja = dsHojaRuta.HOJAS_RUTA.GetChanges(DataRowState.Modified).Rows[0] as Data.dsHojaRuta.HOJAS_RUTARow;
             object[] valorParametros = { rowHoja.HR_NOMBRE, rowHoja.HR_DESCRIPCION, rowHoja.HR_ACTIVO, rowHoja.HR_FECHAALTA, rowHoja.HR_CODIGO };
             SqlTransaction transaccion = null;
 
@@ -65,7 +65,7 @@ namespace GyCAP.DAL
 
                 DB.executeNonQuery(sqlHoja, valorParametros, transaccion);
 
-                foreach (Data.dsProduccion.CENTROSXHOJARUTARow row in (Data.dsProduccion.CENTROSXHOJARUTARow[])dsHojaRuta.CENTROSXHOJARUTA.Select(null, null, DataViewRowState.Added))
+                foreach (Data.dsHojaRuta.CENTROSXHOJARUTARow row in (Data.dsHojaRuta.CENTROSXHOJARUTARow[])dsHojaRuta.CENTROSXHOJARUTA.Select(null, null, DataViewRowState.Added))
                 {
                     valorParametros = new object[] { row.CTO_CODIGO, row.HR_CODIGO, row.CXHR_SECUENCIA };
                     row.BeginEdit();
@@ -73,13 +73,13 @@ namespace GyCAP.DAL
                     row.EndEdit();
                 }
 
-                foreach (Data.dsProduccion.CENTROSXHOJARUTARow row in (Data.dsProduccion.CENTROSXHOJARUTARow[])dsHojaRuta.CENTROSXHOJARUTA.Select(null, null, DataViewRowState.ModifiedCurrent))
+                foreach (Data.dsHojaRuta.CENTROSXHOJARUTARow row in (Data.dsHojaRuta.CENTROSXHOJARUTARow[])dsHojaRuta.CENTROSXHOJARUTA.Select(null, null, DataViewRowState.ModifiedCurrent))
                 {
                     valorParametros = new object[] { row.CXHR_SECUENCIA, row.CXHR_CODIGO };
                     DB.executeNonQuery(sqlUDetalle, valorParametros, transaccion);
                 }
 
-                foreach (Data.dsProduccion.CENTROSXHOJARUTARow row in (Data.dsProduccion.CENTROSXHOJARUTARow[])dsHojaRuta.CENTROSXHOJARUTA.Select(null, null, DataViewRowState.Deleted))
+                foreach (Data.dsHojaRuta.CENTROSXHOJARUTARow row in (Data.dsHojaRuta.CENTROSXHOJARUTARow[])dsHojaRuta.CENTROSXHOJARUTA.Select(null, null, DataViewRowState.Deleted))
                 {
                     valorParametros = new object[] { Convert.ToInt32(row["cxhr_codigo", DataRowVersion.Original]) };
                     DB.executeNonQuery(sqlDDetalle, valorParametros, transaccion);
@@ -141,7 +141,7 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
         
-        public static void ObtenerHojasRuta(object nombre, object estado, Data.dsProduccion dsHojaRuta, bool obtenerDetalle)
+        public static void ObtenerHojasRuta(object nombre, object estado, Data.dsHojaRuta dsHojaRuta, bool obtenerDetalle)
         {
             string sql = @"SELECT hr_codigo, hr_nombre, hr_descripcion, hr_activo, hr_fechaalta FROM HOJAS_RUTA WHERE 1=1 ";
 
@@ -205,12 +205,12 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        private static void ObtenerDetalleHoja(Data.dsProduccion ds)
+        private static void ObtenerDetalleHoja(Data.dsHojaRuta ds)
         {
             string sql = "SELECT cxhr_codigo, cto_codigo, hr_codigo, cxhr_secuencia FROM CENTROSXHOJARUTA WHERE hr_codigo = @p0";
             object[] valorParametros;
 
-            foreach (Data.dsProduccion.HOJAS_RUTARow row in ds.HOJAS_RUTA)
+            foreach (Data.dsHojaRuta.HOJAS_RUTARow row in ds.HOJAS_RUTA)
             {
                 valorParametros = new object[] { row.HR_CODIGO };
                 DB.FillDataTable(ds.CENTROSXHOJARUTA, sql, valorParametros);
