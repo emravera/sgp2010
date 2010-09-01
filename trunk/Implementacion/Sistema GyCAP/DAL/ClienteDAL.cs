@@ -173,7 +173,7 @@ namespace GyCAP.DAL
 
             object[] valorParametros = { cliente.Codigo, 
                                          cliente.RazonSocial, cliente.Telefono, cliente.MotivoBaja, 
-                                         cliente.Mail, cliente.Estado, cliente.FechaBaja };
+                                         cliente.Mail, cliente.Estado, DBNull.Value };
             try
             {
                 DB.executeNonQuery(sql, valorParametros, null);

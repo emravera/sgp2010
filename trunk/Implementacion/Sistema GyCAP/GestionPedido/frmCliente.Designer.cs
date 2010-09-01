@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.txtMail = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.txtMotivoBaja = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -57,10 +59,8 @@
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnModificar = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cboBuscarEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.txtMail = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.cboBuscarEstado = new System.Windows.Forms.ComboBox();
+            this.cboEstado = new System.Windows.Forms.ComboBox();
             this.gbDatos.SuspendLayout();
             this.tcABM.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -75,11 +75,11 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.cboEstado);
             this.gbDatos.Controls.Add(this.txtMail);
             this.gbDatos.Controls.Add(this.label5);
             this.gbDatos.Controls.Add(this.txtMotivoBaja);
             this.gbDatos.Controls.Add(this.label2);
-            this.gbDatos.Controls.Add(this.cboEstado);
             this.gbDatos.Controls.Add(this.label6);
             this.gbDatos.Controls.Add(this.txtTelefono);
             this.gbDatos.Controls.Add(this.label8);
@@ -94,6 +94,24 @@
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Empleado";
+            // 
+            // txtMail
+            // 
+            this.txtMail.Location = new System.Drawing.Point(94, 78);
+            this.txtMail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtMail.Name = "txtMail";
+            this.txtMail.Size = new System.Drawing.Size(278, 20);
+            this.txtMail.TabIndex = 6;
+            this.txtMail.Enter += new System.EventHandler(this.txtMail_Enter);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 81);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 13);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Mail:";
             // 
             // txtMotivoBaja
             // 
@@ -117,7 +135,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 107);
+            this.label6.Location = new System.Drawing.Point(7, 106);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 13);
             this.label6.TabIndex = 18;
@@ -210,7 +228,7 @@
             // 
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
-            this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvLista.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvLista.Location = new System.Drawing.Point(9, 22);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
@@ -220,6 +238,7 @@
             this.dgvLista.Size = new System.Drawing.Size(526, 191);
             this.dgvLista.TabIndex = 3;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
+            this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
             // groupBox1
             // 
@@ -423,40 +442,20 @@
             // cboBuscarEstado
             // 
             this.cboBuscarEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboBuscarEstado.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboBuscarEstado.FormattingEnabled = true;
             this.cboBuscarEstado.Location = new System.Drawing.Point(76, 18);
             this.cboBuscarEstado.Name = "cboBuscarEstado";
-            this.cboBuscarEstado.Size = new System.Drawing.Size(85, 21);
-            this.cboBuscarEstado.TabIndex = 0;
+            this.cboBuscarEstado.Size = new System.Drawing.Size(106, 21);
+            this.cboBuscarEstado.TabIndex = 4;
             // 
             // cboEstado
             // 
             this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEstado.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboEstado.FormattingEnabled = true;
             this.cboEstado.Location = new System.Drawing.Point(94, 103);
             this.cboEstado.Name = "cboEstado";
             this.cboEstado.Size = new System.Drawing.Size(121, 21);
             this.cboEstado.TabIndex = 7;
-            // 
-            // txtMail
-            // 
-            this.txtMail.Location = new System.Drawing.Point(94, 78);
-            this.txtMail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtMail.Name = "txtMail";
-            this.txtMail.Size = new System.Drawing.Size(278, 20);
-            this.txtMail.TabIndex = 6;
-            this.txtMail.Enter += new System.EventHandler(this.txtMail_Enter);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 81);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 13);
-            this.label5.TabIndex = 22;
-            this.label5.Text = "Mail:";
             // 
             // frmCliente
             // 
@@ -517,11 +516,11 @@
         private System.Windows.Forms.ToolStrip tsMenu;
         private System.Windows.Forms.ToolStripButton btnModificar;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboBuscarEstado;
         private System.Windows.Forms.TextBox txtMotivoBaja;
         private System.Windows.Forms.Label label2;
-        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboEstado;
         private System.Windows.Forms.TextBox txtMail;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cboBuscarEstado;
+        private System.Windows.Forms.ComboBox cboEstado;
     }
 }
