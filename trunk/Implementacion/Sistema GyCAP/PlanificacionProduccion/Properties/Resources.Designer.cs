@@ -74,6 +74,13 @@ namespace GyCAP.UI.PlanificacionProduccion.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap arriba1_15 {
+            get {
+                object obj = ResourceManager.GetObject("arriba1_15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Delete_25 {
             get {
                 object obj = ResourceManager.GetObject("Delete_25", resourceCulture);
@@ -126,6 +133,13 @@ namespace GyCAP.UI.PlanificacionProduccion.Properties {
         internal static System.Drawing.Bitmap Listados_48 {
             get {
                 object obj = ResourceManager.GetObject("Listados_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap lupa_20 {
+            get {
+                object obj = ResourceManager.GetObject("lupa_20", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
