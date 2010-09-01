@@ -2388,11 +2388,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string CLI_MOTIVOBAJA {
                 get {
-                    try {
-                        return ((string)(this[this.tableCLIENTES.CLI_MOTIVOBAJAColumn]));
+                    if (this.IsCLI_MOTIVOBAJANull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CLI_MOTIVOBAJA\' de la tabla \'CLIENTES\' es DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableCLIENTES.CLI_MOTIVOBAJAColumn]));
                     }
                 }
                 set {
@@ -2403,11 +2403,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string CLI_MAIL {
                 get {
-                    try {
-                        return ((string)(this[this.tableCLIENTES.CLI_MAILColumn]));
+                    if (this.IsCLI_MAILNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CLI_MAIL\' de la tabla \'CLIENTES\' es DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableCLIENTES.CLI_MAILColumn]));
                     }
                 }
                 set {

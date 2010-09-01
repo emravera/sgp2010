@@ -399,55 +399,55 @@ SELECT MCA_CODIGO, CLI_CODIGO, MCA_NOMBRE FROM MARCAS WHERE (MCA_CODIGO = @MCA_C
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="dsCliente" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="dsCliente" msprop:Generator_UserDSName="dsCliente" msprop:EnableTableAdapterManager="true">
+  <xs:element name="dsCliente" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsCliente" msprop:Generator_DataSetName="dsCliente" msprop:EnableTableAdapterManager="true">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="PEDIDOS" msprop:Generator_UserTableName="PEDIDOS" msprop:Generator_RowDeletedName="PEDIDOSRowDeleted" msprop:Generator_TableClassName="PEDIDOSDataTable" msprop:Generator_RowChangedName="PEDIDOSRowChanged" msprop:Generator_RowClassName="PEDIDOSRow" msprop:Generator_RowChangingName="PEDIDOSRowChanging" msprop:Generator_RowEvArgName="PEDIDOSRowChangeEvent" msprop:Generator_RowEvHandlerName="PEDIDOSRowChangeEventHandler" msprop:Generator_TablePropName="PEDIDOS" msprop:Generator_TableVarName="tablePEDIDOS" msprop:Generator_RowDeletingName="PEDIDOSRowDeleting">
+        <xs:element name="PEDIDOS" msprop:Generator_UserTableName="PEDIDOS" msprop:Generator_RowDeletedName="PEDIDOSRowDeleted" msprop:Generator_RowChangedName="PEDIDOSRowChanged" msprop:Generator_RowClassName="PEDIDOSRow" msprop:Generator_RowChangingName="PEDIDOSRowChanging" msprop:Generator_RowEvArgName="PEDIDOSRowChangeEvent" msprop:Generator_RowEvHandlerName="PEDIDOSRowChangeEventHandler" msprop:Generator_TableClassName="PEDIDOSDataTable" msprop:Generator_TableVarName="tablePEDIDOS" msprop:Generator_RowDeletingName="PEDIDOSRowDeleting" msprop:Generator_TablePropName="PEDIDOS">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="PED_NUMERO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="PED_NUMERO" msprop:Generator_ColumnPropNameInRow="PED_NUMERO" msprop:Generator_ColumnVarNameInTable="columnPED_NUMERO" msprop:Generator_ColumnPropNameInTable="PED_NUMEROColumn" type="xs:decimal" />
-              <xs:element name="CLI_CODIGO" msprop:Generator_UserColumnName="CLI_CODIGO" msprop:Generator_ColumnPropNameInRow="CLI_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCLI_CODIGO" msprop:Generator_ColumnPropNameInTable="CLI_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="EPED_CODIGO" msprop:Generator_UserColumnName="EPED_CODIGO" msprop:Generator_ColumnPropNameInRow="EPED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnEPED_CODIGO" msprop:Generator_ColumnPropNameInTable="EPED_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="PED_FECHAENTREGAPREVISTA" msprop:Generator_UserColumnName="PED_FECHAENTREGAPREVISTA" msprop:Generator_ColumnPropNameInRow="PED_FECHAENTREGAPREVISTA" msprop:Generator_ColumnVarNameInTable="columnPED_FECHAENTREGAPREVISTA" msprop:Generator_ColumnPropNameInTable="PED_FECHAENTREGAPREVISTAColumn" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="PED_FECHAENTREGAREAL" msprop:Generator_UserColumnName="PED_FECHAENTREGAREAL" msprop:Generator_ColumnPropNameInRow="PED_FECHAENTREGAREAL" msprop:Generator_ColumnVarNameInTable="columnPED_FECHAENTREGAREAL" msprop:Generator_ColumnPropNameInTable="PED_FECHAENTREGAREALColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PED_NUMERO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="PED_NUMERO" msprop:Generator_ColumnVarNameInTable="columnPED_NUMERO" msprop:Generator_ColumnPropNameInRow="PED_NUMERO" msprop:Generator_ColumnPropNameInTable="PED_NUMEROColumn" type="xs:decimal" />
+              <xs:element name="CLI_CODIGO" msprop:Generator_UserColumnName="CLI_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCLI_CODIGO" msprop:Generator_ColumnPropNameInRow="CLI_CODIGO" msprop:Generator_ColumnPropNameInTable="CLI_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="EPED_CODIGO" msprop:Generator_UserColumnName="EPED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnEPED_CODIGO" msprop:Generator_ColumnPropNameInRow="EPED_CODIGO" msprop:Generator_ColumnPropNameInTable="EPED_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="PED_FECHAENTREGAPREVISTA" msprop:Generator_UserColumnName="PED_FECHAENTREGAPREVISTA" msprop:Generator_ColumnVarNameInTable="columnPED_FECHAENTREGAPREVISTA" msprop:Generator_ColumnPropNameInRow="PED_FECHAENTREGAPREVISTA" msprop:Generator_ColumnPropNameInTable="PED_FECHAENTREGAPREVISTAColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PED_FECHAENTREGAREAL" msprop:Generator_UserColumnName="PED_FECHAENTREGAREAL" msprop:Generator_ColumnVarNameInTable="columnPED_FECHAENTREGAREAL" msprop:Generator_ColumnPropNameInRow="PED_FECHAENTREGAREAL" msprop:Generator_ColumnPropNameInTable="PED_FECHAENTREGAREALColumn" type="xs:dateTime" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="CLIENTES" msprop:Generator_UserTableName="CLIENTES" msprop:Generator_RowDeletedName="CLIENTESRowDeleted" msprop:Generator_TableClassName="CLIENTESDataTable" msprop:Generator_RowChangedName="CLIENTESRowChanged" msprop:Generator_RowClassName="CLIENTESRow" msprop:Generator_RowChangingName="CLIENTESRowChanging" msprop:Generator_RowEvArgName="CLIENTESRowChangeEvent" msprop:Generator_RowEvHandlerName="CLIENTESRowChangeEventHandler" msprop:Generator_TablePropName="CLIENTES" msprop:Generator_TableVarName="tableCLIENTES" msprop:Generator_RowDeletingName="CLIENTESRowDeleting">
+        <xs:element name="CLIENTES" msprop:Generator_UserTableName="CLIENTES" msprop:Generator_RowDeletedName="CLIENTESRowDeleted" msprop:Generator_RowChangedName="CLIENTESRowChanged" msprop:Generator_RowClassName="CLIENTESRow" msprop:Generator_RowChangingName="CLIENTESRowChanging" msprop:Generator_RowEvArgName="CLIENTESRowChangeEvent" msprop:Generator_RowEvHandlerName="CLIENTESRowChangeEventHandler" msprop:Generator_TableClassName="CLIENTESDataTable" msprop:Generator_TableVarName="tableCLIENTES" msprop:Generator_RowDeletingName="CLIENTESRowDeleting" msprop:Generator_TablePropName="CLIENTES">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="CLI_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="CLI_CODIGO" msprop:Generator_ColumnPropNameInRow="CLI_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCLI_CODIGO" msprop:Generator_ColumnPropNameInTable="CLI_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="CLI_RAZONSOCIAL" msprop:Generator_UserColumnName="CLI_RAZONSOCIAL" msprop:Generator_ColumnPropNameInRow="CLI_RAZONSOCIAL" msprop:Generator_ColumnVarNameInTable="columnCLI_RAZONSOCIAL" msprop:Generator_ColumnPropNameInTable="CLI_RAZONSOCIALColumn" minOccurs="0">
+              <xs:element name="CLI_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="CLI_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCLI_CODIGO" msprop:Generator_ColumnPropNameInRow="CLI_CODIGO" msprop:Generator_ColumnPropNameInTable="CLI_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="CLI_RAZONSOCIAL" msprop:Generator_UserColumnName="CLI_RAZONSOCIAL" msprop:Generator_ColumnVarNameInTable="columnCLI_RAZONSOCIAL" msprop:Generator_ColumnPropNameInRow="CLI_RAZONSOCIAL" msprop:Generator_ColumnPropNameInTable="CLI_RAZONSOCIALColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="80" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="CLI_TELEFONO" msprop:Generator_UserColumnName="CLI_TELEFONO" msprop:Generator_ColumnPropNameInRow="CLI_TELEFONO" msprop:Generator_ColumnVarNameInTable="columnCLI_TELEFONO" msprop:Generator_ColumnPropNameInTable="CLI_TELEFONOColumn" minOccurs="0">
+              <xs:element name="CLI_TELEFONO" msprop:Generator_UserColumnName="CLI_TELEFONO" msprop:Generator_ColumnVarNameInTable="columnCLI_TELEFONO" msprop:Generator_ColumnPropNameInRow="CLI_TELEFONO" msprop:Generator_ColumnPropNameInTable="CLI_TELEFONOColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="30" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="CLI_FECHAALTA" msprop:Generator_UserColumnName="CLI_FECHAALTA" msprop:Generator_ColumnPropNameInRow="CLI_FECHAALTA" msprop:Generator_ColumnVarNameInTable="columnCLI_FECHAALTA" msprop:Generator_ColumnPropNameInTable="CLI_FECHAALTAColumn" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="CLI_FECHABAJA" msprop:Generator_UserColumnName="CLI_FECHABAJA" msprop:Generator_ColumnPropNameInRow="CLI_FECHABAJA" msprop:Generator_ColumnVarNameInTable="columnCLI_FECHABAJA" msprop:Generator_ColumnPropNameInTable="CLI_FECHABAJAColumn" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="CLI_MOTIVOBAJA" msprop:Generator_UserColumnName="CLI_MOTIVOBAJA" msprop:Generator_ColumnPropNameInRow="CLI_MOTIVOBAJA" msprop:Generator_ColumnVarNameInTable="columnCLI_MOTIVOBAJA" msprop:Generator_ColumnPropNameInTable="CLI_MOTIVOBAJAColumn" minOccurs="0">
+              <xs:element name="CLI_FECHAALTA" msprop:Generator_UserColumnName="CLI_FECHAALTA" msprop:Generator_ColumnVarNameInTable="columnCLI_FECHAALTA" msprop:Generator_ColumnPropNameInRow="CLI_FECHAALTA" msprop:Generator_ColumnPropNameInTable="CLI_FECHAALTAColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CLI_FECHABAJA" msprop:Generator_UserColumnName="CLI_FECHABAJA" msprop:Generator_ColumnVarNameInTable="columnCLI_FECHABAJA" msprop:Generator_ColumnPropNameInRow="CLI_FECHABAJA" msprop:Generator_ColumnPropNameInTable="CLI_FECHABAJAColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CLI_MOTIVOBAJA" msprop:Generator_UserColumnName="CLI_MOTIVOBAJA" msprop:Generator_ColumnVarNameInTable="columnCLI_MOTIVOBAJA" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="CLI_MOTIVOBAJA" msprop:Generator_ColumnPropNameInTable="CLI_MOTIVOBAJAColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="255" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="CLI_MAIL" msprop:Generator_UserColumnName="CLI_MAIL" msprop:Generator_ColumnPropNameInRow="CLI_MAIL" msprop:Generator_ColumnVarNameInTable="columnCLI_MAIL" msprop:Generator_ColumnPropNameInTable="CLI_MAILColumn" minOccurs="0">
+              <xs:element name="CLI_MAIL" msprop:Generator_UserColumnName="CLI_MAIL" msprop:Generator_ColumnVarNameInTable="columnCLI_MAIL" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="CLI_MAIL" msprop:Generator_ColumnPropNameInTable="CLI_MAILColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="CLI_ESTADO" msprop:Generator_UserColumnName="CLI_ESTADO" msprop:Generator_ColumnPropNameInRow="CLI_ESTADO" msprop:Generator_ColumnVarNameInTable="columnCLI_ESTADO" msprop:Generator_ColumnPropNameInTable="CLI_ESTADOColumn" minOccurs="0">
+              <xs:element name="CLI_ESTADO" msprop:Generator_UserColumnName="CLI_ESTADO" msprop:Generator_ColumnVarNameInTable="columnCLI_ESTADO" msprop:Generator_ColumnPropNameInRow="CLI_ESTADO" msprop:Generator_ColumnPropNameInTable="CLI_ESTADOColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="1" />
@@ -457,18 +457,18 @@ SELECT MCA_CODIGO, CLI_CODIGO, MCA_NOMBRE FROM MARCAS WHERE (MCA_CODIGO = @MCA_C
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="ESTADO_PEDIDOS" msprop:Generator_UserTableName="ESTADO_PEDIDOS" msprop:Generator_RowDeletedName="ESTADO_PEDIDOSRowDeleted" msprop:Generator_TableClassName="ESTADO_PEDIDOSDataTable" msprop:Generator_RowChangedName="ESTADO_PEDIDOSRowChanged" msprop:Generator_RowClassName="ESTADO_PEDIDOSRow" msprop:Generator_RowChangingName="ESTADO_PEDIDOSRowChanging" msprop:Generator_RowEvArgName="ESTADO_PEDIDOSRowChangeEvent" msprop:Generator_RowEvHandlerName="ESTADO_PEDIDOSRowChangeEventHandler" msprop:Generator_TablePropName="ESTADO_PEDIDOS" msprop:Generator_TableVarName="tableESTADO_PEDIDOS" msprop:Generator_RowDeletingName="ESTADO_PEDIDOSRowDeleting">
+        <xs:element name="ESTADO_PEDIDOS" msprop:Generator_UserTableName="ESTADO_PEDIDOS" msprop:Generator_RowDeletedName="ESTADO_PEDIDOSRowDeleted" msprop:Generator_RowChangedName="ESTADO_PEDIDOSRowChanged" msprop:Generator_RowClassName="ESTADO_PEDIDOSRow" msprop:Generator_RowChangingName="ESTADO_PEDIDOSRowChanging" msprop:Generator_RowEvArgName="ESTADO_PEDIDOSRowChangeEvent" msprop:Generator_RowEvHandlerName="ESTADO_PEDIDOSRowChangeEventHandler" msprop:Generator_TableClassName="ESTADO_PEDIDOSDataTable" msprop:Generator_TableVarName="tableESTADO_PEDIDOS" msprop:Generator_RowDeletingName="ESTADO_PEDIDOSRowDeleting" msprop:Generator_TablePropName="ESTADO_PEDIDOS">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="EPED_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="EPED_CODIGO" msprop:Generator_ColumnPropNameInRow="EPED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnEPED_CODIGO" msprop:Generator_ColumnPropNameInTable="EPED_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="EPED_NOMBRE" msprop:Generator_UserColumnName="EPED_NOMBRE" msprop:Generator_ColumnPropNameInRow="EPED_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnEPED_NOMBRE" msprop:Generator_ColumnPropNameInTable="EPED_NOMBREColumn" minOccurs="0">
+              <xs:element name="EPED_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="EPED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnEPED_CODIGO" msprop:Generator_ColumnPropNameInRow="EPED_CODIGO" msprop:Generator_ColumnPropNameInTable="EPED_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="EPED_NOMBRE" msprop:Generator_UserColumnName="EPED_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnEPED_NOMBRE" msprop:Generator_ColumnPropNameInRow="EPED_NOMBRE" msprop:Generator_ColumnPropNameInTable="EPED_NOMBREColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="80" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="EPED_DESCRIPCION" msprop:Generator_UserColumnName="EPED_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="EPED_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnEPED_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="EPED_DESCRIPCIONColumn" minOccurs="0">
+              <xs:element name="EPED_DESCRIPCION" msprop:Generator_UserColumnName="EPED_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnEPED_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="EPED_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="EPED_DESCRIPCIONColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="200" />
@@ -478,29 +478,29 @@ SELECT MCA_CODIGO, CLI_CODIGO, MCA_NOMBRE FROM MARCAS WHERE (MCA_CODIGO = @MCA_C
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="DETALLE_PEDIDOS" msprop:Generator_UserTableName="DETALLE_PEDIDOS" msprop:Generator_RowDeletedName="DETALLE_PEDIDOSRowDeleted" msprop:Generator_TableClassName="DETALLE_PEDIDOSDataTable" msprop:Generator_RowChangedName="DETALLE_PEDIDOSRowChanged" msprop:Generator_RowClassName="DETALLE_PEDIDOSRow" msprop:Generator_RowChangingName="DETALLE_PEDIDOSRowChanging" msprop:Generator_RowEvArgName="DETALLE_PEDIDOSRowChangeEvent" msprop:Generator_RowEvHandlerName="DETALLE_PEDIDOSRowChangeEventHandler" msprop:Generator_TablePropName="DETALLE_PEDIDOS" msprop:Generator_TableVarName="tableDETALLE_PEDIDOS" msprop:Generator_RowDeletingName="DETALLE_PEDIDOSRowDeleting">
+        <xs:element name="DETALLE_PEDIDOS" msprop:Generator_UserTableName="DETALLE_PEDIDOS" msprop:Generator_RowDeletedName="DETALLE_PEDIDOSRowDeleted" msprop:Generator_RowChangedName="DETALLE_PEDIDOSRowChanged" msprop:Generator_RowClassName="DETALLE_PEDIDOSRow" msprop:Generator_RowChangingName="DETALLE_PEDIDOSRowChanging" msprop:Generator_RowEvArgName="DETALLE_PEDIDOSRowChangeEvent" msprop:Generator_RowEvHandlerName="DETALLE_PEDIDOSRowChangeEventHandler" msprop:Generator_TableClassName="DETALLE_PEDIDOSDataTable" msprop:Generator_TableVarName="tableDETALLE_PEDIDOS" msprop:Generator_RowDeletingName="DETALLE_PEDIDOSRowDeleting" msprop:Generator_TablePropName="DETALLE_PEDIDOS">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="DPED_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="DPED_CODIGO" msprop:Generator_ColumnPropNameInRow="DPED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnDPED_CODIGO" msprop:Generator_ColumnPropNameInTable="DPED_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="PED_NUMERO" msprop:Generator_UserColumnName="PED_NUMERO" msprop:Generator_ColumnPropNameInRow="PED_NUMERO" msprop:Generator_ColumnVarNameInTable="columnPED_NUMERO" msprop:Generator_ColumnPropNameInTable="PED_NUMEROColumn" type="xs:decimal" />
-              <xs:element name="EDPED_CODIGO" msprop:Generator_UserColumnName="EDPED_CODIGO" msprop:Generator_ColumnPropNameInRow="EDPED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnEDPED_CODIGO" msprop:Generator_ColumnPropNameInTable="EDPED_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="COC_CODIGO" msprop:Generator_UserColumnName="COC_CODIGO" msprop:Generator_ColumnPropNameInRow="COC_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCOC_CODIGO" msprop:Generator_ColumnPropNameInTable="COC_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="DPED_CANTIDAD" msprop:Generator_UserColumnName="DPED_CANTIDAD" msprop:Generator_ColumnPropNameInRow="DPED_CANTIDAD" msprop:Generator_ColumnVarNameInTable="columnDPED_CANTIDAD" msprop:Generator_ColumnPropNameInTable="DPED_CANTIDADColumn" type="xs:int" />
+              <xs:element name="DPED_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="DPED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnDPED_CODIGO" msprop:Generator_ColumnPropNameInRow="DPED_CODIGO" msprop:Generator_ColumnPropNameInTable="DPED_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="PED_NUMERO" msprop:Generator_UserColumnName="PED_NUMERO" msprop:Generator_ColumnVarNameInTable="columnPED_NUMERO" msprop:Generator_ColumnPropNameInRow="PED_NUMERO" msprop:Generator_ColumnPropNameInTable="PED_NUMEROColumn" type="xs:decimal" />
+              <xs:element name="EDPED_CODIGO" msprop:Generator_UserColumnName="EDPED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnEDPED_CODIGO" msprop:Generator_ColumnPropNameInRow="EDPED_CODIGO" msprop:Generator_ColumnPropNameInTable="EDPED_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="COC_CODIGO" msprop:Generator_UserColumnName="COC_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCOC_CODIGO" msprop:Generator_ColumnPropNameInRow="COC_CODIGO" msprop:Generator_ColumnPropNameInTable="COC_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="DPED_CANTIDAD" msprop:Generator_UserColumnName="DPED_CANTIDAD" msprop:Generator_ColumnVarNameInTable="columnDPED_CANTIDAD" msprop:Generator_ColumnPropNameInRow="DPED_CANTIDAD" msprop:Generator_ColumnPropNameInTable="DPED_CANTIDADColumn" type="xs:int" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="ESTADO_DETALLE_PEDIDOS" msprop:Generator_UserTableName="ESTADO_DETALLE_PEDIDOS" msprop:Generator_RowDeletedName="ESTADO_DETALLE_PEDIDOSRowDeleted" msprop:Generator_TableClassName="ESTADO_DETALLE_PEDIDOSDataTable" msprop:Generator_RowChangedName="ESTADO_DETALLE_PEDIDOSRowChanged" msprop:Generator_RowClassName="ESTADO_DETALLE_PEDIDOSRow" msprop:Generator_RowChangingName="ESTADO_DETALLE_PEDIDOSRowChanging" msprop:Generator_RowEvArgName="ESTADO_DETALLE_PEDIDOSRowChangeEvent" msprop:Generator_RowEvHandlerName="ESTADO_DETALLE_PEDIDOSRowChangeEventHandler" msprop:Generator_TablePropName="ESTADO_DETALLE_PEDIDOS" msprop:Generator_TableVarName="tableESTADO_DETALLE_PEDIDOS" msprop:Generator_RowDeletingName="ESTADO_DETALLE_PEDIDOSRowDeleting">
+        <xs:element name="ESTADO_DETALLE_PEDIDOS" msprop:Generator_UserTableName="ESTADO_DETALLE_PEDIDOS" msprop:Generator_RowDeletedName="ESTADO_DETALLE_PEDIDOSRowDeleted" msprop:Generator_RowChangedName="ESTADO_DETALLE_PEDIDOSRowChanged" msprop:Generator_RowClassName="ESTADO_DETALLE_PEDIDOSRow" msprop:Generator_RowChangingName="ESTADO_DETALLE_PEDIDOSRowChanging" msprop:Generator_RowEvArgName="ESTADO_DETALLE_PEDIDOSRowChangeEvent" msprop:Generator_RowEvHandlerName="ESTADO_DETALLE_PEDIDOSRowChangeEventHandler" msprop:Generator_TableClassName="ESTADO_DETALLE_PEDIDOSDataTable" msprop:Generator_TableVarName="tableESTADO_DETALLE_PEDIDOS" msprop:Generator_RowDeletingName="ESTADO_DETALLE_PEDIDOSRowDeleting" msprop:Generator_TablePropName="ESTADO_DETALLE_PEDIDOS">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="EDPED_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="EDPED_CODIGO" msprop:Generator_ColumnPropNameInRow="EDPED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnEDPED_CODIGO" msprop:Generator_ColumnPropNameInTable="EDPED_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="EDPED_NOMBRE" msprop:Generator_UserColumnName="EDPED_NOMBRE" msprop:Generator_ColumnPropNameInRow="EDPED_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnEDPED_NOMBRE" msprop:Generator_ColumnPropNameInTable="EDPED_NOMBREColumn" minOccurs="0">
+              <xs:element name="EDPED_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="EDPED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnEDPED_CODIGO" msprop:Generator_ColumnPropNameInRow="EDPED_CODIGO" msprop:Generator_ColumnPropNameInTable="EDPED_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="EDPED_NOMBRE" msprop:Generator_UserColumnName="EDPED_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnEDPED_NOMBRE" msprop:Generator_ColumnPropNameInRow="EDPED_NOMBRE" msprop:Generator_ColumnPropNameInTable="EDPED_NOMBREColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="80" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="EDPED_DESCRIPCION" msprop:Generator_UserColumnName="EDPED_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="EDPED_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnEDPED_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="EDPED_DESCRIPCIONColumn" minOccurs="0">
+              <xs:element name="EDPED_DESCRIPCION" msprop:Generator_UserColumnName="EDPED_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnEDPED_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="EDPED_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="EDPED_DESCRIPCIONColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="200" />
@@ -510,12 +510,12 @@ SELECT MCA_CODIGO, CLI_CODIGO, MCA_NOMBRE FROM MARCAS WHERE (MCA_CODIGO = @MCA_C
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="MARCAS" msprop:Generator_UserTableName="MARCAS" msprop:Generator_RowDeletedName="MARCASRowDeleted" msprop:Generator_TableClassName="MARCASDataTable" msprop:Generator_RowChangedName="MARCASRowChanged" msprop:Generator_RowClassName="MARCASRow" msprop:Generator_RowChangingName="MARCASRowChanging" msprop:Generator_RowEvArgName="MARCASRowChangeEvent" msprop:Generator_RowEvHandlerName="MARCASRowChangeEventHandler" msprop:Generator_TablePropName="MARCAS" msprop:Generator_TableVarName="tableMARCAS" msprop:Generator_RowDeletingName="MARCASRowDeleting">
+        <xs:element name="MARCAS" msprop:Generator_UserTableName="MARCAS" msprop:Generator_RowDeletedName="MARCASRowDeleted" msprop:Generator_RowChangedName="MARCASRowChanged" msprop:Generator_RowClassName="MARCASRow" msprop:Generator_RowChangingName="MARCASRowChanging" msprop:Generator_RowEvArgName="MARCASRowChangeEvent" msprop:Generator_RowEvHandlerName="MARCASRowChangeEventHandler" msprop:Generator_TableClassName="MARCASDataTable" msprop:Generator_TableVarName="tableMARCAS" msprop:Generator_RowDeletingName="MARCASRowDeleting" msprop:Generator_TablePropName="MARCAS">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="MCA_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="MCA_CODIGO" msprop:Generator_ColumnPropNameInRow="MCA_CODIGO" msprop:Generator_ColumnVarNameInTable="columnMCA_CODIGO" msprop:Generator_ColumnPropNameInTable="MCA_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="CLI_CODIGO" msprop:Generator_UserColumnName="CLI_CODIGO" msprop:Generator_ColumnPropNameInRow="CLI_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCLI_CODIGO" msprop:Generator_ColumnPropNameInTable="CLI_CODIGOColumn" type="xs:decimal" minOccurs="0" />
-              <xs:element name="MCA_NOMBRE" msprop:Generator_UserColumnName="MCA_NOMBRE" msprop:Generator_ColumnPropNameInRow="MCA_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnMCA_NOMBRE" msprop:Generator_ColumnPropNameInTable="MCA_NOMBREColumn" minOccurs="0">
+              <xs:element name="MCA_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="MCA_CODIGO" msprop:Generator_ColumnVarNameInTable="columnMCA_CODIGO" msprop:Generator_ColumnPropNameInRow="MCA_CODIGO" msprop:Generator_ColumnPropNameInTable="MCA_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="CLI_CODIGO" msprop:Generator_UserColumnName="CLI_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCLI_CODIGO" msprop:Generator_ColumnPropNameInRow="CLI_CODIGO" msprop:Generator_ColumnPropNameInTable="CLI_CODIGOColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="MCA_NOMBRE" msprop:Generator_UserColumnName="MCA_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnMCA_NOMBRE" msprop:Generator_ColumnPropNameInRow="MCA_NOMBRE" msprop:Generator_ColumnPropNameInTable="MCA_NOMBREColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="80" />

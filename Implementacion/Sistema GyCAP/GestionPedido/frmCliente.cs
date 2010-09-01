@@ -104,7 +104,6 @@ namespace GyCAP.UI.GestionPedido
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcABM.SelectedTab = tpBuscar;
-                    btnBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
                     setControles(false);
@@ -282,7 +281,7 @@ namespace GyCAP.UI.GestionPedido
             txtRazonSocial.Text = dsCliente.CLIENTES.FindByCLI_CODIGO(codigoCliente).CLI_RAZONSOCIAL;
             txtTelefono.Text = dsCliente.CLIENTES.FindByCLI_CODIGO(codigoCliente).CLI_TELEFONO;
             txtMail.Text = dsCliente.CLIENTES.FindByCLI_CODIGO(codigoCliente).CLI_MAIL;
-            //cboEstado
+            //cboEstado.SelectedI
             txtMotivoBaja.Text = dsCliente.CLIENTES.FindByCLI_CODIGO(codigoCliente).CLI_MOTIVOBAJA;
             
         }
@@ -329,12 +328,15 @@ namespace GyCAP.UI.GestionPedido
                     cliente.Telefono = txtTelefono.Text.Trim();
                     cliente.MotivoBaja = txtMotivoBaja.Text.Trim();  
                     cliente.FechaAlta = BLL.DBBLL.GetFechaServidor();
-                    cliente.Estado = cboEstado.GetSelectedText(); 
+                    if (cboEstado.SelectedItem.ToString().Substring(0, 1) == "A")
+                        cliente.Estado = "A";
+                    else
+                        cliente.Estado = "I";
 
                     try
                     {
                         //Primero lo creamos en la db
-                        cliente.Codigo = BLL.ClienteBLL.Insertar( cliente);
+                        cliente.Codigo = BLL.ClienteBLL.Insertar(cliente);
                         //Ahora lo agregamos al dataset
                         Data.dsCliente.CLIENTESRow rowCliente = dsCliente.CLIENTES.NewCLIENTESRow();
                         //Indicamos que comienza la edición de la fila
@@ -387,7 +389,10 @@ namespace GyCAP.UI.GestionPedido
                     cliente.Mail = txtMail.Text.Trim();
                     cliente.Telefono = txtTelefono.Text.Trim();
                     cliente.MotivoBaja = txtMotivoBaja.Text.Trim();
-                    cliente.Estado = cboEstado.GetSelectedText(); 
+                    if (cboEstado.SelectedItem.ToString().Substring(0, 1) == "A")
+                        cliente.Estado = "A";
+                    else
+                        cliente.Estado = "I";
 
                     try
                     {
@@ -427,6 +432,29 @@ namespace GyCAP.UI.GestionPedido
             {
                 MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            //if (e.Value.ToString() != String.Empty)
+            //{
+            //string nombre;
+            //switch (dgvLista.Columns[e.ColumnIndex].Name)
+            //{
+            //    case "CLI_ESTADO":
+            //        nombre = string.Empty;
+            //        if (dsCliente.CLIENTES.FindByCLI_CODIGO(Convert.ToInt32(e.Value)).CLI_ESTADO == "A")
+            //            nombre = "Activo";
+            //        else if (dsCliente.CLIENTES.FindByCLI_CODIGO(Convert.ToInt32(e.Value)).CLI_ESTADO == "I")
+            //            nombre = "Inactivo";
+
+            //        e.Value = nombre;    
+            //        break;
+            //    default:
+            //        break;
+            //}
+
+            //}
         }
 
 
