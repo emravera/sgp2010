@@ -83,6 +83,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Agregamos la columnas
             dgvDatos.Columns.Add("DPMES_CODIGO", "Código");
             dgvDatos.Columns.Add("PMES_CODIGO", "Mes");
+            dgvDatos.Columns.Add("DIAPMES_CODIGO", "Dia");
             dgvDatos.Columns.Add("COC_CODIGO", "Cocina Codigo");
             dgvDatos.Columns.Add("DPMES_CANTIDADESTIMADA", "Cantidad Estimada");
             dgvDatos.Columns.Add("DPMES_CANTIDADREAL", "Cantidad Real");
