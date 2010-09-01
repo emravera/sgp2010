@@ -24,5 +24,22 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        //Metodo que valida que no exista un plan semanal para ese año, mes y semana ya creado
+        public static bool Validar(int codigoPlanMensual, int semana)
+        {
+            string sql = @"SELECT count(ps.psem_codigo)
+                           FROM PLANES_MENSUALES as pm, PLANES_SEMANALES as ps
+                           WHERE pm.pmes_codigo=ps.pmes_codigo and ps.psem_semana=@p0 and pm.pmes_codigo=@p1";
+
+            object[] valorParametros = { codigoPlanMensual, semana };
+            try
+            {
+                int cantidad = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+                if (cantidad == 0) return true;
+                else return false;
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
     }
 }

@@ -17,6 +17,12 @@ namespace GyCAP.BLL
             DAL.PlanSemanalDAL.obtenerPS(dtPlanSemanal, codigoPlanMensual);
         }
 
+        //Metodo que busca y verifica si existe un plan semanal para un anio y mes determinado
+        public static bool validarDetalle(int codigoPlanMensual, int numeroSemana)
+        {
+           return DAL.PlanSemanalDAL.Validar(codigoPlanMensual, numeroSemana);
+        }
+
 
 
 
