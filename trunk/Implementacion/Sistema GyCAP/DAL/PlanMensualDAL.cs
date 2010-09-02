@@ -147,7 +147,7 @@ namespace GyCAP.DAL
                 {
                     object[] valorParam = { plan.Codigo,row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA };
                     row.BeginEdit();
-                    row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, null));
+                    row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
                     row.PMES_CODIGO = plan.Codigo;
                     row.EndEdit();                    
                 }
@@ -182,7 +182,7 @@ namespace GyCAP.DAL
                 {
                     object[] valorParam = { plan.Codigo, row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA };
                     row.BeginEdit();
-                    row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, null));
+                    row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
                     row.PMES_CODIGO = plan.Codigo;
                     row.EndEdit();
                 }
@@ -190,14 +190,16 @@ namespace GyCAP.DAL
                 sql = "UPDATE [DETALLE_PLANES_MENSUALES] SET dpmes_cantidadestimada=@p0 ";
                 foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])planMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
                 {
-                    object[] valorParam = { row.DPMES_CANTIDADESTIMADA };
+                    object[] valorPar = { row.DPMES_CANTIDADESTIMADA };
+                    DB.executeNonQuery(sql, valorPar, transaccion);
                 }
 
                 //Elimino las que fueron sacadas
                 sql = "DELETE FROM [DETALLE_PLANES_MENSUALES] WHERE dpmes_codigo=@p0 ";
                 foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])planMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.Deleted))
                 {
-                    object[] valorParam = {Convert.ToInt32(row["DPMES_CODIGO", System.Data.DataRowVersion.Original])};
+                    object[] valorPara = {Convert.ToInt32(row["DPMES_CODIGO", System.Data.DataRowVersion.Original])};
+                    DB.executeNonQuery(sql, valorPara, transaccion);
                 }
 
                 transaccion.Commit();

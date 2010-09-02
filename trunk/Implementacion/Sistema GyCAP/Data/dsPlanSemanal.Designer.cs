@@ -655,7 +655,6 @@ namespace GyCAP.Data {
                 this.columnPSEM_CODIGO.AutoIncrementSeed = -1;
                 this.columnPSEM_CODIGO.AutoIncrementStep = -1;
                 this.columnPSEM_CODIGO.AllowDBNull = false;
-                this.columnPSEM_CODIGO.ReadOnly = true;
                 this.columnPSEM_CODIGO.Unique = true;
                 this.columnPMES_CODIGO.AllowDBNull = false;
             }
@@ -2154,7 +2153,6 @@ namespace GyCAP.Data {
                 this.columnDIAPSEM_CODIGO.AutoIncrementSeed = -1;
                 this.columnDIAPSEM_CODIGO.AutoIncrementStep = -1;
                 this.columnDIAPSEM_CODIGO.AllowDBNull = false;
-                this.columnDIAPSEM_CODIGO.ReadOnly = true;
                 this.columnDIAPSEM_CODIGO.Unique = true;
                 this.columnDIAPSEM_DIA.MaxLength = 50;
                 this.columnPSEM_CODIGO.AllowDBNull = false;
@@ -2464,7 +2462,6 @@ namespace GyCAP.Data {
                 this.columnDPSEM_CODIGO.AutoIncrementSeed = -1;
                 this.columnDPSEM_CODIGO.AutoIncrementStep = -1;
                 this.columnDPSEM_CODIGO.AllowDBNull = false;
-                this.columnDPSEM_CODIGO.ReadOnly = true;
                 this.columnDPSEM_CODIGO.Unique = true;
                 this.columnCOC_CODIGO.AllowDBNull = false;
                 this.columnDIAPSEM_CODIGO.AllowDBNull = false;
