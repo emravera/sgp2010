@@ -16,7 +16,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         private enum estadoUI { nuevoAutomatico, nuevoManual, consultar, modificar };
         private estadoUI estadoInterface;
         private enum tipoNodo { anio, mes, semana, dia, detalleDia };
-        public static readonly int estadoInicialNuevoAutmatico = 1; //Para generar las OT de fomra automática
+        public static readonly int estadoInicialNuevoAutmatico = 1; //Para generar las OT de forma automática
         public static readonly int estadoInicialNuevoManual = 2; //Para generar OT de forma manual
         Data.dsPlanSemanal dsPlanSemanal = new GyCAP.Data.dsPlanSemanal();
         Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
@@ -253,8 +253,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             tvDetallePlan.EndUpdate();
             tvDetallePlan.ExpandAll();
         }
-        
-        private void CargarPlan(int codigoMes)
+
+        #region CargarPlanMensual - Desactivado
+        /*private void CargarPlan(int codigoMes)
         {
             foreach (Data.dsPlanSemanal.PLANES_MENSUALESRow rowMes in (Data.dsPlanSemanal.PLANES_MENSUALESRow[])dsPlanSemanal.PLANES_MENSUALES.Select("PMES_CODIGO = " + codigoMes))
             {
@@ -298,7 +299,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                 tvDetallePlan.EndUpdate();
                 tvDetallePlan.ExpandAll();
             }
-        }
+        }*/
+        #endregion
 
         private void button_MouseDown(object sender, MouseEventArgs e)
         {
