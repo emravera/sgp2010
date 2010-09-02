@@ -205,6 +205,21 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        public static void ObtenerHojaRuta(int codigoHoja, bool detalle, Data.dsHojaRuta dsHojaRuta)
+        {
+            string sql = @"SELECT hr_codigo, hr_nombre, hr_descripcion, hr_activo, hr_fechaalta FROM HOJAS_RUTA WHERE hr_codigo = @p0";
+            object[] valoresParametros = { codigoHoja };
+            try
+            {
+                DB.FillDataTable(dsHojaRuta.HOJAS_RUTA, sql, valoresParametros);
+                if (detalle)
+                {
+                    ObtenerDetalleHoja(codigoHoja, dsHojaRuta);
+                }
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+        
         private static void ObtenerDetalleHoja(Data.dsHojaRuta ds)
         {
             string sql = "SELECT cxhr_codigo, cto_codigo, hr_codigo, cxhr_secuencia FROM CENTROSXHOJARUTA WHERE hr_codigo = @p0";
@@ -214,6 +229,18 @@ namespace GyCAP.DAL
             {
                 valorParametros = new object[] { row.HR_CODIGO };
                 DB.FillDataTable(ds.CENTROSXHOJARUTA, sql, valorParametros);
+            }
+        }
+
+        private static void ObtenerDetalleHoja(int codigoHoja, Data.dsHojaRuta ds)
+        {
+            string sql = "SELECT cxhr_codigo, cto_codigo, hr_codigo, cxhr_secuencia FROM CENTROSXHOJARUTA WHERE hr_codigo = @p0";
+            object[] valorParametros = { codigoHoja };
+
+            DB.FillDataTable(ds.CENTROSXHOJARUTA, sql, valorParametros);
+            foreach (Data.dsHojaRuta.CENTROSXHOJARUTARow rowCxHR in (Data.dsHojaRuta.CENTROSXHOJARUTARow[])ds.CENTROSXHOJARUTA.Select("hr_codigo = " + codigoHoja))
+            {
+                CentroTrabajoDAL.ObtenerCentroTrabajo(Convert.ToInt32(rowCxHR.CTO_CODIGO), true, ds);
             }
         }
     }

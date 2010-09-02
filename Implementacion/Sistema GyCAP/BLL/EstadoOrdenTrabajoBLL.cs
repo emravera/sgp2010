@@ -12,5 +12,7 @@ namespace GyCAP.BLL
         {
             DAL.EstadoOrdenTrabajoDAL.ObtenerEstados(dtEstadosOrden);
         }
+
+        
     }
 }

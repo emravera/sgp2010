@@ -196,5 +196,23 @@ namespace GyCAP.DAL
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
+
+        public static int ObtenerCodigoEstructuraActiva(int codigoCocina)
+        {
+            string sql = "SELECT count(estr_codigo) FROM ESTRUCTURAS WHERE coc_codigo = @p0 AND estr_activo = @p1";
+            object[] valorParametros = { codigoCocina, EstructuraDAL.EstructuraActiva };
+            int codigo = 0;
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) != 0)
+                {
+                    sql = "SELECT estr_codigo FROM ESTRUCTURAS WHERE coc_codigo = @p0 AND estr_activo = @p1";
+                    codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+                }
+
+                return codigo;
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
     }
 }

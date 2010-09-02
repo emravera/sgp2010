@@ -254,8 +254,12 @@ namespace GyCAP.DAL
         /// <returns>Un objeto DateTime.</returns>
         public static DateTime GetFechaServidor()
         {
-            string sql = "SELECT GetDate()";
-            return DateTime.Parse(executeScalar(sql, null, null).ToString());
+            try
+            {
+                string sql = "SELECT GetDate()";
+                return DateTime.Parse(executeScalar(sql, null, null).ToString());
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
     }
 }

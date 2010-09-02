@@ -288,6 +288,39 @@ namespace GyCAP.DAL
             }
         }
 
+        public static void ObtenerSubconjunto(int codigoSubconjunto, bool detalle, Data.dsEstructura ds)
+        {
+            string sql = @"SELECT sconj_codigo, sconj_nombre, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo, 
+                                  sconj_codigoparte, sconj_costo, hr_codigo, sconj_costofijo FROM SUBCONJUNTOS WHERE sconj_codigo = @p0";
+            object[] valorParametros = { codigoSubconjunto };
+
+            try
+            {
+                DB.FillDataTable(ds.SUBCONJUNTOS, sql, valorParametros);
+                if (detalle)
+                {
+                    //Obtenemos las piezas que forman el subconjunto y su detalle
+                    ObtenerDetalleSubconjunto(codigoSubconjunto, ds);
+                }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+        
+        private static void ObtenerDetalleSubconjunto(int codigoSubconjunto, Data.dsEstructura ds)
+        {
+            string sql = @"SELECT pxsc_codigo, sconj_codigo, pza_codigo, pxsc_cantidad
+                         FROM PIEZASXSUBCONJUNTO WHERE sconj_codigo = @p0";
+
+            object[] valorParametros = { codigoSubconjunto };
+
+            DB.FillDataTable(ds.PIEZASXSUBCONJUNTO, sql, valorParametros);
+            //Obtenemos las piezas y su detalle
+            foreach (Data.dsEstructura.PIEZASXSUBCONJUNTORow rowPxSC in (Data.dsEstructura.PIEZASXSUBCONJUNTORow[])ds.PIEZASXSUBCONJUNTO.Select("SCONJ_CODIGO = " + codigoSubconjunto))
+            {
+                PiezaDAL.ObtenerPieza(Convert.ToInt32(rowPxSC.PZA_CODIGO), true, ds);
+            }
+        }
+
         public static bool PuedeEliminarse(int codigo)
         {
             string sqlSCXC = "SELECT count(sconj_codigo) FROM SUBCONJUNTOSXCONJUNTO WHERE sconj_codigo = @p0";

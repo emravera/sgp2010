@@ -65,5 +65,16 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+
+        public static void ObtenerTurno(int codigoTurno, Data.dsHojaRuta ds)
+        {
+            string sql = "SELECT tur_codigo, tur_nombre, tur_horainicio, tur_horafin FROM TURNOS_TRABAJO WHERE tur_codigo = @p0";
+            object[] valoresParametros = { codigoTurno };
+            try
+            {
+                DB.FillDataTable(ds.TURNOS_TRABAJO, sql, valoresParametros);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
     }
 }

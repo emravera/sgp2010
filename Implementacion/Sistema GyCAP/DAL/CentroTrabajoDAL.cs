@@ -347,6 +347,25 @@ namespace GyCAP.DAL
                 catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
         }
+
+        public static void ObtenerCentroTrabajo(int codigoCentro, bool turnos, Data.dsHojaRuta ds)
+        {
+            string sql = @"SELECT cto_codigo, cto_nombre, sec_codigo, cto_tipo, cto_horastrabajonormal, cto_horastrabajoextendido,
+                                  cto_activo, cto_descripcion, cto_capacidadciclo, cto_horasciclo, cto_tiempoantes, cto_tiempodespues, 
+                                  cto_eficiencia, cto_costohora, cto_costociclo FROM CENTROS_TRABAJOS WHERE cto_codigo = @p0";
+
+            object[] valoresParametros = { codigoCentro };
+
+            try
+            {
+                DB.FillDataTable(ds.CENTROS_TRABAJOS, sql, valoresParametros);
+                if (turnos)
+                {
+
+                }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
         
         private static void ObtenerTurnosCentro(Data.dsCentroTrabajo ds)
         {
@@ -356,6 +375,18 @@ namespace GyCAP.DAL
             {
                 valorParametros = new object[] { row.CTO_CODIGO };
                 DB.FillDataTable(ds.TURNOSXCENTROTRABAJO, sql, valorParametros);
+            }
+        }
+
+        private static void ObtenerTurnosCentro(int codigoCentro, Data.dsHojaRuta ds)
+        {
+            string sql = "SELECT txct_codigo, tur_codigo, cto_codigo FROM TURNOSXCENTROTRABAJO WHERE cto_codigo = @p0";
+            object[] valorParametros = { codigoCentro };
+            DB.FillDataTable(ds.TURNOSXCENTROTRABAJO, sql, valorParametros);
+
+            foreach (Data.dsHojaRuta.TURNOSXCENTROTRABAJORow rowTxCTO in (Data.dsHojaRuta.TURNOSXCENTROTRABAJORow[])ds.TURNOSXCENTROTRABAJO.Select("cto_codigo = " + codigoCentro))
+            {
+                TurnoTrabajoDAL.ObtenerTurno(Convert.ToInt32(rowTxCTO.TUR_CODIGO), ds);
             }
         }
     }

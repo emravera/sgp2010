@@ -87,6 +87,7 @@
     <Compile Include="Excepciones\ElementoInexistenteException.cs" />
     <Compile Include="Excepciones\ElementoExistenteException.cs" />
     <Compile Include="Excepciones\ErrorInesperadoException.cs" />
+    <Compile Include="Excepciones\OrdenTrabajoException.cs" />
     <Compile Include="Excepciones\ValorNoNegativoException.cs" />
     <Compile Include="FabricanteMaquina.cs" />
     <Compile Include="GrupoEstructura.cs" />

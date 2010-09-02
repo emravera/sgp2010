@@ -411,7 +411,24 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        //Obtiene el detalle de todos los subconjuntos buscados, de uso interno por el método buscador ObtenerSubconjuntos
+        public static void ObtenerConjunto(int codigoConjunto, bool detalle, Data.dsEstructura dsEstructura)
+        {
+            string sql = @"SELECT conj_codigo, conj_nombre, conj_descripcion, conj_cantidadstock, par_codigo, pno_codigo
+                                 ,conj_codigoparte, conj_costo, hr_codigo, conj_costofijo FROM CONJUNTOS WHERE conj_codigo = @p0";
+            object[] valorParametros = { codigoConjunto };
+
+            try
+            {
+                DB.FillDataTable(dsEstructura.CONJUNTOS, sql, valorParametros);
+                if (detalle)
+                {
+                    ObtenerDetalleConjunto(codigoConjunto, dsEstructura);
+                }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+        
+        //Obtiene el detalle de todos los conjuntos buscados, de uso interno por el método buscador ObtenerSubconjuntos
         private static void ObtenerDetalleConjuntos(Data.dsEstructura ds)
         {
             string sql = @"SELECT scxcj_codigo, conj_codigo, sconj_codigo, scxcj_cantidad
@@ -429,6 +446,33 @@ namespace GyCAP.DAL
                 DB.FillDataTable(ds.PIEZASXCONJUNTO, sql2, valorParametros);
             }
         }
+
+        //Obtiene el detalle del conjuntos buscado
+        private static void ObtenerDetalleConjunto(int codigoConjunto, Data.dsEstructura ds)
+        {
+            string sql = @"SELECT scxcj_codigo, conj_codigo, sconj_codigo, scxcj_cantidad
+                          FROM SUBCONJUNTOSXCONJUNTO WHERE conj_codigo = @p0";
+
+            string sql2 = @"SELECT pxcj_codigo, conj_codigo, pza_codigo, pxcj_cantidad
+                          FROM PIEZASXCONJUNTO WHERE conj_codigo = @p0";
+
+            object[] valorParametros = { codigoConjunto };
+
+            DB.FillDataTable(ds.SUBCONJUNTOSXCONJUNTO, sql, valorParametros);
+
+            foreach (Data.dsEstructura.SUBCONJUNTOSXCONJUNTORow rowSCxC in (Data.dsEstructura.SUBCONJUNTOSXCONJUNTORow[])ds.SUBCONJUNTOSXCONJUNTO.Select("conj_codigo = " + codigoConjunto))
+            {
+                SubConjuntoDAL.ObtenerSubconjunto(Convert.ToInt32(rowSCxC.SCONJ_CODIGO), true, ds);
+            }
+
+            DB.FillDataTable(ds.PIEZASXCONJUNTO, sql2, valorParametros);
+
+            foreach (Data.dsEstructura.PIEZASXCONJUNTORow rowPxC in (Data.dsEstructura.PIEZASXCONJUNTORow[])ds.PIEZASXCONJUNTO.Select("conj_codigo = " + codigoConjunto))
+            {
+                PiezaDAL.ObtenerPieza(Convert.ToInt32(rowPxC.PZA_CODIGO), true, ds);
+            }
+        }
+       
         
         #region ObtenerDetalles modificado en IT2
 

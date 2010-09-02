@@ -85,5 +85,10 @@ namespace GyCAP.BLL
             }
             catch (System.IO.FileNotFoundException) { return BLL.Properties.Resources.sinimagen; }
         }
+
+        public static int ObtenerCodigoEstructuraActiva(int codigoCocina)
+        {
+            return DAL.CocinaDAL.ObtenerCodigoEstructuraActiva(codigoCocina);
+        }
     }
 }

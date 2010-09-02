@@ -233,7 +233,7 @@ namespace GyCAP.DAL
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
         public static Entidades.Pieza ObtenerPieza(int codigoPieza)
         {
-            string sql = @"SELECT pza_nombre, te_terminacion, pza_descripcion, pza_cantidadstock, par_codigo, pno_codigo, pza_codigoparte 
+            string sql = @"SELECT pza_codigo, pza_nombre, te_codigo, pza_descripcion, pza_cantidadstock, par_codigo, pno_codigo, pza_codigoparte 
                                   ,pza_costo, hr_codigo, pza_costofijo FROM PIEZAS WHERE pza_codigo = @p0";
             object[] valorParametros = { codigoPieza };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
@@ -339,8 +339,26 @@ namespace GyCAP.DAL
                 DB.FillDataTable(dtPiezas, sql, valorParametros);
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-        }        
+        }
 
+        public static void ObtenerPieza(int codigoPieza, bool detalle, Data.dsEstructura ds)
+        {
+            string sql = @"SELECT pza_codigo, pza_nombre, te_codigo, pza_descripcion, pza_cantidadstock, par_codigo, pno_codigo, pza_codigoparte 
+                                  ,pza_costo, hr_codigo, pza_costofijo FROM PIEZAS WHERE pza_codigo = @p0";
+            object[] valorParametros = { codigoPieza };
+            try
+            {
+                DB.FillDataTable(ds.PIEZAS, sql, valorParametros);
+                if (detalle)
+                {
+                    //Obtenemos las materias primas que forman la pieza
+                    ObtenerDetallePieza(codigoPieza, ds);
+                }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+
+        }
+        
         public static bool PuedeEliminarse(int codigo)
         {
             string sqlPXC = "SELECT count(pza_codigo) FROM PIEZASXCONJUNTO WHERE pza_codigo = @p0";
@@ -370,6 +388,21 @@ namespace GyCAP.DAL
             {
                 valorParametros = new object[] { rowPieza.PZA_CODIGO };
                 DB.FillDataTable(ds.MATERIASPRIMASXPIEZA, sql, valorParametros);
+            }
+        }
+
+        private static void ObtenerDetallePieza(int codigoPieza, Data.dsEstructura ds)
+        {
+            string sql = @"SELECT mpxp_codigo, pza_codigo, mp_codigo, mpxp_cantidad
+                         FROM MATERIASPRIMASXPIEZA WHERE pza_codigo = @p0";
+
+            object[] valorParametros = { codigoPieza };
+
+            DB.FillDataTable(ds.MATERIASPRIMASXPIEZA, sql, valorParametros);
+            //Obtenemos las materias primas que forman la pieza
+            foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow rowMPxP in (Data.dsEstructura.MATERIASPRIMASXPIEZARow[])ds.MATERIASPRIMASXPIEZA.Select("pza_codigo = " + codigoPieza))
+            {
+                MateriaPrimaDAL.ObtenerMateriaPrima(Convert.ToInt32(rowMPxP.MP_CODIGO), ds);
             }
         }
 
