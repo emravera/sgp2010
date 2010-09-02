@@ -33,118 +33,118 @@
             this.tcOrdenTrabajo = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnGenerar = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.tvDetallePlan = new System.Windows.Forms.TreeView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.panelAccionesOrdenTrabajo = new System.Windows.Forms.Panel();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.dgvListaOrdenTrabajo = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.cbAnioBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbMesBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.cbSemanaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
-            this.dtpTiempoTotal = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.txtOrigenOrden = new System.Windows.Forms.TextBox();
-            this.cbHojaRuta = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbEstructura = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.dtpHoraFin = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.dtpHoraInicio = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.dtpFechaFinOrden = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.dtpFechaInicioOrden = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.cbEmpleado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbCentroTrabajo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.dtpFechaAltaOrden = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.txtCodigoOrden = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
+            this.nudCantidadOrden = new System.Windows.Forms.NumericUpDown();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.txtTipoParteDetalle = new System.Windows.Forms.TextBox();
+            this.txtParteDetalle = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtOrigenDetalle = new System.Windows.Forms.TextBox();
+            this.txtEstadoDetalle = new System.Windows.Forms.TextBox();
+            this.txtCodigoDetalle = new System.Windows.Forms.TextBox();
+            this.txtNumeroDetalle = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.gbNavegador = new System.Windows.Forms.GroupBox();
             this.bnNavegador = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.tsMenu = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtNumeroOrden = new System.Windows.Forms.TextBox();
-            this.txtEstadoOrden = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.txtCocinaOrden = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.txtNumeroDetalle = new System.Windows.Forms.TextBox();
-            this.txtCodigoDetalle = new System.Windows.Forms.TextBox();
-            this.txtEstadoDetalle = new System.Windows.Forms.TextBox();
-            this.txtOrigenDetalle = new System.Windows.Forms.TextBox();
-            this.seleccionadorFecha1 = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.txtCocinaOrden = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtEstadoOrden = new System.Windows.Forms.TextBox();
+            this.txtNumeroOrden = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtOrigenOrden = new System.Windows.Forms.TextBox();
+            this.txtCodigoOrden = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tsMenu = new System.Windows.Forms.ToolStrip();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.cbAnioBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbMesBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbSemanaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.seleccionadorFecha2 = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
+            this.seleccionadorFecha1 = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.dtpTiempoTotal = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.cbCentroTrabajo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.dtpHoraFin = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.cbHojaRuta = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.dtpHoraInicio = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.cbEstructura = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbEmpleado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.dtpFechaFinOrden = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.dtpFechaInicioOrden = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.dtpFechaAltaOrden = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnConsultar = new System.Windows.Forms.Button();
+            this.btnGenerar = new System.Windows.Forms.Button();
             this.btnDetalleOrden = new System.Windows.Forms.Button();
             this.btnEliminarOrden = new System.Windows.Forms.Button();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.nudCantidadOrden = new System.Windows.Forms.NumericUpDown();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.txtParteDetalle = new System.Windows.Forms.TextBox();
-            this.txtTipoParteDetalle = new System.Windows.Forms.TextBox();
-            this.btnConsultar = new System.Windows.Forms.Button();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tcOrdenTrabajo.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.panelAccionesOrdenTrabajo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaOrdenTrabajo)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.tpDatos.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.gbDatos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadOrden)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.gbNavegador.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bnNavegador)).BeginInit();
             this.bnNavegador.SuspendLayout();
             this.tsMenu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadOrden)).BeginInit();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcOrdenTrabajo
@@ -188,17 +188,71 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Detalle del plan de producción";
             // 
-            // btnGenerar
+            // groupBox5
             // 
-            this.btnGenerar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.System_25;
-            this.btnGenerar.Location = new System.Drawing.Point(593, 123);
-            this.btnGenerar.Name = "btnGenerar";
-            this.btnGenerar.Size = new System.Drawing.Size(82, 36);
-            this.btnGenerar.TabIndex = 8;
-            this.btnGenerar.Text = "Generar";
-            this.btnGenerar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnGenerar.UseVisualStyleBackColor = true;
-            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
+            this.groupBox5.Controls.Add(this.label31);
+            this.groupBox5.Controls.Add(this.label30);
+            this.groupBox5.Controls.Add(this.label11);
+            this.groupBox5.Controls.Add(this.panel3);
+            this.groupBox5.Controls.Add(this.panel2);
+            this.groupBox5.Controls.Add(this.panel1);
+            this.groupBox5.Location = new System.Drawing.Point(593, 15);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(171, 100);
+            this.groupBox5.TabIndex = 9;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Referencias";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(60, 68);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(49, 13);
+            this.label31.TabIndex = 4;
+            this.label31.Text = "Correcto";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(60, 47);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(58, 13);
+            this.label30.TabIndex = 3;
+            this.label30.Text = "Modificado";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(60, 26);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(63, 13);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "Sin órdenes";
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.Black;
+            this.panel3.Location = new System.Drawing.Point(39, 66);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(15, 15);
+            this.panel3.TabIndex = 1;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Yellow;
+            this.panel2.Location = new System.Drawing.Point(39, 45);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(15, 15);
+            this.panel2.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Red;
+            this.panel1.Location = new System.Drawing.Point(39, 24);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(15, 15);
+            this.panel1.TabIndex = 0;
             // 
             // tvDetallePlan
             // 
@@ -211,7 +265,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.panelAccionesOrdenTrabajo);
+            this.groupBox1.Controls.Add(this.groupBox6);
             this.groupBox1.Controls.Add(this.dgvListaOrdenTrabajo);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox1.Location = new System.Drawing.Point(3, 228);
@@ -221,24 +275,50 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Listado de órdenes de trabajo";
             // 
-            // panelAccionesOrdenTrabajo
+            // btnCancelar
             // 
-            this.panelAccionesOrdenTrabajo.Controls.Add(this.btnCancelar);
-            this.panelAccionesOrdenTrabajo.Controls.Add(this.btnGuardar);
-            this.panelAccionesOrdenTrabajo.Controls.Add(this.btnEliminarOrden);
-            this.panelAccionesOrdenTrabajo.Controls.Add(this.btnDetalleOrden);
-            this.panelAccionesOrdenTrabajo.Location = new System.Drawing.Point(615, 20);
-            this.panelAccionesOrdenTrabajo.Name = "panelAccionesOrdenTrabajo";
-            this.panelAccionesOrdenTrabajo.Size = new System.Drawing.Size(143, 250);
-            this.panelAccionesOrdenTrabajo.TabIndex = 1;
+            this.btnCancelar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Cancel_25;
+            this.btnCancelar.Location = new System.Drawing.Point(44, 140);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(85, 40);
+            this.btnCancelar.TabIndex = 3;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnCancelar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Save_25;
+            this.btnGuardar.Location = new System.Drawing.Point(44, 194);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(85, 40);
+            this.btnGuardar.TabIndex = 2;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnGuardar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // dgvListaOrdenTrabajo
             // 
+            this.dgvListaOrdenTrabajo.AllowUserToAddRows = false;
+            this.dgvListaOrdenTrabajo.AllowUserToDeleteRows = false;
             this.dgvListaOrdenTrabajo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListaOrdenTrabajo.Dock = System.Windows.Forms.DockStyle.Left;
             this.dgvListaOrdenTrabajo.Location = new System.Drawing.Point(3, 17);
+            this.dgvListaOrdenTrabajo.MultiSelect = false;
             this.dgvListaOrdenTrabajo.Name = "dgvListaOrdenTrabajo";
-            this.dgvListaOrdenTrabajo.Size = new System.Drawing.Size(595, 256);
+            this.dgvListaOrdenTrabajo.RowHeadersVisible = false;
+            this.dgvListaOrdenTrabajo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvListaOrdenTrabajo.Size = new System.Drawing.Size(574, 256);
             this.dgvListaOrdenTrabajo.TabIndex = 0;
             // 
             // groupBox2
@@ -267,28 +347,6 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Año:";
             // 
-            // cbAnioBuscar
-            // 
-            this.cbAnioBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAnioBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbAnioBuscar.FormattingEnabled = true;
-            this.cbAnioBuscar.Location = new System.Drawing.Point(50, 20);
-            this.cbAnioBuscar.Name = "cbAnioBuscar";
-            this.cbAnioBuscar.Size = new System.Drawing.Size(125, 21);
-            this.cbAnioBuscar.TabIndex = 8;
-            this.cbAnioBuscar.SelectedIndexChanged += new System.EventHandler(this.cbAnioBuscar_SelectedIndexChanged);
-            // 
-            // cbMesBuscar
-            // 
-            this.cbMesBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMesBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbMesBuscar.FormattingEnabled = true;
-            this.cbMesBuscar.Location = new System.Drawing.Point(256, 20);
-            this.cbMesBuscar.Name = "cbMesBuscar";
-            this.cbMesBuscar.Size = new System.Drawing.Size(125, 21);
-            this.cbMesBuscar.TabIndex = 7;
-            this.cbMesBuscar.SelectedIndexChanged += new System.EventHandler(this.cbMesBuscar_SelectedIndexChanged);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -298,18 +356,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Mes:";
             // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.lupa_20;
-            this.btnBuscar.Location = new System.Drawing.Point(683, 17);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscar.TabIndex = 6;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -318,16 +364,6 @@
             this.label5.Size = new System.Drawing.Size(49, 13);
             this.label5.TabIndex = 1;
             this.label5.Text = "Semana:";
-            // 
-            // cbSemanaBuscar
-            // 
-            this.cbSemanaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSemanaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbSemanaBuscar.FormattingEnabled = true;
-            this.cbSemanaBuscar.Location = new System.Drawing.Point(473, 20);
-            this.cbSemanaBuscar.Name = "cbSemanaBuscar";
-            this.cbSemanaBuscar.Size = new System.Drawing.Size(125, 21);
-            this.cbSemanaBuscar.TabIndex = 3;
             // 
             // tpDatos
             // 
@@ -389,131 +425,162 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos de la Orden de Trabajo";
             // 
-            // dtpTiempoTotal
+            // nudCantidadOrden
             // 
-            this.dtpTiempoTotal.CustomFormat = " ";
-            this.dtpTiempoTotal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpTiempoTotal.Location = new System.Drawing.Point(592, 226);
-            this.dtpTiempoTotal.Name = "dtpTiempoTotal";
-            this.dtpTiempoTotal.Size = new System.Drawing.Size(149, 21);
-            this.dtpTiempoTotal.TabIndex = 38;
+            this.nudCantidadOrden.Location = new System.Drawing.Point(602, 87);
+            this.nudCantidadOrden.Name = "nudCantidadOrden";
+            this.nudCantidadOrden.Size = new System.Drawing.Size(160, 21);
+            this.nudCantidadOrden.TabIndex = 49;
+            this.nudCantidadOrden.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // txtOrigenOrden
+            // groupBox4
             // 
-            this.txtOrigenOrden.Location = new System.Drawing.Point(602, 25);
-            this.txtOrigenOrden.Name = "txtOrigenOrden";
-            this.txtOrigenOrden.Size = new System.Drawing.Size(160, 21);
-            this.txtOrigenOrden.TabIndex = 37;
+            this.groupBox4.Controls.Add(this.txtTipoParteDetalle);
+            this.groupBox4.Controls.Add(this.txtParteDetalle);
+            this.groupBox4.Controls.Add(this.textBox1);
+            this.groupBox4.Controls.Add(this.seleccionadorFecha2);
+            this.groupBox4.Controls.Add(this.seleccionadorFecha1);
+            this.groupBox4.Controls.Add(this.txtOrigenDetalle);
+            this.groupBox4.Controls.Add(this.txtEstadoDetalle);
+            this.groupBox4.Controls.Add(this.txtCodigoDetalle);
+            this.groupBox4.Controls.Add(this.txtNumeroDetalle);
+            this.groupBox4.Controls.Add(this.label29);
+            this.groupBox4.Controls.Add(this.label28);
+            this.groupBox4.Controls.Add(this.label27);
+            this.groupBox4.Controls.Add(this.label26);
+            this.groupBox4.Controls.Add(this.label25);
+            this.groupBox4.Controls.Add(this.label12);
+            this.groupBox4.Controls.Add(this.label22);
+            this.groupBox4.Controls.Add(this.label20);
+            this.groupBox4.Controls.Add(this.label21);
+            this.groupBox4.Controls.Add(this.dtpTiempoTotal);
+            this.groupBox4.Controls.Add(this.label18);
+            this.groupBox4.Controls.Add(this.cbCentroTrabajo);
+            this.groupBox4.Controls.Add(this.dtpHoraFin);
+            this.groupBox4.Controls.Add(this.cbHojaRuta);
+            this.groupBox4.Controls.Add(this.dtpHoraInicio);
+            this.groupBox4.Controls.Add(this.label19);
+            this.groupBox4.Controls.Add(this.cbEstructura);
+            this.groupBox4.Controls.Add(this.cbEmpleado);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.label8);
+            this.groupBox4.Controls.Add(this.gbNavegador);
+            this.groupBox4.Controls.Add(this.label3);
+            this.groupBox4.Controls.Add(this.label10);
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Location = new System.Drawing.Point(6, 128);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(762, 308);
+            this.groupBox4.TabIndex = 48;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Detalle de la orden de trabajo";
             // 
-            // cbHojaRuta
+            // txtTipoParteDetalle
             // 
-            this.cbHojaRuta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbHojaRuta.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbHojaRuta.FormattingEnabled = true;
-            this.cbHojaRuta.Location = new System.Drawing.Point(439, 144);
-            this.cbHojaRuta.Name = "cbHojaRuta";
-            this.cbHojaRuta.Size = new System.Drawing.Size(200, 21);
-            this.cbHojaRuta.TabIndex = 36;
+            this.txtTipoParteDetalle.Location = new System.Drawing.Point(325, 57);
+            this.txtTipoParteDetalle.Name = "txtTipoParteDetalle";
+            this.txtTipoParteDetalle.ReadOnly = true;
+            this.txtTipoParteDetalle.Size = new System.Drawing.Size(165, 21);
+            this.txtTipoParteDetalle.TabIndex = 54;
             // 
-            // cbEstructura
+            // txtParteDetalle
             // 
-            this.cbEstructura.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEstructura.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbEstructura.FormattingEnabled = true;
-            this.cbEstructura.Location = new System.Drawing.Point(118, 144);
-            this.cbEstructura.Name = "cbEstructura";
-            this.cbEstructura.Size = new System.Drawing.Size(200, 21);
-            this.cbEstructura.TabIndex = 35;
+            this.txtParteDetalle.Location = new System.Drawing.Point(70, 57);
+            this.txtParteDetalle.Name = "txtParteDetalle";
+            this.txtParteDetalle.ReadOnly = true;
+            this.txtParteDetalle.Size = new System.Drawing.Size(165, 21);
+            this.txtParteDetalle.TabIndex = 53;
             // 
-            // dtpHoraFin
+            // textBox1
             // 
-            this.dtpHoraFin.CustomFormat = " ";
-            this.dtpHoraFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpHoraFin.Location = new System.Drawing.Point(358, 226);
-            this.dtpHoraFin.Name = "dtpHoraFin";
-            this.dtpHoraFin.Size = new System.Drawing.Size(141, 21);
-            this.dtpHoraFin.TabIndex = 34;
+            this.textBox1.Location = new System.Drawing.Point(576, 57);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(165, 21);
+            this.textBox1.TabIndex = 52;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // dtpHoraInicio
+            // txtOrigenDetalle
             // 
-            this.dtpHoraInicio.CustomFormat = " ";
-            this.dtpHoraInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpHoraInicio.Location = new System.Drawing.Point(88, 228);
-            this.dtpHoraInicio.Name = "dtpHoraInicio";
-            this.dtpHoraInicio.Size = new System.Drawing.Size(144, 21);
-            this.dtpHoraInicio.TabIndex = 33;
+            this.txtOrigenDetalle.Location = new System.Drawing.Point(576, 24);
+            this.txtOrigenDetalle.Name = "txtOrigenDetalle";
+            this.txtOrigenDetalle.Size = new System.Drawing.Size(165, 21);
+            this.txtOrigenDetalle.TabIndex = 49;
             // 
-            // dtpFechaFinOrden
+            // txtEstadoDetalle
             // 
-            this.dtpFechaFinOrden.CustomFormat = " ";
-            this.dtpFechaFinOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaFinOrden.Location = new System.Drawing.Point(602, 54);
-            this.dtpFechaFinOrden.Name = "dtpFechaFinOrden";
-            this.dtpFechaFinOrden.Size = new System.Drawing.Size(160, 21);
-            this.dtpFechaFinOrden.TabIndex = 32;
+            this.txtEstadoDetalle.Location = new System.Drawing.Point(592, 192);
+            this.txtEstadoDetalle.Name = "txtEstadoDetalle";
+            this.txtEstadoDetalle.Size = new System.Drawing.Size(149, 21);
+            this.txtEstadoDetalle.TabIndex = 48;
             // 
-            // dtpFechaInicioOrden
+            // txtCodigoDetalle
             // 
-            this.dtpFechaInicioOrden.CustomFormat = " ";
-            this.dtpFechaInicioOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaInicioOrden.Location = new System.Drawing.Point(325, 54);
-            this.dtpFechaInicioOrden.Name = "dtpFechaInicioOrden";
-            this.dtpFechaInicioOrden.Size = new System.Drawing.Size(160, 21);
-            this.dtpFechaInicioOrden.TabIndex = 31;
+            this.txtCodigoDetalle.Location = new System.Drawing.Point(325, 24);
+            this.txtCodigoDetalle.Name = "txtCodigoDetalle";
+            this.txtCodigoDetalle.Size = new System.Drawing.Size(165, 21);
+            this.txtCodigoDetalle.TabIndex = 47;
             // 
-            // cbEmpleado
+            // txtNumeroDetalle
             // 
-            this.cbEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEmpleado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbEmpleado.FormattingEnabled = true;
-            this.cbEmpleado.Location = new System.Drawing.Point(439, 111);
-            this.cbEmpleado.Name = "cbEmpleado";
-            this.cbEmpleado.Size = new System.Drawing.Size(200, 21);
-            this.cbEmpleado.TabIndex = 27;
+            this.txtNumeroDetalle.Location = new System.Drawing.Point(70, 24);
+            this.txtNumeroDetalle.Name = "txtNumeroDetalle";
+            this.txtNumeroDetalle.Size = new System.Drawing.Size(165, 21);
+            this.txtNumeroDetalle.TabIndex = 46;
             // 
-            // cbCentroTrabajo
+            // label29
             // 
-            this.cbCentroTrabajo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCentroTrabajo.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbCentroTrabajo.FormattingEnabled = true;
-            this.cbCentroTrabajo.Location = new System.Drawing.Point(118, 111);
-            this.cbCentroTrabajo.Name = "cbCentroTrabajo";
-            this.cbCentroTrabajo.Size = new System.Drawing.Size(200, 21);
-            this.cbCentroTrabajo.TabIndex = 26;
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(259, 27);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(44, 13);
+            this.label29.TabIndex = 45;
+            this.label29.Text = "Código:";
             // 
-            // dtpFechaAltaOrden
+            // label28
             // 
-            this.dtpFechaAltaOrden.CustomFormat = " ";
-            this.dtpFechaAltaOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaAltaOrden.Location = new System.Drawing.Point(78, 85);
-            this.dtpFechaAltaOrden.Name = "dtpFechaAltaOrden";
-            this.dtpFechaAltaOrden.Size = new System.Drawing.Size(160, 21);
-            this.dtpFechaAltaOrden.TabIndex = 25;
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(516, 195);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(44, 13);
+            this.label28.TabIndex = 44;
+            this.label28.Text = "Estado:";
             // 
-            // txtCodigoOrden
+            // label27
             // 
-            this.txtCodigoOrden.Location = new System.Drawing.Point(325, 25);
-            this.txtCodigoOrden.Name = "txtCodigoOrden";
-            this.txtCodigoOrden.Size = new System.Drawing.Size(160, 21);
-            this.txtCodigoOrden.TabIndex = 23;
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(516, 27);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(43, 13);
+            this.label27.TabIndex = 43;
+            this.label27.Text = "Origen:";
             // 
-            // label24
+            // label26
             // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(501, 58);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(95, 13);
-            this.label24.TabIndex = 22;
-            this.label24.Text = "Fecha finalización:";
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(16, 27);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(48, 13);
+            this.label26.TabIndex = 42;
+            this.label26.Text = "Número:";
             // 
-            // label23
+            // label25
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(253, 58);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(66, 13);
-            this.label23.TabIndex = 21;
-            this.label23.Text = "Fecha inicio:";
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(257, 195);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(95, 13);
+            this.label25.TabIndex = 41;
+            this.label25.Text = "Fecha finalización:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(16, 195);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(66, 13);
+            this.label12.TabIndex = 40;
+            this.label12.Text = "Fecha inicio:";
             // 
             // label22
             // 
@@ -524,15 +591,6 @@
             this.label22.TabIndex = 20;
             this.label22.Text = "Tipo parte:";
             // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(516, 60);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(54, 13);
-            this.label21.TabIndex = 19;
-            this.label21.Text = "Cantidad:";
-            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -542,14 +600,14 @@
             this.label20.TabIndex = 18;
             this.label20.Text = "Parte:";
             // 
-            // label19
+            // label21
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(362, 114);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(57, 13);
-            this.label19.TabIndex = 17;
-            this.label19.Text = "Empleado:";
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(516, 60);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(54, 13);
+            this.label21.TabIndex = 19;
+            this.label21.Text = "Cantidad:";
             // 
             // label18
             // 
@@ -560,59 +618,14 @@
             this.label18.TabIndex = 16;
             this.label18.Text = "Centro de trabajo:";
             // 
-            // label17
+            // label19
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(11, 89);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(61, 13);
-            this.label17.TabIndex = 15;
-            this.label17.Text = "Fecha alta:";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(11, 58);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(44, 13);
-            this.label16.TabIndex = 14;
-            this.label16.Text = "Estado:";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(253, 28);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(44, 13);
-            this.label15.TabIndex = 13;
-            this.label15.Text = "Código:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(516, 230);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(70, 13);
-            this.label10.TabIndex = 8;
-            this.label10.Text = "Tiempo total:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(501, 28);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(43, 13);
-            this.label9.TabIndex = 7;
-            this.label9.Text = "Origen:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(362, 147);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(71, 13);
-            this.label8.TabIndex = 6;
-            this.label8.Text = "Hoja de ruta:";
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(362, 114);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(57, 13);
+            this.label19.TabIndex = 17;
+            this.label19.Text = "Empleado:";
             // 
             // label7
             // 
@@ -623,23 +636,14 @@
             this.label7.TabIndex = 5;
             this.label7.Text = "Estructura:";
             // 
-            // label4
+            // label8
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(257, 230);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Hora finalización:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 230);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Hora inicio:";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(362, 147);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(71, 13);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "Hoja de ruta:";
             // 
             // gbNavegador
             // 
@@ -684,24 +688,6 @@
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
-            // 
             // bindingNavigatorSeparator
             // 
             this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
@@ -721,6 +707,438 @@
             this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 230);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(60, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Hora inicio:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(516, 230);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(70, 13);
+            this.label10.TabIndex = 8;
+            this.label10.Text = "Tiempo total:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(257, 230);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(89, 13);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Hora finalización:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(501, 89);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(54, 13);
+            this.label14.TabIndex = 46;
+            this.label14.Text = "Cantidad:";
+            // 
+            // txtCocinaOrden
+            // 
+            this.txtCocinaOrden.Location = new System.Drawing.Point(325, 86);
+            this.txtCocinaOrden.Name = "txtCocinaOrden";
+            this.txtCocinaOrden.ReadOnly = true;
+            this.txtCocinaOrden.Size = new System.Drawing.Size(160, 21);
+            this.txtCocinaOrden.TabIndex = 45;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(253, 89);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(43, 13);
+            this.label13.TabIndex = 44;
+            this.label13.Text = "Cocina:";
+            // 
+            // txtEstadoOrden
+            // 
+            this.txtEstadoOrden.Location = new System.Drawing.Point(78, 55);
+            this.txtEstadoOrden.Name = "txtEstadoOrden";
+            this.txtEstadoOrden.ReadOnly = true;
+            this.txtEstadoOrden.Size = new System.Drawing.Size(160, 21);
+            this.txtEstadoOrden.TabIndex = 42;
+            // 
+            // txtNumeroOrden
+            // 
+            this.txtNumeroOrden.Location = new System.Drawing.Point(78, 25);
+            this.txtNumeroOrden.Name = "txtNumeroOrden";
+            this.txtNumeroOrden.ReadOnly = true;
+            this.txtNumeroOrden.Size = new System.Drawing.Size(160, 21);
+            this.txtNumeroOrden.TabIndex = 41;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(11, 28);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(48, 13);
+            this.label6.TabIndex = 40;
+            this.label6.Text = "Número:";
+            // 
+            // txtOrigenOrden
+            // 
+            this.txtOrigenOrden.Location = new System.Drawing.Point(602, 25);
+            this.txtOrigenOrden.Name = "txtOrigenOrden";
+            this.txtOrigenOrden.Size = new System.Drawing.Size(160, 21);
+            this.txtOrigenOrden.TabIndex = 37;
+            // 
+            // txtCodigoOrden
+            // 
+            this.txtCodigoOrden.Location = new System.Drawing.Point(325, 25);
+            this.txtCodigoOrden.Name = "txtCodigoOrden";
+            this.txtCodigoOrden.Size = new System.Drawing.Size(160, 21);
+            this.txtCodigoOrden.TabIndex = 23;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(501, 58);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(95, 13);
+            this.label24.TabIndex = 22;
+            this.label24.Text = "Fecha finalización:";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(253, 58);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(66, 13);
+            this.label23.TabIndex = 21;
+            this.label23.Text = "Fecha inicio:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(11, 89);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(61, 13);
+            this.label17.TabIndex = 15;
+            this.label17.Text = "Fecha alta:";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(11, 58);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(44, 13);
+            this.label16.TabIndex = 14;
+            this.label16.Text = "Estado:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(253, 28);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(44, 13);
+            this.label15.TabIndex = 13;
+            this.label15.Text = "Código:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(501, 28);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(43, 13);
+            this.label9.TabIndex = 7;
+            this.label9.Text = "Origen:";
+            // 
+            // tsMenu
+            // 
+            this.tsMenu.BackColor = System.Drawing.Color.Silver;
+            this.tsMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tsMenu.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator1,
+            this.btnSalir});
+            this.tsMenu.Location = new System.Drawing.Point(0, 0);
+            this.tsMenu.Name = "tsMenu";
+            this.tsMenu.Size = new System.Drawing.Size(794, 50);
+            this.tsMenu.TabIndex = 1;
+            this.tsMenu.Text = "toolStrip1";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.tcOrdenTrabajo, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tsMenu, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(794, 572);
+            this.tableLayoutPanel1.TabIndex = 2;
+            // 
+            // cbAnioBuscar
+            // 
+            this.cbAnioBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAnioBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbAnioBuscar.FormattingEnabled = true;
+            this.cbAnioBuscar.Location = new System.Drawing.Point(50, 20);
+            this.cbAnioBuscar.Name = "cbAnioBuscar";
+            this.cbAnioBuscar.Size = new System.Drawing.Size(125, 21);
+            this.cbAnioBuscar.TabIndex = 8;
+            this.cbAnioBuscar.SelectedIndexChanged += new System.EventHandler(this.cbAnioBuscar_SelectedIndexChanged);
+            // 
+            // cbMesBuscar
+            // 
+            this.cbMesBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMesBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbMesBuscar.FormattingEnabled = true;
+            this.cbMesBuscar.Location = new System.Drawing.Point(256, 20);
+            this.cbMesBuscar.Name = "cbMesBuscar";
+            this.cbMesBuscar.Size = new System.Drawing.Size(125, 21);
+            this.cbMesBuscar.TabIndex = 7;
+            this.cbMesBuscar.SelectedIndexChanged += new System.EventHandler(this.cbMesBuscar_SelectedIndexChanged);
+            // 
+            // cbSemanaBuscar
+            // 
+            this.cbSemanaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSemanaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbSemanaBuscar.FormattingEnabled = true;
+            this.cbSemanaBuscar.Location = new System.Drawing.Point(473, 20);
+            this.cbSemanaBuscar.Name = "cbSemanaBuscar";
+            this.cbSemanaBuscar.Size = new System.Drawing.Size(125, 21);
+            this.cbSemanaBuscar.TabIndex = 3;
+            // 
+            // seleccionadorFecha2
+            // 
+            this.seleccionadorFecha2.CustomFormat = " ";
+            this.seleccionadorFecha2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.seleccionadorFecha2.Location = new System.Drawing.Point(358, 191);
+            this.seleccionadorFecha2.Name = "seleccionadorFecha2";
+            this.seleccionadorFecha2.Size = new System.Drawing.Size(141, 21);
+            this.seleccionadorFecha2.TabIndex = 51;
+            // 
+            // seleccionadorFecha1
+            // 
+            this.seleccionadorFecha1.CustomFormat = " ";
+            this.seleccionadorFecha1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.seleccionadorFecha1.Location = new System.Drawing.Point(88, 191);
+            this.seleccionadorFecha1.Name = "seleccionadorFecha1";
+            this.seleccionadorFecha1.Size = new System.Drawing.Size(144, 21);
+            this.seleccionadorFecha1.TabIndex = 50;
+            // 
+            // dtpTiempoTotal
+            // 
+            this.dtpTiempoTotal.CustomFormat = " ";
+            this.dtpTiempoTotal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpTiempoTotal.Location = new System.Drawing.Point(592, 226);
+            this.dtpTiempoTotal.Name = "dtpTiempoTotal";
+            this.dtpTiempoTotal.Size = new System.Drawing.Size(149, 21);
+            this.dtpTiempoTotal.TabIndex = 38;
+            // 
+            // cbCentroTrabajo
+            // 
+            this.cbCentroTrabajo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCentroTrabajo.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbCentroTrabajo.FormattingEnabled = true;
+            this.cbCentroTrabajo.Location = new System.Drawing.Point(118, 111);
+            this.cbCentroTrabajo.Name = "cbCentroTrabajo";
+            this.cbCentroTrabajo.Size = new System.Drawing.Size(200, 21);
+            this.cbCentroTrabajo.TabIndex = 26;
+            // 
+            // dtpHoraFin
+            // 
+            this.dtpHoraFin.CustomFormat = " ";
+            this.dtpHoraFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpHoraFin.Location = new System.Drawing.Point(358, 226);
+            this.dtpHoraFin.Name = "dtpHoraFin";
+            this.dtpHoraFin.Size = new System.Drawing.Size(141, 21);
+            this.dtpHoraFin.TabIndex = 34;
+            // 
+            // cbHojaRuta
+            // 
+            this.cbHojaRuta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbHojaRuta.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbHojaRuta.FormattingEnabled = true;
+            this.cbHojaRuta.Location = new System.Drawing.Point(439, 144);
+            this.cbHojaRuta.Name = "cbHojaRuta";
+            this.cbHojaRuta.Size = new System.Drawing.Size(200, 21);
+            this.cbHojaRuta.TabIndex = 36;
+            // 
+            // dtpHoraInicio
+            // 
+            this.dtpHoraInicio.CustomFormat = " ";
+            this.dtpHoraInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpHoraInicio.Location = new System.Drawing.Point(88, 228);
+            this.dtpHoraInicio.Name = "dtpHoraInicio";
+            this.dtpHoraInicio.Size = new System.Drawing.Size(144, 21);
+            this.dtpHoraInicio.TabIndex = 33;
+            // 
+            // cbEstructura
+            // 
+            this.cbEstructura.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstructura.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbEstructura.FormattingEnabled = true;
+            this.cbEstructura.Location = new System.Drawing.Point(118, 144);
+            this.cbEstructura.Name = "cbEstructura";
+            this.cbEstructura.Size = new System.Drawing.Size(200, 21);
+            this.cbEstructura.TabIndex = 35;
+            // 
+            // cbEmpleado
+            // 
+            this.cbEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEmpleado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbEmpleado.FormattingEnabled = true;
+            this.cbEmpleado.Location = new System.Drawing.Point(439, 111);
+            this.cbEmpleado.Name = "cbEmpleado";
+            this.cbEmpleado.Size = new System.Drawing.Size(200, 21);
+            this.cbEmpleado.TabIndex = 27;
+            // 
+            // dtpFechaFinOrden
+            // 
+            this.dtpFechaFinOrden.CustomFormat = " ";
+            this.dtpFechaFinOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaFinOrden.Location = new System.Drawing.Point(602, 54);
+            this.dtpFechaFinOrden.Name = "dtpFechaFinOrden";
+            this.dtpFechaFinOrden.Size = new System.Drawing.Size(160, 21);
+            this.dtpFechaFinOrden.TabIndex = 32;
+            // 
+            // dtpFechaInicioOrden
+            // 
+            this.dtpFechaInicioOrden.CustomFormat = " ";
+            this.dtpFechaInicioOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaInicioOrden.Location = new System.Drawing.Point(325, 54);
+            this.dtpFechaInicioOrden.Name = "dtpFechaInicioOrden";
+            this.dtpFechaInicioOrden.Size = new System.Drawing.Size(160, 21);
+            this.dtpFechaInicioOrden.TabIndex = 31;
+            // 
+            // dtpFechaAltaOrden
+            // 
+            this.dtpFechaAltaOrden.CustomFormat = " ";
+            this.dtpFechaAltaOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaAltaOrden.Location = new System.Drawing.Point(78, 85);
+            this.dtpFechaAltaOrden.Name = "dtpFechaAltaOrden";
+            this.dtpFechaAltaOrden.Size = new System.Drawing.Size(160, 21);
+            this.dtpFechaAltaOrden.TabIndex = 25;
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.btnGuardar);
+            this.groupBox6.Controls.Add(this.btnCancelar);
+            this.groupBox6.Controls.Add(this.btnDetalleOrden);
+            this.groupBox6.Controls.Add(this.btnEliminarOrden);
+            this.groupBox6.Location = new System.Drawing.Point(593, 17);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(171, 256);
+            this.groupBox6.TabIndex = 2;
+            this.groupBox6.TabStop = false;
+            // 
+            // btnConsultar
+            // 
+            this.btnConsultar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnConsultar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnConsultar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsultar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_25;
+            this.btnConsultar.Location = new System.Drawing.Point(682, 123);
+            this.btnConsultar.Name = "btnConsultar";
+            this.btnConsultar.Size = new System.Drawing.Size(82, 36);
+            this.btnConsultar.TabIndex = 10;
+            this.btnConsultar.Text = "Ver\r\nórdenes";
+            this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnConsultar.UseVisualStyleBackColor = true;
+            this.btnConsultar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnConsultar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnGenerar
+            // 
+            this.btnGenerar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnGenerar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnGenerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.System_25;
+            this.btnGenerar.Location = new System.Drawing.Point(593, 123);
+            this.btnGenerar.Name = "btnGenerar";
+            this.btnGenerar.Size = new System.Drawing.Size(82, 36);
+            this.btnGenerar.TabIndex = 8;
+            this.btnGenerar.Text = "Generar";
+            this.btnGenerar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnGenerar.UseVisualStyleBackColor = true;
+            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
+            this.btnGenerar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnGenerar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnDetalleOrden
+            // 
+            this.btnDetalleOrden.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnDetalleOrden.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnDetalleOrden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDetalleOrden.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_25;
+            this.btnDetalleOrden.Location = new System.Drawing.Point(44, 32);
+            this.btnDetalleOrden.Name = "btnDetalleOrden";
+            this.btnDetalleOrden.Size = new System.Drawing.Size(85, 40);
+            this.btnDetalleOrden.TabIndex = 0;
+            this.btnDetalleOrden.Text = "Ver\r\ndetalle";
+            this.btnDetalleOrden.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDetalleOrden.UseVisualStyleBackColor = true;
+            this.btnDetalleOrden.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnDetalleOrden.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnEliminarOrden
+            // 
+            this.btnEliminarOrden.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnEliminarOrden.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnEliminarOrden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminarOrden.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Delete_25;
+            this.btnEliminarOrden.Location = new System.Drawing.Point(44, 86);
+            this.btnEliminarOrden.Name = "btnEliminarOrden";
+            this.btnEliminarOrden.Size = new System.Drawing.Size(85, 40);
+            this.btnEliminarOrden.TabIndex = 1;
+            this.btnEliminarOrden.Text = "Eliminar";
+            this.btnEliminarOrden.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEliminarOrden.UseVisualStyleBackColor = true;
+            this.btnEliminarOrden.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnEliminarOrden.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.lupa_20;
+            this.btnBuscar.Location = new System.Drawing.Point(683, 17);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
+            this.btnBuscar.TabIndex = 6;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "Move first";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
+            // 
             // bindingNavigatorMoveNextItem
             // 
             this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -739,26 +1157,6 @@
             this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveLastItem.Text = "Move last";
             // 
-            // tsMenu
-            // 
-            this.tsMenu.BackColor = System.Drawing.Color.Silver;
-            this.tsMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tsMenu.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator1,
-            this.btnSalir});
-            this.tsMenu.Location = new System.Drawing.Point(0, 0);
-            this.tsMenu.Name = "tsMenu";
-            this.tsMenu.Size = new System.Drawing.Size(794, 50);
-            this.tsMenu.TabIndex = 1;
-            this.tsMenu.Text = "toolStrip1";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
-            // 
             // btnSalir
             // 
             this.btnSalir.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Salir_25;
@@ -769,364 +1167,6 @@
             this.btnSalir.Text = "&Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.tcOrdenTrabajo, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tsMenu, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(794, 572);
-            this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(11, 28);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(48, 13);
-            this.label6.TabIndex = 40;
-            this.label6.Text = "Número:";
-            // 
-            // txtNumeroOrden
-            // 
-            this.txtNumeroOrden.Location = new System.Drawing.Point(78, 25);
-            this.txtNumeroOrden.Name = "txtNumeroOrden";
-            this.txtNumeroOrden.ReadOnly = true;
-            this.txtNumeroOrden.Size = new System.Drawing.Size(160, 21);
-            this.txtNumeroOrden.TabIndex = 41;
-            // 
-            // txtEstadoOrden
-            // 
-            this.txtEstadoOrden.Location = new System.Drawing.Point(78, 55);
-            this.txtEstadoOrden.Name = "txtEstadoOrden";
-            this.txtEstadoOrden.ReadOnly = true;
-            this.txtEstadoOrden.Size = new System.Drawing.Size(160, 21);
-            this.txtEstadoOrden.TabIndex = 42;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(253, 89);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(43, 13);
-            this.label13.TabIndex = 44;
-            this.label13.Text = "Cocina:";
-            // 
-            // txtCocinaOrden
-            // 
-            this.txtCocinaOrden.Location = new System.Drawing.Point(325, 86);
-            this.txtCocinaOrden.Name = "txtCocinaOrden";
-            this.txtCocinaOrden.ReadOnly = true;
-            this.txtCocinaOrden.Size = new System.Drawing.Size(160, 21);
-            this.txtCocinaOrden.TabIndex = 45;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(501, 89);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(54, 13);
-            this.label14.TabIndex = 46;
-            this.label14.Text = "Cantidad:";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.txtTipoParteDetalle);
-            this.groupBox4.Controls.Add(this.txtParteDetalle);
-            this.groupBox4.Controls.Add(this.textBox1);
-            this.groupBox4.Controls.Add(this.seleccionadorFecha2);
-            this.groupBox4.Controls.Add(this.seleccionadorFecha1);
-            this.groupBox4.Controls.Add(this.txtOrigenDetalle);
-            this.groupBox4.Controls.Add(this.txtEstadoDetalle);
-            this.groupBox4.Controls.Add(this.txtCodigoDetalle);
-            this.groupBox4.Controls.Add(this.txtNumeroDetalle);
-            this.groupBox4.Controls.Add(this.label29);
-            this.groupBox4.Controls.Add(this.label28);
-            this.groupBox4.Controls.Add(this.label27);
-            this.groupBox4.Controls.Add(this.label26);
-            this.groupBox4.Controls.Add(this.label25);
-            this.groupBox4.Controls.Add(this.label12);
-            this.groupBox4.Controls.Add(this.label22);
-            this.groupBox4.Controls.Add(this.label20);
-            this.groupBox4.Controls.Add(this.label21);
-            this.groupBox4.Controls.Add(this.dtpTiempoTotal);
-            this.groupBox4.Controls.Add(this.label18);
-            this.groupBox4.Controls.Add(this.cbCentroTrabajo);
-            this.groupBox4.Controls.Add(this.dtpHoraFin);
-            this.groupBox4.Controls.Add(this.cbHojaRuta);
-            this.groupBox4.Controls.Add(this.dtpHoraInicio);
-            this.groupBox4.Controls.Add(this.label19);
-            this.groupBox4.Controls.Add(this.cbEstructura);
-            this.groupBox4.Controls.Add(this.cbEmpleado);
-            this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Controls.Add(this.gbNavegador);
-            this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Controls.Add(this.label10);
-            this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Location = new System.Drawing.Point(6, 128);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(762, 308);
-            this.groupBox4.TabIndex = 48;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Detalle de la orden de trabajo";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(16, 195);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(66, 13);
-            this.label12.TabIndex = 40;
-            this.label12.Text = "Fecha inicio:";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(257, 195);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(95, 13);
-            this.label25.TabIndex = 41;
-            this.label25.Text = "Fecha finalización:";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(16, 27);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(48, 13);
-            this.label26.TabIndex = 42;
-            this.label26.Text = "Número:";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(516, 27);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(43, 13);
-            this.label27.TabIndex = 43;
-            this.label27.Text = "Origen:";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(516, 195);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(44, 13);
-            this.label28.TabIndex = 44;
-            this.label28.Text = "Estado:";
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(259, 27);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(44, 13);
-            this.label29.TabIndex = 45;
-            this.label29.Text = "Código:";
-            // 
-            // txtNumeroDetalle
-            // 
-            this.txtNumeroDetalle.Location = new System.Drawing.Point(70, 24);
-            this.txtNumeroDetalle.Name = "txtNumeroDetalle";
-            this.txtNumeroDetalle.Size = new System.Drawing.Size(165, 21);
-            this.txtNumeroDetalle.TabIndex = 46;
-            // 
-            // txtCodigoDetalle
-            // 
-            this.txtCodigoDetalle.Location = new System.Drawing.Point(325, 24);
-            this.txtCodigoDetalle.Name = "txtCodigoDetalle";
-            this.txtCodigoDetalle.Size = new System.Drawing.Size(165, 21);
-            this.txtCodigoDetalle.TabIndex = 47;
-            // 
-            // txtEstadoDetalle
-            // 
-            this.txtEstadoDetalle.Location = new System.Drawing.Point(592, 192);
-            this.txtEstadoDetalle.Name = "txtEstadoDetalle";
-            this.txtEstadoDetalle.Size = new System.Drawing.Size(149, 21);
-            this.txtEstadoDetalle.TabIndex = 48;
-            // 
-            // txtOrigenDetalle
-            // 
-            this.txtOrigenDetalle.Location = new System.Drawing.Point(576, 24);
-            this.txtOrigenDetalle.Name = "txtOrigenDetalle";
-            this.txtOrigenDetalle.Size = new System.Drawing.Size(165, 21);
-            this.txtOrigenDetalle.TabIndex = 49;
-            // 
-            // seleccionadorFecha1
-            // 
-            this.seleccionadorFecha1.CustomFormat = " ";
-            this.seleccionadorFecha1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.seleccionadorFecha1.Location = new System.Drawing.Point(88, 191);
-            this.seleccionadorFecha1.Name = "seleccionadorFecha1";
-            this.seleccionadorFecha1.Size = new System.Drawing.Size(144, 21);
-            this.seleccionadorFecha1.TabIndex = 50;
-            // 
-            // seleccionadorFecha2
-            // 
-            this.seleccionadorFecha2.CustomFormat = " ";
-            this.seleccionadorFecha2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.seleccionadorFecha2.Location = new System.Drawing.Point(358, 191);
-            this.seleccionadorFecha2.Name = "seleccionadorFecha2";
-            this.seleccionadorFecha2.Size = new System.Drawing.Size(141, 21);
-            this.seleccionadorFecha2.TabIndex = 51;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.label31);
-            this.groupBox5.Controls.Add(this.label30);
-            this.groupBox5.Controls.Add(this.label11);
-            this.groupBox5.Controls.Add(this.panel3);
-            this.groupBox5.Controls.Add(this.panel2);
-            this.groupBox5.Controls.Add(this.panel1);
-            this.groupBox5.Location = new System.Drawing.Point(593, 15);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(171, 100);
-            this.groupBox5.TabIndex = 9;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Referencias";
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Red;
-            this.panel1.Location = new System.Drawing.Point(39, 24);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(15, 15);
-            this.panel1.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.Yellow;
-            this.panel2.Location = new System.Drawing.Point(39, 45);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(15, 15);
-            this.panel2.TabIndex = 1;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.Black;
-            this.panel3.Location = new System.Drawing.Point(39, 66);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(15, 15);
-            this.panel3.TabIndex = 1;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(60, 26);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(63, 13);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "Sin órdenes";
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(60, 47);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(58, 13);
-            this.label30.TabIndex = 3;
-            this.label30.Text = "Modificado";
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(60, 68);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(49, 13);
-            this.label31.TabIndex = 4;
-            this.label31.Text = "Correcto";
-            // 
-            // btnDetalleOrden
-            // 
-            this.btnDetalleOrden.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_25;
-            this.btnDetalleOrden.Location = new System.Drawing.Point(32, 39);
-            this.btnDetalleOrden.Name = "btnDetalleOrden";
-            this.btnDetalleOrden.Size = new System.Drawing.Size(82, 40);
-            this.btnDetalleOrden.TabIndex = 0;
-            this.btnDetalleOrden.Text = "Ver\r\ndetalle";
-            this.btnDetalleOrden.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDetalleOrden.UseVisualStyleBackColor = true;
-            // 
-            // btnEliminarOrden
-            // 
-            this.btnEliminarOrden.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Delete_25;
-            this.btnEliminarOrden.Location = new System.Drawing.Point(32, 85);
-            this.btnEliminarOrden.Name = "btnEliminarOrden";
-            this.btnEliminarOrden.Size = new System.Drawing.Size(82, 40);
-            this.btnEliminarOrden.TabIndex = 1;
-            this.btnEliminarOrden.Text = "Eliminar";
-            this.btnEliminarOrden.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEliminarOrden.UseVisualStyleBackColor = true;
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Location = new System.Drawing.Point(32, 178);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(82, 40);
-            this.btnGuardar.TabIndex = 2;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(32, 131);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(82, 40);
-            this.btnCancelar.TabIndex = 3;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            // 
-            // nudCantidadOrden
-            // 
-            this.nudCantidadOrden.Location = new System.Drawing.Point(602, 87);
-            this.nudCantidadOrden.Name = "nudCantidadOrden";
-            this.nudCantidadOrden.Size = new System.Drawing.Size(160, 21);
-            this.nudCantidadOrden.TabIndex = 49;
-            this.nudCantidadOrden.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(576, 57);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(165, 21);
-            this.textBox1.TabIndex = 52;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtParteDetalle
-            // 
-            this.txtParteDetalle.Location = new System.Drawing.Point(70, 57);
-            this.txtParteDetalle.Name = "txtParteDetalle";
-            this.txtParteDetalle.ReadOnly = true;
-            this.txtParteDetalle.Size = new System.Drawing.Size(165, 21);
-            this.txtParteDetalle.TabIndex = 53;
-            // 
-            // txtTipoParteDetalle
-            // 
-            this.txtTipoParteDetalle.Location = new System.Drawing.Point(325, 57);
-            this.txtTipoParteDetalle.Name = "txtTipoParteDetalle";
-            this.txtTipoParteDetalle.ReadOnly = true;
-            this.txtTipoParteDetalle.Size = new System.Drawing.Size(165, 21);
-            this.txtTipoParteDetalle.TabIndex = 54;
-            // 
-            // btnConsultar
-            // 
-            this.btnConsultar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_25;
-            this.btnConsultar.Location = new System.Drawing.Point(682, 123);
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(82, 36);
-            this.btnConsultar.TabIndex = 10;
-            this.btnConsultar.Text = "Ver\r\nórdenes";
-            this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnConsultar.UseVisualStyleBackColor = true;
             // 
             // frmGenerarOrdenTrabajo
             // 
@@ -1144,8 +1184,9 @@
             this.tcOrdenTrabajo.ResumeLayout(false);
             this.tpBuscar.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.panelAccionesOrdenTrabajo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaOrdenTrabajo)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -1153,6 +1194,9 @@
             this.gbGuardarCancelar.ResumeLayout(false);
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadOrden)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.gbNavegador.ResumeLayout(false);
             this.gbNavegador.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bnNavegador)).EndInit();
@@ -1162,11 +1206,7 @@
             this.tsMenu.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadOrden)).EndInit();
+            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1180,14 +1220,12 @@
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.GroupBox gbDatos;
         private System.Windows.Forms.ToolStrip tsMenu;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnSalir;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnGenerar;
         private System.Windows.Forms.TreeView tvDetallePlan;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Panel panelAccionesOrdenTrabajo;
         private System.Windows.Forms.DataGridView dgvListaOrdenTrabajo;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label1;
@@ -1270,6 +1308,8 @@
         private System.Windows.Forms.TextBox txtParteDetalle;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnConsultar;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.GroupBox groupBox6;
 
     }
 }

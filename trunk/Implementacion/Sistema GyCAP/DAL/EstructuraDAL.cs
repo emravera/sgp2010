@@ -531,26 +531,55 @@ namespace GyCAP.DAL
                 i++;
             }
 
-            GrupoEstructuraDAL.ObtenerGruposEstructura(codigosEstructuras, dsEstructura);
-            ConjuntoEstructuraDAL.ObtenerConjuntosEstructura(codigosEstructuras, dsEstructura);
-            //SubconjuntoEstructuraDAL.ObtenerSubconjuntosEstructura(codigosEstructuras, dsEstructura); desactivado en IT2
-            PiezaEstructuraDAL.ObtenerPiezasEstructura(codigosEstructuras, dsEstructura);
-            //MateriaPrimaEstructuraDAL.ObtenerMateriasPrimasEstructura(codigosEstructuras, dsEstructura); desactivado en IT2
+            try
+            {
+                GrupoEstructuraDAL.ObtenerGruposEstructura(codigosEstructuras, dsEstructura);
+                ConjuntoEstructuraDAL.ObtenerConjuntosEstructura(codigosEstructuras, dsEstructura);
+                PiezaEstructuraDAL.ObtenerPiezasEstructura(codigosEstructuras, dsEstructura);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            
         }
 
-        public static void ObtenerEstructuraCocina(int codigoCocina, Data.dsEstructura ds, bool detalle)
+        private static void ObtenerDetalleEstructura(int codigoEstructura, Data.dsEstructura dsEstructura)
+        { 
+            int[] codigosEstructuras = { codigoEstructura };
+
+            try
+            {
+                GrupoEstructuraDAL.ObtenerGruposEstructura(codigosEstructuras, dsEstructura);
+                ConjuntoEstructuraDAL.ObtenerConjuntosEstructura(codigosEstructuras, dsEstructura);
+
+                foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow rowCxE in (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select("estr_codigo = " + codigoEstructura))
+                {
+                    ConjuntoDAL.ObtenerConjunto(Convert.ToInt32(rowCxE.CONJ_CODIGO), true, dsEstructura);
+                }
+
+                PiezaEstructuraDAL.ObtenerPiezasEstructura(codigosEstructuras, dsEstructura);
+
+                foreach (Data.dsEstructura.PIEZASXESTRUCTURARow rowPxE in (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select("estr_codigo = " + codigoEstructura))
+                {
+                    PiezaDAL.ObtenerPieza(Convert.ToInt32(rowPxE.PZA_CODIGO), true, dsEstructura);
+                }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+
+        }
+
+        public static void ObtenerEstructura(int codigoEstructura, Data.dsEstructura ds, bool detalle)
         {
             string sql = @"SELECT estr_codigo, estr_nombre, coc_codigo, pno_codigo, estr_descripcion, estr_activo, 
-                          estr_fecha_alta, estr_fecha_modificacion, e_codigo, estr_costo, estr_costofijo FROM ESTRUCTURAS WHERE coc_codigo = @p0";
+                          estr_fecha_alta, estr_fecha_modificacion, e_codigo, estr_costo, estr_costofijo 
+                          FROM ESTRUCTURAS WHERE coc_codigo = @p0";
 
-            object[] valorParametros = { codigoCocina };
+            object[] valorParametros = { codigoEstructura };
             
             try
             {
                 DB.FillDataSet(ds, "ESTRUCTURAS", sql, valorParametros);
                 if (detalle)
                 {                    
-                    ObtenerDetalleEstructura(ds);
+                    ObtenerDetalleEstructura(codigoEstructura, ds);
                 }
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }

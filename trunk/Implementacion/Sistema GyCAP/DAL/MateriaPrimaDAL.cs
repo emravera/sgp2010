@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace GyCAP.DAL
 {
@@ -78,6 +79,19 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
+        }
+
+        public static void ObtenerMateriaPrima(int codigoMP, Data.dsEstructura ds)
+        {
+            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_costo
+                        FROM MATERIAS_PRIMAS WHERE mp_codigo = @p0";
+            object[] valoresParametros = { codigoMP };
+            
+            try
+            {
+                DB.FillDataTable(ds.MATERIAS_PRIMAS, sql, valoresParametros);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
     }

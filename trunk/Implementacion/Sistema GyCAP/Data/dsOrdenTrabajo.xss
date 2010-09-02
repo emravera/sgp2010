@@ -7,24 +7,12 @@
 <DiagramLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ex:showrelationlabel="False" ViewPortX="0" ViewPortY="67" xmlns:ex="urn:schemas-microsoft-com:xml-msdatasource-layout-extended" xmlns="urn:schemas-microsoft-com:xml-msdatasource-layout">
   <Shapes>
     <Shape ID="DesignTable:ESTADO_ORDENES_TRABAJO" ZOrder="8" X="34" Y="91" Height="122" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="75" />
-    <Shape ID="DesignTable:ORDENES_TRABAJO" ZOrder="7" X="147" Y="383" Height="275" Width="257" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="228" />
-    <Shape ID="DesignTable:ORDENES_TRABAJO_MANUAL" ZOrder="5" X="487" Y="445" Height="190" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="143" />
-    <Shape ID="DesignTable:DETALLE_ORDENES_TRABAJO" ZOrder="4" X="496" Y="99" Height="275" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="228" />
+    <Shape ID="DesignTable:ORDENES_TRABAJO_MANUAL" ZOrder="7" X="487" Y="445" Height="190" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="143" />
+    <Shape ID="DesignTable:DETALLE_ORDENES_TRABAJO" ZOrder="6" X="496" Y="99" Height="275" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="228" />
+    <Shape ID="DesignTable:ORDENES_TRABAJO" ZOrder="3" X="124" Y="344" Height="275" Width="257" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="228" />
   </Shapes>
   <Connectors>
-    <Connector ID="DesignRelation:ordenTrabajo_estadoOrdenTrabajo_fk" ZOrder="6" LineWidth="11">
-      <RoutePoints>
-        <Point>
-          <X>226</X>
-          <Y>213</Y>
-        </Point>
-        <Point>
-          <X>226</X>
-          <Y>383</Y>
-        </Point>
-      </RoutePoints>
-    </Connector>
-    <Connector ID="DesignRelation:ESTADO_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO" ZOrder="3" LineWidth="11">
+    <Connector ID="DesignRelation:ESTADO_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO" ZOrder="5" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>334</X>
@@ -36,23 +24,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO" ZOrder="2" LineWidth="11">
-      <RoutePoints>
-        <Point>
-          <X>387</X>
-          <Y>383</Y>
-        </Point>
-        <Point>
-          <X>387</X>
-          <Y>357</Y>
-        </Point>
-        <Point>
-          <X>496</X>
-          <Y>357</Y>
-        </Point>
-      </RoutePoints>
-    </Connector>
-    <Connector ID="DesignRelation:ORDENES_TRABAJO_MANUAL_DETALLE_ORDENES_TRABAJO" ZOrder="1" LineWidth="11">
+    <Connector ID="DesignRelation:ORDENES_TRABAJO_MANUAL_DETALLE_ORDENES_TRABAJO" ZOrder="4" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>641</X>
@@ -61,6 +33,30 @@
         <Point>
           <X>641</X>
           <Y>374</Y>
+        </Point>
+      </RoutePoints>
+    </Connector>
+    <Connector ID="DesignRelation:ordenTrabajo_estadoOrdenTrabajo_fk" ZOrder="2" LineWidth="11">
+      <RoutePoints>
+        <Point>
+          <X>148</X>
+          <Y>213</Y>
+        </Point>
+        <Point>
+          <X>148</X>
+          <Y>344</Y>
+        </Point>
+      </RoutePoints>
+    </Connector>
+    <Connector ID="DesignRelation:ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO" ZOrder="1" LineWidth="11">
+      <RoutePoints>
+        <Point>
+          <X>381</X>
+          <Y>359</Y>
+        </Point>
+        <Point>
+          <X>496</X>
+          <Y>359</Y>
         </Point>
       </RoutePoints>
     </Connector>

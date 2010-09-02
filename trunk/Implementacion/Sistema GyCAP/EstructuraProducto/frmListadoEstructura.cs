@@ -56,7 +56,7 @@ namespace GyCAP.UI.EstructuraProducto
                     dsEstructura.CONJUNTOSXESTRUCTURA.Clear();
                     dsEstructura.GRUPOS_ESTRUCTURA.Clear();
                     dsEstructura.ESTRUCTURAS.Clear();
-                    BLL.EstructuraBLL.ObtenerEstructuraCocina(cbCocinaBuscar.GetSelectedValueInt(), dsEstructura, true);
+                    BLL.EstructuraBLL.ObtenerEstructura(cbCocinaBuscar.GetSelectedValueInt(), dsEstructura, true);
                     dvEstructuras.Table = dsEstructura.ESTRUCTURAS;
                     if (dsEstructura.ESTRUCTURAS.Rows.Count == 0)
                     {

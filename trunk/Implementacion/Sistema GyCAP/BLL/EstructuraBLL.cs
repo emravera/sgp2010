@@ -53,9 +53,9 @@ namespace GyCAP.BLL
             DAL.EstructuraDAL.ObtenerEstructuras(nombre, plano, fechaCreacion, cocina, responsable, activo, ds);
         }
 
-        public static void ObtenerEstructuraCocina(int codigoCocina, Data.dsEstructura ds, bool detalle)
+        public static void ObtenerEstructura(int codigoEstructura, Data.dsEstructura ds, bool detalle)
         {
-            DAL.EstructuraDAL.ObtenerEstructuraCocina(codigoCocina, ds, detalle);
+            DAL.EstructuraDAL.ObtenerEstructura(codigoEstructura, ds, detalle);
         }
     }
 }

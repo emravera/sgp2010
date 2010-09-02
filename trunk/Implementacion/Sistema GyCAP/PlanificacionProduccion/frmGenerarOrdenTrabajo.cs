@@ -21,7 +21,8 @@ namespace GyCAP.UI.PlanificacionProduccion
         Data.dsPlanSemanal dsPlanSemanal = new GyCAP.Data.dsPlanSemanal();
         Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
         Data.dsOrdenTrabajo dsOrdenTrabajo = new GyCAP.Data.dsOrdenTrabajo();
-        DataView dvPlanAnual, dvMensual, dvPlanSemanal, dvOrdenTrabajo;
+        Data.dsHojaRuta dsHojaRuta = new GyCAP.Data.dsHojaRuta();
+        DataView dvPlanAnual, dvMensual, dvPlanSemanal, dvOrdenTrabajo, dvHojaRuta, dvEstructura;
 
         #region Inicio
 
@@ -117,7 +118,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                         {
                             BLL.DetallePlanSemanalBLL.ObtenerDetalle(Convert.ToInt32(rowDia.DIAPSEM_CODIGO), dsPlanSemanal.DETALLE_PLANES_SEMANALES);
                         }
-                        CargarPlan(cbMesBuscar.GetSelectedValueInt());
+                        //CargarPlan(cbMesBuscar.GetSelectedValueInt());
+                        CargarPlanSemanal(cbSemanaBuscar.GetSelectedValueInt());
                     }
                     else
                     {
@@ -208,7 +210,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 BLL.PlanAnualBLL.ObtenerTodos(dsPlanSemanal.PLANES_ANUALES);
                 BLL.CocinaBLL.ObtenerCocinas(dsPlanSemanal.COCINAS);
-                BLL.EstadoOrdenTrabajoBLL.ObtenerEstadosOrden(dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO);
+                BLL.EstadoOrdenTrabajoBLL.ObtenerEstadosOrden(dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO);                
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -218,6 +220,40 @@ namespace GyCAP.UI.PlanificacionProduccion
             cbAnioBuscar.SetDatos(dvPlanAnual, "PAN_CODIGO", "PAN_ANIO", "Seleccione", false);
         }
 
+        private void CargarPlanSemanal(int codigoSemana)
+        {
+            tvDetallePlan.Nodes.Clear();
+            tvDetallePlan.BeginUpdate();
+            
+            TreeNode nodoSemana = new TreeNode();
+            nodoSemana.Name = dsPlanSemanal.PLANES_SEMANALES.FindByPSEM_CODIGO(codigoSemana).PSEM_CODIGO.ToString();
+            nodoSemana.Text = "Semana " + dsPlanSemanal.PLANES_SEMANALES.FindByPSEM_CODIGO(codigoSemana).PSEM_SEMANA.ToString();
+            nodoSemana.Tag = tipoNodo.semana;
+
+            tvDetallePlan.Nodes.Add(nodoSemana);
+
+            foreach (Data.dsPlanSemanal.DIAS_PLAN_SEMANALRow rowDia in dsPlanSemanal.PLANES_SEMANALES.FindByPSEM_CODIGO(codigoSemana).GetDIAS_PLAN_SEMANALRows())
+            {
+                TreeNode nodoDia = new TreeNode();
+                nodoDia.Name = rowDia.DIAPSEM_CODIGO.ToString();
+                nodoDia.Text = rowDia.DIAPSEM_DIA + " - " + rowDia.DIAPSEM_FECHA.ToShortDateString();
+                nodoDia.Tag = tipoNodo.dia;
+                nodoSemana.Nodes.Add(nodoDia);
+
+                foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow rowDetalle in rowDia.GetDETALLE_PLANES_SEMANALESRows())
+                {
+                    TreeNode nodoDetalle = new TreeNode();
+                    nodoDetalle.Name = rowDetalle.DIAPSEM_CODIGO.ToString();
+                    nodoDetalle.Text = "Cocina: " + rowDetalle.COCINASRow.COC_CODIGO_PRODUCTO + " - Cantidad: " + rowDetalle.DPSEM_CANTIDADESTIMADA.ToString();
+                    nodoDetalle.Tag = tipoNodo.detalleDia;
+                    nodoDia.Nodes.Add(nodoDetalle);
+                }
+            }
+
+            tvDetallePlan.EndUpdate();
+            tvDetallePlan.ExpandAll();
+        }
+        
         private void CargarPlan(int codigoMes)
         {
             foreach (Data.dsPlanSemanal.PLANES_MENSUALESRow rowMes in (Data.dsPlanSemanal.PLANES_MENSUALESRow[])dsPlanSemanal.PLANES_MENSUALES.Select("PMES_CODIGO = " + codigoMes))
@@ -245,7 +281,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                         TreeNode nodoDia = new TreeNode();
                         nodoDia.Name = rowDia.DIAPSEM_CODIGO.ToString();
                         nodoDia.Text = rowDia.DIAPSEM_DIA + " - " + rowDia.DIAPSEM_FECHA.ToShortDateString();
-                        nodoSemana.Tag = tipoNodo.dia;
+                        nodoDia.Tag = tipoNodo.dia;
                         nodoSemana.Nodes.Add(nodoDia);
 
                         foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow rowDetalle in rowDia.GetDETALLE_PLANES_SEMANALESRows())
@@ -264,30 +300,49 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
         }
 
+        private void button_MouseDown(object sender, MouseEventArgs e)
+        {
+            Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
+            (sender as Button).Location = punto;
+        }
+
+        private void button_MouseUp(object sender, MouseEventArgs e)
+        {
+            Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
+            (sender as Button).Location = punto;
+        }
+
         #endregion
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
-            /*tipoNodo seleccion = (tipoNodo)tvDetallePlan.SelectedNode.Tag;
+            tipoNodo seleccion = (tipoNodo)tvDetallePlan.SelectedNode.Tag;
             int codigo;
-
-            switch (seleccion)
+            Application.UseWaitCursor = true;
+            try
             {
-                case tipoNodo.anio:
-                    break;
-                case tipoNodo.mes:
-                    break;
-                case tipoNodo.semana:
-                    break;
-                case tipoNodo.dia:
-                    break;
-                case tipoNodo.detalleDia:
-                    break;
-                default:
-                    break;
-            }*/
+                switch (seleccion)
+                {
+                    case tipoNodo.anio:
+                        break;
+                    case tipoNodo.mes:
+                        break;
+                    case tipoNodo.semana:
+                        BLL.OrdenTrabajoBLL.GenerarOrdenTrabajoSemana(Convert.ToInt32(tvDetallePlan.SelectedNode.Name), dsPlanSemanal, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                        break;
+                    case tipoNodo.dia:
+                        break;
+                    case tipoNodo.detalleDia:
+                        break;
+                    default:
+                        break;
+                }
 
-            
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex) { Application.UseWaitCursor = false; MessageBox.Show(ex.Message); }
+            catch (Entidades.Excepciones.OrdenTrabajoException ex) { Application.UseWaitCursor = false; MessageBox.Show(ex.Message); }
+            Application.UseWaitCursor = false;
+            codigo = 0;
         }       
 
     }
