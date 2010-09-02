@@ -67,6 +67,7 @@
     <Compile Include="DetallePlanMensual.cs" />
     <Compile Include="DetallePlanSemanal.cs" />
     <Compile Include="DetalleSubconjunto.cs" />
+    <Compile Include="DiasPlanSemanal.cs" />
     <Compile Include="Domicilio.cs" />
     <Compile Include="EjemplarMaquina.cs" />
     <Compile Include="Empleado.cs" />
