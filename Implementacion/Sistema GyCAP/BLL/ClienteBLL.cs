@@ -32,7 +32,7 @@ namespace GyCAP.BLL
             return DAL.ClienteDAL.Insertar(cliente);
         }
 
-        public static void Eliminar(int codigo)
+        public static void Eliminar(long codigo)
         {
             //Revisamos que no esté en alguna transacción
             if (DAL.ClienteDAL.PuedeEliminarse(codigo))
