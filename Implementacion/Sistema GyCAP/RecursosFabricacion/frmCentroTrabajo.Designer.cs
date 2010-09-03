@@ -65,8 +65,6 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
-            this.nudHorasExtendido = new System.Windows.Forms.NumericUpDown();
-            this.nudHorasNormal = new System.Windows.Forms.NumericUpDown();
             this.cbActivo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.lvTurnos = new System.Windows.Forms.ListView();
             this.label13 = new System.Windows.Forms.Label();
@@ -82,6 +80,8 @@
             this.txtDescripcion = new System.Windows.Forms.RichTextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.nudHorasNormal = new System.Windows.Forms.NumericUpDown();
+            this.nudHorasExtendido = new System.Windows.Forms.NumericUpDown();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.btnConsultar = new System.Windows.Forms.ToolStripButton();
@@ -107,8 +107,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudTiempoCiclo)).BeginInit();
             this.gbGuardarCancelar.SuspendLayout();
             this.gbDatos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHorasExtendido)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHorasNormal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHorasExtendido)).BeginInit();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -450,6 +450,11 @@
             0,
             65536});
             this.nudEficiencia.Location = new System.Drawing.Point(121, 83);
+            this.nudEficiencia.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nudEficiencia.Name = "nudEficiencia";
             this.nudEficiencia.Size = new System.Drawing.Size(120, 21);
             this.nudEficiencia.TabIndex = 19;
@@ -574,42 +579,6 @@
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del Centro de Trabajo";
-            // 
-            // nudHorasExtendido
-            // 
-            this.nudHorasExtendido.DecimalPlaces = 2;
-            this.nudHorasExtendido.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nudHorasExtendido.Location = new System.Drawing.Point(401, 52);
-            this.nudHorasExtendido.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.nudHorasExtendido.Name = "nudHorasExtendido";
-            this.nudHorasExtendido.Size = new System.Drawing.Size(151, 21);
-            this.nudHorasExtendido.TabIndex = 10;
-            // 
-            // nudHorasNormal
-            // 
-            this.nudHorasNormal.DecimalPlaces = 2;
-            this.nudHorasNormal.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nudHorasNormal.Location = new System.Drawing.Point(401, 24);
-            this.nudHorasNormal.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.nudHorasNormal.Name = "nudHorasNormal";
-            this.nudHorasNormal.Size = new System.Drawing.Size(151, 21);
-            this.nudHorasNormal.TabIndex = 8;
             // 
             // cbActivo
             // 
@@ -757,6 +726,42 @@
             this.label3.TabIndex = 1;
             this.label3.Text = "Nombre:";
             // 
+            // nudHorasNormal
+            // 
+            this.nudHorasNormal.DecimalPlaces = 2;
+            this.nudHorasNormal.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudHorasNormal.Location = new System.Drawing.Point(401, 24);
+            this.nudHorasNormal.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudHorasNormal.Name = "nudHorasNormal";
+            this.nudHorasNormal.Size = new System.Drawing.Size(151, 21);
+            this.nudHorasNormal.TabIndex = 8;
+            // 
+            // nudHorasExtendido
+            // 
+            this.nudHorasExtendido.DecimalPlaces = 2;
+            this.nudHorasExtendido.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudHorasExtendido.Location = new System.Drawing.Point(401, 52);
+            this.nudHorasExtendido.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudHorasExtendido.Name = "nudHorasExtendido";
+            this.nudHorasExtendido.Size = new System.Drawing.Size(151, 21);
+            this.nudHorasExtendido.TabIndex = 10;
+            // 
             // tsMenu
             // 
             this.tsMenu.BackColor = System.Drawing.Color.Silver;
@@ -872,8 +877,8 @@
             this.gbGuardarCancelar.ResumeLayout(false);
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHorasExtendido)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHorasNormal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHorasExtendido)).EndInit();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.ResumeLayout(false);

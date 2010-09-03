@@ -22,8 +22,9 @@ namespace GyCAP.UI.PlanificacionProduccion
         Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
         Data.dsOrdenTrabajo dsOrdenTrabajo = new GyCAP.Data.dsOrdenTrabajo();
         Data.dsHojaRuta dsHojaRuta = new GyCAP.Data.dsHojaRuta();
-        DataView dvPlanAnual, dvMensual, dvPlanSemanal, dvOrdenTrabajo, dvHojaRuta, dvEstructura;
+        DataView dvPlanAnual, dvMensual, dvPlanSemanal, dvOrdenTrabajo, dvHojaRuta, dvEstructura, dvDetalleOrden;
         private int columnIndex = -1;
+        BindingSource sourceDetalle = new BindingSource();
 
         #region Inicio
 
@@ -137,6 +138,23 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
         }
 
+        private void dgvListaOrdenTrabajo_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            int codigo = Convert.ToInt32(dvOrdenTrabajo[e.RowIndex]["ord_numero"]);
+            dvDetalleOrden.RowFilter = "ord_numero = " + codigo;
+            sourceDetalle.DataSource = dvDetalleOrden;
+            bnNavegador.BindingSource = sourceDetalle;
+            txtNumeroOrden.Text = (codigo * -1).ToString();
+            txtCodigoOrden.Text = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigo).ORD_CODIGO;
+            txtOrigenOrden.Text = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigo).ORD_ORIGEN;
+            txtEstadoOrden.Text = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigo).ESTADO_ORDENES_TRABAJORow.EORD_NOMBRE;
+            dtpFechaAltaOrden.SetFecha(dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigo).ORD_FECHAALTA);
+            int codigoPlan = Convert.ToInt32(dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigo).DPSEM_CODIGO);
+            txtCocinaOrden.Text = dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(codigoPlan).COCINASRow.COC_CODIGO_PRODUCTO;
+            nudCantidadOrden.Value = dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(codigoPlan).DPSEM_CANTIDADESTIMADA;
+            CompletarDatosDetalle();
+        }
+
         #endregion
 
         #region Generar órdenes
@@ -164,13 +182,74 @@ namespace GyCAP.UI.PlanificacionProduccion
                     default:
                         break;
                 }
-
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex) { Application.UseWaitCursor = false; MessageBox.Show(ex.Message); }
             catch (Entidades.Excepciones.OrdenTrabajoException ex) { Application.UseWaitCursor = false; MessageBox.Show(ex.Message); }
             Application.UseWaitCursor = false;
             dvOrdenTrabajo.Table = dsOrdenTrabajo.ORDENES_TRABAJO;
-            codigo = 0;
+            dvDetalleOrden.Table = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO;
+        }
+
+        #endregion
+
+        #region Datos
+
+        private void btnDetalleOrden_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.consultar);
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            tcOrdenTrabajo.SelectedTab = tpBuscar;
+        }
+
+        private void CompletarDatosDetalle()
+        {
+            if (sourceDetalle.Count > 0)
+            {
+                Data.dsOrdenTrabajo.DETALLE_ORDENES_TRABAJORow row = (Data.dsOrdenTrabajo.DETALLE_ORDENES_TRABAJORow)(sourceDetalle.Current as DataRowView).Row;
+                txtNumeroDetalle.Text = (row.DORD_NUMERO * -1).ToString();
+                txtCodigoDetalle.Text = row.DORD_CODIGO;
+                txtOrigenDetalle.Text = row.DORD_ORIGEN;
+                if (row.PAR_TIPO == BLL.OrdenTrabajoBLL.parteTipoConjunto) 
+                { 
+                    txtTipoParteDetalle.Text = "Conjunto";
+                    txtParteDetalle.Text = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).CONJ_CODIGOPARTE;
+                    int hoja = Convert.ToInt32(dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).HR_CODIGO);
+                    txtHojaRuta.Text = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(hoja).HR_NOMBRE;
+                }
+                else if (row.PAR_TIPO == BLL.OrdenTrabajoBLL.parteTipoSubconjunto) 
+                { 
+                    txtTipoParteDetalle.Text = "Subconjunto";
+                    txtParteDetalle.Text = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).SCONJ_CODIGOPARTE;
+                    int hoja = Convert.ToInt32(dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).HR_CODIGO);
+                    txtHojaRuta.Text = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(hoja).HR_NOMBRE;
+                }
+                else if (row.PAR_TIPO == BLL.OrdenTrabajoBLL.parteTipoPieza)
+                { 
+                    txtTipoParteDetalle.Text = "Pieza";
+                    txtParteDetalle.Text = dsEstructura.PIEZAS.FindByPZA_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).PZA_CODIGOPARTE;
+                    int hoja = Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).HR_CODIGO);
+                    txtHojaRuta.Text = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(hoja).HR_NOMBRE;
+                }
+                txtCantidadDetalle.Text = row.DORD_CANTIDADESTIMADA.ToString();
+                txtCentroTrabajo.Text = dsHojaRuta.CENTROS_TRABAJOS.FindByCTO_CODIGO(Convert.ToInt32(row.CTO_CODIGO)).CTO_NOMBRE;
+                txtEstructura.Text = dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(Convert.ToInt32(row.ESTR_CODIGO)).ESTR_NOMBRE;
+                txtEstadoDetalle.Text = row.ESTADO_ORDENES_TRABAJORow.EORD_NOMBRE;
+                txtOperacionDetalle.Text = dsHojaRuta.OPERACIONES.FindByOPR_NUMERO(Convert.ToInt32(row.OPR_NUMERO)).OPR_NOMBRE;
+                txtObservaciones.Text = row.DORD_OBSERVACIONES;
+            }
+        }
+
+        private void bnMoveNextItem_Click(object sender, EventArgs e)
+        {
+            CompletarDatosDetalle();
+        }
+
+        private void bnMovePreviousItem_Click(object sender, EventArgs e)
+        {
+            CompletarDatosDetalle();
         }
 
         #endregion
@@ -200,7 +279,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 case estadoUI.modificar:
                     
                     btnGuardar.Enabled = true;
-                    btnVolver.Enabled = false;
+                    btnVolver.Enabled = true;
                     btnConsultar.Enabled = false;
                     
                     estadoInterface = estadoUI.modificar;
@@ -234,8 +313,8 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvListaOrdenTrabajo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvListaOrdenTrabajo.AllowUserToResizeColumns = true;
             dgvListaOrdenTrabajo.Columns["ORD_FECHAALTA"].MinimumWidth = 110;
-            dgvListaOrdenTrabajo.Columns["ORD_FECHAINICIOESTIMADA"].MinimumWidth = 80;
-            dgvListaOrdenTrabajo.Columns["ORD_FECHAFINESTIMADA"].MinimumWidth = 80;
+            dgvListaOrdenTrabajo.Columns["ORD_FECHAINICIOESTIMADA"].MinimumWidth = 90;
+            dgvListaOrdenTrabajo.Columns["ORD_FECHAFINESTIMADA"].MinimumWidth = 90;
             dgvListaOrdenTrabajo.Columns["ORD_FECHAALTA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvListaOrdenTrabajo.Columns["ORD_FECHAINICIOESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvListaOrdenTrabajo.Columns["ORD_FECHAFINESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -247,6 +326,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dvPlanSemanal = new DataView(dsPlanSemanal.PLANES_SEMANALES);
             dvOrdenTrabajo = new DataView(dsOrdenTrabajo.ORDENES_TRABAJO);
             dgvListaOrdenTrabajo.DataSource = dvOrdenTrabajo;
+            dvDetalleOrden = new DataView(dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO);
 
             try
             {
@@ -256,7 +336,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Generar Orden Trabajo - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error: Generar Orden de Trabajo - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             cbAnioBuscar.SetDatos(dvPlanAnual, "PAN_CODIGO", "PAN_ANIO", "Seleccione", false);
