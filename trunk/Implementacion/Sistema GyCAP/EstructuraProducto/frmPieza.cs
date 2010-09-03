@@ -921,5 +921,10 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
+
+        private void frmPieza_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

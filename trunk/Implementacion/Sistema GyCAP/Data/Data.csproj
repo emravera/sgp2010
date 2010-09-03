@@ -61,6 +61,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsCentroTrabajo.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsCliente.cs">
+      <DependentUpon>dsCliente.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="dsCliente.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
