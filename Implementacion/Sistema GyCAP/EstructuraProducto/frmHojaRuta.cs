@@ -320,12 +320,12 @@ namespace GyCAP.UI.EstructuraProducto
                 else { hojaCodigo = Convert.ToInt32(dvHojasRuta[dgvHojasRuta.SelectedRows[0].Index]["hr_codigo"]); }
                 //Obtenemos el código del centro trabajo, también lo vamos a usar mucho
                 int centroCodigo = cbCentroTrabajo.GetSelectedValueInt();
-                int operacionCodigo = cbOperacion.GetSelectedValueInt();
+                int operacionNumero = cbOperacion.GetSelectedValueInt();
                 if (dvDetalleHoja.Count > 0)
                 {
                     //Algo tiene, comprobemos que no intente agregar lo mismo haciendo una consulta al dataset,
                     //no usamos el dataview porque no queremos volver a filtrar los datos y perderlos
-                    string filtro = "hr_codigo = " + hojaCodigo + " AND cto_codigo = " + centroCodigo + " AND opr_codigo = " + operacionCodigo;
+                    string filtro = "hr_codigo = " + hojaCodigo + " AND cto_codigo = " + centroCodigo + " AND opr_numero = " + operacionNumero;
                     Data.dsHojaRuta.DETALLE_HOJARUTARow[] rows =
                         (Data.dsHojaRuta.DETALLE_HOJARUTARow[])dsHojaRuta.DETALLE_HOJARUTA.Select(filtro);
                     if (rows.Length > 0)
@@ -355,7 +355,7 @@ namespace GyCAP.UI.EstructuraProducto
                     //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
                     row.DHR_CODIGO = codigoDetalle--; //-- para que se vaya autodecrementando en cada inserción
                     row.HR_CODIGO = hojaCodigo;
-                    row.OPR_NUMERO = operacionCodigo;
+                    row.OPR_NUMERO = operacionNumero;
                     row.CTO_CODIGO = centroCodigo;
                     row.DHR_SECUENCIA = nudSecuencia.Value;
                     row.EndEdit();
@@ -504,8 +504,10 @@ namespace GyCAP.UI.EstructuraProducto
             dgvHojasRuta.Columns["HR_ACTIVO"].DataPropertyName = "HR_ACTIVO";
             dgvHojasRuta.Columns["HR_DESCRIPCION"].DataPropertyName = "HR_DESCRIPCION";
             dgvHojasRuta.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dgvHojasRuta.Columns["HR_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvHojasRuta.Columns["HR_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvHojasRuta.Columns["HR_DESCRIPCION"].Resizable = DataGridViewTriState.True;
+            dgvHojasRuta.Columns["HR_FECHAALTA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvHojasRuta.Columns["HR_FECHAALTA"].Width = 110;
 
             dgvDetalleHoja.AutoGenerateColumns = false;
             dgvDetalleHoja.Columns.Add("DHR_SECUENCIA", "Secuencia");
@@ -515,7 +517,8 @@ namespace GyCAP.UI.EstructuraProducto
             dgvDetalleHoja.Columns["DHR_SECUENCIA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvDetalleHoja.Columns["CTO_CODIGO"].DataPropertyName = "CTO_CODIGO";
             dgvDetalleHoja.Columns["OPR_NUMERO"].DataPropertyName = "OPR_NUMERO";
-            dgvDetalleHoja.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvDetalleHoja.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvDetalleHoja.Columns["CTO_CODIGO"].MinimumWidth = 110;
 
             //Dataviews, combos y carga de datos iniciales
             dvHojasRuta = new DataView(dsHojaRuta.HOJAS_RUTA);
