@@ -10,7 +10,7 @@ namespace GyCAP.BLL
     public class ConjuntoBLL
     {
         public static readonly int estadoActivo = 1;
-        public static readonly int estadoInactivo = 0;      
+        public static readonly int estadoInactivo = 0;
         
         /// <summary>
         /// Setea el directorio que contiene las imágenes de los conjuntos en base al directorio en que

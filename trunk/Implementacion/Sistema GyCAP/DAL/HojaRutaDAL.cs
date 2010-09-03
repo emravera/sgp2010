@@ -14,7 +14,7 @@ namespace GyCAP.DAL
             string sqlHoja = @"INSERT INTO [HOJAS_RUTA] ([hr_nombre], [hr_descripcion], [hr_activo], [hr_fechaAlta]) 
                               VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
 
-            string sqlDetalle = "INSERT INTO [CENTROSXHOJARUTA] ([cto_codigo], [hr_codigo], [cxhr_secuencia]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
+            string sqlDetalle = "INSERT INTO [DETALLE_HOJARUTA] ([cto_codigo], [hr_codigo], [dhr_secuencia], [opr_numero]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
 
             Data.dsHojaRuta.HOJAS_RUTARow rowhoja = dsHojaRuta.HOJAS_RUTA.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsHojaRuta.HOJAS_RUTARow;
             object[] valorParametros = { rowhoja.HR_NOMBRE, rowhoja.HR_DESCRIPCION, rowhoja.HR_ACTIVO, rowhoja.HR_FECHAALTA };
@@ -27,11 +27,11 @@ namespace GyCAP.DAL
                 rowhoja.HR_CODIGO = Convert.ToInt32(DB.executeScalar(sqlHoja, valorParametros, transaccion));
                 rowhoja.EndEdit();
 
-                foreach (Data.dsHojaRuta.CENTROSXHOJARUTARow row in (Data.dsHojaRuta.CENTROSXHOJARUTARow[])dsHojaRuta.CENTROSXHOJARUTA.Select(null, null, DataViewRowState.Added))
+                foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow row in (Data.dsHojaRuta.DETALLE_HOJARUTARow[])dsHojaRuta.DETALLE_HOJARUTA.Select(null, null, DataViewRowState.Added))
                 {
-                    valorParametros = new object[] { row.CTO_CODIGO, rowhoja.HR_CODIGO, row.CXHR_SECUENCIA };
+                    valorParametros = new object[] { row.CTO_CODIGO, rowhoja.HR_CODIGO, row.DHR_SECUENCIA, row.OPR_NUMERO };
                     row.BeginEdit();
-                    row.CXHR_CODIGO = Convert.ToInt32(DB.executeScalar(sqlDetalle, valorParametros, transaccion));
+                    row.DHR_CODIGO = Convert.ToInt32(DB.executeScalar(sqlDetalle, valorParametros, transaccion));
                     row.HR_CODIGO = rowhoja.HR_CODIGO;
                     row.EndEdit();
                 }
@@ -52,9 +52,9 @@ namespace GyCAP.DAL
         public static void Actualizar(Data.dsHojaRuta dsHojaRuta)
         {
             string sqlHoja = "UPDATE HOJAS_RUTA SET hr_nombre = @p0, hr_descripcion = @p1, hr_activo = @p2, hr_fechaalta = @p3 WHERE hr_codigo = @p4";
-            string sqlIDetalle = "INSERT INTO [CENTROSXHOJARUTA] ([cto_codigo], [hr_codigo], [cxhr_secuencia]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
-            string sqlUDetalle = "UPDATE CENTROSXHOJARUTA SET cxhr_secuencia = @p0 WHERE cxhr_codigo = @p1";
-            string sqlDDetalle = "DELETE FROM CENTROSXHOJARUTA WHERE cxhr_codigo = @p0";
+            string sqlIDetalle = "INSERT INTO [DETALLE_HOJARUTA] ([cto_codigo], [hr_codigo], [dhr_secuencia], [opr_numero]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+            string sqlUDetalle = "UPDATE DETALLE_HOJARUTA SET dhr_secuencia = @p0 WHERE dhr_codigo = @p1";
+            string sqlDDetalle = "DELETE FROM DETALLE_HOJARUTA WHERE dhr_codigo = @p0";
             Data.dsHojaRuta.HOJAS_RUTARow rowHoja = dsHojaRuta.HOJAS_RUTA.GetChanges(DataRowState.Modified).Rows[0] as Data.dsHojaRuta.HOJAS_RUTARow;
             object[] valorParametros = { rowHoja.HR_NOMBRE, rowHoja.HR_DESCRIPCION, rowHoja.HR_ACTIVO, rowHoja.HR_FECHAALTA, rowHoja.HR_CODIGO };
             SqlTransaction transaccion = null;
@@ -65,23 +65,23 @@ namespace GyCAP.DAL
 
                 DB.executeNonQuery(sqlHoja, valorParametros, transaccion);
 
-                foreach (Data.dsHojaRuta.CENTROSXHOJARUTARow row in (Data.dsHojaRuta.CENTROSXHOJARUTARow[])dsHojaRuta.CENTROSXHOJARUTA.Select(null, null, DataViewRowState.Added))
+                foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow row in (Data.dsHojaRuta.DETALLE_HOJARUTARow[])dsHojaRuta.DETALLE_HOJARUTA.Select(null, null, DataViewRowState.Added))
                 {
-                    valorParametros = new object[] { row.CTO_CODIGO, row.HR_CODIGO, row.CXHR_SECUENCIA };
+                    valorParametros = new object[] { row.CTO_CODIGO, row.HR_CODIGO, row.DHR_SECUENCIA, row.OPR_NUMERO };
                     row.BeginEdit();
-                    row.CXHR_CODIGO = Convert.ToInt32(DB.executeScalar(sqlIDetalle, valorParametros, transaccion));
+                    row.DHR_CODIGO = Convert.ToInt32(DB.executeScalar(sqlIDetalle, valorParametros, transaccion));
                     row.EndEdit();
                 }
 
-                foreach (Data.dsHojaRuta.CENTROSXHOJARUTARow row in (Data.dsHojaRuta.CENTROSXHOJARUTARow[])dsHojaRuta.CENTROSXHOJARUTA.Select(null, null, DataViewRowState.ModifiedCurrent))
+                foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow row in (Data.dsHojaRuta.DETALLE_HOJARUTARow[])dsHojaRuta.DETALLE_HOJARUTA.Select(null, null, DataViewRowState.ModifiedCurrent))
                 {
-                    valorParametros = new object[] { row.CXHR_SECUENCIA, row.CXHR_CODIGO };
+                    valorParametros = new object[] { row.DHR_SECUENCIA, row.DHR_CODIGO };
                     DB.executeNonQuery(sqlUDetalle, valorParametros, transaccion);
                 }
 
-                foreach (Data.dsHojaRuta.CENTROSXHOJARUTARow row in (Data.dsHojaRuta.CENTROSXHOJARUTARow[])dsHojaRuta.CENTROSXHOJARUTA.Select(null, null, DataViewRowState.Deleted))
+                foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow row in (Data.dsHojaRuta.DETALLE_HOJARUTARow[])dsHojaRuta.DETALLE_HOJARUTA.Select(null, null, DataViewRowState.Deleted))
                 {
-                    valorParametros = new object[] { Convert.ToInt32(row["cxhr_codigo", DataRowVersion.Original]) };
+                    valorParametros = new object[] { Convert.ToInt32(row["dhr_codigo", DataRowVersion.Original]) };
                     DB.executeNonQuery(sqlDDetalle, valorParametros, transaccion);
                 }
 
@@ -101,7 +101,7 @@ namespace GyCAP.DAL
         public static void Eliminar(int codigo)
         {
             string sqlHoja = "DELETE FROM HOJAS_RUTA WHERE hr_codigo = @p0";
-            string sqlDetalle = "DELETE FROM CENTROSXHOJARUTA WHERE hr_codigo = @p0";
+            string sqlDetalle = "DELETE FROM DETALLE_HOJARUTA WHERE hr_codigo = @p0";
             object[] valorParametros = { codigo };
             SqlTransaction transaccion = null;
 
@@ -222,25 +222,26 @@ namespace GyCAP.DAL
         
         private static void ObtenerDetalleHoja(Data.dsHojaRuta ds)
         {
-            string sql = "SELECT cxhr_codigo, cto_codigo, hr_codigo, cxhr_secuencia FROM CENTROSXHOJARUTA WHERE hr_codigo = @p0";
+            string sql = "SELECT dhr_codigo, cto_codigo, hr_codigo, dhr_secuencia, opr_numero FROM DETALLE_HOJARUTA WHERE hr_codigo = @p0";
             object[] valorParametros;
 
             foreach (Data.dsHojaRuta.HOJAS_RUTARow row in ds.HOJAS_RUTA)
             {
                 valorParametros = new object[] { row.HR_CODIGO };
-                DB.FillDataTable(ds.CENTROSXHOJARUTA, sql, valorParametros);
+                DB.FillDataTable(ds.DETALLE_HOJARUTA, sql, valorParametros);
             }
         }
 
         private static void ObtenerDetalleHoja(int codigoHoja, Data.dsHojaRuta ds)
         {
-            string sql = "SELECT cxhr_codigo, cto_codigo, hr_codigo, cxhr_secuencia FROM CENTROSXHOJARUTA WHERE hr_codigo = @p0";
+            string sql = "SELECT dhr_codigo, cto_codigo, hr_codigo, dhr_secuencia FROM DETALLE_HOJARUTA WHERE hr_codigo = @p0";
             object[] valorParametros = { codigoHoja };
 
-            DB.FillDataTable(ds.CENTROSXHOJARUTA, sql, valorParametros);
-            foreach (Data.dsHojaRuta.CENTROSXHOJARUTARow rowCxHR in (Data.dsHojaRuta.CENTROSXHOJARUTARow[])ds.CENTROSXHOJARUTA.Select("hr_codigo = " + codigoHoja))
+            DB.FillDataTable(ds.DETALLE_HOJARUTA, sql, valorParametros);
+            foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowDHR in (Data.dsHojaRuta.DETALLE_HOJARUTARow[])ds.DETALLE_HOJARUTA.Select("hr_codigo = " + codigoHoja))
             {
-                CentroTrabajoDAL.ObtenerCentroTrabajo(Convert.ToInt32(rowCxHR.CTO_CODIGO), true, ds);
+                CentroTrabajoDAL.ObtenerCentroTrabajo(Convert.ToInt32(rowDHR.CTO_CODIGO), true, ds);
+                OperacionDAL.ObtenerOperacion(Convert.ToInt32(rowDHR.OPR_NUMERO), ds);
             }
         }
     }
