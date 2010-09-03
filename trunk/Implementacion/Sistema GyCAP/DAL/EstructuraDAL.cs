@@ -570,7 +570,7 @@ namespace GyCAP.DAL
         {
             string sql = @"SELECT estr_codigo, estr_nombre, coc_codigo, pno_codigo, estr_descripcion, estr_activo, 
                           estr_fecha_alta, estr_fecha_modificacion, e_codigo, estr_costo, estr_costofijo 
-                          FROM ESTRUCTURAS WHERE coc_codigo = @p0";
+                          FROM ESTRUCTURAS WHERE estr_codigo = @p0";
 
             object[] valorParametros = { codigoEstructura };
             

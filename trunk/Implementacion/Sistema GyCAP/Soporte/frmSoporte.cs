@@ -174,14 +174,20 @@ namespace GyCAP.UI.Soporte
 
         private void button_MouseDown(object sender, MouseEventArgs e)
         {
-            Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
-            (sender as Button).Location = punto;
+            if (e.Button == MouseButtons.Left)
+            {
+                Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
+                (sender as Button).Location = punto;
+            }
         }
 
         private void button_MouseUp(object sender, MouseEventArgs e)
         {
-            Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
-            (sender as Button).Location = punto;
+            if (e.Button == MouseButtons.Left)
+            {
+                Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
+                (sender as Button).Location = punto;
+            }
         }
 
         private void btn_Click(object sender, EventArgs e)

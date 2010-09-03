@@ -650,9 +650,10 @@ namespace GyCAP.UI.EstructuraProducto
                     cbEstado.Enabled = true;
                     cbEstado.SetTexto("Seleccione");
                     dtpFechaAlta.Enabled = true;
+                    dtpFechaAlta.SetFechaNull();
                     try
                     {
-                        dtpFechaAlta.Value = BLL.DBBLL.GetFechaServidor();
+                        dtpFechaAlta.SetFecha(BLL.DBBLL.GetFechaServidor());
                     }
                     catch (Exception) { dtpFechaAlta.Value = DateTime.Today; }
                     cbCocina.Enabled = true;
@@ -660,6 +661,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbResponsable.Enabled = true;
                     cbResponsable.SelectedIndex = -1;
                     dtpFechaModificacion.Enabled = true;
+                    dtpFechaModificacion.SetFechaNull();
                     txtDescripcion.ReadOnly = false;
                     nudcosto.Value = 0;
                     nudcosto.Enabled = true;
@@ -697,7 +699,7 @@ namespace GyCAP.UI.EstructuraProducto
                     dtpFechaAlta.Enabled = true;
                     try
                     {
-                        dtpFechaAlta.Value = BLL.DBBLL.GetFechaServidor();
+                        dtpFechaAlta.SetFecha(BLL.DBBLL.GetFechaServidor());
                     }
                     catch (Exception) { dtpFechaAlta.Value = DateTime.Today; }
                     cbCocina.Enabled = true;
@@ -705,6 +707,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbResponsable.Enabled = true;
                     cbResponsable.SelectedIndex = -1;
                     dtpFechaModificacion.Enabled = true;
+                    dtpFechaModificacion.SetFechaNull();
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
                     nudcosto.Enabled = true;
@@ -826,9 +829,10 @@ namespace GyCAP.UI.EstructuraProducto
             dgvEstructuras.Columns.Add("E_CODIGO", "Responsable");
             dgvEstructuras.Columns.Add("ESTR_ACTIVO", "Activo");
             dgvEstructuras.Columns.Add("ESTR_FECHA_ALTA", "Fecha creación");
-            dgvEstructuras.Columns["ESTR_FECHA_ALTA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvEstructuras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dgvEstructuras.Columns["ESTR_FECHA_ALTA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvEstructuras.Columns["ESTR_FECHA_ALTA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvEstructuras.Columns["ESTR_ACTIVO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvEstructuras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvEstructuras.Columns["ESTR_FECHA_ALTA"].MinimumWidth = 110;
             dgvEstructuras.Columns["ESTR_NOMBRE"].DataPropertyName = "ESTR_NOMBRE";
             dgvEstructuras.Columns["COC_CODIGO"].DataPropertyName = "COC_CODIGO";
             dgvEstructuras.Columns["PNO_CODIGO"].DataPropertyName = "PNO_CODIGO";

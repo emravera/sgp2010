@@ -123,6 +123,8 @@ namespace GyCAP.Data {
         
         private global::System.Data.DataRelation relationTERMINACIONES_PIEZAS;
         
+        private global::System.Data.DataRelation relationCONJUNTOS_PIEZASXCONJUNTO;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -685,6 +687,7 @@ namespace GyCAP.Data {
             this.relationCONJUNTOS_CONJUNTOSXESTRUCTURA = this.Relations["CONJUNTOS_CONJUNTOSXESTRUCTURA"];
             this.relationESTRUCTURAS_CONJUNTOSXESTRUCTURA = this.Relations["ESTRUCTURAS_CONJUNTOSXESTRUCTURA"];
             this.relationTERMINACIONES_PIEZAS = this.Relations["TERMINACIONES_PIEZAS"];
+            this.relationCONJUNTOS_PIEZASXCONJUNTO = this.Relations["CONJUNTOS_PIEZASXCONJUNTO"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -852,6 +855,10 @@ namespace GyCAP.Data {
                         this.tableTERMINACIONES.TE_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tablePIEZAS.TE_CODIGOColumn}, false);
             this.Relations.Add(this.relationTERMINACIONES_PIEZAS);
+            this.relationCONJUNTOS_PIEZASXCONJUNTO = new global::System.Data.DataRelation("CONJUNTOS_PIEZASXCONJUNTO", new global::System.Data.DataColumn[] {
+                        this.tableCONJUNTOS.CONJ_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePIEZASXCONJUNTO.CONJ_CODIGOColumn}, false);
+            this.Relations.Add(this.relationCONJUNTOS_PIEZASXCONJUNTO);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3871,13 +3878,16 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PIEZASXCONJUNTORow AddPIEZASXCONJUNTORow(decimal CONJ_CODIGO, PIEZASRow parentPIEZASRowByPIEZAS_PIEZASXCONJUNTO, decimal PXCJ_CANTIDAD) {
+            public PIEZASXCONJUNTORow AddPIEZASXCONJUNTORow(CONJUNTOSRow parentCONJUNTOSRowByCONJUNTOS_PIEZASXCONJUNTO, PIEZASRow parentPIEZASRowByPIEZAS_PIEZASXCONJUNTO, decimal PXCJ_CANTIDAD) {
                 PIEZASXCONJUNTORow rowPIEZASXCONJUNTORow = ((PIEZASXCONJUNTORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
-                        CONJ_CODIGO,
+                        null,
                         null,
                         PXCJ_CANTIDAD};
+                if ((parentCONJUNTOSRowByCONJUNTOS_PIEZASXCONJUNTO != null)) {
+                    columnValuesArray[1] = parentCONJUNTOSRowByCONJUNTOS_PIEZASXCONJUNTO[0];
+                }
                 if ((parentPIEZASRowByPIEZAS_PIEZASXCONJUNTO != null)) {
                     columnValuesArray[2] = parentPIEZASRowByPIEZAS_PIEZASXCONJUNTO[0];
                 }
@@ -8228,6 +8238,16 @@ namespace GyCAP.Data {
                     this.SetParentRow(value, this.Table.ParentRelations["PIEZAS_PIEZASXCONJUNTO"]);
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CONJUNTOSRow CONJUNTOSRow {
+                get {
+                    return ((CONJUNTOSRow)(this.GetParentRow(this.Table.ParentRelations["CONJUNTOS_PIEZASXCONJUNTO"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["CONJUNTOS_PIEZASXCONJUNTO"]);
+                }
+            }
         }
         
         /// <summary>
@@ -9156,6 +9176,16 @@ namespace GyCAP.Data {
                 }
                 else {
                     return ((CONJUNTOSXESTRUCTURARow[])(base.GetChildRows(this.Table.ChildRelations["CONJUNTOS_CONJUNTOSXESTRUCTURA"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PIEZASXCONJUNTORow[] GetPIEZASXCONJUNTORows() {
+                if ((this.Table.ChildRelations["CONJUNTOS_PIEZASXCONJUNTO"] == null)) {
+                    return new PIEZASXCONJUNTORow[0];
+                }
+                else {
+                    return ((PIEZASXCONJUNTORow[])(base.GetChildRows(this.Table.ChildRelations["CONJUNTOS_PIEZASXCONJUNTO"])));
                 }
             }
         }

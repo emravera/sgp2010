@@ -23,6 +23,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         Data.dsOrdenTrabajo dsOrdenTrabajo = new GyCAP.Data.dsOrdenTrabajo();
         Data.dsHojaRuta dsHojaRuta = new GyCAP.Data.dsHojaRuta();
         DataView dvPlanAnual, dvMensual, dvPlanSemanal, dvOrdenTrabajo, dvHojaRuta, dvEstructura;
+        private int columnIndex = -1;
 
         #region Inicio
 
@@ -118,7 +119,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                         {
                             BLL.DetallePlanSemanalBLL.ObtenerDetalle(Convert.ToInt32(rowDia.DIAPSEM_CODIGO), dsPlanSemanal.DETALLE_PLANES_SEMANALES);
                         }
-                        //CargarPlan(cbMesBuscar.GetSelectedValueInt());
                         CargarPlanSemanal(cbSemanaBuscar.GetSelectedValueInt());
                     }
                     else
@@ -135,6 +135,42 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 MessageBox.Show("Debe seleccionar una Semana de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        #endregion
+
+        #region Generar órdenes
+
+        private void btnGenerar_Click(object sender, EventArgs e)
+        {
+            tipoNodo seleccion = (tipoNodo)tvDetallePlan.SelectedNode.Tag;
+            int codigo;
+            Application.UseWaitCursor = true;
+            try
+            {
+                switch (seleccion)
+                {
+                    case tipoNodo.anio:
+                        break;
+                    case tipoNodo.mes:
+                        break;
+                    case tipoNodo.semana:
+                        BLL.OrdenTrabajoBLL.GenerarOrdenTrabajoSemana(Convert.ToInt32(tvDetallePlan.SelectedNode.Name), dsPlanSemanal, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                        break;
+                    case tipoNodo.dia:
+                        break;
+                    case tipoNodo.detalleDia:
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex) { Application.UseWaitCursor = false; MessageBox.Show(ex.Message); }
+            catch (Entidades.Excepciones.OrdenTrabajoException ex) { Application.UseWaitCursor = false; MessageBox.Show(ex.Message); }
+            Application.UseWaitCursor = false;
+            dvOrdenTrabajo.Table = dsOrdenTrabajo.ORDENES_TRABAJO;
+            codigo = 0;
         }
 
         #endregion
@@ -178,7 +214,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         private void InicializarDatos()
         {
             //Grilla ordenes trabajo
-            dgvListaOrdenTrabajo.Columns.Add("ORD_NUMERO", "Número");
+            dgvListaOrdenTrabajo.AutoGenerateColumns = false;
             dgvListaOrdenTrabajo.Columns.Add("ORD_CODIGO", "Código");
             dgvListaOrdenTrabajo.Columns.Add("ORD_FECHAALTA", "Fecha creación");
             dgvListaOrdenTrabajo.Columns.Add("ORD_ORIGEN", "Origen");
@@ -187,7 +223,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvListaOrdenTrabajo.Columns.Add("ORD_FECHAINICIOESTIMADA", "Fecha inicio");
             dgvListaOrdenTrabajo.Columns.Add("ORD_FECHAFINESTIMADA", "Fecha fin");
             dgvListaOrdenTrabajo.Columns.Add("EORD_CODIGO", "Estado");
-            dgvListaOrdenTrabajo.Columns["ORD_NUMERO"].DataPropertyName = "ORD_NUMERO";
             dgvListaOrdenTrabajo.Columns["ORD_CODIGO"].DataPropertyName = "ORD_CODIGO";
             dgvListaOrdenTrabajo.Columns["ORD_FECHAALTA"].DataPropertyName = "ORD_FECHAALTA";
             dgvListaOrdenTrabajo.Columns["ORD_ORIGEN"].DataPropertyName = "ORD_ORIGEN";
@@ -198,12 +233,19 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvListaOrdenTrabajo.Columns["EORD_CODIGO"].DataPropertyName = "EORD_CODIGO";
             dgvListaOrdenTrabajo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvListaOrdenTrabajo.AllowUserToResizeColumns = true;
+            dgvListaOrdenTrabajo.Columns["ORD_FECHAALTA"].MinimumWidth = 110;
+            dgvListaOrdenTrabajo.Columns["ORD_FECHAINICIOESTIMADA"].MinimumWidth = 80;
+            dgvListaOrdenTrabajo.Columns["ORD_FECHAFINESTIMADA"].MinimumWidth = 80;
+            dgvListaOrdenTrabajo.Columns["ORD_FECHAALTA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvListaOrdenTrabajo.Columns["ORD_FECHAINICIOESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvListaOrdenTrabajo.Columns["ORD_FECHAFINESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvListaOrdenTrabajo.Columns["CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
 
             //Dataviews
             dvPlanAnual = new DataView(dsPlanSemanal.PLANES_ANUALES);
             dvMensual = new DataView(dsPlanSemanal.PLANES_MENSUALES);
             dvPlanSemanal = new DataView(dsPlanSemanal.PLANES_SEMANALES);
-            
+            dvOrdenTrabajo = new DataView(dsOrdenTrabajo.ORDENES_TRABAJO);
             dgvListaOrdenTrabajo.DataSource = dvOrdenTrabajo;
 
             try
@@ -231,6 +273,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             nodoSemana.Tag = tipoNodo.semana;
 
             tvDetallePlan.Nodes.Add(nodoSemana);
+            Sistema.FuncionesAuxiliares.QuitarCheckBox(nodoSemana, tvDetallePlan);
 
             foreach (Data.dsPlanSemanal.DIAS_PLAN_SEMANALRow rowDia in dsPlanSemanal.PLANES_SEMANALES.FindByPSEM_CODIGO(codigoSemana).GetDIAS_PLAN_SEMANALRows())
             {
@@ -254,98 +297,93 @@ namespace GyCAP.UI.PlanificacionProduccion
             tvDetallePlan.ExpandAll();
         }
 
-        #region CargarPlanMensual - Desactivado
-        /*private void CargarPlan(int codigoMes)
-        {
-            foreach (Data.dsPlanSemanal.PLANES_MENSUALESRow rowMes in (Data.dsPlanSemanal.PLANES_MENSUALESRow[])dsPlanSemanal.PLANES_MENSUALES.Select("PMES_CODIGO = " + codigoMes))
-            {
-                tvDetallePlan.Nodes.Clear();
-                tvDetallePlan.BeginUpdate();
-                TreeNode nodoMes = new TreeNode();
-                nodoMes.Name = rowMes.PMES_CODIGO.ToString();
-                nodoMes.Text = rowMes.PMES_MES;
-                nodoMes.Tag = tipoNodo.mes;
-                tvDetallePlan.Nodes.Add(nodoMes);
-                Sistema.FuncionesAuxiliares.QuitarCheckBox(nodoMes, tvDetallePlan); 
-
-                foreach (Data.dsPlanSemanal.PLANES_SEMANALESRow rowSemana in rowMes.GetPLANES_SEMANALESRows())
-                {
-                    TreeNode nodoSemana = new TreeNode();
-                    nodoSemana.Name = rowSemana.PMES_CODIGO.ToString();
-                    nodoSemana.Text = "Semana " + rowSemana.PSEM_SEMANA.ToString();
-                    nodoSemana.Tag = tipoNodo.semana;
-                    
-                    nodoMes.Nodes.Add(nodoSemana);
-
-                    foreach (Data.dsPlanSemanal.DIAS_PLAN_SEMANALRow rowDia in rowSemana.GetDIAS_PLAN_SEMANALRows())
-                    {
-                        TreeNode nodoDia = new TreeNode();
-                        nodoDia.Name = rowDia.DIAPSEM_CODIGO.ToString();
-                        nodoDia.Text = rowDia.DIAPSEM_DIA + " - " + rowDia.DIAPSEM_FECHA.ToShortDateString();
-                        nodoDia.Tag = tipoNodo.dia;
-                        nodoSemana.Nodes.Add(nodoDia);
-
-                        foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow rowDetalle in rowDia.GetDETALLE_PLANES_SEMANALESRows())
-                        {
-                            TreeNode nodoDetalle = new TreeNode();
-                            nodoDetalle.Name = rowDetalle.DIAPSEM_CODIGO.ToString();
-                            nodoDetalle.Text = "Cocina: " + rowDetalle.COCINASRow.COC_CODIGO_PRODUCTO + " - Cantidad: " + rowDetalle.DPSEM_CANTIDADESTIMADA.ToString();
-                            nodoDetalle.Tag = tipoNodo.detalleDia;
-                            nodoDia.Nodes.Add(nodoDetalle);
-                        }
-                    }
-                }
-
-                tvDetallePlan.EndUpdate();
-                tvDetallePlan.ExpandAll();
-            }
-        }*/
-        #endregion
-
         private void button_MouseDown(object sender, MouseEventArgs e)
         {
-            Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
-            (sender as Button).Location = punto;
+            if (e.Button == MouseButtons.Left)
+            {
+                Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
+                (sender as Button).Location = punto;
+            }
         }
 
         private void button_MouseUp(object sender, MouseEventArgs e)
         {
-            Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
-            (sender as Button).Location = punto;
+            if (e.Button == MouseButtons.Left)
+            {
+                Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
+                (sender as Button).Location = punto;
+            }
         }
 
-        #endregion
-
-        private void btnGenerar_Click(object sender, EventArgs e)
+        private void dgvListaOrdenTrabajo_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            tipoNodo seleccion = (tipoNodo)tvDetallePlan.SelectedNode.Tag;
-            int codigo;
-            Application.UseWaitCursor = true;
-            try
+            if (e.Value != null && e.Value.ToString() != string.Empty)
             {
-                switch (seleccion)
+                string nombre = string.Empty;
+                switch (dgvListaOrdenTrabajo.Columns[e.ColumnIndex].Name)
                 {
-                    case tipoNodo.anio:
+                    case "ORD_FECHAALTA":
+                        nombre = DateTime.Parse(e.Value.ToString()).ToShortDateString();
+                        e.Value = nombre;
                         break;
-                    case tipoNodo.mes:
+                    case "COCINA":
+                        nombre = dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(Convert.ToInt32(e.Value.ToString())).COCINASRow.COC_CODIGO_PRODUCTO;
+                        e.Value = nombre;
                         break;
-                    case tipoNodo.semana:
-                        BLL.OrdenTrabajoBLL.GenerarOrdenTrabajoSemana(Convert.ToInt32(tvDetallePlan.SelectedNode.Name), dsPlanSemanal, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                    case "ORD_FECHAINICIOESTIMADA":
+                        nombre = DateTime.Parse(e.Value.ToString()).ToShortDateString();
+                        e.Value = nombre;
                         break;
-                    case tipoNodo.dia:
+                    case "ORD_FECHAFINESTIMADA":
+                        nombre = DateTime.Parse(e.Value.ToString()).ToShortDateString();
+                        e.Value = nombre;
                         break;
-                    case tipoNodo.detalleDia:
+                    case "EORD_CODIGO":
+                        nombre = dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.FindByEORD_CODIGO(Convert.ToInt32(e.Value.ToString())).EORD_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "CANTIDAD":
+                        nombre = dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(Convert.ToInt32(e.Value.ToString())).DPSEM_CANTIDADESTIMADA.ToString();
+                        e.Value = nombre;
                         break;
                     default:
                         break;
                 }
-
             }
-            catch (Entidades.Excepciones.BaseDeDatosException ex) { Application.UseWaitCursor = false; MessageBox.Show(ex.Message); }
-            catch (Entidades.Excepciones.OrdenTrabajoException ex) { Application.UseWaitCursor = false; MessageBox.Show(ex.Message); }
-            Application.UseWaitCursor = false;
-            codigo = 0;
-        }       
+        }
+
+        #region Menú bloquear columnas
+        private void tsmiBloquearColumna_Click(object sender, EventArgs e)
+        {
+            if (columnIndex != -1) { dgvListaOrdenTrabajo.Columns[columnIndex].Frozen = true; }
+        }
+
+        private void tsmiDesbloquearColumna_Click(object sender, EventArgs e)
+        {
+            if (columnIndex != -1) { dgvListaOrdenTrabajo.Columns[columnIndex].Frozen = false; }
+        }
+
+        private void dgvListaOrdenTrabajo_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                columnIndex = e.ColumnIndex;
+                if (dgvListaOrdenTrabajo.Columns[columnIndex].Frozen)
+                {
+                    tsmiBloquearColumna.Checked = true;
+                    tsmiDesbloquearColumna.Checked = false;
+                }
+                else
+                {
+                    tsmiBloquearColumna.Checked = false;
+                    tsmiDesbloquearColumna.Checked = true;
+                }
+                cmsGrillaOrdenesTrabajo.Show(MousePosition);
+            }
+        }
+        #endregion
+
+        #endregion
 
     }
 }

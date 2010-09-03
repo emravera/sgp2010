@@ -602,15 +602,21 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void button_MouseDown(object sender, MouseEventArgs e)
         {
-            Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
-            (sender as Button).Location = punto;
+            if (e.Button == MouseButtons.Left)
+            {
+                Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
+                (sender as Button).Location = punto;
+            }
         }
 
         private void button_MouseUp(object sender, MouseEventArgs e)
         {
-            Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
-            (sender as Button).Location = punto;
-        }        
+            if (e.Button == MouseButtons.Left)
+            {
+                Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
+                (sender as Button).Location = punto;
+            }
+        }      
 
         private void dgvDetalleHoja_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
