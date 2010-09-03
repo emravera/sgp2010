@@ -179,9 +179,23 @@ namespace GyCAP.UI.GestionPedido.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Restar_Gris_25 {
+            get {
+                object obj = ResourceManager.GetObject("Restar_Gris_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Salir_25 {
             get {
                 object obj = ResourceManager.GetObject("Salir_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Sumar_Gris_25 {
+            get {
+                object obj = ResourceManager.GetObject("Sumar_Gris_25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -210,6 +224,20 @@ namespace GyCAP.UI.GestionPedido.Properties {
         internal static System.Drawing.Bitmap Warning_25 {
             get {
                 object obj = ResourceManager.GetObject("Warning_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Zoom_In_25 {
+            get {
+                object obj = ResourceManager.GetObject("Zoom_In_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Zoom_Out_25 {
+            get {
+                object obj = ResourceManager.GetObject("Zoom_Out_25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
