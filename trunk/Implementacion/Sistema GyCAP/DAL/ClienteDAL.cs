@@ -150,12 +150,12 @@ namespace GyCAP.DAL
         public static int Insertar(Entidades.Cliente cliente)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
-            string sql = @"INSERT INTO [CLIENTES] ([CLI_RAZONSOCIAL], [CLI_TELEFONO], [CLI_MOTIVOBAJA],
-                           [CLI_MAIL], [CLI_ESTADO], [CLI_FECHAALTA], [CLI_FECHABAJA]) 
-                          VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, ) SELECT @@Identity";
+            string sql = @"INSERT INTO CLIENTES (CLI_RAZONSOCIAL, CLI_TELEFONO, CLI_MOTIVOBAJA,
+                           CLI_MAIL, CLI_ESTADO, CLI_FECHAALTA) 
+                          VALUES (@p0, @p1, @p2, @p3, @p4, @p5 ) SELECT @@Identity";
 
             object[] valorParametros = { cliente.RazonSocial, cliente.Telefono, cliente.MotivoBaja, 
-                                         cliente.Mail, cliente.Estado, cliente.FechaAlta, DBNull.Value };
+                                         cliente.Mail, cliente.Estado, cliente.FechaAlta};
             try
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));

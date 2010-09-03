@@ -43,11 +43,11 @@ namespace GyCAP.UI.GestionPedido
             dgvLista.Columns["CLI_ESTADO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            dgvLista.Columns["CLI_CODIGO"].DataPropertyName = "E_CODIGO";
-            dgvLista.Columns["CLI_RAZONSOCIAL"].DataPropertyName = "E_LEGAJO";
-            dgvLista.Columns["CLI_TELEFONO"].DataPropertyName = "E_APELLIDO";
-            dgvLista.Columns["CLI_MAIL"].DataPropertyName = "E_NOMBRE";
-            dgvLista.Columns["CLI_ESTADO"].DataPropertyName = "EE_CODIGO";
+            dgvLista.Columns["CLI_CODIGO"].DataPropertyName = "CLI_CODIGO";
+            dgvLista.Columns["CLI_RAZONSOCIAL"].DataPropertyName = "CLI_RAZONSOCIAL";
+            dgvLista.Columns["CLI_TELEFONO"].DataPropertyName = "CLI_TELEFONO";
+            dgvLista.Columns["CLI_MAIL"].DataPropertyName = "CLI_MAIL";
+            dgvLista.Columns["CLI_ESTADO"].DataPropertyName = "CLI_ESTADO";
 
             //Alineacion de los numeros y las fechas en la grilla
             dgvLista.Columns["CLI_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -281,9 +281,11 @@ namespace GyCAP.UI.GestionPedido
             txtRazonSocial.Text = dsCliente.CLIENTES.FindByCLI_CODIGO(codigoCliente).CLI_RAZONSOCIAL;
             txtTelefono.Text = dsCliente.CLIENTES.FindByCLI_CODIGO(codigoCliente).CLI_TELEFONO;
             txtMail.Text = dsCliente.CLIENTES.FindByCLI_CODIGO(codigoCliente).CLI_MAIL;
-            //cboEstado.SelectedI
             txtMotivoBaja.Text = dsCliente.CLIENTES.FindByCLI_CODIGO(codigoCliente).CLI_MOTIVOBAJA;
-            
+            if (dsCliente.CLIENTES.FindByCLI_CODIGO(codigoCliente).CLI_ESTADO == "A")
+                cboEstado.SelectedIndex = 0;
+            else
+                cboEstado.SelectedIndex = 1;
         }
 
         private void txtRazonSocial_Enter(object sender, EventArgs e)
@@ -329,9 +331,15 @@ namespace GyCAP.UI.GestionPedido
                     cliente.MotivoBaja = txtMotivoBaja.Text.Trim();  
                     cliente.FechaAlta = BLL.DBBLL.GetFechaServidor();
                     if (cboEstado.SelectedItem.ToString().Substring(0, 1) == "A")
+                    {
                         cliente.Estado = "A";
+                        cliente.MotivoBaja = string.Empty;
+                    }
                     else
+                    {
                         cliente.Estado = "I";
+                        cliente.MotivoBaja = txtMotivoBaja.Text.Trim();
+                    }
 
                     try
                     {
@@ -341,7 +349,7 @@ namespace GyCAP.UI.GestionPedido
                         Data.dsCliente.CLIENTESRow rowCliente = dsCliente.CLIENTES.NewCLIENTESRow();
                         //Indicamos que comienza la edición de la fila
                         rowCliente.BeginEdit();
-                        //rowEmpleado.E_CODIGO = empleado.Codigo;
+                        rowCliente.CLI_CODIGO = cliente.Codigo;
                         rowCliente.CLI_RAZONSOCIAL = cliente.RazonSocial;
                         rowCliente.CLI_TELEFONO = cliente.Telefono;
                         rowCliente.CLI_MAIL = cliente.Mail;
@@ -438,23 +446,59 @@ namespace GyCAP.UI.GestionPedido
         {
             //if (e.Value.ToString() != String.Empty)
             //{
-            //string nombre;
-            //switch (dgvLista.Columns[e.ColumnIndex].Name)
-            //{
-            //    case "CLI_ESTADO":
-            //        nombre = string.Empty;
-            //        if (dsCliente.CLIENTES.FindByCLI_CODIGO(Convert.ToInt32(e.Value)).CLI_ESTADO == "A")
-            //            nombre = "Activo";
-            //        else if (dsCliente.CLIENTES.FindByCLI_CODIGO(Convert.ToInt32(e.Value)).CLI_ESTADO == "I")
-            //            nombre = "Inactivo";
+            string nombre;
+            switch (dgvLista.Columns[e.ColumnIndex].Name)
+            {
+                case "CLI_ESTADO":
+                    nombre = string.Empty;
+                    if (e.Value.ToString() == "A")
+                        nombre = "Activo";
+                    else if (e.Value.ToString() == "I")
+                        nombre = "Inactivo";
 
-            //        e.Value = nombre;    
-            //        break;
-            //    default:
-            //        break;
-            //}
+                    e.Value = nombre;
+                    break;
+                default:
+                    break;
+            }
 
             //}
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            //Controlamos que esté seleccionado algo
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Preguntamos si está seguro
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el Cliente seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (respuesta == DialogResult.Yes)
+                {
+                    try
+                    {
+                        //Lo eliminamos de la DB
+                        long codigo = Convert.ToInt64(dvCliente[dgvLista.SelectedRows[0].Index]["CLI_CODIGO"]);
+                        BLL.ClienteBLL.Eliminar(codigo); 
+
+                        //Lo eliminamos del dataset
+                        dsCliente.CLIENTES.FindByCLI_CODIGO(codigo).Delete();
+                        dsCliente.CLIENTES.AcceptChanges();
+                        btnVolver.PerformClick();
+                    }
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Cliente de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
 
