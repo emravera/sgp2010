@@ -118,6 +118,10 @@
             this.cmsGrillaOrdenesTrabajo = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiBloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDesbloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
+            this.label32 = new System.Windows.Forms.Label();
+            this.txtOperacionDetalle = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.txtObservaciones = new System.Windows.Forms.RichTextBox();
             this.cbAnioBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbMesBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbSemanaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
@@ -130,10 +134,6 @@
             this.dtpFechaFinOrden = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.dtpFechaInicioOrden = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.dtpFechaAltaOrden = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.label32 = new System.Windows.Forms.Label();
-            this.txtOperacionDetalle = new System.Windows.Forms.TextBox();
-            this.label33 = new System.Windows.Forms.Label();
-            this.txtObservaciones = new System.Windows.Forms.RichTextBox();
             this.tcOrdenTrabajo.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -663,6 +663,7 @@
             // 
             this.txtNumeroDetalle.Location = new System.Drawing.Point(73, 24);
             this.txtNumeroDetalle.Name = "txtNumeroDetalle";
+            this.txtNumeroDetalle.ReadOnly = true;
             this.txtNumeroDetalle.Size = new System.Drawing.Size(147, 21);
             this.txtNumeroDetalle.TabIndex = 46;
             // 
@@ -1100,6 +1101,40 @@
             this.tsmiDesbloquearColumna.Text = "Desbloquear columna";
             this.tsmiDesbloquearColumna.Click += new System.EventHandler(this.tsmiDesbloquearColumna_Click);
             // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(226, 90);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(60, 13);
+            this.label32.TabIndex = 58;
+            this.label32.Text = "Operación:";
+            // 
+            // txtOperacionDetalle
+            // 
+            this.txtOperacionDetalle.Location = new System.Drawing.Point(292, 87);
+            this.txtOperacionDetalle.Name = "txtOperacionDetalle";
+            this.txtOperacionDetalle.ReadOnly = true;
+            this.txtOperacionDetalle.Size = new System.Drawing.Size(168, 21);
+            this.txtOperacionDetalle.TabIndex = 59;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(7, 207);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(82, 13);
+            this.label33.TabIndex = 60;
+            this.label33.Text = "Observaciones:";
+            // 
+            // txtObservaciones
+            // 
+            this.txtObservaciones.Location = new System.Drawing.Point(10, 223);
+            this.txtObservaciones.Name = "txtObservaciones";
+            this.txtObservaciones.Size = new System.Drawing.Size(737, 68);
+            this.txtObservaciones.TabIndex = 61;
+            this.txtObservaciones.Text = "";
+            // 
             // cbAnioBuscar
             // 
             this.cbAnioBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1213,40 +1248,6 @@
             this.dtpFechaAltaOrden.Name = "dtpFechaAltaOrden";
             this.dtpFechaAltaOrden.Size = new System.Drawing.Size(160, 21);
             this.dtpFechaAltaOrden.TabIndex = 25;
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(226, 90);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(60, 13);
-            this.label32.TabIndex = 58;
-            this.label32.Text = "Operación:";
-            // 
-            // txtOperacionDetalle
-            // 
-            this.txtOperacionDetalle.Location = new System.Drawing.Point(292, 87);
-            this.txtOperacionDetalle.Name = "txtOperacionDetalle";
-            this.txtOperacionDetalle.ReadOnly = true;
-            this.txtOperacionDetalle.Size = new System.Drawing.Size(168, 21);
-            this.txtOperacionDetalle.TabIndex = 59;
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(7, 207);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(82, 13);
-            this.label33.TabIndex = 60;
-            this.label33.Text = "Observaciones:";
-            // 
-            // txtObservaciones
-            // 
-            this.txtObservaciones.Location = new System.Drawing.Point(10, 223);
-            this.txtObservaciones.Name = "txtObservaciones";
-            this.txtObservaciones.Size = new System.Drawing.Size(737, 68);
-            this.txtObservaciones.TabIndex = 61;
-            this.txtObservaciones.Text = "";
             // 
             // frmGenerarOrdenTrabajo
             // 
