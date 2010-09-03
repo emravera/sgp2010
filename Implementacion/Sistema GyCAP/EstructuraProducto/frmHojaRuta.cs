@@ -13,7 +13,7 @@ namespace GyCAP.UI.EstructuraProducto
     {
         private static frmHojaRuta _frmHojaRuta = null;
         private Data.dsHojaRuta dsHojaRuta = new GyCAP.Data.dsHojaRuta();
-        private DataView dvHojasRuta, dvDetalleHoja, dvCentrosTrabajo;
+        private DataView dvHojasRuta, dvDetalleHoja, dvCentrosTrabajo, dvOperaciones;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
@@ -69,7 +69,7 @@ namespace GyCAP.UI.EstructuraProducto
             try
             {
                 dsHojaRuta.HOJAS_RUTA.Clear();
-                dsHojaRuta.CENTROSXHOJARUTA.Clear();
+                dsHojaRuta.DETALLE_HOJARUTA.Clear();
                 dvHojasRuta.Table = null;
                 dvDetalleHoja.Table = null;
 
@@ -84,7 +84,7 @@ namespace GyCAP.UI.EstructuraProducto
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
                 dvHojasRuta.Table = dsHojaRuta.HOJAS_RUTA;
-                dvDetalleHoja.Table = dsHojaRuta.CENTROSXHOJARUTA;
+                dvDetalleHoja.Table = dsHojaRuta.DETALLE_HOJARUTA;
 
                 SetInterface(estadoUI.inicio);
             }
@@ -183,7 +183,7 @@ namespace GyCAP.UI.EstructuraProducto
                         BLL.HojaRutaBLL.Insertar(dsHojaRuta);
                         //Ahora si aceptamos los cambios
                         dsHojaRuta.HOJAS_RUTA.AcceptChanges();
-                        dsHojaRuta.CENTROSXHOJARUTA.AcceptChanges();
+                        dsHojaRuta.DETALLE_HOJARUTA.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
 
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
@@ -224,7 +224,7 @@ namespace GyCAP.UI.EstructuraProducto
                         BLL.HojaRutaBLL.Actualizar(dsHojaRuta);
                         //El dataset ya se actualizó en las capas DAL y BLL, aceptamos los cambios
                         dsHojaRuta.HOJAS_RUTA.AcceptChanges();
-                        dsHojaRuta.CENTROSXHOJARUTA.AcceptChanges();
+                        dsHojaRuta.DETALLE_HOJARUTA.AcceptChanges();
                         //Avisamos que estuvo todo ok
                         MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //Y por último seteamos el estado de la interfaz
@@ -264,13 +264,13 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvDetalleHoja.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Obtenemos el código
-                int codigo = Convert.ToInt32(dvDetalleHoja[dgvDetalleHoja.SelectedRows[0].Index]["cxhr_codigo"]);
+                int codigo = Convert.ToInt32(dvDetalleHoja[dgvDetalleHoja.SelectedRows[0].Index]["dhr_codigo"]);
                 //Lo borramos pero sólo del dataset
-                dsHojaRuta.CENTROSXHOJARUTA.FindByCXHR_CODIGO(codigo).Delete();
+                dsHojaRuta.DETALLE_HOJARUTA.FindByDHR_CODIGO(codigo).Delete();
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Centro de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debe seleccionar un detalle de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         
@@ -279,14 +279,14 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvDetalleHoja.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Obtenemos el código
-                int codigo = Convert.ToInt32(dvDetalleHoja[dgvDetalleHoja.SelectedRows[0].Index]["cxhr_codigo"]);
+                int codigo = Convert.ToInt32(dvDetalleHoja[dgvDetalleHoja.SelectedRows[0].Index]["dhr_codigo"]);
                 //Aumentamos la cantidad                
-                dsHojaRuta.CENTROSXHOJARUTA.FindByCXHR_CODIGO(codigo).CXHR_SECUENCIA += 1;
-                dvDetalleHoja.Sort = "CXHR_SECUENCIA ASC";
+                dsHojaRuta.DETALLE_HOJARUTA.FindByDHR_CODIGO(codigo).DHR_SECUENCIA += 1;
+                dvDetalleHoja.Sort = "DHR_SECUENCIA ASC";
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Centro de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debe seleccionar un detalle de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -295,23 +295,23 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvDetalleHoja.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Obtenemos el código
-                int codigo = Convert.ToInt32(dvDetalleHoja[dgvDetalleHoja.SelectedRows[0].Index]["cxhr_codigo"]);
-                if (dsHojaRuta.CENTROSXHOJARUTA.FindByCXHR_CODIGO(codigo).CXHR_SECUENCIA > 0)
+                int codigo = Convert.ToInt32(dvDetalleHoja[dgvDetalleHoja.SelectedRows[0].Index]["dhr_codigo"]);
+                if (dsHojaRuta.DETALLE_HOJARUTA.FindByDHR_CODIGO(codigo).DHR_SECUENCIA > 0)
                 {
                     //Aumentamos la cantidad                
-                    dsHojaRuta.CENTROSXHOJARUTA.FindByCXHR_CODIGO(codigo).CXHR_SECUENCIA -= 1;
+                    dsHojaRuta.DETALLE_HOJARUTA.FindByDHR_CODIGO(codigo).DHR_SECUENCIA -= 1;
                     dvDetalleHoja.Sort = "CXHR_SECUENCIA ASC";
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Centro de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debe seleccionar un detalle de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (dgvCentrosTrabajo.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            if (cbOperacion.GetSelectedIndex() != -1 && cbCentroTrabajo.GetSelectedIndex() != -1)
             {
                 bool agregar; //variable que indica si se debe agregar al listado
                 //Obtenemos el código según sea nueva o modificada, lo hacemos acá porque lo vamos a usar mucho
@@ -319,19 +319,19 @@ namespace GyCAP.UI.EstructuraProducto
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { hojaCodigo = -1; }
                 else { hojaCodigo = Convert.ToInt32(dvHojasRuta[dgvHojasRuta.SelectedRows[0].Index]["hr_codigo"]); }
                 //Obtenemos el código del centro trabajo, también lo vamos a usar mucho
-                int centroCodigo = Convert.ToInt32(dvCentrosTrabajo[dgvCentrosTrabajo.SelectedRows[0].Index]["cto_codigo"]);
-
+                int centroCodigo = cbCentroTrabajo.GetSelectedValueInt();
+                int operacionCodigo = cbOperacion.GetSelectedValueInt();
                 if (dvDetalleHoja.Count > 0)
                 {
                     //Algo tiene, comprobemos que no intente agregar lo mismo haciendo una consulta al dataset,
                     //no usamos el dataview porque no queremos volver a filtrar los datos y perderlos
-                    string filtro = "hr_codigo = " + hojaCodigo + " AND cto_codigo = " + centroCodigo;
-                    Data.dsHojaRuta.CENTROSXHOJARUTARow[] rows =
-                        (Data.dsHojaRuta.CENTROSXHOJARUTARow[])dsHojaRuta.CENTROSXHOJARUTA.Select(filtro);
+                    string filtro = "hr_codigo = " + hojaCodigo + " AND cto_codigo = " + centroCodigo + " AND opr_codigo = " + operacionCodigo;
+                    Data.dsHojaRuta.DETALLE_HOJARUTARow[] rows =
+                        (Data.dsHojaRuta.DETALLE_HOJARUTARow[])dsHojaRuta.DETALLE_HOJARUTA.Select(filtro);
                     if (rows.Length > 0)
                     {
                         //Ya lo ha agregado, avisemos
-                        MessageBox.Show("La Hoja de Ruta ya posee el Centro de Tarbajo seleccionado.", "Información: elemento duplicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("La Hoja de Ruta ya posee la Operación en el Centro de Trabajo seleccionados.", "Información: elemento duplicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //Como ya existe marcamos que no debe agregarse
                         agregar = false;
                     }
@@ -350,23 +350,26 @@ namespace GyCAP.UI.EstructuraProducto
                 //Ahora comprobamos si debe agregarse la materia prima o no
                 if (agregar)
                 {
-                    Data.dsHojaRuta.CENTROSXHOJARUTARow row = dsHojaRuta.CENTROSXHOJARUTA.NewCENTROSXHOJARUTARow();
+                    Data.dsHojaRuta.DETALLE_HOJARUTARow row = dsHojaRuta.DETALLE_HOJARUTA.NewDETALLE_HOJARUTARow();
                     row.BeginEdit();
                     //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
-                    row.CXHR_CODIGO = codigoDetalle--; //-- para que se vaya autodecrementando en cada inserción
+                    row.DHR_CODIGO = codigoDetalle--; //-- para que se vaya autodecrementando en cada inserción
                     row.HR_CODIGO = hojaCodigo;
+                    row.OPR_NUMERO = operacionCodigo;
                     row.CTO_CODIGO = centroCodigo;
-                    row.CXHR_SECUENCIA = nudSecuencia.Value;
+                    row.DHR_SECUENCIA = nudSecuencia.Value;
                     row.EndEdit();
                     //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
                     //todavia no vamos a insertar en la db hasta que no haga Guardar
-                    dsHojaRuta.CENTROSXHOJARUTA.AddCENTROSXHOJARUTARow(row);
+                    dsHojaRuta.DETALLE_HOJARUTA.AddDETALLE_HOJARUTARow(row);
                 }
+                cbOperacion.SetTexto("Seleccione");
+                cbCentroTrabajo.SetTexto("Seleccione");
                 nudSecuencia.Value = 0;
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Centro de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debe seleccionar una Operación y un Centro de Trabajo.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         
@@ -381,7 +384,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             //Descartamos los cambios realizamos hasta el momento sin guardar
             dsHojaRuta.HOJAS_RUTA.RejectChanges();
-            dsHojaRuta.CENTROSXHOJARUTA.RejectChanges();
+            dsHojaRuta.DETALLE_HOJARUTA.RejectChanges();
             SetInterface(estadoUI.inicio);
         }
 
@@ -505,33 +508,22 @@ namespace GyCAP.UI.EstructuraProducto
             dgvHojasRuta.Columns["HR_DESCRIPCION"].Resizable = DataGridViewTriState.True;
 
             dgvDetalleHoja.AutoGenerateColumns = false;
-            dgvDetalleHoja.Columns.Add("CXHR_SECUENCIA", "Secuencia");
+            dgvDetalleHoja.Columns.Add("DHR_SECUENCIA", "Secuencia");
+            dgvDetalleHoja.Columns.Add("OPR_NUMERO", "Operación");
             dgvDetalleHoja.Columns.Add("CTO_CODIGO", "Centro Trabajo");
-            dgvDetalleHoja.Columns["CXHR_SECUENCIA"].DataPropertyName = "CXHR_SECUENCIA";
-            dgvDetalleHoja.Columns["CXHR_SECUENCIA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvDetalleHoja.Columns["DHR_SECUENCIA"].DataPropertyName = "DHR_SECUENCIA";
+            dgvDetalleHoja.Columns["DHR_SECUENCIA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvDetalleHoja.Columns["CTO_CODIGO"].DataPropertyName = "CTO_CODIGO";
+            dgvDetalleHoja.Columns["OPR_NUMERO"].DataPropertyName = "OPR_NUMERO";
             dgvDetalleHoja.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-            dgvCentrosTrabajo.AutoGenerateColumns = false;
-            dgvCentrosTrabajo.Columns.Add("CTO_NOMBRE", "Nombre");
-            dgvCentrosTrabajo.Columns.Add("CTO_TIPO", "Tipo");
-            dgvCentrosTrabajo.Columns.Add("SEC_CODIGO", "Sector");
-            dgvCentrosTrabajo.Columns.Add("CTO_DESCRIPCION", "Descripción");
-            dgvCentrosTrabajo.Columns["CTO_NOMBRE"].DataPropertyName = "CTO_NOMBRE";
-            dgvCentrosTrabajo.Columns["CTO_TIPO"].DataPropertyName = "CTO_TIPO";
-            dgvCentrosTrabajo.Columns["SEC_CODIGO"].DataPropertyName = "SEC_CODIGO";
-            dgvCentrosTrabajo.Columns["CTO_DESCRIPCION"].DataPropertyName = "CTO_DESCRIPCION";
-            dgvCentrosTrabajo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dgvCentrosTrabajo.Columns["CTO_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvCentrosTrabajo.Columns["CTO_DESCRIPCION"].Resizable = DataGridViewTriState.True;
 
             //Dataviews, combos y carga de datos iniciales
             dvHojasRuta = new DataView(dsHojaRuta.HOJAS_RUTA);
             dvHojasRuta.Sort = "HR_NOMBRE ASC";
             dgvHojasRuta.DataSource = dvHojasRuta;
-            dvDetalleHoja = new DataView(dsHojaRuta.CENTROSXHOJARUTA);
+            dvDetalleHoja = new DataView(dsHojaRuta.DETALLE_HOJARUTA);
             dgvDetalleHoja.DataSource = dvDetalleHoja;
-            dvDetalleHoja.Sort = "CXHR_SECUENCIA ASC";
+            dvDetalleHoja.Sort = "DHR_SECUENCIA ASC";
             string[] nombres = { "Activa", "Inactiva" };
             int[] valores = { BLL.HojaRutaBLL.hojaRutaActiva, BLL.HojaRutaBLL.hojaRutaInactiva };
             cbActivaBuscar.SetDatos(nombres, valores, "--TODOS--", true);
@@ -540,6 +532,7 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 BLL.CentroTrabajoBLL.ObetenerCentrosTrabajo(null, null, null, BLL.CentroTrabajoBLL.CentroActivo, dsHojaRuta.CENTROS_TRABAJOS);
                 BLL.SectorBLL.ObtenerTodos(dsHojaRuta.SECTORES);
+                BLL.OperacionBLL.ObetenerOperaciones(dsHojaRuta.OPERACIONES);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -547,8 +540,10 @@ namespace GyCAP.UI.EstructuraProducto
             }
 
             dvCentrosTrabajo = new DataView(dsHojaRuta.CENTROS_TRABAJOS);
-            dvCentrosTrabajo.Sort = "CTO_NOMBRE ASC";
-            dgvCentrosTrabajo.DataSource = dvCentrosTrabajo;
+            dvOperaciones = new DataView(dsHojaRuta.OPERACIONES);
+            string[] display = { "OPR_CODIGO", "OPR_NOMBRE" };
+            cbOperacion.SetDatos(dvOperaciones, "OPR_NUMERO", display, " - ", "Seleccione", false);
+            cbCentroTrabajo.SetDatos(dvCentrosTrabajo, "CTO_CODIGO", "CTO_NOMBRE", "Seleccione", false);
         }        
 
         private void dgvHojasRuta_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -575,7 +570,7 @@ namespace GyCAP.UI.EstructuraProducto
                     else if (Convert.ToInt32(e.Value.ToString()) == BLL.HojaRutaBLL.hojaRutaInactiva) { nombre = "Inactiva"; }
                     e.Value = nombre;
                         break;
-                    case "HR+FECHAALTA":
+                    case "HR_FECHAALTA":
                         nombre = DateTime.Parse(e.Value.ToString()).ToShortDateString();
                         e.Value = nombre;
                         break;
@@ -588,7 +583,8 @@ namespace GyCAP.UI.EstructuraProducto
         private void SetSlide()
         {
             gbDatos.Parent = slideDatos;
-            gbCentrosTrabajo.Parent = slideAgregar;
+            gbAgregar.Parent = slideAgregar;
+            gbBotonesAgregar.Parent = slideAgregar;
             slideControl.AddSlide(slideAgregar);
             slideControl.AddSlide(slideDatos);
             slideControl.Selected = slideDatos;
@@ -598,7 +594,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             if (sender.GetType().Equals(txtNombre.GetType())) { (sender as TextBox).SelectAll(); }
             if (sender.GetType().Equals(txtDescripcion.GetType())) { (sender as RichTextBox).SelectAll(); }
-            //if (sender.GetType().Equals(nudCantidad.GetType())) { (sender as NumericUpDown).Select(0, 20); }
+            if (sender.GetType().Equals(nudSecuencia.GetType())) { (sender as NumericUpDown).Select(0, 20); }
         }
 
         private void button_MouseDown(object sender, MouseEventArgs e)
@@ -625,27 +621,8 @@ namespace GyCAP.UI.EstructuraProducto
                         nombre = dsHojaRuta.CENTROS_TRABAJOS.FindByCTO_CODIGO(Convert.ToInt32(e.Value.ToString())).CTO_NOMBRE;
                         e.Value = nombre;
                         break;
-                    default:
-                        break;
-                }
-            }
-        }        
-
-        private void dgvCentrosTrabajo_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.Value.ToString() != string.Empty)
-            {
-                string nombre = string.Empty;
-
-                switch (dgvCentrosTrabajo.Columns[e.ColumnIndex].Name)
-                {
-                    case "CTO_TIPO":
-                        if (Convert.ToInt32(e.Value.ToString()) == BLL.CentroTrabajoBLL.TipoHombre) { nombre = "Hombre"; }
-                        else if (Convert.ToInt32(e.Value.ToString()) == BLL.CentroTrabajoBLL.TipoMaquina) { nombre = "Máquina"; }
-                        e.Value = nombre;
-                        break;
-                    case "SEC_CODIGO":
-                        nombre = dsHojaRuta.SECTORES.FindBySEC_CODIGO(Convert.ToInt32(e.Value.ToString())).SEC_NOMBRE;
+                    case "OPR_NUMERO":
+                        nombre = dsHojaRuta.OPERACIONES.FindByOPR_NUMERO(Convert.ToInt32(e.Value.ToString())).OPR_NOMBRE;
                         e.Value = nombre;
                         break;
                     default:

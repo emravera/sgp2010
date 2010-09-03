@@ -94,6 +94,7 @@
     <Compile Include="MateriaPrimaPrincipalDAL.cs" />
     <Compile Include="ModeloCocinaDAL.cs" />
     <Compile Include="ModeloMaquinaDAL.cs" />
+    <Compile Include="OperacionDAL.cs" />
     <Compile Include="OrdenTrabajoDAL.cs" />
     <Compile Include="PedidoDAL.cs" />
     <Compile Include="PiezaDAL.cs" />
