@@ -2365,11 +2365,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string ORD_OBSERVACIONES {
                 get {
-                    try {
-                        return ((string)(this[this.tableORDENES_TRABAJO.ORD_OBSERVACIONESColumn]));
+                    if (this.IsORD_OBSERVACIONESNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ORD_OBSERVACIONES\' in table \'ORDENES_TRABAJO\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableORDENES_TRABAJO.ORD_OBSERVACIONESColumn]));
                     }
                 }
                 set {
@@ -2855,12 +2855,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string DORD_OBSERVACIONES {
                 get {
-                    try {
-                        return ((string)(this[this.tableDETALLE_ORDENES_TRABAJO.DORD_OBSERVACIONESColumn]));
+                    if (this.IsDORD_OBSERVACIONESNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DORD_OBSERVACIONES\' in table \'DETALLE_ORDENES_TRABAJO\' is D" +
-                                "BNull.", e);
+                    else {
+                        return ((string)(this[this.tableDETALLE_ORDENES_TRABAJO.DORD_OBSERVACIONESColumn]));
                     }
                 }
                 set {
