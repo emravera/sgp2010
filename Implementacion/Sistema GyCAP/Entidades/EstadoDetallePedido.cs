@@ -7,5 +7,26 @@ namespace GyCAP.Entidades
 {
     public class EstadoDetallePedido
     {
+        private long codigo;
+        private string nombre;
+        private string descripcion;
+
+        public long Codigo
+        {
+            get { return codigo; }
+            set { codigo = value; }
+        }
+
+        public string Nombre
+        {
+            get { return nombre; }
+            set { nombre = value; }
+        }
+
+        public string Descripcion
+        {
+            get { return descripcion; }
+            set { descripcion = value; }
+        }
     }
 }
