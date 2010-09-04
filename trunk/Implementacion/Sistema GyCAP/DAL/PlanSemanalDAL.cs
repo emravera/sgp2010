@@ -24,6 +24,25 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+        //Metodo que trae las cantidades planificadas de una cocina
+        public static int obtenerCocinasPlanificadas(int codigoCocina)
+        {
+            int cantidad = 0;
+
+            string sql = @"SELECT sum(dpsem_cantidadestimada)
+                           FROM DETALLE_PLANES_SEMANALES
+                           WHERE coc_codigo=@p0";
+
+            object[] valorParametros = { codigoCocina };
+            try
+            {
+                cantidad = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+            return cantidad;
+        }
+
         //METODO DE VALIDACION
         //Metodo que valida que no exista un plan semanal para ese año, mes y semana ya creado
         public static bool Validar(int codigoPlanMensual, int semana)
@@ -198,6 +217,8 @@ namespace GyCAP.DAL
 
                 foreach (Data.dsPlanSemanal.DIAS_PLAN_SEMANALRow row in dsPlanSemanal.DIAS_PLAN_SEMANAL.Rows)
                 {
+                    codigoDia = Convert.ToInt32(row.DIAPSEM_CODIGO);
+
                     //Elimino los dias
                     string sql = "DELETE FROM DIAS_PLAN_SEMANAL WHERE diapsem_codigo = @p0";
                     object[] valorParametros = { codigoDia };
