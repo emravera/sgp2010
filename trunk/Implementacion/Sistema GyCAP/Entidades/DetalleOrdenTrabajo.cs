@@ -7,5 +7,6 @@ namespace GyCAP.Entidades
 {
     public class DetalleOrdenTrabajo
     {
+        
     }
 }
