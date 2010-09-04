@@ -23,16 +23,31 @@ namespace GyCAP.BLL
            return DAL.PlanSemanalDAL.Validar(codigoPlanMensual, numeroSemana);
         }
 
-        //METODO DE GUARDADO DE DATOS
-        public static void InsertarPlanSemanal(Entidades.PlanSemanal planSemanal, Entidades.DiasPlanSemanal diaPlanSemanal, Data.dsPlanSemanal dsPlanSemanal)
+        //Metodo que verifica que no exista en un plan semanal ese dia
+        public static bool validarDia(DateTime dia)
         {
-            DAL.PlanSemanalDAL.GuardarPlanSemanal(planSemanal,diaPlanSemanal,dsPlanSemanal);
+            return DAL.PlanSemanalDAL.ValidarDia(dia);
         }
-        //Metodo para modificar el Plan Semanal
+        
+        //METODO DE GUARDADO DE DATOS
+        public static int InsertarPlanSemanal(Entidades.PlanSemanal planSemanal, Entidades.DiasPlanSemanal diaPlanSemanal, Data.dsPlanSemanal dsPlanSemanal, bool esPrimero)
+        {
+            return DAL.PlanSemanalDAL.GuardarPlanSemanal(planSemanal,diaPlanSemanal,dsPlanSemanal,esPrimero);
+        }
+        
+        //Metodo para MODIFICAR el Plan Semanal
         public static void ModificarPlanSemanal(Entidades.PlanSemanal planSemanal, Entidades.DiasPlanSemanal diaPlanSemanal, Data.dsPlanSemanal dsPlanSemanal)
         {
             DAL.PlanSemanalDAL.GuardarPlanModificado(planSemanal, diaPlanSemanal, dsPlanSemanal);
         }
+
+        //METODO PARA ELIMINAR EL PLAN SEMANAL
+        //METODO DE ELIMINACION
+        public static void EliminarPlan(int codigoPlan, Data.dsPlanSemanal dsPlanSemanal)
+        {
+            DAL.PlanSemanalDAL.EliminarPlan(codigoPlan, dsPlanSemanal);
+        }
+
 
 
     }
