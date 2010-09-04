@@ -19,7 +19,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         private DataView dvComboAnio, dvComboMesDatos, dvComboSemanaDatos;
         private enum estadoUI { inicio, nuevo, buscar, modificar, cargaDetalle };
         private static estadoUI estadoActual;
-        int codigoDetalle = -1;
+        int codigoDetalle = -1; bool esPrimero = true; int codigoPlanSemanal = 0;
 
 
         public frmPlanSemanal()
@@ -246,7 +246,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnEliminar.Enabled = false;
                     btnModificar.Enabled = false;
                     tcPlanAnual.SelectedTab = tpDatos;
-                    estadoActual = estadoUI.inicio;
+                    estadoActual = estadoUI.nuevo;
 
                     //Ponemos los combo en su estado
                     cbPlanAnual.Enabled = true;
@@ -272,6 +272,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbCargaDetalle.Visible = false;
                     gbDetalleGrillaDatos.Visible = false;
                     gbBotones.Visible = false;
+                    gbCantidades.Visible = false;
                     break;
 
                 //Cuando se carga el Detalle
@@ -281,7 +282,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnEliminar.Enabled = false;
                     btnModificar.Enabled = false;
                     tcPlanAnual.SelectedTab = tpDatos;
-                    estadoActual = estadoUI.inicio;
+                    estadoActual = estadoUI.cargaDetalle;
                     gbDatosPrincipales.Enabled = false;
 
                     //Seteamos los estados de los groupbox
@@ -289,6 +290,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbCargaDetalle.Visible = true;
                     gbDetalleGrillaDatos.Visible = true;
                     gbBotones.Visible = true;
+                    gbCantidades.Visible = true;
 
                     //Seteamos los estados de los controles
                     rbUnidades.Checked = true;
@@ -321,6 +323,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbCargaDetalle.Visible = true;
                     gbDetalleGrillaDatos.Visible = true;
                     gbBotones.Visible = true;
+                    gbCantidades.Visible = true;
 
                     //Seteamos los estados de los controles
                     rbUnidades.Checked = true;
@@ -335,8 +338,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                     dgvDatos.Columns["DPSEM_ESTADO"].Visible = false;
                     dgvDatos.Columns["DPSEM_CANTIDADREAL"].Visible = false;
                     break;
-
-
 
                 default:
                     break;
@@ -388,7 +389,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             else numeroSemana =Convert.ToInt32(cbSemanaDatos.GetSelectedText());
             
             //Valido que la semana que se quiere cargar no exista 
-
             if (BLL.PlanSemanalBLL.validarDetalle(pmes, numeroSemana) == false) msjerror = msjerror + "-Ya existe un plan semanal generado para esa semana del año\n";
 
             if (msjerror != string.Empty)
@@ -396,7 +396,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 msjerror = "Los errores de Validación encontrados son:\n" + msjerror;
             }
 
-            return msjerror;
+            return msjerror; 
         }
 
         //Metodo que valida que se agregue un detalle
@@ -452,6 +452,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                     msjerror = msjerror + "-El modelo de cocina que intenta agregar ya se encuentra en la planificación\n";
                 }
             }
+            //Valido que no exista un plan para el dia que selecciono}
+            if (BLL.PlanSemanalBLL.validarDia(Convert.ToDateTime(dtpFechaDia.Value)) == false) msjerror = msjerror + "-El día que intenta agregar ya esta incluido en otro plan semanal\n"; ;
             
             //Verifico si hay errores y les agrego una cabecera
             if (msjerror != string.Empty)
@@ -828,6 +830,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             string validacion = ValidarCargaDetalle();
             try
             {
+                //Se pone el plan Mensual en cero
+                codigoPlanSemanal = 0;
+
                 if (validacion == string.Empty)
                 {
                     //Se debe cargar la grilla de datos del plan mensual
@@ -894,9 +899,17 @@ namespace GyCAP.UI.PlanificacionProduccion
                     row.DPSEM_CODIGO = codigoDetalle--;
                     row.DIAPSEM_CODIGO = codigoDia;
                     row.COC_CODIGO = Convert.ToInt32(dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["coc_codigo"]);
-                    
-                    //Le pongo estado 0 que significa que no tiene ordenes de trabajo
-                    row.DPSEM_ESTADO = 0;
+
+                    if (estadoActual == estadoUI.cargaDetalle)
+                    {
+                        //Le pongo estado 0 que significa que no tiene ordenes de trabajo
+                        row.DPSEM_ESTADO = BLL.DetallePlanSemanalBLL.estadoGenerado;
+                    }
+                    else if (estadoActual == estadoUI.modificar)
+                    {
+                        //Le pongo estado 0 que significa que no tiene ordenes de trabajo
+                        row.DPSEM_ESTADO = BLL.DetallePlanSemanalBLL.estadoModificado;
+                    }
                     if (rbUnidades.Checked == true)
                     {
                         cantidad = Convert.ToInt32(numUnidades.Value);
@@ -904,7 +917,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     }
                     else
                     {
-                        int cantidadMes = Convert.ToInt32(dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["dpsem_cantidadestimada"]);
+                        int cantidadMes = Convert.ToInt32(dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["dpmes_cantidadestimada"]);
                         cantidad = Convert.ToInt32(cantidadMes * (numPorcentaje.Value / 100));
                         row.DPSEM_CANTIDADESTIMADA = cantidad;
 
@@ -988,9 +1001,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 MessageBox.Show("La cantidad a planificar en la semana no puede ser menor que cero", "Información: Cantidad Mayor", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-
-
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -1021,16 +1031,27 @@ namespace GyCAP.UI.PlanificacionProduccion
                 planSemanal.FechaCreacion = BLL.DBBLL.GetFechaServidor();
                 planSemanal.PlanMensual = planMensual;
                 planSemanal.Semana =Convert.ToInt32(cbSemanaDatos.GetSelectedText());
+                planSemanal.Codigo = codigoPlanSemanal;
 
                 //Creamos el objeto del dia del Plan Semanal
                 Entidades.DiasPlanSemanal diaPlan = new GyCAP.Entidades.DiasPlanSemanal();
                 diaPlan.Dia = getDia(dtpFechaDia.Value);
                 diaPlan.Fecha = dtpFechaDia.Value;
                 diaPlan.PlanSemanal = planSemanal;
+
                 if (estadoActual == estadoUI.cargaDetalle)
                 {
-                    //Llamamos al método que realiza el guardado de los datos en la clase Plan Semanal
-                    BLL.PlanSemanalBLL.InsertarPlanSemanal(planSemanal, diaPlan, dsPlanSemanal);
+                    if (esPrimero == true)
+                    {
+                        //Llamamos al método que realiza el guardado de los datos en la clase Plan Semanal
+                        codigoPlanSemanal = BLL.PlanSemanalBLL.InsertarPlanSemanal(planSemanal, diaPlan, dsPlanSemanal, esPrimero);
+                    }
+                    else
+                    {
+                        int guardaCodigo = codigoPlanSemanal;
+                        codigoPlanSemanal = BLL.PlanSemanalBLL.InsertarPlanSemanal(planSemanal, diaPlan, dsPlanSemanal, esPrimero);
+                        codigoPlanSemanal = guardaCodigo;
+                    }
                 }
                 else if (estadoActual == estadoUI.modificar)
                 {
@@ -1039,12 +1060,31 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
                 //Si esta todo bien aceptamos los cambios que se le hacen al dataset
                 dsPlanSemanal.AcceptChanges();
+                                      
 
-                MessageBox.Show("Los datos se han almacenado correctamente", "Informacion: Demanda Anual - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //Verificamos si esta modificando
+                if (estadoActual == estadoUI.modificar)
+                {
+                    MessageBox.Show("Los datos del día modificado se han almacenado correctamente", "Informacion: Plan Semanal - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    SetInterface(estadoUI.inicio);
 
-                //Vuelvo al estado inicial de la interface
-                SetInterface(estadoUI.inicio);
+                }
+                else if (estadoActual == estadoUI.cargaDetalle)
+                {
+                    //Verifico si quiere continuar cargando
+                    MessageBox.Show("Los datos del día se han almacenado correctamente", "Informacion: Plan Semanal - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    DialogResult respuesta = MessageBox.Show("¿Desea continuar Cargando otro día de la semana?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
+                    if (respuesta == DialogResult.Yes)
+                    {
+                        esPrimero = false;
+                        SetInterface(estadoUI.cargaDetalle);
+                    }
+                    else
+                    {
+                        SetInterface(estadoUI.inicio);
+                    }
+                }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -1112,7 +1152,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                         dtpFechaDia.Value = fecha;
                     }
 
-
                     SetInterface(estadoUI.modificar);
                 }
                 else
@@ -1127,7 +1166,57 @@ namespace GyCAP.UI.PlanificacionProduccion
 
 
         }
-       
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Preguntamos si está seguro
+                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el Plan Semanal seleccionada y todo su detalle ?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (respuesta == DialogResult.Yes)
+                {
+                    try
+                    {
+                        //Obtengo el Codigo del plan Semanal
+                        int codigoPlanSemanal =Convert.ToInt32(cbSemana.GetSelectedValue());
+                        
+                       //Elimino el plan anual y su detalle de la BD
+                        BLL.PlanSemanalBLL.EliminarPlan(codigoPlanSemanal, dsPlanSemanal);
+
+                       //Limpio el dataset de detalles
+                       dsPlanSemanal.DETALLE_PLANES_SEMANALES.Clear();
+
+                       //Limpio el Dataset de Dias
+                       dsPlanSemanal.DIAS_PLAN_SEMANAL.Clear();
+
+                       //Lo eliminamos del dataset
+                       dsPlanSemanal.PLANES_SEMANALES.FindByPSEM_CODIGO(codigoPlanSemanal).Delete();
+                       dsPlanSemanal.PLANES_SEMANALES.AcceptChanges();
+
+                       //Avisamos que se elimino 
+                       MessageBox.Show("Se han eliminado los datos correctamente", "Información: Elemento Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                      //Ponemos la ventana en el estado inicial
+                      SetInterface(estadoUI.inicio);
+                                             
+                    }
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una Designación de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
+        }
 
     }
 }

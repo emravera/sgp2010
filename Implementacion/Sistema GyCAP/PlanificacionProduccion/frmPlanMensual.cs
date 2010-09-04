@@ -83,7 +83,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Agregamos la columnas
             dgvDatos.Columns.Add("DPMES_CODIGO", "Código");
             dgvDatos.Columns.Add("PMES_CODIGO", "Mes");
-            dgvDatos.Columns.Add("DIAPMES_CODIGO", "Dia");
             dgvDatos.Columns.Add("COC_CODIGO", "Cocina Codigo");
             dgvDatos.Columns.Add("DPMES_CANTIDADESTIMADA", "Cantidad Estimada");
             dgvDatos.Columns.Add("DPMES_CANTIDADREAL", "Cantidad Real");
@@ -96,7 +95,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDatos.Columns["DPMES_CANTIDADREAL"].DataPropertyName = "DPMES_CANTIDADREAL";
 
             //Seteamos el modo de tamaño de las columnas
-            dgvDatos.Columns[0].Visible = false;
             dgvDatos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDatos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDatos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -255,6 +253,12 @@ namespace GyCAP.UI.PlanificacionProduccion
                     tcPlanAnual.SelectedTab = tpDatos;
                     SetInterface(estadoUI.cargaDetalle);
                     estadoActual = estadoUI.modificar;
+                    //Radiobuttons
+                    rbUnidades.Checked = true;
+                    //Escondo las columnas que no quiero mostrar de la grilla
+                    dgvDatos.Columns["DPMES_CODIGO"].Visible = false;
+                    dgvDatos.Columns["PMES_CODIGO"].Visible = false;
+                    dgvDatos.Columns["DPMES_CANTIDADREAL"].Visible = false;
                     break;
 
                 case estadoUI.nuevo:
@@ -550,7 +554,16 @@ namespace GyCAP.UI.PlanificacionProduccion
 
            
             //Validamos que no se quiera agregar un modelo que ya está en el dataset
-            foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in dsPlanMensual.DETALLE_PLANES_MENSUALES.Rows)
+            foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])dsPlanMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.Added))
+            {
+                if (row["COC_CODIGO"].ToString() == Convert.ToString(cbCocinas.GetSelectedValue()))
+                {
+                    msjerror = msjerror + "-El modelo de cocina que intenta agregar ya se encuentra en la planificación\n";
+                }
+            }
+
+            //Validamos que no se quiera agregar un modelo que ya está en el dataset
+            foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])dsPlanMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
             {
                 if (row["COC_CODIGO"].ToString() == Convert.ToString(cbCocinas.GetSelectedValue()))
                 {
@@ -567,7 +580,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void dgvDatos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.Value.ToString() != String.Empty)
+            if (e.Value != null)
             {
                 switch (dgvDatos.Columns[e.ColumnIndex].Name)
                 {
@@ -673,8 +686,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
                 //Si esta todo bien aceptamos los cambios que se le hacen al dataset
                 dsPlanMensual.AcceptChanges();
-                
-                MessageBox.Show("Los datos se han almacenado correctamente", "Informacion: Demanda Anual - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                MessageBox.Show("Los datos se han almacenado correctamente", "Informacion: Plan Mensual - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //Vuelvo al estado inicial de la interface
                 SetInterface(estadoUI.inicio);
@@ -739,13 +752,13 @@ namespace GyCAP.UI.PlanificacionProduccion
                     try
                     {
                         //Obtengo el Codigo del plan
-                        int codigo = Convert.ToInt32(dvListaPlanes[dgvLista.SelectedRows[0].Index]["pan_codigo"]);
+                        int codigo = Convert.ToInt32(dvListaPlanes[dgvLista.SelectedRows[0].Index]["pmes_codigo"]);
 
                         //Pregunto si se puede eliminar
                         if (BLL.PlanMensualBLL.ExistePlanSemanal(codigo) == true)
                         {
                             //Elimino el plan anual y su detalle de la BD
-                            BLL.PlanAnualBLL.Eliminar(codigo);
+                            BLL.PlanMensualBLL.EliminarPlan(codigo);
 
                             //Limpio el dataset de detalles
                             dsPlanMensual.DETALLE_PLANES_MENSUALES.Clear();
@@ -778,11 +791,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                 MessageBox.Show("Debe seleccionar una Designación de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-
-        }
-
-        private void dgvLista_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
         }
 

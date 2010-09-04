@@ -41,9 +41,25 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+        //Metodo que valida que no ecista el dia que se quiere insertar en otro plan semanal
+        public static bool ValidarDia(DateTime dia)
+        {
+            string sql = @"SELECT count(diapsem_codigo)
+                           FROM DIAS_PLAN_SEMANAL
+                           WHERE diapsem_fecha LIKE @p0";
 
+            string diaTexto = "'" + dia.ToString() + "'";
+            object[] valorParametros = { diaTexto };
+            try
+            {
+                int cantidad = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+                if (cantidad == 0) return true;
+                else return false;
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
         //METODO DE INSERCION
-        public static void GuardarPlanSemanal(Entidades.PlanSemanal planSemanal, Entidades.DiasPlanSemanal diaPlanSemanal, Data.dsPlanSemanal dsPlanSemanal)
+        public static int GuardarPlanSemanal(Entidades.PlanSemanal planSemanal, Entidades.DiasPlanSemanal diaPlanSemanal, Data.dsPlanSemanal dsPlanSemanal, bool esPrimero)
         {
 
             SqlTransaction transaccion = null;
@@ -52,32 +68,39 @@ namespace GyCAP.DAL
             {
                 //Inicio la transaccion 
                 transaccion = DB.IniciarTransaccion();
+                string sql = string.Empty;
+                int codigo = 0;
 
-                //Inserto el PlanSemanal
-                //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
-                string sql = "INSERT INTO [PLANES_SEMANALES] ([pmes_codigo], [psem_semana], [psem_fechacreacion]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
-                object[] valorParametros = { planSemanal.PlanMensual.Codigo, planSemanal.Semana, planSemanal.FechaCreacion };
-                planSemanal.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
-
-                //Inserto el dia del Plan Semanal
-                sql = "INSERT INTO [DIAS_PLAN_SEMANAL] ([diapsem_dia], [diapsem_fecha], [psem_codigo]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
-                object[] valorPara = { diaPlanSemanal.Dia, diaPlanSemanal.Fecha, diaPlanSemanal.PlanSemanal.Codigo };
-                diaPlanSemanal.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorPara, null));
-                
-                //Inserto el Detalle
-                sql = "INSERT INTO [DETALLE_PLANES_SEMANALES] ([diapsem_codigo], [coc_codigo], [dpsem_cantidadestimada], [dpsem_estado]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
-                foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow row in (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow[])dsPlanSemanal.DETALLE_PLANES_SEMANALES.Select(null, null, System.Data.DataViewRowState.Added))
+                if (esPrimero == true)
                 {
-                    object[] valorParam = { diaPlanSemanal.Codigo, row.COC_CODIGO, row.DPSEM_CANTIDADESTIMADA, row.DPSEM_ESTADO };
-                    row.BeginEdit();
-                    row.DPSEM_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, null));
-                    row.DIAPSEM_CODIGO = diaPlanSemanal.Codigo;
-                    row.EndEdit();
+                    //Inserto el PlanSemanal
+                    //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
+                    sql = "INSERT INTO [PLANES_SEMANALES] ([pmes_codigo], [psem_semana], [psem_fechacreacion]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
+                    object[] valorParametros = { planSemanal.PlanMensual.Codigo, planSemanal.Semana, planSemanal.FechaCreacion };
+                    planSemanal.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+                    codigo = planSemanal.Codigo;
                 }
+                    //Inserto el dia del Plan Semanal
+                    sql = "INSERT INTO [DIAS_PLAN_SEMANAL] ([diapsem_dia], [diapsem_fecha], [psem_codigo]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
+                    object[] valorPara = { diaPlanSemanal.Dia, diaPlanSemanal.Fecha, diaPlanSemanal.PlanSemanal.Codigo };
+                    diaPlanSemanal.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorPara, null));
 
-                transaccion.Commit();
-                DB.FinalizarTransaccion();
+                    //Inserto el Detalle
+                    sql = "INSERT INTO [DETALLE_PLANES_SEMANALES] ([diapsem_codigo], [coc_codigo], [dpsem_cantidadestimada], [dpsem_estado]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+                    foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow row in (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow[])dsPlanSemanal.DETALLE_PLANES_SEMANALES.Select(null, null, System.Data.DataViewRowState.Added))
+                    {
+                        object[] valorParam = { diaPlanSemanal.Codigo, row.COC_CODIGO, row.DPSEM_CANTIDADESTIMADA, row.DPSEM_ESTADO };
+                        row.BeginEdit();
+                        row.DPSEM_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, null));
+                        row.DIAPSEM_CODIGO = diaPlanSemanal.Codigo;
+                        row.EndEdit();
+                    }
 
+                    transaccion.Commit();
+                    DB.FinalizarTransaccion();
+
+                 
+                return codigo;
             }
             catch (SqlException)
             {
@@ -101,8 +124,8 @@ namespace GyCAP.DAL
                 string sql = string.Empty;
 
                 //Modifico el dia del plan semanal
-                sql = "UPDATE [PLANES_SEMANALES] SET psem_semana=@p0";
-                object[] valorParametros = { planSemanal.Semana };
+                sql = "UPDATE [DIA_PLAN_SEMANAL] SET diapsem_dia=@p0, diapsem_fecha=@p1 WHERE psem_semana=@p2";
+                object[] valorParametros = { diaPlanSemanal.Dia, diaPlanSemanal.Fecha, planSemanal.Semana };
                 DB.executeNonQuery(sql, valorParametros,transaccion);
 
                 //Inserto los detalles nuevos
@@ -117,10 +140,10 @@ namespace GyCAP.DAL
                 }
 
                 //Guardo las modificaciones
-                sql = "UPDATE [DETALLE_PLANES_SEMANALES] SET dpsem_cantidadestimada=@p0 ";
+                sql = "UPDATE [DETALLE_PLANES_SEMANALES] SET dpsem_cantidadestimada=@p0 WHERE dpsem_codigo=@p1";
                 foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow row in (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow[])dsPlanSemanal.DETALLE_PLANES_SEMANALES.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
                 {
-                    object[] valorPar = { row.DPSEM_CANTIDADESTIMADA };
+                    object[] valorPar = { row.DPSEM_CANTIDADESTIMADA, row.DPSEM_CODIGO};
                     DB.executeNonQuery(sql, valorPar, transaccion);
                 }
 
@@ -144,6 +167,64 @@ namespace GyCAP.DAL
             }
 
         }
+        //METODO DE ELIMINACION DE LA BASE DE DATOS
+        public static void EliminarPlan(int codigoPlan, Data.dsPlanSemanal dsPlanSemanal)
+        {
+            SqlTransaction transaccion = null;
+            int codigoDia = 0;
+            try
+            {
+                //Iniciamos la transaccion
+                transaccion = DB.IniciarTransaccion();
+
+
+                foreach (Data.dsPlanSemanal.DIAS_PLAN_SEMANALRow row in dsPlanSemanal.DIAS_PLAN_SEMANAL.Rows)
+                {
+                    codigoDia =Convert.ToInt32(row.DIAPSEM_CODIGO);
+
+                    try
+                    {
+                        //Elimino el detalle del plan mensual
+                        string sql = "DELETE FROM DETALLE_PLANES_SEMANALES WHERE diapsem_codigo = @p0";
+                        object[] valorParam = { codigoDia };
+                        DB.executeNonQuery(sql, valorParam, null);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Entidades.Excepciones.ElementoEnTransaccionException();
+                    }
+
+                }
+
+                foreach (Data.dsPlanSemanal.DIAS_PLAN_SEMANALRow row in dsPlanSemanal.DIAS_PLAN_SEMANAL.Rows)
+                {
+                    //Elimino los dias
+                    string sql = "DELETE FROM DIAS_PLAN_SEMANAL WHERE diapsem_codigo = @p0";
+                    object[] valorParametros = { codigoDia };
+                    DB.executeNonQuery(sql, valorParametros, null);
+                }
+
+                //Elimino el plan semanal
+                string sqlPS = "DELETE FROM PLANES_SEMANALES WHERE psem_codigo = @p0";
+                object[] valorPara = { codigoPlan };
+                DB.executeNonQuery(sqlPS, valorPara, null);
+
+
+                transaccion.Commit();
+                DB.FinalizarTransaccion();
+            }
+            catch (SqlException)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException();
+            }
+            catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+            {
+                transaccion.Rollback();                
+            }
+
+        }
+
 
 
     }
