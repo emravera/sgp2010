@@ -31,5 +31,64 @@ namespace GyCAP.DAL
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
+        
+        //Busqueda con filtros desde el formulario
+        public static void buscarOperacion(Data.dsOperacionesFabricacion dsOperaciones, string nombre, string codificacion)
+        {
+            string sql = @"SELECT opr_numero, opr_codigo, opr_nombre, opr_descripcion, opr_horasrequerida
+                           FROM OPERACIONES";
+
+            object[] valorParametros = { null };
+            object[] valoresPram = { null, null };
+
+            //Si busca solo por el nombre
+            if (nombre != String.Empty && codificacion == string.Empty)
+            {
+                //Agrego la busqueda por nombre
+                sql = sql + " WHERE opr_nombre LIKE @p0";
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                nombre = "%" + nombre + "%";
+                valorParametros.SetValue(nombre, 0);
+            }
+            else if (nombre == string.Empty && codificacion != string.Empty)
+            {
+                //Agrego la busqueda por marca
+                sql = sql + " WHERE opr_codigo LIKE @p0";
+                codificacion = "%" + codificacion + "%";
+                valorParametros.SetValue(codificacion, 0);
+            }
+            else if (nombre != string.Empty && codificacion != string.Empty)
+            {
+                //Agrego la busqueda por marca
+                sql = sql + " WHERE opr_codigo LIKE @p0 and opr_nombre LIKE @p1";
+                codificacion = "%" + codificacion + "%";
+                //Le doy valores a la estructura
+                valoresPram.SetValue(codificacion, 0);
+                valoresPram.SetValue(nombre, 1);
+            }
+
+            //Ejecuto el comando a la BD
+            try
+            {
+                if (valorParametros.GetValue(0) == null && valoresPram.GetValue(0) == null)
+                {
+                    //Se ejcuta normalmente y por defecto trae todos los elementos de la DB
+                    DB.FillDataSet(dsOperaciones, "OPERACIONES", sql, null);
+                }
+                else
+                {
+                    if (valoresPram.GetValue(0) == null)
+                    {
+                        DB.FillDataSet(dsOperaciones, "OPERACIONES", sql, valorParametros);
+                    }
+                    else
+                    {
+                        DB.FillDataSet(dsOperaciones, "OPERACIONES", sql, valoresPram);
+                    }
+                }
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
     }
 }

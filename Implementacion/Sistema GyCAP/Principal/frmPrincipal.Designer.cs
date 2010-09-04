@@ -85,6 +85,7 @@
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnOperaciones = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -447,7 +448,8 @@
             this.tsMaquinas,
             this.btnPlanMensual,
             this.btnPlanSemanal,
-            this.toolCliente});
+            this.toolCliente,
+            this.btnOperaciones});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(792, 36);
@@ -609,6 +611,16 @@
             this.lblEstado.Size = new System.Drawing.Size(38, 17);
             this.lblEstado.Text = "Status";
             // 
+            // btnOperaciones
+            // 
+            this.btnOperaciones.Image = ((System.Drawing.Image)(resources.GetObject("btnOperaciones.Image")));
+            this.btnOperaciones.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnOperaciones.Name = "btnOperaciones";
+            this.btnOperaciones.Size = new System.Drawing.Size(71, 33);
+            this.btnOperaciones.Text = "Operaciones";
+            this.btnOperaciones.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnOperaciones.Click += new System.EventHandler(this.btnOperaciones_Click);
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -692,6 +704,7 @@
         private System.Windows.Forms.ToolStripButton btnPlanMensual;
         private System.Windows.Forms.ToolStripButton btnPlanSemanal;
         private System.Windows.Forms.ToolStripButton toolCliente;
+        private System.Windows.Forms.ToolStripButton btnOperaciones;
     }
 }
 
