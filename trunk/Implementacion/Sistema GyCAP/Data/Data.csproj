@@ -99,6 +99,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsEmpleadosyCapacidades.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsEstadoDetallePedido.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEstadoDetallePedido.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsEstadoEmpleado.cs">
       <DependentUpon>dsEstadoEmpleado.xsd</DependentUpon>
     </Compile>
@@ -111,6 +116,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsEstadoMaquina.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsEstadoPedidos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEstadoPedidos.xsd</DependentUpon>
     </Compile>
     <Compile Include="dsEstimarDemanda.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -328,6 +338,17 @@
     <None Include="dsEmpleadosyCapacidades.xss">
       <DependentUpon>dsEmpleadosyCapacidades.xsd</DependentUpon>
     </None>
+    <None Include="dsEstadoDetallePedido.xsc">
+      <DependentUpon>dsEstadoDetallePedido.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstadoDetallePedido.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEstadoDetallePedido.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsEstadoDetallePedido.xss">
+      <DependentUpon>dsEstadoDetallePedido.xsd</DependentUpon>
+    </None>
     <None Include="dsEstadoEmpleado.xsc">
       <DependentUpon>dsEstadoEmpleado.xsd</DependentUpon>
     </None>
@@ -349,6 +370,17 @@
     </None>
     <None Include="dsEstadoMaquina.xss">
       <DependentUpon>dsEstadoMaquina.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstadoPedidos.xsc">
+      <DependentUpon>dsEstadoPedidos.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstadoPedidos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEstadoPedidos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsEstadoPedidos.xss">
+      <DependentUpon>dsEstadoPedidos.xsd</DependentUpon>
     </None>
     <None Include="dsEstimarDemanda.xsc">
       <DependentUpon>dsEstimarDemanda.xsd</DependentUpon>

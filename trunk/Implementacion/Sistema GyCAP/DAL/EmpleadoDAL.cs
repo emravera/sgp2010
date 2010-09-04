@@ -110,20 +110,26 @@ namespace GyCAP.DAL
         //Metodo que verifica que no este usado en otro lugar
         public static bool PuedeEliminarse(long codigo)
         {
-            string sql = "SELECT count(E_codigo) FROM xxx WHERE E_codigo = @p0";
+            string sqlDPM = "SELECT count(DPMAN_CODIGO) FROM DETALLE_PLANES_MANTENIMIENTO WHERE E_codigo = @p0";
+            string sqlDOT = "SELECT count(MCA_CODIGO) FROM DETALLE_ORDENES_TRABAJO  WHERE E_codigo = @p0";
+            string sqlESTR = "SELECT count(ESTR_CODIGO) FROM ESTRUCTURAS WHERE E_codigo = @p0";
+            string sqlUSU = "SELECT count(U_CODIGO) FROM USUARIOS WHERE E_codigo = @p0";
+            string sqlCXE = "SELECT count(CXE_CODIGO) FROM CAPACIDADESXEMPLEADO WHERE E_codigo = @p0";
+
+
             object[] valorParametros = { codigo };
             try
             {
-                //if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
-                //{
-                return true;
-                //}
-                //else
-                //{
-                //    return false;
-                //}
+                int resultadoDPM = Convert.ToInt32(DB.executeScalar(sqlDPM, valorParametros, null));
+                int resultadoDOT = Convert.ToInt32(DB.executeScalar(sqlDOT, valorParametros, null));
+                int resultadoESTR = Convert.ToInt32(DB.executeScalar(sqlESTR, valorParametros, null));
+                int resultadoUSU = Convert.ToInt32(DB.executeScalar(sqlUSU, valorParametros, null));
+                int resultadoCXE = Convert.ToInt32(DB.executeScalar(sqlCXE, valorParametros, null));
+
+                if (resultadoDPM == 0 && resultadoDOT == 0 && resultadoESTR && resultadoUSU && resultadoCXE) { return true; }
+                else { return false; }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         //Metodo que elimina de la base de datos
