@@ -1351,6 +1351,8 @@ namespace GyCAP.Data {
             
             private global::System.Data.DataColumn columnDPMES_CANTIDADREAL;
             
+            private global::System.Data.DataColumn columnDPMES_CANTPLANIFICADA;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public DETALLE_PLANES_MENSUALESDataTable() {
                 this.TableName = "DETALLE_PLANES_MENSUALES";
@@ -1417,6 +1419,13 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DPMES_CANTPLANIFICADAColumn {
+                get {
+                    return this.columnDPMES_CANTPLANIFICADA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1445,14 +1454,15 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PLANES_MENSUALESRow AddDETALLE_PLANES_MENSUALESRow(PLANES_MENSUALESRow parentPLANES_MENSUALESRowBydetallePlanMensual_planMensual_fk, COCINASRow parentCOCINASRowBydetallePlanMensual_cocina_fk, int DPMES_CANTIDADESTIMADA, int DPMES_CANTIDADREAL) {
+            public DETALLE_PLANES_MENSUALESRow AddDETALLE_PLANES_MENSUALESRow(PLANES_MENSUALESRow parentPLANES_MENSUALESRowBydetallePlanMensual_planMensual_fk, COCINASRow parentCOCINASRowBydetallePlanMensual_cocina_fk, int DPMES_CANTIDADESTIMADA, int DPMES_CANTIDADREAL, decimal DPMES_CANTPLANIFICADA) {
                 DETALLE_PLANES_MENSUALESRow rowDETALLE_PLANES_MENSUALESRow = ((DETALLE_PLANES_MENSUALESRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
                         null,
                         DPMES_CANTIDADESTIMADA,
-                        DPMES_CANTIDADREAL};
+                        DPMES_CANTIDADREAL,
+                        DPMES_CANTPLANIFICADA};
                 if ((parentPLANES_MENSUALESRowBydetallePlanMensual_planMensual_fk != null)) {
                     columnValuesArray[1] = parentPLANES_MENSUALESRowBydetallePlanMensual_planMensual_fk[0];
                 }
@@ -1489,6 +1499,7 @@ namespace GyCAP.Data {
                 this.columnCOC_CODIGO = base.Columns["COC_CODIGO"];
                 this.columnDPMES_CANTIDADESTIMADA = base.Columns["DPMES_CANTIDADESTIMADA"];
                 this.columnDPMES_CANTIDADREAL = base.Columns["DPMES_CANTIDADREAL"];
+                this.columnDPMES_CANTPLANIFICADA = base.Columns["DPMES_CANTPLANIFICADA"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1503,6 +1514,8 @@ namespace GyCAP.Data {
                 base.Columns.Add(this.columnDPMES_CANTIDADESTIMADA);
                 this.columnDPMES_CANTIDADREAL = new global::System.Data.DataColumn("DPMES_CANTIDADREAL", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDPMES_CANTIDADREAL);
+                this.columnDPMES_CANTPLANIFICADA = new global::System.Data.DataColumn("DPMES_CANTPLANIFICADA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDPMES_CANTPLANIFICADA);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnDPMES_CODIGO}, true));
                 this.columnDPMES_CODIGO.AutoIncrement = true;
@@ -1513,6 +1526,7 @@ namespace GyCAP.Data {
                 this.columnDPMES_CODIGO.Unique = true;
                 this.columnPMES_CODIGO.AllowDBNull = false;
                 this.columnCOC_CODIGO.AllowDBNull = false;
+                this.columnDPMES_CANTPLANIFICADA.DefaultValue = ((decimal)(0m));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2962,6 +2976,22 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal DPMES_CANTPLANIFICADA {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTPLANIFICADAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DPMES_CANTPLANIFICADA\' de la tabla \'DETALLE_PLANES_MENSUA" +
+                                "LES\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTPLANIFICADAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public PLANES_MENSUALESRow PLANES_MENSUALESRow {
                 get {
                     return ((PLANES_MENSUALESRow)(this.GetParentRow(this.Table.ParentRelations["detallePlanMensual_planMensual_fk"])));
@@ -2999,6 +3029,16 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetDPMES_CANTIDADREALNull() {
                 this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTIDADREALColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDPMES_CANTPLANIFICADANull() {
+                return this.IsNull(this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTPLANIFICADAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDPMES_CANTPLANIFICADANull() {
+                this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTPLANIFICADAColumn] = global::System.Convert.DBNull;
             }
         }
         

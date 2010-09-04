@@ -16,7 +16,13 @@ namespace GyCAP.BLL
         {
             DAL.PlanSemanalDAL.obtenerPS(dtPlanSemanal, codigoPlanMensual);
         }
+        //Metodo que busca la cantidad de cocinas planificadas
+        public static int obtenerCocinasPlanificadas(int codigoCocina)
+        {
+            return DAL.PlanSemanalDAL.obtenerCocinasPlanificadas(codigoCocina);
+        }
 
+        //METODOS DE VALIDACION
         //Metodo que busca y verifica si existe un plan semanal para un anio y mes determinado
         public static bool validarDetalle(int codigoPlanMensual, int numeroSemana)
         {
