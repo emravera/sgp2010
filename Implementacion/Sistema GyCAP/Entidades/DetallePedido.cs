@@ -8,9 +8,9 @@ namespace GyCAP.Entidades
     public class DetallePedido
     {
         private long codigo;
-        private Pedido codigoPedido;
+        private Pedido pedido;
         private EstadoDetallePedido estado;
-        private Cocina codigoCocina;
+        private Cocina cocina;
         private int cantidad;
         private DateTime fechaCancelacion;
 
@@ -20,10 +20,10 @@ namespace GyCAP.Entidades
             set { codigo = value; }
         }
         
-        public Pedido CodigoPedido
+        public Pedido Pedido
         {
-            get { return codigoPedido; }
-            set { codigoPedido = value; }
+            get { return pedido; }
+            set { pedido = value; }
         }
 
         public EstadoDetallePedido Estado
@@ -32,10 +32,10 @@ namespace GyCAP.Entidades
             set { estado = value; }
         }
 
-        public Cocina CodigoCocina
+        public Cocina Cocina
         {
-            get { return codigoCocina; }
-            set { codigoCocina = value; }
+            get { return cocina; }
+            set { cocina = value; }
         }
 
         public int Cantidad

@@ -126,7 +126,8 @@ namespace GyCAP.DAL
                 int resultadoUSU = Convert.ToInt32(DB.executeScalar(sqlUSU, valorParametros, null));
                 int resultadoCXE = Convert.ToInt32(DB.executeScalar(sqlCXE, valorParametros, null));
 
-                if (resultadoDPM == 0 && resultadoDOT == 0 && resultadoESTR == 0 && resultadoUSU == 0 && resultadoCXE == 0) { return true; }
+                if (resultadoDPM == 0 && resultadoDOT == 0 && resultadoESTR == 0 
+                    && resultadoUSU == 0 && resultadoCXE == 0) { return true; }
                 else { return false; }
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
