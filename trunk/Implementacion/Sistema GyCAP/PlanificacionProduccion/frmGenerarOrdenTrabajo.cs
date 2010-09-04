@@ -25,6 +25,8 @@ namespace GyCAP.UI.PlanificacionProduccion
         DataView dvPlanAnual, dvMensual, dvPlanSemanal, dvOrdenTrabajo, dvHojaRuta, dvEstructura, dvDetalleOrden;
         private int columnIndex = -1;
         BindingSource sourceDetalle = new BindingSource();
+        private Sistema.ControlesUsuarios.AnimadorFormulario animador = new GyCAP.UI.Sistema.ControlesUsuarios.AnimadorFormulario();
+        private TreeView tvOrdenes = new TreeView();
 
         #region Inicio
 
@@ -161,33 +163,23 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
-            tipoNodo seleccion = (tipoNodo)tvDetallePlan.SelectedNode.Tag;
-            int codigo;
-            Application.UseWaitCursor = true;
-            try
+            if (tvDetallePlan.SelectedNode != null && ((tipoNodo)tvDetallePlan.SelectedNode.Tag) == tipoNodo.dia)
             {
-                switch (seleccion)
+                Application.UseWaitCursor = true;
+                try
                 {
-                    case tipoNodo.anio:
-                        break;
-                    case tipoNodo.mes:
-                        break;
-                    case tipoNodo.semana:
-                        BLL.OrdenTrabajoBLL.GenerarOrdenTrabajoSemana(Convert.ToInt32(tvDetallePlan.SelectedNode.Name), dsPlanSemanal, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
-                        break;
-                    case tipoNodo.dia:
-                        break;
-                    case tipoNodo.detalleDia:
-                        break;
-                    default:
-                        break;
+                    BLL.OrdenTrabajoBLL.GenerarOrdenTrabajoSemana(Convert.ToInt32(tvDetallePlan.SelectedNode.Name), dsPlanSemanal, dsOrdenTrabajo, dsEstructura, dsHojaRuta, tvOrdenes);                    
                 }
+                catch (Entidades.Excepciones.BaseDeDatosException ex) { Application.UseWaitCursor = false; MessageBox.Show(ex.Message); }
+                catch (Entidades.Excepciones.OrdenTrabajoException ex) { Application.UseWaitCursor = false; MessageBox.Show(ex.Message); }
+                Application.UseWaitCursor = false;
+                dvOrdenTrabajo.Table = dsOrdenTrabajo.ORDENES_TRABAJO;
+                dvDetalleOrden.Table = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO;
             }
-            catch (Entidades.Excepciones.BaseDeDatosException ex) { Application.UseWaitCursor = false; MessageBox.Show(ex.Message); }
-            catch (Entidades.Excepciones.OrdenTrabajoException ex) { Application.UseWaitCursor = false; MessageBox.Show(ex.Message); }
-            Application.UseWaitCursor = false;
-            dvOrdenTrabajo.Table = dsOrdenTrabajo.ORDENES_TRABAJO;
-            dvDetalleOrden.Table = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO;
+            else
+            {
+                MessageBox.Show("Debe seleccionar un día de la Semana.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         #endregion
@@ -270,7 +262,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
-                    btnConsultar.Enabled = false;
+                    
                     
                     estadoInterface = estadoUI.nuevoManual;
                     tcOrdenTrabajo.SelectedTab = tpDatos;
@@ -280,7 +272,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
-                    btnConsultar.Enabled = false;
+                    
                     
                     estadoInterface = estadoUI.modificar;
                     tcOrdenTrabajo.SelectedTab = tpDatos;
@@ -353,7 +345,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             nodoSemana.Tag = tipoNodo.semana;
 
             tvDetallePlan.Nodes.Add(nodoSemana);
-            Sistema.FuncionesAuxiliares.QuitarCheckBox(nodoSemana, tvDetallePlan);
+            //Sistema.FuncionesAuxiliares.QuitarCheckBox(nodoSemana, tvDetallePlan);
 
             foreach (Data.dsPlanSemanal.DIAS_PLAN_SEMANALRow rowDia in dsPlanSemanal.PLANES_SEMANALES.FindByPSEM_CODIGO(codigoSemana).GetDIAS_PLAN_SEMANALRows())
             {
@@ -461,6 +453,24 @@ namespace GyCAP.UI.PlanificacionProduccion
                 cmsGrillaOrdenesTrabajo.Show(MousePosition);
             }
         }
+        #endregion
+
+        #region Ventana Árbol
+
+        private void btnArbol_Click(object sender, EventArgs e)
+        {
+            if (animador.EsVisible()) { animador.CerrarFormulario(); }
+            else
+            {
+                if (dgvListaOrdenTrabajo.SelectedRows.Count > 0)
+                {                    
+                    frmArbolOrdenesTrabajo.Instancia.SetArbol(tvOrdenes, dvOrdenTrabajo[dgvListaOrdenTrabajo.SelectedRows[0].Index]["ord_codigo"].ToString());
+                    animador.SetFormulario(frmArbolOrdenesTrabajo.Instancia, this, Sistema.ControlesUsuarios.AnimadorFormulario.animacionDerecha, 300, false);
+                    animador.MostrarFormulario();
+                }
+            }
+        }
+
         #endregion
 
         #endregion

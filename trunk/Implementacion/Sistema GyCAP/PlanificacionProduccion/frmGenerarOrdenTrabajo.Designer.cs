@@ -33,7 +33,6 @@
             this.tcOrdenTrabajo = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnConsultar = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label31 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
@@ -41,32 +40,35 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnGenerar = new System.Windows.Forms.Button();
             this.tvDetallePlan = new System.Windows.Forms.TreeView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnDetalleOrden = new System.Windows.Forms.Button();
-            this.btnEliminarOrden = new System.Windows.Forms.Button();
             this.dgvListaOrdenTrabajo = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cbAnioBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbMesBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.cbSemanaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
             this.nudCantidadOrden = new System.Windows.Forms.NumericUpDown();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.txtObservaciones = new System.Windows.Forms.RichTextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.txtOperacionDetalle = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
             this.txtCentroTrabajo = new System.Windows.Forms.TextBox();
             this.txtHojaRuta = new System.Windows.Forms.TextBox();
             this.txtEstructura = new System.Windows.Forms.TextBox();
             this.txtTipoParteDetalle = new System.Windows.Forms.TextBox();
             this.txtParteDetalle = new System.Windows.Forms.TextBox();
             this.txtCantidadDetalle = new System.Windows.Forms.TextBox();
+            this.seleccionadorFecha2 = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.seleccionadorFecha1 = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.txtOrigenDetalle = new System.Windows.Forms.TextBox();
             this.txtEstadoDetalle = new System.Windows.Forms.TextBox();
             this.txtCodigoDetalle = new System.Windows.Forms.TextBox();
@@ -80,20 +82,20 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
+            this.dtpTiempoTotal = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.label18 = new System.Windows.Forms.Label();
+            this.dtpHoraFin = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.dtpHoraInicio = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.label19 = new System.Windows.Forms.Label();
+            this.cbEmpleado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.gbNavegador = new System.Windows.Forms.GroupBox();
             this.bnNavegador = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bnMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bnMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.label3 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -104,6 +106,9 @@
             this.txtNumeroOrden = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtOrigenOrden = new System.Windows.Forms.TextBox();
+            this.dtpFechaFinOrden = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.dtpFechaInicioOrden = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.dtpFechaAltaOrden = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.txtCodigoOrden = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -113,27 +118,22 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cmsGrillaOrdenesTrabajo = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiBloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDesbloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
-            this.label32 = new System.Windows.Forms.Label();
-            this.txtOperacionDetalle = new System.Windows.Forms.TextBox();
-            this.label33 = new System.Windows.Forms.Label();
-            this.txtObservaciones = new System.Windows.Forms.RichTextBox();
-            this.cbAnioBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbMesBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbSemanaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.seleccionadorFecha2 = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.seleccionadorFecha1 = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.dtpTiempoTotal = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.dtpHoraFin = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.dtpHoraInicio = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.cbEmpleado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.dtpFechaFinOrden = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.dtpFechaInicioOrden = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.dtpFechaAltaOrden = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.btnGenerar = new System.Windows.Forms.Button();
+            this.btnArbol = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnDetalleOrden = new System.Windows.Forms.Button();
+            this.btnEliminarOrden = new System.Windows.Forms.Button();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bnMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bnMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tcOrdenTrabajo.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -184,8 +184,8 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.btnConsultar);
             this.groupBox3.Controls.Add(this.groupBox5);
+            this.groupBox3.Controls.Add(this.btnGuardar);
             this.groupBox3.Controls.Add(this.btnGenerar);
             this.groupBox3.Controls.Add(this.tvDetallePlan);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -195,22 +195,6 @@
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Detalle del plan de producción";
-            // 
-            // btnConsultar
-            // 
-            this.btnConsultar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnConsultar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnConsultar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_25;
-            this.btnConsultar.Location = new System.Drawing.Point(682, 123);
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(82, 36);
-            this.btnConsultar.TabIndex = 10;
-            this.btnConsultar.Text = "Ver\r\nórdenes";
-            this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnConsultar.UseVisualStyleBackColor = true;
-            this.btnConsultar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnConsultar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // groupBox5
             // 
@@ -278,26 +262,8 @@
             this.panel1.Size = new System.Drawing.Size(15, 15);
             this.panel1.TabIndex = 0;
             // 
-            // btnGenerar
-            // 
-            this.btnGenerar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnGenerar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnGenerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGenerar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.System_25;
-            this.btnGenerar.Location = new System.Drawing.Point(593, 123);
-            this.btnGenerar.Name = "btnGenerar";
-            this.btnGenerar.Size = new System.Drawing.Size(82, 36);
-            this.btnGenerar.TabIndex = 8;
-            this.btnGenerar.Text = "Generar";
-            this.btnGenerar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnGenerar.UseVisualStyleBackColor = true;
-            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
-            this.btnGenerar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnGenerar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
             // tvDetallePlan
             // 
-            this.tvDetallePlan.CheckBoxes = true;
             this.tvDetallePlan.Dock = System.Windows.Forms.DockStyle.Left;
             this.tvDetallePlan.Location = new System.Drawing.Point(3, 17);
             this.tvDetallePlan.Name = "tvDetallePlan";
@@ -318,80 +284,15 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.btnGuardar);
+            this.groupBox6.Controls.Add(this.btnArbol);
             this.groupBox6.Controls.Add(this.btnCancelar);
             this.groupBox6.Controls.Add(this.btnDetalleOrden);
             this.groupBox6.Controls.Add(this.btnEliminarOrden);
-            this.groupBox6.Location = new System.Drawing.Point(593, 17);
+            this.groupBox6.Location = new System.Drawing.Point(593, 12);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(171, 256);
+            this.groupBox6.Size = new System.Drawing.Size(171, 258);
             this.groupBox6.TabIndex = 2;
             this.groupBox6.TabStop = false;
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Save_25;
-            this.btnGuardar.Location = new System.Drawing.Point(44, 194);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(85, 40);
-            this.btnGuardar.TabIndex = 2;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnGuardar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Cancel_25;
-            this.btnCancelar.Location = new System.Drawing.Point(44, 140);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(85, 40);
-            this.btnCancelar.TabIndex = 3;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnCancelar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnDetalleOrden
-            // 
-            this.btnDetalleOrden.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnDetalleOrden.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnDetalleOrden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDetalleOrden.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_25;
-            this.btnDetalleOrden.Location = new System.Drawing.Point(44, 32);
-            this.btnDetalleOrden.Name = "btnDetalleOrden";
-            this.btnDetalleOrden.Size = new System.Drawing.Size(85, 40);
-            this.btnDetalleOrden.TabIndex = 0;
-            this.btnDetalleOrden.Text = "Ver\r\ndetalle";
-            this.btnDetalleOrden.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDetalleOrden.UseVisualStyleBackColor = true;
-            this.btnDetalleOrden.Click += new System.EventHandler(this.btnDetalleOrden_Click);
-            this.btnDetalleOrden.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnDetalleOrden.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnEliminarOrden
-            // 
-            this.btnEliminarOrden.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnEliminarOrden.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnEliminarOrden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEliminarOrden.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Delete_25;
-            this.btnEliminarOrden.Location = new System.Drawing.Point(44, 86);
-            this.btnEliminarOrden.Name = "btnEliminarOrden";
-            this.btnEliminarOrden.Size = new System.Drawing.Size(85, 40);
-            this.btnEliminarOrden.TabIndex = 1;
-            this.btnEliminarOrden.Text = "Eliminar";
-            this.btnEliminarOrden.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEliminarOrden.UseVisualStyleBackColor = true;
-            this.btnEliminarOrden.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnEliminarOrden.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // dgvListaOrdenTrabajo
             // 
@@ -438,6 +339,28 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Año:";
             // 
+            // cbAnioBuscar
+            // 
+            this.cbAnioBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAnioBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbAnioBuscar.FormattingEnabled = true;
+            this.cbAnioBuscar.Location = new System.Drawing.Point(50, 20);
+            this.cbAnioBuscar.Name = "cbAnioBuscar";
+            this.cbAnioBuscar.Size = new System.Drawing.Size(125, 21);
+            this.cbAnioBuscar.TabIndex = 8;
+            this.cbAnioBuscar.SelectedIndexChanged += new System.EventHandler(this.cbAnioBuscar_SelectedIndexChanged);
+            // 
+            // cbMesBuscar
+            // 
+            this.cbMesBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMesBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbMesBuscar.FormattingEnabled = true;
+            this.cbMesBuscar.Location = new System.Drawing.Point(256, 20);
+            this.cbMesBuscar.Name = "cbMesBuscar";
+            this.cbMesBuscar.Size = new System.Drawing.Size(125, 21);
+            this.cbMesBuscar.TabIndex = 7;
+            this.cbMesBuscar.SelectedIndexChanged += new System.EventHandler(this.cbMesBuscar_SelectedIndexChanged);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -447,18 +370,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Mes:";
             // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.lupa_20;
-            this.btnBuscar.Location = new System.Drawing.Point(652, 17);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscar.TabIndex = 6;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -467,6 +378,16 @@
             this.label5.Size = new System.Drawing.Size(49, 13);
             this.label5.TabIndex = 1;
             this.label5.Text = "Semana:";
+            // 
+            // cbSemanaBuscar
+            // 
+            this.cbSemanaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSemanaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbSemanaBuscar.FormattingEnabled = true;
+            this.cbSemanaBuscar.Location = new System.Drawing.Point(473, 20);
+            this.cbSemanaBuscar.Name = "cbSemanaBuscar";
+            this.cbSemanaBuscar.Size = new System.Drawing.Size(125, 21);
+            this.cbSemanaBuscar.TabIndex = 3;
             // 
             // tpDatos
             // 
@@ -588,6 +509,40 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Detalle de la orden de trabajo";
             // 
+            // txtObservaciones
+            // 
+            this.txtObservaciones.Location = new System.Drawing.Point(10, 223);
+            this.txtObservaciones.Name = "txtObservaciones";
+            this.txtObservaciones.Size = new System.Drawing.Size(737, 68);
+            this.txtObservaciones.TabIndex = 61;
+            this.txtObservaciones.Text = "";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(7, 207);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(82, 13);
+            this.label33.TabIndex = 60;
+            this.label33.Text = "Observaciones:";
+            // 
+            // txtOperacionDetalle
+            // 
+            this.txtOperacionDetalle.Location = new System.Drawing.Point(292, 87);
+            this.txtOperacionDetalle.Name = "txtOperacionDetalle";
+            this.txtOperacionDetalle.ReadOnly = true;
+            this.txtOperacionDetalle.Size = new System.Drawing.Size(168, 21);
+            this.txtOperacionDetalle.TabIndex = 59;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(226, 90);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(60, 13);
+            this.label32.TabIndex = 58;
+            this.label32.Text = "Operación:";
+            // 
             // txtCentroTrabajo
             // 
             this.txtCentroTrabajo.Location = new System.Drawing.Point(95, 87);
@@ -636,6 +591,24 @@
             this.txtCantidadDetalle.Size = new System.Drawing.Size(230, 21);
             this.txtCantidadDetalle.TabIndex = 52;
             this.txtCantidadDetalle.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // seleccionadorFecha2
+            // 
+            this.seleccionadorFecha2.CustomFormat = " ";
+            this.seleccionadorFecha2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.seleccionadorFecha2.Location = new System.Drawing.Point(349, 150);
+            this.seleccionadorFecha2.Name = "seleccionadorFecha2";
+            this.seleccionadorFecha2.Size = new System.Drawing.Size(141, 21);
+            this.seleccionadorFecha2.TabIndex = 51;
+            // 
+            // seleccionadorFecha1
+            // 
+            this.seleccionadorFecha1.CustomFormat = " ";
+            this.seleccionadorFecha1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.seleccionadorFecha1.Location = new System.Drawing.Point(79, 150);
+            this.seleccionadorFecha1.Name = "seleccionadorFecha1";
+            this.seleccionadorFecha1.Size = new System.Drawing.Size(144, 21);
+            this.seleccionadorFecha1.TabIndex = 50;
             // 
             // txtOrigenDetalle
             // 
@@ -748,6 +721,15 @@
             this.label21.TabIndex = 19;
             this.label21.Text = "Cantidad:";
             // 
+            // dtpTiempoTotal
+            // 
+            this.dtpTiempoTotal.CustomFormat = " ";
+            this.dtpTiempoTotal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpTiempoTotal.Location = new System.Drawing.Point(583, 175);
+            this.dtpTiempoTotal.Name = "dtpTiempoTotal";
+            this.dtpTiempoTotal.Size = new System.Drawing.Size(173, 21);
+            this.dtpTiempoTotal.TabIndex = 38;
+            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -757,6 +739,24 @@
             this.label18.TabIndex = 16;
             this.label18.Text = "Centro trabajo:";
             // 
+            // dtpHoraFin
+            // 
+            this.dtpHoraFin.CustomFormat = " ";
+            this.dtpHoraFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpHoraFin.Location = new System.Drawing.Point(349, 175);
+            this.dtpHoraFin.Name = "dtpHoraFin";
+            this.dtpHoraFin.Size = new System.Drawing.Size(141, 21);
+            this.dtpHoraFin.TabIndex = 34;
+            // 
+            // dtpHoraInicio
+            // 
+            this.dtpHoraInicio.CustomFormat = " ";
+            this.dtpHoraInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpHoraInicio.Location = new System.Drawing.Point(79, 175);
+            this.dtpHoraInicio.Name = "dtpHoraInicio";
+            this.dtpHoraInicio.Size = new System.Drawing.Size(144, 21);
+            this.dtpHoraInicio.TabIndex = 33;
+            // 
             // label19
             // 
             this.label19.AutoSize = true;
@@ -765,6 +765,16 @@
             this.label19.Size = new System.Drawing.Size(57, 13);
             this.label19.TabIndex = 17;
             this.label19.Text = "Empleado:";
+            // 
+            // cbEmpleado
+            // 
+            this.cbEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEmpleado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbEmpleado.FormattingEnabled = true;
+            this.cbEmpleado.Location = new System.Drawing.Point(526, 87);
+            this.cbEmpleado.Name = "cbEmpleado";
+            this.cbEmpleado.Size = new System.Drawing.Size(230, 21);
+            this.cbEmpleado.TabIndex = 27;
             // 
             // label7
             // 
@@ -827,25 +837,6 @@
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
-            // 
-            // bnMovePreviousItem
-            // 
-            this.bnMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bnMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bnMovePreviousItem.Image")));
-            this.bnMovePreviousItem.Name = "bnMovePreviousItem";
-            this.bnMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bnMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bnMovePreviousItem.Text = "Move previous";
-            this.bnMovePreviousItem.Click += new System.EventHandler(this.bnMovePreviousItem_Click);
-            // 
             // bindingNavigatorSeparator
             // 
             this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
@@ -864,25 +855,6 @@
             // 
             this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bnMoveNextItem
-            // 
-            this.bnMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bnMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bnMoveNextItem.Image")));
-            this.bnMoveNextItem.Name = "bnMoveNextItem";
-            this.bnMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bnMoveNextItem.Size = new System.Drawing.Size(23, 22);
-            this.bnMoveNextItem.Text = "Move next";
-            this.bnMoveNextItem.Click += new System.EventHandler(this.bnMoveNextItem_Click);
-            // 
-            // bindingNavigatorMoveLastItem
-            // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveLastItem.Text = "Move last";
             // 
             // label3
             // 
@@ -969,6 +941,33 @@
             this.txtOrigenOrden.Size = new System.Drawing.Size(160, 21);
             this.txtOrigenOrden.TabIndex = 37;
             // 
+            // dtpFechaFinOrden
+            // 
+            this.dtpFechaFinOrden.CustomFormat = " ";
+            this.dtpFechaFinOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaFinOrden.Location = new System.Drawing.Point(602, 51);
+            this.dtpFechaFinOrden.Name = "dtpFechaFinOrden";
+            this.dtpFechaFinOrden.Size = new System.Drawing.Size(160, 21);
+            this.dtpFechaFinOrden.TabIndex = 32;
+            // 
+            // dtpFechaInicioOrden
+            // 
+            this.dtpFechaInicioOrden.CustomFormat = " ";
+            this.dtpFechaInicioOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaInicioOrden.Location = new System.Drawing.Point(325, 51);
+            this.dtpFechaInicioOrden.Name = "dtpFechaInicioOrden";
+            this.dtpFechaInicioOrden.Size = new System.Drawing.Size(160, 21);
+            this.dtpFechaInicioOrden.TabIndex = 31;
+            // 
+            // dtpFechaAltaOrden
+            // 
+            this.dtpFechaAltaOrden.CustomFormat = " ";
+            this.dtpFechaAltaOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaAltaOrden.Location = new System.Drawing.Point(78, 77);
+            this.dtpFechaAltaOrden.Name = "dtpFechaAltaOrden";
+            this.dtpFechaAltaOrden.Size = new System.Drawing.Size(160, 21);
+            this.dtpFechaAltaOrden.TabIndex = 25;
+            // 
             // txtCodigoOrden
             // 
             this.txtCodigoOrden.Location = new System.Drawing.Point(325, 25);
@@ -1050,17 +1049,6 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
             // 
-            // btnSalir
-            // 
-            this.btnSalir.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Salir_25;
-            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(31, 47);
-            this.btnSalir.Text = "&Salir";
-            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
@@ -1101,153 +1089,178 @@
             this.tsmiDesbloquearColumna.Text = "Desbloquear columna";
             this.tsmiDesbloquearColumna.Click += new System.EventHandler(this.tsmiDesbloquearColumna_Click);
             // 
-            // label32
+            // btnGenerar
             // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(226, 90);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(60, 13);
-            this.label32.TabIndex = 58;
-            this.label32.Text = "Operación:";
+            this.btnGenerar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnGenerar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnGenerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.System_25;
+            this.btnGenerar.Location = new System.Drawing.Point(593, 123);
+            this.btnGenerar.Name = "btnGenerar";
+            this.btnGenerar.Size = new System.Drawing.Size(82, 36);
+            this.btnGenerar.TabIndex = 8;
+            this.btnGenerar.Text = "Generar";
+            this.btnGenerar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnGenerar.UseVisualStyleBackColor = true;
+            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
+            this.btnGenerar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnGenerar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
-            // txtOperacionDetalle
+            // btnArbol
             // 
-            this.txtOperacionDetalle.Location = new System.Drawing.Point(292, 87);
-            this.txtOperacionDetalle.Name = "txtOperacionDetalle";
-            this.txtOperacionDetalle.ReadOnly = true;
-            this.txtOperacionDetalle.Size = new System.Drawing.Size(168, 21);
-            this.txtOperacionDetalle.TabIndex = 59;
+            this.btnArbol.AutoSize = true;
+            this.btnArbol.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnArbol.FlatAppearance.BorderSize = 0;
+            this.btnArbol.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnArbol.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnArbol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnArbol.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Arbol_25;
+            this.btnArbol.Location = new System.Drawing.Point(30, 76);
+            this.btnArbol.Name = "btnArbol";
+            this.btnArbol.Size = new System.Drawing.Size(111, 48);
+            this.btnArbol.TabIndex = 4;
+            this.btnArbol.Text = "Árbol dependencias";
+            this.btnArbol.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnArbol.UseVisualStyleBackColor = true;
+            this.btnArbol.Click += new System.EventHandler(this.btnArbol_Click);
+            this.btnArbol.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnArbol.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
-            // label33
+            // btnGuardar
             // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(7, 207);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(82, 13);
-            this.label33.TabIndex = 60;
-            this.label33.Text = "Observaciones:";
+            this.btnGuardar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGuardar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Save_25;
+            this.btnGuardar.Location = new System.Drawing.Point(682, 123);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(82, 36);
+            this.btnGuardar.TabIndex = 2;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnGuardar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
-            // txtObservaciones
+            // btnCancelar
             // 
-            this.txtObservaciones.Location = new System.Drawing.Point(10, 223);
-            this.txtObservaciones.Name = "txtObservaciones";
-            this.txtObservaciones.Size = new System.Drawing.Size(737, 68);
-            this.txtObservaciones.TabIndex = 61;
-            this.txtObservaciones.Text = "";
+            this.btnCancelar.AutoSize = true;
+            this.btnCancelar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCancelar.FlatAppearance.BorderSize = 0;
+            this.btnCancelar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Cancel_25;
+            this.btnCancelar.Location = new System.Drawing.Point(40, 197);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(90, 48);
+            this.btnCancelar.TabIndex = 3;
+            this.btnCancelar.Text = "Cancelar orden";
+            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnCancelar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
-            // cbAnioBuscar
+            // btnDetalleOrden
             // 
-            this.cbAnioBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAnioBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbAnioBuscar.FormattingEnabled = true;
-            this.cbAnioBuscar.Location = new System.Drawing.Point(50, 20);
-            this.cbAnioBuscar.Name = "cbAnioBuscar";
-            this.cbAnioBuscar.Size = new System.Drawing.Size(125, 21);
-            this.cbAnioBuscar.TabIndex = 8;
-            this.cbAnioBuscar.SelectedIndexChanged += new System.EventHandler(this.cbAnioBuscar_SelectedIndexChanged);
+            this.btnDetalleOrden.AutoSize = true;
+            this.btnDetalleOrden.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDetalleOrden.FlatAppearance.BorderSize = 0;
+            this.btnDetalleOrden.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnDetalleOrden.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnDetalleOrden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDetalleOrden.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_25;
+            this.btnDetalleOrden.Location = new System.Drawing.Point(45, 19);
+            this.btnDetalleOrden.Name = "btnDetalleOrden";
+            this.btnDetalleOrden.Size = new System.Drawing.Size(81, 48);
+            this.btnDetalleOrden.TabIndex = 0;
+            this.btnDetalleOrden.Text = "Detalle orden";
+            this.btnDetalleOrden.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDetalleOrden.UseVisualStyleBackColor = true;
+            this.btnDetalleOrden.Click += new System.EventHandler(this.btnDetalleOrden_Click);
+            this.btnDetalleOrden.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnDetalleOrden.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
-            // cbMesBuscar
+            // btnEliminarOrden
             // 
-            this.cbMesBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMesBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbMesBuscar.FormattingEnabled = true;
-            this.cbMesBuscar.Location = new System.Drawing.Point(256, 20);
-            this.cbMesBuscar.Name = "cbMesBuscar";
-            this.cbMesBuscar.Size = new System.Drawing.Size(125, 21);
-            this.cbMesBuscar.TabIndex = 7;
-            this.cbMesBuscar.SelectedIndexChanged += new System.EventHandler(this.cbMesBuscar_SelectedIndexChanged);
+            this.btnEliminarOrden.AutoSize = true;
+            this.btnEliminarOrden.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnEliminarOrden.FlatAppearance.BorderSize = 0;
+            this.btnEliminarOrden.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnEliminarOrden.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnEliminarOrden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminarOrden.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Delete_25;
+            this.btnEliminarOrden.Location = new System.Drawing.Point(43, 137);
+            this.btnEliminarOrden.Name = "btnEliminarOrden";
+            this.btnEliminarOrden.Size = new System.Drawing.Size(84, 48);
+            this.btnEliminarOrden.TabIndex = 1;
+            this.btnEliminarOrden.Text = "Eliminar orden";
+            this.btnEliminarOrden.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminarOrden.UseVisualStyleBackColor = true;
+            this.btnEliminarOrden.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnEliminarOrden.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
-            // cbSemanaBuscar
+            // btnBuscar
             // 
-            this.cbSemanaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSemanaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbSemanaBuscar.FormattingEnabled = true;
-            this.cbSemanaBuscar.Location = new System.Drawing.Point(473, 20);
-            this.cbSemanaBuscar.Name = "cbSemanaBuscar";
-            this.cbSemanaBuscar.Size = new System.Drawing.Size(125, 21);
-            this.cbSemanaBuscar.TabIndex = 3;
+            this.btnBuscar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.lupa_20;
+            this.btnBuscar.Location = new System.Drawing.Point(652, 17);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
+            this.btnBuscar.TabIndex = 6;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // seleccionadorFecha2
+            // bindingNavigatorMoveFirstItem
             // 
-            this.seleccionadorFecha2.CustomFormat = " ";
-            this.seleccionadorFecha2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.seleccionadorFecha2.Location = new System.Drawing.Point(349, 150);
-            this.seleccionadorFecha2.Name = "seleccionadorFecha2";
-            this.seleccionadorFecha2.Size = new System.Drawing.Size(141, 21);
-            this.seleccionadorFecha2.TabIndex = 51;
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "Move first";
             // 
-            // seleccionadorFecha1
+            // bnMovePreviousItem
             // 
-            this.seleccionadorFecha1.CustomFormat = " ";
-            this.seleccionadorFecha1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.seleccionadorFecha1.Location = new System.Drawing.Point(79, 150);
-            this.seleccionadorFecha1.Name = "seleccionadorFecha1";
-            this.seleccionadorFecha1.Size = new System.Drawing.Size(144, 21);
-            this.seleccionadorFecha1.TabIndex = 50;
+            this.bnMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bnMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bnMovePreviousItem.Image")));
+            this.bnMovePreviousItem.Name = "bnMovePreviousItem";
+            this.bnMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bnMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bnMovePreviousItem.Text = "Move previous";
+            this.bnMovePreviousItem.Click += new System.EventHandler(this.bnMovePreviousItem_Click);
             // 
-            // dtpTiempoTotal
+            // bnMoveNextItem
             // 
-            this.dtpTiempoTotal.CustomFormat = " ";
-            this.dtpTiempoTotal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpTiempoTotal.Location = new System.Drawing.Point(583, 175);
-            this.dtpTiempoTotal.Name = "dtpTiempoTotal";
-            this.dtpTiempoTotal.Size = new System.Drawing.Size(173, 21);
-            this.dtpTiempoTotal.TabIndex = 38;
+            this.bnMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bnMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bnMoveNextItem.Image")));
+            this.bnMoveNextItem.Name = "bnMoveNextItem";
+            this.bnMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bnMoveNextItem.Size = new System.Drawing.Size(23, 22);
+            this.bnMoveNextItem.Text = "Move next";
+            this.bnMoveNextItem.Click += new System.EventHandler(this.bnMoveNextItem_Click);
             // 
-            // dtpHoraFin
+            // bindingNavigatorMoveLastItem
             // 
-            this.dtpHoraFin.CustomFormat = " ";
-            this.dtpHoraFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpHoraFin.Location = new System.Drawing.Point(349, 175);
-            this.dtpHoraFin.Name = "dtpHoraFin";
-            this.dtpHoraFin.Size = new System.Drawing.Size(141, 21);
-            this.dtpHoraFin.TabIndex = 34;
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveLastItem.Text = "Move last";
             // 
-            // dtpHoraInicio
+            // btnSalir
             // 
-            this.dtpHoraInicio.CustomFormat = " ";
-            this.dtpHoraInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpHoraInicio.Location = new System.Drawing.Point(79, 175);
-            this.dtpHoraInicio.Name = "dtpHoraInicio";
-            this.dtpHoraInicio.Size = new System.Drawing.Size(144, 21);
-            this.dtpHoraInicio.TabIndex = 33;
-            // 
-            // cbEmpleado
-            // 
-            this.cbEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEmpleado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbEmpleado.FormattingEnabled = true;
-            this.cbEmpleado.Location = new System.Drawing.Point(526, 87);
-            this.cbEmpleado.Name = "cbEmpleado";
-            this.cbEmpleado.Size = new System.Drawing.Size(230, 21);
-            this.cbEmpleado.TabIndex = 27;
-            // 
-            // dtpFechaFinOrden
-            // 
-            this.dtpFechaFinOrden.CustomFormat = " ";
-            this.dtpFechaFinOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaFinOrden.Location = new System.Drawing.Point(602, 51);
-            this.dtpFechaFinOrden.Name = "dtpFechaFinOrden";
-            this.dtpFechaFinOrden.Size = new System.Drawing.Size(160, 21);
-            this.dtpFechaFinOrden.TabIndex = 32;
-            // 
-            // dtpFechaInicioOrden
-            // 
-            this.dtpFechaInicioOrden.CustomFormat = " ";
-            this.dtpFechaInicioOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaInicioOrden.Location = new System.Drawing.Point(325, 51);
-            this.dtpFechaInicioOrden.Name = "dtpFechaInicioOrden";
-            this.dtpFechaInicioOrden.Size = new System.Drawing.Size(160, 21);
-            this.dtpFechaInicioOrden.TabIndex = 31;
-            // 
-            // dtpFechaAltaOrden
-            // 
-            this.dtpFechaAltaOrden.CustomFormat = " ";
-            this.dtpFechaAltaOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaAltaOrden.Location = new System.Drawing.Point(78, 77);
-            this.dtpFechaAltaOrden.Name = "dtpFechaAltaOrden";
-            this.dtpFechaAltaOrden.Size = new System.Drawing.Size(160, 21);
-            this.dtpFechaAltaOrden.TabIndex = 25;
+            this.btnSalir.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Salir_25;
+            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(31, 47);
+            this.btnSalir.Text = "&Salir";
+            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // frmGenerarOrdenTrabajo
             // 
@@ -1269,6 +1282,7 @@
             this.groupBox5.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaOrdenTrabajo)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -1386,7 +1400,6 @@
         private System.Windows.Forms.TextBox txtTipoParteDetalle;
         private System.Windows.Forms.TextBox txtParteDetalle;
         private System.Windows.Forms.TextBox txtCantidadDetalle;
-        private System.Windows.Forms.Button btnConsultar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.ContextMenuStrip cmsGrillaOrdenesTrabajo;
@@ -1399,6 +1412,7 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.RichTextBox txtObservaciones;
         private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Button btnArbol;
 
     }
 }

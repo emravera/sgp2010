@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using System.Windows.Forms;
 
 namespace GyCAP.BLL
 {
@@ -13,7 +14,7 @@ namespace GyCAP.BLL
         public static readonly int parteTipoPieza = 3;
         public static readonly int parteTipoMateriaPrima = 4;
         
-        public static void GenerarOrdenTrabajoSemana(int semana, Data.dsPlanSemanal dsPlanSemanal, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
+        public static void GenerarOrdenTrabajoSemana(int semana, Data.dsPlanSemanal dsPlanSemanal, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta, TreeView tvOrdenes)
         {
             //Declaramos las variables necesarias
             int codigoOrden = -1, codigoDetalleOrden = -1;
