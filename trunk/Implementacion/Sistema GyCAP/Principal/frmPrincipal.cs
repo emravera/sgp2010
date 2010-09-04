@@ -229,6 +229,12 @@ namespace Principal
             GyCAP.UI.GestionPedido.frmCliente.Instancia.MdiParent = this;
             GyCAP.UI.GestionPedido.frmCliente.Instancia.Show();
         }
+
+        private void btnOperaciones_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.EstructuraProducto.frmOperacionesFabricacion.Instancia.MdiParent = this;
+            GyCAP.UI.EstructuraProducto.frmOperacionesFabricacion.Instancia.Show();
+        }
         
     }
 }
