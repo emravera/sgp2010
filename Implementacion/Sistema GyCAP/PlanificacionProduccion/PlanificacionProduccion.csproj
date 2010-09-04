@@ -58,6 +58,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmArbolOrdenesTrabajo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmArbolOrdenesTrabajo.Designer.cs">
+      <DependentUpon>frmArbolOrdenesTrabajo.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmEstimarDemandaAnual.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +114,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmArbolOrdenesTrabajo.resx">
+      <DependentUpon>frmArbolOrdenesTrabajo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEstimarDemandaAnual.resx">
       <DependentUpon>frmEstimarDemandaAnual.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -254,6 +264,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cancel-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arbol-25.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

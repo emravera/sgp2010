@@ -74,6 +74,13 @@ namespace GyCAP.UI.PlanificacionProduccion.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Arbol_25 {
+            get {
+                object obj = ResourceManager.GetObject("Arbol_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap arriba1_15 {
             get {
                 object obj = ResourceManager.GetObject("arriba1_15", resourceCulture);
