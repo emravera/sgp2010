@@ -14,6 +14,7 @@ namespace GyCAP.Entidades
         private DateTime fechaEntregaPrevista;
         private DateTime fechaEntregaReal;
         private DateTime fechaAlta;
+        private string observaciones;
 
         public long Codigo
         {
@@ -57,6 +58,10 @@ namespace GyCAP.Entidades
             set { fechaAlta = value; }
         }
 
-
+        public string Observaciones
+        {
+            get { return observaciones; }
+            set { observaciones = value; }
+        }
     }
 }
