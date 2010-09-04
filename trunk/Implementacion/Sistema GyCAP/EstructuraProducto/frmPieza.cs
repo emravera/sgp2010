@@ -745,6 +745,7 @@ namespace GyCAP.UI.EstructuraProducto
                 BLL.UnidadMedidaBLL.ObtenerTodos(dsUnidadMedida.UNIDADES_MEDIDA);
                 BLL.TipoUnidadMedidaBLL.ObtenerTodos(dsUnidadMedida.TIPOS_UNIDADES_MEDIDA);
                 BLL.HojaRutaBLL.ObtenerHojasRuta(dsEstructura.HOJAS_RUTA);
+
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
