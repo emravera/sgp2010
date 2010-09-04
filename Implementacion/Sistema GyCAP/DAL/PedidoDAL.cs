@@ -254,59 +254,60 @@ namespace GyCAP.DAL
 //            return pedido;
 //        }
 
-//        public static void ObtenerPiezas(object nombre, object codTerminacion, Data.dsEstructura ds, bool obtenerDetalle)
-//        {
-//            string sql = @"SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, pza_cantidadstock, par_codigo, pno_codigo
-//                                 , pza_codigoparte, pza_costo, hr_codigo, pza_costofijo FROM PIEZAS WHERE 1=1";
+        public static void ObtenerPedido(object nombre, object numero, int idEstadoPedido, DateTime fechaDesde, DateTime fechaHasta, Data.dsCliente ds, bool obtenerDetalle)
+        {
+            string sql = @"SELECT PED_CODIGO, CLI_CODIGO, EPED_CODIGO, PED_FECHAENTREGAPREVISTA, PED_FECHAENTREGAREAL
+                          , PED_FECHA_ALTA, PED_OBSERVACIONES, PED_NUMERO
+                          FROM PEDIDOS, CLIENTES WHERE PEDIDOS.CLI_CODIGO = CLIENTES.CLI_CODIGO ";
 
-//            //Sirve para armar el nombre de los parámetros
-//            int cantidadParametros = 0;
-//            //Un array de object para ir guardando los valores de los filtros, con tamaño = cantidad de filtros disponibles
-//            object[] valoresFiltros = new object[2];
-//            //Empecemos a armar la consulta, revisemos que filtros aplican
-//            if (nombre != null && nombre.ToString() != string.Empty)
-//            {
-//                //si aplica el filtro lo usamos
-//                sql += " AND pza_nombre LIKE @p" + cantidadParametros + " ";
-//                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
-//                nombre = "%" + nombre + "%";
-//                valoresFiltros[cantidadParametros] = nombre;
-//                cantidadParametros++;
-//            }
-//            //Revisamos si pasó algun valor y si es un integer
-//            if (codTerminacion != null && codTerminacion.GetType() == cantidadParametros.GetType())
-//            {
-//                sql += " AND te_codigo = @p" + cantidadParametros;
-//                valoresFiltros[cantidadParametros] = Convert.ToInt32(codTerminacion);
-//                cantidadParametros++;
-//            }
+            //Sirve para armar el nombre de los parámetros
+            int cantidadParametros = 0;
+            //Un array de object para ir guardando los valores de los filtros, con tamaño = cantidad de filtros disponibles
+            object[] valoresFiltros = new object[3];
+            //Empecemos a armar la consulta, revisemos que filtros aplican
+            if (nombre != null && nombre.ToString() != string.Empty)
+            {
+                //si aplica el filtro lo usamos
+                sql += " AND CLI_RAZONSOCIAL LIKE @p" + cantidadParametros + " ";
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                nombre = "%" + nombre + "%";
+                valoresFiltros[cantidadParametros] = nombre;
+                cantidadParametros++;
+            }
+            //Revisamos si pasó algun valor y si es un integer
+            //if (codTerminacion != null && codTerminacion.GetType() == cantidadParametros.GetType())
+            //{
+            //    sql += " AND te_codigo = @p" + cantidadParametros;
+            //    valoresFiltros[cantidadParametros] = Convert.ToInt32(codTerminacion);
+            //    cantidadParametros++;
+            //}
 
-//            if (cantidadParametros > 0)
-//            {
-//                //Buscamos con filtro, armemos el array de los valores de los parametros
-//                object[] valorParametros = new object[cantidadParametros];
-//                for (int i = 0; i < cantidadParametros; i++)
-//                {
-//                    valorParametros[i] = valoresFiltros[i];
-//                }
-//                try
-//                {
-//                    DB.FillDataSet(ds, "PIEZAS", sql, valorParametros);
-//                    if (obtenerDetalle) { ObtenerDetallePiezas(ds); }
-//                }
-//                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-//            }
-//            else
-//            {
-//                //Buscamos sin filtro
-//                try
-//                {
-//                    DB.FillDataSet(ds, "PIEZAS", sql, null);
-//                    if (obtenerDetalle) { ObtenerDetallePiezas(ds); }
-//                }
-//                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-//            }
-//        }
+            //if (cantidadParametros > 0)
+            //{
+            //    //Buscamos con filtro, armemos el array de los valores de los parametros
+            //    object[] valorParametros = new object[cantidadParametros];
+            //    for (int i = 0; i < cantidadParametros; i++)
+            //    {
+            //        valorParametros[i] = valoresFiltros[i];
+            //    }
+            //    try
+            //    {
+            //        DB.FillDataSet(ds, "PIEZAS", sql, valorParametros);
+            //        if (obtenerDetalle) { ObtenerDetallePiezas(ds); }
+            //    }
+            //    catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            //}
+            //else
+            //{
+            //    //Buscamos sin filtro
+            //    try
+            //    {
+            //        DB.FillDataSet(ds, "PIEZAS", sql, null);
+            //        if (obtenerDetalle) { ObtenerDetallePiezas(ds); }
+            //    }
+            //    catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            //}
+        }
 
 //        public static void ObtenerPiezas(System.Data.DataTable dtPiezas)
 //        {

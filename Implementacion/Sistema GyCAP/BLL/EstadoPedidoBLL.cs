@@ -54,7 +54,7 @@ namespace GyCAP.BLL
 
         public static void ObtenerTodos(DataTable dtEstadoPedido)
         {
-            //DAL.EstadoPedidoDAL.ObtenerEstadosDetallePedido(dtEstadoPedido);
+            DAL.EstadoPedidoDAL.ObtenerEstadosPedido(dtEstadoPedido);
         }
 
         public static void ObtenerTodos(Data.dsCliente ds)
