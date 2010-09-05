@@ -251,15 +251,65 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         #endregion
 
-        private void button2_Click(object sender, EventArgs e)
+        #region Orden Trabajo
+
+        private void btnNuevoOrdenTrabajo_Click(object sender, EventArgs e)
         {
-            frmGenerarOrdenTrabajo.Instancia.TopLevel = false;
-            frmGenerarOrdenTrabajo.Instancia.Parent = areaTrabajo;
-            frmGenerarOrdenTrabajo.Instancia.Location = PosicionarFormulario();
-            frmGenerarOrdenTrabajo.Instancia.Show();
+            frmOrdenTrabajo.Instancia.TopLevel = false;
+            frmOrdenTrabajo.Instancia.Parent = areaTrabajo;
+            frmOrdenTrabajo.Instancia.Location = PosicionarFormulario();
+            frmOrdenTrabajo.Instancia.Show();
         }
 
-        
+        private void btnConsultarOrdenTrabajo_Click(object sender, EventArgs e)
+        {
+            frmOrdenTrabajo.Instancia.TopLevel = false;
+            frmOrdenTrabajo.Instancia.Parent = areaTrabajo;
+            frmOrdenTrabajo.Instancia.Location = PosicionarFormulario();
+            frmOrdenTrabajo.Instancia.Show();
+        }
+
+        #endregion
+
+        #region Plan Mensual
+
+        private void btnNuevoPlanMensual_Click(object sender, EventArgs e)
+        {
+            frmPlanMensual.Instancia.TopLevel = false;
+            frmPlanMensual.Instancia.Parent = areaTrabajo;
+            frmPlanMensual.Instancia.Location = PosicionarFormulario();
+            frmPlanMensual.Instancia.Show();
+        }
+
+        private void btnConsultarPlanMensual_Click(object sender, EventArgs e)
+        {
+            frmPlanMensual.Instancia.TopLevel = false;
+            frmPlanMensual.Instancia.Parent = areaTrabajo;
+            frmPlanMensual.Instancia.Location = PosicionarFormulario();
+            frmPlanMensual.Instancia.Show();
+        }
+
+        #endregion
+
+        #region Plan Semanal
+
+        private void btnNuevoPlanSemanal_Click(object sender, EventArgs e)
+        {
+            frmPlanSemanal.Instancia.TopLevel = false;
+            frmPlanSemanal.Instancia.Parent = areaTrabajo;
+            frmPlanSemanal.Instancia.Location = PosicionarFormulario();
+            frmPlanSemanal.Instancia.Show();
+        }
+
+        private void btnConsultarPlanSemanal_Click(object sender, EventArgs e)
+        {
+            frmPlanSemanal.Instancia.TopLevel = false;
+            frmPlanSemanal.Instancia.Parent = areaTrabajo;
+            frmPlanSemanal.Instancia.Location = PosicionarFormulario();
+            frmPlanSemanal.Instancia.Show();
+        }
+
+        #endregion
 
     }
 
