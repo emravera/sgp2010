@@ -82,10 +82,11 @@
             this.btnPlanMensual = new System.Windows.Forms.ToolStripButton();
             this.btnPlanSemanal = new System.Windows.Forms.ToolStripButton();
             this.toolCliente = new System.Windows.Forms.ToolStripButton();
+            this.btnOperaciones = new System.Windows.Forms.ToolStripButton();
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.btnOperaciones = new System.Windows.Forms.ToolStripButton();
+            this.toolPedidos = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -449,7 +450,8 @@
             this.btnPlanMensual,
             this.btnPlanSemanal,
             this.toolCliente,
-            this.btnOperaciones});
+            this.btnOperaciones,
+            this.toolPedidos});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(792, 36);
@@ -595,6 +597,16 @@
             this.toolCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolCliente.Click += new System.EventHandler(this.toolCliente_Click);
             // 
+            // btnOperaciones
+            // 
+            this.btnOperaciones.Image = ((System.Drawing.Image)(resources.GetObject("btnOperaciones.Image")));
+            this.btnOperaciones.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnOperaciones.Name = "btnOperaciones";
+            this.btnOperaciones.Size = new System.Drawing.Size(71, 33);
+            this.btnOperaciones.Text = "Operaciones";
+            this.btnOperaciones.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnOperaciones.Click += new System.EventHandler(this.btnOperaciones_Click);
+            // 
             // barraEstado
             // 
             this.barraEstado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -611,15 +623,15 @@
             this.lblEstado.Size = new System.Drawing.Size(38, 17);
             this.lblEstado.Text = "Status";
             // 
-            // btnOperaciones
+            // toolPedidos
             // 
-            this.btnOperaciones.Image = ((System.Drawing.Image)(resources.GetObject("btnOperaciones.Image")));
-            this.btnOperaciones.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnOperaciones.Name = "btnOperaciones";
-            this.btnOperaciones.Size = new System.Drawing.Size(71, 33);
-            this.btnOperaciones.Text = "Operaciones";
-            this.btnOperaciones.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnOperaciones.Click += new System.EventHandler(this.btnOperaciones_Click);
+            this.toolPedidos.Image = ((System.Drawing.Image)(resources.GetObject("toolPedidos.Image")));
+            this.toolPedidos.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolPedidos.Name = "toolPedidos";
+            this.toolPedidos.Size = new System.Drawing.Size(48, 33);
+            this.toolPedidos.Text = "Pedidos";
+            this.toolPedidos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolPedidos.Click += new System.EventHandler(this.toolPedidos_Click);
             // 
             // frmPrincipal
             // 
@@ -705,6 +717,7 @@
         private System.Windows.Forms.ToolStripButton btnPlanSemanal;
         private System.Windows.Forms.ToolStripButton toolCliente;
         private System.Windows.Forms.ToolStripButton btnOperaciones;
+        private System.Windows.Forms.ToolStripButton toolPedidos;
     }
 }
 
