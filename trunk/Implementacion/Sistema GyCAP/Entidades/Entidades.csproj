@@ -101,6 +101,7 @@
     <Compile Include="MateriaPrimaPrincipal.cs" />
     <Compile Include="ModeloCocina.cs" />
     <Compile Include="ModeloMaquina.cs" />
+    <Compile Include="OperacionFabricacion.cs" />
     <Compile Include="OrdenTrabajo.cs" />
     <Compile Include="Pedido.cs" />
     <Compile Include="Pieza.cs" />

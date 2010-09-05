@@ -50,6 +50,7 @@
     <Compile Include="CapacidadEmpleadoBLL.cs" />
     <Compile Include="CausaFalloBLL.cs" />
     <Compile Include="CentroTrabajoBLL.cs" />
+    <Compile Include="ClaseTemporalPedido.cs" />
     <Compile Include="ClienteBLL.cs" />
     <Compile Include="CocinaBLL.cs" />
     <Compile Include="ColorBLL.cs" />

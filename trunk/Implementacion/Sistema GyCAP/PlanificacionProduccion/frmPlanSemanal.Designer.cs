@@ -49,9 +49,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.gbDatosPrincipales = new System.Windows.Forms.GroupBox();
+            this.cbSemanaDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label12 = new System.Windows.Forms.Label();
             this.btnCargaDetalle = new System.Windows.Forms.Button();
+            this.cbPlanAnual = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label3 = new System.Windows.Forms.Label();
+            this.cbMesDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
             this.gbDetalleGrillaDatos = new System.Windows.Forms.GroupBox();
@@ -63,7 +66,10 @@
             this.gbGrillaDemanda = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbAnio = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbSemana = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label11 = new System.Windows.Forms.Label();
+            this.cbMes = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label2 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -78,12 +84,6 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.cbAnio = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbSemana = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbMes = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbSemanaDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbPlanAnual = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbMesDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.gbCargaDetalle.SuspendLayout();
             this.gbPlanMensual.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanMensual)).BeginInit();
@@ -110,7 +110,6 @@
             // gbCargaDetalle
             // 
             this.gbCargaDetalle.Controls.Add(this.gbPlanMensual);
-            this.gbCargaDetalle.Controls.Add(this.btnAgregar);
             this.gbCargaDetalle.Controls.Add(this.groupBox3);
             this.gbCargaDetalle.Controls.Add(this.dtpFechaDia);
             this.gbCargaDetalle.Controls.Add(this.label8);
@@ -152,7 +151,7 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(299, 254);
+            this.btnAgregar.Location = new System.Drawing.Point(308, 359);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(81, 23);
             this.btnAgregar.TabIndex = 9;
@@ -166,16 +165,16 @@
             this.groupBox3.Controls.Add(this.numPorcentaje);
             this.groupBox3.Controls.Add(this.rbPorcentaje);
             this.groupBox3.Controls.Add(this.rbUnidades);
-            this.groupBox3.Location = new System.Drawing.Point(9, 207);
+            this.groupBox3.Location = new System.Drawing.Point(8, 207);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(282, 70);
+            this.groupBox3.Size = new System.Drawing.Size(378, 70);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Cantidad";
             // 
             // numUnidades
             // 
-            this.numUnidades.Location = new System.Drawing.Point(155, 18);
+            this.numUnidades.Location = new System.Drawing.Point(178, 14);
             this.numUnidades.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -188,7 +187,7 @@
             // 
             // numPorcentaje
             // 
-            this.numPorcentaje.Location = new System.Drawing.Point(155, 44);
+            this.numPorcentaje.Location = new System.Drawing.Point(178, 40);
             this.numPorcentaje.Name = "numPorcentaje";
             this.numPorcentaje.Size = new System.Drawing.Size(120, 20);
             this.numPorcentaje.TabIndex = 8;
@@ -197,7 +196,7 @@
             // rbPorcentaje
             // 
             this.rbPorcentaje.AutoSize = true;
-            this.rbPorcentaje.Location = new System.Drawing.Point(50, 44);
+            this.rbPorcentaje.Location = new System.Drawing.Point(73, 40);
             this.rbPorcentaje.Name = "rbPorcentaje";
             this.rbPorcentaje.Size = new System.Drawing.Size(93, 17);
             this.rbPorcentaje.TabIndex = 1;
@@ -209,7 +208,7 @@
             // rbUnidades
             // 
             this.rbUnidades.AutoSize = true;
-            this.rbUnidades.Location = new System.Drawing.Point(50, 20);
+            this.rbUnidades.Location = new System.Drawing.Point(73, 16);
             this.rbUnidades.Name = "rbUnidades";
             this.rbUnidades.Size = new System.Drawing.Size(105, 17);
             this.rbUnidades.TabIndex = 0;
@@ -269,7 +268,7 @@
             this.panelAcciones.Controls.Add(this.btnSumar);
             this.panelAcciones.Controls.Add(this.label6);
             this.panelAcciones.Controls.Add(this.btnDelete);
-            this.panelAcciones.Location = new System.Drawing.Point(10, 213);
+            this.panelAcciones.Location = new System.Drawing.Point(10, 224);
             this.panelAcciones.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelAcciones.Name = "panelAcciones";
             this.panelAcciones.Size = new System.Drawing.Size(304, 53);
@@ -345,6 +344,16 @@
             this.gbDatosPrincipales.TabStop = false;
             this.gbDatosPrincipales.Text = "Datos Principales";
             // 
+            // cbSemanaDatos
+            // 
+            this.cbSemanaDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSemanaDatos.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbSemanaDatos.FormattingEnabled = true;
+            this.cbSemanaDatos.Location = new System.Drawing.Point(529, 20);
+            this.cbSemanaDatos.Name = "cbSemanaDatos";
+            this.cbSemanaDatos.Size = new System.Drawing.Size(85, 21);
+            this.cbSemanaDatos.TabIndex = 3;
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -364,6 +373,17 @@
             this.btnCargaDetalle.UseVisualStyleBackColor = true;
             this.btnCargaDetalle.Click += new System.EventHandler(this.btnCargaDetalle_Click);
             // 
+            // cbPlanAnual
+            // 
+            this.cbPlanAnual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPlanAnual.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbPlanAnual.FormattingEnabled = true;
+            this.cbPlanAnual.Location = new System.Drawing.Point(144, 20);
+            this.cbPlanAnual.Name = "cbPlanAnual";
+            this.cbPlanAnual.Size = new System.Drawing.Size(94, 21);
+            this.cbPlanAnual.TabIndex = 1;
+            this.cbPlanAnual.DropDownClosed += new System.EventHandler(this.cbPlanAnual_DropDownClosed);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -372,6 +392,17 @@
             this.label3.Size = new System.Drawing.Size(124, 13);
             this.label3.TabIndex = 24;
             this.label3.Text = "Plan Anual Planificación:";
+            // 
+            // cbMesDatos
+            // 
+            this.cbMesDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMesDatos.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbMesDatos.FormattingEnabled = true;
+            this.cbMesDatos.Location = new System.Drawing.Point(338, 20);
+            this.cbMesDatos.Name = "cbMesDatos";
+            this.cbMesDatos.Size = new System.Drawing.Size(121, 21);
+            this.cbMesDatos.TabIndex = 2;
+            this.cbMesDatos.DropDownClosed += new System.EventHandler(this.cbMesDatos_DropDownClosed);
             // 
             // label4
             // 
@@ -392,7 +423,7 @@
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(304, 191);
+            this.dgvDatos.Size = new System.Drawing.Size(304, 203);
             this.dgvDatos.TabIndex = 5;
             this.dgvDatos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDatos_CellFormatting);
             // 
@@ -402,7 +433,7 @@
             this.gbDetalleGrillaDatos.Controls.Add(this.dgvDatos);
             this.gbDetalleGrillaDatos.Location = new System.Drawing.Point(401, 70);
             this.gbDetalleGrillaDatos.Name = "gbDetalleGrillaDatos";
-            this.gbDetalleGrillaDatos.Size = new System.Drawing.Size(321, 271);
+            this.gbDetalleGrillaDatos.Size = new System.Drawing.Size(321, 282);
             this.gbDetalleGrillaDatos.TabIndex = 17;
             this.gbDetalleGrillaDatos.TabStop = false;
             this.gbDetalleGrillaDatos.Text = "Detalle Plan Semanal";
@@ -522,6 +553,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
+            // cbAnio
+            // 
+            this.cbAnio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAnio.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbAnio.FormattingEnabled = true;
+            this.cbAnio.Location = new System.Drawing.Point(45, 21);
+            this.cbAnio.Name = "cbAnio";
+            this.cbAnio.Size = new System.Drawing.Size(115, 21);
+            this.cbAnio.TabIndex = 9;
+            this.cbAnio.DropDownClosed += new System.EventHandler(this.cbAnio_DropDownClosed);
+            // 
+            // cbSemana
+            // 
+            this.cbSemana.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSemana.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbSemana.FormattingEnabled = true;
+            this.cbSemana.Location = new System.Drawing.Point(424, 21);
+            this.cbSemana.Name = "cbSemana";
+            this.cbSemana.Size = new System.Drawing.Size(84, 21);
+            this.cbSemana.TabIndex = 7;
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -530,6 +582,17 @@
             this.label11.Size = new System.Drawing.Size(49, 13);
             this.label11.TabIndex = 8;
             this.label11.Text = "Semana:";
+            // 
+            // cbMes
+            // 
+            this.cbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMes.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbMes.FormattingEnabled = true;
+            this.cbMes.Location = new System.Drawing.Point(226, 21);
+            this.cbMes.Name = "cbMes";
+            this.cbMes.Size = new System.Drawing.Size(128, 21);
+            this.cbMes.TabIndex = 3;
+            this.cbMes.DropDownClosed += new System.EventHandler(this.cbMes_DropDownClosed);
             // 
             // label2
             // 
@@ -565,6 +628,7 @@
             // tpDatos
             // 
             this.tpDatos.Controls.Add(this.gbDetalleGrillaDatos);
+            this.tpDatos.Controls.Add(this.btnAgregar);
             this.tpDatos.Controls.Add(this.gbCargaDetalle);
             this.tpDatos.Controls.Add(this.gbBotones);
             this.tpDatos.Controls.Add(this.gbDatosPrincipales);
@@ -688,70 +752,6 @@
             this.btnSalir.Text = "&Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // cbAnio
-            // 
-            this.cbAnio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAnio.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbAnio.FormattingEnabled = true;
-            this.cbAnio.Location = new System.Drawing.Point(45, 21);
-            this.cbAnio.Name = "cbAnio";
-            this.cbAnio.Size = new System.Drawing.Size(115, 21);
-            this.cbAnio.TabIndex = 9;
-            this.cbAnio.DropDownClosed += new System.EventHandler(this.cbAnio_DropDownClosed);
-            // 
-            // cbSemana
-            // 
-            this.cbSemana.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSemana.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbSemana.FormattingEnabled = true;
-            this.cbSemana.Location = new System.Drawing.Point(424, 21);
-            this.cbSemana.Name = "cbSemana";
-            this.cbSemana.Size = new System.Drawing.Size(84, 21);
-            this.cbSemana.TabIndex = 7;
-            // 
-            // cbMes
-            // 
-            this.cbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMes.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbMes.FormattingEnabled = true;
-            this.cbMes.Location = new System.Drawing.Point(226, 21);
-            this.cbMes.Name = "cbMes";
-            this.cbMes.Size = new System.Drawing.Size(128, 21);
-            this.cbMes.TabIndex = 3;
-            this.cbMes.DropDownClosed += new System.EventHandler(this.cbMes_DropDownClosed);
-            // 
-            // cbSemanaDatos
-            // 
-            this.cbSemanaDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSemanaDatos.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbSemanaDatos.FormattingEnabled = true;
-            this.cbSemanaDatos.Location = new System.Drawing.Point(529, 20);
-            this.cbSemanaDatos.Name = "cbSemanaDatos";
-            this.cbSemanaDatos.Size = new System.Drawing.Size(85, 21);
-            this.cbSemanaDatos.TabIndex = 3;
-            // 
-            // cbPlanAnual
-            // 
-            this.cbPlanAnual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPlanAnual.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbPlanAnual.FormattingEnabled = true;
-            this.cbPlanAnual.Location = new System.Drawing.Point(144, 20);
-            this.cbPlanAnual.Name = "cbPlanAnual";
-            this.cbPlanAnual.Size = new System.Drawing.Size(94, 21);
-            this.cbPlanAnual.TabIndex = 1;
-            this.cbPlanAnual.DropDownClosed += new System.EventHandler(this.cbPlanAnual_DropDownClosed);
-            // 
-            // cbMesDatos
-            // 
-            this.cbMesDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMesDatos.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbMesDatos.FormattingEnabled = true;
-            this.cbMesDatos.Location = new System.Drawing.Point(338, 20);
-            this.cbMesDatos.Name = "cbMesDatos";
-            this.cbMesDatos.Size = new System.Drawing.Size(121, 21);
-            this.cbMesDatos.TabIndex = 2;
-            this.cbMesDatos.DropDownClosed += new System.EventHandler(this.cbMesDatos_DropDownClosed);
             // 
             // frmPlanSemanal
             // 

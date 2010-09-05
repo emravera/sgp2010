@@ -56,6 +56,6 @@ namespace GyCAP.BLL
         {
             return DAL.ClienteDAL.esCliente(cliente);
         }
-
+        
     }
 }

@@ -90,5 +90,43 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        //METODO DE INSERCION
+        //Metodo que inserta en la base de datos
+        public static int Insertar(Entidades.OperacionFabricacion operacion)
+        {
+            //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
+            string sql = "INSERT INTO [OPERACIONES] ([opr_codigo], [opr_nombre],[opr_descripcion],[opr_horasrequerida]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+            object[] valorParametros = { operacion.Codificacion, operacion.Nombre, operacion.Descripcion, operacion.HorasRequeridas };
+            
+            try
+            {
+                return Convert.ToInt32(DB.executeNonQuery(sql, valorParametros, null));
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+        //Metodo de ACTUALIZACION
+        public static void ModificarOperacion(Entidades.OperacionFabricacion operacion)
+        {
+            string sql = "UPDATE OPERACIONES SET opr_codigo = @p0, opr_nombre = @p1, opr_descripcion=@p2, opr_horasrequerida= @p3 WHERE opr_numero = @p4";
+            object[] valorParametros = { operacion.Codificacion, operacion.Nombre, operacion.Descripcion, operacion.HorasRequeridas, operacion.Codigo };
+            
+            try
+            {
+                DB.executeNonQuery(sql, valorParametros, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+        //Metodo de Eliminacion
+        public static void EliminarOperacion(int codigo)
+        {
+            string sql = "DELETE FROM OPERACIONES WHERE opr_numero = @p0";
+            object[] valorParametros = { codigo };
+            try
+            {
+                DB.executeNonQuery(sql, valorParametros, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
     }
 }

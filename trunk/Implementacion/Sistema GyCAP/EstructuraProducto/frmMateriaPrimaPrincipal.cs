@@ -351,8 +351,7 @@ namespace GyCAP.UI.EstructuraProducto
                             nombre = dsMateriaPrimaPrincipal.MATERIAS_PRIMAS.FindByMP_CODIGO(Convert.ToInt32(e.Value)).MP_NOMBRE;
                             e.Value = nombre;
                             break;
-                        case "MPPR_CANTIDAD":
-                            
+                        case "MPPR_CANTIDAD":                            
                             cantidad =Math.Round(Convert.ToDecimal(e.Value),2);
                             e.Value = cantidad;
                             break;
