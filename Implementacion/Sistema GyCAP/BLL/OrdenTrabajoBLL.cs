@@ -21,7 +21,7 @@ namespace GyCAP.BLL
             decimal tiempoTotal = 0;
                         
             //Recorremos todo el detalle del día
-            foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow rowDetalle in (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow[])dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.Select("diapsem_codigo = " + codigoDia))
+            foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow rowDetalle in (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow[])dsPlanSemanal.DETALLE_PLANES_SEMANALES.Select("diapsem_codigo = " + codigoDia))
             {
                 //Primero armamos la cabecera que corresponde uno a uno con el detalle del día
                 Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOrden = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
@@ -39,11 +39,14 @@ namespace GyCAP.BLL
                 rowOrden.SetORDM_NUMERONull();
                 rowOrden.ORD_PRIORIDAD = 0;
                 rowOrden.ORD_OBSERVACIONES = string.Empty;
+                
+                //Obtenemos la estructura completa de la cocina y la cantidad pedida
+                int codigoEstructura = CocinaBLL.ObtenerCodigoEstructuraActiva(Convert.ToInt32(rowDetalle.COC_CODIGO));
+
+                rowOrden.ESTR_CODIGO = codigoEstructura;
                 rowOrden.EndEdit();
                 dsOrdenTrabajo.ORDENES_TRABAJO.AddORDENES_TRABAJORow(rowOrden);
-
-                //Ahora creamos el detalle de la orden, necesitamos la estructura completa de la cocina y la cantidad pedida
-                int codigoEstructura = CocinaBLL.ObtenerCodigoEstructuraActiva(Convert.ToInt32(rowDetalle.COC_CODIGO));
+                
                 string mensaje = string.Empty;
                 if (codigoEstructura == 0)
                 {
@@ -99,14 +102,14 @@ namespace GyCAP.BLL
                 //Calculamos las cantidades necesarias de cada cosa y al mismo tiempo el tiempo necesario para producir todo
                 //Empezamos por las partes de primer nivel que dependen de estructura, bajamos hasta el último nivel y desde ahí
                 //empezamos a crear los detalles, primero los conjuntos que forman la estructura
-                decimal ordenPrecedente = 0, cantidadOrdenes = 0;
+                decimal ordenSiguiente = 0, ultimaOrdenConjunto = 0, nivel = 0;//, cantidadOrdenes = 0;
                 foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow rowCxE in dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).GetCONJUNTOSXESTRUCTURARows())
                 {
-                    ordenPrecedente = 0;
-                    cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowCxE.CONJUNTOSRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
+                    ordenSiguiente = 0;
+                    //cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowCxE.CONJUNTOSRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
                     foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaCxE in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowCxE.CONJUNTOSRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
                     {
-                        cantidadOrdenes--;
+                        //cantidadOrdenes--;
                         Data.dsOrdenTrabajo.DETALLE_ORDENES_TRABAJORow rowDOCxE = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.NewDETALLE_ORDENES_TRABAJORow();
                         rowDOCxE.BeginEdit();
                         rowDOCxE.DORD_NUMERO = codigoDetalleOrden--;
@@ -122,25 +125,23 @@ namespace GyCAP.BLL
                         rowDOCxE.CTO_CODIGO = rowHojaCxE.CTO_CODIGO;
                         rowDOCxE.OPR_NUMERO = rowHojaCxE.OPR_NUMERO;
                         rowDOCxE.DORD_OBSERVACIONES = string.Empty;
-                        if (ordenPrecedente == 0) { rowDOCxE.SetDORD_ORDENPRECEDENTENull(); }
-                        else 
-                        { 
-                            rowDOCxE.DORD_ORDENPRECEDENTE = ordenPrecedente;
-                            dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(ordenPrecedente).DORD_ORDENSIGUIENTE = rowDOCxE.DORD_NUMERO;
-                        }
-                        if (cantidadOrdenes == 0) { rowDOCxE.SetDORD_ORDENSIGUIENTENull(); }
+                        rowDOCxE.DORD_ORDENPRECEDENTE = 0;
+                        if (ordenSiguiente == 0) { rowDOCxE.SetDORD_ORDENSIGUIENTENull(); }
+                        else { rowDOCxE.DORD_ORDENSIGUIENTE = ordenSiguiente; }
                         rowDOCxE.DORD_NIVEL = 0;
                         rowDOCxE.EndEdit();
                         dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.AddDETALLE_ORDENES_TRABAJORow(rowDOCxE);
-                        ordenPrecedente = rowDOCxE.DORD_NUMERO;                        
+                        ordenSiguiente = rowDOCxE.DORD_NUMERO;
+                        ultimaOrdenConjunto = ordenSiguiente;
                     }
                     
                     foreach (Data.dsEstructura.SUBCONJUNTOSXCONJUNTORow rowSCxC in dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(rowCxE.CONJ_CODIGO).GetSUBCONJUNTOSXCONJUNTORows())
                     {
-                        cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowSCxC.SUBCONJUNTOSRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
+                        //cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowSCxC.SUBCONJUNTOSRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
+                        nivel = 1;
                         foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaSCxC in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowSCxC.SUBCONJUNTOSRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
                         {
-                            cantidadOrdenes--;
+                            //cantidadOrdenes--;
                             Data.dsOrdenTrabajo.DETALLE_ORDENES_TRABAJORow rowDOSCxC = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.NewDETALLE_ORDENES_TRABAJORow();
                             rowDOSCxC.BeginEdit();
                             rowDOSCxC.DORD_NUMERO = codigoDetalleOrden--;
@@ -155,26 +156,24 @@ namespace GyCAP.BLL
                             rowDOSCxC.DORD_CANTIDADESTIMADA = rowDetalle.DPSEM_CANTIDADESTIMADA * rowCxE.CXE_CANTIDAD * rowSCxC.SCXCJ_CANTIDAD;
                             rowDOSCxC.CTO_CODIGO = rowHojaSCxC.CTO_CODIGO;
                             rowDOSCxC.OPR_NUMERO = rowHojaSCxC.OPR_NUMERO;
-                            if (ordenPrecedente == 0) { rowDOSCxC.SetDORD_ORDENPRECEDENTENull(); }
-                            else
-                            {
-                                rowDOSCxC.DORD_ORDENPRECEDENTE = ordenPrecedente;
-                                dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(ordenPrecedente).DORD_ORDENSIGUIENTE = rowDOSCxC.DORD_NUMERO;
-                            }
-                            if (cantidadOrdenes == 0) { rowDOSCxC.SetDORD_ORDENSIGUIENTENull(); }
-                            rowDOSCxC.DORD_NIVEL = 0;
+                            if (ordenSiguiente == 0) { rowDOSCxC.SetDORD_ORDENSIGUIENTENull(); }
+                            else { rowDOSCxC.DORD_ORDENSIGUIENTE = ordenSiguiente; }
+                            rowDOSCxC.DORD_ORDENPRECEDENTE = 0;
+                            rowDOSCxC.DORD_NIVEL = nivel;
                             rowDOSCxC.EndEdit();
                             dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.AddDETALLE_ORDENES_TRABAJORow(rowDOSCxC);
-                            ordenPrecedente = rowDOSCxC.DORD_NUMERO;                            
+                            ordenSiguiente = rowDOSCxC.DORD_NUMERO;
+                            nivel = 0;
                         }
                         
                         foreach (Data.dsEstructura.PIEZASXSUBCONJUNTORow rowPxSC in dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(rowSCxC.SCONJ_CODIGO).GetPIEZASXSUBCONJUNTORows())
                         {
                             //Ahora generamos un detalle para cada par operación-centro de la hoja de ruta de la parte
-                            cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxSC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
+                            //cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxSC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
+                            nivel = 1;
                             foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaPxSC in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxSC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
                             {
-                                cantidadOrdenes--;
+                                //cantidadOrdenes--;
                                 Data.dsOrdenTrabajo.DETALLE_ORDENES_TRABAJORow rowDOPxSC = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.NewDETALLE_ORDENES_TRABAJORow();
                                 rowDOPxSC.BeginEdit();
                                 rowDOPxSC.DORD_NUMERO = codigoDetalleOrden--;
@@ -189,28 +188,26 @@ namespace GyCAP.BLL
                                 rowDOPxSC.DORD_CANTIDADESTIMADA = rowDetalle.DPSEM_CANTIDADESTIMADA * rowCxE.CXE_CANTIDAD * rowSCxC.SCXCJ_CANTIDAD * rowPxSC.PXSC_CANTIDAD;
                                 rowDOPxSC.CTO_CODIGO = rowHojaPxSC.CTO_CODIGO;
                                 rowDOPxSC.OPR_NUMERO = rowHojaPxSC.OPR_NUMERO;
-                                if (ordenPrecedente == 0) { rowDOPxSC.SetDORD_ORDENPRECEDENTENull(); }
-                                else
-                                {
-                                    rowDOPxSC.DORD_ORDENPRECEDENTE = ordenPrecedente;
-                                    dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(ordenPrecedente).DORD_ORDENSIGUIENTE = rowDOPxSC.DORD_NUMERO;
-                                }
-                                if (cantidadOrdenes == 0) { rowDOPxSC.SetDORD_ORDENSIGUIENTENull(); }
-                                rowDOPxSC.DORD_NIVEL = 0;
+                                if (ordenSiguiente == 0) { rowDOPxSC.SetDORD_ORDENSIGUIENTENull(); }
+                                else { rowDOPxSC.DORD_ORDENSIGUIENTE = ordenSiguiente; }
+                                rowDOPxSC.DORD_ORDENPRECEDENTE = 0;
+                                rowDOPxSC.DORD_NIVEL = nivel;
                                 rowDOPxSC.EndEdit();
                                 dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.AddDETALLE_ORDENES_TRABAJORow(rowDOPxSC);
-                                ordenPrecedente = rowDOPxSC.DORD_NUMERO;
+                                ordenSiguiente = rowDOPxSC.DORD_NUMERO;
+                                nivel = 0;
                             }                                
                         }
                     }
 
-                    ordenPrecedente = 0;
+                    ordenSiguiente = ultimaOrdenConjunto;
                     foreach (Data.dsEstructura.PIEZASXCONJUNTORow rowPxC in dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(rowCxE.CONJ_CODIGO).GetPIEZASXCONJUNTORows())
                     {                        
-                        cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
+                        //cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
+                        nivel = 1;
                         foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaPxC in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
                         {
-                            cantidadOrdenes--;
+                            //cantidadOrdenes--;
                             Data.dsOrdenTrabajo.DETALLE_ORDENES_TRABAJORow rowDOPxC = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.NewDETALLE_ORDENES_TRABAJORow();
                             rowDOPxC.BeginEdit();
                             rowDOPxC.DORD_NUMERO = codigoDetalleOrden--;
@@ -225,28 +222,25 @@ namespace GyCAP.BLL
                             rowDOPxC.DORD_CANTIDADESTIMADA = rowDetalle.DPSEM_CANTIDADESTIMADA * rowCxE.CXE_CANTIDAD * rowPxC.PXCJ_CANTIDAD;
                             rowDOPxC.CTO_CODIGO = rowHojaPxC.CTO_CODIGO;
                             rowDOPxC.OPR_NUMERO = rowHojaPxC.OPR_NUMERO;
-                            if (ordenPrecedente == 0) { rowDOPxC.SetDORD_ORDENPRECEDENTENull(); }
-                            else
-                            {
-                                rowDOPxC.DORD_ORDENPRECEDENTE = ordenPrecedente;
-                                dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(ordenPrecedente).DORD_ORDENSIGUIENTE = rowDOPxC.DORD_NUMERO;
-                            }
-                            if (cantidadOrdenes == 0) { rowDOPxC.SetDORD_ORDENSIGUIENTENull(); }
-                            rowDOPxC.DORD_NIVEL = 0;
+                            if (ordenSiguiente == 0) { rowDOPxC.SetDORD_ORDENSIGUIENTENull(); }
+                            else { rowDOPxC.DORD_ORDENSIGUIENTE = ordenSiguiente; }
+                            rowDOPxC.DORD_ORDENPRECEDENTE = 0;
+                            rowDOPxC.DORD_NIVEL = nivel;
                             rowDOPxC.EndEdit();
                             dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.AddDETALLE_ORDENES_TRABAJORow(rowDOPxC);
-                            ordenPrecedente = rowDOPxC.DORD_NUMERO;
+                            ordenSiguiente = rowDOPxC.DORD_NUMERO;
+                            nivel = 0;
                         }
                     }
                 }
                 //Ahora las piezas que forman la estructura
-                ordenPrecedente = 0;
+                ordenSiguiente = 0;
                 foreach (Data.dsEstructura.PIEZASXESTRUCTURARow rowPxE in dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).GetPIEZASXESTRUCTURARows())
                 {
-                    cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxE.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
+                    //cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxE.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
                     foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaPxE in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxE.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
                     {
-                        cantidadOrdenes--;
+                        //cantidadOrdenes--;
                         Data.dsOrdenTrabajo.DETALLE_ORDENES_TRABAJORow rowDOPxE = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.NewDETALLE_ORDENES_TRABAJORow();
                         rowDOPxE.BeginEdit();
                         rowDOPxE.DORD_NUMERO = codigoDetalleOrden--;
@@ -261,26 +255,51 @@ namespace GyCAP.BLL
                         rowDOPxE.DORD_CANTIDADESTIMADA = rowDetalle.DPSEM_CANTIDADESTIMADA * rowPxE.PXE_CANTIDAD;
                         rowDOPxE.CTO_CODIGO = rowHojaPxE.CTO_CODIGO;
                         rowDOPxE.OPR_NUMERO = rowHojaPxE.OPR_NUMERO;
-                        if (ordenPrecedente == 0) { rowDOPxE.SetDORD_ORDENPRECEDENTENull(); }
-                        else
-                        {
-                            rowDOPxE.DORD_ORDENPRECEDENTE = ordenPrecedente;
-                            dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(ordenPrecedente).DORD_ORDENSIGUIENTE = rowDOPxE.DORD_NUMERO;
-                        }
-                        if (cantidadOrdenes == 0) { rowDOPxE.SetDORD_ORDENSIGUIENTENull(); }
+                        if (ordenSiguiente == 0) { rowDOPxE.SetDORD_ORDENSIGUIENTENull(); }
+                        else { rowDOPxE.DORD_ORDENSIGUIENTE = ordenSiguiente; }
                         rowDOPxE.DORD_NIVEL = 0;
                         rowDOPxE.EndEdit();
                         dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.AddDETALLE_ORDENES_TRABAJORow(rowDOPxE);
-                        ordenPrecedente = rowDOPxE.DORD_NUMERO;
-                    }                        
+                        ordenSiguiente = rowDOPxE.DORD_NUMERO;
+                    }
                 }
             }
-            
         }
 
-        public static void GenerarArbolOrdenes(int codigoOrden, TreeView tvOT, TreeView tvOTyE, Data.dsOrdenTrabajo dsOrdenTrabajo)
+        public static void GenerarArbolOrdenes(int codigoOrden, TreeView tvOT, TreeView tvOTyE, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
         {
-        
+            Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOrden = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigoOrden);
+
+            TreeNode nodoOrden = new TreeNode();
+            nodoOrden.Name = rowOrden.ORD_NUMERO.ToString();
+            nodoOrden.Text = rowOrden.ORD_ORIGEN;
+            tvOT.BeginUpdate();
+            tvOT.Nodes.Clear();
+            tvOT.Nodes.Add(nodoOrden);
+            
+            foreach (Data.dsOrdenTrabajo.DETALLE_ORDENES_TRABAJORow rowDetalle in rowOrden.GetDETALLE_ORDENES_TRABAJORows())
+            {
+                TreeNode nodoDetalle = new TreeNode();
+                nodoDetalle.Name = rowDetalle.DORD_NUMERO.ToString();
+                nodoDetalle.Text = rowDetalle.DORD_ORIGEN;
+                if (rowDetalle.IsDORD_ORDENSIGUIENTENull())
+                {
+                    nodoOrden.Nodes.Add(nodoDetalle);
+                }
+                else
+                {
+                    if (rowDetalle.DORD_NIVEL == 1)
+                    {
+                        tvOT.Nodes.Find(rowDetalle.DORD_ORDENSIGUIENTE.ToString(), true)[0].Nodes.Add(nodoDetalle);
+                    }
+                    else
+                    {
+                        tvOT.Nodes.Find(rowDetalle.DORD_ORDENSIGUIENTE.ToString(), true)[0].Parent.Nodes.Add(nodoDetalle);
+                    }
+                }
+            }
+
+            tvOT.EndUpdate();
         }
     }
 }

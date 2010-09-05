@@ -464,7 +464,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 if (dgvListaOrdenTrabajo.SelectedRows.Count > 0)
                 {                    
-                    frmArbolOrdenesTrabajo.Instancia.SetArbol(tvOrdenes, dvOrdenTrabajo[dgvListaOrdenTrabajo.SelectedRows[0].Index]["ord_codigo"].ToString());
+                    int codOrden = Convert.ToInt32(dvOrdenTrabajo[dgvListaOrdenTrabajo.SelectedRows[0].Index]["ord_numero"].ToString());
+                    BLL.OrdenTrabajoBLL.GenerarArbolOrdenes(codOrden, tvOrdenes, null, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                    frmArbolOrdenesTrabajo.Instancia.SetArbol(tvOrdenes, dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codOrden).ORD_CODIGO);
                     animador.SetFormulario(frmArbolOrdenesTrabajo.Instancia, this, Sistema.ControlesUsuarios.AnimadorFormulario.animacionDerecha, 300, false);
                     animador.MostrarFormulario();
                 }
