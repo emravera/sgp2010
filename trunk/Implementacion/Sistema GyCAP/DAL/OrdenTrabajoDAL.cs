@@ -42,6 +42,7 @@ namespace GyCAP.DAL
                                              rowOrden.ORD_PRIORIDAD };
 
             SqlTransaction transaccion = null;
+            
             try
             {
                 transaccion = DB.IniciarTransaccion();
