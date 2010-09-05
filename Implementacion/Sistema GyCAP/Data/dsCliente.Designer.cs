@@ -3202,11 +3202,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string PED_OBSERVACIONES {
                 get {
-                    try {
-                        return ((string)(this[this.tablePEDIDOS.PED_OBSERVACIONESColumn]));
+                    if (this.IsPED_OBSERVACIONESNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PED_OBSERVACIONES\' in table \'PEDIDOS\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tablePEDIDOS.PED_OBSERVACIONESColumn]));
                     }
                 }
                 set {

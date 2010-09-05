@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace GyCAP.DAL
 {
@@ -109,6 +110,18 @@ namespace GyCAP.DAL
             {
                 //Se llena el Dataset
                 DB.FillDataSet(ds, "ESTADO_DETALLE_PEDIDOS", sql, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
+        public static void ObtenerEstadosDetallePedido(DataTable dtEstadoDetallePedido)
+        {
+            string sql = @"SELECT EDPED_CODIGO, EDPED_NOMBRE, EDPED_DESCRIPCION
+                           FROM ESTADO_DETALLE_PEDIDOS";
+            try
+            {
+                //Se llena el Dataset
+                DB.FillDataTable(dtEstadoDetallePedido, sql, null);
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
