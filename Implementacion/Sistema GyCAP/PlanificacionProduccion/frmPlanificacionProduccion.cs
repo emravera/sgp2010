@@ -24,10 +24,16 @@ namespace GyCAP.UI.PlanificacionProduccion
             btnDemanda.Tag = panelDemanda;
             btnPlanAnual.Tag = panelPlanAnual;
             btnMPPrincipal.Tag = panelMPPrincipal;
+            btnPlanMensual.Tag = panelPlanMensual;
+            btnPlanSemanal.Tag = panelPlanSemanal;
+            btnOrdenTrabajo.Tag = panelOrdenTrabajo;
             Size size = new Size(panelDemanda.Size.Width, 0);
             panelDemanda.Size = size;
             panelMPPrincipal.Size = size;
             panelPlanAnual.Size = size;
+            panelPlanMensual.Size = size;
+            panelPlanSemanal.Size = size;
+            panelOrdenTrabajo.Size = size;
         }
 
         private void frmPlanificacionProduccion_Load(object sender, EventArgs e)
@@ -255,18 +261,18 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void btnNuevoOrdenTrabajo_Click(object sender, EventArgs e)
         {
-            frmOrdenTrabajo.Instancia.TopLevel = false;
-            frmOrdenTrabajo.Instancia.Parent = areaTrabajo;
-            frmOrdenTrabajo.Instancia.Location = PosicionarFormulario();
-            frmOrdenTrabajo.Instancia.Show();
+            frmGenerarOrdenTrabajo.Instancia.TopLevel = false;
+            frmGenerarOrdenTrabajo.Instancia.Parent = areaTrabajo;
+            frmGenerarOrdenTrabajo.Instancia.Location = PosicionarFormulario();
+            frmGenerarOrdenTrabajo.Instancia.Show();
         }
 
         private void btnConsultarOrdenTrabajo_Click(object sender, EventArgs e)
         {
-            frmOrdenTrabajo.Instancia.TopLevel = false;
-            frmOrdenTrabajo.Instancia.Parent = areaTrabajo;
-            frmOrdenTrabajo.Instancia.Location = PosicionarFormulario();
-            frmOrdenTrabajo.Instancia.Show();
+            frmGenerarOrdenTrabajo.Instancia.TopLevel = false;
+            frmGenerarOrdenTrabajo.Instancia.Parent = areaTrabajo;
+            frmGenerarOrdenTrabajo.Instancia.Location = PosicionarFormulario();
+            frmGenerarOrdenTrabajo.Instancia.Show();
         }
 
         #endregion
