@@ -51,6 +51,27 @@
             this.txtAnioBuscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tpDatos = new System.Windows.Forms.TabPage();
+            this.tcDatos = new System.Windows.Forms.TabControl();
+            this.tpPlanificacion = new System.Windows.Forms.TabPage();
+            this.gbCargaDetalle = new System.Windows.Forms.GroupBox();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.numUnidades = new System.Windows.Forms.NumericUpDown();
+            this.numPorcentaje = new System.Windows.Forms.NumericUpDown();
+            this.rbPorcentaje = new System.Windows.Forms.RadioButton();
+            this.rbUnidades = new System.Windows.Forms.RadioButton();
+            this.cbCocinas = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tpPedidos = new System.Windows.Forms.TabPage();
+            this.gbPedidos = new System.Windows.Forms.GroupBox();
+            this.btnVerDetalle = new System.Windows.Forms.Button();
+            this.dgvPedidos = new System.Windows.Forms.DataGridView();
+            this.lblMensaje = new System.Windows.Forms.Label();
+            this.tpDetallePedido = new System.Windows.Forms.TabPage();
+            this.gbDetallePedido = new System.Windows.Forms.GroupBox();
+            this.btnPlanificar = new System.Windows.Forms.Button();
+            this.dgvDetallePedido = new System.Windows.Forms.DataGridView();
+            this.label11 = new System.Windows.Forms.Label();
             this.gbCantidades = new System.Windows.Forms.GroupBox();
             this.txtRestaPlanificar = new System.Windows.Forms.TextBox();
             this.txtCantPlanificada = new System.Windows.Forms.TextBox();
@@ -66,15 +87,6 @@
             this.btnSumar = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.gbCargaDetalle = new System.Windows.Forms.GroupBox();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.numUnidades = new System.Windows.Forms.NumericUpDown();
-            this.numPorcentaje = new System.Windows.Forms.NumericUpDown();
-            this.rbPorcentaje = new System.Windows.Forms.RadioButton();
-            this.rbUnidades = new System.Windows.Forms.RadioButton();
-            this.cbCocinas = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.label5 = new System.Windows.Forms.Label();
             this.gbBotones = new System.Windows.Forms.GroupBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -83,20 +95,29 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcPlanAnual = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
+            this.lblMensajeDetalle = new System.Windows.Forms.Label();
             this.gbDatosPrincipales.SuspendLayout();
             this.tsMenu.SuspendLayout();
             this.gbGrillaDemanda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tpDatos.SuspendLayout();
-            this.gbCantidades.SuspendLayout();
-            this.gbDetalleGrilla.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
-            this.panelAcciones.SuspendLayout();
+            this.tcDatos.SuspendLayout();
+            this.tpPlanificacion.SuspendLayout();
             this.gbCargaDetalle.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUnidades)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPorcentaje)).BeginInit();
+            this.tpPedidos.SuspendLayout();
+            this.gbPedidos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPedidos)).BeginInit();
+            this.tpDetallePedido.SuspendLayout();
+            this.gbDetallePedido.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePedido)).BeginInit();
+            this.gbCantidades.SuspendLayout();
+            this.gbDetalleGrilla.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
+            this.panelAcciones.SuspendLayout();
             this.gbBotones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
             this.gbGrillaDetalle.SuspendLayout();
@@ -219,7 +240,7 @@
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.tsMenu.Size = new System.Drawing.Size(736, 50);
+            this.tsMenu.Size = new System.Drawing.Size(738, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
@@ -255,7 +276,7 @@
             this.gbGrillaDemanda.Controls.Add(this.dgvLista);
             this.gbGrillaDemanda.Location = new System.Drawing.Point(6, 75);
             this.gbGrillaDemanda.Name = "gbGrillaDemanda";
-            this.gbGrillaDemanda.Size = new System.Drawing.Size(404, 320);
+            this.gbGrillaDemanda.Size = new System.Drawing.Size(369, 320);
             this.gbGrillaDemanda.TabIndex = 1;
             this.gbGrillaDemanda.TabStop = false;
             this.gbGrillaDemanda.Text = "Listado de Planes Mensuales";
@@ -271,7 +292,7 @@
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(376, 290);
+            this.dgvLista.Size = new System.Drawing.Size(342, 290);
             this.dgvLista.TabIndex = 1;
             this.dgvLista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellClick);
             // 
@@ -285,7 +306,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(722, 66);
+            this.groupBox1.Size = new System.Drawing.Size(724, 66);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
@@ -340,18 +361,250 @@
             // 
             // tpDatos
             // 
+            this.tpDatos.Controls.Add(this.tcDatos);
             this.tpDatos.Controls.Add(this.gbCantidades);
             this.tpDatos.Controls.Add(this.gbDetalleGrilla);
-            this.tpDatos.Controls.Add(this.gbCargaDetalle);
             this.tpDatos.Controls.Add(this.gbBotones);
             this.tpDatos.Controls.Add(this.gbDatosPrincipales);
             this.tpDatos.Location = new System.Drawing.Point(4, 5);
             this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDatos.Size = new System.Drawing.Size(728, 394);
+            this.tpDatos.Size = new System.Drawing.Size(730, 431);
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
+            // 
+            // tcDatos
+            // 
+            this.tcDatos.Controls.Add(this.tpPlanificacion);
+            this.tcDatos.Controls.Add(this.tpPedidos);
+            this.tcDatos.Controls.Add(this.tpDetallePedido);
+            this.tcDatos.Location = new System.Drawing.Point(3, 72);
+            this.tcDatos.Name = "tcDatos";
+            this.tcDatos.SelectedIndex = 0;
+            this.tcDatos.Size = new System.Drawing.Size(399, 240);
+            this.tcDatos.TabIndex = 19;
+            // 
+            // tpPlanificacion
+            // 
+            this.tpPlanificacion.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.tpPlanificacion.Controls.Add(this.gbCargaDetalle);
+            this.tpPlanificacion.Location = new System.Drawing.Point(4, 22);
+            this.tpPlanificacion.Name = "tpPlanificacion";
+            this.tpPlanificacion.Padding = new System.Windows.Forms.Padding(3);
+            this.tpPlanificacion.Size = new System.Drawing.Size(391, 214);
+            this.tpPlanificacion.TabIndex = 0;
+            this.tpPlanificacion.Text = "Planificación";
+            // 
+            // gbCargaDetalle
+            // 
+            this.gbCargaDetalle.Controls.Add(this.btnAgregar);
+            this.gbCargaDetalle.Controls.Add(this.groupBox3);
+            this.gbCargaDetalle.Controls.Add(this.cbCocinas);
+            this.gbCargaDetalle.Controls.Add(this.label5);
+            this.gbCargaDetalle.Location = new System.Drawing.Point(3, 6);
+            this.gbCargaDetalle.Name = "gbCargaDetalle";
+            this.gbCargaDetalle.Size = new System.Drawing.Size(382, 202);
+            this.gbCargaDetalle.TabIndex = 17;
+            this.gbCargaDetalle.TabStop = false;
+            this.gbCargaDetalle.Text = "Carga Detalle del Plan Mensual";
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Location = new System.Drawing.Point(300, 173);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(76, 23);
+            this.btnAgregar.TabIndex = 13;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.numUnidades);
+            this.groupBox3.Controls.Add(this.numPorcentaje);
+            this.groupBox3.Controls.Add(this.rbPorcentaje);
+            this.groupBox3.Controls.Add(this.rbUnidades);
+            this.groupBox3.Location = new System.Drawing.Point(6, 69);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(370, 88);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Cantidad";
+            // 
+            // numUnidades
+            // 
+            this.numUnidades.Location = new System.Drawing.Point(174, 19);
+            this.numUnidades.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.numUnidades.Name = "numUnidades";
+            this.numUnidades.Size = new System.Drawing.Size(120, 20);
+            this.numUnidades.TabIndex = 3;
+            this.numUnidades.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // numPorcentaje
+            // 
+            this.numPorcentaje.Location = new System.Drawing.Point(174, 51);
+            this.numPorcentaje.Name = "numPorcentaje";
+            this.numPorcentaje.Size = new System.Drawing.Size(120, 20);
+            this.numPorcentaje.TabIndex = 2;
+            this.numPorcentaje.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // rbPorcentaje
+            // 
+            this.rbPorcentaje.AutoSize = true;
+            this.rbPorcentaje.Location = new System.Drawing.Point(64, 51);
+            this.rbPorcentaje.Name = "rbPorcentaje";
+            this.rbPorcentaje.Size = new System.Drawing.Size(93, 17);
+            this.rbPorcentaje.TabIndex = 1;
+            this.rbPorcentaje.TabStop = true;
+            this.rbPorcentaje.Text = "Porcentaje (%)";
+            this.rbPorcentaje.UseVisualStyleBackColor = true;
+            // 
+            // rbUnidades
+            // 
+            this.rbUnidades.AutoSize = true;
+            this.rbUnidades.Location = new System.Drawing.Point(64, 20);
+            this.rbUnidades.Name = "rbUnidades";
+            this.rbUnidades.Size = new System.Drawing.Size(105, 17);
+            this.rbUnidades.TabIndex = 0;
+            this.rbUnidades.TabStop = true;
+            this.rbUnidades.Text = "Unidades Fisicas";
+            this.rbUnidades.UseVisualStyleBackColor = true;
+            // 
+            // cbCocinas
+            // 
+            this.cbCocinas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCocinas.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbCocinas.FormattingEnabled = true;
+            this.cbCocinas.Location = new System.Drawing.Point(106, 30);
+            this.cbCocinas.Name = "cbCocinas";
+            this.cbCocinas.Size = new System.Drawing.Size(255, 21);
+            this.cbCocinas.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 33);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(94, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Cocina a Producir:";
+            // 
+            // tpPedidos
+            // 
+            this.tpPedidos.BackColor = System.Drawing.SystemColors.Control;
+            this.tpPedidos.Controls.Add(this.gbPedidos);
+            this.tpPedidos.Location = new System.Drawing.Point(4, 22);
+            this.tpPedidos.Name = "tpPedidos";
+            this.tpPedidos.Padding = new System.Windows.Forms.Padding(3);
+            this.tpPedidos.Size = new System.Drawing.Size(391, 214);
+            this.tpPedidos.TabIndex = 1;
+            this.tpPedidos.Text = "Pedidos Mes";
+            // 
+            // gbPedidos
+            // 
+            this.gbPedidos.Controls.Add(this.btnVerDetalle);
+            this.gbPedidos.Controls.Add(this.dgvPedidos);
+            this.gbPedidos.Controls.Add(this.lblMensaje);
+            this.gbPedidos.Location = new System.Drawing.Point(8, 6);
+            this.gbPedidos.Name = "gbPedidos";
+            this.gbPedidos.Size = new System.Drawing.Size(377, 202);
+            this.gbPedidos.TabIndex = 0;
+            this.gbPedidos.TabStop = false;
+            this.gbPedidos.Text = "Pedidos";
+            // 
+            // btnVerDetalle
+            // 
+            this.btnVerDetalle.Location = new System.Drawing.Point(290, 172);
+            this.btnVerDetalle.Name = "btnVerDetalle";
+            this.btnVerDetalle.Size = new System.Drawing.Size(76, 23);
+            this.btnVerDetalle.TabIndex = 14;
+            this.btnVerDetalle.Text = "Ver Detalle";
+            this.btnVerDetalle.UseVisualStyleBackColor = true;
+            this.btnVerDetalle.Click += new System.EventHandler(this.btnVerDetalle_Click);
+            // 
+            // dgvPedidos
+            // 
+            this.dgvPedidos.AllowUserToAddRows = false;
+            this.dgvPedidos.AllowUserToDeleteRows = false;
+            this.dgvPedidos.AllowUserToResizeRows = false;
+            this.dgvPedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPedidos.Location = new System.Drawing.Point(6, 19);
+            this.dgvPedidos.Name = "dgvPedidos";
+            this.dgvPedidos.RowHeadersVisible = false;
+            this.dgvPedidos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPedidos.Size = new System.Drawing.Size(360, 147);
+            this.dgvPedidos.TabIndex = 7;
+            this.dgvPedidos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPedidos_CellFormatting);
+            // 
+            // lblMensaje
+            // 
+            this.lblMensaje.AutoSize = true;
+            this.lblMensaje.Location = new System.Drawing.Point(102, 84);
+            this.lblMensaje.Name = "lblMensaje";
+            this.lblMensaje.Size = new System.Drawing.Size(41, 13);
+            this.lblMensaje.TabIndex = 15;
+            this.lblMensaje.Text = "label11";
+            // 
+            // tpDetallePedido
+            // 
+            this.tpDetallePedido.BackColor = System.Drawing.SystemColors.Control;
+            this.tpDetallePedido.Controls.Add(this.gbDetallePedido);
+            this.tpDetallePedido.Location = new System.Drawing.Point(4, 22);
+            this.tpDetallePedido.Name = "tpDetallePedido";
+            this.tpDetallePedido.Size = new System.Drawing.Size(391, 214);
+            this.tpDetallePedido.TabIndex = 2;
+            this.tpDetallePedido.Text = "DetallePedido";
+            // 
+            // gbDetallePedido
+            // 
+            this.gbDetallePedido.Controls.Add(this.btnPlanificar);
+            this.gbDetallePedido.Controls.Add(this.dgvDetallePedido);
+            this.gbDetallePedido.Controls.Add(this.label11);
+            this.gbDetallePedido.Controls.Add(this.lblMensajeDetalle);
+            this.gbDetallePedido.Location = new System.Drawing.Point(7, 6);
+            this.gbDetallePedido.Name = "gbDetallePedido";
+            this.gbDetallePedido.Size = new System.Drawing.Size(377, 202);
+            this.gbDetallePedido.TabIndex = 1;
+            this.gbDetallePedido.TabStop = false;
+            this.gbDetallePedido.Text = "Detalle Pedido";
+            // 
+            // btnPlanificar
+            // 
+            this.btnPlanificar.Location = new System.Drawing.Point(290, 172);
+            this.btnPlanificar.Name = "btnPlanificar";
+            this.btnPlanificar.Size = new System.Drawing.Size(76, 23);
+            this.btnPlanificar.TabIndex = 14;
+            this.btnPlanificar.Text = "Planificar";
+            this.btnPlanificar.UseVisualStyleBackColor = true;
+            // 
+            // dgvDetallePedido
+            // 
+            this.dgvDetallePedido.AllowUserToAddRows = false;
+            this.dgvDetallePedido.AllowUserToDeleteRows = false;
+            this.dgvDetallePedido.AllowUserToResizeRows = false;
+            this.dgvDetallePedido.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDetallePedido.Location = new System.Drawing.Point(6, 19);
+            this.dgvDetallePedido.Name = "dgvDetallePedido";
+            this.dgvDetallePedido.ReadOnly = true;
+            this.dgvDetallePedido.RowHeadersVisible = false;
+            this.dgvDetallePedido.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDetallePedido.Size = new System.Drawing.Size(360, 147);
+            this.dgvDetallePedido.TabIndex = 7;
+            this.dgvDetallePedido.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetallePedido_CellFormatting);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(102, 84);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(41, 13);
+            this.label11.TabIndex = 15;
+            this.label11.Text = "label11";
             // 
             // gbCantidades
             // 
@@ -361,9 +614,9 @@
             this.gbCantidades.Controls.Add(this.label10);
             this.gbCantidades.Controls.Add(this.label9);
             this.gbCantidades.Controls.Add(this.label8);
-            this.gbCantidades.Location = new System.Drawing.Point(9, 72);
+            this.gbCantidades.Location = new System.Drawing.Point(7, 318);
             this.gbCantidades.Name = "gbCantidades";
-            this.gbCantidades.Size = new System.Drawing.Size(350, 98);
+            this.gbCantidades.Size = new System.Drawing.Size(391, 101);
             this.gbCantidades.TabIndex = 18;
             this.gbCantidades.TabStop = false;
             this.gbCantidades.Text = "Cantidades a Planificar";
@@ -420,9 +673,9 @@
             // 
             this.gbDetalleGrilla.Controls.Add(this.dgvDatos);
             this.gbDetalleGrilla.Controls.Add(this.panelAcciones);
-            this.gbDetalleGrilla.Location = new System.Drawing.Point(372, 70);
+            this.gbDetalleGrilla.Location = new System.Drawing.Point(408, 70);
             this.gbDetalleGrilla.Name = "gbDetalleGrilla";
-            this.gbDetalleGrilla.Size = new System.Drawing.Size(350, 271);
+            this.gbDetalleGrilla.Size = new System.Drawing.Size(314, 309);
             this.gbDetalleGrilla.TabIndex = 17;
             this.gbDetalleGrilla.TabStop = false;
             this.gbDetalleGrilla.Text = "Detalle";
@@ -433,11 +686,12 @@
             this.dgvDatos.AllowUserToDeleteRows = false;
             this.dgvDatos.AllowUserToResizeRows = false;
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDatos.Location = new System.Drawing.Point(5, 24);
+            this.dgvDatos.Location = new System.Drawing.Point(6, 15);
             this.dgvDatos.Name = "dgvDatos";
+            this.dgvDatos.ReadOnly = true;
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(268, 220);
+            this.dgvDatos.Size = new System.Drawing.Size(296, 222);
             this.dgvDatos.TabIndex = 5;
             this.dgvDatos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDatos_CellFormatting);
             // 
@@ -449,16 +703,16 @@
             this.panelAcciones.Controls.Add(this.btnSumar);
             this.panelAcciones.Controls.Add(this.label6);
             this.panelAcciones.Controls.Add(this.btnDelete);
-            this.panelAcciones.Location = new System.Drawing.Point(279, 23);
+            this.panelAcciones.Location = new System.Drawing.Point(6, 244);
             this.panelAcciones.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelAcciones.Name = "panelAcciones";
-            this.panelAcciones.Size = new System.Drawing.Size(65, 221);
+            this.panelAcciones.Size = new System.Drawing.Size(296, 56);
             this.panelAcciones.TabIndex = 12;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 111);
+            this.label7.Location = new System.Drawing.Point(190, 6);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(60, 13);
             this.label7.TabIndex = 20;
@@ -470,7 +724,7 @@
             this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestar.Image = ((System.Drawing.Image)(resources.GetObject("btnRestar.Image")));
             this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRestar.Location = new System.Drawing.Point(19, 172);
+            this.btnRestar.Location = new System.Drawing.Point(220, 21);
             this.btnRestar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRestar.Name = "btnRestar";
             this.btnRestar.Size = new System.Drawing.Size(30, 30);
@@ -485,7 +739,7 @@
             this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSumar.Image = ((System.Drawing.Image)(resources.GetObject("btnSumar.Image")));
             this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSumar.Location = new System.Drawing.Point(19, 131);
+            this.btnSumar.Location = new System.Drawing.Point(184, 21);
             this.btnSumar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSumar.Name = "btnSumar";
             this.btnSumar.Size = new System.Drawing.Size(30, 30);
@@ -499,9 +753,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(8, 6);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(51, 13);
+            this.label6.Size = new System.Drawing.Size(111, 13);
             this.label6.TabIndex = 17;
-            this.label6.Text = "Acciones";
+            this.label6.Text = "Eliminar Seleccionado";
             // 
             // btnDelete
             // 
@@ -509,7 +763,7 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Delete_25;
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(19, 28);
+            this.btnDelete.Location = new System.Drawing.Point(45, 20);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(30, 30);
@@ -518,119 +772,19 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // gbCargaDetalle
-            // 
-            this.gbCargaDetalle.Controls.Add(this.btnAgregar);
-            this.gbCargaDetalle.Controls.Add(this.groupBox3);
-            this.gbCargaDetalle.Controls.Add(this.cbCocinas);
-            this.gbCargaDetalle.Controls.Add(this.label5);
-            this.gbCargaDetalle.Location = new System.Drawing.Point(3, 176);
-            this.gbCargaDetalle.Name = "gbCargaDetalle";
-            this.gbCargaDetalle.Size = new System.Drawing.Size(359, 165);
-            this.gbCargaDetalle.TabIndex = 16;
-            this.gbCargaDetalle.TabStop = false;
-            this.gbCargaDetalle.Text = "Carga Detalle del Plan Mensual";
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Location = new System.Drawing.Point(249, 136);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(104, 23);
-            this.btnAgregar.TabIndex = 13;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.numUnidades);
-            this.groupBox3.Controls.Add(this.numPorcentaje);
-            this.groupBox3.Controls.Add(this.rbPorcentaje);
-            this.groupBox3.Controls.Add(this.rbUnidades);
-            this.groupBox3.Location = new System.Drawing.Point(24, 46);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(264, 88);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Cantidad";
-            // 
-            // numUnidades
-            // 
-            this.numUnidades.Location = new System.Drawing.Point(125, 19);
-            this.numUnidades.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.numUnidades.Name = "numUnidades";
-            this.numUnidades.Size = new System.Drawing.Size(120, 20);
-            this.numUnidades.TabIndex = 3;
-            this.numUnidades.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // numPorcentaje
-            // 
-            this.numPorcentaje.Location = new System.Drawing.Point(125, 51);
-            this.numPorcentaje.Name = "numPorcentaje";
-            this.numPorcentaje.Size = new System.Drawing.Size(120, 20);
-            this.numPorcentaje.TabIndex = 2;
-            this.numPorcentaje.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // rbPorcentaje
-            // 
-            this.rbPorcentaje.AutoSize = true;
-            this.rbPorcentaje.Location = new System.Drawing.Point(15, 51);
-            this.rbPorcentaje.Name = "rbPorcentaje";
-            this.rbPorcentaje.Size = new System.Drawing.Size(93, 17);
-            this.rbPorcentaje.TabIndex = 1;
-            this.rbPorcentaje.TabStop = true;
-            this.rbPorcentaje.Text = "Porcentaje (%)";
-            this.rbPorcentaje.UseVisualStyleBackColor = true;
-            this.rbPorcentaje.CheckedChanged += new System.EventHandler(this.rbPorcentaje_CheckedChanged);
-            // 
-            // rbUnidades
-            // 
-            this.rbUnidades.AutoSize = true;
-            this.rbUnidades.Location = new System.Drawing.Point(15, 20);
-            this.rbUnidades.Name = "rbUnidades";
-            this.rbUnidades.Size = new System.Drawing.Size(105, 17);
-            this.rbUnidades.TabIndex = 0;
-            this.rbUnidades.TabStop = true;
-            this.rbUnidades.Text = "Unidades Fisicas";
-            this.rbUnidades.UseVisualStyleBackColor = true;
-            this.rbUnidades.CheckedChanged += new System.EventHandler(this.rbUnidades_CheckedChanged);
-            // 
-            // cbCocinas
-            // 
-            this.cbCocinas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCocinas.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbCocinas.FormattingEnabled = true;
-            this.cbCocinas.Location = new System.Drawing.Point(105, 19);
-            this.cbCocinas.Name = "cbCocinas";
-            this.cbCocinas.Size = new System.Drawing.Size(212, 21);
-            this.cbCocinas.TabIndex = 1;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(5, 22);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(94, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Cocina a Producir:";
-            // 
             // gbBotones
             // 
             this.gbBotones.Controls.Add(this.btnVolver);
             this.gbBotones.Controls.Add(this.btnGuardar);
-            this.gbBotones.Location = new System.Drawing.Point(372, 347);
+            this.gbBotones.Location = new System.Drawing.Point(408, 379);
             this.gbBotones.Name = "gbBotones";
-            this.gbBotones.Size = new System.Drawing.Size(350, 40);
+            this.gbBotones.Size = new System.Drawing.Size(316, 40);
             this.gbBotones.TabIndex = 13;
             this.gbBotones.TabStop = false;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(279, 12);
+            this.btnVolver.Location = new System.Drawing.Point(250, 12);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(64, 22);
             this.btnVolver.TabIndex = 22;
@@ -640,7 +794,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(209, 12);
+            this.btnGuardar.Location = new System.Drawing.Point(180, 12);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(64, 22);
             this.btnGuardar.TabIndex = 21;
@@ -655,22 +809,22 @@
             this.dgvDetalle.AllowUserToResizeColumns = false;
             this.dgvDetalle.AllowUserToResizeRows = false;
             this.dgvDetalle.Enabled = false;
-            this.dgvDetalle.Location = new System.Drawing.Point(11, 22);
+            this.dgvDetalle.Location = new System.Drawing.Point(6, 19);
             this.dgvDetalle.MultiSelect = false;
             this.dgvDetalle.Name = "dgvDetalle";
             this.dgvDetalle.ReadOnly = true;
             this.dgvDetalle.RowHeadersVisible = false;
             this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetalle.Size = new System.Drawing.Size(291, 290);
+            this.dgvDetalle.Size = new System.Drawing.Size(317, 290);
             this.dgvDetalle.TabIndex = 1;
             this.dgvDetalle.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetalle_CellFormatting);
             // 
             // gbGrillaDetalle
             // 
             this.gbGrillaDetalle.Controls.Add(this.dgvDetalle);
-            this.gbGrillaDetalle.Location = new System.Drawing.Point(416, 75);
+            this.gbGrillaDetalle.Location = new System.Drawing.Point(381, 75);
             this.gbGrillaDetalle.Name = "gbGrillaDetalle";
-            this.gbGrillaDetalle.Size = new System.Drawing.Size(308, 320);
+            this.gbGrillaDetalle.Size = new System.Drawing.Size(343, 320);
             this.gbGrillaDetalle.TabIndex = 2;
             this.gbGrillaDetalle.TabStop = false;
             this.gbGrillaDetalle.Text = "Listado Detalle Planes Mensuales";
@@ -688,7 +842,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(740, 459);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(742, 496);
             this.tableLayoutPanel1.TabIndex = 14;
             // 
             // tcPlanAnual
@@ -704,7 +858,7 @@
             this.tcPlanAnual.Name = "tcPlanAnual";
             this.tcPlanAnual.Padding = new System.Drawing.Point(0, 0);
             this.tcPlanAnual.SelectedIndex = 0;
-            this.tcPlanAnual.Size = new System.Drawing.Size(736, 403);
+            this.tcPlanAnual.Size = new System.Drawing.Size(738, 440);
             this.tcPlanAnual.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcPlanAnual.TabIndex = 8;
             // 
@@ -716,15 +870,24 @@
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(728, 394);
+            this.tpBuscar.Size = new System.Drawing.Size(730, 431);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
+            // 
+            // lblMensajeDetalle
+            // 
+            this.lblMensajeDetalle.AutoSize = true;
+            this.lblMensajeDetalle.Location = new System.Drawing.Point(92, 84);
+            this.lblMensajeDetalle.Name = "lblMensajeDetalle";
+            this.lblMensajeDetalle.Size = new System.Drawing.Size(41, 13);
+            this.lblMensajeDetalle.TabIndex = 16;
+            this.lblMensajeDetalle.Text = "label12";
             // 
             // frmPlanMensual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(740, 459);
+            this.ClientSize = new System.Drawing.Size(742, 496);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmPlanMensual";
             this.Text = "Plan Mensual";
@@ -737,18 +900,28 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tpDatos.ResumeLayout(false);
-            this.gbCantidades.ResumeLayout(false);
-            this.gbCantidades.PerformLayout();
-            this.gbDetalleGrilla.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
-            this.panelAcciones.ResumeLayout(false);
-            this.panelAcciones.PerformLayout();
+            this.tcDatos.ResumeLayout(false);
+            this.tpPlanificacion.ResumeLayout(false);
             this.gbCargaDetalle.ResumeLayout(false);
             this.gbCargaDetalle.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUnidades)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPorcentaje)).EndInit();
+            this.tpPedidos.ResumeLayout(false);
+            this.gbPedidos.ResumeLayout(false);
+            this.gbPedidos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPedidos)).EndInit();
+            this.tpDetallePedido.ResumeLayout(false);
+            this.gbDetallePedido.ResumeLayout(false);
+            this.gbDetallePedido.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePedido)).EndInit();
+            this.gbCantidades.ResumeLayout(false);
+            this.gbCantidades.PerformLayout();
+            this.gbDetalleGrilla.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
+            this.panelAcciones.ResumeLayout(false);
+            this.panelAcciones.PerformLayout();
             this.gbBotones.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).EndInit();
             this.gbGrillaDetalle.ResumeLayout(false);
@@ -791,13 +964,6 @@
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbPlanAnual;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnCargaDetalle;
-        private System.Windows.Forms.GroupBox gbCargaDetalle;
-        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbCocinas;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.NumericUpDown numPorcentaje;
-        private System.Windows.Forms.RadioButton rbPorcentaje;
-        private System.Windows.Forms.RadioButton rbUnidades;
         private System.Windows.Forms.DataGridView dgvDatos;
         private System.Windows.Forms.Panel panelAcciones;
         private System.Windows.Forms.Button btnDelete;
@@ -806,7 +972,6 @@
         private System.Windows.Forms.Button btnRestar;
         private System.Windows.Forms.Button btnSumar;
         private System.Windows.Forms.GroupBox gbDetalleGrilla;
-        private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.GroupBox gbCantidades;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
@@ -815,6 +980,27 @@
         private System.Windows.Forms.TextBox txtRestaPlanificar;
         private System.Windows.Forms.TextBox txtCantPlanificada;
         private System.Windows.Forms.TextBox txtCantAPlanificar;
+        private System.Windows.Forms.TabControl tcDatos;
+        private System.Windows.Forms.TabPage tpPlanificacion;
+        private System.Windows.Forms.TabPage tpPedidos;
+        private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.GroupBox gbCargaDetalle;
+        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.NumericUpDown numUnidades;
+        private System.Windows.Forms.NumericUpDown numPorcentaje;
+        private System.Windows.Forms.RadioButton rbPorcentaje;
+        private System.Windows.Forms.RadioButton rbUnidades;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbCocinas;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.GroupBox gbPedidos;
+        private System.Windows.Forms.DataGridView dgvPedidos;
+        private System.Windows.Forms.Button btnVerDetalle;
+        private System.Windows.Forms.Label lblMensaje;
+        private System.Windows.Forms.TabPage tpDetallePedido;
+        private System.Windows.Forms.GroupBox gbDetallePedido;
+        private System.Windows.Forms.Button btnPlanificar;
+        private System.Windows.Forms.DataGridView dgvDetallePedido;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblMensajeDetalle;
     }
 }

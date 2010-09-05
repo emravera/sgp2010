@@ -19,5 +19,20 @@ namespace GyCAP.BLL
         {
             DAL.OperacionDAL.buscarOperacion(dsOperaciones,nombre,codificacion);
         }
+        //METODO INSERCION
+        public static void InsertarOperacion(Entidades.OperacionFabricacion operacion)
+        {
+            DAL.OperacionDAL.Insertar(operacion);
+        }
+        //METODO MODIFICACIÓN
+        public static void ModificarOperacion(Entidades.OperacionFabricacion operacion)
+        {
+            DAL.OperacionDAL.ModificarOperacion(operacion);
+        }
+        //METODO ELIMINACIÓN
+        public static void EliminarOperacion(int codigoOperacion)
+        {
+            DAL.OperacionDAL.EliminarOperacion(codigoOperacion);
+        }
     }
 }

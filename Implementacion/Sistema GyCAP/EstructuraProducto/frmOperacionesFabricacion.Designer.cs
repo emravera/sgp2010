@@ -30,7 +30,7 @@
         {
             this.btnVolver = new System.Windows.Forms.Button();
             this.dgvLista = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbGrillaBuscar = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtCodigoOperacionBuscar = new System.Windows.Forms.TextBox();
             this.lblClienteBuscar = new System.Windows.Forms.Label();
@@ -60,7 +60,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.gbGrillaBuscar.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
@@ -74,12 +74,13 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(423, 20);
+            this.btnVolver.Location = new System.Drawing.Point(434, 19);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(64, 22);
-            this.btnVolver.TabIndex = 5;
+            this.btnVolver.TabIndex = 6;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // dgvLista
             // 
@@ -92,20 +93,23 @@
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(469, 154);
+            this.dgvLista.Size = new System.Drawing.Size(484, 154);
             this.dgvLista.TabIndex = 0;
+            this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
+            this.dgvLista.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellContentDoubleClick);
+            this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
-            // groupBox2
+            // gbGrillaBuscar
             // 
-            this.groupBox2.Controls.Add(this.dgvLista);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(3, 62);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(9);
-            this.groupBox2.Size = new System.Drawing.Size(487, 185);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Listado de Operaciones";
+            this.gbGrillaBuscar.Controls.Add(this.dgvLista);
+            this.gbGrillaBuscar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.gbGrillaBuscar.Location = new System.Drawing.Point(3, 64);
+            this.gbGrillaBuscar.Name = "gbGrillaBuscar";
+            this.gbGrillaBuscar.Padding = new System.Windows.Forms.Padding(9);
+            this.gbGrillaBuscar.Size = new System.Drawing.Size(502, 185);
+            this.gbGrillaBuscar.TabIndex = 1;
+            this.gbGrillaBuscar.TabStop = false;
+            this.gbGrillaBuscar.Text = "Listado de Operaciones";
             // 
             // groupBox1
             // 
@@ -117,7 +121,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(487, 55);
+            this.groupBox1.Size = new System.Drawing.Size(502, 55);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
@@ -128,7 +132,7 @@
             this.txtCodigoOperacionBuscar.MaxLength = 80;
             this.txtCodigoOperacionBuscar.Name = "txtCodigoOperacionBuscar";
             this.txtCodigoOperacionBuscar.Size = new System.Drawing.Size(97, 20);
-            this.txtCodigoOperacionBuscar.TabIndex = 6;
+            this.txtCodigoOperacionBuscar.TabIndex = 8;
             // 
             // lblClienteBuscar
             // 
@@ -143,10 +147,10 @@
             // 
             this.btnBuscar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(394, 18);
+            this.btnBuscar.Location = new System.Drawing.Point(415, 17);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscar.TabIndex = 5;
+            this.btnBuscar.TabIndex = 9;
             this.btnBuscar.Text = "&Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -158,7 +162,7 @@
             this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(97, 20);
-            this.txtNombreBuscar.TabIndex = 2;
+            this.txtNombreBuscar.TabIndex = 7;
             // 
             // label1
             // 
@@ -171,12 +175,12 @@
             // 
             // tpBuscar
             // 
-            this.tpBuscar.Controls.Add(this.groupBox2);
+            this.tpBuscar.Controls.Add(this.gbGrillaBuscar);
             this.tpBuscar.Controls.Add(this.groupBox1);
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(493, 250);
+            this.tpBuscar.Size = new System.Drawing.Size(508, 252);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
@@ -185,21 +189,22 @@
             this.gbGuardarCancelar.Controls.Add(this.btnVolver);
             this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
             this.gbGuardarCancelar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 190);
+            this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 192);
             this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
             this.gbGuardarCancelar.Name = "gbGuardarCancelar";
-            this.gbGuardarCancelar.Size = new System.Drawing.Size(487, 57);
+            this.gbGuardarCancelar.Size = new System.Drawing.Size(502, 57);
             this.gbGuardarCancelar.TabIndex = 1;
             this.gbGuardarCancelar.TabStop = false;
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(353, 20);
+            this.btnGuardar.Location = new System.Drawing.Point(364, 19);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(64, 22);
-            this.btnGuardar.TabIndex = 4;
+            this.btnGuardar.TabIndex = 5;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // tcMarca
             // 
@@ -214,7 +219,7 @@
             this.tcMarca.Name = "tcMarca";
             this.tcMarca.Padding = new System.Drawing.Point(0, 0);
             this.tcMarca.SelectedIndex = 0;
-            this.tcMarca.Size = new System.Drawing.Size(501, 259);
+            this.tcMarca.Size = new System.Drawing.Size(516, 261);
             this.tcMarca.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcMarca.TabIndex = 8;
             // 
@@ -226,7 +231,7 @@
             this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDatos.Size = new System.Drawing.Size(493, 250);
+            this.tpDatos.Size = new System.Drawing.Size(508, 252);
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
@@ -244,7 +249,7 @@
             this.gbDatos.Location = new System.Drawing.Point(3, 3);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(487, 187);
+            this.gbDatos.Size = new System.Drawing.Size(502, 187);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Operaciones Fabricación";
@@ -254,7 +259,7 @@
             this.numHoras.Location = new System.Drawing.Point(118, 88);
             this.numHoras.Name = "numHoras";
             this.numHoras.Size = new System.Drawing.Size(65, 20);
-            this.numHoras.TabIndex = 9;
+            this.numHoras.TabIndex = 3;
             this.numHoras.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label4
@@ -272,7 +277,7 @@
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(310, 58);
-            this.txtDescripcion.TabIndex = 7;
+            this.txtDescripcion.TabIndex = 4;
             // 
             // label2
             // 
@@ -288,7 +293,7 @@
             this.txtNombre.Location = new System.Drawing.Point(118, 59);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(193, 20);
-            this.txtNombre.TabIndex = 5;
+            this.txtNombre.TabIndex = 2;
             // 
             // label5
             // 
@@ -335,6 +340,7 @@
             this.btnEliminar.Size = new System.Drawing.Size(47, 47);
             this.btnEliminar.Text = "&Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnModificar
             // 
@@ -388,7 +394,7 @@
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.tsMenu.Size = new System.Drawing.Size(501, 50);
+            this.tsMenu.Size = new System.Drawing.Size(516, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
@@ -410,19 +416,22 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(505, 315);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(520, 317);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
             // frmOperacionesFabricacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 315);
+            this.ClientSize = new System.Drawing.Size(520, 317);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmOperacionesFabricacion";
             this.Text = "Operaciones de Fabricación";
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
-            this.groupBox2.ResumeLayout(false);
+            this.gbGrillaBuscar.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tpBuscar.ResumeLayout(false);
@@ -444,7 +453,7 @@
 
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.DataGridView dgvLista;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbGrillaBuscar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtCodigoOperacionBuscar;
         private System.Windows.Forms.Label lblClienteBuscar;

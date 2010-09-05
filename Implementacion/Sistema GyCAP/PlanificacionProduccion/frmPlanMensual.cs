@@ -13,7 +13,7 @@ namespace GyCAP.UI.PlanificacionProduccion
     {
         private static frmPlanMensual _frmPlanMensual = null;
         private Data.dsPlanMensual dsPlanMensual = new GyCAP.Data.dsPlanMensual();
-        private DataView dvListaPlanes, dvListaDetalle, dvListaDatos, dvComboPlanesAnuales, dvComboCocinas;
+        private DataView dvListaPlanes, dvListaDetalle, dvListaDatos, dvComboPlanesAnuales, dvComboCocinas, dvListaPedidos, dvListaDetallePedido;
         private enum estadoUI { inicio, nuevo, buscar, modificar, cargaDetalle };
         private static estadoUI estadoActual;
         private static int cantidadPlanificada; int codigoDetalle = -1;
@@ -25,6 +25,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Inicializamos las grillas
             dgvDetalle.AutoGenerateColumns = false;
             dgvLista.AutoGenerateColumns = false;
+            dgvDatos.AutoGenerateColumns = false;
+            dgvPedidos.AutoGenerateColumns = false;
+            dgvDetallePedido.AutoGenerateColumns = false;
 
             //Para cada Lista
             //Lista de Demandas
@@ -59,6 +62,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns.Add("COC_CODIGO", "Cocina Codigo");
             dgvDetalle.Columns.Add("DPMES_CANTIDADESTIMADA", "Cantidad Estimada");
             dgvDetalle.Columns.Add("DPMES_CANTIDADREAL", "Cantidad Real");
+            dgvDetalle.Columns.Add("DPED_CODIGO", "Pedido");
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvDetalle.Columns["DPMES_CODIGO"].DataPropertyName = "DPMES_CODIGO";
@@ -66,6 +70,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns["COC_CODIGO"].DataPropertyName = "COC_CODIGO";
             dgvDetalle.Columns["DPMES_CANTIDADESTIMADA"].DataPropertyName = "DPMES_CANTIDADESTIMADA";
             dgvDetalle.Columns["DPMES_CANTIDADREAL"].DataPropertyName = "DPMES_CANTIDADREAL";
+            dgvDetalle.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
 
             //Seteamos el modo de tamaño de las columnas
             dgvDetalle.Columns[0].Visible = false;
@@ -74,11 +79,13 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalle.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvDetalle.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvDetalle.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
              //Creamos el dataview y lo asignamos a la grilla
             dvListaDetalle = new DataView(dsPlanMensual.DETALLE_PLANES_MENSUALES);
             dgvDetalle.DataSource = dvListaDetalle;
 
+            //******************************************************************************************
             //Lista de Datos
             //Agregamos la columnas
             dgvDatos.Columns.Add("DPMES_CODIGO", "Código");
@@ -86,6 +93,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDatos.Columns.Add("COC_CODIGO", "Cocina Codigo");
             dgvDatos.Columns.Add("DPMES_CANTIDADESTIMADA", "Cantidad Estimada");
             dgvDatos.Columns.Add("DPMES_CANTIDADREAL", "Cantidad Real");
+            dgvDatos.Columns.Add("DPED_CODIGO", "Pedido");
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvDatos.Columns["DPMES_CODIGO"].DataPropertyName = "DPMES_CODIGO";
@@ -93,6 +101,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDatos.Columns["COC_CODIGO"].DataPropertyName = "COC_CODIGO";
             dgvDatos.Columns["DPMES_CANTIDADESTIMADA"].DataPropertyName = "DPMES_CANTIDADESTIMADA";
             dgvDatos.Columns["DPMES_CANTIDADREAL"].DataPropertyName = "DPMES_CANTIDADREAL";
+            dgvDatos.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
 
             //Seteamos el modo de tamaño de las columnas
             dgvDatos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -100,12 +109,74 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDatos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDatos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvDatos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvDatos.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDatos = new DataView(dsPlanMensual.DETALLE_PLANES_MENSUALES);
             dgvDatos.DataSource = dvListaDatos;
 
 
+            //*********************************** Lista de Pedidos *****************************************
+            //Agregamos la columnas
+            dgvPedidos.Columns.Add("PED_CODIGO", "Código");
+            dgvPedidos.Columns.Add("PED_NUMERO", "Numero");
+            dgvPedidos.Columns.Add("CLI_CODIGO", "Cliente");
+            dgvPedidos.Columns.Add("EPED_CODIGO", "Estado");
+            dgvPedidos.Columns.Add("PED_FECHA_ALTA", "Fecha Alta");
+            dgvPedidos.Columns.Add("PED_FECHAENTREGAPREVISTA", "Fecha Entrega");
+            dgvPedidos.Columns.Add("PED_FECHAENTREGAREAL", "Fecha Real Entrega");
+               
+
+            //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
+            dgvPedidos.Columns["PED_CODIGO"].DataPropertyName = "PED_CODIGO";
+            dgvPedidos.Columns["PED_NUMERO"].DataPropertyName = "PED_NUMERO";
+            dgvPedidos.Columns["CLI_CODIGO"].DataPropertyName = "CLI_CODIGO";
+            dgvPedidos.Columns["EPED_CODIGO"].DataPropertyName = "EPED_CODIGO";
+            dgvPedidos.Columns["PED_FECHA_ALTA"].DataPropertyName = "PED_FECHA_ALTA";
+            dgvPedidos.Columns["PED_FECHAENTREGAPREVISTA"].DataPropertyName = "PED_FECHAENTREGAPREVISTA";
+            dgvPedidos.Columns["PED_FECHAENTREGAREAL"].DataPropertyName = "PED_FECHAENTREGAREAL";
+
+            //Seteamos el modo de tamaño de las columnas
+            dgvPedidos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPedidos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPedidos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPedidos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPedidos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvPedidos.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            //Creamos el dataview y lo asignamos a la grilla
+            dvListaPedidos = new DataView(dsPlanMensual.PEDIDOS);
+            dgvPedidos.DataSource = dvListaPedidos;
+
+            //*********************************** Lista de Detalle de Pedidos *****************************************
+            //Agregamos la columnas
+            dgvDetallePedido.Columns.Add("DPED_CODIGO", "Código");
+            dgvDetallePedido.Columns.Add("PED_CODIGO", "Pedido");
+            dgvDetallePedido.Columns.Add("EDPED_CODIGO", "Estado");
+            dgvDetallePedido.Columns.Add("COC_CODIGO", "Cocina");
+            dgvDetallePedido.Columns.Add("DPED_CANTIDAD", "Cantidad");
+            dgvDetallePedido.Columns.Add("DPED_FECHA_CANCELACION", "Fecha Cancelación");
+
+            //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
+            dgvDetallePedido.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
+            dgvDetallePedido.Columns["PED_CODIGO"].DataPropertyName = "PED_CODIGO";
+            dgvDetallePedido.Columns["EDPED_CODIGO"].DataPropertyName = "EDPED_CODIGO";
+            dgvDetallePedido.Columns["COC_CODIGO"].DataPropertyName = "COC_CODIGO";
+            dgvDetallePedido.Columns["DPED_CANTIDAD"].DataPropertyName = "DPED_CANTIDAD";
+            dgvDetallePedido.Columns["DPED_FECHA_CANCELACION"].DataPropertyName = "DPED_FECHA_CANCELACION";
+            
+            //Seteamos el modo de tamaño de las columnas
+            dgvDetallePedido.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDetallePedido.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDetallePedido.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDetallePedido.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDetallePedido.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvDetallePedido.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            
+            //Creamos el dataview y lo asignamos a la grilla
+            dvListaDetallePedido = new DataView(dsPlanMensual.DETALLE_PEDIDOS);
+            dgvDetallePedido.DataSource = dvListaDetallePedido;
+            
             //LLenado de Datasets
             //Llenamos el dataset con los planes anuales
             BLL.PlanAnualBLL.ObtenerTodos(dsPlanMensual.PLANES_ANUALES);
@@ -115,7 +186,16 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             //Llenamos el dataset de Cocinas
             BLL.CocinaBLL.ObtenerCocinasSinCosto(dsPlanMensual.COCINAS);
-            
+
+            //Llenamos el dataset de Clientes
+            BLL.ClienteBLL.ObtenerTodos(dsPlanMensual.CLIENTES);
+
+            //Llenamos el datatable con los estados de pedidos
+            BLL.EstadoPedidoBLL.ObtenerTodos(dsPlanMensual.ESTADO_PEDIDOS);
+
+            //Llenamos el datatable con los estados de detalle Pedido
+            BLL.EstadoDetallePedidoBLL.ObtenerTodos(dsPlanMensual.ESTADO_DETALLE_PEDIDOS);
+
             //Cargamos el combo de los meses
             string[] Meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
             int cont = 0; int[] valores = new int[12];
@@ -203,6 +283,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbGrillaDetalle.Visible = false;
                     tcPlanAnual.SelectedTab = tpBuscar;
                     estadoActual = estadoUI.buscar;
+                    
                     //Columnas de las grillas
                     //Ponemos las columnas de las grillas en visible false
                     dgvLista.Columns["PMES_CODIGO"].Visible = false;
@@ -211,6 +292,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     dgvDetalle.Columns["PMES_CODIGO"].Visible = false;
                     dgvDetalle.Columns["DPMES_CANTIDADREAL"].Visible = false;
                     break;
+
                 //Cuando se carga el Detalle
                 case estadoUI.cargaDetalle:
                     btnNuevo.Enabled = true;
@@ -219,6 +301,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnModificar.Enabled = false;
                     tcPlanAnual.SelectedTab = tpDatos;
                     estadoActual = estadoUI.cargaDetalle;
+                    
                     //Manejo de Controles
                     //Groupbox
                     gbDatosPrincipales.Enabled = false;
@@ -239,10 +322,23 @@ namespace GyCAP.UI.PlanificacionProduccion
                     numPorcentaje.Value = 0;
                     //Radiobuttons
                     rbUnidades.Checked = true;
+                    //Busco la tab seleccinada
+                    tcDatos.Visible = true;
+                    tcDatos.SelectedTab = tpPlanificacion;
+                    
                     //Escondo las columnas que no quiero mostrar de la grilla
                     dgvDatos.Columns["DPMES_CODIGO"].Visible = false;
                     dgvDatos.Columns["PMES_CODIGO"].Visible = false;
                     dgvDatos.Columns["DPMES_CANTIDADREAL"].Visible = false;
+
+                    //Escondo las columnas de las grillas de pedidos
+                    dgvPedidos.Columns["PED_CODIGO"].Visible = false;
+                    dgvPedidos.Columns["PED_FECHAENTREGAREAL"].Visible = false;
+                    dgvPedidos.Columns["PED_FECHA_ALTA"].Visible = false;
+
+                    dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
+                    dgvDetallePedido.Columns["PED_CODIGO"].Visible = false;
+                    dgvDetallePedido.Columns["DPED_FECHA_CANCELACION"].Visible = false;
                     break;
                     
                 case estadoUI.modificar:
@@ -255,6 +351,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     estadoActual = estadoUI.modificar;
                     //Radiobuttons
                     rbUnidades.Checked = true;
+
                     //Escondo las columnas que no quiero mostrar de la grilla
                     dgvDatos.Columns["DPMES_CODIGO"].Visible = false;
                     dgvDatos.Columns["PMES_CODIGO"].Visible = false;
@@ -267,16 +364,20 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnEliminar.Enabled = false;
                     btnModificar.Enabled = false;
                     tcPlanAnual.SelectedTab = tpDatos;
+                    
+                    //Manejo los controles
                     cbMesDatos.SetSelectedIndex(-1);
                     cbPlanAnual.SetSelectedIndex(-1);
+                    tcDatos.Visible = false;
+                    
                     gbDatosPrincipales.Enabled = true;
                     gbCantidades.Visible = false;
                     gbCargaDetalle.Visible = false;
                     gbDetalleGrilla.Visible = false;
                     gbBotones.Visible = false;
                     estadoActual = estadoUI.nuevo;
-                    break;
-                
+
+                    break;               
 
                 default:
                     break;
@@ -422,6 +523,35 @@ namespace GyCAP.UI.PlanificacionProduccion
                 {
                     int anio = Convert.ToInt32(cbPlanAnual.GetSelectedText());
                     string mes = cbMesDatos.GetSelectedText();
+
+                    //Metodo que me busca el valuemember de un mes
+                    string[] Meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
+                    int cont = 0;
+                    foreach (string l in Meses)
+                    {
+                        if (mes == Meses[cont]) break;
+                        cont++;
+                    }
+                    cont += 1;
+                                       
+                    //Verifico si existen pedidos para ese mes
+                    DateTime fechaPedidos = Convert.ToDateTime("01/" + cont.ToString() + "/" + anio.ToString());
+                    
+                    //Busco los pedidos para esa fecha
+                    BLL.ClaseTemporalPedido.ObtenerPedido(fechaPedidos,dsPlanMensual);
+
+                    if (dsPlanMensual.PEDIDOS.Rows.Count == 0)
+                    {
+                        dgvPedidos.Visible = false;
+                        lblMensaje.Text = "No se encontraron pedidos";
+                        btnVerDetalle.Enabled = false;
+                    }
+                    else
+                    {
+                        dgvPedidos.Visible = true;
+                        lblMensaje.Text = string.Empty;
+                        btnVerDetalle.Enabled = true;
+                    }
 
                     //Verifico que no exista ningun plan mensual para esos datos
                     if (BLL.PlanMensualBLL.ExistePlanMensual(anio, mes) == true)
@@ -595,6 +725,34 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
         }
 
+        private void dgvPedidos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
+            if (e.Value != null)
+            {
+                string nombre;
+
+                switch (dgvPedidos.Columns[e.ColumnIndex].Name)
+                {
+                    case "COC_CODIGO":
+                        nombre = dsPlanMensual.COCINAS.FindByCOC_CODIGO(Convert.ToInt32(e.Value)).COC_CODIGO_PRODUCTO;
+                        e.Value = nombre;
+                        break;
+                    case "EPED_CODIGO":
+                        nombre = dsPlanMensual.ESTADO_PEDIDOS.FindByEPED_CODIGO(Convert.ToInt32(e.Value)).EPED_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "CLI_CODIGO":
+                        nombre = dsPlanMensual.CLIENTES.FindByCLI_CODIGO(Convert.ToInt32(e.Value)).CLI_RAZONSOCIAL;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (dgvDatos.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
@@ -714,7 +872,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                 string mes = dsPlanMensual.PLANES_MENSUALES.FindByPMES_CODIGO(codigo).PMES_MES.ToString();
 
-                //Motodo que me busca el valuemember de un mes
+                //Metodo que me busca el valuemember de un mes
                 string[] Meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
                 int cont = 0;
                 foreach (string l in Meses)
@@ -794,6 +952,71 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         }
 
+        private void btnVerDetalle_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Busco el Codigo del Pedido
+                int codigoPedido = Convert.ToInt32(dvListaPedidos[dgvPedidos.SelectedRows[0].Index]["ped_codigo"]);
+
+                //Obtengo el detalle del pedido
+                BLL.ClaseTemporalPedido.ObtenerDetallePedido(dsPlanMensual.DETALLE_PEDIDOS, codigoPedido);
+
+                if (dsPlanMensual.DETALLE_PEDIDOS.Rows.Count > 0)
+                {
+                    //Selecciono el tab del detalle
+                    tcDatos.SelectedTab = tpDetallePedido;
+                    gbDetallePedido.Visible = true;
+                    btnPlanificar.Enabled = true;
+                }
+                else
+                {
+                    gbDetallePedido.Visible = false;
+                    btnPlanificar.Enabled = false;
+                    MessageBox.Show("El Pedido Seleccionado no tiene Detalle", "Información: Pedido Sin Detalle", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message, "Error: Plan Mensual - Carga Detalle Pedidos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void dgvDetallePedido_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value != null)
+            {
+                string nombre;
+
+                switch (dgvDetallePedido.Columns[e.ColumnIndex].Name)
+                {
+                    case "COC_CODIGO":
+                        nombre = dsPlanMensual.COCINAS.FindByCOC_CODIGO(Convert.ToInt32(e.Value)).COC_CODIGO_PRODUCTO;
+                        e.Value = nombre;
+                        break;
+                    case "EDPED_CODIGO":
+                        nombre = dsPlanMensual.ESTADO_DETALLE_PEDIDOS.FindByEDPED_CODIGO(Convert.ToInt32(e.Value)).EDPED_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+
+
+        }
+
+        
+
+       
+
+       
+
+        
         
         
 

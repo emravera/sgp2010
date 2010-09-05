@@ -49,6 +49,7 @@
     <Compile Include="CapacidadEmpleadoDAL.cs" />
     <Compile Include="CausaFalloDAL.cs" />
     <Compile Include="CentroTrabajoDAL.cs" />
+    <Compile Include="ClaseTemporalPedido.cs" />
     <Compile Include="ClienteDAL.cs" />
     <Compile Include="CocinaDAL.cs" />
     <Compile Include="ColorDAL.cs" />
