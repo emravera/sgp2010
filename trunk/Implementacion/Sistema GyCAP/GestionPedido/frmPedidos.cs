@@ -92,6 +92,8 @@ namespace GyCAP.UI.GestionPedido
                     break;
                 case estadoUI.nuevo:
                     setControles(false);
+                    cboEstado.SelectedIndex = 1; //Esto tiene que ser un parametro no puede quedar hardcodiado
+                    cboEstado.Enabled = false;
                     dvDetallePedido.RowFilter = "DPED_CODIGO < 0";
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -106,6 +108,8 @@ namespace GyCAP.UI.GestionPedido
                     break;
                 case estadoUI.nuevoExterno:
                     setControles(false);
+                    cboEstado.SelectedIndex = 1; //Esto tiene que ser un parametro no puede quedar hardcodiado
+                    cboEstado.Enabled = false;
                     dvDetallePedido.RowFilter = "DPED_CODIGO < 0";
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -151,7 +155,8 @@ namespace GyCAP.UI.GestionPedido
             txtObservacion.ReadOnly = pValue;
             cboClientes.Enabled = !pValue;
             cboEstado.Enabled = !pValue;
-            sfFechaPrevista.Enabled = !pValue;  
+            sfFechaPrevista.Enabled = !pValue;
+
         }
 
         private void SetSlide()
@@ -178,7 +183,9 @@ namespace GyCAP.UI.GestionPedido
             dgvLista.Columns.Add("EPED_CODIGO", "Estado");
             dgvLista.Columns.Add("PED_OBSERVACIONES", "Observaciones");
             dgvLista.Columns["PED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["PED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvLista.Columns["PED_NUMERO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["PED_NUMERO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvLista.Columns["CLI_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["PED_FECHAENTREGAPREVISTA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["PED_FECHAENTREGAPREVISTA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -258,6 +265,7 @@ namespace GyCAP.UI.GestionPedido
                 BLL.EstadoPedidoBLL.ObtenerTodos(dsCliente.ESTADO_PEDIDOS);
                 BLL.EstadoDetallePedidoBLL.ObtenerTodos(dsCliente.ESTADO_DETALLE_PEDIDOS);
                 BLL.CocinaBLL.ObtenerCocinas(dsCliente.COCINAS);
+                BLL.ClienteBLL.ObtenerTodos(dsCliente.CLIENTES);
 
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -270,8 +278,8 @@ namespace GyCAP.UI.GestionPedido
             dvCocinas = new DataView(dsCliente.COCINAS);
 
             cboEstadoBuscar.SetDatos(dvEstadoPedidoBuscar, "EPED_CODIGO", "EPED_NOMBRE", "--TODOS--", true);
-            cboEstado.SetDatos(dvEstadoPedidoBuscar, "EPED_CODIGO", "EPED_NOMBRE", "--TODOS--", true);
-            cboClientes.SetDatos(dvClientes, "CLI_CODIGO", "CLI_RAZONSOCIAL", "--TODOS--", true);  
+            cboEstado.SetDatos(dvEstadoPedidoBuscar, "EPED_CODIGO", "EPED_NOMBRE", "", false);
+            cboClientes.SetDatos(dvClientes, "CLI_CODIGO", "CLI_RAZONSOCIAL", "", false);  
 
         }
 
@@ -282,12 +290,13 @@ namespace GyCAP.UI.GestionPedido
                 dsCliente.PEDIDOS.Clear();
                 dsCliente.DETALLE_PEDIDOS.Clear();
 
-                //Busquemos, no importa si ingresó algo o no, ya se encargarán las otras clases de verificarlo
-                BLL.PedidoBLL.ObtenerPedido(txtNombreBuscar.Text,txtNroPedidoBuscar,cboEstadoBuscar.GetSelectedValueInt(),DateTime.Parse ( sfFechaDesde.GetFecha().ToString() ),DateTime.Parse ( sfFechaHasta.GetFecha().ToString()) , dsCliente, true);
+
+                    //Busquemos, no importa si ingresó algo o no, ya se encargarán las otras clases de verificarlo
+                    BLL.PedidoBLL.ObtenerPedido(txtNombreBuscar.Text, txtNroPedidoBuscar.Text, cboEstadoBuscar.GetSelectedValueInt(), sfFechaDesde.GetFecha(), sfFechaHasta.GetFecha(), dsCliente, true);
 
                 if (dsCliente.PEDIDOS.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Piezas con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("No se encontraron Pedidos con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
@@ -326,6 +335,80 @@ namespace GyCAP.UI.GestionPedido
             this.Dispose(true); 
         }
 
+        private void frmPedidos_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            long codigo = Convert.ToInt64(dvPedido[e.RowIndex]["ped_codigo"]);
+            txtNumero.Text = dsCliente.PEDIDOS.FindByPED_CODIGO(codigo).PED_NUMERO;
+            cboClientes.SetSelectedValue(Convert.ToInt32(dsCliente.PEDIDOS.FindByPED_CODIGO(codigo).CLI_CODIGO));
+            sfFechaPrevista.SetFecha(dsCliente.PEDIDOS.FindByPED_CODIGO(codigo).PED_FECHAENTREGAPREVISTA);
+            cboEstado.SetSelectedValue(Convert.ToInt32(dsCliente.PEDIDOS.FindByPED_CODIGO(codigo).EPED_CODIGO));
+            txtObservacion.Text = dsCliente.PEDIDOS.FindByPED_CODIGO(codigo).PED_OBSERVACIONES;
+
+            //Usemos el filtro del dataview para mostrar sólo las Detalles del Pedido seleccionado
+            dvDetallePedido.RowFilter = "ped_codigo = " + codigo;
+
+        }
+
+        private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != string.Empty)
+            {
+                string nombre;
+
+                switch (dgvLista.Columns[e.ColumnIndex].Name)
+                {
+                    case "CLI_CODIGO":
+                        nombre = dsCliente.CLIENTES.FindByCLI_CODIGO(Convert.ToInt64(e.Value.ToString())).CLI_RAZONSOCIAL;
+                        e.Value = nombre;
+                        break;
+                    case "EPED_CODIGO":
+                        nombre = dsCliente.ESTADO_PEDIDOS.FindByEPED_CODIGO(Convert.ToInt64(e.Value.ToString())).EPED_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void dgvLista_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            //Descartamos los cambios realizamos hasta el momento sin guardar
+            dsCliente.PEDIDOS.RejectChanges();
+            dsCliente.DETALLE_PEDIDOS.RejectChanges();
+            SetInterface(estadoUI.inicio);
+        }
+
+        private void dgvDetallePedido_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != string.Empty)
+            {
+                string nombre;
+                switch (dgvDetallePedido.Columns[e.ColumnIndex].Name)
+                {
+                    case "COC_CODIGO":
+                        nombre = dsCliente.COCINAS.FindByCOC_CODIGO(Convert.ToInt32(e.Value.ToString())).COC_CODIGO_PRODUCTO;
+                        e.Value = nombre;
+                        break;
+                    case "EDPED_CODIGO":
+                        nombre = dsCliente.ESTADO_DETALLE_PEDIDOS.FindByEDPED_CODIGO(Convert.ToInt32(e.Value.ToString())).EDPED_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
     }
 }

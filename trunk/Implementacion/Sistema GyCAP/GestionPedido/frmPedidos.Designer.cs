@@ -42,6 +42,14 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
             this.tpCocinas = new System.Windows.Forms.TabPage();
+            this.gbCocinas = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnHecho = new System.Windows.Forms.Button();
+            this.nudCantidad = new System.Windows.Forms.NumericUpDown();
+            this.dgvCocinas = new System.Windows.Forms.DataGridView();
+            this.slideAgregar = new SlickInterface.Slide();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.label11 = new System.Windows.Forms.Label();
@@ -61,51 +69,43 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
+            this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.txtNumero = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtObservacion = new System.Windows.Forms.RichTextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.slideDatos = new SlickInterface.Slide();
+            this.slideControl = new SlickInterface.SlideControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcPedido = new System.Windows.Forms.TabControl();
             this.sfFechaHasta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.sfFechaDesde = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.cboEstadoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.slideControl = new SlickInterface.SlideControl();
-            this.slideDatos = new SlickInterface.Slide();
-            this.gbDatos = new System.Windows.Forms.GroupBox();
             this.sfFechaPrevista = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.txtNumero = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cboClientes = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtObservacion = new System.Windows.Forms.RichTextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.slideAgregar = new SlickInterface.Slide();
-            this.gbCocinas = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.btnHecho = new System.Windows.Forms.Button();
-            this.nudCantidad = new System.Windows.Forms.NumericUpDown();
-            this.dgvCocinas = new System.Windows.Forms.DataGridView();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePedido)).BeginInit();
             this.panelAcciones.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.tpCocinas.SuspendLayout();
+            this.gbCocinas.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCocinas)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             this.tsMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tpDatos.SuspendLayout();
+            this.gbDatos.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcPedido.SuspendLayout();
-            this.gbDatos.SuspendLayout();
-            this.gbCocinas.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCocinas)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -132,6 +132,7 @@
             this.dgvDetallePedido.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDetallePedido.Size = new System.Drawing.Size(462, 180);
             this.dgvDetallePedido.TabIndex = 12;
+            this.dgvDetallePedido.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetallePedido_CellFormatting);
             // 
             // panelAcciones
             // 
@@ -248,6 +249,7 @@
             this.btnVolver.TabIndex = 18;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnGuardar
             // 
@@ -271,6 +273,101 @@
             this.tpCocinas.Size = new System.Drawing.Size(570, 467);
             this.tpCocinas.TabIndex = 2;
             this.tpCocinas.UseVisualStyleBackColor = true;
+            // 
+            // gbCocinas
+            // 
+            this.gbCocinas.Controls.Add(this.panel1);
+            this.gbCocinas.Controls.Add(this.dgvCocinas);
+            this.gbCocinas.Location = new System.Drawing.Point(6, 3);
+            this.gbCocinas.Name = "gbCocinas";
+            this.gbCocinas.Size = new System.Drawing.Size(563, 190);
+            this.gbCocinas.TabIndex = 13;
+            this.gbCocinas.TabStop = false;
+            this.gbCocinas.Text = "Cocinas";
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.btnAgregar);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.btnHecho);
+            this.panel1.Controls.Add(this.nudCantidad);
+            this.panel1.Location = new System.Drawing.Point(470, 37);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(73, 127);
+            this.panel1.TabIndex = 6;
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAgregar.Location = new System.Drawing.Point(3, 63);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(64, 22);
+            this.btnAgregar.TabIndex = 31;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label8.Location = new System.Drawing.Point(0, 13);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(50, 13);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Cantidad";
+            // 
+            // btnHecho
+            // 
+            this.btnHecho.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnHecho.Location = new System.Drawing.Point(3, 90);
+            this.btnHecho.Name = "btnHecho";
+            this.btnHecho.Size = new System.Drawing.Size(64, 22);
+            this.btnHecho.TabIndex = 32;
+            this.btnHecho.Text = "Hecho";
+            this.btnHecho.UseVisualStyleBackColor = true;
+            // 
+            // nudCantidad
+            // 
+            this.nudCantidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.nudCantidad.DecimalPlaces = 3;
+            this.nudCantidad.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudCantidad.Location = new System.Drawing.Point(3, 30);
+            this.nudCantidad.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudCantidad.Name = "nudCantidad";
+            this.nudCantidad.Size = new System.Drawing.Size(64, 20);
+            this.nudCantidad.TabIndex = 30;
+            this.nudCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // dgvCocinas
+            // 
+            this.dgvCocinas.AllowUserToAddRows = false;
+            this.dgvCocinas.AllowUserToDeleteRows = false;
+            this.dgvCocinas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCocinas.Location = new System.Drawing.Point(6, 17);
+            this.dgvCocinas.MultiSelect = false;
+            this.dgvCocinas.Name = "dgvCocinas";
+            this.dgvCocinas.ReadOnly = true;
+            this.dgvCocinas.RowHeadersVisible = false;
+            this.dgvCocinas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCocinas.Size = new System.Drawing.Size(441, 164);
+            this.dgvCocinas.TabIndex = 0;
+            // 
+            // slideAgregar
+            // 
+            this.slideAgregar.Location = new System.Drawing.Point(6, 3);
+            this.slideAgregar.Name = "slideAgregar";
+            this.slideAgregar.Size = new System.Drawing.Size(561, 190);
+            this.slideAgregar.SlideControl = null;
+            this.slideAgregar.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -299,6 +396,9 @@
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(546, 318);
             this.dgvLista.TabIndex = 6;
+            this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
+            this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
+            this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
             // label11
             // 
@@ -492,6 +592,105 @@
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
+            // gbDatos
+            // 
+            this.gbDatos.Controls.Add(this.sfFechaPrevista);
+            this.gbDatos.Controls.Add(this.txtNumero);
+            this.gbDatos.Controls.Add(this.label9);
+            this.gbDatos.Controls.Add(this.cboEstado);
+            this.gbDatos.Controls.Add(this.cboClientes);
+            this.gbDatos.Controls.Add(this.label4);
+            this.gbDatos.Controls.Add(this.txtObservacion);
+            this.gbDatos.Controls.Add(this.label2);
+            this.gbDatos.Controls.Add(this.label3);
+            this.gbDatos.Controls.Add(this.label1);
+            this.gbDatos.Location = new System.Drawing.Point(8, 4);
+            this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
+            this.gbDatos.Name = "gbDatos";
+            this.gbDatos.Size = new System.Drawing.Size(558, 185);
+            this.gbDatos.TabIndex = 16;
+            this.gbDatos.TabStop = false;
+            this.gbDatos.Text = "Datos del pedido";
+            // 
+            // txtNumero
+            // 
+            this.txtNumero.Location = new System.Drawing.Point(96, 19);
+            this.txtNumero.MaxLength = 20;
+            this.txtNumero.Name = "txtNumero";
+            this.txtNumero.Size = new System.Drawing.Size(284, 20);
+            this.txtNumero.TabIndex = 7;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(8, 22);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(48, 13);
+            this.label9.TabIndex = 7;
+            this.label9.Text = "Numero:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 97);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(44, 13);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "Estado:";
+            // 
+            // txtObservacion
+            // 
+            this.txtObservacion.Location = new System.Drawing.Point(96, 123);
+            this.txtObservacion.MaxLength = 200;
+            this.txtObservacion.Name = "txtObservacion";
+            this.txtObservacion.Size = new System.Drawing.Size(284, 50);
+            this.txtObservacion.TabIndex = 11;
+            this.txtObservacion.Text = "";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 126);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Observación:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(8, 47);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 13);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Cliente:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 73);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Fecha Prevista:";
+            // 
+            // slideDatos
+            // 
+            this.slideDatos.Location = new System.Drawing.Point(3, 3);
+            this.slideDatos.Name = "slideDatos";
+            this.slideDatos.Size = new System.Drawing.Size(564, 190);
+            this.slideDatos.SlideControl = null;
+            this.slideDatos.TabIndex = 15;
+            // 
+            // slideControl
+            // 
+            this.slideControl.Location = new System.Drawing.Point(6, 3);
+            this.slideControl.Name = "slideControl";
+            this.slideControl.Selected = null;
+            this.slideControl.Size = new System.Drawing.Size(558, 195);
+            this.slideControl.SlideSpeed = 250;
+            this.slideControl.TabIndex = 14;
+            // 
             // tpBuscar
             // 
             this.tpBuscar.Controls.Add(this.groupBox2);
@@ -565,43 +764,6 @@
             this.cboEstadoBuscar.Size = new System.Drawing.Size(115, 21);
             this.cboEstadoBuscar.TabIndex = 3;
             // 
-            // slideControl
-            // 
-            this.slideControl.Location = new System.Drawing.Point(6, 3);
-            this.slideControl.Name = "slideControl";
-            this.slideControl.Selected = null;
-            this.slideControl.Size = new System.Drawing.Size(558, 195);
-            this.slideControl.SlideSpeed = 250;
-            this.slideControl.TabIndex = 14;
-            // 
-            // slideDatos
-            // 
-            this.slideDatos.Location = new System.Drawing.Point(3, 3);
-            this.slideDatos.Name = "slideDatos";
-            this.slideDatos.Size = new System.Drawing.Size(564, 190);
-            this.slideDatos.SlideControl = null;
-            this.slideDatos.TabIndex = 15;
-            // 
-            // gbDatos
-            // 
-            this.gbDatos.Controls.Add(this.sfFechaPrevista);
-            this.gbDatos.Controls.Add(this.txtNumero);
-            this.gbDatos.Controls.Add(this.label9);
-            this.gbDatos.Controls.Add(this.cboEstado);
-            this.gbDatos.Controls.Add(this.cboClientes);
-            this.gbDatos.Controls.Add(this.label4);
-            this.gbDatos.Controls.Add(this.txtObservacion);
-            this.gbDatos.Controls.Add(this.label2);
-            this.gbDatos.Controls.Add(this.label3);
-            this.gbDatos.Controls.Add(this.label1);
-            this.gbDatos.Location = new System.Drawing.Point(8, 4);
-            this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
-            this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(563, 185);
-            this.gbDatos.TabIndex = 16;
-            this.gbDatos.TabStop = false;
-            this.gbDatos.Text = "Datos del pedido";
-            // 
             // sfFechaPrevista
             // 
             this.sfFechaPrevista.CustomFormat = " ";
@@ -610,23 +772,6 @@
             this.sfFechaPrevista.Name = "sfFechaPrevista";
             this.sfFechaPrevista.Size = new System.Drawing.Size(284, 20);
             this.sfFechaPrevista.TabIndex = 9;
-            // 
-            // txtNumero
-            // 
-            this.txtNumero.Location = new System.Drawing.Point(96, 19);
-            this.txtNumero.MaxLength = 20;
-            this.txtNumero.Name = "txtNumero";
-            this.txtNumero.Size = new System.Drawing.Size(284, 20);
-            this.txtNumero.TabIndex = 7;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(8, 22);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(48, 13);
-            this.label9.TabIndex = 7;
-            this.label9.Text = "Numero:";
             // 
             // cboEstado
             // 
@@ -648,146 +793,6 @@
             this.cboClientes.Size = new System.Drawing.Size(284, 21);
             this.cboClientes.TabIndex = 8;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 97);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 13);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "Estado:";
-            // 
-            // txtObservacion
-            // 
-            this.txtObservacion.Location = new System.Drawing.Point(96, 123);
-            this.txtObservacion.MaxLength = 200;
-            this.txtObservacion.Name = "txtObservacion";
-            this.txtObservacion.Size = new System.Drawing.Size(284, 50);
-            this.txtObservacion.TabIndex = 11;
-            this.txtObservacion.Text = "";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 126);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Observación:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 47);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 13);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Cliente:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 73);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 13);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Fecha Prevista:";
-            // 
-            // slideAgregar
-            // 
-            this.slideAgregar.Location = new System.Drawing.Point(6, 3);
-            this.slideAgregar.Name = "slideAgregar";
-            this.slideAgregar.Size = new System.Drawing.Size(561, 190);
-            this.slideAgregar.SlideControl = null;
-            this.slideAgregar.TabIndex = 0;
-            // 
-            // gbCocinas
-            // 
-            this.gbCocinas.Controls.Add(this.panel1);
-            this.gbCocinas.Controls.Add(this.dgvCocinas);
-            this.gbCocinas.Location = new System.Drawing.Point(6, 3);
-            this.gbCocinas.Name = "gbCocinas";
-            this.gbCocinas.Size = new System.Drawing.Size(563, 190);
-            this.gbCocinas.TabIndex = 13;
-            this.gbCocinas.TabStop = false;
-            this.gbCocinas.Text = "Cocinas";
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.btnAgregar);
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.btnHecho);
-            this.panel1.Controls.Add(this.nudCantidad);
-            this.panel1.Location = new System.Drawing.Point(470, 37);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(73, 127);
-            this.panel1.TabIndex = 6;
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAgregar.Location = new System.Drawing.Point(3, 63);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(64, 22);
-            this.btnAgregar.TabIndex = 31;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.label8.Location = new System.Drawing.Point(0, 13);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(50, 13);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Cantidad";
-            // 
-            // btnHecho
-            // 
-            this.btnHecho.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnHecho.Location = new System.Drawing.Point(3, 90);
-            this.btnHecho.Name = "btnHecho";
-            this.btnHecho.Size = new System.Drawing.Size(64, 22);
-            this.btnHecho.TabIndex = 32;
-            this.btnHecho.Text = "Hecho";
-            this.btnHecho.UseVisualStyleBackColor = true;
-            // 
-            // nudCantidad
-            // 
-            this.nudCantidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.nudCantidad.DecimalPlaces = 3;
-            this.nudCantidad.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nudCantidad.Location = new System.Drawing.Point(3, 30);
-            this.nudCantidad.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nudCantidad.Name = "nudCantidad";
-            this.nudCantidad.Size = new System.Drawing.Size(64, 20);
-            this.nudCantidad.TabIndex = 30;
-            this.nudCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // dgvCocinas
-            // 
-            this.dgvCocinas.AllowUserToAddRows = false;
-            this.dgvCocinas.AllowUserToDeleteRows = false;
-            this.dgvCocinas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCocinas.Location = new System.Drawing.Point(6, 17);
-            this.dgvCocinas.MultiSelect = false;
-            this.dgvCocinas.Name = "dgvCocinas";
-            this.dgvCocinas.ReadOnly = true;
-            this.dgvCocinas.RowHeadersVisible = false;
-            this.dgvCocinas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCocinas.Size = new System.Drawing.Size(441, 164);
-            this.dgvCocinas.TabIndex = 0;
-            // 
             // frmPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -799,12 +804,18 @@
             this.MaximizeBox = false;
             this.Name = "frmPedidos";
             this.Text = "Pedidos";
+            this.Load += new System.EventHandler(this.frmPedidos_Load);
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePedido)).EndInit();
             this.panelAcciones.ResumeLayout(false);
             this.panelAcciones.PerformLayout();
             this.gbGuardarCancelar.ResumeLayout(false);
             this.tpCocinas.ResumeLayout(false);
+            this.gbCocinas.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCocinas)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
             this.tsMenu.ResumeLayout(false);
@@ -812,17 +823,12 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tpDatos.ResumeLayout(false);
+            this.gbDatos.ResumeLayout(false);
+            this.gbDatos.PerformLayout();
             this.tpBuscar.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tcPedido.ResumeLayout(false);
-            this.gbDatos.ResumeLayout(false);
-            this.gbDatos.PerformLayout();
-            this.gbCocinas.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCocinas)).EndInit();
             this.ResumeLayout(false);
 
         }

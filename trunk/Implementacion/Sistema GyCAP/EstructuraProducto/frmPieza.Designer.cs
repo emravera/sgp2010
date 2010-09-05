@@ -419,6 +419,7 @@
             this.dgvPiezas.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPiezas_RowEnter);
             this.dgvPiezas.DoubleClick += new System.EventHandler(this.dgvPiezas_DoubleClick);
             this.dgvPiezas.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPiezas_CellFormatting);
+            this.dgvPiezas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPiezas_CellContentClick);
             // 
             // tableLayoutPanel1
             // 

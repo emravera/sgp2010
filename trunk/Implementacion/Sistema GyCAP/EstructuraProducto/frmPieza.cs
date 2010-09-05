@@ -923,5 +923,10 @@ namespace GyCAP.UI.EstructuraProducto
 
         #endregion
 
+
+        private void dgvPiezas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
