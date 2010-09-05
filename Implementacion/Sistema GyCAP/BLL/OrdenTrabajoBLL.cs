@@ -102,7 +102,7 @@ namespace GyCAP.BLL
                 //Calculamos las cantidades necesarias de cada cosa y al mismo tiempo el tiempo necesario para producir todo
                 //Empezamos por las partes de primer nivel que dependen de estructura, bajamos hasta el último nivel y desde ahí
                 //empezamos a crear los detalles, primero los conjuntos que forman la estructura
-                decimal ordenSiguiente = 0, ultimaOrdenConjunto = 0, nivel = 0;//, cantidadOrdenes = 0;
+                decimal ordenSiguiente = 0, ultimaOrdenConjunto = 0, nivel = 0, ultimaOrdenSubconjunto = 0;//, cantidadOrdenes = 0;
                 foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow rowCxE in dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).GetCONJUNTOSXESTRUCTURARows())
                 {
                     ordenSiguiente = 0;
@@ -114,7 +114,7 @@ namespace GyCAP.BLL
                         rowDOCxE.BeginEdit();
                         rowDOCxE.DORD_NUMERO = codigoDetalleOrden--;
                         rowDOCxE.DORD_CODIGO = "código detalle";
-                        rowDOCxE.DORD_ORIGEN = rowOrden.ORD_ORIGEN;
+                        rowDOCxE.DORD_ORIGEN = rowOrden.ORD_ORIGEN + "/" + rowCxE.CONJUNTOSRow.CONJ_CODIGOPARTE;
                         rowDOCxE.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                         rowDOCxE.ORD_NUMERO = rowOrden.ORD_NUMERO;
                         rowDOCxE.PAR_CODIGO = rowCxE.CONJUNTOSRow.CONJ_CODIGO;
@@ -139,6 +139,7 @@ namespace GyCAP.BLL
                     {
                         //cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowSCxC.SUBCONJUNTOSRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
                         nivel = 1;
+                        ordenSiguiente = ultimaOrdenConjunto;
                         foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaSCxC in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowSCxC.SUBCONJUNTOSRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
                         {
                             //cantidadOrdenes--;
@@ -163,6 +164,7 @@ namespace GyCAP.BLL
                             rowDOSCxC.EndEdit();
                             dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.AddDETALLE_ORDENES_TRABAJORow(rowDOSCxC);
                             ordenSiguiente = rowDOSCxC.DORD_NUMERO;
+                            ultimaOrdenSubconjunto = rowDOSCxC.DORD_NUMERO;
                             nivel = 0;
                         }
                         
@@ -171,6 +173,7 @@ namespace GyCAP.BLL
                             //Ahora generamos un detalle para cada par operación-centro de la hoja de ruta de la parte
                             //cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxSC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
                             nivel = 1;
+                            ordenSiguiente = ultimaOrdenSubconjunto;
                             foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaPxSC in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxSC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
                             {
                                 //cantidadOrdenes--;
@@ -205,6 +208,7 @@ namespace GyCAP.BLL
                     {                        
                         //cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
                         nivel = 1;
+                        ordenSiguiente = ultimaOrdenConjunto;
                         foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaPxC in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
                         {
                             //cantidadOrdenes--;
@@ -245,7 +249,7 @@ namespace GyCAP.BLL
                         rowDOPxE.BeginEdit();
                         rowDOPxE.DORD_NUMERO = codigoDetalleOrden--;
                         rowDOPxE.DORD_CODIGO = "código detalle";
-                        rowDOPxE.DORD_ORIGEN = rowOrden.ORD_ORIGEN;
+                        rowDOPxE.DORD_ORIGEN = rowOrden.ORD_ORIGEN + "/" + rowPxE.PIEZASRow.PZA_CODIGOPARTE;
                         rowDOPxE.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                         rowDOPxE.ORD_NUMERO = rowOrden.ORD_NUMERO;
                         rowDOPxE.PAR_CODIGO = rowPxE.PZA_CODIGO;
@@ -257,6 +261,7 @@ namespace GyCAP.BLL
                         rowDOPxE.OPR_NUMERO = rowHojaPxE.OPR_NUMERO;
                         if (ordenSiguiente == 0) { rowDOPxE.SetDORD_ORDENSIGUIENTENull(); }
                         else { rowDOPxE.DORD_ORDENSIGUIENTE = ordenSiguiente; }
+                        rowDOPxE.DORD_ORDENPRECEDENTE = 0;
                         rowDOPxE.DORD_NIVEL = 0;
                         rowDOPxE.EndEdit();
                         dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.AddDETALLE_ORDENES_TRABAJORow(rowDOPxE);
@@ -269,12 +274,10 @@ namespace GyCAP.BLL
         public static void GenerarArbolOrdenes(int codigoOrden, TreeView tvOT, TreeView tvOTyE, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
         {
             Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOrden = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigoOrden);
-
+            tvOT.Nodes.Clear();
             TreeNode nodoOrden = new TreeNode();
             nodoOrden.Name = rowOrden.ORD_NUMERO.ToString();
-            nodoOrden.Text = rowOrden.ORD_ORIGEN;
-            tvOT.BeginUpdate();
-            tvOT.Nodes.Clear();
+            nodoOrden.Text = rowOrden.ORD_ORIGEN;           
             tvOT.Nodes.Add(nodoOrden);
             
             foreach (Data.dsOrdenTrabajo.DETALLE_ORDENES_TRABAJORow rowDetalle in rowOrden.GetDETALLE_ORDENES_TRABAJORows())
@@ -298,8 +301,6 @@ namespace GyCAP.BLL
                     }
                 }
             }
-
-            tvOT.EndUpdate();
         }
     }
 }

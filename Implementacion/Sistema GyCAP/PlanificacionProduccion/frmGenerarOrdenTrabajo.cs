@@ -26,7 +26,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         private int columnIndex = -1;
         BindingSource sourceDetalle = new BindingSource();
         private Sistema.ControlesUsuarios.AnimadorFormulario animador = new GyCAP.UI.Sistema.ControlesUsuarios.AnimadorFormulario();
-        private TreeView tvOrdenes = new TreeView();
+        private TreeView tvOrdenes;
 
         #region Inicio
 
@@ -65,6 +65,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
+            this.Close();
             this.Dispose(true);
         }
 
@@ -463,10 +464,11 @@ namespace GyCAP.UI.PlanificacionProduccion
             else
             {
                 if (dgvListaOrdenTrabajo.SelectedRows.Count > 0)
-                {                    
+                {
+                    tvOrdenes = frmArbolOrdenesTrabajo.Instancia.GetArbol();
                     int codOrden = Convert.ToInt32(dvOrdenTrabajo[dgvListaOrdenTrabajo.SelectedRows[0].Index]["ord_numero"].ToString());
                     BLL.OrdenTrabajoBLL.GenerarArbolOrdenes(codOrden, tvOrdenes, null, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
-                    frmArbolOrdenesTrabajo.Instancia.SetArbol(tvOrdenes, dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codOrden).ORD_CODIGO);
+                    frmArbolOrdenesTrabajo.Instancia.SetArbol(tvOrdenes, dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codOrden).ORD_ORIGEN);
                     animador.SetFormulario(frmArbolOrdenesTrabajo.Instancia, this, Sistema.ControlesUsuarios.AnimadorFormulario.animacionDerecha, 300, false);
                     animador.MostrarFormulario();
                 }

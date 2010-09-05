@@ -251,6 +251,14 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         #endregion
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            frmGenerarOrdenTrabajo.Instancia.TopLevel = false;
+            frmGenerarOrdenTrabajo.Instancia.Parent = areaTrabajo;
+            frmGenerarOrdenTrabajo.Instancia.Location = PosicionarFormulario();
+            frmGenerarOrdenTrabajo.Instancia.Show();
+        }
+
         
 
     }

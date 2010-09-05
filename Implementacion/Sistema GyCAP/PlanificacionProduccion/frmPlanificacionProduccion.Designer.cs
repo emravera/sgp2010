@@ -46,6 +46,7 @@
             this.btnMenu = new System.Windows.Forms.Button();
             this.scUp = new System.Windows.Forms.SplitContainer();
             this.scDown = new System.Windows.Forms.SplitContainer();
+            this.button2 = new System.Windows.Forms.Button();
             this.flpMenu.SuspendLayout();
             this.panelDemanda.SuspendLayout();
             this.panelPlanAnual.SuspendLayout();
@@ -85,6 +86,7 @@
             this.flpMenu.Controls.Add(this.btnMPPrincipal);
             this.flpMenu.Controls.Add(this.panelMPPrincipal);
             this.flpMenu.Controls.Add(this.panelSalir);
+            this.flpMenu.Controls.Add(this.button2);
             this.flpMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpMenu.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpMenu.Location = new System.Drawing.Point(0, 0);
@@ -386,6 +388,25 @@
             this.scDown.SplitterWidth = 3;
             this.scDown.TabIndex = 4;
             // 
+            // button2
+            // 
+            this.button2.AutoSize = true;
+            this.button2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_48;
+            this.button2.Location = new System.Drawing.Point(161, 90);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(63, 71);
+            this.button2.TabIndex = 16;
+            this.button2.Text = "Consultar";
+            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // frmPlanificacionProduccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -399,6 +420,7 @@
             this.Text = "GyCAP - Planificación de la Producción";
             this.Load += new System.EventHandler(this.frmPlanificacionProduccion_Load);
             this.flpMenu.ResumeLayout(false);
+            this.flpMenu.PerformLayout();
             this.panelDemanda.ResumeLayout(false);
             this.panelDemanda.PerformLayout();
             this.panelPlanAnual.ResumeLayout(false);
@@ -436,5 +458,6 @@
         private System.Windows.Forms.SplitContainer scUp;
         private System.Windows.Forms.SplitContainer scDown;
         private System.Windows.Forms.Button btnConsultarMPPrincipal;
+        private System.Windows.Forms.Button button2;
     }
 }

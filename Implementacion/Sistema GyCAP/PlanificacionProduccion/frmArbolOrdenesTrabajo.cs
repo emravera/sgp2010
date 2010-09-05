@@ -41,6 +41,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         public void SetArbol(TreeView tvOrdenesTrabajo, string textoVentana)
         {
             tvOrdenes = tvOrdenesTrabajo;
+            tvOrdenes.ExpandAll();
             this.Text = textoVentana;
         }
 
