@@ -43,8 +43,6 @@ namespace GyCAP.Data {
         
         private global::System.Data.DataRelation relationORDENES_TRABAJO_MANUAL_DETALLE_ORDENES_TRABAJO;
         
-        private global::System.Data.DataRelation relationDETALLE_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO;
-        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -267,7 +265,6 @@ namespace GyCAP.Data {
             this.relationORDENES_TRABAJO_MANUAL_ORDENES_TRABAJO = this.Relations["ORDENES_TRABAJO_MANUAL_ORDENES_TRABAJO"];
             this.relationORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO = this.Relations["ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO"];
             this.relationORDENES_TRABAJO_MANUAL_DETALLE_ORDENES_TRABAJO = this.Relations["ORDENES_TRABAJO_MANUAL_DETALLE_ORDENES_TRABAJO"];
-            this.relationDETALLE_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO = this.Relations["DETALLE_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -305,10 +302,6 @@ namespace GyCAP.Data {
                         this.tableORDENES_TRABAJO_MANUAL.ORDM_NUMEROColumn}, new global::System.Data.DataColumn[] {
                         this.tableDETALLE_ORDENES_TRABAJO.EORD_CODIGOColumn}, false);
             this.Relations.Add(this.relationORDENES_TRABAJO_MANUAL_DETALLE_ORDENES_TRABAJO);
-            this.relationDETALLE_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO = new global::System.Data.DataRelation("DETALLE_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO", new global::System.Data.DataColumn[] {
-                        this.tableDETALLE_ORDENES_TRABAJO.DORD_NUMEROColumn}, new global::System.Data.DataColumn[] {
-                        this.tableDETALLE_ORDENES_TRABAJO.DORD_ORDENSIGUIENTEColumn}, false);
-            this.Relations.Add(this.relationDETALLE_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -981,7 +974,7 @@ namespace GyCAP.Data {
                         decimal OPR_NUMERO, 
                         string DORD_OBSERVACIONES, 
                         decimal DORD_ORDENPRECEDENTE, 
-                        DETALLE_ORDENES_TRABAJORow parentDETALLE_ORDENES_TRABAJORowByDETALLE_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO, 
+                        decimal DORD_ORDENSIGUIENTE, 
                         decimal DORD_NIVEL) {
                 DETALLE_ORDENES_TRABAJORow rowDETALLE_ORDENES_TRABAJORow = ((DETALLE_ORDENES_TRABAJORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -1009,16 +1002,13 @@ namespace GyCAP.Data {
                         OPR_NUMERO,
                         DORD_OBSERVACIONES,
                         DORD_ORDENPRECEDENTE,
-                        null,
+                        DORD_ORDENSIGUIENTE,
                         DORD_NIVEL};
                 if ((parentORDENES_TRABAJORowByORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO != null)) {
                     columnValuesArray[3] = parentORDENES_TRABAJORowByORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO[0];
                 }
                 if ((parentESTADO_ORDENES_TRABAJORowByESTADO_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO != null)) {
                     columnValuesArray[5] = parentESTADO_ORDENES_TRABAJORowByESTADO_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO[0];
-                }
-                if ((parentDETALLE_ORDENES_TRABAJORowByDETALLE_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO != null)) {
-                    columnValuesArray[24] = parentDETALLE_ORDENES_TRABAJORowByDETALLE_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO[0];
                 }
                 rowDETALLE_ORDENES_TRABAJORow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDETALLE_ORDENES_TRABAJORow);
@@ -2515,16 +2505,6 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_ORDENES_TRABAJORow DETALLE_ORDENES_TRABAJORowParent {
-                get {
-                    return ((DETALLE_ORDENES_TRABAJORow)(this.GetParentRow(this.Table.ParentRelations["DETALLE_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["DETALLE_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsE_CODIGONull() {
                 return this.IsNull(this.tableDETALLE_ORDENES_TRABAJO.E_CODIGOColumn);
             }
@@ -2762,16 +2742,6 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetDORD_NIVELNull() {
                 this[this.tableDETALLE_ORDENES_TRABAJO.DORD_NIVELColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_ORDENES_TRABAJORow[] GetDETALLE_ORDENES_TRABAJORows() {
-                if ((this.Table.ChildRelations["DETALLE_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO"] == null)) {
-                    return new DETALLE_ORDENES_TRABAJORow[0];
-                }
-                else {
-                    return ((DETALLE_ORDENES_TRABAJORow[])(base.GetChildRows(this.Table.ChildRelations["DETALLE_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO"])));
-                }
             }
         }
         
@@ -6701,7 +6671,6 @@ SELECT ORDM_NUMERO, ORDM_CANTIDADESTIMADA, ORDM_CANTIDADREAL, COC_CODIGO, PAR_CO
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    this.SortSelfReferenceRows(updatedRows, dataSet.Relations["DETALLE_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO"], false);
                     result = (result + this._dETALLE_ORDENES_TRABAJOTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
@@ -6743,7 +6712,6 @@ SELECT ORDM_NUMERO, ORDM_CANTIDADESTIMADA, ORDM_CANTIDADREAL, COC_CODIGO, PAR_CO
                 global::System.Data.DataRow[] addedRows = dataSet.DETALLE_ORDENES_TRABAJO.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    this.SortSelfReferenceRows(addedRows, dataSet.Relations["DETALLE_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO"], false);
                     result = (result + this._dETALLE_ORDENES_TRABAJOTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
@@ -6761,7 +6729,6 @@ SELECT ORDM_NUMERO, ORDM_CANTIDADESTIMADA, ORDM_CANTIDADREAL, COC_CODIGO, PAR_CO
                 global::System.Data.DataRow[] deletedRows = dataSet.DETALLE_ORDENES_TRABAJO.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    this.SortSelfReferenceRows(deletedRows, dataSet.Relations["DETALLE_ORDENES_TRABAJO_DETALLE_ORDENES_TRABAJO"], true);
                     result = (result + this._dETALLE_ORDENES_TRABAJOTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
