@@ -30,6 +30,7 @@ namespace GyCAP.UI.EstructuraProducto
             btnHojaRuta.Tag = panelHojaRuta;
             btnMPPrincipal.Tag = panelMPPrincipal;
             btnModeloCocina.Tag = panelModeloCocina;
+            btnOperacionFabricacion.Tag = panelOperacionFabricacion;
             btnPieza.Tag = panelPieza;
             btnSubconjunto.Tag = panelSubconjunto;
             btnTerminacion.Tag = panelTerminacion;
@@ -43,6 +44,7 @@ namespace GyCAP.UI.EstructuraProducto
             panelHojaRuta.Size = size;
             panelModeloCocina.Size = size;
             panelMPPrincipal.Size = size;
+            panelOperacionFabricacion.Size = size;
             panelPieza.Size = size;
             panelSubconjunto.Size = size;
             panelTerminacion.Size = size;
@@ -510,8 +512,27 @@ namespace GyCAP.UI.EstructuraProducto
 
         #endregion
 
-        
+        #region Operación Fabricación
 
-        
+        private void btnNuevoOperacionFabricacion_Click(object sender, EventArgs e)
+        {
+            frmOperacionesFabricacion.Instancia.TopLevel = false;
+            frmOperacionesFabricacion.Instancia.Parent = areaTrabajo;
+            frmOperacionesFabricacion.Instancia.Location = PosicionarFormulario();
+            frmOperacionesFabricacion.Instancia.btnNuevo.PerformClick();
+            frmOperacionesFabricacion.Instancia.Show();
+        }
+
+        private void btnConsultarOperacionFabricacion_Click(object sender, EventArgs e)
+        {
+            frmOperacionesFabricacion.Instancia.TopLevel = false;
+            frmOperacionesFabricacion.Instancia.Parent = areaTrabajo;
+            frmOperacionesFabricacion.Instancia.Location = PosicionarFormulario();
+            frmOperacionesFabricacion.Instancia.Show();
+        }
+
+        #endregion
+
+
     }
 }

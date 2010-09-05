@@ -76,7 +76,7 @@
             // 
             this.btnVolver.Location = new System.Drawing.Point(434, 19);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(64, 22);
+            this.btnVolver.Size = new System.Drawing.Size(64, 26);
             this.btnVolver.TabIndex = 6;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -87,13 +87,13 @@
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
             this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLista.Location = new System.Drawing.Point(9, 22);
+            this.dgvLista.Location = new System.Drawing.Point(9, 23);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(484, 154);
+            this.dgvLista.Size = new System.Drawing.Size(484, 153);
             this.dgvLista.TabIndex = 0;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellContentDoubleClick);
@@ -131,7 +131,7 @@
             this.txtCodigoOperacionBuscar.Location = new System.Drawing.Point(271, 21);
             this.txtCodigoOperacionBuscar.MaxLength = 80;
             this.txtCodigoOperacionBuscar.Name = "txtCodigoOperacionBuscar";
-            this.txtCodigoOperacionBuscar.Size = new System.Drawing.Size(97, 20);
+            this.txtCodigoOperacionBuscar.Size = new System.Drawing.Size(97, 21);
             this.txtCodigoOperacionBuscar.TabIndex = 8;
             // 
             // lblClienteBuscar
@@ -139,7 +139,7 @@
             this.lblClienteBuscar.AutoSize = true;
             this.lblClienteBuscar.Location = new System.Drawing.Point(170, 24);
             this.lblClienteBuscar.Name = "lblClienteBuscar";
-            this.lblClienteBuscar.Size = new System.Drawing.Size(95, 13);
+            this.lblClienteBuscar.Size = new System.Drawing.Size(96, 13);
             this.lblClienteBuscar.TabIndex = 3;
             this.lblClienteBuscar.Text = "Codigo Operación:";
             // 
@@ -161,7 +161,7 @@
             this.txtNombreBuscar.Location = new System.Drawing.Point(66, 21);
             this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
-            this.txtNombreBuscar.Size = new System.Drawing.Size(97, 20);
+            this.txtNombreBuscar.Size = new System.Drawing.Size(97, 21);
             this.txtNombreBuscar.TabIndex = 7;
             // 
             // label1
@@ -169,7 +169,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(11, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.Size = new System.Drawing.Size(48, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Nombre:";
             // 
@@ -200,7 +200,7 @@
             // 
             this.btnGuardar.Location = new System.Drawing.Point(364, 19);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(64, 22);
+            this.btnGuardar.Size = new System.Drawing.Size(64, 26);
             this.btnGuardar.TabIndex = 5;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -258,7 +258,7 @@
             // 
             this.numHoras.Location = new System.Drawing.Point(118, 88);
             this.numHoras.Name = "numHoras";
-            this.numHoras.Size = new System.Drawing.Size(65, 20);
+            this.numHoras.Size = new System.Drawing.Size(65, 21);
             this.numHoras.TabIndex = 3;
             this.numHoras.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -267,7 +267,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(17, 93);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(95, 13);
+            this.label4.Size = new System.Drawing.Size(96, 13);
             this.label4.TabIndex = 8;
             this.label4.Text = "Horas Requeridas:";
             // 
@@ -284,7 +284,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(17, 32);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 13);
+            this.label2.Size = new System.Drawing.Size(96, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "Codigo Operación:";
             // 
@@ -292,7 +292,7 @@
             // 
             this.txtNombre.Location = new System.Drawing.Point(118, 59);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(193, 20);
+            this.txtNombre.Size = new System.Drawing.Size(193, 21);
             this.txtNombre.TabIndex = 2;
             // 
             // label5
@@ -300,7 +300,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(46, 117);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 13);
+            this.label5.Size = new System.Drawing.Size(65, 13);
             this.label5.TabIndex = 4;
             this.label5.Text = "Descripción:";
             // 
@@ -308,7 +308,7 @@
             // 
             this.txtCodigoOperacion.Location = new System.Drawing.Point(118, 29);
             this.txtCodigoOperacion.Name = "txtCodigoOperacion";
-            this.txtCodigoOperacion.Size = new System.Drawing.Size(193, 20);
+            this.txtCodigoOperacion.Size = new System.Drawing.Size(193, 21);
             this.txtCodigoOperacion.TabIndex = 1;
             // 
             // label3
@@ -316,7 +316,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(65, 62);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 13);
+            this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "Nombre:";
             // 
@@ -425,10 +425,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(520, 317);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "frmOperacionesFabricacion";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Operaciones de Fabricación";
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
             this.gbGrillaBuscar.ResumeLayout(false);
@@ -473,7 +475,6 @@
         private System.Windows.Forms.ToolStripButton btnEliminar;
         private System.Windows.Forms.ToolStripButton btnModificar;
         private System.Windows.Forms.ToolStripButton btnConsultar;
-        private System.Windows.Forms.ToolStripButton btnNuevo;
         private System.Windows.Forms.ToolStrip tsMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -482,5 +483,6 @@
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.NumericUpDown numHoras;
         private System.Windows.Forms.Label label4;
+        public System.Windows.Forms.ToolStripButton btnNuevo;
     }
 }
