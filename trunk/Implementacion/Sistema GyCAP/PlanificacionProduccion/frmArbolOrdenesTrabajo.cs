@@ -38,16 +38,65 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
         }
 
-        public void SetArbol(TreeView tvOrdenesTrabajo, string textoVentana)
+        public void SetTextoVentana(string textoVentana)
         {
-            tvOrdenes = tvOrdenesTrabajo;
-            tvOrdenes.ExpandAll();
             this.Text = textoVentana;
         }
 
-        public TreeView GetArbol()
+        public TreeView GetArbolDependenciaSimple()
         {
-            return tvOrdenes;
+            return tvArbolDependenciaSimple;
+        }
+
+        public TreeView GetArbolDependenciaCompleta()
+        {
+            return tvArbolDependenciaCompleta;
+        }
+
+        public TreeView GetArbolOrdenesYEstructura()
+        {
+            return tvArbolOrdenesYEstructura;
+        }       
+
+        private void tvArbolDependenciaSimple_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (Convert.ToInt32(e.Node.Tag.ToString()) == BLL.OrdenTrabajoBLL.nodoDetalleOrdenTrabajo)
+            {
+                frmGenerarOrdenTrabajo.Instancia.SeleccionarDetalle(Convert.ToInt32(e.Node.Name));
+                SeleccionarDetalleOrden(Convert.ToInt32(e.Node.Name));
+            }
+        }
+
+        private void tvArbolDependenciaCompleta_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (Convert.ToInt32(e.Node.Tag.ToString()) == BLL.OrdenTrabajoBLL.nodoDetalleOrdenTrabajo)
+            {
+                frmGenerarOrdenTrabajo.Instancia.SeleccionarDetalle(Convert.ToInt32(e.Node.Name));
+                SeleccionarDetalleOrden(Convert.ToInt32(e.Node.Name));
+            }
+        }
+
+        private void tvArbolOrdenesYEstructura_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (Convert.ToInt32(e.Node.Tag.ToString()) == BLL.OrdenTrabajoBLL.nodoDetalleOrdenTrabajo)
+            {
+                frmGenerarOrdenTrabajo.Instancia.SeleccionarDetalle(Convert.ToInt32(e.Node.Name));
+                SeleccionarDetalleOrden(Convert.ToInt32(e.Node.Name));
+            }
+        }
+
+        public void SeleccionarDetalleOrden(int codigoOrden)
+        {
+            tvArbolDependenciaSimple.SelectedNode = tvArbolDependenciaSimple.Nodes[0].Nodes.Find(codigoOrden.ToString(), true)[0];
+            tvArbolDependenciaCompleta.SelectedNode = tvArbolDependenciaCompleta.Nodes[0].Nodes.Find(codigoOrden.ToString(), true)[0];
+            tvArbolOrdenesYEstructura.SelectedNode = tvArbolOrdenesYEstructura.Nodes[0].Nodes.Find(codigoOrden.ToString(), true)[0];
+        }
+
+        private void tcArbol_Selected(object sender, TabControlEventArgs e)
+        {
+            if (e.TabPage == tpArbol1) { tvArbolDependenciaSimple.Focus(); }
+            else if (e.TabPage == tpArbol2) { tvArbolDependenciaCompleta.Focus(); }
+            else if (e.TabPage == tpArbol3) { tvArbolOrdenesYEstructura.Focus(); }
         }
     }
 }

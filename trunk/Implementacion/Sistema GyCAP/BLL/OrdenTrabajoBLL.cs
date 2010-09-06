@@ -13,12 +13,23 @@ namespace GyCAP.BLL
         public static readonly int parteTipoSubconjunto = 2;
         public static readonly int parteTipoPieza = 3;
         public static readonly int parteTipoMateriaPrima = 4;
+        public static readonly int nodoOrdenTrabajo = 1;
+        public static readonly int nodoDetalleOrdenTrabajo = 2;
+        public static readonly int nodoComplemento = 3;
+
+        public static string GetTipoParte(int tipo)
+        {
+            if (tipo == parteTipoConjunto) return "Conjunto";
+            if (tipo == parteTipoSubconjunto) return "Subconjunto";
+            if (tipo == parteTipoPieza) return "Pieza";
+            if (tipo == parteTipoMateriaPrima) return "Materia Prima";
+            return string.Empty;
+        }
         
         public static void GenerarOrdenTrabajoDia(int codigoDia, Data.dsPlanSemanal dsPlanSemanal, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
         {
             //Declaramos las variables necesarias
             int codigoOrden = -1, codigoDetalleOrden = -1;
-            decimal tiempoTotal = 0;
                         
             //Recorremos todo el detalle del día
             foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow rowDetalle in (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow[])dsPlanSemanal.DETALLE_PLANES_SEMANALES.Select("diapsem_codigo = " + codigoDia))
@@ -32,8 +43,6 @@ namespace GyCAP.BLL
                 rowOrden.ORD_FECHAALTA = DBBLL.GetFechaServidor();
                 rowOrden.DPSEM_CODIGO = rowDetalle.DPSEM_CODIGO;
                 rowOrden.ORD_ORIGEN = "OA-" + rowDetalle.COCINASRow.COC_CODIGO_PRODUCTO;
-                rowOrden.ORD_FECHAINICIOESTIMADA = DateTime.Today;
-                rowOrden.ORD_FECHAFINESTIMADA = DateTime.Today;
                 rowOrden.SetORD_FECHAINICIOREALNull();
                 rowOrden.SetORD_FECHAFINREALNull();
                 rowOrden.SetORDM_NUMERONull();
@@ -46,6 +55,9 @@ namespace GyCAP.BLL
                 rowOrden.ESTR_CODIGO = codigoEstructura;
                 rowOrden.EndEdit();
                 dsOrdenTrabajo.ORDENES_TRABAJO.AddORDENES_TRABAJORow(rowOrden);
+                rowDetalle.BeginEdit();
+                rowDetalle.DPSEM_ESTADO = BLL.DetallePlanSemanalBLL.estadoConOrden;
+                rowDetalle.EndEdit();
                 
                 string mensaje = string.Empty;
                 if (codigoEstructura == 0)
@@ -102,14 +114,12 @@ namespace GyCAP.BLL
                 //Calculamos las cantidades necesarias de cada cosa y al mismo tiempo el tiempo necesario para producir todo
                 //Empezamos por las partes de primer nivel que dependen de estructura, bajamos hasta el último nivel y desde ahí
                 //empezamos a crear los detalles, primero los conjuntos que forman la estructura
-                decimal ordenSiguiente = 0, ultimaOrdenConjunto = 0, nivel = 0, ultimaOrdenSubconjunto = 0;//, cantidadOrdenes = 0;
+                decimal ordenSiguiente = 0, ultimaOrdenConjunto = 0, nivel = 0, ultimaOrdenSubconjunto = 0;
                 foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow rowCxE in dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).GetCONJUNTOSXESTRUCTURARows())
                 {
                     ordenSiguiente = 0;
-                    //cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowCxE.CONJUNTOSRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
                     foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaCxE in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowCxE.CONJUNTOSRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
                     {
-                        //cantidadOrdenes--;
                         Data.dsOrdenTrabajo.DETALLE_ORDENES_TRABAJORow rowDOCxE = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.NewDETALLE_ORDENES_TRABAJORow();
                         rowDOCxE.BeginEdit();
                         rowDOCxE.DORD_NUMERO = codigoDetalleOrden--;
@@ -137,17 +147,15 @@ namespace GyCAP.BLL
                     
                     foreach (Data.dsEstructura.SUBCONJUNTOSXCONJUNTORow rowSCxC in dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(rowCxE.CONJ_CODIGO).GetSUBCONJUNTOSXCONJUNTORows())
                     {
-                        //cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowSCxC.SUBCONJUNTOSRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
                         nivel = 1;
                         ordenSiguiente = ultimaOrdenConjunto;
                         foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaSCxC in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowSCxC.SUBCONJUNTOSRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
                         {
-                            //cantidadOrdenes--;
                             Data.dsOrdenTrabajo.DETALLE_ORDENES_TRABAJORow rowDOSCxC = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.NewDETALLE_ORDENES_TRABAJORow();
                             rowDOSCxC.BeginEdit();
                             rowDOSCxC.DORD_NUMERO = codigoDetalleOrden--;
                             rowDOSCxC.DORD_CODIGO = "código detalle";
-                            rowDOSCxC.DORD_ORIGEN = rowOrden.ORD_ORIGEN + "/" + rowCxE.CONJUNTOSRow.CONJ_CODIGOPARTE;
+                            rowDOSCxC.DORD_ORIGEN = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(ultimaOrdenConjunto).DORD_ORIGEN + "/" + rowSCxC.SUBCONJUNTOSRow.SCONJ_CODIGOPARTE;
                             rowDOSCxC.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                             rowDOSCxC.ORD_NUMERO = rowOrden.ORD_NUMERO;
                             rowDOSCxC.PAR_CODIGO = rowSCxC.SUBCONJUNTOSRow.SCONJ_CODIGO;
@@ -171,17 +179,15 @@ namespace GyCAP.BLL
                         foreach (Data.dsEstructura.PIEZASXSUBCONJUNTORow rowPxSC in dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(rowSCxC.SCONJ_CODIGO).GetPIEZASXSUBCONJUNTORows())
                         {
                             //Ahora generamos un detalle para cada par operación-centro de la hoja de ruta de la parte
-                            //cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxSC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
                             nivel = 1;
                             ordenSiguiente = ultimaOrdenSubconjunto;
                             foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaPxSC in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxSC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
                             {
-                                //cantidadOrdenes--;
                                 Data.dsOrdenTrabajo.DETALLE_ORDENES_TRABAJORow rowDOPxSC = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.NewDETALLE_ORDENES_TRABAJORow();
                                 rowDOPxSC.BeginEdit();
                                 rowDOPxSC.DORD_NUMERO = codigoDetalleOrden--;
                                 rowDOPxSC.DORD_CODIGO = "código detalle";
-                                rowDOPxSC.DORD_ORIGEN = rowOrden.ORD_ORIGEN + "/" + rowCxE.CONJUNTOSRow.CONJ_CODIGOPARTE + "/" + rowPxSC.SUBCONJUNTOSRow.SCONJ_CODIGOPARTE;
+                                rowDOPxSC.DORD_ORIGEN = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(ultimaOrdenSubconjunto).DORD_ORIGEN + "/" + rowPxSC.PIEZASRow.PZA_CODIGOPARTE;
                                 rowDOPxSC.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                                 rowDOPxSC.ORD_NUMERO = rowOrden.ORD_NUMERO;
                                 rowDOPxSC.PAR_CODIGO = rowPxSC.PZA_CODIGO;
@@ -206,17 +212,15 @@ namespace GyCAP.BLL
                     ordenSiguiente = ultimaOrdenConjunto;
                     foreach (Data.dsEstructura.PIEZASXCONJUNTORow rowPxC in dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(rowCxE.CONJ_CODIGO).GetPIEZASXCONJUNTORows())
                     {                        
-                        //cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
                         nivel = 1;
                         ordenSiguiente = ultimaOrdenConjunto;
                         foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaPxC in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
                         {
-                            //cantidadOrdenes--;
                             Data.dsOrdenTrabajo.DETALLE_ORDENES_TRABAJORow rowDOPxC = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.NewDETALLE_ORDENES_TRABAJORow();
                             rowDOPxC.BeginEdit();
                             rowDOPxC.DORD_NUMERO = codigoDetalleOrden--;
                             rowDOPxC.DORD_CODIGO = "código detalle";
-                            rowDOPxC.DORD_ORIGEN = rowOrden.ORD_ORIGEN + "/" + rowCxE.CONJUNTOSRow.CONJ_CODIGOPARTE;
+                            rowDOPxC.DORD_ORIGEN = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(ultimaOrdenConjunto).DORD_ORIGEN + "/" + rowPxC.PIEZASRow.PZA_CODIGOPARTE;
                             rowDOPxC.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                             rowDOPxC.ORD_NUMERO = rowOrden.ORD_NUMERO;
                             rowDOPxC.PAR_CODIGO = rowCxE.CONJUNTOSRow.CONJ_CODIGO;
@@ -238,13 +242,12 @@ namespace GyCAP.BLL
                     }
                 }
                 //Ahora las piezas que forman la estructura
-                ordenSiguiente = 0;
+                //ordenSiguiente = 0;
                 foreach (Data.dsEstructura.PIEZASXESTRUCTURARow rowPxE in dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).GetPIEZASXESTRUCTURARows())
                 {
-                    //cantidadOrdenes = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxE.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows().Length;
+                    ordenSiguiente = 0;
                     foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaPxE in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxE.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
                     {
-                        //cantidadOrdenes--;
                         Data.dsOrdenTrabajo.DETALLE_ORDENES_TRABAJORow rowDOPxE = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.NewDETALLE_ORDENES_TRABAJORow();
                         rowDOPxE.BeginEdit();
                         rowDOPxE.DORD_NUMERO = codigoDetalleOrden--;
@@ -271,35 +274,143 @@ namespace GyCAP.BLL
             }
         }
 
-        public static void GenerarArbolOrdenes(int codigoOrden, TreeView tvOT, TreeView tvOTyE, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
+        public static void GenerarArbolOrdenes(int codigoOrden, TreeView tvDependenciaSimple, TreeView tvDependenciaCompleta, TreeView tvOrdenesYEstructura, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
         {
             Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOrden = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigoOrden);
-            tvOT.Nodes.Clear();
-            TreeNode nodoOrden = new TreeNode();
-            nodoOrden.Name = rowOrden.ORD_NUMERO.ToString();
-            nodoOrden.Text = rowOrden.ORD_ORIGEN;           
-            tvOT.Nodes.Add(nodoOrden);
-            
+            tvDependenciaSimple.Nodes.Clear();
+            tvOrdenesYEstructura.Nodes.Clear();
+            TreeNode nodoOrdenOT = new TreeNode();
+            TreeNode nodoOrdenOTyE = new TreeNode();
+            TreeNode nodoOrdenDC = new TreeNode();
+            nodoOrdenOT.Name = rowOrden.ORD_NUMERO.ToString();
+            nodoOrdenOT.Text = rowOrden.ORD_ORIGEN;
+            nodoOrdenOT.Tag = nodoOrdenTrabajo;
+            tvDependenciaSimple.Nodes.Add(nodoOrdenOT);
+            nodoOrdenOTyE.Name = rowOrden.ORD_NUMERO.ToString();
+            nodoOrdenOTyE.Text = rowOrden.ORD_ORIGEN;
+            nodoOrdenOTyE.Tag = nodoOrdenTrabajo;
+            tvOrdenesYEstructura.Nodes.Add(nodoOrdenOTyE);
+            nodoOrdenDC.Name = rowOrden.ORD_NUMERO.ToString();
+            nodoOrdenDC.Text = rowOrden.ORD_ORIGEN;
+            nodoOrdenDC.Tag = nodoOrdenTrabajo;
+            tvDependenciaCompleta.Nodes.Add(nodoOrdenDC);
+
+            TreeNode nodoDetalleOT, nodoDetalleOTyE, nodoDetalleDC, ultimoNodoParte = new TreeNode(), parte, ordenes;
             foreach (Data.dsOrdenTrabajo.DETALLE_ORDENES_TRABAJORow rowDetalle in rowOrden.GetDETALLE_ORDENES_TRABAJORows())
             {
-                TreeNode nodoDetalle = new TreeNode();
-                nodoDetalle.Name = rowDetalle.DORD_NUMERO.ToString();
-                nodoDetalle.Text = rowDetalle.DORD_ORIGEN;
+                #region Árbol dependencia simple
+                nodoDetalleOT = new TreeNode();
+                nodoDetalleOT.Name = rowDetalle.DORD_NUMERO.ToString();
+                nodoDetalleOT.Text = rowDetalle.DORD_ORIGEN;
+                nodoDetalleOT.Tag = nodoDetalleOrdenTrabajo;
                 if (rowDetalle.IsDORD_ORDENSIGUIENTENull())
                 {
-                    nodoOrden.Nodes.Add(nodoDetalle);
+                    nodoOrdenOT.Nodes.Add(nodoDetalleOT);
                 }
                 else
                 {
                     if (rowDetalle.DORD_NIVEL == 1)
                     {
-                        tvOT.Nodes.Find(rowDetalle.DORD_ORDENSIGUIENTE.ToString(), true)[0].Nodes.Add(nodoDetalle);
+                        nodoOrdenOT.Nodes.Find(rowDetalle.DORD_ORDENSIGUIENTE.ToString(), true)[0].Nodes.Add(nodoDetalleOT);
                     }
                     else
                     {
-                        tvOT.Nodes.Find(rowDetalle.DORD_ORDENSIGUIENTE.ToString(), true)[0].Parent.Nodes.Add(nodoDetalle);
+                        nodoOrdenOT.Nodes.Find(rowDetalle.DORD_ORDENSIGUIENTE.ToString(), true)[0].Parent.Nodes.Add(nodoDetalleOT);
                     }
                 }
+                #endregion
+
+                #region Árbol dependencia completa
+
+                nodoDetalleDC = new TreeNode();
+                nodoDetalleDC.Name = rowDetalle.DORD_NUMERO.ToString();
+                nodoDetalleDC.Text = rowDetalle.DORD_ORIGEN;
+                nodoDetalleDC.Tag = nodoDetalleOrdenTrabajo;
+                if (rowDetalle.IsDORD_ORDENSIGUIENTENull())
+                {
+                    nodoOrdenDC.Nodes.Add(nodoDetalleDC);
+                }
+                else
+                {
+                    nodoOrdenDC.Nodes.Find(rowDetalle.DORD_ORDENSIGUIENTE.ToString(), true)[0].Nodes.Add(nodoDetalleDC);
+                }
+
+                #endregion
+
+                #region Árbol órdenes y estructura
+                nodoDetalleOTyE = new TreeNode();
+                nodoDetalleOTyE.Name = rowDetalle.DORD_NUMERO.ToString();
+                nodoDetalleOTyE.Text = rowDetalle.DORD_ORIGEN;
+                nodoDetalleOTyE.Tag = nodoDetalleOrdenTrabajo;
+                if (rowDetalle.IsDORD_ORDENSIGUIENTENull())
+                {
+                    parte = new TreeNode();
+                    ordenes = new TreeNode();
+                    parte.Name = rowDetalle.PAR_CODIGO.ToString();
+                    parte.Text = GetTipoParte(Convert.ToInt32(rowDetalle.PAR_TIPO));
+                    parte.Tag = nodoComplemento;
+                    nodoOrdenOTyE.Nodes.Add(parte);
+                    ordenes.Name = "ordenes";
+                    ordenes.Text = "Órdenes";
+                    ordenes.Tag = nodoComplemento;
+                    parte.Nodes.Add(ordenes);                    
+                    ordenes.Nodes.Add(nodoDetalleOTyE);
+                    ultimoNodoParte = parte;
+                }
+                else
+                {
+                    if (Convert.ToInt32(rowDetalle.DORD_NIVEL) == 0)
+                    {
+                        ultimoNodoParte.Nodes["ordenes"].Nodes.Add(nodoDetalleOTyE);
+                    }
+                    else
+                    {
+                        while (rowDetalle.DORD_ORDENSIGUIENTE != Convert.ToDecimal(ultimoNodoParte.Nodes["ordenes"].LastNode.Name))
+                        {
+                            ultimoNodoParte = ultimoNodoParte.Parent;
+                        }
+
+                        parte = new TreeNode();
+                        parte.Name = rowDetalle.PAR_CODIGO.ToString();
+                        parte.Text = GetTipoParte(Convert.ToInt32(rowDetalle.PAR_TIPO));
+                        parte.Tag = nodoComplemento;
+                        ultimoNodoParte.Nodes.Add(parte);
+                        ordenes = new TreeNode();
+                        ordenes.Name = "ordenes";
+                        ordenes.Text = "Órdenes";
+                        ordenes.Tag = nodoComplemento;
+                        parte.Nodes.Add(ordenes);
+                        ultimoNodoParte = parte;
+                        ultimoNodoParte.Nodes["ordenes"].Nodes.Add(nodoDetalleOTyE);
+                    }
+                }
+
+                #endregion
+            }
+            tvDependenciaSimple.ExpandAll();
+            tvDependenciaCompleta.ExpandAll();
+            tvOrdenesYEstructura.ExpandAll();
+        }
+
+        private static void PlanearFechaHaciaAdelante(int codigoOrden, DateTime fechaInicio, TreeView tvOrden, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
+        {
+            TreeNode nodoOrden = tvOrden.Nodes[codigoOrden.ToString()];
+
+            foreach (TreeNode nodoDetalle in nodoOrden.Nodes)
+            {
+                
+            }
+        }
+
+        private static void PlanearFechaHaciaAtras(int codigoOrden, DateTime fechaFinalizacion, TreeView tvOrden, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
+        {
+            TreeNode nodoOrden = tvOrden.Nodes[codigoOrden.ToString()];
+            dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigoOrden).ORD_FECHAFINESTIMADA = fechaFinalizacion;
+            DateTime fechainicio = fechaFinalizacion;
+            
+            foreach (TreeNode nodoDetalle in nodoOrden.Nodes)
+            {
+                
             }
         }
     }
