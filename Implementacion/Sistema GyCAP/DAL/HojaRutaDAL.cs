@@ -234,7 +234,8 @@ namespace GyCAP.DAL
 
         private static void ObtenerDetalleHoja(int codigoHoja, Data.dsHojaRuta ds)
         {
-            string sql = "SELECT dhr_codigo, cto_codigo, hr_codigo, dhr_secuencia, opr_numero FROM DETALLE_HOJARUTA WHERE hr_codigo = @p0";
+            string sql = @"SELECT dhr_codigo, cto_codigo, hr_codigo, dhr_secuencia, opr_numero FROM DETALLE_HOJARUTA 
+                            WHERE hr_codigo = @p0 ORDER BY dhr_secuencia ASC";
             object[] valorParametros = { codigoHoja };
 
             DB.FillDataTable(ds.DETALLE_HOJARUTA, sql, valorParametros);
