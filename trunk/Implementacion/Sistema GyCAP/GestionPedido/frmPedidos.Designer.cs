@@ -184,6 +184,7 @@
             this.btnRestar.TabIndex = 16;
             this.btnRestar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRestar.UseVisualStyleBackColor = true;
+            this.btnRestar.Click += new System.EventHandler(this.btnRestar_Click);
             // 
             // btnSumar
             // 
@@ -199,6 +200,7 @@
             this.btnSumar.TabIndex = 15;
             this.btnSumar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSumar.UseVisualStyleBackColor = true;
+            this.btnSumar.Click += new System.EventHandler(this.btnSumar_Click);
             // 
             // btnDelete
             // 
@@ -214,6 +216,7 @@
             this.btnDelete.TabIndex = 14;
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnNew
             // 
@@ -229,6 +232,7 @@
             this.btnNew.TabIndex = 13;
             this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // gbGuardarCancelar
             // 
@@ -306,6 +310,7 @@
             this.btnAgregar.TabIndex = 31;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // label8
             // 
@@ -326,16 +331,11 @@
             this.btnHecho.TabIndex = 32;
             this.btnHecho.Text = "Hecho";
             this.btnHecho.UseVisualStyleBackColor = true;
+            this.btnHecho.Click += new System.EventHandler(this.btnHecho_Click);
             // 
             // nudCantidad
             // 
             this.nudCantidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.nudCantidad.DecimalPlaces = 3;
-            this.nudCantidad.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
             this.nudCantidad.Location = new System.Drawing.Point(3, 30);
             this.nudCantidad.Maximum = new decimal(new int[] {
             1000,
@@ -346,6 +346,7 @@
             this.nudCantidad.Size = new System.Drawing.Size(64, 20);
             this.nudCantidad.TabIndex = 30;
             this.nudCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudCantidad.Enter += new System.EventHandler(this.nudCantidad_Enter);
             // 
             // dgvCocinas
             // 

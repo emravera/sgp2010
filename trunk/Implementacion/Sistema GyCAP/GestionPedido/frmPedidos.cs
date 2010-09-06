@@ -207,6 +207,11 @@ namespace GyCAP.UI.GestionPedido
             dgvDetallePedido.Columns["DPED_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDetallePedido.Columns["EDPED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
+            //Alineacion de los numeros y las fechas en la grilla
+            dgvDetallePedido.Columns["DPED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
+
+
             dgvCocinas.Columns.Add("COC_CODIGO_PRODUCTO", "Código");
             dgvCocinas.Columns.Add("MOD_CODIGO", "Modelo");
             dgvCocinas.Columns.Add("MCA_CODIGO", "Marca");
@@ -219,6 +224,7 @@ namespace GyCAP.UI.GestionPedido
             dgvCocinas.Columns["COC_COSTO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvCocinas.Columns["COC_ESTADO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
+            
             //Indicamos de dónde van a sacar los datos cada columna
             dgvLista.Columns["PED_CODIGO"].DataPropertyName = "PED_CODIGO";
             dgvLista.Columns["PED_NUMERO"].DataPropertyName = "PED_NUMERO";
@@ -407,6 +413,154 @@ namespace GyCAP.UI.GestionPedido
                     default:
                         break;
                 }
+            }
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            slideControl.ForwardTo("slideAgregar");
+            panelAcciones.Enabled = false;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvDetallePedido.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Obtenemos el código
+                int codigoDetalle = Convert.ToInt32(dvDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_codigo"]);
+                //Lo borramos pero sólo del dataset                
+                //if (!chkCostoFijo.Checked)
+                //{
+                //    decimal costo = dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDetalle).MATERIAS_PRIMASRow.MP_COSTO;
+                //    decimal cantidad = dsEstructura.MATERIASPRIMASXPIEZA.FindByMPXP_CODIGO(codigoDetalle).MPXP_CANTIDAD;
+                //    try { nudCosto.Value -= (costo * cantidad); }
+                //    catch (System.ArgumentOutOfRangeException) { nudCosto.Value = 0; }
+                //}
+                dsCliente.DETALLE_PEDIDOS.FindByDPED_CODIGO(codigoDetalle).Delete();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una Materia Prima de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnSumar_Click(object sender, EventArgs e)
+        {
+            if (dgvDetallePedido.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Obtenemos el código
+                int codigoDetalle = Convert.ToInt32(dvDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_codigo"]);
+                //Aumentamos la cantidad                
+                dsCliente.DETALLE_PEDIDOS.FindByDPED_CODIGO(codigoDetalle).DPED_CANTIDAD += 1;
+                dgvDetallePedido.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una Cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnRestar_Click(object sender, EventArgs e)
+        {
+            if (dgvDetallePedido.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Obtenemos el código
+                int codigoDetalle = Convert.ToInt32(dvDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_codigo"]);
+                //Disminuimos la cantidad
+                if (dsCliente.DETALLE_PEDIDOS.FindByDPED_CODIGO(codigoDetalle).DPED_CANTIDAD > 1)
+                {
+                    dsCliente.DETALLE_PEDIDOS.FindByDPED_CODIGO(codigoDetalle).DPED_CANTIDAD -= 1;
+                }
+                dgvDetallePedido.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una Cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void nudCantidad_Enter(object sender, EventArgs e)
+        {
+            //if (sender.GetType().Equals(txtNombre.GetType())) { (sender as TextBox).SelectAll(); }
+            //if (sender.GetType().Equals(txtDescripcion.GetType())) { (sender as RichTextBox).SelectAll(); }
+            if (sender.GetType().Equals(nudCantidad.GetType())) { (sender as NumericUpDown).Select(0, 20); }
+        }
+
+        private void btnHecho_Click(object sender, EventArgs e)
+        {
+            slideControl.BackwardTo("slideDatos");
+            nudCantidad.Value = 0;
+            panelAcciones.Enabled = true;
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            if (dgvCocinas.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0 && nudCantidad.Value > 0)
+            {
+                bool agregarCocina; //variable que indica si se debe agregar la cocina al listado
+                //Obtenemos el código de la pieza según sea nueva o modificada, lo hacemos acá porque lo vamos a usar mucho
+                int pedidoCodigo;
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { pedidoCodigo = -1; }
+                else { pedidoCodigo = Convert.ToInt32(dvPedido[dgvLista.SelectedRows[0].Index]["ped_codigo"]); }
+                //Obtenemos el código de la cocina, también lo vamos a usar mucho
+                int cocinaCodigo = Convert.ToInt32(dvCocinas[dgvCocinas.SelectedRows[0].Index]["coc_codigo"]);
+
+                //Primero vemos si el pedido tiene algúna cocina cargada, como ya hemos filtrado el dataview
+                //esté sabrá decirnos cuantas filas tiene el conjunto seleccionado                
+                if (dvDetallePedido.Count > 0)
+                {
+                    //Algo tiene, comprobemos que no intente agregar la misma cocina haciendo una consulta al dataset,
+                    //no usamos el dataview porque no queremos volver a filtrar los datos y perderlos
+                    string filtro = "ped_codigo = " + pedidoCodigo + " AND coc_codigo = " + cocinaCodigo;
+                    Data.dsCliente.DETALLE_PEDIDOSRow[] rows =
+                        (Data.dsCliente.DETALLE_PEDIDOSRow[])dsCliente.DETALLE_PEDIDOS.Select(filtro);
+                    if (rows.Length > 0)
+                    {
+                        //Ya lo ha agregado, preguntemos si quiere aumentar la cantidad existente o descartar
+                        DialogResult respuesta = MessageBox.Show("El Pedido ya posee la cocina seleccionada. ¿Desea sumar la cantidad ingresada?", "Pregunta: Confirmar acción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (respuesta == DialogResult.Yes)
+                        {
+                            //Sumemos la cantidad ingresada a la existente, como hay una sola fila seleccionamos la 0 del array
+                            rows[0].DPED_CANTIDAD += int.Parse(nudCantidad.Value.ToString());
+                            nudCantidad.Value = 0;
+                        }
+                        //Como ya existe marcamos que no debe agregarse
+                        agregarCocina = false;
+                    }
+                    else
+                    {
+                        //No lo ha agregado, marcamos que debe agregarse
+                        agregarCocina = true;
+                    }
+                }
+                else
+                {
+                    //No tiene ningúna materia prima agregada, marcamos que debe agregarse
+                    agregarCocina = true;
+                }
+
+                //Ahora comprobamos si debe agregarse la cocina o no
+                if (agregarCocina)
+                {
+                    Data.dsCliente.DETALLE_PEDIDOSRow row = dsCliente.DETALLE_PEDIDOS.NewDETALLE_PEDIDOSRow();
+                    row.BeginEdit();
+                    //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
+                    row.DPED_CODIGO = codigoDetalle--; //-- para que se vaya autodecrementando en cada inserción
+                    row.PED_CODIGO = pedidoCodigo;
+                    row.COC_CODIGO = cocinaCodigo;
+                    row.EDPED_CODIGO = 1; //Esto tiene que ser un parametro
+                    row.DPED_CANTIDAD = int.Parse(nudCantidad.Value.ToString());
+                    row.EndEdit();
+                    //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
+                    //todavia no vamos a insertar en la db hasta que no haga Guardar
+                    dsCliente.DETALLE_PEDIDOS.AddDETALLE_PEDIDOSRow(row);
+                    nudCantidad.Value = 0;
+                }
+                nudCantidad.Value = 0;
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una Materia Prima de la lista y asignarle una cantidad mayor a 0.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
