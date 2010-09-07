@@ -109,6 +109,7 @@ namespace GyCAP.UI.GestionPedido
                     btnEliminar.Enabled = false;
                     panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
+                    dvDetallePedido.RowFilter = "DPED_CODIGO < 0";
                     tcPedido.SelectedTab = tpDatos;
                     cboClientes.Focus();
                     break;
@@ -125,6 +126,7 @@ namespace GyCAP.UI.GestionPedido
                     btnEliminar.Enabled = false;
                     panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.nuevoExterno;
+                    dvDetallePedido.RowFilter = "DPED_CODIGO < 0";
                     tcPedido.SelectedTab = tpDatos;
                     cboClientes.Focus();
                     break;
@@ -179,9 +181,9 @@ namespace GyCAP.UI.GestionPedido
 
             if (pValue == true)
             {
-                dvDetallePedido.RowFilter = "DPED_CODIGO < 0";
+                
                 dgvDetallePedido.Refresh();
-                cboEstado.SetSelectedIndex(2)  ; //Esto tiene que ser un parametro no puede quedar hardcodiado
+                cboEstado.SetSelectedIndex(1)  ; //Esto tiene que ser un parametro no puede quedar hardcodiado
                 cboEstado.Enabled = false;
 
                 cboClientes.SetTexto("Seleccione un Cliente...");
@@ -308,10 +310,10 @@ namespace GyCAP.UI.GestionPedido
             {
                 MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            dvDetallePedido = new DataView(dsCliente.DETALLE_PEDIDOS);
+            //dvDetallePedido = new DataView(dsCliente.DETALLE_PEDIDOS);
             dvEstadoPedidoBuscar = new DataView(dsCliente.ESTADO_PEDIDOS);
-            dvEstadoPedido = new DataView(dsCliente.ESTADO_PEDIDOS);
-            dvCocinas = new DataView(dsCliente.COCINAS);
+            //dvEstadoPedido = new DataView(dsCliente.ESTADO_PEDIDOS);
+            //dvCocinas = new DataView(dsCliente.COCINAS);
 
             cboEstadoBuscar.SetDatos(dvEstadoPedidoBuscar, "EPED_CODIGO", "EPED_NOMBRE", "--TODOS--", true);
             cboEstado.SetDatos(dvEstadoPedidoBuscar, "EPED_CODIGO", "EPED_NOMBRE", "", false);
@@ -385,8 +387,8 @@ namespace GyCAP.UI.GestionPedido
             txtObservacion.Text = dsCliente.PEDIDOS.FindByPED_CODIGO(codigo).PED_OBSERVACIONES;
 
             //Usemos el filtro del dataview para mostrar sólo las Detalles del Pedido seleccionado
-            dvDetallePedido.RowFilter = "ped_codigo = " + codigo;
-
+            dvDetallePedido.RowFilter = "PED_CODIGO = " + codigo;
+            
         }
 
         private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
