@@ -109,6 +109,23 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        //Metodo que valida que no exista un detalle de plan semanal para ese pedido
+        public static bool ExistePlanSemanalPedido(int codigoDetalle)
+        {
+            string sql = @"SELECT count(dped_codigo)
+                           FROM DETALLE_PLANES_SEMANALES
+                           WHERE dped_codigo=@p0";
+            object[] valorParametros = { codigoDetalle };
+            try
+            {
+                int cantidad = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+                if (cantidad == 0) return true;
+                else return false;
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
+
         //Metodo que valida que no existan planes semanales de ese plan mensual para que se pueda modificar
         public static bool ValidarActualizar(int codigoPlan)
         {
@@ -139,17 +156,31 @@ namespace GyCAP.DAL
                 //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
                 string sql = "INSERT INTO [PLANES_MENSUALES] ([pan_codigo], [pmes_mes], [pmes_fechacreacion]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
                 object[] valorParametros = { plan.PlanAnual.Codigo, plan.Mes, plan.FechaCreacion };
-                plan.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+                plan.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, transaccion));
 
                 //Inserto el Detalle
-                sql = "INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
+                
                 foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[]) planMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.Added))
                 {
-                    object[] valorParam = { plan.Codigo,row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA };
-                    row.BeginEdit();
-                    row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
-                    row.PMES_CODIGO = plan.Codigo;
-                    row.EndEdit();                    
+                    if (row.DPED_CODIGO != 0)
+                    {
+                        sql = "INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada], [dped_codigo]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+                        object[] valorParam = { plan.Codigo, row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA, row.DPED_CODIGO };
+                        row.BeginEdit();
+                        row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
+                        row.PMES_CODIGO = plan.Codigo;
+                        row.EndEdit();
+                    }
+                    else
+                    {
+                        sql = "INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
+                        object[] valorParam = { plan.Codigo, row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA };
+                        row.BeginEdit();
+                        row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
+                        row.PMES_CODIGO = plan.Codigo;
+                        row.EndEdit();
+
+                    }
                 }
 
                 transaccion.Commit();
@@ -160,8 +191,7 @@ namespace GyCAP.DAL
             {
                 transaccion.Rollback();
                 throw new Entidades.Excepciones.BaseDeDatosException();
-
-            }
+            }            
           
         }
         //METODO QUE GUARDA LOS DATOS DEL PLAN MODIFICADOS   
@@ -176,16 +206,31 @@ namespace GyCAP.DAL
 
                 string sql = string.Empty;
 
-                //Inserto los detalles nuevos
-                sql = "INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
+                //Inserto los Detalles nuevos
                 foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])planMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.Added))
                 {
-                    object[] valorParam = { plan.Codigo, row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA };
-                    row.BeginEdit();
-                    row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
-                    row.PMES_CODIGO = plan.Codigo;
-                    row.EndEdit();
+                    if (row.DPED_CODIGO != 0)
+                    {
+                        sql = "INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada], [dped_codigo]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+                        object[] valorParam = { plan.Codigo, row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA, row.DPED_CODIGO };
+                        row.BeginEdit();
+                        row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
+                        row.PMES_CODIGO = plan.Codigo;
+                        row.EndEdit();
+                    }
+                    else
+                    {
+                        sql = "INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
+                        object[] valorParam = { plan.Codigo, row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA };
+                        row.BeginEdit();
+                        row.DPED_CODIGO = 0;
+                        row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
+                        row.PMES_CODIGO = plan.Codigo;
+                        row.EndEdit();
+
+                    }
                 }
+
                 //Guardo las modificaciones
                 sql = "UPDATE [DETALLE_PLANES_MENSUALES] SET dpmes_cantidadestimada=@p0 ";
                 foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])planMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
@@ -198,8 +243,29 @@ namespace GyCAP.DAL
                 sql = "DELETE FROM [DETALLE_PLANES_MENSUALES] WHERE dpmes_codigo=@p0 ";
                 foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])planMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.Deleted))
                 {
+                    //pregunto si tiene un pedido asociado le actualizo el estado
+                    if (Convert.ToInt32(row["DPED_CODIGO", System.Data.DataRowVersion.Original]) != 0)
+                    {
+                        //obtengo ese detalle
+                        DAL.ClaseTemporalPedido.ObtenerUnDetallePedido(planMensual.DETALLE_PEDIDOS, Convert.ToInt32(row["DPED_CODIGO", System.Data.DataRowVersion.Original]));
+
+                        foreach (Data.dsPlanMensual.DETALLE_PEDIDOSRow dped in planMensual.DETALLE_PEDIDOS.Rows)
+                        {
+                            if (Convert.ToInt32(row["DPED_CODIGO", System.Data.DataRowVersion.Original]) == Convert.ToInt32(dped["DPED_CODIGO", System.Data.DataRowVersion.Original]))
+                            {
+                                //Le actualizo el estado al detalle
+                                DAL.ClaseTemporalPedido.CambiarEstado(Convert.ToInt32(dped["DPED_CODIGO", System.Data.DataRowVersion.Original]), 1);
+
+                                //Le actualizo el estado del pedido
+                                DAL.ClaseTemporalPedido.CambiarEstadoPedido(Convert.ToInt32(dped["DPED_CODIGO", System.Data.DataRowVersion.Original]), 1);
+                            }
+                        }
+
+                    }
+
+                    //Lo actualizo en la base de datos
                     object[] valorPara = {Convert.ToInt32(row["DPMES_CODIGO", System.Data.DataRowVersion.Original])};
-                    DB.executeNonQuery(sql, valorPara, transaccion);
+                    DB.executeNonQuery(sql, valorPara, transaccion);                    
                 }
 
                 transaccion.Commit();
@@ -246,8 +312,6 @@ namespace GyCAP.DAL
             }
 
         }
-
-
 
         public static int ObtenerCantidad(int anio, string mes)
         {

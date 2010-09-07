@@ -40,6 +40,80 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
         }
+        public static void ObtenerUnDetallePedido(DataTable dtDetallePedidos, int codigoDetalle)
+        {
+            string sql = @"SELECT dped_codigo, ped_codigo, edped_codigo, coc_codigo, dped_cantidad, dped_fecha_cancelacion
+                           FROM DETALLE_PEDIDOS WHERE dped_codigo = @p0";
+
+            object[] valorParametros = { codigoDetalle };
+            try
+            {
+                //Se llena el Datatable
+                DB.FillDataTable(dtDetallePedidos, sql, valorParametros);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+        }
+
+
+        public static void CambiarEstado(int codigoDetallePedido, int estado)
+        {
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                //Inserto la demanda
+                transaccion = DB.IniciarTransaccion();
+
+                string sql = string.Empty;
+
+         
+                //Guardo las modificaciones
+                sql = "UPDATE [DETALLE_PEDIDOS] SET edped_codigo=@p0 WHERE dped_codigo=@p1";
+                object[] valorPar = { estado, codigoDetallePedido };
+                DB.executeNonQuery(sql, valorPar, transaccion);
+                
+                transaccion.Commit();
+                DB.FinalizarTransaccion();
+
+
+            }
+            catch (SqlException)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException();
+
+            }
+        }
+
+        public static void CambiarEstadoPedido(int codigoPedido, int estado)
+        {
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                //Inserto la demanda
+                transaccion = DB.IniciarTransaccion();
+
+                string sql = string.Empty;
+
+
+                //Guardo las modificaciones
+                sql = "UPDATE [PEDIDOS] SET eped_codigo=@p0 WHERE ped_codigo=@p1";
+                object[] valorPar = { estado, codigoPedido };
+                DB.executeNonQuery(sql, valorPar, transaccion);
+
+                transaccion.Commit();
+                DB.FinalizarTransaccion();
+
+
+            }
+            catch (SqlException)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException();
+            }
+        }
 
     }
 }

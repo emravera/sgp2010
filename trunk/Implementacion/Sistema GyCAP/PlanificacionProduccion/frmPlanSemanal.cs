@@ -91,6 +91,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvPlanMensual.Columns.Add("COC_CODIGO", "Cocina Codigo");
             dgvPlanMensual.Columns.Add("DPMES_CANTIDADESTIMADA", "C.Estimada");
             dgvPlanMensual.Columns.Add("DPMES_CANTPLANIFICADA", "C.Planificada");
+            dgvPlanMensual.Columns.Add("DPED_CODIGO", "Detalle Pedido");
             dgvPlanMensual.Columns.Add("DPMES_CANTIDADREAL", "C.Real");
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
@@ -100,6 +101,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvPlanMensual.Columns["COC_CODIGO"].DataPropertyName = "COC_CODIGO";
             dgvPlanMensual.Columns["DPMES_CANTIDADESTIMADA"].DataPropertyName = "DPMES_CANTIDADESTIMADA";
             dgvPlanMensual.Columns["DPMES_CANTIDADREAL"].DataPropertyName = "DPMES_CANTIDADREAL";
+            dgvPlanMensual.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
 
             //Seteamos el modo de tamaño de las columnas
             dgvPlanMensual.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -108,6 +110,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvPlanMensual.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPlanMensual.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvPlanMensual.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvPlanMensual.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListaPlanesMensuales = new DataView(dsPlanSemanal.DETALLE_PLANES_MENSUALES);
@@ -121,6 +124,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDatos.Columns.Add("DPSEM_CANTIDADESTIMADA", "C.Estimada");
             dgvDatos.Columns.Add("DPSEM_CANTIDADREAL", "C. Real");
             dgvDatos.Columns.Add("DPSEM_ESTADO", "Estado");
+            dgvDatos.Columns.Add("DPED_CODIGO", "Detalle Pedido");
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvDatos.Columns["DPSEM_CODIGO"].DataPropertyName = "DPSEM_CODIGO";
@@ -129,14 +133,16 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDatos.Columns["DPSEM_CANTIDADESTIMADA"].DataPropertyName = "DPSEM_CANTIDADESTIMADA";
             dgvDatos.Columns["DPSEM_CANTIDADREAL"].DataPropertyName = "DPSEM_CANTIDADREAL";
             dgvDatos.Columns["DPSEM_ESTADO"].DataPropertyName = "DPSEM_ESTADO";
+            dgvDatos.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
 
             //Seteamos el modo de tamaño de las columnas
             dgvDatos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDatos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDatos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDatos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvDatos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDatos.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvDatos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvDatos.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDatos.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             
 
             //Creamos el dataview y lo asignamos a la grilla
@@ -442,12 +448,21 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Se valida que no se quiera agregar un modelo que ya este en el detalle
             
             int codigo = Convert.ToInt32(dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["coc_codigo"]);
+            int codigoPedido=0;
+
+            if (dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["dped_codigo"].ToString() != string.Empty)
+            {
+                codigoPedido = Convert.ToInt32(dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["dped_codigo"]);
+            }
 
             foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow row in dsPlanSemanal.DETALLE_PLANES_SEMANALES.Rows)
             {
                 if (row["COC_CODIGO"].ToString() == codigo.ToString())
                 {
-                    msjerror = msjerror + "-El modelo de cocina que intenta agregar ya se encuentra en la planificación\n";
+                    if (row["DPED_CODIGO"].ToString() == codigoPedido.ToString())
+                    {
+                        msjerror = msjerror + "-El modelo de cocina que intenta agregar ya se encuentra en la planificación\n";
+                    }
                 }
             }
             //Valido que no exista un plan para el dia que selecciono}
@@ -519,7 +534,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     BLL.PlanMensualBLL.ObtenerPMAnio(dsPlanSemanal.PLANES_MENSUALES, codigo);
 
                     dvComboMes = new DataView(dsPlanSemanal.PLANES_MENSUALES);
-                    cbMes.SetDatos(dvComboMes, "pmes_codigo", "pmes_mes", "Seleccione", false);
+                    cbMes.SetDatos(dvComboMes, "pmes_codigo", "pmes_mes","pmes_codigo ASC", "Seleccione", false);
 
                     if (dsPlanSemanal.PLANES_MENSUALES.Rows.Count > 0)
                     {
@@ -746,7 +761,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     BLL.PlanMensualBLL.ObtenerPMAnio(dsPlanSemanal.PLANES_MENSUALES, codigo);
 
                     dvComboMesDatos = new DataView(dsPlanSemanal.PLANES_MENSUALES);
-                    cbMesDatos.SetDatos(dvComboMesDatos, "pmes_codigo", "pmes_mes", "Seleccione", false);
+                    cbMesDatos.SetDatos(dvComboMesDatos, "pmes_codigo", "pmes_mes", "pmes_codigo ASC", "Seleccione", false);
 
                     if (dsPlanSemanal.PLANES_MENSUALES.Rows.Count > 0)
                     {
@@ -835,8 +850,13 @@ namespace GyCAP.UI.PlanificacionProduccion
                 {
                     //Se debe cargar la grilla de datos del plan mensual
                     int codigoAnio = Convert.ToInt32(cbPlanAnual.GetSelectedValue());
+                    int codigoPlanMensual = Convert.ToInt32(cbMesDatos.GetSelectedValue());
+
                     int anio = Convert.ToInt32(cbPlanAnual.GetSelectedText());
                     string mes = cbMesDatos.GetSelectedText().ToString();
+
+                    //Limpio el datatable
+                    dsPlanSemanal.DETALLE_PLANES_MENSUALES.Clear();
 
                     //Lleno el dataset
                     BLL.DetallePlanMensualBLL.ObtenerDetallePM(codigoAnio, mes, dsPlanSemanal.DETALLE_PLANES_MENSUALES);
@@ -868,14 +888,24 @@ namespace GyCAP.UI.PlanificacionProduccion
                         //Se calcula la cantidad ya planificada para cada cocina
                         foreach (Data.dsPlanSemanal.DETALLE_PLANES_MENSUALESRow row in dsPlanSemanal.DETALLE_PLANES_MENSUALES.Rows)
                         {
+                            int? cantidadPlanificada = null;
+                            
                             //busco el codigo del modelo de cocina
                             int codigoCocina =Convert.ToInt32(row.COC_CODIGO);
-
-                            //Busco en la base de datos la cantidad
-                            int cantidadPlanificada = BLL.PlanSemanalBLL.obtenerCocinasPlanificadas(codigoCocina);
+                            if (row["DPED_CODIGO"].ToString() == string.Empty)
+                            {
+                                //Busco en la base de datos la cantidad
+                                cantidadPlanificada = BLL.PlanSemanalBLL.obtenerCocinasPlanificadas(codigoCocina, codigoAnio, codigoPlanMensual);
+                            }
+                            else
+                            {
+                                cantidadPlanificada = BLL.PlanSemanalBLL.obtenerCocinasPlanificadas(codigoCocina, codigoAnio, codigoPlanMensual,Convert.ToInt32(row.DPED_CODIGO));
+                            }
+                            
+                            if (cantidadPlanificada == null) cantidadPlanificada = 0;
 
                             row.BeginEdit();
-                            row.DPMES_CANTPLANIFICADA = cantidadPlanificada;
+                            row.DPMES_CANTPLANIFICADA =Convert.ToDecimal(cantidadPlanificada);
                             row.EndEdit();
                         }
 
@@ -934,25 +964,44 @@ namespace GyCAP.UI.PlanificacionProduccion
                         row.DPSEM_CANTIDADESTIMADA = cantidad;
 
                     }
+                    //Si tiene un pedido lo agrego sino pongo 0
+                    if (dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["dped_codigo"].ToString() != string.Empty)
+                    {
+                        row.DPED_CODIGO = Convert.ToInt32(dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["dped_codigo"]);
+                    }
+                    else
+                    {
+                        row.DPED_CODIGO = 0;
+                    }
                     row.EndEdit();
                     dsPlanSemanal.DETALLE_PLANES_SEMANALES.AddDETALLE_PLANES_SEMANALESRow(row);
 
                     //Agrego el valor al dataset de planes mensuales
                     int codigoCocinaAgregada = Convert.ToInt32(dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["coc_codigo"]);
+                    string pedido = string.Empty;
 
-                    //Se calcula la cantidad ya planificada para cada cocina
-                    foreach (Data.dsPlanSemanal.DETALLE_PLANES_MENSUALESRow rows in dsPlanSemanal.DETALLE_PLANES_MENSUALES.Rows)
+                    if (dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["dped_codigo"].ToString() != string.Empty)
                     {
-                        //busco el codigo del modelo de cocina
-                        int codigoCocina = Convert.ToInt32(rows.COC_CODIGO);
+                        pedido = Convert.ToString(dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["dped_codigo"]);
 
-                        if (codigoCocina == codigoCocinaAgregada)
-                        {
-                            rows.BeginEdit();
-                            rows.DPMES_CANTPLANIFICADA += cantidad;
-                            rows.EndEdit();
-                        }
                     }
+                        //Se calcula la cantidad ya planificada para cada cocina
+                        foreach (Data.dsPlanSemanal.DETALLE_PLANES_MENSUALESRow rows in dsPlanSemanal.DETALLE_PLANES_MENSUALES.Rows)
+                        {
+                            //busco el codigo del modelo de cocina
+                            int codigoCocina = Convert.ToInt32(rows.COC_CODIGO);
+
+                            if (codigoCocina == codigoCocinaAgregada)
+                            {
+                                if (pedido == rows["DPED_CODIGO"].ToString())
+                                {
+                                    rows.BeginEdit();
+                                    rows.DPMES_CANTPLANIFICADA += cantidad;
+                                    rows.EndEdit();
+                                }
+                            }
+                        }
+                    
 
                     //Seteo los valores de los controles en cero
                     rbUnidades.Checked = true;
@@ -980,21 +1029,19 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             //Obtengo la cantidad a producir en el mes
             int cocina = Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["coc_codigo"]);
-            DataRow[] fila= dsPlanSemanal.DETALLE_PLANES_MENSUALES.Select("coc_codigo=" + cocina.ToString());
+            int codigoPedido = Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dped_codigo"]);
+            DataRow[] fila;
+            if (codigoPedido != 0)
+            {
+                fila = dsPlanSemanal.DETALLE_PLANES_MENSUALES.Select("coc_codigo=" + cocina.ToString() + "and dped_codigo =" + codigoPedido.ToString());
+            }
+            else
+            {
+                fila = dsPlanSemanal.DETALLE_PLANES_MENSUALES.Select("coc_codigo=" + cocina.ToString());
+            }
             int cantidadMes = fila[0].Field<int>("dpmes_cantidadestimada");
             int? cantidadReal = fila[0].Field<int?>("dpmes_cantidadreal");
             if (cantidadReal == null) cantidadReal = 0;
-
-            //Se calcula la cantidad ya planificada para cada cocina
-            foreach (Data.dsPlanSemanal.DETALLE_PLANES_MENSUALESRow rows in dsPlanSemanal.DETALLE_PLANES_MENSUALES.Rows)
-            {
-                if (rows.COC_CODIGO == cocina)
-                {
-                    rows.BeginEdit();
-                    rows.DPMES_CANTPLANIFICADA += 1;
-                    rows.EndEdit();
-                }
-            }
 
             //Obtengo la cantidad que ya se quiere producir
             int cantidadPlanificada = Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dpsem_cantidadestimada"]);
@@ -1004,6 +1051,32 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 if (dgvDatos.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
                 {
+                    //Agrego el valor al dataset de planes mensuales
+                    int codigoCocinaAgregada = Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["coc_codigo"]);
+                    string pedido = string.Empty;
+
+                    if (dvListaDatos[dgvDatos.SelectedRows[0].Index]["dped_codigo"].ToString() != string.Empty)
+                    {
+                        pedido = Convert.ToString(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dped_codigo"]);
+
+                    }
+                    //Se calcula la cantidad ya planificada para cada cocina
+                    foreach (Data.dsPlanSemanal.DETALLE_PLANES_MENSUALESRow rows in dsPlanSemanal.DETALLE_PLANES_MENSUALES.Rows)
+                    {
+                        //busco el codigo del modelo de cocina
+                        int codigoCocina = Convert.ToInt32(rows.COC_CODIGO);
+
+                        if (codigoCocina == codigoCocinaAgregada)
+                        {
+                            if (pedido == rows["DPED_CODIGO"].ToString())
+                            {
+                                rows.BeginEdit();
+                                rows.DPMES_CANTPLANIFICADA += 1;
+                                rows.EndEdit();
+                            }
+                        }
+                    }
+
                     int codigo = Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dpsem_codigo"]);
                     dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(codigo).DPSEM_CANTIDADESTIMADA += 1;
                 }
@@ -1020,19 +1093,6 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void btnRestar_Click(object sender, EventArgs e)
         {
-            int cocina = Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["coc_codigo"]);
-
-            //Resto a la cantidad ya planificada de cocina
-            foreach (Data.dsPlanSemanal.DETALLE_PLANES_MENSUALESRow rows in dsPlanSemanal.DETALLE_PLANES_MENSUALES.Rows)
-            {
-                if (rows.COC_CODIGO == cocina)
-                {
-                    rows.BeginEdit();
-                    rows.DPMES_CANTPLANIFICADA -= 1;
-                    rows.EndEdit();
-                }
-            }
-
             //Obtengo la cantidad que ya se quiere producir
             int cantidadPlanificada = Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dpsem_cantidadestimada"]);
 
@@ -1041,6 +1101,37 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 if (dgvDatos.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
                 {
+                    //Agrego el valor al dataset de planes mensuales
+                    int codigoCocinaAgregada = Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["coc_codigo"]);
+                    string pedido = string.Empty;
+
+                    if (dvListaDatos[dgvDatos.SelectedRows[0].Index]["dped_codigo"].ToString() != string.Empty)
+                    {
+                        pedido = Convert.ToString(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dped_codigo"]);
+
+                    }
+                    //Se calcula la cantidad ya planificada para cada cocina
+                    foreach (Data.dsPlanSemanal.DETALLE_PLANES_MENSUALESRow rows in dsPlanSemanal.DETALLE_PLANES_MENSUALES.Rows)
+                    {
+                        //busco el codigo del modelo de cocina
+                        int codigoCocina = Convert.ToInt32(rows.COC_CODIGO);
+
+                        if (codigoCocina == codigoCocinaAgregada)
+                        {
+                            if (pedido == rows["DPED_CODIGO"].ToString())
+                            {
+                                rows.BeginEdit();
+                                rows.DPMES_CANTPLANIFICADA -= 1;
+                                rows.EndEdit();
+                            }
+                        }
+                    }
+
+
+
+
+
+
                     int codigo = Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dpsem_codigo"]);
                     dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(codigo).DPSEM_CANTIDADESTIMADA -= 1;
                 }

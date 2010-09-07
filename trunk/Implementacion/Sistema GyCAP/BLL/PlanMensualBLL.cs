@@ -29,6 +29,12 @@ namespace GyCAP.BLL
            return DAL.PlanMensualDAL.Validar(anio, mes);
         }
 
+        //Metodo que valida que no exista un detalle de plan semanal para ese pedido
+        public static bool ExistePlanSemanalPedido(int codigoDetallePedido)
+        {
+            return DAL.PlanMensualDAL.ExistePlanSemanalPedido(codigoDetallePedido);
+        }
+
         //Metodo que valida que no exista un plan semanal con ese plan mensual para poder modificarse
         public static bool ExistePlanSemanal(int codigoPlan)
         {
