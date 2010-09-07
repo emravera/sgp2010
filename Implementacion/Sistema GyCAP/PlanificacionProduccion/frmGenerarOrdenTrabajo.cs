@@ -155,6 +155,12 @@ namespace GyCAP.UI.PlanificacionProduccion
             int codigoPlan = Convert.ToInt32(dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigo).DPSEM_CODIGO);
             txtCocinaOrden.Text = dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(codigoPlan).COCINASRow.COC_CODIGO_PRODUCTO;
             nudCantidadOrden.Value = dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(codigoPlan).DPSEM_CANTIDADESTIMADA;
+            if (!dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigo).IsORD_FECHAINICIOESTIMADANull())
+                { dtpFechaInicioOrden.SetFecha(dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigo).ORD_FECHAINICIOESTIMADA); }
+
+            if (!dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigo).IsORD_FECHAFINESTIMADANull())
+            { dtpFechaFinOrden.SetFecha(dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigo).ORD_FECHAFINESTIMADA); }
+
             CompletarDatosDetalle();
         }
 
@@ -237,6 +243,9 @@ namespace GyCAP.UI.PlanificacionProduccion
                 txtEstadoDetalle.Text = row.ESTADO_ORDENES_TRABAJORow.EORD_NOMBRE;
                 txtOperacionDetalle.Text = dsHojaRuta.OPERACIONES.FindByOPR_NUMERO(Convert.ToInt32(row.OPR_NUMERO)).OPR_NOMBRE;
                 txtObservaciones.Text = row.DORD_OBSERVACIONES;
+
+                if (!row.IsDORD_FECHAINICIOESTIMADANull()) { dtpFechaInicioDetalle.SetFecha(row.DORD_FECHAINICIOESTIMADA); }
+                if (!row.IsDORD_HORAFINESTIMADANull()) { dtpFechaFinDetalle.SetFecha(row.DORD_FECHAFINESTIMADA); }
             }
         }
 
@@ -516,14 +525,30 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 if (cbModoPlanearFecha.GetSelectedIndex() != -1 && !dtpFechaPlanear.EsFechaNull())
                 {
+                    int codigo = Convert.ToInt32(dvOrdenTrabajo[dgvListaOrdenTrabajo.SelectedRows[0].Index]["ord_numero"].ToString());
+                    tvDependenciaSimple = frmArbolOrdenesTrabajo.Instancia.GetArbolDependenciaSimple();
+                    tvDependenciaCompleta = frmArbolOrdenesTrabajo.Instancia.GetArbolDependenciaCompleta();
+                    tvOrdenesYEstructura = frmArbolOrdenesTrabajo.Instancia.GetArbolOrdenesYEstructura();
+                    BLL.OrdenTrabajoBLL.GenerarArbolOrdenes(codigo, tvDependenciaSimple, tvDependenciaCompleta, tvOrdenesYEstructura, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
                     if (cbModoPlanearFecha.GetSelectedValueInt() == 0)
                     {
                         //Planeamos hacia adelante
-                        MessageBox.Show(BLL.OrdenTrabajoBLL.PlanearFechaHaciaAtras(Convert.ToInt32(dvOrdenTrabajo[dgvListaOrdenTrabajo.SelectedRows[0].Index]["ord_numero"].ToString()), DateTime.Today, tvDependenciaCompleta, dsOrdenTrabajo, dsEstructura, dsHojaRuta));
+                        DateTime fecha = DateTime.Parse(DateTime.Parse(dtpFechaPlanear.GetFecha().ToString()).ToShortDateString());
+                        decimal factor = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(codigo).DORD_CANTIDADESTIMADA / 100;
+                        BLL.OrdenTrabajoBLL.PlanearFechaHaciaDelante(codigo, fecha, factor, tvDependenciaCompleta, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                        dvDetalleOrden.Table = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO;
+                        sourceDetalle.DataSource = dvDetalleOrden;
+                        CompletarDatosDetalle();
                     }
                     else
                     {
-                        //Planeamos hacia atrás
+                        //Planeamos hacia atrás                        
+                        DateTime fecha = DateTime.Parse(DateTime.Parse(dtpFechaPlanear.GetFecha().ToString()).ToShortDateString());
+                        decimal factor = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(codigo).DORD_CANTIDADESTIMADA / 100;
+                        BLL.OrdenTrabajoBLL.PlanearFechaHaciaAtras(codigo, fecha, factor, tvDependenciaCompleta, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                        dvDetalleOrden.Table = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO;
+                        sourceDetalle.DataSource = dvDetalleOrden;
+                        CompletarDatosDetalle();
                     }
                 }
                 else { MessageBox.Show("Debe seleccionar un modo de planeamiento y una fecha.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
