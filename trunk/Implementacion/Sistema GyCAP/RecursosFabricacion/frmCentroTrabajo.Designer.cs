@@ -51,6 +51,8 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.nudCapacidadUnidadHora = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
             this.nudTiempoDespues = new System.Windows.Forms.NumericUpDown();
             this.nudTiempoAntes = new System.Windows.Forms.NumericUpDown();
             this.nudCapacidadCiclo = new System.Windows.Forms.NumericUpDown();
@@ -100,6 +102,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudCostoCiclo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCostoHora)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCapacidadUnidadHora)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTiempoDespues)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTiempoAntes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCapacidadCiclo)).BeginInit();
@@ -340,7 +343,7 @@
             0});
             this.nudCostoCiclo.Name = "nudCostoCiclo";
             this.nudCostoCiclo.Size = new System.Drawing.Size(120, 21);
-            this.nudCostoCiclo.TabIndex = 21;
+            this.nudCostoCiclo.TabIndex = 22;
             this.nudCostoCiclo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCostoCiclo.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -353,9 +356,14 @@
             0,
             65536});
             this.nudCostoHora.Location = new System.Drawing.Point(121, 27);
+            this.nudCostoHora.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.nudCostoHora.Name = "nudCostoHora";
             this.nudCostoHora.Size = new System.Drawing.Size(120, 21);
-            this.nudCostoHora.TabIndex = 20;
+            this.nudCostoHora.TabIndex = 21;
             this.nudCostoHora.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCostoHora.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -379,6 +387,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.nudCapacidadUnidadHora);
+            this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.nudTiempoDespues);
             this.groupBox3.Controls.Add(this.nudTiempoAntes);
             this.groupBox3.Controls.Add(this.nudCapacidadCiclo);
@@ -396,6 +406,34 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Capacidad del Centro de Trabajo";
             // 
+            // nudCapacidadUnidadHora
+            // 
+            this.nudCapacidadUnidadHora.DecimalPlaces = 2;
+            this.nudCapacidadUnidadHora.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudCapacidadUnidadHora.Location = new System.Drawing.Point(434, 27);
+            this.nudCapacidadUnidadHora.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudCapacidadUnidadHora.Name = "nudCapacidadUnidadHora";
+            this.nudCapacidadUnidadHora.Size = new System.Drawing.Size(120, 21);
+            this.nudCapacidadUnidadHora.TabIndex = 16;
+            this.nudCapacidadUnidadHora.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(263, 29);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(141, 13);
+            this.label10.TabIndex = 20;
+            this.label10.Text = "Capacidad por unidad/hora:";
+            // 
             // nudTiempoDespues
             // 
             this.nudTiempoDespues.DecimalPlaces = 2;
@@ -404,10 +442,15 @@
             0,
             0,
             65536});
-            this.nudTiempoDespues.Location = new System.Drawing.Point(434, 54);
+            this.nudTiempoDespues.Location = new System.Drawing.Point(434, 83);
+            this.nudTiempoDespues.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.nudTiempoDespues.Name = "nudTiempoDespues";
             this.nudTiempoDespues.Size = new System.Drawing.Size(120, 21);
-            this.nudTiempoDespues.TabIndex = 18;
+            this.nudTiempoDespues.TabIndex = 20;
             this.nudTiempoDespues.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudTiempoDespues.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -419,10 +462,15 @@
             0,
             0,
             65536});
-            this.nudTiempoAntes.Location = new System.Drawing.Point(434, 25);
+            this.nudTiempoAntes.Location = new System.Drawing.Point(434, 54);
+            this.nudTiempoAntes.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.nudTiempoAntes.Name = "nudTiempoAntes";
             this.nudTiempoAntes.Size = new System.Drawing.Size(120, 21);
-            this.nudTiempoAntes.TabIndex = 16;
+            this.nudTiempoAntes.TabIndex = 18;
             this.nudTiempoAntes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudTiempoAntes.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -435,6 +483,11 @@
             0,
             65536});
             this.nudCapacidadCiclo.Location = new System.Drawing.Point(121, 25);
+            this.nudCapacidadCiclo.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.nudCapacidadCiclo.Name = "nudCapacidadCiclo";
             this.nudCapacidadCiclo.Size = new System.Drawing.Size(120, 21);
             this.nudCapacidadCiclo.TabIndex = 15;
@@ -470,6 +523,11 @@
             0,
             65536});
             this.nudTiempoCiclo.Location = new System.Drawing.Point(121, 54);
+            this.nudTiempoCiclo.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.nudTiempoCiclo.Name = "nudTiempoCiclo";
             this.nudTiempoCiclo.Size = new System.Drawing.Size(120, 21);
             this.nudTiempoCiclo.TabIndex = 17;
@@ -506,7 +564,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(263, 29);
+            this.label8.Location = new System.Drawing.Point(263, 56);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(152, 13);
             this.label8.TabIndex = 1;
@@ -515,7 +573,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(263, 56);
+            this.label7.Location = new System.Drawing.Point(263, 85);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(165, 13);
             this.label7.TabIndex = 0;
@@ -537,7 +595,7 @@
             this.btnVolver.Location = new System.Drawing.Point(496, 18);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(64, 26);
-            this.btnVolver.TabIndex = 23;
+            this.btnVolver.TabIndex = 24;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -547,7 +605,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(426, 18);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(64, 26);
-            this.btnGuardar.TabIndex = 22;
+            this.btnGuardar.TabIndex = 23;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -675,9 +733,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(10, 55);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(31, 13);
+            this.label6.Size = new System.Drawing.Size(70, 13);
             this.label6.TabIndex = 7;
-            this.label6.Text = "Tipo:";
+            this.label6.Text = "Tipo recurso:";
             // 
             // label5
             // 
@@ -869,6 +927,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudCostoHora)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCapacidadUnidadHora)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTiempoDespues)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTiempoAntes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCapacidadCiclo)).EndInit();
@@ -948,5 +1007,7 @@
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbActivo;
         private System.Windows.Forms.NumericUpDown nudHorasExtendido;
         private System.Windows.Forms.NumericUpDown nudHorasNormal;
+        private System.Windows.Forms.NumericUpDown nudCapacidadUnidadHora;
+        private System.Windows.Forms.Label label10;
     }
 }
