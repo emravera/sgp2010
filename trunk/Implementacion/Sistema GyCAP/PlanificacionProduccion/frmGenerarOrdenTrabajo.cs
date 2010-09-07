@@ -542,7 +542,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     }
                     else
                     {
-                        //Planeamos hacia atrás                        
+                        //Planeamos hacia atrás
                         DateTime fecha = DateTime.Parse(DateTime.Parse(dtpFechaPlanear.GetFecha().ToString()).ToShortDateString());
                         decimal factor = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(codigo).DORD_CANTIDADESTIMADA / 100;
                         BLL.OrdenTrabajoBLL.PlanearFechaHaciaAtras(codigo, fecha, factor, tvDependenciaCompleta, dsOrdenTrabajo, dsEstructura, dsHojaRuta);

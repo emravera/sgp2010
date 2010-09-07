@@ -468,6 +468,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmCliente";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Clientes";
             this.Load += new System.EventHandler(this.frmCliente_Load);
             this.gbDatos.ResumeLayout(false);
