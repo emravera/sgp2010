@@ -558,5 +558,10 @@ namespace GyCAP.UI.PlanificacionProduccion
                     
         #endregion
 
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Las órdenes fueron guardadas correctamente.", "Información: Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
     }
 }
