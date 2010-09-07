@@ -94,7 +94,7 @@ namespace GyCAP.UI.GestionPedido
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.inicio;
                     tcPedido.SelectedTab = tpBuscar;
-                    txtNombreBuscar.Focus();
+                    //txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
                     setControles(false);
@@ -181,7 +181,7 @@ namespace GyCAP.UI.GestionPedido
             {
                 dvDetallePedido.RowFilter = "DPED_CODIGO < 0";
                 dgvDetallePedido.Refresh();
-                cboEstado.SetSelectedIndex(1)  ; //Esto tiene que ser un parametro no puede quedar hardcodiado
+                cboEstado.SetSelectedIndex(2)  ; //Esto tiene que ser un parametro no puede quedar hardcodiado
                 cboEstado.Enabled = false;
 
                 cboClientes.SetTexto("Seleccione un Cliente...");
