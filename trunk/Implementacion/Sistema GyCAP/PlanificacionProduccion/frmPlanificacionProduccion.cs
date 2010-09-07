@@ -265,6 +265,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             frmGenerarOrdenTrabajo.Instancia.Parent = areaTrabajo;
             frmGenerarOrdenTrabajo.Instancia.Location = PosicionarFormulario();
             frmGenerarOrdenTrabajo.Instancia.Show();
+            frmGenerarOrdenTrabajo.Instancia.Focus();
         }
 
         private void btnConsultarOrdenTrabajo_Click(object sender, EventArgs e)
@@ -273,6 +274,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             frmGenerarOrdenTrabajo.Instancia.Parent = areaTrabajo;
             frmGenerarOrdenTrabajo.Instancia.Location = PosicionarFormulario();
             frmGenerarOrdenTrabajo.Instancia.Show();
+            frmGenerarOrdenTrabajo.Instancia.Focus();
         }
 
         #endregion
@@ -285,6 +287,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             frmPlanMensual.Instancia.Parent = areaTrabajo;
             frmPlanMensual.Instancia.Location = PosicionarFormulario();
             frmPlanMensual.Instancia.Show();
+            frmPlanMensual.Instancia.Focus();
         }
 
         private void btnConsultarPlanMensual_Click(object sender, EventArgs e)
@@ -293,6 +296,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             frmPlanMensual.Instancia.Parent = areaTrabajo;
             frmPlanMensual.Instancia.Location = PosicionarFormulario();
             frmPlanMensual.Instancia.Show();
+            frmPlanMensual.Instancia.Focus();
         }
 
         #endregion
@@ -305,6 +309,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             frmPlanSemanal.Instancia.Parent = areaTrabajo;
             frmPlanSemanal.Instancia.Location = PosicionarFormulario();
             frmPlanSemanal.Instancia.Show();
+            frmPlanSemanal.Instancia.Focus();
         }
 
         private void btnConsultarPlanSemanal_Click(object sender, EventArgs e)
@@ -313,6 +318,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             frmPlanSemanal.Instancia.Parent = areaTrabajo;
             frmPlanSemanal.Instancia.Location = PosicionarFormulario();
             frmPlanSemanal.Instancia.Show();
+            frmPlanSemanal.Instancia.Focus();
         }
 
         #endregion
