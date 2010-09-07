@@ -187,10 +187,10 @@ namespace GyCAP.DAL
                 DB.FinalizarTransaccion();
                 
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
                 transaccion.Rollback();
-                throw new Entidades.Excepciones.BaseDeDatosException();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
             }            
           
         }

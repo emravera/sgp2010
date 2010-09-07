@@ -1127,11 +1127,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                         }
                     }
 
-
-
-
-
-
                     int codigo = Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dpsem_codigo"]);
                     dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(codigo).DPSEM_CANTIDADESTIMADA -= 1;
                 }
