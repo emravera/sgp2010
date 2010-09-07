@@ -247,14 +247,14 @@ namespace GyCAP.UI.GestionPedido
             dgvCocinas.Columns.Add("COC_CODIGO_PRODUCTO", "Código");
             dgvCocinas.Columns.Add("MOD_CODIGO", "Modelo");
             dgvCocinas.Columns.Add("MCA_CODIGO", "Marca");
-            dgvCocinas.Columns.Add("COC_ESTADO", "Estado");
+            //dgvCocinas.Columns.Add("COC_ESTADO", "Estado");
             dgvCocinas.Columns.Add("COC_COSTO", "Costo");
             dgvCocinas.Columns["COC_CODIGO_PRODUCTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCocinas.Columns["MOD_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCocinas.Columns["MCA_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCocinas.Columns["COC_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvCocinas.Columns["COC_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvCocinas.Columns["COC_COSTO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvCocinas.Columns["COC_ESTADO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvCocinas.Columns["COC_ESTADO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             
             //Indicamos de dónde van a sacar los datos cada columna
@@ -273,7 +273,7 @@ namespace GyCAP.UI.GestionPedido
             dgvCocinas.Columns["COC_CODIGO_PRODUCTO"].DataPropertyName = "COC_CODIGO_PRODUCTO";
             dgvCocinas.Columns["MOD_CODIGO"].DataPropertyName = "MOD_CODIGO";
             dgvCocinas.Columns["MCA_CODIGO"].DataPropertyName = "MCA_CODIGO";
-            dgvCocinas.Columns["COC_ESTADO"].DataPropertyName = "COC_ESTADO";
+            //dgvCocinas.Columns["COC_ESTADO"].DataPropertyName = "COC_ESTADO";
             dgvCocinas.Columns["COC_COSTO"].DataPropertyName = "COC_COSTO";
 
             //Creamos el dataview y lo asignamos a la grilla
@@ -285,7 +285,7 @@ namespace GyCAP.UI.GestionPedido
             dgvDetallePedido.DataSource = dvDetallePedido;
 
             dvCocinas = new DataView(dsCliente.COCINAS);
-            dvCocinas.Sort = "COC_CODIGO ASC";
+            dvCocinas.Sort = "COC_CODIGO_PRODUCTO ASC";
             dgvCocinas.DataSource = dvCocinas;
 
             dvClientes = new DataView(dsCliente.CLIENTES);
@@ -304,6 +304,8 @@ namespace GyCAP.UI.GestionPedido
                 BLL.EstadoDetallePedidoBLL.ObtenerTodos(dsCliente.ESTADO_DETALLE_PEDIDOS);
                 BLL.CocinaBLL.ObtenerCocinas(dsCliente.COCINAS);
                 BLL.ClienteBLL.ObtenerTodos(dsCliente.CLIENTES);
+                BLL.MarcaBLL.ObtenerTodos(dsCliente.MARCAS);
+                BLL.ModeloCocinaBLL.ObtenerTodos(dsCliente.MODELOS_COCINAS);
 
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -784,6 +786,27 @@ namespace GyCAP.UI.GestionPedido
             {
                 Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
                 (sender as Button).Location = punto;
+            }
+        }
+
+        private void dgvCocinas_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != string.Empty)
+            {
+                string nombre;
+                switch (dgvCocinas.Columns[e.ColumnIndex].Name)
+                {
+                    case "MOD_CODIGO":
+                        nombre = dsCliente.MODELOS_COCINAS.FindByMOD_CODIGO(Convert.ToInt32(e.Value.ToString())).MOD_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "MCA_CODIGO":
+                        nombre = dsCliente.MARCAS.FindByMCA_CODIGO(Convert.ToInt32(e.Value.ToString())).MCA_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
