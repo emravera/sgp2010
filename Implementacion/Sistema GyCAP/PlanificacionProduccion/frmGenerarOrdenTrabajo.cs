@@ -292,7 +292,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     
                     
                     estadoInterface = estadoUI.nuevoManual;
-                    tcOrdenTrabajo.SelectedTab = tpDatos;
+                    tcOrdenTrabajo.SelectedTab = tpOrdenManual;
                     break;
                 case estadoUI.consultar:
                 case estadoUI.modificar:
