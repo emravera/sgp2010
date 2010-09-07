@@ -521,6 +521,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmOperacionesFabricacion.Instancia.Location = PosicionarFormulario();
             frmOperacionesFabricacion.Instancia.btnNuevo.PerformClick();
             frmOperacionesFabricacion.Instancia.Show();
+            frmOperacionesFabricacion.Instancia.Focus();
         }
 
         private void btnConsultarOperacionFabricacion_Click(object sender, EventArgs e)
@@ -529,6 +530,7 @@ namespace GyCAP.UI.EstructuraProducto
             frmOperacionesFabricacion.Instancia.Parent = areaTrabajo;
             frmOperacionesFabricacion.Instancia.Location = PosicionarFormulario();
             frmOperacionesFabricacion.Instancia.Show();
+            frmOperacionesFabricacion.Instancia.Focus();
         }
 
         #endregion
