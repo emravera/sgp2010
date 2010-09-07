@@ -135,19 +135,23 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.tsMenu = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cmsGrillaOrdenesTrabajo = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiBloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDesbloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
             this.tpOrdenManual = new System.Windows.Forms.TabPage();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label36 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.label38 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.seleccionadorFecha1 = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
@@ -159,17 +163,13 @@
             this.label41 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tsMenu = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.cmsGrillaOrdenesTrabajo = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiBloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDesbloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
             this.tcOrdenTrabajo.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -190,13 +190,13 @@
             this.gbNavegador.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bnNavegador)).BeginInit();
             this.bnNavegador.SuspendLayout();
+            this.tpOrdenManual.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tsMenu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.cmsGrillaOrdenesTrabajo.SuspendLayout();
-            this.tpOrdenManual.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcOrdenTrabajo
@@ -321,6 +321,7 @@
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             this.btnGuardar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnGuardar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
@@ -1337,77 +1338,6 @@
             this.label9.TabIndex = 7;
             this.label9.Text = "Origen:";
             // 
-            // tsMenu
-            // 
-            this.tsMenu.BackColor = System.Drawing.Color.Silver;
-            this.tsMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tsMenu.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator1,
-            this.btnSalir});
-            this.tsMenu.Location = new System.Drawing.Point(0, 0);
-            this.tsMenu.Name = "tsMenu";
-            this.tsMenu.Size = new System.Drawing.Size(794, 50);
-            this.tsMenu.TabIndex = 1;
-            this.tsMenu.Text = "toolStrip1";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Salir_25;
-            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(31, 47);
-            this.btnSalir.Text = "&Salir";
-            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.tcOrdenTrabajo, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tsMenu, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(794, 572);
-            this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // cmsGrillaOrdenesTrabajo
-            // 
-            this.cmsGrillaOrdenesTrabajo.AllowMerge = false;
-            this.cmsGrillaOrdenesTrabajo.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiBloquearColumna,
-            this.tsmiDesbloquearColumna});
-            this.cmsGrillaOrdenesTrabajo.Name = "cmsGrillaOrdenesTrabajo";
-            this.cmsGrillaOrdenesTrabajo.Size = new System.Drawing.Size(188, 48);
-            // 
-            // tsmiBloquearColumna
-            // 
-            this.tsmiBloquearColumna.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsmiBloquearColumna.Name = "tsmiBloquearColumna";
-            this.tsmiBloquearColumna.Size = new System.Drawing.Size(187, 22);
-            this.tsmiBloquearColumna.Text = "Bloquear columna";
-            this.tsmiBloquearColumna.Click += new System.EventHandler(this.tsmiBloquearColumna_Click);
-            // 
-            // tsmiDesbloquearColumna
-            // 
-            this.tsmiDesbloquearColumna.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsmiDesbloquearColumna.Name = "tsmiDesbloquearColumna";
-            this.tsmiDesbloquearColumna.Size = new System.Drawing.Size(187, 22);
-            this.tsmiDesbloquearColumna.Text = "Desbloquear columna";
-            this.tsmiDesbloquearColumna.Click += new System.EventHandler(this.tsmiDesbloquearColumna_Click);
-            // 
             // tpOrdenManual
             // 
             this.tpOrdenManual.Controls.Add(this.groupBox8);
@@ -1444,6 +1374,111 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Datos de la orden de trabajo manual";
             // 
+            // button1
+            // 
+            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_25;
+            this.button1.Location = new System.Drawing.Point(342, 447);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(82, 36);
+            this.button1.TabIndex = 74;
+            this.button1.Text = "Detalle";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.radioButton2);
+            this.groupBox9.Controls.Add(this.radioButton1);
+            this.groupBox9.Controls.Add(this.comboBox3);
+            this.groupBox9.Controls.Add(this.comboBox2);
+            this.groupBox9.Controls.Add(this.comboBox1);
+            this.groupBox9.Controls.Add(this.label45);
+            this.groupBox9.Controls.Add(this.label42);
+            this.groupBox9.Controls.Add(this.label37);
+            this.groupBox9.Controls.Add(this.numericUpDown1);
+            this.groupBox9.Controls.Add(this.label36);
+            this.groupBox9.Location = new System.Drawing.Point(94, 148);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(574, 281);
+            this.groupBox9.TabIndex = 65;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Producto a fabricar";
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(71, 66);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(14, 13);
+            this.radioButton2.TabIndex = 71;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(71, 115);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(14, 13);
+            this.radioButton1.TabIndex = 70;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(164, 63);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(317, 21);
+            this.comboBox3.TabIndex = 69;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(164, 153);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(317, 21);
+            this.comboBox2.TabIndex = 68;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(164, 112);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(317, 21);
+            this.comboBox1.TabIndex = 67;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(115, 156);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(37, 13);
+            this.label45.TabIndex = 66;
+            this.label45.Text = "Parte:";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(92, 115);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(60, 13);
+            this.label42.TabIndex = 65;
+            this.label42.Text = "Tipo parte:";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(109, 66);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(43, 13);
+            this.label37.TabIndex = 63;
+            this.label37.Text = "Cocina:";
+            // 
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(164, 190);
@@ -1466,14 +1501,20 @@
             this.label36.TabIndex = 64;
             this.label36.Text = "Cantidad:";
             // 
-            // label37
+            // button4
             // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(109, 66);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(43, 13);
-            this.label37.TabIndex = 63;
-            this.label37.Text = "Cocina:";
+            this.button4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Save_25;
+            this.button4.Location = new System.Drawing.Point(430, 447);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(82, 36);
+            this.button4.TabIndex = 73;
+            this.button4.Text = "Guardar";
+            this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // textBox3
             // 
@@ -1482,6 +1523,20 @@
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(160, 21);
             this.textBox3.TabIndex = 50;
+            // 
+            // button3
+            // 
+            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.System_25;
+            this.button3.Location = new System.Drawing.Point(254, 447);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(82, 36);
+            this.button3.TabIndex = 72;
+            this.button3.Text = "Generar";
+            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // label38
             // 
@@ -1583,130 +1638,76 @@
             this.label44.TabIndex = 47;
             this.label44.Text = "Origen:";
             // 
-            // groupBox9
+            // tsMenu
             // 
-            this.groupBox9.Controls.Add(this.radioButton2);
-            this.groupBox9.Controls.Add(this.radioButton1);
-            this.groupBox9.Controls.Add(this.comboBox3);
-            this.groupBox9.Controls.Add(this.comboBox2);
-            this.groupBox9.Controls.Add(this.comboBox1);
-            this.groupBox9.Controls.Add(this.label45);
-            this.groupBox9.Controls.Add(this.label42);
-            this.groupBox9.Controls.Add(this.label37);
-            this.groupBox9.Controls.Add(this.numericUpDown1);
-            this.groupBox9.Controls.Add(this.label36);
-            this.groupBox9.Location = new System.Drawing.Point(94, 148);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(574, 281);
-            this.groupBox9.TabIndex = 65;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Producto a fabricar";
+            this.tsMenu.BackColor = System.Drawing.Color.Silver;
+            this.tsMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tsMenu.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator1,
+            this.btnSalir});
+            this.tsMenu.Location = new System.Drawing.Point(0, 0);
+            this.tsMenu.Name = "tsMenu";
+            this.tsMenu.Size = new System.Drawing.Size(794, 50);
+            this.tsMenu.TabIndex = 1;
+            this.tsMenu.Text = "toolStrip1";
             // 
-            // label42
+            // toolStripSeparator1
             // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(92, 115);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(60, 13);
-            this.label42.TabIndex = 65;
-            this.label42.Text = "Tipo parte:";
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
             // 
-            // label45
+            // btnSalir
             // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(115, 156);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(37, 13);
-            this.label45.TabIndex = 66;
-            this.label45.Text = "Parte:";
+            this.btnSalir.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Salir_25;
+            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(31, 47);
+            this.btnSalir.Text = "&Salir";
+            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // comboBox1
+            // tableLayoutPanel1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(164, 112);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(317, 21);
-            this.comboBox1.TabIndex = 67;
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.tcOrdenTrabajo, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tsMenu, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(794, 572);
+            this.tableLayoutPanel1.TabIndex = 2;
             // 
-            // comboBox2
+            // cmsGrillaOrdenesTrabajo
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(164, 153);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(317, 21);
-            this.comboBox2.TabIndex = 68;
+            this.cmsGrillaOrdenesTrabajo.AllowMerge = false;
+            this.cmsGrillaOrdenesTrabajo.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiBloquearColumna,
+            this.tsmiDesbloquearColumna});
+            this.cmsGrillaOrdenesTrabajo.Name = "cmsGrillaOrdenesTrabajo";
+            this.cmsGrillaOrdenesTrabajo.Size = new System.Drawing.Size(188, 48);
             // 
-            // comboBox3
+            // tsmiBloquearColumna
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(164, 63);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(317, 21);
-            this.comboBox3.TabIndex = 69;
+            this.tsmiBloquearColumna.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsmiBloquearColumna.Name = "tsmiBloquearColumna";
+            this.tsmiBloquearColumna.Size = new System.Drawing.Size(187, 22);
+            this.tsmiBloquearColumna.Text = "Bloquear columna";
+            this.tsmiBloquearColumna.Click += new System.EventHandler(this.tsmiBloquearColumna_Click);
             // 
-            // radioButton1
+            // tsmiDesbloquearColumna
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(71, 115);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(14, 13);
-            this.radioButton1.TabIndex = 70;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(71, 66);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(14, 13);
-            this.radioButton2.TabIndex = 71;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Save_25;
-            this.button4.Location = new System.Drawing.Point(430, 447);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(82, 36);
-            this.button4.TabIndex = 73;
-            this.button4.Text = "Guardar";
-            this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.System_25;
-            this.button3.Location = new System.Drawing.Point(254, 447);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(82, 36);
-            this.button3.TabIndex = 72;
-            this.button3.Text = "Generar";
-            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_25;
-            this.button1.Location = new System.Drawing.Point(342, 447);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(82, 36);
-            this.button1.TabIndex = 74;
-            this.button1.Text = "Detalle";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = true;
+            this.tsmiDesbloquearColumna.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsmiDesbloquearColumna.Name = "tsmiDesbloquearColumna";
+            this.tsmiDesbloquearColumna.Size = new System.Drawing.Size(187, 22);
+            this.tsmiDesbloquearColumna.Text = "Desbloquear columna";
+            this.tsmiDesbloquearColumna.Click += new System.EventHandler(this.tsmiDesbloquearColumna_Click);
             // 
             // frmGenerarOrdenTrabajo
             // 
@@ -1749,17 +1750,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.bnNavegador)).EndInit();
             this.bnNavegador.ResumeLayout(false);
             this.bnNavegador.PerformLayout();
+            this.tpOrdenManual.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.cmsGrillaOrdenesTrabajo.ResumeLayout(false);
-            this.tpOrdenManual.ResumeLayout(false);
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
             this.ResumeLayout(false);
 
         }
