@@ -37,9 +37,6 @@
             this.panelMPPrincipal = new System.Windows.Forms.Panel();
             this.btnConsultarMPPrincipal = new System.Windows.Forms.Button();
             this.btnNuevoMPPrincipal = new System.Windows.Forms.Button();
-            this.btnMenu = new System.Windows.Forms.Button();
-            this.scUp = new System.Windows.Forms.SplitContainer();
-            this.scDown = new System.Windows.Forms.SplitContainer();
             this.btnOrdenTrabajo = new System.Windows.Forms.Button();
             this.panelOrdenTrabajo = new System.Windows.Forms.Panel();
             this.btnConsultarOrdenTrabajo = new System.Windows.Forms.Button();
@@ -58,19 +55,22 @@
             this.btnNuevoPlanSemanal = new System.Windows.Forms.Button();
             this.panelSalir = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnMenu = new System.Windows.Forms.Button();
+            this.scUp = new System.Windows.Forms.SplitContainer();
+            this.scDown = new System.Windows.Forms.SplitContainer();
             this.flpMenu.SuspendLayout();
             this.panelDemanda.SuspendLayout();
             this.panelMPPrincipal.SuspendLayout();
-            this.scUp.Panel1.SuspendLayout();
-            this.scUp.SuspendLayout();
-            this.scDown.Panel1.SuspendLayout();
-            this.scDown.Panel2.SuspendLayout();
-            this.scDown.SuspendLayout();
             this.panelOrdenTrabajo.SuspendLayout();
             this.panelPlanAnual.SuspendLayout();
             this.panelPlanMensual.SuspendLayout();
             this.panelPlanSemanal.SuspendLayout();
             this.panelSalir.SuspendLayout();
+            this.scUp.Panel1.SuspendLayout();
+            this.scUp.SuspendLayout();
+            this.scDown.Panel1.SuspendLayout();
+            this.scDown.Panel2.SuspendLayout();
+            this.scDown.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDemanda
@@ -242,67 +242,6 @@
             this.btnNuevoMPPrincipal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoMPPrincipal.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
-            // btnMenu
-            // 
-            this.btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
-            this.btnMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMenu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
-            this.btnMenu.Location = new System.Drawing.Point(0, 0);
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(13, 566);
-            this.btnMenu.TabIndex = 0;
-            this.btnMenu.Text = "Menú";
-            this.btnMenu.UseVisualStyleBackColor = true;
-            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
-            // 
-            // scUp
-            // 
-            this.scUp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scUp.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.scUp.IsSplitterFixed = true;
-            this.scUp.Location = new System.Drawing.Point(0, 0);
-            this.scUp.Name = "scUp";
-            // 
-            // scUp.Panel1
-            // 
-            this.scUp.Panel1.AutoScroll = true;
-            this.scUp.Panel1.Controls.Add(this.btnMenu);
-            this.scUp.Panel1MinSize = 20;
-            // 
-            // scUp.Panel2
-            // 
-            this.scUp.Panel2.AutoScroll = true;
-            this.scUp.Panel2.AutoScrollMargin = new System.Drawing.Size(1000, 1000);
-            this.scUp.Panel2.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.scUp_Panel2_ControlRemoved);
-            this.scUp.Size = new System.Drawing.Size(624, 566);
-            this.scUp.SplitterDistance = 20;
-            this.scUp.SplitterWidth = 3;
-            this.scUp.TabIndex = 0;
-            // 
-            // scDown
-            // 
-            this.scDown.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.scDown.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scDown.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.scDown.IsSplitterFixed = true;
-            this.scDown.Location = new System.Drawing.Point(0, 0);
-            this.scDown.Name = "scDown";
-            // 
-            // scDown.Panel1
-            // 
-            this.scDown.Panel1.AutoScroll = true;
-            this.scDown.Panel1.Controls.Add(this.flpMenu);
-            // 
-            // scDown.Panel2
-            // 
-            this.scDown.Panel2.AutoScroll = true;
-            this.scDown.Panel2.Controls.Add(this.scUp);
-            this.scDown.Size = new System.Drawing.Size(792, 570);
-            this.scDown.SplitterDistance = 161;
-            this.scDown.SplitterWidth = 3;
-            this.scDown.TabIndex = 4;
-            // 
             // btnOrdenTrabajo
             // 
             this.btnOrdenTrabajo.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -343,12 +282,12 @@
             this.btnConsultarOrdenTrabajo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnConsultarOrdenTrabajo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarOrdenTrabajo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarOrdenTrabajo.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_48;
-            this.btnConsultarOrdenTrabajo.Location = new System.Drawing.Point(48, 74);
+            this.btnConsultarOrdenTrabajo.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.New_48;
+            this.btnConsultarOrdenTrabajo.Location = new System.Drawing.Point(52, 74);
             this.btnConsultarOrdenTrabajo.Name = "btnConsultarOrdenTrabajo";
-            this.btnConsultarOrdenTrabajo.Size = new System.Drawing.Size(63, 71);
+            this.btnConsultarOrdenTrabajo.Size = new System.Drawing.Size(54, 71);
             this.btnConsultarOrdenTrabajo.TabIndex = 1;
-            this.btnConsultarOrdenTrabajo.Text = "Consultar";
+            this.btnConsultarOrdenTrabajo.Text = "Manual";
             this.btnConsultarOrdenTrabajo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarOrdenTrabajo.UseVisualStyleBackColor = true;
             this.btnConsultarOrdenTrabajo.Click += new System.EventHandler(this.btnConsultarOrdenTrabajo_Click);
@@ -365,11 +304,11 @@
             this.btnNuevoOrdenTrabajo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnNuevoOrdenTrabajo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNuevoOrdenTrabajo.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.New_48;
-            this.btnNuevoOrdenTrabajo.Location = new System.Drawing.Point(52, 3);
+            this.btnNuevoOrdenTrabajo.Location = new System.Drawing.Point(44, 3);
             this.btnNuevoOrdenTrabajo.Name = "btnNuevoOrdenTrabajo";
-            this.btnNuevoOrdenTrabajo.Size = new System.Drawing.Size(54, 71);
+            this.btnNuevoOrdenTrabajo.Size = new System.Drawing.Size(71, 71);
             this.btnNuevoOrdenTrabajo.TabIndex = 0;
-            this.btnNuevoOrdenTrabajo.Text = " Nuevo";
+            this.btnNuevoOrdenTrabajo.Text = "Automático";
             this.btnNuevoOrdenTrabajo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoOrdenTrabajo.UseVisualStyleBackColor = true;
             this.btnNuevoOrdenTrabajo.Click += new System.EventHandler(this.btnNuevoOrdenTrabajo_Click);
@@ -626,6 +565,67 @@
             this.button1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.button1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
+            // btnMenu
+            // 
+            this.btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
+            this.btnMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMenu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+            this.btnMenu.Location = new System.Drawing.Point(0, 0);
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(13, 566);
+            this.btnMenu.TabIndex = 0;
+            this.btnMenu.Text = "Menú";
+            this.btnMenu.UseVisualStyleBackColor = true;
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
+            // 
+            // scUp
+            // 
+            this.scUp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scUp.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.scUp.IsSplitterFixed = true;
+            this.scUp.Location = new System.Drawing.Point(0, 0);
+            this.scUp.Name = "scUp";
+            // 
+            // scUp.Panel1
+            // 
+            this.scUp.Panel1.AutoScroll = true;
+            this.scUp.Panel1.Controls.Add(this.btnMenu);
+            this.scUp.Panel1MinSize = 20;
+            // 
+            // scUp.Panel2
+            // 
+            this.scUp.Panel2.AutoScroll = true;
+            this.scUp.Panel2.AutoScrollMargin = new System.Drawing.Size(1000, 1000);
+            this.scUp.Panel2.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.scUp_Panel2_ControlRemoved);
+            this.scUp.Size = new System.Drawing.Size(624, 566);
+            this.scUp.SplitterDistance = 20;
+            this.scUp.SplitterWidth = 3;
+            this.scUp.TabIndex = 0;
+            // 
+            // scDown
+            // 
+            this.scDown.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.scDown.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scDown.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.scDown.IsSplitterFixed = true;
+            this.scDown.Location = new System.Drawing.Point(0, 0);
+            this.scDown.Name = "scDown";
+            // 
+            // scDown.Panel1
+            // 
+            this.scDown.Panel1.AutoScroll = true;
+            this.scDown.Panel1.Controls.Add(this.flpMenu);
+            // 
+            // scDown.Panel2
+            // 
+            this.scDown.Panel2.AutoScroll = true;
+            this.scDown.Panel2.Controls.Add(this.scUp);
+            this.scDown.Size = new System.Drawing.Size(792, 570);
+            this.scDown.SplitterDistance = 161;
+            this.scDown.SplitterWidth = 3;
+            this.scDown.TabIndex = 4;
+            // 
             // frmPlanificacionProduccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -643,11 +643,6 @@
             this.panelDemanda.PerformLayout();
             this.panelMPPrincipal.ResumeLayout(false);
             this.panelMPPrincipal.PerformLayout();
-            this.scUp.Panel1.ResumeLayout(false);
-            this.scUp.ResumeLayout(false);
-            this.scDown.Panel1.ResumeLayout(false);
-            this.scDown.Panel2.ResumeLayout(false);
-            this.scDown.ResumeLayout(false);
             this.panelOrdenTrabajo.ResumeLayout(false);
             this.panelOrdenTrabajo.PerformLayout();
             this.panelPlanAnual.ResumeLayout(false);
@@ -658,6 +653,11 @@
             this.panelPlanSemanal.PerformLayout();
             this.panelSalir.ResumeLayout(false);
             this.panelSalir.PerformLayout();
+            this.scUp.Panel1.ResumeLayout(false);
+            this.scUp.ResumeLayout(false);
+            this.scDown.Panel1.ResumeLayout(false);
+            this.scDown.Panel2.ResumeLayout(false);
+            this.scDown.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

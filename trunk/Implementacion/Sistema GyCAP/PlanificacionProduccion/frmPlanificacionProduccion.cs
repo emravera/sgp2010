@@ -264,6 +264,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             frmGenerarOrdenTrabajo.Instancia.TopLevel = false;
             frmGenerarOrdenTrabajo.Instancia.Parent = areaTrabajo;
             frmGenerarOrdenTrabajo.Instancia.Location = PosicionarFormulario();
+            frmGenerarOrdenTrabajo.Instancia.SetEstadoInicial(frmGenerarOrdenTrabajo.estadoInicialNuevoAutmatico);
             frmGenerarOrdenTrabajo.Instancia.Show();
             frmGenerarOrdenTrabajo.Instancia.Focus();
         }
@@ -273,6 +274,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             frmGenerarOrdenTrabajo.Instancia.TopLevel = false;
             frmGenerarOrdenTrabajo.Instancia.Parent = areaTrabajo;
             frmGenerarOrdenTrabajo.Instancia.Location = PosicionarFormulario();
+            frmGenerarOrdenTrabajo.Instancia.SetEstadoInicial(frmGenerarOrdenTrabajo.estadoInicialNuevoManual);
             frmGenerarOrdenTrabajo.Instancia.Show();
             frmGenerarOrdenTrabajo.Instancia.Focus();
         }
