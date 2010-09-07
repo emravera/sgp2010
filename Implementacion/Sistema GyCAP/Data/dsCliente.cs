@@ -1,4 +1,4 @@
-﻿namespace GyCAP.Data
+﻿namespace GyCAP.Data.dsClienteTableAdapters
 {
 }
 namespace GyCAP.Data

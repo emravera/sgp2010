@@ -372,6 +372,7 @@
             this.dgvCocinas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCocinas.Size = new System.Drawing.Size(441, 164);
             this.dgvCocinas.TabIndex = 0;
+            this.dgvCocinas.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCocinas_CellFormatting);
             // 
             // slideAgregar
             // 
