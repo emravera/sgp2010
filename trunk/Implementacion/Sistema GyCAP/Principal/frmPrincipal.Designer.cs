@@ -83,10 +83,10 @@
             this.btnPlanSemanal = new System.Windows.Forms.ToolStripButton();
             this.toolCliente = new System.Windows.Forms.ToolStripButton();
             this.btnOperaciones = new System.Windows.Forms.ToolStripButton();
+            this.toolPedidos = new System.Windows.Forms.ToolStripButton();
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.toolPedidos = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -165,6 +165,7 @@
             this.menuItemGP.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
             this.menuItemGP.Size = new System.Drawing.Size(307, 22);
             this.menuItemGP.Text = "&Pedidos";
+            this.menuItemGP.Click += new System.EventHandler(this.menuItemGP_Click);
             // 
             // menuItemGS
             // 
@@ -607,6 +608,16 @@
             this.btnOperaciones.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnOperaciones.Click += new System.EventHandler(this.btnOperaciones_Click);
             // 
+            // toolPedidos
+            // 
+            this.toolPedidos.Image = ((System.Drawing.Image)(resources.GetObject("toolPedidos.Image")));
+            this.toolPedidos.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolPedidos.Name = "toolPedidos";
+            this.toolPedidos.Size = new System.Drawing.Size(48, 33);
+            this.toolPedidos.Text = "Pedidos";
+            this.toolPedidos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolPedidos.Click += new System.EventHandler(this.toolPedidos_Click);
+            // 
             // barraEstado
             // 
             this.barraEstado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -622,16 +633,6 @@
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(38, 17);
             this.lblEstado.Text = "Status";
-            // 
-            // toolPedidos
-            // 
-            this.toolPedidos.Image = ((System.Drawing.Image)(resources.GetObject("toolPedidos.Image")));
-            this.toolPedidos.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolPedidos.Name = "toolPedidos";
-            this.toolPedidos.Size = new System.Drawing.Size(48, 33);
-            this.toolPedidos.Text = "Pedidos";
-            this.toolPedidos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolPedidos.Click += new System.EventHandler(this.toolPedidos_Click);
             // 
             // frmPrincipal
             // 

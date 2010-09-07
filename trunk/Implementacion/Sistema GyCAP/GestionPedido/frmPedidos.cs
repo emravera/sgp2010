@@ -768,5 +768,23 @@ namespace GyCAP.UI.GestionPedido
             cboClientes.SetDatos(dvClientes, "CLI_CODIGO", "CLI_RAZONSOCIAL", "", false);
             cboClientes.SetSelectedValue(Convert.ToInt32(cliente.Codigo.ToString()));
         }
+
+        private void button_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
+                (sender as Button).Location = punto;
+            }
+        }
+
+        private void button_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
+                (sender as Button).Location = punto;
+            }
+        }
     }
 }

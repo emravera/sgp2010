@@ -241,6 +241,12 @@ namespace Principal
             GyCAP.UI.GestionPedido.frmPedidos.Instancia.MdiParent = this;
             GyCAP.UI.GestionPedido.frmPedidos.Instancia.Show();
         }
+
+        private void menuItemGP_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionPedido.frmGestionPedido.Instancia.MdiParent = this;
+            GyCAP.UI.GestionPedido.frmGestionPedido.Instancia.Show();
+        }
         
     }
 }
