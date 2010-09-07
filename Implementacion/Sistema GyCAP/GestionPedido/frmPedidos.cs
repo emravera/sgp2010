@@ -183,7 +183,7 @@ namespace GyCAP.UI.GestionPedido
             {
                 
                 dgvDetallePedido.Refresh();
-                cboEstado.SetSelectedIndex(1)  ; //Esto tiene que ser un parametro no puede quedar hardcodiado
+                cboEstado.SetSelectedValue(1 )  ; //Esto tiene que ser un parametro no puede quedar hardcodiado
                 cboEstado.Enabled = false;
 
                 cboClientes.SetTexto("Seleccione un Cliente...");
