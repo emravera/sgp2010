@@ -19,6 +19,8 @@ namespace GyCAP.UI.GestionPedido
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
 
+        public event Action<Entidades.Cliente> NuevoCliente;
+
         public frmCliente()
         {
             InitializeComponent();
@@ -170,6 +172,12 @@ namespace GyCAP.UI.GestionPedido
             }
         }
 
+        public void SetEstadoInicial(int estado)
+        {
+            if (estado == estadoInicialNuevo) { SetInterface(estadoUI.nuevoExterno); }
+            if (estado == estadoInicialConsultar) { SetInterface(estadoUI.inicio); }
+        }
+
         private void setControles(bool pValue)
         {
             txtRazonSocial.ReadOnly = pValue;
@@ -184,7 +192,7 @@ namespace GyCAP.UI.GestionPedido
         {
             get
             {
-                if (_frmCliente == null || _frmCliente.IsDisposed)
+                if (_frmCliente == null || _frmCliente.IsDisposed )
                 {
                     _frmCliente = new frmCliente();
                 }
@@ -368,6 +376,12 @@ namespace GyCAP.UI.GestionPedido
                         if (estadoInterface == estadoUI.nuevoExterno)
                         {
                             //Nuevo desde acceso directo, cerramos el formulario
+
+                            if (NuevoCliente != null)//preguntas si el evento esta manejado, si esta referenciado en algun otro form
+                            {
+                                NuevoCliente(cliente); //llamas el evento
+                            }
+
                             btnSalir.PerformClick();
                         }
                         else

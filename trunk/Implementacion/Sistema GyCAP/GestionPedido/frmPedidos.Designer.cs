@@ -62,16 +62,22 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.sfFechaHasta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.label13 = new System.Windows.Forms.Label();
+            this.sfFechaDesde = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.label12 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtNroPedidoBuscar = new System.Windows.Forms.TextBox();
+            this.cboEstadoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.sfFechaPrevista = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboClientes = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
             this.txtObservacion = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -82,12 +88,8 @@
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcPedido = new System.Windows.Forms.TabControl();
-            this.sfFechaHasta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.sfFechaDesde = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.cboEstadoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.sfFechaPrevista = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cboClientes = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.btnNewCliente = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePedido)).BeginInit();
             this.panelAcciones.SuspendLayout();
@@ -112,9 +114,9 @@
             // 
             this.groupBox3.Controls.Add(this.dgvDetallePedido);
             this.groupBox3.Controls.Add(this.panelAcciones);
-            this.groupBox3.Location = new System.Drawing.Point(8, 204);
+            this.groupBox3.Location = new System.Drawing.Point(6, 199);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(560, 207);
+            this.groupBox3.Size = new System.Drawing.Size(560, 201);
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Detalle del pedido";
@@ -238,16 +240,16 @@
             // 
             this.gbGuardarCancelar.Controls.Add(this.btnVolver);
             this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
-            this.gbGuardarCancelar.Location = new System.Drawing.Point(8, 415);
+            this.gbGuardarCancelar.Location = new System.Drawing.Point(6, 401);
             this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
             this.gbGuardarCancelar.Name = "gbGuardarCancelar";
-            this.gbGuardarCancelar.Size = new System.Drawing.Size(560, 47);
+            this.gbGuardarCancelar.Size = new System.Drawing.Size(560, 46);
             this.gbGuardarCancelar.TabIndex = 1;
             this.gbGuardarCancelar.TabStop = false;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(485, 15);
+            this.btnVolver.Location = new System.Drawing.Point(488, 15);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(64, 26);
             this.btnVolver.TabIndex = 18;
@@ -257,12 +259,13 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(415, 15);
+            this.btnGuardar.Location = new System.Drawing.Point(418, 15);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(64, 26);
             this.btnGuardar.TabIndex = 17;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // ofdImagen
             // 
@@ -274,7 +277,7 @@
             this.tpCocinas.Controls.Add(this.slideAgregar);
             this.tpCocinas.Location = new System.Drawing.Point(4, 5);
             this.tpCocinas.Name = "tpCocinas";
-            this.tpCocinas.Size = new System.Drawing.Size(570, 467);
+            this.tpCocinas.Size = new System.Drawing.Size(570, 448);
             this.tpCocinas.TabIndex = 2;
             this.tpCocinas.UseVisualStyleBackColor = true;
             // 
@@ -282,9 +285,9 @@
             // 
             this.gbCocinas.Controls.Add(this.panel1);
             this.gbCocinas.Controls.Add(this.dgvCocinas);
-            this.gbCocinas.Location = new System.Drawing.Point(6, 3);
+            this.gbCocinas.Location = new System.Drawing.Point(0, 0);
             this.gbCocinas.Name = "gbCocinas";
-            this.gbCocinas.Size = new System.Drawing.Size(563, 190);
+            this.gbCocinas.Size = new System.Drawing.Size(564, 190);
             this.gbCocinas.TabIndex = 13;
             this.gbCocinas.TabStop = false;
             this.gbCocinas.Text = "Cocinas";
@@ -374,10 +377,10 @@
             // 
             this.groupBox2.Controls.Add(this.dgvLista);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(3, 115);
+            this.groupBox2.Location = new System.Drawing.Point(3, 139);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(9);
-            this.groupBox2.Size = new System.Drawing.Size(564, 349);
+            this.groupBox2.Size = new System.Drawing.Size(564, 306);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Listado de Pedidos";
@@ -395,7 +398,7 @@
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(546, 318);
+            this.dgvLista.Size = new System.Drawing.Size(546, 275);
             this.dgvLista.TabIndex = 6;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
@@ -484,6 +487,7 @@
             this.btnEliminar.Size = new System.Drawing.Size(47, 47);
             this.btnEliminar.Text = "&Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // toolStripSeparator1
             // 
@@ -522,6 +526,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
+            // sfFechaHasta
+            // 
+            this.sfFechaHasta.CustomFormat = " ";
+            this.sfFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.sfFechaHasta.Location = new System.Drawing.Point(85, 46);
+            this.sfFechaHasta.Name = "sfFechaHasta";
+            this.sfFechaHasta.Size = new System.Drawing.Size(102, 20);
+            this.sfFechaHasta.TabIndex = 1;
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -530,6 +543,15 @@
             this.label13.Size = new System.Drawing.Size(71, 13);
             this.label13.TabIndex = 13;
             this.label13.Text = "Fecha Hasta:";
+            // 
+            // sfFechaDesde
+            // 
+            this.sfFechaDesde.CustomFormat = " ";
+            this.sfFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.sfFechaDesde.Location = new System.Drawing.Point(85, 20);
+            this.sfFechaDesde.Name = "sfFechaDesde";
+            this.sfFechaDesde.Size = new System.Drawing.Size(102, 20);
+            this.sfFechaDesde.TabIndex = 0;
             // 
             // label12
             // 
@@ -556,6 +578,16 @@
             this.txtNroPedidoBuscar.Name = "txtNroPedidoBuscar";
             this.txtNroPedidoBuscar.Size = new System.Drawing.Size(131, 20);
             this.txtNroPedidoBuscar.TabIndex = 2;
+            // 
+            // cboEstadoBuscar
+            // 
+            this.cboEstadoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEstadoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboEstadoBuscar.FormattingEnabled = true;
+            this.cboEstadoBuscar.Location = new System.Drawing.Point(282, 21);
+            this.cboEstadoBuscar.Name = "cboEstadoBuscar";
+            this.cboEstadoBuscar.Size = new System.Drawing.Size(115, 21);
+            this.cboEstadoBuscar.TabIndex = 3;
             // 
             // btnBuscar
             // 
@@ -589,12 +621,14 @@
             this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDatos.Size = new System.Drawing.Size(570, 467);
+            this.tpDatos.Size = new System.Drawing.Size(570, 448);
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.label14);
+            this.gbDatos.Controls.Add(this.btnNewCliente);
             this.gbDatos.Controls.Add(this.sfFechaPrevista);
             this.gbDatos.Controls.Add(this.txtNumero);
             this.gbDatos.Controls.Add(this.label9);
@@ -605,13 +639,22 @@
             this.gbDatos.Controls.Add(this.label2);
             this.gbDatos.Controls.Add(this.label3);
             this.gbDatos.Controls.Add(this.label1);
-            this.gbDatos.Location = new System.Drawing.Point(8, 4);
+            this.gbDatos.Location = new System.Drawing.Point(3, 1);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
             this.gbDatos.Size = new System.Drawing.Size(558, 185);
             this.gbDatos.TabIndex = 16;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del pedido";
+            // 
+            // sfFechaPrevista
+            // 
+            this.sfFechaPrevista.CustomFormat = " ";
+            this.sfFechaPrevista.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.sfFechaPrevista.Location = new System.Drawing.Point(96, 69);
+            this.sfFechaPrevista.Name = "sfFechaPrevista";
+            this.sfFechaPrevista.Size = new System.Drawing.Size(284, 20);
+            this.sfFechaPrevista.TabIndex = 9;
             // 
             // txtNumero
             // 
@@ -629,6 +672,26 @@
             this.label9.Size = new System.Drawing.Size(48, 13);
             this.label9.TabIndex = 7;
             this.label9.Text = "Numero:";
+            // 
+            // cboEstado
+            // 
+            this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEstado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboEstado.FormattingEnabled = true;
+            this.cboEstado.Location = new System.Drawing.Point(96, 94);
+            this.cboEstado.Name = "cboEstado";
+            this.cboEstado.Size = new System.Drawing.Size(284, 21);
+            this.cboEstado.TabIndex = 10;
+            // 
+            // cboClientes
+            // 
+            this.cboClientes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboClientes.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboClientes.FormattingEnabled = true;
+            this.cboClientes.Location = new System.Drawing.Point(96, 44);
+            this.cboClientes.Name = "cboClientes";
+            this.cboClientes.Size = new System.Drawing.Size(284, 21);
+            this.cboClientes.TabIndex = 8;
             // 
             // label4
             // 
@@ -688,7 +751,7 @@
             this.slideControl.Location = new System.Drawing.Point(6, 3);
             this.slideControl.Name = "slideControl";
             this.slideControl.Selected = null;
-            this.slideControl.Size = new System.Drawing.Size(558, 195);
+            this.slideControl.Size = new System.Drawing.Size(564, 195);
             this.slideControl.SlideSpeed = 250;
             this.slideControl.TabIndex = 14;
             // 
@@ -699,7 +762,7 @@
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(570, 467);
+            this.tpBuscar.Size = new System.Drawing.Size(570, 448);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
@@ -716,7 +779,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(582, 532);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(582, 513);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
             // tcPedido
@@ -733,72 +796,42 @@
             this.tcPedido.Name = "tcPedido";
             this.tcPedido.Padding = new System.Drawing.Point(0, 0);
             this.tcPedido.SelectedIndex = 0;
-            this.tcPedido.Size = new System.Drawing.Size(578, 476);
+            this.tcPedido.Size = new System.Drawing.Size(578, 457);
             this.tcPedido.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcPedido.TabIndex = 8;
             // 
-            // sfFechaHasta
+            // btnNewCliente
             // 
-            this.sfFechaHasta.CustomFormat = " ";
-            this.sfFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.sfFechaHasta.Location = new System.Drawing.Point(85, 46);
-            this.sfFechaHasta.Name = "sfFechaHasta";
-            this.sfFechaHasta.Size = new System.Drawing.Size(102, 20);
-            this.sfFechaHasta.TabIndex = 1;
+            this.btnNewCliente.FlatAppearance.BorderSize = 0;
+            this.btnNewCliente.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnNewCliente.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnNewCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewCliente.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.New_25;
+            this.btnNewCliente.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNewCliente.Location = new System.Drawing.Point(386, 38);
+            this.btnNewCliente.Name = "btnNewCliente";
+            this.btnNewCliente.Size = new System.Drawing.Size(30, 30);
+            this.btnNewCliente.TabIndex = 20;
+            this.btnNewCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnNewCliente.UseVisualStyleBackColor = true;
+            this.btnNewCliente.Click += new System.EventHandler(this.btnNewCliente_Click);
             // 
-            // sfFechaDesde
+            // label14
             // 
-            this.sfFechaDesde.CustomFormat = " ";
-            this.sfFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.sfFechaDesde.Location = new System.Drawing.Point(85, 20);
-            this.sfFechaDesde.Name = "sfFechaDesde";
-            this.sfFechaDesde.Size = new System.Drawing.Size(102, 20);
-            this.sfFechaDesde.TabIndex = 0;
-            // 
-            // cboEstadoBuscar
-            // 
-            this.cboEstadoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEstadoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboEstadoBuscar.FormattingEnabled = true;
-            this.cboEstadoBuscar.Location = new System.Drawing.Point(282, 21);
-            this.cboEstadoBuscar.Name = "cboEstadoBuscar";
-            this.cboEstadoBuscar.Size = new System.Drawing.Size(115, 21);
-            this.cboEstadoBuscar.TabIndex = 3;
-            // 
-            // sfFechaPrevista
-            // 
-            this.sfFechaPrevista.CustomFormat = " ";
-            this.sfFechaPrevista.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.sfFechaPrevista.Location = new System.Drawing.Point(96, 69);
-            this.sfFechaPrevista.Name = "sfFechaPrevista";
-            this.sfFechaPrevista.Size = new System.Drawing.Size(284, 20);
-            this.sfFechaPrevista.TabIndex = 9;
-            // 
-            // cboEstado
-            // 
-            this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEstado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboEstado.FormattingEnabled = true;
-            this.cboEstado.Location = new System.Drawing.Point(96, 94);
-            this.cboEstado.Name = "cboEstado";
-            this.cboEstado.Size = new System.Drawing.Size(284, 21);
-            this.cboEstado.TabIndex = 10;
-            // 
-            // cboClientes
-            // 
-            this.cboClientes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboClientes.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboClientes.FormattingEnabled = true;
-            this.cboClientes.Location = new System.Drawing.Point(96, 44);
-            this.cboClientes.Name = "cboClientes";
-            this.cboClientes.Size = new System.Drawing.Size(284, 21);
-            this.cboClientes.TabIndex = 8;
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(418, 47);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(74, 13);
+            this.label14.TabIndex = 21;
+            this.label14.Text = "Nuevo Cliente";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(582, 532);
+            this.ClientSize = new System.Drawing.Size(582, 513);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -896,5 +929,7 @@
         private System.Windows.Forms.Label label1;
         private SlickInterface.Slide slideDatos;
         private SlickInterface.SlideControl slideControl;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button btnNewCliente;
     }
 }
