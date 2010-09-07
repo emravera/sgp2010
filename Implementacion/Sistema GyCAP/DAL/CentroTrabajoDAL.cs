@@ -30,8 +30,9 @@ namespace GyCAP.DAL
                             [cto_tiempodespues], 
                             [cto_eficiencia], 
                             [cto_costohora], 
-                            [cto_costociclo])
-                            VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13) SELECT @@Identity";
+                            [cto_costociclo],
+                            [cto_capacidadunidadhora])
+                            VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14) SELECT @@Identity";
 
             Data.dsCentroTrabajo.CENTROS_TRABAJOSRow row = ds.CENTROS_TRABAJOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsCentroTrabajo.CENTROS_TRABAJOSRow;
             object[] valoresParametros = { row.CTO_NOMBRE,
@@ -47,7 +48,8 @@ namespace GyCAP.DAL
                                            row.CTO_TIEMPODESPUES,
                                            row.CTO_EFICIENCIA,
                                            row.CTO_COSTOHORA,
-                                           row.CTO_COSTOCICLO };
+                                           row.CTO_COSTOCICLO,
+                                           row.CTO_CAPACIDADUNIDADHORA };
 
             string sqlTurnos = "INSERT INTO [TURNOSXCENTROTRABAJO] ([tur_codigo], [cto_codigo]) VALUES(@p0, @p1) SELECT @@Identity";
             
@@ -96,8 +98,9 @@ namespace GyCAP.DAL
                                 cto_tiempodespues = @p10, 
                                 cto_eficiencia = @p11, 
                                 cto_costohora = @p12, 
-                                cto_costociclo = @p13 
-                                WHERE cto_codigo = @p14";
+                                cto_costociclo = @p13,
+                                cto_capacidadunidadhora = @p14  
+                                WHERE cto_codigo = @p15";
 
             Data.dsCentroTrabajo.CENTROS_TRABAJOSRow row = ds.CENTROS_TRABAJOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsCentroTrabajo.CENTROS_TRABAJOSRow;
             object[] valorParametros = { row.CTO_NOMBRE, 
@@ -114,6 +117,7 @@ namespace GyCAP.DAL
                                            row.CTO_EFICIENCIA,
                                            row.CTO_COSTOHORA,
                                            row.CTO_COSTOCICLO,
+                                           row.CTO_CAPACIDADUNIDADHORA,
                                            row.CTO_CODIGO };
 
             string sqlITurnos = "INSERT INTO [TURNOSXCENTROTRABAJO] ([tur_codigo], [cto_codigo]) VALUES(@p0, @p1) SELECT @@Identity";
@@ -209,7 +213,7 @@ namespace GyCAP.DAL
         {
             string sql = @"SELECT cto_codigo, cto_nombre, sec_codigo, cto_tipo, cto_horastrabajonormal, cto_horastrabajoextendido,
                                   cto_activo, cto_descripcion, cto_capacidadciclo, cto_horasciclo, cto_tiempoantes, cto_tiempodespues, 
-                                  cto_eficiencia, cto_costohora, cto_costociclo FROM CENTROS_TRABAJOS WHERE 1=1 ";
+                                  cto_eficiencia, cto_costohora, cto_costociclo, cto_capacidadunidadhora FROM CENTROS_TRABAJOS WHERE 1=1 ";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
@@ -280,7 +284,7 @@ namespace GyCAP.DAL
         {
             string sql = @"SELECT cto_codigo, cto_nombre, sec_codigo, cto_tipo, cto_horastrabajonormal, cto_horastrabajoextendido,
                                   cto_activo, cto_descripcion, cto_capacidadciclo, cto_horasciclo, cto_tiempoantes, cto_tiempodespues, 
-                                  cto_eficiencia, cto_costohora, cto_costociclo FROM CENTROS_TRABAJOS WHERE 1=1 ";
+                                  cto_eficiencia, cto_costohora, cto_costociclo, cto_capacidadunidadhora FROM CENTROS_TRABAJOS WHERE 1=1 ";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
@@ -352,7 +356,7 @@ namespace GyCAP.DAL
         {
             string sql = @"SELECT cto_codigo, cto_nombre, sec_codigo, cto_tipo, cto_horastrabajonormal, cto_horastrabajoextendido,
                                   cto_activo, cto_descripcion, cto_capacidadciclo, cto_horasciclo, cto_tiempoantes, cto_tiempodespues, 
-                                  cto_eficiencia, cto_costohora, cto_costociclo FROM CENTROS_TRABAJOS WHERE cto_codigo = @p0";
+                                  cto_eficiencia, cto_costohora, cto_costociclo, cto_capacidadunidadhora FROM CENTROS_TRABAJOS WHERE cto_codigo = @p0";
 
             object[] valoresParametros = { codigoCentro };
 

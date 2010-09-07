@@ -399,22 +399,9 @@ namespace GyCAP.BLL
             
         }
 
-        //public static string PlanearFechaHaciaAtras(int codigoOrden, DateTime fechaFinalizacion, TreeView tvOrden, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
-        //{
-            //TreeNode nodoOrden = tvOrden.Nodes[codigoOrden.ToString()];
-            //dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigoOrden).ORD_FECHAFINESTIMADA = fechaFinalizacion;
-            //DateTime fechainicio = fechaFinalizacion;
-
-            //TimeSpan tiempo = new TimeSpan(0, 0, 0);
-
-            //object mensaje = string.Empty;
-            //mostrar(nodoOrden, ref mensaje);
-            //return mensaje.ToString();
-       // }
-
-        public static string PlanearFechaHaciaAtras(int codigoOrden, DateTime fechaFinalizacion, TreeView tvOrden, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
+        public static string PlanearFechaHaciaAtras(int codigoOrden, DateTime fechaFinalizacion, TreeView tvDependenciaCompleta, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
         {
-            TreeNode nodoOrden = tvOrden.Nodes[codigoOrden.ToString()];
+            TreeNode nodoOrden = tvDependenciaCompleta.Nodes[codigoOrden.ToString()];
             dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigoOrden).ORD_FECHAFINESTIMADA = fechaFinalizacion;
             DateTime fechainicio = fechaFinalizacion;
             
@@ -423,33 +410,14 @@ namespace GyCAP.BLL
             foreach (TreeNode nodoHijo in nodoOrden.Nodes)
             {
                 nuevoTiempo = 0;
-                mostrar2(nodoHijo, ref mensaje, ref nuevoTiempo, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                CalcularFechas(nodoHijo, ref mensaje, ref nuevoTiempo, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
                 if (nuevoTiempo > tiempoMayor) { tiempoMayor = nuevoTiempo; }
             }
             
             return mensaje.ToString() + "\n\n" + tiempoMayor.ToString();
         }
 
-        private static void mostrar(TreeNode nodo, ref object mensaje, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
-        {
-            if (nodo != null)
-            {
-                if (mensaje == null) { mensaje = nodo.Text; }
-                else 
-                { 
-                    mensaje = mensaje.ToString() + "\n" + nodo.Text;
-                    decimal codOperacion = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).OPR_NUMERO;
-                    mensaje = mensaje.ToString() + "-" + dsHojaRuta.OPERACIONES.FindByOPR_NUMERO(codOperacion).OPR_HORASREQUERIDA.ToString();
-                }
-                
-                foreach (TreeNode nodoHijo in nodo.Nodes)
-                {
-                    mostrar(nodoHijo, ref mensaje, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
-                }
-            }
-        }
-
-        private static void mostrar2(TreeNode nodo, ref object mensaje, ref decimal tiempo, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
+        private static void CalcularFechas(TreeNode nodo, ref object mensaje, ref decimal tiempo, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
         {
             if (nodo != null)
             {                
@@ -461,7 +429,7 @@ namespace GyCAP.BLL
                 foreach (TreeNode nodoHijo in nodo.Nodes)
                 {
                     decimal tiempoNuevo = tiempoActual;
-                    mostrar2(nodoHijo, ref mensaje, ref tiempoNuevo, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                    CalcularFechas(nodoHijo, ref mensaje, ref tiempoNuevo, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
                     if (tiempoNuevo > tiempo) { tiempo = tiempoNuevo; mensaje = mensaje.ToString() + "*" + tiempo.ToString(); }
                 }
                 
