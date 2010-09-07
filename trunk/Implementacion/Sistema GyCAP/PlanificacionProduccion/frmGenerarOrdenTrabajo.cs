@@ -519,6 +519,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     if (cbModoPlanearFecha.GetSelectedValueInt() == 0)
                     {
                         //Planeamos hacia adelante
+                        MessageBox.Show(BLL.OrdenTrabajoBLL.PlanearFechaHaciaAtras(Convert.ToInt32(dvOrdenTrabajo[dgvListaOrdenTrabajo.SelectedRows[0].Index]["ord_numero"].ToString()), DateTime.Today, tvDependenciaCompleta, dsOrdenTrabajo, dsEstructura, dsHojaRuta));
                     }
                     else
                     {
