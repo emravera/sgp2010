@@ -9,210 +9,252 @@ namespace GyCAP.DAL
 {
     public class PedidoDAL
     {
-//        public static void Insertar(Data.dsCliente dsCliente)
-//        {
-//            //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
-//            string sqlInsert = @"INSERT INTO [PIEZAS]
-//                               ([pza_nombre]
-//                               ,[te_codigo]
-//                               ,[pza_descripcion]
-//                               ,[pza_cantidadstock]
-//                               ,[par_codigo]
-//                               ,[pno_codigo]
-//                               ,[pza_codigoparte]
-//                               ,[pza_costo]
-//                               ,[hr_codigo]
-//                               ,[pza_costofijo]) 
-//                               VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9) SELECT @@Identity";
+        public static void Insertar(Data.dsCliente dsCliente)
+        {
+            //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
+            string sqlInsert = @"INSERT INTO [PEDIDOS]
+                               ([CLI_CODIGO]
+                               ,[EPED_CODIGO]
+                               ,[PED_FECHAENTREGAPREVISTA]
+                               ,[PED_FECHA_ALTA]
+                               ,[PED_OBSERVACIONES]
+                               ,[PED_NUMERO]) 
+                               VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
 
-//            //Así obtenemos la pieza nueva del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
-//            Data.dsEstructura.PIEZASRow rowPieza = dsCliente.PIEZAS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.PIEZASRow;
-//            object hojaRuta = DBNull.Value;
-//            if (!rowPieza.IsHR_CODIGONull()) { hojaRuta = rowPieza.HR_CODIGO; }
-//            object[] valorParametros = { rowPieza.PZA_NOMBRE, 
-//                                           rowPieza.TE_CODIGO, 
-//                                           rowPieza.PZA_DESCRIPCION, 
-//                                           0, 
-//                                           rowPieza.PAR_CODIGO, 
-//                                           rowPieza.PNO_CODIGO, 
-//                                           rowPieza.PZA_CODIGOPARTE, 
-//                                           rowPieza.PZA_COSTO, 
-//                                           hojaRuta,
-//                                           rowPieza.PZA_COSTOFIJO };
+            //Así obtenemos el pedido nuevo del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
+            Data.dsCliente.PEDIDOSRow rowPedido = dsCliente.PEDIDOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsCliente.PEDIDOSRow;
+            object[] valorParametros = { rowPedido.CLI_CODIGO, 
+                                         rowPedido.EPED_CODIGO, 
+                                         rowPedido.PED_FECHAENTREGAPREVISTA, 
+                                         DB.GetFechaServidor(), 
+                                         rowPedido.PED_OBSERVACIONES, 
+                                         rowPedido.PED_NUMERO };
 
-//            //Declaramos el objeto transaccion
-//            SqlTransaction transaccion = null;
+            //Declaramos el objeto transaccion
+            SqlTransaction transaccion = null;
 
-//            try
-//            {
-//                //Iniciamos la transaccion
-//                transaccion = DB.IniciarTransaccion();
-//                //Insertamos la pieza y actualizamos su código en el dataset
-//                rowPieza.BeginEdit();
-//                rowPieza.PZA_CODIGO = Convert.ToInt32(DB.executeScalar(sqlInsert, valorParametros, transaccion));
-//                rowPieza.EndEdit();
-//                //Ahora insertamos su estructura, usamos el foreach para recorrer sólo los nuevos registros del dataset
-//                Entidades.DetallePieza detalle = new GyCAP.Entidades.DetallePieza();
-//                foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow row in (Data.dsEstructura.MATERIASPRIMASXPIEZARow[])dsCliente.MATERIASPRIMASXPIEZA.Select(null, null, System.Data.DataViewRowState.Added))
-//                {
-//                    detalle.CodigoPieza = Convert.ToInt32(rowPieza.PZA_CODIGO);
-//                    detalle.CodigoMateriaPrima = Convert.ToInt32(row.MP_CODIGO);
-//                    detalle.Cantidad = row.MPXP_CANTIDAD;
-//                    DetallePiezaDAL.Insertar(detalle, transaccion);
-//                    row.BeginEdit();
-//                    row.PZA_CODIGO = detalle.CodigoPieza;
-//                    row.MPXP_CODIGO = detalle.CodigoDetalle;
-//                    row.EndEdit();
-//                }
-//                //Todo ok, commit
-//                transaccion.Commit();
-//            }
-//            catch (SqlException ex)
-//            {
-//                //Error en alguna consulta, descartamos los cambios
-//                transaccion.Rollback();
-//                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
-//            }
-//            finally
-//            {
-//                //En cualquier caso finalizamos la transaccion para que se cierre la conexion
-//                DB.FinalizarTransaccion();
-//            }
-//        }
+            try
+            {
+                //Iniciamos la transaccion
+                transaccion = DB.IniciarTransaccion();
+                //Insertamos la pieza y actualizamos su código en el dataset
+                rowPedido.BeginEdit();
+                rowPedido.PED_CODIGO = Convert.ToInt64(DB.executeScalar(sqlInsert, valorParametros, transaccion));
+                
+                rowPedido.PED_NUMERO = rowPedido.PED_CODIGO.ToString(); 
+                rowPedido.EndEdit();
+                
+                //Ahora insertamos el detalle, usamos el foreach para recorrer sólo los nuevos registros del dataset
+                Entidades.DetallePedido detalle = new GyCAP.Entidades.DetallePedido();
+                foreach (Data.dsCliente.DETALLE_PEDIDOSRow row in (Data.dsCliente.DETALLE_PEDIDOSRow[])dsCliente.DETALLE_PEDIDOS.Select(null, null, System.Data.DataViewRowState.Added))
+                {
+                    Entidades.Pedido lPedido = new Entidades.Pedido();
+                    lPedido.Codigo = Convert.ToInt64(rowPedido.PED_CODIGO);
+                    Entidades.Cocina lCocina = new GyCAP.Entidades.Cocina();
+                    lCocina.CodigoCocina = Convert.ToInt32(row.COC_CODIGO);
+                    Entidades.EstadoDetallePedido lEstadoDetalle = new GyCAP.Entidades.EstadoDetallePedido();
+                    lEstadoDetalle.Codigo = 1; //Hacer parametro, no puede quedar Hardcodado  
 
-//        public static void Eliminar(int codigoPedido)
-//        {
-//            string sql = "DELETE FROM PEDIDOS WHERE ped_codigo = @p0";
-//            object[] valorParametros = { codigoPedido };
-//            SqlTransaction transaccion = null;
+                    detalle.Pedido = lPedido;
+                    detalle.Cocina = lCocina;
+                    detalle.Cantidad = row.DPED_CANTIDAD;
+                    detalle.Estado = lEstadoDetalle; 
+                    DetallePedidoDAL.Insertar(detalle, transaccion);
+                    row.BeginEdit();
+                    row.PED_CODIGO = detalle.Pedido.Codigo;
+                    row.COC_CODIGO = detalle.Cocina.CodigoCocina;
+                    row.DPED_CANTIDAD = detalle.Cantidad;
+                    row.EDPED_CODIGO = detalle.Estado.Codigo; 
+                    row.EndEdit();
+                }
+                //Todo ok, commit
+                transaccion.Commit();
+                ActualizarNumero(long.Parse(rowPedido.PED_CODIGO.ToString())); 
+            }
+            catch (SqlException ex)
+            {
+                //Error en alguna consulta, descartamos los cambios
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
+            }
+            finally
+            {
+                //En cualquier caso finalizamos la transaccion para que se cierre la conexion
+                DB.FinalizarTransaccion();
+            }
+        }
 
-//            try
-//            {
-//                transaccion = DB.IniciarTransaccion();
-//                //Primero los hijos
-//                DetallePedidoDAL.EliminarDetallePedido(codigoPedido, transaccion);
-//                //Ahora el padre
-//                DB.executeNonQuery(sql, valorParametros, transaccion);
-//                //Todo OK
-//                transaccion.Commit();
-//            }
-//            catch (SqlException)
-//            {
-//                transaccion.Rollback();
-//                throw new Entidades.Excepciones.BaseDeDatosException();
-//            }
-//            finally
-//            {
-//                DB.FinalizarTransaccion();
-//            }
-//        }
+        public static void Eliminar(long codigoPedido)
+        {
+            string sql = "DELETE FROM PEDIDOS WHERE ped_codigo = @p0";
+            object[] valorParametros = { codigoPedido };
+            SqlTransaction transaccion = null;
 
-//        public static void Actualizar(Data.dsCliente dsCliente)
-//        {
-//            //Esto va a ser muy largo...empecemos
-//            //Primero actualizaremos la pieza y luego la estructura
-//            //Armemos todas las consultas
-//            string sqlUpdate = @"UPDATE PIEZAS SET
-//                               pza_nombre = @p0
-//                               ,te_codigo = @p1
-//                               ,pza_descripcion = @p2
-//                               ,par_codigo = @p3
-//                               ,pno_codigo = @p4
-//                               ,pza_codigoparte = @p5
-//                               ,pza_costo = @p6
-//                               ,hr_codigo = @p7
-//                               ,pza_costo = @p8
-//                               WHERE pza_codigo = @p9";
+            try
+            {
+                transaccion = DB.IniciarTransaccion();
+                //Primero los hijos
+                DetallePedidoDAL.EliminarDetallePedido(codigoPedido, transaccion);
+                //Ahora el padre
+                DB.executeNonQuery(sql, valorParametros, transaccion);
+                //Todo OK
+                transaccion.Commit();
+            }
+            catch (SqlException)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException();
+            }
+            finally
+            {
+                DB.FinalizarTransaccion();
+            }
+        }
 
-//            //Así obtenemos la pieza del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
-//            Data.dsEstructura.PIEZASRow rowPieza = dsCliente.PIEZAS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.PIEZASRow;
-//            object hojaRuta = DBNull.Value;
-//            if (!rowPieza.IsHR_CODIGONull()) { hojaRuta = rowPieza.HR_CODIGO; }
-//            object[] valorParametros = { rowPieza.PZA_NOMBRE, 
-//                                         rowPieza.TE_CODIGO, 
-//                                         rowPieza.PZA_DESCRIPCION, 
-//                                         rowPieza.PAR_CODIGO, 
-//                                         rowPieza.PNO_CODIGO, 
-//                                         rowPieza.PZA_CODIGOPARTE, 
-//                                         rowPieza.PZA_COSTO, 
-//                                         hojaRuta, 
-//                                         rowPieza.PZA_COSTOFIJO,
-//                                         rowPieza.PZA_CODIGO };
+        public static void Actualizar(Data.dsCliente dsCliente)
+        {
+            //Primero actualizaremos la pieza y luego la estructura
+            //Armemos todas las consultas
+            string sqlUpdate = @"UPDATE PEDIDOS SET
+                                CLI_CODIGO = @p0
+                               ,EPED_CODIGO = @p1
+                               ,PED_FECHAENTREGAPREVISTA = @p2
+                               ,PED_OBSERVACIONES = @p3
+                               ,PED_NUMERO = @p4
+                               WHERE PED_CODIGO = @p5";
 
-//            //Declaramos el objeto transaccion
-//            SqlTransaction transaccion = null;
+            //Así obtenemos el pedido del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
+            Data.dsCliente.PEDIDOSRow rowPedido = dsCliente.PEDIDOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsCliente.PEDIDOSRow;
+            object[] valorParametros = { rowPedido.CLI_CODIGO, 
+                                         rowPedido.EPED_CODIGO, 
+                                         rowPedido.PED_FECHAENTREGAPREVISTA, 
+                                         rowPedido.PED_OBSERVACIONES, 
+                                         rowPedido.PED_NUMERO, 
+                                         rowPedido.PED_CODIGO };
 
-//            try
-//            {
-//                //Iniciamos la transaccion
-//                transaccion = DB.IniciarTransaccion();
+            //Declaramos el objeto transaccion
+            SqlTransaction transaccion = null;
 
-//                //Actualizamos la pieza
-//                DB.executeNonQuery(sqlUpdate, valorParametros, transaccion);
-//                //Actualizamos la estructura, primero insertamos los nuevos
-//                Entidades.DetallePieza detalle = new GyCAP.Entidades.DetallePieza();
-//                foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow row in (Data.dsEstructura.MATERIASPRIMASXPIEZARow[])dsCliente.MATERIASPRIMASXPIEZA.Select(null, null, System.Data.DataViewRowState.Added))
-//                {
-//                    detalle.CodigoPieza = Convert.ToInt32(row.PZA_CODIGO);
-//                    detalle.CodigoMateriaPrima = Convert.ToInt32(row.MP_CODIGO);
-//                    detalle.Cantidad = row.MPXP_CANTIDAD;
-//                    DetallePiezaDAL.Insertar(detalle, transaccion);
-//                    row.BeginEdit();
-//                    row.MPXP_CODIGO = detalle.CodigoDetalle;
-//                    row.EndEdit();
-//                }
+            try
+            {
+                //Iniciamos la transaccion
+                transaccion = DB.IniciarTransaccion();
 
-//                //Segundo actualizamos los modificados
-//                foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow row in (Data.dsEstructura.MATERIASPRIMASXPIEZARow[])dsCliente.MATERIASPRIMASXPIEZA.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
-//                {
-//                    detalle.CodigoDetalle = Convert.ToInt32(row.MPXP_CODIGO);
-//                    detalle.CodigoPieza = Convert.ToInt32(row.PZA_CODIGO);
-//                    detalle.CodigoMateriaPrima = Convert.ToInt32(row.MP_CODIGO);
-//                    detalle.Cantidad = row.MPXP_CANTIDAD;
-//                    DetallePiezaDAL.Actualizar(detalle, transaccion);
-//                }
+                //Actualizamos la pieza
+                DB.executeNonQuery(sqlUpdate, valorParametros, transaccion);
+                //Actualizamos la estructura, primero insertamos los nuevos
+                Entidades.DetallePedido detalle = new GyCAP.Entidades.DetallePedido();
+                foreach (Data.dsCliente.DETALLE_PEDIDOSRow row in (Data.dsCliente.DETALLE_PEDIDOSRow[])dsCliente.DETALLE_PEDIDOS.Select(null, null, System.Data.DataViewRowState.Added))
+                {
+                    Entidades.Pedido lPedido = new Entidades.Pedido();
+                    lPedido.Codigo = Convert.ToInt64(rowPedido.PED_CODIGO);
+                    Entidades.Cocina lCocina = new GyCAP.Entidades.Cocina();
+                    lCocina.CodigoCocina = Convert.ToInt32(row.COC_CODIGO);
+                    Entidades.EstadoDetallePedido lEstadoDetalle = new GyCAP.Entidades.EstadoDetallePedido();
+                    lEstadoDetalle.Codigo = 1; //Hacer parametro, no puede quedar Hardcodado  
 
-//                //Tercero eliminamos
-//                foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow row in (Data.dsEstructura.MATERIASPRIMASXPIEZARow[])dsCliente.MATERIASPRIMASXPIEZA.Select(null, null, System.Data.DataViewRowState.Deleted))
-//                {
-//                    //Como la fila está eliminada y no tiene datos, tenemos que acceder a la versión original
-//                    detalle.CodigoDetalle = Convert.ToInt32(row["mpxp_codigo", System.Data.DataRowVersion.Original]);
-//                    DetallePiezaDAL.Eliminar(detalle, transaccion);
-//                }
-//                //Si todo resulto correcto, commit
-//                transaccion.Commit();
-//            }
-//            catch (SqlException ex)
-//            {
-//                //Error en alguna consulta, descartamos los cambios
-//                transaccion.Rollback();
-//                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
-//            }
-//            finally
-//            {
-//                //En cualquier caso finalizamos la transaccion para que se cierre la conexion
-//                DB.FinalizarTransaccion();
-//            }
-//        }
+                    detalle.Pedido = lPedido;
+                    detalle.Cocina = lCocina;
+                    detalle.Cantidad = row.DPED_CANTIDAD;
+                    detalle.Estado = lEstadoDetalle;
+                    DetallePedidoDAL.Actualizar(detalle, transaccion);
+                    row.BeginEdit();
+                    row.PED_CODIGO = detalle.Codigo;
+                    row.COC_CODIGO = detalle.Cocina.CodigoCocina;
+                    row.DPED_CANTIDAD = detalle.Cantidad;
+                    row.EDPED_CODIGO = detalle.Estado.Codigo;
+                    row.EndEdit();
+                }
 
-//        //Determina si existe una pieza dado su nombre y terminación
-//        public static bool EsPedido(Entidades.Pedido pedido)
-//        {
-//            string sql = "SELECT count(ped_codigo) FROM PEDIDOS WHERE PED_NUMERO = @p0 AND PED_codigo = @p1";
-//            object[] valorParametros = {pedido.Numero, pedido.Codigo};
-//            try
-//            {
-//                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
-//                {
-//                    return false;
-//                }
-//                else
-//                {
-//                    return true;
-//                }
-//            }
-//            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-//        }
+                //Segundo actualizamos los modificados
+                foreach (Data.dsCliente.DETALLE_PEDIDOSRow row in (Data.dsCliente.DETALLE_PEDIDOSRow[])dsCliente.DETALLE_PEDIDOS.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent ))
+                {
+                    Entidades.Pedido lPedido = new Entidades.Pedido();
+                    lPedido.Codigo = Convert.ToInt64(rowPedido.PED_CODIGO);
+                    Entidades.Cocina lCocina = new GyCAP.Entidades.Cocina();
+                    lCocina.CodigoCocina = Convert.ToInt32(row.COC_CODIGO);
+                    Entidades.EstadoDetallePedido lEstadoDetalle = new GyCAP.Entidades.EstadoDetallePedido();
+                    lEstadoDetalle.Codigo = 1; //Hacer parametro, no puede quedar Hardcodado  
+
+                    detalle.Pedido = lPedido;
+                    detalle.Cocina = lCocina;
+                    detalle.Cantidad = row.DPED_CANTIDAD;
+                    detalle.Estado = lEstadoDetalle;
+                    DetallePedidoDAL.Actualizar(detalle, transaccion);
+                }
+
+                //Tercero eliminamos
+                foreach (Data.dsCliente.DETALLE_PEDIDOSRow row in (Data.dsCliente.DETALLE_PEDIDOSRow[])dsCliente.DETALLE_PEDIDOS.Select(null, null, System.Data.DataViewRowState.Deleted))
+                {
+                    //Como la fila está eliminada y no tiene datos, tenemos que acceder a la versión original
+                    detalle.Codigo = Convert.ToInt64(row["dped_codigo", System.Data.DataRowVersion.Original]);
+                    DetallePedidoDAL.Eliminar(detalle, transaccion);
+                }
+                //Si todo resulto correcto, commit
+                transaccion.Commit();
+            }
+            catch (SqlException ex)
+            {
+                //Error en alguna consulta, descartamos los cambios
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
+            }
+            finally
+            {
+                //En cualquier caso finalizamos la transaccion para que se cierre la conexion
+                DB.FinalizarTransaccion();
+            }
+        }
+
+        public static void ActualizarNumero(long codigo)
+        {
+            //Primero actualizaremos la pieza y luego la estructura
+            //Armemos todas las consultas
+            string sqlUpdate = @"UPDATE PEDIDOS SET
+                                PED_NUMERO = @p0
+                               WHERE PED_CODIGO = @p0";
+
+            object[] valorParametros = { codigo };
+
+            //Declaramos el objeto transaccion
+            //SqlTransaction transaccion = null;
+
+            try
+            {
+                //Iniciamos la transaccion
+                //transaccion = DB.IniciarTransaccion();
+
+                //Actualizamos la pieza
+                //DB.executeNonQuery(sqlUpdate, valorParametros, transaccion);
+                DB.executeNonQuery(sqlUpdate, valorParametros, null);
+            }
+            catch (SqlException ex)
+            {
+                //Error en alguna consulta, descartamos los cambios
+                //transaccion.Rollback();
+
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
+            }
+        }
+
+        //Determina si existe una pedido dado su nombre y terminación
+        public static bool EsPedido(Entidades.Pedido pedido)
+        {
+            string sql = "SELECT count(ped_codigo) FROM PEDIDOS WHERE PED_NUMERO = @p0 AND PED_codigo = @p1";
+            object[] valorParametros = { pedido.Numero, pedido.Codigo };
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
 
 //        /// <summary>
 //        /// Obtiene una pieza por su código.
@@ -377,23 +419,22 @@ namespace GyCAP.DAL
 
 //        }
 
-//        public static bool PuedeEliminarse(int codigo)
-//        {
-//            string sqlPXC = "SELECT count(pza_codigo) FROM PIEZASXCONJUNTO WHERE pza_codigo = @p0";
-//            string sqlPXSC = "SELECT count(pza_codigo) FROM PIEZASXSUBCONJUNTO WHERE pza_codigo = @p0";
-//            string sqlPXE = "SELECT count(pza_codigo) FROM PIEZASXESTRUCTURA WHERE pza_codigo = @p0";
+        public static bool PuedeEliminarse(long codigo)
+        {
+            string sqlDPM = "SELECT count(dped_codigo) FROM DETALLE_PLANES_MENSUALES WHERE dped_codigo = @p0";
+            string sqlDPS = "SELECT count(dped_codigo) FROM DETALLE_PLANES_SEMANALES WHERE dped_codigo = @p0";
 
-//            object[] valorParametros = { codigo };
-//            try
-//            {
-//                int resultadoPXC = Convert.ToInt32(DB.executeScalar(sqlPXC, valorParametros, null));
-//                int resultadoPXSC = Convert.ToInt32(DB.executeScalar(sqlPXSC, valorParametros, null));
-//                int resultadoPXE = Convert.ToInt32(DB.executeScalar(sqlPXE, valorParametros, null));
-//                if (resultadoPXSC == 0 && resultadoPXE == 0 && resultadoPXC == 0) { return true; }
-//                else { return false; }
-//            }
-//            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-//        }
+            object[] valorParametros = { codigo };
+            try
+            {
+                int resultadoDPM = Convert.ToInt32(DB.executeScalar(sqlDPM, valorParametros, null));
+                int resultadoDPS = Convert.ToInt32(DB.executeScalar(sqlDPS, valorParametros, null));
+
+                if (resultadoDPS == 0 && resultadoDPM == 0) { return true; }
+                else { return false; }
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
 
         private static void ObtenerDetallePedido(Data.dsCliente ds)
         {

@@ -12,14 +12,13 @@ namespace GyCAP.DAL
         public static void Insertar(Entidades.DetallePedido detalle, SqlTransaction transaccion)
         {
             string sqlInsert = @"INSERT INTO [DETALLE_PEDIDOS] 
-                                        ([DPED_CODIGO]
-                                        ,[PED_CODIGO]
+                                        ([PED_CODIGO]
                                         ,[EDPED_CODIGO]
                                         ,[COC_CODIGO]
                                         ,[DPED_CANTIDAD])
-                                        VALUES (@p0, @p1, @p2, @p4, @p4) SELECT @@Identity";
+                                        VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
 
-            object[] valorParametros = {detalle.Codigo, detalle.Pedido.Codigo , detalle.Estado.Codigo
+            object[] valorParametros = {detalle.Pedido.Codigo , detalle.Estado.Codigo
                                        ,detalle.Cocina.CodigoCocina, detalle.Cantidad};
             detalle.Codigo = Convert.ToInt64(DB.executeScalar(sqlInsert, valorParametros, transaccion));
         }

@@ -199,7 +199,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     if (dsEmpleado.EMPLEADOS.Rows.Count == 0)
                     {
                         hayDatos = false;
-                        txtNombreBuscar.Focus();
+                        btnBuscar.Focus();
                     }
                     else
                     {
@@ -214,7 +214,6 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcABM.SelectedTab = tpBuscar;
-                    txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
                     setControles(false);
@@ -381,7 +380,7 @@ namespace GyCAP.UI.RecursosFabricacion
 
                     //Asigno el Sector creado al Empleado 
                     empleado.Estado = estadoEmpleado;
-
+                    
                     try
                     {
                         //Primero lo creamos en la db
