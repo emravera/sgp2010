@@ -300,7 +300,7 @@ namespace GyCAP.UI.EstructuraProducto
                 {
                     //Aumentamos la cantidad                
                     dsHojaRuta.DETALLE_HOJARUTA.FindByDHR_CODIGO(codigo).DHR_SECUENCIA -= 1;
-                    dvDetalleHoja.Sort = "CXHR_SECUENCIA ASC";
+                    dvDetalleHoja.Sort = "DHR_SECUENCIA ASC";
                 }
             }
             else
