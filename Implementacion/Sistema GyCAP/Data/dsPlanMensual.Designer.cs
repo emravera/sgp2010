@@ -2895,7 +2895,6 @@ namespace GyCAP.Data {
                 this.columnPMES_CODIGO.AutoIncrementSeed = -1;
                 this.columnPMES_CODIGO.AutoIncrementStep = -1;
                 this.columnPMES_CODIGO.AllowDBNull = false;
-                this.columnPMES_CODIGO.ReadOnly = true;
                 this.columnPMES_CODIGO.Unique = true;
                 this.columnPAN_CODIGO.AllowDBNull = false;
                 this.columnPMES_MES.MaxLength = 50;
@@ -3205,7 +3204,6 @@ namespace GyCAP.Data {
                 this.columnDPMES_CODIGO.AutoIncrementSeed = -1;
                 this.columnDPMES_CODIGO.AutoIncrementStep = -1;
                 this.columnDPMES_CODIGO.AllowDBNull = false;
-                this.columnDPMES_CODIGO.ReadOnly = true;
                 this.columnDPMES_CODIGO.Unique = true;
                 this.columnPMES_CODIGO.AllowDBNull = false;
                 this.columnCOC_CODIGO.AllowDBNull = false;

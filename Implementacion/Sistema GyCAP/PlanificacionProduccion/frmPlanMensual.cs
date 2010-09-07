@@ -17,6 +17,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         private enum estadoUI { inicio, nuevo, buscar, modificar, cargaDetalle };
         private static estadoUI estadoActual;
         private static int cantidadPlanificada; int codigoDetalle = -1;
+        private static bool seleccionPestaña = false;
         
         public frmPlanMensual()
         {
@@ -632,6 +633,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     row.DPMES_CANTIDADESTIMADA = cantidad;
                     
                 }
+                row.DPED_CODIGO = 0;
                 row.EndEdit();
                 dsPlanMensual.DETALLE_PLANES_MENSUALES.AddDETALLE_PLANES_MENSUALESRow(row);
 
@@ -686,9 +688,14 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Validamos que no se quiera agregar un modelo que ya está en el dataset
             foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])dsPlanMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.Added))
             {
-                if (row["COC_CODIGO"].ToString() == Convert.ToString(cbCocinas.GetSelectedValue()))
+                if (row["DPED_CODIGO"].ToString() == string.Empty)
                 {
-                    msjerror = msjerror + "-El modelo de cocina que intenta agregar ya se encuentra en la planificación\n";
+                    if (row["COC_CODIGO"].ToString() == Convert.ToString(cbCocinas.GetSelectedValue()))
+                    {
+
+                        msjerror = msjerror + "-El modelo de cocina que intenta agregar ya se encuentra en la planificación\n";
+
+                    }
                 }
             }
 
@@ -718,11 +725,13 @@ namespace GyCAP.UI.PlanificacionProduccion
                         string nombre = dsPlanMensual.COCINAS.FindByCOC_CODIGO(Convert.ToInt32(e.Value)).COC_CODIGO_PRODUCTO;
                         e.Value = nombre;
                         break;
+                    case "DPED_CODIGO":
+                        //if(e.Value.ToString()== string.Empty) e.Value = 0;
+                        break;
                     default:
                         break;
                 }
-
-            }
+            }           
         }
 
         private void dgvPedidos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -755,33 +764,26 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvDatos.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
-            {
-                int codigo = Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dpmes_codigo"]);
-                int cantidad =Convert.ToInt32(dsPlanMensual.DETALLE_PLANES_MENSUALES.FindByDPMES_CODIGO(codigo).DPMES_CANTIDADESTIMADA);
-                //Sumo las cantidades
-                CalcularCantidades(cantidad * -1);
+            bool validacion = true;
 
-                //Elimino el dataset
-                dsPlanMensual.DETALLE_PLANES_MENSUALES.FindByDPMES_CODIGO(codigo).Delete();
-            }
-            else
+            if (Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dped_codigo"]) != 0)
             {
-                MessageBox.Show("Debe seleccionar un modelo de cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
+                //Valido que no tenga detalles de planes semanales ya creados
+                validacion = BLL.PlanMensualBLL.ExistePlanSemanalPedido(Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dped_codigo"]));
 
-        private void btnSumar_Click(object sender, EventArgs e)
-        {
-            if (1 < (Convert.ToInt32(txtCantAPlanificar.Text) - Convert.ToInt32(txtCantPlanificada.Text))) 
+            }
+
+            if (validacion == true)
             {
                 if (dgvDatos.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
                 {
                     int codigo = Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dpmes_codigo"]);
-                    dsPlanMensual.DETALLE_PLANES_MENSUALES.FindByDPMES_CODIGO(codigo).DPMES_CANTIDADESTIMADA += 1;
+                    int cantidad = Convert.ToInt32(dsPlanMensual.DETALLE_PLANES_MENSUALES.FindByDPMES_CODIGO(codigo).DPMES_CANTIDADESTIMADA);
+                    //Sumo las cantidades
+                    CalcularCantidades(cantidad * -1);
 
-                    //Llamo a la función que recalcula los valores
-                    CalcularCantidades(1);
+                    //Elimino el dataset
+                    dsPlanMensual.DETALLE_PLANES_MENSUALES.FindByDPMES_CODIGO(codigo).Delete();
                 }
                 else
                 {
@@ -790,31 +792,70 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             else
             {
-                MessageBox.Show("La cantidad de unidades no puede ser mayor de lo que resta planificar", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No puede eliminar un detalle de pedido del plan mensual si ya fue planificado en el plan semanal", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
+        }
+
+        private void btnSumar_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dped_codigo"]) == 0)
+            {
+                if (1 < (Convert.ToInt32(txtCantAPlanificar.Text) - Convert.ToInt32(txtCantPlanificada.Text)))
+                {
+                    if (dgvDatos.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+                    {
+                        int codigo = Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dpmes_codigo"]);
+                        dsPlanMensual.DETALLE_PLANES_MENSUALES.FindByDPMES_CODIGO(codigo).DPMES_CANTIDADESTIMADA += 1;
+
+                        //Llamo a la función que recalcula los valores
+                        CalcularCantidades(1);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Debe seleccionar un modelo de cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("La cantidad de unidades no puede ser mayor de lo que resta planificar", "Información: Validación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No puede cambiar las cantidades de un pedido", "Información: Validación", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void btnRestar_Click(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(txtCantPlanificada.Text) >= 1)
+            if (Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dped_codigo"]) == 0)
             {
-                if (dgvDatos.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+                if (Convert.ToInt32(txtCantPlanificada.Text) >= 1)
                 {
-                    int codigo = Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dpmes_codigo"]);
-                    dsPlanMensual.DETALLE_PLANES_MENSUALES.FindByDPMES_CODIGO(codigo).DPMES_CANTIDADESTIMADA -= 1;
+                    if (dgvDatos.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+                    {
+                        int codigo = Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dpmes_codigo"]);
+                        dsPlanMensual.DETALLE_PLANES_MENSUALES.FindByDPMES_CODIGO(codigo).DPMES_CANTIDADESTIMADA -= 1;
 
-                    //Llamo a la función que recalcula los valores
-                    CalcularCantidades(-1);
+                        //Llamo a la función que recalcula los valores
+                        CalcularCantidades(-1);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Debe seleccionar un modelo de cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Debe seleccionar un modelo de cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("La cantidad de unidades no puede ser mayor de lo que ya se planificó", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
             {
-                MessageBox.Show("La cantidad de unidades no puede ser mayor de lo que ya se planificó", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No puede cambiar las cantidades de un pedido", "Información: Validación", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -847,6 +888,54 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                 MessageBox.Show("Los datos se han almacenado correctamente", "Informacion: Plan Mensual - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                if (estadoActual == estadoUI.cargaDetalle || estadoActual==estadoUI.modificar)
+                {
+                    //Cambio el estado a los detalles de pedido que fueron Planificados
+                    foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in dsPlanMensual.DETALLE_PLANES_MENSUALES.Rows)
+                    {
+                        if (row["DPED_CODIGO"].ToString() != Convert.ToString(0))
+                        {
+                            //Actualizo el valor del estado en la BD
+                            BLL.ClaseTemporalPedido.CambiarEstado(Convert.ToInt32(row.DPED_CODIGO), 2);
+
+                            //lo actualizo el el dataset
+                            dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).BeginEdit();
+                            dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).EDPED_CODIGO = 2;
+                            dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).EndEdit();
+                            dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).AcceptChanges();
+                        }
+                    }
+                    //Cambio el estado del pedido que fue planificado si todos los detalles lo fueron
+                    int cont = 0; int cantfilas = 0;
+                    foreach (Data.dsPlanMensual.PEDIDOSRow pm in dsPlanMensual.PEDIDOS.Rows)
+                    {
+                        foreach (Data.dsPlanMensual.DETALLE_PEDIDOSRow row in (Data.dsPlanMensual.DETALLE_PEDIDOSRow[])dsPlanMensual.DETALLE_PEDIDOS.Select("ped_codigo=" + pm.PED_CODIGO.ToString()))
+                        {
+                            if (Convert.ToInt32(row["EDPED_CODIGO"]) == 2)
+                            {
+                                cont++;
+                            }
+                            cantfilas++;
+                        }
+
+                        if (cont == cantfilas)
+                        {
+                            //Cambio el estado del pedido en la bd
+                            BLL.ClaseTemporalPedido.CambiarEstadoPedido(Convert.ToInt32(pm.PED_CODIGO), 2);
+
+                            //lo actualizo el el dataset
+                            pm.BeginEdit();
+                            pm.EPED_CODIGO = 2;
+                            pm.EndEdit();
+                            pm.AcceptChanges();
+                        }
+                        //pongo los contadores en cero
+                        cont = 0;
+                        cantfilas = 0;
+                    }
+                }
+
+
                 //Vuelvo al estado inicial de la interface
                 SetInterface(estadoUI.inicio);
 
@@ -860,7 +949,6 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            
             //Datos de la cabecera
             //Selecciono el codigo de la demanda anual
             int codigo = Convert.ToInt32(dvListaPlanes[dgvLista.SelectedRows[0].Index]["pmes_codigo"]);
@@ -882,7 +970,47 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
 
                 cbMesDatos.SetSelectedIndex(cont);
+                
+                //Cargo lo que corresponde a los PEDIDOS
+               if (cbPlanAnual.SelectedIndex != -1 && cbMesDatos.SelectedIndex != -1)
+                {
+                    cont += 1;
 
+                    //Verifico si existen pedidos para ese mes
+                    DateTime fechaPedidos = Convert.ToDateTime("01/" + cont.ToString() + "/" + anio.ToString());
+
+                    //Busco los pedidos para esa fecha
+                    BLL.ClaseTemporalPedido.ObtenerPedido(fechaPedidos, dsPlanMensual);
+
+                    if (dsPlanMensual.PEDIDOS.Rows.Count == 0)
+                    {
+                        dgvPedidos.Visible = false;
+                        lblMensaje.Text = "No se encontraron pedidos";
+                        btnVerDetalle.Enabled = false;
+                    }
+                    else
+                    {
+                        dgvPedidos.Visible = true;
+                        lblMensaje.Text = string.Empty;
+                        btnVerDetalle.Enabled = true;
+                    }
+                }
+
+                //Pongo en 0 los null de los pedidos
+               foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in dsPlanMensual.DETALLE_PLANES_MENSUALES.Rows)
+               {
+                   try
+                   {
+                       decimal? pedido = row.DPED_CODIGO;
+                   }
+                   catch(Exception)
+                   {
+                       row.BeginEdit();
+                       row.DPED_CODIGO = 0;
+                       row.EndEdit();
+                       row.AcceptChanges();
+                   }
+               }
                 //Seteo la interface al estado modificar
                 SetInterface(estadoUI.modificar);
 
@@ -965,9 +1093,10 @@ namespace GyCAP.UI.PlanificacionProduccion
                 if (dsPlanMensual.DETALLE_PEDIDOS.Rows.Count > 0)
                 {
                     //Selecciono el tab del detalle
-                    tcDatos.SelectedTab = tpDetallePedido;
                     gbDetallePedido.Visible = true;
                     btnPlanificar.Enabled = true;
+                    seleccionPestaña = true;
+                    tcDatos.SelectedTab = tpDetallePedido;
                 }
                 else
                 {
@@ -1006,9 +1135,58 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             }
 
+        }
+
+        private void tcDatos_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (e.TabPage == tpDetallePedido && seleccionPestaña==false)
+            {
+                e.Cancel=true;
+            }
+            else if (seleccionPestaña == true)
+            {
+                seleccionPestaña = false;
+            }
 
 
         }
+
+        private void btnPlanificar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int codigoPlan = -1; int cantidad;
+                   
+                //Comenzamos con la edición de la fila en si misma
+                Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row = dsPlanMensual.DETALLE_PLANES_MENSUALES.NewDETALLE_PLANES_MENSUALESRow();
+                row.BeginEdit();
+                row.DPMES_CODIGO = codigoDetalle--;
+                row.PMES_CODIGO = codigoPlan;
+                row.COC_CODIGO = Convert.ToInt32(dvListaDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["coc_codigo"]);
+                cantidad = Convert.ToInt32(dvListaDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_cantidad"]);
+                row.DPMES_CANTIDADESTIMADA = cantidad;
+                row.DPED_CODIGO = Convert.ToInt32(dvListaDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_codigo"]); 
+                row.EndEdit();
+                dsPlanMensual.DETALLE_PLANES_MENSUALES.AddDETALLE_PLANES_MENSUALESRow(row);
+
+                //Metodo que recalcula los valores Ingresados
+                CalcularCantidades(cantidad);
+
+                //Seteamos la interface
+                tcDatos.SelectedTab = tpPlanificacion;           
+
+             }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message, "Error: Plan Mensual - Carga Detalle Pedidos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+
+        }
+
+        
 
         
 

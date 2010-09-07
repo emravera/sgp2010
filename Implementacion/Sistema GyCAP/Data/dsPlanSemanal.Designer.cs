@@ -25,13 +25,9 @@ namespace GyCAP.Data {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class dsPlanSemanal : global::System.Data.DataSet {
         
-        private PLANES_SEMANALESDataTable tablePLANES_SEMANALES;
-        
         private PLANES_MENSUALESDataTable tablePLANES_MENSUALES;
         
         private PLANES_ANUALESDataTable tablePLANES_ANUALES;
-        
-        private DETALLE_PLANES_MENSUALESDataTable tableDETALLE_PLANES_MENSUALES;
         
         private COCINASDataTable tableCOCINAS;
         
@@ -39,19 +35,35 @@ namespace GyCAP.Data {
         
         private DETALLE_PLANES_SEMANALESDataTable tableDETALLE_PLANES_SEMANALES;
         
-        private global::System.Data.DataRelation relationplanSemanal_planMensual_fk;
+        private DETALLE_PEDIDOSDataTable tableDETALLE_PEDIDOS;
+        
+        private PEDIDOSDataTable tablePEDIDOS;
+        
+        private DETALLE_PLANES_MENSUALESDataTable tableDETALLE_PLANES_MENSUALES;
+        
+        private PLANES_SEMANALESDataTable tablePLANES_SEMANALES;
         
         private global::System.Data.DataRelation relationplanMensual_planAnual_fk;
-        
-        private global::System.Data.DataRelation relationdetallePlanMensual_planMensual_fk;
-        
-        private global::System.Data.DataRelation relationdetallePlanMensual_cocina_fk;
-        
-        private global::System.Data.DataRelation relationdiasPlanSemanal_PlanSemanal_FK;
         
         private global::System.Data.DataRelation relationdetallePlanSemanal_cocina_fk;
         
         private global::System.Data.DataRelation relationdiasPlanSemanal_DetallePlanSemanal_FK;
+        
+        private global::System.Data.DataRelation relationdetallePlanSemanal_DetallePedido_fk;
+        
+        private global::System.Data.DataRelation relationdetallePedido_Cocina_fk;
+        
+        private global::System.Data.DataRelation relationdetallePedido_pedido_fk;
+        
+        private global::System.Data.DataRelation relationdetallePlanMensual_cocina_fk;
+        
+        private global::System.Data.DataRelation relationdetallePlanmensual_DetallePedidos_fk;
+        
+        private global::System.Data.DataRelation relationdetallePlanMensual_planMensual_fk;
+        
+        private global::System.Data.DataRelation relationdiasPlanSemanal_PlanSemanal_FK;
+        
+        private global::System.Data.DataRelation relationplanSemanal_planMensual_fk;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -79,17 +91,11 @@ namespace GyCAP.Data {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["PLANES_SEMANALES"] != null)) {
-                    base.Tables.Add(new PLANES_SEMANALESDataTable(ds.Tables["PLANES_SEMANALES"]));
-                }
                 if ((ds.Tables["PLANES_MENSUALES"] != null)) {
                     base.Tables.Add(new PLANES_MENSUALESDataTable(ds.Tables["PLANES_MENSUALES"]));
                 }
                 if ((ds.Tables["PLANES_ANUALES"] != null)) {
                     base.Tables.Add(new PLANES_ANUALESDataTable(ds.Tables["PLANES_ANUALES"]));
-                }
-                if ((ds.Tables["DETALLE_PLANES_MENSUALES"] != null)) {
-                    base.Tables.Add(new DETALLE_PLANES_MENSUALESDataTable(ds.Tables["DETALLE_PLANES_MENSUALES"]));
                 }
                 if ((ds.Tables["COCINAS"] != null)) {
                     base.Tables.Add(new COCINASDataTable(ds.Tables["COCINAS"]));
@@ -99,6 +105,18 @@ namespace GyCAP.Data {
                 }
                 if ((ds.Tables["DETALLE_PLANES_SEMANALES"] != null)) {
                     base.Tables.Add(new DETALLE_PLANES_SEMANALESDataTable(ds.Tables["DETALLE_PLANES_SEMANALES"]));
+                }
+                if ((ds.Tables["DETALLE_PEDIDOS"] != null)) {
+                    base.Tables.Add(new DETALLE_PEDIDOSDataTable(ds.Tables["DETALLE_PEDIDOS"]));
+                }
+                if ((ds.Tables["PEDIDOS"] != null)) {
+                    base.Tables.Add(new PEDIDOSDataTable(ds.Tables["PEDIDOS"]));
+                }
+                if ((ds.Tables["DETALLE_PLANES_MENSUALES"] != null)) {
+                    base.Tables.Add(new DETALLE_PLANES_MENSUALESDataTable(ds.Tables["DETALLE_PLANES_MENSUALES"]));
+                }
+                if ((ds.Tables["PLANES_SEMANALES"] != null)) {
+                    base.Tables.Add(new PLANES_SEMANALESDataTable(ds.Tables["PLANES_SEMANALES"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -121,15 +139,6 @@ namespace GyCAP.Data {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public PLANES_SEMANALESDataTable PLANES_SEMANALES {
-            get {
-                return this.tablePLANES_SEMANALES;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public PLANES_MENSUALESDataTable PLANES_MENSUALES {
             get {
                 return this.tablePLANES_MENSUALES;
@@ -142,15 +151,6 @@ namespace GyCAP.Data {
         public PLANES_ANUALESDataTable PLANES_ANUALES {
             get {
                 return this.tablePLANES_ANUALES;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public DETALLE_PLANES_MENSUALESDataTable DETALLE_PLANES_MENSUALES {
-            get {
-                return this.tableDETALLE_PLANES_MENSUALES;
             }
         }
         
@@ -178,6 +178,42 @@ namespace GyCAP.Data {
         public DETALLE_PLANES_SEMANALESDataTable DETALLE_PLANES_SEMANALES {
             get {
                 return this.tableDETALLE_PLANES_SEMANALES;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public DETALLE_PEDIDOSDataTable DETALLE_PEDIDOS {
+            get {
+                return this.tableDETALLE_PEDIDOS;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public PEDIDOSDataTable PEDIDOS {
+            get {
+                return this.tablePEDIDOS;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public DETALLE_PLANES_MENSUALESDataTable DETALLE_PLANES_MENSUALES {
+            get {
+                return this.tableDETALLE_PLANES_MENSUALES;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public PLANES_SEMANALESDataTable PLANES_SEMANALES {
+            get {
+                return this.tablePLANES_SEMANALES;
             }
         }
         
@@ -240,17 +276,11 @@ namespace GyCAP.Data {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["PLANES_SEMANALES"] != null)) {
-                    base.Tables.Add(new PLANES_SEMANALESDataTable(ds.Tables["PLANES_SEMANALES"]));
-                }
                 if ((ds.Tables["PLANES_MENSUALES"] != null)) {
                     base.Tables.Add(new PLANES_MENSUALESDataTable(ds.Tables["PLANES_MENSUALES"]));
                 }
                 if ((ds.Tables["PLANES_ANUALES"] != null)) {
                     base.Tables.Add(new PLANES_ANUALESDataTable(ds.Tables["PLANES_ANUALES"]));
-                }
-                if ((ds.Tables["DETALLE_PLANES_MENSUALES"] != null)) {
-                    base.Tables.Add(new DETALLE_PLANES_MENSUALESDataTable(ds.Tables["DETALLE_PLANES_MENSUALES"]));
                 }
                 if ((ds.Tables["COCINAS"] != null)) {
                     base.Tables.Add(new COCINASDataTable(ds.Tables["COCINAS"]));
@@ -260,6 +290,18 @@ namespace GyCAP.Data {
                 }
                 if ((ds.Tables["DETALLE_PLANES_SEMANALES"] != null)) {
                     base.Tables.Add(new DETALLE_PLANES_SEMANALESDataTable(ds.Tables["DETALLE_PLANES_SEMANALES"]));
+                }
+                if ((ds.Tables["DETALLE_PEDIDOS"] != null)) {
+                    base.Tables.Add(new DETALLE_PEDIDOSDataTable(ds.Tables["DETALLE_PEDIDOS"]));
+                }
+                if ((ds.Tables["PEDIDOS"] != null)) {
+                    base.Tables.Add(new PEDIDOSDataTable(ds.Tables["PEDIDOS"]));
+                }
+                if ((ds.Tables["DETALLE_PLANES_MENSUALES"] != null)) {
+                    base.Tables.Add(new DETALLE_PLANES_MENSUALESDataTable(ds.Tables["DETALLE_PLANES_MENSUALES"]));
+                }
+                if ((ds.Tables["PLANES_SEMANALES"] != null)) {
+                    base.Tables.Add(new PLANES_SEMANALESDataTable(ds.Tables["PLANES_SEMANALES"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -291,12 +333,6 @@ namespace GyCAP.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         internal void InitVars(bool initTable) {
-            this.tablePLANES_SEMANALES = ((PLANES_SEMANALESDataTable)(base.Tables["PLANES_SEMANALES"]));
-            if ((initTable == true)) {
-                if ((this.tablePLANES_SEMANALES != null)) {
-                    this.tablePLANES_SEMANALES.InitVars();
-                }
-            }
             this.tablePLANES_MENSUALES = ((PLANES_MENSUALESDataTable)(base.Tables["PLANES_MENSUALES"]));
             if ((initTable == true)) {
                 if ((this.tablePLANES_MENSUALES != null)) {
@@ -307,12 +343,6 @@ namespace GyCAP.Data {
             if ((initTable == true)) {
                 if ((this.tablePLANES_ANUALES != null)) {
                     this.tablePLANES_ANUALES.InitVars();
-                }
-            }
-            this.tableDETALLE_PLANES_MENSUALES = ((DETALLE_PLANES_MENSUALESDataTable)(base.Tables["DETALLE_PLANES_MENSUALES"]));
-            if ((initTable == true)) {
-                if ((this.tableDETALLE_PLANES_MENSUALES != null)) {
-                    this.tableDETALLE_PLANES_MENSUALES.InitVars();
                 }
             }
             this.tableCOCINAS = ((COCINASDataTable)(base.Tables["COCINAS"]));
@@ -333,13 +363,41 @@ namespace GyCAP.Data {
                     this.tableDETALLE_PLANES_SEMANALES.InitVars();
                 }
             }
-            this.relationplanSemanal_planMensual_fk = this.Relations["planSemanal_planMensual_fk"];
+            this.tableDETALLE_PEDIDOS = ((DETALLE_PEDIDOSDataTable)(base.Tables["DETALLE_PEDIDOS"]));
+            if ((initTable == true)) {
+                if ((this.tableDETALLE_PEDIDOS != null)) {
+                    this.tableDETALLE_PEDIDOS.InitVars();
+                }
+            }
+            this.tablePEDIDOS = ((PEDIDOSDataTable)(base.Tables["PEDIDOS"]));
+            if ((initTable == true)) {
+                if ((this.tablePEDIDOS != null)) {
+                    this.tablePEDIDOS.InitVars();
+                }
+            }
+            this.tableDETALLE_PLANES_MENSUALES = ((DETALLE_PLANES_MENSUALESDataTable)(base.Tables["DETALLE_PLANES_MENSUALES"]));
+            if ((initTable == true)) {
+                if ((this.tableDETALLE_PLANES_MENSUALES != null)) {
+                    this.tableDETALLE_PLANES_MENSUALES.InitVars();
+                }
+            }
+            this.tablePLANES_SEMANALES = ((PLANES_SEMANALESDataTable)(base.Tables["PLANES_SEMANALES"]));
+            if ((initTable == true)) {
+                if ((this.tablePLANES_SEMANALES != null)) {
+                    this.tablePLANES_SEMANALES.InitVars();
+                }
+            }
             this.relationplanMensual_planAnual_fk = this.Relations["planMensual_planAnual_fk"];
-            this.relationdetallePlanMensual_planMensual_fk = this.Relations["detallePlanMensual_planMensual_fk"];
-            this.relationdetallePlanMensual_cocina_fk = this.Relations["detallePlanMensual_cocina_fk"];
-            this.relationdiasPlanSemanal_PlanSemanal_FK = this.Relations["diasPlanSemanal_PlanSemanal_FK"];
             this.relationdetallePlanSemanal_cocina_fk = this.Relations["detallePlanSemanal_cocina_fk"];
             this.relationdiasPlanSemanal_DetallePlanSemanal_FK = this.Relations["diasPlanSemanal_DetallePlanSemanal_FK"];
+            this.relationdetallePlanSemanal_DetallePedido_fk = this.Relations["detallePlanSemanal_DetallePedido_fk"];
+            this.relationdetallePedido_Cocina_fk = this.Relations["detallePedido_Cocina_fk"];
+            this.relationdetallePedido_pedido_fk = this.Relations["detallePedido_pedido_fk"];
+            this.relationdetallePlanMensual_cocina_fk = this.Relations["detallePlanMensual_cocina_fk"];
+            this.relationdetallePlanmensual_DetallePedidos_fk = this.Relations["detallePlanmensual_DetallePedidos_fk"];
+            this.relationdetallePlanMensual_planMensual_fk = this.Relations["detallePlanMensual_planMensual_fk"];
+            this.relationdiasPlanSemanal_PlanSemanal_FK = this.Relations["diasPlanSemanal_PlanSemanal_FK"];
+            this.relationplanSemanal_planMensual_fk = this.Relations["planSemanal_planMensual_fk"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -349,40 +407,28 @@ namespace GyCAP.Data {
             this.Namespace = "http://tempuri.org/dsPlanSemanal.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tablePLANES_SEMANALES = new PLANES_SEMANALESDataTable();
-            base.Tables.Add(this.tablePLANES_SEMANALES);
             this.tablePLANES_MENSUALES = new PLANES_MENSUALESDataTable();
             base.Tables.Add(this.tablePLANES_MENSUALES);
             this.tablePLANES_ANUALES = new PLANES_ANUALESDataTable();
             base.Tables.Add(this.tablePLANES_ANUALES);
-            this.tableDETALLE_PLANES_MENSUALES = new DETALLE_PLANES_MENSUALESDataTable();
-            base.Tables.Add(this.tableDETALLE_PLANES_MENSUALES);
             this.tableCOCINAS = new COCINASDataTable();
             base.Tables.Add(this.tableCOCINAS);
             this.tableDIAS_PLAN_SEMANAL = new DIAS_PLAN_SEMANALDataTable();
             base.Tables.Add(this.tableDIAS_PLAN_SEMANAL);
             this.tableDETALLE_PLANES_SEMANALES = new DETALLE_PLANES_SEMANALESDataTable();
             base.Tables.Add(this.tableDETALLE_PLANES_SEMANALES);
-            this.relationplanSemanal_planMensual_fk = new global::System.Data.DataRelation("planSemanal_planMensual_fk", new global::System.Data.DataColumn[] {
-                        this.tablePLANES_MENSUALES.PMES_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePLANES_SEMANALES.PMES_CODIGOColumn}, false);
-            this.Relations.Add(this.relationplanSemanal_planMensual_fk);
+            this.tableDETALLE_PEDIDOS = new DETALLE_PEDIDOSDataTable();
+            base.Tables.Add(this.tableDETALLE_PEDIDOS);
+            this.tablePEDIDOS = new PEDIDOSDataTable();
+            base.Tables.Add(this.tablePEDIDOS);
+            this.tableDETALLE_PLANES_MENSUALES = new DETALLE_PLANES_MENSUALESDataTable();
+            base.Tables.Add(this.tableDETALLE_PLANES_MENSUALES);
+            this.tablePLANES_SEMANALES = new PLANES_SEMANALESDataTable();
+            base.Tables.Add(this.tablePLANES_SEMANALES);
             this.relationplanMensual_planAnual_fk = new global::System.Data.DataRelation("planMensual_planAnual_fk", new global::System.Data.DataColumn[] {
                         this.tablePLANES_ANUALES.PAN_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tablePLANES_MENSUALES.PAN_CODIGOColumn}, false);
             this.Relations.Add(this.relationplanMensual_planAnual_fk);
-            this.relationdetallePlanMensual_planMensual_fk = new global::System.Data.DataRelation("detallePlanMensual_planMensual_fk", new global::System.Data.DataColumn[] {
-                        this.tablePLANES_MENSUALES.PMES_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableDETALLE_PLANES_MENSUALES.PMES_CODIGOColumn}, false);
-            this.Relations.Add(this.relationdetallePlanMensual_planMensual_fk);
-            this.relationdetallePlanMensual_cocina_fk = new global::System.Data.DataRelation("detallePlanMensual_cocina_fk", new global::System.Data.DataColumn[] {
-                        this.tableCOCINAS.COC_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableDETALLE_PLANES_MENSUALES.COC_CODIGOColumn}, false);
-            this.Relations.Add(this.relationdetallePlanMensual_cocina_fk);
-            this.relationdiasPlanSemanal_PlanSemanal_FK = new global::System.Data.DataRelation("diasPlanSemanal_PlanSemanal_FK", new global::System.Data.DataColumn[] {
-                        this.tablePLANES_SEMANALES.PSEM_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableDIAS_PLAN_SEMANAL.PSEM_CODIGOColumn}, false);
-            this.Relations.Add(this.relationdiasPlanSemanal_PlanSemanal_FK);
             this.relationdetallePlanSemanal_cocina_fk = new global::System.Data.DataRelation("detallePlanSemanal_cocina_fk", new global::System.Data.DataColumn[] {
                         this.tableCOCINAS.COC_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableDETALLE_PLANES_SEMANALES.COC_CODIGOColumn}, false);
@@ -391,11 +437,38 @@ namespace GyCAP.Data {
                         this.tableDIAS_PLAN_SEMANAL.DIAPSEM_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableDETALLE_PLANES_SEMANALES.DIAPSEM_CODIGOColumn}, false);
             this.Relations.Add(this.relationdiasPlanSemanal_DetallePlanSemanal_FK);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializePLANES_SEMANALES() {
-            return false;
+            this.relationdetallePlanSemanal_DetallePedido_fk = new global::System.Data.DataRelation("detallePlanSemanal_DetallePedido_fk", new global::System.Data.DataColumn[] {
+                        this.tableDETALLE_PEDIDOS.DPED_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDETALLE_PLANES_SEMANALES.DPED_CODIGOColumn}, false);
+            this.Relations.Add(this.relationdetallePlanSemanal_DetallePedido_fk);
+            this.relationdetallePedido_Cocina_fk = new global::System.Data.DataRelation("detallePedido_Cocina_fk", new global::System.Data.DataColumn[] {
+                        this.tableCOCINAS.COC_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDETALLE_PEDIDOS.COC_CODIGOColumn}, false);
+            this.Relations.Add(this.relationdetallePedido_Cocina_fk);
+            this.relationdetallePedido_pedido_fk = new global::System.Data.DataRelation("detallePedido_pedido_fk", new global::System.Data.DataColumn[] {
+                        this.tablePEDIDOS.PED_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDETALLE_PEDIDOS.PED_CODIGOColumn}, false);
+            this.Relations.Add(this.relationdetallePedido_pedido_fk);
+            this.relationdetallePlanMensual_cocina_fk = new global::System.Data.DataRelation("detallePlanMensual_cocina_fk", new global::System.Data.DataColumn[] {
+                        this.tableCOCINAS.COC_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDETALLE_PLANES_MENSUALES.COC_CODIGOColumn}, false);
+            this.Relations.Add(this.relationdetallePlanMensual_cocina_fk);
+            this.relationdetallePlanmensual_DetallePedidos_fk = new global::System.Data.DataRelation("detallePlanmensual_DetallePedidos_fk", new global::System.Data.DataColumn[] {
+                        this.tableDETALLE_PEDIDOS.DPED_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDETALLE_PLANES_MENSUALES.DPED_CODIGOColumn}, false);
+            this.Relations.Add(this.relationdetallePlanmensual_DetallePedidos_fk);
+            this.relationdetallePlanMensual_planMensual_fk = new global::System.Data.DataRelation("detallePlanMensual_planMensual_fk", new global::System.Data.DataColumn[] {
+                        this.tablePLANES_MENSUALES.PMES_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDETALLE_PLANES_MENSUALES.DPED_CODIGOColumn}, false);
+            this.Relations.Add(this.relationdetallePlanMensual_planMensual_fk);
+            this.relationdiasPlanSemanal_PlanSemanal_FK = new global::System.Data.DataRelation("diasPlanSemanal_PlanSemanal_FK", new global::System.Data.DataColumn[] {
+                        this.tablePLANES_SEMANALES.PSEM_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDIAS_PLAN_SEMANAL.PSEM_CODIGOColumn}, false);
+            this.Relations.Add(this.relationdiasPlanSemanal_PlanSemanal_FK);
+            this.relationplanSemanal_planMensual_fk = new global::System.Data.DataRelation("planSemanal_planMensual_fk", new global::System.Data.DataColumn[] {
+                        this.tablePLANES_MENSUALES.PMES_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePLANES_SEMANALES.PMES_CODIGOColumn}, false);
+            this.Relations.Add(this.relationplanSemanal_planMensual_fk);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -405,11 +478,6 @@ namespace GyCAP.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializePLANES_ANUALES() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeDETALLE_PLANES_MENSUALES() {
             return false;
         }
         
@@ -425,6 +493,26 @@ namespace GyCAP.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeDETALLE_PLANES_SEMANALES() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeDETALLE_PEDIDOS() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializePEDIDOS() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeDETALLE_PLANES_MENSUALES() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializePLANES_SEMANALES() {
             return false;
         }
         
@@ -481,13 +569,9 @@ namespace GyCAP.Data {
             return type;
         }
         
-        public delegate void PLANES_SEMANALESRowChangeEventHandler(object sender, PLANES_SEMANALESRowChangeEvent e);
-        
         public delegate void PLANES_MENSUALESRowChangeEventHandler(object sender, PLANES_MENSUALESRowChangeEvent e);
         
         public delegate void PLANES_ANUALESRowChangeEventHandler(object sender, PLANES_ANUALESRowChangeEvent e);
-        
-        public delegate void DETALLE_PLANES_MENSUALESRowChangeEventHandler(object sender, DETALLE_PLANES_MENSUALESRowChangeEvent e);
         
         public delegate void COCINASRowChangeEventHandler(object sender, COCINASRowChangeEvent e);
         
@@ -495,284 +579,13 @@ namespace GyCAP.Data {
         
         public delegate void DETALLE_PLANES_SEMANALESRowChangeEventHandler(object sender, DETALLE_PLANES_SEMANALESRowChangeEvent e);
         
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class PLANES_SEMANALESDataTable : global::System.Data.TypedTableBase<PLANES_SEMANALESRow> {
-            
-            private global::System.Data.DataColumn columnPSEM_CODIGO;
-            
-            private global::System.Data.DataColumn columnPMES_CODIGO;
-            
-            private global::System.Data.DataColumn columnPSEM_SEMANA;
-            
-            private global::System.Data.DataColumn columnPSEM_FECHACREACION;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANES_SEMANALESDataTable() {
-                this.TableName = "PLANES_SEMANALES";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal PLANES_SEMANALESDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected PLANES_SEMANALESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PSEM_CODIGOColumn {
-                get {
-                    return this.columnPSEM_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PMES_CODIGOColumn {
-                get {
-                    return this.columnPMES_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PSEM_SEMANAColumn {
-                get {
-                    return this.columnPSEM_SEMANA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PSEM_FECHACREACIONColumn {
-                get {
-                    return this.columnPSEM_FECHACREACION;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANES_SEMANALESRow this[int index] {
-                get {
-                    return ((PLANES_SEMANALESRow)(this.Rows[index]));
-                }
-            }
-            
-            public event PLANES_SEMANALESRowChangeEventHandler PLANES_SEMANALESRowChanging;
-            
-            public event PLANES_SEMANALESRowChangeEventHandler PLANES_SEMANALESRowChanged;
-            
-            public event PLANES_SEMANALESRowChangeEventHandler PLANES_SEMANALESRowDeleting;
-            
-            public event PLANES_SEMANALESRowChangeEventHandler PLANES_SEMANALESRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddPLANES_SEMANALESRow(PLANES_SEMANALESRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANES_SEMANALESRow AddPLANES_SEMANALESRow(PLANES_MENSUALESRow parentPLANES_MENSUALESRowByplanSemanal_planMensual_fk, decimal PSEM_SEMANA, System.DateTime PSEM_FECHACREACION) {
-                PLANES_SEMANALESRow rowPLANES_SEMANALESRow = ((PLANES_SEMANALESRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        null,
-                        PSEM_SEMANA,
-                        PSEM_FECHACREACION};
-                if ((parentPLANES_MENSUALESRowByplanSemanal_planMensual_fk != null)) {
-                    columnValuesArray[1] = parentPLANES_MENSUALESRowByplanSemanal_planMensual_fk[0];
-                }
-                rowPLANES_SEMANALESRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowPLANES_SEMANALESRow);
-                return rowPLANES_SEMANALESRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANES_SEMANALESRow FindByPSEM_CODIGO(decimal PSEM_CODIGO) {
-                return ((PLANES_SEMANALESRow)(this.Rows.Find(new object[] {
-                            PSEM_CODIGO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                PLANES_SEMANALESDataTable cln = ((PLANES_SEMANALESDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new PLANES_SEMANALESDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnPSEM_CODIGO = base.Columns["PSEM_CODIGO"];
-                this.columnPMES_CODIGO = base.Columns["PMES_CODIGO"];
-                this.columnPSEM_SEMANA = base.Columns["PSEM_SEMANA"];
-                this.columnPSEM_FECHACREACION = base.Columns["PSEM_FECHACREACION"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnPSEM_CODIGO = new global::System.Data.DataColumn("PSEM_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPSEM_CODIGO);
-                this.columnPMES_CODIGO = new global::System.Data.DataColumn("PMES_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPMES_CODIGO);
-                this.columnPSEM_SEMANA = new global::System.Data.DataColumn("PSEM_SEMANA", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPSEM_SEMANA);
-                this.columnPSEM_FECHACREACION = new global::System.Data.DataColumn("PSEM_FECHACREACION", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPSEM_FECHACREACION);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnPSEM_CODIGO}, true));
-                this.columnPSEM_CODIGO.AutoIncrement = true;
-                this.columnPSEM_CODIGO.AutoIncrementSeed = -1;
-                this.columnPSEM_CODIGO.AutoIncrementStep = -1;
-                this.columnPSEM_CODIGO.AllowDBNull = false;
-                this.columnPSEM_CODIGO.Unique = true;
-                this.columnPMES_CODIGO.AllowDBNull = false;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANES_SEMANALESRow NewPLANES_SEMANALESRow() {
-                return ((PLANES_SEMANALESRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new PLANES_SEMANALESRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(PLANES_SEMANALESRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.PLANES_SEMANALESRowChanged != null)) {
-                    this.PLANES_SEMANALESRowChanged(this, new PLANES_SEMANALESRowChangeEvent(((PLANES_SEMANALESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.PLANES_SEMANALESRowChanging != null)) {
-                    this.PLANES_SEMANALESRowChanging(this, new PLANES_SEMANALESRowChangeEvent(((PLANES_SEMANALESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.PLANES_SEMANALESRowDeleted != null)) {
-                    this.PLANES_SEMANALESRowDeleted(this, new PLANES_SEMANALESRowChangeEvent(((PLANES_SEMANALESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.PLANES_SEMANALESRowDeleting != null)) {
-                    this.PLANES_SEMANALESRowDeleting(this, new PLANES_SEMANALESRowChangeEvent(((PLANES_SEMANALESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemovePLANES_SEMANALESRow(PLANES_SEMANALESRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsPlanSemanal ds = new dsPlanSemanal();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "PLANES_SEMANALESDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
+        public delegate void DETALLE_PEDIDOSRowChangeEventHandler(object sender, DETALLE_PEDIDOSRowChangeEvent e);
+        
+        public delegate void PEDIDOSRowChangeEventHandler(object sender, PEDIDOSRowChangeEvent e);
+        
+        public delegate void DETALLE_PLANES_MENSUALESRowChangeEventHandler(object sender, DETALLE_PLANES_MENSUALESRowChangeEvent e);
+        
+        public delegate void PLANES_SEMANALESRowChangeEventHandler(object sender, PLANES_SEMANALESRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1293,317 +1106,6 @@ namespace GyCAP.Data {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "PLANES_ANUALESDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class DETALLE_PLANES_MENSUALESDataTable : global::System.Data.TypedTableBase<DETALLE_PLANES_MENSUALESRow> {
-            
-            private global::System.Data.DataColumn columnDPMES_CODIGO;
-            
-            private global::System.Data.DataColumn columnPMES_CODIGO;
-            
-            private global::System.Data.DataColumn columnCOC_CODIGO;
-            
-            private global::System.Data.DataColumn columnDPMES_CANTIDADESTIMADA;
-            
-            private global::System.Data.DataColumn columnDPMES_CANTIDADREAL;
-            
-            private global::System.Data.DataColumn columnDPMES_CANTPLANIFICADA;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PLANES_MENSUALESDataTable() {
-                this.TableName = "DETALLE_PLANES_MENSUALES";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal DETALLE_PLANES_MENSUALESDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected DETALLE_PLANES_MENSUALESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn DPMES_CODIGOColumn {
-                get {
-                    return this.columnDPMES_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PMES_CODIGOColumn {
-                get {
-                    return this.columnPMES_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn COC_CODIGOColumn {
-                get {
-                    return this.columnCOC_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn DPMES_CANTIDADESTIMADAColumn {
-                get {
-                    return this.columnDPMES_CANTIDADESTIMADA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn DPMES_CANTIDADREALColumn {
-                get {
-                    return this.columnDPMES_CANTIDADREAL;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn DPMES_CANTPLANIFICADAColumn {
-                get {
-                    return this.columnDPMES_CANTPLANIFICADA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PLANES_MENSUALESRow this[int index] {
-                get {
-                    return ((DETALLE_PLANES_MENSUALESRow)(this.Rows[index]));
-                }
-            }
-            
-            public event DETALLE_PLANES_MENSUALESRowChangeEventHandler DETALLE_PLANES_MENSUALESRowChanging;
-            
-            public event DETALLE_PLANES_MENSUALESRowChangeEventHandler DETALLE_PLANES_MENSUALESRowChanged;
-            
-            public event DETALLE_PLANES_MENSUALESRowChangeEventHandler DETALLE_PLANES_MENSUALESRowDeleting;
-            
-            public event DETALLE_PLANES_MENSUALESRowChangeEventHandler DETALLE_PLANES_MENSUALESRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddDETALLE_PLANES_MENSUALESRow(DETALLE_PLANES_MENSUALESRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PLANES_MENSUALESRow AddDETALLE_PLANES_MENSUALESRow(PLANES_MENSUALESRow parentPLANES_MENSUALESRowBydetallePlanMensual_planMensual_fk, COCINASRow parentCOCINASRowBydetallePlanMensual_cocina_fk, int DPMES_CANTIDADESTIMADA, int DPMES_CANTIDADREAL, decimal DPMES_CANTPLANIFICADA) {
-                DETALLE_PLANES_MENSUALESRow rowDETALLE_PLANES_MENSUALESRow = ((DETALLE_PLANES_MENSUALESRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        null,
-                        null,
-                        DPMES_CANTIDADESTIMADA,
-                        DPMES_CANTIDADREAL,
-                        DPMES_CANTPLANIFICADA};
-                if ((parentPLANES_MENSUALESRowBydetallePlanMensual_planMensual_fk != null)) {
-                    columnValuesArray[1] = parentPLANES_MENSUALESRowBydetallePlanMensual_planMensual_fk[0];
-                }
-                if ((parentCOCINASRowBydetallePlanMensual_cocina_fk != null)) {
-                    columnValuesArray[2] = parentCOCINASRowBydetallePlanMensual_cocina_fk[0];
-                }
-                rowDETALLE_PLANES_MENSUALESRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowDETALLE_PLANES_MENSUALESRow);
-                return rowDETALLE_PLANES_MENSUALESRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PLANES_MENSUALESRow FindByDPMES_CODIGO(decimal DPMES_CODIGO) {
-                return ((DETALLE_PLANES_MENSUALESRow)(this.Rows.Find(new object[] {
-                            DPMES_CODIGO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                DETALLE_PLANES_MENSUALESDataTable cln = ((DETALLE_PLANES_MENSUALESDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new DETALLE_PLANES_MENSUALESDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnDPMES_CODIGO = base.Columns["DPMES_CODIGO"];
-                this.columnPMES_CODIGO = base.Columns["PMES_CODIGO"];
-                this.columnCOC_CODIGO = base.Columns["COC_CODIGO"];
-                this.columnDPMES_CANTIDADESTIMADA = base.Columns["DPMES_CANTIDADESTIMADA"];
-                this.columnDPMES_CANTIDADREAL = base.Columns["DPMES_CANTIDADREAL"];
-                this.columnDPMES_CANTPLANIFICADA = base.Columns["DPMES_CANTPLANIFICADA"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnDPMES_CODIGO = new global::System.Data.DataColumn("DPMES_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDPMES_CODIGO);
-                this.columnPMES_CODIGO = new global::System.Data.DataColumn("PMES_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPMES_CODIGO);
-                this.columnCOC_CODIGO = new global::System.Data.DataColumn("COC_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCOC_CODIGO);
-                this.columnDPMES_CANTIDADESTIMADA = new global::System.Data.DataColumn("DPMES_CANTIDADESTIMADA", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDPMES_CANTIDADESTIMADA);
-                this.columnDPMES_CANTIDADREAL = new global::System.Data.DataColumn("DPMES_CANTIDADREAL", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDPMES_CANTIDADREAL);
-                this.columnDPMES_CANTPLANIFICADA = new global::System.Data.DataColumn("DPMES_CANTPLANIFICADA", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDPMES_CANTPLANIFICADA);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnDPMES_CODIGO}, true));
-                this.columnDPMES_CODIGO.AutoIncrement = true;
-                this.columnDPMES_CODIGO.AutoIncrementSeed = -1;
-                this.columnDPMES_CODIGO.AutoIncrementStep = -1;
-                this.columnDPMES_CODIGO.AllowDBNull = false;
-                this.columnDPMES_CODIGO.ReadOnly = true;
-                this.columnDPMES_CODIGO.Unique = true;
-                this.columnPMES_CODIGO.AllowDBNull = false;
-                this.columnCOC_CODIGO.AllowDBNull = false;
-                this.columnDPMES_CANTPLANIFICADA.DefaultValue = ((decimal)(0m));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PLANES_MENSUALESRow NewDETALLE_PLANES_MENSUALESRow() {
-                return ((DETALLE_PLANES_MENSUALESRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new DETALLE_PLANES_MENSUALESRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(DETALLE_PLANES_MENSUALESRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.DETALLE_PLANES_MENSUALESRowChanged != null)) {
-                    this.DETALLE_PLANES_MENSUALESRowChanged(this, new DETALLE_PLANES_MENSUALESRowChangeEvent(((DETALLE_PLANES_MENSUALESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.DETALLE_PLANES_MENSUALESRowChanging != null)) {
-                    this.DETALLE_PLANES_MENSUALESRowChanging(this, new DETALLE_PLANES_MENSUALESRowChangeEvent(((DETALLE_PLANES_MENSUALESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.DETALLE_PLANES_MENSUALESRowDeleted != null)) {
-                    this.DETALLE_PLANES_MENSUALESRowDeleted(this, new DETALLE_PLANES_MENSUALESRowChangeEvent(((DETALLE_PLANES_MENSUALESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.DETALLE_PLANES_MENSUALESRowDeleting != null)) {
-                    this.DETALLE_PLANES_MENSUALESRowDeleting(this, new DETALLE_PLANES_MENSUALESRowChangeEvent(((DETALLE_PLANES_MENSUALESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveDETALLE_PLANES_MENSUALESRow(DETALLE_PLANES_MENSUALESRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsPlanSemanal ds = new dsPlanSemanal();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "DETALLE_PLANES_MENSUALESDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -2307,6 +1809,8 @@ namespace GyCAP.Data {
             
             private global::System.Data.DataColumn columnDPSEM_ESTADO;
             
+            private global::System.Data.DataColumn columnDPED_CODIGO;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public DETALLE_PLANES_SEMANALESDataTable() {
                 this.TableName = "DETALLE_PLANES_SEMANALES";
@@ -2380,6 +1884,13 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DPED_CODIGOColumn {
+                get {
+                    return this.columnDPED_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2408,7 +1919,7 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PLANES_SEMANALESRow AddDETALLE_PLANES_SEMANALESRow(COCINASRow parentCOCINASRowBydetallePlanSemanal_cocina_fk, int DPSEM_CANTIDADESTIMADA, int DPSEM_CANTIDADREAL, DIAS_PLAN_SEMANALRow parentDIAS_PLAN_SEMANALRowBydiasPlanSemanal_DetallePlanSemanal_FK, decimal DPSEM_ESTADO) {
+            public DETALLE_PLANES_SEMANALESRow AddDETALLE_PLANES_SEMANALESRow(COCINASRow parentCOCINASRowBydetallePlanSemanal_cocina_fk, int DPSEM_CANTIDADESTIMADA, int DPSEM_CANTIDADREAL, DIAS_PLAN_SEMANALRow parentDIAS_PLAN_SEMANALRowBydiasPlanSemanal_DetallePlanSemanal_FK, decimal DPSEM_ESTADO, DETALLE_PEDIDOSRow parentDETALLE_PEDIDOSRowBydetallePlanSemanal_DetallePedido_fk) {
                 DETALLE_PLANES_SEMANALESRow rowDETALLE_PLANES_SEMANALESRow = ((DETALLE_PLANES_SEMANALESRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2416,12 +1927,16 @@ namespace GyCAP.Data {
                         DPSEM_CANTIDADESTIMADA,
                         DPSEM_CANTIDADREAL,
                         null,
-                        DPSEM_ESTADO};
+                        DPSEM_ESTADO,
+                        null};
                 if ((parentCOCINASRowBydetallePlanSemanal_cocina_fk != null)) {
                     columnValuesArray[1] = parentCOCINASRowBydetallePlanSemanal_cocina_fk[0];
                 }
                 if ((parentDIAS_PLAN_SEMANALRowBydiasPlanSemanal_DetallePlanSemanal_FK != null)) {
                     columnValuesArray[4] = parentDIAS_PLAN_SEMANALRowBydiasPlanSemanal_DetallePlanSemanal_FK[0];
+                }
+                if ((parentDETALLE_PEDIDOSRowBydetallePlanSemanal_DetallePedido_fk != null)) {
+                    columnValuesArray[6] = parentDETALLE_PEDIDOSRowBydetallePlanSemanal_DetallePedido_fk[0];
                 }
                 rowDETALLE_PLANES_SEMANALESRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDETALLE_PLANES_SEMANALESRow);
@@ -2454,6 +1969,7 @@ namespace GyCAP.Data {
                 this.columnDPSEM_CANTIDADREAL = base.Columns["DPSEM_CANTIDADREAL"];
                 this.columnDIAPSEM_CODIGO = base.Columns["DIAPSEM_CODIGO"];
                 this.columnDPSEM_ESTADO = base.Columns["DPSEM_ESTADO"];
+                this.columnDPED_CODIGO = base.Columns["DPED_CODIGO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2470,6 +1986,8 @@ namespace GyCAP.Data {
                 base.Columns.Add(this.columnDIAPSEM_CODIGO);
                 this.columnDPSEM_ESTADO = new global::System.Data.DataColumn("DPSEM_ESTADO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDPSEM_ESTADO);
+                this.columnDPED_CODIGO = new global::System.Data.DataColumn("DPED_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDPED_CODIGO);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnDPSEM_CODIGO}, true));
                 this.columnDPSEM_CODIGO.AutoIncrement = true;
@@ -2597,108 +2115,1250 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
-        ///Represents strongly named DataRow class.
+        ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class PLANES_SEMANALESRow : global::System.Data.DataRow {
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class DETALLE_PEDIDOSDataTable : global::System.Data.TypedTableBase<DETALLE_PEDIDOSRow> {
             
-            private PLANES_SEMANALESDataTable tablePLANES_SEMANALES;
+            private global::System.Data.DataColumn columnDPED_CODIGO;
+            
+            private global::System.Data.DataColumn columnPED_CODIGO;
+            
+            private global::System.Data.DataColumn columnEDPED_CODIGO;
+            
+            private global::System.Data.DataColumn columnCOC_CODIGO;
+            
+            private global::System.Data.DataColumn columnDPED_CANTIDAD;
+            
+            private global::System.Data.DataColumn columnDPED_FECHA_CANCELACION;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal PLANES_SEMANALESRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tablePLANES_SEMANALES = ((PLANES_SEMANALESDataTable)(this.Table));
+            public DETALLE_PEDIDOSDataTable() {
+                this.TableName = "DETALLE_PEDIDOS";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal PSEM_CODIGO {
-                get {
-                    return ((decimal)(this[this.tablePLANES_SEMANALES.PSEM_CODIGOColumn]));
+            internal DETALLE_PEDIDOSDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
                 }
-                set {
-                    this[this.tablePLANES_SEMANALES.PSEM_CODIGOColumn] = value;
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected DETALLE_PEDIDOSDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DPED_CODIGOColumn {
+                get {
+                    return this.columnDPED_CODIGO;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal PMES_CODIGO {
+            public global::System.Data.DataColumn PED_CODIGOColumn {
                 get {
-                    return ((decimal)(this[this.tablePLANES_SEMANALES.PMES_CODIGOColumn]));
-                }
-                set {
-                    this[this.tablePLANES_SEMANALES.PMES_CODIGOColumn] = value;
+                    return this.columnPED_CODIGO;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal PSEM_SEMANA {
+            public global::System.Data.DataColumn EDPED_CODIGOColumn {
                 get {
+                    return this.columnEDPED_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn COC_CODIGOColumn {
+                get {
+                    return this.columnCOC_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DPED_CANTIDADColumn {
+                get {
+                    return this.columnDPED_CANTIDAD;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DPED_FECHA_CANCELACIONColumn {
+                get {
+                    return this.columnDPED_FECHA_CANCELACION;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PEDIDOSRow this[int index] {
+                get {
+                    return ((DETALLE_PEDIDOSRow)(this.Rows[index]));
+                }
+            }
+            
+            public event DETALLE_PEDIDOSRowChangeEventHandler DETALLE_PEDIDOSRowChanging;
+            
+            public event DETALLE_PEDIDOSRowChangeEventHandler DETALLE_PEDIDOSRowChanged;
+            
+            public event DETALLE_PEDIDOSRowChangeEventHandler DETALLE_PEDIDOSRowDeleting;
+            
+            public event DETALLE_PEDIDOSRowChangeEventHandler DETALLE_PEDIDOSRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddDETALLE_PEDIDOSRow(DETALLE_PEDIDOSRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PEDIDOSRow AddDETALLE_PEDIDOSRow(PEDIDOSRow parentPEDIDOSRowBydetallePedido_pedido_fk, decimal EDPED_CODIGO, COCINASRow parentCOCINASRowBydetallePedido_Cocina_fk, int DPED_CANTIDAD, System.DateTime DPED_FECHA_CANCELACION) {
+                DETALLE_PEDIDOSRow rowDETALLE_PEDIDOSRow = ((DETALLE_PEDIDOSRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        EDPED_CODIGO,
+                        null,
+                        DPED_CANTIDAD,
+                        DPED_FECHA_CANCELACION};
+                if ((parentPEDIDOSRowBydetallePedido_pedido_fk != null)) {
+                    columnValuesArray[1] = parentPEDIDOSRowBydetallePedido_pedido_fk[0];
+                }
+                if ((parentCOCINASRowBydetallePedido_Cocina_fk != null)) {
+                    columnValuesArray[3] = parentCOCINASRowBydetallePedido_Cocina_fk[0];
+                }
+                rowDETALLE_PEDIDOSRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDETALLE_PEDIDOSRow);
+                return rowDETALLE_PEDIDOSRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PEDIDOSRow FindByDPED_CODIGO(decimal DPED_CODIGO) {
+                return ((DETALLE_PEDIDOSRow)(this.Rows.Find(new object[] {
+                            DPED_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                DETALLE_PEDIDOSDataTable cln = ((DETALLE_PEDIDOSDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new DETALLE_PEDIDOSDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnDPED_CODIGO = base.Columns["DPED_CODIGO"];
+                this.columnPED_CODIGO = base.Columns["PED_CODIGO"];
+                this.columnEDPED_CODIGO = base.Columns["EDPED_CODIGO"];
+                this.columnCOC_CODIGO = base.Columns["COC_CODIGO"];
+                this.columnDPED_CANTIDAD = base.Columns["DPED_CANTIDAD"];
+                this.columnDPED_FECHA_CANCELACION = base.Columns["DPED_FECHA_CANCELACION"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnDPED_CODIGO = new global::System.Data.DataColumn("DPED_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDPED_CODIGO);
+                this.columnPED_CODIGO = new global::System.Data.DataColumn("PED_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPED_CODIGO);
+                this.columnEDPED_CODIGO = new global::System.Data.DataColumn("EDPED_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEDPED_CODIGO);
+                this.columnCOC_CODIGO = new global::System.Data.DataColumn("COC_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOC_CODIGO);
+                this.columnDPED_CANTIDAD = new global::System.Data.DataColumn("DPED_CANTIDAD", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDPED_CANTIDAD);
+                this.columnDPED_FECHA_CANCELACION = new global::System.Data.DataColumn("DPED_FECHA_CANCELACION", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDPED_FECHA_CANCELACION);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnDPED_CODIGO}, true));
+                this.columnDPED_CODIGO.AutoIncrement = true;
+                this.columnDPED_CODIGO.AutoIncrementSeed = -1;
+                this.columnDPED_CODIGO.AutoIncrementStep = -1;
+                this.columnDPED_CODIGO.AllowDBNull = false;
+                this.columnDPED_CODIGO.ReadOnly = true;
+                this.columnDPED_CODIGO.Unique = true;
+                this.columnPED_CODIGO.AllowDBNull = false;
+                this.columnEDPED_CODIGO.AllowDBNull = false;
+                this.columnCOC_CODIGO.AllowDBNull = false;
+                this.columnDPED_CANTIDAD.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PEDIDOSRow NewDETALLE_PEDIDOSRow() {
+                return ((DETALLE_PEDIDOSRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new DETALLE_PEDIDOSRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(DETALLE_PEDIDOSRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.DETALLE_PEDIDOSRowChanged != null)) {
+                    this.DETALLE_PEDIDOSRowChanged(this, new DETALLE_PEDIDOSRowChangeEvent(((DETALLE_PEDIDOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.DETALLE_PEDIDOSRowChanging != null)) {
+                    this.DETALLE_PEDIDOSRowChanging(this, new DETALLE_PEDIDOSRowChangeEvent(((DETALLE_PEDIDOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.DETALLE_PEDIDOSRowDeleted != null)) {
+                    this.DETALLE_PEDIDOSRowDeleted(this, new DETALLE_PEDIDOSRowChangeEvent(((DETALLE_PEDIDOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.DETALLE_PEDIDOSRowDeleting != null)) {
+                    this.DETALLE_PEDIDOSRowDeleting(this, new DETALLE_PEDIDOSRowChangeEvent(((DETALLE_PEDIDOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveDETALLE_PEDIDOSRow(DETALLE_PEDIDOSRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsPlanSemanal ds = new dsPlanSemanal();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "DETALLE_PEDIDOSDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
                     try {
-                        return ((decimal)(this[this.tablePLANES_SEMANALES.PSEM_SEMANAColumn]));
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'PSEM_SEMANA\' de la tabla \'PLANES_SEMANALES\' es DBNull.", e);
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
                     }
                 }
-                set {
-                    this[this.tablePLANES_SEMANALES.PSEM_SEMANAColumn] = value;
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class PEDIDOSDataTable : global::System.Data.TypedTableBase<PEDIDOSRow> {
+            
+            private global::System.Data.DataColumn columnPED_CODIGO;
+            
+            private global::System.Data.DataColumn columnCLI_CODIGO;
+            
+            private global::System.Data.DataColumn columnEPED_CODIGO;
+            
+            private global::System.Data.DataColumn columnPED_FECHAENTREGAPREVISTA;
+            
+            private global::System.Data.DataColumn columnPED_FECHAENTREGAREAL;
+            
+            private global::System.Data.DataColumn columnPED_FECHA_ALTA;
+            
+            private global::System.Data.DataColumn columnPED_OBSERVACIONES;
+            
+            private global::System.Data.DataColumn columnPED_NUMERO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PEDIDOSDataTable() {
+                this.TableName = "PEDIDOS";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal PEDIDOSDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected PEDIDOSDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PED_CODIGOColumn {
+                get {
+                    return this.columnPED_CODIGO;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime PSEM_FECHACREACION {
+            public global::System.Data.DataColumn CLI_CODIGOColumn {
                 get {
+                    return this.columnCLI_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EPED_CODIGOColumn {
+                get {
+                    return this.columnEPED_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PED_FECHAENTREGAPREVISTAColumn {
+                get {
+                    return this.columnPED_FECHAENTREGAPREVISTA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PED_FECHAENTREGAREALColumn {
+                get {
+                    return this.columnPED_FECHAENTREGAREAL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PED_FECHA_ALTAColumn {
+                get {
+                    return this.columnPED_FECHA_ALTA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PED_OBSERVACIONESColumn {
+                get {
+                    return this.columnPED_OBSERVACIONES;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PED_NUMEROColumn {
+                get {
+                    return this.columnPED_NUMERO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PEDIDOSRow this[int index] {
+                get {
+                    return ((PEDIDOSRow)(this.Rows[index]));
+                }
+            }
+            
+            public event PEDIDOSRowChangeEventHandler PEDIDOSRowChanging;
+            
+            public event PEDIDOSRowChangeEventHandler PEDIDOSRowChanged;
+            
+            public event PEDIDOSRowChangeEventHandler PEDIDOSRowDeleting;
+            
+            public event PEDIDOSRowChangeEventHandler PEDIDOSRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddPEDIDOSRow(PEDIDOSRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PEDIDOSRow AddPEDIDOSRow(decimal CLI_CODIGO, decimal EPED_CODIGO, System.DateTime PED_FECHAENTREGAPREVISTA, System.DateTime PED_FECHAENTREGAREAL, System.DateTime PED_FECHA_ALTA, string PED_OBSERVACIONES, string PED_NUMERO) {
+                PEDIDOSRow rowPEDIDOSRow = ((PEDIDOSRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        CLI_CODIGO,
+                        EPED_CODIGO,
+                        PED_FECHAENTREGAPREVISTA,
+                        PED_FECHAENTREGAREAL,
+                        PED_FECHA_ALTA,
+                        PED_OBSERVACIONES,
+                        PED_NUMERO};
+                rowPEDIDOSRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowPEDIDOSRow);
+                return rowPEDIDOSRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PEDIDOSRow FindByPED_CODIGO(decimal PED_CODIGO) {
+                return ((PEDIDOSRow)(this.Rows.Find(new object[] {
+                            PED_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                PEDIDOSDataTable cln = ((PEDIDOSDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new PEDIDOSDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnPED_CODIGO = base.Columns["PED_CODIGO"];
+                this.columnCLI_CODIGO = base.Columns["CLI_CODIGO"];
+                this.columnEPED_CODIGO = base.Columns["EPED_CODIGO"];
+                this.columnPED_FECHAENTREGAPREVISTA = base.Columns["PED_FECHAENTREGAPREVISTA"];
+                this.columnPED_FECHAENTREGAREAL = base.Columns["PED_FECHAENTREGAREAL"];
+                this.columnPED_FECHA_ALTA = base.Columns["PED_FECHA_ALTA"];
+                this.columnPED_OBSERVACIONES = base.Columns["PED_OBSERVACIONES"];
+                this.columnPED_NUMERO = base.Columns["PED_NUMERO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnPED_CODIGO = new global::System.Data.DataColumn("PED_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPED_CODIGO);
+                this.columnCLI_CODIGO = new global::System.Data.DataColumn("CLI_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCLI_CODIGO);
+                this.columnEPED_CODIGO = new global::System.Data.DataColumn("EPED_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEPED_CODIGO);
+                this.columnPED_FECHAENTREGAPREVISTA = new global::System.Data.DataColumn("PED_FECHAENTREGAPREVISTA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPED_FECHAENTREGAPREVISTA);
+                this.columnPED_FECHAENTREGAREAL = new global::System.Data.DataColumn("PED_FECHAENTREGAREAL", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPED_FECHAENTREGAREAL);
+                this.columnPED_FECHA_ALTA = new global::System.Data.DataColumn("PED_FECHA_ALTA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPED_FECHA_ALTA);
+                this.columnPED_OBSERVACIONES = new global::System.Data.DataColumn("PED_OBSERVACIONES", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPED_OBSERVACIONES);
+                this.columnPED_NUMERO = new global::System.Data.DataColumn("PED_NUMERO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPED_NUMERO);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnPED_CODIGO}, true));
+                this.columnPED_CODIGO.AutoIncrement = true;
+                this.columnPED_CODIGO.AutoIncrementSeed = -1;
+                this.columnPED_CODIGO.AutoIncrementStep = -1;
+                this.columnPED_CODIGO.AllowDBNull = false;
+                this.columnPED_CODIGO.ReadOnly = true;
+                this.columnPED_CODIGO.Unique = true;
+                this.columnCLI_CODIGO.AllowDBNull = false;
+                this.columnEPED_CODIGO.AllowDBNull = false;
+                this.columnPED_OBSERVACIONES.MaxLength = 254;
+                this.columnPED_NUMERO.MaxLength = 20;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PEDIDOSRow NewPEDIDOSRow() {
+                return ((PEDIDOSRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new PEDIDOSRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(PEDIDOSRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.PEDIDOSRowChanged != null)) {
+                    this.PEDIDOSRowChanged(this, new PEDIDOSRowChangeEvent(((PEDIDOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.PEDIDOSRowChanging != null)) {
+                    this.PEDIDOSRowChanging(this, new PEDIDOSRowChangeEvent(((PEDIDOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.PEDIDOSRowDeleted != null)) {
+                    this.PEDIDOSRowDeleted(this, new PEDIDOSRowChangeEvent(((PEDIDOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.PEDIDOSRowDeleting != null)) {
+                    this.PEDIDOSRowDeleting(this, new PEDIDOSRowChangeEvent(((PEDIDOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemovePEDIDOSRow(PEDIDOSRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsPlanSemanal ds = new dsPlanSemanal();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "PEDIDOSDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
                     try {
-                        return ((global::System.DateTime)(this[this.tablePLANES_SEMANALES.PSEM_FECHACREACIONColumn]));
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'PSEM_FECHACREACION\' de la tabla \'PLANES_SEMANALES\' es DBN" +
-                                "ull.", e);
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
                     }
                 }
-                set {
-                    this[this.tablePLANES_SEMANALES.PSEM_FECHACREACIONColumn] = value;
-                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class DETALLE_PLANES_MENSUALESDataTable : global::System.Data.TypedTableBase<DETALLE_PLANES_MENSUALESRow> {
+            
+            private global::System.Data.DataColumn columnDPMES_CODIGO;
+            
+            private global::System.Data.DataColumn columnPMES_CODIGO;
+            
+            private global::System.Data.DataColumn columnCOC_CODIGO;
+            
+            private global::System.Data.DataColumn columnDPMES_CANTIDADESTIMADA;
+            
+            private global::System.Data.DataColumn columnDPMES_CANTIDADREAL;
+            
+            private global::System.Data.DataColumn columnDPED_CODIGO;
+            
+            private global::System.Data.DataColumn columnDPMES_CANTPLANIFICADA;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PLANES_MENSUALESDataTable() {
+                this.TableName = "DETALLE_PLANES_MENSUALES";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANES_MENSUALESRow PLANES_MENSUALESRow {
+            internal DETALLE_PLANES_MENSUALESDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected DETALLE_PLANES_MENSUALESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DPMES_CODIGOColumn {
                 get {
-                    return ((PLANES_MENSUALESRow)(this.GetParentRow(this.Table.ParentRelations["planSemanal_planMensual_fk"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["planSemanal_planMensual_fk"]);
+                    return this.columnDPMES_CODIGO;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPSEM_SEMANANull() {
-                return this.IsNull(this.tablePLANES_SEMANALES.PSEM_SEMANAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPSEM_SEMANANull() {
-                this[this.tablePLANES_SEMANALES.PSEM_SEMANAColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPSEM_FECHACREACIONNull() {
-                return this.IsNull(this.tablePLANES_SEMANALES.PSEM_FECHACREACIONColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPSEM_FECHACREACIONNull() {
-                this[this.tablePLANES_SEMANALES.PSEM_FECHACREACIONColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DIAS_PLAN_SEMANALRow[] GetDIAS_PLAN_SEMANALRows() {
-                if ((this.Table.ChildRelations["diasPlanSemanal_PlanSemanal_FK"] == null)) {
-                    return new DIAS_PLAN_SEMANALRow[0];
+            public global::System.Data.DataColumn PMES_CODIGOColumn {
+                get {
+                    return this.columnPMES_CODIGO;
                 }
-                else {
-                    return ((DIAS_PLAN_SEMANALRow[])(base.GetChildRows(this.Table.ChildRelations["diasPlanSemanal_PlanSemanal_FK"])));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn COC_CODIGOColumn {
+                get {
+                    return this.columnCOC_CODIGO;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DPMES_CANTIDADESTIMADAColumn {
+                get {
+                    return this.columnDPMES_CANTIDADESTIMADA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DPMES_CANTIDADREALColumn {
+                get {
+                    return this.columnDPMES_CANTIDADREAL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DPED_CODIGOColumn {
+                get {
+                    return this.columnDPED_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DPMES_CANTPLANIFICADAColumn {
+                get {
+                    return this.columnDPMES_CANTPLANIFICADA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PLANES_MENSUALESRow this[int index] {
+                get {
+                    return ((DETALLE_PLANES_MENSUALESRow)(this.Rows[index]));
+                }
+            }
+            
+            public event DETALLE_PLANES_MENSUALESRowChangeEventHandler DETALLE_PLANES_MENSUALESRowChanging;
+            
+            public event DETALLE_PLANES_MENSUALESRowChangeEventHandler DETALLE_PLANES_MENSUALESRowChanged;
+            
+            public event DETALLE_PLANES_MENSUALESRowChangeEventHandler DETALLE_PLANES_MENSUALESRowDeleting;
+            
+            public event DETALLE_PLANES_MENSUALESRowChangeEventHandler DETALLE_PLANES_MENSUALESRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddDETALLE_PLANES_MENSUALESRow(DETALLE_PLANES_MENSUALESRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PLANES_MENSUALESRow AddDETALLE_PLANES_MENSUALESRow(decimal PMES_CODIGO, COCINASRow parentCOCINASRowBydetallePlanMensual_cocina_fk, int DPMES_CANTIDADESTIMADA, int DPMES_CANTIDADREAL, DETALLE_PEDIDOSRow parentDETALLE_PEDIDOSRowBydetallePlanmensual_DetallePedidos_fk, decimal DPMES_CANTPLANIFICADA) {
+                DETALLE_PLANES_MENSUALESRow rowDETALLE_PLANES_MENSUALESRow = ((DETALLE_PLANES_MENSUALESRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        PMES_CODIGO,
+                        null,
+                        DPMES_CANTIDADESTIMADA,
+                        DPMES_CANTIDADREAL,
+                        null,
+                        DPMES_CANTPLANIFICADA};
+                if ((parentCOCINASRowBydetallePlanMensual_cocina_fk != null)) {
+                    columnValuesArray[2] = parentCOCINASRowBydetallePlanMensual_cocina_fk[0];
+                }
+                if ((parentDETALLE_PEDIDOSRowBydetallePlanmensual_DetallePedidos_fk != null)) {
+                    columnValuesArray[5] = parentDETALLE_PEDIDOSRowBydetallePlanmensual_DetallePedidos_fk[0];
+                }
+                rowDETALLE_PLANES_MENSUALESRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDETALLE_PLANES_MENSUALESRow);
+                return rowDETALLE_PLANES_MENSUALESRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PLANES_MENSUALESRow FindByDPMES_CODIGO(decimal DPMES_CODIGO) {
+                return ((DETALLE_PLANES_MENSUALESRow)(this.Rows.Find(new object[] {
+                            DPMES_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                DETALLE_PLANES_MENSUALESDataTable cln = ((DETALLE_PLANES_MENSUALESDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new DETALLE_PLANES_MENSUALESDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnDPMES_CODIGO = base.Columns["DPMES_CODIGO"];
+                this.columnPMES_CODIGO = base.Columns["PMES_CODIGO"];
+                this.columnCOC_CODIGO = base.Columns["COC_CODIGO"];
+                this.columnDPMES_CANTIDADESTIMADA = base.Columns["DPMES_CANTIDADESTIMADA"];
+                this.columnDPMES_CANTIDADREAL = base.Columns["DPMES_CANTIDADREAL"];
+                this.columnDPED_CODIGO = base.Columns["DPED_CODIGO"];
+                this.columnDPMES_CANTPLANIFICADA = base.Columns["DPMES_CANTPLANIFICADA"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnDPMES_CODIGO = new global::System.Data.DataColumn("DPMES_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDPMES_CODIGO);
+                this.columnPMES_CODIGO = new global::System.Data.DataColumn("PMES_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPMES_CODIGO);
+                this.columnCOC_CODIGO = new global::System.Data.DataColumn("COC_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOC_CODIGO);
+                this.columnDPMES_CANTIDADESTIMADA = new global::System.Data.DataColumn("DPMES_CANTIDADESTIMADA", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDPMES_CANTIDADESTIMADA);
+                this.columnDPMES_CANTIDADREAL = new global::System.Data.DataColumn("DPMES_CANTIDADREAL", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDPMES_CANTIDADREAL);
+                this.columnDPED_CODIGO = new global::System.Data.DataColumn("DPED_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDPED_CODIGO);
+                this.columnDPMES_CANTPLANIFICADA = new global::System.Data.DataColumn("DPMES_CANTPLANIFICADA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDPMES_CANTPLANIFICADA);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnDPMES_CODIGO}, true));
+                this.columnDPMES_CODIGO.AutoIncrement = true;
+                this.columnDPMES_CODIGO.AutoIncrementSeed = -1;
+                this.columnDPMES_CODIGO.AutoIncrementStep = -1;
+                this.columnDPMES_CODIGO.AllowDBNull = false;
+                this.columnDPMES_CODIGO.ReadOnly = true;
+                this.columnDPMES_CODIGO.Unique = true;
+                this.columnPMES_CODIGO.AllowDBNull = false;
+                this.columnCOC_CODIGO.AllowDBNull = false;
+                this.columnDPED_CODIGO.DefaultValue = ((decimal)(0m));
+                this.columnDPMES_CANTPLANIFICADA.DefaultValue = ((decimal)(0m));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PLANES_MENSUALESRow NewDETALLE_PLANES_MENSUALESRow() {
+                return ((DETALLE_PLANES_MENSUALESRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new DETALLE_PLANES_MENSUALESRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(DETALLE_PLANES_MENSUALESRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.DETALLE_PLANES_MENSUALESRowChanged != null)) {
+                    this.DETALLE_PLANES_MENSUALESRowChanged(this, new DETALLE_PLANES_MENSUALESRowChangeEvent(((DETALLE_PLANES_MENSUALESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.DETALLE_PLANES_MENSUALESRowChanging != null)) {
+                    this.DETALLE_PLANES_MENSUALESRowChanging(this, new DETALLE_PLANES_MENSUALESRowChangeEvent(((DETALLE_PLANES_MENSUALESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.DETALLE_PLANES_MENSUALESRowDeleted != null)) {
+                    this.DETALLE_PLANES_MENSUALESRowDeleted(this, new DETALLE_PLANES_MENSUALESRowChangeEvent(((DETALLE_PLANES_MENSUALESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.DETALLE_PLANES_MENSUALESRowDeleting != null)) {
+                    this.DETALLE_PLANES_MENSUALESRowDeleting(this, new DETALLE_PLANES_MENSUALESRowChangeEvent(((DETALLE_PLANES_MENSUALESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveDETALLE_PLANES_MENSUALESRow(DETALLE_PLANES_MENSUALESRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsPlanSemanal ds = new dsPlanSemanal();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "DETALLE_PLANES_MENSUALESDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class PLANES_SEMANALESDataTable : global::System.Data.TypedTableBase<PLANES_SEMANALESRow> {
+            
+            private global::System.Data.DataColumn columnPSEM_CODIGO;
+            
+            private global::System.Data.DataColumn columnPMES_CODIGO;
+            
+            private global::System.Data.DataColumn columnPSEM_SEMANA;
+            
+            private global::System.Data.DataColumn columnPSEM_FECHACREACION;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANES_SEMANALESDataTable() {
+                this.TableName = "PLANES_SEMANALES";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal PLANES_SEMANALESDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected PLANES_SEMANALESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PSEM_CODIGOColumn {
+                get {
+                    return this.columnPSEM_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PMES_CODIGOColumn {
+                get {
+                    return this.columnPMES_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PSEM_SEMANAColumn {
+                get {
+                    return this.columnPSEM_SEMANA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PSEM_FECHACREACIONColumn {
+                get {
+                    return this.columnPSEM_FECHACREACION;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANES_SEMANALESRow this[int index] {
+                get {
+                    return ((PLANES_SEMANALESRow)(this.Rows[index]));
+                }
+            }
+            
+            public event PLANES_SEMANALESRowChangeEventHandler PLANES_SEMANALESRowChanging;
+            
+            public event PLANES_SEMANALESRowChangeEventHandler PLANES_SEMANALESRowChanged;
+            
+            public event PLANES_SEMANALESRowChangeEventHandler PLANES_SEMANALESRowDeleting;
+            
+            public event PLANES_SEMANALESRowChangeEventHandler PLANES_SEMANALESRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddPLANES_SEMANALESRow(PLANES_SEMANALESRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANES_SEMANALESRow AddPLANES_SEMANALESRow(PLANES_MENSUALESRow parentPLANES_MENSUALESRowByplanSemanal_planMensual_fk, decimal PSEM_SEMANA, System.DateTime PSEM_FECHACREACION) {
+                PLANES_SEMANALESRow rowPLANES_SEMANALESRow = ((PLANES_SEMANALESRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        PSEM_SEMANA,
+                        PSEM_FECHACREACION};
+                if ((parentPLANES_MENSUALESRowByplanSemanal_planMensual_fk != null)) {
+                    columnValuesArray[1] = parentPLANES_MENSUALESRowByplanSemanal_planMensual_fk[0];
+                }
+                rowPLANES_SEMANALESRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowPLANES_SEMANALESRow);
+                return rowPLANES_SEMANALESRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANES_SEMANALESRow FindByPSEM_CODIGO(decimal PSEM_CODIGO) {
+                return ((PLANES_SEMANALESRow)(this.Rows.Find(new object[] {
+                            PSEM_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                PLANES_SEMANALESDataTable cln = ((PLANES_SEMANALESDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new PLANES_SEMANALESDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnPSEM_CODIGO = base.Columns["PSEM_CODIGO"];
+                this.columnPMES_CODIGO = base.Columns["PMES_CODIGO"];
+                this.columnPSEM_SEMANA = base.Columns["PSEM_SEMANA"];
+                this.columnPSEM_FECHACREACION = base.Columns["PSEM_FECHACREACION"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnPSEM_CODIGO = new global::System.Data.DataColumn("PSEM_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPSEM_CODIGO);
+                this.columnPMES_CODIGO = new global::System.Data.DataColumn("PMES_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPMES_CODIGO);
+                this.columnPSEM_SEMANA = new global::System.Data.DataColumn("PSEM_SEMANA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPSEM_SEMANA);
+                this.columnPSEM_FECHACREACION = new global::System.Data.DataColumn("PSEM_FECHACREACION", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPSEM_FECHACREACION);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnPSEM_CODIGO}, true));
+                this.columnPSEM_CODIGO.AutoIncrement = true;
+                this.columnPSEM_CODIGO.AutoIncrementSeed = -1;
+                this.columnPSEM_CODIGO.AutoIncrementStep = -1;
+                this.columnPSEM_CODIGO.AllowDBNull = false;
+                this.columnPSEM_CODIGO.Unique = true;
+                this.columnPMES_CODIGO.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANES_SEMANALESRow NewPLANES_SEMANALESRow() {
+                return ((PLANES_SEMANALESRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new PLANES_SEMANALESRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(PLANES_SEMANALESRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.PLANES_SEMANALESRowChanged != null)) {
+                    this.PLANES_SEMANALESRowChanged(this, new PLANES_SEMANALESRowChangeEvent(((PLANES_SEMANALESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.PLANES_SEMANALESRowChanging != null)) {
+                    this.PLANES_SEMANALESRowChanging(this, new PLANES_SEMANALESRowChangeEvent(((PLANES_SEMANALESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.PLANES_SEMANALESRowDeleted != null)) {
+                    this.PLANES_SEMANALESRowDeleted(this, new PLANES_SEMANALESRowChangeEvent(((PLANES_SEMANALESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.PLANES_SEMANALESRowDeleting != null)) {
+                    this.PLANES_SEMANALESRowDeleting(this, new PLANES_SEMANALESRowChangeEvent(((PLANES_SEMANALESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemovePLANES_SEMANALESRow(PLANES_SEMANALESRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsPlanSemanal ds = new dsPlanSemanal();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "PLANES_SEMANALESDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
             }
         }
         
@@ -2798,22 +3458,22 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANES_SEMANALESRow[] GetPLANES_SEMANALESRows() {
-                if ((this.Table.ChildRelations["planSemanal_planMensual_fk"] == null)) {
-                    return new PLANES_SEMANALESRow[0];
-                }
-                else {
-                    return ((PLANES_SEMANALESRow[])(base.GetChildRows(this.Table.ChildRelations["planSemanal_planMensual_fk"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public DETALLE_PLANES_MENSUALESRow[] GetDETALLE_PLANES_MENSUALESRows() {
                 if ((this.Table.ChildRelations["detallePlanMensual_planMensual_fk"] == null)) {
                     return new DETALLE_PLANES_MENSUALESRow[0];
                 }
                 else {
                     return ((DETALLE_PLANES_MENSUALESRow[])(base.GetChildRows(this.Table.ChildRelations["detallePlanMensual_planMensual_fk"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANES_SEMANALESRow[] GetPLANES_SEMANALESRows() {
+                if ((this.Table.ChildRelations["planSemanal_planMensual_fk"] == null)) {
+                    return new PLANES_SEMANALESRow[0];
+                }
+                else {
+                    return ((PLANES_SEMANALESRow[])(base.GetChildRows(this.Table.ChildRelations["planSemanal_planMensual_fk"])));
                 }
             }
         }
@@ -2896,149 +3556,6 @@ namespace GyCAP.Data {
                 else {
                     return ((PLANES_MENSUALESRow[])(base.GetChildRows(this.Table.ChildRelations["planMensual_planAnual_fk"])));
                 }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class DETALLE_PLANES_MENSUALESRow : global::System.Data.DataRow {
-            
-            private DETALLE_PLANES_MENSUALESDataTable tableDETALLE_PLANES_MENSUALES;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal DETALLE_PLANES_MENSUALESRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableDETALLE_PLANES_MENSUALES = ((DETALLE_PLANES_MENSUALESDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal DPMES_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal PMES_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableDETALLE_PLANES_MENSUALES.PMES_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableDETALLE_PLANES_MENSUALES.PMES_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal COC_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableDETALLE_PLANES_MENSUALES.COC_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableDETALLE_PLANES_MENSUALES.COC_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int DPMES_CANTIDADESTIMADA {
-                get {
-                    try {
-                        return ((int)(this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTIDADESTIMADAColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DPMES_CANTIDADESTIMADA\' de la tabla \'DETALLE_PLANES_MENSU" +
-                                "ALES\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTIDADESTIMADAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int DPMES_CANTIDADREAL {
-                get {
-                    try {
-                        return ((int)(this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTIDADREALColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DPMES_CANTIDADREAL\' de la tabla \'DETALLE_PLANES_MENSUALES" +
-                                "\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTIDADREALColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal DPMES_CANTPLANIFICADA {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTPLANIFICADAColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DPMES_CANTPLANIFICADA\' de la tabla \'DETALLE_PLANES_MENSUA" +
-                                "LES\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTPLANIFICADAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANES_MENSUALESRow PLANES_MENSUALESRow {
-                get {
-                    return ((PLANES_MENSUALESRow)(this.GetParentRow(this.Table.ParentRelations["detallePlanMensual_planMensual_fk"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["detallePlanMensual_planMensual_fk"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COCINASRow COCINASRow {
-                get {
-                    return ((COCINASRow)(this.GetParentRow(this.Table.ParentRelations["detallePlanMensual_cocina_fk"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["detallePlanMensual_cocina_fk"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsDPMES_CANTIDADESTIMADANull() {
-                return this.IsNull(this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTIDADESTIMADAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetDPMES_CANTIDADESTIMADANull() {
-                this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTIDADESTIMADAColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsDPMES_CANTIDADREALNull() {
-                return this.IsNull(this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTIDADREALColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetDPMES_CANTIDADREALNull() {
-                this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTIDADREALColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsDPMES_CANTPLANIFICADANull() {
-                return this.IsNull(this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTPLANIFICADAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetDPMES_CANTPLANIFICADANull() {
-                this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTPLANIFICADAColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3172,22 +3689,32 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PLANES_MENSUALESRow[] GetDETALLE_PLANES_MENSUALESRows() {
-                if ((this.Table.ChildRelations["detallePlanMensual_cocina_fk"] == null)) {
-                    return new DETALLE_PLANES_MENSUALESRow[0];
-                }
-                else {
-                    return ((DETALLE_PLANES_MENSUALESRow[])(base.GetChildRows(this.Table.ChildRelations["detallePlanMensual_cocina_fk"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public DETALLE_PLANES_SEMANALESRow[] GetDETALLE_PLANES_SEMANALESRows() {
                 if ((this.Table.ChildRelations["detallePlanSemanal_cocina_fk"] == null)) {
                     return new DETALLE_PLANES_SEMANALESRow[0];
                 }
                 else {
                     return ((DETALLE_PLANES_SEMANALESRow[])(base.GetChildRows(this.Table.ChildRelations["detallePlanSemanal_cocina_fk"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PEDIDOSRow[] GetDETALLE_PEDIDOSRows() {
+                if ((this.Table.ChildRelations["detallePedido_Cocina_fk"] == null)) {
+                    return new DETALLE_PEDIDOSRow[0];
+                }
+                else {
+                    return ((DETALLE_PEDIDOSRow[])(base.GetChildRows(this.Table.ChildRelations["detallePedido_Cocina_fk"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PLANES_MENSUALESRow[] GetDETALLE_PLANES_MENSUALESRows() {
+                if ((this.Table.ChildRelations["detallePlanMensual_cocina_fk"] == null)) {
+                    return new DETALLE_PLANES_MENSUALESRow[0];
+                }
+                else {
+                    return ((DETALLE_PLANES_MENSUALESRow[])(base.GetChildRows(this.Table.ChildRelations["detallePlanMensual_cocina_fk"])));
                 }
             }
         }
@@ -3391,6 +3918,22 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal DPED_CODIGO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableDETALLE_PLANES_SEMANALES.DPED_CODIGOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DPED_CODIGO\' de la tabla \'DETALLE_PLANES_SEMANALES\' es DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tableDETALLE_PLANES_SEMANALES.DPED_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public COCINASRow COCINASRow {
                 get {
                     return ((COCINASRow)(this.GetParentRow(this.Table.ParentRelations["detallePlanSemanal_cocina_fk"])));
@@ -3407,6 +3950,16 @@ namespace GyCAP.Data {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["diasPlanSemanal_DetallePlanSemanal_FK"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PEDIDOSRow DETALLE_PEDIDOSRow {
+                get {
+                    return ((DETALLE_PEDIDOSRow)(this.GetParentRow(this.Table.ParentRelations["detallePlanSemanal_DetallePedido_fk"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["detallePlanSemanal_DetallePedido_fk"]);
                 }
             }
             
@@ -3439,35 +3992,611 @@ namespace GyCAP.Data {
             public void SetDPSEM_ESTADONull() {
                 this[this.tableDETALLE_PLANES_SEMANALES.DPSEM_ESTADOColumn] = global::System.Convert.DBNull;
             }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class PLANES_SEMANALESRowChangeEvent : global::System.EventArgs {
-            
-            private PLANES_SEMANALESRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANES_SEMANALESRowChangeEvent(PLANES_SEMANALESRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
+            public bool IsDPED_CODIGONull() {
+                return this.IsNull(this.tableDETALLE_PLANES_SEMANALES.DPED_CODIGOColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANES_SEMANALESRow Row {
+            public void SetDPED_CODIGONull() {
+                this[this.tableDETALLE_PLANES_SEMANALES.DPED_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class DETALLE_PEDIDOSRow : global::System.Data.DataRow {
+            
+            private DETALLE_PEDIDOSDataTable tableDETALLE_PEDIDOS;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal DETALLE_PEDIDOSRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableDETALLE_PEDIDOS = ((DETALLE_PEDIDOSDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal DPED_CODIGO {
                 get {
-                    return this.eventRow;
+                    return ((decimal)(this[this.tableDETALLE_PEDIDOS.DPED_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableDETALLE_PEDIDOS.DPED_CODIGOColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
+            public decimal PED_CODIGO {
                 get {
-                    return this.eventAction;
+                    return ((decimal)(this[this.tableDETALLE_PEDIDOS.PED_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableDETALLE_PEDIDOS.PED_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal EDPED_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableDETALLE_PEDIDOS.EDPED_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableDETALLE_PEDIDOS.EDPED_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal COC_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableDETALLE_PEDIDOS.COC_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableDETALLE_PEDIDOS.COC_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int DPED_CANTIDAD {
+                get {
+                    return ((int)(this[this.tableDETALLE_PEDIDOS.DPED_CANTIDADColumn]));
+                }
+                set {
+                    this[this.tableDETALLE_PEDIDOS.DPED_CANTIDADColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime DPED_FECHA_CANCELACION {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableDETALLE_PEDIDOS.DPED_FECHA_CANCELACIONColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DPED_FECHA_CANCELACION\' de la tabla \'DETALLE_PEDIDOS\' es " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDETALLE_PEDIDOS.DPED_FECHA_CANCELACIONColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COCINASRow COCINASRow {
+                get {
+                    return ((COCINASRow)(this.GetParentRow(this.Table.ParentRelations["detallePedido_Cocina_fk"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["detallePedido_Cocina_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PEDIDOSRow PEDIDOSRow {
+                get {
+                    return ((PEDIDOSRow)(this.GetParentRow(this.Table.ParentRelations["detallePedido_pedido_fk"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["detallePedido_pedido_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDPED_FECHA_CANCELACIONNull() {
+                return this.IsNull(this.tableDETALLE_PEDIDOS.DPED_FECHA_CANCELACIONColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDPED_FECHA_CANCELACIONNull() {
+                this[this.tableDETALLE_PEDIDOS.DPED_FECHA_CANCELACIONColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PLANES_SEMANALESRow[] GetDETALLE_PLANES_SEMANALESRows() {
+                if ((this.Table.ChildRelations["detallePlanSemanal_DetallePedido_fk"] == null)) {
+                    return new DETALLE_PLANES_SEMANALESRow[0];
+                }
+                else {
+                    return ((DETALLE_PLANES_SEMANALESRow[])(base.GetChildRows(this.Table.ChildRelations["detallePlanSemanal_DetallePedido_fk"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PLANES_MENSUALESRow[] GetDETALLE_PLANES_MENSUALESRows() {
+                if ((this.Table.ChildRelations["detallePlanmensual_DetallePedidos_fk"] == null)) {
+                    return new DETALLE_PLANES_MENSUALESRow[0];
+                }
+                else {
+                    return ((DETALLE_PLANES_MENSUALESRow[])(base.GetChildRows(this.Table.ChildRelations["detallePlanmensual_DetallePedidos_fk"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class PEDIDOSRow : global::System.Data.DataRow {
+            
+            private PEDIDOSDataTable tablePEDIDOS;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal PEDIDOSRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablePEDIDOS = ((PEDIDOSDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal PED_CODIGO {
+                get {
+                    return ((decimal)(this[this.tablePEDIDOS.PED_CODIGOColumn]));
+                }
+                set {
+                    this[this.tablePEDIDOS.PED_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CLI_CODIGO {
+                get {
+                    return ((decimal)(this[this.tablePEDIDOS.CLI_CODIGOColumn]));
+                }
+                set {
+                    this[this.tablePEDIDOS.CLI_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal EPED_CODIGO {
+                get {
+                    return ((decimal)(this[this.tablePEDIDOS.EPED_CODIGOColumn]));
+                }
+                set {
+                    this[this.tablePEDIDOS.EPED_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime PED_FECHAENTREGAPREVISTA {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tablePEDIDOS.PED_FECHAENTREGAPREVISTAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'PED_FECHAENTREGAPREVISTA\' de la tabla \'PEDIDOS\' es DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tablePEDIDOS.PED_FECHAENTREGAPREVISTAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime PED_FECHAENTREGAREAL {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tablePEDIDOS.PED_FECHAENTREGAREALColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'PED_FECHAENTREGAREAL\' de la tabla \'PEDIDOS\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePEDIDOS.PED_FECHAENTREGAREALColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime PED_FECHA_ALTA {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tablePEDIDOS.PED_FECHA_ALTAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'PED_FECHA_ALTA\' de la tabla \'PEDIDOS\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePEDIDOS.PED_FECHA_ALTAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PED_OBSERVACIONES {
+                get {
+                    try {
+                        return ((string)(this[this.tablePEDIDOS.PED_OBSERVACIONESColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'PED_OBSERVACIONES\' de la tabla \'PEDIDOS\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePEDIDOS.PED_OBSERVACIONESColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PED_NUMERO {
+                get {
+                    try {
+                        return ((string)(this[this.tablePEDIDOS.PED_NUMEROColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'PED_NUMERO\' de la tabla \'PEDIDOS\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePEDIDOS.PED_NUMEROColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPED_FECHAENTREGAPREVISTANull() {
+                return this.IsNull(this.tablePEDIDOS.PED_FECHAENTREGAPREVISTAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPED_FECHAENTREGAPREVISTANull() {
+                this[this.tablePEDIDOS.PED_FECHAENTREGAPREVISTAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPED_FECHAENTREGAREALNull() {
+                return this.IsNull(this.tablePEDIDOS.PED_FECHAENTREGAREALColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPED_FECHAENTREGAREALNull() {
+                this[this.tablePEDIDOS.PED_FECHAENTREGAREALColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPED_FECHA_ALTANull() {
+                return this.IsNull(this.tablePEDIDOS.PED_FECHA_ALTAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPED_FECHA_ALTANull() {
+                this[this.tablePEDIDOS.PED_FECHA_ALTAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPED_OBSERVACIONESNull() {
+                return this.IsNull(this.tablePEDIDOS.PED_OBSERVACIONESColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPED_OBSERVACIONESNull() {
+                this[this.tablePEDIDOS.PED_OBSERVACIONESColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPED_NUMERONull() {
+                return this.IsNull(this.tablePEDIDOS.PED_NUMEROColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPED_NUMERONull() {
+                this[this.tablePEDIDOS.PED_NUMEROColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PEDIDOSRow[] GetDETALLE_PEDIDOSRows() {
+                if ((this.Table.ChildRelations["detallePedido_pedido_fk"] == null)) {
+                    return new DETALLE_PEDIDOSRow[0];
+                }
+                else {
+                    return ((DETALLE_PEDIDOSRow[])(base.GetChildRows(this.Table.ChildRelations["detallePedido_pedido_fk"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class DETALLE_PLANES_MENSUALESRow : global::System.Data.DataRow {
+            
+            private DETALLE_PLANES_MENSUALESDataTable tableDETALLE_PLANES_MENSUALES;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal DETALLE_PLANES_MENSUALESRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableDETALLE_PLANES_MENSUALES = ((DETALLE_PLANES_MENSUALESDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal DPMES_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal PMES_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableDETALLE_PLANES_MENSUALES.PMES_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableDETALLE_PLANES_MENSUALES.PMES_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal COC_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableDETALLE_PLANES_MENSUALES.COC_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableDETALLE_PLANES_MENSUALES.COC_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int DPMES_CANTIDADESTIMADA {
+                get {
+                    try {
+                        return ((int)(this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTIDADESTIMADAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DPMES_CANTIDADESTIMADA\' de la tabla \'DETALLE_PLANES_MENSU" +
+                                "ALES\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTIDADESTIMADAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int DPMES_CANTIDADREAL {
+                get {
+                    try {
+                        return ((int)(this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTIDADREALColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DPMES_CANTIDADREAL\' de la tabla \'DETALLE_PLANES_MENSUALES" +
+                                "\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTIDADREALColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal DPED_CODIGO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableDETALLE_PLANES_MENSUALES.DPED_CODIGOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DPED_CODIGO\' de la tabla \'DETALLE_PLANES_MENSUALES\' es DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tableDETALLE_PLANES_MENSUALES.DPED_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal DPMES_CANTPLANIFICADA {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTPLANIFICADAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DPMES_CANTPLANIFICADA\' de la tabla \'DETALLE_PLANES_MENSUA" +
+                                "LES\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTPLANIFICADAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COCINASRow COCINASRow {
+                get {
+                    return ((COCINASRow)(this.GetParentRow(this.Table.ParentRelations["detallePlanMensual_cocina_fk"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["detallePlanMensual_cocina_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PEDIDOSRow DETALLE_PEDIDOSRow {
+                get {
+                    return ((DETALLE_PEDIDOSRow)(this.GetParentRow(this.Table.ParentRelations["detallePlanmensual_DetallePedidos_fk"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["detallePlanmensual_DetallePedidos_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANES_MENSUALESRow PLANES_MENSUALESRow {
+                get {
+                    return ((PLANES_MENSUALESRow)(this.GetParentRow(this.Table.ParentRelations["detallePlanMensual_planMensual_fk"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["detallePlanMensual_planMensual_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDPMES_CANTIDADESTIMADANull() {
+                return this.IsNull(this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTIDADESTIMADAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDPMES_CANTIDADESTIMADANull() {
+                this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTIDADESTIMADAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDPMES_CANTIDADREALNull() {
+                return this.IsNull(this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTIDADREALColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDPMES_CANTIDADREALNull() {
+                this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTIDADREALColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDPED_CODIGONull() {
+                return this.IsNull(this.tableDETALLE_PLANES_MENSUALES.DPED_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDPED_CODIGONull() {
+                this[this.tableDETALLE_PLANES_MENSUALES.DPED_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDPMES_CANTPLANIFICADANull() {
+                return this.IsNull(this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTPLANIFICADAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDPMES_CANTPLANIFICADANull() {
+                this[this.tableDETALLE_PLANES_MENSUALES.DPMES_CANTPLANIFICADAColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class PLANES_SEMANALESRow : global::System.Data.DataRow {
+            
+            private PLANES_SEMANALESDataTable tablePLANES_SEMANALES;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal PLANES_SEMANALESRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablePLANES_SEMANALES = ((PLANES_SEMANALESDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal PSEM_CODIGO {
+                get {
+                    return ((decimal)(this[this.tablePLANES_SEMANALES.PSEM_CODIGOColumn]));
+                }
+                set {
+                    this[this.tablePLANES_SEMANALES.PSEM_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal PMES_CODIGO {
+                get {
+                    return ((decimal)(this[this.tablePLANES_SEMANALES.PMES_CODIGOColumn]));
+                }
+                set {
+                    this[this.tablePLANES_SEMANALES.PMES_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal PSEM_SEMANA {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePLANES_SEMANALES.PSEM_SEMANAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'PSEM_SEMANA\' de la tabla \'PLANES_SEMANALES\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePLANES_SEMANALES.PSEM_SEMANAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime PSEM_FECHACREACION {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tablePLANES_SEMANALES.PSEM_FECHACREACIONColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'PSEM_FECHACREACION\' de la tabla \'PLANES_SEMANALES\' es DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePLANES_SEMANALES.PSEM_FECHACREACIONColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANES_MENSUALESRow PLANES_MENSUALESRow {
+                get {
+                    return ((PLANES_MENSUALESRow)(this.GetParentRow(this.Table.ParentRelations["planSemanal_planMensual_fk"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["planSemanal_planMensual_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPSEM_SEMANANull() {
+                return this.IsNull(this.tablePLANES_SEMANALES.PSEM_SEMANAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPSEM_SEMANANull() {
+                this[this.tablePLANES_SEMANALES.PSEM_SEMANAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPSEM_FECHACREACIONNull() {
+                return this.IsNull(this.tablePLANES_SEMANALES.PSEM_FECHACREACIONColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPSEM_FECHACREACIONNull() {
+                this[this.tablePLANES_SEMANALES.PSEM_FECHACREACIONColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DIAS_PLAN_SEMANALRow[] GetDIAS_PLAN_SEMANALRows() {
+                if ((this.Table.ChildRelations["diasPlanSemanal_PlanSemanal_FK"] == null)) {
+                    return new DIAS_PLAN_SEMANALRow[0];
+                }
+                else {
+                    return ((DIAS_PLAN_SEMANALRow[])(base.GetChildRows(this.Table.ChildRelations["diasPlanSemanal_PlanSemanal_FK"])));
                 }
             }
         }
@@ -3521,37 +4650,6 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public PLANES_ANUALESRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class DETALLE_PLANES_MENSUALESRowChangeEvent : global::System.EventArgs {
-            
-            private DETALLE_PLANES_MENSUALESRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PLANES_MENSUALESRowChangeEvent(DETALLE_PLANES_MENSUALESRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PLANES_MENSUALESRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -3657,359 +4755,134 @@ namespace GyCAP.Data {
                 }
             }
         }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class DETALLE_PEDIDOSRowChangeEvent : global::System.EventArgs {
+            
+            private DETALLE_PEDIDOSRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PEDIDOSRowChangeEvent(DETALLE_PEDIDOSRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PEDIDOSRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class PEDIDOSRowChangeEvent : global::System.EventArgs {
+            
+            private PEDIDOSRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PEDIDOSRowChangeEvent(PEDIDOSRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PEDIDOSRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class DETALLE_PLANES_MENSUALESRowChangeEvent : global::System.EventArgs {
+            
+            private DETALLE_PLANES_MENSUALESRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PLANES_MENSUALESRowChangeEvent(DETALLE_PLANES_MENSUALESRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PLANES_MENSUALESRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class PLANES_SEMANALESRowChangeEvent : global::System.EventArgs {
+            
+            private PLANES_SEMANALESRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANES_SEMANALESRowChangeEvent(PLANES_SEMANALESRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANES_SEMANALESRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
     }
 }
 namespace GyCAP.Data.dsPlanSemanalTableAdapters {
     
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class PLANES_SEMANALESTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public PLANES_SEMANALESTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "PLANES_SEMANALES";
-            tableMapping.ColumnMappings.Add("PSEM_CODIGO", "PSEM_CODIGO");
-            tableMapping.ColumnMappings.Add("PMES_CODIGO", "PMES_CODIGO");
-            tableMapping.ColumnMappings.Add("PSEM_SEMANA", "PSEM_SEMANA");
-            tableMapping.ColumnMappings.Add("PSEM_FECHACREACION", "PSEM_FECHACREACION");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[PLANES_SEMANALES] WHERE (([PSEM_CODIGO] = @Original_PSEM_CODIGO) AND ([PMES_CODIGO] = @Original_PMES_CODIGO) AND ((@IsNull_PSEM_SEMANA = 1 AND [PSEM_SEMANA] IS NULL) OR ([PSEM_SEMANA] = @Original_PSEM_SEMANA)) AND ((@IsNull_PSEM_FECHACREACION = 1 AND [PSEM_FECHACREACION] IS NULL) OR ([PSEM_FECHACREACION] = @Original_PSEM_FECHACREACION)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PSEM_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PMES_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PSEM_SEMANA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PSEM_SEMANA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PSEM_SEMANA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PSEM_SEMANA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PSEM_FECHACREACION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PSEM_FECHACREACION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PSEM_FECHACREACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PSEM_FECHACREACION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[PLANES_SEMANALES] ([PMES_CODIGO], [PSEM_SEMANA], [PSEM_FECHACREACION]) VALUES (@PMES_CODIGO, @PSEM_SEMANA, @PSEM_FECHACREACION);
-SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEMANALES WHERE (PSEM_CODIGO = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PMES_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PSEM_SEMANA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PSEM_SEMANA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PSEM_FECHACREACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PSEM_FECHACREACION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[PLANES_SEMANALES] SET [PMES_CODIGO] = @PMES_CODIGO, [PSEM_SEMANA] = @PSEM_SEMANA, [PSEM_FECHACREACION] = @PSEM_FECHACREACION WHERE (([PSEM_CODIGO] = @Original_PSEM_CODIGO) AND ([PMES_CODIGO] = @Original_PMES_CODIGO) AND ((@IsNull_PSEM_SEMANA = 1 AND [PSEM_SEMANA] IS NULL) OR ([PSEM_SEMANA] = @Original_PSEM_SEMANA)) AND ((@IsNull_PSEM_FECHACREACION = 1 AND [PSEM_FECHACREACION] IS NULL) OR ([PSEM_FECHACREACION] = @Original_PSEM_FECHACREACION)));
-SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEMANALES WHERE (PSEM_CODIGO = @PSEM_CODIGO)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PMES_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PSEM_SEMANA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PSEM_SEMANA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PSEM_FECHACREACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PSEM_FECHACREACION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PSEM_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PMES_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PSEM_SEMANA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PSEM_SEMANA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PSEM_SEMANA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PSEM_SEMANA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PSEM_FECHACREACION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PSEM_FECHACREACION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PSEM_FECHACREACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PSEM_FECHACREACION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "PSEM_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString6;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM dbo.PLANES_" +
-                "SEMANALES";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsPlanSemanal.PLANES_SEMANALESDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsPlanSemanal.PLANES_SEMANALESDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsPlanSemanal.PLANES_SEMANALESDataTable dataTable = new dsPlanSemanal.PLANES_SEMANALESDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsPlanSemanal.PLANES_SEMANALESDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsPlanSemanal dataSet) {
-            return this.Adapter.Update(dataSet, "PLANES_SEMANALES");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_PSEM_CODIGO, decimal Original_PMES_CODIGO, global::System.Nullable<decimal> Original_PSEM_SEMANA, global::System.Nullable<global::System.DateTime> Original_PSEM_FECHACREACION) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_PSEM_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_PMES_CODIGO));
-            if ((Original_PSEM_SEMANA.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((decimal)(Original_PSEM_SEMANA.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PSEM_FECHACREACION.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((System.DateTime)(Original_PSEM_FECHACREACION.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(decimal PMES_CODIGO, global::System.Nullable<decimal> PSEM_SEMANA, global::System.Nullable<global::System.DateTime> PSEM_FECHACREACION) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(PMES_CODIGO));
-            if ((PSEM_SEMANA.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(PSEM_SEMANA.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((PSEM_FECHACREACION.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(PSEM_FECHACREACION.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal PMES_CODIGO, global::System.Nullable<decimal> PSEM_SEMANA, global::System.Nullable<global::System.DateTime> PSEM_FECHACREACION, decimal Original_PSEM_CODIGO, decimal Original_PMES_CODIGO, global::System.Nullable<decimal> Original_PSEM_SEMANA, global::System.Nullable<global::System.DateTime> Original_PSEM_FECHACREACION, decimal PSEM_CODIGO) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(PMES_CODIGO));
-            if ((PSEM_SEMANA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(PSEM_SEMANA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((PSEM_FECHACREACION.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(PSEM_FECHACREACION.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(Original_PSEM_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(Original_PMES_CODIGO));
-            if ((Original_PSEM_SEMANA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_PSEM_SEMANA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PSEM_FECHACREACION.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(Original_PSEM_FECHACREACION.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(PSEM_CODIGO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal PMES_CODIGO, global::System.Nullable<decimal> PSEM_SEMANA, global::System.Nullable<global::System.DateTime> PSEM_FECHACREACION, decimal Original_PSEM_CODIGO, decimal Original_PMES_CODIGO, global::System.Nullable<decimal> Original_PSEM_SEMANA, global::System.Nullable<global::System.DateTime> Original_PSEM_FECHACREACION) {
-            return this.Update(PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION, Original_PSEM_CODIGO, Original_PMES_CODIGO, Original_PSEM_SEMANA, Original_PSEM_FECHACREACION, Original_PSEM_CODIGO);
-        }
-    }
     
     /// <summary>
     ///Represents the connection and commands used to retrieve and save data.
@@ -4680,364 +5553,6 @@ SELECT PAN_CODIGO, PAN_ANIO, DEMAN_CODIGO, PAN_FECHACREACION FROM PLANES_ANUALES
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(decimal PAN_ANIO, decimal DEMAN_CODIGO, global::System.Nullable<global::System.DateTime> PAN_FECHACREACION, decimal Original_PAN_CODIGO, decimal Original_PAN_ANIO, decimal Original_DEMAN_CODIGO, global::System.Nullable<global::System.DateTime> Original_PAN_FECHACREACION) {
             return this.Update(PAN_ANIO, DEMAN_CODIGO, PAN_FECHACREACION, Original_PAN_CODIGO, Original_PAN_ANIO, Original_DEMAN_CODIGO, Original_PAN_FECHACREACION, Original_PAN_CODIGO);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class DETALLE_PLANES_MENSUALESTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public DETALLE_PLANES_MENSUALESTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "DETALLE_PLANES_MENSUALES";
-            tableMapping.ColumnMappings.Add("DPMES_CODIGO", "DPMES_CODIGO");
-            tableMapping.ColumnMappings.Add("PMES_CODIGO", "PMES_CODIGO");
-            tableMapping.ColumnMappings.Add("COC_CODIGO", "COC_CODIGO");
-            tableMapping.ColumnMappings.Add("DPMES_CANTIDADESTIMADA", "DPMES_CANTIDADESTIMADA");
-            tableMapping.ColumnMappings.Add("DPMES_CANTIDADREAL", "DPMES_CANTIDADREAL");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[DETALLE_PLANES_MENSUALES] WHERE (([DPMES_CODIGO] = @Original_DPMES_CODIGO) AND ([PMES_CODIGO] = @Original_PMES_CODIGO) AND ([COC_CODIGO] = @Original_COC_CODIGO) AND ((@IsNull_DPMES_CANTIDADESTIMADA = 1 AND [DPMES_CANTIDADESTIMADA] IS NULL) OR ([DPMES_CANTIDADESTIMADA] = @Original_DPMES_CANTIDADESTIMADA)) AND ((@IsNull_DPMES_CANTIDADREAL = 1 AND [DPMES_CANTIDADREAL] IS NULL) OR ([DPMES_CANTIDADREAL] = @Original_DPMES_CANTIDADREAL)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPMES_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PMES_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPMES_CANTIDADESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPMES_CANTIDADESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPMES_CANTIDADREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPMES_CANTIDADREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[DETALLE_PLANES_MENSUALES] ([PMES_CODIGO], [COC_CODIGO], [DPMES_CANTIDADESTIMADA], [DPMES_CANTIDADREAL]) VALUES (@PMES_CODIGO, @COC_CODIGO, @DPMES_CANTIDADESTIMADA, @DPMES_CANTIDADREAL);
-SELECT DPMES_CODIGO, PMES_CODIGO, COC_CODIGO, DPMES_CANTIDADESTIMADA, DPMES_CANTIDADREAL FROM DETALLE_PLANES_MENSUALES WHERE (DPMES_CODIGO = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PMES_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPMES_CANTIDADESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPMES_CANTIDADREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[DETALLE_PLANES_MENSUALES] SET [PMES_CODIGO] = @PMES_CODIGO, [COC_CODIGO] = @COC_CODIGO, [DPMES_CANTIDADESTIMADA] = @DPMES_CANTIDADESTIMADA, [DPMES_CANTIDADREAL] = @DPMES_CANTIDADREAL WHERE (([DPMES_CODIGO] = @Original_DPMES_CODIGO) AND ([PMES_CODIGO] = @Original_PMES_CODIGO) AND ([COC_CODIGO] = @Original_COC_CODIGO) AND ((@IsNull_DPMES_CANTIDADESTIMADA = 1 AND [DPMES_CANTIDADESTIMADA] IS NULL) OR ([DPMES_CANTIDADESTIMADA] = @Original_DPMES_CANTIDADESTIMADA)) AND ((@IsNull_DPMES_CANTIDADREAL = 1 AND [DPMES_CANTIDADREAL] IS NULL) OR ([DPMES_CANTIDADREAL] = @Original_DPMES_CANTIDADREAL)));
-SELECT DPMES_CODIGO, PMES_CODIGO, COC_CODIGO, DPMES_CANTIDADESTIMADA, DPMES_CANTIDADREAL FROM DETALLE_PLANES_MENSUALES WHERE (DPMES_CODIGO = @DPMES_CODIGO)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PMES_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPMES_CANTIDADESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPMES_CANTIDADREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPMES_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PMES_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPMES_CANTIDADESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPMES_CANTIDADESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPMES_CANTIDADREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPMES_CANTIDADREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPMES_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "DPMES_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString6;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT DPMES_CODIGO, PMES_CODIGO, COC_CODIGO, DPMES_CANTIDADESTIMADA, DPMES_CANTI" +
-                "DADREAL FROM dbo.DETALLE_PLANES_MENSUALES";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsPlanSemanal.DETALLE_PLANES_MENSUALESDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsPlanSemanal.DETALLE_PLANES_MENSUALESDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsPlanSemanal.DETALLE_PLANES_MENSUALESDataTable dataTable = new dsPlanSemanal.DETALLE_PLANES_MENSUALESDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsPlanSemanal.DETALLE_PLANES_MENSUALESDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsPlanSemanal dataSet) {
-            return this.Adapter.Update(dataSet, "DETALLE_PLANES_MENSUALES");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_DPMES_CODIGO, decimal Original_PMES_CODIGO, decimal Original_COC_CODIGO, global::System.Nullable<int> Original_DPMES_CANTIDADESTIMADA, global::System.Nullable<int> Original_DPMES_CANTIDADREAL) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_DPMES_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_PMES_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_COC_CODIGO));
-            if ((Original_DPMES_CANTIDADESTIMADA.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_DPMES_CANTIDADESTIMADA.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((Original_DPMES_CANTIDADREAL.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_DPMES_CANTIDADREAL.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(decimal PMES_CODIGO, decimal COC_CODIGO, global::System.Nullable<int> DPMES_CANTIDADESTIMADA, global::System.Nullable<int> DPMES_CANTIDADREAL) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(PMES_CODIGO));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(COC_CODIGO));
-            if ((DPMES_CANTIDADESTIMADA.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(DPMES_CANTIDADESTIMADA.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((DPMES_CANTIDADREAL.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(DPMES_CANTIDADREAL.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal PMES_CODIGO, decimal COC_CODIGO, global::System.Nullable<int> DPMES_CANTIDADESTIMADA, global::System.Nullable<int> DPMES_CANTIDADREAL, decimal Original_DPMES_CODIGO, decimal Original_PMES_CODIGO, decimal Original_COC_CODIGO, global::System.Nullable<int> Original_DPMES_CANTIDADESTIMADA, global::System.Nullable<int> Original_DPMES_CANTIDADREAL, decimal DPMES_CODIGO) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(PMES_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(COC_CODIGO));
-            if ((DPMES_CANTIDADESTIMADA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(DPMES_CANTIDADESTIMADA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((DPMES_CANTIDADREAL.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(DPMES_CANTIDADREAL.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(Original_DPMES_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(Original_PMES_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_COC_CODIGO));
-            if ((Original_DPMES_CANTIDADESTIMADA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_DPMES_CANTIDADESTIMADA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((Original_DPMES_CANTIDADREAL.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_DPMES_CANTIDADREAL.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(DPMES_CODIGO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal PMES_CODIGO, decimal COC_CODIGO, global::System.Nullable<int> DPMES_CANTIDADESTIMADA, global::System.Nullable<int> DPMES_CANTIDADREAL, decimal Original_DPMES_CODIGO, decimal Original_PMES_CODIGO, decimal Original_COC_CODIGO, global::System.Nullable<int> Original_DPMES_CANTIDADESTIMADA, global::System.Nullable<int> Original_DPMES_CANTIDADREAL) {
-            return this.Update(PMES_CODIGO, COC_CODIGO, DPMES_CANTIDADESTIMADA, DPMES_CANTIDADREAL, Original_DPMES_CODIGO, Original_PMES_CODIGO, Original_COC_CODIGO, Original_DPMES_CANTIDADESTIMADA, Original_DPMES_CANTIDADREAL, Original_DPMES_CODIGO);
         }
     }
     
@@ -5947,10 +6462,11 @@ SELECT DIAPSEM_CODIGO, DIAPSEM_DIA, DIAPSEM_FECHA, PSEM_CODIGO FROM DIAS_PLAN_SE
             tableMapping.ColumnMappings.Add("DPSEM_CANTIDADREAL", "DPSEM_CANTIDADREAL");
             tableMapping.ColumnMappings.Add("DIAPSEM_CODIGO", "DIAPSEM_CODIGO");
             tableMapping.ColumnMappings.Add("DPSEM_ESTADO", "DPSEM_ESTADO");
+            tableMapping.ColumnMappings.Add("DPED_CODIGO", "DPED_CODIGO");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[DETALLE_PLANES_SEMANALES] WHERE (([DPSEM_CODIGO] = @Original_DPSEM_CODIGO) AND ([COC_CODIGO] = @Original_COC_CODIGO) AND ((@IsNull_DPSEM_CANTIDADESTIMADA = 1 AND [DPSEM_CANTIDADESTIMADA] IS NULL) OR ([DPSEM_CANTIDADESTIMADA] = @Original_DPSEM_CANTIDADESTIMADA)) AND ((@IsNull_DPSEM_CANTIDADREAL = 1 AND [DPSEM_CANTIDADREAL] IS NULL) OR ([DPSEM_CANTIDADREAL] = @Original_DPSEM_CANTIDADREAL)) AND ([DIAPSEM_CODIGO] = @Original_DIAPSEM_CODIGO) AND ((@IsNull_DPSEM_ESTADO = 1 AND [DPSEM_ESTADO] IS NULL) OR ([DPSEM_ESTADO] = @Original_DPSEM_ESTADO)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[DETALLE_PLANES_SEMANALES] WHERE (([DPSEM_CODIGO] = @Original_DPSEM_CODIGO) AND ([COC_CODIGO] = @Original_COC_CODIGO) AND ((@IsNull_DPSEM_CANTIDADESTIMADA = 1 AND [DPSEM_CANTIDADESTIMADA] IS NULL) OR ([DPSEM_CANTIDADESTIMADA] = @Original_DPSEM_CANTIDADESTIMADA)) AND ((@IsNull_DPSEM_CANTIDADREAL = 1 AND [DPSEM_CANTIDADREAL] IS NULL) OR ([DPSEM_CANTIDADREAL] = @Original_DPSEM_CANTIDADREAL)) AND ([DIAPSEM_CODIGO] = @Original_DIAPSEM_CODIGO) AND ((@IsNull_DPSEM_ESTADO = 1 AND [DPSEM_ESTADO] IS NULL) OR ([DPSEM_ESTADO] = @Original_DPSEM_ESTADO)) AND ((@IsNull_DPED_CODIGO = 1 AND [DPED_CODIGO] IS NULL) OR ([DPED_CODIGO] = @Original_DPED_CODIGO)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPSEM_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -5961,26 +6477,30 @@ SELECT DIAPSEM_CODIGO, DIAPSEM_DIA, DIAPSEM_FECHA, PSEM_CODIGO FROM DIAS_PLAN_SE
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DIAPSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DIAPSEM_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPSEM_ESTADO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPSEM_ESTADO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPSEM_ESTADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "DPSEM_ESTADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPED_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[DETALLE_PLANES_SEMANALES] ([COC_CODIGO], [DPSEM_CANTIDADESTIMADA], [DPSEM_CANTIDADREAL], [DIAPSEM_CODIGO], [DPSEM_ESTADO]) VALUES (@COC_CODIGO, @DPSEM_CANTIDADESTIMADA, @DPSEM_CANTIDADREAL, @DIAPSEM_CODIGO, @DPSEM_ESTADO);
-SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIAPSEM_CODIGO, DPSEM_ESTADO FROM DETALLE_PLANES_SEMANALES WHERE (DPSEM_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[DETALLE_PLANES_SEMANALES] ([COC_CODIGO], [DPSEM_CANTIDADESTIMADA], [DPSEM_CANTIDADREAL], [DIAPSEM_CODIGO], [DPSEM_ESTADO], [DPED_CODIGO]) VALUES (@COC_CODIGO, @DPSEM_CANTIDADESTIMADA, @DPSEM_CANTIDADREAL, @DIAPSEM_CODIGO, @DPSEM_ESTADO, @DPED_CODIGO);
+SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIAPSEM_CODIGO, DPSEM_ESTADO, DPED_CODIGO FROM DETALLE_PLANES_SEMANALES WHERE (DPSEM_CODIGO = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPSEM_CANTIDADESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPSEM_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPSEM_CANTIDADREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPSEM_CANTIDADREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DIAPSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DIAPSEM_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPSEM_ESTADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "DPSEM_ESTADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[DETALLE_PLANES_SEMANALES] SET [COC_CODIGO] = @COC_CODIGO, [DPSEM_CANTIDADESTIMADA] = @DPSEM_CANTIDADESTIMADA, [DPSEM_CANTIDADREAL] = @DPSEM_CANTIDADREAL, [DIAPSEM_CODIGO] = @DIAPSEM_CODIGO, [DPSEM_ESTADO] = @DPSEM_ESTADO WHERE (([DPSEM_CODIGO] = @Original_DPSEM_CODIGO) AND ([COC_CODIGO] = @Original_COC_CODIGO) AND ((@IsNull_DPSEM_CANTIDADESTIMADA = 1 AND [DPSEM_CANTIDADESTIMADA] IS NULL) OR ([DPSEM_CANTIDADESTIMADA] = @Original_DPSEM_CANTIDADESTIMADA)) AND ((@IsNull_DPSEM_CANTIDADREAL = 1 AND [DPSEM_CANTIDADREAL] IS NULL) OR ([DPSEM_CANTIDADREAL] = @Original_DPSEM_CANTIDADREAL)) AND ([DIAPSEM_CODIGO] = @Original_DIAPSEM_CODIGO) AND ((@IsNull_DPSEM_ESTADO = 1 AND [DPSEM_ESTADO] IS NULL) OR ([DPSEM_ESTADO] = @Original_DPSEM_ESTADO)));
-SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIAPSEM_CODIGO, DPSEM_ESTADO FROM DETALLE_PLANES_SEMANALES WHERE (DPSEM_CODIGO = @DPSEM_CODIGO)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[DETALLE_PLANES_SEMANALES] SET [COC_CODIGO] = @COC_CODIGO, [DPSEM_CANTIDADESTIMADA] = @DPSEM_CANTIDADESTIMADA, [DPSEM_CANTIDADREAL] = @DPSEM_CANTIDADREAL, [DIAPSEM_CODIGO] = @DIAPSEM_CODIGO, [DPSEM_ESTADO] = @DPSEM_ESTADO, [DPED_CODIGO] = @DPED_CODIGO WHERE (([DPSEM_CODIGO] = @Original_DPSEM_CODIGO) AND ([COC_CODIGO] = @Original_COC_CODIGO) AND ((@IsNull_DPSEM_CANTIDADESTIMADA = 1 AND [DPSEM_CANTIDADESTIMADA] IS NULL) OR ([DPSEM_CANTIDADESTIMADA] = @Original_DPSEM_CANTIDADESTIMADA)) AND ((@IsNull_DPSEM_CANTIDADREAL = 1 AND [DPSEM_CANTIDADREAL] IS NULL) OR ([DPSEM_CANTIDADREAL] = @Original_DPSEM_CANTIDADREAL)) AND ([DIAPSEM_CODIGO] = @Original_DIAPSEM_CODIGO) AND ((@IsNull_DPSEM_ESTADO = 1 AND [DPSEM_ESTADO] IS NULL) OR ([DPSEM_ESTADO] = @Original_DPSEM_ESTADO)) AND ((@IsNull_DPED_CODIGO = 1 AND [DPED_CODIGO] IS NULL) OR ([DPED_CODIGO] = @Original_DPED_CODIGO)));
+SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIAPSEM_CODIGO, DPSEM_ESTADO, DPED_CODIGO FROM DETALLE_PLANES_SEMANALES WHERE (DPSEM_CODIGO = @DPSEM_CODIGO)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPSEM_CANTIDADESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPSEM_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPSEM_CANTIDADREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPSEM_CANTIDADREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DIAPSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DIAPSEM_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPSEM_ESTADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "DPSEM_ESTADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPSEM_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPSEM_CANTIDADESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPSEM_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -5990,6 +6510,8 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DIAPSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DIAPSEM_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPSEM_ESTADO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPSEM_ESTADO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPSEM_ESTADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "DPSEM_ESTADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPED_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "DPSEM_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -6005,7 +6527,7 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIAP" +
-                "SEM_CODIGO, DPSEM_ESTADO FROM dbo.DETALLE_PLANES_SEMANALES";
+                "SEM_CODIGO, DPSEM_ESTADO, DPED_CODIGO FROM dbo.DETALLE_PLANES_SEMANALES";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -6059,7 +6581,7 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_DPSEM_CODIGO, decimal Original_COC_CODIGO, global::System.Nullable<int> Original_DPSEM_CANTIDADESTIMADA, global::System.Nullable<int> Original_DPSEM_CANTIDADREAL, decimal Original_DIAPSEM_CODIGO, global::System.Nullable<decimal> Original_DPSEM_ESTADO) {
+        public virtual int Delete(decimal Original_DPSEM_CODIGO, decimal Original_COC_CODIGO, global::System.Nullable<int> Original_DPSEM_CANTIDADESTIMADA, global::System.Nullable<int> Original_DPSEM_CANTIDADREAL, decimal Original_DIAPSEM_CODIGO, global::System.Nullable<decimal> Original_DPSEM_ESTADO, global::System.Nullable<decimal> Original_DPED_CODIGO) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_DPSEM_CODIGO));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_COC_CODIGO));
             if ((Original_DPSEM_CANTIDADESTIMADA.HasValue == true)) {
@@ -6087,6 +6609,14 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
                 this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
+            if ((Original_DPED_CODIGO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((decimal)(Original_DPED_CODIGO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6106,7 +6636,7 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(decimal COC_CODIGO, global::System.Nullable<int> DPSEM_CANTIDADESTIMADA, global::System.Nullable<int> DPSEM_CANTIDADREAL, decimal DIAPSEM_CODIGO, global::System.Nullable<decimal> DPSEM_ESTADO) {
+        public virtual int Insert(decimal COC_CODIGO, global::System.Nullable<int> DPSEM_CANTIDADESTIMADA, global::System.Nullable<int> DPSEM_CANTIDADREAL, decimal DIAPSEM_CODIGO, global::System.Nullable<decimal> DPSEM_ESTADO, global::System.Nullable<decimal> DPED_CODIGO) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(COC_CODIGO));
             if ((DPSEM_CANTIDADESTIMADA.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((int)(DPSEM_CANTIDADESTIMADA.Value));
@@ -6123,6 +6653,391 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
             this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(DIAPSEM_CODIGO));
             if ((DPSEM_ESTADO.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(DPSEM_ESTADO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((DPED_CODIGO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(DPED_CODIGO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(decimal COC_CODIGO, global::System.Nullable<int> DPSEM_CANTIDADESTIMADA, global::System.Nullable<int> DPSEM_CANTIDADREAL, decimal DIAPSEM_CODIGO, global::System.Nullable<decimal> DPSEM_ESTADO, global::System.Nullable<decimal> DPED_CODIGO, decimal Original_DPSEM_CODIGO, decimal Original_COC_CODIGO, global::System.Nullable<int> Original_DPSEM_CANTIDADESTIMADA, global::System.Nullable<int> Original_DPSEM_CANTIDADREAL, decimal Original_DIAPSEM_CODIGO, global::System.Nullable<decimal> Original_DPSEM_ESTADO, global::System.Nullable<decimal> Original_DPED_CODIGO, decimal DPSEM_CODIGO) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(COC_CODIGO));
+            if ((DPSEM_CANTIDADESTIMADA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(DPSEM_CANTIDADESTIMADA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((DPSEM_CANTIDADREAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(DPSEM_CANTIDADREAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(DIAPSEM_CODIGO));
+            if ((DPSEM_ESTADO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(DPSEM_ESTADO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((DPED_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(DPED_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_DPSEM_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(Original_COC_CODIGO));
+            if ((Original_DPSEM_CANTIDADESTIMADA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_DPSEM_CANTIDADESTIMADA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((Original_DPSEM_CANTIDADREAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_DPSEM_CANTIDADREAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(Original_DIAPSEM_CODIGO));
+            if ((Original_DPSEM_ESTADO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((decimal)(Original_DPSEM_ESTADO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            if ((Original_DPED_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((decimal)(Original_DPED_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[17].Value = ((decimal)(DPSEM_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(decimal COC_CODIGO, global::System.Nullable<int> DPSEM_CANTIDADESTIMADA, global::System.Nullable<int> DPSEM_CANTIDADREAL, decimal DIAPSEM_CODIGO, global::System.Nullable<decimal> DPSEM_ESTADO, global::System.Nullable<decimal> DPED_CODIGO, decimal Original_DPSEM_CODIGO, decimal Original_COC_CODIGO, global::System.Nullable<int> Original_DPSEM_CANTIDADESTIMADA, global::System.Nullable<int> Original_DPSEM_CANTIDADREAL, decimal Original_DIAPSEM_CODIGO, global::System.Nullable<decimal> Original_DPSEM_ESTADO, global::System.Nullable<decimal> Original_DPED_CODIGO) {
+            return this.Update(COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIAPSEM_CODIGO, DPSEM_ESTADO, DPED_CODIGO, Original_DPSEM_CODIGO, Original_COC_CODIGO, Original_DPSEM_CANTIDADESTIMADA, Original_DPSEM_CANTIDADREAL, Original_DIAPSEM_CODIGO, Original_DPSEM_ESTADO, Original_DPED_CODIGO, Original_DPSEM_CODIGO);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class DETALLE_PEDIDOSTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public DETALLE_PEDIDOSTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "DETALLE_PEDIDOS";
+            tableMapping.ColumnMappings.Add("DPED_CODIGO", "DPED_CODIGO");
+            tableMapping.ColumnMappings.Add("PED_CODIGO", "PED_CODIGO");
+            tableMapping.ColumnMappings.Add("EDPED_CODIGO", "EDPED_CODIGO");
+            tableMapping.ColumnMappings.Add("COC_CODIGO", "COC_CODIGO");
+            tableMapping.ColumnMappings.Add("DPED_CANTIDAD", "DPED_CANTIDAD");
+            tableMapping.ColumnMappings.Add("DPED_FECHA_CANCELACION", "DPED_FECHA_CANCELACION");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[DETALLE_PEDIDOS] WHERE (([DPED_CODIGO] = @Original_DPED_CODIGO) AND ([PED_CODIGO] = @Original_PED_CODIGO) AND ([EDPED_CODIGO] = @Original_EDPED_CODIGO) AND ([COC_CODIGO] = @Original_COC_CODIGO) AND ([DPED_CANTIDAD] = @Original_DPED_CANTIDAD) AND ((@IsNull_DPED_FECHA_CANCELACION = 1 AND [DPED_FECHA_CANCELACION] IS NULL) OR ([DPED_FECHA_CANCELACION] = @Original_DPED_FECHA_CANCELACION)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EDPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EDPED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPED_CANTIDAD", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPED_CANTIDAD", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPED_FECHA_CANCELACION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPED_FECHA_CANCELACION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPED_FECHA_CANCELACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPED_FECHA_CANCELACION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[DETALLE_PEDIDOS] ([PED_CODIGO], [EDPED_CODIGO], [COC_CODIGO], [DPED_CANTIDAD], [DPED_FECHA_CANCELACION]) VALUES (@PED_CODIGO, @EDPED_CODIGO, @COC_CODIGO, @DPED_CANTIDAD, @DPED_FECHA_CANCELACION);
+SELECT DPED_CODIGO, PED_CODIGO, EDPED_CODIGO, COC_CODIGO, DPED_CANTIDAD, DPED_FECHA_CANCELACION FROM DETALLE_PEDIDOS WHERE (DPED_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EDPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EDPED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPED_CANTIDAD", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPED_CANTIDAD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPED_FECHA_CANCELACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPED_FECHA_CANCELACION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[DETALLE_PEDIDOS] SET [PED_CODIGO] = @PED_CODIGO, [EDPED_CODIGO] = @EDPED_CODIGO, [COC_CODIGO] = @COC_CODIGO, [DPED_CANTIDAD] = @DPED_CANTIDAD, [DPED_FECHA_CANCELACION] = @DPED_FECHA_CANCELACION WHERE (([DPED_CODIGO] = @Original_DPED_CODIGO) AND ([PED_CODIGO] = @Original_PED_CODIGO) AND ([EDPED_CODIGO] = @Original_EDPED_CODIGO) AND ([COC_CODIGO] = @Original_COC_CODIGO) AND ([DPED_CANTIDAD] = @Original_DPED_CANTIDAD) AND ((@IsNull_DPED_FECHA_CANCELACION = 1 AND [DPED_FECHA_CANCELACION] IS NULL) OR ([DPED_FECHA_CANCELACION] = @Original_DPED_FECHA_CANCELACION)));
+SELECT DPED_CODIGO, PED_CODIGO, EDPED_CODIGO, COC_CODIGO, DPED_CANTIDAD, DPED_FECHA_CANCELACION FROM DETALLE_PEDIDOS WHERE (DPED_CODIGO = @DPED_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EDPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EDPED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPED_CANTIDAD", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPED_CANTIDAD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPED_FECHA_CANCELACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPED_FECHA_CANCELACION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EDPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EDPED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPED_CANTIDAD", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPED_CANTIDAD", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPED_FECHA_CANCELACION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPED_FECHA_CANCELACION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPED_FECHA_CANCELACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPED_FECHA_CANCELACION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPED_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString6;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT DPED_CODIGO, PED_CODIGO, EDPED_CODIGO, COC_CODIGO, DPED_CANTIDAD, DPED_FEC" +
+                "HA_CANCELACION FROM dbo.DETALLE_PEDIDOS";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsPlanSemanal.DETALLE_PEDIDOSDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsPlanSemanal.DETALLE_PEDIDOSDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsPlanSemanal.DETALLE_PEDIDOSDataTable dataTable = new dsPlanSemanal.DETALLE_PEDIDOSDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsPlanSemanal.DETALLE_PEDIDOSDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsPlanSemanal dataSet) {
+            return this.Adapter.Update(dataSet, "DETALLE_PEDIDOS");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_DPED_CODIGO, decimal Original_PED_CODIGO, decimal Original_EDPED_CODIGO, decimal Original_COC_CODIGO, int Original_DPED_CANTIDAD, global::System.Nullable<global::System.DateTime> Original_DPED_FECHA_CANCELACION) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_DPED_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_PED_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_EDPED_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((decimal)(Original_COC_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_DPED_CANTIDAD));
+            if ((Original_DPED_FECHA_CANCELACION.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((System.DateTime)(Original_DPED_FECHA_CANCELACION.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal PED_CODIGO, decimal EDPED_CODIGO, decimal COC_CODIGO, int DPED_CANTIDAD, global::System.Nullable<global::System.DateTime> DPED_FECHA_CANCELACION) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(PED_CODIGO));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(EDPED_CODIGO));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(COC_CODIGO));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((int)(DPED_CANTIDAD));
+            if ((DPED_FECHA_CANCELACION.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(DPED_FECHA_CANCELACION.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
@@ -6146,55 +7061,31 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal COC_CODIGO, global::System.Nullable<int> DPSEM_CANTIDADESTIMADA, global::System.Nullable<int> DPSEM_CANTIDADREAL, decimal DIAPSEM_CODIGO, global::System.Nullable<decimal> DPSEM_ESTADO, decimal Original_DPSEM_CODIGO, decimal Original_COC_CODIGO, global::System.Nullable<int> Original_DPSEM_CANTIDADESTIMADA, global::System.Nullable<int> Original_DPSEM_CANTIDADREAL, decimal Original_DIAPSEM_CODIGO, global::System.Nullable<decimal> Original_DPSEM_ESTADO, decimal DPSEM_CODIGO) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(COC_CODIGO));
-            if ((DPSEM_CANTIDADESTIMADA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(DPSEM_CANTIDADESTIMADA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((DPSEM_CANTIDADREAL.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(DPSEM_CANTIDADREAL.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(DIAPSEM_CODIGO));
-            if ((DPSEM_ESTADO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(DPSEM_ESTADO.Value));
+        public virtual int Update(decimal PED_CODIGO, decimal EDPED_CODIGO, decimal COC_CODIGO, int DPED_CANTIDAD, global::System.Nullable<global::System.DateTime> DPED_FECHA_CANCELACION, decimal Original_DPED_CODIGO, decimal Original_PED_CODIGO, decimal Original_EDPED_CODIGO, decimal Original_COC_CODIGO, int Original_DPED_CANTIDAD, global::System.Nullable<global::System.DateTime> Original_DPED_FECHA_CANCELACION, decimal DPED_CODIGO) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(PED_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(EDPED_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(COC_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(DPED_CANTIDAD));
+            if ((DPED_FECHA_CANCELACION.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(DPED_FECHA_CANCELACION.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(Original_DPSEM_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_COC_CODIGO));
-            if ((Original_DPSEM_CANTIDADESTIMADA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_DPSEM_CANTIDADESTIMADA.Value));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(Original_DPED_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_PED_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(Original_EDPED_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_COC_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_DPED_CANTIDAD));
+            if ((Original_DPED_FECHA_CANCELACION.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(Original_DPED_FECHA_CANCELACION.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
-            if ((Original_DPSEM_CANTIDADREAL.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_DPSEM_CANTIDADREAL.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_DIAPSEM_CODIGO));
-            if ((Original_DPSEM_ESTADO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_DPSEM_ESTADO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((decimal)(DPSEM_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(DPED_CODIGO));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6214,8 +7105,1229 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal COC_CODIGO, global::System.Nullable<int> DPSEM_CANTIDADESTIMADA, global::System.Nullable<int> DPSEM_CANTIDADREAL, decimal DIAPSEM_CODIGO, global::System.Nullable<decimal> DPSEM_ESTADO, decimal Original_DPSEM_CODIGO, decimal Original_COC_CODIGO, global::System.Nullable<int> Original_DPSEM_CANTIDADESTIMADA, global::System.Nullable<int> Original_DPSEM_CANTIDADREAL, decimal Original_DIAPSEM_CODIGO, global::System.Nullable<decimal> Original_DPSEM_ESTADO) {
-            return this.Update(COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIAPSEM_CODIGO, DPSEM_ESTADO, Original_DPSEM_CODIGO, Original_COC_CODIGO, Original_DPSEM_CANTIDADESTIMADA, Original_DPSEM_CANTIDADREAL, Original_DIAPSEM_CODIGO, Original_DPSEM_ESTADO, Original_DPSEM_CODIGO);
+        public virtual int Update(decimal PED_CODIGO, decimal EDPED_CODIGO, decimal COC_CODIGO, int DPED_CANTIDAD, global::System.Nullable<global::System.DateTime> DPED_FECHA_CANCELACION, decimal Original_DPED_CODIGO, decimal Original_PED_CODIGO, decimal Original_EDPED_CODIGO, decimal Original_COC_CODIGO, int Original_DPED_CANTIDAD, global::System.Nullable<global::System.DateTime> Original_DPED_FECHA_CANCELACION) {
+            return this.Update(PED_CODIGO, EDPED_CODIGO, COC_CODIGO, DPED_CANTIDAD, DPED_FECHA_CANCELACION, Original_DPED_CODIGO, Original_PED_CODIGO, Original_EDPED_CODIGO, Original_COC_CODIGO, Original_DPED_CANTIDAD, Original_DPED_FECHA_CANCELACION, Original_DPED_CODIGO);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class PEDIDOSTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public PEDIDOSTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "PEDIDOS";
+            tableMapping.ColumnMappings.Add("PED_CODIGO", "PED_CODIGO");
+            tableMapping.ColumnMappings.Add("CLI_CODIGO", "CLI_CODIGO");
+            tableMapping.ColumnMappings.Add("EPED_CODIGO", "EPED_CODIGO");
+            tableMapping.ColumnMappings.Add("PED_FECHAENTREGAPREVISTA", "PED_FECHAENTREGAPREVISTA");
+            tableMapping.ColumnMappings.Add("PED_FECHAENTREGAREAL", "PED_FECHAENTREGAREAL");
+            tableMapping.ColumnMappings.Add("PED_FECHA_ALTA", "PED_FECHA_ALTA");
+            tableMapping.ColumnMappings.Add("PED_OBSERVACIONES", "PED_OBSERVACIONES");
+            tableMapping.ColumnMappings.Add("PED_NUMERO", "PED_NUMERO");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[PEDIDOS] WHERE (([PED_CODIGO] = @Original_PED_CODIGO) AND ([CLI_CODIGO] = @Original_CLI_CODIGO) AND ([EPED_CODIGO] = @Original_EPED_CODIGO) AND ((@IsNull_PED_FECHAENTREGAPREVISTA = 1 AND [PED_FECHAENTREGAPREVISTA] IS NULL) OR ([PED_FECHAENTREGAPREVISTA] = @Original_PED_FECHAENTREGAPREVISTA)) AND ((@IsNull_PED_FECHAENTREGAREAL = 1 AND [PED_FECHAENTREGAREAL] IS NULL) OR ([PED_FECHAENTREGAREAL] = @Original_PED_FECHAENTREGAREAL)) AND ((@IsNull_PED_FECHA_ALTA = 1 AND [PED_FECHA_ALTA] IS NULL) OR ([PED_FECHA_ALTA] = @Original_PED_FECHA_ALTA)) AND ((@IsNull_PED_OBSERVACIONES = 1 AND [PED_OBSERVACIONES] IS NULL) OR ([PED_OBSERVACIONES] = @Original_PED_OBSERVACIONES)) AND ((@IsNull_PED_NUMERO = 1 AND [PED_NUMERO] IS NULL) OR ([PED_NUMERO] = @Original_PED_NUMERO)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CLI_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CLI_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EPED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PED_FECHAENTREGAPREVISTA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHAENTREGAPREVISTA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PED_FECHAENTREGAPREVISTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHAENTREGAPREVISTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PED_FECHAENTREGAREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHAENTREGAREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PED_FECHAENTREGAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHAENTREGAREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PED_FECHA_ALTA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHA_ALTA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PED_FECHA_ALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHA_ALTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PED_OBSERVACIONES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_OBSERVACIONES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PED_OBSERVACIONES", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_OBSERVACIONES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PED_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PED_NUMERO", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[PEDIDOS] ([CLI_CODIGO], [EPED_CODIGO], [PED_FECHAENTREGAPREVISTA], [PED_FECHAENTREGAREAL], [PED_FECHA_ALTA], [PED_OBSERVACIONES], [PED_NUMERO]) VALUES (@CLI_CODIGO, @EPED_CODIGO, @PED_FECHAENTREGAPREVISTA, @PED_FECHAENTREGAREAL, @PED_FECHA_ALTA, @PED_OBSERVACIONES, @PED_NUMERO);
+SELECT PED_CODIGO, CLI_CODIGO, EPED_CODIGO, PED_FECHAENTREGAPREVISTA, PED_FECHAENTREGAREAL, PED_FECHA_ALTA, PED_OBSERVACIONES, PED_NUMERO FROM PEDIDOS WHERE (PED_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CLI_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CLI_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EPED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PED_FECHAENTREGAPREVISTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHAENTREGAPREVISTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PED_FECHAENTREGAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHAENTREGAREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PED_FECHA_ALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHA_ALTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PED_OBSERVACIONES", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_OBSERVACIONES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PED_NUMERO", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[PEDIDOS] SET [CLI_CODIGO] = @CLI_CODIGO, [EPED_CODIGO] = @EPED_CODIGO, [PED_FECHAENTREGAPREVISTA] = @PED_FECHAENTREGAPREVISTA, [PED_FECHAENTREGAREAL] = @PED_FECHAENTREGAREAL, [PED_FECHA_ALTA] = @PED_FECHA_ALTA, [PED_OBSERVACIONES] = @PED_OBSERVACIONES, [PED_NUMERO] = @PED_NUMERO WHERE (([PED_CODIGO] = @Original_PED_CODIGO) AND ([CLI_CODIGO] = @Original_CLI_CODIGO) AND ([EPED_CODIGO] = @Original_EPED_CODIGO) AND ((@IsNull_PED_FECHAENTREGAPREVISTA = 1 AND [PED_FECHAENTREGAPREVISTA] IS NULL) OR ([PED_FECHAENTREGAPREVISTA] = @Original_PED_FECHAENTREGAPREVISTA)) AND ((@IsNull_PED_FECHAENTREGAREAL = 1 AND [PED_FECHAENTREGAREAL] IS NULL) OR ([PED_FECHAENTREGAREAL] = @Original_PED_FECHAENTREGAREAL)) AND ((@IsNull_PED_FECHA_ALTA = 1 AND [PED_FECHA_ALTA] IS NULL) OR ([PED_FECHA_ALTA] = @Original_PED_FECHA_ALTA)) AND ((@IsNull_PED_OBSERVACIONES = 1 AND [PED_OBSERVACIONES] IS NULL) OR ([PED_OBSERVACIONES] = @Original_PED_OBSERVACIONES)) AND ((@IsNull_PED_NUMERO = 1 AND [PED_NUMERO] IS NULL) OR ([PED_NUMERO] = @Original_PED_NUMERO)));
+SELECT PED_CODIGO, CLI_CODIGO, EPED_CODIGO, PED_FECHAENTREGAPREVISTA, PED_FECHAENTREGAREAL, PED_FECHA_ALTA, PED_OBSERVACIONES, PED_NUMERO FROM PEDIDOS WHERE (PED_CODIGO = @PED_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CLI_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CLI_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EPED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PED_FECHAENTREGAPREVISTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHAENTREGAPREVISTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PED_FECHAENTREGAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHAENTREGAREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PED_FECHA_ALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHA_ALTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PED_OBSERVACIONES", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_OBSERVACIONES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PED_NUMERO", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CLI_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CLI_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EPED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PED_FECHAENTREGAPREVISTA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHAENTREGAPREVISTA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PED_FECHAENTREGAPREVISTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHAENTREGAPREVISTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PED_FECHAENTREGAREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHAENTREGAREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PED_FECHAENTREGAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHAENTREGAREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PED_FECHA_ALTA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHA_ALTA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PED_FECHA_ALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_FECHA_ALTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PED_OBSERVACIONES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_OBSERVACIONES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PED_OBSERVACIONES", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_OBSERVACIONES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PED_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PED_NUMERO", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PED_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PED_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "PED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString6;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT PED_CODIGO, CLI_CODIGO, EPED_CODIGO, PED_FECHAENTREGAPREVISTA, PED_FECHAEN" +
+                "TREGAREAL, PED_FECHA_ALTA, PED_OBSERVACIONES, PED_NUMERO FROM dbo.PEDIDOS";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsPlanSemanal.PEDIDOSDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsPlanSemanal.PEDIDOSDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsPlanSemanal.PEDIDOSDataTable dataTable = new dsPlanSemanal.PEDIDOSDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsPlanSemanal.PEDIDOSDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsPlanSemanal dataSet) {
+            return this.Adapter.Update(dataSet, "PEDIDOS");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_PED_CODIGO, decimal Original_CLI_CODIGO, decimal Original_EPED_CODIGO, global::System.Nullable<global::System.DateTime> Original_PED_FECHAENTREGAPREVISTA, global::System.Nullable<global::System.DateTime> Original_PED_FECHAENTREGAREAL, global::System.Nullable<global::System.DateTime> Original_PED_FECHA_ALTA, string Original_PED_OBSERVACIONES, string Original_PED_NUMERO) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_PED_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_CLI_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_EPED_CODIGO));
+            if ((Original_PED_FECHAENTREGAPREVISTA.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((System.DateTime)(Original_PED_FECHAENTREGAPREVISTA.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PED_FECHAENTREGAREAL.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((System.DateTime)(Original_PED_FECHAENTREGAREAL.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PED_FECHA_ALTA.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((System.DateTime)(Original_PED_FECHA_ALTA.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PED_OBSERVACIONES == null)) {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((string)(Original_PED_OBSERVACIONES));
+            }
+            if ((Original_PED_NUMERO == null)) {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((string)(Original_PED_NUMERO));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal CLI_CODIGO, decimal EPED_CODIGO, global::System.Nullable<global::System.DateTime> PED_FECHAENTREGAPREVISTA, global::System.Nullable<global::System.DateTime> PED_FECHAENTREGAREAL, global::System.Nullable<global::System.DateTime> PED_FECHA_ALTA, string PED_OBSERVACIONES, string PED_NUMERO) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(CLI_CODIGO));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(EPED_CODIGO));
+            if ((PED_FECHAENTREGAPREVISTA.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(PED_FECHAENTREGAPREVISTA.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((PED_FECHAENTREGAREAL.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((System.DateTime)(PED_FECHAENTREGAREAL.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((PED_FECHA_ALTA.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(PED_FECHA_ALTA.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((PED_OBSERVACIONES == null)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(PED_OBSERVACIONES));
+            }
+            if ((PED_NUMERO == null)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(PED_NUMERO));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    decimal CLI_CODIGO, 
+                    decimal EPED_CODIGO, 
+                    global::System.Nullable<global::System.DateTime> PED_FECHAENTREGAPREVISTA, 
+                    global::System.Nullable<global::System.DateTime> PED_FECHAENTREGAREAL, 
+                    global::System.Nullable<global::System.DateTime> PED_FECHA_ALTA, 
+                    string PED_OBSERVACIONES, 
+                    string PED_NUMERO, 
+                    decimal Original_PED_CODIGO, 
+                    decimal Original_CLI_CODIGO, 
+                    decimal Original_EPED_CODIGO, 
+                    global::System.Nullable<global::System.DateTime> Original_PED_FECHAENTREGAPREVISTA, 
+                    global::System.Nullable<global::System.DateTime> Original_PED_FECHAENTREGAREAL, 
+                    global::System.Nullable<global::System.DateTime> Original_PED_FECHA_ALTA, 
+                    string Original_PED_OBSERVACIONES, 
+                    string Original_PED_NUMERO, 
+                    decimal PED_CODIGO) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(CLI_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(EPED_CODIGO));
+            if ((PED_FECHAENTREGAPREVISTA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(PED_FECHAENTREGAPREVISTA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((PED_FECHAENTREGAREAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((System.DateTime)(PED_FECHAENTREGAREAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((PED_FECHA_ALTA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(PED_FECHA_ALTA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((PED_OBSERVACIONES == null)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(PED_OBSERVACIONES));
+            }
+            if ((PED_NUMERO == null)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(PED_NUMERO));
+            }
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(Original_PED_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_CLI_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(Original_EPED_CODIGO));
+            if ((Original_PED_FECHAENTREGAPREVISTA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(Original_PED_FECHAENTREGAPREVISTA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PED_FECHAENTREGAREAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((System.DateTime)(Original_PED_FECHAENTREGAREAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PED_FECHA_ALTA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((System.DateTime)(Original_PED_FECHA_ALTA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PED_OBSERVACIONES == null)) {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_PED_OBSERVACIONES));
+            }
+            if ((Original_PED_NUMERO == null)) {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((string)(Original_PED_NUMERO));
+            }
+            this.Adapter.UpdateCommand.Parameters[20].Value = ((decimal)(PED_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(decimal CLI_CODIGO, decimal EPED_CODIGO, global::System.Nullable<global::System.DateTime> PED_FECHAENTREGAPREVISTA, global::System.Nullable<global::System.DateTime> PED_FECHAENTREGAREAL, global::System.Nullable<global::System.DateTime> PED_FECHA_ALTA, string PED_OBSERVACIONES, string PED_NUMERO, decimal Original_PED_CODIGO, decimal Original_CLI_CODIGO, decimal Original_EPED_CODIGO, global::System.Nullable<global::System.DateTime> Original_PED_FECHAENTREGAPREVISTA, global::System.Nullable<global::System.DateTime> Original_PED_FECHAENTREGAREAL, global::System.Nullable<global::System.DateTime> Original_PED_FECHA_ALTA, string Original_PED_OBSERVACIONES, string Original_PED_NUMERO) {
+            return this.Update(CLI_CODIGO, EPED_CODIGO, PED_FECHAENTREGAPREVISTA, PED_FECHAENTREGAREAL, PED_FECHA_ALTA, PED_OBSERVACIONES, PED_NUMERO, Original_PED_CODIGO, Original_CLI_CODIGO, Original_EPED_CODIGO, Original_PED_FECHAENTREGAPREVISTA, Original_PED_FECHAENTREGAREAL, Original_PED_FECHA_ALTA, Original_PED_OBSERVACIONES, Original_PED_NUMERO, Original_PED_CODIGO);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class DETALLE_PLANES_MENSUALESTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public DETALLE_PLANES_MENSUALESTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "DETALLE_PLANES_MENSUALES";
+            tableMapping.ColumnMappings.Add("DPMES_CODIGO", "DPMES_CODIGO");
+            tableMapping.ColumnMappings.Add("PMES_CODIGO", "PMES_CODIGO");
+            tableMapping.ColumnMappings.Add("COC_CODIGO", "COC_CODIGO");
+            tableMapping.ColumnMappings.Add("DPMES_CANTIDADESTIMADA", "DPMES_CANTIDADESTIMADA");
+            tableMapping.ColumnMappings.Add("DPMES_CANTIDADREAL", "DPMES_CANTIDADREAL");
+            tableMapping.ColumnMappings.Add("DPED_CODIGO", "DPED_CODIGO");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[DETALLE_PLANES_MENSUALES] WHERE (([DPMES_CODIGO] = @Original_DPMES_CODIGO) AND ([PMES_CODIGO] = @Original_PMES_CODIGO) AND ([COC_CODIGO] = @Original_COC_CODIGO) AND ((@IsNull_DPMES_CANTIDADESTIMADA = 1 AND [DPMES_CANTIDADESTIMADA] IS NULL) OR ([DPMES_CANTIDADESTIMADA] = @Original_DPMES_CANTIDADESTIMADA)) AND ((@IsNull_DPMES_CANTIDADREAL = 1 AND [DPMES_CANTIDADREAL] IS NULL) OR ([DPMES_CANTIDADREAL] = @Original_DPMES_CANTIDADREAL)) AND ((@IsNull_DPED_CODIGO = 1 AND [DPED_CODIGO] IS NULL) OR ([DPED_CODIGO] = @Original_DPED_CODIGO)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPMES_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PMES_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPMES_CANTIDADESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPMES_CANTIDADESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPMES_CANTIDADREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPMES_CANTIDADREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPED_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[DETALLE_PLANES_MENSUALES] ([PMES_CODIGO], [COC_CODIGO], [DPMES_CANTIDADESTIMADA], [DPMES_CANTIDADREAL], [DPED_CODIGO]) VALUES (@PMES_CODIGO, @COC_CODIGO, @DPMES_CANTIDADESTIMADA, @DPMES_CANTIDADREAL, @DPED_CODIGO);
+SELECT DPMES_CODIGO, PMES_CODIGO, COC_CODIGO, DPMES_CANTIDADESTIMADA, DPMES_CANTIDADREAL, DPED_CODIGO FROM DETALLE_PLANES_MENSUALES WHERE (DPMES_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PMES_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPMES_CANTIDADESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPMES_CANTIDADREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[DETALLE_PLANES_MENSUALES] SET [PMES_CODIGO] = @PMES_CODIGO, [COC_CODIGO] = @COC_CODIGO, [DPMES_CANTIDADESTIMADA] = @DPMES_CANTIDADESTIMADA, [DPMES_CANTIDADREAL] = @DPMES_CANTIDADREAL, [DPED_CODIGO] = @DPED_CODIGO WHERE (([DPMES_CODIGO] = @Original_DPMES_CODIGO) AND ([PMES_CODIGO] = @Original_PMES_CODIGO) AND ([COC_CODIGO] = @Original_COC_CODIGO) AND ((@IsNull_DPMES_CANTIDADESTIMADA = 1 AND [DPMES_CANTIDADESTIMADA] IS NULL) OR ([DPMES_CANTIDADESTIMADA] = @Original_DPMES_CANTIDADESTIMADA)) AND ((@IsNull_DPMES_CANTIDADREAL = 1 AND [DPMES_CANTIDADREAL] IS NULL) OR ([DPMES_CANTIDADREAL] = @Original_DPMES_CANTIDADREAL)) AND ((@IsNull_DPED_CODIGO = 1 AND [DPED_CODIGO] IS NULL) OR ([DPED_CODIGO] = @Original_DPED_CODIGO)));
+SELECT DPMES_CODIGO, PMES_CODIGO, COC_CODIGO, DPMES_CANTIDADESTIMADA, DPMES_CANTIDADREAL, DPED_CODIGO FROM DETALLE_PLANES_MENSUALES WHERE (DPMES_CODIGO = @DPMES_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PMES_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPMES_CANTIDADESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPMES_CANTIDADREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPMES_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PMES_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPMES_CANTIDADESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPMES_CANTIDADESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPMES_CANTIDADREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPMES_CANTIDADREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPMES_CANTIDADREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPED_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPMES_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "DPMES_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString6;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT DPMES_CODIGO, PMES_CODIGO, COC_CODIGO, DPMES_CANTIDADESTIMADA, DPMES_CANTI" +
+                "DADREAL, DPED_CODIGO FROM dbo.DETALLE_PLANES_MENSUALES";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsPlanSemanal.DETALLE_PLANES_MENSUALESDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsPlanSemanal.DETALLE_PLANES_MENSUALESDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsPlanSemanal.DETALLE_PLANES_MENSUALESDataTable dataTable = new dsPlanSemanal.DETALLE_PLANES_MENSUALESDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsPlanSemanal.DETALLE_PLANES_MENSUALESDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsPlanSemanal dataSet) {
+            return this.Adapter.Update(dataSet, "DETALLE_PLANES_MENSUALES");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_DPMES_CODIGO, decimal Original_PMES_CODIGO, decimal Original_COC_CODIGO, global::System.Nullable<int> Original_DPMES_CANTIDADESTIMADA, global::System.Nullable<int> Original_DPMES_CANTIDADREAL, global::System.Nullable<decimal> Original_DPED_CODIGO) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_DPMES_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_PMES_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_COC_CODIGO));
+            if ((Original_DPMES_CANTIDADESTIMADA.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_DPMES_CANTIDADESTIMADA.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((Original_DPMES_CANTIDADREAL.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_DPMES_CANTIDADREAL.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((Original_DPED_CODIGO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((decimal)(Original_DPED_CODIGO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal PMES_CODIGO, decimal COC_CODIGO, global::System.Nullable<int> DPMES_CANTIDADESTIMADA, global::System.Nullable<int> DPMES_CANTIDADREAL, global::System.Nullable<decimal> DPED_CODIGO) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(PMES_CODIGO));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(COC_CODIGO));
+            if ((DPMES_CANTIDADESTIMADA.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(DPMES_CANTIDADESTIMADA.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((DPMES_CANTIDADREAL.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(DPMES_CANTIDADREAL.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((DPED_CODIGO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(DPED_CODIGO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(decimal PMES_CODIGO, decimal COC_CODIGO, global::System.Nullable<int> DPMES_CANTIDADESTIMADA, global::System.Nullable<int> DPMES_CANTIDADREAL, global::System.Nullable<decimal> DPED_CODIGO, decimal Original_DPMES_CODIGO, decimal Original_PMES_CODIGO, decimal Original_COC_CODIGO, global::System.Nullable<int> Original_DPMES_CANTIDADESTIMADA, global::System.Nullable<int> Original_DPMES_CANTIDADREAL, global::System.Nullable<decimal> Original_DPED_CODIGO, decimal DPMES_CODIGO) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(PMES_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(COC_CODIGO));
+            if ((DPMES_CANTIDADESTIMADA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(DPMES_CANTIDADESTIMADA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((DPMES_CANTIDADREAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(DPMES_CANTIDADREAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((DPED_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(DPED_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(Original_DPMES_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_PMES_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(Original_COC_CODIGO));
+            if ((Original_DPMES_CANTIDADESTIMADA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_DPMES_CANTIDADESTIMADA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((Original_DPMES_CANTIDADREAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_DPMES_CANTIDADREAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((Original_DPED_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_DPED_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((decimal)(DPMES_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(decimal PMES_CODIGO, decimal COC_CODIGO, global::System.Nullable<int> DPMES_CANTIDADESTIMADA, global::System.Nullable<int> DPMES_CANTIDADREAL, global::System.Nullable<decimal> DPED_CODIGO, decimal Original_DPMES_CODIGO, decimal Original_PMES_CODIGO, decimal Original_COC_CODIGO, global::System.Nullable<int> Original_DPMES_CANTIDADESTIMADA, global::System.Nullable<int> Original_DPMES_CANTIDADREAL, global::System.Nullable<decimal> Original_DPED_CODIGO) {
+            return this.Update(PMES_CODIGO, COC_CODIGO, DPMES_CANTIDADESTIMADA, DPMES_CANTIDADREAL, DPED_CODIGO, Original_DPMES_CODIGO, Original_PMES_CODIGO, Original_COC_CODIGO, Original_DPMES_CANTIDADESTIMADA, Original_DPMES_CANTIDADREAL, Original_DPED_CODIGO, Original_DPMES_CODIGO);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class PLANES_SEMANALESTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public PLANES_SEMANALESTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "PLANES_SEMANALES";
+            tableMapping.ColumnMappings.Add("PSEM_CODIGO", "PSEM_CODIGO");
+            tableMapping.ColumnMappings.Add("PMES_CODIGO", "PMES_CODIGO");
+            tableMapping.ColumnMappings.Add("PSEM_SEMANA", "PSEM_SEMANA");
+            tableMapping.ColumnMappings.Add("PSEM_FECHACREACION", "PSEM_FECHACREACION");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[PLANES_SEMANALES] WHERE (([PSEM_CODIGO] = @Original_PSEM_CODIGO) AND ([PMES_CODIGO] = @Original_PMES_CODIGO) AND ((@IsNull_PSEM_SEMANA = 1 AND [PSEM_SEMANA] IS NULL) OR ([PSEM_SEMANA] = @Original_PSEM_SEMANA)) AND ((@IsNull_PSEM_FECHACREACION = 1 AND [PSEM_FECHACREACION] IS NULL) OR ([PSEM_FECHACREACION] = @Original_PSEM_FECHACREACION)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PSEM_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PMES_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PSEM_SEMANA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PSEM_SEMANA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PSEM_SEMANA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 2, 0, "PSEM_SEMANA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PSEM_FECHACREACION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PSEM_FECHACREACION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PSEM_FECHACREACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PSEM_FECHACREACION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[PLANES_SEMANALES] ([PMES_CODIGO], [PSEM_SEMANA], [PSEM_FECHACREACION]) VALUES (@PMES_CODIGO, @PSEM_SEMANA, @PSEM_FECHACREACION);
+SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEMANALES WHERE (PSEM_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PMES_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PSEM_SEMANA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 2, 0, "PSEM_SEMANA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PSEM_FECHACREACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PSEM_FECHACREACION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[PLANES_SEMANALES] SET [PMES_CODIGO] = @PMES_CODIGO, [PSEM_SEMANA] = @PSEM_SEMANA, [PSEM_FECHACREACION] = @PSEM_FECHACREACION WHERE (([PSEM_CODIGO] = @Original_PSEM_CODIGO) AND ([PMES_CODIGO] = @Original_PMES_CODIGO) AND ((@IsNull_PSEM_SEMANA = 1 AND [PSEM_SEMANA] IS NULL) OR ([PSEM_SEMANA] = @Original_PSEM_SEMANA)) AND ((@IsNull_PSEM_FECHACREACION = 1 AND [PSEM_FECHACREACION] IS NULL) OR ([PSEM_FECHACREACION] = @Original_PSEM_FECHACREACION)));
+SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEMANALES WHERE (PSEM_CODIGO = @PSEM_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PMES_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PSEM_SEMANA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 2, 0, "PSEM_SEMANA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PSEM_FECHACREACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PSEM_FECHACREACION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PSEM_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PMES_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PMES_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PSEM_SEMANA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PSEM_SEMANA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PSEM_SEMANA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 2, 0, "PSEM_SEMANA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PSEM_FECHACREACION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PSEM_FECHACREACION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PSEM_FECHACREACION", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PSEM_FECHACREACION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "PSEM_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString6;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM dbo.PLANES_" +
+                "SEMANALES";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsPlanSemanal.PLANES_SEMANALESDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsPlanSemanal.PLANES_SEMANALESDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsPlanSemanal.PLANES_SEMANALESDataTable dataTable = new dsPlanSemanal.PLANES_SEMANALESDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsPlanSemanal.PLANES_SEMANALESDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsPlanSemanal dataSet) {
+            return this.Adapter.Update(dataSet, "PLANES_SEMANALES");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_PSEM_CODIGO, decimal Original_PMES_CODIGO, global::System.Nullable<decimal> Original_PSEM_SEMANA, global::System.Nullable<global::System.DateTime> Original_PSEM_FECHACREACION) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_PSEM_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_PMES_CODIGO));
+            if ((Original_PSEM_SEMANA.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((decimal)(Original_PSEM_SEMANA.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PSEM_FECHACREACION.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((System.DateTime)(Original_PSEM_FECHACREACION.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal PMES_CODIGO, global::System.Nullable<decimal> PSEM_SEMANA, global::System.Nullable<global::System.DateTime> PSEM_FECHACREACION) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(PMES_CODIGO));
+            if ((PSEM_SEMANA.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(PSEM_SEMANA.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((PSEM_FECHACREACION.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(PSEM_FECHACREACION.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(decimal PMES_CODIGO, global::System.Nullable<decimal> PSEM_SEMANA, global::System.Nullable<global::System.DateTime> PSEM_FECHACREACION, decimal Original_PSEM_CODIGO, decimal Original_PMES_CODIGO, global::System.Nullable<decimal> Original_PSEM_SEMANA, global::System.Nullable<global::System.DateTime> Original_PSEM_FECHACREACION, decimal PSEM_CODIGO) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(PMES_CODIGO));
+            if ((PSEM_SEMANA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(PSEM_SEMANA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((PSEM_FECHACREACION.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(PSEM_FECHACREACION.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(Original_PSEM_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(Original_PMES_CODIGO));
+            if ((Original_PSEM_SEMANA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_PSEM_SEMANA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PSEM_FECHACREACION.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(Original_PSEM_FECHACREACION.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(PSEM_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(decimal PMES_CODIGO, global::System.Nullable<decimal> PSEM_SEMANA, global::System.Nullable<global::System.DateTime> PSEM_FECHACREACION, decimal Original_PSEM_CODIGO, decimal Original_PMES_CODIGO, global::System.Nullable<decimal> Original_PSEM_SEMANA, global::System.Nullable<global::System.DateTime> Original_PSEM_FECHACREACION) {
+            return this.Update(PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION, Original_PSEM_CODIGO, Original_PMES_CODIGO, Original_PSEM_SEMANA, Original_PSEM_FECHACREACION, Original_PSEM_CODIGO);
         }
     }
     
@@ -6232,19 +8344,23 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
         
         private UpdateOrderOption _updateOrder;
         
-        private PLANES_SEMANALESTableAdapter _pLANES_SEMANALESTableAdapter;
-        
         private PLANES_MENSUALESTableAdapter _pLANES_MENSUALESTableAdapter;
         
         private PLANES_ANUALESTableAdapter _pLANES_ANUALESTableAdapter;
-        
-        private DETALLE_PLANES_MENSUALESTableAdapter _dETALLE_PLANES_MENSUALESTableAdapter;
         
         private COCINASTableAdapter _cOCINASTableAdapter;
         
         private DIAS_PLAN_SEMANALTableAdapter _dIAS_PLAN_SEMANALTableAdapter;
         
         private DETALLE_PLANES_SEMANALESTableAdapter _dETALLE_PLANES_SEMANALESTableAdapter;
+        
+        private DETALLE_PEDIDOSTableAdapter _dETALLE_PEDIDOSTableAdapter;
+        
+        private PEDIDOSTableAdapter _pEDIDOSTableAdapter;
+        
+        private DETALLE_PLANES_MENSUALESTableAdapter _dETALLE_PLANES_MENSUALESTableAdapter;
+        
+        private PLANES_SEMANALESTableAdapter _pLANES_SEMANALESTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -6257,19 +8373,6 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
             }
             set {
                 this._updateOrder = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
-        public PLANES_SEMANALESTableAdapter PLANES_SEMANALESTableAdapter {
-            get {
-                return this._pLANES_SEMANALESTableAdapter;
-            }
-            set {
-                this._pLANES_SEMANALESTableAdapter = value;
             }
         }
         
@@ -6296,19 +8399,6 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
             }
             set {
                 this._pLANES_ANUALESTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
-        public DETALLE_PLANES_MENSUALESTableAdapter DETALLE_PLANES_MENSUALESTableAdapter {
-            get {
-                return this._dETALLE_PLANES_MENSUALESTableAdapter;
-            }
-            set {
-                this._dETALLE_PLANES_MENSUALESTableAdapter = value;
             }
         }
         
@@ -6352,6 +8442,58 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public DETALLE_PEDIDOSTableAdapter DETALLE_PEDIDOSTableAdapter {
+            get {
+                return this._dETALLE_PEDIDOSTableAdapter;
+            }
+            set {
+                this._dETALLE_PEDIDOSTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public PEDIDOSTableAdapter PEDIDOSTableAdapter {
+            get {
+                return this._pEDIDOSTableAdapter;
+            }
+            set {
+                this._pEDIDOSTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public DETALLE_PLANES_MENSUALESTableAdapter DETALLE_PLANES_MENSUALESTableAdapter {
+            get {
+                return this._dETALLE_PLANES_MENSUALESTableAdapter;
+            }
+            set {
+                this._dETALLE_PLANES_MENSUALESTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public PLANES_SEMANALESTableAdapter PLANES_SEMANALESTableAdapter {
+            get {
+                return this._pLANES_SEMANALESTableAdapter;
+            }
+            set {
+                this._pLANES_SEMANALESTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -6368,10 +8510,6 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
                 if ((this._connection != null)) {
                     return this._connection;
                 }
-                if (((this._pLANES_SEMANALESTableAdapter != null) 
-                            && (this._pLANES_SEMANALESTableAdapter.Connection != null))) {
-                    return this._pLANES_SEMANALESTableAdapter.Connection;
-                }
                 if (((this._pLANES_MENSUALESTableAdapter != null) 
                             && (this._pLANES_MENSUALESTableAdapter.Connection != null))) {
                     return this._pLANES_MENSUALESTableAdapter.Connection;
@@ -6379,10 +8517,6 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
                 if (((this._pLANES_ANUALESTableAdapter != null) 
                             && (this._pLANES_ANUALESTableAdapter.Connection != null))) {
                     return this._pLANES_ANUALESTableAdapter.Connection;
-                }
-                if (((this._dETALLE_PLANES_MENSUALESTableAdapter != null) 
-                            && (this._dETALLE_PLANES_MENSUALESTableAdapter.Connection != null))) {
-                    return this._dETALLE_PLANES_MENSUALESTableAdapter.Connection;
                 }
                 if (((this._cOCINASTableAdapter != null) 
                             && (this._cOCINASTableAdapter.Connection != null))) {
@@ -6396,6 +8530,22 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
                             && (this._dETALLE_PLANES_SEMANALESTableAdapter.Connection != null))) {
                     return this._dETALLE_PLANES_SEMANALESTableAdapter.Connection;
                 }
+                if (((this._dETALLE_PEDIDOSTableAdapter != null) 
+                            && (this._dETALLE_PEDIDOSTableAdapter.Connection != null))) {
+                    return this._dETALLE_PEDIDOSTableAdapter.Connection;
+                }
+                if (((this._pEDIDOSTableAdapter != null) 
+                            && (this._pEDIDOSTableAdapter.Connection != null))) {
+                    return this._pEDIDOSTableAdapter.Connection;
+                }
+                if (((this._dETALLE_PLANES_MENSUALESTableAdapter != null) 
+                            && (this._dETALLE_PLANES_MENSUALESTableAdapter.Connection != null))) {
+                    return this._dETALLE_PLANES_MENSUALESTableAdapter.Connection;
+                }
+                if (((this._pLANES_SEMANALESTableAdapter != null) 
+                            && (this._pLANES_SEMANALESTableAdapter.Connection != null))) {
+                    return this._pLANES_SEMANALESTableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -6408,16 +8558,10 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
-                if ((this._pLANES_SEMANALESTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._pLANES_MENSUALESTableAdapter != null)) {
                     count = (count + 1);
                 }
                 if ((this._pLANES_ANUALESTableAdapter != null)) {
-                    count = (count + 1);
-                }
-                if ((this._dETALLE_PLANES_MENSUALESTableAdapter != null)) {
                     count = (count + 1);
                 }
                 if ((this._cOCINASTableAdapter != null)) {
@@ -6427,6 +8571,18 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
                     count = (count + 1);
                 }
                 if ((this._dETALLE_PLANES_SEMANALESTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._dETALLE_PEDIDOSTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._pEDIDOSTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._dETALLE_PLANES_MENSUALESTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._pLANES_SEMANALESTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -6466,12 +8622,12 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._dIAS_PLAN_SEMANALTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.DIAS_PLAN_SEMANAL.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._pEDIDOSTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.PEDIDOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._dIAS_PLAN_SEMANALTableAdapter.Update(updatedRows));
+                    result = (result + this._pEDIDOSTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -6481,6 +8637,24 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._cOCINASTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._dIAS_PLAN_SEMANALTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.DIAS_PLAN_SEMANAL.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._dIAS_PLAN_SEMANALTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._dETALLE_PEDIDOSTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.DETALLE_PEDIDOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._dETALLE_PEDIDOSTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -6535,11 +8709,11 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._dIAS_PLAN_SEMANALTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.DIAS_PLAN_SEMANAL.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._pEDIDOSTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.PEDIDOS.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._dIAS_PLAN_SEMANALTableAdapter.Update(addedRows));
+                    result = (result + this._pEDIDOSTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -6548,6 +8722,22 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._cOCINASTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._dIAS_PLAN_SEMANALTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.DIAS_PLAN_SEMANAL.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._dIAS_PLAN_SEMANALTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._dETALLE_PEDIDOSTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.DETALLE_PEDIDOS.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._dETALLE_PEDIDOSTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -6592,11 +8782,11 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._cOCINASTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.COCINAS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._dETALLE_PEDIDOSTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.DETALLE_PEDIDOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._cOCINASTableAdapter.Update(deletedRows));
+                    result = (result + this._dETALLE_PEDIDOSTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -6605,6 +8795,22 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._dIAS_PLAN_SEMANALTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._cOCINASTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.COCINAS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._cOCINASTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._pEDIDOSTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.PEDIDOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._pEDIDOSTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -6669,11 +8875,6 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
-            if (((this._pLANES_SEMANALESTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._pLANES_SEMANALESTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
-                        "sma cadena de conexión.");
-            }
             if (((this._pLANES_MENSUALESTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._pLANES_MENSUALESTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
@@ -6681,11 +8882,6 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
             }
             if (((this._pLANES_ANUALESTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._pLANES_ANUALESTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
-                        "sma cadena de conexión.");
-            }
-            if (((this._dETALLE_PLANES_MENSUALESTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._dETALLE_PLANES_MENSUALESTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
                         "sma cadena de conexión.");
             }
@@ -6701,6 +8897,26 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
             }
             if (((this._dETALLE_PLANES_SEMANALESTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._dETALLE_PLANES_SEMANALESTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
+                        "sma cadena de conexión.");
+            }
+            if (((this._dETALLE_PEDIDOSTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._dETALLE_PEDIDOSTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
+                        "sma cadena de conexión.");
+            }
+            if (((this._pEDIDOSTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._pEDIDOSTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
+                        "sma cadena de conexión.");
+            }
+            if (((this._dETALLE_PLANES_MENSUALESTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._dETALLE_PLANES_MENSUALESTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
+                        "sma cadena de conexión.");
+            }
+            if (((this._pLANES_SEMANALESTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._pLANES_SEMANALESTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
                         "sma cadena de conexión.");
             }
@@ -6736,15 +8952,6 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
             try {
                 // ---- Prepare for update -----------
                 //
-                if ((this._pLANES_SEMANALESTableAdapter != null)) {
-                    revertConnections.Add(this._pLANES_SEMANALESTableAdapter, this._pLANES_SEMANALESTableAdapter.Connection);
-                    this._pLANES_SEMANALESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._pLANES_SEMANALESTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._pLANES_SEMANALESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._pLANES_SEMANALESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._pLANES_SEMANALESTableAdapter.Adapter);
-                    }
-                }
                 if ((this._pLANES_MENSUALESTableAdapter != null)) {
                     revertConnections.Add(this._pLANES_MENSUALESTableAdapter, this._pLANES_MENSUALESTableAdapter.Connection);
                     this._pLANES_MENSUALESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -6761,15 +8968,6 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
                     if (this._pLANES_ANUALESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._pLANES_ANUALESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._pLANES_ANUALESTableAdapter.Adapter);
-                    }
-                }
-                if ((this._dETALLE_PLANES_MENSUALESTableAdapter != null)) {
-                    revertConnections.Add(this._dETALLE_PLANES_MENSUALESTableAdapter, this._dETALLE_PLANES_MENSUALESTableAdapter.Connection);
-                    this._dETALLE_PLANES_MENSUALESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._dETALLE_PLANES_MENSUALESTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._dETALLE_PLANES_MENSUALESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._dETALLE_PLANES_MENSUALESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._dETALLE_PLANES_MENSUALESTableAdapter.Adapter);
                     }
                 }
                 if ((this._cOCINASTableAdapter != null)) {
@@ -6797,6 +8995,42 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
                     if (this._dETALLE_PLANES_SEMANALESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._dETALLE_PLANES_SEMANALESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._dETALLE_PLANES_SEMANALESTableAdapter.Adapter);
+                    }
+                }
+                if ((this._dETALLE_PEDIDOSTableAdapter != null)) {
+                    revertConnections.Add(this._dETALLE_PEDIDOSTableAdapter, this._dETALLE_PEDIDOSTableAdapter.Connection);
+                    this._dETALLE_PEDIDOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._dETALLE_PEDIDOSTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._dETALLE_PEDIDOSTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._dETALLE_PEDIDOSTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._dETALLE_PEDIDOSTableAdapter.Adapter);
+                    }
+                }
+                if ((this._pEDIDOSTableAdapter != null)) {
+                    revertConnections.Add(this._pEDIDOSTableAdapter, this._pEDIDOSTableAdapter.Connection);
+                    this._pEDIDOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._pEDIDOSTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._pEDIDOSTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._pEDIDOSTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._pEDIDOSTableAdapter.Adapter);
+                    }
+                }
+                if ((this._dETALLE_PLANES_MENSUALESTableAdapter != null)) {
+                    revertConnections.Add(this._dETALLE_PLANES_MENSUALESTableAdapter, this._dETALLE_PLANES_MENSUALESTableAdapter.Connection);
+                    this._dETALLE_PLANES_MENSUALESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._dETALLE_PLANES_MENSUALESTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._dETALLE_PLANES_MENSUALESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._dETALLE_PLANES_MENSUALESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._dETALLE_PLANES_MENSUALESTableAdapter.Adapter);
+                    }
+                }
+                if ((this._pLANES_SEMANALESTableAdapter != null)) {
+                    revertConnections.Add(this._pLANES_SEMANALESTableAdapter, this._pLANES_SEMANALESTableAdapter.Connection);
+                    this._pLANES_SEMANALESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._pLANES_SEMANALESTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._pLANES_SEMANALESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._pLANES_SEMANALESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._pLANES_SEMANALESTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -6857,10 +9091,6 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
                 if (workConnOpened) {
                     workConnection.Close();
                 }
-                if ((this._pLANES_SEMANALESTableAdapter != null)) {
-                    this._pLANES_SEMANALESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._pLANES_SEMANALESTableAdapter]));
-                    this._pLANES_SEMANALESTableAdapter.Transaction = null;
-                }
                 if ((this._pLANES_MENSUALESTableAdapter != null)) {
                     this._pLANES_MENSUALESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._pLANES_MENSUALESTableAdapter]));
                     this._pLANES_MENSUALESTableAdapter.Transaction = null;
@@ -6868,10 +9098,6 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
                 if ((this._pLANES_ANUALESTableAdapter != null)) {
                     this._pLANES_ANUALESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._pLANES_ANUALESTableAdapter]));
                     this._pLANES_ANUALESTableAdapter.Transaction = null;
-                }
-                if ((this._dETALLE_PLANES_MENSUALESTableAdapter != null)) {
-                    this._dETALLE_PLANES_MENSUALESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._dETALLE_PLANES_MENSUALESTableAdapter]));
-                    this._dETALLE_PLANES_MENSUALESTableAdapter.Transaction = null;
                 }
                 if ((this._cOCINASTableAdapter != null)) {
                     this._cOCINASTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cOCINASTableAdapter]));
@@ -6884,6 +9110,22 @@ SELECT DPSEM_CODIGO, COC_CODIGO, DPSEM_CANTIDADESTIMADA, DPSEM_CANTIDADREAL, DIA
                 if ((this._dETALLE_PLANES_SEMANALESTableAdapter != null)) {
                     this._dETALLE_PLANES_SEMANALESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._dETALLE_PLANES_SEMANALESTableAdapter]));
                     this._dETALLE_PLANES_SEMANALESTableAdapter.Transaction = null;
+                }
+                if ((this._dETALLE_PEDIDOSTableAdapter != null)) {
+                    this._dETALLE_PEDIDOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._dETALLE_PEDIDOSTableAdapter]));
+                    this._dETALLE_PEDIDOSTableAdapter.Transaction = null;
+                }
+                if ((this._pEDIDOSTableAdapter != null)) {
+                    this._pEDIDOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._pEDIDOSTableAdapter]));
+                    this._pEDIDOSTableAdapter.Transaction = null;
+                }
+                if ((this._dETALLE_PLANES_MENSUALESTableAdapter != null)) {
+                    this._dETALLE_PLANES_MENSUALESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._dETALLE_PLANES_MENSUALESTableAdapter]));
+                    this._dETALLE_PLANES_MENSUALESTableAdapter.Transaction = null;
+                }
+                if ((this._pLANES_SEMANALESTableAdapter != null)) {
+                    this._pLANES_SEMANALESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._pLANES_SEMANALESTableAdapter]));
+                    this._pLANES_SEMANALESTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

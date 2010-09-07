@@ -32,7 +32,6 @@
             this.gbCargaDetalle = new System.Windows.Forms.GroupBox();
             this.gbPlanMensual = new System.Windows.Forms.GroupBox();
             this.dgvPlanMensual = new System.Windows.Forms.DataGridView();
-            this.btnAgregar = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.numUnidades = new System.Windows.Forms.NumericUpDown();
             this.numPorcentaje = new System.Windows.Forms.NumericUpDown();
@@ -42,6 +41,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtSemana = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnAgregar = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.panelAcciones = new System.Windows.Forms.Panel();
             this.btnRestar = new System.Windows.Forms.Button();
@@ -110,6 +110,7 @@
             // gbCargaDetalle
             // 
             this.gbCargaDetalle.Controls.Add(this.gbPlanMensual);
+            this.gbCargaDetalle.Controls.Add(this.btnAgregar);
             this.gbCargaDetalle.Controls.Add(this.groupBox3);
             this.gbCargaDetalle.Controls.Add(this.dtpFechaDia);
             this.gbCargaDetalle.Controls.Add(this.label8);
@@ -117,7 +118,7 @@
             this.gbCargaDetalle.Controls.Add(this.label5);
             this.gbCargaDetalle.Location = new System.Drawing.Point(3, 70);
             this.gbCargaDetalle.Name = "gbCargaDetalle";
-            this.gbCargaDetalle.Size = new System.Drawing.Size(392, 282);
+            this.gbCargaDetalle.Size = new System.Drawing.Size(392, 318);
             this.gbCargaDetalle.TabIndex = 16;
             this.gbCargaDetalle.TabStop = false;
             this.gbCargaDetalle.Text = "Carga Plan Semanal";
@@ -148,16 +149,6 @@
             this.dgvPlanMensual.Size = new System.Drawing.Size(367, 143);
             this.dgvPlanMensual.TabIndex = 7;
             this.dgvPlanMensual.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPlanMensual_CellFormatting);
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Location = new System.Drawing.Point(308, 359);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(81, 23);
-            this.btnAgregar.TabIndex = 9;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // groupBox3
             // 
@@ -250,6 +241,16 @@
             this.label5.Size = new System.Drawing.Size(104, 13);
             this.label5.TabIndex = 0;
             this.label5.Text = "Semana Planificada:";
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Location = new System.Drawing.Point(305, 289);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(81, 23);
+            this.btnAgregar.TabIndex = 9;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // label7
             // 
@@ -628,7 +629,6 @@
             // tpDatos
             // 
             this.tpDatos.Controls.Add(this.gbDetalleGrillaDatos);
-            this.tpDatos.Controls.Add(this.btnAgregar);
             this.tpDatos.Controls.Add(this.gbCargaDetalle);
             this.tpDatos.Controls.Add(this.gbBotones);
             this.tpDatos.Controls.Add(this.gbDatosPrincipales);

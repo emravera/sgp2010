@@ -25,15 +25,16 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
         //Metodo que trae las cantidades planificadas de una cocina
-        public static int obtenerCocinasPlanificadas(int codigoCocina)
+        public static int? obtenerCocinasPlanificadas(int codigoCocina, int codigoPA, int codigoPM)
         {
-            int cantidad = 0;
+            int? cantidad = 0;
 
-            string sql = @"SELECT sum(dpsem_cantidadestimada)
-                           FROM DETALLE_PLANES_SEMANALES
-                           WHERE coc_codigo=@p0";
+            string sql = @"SELECT COALESCE(sum(det.dpsem_cantidadestimada),0)
+                           FROM DETALLE_PLANES_SEMANALES as det, DIAS_PLAN_SEMANAL as dia, PLANES_SEMANALES as ps, PLANES_MENSUALES as pm, PLANES_ANUALES as pa
+                           WHERE det.coc_codigo=@p0 and det.diapsem_codigo=dia.diapsem_codigo and dia.psem_codigo=ps.psem_codigo and ps.pmes_codigo=pm.pmes_codigo
+                           and pm.pan_codigo=pa.pan_codigo and pm.pan_codigo=@p1 and ps.pmes_codigo=@p2 and det.dped_codigo IS NULL";
 
-            object[] valorParametros = { codigoCocina };
+            object[] valorParametros = { codigoCocina, codigoPA, codigoPM };
             try
             {
                 cantidad = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
@@ -42,7 +43,25 @@ namespace GyCAP.DAL
 
             return cantidad;
         }
+        //Metodo que trae las cantidades planificadas de una cocina y un pedido
+        public static int? obtenerCocinasPlanificadas(int codigoCocina, int codigoPA, int codigoPM, int codigoPedido)
+        {
+            int? cantidad = 0;
 
+            string sql = @"SELECT COALESCE(sum(det.dpsem_cantidadestimada),0)
+                           FROM DETALLE_PLANES_SEMANALES as det, DIAS_PLAN_SEMANAL as dia, PLANES_SEMANALES as ps, PLANES_MENSUALES as pm, PLANES_ANUALES as pa
+                           WHERE det.coc_codigo=@p0 and det.diapsem_codigo=dia.diapsem_codigo and dia.psem_codigo=ps.psem_codigo and ps.pmes_codigo=pm.pmes_codigo
+                           and pm.pan_codigo=pa.pan_codigo and pm.pan_codigo=@p1 and ps.pmes_codigo=@p2 and det.dped_codigo=@p3";
+
+            object[] valorParametros = { codigoCocina, codigoPA, codigoPM, codigoPedido };
+            try
+            {
+                cantidad = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+            return cantidad;
+        }
         //METODO DE VALIDACION
         //Metodo que valida que no exista un plan semanal para ese año, mes y semana ya creado
         public static bool Validar(int codigoPlanMensual, int semana)
@@ -96,23 +115,36 @@ namespace GyCAP.DAL
                     //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
                     sql = "INSERT INTO [PLANES_SEMANALES] ([pmes_codigo], [psem_semana], [psem_fechacreacion]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
                     object[] valorParametros = { planSemanal.PlanMensual.Codigo, planSemanal.Semana, planSemanal.FechaCreacion };
-                    planSemanal.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+                    planSemanal.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, transaccion));
                     codigo = planSemanal.Codigo;
                 }
                     //Inserto el dia del Plan Semanal
                     sql = "INSERT INTO [DIAS_PLAN_SEMANAL] ([diapsem_dia], [diapsem_fecha], [psem_codigo]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
                     object[] valorPara = { diaPlanSemanal.Dia, diaPlanSemanal.Fecha, diaPlanSemanal.PlanSemanal.Codigo };
-                    diaPlanSemanal.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorPara, null));
+                    diaPlanSemanal.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorPara, transaccion));
 
-                    //Inserto el Detalle
-                    sql = "INSERT INTO [DETALLE_PLANES_SEMANALES] ([diapsem_codigo], [coc_codigo], [dpsem_cantidadestimada], [dpsem_estado]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+                    //Inserto el Detalle                    
                     foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow row in (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow[])dsPlanSemanal.DETALLE_PLANES_SEMANALES.Select(null, null, System.Data.DataViewRowState.Added))
                     {
-                        object[] valorParam = { diaPlanSemanal.Codigo, row.COC_CODIGO, row.DPSEM_CANTIDADESTIMADA, row.DPSEM_ESTADO };
-                        row.BeginEdit();
-                        row.DPSEM_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, null));
-                        row.DIAPSEM_CODIGO = diaPlanSemanal.Codigo;
-                        row.EndEdit();
+                        if (row.DPED_CODIGO != 0)
+                        {
+                            sql = "INSERT INTO [DETALLE_PLANES_SEMANALES] ([diapsem_codigo], [coc_codigo], [dpsem_cantidadestimada], [dpsem_estado], [dped_codigo]) VALUES (@p0, @p1, @p2, @p3, @p4) SELECT @@Identity";
+                            object[] valorParam = { diaPlanSemanal.Codigo, row.COC_CODIGO, row.DPSEM_CANTIDADESTIMADA, row.DPSEM_ESTADO, row.DPED_CODIGO };
+                            row.BeginEdit();
+                            row.DPSEM_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
+                            row.DIAPSEM_CODIGO = diaPlanSemanal.Codigo;
+                            row.EndEdit();
+                        }
+                        else
+                        {
+                            sql = "INSERT INTO [DETALLE_PLANES_SEMANALES] ([diapsem_codigo], [coc_codigo], [dpsem_cantidadestimada], [dpsem_estado]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+                            object[] valorParam = { diaPlanSemanal.Codigo, row.COC_CODIGO, row.DPSEM_CANTIDADESTIMADA, row.DPSEM_ESTADO };
+                            row.BeginEdit();
+                            row.DPSEM_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
+                            row.DIAPSEM_CODIGO = diaPlanSemanal.Codigo;
+                            row.EndEdit();
+
+                        }
                     }
 
                     transaccion.Commit();

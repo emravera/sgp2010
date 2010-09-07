@@ -14,11 +14,19 @@ namespace GyCAP.BLL
         {
             DAL.ClaseTemporalPedido.ObtenerPedido(fecha, dsPlanMensual);
         }
+        public static void CambiarEstadoPedido(int codigoPedido, int estado)
+        {
+            DAL.ClaseTemporalPedido.CambiarEstadoPedido(codigoPedido, estado);
+        }
 
         //CLASE DE DETALLE DE PEDIDO
         public static void ObtenerDetallePedido(DataTable dtDetallePedido, int codigoPedido)
         {
             DAL.ClaseTemporalPedido.ObtenerDetallePedido(dtDetallePedido, codigoPedido);
+        }
+        public static void CambiarEstado(int codigoDetallePedido, int estado)
+        {
+            DAL.ClaseTemporalPedido.CambiarEstado(codigoDetallePedido, estado);
         }
 
     }
