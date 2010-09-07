@@ -279,6 +279,7 @@ namespace GyCAP.BLL
             Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOrden = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigoOrden);
             tvDependenciaSimple.Nodes.Clear();
             tvOrdenesYEstructura.Nodes.Clear();
+            tvDependenciaCompleta.Nodes.Clear();
             TreeNode nodoOrdenOT = new TreeNode();
             TreeNode nodoOrdenOTyE = new TreeNode();
             TreeNode nodoOrdenDC = new TreeNode();
@@ -392,50 +393,84 @@ namespace GyCAP.BLL
             tvOrdenesYEstructura.ExpandAll();
         }
 
-        private static void PlanearFechaHaciaAdelante(int codigoOrden, DateTime fechaInicio, TreeView tvDependenciaCompleta, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
+        public static void PlanearFechaHaciaDelante(int codigoOrden, DateTime fechaInicio, decimal factorCorreccion, TreeView tvDependenciaCompleta, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
         {
             TreeNode nodoOrden = tvDependenciaCompleta.Nodes[codigoOrden.ToString()];
+            dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigoOrden).ORD_FECHAINICIOESTIMADA = fechaInicio;
+            DateTime fechaMayor = fechaInicio;
+            DateTime nuevaFecha;
+            foreach (TreeNode nodoHijo in nodoOrden.Nodes)
+            {
+                nuevaFecha = CalcularFechaHaciaDelante(nodoHijo, fechaInicio, factorCorreccion, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                if (nuevaFecha > fechaMayor) { fechaMayor = nuevaFecha; }
+            }
 
-            
+            dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigoOrden).ORD_FECHAFINESTIMADA = fechaMayor;
         }
 
-        public static string PlanearFechaHaciaAtras(int codigoOrden, DateTime fechaFinalizacion, TreeView tvDependenciaCompleta, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
+        public static void PlanearFechaHaciaAtras(int codigoOrden, DateTime fechaFinalizacion, decimal factorCorreccion, TreeView tvDependenciaCompleta, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
         {
             TreeNode nodoOrden = tvDependenciaCompleta.Nodes[codigoOrden.ToString()];
             dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigoOrden).ORD_FECHAFINESTIMADA = fechaFinalizacion;
-            DateTime fechainicio = fechaFinalizacion;
-            
-            decimal nuevoTiempo = 0, tiempoMayor = 0;
-            object mensaje = string.Empty;
+            DateTime fechaMenor = fechaFinalizacion;
+            DateTime nuevaFecha;
             foreach (TreeNode nodoHijo in nodoOrden.Nodes)
             {
-                nuevoTiempo = 0;
-                CalcularFechas(nodoHijo, ref mensaje, ref nuevoTiempo, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
-                if (nuevoTiempo > tiempoMayor) { tiempoMayor = nuevoTiempo; }
+                nuevaFecha = CalcularFechaHaciaAtras(nodoHijo, fechaFinalizacion, factorCorreccion, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                if (nuevaFecha < fechaMenor) { fechaMenor = nuevaFecha; }
             }
-            
-            return mensaje.ToString() + "\n\n" + tiempoMayor.ToString();
+
+            dsOrdenTrabajo.ORDENES_TRABAJO.FindByORD_NUMERO(codigoOrden).ORD_FECHAINICIOESTIMADA = fechaMenor;
         }
 
-        private static void CalcularFechas(TreeNode nodo, ref object mensaje, ref decimal tiempo, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
+        private static DateTime CalcularFechaHaciaAtras(TreeNode nodo, DateTime fechaFin, decimal factorCorreccion, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
         {
             if (nodo != null)
-            {                
-                mensaje =  mensaje.ToString() + "\n" + nodo.Text;
+            {
+                dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).DORD_FECHAFINESTIMADA = fechaFin;
                 decimal codOperacion = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).OPR_NUMERO;
-                mensaje = mensaje.ToString() + "-" + dsHojaRuta.OPERACIONES.FindByOPR_NUMERO(codOperacion).OPR_HORASREQUERIDA.ToString();
-                tiempo += dsHojaRuta.OPERACIONES.FindByOPR_NUMERO(codOperacion).OPR_HORASREQUERIDA;
-                decimal tiempoActual = tiempo;
+                decimal codCentro = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).CTO_CODIGO;
+                decimal horasOperacion = dsHojaRuta.OPERACIONES.FindByOPR_NUMERO(codOperacion).OPR_HORASREQUERIDA;
+                decimal cantidad = factorCorreccion;//dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).DORD_CANTIDADESTIMADA;
+                TimeSpan restar = TimeSpan.FromHours(Convert.ToDouble(cantidad * horasOperacion));                
+                DateTime fechaInicioDetalle = fechaFin.Subtract(restar);
+                dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).DORD_FECHAINICIOESTIMADA = fechaInicioDetalle;
+                DateTime fechaMenor = fechaInicioDetalle;
+                DateTime nuevaFecha;
                 foreach (TreeNode nodoHijo in nodo.Nodes)
                 {
-                    decimal tiempoNuevo = tiempoActual;
-                    CalcularFechas(nodoHijo, ref mensaje, ref tiempoNuevo, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
-                    if (tiempoNuevo > tiempo) { tiempo = tiempoNuevo; mensaje = mensaje.ToString() + "*" + tiempo.ToString(); }
+                    nuevaFecha = CalcularFechaHaciaAtras(nodoHijo, fechaInicioDetalle, factorCorreccion, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                    if (nuevaFecha < fechaMenor) { fechaMenor = nuevaFecha; }
                 }
-                
+                return fechaMenor;
             }
+
+            return fechaFin;
         }
 
-        
+        private static DateTime CalcularFechaHaciaDelante(TreeNode nodo, DateTime fechaInicio, decimal factorCorreccion, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
+        {
+            if (nodo != null)
+            {
+                dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).DORD_FECHAINICIOESTIMADA = fechaInicio;
+                decimal codOperacion = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).OPR_NUMERO;
+                decimal codCentro = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).CTO_CODIGO;
+                decimal horasOperacion = dsHojaRuta.OPERACIONES.FindByOPR_NUMERO(codOperacion).OPR_HORASREQUERIDA;
+                decimal cantidad = factorCorreccion;//dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).DORD_CANTIDADESTIMADA;
+                decimal sumar = cantidad * horasOperacion;
+                DateTime fechaFinDetalle = fechaInicio.AddHours(Double.Parse(sumar.ToString()));
+                dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).DORD_FECHAFINESTIMADA = fechaFinDetalle;
+                DateTime fechaMayor = fechaFinDetalle;
+                DateTime nuevaFecha;
+                foreach (TreeNode nodoHijo in nodo.Nodes)
+                {
+                    nuevaFecha = CalcularFechaHaciaDelante(nodoHijo, fechaFinDetalle, factorCorreccion, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                    if (nuevaFecha > fechaMayor) { fechaMayor = nuevaFecha; }
+                }
+                return fechaMayor;
+            }
+
+            return fechaInicio;
+        }
     }
 }
