@@ -1016,6 +1016,7 @@
             this.label3.Size = new System.Drawing.Size(60, 13);
             this.label3.TabIndex = 3;
             this.label3.Text = "Hora inicio:";
+            this.label3.Visible = false;
             // 
             // label10
             // 
@@ -1025,6 +1026,7 @@
             this.label10.Size = new System.Drawing.Size(92, 13);
             this.label10.TabIndex = 8;
             this.label10.Text = "Tiempo total (hs):";
+            this.label10.Visible = false;
             // 
             // label4
             // 
@@ -1034,6 +1036,7 @@
             this.label4.Size = new System.Drawing.Size(89, 13);
             this.label4.TabIndex = 4;
             this.label4.Text = "Hora finalización:";
+            this.label4.Visible = false;
             // 
             // label14
             // 
@@ -1308,6 +1311,7 @@
             this.dtpTiempoTotalDetalle.ShowUpDown = true;
             this.dtpTiempoTotalDetalle.Size = new System.Drawing.Size(173, 21);
             this.dtpTiempoTotalDetalle.TabIndex = 40;
+            this.dtpTiempoTotalDetalle.Visible = false;
             // 
             // dtpHoraFinDetalle
             // 
@@ -1318,6 +1322,7 @@
             this.dtpHoraFinDetalle.Name = "dtpHoraFinDetalle";
             this.dtpHoraFinDetalle.Size = new System.Drawing.Size(141, 21);
             this.dtpHoraFinDetalle.TabIndex = 39;
+            this.dtpHoraFinDetalle.Visible = false;
             // 
             // dtpHoraInicioDetalle
             // 
@@ -1328,6 +1333,7 @@
             this.dtpHoraInicioDetalle.Name = "dtpHoraInicioDetalle";
             this.dtpHoraInicioDetalle.Size = new System.Drawing.Size(144, 21);
             this.dtpHoraInicioDetalle.TabIndex = 38;
+            this.dtpHoraInicioDetalle.Visible = false;
             // 
             // cbEmpleado
             // 
