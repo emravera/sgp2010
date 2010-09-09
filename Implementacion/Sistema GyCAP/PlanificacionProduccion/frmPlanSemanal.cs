@@ -38,7 +38,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Agregamos la columnas
             dgvLista.Columns.Add("DIAPSEM_CODIGO", "Código");
             dgvLista.Columns.Add("PSEM_CODIGO", "N° Semana");
-            dgvLista.Columns.Add("DIAPSEM_DIA", "Dia");
+            dgvLista.Columns.Add("DIAPSEM_DIA", "Día");
             dgvLista.Columns.Add("DIAPSEM_FECHA", "Fecha");
 
             //Seteamos el modo de tamaño de las columnas
@@ -61,7 +61,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Agregamos la columnas
             dgvDetalle.Columns.Add("DPSEM_CODIGO", "Código");
             dgvDetalle.Columns.Add("COC_CODIGO", "Cocina");
-            dgvDetalle.Columns.Add("DIAPSEM_CODIGO", "Código Dia");
+            dgvDetalle.Columns.Add("DIAPSEM_CODIGO", "Código Día");
             dgvDetalle.Columns.Add("DPSEM_CANTIDADESTIMADA", "C.Estimada");
             dgvDetalle.Columns.Add("DPSEM_CANTIDADREAL", "C.Real");
 
@@ -120,7 +120,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Agregamos la columnas
             dgvDatos.Columns.Add("DPSEM_CODIGO", "Código");
             dgvDatos.Columns.Add("COC_CODIGO", "Cocina");
-            dgvDatos.Columns.Add("DIAPSEM_CODIGO", "Dia Semana");
+            dgvDatos.Columns.Add("DIAPSEM_CODIGO", "Día Semana");
             dgvDatos.Columns.Add("DPSEM_CANTIDADESTIMADA", "C.Estimada");
             dgvDatos.Columns.Add("DPSEM_CANTIDADREAL", "C. Real");
             dgvDatos.Columns.Add("DPSEM_ESTADO", "Estado");
@@ -613,7 +613,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                 if (dsPlanSemanal.DIAS_PLAN_SEMANAL.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Dias para la semama ingresada.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("No se encontraron Días para la semama ingresada.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 SetInterface(estadoUI.buscar);
@@ -1307,7 +1307,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
                 else
                 {
-                    MessageBox.Show("Debe seleccionar un elemento de la Lista de Dias para Modificar5", "Error: Plan Semanal - Modificar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Debe seleccionar un elemento de la Lista de Días para Modificar.", "Error: Plan Semanal - Modificar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -1324,7 +1324,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el Plan Semanal seleccionada y todo su detalle ?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Plan Semanal seleccionada y todo su detalle?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -1367,6 +1367,24 @@ namespace GyCAP.UI.PlanificacionProduccion
                 MessageBox.Show("Debe seleccionar una Designación de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             
+        }
+
+        private void button_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
+                (sender as Button).Location = punto;
+            }
+        }
+
+        private void button_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
+                (sender as Button).Location = punto;
+            }
         }
 
     }

@@ -32,6 +32,7 @@
             this.gbCargaDetalle = new System.Windows.Forms.GroupBox();
             this.gbPlanMensual = new System.Windows.Forms.GroupBox();
             this.dgvPlanMensual = new System.Windows.Forms.DataGridView();
+            this.btnAgregar = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.numUnidades = new System.Windows.Forms.NumericUpDown();
             this.numPorcentaje = new System.Windows.Forms.NumericUpDown();
@@ -41,7 +42,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtSemana = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnAgregar = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.panelAcciones = new System.Windows.Forms.Panel();
             this.btnRestar = new System.Windows.Forms.Button();
@@ -150,6 +150,16 @@
             this.dgvPlanMensual.TabIndex = 7;
             this.dgvPlanMensual.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPlanMensual_CellFormatting);
             // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Location = new System.Drawing.Point(305, 289);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(81, 23);
+            this.btnAgregar.TabIndex = 9;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.numUnidades);
@@ -172,7 +182,7 @@
             0,
             0});
             this.numUnidades.Name = "numUnidades";
-            this.numUnidades.Size = new System.Drawing.Size(120, 20);
+            this.numUnidades.Size = new System.Drawing.Size(120, 21);
             this.numUnidades.TabIndex = 7;
             this.numUnidades.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -180,7 +190,7 @@
             // 
             this.numPorcentaje.Location = new System.Drawing.Point(178, 40);
             this.numPorcentaje.Name = "numPorcentaje";
-            this.numPorcentaje.Size = new System.Drawing.Size(120, 20);
+            this.numPorcentaje.Size = new System.Drawing.Size(120, 21);
             this.numPorcentaje.TabIndex = 8;
             this.numPorcentaje.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -189,7 +199,7 @@
             this.rbPorcentaje.AutoSize = true;
             this.rbPorcentaje.Location = new System.Drawing.Point(73, 40);
             this.rbPorcentaje.Name = "rbPorcentaje";
-            this.rbPorcentaje.Size = new System.Drawing.Size(93, 17);
+            this.rbPorcentaje.Size = new System.Drawing.Size(99, 17);
             this.rbPorcentaje.TabIndex = 1;
             this.rbPorcentaje.TabStop = true;
             this.rbPorcentaje.Text = "Porcentaje (%)";
@@ -201,7 +211,7 @@
             this.rbUnidades.AutoSize = true;
             this.rbUnidades.Location = new System.Drawing.Point(73, 16);
             this.rbUnidades.Name = "rbUnidades";
-            this.rbUnidades.Size = new System.Drawing.Size(105, 17);
+            this.rbUnidades.Size = new System.Drawing.Size(103, 17);
             this.rbUnidades.TabIndex = 0;
             this.rbUnidades.TabStop = true;
             this.rbUnidades.Text = "Unidades Fisicas";
@@ -214,7 +224,7 @@
             this.dtpFechaDia.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFechaDia.Location = new System.Drawing.Point(272, 16);
             this.dtpFechaDia.Name = "dtpFechaDia";
-            this.dtpFechaDia.Size = new System.Drawing.Size(89, 20);
+            this.dtpFechaDia.Size = new System.Drawing.Size(89, 21);
             this.dtpFechaDia.TabIndex = 6;
             // 
             // label8
@@ -230,7 +240,7 @@
             // 
             this.txtSemana.Location = new System.Drawing.Point(108, 16);
             this.txtSemana.Name = "txtSemana";
-            this.txtSemana.Size = new System.Drawing.Size(71, 20);
+            this.txtSemana.Size = new System.Drawing.Size(71, 21);
             this.txtSemana.TabIndex = 5;
             // 
             // label5
@@ -238,26 +248,16 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(7, 20);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(104, 13);
+            this.label5.Size = new System.Drawing.Size(103, 13);
             this.label5.TabIndex = 0;
             this.label5.Text = "Semana Planificada:";
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Location = new System.Drawing.Point(305, 289);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(81, 23);
-            this.btnAgregar.TabIndex = 9;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(205, 6);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(60, 13);
+            this.label7.Size = new System.Drawing.Size(61, 13);
             this.label7.TabIndex = 20;
             this.label7.Text = "Cantidades";
             // 
@@ -278,6 +278,8 @@
             // btnRestar
             // 
             this.btnRestar.FlatAppearance.BorderSize = 0;
+            this.btnRestar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnRestar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestar.Image = ((System.Drawing.Image)(resources.GetObject("btnRestar.Image")));
             this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -289,10 +291,14 @@
             this.btnRestar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRestar.UseVisualStyleBackColor = true;
             this.btnRestar.Click += new System.EventHandler(this.btnRestar_Click);
+            this.btnRestar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnRestar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnSumar
             // 
             this.btnSumar.FlatAppearance.BorderSize = 0;
+            this.btnSumar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnSumar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSumar.Image = ((System.Drawing.Image)(resources.GetObject("btnSumar.Image")));
             this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -304,19 +310,23 @@
             this.btnSumar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSumar.UseVisualStyleBackColor = true;
             this.btnSumar.Click += new System.EventHandler(this.btnSumar_Click);
+            this.btnSumar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnSumar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(26, 6);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(111, 13);
+            this.label6.Size = new System.Drawing.Size(108, 13);
             this.label6.TabIndex = 17;
             this.label6.Text = "Eliminar Seleccionado";
             // 
             // btnDelete
             // 
             this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -328,6 +338,8 @@
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnDelete.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // gbDatosPrincipales
             // 
@@ -390,7 +402,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(14, 24);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(124, 13);
+            this.label3.Size = new System.Drawing.Size(122, 13);
             this.label3.TabIndex = 24;
             this.label3.Text = "Plan Anual Planificación:";
             // 
@@ -410,7 +422,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(246, 24);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(93, 13);
+            this.label4.Size = new System.Drawing.Size(91, 13);
             this.label4.TabIndex = 8;
             this.label4.Text = "Mes Planificación:";
             // 
@@ -606,7 +618,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscar.Image")));
+            this.btnBuscar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBuscar.Location = new System.Drawing.Point(598, 18);
             this.btnBuscar.Name = "btnBuscar";
@@ -622,7 +634,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(10, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.Size = new System.Drawing.Size(30, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Año:";
             // 
@@ -759,7 +771,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(740, 459);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmPlanSemanal";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Plan Semanal";
             this.gbCargaDetalle.ResumeLayout(false);
             this.gbCargaDetalle.PerformLayout();

@@ -120,7 +120,7 @@ namespace GyCAP.DAL
                                ,pza_codigoparte = @p5
                                ,pza_costo = @p6
                                ,hr_codigo = @p7
-                               ,pza_costo = @p8
+                               ,pza_costofijo = @p8
                                WHERE pza_codigo = @p9";
 
             //Así obtenemos la pieza del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto

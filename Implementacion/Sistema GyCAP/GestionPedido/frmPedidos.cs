@@ -22,7 +22,6 @@ namespace GyCAP.UI.GestionPedido
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
-        private SplitterPanel areaTrabajo;
 
         //Variable que simula el código autodecremental para el detalle, usa valores negativos para no tener problemas con valores existentes
         int codigoDetalle = -1;
@@ -221,6 +220,7 @@ namespace GyCAP.UI.GestionPedido
             dgvLista.Columns["CLI_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["PED_FECHAENTREGAPREVISTA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["PED_FECHAENTREGAPREVISTA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvLista.Columns["PED_FECHAENTREGAPREVISTA"].MinimumWidth = 110;
             dgvLista.Columns["EPED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["PED_OBSERVACIONES"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
@@ -228,20 +228,20 @@ namespace GyCAP.UI.GestionPedido
             dgvLista.Columns["PED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvLista.Columns["PED_CODIGO"].Visible = false;
 
-            dgvDetallePedido.Columns.Add("DPED_CODIGO", "Codigo");
+            //dgvDetallePedido.Columns.Add("DPED_CODIGO", "Codigo");
             dgvDetallePedido.Columns.Add("COC_CODIGO", "Cocina");
             dgvDetallePedido.Columns.Add("DPED_CANTIDAD", "Cantidad");
             dgvDetallePedido.Columns.Add("EDPED_CODIGO", "Estado");
 
-            dgvDetallePedido.Columns["DPED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvDetallePedido.Columns["DPED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetallePedido.Columns["COC_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetallePedido.Columns["DPED_CANTIDAD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetallePedido.Columns["DPED_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvDetallePedido.Columns["EDPED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvDetallePedido.Columns["EDPED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             //Alineacion de los numeros y las fechas en la grilla
-            dgvDetallePedido.Columns["DPED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
+            //dgvDetallePedido.Columns["DPED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
 
 
             dgvCocinas.Columns.Add("COC_CODIGO_PRODUCTO", "Código");
@@ -252,7 +252,7 @@ namespace GyCAP.UI.GestionPedido
             dgvCocinas.Columns["COC_CODIGO_PRODUCTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCocinas.Columns["MOD_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCocinas.Columns["MCA_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCocinas.Columns["COC_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvCocinas.Columns["COC_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCocinas.Columns["COC_COSTO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             //dgvCocinas.Columns["COC_ESTADO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
@@ -265,7 +265,7 @@ namespace GyCAP.UI.GestionPedido
             dgvLista.Columns["EPED_CODIGO"].DataPropertyName = "EPED_CODIGO";
             dgvLista.Columns["PED_OBSERVACIONES"].DataPropertyName = "PED_OBSERVACIONES";
 
-            dgvDetallePedido.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
+            //dgvDetallePedido.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
             dgvDetallePedido.Columns["COC_CODIGO"].DataPropertyName = "COC_CODIGO";
             dgvDetallePedido.Columns["DPED_CANTIDAD"].DataPropertyName = "DPED_CANTIDAD";
             dgvDetallePedido.Columns["EDPED_CODIGO"].DataPropertyName = "EDPED_CODIGO";
@@ -312,10 +312,7 @@ namespace GyCAP.UI.GestionPedido
             {
                 MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            //dvDetallePedido = new DataView(dsCliente.DETALLE_PEDIDOS);
             dvEstadoPedidoBuscar = new DataView(dsCliente.ESTADO_PEDIDOS);
-            //dvEstadoPedido = new DataView(dsCliente.ESTADO_PEDIDOS);
-            //dvCocinas = new DataView(dsCliente.COCINAS);
 
             cboEstadoBuscar.SetDatos(dvEstadoPedidoBuscar, "EPED_CODIGO", "EPED_NOMBRE", "--TODOS--", true);
             cboEstado.SetDatos(dvEstadoPedidoBuscar, "EPED_CODIGO", "EPED_NOMBRE", "", false);
@@ -407,6 +404,10 @@ namespace GyCAP.UI.GestionPedido
                         break;
                     case "EPED_CODIGO":
                         nombre = dsCliente.ESTADO_PEDIDOS.FindByEPED_CODIGO(Convert.ToInt64(e.Value.ToString())).EPED_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "PED_FECHAENTREGAPREVISTA":
+                        nombre = DateTime.Parse(e.Value.ToString()).ToShortDateString();
                         e.Value = nombre;
                         break;
                     default:
@@ -717,7 +718,7 @@ namespace GyCAP.UI.GestionPedido
                 if (estado != 1) //Si no esta pendiente no lo puede eliminar PARAMETRIZAR
                 {
                     //Preguntamos si está seguro
-                    DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el Pedido Seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Pedido Seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (respuesta == DialogResult.Yes)
                     {
                         try
@@ -750,15 +751,15 @@ namespace GyCAP.UI.GestionPedido
         private void btnNewCliente_Click(object sender, EventArgs e)
         {
             frmCliente.Instancia.TopLevel = false;
-            frmCliente.Instancia.Parent = areaTrabajo;
-            frmCliente.Instancia.MdiParent = frmPedidos.Instancia.MdiParent; 
-
-            //frmCliente.Instancia.Location = PosicionarFormulario();
+            frmCliente.Instancia.Parent = this.Parent;
+            Point ubicacion = this.Location;
+            ubicacion.X += 50;
+            ubicacion.Y += 50;
+            frmCliente.Instancia.Location = ubicacion;
             frmCliente.Instancia.SetEstadoInicial(frmCliente.estadoInicialNuevo);
             frmCliente.Instancia.NuevoCliente += new Action<Entidades.Cliente>(frm_NuevoCliente);
             frmCliente.Instancia.Show();
             frmCliente.Instancia.Focus();
-
         }
 
         private void frm_NuevoCliente(Entidades.Cliente cliente)

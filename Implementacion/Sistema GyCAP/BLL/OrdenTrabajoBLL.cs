@@ -431,7 +431,7 @@ namespace GyCAP.BLL
                 decimal codOperacion = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).OPR_NUMERO;
                 decimal codCentro = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).CTO_CODIGO;
                 decimal horasOperacion = dsHojaRuta.OPERACIONES.FindByOPR_NUMERO(codOperacion).OPR_HORASREQUERIDA;
-                decimal cantidad = factorCorreccion;//dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).DORD_CANTIDADESTIMADA;
+                decimal cantidad = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).DORD_CANTIDADESTIMADA;
                 TimeSpan restar = TimeSpan.FromHours(Convert.ToDouble(cantidad * horasOperacion));                
                 DateTime fechaInicioDetalle = fechaFin.Subtract(restar);
                 dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).DORD_FECHAINICIOESTIMADA = fechaInicioDetalle;
@@ -456,7 +456,7 @@ namespace GyCAP.BLL
                 decimal codOperacion = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).OPR_NUMERO;
                 decimal codCentro = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).CTO_CODIGO;
                 decimal horasOperacion = dsHojaRuta.OPERACIONES.FindByOPR_NUMERO(codOperacion).OPR_HORASREQUERIDA;
-                decimal cantidad = factorCorreccion;//dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).DORD_CANTIDADESTIMADA;
+                decimal cantidad = dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).DORD_CANTIDADESTIMADA;
                 decimal sumar = cantidad * horasOperacion;
                 DateTime fechaFinDetalle = fechaInicio.AddHours(Double.Parse(sumar.ToString()));
                 dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.FindByDORD_NUMERO(Convert.ToInt32(nodo.Name)).DORD_FECHAFINESTIMADA = fechaFinDetalle;

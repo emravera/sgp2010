@@ -73,7 +73,6 @@
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbDatos = new System.Windows.Forms.GroupBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.btnNewCliente = new System.Windows.Forms.Button();
             this.sfFechaPrevista = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.txtNumero = new System.Windows.Forms.TextBox();
@@ -636,7 +635,6 @@
             // 
             // gbDatos
             // 
-            this.gbDatos.Controls.Add(this.label14);
             this.gbDatos.Controls.Add(this.btnNewCliente);
             this.gbDatos.Controls.Add(this.sfFechaPrevista);
             this.gbDatos.Controls.Add(this.txtNumero);
@@ -656,29 +654,21 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del pedido";
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(418, 47);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(74, 13);
-            this.label14.TabIndex = 21;
-            this.label14.Text = "Nuevo Cliente";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // btnNewCliente
             // 
+            this.btnNewCliente.AutoSize = true;
+            this.btnNewCliente.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnNewCliente.FlatAppearance.BorderSize = 0;
             this.btnNewCliente.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.btnNewCliente.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnNewCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewCliente.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNewCliente.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.New_25;
-            this.btnNewCliente.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNewCliente.Location = new System.Drawing.Point(386, 38);
             this.btnNewCliente.Name = "btnNewCliente";
-            this.btnNewCliente.Size = new System.Drawing.Size(30, 30);
+            this.btnNewCliente.Size = new System.Drawing.Size(85, 31);
             this.btnNewCliente.TabIndex = 20;
+            this.btnNewCliente.Text = "Nuevo...";
             this.btnNewCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNewCliente.UseVisualStyleBackColor = true;
             this.btnNewCliente.Click += new System.EventHandler(this.btnNewCliente_Click);
@@ -942,7 +932,6 @@
         private System.Windows.Forms.Label label1;
         private SlickInterface.Slide slideDatos;
         private SlickInterface.SlideControl slideControl;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnNewCliente;
     }
 }

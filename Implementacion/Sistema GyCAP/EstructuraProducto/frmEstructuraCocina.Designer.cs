@@ -34,6 +34,10 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvEstructuras = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dtpFechaAltaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.cbResponsableBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbPlanoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbCocinaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbActivoBuscar = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -55,6 +59,16 @@
             this.gbPartes = new System.Windows.Forms.GroupBox();
             this.dgvPartes = new System.Windows.Forms.DataGridView();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.chkFijo = new System.Windows.Forms.CheckBox();
+            this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.label17 = new System.Windows.Forms.Label();
+            this.nudcosto = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.dtpFechaModificacion = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.dtpFechaAlta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.cbResponsable = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbPlano = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbCocina = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -104,21 +118,6 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.label15 = new System.Windows.Forms.Label();
-            this.nudcosto = new System.Windows.Forms.NumericUpDown();
-            this.label17 = new System.Windows.Forms.Label();
-            this.lblPeso = new System.Windows.Forms.Label();
-            this.chkFijo = new System.Windows.Forms.CheckBox();
-            this.dtpFechaAltaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.cbResponsableBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbPlanoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbCocinaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.dtpFechaModificacion = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.dtpFechaAlta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.cbResponsable = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbPlano = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbCocina = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcEstructuraCocina.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -131,6 +130,7 @@
             this.gbPartes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartes)).BeginInit();
             this.gbDatos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudcosto)).BeginInit();
             this.gbGuardarVolver.SuspendLayout();
             this.tpConjuntos.SuspendLayout();
             this.gbOC.SuspendLayout();
@@ -149,7 +149,6 @@
             this.gbPD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPD)).BeginInit();
             this.tsMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudcosto)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -247,6 +246,45 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de Búsqueda";
+            // 
+            // dtpFechaAltaBuscar
+            // 
+            this.dtpFechaAltaBuscar.CustomFormat = " ";
+            this.dtpFechaAltaBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaAltaBuscar.Location = new System.Drawing.Point(574, 20);
+            this.dtpFechaAltaBuscar.Name = "dtpFechaAltaBuscar";
+            this.dtpFechaAltaBuscar.Size = new System.Drawing.Size(95, 20);
+            this.dtpFechaAltaBuscar.TabIndex = 4;
+            // 
+            // cbResponsableBuscar
+            // 
+            this.cbResponsableBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbResponsableBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbResponsableBuscar.FormattingEnabled = true;
+            this.cbResponsableBuscar.Location = new System.Drawing.Point(333, 60);
+            this.cbResponsableBuscar.Name = "cbResponsableBuscar";
+            this.cbResponsableBuscar.Size = new System.Drawing.Size(166, 21);
+            this.cbResponsableBuscar.TabIndex = 12;
+            // 
+            // cbPlanoBuscar
+            // 
+            this.cbPlanoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPlanoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbPlanoBuscar.FormattingEnabled = true;
+            this.cbPlanoBuscar.Location = new System.Drawing.Point(333, 20);
+            this.cbPlanoBuscar.Name = "cbPlanoBuscar";
+            this.cbPlanoBuscar.Size = new System.Drawing.Size(166, 21);
+            this.cbPlanoBuscar.TabIndex = 2;
+            // 
+            // cbCocinaBuscar
+            // 
+            this.cbCocinaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCocinaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbCocinaBuscar.FormattingEnabled = true;
+            this.cbCocinaBuscar.Location = new System.Drawing.Point(67, 60);
+            this.cbCocinaBuscar.Name = "cbCocinaBuscar";
+            this.cbCocinaBuscar.Size = new System.Drawing.Size(166, 21);
+            this.cbCocinaBuscar.TabIndex = 10;
             // 
             // cbActivoBuscar
             // 
@@ -481,7 +519,6 @@
             // 
             this.gbDatos.Controls.Add(this.chkFijo);
             this.gbDatos.Controls.Add(this.cbEstado);
-            this.gbDatos.Controls.Add(this.lblPeso);
             this.gbDatos.Controls.Add(this.label17);
             this.gbDatos.Controls.Add(this.nudcosto);
             this.gbDatos.Controls.Add(this.label15);
@@ -506,6 +543,113 @@
             this.gbDatos.TabIndex = 5;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos de la Estructura de Cocina";
+            // 
+            // chkFijo
+            // 
+            this.chkFijo.AutoSize = true;
+            this.chkFijo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkFijo.Location = new System.Drawing.Point(719, 88);
+            this.chkFijo.Name = "chkFijo";
+            this.chkFijo.Size = new System.Drawing.Size(43, 17);
+            this.chkFijo.TabIndex = 31;
+            this.chkFijo.Text = "Fijo";
+            this.chkFijo.UseVisualStyleBackColor = true;
+            this.chkFijo.CheckedChanged += new System.EventHandler(this.chkFijo_CheckedChanged);
+            // 
+            // cbEstado
+            // 
+            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbEstado.FormattingEnabled = true;
+            this.cbEstado.Location = new System.Drawing.Point(610, 114);
+            this.cbEstado.Name = "cbEstado";
+            this.cbEstado.Size = new System.Drawing.Size(152, 21);
+            this.cbEstado.TabIndex = 30;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(532, 117);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(44, 13);
+            this.label17.TabIndex = 28;
+            this.label17.Text = "Estado:";
+            // 
+            // nudcosto
+            // 
+            this.nudcosto.DecimalPlaces = 2;
+            this.nudcosto.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudcosto.Location = new System.Drawing.Point(610, 87);
+            this.nudcosto.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudcosto.Name = "nudcosto";
+            this.nudcosto.Size = new System.Drawing.Size(103, 20);
+            this.nudcosto.TabIndex = 27;
+            this.nudcosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(532, 89);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(73, 13);
+            this.label15.TabIndex = 26;
+            this.label15.Text = "Costo total $:";
+            // 
+            // dtpFechaModificacion
+            // 
+            this.dtpFechaModificacion.CustomFormat = " ";
+            this.dtpFechaModificacion.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaModificacion.Location = new System.Drawing.Point(419, 56);
+            this.dtpFechaModificacion.Name = "dtpFechaModificacion";
+            this.dtpFechaModificacion.Size = new System.Drawing.Size(107, 20);
+            this.dtpFechaModificacion.TabIndex = 25;
+            // 
+            // dtpFechaAlta
+            // 
+            this.dtpFechaAlta.CustomFormat = " ";
+            this.dtpFechaAlta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaAlta.Location = new System.Drawing.Point(419, 27);
+            this.dtpFechaAlta.Name = "dtpFechaAlta";
+            this.dtpFechaAlta.Size = new System.Drawing.Size(107, 20);
+            this.dtpFechaAlta.TabIndex = 24;
+            // 
+            // cbResponsable
+            // 
+            this.cbResponsable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbResponsable.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbResponsable.FormattingEnabled = true;
+            this.cbResponsable.Location = new System.Drawing.Point(610, 57);
+            this.cbResponsable.Name = "cbResponsable";
+            this.cbResponsable.Size = new System.Drawing.Size(152, 21);
+            this.cbResponsable.TabIndex = 23;
+            // 
+            // cbPlano
+            // 
+            this.cbPlano.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPlano.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbPlano.FormattingEnabled = true;
+            this.cbPlano.Location = new System.Drawing.Point(610, 28);
+            this.cbPlano.Name = "cbPlano";
+            this.cbPlano.Size = new System.Drawing.Size(152, 21);
+            this.cbPlano.TabIndex = 22;
+            // 
+            // cbCocina
+            // 
+            this.cbCocina.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCocina.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbCocina.FormattingEnabled = true;
+            this.cbCocina.Location = new System.Drawing.Point(76, 57);
+            this.cbCocina.Name = "cbCocina";
+            this.cbCocina.Size = new System.Drawing.Size(199, 21);
+            this.cbCocina.TabIndex = 21;
             // 
             // label11
             // 
@@ -1059,162 +1203,6 @@
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(532, 89);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(64, 13);
-            this.label15.TabIndex = 26;
-            this.label15.Text = "Costo total:";
-            // 
-            // nudcosto
-            // 
-            this.nudcosto.DecimalPlaces = 2;
-            this.nudcosto.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nudcosto.Location = new System.Drawing.Point(610, 87);
-            this.nudcosto.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.nudcosto.Name = "nudcosto";
-            this.nudcosto.Size = new System.Drawing.Size(103, 20);
-            this.nudcosto.TabIndex = 27;
-            this.nudcosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(532, 117);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(44, 13);
-            this.label17.TabIndex = 28;
-            this.label17.Text = "Estado:";
-            // 
-            // lblPeso
-            // 
-            this.lblPeso.AutoSize = true;
-            this.lblPeso.BackColor = System.Drawing.Color.White;
-            this.lblPeso.Location = new System.Drawing.Point(611, 90);
-            this.lblPeso.Name = "lblPeso";
-            this.lblPeso.Size = new System.Drawing.Size(13, 13);
-            this.lblPeso.TabIndex = 29;
-            this.lblPeso.Text = "$";
-            // 
-            // chkFijo
-            // 
-            this.chkFijo.AutoSize = true;
-            this.chkFijo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkFijo.Location = new System.Drawing.Point(719, 88);
-            this.chkFijo.Name = "chkFijo";
-            this.chkFijo.Size = new System.Drawing.Size(43, 17);
-            this.chkFijo.TabIndex = 31;
-            this.chkFijo.Text = "Fijo";
-            this.chkFijo.UseVisualStyleBackColor = true;
-            this.chkFijo.CheckedChanged += new System.EventHandler(this.chkFijo_CheckedChanged);
-            // 
-            // dtpFechaAltaBuscar
-            // 
-            this.dtpFechaAltaBuscar.CustomFormat = " ";
-            this.dtpFechaAltaBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaAltaBuscar.Location = new System.Drawing.Point(574, 20);
-            this.dtpFechaAltaBuscar.Name = "dtpFechaAltaBuscar";
-            this.dtpFechaAltaBuscar.Size = new System.Drawing.Size(95, 20);
-            this.dtpFechaAltaBuscar.TabIndex = 4;
-            // 
-            // cbResponsableBuscar
-            // 
-            this.cbResponsableBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbResponsableBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbResponsableBuscar.FormattingEnabled = true;
-            this.cbResponsableBuscar.Location = new System.Drawing.Point(333, 60);
-            this.cbResponsableBuscar.Name = "cbResponsableBuscar";
-            this.cbResponsableBuscar.Size = new System.Drawing.Size(166, 21);
-            this.cbResponsableBuscar.TabIndex = 12;
-            // 
-            // cbPlanoBuscar
-            // 
-            this.cbPlanoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPlanoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbPlanoBuscar.FormattingEnabled = true;
-            this.cbPlanoBuscar.Location = new System.Drawing.Point(333, 20);
-            this.cbPlanoBuscar.Name = "cbPlanoBuscar";
-            this.cbPlanoBuscar.Size = new System.Drawing.Size(166, 21);
-            this.cbPlanoBuscar.TabIndex = 2;
-            // 
-            // cbCocinaBuscar
-            // 
-            this.cbCocinaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCocinaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbCocinaBuscar.FormattingEnabled = true;
-            this.cbCocinaBuscar.Location = new System.Drawing.Point(67, 60);
-            this.cbCocinaBuscar.Name = "cbCocinaBuscar";
-            this.cbCocinaBuscar.Size = new System.Drawing.Size(166, 21);
-            this.cbCocinaBuscar.TabIndex = 10;
-            // 
-            // cbEstado
-            // 
-            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEstado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(610, 114);
-            this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(152, 21);
-            this.cbEstado.TabIndex = 30;
-            // 
-            // dtpFechaModificacion
-            // 
-            this.dtpFechaModificacion.CustomFormat = " ";
-            this.dtpFechaModificacion.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaModificacion.Location = new System.Drawing.Point(419, 56);
-            this.dtpFechaModificacion.Name = "dtpFechaModificacion";
-            this.dtpFechaModificacion.Size = new System.Drawing.Size(107, 20);
-            this.dtpFechaModificacion.TabIndex = 25;
-            // 
-            // dtpFechaAlta
-            // 
-            this.dtpFechaAlta.CustomFormat = " ";
-            this.dtpFechaAlta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaAlta.Location = new System.Drawing.Point(419, 27);
-            this.dtpFechaAlta.Name = "dtpFechaAlta";
-            this.dtpFechaAlta.Size = new System.Drawing.Size(107, 20);
-            this.dtpFechaAlta.TabIndex = 24;
-            // 
-            // cbResponsable
-            // 
-            this.cbResponsable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbResponsable.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbResponsable.FormattingEnabled = true;
-            this.cbResponsable.Location = new System.Drawing.Point(610, 57);
-            this.cbResponsable.Name = "cbResponsable";
-            this.cbResponsable.Size = new System.Drawing.Size(152, 21);
-            this.cbResponsable.TabIndex = 23;
-            // 
-            // cbPlano
-            // 
-            this.cbPlano.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPlano.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbPlano.FormattingEnabled = true;
-            this.cbPlano.Location = new System.Drawing.Point(610, 28);
-            this.cbPlano.Name = "cbPlano";
-            this.cbPlano.Size = new System.Drawing.Size(152, 21);
-            this.cbPlano.TabIndex = 22;
-            // 
-            // cbCocina
-            // 
-            this.cbCocina.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCocina.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbCocina.FormattingEnabled = true;
-            this.cbCocina.Location = new System.Drawing.Point(76, 57);
-            this.cbCocina.Name = "cbCocina";
-            this.cbCocina.Size = new System.Drawing.Size(199, 21);
-            this.cbCocina.TabIndex = 21;
-            // 
             // frmEstructuraCocina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1245,6 +1233,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartes)).EndInit();
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudcosto)).EndInit();
             this.gbGuardarVolver.ResumeLayout(false);
             this.tpConjuntos.ResumeLayout(false);
             this.gbOC.ResumeLayout(false);
@@ -1266,7 +1255,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPD)).EndInit();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudcosto)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1361,7 +1349,6 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.NumericUpDown nudcosto;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label lblPeso;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbEstado;
         private System.Windows.Forms.CheckBox chkFijo;
     }
