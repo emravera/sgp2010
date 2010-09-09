@@ -124,7 +124,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvPiezas.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar la Pieza seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la Pieza seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -505,7 +505,6 @@ namespace GyCAP.UI.EstructuraProducto
                     dvDetallePieza.RowFilter = "MPXP_CODIGO < 0";
                     nudCosto.Enabled = true;
                     nudCosto.Value = 0;
-                    lblSigno.BackColor = System.Drawing.Color.White;
                     chkCostoFijo.Enabled = true;
                     chkCostoFijo.Checked = false;
                     txtDescripcion.ReadOnly = false;
@@ -541,7 +540,6 @@ namespace GyCAP.UI.EstructuraProducto
                     dvDetallePieza.RowFilter = "MPXP_CODIGO < 0";
                     nudCosto.Enabled = true;
                     nudCosto.Value = 0;
-                    lblSigno.BackColor = System.Drawing.Color.White;
                     chkCostoFijo.Enabled = true;
                     chkCostoFijo.Checked = false;
                     txtDescripcion.ReadOnly = false;
@@ -574,7 +572,6 @@ namespace GyCAP.UI.EstructuraProducto
                     cbHojaRuta.SetTexto(string.Empty);
                     nudCosto.Enabled = false;
                     chkCostoFijo.Enabled = false;
-                    lblSigno.BackColor = System.Drawing.Color.Empty;
                     txtDescripcion.ReadOnly = true;
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
@@ -598,7 +595,6 @@ namespace GyCAP.UI.EstructuraProducto
                     cbHojaRuta.Enabled = true;
                     cbHojaRuta.SetTexto(string.Empty);
                     nudCosto.Enabled = true;
-                    lblSigno.BackColor = System.Drawing.Color.White;
                     chkCostoFijo.Enabled = true;
                     txtDescripcion.ReadOnly = false;
                     btnGuardar.Enabled = true;

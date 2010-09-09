@@ -458,25 +458,24 @@ namespace GyCAP.UI.GestionPedido
 
         private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            //if (e.Value.ToString() != String.Empty)
-            //{
-            string nombre;
-            switch (dgvLista.Columns[e.ColumnIndex].Name)
+            if (e.Value != null && e.Value.ToString() != String.Empty)
             {
-                case "CLI_ESTADO":
-                    nombre = string.Empty;
-                    if (e.Value.ToString() == "A")
-                        nombre = "Activo";
-                    else if (e.Value.ToString() == "I")
-                        nombre = "Inactivo";
+                string nombre;
+                switch (dgvLista.Columns[e.ColumnIndex].Name)
+                {
+                    case "CLI_ESTADO":
+                        nombre = string.Empty;
+                        if (e.Value.ToString() == "A")
+                            nombre = "Activo";
+                        else if (e.Value.ToString() == "I")
+                            nombre = "Inactivo";
 
-                    e.Value = nombre;
-                    break;
-                default:
-                    break;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
             }
-
-            //}
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -485,7 +484,7 @@ namespace GyCAP.UI.GestionPedido
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el Cliente seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Cliente seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
                     try

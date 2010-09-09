@@ -230,7 +230,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar la terminación seleccionada?", "Confirmar eliminación", MessageBoxButtons.YesNo);
+                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la terminación seleccionada?", "Confirmar eliminación", MessageBoxButtons.YesNo);
                 if (respuesta == DialogResult.Yes)
                 {
                     try

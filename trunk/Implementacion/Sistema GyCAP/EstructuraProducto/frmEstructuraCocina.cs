@@ -83,7 +83,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvEstructuras.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar la Estructura seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la Estructura seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -665,7 +665,6 @@ namespace GyCAP.UI.EstructuraProducto
                     txtDescripcion.ReadOnly = false;
                     nudcosto.Value = 0;
                     nudcosto.Enabled = true;
-                    lblPeso.BackColor = System.Drawing.Color.White;
                     chkFijo.Enabled = true;
                     chkFijo.Checked = false;
                     txtDescripcion.Clear();
@@ -712,7 +711,6 @@ namespace GyCAP.UI.EstructuraProducto
                     txtDescripcion.Clear();
                     nudcosto.Enabled = true;
                     nudcosto.Value = 0;
-                    lblPeso.BackColor = System.Drawing.Color.White;
                     chkFijo.Enabled = true;
                     chkFijo.Checked = false;
                     dsEstructura.LISTA_PARTES.Clear();
@@ -745,7 +743,6 @@ namespace GyCAP.UI.EstructuraProducto
                     dtpFechaModificacion.Enabled = false;
                     txtDescripcion.ReadOnly = true;
                     nudcosto.Enabled = false;
-                    lblPeso.BackColor = System.Drawing.Color.Empty;
                     chkFijo.Enabled = false;
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
@@ -774,7 +771,6 @@ namespace GyCAP.UI.EstructuraProducto
                     dtpFechaModificacion.Enabled = true;
                     txtDescripcion.ReadOnly = false;
                     nudcosto.Enabled = true;
-                    lblPeso.BackColor = System.Drawing.Color.White;
                     chkFijo.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;

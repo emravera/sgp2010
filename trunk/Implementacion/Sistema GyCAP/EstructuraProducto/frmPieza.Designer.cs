@@ -57,7 +57,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbDatos = new System.Windows.Forms.GroupBox();
-            this.lblSigno = new System.Windows.Forms.Label();
             this.cbHojaRuta = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label14 = new System.Windows.Forms.Label();
             this.chkCostoFijo = new System.Windows.Forms.CheckBox();
@@ -495,7 +494,6 @@
             // 
             // gbDatos
             // 
-            this.gbDatos.Controls.Add(this.lblSigno);
             this.gbDatos.Controls.Add(this.cbHojaRuta);
             this.gbDatos.Controls.Add(this.label14);
             this.gbDatos.Controls.Add(this.chkCostoFijo);
@@ -521,16 +519,6 @@
             this.gbDatos.TabIndex = 15;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos de la pieza";
-            // 
-            // lblSigno
-            // 
-            this.lblSigno.AutoSize = true;
-            this.lblSigno.BackColor = System.Drawing.Color.White;
-            this.lblSigno.Location = new System.Drawing.Point(88, 148);
-            this.lblSigno.Name = "lblSigno";
-            this.lblSigno.Size = new System.Drawing.Size(13, 13);
-            this.lblSigno.TabIndex = 31;
-            this.lblSigno.Text = "$";
             // 
             // cbHojaRuta
             // 
@@ -588,9 +576,9 @@
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(8, 146);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(39, 13);
+            this.label13.Size = new System.Drawing.Size(48, 13);
             this.label13.TabIndex = 26;
-            this.label13.Text = "Costo:";
+            this.label13.Text = "Costo $:";
             // 
             // txtCodigo
             // 
@@ -1094,6 +1082,5 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnZoomOut;
         private System.Windows.Forms.Button btnZoomIn;
-        private System.Windows.Forms.Label lblSigno;
     }
 }

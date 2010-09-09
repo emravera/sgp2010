@@ -1032,7 +1032,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Ésta seguro que desea eliminar el Plan Mensual seleccionada y todo su detalle ?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Plan Mensual seleccionada y todo su detalle ?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -1180,39 +1180,24 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 MessageBox.Show(ex.Message, "Error: Plan Mensual - Carga Detalle Pedidos", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
-
-
         }
 
-        
+        private void button_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
+                (sender as Button).Location = punto;
+            }
+        }
 
-        
-
-       
-
-       
-
-        
-        
-        
-
-        
-
-        
-
-       
-
-        
-
-        
-
-      
-        
-
-        
-
-       
+        private void button_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
+                (sender as Button).Location = punto;
+            }
+        }
     }
 }

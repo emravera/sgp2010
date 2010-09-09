@@ -683,7 +683,7 @@
             // 
             this.lblHorasSemanaExtendido.AutoSize = true;
             this.lblHorasSemanaExtendido.BackColor = System.Drawing.Color.White;
-            this.lblHorasSemanaExtendido.Location = new System.Drawing.Point(451, 56);
+            this.lblHorasSemanaExtendido.Location = new System.Drawing.Point(457, 56);
             this.lblHorasSemanaExtendido.Name = "lblHorasSemanaExtendido";
             this.lblHorasSemanaExtendido.Size = new System.Drawing.Size(75, 13);
             this.lblHorasSemanaExtendido.TabIndex = 15;
@@ -693,7 +693,7 @@
             // 
             this.lblHorasSemanaNormal.AutoSize = true;
             this.lblHorasSemanaNormal.BackColor = System.Drawing.Color.White;
-            this.lblHorasSemanaNormal.Location = new System.Drawing.Point(451, 27);
+            this.lblHorasSemanaNormal.Location = new System.Drawing.Point(457, 27);
             this.lblHorasSemanaNormal.Name = "lblHorasSemanaNormal";
             this.lblHorasSemanaNormal.Size = new System.Drawing.Size(75, 13);
             this.lblHorasSemanaNormal.TabIndex = 14;
