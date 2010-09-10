@@ -17,7 +17,7 @@ namespace GyCAP.DAL
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void Eliminar(int codigo)
@@ -28,7 +28,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void Actualizar(Entidades.EstadoEmpleado estadoEmpleado)
@@ -39,7 +39,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static bool EsEstadoEmpleado(Entidades.EstadoEmpleado estadoEmpleado)
@@ -57,7 +57,7 @@ namespace GyCAP.DAL
                     return true;
                 }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void ObtenerEstadosEmpleado(string nombre, Data.dsEstadoEmpleado ds)
@@ -74,7 +74,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "ESTADO_EMPLEADOS", sql, valorParametros);
                 }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
             }
             else
@@ -84,7 +84,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "ESTADO_EMPLEADOS", sql, null);
                 }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
             }
         }
@@ -98,7 +98,7 @@ namespace GyCAP.DAL
                 //Se llena el Dataset
                 DB.FillDataSet(ds, "ESTADO_EMPLEADOS", sql, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void ObtenerEstadosEmpleado(Data.dsEmpleado ds)
@@ -110,7 +110,7 @@ namespace GyCAP.DAL
                 //Se llena el Dataset
                 DB.FillDataSet(ds, "ESTADO_EMPLEADOS", sql, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static bool PuedeEliminarse(int codigo)
@@ -128,7 +128,7 @@ namespace GyCAP.DAL
                     return false;
                 }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
     }
 }

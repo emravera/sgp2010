@@ -453,7 +453,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 MessageBox.Show(ex.Message, "Error: Plan Anual - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetInterface(estadoUI.inicio);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("El año no tiene el formato Correcto", "Error: Plan Anual - Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

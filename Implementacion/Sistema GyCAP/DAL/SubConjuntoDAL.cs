@@ -195,17 +195,6 @@ namespace GyCAP.DAL
             }
         }
 
-        public static void ActualizarStock(int codigoSubconjunto, int cantidad)
-        {
-            string sql = "UPDATE SUBCONJUNTOS SET sconj_cantidadstock = @p0 WHERE sconj_codigo = @p1";
-            object[] valorParametros = { cantidad, codigoSubconjunto };
-            try
-            {
-                DB.executeNonQuery(sql, valorParametros, null);
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
-
         public static void ObtenerSubconjuntos(DataTable dtSubconjuntos)
         {
             string sql = @"SELECT sconj_codigo, sconj_nombre, sconj_descripcion, sconj_cantidadstock, par_codigo, pno_codigo, 
@@ -336,56 +325,6 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
-
-        #region ObetenerDetalles IT1
-
-        //Obtiene el detalle de todos los subconjuntos buscadas, de uso interno por el método buscador ObtenerSubconjuntos
-        /*private static void ObtenerDetalleSubconjuntos(Data.dsEstructura ds)
-        {
-            string sql = @"SELECT dsc_codigo, sconj_codigo, pza_codigo, dsc_cantidad
-                         FROM DETALLE_SUBCONJUNTO WHERE sconj_codigo = @p0";
-
-            object[] valorParametros; ;
-
-            foreach (Data.dsEstructura.SUBCONJUNTOSRow rowSubconjunto in ds.SUBCONJUNTOS)
-            {
-                valorParametros = new object[] { rowSubconjunto.SCONJ_CODIGO };
-                DB.FillDataTable(ds.DETALLE_SUBCONJUNTO, sql, valorParametros);
-            }
-        }
-        
-        ////Obtiene todas las materias primas desde la BD por los que está formada el subconjunto
-        public static void ObtenerEstructura(int codigoSubconjunto, Data.dsEstructura ds)
-        {
-            string sql = @"SELECT dsc_codigo, sconj_codigo, pza_codigo, dsc_cantidad
-                         FROM DETALLE_SUBCONJUNTO WHERE sconj_codigo = @p0";
-
-            object[] valorParametros = { codigoSubconjunto };
-            try
-            {
-                //Primero obtenemos la tabla intermedia
-                DB.FillDataSet(ds, "DETALLE_SUBCONJUNTO", sql, valorParametros);
-                //Ahora los datos de las piezas que estén en la consulta anterior
-                Entidades.Pieza pieza = new GyCAP.Entidades.Pieza();
-                foreach (Data.dsEstructura.DETALLE_SUBCONJUNTORow row in ds.DETALLE_SUBCONJUNTO)
-                {
-                    //Como ya tenemos todos los códigos de las materias primas que necesitamos, directamente
-                    //se los pedimos a MateriaPrimaDAL
-                    pieza = DAL.PiezaDAL.ObtenerPieza(Convert.ToInt32(row.PZA_CODIGO));
-                    Data.dsEstructura.PIEZASRow rowPieza = ds.PIEZAS.NewPIEZASRow();
-                    rowPieza.BeginEdit();
-                    rowPieza.PZA_CODIGO = pieza.CodigoPieza;
-                    rowPieza.PZA_NOMBRE = pieza.Nombre;
-                    rowPieza.TE_CODIGO = pieza.CodigoTerminacion;
-                    rowPieza.EndEdit();
-                    ds.PIEZAS.AddPIEZASRow(rowPieza);
-                }
-                ds.PIEZAS.AcceptChanges();
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-            catch (Entidades.Excepciones.ElementoInexistenteException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }*/
-        #endregion
 
         public static bool EsSubConjunto(Entidades.SubConjunto subConjunto)
         {

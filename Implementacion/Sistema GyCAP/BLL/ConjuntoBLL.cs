@@ -51,18 +51,6 @@ namespace GyCAP.BLL
         {
             DAL.ConjuntoDAL.Actualizar(dsEstructura);
         }
-
-        public static void ActualizarStock(int codigoConjunto, int cantidad)
-        {
-            if (cantidad >= 0)
-            {
-                DAL.ConjuntoDAL.ActualizarStock(codigoConjunto, cantidad);
-            }
-            else
-            {
-                throw new Entidades.Excepciones.ValorNoNegativoException();
-            }
-        }
         
         //Comprueba si existe un conjunto dado su nombre y terminación
         public static bool EsConjunto(Entidades.Conjunto conjunto)

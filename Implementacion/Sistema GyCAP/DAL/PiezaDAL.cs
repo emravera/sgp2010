@@ -194,17 +194,6 @@ namespace GyCAP.DAL
             }
         }
 
-        public static void ActualizarStock(int codigoPieza, int cantidad)
-        {
-            string sql = "UPDATE PIEZAS SET pza_cantidadstock = @p0 WHERE pza_codigo = @p1";
-            object[] valorParametros = { cantidad, codigoPieza };
-            try
-            {
-                DB.executeNonQuery(sql, valorParametros, null);
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
-
         //Determina si existe una pieza dado su nombre y terminación
         public static bool EsPieza(Entidades.Pieza pieza)
         {
@@ -405,58 +394,5 @@ namespace GyCAP.DAL
                 MateriaPrimaDAL.ObtenerMateriaPrima(Convert.ToInt32(rowMPxP.MP_CODIGO), ds);
             }
         }
-
-        #region ObetenerDetalles IT1
-
-        //Obtiene el detalle de todas las piezas buscadas, de uso interno por el método buscador ObtenerPiezas
-        /*private static void ObtenerDetallePiezas(Data.dsEstructura ds)
-        {
-            string sql = @"SELECT dpza_codigo, pza_codigo, mp_codigo, dpza_cantidad
-                         FROM DETALLE_PIEZA WHERE pza_codigo = @p0";
-
-            object[] valorParametros; ;
-
-            foreach (Data.dsEstructura.PIEZASRow rowPieza in ds.PIEZAS)
-            {
-                valorParametros = new object[] { rowPieza.PZA_CODIGO };
-                DB.FillDataTable(ds.DETALLE_PIEZA, sql, valorParametros);
-            }
-        }
-        
-        ////Obtiene todas las materias primas desde la BD por los que está formada la pieza
-        public static void ObtenerEstructura(int codigoPieza, Data.dsEstructura ds)
-        {
-            string sql = @"SELECT dpza_codigo, pza_codigo, mp_codigo, dpza_cantidad
-                         FROM DETALLE_PIEZA WHERE pza_codigo = @p0";
-            
-            object[] valorParametros = { codigoPieza };
-            try
-            {
-                //Primero obtenemos la tabla intermedia
-                DB.FillDataSet(ds, "DETALLE_PIEZA", sql, valorParametros);
-                //Ahora los datos de las materias primas que estén en la consulta anterior
-                Entidades.MateriaPrima materiaPrima = new GyCAP.Entidades.MateriaPrima();
-                foreach (Data.dsEstructura.DETALLE_PIEZARow row in ds.DETALLE_PIEZA)
-                {
-                    //Como ya tenemos todos los códigos de las materias primas que necesitamos, directamente
-                    //se los pedimos a MateriaPrimaDAL
-                    materiaPrima = DAL.MateriaPrimaDAL.ObtenerMateriaPrima(Convert.ToInt32(row.MP_CODIGO));
-                    Data.dsEstructura.MATERIAS_PRIMASRow rowMateriaPrima = ds.MATERIAS_PRIMAS.NewMATERIAS_PRIMASRow();
-                    rowMateriaPrima.BeginEdit();
-                    rowMateriaPrima.MP_CODIGO = materiaPrima.CodigoMateriaPrima;
-                    rowMateriaPrima.MP_NOMBRE = materiaPrima.Nombre;
-                    rowMateriaPrima.UMED_CODIGO = materiaPrima.CodigoUnidadMedida;
-                    rowMateriaPrima.MP_DESCRIPCION = materiaPrima.Descripcion;
-                    rowMateriaPrima.MP_PRECIO = materiaPrima.Precio;
-                    rowMateriaPrima.EndEdit();
-                    ds.MATERIAS_PRIMAS.AddMATERIAS_PRIMASRow(rowMateriaPrima);
-                }
-                ds.MATERIAS_PRIMAS.AcceptChanges();
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-            catch (Entidades.Excepciones.ElementoInexistenteException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }*/
-
-        #endregion
     }
 }

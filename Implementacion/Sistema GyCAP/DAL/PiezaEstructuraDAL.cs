@@ -13,14 +13,12 @@ namespace GyCAP.DAL
             string sqlInsert = @"INSERT INTO [PIEZASXESTRUCTURA] 
                                 ([estr_codigo]
                                 ,[pza_codigo]
-                                ,[pxe_cantidad]
-                                ,[grp_codigo])
-                                VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+                                ,[pxe_cantidad])
+                                VALUES (@p0, @p1, @p2) SELECT @@Identity";
 
             object[] valorParametros = { piezaEstructura.CodigoEstructura, 
                                            piezaEstructura.CodigoPieza, 
-                                           piezaEstructura.CantidadPieza, 
-                                           piezaEstructura.CodigoGrupo };
+                                           piezaEstructura.CantidadPieza };
 
             piezaEstructura.CodigoDetalle = Convert.ToInt32(DB.executeScalar(sqlInsert, valorParametros, transaccion));
         }
@@ -48,7 +46,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerPiezasEstructura(int[] codigosEstructura, Data.dsEstructura ds)
         {
-            string sql = "SELECT pxe_codigo, estr_codigo, pza_codigo, pxe_cantidad, grp_codigo FROM PIEZASXESTRUCTURA WHERE estr_codigo IN (@p0)";
+            string sql = "SELECT pxe_codigo, estr_codigo, pza_codigo, pxe_cantidad FROM PIEZASXESTRUCTURA WHERE estr_codigo IN (@p0)";
             object[] valorParametros = { codigosEstructura };
             DB.FillDataSet(ds, "PIEZASXESTRUCTURA", sql, valorParametros);
         }

@@ -243,7 +243,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 MessageBox.Show(ex.Message, "Error: Demanda Anual - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetInterface(estadoUI.inicio);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("El año no tiene el formato Correcto", "Error: Demanda Anual - Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

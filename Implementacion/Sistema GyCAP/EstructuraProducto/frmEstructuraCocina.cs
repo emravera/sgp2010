@@ -127,7 +127,6 @@ namespace GyCAP.UI.EstructuraProducto
             {                
                 dsEstructura.PIEZASXESTRUCTURA.Clear();                
                 dsEstructura.CONJUNTOSXESTRUCTURA.Clear();
-                dsEstructura.GRUPOS_ESTRUCTURA.Clear();
                 dsEstructura.ESTRUCTURAS.Clear();
                 BLL.EstructuraBLL.ObtenerEstructuras(txtNombreBuscar.Text, cbPlanoBuscar.GetSelectedValue(), dtpFechaAltaBuscar.GetFecha(), cbCocinaBuscar.GetSelectedValue(), cbResponsableBuscar.GetSelectedValue(), ((Sistema.Item)cbActivoBuscar.SelectedItem).Value, dsEstructura);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
@@ -189,7 +188,6 @@ namespace GyCAP.UI.EstructuraProducto
                         dsEstructura.ESTRUCTURAS.AddESTRUCTURASRow(rowEstructura);
                         BLL.EstructuraBLL.Insertar(dsEstructura);
                         dsEstructura.ESTRUCTURAS.AcceptChanges();
-                        dsEstructura.GRUPOS_ESTRUCTURA.AcceptChanges();
                         dsEstructura.CONJUNTOSXESTRUCTURA.AcceptChanges();
                         dsEstructura.PIEZASXESTRUCTURA.AcceptChanges();
 
@@ -259,7 +257,6 @@ namespace GyCAP.UI.EstructuraProducto
             //Descartamos los cambios realizamos hasta el momento sin guardar
             dsEstructura.PIEZASXESTRUCTURA.RejectChanges();
             dsEstructura.CONJUNTOSXESTRUCTURA.RejectChanges();
-            dsEstructura.GRUPOS_ESTRUCTURA.RejectChanges();
             dsEstructura.ESTRUCTURAS.RejectChanges();
             dsEstructura.LISTA_PARTES.Clear();
             SetInterface(estadoUI.inicio);
@@ -339,8 +336,6 @@ namespace GyCAP.UI.EstructuraProducto
                     row.ESTR_CODIGO = codigoEstructura;
                     row.CONJ_CODIGO = codigoConjunto;
                     row.CXE_CANTIDAD = nudC.Value;
-                    if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { row.GRP_CODIGO = -1; }
-                    else { row.GRP_CODIGO = Convert.ToInt32(dsEstructura.GRUPOS_ESTRUCTURA[0]["GRP_CODIGO"]); }
                     row.EndEdit();
                     //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
                     //todavia no vamos a insertar en la db hasta que no haga Guardar
@@ -461,8 +456,6 @@ namespace GyCAP.UI.EstructuraProducto
                     row.ESTR_CODIGO = codigoEstructura;
                     row.PZA_CODIGO = codigoPieza;
                     row.PXE_CANTIDAD = nudP.Value;
-                    if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { row.GRP_CODIGO = -1; }
-                    else { row.GRP_CODIGO = Convert.ToInt32(dsEstructura.GRUPOS_ESTRUCTURA[0]["GRP_CODIGO"]); }
                     row.EndEdit();
                     dsEstructura.PIEZASXESTRUCTURA.AddPIEZASXESTRUCTURARow(row);
                     if (!chkFijo.Checked)
@@ -671,7 +664,6 @@ namespace GyCAP.UI.EstructuraProducto
                     dsEstructura.LISTA_PARTES.Clear();
                     dvCE.RowFilter = "ESTR_CODIGO = -1";
                     dvPE.RowFilter = "ESTR_CODIGO = -1";
-                    CrearGrupoCero();
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -716,7 +708,6 @@ namespace GyCAP.UI.EstructuraProducto
                     dsEstructura.LISTA_PARTES.Clear();
                     dvCE.RowFilter = "ESTR_CODIGO = -1";
                     dvPE.RowFilter = "ESTR_CODIGO = -1";
-                    CrearGrupoCero();
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
                     btnNuevo.Enabled = false;
@@ -919,13 +910,10 @@ namespace GyCAP.UI.EstructuraProducto
             dgvCE.Columns.Add("CONJ_NOMBRE", "Nombre");
             dgvCE.Columns.Add("CXE_CANTIDAD", "Cantidad");
             dgvCE.Columns["CXE_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvCE.Columns.Add("GRP_CODIGO", "Grupo");
-            dgvCE.Columns["GRP_CODIGO"].Visible = false;
             dgvCE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvCE.Columns["CONJ_CODIGOPARTE"].DataPropertyName = "CONJ_CODIGO";
             dgvCE.Columns["CONJ_NOMBRE"].DataPropertyName = "CONJ_CODIGO";
             dgvCE.Columns["CXE_CANTIDAD"].DataPropertyName = "CXE_CANTIDAD";
-            dgvCE.Columns["GRP_CODIGO"].DataPropertyName = "GRP_CODIGO";
 
             //Dataviews
             dvCD = new DataView(dsEstructura.CONJUNTOS);
@@ -961,14 +949,12 @@ namespace GyCAP.UI.EstructuraProducto
             dgvPE.Columns.Add("TE_NOMBRE", "Terminación");
             dgvPE.Columns.Add("PXE_CANTIDAD", "Cantidad");
             dgvPE.Columns["PXE_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvPE.Columns.Add("GRP_CODIGO", "Grupo");
             dgvPE.Columns["GRP_CODIGO"].Visible = false;
             dgvPE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvPE.Columns["PZA_CODIGOPARTE"].DataPropertyName = "PZA_CODIGO";
             dgvPE.Columns["PZA_NOMBRE"].DataPropertyName = "PZA_CODIGO";
             dgvPE.Columns["TE_NOMBRE"].DataPropertyName = "PZA_CODIGO";
             dgvPE.Columns["PXE_CANTIDAD"].DataPropertyName = "PXE_CANTIDAD";
-            dgvPE.Columns["GRP_CODIGO"].DataPropertyName = "GRP_CODIGO";
 
             //Dataviews
             dvPD = new DataView(dsEstructura.PIEZAS);
@@ -1039,22 +1025,6 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 MessageBox.Show(ex.Message, "Error: " + this.Text + " - Carga de partes", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void CrearGrupoCero()
-        {
-            //Agrego el grupo 0 que tiene toda estructura - cambiar de lugar - gonzalo
-            Data.dsEstructura.GRUPOS_ESTRUCTURARow row = dsEstructura.GRUPOS_ESTRUCTURA.NewGRUPOS_ESTRUCTURARow();
-            row.BeginEdit();
-            row.GRP_CODIGO = -1;
-            row.GRP_NOMBRE = "Grupo 0";
-            row.GRP_NUMERO = 0;
-            row.SetGRP_PADRE_CODIGONull();
-            row.GRP_DESCRIPCION = "grupo 0";
-            row.GRP_CONCRETO = 0;
-            row.ESTR_CODIGO = -1;
-            row.EndEdit();
-            dsEstructura.GRUPOS_ESTRUCTURA.AddGRUPOS_ESTRUCTURARow(row);
         }
 
         private decimal CalcularCosto()
@@ -1143,11 +1113,6 @@ namespace GyCAP.UI.EstructuraProducto
                         nombre = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigo).CONJ_NOMBRE;
                         e.Value = nombre;
                         break;
-                    case "GRP_CODIGO":
-                        codigo = Convert.ToInt32(e.Value.ToString());
-                        nombre = dsEstructura.GRUPOS_ESTRUCTURA.FindByGRP_CODIGO(codigo).GRP_NOMBRE;
-                        e.Value = nombre;
-                        break;
                     default:
                         break;
                 }
@@ -1188,11 +1153,6 @@ namespace GyCAP.UI.EstructuraProducto
                     nombre = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigo).TERMINACIONESRow.TE_NOMBRE;
                     e.Value = nombre;
                     break;
-                case "GRP_CODIGO":
-                    codigo = Convert.ToInt32(e.Value.ToString());
-                    nombre = dsEstructura.GRUPOS_ESTRUCTURA.FindByGRP_CODIGO(codigo).GRP_NOMBRE;
-                    e.Value = nombre;
-                    break;
                 default:
                     break;
             }
@@ -1226,7 +1186,6 @@ namespace GyCAP.UI.EstructuraProducto
 
         #endregion
 
-        
 
     }
 }

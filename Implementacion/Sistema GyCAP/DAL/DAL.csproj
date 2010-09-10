@@ -84,14 +84,12 @@
     <Compile Include="EstadoUsuarioDAL.cs" />
     <Compile Include="EstructuraDAL.cs" />
     <Compile Include="FabricanteMaquinaDAL.cs" />
-    <Compile Include="GrupoEstructuraDAL.cs" />
     <Compile Include="HojaRutaDAL.cs" />
     <Compile Include="LocalidadDAL.cs" />
     <Compile Include="MantenimientoDAL.cs" />
     <Compile Include="MaquinaDAL.cs" />
     <Compile Include="MarcaDAL.cs" />
     <Compile Include="MateriaPrimaDAL.cs" />
-    <Compile Include="MateriaPrimaEstructuraDAL.cs" />
     <Compile Include="MateriaPrimaPrincipalDAL.cs" />
     <Compile Include="ModeloCocinaDAL.cs" />
     <Compile Include="ModeloMaquinaDAL.cs" />
@@ -119,7 +117,6 @@
     <Compile Include="StockRepuestoDAL.cs" />
     <Compile Include="StockSubConjuntoDAL.cs" />
     <Compile Include="SubConjuntoDAL.cs" />
-    <Compile Include="SubconjuntoEstructuraDAL.cs" />
     <Compile Include="TareaDAL.cs" />
     <Compile Include="TerminacionDAL.cs" />
     <Compile Include="TipoMantenimientoDAL.cs" />

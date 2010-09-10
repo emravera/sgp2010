@@ -18,7 +18,7 @@ namespace GyCAP.DAL
             {
                 return Convert.ToInt64(DB.executeScalar(sql, valorParametros, null));
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void Eliminar(long codigo)
@@ -29,7 +29,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void Actualizar(Entidades.EstadoDetallePedido estadoDetallePedido)
@@ -40,7 +40,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static bool EsEstadoDetallePedido(Entidades.EstadoDetallePedido estadoDetallePedido)
@@ -58,7 +58,7 @@ namespace GyCAP.DAL
                     return true;
                 }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void ObtenerEstadosDetallePedido(string nombre, Data.dsEstadoDetallePedido ds)
@@ -75,7 +75,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "ESTADO_DETALLE_PEDIDOS", sql, valorParametros);
                 }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
             }
             else
@@ -85,7 +85,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "ESTADO_DETALLE_PEDIDOS", sql, null);
                 }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
             }
         }
@@ -99,7 +99,7 @@ namespace GyCAP.DAL
                 //Se llena el Dataset
                 DB.FillDataSet(ds, "ESTADO_DETALLE_PEDIDOS", sql, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void ObtenerEstadosDetallePedido(Data.dsCliente ds)
@@ -111,7 +111,7 @@ namespace GyCAP.DAL
                 //Se llena el Dataset
                 DB.FillDataSet(ds, "ESTADO_DETALLE_PEDIDOS", sql, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void ObtenerEstadosDetallePedido(DataTable dtEstadoDetallePedido)
@@ -123,7 +123,7 @@ namespace GyCAP.DAL
                 //Se llena el Dataset
                 DB.FillDataTable(dtEstadoDetallePedido, sql, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static bool PuedeEliminarse(long codigo)
@@ -141,7 +141,7 @@ namespace GyCAP.DAL
                     return false;
                 }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
     }
 }

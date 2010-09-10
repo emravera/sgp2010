@@ -246,16 +246,6 @@ namespace GyCAP.UI.RecursosFabricacion
 
         #region Centro de Trabajo
 
-        private void btnListadoCentroTrabajo_Click(object sender, EventArgs e)
-        {
-            frmCentroTrabajo.Instancia.TopLevel = false;
-            frmCentroTrabajo.Instancia.Parent = areaTrabajo;
-            frmCentroTrabajo.Instancia.Location = PosicionarFormulario();
-            frmCentroTrabajo.Instancia.SetEstadoInicial(frmCentroTrabajo.estadoInicialNuevo);
-            frmCentroTrabajo.Instancia.Show();
-            frmCentroTrabajo.Instancia.Focus();
-        }
-
         private void btnConsultarCentroTrabajo_Click(object sender, EventArgs e)
         {
             frmCentroTrabajo.Instancia.TopLevel = false;
@@ -267,6 +257,16 @@ namespace GyCAP.UI.RecursosFabricacion
         }
 
         private void btnNuevoCentroTrabajo_Click(object sender, EventArgs e)
+        {
+            frmCentroTrabajo.Instancia.TopLevel = false;
+            frmCentroTrabajo.Instancia.Parent = areaTrabajo;
+            frmCentroTrabajo.Instancia.Location = PosicionarFormulario();
+            frmCentroTrabajo.Instancia.SetEstadoInicial(frmCentroTrabajo.estadoInicialNuevo);
+            frmCentroTrabajo.Instancia.Show();
+            frmCentroTrabajo.Instancia.Focus();
+        }
+
+        private void btnListadoCentroTrabajo_Click(object sender, EventArgs e)
         {
 
         }

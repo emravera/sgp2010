@@ -52,18 +52,6 @@ namespace GyCAP.BLL
             DAL.PiezaDAL.Actualizar(dsEstructura);
         }
 
-        public static void ActualizarStock(int codigoPieza, int cantidad)
-        {
-            if (cantidad >= 0)
-            {
-                DAL.PiezaDAL.ActualizarStock(codigoPieza, cantidad);
-            }
-            else
-            {
-                throw new Entidades.Excepciones.ValorNoNegativoException();
-            }
-        }
-
         //Comprueba si existe una pieza dado su nombre y terminación
         public static bool EsPieza(Entidades.Pieza pieza)
         {

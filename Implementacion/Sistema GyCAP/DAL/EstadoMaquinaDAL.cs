@@ -17,7 +17,7 @@ namespace GyCAP.DAL
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void Eliminar(int codigo)
@@ -28,7 +28,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void Actualizar(Entidades.EstadoMaquina estadoMaquina)
@@ -39,7 +39,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static bool EsEstadoMaquina(Entidades.EstadoMaquina estadoMaquina)
@@ -57,7 +57,7 @@ namespace GyCAP.DAL
                     return true;
                 }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void ObtenerEstadosMaquina(string nombre, Data.dsEstadoMaquina ds)
@@ -74,7 +74,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "ESTADO_MAQUINAS", sql, valorParametros);
                 }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
             }
             else
@@ -84,7 +84,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "ESTADO_MAQUINAS", sql, null);
                 }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
             }
         }
@@ -98,7 +98,7 @@ namespace GyCAP.DAL
                 //Se llena el Dataset
                 DB.FillDataSet(ds, "ESTADO_MAQUINAS", sql, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void ObtenerEstadosMaquina(Data.dsMaquina ds)
@@ -110,7 +110,7 @@ namespace GyCAP.DAL
                 //Se llena el Dataset
                 DB.FillDataSet(ds, "ESTADO_MAQUINAS", sql, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static bool PuedeEliminarse(int codigo)
@@ -128,7 +128,7 @@ namespace GyCAP.DAL
                     return false;
                 }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
     }
 }
