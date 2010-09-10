@@ -17,7 +17,7 @@ namespace GyCAP.DAL
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void Eliminar(int codigo)
@@ -28,7 +28,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void Actualizar(Entidades.CapacidadEmpleado capacidadEmpleado)
@@ -39,7 +39,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static bool EsCapacidadEmpleado(Entidades.CapacidadEmpleado capacidadEmpleado)
@@ -57,7 +57,7 @@ namespace GyCAP.DAL
                     return true;
                 }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void ObtenerCapacidadEmpleado(string nombre, Data.dsCapacidadEmpleado ds)
@@ -74,7 +74,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "CAPACIDAD_EMPLEADOS", sql, valorParametros);
                 }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
             }
             else
@@ -84,7 +84,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "CAPACIDAD_EMPLEADOS", sql, null);
                 }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
             }
         }
@@ -97,7 +97,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataSet(ds, "CAPACIDAD_EMPLEADOS", sql, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
         }
 
@@ -117,7 +117,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "CAPACIDAD_EMPLEADOS", sql, valorParametros);
                 }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
             else
             {
@@ -125,7 +125,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "CAPACIDAD_EMPLEADOS", sql, null);
                 }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
         }
 
@@ -139,7 +139,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataSet(ds, "CAPACIDADESXEMPLEADO", sql, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             
         }
 
@@ -158,7 +158,7 @@ namespace GyCAP.DAL
                     return false;
                 }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
     }
 }

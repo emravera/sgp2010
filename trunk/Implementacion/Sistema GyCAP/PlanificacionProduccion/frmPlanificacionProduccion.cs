@@ -288,6 +288,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             frmPlanMensual.Instancia.TopLevel = false;
             frmPlanMensual.Instancia.Parent = areaTrabajo;
             frmPlanMensual.Instancia.Location = PosicionarFormulario();
+            frmPlanMensual.Instancia.btnNuevo.PerformClick();
             frmPlanMensual.Instancia.Show();
             frmPlanMensual.Instancia.Focus();
         }
@@ -310,6 +311,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             frmPlanSemanal.Instancia.TopLevel = false;
             frmPlanSemanal.Instancia.Parent = areaTrabajo;
             frmPlanSemanal.Instancia.Location = PosicionarFormulario();
+            frmPlanSemanal.Instancia.btnNuevo.PerformClick();
             frmPlanSemanal.Instancia.Show();
             frmPlanSemanal.Instancia.Focus();
         }

@@ -51,18 +51,6 @@ namespace GyCAP.BLL
             DAL.SubConjuntoDAL.Actualizar(dsEstructura);
         }
 
-        public static void ActualizarStock(int codigoSubconjunto, int cantidad)
-        {
-            if (cantidad >= 0)
-            {
-                DAL.SubConjuntoDAL.ActualizarStock(codigoSubconjunto, cantidad);
-            }
-            else
-            {
-                throw new Entidades.Excepciones.ValorNoNegativoException();
-            }
-        }
-
         //Comprueba si existe un subconjunto dado su nombre y terminación
         public static bool EsSubconjunto(Entidades.SubConjunto subconjunto)
         {

@@ -50,11 +50,8 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 try
                 {
-                    dsEstructura.MATERIASPRIMASXESTRUCTURA.Clear();
                     dsEstructura.PIEZASXESTRUCTURA.Clear();
-                    dsEstructura.SUBCONJUNTOSXESTRUCTURA.Clear();
                     dsEstructura.CONJUNTOSXESTRUCTURA.Clear();
-                    dsEstructura.GRUPOS_ESTRUCTURA.Clear();
                     dsEstructura.ESTRUCTURAS.Clear();
                     BLL.EstructuraBLL.ObtenerEstructura(cbCocinaBuscar.GetSelectedValueInt(), dsEstructura, true);
                     dvEstructuras.Table = dsEstructura.ESTRUCTURAS;
@@ -156,20 +153,6 @@ namespace GyCAP.UI.EstructuraProducto
                 dsEstructura.LISTA_PARTES.AddLISTA_PARTESRow(rowParte);
             }
 
-            foreach (Data.dsEstructura.SUBCONJUNTOSXESTRUCTURARow row in dsEstructura.SUBCONJUNTOSXESTRUCTURA)
-            {
-                Data.dsEstructura.LISTA_PARTESRow rowParte = dsEstructura.LISTA_PARTES.NewLISTA_PARTESRow();
-                rowParte.BeginEdit();
-                rowParte.PAR_TIPO = "Subconjunto";
-                rowParte.PAR_CODIGO = row.SUBCONJUNTOSRow.SCONJ_CODIGOPARTE;
-                rowParte.PAR_NOMBRE = row.SUBCONJUNTOSRow.SCONJ_NOMBRE;
-                rowParte.PAR_TERMINACION = string.Empty;
-                rowParte.PAR_CANTIDAD = row.SCXE_CANTIDAD.ToString();
-                rowParte.PAR_UMED = "Unidad";
-                rowParte.EndEdit();
-                dsEstructura.LISTA_PARTES.AddLISTA_PARTESRow(rowParte);
-            }
-
             foreach (Data.dsEstructura.PIEZASXESTRUCTURARow row in dsEstructura.PIEZASXESTRUCTURA)
             {
                 Data.dsEstructura.LISTA_PARTESRow rowParte = dsEstructura.LISTA_PARTES.NewLISTA_PARTESRow();
@@ -180,20 +163,6 @@ namespace GyCAP.UI.EstructuraProducto
                 rowParte.PAR_TERMINACION = dsEstructura.TERMINACIONES.FindByTE_CODIGO(row.PIEZASRow.TE_CODIGO).TE_NOMBRE;
                 rowParte.PAR_CANTIDAD = row.PXE_CANTIDAD.ToString();
                 rowParte.PAR_UMED = "Unidad";
-                rowParte.EndEdit();
-                dsEstructura.LISTA_PARTES.AddLISTA_PARTESRow(rowParte);
-            }
-
-            foreach (Data.dsEstructura.MATERIASPRIMASXESTRUCTURARow row in dsEstructura.MATERIASPRIMASXESTRUCTURA)
-            {
-                Data.dsEstructura.LISTA_PARTESRow rowParte = dsEstructura.LISTA_PARTES.NewLISTA_PARTESRow();
-                rowParte.BeginEdit();
-                rowParte.PAR_TIPO = "Materia Prima";
-                rowParte.PAR_CODIGO = string.Empty;
-                rowParte.PAR_NOMBRE = row.MATERIAS_PRIMASRow.MP_NOMBRE;
-                rowParte.PAR_TERMINACION = string.Empty;
-                rowParte.PAR_CANTIDAD = row.MPXE_CANTIDAD.ToString();
-                rowParte.PAR_UMED = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(row.MATERIAS_PRIMASRow.UMED_CODIGO).UMED_NOMBRE;
                 rowParte.EndEdit();
                 dsEstructura.LISTA_PARTES.AddLISTA_PARTESRow(rowParte);
             }

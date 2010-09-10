@@ -240,7 +240,7 @@ namespace GyCAP.DAL
                         object[] valorParam = { codigoDia };
                         DB.executeNonQuery(sql, valorParam, null);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         throw new Entidades.Excepciones.ElementoEnTransaccionException();
                     }
@@ -271,7 +271,7 @@ namespace GyCAP.DAL
                 transaccion.Rollback();
                 throw new Entidades.Excepciones.BaseDeDatosException();
             }
-            catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+            catch (Entidades.Excepciones.ElementoEnTransaccionException)
             {
                 transaccion.Rollback();                
             }
