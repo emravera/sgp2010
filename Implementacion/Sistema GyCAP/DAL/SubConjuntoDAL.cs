@@ -313,14 +313,12 @@ namespace GyCAP.DAL
         public static bool PuedeEliminarse(int codigo)
         {
             string sqlSCXC = "SELECT count(sconj_codigo) FROM SUBCONJUNTOSXCONJUNTO WHERE sconj_codigo = @p0";
-            string sqlSCXE = "SELECT count(sconj_codigo) FROM SUBCONJUNTOSXESTRUCTURA WHERE sconj_codigo = @p0";
 
             object[] valorParametros = { codigo };
             try
             {
                 int resultadoSCXC = Convert.ToInt32(DB.executeScalar(sqlSCXC, valorParametros, null));
-                int resultadoSCXE = Convert.ToInt32(DB.executeScalar(sqlSCXE, valorParametros, null));
-                if (resultadoSCXC == 0 && resultadoSCXE == 0) { return true; }
+                if (resultadoSCXC == 0) { return true; }
                 else { return false; }
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
