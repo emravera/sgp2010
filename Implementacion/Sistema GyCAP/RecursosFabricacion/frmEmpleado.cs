@@ -543,14 +543,10 @@ namespace GyCAP.UI.RecursosFabricacion
                     //por una consulta a la BD
                     dvEmpleado.Table = dsEmpleado.EMPLEADOS;
 
-                    //BLL.CA
-
                     //Creamos el dataview y lo asignamos a la grilla
                     dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDADESXEMPLEADO);
                     //dvCapacidadEmpleado.Sort = "CEMP_NOMBRE ASC";
                     dgvCapacidades.DataSource = dvCapacidadEmpleado;
-
-
 
                     if (dsEmpleado.EMPLEADOS.Rows.Count == 0)
                     {
@@ -681,7 +677,37 @@ namespace GyCAP.UI.RecursosFabricacion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-
+            //Controlamos que esté seleccionado algo
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Preguntamos si está seguro
+                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Empleado seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (respuesta == DialogResult.Yes)
+                {
+                    try
+                    {
+                        //Obtenemos el codigo
+                        long codigo = Convert.ToInt64(dvEmpleado[dgvLista.SelectedRows[0].Index]["e_codigo"]);
+                        //Lo eliminamos de la DB
+                        BLL.EmpleadoBLL.Eliminar(codigo);
+                        //Lo eliminamos de la tabla conjuntos del dataset
+                        dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).Delete();
+                        dsEmpleado.EMPLEADOS.AcceptChanges();
+                    }
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error: Empleado - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error: Empleado - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Empleado de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
     }
