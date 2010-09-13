@@ -313,7 +313,7 @@
             this.Name = "frmGestionPedido";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "Gestion de Pedido";
+            this.Text = "GyCAP  - Gestion de Pedido";
             this.Load += new System.EventHandler(this.frmGestionPedido_Load);
             this.scUp.Panel1.ResumeLayout(false);
             this.scUp.ResumeLayout(false);
