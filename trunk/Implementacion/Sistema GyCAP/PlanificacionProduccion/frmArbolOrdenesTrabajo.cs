@@ -60,36 +60,36 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void tvArbolDependenciaSimple_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (Convert.ToInt32(e.Node.Tag.ToString()) == BLL.OrdenTrabajoBLL.nodoDetalleOrdenTrabajo)
+            if (Convert.ToInt32(e.Node.Tag.ToString()) == BLL.OrdenProduccionBLL.nodoDetalleOrdenTrabajo)
             {
-                frmGenerarOrdenTrabajo.Instancia.SeleccionarDetalle(Convert.ToInt32(e.Node.Name));
-                SeleccionarDetalleOrden(Convert.ToInt32(e.Node.Name));
+                frmGenerarOrdenTrabajo.Instancia.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
+                SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
             }
         }
 
         private void tvArbolDependenciaCompleta_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (Convert.ToInt32(e.Node.Tag.ToString()) == BLL.OrdenTrabajoBLL.nodoDetalleOrdenTrabajo)
+            if (Convert.ToInt32(e.Node.Tag.ToString()) == BLL.OrdenProduccionBLL.nodoDetalleOrdenTrabajo)
             {
-                frmGenerarOrdenTrabajo.Instancia.SeleccionarDetalle(Convert.ToInt32(e.Node.Name));
-                SeleccionarDetalleOrden(Convert.ToInt32(e.Node.Name));
+                frmGenerarOrdenTrabajo.Instancia.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
+                SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
             }
         }
 
         private void tvArbolOrdenesYEstructura_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (Convert.ToInt32(e.Node.Tag.ToString()) == BLL.OrdenTrabajoBLL.nodoDetalleOrdenTrabajo)
+            if (Convert.ToInt32(e.Node.Tag.ToString()) == BLL.OrdenProduccionBLL.nodoDetalleOrdenTrabajo)
             {
-                frmGenerarOrdenTrabajo.Instancia.SeleccionarDetalle(Convert.ToInt32(e.Node.Name));
-                SeleccionarDetalleOrden(Convert.ToInt32(e.Node.Name));
+                frmGenerarOrdenTrabajo.Instancia.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
+                SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
             }
         }
 
-        public void SeleccionarDetalleOrden(int codigoOrden)
+        public void SeleccionarOrdenTrabajo(int codigoOrdenT)
         {
-            tvArbolDependenciaSimple.SelectedNode = tvArbolDependenciaSimple.Nodes[0].Nodes.Find(codigoOrden.ToString(), true)[0];
-            tvArbolDependenciaCompleta.SelectedNode = tvArbolDependenciaCompleta.Nodes[0].Nodes.Find(codigoOrden.ToString(), true)[0];
-            tvArbolOrdenesYEstructura.SelectedNode = tvArbolOrdenesYEstructura.Nodes[0].Nodes.Find(codigoOrden.ToString(), true)[0];
+            tvArbolDependenciaSimple.SelectedNode = tvArbolDependenciaSimple.Nodes[0].Nodes.Find(codigoOrdenT.ToString(), true)[0];
+            tvArbolDependenciaCompleta.SelectedNode = tvArbolDependenciaCompleta.Nodes[0].Nodes.Find(codigoOrdenT.ToString(), true)[0];
+            tvArbolOrdenesYEstructura.SelectedNode = tvArbolOrdenesYEstructura.Nodes[0].Nodes.Find(codigoOrdenT.ToString(), true)[0];
         }
 
         private void tcArbol_Selected(object sender, TabControlEventArgs e)
