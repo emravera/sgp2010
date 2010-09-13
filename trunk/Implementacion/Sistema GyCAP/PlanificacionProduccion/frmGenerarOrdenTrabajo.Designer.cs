@@ -101,8 +101,6 @@
             this.label18 = new System.Windows.Forms.Label();
             this.dtpHoraFinDetalle = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.dtpHoraInicioDetalle = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.label19 = new System.Windows.Forms.Label();
-            this.cbEmpleado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.gbNavegador = new System.Windows.Forms.GroupBox();
@@ -745,8 +743,6 @@
             this.groupBox4.Controls.Add(this.label18);
             this.groupBox4.Controls.Add(this.dtpHoraFinDetalle);
             this.groupBox4.Controls.Add(this.dtpHoraInicioDetalle);
-            this.groupBox4.Controls.Add(this.label19);
-            this.groupBox4.Controls.Add(this.cbEmpleado);
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.label8);
             this.groupBox4.Controls.Add(this.gbNavegador);
@@ -1019,25 +1015,6 @@
             this.dtpHoraInicioDetalle.Size = new System.Drawing.Size(144, 21);
             this.dtpHoraInicioDetalle.TabIndex = 38;
             this.dtpHoraInicioDetalle.Visible = false;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(466, 90);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(57, 13);
-            this.label19.TabIndex = 17;
-            this.label19.Text = "Empleado:";
-            // 
-            // cbEmpleado
-            // 
-            this.cbEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEmpleado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbEmpleado.FormattingEnabled = true;
-            this.cbEmpleado.Location = new System.Drawing.Point(526, 87);
-            this.cbEmpleado.Name = "cbEmpleado";
-            this.cbEmpleado.Size = new System.Drawing.Size(230, 21);
-            this.cbEmpleado.TabIndex = 32;
             // 
             // label7
             // 
@@ -1804,7 +1781,6 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
@@ -1818,7 +1794,6 @@
         private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha dtpHoraInicioDetalle;
         private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha dtpFechaFinOrden;
         private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha dtpFechaInicioOrden;
-        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbEmpleado;
         private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha dtpFechaAltaOrden;
         private System.Windows.Forms.TextBox txtCodigoOrden;
         private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha dtpTiempoTotalDetalle;
