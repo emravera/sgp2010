@@ -12,7 +12,8 @@ namespace GyCAP.DAL
         public static void Insertar(Data.dsOrdenTrabajo dsOrdenTrabajo)
         {
             string sql = @"INSERT INTO ORDENES_TRABAJO 
-                        ([ord_codigo]
+                        ([ord_numero]
+                        ,[ord_codigo]
                         ,[eord_codigo]
                         ,[ord_fechaalta]
                         ,[dpsem_codigo]
@@ -24,11 +25,12 @@ namespace GyCAP.DAL
                         ,[ord_fechafinreal]
                         ,[ord_observaciones]
                         ,[ord_prioridad])
-                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11) SELECT @@Identity";
+                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @12) SELECT @@Identity";
 
             Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOrden = dsOrdenTrabajo.ORDENES_TRABAJO.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsOrdenTrabajo.ORDENES_TRABAJORow;
             object ord = DBNull.Value, ordm = DBNull.Value, dpsem = DBNull.Value;
-            object[] valoresParametros = { rowOrden.ORD_CODIGO,
+            object[] valoresParametros = { rowOrden.ORD_NUMERO,
+                                             rowOrden.ORD_CODIGO,
                                              rowOrden.EORD_CODIGO,
                                              rowOrden.ORD_FECHAALTA,
                                              dpsem,

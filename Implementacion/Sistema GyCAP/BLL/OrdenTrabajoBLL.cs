@@ -17,6 +17,11 @@ namespace GyCAP.BLL
         public static readonly int nodoDetalleOrdenTrabajo = 2;
         public static readonly int nodoComplemento = 3;
 
+        public static void Insertar(Data.dsOrdenTrabajo dsOrdenTrabajo)
+        {
+            DAL.OrdenTrabajoDAL.Insertar(dsOrdenTrabajo);
+        }
+        
         public static string GetTipoParte(int tipo)
         {
             if (tipo == parteTipoConjunto) return "Conjunto";

@@ -5,7 +5,8 @@ using System.Text;
 
 namespace GyCAP.BLL
 {
-    class DetalleOrdenTrabajoBLL
+    public class DetalleOrdenTrabajoBLL
     {
+        
     }
 }

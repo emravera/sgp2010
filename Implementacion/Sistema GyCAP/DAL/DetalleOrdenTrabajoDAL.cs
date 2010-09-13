@@ -13,9 +13,7 @@ namespace GyCAP.DAL
         {
             string sql = @"INSERT INTO DETALLE_ORDENES_TRABAJO 
                          ([dord_codigo]
-                         ,[e_codigo]
                          ,[ord_numero]
-                         ,[ordm_numero]
                          ,[eord_codigo]
                          ,[par_codigo]
                          ,[par_tipo]
@@ -38,17 +36,14 @@ namespace GyCAP.DAL
                          ,[dord_ordensiguiente]
                          ,[dord_nivel])
                          VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, 
-                                 @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24) SELECT @@Identity";
+                                 @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23) SELECT @@Identity";
 
-            object ord = DBNull.Value, ordm = DBNull.Value, precedente = DBNull.Value, siguiente = DBNull.Value;
+            object ord = DBNull.Value, precedente = DBNull.Value, siguiente = DBNull.Value;
             if (!row.IsORD_NUMERONull()) { ord = row.ORD_NUMERO; }
-            if (!row.IsORDM_NUMERONull()) { ordm = row.ORDM_NUMERO; }
             if (!row.IsDORD_ORDENPRECEDENTENull()) { precedente = row.DORD_ORDENPRECEDENTE; }
             if (!row.IsDORD_ORDENSIGUIENTENull()) { siguiente = row.DORD_ORDENSIGUIENTE; }
             object[] valoresParametros = { row.DORD_CODIGO,
-                                             row.E_CODIGO,
                                              ord,
-                                             ordm,
                                              row.EORD_CODIGO,
                                              row.PAR_CODIGO,
                                              row.PAR_TIPO,
@@ -74,6 +69,8 @@ namespace GyCAP.DAL
             row.DORD_NUMERO = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
             return Convert.ToInt32(row.DORD_NUMERO);
         }
+
+      
 
         
     }
