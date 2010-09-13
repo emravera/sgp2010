@@ -60,7 +60,7 @@
     <Compile Include="DesignacionDAL.cs" />
     <Compile Include="DetalleConjuntoDAL.cs" />
     <Compile Include="DetalleDemandaAnualDAL.cs" />
-    <Compile Include="DetalleOrdenTrabajoDAL.cs" />
+    <Compile Include="OrdenTrabajoDAL.cs" />
     <Compile Include="DetallePedidoDAL.cs" />
     <Compile Include="DetallePlanAnualDAL.cs" />
     <Compile Include="DetallePiezaDAL.cs" />
@@ -94,7 +94,7 @@
     <Compile Include="ModeloCocinaDAL.cs" />
     <Compile Include="ModeloMaquinaDAL.cs" />
     <Compile Include="OperacionDAL.cs" />
-    <Compile Include="OrdenTrabajoDAL.cs" />
+    <Compile Include="OrdenProduccionDAL.cs" />
     <Compile Include="PedidoDAL.cs" />
     <Compile Include="PiezaDAL.cs" />
     <Compile Include="PiezaEstructuraDAL.cs" />

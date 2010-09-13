@@ -59,7 +59,7 @@
     <Compile Include="DemandaAnualBLL.cs" />
     <Compile Include="DesignacionBLL.cs" />
     <Compile Include="DetalleDemandaAnualBLL.cs" />
-    <Compile Include="DetalleOrdenTrabajoBLL.cs" />
+    <Compile Include="OrdenTrabajoBLL.cs" />
     <Compile Include="DetallePedidoBLL.cs" />
     <Compile Include="DetallePlanAnualBLL.cs" />
     <Compile Include="DetallePlanMantenimientoBLL.cs" />
@@ -91,7 +91,7 @@
     <Compile Include="ModeloCocinaBLL.cs" />
     <Compile Include="ModeloMaquinaBLL.cs" />
     <Compile Include="OperacionBLL.cs" />
-    <Compile Include="OrdenTrabajoBLL.cs" />
+    <Compile Include="OrdenProduccionBLL.cs" />
     <Compile Include="PedidoBLL.cs" />
     <Compile Include="PiezaBLL.cs" />
     <Compile Include="PlanAnualBLL.cs" />

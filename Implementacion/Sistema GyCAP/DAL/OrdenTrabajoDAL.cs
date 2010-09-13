@@ -9,70 +9,66 @@ namespace GyCAP.DAL
 {
     public class OrdenTrabajoDAL
     {
-        public static void Insertar(Data.dsOrdenTrabajo dsOrdenTrabajo)
+        public static int Insertar(Data.dsOrdenTrabajo.ORDENES_TRABAJORow row, SqlTransaction transaccion)
         {
             string sql = @"INSERT INTO ORDENES_TRABAJO 
-                        ([ord_numero]
-                        ,[ord_codigo]
-                        ,[eord_codigo]
-                        ,[ord_fechaalta]
-                        ,[dpsem_codigo]
-                        ,[ordm_numero]
-                        ,[ord_origen]
-                        ,[ord_fechainicioestimada]
-                        ,[ord_fechainicioreal]
-                        ,[ord_fechafinestimada]
-                        ,[ord_fechafinreal]
-                        ,[ord_observaciones]
-                        ,[ord_prioridad])
-                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @12) SELECT @@Identity";
+                         ([ordt_codigo]
+                         ,[ordp_numero]
+                         ,[eord_codigo]
+                         ,[par_codigo]
+                         ,[par_tipo]
+                         ,[ordt_origen]
+                         ,[ordt_cantidadestimada]
+                         ,[ordt_cantidadreal]
+                         ,[ordt_fechainicioestimada]
+                         ,[ordt_fechainicioral]
+                         ,[ordt_fechafinestimada]
+                         ,[ordt_fechafinreal]
+                         ,[ordt_horainicioestimada]
+                         ,[ordt_horainicioreal]
+                         ,[ordt_horafinestimada]
+                         ,[ordt_horafinreal]
+                         ,[estr_codigo]
+                         ,[cto_codigo]
+                         ,[opr_numero]
+                         ,[ordt_observaciones]
+                         ,[ordt_ordenprecendente]
+                         ,[ordt_ordensiguiente]
+                         ,[ordt_nivel])
+                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, 
+                                 @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23) SELECT @@Identity";
 
-            Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOrden = dsOrdenTrabajo.ORDENES_TRABAJO.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsOrdenTrabajo.ORDENES_TRABAJORow;
-            object ord = DBNull.Value, ordm = DBNull.Value, dpsem = DBNull.Value;
-            object[] valoresParametros = { rowOrden.ORD_NUMERO,
-                                             rowOrden.ORD_CODIGO,
-                                             rowOrden.EORD_CODIGO,
-                                             rowOrden.ORD_FECHAALTA,
-                                             dpsem,
-                                             ordm,
-                                             rowOrden.ORD_ORIGEN,
-                                             rowOrden.ORD_FECHAINICIOESTIMADA,
+            object precedente = DBNull.Value, siguiente = DBNull.Value;
+            if (!row.IsORDT_ORDENPRECEDENTENull()) { precedente = row.ORDT_ORDENPRECEDENTE; }
+            if (!row.IsORDT_ORDENSIGUIENTENull()) { siguiente = row.ORDT_ORDENSIGUIENTE; }
+            object[] valoresParametros = { row.ORDT_CODIGO,
+                                             row.ORDP_NUMERO,
+                                             row.EORD_CODIGO,
+                                             row.PAR_CODIGO,
+                                             row.PAR_TIPO,
+                                             row.ORDT_ORIGEN,
+                                             row.ORDT_CANTIDADESTIMADA,
                                              DBNull.Value,
-                                             rowOrden.ORD_FECHAFINESTIMADA,
+                                             row.ORDT_FECHAINICIOESTIMADA,
                                              DBNull.Value,
-                                             rowOrden.ORD_OBSERVACIONES,
-                                             rowOrden.ORD_PRIORIDAD };
+                                             row.ORDT_FECHAFINESTIMADA,
+                                             DBNull.Value,
+                                             row.ORDT_HORAINICIOESTIMADA,
+                                             DBNull.Value,
+                                             row.ORDT_HORAFINESTIMADA,
+                                             DBNull.Value,
+                                             row.ESTR_CODIGO,
+                                             row.CTO_CODIGO,
+                                             row.OPR_NUMERO,
+                                             row.ORDT_OBSERVACIONES,
+                                             precedente,
+                                             siguiente,
+                                             row.ORDT_NIVEL };
 
-            SqlTransaction transaccion = null;
-            
-            try
-            {
-                transaccion = DB.IniciarTransaccion();
-                rowOrden.BeginEdit();
-                rowOrden.ORD_NUMERO = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
-                rowOrden.EndEdit();
+            row.ORDT_NUMERO = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
+            return Convert.ToInt32(row.ORDT_NUMERO);
+        }     
 
-                foreach (Data.dsOrdenTrabajo.DETALLE_ORDENES_TRABAJORow rowDetalle in (Data.dsOrdenTrabajo.DETALLE_ORDENES_TRABAJORow[])dsOrdenTrabajo.DETALLE_ORDENES_TRABAJO.Select("ord_numero = " + rowOrden.ORD_NUMERO))
-                {
-                    rowDetalle.BeginEdit();
-                    rowDetalle.ORD_NUMERO = rowOrden.ORD_NUMERO;
-                    rowDetalle.DORD_NUMERO = DetalleOrdenTrabajoDAL.Insertar(rowDetalle, transaccion);
-                    rowDetalle.EndEdit();
-                }
-
-                transaccion.Commit();
-            }
-            catch (SqlException ex)
-            {
-                //Error en alguna consulta, descartamos los cambios
-                transaccion.Rollback();
-                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
-            }
-            finally
-            {
-                //En cualquier caso finalizamos la transaccion para que se cierre la conexion
-                DB.FinalizarTransaccion();
-            }
-        }
+        
     }
 }
