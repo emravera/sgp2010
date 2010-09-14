@@ -824,9 +824,9 @@
             // gbNavegador
             // 
             this.gbNavegador.Controls.Add(this.bnNavegador);
-            this.gbNavegador.Location = new System.Drawing.Point(272, 415);
+            this.gbNavegador.Location = new System.Drawing.Point(281, 415);
             this.gbNavegador.Name = "gbNavegador";
-            this.gbNavegador.Size = new System.Drawing.Size(228, 38);
+            this.gbNavegador.Size = new System.Drawing.Size(200, 38);
             this.gbNavegador.TabIndex = 42;
             this.gbNavegador.TabStop = false;
             // 
@@ -853,10 +853,9 @@
             this.bnNavegador.MovePreviousItem = this.bnMovePreviousItem;
             this.bnNavegador.Name = "bnNavegador";
             this.bnNavegador.PositionItem = this.bindingNavigatorPositionItem;
-            this.bnNavegador.Size = new System.Drawing.Size(222, 25);
+            this.bnNavegador.Size = new System.Drawing.Size(194, 25);
             this.bnNavegador.TabIndex = 0;
             this.bnNavegador.Text = "bindingNavigator1";
-            this.bnNavegador.Visible = false;
             // 
             // bindingNavigatorCountItem
             // 
