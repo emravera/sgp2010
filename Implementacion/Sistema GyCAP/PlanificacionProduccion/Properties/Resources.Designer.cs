@@ -88,6 +88,13 @@ namespace GyCAP.UI.PlanificacionProduccion.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Calculadora_25 {
+            get {
+                object obj = ResourceManager.GetObject("Calculadora_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Cancel_25 {
             get {
                 object obj = ResourceManager.GetObject("Cancel_25", resourceCulture);
