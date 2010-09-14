@@ -151,15 +151,15 @@ namespace GyCAP.UI.PlanificacionProduccion
             txtCodigoOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).ORDP_CODIGO;
             txtOrigenOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).ORDP_ORIGEN;
             txtEstadoOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).ESTADO_ORDENES_TRABAJORow.EORD_NOMBRE;
-            dtpFechaAltaOrdenP.SetFecha(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).ORDP_FECHAALTA);
+            //dtpFechaAltaOrdenP.SetFecha(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).ORDP_FECHAALTA);
             int codigoPlan = Convert.ToInt32(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).DPSEM_CODIGO);
             txtCocinaOrdenP.Text = dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(codigoPlan).COCINASRow.COC_CODIGO_PRODUCTO;
             nudCantidadOrdenP.Value = dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(codigoPlan).DPSEM_CANTIDADESTIMADA;
             if (!dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).IsORDP_FECHAINICIOESTIMADANull())
-            { dtpFechaInicioOrdenP.SetFecha(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).ORDP_FECHAINICIOESTIMADA); }
+            { } //dtpFechaInicioOrdenP.SetFecha(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).ORDP_FECHAINICIOESTIMADA); }
 
             if (!dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).IsORDP_FECHAFINESTIMADANull())
-            { dtpFechaFinOrdenP.SetFecha(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).ORDP_FECHAFINESTIMADA); }
+            {} //dtpFechaFinOrdenP.SetFecha(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).ORDP_FECHAFINESTIMADA); }
 
             CompletarDatosOrdenTrabajo();
         }
@@ -242,8 +242,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                 txtOperacion.Text = dsHojaRuta.OPERACIONES.FindByOPR_NUMERO(Convert.ToInt32(row.OPR_NUMERO)).OPR_NOMBRE;
                 txtObservacionesOrdenT.Text = row.ORDT_OBSERVACIONES;
 
-                if (!row.IsORDT_FECHAINICIOESTIMADANull()) { dtpFechaInicioOrdenT.SetFecha(row.ORDT_FECHAINICIOESTIMADA); }
-                if (!row.IsORDT_HORAFINESTIMADANull()) { dtpFechaFinOrdenT.SetFecha(row.ORDT_FECHAFINESTIMADA); }
+                //if (!row.IsORDT_FECHAINICIOESTIMADANull()) { dtpFechaInicioOrdenT.SetFecha(row.ORDT_FECHAINICIOESTIMADA); }
+                //if (!row.IsORDT_HORAFINESTIMADANull()) { dtpFechaFinOrdenT.SetFecha(row.ORDT_FECHAFINESTIMADA); }
             }
         }
 
@@ -285,8 +285,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                     break;
                 case estadoUI.nuevoManual:
                     
-                    btnGuardar.Enabled = true;
-                    btnVolver.Enabled = true;
+                    btnGuardarActual.Enabled = true;
+                    
                     
                     
                     estadoInterface = estadoUI.nuevoManual;
@@ -295,8 +295,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                 case estadoUI.consultar:
                 case estadoUI.modificar:
                     
-                    btnGuardar.Enabled = true;
-                    btnVolver.Enabled = true;
+                    btnGuardarActual.Enabled = true;
+                    
                     
                     
                     estadoInterface = estadoUI.modificar;
@@ -346,7 +346,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dvOrdenTrabajo = new DataView(dsOrdenTrabajo.ORDENES_TRABAJO);
             string[] nombres = { "Hacia adelante", "Hacia atrás" };
             int[] valores = { 0, 1 };
-            cbModoPlanearFecha.SetDatos(nombres, valores, "Seleccione", false);
+            cbModoFecha.SetDatos(nombres, valores, "Seleccione", false);
 
             try
             {
@@ -521,14 +521,14 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
             {
-                if (cbModoPlanearFecha.GetSelectedIndex() != -1 && !dtpFechaPlanear.EsFechaNull())
+                if (cbModoFecha.GetSelectedIndex() != -1 && !dtpFechaPlanear.EsFechaNull())
                 {
                     int codigoP = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"].ToString());
                     tvDependenciaSimple = frmArbolOrdenesTrabajo.Instancia.GetArbolDependenciaSimple();
                     tvDependenciaCompleta = frmArbolOrdenesTrabajo.Instancia.GetArbolDependenciaCompleta();
                     tvOrdenesYEstructura = frmArbolOrdenesTrabajo.Instancia.GetArbolOrdenesYEstructura();
                     BLL.OrdenProduccionBLL.GenerarArbolOrdenes(codigoP, tvDependenciaSimple, tvDependenciaCompleta, tvOrdenesYEstructura, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
-                    if (cbModoPlanearFecha.GetSelectedValueInt() == 0)
+                    if (cbModoFecha.GetSelectedValueInt() == 0)
                     {
                         //Planeamos hacia adelante
                         DateTime fecha = DateTime.Parse(DateTime.Parse(dtpFechaPlanear.GetFecha().ToString()).ToShortDateString());
