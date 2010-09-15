@@ -30,11 +30,113 @@ namespace GyCAP.BLL
             if (tipo == parteTipoMateriaPrima) return "Materia Prima";
             return string.Empty;
         }
+
+        public static void GenerarOrdenProduccionSemana(int codigoSemana, Data.dsPlanSemanal dsPlanSemanal, Data.dsOrdenTrabajo dsOrdenTrabajo)
+        {
+            //Declaramos las variables necesarias
+            int codigoOrdenP = -1;
+            if (dsOrdenTrabajo.ORDENES_PRODUCCION.Rows.Count > 0)
+            { codigoOrdenP = Convert.ToInt32((dsOrdenTrabajo.ORDENES_PRODUCCION.Select("ORDP_NUMERO = Min (ORDP_NUMERO)") as Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow[])[0].ORDP_NUMERO - 1); }
+                        
+            //Recorremos todos los días
+            foreach (Data.dsPlanSemanal.DIAS_PLAN_SEMANALRow rowDia in dsPlanSemanal.PLANES_SEMANALES.FindByPSEM_CODIGO(codigoSemana).GetDIAS_PLAN_SEMANALRows())
+            {
+                //Recorremos el detalle de cada día y generamos la orden de producción
+                foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow rowDetalle in rowDia.GetDETALLE_PLANES_SEMANALESRows())
+                {
+                    //Primero controlamos si no tiene órdenes
+                    if (rowDetalle.DPSEM_ESTADO == BLL.DetallePlanSemanalBLL.estadoGenerado)
+                    {
+                        //No tiene órdenes, controlamos si la cocina tiene una estructura activa
+                        int codigoEstructura = CocinaBLL.ObtenerCodigoEstructuraActiva(Convert.ToInt32(rowDetalle.COC_CODIGO));
+                        string mensaje = string.Empty;
+                        if (codigoEstructura == 0)
+                        {
+                            mensaje = "La Cocina " + rowDetalle.COCINASRow.COC_CODIGO_PRODUCTO + " no posee una Estructura activa.";
+                            throw new Entidades.Excepciones.OrdenTrabajoException(mensaje);
+                        }
+
+                        //Tiene estructura activa, creamos la orden de producción
+                        Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow rowOrdenP = dsOrdenTrabajo.ORDENES_PRODUCCION.NewORDENES_PRODUCCIONRow();
+                        rowOrdenP.BeginEdit();
+                        rowOrdenP.ORDP_NUMERO = codigoOrdenP--;
+                        rowOrdenP.ORDP_CODIGO = "OA" + (rowOrdenP.ORDP_NUMERO * -1).ToString();
+                        rowOrdenP.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
+                        rowOrdenP.ORDP_FECHAALTA = DBBLL.GetFechaServidor();
+                        rowOrdenP.DPSEM_CODIGO = rowDetalle.DPSEM_CODIGO;
+                        rowOrdenP.ORDP_ORIGEN = rowOrdenP.ORDP_CODIGO + "-" + rowDetalle.COCINASRow.COC_CODIGO_PRODUCTO;
+                        rowOrdenP.SetORDP_FECHAINICIOREALNull();
+                        rowOrdenP.SetORDP_FECHAFINREALNull();
+                        rowOrdenP.SetORDPM_NUMERONull();
+                        rowOrdenP.ORDP_PRIORIDAD = 0;
+                        rowOrdenP.ORDP_OBSERVACIONES = string.Empty;
+                        rowOrdenP.COC_CODIGO = rowDetalle.COC_CODIGO;
+                        rowOrdenP.ORDP_CANTIDADESTIMADA = rowDetalle.DPSEM_CANTIDADESTIMADA;
+                        rowOrdenP.ORDP_CANTIDADREAL = 0;
+                        rowOrdenP.ESTR_CODIGO = codigoEstructura;
+                        rowOrdenP.EndEdit();
+                        dsOrdenTrabajo.ORDENES_PRODUCCION.AddORDENES_PRODUCCIONRow(rowOrdenP);
+                        rowDetalle.BeginEdit();
+                        rowDetalle.DPSEM_ESTADO = BLL.DetallePlanSemanalBLL.estadoConOrden;
+                        rowDetalle.EndEdit();
+                    }
+                }
+            }
+        }
+
+        public static void GenerarOrdenProduccionDia(int codigoDia, Data.dsPlanSemanal dsPlanSemanal, Data.dsOrdenTrabajo dsOrdenTrabajo)
+        {
+            //Declaramos las variables necesarias
+            int codigoOrdenP = -1;
+            if (dsOrdenTrabajo.ORDENES_PRODUCCION.Rows.Count > 0)
+            { codigoOrdenP = Convert.ToInt32((dsOrdenTrabajo.ORDENES_PRODUCCION.Select("ORDP_NUMERO = Min (ORDP_NUMERO)") as Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow[])[0].ORDP_NUMERO - 1); }           
+            
+            //Recorremos el detalle del día y generamos la orden de producción
+            foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow rowDetalle in (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow[])dsPlanSemanal.DETALLE_PLANES_SEMANALES.Select("diapsem_codigo = " + codigoDia))
+            {
+                //Primero controlamos si no tiene órdenes
+                if (rowDetalle.DPSEM_ESTADO == BLL.DetallePlanSemanalBLL.estadoGenerado)
+                {
+                    //No tiene órdenes, controlamos si la cocina tiene una estructura activa
+                    int codigoEstructura = CocinaBLL.ObtenerCodigoEstructuraActiva(Convert.ToInt32(rowDetalle.COC_CODIGO));
+                    string mensaje = string.Empty;
+                    if (codigoEstructura == 0)
+                    {
+                        mensaje = "La Cocina " + rowDetalle.COCINASRow.COC_CODIGO_PRODUCTO + " no posee una Estructura activa.";
+                        throw new Entidades.Excepciones.OrdenTrabajoException(mensaje);
+                    }
+
+                    //Tiene estructura activa, creamos la orden de producción
+                    Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow rowOrdenP = dsOrdenTrabajo.ORDENES_PRODUCCION.NewORDENES_PRODUCCIONRow();
+                    rowOrdenP.BeginEdit();
+                    rowOrdenP.ORDP_NUMERO = codigoOrdenP--;
+                    rowOrdenP.ORDP_CODIGO = "OA" + (rowOrdenP.ORDP_NUMERO * -1).ToString();
+                    rowOrdenP.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
+                    rowOrdenP.ORDP_FECHAALTA = DBBLL.GetFechaServidor();
+                    rowOrdenP.DPSEM_CODIGO = rowDetalle.DPSEM_CODIGO;
+                    rowOrdenP.ORDP_ORIGEN = rowOrdenP.ORDP_CODIGO + "-" + rowDetalle.COCINASRow.COC_CODIGO_PRODUCTO;
+                    rowOrdenP.SetORDP_FECHAINICIOREALNull();
+                    rowOrdenP.SetORDP_FECHAFINREALNull();
+                    rowOrdenP.SetORDPM_NUMERONull();
+                    rowOrdenP.ORDP_PRIORIDAD = 0;
+                    rowOrdenP.ORDP_OBSERVACIONES = string.Empty;
+                    rowOrdenP.COC_CODIGO = rowDetalle.COC_CODIGO;
+                    rowOrdenP.ORDP_CANTIDADESTIMADA = rowDetalle.DPSEM_CANTIDADESTIMADA;
+                    rowOrdenP.ORDP_CANTIDADREAL = 0;
+                    rowOrdenP.ESTR_CODIGO = codigoEstructura;
+                    rowOrdenP.EndEdit();
+                    dsOrdenTrabajo.ORDENES_PRODUCCION.AddORDENES_PRODUCCIONRow(rowOrdenP);
+                    rowDetalle.BeginEdit();
+                    rowDetalle.DPSEM_ESTADO = BLL.DetallePlanSemanalBLL.estadoConOrden;
+                    rowDetalle.EndEdit();
+                }
+            }            
+        }
         
         public static void GenerarOrdenTrabajoDia(int codigoDia, Data.dsPlanSemanal dsPlanSemanal, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
         {
             //Declaramos las variables necesarias
-            int codigoOrden = -1, codigoDetalleOrden = -1;
+            int codigoOrdenP = -1, codigoOrdenT = -1;
                         
             //Recorremos todo el detalle del día
             foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow rowDetalle in (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow[])dsPlanSemanal.DETALLE_PLANES_SEMANALES.Select("diapsem_codigo = " + codigoDia))
@@ -42,7 +144,7 @@ namespace GyCAP.BLL
                 //Primero armamos lasórdenes de producción que corresponden uno a uno con el detalle del día
                 Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow rowOrdenP = dsOrdenTrabajo.ORDENES_PRODUCCION.NewORDENES_PRODUCCIONRow();
                 rowOrdenP.BeginEdit();
-                rowOrdenP.ORDP_NUMERO = codigoOrden--;
+                rowOrdenP.ORDP_NUMERO = codigoOrdenP--;
                 rowOrdenP.ORDP_CODIGO = "codigoOrden";
                 rowOrdenP.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                 rowOrdenP.ORDP_FECHAALTA = DBBLL.GetFechaServidor();
@@ -127,7 +229,7 @@ namespace GyCAP.BLL
                     {
                         Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTCxE = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                         rowOTCxE.BeginEdit();
-                        rowOTCxE.ORDT_NUMERO = codigoDetalleOrden--;
+                        rowOTCxE.ORDT_NUMERO = codigoOrdenT--;
                         rowOTCxE.ORDT_CODIGO = "código detalle";
                         rowOTCxE.ORDT_ORIGEN = rowOrdenP.ORDP_ORIGEN + "/" + rowCxE.CONJUNTOSRow.CONJ_CODIGOPARTE;
                         rowOTCxE.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
@@ -158,7 +260,7 @@ namespace GyCAP.BLL
                         {
                             Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTSCxC = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                             rowOTSCxC.BeginEdit();
-                            rowOTSCxC.ORDT_NUMERO = codigoDetalleOrden--;
+                            rowOTSCxC.ORDT_NUMERO = codigoOrdenT--;
                             rowOTSCxC.ORDT_CODIGO = "código detalle";
                             rowOTSCxC.ORDT_ORIGEN = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(ultimaOrdenConjunto).ORDT_ORIGEN + "/" + rowSCxC.SUBCONJUNTOSRow.SCONJ_CODIGOPARTE;
                             rowOTSCxC.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
@@ -190,7 +292,7 @@ namespace GyCAP.BLL
                             {
                                 Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTPxSC = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                                 rowOTPxSC.BeginEdit();
-                                rowOTPxSC.ORDT_NUMERO = codigoDetalleOrden--;
+                                rowOTPxSC.ORDT_NUMERO = codigoOrdenT--;
                                 rowOTPxSC.ORDT_CODIGO = "código detalle";
                                 rowOTPxSC.ORDT_ORIGEN = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(ultimaOrdenSubconjunto).ORDT_ORIGEN + "/" + rowPxSC.PIEZASRow.PZA_CODIGOPARTE;
                                 rowOTPxSC.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
@@ -223,7 +325,7 @@ namespace GyCAP.BLL
                         {
                             Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTPxC = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                             rowOTPxC.BeginEdit();
-                            rowOTPxC.ORDT_NUMERO = codigoDetalleOrden--;
+                            rowOTPxC.ORDT_NUMERO = codigoOrdenT--;
                             rowOTPxC.ORDT_CODIGO = "código detalle";
                             rowOTPxC.ORDT_ORIGEN = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(ultimaOrdenConjunto).ORDT_ORIGEN + "/" + rowPxC.PIEZASRow.PZA_CODIGOPARTE;
                             rowOTPxC.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
@@ -255,7 +357,7 @@ namespace GyCAP.BLL
                     {
                         Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTPxE = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                         rowOTPxE.BeginEdit();
-                        rowOTPxE.ORDT_NUMERO = codigoDetalleOrden--;
+                        rowOTPxE.ORDT_NUMERO = codigoOrdenT--;
                         rowOTPxE.ORDT_CODIGO = "código detalle";
                         rowOTPxE.ORDT_ORIGEN = rowOrdenP.ORDP_ORIGEN + "/" + rowPxE.PIEZASRow.PZA_CODIGOPARTE;
                         rowOTPxE.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;

@@ -140,7 +140,7 @@ namespace GyCAP.DAL
                 //Iniciamos la transaccion
                 transaccion = DB.IniciarTransaccion();
 
-                //Actualizamos la pieza
+                //Actualizamos el detalle
                 DB.executeNonQuery(sqlUpdate, valorParametros, transaccion);
                 //Actualizamos la estructura, primero insertamos los nuevos
                 Entidades.DetallePedido detalle = new GyCAP.Entidades.DetallePedido();
@@ -377,48 +377,6 @@ namespace GyCAP.DAL
             }
         }
 
-//        public static void ObtenerPiezas(System.Data.DataTable dtPiezas)
-//        {
-//            string sql = @"SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, pza_cantidadstock, par_codigo, pno_codigo
-//                                , pza_codigoparte, pza_costo, hr_codigo, pza_costofijo FROM PIEZAS";
-
-//            try
-//            {
-//                DB.FillDataTable(dtPiezas, sql, null);
-//            }
-//            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-//        }
-
-//        public static void ObtenerPiezas(System.Data.DataTable dtPiezas, int estado)
-//        {
-//            string sql = @"SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, pza_cantidadstock, par_codigo, pno_codigo
-//                                , pza_codigoparte, pza_costo, hr_codigo, pza_costofijo FROM PIEZAS WHERE par_codigo = @p0";
-//            object[] valorParametros = { estado };
-//            try
-//            {
-//                DB.FillDataTable(dtPiezas, sql, valorParametros);
-//            }
-//            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-//        }
-
-//        public static void ObtenerPieza(int codigoPieza, bool detalle, Data.dsEstructura ds)
-//        {
-//            string sql = @"SELECT pza_codigo, pza_nombre, te_codigo, pza_descripcion, pza_cantidadstock, par_codigo, pno_codigo, pza_codigoparte 
-//                                  ,pza_costo, hr_codigo, pza_costofijo FROM PIEZAS WHERE pza_codigo = @p0";
-//            object[] valorParametros = { codigoPieza };
-//            try
-//            {
-//                DB.FillDataTable(ds.PIEZAS, sql, valorParametros);
-//                if (detalle)
-//                {
-//                    //Obtenemos las materias primas que forman la pieza
-//                    ObtenerDetallePieza(codigoPieza, ds);
-//                }
-//            }
-//            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-
-//        }
-
         public static bool PuedeEliminarse(long codigo)
         {
             string sqlDPM = "SELECT count(dped_codigo) FROM DETALLE_PLANES_MENSUALES WHERE dped_codigo = @p0";
@@ -449,20 +407,5 @@ namespace GyCAP.DAL
                 DB.FillDataTable(ds.DETALLE_PEDIDOS, sql, valorParametros);
             }
         }
-
-//        private static void ObtenerDetallePieza(int codigoPieza, Data.dsEstructura ds)
-//        {
-//            string sql = @"SELECT mpxp_codigo, pza_codigo, mp_codigo, mpxp_cantidad
-//                         FROM MATERIASPRIMASXPIEZA WHERE pza_codigo = @p0";
-
-//            object[] valorParametros = { codigoPieza };
-
-//            DB.FillDataTable(ds.MATERIASPRIMASXPIEZA, sql, valorParametros);
-//            //Obtenemos las materias primas que forman la pieza
-//            foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow rowMPxP in (Data.dsEstructura.MATERIASPRIMASXPIEZARow[])ds.MATERIASPRIMASXPIEZA.Select("pza_codigo = " + codigoPieza))
-//            {
-//                MateriaPrimaDAL.ObtenerMateriaPrima(Convert.ToInt32(rowMPxP.MP_CODIGO), ds);
-//            }
-//        }
     }
 }

@@ -29,21 +29,21 @@ namespace GyCAP.Data {
         
         private ORDENES_TRABAJODataTable tableORDENES_TRABAJO;
         
-        private ORDENES_PRODUCCIONDataTable tableORDENES_PRODUCCION;
-        
         private ORDENES_PRODUCCION_MANUALDataTable tableORDENES_PRODUCCION_MANUAL;
         
         private CIERRE_ORDENTRABAJODataTable tableCIERRE_ORDENTRABAJO;
         
+        private ORDENES_PRODUCCIONDataTable tableORDENES_PRODUCCION;
+        
         private global::System.Data.DataRelation relationFK_ORDENES_TRABAJO_ESTADO_ORDENES_TRABAJO;
+        
+        private global::System.Data.DataRelation relationFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO;
         
         private global::System.Data.DataRelation relationFK_ORDENES_PRODUCCION_ORDENES_TRABAJO;
         
         private global::System.Data.DataRelation relationFK_ORDENES_PRODUCCION_ESTADO_ORDENES_TRABAJO;
         
         private global::System.Data.DataRelation relationFK_ORDENES_PRODUCCION_ORDENES_PRODUCCION_MANUAL;
-        
-        private global::System.Data.DataRelation relationFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -77,14 +77,14 @@ namespace GyCAP.Data {
                 if ((ds.Tables["ORDENES_TRABAJO"] != null)) {
                     base.Tables.Add(new ORDENES_TRABAJODataTable(ds.Tables["ORDENES_TRABAJO"]));
                 }
-                if ((ds.Tables["ORDENES_PRODUCCION"] != null)) {
-                    base.Tables.Add(new ORDENES_PRODUCCIONDataTable(ds.Tables["ORDENES_PRODUCCION"]));
-                }
                 if ((ds.Tables["ORDENES_PRODUCCION_MANUAL"] != null)) {
                     base.Tables.Add(new ORDENES_PRODUCCION_MANUALDataTable(ds.Tables["ORDENES_PRODUCCION_MANUAL"]));
                 }
                 if ((ds.Tables["CIERRE_ORDENTRABAJO"] != null)) {
                     base.Tables.Add(new CIERRE_ORDENTRABAJODataTable(ds.Tables["CIERRE_ORDENTRABAJO"]));
+                }
+                if ((ds.Tables["ORDENES_PRODUCCION"] != null)) {
+                    base.Tables.Add(new ORDENES_PRODUCCIONDataTable(ds.Tables["ORDENES_PRODUCCION"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -125,15 +125,6 @@ namespace GyCAP.Data {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public ORDENES_PRODUCCIONDataTable ORDENES_PRODUCCION {
-            get {
-                return this.tableORDENES_PRODUCCION;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public ORDENES_PRODUCCION_MANUALDataTable ORDENES_PRODUCCION_MANUAL {
             get {
                 return this.tableORDENES_PRODUCCION_MANUAL;
@@ -146,6 +137,15 @@ namespace GyCAP.Data {
         public CIERRE_ORDENTRABAJODataTable CIERRE_ORDENTRABAJO {
             get {
                 return this.tableCIERRE_ORDENTRABAJO;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ORDENES_PRODUCCIONDataTable ORDENES_PRODUCCION {
+            get {
+                return this.tableORDENES_PRODUCCION;
             }
         }
         
@@ -214,14 +214,14 @@ namespace GyCAP.Data {
                 if ((ds.Tables["ORDENES_TRABAJO"] != null)) {
                     base.Tables.Add(new ORDENES_TRABAJODataTable(ds.Tables["ORDENES_TRABAJO"]));
                 }
-                if ((ds.Tables["ORDENES_PRODUCCION"] != null)) {
-                    base.Tables.Add(new ORDENES_PRODUCCIONDataTable(ds.Tables["ORDENES_PRODUCCION"]));
-                }
                 if ((ds.Tables["ORDENES_PRODUCCION_MANUAL"] != null)) {
                     base.Tables.Add(new ORDENES_PRODUCCION_MANUALDataTable(ds.Tables["ORDENES_PRODUCCION_MANUAL"]));
                 }
                 if ((ds.Tables["CIERRE_ORDENTRABAJO"] != null)) {
                     base.Tables.Add(new CIERRE_ORDENTRABAJODataTable(ds.Tables["CIERRE_ORDENTRABAJO"]));
+                }
+                if ((ds.Tables["ORDENES_PRODUCCION"] != null)) {
+                    base.Tables.Add(new ORDENES_PRODUCCIONDataTable(ds.Tables["ORDENES_PRODUCCION"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -265,12 +265,6 @@ namespace GyCAP.Data {
                     this.tableORDENES_TRABAJO.InitVars();
                 }
             }
-            this.tableORDENES_PRODUCCION = ((ORDENES_PRODUCCIONDataTable)(base.Tables["ORDENES_PRODUCCION"]));
-            if ((initTable == true)) {
-                if ((this.tableORDENES_PRODUCCION != null)) {
-                    this.tableORDENES_PRODUCCION.InitVars();
-                }
-            }
             this.tableORDENES_PRODUCCION_MANUAL = ((ORDENES_PRODUCCION_MANUALDataTable)(base.Tables["ORDENES_PRODUCCION_MANUAL"]));
             if ((initTable == true)) {
                 if ((this.tableORDENES_PRODUCCION_MANUAL != null)) {
@@ -283,11 +277,17 @@ namespace GyCAP.Data {
                     this.tableCIERRE_ORDENTRABAJO.InitVars();
                 }
             }
+            this.tableORDENES_PRODUCCION = ((ORDENES_PRODUCCIONDataTable)(base.Tables["ORDENES_PRODUCCION"]));
+            if ((initTable == true)) {
+                if ((this.tableORDENES_PRODUCCION != null)) {
+                    this.tableORDENES_PRODUCCION.InitVars();
+                }
+            }
             this.relationFK_ORDENES_TRABAJO_ESTADO_ORDENES_TRABAJO = this.Relations["FK_ORDENES_TRABAJO_ESTADO_ORDENES_TRABAJO"];
+            this.relationFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO = this.Relations["FK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO"];
             this.relationFK_ORDENES_PRODUCCION_ORDENES_TRABAJO = this.Relations["FK_ORDENES_PRODUCCION_ORDENES_TRABAJO"];
             this.relationFK_ORDENES_PRODUCCION_ESTADO_ORDENES_TRABAJO = this.Relations["FK_ORDENES_PRODUCCION_ESTADO_ORDENES_TRABAJO"];
             this.relationFK_ORDENES_PRODUCCION_ORDENES_PRODUCCION_MANUAL = this.Relations["FK_ORDENES_PRODUCCION_ORDENES_PRODUCCION_MANUAL"];
-            this.relationFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO = this.Relations["FK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -301,16 +301,20 @@ namespace GyCAP.Data {
             base.Tables.Add(this.tableESTADO_ORDENES_TRABAJO);
             this.tableORDENES_TRABAJO = new ORDENES_TRABAJODataTable();
             base.Tables.Add(this.tableORDENES_TRABAJO);
-            this.tableORDENES_PRODUCCION = new ORDENES_PRODUCCIONDataTable();
-            base.Tables.Add(this.tableORDENES_PRODUCCION);
             this.tableORDENES_PRODUCCION_MANUAL = new ORDENES_PRODUCCION_MANUALDataTable();
             base.Tables.Add(this.tableORDENES_PRODUCCION_MANUAL);
             this.tableCIERRE_ORDENTRABAJO = new CIERRE_ORDENTRABAJODataTable();
             base.Tables.Add(this.tableCIERRE_ORDENTRABAJO);
+            this.tableORDENES_PRODUCCION = new ORDENES_PRODUCCIONDataTable();
+            base.Tables.Add(this.tableORDENES_PRODUCCION);
             this.relationFK_ORDENES_TRABAJO_ESTADO_ORDENES_TRABAJO = new global::System.Data.DataRelation("FK_ORDENES_TRABAJO_ESTADO_ORDENES_TRABAJO", new global::System.Data.DataColumn[] {
                         this.tableESTADO_ORDENES_TRABAJO.EORD_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableORDENES_TRABAJO.EORD_CODIGOColumn}, false);
             this.Relations.Add(this.relationFK_ORDENES_TRABAJO_ESTADO_ORDENES_TRABAJO);
+            this.relationFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO = new global::System.Data.DataRelation("FK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO", new global::System.Data.DataColumn[] {
+                        this.tableORDENES_TRABAJO.ORDT_NUMEROColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCIERRE_ORDENTRABAJO.ORDT_NUMEROColumn}, false);
+            this.Relations.Add(this.relationFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO);
             this.relationFK_ORDENES_PRODUCCION_ORDENES_TRABAJO = new global::System.Data.DataRelation("FK_ORDENES_PRODUCCION_ORDENES_TRABAJO", new global::System.Data.DataColumn[] {
                         this.tableORDENES_PRODUCCION.ORDP_NUMEROColumn}, new global::System.Data.DataColumn[] {
                         this.tableORDENES_TRABAJO.ORDP_NUMEROColumn}, false);
@@ -323,10 +327,6 @@ namespace GyCAP.Data {
                         this.tableORDENES_PRODUCCION_MANUAL.ORDPM_NUMEROColumn}, new global::System.Data.DataColumn[] {
                         this.tableORDENES_PRODUCCION.ORDPM_NUMEROColumn}, false);
             this.Relations.Add(this.relationFK_ORDENES_PRODUCCION_ORDENES_PRODUCCION_MANUAL);
-            this.relationFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO = new global::System.Data.DataRelation("FK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO", new global::System.Data.DataColumn[] {
-                        this.tableORDENES_TRABAJO.ORDT_NUMEROColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCIERRE_ORDENTRABAJO.ORDT_NUMEROColumn}, false);
-            this.Relations.Add(this.relationFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -340,17 +340,17 @@ namespace GyCAP.Data {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeORDENES_PRODUCCION() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeORDENES_PRODUCCION_MANUAL() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeCIERRE_ORDENTRABAJO() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeORDENES_PRODUCCION() {
             return false;
         }
         
@@ -411,11 +411,11 @@ namespace GyCAP.Data {
         
         public delegate void ORDENES_TRABAJORowChangeEventHandler(object sender, ORDENES_TRABAJORowChangeEvent e);
         
-        public delegate void ORDENES_PRODUCCIONRowChangeEventHandler(object sender, ORDENES_PRODUCCIONRowChangeEvent e);
-        
         public delegate void ORDENES_PRODUCCION_MANUALRowChangeEventHandler(object sender, ORDENES_PRODUCCION_MANUALRowChangeEvent e);
         
         public delegate void CIERRE_ORDENTRABAJORowChangeEventHandler(object sender, CIERRE_ORDENTRABAJORowChangeEvent e);
+        
+        public delegate void ORDENES_PRODUCCIONRowChangeEventHandler(object sender, ORDENES_PRODUCCIONRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1254,420 +1254,6 @@ namespace GyCAP.Data {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ORDENES_PRODUCCIONDataTable : global::System.Data.TypedTableBase<ORDENES_PRODUCCIONRow> {
-            
-            private global::System.Data.DataColumn columnORDP_NUMERO;
-            
-            private global::System.Data.DataColumn columnORDP_CODIGO;
-            
-            private global::System.Data.DataColumn columnEORD_CODIGO;
-            
-            private global::System.Data.DataColumn columnORDP_FECHAALTA;
-            
-            private global::System.Data.DataColumn columnDPSEM_CODIGO;
-            
-            private global::System.Data.DataColumn columnORDPM_NUMERO;
-            
-            private global::System.Data.DataColumn columnORDP_ORIGEN;
-            
-            private global::System.Data.DataColumn columnORDP_FECHAINICIOESTIMADA;
-            
-            private global::System.Data.DataColumn columnORDP_FECHAINICIOREAL;
-            
-            private global::System.Data.DataColumn columnORDP_FECHAFINESTIMADA;
-            
-            private global::System.Data.DataColumn columnORDP_FECHAFINREAL;
-            
-            private global::System.Data.DataColumn columnORDP_OBSERVACIONES;
-            
-            private global::System.Data.DataColumn columnORDP_PRIORIDAD;
-            
-            private global::System.Data.DataColumn columnESTR_CODIGO;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ORDENES_PRODUCCIONDataTable() {
-                this.TableName = "ORDENES_PRODUCCION";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal ORDENES_PRODUCCIONDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected ORDENES_PRODUCCIONDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ORDP_NUMEROColumn {
-                get {
-                    return this.columnORDP_NUMERO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ORDP_CODIGOColumn {
-                get {
-                    return this.columnORDP_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn EORD_CODIGOColumn {
-                get {
-                    return this.columnEORD_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ORDP_FECHAALTAColumn {
-                get {
-                    return this.columnORDP_FECHAALTA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn DPSEM_CODIGOColumn {
-                get {
-                    return this.columnDPSEM_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ORDPM_NUMEROColumn {
-                get {
-                    return this.columnORDPM_NUMERO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ORDP_ORIGENColumn {
-                get {
-                    return this.columnORDP_ORIGEN;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ORDP_FECHAINICIOESTIMADAColumn {
-                get {
-                    return this.columnORDP_FECHAINICIOESTIMADA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ORDP_FECHAINICIOREALColumn {
-                get {
-                    return this.columnORDP_FECHAINICIOREAL;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ORDP_FECHAFINESTIMADAColumn {
-                get {
-                    return this.columnORDP_FECHAFINESTIMADA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ORDP_FECHAFINREALColumn {
-                get {
-                    return this.columnORDP_FECHAFINREAL;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ORDP_OBSERVACIONESColumn {
-                get {
-                    return this.columnORDP_OBSERVACIONES;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ORDP_PRIORIDADColumn {
-                get {
-                    return this.columnORDP_PRIORIDAD;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ESTR_CODIGOColumn {
-                get {
-                    return this.columnESTR_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ORDENES_PRODUCCIONRow this[int index] {
-                get {
-                    return ((ORDENES_PRODUCCIONRow)(this.Rows[index]));
-                }
-            }
-            
-            public event ORDENES_PRODUCCIONRowChangeEventHandler ORDENES_PRODUCCIONRowChanging;
-            
-            public event ORDENES_PRODUCCIONRowChangeEventHandler ORDENES_PRODUCCIONRowChanged;
-            
-            public event ORDENES_PRODUCCIONRowChangeEventHandler ORDENES_PRODUCCIONRowDeleting;
-            
-            public event ORDENES_PRODUCCIONRowChangeEventHandler ORDENES_PRODUCCIONRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddORDENES_PRODUCCIONRow(ORDENES_PRODUCCIONRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ORDENES_PRODUCCIONRow AddORDENES_PRODUCCIONRow(string ORDP_CODIGO, ESTADO_ORDENES_TRABAJORow parentESTADO_ORDENES_TRABAJORowByFK_ORDENES_PRODUCCION_ESTADO_ORDENES_TRABAJO, System.DateTime ORDP_FECHAALTA, decimal DPSEM_CODIGO, ORDENES_PRODUCCION_MANUALRow parentORDENES_PRODUCCION_MANUALRowByFK_ORDENES_PRODUCCION_ORDENES_PRODUCCION_MANUAL, string ORDP_ORIGEN, System.DateTime ORDP_FECHAINICIOESTIMADA, System.DateTime ORDP_FECHAINICIOREAL, System.DateTime ORDP_FECHAFINESTIMADA, System.DateTime ORDP_FECHAFINREAL, string ORDP_OBSERVACIONES, decimal ORDP_PRIORIDAD, decimal ESTR_CODIGO) {
-                ORDENES_PRODUCCIONRow rowORDENES_PRODUCCIONRow = ((ORDENES_PRODUCCIONRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        ORDP_CODIGO,
-                        null,
-                        ORDP_FECHAALTA,
-                        DPSEM_CODIGO,
-                        null,
-                        ORDP_ORIGEN,
-                        ORDP_FECHAINICIOESTIMADA,
-                        ORDP_FECHAINICIOREAL,
-                        ORDP_FECHAFINESTIMADA,
-                        ORDP_FECHAFINREAL,
-                        ORDP_OBSERVACIONES,
-                        ORDP_PRIORIDAD,
-                        ESTR_CODIGO};
-                if ((parentESTADO_ORDENES_TRABAJORowByFK_ORDENES_PRODUCCION_ESTADO_ORDENES_TRABAJO != null)) {
-                    columnValuesArray[2] = parentESTADO_ORDENES_TRABAJORowByFK_ORDENES_PRODUCCION_ESTADO_ORDENES_TRABAJO[0];
-                }
-                if ((parentORDENES_PRODUCCION_MANUALRowByFK_ORDENES_PRODUCCION_ORDENES_PRODUCCION_MANUAL != null)) {
-                    columnValuesArray[5] = parentORDENES_PRODUCCION_MANUALRowByFK_ORDENES_PRODUCCION_ORDENES_PRODUCCION_MANUAL[0];
-                }
-                rowORDENES_PRODUCCIONRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowORDENES_PRODUCCIONRow);
-                return rowORDENES_PRODUCCIONRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ORDENES_PRODUCCIONRow FindByORDP_NUMERO(decimal ORDP_NUMERO) {
-                return ((ORDENES_PRODUCCIONRow)(this.Rows.Find(new object[] {
-                            ORDP_NUMERO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                ORDENES_PRODUCCIONDataTable cln = ((ORDENES_PRODUCCIONDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new ORDENES_PRODUCCIONDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnORDP_NUMERO = base.Columns["ORDP_NUMERO"];
-                this.columnORDP_CODIGO = base.Columns["ORDP_CODIGO"];
-                this.columnEORD_CODIGO = base.Columns["EORD_CODIGO"];
-                this.columnORDP_FECHAALTA = base.Columns["ORDP_FECHAALTA"];
-                this.columnDPSEM_CODIGO = base.Columns["DPSEM_CODIGO"];
-                this.columnORDPM_NUMERO = base.Columns["ORDPM_NUMERO"];
-                this.columnORDP_ORIGEN = base.Columns["ORDP_ORIGEN"];
-                this.columnORDP_FECHAINICIOESTIMADA = base.Columns["ORDP_FECHAINICIOESTIMADA"];
-                this.columnORDP_FECHAINICIOREAL = base.Columns["ORDP_FECHAINICIOREAL"];
-                this.columnORDP_FECHAFINESTIMADA = base.Columns["ORDP_FECHAFINESTIMADA"];
-                this.columnORDP_FECHAFINREAL = base.Columns["ORDP_FECHAFINREAL"];
-                this.columnORDP_OBSERVACIONES = base.Columns["ORDP_OBSERVACIONES"];
-                this.columnORDP_PRIORIDAD = base.Columns["ORDP_PRIORIDAD"];
-                this.columnESTR_CODIGO = base.Columns["ESTR_CODIGO"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnORDP_NUMERO = new global::System.Data.DataColumn("ORDP_NUMERO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnORDP_NUMERO);
-                this.columnORDP_CODIGO = new global::System.Data.DataColumn("ORDP_CODIGO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnORDP_CODIGO);
-                this.columnEORD_CODIGO = new global::System.Data.DataColumn("EORD_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnEORD_CODIGO);
-                this.columnORDP_FECHAALTA = new global::System.Data.DataColumn("ORDP_FECHAALTA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnORDP_FECHAALTA);
-                this.columnDPSEM_CODIGO = new global::System.Data.DataColumn("DPSEM_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDPSEM_CODIGO);
-                this.columnORDPM_NUMERO = new global::System.Data.DataColumn("ORDPM_NUMERO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnORDPM_NUMERO);
-                this.columnORDP_ORIGEN = new global::System.Data.DataColumn("ORDP_ORIGEN", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnORDP_ORIGEN);
-                this.columnORDP_FECHAINICIOESTIMADA = new global::System.Data.DataColumn("ORDP_FECHAINICIOESTIMADA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnORDP_FECHAINICIOESTIMADA);
-                this.columnORDP_FECHAINICIOREAL = new global::System.Data.DataColumn("ORDP_FECHAINICIOREAL", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnORDP_FECHAINICIOREAL);
-                this.columnORDP_FECHAFINESTIMADA = new global::System.Data.DataColumn("ORDP_FECHAFINESTIMADA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnORDP_FECHAFINESTIMADA);
-                this.columnORDP_FECHAFINREAL = new global::System.Data.DataColumn("ORDP_FECHAFINREAL", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnORDP_FECHAFINREAL);
-                this.columnORDP_OBSERVACIONES = new global::System.Data.DataColumn("ORDP_OBSERVACIONES", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnORDP_OBSERVACIONES);
-                this.columnORDP_PRIORIDAD = new global::System.Data.DataColumn("ORDP_PRIORIDAD", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnORDP_PRIORIDAD);
-                this.columnESTR_CODIGO = new global::System.Data.DataColumn("ESTR_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnESTR_CODIGO);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnORDP_NUMERO}, true));
-                this.columnORDP_NUMERO.AutoIncrement = true;
-                this.columnORDP_NUMERO.AutoIncrementSeed = -1;
-                this.columnORDP_NUMERO.AutoIncrementStep = -1;
-                this.columnORDP_NUMERO.AllowDBNull = false;
-                this.columnORDP_NUMERO.Unique = true;
-                this.columnORDP_CODIGO.MaxLength = 100;
-                this.columnORDP_ORIGEN.MaxLength = 100;
-                this.columnORDP_OBSERVACIONES.MaxLength = 300;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ORDENES_PRODUCCIONRow NewORDENES_PRODUCCIONRow() {
-                return ((ORDENES_PRODUCCIONRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new ORDENES_PRODUCCIONRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(ORDENES_PRODUCCIONRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.ORDENES_PRODUCCIONRowChanged != null)) {
-                    this.ORDENES_PRODUCCIONRowChanged(this, new ORDENES_PRODUCCIONRowChangeEvent(((ORDENES_PRODUCCIONRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.ORDENES_PRODUCCIONRowChanging != null)) {
-                    this.ORDENES_PRODUCCIONRowChanging(this, new ORDENES_PRODUCCIONRowChangeEvent(((ORDENES_PRODUCCIONRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.ORDENES_PRODUCCIONRowDeleted != null)) {
-                    this.ORDENES_PRODUCCIONRowDeleted(this, new ORDENES_PRODUCCIONRowChangeEvent(((ORDENES_PRODUCCIONRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.ORDENES_PRODUCCIONRowDeleting != null)) {
-                    this.ORDENES_PRODUCCIONRowDeleting(this, new ORDENES_PRODUCCIONRowChangeEvent(((ORDENES_PRODUCCIONRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveORDENES_PRODUCCIONRow(ORDENES_PRODUCCIONRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsOrdenTrabajo ds = new dsOrdenTrabajo();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "ORDENES_PRODUCCIONDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class ORDENES_PRODUCCION_MANUALDataTable : global::System.Data.TypedTableBase<ORDENES_PRODUCCION_MANUALRow> {
             
             private global::System.Data.DataColumn columnORDPM_NUMERO;
@@ -2308,6 +1894,475 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ORDENES_PRODUCCIONDataTable : global::System.Data.TypedTableBase<ORDENES_PRODUCCIONRow> {
+            
+            private global::System.Data.DataColumn columnORDP_NUMERO;
+            
+            private global::System.Data.DataColumn columnORDP_CODIGO;
+            
+            private global::System.Data.DataColumn columnEORD_CODIGO;
+            
+            private global::System.Data.DataColumn columnORDP_FECHAALTA;
+            
+            private global::System.Data.DataColumn columnDPSEM_CODIGO;
+            
+            private global::System.Data.DataColumn columnORDPM_NUMERO;
+            
+            private global::System.Data.DataColumn columnORDP_ORIGEN;
+            
+            private global::System.Data.DataColumn columnORDP_FECHAINICIOESTIMADA;
+            
+            private global::System.Data.DataColumn columnORDP_FECHAINICIOREAL;
+            
+            private global::System.Data.DataColumn columnORDP_FECHAFINESTIMADA;
+            
+            private global::System.Data.DataColumn columnORDP_FECHAFINREAL;
+            
+            private global::System.Data.DataColumn columnORDP_OBSERVACIONES;
+            
+            private global::System.Data.DataColumn columnORDP_PRIORIDAD;
+            
+            private global::System.Data.DataColumn columnESTR_CODIGO;
+            
+            private global::System.Data.DataColumn columnORDP_CANTIDADESTIMADA;
+            
+            private global::System.Data.DataColumn columnORDP_CANTIDADREAL;
+            
+            private global::System.Data.DataColumn columnCOC_CODIGO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ORDENES_PRODUCCIONDataTable() {
+                this.TableName = "ORDENES_PRODUCCION";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal ORDENES_PRODUCCIONDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected ORDENES_PRODUCCIONDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ORDP_NUMEROColumn {
+                get {
+                    return this.columnORDP_NUMERO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ORDP_CODIGOColumn {
+                get {
+                    return this.columnORDP_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EORD_CODIGOColumn {
+                get {
+                    return this.columnEORD_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ORDP_FECHAALTAColumn {
+                get {
+                    return this.columnORDP_FECHAALTA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DPSEM_CODIGOColumn {
+                get {
+                    return this.columnDPSEM_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ORDPM_NUMEROColumn {
+                get {
+                    return this.columnORDPM_NUMERO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ORDP_ORIGENColumn {
+                get {
+                    return this.columnORDP_ORIGEN;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ORDP_FECHAINICIOESTIMADAColumn {
+                get {
+                    return this.columnORDP_FECHAINICIOESTIMADA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ORDP_FECHAINICIOREALColumn {
+                get {
+                    return this.columnORDP_FECHAINICIOREAL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ORDP_FECHAFINESTIMADAColumn {
+                get {
+                    return this.columnORDP_FECHAFINESTIMADA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ORDP_FECHAFINREALColumn {
+                get {
+                    return this.columnORDP_FECHAFINREAL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ORDP_OBSERVACIONESColumn {
+                get {
+                    return this.columnORDP_OBSERVACIONES;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ORDP_PRIORIDADColumn {
+                get {
+                    return this.columnORDP_PRIORIDAD;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ESTR_CODIGOColumn {
+                get {
+                    return this.columnESTR_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ORDP_CANTIDADESTIMADAColumn {
+                get {
+                    return this.columnORDP_CANTIDADESTIMADA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ORDP_CANTIDADREALColumn {
+                get {
+                    return this.columnORDP_CANTIDADREAL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn COC_CODIGOColumn {
+                get {
+                    return this.columnCOC_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ORDENES_PRODUCCIONRow this[int index] {
+                get {
+                    return ((ORDENES_PRODUCCIONRow)(this.Rows[index]));
+                }
+            }
+            
+            public event ORDENES_PRODUCCIONRowChangeEventHandler ORDENES_PRODUCCIONRowChanging;
+            
+            public event ORDENES_PRODUCCIONRowChangeEventHandler ORDENES_PRODUCCIONRowChanged;
+            
+            public event ORDENES_PRODUCCIONRowChangeEventHandler ORDENES_PRODUCCIONRowDeleting;
+            
+            public event ORDENES_PRODUCCIONRowChangeEventHandler ORDENES_PRODUCCIONRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddORDENES_PRODUCCIONRow(ORDENES_PRODUCCIONRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ORDENES_PRODUCCIONRow AddORDENES_PRODUCCIONRow(
+                        string ORDP_CODIGO, 
+                        ESTADO_ORDENES_TRABAJORow parentESTADO_ORDENES_TRABAJORowByFK_ORDENES_PRODUCCION_ESTADO_ORDENES_TRABAJO, 
+                        System.DateTime ORDP_FECHAALTA, 
+                        decimal DPSEM_CODIGO, 
+                        ORDENES_PRODUCCION_MANUALRow parentORDENES_PRODUCCION_MANUALRowByFK_ORDENES_PRODUCCION_ORDENES_PRODUCCION_MANUAL, 
+                        string ORDP_ORIGEN, 
+                        System.DateTime ORDP_FECHAINICIOESTIMADA, 
+                        System.DateTime ORDP_FECHAINICIOREAL, 
+                        System.DateTime ORDP_FECHAFINESTIMADA, 
+                        System.DateTime ORDP_FECHAFINREAL, 
+                        string ORDP_OBSERVACIONES, 
+                        decimal ORDP_PRIORIDAD, 
+                        decimal ESTR_CODIGO, 
+                        decimal ORDP_CANTIDADESTIMADA, 
+                        decimal ORDP_CANTIDADREAL, 
+                        decimal COC_CODIGO) {
+                ORDENES_PRODUCCIONRow rowORDENES_PRODUCCIONRow = ((ORDENES_PRODUCCIONRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        ORDP_CODIGO,
+                        null,
+                        ORDP_FECHAALTA,
+                        DPSEM_CODIGO,
+                        null,
+                        ORDP_ORIGEN,
+                        ORDP_FECHAINICIOESTIMADA,
+                        ORDP_FECHAINICIOREAL,
+                        ORDP_FECHAFINESTIMADA,
+                        ORDP_FECHAFINREAL,
+                        ORDP_OBSERVACIONES,
+                        ORDP_PRIORIDAD,
+                        ESTR_CODIGO,
+                        ORDP_CANTIDADESTIMADA,
+                        ORDP_CANTIDADREAL,
+                        COC_CODIGO};
+                if ((parentESTADO_ORDENES_TRABAJORowByFK_ORDENES_PRODUCCION_ESTADO_ORDENES_TRABAJO != null)) {
+                    columnValuesArray[2] = parentESTADO_ORDENES_TRABAJORowByFK_ORDENES_PRODUCCION_ESTADO_ORDENES_TRABAJO[0];
+                }
+                if ((parentORDENES_PRODUCCION_MANUALRowByFK_ORDENES_PRODUCCION_ORDENES_PRODUCCION_MANUAL != null)) {
+                    columnValuesArray[5] = parentORDENES_PRODUCCION_MANUALRowByFK_ORDENES_PRODUCCION_ORDENES_PRODUCCION_MANUAL[0];
+                }
+                rowORDENES_PRODUCCIONRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowORDENES_PRODUCCIONRow);
+                return rowORDENES_PRODUCCIONRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ORDENES_PRODUCCIONRow FindByORDP_NUMERO(decimal ORDP_NUMERO) {
+                return ((ORDENES_PRODUCCIONRow)(this.Rows.Find(new object[] {
+                            ORDP_NUMERO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                ORDENES_PRODUCCIONDataTable cln = ((ORDENES_PRODUCCIONDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ORDENES_PRODUCCIONDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnORDP_NUMERO = base.Columns["ORDP_NUMERO"];
+                this.columnORDP_CODIGO = base.Columns["ORDP_CODIGO"];
+                this.columnEORD_CODIGO = base.Columns["EORD_CODIGO"];
+                this.columnORDP_FECHAALTA = base.Columns["ORDP_FECHAALTA"];
+                this.columnDPSEM_CODIGO = base.Columns["DPSEM_CODIGO"];
+                this.columnORDPM_NUMERO = base.Columns["ORDPM_NUMERO"];
+                this.columnORDP_ORIGEN = base.Columns["ORDP_ORIGEN"];
+                this.columnORDP_FECHAINICIOESTIMADA = base.Columns["ORDP_FECHAINICIOESTIMADA"];
+                this.columnORDP_FECHAINICIOREAL = base.Columns["ORDP_FECHAINICIOREAL"];
+                this.columnORDP_FECHAFINESTIMADA = base.Columns["ORDP_FECHAFINESTIMADA"];
+                this.columnORDP_FECHAFINREAL = base.Columns["ORDP_FECHAFINREAL"];
+                this.columnORDP_OBSERVACIONES = base.Columns["ORDP_OBSERVACIONES"];
+                this.columnORDP_PRIORIDAD = base.Columns["ORDP_PRIORIDAD"];
+                this.columnESTR_CODIGO = base.Columns["ESTR_CODIGO"];
+                this.columnORDP_CANTIDADESTIMADA = base.Columns["ORDP_CANTIDADESTIMADA"];
+                this.columnORDP_CANTIDADREAL = base.Columns["ORDP_CANTIDADREAL"];
+                this.columnCOC_CODIGO = base.Columns["COC_CODIGO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnORDP_NUMERO = new global::System.Data.DataColumn("ORDP_NUMERO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnORDP_NUMERO);
+                this.columnORDP_CODIGO = new global::System.Data.DataColumn("ORDP_CODIGO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnORDP_CODIGO);
+                this.columnEORD_CODIGO = new global::System.Data.DataColumn("EORD_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEORD_CODIGO);
+                this.columnORDP_FECHAALTA = new global::System.Data.DataColumn("ORDP_FECHAALTA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnORDP_FECHAALTA);
+                this.columnDPSEM_CODIGO = new global::System.Data.DataColumn("DPSEM_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDPSEM_CODIGO);
+                this.columnORDPM_NUMERO = new global::System.Data.DataColumn("ORDPM_NUMERO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnORDPM_NUMERO);
+                this.columnORDP_ORIGEN = new global::System.Data.DataColumn("ORDP_ORIGEN", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnORDP_ORIGEN);
+                this.columnORDP_FECHAINICIOESTIMADA = new global::System.Data.DataColumn("ORDP_FECHAINICIOESTIMADA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnORDP_FECHAINICIOESTIMADA);
+                this.columnORDP_FECHAINICIOREAL = new global::System.Data.DataColumn("ORDP_FECHAINICIOREAL", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnORDP_FECHAINICIOREAL);
+                this.columnORDP_FECHAFINESTIMADA = new global::System.Data.DataColumn("ORDP_FECHAFINESTIMADA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnORDP_FECHAFINESTIMADA);
+                this.columnORDP_FECHAFINREAL = new global::System.Data.DataColumn("ORDP_FECHAFINREAL", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnORDP_FECHAFINREAL);
+                this.columnORDP_OBSERVACIONES = new global::System.Data.DataColumn("ORDP_OBSERVACIONES", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnORDP_OBSERVACIONES);
+                this.columnORDP_PRIORIDAD = new global::System.Data.DataColumn("ORDP_PRIORIDAD", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnORDP_PRIORIDAD);
+                this.columnESTR_CODIGO = new global::System.Data.DataColumn("ESTR_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnESTR_CODIGO);
+                this.columnORDP_CANTIDADESTIMADA = new global::System.Data.DataColumn("ORDP_CANTIDADESTIMADA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnORDP_CANTIDADESTIMADA);
+                this.columnORDP_CANTIDADREAL = new global::System.Data.DataColumn("ORDP_CANTIDADREAL", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnORDP_CANTIDADREAL);
+                this.columnCOC_CODIGO = new global::System.Data.DataColumn("COC_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOC_CODIGO);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnORDP_NUMERO}, true));
+                this.columnORDP_NUMERO.AutoIncrement = true;
+                this.columnORDP_NUMERO.AutoIncrementSeed = -1;
+                this.columnORDP_NUMERO.AutoIncrementStep = -1;
+                this.columnORDP_NUMERO.AllowDBNull = false;
+                this.columnORDP_NUMERO.Unique = true;
+                this.columnORDP_CODIGO.MaxLength = 100;
+                this.columnORDP_ORIGEN.MaxLength = 100;
+                this.columnORDP_OBSERVACIONES.MaxLength = 300;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ORDENES_PRODUCCIONRow NewORDENES_PRODUCCIONRow() {
+                return ((ORDENES_PRODUCCIONRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ORDENES_PRODUCCIONRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(ORDENES_PRODUCCIONRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ORDENES_PRODUCCIONRowChanged != null)) {
+                    this.ORDENES_PRODUCCIONRowChanged(this, new ORDENES_PRODUCCIONRowChangeEvent(((ORDENES_PRODUCCIONRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ORDENES_PRODUCCIONRowChanging != null)) {
+                    this.ORDENES_PRODUCCIONRowChanging(this, new ORDENES_PRODUCCIONRowChangeEvent(((ORDENES_PRODUCCIONRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ORDENES_PRODUCCIONRowDeleted != null)) {
+                    this.ORDENES_PRODUCCIONRowDeleted(this, new ORDENES_PRODUCCIONRowChangeEvent(((ORDENES_PRODUCCIONRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ORDENES_PRODUCCIONRowDeleting != null)) {
+                    this.ORDENES_PRODUCCIONRowDeleting(this, new ORDENES_PRODUCCIONRowChangeEvent(((ORDENES_PRODUCCIONRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveORDENES_PRODUCCIONRow(ORDENES_PRODUCCIONRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsOrdenTrabajo ds = new dsOrdenTrabajo();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ORDENES_PRODUCCIONDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -2429,11 +2484,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string ORDT_CODIGO {
                 get {
-                    try {
-                        return ((string)(this[this.tableORDENES_TRABAJO.ORDT_CODIGOColumn]));
+                    if (this.IsORDT_CODIGONull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ORDT_CODIGO\' in table \'ORDENES_TRABAJO\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableORDENES_TRABAJO.ORDT_CODIGOColumn]));
                     }
                 }
                 set {
@@ -2504,11 +2559,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string ORDT_ORIGEN {
                 get {
-                    try {
-                        return ((string)(this[this.tableORDENES_TRABAJO.ORDT_ORIGENColumn]));
+                    if (this.IsORDT_ORIGENNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ORDT_ORIGEN\' in table \'ORDENES_TRABAJO\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableORDENES_TRABAJO.ORDT_ORIGENColumn]));
                     }
                 }
                 set {
@@ -3043,390 +3098,6 @@ namespace GyCAP.Data {
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class ORDENES_PRODUCCIONRow : global::System.Data.DataRow {
-            
-            private ORDENES_PRODUCCIONDataTable tableORDENES_PRODUCCION;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal ORDENES_PRODUCCIONRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableORDENES_PRODUCCION = ((ORDENES_PRODUCCIONDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal ORDP_NUMERO {
-                get {
-                    return ((decimal)(this[this.tableORDENES_PRODUCCION.ORDP_NUMEROColumn]));
-                }
-                set {
-                    this[this.tableORDENES_PRODUCCION.ORDP_NUMEROColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string ORDP_CODIGO {
-                get {
-                    try {
-                        return ((string)(this[this.tableORDENES_PRODUCCION.ORDP_CODIGOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ORDP_CODIGO\' in table \'ORDENES_PRODUCCION\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableORDENES_PRODUCCION.ORDP_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal EORD_CODIGO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableORDENES_PRODUCCION.EORD_CODIGOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EORD_CODIGO\' in table \'ORDENES_PRODUCCION\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableORDENES_PRODUCCION.EORD_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime ORDP_FECHAALTA {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableORDENES_PRODUCCION.ORDP_FECHAALTAColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ORDP_FECHAALTA\' in table \'ORDENES_PRODUCCION\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableORDENES_PRODUCCION.ORDP_FECHAALTAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal DPSEM_CODIGO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableORDENES_PRODUCCION.DPSEM_CODIGOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DPSEM_CODIGO\' in table \'ORDENES_PRODUCCION\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableORDENES_PRODUCCION.DPSEM_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal ORDPM_NUMERO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableORDENES_PRODUCCION.ORDPM_NUMEROColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ORDPM_NUMERO\' in table \'ORDENES_PRODUCCION\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableORDENES_PRODUCCION.ORDPM_NUMEROColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string ORDP_ORIGEN {
-                get {
-                    try {
-                        return ((string)(this[this.tableORDENES_PRODUCCION.ORDP_ORIGENColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ORDP_ORIGEN\' in table \'ORDENES_PRODUCCION\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableORDENES_PRODUCCION.ORDP_ORIGENColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime ORDP_FECHAINICIOESTIMADA {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableORDENES_PRODUCCION.ORDP_FECHAINICIOESTIMADAColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ORDP_FECHAINICIOESTIMADA\' in table \'ORDENES_PRODUCCION\' is " +
-                                "DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableORDENES_PRODUCCION.ORDP_FECHAINICIOESTIMADAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime ORDP_FECHAINICIOREAL {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableORDENES_PRODUCCION.ORDP_FECHAINICIOREALColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ORDP_FECHAINICIOREAL\' in table \'ORDENES_PRODUCCION\' is DBNu" +
-                                "ll.", e);
-                    }
-                }
-                set {
-                    this[this.tableORDENES_PRODUCCION.ORDP_FECHAINICIOREALColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime ORDP_FECHAFINESTIMADA {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableORDENES_PRODUCCION.ORDP_FECHAFINESTIMADAColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ORDP_FECHAFINESTIMADA\' in table \'ORDENES_PRODUCCION\' is DBN" +
-                                "ull.", e);
-                    }
-                }
-                set {
-                    this[this.tableORDENES_PRODUCCION.ORDP_FECHAFINESTIMADAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime ORDP_FECHAFINREAL {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableORDENES_PRODUCCION.ORDP_FECHAFINREALColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ORDP_FECHAFINREAL\' in table \'ORDENES_PRODUCCION\' is DBNull." +
-                                "", e);
-                    }
-                }
-                set {
-                    this[this.tableORDENES_PRODUCCION.ORDP_FECHAFINREALColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string ORDP_OBSERVACIONES {
-                get {
-                    if (this.IsORDP_OBSERVACIONESNull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tableORDENES_PRODUCCION.ORDP_OBSERVACIONESColumn]));
-                    }
-                }
-                set {
-                    this[this.tableORDENES_PRODUCCION.ORDP_OBSERVACIONESColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal ORDP_PRIORIDAD {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableORDENES_PRODUCCION.ORDP_PRIORIDADColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ORDP_PRIORIDAD\' in table \'ORDENES_PRODUCCION\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableORDENES_PRODUCCION.ORDP_PRIORIDADColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal ESTR_CODIGO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableORDENES_PRODUCCION.ESTR_CODIGOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ESTR_CODIGO\' in table \'ORDENES_PRODUCCION\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableORDENES_PRODUCCION.ESTR_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ESTADO_ORDENES_TRABAJORow ESTADO_ORDENES_TRABAJORow {
-                get {
-                    return ((ESTADO_ORDENES_TRABAJORow)(this.GetParentRow(this.Table.ParentRelations["FK_ORDENES_PRODUCCION_ESTADO_ORDENES_TRABAJO"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_ORDENES_PRODUCCION_ESTADO_ORDENES_TRABAJO"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ORDENES_PRODUCCION_MANUALRow ORDENES_PRODUCCION_MANUALRow {
-                get {
-                    return ((ORDENES_PRODUCCION_MANUALRow)(this.GetParentRow(this.Table.ParentRelations["FK_ORDENES_PRODUCCION_ORDENES_PRODUCCION_MANUAL"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_ORDENES_PRODUCCION_ORDENES_PRODUCCION_MANUAL"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsORDP_CODIGONull() {
-                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_CODIGOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetORDP_CODIGONull() {
-                this[this.tableORDENES_PRODUCCION.ORDP_CODIGOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsEORD_CODIGONull() {
-                return this.IsNull(this.tableORDENES_PRODUCCION.EORD_CODIGOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetEORD_CODIGONull() {
-                this[this.tableORDENES_PRODUCCION.EORD_CODIGOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsORDP_FECHAALTANull() {
-                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_FECHAALTAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetORDP_FECHAALTANull() {
-                this[this.tableORDENES_PRODUCCION.ORDP_FECHAALTAColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsDPSEM_CODIGONull() {
-                return this.IsNull(this.tableORDENES_PRODUCCION.DPSEM_CODIGOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetDPSEM_CODIGONull() {
-                this[this.tableORDENES_PRODUCCION.DPSEM_CODIGOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsORDPM_NUMERONull() {
-                return this.IsNull(this.tableORDENES_PRODUCCION.ORDPM_NUMEROColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetORDPM_NUMERONull() {
-                this[this.tableORDENES_PRODUCCION.ORDPM_NUMEROColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsORDP_ORIGENNull() {
-                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_ORIGENColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetORDP_ORIGENNull() {
-                this[this.tableORDENES_PRODUCCION.ORDP_ORIGENColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsORDP_FECHAINICIOESTIMADANull() {
-                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_FECHAINICIOESTIMADAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetORDP_FECHAINICIOESTIMADANull() {
-                this[this.tableORDENES_PRODUCCION.ORDP_FECHAINICIOESTIMADAColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsORDP_FECHAINICIOREALNull() {
-                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_FECHAINICIOREALColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetORDP_FECHAINICIOREALNull() {
-                this[this.tableORDENES_PRODUCCION.ORDP_FECHAINICIOREALColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsORDP_FECHAFINESTIMADANull() {
-                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_FECHAFINESTIMADAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetORDP_FECHAFINESTIMADANull() {
-                this[this.tableORDENES_PRODUCCION.ORDP_FECHAFINESTIMADAColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsORDP_FECHAFINREALNull() {
-                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_FECHAFINREALColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetORDP_FECHAFINREALNull() {
-                this[this.tableORDENES_PRODUCCION.ORDP_FECHAFINREALColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsORDP_OBSERVACIONESNull() {
-                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_OBSERVACIONESColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetORDP_OBSERVACIONESNull() {
-                this[this.tableORDENES_PRODUCCION.ORDP_OBSERVACIONESColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsORDP_PRIORIDADNull() {
-                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_PRIORIDADColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetORDP_PRIORIDADNull() {
-                this[this.tableORDENES_PRODUCCION.ORDP_PRIORIDADColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsESTR_CODIGONull() {
-                return this.IsNull(this.tableORDENES_PRODUCCION.ESTR_CODIGOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetESTR_CODIGONull() {
-                this[this.tableORDENES_PRODUCCION.ESTR_CODIGOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ORDENES_TRABAJORow[] GetORDENES_TRABAJORows() {
-                if ((this.Table.ChildRelations["FK_ORDENES_PRODUCCION_ORDENES_TRABAJO"] == null)) {
-                    return new ORDENES_TRABAJORow[0];
-                }
-                else {
-                    return ((ORDENES_TRABAJORow[])(base.GetChildRows(this.Table.ChildRelations["FK_ORDENES_PRODUCCION_ORDENES_TRABAJO"])));
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public partial class ORDENES_PRODUCCION_MANUALRow : global::System.Data.DataRow {
             
             private ORDENES_PRODUCCION_MANUALDataTable tableORDENES_PRODUCCION_MANUAL;
@@ -3825,6 +3496,467 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class ORDENES_PRODUCCIONRow : global::System.Data.DataRow {
+            
+            private ORDENES_PRODUCCIONDataTable tableORDENES_PRODUCCION;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal ORDENES_PRODUCCIONRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableORDENES_PRODUCCION = ((ORDENES_PRODUCCIONDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal ORDP_NUMERO {
+                get {
+                    return ((decimal)(this[this.tableORDENES_PRODUCCION.ORDP_NUMEROColumn]));
+                }
+                set {
+                    this[this.tableORDENES_PRODUCCION.ORDP_NUMEROColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string ORDP_CODIGO {
+                get {
+                    if (this.IsORDP_CODIGONull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableORDENES_PRODUCCION.ORDP_CODIGOColumn]));
+                    }
+                }
+                set {
+                    this[this.tableORDENES_PRODUCCION.ORDP_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal EORD_CODIGO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableORDENES_PRODUCCION.EORD_CODIGOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EORD_CODIGO\' in table \'ORDENES_PRODUCCION\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableORDENES_PRODUCCION.EORD_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime ORDP_FECHAALTA {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableORDENES_PRODUCCION.ORDP_FECHAALTAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ORDP_FECHAALTA\' in table \'ORDENES_PRODUCCION\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableORDENES_PRODUCCION.ORDP_FECHAALTAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal DPSEM_CODIGO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableORDENES_PRODUCCION.DPSEM_CODIGOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DPSEM_CODIGO\' in table \'ORDENES_PRODUCCION\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableORDENES_PRODUCCION.DPSEM_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal ORDPM_NUMERO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableORDENES_PRODUCCION.ORDPM_NUMEROColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ORDPM_NUMERO\' in table \'ORDENES_PRODUCCION\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableORDENES_PRODUCCION.ORDPM_NUMEROColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string ORDP_ORIGEN {
+                get {
+                    if (this.IsORDP_ORIGENNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableORDENES_PRODUCCION.ORDP_ORIGENColumn]));
+                    }
+                }
+                set {
+                    this[this.tableORDENES_PRODUCCION.ORDP_ORIGENColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime ORDP_FECHAINICIOESTIMADA {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableORDENES_PRODUCCION.ORDP_FECHAINICIOESTIMADAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ORDP_FECHAINICIOESTIMADA\' in table \'ORDENES_PRODUCCION\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableORDENES_PRODUCCION.ORDP_FECHAINICIOESTIMADAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime ORDP_FECHAINICIOREAL {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableORDENES_PRODUCCION.ORDP_FECHAINICIOREALColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ORDP_FECHAINICIOREAL\' in table \'ORDENES_PRODUCCION\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tableORDENES_PRODUCCION.ORDP_FECHAINICIOREALColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime ORDP_FECHAFINESTIMADA {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableORDENES_PRODUCCION.ORDP_FECHAFINESTIMADAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ORDP_FECHAFINESTIMADA\' in table \'ORDENES_PRODUCCION\' is DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tableORDENES_PRODUCCION.ORDP_FECHAFINESTIMADAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime ORDP_FECHAFINREAL {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableORDENES_PRODUCCION.ORDP_FECHAFINREALColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ORDP_FECHAFINREAL\' in table \'ORDENES_PRODUCCION\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableORDENES_PRODUCCION.ORDP_FECHAFINREALColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string ORDP_OBSERVACIONES {
+                get {
+                    if (this.IsORDP_OBSERVACIONESNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableORDENES_PRODUCCION.ORDP_OBSERVACIONESColumn]));
+                    }
+                }
+                set {
+                    this[this.tableORDENES_PRODUCCION.ORDP_OBSERVACIONESColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal ORDP_PRIORIDAD {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableORDENES_PRODUCCION.ORDP_PRIORIDADColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ORDP_PRIORIDAD\' in table \'ORDENES_PRODUCCION\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableORDENES_PRODUCCION.ORDP_PRIORIDADColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal ESTR_CODIGO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableORDENES_PRODUCCION.ESTR_CODIGOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ESTR_CODIGO\' in table \'ORDENES_PRODUCCION\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableORDENES_PRODUCCION.ESTR_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal ORDP_CANTIDADESTIMADA {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableORDENES_PRODUCCION.ORDP_CANTIDADESTIMADAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ORDP_CANTIDADESTIMADA\' in table \'ORDENES_PRODUCCION\' is DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tableORDENES_PRODUCCION.ORDP_CANTIDADESTIMADAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal ORDP_CANTIDADREAL {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableORDENES_PRODUCCION.ORDP_CANTIDADREALColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ORDP_CANTIDADREAL\' in table \'ORDENES_PRODUCCION\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableORDENES_PRODUCCION.ORDP_CANTIDADREALColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal COC_CODIGO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableORDENES_PRODUCCION.COC_CODIGOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'COC_CODIGO\' in table \'ORDENES_PRODUCCION\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableORDENES_PRODUCCION.COC_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ESTADO_ORDENES_TRABAJORow ESTADO_ORDENES_TRABAJORow {
+                get {
+                    return ((ESTADO_ORDENES_TRABAJORow)(this.GetParentRow(this.Table.ParentRelations["FK_ORDENES_PRODUCCION_ESTADO_ORDENES_TRABAJO"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_ORDENES_PRODUCCION_ESTADO_ORDENES_TRABAJO"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ORDENES_PRODUCCION_MANUALRow ORDENES_PRODUCCION_MANUALRow {
+                get {
+                    return ((ORDENES_PRODUCCION_MANUALRow)(this.GetParentRow(this.Table.ParentRelations["FK_ORDENES_PRODUCCION_ORDENES_PRODUCCION_MANUAL"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_ORDENES_PRODUCCION_ORDENES_PRODUCCION_MANUAL"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsORDP_CODIGONull() {
+                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetORDP_CODIGONull() {
+                this[this.tableORDENES_PRODUCCION.ORDP_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEORD_CODIGONull() {
+                return this.IsNull(this.tableORDENES_PRODUCCION.EORD_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEORD_CODIGONull() {
+                this[this.tableORDENES_PRODUCCION.EORD_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsORDP_FECHAALTANull() {
+                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_FECHAALTAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetORDP_FECHAALTANull() {
+                this[this.tableORDENES_PRODUCCION.ORDP_FECHAALTAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDPSEM_CODIGONull() {
+                return this.IsNull(this.tableORDENES_PRODUCCION.DPSEM_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDPSEM_CODIGONull() {
+                this[this.tableORDENES_PRODUCCION.DPSEM_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsORDPM_NUMERONull() {
+                return this.IsNull(this.tableORDENES_PRODUCCION.ORDPM_NUMEROColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetORDPM_NUMERONull() {
+                this[this.tableORDENES_PRODUCCION.ORDPM_NUMEROColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsORDP_ORIGENNull() {
+                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_ORIGENColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetORDP_ORIGENNull() {
+                this[this.tableORDENES_PRODUCCION.ORDP_ORIGENColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsORDP_FECHAINICIOESTIMADANull() {
+                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_FECHAINICIOESTIMADAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetORDP_FECHAINICIOESTIMADANull() {
+                this[this.tableORDENES_PRODUCCION.ORDP_FECHAINICIOESTIMADAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsORDP_FECHAINICIOREALNull() {
+                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_FECHAINICIOREALColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetORDP_FECHAINICIOREALNull() {
+                this[this.tableORDENES_PRODUCCION.ORDP_FECHAINICIOREALColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsORDP_FECHAFINESTIMADANull() {
+                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_FECHAFINESTIMADAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetORDP_FECHAFINESTIMADANull() {
+                this[this.tableORDENES_PRODUCCION.ORDP_FECHAFINESTIMADAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsORDP_FECHAFINREALNull() {
+                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_FECHAFINREALColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetORDP_FECHAFINREALNull() {
+                this[this.tableORDENES_PRODUCCION.ORDP_FECHAFINREALColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsORDP_OBSERVACIONESNull() {
+                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_OBSERVACIONESColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetORDP_OBSERVACIONESNull() {
+                this[this.tableORDENES_PRODUCCION.ORDP_OBSERVACIONESColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsORDP_PRIORIDADNull() {
+                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_PRIORIDADColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetORDP_PRIORIDADNull() {
+                this[this.tableORDENES_PRODUCCION.ORDP_PRIORIDADColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsESTR_CODIGONull() {
+                return this.IsNull(this.tableORDENES_PRODUCCION.ESTR_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetESTR_CODIGONull() {
+                this[this.tableORDENES_PRODUCCION.ESTR_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsORDP_CANTIDADESTIMADANull() {
+                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_CANTIDADESTIMADAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetORDP_CANTIDADESTIMADANull() {
+                this[this.tableORDENES_PRODUCCION.ORDP_CANTIDADESTIMADAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsORDP_CANTIDADREALNull() {
+                return this.IsNull(this.tableORDENES_PRODUCCION.ORDP_CANTIDADREALColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetORDP_CANTIDADREALNull() {
+                this[this.tableORDENES_PRODUCCION.ORDP_CANTIDADREALColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCOC_CODIGONull() {
+                return this.IsNull(this.tableORDENES_PRODUCCION.COC_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCOC_CODIGONull() {
+                this[this.tableORDENES_PRODUCCION.COC_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ORDENES_TRABAJORow[] GetORDENES_TRABAJORows() {
+                if ((this.Table.ChildRelations["FK_ORDENES_PRODUCCION_ORDENES_TRABAJO"] == null)) {
+                    return new ORDENES_TRABAJORow[0];
+                }
+                else {
+                    return ((ORDENES_TRABAJORow[])(base.GetChildRows(this.Table.ChildRelations["FK_ORDENES_PRODUCCION_ORDENES_TRABAJO"])));
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -3890,37 +4022,6 @@ namespace GyCAP.Data {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class ORDENES_PRODUCCIONRowChangeEvent : global::System.EventArgs {
-            
-            private ORDENES_PRODUCCIONRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ORDENES_PRODUCCIONRowChangeEvent(ORDENES_PRODUCCIONRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ORDENES_PRODUCCIONRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public class ORDENES_PRODUCCION_MANUALRowChangeEvent : global::System.EventArgs {
             
             private ORDENES_PRODUCCION_MANUALRow eventRow;
@@ -3966,6 +4067,37 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public CIERRE_ORDENTRABAJORow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class ORDENES_PRODUCCIONRowChangeEvent : global::System.EventArgs {
+            
+            private ORDENES_PRODUCCIONRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ORDENES_PRODUCCIONRowChangeEvent(ORDENES_PRODUCCIONRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ORDENES_PRODUCCIONRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -5636,834 +5768,6 @@ SELECT ORDT_NUMERO, ORDT_CODIGO, ORDP_NUMERO, EORD_CODIGO, PAR_CODIGO, PAR_TIPO,
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class ORDENES_PRODUCCIONTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public ORDENES_PRODUCCIONTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "ORDENES_PRODUCCION";
-            tableMapping.ColumnMappings.Add("ORDP_NUMERO", "ORDP_NUMERO");
-            tableMapping.ColumnMappings.Add("ORDP_CODIGO", "ORDP_CODIGO");
-            tableMapping.ColumnMappings.Add("EORD_CODIGO", "EORD_CODIGO");
-            tableMapping.ColumnMappings.Add("ORDP_FECHAALTA", "ORDP_FECHAALTA");
-            tableMapping.ColumnMappings.Add("DPSEM_CODIGO", "DPSEM_CODIGO");
-            tableMapping.ColumnMappings.Add("ORDPM_NUMERO", "ORDPM_NUMERO");
-            tableMapping.ColumnMappings.Add("ORDP_ORIGEN", "ORDP_ORIGEN");
-            tableMapping.ColumnMappings.Add("ORDP_FECHAINICIOESTIMADA", "ORDP_FECHAINICIOESTIMADA");
-            tableMapping.ColumnMappings.Add("ORDP_FECHAINICIOREAL", "ORDP_FECHAINICIOREAL");
-            tableMapping.ColumnMappings.Add("ORDP_FECHAFINESTIMADA", "ORDP_FECHAFINESTIMADA");
-            tableMapping.ColumnMappings.Add("ORDP_FECHAFINREAL", "ORDP_FECHAFINREAL");
-            tableMapping.ColumnMappings.Add("ORDP_OBSERVACIONES", "ORDP_OBSERVACIONES");
-            tableMapping.ColumnMappings.Add("ORDP_PRIORIDAD", "ORDP_PRIORIDAD");
-            tableMapping.ColumnMappings.Add("ESTR_CODIGO", "ESTR_CODIGO");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[ORDENES_PRODUCCION] WHERE (([ORDP_NUMERO] = @Original_ORDP_NUM" +
-                "ERO) AND ((@IsNull_ORDP_CODIGO = 1 AND [ORDP_CODIGO] IS NULL) OR ([ORDP_CODIGO] " +
-                "= @Original_ORDP_CODIGO)) AND ((@IsNull_EORD_CODIGO = 1 AND [EORD_CODIGO] IS NUL" +
-                "L) OR ([EORD_CODIGO] = @Original_EORD_CODIGO)) AND ((@IsNull_ORDP_FECHAALTA = 1 " +
-                "AND [ORDP_FECHAALTA] IS NULL) OR ([ORDP_FECHAALTA] = @Original_ORDP_FECHAALTA)) " +
-                "AND ((@IsNull_DPSEM_CODIGO = 1 AND [DPSEM_CODIGO] IS NULL) OR ([DPSEM_CODIGO] = " +
-                "@Original_DPSEM_CODIGO)) AND ((@IsNull_ORDPM_NUMERO = 1 AND [ORDPM_NUMERO] IS NU" +
-                "LL) OR ([ORDPM_NUMERO] = @Original_ORDPM_NUMERO)) AND ((@IsNull_ORDP_ORIGEN = 1 " +
-                "AND [ORDP_ORIGEN] IS NULL) OR ([ORDP_ORIGEN] = @Original_ORDP_ORIGEN)) AND ((@Is" +
-                "Null_ORDP_FECHAINICIOESTIMADA = 1 AND [ORDP_FECHAINICIOESTIMADA] IS NULL) OR ([O" +
-                "RDP_FECHAINICIOESTIMADA] = @Original_ORDP_FECHAINICIOESTIMADA)) AND ((@IsNull_OR" +
-                "DP_FECHAINICIOREAL = 1 AND [ORDP_FECHAINICIOREAL] IS NULL) OR ([ORDP_FECHAINICIO" +
-                "REAL] = @Original_ORDP_FECHAINICIOREAL)) AND ((@IsNull_ORDP_FECHAFINESTIMADA = 1" +
-                " AND [ORDP_FECHAFINESTIMADA] IS NULL) OR ([ORDP_FECHAFINESTIMADA] = @Original_OR" +
-                "DP_FECHAFINESTIMADA)) AND ((@IsNull_ORDP_FECHAFINREAL = 1 AND [ORDP_FECHAFINREAL" +
-                "] IS NULL) OR ([ORDP_FECHAFINREAL] = @Original_ORDP_FECHAFINREAL)) AND ((@IsNull" +
-                "_ORDP_OBSERVACIONES = 1 AND [ORDP_OBSERVACIONES] IS NULL) OR ([ORDP_OBSERVACIONE" +
-                "S] = @Original_ORDP_OBSERVACIONES)) AND ((@IsNull_ORDP_PRIORIDAD = 1 AND [ORDP_P" +
-                "RIORIDAD] IS NULL) OR ([ORDP_PRIORIDAD] = @Original_ORDP_PRIORIDAD)) AND ((@IsNu" +
-                "ll_ESTR_CODIGO = 1 AND [ESTR_CODIGO] IS NULL) OR ([ESTR_CODIGO] = @Original_ESTR" +
-                "_CODIGO)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDP_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_EORD_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EORD_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EORD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EORD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAALTA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAALTA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAALTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPSEM_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPSEM_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPSEM_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDPM_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDPM_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDPM_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDPM_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_ORIGEN", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_ORIGEN", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_ORIGEN", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_ORIGEN", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAINICIOESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOESTIMADA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAINICIOESTIMADA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAINICIOREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAINICIOREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAFINESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINESTIMADA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAFINESTIMADA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAFINREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAFINREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_OBSERVACIONES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_OBSERVACIONES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_OBSERVACIONES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_PRIORIDAD", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_PRIORIDAD", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_PRIORIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "ORDP_PRIORIDAD", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ESTR_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ESTR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[ORDENES_PRODUCCION] ([ORDP_CODIGO], [EORD_CODIGO], [ORDP_FECHAALTA], [DPSEM_CODIGO], [ORDPM_NUMERO], [ORDP_ORIGEN], [ORDP_FECHAINICIOESTIMADA], [ORDP_FECHAINICIOREAL], [ORDP_FECHAFINESTIMADA], [ORDP_FECHAFINREAL], [ORDP_OBSERVACIONES], [ORDP_PRIORIDAD], [ESTR_CODIGO]) VALUES (@ORDP_CODIGO, @EORD_CODIGO, @ORDP_FECHAALTA, @DPSEM_CODIGO, @ORDPM_NUMERO, @ORDP_ORIGEN, @ORDP_FECHAINICIOESTIMADA, @ORDP_FECHAINICIOREAL, @ORDP_FECHAFINESTIMADA, @ORDP_FECHAFINREAL, @ORDP_OBSERVACIONES, @ORDP_PRIORIDAD, @ESTR_CODIGO);
-SELECT ORDP_NUMERO, ORDP_CODIGO, EORD_CODIGO, ORDP_FECHAALTA, DPSEM_CODIGO, ORDPM_NUMERO, ORDP_ORIGEN, ORDP_FECHAINICIOESTIMADA, ORDP_FECHAINICIOREAL, ORDP_FECHAFINESTIMADA, ORDP_FECHAFINREAL, ORDP_OBSERVACIONES, ORDP_PRIORIDAD, ESTR_CODIGO FROM ORDENES_PRODUCCION WHERE (ORDP_NUMERO = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EORD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EORD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAALTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPSEM_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDPM_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDPM_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_ORIGEN", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_ORIGEN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAINICIOESTIMADA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAINICIOREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAFINESTIMADA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAFINREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_OBSERVACIONES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_PRIORIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "ORDP_PRIORIDAD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ESTR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[ORDENES_PRODUCCION] SET [ORDP_CODIGO] = @ORDP_CODIGO, [EORD_CODIGO]" +
-                " = @EORD_CODIGO, [ORDP_FECHAALTA] = @ORDP_FECHAALTA, [DPSEM_CODIGO] = @DPSEM_COD" +
-                "IGO, [ORDPM_NUMERO] = @ORDPM_NUMERO, [ORDP_ORIGEN] = @ORDP_ORIGEN, [ORDP_FECHAIN" +
-                "ICIOESTIMADA] = @ORDP_FECHAINICIOESTIMADA, [ORDP_FECHAINICIOREAL] = @ORDP_FECHAI" +
-                "NICIOREAL, [ORDP_FECHAFINESTIMADA] = @ORDP_FECHAFINESTIMADA, [ORDP_FECHAFINREAL]" +
-                " = @ORDP_FECHAFINREAL, [ORDP_OBSERVACIONES] = @ORDP_OBSERVACIONES, [ORDP_PRIORID" +
-                "AD] = @ORDP_PRIORIDAD, [ESTR_CODIGO] = @ESTR_CODIGO WHERE (([ORDP_NUMERO] = @Ori" +
-                "ginal_ORDP_NUMERO) AND ((@IsNull_ORDP_CODIGO = 1 AND [ORDP_CODIGO] IS NULL) OR (" +
-                "[ORDP_CODIGO] = @Original_ORDP_CODIGO)) AND ((@IsNull_EORD_CODIGO = 1 AND [EORD_" +
-                "CODIGO] IS NULL) OR ([EORD_CODIGO] = @Original_EORD_CODIGO)) AND ((@IsNull_ORDP_" +
-                "FECHAALTA = 1 AND [ORDP_FECHAALTA] IS NULL) OR ([ORDP_FECHAALTA] = @Original_ORD" +
-                "P_FECHAALTA)) AND ((@IsNull_DPSEM_CODIGO = 1 AND [DPSEM_CODIGO] IS NULL) OR ([DP" +
-                "SEM_CODIGO] = @Original_DPSEM_CODIGO)) AND ((@IsNull_ORDPM_NUMERO = 1 AND [ORDPM" +
-                "_NUMERO] IS NULL) OR ([ORDPM_NUMERO] = @Original_ORDPM_NUMERO)) AND ((@IsNull_OR" +
-                "DP_ORIGEN = 1 AND [ORDP_ORIGEN] IS NULL) OR ([ORDP_ORIGEN] = @Original_ORDP_ORIG" +
-                "EN)) AND ((@IsNull_ORDP_FECHAINICIOESTIMADA = 1 AND [ORDP_FECHAINICIOESTIMADA] I" +
-                "S NULL) OR ([ORDP_FECHAINICIOESTIMADA] = @Original_ORDP_FECHAINICIOESTIMADA)) AN" +
-                "D ((@IsNull_ORDP_FECHAINICIOREAL = 1 AND [ORDP_FECHAINICIOREAL] IS NULL) OR ([OR" +
-                "DP_FECHAINICIOREAL] = @Original_ORDP_FECHAINICIOREAL)) AND ((@IsNull_ORDP_FECHAF" +
-                "INESTIMADA = 1 AND [ORDP_FECHAFINESTIMADA] IS NULL) OR ([ORDP_FECHAFINESTIMADA] " +
-                "= @Original_ORDP_FECHAFINESTIMADA)) AND ((@IsNull_ORDP_FECHAFINREAL = 1 AND [ORD" +
-                "P_FECHAFINREAL] IS NULL) OR ([ORDP_FECHAFINREAL] = @Original_ORDP_FECHAFINREAL))" +
-                " AND ((@IsNull_ORDP_OBSERVACIONES = 1 AND [ORDP_OBSERVACIONES] IS NULL) OR ([ORD" +
-                "P_OBSERVACIONES] = @Original_ORDP_OBSERVACIONES)) AND ((@IsNull_ORDP_PRIORIDAD =" +
-                " 1 AND [ORDP_PRIORIDAD] IS NULL) OR ([ORDP_PRIORIDAD] = @Original_ORDP_PRIORIDAD" +
-                ")) AND ((@IsNull_ESTR_CODIGO = 1 AND [ESTR_CODIGO] IS NULL) OR ([ESTR_CODIGO] = " +
-                "@Original_ESTR_CODIGO)));\r\nSELECT ORDP_NUMERO, ORDP_CODIGO, EORD_CODIGO, ORDP_FE" +
-                "CHAALTA, DPSEM_CODIGO, ORDPM_NUMERO, ORDP_ORIGEN, ORDP_FECHAINICIOESTIMADA, ORDP" +
-                "_FECHAINICIOREAL, ORDP_FECHAFINESTIMADA, ORDP_FECHAFINREAL, ORDP_OBSERVACIONES, " +
-                "ORDP_PRIORIDAD, ESTR_CODIGO FROM ORDENES_PRODUCCION WHERE (ORDP_NUMERO = @ORDP_N" +
-                "UMERO)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EORD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EORD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAALTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPSEM_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDPM_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDPM_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_ORIGEN", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_ORIGEN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAINICIOESTIMADA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAINICIOREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAFINESTIMADA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAFINREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_OBSERVACIONES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_PRIORIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "ORDP_PRIORIDAD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ESTR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDP_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_EORD_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EORD_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EORD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EORD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAALTA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAALTA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAALTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPSEM_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPSEM_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPSEM_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDPM_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDPM_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDPM_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDPM_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_ORIGEN", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_ORIGEN", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_ORIGEN", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_ORIGEN", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAINICIOESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOESTIMADA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAINICIOESTIMADA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAINICIOREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAINICIOREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAFINESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINESTIMADA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAFINESTIMADA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAFINREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAFINREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_OBSERVACIONES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_OBSERVACIONES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_OBSERVACIONES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_PRIORIDAD", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_PRIORIDAD", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_PRIORIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "ORDP_PRIORIDAD", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ESTR_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ESTR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_NUMERO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "ORDP_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString8;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT ORDP_NUMERO, ORDP_CODIGO, EORD_CODIGO, ORDP_FECHAALTA, DPSEM_CODIGO, ORDPM_NUMERO, ORDP_ORIGEN, ORDP_FECHAINICIOESTIMADA, ORDP_FECHAINICIOREAL, ORDP_FECHAFINESTIMADA, ORDP_FECHAFINREAL, ORDP_OBSERVACIONES, ORDP_PRIORIDAD, ESTR_CODIGO FROM dbo.ORDENES_PRODUCCION";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsOrdenTrabajo.ORDENES_PRODUCCIONDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsOrdenTrabajo.ORDENES_PRODUCCIONDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsOrdenTrabajo.ORDENES_PRODUCCIONDataTable dataTable = new dsOrdenTrabajo.ORDENES_PRODUCCIONDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsOrdenTrabajo.ORDENES_PRODUCCIONDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsOrdenTrabajo dataSet) {
-            return this.Adapter.Update(dataSet, "ORDENES_PRODUCCION");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_ORDP_NUMERO, string Original_ORDP_CODIGO, global::System.Nullable<decimal> Original_EORD_CODIGO, global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAALTA, global::System.Nullable<decimal> Original_DPSEM_CODIGO, global::System.Nullable<decimal> Original_ORDPM_NUMERO, string Original_ORDP_ORIGEN, global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAINICIOESTIMADA, global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAINICIOREAL, global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAFINESTIMADA, global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAFINREAL, string Original_ORDP_OBSERVACIONES, global::System.Nullable<decimal> Original_ORDP_PRIORIDAD, global::System.Nullable<decimal> Original_ESTR_CODIGO) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_ORDP_NUMERO));
-            if ((Original_ORDP_CODIGO == null)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_ORDP_CODIGO));
-            }
-            if ((Original_EORD_CODIGO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((decimal)(Original_EORD_CODIGO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ORDP_FECHAALTA.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((System.DateTime)(Original_ORDP_FECHAALTA.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((Original_DPSEM_CODIGO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((decimal)(Original_DPSEM_CODIGO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ORDPM_NUMERO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((decimal)(Original_ORDPM_NUMERO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ORDP_ORIGEN == null)) {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((string)(Original_ORDP_ORIGEN));
-            }
-            if ((Original_ORDP_FECHAINICIOESTIMADA.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((System.DateTime)(Original_ORDP_FECHAINICIOESTIMADA.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ORDP_FECHAINICIOREAL.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[16].Value = ((System.DateTime)(Original_ORDP_FECHAINICIOREAL.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ORDP_FECHAFINESTIMADA.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[18].Value = ((System.DateTime)(Original_ORDP_FECHAFINESTIMADA.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ORDP_FECHAFINREAL.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[20].Value = ((System.DateTime)(Original_ORDP_FECHAFINREAL.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[20].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ORDP_OBSERVACIONES == null)) {
-                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[22].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[22].Value = ((string)(Original_ORDP_OBSERVACIONES));
-            }
-            if ((Original_ORDP_PRIORIDAD.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[24].Value = ((decimal)(Original_ORDP_PRIORIDAD.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[24].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ESTR_CODIGO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[26].Value = ((decimal)(Original_ESTR_CODIGO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[26].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string ORDP_CODIGO, global::System.Nullable<decimal> EORD_CODIGO, global::System.Nullable<global::System.DateTime> ORDP_FECHAALTA, global::System.Nullable<decimal> DPSEM_CODIGO, global::System.Nullable<decimal> ORDPM_NUMERO, string ORDP_ORIGEN, global::System.Nullable<global::System.DateTime> ORDP_FECHAINICIOESTIMADA, global::System.Nullable<global::System.DateTime> ORDP_FECHAINICIOREAL, global::System.Nullable<global::System.DateTime> ORDP_FECHAFINESTIMADA, global::System.Nullable<global::System.DateTime> ORDP_FECHAFINREAL, string ORDP_OBSERVACIONES, global::System.Nullable<decimal> ORDP_PRIORIDAD, global::System.Nullable<decimal> ESTR_CODIGO) {
-            if ((ORDP_CODIGO == null)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(ORDP_CODIGO));
-            }
-            if ((EORD_CODIGO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(EORD_CODIGO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((ORDP_FECHAALTA.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(ORDP_FECHAALTA.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((DPSEM_CODIGO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(DPSEM_CODIGO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((ORDPM_NUMERO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(ORDPM_NUMERO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((ORDP_ORIGEN == null)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(ORDP_ORIGEN));
-            }
-            if ((ORDP_FECHAINICIOESTIMADA.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((System.DateTime)(ORDP_FECHAINICIOESTIMADA.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((ORDP_FECHAINICIOREAL.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((System.DateTime)(ORDP_FECHAINICIOREAL.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((ORDP_FECHAFINESTIMADA.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((System.DateTime)(ORDP_FECHAFINESTIMADA.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((ORDP_FECHAFINREAL.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[9].Value = ((System.DateTime)(ORDP_FECHAFINREAL.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            if ((ORDP_OBSERVACIONES == null)) {
-                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[10].Value = ((string)(ORDP_OBSERVACIONES));
-            }
-            if ((ORDP_PRIORIDAD.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[11].Value = ((decimal)(ORDP_PRIORIDAD.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            if ((ESTR_CODIGO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[12].Value = ((decimal)(ESTR_CODIGO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string ORDP_CODIGO, 
-                    global::System.Nullable<decimal> EORD_CODIGO, 
-                    global::System.Nullable<global::System.DateTime> ORDP_FECHAALTA, 
-                    global::System.Nullable<decimal> DPSEM_CODIGO, 
-                    global::System.Nullable<decimal> ORDPM_NUMERO, 
-                    string ORDP_ORIGEN, 
-                    global::System.Nullable<global::System.DateTime> ORDP_FECHAINICIOESTIMADA, 
-                    global::System.Nullable<global::System.DateTime> ORDP_FECHAINICIOREAL, 
-                    global::System.Nullable<global::System.DateTime> ORDP_FECHAFINESTIMADA, 
-                    global::System.Nullable<global::System.DateTime> ORDP_FECHAFINREAL, 
-                    string ORDP_OBSERVACIONES, 
-                    global::System.Nullable<decimal> ORDP_PRIORIDAD, 
-                    global::System.Nullable<decimal> ESTR_CODIGO, 
-                    decimal Original_ORDP_NUMERO, 
-                    string Original_ORDP_CODIGO, 
-                    global::System.Nullable<decimal> Original_EORD_CODIGO, 
-                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAALTA, 
-                    global::System.Nullable<decimal> Original_DPSEM_CODIGO, 
-                    global::System.Nullable<decimal> Original_ORDPM_NUMERO, 
-                    string Original_ORDP_ORIGEN, 
-                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAINICIOESTIMADA, 
-                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAINICIOREAL, 
-                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAFINESTIMADA, 
-                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAFINREAL, 
-                    string Original_ORDP_OBSERVACIONES, 
-                    global::System.Nullable<decimal> Original_ORDP_PRIORIDAD, 
-                    global::System.Nullable<decimal> Original_ESTR_CODIGO, 
-                    decimal ORDP_NUMERO) {
-            if ((ORDP_CODIGO == null)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(ORDP_CODIGO));
-            }
-            if ((EORD_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(EORD_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((ORDP_FECHAALTA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(ORDP_FECHAALTA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((DPSEM_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(DPSEM_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((ORDPM_NUMERO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(ORDPM_NUMERO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((ORDP_ORIGEN == null)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(ORDP_ORIGEN));
-            }
-            if ((ORDP_FECHAINICIOESTIMADA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(ORDP_FECHAINICIOESTIMADA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((ORDP_FECHAINICIOREAL.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(ORDP_FECHAINICIOREAL.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((ORDP_FECHAFINESTIMADA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(ORDP_FECHAFINESTIMADA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((ORDP_FECHAFINREAL.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((System.DateTime)(ORDP_FECHAFINREAL.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            if ((ORDP_OBSERVACIONES == null)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(ORDP_OBSERVACIONES));
-            }
-            if ((ORDP_PRIORIDAD.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(ORDP_PRIORIDAD.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            if ((ESTR_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(ESTR_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_ORDP_NUMERO));
-            if ((Original_ORDP_CODIGO == null)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_ORDP_CODIGO));
-            }
-            if ((Original_EORD_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((decimal)(Original_EORD_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ORDP_FECHAALTA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((System.DateTime)(Original_ORDP_FECHAALTA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
-            }
-            if ((Original_DPSEM_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((decimal)(Original_DPSEM_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ORDPM_NUMERO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((decimal)(Original_ORDPM_NUMERO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ORDP_ORIGEN == null)) {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((string)(Original_ORDP_ORIGEN));
-            }
-            if ((Original_ORDP_FECHAINICIOESTIMADA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((System.DateTime)(Original_ORDP_FECHAINICIOESTIMADA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ORDP_FECHAINICIOREAL.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((System.DateTime)(Original_ORDP_FECHAINICIOREAL.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[29].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ORDP_FECHAFINESTIMADA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((System.DateTime)(Original_ORDP_FECHAFINESTIMADA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[31].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ORDP_FECHAFINREAL.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((System.DateTime)(Original_ORDP_FECHAFINREAL.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[33].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ORDP_OBSERVACIONES == null)) {
-                this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[35].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((string)(Original_ORDP_OBSERVACIONES));
-            }
-            if ((Original_ORDP_PRIORIDAD.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[37].Value = ((decimal)(Original_ORDP_PRIORIDAD.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[37].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ESTR_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[39].Value = ((decimal)(Original_ESTR_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[39].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[40].Value = ((decimal)(ORDP_NUMERO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string ORDP_CODIGO, 
-                    global::System.Nullable<decimal> EORD_CODIGO, 
-                    global::System.Nullable<global::System.DateTime> ORDP_FECHAALTA, 
-                    global::System.Nullable<decimal> DPSEM_CODIGO, 
-                    global::System.Nullable<decimal> ORDPM_NUMERO, 
-                    string ORDP_ORIGEN, 
-                    global::System.Nullable<global::System.DateTime> ORDP_FECHAINICIOESTIMADA, 
-                    global::System.Nullable<global::System.DateTime> ORDP_FECHAINICIOREAL, 
-                    global::System.Nullable<global::System.DateTime> ORDP_FECHAFINESTIMADA, 
-                    global::System.Nullable<global::System.DateTime> ORDP_FECHAFINREAL, 
-                    string ORDP_OBSERVACIONES, 
-                    global::System.Nullable<decimal> ORDP_PRIORIDAD, 
-                    global::System.Nullable<decimal> ESTR_CODIGO, 
-                    decimal Original_ORDP_NUMERO, 
-                    string Original_ORDP_CODIGO, 
-                    global::System.Nullable<decimal> Original_EORD_CODIGO, 
-                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAALTA, 
-                    global::System.Nullable<decimal> Original_DPSEM_CODIGO, 
-                    global::System.Nullable<decimal> Original_ORDPM_NUMERO, 
-                    string Original_ORDP_ORIGEN, 
-                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAINICIOESTIMADA, 
-                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAINICIOREAL, 
-                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAFINESTIMADA, 
-                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAFINREAL, 
-                    string Original_ORDP_OBSERVACIONES, 
-                    global::System.Nullable<decimal> Original_ORDP_PRIORIDAD, 
-                    global::System.Nullable<decimal> Original_ESTR_CODIGO) {
-            return this.Update(ORDP_CODIGO, EORD_CODIGO, ORDP_FECHAALTA, DPSEM_CODIGO, ORDPM_NUMERO, ORDP_ORIGEN, ORDP_FECHAINICIOESTIMADA, ORDP_FECHAINICIOREAL, ORDP_FECHAFINESTIMADA, ORDP_FECHAFINREAL, ORDP_OBSERVACIONES, ORDP_PRIORIDAD, ESTR_CODIGO, Original_ORDP_NUMERO, Original_ORDP_CODIGO, Original_EORD_CODIGO, Original_ORDP_FECHAALTA, Original_DPSEM_CODIGO, Original_ORDPM_NUMERO, Original_ORDP_ORIGEN, Original_ORDP_FECHAINICIOESTIMADA, Original_ORDP_FECHAINICIOREAL, Original_ORDP_FECHAFINESTIMADA, Original_ORDP_FECHAFINREAL, Original_ORDP_OBSERVACIONES, Original_ORDP_PRIORIDAD, Original_ESTR_CODIGO, Original_ORDP_NUMERO);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class ORDENES_PRODUCCION_MANUALTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
@@ -7466,6 +6770,994 @@ SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHA
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class ORDENES_PRODUCCIONTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public ORDENES_PRODUCCIONTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "ORDENES_PRODUCCION";
+            tableMapping.ColumnMappings.Add("ORDP_NUMERO", "ORDP_NUMERO");
+            tableMapping.ColumnMappings.Add("ORDP_CODIGO", "ORDP_CODIGO");
+            tableMapping.ColumnMappings.Add("EORD_CODIGO", "EORD_CODIGO");
+            tableMapping.ColumnMappings.Add("ORDP_FECHAALTA", "ORDP_FECHAALTA");
+            tableMapping.ColumnMappings.Add("DPSEM_CODIGO", "DPSEM_CODIGO");
+            tableMapping.ColumnMappings.Add("ORDPM_NUMERO", "ORDPM_NUMERO");
+            tableMapping.ColumnMappings.Add("ORDP_ORIGEN", "ORDP_ORIGEN");
+            tableMapping.ColumnMappings.Add("ORDP_FECHAINICIOESTIMADA", "ORDP_FECHAINICIOESTIMADA");
+            tableMapping.ColumnMappings.Add("ORDP_FECHAINICIOREAL", "ORDP_FECHAINICIOREAL");
+            tableMapping.ColumnMappings.Add("ORDP_FECHAFINESTIMADA", "ORDP_FECHAFINESTIMADA");
+            tableMapping.ColumnMappings.Add("ORDP_FECHAFINREAL", "ORDP_FECHAFINREAL");
+            tableMapping.ColumnMappings.Add("ORDP_OBSERVACIONES", "ORDP_OBSERVACIONES");
+            tableMapping.ColumnMappings.Add("ORDP_PRIORIDAD", "ORDP_PRIORIDAD");
+            tableMapping.ColumnMappings.Add("ESTR_CODIGO", "ESTR_CODIGO");
+            tableMapping.ColumnMappings.Add("ORDP_CANTIDADESTIMADA", "ORDP_CANTIDADESTIMADA");
+            tableMapping.ColumnMappings.Add("ORDP_CANTIDADREAL", "ORDP_CANTIDADREAL");
+            tableMapping.ColumnMappings.Add("COC_CODIGO", "COC_CODIGO");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[ORDENES_PRODUCCION] WHERE (([ORDP_NUMERO] = @Original_ORDP_NUM" +
+                "ERO) AND ((@IsNull_ORDP_CODIGO = 1 AND [ORDP_CODIGO] IS NULL) OR ([ORDP_CODIGO] " +
+                "= @Original_ORDP_CODIGO)) AND ((@IsNull_EORD_CODIGO = 1 AND [EORD_CODIGO] IS NUL" +
+                "L) OR ([EORD_CODIGO] = @Original_EORD_CODIGO)) AND ((@IsNull_ORDP_FECHAALTA = 1 " +
+                "AND [ORDP_FECHAALTA] IS NULL) OR ([ORDP_FECHAALTA] = @Original_ORDP_FECHAALTA)) " +
+                "AND ((@IsNull_DPSEM_CODIGO = 1 AND [DPSEM_CODIGO] IS NULL) OR ([DPSEM_CODIGO] = " +
+                "@Original_DPSEM_CODIGO)) AND ((@IsNull_ORDPM_NUMERO = 1 AND [ORDPM_NUMERO] IS NU" +
+                "LL) OR ([ORDPM_NUMERO] = @Original_ORDPM_NUMERO)) AND ((@IsNull_ORDP_ORIGEN = 1 " +
+                "AND [ORDP_ORIGEN] IS NULL) OR ([ORDP_ORIGEN] = @Original_ORDP_ORIGEN)) AND ((@Is" +
+                "Null_ORDP_FECHAINICIOESTIMADA = 1 AND [ORDP_FECHAINICIOESTIMADA] IS NULL) OR ([O" +
+                "RDP_FECHAINICIOESTIMADA] = @Original_ORDP_FECHAINICIOESTIMADA)) AND ((@IsNull_OR" +
+                "DP_FECHAINICIOREAL = 1 AND [ORDP_FECHAINICIOREAL] IS NULL) OR ([ORDP_FECHAINICIO" +
+                "REAL] = @Original_ORDP_FECHAINICIOREAL)) AND ((@IsNull_ORDP_FECHAFINESTIMADA = 1" +
+                " AND [ORDP_FECHAFINESTIMADA] IS NULL) OR ([ORDP_FECHAFINESTIMADA] = @Original_OR" +
+                "DP_FECHAFINESTIMADA)) AND ((@IsNull_ORDP_FECHAFINREAL = 1 AND [ORDP_FECHAFINREAL" +
+                "] IS NULL) OR ([ORDP_FECHAFINREAL] = @Original_ORDP_FECHAFINREAL)) AND ((@IsNull" +
+                "_ORDP_OBSERVACIONES = 1 AND [ORDP_OBSERVACIONES] IS NULL) OR ([ORDP_OBSERVACIONE" +
+                "S] = @Original_ORDP_OBSERVACIONES)) AND ((@IsNull_ORDP_PRIORIDAD = 1 AND [ORDP_P" +
+                "RIORIDAD] IS NULL) OR ([ORDP_PRIORIDAD] = @Original_ORDP_PRIORIDAD)) AND ((@IsNu" +
+                "ll_ESTR_CODIGO = 1 AND [ESTR_CODIGO] IS NULL) OR ([ESTR_CODIGO] = @Original_ESTR" +
+                "_CODIGO)) AND ((@IsNull_ORDP_CANTIDADESTIMADA = 1 AND [ORDP_CANTIDADESTIMADA] IS" +
+                " NULL) OR ([ORDP_CANTIDADESTIMADA] = @Original_ORDP_CANTIDADESTIMADA)) AND ((@Is" +
+                "Null_ORDP_CANTIDADREAL = 1 AND [ORDP_CANTIDADREAL] IS NULL) OR ([ORDP_CANTIDADRE" +
+                "AL] = @Original_ORDP_CANTIDADREAL)) AND ((@IsNull_COC_CODIGO = 1 AND [COC_CODIGO" +
+                "] IS NULL) OR ([COC_CODIGO] = @Original_COC_CODIGO)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDP_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_EORD_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EORD_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EORD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EORD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAALTA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAALTA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAALTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPSEM_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPSEM_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPSEM_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDPM_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDPM_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDPM_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDPM_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_ORIGEN", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_ORIGEN", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_ORIGEN", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_ORIGEN", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAINICIOESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOESTIMADA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAINICIOESTIMADA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAINICIOREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAINICIOREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAFINESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINESTIMADA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAFINESTIMADA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAFINREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAFINREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_OBSERVACIONES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_OBSERVACIONES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_OBSERVACIONES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_PRIORIDAD", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_PRIORIDAD", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_PRIORIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "ORDP_PRIORIDAD", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ESTR_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ESTR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_CANTIDADESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_CANTIDADESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDP_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_CANTIDADREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_CANTIDADREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_CANTIDADREAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDP_CANTIDADREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_COC_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[ORDENES_PRODUCCION] ([ORDP_CODIGO], [EORD_CODIGO], [ORDP_FECHAALTA], [DPSEM_CODIGO], [ORDPM_NUMERO], [ORDP_ORIGEN], [ORDP_FECHAINICIOESTIMADA], [ORDP_FECHAINICIOREAL], [ORDP_FECHAFINESTIMADA], [ORDP_FECHAFINREAL], [ORDP_OBSERVACIONES], [ORDP_PRIORIDAD], [ESTR_CODIGO], [ORDP_CANTIDADESTIMADA], [ORDP_CANTIDADREAL], [COC_CODIGO]) VALUES (@ORDP_CODIGO, @EORD_CODIGO, @ORDP_FECHAALTA, @DPSEM_CODIGO, @ORDPM_NUMERO, @ORDP_ORIGEN, @ORDP_FECHAINICIOESTIMADA, @ORDP_FECHAINICIOREAL, @ORDP_FECHAFINESTIMADA, @ORDP_FECHAFINREAL, @ORDP_OBSERVACIONES, @ORDP_PRIORIDAD, @ESTR_CODIGO, @ORDP_CANTIDADESTIMADA, @ORDP_CANTIDADREAL, @COC_CODIGO);
+SELECT ORDP_NUMERO, ORDP_CODIGO, EORD_CODIGO, ORDP_FECHAALTA, DPSEM_CODIGO, ORDPM_NUMERO, ORDP_ORIGEN, ORDP_FECHAINICIOESTIMADA, ORDP_FECHAINICIOREAL, ORDP_FECHAFINESTIMADA, ORDP_FECHAFINREAL, ORDP_OBSERVACIONES, ORDP_PRIORIDAD, ESTR_CODIGO, ORDP_CANTIDADESTIMADA, ORDP_CANTIDADREAL, COC_CODIGO FROM ORDENES_PRODUCCION WHERE (ORDP_NUMERO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EORD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EORD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAALTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPSEM_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDPM_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDPM_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_ORIGEN", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_ORIGEN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAINICIOESTIMADA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAINICIOREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAFINESTIMADA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAFINREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_OBSERVACIONES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_PRIORIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "ORDP_PRIORIDAD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ESTR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_CANTIDADESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDP_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_CANTIDADREAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDP_CANTIDADREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[ORDENES_PRODUCCION] SET [ORDP_CODIGO] = @ORDP_CODIGO, [EORD_CODIGO]" +
+                " = @EORD_CODIGO, [ORDP_FECHAALTA] = @ORDP_FECHAALTA, [DPSEM_CODIGO] = @DPSEM_COD" +
+                "IGO, [ORDPM_NUMERO] = @ORDPM_NUMERO, [ORDP_ORIGEN] = @ORDP_ORIGEN, [ORDP_FECHAIN" +
+                "ICIOESTIMADA] = @ORDP_FECHAINICIOESTIMADA, [ORDP_FECHAINICIOREAL] = @ORDP_FECHAI" +
+                "NICIOREAL, [ORDP_FECHAFINESTIMADA] = @ORDP_FECHAFINESTIMADA, [ORDP_FECHAFINREAL]" +
+                " = @ORDP_FECHAFINREAL, [ORDP_OBSERVACIONES] = @ORDP_OBSERVACIONES, [ORDP_PRIORID" +
+                "AD] = @ORDP_PRIORIDAD, [ESTR_CODIGO] = @ESTR_CODIGO, [ORDP_CANTIDADESTIMADA] = @" +
+                "ORDP_CANTIDADESTIMADA, [ORDP_CANTIDADREAL] = @ORDP_CANTIDADREAL, [COC_CODIGO] = " +
+                "@COC_CODIGO WHERE (([ORDP_NUMERO] = @Original_ORDP_NUMERO) AND ((@IsNull_ORDP_CO" +
+                "DIGO = 1 AND [ORDP_CODIGO] IS NULL) OR ([ORDP_CODIGO] = @Original_ORDP_CODIGO)) " +
+                "AND ((@IsNull_EORD_CODIGO = 1 AND [EORD_CODIGO] IS NULL) OR ([EORD_CODIGO] = @Or" +
+                "iginal_EORD_CODIGO)) AND ((@IsNull_ORDP_FECHAALTA = 1 AND [ORDP_FECHAALTA] IS NU" +
+                "LL) OR ([ORDP_FECHAALTA] = @Original_ORDP_FECHAALTA)) AND ((@IsNull_DPSEM_CODIGO" +
+                " = 1 AND [DPSEM_CODIGO] IS NULL) OR ([DPSEM_CODIGO] = @Original_DPSEM_CODIGO)) A" +
+                "ND ((@IsNull_ORDPM_NUMERO = 1 AND [ORDPM_NUMERO] IS NULL) OR ([ORDPM_NUMERO] = @" +
+                "Original_ORDPM_NUMERO)) AND ((@IsNull_ORDP_ORIGEN = 1 AND [ORDP_ORIGEN] IS NULL)" +
+                " OR ([ORDP_ORIGEN] = @Original_ORDP_ORIGEN)) AND ((@IsNull_ORDP_FECHAINICIOESTIM" +
+                "ADA = 1 AND [ORDP_FECHAINICIOESTIMADA] IS NULL) OR ([ORDP_FECHAINICIOESTIMADA] =" +
+                " @Original_ORDP_FECHAINICIOESTIMADA)) AND ((@IsNull_ORDP_FECHAINICIOREAL = 1 AND" +
+                " [ORDP_FECHAINICIOREAL] IS NULL) OR ([ORDP_FECHAINICIOREAL] = @Original_ORDP_FEC" +
+                "HAINICIOREAL)) AND ((@IsNull_ORDP_FECHAFINESTIMADA = 1 AND [ORDP_FECHAFINESTIMAD" +
+                "A] IS NULL) OR ([ORDP_FECHAFINESTIMADA] = @Original_ORDP_FECHAFINESTIMADA)) AND " +
+                "((@IsNull_ORDP_FECHAFINREAL = 1 AND [ORDP_FECHAFINREAL] IS NULL) OR ([ORDP_FECHA" +
+                "FINREAL] = @Original_ORDP_FECHAFINREAL)) AND ((@IsNull_ORDP_OBSERVACIONES = 1 AN" +
+                "D [ORDP_OBSERVACIONES] IS NULL) OR ([ORDP_OBSERVACIONES] = @Original_ORDP_OBSERV" +
+                "ACIONES)) AND ((@IsNull_ORDP_PRIORIDAD = 1 AND [ORDP_PRIORIDAD] IS NULL) OR ([OR" +
+                "DP_PRIORIDAD] = @Original_ORDP_PRIORIDAD)) AND ((@IsNull_ESTR_CODIGO = 1 AND [ES" +
+                "TR_CODIGO] IS NULL) OR ([ESTR_CODIGO] = @Original_ESTR_CODIGO)) AND ((@IsNull_OR" +
+                "DP_CANTIDADESTIMADA = 1 AND [ORDP_CANTIDADESTIMADA] IS NULL) OR ([ORDP_CANTIDADE" +
+                "STIMADA] = @Original_ORDP_CANTIDADESTIMADA)) AND ((@IsNull_ORDP_CANTIDADREAL = 1" +
+                " AND [ORDP_CANTIDADREAL] IS NULL) OR ([ORDP_CANTIDADREAL] = @Original_ORDP_CANTI" +
+                "DADREAL)) AND ((@IsNull_COC_CODIGO = 1 AND [COC_CODIGO] IS NULL) OR ([COC_CODIGO" +
+                "] = @Original_COC_CODIGO)));\r\nSELECT ORDP_NUMERO, ORDP_CODIGO, EORD_CODIGO, ORDP" +
+                "_FECHAALTA, DPSEM_CODIGO, ORDPM_NUMERO, ORDP_ORIGEN, ORDP_FECHAINICIOESTIMADA, O" +
+                "RDP_FECHAINICIOREAL, ORDP_FECHAFINESTIMADA, ORDP_FECHAFINREAL, ORDP_OBSERVACIONE" +
+                "S, ORDP_PRIORIDAD, ESTR_CODIGO, ORDP_CANTIDADESTIMADA, ORDP_CANTIDADREAL, COC_CO" +
+                "DIGO FROM ORDENES_PRODUCCION WHERE (ORDP_NUMERO = @ORDP_NUMERO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EORD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EORD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAALTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DPSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPSEM_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDPM_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDPM_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_ORIGEN", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_ORIGEN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAINICIOESTIMADA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAINICIOREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAFINESTIMADA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_FECHAFINREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_OBSERVACIONES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_PRIORIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "ORDP_PRIORIDAD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ESTR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_CANTIDADESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDP_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_CANTIDADREAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDP_CANTIDADREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDP_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_EORD_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EORD_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EORD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EORD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAALTA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAALTA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAALTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPSEM_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPSEM_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPSEM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPSEM_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDPM_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDPM_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDPM_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDPM_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_ORIGEN", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_ORIGEN", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_ORIGEN", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_ORIGEN", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAINICIOESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOESTIMADA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAINICIOESTIMADA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAINICIOREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAINICIOREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAINICIOREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAFINESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINESTIMADA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAFINESTIMADA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_FECHAFINREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_FECHAFINREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_FECHAFINREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_OBSERVACIONES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_OBSERVACIONES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_OBSERVACIONES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_PRIORIDAD", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_PRIORIDAD", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_PRIORIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "ORDP_PRIORIDAD", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ESTR_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ESTR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_CANTIDADESTIMADA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_CANTIDADESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDP_CANTIDADESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDP_CANTIDADREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDP_CANTIDADREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDP_CANTIDADREAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDP_CANTIDADREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_COC_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDP_NUMERO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "ORDP_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString8;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = @"SELECT ORDP_NUMERO, ORDP_CODIGO, EORD_CODIGO, ORDP_FECHAALTA, DPSEM_CODIGO, ORDPM_NUMERO, ORDP_ORIGEN, ORDP_FECHAINICIOESTIMADA, ORDP_FECHAINICIOREAL, ORDP_FECHAFINESTIMADA, ORDP_FECHAFINREAL, ORDP_OBSERVACIONES, ORDP_PRIORIDAD, ESTR_CODIGO, ORDP_CANTIDADESTIMADA, ORDP_CANTIDADREAL, COC_CODIGO FROM dbo.ORDENES_PRODUCCION";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsOrdenTrabajo.ORDENES_PRODUCCIONDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsOrdenTrabajo.ORDENES_PRODUCCIONDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsOrdenTrabajo.ORDENES_PRODUCCIONDataTable dataTable = new dsOrdenTrabajo.ORDENES_PRODUCCIONDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsOrdenTrabajo.ORDENES_PRODUCCIONDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsOrdenTrabajo dataSet) {
+            return this.Adapter.Update(dataSet, "ORDENES_PRODUCCION");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(
+                    decimal Original_ORDP_NUMERO, 
+                    string Original_ORDP_CODIGO, 
+                    global::System.Nullable<decimal> Original_EORD_CODIGO, 
+                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAALTA, 
+                    global::System.Nullable<decimal> Original_DPSEM_CODIGO, 
+                    global::System.Nullable<decimal> Original_ORDPM_NUMERO, 
+                    string Original_ORDP_ORIGEN, 
+                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAINICIOESTIMADA, 
+                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAINICIOREAL, 
+                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAFINESTIMADA, 
+                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAFINREAL, 
+                    string Original_ORDP_OBSERVACIONES, 
+                    global::System.Nullable<decimal> Original_ORDP_PRIORIDAD, 
+                    global::System.Nullable<decimal> Original_ESTR_CODIGO, 
+                    global::System.Nullable<decimal> Original_ORDP_CANTIDADESTIMADA, 
+                    global::System.Nullable<decimal> Original_ORDP_CANTIDADREAL, 
+                    global::System.Nullable<decimal> Original_COC_CODIGO) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_ORDP_NUMERO));
+            if ((Original_ORDP_CODIGO == null)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_ORDP_CODIGO));
+            }
+            if ((Original_EORD_CODIGO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((decimal)(Original_EORD_CODIGO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDP_FECHAALTA.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((System.DateTime)(Original_ORDP_FECHAALTA.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((Original_DPSEM_CODIGO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((decimal)(Original_DPSEM_CODIGO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDPM_NUMERO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((decimal)(Original_ORDPM_NUMERO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDP_ORIGEN == null)) {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((string)(Original_ORDP_ORIGEN));
+            }
+            if ((Original_ORDP_FECHAINICIOESTIMADA.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((System.DateTime)(Original_ORDP_FECHAINICIOESTIMADA.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDP_FECHAINICIOREAL.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((System.DateTime)(Original_ORDP_FECHAINICIOREAL.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDP_FECHAFINESTIMADA.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[18].Value = ((System.DateTime)(Original_ORDP_FECHAFINESTIMADA.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDP_FECHAFINREAL.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[20].Value = ((System.DateTime)(Original_ORDP_FECHAFINREAL.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDP_OBSERVACIONES == null)) {
+                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[22].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[22].Value = ((string)(Original_ORDP_OBSERVACIONES));
+            }
+            if ((Original_ORDP_PRIORIDAD.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[24].Value = ((decimal)(Original_ORDP_PRIORIDAD.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[24].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ESTR_CODIGO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[26].Value = ((decimal)(Original_ESTR_CODIGO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[26].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDP_CANTIDADESTIMADA.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[28].Value = ((decimal)(Original_ORDP_CANTIDADESTIMADA.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[28].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDP_CANTIDADREAL.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[29].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[30].Value = ((decimal)(Original_ORDP_CANTIDADREAL.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[29].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[30].Value = global::System.DBNull.Value;
+            }
+            if ((Original_COC_CODIGO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[31].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[32].Value = ((decimal)(Original_COC_CODIGO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[31].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[32].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(
+                    string ORDP_CODIGO, 
+                    global::System.Nullable<decimal> EORD_CODIGO, 
+                    global::System.Nullable<global::System.DateTime> ORDP_FECHAALTA, 
+                    global::System.Nullable<decimal> DPSEM_CODIGO, 
+                    global::System.Nullable<decimal> ORDPM_NUMERO, 
+                    string ORDP_ORIGEN, 
+                    global::System.Nullable<global::System.DateTime> ORDP_FECHAINICIOESTIMADA, 
+                    global::System.Nullable<global::System.DateTime> ORDP_FECHAINICIOREAL, 
+                    global::System.Nullable<global::System.DateTime> ORDP_FECHAFINESTIMADA, 
+                    global::System.Nullable<global::System.DateTime> ORDP_FECHAFINREAL, 
+                    string ORDP_OBSERVACIONES, 
+                    global::System.Nullable<decimal> ORDP_PRIORIDAD, 
+                    global::System.Nullable<decimal> ESTR_CODIGO, 
+                    global::System.Nullable<decimal> ORDP_CANTIDADESTIMADA, 
+                    global::System.Nullable<decimal> ORDP_CANTIDADREAL, 
+                    global::System.Nullable<decimal> COC_CODIGO) {
+            if ((ORDP_CODIGO == null)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(ORDP_CODIGO));
+            }
+            if ((EORD_CODIGO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(EORD_CODIGO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((ORDP_FECHAALTA.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(ORDP_FECHAALTA.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((DPSEM_CODIGO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(DPSEM_CODIGO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((ORDPM_NUMERO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(ORDPM_NUMERO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((ORDP_ORIGEN == null)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(ORDP_ORIGEN));
+            }
+            if ((ORDP_FECHAINICIOESTIMADA.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((System.DateTime)(ORDP_FECHAINICIOESTIMADA.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((ORDP_FECHAINICIOREAL.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((System.DateTime)(ORDP_FECHAINICIOREAL.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((ORDP_FECHAFINESTIMADA.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((System.DateTime)(ORDP_FECHAFINESTIMADA.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((ORDP_FECHAFINREAL.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[9].Value = ((System.DateTime)(ORDP_FECHAFINREAL.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((ORDP_OBSERVACIONES == null)) {
+                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[10].Value = ((string)(ORDP_OBSERVACIONES));
+            }
+            if ((ORDP_PRIORIDAD.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[11].Value = ((decimal)(ORDP_PRIORIDAD.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((ESTR_CODIGO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[12].Value = ((decimal)(ESTR_CODIGO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((ORDP_CANTIDADESTIMADA.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[13].Value = ((decimal)(ORDP_CANTIDADESTIMADA.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            if ((ORDP_CANTIDADREAL.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[14].Value = ((decimal)(ORDP_CANTIDADREAL.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            if ((COC_CODIGO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[15].Value = ((decimal)(COC_CODIGO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string ORDP_CODIGO, 
+                    global::System.Nullable<decimal> EORD_CODIGO, 
+                    global::System.Nullable<global::System.DateTime> ORDP_FECHAALTA, 
+                    global::System.Nullable<decimal> DPSEM_CODIGO, 
+                    global::System.Nullable<decimal> ORDPM_NUMERO, 
+                    string ORDP_ORIGEN, 
+                    global::System.Nullable<global::System.DateTime> ORDP_FECHAINICIOESTIMADA, 
+                    global::System.Nullable<global::System.DateTime> ORDP_FECHAINICIOREAL, 
+                    global::System.Nullable<global::System.DateTime> ORDP_FECHAFINESTIMADA, 
+                    global::System.Nullable<global::System.DateTime> ORDP_FECHAFINREAL, 
+                    string ORDP_OBSERVACIONES, 
+                    global::System.Nullable<decimal> ORDP_PRIORIDAD, 
+                    global::System.Nullable<decimal> ESTR_CODIGO, 
+                    global::System.Nullable<decimal> ORDP_CANTIDADESTIMADA, 
+                    global::System.Nullable<decimal> ORDP_CANTIDADREAL, 
+                    global::System.Nullable<decimal> COC_CODIGO, 
+                    decimal Original_ORDP_NUMERO, 
+                    string Original_ORDP_CODIGO, 
+                    global::System.Nullable<decimal> Original_EORD_CODIGO, 
+                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAALTA, 
+                    global::System.Nullable<decimal> Original_DPSEM_CODIGO, 
+                    global::System.Nullable<decimal> Original_ORDPM_NUMERO, 
+                    string Original_ORDP_ORIGEN, 
+                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAINICIOESTIMADA, 
+                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAINICIOREAL, 
+                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAFINESTIMADA, 
+                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAFINREAL, 
+                    string Original_ORDP_OBSERVACIONES, 
+                    global::System.Nullable<decimal> Original_ORDP_PRIORIDAD, 
+                    global::System.Nullable<decimal> Original_ESTR_CODIGO, 
+                    global::System.Nullable<decimal> Original_ORDP_CANTIDADESTIMADA, 
+                    global::System.Nullable<decimal> Original_ORDP_CANTIDADREAL, 
+                    global::System.Nullable<decimal> Original_COC_CODIGO, 
+                    decimal ORDP_NUMERO) {
+            if ((ORDP_CODIGO == null)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(ORDP_CODIGO));
+            }
+            if ((EORD_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(EORD_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((ORDP_FECHAALTA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(ORDP_FECHAALTA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((DPSEM_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(DPSEM_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((ORDPM_NUMERO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(ORDPM_NUMERO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((ORDP_ORIGEN == null)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(ORDP_ORIGEN));
+            }
+            if ((ORDP_FECHAINICIOESTIMADA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(ORDP_FECHAINICIOESTIMADA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((ORDP_FECHAINICIOREAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(ORDP_FECHAINICIOREAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((ORDP_FECHAFINESTIMADA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(ORDP_FECHAFINESTIMADA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((ORDP_FECHAFINREAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((System.DateTime)(ORDP_FECHAFINREAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((ORDP_OBSERVACIONES == null)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(ORDP_OBSERVACIONES));
+            }
+            if ((ORDP_PRIORIDAD.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(ORDP_PRIORIDAD.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((ESTR_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(ESTR_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((ORDP_CANTIDADESTIMADA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(ORDP_CANTIDADESTIMADA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            if ((ORDP_CANTIDADREAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((decimal)(ORDP_CANTIDADREAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            if ((COC_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((decimal)(COC_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[16].Value = ((decimal)(Original_ORDP_NUMERO));
+            if ((Original_ORDP_CODIGO == null)) {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_ORDP_CODIGO));
+            }
+            if ((Original_EORD_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((decimal)(Original_EORD_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDP_FECHAALTA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((System.DateTime)(Original_ORDP_FECHAALTA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
+            }
+            if ((Original_DPSEM_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((decimal)(Original_DPSEM_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDPM_NUMERO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(Original_ORDPM_NUMERO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDP_ORIGEN == null)) {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((string)(Original_ORDP_ORIGEN));
+            }
+            if ((Original_ORDP_FECHAINICIOESTIMADA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((System.DateTime)(Original_ORDP_FECHAINICIOESTIMADA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDP_FECHAINICIOREAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((System.DateTime)(Original_ORDP_FECHAINICIOREAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[32].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDP_FECHAFINESTIMADA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((System.DateTime)(Original_ORDP_FECHAFINESTIMADA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDP_FECHAFINREAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((System.DateTime)(Original_ORDP_FECHAFINREAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[36].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDP_OBSERVACIONES == null)) {
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[38].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((string)(Original_ORDP_OBSERVACIONES));
+            }
+            if ((Original_ORDP_PRIORIDAD.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[40].Value = ((decimal)(Original_ORDP_PRIORIDAD.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[40].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ESTR_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[42].Value = ((decimal)(Original_ESTR_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[42].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDP_CANTIDADESTIMADA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[43].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[44].Value = ((decimal)(Original_ORDP_CANTIDADESTIMADA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[43].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[44].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ORDP_CANTIDADREAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[45].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[46].Value = ((decimal)(Original_ORDP_CANTIDADREAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[45].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[46].Value = global::System.DBNull.Value;
+            }
+            if ((Original_COC_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[47].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[48].Value = ((decimal)(Original_COC_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[47].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[48].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[49].Value = ((decimal)(ORDP_NUMERO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string ORDP_CODIGO, 
+                    global::System.Nullable<decimal> EORD_CODIGO, 
+                    global::System.Nullable<global::System.DateTime> ORDP_FECHAALTA, 
+                    global::System.Nullable<decimal> DPSEM_CODIGO, 
+                    global::System.Nullable<decimal> ORDPM_NUMERO, 
+                    string ORDP_ORIGEN, 
+                    global::System.Nullable<global::System.DateTime> ORDP_FECHAINICIOESTIMADA, 
+                    global::System.Nullable<global::System.DateTime> ORDP_FECHAINICIOREAL, 
+                    global::System.Nullable<global::System.DateTime> ORDP_FECHAFINESTIMADA, 
+                    global::System.Nullable<global::System.DateTime> ORDP_FECHAFINREAL, 
+                    string ORDP_OBSERVACIONES, 
+                    global::System.Nullable<decimal> ORDP_PRIORIDAD, 
+                    global::System.Nullable<decimal> ESTR_CODIGO, 
+                    global::System.Nullable<decimal> ORDP_CANTIDADESTIMADA, 
+                    global::System.Nullable<decimal> ORDP_CANTIDADREAL, 
+                    global::System.Nullable<decimal> COC_CODIGO, 
+                    decimal Original_ORDP_NUMERO, 
+                    string Original_ORDP_CODIGO, 
+                    global::System.Nullable<decimal> Original_EORD_CODIGO, 
+                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAALTA, 
+                    global::System.Nullable<decimal> Original_DPSEM_CODIGO, 
+                    global::System.Nullable<decimal> Original_ORDPM_NUMERO, 
+                    string Original_ORDP_ORIGEN, 
+                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAINICIOESTIMADA, 
+                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAINICIOREAL, 
+                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAFINESTIMADA, 
+                    global::System.Nullable<global::System.DateTime> Original_ORDP_FECHAFINREAL, 
+                    string Original_ORDP_OBSERVACIONES, 
+                    global::System.Nullable<decimal> Original_ORDP_PRIORIDAD, 
+                    global::System.Nullable<decimal> Original_ESTR_CODIGO, 
+                    global::System.Nullable<decimal> Original_ORDP_CANTIDADESTIMADA, 
+                    global::System.Nullable<decimal> Original_ORDP_CANTIDADREAL, 
+                    global::System.Nullable<decimal> Original_COC_CODIGO) {
+            return this.Update(ORDP_CODIGO, EORD_CODIGO, ORDP_FECHAALTA, DPSEM_CODIGO, ORDPM_NUMERO, ORDP_ORIGEN, ORDP_FECHAINICIOESTIMADA, ORDP_FECHAINICIOREAL, ORDP_FECHAFINESTIMADA, ORDP_FECHAFINREAL, ORDP_OBSERVACIONES, ORDP_PRIORIDAD, ESTR_CODIGO, ORDP_CANTIDADESTIMADA, ORDP_CANTIDADREAL, COC_CODIGO, Original_ORDP_NUMERO, Original_ORDP_CODIGO, Original_EORD_CODIGO, Original_ORDP_FECHAALTA, Original_DPSEM_CODIGO, Original_ORDPM_NUMERO, Original_ORDP_ORIGEN, Original_ORDP_FECHAINICIOESTIMADA, Original_ORDP_FECHAINICIOREAL, Original_ORDP_FECHAFINESTIMADA, Original_ORDP_FECHAFINREAL, Original_ORDP_OBSERVACIONES, Original_ORDP_PRIORIDAD, Original_ESTR_CODIGO, Original_ORDP_CANTIDADESTIMADA, Original_ORDP_CANTIDADREAL, Original_COC_CODIGO, Original_ORDP_NUMERO);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -7482,11 +7774,11 @@ SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHA
         
         private ORDENES_TRABAJOTableAdapter _oRDENES_TRABAJOTableAdapter;
         
-        private ORDENES_PRODUCCIONTableAdapter _oRDENES_PRODUCCIONTableAdapter;
-        
         private ORDENES_PRODUCCION_MANUALTableAdapter _oRDENES_PRODUCCION_MANUALTableAdapter;
         
         private CIERRE_ORDENTRABAJOTableAdapter _cIERRE_ORDENTRABAJOTableAdapter;
+        
+        private ORDENES_PRODUCCIONTableAdapter _oRDENES_PRODUCCIONTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -7532,19 +7824,6 @@ SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHA
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
             "", "System.Drawing.Design.UITypeEditor")]
-        public ORDENES_PRODUCCIONTableAdapter ORDENES_PRODUCCIONTableAdapter {
-            get {
-                return this._oRDENES_PRODUCCIONTableAdapter;
-            }
-            set {
-                this._oRDENES_PRODUCCIONTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
         public ORDENES_PRODUCCION_MANUALTableAdapter ORDENES_PRODUCCION_MANUALTableAdapter {
             get {
                 return this._oRDENES_PRODUCCION_MANUALTableAdapter;
@@ -7564,6 +7843,19 @@ SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHA
             }
             set {
                 this._cIERRE_ORDENTRABAJOTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public ORDENES_PRODUCCIONTableAdapter ORDENES_PRODUCCIONTableAdapter {
+            get {
+                return this._oRDENES_PRODUCCIONTableAdapter;
+            }
+            set {
+                this._oRDENES_PRODUCCIONTableAdapter = value;
             }
         }
         
@@ -7592,10 +7884,6 @@ SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHA
                             && (this._oRDENES_TRABAJOTableAdapter.Connection != null))) {
                     return this._oRDENES_TRABAJOTableAdapter.Connection;
                 }
-                if (((this._oRDENES_PRODUCCIONTableAdapter != null) 
-                            && (this._oRDENES_PRODUCCIONTableAdapter.Connection != null))) {
-                    return this._oRDENES_PRODUCCIONTableAdapter.Connection;
-                }
                 if (((this._oRDENES_PRODUCCION_MANUALTableAdapter != null) 
                             && (this._oRDENES_PRODUCCION_MANUALTableAdapter.Connection != null))) {
                     return this._oRDENES_PRODUCCION_MANUALTableAdapter.Connection;
@@ -7603,6 +7891,10 @@ SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHA
                 if (((this._cIERRE_ORDENTRABAJOTableAdapter != null) 
                             && (this._cIERRE_ORDENTRABAJOTableAdapter.Connection != null))) {
                     return this._cIERRE_ORDENTRABAJOTableAdapter.Connection;
+                }
+                if (((this._oRDENES_PRODUCCIONTableAdapter != null) 
+                            && (this._oRDENES_PRODUCCIONTableAdapter.Connection != null))) {
+                    return this._oRDENES_PRODUCCIONTableAdapter.Connection;
                 }
                 return null;
             }
@@ -7622,13 +7914,13 @@ SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHA
                 if ((this._oRDENES_TRABAJOTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._oRDENES_PRODUCCIONTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._oRDENES_PRODUCCION_MANUALTableAdapter != null)) {
                     count = (count + 1);
                 }
                 if ((this._cIERRE_ORDENTRABAJOTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._oRDENES_PRODUCCIONTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -7831,11 +8123,6 @@ SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHA
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._oRDENES_PRODUCCIONTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._oRDENES_PRODUCCIONTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             if (((this._oRDENES_PRODUCCION_MANUALTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._oRDENES_PRODUCCION_MANUALTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
@@ -7843,6 +8130,11 @@ SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHA
             }
             if (((this._cIERRE_ORDENTRABAJOTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._cIERRE_ORDENTRABAJOTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._oRDENES_PRODUCCIONTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._oRDENES_PRODUCCIONTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -7896,15 +8188,6 @@ SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHA
                         adaptersWithAcceptChangesDuringUpdate.Add(this._oRDENES_TRABAJOTableAdapter.Adapter);
                     }
                 }
-                if ((this._oRDENES_PRODUCCIONTableAdapter != null)) {
-                    revertConnections.Add(this._oRDENES_PRODUCCIONTableAdapter, this._oRDENES_PRODUCCIONTableAdapter.Connection);
-                    this._oRDENES_PRODUCCIONTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._oRDENES_PRODUCCIONTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._oRDENES_PRODUCCIONTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._oRDENES_PRODUCCIONTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._oRDENES_PRODUCCIONTableAdapter.Adapter);
-                    }
-                }
                 if ((this._oRDENES_PRODUCCION_MANUALTableAdapter != null)) {
                     revertConnections.Add(this._oRDENES_PRODUCCION_MANUALTableAdapter, this._oRDENES_PRODUCCION_MANUALTableAdapter.Connection);
                     this._oRDENES_PRODUCCION_MANUALTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -7921,6 +8204,15 @@ SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHA
                     if (this._cIERRE_ORDENTRABAJOTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._cIERRE_ORDENTRABAJOTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._cIERRE_ORDENTRABAJOTableAdapter.Adapter);
+                    }
+                }
+                if ((this._oRDENES_PRODUCCIONTableAdapter != null)) {
+                    revertConnections.Add(this._oRDENES_PRODUCCIONTableAdapter, this._oRDENES_PRODUCCIONTableAdapter.Connection);
+                    this._oRDENES_PRODUCCIONTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._oRDENES_PRODUCCIONTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._oRDENES_PRODUCCIONTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._oRDENES_PRODUCCIONTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._oRDENES_PRODUCCIONTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -7989,10 +8281,6 @@ SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHA
                     this._oRDENES_TRABAJOTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._oRDENES_TRABAJOTableAdapter]));
                     this._oRDENES_TRABAJOTableAdapter.Transaction = null;
                 }
-                if ((this._oRDENES_PRODUCCIONTableAdapter != null)) {
-                    this._oRDENES_PRODUCCIONTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._oRDENES_PRODUCCIONTableAdapter]));
-                    this._oRDENES_PRODUCCIONTableAdapter.Transaction = null;
-                }
                 if ((this._oRDENES_PRODUCCION_MANUALTableAdapter != null)) {
                     this._oRDENES_PRODUCCION_MANUALTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._oRDENES_PRODUCCION_MANUALTableAdapter]));
                     this._oRDENES_PRODUCCION_MANUALTableAdapter.Transaction = null;
@@ -8000,6 +8288,10 @@ SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHA
                 if ((this._cIERRE_ORDENTRABAJOTableAdapter != null)) {
                     this._cIERRE_ORDENTRABAJOTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cIERRE_ORDENTRABAJOTableAdapter]));
                     this._cIERRE_ORDENTRABAJOTableAdapter.Transaction = null;
+                }
+                if ((this._oRDENES_PRODUCCIONTableAdapter != null)) {
+                    this._oRDENES_PRODUCCIONTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._oRDENES_PRODUCCIONTableAdapter]));
+                    this._oRDENES_PRODUCCIONTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
