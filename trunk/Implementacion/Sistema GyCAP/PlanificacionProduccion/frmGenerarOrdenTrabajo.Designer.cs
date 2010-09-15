@@ -75,8 +75,7 @@
             this.btnGuardarTodo = new System.Windows.Forms.Button();
             this.btnArbol = new System.Windows.Forms.Button();
             this.btnGuardarActual = new System.Windows.Forms.Button();
-            this.btnDetalleOrden = new System.Windows.Forms.Button();
-            this.btnEliminarOrden = new System.Windows.Forms.Button();
+            this.btnEliminarActual = new System.Windows.Forms.Button();
             this.gbDatosOrdenP = new System.Windows.Forms.GroupBox();
             this.txtFechaInicioOrdenP = new System.Windows.Forms.TextBox();
             this.txtFechaAltaOrdenP = new System.Windows.Forms.TextBox();
@@ -131,13 +130,13 @@
             this.gbNavegador = new System.Windows.Forms.GroupBox();
             this.bnNavegador = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bnMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bnMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bnMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bnMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
@@ -145,6 +144,10 @@
             this.cmsGrillaOrdenesTrabajo = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiBloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDesbloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnEliminarTodas = new System.Windows.Forms.Button();
+            this.btnAplicarCambios = new System.Windows.Forms.Button();
+            this.bnAplicar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tcOrdenTrabajo.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -597,7 +600,7 @@
             this.cbModoInicio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbModoInicio.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbModoInicio.FormattingEnabled = true;
-            this.cbModoInicio.Location = new System.Drawing.Point(203, 40);
+            this.cbModoInicio.Location = new System.Drawing.Point(236, 40);
             this.cbModoInicio.Name = "cbModoInicio";
             this.cbModoInicio.Size = new System.Drawing.Size(155, 21);
             this.cbModoInicio.TabIndex = 22;
@@ -622,7 +625,7 @@
             // 
             this.dtpFechaPlanear.CustomFormat = " ";
             this.dtpFechaPlanear.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaPlanear.Location = new System.Drawing.Point(203, 97);
+            this.dtpFechaPlanear.Location = new System.Drawing.Point(236, 97);
             this.dtpFechaPlanear.Name = "dtpFechaPlanear";
             this.dtpFechaPlanear.Size = new System.Drawing.Size(157, 21);
             this.dtpFechaPlanear.TabIndex = 19;
@@ -630,7 +633,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(202, 24);
+            this.label19.Location = new System.Drawing.Point(235, 24);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(74, 13);
             this.label19.TabIndex = 21;
@@ -648,7 +651,7 @@
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(202, 81);
+            this.label35.Location = new System.Drawing.Point(235, 81);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(36, 13);
             this.label35.TabIndex = 17;
@@ -666,11 +669,12 @@
             // 
             // gbOpciones
             // 
+            this.gbOpciones.Controls.Add(this.btnAplicarCambios);
+            this.gbOpciones.Controls.Add(this.btnEliminarTodas);
             this.gbOpciones.Controls.Add(this.btnGuardarTodo);
             this.gbOpciones.Controls.Add(this.btnArbol);
             this.gbOpciones.Controls.Add(this.btnGuardarActual);
-            this.gbOpciones.Controls.Add(this.btnDetalleOrden);
-            this.gbOpciones.Controls.Add(this.btnEliminarOrden);
+            this.gbOpciones.Controls.Add(this.btnEliminarActual);
             this.gbOpciones.Location = new System.Drawing.Point(426, 285);
             this.gbOpciones.Name = "gbOpciones";
             this.gbOpciones.Size = new System.Drawing.Size(351, 197);
@@ -687,7 +691,7 @@
             this.btnGuardarTodo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnGuardarTodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardarTodo.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Save_25;
-            this.btnGuardarTodo.Location = new System.Drawing.Point(207, 123);
+            this.btnGuardarTodo.Location = new System.Drawing.Point(263, 116);
             this.btnGuardarTodo.Name = "btnGuardarTodo";
             this.btnGuardarTodo.Size = new System.Drawing.Size(56, 61);
             this.btnGuardarTodo.TabIndex = 16;
@@ -706,7 +710,7 @@
             this.btnArbol.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnArbol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnArbol.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Arbol_25;
-            this.btnArbol.Location = new System.Drawing.Point(128, 36);
+            this.btnArbol.Location = new System.Drawing.Point(22, 116);
             this.btnArbol.Name = "btnArbol";
             this.btnArbol.Size = new System.Drawing.Size(84, 61);
             this.btnArbol.TabIndex = 13;
@@ -725,7 +729,7 @@
             this.btnGuardarActual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnGuardarActual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardarActual.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Save_25;
-            this.btnGuardarActual.Location = new System.Drawing.Point(67, 123);
+            this.btnGuardarActual.Location = new System.Drawing.Point(253, 33);
             this.btnGuardarActual.Name = "btnGuardarActual";
             this.btnGuardarActual.Size = new System.Drawing.Size(77, 61);
             this.btnGuardarActual.TabIndex = 15;
@@ -735,43 +739,24 @@
             this.btnGuardarActual.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnGuardarActual.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
-            // btnDetalleOrden
+            // btnEliminarActual
             // 
-            this.btnDetalleOrden.AutoSize = true;
-            this.btnDetalleOrden.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnDetalleOrden.FlatAppearance.BorderSize = 0;
-            this.btnDetalleOrden.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnDetalleOrden.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnDetalleOrden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDetalleOrden.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_25;
-            this.btnDetalleOrden.Location = new System.Drawing.Point(19, 35);
-            this.btnDetalleOrden.Name = "btnDetalleOrden";
-            this.btnDetalleOrden.Size = new System.Drawing.Size(75, 61);
-            this.btnDetalleOrden.TabIndex = 12;
-            this.btnDetalleOrden.Text = "&Ver órdenes\r\nde trabajo";
-            this.btnDetalleOrden.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDetalleOrden.UseVisualStyleBackColor = true;
-            this.btnDetalleOrden.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnDetalleOrden.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnEliminarOrden
-            // 
-            this.btnEliminarOrden.AutoSize = true;
-            this.btnEliminarOrden.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnEliminarOrden.FlatAppearance.BorderSize = 0;
-            this.btnEliminarOrden.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnEliminarOrden.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnEliminarOrden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEliminarOrden.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Delete_25;
-            this.btnEliminarOrden.Location = new System.Drawing.Point(246, 38);
-            this.btnEliminarOrden.Name = "btnEliminarOrden";
-            this.btnEliminarOrden.Size = new System.Drawing.Size(84, 61);
-            this.btnEliminarOrden.TabIndex = 14;
-            this.btnEliminarOrden.Text = "&Eliminar orden\r\nde producción";
-            this.btnEliminarOrden.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEliminarOrden.UseVisualStyleBackColor = true;
-            this.btnEliminarOrden.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnEliminarOrden.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            this.btnEliminarActual.AutoSize = true;
+            this.btnEliminarActual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnEliminarActual.FlatAppearance.BorderSize = 0;
+            this.btnEliminarActual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnEliminarActual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnEliminarActual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminarActual.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Delete_25;
+            this.btnEliminarActual.Location = new System.Drawing.Point(138, 33);
+            this.btnEliminarActual.Name = "btnEliminarActual";
+            this.btnEliminarActual.Size = new System.Drawing.Size(77, 61);
+            this.btnEliminarActual.TabIndex = 14;
+            this.btnEliminarActual.Text = "&Eliminar\r\norden actual";
+            this.btnEliminarActual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminarActual.UseVisualStyleBackColor = true;
+            this.btnEliminarActual.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnEliminarActual.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // gbDatosOrdenP
             // 
@@ -847,7 +832,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(11, 146);
+            this.label7.Location = new System.Drawing.Point(13, 146);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(78, 13);
             this.label7.TabIndex = 47;
@@ -1070,7 +1055,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(7, 266);
+            this.label33.Location = new System.Drawing.Point(9, 266);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(82, 13);
             this.label33.TabIndex = 60;
@@ -1271,9 +1256,9 @@
             // gbNavegador
             // 
             this.gbNavegador.Controls.Add(this.bnNavegador);
-            this.gbNavegador.Location = new System.Drawing.Point(281, 415);
+            this.gbNavegador.Location = new System.Drawing.Point(224, 420);
             this.gbNavegador.Name = "gbNavegador";
-            this.gbNavegador.Size = new System.Drawing.Size(200, 38);
+            this.gbNavegador.Size = new System.Drawing.Size(314, 42);
             this.gbNavegador.TabIndex = 42;
             this.gbNavegador.TabStop = false;
             // 
@@ -1285,22 +1270,24 @@
             this.bnNavegador.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bnNavegador.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.bnNavegador.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem,
+            this.bnMoveFirstItem,
             this.bnMovePreviousItem,
             this.bindingNavigatorSeparator,
             this.bindingNavigatorPositionItem,
             this.bindingNavigatorCountItem,
             this.bindingNavigatorSeparator1,
             this.bnMoveNextItem,
-            this.bindingNavigatorMoveLastItem});
-            this.bnNavegador.Location = new System.Drawing.Point(3, 10);
-            this.bnNavegador.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.bnNavegador.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.bnMoveLastItem,
+            this.toolStripSeparator2,
+            this.bnAplicar});
+            this.bnNavegador.Location = new System.Drawing.Point(3, 14);
+            this.bnNavegador.MoveFirstItem = this.bnMoveFirstItem;
+            this.bnNavegador.MoveLastItem = this.bnMoveLastItem;
             this.bnNavegador.MoveNextItem = this.bnMoveNextItem;
             this.bnNavegador.MovePreviousItem = this.bnMovePreviousItem;
             this.bnNavegador.Name = "bnNavegador";
             this.bnNavegador.PositionItem = this.bindingNavigatorPositionItem;
-            this.bnNavegador.Size = new System.Drawing.Size(194, 25);
+            this.bnNavegador.Size = new System.Drawing.Size(308, 25);
             this.bnNavegador.TabIndex = 0;
             this.bnNavegador.Text = "bindingNavigator1";
             // 
@@ -1311,14 +1298,15 @@
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
-            // bindingNavigatorMoveFirstItem
+            // bnMoveFirstItem
             // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
+            this.bnMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bnMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bnMoveFirstItem.Image")));
+            this.bnMoveFirstItem.Name = "bnMoveFirstItem";
+            this.bnMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bnMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bnMoveFirstItem.Text = "Move first";
+            this.bnMoveFirstItem.Click += new System.EventHandler(this.bnMoveFirstItem_Click);
             // 
             // bnMovePreviousItem
             // 
@@ -1328,6 +1316,7 @@
             this.bnMovePreviousItem.RightToLeftAutoMirrorImage = true;
             this.bnMovePreviousItem.Size = new System.Drawing.Size(23, 22);
             this.bnMovePreviousItem.Text = "Move previous";
+            this.bnMovePreviousItem.Click += new System.EventHandler(this.bnMovePreviousItem_Click);
             // 
             // bindingNavigatorSeparator
             // 
@@ -1356,15 +1345,18 @@
             this.bnMoveNextItem.RightToLeftAutoMirrorImage = true;
             this.bnMoveNextItem.Size = new System.Drawing.Size(23, 22);
             this.bnMoveNextItem.Text = "Move next";
+            this.bnMoveNextItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.bnMoveNextItem.Click += new System.EventHandler(this.bnMoveNextItem_Click);
             // 
-            // bindingNavigatorMoveLastItem
+            // bnMoveLastItem
             // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveLastItem.Text = "Move last";
+            this.bnMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bnMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bnMoveLastItem.Image")));
+            this.bnMoveLastItem.Name = "bnMoveLastItem";
+            this.bnMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bnMoveLastItem.Size = new System.Drawing.Size(23, 22);
+            this.bnMoveLastItem.Text = "Move last";
+            this.bnMoveLastItem.Click += new System.EventHandler(this.bnMoveLastItem_Click);
             // 
             // tsMenu
             // 
@@ -1436,6 +1428,53 @@
             this.tsmiDesbloquearColumna.Size = new System.Drawing.Size(187, 22);
             this.tsmiDesbloquearColumna.Text = "Desbloquear columna";
             this.tsmiDesbloquearColumna.Click += new System.EventHandler(this.tsmiDesbloquearColumna_Click);
+            // 
+            // btnEliminarTodas
+            // 
+            this.btnEliminarTodas.AutoSize = true;
+            this.btnEliminarTodas.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnEliminarTodas.FlatAppearance.BorderSize = 0;
+            this.btnEliminarTodas.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnEliminarTodas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnEliminarTodas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminarTodas.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Delete_25;
+            this.btnEliminarTodas.Location = new System.Drawing.Point(149, 116);
+            this.btnEliminarTodas.Name = "btnEliminarTodas";
+            this.btnEliminarTodas.Size = new System.Drawing.Size(53, 61);
+            this.btnEliminarTodas.TabIndex = 17;
+            this.btnEliminarTodas.Text = "Eli&minar\r\ntodas";
+            this.btnEliminarTodas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminarTodas.UseVisualStyleBackColor = true;
+            // 
+            // btnAplicarCambios
+            // 
+            this.btnAplicarCambios.AutoSize = true;
+            this.btnAplicarCambios.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAplicarCambios.FlatAppearance.BorderSize = 0;
+            this.btnAplicarCambios.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnAplicarCambios.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnAplicarCambios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAplicarCambios.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Apply_25;
+            this.btnAplicarCambios.Location = new System.Drawing.Point(38, 33);
+            this.btnAplicarCambios.Name = "btnAplicarCambios";
+            this.btnAplicarCambios.Size = new System.Drawing.Size(55, 61);
+            this.btnAplicarCambios.TabIndex = 18;
+            this.btnAplicarCambios.Text = "Aplicar\r\n&cambios";
+            this.btnAplicarCambios.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAplicarCambios.UseVisualStyleBackColor = true;
+            // 
+            // bnAplicar
+            // 
+            this.bnAplicar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Apply_25;
+            this.bnAplicar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bnAplicar.Name = "bnAplicar";
+            this.bnAplicar.Size = new System.Drawing.Size(100, 22);
+            this.bnAplicar.Text = "Aplicar cambios";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // frmGenerarOrdenTrabajo
             // 
@@ -1564,13 +1603,13 @@
         private System.Windows.Forms.GroupBox gbNavegador;
         private System.Windows.Forms.BindingNavigator bnNavegador;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
+        private System.Windows.Forms.ToolStripButton bnMoveFirstItem;
         private System.Windows.Forms.ToolStripButton bnMovePreviousItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
         private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
         private System.Windows.Forms.ToolStripButton bnMoveNextItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
+        private System.Windows.Forms.ToolStripButton bnMoveLastItem;
         private System.Windows.Forms.GroupBox gbOpciones;
         private System.Windows.Forms.Button btnCalcularFechas;
         private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha dtpFechaPlanear;
@@ -1579,8 +1618,7 @@
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.Button btnGuardarActual;
         private System.Windows.Forms.Button btnArbol;
-        private System.Windows.Forms.Button btnDetalleOrden;
-        private System.Windows.Forms.Button btnEliminarOrden;
+        private System.Windows.Forms.Button btnEliminarActual;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button btnBajarPrioridad;
         private System.Windows.Forms.Button btnSubirPrioridad;
@@ -1603,6 +1641,10 @@
         private System.Windows.Forms.TextBox txtHoraInicioOrdenT;
         private System.Windows.Forms.TextBox txtFechaFinOrdenT;
         private System.Windows.Forms.TextBox txtHoraFinOrdenT;
+        private System.Windows.Forms.Button btnAplicarCambios;
+        private System.Windows.Forms.Button btnEliminarTodas;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton bnAplicar;
 
     }
 }
