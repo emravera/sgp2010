@@ -22,7 +22,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
         Data.dsOrdenTrabajo dsOrdenTrabajo = new GyCAP.Data.dsOrdenTrabajo();
         Data.dsHojaRuta dsHojaRuta = new GyCAP.Data.dsHojaRuta();
-        DataView dvPlanAnual, dvMensual, dvPlanSemanal, dvOrdenProduccion, dvHojaRuta, dvEstructura, dvOrdenTrabajo;
+        DataView dvPlanAnual, dvMensual, dvPlanSemanal, dvOrdenProduccion, dvOrdenTrabajo;
         private int columnIndex = -1;
         BindingSource sourceOrdenTrabajo = new BindingSource();
         private Sistema.ControlesUsuarios.AnimadorFormulario animador = new GyCAP.UI.Sistema.ControlesUsuarios.AnimadorFormulario();
@@ -71,7 +71,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         #endregion
 
-        #region Búsqueda
+        #region Buscar
 
         private void cbAnioBuscar_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -166,36 +166,86 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         #endregion
 
-        #region Generar órdenes
+        #region Pestaña Generar
 
-        private void btnGenerar_Click(object sender, EventArgs e)
+        private void btnGenerarOrdenP_Click(object sender, EventArgs e)
         {
-            if (tvDetallePlan.SelectedNode != null && ((tipoNodo)tvDetallePlan.SelectedNode.Tag) == tipoNodo.dia)
+            if (tvDetallePlan.SelectedNode != null)
             {
-                try
+                if (((tipoNodo)tvDetallePlan.SelectedNode.Tag) == tipoNodo.dia)
                 {
-                    BLL.OrdenProduccionBLL.GenerarOrdenTrabajoDia(Convert.ToInt32(tvDetallePlan.SelectedNode.Name), dsPlanSemanal, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                    try
+                    {
+                        BLL.OrdenProduccionBLL.GenerarOrdenProduccionDia(Convert.ToInt32(tvDetallePlan.SelectedNode.Name), dsPlanSemanal, dsOrdenTrabajo);
+                        dvOrdenProduccion.Table = dsOrdenTrabajo.ORDENES_PRODUCCION;
+                        //dgvListaOrdenProduccion.SelectedRows[0].Selected = false;
+                        foreach (TreeNode nodo in tvDetallePlan.SelectedNode.Nodes)
+                        {
+                            nodo.ForeColor = Color.Black;
+                        }
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex) { MessageBox.Show(ex.Message); }
+                    catch (Entidades.Excepciones.OrdenTrabajoException ex) { MessageBox.Show(ex.Message); }
                 }
-                catch (Entidades.Excepciones.BaseDeDatosException ex) { MessageBox.Show(ex.Message); }
-                catch (Entidades.Excepciones.OrdenTrabajoException ex) { MessageBox.Show(ex.Message); }
-
-                dvOrdenProduccion.Table = dsOrdenTrabajo.ORDENES_PRODUCCION;
-                dvOrdenTrabajo.Table = dsOrdenTrabajo.ORDENES_TRABAJO;
-                dgvListaOrdenProduccion.SelectedRows[0].Selected = false;
-                foreach (TreeNode nodo in tvDetallePlan.SelectedNode.Nodes)
+                else if (((tipoNodo)tvDetallePlan.SelectedNode.Tag) == tipoNodo.semana)
                 {
-                    nodo.ForeColor = Color.Black;
+                    try
+                    {
+                        BLL.OrdenProduccionBLL.GenerarOrdenProduccionSemana(Convert.ToInt32(tvDetallePlan.SelectedNode.Name), dsPlanSemanal, dsOrdenTrabajo);
+                        dvOrdenProduccion.Table = dsOrdenTrabajo.ORDENES_PRODUCCION;
+                        //dgvListaOrdenProduccion.SelectedRows[0].Selected = false;
+                        foreach (TreeNode nodo in tvDetallePlan.SelectedNode.Nodes)
+                        {
+                            nodo.ForeColor = Color.Black;
+                        }
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex) { MessageBox.Show(ex.Message); }
+                    catch (Entidades.Excepciones.OrdenTrabajoException ex) { MessageBox.Show(ex.Message); }
+                }
+                else
+                {
+                    MessageBox.Show("Debe seleccionar la semana o un día.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un día de la Semana.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debe seleccionar la semana o un día.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnSubirPrioridad_Click(object sender, EventArgs e)
+        {
+            if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
+            {
+                int codOrdenP = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"].ToString());
+                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).ORDP_PRIORIDAD += 1;
+            }
+        }
+
+        private void btnBajarPrioridad_Click(object sender, EventArgs e)
+        {
+            if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
+            {
+                int codOrdenP = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"].ToString());
+                if (dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).ORDP_PRIORIDAD > 0)
+                {
+                    dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).ORDP_PRIORIDAD -= 1;
+                }
+            }
+        }
+
+        private void btnAsignarCantidad_Click(object sender, EventArgs e)
+        {
+            if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
+            {
+                int codOrdenP = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"].ToString());
+                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).ORDP_CANTIDADESTIMADA = nudCantidadOrdenP.Value;
             }
         }
 
         #endregion
 
-        #region Datos
+        #region Pestaña Orden Produccion
 
         private void btnDetalleOrden_Click(object sender, EventArgs e)
         {
@@ -203,10 +253,44 @@ namespace GyCAP.UI.PlanificacionProduccion
             else { MessageBox.Show("Debe seleccionar una Orden de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
         }
 
-        private void btnVolver_Click(object sender, EventArgs e)
+        private void btnCalcularFechas_Click(object sender, EventArgs e)
         {
-            tcOrdenTrabajo.SelectedTab = tpBuscar;
+            if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
+            {
+                if (cbModoFecha.GetSelectedIndex() != -1 && !dtpFechaPlanear.EsFechaNull())
+                {
+                    int codigoP = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"].ToString());
+                    tvDependenciaSimple = frmArbolOrdenesTrabajo.Instancia.GetArbolDependenciaSimple();
+                    tvDependenciaCompleta = frmArbolOrdenesTrabajo.Instancia.GetArbolDependenciaCompleta();
+                    tvOrdenesYEstructura = frmArbolOrdenesTrabajo.Instancia.GetArbolOrdenesYEstructura();
+                    BLL.OrdenProduccionBLL.GenerarArbolOrdenes(codigoP, tvDependenciaSimple, tvDependenciaCompleta, tvOrdenesYEstructura, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                    if (cbModoFecha.GetSelectedValueInt() == 0)
+                    {
+                        //Planeamos hacia adelante
+                        DateTime fecha = DateTime.Parse(DateTime.Parse(dtpFechaPlanear.GetFecha().ToString()).ToShortDateString());
+                        BLL.OrdenProduccionBLL.PlanearFechaHaciaDelante(codigoP, fecha, tvDependenciaCompleta, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                        dvOrdenTrabajo.Table = dsOrdenTrabajo.ORDENES_TRABAJO;
+                        sourceOrdenTrabajo.DataSource = dvOrdenTrabajo;
+                        CompletarDatosOrdenTrabajo();
+                    }
+                    else
+                    {
+                        //Planeamos hacia atrás
+                        DateTime fecha = DateTime.Parse(DateTime.Parse(dtpFechaPlanear.GetFecha().ToString()).ToShortDateString());
+                        BLL.OrdenProduccionBLL.PlanearFechaHaciaAtras(codigoP, fecha, tvDependenciaCompleta, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                        dvOrdenTrabajo.Table = dsOrdenTrabajo.ORDENES_TRABAJO;
+                        sourceOrdenTrabajo.DataSource = dvOrdenTrabajo;
+                        CompletarDatosOrdenTrabajo();
+                    }
+                }
+                else { MessageBox.Show("Debe seleccionar un modo de planeamiento y una fecha.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+            }
+            else { MessageBox.Show("Debe seleccionar una Orden de Producción de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
         }
+
+        #endregion
+
+        #region Pestaña orden trabajo
 
         private void CompletarDatosOrdenTrabajo()
         {
@@ -517,47 +601,12 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         #endregion
 
-        private void btnCalcularFechas_Click(object sender, EventArgs e)
-        {
-            if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
-            {
-                if (cbModoFecha.GetSelectedIndex() != -1 && !dtpFechaPlanear.EsFechaNull())
-                {
-                    int codigoP = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"].ToString());
-                    tvDependenciaSimple = frmArbolOrdenesTrabajo.Instancia.GetArbolDependenciaSimple();
-                    tvDependenciaCompleta = frmArbolOrdenesTrabajo.Instancia.GetArbolDependenciaCompleta();
-                    tvOrdenesYEstructura = frmArbolOrdenesTrabajo.Instancia.GetArbolOrdenesYEstructura();
-                    BLL.OrdenProduccionBLL.GenerarArbolOrdenes(codigoP, tvDependenciaSimple, tvDependenciaCompleta, tvOrdenesYEstructura, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
-                    if (cbModoFecha.GetSelectedValueInt() == 0)
-                    {
-                        //Planeamos hacia adelante
-                        DateTime fecha = DateTime.Parse(DateTime.Parse(dtpFechaPlanear.GetFecha().ToString()).ToShortDateString());
-                        BLL.OrdenProduccionBLL.PlanearFechaHaciaDelante(codigoP, fecha, tvDependenciaCompleta, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
-                        dvOrdenTrabajo.Table = dsOrdenTrabajo.ORDENES_TRABAJO;
-                        sourceOrdenTrabajo.DataSource = dvOrdenTrabajo;
-                        CompletarDatosOrdenTrabajo();
-                    }
-                    else
-                    {
-                        //Planeamos hacia atrás
-                        DateTime fecha = DateTime.Parse(DateTime.Parse(dtpFechaPlanear.GetFecha().ToString()).ToShortDateString());
-                        BLL.OrdenProduccionBLL.PlanearFechaHaciaAtras(codigoP, fecha, tvDependenciaCompleta, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
-                        dvOrdenTrabajo.Table = dsOrdenTrabajo.ORDENES_TRABAJO;
-                        sourceOrdenTrabajo.DataSource = dvOrdenTrabajo;
-                        CompletarDatosOrdenTrabajo();
-                    }
-                }
-                else { MessageBox.Show("Debe seleccionar un modo de planeamiento y una fecha.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
-            }
-            else { MessageBox.Show("Debe seleccionar una Orden de Producción de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
-        }
-                    
+        
+
         #endregion
 
-        private void btnGuardar_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Las órdenes fueron guardadas correctamente.", "Información: Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+        
+
 
     }
 }
