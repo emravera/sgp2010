@@ -13,7 +13,7 @@ namespace GyCAP.DAL
         //Metodo de Busqueda
         public static void ObtenerDetalle(DataTable dtDetalle, int idCodigo)
         {
-            string sql = @"SELECT dpsem_codigo, coc_codigo, dpsem_cantidadestimada, dpsem_cantidadreal, diapsem_codigo, dpsem_estado 
+            string sql = @"SELECT dpsem_codigo, coc_codigo, dpsem_cantidadestimada, dpsem_cantidadreal, diapsem_codigo, dpsem_estado, dped_codigo  
                         FROM DETALLE_PLANES_SEMANALES WHERE diapsem_codigo=@p0";
 
             object[] parametros = { idCodigo };
