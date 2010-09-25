@@ -145,7 +145,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cmsGrillaOrdenesTrabajo = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsGrillaOrdenesProduccion = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiBloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDesbloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
             this.tcOrdenTrabajo.SuspendLayout();
@@ -168,7 +168,7 @@
             this.bnNavegador.SuspendLayout();
             this.tsMenu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.cmsGrillaOrdenesTrabajo.SuspendLayout();
+            this.cmsGrillaOrdenesProduccion.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcOrdenTrabajo
@@ -298,6 +298,7 @@
             // 
             // tvDetallePlan
             // 
+            this.tvDetallePlan.CheckBoxes = true;
             this.tvDetallePlan.Dock = System.Windows.Forms.DockStyle.Left;
             this.tvDetallePlan.Location = new System.Drawing.Point(3, 17);
             this.tvDetallePlan.Name = "tvDetallePlan";
@@ -330,6 +331,7 @@
             this.btnGenerarOrdenT.Text = "Generar órdenes &trabajo";
             this.btnGenerarOrdenT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnGenerarOrdenT.UseVisualStyleBackColor = true;
+            this.btnGenerarOrdenT.Click += new System.EventHandler(this.btnGenerarOrdenT_Click);
             this.btnGenerarOrdenT.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnGenerarOrdenT.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
@@ -447,14 +449,13 @@
             this.dgvListaOrdenProduccion.Location = new System.Drawing.Point(3, 17);
             this.dgvListaOrdenProduccion.MultiSelect = false;
             this.dgvListaOrdenProduccion.Name = "dgvListaOrdenProduccion";
-            this.dgvListaOrdenProduccion.ReadOnly = true;
             this.dgvListaOrdenProduccion.RowHeadersVisible = false;
             this.dgvListaOrdenProduccion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListaOrdenProduccion.Size = new System.Drawing.Size(574, 209);
             this.dgvListaOrdenProduccion.TabIndex = 8;
-            this.dgvListaOrdenProduccion.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListaOrdenTrabajo_RowEnter);
-            this.dgvListaOrdenProduccion.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvListaOrdenTrabajo_ColumnHeaderMouseClick);
-            this.dgvListaOrdenProduccion.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvListaOrdenTrabajo_CellFormatting);
+            this.dgvListaOrdenProduccion.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListaOrdenProduccion_RowEnter);
+            this.dgvListaOrdenProduccion.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvListaOrdenProduccion_ColumnHeaderMouseClick);
+            this.dgvListaOrdenProduccion.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvListaOrdenProduccion_CellFormatting);
             // 
             // groupBox2
             // 
@@ -1281,7 +1282,6 @@
             this.label3.Size = new System.Drawing.Size(60, 13);
             this.label3.TabIndex = 3;
             this.label3.Text = "Hora inicio:";
-            this.label3.Visible = false;
             // 
             // label4
             // 
@@ -1291,7 +1291,6 @@
             this.label4.Size = new System.Drawing.Size(89, 13);
             this.label4.TabIndex = 4;
             this.label4.Text = "Hora finalización:";
-            this.label4.Visible = false;
             // 
             // gbNavegador
             // 
@@ -1457,14 +1456,14 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(794, 572);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
-            // cmsGrillaOrdenesTrabajo
+            // cmsGrillaOrdenesProduccion
             // 
-            this.cmsGrillaOrdenesTrabajo.AllowMerge = false;
-            this.cmsGrillaOrdenesTrabajo.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsGrillaOrdenesProduccion.AllowMerge = false;
+            this.cmsGrillaOrdenesProduccion.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiBloquearColumna,
             this.tsmiDesbloquearColumna});
-            this.cmsGrillaOrdenesTrabajo.Name = "cmsGrillaOrdenesTrabajo";
-            this.cmsGrillaOrdenesTrabajo.Size = new System.Drawing.Size(188, 48);
+            this.cmsGrillaOrdenesProduccion.Name = "cmsGrillaOrdenesTrabajo";
+            this.cmsGrillaOrdenesProduccion.Size = new System.Drawing.Size(188, 48);
             // 
             // tsmiBloquearColumna
             // 
@@ -1526,7 +1525,7 @@
             this.tsMenu.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.cmsGrillaOrdenesTrabajo.ResumeLayout(false);
+            this.cmsGrillaOrdenesProduccion.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1575,7 +1574,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ContextMenuStrip cmsGrillaOrdenesTrabajo;
+        private System.Windows.Forms.ContextMenuStrip cmsGrillaOrdenesProduccion;
         private System.Windows.Forms.ToolStripMenuItem tsmiBloquearColumna;
         private System.Windows.Forms.ToolStripMenuItem tsmiDesbloquearColumna;
         private System.Windows.Forms.TabPage tpOrdenTrabajo;
