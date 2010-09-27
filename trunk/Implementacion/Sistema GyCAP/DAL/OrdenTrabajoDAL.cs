@@ -32,14 +32,12 @@ namespace GyCAP.DAL
                          ,[cto_codigo]
                          ,[opr_numero]
                          ,[ordt_observaciones]
-                         ,[ordt_ordenprecendente]
                          ,[ordt_ordensiguiente]
                          ,[ordt_nivel])
                          VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, 
-                                 @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23) SELECT @@Identity";
+                                 @p16, @p17, @p18, @p19, @p20, @p21) SELECT @@Identity";
 
-            object precedente = DBNull.Value, siguiente = DBNull.Value;
-            if (!row.IsORDT_ORDENPRECEDENTENull()) { precedente = row.ORDT_ORDENPRECEDENTE; }
+            object siguiente = DBNull.Value;
             if (!row.IsORDT_ORDENSIGUIENTENull()) { siguiente = row.ORDT_ORDENSIGUIENTE; }
             object[] valoresParametros = { row.ORDT_CODIGO,
                                              row.ORDP_NUMERO,
@@ -61,11 +59,9 @@ namespace GyCAP.DAL
                                              row.CTO_CODIGO,
                                              row.OPR_NUMERO,
                                              row.ORDT_OBSERVACIONES,
-                                             precedente,
                                              siguiente,
                                              row.ORDT_NIVEL };
 
-            row.ORDT_NUMERO = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
             return Convert.ToInt32(row.ORDT_NUMERO);
         }     
 

@@ -25,5 +25,18 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        public static void ActualizarEstado(int codigoDetalle, int codigoEstado)
+        {
+            string sql = @"UPDATE DETALLE_PLANES_SEMANALES SET dpsem_estado = @p0 WHERE dpsem_codigo = @p1";
+
+            object[] parametros = { codigoEstado, codigoDetalle };
+
+            try
+            {
+                DB.executeNonQuery(sql, parametros, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
     }
 }

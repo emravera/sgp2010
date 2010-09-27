@@ -17,5 +17,10 @@ namespace GyCAP.BLL
         {
             DAL.DetallePlanSemanalDAL.ObtenerDetalle(dtDetalle,idPlan);
         }
+
+        public static void ActualizarEstado(int codigoDetalle, int codigoEstado)
+        {
+            DAL.DetallePlanSemanalDAL.ActualizarEstado(codigoDetalle, codigoEstado);
+        }
     }
 }

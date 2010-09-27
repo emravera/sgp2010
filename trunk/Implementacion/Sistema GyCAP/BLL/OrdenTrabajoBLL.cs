@@ -32,7 +32,7 @@ namespace GyCAP.BLL
         /// <param name="dsOrdenTrabajo"></param>
         /// <param name="dsEstructura"></param>
         /// <param name="dsHojaRuta"></param>
-        public static void GenerarOrdenesTrabajo(int codigoOrdenProduccion, Data.dsPlanSemanal dsPlanSemanal, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
+        public static void GenerarOrdenesTrabajo(int codigoOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
         {
             //Si la orden de producción tiene órdenes de trabajo generadas las eliminamos
             foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow row in dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).GetORDENES_TRABAJORows())
@@ -97,7 +97,7 @@ namespace GyCAP.BLL
                         Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTCxE = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                         rowOTCxE.BeginEdit();
                         rowOTCxE.ORDT_NUMERO = codigoOrdenT--;
-                        rowOTCxE.ORDT_CODIGO = "código detalle";
+                        rowOTCxE.ORDT_CODIGO = "OTA-" + (rowOTCxE.ORDT_NUMERO * -1).ToString();
                         rowOTCxE.ORDT_ORIGEN = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_ORIGEN + " / " + rowCxE.CONJUNTOSRow.CONJ_CODIGOPARTE;
                         rowOTCxE.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                         rowOTCxE.ORDP_NUMERO = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_NUMERO;
@@ -108,8 +108,6 @@ namespace GyCAP.BLL
                         rowOTCxE.ORDT_CANTIDADESTIMADA = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_CANTIDADESTIMADA * rowCxE.CXE_CANTIDAD;
                         rowOTCxE.CTO_CODIGO = rowHojaCxE.CTO_CODIGO;
                         rowOTCxE.OPR_NUMERO = rowHojaCxE.OPR_NUMERO;
-                        rowOTCxE.ORDT_OBSERVACIONES = string.Empty;
-                        rowOTCxE.ORDT_ORDENPRECEDENTE = 0;
                         if (ordenSiguiente == 0) { rowOTCxE.SetORDT_ORDENSIGUIENTENull(); }
                         else { rowOTCxE.ORDT_ORDENSIGUIENTE = ordenSiguiente; }
                         rowOTCxE.ORDT_NIVEL = 0;
@@ -131,7 +129,7 @@ namespace GyCAP.BLL
                             Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTSCxC = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                             rowOTSCxC.BeginEdit();
                             rowOTSCxC.ORDT_NUMERO = codigoOrdenT--;
-                            rowOTSCxC.ORDT_CODIGO = "código detalle";
+                            rowOTSCxC.ORDT_CODIGO = "OTA-" + (rowOTSCxC.ORDT_NUMERO * -1).ToString();
                             rowOTSCxC.ORDT_ORIGEN = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(ultimaOrdenConjunto).ORDT_ORIGEN + " / " + rowSCxC.SUBCONJUNTOSRow.SCONJ_CODIGOPARTE;
                             rowOTSCxC.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                             rowOTSCxC.ORDP_NUMERO = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_NUMERO;
@@ -144,7 +142,6 @@ namespace GyCAP.BLL
                             rowOTSCxC.OPR_NUMERO = rowHojaSCxC.OPR_NUMERO;
                             if (ordenSiguiente == 0) { rowOTSCxC.SetORDT_ORDENSIGUIENTENull(); }
                             else { rowOTSCxC.ORDT_ORDENSIGUIENTE = ordenSiguiente; }
-                            rowOTSCxC.ORDT_ORDENPRECEDENTE = 0;
                             rowOTSCxC.ORDT_NIVEL = nivel;
                             rowOTSCxC.EndEdit();
                             dsOrdenTrabajo.ORDENES_TRABAJO.AddORDENES_TRABAJORow(rowOTSCxC);
@@ -166,7 +163,7 @@ namespace GyCAP.BLL
                                 Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTPxSC = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                                 rowOTPxSC.BeginEdit();
                                 rowOTPxSC.ORDT_NUMERO = codigoOrdenT--;
-                                rowOTPxSC.ORDT_CODIGO = "código detalle";
+                                rowOTPxSC.ORDT_CODIGO = "OTA-" + (rowOTPxSC.ORDT_NUMERO * -1).ToString();
                                 rowOTPxSC.ORDT_ORIGEN = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(ultimaOrdenSubconjunto).ORDT_ORIGEN + " / " + rowPxSC.PIEZASRow.PZA_CODIGOPARTE;
                                 rowOTPxSC.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                                 rowOTPxSC.ORDP_NUMERO = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_NUMERO;
@@ -179,7 +176,6 @@ namespace GyCAP.BLL
                                 rowOTPxSC.OPR_NUMERO = rowHojaPxSC.OPR_NUMERO;
                                 if (ordenSiguiente == 0) { rowOTPxSC.SetORDT_ORDENSIGUIENTENull(); }
                                 else { rowOTPxSC.ORDT_ORDENSIGUIENTE = ordenSiguiente; }
-                                rowOTPxSC.ORDT_ORDENPRECEDENTE = 0;
                                 rowOTPxSC.ORDT_NIVEL = nivel;
                                 rowOTPxSC.EndEdit();
                                 dsOrdenTrabajo.ORDENES_TRABAJO.AddORDENES_TRABAJORow(rowOTPxSC);
@@ -202,7 +198,7 @@ namespace GyCAP.BLL
                             Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTPxC = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                             rowOTPxC.BeginEdit();
                             rowOTPxC.ORDT_NUMERO = codigoOrdenT--;
-                            rowOTPxC.ORDT_CODIGO = "código detalle";
+                            rowOTPxC.ORDT_CODIGO = "OTA-" + (rowOTPxC.ORDT_NUMERO * -1).ToString();
                             rowOTPxC.ORDT_ORIGEN = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(ultimaOrdenConjunto).ORDT_ORIGEN + " / " + rowPxC.PIEZASRow.PZA_CODIGOPARTE;
                             rowOTPxC.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                             rowOTPxC.ORDP_NUMERO = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_NUMERO;
@@ -215,7 +211,6 @@ namespace GyCAP.BLL
                             rowOTPxC.OPR_NUMERO = rowHojaPxC.OPR_NUMERO;
                             if (ordenSiguiente == 0) { rowOTPxC.SetORDT_ORDENSIGUIENTENull(); }
                             else { rowOTPxC.ORDT_ORDENSIGUIENTE = ordenSiguiente; }
-                            rowOTPxC.ORDT_ORDENPRECEDENTE = 0;
                             rowOTPxC.ORDT_NIVEL = nivel;
                             rowOTPxC.EndEdit();
                             dsOrdenTrabajo.ORDENES_TRABAJO.AddORDENES_TRABAJORow(rowOTPxC);
@@ -236,7 +231,7 @@ namespace GyCAP.BLL
                         Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTPxE = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                         rowOTPxE.BeginEdit();
                         rowOTPxE.ORDT_NUMERO = codigoOrdenT--;
-                        rowOTPxE.ORDT_CODIGO = "código detalle";
+                        rowOTPxE.ORDT_CODIGO = "OTA-" + (rowOTPxE.ORDT_NUMERO * -1).ToString();
                         rowOTPxE.ORDT_ORIGEN = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_ORIGEN + " / " + rowPxE.PIEZASRow.PZA_CODIGOPARTE;
                         rowOTPxE.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                         rowOTPxE.ORDP_NUMERO = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_NUMERO;
@@ -249,7 +244,6 @@ namespace GyCAP.BLL
                         rowOTPxE.OPR_NUMERO = rowHojaPxE.OPR_NUMERO;
                         if (ordenSiguiente == 0) { rowOTPxE.SetORDT_ORDENSIGUIENTENull(); }
                         else { rowOTPxE.ORDT_ORDENSIGUIENTE = ordenSiguiente; }
-                        rowOTPxE.ORDT_ORDENPRECEDENTE = 0;
                         rowOTPxE.ORDT_NIVEL = 0;
                         rowOTPxE.EndEdit();
                         dsOrdenTrabajo.ORDENES_TRABAJO.AddORDENES_TRABAJORow(rowOTPxE);

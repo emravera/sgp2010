@@ -158,33 +158,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
         }
 
-        private void dgvListaOrdenProduccion_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            int codigo = Convert.ToInt32(dvOrdenProduccion[e.RowIndex]["ordp_numero"]);
-            dvOrdenTrabajo.RowFilter = "ordp_numero = " + codigo;
-            sourceOrdenTrabajo.DataSource = dvOrdenTrabajo;
-            bnNavegador.BindingSource = sourceOrdenTrabajo;
-            txtNumeroOrdenP.Text = (codigo * -1).ToString();
-            txtCodigoOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).ORDP_CODIGO;
-            txtOrigenOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).ORDP_ORIGEN;
-            txtEstadoOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).ESTADO_ORDENES_TRABAJORow.EORD_NOMBRE;
-            txtFechaAltaOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).ORDP_FECHAALTA.ToShortDateString();
-            int codigoPlan = Convert.ToInt32(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).DPSEM_CODIGO);
-            txtCocinaOrdenP.Text = dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(codigoPlan).COCINASRow.COC_CODIGO_PRODUCTO;
-            txtCantidadOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).ORDP_CANTIDADESTIMADA.ToString();
-            if (!dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).IsORDP_FECHAINICIOESTIMADANull())
-                { txtFechaInicioOrdenP.Text =dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).ORDP_FECHAINICIOESTIMADA.ToShortDateString(); }
-
-            if (!dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).IsORDP_FECHAFINESTIMADANull())
-                { txtFechaInicioOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).ORDP_FECHAFINESTIMADA.ToShortDateString(); }
-
-            txtObservacionesOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).ORDP_OBSERVACIONES;
-            CompletarDatosOrdenTrabajo();
-        }
-
         #endregion
 
-        #region Pestaña Generar
+        #region Pestaña Generar Automaticamente
 
         private void btnGenerarOrdenP_Click(object sender, EventArgs e)
         {
@@ -256,21 +232,41 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
         }
 
+        private void btnGenerarOrdenT_Click(object sender, EventArgs e)
+        {
+            int cantidad = 0;
+            foreach (DataGridViewRow fila in dgvListaOrdenProduccion.Rows)
+            {
+                DataGridViewCheckBoxCell cellSelecion = fila.Cells[0] as DataGridViewCheckBoxCell;
+                if (Convert.ToBoolean(cellSelecion.FormattedValue))
+                {
+                    int codigoOrdenP = Convert.ToInt32(dvOrdenProduccion[fila.Index]["ordp_numero"].ToString());
+                    BLL.OrdenTrabajoBLL.GenerarOrdenesTrabajo(codigoOrdenP, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                    cantidad++;
+                }
+            }
+
+            if (cantidad == 0) { MessageBox.Show("Debe seleccionar una o más Órdenes de Producción.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+        }
+
         #endregion
 
-        #region Pestaña Orden Produccion
+        #region Pestaña Generar Manualmente
 
-        private void btnDetalleOrden_Click(object sender, EventArgs e)
-        {
-            if (dgvListaOrdenProduccion.SelectedRows.Count > 0) { SetInterface(estadoUI.consultar); }
-            else { MessageBox.Show("Debe seleccionar una Orden de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
-        }
+        #endregion
+
+        #region Pestaña Orden Producción
 
         private void btnCalcularFechas_Click(object sender, EventArgs e)
         {
             if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
             {
-                if (cbModoFecha.GetSelectedIndex() != -1 && !dtpFechaPlanear.EsFechaNull())
+                string mensaje = string.Empty;
+                if (cbModoFecha.GetSelectedIndex() == -1) { mensaje = "- Modo de planeación"; }
+                if (dtpFechaPlanear.EsFechaNull()) { mensaje = "- Modo de inicio"; }
+                if (cbModoInicio.GetSelectedIndex() == -1) { mensaje = "- Modo de stock"; }
+                if (cbModoStock.GetSelectedIndex() != -1) { mensaje = "- Fecha"; }
+                if (string.IsNullOrEmpty(mensaje))
                 {
                     int codigoP = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"].ToString());
                     tvDependenciaSimple = frmArbolOrdenesTrabajo.Instancia.GetArbolDependenciaSimple();
@@ -296,56 +292,152 @@ namespace GyCAP.UI.PlanificacionProduccion
                         CompletarDatosOrdenTrabajo();
                     }
                 }
-                else { MessageBox.Show("Debe seleccionar un modo de planeamiento y una fecha.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+                else { MessageBox.Show("Debe seleccionar:" + mensaje, "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
             }
             else { MessageBox.Show("Debe seleccionar una Orden de Producción de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
         }
 
-        #endregion
-
-        #region Pestaña orden trabajo
-
-        private void CompletarDatosOrdenTrabajo()
+        private void btnAplicarCambios_Click(object sender, EventArgs e)
         {
-            if (sourceOrdenTrabajo.Count > 0)
+            if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
             {
-                Data.dsOrdenTrabajo.ORDENES_TRABAJORow row = (Data.dsOrdenTrabajo.ORDENES_TRABAJORow)(sourceOrdenTrabajo.Current as DataRowView).Row;
-                txtNumeroOrdenT.Text = (row.ORDT_NUMERO * -1).ToString();
-                txtCodigoOrdenT.Text = row.ORDT_CODIGO;
-                txtOrigenOrdenT.Text = row.ORDT_ORIGEN;
-                if (row.PAR_TIPO == BLL.OrdenProduccionBLL.parteTipoConjunto) 
-                { 
-                    txtTipoParteOrdenT.Text = "Conjunto";
-                    txtParteOrdenT.Text = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).CONJ_CODIGOPARTE;
-                    int hoja = Convert.ToInt32(dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).HR_CODIGO);
-                    txtHojaRuta.Text = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(hoja).HR_NOMBRE;
-                }
-                else if (row.PAR_TIPO == BLL.OrdenProduccionBLL.parteTipoSubconjunto) 
-                { 
-                    txtTipoParteOrdenT.Text = "Subconjunto";
-                    txtParteOrdenT.Text = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).SCONJ_CODIGOPARTE;
-                    int hoja = Convert.ToInt32(dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).HR_CODIGO);
-                    txtHojaRuta.Text = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(hoja).HR_NOMBRE;
-                }
-                else if (row.PAR_TIPO == BLL.OrdenProduccionBLL.parteTipoPieza)
-                { 
-                    txtTipoParteOrdenT.Text = "Pieza";
-                    txtParteOrdenT.Text = dsEstructura.PIEZAS.FindByPZA_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).PZA_CODIGOPARTE;
-                    int hoja = Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).HR_CODIGO);
-                    txtHojaRuta.Text = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(hoja).HR_NOMBRE;
-                }
-                txtCantidadOrdenT.Text = row.ORDT_CANTIDADESTIMADA.ToString();
-                txtCentroTrabajo.Text = dsHojaRuta.CENTROS_TRABAJOS.FindByCTO_CODIGO(Convert.ToInt32(row.CTO_CODIGO)).CTO_NOMBRE;
-                txtOperacion.Text = dsHojaRuta.OPERACIONES.FindByOPR_NUMERO(Convert.ToInt32(row.OPR_NUMERO)).OPR_NOMBRE;
-                txtObservacionesOrdenT.Text = row.ORDT_OBSERVACIONES;
-
-                if (!row.IsORDT_FECHAINICIOESTIMADANull()) { txtFechaInicioOrdenT.Text = row.ORDT_FECHAINICIOESTIMADA.ToShortDateString(); }
-                if (!row.IsORDT_HORAFINESTIMADANull()) { txtFechaFinOrdenT.Text = row.ORDT_FECHAFINESTIMADA.ToShortDateString(); }
-                if (!row.IsORDT_HORAINICIOESTIMADANull()) { txtHoraInicioOrdenT.Text = Sistema.FuncionesAuxiliares.DecimalHourToString(row.ORDT_HORAINICIOESTIMADA); }
-                if (!row.IsORDT_HORAFINESTIMADANull()) { txtHoraFinOrdenT.Text = Sistema.FuncionesAuxiliares.DecimalHourToString(row.ORDT_HORAFINESTIMADA); }
+                //ver si no existe en la DB, en ese caso actualizar - gonzalo
+                int codOrdenP = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"].ToString());
+                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).ORDP_CODIGO = txtCodigoOrdenP.Text;
+                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).ORDP_ORIGEN = txtOrigenOrdenP.Text;
+                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).ORDP_OBSERVACIONES = txtObservacionesOrdenP.Text;
+                //MessageBox.Show("Debe seleccionar una orden de producción de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
+        private void btnEliminarActual_Click(object sender, EventArgs e)
+        {
+            if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
+            {
+                int codOrdenP = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"].ToString());
+                bool eliminar = true;
+                if (codOrdenP > 0)
+                {
+                    try
+                    {
+                        BLL.OrdenProduccionBLL.Eliminar(codOrdenP);
+                        BLL.DetallePlanSemanalBLL.ActualizarEstado(codOrdenP, BLL.DetallePlanSemanalBLL.estadoGenerado);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        eliminar = false;
+                        MessageBox.Show(ex.Message, "Error: Generar Orden de Producción - Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+                if (eliminar)
+                {
+                    foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOT in dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).GetORDENES_TRABAJORows())
+                    {
+                        rowOT.Delete();
+                    }
+                    dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).DPSEM_CODIGO).DPSEM_ESTADO = BLL.DetallePlanSemanalBLL.estadoGenerado;
+                    tvDetallePlan.Nodes.Find(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).DPSEM_CODIGO.ToString(), true)[0].ForeColor = Color.Red;
+                    dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).Delete();
+                    MessageBox.Show("La Orden de Producción ha sido eliminada correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimpiarControles();
+                }
+            }
+        }
+
+        private void btnEliminarTodas_Click(object sender, EventArgs e)
+        {
+            bool eliminar;
+            string mensaje = string.Empty;
+            IList<decimal> opeliminar = new List<decimal>();
+            foreach (Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow rowOP in dsOrdenTrabajo.ORDENES_PRODUCCION.Rows)
+            {
+                eliminar = true;
+                if (rowOP.ORDP_NUMERO > 0)
+                {
+                    try
+                    {
+                        BLL.OrdenProduccionBLL.Eliminar(Convert.ToInt32(rowOP.ORDP_NUMERO));
+                        BLL.DetallePlanSemanalBLL.ActualizarEstado(Convert.ToInt32(rowOP.DPSEM_CODIGO), BLL.DetallePlanSemanalBLL.estadoGenerado);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException)
+                    {
+                        eliminar = false;
+                        mensaje += "\n- " + rowOP.ORDP_CODIGO;
+                    }
+                }
+
+                if (eliminar)
+                {
+                    foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOT in rowOP.GetORDENES_TRABAJORows())
+                    {
+                        rowOT.Delete();
+                    }
+                    dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(rowOP.DPSEM_CODIGO).DPSEM_ESTADO = BLL.DetallePlanSemanalBLL.estadoGenerado;
+                    tvDetallePlan.Nodes.Find(rowOP.DPSEM_CODIGO.ToString(), true)[0].ForeColor = Color.Red;
+                    opeliminar.Add(rowOP.ORDP_NUMERO);
+                }
+            }
+            foreach (decimal codigo in opeliminar)
+            {
+                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).Delete();
+            }
+            
+            if (string.IsNullOrEmpty(mensaje))
+            {
+                MessageBox.Show("Las Órdenes de Producción se eliminaron correctamente.", "Generar Orden de Producción - Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LimpiarControles();
+            }
+            else
+            {
+                MessageBox.Show("Error al eliminar las siguientes Órdenes de Producción:" + mensaje, "Generar Orden de Producción - Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LimpiarControles();
+            }
+        }
+
+        private void btnGuardarActual_Click(object sender, EventArgs e)
+        {
+            if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
+            {
+                int codOrdenP = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"].ToString());
+                GuardarOrden(codOrdenP);
+            }
+        }
+
+        private void btnGuardarTodo_Click(object sender, EventArgs e)
+        {
+            foreach (Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow row in dsOrdenTrabajo.ORDENES_PRODUCCION.Rows)
+            {
+                GuardarOrden(Convert.ToInt32(row.ORDP_NUMERO));
+            }
+        }
+
+        private void GuardarOrden(int numeroOrdenProduccion)
+        {
+            //Verificar si no estan ya en la DB, en ese caso actualizar - gonzalo
+            if (!dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).IsORDP_FECHAINICIOESTIMADANull())
+            {
+                try
+                {
+                    BLL.OrdenProduccionBLL.Insertar(numeroOrdenProduccion, dsOrdenTrabajo);
+                    BLL.DetallePlanSemanalBLL.ActualizarEstado(Convert.ToInt32(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).DPSEM_CODIGO), BLL.DetallePlanSemanalBLL.estadoConOrden);
+                    dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).DPSEM_CODIGO).DPSEM_ESTADO = BLL.DetallePlanSemanalBLL.estadoConOrden;
+                }
+                catch (Entidades.Excepciones.BaseDeDatosException ex)
+                {
+                    MessageBox.Show(ex.Message, "Error: Generar Orden de Producción - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe generar las fechas de las órdenes a guardar.", "Error: Generar Orden de Producción - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #endregion
+
+        #region Pestaña Orden Trabajo
+        
         private void bnMoveNextItem_Click(object sender, EventArgs e)
         {
             CompletarDatosOrdenTrabajo();
@@ -386,6 +478,14 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
         }
 
+        private void bnAplicar_Click(object sender, EventArgs e)
+        {
+            Data.dsOrdenTrabajo.ORDENES_TRABAJORow row = (Data.dsOrdenTrabajo.ORDENES_TRABAJORow)(sourceOrdenTrabajo.Current as DataRowView).Row;
+            row.ORDT_CODIGO = txtCodigoOrdenT.Text;
+            row.ORDT_ORIGEN = txtOrigenOrdenT.Text;
+            row.ORDT_OBSERVACIONES = txtObservacionesOrdenT.Text;
+        }
+
         #endregion
 
         #region Servicios
@@ -400,7 +500,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     estadoInterface = estadoUI.nuevoAutomatico;
                     dtpFechaPlanear.SetFechaNull();
                     
-                    tcOrdenTrabajo.SelectedTab = tpBuscar;
+                    tcOrdenTrabajo.SelectedTab = tpAutomatico;
                     break;
                 case estadoUI.nuevoManual:
                     
@@ -426,6 +526,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
         }
 
+        #region InicializarDatos
         private void InicializarDatos()
         {
             //Grilla ordenes trabajo
@@ -516,14 +617,16 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             cbAnioBuscar.SetDatos(dvPlanAnual, "PAN_CODIGO", "PAN_ANIO", "Seleccione", false);
         }
+        #endregion
 
+        #region Cargar plan semanal en treeview
         private void CargarPlanSemanal(int codigoSemana)
         {
             tvDetallePlan.Nodes.Clear();
             tvDetallePlan.BeginUpdate();
             
             TreeNode nodoSemana = new TreeNode();
-            nodoSemana.Name = dsPlanSemanal.PLANES_SEMANALES.FindByPSEM_CODIGO(codigoSemana).PSEM_CODIGO.ToString();
+            nodoSemana.Name = codigoSemana.ToString();
             nodoSemana.Text = "Semana " + dsPlanSemanal.PLANES_SEMANALES.FindByPSEM_CODIGO(codigoSemana).PSEM_SEMANA.ToString();
             nodoSemana.Tag = tipoNodo.semana;
 
@@ -540,7 +643,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow rowDetalle in rowDia.GetDETALLE_PLANES_SEMANALESRows())
                 {
                     TreeNode nodoDetalle = new TreeNode();
-                    nodoDetalle.Name = rowDetalle.DIAPSEM_CODIGO.ToString();
+                    nodoDetalle.Name = rowDetalle.DPSEM_CODIGO.ToString();
                     nodoDetalle.Text = "Cocina: " + rowDetalle.COCINASRow.COC_CODIGO_PRODUCTO + " - Cantidad: " + rowDetalle.DPSEM_CANTIDADESTIMADA.ToString();
                     if (rowDetalle.IsDPED_CODIGONull()) { nodoDetalle.Text += " - Origen: Planificación"; }
                     else { nodoDetalle.Text += " - Origen: Pedido de cliente"; }
@@ -557,7 +660,77 @@ namespace GyCAP.UI.PlanificacionProduccion
             tvDetallePlan.EndUpdate();
             tvDetallePlan.ExpandAll();
         }
+        #endregion
 
+        #region Completar datos al seleccionar una orden de producción
+        private void CompletarDatosOrdenTrabajo()
+        {
+            if (sourceOrdenTrabajo.Count > 0)
+            {
+                Data.dsOrdenTrabajo.ORDENES_TRABAJORow row = (Data.dsOrdenTrabajo.ORDENES_TRABAJORow)(sourceOrdenTrabajo.Current as DataRowView).Row;
+                if (row.ORDT_NUMERO < 0) { txtNumeroOrdenT.Text = "No asignado..."; }
+                else { txtNumeroOrdenT.Text = row.ORDT_NUMERO.ToString(); }
+                txtCodigoOrdenT.Text = row.ORDT_CODIGO;
+                txtOrigenOrdenT.Text = row.ORDT_ORIGEN;
+                if (row.PAR_TIPO == BLL.OrdenProduccionBLL.parteTipoConjunto) 
+                { 
+                    txtTipoParteOrdenT.Text = "Conjunto";
+                    txtParteOrdenT.Text = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).CONJ_CODIGOPARTE;
+                    int hoja = Convert.ToInt32(dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).HR_CODIGO);
+                    txtHojaRuta.Text = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(hoja).HR_NOMBRE;
+                }
+                else if (row.PAR_TIPO == BLL.OrdenProduccionBLL.parteTipoSubconjunto) 
+                { 
+                    txtTipoParteOrdenT.Text = "Subconjunto";
+                    txtParteOrdenT.Text = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).SCONJ_CODIGOPARTE;
+                    int hoja = Convert.ToInt32(dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).HR_CODIGO);
+                    txtHojaRuta.Text = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(hoja).HR_NOMBRE;
+                }
+                else if (row.PAR_TIPO == BLL.OrdenProduccionBLL.parteTipoPieza)
+                { 
+                    txtTipoParteOrdenT.Text = "Pieza";
+                    txtParteOrdenT.Text = dsEstructura.PIEZAS.FindByPZA_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).PZA_CODIGOPARTE;
+                    int hoja = Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).HR_CODIGO);
+                    txtHojaRuta.Text = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(hoja).HR_NOMBRE;
+                }
+                txtCantidadOrdenT.Text = row.ORDT_CANTIDADESTIMADA.ToString();
+                txtCentroTrabajo.Text = dsHojaRuta.CENTROS_TRABAJOS.FindByCTO_CODIGO(Convert.ToInt32(row.CTO_CODIGO)).CTO_NOMBRE;
+                txtOperacion.Text = dsHojaRuta.OPERACIONES.FindByOPR_NUMERO(Convert.ToInt32(row.OPR_NUMERO)).OPR_NOMBRE;
+                txtObservacionesOrdenT.Text = row.ORDT_OBSERVACIONES;
+
+                if (!row.IsORDT_FECHAINICIOESTIMADANull()) { txtFechaInicioOrdenT.Text = row.ORDT_FECHAINICIOESTIMADA.ToShortDateString(); }
+                if (!row.IsORDT_HORAFINESTIMADANull()) { txtFechaFinOrdenT.Text = row.ORDT_FECHAFINESTIMADA.ToShortDateString(); }
+                if (!row.IsORDT_HORAINICIOESTIMADANull()) { txtHoraInicioOrdenT.Text = Sistema.FuncionesAuxiliares.DecimalHourToString(row.ORDT_HORAINICIOESTIMADA); }
+                if (!row.IsORDT_HORAFINESTIMADANull()) { txtHoraFinOrdenT.Text = Sistema.FuncionesAuxiliares.DecimalHourToString(row.ORDT_HORAFINESTIMADA); }
+            }
+        }
+
+        private void CompletarDatosOrdenProduccion(int numeroOrdenProduccion)
+        {
+            dvOrdenTrabajo.RowFilter = "ordp_numero = " + numeroOrdenProduccion;
+            sourceOrdenTrabajo.DataSource = dvOrdenTrabajo;
+            bnNavegador.BindingSource = sourceOrdenTrabajo;
+            if (numeroOrdenProduccion < 0) { txtNumeroOrdenP.Text = "No asignado..."; }
+            else { txtNumeroOrdenP.Text = numeroOrdenProduccion.ToString(); }
+            txtCodigoOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_CODIGO;
+            txtOrigenOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_ORIGEN;
+            txtEstadoOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ESTADO_ORDENES_TRABAJORow.EORD_NOMBRE;
+            txtFechaAltaOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_FECHAALTA.ToShortDateString();
+            int codigoPlan = Convert.ToInt32(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).DPSEM_CODIGO);
+            txtCocinaOrdenP.Text = dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(codigoPlan).COCINASRow.COC_CODIGO_PRODUCTO;
+            txtCantidadOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_CANTIDADESTIMADA.ToString();
+            if (!dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).IsORDP_FECHAINICIOESTIMADANull())
+            { txtFechaInicioOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_FECHAINICIOESTIMADA.ToShortDateString(); }
+
+            if (!dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).IsORDP_FECHAFINESTIMADANull())
+            { txtFechaInicioOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_FECHAFINESTIMADA.ToShortDateString(); }
+
+            txtObservacionesOrdenP.Text = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_OBSERVACIONES;
+            CompletarDatosOrdenTrabajo();
+        }
+        #endregion
+
+        #region Efecto de los botones
         private void button_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -576,6 +749,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
         }
 
+        #endregion
+
+        #region Eventos Grilla orden producion
         private void dgvListaOrdenProduccion_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value != null && e.Value.ToString() != string.Empty)
@@ -604,6 +780,24 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
             }
         }
+
+        private void dgvListaOrdenProduccion_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            //Código cambiado al evento de seleccionar pestaña para evitar un comportamiento extraño al eliminar y demás
+            //int codigo = Convert.ToInt32(dvOrdenProduccion[e.RowIndex]["ordp_numero"]);
+            //CompletarDatosOrdenProduccion(codigo);
+        }
+
+        private void dgvListaOrdenProduccion_SelectionChanged(object sender, EventArgs e)
+        {
+            //Código cambiado al evento de seleccionar pestaña para evitar un comportamiento extraño al eliminar y demás
+            //if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
+            //{
+            //int codigo = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"]);
+            //CompletarDatosOrdenProduccion(codigo);
+            //}
+        }
+        #endregion
 
         #region Menú bloquear columnas
         private void tsmiBloquearColumna_Click(object sender, EventArgs e)
@@ -678,6 +872,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbFechas.Visible = true;
                     gbOpcionesOP.Visible = true;
                     lblMensajeOP.Visible = false;
+                    int codigo = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"]);
+                    CompletarDatosOrdenProduccion(codigo);
                 }
                 else 
                 { 
@@ -691,6 +887,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
                 {
+                    int codigo = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"]);
+                    CompletarDatosOrdenProduccion(codigo);
+                    
                     if (sourceOrdenTrabajo.Count > 0)
                     {
                         gbDatosOrdenT.Visible = true;
@@ -713,22 +912,34 @@ namespace GyCAP.UI.PlanificacionProduccion
         }
         #endregion
 
-        private void btnGenerarOrdenT_Click(object sender, EventArgs e)
-        {            
-            foreach (DataGridViewRow fila in dgvListaOrdenProduccion.Rows)
-	        {                
-                DataGridViewCheckBoxCell cellSelecion = fila.Cells[0] as DataGridViewCheckBoxCell;                
-                if(Convert.ToBoolean(cellSelecion.FormattedValue))
-                {
-                    int codigoOrdenP = Convert.ToInt32(dvOrdenProduccion[fila.Index]["ordp_numero"].ToString());
-                    BLL.OrdenTrabajoBLL.GenerarOrdenesTrabajo(codigoOrdenP, dsPlanSemanal, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
-                }
-	        }
+        #region Limpiar controles
+
+        private void LimpiarControles()
+        {
+            dvOrdenTrabajo.RowFilter = "ordp_numero = 0";
+            sourceOrdenTrabajo.DataSource = dvOrdenTrabajo;
+            bnNavegador.BindingSource = sourceOrdenTrabajo;
+            txtNumeroOrdenP.Clear();
+            txtCodigoOrdenP.Clear();
+            txtOrigenOrdenP.Clear();
+            txtEstadoOrdenP.Clear();
+            txtFechaAltaOrdenP.Clear();
+            txtCocinaOrdenP.Clear();
+            txtCantidadOrdenP.Clear();
+            txtFechaInicioOrdenP.Clear();
+            txtFechaInicioOrdenP.Clear();
+            txtObservacionesOrdenP.Clear();
+            CompletarDatosOrdenTrabajo();
+            tcOrdenTrabajo.SelectedTab = tpAutomatico;
         }
+
+        #endregion
 
         
 
 
         #endregion
+
+
     }
 }
