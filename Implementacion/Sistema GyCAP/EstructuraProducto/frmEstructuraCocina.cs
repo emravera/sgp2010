@@ -949,7 +949,6 @@ namespace GyCAP.UI.EstructuraProducto
             dgvPE.Columns.Add("TE_NOMBRE", "Terminación");
             dgvPE.Columns.Add("PXE_CANTIDAD", "Cantidad");
             dgvPE.Columns["PXE_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvPE.Columns["GRP_CODIGO"].Visible = false;
             dgvPE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvPE.Columns["PZA_CODIGOPARTE"].DataPropertyName = "PZA_CODIGO";
             dgvPE.Columns["PZA_NOMBRE"].DataPropertyName = "PZA_CODIGO";

@@ -14,7 +14,6 @@ namespace GyCAP.UI.RecursosFabricacion
         private static frmRecursosFabricacion _frmRecursosFabricacion = null;
         private SplitterPanel areaTrabajo;
         private Panel activo = null;
-        int distanciaSeparador = 0;
         
         public frmRecursosFabricacion()
         {

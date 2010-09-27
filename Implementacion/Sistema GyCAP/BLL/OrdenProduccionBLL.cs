@@ -17,11 +17,6 @@ namespace GyCAP.BLL
         public static readonly int nodoDetalleOrdenTrabajo = 2;
         public static readonly int nodoComplemento = 3;
 
-        public static void Insertar(Data.dsOrdenTrabajo dsOrdenTrabajo)
-        {
-            DAL.OrdenProduccionDAL.Insertar(dsOrdenTrabajo);
-        }
-        
         public static string GetTipoParte(int tipo)
         {
             if (tipo == parteTipoConjunto) return "Conjunto";
@@ -29,6 +24,17 @@ namespace GyCAP.BLL
             if (tipo == parteTipoPieza) return "Pieza";
             if (tipo == parteTipoMateriaPrima) return "Materia Prima";
             return string.Empty;
+        }
+        
+        public static void Insertar(int numeroOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo)
+        {
+            DAL.OrdenProduccionDAL.Insertar(numeroOrdenProduccion, dsOrdenTrabajo);
+        }
+
+        public static void Eliminar(int numeroOrdenProduccion)
+        {
+            //revisar que condiciones hacen faltan pra poder elimiarse - gonzalo
+            BLL.OrdenProduccionBLL.Eliminar(numeroOrdenProduccion);
         }
 
         /// <summary>
@@ -66,7 +72,7 @@ namespace GyCAP.BLL
                         Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow rowOrdenP = dsOrdenTrabajo.ORDENES_PRODUCCION.NewORDENES_PRODUCCIONRow();
                         rowOrdenP.BeginEdit();
                         rowOrdenP.ORDP_NUMERO = codigoOrdenP--;
-                        rowOrdenP.ORDP_CODIGO = "OA" + (rowOrdenP.ORDP_NUMERO * -1).ToString();
+                        rowOrdenP.ORDP_CODIGO = "OPA" + (rowOrdenP.ORDP_NUMERO * -1).ToString();
                         rowOrdenP.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                         rowOrdenP.ORDP_FECHAALTA = DBBLL.GetFechaServidor();
                         rowOrdenP.DPSEM_CODIGO = rowDetalle.DPSEM_CODIGO;
@@ -122,7 +128,7 @@ namespace GyCAP.BLL
                     Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow rowOrdenP = dsOrdenTrabajo.ORDENES_PRODUCCION.NewORDENES_PRODUCCIONRow();
                     rowOrdenP.BeginEdit();
                     rowOrdenP.ORDP_NUMERO = codigoOrdenP--;
-                    rowOrdenP.ORDP_CODIGO = "OA" + (rowOrdenP.ORDP_NUMERO * -1).ToString();
+                    rowOrdenP.ORDP_CODIGO = "OPA" + (rowOrdenP.ORDP_NUMERO * -1).ToString();
                     rowOrdenP.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                     rowOrdenP.ORDP_FECHAALTA = DBBLL.GetFechaServidor();
                     rowOrdenP.DPSEM_CODIGO = rowDetalle.DPSEM_CODIGO;

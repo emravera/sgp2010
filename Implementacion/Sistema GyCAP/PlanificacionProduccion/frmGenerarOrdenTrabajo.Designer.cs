@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGenerarOrdenTrabajo));
             this.tcOrdenTrabajo = new System.Windows.Forms.TabControl();
-            this.tpBuscar = new System.Windows.Forms.TabPage();
+            this.tpAutomatico = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label31 = new System.Windows.Forms.Label();
@@ -54,23 +54,16 @@
             this.dgvListaOrdenProduccion = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.cbAnioBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbMesBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label2 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.cbSemanaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.tpOrdenProduccion = new System.Windows.Forms.TabPage();
             this.gbFechas = new System.Windows.Forms.GroupBox();
-            this.cbModoStock = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label28 = new System.Windows.Forms.Label();
-            this.cbModoInicio = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.btnCalcularFechas = new System.Windows.Forms.Button();
-            this.dtpFechaPlanear = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.label19 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
-            this.cbModoFecha = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.gbOpcionesOP = new System.Windows.Forms.GroupBox();
             this.btnAplicarCambios = new System.Windows.Forms.Button();
             this.btnEliminarTodas = new System.Windows.Forms.Button();
@@ -148,8 +141,16 @@
             this.cmsGrillaOrdenesProduccion = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiBloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDesbloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbAnioBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbMesBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbSemanaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbModoStock = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbModoInicio = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.dtpFechaPlanear = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.cbModoFecha = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.tpManual = new System.Windows.Forms.TabPage();
             this.tcOrdenTrabajo.SuspendLayout();
-            this.tpBuscar.SuspendLayout();
+            this.tpAutomatico.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -173,7 +174,8 @@
             // 
             // tcOrdenTrabajo
             // 
-            this.tcOrdenTrabajo.Controls.Add(this.tpBuscar);
+            this.tcOrdenTrabajo.Controls.Add(this.tpAutomatico);
+            this.tcOrdenTrabajo.Controls.Add(this.tpManual);
             this.tcOrdenTrabajo.Controls.Add(this.tpOrdenProduccion);
             this.tcOrdenTrabajo.Controls.Add(this.tpOrdenTrabajo);
             this.tcOrdenTrabajo.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -187,18 +189,18 @@
             this.tcOrdenTrabajo.TabIndex = 0;
             this.tcOrdenTrabajo.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tcOrdenTrabajo_Selecting);
             // 
-            // tpBuscar
+            // tpAutomatico
             // 
-            this.tpBuscar.Controls.Add(this.groupBox3);
-            this.tpBuscar.Controls.Add(this.groupBox1);
-            this.tpBuscar.Controls.Add(this.groupBox2);
-            this.tpBuscar.Location = new System.Drawing.Point(4, 22);
-            this.tpBuscar.Name = "tpBuscar";
-            this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(780, 490);
-            this.tpBuscar.TabIndex = 0;
-            this.tpBuscar.Text = "Generar";
-            this.tpBuscar.UseVisualStyleBackColor = true;
+            this.tpAutomatico.Controls.Add(this.groupBox3);
+            this.tpAutomatico.Controls.Add(this.groupBox1);
+            this.tpAutomatico.Controls.Add(this.groupBox2);
+            this.tpAutomatico.Location = new System.Drawing.Point(4, 22);
+            this.tpAutomatico.Name = "tpAutomatico";
+            this.tpAutomatico.Padding = new System.Windows.Forms.Padding(3);
+            this.tpAutomatico.Size = new System.Drawing.Size(780, 490);
+            this.tpAutomatico.TabIndex = 0;
+            this.tpAutomatico.Text = "Generar automáticamente";
+            this.tpAutomatico.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -456,6 +458,7 @@
             this.dgvListaOrdenProduccion.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListaOrdenProduccion_RowEnter);
             this.dgvListaOrdenProduccion.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvListaOrdenProduccion_ColumnHeaderMouseClick);
             this.dgvListaOrdenProduccion.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvListaOrdenProduccion_CellFormatting);
+            this.dgvListaOrdenProduccion.SelectionChanged += new System.EventHandler(this.dgvListaOrdenProduccion_SelectionChanged);
             // 
             // groupBox2
             // 
@@ -482,28 +485,6 @@
             this.label1.Size = new System.Drawing.Size(30, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "Año:";
-            // 
-            // cbAnioBuscar
-            // 
-            this.cbAnioBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAnioBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbAnioBuscar.FormattingEnabled = true;
-            this.cbAnioBuscar.Location = new System.Drawing.Point(50, 20);
-            this.cbAnioBuscar.Name = "cbAnioBuscar";
-            this.cbAnioBuscar.Size = new System.Drawing.Size(125, 21);
-            this.cbAnioBuscar.TabIndex = 1;
-            this.cbAnioBuscar.SelectedIndexChanged += new System.EventHandler(this.cbAnioBuscar_SelectedIndexChanged);
-            // 
-            // cbMesBuscar
-            // 
-            this.cbMesBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMesBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbMesBuscar.FormattingEnabled = true;
-            this.cbMesBuscar.Location = new System.Drawing.Point(256, 20);
-            this.cbMesBuscar.Name = "cbMesBuscar";
-            this.cbMesBuscar.Size = new System.Drawing.Size(125, 21);
-            this.cbMesBuscar.TabIndex = 2;
-            this.cbMesBuscar.SelectedIndexChanged += new System.EventHandler(this.cbMesBuscar_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -537,17 +518,6 @@
             this.label5.TabIndex = 1;
             this.label5.Text = "Semana:";
             // 
-            // cbSemanaBuscar
-            // 
-            this.cbSemanaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSemanaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbSemanaBuscar.FormattingEnabled = true;
-            this.cbSemanaBuscar.Location = new System.Drawing.Point(473, 20);
-            this.cbSemanaBuscar.Name = "cbSemanaBuscar";
-            this.cbSemanaBuscar.Size = new System.Drawing.Size(125, 21);
-            this.cbSemanaBuscar.TabIndex = 3;
-            this.cbSemanaBuscar.SelectedIndexChanged += new System.EventHandler(this.cbSemanaBuscar_SelectedIndexChanged);
-            // 
             // tpOrdenProduccion
             // 
             this.tpOrdenProduccion.Controls.Add(this.gbFechas);
@@ -579,16 +549,6 @@
             this.gbFechas.TabStop = false;
             this.gbFechas.Text = "Fechas";
             // 
-            // cbModoStock
-            // 
-            this.cbModoStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbModoStock.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbModoStock.FormattingEnabled = true;
-            this.cbModoStock.Location = new System.Drawing.Point(20, 97);
-            this.cbModoStock.Name = "cbModoStock";
-            this.cbModoStock.Size = new System.Drawing.Size(157, 21);
-            this.cbModoStock.TabIndex = 24;
-            // 
             // label28
             // 
             this.label28.AutoSize = true;
@@ -597,16 +557,6 @@
             this.label28.Size = new System.Drawing.Size(77, 13);
             this.label28.TabIndex = 23;
             this.label28.Text = "Modo de Stock";
-            // 
-            // cbModoInicio
-            // 
-            this.cbModoInicio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbModoInicio.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbModoInicio.FormattingEnabled = true;
-            this.cbModoInicio.Location = new System.Drawing.Point(236, 40);
-            this.cbModoInicio.Name = "cbModoInicio";
-            this.cbModoInicio.Size = new System.Drawing.Size(155, 21);
-            this.cbModoInicio.TabIndex = 22;
             // 
             // btnCalcularFechas
             // 
@@ -620,17 +570,9 @@
             this.btnCalcularFechas.Text = "&Calcular fechas";
             this.btnCalcularFechas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCalcularFechas.UseVisualStyleBackColor = true;
+            this.btnCalcularFechas.Click += new System.EventHandler(this.btnCalcularFechas_Click);
             this.btnCalcularFechas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnCalcularFechas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // dtpFechaPlanear
-            // 
-            this.dtpFechaPlanear.CustomFormat = " ";
-            this.dtpFechaPlanear.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaPlanear.Location = new System.Drawing.Point(236, 97);
-            this.dtpFechaPlanear.Name = "dtpFechaPlanear";
-            this.dtpFechaPlanear.Size = new System.Drawing.Size(157, 21);
-            this.dtpFechaPlanear.TabIndex = 19;
             // 
             // label19
             // 
@@ -658,16 +600,6 @@
             this.label35.Size = new System.Drawing.Size(36, 13);
             this.label35.TabIndex = 17;
             this.label35.Text = "Fecha";
-            // 
-            // cbModoFecha
-            // 
-            this.cbModoFecha.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbModoFecha.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbModoFecha.FormattingEnabled = true;
-            this.cbModoFecha.Location = new System.Drawing.Point(20, 40);
-            this.cbModoFecha.Name = "cbModoFecha";
-            this.cbModoFecha.Size = new System.Drawing.Size(157, 21);
-            this.cbModoFecha.TabIndex = 18;
             // 
             // gbOpcionesOP
             // 
@@ -700,6 +632,7 @@
             this.btnAplicarCambios.Text = "Aplicar\r\n&cambios";
             this.btnAplicarCambios.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAplicarCambios.UseVisualStyleBackColor = true;
+            this.btnAplicarCambios.Click += new System.EventHandler(this.btnAplicarCambios_Click);
             this.btnAplicarCambios.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnAplicarCambios.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
@@ -719,6 +652,7 @@
             this.btnEliminarTodas.Text = "Eli&minar\r\ntodas";
             this.btnEliminarTodas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEliminarTodas.UseVisualStyleBackColor = true;
+            this.btnEliminarTodas.Click += new System.EventHandler(this.btnEliminarTodas_Click);
             this.btnEliminarTodas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnEliminarTodas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
@@ -738,6 +672,7 @@
             this.btnGuardarTodo.Text = "Guardar\r\nt&odas";
             this.btnGuardarTodo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnGuardarTodo.UseVisualStyleBackColor = true;
+            this.btnGuardarTodo.Click += new System.EventHandler(this.btnGuardarTodo_Click);
             this.btnGuardarTodo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnGuardarTodo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
@@ -777,6 +712,7 @@
             this.btnGuardarActual.Text = "&Guardar\r\norden actual";
             this.btnGuardarActual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnGuardarActual.UseVisualStyleBackColor = true;
+            this.btnGuardarActual.Click += new System.EventHandler(this.btnGuardarActual_Click);
             this.btnGuardarActual.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnGuardarActual.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
@@ -796,6 +732,7 @@
             this.btnEliminarActual.Text = "&Eliminar\r\norden actual";
             this.btnEliminarActual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEliminarActual.UseVisualStyleBackColor = true;
+            this.btnEliminarActual.Click += new System.EventHandler(this.btnEliminarActual_Click);
             this.btnEliminarActual.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnEliminarActual.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
@@ -943,6 +880,7 @@
             this.txtCodigoOrdenP.Location = new System.Drawing.Point(325, 25);
             this.txtCodigoOrdenP.MaxLength = 100;
             this.txtCodigoOrdenP.Name = "txtCodigoOrdenP";
+            this.txtCodigoOrdenP.ReadOnly = true;
             this.txtCodigoOrdenP.Size = new System.Drawing.Size(160, 21);
             this.txtCodigoOrdenP.TabIndex = 16;
             // 
@@ -1173,6 +1111,7 @@
             this.txtCodigoOrdenT.Location = new System.Drawing.Point(276, 33);
             this.txtCodigoOrdenT.MaxLength = 100;
             this.txtCodigoOrdenT.Name = "txtCodigoOrdenT";
+            this.txtCodigoOrdenT.ReadOnly = true;
             this.txtCodigoOrdenT.Size = new System.Drawing.Size(184, 21);
             this.txtCodigoOrdenT.TabIndex = 25;
             // 
@@ -1409,6 +1348,7 @@
             this.bnAplicar.Name = "bnAplicar";
             this.bnAplicar.Size = new System.Drawing.Size(100, 22);
             this.bnAplicar.Text = "Aplicar cambios";
+            this.bnAplicar.Click += new System.EventHandler(this.bnAplicar_Click);
             // 
             // tsMenu
             // 
@@ -1481,6 +1421,87 @@
             this.tsmiDesbloquearColumna.Text = "Desbloquear columna";
             this.tsmiDesbloquearColumna.Click += new System.EventHandler(this.tsmiDesbloquearColumna_Click);
             // 
+            // cbAnioBuscar
+            // 
+            this.cbAnioBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAnioBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbAnioBuscar.FormattingEnabled = true;
+            this.cbAnioBuscar.Location = new System.Drawing.Point(50, 20);
+            this.cbAnioBuscar.Name = "cbAnioBuscar";
+            this.cbAnioBuscar.Size = new System.Drawing.Size(125, 21);
+            this.cbAnioBuscar.TabIndex = 1;
+            this.cbAnioBuscar.SelectedIndexChanged += new System.EventHandler(this.cbAnioBuscar_SelectedIndexChanged);
+            // 
+            // cbMesBuscar
+            // 
+            this.cbMesBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMesBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbMesBuscar.FormattingEnabled = true;
+            this.cbMesBuscar.Location = new System.Drawing.Point(256, 20);
+            this.cbMesBuscar.Name = "cbMesBuscar";
+            this.cbMesBuscar.Size = new System.Drawing.Size(125, 21);
+            this.cbMesBuscar.TabIndex = 2;
+            this.cbMesBuscar.SelectedIndexChanged += new System.EventHandler(this.cbMesBuscar_SelectedIndexChanged);
+            // 
+            // cbSemanaBuscar
+            // 
+            this.cbSemanaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSemanaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbSemanaBuscar.FormattingEnabled = true;
+            this.cbSemanaBuscar.Location = new System.Drawing.Point(473, 20);
+            this.cbSemanaBuscar.Name = "cbSemanaBuscar";
+            this.cbSemanaBuscar.Size = new System.Drawing.Size(125, 21);
+            this.cbSemanaBuscar.TabIndex = 3;
+            this.cbSemanaBuscar.SelectedIndexChanged += new System.EventHandler(this.cbSemanaBuscar_SelectedIndexChanged);
+            // 
+            // cbModoStock
+            // 
+            this.cbModoStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbModoStock.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbModoStock.FormattingEnabled = true;
+            this.cbModoStock.Location = new System.Drawing.Point(20, 97);
+            this.cbModoStock.Name = "cbModoStock";
+            this.cbModoStock.Size = new System.Drawing.Size(157, 21);
+            this.cbModoStock.TabIndex = 24;
+            // 
+            // cbModoInicio
+            // 
+            this.cbModoInicio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbModoInicio.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbModoInicio.FormattingEnabled = true;
+            this.cbModoInicio.Location = new System.Drawing.Point(236, 40);
+            this.cbModoInicio.Name = "cbModoInicio";
+            this.cbModoInicio.Size = new System.Drawing.Size(155, 21);
+            this.cbModoInicio.TabIndex = 22;
+            // 
+            // dtpFechaPlanear
+            // 
+            this.dtpFechaPlanear.CustomFormat = " ";
+            this.dtpFechaPlanear.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaPlanear.Location = new System.Drawing.Point(236, 97);
+            this.dtpFechaPlanear.Name = "dtpFechaPlanear";
+            this.dtpFechaPlanear.Size = new System.Drawing.Size(157, 21);
+            this.dtpFechaPlanear.TabIndex = 19;
+            // 
+            // cbModoFecha
+            // 
+            this.cbModoFecha.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbModoFecha.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbModoFecha.FormattingEnabled = true;
+            this.cbModoFecha.Location = new System.Drawing.Point(20, 40);
+            this.cbModoFecha.Name = "cbModoFecha";
+            this.cbModoFecha.Size = new System.Drawing.Size(157, 21);
+            this.cbModoFecha.TabIndex = 18;
+            // 
+            // tpManual
+            // 
+            this.tpManual.Location = new System.Drawing.Point(4, 22);
+            this.tpManual.Name = "tpManual";
+            this.tpManual.Size = new System.Drawing.Size(780, 490);
+            this.tpManual.TabIndex = 3;
+            this.tpManual.Text = "Generar manualmente";
+            this.tpManual.UseVisualStyleBackColor = true;
+            // 
             // frmGenerarOrdenTrabajo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1495,7 +1516,7 @@
             this.ShowInTaskbar = false;
             this.Text = "Generar Orden de Trabajo";
             this.tcOrdenTrabajo.ResumeLayout(false);
-            this.tpBuscar.ResumeLayout(false);
+            this.tpAutomatico.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -1533,7 +1554,7 @@
         #endregion
 
         private System.Windows.Forms.TabControl tcOrdenTrabajo;
-        private System.Windows.Forms.TabPage tpBuscar;
+        private System.Windows.Forms.TabPage tpAutomatico;
         private System.Windows.Forms.TabPage tpOrdenProduccion;
         private System.Windows.Forms.GroupBox gbDatosOrdenP;
         private System.Windows.Forms.ToolStrip tsMenu;
@@ -1650,6 +1671,7 @@
         private System.Windows.Forms.Button btnEliminarTodas;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton bnAplicar;
+        private System.Windows.Forms.TabPage tpManual;
 
     }
 }
