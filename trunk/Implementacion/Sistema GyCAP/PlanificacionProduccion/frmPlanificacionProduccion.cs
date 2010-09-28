@@ -261,22 +261,22 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void btnNuevoOrdenTrabajo_Click(object sender, EventArgs e)
         {
-            frmGenerarOrdenTrabajo.Instancia.TopLevel = false;
-            frmGenerarOrdenTrabajo.Instancia.Parent = areaTrabajo;
-            frmGenerarOrdenTrabajo.Instancia.Location = PosicionarFormulario();
-            frmGenerarOrdenTrabajo.Instancia.SetEstadoInicial(frmGenerarOrdenTrabajo.estadoInicialNuevoAutmatico);
-            frmGenerarOrdenTrabajo.Instancia.Show();
-            frmGenerarOrdenTrabajo.Instancia.Focus();
+            frmGenerarOrdenTrabajo.InstanciaAutomatica.TopLevel = false;
+            frmGenerarOrdenTrabajo.InstanciaAutomatica.Parent = areaTrabajo;
+            frmGenerarOrdenTrabajo.InstanciaAutomatica.Location = PosicionarFormulario();
+            frmGenerarOrdenTrabajo.InstanciaAutomatica.SetEstadoInicial(frmGenerarOrdenTrabajo.estadoInicialNuevoAutomatico);
+            frmGenerarOrdenTrabajo.InstanciaAutomatica.Show();
+            frmGenerarOrdenTrabajo.InstanciaAutomatica.Focus();
         }
 
         private void btnConsultarOrdenTrabajo_Click(object sender, EventArgs e)
         {
-            frmGenerarOrdenTrabajo.Instancia.TopLevel = false;
-            frmGenerarOrdenTrabajo.Instancia.Parent = areaTrabajo;
-            frmGenerarOrdenTrabajo.Instancia.Location = PosicionarFormulario();
-            frmGenerarOrdenTrabajo.Instancia.SetEstadoInicial(frmGenerarOrdenTrabajo.estadoInicialNuevoManual);
-            frmGenerarOrdenTrabajo.Instancia.Show();
-            frmGenerarOrdenTrabajo.Instancia.Focus();
+            frmGenerarOrdenTrabajo.InstanciaManual.TopLevel = false;
+            frmGenerarOrdenTrabajo.InstanciaManual.Parent = areaTrabajo;
+            frmGenerarOrdenTrabajo.InstanciaManual.Location = PosicionarFormulario();
+            frmGenerarOrdenTrabajo.InstanciaManual.SetEstadoInicial(frmGenerarOrdenTrabajo.estadoInicialNuevoManual);
+            frmGenerarOrdenTrabajo.InstanciaManual.Show();
+            frmGenerarOrdenTrabajo.InstanciaManual.Focus();
         }
 
         #endregion

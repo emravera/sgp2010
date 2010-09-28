@@ -130,8 +130,8 @@ namespace Principal
         //ELIMINAR LO QUE SIGUE
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            GyCAP.UI.PlanificacionProduccion.frmGenerarOrdenTrabajo.Instancia.MdiParent = this;
-            GyCAP.UI.PlanificacionProduccion.frmGenerarOrdenTrabajo.Instancia.Show();
+            GyCAP.UI.PlanificacionProduccion.frmGenerarOrdenTrabajo.InstanciaAutomatica.MdiParent = this;
+            GyCAP.UI.PlanificacionProduccion.frmGenerarOrdenTrabajo.InstanciaAutomatica.Show();
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
