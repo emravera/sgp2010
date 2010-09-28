@@ -62,7 +62,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             if (Convert.ToInt32(e.Node.Tag.ToString()) == BLL.OrdenProduccionBLL.nodoDetalleOrdenTrabajo)
             {
-                frmGenerarOrdenTrabajo.Instancia.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
+                frmGenerarOrdenTrabajo.InstanciaAutomatica.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
                 SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
             }
         }
@@ -71,7 +71,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             if (Convert.ToInt32(e.Node.Tag.ToString()) == BLL.OrdenProduccionBLL.nodoDetalleOrdenTrabajo)
             {
-                frmGenerarOrdenTrabajo.Instancia.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
+                frmGenerarOrdenTrabajo.InstanciaAutomatica.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
                 SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
             }
         }
@@ -80,7 +80,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             if (Convert.ToInt32(e.Node.Tag.ToString()) == BLL.OrdenProduccionBLL.nodoDetalleOrdenTrabajo)
             {
-                frmGenerarOrdenTrabajo.Instancia.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
+                frmGenerarOrdenTrabajo.InstanciaAutomatica.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
                 SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
             }
         }

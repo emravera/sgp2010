@@ -12,11 +12,12 @@ namespace GyCAP.UI.PlanificacionProduccion
 {
     public partial class frmGenerarOrdenTrabajo : Form
     {        
-        private static frmGenerarOrdenTrabajo _frmGenerarOrdenTrabajo = null;
-        private enum estadoUI { nuevoAutomatico, nuevoManual, consultar, modificar };
+        private static frmGenerarOrdenTrabajo _frmGenerarOrdenTrabajoA = null;
+        private static frmGenerarOrdenTrabajo _frmGenerarOrdenTrabajoM = null;
+        private enum estadoUI { nuevoAutomatico, nuevoManual };
         private estadoUI estadoInterface;
         private enum tipoNodo { anio, mes, semana, dia, detalleDia };
-        public static readonly int estadoInicialNuevoAutmatico = 1; //Para generar las OT de forma automática
+        public static readonly int estadoInicialNuevoAutomatico = 1; //Para generar las OT de forma automática
         public static readonly int estadoInicialNuevoManual = 2; //Para generar OT de forma manual
         Data.dsPlanSemanal dsPlanSemanal = new GyCAP.Data.dsPlanSemanal();
         Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
@@ -36,33 +37,62 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             InitializeComponent();
             InicializarDatos();
-            SetInterface(estadoUI.nuevoAutomatico);
         }
 
-        public static frmGenerarOrdenTrabajo Instancia
+        public static frmGenerarOrdenTrabajo InstanciaAutomatica
         {
             get
             {
-                if (_frmGenerarOrdenTrabajo == null || _frmGenerarOrdenTrabajo.IsDisposed)
+                if (_frmGenerarOrdenTrabajoA == null || _frmGenerarOrdenTrabajoA.IsDisposed)
                 {
-                    _frmGenerarOrdenTrabajo = new frmGenerarOrdenTrabajo();
+                    _frmGenerarOrdenTrabajoA = new frmGenerarOrdenTrabajo();
                 }
                 else
                 {
-                    _frmGenerarOrdenTrabajo.BringToFront();
+                    _frmGenerarOrdenTrabajoA.BringToFront();
                 }
-                return _frmGenerarOrdenTrabajo;
+                return _frmGenerarOrdenTrabajoA;
             }
             set
             {
-                _frmGenerarOrdenTrabajo = value;
+                _frmGenerarOrdenTrabajoA = value;
+            }
+        }
+
+        public static frmGenerarOrdenTrabajo InstanciaManual
+        {
+            get
+            {
+                if (_frmGenerarOrdenTrabajoM == null || _frmGenerarOrdenTrabajoM.IsDisposed)
+                {
+                    _frmGenerarOrdenTrabajoM = new frmGenerarOrdenTrabajo();
+                }
+                else
+                {
+                    _frmGenerarOrdenTrabajoM.BringToFront();
+                }
+                return _frmGenerarOrdenTrabajoM;
+            }
+            set
+            {
+                _frmGenerarOrdenTrabajoM = value;
             }
         }
 
         public void SetEstadoInicial(int estado)
         {
-            if (estado == estadoInicialNuevoAutmatico) { SetInterface(estadoUI.nuevoAutomatico); }
-            if (estado == estadoInicialNuevoManual) { SetInterface(estadoUI.nuevoManual); }
+            if (estado == estadoInicialNuevoAutomatico) 
+            {
+                tcOrdenTrabajo.TabPages.Remove(tpManual);
+                this.Text = "Generar Orden de Trabajo Automática";
+                estadoInterface = estadoUI.nuevoAutomatico;
+            }
+            if (estado == estadoInicialNuevoManual) 
+            {
+                tcOrdenTrabajo.TabPages.Remove(tpAutomatico);
+                this.Text = "Generar Orden de Trabajo Manual";
+                estadoInterface = estadoUI.nuevoManual;
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -505,42 +535,6 @@ namespace GyCAP.UI.PlanificacionProduccion
         #endregion
 
         #region Servicios
-
-        //Setea la pantalla de acuerdo al estado en que se encuentre
-        private void SetInterface(estadoUI estado)
-        {
-            switch (estado)
-            {
-                case estadoUI.nuevoAutomatico:
-                   
-                    estadoInterface = estadoUI.nuevoAutomatico;
-                    dtpFechaPlanear.SetFechaNull();
-                    
-                    tcOrdenTrabajo.SelectedTab = tpAutomatico;
-                    break;
-                case estadoUI.nuevoManual:
-                    
-                    btnGuardarActual.Enabled = true;
-                    
-                    
-                    
-                    estadoInterface = estadoUI.nuevoManual;
-                    //tcOrdenTrabajo.SelectedTab = tpOrdenManual;
-                    break;
-                case estadoUI.consultar:
-                case estadoUI.modificar:
-                    
-                    btnGuardarActual.Enabled = true;
-                    
-                    
-                    
-                    estadoInterface = estadoUI.modificar;
-                    tcOrdenTrabajo.SelectedTab = tpOrdenProduccion;
-                    break;
-                default:
-                    break;
-            }
-        }
 
         #region InicializarDatos
         private void InicializarDatos()
