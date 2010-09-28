@@ -35,6 +35,7 @@ namespace GyCAP.BLL
         public static void GenerarOrdenesTrabajo(int codigoOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
         {
             //Si la orden de producción tiene órdenes de trabajo generadas las eliminamos
+            //Y si ya estan en la DB ??? - gonzalo
             foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow row in dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).GetORDENES_TRABAJORows())
             {
                 row.Delete();
@@ -49,55 +50,24 @@ namespace GyCAP.BLL
             int codigoEstructura = Convert.ToInt32(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ESTR_CODIGO);
             EstructuraBLL.ObtenerEstructura(codigoEstructura, dsEstructura, true);
 
-            //Obtenemos las hojas de ruta de cada parte de la estructura
-            #region Obtener Hojas Rutas
-            foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow rowCxE in (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select("estr_codigo = " + codigoEstructura))
-            {
-                if (!rowCxE.CONJUNTOSRow.IsHR_CODIGONull())
-                {
-                    DAL.HojaRutaDAL.ObtenerHojaRuta(Convert.ToInt32(rowCxE.CONJUNTOSRow.HR_CODIGO), true, dsHojaRuta);
-                }                
-
-                foreach (Data.dsEstructura.SUBCONJUNTOSXCONJUNTORow rowSCxC in rowCxE.CONJUNTOSRow.GetSUBCONJUNTOSXCONJUNTORows())
-                {
-                    if (!rowSCxC.SUBCONJUNTOSRow.IsHR_CODIGONull())
-                    {
-                        DAL.HojaRutaDAL.ObtenerHojaRuta(Convert.ToInt32(rowSCxC.SUBCONJUNTOSRow.HR_CODIGO), true, dsHojaRuta);
-                    }                    
-
-                    foreach (Data.dsEstructura.PIEZASXSUBCONJUNTORow rowPxSC in rowSCxC.SUBCONJUNTOSRow.GetPIEZASXSUBCONJUNTORows())
-                    {
-                        if (!rowPxSC.PIEZASRow.IsHR_CODIGONull())
-                        {
-                            DAL.HojaRutaDAL.ObtenerHojaRuta(Convert.ToInt32(rowPxSC.PIEZASRow.HR_CODIGO), true, dsHojaRuta);
-                        }                        
-                    }
-                }
-            }
-
-            foreach (Data.dsEstructura.PIEZASXESTRUCTURARow rowPxE in (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select("estr_codigo = " + codigoEstructura))
-            {
-                if (!rowPxE.PIEZASRow.IsHR_CODIGONull())
-                {
-                    DAL.HojaRutaDAL.ObtenerHojaRuta(Convert.ToInt32(rowPxE.PIEZASRow.HR_CODIGO), true, dsHojaRuta);
-                }                
-            }
-            #endregion
-
             //Creamos las órdenes de trabajo, generamos una para cada par operación-centro de la hoja de ruta de la parte
-            //De forma recursiva empezando por el nivel más alto de la estructura, primero los conjuntos
+            //De forma recursiva empezando por el nivel más alto de la estructura
             decimal ordenSiguiente = 0, ultimaOrdenConjunto = 0, nivel = 0, ultimaOrdenSubconjunto = 0;
             foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow rowCxE in dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).GetCONJUNTOSXESTRUCTURARows())
             {
                 ordenSiguiente = 0;
+                //Comprobamos si tiene hoja de ruta
                 if (!rowCxE.CONJUNTOSRow.IsHR_CODIGONull())
                 {
+                    //Tiene hoja de ruta, la obtenemos y la recorremos
+                    DAL.HojaRutaDAL.ObtenerHojaRuta(Convert.ToInt32(rowCxE.CONJUNTOSRow.HR_CODIGO), true, dsHojaRuta);
                     foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaCxE in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowCxE.CONJUNTOSRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
-                    {
+                    {                        
+                        //Creamos la orden de trabajo para cada detalle de la hoja de ruta
                         Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTCxE = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                         rowOTCxE.BeginEdit();
                         rowOTCxE.ORDT_NUMERO = codigoOrdenT--;
-                        rowOTCxE.ORDT_CODIGO = "OTA-" + (rowOTCxE.ORDT_NUMERO * -1).ToString();
+                        rowOTCxE.ORDT_CODIGO = "OTA" + (rowOTCxE.ORDT_NUMERO * -1).ToString();
                         rowOTCxE.ORDT_ORIGEN = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_ORIGEN + " / " + rowCxE.CONJUNTOSRow.CONJ_CODIGOPARTE;
                         rowOTCxE.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                         rowOTCxE.ORDP_NUMERO = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_NUMERO;
@@ -117,19 +87,23 @@ namespace GyCAP.BLL
                         ultimaOrdenConjunto = ordenSiguiente;
                     }
                 }
-
+                //Los subconjuntos del conjunto
                 foreach (Data.dsEstructura.SUBCONJUNTOSXCONJUNTORow rowSCxC in dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(rowCxE.CONJ_CODIGO).GetSUBCONJUNTOSXCONJUNTORows())
                 {
                     nivel = 1;
                     ordenSiguiente = ultimaOrdenConjunto;
+                    //Comprobamos si tiene hoja de ruta
                     if (!rowSCxC.SUBCONJUNTOSRow.IsHR_CODIGONull())
                     {
+                        //Tiene hoja de ruta, la obtenemos y la recorremos
+                        DAL.HojaRutaDAL.ObtenerHojaRuta(Convert.ToInt32(rowSCxC.SUBCONJUNTOSRow.HR_CODIGO), true, dsHojaRuta);
                         foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaSCxC in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowSCxC.SUBCONJUNTOSRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
-                        {
+                        {                            
+                            //Creamos la orden de trabajo para cada detalle de la hoja de ruta
                             Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTSCxC = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                             rowOTSCxC.BeginEdit();
                             rowOTSCxC.ORDT_NUMERO = codigoOrdenT--;
-                            rowOTSCxC.ORDT_CODIGO = "OTA-" + (rowOTSCxC.ORDT_NUMERO * -1).ToString();
+                            rowOTSCxC.ORDT_CODIGO = "OTA" + (rowOTSCxC.ORDT_NUMERO * -1).ToString();
                             rowOTSCxC.ORDT_ORIGEN = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(ultimaOrdenConjunto).ORDT_ORIGEN + " / " + rowSCxC.SUBCONJUNTOSRow.SCONJ_CODIGOPARTE;
                             rowOTSCxC.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                             rowOTSCxC.ORDP_NUMERO = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_NUMERO;
@@ -150,20 +124,23 @@ namespace GyCAP.BLL
                             nivel = 0;
                         }
                     }
-
+                    //Las piezas del subconjunto
                     foreach (Data.dsEstructura.PIEZASXSUBCONJUNTORow rowPxSC in dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(rowSCxC.SCONJ_CODIGO).GetPIEZASXSUBCONJUNTORows())
-                    {
-                        
+                    {                        
                         nivel = 1;
                         ordenSiguiente = ultimaOrdenSubconjunto;
+                        //Comprobamos si tiene hoja de ruta
                         if (!rowPxSC.PIEZASRow.IsHR_CODIGONull())
                         {
+                            //Tiene hoja de ruta, la obtenemos y la recorremos
+                            DAL.HojaRutaDAL.ObtenerHojaRuta(Convert.ToInt32(rowPxSC.PIEZASRow.HR_CODIGO), true, dsHojaRuta);
+                            //Creamos la orden de trabajo para cada detalle de la hoja de ruta
                             foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaPxSC in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxSC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
                             {
                                 Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTPxSC = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                                 rowOTPxSC.BeginEdit();
                                 rowOTPxSC.ORDT_NUMERO = codigoOrdenT--;
-                                rowOTPxSC.ORDT_CODIGO = "OTA-" + (rowOTPxSC.ORDT_NUMERO * -1).ToString();
+                                rowOTPxSC.ORDT_CODIGO = "OTA" + (rowOTPxSC.ORDT_NUMERO * -1).ToString();
                                 rowOTPxSC.ORDT_ORIGEN = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(ultimaOrdenSubconjunto).ORDT_ORIGEN + " / " + rowPxSC.PIEZASRow.PZA_CODIGOPARTE;
                                 rowOTPxSC.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                                 rowOTPxSC.ORDP_NUMERO = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_NUMERO;
@@ -187,18 +164,23 @@ namespace GyCAP.BLL
                 }
 
                 ordenSiguiente = ultimaOrdenConjunto;
+                //Las piezas del conjunto
                 foreach (Data.dsEstructura.PIEZASXCONJUNTORow rowPxC in dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(rowCxE.CONJ_CODIGO).GetPIEZASXCONJUNTORows())
                 {
                     nivel = 1;
                     ordenSiguiente = ultimaOrdenConjunto;
+                    //Comprobamos si tiene hoja de ruta
                     if (!rowPxC.PIEZASRow.IsHR_CODIGONull())
                     {
+                        //Tiene hoja de ruta, la obtenemos y la recorremos
+                        DAL.HojaRutaDAL.ObtenerHojaRuta(Convert.ToInt32(rowPxC.PIEZASRow.HR_CODIGO), true, dsHojaRuta);
+                        //Creamos la orden de trabajo para cada detalle de la hoja de ruta
                         foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaPxC in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
                         {
                             Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTPxC = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                             rowOTPxC.BeginEdit();
                             rowOTPxC.ORDT_NUMERO = codigoOrdenT--;
-                            rowOTPxC.ORDT_CODIGO = "OTA-" + (rowOTPxC.ORDT_NUMERO * -1).ToString();
+                            rowOTPxC.ORDT_CODIGO = "OTA" + (rowOTPxC.ORDT_NUMERO * -1).ToString();
                             rowOTPxC.ORDT_ORIGEN = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(ultimaOrdenConjunto).ORDT_ORIGEN + " / " + rowPxC.PIEZASRow.PZA_CODIGOPARTE;
                             rowOTPxC.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                             rowOTPxC.ORDP_NUMERO = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_NUMERO;
@@ -220,18 +202,23 @@ namespace GyCAP.BLL
                     }
                 }
             }
+            
             //Ahora las piezas que forman la estructura
             foreach (Data.dsEstructura.PIEZASXESTRUCTURARow rowPxE in dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).GetPIEZASXESTRUCTURARows())
             {
                 ordenSiguiente = 0;
+                //Comprobamos si tiene hoja de ruta
                 if (!rowPxE.PIEZASRow.IsHR_CODIGONull())
                 {
+                    //Tiene hoja de ruta, la obtenemos y la recorremos
+                    DAL.HojaRutaDAL.ObtenerHojaRuta(Convert.ToInt32(rowPxE.PIEZASRow.HR_CODIGO), true, dsHojaRuta);
+                    //Creamos la orden de trabajo para cada detalle de la hoja de ruta
                     foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaPxE in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxE.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
                     {
                         Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTPxE = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                         rowOTPxE.BeginEdit();
                         rowOTPxE.ORDT_NUMERO = codigoOrdenT--;
-                        rowOTPxE.ORDT_CODIGO = "OTA-" + (rowOTPxE.ORDT_NUMERO * -1).ToString();
+                        rowOTPxE.ORDT_CODIGO = "OTA" + (rowOTPxE.ORDT_NUMERO * -1).ToString();
                         rowOTPxE.ORDT_ORIGEN = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_ORIGEN + " / " + rowPxE.PIEZASRow.PZA_CODIGOPARTE;
                         rowOTPxE.EORD_CODIGO = (dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO.Select("EORD_NOMBRE = 'Generada'") as Data.dsOrdenTrabajo.ESTADO_ORDENES_TRABAJORow[])[0].EORD_CODIGO;
                         rowOTPxE.ORDP_NUMERO = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_NUMERO;
