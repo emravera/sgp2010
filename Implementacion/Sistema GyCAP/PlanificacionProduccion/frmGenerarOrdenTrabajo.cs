@@ -28,6 +28,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         private Sistema.ControlesUsuarios.AnimadorFormulario animador = new GyCAP.UI.Sistema.ControlesUsuarios.AnimadorFormulario();
         private TreeView tvDependenciaSimple, tvDependenciaCompleta, tvOrdenesYEstructura;
         Label lblMensajeOP, lblMensajeOT;
+        private CheckBox chkSeleccionarOP = new CheckBox();
 
         #region Inicio
 
@@ -128,6 +129,10 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             dsPlanSemanal.DIAS_PLAN_SEMANAL.Clear();
             dsPlanSemanal.DETALLE_PLANES_SEMANALES.Clear();
+            dsOrdenTrabajo.ORDENES_PRODUCCION.Clear();
+            dsOrdenTrabajo.ORDENES_PRODUCCION_MANUAL.Clear();
+            dsOrdenTrabajo.ORDENES_TRABAJO.Clear();
+            chkSeleccionarOP.Checked = false;
 
             if ( cbSemanaBuscar.GetSelectedIndex() != -1)
             {
@@ -158,6 +163,18 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
         }
 
+        private void tvDetallePlan_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            tipoNodo tipo = (tipoNodo)e.Node.Tag;
+            if (tipo == tipoNodo.semana)
+            {
+                foreach (TreeNode nodo in e.Node.Nodes)
+                {
+                    nodo.Checked = e.Node.Checked;
+                }
+            }
+        }
+
         #endregion
 
         #region Pestaña Generar Automaticamente
@@ -185,7 +202,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
 
             if (generados == 0) { MessageBox.Show("Debe seleccionar la semana o un día.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
-            
         }
 
         private void btnSubirPrioridad_Click(object sender, EventArgs e)
@@ -536,6 +552,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             columnaCheck.ReadOnly = false;
             columnaCheck.TrueValue = true;
             columnaCheck.FalseValue = false;
+            columnaCheck.MinimumWidth = 20;
+            columnaCheck.Frozen = true;
+            DataGridViewHeaderCell algo = new DataGridViewHeaderCell();
             dgvListaOrdenProduccion.AutoGenerateColumns = false;
             dgvListaOrdenProduccion.Columns.Add(columnaCheck);
             dgvListaOrdenProduccion.Columns.Add("ORDP_CODIGO", "Código");
@@ -571,6 +590,11 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvListaOrdenProduccion.Columns["ORDP_FECHAINICIOESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvListaOrdenProduccion.Columns["ORDP_FECHAFINESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvListaOrdenProduccion.Columns["ORDP_CANTIDADESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
+            chkSeleccionarOP.Parent = dgvListaOrdenProduccion;
+            chkSeleccionarOP.Location = new Point(5, 3);
+            chkSeleccionarOP.Text = string.Empty;
+            chkSeleccionarOP.AutoSize = true;
+            chkSeleccionarOP.CheckedChanged += new EventHandler(chkSeleccionarOP_CheckedChanged);
 
             //Dataviews y combos
             dvPlanAnual = new DataView(dsPlanSemanal.PLANES_ANUALES);
@@ -616,6 +640,18 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
 
             cbAnioBuscar.SetDatos(dvPlanAnual, "PAN_CODIGO", "PAN_ANIO", "Seleccione", false);
+        }
+
+        void chkSeleccionarOP_CheckedChanged(object sender, EventArgs e)
+        {
+            dgvListaOrdenProduccion.BeginEdit(true);
+            foreach (DataGridViewRow fila in dgvListaOrdenProduccion.Rows)
+            {
+                DataGridViewCheckBoxCell cellSelecion = fila.Cells[0] as DataGridViewCheckBoxCell;
+                cellSelecion.Value = chkSeleccionarOP.Checked;
+            }
+            dgvListaOrdenProduccion.EndEdit();
+            dgvListaOrdenProduccion.Refresh();
         }
         #endregion
 
@@ -812,20 +848,23 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void dgvListaOrdenProduccion_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            if (e.ColumnIndex != 0)
             {
-                columnIndex = e.ColumnIndex;
-                if (dgvListaOrdenProduccion.Columns[columnIndex].Frozen)
+                if (e.Button == MouseButtons.Right)
                 {
-                    tsmiBloquearColumna.Checked = true;
-                    tsmiDesbloquearColumna.Checked = false;
+                    columnIndex = e.ColumnIndex;
+                    if (dgvListaOrdenProduccion.Columns[columnIndex].Frozen)
+                    {
+                        tsmiBloquearColumna.Checked = true;
+                        tsmiDesbloquearColumna.Checked = false;
+                    }
+                    else
+                    {
+                        tsmiBloquearColumna.Checked = false;
+                        tsmiDesbloquearColumna.Checked = true;
+                    }
+                    cmsGrillaOrdenesProduccion.Show(MousePosition);
                 }
-                else
-                {
-                    tsmiBloquearColumna.Checked = false;
-                    tsmiDesbloquearColumna.Checked = true;
-                }
-                cmsGrillaOrdenesProduccion.Show(MousePosition);
             }
         }
         #endregion
@@ -934,6 +973,8 @@ namespace GyCAP.UI.PlanificacionProduccion
         }
 
         #endregion
+
+        
 
         
 

@@ -57,6 +57,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.tpManual = new System.Windows.Forms.TabPage();
             this.tpOrdenProduccion = new System.Windows.Forms.TabPage();
             this.gbFechas = new System.Windows.Forms.GroupBox();
             this.label28 = new System.Windows.Forms.Label();
@@ -148,7 +149,6 @@
             this.cbModoInicio = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.dtpFechaPlanear = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.cbModoFecha = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.tpManual = new System.Windows.Forms.TabPage();
             this.tcOrdenTrabajo.SuspendLayout();
             this.tpAutomatico.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -306,6 +306,7 @@
             this.tvDetallePlan.Name = "tvDetallePlan";
             this.tvDetallePlan.Size = new System.Drawing.Size(574, 175);
             this.tvDetallePlan.TabIndex = 5;
+            this.tvDetallePlan.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.tvDetallePlan_AfterCheck);
             // 
             // groupBox1
             // 
@@ -517,6 +518,15 @@
             this.label5.Size = new System.Drawing.Size(49, 13);
             this.label5.TabIndex = 1;
             this.label5.Text = "Semana:";
+            // 
+            // tpManual
+            // 
+            this.tpManual.Location = new System.Drawing.Point(4, 22);
+            this.tpManual.Name = "tpManual";
+            this.tpManual.Size = new System.Drawing.Size(780, 490);
+            this.tpManual.TabIndex = 3;
+            this.tpManual.Text = "Generar manualmente";
+            this.tpManual.UseVisualStyleBackColor = true;
             // 
             // tpOrdenProduccion
             // 
@@ -1492,15 +1502,6 @@
             this.cbModoFecha.Name = "cbModoFecha";
             this.cbModoFecha.Size = new System.Drawing.Size(157, 21);
             this.cbModoFecha.TabIndex = 18;
-            // 
-            // tpManual
-            // 
-            this.tpManual.Location = new System.Drawing.Point(4, 22);
-            this.tpManual.Name = "tpManual";
-            this.tpManual.Size = new System.Drawing.Size(780, 490);
-            this.tpManual.TabIndex = 3;
-            this.tpManual.Text = "Generar manualmente";
-            this.tpManual.UseVisualStyleBackColor = true;
             // 
             // frmGenerarOrdenTrabajo
             // 
