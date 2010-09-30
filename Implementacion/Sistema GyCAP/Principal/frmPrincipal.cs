@@ -247,6 +247,12 @@ namespace Principal
             GyCAP.UI.GestionPedido.frmGestionPedido.Instancia.MdiParent = this;
             GyCAP.UI.GestionPedido.frmGestionPedido.Instancia.Show();
         }
+
+        private void btnControlPlan_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.ControlTrabajoEnProceso.frmControlPlanificacion.Instancia.MdiParent = this;
+            GyCAP.UI.ControlTrabajoEnProceso.frmControlPlanificacion.Instancia.Show();
+        }
         
     }
 }
