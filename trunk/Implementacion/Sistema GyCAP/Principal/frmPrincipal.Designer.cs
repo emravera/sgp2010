@@ -87,6 +87,7 @@
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnControlPlan = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -452,7 +453,8 @@
             this.btnPlanSemanal,
             this.toolCliente,
             this.btnOperaciones,
-            this.toolPedidos});
+            this.toolPedidos,
+            this.btnControlPlan});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(792, 36);
@@ -634,6 +636,16 @@
             this.lblEstado.Size = new System.Drawing.Size(38, 17);
             this.lblEstado.Text = "Status";
             // 
+            // btnControlPlan
+            // 
+            this.btnControlPlan.Image = ((System.Drawing.Image)(resources.GetObject("btnControlPlan.Image")));
+            this.btnControlPlan.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnControlPlan.Name = "btnControlPlan";
+            this.btnControlPlan.Size = new System.Drawing.Size(80, 33);
+            this.btnControlPlan.Text = "Control Planes";
+            this.btnControlPlan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnControlPlan.Click += new System.EventHandler(this.btnControlPlan_Click);
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -719,6 +731,7 @@
         private System.Windows.Forms.ToolStripButton toolCliente;
         private System.Windows.Forms.ToolStripButton btnOperaciones;
         private System.Windows.Forms.ToolStripButton toolPedidos;
+        private System.Windows.Forms.ToolStripButton btnControlPlan;
     }
 }
 

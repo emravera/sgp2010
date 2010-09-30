@@ -595,7 +595,6 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-
             try
             {
                 //Limpiamos el Dataset
@@ -623,7 +622,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                 MessageBox.Show(ex.Message, "Error: Plan Semanal - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetInterface(estadoUI.inicio);
             }
-
         }    
 
         private void dgvLista_CellClick(object sender, DataGridViewCellEventArgs e)
