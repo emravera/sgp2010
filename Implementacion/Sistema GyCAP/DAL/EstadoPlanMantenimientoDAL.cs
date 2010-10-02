@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GyCAP.DAL
 {
-    class EstadoPlanMantenimientoDAL
+    public class EstadoPlanMantenimientoDAL
     {
     }
 }
