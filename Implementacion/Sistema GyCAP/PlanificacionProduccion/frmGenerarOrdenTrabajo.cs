@@ -310,8 +310,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                 string mensaje = string.Empty;
                 if (cbModoFecha.GetSelectedIndex() == -1) { mensaje = "- Modo de planeación"; }
                 if (dtpFechaPlanear.EsFechaNull()) { mensaje = "- Modo de inicio"; }
-                if (cbModoInicio.GetSelectedIndex() == -1) { mensaje = "- Modo de stock"; }
-                if (cbModoStock.GetSelectedIndex() != -1) { mensaje = "- Fecha"; }
+                //if (cbModoInicio.GetSelectedIndex() == -1) { mensaje = "- Modo de stock"; }
+                //if (cbModoStock.GetSelectedIndex() != -1) { mensaje = "- Fecha"; }
                 if (string.IsNullOrEmpty(mensaje))
                 {
                     int codigoP = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"].ToString());
@@ -729,7 +729,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 txtObservacionesOrdenT.Text = row.ORDT_OBSERVACIONES;
 
                 if (!row.IsORDT_FECHAINICIOESTIMADANull()) { txtFechaInicioOrdenT.Text = row.ORDT_FECHAINICIOESTIMADA.ToShortDateString(); }
-                if (!row.IsORDT_HORAFINESTIMADANull()) { txtFechaFinOrdenT.Text = row.ORDT_FECHAFINESTIMADA.ToShortDateString(); }
+                if (!row.IsORDT_FECHAFINESTIMADANull()) { txtFechaFinOrdenT.Text = row.ORDT_FECHAFINESTIMADA.ToShortDateString(); }
                 if (!row.IsORDT_HORAINICIOESTIMADANull()) { txtHoraInicioOrdenT.Text = Sistema.FuncionesAuxiliares.DecimalHourToString(row.ORDT_HORAINICIOESTIMADA); }
                 if (!row.IsORDT_HORAFINESTIMADANull()) { txtHoraFinOrdenT.Text = Sistema.FuncionesAuxiliares.DecimalHourToString(row.ORDT_HORAFINESTIMADA); }
             }
