@@ -146,6 +146,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsHojaRuta.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsMantenimiento.cs">
+      <DependentUpon>dsMantenimiento.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dsMantenimiento.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsMantenimiento.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsMaquina.cs">
       <DependentUpon>dsMaquina.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -430,6 +439,17 @@
     </None>
     <None Include="dsHojaRuta.xss">
       <DependentUpon>dsHojaRuta.xsd</DependentUpon>
+    </None>
+    <None Include="dsMantenimiento.xsc">
+      <DependentUpon>dsMantenimiento.xsd</DependentUpon>
+    </None>
+    <None Include="dsMantenimiento.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsMantenimiento.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsMantenimiento.xss">
+      <DependentUpon>dsMantenimiento.xsd</DependentUpon>
     </None>
     <None Include="dsMaquina.xsc">
       <DependentUpon>dsMaquina.xsd</DependentUpon>
