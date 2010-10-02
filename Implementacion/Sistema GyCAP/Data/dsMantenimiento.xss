@@ -7,8 +7,8 @@
 <DiagramLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ex:showrelationlabel="False" ViewPortX="0" ViewPortY="0" xmlns:ex="urn:schemas-microsoft-com:xml-msdatasource-layout-extended" xmlns="urn:schemas-microsoft-com:xml-msdatasource-layout">
   <Shapes>
     <Shape ID="DesignTable:MANTENIMIENTOS" ZOrder="9" X="544" Y="40" Height="139" Width="250" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="92" />
-    <Shape ID="DesignTable:PLANES_MANTENIMIENTO" ZOrder="4" X="50" Y="389" Height="171" Width="295" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="109" />
-    <Shape ID="DesignTable:ESTADO_PLANES_MANTENIMIENTO" ZOrder="5" X="59" Y="631" Height="122" Width="275" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="75" />
+    <Shape ID="DesignTable:PLANES_MANTENIMIENTO" ZOrder="4" X="45" Y="351" Height="171" Width="299" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="109" />
+    <Shape ID="DesignTable:ESTADO_PLANES_MANTENIMIENTO" ZOrder="5" X="51" Y="616" Height="122" Width="291" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="75" />
     <Shape ID="DesignTable:DETALLE_PLANES_MANTENIMIENTO" ZOrder="8" X="43" Y="28" Height="258" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="211" />
     <Shape ID="DesignTable:TIPOS_MANTENIMIENTOS" ZOrder="2" X="522" Y="288" Height="122" Width="293" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="75" />
   </Shapes>
@@ -16,12 +16,12 @@
     <Connector ID="DesignRelation:planMantenimiento_estadoPlanMantenimiento_fk" ZOrder="3" LineWidth="11">
       <RoutePoints>
         <Point>
-          <X>201</X>
-          <Y>631</Y>
+          <X>188</X>
+          <Y>616</Y>
         </Point>
         <Point>
-          <X>201</X>
-          <Y>560</Y>
+          <X>188</X>
+          <Y>522</Y>
         </Point>
       </RoutePoints>
     </Connector>
@@ -40,11 +40,11 @@
     <Connector ID="DesignRelation:detallePlanMantenimiento_planMantenimiento_fk" ZOrder="6" LineWidth="11">
       <RoutePoints>
         <Point>
-          <X>185</X>
-          <Y>389</Y>
+          <X>188</X>
+          <Y>351</Y>
         </Point>
         <Point>
-          <X>185</X>
+          <X>188</X>
           <Y>286</Y>
         </Point>
       </RoutePoints>
