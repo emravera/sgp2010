@@ -17,6 +17,10 @@ namespace GyCAP.BLL
         public static readonly int nodoDetalleOrdenTrabajo = 2;
         public static readonly int nodoComplemento = 3;
 
+        public static readonly int EstadoGenerado = 1;
+        public static readonly int EstadoEnProceso = 2;
+        public static readonly int EstadoFinalizado = 5;
+
         public static string GetTipoParte(int tipo)
         {
             if (tipo == parteTipoConjunto) return "Conjunto";
@@ -338,23 +342,26 @@ namespace GyCAP.BLL
         private static DateTime CalcularFechaHaciaDelante(TreeNode nodo, DateTime fechaInicio, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
         {
             if (nodo != null)
-            {
-                dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(Convert.ToInt32(nodo.Name)).ORDT_FECHAINICIOESTIMADA = fechaInicio;
+            {               
+                DateTime fechaMayor = fechaInicio;
+                DateTime nuevaFecha;
+                
+                foreach (TreeNode nodoHijo in nodo.Nodes)
+                {
+                    nuevaFecha = CalcularFechaHaciaDelante(nodoHijo, fechaInicio, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                    if (nuevaFecha > fechaMayor) { fechaMayor = nuevaFecha; }
+                }
+
                 decimal codOperacion = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(Convert.ToInt32(nodo.Name)).OPR_NUMERO;
                 decimal codCentro = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(Convert.ToInt32(nodo.Name)).CTO_CODIGO;
                 decimal horasOperacion = dsHojaRuta.OPERACIONES.FindByOPR_NUMERO(codOperacion).OPR_HORASREQUERIDA;
                 decimal cantidad = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(Convert.ToInt32(nodo.Name)).ORDT_CANTIDADESTIMADA;
                 decimal sumar = cantidad * horasOperacion;
-                DateTime fechaFinDetalle = fechaInicio.AddHours(Double.Parse(sumar.ToString()));
-                dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(Convert.ToInt32(nodo.Name)).ORDT_FECHAFINESTIMADA = fechaFinDetalle;
-                DateTime fechaMayor = fechaFinDetalle;
-                DateTime nuevaFecha;
-                foreach (TreeNode nodoHijo in nodo.Nodes)
-                {
-                    nuevaFecha = CalcularFechaHaciaDelante(nodoHijo, fechaFinDetalle, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
-                    if (nuevaFecha > fechaMayor) { fechaMayor = nuevaFecha; }
-                }
-                return fechaMayor;
+                dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(Convert.ToInt32(nodo.Name)).ORDT_FECHAINICIOESTIMADA = fechaMayor;
+                DateTime fechaFin = fechaMayor.AddHours(Double.Parse(sumar.ToString()));
+                dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(Convert.ToInt32(nodo.Name)).ORDT_FECHAFINESTIMADA = fechaFin;
+
+                return fechaMayor.AddHours(Convert.ToDouble(horasOperacion));
             }
 
             return fechaInicio;
