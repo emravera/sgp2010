@@ -81,6 +81,7 @@ namespace GyCAP.BLL
                         if (ordenSiguiente == 0) { rowOTCxE.SetORDT_ORDENSIGUIENTENull(); }
                         else { rowOTCxE.ORDT_ORDENSIGUIENTE = ordenSiguiente; }
                         rowOTCxE.ORDT_NIVEL = 0;
+                        rowOTCxE.ORDT_SECUENCIA = rowHojaCxE.DHR_SECUENCIA;
                         rowOTCxE.EndEdit();
                         dsOrdenTrabajo.ORDENES_TRABAJO.AddORDENES_TRABAJORow(rowOTCxE);
                         ordenSiguiente = rowOTCxE.ORDT_NUMERO;
@@ -117,6 +118,7 @@ namespace GyCAP.BLL
                             if (ordenSiguiente == 0) { rowOTSCxC.SetORDT_ORDENSIGUIENTENull(); }
                             else { rowOTSCxC.ORDT_ORDENSIGUIENTE = ordenSiguiente; }
                             rowOTSCxC.ORDT_NIVEL = nivel;
+                            rowOTSCxC.ORDT_SECUENCIA = rowHojaSCxC.DHR_SECUENCIA;
                             rowOTSCxC.EndEdit();
                             dsOrdenTrabajo.ORDENES_TRABAJO.AddORDENES_TRABAJORow(rowOTSCxC);
                             ordenSiguiente = rowOTSCxC.ORDT_NUMERO;
@@ -154,6 +156,7 @@ namespace GyCAP.BLL
                                 if (ordenSiguiente == 0) { rowOTPxSC.SetORDT_ORDENSIGUIENTENull(); }
                                 else { rowOTPxSC.ORDT_ORDENSIGUIENTE = ordenSiguiente; }
                                 rowOTPxSC.ORDT_NIVEL = nivel;
+                                rowOTPxSC.ORDT_SECUENCIA = rowHojaPxSC.DHR_SECUENCIA;
                                 rowOTPxSC.EndEdit();
                                 dsOrdenTrabajo.ORDENES_TRABAJO.AddORDENES_TRABAJORow(rowOTPxSC);
                                 ordenSiguiente = rowOTPxSC.ORDT_NUMERO;
@@ -194,6 +197,7 @@ namespace GyCAP.BLL
                             if (ordenSiguiente == 0) { rowOTPxC.SetORDT_ORDENSIGUIENTENull(); }
                             else { rowOTPxC.ORDT_ORDENSIGUIENTE = ordenSiguiente; }
                             rowOTPxC.ORDT_NIVEL = nivel;
+                            rowOTPxC.ORDT_SECUENCIA = rowHojaPxC.DHR_SECUENCIA;
                             rowOTPxC.EndEdit();
                             dsOrdenTrabajo.ORDENES_TRABAJO.AddORDENES_TRABAJORow(rowOTPxC);
                             ordenSiguiente = rowOTPxC.ORDT_NUMERO;
@@ -232,6 +236,7 @@ namespace GyCAP.BLL
                         if (ordenSiguiente == 0) { rowOTPxE.SetORDT_ORDENSIGUIENTENull(); }
                         else { rowOTPxE.ORDT_ORDENSIGUIENTE = ordenSiguiente; }
                         rowOTPxE.ORDT_NIVEL = 0;
+                        rowOTPxE.ORDT_SECUENCIA = rowHojaPxE.DHR_SECUENCIA;
                         rowOTPxE.EndEdit();
                         dsOrdenTrabajo.ORDENES_TRABAJO.AddORDENES_TRABAJORow(rowOTPxE);
                         ordenSiguiente = rowOTPxE.ORDT_NUMERO;
