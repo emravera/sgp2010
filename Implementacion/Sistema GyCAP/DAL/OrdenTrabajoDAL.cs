@@ -21,7 +21,7 @@ namespace GyCAP.DAL
                          ,[ordt_cantidadestimada]
                          ,[ordt_cantidadreal]
                          ,[ordt_fechainicioestimada]
-                         ,[ordt_fechainicioral]
+                         ,[ordt_fechainicioreal]
                          ,[ordt_fechafinestimada]
                          ,[ordt_fechafinreal]
                          ,[ordt_horainicioestimada]
@@ -33,9 +33,10 @@ namespace GyCAP.DAL
                          ,[opr_numero]
                          ,[ordt_observaciones]
                          ,[ordt_ordensiguiente]
-                         ,[ordt_nivel])
+                         ,[ordt_nivel]
+                         ,[ordt_secuencia])
                          VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, 
-                                 @p16, @p17, @p18, @p19, @p20, @p21) SELECT @@Identity";
+                                 @p16, @p17, @p18, @p19, @p20, @p21, @p22) SELECT @@Identity";
 
             object siguiente = DBNull.Value;
             if (!row.IsORDT_ORDENSIGUIENTENull()) { siguiente = row.ORDT_ORDENSIGUIENTE; }
@@ -60,9 +61,10 @@ namespace GyCAP.DAL
                                              row.OPR_NUMERO,
                                              row.ORDT_OBSERVACIONES,
                                              siguiente,
-                                             row.ORDT_NIVEL };
+                                             row.ORDT_NIVEL,
+                                             row.ORDT_SECUENCIA };
 
-            return Convert.ToInt32(row.ORDT_NUMERO);
+            return Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
         }     
 
         
