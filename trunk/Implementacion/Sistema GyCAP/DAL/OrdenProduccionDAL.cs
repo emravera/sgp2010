@@ -28,7 +28,7 @@ namespace GyCAP.DAL
                         ,[ordp_cantidadestimada]
                         ,[ordp_cantidadreal]
                         ,[coc_codigo])
-                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @12, @p13, @p14, @p15) SELECT @@Identity";
+                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15) SELECT @@Identity";
 
             Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow rowOrdenP = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion);
             object ordpm = DBNull.Value, dpsem = DBNull.Value, cocina = DBNull.Value;
@@ -60,18 +60,18 @@ namespace GyCAP.DAL
             {
                 transaccion = DB.IniciarTransaccion();
                 rowOrdenP.BeginEdit();
-                rowOrdenP.ORDP_NUMERO = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
-                if (rowOrdenP.IsORDPM_NUMERONull()) { rowOrdenP.ORDP_CODIGO = "OPA-" + rowOrdenP.ORDP_NUMERO.ToString(); }
-                else { rowOrdenP.ORDP_CODIGO = "OPM-" + rowOrdenP.ORDPM_NUMERO.ToString(); }
+                numeroOrdenProduccion = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
+                if (rowOrdenP.IsORDPM_NUMERONull()) { rowOrdenP.ORDP_CODIGO = "OPA-" + numeroOrdenProduccion; }
+                else { rowOrdenP.ORDP_CODIGO = "OPM-" + numeroOrdenProduccion; }
                 rowOrdenP.EndEdit();
 
-                valoresParametros = new object[] { rowOrdenP.ORDP_CODIGO, rowOrdenP.ORDP_NUMERO };
+                valoresParametros = new object[] { rowOrdenP.ORDP_CODIGO, numeroOrdenProduccion };
                 DB.executeNonQuery(sqlUOP, valoresParametros, transaccion);
 
-                foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOrdenTrabajo in dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).GetORDENES_TRABAJORows())
+                foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOrdenTrabajo in rowOrdenP.GetORDENES_TRABAJORows())
                 {
                     rowOrdenTrabajo.BeginEdit();
-                    rowOrdenTrabajo.ORDP_NUMERO = rowOrdenP.ORDP_NUMERO;
+                    rowOrdenTrabajo.ORDP_NUMERO = numeroOrdenProduccion;
                     int numero = OrdenTrabajoDAL.Insertar(rowOrdenTrabajo, transaccion);
                     foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow row in (Data.dsOrdenTrabajo.ORDENES_TRABAJORow[])dsOrdenTrabajo.ORDENES_TRABAJO.Select("ordt_ordensiguiente = " + rowOrdenTrabajo.ORDT_NUMERO))
                     {
@@ -85,7 +85,10 @@ namespace GyCAP.DAL
                     DB.executeNonQuery(sqlUOT, valoresParametros, transaccion);
                     rowOrdenTrabajo.EndEdit();
                 }
-
+                rowOrdenP.BeginEdit();
+                rowOrdenP.ORDP_NUMERO = numeroOrdenProduccion;
+                rowOrdenP.EndEdit();
+                
                 transaccion.Commit();
             }
             catch (SqlException ex)
