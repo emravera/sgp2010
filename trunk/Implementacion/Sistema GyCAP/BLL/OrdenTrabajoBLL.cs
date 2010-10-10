@@ -76,6 +76,7 @@ namespace GyCAP.BLL
                         rowOTCxE.ESTR_CODIGO = codigoEstructura;
                         rowOTCxE.ORDT_OBSERVACIONES = string.Empty;
                         rowOTCxE.ORDT_CANTIDADESTIMADA = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_CANTIDADESTIMADA * rowCxE.CXE_CANTIDAD;
+                        rowOTCxE.ORDT_CANTIDADREAL = 0;
                         rowOTCxE.CTO_CODIGO = rowHojaCxE.CTO_CODIGO;
                         rowOTCxE.OPR_NUMERO = rowHojaCxE.OPR_NUMERO;
                         if (ordenSiguiente == 0) { rowOTCxE.SetORDT_ORDENSIGUIENTENull(); }
@@ -113,6 +114,7 @@ namespace GyCAP.BLL
                             rowOTSCxC.ESTR_CODIGO = codigoEstructura;
                             rowOTSCxC.ORDT_OBSERVACIONES = string.Empty;
                             rowOTSCxC.ORDT_CANTIDADESTIMADA = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_CANTIDADESTIMADA * rowCxE.CXE_CANTIDAD * rowSCxC.SCXCJ_CANTIDAD;
+                            rowOTSCxC.ORDT_CANTIDADREAL = 0;
                             rowOTSCxC.CTO_CODIGO = rowHojaSCxC.CTO_CODIGO;
                             rowOTSCxC.OPR_NUMERO = rowHojaSCxC.OPR_NUMERO;
                             if (ordenSiguiente == 0) { rowOTSCxC.SetORDT_ORDENSIGUIENTENull(); }
@@ -151,6 +153,7 @@ namespace GyCAP.BLL
                                 rowOTPxSC.ESTR_CODIGO = codigoEstructura;
                                 rowOTPxSC.ORDT_OBSERVACIONES = string.Empty;
                                 rowOTPxSC.ORDT_CANTIDADESTIMADA = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_CANTIDADESTIMADA * rowCxE.CXE_CANTIDAD * rowSCxC.SCXCJ_CANTIDAD * rowPxSC.PXSC_CANTIDAD;
+                                rowOTPxSC.ORDT_CANTIDADREAL = 0;
                                 rowOTPxSC.CTO_CODIGO = rowHojaPxSC.CTO_CODIGO;
                                 rowOTPxSC.OPR_NUMERO = rowHojaPxSC.OPR_NUMERO;
                                 if (ordenSiguiente == 0) { rowOTPxSC.SetORDT_ORDENSIGUIENTENull(); }
@@ -192,6 +195,7 @@ namespace GyCAP.BLL
                             rowOTPxC.ESTR_CODIGO = codigoEstructura;
                             rowOTPxC.ORDT_OBSERVACIONES = string.Empty;
                             rowOTPxC.ORDT_CANTIDADESTIMADA = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_CANTIDADESTIMADA * rowCxE.CXE_CANTIDAD * rowPxC.PXCJ_CANTIDAD;
+                            rowOTPxC.ORDT_CANTIDADREAL = 0;
                             rowOTPxC.CTO_CODIGO = rowHojaPxC.CTO_CODIGO;
                             rowOTPxC.OPR_NUMERO = rowHojaPxC.OPR_NUMERO;
                             if (ordenSiguiente == 0) { rowOTPxC.SetORDT_ORDENSIGUIENTENull(); }
@@ -231,6 +235,7 @@ namespace GyCAP.BLL
                         rowOTPxE.ESTR_CODIGO = codigoEstructura;
                         rowOTPxE.ORDT_OBSERVACIONES = string.Empty;
                         rowOTPxE.ORDT_CANTIDADESTIMADA = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_CANTIDADESTIMADA * rowPxE.PXE_CANTIDAD;
+                        rowOTPxE.ORDT_CANTIDADREAL = 0;
                         rowOTPxE.CTO_CODIGO = rowHojaPxE.CTO_CODIGO;
                         rowOTPxE.OPR_NUMERO = rowHojaPxE.OPR_NUMERO;
                         if (ordenSiguiente == 0) { rowOTPxE.SetORDT_ORDENSIGUIENTENull(); }
