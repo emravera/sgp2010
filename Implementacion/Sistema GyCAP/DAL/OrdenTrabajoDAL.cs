@@ -47,7 +47,7 @@ namespace GyCAP.DAL
                                              row.PAR_TIPO,
                                              row.ORDT_ORIGEN,
                                              row.ORDT_CANTIDADESTIMADA,
-                                             DBNull.Value,
+                                             row.ORDT_CANTIDADREAL,
                                              row.ORDT_FECHAINICIOESTIMADA,
                                              DBNull.Value,
                                              row.ORDT_FECHAFINESTIMADA,
