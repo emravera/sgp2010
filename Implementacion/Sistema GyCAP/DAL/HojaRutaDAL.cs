@@ -14,7 +14,8 @@ namespace GyCAP.DAL
             string sqlHoja = @"INSERT INTO [HOJAS_RUTA] ([hr_nombre], [hr_descripcion], [hr_activo], [hr_fechaAlta]) 
                               VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
 
-            string sqlDetalle = "INSERT INTO [DETALLE_HOJARUTA] ([cto_codigo], [hr_codigo], [dhr_secuencia], [opr_numero]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+            string sqlDetalle = @"INSERT INTO [DETALLE_HOJARUTA] ([cto_codigo], [hr_codigo], [dhr_secuencia], [opr_numero], [ustck_origen], [ustck_destino]) 
+                                  VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
 
             Data.dsHojaRuta.HOJAS_RUTARow rowhoja = dsHojaRuta.HOJAS_RUTA.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsHojaRuta.HOJAS_RUTARow;
             object[] valorParametros = { rowhoja.HR_NOMBRE, rowhoja.HR_DESCRIPCION, rowhoja.HR_ACTIVO, rowhoja.HR_FECHAALTA };
@@ -27,9 +28,12 @@ namespace GyCAP.DAL
                 rowhoja.HR_CODIGO = Convert.ToInt32(DB.executeScalar(sqlHoja, valorParametros, transaccion));
                 rowhoja.EndEdit();
 
+                object stockOrigen = DBNull.Value, stockDestino = DBNull.Value;
                 foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow row in (Data.dsHojaRuta.DETALLE_HOJARUTARow[])dsHojaRuta.DETALLE_HOJARUTA.Select(null, null, DataViewRowState.Added))
                 {
-                    valorParametros = new object[] { row.CTO_CODIGO, rowhoja.HR_CODIGO, row.DHR_SECUENCIA, row.OPR_NUMERO };
+                    if (!row.IsUSTCK_ORIGENNull()) { stockOrigen = row.USTCK_ORIGEN; }
+                    if (!row.IsUSTCK_DESTINONull()) { stockDestino = row.USTCK_DESTINO; }
+                    valorParametros = new object[] { row.CTO_CODIGO, rowhoja.HR_CODIGO, row.DHR_SECUENCIA, row.OPR_NUMERO, stockOrigen, stockDestino };
                     row.BeginEdit();
                     row.DHR_CODIGO = Convert.ToInt32(DB.executeScalar(sqlDetalle, valorParametros, transaccion));
                     row.HR_CODIGO = rowhoja.HR_CODIGO;
@@ -52,7 +56,7 @@ namespace GyCAP.DAL
         public static void Actualizar(Data.dsHojaRuta dsHojaRuta)
         {
             string sqlHoja = "UPDATE HOJAS_RUTA SET hr_nombre = @p0, hr_descripcion = @p1, hr_activo = @p2, hr_fechaalta = @p3 WHERE hr_codigo = @p4";
-            string sqlIDetalle = "INSERT INTO [DETALLE_HOJARUTA] ([cto_codigo], [hr_codigo], [dhr_secuencia], [opr_numero]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+            string sqlIDetalle = "INSERT INTO [DETALLE_HOJARUTA] ([cto_codigo], [hr_codigo], [dhr_secuencia], [opr_numero], [ustck_origen], [ustck_destino]) VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
             string sqlUDetalle = "UPDATE DETALLE_HOJARUTA SET dhr_secuencia = @p0 WHERE dhr_codigo = @p1";
             string sqlDDetalle = "DELETE FROM DETALLE_HOJARUTA WHERE dhr_codigo = @p0";
             Data.dsHojaRuta.HOJAS_RUTARow rowHoja = dsHojaRuta.HOJAS_RUTA.GetChanges(DataRowState.Modified).Rows[0] as Data.dsHojaRuta.HOJAS_RUTARow;
@@ -65,9 +69,12 @@ namespace GyCAP.DAL
 
                 DB.executeNonQuery(sqlHoja, valorParametros, transaccion);
 
+                object stockOrigen = DBNull.Value, stockDestino = DBNull.Value;
                 foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow row in (Data.dsHojaRuta.DETALLE_HOJARUTARow[])dsHojaRuta.DETALLE_HOJARUTA.Select(null, null, DataViewRowState.Added))
                 {
-                    valorParametros = new object[] { row.CTO_CODIGO, row.HR_CODIGO, row.DHR_SECUENCIA, row.OPR_NUMERO };
+                    if (!row.IsUSTCK_ORIGENNull()) { stockOrigen = row.USTCK_ORIGEN; }
+                    if (!row.IsUSTCK_DESTINONull()) { stockDestino = row.USTCK_DESTINO; }
+                    valorParametros = new object[] { row.CTO_CODIGO, row.HR_CODIGO, row.DHR_SECUENCIA, row.OPR_NUMERO, stockOrigen, stockDestino };                    
                     row.BeginEdit();
                     row.DHR_CODIGO = Convert.ToInt32(DB.executeScalar(sqlIDetalle, valorParametros, transaccion));
                     row.EndEdit();
@@ -124,6 +131,7 @@ namespace GyCAP.DAL
 
         public static bool PuedeEliminarse(int codigoHoja)
         {
+            //agregar las comprobaciones de las ordenes de trabajo - gonzalo
             string sqlC = "SELECT count(conj_codigo) FROM CONJUNTOS WHERE hr_codigo = @p0";
             string sqlSC = "SELECT count(sconj_codigo) FROM SUBCONJUNTOS WHERE hr_codigo = @p0";
             string sqlP = "SELECT count(pza_codigo) FROM PIEZAS WHERE hr_codigo = @p0";
@@ -222,7 +230,7 @@ namespace GyCAP.DAL
         
         private static void ObtenerDetalleHoja(Data.dsHojaRuta ds)
         {
-            string sql = "SELECT dhr_codigo, cto_codigo, hr_codigo, dhr_secuencia, opr_numero FROM DETALLE_HOJARUTA WHERE hr_codigo = @p0";
+            string sql = "SELECT dhr_codigo, cto_codigo, hr_codigo, dhr_secuencia, opr_numero, ustck_origen, ustck_destino FROM DETALLE_HOJARUTA WHERE hr_codigo = @p0";
             object[] valorParametros;
 
             foreach (Data.dsHojaRuta.HOJAS_RUTARow row in ds.HOJAS_RUTA)
@@ -234,7 +242,7 @@ namespace GyCAP.DAL
 
         private static void ObtenerDetalleHoja(int codigoHoja, Data.dsHojaRuta ds)
         {
-            string sql = @"SELECT dhr_codigo, cto_codigo, hr_codigo, dhr_secuencia, opr_numero FROM DETALLE_HOJARUTA 
+            string sql = @"SELECT dhr_codigo, cto_codigo, hr_codigo, dhr_secuencia, opr_numero, ustck_origen, ustck_destino FROM DETALLE_HOJARUTA 
                             WHERE hr_codigo = @p0 ORDER BY dhr_secuencia ASC";
             object[] valorParametros = { codigoHoja };
 

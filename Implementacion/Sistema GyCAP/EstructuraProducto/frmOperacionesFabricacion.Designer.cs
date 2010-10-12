@@ -59,10 +59,6 @@
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cboStockDestino = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cboStockOrigen = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             this.gbGrillaBuscar.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -97,7 +93,7 @@
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(484, 218);
+            this.dgvLista.Size = new System.Drawing.Size(484, 160);
             this.dgvLista.TabIndex = 0;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellContentDoubleClick);
@@ -110,7 +106,7 @@
             this.gbGrillaBuscar.Location = new System.Drawing.Point(3, 64);
             this.gbGrillaBuscar.Name = "gbGrillaBuscar";
             this.gbGrillaBuscar.Padding = new System.Windows.Forms.Padding(9);
-            this.gbGrillaBuscar.Size = new System.Drawing.Size(502, 250);
+            this.gbGrillaBuscar.Size = new System.Drawing.Size(502, 192);
             this.gbGrillaBuscar.TabIndex = 1;
             this.gbGrillaBuscar.TabStop = false;
             this.gbGrillaBuscar.Text = "Listado de Operaciones";
@@ -184,7 +180,7 @@
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(508, 317);
+            this.tpBuscar.Size = new System.Drawing.Size(508, 259);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
@@ -193,7 +189,7 @@
             this.gbGuardarCancelar.Controls.Add(this.btnVolver);
             this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
             this.gbGuardarCancelar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 257);
+            this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 199);
             this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
             this.gbGuardarCancelar.Name = "gbGuardarCancelar";
             this.gbGuardarCancelar.Size = new System.Drawing.Size(502, 57);
@@ -223,7 +219,7 @@
             this.tcMarca.Name = "tcMarca";
             this.tcMarca.Padding = new System.Drawing.Point(0, 0);
             this.tcMarca.SelectedIndex = 0;
-            this.tcMarca.Size = new System.Drawing.Size(516, 326);
+            this.tcMarca.Size = new System.Drawing.Size(516, 268);
             this.tcMarca.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcMarca.TabIndex = 8;
             // 
@@ -235,16 +231,12 @@
             this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDatos.Size = new System.Drawing.Size(508, 317);
+            this.tpDatos.Size = new System.Drawing.Size(508, 259);
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
             // gbDatos
             // 
-            this.gbDatos.Controls.Add(this.label7);
-            this.gbDatos.Controls.Add(this.label6);
-            this.gbDatos.Controls.Add(this.cboStockDestino);
-            this.gbDatos.Controls.Add(this.cboStockOrigen);
             this.gbDatos.Controls.Add(this.numHoras);
             this.gbDatos.Controls.Add(this.label4);
             this.gbDatos.Controls.Add(this.txtDescripcion);
@@ -257,7 +249,7 @@
             this.gbDatos.Location = new System.Drawing.Point(3, 3);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(502, 252);
+            this.gbDatos.Size = new System.Drawing.Size(502, 195);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Operaciones Fabricación";
@@ -292,7 +284,7 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(164, 181);
+            this.txtDescripcion.Location = new System.Drawing.Point(164, 121);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(314, 58);
@@ -317,7 +309,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 184);
+            this.label5.Location = new System.Drawing.Point(17, 121);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 13);
             this.label5.TabIndex = 4;
@@ -435,52 +427,14 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(520, 382);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(520, 324);
             this.tableLayoutPanel1.TabIndex = 11;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(17, 123);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(117, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Ubicación stock origen:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(17, 152);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(122, 13);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Ubicación stock destino:";
-            // 
-            // cboStockDestino
-            // 
-            this.cboStockDestino.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboStockDestino.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboStockDestino.FormattingEnabled = true;
-            this.cboStockDestino.Location = new System.Drawing.Point(164, 149);
-            this.cboStockDestino.Name = "cboStockDestino";
-            this.cboStockDestino.Size = new System.Drawing.Size(193, 21);
-            this.cboStockDestino.TabIndex = 10;
-            // 
-            // cboStockOrigen
-            // 
-            this.cboStockOrigen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboStockOrigen.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboStockOrigen.FormattingEnabled = true;
-            this.cboStockOrigen.Location = new System.Drawing.Point(164, 120);
-            this.cboStockOrigen.Name = "cboStockOrigen";
-            this.cboStockOrigen.Size = new System.Drawing.Size(193, 21);
-            this.cboStockOrigen.TabIndex = 9;
             // 
             // frmOperacionesFabricacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 382);
+            this.ClientSize = new System.Drawing.Size(520, 324);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -541,9 +495,5 @@
         private System.Windows.Forms.NumericUpDown numHoras;
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.ToolStripButton btnNuevo;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboStockDestino;
-        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboStockOrigen;
     }
 }

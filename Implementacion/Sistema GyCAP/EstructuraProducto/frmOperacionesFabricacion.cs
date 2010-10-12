@@ -13,7 +13,7 @@ namespace GyCAP.UI.EstructuraProducto
     {
         private static frmOperacionesFabricacion _frmOperacionesFabricacion = null;
         private Data.dsOperacionesFabricacion dsOperacionesFabricacion = new GyCAP.Data.dsOperacionesFabricacion();
-        private DataView dvListaOperaciones, dvStockOrigen, dvStockDestino;
+        private DataView dvListaOperaciones;
         private enum estadoUI { inicio, nuevo, consultar, modificar, buscar };
         private estadoUI estadoInterface;
 
@@ -26,10 +26,9 @@ namespace GyCAP.UI.EstructuraProducto
             //Agregamos las columnas
             dgvLista.Columns.Add("OPR_CODIGO", "Código");
             dgvLista.Columns.Add("OPR_NOMBRE", "Nombre");
-            dgvLista.Columns.Add("OPR_DESCRIPCION", "Descripción");
             dgvLista.Columns.Add("OPR_HORASREQUERIDA", "Tiempo (hs)");
-            dgvLista.Columns.Add("USTCK_ORIGEN", "Stock origen");
-            dgvLista.Columns.Add("USTCK_DESTINO", "Stock destino");
+            dgvLista.Columns.Add("OPR_DESCRIPCION", "Descripción");
+            
 
             //Se setean los valores de las columnas 
             dgvLista.Columns["OPR_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -37,16 +36,12 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns["OPR_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["OPR_HORASREQUERIDA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvLista.Columns["OPR_HORASREQUERIDA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["USTCK_ORIGEN"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["USTCK_DESTINO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["OPR_CODIGO"].DataPropertyName = "OPR_CODIGO";
             dgvLista.Columns["OPR_NOMBRE"].DataPropertyName = "OPR_NOMBRE";
             dgvLista.Columns["OPR_DESCRIPCION"].DataPropertyName = "OPR_DESCRIPCION";
             dgvLista.Columns["OPR_HORASREQUERIDA"].DataPropertyName = "OPR_HORASREQUERIDA";
-            dgvLista.Columns["USTCK_ORIGEN"].DataPropertyName = "USTCK_ORIGEN";
-            dgvLista.Columns["USTCK_DESTINO"].DataPropertyName = "USTCK_DESTINO";
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListaOperaciones = new DataView(dsOperacionesFabricacion.OPERACIONES);
@@ -63,21 +58,6 @@ namespace GyCAP.UI.EstructuraProducto
             //Seteamos la configuracion del numeric UP-down
             numHoras.DecimalPlaces = 2;
             numHoras.Value = 0;
-
-            //Obtenemos las ubicaciones de stock, seteamos los dataview y los combos
-            try
-            {
-                BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsOperacionesFabricacion.UBICACIONES_STOCK);
-            }
-            catch (Entidades.Excepciones.BaseDeDatosException ex)
-            {
-                MessageBox.Show(ex.Message, "Error: Operaciones de Fabricación - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            dvStockOrigen = new DataView(dsOperacionesFabricacion.UBICACIONES_STOCK);
-            dvStockDestino = new DataView(dsOperacionesFabricacion.UBICACIONES_STOCK);
-            cboStockOrigen.SetDatos(dvStockOrigen, "USTCK_NUMERO", "USTCK_NOMBRE", "Sin especificar...", false);
-            cboStockDestino.SetDatos(dvStockDestino, "USTCK_NUMERO", "USTCK_NOMBRE", "Sin especificar...", false);
 
             //Seteamos el estado de la interface
             SetInterface(estadoUI.inicio);
@@ -196,8 +176,6 @@ namespace GyCAP.UI.EstructuraProducto
                     txtNombre.Text = string.Empty;
                     txtDescripcion.Text = string.Empty;
                     numHoras.Value = 0;
-                    cboStockOrigen.SetSelectedIndex(-1);                    
-                    cboStockDestino.SetSelectedIndex(-1);
                     txtCodigoOperacion.Focus();
 
                     //Los habilito
@@ -205,8 +183,6 @@ namespace GyCAP.UI.EstructuraProducto
                     txtNombre.ReadOnly = false;
                     txtDescripcion.ReadOnly = false;
                     numHoras.Enabled = true;
-                    cboStockOrigen.Enabled = true;
-                    cboStockDestino.Enabled = true;
                     break;
                 case estadoUI.consultar:
                     btnNuevo.Enabled = true;
@@ -223,8 +199,6 @@ namespace GyCAP.UI.EstructuraProducto
                     txtNombre.ReadOnly = true;
                     txtDescripcion.ReadOnly = true;
                     numHoras.Enabled = false;
-                    cboStockOrigen.Enabled = false;
-                    cboStockDestino.Enabled = false;
                     break;
                 case estadoUI.modificar:
                     btnNuevo.Enabled = true;
@@ -241,8 +215,7 @@ namespace GyCAP.UI.EstructuraProducto
                     txtNombre.ReadOnly = false;
                     txtDescripcion.ReadOnly = false;
                     numHoras.Enabled = true;
-                    cboStockOrigen.Enabled = true;
-                    cboStockDestino.Enabled = true;
+                    txtCodigoOperacion.Focus();
                     break;
                 default:
                     break;
@@ -294,11 +267,9 @@ namespace GyCAP.UI.EstructuraProducto
                    operacion.Nombre = txtNombre.Text;
                    operacion.Descripcion = txtDescripcion.Text;
                    operacion.HorasRequeridas = numHoras.Value;
-                   if (cboStockOrigen.GetSelectedIndex() != -1) { operacion.UbicacionStockOrigen = new GyCAP.Entidades.UbicacionStock(cboStockOrigen.GetSelectedValueInt()); }
-                   if (cboStockDestino.GetSelectedIndex() != -1) { operacion.UbicacionStockDestino = new GyCAP.Entidades.UbicacionStock(cboStockDestino.GetSelectedValueInt()); }
 
                    //Pregunto si se esta creando una nueva operacion
-                   if(estadoInterface==estadoUI.nuevo)
+                   if(estadoInterface == estadoUI.nuevo)
                    {
                        //Lo inserto en la base de datos
                        BLL.OperacionBLL.InsertarOperacion(operacion);
@@ -360,14 +331,6 @@ namespace GyCAP.UI.EstructuraProducto
                         //nombre = Sistema.FuncionesAuxiliares.DecimalHourToString(Convert.ToDecimal(e.Value), "{0}hs:{1}m");
                         //e.Value = nombre;
                         break;
-                    case "USTCK_ORIGEN":
-                        nombre = dsOperacionesFabricacion.UBICACIONES_STOCK.FindByUSTCK_NUMERO(Convert.ToInt32(e.Value)).USTCK_NOMBRE;
-                        e.Value = nombre;
-                        break;
-                    case "USTCK_DESTINO":
-                        nombre = dsOperacionesFabricacion.UBICACIONES_STOCK.FindByUSTCK_NUMERO(Convert.ToInt32(e.Value)).USTCK_NOMBRE;
-                        e.Value = nombre;
-                        break;
                     default:
                         break;
                 }
@@ -385,10 +348,6 @@ namespace GyCAP.UI.EstructuraProducto
             txtDescripcion.Text = dsOperacionesFabricacion.OPERACIONES.FindByOPR_NUMERO(codigoOperacion).OPR_DESCRIPCION.ToString();
             txtNombre.Text = dsOperacionesFabricacion.OPERACIONES.FindByOPR_NUMERO(codigoOperacion).OPR_NOMBRE.ToString();
             numHoras.Value = dsOperacionesFabricacion.OPERACIONES.FindByOPR_NUMERO(codigoOperacion).OPR_HORASREQUERIDA;
-            if (dsOperacionesFabricacion.OPERACIONES.FindByOPR_NUMERO(codigoOperacion).IsUSTCK_ORIGENNull()) { cboStockOrigen.SetSelectedIndex(-1); }
-            else { cboStockOrigen.SetSelectedValue(Convert.ToInt32(dsOperacionesFabricacion.OPERACIONES.FindByOPR_NUMERO(codigoOperacion).USTCK_ORIGEN)); }
-            if (dsOperacionesFabricacion.OPERACIONES.FindByOPR_NUMERO(codigoOperacion).IsUSTCK_DESTINONull()) { cboStockDestino.SetSelectedIndex(-1); }
-            else { cboStockDestino.SetSelectedValue(Convert.ToInt32(dsOperacionesFabricacion.OPERACIONES.FindByOPR_NUMERO(codigoOperacion).USTCK_DESTINO)); }
        }
 
         private void btnEliminar_Click(object sender, EventArgs e)
