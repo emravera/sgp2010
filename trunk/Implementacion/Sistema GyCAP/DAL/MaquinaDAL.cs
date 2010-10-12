@@ -15,7 +15,7 @@ namespace GyCAP.DAL
         public static void ObtenerMaquinas(object nombre,int idEstado, string cadFabricantes, string cadModelo, Data.dsMaquina ds)
         {
             string sql = @"SELECT MAQ_CODIGO,MODM_CODIGO, EMAQ_CODIGO, FAB_CODIGO, MAQ_NUMEROSERIE, MAQ_NOMBRE,
-                           MAQ_MARCA, MAQ_FECHAALTA
+                           MAQ_MARCA, MAQ_FECHAALTA, MAQ_ES_CRITICA
                            FROM MAQUINAS
                            WHERE 1 = 1 ";
 
@@ -140,11 +140,11 @@ namespace GyCAP.DAL
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
             string sql = @"INSERT INTO [MAQUINAS] ([MODM_CODIGO], [EMAQ_CODIGO], [FAB_CODIGO],
-                           [MAQ_NOMBRE], [MAQ_NUMEROSERIE], [MAQ_MARCA], [MAQ_FECHAALTA])
-                          VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6) SELECT @@Identity";
+                           [MAQ_NOMBRE], [MAQ_NUMEROSERIE], [MAQ_MARCA], [MAQ_FECHAALTA], [MAQ_ES_CRITICA])
+                          VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7) SELECT @@Identity";
 
             object[] valorParametros = { maquina.Modelo.Codigo, maquina.Estado.Codigo, maquina.Fabricante.Codigo, 
-                                         maquina.Nombre, maquina.NumeroSerie, maquina.Marca, maquina.FechaAlta };
+                                         maquina.Nombre, maquina.NumeroSerie, maquina.Marca, maquina.FechaAlta, maquina.EsCritica };
             try
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
@@ -157,12 +157,12 @@ namespace GyCAP.DAL
         public static void Actualizar(Entidades.Maquina maquina)
         {
             string sql = @"UPDATE MAQUINAS SET MODM_CODIGO = @p1, EMAQ_CODIGO = @p2, FAB_CODIGO = @p3, 
-                           MAQ_NOMBRE = @p4, MAQ_NUMEROSERIE = @p5, MAQ_MARCA = @p6
+                           MAQ_NOMBRE = @p4, MAQ_NUMEROSERIE = @p5, MAQ_MARCA = @p6, MAQ_ES_CRITICA = @p7
                            WHERE MAQ_CODIGO = @p0";
 
             object[] valorParametros = { maquina.Codigo, 
                                          maquina.Modelo.Codigo, maquina.Estado.Codigo, maquina.Fabricante.Codigo, 
-                                         maquina.Nombre, maquina.NumeroSerie, maquina.Marca };
+                                         maquina.Nombre, maquina.NumeroSerie, maquina.Marca, maquina.EsCritica };
             try
             {
                 DB.executeNonQuery(sql, valorParametros, null);
@@ -177,7 +177,7 @@ namespace GyCAP.DAL
         public static void ObtenerMaquinas(DataTable dtMaquina)
         {
             string sql = @"SELECT MAQ_CODIGO, EMAQ_CODIGO, MODM_CODIGO, FAB_CODIGO, MAQ_NOMBRE,
-                           MAQ_NUMEROSERIE, MAQ_FECHA_ALTA, MAQ_MARCA 
+                           MAQ_NUMEROSERIE, MAQ_FECHA_ALTA, MAQ_MARCA, MAQ_ES_CRITICA 
                            FROM MAQUINAS ";
 
             DB.FillDataTable(dtMaquina, sql, null);

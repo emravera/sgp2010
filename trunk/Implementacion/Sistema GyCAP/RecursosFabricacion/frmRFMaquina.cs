@@ -17,7 +17,7 @@ namespace GyCAP.UI.RecursosFabricacion
         private DataView dvMaquina, dvEstadoMaquina, dvEstadoMaquinaBuscar,
                          dvListaModelos, dvModelo,
                          dvListaFabricante, dvFabricante;
-        private enum estadoUI { inicio, nuevo, consultar, modificar, nuevoExterno};
+        private enum estadoUI { inicio, nuevo, consultar, modificar, nuevoExterno };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
@@ -38,6 +38,7 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvLista.Columns.Add("MAQ_MARCA", "Marca");
             dgvLista.Columns.Add("MODM_CODIGO", "Modelo");
             dgvLista.Columns.Add("FAB_CODIGO", "Fabricante");
+            dgvLista.Columns.Add("MAQ_ES_CRITICA", "Es Crítica");
             dgvLista.Columns.Add("EMAQ_CODIGO", "Estado");
 
             //Seteamos el modo de tamaño de las columnas
@@ -47,6 +48,7 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvLista.Columns["MAQ_MARCA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["MODM_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["FAB_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["MAQ_ES_CRITICA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["EMAQ_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
@@ -56,6 +58,7 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvLista.Columns["MAQ_MARCA"].DataPropertyName = "MAQ_MARCA";
             dgvLista.Columns["MODM_CODIGO"].DataPropertyName = "MODM_CODIGO";
             dgvLista.Columns["FAB_CODIGO"].DataPropertyName = "FAB_CODIGO";
+            dgvLista.Columns["MAQ_ES_CRITICA"].DataPropertyName = "MAQ_ES_CRITICA";
             dgvLista.Columns["EMAQ_CODIGO"].DataPropertyName = "EMAQ_CODIGO";
 
             //Alineacion de los numeros y las fechas en la grilla
@@ -129,9 +132,13 @@ namespace GyCAP.UI.RecursosFabricacion
 
             dvFabricante = new DataView(dsMaquina.FABRICANTE_MAQUINAS);
             cboFabricante.SetDatos(dvFabricante, "FAB_CODIGO", "FAB_RAZONSOCIAL", "Seleccione un Fabricante...", false);
-            
+
             dvModelo = new DataView(dsMaquina.MODELOS_MAQUINAS);
             cboModelo.SetDatos(dvModelo, "MODM_CODIGO", "MODM_NOMBRE", "Seleccione un Modelo...", false);
+
+            cboEsCritica.Items.Add("No");
+            cboEsCritica.Items.Add("Si");
+            cboEsCritica.SelectedIndex = 0;
 
             //Limitamos el maximo de los controles
             txtMarca.MaxLength = 80;
@@ -182,8 +189,9 @@ namespace GyCAP.UI.RecursosFabricacion
                     setBotones(false);
                     txtNombre.Text = string.Empty;
                     txtMarca.Text = string.Empty;
-                    txtNroSerie.Text = string.Empty;                    
+                    txtNroSerie.Text = string.Empty;
                     cboEstado.SelectedIndex = -1;
+                    cboEsCritica.SelectedIndex = -1;
                     cboFabricante.SelectedIndex = -1;
                     cboModelo.SelectedIndex = -1;
 
@@ -204,6 +212,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     txtMarca.Text = string.Empty;
                     txtNroSerie.Text = string.Empty;
                     cboEstado.SelectedIndex = -1;
+                    cboEsCritica.SelectedIndex = -1;
                     cboFabricante.SelectedIndex = -1;
                     cboModelo.SelectedIndex = -1;
 
@@ -250,8 +259,9 @@ namespace GyCAP.UI.RecursosFabricacion
             txtMarca.ReadOnly = pValue;
             txtNombre.ReadOnly = pValue;
             txtNroSerie.ReadOnly = pValue;
-            cboModelo.Enabled = !pValue; 
+            cboModelo.Enabled = !pValue;
             cboEstado.Enabled = !pValue;
+            cboEsCritica.Enabled = !pValue;
             cboFabricante.Enabled = !pValue;
         }
 
@@ -335,6 +345,10 @@ namespace GyCAP.UI.RecursosFabricacion
                     //Asigno el Estado creada a la Maquina correspondiente
                     maquina.Estado = estado;
 
+                    maquina.EsCritica = "N";
+                    if (cboEsCritica.Text == "Si")
+                        maquina.EsCritica = "S";
+
                     try
                     {
                         //Primero lo creamos en la db
@@ -347,10 +361,11 @@ namespace GyCAP.UI.RecursosFabricacion
                         rowMaquina.MAQ_NOMBRE = maquina.Nombre;
                         rowMaquina.MAQ_NUMEROSERIE = maquina.NumeroSerie;
                         rowMaquina.MAQ_MARCA = maquina.Marca;
-                        rowMaquina.MAQ_FECHAALTA = maquina.FechaAlta; 
+                        rowMaquina.MAQ_FECHAALTA = maquina.FechaAlta;
                         rowMaquina.FAB_CODIGO = maquina.Fabricante.Codigo;
                         rowMaquina.MODM_CODIGO = maquina.Modelo.Codigo;
-                        rowMaquina.EMAQ_CODIGO = maquina.Estado.Codigo;   
+                        rowMaquina.EMAQ_CODIGO = maquina.Estado.Codigo;
+                        rowMaquina.MAQ_ES_CRITICA = maquina.EsCritica; 
                         //Termina la edición de la fila
                         rowMaquina.EndEdit();
                         //Agregamos la fila al dataset y aceptamos los cambios
@@ -405,6 +420,10 @@ namespace GyCAP.UI.RecursosFabricacion
                     //Asigno el Estado creada a la Maquina correspondiente
                     maquina.Estado = estado;
 
+                    maquina.EsCritica = "N";
+                    if (cboEsCritica.Text == "Si")
+                        maquina.EsCritica = "S";
+
                     try
                     {
                         //Lo actualizamos en la DB
@@ -419,9 +438,10 @@ namespace GyCAP.UI.RecursosFabricacion
                         rowMaquina.FAB_CODIGO = maquina.Fabricante.Codigo;
                         rowMaquina.MODM_CODIGO = maquina.Modelo.Codigo;
                         rowMaquina.EMAQ_CODIGO = maquina.Estado.Codigo;
+                        rowMaquina.MAQ_ES_CRITICA = maquina.EsCritica; 
                         //Termina la edición de la fila
                         rowMaquina.EndEdit();
-                        
+
                         //Agregamos la fila al dataset y aceptamos los cambios
                         dsMaquina.MAQUINAS.AcceptChanges();
                         //Avisamos que estuvo todo ok
@@ -541,6 +561,12 @@ namespace GyCAP.UI.RecursosFabricacion
                         nombre = dsMaquina.MODELOS_MAQUINAS.FindByMODM_CODIGO(Convert.ToInt32(e.Value)).MODM_NOMBRE;
                         e.Value = nombre;
                         break;
+                    case "MAQ_ES_CRITICA":
+                        nombre = "No";
+                        if (e.Value.ToString() == "S")
+                            nombre = "Si";
+                        e.Value = nombre;
+                        break;
                     default:
                         break;
                 }
@@ -562,6 +588,9 @@ namespace GyCAP.UI.RecursosFabricacion
             cboEstado.SetSelectedValue(int.Parse(dsMaquina.MAQUINAS.FindByMAQ_CODIGO(codigoMaquina).EMAQ_CODIGO.ToString()));
             cboFabricante.SetSelectedValue(int.Parse(dsMaquina.MAQUINAS.FindByMAQ_CODIGO(codigoMaquina).FAB_CODIGO.ToString()));
             cboModelo.SetSelectedValue(int.Parse(dsMaquina.MAQUINAS.FindByMAQ_CODIGO(codigoMaquina).MODM_CODIGO.ToString()));
+            cboEsCritica.SelectedItem = "No";
+            if (dsMaquina.MAQUINAS.FindByMAQ_CODIGO(codigoMaquina).MAQ_ES_CRITICA == "S")
+                cboEsCritica.SelectedItem = "Si";
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)

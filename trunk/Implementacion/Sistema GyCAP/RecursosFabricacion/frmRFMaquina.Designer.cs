@@ -29,7 +29,12 @@
         private void InitializeComponent()
         {
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cboEsCritica = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboFabricante = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label7 = new System.Windows.Forms.Label();
+            this.cboModelo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label6 = new System.Windows.Forms.Label();
             this.txtNroSerie = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -45,6 +50,7 @@
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lvModelos = new System.Windows.Forms.ListView();
+            this.cboBuscarEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.lvFabricantes = new System.Windows.Forms.ListView();
             this.label4 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -61,10 +67,6 @@
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnModificar = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cboBuscarEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cboFabricante = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cboModelo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.gbDatos.SuspendLayout();
             this.tcABM.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -79,6 +81,8 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.label8);
+            this.gbDatos.Controls.Add(this.cboEsCritica);
             this.gbDatos.Controls.Add(this.cboFabricante);
             this.gbDatos.Controls.Add(this.label7);
             this.gbDatos.Controls.Add(this.cboModelo);
@@ -101,14 +105,63 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Empleado";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(9, 154);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(55, 13);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "Es Crítica:";
+            // 
+            // cboEsCritica
+            // 
+            this.cboEsCritica.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEsCritica.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboEsCritica.FormattingEnabled = true;
+            this.cboEsCritica.Location = new System.Drawing.Point(76, 151);
+            this.cboEsCritica.Name = "cboEsCritica";
+            this.cboEsCritica.Size = new System.Drawing.Size(190, 21);
+            this.cboEsCritica.TabIndex = 12;
+            // 
+            // cboFabricante
+            // 
+            this.cboFabricante.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFabricante.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboFabricante.FormattingEnabled = true;
+            this.cboFabricante.Location = new System.Drawing.Point(76, 124);
+            this.cboFabricante.Name = "cboFabricante";
+            this.cboFabricante.Size = new System.Drawing.Size(190, 21);
+            this.cboFabricante.TabIndex = 11;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 154);
+            this.label7.Location = new System.Drawing.Point(9, 181);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(44, 13);
             this.label7.TabIndex = 20;
             this.label7.Text = "Estado:";
+            // 
+            // cboModelo
+            // 
+            this.cboModelo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboModelo.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboModelo.FormattingEnabled = true;
+            this.cboModelo.Location = new System.Drawing.Point(76, 97);
+            this.cboModelo.Name = "cboModelo";
+            this.cboModelo.Size = new System.Drawing.Size(190, 21);
+            this.cboModelo.TabIndex = 10;
+            // 
+            // cboEstado
+            // 
+            this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEstado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboEstado.FormattingEnabled = true;
+            this.cboEstado.Location = new System.Drawing.Point(76, 178);
+            this.cboEstado.Name = "cboEstado";
+            this.cboEstado.Size = new System.Drawing.Size(190, 21);
+            this.cboEstado.TabIndex = 13;
             // 
             // label6
             // 
@@ -237,6 +290,7 @@
             this.dgvLista.Location = new System.Drawing.Point(9, 22);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
+            this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(557, 156);
@@ -276,6 +330,16 @@
             this.lvModelos.TabIndex = 2;
             this.lvModelos.UseCompatibleStateImageBehavior = false;
             this.lvModelos.View = System.Windows.Forms.View.Details;
+            // 
+            // cboBuscarEstado
+            // 
+            this.cboBuscarEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboBuscarEstado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboBuscarEstado.FormattingEnabled = true;
+            this.cboBuscarEstado.Location = new System.Drawing.Point(348, 44);
+            this.cboBuscarEstado.Name = "cboBuscarEstado";
+            this.cboBuscarEstado.Size = new System.Drawing.Size(85, 21);
+            this.cboBuscarEstado.TabIndex = 3;
             // 
             // lvFabricantes
             // 
@@ -472,46 +536,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(593, 374);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
-            // cboBuscarEstado
-            // 
-            this.cboBuscarEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboBuscarEstado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboBuscarEstado.FormattingEnabled = true;
-            this.cboBuscarEstado.Location = new System.Drawing.Point(348, 44);
-            this.cboBuscarEstado.Name = "cboBuscarEstado";
-            this.cboBuscarEstado.Size = new System.Drawing.Size(85, 21);
-            this.cboBuscarEstado.TabIndex = 3;
-            // 
-            // cboFabricante
-            // 
-            this.cboFabricante.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboFabricante.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboFabricante.FormattingEnabled = true;
-            this.cboFabricante.Location = new System.Drawing.Point(76, 124);
-            this.cboFabricante.Name = "cboFabricante";
-            this.cboFabricante.Size = new System.Drawing.Size(190, 21);
-            this.cboFabricante.TabIndex = 11;
-            // 
-            // cboModelo
-            // 
-            this.cboModelo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboModelo.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboModelo.FormattingEnabled = true;
-            this.cboModelo.Location = new System.Drawing.Point(76, 97);
-            this.cboModelo.Name = "cboModelo";
-            this.cboModelo.Size = new System.Drawing.Size(190, 21);
-            this.cboModelo.TabIndex = 10;
-            // 
-            // cboEstado
-            // 
-            this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEstado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboEstado.FormattingEnabled = true;
-            this.cboEstado.Location = new System.Drawing.Point(76, 151);
-            this.cboEstado.Name = "cboEstado";
-            this.cboEstado.Size = new System.Drawing.Size(190, 21);
-            this.cboEstado.TabIndex = 12;
-            // 
             // frmRFMaquina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -580,5 +604,7 @@
         private System.Windows.Forms.ListView lvModelos;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboFabricante;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboEsCritica;
     }
 }
