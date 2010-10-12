@@ -125,6 +125,7 @@
     <Compile Include="TipoRepuestoBLL.cs" />
     <Compile Include="TipoUnidadMedidaBLL.cs" />
     <Compile Include="TurnoTrabajoBLL.cs" />
+    <Compile Include="UbicacionStockBLL.cs" />
     <Compile Include="UnidadMedidaBLL.cs" />
     <Compile Include="UsuarioBLL.cs" />
   </ItemGroup>

@@ -11,7 +11,8 @@ namespace GyCAP.DAL
     {
         public static void ObtenerOperaciones(DataTable dtOperaciones)
         {
-            string sql = "SELECT opr_numero, opr_codigo, opr_nombre, opr_descripcion, opr_horasrequerida FROM OPERACIONES";
+            string sql = @"SELECT opr_numero, opr_codigo, opr_nombre, opr_descripcion, opr_horasrequerida, ustck_origen, ustck_destino 
+                         FROM OPERACIONES";
             
             try
             {
@@ -22,7 +23,8 @@ namespace GyCAP.DAL
         
         public static void ObtenerOperacion(int numeroOperacion, Data.dsHojaRuta ds)
         {
-            string sql = "SELECT opr_numero, opr_codigo, opr_nombre, opr_descripcion, opr_horasrequerida FROM OPERACIONES WHERE opr_numero = @p0";
+            string sql = @"SELECT opr_numero, opr_codigo, opr_nombre, opr_descripcion, opr_horasrequerida, ustck_origen, ustck_destino 
+                         FROM OPERACIONES WHERE opr_numero = @p0";
             object[] valoresParametros = { numeroOperacion };
 
             try
@@ -35,7 +37,7 @@ namespace GyCAP.DAL
         //Busqueda con filtros desde el formulario
         public static void buscarOperacion(Data.dsOperacionesFabricacion dsOperaciones, string nombre, string codificacion)
         {
-            string sql = @"SELECT opr_numero, opr_codigo, opr_nombre, opr_descripcion, opr_horasrequerida
+            string sql = @"SELECT opr_numero, opr_codigo, opr_nombre, opr_descripcion, opr_horasrequerida, ustck_origen, ustck_destino 
                            FROM OPERACIONES";
 
             object[] valorParametros = { null };
@@ -95,8 +97,25 @@ namespace GyCAP.DAL
         public static int Insertar(Entidades.OperacionFabricacion operacion)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
-            string sql = "INSERT INTO [OPERACIONES] ([opr_codigo], [opr_nombre],[opr_descripcion],[opr_horasrequerida]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
-            object[] valorParametros = { operacion.Codificacion, operacion.Nombre, operacion.Descripcion, operacion.HorasRequeridas };
+            string sql = @"INSERT INTO [OPERACIONES] 
+                        ([opr_codigo], 
+                        [opr_nombre],
+                        [opr_descripcion],
+                        [opr_horasrequerida],
+                        [ustck_origen],
+                        [ustck_destino]) 
+                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
+
+            object stockOrigen = DBNull.Value, stockDestino = DBNull.Value;
+            if (operacion.UbicacionStockOrigen != null) { stockOrigen = operacion.UbicacionStockOrigen.Numero; }
+            if (operacion.UbicacionStockDestino != null) { stockDestino = operacion.UbicacionStockDestino.Numero; }
+            
+            object[] valorParametros = { operacion.Codificacion, 
+                                           operacion.Nombre, 
+                                           operacion.Descripcion, 
+                                           operacion.HorasRequeridas,
+                                           stockOrigen,
+                                           stockDestino };
             
             try
             {
@@ -107,8 +126,21 @@ namespace GyCAP.DAL
         //Metodo de ACTUALIZACION
         public static void ModificarOperacion(Entidades.OperacionFabricacion operacion)
         {
-            string sql = "UPDATE OPERACIONES SET opr_codigo = @p0, opr_nombre = @p1, opr_descripcion=@p2, opr_horasrequerida= @p3 WHERE opr_numero = @p4";
-            object[] valorParametros = { operacion.Codificacion, operacion.Nombre, operacion.Descripcion, operacion.HorasRequeridas, operacion.Codigo };
+            string sql = @"UPDATE OPERACIONES SET opr_codigo = @p0, opr_nombre = @p1, opr_descripcion = @p2, opr_horasrequerida = @p3, 
+                            ustck_origen = @p4, ustck_destino = @p5
+                            WHERE opr_numero = @p6";
+            
+            object stockOrigen = DBNull.Value, stockDestino = DBNull.Value;
+            if (operacion.UbicacionStockOrigen != null) { stockOrigen = operacion.UbicacionStockOrigen; }
+            if (operacion.UbicacionStockDestino != null) { stockDestino = operacion.UbicacionStockDestino; }
+            
+            object[] valorParametros = { operacion.Codificacion, 
+                                           operacion.Nombre, 
+                                           operacion.Descripcion, 
+                                           operacion.HorasRequeridas, 
+                                           stockOrigen,
+                                           stockDestino,
+                                           operacion.Codigo };
             
             try
             {

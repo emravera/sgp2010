@@ -228,6 +228,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsSectorTrabajo.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsStock.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsStock.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsTerminacion.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -593,6 +598,17 @@
     </None>
     <None Include="dsSectorTrabajo.xss">
       <DependentUpon>dsSectorTrabajo.xsd</DependentUpon>
+    </None>
+    <None Include="dsStock.xsc">
+      <DependentUpon>dsStock.xsd</DependentUpon>
+    </None>
+    <None Include="dsStock.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsStock.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsStock.xss">
+      <DependentUpon>dsStock.xsd</DependentUpon>
     </None>
     <None Include="dsTerminacion.xsc">
       <DependentUpon>dsTerminacion.xsd</DependentUpon>

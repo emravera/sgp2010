@@ -133,6 +133,7 @@
     <Compile Include="TipoRepuesto.cs" />
     <Compile Include="TipoUnidadMedida.cs" />
     <Compile Include="TurnoTrabajo.cs" />
+    <Compile Include="UbicacionStock.cs" />
     <Compile Include="UnidadMedida.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>
