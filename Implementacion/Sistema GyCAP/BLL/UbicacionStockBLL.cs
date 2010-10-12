@@ -8,6 +8,9 @@ namespace GyCAP.BLL
 {
     public class UbicacionStockBLL
     {
+        public static readonly int Activo = 1;
+        public static readonly int Inactivo = 0;
+        
         public static void ObtenerUbicacionesStock(DataTable dtUbicacionStock)
         {
             DAL.UbicacionStockDAL.ObtenerUbicacionesStock(dtUbicacionStock);

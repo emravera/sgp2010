@@ -41,7 +41,14 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns["UMED_ABREVIATURA"].DataPropertyName = "UMED_ABREVIATURA";
 
             //Llena el Dataset con Tipo Unidad Medida
-            BLL.TipoUnidadMedidaBLL.ObtenerTodos(dsUnidadMedida);            
+            try
+            {
+                BLL.TipoUnidadMedidaBLL.ObtenerTodos(dsUnidadMedida);
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             //Creamos el dataview y lo asignamos a la grilla
             dvListaUnidad = new DataView(dsUnidadMedida.UNIDADES_MEDIDA);
             dvListaUnidad.Sort = "UMED_NOMBRE ASC";

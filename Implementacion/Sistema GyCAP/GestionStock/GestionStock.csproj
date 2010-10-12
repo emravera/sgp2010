@@ -8,7 +8,7 @@
     <ProjectGuid>{35A24B8F-C745-41C5-A681-39C1F9AAD906}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GestionStock</RootNamespace>
+    <RootNamespace>GyCAP.UI.GestionStock</RootNamespace>
     <AssemblyName>GestionStock</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -31,6 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Sistema, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Sistema\obj\Debug\Sistema.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -48,8 +53,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmUbicacionStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUbicacionStock.Designer.cs">
+      <DependentUpon>frmUbicacionStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmUbicacionStock.resx">
+      <DependentUpon>frmUbicacionStock.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -58,6 +73,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -82,6 +98,24 @@
       <Project>{BF769C01-D311-4BC9-813A-C63DC3B89319}</Project>
       <Name>Entidades %28Entidades\Entidades%29</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Text-Editor-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delete-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Find-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lupa-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Salir-25.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
