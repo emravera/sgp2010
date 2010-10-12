@@ -123,6 +123,7 @@
     <Compile Include="TipoRepuestoDAL.cs" />
     <Compile Include="TipoUnidadMedidaDAL.cs" />
     <Compile Include="TurnoTrabajoDAL.cs" />
+    <Compile Include="UbicacionStockDAL.cs" />
     <Compile Include="UnidadMedidaDAL.cs" />
     <Compile Include="UsuarioDAL.cs" />
   </ItemGroup>

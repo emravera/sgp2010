@@ -35,5 +35,12 @@ namespace GyCAP.Entidades
             get { return abreviatura; }
             set { abreviatura = value; }
         }
+
+        public UnidadMedida() { }
+        
+        public UnidadMedida(int codigoUnidadMedida)
+        {
+            this.codigo = codigoUnidadMedida;
+        }
     }
 }
