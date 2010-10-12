@@ -15,6 +15,7 @@ namespace GyCAP.Entidades
         private FabricanteMaquina fabricante;
         private string marca;
         private EstadoMaquina estado;
+        private string esCritica;
 
         public int Codigo
         {
@@ -62,6 +63,12 @@ namespace GyCAP.Entidades
         {
             get { return estado; }
             set { estado = value; }
+        }
+
+        public string EsCritica
+        {
+            get { return esCritica; }
+            set { esCritica = value; }
         }
     }
 }
