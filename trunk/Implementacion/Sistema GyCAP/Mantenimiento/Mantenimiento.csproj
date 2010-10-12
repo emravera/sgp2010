@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmPlanMantenimiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPlanMantenimiento.Designer.cs">
+      <DependentUpon>frmPlanMantenimiento.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTipoMantenimiento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,6 +62,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmPlanMantenimiento.resx">
+      <DependentUpon>frmPlanMantenimiento.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmTipoMantenimiento.resx">
       <DependentUpon>frmTipoMantenimiento.cs</DependentUpon>
       <SubType>Designer</SubType>
