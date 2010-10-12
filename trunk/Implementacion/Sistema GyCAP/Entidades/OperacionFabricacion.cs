@@ -43,21 +43,6 @@ namespace GyCAP.Entidades
             set { horasRequeridas = value; }
         }
 
-        private UbicacionStock ubicacionStockOrigen;
-
-        public UbicacionStock UbicacionStockOrigen
-        {
-            get { return ubicacionStockOrigen; }
-            set { ubicacionStockOrigen = value; }
-        }
-        private UbicacionStock ubicacionStockDestino;
-
-        public UbicacionStock UbicacionStockDestino
-        {
-            get { return ubicacionStockDestino; }
-            set { ubicacionStockDestino = value; }
-        }
-
         
     }
 }

@@ -13,7 +13,7 @@ namespace GyCAP.UI.EstructuraProducto
     {
         private static frmHojaRuta _frmHojaRuta = null;
         private Data.dsHojaRuta dsHojaRuta = new GyCAP.Data.dsHojaRuta();
-        private DataView dvHojasRuta, dvDetalleHoja, dvCentrosTrabajo, dvOperaciones;
+        private DataView dvHojasRuta, dvDetalleHoja, dvCentrosTrabajo, dvOperaciones, dvStockOrigen, dvStockDestino;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
@@ -358,6 +358,10 @@ namespace GyCAP.UI.EstructuraProducto
                     row.OPR_NUMERO = operacionNumero;
                     row.CTO_CODIGO = centroCodigo;
                     row.DHR_SECUENCIA = nudSecuencia.Value;
+                    if (cboStockOrigen.GetSelectedIndex() != -1) { row.USTCK_ORIGEN = cboStockOrigen.GetSelectedValueInt(); }
+                    else { row.SetUSTCK_ORIGENNull(); }
+                    if (cboStockDestino.GetSelectedIndex() != -1) { row.USTCK_DESTINO = cboStockDestino.GetSelectedValueInt(); }
+                    else { row.SetUSTCK_DESTINONull(); }
                     row.EndEdit();
                     //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
                     //todavia no vamos a insertar en la db hasta que no haga Guardar
@@ -433,6 +437,8 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     panelAcciones.Enabled = true;
+                    cboStockOrigen.Enabled = true;
+                    cboStockDestino.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
                     tcHojaRuta.SelectedTab = tpDatos;
                     txtNombre.Focus();
@@ -453,6 +459,8 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     panelAcciones.Enabled = true;
+                    cboStockOrigen.Enabled = true;
+                    cboStockDestino.Enabled = true;
                     estadoInterface = estadoUI.nuevoExterno;
                     tcHojaRuta.SelectedTab = tpDatos;
                     txtNombre.Focus();
@@ -465,6 +473,8 @@ namespace GyCAP.UI.EstructuraProducto
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
                     panelAcciones.Enabled = false;
+                    cboStockOrigen.Enabled = false;
+                    cboStockDestino.Enabled = false;
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.consultar;
                     tcHojaRuta.SelectedTab = tpDatos;
@@ -482,6 +492,8 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     panelAcciones.Enabled = true;
+                    cboStockOrigen.Enabled = true;
+                    cboStockDestino.Enabled = true;
                     estadoInterface = estadoUI.modificar;
                     tcHojaRuta.SelectedTab = tpDatos;
                     txtNombre.Focus();
@@ -513,11 +525,15 @@ namespace GyCAP.UI.EstructuraProducto
             dgvDetalleHoja.Columns.Add("DHR_SECUENCIA", "Secuencia");
             dgvDetalleHoja.Columns.Add("OPR_NUMERO", "Operación");
             dgvDetalleHoja.Columns.Add("CTO_CODIGO", "Centro Trabajo");
+            dgvDetalleHoja.Columns.Add("USTCK_ORIGEN", "Stock origen");
+            dgvDetalleHoja.Columns.Add("USTCK_DESTINO", "Stock destino");
             dgvDetalleHoja.Columns["DHR_SECUENCIA"].DataPropertyName = "DHR_SECUENCIA";
             dgvDetalleHoja.Columns["DHR_SECUENCIA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvDetalleHoja.Columns["CTO_CODIGO"].DataPropertyName = "CTO_CODIGO";
             dgvDetalleHoja.Columns["OPR_NUMERO"].DataPropertyName = "OPR_NUMERO";
-            dgvDetalleHoja.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvDetalleHoja.Columns["USTCK_ORIGEN"].DataPropertyName = "USTCK_ORIGEN";
+            dgvDetalleHoja.Columns["USTCK_DESTINO"].DataPropertyName = "USTCK_DESTINO";
+            dgvDetalleHoja.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvDetalleHoja.Columns["CTO_CODIGO"].MinimumWidth = 110;
 
             //Dataviews, combos y carga de datos iniciales
@@ -536,6 +552,7 @@ namespace GyCAP.UI.EstructuraProducto
                 BLL.CentroTrabajoBLL.ObetenerCentrosTrabajo(null, null, null, BLL.CentroTrabajoBLL.CentroActivo, dsHojaRuta.CENTROS_TRABAJOS);
                 BLL.SectorBLL.ObtenerTodos(dsHojaRuta.SECTORES);
                 BLL.OperacionBLL.ObetenerOperaciones(dsHojaRuta.OPERACIONES);
+                BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsHojaRuta.UBICACIONES_STOCK);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -547,6 +564,11 @@ namespace GyCAP.UI.EstructuraProducto
             string[] display = { "OPR_CODIGO", "OPR_NOMBRE" };
             cbOperacion.SetDatos(dvOperaciones, "OPR_NUMERO", display, " - ", "Seleccione", false);
             cbCentroTrabajo.SetDatos(dvCentrosTrabajo, "CTO_CODIGO", "CTO_NOMBRE", "Seleccione", false);
+
+            dvStockOrigen = new DataView(dsHojaRuta.UBICACIONES_STOCK);
+            dvStockDestino = new DataView(dsHojaRuta.UBICACIONES_STOCK);
+            cboStockOrigen.SetDatos(dvStockOrigen, "USTCK_NUMERO", "USTCK_NOMBRE", "Sin especificar...", false);
+            cboStockDestino.SetDatos(dvStockDestino, "USTCK_NUMERO", "USTCK_NOMBRE", "Sin especificar...", false);
         }        
 
         private void dgvHojasRuta_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -620,7 +642,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void dgvDetalleHoja_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.Value.ToString() != string.Empty)
+            if (!string.IsNullOrEmpty(e.Value.ToString()))
             {
                 string nombre;
 
@@ -632,6 +654,14 @@ namespace GyCAP.UI.EstructuraProducto
                         break;
                     case "OPR_NUMERO":
                         nombre = dsHojaRuta.OPERACIONES.FindByOPR_NUMERO(Convert.ToInt32(e.Value.ToString())).OPR_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "USTCK_ORIGEN":
+                        nombre = dsHojaRuta.UBICACIONES_STOCK.FindByUSTCK_NUMERO(Convert.ToInt32(e.Value)).USTCK_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "USTCK_DESTINO":
+                        nombre = dsHojaRuta.UBICACIONES_STOCK.FindByUSTCK_NUMERO(Convert.ToInt32(e.Value)).USTCK_NOMBRE;
                         e.Value = nombre;
                         break;
                     default:
