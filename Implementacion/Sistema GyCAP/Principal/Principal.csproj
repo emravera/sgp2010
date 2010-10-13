@@ -121,6 +121,10 @@
       <Project>{9260777F-2789-458E-924E-163DC946C9E1}</Project>
       <Name>GestionPedido</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GestionStock\GestionStock.csproj">
+      <Project>{35A24B8F-C745-41C5-A681-39C1F9AAD906}</Project>
+      <Name>GestionStock</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PlanificacionProduccion\PlanificacionProduccion.csproj">
       <Project>{959ABFBF-7696-414D-B0CA-8807851367E8}</Project>
       <Name>PlanificacionProduccion</Name>

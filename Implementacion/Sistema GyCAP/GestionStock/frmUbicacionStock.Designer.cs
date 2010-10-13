@@ -35,22 +35,14 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
-            this.btnNuevo = new System.Windows.Forms.ToolStripButton();
-            this.btnConsultar = new System.Windows.Forms.ToolStripButton();
-            this.btnModificar = new System.Windows.Forms.ToolStripButton();
-            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbDatos = new System.Windows.Forms.GroupBox();
-            this.cboUnidadMedida = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.txtUbicacionFisica = new System.Windows.Forms.RichTextBox();
             this.txtDescripcion = new System.Windows.Forms.RichTextBox();
             this.nudCantidadVirtual = new System.Windows.Forms.NumericUpDown();
             this.nudCantidadReal = new System.Windows.Forms.NumericUpDown();
-            this.cboPadre = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -62,13 +54,21 @@
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cboEstadoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tcUbicacionStock = new System.Windows.Forms.TabControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.cboEstadoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboUnidadMedida = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboPadre = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.btnNuevo = new System.Windows.Forms.ToolStripButton();
+            this.btnConsultar = new System.Windows.Forms.ToolStripButton();
+            this.btnModificar = new System.Windows.Forms.ToolStripButton();
+            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tsMenu.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.tpDatos.SuspendLayout();
@@ -90,6 +90,7 @@
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(185, 21);
             this.txtCodigo.TabIndex = 9;
+            this.txtCodigo.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label6
             // 
@@ -117,6 +118,7 @@
             this.btnVolver.TabIndex = 11;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnGuardar
             // 
@@ -126,6 +128,7 @@
             this.btnGuardar.TabIndex = 10;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // txtNombre
             // 
@@ -134,6 +137,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(185, 21);
             this.txtNombre.TabIndex = 7;
+            this.txtNombre.Enter += new System.EventHandler(this.control_Enter);
             // 
             // tsMenu
             // 
@@ -158,61 +162,10 @@
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
-            // btnNuevo
-            // 
-            this.btnNuevo.Image = global::GyCAP.UI.GestionStock.Properties.Resources.New_25;
-            this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(42, 47);
-            this.btnNuevo.Text = "&Nuevo";
-            this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnConsultar
-            // 
-            this.btnConsultar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Find_25;
-            this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(57, 47);
-            this.btnConsultar.Text = "&Consultar";
-            this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Text_Editor_25;
-            this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(54, 47);
-            this.btnModificar.Text = "&Modificar";
-            this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Delete_25;
-            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(47, 47);
-            this.btnEliminar.Text = "&Eliminar";
-            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Salir_25;
-            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(31, 47);
-            this.btnSalir.Text = "&Salir";
-            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // gbGuardarCancelar
             // 
@@ -267,16 +220,6 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos de la Unidad de Medida";
             // 
-            // cboUnidadMedida
-            // 
-            this.cboUnidadMedida.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboUnidadMedida.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboUnidadMedida.FormattingEnabled = true;
-            this.cboUnidadMedida.Location = new System.Drawing.Point(417, 98);
-            this.cboUnidadMedida.Name = "cboUnidadMedida";
-            this.cboUnidadMedida.Size = new System.Drawing.Size(174, 21);
-            this.cboUnidadMedida.TabIndex = 23;
-            // 
             // txtUbicacionFisica
             // 
             this.txtUbicacionFisica.Location = new System.Drawing.Point(316, 188);
@@ -285,6 +228,7 @@
             this.txtUbicacionFisica.Size = new System.Drawing.Size(275, 88);
             this.txtUbicacionFisica.TabIndex = 22;
             this.txtUbicacionFisica.Text = "";
+            this.txtUbicacionFisica.Enter += new System.EventHandler(this.control_Enter);
             // 
             // txtDescripcion
             // 
@@ -294,6 +238,7 @@
             this.txtDescripcion.Size = new System.Drawing.Size(275, 88);
             this.txtDescripcion.TabIndex = 21;
             this.txtDescripcion.Text = "";
+            this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
             // 
             // nudCantidadVirtual
             // 
@@ -304,10 +249,16 @@
             0,
             65536});
             this.nudCantidadVirtual.Location = new System.Drawing.Point(417, 65);
+            this.nudCantidadVirtual.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.nudCantidadVirtual.Name = "nudCantidadVirtual";
             this.nudCantidadVirtual.Size = new System.Drawing.Size(174, 21);
             this.nudCantidadVirtual.TabIndex = 20;
             this.nudCantidadVirtual.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudCantidadVirtual.Enter += new System.EventHandler(this.control_Enter);
             // 
             // nudCantidadReal
             // 
@@ -318,30 +269,16 @@
             0,
             65536});
             this.nudCantidadReal.Location = new System.Drawing.Point(417, 31);
+            this.nudCantidadReal.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.nudCantidadReal.Name = "nudCantidadReal";
             this.nudCantidadReal.Size = new System.Drawing.Size(174, 21);
             this.nudCantidadReal.TabIndex = 19;
             this.nudCantidadReal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // cboPadre
-            // 
-            this.cboPadre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboPadre.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboPadre.FormattingEnabled = true;
-            this.cboPadre.Location = new System.Drawing.Point(105, 98);
-            this.cboPadre.Name = "cboPadre";
-            this.cboPadre.Size = new System.Drawing.Size(185, 21);
-            this.cboPadre.TabIndex = 18;
-            // 
-            // cboEstado
-            // 
-            this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEstado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboEstado.FormattingEnabled = true;
-            this.cboEstado.Location = new System.Drawing.Point(105, 133);
-            this.cboEstado.Name = "cboEstado";
-            this.cboEstado.Size = new System.Drawing.Size(185, 21);
-            this.cboEstado.TabIndex = 17;
+            this.nudCantidadReal.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label12
             // 
@@ -431,6 +368,9 @@
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(591, 249);
             this.dgvLista.TabIndex = 0;
+            this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
+            this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
+            this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
             // tpBuscar
             // 
@@ -458,16 +398,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
-            // cboEstadoBuscar
-            // 
-            this.cboEstadoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEstadoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboEstadoBuscar.FormattingEnabled = true;
-            this.cboEstadoBuscar.Location = new System.Drawing.Point(294, 22);
-            this.cboEstadoBuscar.Name = "cboEstadoBuscar";
-            this.cboEstadoBuscar.Size = new System.Drawing.Size(169, 21);
-            this.cboEstadoBuscar.TabIndex = 6;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -477,18 +407,6 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Estado:";
             // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.lupa_20;
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(525, 20);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscar.TabIndex = 5;
-            this.btnBuscar.Text = "&Buscar";
-            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            // 
             // txtNombreBuscar
             // 
             this.txtNombreBuscar.Location = new System.Drawing.Point(77, 22);
@@ -496,6 +414,7 @@
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(161, 21);
             this.txtNombreBuscar.TabIndex = 2;
+            this.txtNombreBuscar.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label1
             // 
@@ -539,6 +458,114 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(627, 413);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
+            // cboEstadoBuscar
+            // 
+            this.cboEstadoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEstadoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboEstadoBuscar.FormattingEnabled = true;
+            this.cboEstadoBuscar.Location = new System.Drawing.Point(294, 22);
+            this.cboEstadoBuscar.Name = "cboEstadoBuscar";
+            this.cboEstadoBuscar.Size = new System.Drawing.Size(169, 21);
+            this.cboEstadoBuscar.TabIndex = 6;
+            // 
+            // cboUnidadMedida
+            // 
+            this.cboUnidadMedida.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboUnidadMedida.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboUnidadMedida.FormattingEnabled = true;
+            this.cboUnidadMedida.Location = new System.Drawing.Point(417, 98);
+            this.cboUnidadMedida.Name = "cboUnidadMedida";
+            this.cboUnidadMedida.Size = new System.Drawing.Size(174, 21);
+            this.cboUnidadMedida.TabIndex = 23;
+            // 
+            // cboPadre
+            // 
+            this.cboPadre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPadre.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboPadre.FormattingEnabled = true;
+            this.cboPadre.Location = new System.Drawing.Point(105, 98);
+            this.cboPadre.Name = "cboPadre";
+            this.cboPadre.Size = new System.Drawing.Size(185, 21);
+            this.cboPadre.TabIndex = 18;
+            // 
+            // cboEstado
+            // 
+            this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEstado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboEstado.FormattingEnabled = true;
+            this.cboEstado.Location = new System.Drawing.Point(105, 133);
+            this.cboEstado.Name = "cboEstado";
+            this.cboEstado.Size = new System.Drawing.Size(185, 21);
+            this.cboEstado.TabIndex = 17;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.lupa_20;
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscar.Location = new System.Drawing.Point(525, 20);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
+            this.btnBuscar.TabIndex = 5;
+            this.btnBuscar.Text = "&Buscar";
+            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // btnNuevo
+            // 
+            this.btnNuevo.Image = global::GyCAP.UI.GestionStock.Properties.Resources.New_25;
+            this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(42, 47);
+            this.btnNuevo.Text = "&Nuevo";
+            this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
+            // 
+            // btnConsultar
+            // 
+            this.btnConsultar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Find_25;
+            this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnConsultar.Name = "btnConsultar";
+            this.btnConsultar.Size = new System.Drawing.Size(57, 47);
+            this.btnConsultar.Text = "&Consultar";
+            this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Text_Editor_25;
+            this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(54, 47);
+            this.btnModificar.Text = "&Modificar";
+            this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Delete_25;
+            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(47, 47);
+            this.btnEliminar.Text = "&Eliminar";
+            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Salir_25;
+            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(31, 47);
+            this.btnSalir.Text = "&Salir";
+            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
             // frmUbicacionStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -581,7 +608,6 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.ToolStrip tsMenu;
-        private System.Windows.Forms.ToolStripButton btnNuevo;
         private System.Windows.Forms.ToolStripButton btnConsultar;
         private System.Windows.Forms.ToolStripButton btnModificar;
         private System.Windows.Forms.ToolStripButton btnEliminar;
@@ -615,5 +641,6 @@
         private System.Windows.Forms.Label label7;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboEstadoBuscar;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboUnidadMedida;
+        public System.Windows.Forms.ToolStripButton btnNuevo;
     }
 }

@@ -359,8 +359,6 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = hayDatos;
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
-                    txtNombreBuscar.Text = String.Empty;
-                    cbTipo.SelectedIndex = -1;
                     tcUnidadMedida.SelectedTab = tpBuscar;
                     txtNombreBuscar.Focus();
                     break;
