@@ -84,10 +84,10 @@
             this.toolCliente = new System.Windows.Forms.ToolStripButton();
             this.btnOperaciones = new System.Windows.Forms.ToolStripButton();
             this.toolPedidos = new System.Windows.Forms.ToolStripButton();
+            this.btnControlPlan = new System.Windows.Forms.ToolStripButton();
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.btnControlPlan = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -176,6 +176,7 @@
             this.menuItemGS.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.K)));
             this.menuItemGS.Size = new System.Drawing.Size(307, 22);
             this.menuItemGS.Text = "Stoc&k";
+            this.menuItemGS.Click += new System.EventHandler(this.menuItemGS_Click);
             // 
             // menuItemMA
             // 
@@ -620,6 +621,16 @@
             this.toolPedidos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolPedidos.Click += new System.EventHandler(this.toolPedidos_Click);
             // 
+            // btnControlPlan
+            // 
+            this.btnControlPlan.Image = ((System.Drawing.Image)(resources.GetObject("btnControlPlan.Image")));
+            this.btnControlPlan.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnControlPlan.Name = "btnControlPlan";
+            this.btnControlPlan.Size = new System.Drawing.Size(80, 33);
+            this.btnControlPlan.Text = "Control Planes";
+            this.btnControlPlan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnControlPlan.Click += new System.EventHandler(this.btnControlPlan_Click);
+            // 
             // barraEstado
             // 
             this.barraEstado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -635,16 +646,6 @@
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(38, 17);
             this.lblEstado.Text = "Status";
-            // 
-            // btnControlPlan
-            // 
-            this.btnControlPlan.Image = ((System.Drawing.Image)(resources.GetObject("btnControlPlan.Image")));
-            this.btnControlPlan.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnControlPlan.Name = "btnControlPlan";
-            this.btnControlPlan.Size = new System.Drawing.Size(80, 33);
-            this.btnControlPlan.Text = "Control Planes";
-            this.btnControlPlan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnControlPlan.Click += new System.EventHandler(this.btnControlPlan_Click);
             // 
             // frmPrincipal
             // 

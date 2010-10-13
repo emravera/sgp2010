@@ -67,9 +67,30 @@ namespace GyCAP.UI.GestionStock.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Exit_48 {
+            get {
+                object obj = ResourceManager.GetObject("Exit_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Find_25 {
             get {
                 object obj = ResourceManager.GetObject("Find_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Find_48 {
+            get {
+                object obj = ResourceManager.GetObject("Find_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Listados_48 {
+            get {
+                object obj = ResourceManager.GetObject("Listados_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -84,6 +105,13 @@ namespace GyCAP.UI.GestionStock.Properties {
         internal static System.Drawing.Bitmap New_25 {
             get {
                 object obj = ResourceManager.GetObject("New_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap New_48 {
+            get {
+                object obj = ResourceManager.GetObject("New_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

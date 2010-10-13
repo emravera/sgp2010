@@ -44,7 +44,6 @@ namespace GyCAP.BLL
                 //No puede eliminarse, lanzamos nuestra excepción
                 throw new Entidades.Excepciones.ElementoEnTransaccionException();
             }
-
         }
 
         public static void Actualizar(Data.dsEstructura dsEstructura)

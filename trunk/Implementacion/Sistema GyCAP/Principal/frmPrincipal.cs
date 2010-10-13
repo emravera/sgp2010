@@ -44,6 +44,24 @@ namespace Principal
             GyCAP.UI.RecursosFabricacion.frmRecursosFabricacion.Instancia.MdiParent = this;
             GyCAP.UI.RecursosFabricacion.frmRecursosFabricacion.Instancia.Show();
         }
+
+        private void menuItemPP_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.PlanificacionProduccion.frmPlanificacionProduccion.Instancia.MdiParent = this;
+            GyCAP.UI.PlanificacionProduccion.frmPlanificacionProduccion.Instancia.Show();
+        }
+
+        private void menuItemGP_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionPedido.frmGestionPedido.Instancia.MdiParent = this;
+            GyCAP.UI.GestionPedido.frmGestionPedido.Instancia.Show();
+        }
+
+        private void menuItemGS_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionStock.frmGestionStock.Instancia.MdiParent = this;
+            GyCAP.UI.GestionStock.frmGestionStock.Instancia.Show();
+        }
         
         #endregion
 
@@ -204,13 +222,7 @@ namespace Principal
         {
             GyCAP.UI.RecursosFabricacion.frmRFMaquina.Instancia.MdiParent = this;
             GyCAP.UI.RecursosFabricacion.frmRFMaquina.Instancia.Show();
-        }
-
-        private void menuItemPP_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.PlanificacionProduccion.frmPlanificacionProduccion.Instancia.MdiParent = this;
-            GyCAP.UI.PlanificacionProduccion.frmPlanificacionProduccion.Instancia.Show();
-        }
+        }        
 
         private void btnPlanMensual_Click(object sender, EventArgs e)
         {
@@ -240,19 +252,14 @@ namespace Principal
         {
             GyCAP.UI.GestionPedido.frmPedidos.Instancia.MdiParent = this;
             GyCAP.UI.GestionPedido.frmPedidos.Instancia.Show();
-        }
-
-        private void menuItemGP_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.GestionPedido.frmGestionPedido.Instancia.MdiParent = this;
-            GyCAP.UI.GestionPedido.frmGestionPedido.Instancia.Show();
-        }
+        }        
 
         private void btnControlPlan_Click(object sender, EventArgs e)
         {
             GyCAP.UI.ControlTrabajoEnProceso.frmControlPlanificacion.Instancia.MdiParent = this;
             GyCAP.UI.ControlTrabajoEnProceso.frmControlPlanificacion.Instancia.Show();
         }
+        
         
     }
 }

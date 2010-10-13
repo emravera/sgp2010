@@ -620,23 +620,25 @@ namespace GyCAP.UI.EstructuraProducto
         //hace clic en alguna fila de la grilla
         private void dgvPiezas_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            int codigoPieza = Convert.ToInt32(dvPiezas[e.RowIndex]["pza_codigo"]);
-            txtCodigo.Text = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_CODIGOPARTE;
-            txtNombre.Text = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_NOMBRE;
-            cbTerminacion.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).TE_CODIGO));
-            cbEstado.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).ESTADO_PARTESRow.PAR_CODIGO));
-            cbPlano.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PNO_CODIGO));
-            nudCosto.Value = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_COSTO;
-            txtDescripcion.Text = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_DESCRIPCION;
+            if (dgvPiezas.SelectedRows.Count > 0)
+            {
+                int codigoPieza = Convert.ToInt32(dvPiezas[e.RowIndex]["pza_codigo"]);
+                txtCodigo.Text = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_CODIGOPARTE;
+                txtNombre.Text = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_NOMBRE;
+                cbTerminacion.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).TE_CODIGO));
+                cbEstado.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).ESTADO_PARTESRow.PAR_CODIGO));
+                cbPlano.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PNO_CODIGO));
+                nudCosto.Value = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_COSTO;
+                txtDescripcion.Text = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_DESCRIPCION;
 
-            if (dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).IsHR_CODIGONull()) { cbHojaRuta.SetSelectedIndex(-1); }
-            else { cbHojaRuta.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).HR_CODIGO)); }
-            if (dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_COSTOFIJO == 0) { chkCostoFijo.Checked = false; }
-            else { chkCostoFijo.Checked = true; }
-            pbImagen.Image = BLL.PiezaBLL.ObtenerImagen(codigoPieza);
-            //Usemos el filtro del dataview para mostrar sólo las MP de la pieza seleccionada
-            dvDetallePieza.RowFilter = "pza_codigo = " + codigoPieza;
-            
+                if (dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).IsHR_CODIGONull()) { cbHojaRuta.SetSelectedIndex(-1); }
+                else { cbHojaRuta.SetSelectedValue(Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).HR_CODIGO)); }
+                if (dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoPieza).PZA_COSTOFIJO == 0) { chkCostoFijo.Checked = false; }
+                else { chkCostoFijo.Checked = true; }
+                pbImagen.Image = BLL.PiezaBLL.ObtenerImagen(codigoPieza);
+                //Usemos el filtro del dataview para mostrar sólo las MP de la pieza seleccionada
+                dvDetallePieza.RowFilter = "pza_codigo = " + codigoPieza;
+            }            
         }
 
         //Evento doble clic en la grilla, es igual que si hiciera clic en Consultar

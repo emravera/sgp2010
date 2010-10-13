@@ -78,6 +78,8 @@ namespace GyCAP.Entidades
             set { activo = value; }
         }
 
+        public UbicacionStock() { }
+        
         public UbicacionStock(int numeroUbicacionStock)
         {
             this.numero = numeroUbicacionStock;
