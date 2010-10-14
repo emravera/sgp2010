@@ -78,6 +78,14 @@ namespace GyCAP.Entidades
             set { activo = value; }
         }
 
+        private TipoUbicacionStock tipoUbicacion;
+
+        public TipoUbicacionStock TipoUbicacion
+        {
+            get { return tipoUbicacion; }
+            set { tipoUbicacion = value; }
+        }
+        
         public UbicacionStock() { }
         
         public UbicacionStock(int numeroUbicacionStock)

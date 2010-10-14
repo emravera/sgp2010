@@ -69,6 +69,8 @@
             this.cboUnidadMedida = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cboPadre = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboTipoUbicacion = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.label2 = new System.Windows.Forms.Label();
             this.tsMenu.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.tpDatos.SuspendLayout();
@@ -248,6 +250,8 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.label2);
+            this.gbDatos.Controls.Add(this.cboTipoUbicacion);
             this.gbDatos.Controls.Add(this.cboUnidadMedida);
             this.gbDatos.Controls.Add(this.txtUbicacionFisica);
             this.gbDatos.Controls.Add(this.txtDescripcion);
@@ -566,6 +570,25 @@
             this.cboEstado.Size = new System.Drawing.Size(185, 21);
             this.cboEstado.TabIndex = 8;
             // 
+            // cboTipoUbicacion
+            // 
+            this.cboTipoUbicacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTipoUbicacion.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboTipoUbicacion.FormattingEnabled = true;
+            this.cboTipoUbicacion.Location = new System.Drawing.Point(417, 133);
+            this.cboTipoUbicacion.Name = "cboTipoUbicacion";
+            this.cboTipoUbicacion.Size = new System.Drawing.Size(174, 21);
+            this.cboTipoUbicacion.TabIndex = 17;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(313, 136);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(31, 13);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Tipo:";
+            // 
             // frmUbicacionStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -642,5 +665,7 @@
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboEstadoBuscar;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboUnidadMedida;
         public System.Windows.Forms.ToolStripButton btnNuevo;
+        private System.Windows.Forms.Label label2;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboTipoUbicacion;
     }
 }

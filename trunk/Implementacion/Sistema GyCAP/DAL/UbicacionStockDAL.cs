@@ -12,7 +12,7 @@ namespace GyCAP.DAL
         public static void ObtenerUbicacionesStock(DataTable dtUbicacionesStock)
         {
             string sql = @"SELECT ustck_numero, ustck_codigo, ustck_nombre, ustck_descripcion, ustck_ubicacionfisica, 
-                            ustck_cantidadreal, ustck_cantidadvirtual, umed_codigo, ustck_padre, ustck_activo 
+                            ustck_cantidadreal, ustck_cantidadvirtual, umed_codigo, ustck_padre, ustck_activo, tus_codigo 
                             FROM UBICACIONES_STOCK";
 
             try
@@ -33,8 +33,9 @@ namespace GyCAP.DAL
                          [ustck_cantidadvirtual], 
                          [umed_codigo], 
                          [ustck_padre], 
-                         [ustck_activo])
-                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8) SELECT @@Identity";
+                         [ustck_activo],
+                         [tus_codigo])
+                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9) SELECT @@Identity";
 
             object padre = DBNull.Value;
             if (ubicacion.UbicacionPadre != null) { padre = ubicacion.UbicacionPadre.Numero; };
@@ -46,7 +47,8 @@ namespace GyCAP.DAL
                                       ubicacion.CantidadVirtual,
                                       ubicacion.UnidadMedida.Codigo,
                                       padre,
-                                      ubicacion.Activo };
+                                      ubicacion.Activo,
+                                      ubicacion.TipoUbicacion.Codigo };
 
             try
             {
