@@ -131,6 +131,7 @@
     <Compile Include="Terminacion.cs" />
     <Compile Include="TipoMantenimiento.cs" />
     <Compile Include="TipoRepuesto.cs" />
+    <Compile Include="TipoUbicacionStock.cs" />
     <Compile Include="TipoUnidadMedida.cs" />
     <Compile Include="TurnoTrabajo.cs" />
     <Compile Include="UbicacionStock.cs" />
