@@ -34,7 +34,7 @@ namespace GyCAP.DAL
                          [umed_codigo], 
                          [ustck_padre], 
                          [ustck_activo])
-                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8)";
+                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8) SELECT @@Identity";
 
             object padre = DBNull.Value;
             if (ubicacion.UbicacionPadre != null) { padre = ubicacion.UbicacionPadre.Numero; };
@@ -57,6 +57,13 @@ namespace GyCAP.DAL
         
         public static void Eliminar(int numeroUbicacionStock)
         {
+            string sql = "DELETE FROM UBICACIONES_STOCK WHERE USTCK_NUMERO = @p0";
+            object[] parametros = { numeroUbicacionStock };
+            try
+            {
+                DB.executeNonQuery(sql, parametros, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
         
         public static bool PuedeEliminarse(int numeroUbicacionStock)

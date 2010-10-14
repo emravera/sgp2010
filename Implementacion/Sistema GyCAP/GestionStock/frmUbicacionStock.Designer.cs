@@ -35,7 +35,12 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
+            this.btnNuevo = new System.Windows.Forms.ToolStripButton();
+            this.btnConsultar = new System.Windows.Forms.ToolStripButton();
+            this.btnModificar = new System.Windows.Forms.ToolStripButton();
+            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbDatos = new System.Windows.Forms.GroupBox();
@@ -55,6 +60,7 @@
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tcUbicacionStock = new System.Windows.Forms.TabControl();
@@ -63,12 +69,6 @@
             this.cboUnidadMedida = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cboPadre = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.btnNuevo = new System.Windows.Forms.ToolStripButton();
-            this.btnConsultar = new System.Windows.Forms.ToolStripButton();
-            this.btnModificar = new System.Windows.Forms.ToolStripButton();
-            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tsMenu.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.tpDatos.SuspendLayout();
@@ -89,7 +89,7 @@
             this.txtCodigo.MaxLength = 80;
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(185, 21);
-            this.txtCodigo.TabIndex = 9;
+            this.txtCodigo.TabIndex = 5;
             this.txtCodigo.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label6
@@ -115,7 +115,7 @@
             this.btnVolver.Location = new System.Drawing.Point(539, 20);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(64, 26);
-            this.btnVolver.TabIndex = 11;
+            this.btnVolver.TabIndex = 15;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -125,7 +125,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(469, 20);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(64, 26);
-            this.btnGuardar.TabIndex = 10;
+            this.btnGuardar.TabIndex = 14;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -136,7 +136,7 @@
             this.txtNombre.MaxLength = 80;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(185, 21);
-            this.txtNombre.TabIndex = 7;
+            this.txtNombre.TabIndex = 6;
             this.txtNombre.Enter += new System.EventHandler(this.control_Enter);
             // 
             // tsMenu
@@ -162,10 +162,65 @@
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
+            // btnNuevo
+            // 
+            this.btnNuevo.Image = global::GyCAP.UI.GestionStock.Properties.Resources.New_25;
+            this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(42, 47);
+            this.btnNuevo.Text = "&Nuevo";
+            this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
+            // 
+            // btnConsultar
+            // 
+            this.btnConsultar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Find_25;
+            this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnConsultar.Name = "btnConsultar";
+            this.btnConsultar.Size = new System.Drawing.Size(57, 47);
+            this.btnConsultar.Text = "&Consultar";
+            this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Text_Editor_25;
+            this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(54, 47);
+            this.btnModificar.Text = "&Modificar";
+            this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Delete_25;
+            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(47, 47);
+            this.btnEliminar.Text = "&Eliminar";
+            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Salir_25;
+            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(31, 47);
+            this.btnSalir.Text = "&Salir";
+            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // gbGuardarCancelar
             // 
@@ -226,7 +281,7 @@
             this.txtUbicacionFisica.MaxLength = 200;
             this.txtUbicacionFisica.Name = "txtUbicacionFisica";
             this.txtUbicacionFisica.Size = new System.Drawing.Size(275, 88);
-            this.txtUbicacionFisica.TabIndex = 22;
+            this.txtUbicacionFisica.TabIndex = 13;
             this.txtUbicacionFisica.Text = "";
             this.txtUbicacionFisica.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -236,7 +291,7 @@
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(275, 88);
-            this.txtDescripcion.TabIndex = 21;
+            this.txtDescripcion.TabIndex = 12;
             this.txtDescripcion.Text = "";
             this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -256,7 +311,7 @@
             0});
             this.nudCantidadVirtual.Name = "nudCantidadVirtual";
             this.nudCantidadVirtual.Size = new System.Drawing.Size(174, 21);
-            this.nudCantidadVirtual.TabIndex = 20;
+            this.nudCantidadVirtual.TabIndex = 10;
             this.nudCantidadVirtual.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCantidadVirtual.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -276,7 +331,7 @@
             0});
             this.nudCantidadReal.Name = "nudCantidadReal";
             this.nudCantidadReal.Size = new System.Drawing.Size(174, 21);
-            this.nudCantidadReal.TabIndex = 19;
+            this.nudCantidadReal.TabIndex = 9;
             this.nudCantidadReal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCantidadReal.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -367,7 +422,7 @@
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(591, 249);
-            this.dgvLista.TabIndex = 0;
+            this.dgvLista.TabIndex = 4;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
@@ -407,13 +462,26 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Estado:";
             // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.lupa_20;
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscar.Location = new System.Drawing.Point(525, 20);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
+            this.btnBuscar.TabIndex = 3;
+            this.btnBuscar.Text = "&Buscar";
+            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
             // txtNombreBuscar
             // 
             this.txtNombreBuscar.Location = new System.Drawing.Point(77, 22);
             this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(161, 21);
-            this.txtNombreBuscar.TabIndex = 2;
+            this.txtNombreBuscar.TabIndex = 1;
             this.txtNombreBuscar.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label1
@@ -466,7 +534,7 @@
             this.cboEstadoBuscar.Location = new System.Drawing.Point(294, 22);
             this.cboEstadoBuscar.Name = "cboEstadoBuscar";
             this.cboEstadoBuscar.Size = new System.Drawing.Size(169, 21);
-            this.cboEstadoBuscar.TabIndex = 6;
+            this.cboEstadoBuscar.TabIndex = 2;
             // 
             // cboUnidadMedida
             // 
@@ -476,7 +544,7 @@
             this.cboUnidadMedida.Location = new System.Drawing.Point(417, 98);
             this.cboUnidadMedida.Name = "cboUnidadMedida";
             this.cboUnidadMedida.Size = new System.Drawing.Size(174, 21);
-            this.cboUnidadMedida.TabIndex = 23;
+            this.cboUnidadMedida.TabIndex = 11;
             // 
             // cboPadre
             // 
@@ -486,7 +554,7 @@
             this.cboPadre.Location = new System.Drawing.Point(105, 98);
             this.cboPadre.Name = "cboPadre";
             this.cboPadre.Size = new System.Drawing.Size(185, 21);
-            this.cboPadre.TabIndex = 18;
+            this.cboPadre.TabIndex = 7;
             // 
             // cboEstado
             // 
@@ -496,75 +564,7 @@
             this.cboEstado.Location = new System.Drawing.Point(105, 133);
             this.cboEstado.Name = "cboEstado";
             this.cboEstado.Size = new System.Drawing.Size(185, 21);
-            this.cboEstado.TabIndex = 17;
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.lupa_20;
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(525, 20);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscar.TabIndex = 5;
-            this.btnBuscar.Text = "&Buscar";
-            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // btnNuevo
-            // 
-            this.btnNuevo.Image = global::GyCAP.UI.GestionStock.Properties.Resources.New_25;
-            this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(42, 47);
-            this.btnNuevo.Text = "&Nuevo";
-            this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
-            // 
-            // btnConsultar
-            // 
-            this.btnConsultar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Find_25;
-            this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(57, 47);
-            this.btnConsultar.Text = "&Consultar";
-            this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Text_Editor_25;
-            this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(54, 47);
-            this.btnModificar.Text = "&Modificar";
-            this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Delete_25;
-            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(47, 47);
-            this.btnEliminar.Text = "&Eliminar";
-            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Salir_25;
-            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(31, 47);
-            this.btnSalir.Text = "&Salir";
-            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            this.cboEstado.TabIndex = 8;
             // 
             // frmUbicacionStock
             // 
