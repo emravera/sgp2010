@@ -135,7 +135,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Utilidades.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
@@ -166,6 +165,7 @@
     <None Include="Resources\Text-Editor-25.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ControlesUsuarios\MonthCalendar.dll" />
     <Content Include="SlickInterface.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

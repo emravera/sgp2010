@@ -171,9 +171,9 @@ namespace GyCAP.DAL
         }
 
         /// <summary>
-        /// Obtiene todos los empleados sin filtrar, los carga en una DataTable del tipo de empleado.
+        /// Obtiene todas las máquinas sin filtrar, los carga en una DataTable del tipo de máquina.
         /// </summary>
-        /// <param name="dtEmpleado">La tabla donde cargar losd datos.</param>
+        /// <param name="dtMaquina">La tabla donde cargar los datos.</param>
         public static void ObtenerMaquinas(DataTable dtMaquina)
         {
             string sql = @"SELECT MAQ_CODIGO, EMAQ_CODIGO, MODM_CODIGO, FAB_CODIGO, MAQ_NOMBRE,

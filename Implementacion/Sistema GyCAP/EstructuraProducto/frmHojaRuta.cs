@@ -331,7 +331,7 @@ namespace GyCAP.UI.EstructuraProducto
                     if (rows.Length > 0)
                     {
                         //Ya lo ha agregado, avisemos
-                        MessageBox.Show("La Hoja de Ruta ya posee la Operación en el Centro de Trabajo seleccionados.", "Información: elemento duplicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("La Hoja de Ruta ya posee la Operación en el Centro de Trabajo seleccionado.", "Información: elemento duplicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //Como ya existe marcamos que no debe agregarse
                         agregar = false;
                     }
@@ -369,6 +369,8 @@ namespace GyCAP.UI.EstructuraProducto
                 }
                 cbOperacion.SetTexto("Seleccione");
                 cbCentroTrabajo.SetTexto("Seleccione");
+                cboStockOrigen.SetTexto("Seleccione");
+                cboStockDestino.SetTexto("Seleccione");
                 nudSecuencia.Value = 0;
             }
             else

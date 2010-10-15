@@ -193,9 +193,6 @@
   <data name="arriba1_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arriba1-15.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Cancel_25" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Cancel-25.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Save_25" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Save-25.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -204,5 +201,17 @@
   </data>
   <data name="Calculadora_25" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Calculadora-25.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cancelar_25" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Cancelar-25.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cierre_Parcial_25" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Cierre-Parcial-25.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Finalizar_25" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Finalizar-25.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Iniciar_25" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Iniciar-25.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
