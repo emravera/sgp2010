@@ -95,9 +95,16 @@ namespace GyCAP.UI.PlanificacionProduccion.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap Cancel_25 {
+        internal static System.Drawing.Bitmap Cancelar_25 {
             get {
-                object obj = ResourceManager.GetObject("Cancel_25", resourceCulture);
+                object obj = ResourceManager.GetObject("Cancelar_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Cierre_Parcial_25 {
+            get {
+                object obj = ResourceManager.GetObject("Cierre_Parcial_25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -119,6 +126,13 @@ namespace GyCAP.UI.PlanificacionProduccion.Properties {
         internal static System.Drawing.Bitmap Exit_48 {
             get {
                 object obj = ResourceManager.GetObject("Exit_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Finalizar_25 {
+            get {
+                object obj = ResourceManager.GetObject("Finalizar_25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -147,6 +161,13 @@ namespace GyCAP.UI.PlanificacionProduccion.Properties {
         internal static System.Drawing.Bitmap Information_25 {
             get {
                 object obj = ResourceManager.GetObject("Information_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Iniciar_25 {
+            get {
+                object obj = ResourceManager.GetObject("Iniciar_25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

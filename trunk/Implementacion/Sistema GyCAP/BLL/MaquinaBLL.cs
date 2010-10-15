@@ -53,12 +53,12 @@ namespace GyCAP.BLL
         }
 
         /// <summary>
-        /// Obtiene todos los empleados sin filtrar, los carga en una DataTable del tipo empleados.
+        /// Obtiene todas las máquinas sin filtrar, los carga en una DataTable del tipo máquina.
         /// </summary>
-        /// <param name="dtEmpleados">La tabla donde cargar los datos.</param>
-        public static void ObtenerEmpleados(DataTable dtEmpleados)
+        /// <param name="dtMaquina">La tabla donde cargar los datos.</param>
+        public static void ObtenerMaquinas(DataTable dtMaquina)
         {
-            DAL.EmpleadoDAL.ObtenerEmpleados(dtEmpleados);
+            DAL.MaquinaDAL.ObtenerMaquinas(dtMaquina);
         }
     }
 }
