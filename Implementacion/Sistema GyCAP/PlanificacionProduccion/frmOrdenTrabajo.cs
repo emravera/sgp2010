@@ -85,12 +85,12 @@ namespace GyCAP.UI.PlanificacionProduccion
                     tcOrdenTrabajo.SelectedTab = tpBuscar;
                     break;
                 case estadoUI.pestañaProduccion:
-                    txtNombre.ReadOnly = false;
-                    txtDescripcion.ReadOnly = false;
-                    txtNombre.Text = String.Empty;
-                    txtDescripcion.Text = String.Empty;
+                    //txtNombre.ReadOnly = false;
+                    //txtDescripcion.ReadOnly = false;
+                    //txtNombre.Text = String.Empty;
+                    //txtDescripcion.Text = String.Empty;
                     btnGuardarCierre.Enabled = true;
-                    btnVolver.Enabled = true;
+                    //btnVolver.Enabled = true;
                     btnIniciar.Enabled = false;
                     btnCierreParcial.Enabled = false;
                     btnFinalizar.Enabled = false;
@@ -99,18 +99,18 @@ namespace GyCAP.UI.PlanificacionProduccion
                     tcOrdenTrabajo.SelectedTab = tpOrdenesTrabajo;
                     break;
                 case estadoUI.pestañaTrabajo:
-                    txtNombre.ReadOnly = true;
-                    txtDescripcion.ReadOnly = true;
+                    //txtNombre.ReadOnly = true;
+                    //txtDescripcion.ReadOnly = true;
                     btnGuardarCierre.Enabled = false;
-                    btnVolver.Enabled = true;
+                    //btnVolver.Enabled = true;
                     estadoInterface = estadoUI.pestañaTrabajo;
                     tcOrdenTrabajo.SelectedTab = tpOrdenesTrabajo;
                     break;
                 case estadoUI.pestañaCierreParcial:
-                    txtNombre.ReadOnly = false;
-                    txtDescripcion.ReadOnly = false;
+                    //txtNombre.ReadOnly = false;
+                    //txtDescripcion.ReadOnly = false;
                     btnGuardarCierre.Enabled = true;
-                    btnVolver.Enabled = true;
+                    //btnVolver.Enabled = true;
                     btnIniciar.Enabled = false;
                     btnCierreParcial.Enabled = false;
                     btnFinalizar.Enabled = false;
