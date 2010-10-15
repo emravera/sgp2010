@@ -60,7 +60,22 @@ namespace GyCAP.BLL
             DAL.PlanSemanalDAL.EliminarPlan(codigoPlan, dsPlanSemanal);
         }
 
-
+        //**************************************** Control Planificación **************************************
+        //METODOS DE SEGUIMIENTO DE LA PLANIFICACIÓN
+        public static int ObtenerEstado(int codigoPlan)
+        {
+           return DAL.PlanSemanalDAL.obtenerEstadoOrden(codigoPlan);
+        }
+        //METODOS DE VALIDACION DE EXISTENCIA DE ORDEN DE PRODUCCION
+        public static int VerificarOrden(int codigoPlan)
+        {
+            return DAL.PlanSemanalDAL.VerificarOrdenProduccion(codigoPlan);
+        }
+        //METODO QUE ME DEVUELVE LOS PLANES MENSUALES DE UN DETERMINADO AÑO
+        public static void ObtenerPlanesMensuales(int codigoPlanAnual, Data.dsPlanSemanal dsPlanSemanal)
+        {
+            DAL.PlanSemanalDAL.obtenerPlanesMensuales(codigoPlanAnual,dsPlanSemanal);
+        }
 
     }
 }

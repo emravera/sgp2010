@@ -729,6 +729,7 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
               <xs:element name="DIAPSEM_CODIGO" msprop:Generator_UserColumnName="DIAPSEM_CODIGO" msprop:Generator_ColumnVarNameInTable="columnDIAPSEM_CODIGO" msprop:Generator_ColumnPropNameInRow="DIAPSEM_CODIGO" msprop:Generator_ColumnPropNameInTable="DIAPSEM_CODIGOColumn" type="xs:decimal" />
               <xs:element name="DPSEM_ESTADO" msprop:Generator_UserColumnName="DPSEM_ESTADO" msprop:Generator_ColumnVarNameInTable="columnDPSEM_ESTADO" msprop:Generator_ColumnPropNameInRow="DPSEM_ESTADO" msprop:Generator_ColumnPropNameInTable="DPSEM_ESTADOColumn" type="xs:decimal" minOccurs="0" />
               <xs:element name="DPED_CODIGO" msprop:Generator_UserColumnName="DPED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnDPED_CODIGO" msprop:Generator_ColumnPropNameInRow="DPED_CODIGO" msprop:Generator_ColumnPropNameInTable="DPED_CODIGOColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DPSEM_CANTIDADENPROCESO" msprop:Generator_UserColumnName="DPSEM_CANTIDADENPROCESO" msprop:Generator_ColumnVarNameInTable="columnDPSEM_CANTIDADENPROCESO" msprop:Generator_ColumnPropNameInRow="DPSEM_CANTIDADENPROCESO" msprop:Generator_ColumnPropNameInTable="DPSEM_CANTIDADENPROCESOColumn" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

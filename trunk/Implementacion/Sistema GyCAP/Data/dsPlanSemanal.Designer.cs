@@ -1811,6 +1811,8 @@ namespace GyCAP.Data {
             
             private global::System.Data.DataColumn columnDPED_CODIGO;
             
+            private global::System.Data.DataColumn columnDPSEM_CANTIDADENPROCESO;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public DETALLE_PLANES_SEMANALESDataTable() {
                 this.TableName = "DETALLE_PLANES_SEMANALES";
@@ -1891,6 +1893,13 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DPSEM_CANTIDADENPROCESOColumn {
+                get {
+                    return this.columnDPSEM_CANTIDADENPROCESO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1919,7 +1928,7 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PLANES_SEMANALESRow AddDETALLE_PLANES_SEMANALESRow(COCINASRow parentCOCINASRowBydetallePlanSemanal_cocina_fk, int DPSEM_CANTIDADESTIMADA, int DPSEM_CANTIDADREAL, DIAS_PLAN_SEMANALRow parentDIAS_PLAN_SEMANALRowBydiasPlanSemanal_DetallePlanSemanal_FK, decimal DPSEM_ESTADO, DETALLE_PEDIDOSRow parentDETALLE_PEDIDOSRowBydetallePlanSemanal_DetallePedido_fk) {
+            public DETALLE_PLANES_SEMANALESRow AddDETALLE_PLANES_SEMANALESRow(COCINASRow parentCOCINASRowBydetallePlanSemanal_cocina_fk, int DPSEM_CANTIDADESTIMADA, int DPSEM_CANTIDADREAL, DIAS_PLAN_SEMANALRow parentDIAS_PLAN_SEMANALRowBydiasPlanSemanal_DetallePlanSemanal_FK, decimal DPSEM_ESTADO, DETALLE_PEDIDOSRow parentDETALLE_PEDIDOSRowBydetallePlanSemanal_DetallePedido_fk, decimal DPSEM_CANTIDADENPROCESO) {
                 DETALLE_PLANES_SEMANALESRow rowDETALLE_PLANES_SEMANALESRow = ((DETALLE_PLANES_SEMANALESRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1928,7 +1937,8 @@ namespace GyCAP.Data {
                         DPSEM_CANTIDADREAL,
                         null,
                         DPSEM_ESTADO,
-                        null};
+                        null,
+                        DPSEM_CANTIDADENPROCESO};
                 if ((parentCOCINASRowBydetallePlanSemanal_cocina_fk != null)) {
                     columnValuesArray[1] = parentCOCINASRowBydetallePlanSemanal_cocina_fk[0];
                 }
@@ -1970,6 +1980,7 @@ namespace GyCAP.Data {
                 this.columnDIAPSEM_CODIGO = base.Columns["DIAPSEM_CODIGO"];
                 this.columnDPSEM_ESTADO = base.Columns["DPSEM_ESTADO"];
                 this.columnDPED_CODIGO = base.Columns["DPED_CODIGO"];
+                this.columnDPSEM_CANTIDADENPROCESO = base.Columns["DPSEM_CANTIDADENPROCESO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1988,6 +1999,8 @@ namespace GyCAP.Data {
                 base.Columns.Add(this.columnDPSEM_ESTADO);
                 this.columnDPED_CODIGO = new global::System.Data.DataColumn("DPED_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDPED_CODIGO);
+                this.columnDPSEM_CANTIDADENPROCESO = new global::System.Data.DataColumn("DPSEM_CANTIDADENPROCESO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDPSEM_CANTIDADENPROCESO);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnDPSEM_CODIGO}, true));
                 this.columnDPSEM_CODIGO.AutoIncrement = true;
@@ -3934,6 +3947,22 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal DPSEM_CANTIDADENPROCESO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableDETALLE_PLANES_SEMANALES.DPSEM_CANTIDADENPROCESOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DPSEM_CANTIDADENPROCESO\' de la tabla \'DETALLE_PLANES_SEMA" +
+                                "NALES\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDETALLE_PLANES_SEMANALES.DPSEM_CANTIDADENPROCESOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public COCINASRow COCINASRow {
                 get {
                     return ((COCINASRow)(this.GetParentRow(this.Table.ParentRelations["detallePlanSemanal_cocina_fk"])));
@@ -4001,6 +4030,16 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetDPED_CODIGONull() {
                 this[this.tableDETALLE_PLANES_SEMANALES.DPED_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDPSEM_CANTIDADENPROCESONull() {
+                return this.IsNull(this.tableDETALLE_PLANES_SEMANALES.DPSEM_CANTIDADENPROCESOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDPSEM_CANTIDADENPROCESONull() {
+                this[this.tableDETALLE_PLANES_SEMANALES.DPSEM_CANTIDADENPROCESOColumn] = global::System.Convert.DBNull;
             }
         }
         

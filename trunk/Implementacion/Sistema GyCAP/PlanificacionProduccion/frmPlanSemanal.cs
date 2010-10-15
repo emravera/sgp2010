@@ -1222,7 +1222,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 {
                     //Verifico si quiere continuar cargando
                     MessageBox.Show("Los datos del día se han almacenado correctamente", "Informacion: Plan Semanal - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    DialogResult respuesta = MessageBox.Show("¿Desea continuar Cargando otro día de la semana?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult respuesta = MessageBox.Show("¿Desea continuar Cargando otro día de la semana?", "Pregunta: Guardado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     if (respuesta == DialogResult.Yes)
                     {

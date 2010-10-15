@@ -278,7 +278,56 @@ namespace GyCAP.DAL
 
         }
 
+        //****************************************** Control de la Producción ****************************************************
+        //METODO QUE OBTIENE EL ESTADO DE LA ORDEN DE PRODUCCION DEL DETALLE
+        public static int obtenerEstadoOrden(int codigoDetallePS)
+        {
+            int estado = 0;
 
+            string sql = @"SELECT op.eord_codigo
+                           FROM ORDENES_PRODUCCION as op, DETALLE_PLANES_SEMANALES as dps
+                           WHERE op.dpsem_codigo=dps.dpsem_codigo and op.dpsem_codigo=@p0";
+
+            object[] valorParametros = { codigoDetallePS};
+            try
+            {
+                estado = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+            return estado;
+        }
+        //METODO QUE VERIFICA SI EXISTE UNA ORDEN DE PRODUCCIÓN PARA ESE DETALLE
+        public static int VerificarOrdenProduccion(int codigoDetallePS)
+        {
+            int cantidad = 0;
+
+            string sql = @"SELECT count(op.ordp_codigo)
+                           FROM ORDENES_PRODUCCION as op
+                           WHERE op.dpsem_codigo=@p0";
+
+            object[] valorParametros = { codigoDetallePS };
+            try
+            {
+                cantidad = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+            return cantidad;
+        }
+        //Metodo que obtiene los planes Mesnuales creados para un plan anual
+        public static void obtenerPlanesMensuales(int codigoPlanAnual, Data.dsPlanSemanal dsPlanSemanal)
+        {
+            string sql = @"SELECT pmes_codigo, pan_codigo, pmes_mes, pmes_fechacreacion
+                        FROM PLANES_MENSUALES where pan_codigo=@p0";
+
+            object[] valorParametros = { codigoPlanAnual };
+            try
+            {
+                DB.FillDataSet(dsPlanSemanal, "PLANES_MENSUALES", sql, valorParametros);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
 
     }
 }
