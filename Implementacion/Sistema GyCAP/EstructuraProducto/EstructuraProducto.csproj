@@ -149,6 +149,7 @@
       <DependentUpon>frmTerminacion.cs</DependentUpon>
     </Compile>
     <Compile Include="frmUnidadMedida.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmUnidadMedida.Designer.cs">
       <DependentUpon>frmUnidadMedida.cs</DependentUpon>
