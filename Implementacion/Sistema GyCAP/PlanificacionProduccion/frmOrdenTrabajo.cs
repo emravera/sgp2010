@@ -70,7 +70,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                 dsOrdenTrabajo.ORDENES_PRODUCCION.Clear();
                 dsOrdenTrabajo.ORDENES_TRABAJO.Clear();
                 BLL.OrdenProduccionBLL.ObtenerOrdenesProduccion(txtCodigoOPBuscar.Text, cboEstadoOPBuscar.GetSelectedValueInt(), cboModoOPBuscar.GetSelectedValueInt(), dtpFechaGeneracionOPBuscar.GetFecha(), dtpFechaDesdeOPBuscar.GetFecha(), dtpFechaHastaOPBuscar.GetFecha(), dsOrdenTrabajo);
-                int algo = 0;
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
