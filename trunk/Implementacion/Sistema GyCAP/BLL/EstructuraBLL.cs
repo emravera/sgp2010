@@ -58,7 +58,13 @@ namespace GyCAP.BLL
             DAL.EstructuraDAL.ObtenerEstructura(codigoEstructura, ds, detalle);
         }
 
-        public static decimal[,] ObtenerMateriasPrimas(int codigoCocina)
+        /// <summary>
+        /// Obtiene las materias primas y las cantidades necesarias para fabricar una cocina dada.
+        /// </summary>
+        /// <param name="codigoCocina">El código de la cocina.</param>
+        /// <returns>Un array decimal[,] donde las filas representan materias primas, la primer columna ([n,0]) es el
+        /// código y la segunda ([n,1]) es la cantidad necesaria de esa materia prima para fabricar la cocina dada.</returns>
+        public static decimal[,] ObtenerMateriasPrimasYCantidades(int codigoCocina)
         {
             int codigoEstructura = BLL.CocinaBLL.ObtenerCodigoEstructuraActiva(codigoCocina);
             Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
@@ -98,7 +104,7 @@ namespace GyCAP.BLL
                 }
             }
 
-            foreach (Data.dsEstructura.PIEZASXESTRUCTURARow rowPxE in dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoCocina).GetPIEZASXESTRUCTURARows())
+            foreach (Data.dsEstructura.PIEZASXESTRUCTURARow rowPxE in dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).GetPIEZASXESTRUCTURARows())
             {
                 foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow rowMPxP in rowPxE.PIEZASRow.GetMATERIASPRIMASXPIEZARows())
                 {
