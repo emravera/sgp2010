@@ -78,7 +78,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
 
             //Seteamos el modo de tamaño de las columnas
             dgvDetalleDiario.Columns[0].Visible = false;
-            //dgvDetalleDiario.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDetalleDiario.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalleDiario.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalleDiario.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalleDiario.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -132,8 +132,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
             dgvDetalleMensual.Columns["DPSEM_CANTIDADENPROCESO"].DataPropertyName = "DPSEM_CANTIDADENPROCESO";
 
             //Seteamos el modo de tamaño de las columnas
-            dgvDetalleMensual.Columns[0].Visible = false;
-            //dgvDetalleDiario.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDetalleMensual.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalleMensual.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalleMensual.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalleMensual.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -461,7 +460,6 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                         dgvDetalleDiario.Columns["DIAPSEM_CODIGO"].Visible = false;
                         dgvDetalleDiario.Columns["DPSEM_CODIGO"].Visible = false;
                     }
-
                 }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -504,6 +502,32 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                         //Vuelvo los valores del vector a 0
                         cantidades[0] = 0; cantidades[1] = 0; cantidades[2] = 0;
                     }
+                   
+                }
+                else
+                    {
+                        //Obtengo el código del día
+                        int codigo = Convert.ToInt32(dvListaPlanSemanal[dgvDetallePlan.SelectedRows[0].Index]["diapsem_codigo"]);
+                        string nombreSerie = dvListaPlanSemanal[dgvDetallePlan.SelectedRows[0].Index]["diapsem_dia"].ToString();
+
+                        //Llamo a la funcion para que me genere el detalle
+                        GenerarDetalleDiario(codigo, true);
+
+                        //Si se quiere sacar todos los detalles juntos
+                        foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow row in dsPlanSemanal.DETALLE_PLANES_SEMANALES.Rows)
+                        {
+                            //Cargo los valores del Grafico a un vector
+                            cantidades[0] = cantidades[0] + Convert.ToInt32(row.DPSEM_CANTIDADESTIMADA);
+                            cantidades[1] = cantidades[1] + Convert.ToInt32(row.DPSEM_CANTIDADENPROCESO);
+                            cantidades[2] = cantidades[2] + Convert.ToInt32(row.DPSEM_CANTIDADREAL);
+                        }
+
+                        //Genero el grafico con los valores
+                        GenerarGrafico(cantidades, chartAvance, nombreSerie);
+
+                        //Vuelvo los valores del vector a 0
+                        cantidades[0] = 0; cantidades[1] = 0; cantidades[2] = 0;
+                    }
 
                     //Muestro el grafico generado
                     gbGraficaSemanal.Visible = true;
@@ -511,10 +535,8 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
 
                     //pongo en 0 la serie de nuevo
                     seriesGraficos = 0;
-
-                }
-
-            }
+            
+            }            
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
                 MessageBox.Show(ex.Message, "Error: Plan Semanal - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -827,16 +849,40 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                         //Vuelvo los valores del vector a 0
                         cantidades[0] = 0; cantidades[1] = 0; cantidades[2] = 0;
                     }
+                }
+                else
+                {
+
+                    int codigoPM = Convert.ToInt32(dvListaPlanAnual[dgvMesesPlanAnual.SelectedRows[0].Index]["pmes_codigo"]);
+                    string nombreSerie =dvListaPlanAnual[dgvMesesPlanAnual.SelectedRows[0].Index]["pmes_mes"].ToString(); 
+
+                    //Llamo a la funcion para que me genere el detalle
+                    GenerarDetalleMes(codigoPM, true);
+
+                    //Si se quiere sacar todos los detalles juntos
+                    foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow row in dsPlanSemanal.DETALLE_PLANES_SEMANALES.Rows)
+                    {
+                        //Cargo los valores del Grafico a un vector
+                        cantidades[0] = cantidades[0] + Convert.ToInt32(row.DPSEM_CANTIDADESTIMADA);
+                        cantidades[1] = cantidades[1] + Convert.ToInt32(row.DPSEM_CANTIDADENPROCESO);
+                        cantidades[2] = cantidades[2] + Convert.ToInt32(row.DPSEM_CANTIDADREAL);
+                    }
+
+                    //Genero el grafico con los valores
+                    GenerarGrafico(cantidades, chartPlanAnual, nombreSerie);
+
+                    //Vuelvo los valores del vector a 0
+                    cantidades[0] = 0; cantidades[1] = 0; cantidades[2] = 0;
+                }
 
                     //Muestro el grafico generado
                     gbDetallePlanAnual.Visible = false;
                     gbGraficaPlanAnual.Visible = true;
 
-
                     //pongo en 0 la serie de nuevo
                     seriesGraficos = 0;
 
-                }
+             
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -861,14 +907,14 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                     tcPlanAnual.SelectedTab = tpDetalleMeses;
 
                     //Ocultamos las columnas que no se quieren ver
-                    dgvDetalleDiario.Columns["DIAPSEM_CODIGO"].Visible = false;
-                    dgvDetalleDiario.Columns["DPSEM_CODIGO"].Visible = false;
+                    dgvDetalleMensual.Columns["DPSEM_CODIGO"].Visible = false;
+                    dgvDetalleMensual.Columns["DIAPSEM_CODIGO"].Visible = false;
                 }
                 else
                 {
-                    foreach (Data.dsPlanSemanal.DETALLE_PLANES_MENSUALESRow rowMes in dsPlanSemanal.PLANES_MENSUALES.Rows)
+                    foreach (Data.dsPlanSemanal.PLANES_MENSUALESRow rowMes in dsPlanSemanal.PLANES_MENSUALES.Rows)
                     {
-                        //Obtengo el código del día
+                        //Obtengo el código del mes
                         int codigo = Convert.ToInt32(rowMes["pmes_codigo"]);
                         
                         GenerarDetalleMes(codigo, false);
@@ -876,8 +922,8 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                         tcPlanAnual.SelectedTab = tpDetalleMeses;
 
                         //Ocultamos las columnas que no se quieren ver
-                        dgvDetalleDiario.Columns["DIAPSEM_CODIGO"].Visible = false;
-                        dgvDetalleDiario.Columns["DPSEM_CODIGO"].Visible = false;
+                        dgvDetalleMensual.Columns["DPSEM_CODIGO"].Visible = false;
+                        dgvDetalleMensual.Columns["DIAPSEM_CODIGO"].Visible = false;
                     }
 
                 }
