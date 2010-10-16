@@ -34,7 +34,7 @@ namespace GyCAP.DAL
         {
             string sqlUpdate = @"UPDATE DETALLE_PEDIDOS SET DPED_CANTIDAD = @p0 
                                WHERE DPED_CODIGO = @p1";
-            object[] valorParametros = { detalle.Cantidad, detalle.Codigo};
+            object[] valorParametros = { detalle.Cantidad, detalle.Codigo };
             DB.executeNonQuery(sqlUpdate, valorParametros, transaccion);
         }
 
