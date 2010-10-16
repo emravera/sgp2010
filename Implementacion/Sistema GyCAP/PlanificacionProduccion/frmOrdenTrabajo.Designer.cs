@@ -32,53 +32,53 @@
             this.tcOrdenTrabajo = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.gbBuscarOtros = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.txtCodigoBuscar = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.cboModoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label8 = new System.Windows.Forms.Label();
-            this.cboEstadoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvOrdenesProduccion = new System.Windows.Forms.DataGridView();
             this.tpOrdenesTrabajo = new System.Windows.Forms.TabPage();
             this.gbDatos = new System.Windows.Forms.GroupBox();
-            this.tsMenu = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.dtpFechaGeneracionBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.dtpFechaDesdeBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.dtpFechaHastaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.btnIniciar = new System.Windows.Forms.ToolStripButton();
-            this.btnCierreParcial = new System.Windows.Forms.ToolStripButton();
-            this.btnFinalizar = new System.Windows.Forms.ToolStripButton();
-            this.btnCancelar = new System.Windows.Forms.ToolStripButton();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
-            this.tpCierreParcial = new System.Windows.Forms.TabPage();
             this.dgvOrdenesTrabajo = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dgvCierresParciales = new System.Windows.Forms.DataGridView();
+            this.tpCierreParcial = new System.Windows.Forms.TabPage();
             this.gbAgregarCierreParcial = new System.Windows.Forms.GroupBox();
+            this.btnCancelarCierre = new System.Windows.Forms.Button();
+            this.btnGuardarCierre = new System.Windows.Forms.Button();
             this.txtObservacionesCierre = new System.Windows.Forms.RichTextBox();
-            this.btnAgregarCierre = new System.Windows.Forms.Button();
             this.nudCantidadCierre = new System.Windows.Forms.NumericUpDown();
-            this.cboMaquinaCierre = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.dtpHoraCierre = new System.Windows.Forms.DateTimePicker();
-            this.cboEmpleadoCierre = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.dtpFechaCierre = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnModificarCierre = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnEliminarCierre = new System.Windows.Forms.Button();
-            this.btnGuardarCierre = new System.Windows.Forms.Button();
-            this.btnCancelarCierre = new System.Windows.Forms.Button();
+            this.btnModificarCierre = new System.Windows.Forms.Button();
+            this.dgvCierresParciales = new System.Windows.Forms.DataGridView();
+            this.btnAgregarCierre = new System.Windows.Forms.Button();
+            this.tsMenu = new System.Windows.Forms.ToolStrip();
+            this.btnIniciar = new System.Windows.Forms.ToolStripButton();
+            this.btnCierreParcial = new System.Windows.Forms.ToolStripButton();
+            this.btnFinalizar = new System.Windows.Forms.ToolStripButton();
+            this.btnCancelar = new System.Windows.Forms.ToolStripButton();
+            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.dtpFechaHastaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.dtpFechaDesdeBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.dtpFechaGeneracionBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.cboModoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboEstadoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboMaquinaCierre = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboEmpleadoCierre = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.dtpFechaCierre = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcOrdenTrabajo.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -87,13 +87,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenesProduccion)).BeginInit();
             this.tpOrdenesTrabajo.SuspendLayout();
             this.gbDatos.SuspendLayout();
-            this.tsMenu.SuspendLayout();
-            this.tpCierreParcial.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenesTrabajo)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCierresParciales)).BeginInit();
+            this.tpCierreParcial.SuspendLayout();
             this.gbAgregarCierreParcial.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidadCierre)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCierresParciales)).BeginInit();
+            this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -158,6 +158,46 @@
             this.gbBuscarOtros.TabIndex = 3;
             this.gbBuscarOtros.TabStop = false;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(301, 91);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(96, 13);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Fecha inicio hasta:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(301, 59);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 13);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Fecha inicio desde:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(301, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(96, 13);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Fecha generación:";
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.lupa_20;
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscar.Location = new System.Drawing.Point(649, 52);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
+            this.btnBuscar.TabIndex = 2;
+            this.btnBuscar.Text = "&Buscar";
+            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
             // txtCodigoBuscar
             // 
             this.txtCodigoBuscar.Location = new System.Drawing.Point(72, 25);
@@ -174,16 +214,6 @@
             this.label10.TabIndex = 16;
             this.label10.Text = "Código:";
             // 
-            // cboModoBuscar
-            // 
-            this.cboModoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboModoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboModoBuscar.FormattingEnabled = true;
-            this.cboModoBuscar.Location = new System.Drawing.Point(72, 87);
-            this.cboModoBuscar.Name = "cboModoBuscar";
-            this.cboModoBuscar.Size = new System.Drawing.Size(193, 21);
-            this.cboModoBuscar.TabIndex = 13;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -192,16 +222,6 @@
             this.label8.Size = new System.Drawing.Size(37, 13);
             this.label8.TabIndex = 12;
             this.label8.Text = "Modo:";
-            // 
-            // cboEstadoBuscar
-            // 
-            this.cboEstadoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEstadoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboEstadoBuscar.FormattingEnabled = true;
-            this.cboEstadoBuscar.Location = new System.Drawing.Point(72, 56);
-            this.cboEstadoBuscar.Name = "cboEstadoBuscar";
-            this.cboEstadoBuscar.Size = new System.Drawing.Size(193, 21);
-            this.cboEstadoBuscar.TabIndex = 11;
             // 
             // label7
             // 
@@ -237,6 +257,7 @@
             this.dgvOrdenesProduccion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvOrdenesProduccion.Size = new System.Drawing.Size(765, 325);
             this.dgvOrdenesProduccion.TabIndex = 0;
+            this.dgvOrdenesProduccion.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvOrdenesProduccion_CellFormatting);
             // 
             // tpOrdenesTrabajo
             // 
@@ -260,168 +281,6 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Listado de Órdenes de Trabajo";
             // 
-            // tsMenu
-            // 
-            this.tsMenu.BackColor = System.Drawing.Color.Silver;
-            this.tsMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tsMenu.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnIniciar,
-            this.btnCierreParcial,
-            this.btnFinalizar,
-            this.btnCancelar,
-            this.btnEliminar,
-            this.toolStripSeparator1,
-            this.btnSalir});
-            this.tsMenu.Location = new System.Drawing.Point(0, 0);
-            this.tsMenu.Name = "tsMenu";
-            this.tsMenu.Size = new System.Drawing.Size(794, 50);
-            this.tsMenu.TabIndex = 1;
-            this.tsMenu.Text = "toolStrip1";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
-            // 
-            // dtpFechaGeneracionBuscar
-            // 
-            this.dtpFechaGeneracionBuscar.CustomFormat = " ";
-            this.dtpFechaGeneracionBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaGeneracionBuscar.Location = new System.Drawing.Point(405, 24);
-            this.dtpFechaGeneracionBuscar.Name = "dtpFechaGeneracionBuscar";
-            this.dtpFechaGeneracionBuscar.Size = new System.Drawing.Size(200, 21);
-            this.dtpFechaGeneracionBuscar.TabIndex = 18;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(301, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 13);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Fecha generación:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(301, 59);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 13);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "Fecha inicio desde:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(301, 91);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(96, 13);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "Fecha inicio hasta:";
-            // 
-            // dtpFechaDesdeBuscar
-            // 
-            this.dtpFechaDesdeBuscar.CustomFormat = " ";
-            this.dtpFechaDesdeBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaDesdeBuscar.Location = new System.Drawing.Point(405, 55);
-            this.dtpFechaDesdeBuscar.Name = "dtpFechaDesdeBuscar";
-            this.dtpFechaDesdeBuscar.Size = new System.Drawing.Size(200, 21);
-            this.dtpFechaDesdeBuscar.TabIndex = 22;
-            // 
-            // dtpFechaHastaBuscar
-            // 
-            this.dtpFechaHastaBuscar.CustomFormat = " ";
-            this.dtpFechaHastaBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaHastaBuscar.Location = new System.Drawing.Point(405, 86);
-            this.dtpFechaHastaBuscar.Name = "dtpFechaHastaBuscar";
-            this.dtpFechaHastaBuscar.Size = new System.Drawing.Size(200, 21);
-            this.dtpFechaHastaBuscar.TabIndex = 23;
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.lupa_20;
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(649, 52);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscar.TabIndex = 2;
-            this.btnBuscar.Text = "&Buscar";
-            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            // 
-            // btnIniciar
-            // 
-            this.btnIniciar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Iniciar_25;
-            this.btnIniciar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnIniciar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnIniciar.Name = "btnIniciar";
-            this.btnIniciar.Size = new System.Drawing.Size(40, 47);
-            this.btnIniciar.Text = "&Iniciar";
-            this.btnIniciar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnCierreParcial
-            // 
-            this.btnCierreParcial.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Cierre_Parcial_25;
-            this.btnCierreParcial.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCierreParcial.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCierreParcial.Name = "btnCierreParcial";
-            this.btnCierreParcial.Size = new System.Drawing.Size(74, 47);
-            this.btnCierreParcial.Text = "&Cierre parcial";
-            this.btnCierreParcial.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnFinalizar
-            // 
-            this.btnFinalizar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Finalizar_25;
-            this.btnFinalizar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnFinalizar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnFinalizar.Name = "btnFinalizar";
-            this.btnFinalizar.Size = new System.Drawing.Size(50, 47);
-            this.btnFinalizar.Text = "&Finalizar";
-            this.btnFinalizar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Cancelar_25;
-            this.btnCancelar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCancelar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(53, 47);
-            this.btnCancelar.Text = "&Cancelar";
-            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Salir_25;
-            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(31, 47);
-            this.btnSalir.Text = "&Salir";
-            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Delete_25;
-            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(47, 47);
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // tpCierreParcial
-            // 
-            this.tpCierreParcial.Controls.Add(this.gbAgregarCierreParcial);
-            this.tpCierreParcial.Controls.Add(this.groupBox1);
-            this.tpCierreParcial.Location = new System.Drawing.Point(4, 22);
-            this.tpCierreParcial.Name = "tpCierreParcial";
-            this.tpCierreParcial.Size = new System.Drawing.Size(780, 490);
-            this.tpCierreParcial.TabIndex = 2;
-            this.tpCierreParcial.Text = "Cierres Parciales";
-            this.tpCierreParcial.UseVisualStyleBackColor = true;
-            // 
             // dgvOrdenesTrabajo
             // 
             this.dgvOrdenesTrabajo.AllowUserToAddRows = false;
@@ -435,32 +294,18 @@
             this.dgvOrdenesTrabajo.RowHeadersVisible = false;
             this.dgvOrdenesTrabajo.Size = new System.Drawing.Size(768, 461);
             this.dgvOrdenesTrabajo.TabIndex = 0;
+            this.dgvOrdenesTrabajo.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvOrdenesTrabajo_CellFormatting);
             // 
-            // groupBox1
+            // tpCierreParcial
             // 
-            this.groupBox1.Controls.Add(this.btnEliminarCierre);
-            this.groupBox1.Controls.Add(this.btnModificarCierre);
-            this.groupBox1.Controls.Add(this.dgvCierresParciales);
-            this.groupBox1.Controls.Add(this.btnAgregarCierre);
-            this.groupBox1.Location = new System.Drawing.Point(5, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(770, 285);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Listado de Cierres Parciales";
-            // 
-            // dgvCierresParciales
-            // 
-            this.dgvCierresParciales.AllowUserToAddRows = false;
-            this.dgvCierresParciales.AllowUserToDeleteRows = false;
-            this.dgvCierresParciales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCierresParciales.Location = new System.Drawing.Point(6, 20);
-            this.dgvCierresParciales.MultiSelect = false;
-            this.dgvCierresParciales.Name = "dgvCierresParciales";
-            this.dgvCierresParciales.ReadOnly = true;
-            this.dgvCierresParciales.RowHeadersVisible = false;
-            this.dgvCierresParciales.Size = new System.Drawing.Size(758, 228);
-            this.dgvCierresParciales.TabIndex = 1;
+            this.tpCierreParcial.Controls.Add(this.gbAgregarCierreParcial);
+            this.tpCierreParcial.Controls.Add(this.groupBox1);
+            this.tpCierreParcial.Location = new System.Drawing.Point(4, 22);
+            this.tpCierreParcial.Name = "tpCierreParcial";
+            this.tpCierreParcial.Size = new System.Drawing.Size(780, 490);
+            this.tpCierreParcial.TabIndex = 2;
+            this.tpCierreParcial.Text = "Cierres Parciales";
+            this.tpCierreParcial.UseVisualStyleBackColor = true;
             // 
             // gbAgregarCierreParcial
             // 
@@ -485,6 +330,24 @@
             this.gbAgregarCierreParcial.TabStop = false;
             this.gbAgregarCierreParcial.Text = "Agregar cierre parcial";
             // 
+            // btnCancelarCierre
+            // 
+            this.btnCancelarCierre.Location = new System.Drawing.Point(672, 117);
+            this.btnCancelarCierre.Name = "btnCancelarCierre";
+            this.btnCancelarCierre.Size = new System.Drawing.Size(75, 25);
+            this.btnCancelarCierre.TabIndex = 29;
+            this.btnCancelarCierre.Text = "Cancelar";
+            this.btnCancelarCierre.UseVisualStyleBackColor = true;
+            // 
+            // btnGuardarCierre
+            // 
+            this.btnGuardarCierre.Location = new System.Drawing.Point(672, 71);
+            this.btnGuardarCierre.Name = "btnGuardarCierre";
+            this.btnGuardarCierre.Size = new System.Drawing.Size(75, 25);
+            this.btnGuardarCierre.TabIndex = 28;
+            this.btnGuardarCierre.Text = "Guardar";
+            this.btnGuardarCierre.UseVisualStyleBackColor = true;
+            // 
             // txtObservacionesCierre
             // 
             this.txtObservacionesCierre.Location = new System.Drawing.Point(347, 46);
@@ -493,15 +356,6 @@
             this.txtObservacionesCierre.TabIndex = 27;
             this.txtObservacionesCierre.Text = "";
             // 
-            // btnAgregarCierre
-            // 
-            this.btnAgregarCierre.Location = new System.Drawing.Point(527, 254);
-            this.btnAgregarCierre.Name = "btnAgregarCierre";
-            this.btnAgregarCierre.Size = new System.Drawing.Size(75, 25);
-            this.btnAgregarCierre.TabIndex = 26;
-            this.btnAgregarCierre.Text = "Agregar";
-            this.btnAgregarCierre.UseVisualStyleBackColor = true;
-            // 
             // nudCantidadCierre
             // 
             this.nudCantidadCierre.Location = new System.Drawing.Point(84, 92);
@@ -509,41 +363,12 @@
             this.nudCantidadCierre.Size = new System.Drawing.Size(200, 21);
             this.nudCantidadCierre.TabIndex = 25;
             // 
-            // cboMaquinaCierre
-            // 
-            this.cboMaquinaCierre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboMaquinaCierre.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboMaquinaCierre.FormattingEnabled = true;
-            this.cboMaquinaCierre.Location = new System.Drawing.Point(84, 59);
-            this.cboMaquinaCierre.Name = "cboMaquinaCierre";
-            this.cboMaquinaCierre.Size = new System.Drawing.Size(200, 21);
-            this.cboMaquinaCierre.TabIndex = 24;
-            // 
             // dtpHoraCierre
             // 
             this.dtpHoraCierre.Location = new System.Drawing.Point(84, 154);
             this.dtpHoraCierre.Name = "dtpHoraCierre";
             this.dtpHoraCierre.Size = new System.Drawing.Size(200, 21);
             this.dtpHoraCierre.TabIndex = 23;
-            // 
-            // cboEmpleadoCierre
-            // 
-            this.cboEmpleadoCierre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEmpleadoCierre.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboEmpleadoCierre.FormattingEnabled = true;
-            this.cboEmpleadoCierre.Location = new System.Drawing.Point(84, 27);
-            this.cboEmpleadoCierre.Name = "cboEmpleadoCierre";
-            this.cboEmpleadoCierre.Size = new System.Drawing.Size(200, 21);
-            this.cboEmpleadoCierre.TabIndex = 22;
-            // 
-            // dtpFechaCierre
-            // 
-            this.dtpFechaCierre.CustomFormat = " ";
-            this.dtpFechaCierre.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaCierre.Location = new System.Drawing.Point(84, 122);
-            this.dtpFechaCierre.Name = "dtpFechaCierre";
-            this.dtpFechaCierre.Size = new System.Drawing.Size(200, 21);
-            this.dtpFechaCierre.TabIndex = 21;
             // 
             // label12
             // 
@@ -599,14 +424,18 @@
             this.label3.TabIndex = 15;
             this.label3.Text = "Empleado:";
             // 
-            // btnModificarCierre
+            // groupBox1
             // 
-            this.btnModificarCierre.Location = new System.Drawing.Point(608, 254);
-            this.btnModificarCierre.Name = "btnModificarCierre";
-            this.btnModificarCierre.Size = new System.Drawing.Size(75, 25);
-            this.btnModificarCierre.TabIndex = 27;
-            this.btnModificarCierre.Text = "Modificar";
-            this.btnModificarCierre.UseVisualStyleBackColor = true;
+            this.groupBox1.Controls.Add(this.btnEliminarCierre);
+            this.groupBox1.Controls.Add(this.btnModificarCierre);
+            this.groupBox1.Controls.Add(this.dgvCierresParciales);
+            this.groupBox1.Controls.Add(this.btnAgregarCierre);
+            this.groupBox1.Location = new System.Drawing.Point(5, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(770, 285);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Listado de Cierres Parciales";
             // 
             // btnEliminarCierre
             // 
@@ -617,23 +446,199 @@
             this.btnEliminarCierre.Text = "Eliminar";
             this.btnEliminarCierre.UseVisualStyleBackColor = true;
             // 
-            // btnGuardarCierre
+            // btnModificarCierre
             // 
-            this.btnGuardarCierre.Location = new System.Drawing.Point(672, 71);
-            this.btnGuardarCierre.Name = "btnGuardarCierre";
-            this.btnGuardarCierre.Size = new System.Drawing.Size(75, 25);
-            this.btnGuardarCierre.TabIndex = 28;
-            this.btnGuardarCierre.Text = "Guardar";
-            this.btnGuardarCierre.UseVisualStyleBackColor = true;
+            this.btnModificarCierre.Location = new System.Drawing.Point(608, 254);
+            this.btnModificarCierre.Name = "btnModificarCierre";
+            this.btnModificarCierre.Size = new System.Drawing.Size(75, 25);
+            this.btnModificarCierre.TabIndex = 27;
+            this.btnModificarCierre.Text = "Modificar";
+            this.btnModificarCierre.UseVisualStyleBackColor = true;
             // 
-            // btnCancelarCierre
+            // dgvCierresParciales
             // 
-            this.btnCancelarCierre.Location = new System.Drawing.Point(672, 117);
-            this.btnCancelarCierre.Name = "btnCancelarCierre";
-            this.btnCancelarCierre.Size = new System.Drawing.Size(75, 25);
-            this.btnCancelarCierre.TabIndex = 29;
-            this.btnCancelarCierre.Text = "Cancelar";
-            this.btnCancelarCierre.UseVisualStyleBackColor = true;
+            this.dgvCierresParciales.AllowUserToAddRows = false;
+            this.dgvCierresParciales.AllowUserToDeleteRows = false;
+            this.dgvCierresParciales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCierresParciales.Location = new System.Drawing.Point(6, 20);
+            this.dgvCierresParciales.MultiSelect = false;
+            this.dgvCierresParciales.Name = "dgvCierresParciales";
+            this.dgvCierresParciales.ReadOnly = true;
+            this.dgvCierresParciales.RowHeadersVisible = false;
+            this.dgvCierresParciales.Size = new System.Drawing.Size(758, 228);
+            this.dgvCierresParciales.TabIndex = 1;
+            this.dgvCierresParciales.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCierresParciales_CellFormatting);
+            // 
+            // btnAgregarCierre
+            // 
+            this.btnAgregarCierre.Location = new System.Drawing.Point(527, 254);
+            this.btnAgregarCierre.Name = "btnAgregarCierre";
+            this.btnAgregarCierre.Size = new System.Drawing.Size(75, 25);
+            this.btnAgregarCierre.TabIndex = 26;
+            this.btnAgregarCierre.Text = "Agregar";
+            this.btnAgregarCierre.UseVisualStyleBackColor = true;
+            // 
+            // tsMenu
+            // 
+            this.tsMenu.BackColor = System.Drawing.Color.Silver;
+            this.tsMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tsMenu.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnIniciar,
+            this.btnCierreParcial,
+            this.btnFinalizar,
+            this.btnCancelar,
+            this.btnEliminar,
+            this.toolStripSeparator1,
+            this.btnSalir});
+            this.tsMenu.Location = new System.Drawing.Point(0, 0);
+            this.tsMenu.Name = "tsMenu";
+            this.tsMenu.Size = new System.Drawing.Size(794, 50);
+            this.tsMenu.TabIndex = 1;
+            this.tsMenu.Text = "toolStrip1";
+            // 
+            // btnIniciar
+            // 
+            this.btnIniciar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Iniciar_25;
+            this.btnIniciar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnIniciar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnIniciar.Name = "btnIniciar";
+            this.btnIniciar.Size = new System.Drawing.Size(40, 47);
+            this.btnIniciar.Text = "&Iniciar";
+            this.btnIniciar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btnCierreParcial
+            // 
+            this.btnCierreParcial.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Cierre_Parcial_25;
+            this.btnCierreParcial.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnCierreParcial.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCierreParcial.Name = "btnCierreParcial";
+            this.btnCierreParcial.Size = new System.Drawing.Size(74, 47);
+            this.btnCierreParcial.Text = "&Cierre parcial";
+            this.btnCierreParcial.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btnFinalizar
+            // 
+            this.btnFinalizar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Finalizar_25;
+            this.btnFinalizar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnFinalizar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnFinalizar.Name = "btnFinalizar";
+            this.btnFinalizar.Size = new System.Drawing.Size(50, 47);
+            this.btnFinalizar.Text = "&Finalizar";
+            this.btnFinalizar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Cancelar_25;
+            this.btnCancelar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnCancelar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(53, 47);
+            this.btnCancelar.Text = "&Cancelar";
+            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Delete_25;
+            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(47, 47);
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Salir_25;
+            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(31, 47);
+            this.btnSalir.Text = "&Salir";
+            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // dtpFechaHastaBuscar
+            // 
+            this.dtpFechaHastaBuscar.CustomFormat = " ";
+            this.dtpFechaHastaBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaHastaBuscar.Location = new System.Drawing.Point(405, 86);
+            this.dtpFechaHastaBuscar.Name = "dtpFechaHastaBuscar";
+            this.dtpFechaHastaBuscar.Size = new System.Drawing.Size(200, 21);
+            this.dtpFechaHastaBuscar.TabIndex = 23;
+            // 
+            // dtpFechaDesdeBuscar
+            // 
+            this.dtpFechaDesdeBuscar.CustomFormat = " ";
+            this.dtpFechaDesdeBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaDesdeBuscar.Location = new System.Drawing.Point(405, 55);
+            this.dtpFechaDesdeBuscar.Name = "dtpFechaDesdeBuscar";
+            this.dtpFechaDesdeBuscar.Size = new System.Drawing.Size(200, 21);
+            this.dtpFechaDesdeBuscar.TabIndex = 22;
+            // 
+            // dtpFechaGeneracionBuscar
+            // 
+            this.dtpFechaGeneracionBuscar.CustomFormat = " ";
+            this.dtpFechaGeneracionBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaGeneracionBuscar.Location = new System.Drawing.Point(405, 24);
+            this.dtpFechaGeneracionBuscar.Name = "dtpFechaGeneracionBuscar";
+            this.dtpFechaGeneracionBuscar.Size = new System.Drawing.Size(200, 21);
+            this.dtpFechaGeneracionBuscar.TabIndex = 18;
+            // 
+            // cboModoBuscar
+            // 
+            this.cboModoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboModoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboModoBuscar.FormattingEnabled = true;
+            this.cboModoBuscar.Location = new System.Drawing.Point(72, 87);
+            this.cboModoBuscar.Name = "cboModoBuscar";
+            this.cboModoBuscar.Size = new System.Drawing.Size(193, 21);
+            this.cboModoBuscar.TabIndex = 13;
+            // 
+            // cboEstadoBuscar
+            // 
+            this.cboEstadoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEstadoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboEstadoBuscar.FormattingEnabled = true;
+            this.cboEstadoBuscar.Location = new System.Drawing.Point(72, 56);
+            this.cboEstadoBuscar.Name = "cboEstadoBuscar";
+            this.cboEstadoBuscar.Size = new System.Drawing.Size(193, 21);
+            this.cboEstadoBuscar.TabIndex = 11;
+            // 
+            // cboMaquinaCierre
+            // 
+            this.cboMaquinaCierre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboMaquinaCierre.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboMaquinaCierre.FormattingEnabled = true;
+            this.cboMaquinaCierre.Location = new System.Drawing.Point(84, 59);
+            this.cboMaquinaCierre.Name = "cboMaquinaCierre";
+            this.cboMaquinaCierre.Size = new System.Drawing.Size(200, 21);
+            this.cboMaquinaCierre.TabIndex = 24;
+            // 
+            // cboEmpleadoCierre
+            // 
+            this.cboEmpleadoCierre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEmpleadoCierre.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboEmpleadoCierre.FormattingEnabled = true;
+            this.cboEmpleadoCierre.Location = new System.Drawing.Point(84, 27);
+            this.cboEmpleadoCierre.Name = "cboEmpleadoCierre";
+            this.cboEmpleadoCierre.Size = new System.Drawing.Size(200, 21);
+            this.cboEmpleadoCierre.TabIndex = 22;
+            // 
+            // dtpFechaCierre
+            // 
+            this.dtpFechaCierre.CustomFormat = " ";
+            this.dtpFechaCierre.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaCierre.Location = new System.Drawing.Point(84, 122);
+            this.dtpFechaCierre.Name = "dtpFechaCierre";
+            this.dtpFechaCierre.Size = new System.Drawing.Size(200, 21);
+            this.dtpFechaCierre.TabIndex = 21;
             // 
             // frmOrdenTrabajo
             // 
@@ -658,15 +663,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenesProduccion)).EndInit();
             this.tpOrdenesTrabajo.ResumeLayout(false);
             this.gbDatos.ResumeLayout(false);
-            this.tsMenu.ResumeLayout(false);
-            this.tsMenu.PerformLayout();
-            this.tpCierreParcial.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenesTrabajo)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCierresParciales)).EndInit();
+            this.tpCierreParcial.ResumeLayout(false);
             this.gbAgregarCierreParcial.ResumeLayout(false);
             this.gbAgregarCierreParcial.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidadCierre)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCierresParciales)).EndInit();
+            this.tsMenu.ResumeLayout(false);
+            this.tsMenu.PerformLayout();
             this.ResumeLayout(false);
 
         }

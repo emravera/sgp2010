@@ -9,6 +9,9 @@ namespace GyCAP.DAL
 {
     public class OrdenProduccionDAL
     {
+        public static readonly int OrdenAutomatica = 1;
+        public static readonly int OrdenManual = 2;
+        
         public static void Insertar(int numeroOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo)
         {
             string sql = @"INSERT INTO ORDENES_PRODUCCION 
@@ -129,6 +132,97 @@ namespace GyCAP.DAL
             {
                 //En cualquier caso finalizamos la transaccion para que se cierre la conexion
                 DB.FinalizarTransaccion();
+            }
+        }
+
+        public static void ObtenerOrdenesProduccion(object codigo, object estado, object modo, object fechaGeneracion, object fechaDesde, object fechaHasta, Data.dsOrdenTrabajo dsOrdenTrabajo)
+        {
+            string sql = @"SELECT ordp_numero, ordp_codigo, eord_codigo, ordp_fechaalta, dpsem_codigo, ordpm_numero, ordp_origen, ordp_fechainicioestimada, 
+                        ordp_fechainicioreal, ordp_fechafinestimada, ordp_fechafinreal, ordp_observaciones, ordp_prioridad, estr_codigo, 
+                        ordp_cantidadestimada, ordp_cantidadreal, coc_codigo 
+                        FROM ORDENES_PRODUCCION WHERE 1 = 1";
+
+            //Sirve para armar el nombre de los parámetros
+            int cantidadParametros = 0;
+            //Un array de object para ir guardando los valores de los filtros, con tamaño = cantidad de filtros disponibles
+            object[] valoresFiltros = new object[6];
+            //Empecemos a armar la consulta, revisemos que filtros aplican
+            if (codigo != null && codigo.ToString() != string.Empty)
+            {
+                //Si aplica el filtro lo usamos
+                sql += " AND ordp_codigo LIKE @p" + cantidadParametros;
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                codigo = "%" + codigo + "%";
+                valoresFiltros[cantidadParametros] = codigo;
+                cantidadParametros++;
+            }
+
+            //Revisamos si pasó algun valor y si es un integer
+            if (estado != null && estado.GetType() == cantidadParametros.GetType())
+            {
+                sql += " AND eord_codigo = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(estado);
+                cantidadParametros++;
+            }
+
+            //Revisamos si pasó algun valor y si es un integer
+            DateTime generacion;
+            if (fechaGeneracion != null && DateTime.TryParse(fechaGeneracion.ToString(), out generacion))
+            {                
+                sql += " AND ordp_fechaalta >= @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = generacion.ToString("yyyyMMdd");
+                cantidadParametros++;
+                sql += " AND ordp_fechaalta < dateadd(dd, 1, @p" + cantidadParametros + ")";
+                valoresFiltros[cantidadParametros] = generacion.ToString("yyyyMMdd");
+                cantidadParametros++;
+            }
+
+            //Revisamos si pasó algun valor y si es un integer
+            DateTime desde, hasta;
+            if (fechaDesde != null && DateTime.TryParse(fechaDesde.ToString(), out desde) && fechaHasta != null && DateTime.TryParse(fechaHasta.ToString(), out hasta))
+            {
+                sql += " AND ordp_fechainicioestimada BETWEEN @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = desde.ToString("yyyyMMdd");
+                cantidadParametros++;
+                sql += " AND @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = hasta.ToString("yyyyMMdd");
+                cantidadParametros++;
+            }
+
+            //Revisamos si pasó algun valor y si es un integer
+            if (modo != null && modo.GetType() == cantidadParametros.GetType())
+            {
+                if (Convert.ToInt32(modo) == OrdenAutomatica)
+                {
+                    sql += " AND ordpm_numero IS NULL";
+                }
+                else if (Convert.ToInt32(modo) == OrdenManual)
+                {
+                    sql += " AND ordpm_numero IS NOT NULL";
+                }                
+            }
+
+            if (cantidadParametros > 0)
+            {
+                //Buscamos con filtro, armemos el array de los valores de los parametros
+                object[] valorParametros = new object[cantidadParametros];
+                for (int i = 0; i < cantidadParametros; i++)
+                {
+                    valorParametros[i] = valoresFiltros[i];
+                }
+                try
+                {
+                    DB.FillDataSet(dsOrdenTrabajo, "ORDENES_PRODUCCION", sql, valorParametros);
+                }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            }
+            else if (modo != null)
+            {
+                try
+                {
+                    DB.FillDataSet(dsOrdenTrabajo, "ORDENES_PRODUCCION", sql, null);
+                }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
         }
     }

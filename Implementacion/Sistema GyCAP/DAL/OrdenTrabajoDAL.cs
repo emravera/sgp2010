@@ -65,8 +65,23 @@ namespace GyCAP.DAL
                                              row.ORDT_SECUENCIA };
 
             return Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
-        }     
+        }
 
-        
+        public static void ObtenerOrdenesTrabajo(int numeroOrdenProduccion, DataTable dtOrdenTrabajo)
+        {
+            string sql = @"SELECT ordt_numero, ordt_codigo, ordp_numero, eord_codigo, par_codigo, par_tipo, ordt_origen, ordt_cantidadestimada
+                         , ordt_cantidadreal, ordt_fechainicioestimada, ordt_fechainicioreal, ordt_fechafinestimada, ordt_fechafinreal
+                         , ordt_horainicioestimada, ordt_horainicioreal, ordt_horafinestimada, ordt_horafinreal, estr_codigo, cto_codigo, opr_numero
+                         , ordt_observaciones, ordt_ordensiguiente, ordt_nivel,ordt_secuencia 
+                        FROM ORDENES_TRABAJO WHERE ordp_numero = @p0";
+
+            object[] parametros = { numeroOrdenProduccion };
+
+            try
+            {
+                DB.FillDataTable(dtOrdenTrabajo, sql, parametros);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
     }
 }

@@ -21,6 +21,9 @@ namespace GyCAP.BLL
         public static readonly int EstadoEnProceso = 2;
         public static readonly int EstadoFinalizado = 5;
 
+        public static readonly int OrdenAutomatica = 1;
+        public static readonly int OrdenManual = 2;
+
         public static string GetTipoParte(int tipo)
         {
             if (tipo == parteTipoConjunto) return "Conjunto";
@@ -28,6 +31,17 @@ namespace GyCAP.BLL
             if (tipo == parteTipoPieza) return "Pieza";
             if (tipo == parteTipoMateriaPrima) return "Materia Prima";
             return string.Empty;
+        }
+
+        public static void ObtenerOrdenesProduccion(object codigo, object estado, object modo, object fechaGeneracion, object fechaDesde, object fechaHasta, Data.dsOrdenTrabajo dsOrdenTrabajo)
+        {
+            if (estado != null && Convert.ToInt32(estado) <= 0) { estado = null; }
+            if (modo != null && Convert.ToInt32(modo) <= 0) { modo = null; }
+            DAL.OrdenProduccionDAL.ObtenerOrdenesProduccion(codigo, estado, modo, fechaGeneracion, fechaDesde, fechaHasta, dsOrdenTrabajo);
+            foreach (Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow row in dsOrdenTrabajo.ORDENES_PRODUCCION)
+            {
+                OrdenTrabajoBLL.ObtenerOrdenesTrabajo(Convert.ToInt32(row.ORDP_NUMERO), dsOrdenTrabajo.ORDENES_TRABAJO);
+            }
         }
         
         public static void Insertar(int numeroOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo)
