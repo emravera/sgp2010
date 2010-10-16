@@ -181,7 +181,7 @@ namespace GyCAP.BLL
         /// <param name="dsOrdenTrabajo"></param>
         /// <param name="dsEstructura"></param>
         /// <param name="dsHojaRuta"></param>
-        public static void GenerarArbolOrdenesTrabajo(int codigoOrdenProduccion, TreeView tvDependenciaSimple, TreeView tvDependenciaCompleta, TreeView tvOrdenesYEstructura, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
+        public static void GenerarArbolOrdenesTrabajo(int codigoOrdenProduccion, TreeView tvDependenciaSimple, TreeView tvDependenciaCompleta, TreeView tvOrdenesYEstructura, Data.dsOrdenTrabajo dsOrdenTrabajo)
         {
             Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow rowOrdenP = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion);
             tvDependenciaSimple.Nodes.Clear();
@@ -341,22 +341,7 @@ namespace GyCAP.BLL
 
             return fechaFin;
         }
-
-        /*public static void PlanearFechaHaciaDelante(int codigoOrdenProduccion, DateTime fechaInicio, TreeView tvDependenciaCompleta, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
-        {
-            TreeNode nodoOrden = tvDependenciaCompleta.Nodes[codigoOrdenProduccion.ToString()];
-            dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_FECHAINICIOESTIMADA = fechaInicio;
-            DateTime fechaMayor = fechaInicio;
-            DateTime nuevaFecha;
-            foreach (TreeNode nodoHijo in nodoOrden.Nodes)
-            {
-                nuevaFecha = CalcularFechaHaciaDelante(nodoHijo, fechaInicio, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
-                if (nuevaFecha > fechaMayor) { fechaMayor = nuevaFecha; }
-            }
-
-            dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_FECHAFINESTIMADA = fechaMayor;
-        }*/
-
+        
         public static void PlanearFechaHaciaDelante(int codigoOrdenProduccion, DateTime fechaInicio, TreeView tvDependenciaCompleta, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
         {
             TreeNode nodoOrden = tvDependenciaCompleta.Nodes[codigoOrdenProduccion.ToString()];
@@ -417,6 +402,27 @@ namespace GyCAP.BLL
             }
 
             return 0;
+        }
+
+        private static void IniciarOrdenProduccion(int numeroOrdenProduccion, DateTime fechaInicioReal, Data.dsOrdenTrabajo dsOrdenTrabajo)
+        {
+            if (dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).EORD_CODIGO == EstadoGenerado)
+            {
+                //Iniciamos la órdenes de producción
+                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).EORD_CODIGO = EstadoEnProceso;
+                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_FECHAINICIOREAL = fechaInicioReal;
+
+                //Iniciamos las órdenes de trabajo
+                TreeView tvSimple = new TreeView(), tvCompleta = new TreeView(), tvTemp = new TreeView();
+                GenerarArbolOrdenesTrabajo(numeroOrdenProduccion, tvSimple, tvCompleta, tvTemp, dsOrdenTrabajo);
+                tvTemp.Dispose();
+                tvSimple.Dispose();
+                TreeNode nodoOrden = tvCompleta.Nodes[numeroOrdenProduccion.ToString()];
+                foreach (TreeNode nodoOT in nodoOrden.Nodes)
+                {
+                    int numeroOT = Convert.ToInt32(nodoOT.LastNode.Name);
+                }
+            }
         }
 
     }
