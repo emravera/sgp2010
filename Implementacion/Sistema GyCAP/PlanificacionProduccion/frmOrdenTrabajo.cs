@@ -17,7 +17,8 @@ namespace GyCAP.UI.PlanificacionProduccion
         private Data.dsOrdenTrabajo dsOrdenTrabajo = new GyCAP.Data.dsOrdenTrabajo();
         private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
         private Data.dsHojaRuta dsHojaRuta = new GyCAP.Data.dsHojaRuta();
-        private DataView dvOrdenProduccion, dvOrdenTrabajo, dvCierreParcial, dvEmpleado, dvMaquina, dvEstadoBuscar;
+        private DataView dvOrdenProduccion, dvOrdenTrabajo, dvCierreParcial, dvEmpleado, dvMaquina;
+        private DataView dvEstadoOPBuscar, dvEstadoOTBuscar;
         
 
         #region Inicio
@@ -68,13 +69,41 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 dsOrdenTrabajo.ORDENES_PRODUCCION.Clear();
                 dsOrdenTrabajo.ORDENES_TRABAJO.Clear();
-                BLL.OrdenProduccionBLL.ObtenerOrdenesProduccion(txtCodigoBuscar.Text, cboEstadoBuscar.GetSelectedValueInt(), cboModoBuscar.GetSelectedValueInt(), dtpFechaGeneracionBuscar.GetFecha(), dtpFechaDesdeBuscar.GetFecha(), dtpFechaHastaBuscar.GetFecha(), dsOrdenTrabajo);
+                BLL.OrdenProduccionBLL.ObtenerOrdenesProduccion(txtCodigoOPBuscar.Text, cboEstadoOPBuscar.GetSelectedValueInt(), cboModoOPBuscar.GetSelectedValueInt(), dtpFechaGeneracionOPBuscar.GetFecha(), dtpFechaDesdeOPBuscar.GetFecha(), dtpFechaHastaOPBuscar.GetFecha(), dsOrdenTrabajo);
                 int algo = 0;
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
                 MessageBox.Show(ex.Message, "Error: Generar Orden de Producción - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        #endregion
+
+        #region Órdenes de Produccion
+        #endregion
+
+        #region Órdenes de Trabajo
+
+        private void btnFiltrarOT_Click(object sender, EventArgs e)
+        {
+            string filtro = string.Empty;
+
+            if (txtCodigoOTFiltrar.Text != string.Empty) { filtro = "ORDT_CODIGO LIKE '%" + txtCodigoOTFiltrar.Text + "%'"; }
+
+            if (cboEstadoOTFiltrar.GetSelectedValueInt() != -1)
+            {
+                if (filtro == string.Empty) { filtro = "EORD_CODIGO = " + cboEstadoOTFiltrar.GetSelectedValueInt(); }
+                else { filtro += " AND EORD_CODIGO = " + cboEstadoOTFiltrar.GetSelectedValueInt(); }
+            }
+
+            if (dtpFechaInicioOTFiltrar.GetFecha() != null)
+            {
+                if (filtro == string.Empty) { filtro = "ORDT_FECHAINICIOESTIMADA = '" + DateTime.Parse(dtpFechaInicioOTFiltrar.GetFecha().ToString()).ToShortDateString() + "'"; }
+                else { filtro += " AND ORDT_FECHAINICIOESTIMADA = '" + DateTime.Parse(dtpFechaInicioOTFiltrar.GetFecha().ToString()).ToString("yyyyMMdd") + "'"; }
+            }
+
+            dvOrdenTrabajo.RowFilter = filtro;
         }
 
         #endregion
@@ -102,7 +131,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnCierreParcial.Enabled = hayDatos;
                     btnIniciar.Enabled = hayDatos;
                     estadoInterface = estadoUI.inicio;
-                    tcOrdenTrabajo.SelectedTab = tpBuscar;
+                    tcOrdenTrabajo.SelectedTab = tpOrdenesProduccion;
                     break;
                 case estadoUI.pestañaProduccion:
                     //txtNombre.ReadOnly = false;
@@ -254,8 +283,8 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvOrdenesTrabajo.DataSource = dvOrdenTrabajo;
             dvCierreParcial = new DataView(dsOrdenTrabajo.CIERRE_ORDEN_TRABAJO);
             dgvCierresParciales.DataSource = dvCierreParcial;
-            dvEstadoBuscar = new DataView(dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO);
-            cboEstadoBuscar.SetDatos(dvEstadoBuscar, "EORD_CODIGO", "EORD_NOMBRE", "--TODOS--", true);
+            dvEstadoOPBuscar = new DataView(dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO);
+            cboEstadoOPBuscar.SetDatos(dvEstadoOPBuscar, "EORD_CODIGO", "EORD_NOMBRE", "--TODOS--", true);
             dvEmpleado = new DataView(dsOrdenTrabajo.EMPLEADOS);
             string[] display = { "E_APELLIDO", "E_NOMBRE" };
             cboEmpleadoCierre.SetDatos(dvEmpleado, "E_CODIGO", display, ", ", "Seleccione", false);
@@ -263,7 +292,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             cboMaquinaCierre.SetDatos(dvMaquina, "MAQ_CODIGO", "MAQ_NOMBRE", "Seleccione", false);
             string[] nombres = { "Automático", "Manual" };
             int[] valores = { BLL.OrdenProduccionBLL.OrdenAutomatica, BLL.OrdenProduccionBLL.OrdenManual };
-            cboModoBuscar.SetDatos(nombres, valores, "--TODOS--", true);
+            cboModoOPBuscar.SetDatos(nombres, valores, "--TODOS--", true);
+            dvEstadoOTBuscar = new DataView(dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO);
+            cboEstadoOTFiltrar.SetDatos(dvEstadoOTBuscar, "EORD_CODIGO", "EORD_NOMBRE", "--TODOS--", true);
 
             //Por defecto cargamos las órdenes de producción del día y que deben iniciarse
             try
@@ -405,6 +436,34 @@ namespace GyCAP.UI.PlanificacionProduccion
         }
 
         #endregion CellFormatings
+
+        private void btnIniciar_Click(object sender, EventArgs e)
+        {
+            if (tcOrdenTrabajo.SelectedTab == tpOrdenesProduccion)
+            {
+                if (dgvOrdenesProduccion.SelectedRows.Count > 0)
+                {
+                    int numeroOrdenOP = Convert.ToInt32(dvOrdenProduccion[dgvOrdenesProduccion.SelectedRows[0].Index]["ordp_numero"]);
+                    if (dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenOP).EORD_CODIGO == BLL.OrdenProduccionBLL.EstadoGenerado)
+                    {
+                        //iniciar orden produccion
+                    }
+                }
+            }
+            else if (tcOrdenTrabajo.SelectedTab == tpOrdenesTrabajo)
+            {
+                if (dgvOrdenesTrabajo.SelectedRows.Count > 0)
+                {
+                    int numeroOrdenOT = Convert.ToInt32(dvOrdenTrabajo[dgvOrdenesTrabajo.SelectedRows[0].Index]["ordt_numero"]);
+                    if (dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenOT).EORD_CODIGO == BLL.OrdenTrabajoBLL.EstadoGenerado)
+                    {
+                        //preguntar si desea forzar el inicio de la orden de trabajo
+                    }
+                }
+            }
+        }
+
+        
 
         #endregion Servicios
     }

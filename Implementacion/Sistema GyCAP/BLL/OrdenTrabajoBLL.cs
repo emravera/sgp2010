@@ -16,6 +16,12 @@ namespace GyCAP.BLL
         public static readonly int nodoDetalleOrdenTrabajo = 2;
         public static readonly int nodoComplemento = 3;
 
+        public static readonly int EstadoGenerado = 1;
+        public static readonly int EstadoEnEspera = 2;
+        public static readonly int EstadoEnProceso = 3;
+        public static readonly int EstadoFinalizado = 4;
+        public static readonly int EstadoCancelado = 5;
+
         public static string GetTipoParte(int tipo)
         {
             if (tipo == parteTipoConjunto) return "Conjunto";
