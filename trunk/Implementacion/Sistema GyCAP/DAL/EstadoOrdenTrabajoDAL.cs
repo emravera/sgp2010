@@ -19,5 +19,17 @@ namespace GyCAP.DAL
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
+
+        public static int ObtenerEstadoGenerada()
+        {
+            string sql = "SELECT eord_codigo FROM ESTADO_ORDENES_TRABAJO WHERE eord_nombre = @p0";
+            object[] parametros = { "Generada" };
+
+            try
+            {
+                return Convert.ToInt32(DB.executeScalar(sql, parametros, null));
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
     }
 }

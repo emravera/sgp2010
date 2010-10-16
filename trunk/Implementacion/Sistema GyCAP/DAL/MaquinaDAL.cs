@@ -177,7 +177,7 @@ namespace GyCAP.DAL
         public static void ObtenerMaquinas(DataTable dtMaquina)
         {
             string sql = @"SELECT MAQ_CODIGO, EMAQ_CODIGO, MODM_CODIGO, FAB_CODIGO, MAQ_NOMBRE,
-                           MAQ_NUMEROSERIE, MAQ_FECHA_ALTA, MAQ_MARCA, MAQ_ES_CRITICA 
+                           MAQ_NUMEROSERIE, MAQ_FECHAALTA, MAQ_MARCA, MAQ_ES_CRITICA 
                            FROM MAQUINAS ";
 
             DB.FillDataTable(dtMaquina, sql, null);

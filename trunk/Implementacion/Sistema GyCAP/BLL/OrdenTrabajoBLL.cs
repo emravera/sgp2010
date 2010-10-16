@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace GyCAP.BLL
 {
@@ -248,6 +249,11 @@ namespace GyCAP.BLL
                     }
                 }
             }            
+        }
+
+        public static void ObtenerOrdenesTrabajo(int numeroOrdenProduccion, DataTable dtOrdenTrabajo)
+        {
+            DAL.OrdenTrabajoDAL.ObtenerOrdenesTrabajo(numeroOrdenProduccion, dtOrdenTrabajo);
         }
     }
 }
