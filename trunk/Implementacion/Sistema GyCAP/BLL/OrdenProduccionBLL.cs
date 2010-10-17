@@ -404,24 +404,26 @@ namespace GyCAP.BLL
             return 0;
         }
 
-        private static void IniciarOrdenProduccion(int numeroOrdenProduccion, DateTime fechaInicioReal, Data.dsOrdenTrabajo dsOrdenTrabajo)
+        public static void IniciarOrdenProduccion(int numeroOrdenProduccion, DateTime fechaInicioReal, Data.dsOrdenTrabajo dsOrdenTrabajo)
         {
             if (dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).EORD_CODIGO == EstadoGenerado)
             {
-                //Iniciamos la órdenes de producción
-                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).EORD_CODIGO = EstadoEnProceso;
+                //Iniciamos la orden de producción
                 dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_FECHAINICIOREAL = fechaInicioReal;
+                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).EORD_CODIGO = EstadoEnProceso;
 
                 //Iniciamos las órdenes de trabajo
-                TreeView tvSimple = new TreeView(), tvCompleta = new TreeView(), tvTemp = new TreeView();
-                GenerarArbolOrdenesTrabajo(numeroOrdenProduccion, tvSimple, tvCompleta, tvTemp, dsOrdenTrabajo);
-                tvTemp.Dispose();
-                tvSimple.Dispose();
-                TreeNode nodoOrden = tvCompleta.Nodes[numeroOrdenProduccion.ToString()];
-                foreach (TreeNode nodoOT in nodoOrden.Nodes)
+                foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow row in (Data.dsOrdenTrabajo.ORDENES_TRABAJORow[])dsOrdenTrabajo.ORDENES_TRABAJO.Select("ORDT_FECHAINICIOESTIMADA = MIN (ORDT_FECHAINICIOESTIMADA)"))
+	            {
+                    row.EORD_CODIGO = EstadoEnProceso;
+                    row.ORDT_FECHAINICIOREAL = fechaInicioReal;
+	            }
+
+                foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow row in dsOrdenTrabajo.ORDENES_TRABAJO.Rows)
                 {
-                    int numeroOT = Convert.ToInt32(nodoOT.LastNode.Name);
+                    if (row.EORD_CODIGO == EstadoGenerado) { row.EORD_CODIGO = EstadoEnEspera; }
                 }
+
             }
         }
 
