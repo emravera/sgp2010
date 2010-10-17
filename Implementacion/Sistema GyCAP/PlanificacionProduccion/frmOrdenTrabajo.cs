@@ -125,10 +125,10 @@ namespace GyCAP.UI.PlanificacionProduccion
                         hayDatos = true;
                     }
 
-                    btnFinalizar.Enabled = hayDatos;
-                    btnCancelar.Enabled = hayDatos;
-                    btnCierreParcial.Enabled = hayDatos;
-                    btnIniciar.Enabled = hayDatos;
+                    //btnFinalizar.Enabled = hayDatos;
+                    //btnCancelar.Enabled = hayDatos;
+                    //btnCierreParcial.Enabled = hayDatos;
+                    //btnIniciar.Enabled = hayDatos;
                     estadoInterface = estadoUI.inicio;
                     tcOrdenTrabajo.SelectedTab = tpOrdenesProduccion;
                     break;
@@ -137,19 +137,19 @@ namespace GyCAP.UI.PlanificacionProduccion
                     //txtDescripcion.ReadOnly = false;
                     //txtNombre.Text = String.Empty;
                     //txtDescripcion.Text = String.Empty;
-                    btnGuardarCierre.Enabled = true;
+                    //btnGuardarCierre.Enabled = true;
                     //btnVolver.Enabled = true;
-                    btnIniciar.Enabled = false;
-                    btnCierreParcial.Enabled = false;
-                    btnFinalizar.Enabled = false;
-                    btnCancelar.Enabled = false;
+                    //btnIniciar.Enabled = false;
+                    //btnCierreParcial.Enabled = false;
+                    //btnFinalizar.Enabled = false;
+                    //btnCancelar.Enabled = false;
                     estadoInterface = estadoUI.pestañaProduccion;
                     tcOrdenTrabajo.SelectedTab = tpOrdenesTrabajo;
                     break;
                 case estadoUI.pestañaTrabajo:
                     //txtNombre.ReadOnly = true;
                     //txtDescripcion.ReadOnly = true;
-                    btnGuardarCierre.Enabled = false;
+                    //btnGuardarCierre.Enabled = false;
                     //btnVolver.Enabled = true;
                     estadoInterface = estadoUI.pestañaTrabajo;
                     tcOrdenTrabajo.SelectedTab = tpOrdenesTrabajo;
@@ -157,12 +157,12 @@ namespace GyCAP.UI.PlanificacionProduccion
                 case estadoUI.pestañaCierreParcial:
                     //txtNombre.ReadOnly = false;
                     //txtDescripcion.ReadOnly = false;
-                    btnGuardarCierre.Enabled = true;
+                    //btnGuardarCierre.Enabled = true;
                     //btnVolver.Enabled = true;
-                    btnIniciar.Enabled = false;
-                    btnCierreParcial.Enabled = false;
-                    btnFinalizar.Enabled = false;
-                    btnCancelar.Enabled = false;
+                    //btnIniciar.Enabled = false;
+                    //btnCierreParcial.Enabled = false;
+                    //btnFinalizar.Enabled = false;
+                    //btnCancelar.Enabled = false;
                     estadoInterface = estadoUI.pestañaCierreParcial;
                     tcOrdenTrabajo.SelectedTab = tpOrdenesTrabajo;
                     break;
@@ -178,7 +178,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvOrdenesProduccion.Columns.Add("ORDP_CODIGO", "Código");
             dgvOrdenesProduccion.Columns.Add("ORDP_ORIGEN", "Origen");
             dgvOrdenesProduccion.Columns.Add("ORDP_FECHAINICIOESTIMADA", "Inicio estimado");
-            dgvOrdenesProduccion.Columns.Add("ORDP_FECHAINCIOREAL", "Inicio Real");
+            dgvOrdenesProduccion.Columns.Add("ORDP_FECHAINICIOREAL", "Inicio Real");
             dgvOrdenesProduccion.Columns.Add("ORDP_FECHAFINESTIMADA", "Fin estimado");
             dgvOrdenesProduccion.Columns.Add("ORDP_FECHAFINREAL", "Fin real");
             dgvOrdenesProduccion.Columns.Add("COC_CODIGO", "Cocina");
@@ -189,15 +189,15 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvOrdenesProduccion.Columns["ORDP_CODIGO"].DataPropertyName = "ORDP_CODIGO";
             dgvOrdenesProduccion.Columns["ORDP_ORIGEN"].DataPropertyName = "ORDP_ORIGEN";
             dgvOrdenesProduccion.Columns["ORDP_FECHAINICIOESTIMADA"].DataPropertyName = "ORDP_FECHAINICIOESTIMADA";
-            dgvOrdenesProduccion.Columns["ORDP_FECHAINCIOREAL"].DataPropertyName = "ORDP_FECHAINCIOREAL";
+            dgvOrdenesProduccion.Columns["ORDP_FECHAINICIOREAL"].DataPropertyName = "ORDP_FECHAINICIOREAL";
             dgvOrdenesProduccion.Columns["ORDP_FECHAFINESTIMADA"].DataPropertyName = "ORDP_FECHAFINESTIMADA";
-            dgvOrdenesProduccion.Columns["ORDP_FECHAFINREAL"].DataPropertyName = "ORDP_FECHAFINREAL";            
+            dgvOrdenesProduccion.Columns["ORDP_FECHAFINREAL"].DataPropertyName = "ORDP_FECHAFINREAL";
             dgvOrdenesProduccion.Columns["COC_CODIGO"].DataPropertyName = "COC_CODIGO";
             dgvOrdenesProduccion.Columns["ORDP_CANTIDADESTIMADA"].DataPropertyName = "ORDP_CANTIDADESTIMADA";
-            dgvOrdenesProduccion.Columns["ORDP_CANTIDADREAL"].DataPropertyName = "ORDP_CANTIDADREAL";            
+            dgvOrdenesProduccion.Columns["ORDP_CANTIDADREAL"].DataPropertyName = "ORDP_CANTIDADREAL";
             dgvOrdenesProduccion.Columns["EORD_CODIGO"].DataPropertyName = "EORD_CODIGO";
             dgvOrdenesProduccion.Columns["ORDP_FECHAINICIOESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvOrdenesProduccion.Columns["ORDP_FECHAINCIOREAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvOrdenesProduccion.Columns["ORDP_FECHAINICIOREAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvOrdenesProduccion.Columns["ORDP_FECHAFINESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvOrdenesProduccion.Columns["ORDP_FECHAFINREAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvOrdenesProduccion.Columns["ORDP_CANTIDADESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -279,6 +279,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dvOrdenProduccion = new DataView(dsOrdenTrabajo.ORDENES_PRODUCCION);
             dgvOrdenesProduccion.DataSource = dvOrdenProduccion;
             dvOrdenTrabajo = new DataView(dsOrdenTrabajo.ORDENES_TRABAJO);
+            dvOrdenTrabajo.Sort = "ORDT_FECHAINICIOESTIMADA ASC";
             dgvOrdenesTrabajo.DataSource = dvOrdenTrabajo;
             dvCierreParcial = new DataView(dsOrdenTrabajo.CIERRE_ORDEN_TRABAJO);
             dgvCierresParciales.DataSource = dvCierreParcial;
@@ -445,7 +446,14 @@ namespace GyCAP.UI.PlanificacionProduccion
                     int numeroOrdenOP = Convert.ToInt32(dvOrdenProduccion[dgvOrdenesProduccion.SelectedRows[0].Index]["ordp_numero"]);
                     if (dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenOP).EORD_CODIGO == BLL.OrdenProduccionBLL.EstadoGenerado)
                     {
-                        //iniciar orden produccion
+                        try
+                        {
+                            BLL.OrdenProduccionBLL.IniciarOrdenProduccion(numeroOrdenOP, BLL.DBBLL.GetFechaServidor(), dsOrdenTrabajo);
+                        }
+                        catch (Entidades.Excepciones.BaseDeDatosException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio Orden de Producción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
             }
