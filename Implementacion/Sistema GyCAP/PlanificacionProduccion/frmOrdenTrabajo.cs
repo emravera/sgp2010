@@ -12,14 +12,15 @@ namespace GyCAP.UI.PlanificacionProduccion
     public partial class frmOrdenTrabajo : Form
     {
         private static frmOrdenTrabajo _frmOrdenTrabajo = null;
-        private enum estadoUI { inicio, pestañaProduccion, pestañaTrabajo, pestañaCierreParcial };
+        private enum estadoUI { pestañaProduccion, pestañaTrabajo, pestañaCierreParcial };
         private estadoUI estadoInterface;
         private Data.dsOrdenTrabajo dsOrdenTrabajo = new GyCAP.Data.dsOrdenTrabajo();
         private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
         private Data.dsHojaRuta dsHojaRuta = new GyCAP.Data.dsHojaRuta();
+        private Data.dsStock dsStock = new GyCAP.Data.dsStock();
         private DataView dvOrdenProduccion, dvOrdenTrabajo, dvCierreParcial, dvEmpleado, dvMaquina;
         private DataView dvEstadoOPBuscar, dvEstadoOTBuscar;
-        
+        private int columnIndexProduccion = -1, columnIndexTrabajo = -1, columnIndexCierre = -1;
 
         #region Inicio
 
@@ -53,6 +54,46 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         #region Botones menú
 
+        private void btnIniciar_Click(object sender, EventArgs e)
+        {
+            if (estadoInterface == estadoUI.pestañaProduccion)
+            {
+                if (dgvOrdenesProduccion.SelectedRows.Count > 0)
+                {
+                    int numeroOrdenOP = Convert.ToInt32(dvOrdenProduccion[dgvOrdenesProduccion.SelectedRows[0].Index]["ordp_numero"]);
+                    if (dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenOP).EORD_CODIGO == BLL.OrdenProduccionBLL.EstadoGenerado)
+                    {
+                        try
+                        {
+                            BLL.OrdenProduccionBLL.IniciarOrdenProduccion(numeroOrdenOP, BLL.DBBLL.GetFechaServidor(), dsOrdenTrabajo);
+                        }
+                        catch (Entidades.Excepciones.BaseDeDatosException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio Orden de Producción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                else { MessageBox.Show("Debe seleccionar una Orden de Producción de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+            }
+            else if (estadoInterface == estadoUI.pestañaTrabajo)
+            {
+                if (dgvOrdenesTrabajo.SelectedRows.Count > 0)
+                {
+                    int numeroOrdenOT = Convert.ToInt32(dvOrdenTrabajo[dgvOrdenesTrabajo.SelectedRows[0].Index]["ordt_numero"]);
+                    if (dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenOT).EORD_CODIGO == BLL.OrdenTrabajoBLL.EstadoGenerado)
+                    {
+                        //preguntar si desea forzar el inicio de la orden de trabajo
+                    }
+                }                
+                else { MessageBox.Show("Debe seleccionar una Orden de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+            }
+        }
+        
+        private void btnCierreParcial_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.pestañaCierreParcial);
+        }
+        
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -70,6 +111,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                 dsOrdenTrabajo.ORDENES_PRODUCCION.Clear();
                 dsOrdenTrabajo.ORDENES_TRABAJO.Clear();
                 BLL.OrdenProduccionBLL.ObtenerOrdenesProduccion(txtCodigoOPBuscar.Text, cboEstadoOPBuscar.GetSelectedValueInt(), cboModoOPBuscar.GetSelectedValueInt(), dtpFechaGeneracionOPBuscar.GetFecha(), dtpFechaDesdeOPBuscar.GetFecha(), dtpFechaHastaOPBuscar.GetFecha(), dsOrdenTrabajo);
+
+                SetInterface(estadoUI.pestañaProduccion);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -107,15 +150,57 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         #endregion
 
+        #region Cierres Parciales
+
+        private void btnAgregarCierre_Click(object sender, EventArgs e)
+        {
+            if (dgvOrdenesTrabajo.SelectedRows.Count > 0)
+            {
+                gbAgregarCierreParcial.Enabled = true;
+            }
+            else { MessageBox.Show("Debe seleccionar una Orden de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+        }
+
+        private void btnModificarCierre_Click(object sender, EventArgs e)
+        {
+            if (dgvCierresParciales.SelectedRows.Count > 0)
+            {
+                gbAgregarCierreParcial.Enabled = true;
+            }
+            else { MessageBox.Show("Debe seleccionar un Cierre Parcial de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+        }
+
+        private void btnEliminarCierre_Click(object sender, EventArgs e)
+        {
+            if (dgvCierresParciales.SelectedRows.Count > 0)
+            {
+                int codigo = Convert.ToInt32(dvCierreParcial[dgvCierresParciales.SelectedRows[0].Index]["cord_codigo"]);
+                //Eliminar - gonzalo
+                LimpiarDatosCierre();
+            }
+            else { MessageBox.Show("Debe seleccionar un Cierre Parcial de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+        }
+
+        private void btnCancelarCierre_Click(object sender, EventArgs e)
+        {
+            gbAgregarCierreParcial.Enabled = false;
+        }
+
+        private void btnGuardarCierre_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion Cierres Parciales
+
         #region Servicios
 
         private void SetInterface(estadoUI estado)
         {
+            bool hayDatos;
             switch (estado)
             {
-                case estadoUI.inicio:
-                    bool hayDatos;
-
+                case estadoUI.pestañaProduccion:
                     if (dsOrdenTrabajo.ORDENES_PRODUCCION.Rows.Count == 0)
                     {
                         hayDatos = false;
@@ -125,51 +210,53 @@ namespace GyCAP.UI.PlanificacionProduccion
                         hayDatos = true;
                     }
 
-                    //btnFinalizar.Enabled = hayDatos;
-                    //btnCancelar.Enabled = hayDatos;
-                    //btnCierreParcial.Enabled = hayDatos;
-                    //btnIniciar.Enabled = hayDatos;
-                    estadoInterface = estadoUI.inicio;
+                    btnIniciar.Enabled = hayDatos;
+                    btnCierreParcial.Enabled = hayDatos;
+                    btnFinalizar.Enabled = hayDatos;
+                    btnCancelar.Enabled = hayDatos;
+                    btnEliminar.Enabled = hayDatos;
+                    estadoInterface = estadoUI.pestañaProduccion;
                     tcOrdenTrabajo.SelectedTab = tpOrdenesProduccion;
                     break;
-                case estadoUI.pestañaProduccion:
-                    //txtNombre.ReadOnly = false;
-                    //txtDescripcion.ReadOnly = false;
-                    //txtNombre.Text = String.Empty;
-                    //txtDescripcion.Text = String.Empty;
-                    //btnGuardarCierre.Enabled = true;
-                    //btnVolver.Enabled = true;
-                    //btnIniciar.Enabled = false;
-                    //btnCierreParcial.Enabled = false;
-                    //btnFinalizar.Enabled = false;
-                    //btnCancelar.Enabled = false;
-                    estadoInterface = estadoUI.pestañaProduccion;
-                    tcOrdenTrabajo.SelectedTab = tpOrdenesTrabajo;
-                    break;
                 case estadoUI.pestañaTrabajo:
-                    //txtNombre.ReadOnly = true;
-                    //txtDescripcion.ReadOnly = true;
-                    //btnGuardarCierre.Enabled = false;
-                    //btnVolver.Enabled = true;
+                    if (dsOrdenTrabajo.ORDENES_TRABAJO.Rows.Count == 0)
+                    {
+                        hayDatos = false;
+                    }
+                    else
+                    {
+                        hayDatos = true;
+                    }
+                    btnIniciar.Enabled = hayDatos;
+                    btnCierreParcial.Enabled = hayDatos;
+                    btnFinalizar.Enabled = hayDatos;
+                    btnCancelar.Enabled = hayDatos;
+                    btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.pestañaTrabajo;
                     tcOrdenTrabajo.SelectedTab = tpOrdenesTrabajo;
                     break;
                 case estadoUI.pestañaCierreParcial:
-                    //txtNombre.ReadOnly = false;
-                    //txtDescripcion.ReadOnly = false;
-                    //btnGuardarCierre.Enabled = true;
-                    //btnVolver.Enabled = true;
-                    //btnIniciar.Enabled = false;
-                    //btnCierreParcial.Enabled = false;
-                    //btnFinalizar.Enabled = false;
-                    //btnCancelar.Enabled = false;
+                    if (dsOrdenTrabajo.ORDENES_TRABAJO.Rows.Count == 0)
+                    {
+                        hayDatos = false;
+                        LimpiarDatosCierre();
+                    }
+                    else
+                    {
+                        hayDatos = true;
+                    }
+                    btnAgregarCierre.Enabled = hayDatos;
+                    btnModificarCierre.Enabled = hayDatos;
+                    btnEliminarCierre.Enabled = hayDatos;
                     estadoInterface = estadoUI.pestañaCierreParcial;
-                    tcOrdenTrabajo.SelectedTab = tpOrdenesTrabajo;
+                    tcOrdenTrabajo.SelectedTab = tpCierreParcial;
                     break;
                 default:
                     break;
             }
         }
+
+        #region Método Inicializar
 
         private void Inicializar()
         {
@@ -269,6 +356,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 BLL.ConjuntoBLL.ObtenerConjuntos(dsEstructura.CONJUNTOS);
                 BLL.SubConjuntoBLL.ObtenerSubconjuntos(dsEstructura.SUBCONJUNTOS);
                 BLL.PiezaBLL.ObtenerPiezas(dsEstructura.PIEZAS);
+                BLL.EstadoMovimientoStockBLL.ObtenerEstadosMovimiento(dsStock.ESTADO_MOVIMIENTOS_STOCK);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -307,10 +395,12 @@ namespace GyCAP.UI.PlanificacionProduccion
                 MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
-            SetInterface(estadoUI.inicio);
+            SetInterface(estadoUI.pestañaProduccion);
         }
 
-        #region CellFormattings
+        #endregion Método Inicializar
+
+        #region CellFormatings, RowEnter de grillas y Selecting de tabcontrol
 
         private void dgvOrdenesProduccion_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -435,43 +525,166 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
         }
 
-        #endregion CellFormatings
-
-        private void btnIniciar_Click(object sender, EventArgs e)
+        private void dgvOrdenesProduccion_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (tcOrdenTrabajo.SelectedTab == tpOrdenesProduccion)
+            if (dgvOrdenesProduccion.SelectedRows.Count > 0)
             {
-                if (dgvOrdenesProduccion.SelectedRows.Count > 0)
-                {
-                    int numeroOrdenOP = Convert.ToInt32(dvOrdenProduccion[dgvOrdenesProduccion.SelectedRows[0].Index]["ordp_numero"]);
-                    if (dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenOP).EORD_CODIGO == BLL.OrdenProduccionBLL.EstadoGenerado)
-                    {
-                        try
-                        {
-                            BLL.OrdenProduccionBLL.IniciarOrdenProduccion(numeroOrdenOP, BLL.DBBLL.GetFechaServidor(), dsOrdenTrabajo);
-                        }
-                        catch (Entidades.Excepciones.BaseDeDatosException ex)
-                        {
-                            MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio Orden de Producción", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
+                int numero = Convert.ToInt32(dvOrdenProduccion[dgvOrdenesProduccion.SelectedRows[0].Index]["ordp_numero"]);
+                dvOrdenTrabajo.RowFilter = "ORDP_NUMERO = " + numero;
             }
-            else if (tcOrdenTrabajo.SelectedTab == tpOrdenesTrabajo)
+        }
+
+        private void dgvOrdenesTrabajo_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvOrdenesTrabajo.SelectedRows.Count > 0)
             {
-                if (dgvOrdenesTrabajo.SelectedRows.Count > 0)
-                {
-                    int numeroOrdenOT = Convert.ToInt32(dvOrdenTrabajo[dgvOrdenesTrabajo.SelectedRows[0].Index]["ordt_numero"]);
-                    if (dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenOT).EORD_CODIGO == BLL.OrdenTrabajoBLL.EstadoGenerado)
-                    {
-                        //preguntar si desea forzar el inicio de la orden de trabajo
-                    }
-                }
+                int numero = Convert.ToInt32(dvOrdenTrabajo[dgvOrdenesTrabajo.SelectedRows[0].Index]["ordt_numero"]);
+                dvCierreParcial.RowFilter = "ORDT_NUMERO = " + numero;
             }
         }
 
         
 
+        private void tcOrdenTrabajo_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (e.TabPage == tpOrdenesProduccion) { SetInterface(estadoUI.pestañaProduccion); }
+            if (e.TabPage == tpOrdenesTrabajo) { SetInterface(estadoUI.pestañaTrabajo); }
+            if (e.TabPage == tpCierreParcial) { SetInterface(estadoUI.pestañaCierreParcial); }
+        }
+
+        private void dgvCierresParciales_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvCierresParciales.SelectedRows.Count > 0)
+            {
+                int codigo = Convert.ToInt32(dvCierreParcial[dgvCierresParciales.SelectedRows[0].Index]["cord_codigo"]);
+                cboEmpleadoCierre.SetSelectedValue(Convert.ToInt32(dsOrdenTrabajo.CIERRE_ORDEN_TRABAJO.FindByCORD_CODIGO(codigo).E_CODIGO));
+                cboMaquinaCierre.SetSelectedValue(Convert.ToInt32(dsOrdenTrabajo.CIERRE_ORDEN_TRABAJO.FindByCORD_CODIGO(codigo).MAQ_CODIGO));
+                nudCantidadCierre.Value = dsOrdenTrabajo.CIERRE_ORDEN_TRABAJO.FindByCORD_CODIGO(codigo).CORD_CANTIDAD;
+                dtpFechaCierre.SetFecha(dsOrdenTrabajo.CIERRE_ORDEN_TRABAJO.FindByCORD_CODIGO(codigo).CORD_FECHACIERRE);
+                txtObservacionesCierre.Text = dsOrdenTrabajo.CIERRE_ORDEN_TRABAJO.FindByCORD_CODIGO(codigo).CORD_OBSERVACIONES;
+            }
+        }
+        
+        #endregion CellFormatings, RowEnter de grillas y Selecting de tabcontrol
+
+        #region Menú bloquear columnas
+
+        //Grilla órdenes producción
+        private void tsmiBloquearProduccion_Click(object sender, EventArgs e)
+        {
+            if (columnIndexProduccion != -1) { dgvOrdenesProduccion.Columns[columnIndexProduccion].Frozen = true; }
+        }
+
+        private void tsmiDesbloquearProduccion_Click(object sender, EventArgs e)
+        {
+            if (columnIndexProduccion != -1) { dgvOrdenesProduccion.Columns[columnIndexProduccion].Frozen = false; }
+        }
+
+        private void dgvOrdenesProduccion_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex != -1)
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    columnIndexProduccion = e.ColumnIndex;
+                    if (dgvOrdenesProduccion.Columns[columnIndexProduccion].Frozen)
+                    {
+                        tsmiBloquearProduccion.Checked = true;
+                        tsmiDesbloquearProduccion.Checked = false;
+                    }
+                    else
+                    {
+                        tsmiBloquearProduccion.Checked = false;
+                        tsmiDesbloquearProduccion.Checked = true;
+                    }
+                    cmsProduccion.Show(MousePosition);
+                }
+            }
+        }
+
+        //Grilla órdenes trabajo
+        private void tsmiBloquearTrabajo_Click(object sender, EventArgs e)
+        {
+            if (columnIndexTrabajo != -1) { dgvOrdenesTrabajo.Columns[columnIndexTrabajo].Frozen = true; }
+        }
+
+        private void tsmiDesbloquearTrabajo_Click(object sender, EventArgs e)
+        {
+            if (columnIndexTrabajo != -1) { dgvOrdenesTrabajo.Columns[columnIndexTrabajo].Frozen = false; }
+        }
+
+        private void dgvOrdenesTrabajo_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex != -1)
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    columnIndexTrabajo = e.ColumnIndex;
+                    if (dgvOrdenesTrabajo.Columns[columnIndexTrabajo].Frozen)
+                    {
+                        tsmiBloquearTrabajo.Checked = true;
+                        tsmiDesbloquearTrabajo.Checked = false;
+                    }
+                    else
+                    {
+                        tsmiBloquearTrabajo.Checked = false;
+                        tsmiDesbloquearTrabajo.Checked = true;
+                    }
+                    cmsTrabajo.Show(MousePosition);
+                }
+            }
+        }
+
+        //Grilla cierres parciales
+        private void tsmiBloquearCierre_Click(object sender, EventArgs e)
+        {
+            if (columnIndexCierre != -1) { dgvCierresParciales.Columns[columnIndexCierre].Frozen = true; }
+        }
+
+        private void tsmiDesbloquearCierre_Click(object sender, EventArgs e)
+        {
+            if (columnIndexCierre != -1) { dgvCierresParciales.Columns[columnIndexCierre].Frozen = false; }
+        }
+
+        private void dgvCierresParciales_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex != -1)
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    columnIndexCierre = e.ColumnIndex;
+                    if (dgvCierresParciales.Columns[columnIndexCierre].Frozen)
+                    {
+                        tsmiBloquearCierre.Checked = true;
+                        tsmiDesbloquearCierre.Checked = false;
+                    }
+                    else
+                    {
+                        tsmiBloquearCierre.Checked = false;
+                        tsmiDesbloquearCierre.Checked = true;
+                    }
+                    cmsCierres.Show(MousePosition);
+                }
+            }
+        }
+
+        #endregion Menú bloquear columnas
+        
+        private void LimpiarDatosCierre()
+        {
+            cboEmpleadoCierre.SetSelectedIndex(-1);
+            cboMaquinaCierre.SetSelectedIndex(-1);
+            nudCantidadCierre.Value = 0;
+            txtObservacionesCierre.Clear();
+            dtpFechaCierre.SetFechaNull();
+            dtpHoraCierre.Value = new DateTime(2000, 1, 1, 0, 0, 0);
+        }
+
+        
+
         #endregion Servicios
+
+        
+
     }
 }

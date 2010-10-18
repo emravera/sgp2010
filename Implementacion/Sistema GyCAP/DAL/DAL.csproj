@@ -49,6 +49,7 @@
     <Compile Include="CapacidadEmpleadoDAL.cs" />
     <Compile Include="CausaFalloDAL.cs" />
     <Compile Include="CentroTrabajoDAL.cs" />
+    <Compile Include="CierreParcialOrdenTrabajoDAL.cs" />
     <Compile Include="ClaseTemporalPedido.cs" />
     <Compile Include="ClienteDAL.cs" />
     <Compile Include="CocinaDAL.cs" />
@@ -60,6 +61,8 @@
     <Compile Include="DesignacionDAL.cs" />
     <Compile Include="DetalleConjuntoDAL.cs" />
     <Compile Include="DetalleDemandaAnualDAL.cs" />
+    <Compile Include="EstadoMovimientoStockDAL.cs" />
+    <Compile Include="MovimientoStockDAL.cs" />
     <Compile Include="OrdenTrabajoDAL.cs" />
     <Compile Include="DetallePedidoDAL.cs" />
     <Compile Include="DetallePlanAnualDAL.cs" />

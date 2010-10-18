@@ -913,8 +913,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbFechas.Visible = true;
                     gbOpcionesOP.Visible = true;
                     lblMensajeOP.Visible = false;
-                    int codigo = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"]);
-                    CompletarDatosOrdenProduccion(codigo);
+                    int numero = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"]);
+                    CompletarDatosOrdenProduccion(numero);
                 }
                 else 
                 { 
@@ -928,8 +928,8 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
                 {
-                    int codigo = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"]);
-                    CompletarDatosOrdenProduccion(codigo);
+                    int numero = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"]);
+                    CompletarDatosOrdenProduccion(numero);
                     
                     if (sourceOrdenTrabajo.Count > 0)
                     {

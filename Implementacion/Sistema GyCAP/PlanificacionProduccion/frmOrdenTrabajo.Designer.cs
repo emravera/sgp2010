@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcOrdenTrabajo = new System.Windows.Forms.TabControl();
             this.tpOrdenesProduccion = new System.Windows.Forms.TabPage();
@@ -87,6 +88,15 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.cmsProduccion = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiBloquearProduccion = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDesbloquearProduccion = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsTrabajo = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiBloquearTrabajo = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDesbloquearTrabajo = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsCierres = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiBloquearCierre = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDesbloquearCierre = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcOrdenTrabajo.SuspendLayout();
             this.tpOrdenesProduccion.SuspendLayout();
@@ -103,6 +113,9 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCierresParciales)).BeginInit();
             this.tsMenu.SuspendLayout();
+            this.cmsProduccion.SuspendLayout();
+            this.cmsTrabajo.SuspendLayout();
+            this.cmsCierres.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -133,6 +146,7 @@
             this.tcOrdenTrabajo.SelectedIndex = 0;
             this.tcOrdenTrabajo.Size = new System.Drawing.Size(788, 516);
             this.tcOrdenTrabajo.TabIndex = 0;
+            this.tcOrdenTrabajo.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tcOrdenTrabajo_Selecting);
             // 
             // tpOrdenesProduccion
             // 
@@ -313,6 +327,8 @@
             this.dgvOrdenesProduccion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvOrdenesProduccion.Size = new System.Drawing.Size(765, 325);
             this.dgvOrdenesProduccion.TabIndex = 0;
+            this.dgvOrdenesProduccion.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrdenesProduccion_RowEnter);
+            this.dgvOrdenesProduccion.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvOrdenesProduccion_ColumnHeaderMouseClick);
             this.dgvOrdenesProduccion.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvOrdenesProduccion_CellFormatting);
             // 
             // tpOrdenesTrabajo
@@ -428,8 +444,11 @@
             this.dgvOrdenesTrabajo.Name = "dgvOrdenesTrabajo";
             this.dgvOrdenesTrabajo.ReadOnly = true;
             this.dgvOrdenesTrabajo.RowHeadersVisible = false;
+            this.dgvOrdenesTrabajo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvOrdenesTrabajo.Size = new System.Drawing.Size(768, 388);
             this.dgvOrdenesTrabajo.TabIndex = 0;
+            this.dgvOrdenesTrabajo.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrdenesTrabajo_RowEnter);
+            this.dgvOrdenesTrabajo.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvOrdenesTrabajo_ColumnHeaderMouseClick);
             this.dgvOrdenesTrabajo.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvOrdenesTrabajo_CellFormatting);
             // 
             // tpCierreParcial
@@ -474,6 +493,7 @@
             this.btnCancelarCierre.TabIndex = 29;
             this.btnCancelarCierre.Text = "Cancelar";
             this.btnCancelarCierre.UseVisualStyleBackColor = true;
+            this.btnCancelarCierre.Click += new System.EventHandler(this.btnCancelarCierre_Click);
             // 
             // btnGuardarCierre
             // 
@@ -483,6 +503,7 @@
             this.btnGuardarCierre.TabIndex = 28;
             this.btnGuardarCierre.Text = "Guardar";
             this.btnGuardarCierre.UseVisualStyleBackColor = true;
+            this.btnGuardarCierre.Click += new System.EventHandler(this.btnGuardarCierre_Click);
             // 
             // txtObservacionesCierre
             // 
@@ -614,6 +635,7 @@
             this.btnEliminarCierre.TabIndex = 28;
             this.btnEliminarCierre.Text = "Eliminar";
             this.btnEliminarCierre.UseVisualStyleBackColor = true;
+            this.btnEliminarCierre.Click += new System.EventHandler(this.btnEliminarCierre_Click);
             // 
             // btnModificarCierre
             // 
@@ -623,6 +645,7 @@
             this.btnModificarCierre.TabIndex = 27;
             this.btnModificarCierre.Text = "Modificar";
             this.btnModificarCierre.UseVisualStyleBackColor = true;
+            this.btnModificarCierre.Click += new System.EventHandler(this.btnModificarCierre_Click);
             // 
             // dgvCierresParciales
             // 
@@ -634,8 +657,11 @@
             this.dgvCierresParciales.Name = "dgvCierresParciales";
             this.dgvCierresParciales.ReadOnly = true;
             this.dgvCierresParciales.RowHeadersVisible = false;
+            this.dgvCierresParciales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCierresParciales.Size = new System.Drawing.Size(758, 228);
             this.dgvCierresParciales.TabIndex = 1;
+            this.dgvCierresParciales.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCierresParciales_RowEnter);
+            this.dgvCierresParciales.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCierresParciales_ColumnHeaderMouseClick);
             this.dgvCierresParciales.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCierresParciales_CellFormatting);
             // 
             // btnAgregarCierre
@@ -646,6 +672,7 @@
             this.btnAgregarCierre.TabIndex = 26;
             this.btnAgregarCierre.Text = "Agregar";
             this.btnAgregarCierre.UseVisualStyleBackColor = true;
+            this.btnAgregarCierre.Click += new System.EventHandler(this.btnAgregarCierre_Click);
             // 
             // tsMenu
             // 
@@ -687,6 +714,7 @@
             this.btnCierreParcial.Size = new System.Drawing.Size(74, 47);
             this.btnCierreParcial.Text = "&Cierre parcial";
             this.btnCierreParcial.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCierreParcial.Click += new System.EventHandler(this.btnCierreParcial_Click);
             // 
             // btnFinalizar
             // 
@@ -734,6 +762,81 @@
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // cmsProduccion
+            // 
+            this.cmsProduccion.AllowMerge = false;
+            this.cmsProduccion.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiBloquearProduccion,
+            this.tsmiDesbloquearProduccion});
+            this.cmsProduccion.Name = "cmsProduccion";
+            this.cmsProduccion.Size = new System.Drawing.Size(188, 48);
+            // 
+            // tsmiBloquearProduccion
+            // 
+            this.tsmiBloquearProduccion.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsmiBloquearProduccion.Name = "tsmiBloquearProduccion";
+            this.tsmiBloquearProduccion.Size = new System.Drawing.Size(187, 22);
+            this.tsmiBloquearProduccion.Text = "Bloquear columna";
+            this.tsmiBloquearProduccion.Click += new System.EventHandler(this.tsmiBloquearProduccion_Click);
+            // 
+            // tsmiDesbloquearProduccion
+            // 
+            this.tsmiDesbloquearProduccion.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsmiDesbloquearProduccion.Name = "tsmiDesbloquearProduccion";
+            this.tsmiDesbloquearProduccion.Size = new System.Drawing.Size(187, 22);
+            this.tsmiDesbloquearProduccion.Text = "Desbloquear columna";
+            this.tsmiDesbloquearProduccion.Click += new System.EventHandler(this.tsmiDesbloquearProduccion_Click);
+            // 
+            // cmsTrabajo
+            // 
+            this.cmsTrabajo.AllowMerge = false;
+            this.cmsTrabajo.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiBloquearTrabajo,
+            this.tsmiDesbloquearTrabajo});
+            this.cmsTrabajo.Name = "cmsTrabajo";
+            this.cmsTrabajo.Size = new System.Drawing.Size(188, 48);
+            // 
+            // tsmiBloquearTrabajo
+            // 
+            this.tsmiBloquearTrabajo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsmiBloquearTrabajo.Name = "tsmiBloquearTrabajo";
+            this.tsmiBloquearTrabajo.Size = new System.Drawing.Size(187, 22);
+            this.tsmiBloquearTrabajo.Text = "Bloquear columna";
+            this.tsmiBloquearTrabajo.Click += new System.EventHandler(this.tsmiBloquearTrabajo_Click);
+            // 
+            // tsmiDesbloquearTrabajo
+            // 
+            this.tsmiDesbloquearTrabajo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsmiDesbloquearTrabajo.Name = "tsmiDesbloquearTrabajo";
+            this.tsmiDesbloquearTrabajo.Size = new System.Drawing.Size(187, 22);
+            this.tsmiDesbloquearTrabajo.Text = "Desbloquear columna";
+            this.tsmiDesbloquearTrabajo.Click += new System.EventHandler(this.tsmiDesbloquearTrabajo_Click);
+            // 
+            // cmsCierres
+            // 
+            this.cmsCierres.AllowMerge = false;
+            this.cmsCierres.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiBloquearCierre,
+            this.tsmiDesbloquearCierre});
+            this.cmsCierres.Name = "cmsCierres";
+            this.cmsCierres.Size = new System.Drawing.Size(188, 48);
+            // 
+            // tsmiBloquearCierre
+            // 
+            this.tsmiBloquearCierre.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsmiBloquearCierre.Name = "tsmiBloquearCierre";
+            this.tsmiBloquearCierre.Size = new System.Drawing.Size(187, 22);
+            this.tsmiBloquearCierre.Text = "Bloquear columna";
+            this.tsmiBloquearCierre.Click += new System.EventHandler(this.tsmiBloquearCierre_Click);
+            // 
+            // tsmiDesbloquearCierre
+            // 
+            this.tsmiDesbloquearCierre.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsmiDesbloquearCierre.Name = "tsmiDesbloquearCierre";
+            this.tsmiDesbloquearCierre.Size = new System.Drawing.Size(187, 22);
+            this.tsmiDesbloquearCierre.Text = "Desbloquear columna";
+            this.tsmiDesbloquearCierre.Click += new System.EventHandler(this.tsmiDesbloquearCierre_Click);
+            // 
             // frmOrdenTrabajo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -768,6 +871,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCierresParciales)).EndInit();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
+            this.cmsProduccion.ResumeLayout(false);
+            this.cmsTrabajo.ResumeLayout(false);
+            this.cmsCierres.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -833,5 +939,14 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ContextMenuStrip cmsProduccion;
+        private System.Windows.Forms.ContextMenuStrip cmsTrabajo;
+        private System.Windows.Forms.ContextMenuStrip cmsCierres;
+        private System.Windows.Forms.ToolStripMenuItem tsmiBloquearTrabajo;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDesbloquearTrabajo;
+        private System.Windows.Forms.ToolStripMenuItem tsmiBloquearCierre;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDesbloquearCierre;
+        private System.Windows.Forms.ToolStripMenuItem tsmiBloquearProduccion;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDesbloquearProduccion;
     }
 }
