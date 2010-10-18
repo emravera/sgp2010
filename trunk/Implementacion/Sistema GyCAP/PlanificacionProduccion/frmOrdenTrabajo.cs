@@ -66,7 +66,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                     {
                         try
                         {
-                            BLL.OrdenProduccionBLL.IniciarOrdenProduccion(numeroOrdenOP, BLL.DBBLL.GetFechaServidor(), dsOrdenTrabajo, dsStock);
+                            BLL.OrdenProduccionBLL.IniciarOrdenProduccion(numeroOrdenOP, BLL.DBBLL.GetFechaServidor(), dsOrdenTrabajo, dsStock, dsHojaRuta, dsEstructura);
+                            int o = 0;
                         }
                         catch (Entidades.Excepciones.BaseDeDatosException ex)
                         {
@@ -159,6 +160,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             if (dgvOrdenesTrabajo.SelectedRows.Count > 0)
             {
                 gbAgregarCierreParcial.Enabled = true;
+                LimpiarDatosCierre();
             }
             else { MessageBox.Show("Debe seleccionar una Orden de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
         }
@@ -190,7 +192,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void btnGuardarCierre_Click(object sender, EventArgs e)
         {
-
+            gbAgregarCierreParcial.Enabled = false;
         }
 
         #endregion Cierres Parciales
@@ -213,7 +215,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     }
 
                     btnIniciar.Enabled = hayDatos;
-                    btnCierreParcial.Enabled = hayDatos;
+                    btnCierreParcial.Enabled = false;
                     btnFinalizar.Enabled = hayDatos;
                     btnCancelar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
@@ -250,6 +252,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnAgregarCierre.Enabled = hayDatos;
                     btnModificarCierre.Enabled = hayDatos;
                     btnEliminarCierre.Enabled = hayDatos;
+                    gbAgregarCierreParcial.Enabled = false;
                     estadoInterface = estadoUI.pestañaCierreParcial;
                     tcOrdenTrabajo.SelectedTab = tpCierreParcial;
                     break;

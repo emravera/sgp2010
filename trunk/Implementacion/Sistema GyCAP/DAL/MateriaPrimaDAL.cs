@@ -18,7 +18,7 @@ namespace GyCAP.DAL
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
         public static Entidades.MateriaPrima ObtenerMateriaPrima(int codigoMateriaPrima)
         {
-            string sql = @"SELECT mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_costo
+            string sql = @"SELECT mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_costo, ustck_numero 
                         FROM MATERIAS_PRIMAS WHERE pza_codigo = @p0";
             object[] valorParametros = { codigoMateriaPrima };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
@@ -33,6 +33,7 @@ namespace GyCAP.DAL
                 materiaPrima.Descripcion = rdr["mp_descripcion"].ToString();
                 materiaPrima.CantidadStock = Convert.ToInt32(rdr["mp_cantidadstock"].ToString());
                 materiaPrima.Costo = Convert.ToDecimal(rdr["mp_costo"].ToString());
+                materiaPrima.UbicacionStock = new GyCAP.Entidades.UbicacionStock(Convert.ToInt32(rdr["ustck_numero"].ToString()));
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             finally
@@ -46,7 +47,7 @@ namespace GyCAP.DAL
         //Metodo que obtiene todas las materias primas
         public static void ObtenerTodos(Data.dsMateriaPrima ds)
         {
-            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_costo
+            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_costo, ustck_numero 
                         FROM MATERIAS_PRIMAS";
             try
             {
@@ -59,7 +60,7 @@ namespace GyCAP.DAL
         //Metodo que obtiene todas las materias primas
         public static void ObtenerMP(Data.dsPlanMateriasPrimas ds)
         {
-            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_costo
+            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_costo, ustck_numero 
                         FROM MATERIAS_PRIMAS";
             try
             {
@@ -71,7 +72,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerTodos(System.Data.DataTable dt)
         {
-            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_costo
+            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_costo, ustck_numero 
                         FROM MATERIAS_PRIMAS";
             try
             {
@@ -83,7 +84,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerMateriaPrima(int codigoMP, Data.dsEstructura ds)
         {
-            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_costo
+            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_costo, ustck_numero 
                         FROM MATERIAS_PRIMAS WHERE mp_codigo = @p0";
             object[] valoresParametros = { codigoMP };
             
