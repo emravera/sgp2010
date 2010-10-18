@@ -49,6 +49,7 @@
     <Compile Include="CapacidadEmpleado.cs" />
     <Compile Include="CausaFallo.cs" />
     <Compile Include="CentroTrabajo.cs" />
+    <Compile Include="CierreParcialOrdenTrabajo.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Cocina.cs" />
     <Compile Include="Color.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="EstadoDetallePedido.cs" />
     <Compile Include="EstadoEmpleado.cs" />
     <Compile Include="EstadoMaquina.cs" />
+    <Compile Include="EstadoMovimientoStock.cs" />
     <Compile Include="EstadoOrdenTrabajo.cs" />
     <Compile Include="EstadoPedido.cs" />
     <Compile Include="EstadoPlanMantenimiento.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="MateriaPrimaPrincipal.cs" />
     <Compile Include="ModeloCocina.cs" />
     <Compile Include="ModeloMaquina.cs" />
+    <Compile Include="MovimientoStock.cs" />
     <Compile Include="OperacionFabricacion.cs" />
     <Compile Include="OrdenTrabajo.cs" />
     <Compile Include="Pedido.cs" />
