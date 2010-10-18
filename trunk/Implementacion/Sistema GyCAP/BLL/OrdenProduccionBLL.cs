@@ -111,6 +111,7 @@ namespace GyCAP.BLL
                         rowOrdenP.ORDP_CANTIDADESTIMADA = rowDetalle.DPSEM_CANTIDADESTIMADA;
                         rowOrdenP.ORDP_CANTIDADREAL = 0;
                         rowOrdenP.ESTR_CODIGO = codigoEstructura;
+                        rowOrdenP.SetUSTCK_DESTINONull();
                         rowOrdenP.EndEdit();
                         dsOrdenTrabajo.ORDENES_PRODUCCION.AddORDENES_PRODUCCIONRow(rowOrdenP);
                         rowDetalle.BeginEdit();
@@ -167,6 +168,7 @@ namespace GyCAP.BLL
                     rowOrdenP.ORDP_CANTIDADESTIMADA = rowDetalle.DPSEM_CANTIDADESTIMADA;
                     rowOrdenP.ORDP_CANTIDADREAL = 0;
                     rowOrdenP.ESTR_CODIGO = codigoEstructura;
+                    rowOrdenP.SetUSTCK_DESTINONull();
                     rowOrdenP.EndEdit();
                     dsOrdenTrabajo.ORDENES_PRODUCCION.AddORDENES_PRODUCCIONRow(rowOrdenP);
                     rowDetalle.BeginEdit();
@@ -409,27 +411,46 @@ namespace GyCAP.BLL
             return 0;
         }
 
-        public static void IniciarOrdenProduccion(int numeroOrdenProduccion, DateTime fechaInicioReal, Data.dsOrdenTrabajo dsOrdenTrabajo)
+        public static void IniciarOrdenProduccion(int numeroOrdenProduccion, DateTime fechaInicioReal, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsStock dsStock)
         {
-            if (dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).EORD_CODIGO == EstadoGenerado)
-            {
-                //Iniciamos la orden de producción
-                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_FECHAINICIOREAL = fechaInicioReal;
-                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).EORD_CODIGO = EstadoEnProceso;
+            int codigoMovimiento = 0;
+            
+            //Iniciamos la orden de producción
+            dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_FECHAINICIOREAL = fechaInicioReal;
+            dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).EORD_CODIGO = EstadoEnProceso;
 
-                //Iniciamos las órdenes de trabajo
-                string filtro = "ORDP_NUMERO = " + numeroOrdenProduccion + " AND ORDT_FECHAINICIOESTIMADA = MIN (ORDT_FECHAINICIOESTIMADA)";
-                foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow row in (Data.dsOrdenTrabajo.ORDENES_TRABAJORow[])dsOrdenTrabajo.ORDENES_TRABAJO.Select(filtro))
-	            {
-                    row.EORD_CODIGO = EstadoEnProceso;
-                    row.ORDT_FECHAINICIOREAL = fechaInicioReal;
-	            }
-
-                foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow row in (Data.dsOrdenTrabajo.ORDENES_TRABAJORow[])dsOrdenTrabajo.ORDENES_TRABAJO.Select("ORDP_NUMERO = " + numeroOrdenProduccion))
+            //Iniciamos las órdenes de trabajo
+            string filtro = "ORDP_NUMERO = " + numeroOrdenProduccion + " AND ORDT_FECHAINICIOESTIMADA = MIN (ORDT_FECHAINICIOESTIMADA)";
+            foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow row in (Data.dsOrdenTrabajo.ORDENES_TRABAJORow[])dsOrdenTrabajo.ORDENES_TRABAJO.Select(filtro))
+	        {
+                //Cambiamos el estado de la orden a EnProceso y anotamos la fecha real de inicio
+                row.EORD_CODIGO = EstadoEnProceso;
+                row.ORDT_FECHAINICIOREAL = fechaInicioReal;
+                //Realizamos los movimientos de stock correspondientes y actualizamos las cantidades
+                if (!row.IsUSTCK_ORIGENNull()) 
                 {
-                    if (row.EORD_CODIGO == EstadoGenerado) { row.EORD_CODIGO = EstadoEnEspera; }
+                    Data.dsStock.MOVIMIENTOS_STOCKRow rowMovimiento = dsStock.MOVIMIENTOS_STOCK.NewMOVIMIENTOS_STOCKRow();
+                    rowMovimiento.MVTO_NUMERO = codigoMovimiento--;
+                    rowMovimiento.EMVTO_CODIGO = EstadoMovimientoStockBLL.EstadoPlanificado;
+                    rowMovimiento.MVTO_CODIGO = "MSA/OT- " + row.ORDT_CODIGO;
+                    rowMovimiento.MVTO_DESCRIPCION = "Automático. Origen: Orden de Trabajo.";
+                    rowMovimiento.MVTO_FECHAALTA = DBBLL.GetFechaServidor();
+                    rowMovimiento.MVTO_FECHAPREVISTA = row.ORDT_FECHAFINESTIMADA;
+                    rowMovimiento.SetMVTO_FECHAREALNull();
+                    rowMovimiento.USTCK_ORIGEN = row.USTCK_ORIGEN;
+                    rowMovimiento.USTCK_DESTINO = row.USTCK_DESTINO;
+
                 }
+	        }
+
+            foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow row in (Data.dsOrdenTrabajo.ORDENES_TRABAJORow[])dsOrdenTrabajo.ORDENES_TRABAJO.Select("ORDP_NUMERO = " + numeroOrdenProduccion))
+            {
+                if (row.EORD_CODIGO == EstadoGenerado) { row.EORD_CODIGO = EstadoEnEspera; }
             }
+
+            
+
+            
         }
 
     }

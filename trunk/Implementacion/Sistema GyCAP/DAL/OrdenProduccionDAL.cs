@@ -30,14 +30,16 @@ namespace GyCAP.DAL
                         ,[estr_codigo]
                         ,[ordp_cantidadestimada]
                         ,[ordp_cantidadreal]
-                        ,[coc_codigo])
-                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15) SELECT @@Identity";
+                        ,[coc_codigo]
+                        ,[ustck_destino])
+                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16) SELECT @@Identity";
 
             Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow rowOrdenP = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion);
-            object ordpm = DBNull.Value, dpsem = DBNull.Value, cocina = DBNull.Value;
+            object ordpm = DBNull.Value, dpsem = DBNull.Value, cocina = DBNull.Value, stock = DBNull.Value;
             if (rowOrdenP.IsORDPM_NUMERONull()) { dpsem = rowOrdenP.DPSEM_CODIGO; }
             else { ordpm = rowOrdenP.ORDPM_NUMERO; }
             if (!rowOrdenP.IsORDPM_NUMERONull()) { cocina = rowOrdenP.COC_CODIGO; }
+            if (!rowOrdenP.IsUSTCK_DESTINONull()) { stock = rowOrdenP.USTCK_DESTINO; }
             object[] valoresParametros = {   rowOrdenP.ORDP_CODIGO,
                                              rowOrdenP.EORD_CODIGO,
                                              rowOrdenP.ORDP_FECHAALTA,
@@ -53,7 +55,8 @@ namespace GyCAP.DAL
                                              rowOrdenP.ESTR_CODIGO,
                                              rowOrdenP.ORDP_CANTIDADESTIMADA,
                                              rowOrdenP.ORDP_CANTIDADREAL, 
-                                             cocina };
+                                             cocina,
+                                             stock };
 
             string sqlUOP = "UPDATE ORDENES_PRODUCCION SET ordp_codigo = @p0 WHERE ordp_numero = @p1";
             string sqlUOT = "UPDATE ORDENES_TRABAJO SET ordt_codigo = @p0 WHERE ordt_numero = @p1";
@@ -139,7 +142,7 @@ namespace GyCAP.DAL
         {
             string sql = @"SELECT ordp_numero, ordp_codigo, eord_codigo, ordp_fechaalta, dpsem_codigo, ordpm_numero, ordp_origen, ordp_fechainicioestimada, 
                         ordp_fechainicioreal, ordp_fechafinestimada, ordp_fechafinreal, ordp_observaciones, ordp_prioridad, estr_codigo, 
-                        ordp_cantidadestimada, ordp_cantidadreal, coc_codigo 
+                        ordp_cantidadestimada, ordp_cantidadreal, coc_codigo, ustck_destino 
                         FROM ORDENES_PRODUCCION WHERE 1 = 1";
 
             //Sirve para armar el nombre de los parámetros

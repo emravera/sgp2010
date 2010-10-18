@@ -9,6 +9,10 @@ namespace GyCAP.DAL
 {
     public class EstadoMovimientoStockDAL
     {
+        public static readonly int EstadoPlanificado = 1;
+        public static readonly int EstadoFinalizado = 2;
+        public static readonly int EstadoCancelado = 3;
+        
         public static void ObtenerEstados(DataTable dtEstadosMovimientoStock)
         {
             string sql = "SELECT emvto_codigo, emvto_nombre, emvto_descripcion FROM ESTADO_MOVIMIENTOS_STOCK";

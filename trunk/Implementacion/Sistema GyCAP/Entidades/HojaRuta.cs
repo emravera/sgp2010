@@ -43,5 +43,13 @@ namespace GyCAP.Entidades
             set { fechaAlta = value; }
         }
 
+        private UbicacionStock ubicacionStock;
+
+        public UbicacionStock UbicacionStock
+        {
+            get { return ubicacionStock; }
+            set { ubicacionStock = value; }
+        }
+
     }
 }
