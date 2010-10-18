@@ -61,17 +61,19 @@ namespace GyCAP.UI.PlanificacionProduccion
                 if (dgvOrdenesProduccion.SelectedRows.Count > 0)
                 {
                     int numeroOrdenOP = Convert.ToInt32(dvOrdenProduccion[dgvOrdenesProduccion.SelectedRows[0].Index]["ordp_numero"]);
+                    //Comprobamos si puede iniciarse
                     if (dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenOP).EORD_CODIGO == BLL.OrdenProduccionBLL.EstadoGenerado)
                     {
                         try
                         {
-                            BLL.OrdenProduccionBLL.IniciarOrdenProduccion(numeroOrdenOP, BLL.DBBLL.GetFechaServidor(), dsOrdenTrabajo);
+                            BLL.OrdenProduccionBLL.IniciarOrdenProduccion(numeroOrdenOP, BLL.DBBLL.GetFechaServidor(), dsOrdenTrabajo, dsStock);
                         }
                         catch (Entidades.Excepciones.BaseDeDatosException ex)
                         {
                             MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio Orden de Producción", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
+                    else { MessageBox.Show("La Orden de Producción ya se encuentra iniciada o finalizada.", "Información: Inicio", MessageBoxButtons.OK, MessageBoxIcon.Information); }
                 }
                 else { MessageBox.Show("Debe seleccionar una Orden de Producción de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
             }
@@ -363,7 +365,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
-            //Dataviews - ordenar grillas, agregar bloqueo columnas, agregar routing y umed a ordenes - gonzalo
+            //Dataviews - ordenar grillas, agregar routing y umed a ordenes - gonzalo
             dvOrdenProduccion = new DataView(dsOrdenTrabajo.ORDENES_PRODUCCION);
             dgvOrdenesProduccion.DataSource = dvOrdenProduccion;
             dvOrdenTrabajo = new DataView(dsOrdenTrabajo.ORDENES_TRABAJO);

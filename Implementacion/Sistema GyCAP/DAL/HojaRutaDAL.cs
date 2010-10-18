@@ -11,14 +11,16 @@ namespace GyCAP.DAL
     {
         public static void Insertar(Data.dsHojaRuta dsHojaRuta)
         {
-            string sqlHoja = @"INSERT INTO [HOJAS_RUTA] ([hr_nombre], [hr_descripcion], [hr_activo], [hr_fechaAlta]) 
-                              VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+            string sqlHoja = @"INSERT INTO [HOJAS_RUTA] ([hr_nombre], [hr_descripcion], [hr_activo], [hr_fechaAlta], [ustck_numero]) 
+                              VALUES (@p0, @p1, @p2, @p3, @p4) SELECT @@Identity";
 
             string sqlDetalle = @"INSERT INTO [DETALLE_HOJARUTA] ([cto_codigo], [hr_codigo], [dhr_secuencia], [opr_numero], [ustck_origen], [ustck_destino]) 
                                   VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
 
+            object stockHR = DBNull.Value;            
             Data.dsHojaRuta.HOJAS_RUTARow rowhoja = dsHojaRuta.HOJAS_RUTA.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsHojaRuta.HOJAS_RUTARow;
-            object[] valorParametros = { rowhoja.HR_NOMBRE, rowhoja.HR_DESCRIPCION, rowhoja.HR_ACTIVO, rowhoja.HR_FECHAALTA };
+            if (!rowhoja.IsUSTCK_NUMERONull()) { stockHR = rowhoja.USTCK_NUMERO; }
+            object[] valorParametros = { rowhoja.HR_NOMBRE, rowhoja.HR_DESCRIPCION, rowhoja.HR_ACTIVO, rowhoja.HR_FECHAALTA, stockHR };
 
             SqlTransaction transaccion = null;
             try
@@ -55,12 +57,14 @@ namespace GyCAP.DAL
 
         public static void Actualizar(Data.dsHojaRuta dsHojaRuta)
         {
-            string sqlHoja = "UPDATE HOJAS_RUTA SET hr_nombre = @p0, hr_descripcion = @p1, hr_activo = @p2, hr_fechaalta = @p3 WHERE hr_codigo = @p4";
+            string sqlHoja = "UPDATE HOJAS_RUTA SET hr_nombre = @p0, hr_descripcion = @p1, hr_activo = @p2, hr_fechaalta = @p3, ustck_numero = @p4 WHERE hr_codigo = @p5";
             string sqlIDetalle = "INSERT INTO [DETALLE_HOJARUTA] ([cto_codigo], [hr_codigo], [dhr_secuencia], [opr_numero], [ustck_origen], [ustck_destino]) VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
             string sqlUDetalle = "UPDATE DETALLE_HOJARUTA SET dhr_secuencia = @p0 WHERE dhr_codigo = @p1";
             string sqlDDetalle = "DELETE FROM DETALLE_HOJARUTA WHERE dhr_codigo = @p0";
             Data.dsHojaRuta.HOJAS_RUTARow rowHoja = dsHojaRuta.HOJAS_RUTA.GetChanges(DataRowState.Modified).Rows[0] as Data.dsHojaRuta.HOJAS_RUTARow;
-            object[] valorParametros = { rowHoja.HR_NOMBRE, rowHoja.HR_DESCRIPCION, rowHoja.HR_ACTIVO, rowHoja.HR_FECHAALTA, rowHoja.HR_CODIGO };
+            object stockHR = DBNull.Value;
+            if (!rowHoja.IsUSTCK_NUMERONull()) { stockHR = rowHoja.USTCK_NUMERO; }
+            object[] valorParametros = { rowHoja.HR_NOMBRE, rowHoja.HR_DESCRIPCION, rowHoja.HR_ACTIVO, rowHoja.HR_FECHAALTA, stockHR, rowHoja.HR_CODIGO };
             SqlTransaction transaccion = null;
 
             try
@@ -151,7 +155,7 @@ namespace GyCAP.DAL
         
         public static void ObtenerHojasRuta(object nombre, object estado, Data.dsHojaRuta dsHojaRuta, bool obtenerDetalle)
         {
-            string sql = @"SELECT hr_codigo, hr_nombre, hr_descripcion, hr_activo, hr_fechaalta FROM HOJAS_RUTA WHERE 1=1 ";
+            string sql = @"SELECT hr_codigo, hr_nombre, hr_descripcion, hr_activo, hr_fechaalta, ustck_numero FROM HOJAS_RUTA WHERE 1=1 ";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
@@ -204,7 +208,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerHojasRuta(DataTable dtHojas)
         {
-            string sql = @"SELECT hr_codigo, hr_nombre, hr_descripcion, hr_activo, hr_fechaalta FROM HOJAS_RUTA";
+            string sql = @"SELECT hr_codigo, hr_nombre, hr_descripcion, hr_activo, hr_fechaalta, ustck_numero FROM HOJAS_RUTA";
 
             try
             {
@@ -215,7 +219,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerHojaRuta(int codigoHoja, bool detalle, Data.dsHojaRuta dsHojaRuta)
         {
-            string sql = @"SELECT hr_codigo, hr_nombre, hr_descripcion, hr_activo, hr_fechaalta FROM HOJAS_RUTA WHERE hr_codigo = @p0";
+            string sql = @"SELECT hr_codigo, hr_nombre, hr_descripcion, hr_activo, hr_fechaalta, ustck_numero FROM HOJAS_RUTA WHERE hr_codigo = @p0";
             object[] valoresParametros = { codigoHoja };
             try
             {

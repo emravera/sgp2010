@@ -13,7 +13,7 @@ namespace GyCAP.UI.EstructuraProducto
     {
         private static frmHojaRuta _frmHojaRuta = null;
         private Data.dsHojaRuta dsHojaRuta = new GyCAP.Data.dsHojaRuta();
-        private DataView dvHojasRuta, dvDetalleHoja, dvCentrosTrabajo, dvOperaciones, dvStockOrigen, dvStockDestino;
+        private DataView dvHojasRuta, dvDetalleHoja, dvCentrosTrabajo, dvOperaciones, dvStockOrigen, dvStockDestino, dvUbicacionStock;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
@@ -176,6 +176,8 @@ namespace GyCAP.UI.EstructuraProducto
                         rowHoja.HR_FECHAALTA = DateTime.Parse(dtpFechaAlta.GetFecha().ToString());
                         if (chkActivo.Checked) { rowHoja.HR_ACTIVO = BLL.HojaRutaBLL.hojaRutaActiva; }
                         else { rowHoja.HR_ACTIVO = BLL.HojaRutaBLL.hojaRutaInactiva; }
+                        if (cboUbicacionStock.GetSelectedValueInt() != -1) { rowHoja.USTCK_NUMERO = cboUbicacionStock.GetSelectedValueInt(); }
+                        else { rowHoja.SetUSTCK_NUMERONull(); }
                         rowHoja.EndEdit();
                         dsHojaRuta.HOJAS_RUTA.AddHOJAS_RUTARow(rowHoja);
                         //Todavia no aceptamos los cambios porque necesitamos que queden marcadas como nuevas las filas
@@ -218,6 +220,8 @@ namespace GyCAP.UI.EstructuraProducto
                     dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigoHoja).HR_FECHAALTA = DateTime.Parse(dtpFechaAlta.GetFecha().ToString());
                     if (chkActivo.Checked) { dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigoHoja).HR_ACTIVO = BLL.HojaRutaBLL.hojaRutaActiva; }
                     else { dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigoHoja).HR_ACTIVO = BLL.HojaRutaBLL.hojaRutaInactiva; }
+                    if (cboUbicacionStock.GetSelectedValueInt() == -1) { dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigoHoja).SetUSTCK_NUMERONull(); }
+                    else { dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigoHoja).USTCK_NUMERO = cboUbicacionStock.GetSelectedValueInt(); }
                     try
                     {
                         //Lo actualizamos en la DB
@@ -429,6 +433,8 @@ namespace GyCAP.UI.EstructuraProducto
                     dtpFechaAlta.SetFechaNull();
                     dtpFechaAlta.Enabled = true;
                     chkActivo.Enabled = true;
+                    cboUbicacionStock.Enabled = true;
+                    cboUbicacionStock.SetSelectedIndex(-1);
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
                     dvDetalleHoja.RowFilter = "HR_CODIGO = -1";
@@ -451,6 +457,8 @@ namespace GyCAP.UI.EstructuraProducto
                     dtpFechaAlta.SetFechaNull();
                     dtpFechaAlta.Enabled = true;
                     chkActivo.Enabled = true;
+                    cboUbicacionStock.Enabled = true;
+                    cboUbicacionStock.SetSelectedIndex(-1);
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
                     dvDetalleHoja.RowFilter = "HR_CODIGO = -1";
@@ -471,6 +479,7 @@ namespace GyCAP.UI.EstructuraProducto
                     txtNombre.ReadOnly = true;
                     dtpFechaAlta.Enabled = false;
                     chkActivo.Enabled = false;
+                    cboUbicacionStock.Enabled = false;
                     txtDescripcion.ReadOnly = true;
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
@@ -486,6 +495,7 @@ namespace GyCAP.UI.EstructuraProducto
                     txtNombre.ReadOnly = false;
                     dtpFechaAlta.Enabled = true;
                     chkActivo.Enabled = true;
+                    cboUbicacionStock.Enabled = true;
                     txtDescripcion.ReadOnly = false;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -512,10 +522,12 @@ namespace GyCAP.UI.EstructuraProducto
             dgvHojasRuta.Columns.Add("HR_NOMBRE", "Nombre");
             dgvHojasRuta.Columns.Add("HR_FECHAALTA", "Fecha Creación");
             dgvHojasRuta.Columns.Add("HR_ACTIVO", "Estado");
+            dgvHojasRuta.Columns.Add("USTCK_NUMERO", "Ubicación Stock");
             dgvHojasRuta.Columns.Add("HR_DESCRIPCION", "Descripción");
             dgvHojasRuta.Columns["HR_NOMBRE"].DataPropertyName = "HR_NOMBRE";
             dgvHojasRuta.Columns["HR_FECHAALTA"].DataPropertyName = "HR_FECHAALTA";
             dgvHojasRuta.Columns["HR_ACTIVO"].DataPropertyName = "HR_ACTIVO";
+            dgvHojasRuta.Columns["USTCK_NUMERO"].DataPropertyName = "USTCK_NUMERO";
             dgvHojasRuta.Columns["HR_DESCRIPCION"].DataPropertyName = "HR_DESCRIPCION";
             dgvHojasRuta.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvHojasRuta.Columns["HR_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -569,8 +581,11 @@ namespace GyCAP.UI.EstructuraProducto
 
             dvStockOrigen = new DataView(dsHojaRuta.UBICACIONES_STOCK);
             dvStockDestino = new DataView(dsHojaRuta.UBICACIONES_STOCK);
-            cboStockOrigen.SetDatos(dvStockOrigen, "USTCK_NUMERO", "USTCK_NOMBRE", "Sin especificar...", false);
-            cboStockDestino.SetDatos(dvStockDestino, "USTCK_NUMERO", "USTCK_NOMBRE", "Sin especificar...", false);
+            cboStockOrigen.SetDatos(dvStockOrigen, "USTCK_NUMERO", "USTCK_NOMBRE", "Sin especificar...", true);
+            cboStockDestino.SetDatos(dvStockDestino, "USTCK_NUMERO", "USTCK_NOMBRE", "Sin especificar...", true);
+
+            dvUbicacionStock = new DataView(dsHojaRuta.UBICACIONES_STOCK);
+            cboUbicacionStock.SetDatos(dvUbicacionStock, "USTCK_NUMERO", "USTCK_NOMBRE", "Sinespecificar...", true);
         }        
 
         private void dgvHojasRuta_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -581,12 +596,14 @@ namespace GyCAP.UI.EstructuraProducto
             dtpFechaAlta.SetFecha(dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigo).HR_FECHAALTA);
             if (dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigo).HR_ACTIVO == BLL.HojaRutaBLL.hojaRutaActiva) { chkActivo.Checked = true; }
             else { chkActivo.Checked = false; }
+            if (dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigo).IsUSTCK_NUMERONull()) { cboUbicacionStock.SetSelectedIndex(-1); }
+            else { cboUbicacionStock.SetSelectedValue(Convert.ToInt32(dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigo).USTCK_NUMERO)); }
             dvDetalleHoja.RowFilter = "hr_codigo = " + codigo;
         }
 
         private void dgvHojasRuta_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.Value.ToString() != string.Empty)
+            if (!string.IsNullOrEmpty(e.Value.ToString()))
             {
                 string nombre = string.Empty;
 
@@ -599,6 +616,10 @@ namespace GyCAP.UI.EstructuraProducto
                         break;
                     case "HR_FECHAALTA":
                         nombre = DateTime.Parse(e.Value.ToString()).ToShortDateString();
+                        e.Value = nombre;
+                        break;
+                    case "USTCK_NUMERO":
+                        nombre = dsHojaRuta.UBICACIONES_STOCK.FindByUSTCK_NUMERO(Convert.ToInt32(e.Value)).USTCK_NOMBRE;
                         e.Value = nombre;
                         break;
                     default:

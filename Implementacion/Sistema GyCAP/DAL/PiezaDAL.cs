@@ -15,7 +15,6 @@ namespace GyCAP.DAL
                                ([pza_nombre]
                                ,[te_codigo]
                                ,[pza_descripcion]
-                               ,[pza_cantidadstock]
                                ,[par_codigo]
                                ,[pno_codigo]
                                ,[pza_codigoparte]
@@ -30,8 +29,7 @@ namespace GyCAP.DAL
             if (!rowPieza.IsHR_CODIGONull()) { hojaRuta = rowPieza.HR_CODIGO; }
             object[] valorParametros = { rowPieza.PZA_NOMBRE, 
                                            rowPieza.TE_CODIGO, 
-                                           rowPieza.PZA_DESCRIPCION, 
-                                           0, 
+                                           rowPieza.PZA_DESCRIPCION,
                                            rowPieza.PAR_CODIGO, 
                                            rowPieza.PNO_CODIGO, 
                                            rowPieza.PZA_CODIGOPARTE, 
@@ -222,7 +220,7 @@ namespace GyCAP.DAL
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
         public static Entidades.Pieza ObtenerPieza(int codigoPieza)
         {
-            string sql = @"SELECT pza_codigo, pza_nombre, te_codigo, pza_descripcion, pza_cantidadstock, par_codigo, pno_codigo, pza_codigoparte 
+            string sql = @"SELECT pza_codigo, pza_nombre, te_codigo, pza_descripcion, par_codigo, pno_codigo, pza_codigoparte 
                                   ,pza_costo, hr_codigo, pza_costofijo FROM PIEZAS WHERE pza_codigo = @p0";
             object[] valorParametros = { codigoPieza };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
@@ -236,7 +234,6 @@ namespace GyCAP.DAL
                 pieza.Nombre = rdr["pza_nombre"].ToString();
                 pieza.CodigoTerminacion = Convert.ToInt32(rdr["te_codigo"].ToString());
                 pieza.Descripcion = rdr["pza_descripcion"].ToString();
-                pieza.CantidadStock = Convert.ToInt32(rdr["pza_cantidadstock"].ToString());
                 pieza.CodigoEstado = Convert.ToInt32(rdr["par_codigo"].ToString());
                 pieza.CodigoPlano = Convert.ToInt32(rdr["pno_codigo"].ToString());
                 pieza.Costo = Convert.ToDecimal(rdr["pza_costo"].ToString());
@@ -254,7 +251,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerPiezas(object nombre, object codTerminacion, Data.dsEstructura ds, bool obtenerDetalle)
         {
-            string sql = @"SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, pza_cantidadstock, par_codigo, pno_codigo
+            string sql = @"SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, par_codigo, pno_codigo
                                  , pza_codigoparte, pza_costo, hr_codigo, pza_costofijo FROM PIEZAS WHERE 1=1";
 
             //Sirve para armar el nombre de los parámetros
@@ -308,7 +305,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerPiezas(System.Data.DataTable dtPiezas)
         {
-            string sql = @"SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, pza_cantidadstock, par_codigo, pno_codigo
+            string sql = @"SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, par_codigo, pno_codigo
                                 , pza_codigoparte, pza_costo, hr_codigo, pza_costofijo FROM PIEZAS";
                    
             try
@@ -320,7 +317,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerPiezas(System.Data.DataTable dtPiezas, int estado)
         {
-            string sql = @"SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, pza_cantidadstock, par_codigo, pno_codigo
+            string sql = @"SELECT pza_codigo, pza_nombre, pza_descripcion, te_codigo, par_codigo, pno_codigo
                                 , pza_codigoparte, pza_costo, hr_codigo, pza_costofijo FROM PIEZAS WHERE par_codigo = @p0";
             object[] valorParametros = { estado };
             try
@@ -332,7 +329,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerPieza(int codigoPieza, bool detalle, Data.dsEstructura ds)
         {
-            string sql = @"SELECT pza_codigo, pza_nombre, te_codigo, pza_descripcion, pza_cantidadstock, par_codigo, pno_codigo, pza_codigoparte 
+            string sql = @"SELECT pza_codigo, pza_nombre, te_codigo, pza_descripcion, par_codigo, pno_codigo, pza_codigoparte 
                                   ,pza_costo, hr_codigo, pza_costofijo FROM PIEZAS WHERE pza_codigo = @p0";
             object[] valorParametros = { codigoPieza };
             try

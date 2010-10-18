@@ -90,6 +90,11 @@ namespace GyCAP.BLL
                         else { rowOTCxE.ORDT_ORDENSIGUIENTE = ordenSiguiente; }
                         rowOTCxE.ORDT_NIVEL = 0;
                         rowOTCxE.ORDT_SECUENCIA = rowHojaCxE.DHR_SECUENCIA;
+                        if (!rowHojaCxE.IsUSTCK_ORIGENNull()) { rowOTCxE.USTCK_ORIGEN = rowHojaCxE.USTCK_ORIGEN; }
+                        else { rowOTCxE.SetUSTCK_ORIGENNull(); }
+                        if (!rowHojaCxE.IsUSTCK_DESTINONull()) { rowOTCxE.USTCK_DESTINO = rowHojaCxE.USTCK_DESTINO; }
+                        else { rowOTCxE.SetUSTCK_DESTINONull(); }
+                        rowOTCxE.HR_CODIGO = rowCxE.CONJUNTOSRow.HR_CODIGO;
                         rowOTCxE.EndEdit();
                         dsOrdenTrabajo.ORDENES_TRABAJO.AddORDENES_TRABAJORow(rowOTCxE);
                         ordenSiguiente = rowOTCxE.ORDT_NUMERO;
@@ -128,6 +133,11 @@ namespace GyCAP.BLL
                             else { rowOTSCxC.ORDT_ORDENSIGUIENTE = ordenSiguiente; }
                             rowOTSCxC.ORDT_NIVEL = nivel;
                             rowOTSCxC.ORDT_SECUENCIA = rowHojaSCxC.DHR_SECUENCIA;
+                            if (!rowHojaSCxC.IsUSTCK_ORIGENNull()) { rowOTSCxC.USTCK_ORIGEN = rowHojaSCxC.USTCK_ORIGEN; }
+                            else { rowOTSCxC.SetUSTCK_ORIGENNull(); }
+                            if (!rowHojaSCxC.IsUSTCK_DESTINONull()) { rowOTSCxC.USTCK_DESTINO = rowHojaSCxC.USTCK_DESTINO; }
+                            else { rowOTSCxC.SetUSTCK_DESTINONull(); }
+                            rowOTSCxC.HR_CODIGO = rowSCxC.SUBCONJUNTOSRow.HR_CODIGO;
                             rowOTSCxC.EndEdit();
                             dsOrdenTrabajo.ORDENES_TRABAJO.AddORDENES_TRABAJORow(rowOTSCxC);
                             ordenSiguiente = rowOTSCxC.ORDT_NUMERO;
@@ -167,6 +177,11 @@ namespace GyCAP.BLL
                                 else { rowOTPxSC.ORDT_ORDENSIGUIENTE = ordenSiguiente; }
                                 rowOTPxSC.ORDT_NIVEL = nivel;
                                 rowOTPxSC.ORDT_SECUENCIA = rowHojaPxSC.DHR_SECUENCIA;
+                                if (!rowHojaPxSC.IsUSTCK_ORIGENNull()) { rowOTPxSC.USTCK_ORIGEN = rowHojaPxSC.USTCK_ORIGEN; }
+                                else { rowOTPxSC.SetUSTCK_ORIGENNull(); }
+                                if (!rowHojaPxSC.IsUSTCK_DESTINONull()) { rowOTPxSC.USTCK_DESTINO = rowHojaPxSC.USTCK_DESTINO; }
+                                else { rowOTPxSC.SetUSTCK_DESTINONull(); }
+                                rowOTPxSC.HR_CODIGO = rowPxSC.PIEZASRow.HR_CODIGO;
                                 rowOTPxSC.EndEdit();
                                 dsOrdenTrabajo.ORDENES_TRABAJO.AddORDENES_TRABAJORow(rowOTPxSC);
                                 ordenSiguiente = rowOTPxSC.ORDT_NUMERO;
@@ -209,6 +224,11 @@ namespace GyCAP.BLL
                             else { rowOTPxC.ORDT_ORDENSIGUIENTE = ordenSiguiente; }
                             rowOTPxC.ORDT_NIVEL = nivel;
                             rowOTPxC.ORDT_SECUENCIA = rowHojaPxC.DHR_SECUENCIA;
+                            if (!rowHojaPxC.IsUSTCK_ORIGENNull()) { rowOTPxC.USTCK_ORIGEN = rowHojaPxC.USTCK_ORIGEN; }
+                            else { rowOTPxC.SetUSTCK_ORIGENNull(); }
+                            if (!rowHojaPxC.IsUSTCK_DESTINONull()) { rowOTPxC.USTCK_DESTINO = rowHojaPxC.USTCK_DESTINO; }
+                            else { rowOTPxC.SetUSTCK_DESTINONull(); }
+                            rowOTPxC.HR_CODIGO = rowPxC.PIEZASRow.HR_CODIGO;
                             rowOTPxC.EndEdit();
                             dsOrdenTrabajo.ORDENES_TRABAJO.AddORDENES_TRABAJORow(rowOTPxC);
                             ordenSiguiente = rowOTPxC.ORDT_NUMERO;
@@ -249,6 +269,11 @@ namespace GyCAP.BLL
                         else { rowOTPxE.ORDT_ORDENSIGUIENTE = ordenSiguiente; }
                         rowOTPxE.ORDT_NIVEL = 0;
                         rowOTPxE.ORDT_SECUENCIA = rowHojaPxE.DHR_SECUENCIA;
+                        if (!rowHojaPxE.IsUSTCK_ORIGENNull()) { rowOTPxE.USTCK_ORIGEN = rowHojaPxE.USTCK_ORIGEN; }
+                        else { rowOTPxE.SetUSTCK_ORIGENNull(); }
+                        if (!rowHojaPxE.IsUSTCK_DESTINONull()) { rowOTPxE.USTCK_DESTINO = rowHojaPxE.USTCK_DESTINO; }
+                        else { rowOTPxE.SetUSTCK_DESTINONull(); }
+                        rowOTPxE.HR_CODIGO = rowPxE.PIEZASRow.HR_CODIGO;
                         rowOTPxE.EndEdit();
                         dsOrdenTrabajo.ORDENES_TRABAJO.AddORDENES_TRABAJORow(rowOTPxE);
                         ordenSiguiente = rowOTPxE.ORDT_NUMERO;
