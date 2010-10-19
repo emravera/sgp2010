@@ -88,6 +88,7 @@
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnInventarioABC = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -455,7 +456,8 @@
             this.toolCliente,
             this.btnOperaciones,
             this.toolPedidos,
-            this.btnControlPlan});
+            this.btnControlPlan,
+            this.btnInventarioABC});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(792, 36);
@@ -519,6 +521,7 @@
             this.toolStripButton8.Size = new System.Drawing.Size(78, 33);
             this.toolStripButton8.Text = "MP Principales";
             this.toolStripButton8.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton8.Visible = false;
             this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click);
             // 
             // t9
@@ -647,6 +650,16 @@
             this.lblEstado.Size = new System.Drawing.Size(38, 17);
             this.lblEstado.Text = "Status";
             // 
+            // btnInventarioABC
+            // 
+            this.btnInventarioABC.Image = ((System.Drawing.Image)(resources.GetObject("btnInventarioABC.Image")));
+            this.btnInventarioABC.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnInventarioABC.Name = "btnInventarioABC";
+            this.btnInventarioABC.Size = new System.Drawing.Size(81, 33);
+            this.btnInventarioABC.Text = "InventarioABC";
+            this.btnInventarioABC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnInventarioABC.Click += new System.EventHandler(this.btnInventarioABC_Click);
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -733,6 +746,7 @@
         private System.Windows.Forms.ToolStripButton btnOperaciones;
         private System.Windows.Forms.ToolStripButton toolPedidos;
         private System.Windows.Forms.ToolStripButton btnControlPlan;
+        private System.Windows.Forms.ToolStripButton btnInventarioABC;
     }
 }
 

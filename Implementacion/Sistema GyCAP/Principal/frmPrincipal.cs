@@ -259,6 +259,12 @@ namespace Principal
             GyCAP.UI.ControlTrabajoEnProceso.frmControlPlanificacion.Instancia.MdiParent = this;
             GyCAP.UI.ControlTrabajoEnProceso.frmControlPlanificacion.Instancia.Show();
         }
+
+        private void btnInventarioABC_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionStock.frmInventarioABC.Instancia.MdiParent = this;
+            GyCAP.UI.GestionStock.frmInventarioABC.Instancia.Show();
+        }
         
         
     }
