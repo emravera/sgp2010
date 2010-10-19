@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace GyCAP.BLL
 {
@@ -32,5 +33,11 @@ namespace GyCAP.BLL
         {
             DAL.MateriaPrimaDAL.ObtenerTodos(dtMateriaPrima);
         }
+        //Metodo que acepta el Datatable
+        public static void ObtenerMP(DataTable dtMateriaPrima)
+        {
+            DAL.MateriaPrimaDAL.ObtenerMP(dtMateriaPrima);
+        }
+
     }
 }

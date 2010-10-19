@@ -146,6 +146,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsHojaRuta.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsInventarioABC.cs">
+      <DependentUpon>dsInventarioABC.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dsInventarioABC.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsInventarioABC.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsMantenimiento.cs">
       <DependentUpon>dsMantenimiento.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -447,6 +456,17 @@
     </None>
     <None Include="dsHojaRuta.xss">
       <DependentUpon>dsHojaRuta.xsd</DependentUpon>
+    </None>
+    <None Include="dsInventarioABC.xsc">
+      <DependentUpon>dsInventarioABC.xsd</DependentUpon>
+    </None>
+    <None Include="dsInventarioABC.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsInventarioABC.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsInventarioABC.xss">
+      <DependentUpon>dsInventarioABC.xsd</DependentUpon>
     </None>
     <None Include="dsMantenimiento.xsc">
       <DependentUpon>dsMantenimiento.xsd</DependentUpon>
