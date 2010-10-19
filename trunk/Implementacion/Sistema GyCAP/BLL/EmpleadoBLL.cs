@@ -60,5 +60,10 @@ namespace GyCAP.BLL
         {
             DAL.EmpleadoDAL.ObtenerEmpleados(dtEmpleados);
         }
+
+        public static void ObtenerEmpleados(Data.dsMantenimiento dsMantenimeinto)
+        {
+            DAL.EmpleadoDAL.ObtenerEmpleados(dsMantenimeinto);
+        }
     }
 }

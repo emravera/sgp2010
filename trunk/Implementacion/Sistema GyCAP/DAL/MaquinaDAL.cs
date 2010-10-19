@@ -182,5 +182,18 @@ namespace GyCAP.DAL
 
             DB.FillDataTable(dtMaquina, sql, null);
         }
+
+        public static void ObtenerMaquinas(Data.dsMantenimiento ds)
+        {
+            string sql = @"SELECT MAQ_CODIGO, EMAQ_CODIGO, MODM_CODIGO, FAB_CODIGO, MAQ_NOMBRE,
+                           MAQ_NUMEROSERIE, MAQ_FECHAALTA, MAQ_MARCA, MAQ_ES_CRITICA 
+                           FROM MAQUINAS ";
+            try
+            {
+                //Se llena el Dataset
+                DB.FillDataSet(ds, "MAQUINAS", sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
     }
 }

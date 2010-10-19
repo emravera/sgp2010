@@ -60,5 +60,10 @@ namespace GyCAP.BLL
         {
             DAL.MaquinaDAL.ObtenerMaquinas(dtMaquina);
         }
+
+        public static void ObtenerMaquinas(Data.dsMantenimiento dsMantenimiento)
+        {
+            DAL.MaquinaDAL.ObtenerMaquinas(dsMantenimiento);
+        }
     }
 }

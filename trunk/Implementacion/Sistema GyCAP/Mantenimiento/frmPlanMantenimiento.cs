@@ -152,9 +152,11 @@ namespace GyCAP.UI.Mantenimiento
             try
             {
                 BLL.EstadoPlanMantenimientoBLL.ObtenerTodos(dsMantenimiento.ESTADO_PLANES_MANTENIMIENTO);
-                //BLL.EstadoDetallePledidoBLL.ObtenerTodos(dsMantenimiento.ESTADO_DETALLE_PEDIDOS);
-                //BLL.CocinaBLL.ObtenerCocinas(dsMantenimiento.COCINAS);
-                //BLL.ClienteBLL.ObtenerTodos(dsMantenimiento.CLIENTES);
+                BLL.EstadoDetalleMantenimientoBLL.ObtenerTodos(dsMantenimiento.ESTADO_DETALLE_MANTENIMIENTOS); 
+                BLL.MaquinaBLL.ObtenerMaquinas(dsMantenimiento.MAQUINAS);
+                BLL.EmpleadoBLL.ObtenerEmpleados(dsMantenimiento.EMPLEADOS);
+                BLL.TipoRepuestoBLL.ObtenerTodos(dsMantenimiento.TIPOS_REPUESTOS);
+                BLL.RepuestoBLL.ObtenerTodos(dsMantenimiento.REPUESTOS);
                 //BLL.MarcaBLL.ObtenerTodos(dsMantenimiento.MARCAS);
                 //BLL.ModeloCocinaBLL.ObtenerTodos(dsMantenimiento.MODELOS_COCINAS);
 
