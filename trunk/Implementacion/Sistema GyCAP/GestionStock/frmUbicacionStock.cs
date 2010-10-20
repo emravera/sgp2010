@@ -365,24 +365,25 @@ namespace GyCAP.UI.GestionStock
             dgvLista.AutoGenerateColumns = false;
             dgvLista.Columns.Add("USTCK_CODIGO", "Código");
             dgvLista.Columns.Add("USTCK_NOMBRE", "Nombre");
-            dgvLista.Columns.Add("TUS_CODIGO", "Tipo");
-            dgvLista.Columns.Add("USTCK_PADRE", "Padre");
+            dgvLista.Columns.Add("TUS_CODIGO", "Tipo");            
             dgvLista.Columns.Add("USTCK_CANTIDADREAL", "Cantidad real");
+            dgvLista.Columns.Add("USTCK_CANTIDADVIRTUAL", "Cantidad virtual");
             dgvLista.Columns.Add("UMED_CODIGO", "Unidad medida");
             dgvLista.Columns.Add("USTCK_ACTIVO", "Estado");
             dgvLista.Columns["USTCK_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["USTCK_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["TUS_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["USTCK_PADRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["USTCK_CANTIDADVIRTUAL"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["UMED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["USTCK_CANTIDADREAL"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["USTCK_CANTIDADREAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvLista.Columns["USTCK_CANTIDADVIRTUAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvLista.Columns["USTCK_ACTIVO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             dgvLista.Columns["USTCK_CODIGO"].MinimumWidth = 86;
             dgvLista.Columns["USTCK_NOMBRE"].MinimumWidth = 86;
             dgvLista.Columns["TUS_CODIGO"].MinimumWidth = 70;
-            dgvLista.Columns["USTCK_PADRE"].MinimumWidth = 82;
+            dgvLista.Columns["USTCK_CANTIDADVIRTUAL"].MinimumWidth = 70;
             dgvLista.Columns["USTCK_CANTIDADREAL"].MinimumWidth = 70;
             dgvLista.Columns["UMED_CODIGO"].MinimumWidth = 70;
             dgvLista.Columns["USTCK_ACTIVO"].MinimumWidth = 70;
@@ -390,7 +391,7 @@ namespace GyCAP.UI.GestionStock
             dgvLista.Columns["USTCK_CODIGO"].DataPropertyName = "USTCK_CODIGO";
             dgvLista.Columns["USTCK_NOMBRE"].DataPropertyName = "USTCK_NOMBRE";
             dgvLista.Columns["TUS_CODIGO"].DataPropertyName = "TUS_CODIGO";
-            dgvLista.Columns["USTCK_PADRE"].DataPropertyName = "USTCK_PADRE";
+            dgvLista.Columns["USTCK_CANTIDADVIRTUAL"].DataPropertyName = "USTCK_CANTIDADVIRTUAL";
             dgvLista.Columns["USTCK_CANTIDADREAL"].DataPropertyName = "USTCK_CANTIDADREAL";
             dgvLista.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
             dgvLista.Columns["USTCK_ACTIVO"].DataPropertyName = "USTCK_ACTIVO";

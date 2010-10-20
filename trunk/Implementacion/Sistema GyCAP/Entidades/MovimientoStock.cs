@@ -85,5 +85,13 @@ namespace GyCAP.Entidades
             get { return estado; }
             set { estado = value; }
         }
+
+        private OrdenTrabajo ordenTrabajo;
+
+        public OrdenTrabajo OrdenTrabajo
+        {
+            get { return ordenTrabajo; }
+            set { ordenTrabajo = value; }
+        }
     }
 }

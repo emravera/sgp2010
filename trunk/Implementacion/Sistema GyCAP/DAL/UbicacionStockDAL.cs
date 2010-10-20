@@ -59,7 +59,7 @@ namespace GyCAP.DAL
         
         public static void Eliminar(int numeroUbicacionStock)
         {
-            string sql = "DELETE FROM UBICACIONES_STOCK WHERE USTCK_NUMERO = @p0";
+            string sql = "DELETE FROM UBICACIONES_STOCK WHERE ustck_numero = @p0";
             object[] parametros = { numeroUbicacionStock };
             try
             {
@@ -71,6 +71,18 @@ namespace GyCAP.DAL
         public static bool PuedeEliminarse(int numeroUbicacionStock)
         {
             return true;
+        }
+
+        public static void ActualizarCantidadesStock(int numeroUbicacion, decimal cantidadReal, decimal cantidadVirtual, SqlTransaction transaccion)
+        {
+            string sql = @"UPDATE UBICACIONES_STOCK SET 
+                         ustck_cantidadreal = ustck_cantidadreal + @p0 
+                        ,ustck_cantidadvirtual = ustck_cantidadvirtual + @p1 
+                        WHERE ustck_numero = @p2";
+            
+            object[] parametros = { cantidadReal, cantidadVirtual, numeroUbicacion };
+
+            DB.executeNonQuery(sql, parametros, transaccion);
         }
     }
 }

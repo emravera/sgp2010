@@ -463,6 +463,7 @@ namespace GyCAP.BLL
                             }
                             rowMovimiento.MVTO_CANTIDAD_ORIGEN = rowMPxP.MPXP_CANTIDAD * rowOT.ORDT_CANTIDADESTIMADA;
                             rowMovimiento.MVTO_CANTIDAD_DESTINO = rowOT.ORDT_CANTIDADESTIMADA;
+                            rowMovimiento.ORDT_NUMERO = rowOT.ORDT_NUMERO;
                             rowMovimiento.EndEdit();
                             dsStock.MOVIMIENTOS_STOCK.AddMOVIMIENTOS_STOCKRow(rowMovimiento);
 
@@ -485,7 +486,10 @@ namespace GyCAP.BLL
             foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow row in (Data.dsOrdenTrabajo.ORDENES_TRABAJORow[])dsOrdenTrabajo.ORDENES_TRABAJO.Select("ORDP_NUMERO = " + numeroOrdenProduccion))
             {
                 if (row.EORD_CODIGO == EstadoGenerado) { row.EORD_CODIGO = EstadoEnEspera; }
-            }            
+            }
+            
+            //Ahora mandamos todo a la BD, si la OP es para un pedido actualizar el estado del pedido a EnCurso - gonzalo
+            DAL.OrdenProduccionDAL.IniciarOrdenProduccion(numeroOrdenProduccion, dsOrdenTrabajo, dsStock);
         }
     }
 }

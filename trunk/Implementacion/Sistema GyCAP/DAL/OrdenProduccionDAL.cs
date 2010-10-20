@@ -11,6 +11,12 @@ namespace GyCAP.DAL
     {
         public static readonly int OrdenAutomatica = 1;
         public static readonly int OrdenManual = 2;
+
+        public static readonly int EstadoGenerado = 1;
+        public static readonly int EstadoEnEspera = 2;
+        public static readonly int EstadoEnProceso = 3;
+        public static readonly int EstadoFinalizado = 4;
+        public static readonly int EstadoCancelado = 5;
         
         public static void Insertar(int numeroOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo)
         {
@@ -79,6 +85,7 @@ namespace GyCAP.DAL
                     rowOrdenTrabajo.BeginEdit();
                     rowOrdenTrabajo.ORDP_NUMERO = numeroOrdenProduccion;
                     int numero = OrdenTrabajoDAL.Insertar(rowOrdenTrabajo, transaccion);
+                    
                     foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow row in (Data.dsOrdenTrabajo.ORDENES_TRABAJORow[])dsOrdenTrabajo.ORDENES_TRABAJO.Select("ordt_ordensiguiente = " + rowOrdenTrabajo.ORDT_NUMERO))
                     {
                         row.ORDT_ORDENSIGUIENTE = numero;
@@ -138,6 +145,60 @@ namespace GyCAP.DAL
             }
         }
 
+        public static void IniciarOrdenProduccion(int numeroOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsStock dsStock)
+        {
+            string sql = "UPDATE ORDENES_PRODUCCION SET eord_codigo = @p0, ordp_fechainicioreal = @p1 WHERE ordp_numero = @p2";
+            
+            object[] parametros = { dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).EORD_CODIGO,
+                                    dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_FECHAINICIOREAL,
+                                    numeroOrdenProduccion };
+
+            SqlTransaction transaccion = null;
+            try
+            {
+                transaccion = DB.IniciarTransaccion();
+                //Actualizamos la orden de produccion
+                DB.executeNonQuery(sql, parametros, transaccion);
+                //Iniciamos las órdenes de trabajo que corresponden
+                string filtro = "ORDP_NUMERO = " + numeroOrdenProduccion + " AND EORD_CODIGO = " + EstadoEnProceso;
+                foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOT in (Data.dsOrdenTrabajo.ORDENES_TRABAJORow[])dsOrdenTrabajo.ORDENES_TRABAJO.Select(filtro))
+                {
+                    OrdenTrabajoDAL.IniciarOrdenTrabajo(Convert.ToInt32(rowOT.ORDT_NUMERO), dsOrdenTrabajo, dsStock, transaccion);
+                }
+
+                //Actualizamos el estado del resto de las órdenes de trabajo
+                filtro = "ORDP_NUMERO = " + numeroOrdenProduccion + " AND EORD_CODIGO = " + EstadoEnEspera;
+                foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOT in (Data.dsOrdenTrabajo.ORDENES_TRABAJORow[])dsOrdenTrabajo.ORDENES_TRABAJO.Select(filtro))
+                {
+                    OrdenTrabajoDAL.ActualizarEstado(Convert.ToInt32(rowOT.ORDT_NUMERO), EstadoEnEspera, transaccion);
+                }
+
+                //Si la orden de trabajo es por un pedido actualizamos su estado
+                if (!dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).IsDPSEM_CODIGONull())
+                {
+                    object pedido = DetallePlanSemanalDAL.ObtenerPedidoClienteDeDetalle(Convert.ToInt32(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).DPSEM_CODIGO));
+                    if (pedido != null)
+                    {
+                        DetallePedidoDAL.ActualizarEstadoAEnCurso(Convert.ToInt32(pedido), transaccion);
+                    }
+                }
+
+                //Confirmamos los cambios
+                transaccion.Commit();
+            }
+            catch (SqlException ex)
+            {
+                //Error en alguna consulta, descartamos los cambios
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
+            }
+            finally
+            {
+                //En cualquier caso finalizamos la transaccion para que se cierre la conexion
+                DB.FinalizarTransaccion();
+            }            
+        }
+        
         public static void ObtenerOrdenesProduccion(object codigo, object estado, object modo, object fechaGeneracion, object fechaDesde, object fechaHasta, Data.dsOrdenTrabajo dsOrdenTrabajo)
         {
             string sql = @"SELECT ordp_numero, ordp_codigo, eord_codigo, ordp_fechaalta, dpsem_codigo, ordpm_numero, ordp_origen, ordp_fechainicioestimada, 

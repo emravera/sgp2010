@@ -67,10 +67,13 @@ namespace GyCAP.UI.PlanificacionProduccion
                         try
                         {
                             BLL.OrdenProduccionBLL.IniciarOrdenProduccion(numeroOrdenOP, BLL.DBBLL.GetFechaServidor(), dsOrdenTrabajo, dsStock, dsHojaRuta, dsEstructura);
-                            int o = 0;
+                            dsOrdenTrabajo.AcceptChanges();
+                            dsStock.AcceptChanges();
                         }
                         catch (Entidades.Excepciones.BaseDeDatosException ex)
                         {
+                            dsOrdenTrabajo.RejectChanges();
+                            dsStock.RejectChanges();
                             MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio Orden de Producción", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }

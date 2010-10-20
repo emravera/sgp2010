@@ -10,7 +10,7 @@ namespace GyCAP.BLL
     {
         public static void Insertar(Entidades.MovimientoStock movimientoStock)
         {
-            DAL.MovimientoStockDAL.Insertar(movimientoStock);
+            DAL.MovimientoStockDAL.Insertar(movimientoStock, null);
         }
 
         public static void Eliminar(int numeroMovimiento)
