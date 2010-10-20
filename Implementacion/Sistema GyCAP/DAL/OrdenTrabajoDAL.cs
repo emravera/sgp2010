@@ -9,6 +9,12 @@ namespace GyCAP.DAL
 {
     public class OrdenTrabajoDAL
     {
+        public static readonly int EstadoGenerado = 1;
+        public static readonly int EstadoEnEspera = 2;
+        public static readonly int EstadoEnProceso = 3;
+        public static readonly int EstadoFinalizado = 4;
+        public static readonly int EstadoCancelado = 5;
+        
         public static int Insertar(Data.dsOrdenTrabajo.ORDENES_TRABAJORow row, SqlTransaction transaccion)
         {
             string sql = @"INSERT INTO ORDENES_TRABAJO 
@@ -75,6 +81,47 @@ namespace GyCAP.DAL
             return Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
         }
 
+        public static void IniciarOrdenTrabajo(int numeroOrdenTrabajo, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsStock dsStock, SqlTransaction transaccion)
+        {
+            string sql = "UPDATE ORDENES_TRABAJO SET eord_codigo = @p0, ordt_fechainicioreal = @p1 WHERE ordt_numero = @p2";
+            object[] parametros = { dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).EORD_CODIGO, 
+                                     dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_FECHAINICIOREAL, 
+                                     numeroOrdenTrabajo };
+
+            DB.executeNonQuery(sql, parametros, transaccion);
+
+            //Insertamos los movimientos de stock que corresponden a la OT
+            Entidades.MovimientoStock movimiento;
+            foreach (Data.dsStock.MOVIMIENTOS_STOCKRow rowMVTO in (Data.dsStock.MOVIMIENTOS_STOCKRow[])dsStock.MOVIMIENTOS_STOCK.Select("ORDT_NUMERO = " + numeroOrdenTrabajo))
+            {
+                movimiento = new GyCAP.Entidades.MovimientoStock();
+                movimiento.Codigo = rowMVTO.MVTO_CODIGO;
+                movimiento.Descripcion = rowMVTO.MVTO_DESCRIPCION;
+                movimiento.FechaAlta = rowMVTO.MVTO_FECHAALTA;
+                movimiento.FechaPrevista = rowMVTO.MVTO_FECHAPREVISTA;
+                movimiento.Origen = new GyCAP.Entidades.UbicacionStock(Convert.ToInt32(rowMVTO.USTCK_ORIGEN));
+                movimiento.Destino = new GyCAP.Entidades.UbicacionStock(Convert.ToInt32(rowMVTO.USTCK_DESTINO));
+                movimiento.CantidadOrigen = rowMVTO.MVTO_CANTIDAD_ORIGEN;
+                movimiento.CantidadDestino = rowMVTO.MVTO_CANTIDAD_DESTINO;
+                movimiento.Estado = new GyCAP.Entidades.EstadoMovimientoStock(Convert.ToInt32(rowMVTO.EMVTO_CODIGO));
+                movimiento.OrdenTrabajo = new GyCAP.Entidades.OrdenTrabajo(Convert.ToInt32(rowMVTO.ORDT_NUMERO));
+                MovimientoStockDAL.Insertar(movimiento, transaccion);
+                rowMVTO.MVTO_NUMERO = movimiento.Numero;
+            }
+            //Actualizamos la ubicación destino de la orden de trabajo
+            UbicacionStockDAL.ActualizarCantidadesStock(Convert.ToInt32(dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).USTCK_DESTINO),
+                                                        0,
+                                                        dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_CANTIDADESTIMADA,
+                                                        transaccion);
+        }
+
+        public static void ActualizarEstado(int numeroOrdenTrabajo, int codigoEstado, SqlTransaction transaccion)
+        {
+            string sql = "UPDATE ORDENES_TRABAJO SET eord_codigo = @p0 WHERE ordt_numero = @p1";
+            object[] parametros = { codigoEstado, numeroOrdenTrabajo };
+            DB.executeNonQuery(sql, parametros, transaccion);
+        }
+        
         public static void ObtenerOrdenesTrabajo(int numeroOrdenProduccion, DataTable dtOrdenTrabajo)
         {
             string sql = @"SELECT ordt_numero, ordt_codigo, ordp_numero, eord_codigo, par_codigo, par_tipo, ordt_origen, ordt_cantidadestimada

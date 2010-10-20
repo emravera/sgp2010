@@ -8,6 +8,9 @@ namespace GyCAP.BLL
 {
     public class EstadoPedidoBLL
     {
+        public static readonly int EstadoEnCurso = 2;
+        public static readonly int EstadoFinalizado = 5;
+        
         public static long Insertar(Entidades.EstadoPedido estadoPedido)
         {
             //Si existe lanzamos la excepción correspondiente

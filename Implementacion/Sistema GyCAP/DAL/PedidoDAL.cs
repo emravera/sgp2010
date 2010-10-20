@@ -9,6 +9,8 @@ namespace GyCAP.DAL
 {
     public class PedidoDAL
     {
+        public static readonly int EstadoEnCurso = 2;
+        
         public static void Insertar(Data.dsCliente dsCliente)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
@@ -406,6 +408,18 @@ namespace GyCAP.DAL
                 valorParametros = new object[] { rowPedido.PED_CODIGO };
                 DB.FillDataTable(ds.DETALLE_PEDIDOS, sql, valorParametros);
             }
+        }
+
+        public static void ActualizarEstadoAEnCurso(int codigoPedido, SqlTransaction transaccion)
+        {
+            ActualizarEstado(codigoPedido, EstadoEnCurso, transaccion);
+        }
+        
+        public static void ActualizarEstado(int codigoPedido, int codigoEstado, SqlTransaction transaccion)
+        {
+            string sql = "UPDATE PEDIDOS SET eped_codigo = @p0 WHERE ped_codigo = @p1";
+            object[] parametros = { codigoEstado, codigoPedido };
+            DB.executeNonQuery(sql, parametros, transaccion);
         }
     }
 }

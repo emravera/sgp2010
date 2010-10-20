@@ -7,7 +7,7 @@ using System.Data;
 namespace GyCAP.BLL
 {
     public class EstadoOrdenTrabajoBLL
-    {
+    {        
         public static void ObtenerEstadosOrden(DataTable dtEstadosOrden)
         {
             DAL.EstadoOrdenTrabajoDAL.ObtenerEstados(dtEstadosOrden);
