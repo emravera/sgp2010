@@ -3486,7 +3486,6 @@ namespace GyCAP.Data {
                 this.columnDHR_CODIGO.AutoIncrementSeed = -1;
                 this.columnDHR_CODIGO.AutoIncrementStep = -1;
                 this.columnDHR_CODIGO.AllowDBNull = false;
-                this.columnDHR_CODIGO.ReadOnly = true;
                 this.columnDHR_CODIGO.Unique = true;
                 this.columnCTO_CODIGO.AllowDBNull = false;
                 this.columnHR_CODIGO.AllowDBNull = false;

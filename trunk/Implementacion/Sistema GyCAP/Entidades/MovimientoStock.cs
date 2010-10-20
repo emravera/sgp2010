@@ -63,20 +63,21 @@ namespace GyCAP.Entidades
             get { return destino; }
             set { destino = value; }
         }
-        private decimal cantidad;
+        private decimal cantidadOrigen;
 
-        public decimal Cantidad
+        public decimal CantidadOrigen
         {
-            get { return cantidad; }
-            set { cantidad = value; }
+            get { return cantidadOrigen; }
+            set { cantidadOrigen = value; }
         }
-        private UnidadMedida unidadMedida;
+        private decimal cantidadDestino;
 
-        public UnidadMedida UnidadMedida
+        public decimal CantidadDestino
         {
-            get { return unidadMedida; }
-            set { unidadMedida = value; }
+            get { return cantidadDestino; }
+            set { cantidadDestino = value; }
         }
+        
         private EstadoMovimientoStock estado;
 
         public EstadoMovimientoStock Estado

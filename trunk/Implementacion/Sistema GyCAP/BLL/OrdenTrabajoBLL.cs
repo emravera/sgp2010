@@ -68,7 +68,7 @@ namespace GyCAP.BLL
                 {
                     //Tiene hoja de ruta, la obtenemos y la recorremos
                     DAL.HojaRutaDAL.ObtenerHojaRuta(Convert.ToInt32(rowCxE.CONJUNTOSRow.HR_CODIGO), true, dsHojaRuta);
-                    foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaCxE in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowCxE.CONJUNTOSRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
+                    foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaCxE in (Data.dsHojaRuta.DETALLE_HOJARUTARow[])dsHojaRuta.DETALLE_HOJARUTA.Select("HR_CODIGO = " + rowCxE.CONJUNTOSRow.HR_CODIGO, "DHR_SECUENCIA DESC"))
                     {                        
                         //Creamos la orden de trabajo para cada detalle de la hoja de ruta
                         Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTCxE = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
@@ -111,7 +111,7 @@ namespace GyCAP.BLL
                     {
                         //Tiene hoja de ruta, la obtenemos y la recorremos
                         DAL.HojaRutaDAL.ObtenerHojaRuta(Convert.ToInt32(rowSCxC.SUBCONJUNTOSRow.HR_CODIGO), true, dsHojaRuta);
-                        foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaSCxC in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowSCxC.SUBCONJUNTOSRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
+                        foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaSCxC in (Data.dsHojaRuta.DETALLE_HOJARUTARow[])dsHojaRuta.DETALLE_HOJARUTA.Select("HR_CODIGO = " + rowSCxC.SUBCONJUNTOSRow.HR_CODIGO, "DHR_SECUENCIA DESC"))
                         {                            
                             //Creamos la orden de trabajo para cada detalle de la hoja de ruta
                             Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTSCxC = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
@@ -156,7 +156,7 @@ namespace GyCAP.BLL
                             //Tiene hoja de ruta, la obtenemos y la recorremos
                             DAL.HojaRutaDAL.ObtenerHojaRuta(Convert.ToInt32(rowPxSC.PIEZASRow.HR_CODIGO), true, dsHojaRuta);
                             //Creamos la orden de trabajo para cada detalle de la hoja de ruta
-                            foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaPxSC in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxSC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
+                            foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaPxSC in (Data.dsHojaRuta.DETALLE_HOJARUTARow[])dsHojaRuta.DETALLE_HOJARUTA.Select("HR_CODIGO = " + rowPxSC.PIEZASRow.HR_CODIGO, "DHR_SECUENCIA DESC"))
                             {
                                 Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTPxSC = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                                 rowOTPxSC.BeginEdit();
@@ -203,7 +203,7 @@ namespace GyCAP.BLL
                         //Tiene hoja de ruta, la obtenemos y la recorremos
                         DAL.HojaRutaDAL.ObtenerHojaRuta(Convert.ToInt32(rowPxC.PIEZASRow.HR_CODIGO), true, dsHojaRuta);
                         //Creamos la orden de trabajo para cada detalle de la hoja de ruta
-                        foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaPxC in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxC.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
+                        foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaPxC in (Data.dsHojaRuta.DETALLE_HOJARUTARow[])dsHojaRuta.DETALLE_HOJARUTA.Select("HR_CODIGO = " + rowPxC.PIEZASRow.HR_CODIGO, "DHR_SECUENCIA DESC"))
                         {
                             Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTPxC = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                             rowOTPxC.BeginEdit();
@@ -248,7 +248,7 @@ namespace GyCAP.BLL
                     //Tiene hoja de ruta, la obtenemos y la recorremos
                     DAL.HojaRutaDAL.ObtenerHojaRuta(Convert.ToInt32(rowPxE.PIEZASRow.HR_CODIGO), true, dsHojaRuta);
                     //Creamos la orden de trabajo para cada detalle de la hoja de ruta
-                    foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaPxE in dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(rowPxE.PIEZASRow.HR_CODIGO).GetDETALLE_HOJARUTARows())
+                    foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow rowHojaPxE in (Data.dsHojaRuta.DETALLE_HOJARUTARow[])dsHojaRuta.DETALLE_HOJARUTA.Select("HR_CODIGO = " + rowPxE.PIEZASRow.HR_CODIGO, "DHR_SECUENCIA DESC"))
                     {
                         Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTPxE = dsOrdenTrabajo.ORDENES_TRABAJO.NewORDENES_TRABAJORow();
                         rowOTPxE.BeginEdit();

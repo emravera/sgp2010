@@ -23,10 +23,10 @@ namespace GyCAP.UI.GestionStock
 
             areaTrabajo = scUp.Panel2;
             flpMenu.AutoScroll = false;
-            btnTemp.Tag = panelTemp;
+            btnInventarioAbc.Tag = panelInventarioABC;
             btnUbicacionStock.Tag = panelUbicacionStock;
             Size size = new Size(panelUbicacionStock.Size.Width, 0);
-            panelTemp.Size = size;
+            panelInventarioABC.Size = size;
             panelUbicacionStock.Size = size;
         }
 
@@ -216,6 +216,17 @@ namespace GyCAP.UI.GestionStock
             frmUbicacionStock.Instancia.Location = PosicionarFormulario();
             frmUbicacionStock.Instancia.Show();
             frmUbicacionStock.Instancia.Focus();
+        }
+        #endregion
+
+        #region Inventario ABC
+        private void btnConsultarInventarioAbc_Click(object sender, EventArgs e)
+        {
+            frmInventarioABC.Instancia.TopLevel = false;
+            frmInventarioABC.Instancia.Parent = areaTrabajo;
+            frmInventarioABC.Instancia.Location = PosicionarFormulario();
+            frmInventarioABC.Instancia.Show();
+            frmInventarioABC.Instancia.Focus();
         }
         #endregion
     }
