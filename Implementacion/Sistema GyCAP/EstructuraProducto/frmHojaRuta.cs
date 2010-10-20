@@ -362,9 +362,9 @@ namespace GyCAP.UI.EstructuraProducto
                     row.OPR_NUMERO = operacionNumero;
                     row.CTO_CODIGO = centroCodigo;
                     row.DHR_SECUENCIA = nudSecuencia.Value;
-                    if (cboStockOrigen.GetSelectedIndex() != -1) { row.USTCK_ORIGEN = cboStockOrigen.GetSelectedValueInt(); }
+                    if (cboStockOrigen.GetSelectedValueInt() != -1) { row.USTCK_ORIGEN = cboStockOrigen.GetSelectedValueInt(); }
                     else { row.SetUSTCK_ORIGENNull(); }
-                    if (cboStockDestino.GetSelectedIndex() != -1) { row.USTCK_DESTINO = cboStockDestino.GetSelectedValueInt(); }
+                    if (cboStockDestino.GetSelectedValueInt() != -1) { row.USTCK_DESTINO = cboStockDestino.GetSelectedValueInt(); }
                     else { row.SetUSTCK_DESTINONull(); }
                     row.EndEdit();
                     //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
@@ -373,8 +373,8 @@ namespace GyCAP.UI.EstructuraProducto
                 }
                 cbOperacion.SetTexto("Seleccione");
                 cbCentroTrabajo.SetTexto("Seleccione");
-                cboStockOrigen.SetTexto("Seleccione");
-                cboStockDestino.SetTexto("Seleccione");
+                cboStockOrigen.SetSelectedValue(-1);
+                cboStockDestino.SetSelectedValue(-1);
                 nudSecuencia.Value = 0;
             }
             else
@@ -434,7 +434,7 @@ namespace GyCAP.UI.EstructuraProducto
                     dtpFechaAlta.Enabled = true;
                     chkActivo.Enabled = true;
                     cboUbicacionStock.Enabled = true;
-                    cboUbicacionStock.SetSelectedIndex(-1);
+                    cboUbicacionStock.SetSelectedValue(-1);
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
                     dvDetalleHoja.RowFilter = "HR_CODIGO = -1";
@@ -458,7 +458,7 @@ namespace GyCAP.UI.EstructuraProducto
                     dtpFechaAlta.Enabled = true;
                     chkActivo.Enabled = true;
                     cboUbicacionStock.Enabled = true;
-                    cboUbicacionStock.SetSelectedIndex(-1);
+                    cboUbicacionStock.SetSelectedValue(-1);
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
                     dvDetalleHoja.RowFilter = "HR_CODIGO = -1";
@@ -585,7 +585,7 @@ namespace GyCAP.UI.EstructuraProducto
             cboStockDestino.SetDatos(dvStockDestino, "USTCK_NUMERO", "USTCK_NOMBRE", "Sin especificar...", true);
 
             dvUbicacionStock = new DataView(dsHojaRuta.UBICACIONES_STOCK);
-            cboUbicacionStock.SetDatos(dvUbicacionStock, "USTCK_NUMERO", "USTCK_NOMBRE", "Sinespecificar...", true);
+            cboUbicacionStock.SetDatos(dvUbicacionStock, "USTCK_NUMERO", "USTCK_NOMBRE", "Sin especificar...", true);
         }        
 
         private void dgvHojasRuta_RowEnter(object sender, DataGridViewCellEventArgs e)

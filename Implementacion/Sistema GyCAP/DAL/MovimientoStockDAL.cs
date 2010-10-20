@@ -19,8 +19,8 @@ namespace GyCAP.DAL
                         ,[mvto_fechareal]
                         ,[ustck_origen]
                         ,[ustck_destino]
-                        ,[mvto_cantidad]
-                        ,[umed_codigo]
+                        ,[mvto_cantidad_origen]
+                        ,[mvto_cantidad_destino]
                         ,[emvto_codigo]) 
                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9) SELECT @@Identity";
 
@@ -31,8 +31,8 @@ namespace GyCAP.DAL
                                       movimientoStock.FechaReal,
                                       movimientoStock.Origen.Numero,
                                       movimientoStock.Destino.Numero,
-                                      movimientoStock.Cantidad,
-                                      movimientoStock.UnidadMedida.Codigo,
+                                      movimientoStock.CantidadOrigen,
+                                      movimientoStock.CantidadDestino,
                                       movimientoStock.Estado.Codigo };
 
             try

@@ -362,6 +362,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 BLL.SubConjuntoBLL.ObtenerSubconjuntos(dsEstructura.SUBCONJUNTOS);
                 BLL.PiezaBLL.ObtenerPiezas(dsEstructura.PIEZAS);
                 BLL.EstadoMovimientoStockBLL.ObtenerEstadosMovimiento(dsStock.ESTADO_MOVIMIENTOS_STOCK);
+                BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsStock.UBICACIONES_STOCK);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {

@@ -67,7 +67,12 @@ namespace GyCAP.BLL
         public static Entidades.Pieza ObtenerPieza(int codigoPieza)
         {
             return DAL.PiezaDAL.ObtenerPieza(codigoPieza);
-        }        
+        }
+
+        public static void ObtenerPieza(int codigoPieza, bool detalle, Data.dsEstructura dsEstructura)
+        {
+            DAL.PiezaDAL.ObtenerPieza(codigoPieza, detalle, dsEstructura);
+        }
 
         public static void ObtenerPiezas(object nombre, object codTerminacion, Data.dsEstructura ds, bool obtenerDetalle)
         {

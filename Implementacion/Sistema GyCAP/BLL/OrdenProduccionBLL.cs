@@ -413,15 +413,17 @@ namespace GyCAP.BLL
 
         public static void IniciarOrdenProduccion(int numeroOrdenProduccion, DateTime fechaInicioReal, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsStock dsStock, Data.dsHojaRuta dsHojaRuta, Data.dsEstructura dsEstructura)
         {
-            int codigoMovimiento = 0;
+            int codigoMovimiento = -1;
             
             //Iniciamos la orden de producción
             dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_FECHAINICIOREAL = fechaInicioReal;
             dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).EORD_CODIGO = EstadoEnProceso;
 
+            //Obtenemos la estructura entera de la cocina a fabricar
+            BLL.EstructuraBLL.ObtenerEstructura(Convert.ToInt32(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ESTR_CODIGO), dsEstructura, true);
             //Iniciamos las órdenes de trabajo
             string filtro = "ORDP_NUMERO = " + numeroOrdenProduccion + " AND ORDT_FECHAINICIOESTIMADA = MIN (ORDT_FECHAINICIOESTIMADA)";
-            decimal ultimaParte = 0;
+            decimal ultimaParte = 0, stockDestino = 0, cantidadDestino = 0;
             foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOT in (Data.dsOrdenTrabajo.ORDENES_TRABAJORow[])dsOrdenTrabajo.ORDENES_TRABAJO.Select(filtro))
 	        {
                 //Cambiamos el estado de la orden de trabajo a EnProceso y anotamos la fecha real de inicio
@@ -433,7 +435,7 @@ namespace GyCAP.BLL
                 //materia prima que usa cada parte, que sería si o si una pieza en este punto de ejecución, pero sólo de la primer
                 //operación de la hoja de ruta
                 if (rowOT.PAR_CODIGO != ultimaParte)
-                {
+                {                    
                     foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow rowMPxP in dsEstructura.PIEZAS.FindByPZA_CODIGO(rowOT.PAR_CODIGO).GetMATERIASPRIMASXPIEZARows())
                     {
                         //Creamos un movimiento de stock para cada materia prima según su ubicación de stock
@@ -449,17 +451,32 @@ namespace GyCAP.BLL
                             rowMovimiento.MVTO_FECHAPREVISTA = rowOT.ORDT_FECHAFINESTIMADA;
                             rowMovimiento.SetMVTO_FECHAREALNull();
                             rowMovimiento.USTCK_ORIGEN = rowMPxP.MATERIAS_PRIMASRow.USTCK_NUMERO;
-                            rowMovimiento.USTCK_DESTINO = rowOT.USTCK_DESTINO;
-                            rowMovimiento.UMED_CODIGO = rowMPxP.MATERIAS_PRIMASRow.UMED_CODIGO;
-                            rowMovimiento.MVTO_CANTIDAD = rowMPxP.MPXP_CANTIDAD * rowOT.ORDT_CANTIDADESTIMADA;
+                            if (!rowOT.IsUSTCK_DESTINONull()) { rowMovimiento.USTCK_DESTINO = rowOT.USTCK_DESTINO; }
+                            else 
+                            {
+                                Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTTemp = rowOT;
+                                while (rowOTTemp.PAR_CODIGO == rowOTTemp.ORDENES_TRABAJORowParent.PAR_CODIGO && rowOTTemp.PAR_TIPO == rowOTTemp.ORDENES_TRABAJORowParent.PAR_TIPO && rowOTTemp.ORDENES_TRABAJORowParent.IsUSTCK_DESTINONull())
+                                {
+                                    rowOTTemp = rowOTTemp.ORDENES_TRABAJORowParent;
+                                }
+                                rowMovimiento.USTCK_DESTINO = rowOTTemp.ORDENES_TRABAJORowParent.USTCK_DESTINO;
+                            }
+                            rowMovimiento.MVTO_CANTIDAD_ORIGEN = rowMPxP.MPXP_CANTIDAD * rowOT.ORDT_CANTIDADESTIMADA;
+                            rowMovimiento.MVTO_CANTIDAD_DESTINO = rowOT.ORDT_CANTIDADESTIMADA;
                             rowMovimiento.EndEdit();
                             dsStock.MOVIMIENTOS_STOCK.AddMOVIMIENTOS_STOCKRow(rowMovimiento);
 
-                            //Actualizamos los datos de la ubicación de stock origen y destino
-                            dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(rowMovimiento.USTCK_ORIGEN).USTCK_CANTIDADVIRTUAL -= rowMovimiento.MVTO_CANTIDAD;
-                            dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(rowMovimiento.USTCK_DESTINO).USTCK_CANTIDADVIRTUAL += rowOT.ORDT_CANTIDADESTIMADA;
+                            //Actualizamos los datos de la ubicación de stock origen
+                            dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(rowMovimiento.USTCK_ORIGEN).USTCK_CANTIDADVIRTUAL -= rowMovimiento.MVTO_CANTIDAD_ORIGEN;
+                            if (!rowMovimiento.IsUSTCK_DESTINONull())
+                            {
+                                stockDestino = rowMovimiento.USTCK_DESTINO;
+                                cantidadDestino = rowMovimiento.MVTO_CANTIDAD_DESTINO;
+                            }
                         }
                     }
+                    //Actualizamos los datos de la ubicación de stock destino, que para todos los casos anteriores es el mismo
+                    dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(stockDestino).USTCK_CANTIDADVIRTUAL += cantidadDestino;
                     ultimaParte = rowOT.PAR_CODIGO;
                 }
 	        }

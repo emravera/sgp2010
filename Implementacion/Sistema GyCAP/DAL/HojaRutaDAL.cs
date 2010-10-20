@@ -33,6 +33,7 @@ namespace GyCAP.DAL
                 object stockOrigen = DBNull.Value, stockDestino = DBNull.Value;
                 foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow row in (Data.dsHojaRuta.DETALLE_HOJARUTARow[])dsHojaRuta.DETALLE_HOJARUTA.Select(null, null, DataViewRowState.Added))
                 {
+                    stockOrigen = DBNull.Value; stockDestino = DBNull.Value;
                     if (!row.IsUSTCK_ORIGENNull()) { stockOrigen = row.USTCK_ORIGEN; }
                     if (!row.IsUSTCK_DESTINONull()) { stockDestino = row.USTCK_DESTINO; }
                     valorParametros = new object[] { row.CTO_CODIGO, rowhoja.HR_CODIGO, row.DHR_SECUENCIA, row.OPR_NUMERO, stockOrigen, stockDestino };

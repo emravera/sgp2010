@@ -172,7 +172,7 @@ namespace GyCAP.UI.GestionStock
                         ubicacion.Descripcion = txtDescripcion.Text;
                         ubicacion.UbicacionFisica = txtUbicacionFisica.Text;
                         ubicacion.CantidadReal = nudCantidadReal.Value;
-                        ubicacion.CantidadVirtual = nudCantidadVirtual.Value;
+                        ubicacion.CantidadVirtual = nudCantidadReal.Value;
                         if (cboPadre.GetSelectedIndex() != -1) { ubicacion.UbicacionPadre = new GyCAP.Entidades.UbicacionStock(cboPadre.GetSelectedValueInt()); }
                         ubicacion.UnidadMedida = new GyCAP.Entidades.UnidadMedida(cboUnidadMedida.GetSelectedValueInt());
                         ubicacion.Activo = cboEstado.GetSelectedValueInt();
