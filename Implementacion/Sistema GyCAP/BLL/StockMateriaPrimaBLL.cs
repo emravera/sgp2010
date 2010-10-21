@@ -5,7 +5,16 @@ using System.Text;
 
 namespace GyCAP.BLL
 {
-    class StockMateriaPrimaBLL
+    public class StockMateriaPrimaBLL
     {
+        public static int ObtenerTotalAnual(int codigoAnio)
+        {
+            //Funcion que trae todo lo que se debe producir en el año
+            return DAL.StockMateriaPrimaDAL.ObtenerTotalAnual(codigoAnio);
+
+        }
+
+
+
     }
 }

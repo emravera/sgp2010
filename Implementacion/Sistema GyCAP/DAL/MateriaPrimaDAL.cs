@@ -107,5 +107,23 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        //Metodo que obtiene el precio de una materia prima
+        public static decimal ObtenerPrecioMP(decimal codigoMP)
+        {
+            decimal costo = 0;
+
+            string sql = @"SELECT  mp_costo
+                        FROM MATERIAS_PRIMAS where mp_codigo=@p0";
+          
+            object[] valoresParametros = { codigoMP };
+            try
+            {
+                costo=Convert.ToDecimal(DB.executeScalar(sql, valoresParametros, null));
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+            return costo;
+
+        }
     }
 }
