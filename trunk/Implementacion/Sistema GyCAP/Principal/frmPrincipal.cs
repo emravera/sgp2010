@@ -250,8 +250,7 @@ namespace Principal
 
         private void btnOperaciones_Click(object sender, EventArgs e)
         {
-            GyCAP.UI.EstructuraProducto.frmOperacionesFabricacion.Instancia.MdiParent = this;
-            GyCAP.UI.EstructuraProducto.frmOperacionesFabricacion.Instancia.Show();
+            
         }
 
         private void toolPedidos_Click(object sender, EventArgs e)
