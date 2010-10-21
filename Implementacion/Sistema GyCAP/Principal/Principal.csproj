@@ -129,6 +129,10 @@
       <Project>{959ABFBF-7696-414D-B0CA-8807851367E8}</Project>
       <Name>PlanificacionProduccion</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProcesoFabricacion\ProcesoFabricacion.csproj">
+      <Project>{6255860F-61F4-46AC-B845-FE988BD6F723}</Project>
+      <Name>ProcesoFabricacion</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RecursosFabricacion\RecursosFabricacion.csproj">
       <Project>{3D17BB74-E9A2-435E-BED2-9C222B5F1DDD}</Project>
       <Name>RecursosFabricacion</Name>
@@ -189,6 +193,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\reporte.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\modulo.procesoFabricacion.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
