@@ -100,12 +100,6 @@
     <Compile Include="frmEstructuraProducto.Designer.cs">
       <DependentUpon>frmEstructuraProducto.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmHojaRuta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmHojaRuta.Designer.cs">
-      <DependentUpon>frmHojaRuta.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmListadoEstructura.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,12 +117,6 @@
     </Compile>
     <Compile Include="frmModeloCocina.Designer.cs">
       <DependentUpon>frmModeloCocina.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmOperacionesFabricacion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmOperacionesFabricacion.Designer.cs">
-      <DependentUpon>frmOperacionesFabricacion.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPieza.cs">
       <SubType>Form</SubType>
@@ -180,10 +168,6 @@
       <DependentUpon>frmEstructuraProducto.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmHojaRuta.resx">
-      <DependentUpon>frmHojaRuta.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmListadoEstructura.resx">
       <DependentUpon>frmListadoEstructura.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -194,10 +178,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmModeloCocina.resx">
       <DependentUpon>frmModeloCocina.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmOperacionesFabricacion.resx">
-      <DependentUpon>frmOperacionesFabricacion.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPieza.resx">
