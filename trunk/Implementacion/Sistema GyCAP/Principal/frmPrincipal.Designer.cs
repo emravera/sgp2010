@@ -39,9 +39,9 @@
             this.menuItemGS = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemMA = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemPP = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemPF = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemRF = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSO = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemPF = new System.Windows.Forms.ToolStripMenuItem();
             this.menuEdicion = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -189,6 +189,7 @@
             this.menuItemMA.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
             this.menuItemMA.Size = new System.Drawing.Size(307, 22);
             this.menuItemMA.Text = "M&antenimiento";
+            this.menuItemMA.Click += new System.EventHandler(this.menuItemMA_Click);
             // 
             // menuItemPP
             // 
@@ -199,6 +200,16 @@
             this.menuItemPP.Size = new System.Drawing.Size(307, 22);
             this.menuItemPP.Text = "P&lanificación de la Producción";
             this.menuItemPP.Click += new System.EventHandler(this.menuItemPP_Click);
+            // 
+            // menuItemPF
+            // 
+            this.menuItemPF.Image = global::GyCAP.UI.Principal.Properties.Resources.modulo_procesoFabricacion;
+            this.menuItemPF.Name = "menuItemPF";
+            this.menuItemPF.ShortcutKeyDisplayString = "Ctrl + F";
+            this.menuItemPF.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.menuItemPF.Size = new System.Drawing.Size(307, 22);
+            this.menuItemPF.Text = "Proceso de &Fabricación";
+            this.menuItemPF.Click += new System.EventHandler(this.menuItemPF_Click);
             // 
             // menuItemRF
             // 
@@ -219,16 +230,6 @@
             this.menuItemSO.Size = new System.Drawing.Size(307, 22);
             this.menuItemSO.Text = "S&oporte";
             this.menuItemSO.Click += new System.EventHandler(this.menuItemSO_Click);
-            // 
-            // menuItemPF
-            // 
-            this.menuItemPF.Image = global::GyCAP.UI.Principal.Properties.Resources.modulo_procesoFabricacion;
-            this.menuItemPF.Name = "menuItemPF";
-            this.menuItemPF.ShortcutKeyDisplayString = "Ctrl + F";
-            this.menuItemPF.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.menuItemPF.Size = new System.Drawing.Size(307, 22);
-            this.menuItemPF.Text = "Proceso de &Fabricación";
-            this.menuItemPF.Click += new System.EventHandler(this.menuItemPF_Click);
             // 
             // menuEdicion
             // 
