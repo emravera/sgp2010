@@ -41,6 +41,7 @@
             this.menuItemPP = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemRF = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSO = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemPF = new System.Windows.Forms.ToolStripMenuItem();
             this.menuEdicion = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,10 +86,10 @@
             this.btnOperaciones = new System.Windows.Forms.ToolStripButton();
             this.toolPedidos = new System.Windows.Forms.ToolStripButton();
             this.btnControlPlan = new System.Windows.Forms.ToolStripButton();
+            this.btnInventarioABC = new System.Windows.Forms.ToolStripButton();
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.btnInventarioABC = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -124,7 +125,8 @@
             this.menuItemMA,
             this.menuItemPP,
             this.menuItemRF,
-            this.menuItemSO});
+            this.menuItemSO,
+            this.menuItemPF});
             this.menuModulos.ImageTransparentColor = System.Drawing.SystemColors.ActiveBorder;
             this.menuModulos.Name = "menuModulos";
             this.menuModulos.ShortcutKeyDisplayString = "Ctrl + M";
@@ -217,6 +219,16 @@
             this.menuItemSO.Size = new System.Drawing.Size(307, 22);
             this.menuItemSO.Text = "S&oporte";
             this.menuItemSO.Click += new System.EventHandler(this.menuItemSO_Click);
+            // 
+            // menuItemPF
+            // 
+            this.menuItemPF.Image = global::GyCAP.UI.Principal.Properties.Resources.modulo_procesoFabricacion;
+            this.menuItemPF.Name = "menuItemPF";
+            this.menuItemPF.ShortcutKeyDisplayString = "Ctrl + F";
+            this.menuItemPF.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.menuItemPF.Size = new System.Drawing.Size(307, 22);
+            this.menuItemPF.Text = "Proceso de &Fabricación";
+            this.menuItemPF.Click += new System.EventHandler(this.menuItemPF_Click);
             // 
             // menuEdicion
             // 
@@ -634,6 +646,16 @@
             this.btnControlPlan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnControlPlan.Click += new System.EventHandler(this.btnControlPlan_Click);
             // 
+            // btnInventarioABC
+            // 
+            this.btnInventarioABC.Image = ((System.Drawing.Image)(resources.GetObject("btnInventarioABC.Image")));
+            this.btnInventarioABC.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnInventarioABC.Name = "btnInventarioABC";
+            this.btnInventarioABC.Size = new System.Drawing.Size(81, 33);
+            this.btnInventarioABC.Text = "InventarioABC";
+            this.btnInventarioABC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnInventarioABC.Click += new System.EventHandler(this.btnInventarioABC_Click);
+            // 
             // barraEstado
             // 
             this.barraEstado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -649,16 +671,6 @@
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(38, 17);
             this.lblEstado.Text = "Status";
-            // 
-            // btnInventarioABC
-            // 
-            this.btnInventarioABC.Image = ((System.Drawing.Image)(resources.GetObject("btnInventarioABC.Image")));
-            this.btnInventarioABC.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnInventarioABC.Name = "btnInventarioABC";
-            this.btnInventarioABC.Size = new System.Drawing.Size(81, 33);
-            this.btnInventarioABC.Text = "InventarioABC";
-            this.btnInventarioABC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnInventarioABC.Click += new System.EventHandler(this.btnInventarioABC_Click);
             // 
             // frmPrincipal
             // 
@@ -747,6 +759,7 @@
         private System.Windows.Forms.ToolStripButton toolPedidos;
         private System.Windows.Forms.ToolStripButton btnControlPlan;
         private System.Windows.Forms.ToolStripButton btnInventarioABC;
+        private System.Windows.Forms.ToolStripMenuItem menuItemPF;
     }
 }
 

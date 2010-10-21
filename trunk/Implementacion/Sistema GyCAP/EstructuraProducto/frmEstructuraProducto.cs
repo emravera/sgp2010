@@ -14,7 +14,7 @@ namespace GyCAP.UI.EstructuraProducto
         private static frmEstructuraProducto _frmEstructuraProducto = null;
         private SplitterPanel areaTrabajo;
         private Panel activo = null;
-        private Sistema.ControlesUsuarios.AnimadorFormulario animador = new GyCAP.UI.Sistema.ControlesUsuarios.AnimadorFormulario();
+        //private Sistema.ControlesUsuarios.AnimadorFormulario animador = new GyCAP.UI.Sistema.ControlesUsuarios.AnimadorFormulario();
         
         public frmEstructuraProducto()
         {
@@ -26,11 +26,9 @@ namespace GyCAP.UI.EstructuraProducto
             btnColor.Tag = panelColor;
             btnConjunto.Tag = panelConjunto;
             btnDesignacion.Tag = panelDesignacion;
-            btnEstructuraProducto.Tag = panelEstructuraCocina;
-            btnHojaRuta.Tag = panelHojaRuta;
+            btnEstructuraProducto.Tag = panelEstructuraCocina;            
             btnMPPrincipal.Tag = panelMPPrincipal;
-            btnModeloCocina.Tag = panelModeloCocina;
-            btnOperacionFabricacion.Tag = panelOperacionFabricacion;
+            btnModeloCocina.Tag = panelModeloCocina;            
             btnPieza.Tag = panelPieza;
             btnSubconjunto.Tag = panelSubconjunto;
             btnTerminacion.Tag = panelTerminacion;
@@ -40,11 +38,9 @@ namespace GyCAP.UI.EstructuraProducto
             panelColor.Size = size;
             panelConjunto.Size = size;
             panelDesignacion.Size = size;
-            panelEstructuraCocina.Size = size;
-            panelHojaRuta.Size = size;
+            panelEstructuraCocina.Size = size;            
             panelModeloCocina.Size = size;
-            panelMPPrincipal.Size = size;
-            panelOperacionFabricacion.Size = size;
+            panelMPPrincipal.Size = size;            
             panelPieza.Size = size;
             panelSubconjunto.Size = size;
             panelTerminacion.Size = size;
@@ -344,31 +340,7 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
-
-        #region Hoja Ruta
-
-        private void btnNuevoHojaRuta_Click(object sender, EventArgs e)
-        {
-            frmHojaRuta.Instancia.TopLevel = false;
-            frmHojaRuta.Instancia.Parent = areaTrabajo;
-            frmHojaRuta.Instancia.Location = PosicionarFormulario();
-            frmHojaRuta.Instancia.SetEstadoInicial(frmHojaRuta.estadoInicialNuevo);
-            frmHojaRuta.Instancia.Show();
-            frmHojaRuta.Instancia.Focus();
-        }
-
-        private void btnConsultarhojaRuta_Click(object sender, EventArgs e)
-        {
-            frmHojaRuta.Instancia.TopLevel = false;
-            frmHojaRuta.Instancia.Parent = areaTrabajo;
-            frmHojaRuta.Instancia.Location = PosicionarFormulario();
-            frmHojaRuta.Instancia.SetEstadoInicial(frmHojaRuta.estadoInicialConsultar);
-            frmHojaRuta.Instancia.Show();
-            frmHojaRuta.Instancia.Focus();
-        }
-
-        #endregion
-
+        
         #region Materia Prima Principal
 
         private void btnConsultarMPPrincipal_Click(object sender, EventArgs e)
@@ -508,29 +480,6 @@ namespace GyCAP.UI.EstructuraProducto
             frmUnidadMedida.Instancia.SetEstadoInicial(frmUnidadMedida.estadoInicialConsultar);
             frmUnidadMedida.Instancia.Show();
             frmUnidadMedida.Instancia.Focus();
-        }
-
-        #endregion
-
-        #region Operación Fabricación
-
-        private void btnNuevoOperacionFabricacion_Click(object sender, EventArgs e)
-        {
-            frmOperacionesFabricacion.Instancia.TopLevel = false;
-            frmOperacionesFabricacion.Instancia.Parent = areaTrabajo;
-            frmOperacionesFabricacion.Instancia.Location = PosicionarFormulario();
-            frmOperacionesFabricacion.Instancia.btnNuevo.PerformClick();
-            frmOperacionesFabricacion.Instancia.Show();
-            frmOperacionesFabricacion.Instancia.Focus();
-        }
-
-        private void btnConsultarOperacionFabricacion_Click(object sender, EventArgs e)
-        {
-            frmOperacionesFabricacion.Instancia.TopLevel = false;
-            frmOperacionesFabricacion.Instancia.Parent = areaTrabajo;
-            frmOperacionesFabricacion.Instancia.Location = PosicionarFormulario();
-            frmOperacionesFabricacion.Instancia.Show();
-            frmOperacionesFabricacion.Instancia.Focus();
         }
 
         #endregion

@@ -95,6 +95,13 @@ namespace GyCAP.UI.Principal.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap modulo_procesoFabricacion {
+            get {
+                object obj = ResourceManager.GetObject("modulo_procesoFabricacion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap pedido {
             get {
                 object obj = ResourceManager.GetObject("pedido", resourceCulture);
