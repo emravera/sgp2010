@@ -1609,6 +1609,8 @@ namespace GyCAP.Data {
             
             private global::System.Data.DataColumn columnPRECIO_UNIDAD;
             
+            private global::System.Data.DataColumn columnCANTIDAD_INVERSION;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public MATERIAS_PRIMAS_ABCDataTable() {
                 this.TableName = "MATERIAS_PRIMAS_ABC";
@@ -1682,6 +1684,13 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CANTIDAD_INVERSIONColumn {
+                get {
+                    return this.columnCANTIDAD_INVERSION;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1710,7 +1719,7 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MATERIAS_PRIMAS_ABCRow AddMATERIAS_PRIMAS_ABCRow(decimal CODIGO_MATERIA_PRIMA_ABC, decimal CODIGO_MATERIA_PRIMA, decimal CANTIDAD_ANUAL, decimal PORCENTAJE_INVERSION, string CATEGORIA_ABC, decimal PRECIO_UNIDAD) {
+            public MATERIAS_PRIMAS_ABCRow AddMATERIAS_PRIMAS_ABCRow(decimal CODIGO_MATERIA_PRIMA_ABC, decimal CODIGO_MATERIA_PRIMA, decimal CANTIDAD_ANUAL, decimal PORCENTAJE_INVERSION, string CATEGORIA_ABC, decimal PRECIO_UNIDAD, decimal CANTIDAD_INVERSION) {
                 MATERIAS_PRIMAS_ABCRow rowMATERIAS_PRIMAS_ABCRow = ((MATERIAS_PRIMAS_ABCRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         CODIGO_MATERIA_PRIMA_ABC,
@@ -1718,7 +1727,8 @@ namespace GyCAP.Data {
                         CANTIDAD_ANUAL,
                         PORCENTAJE_INVERSION,
                         CATEGORIA_ABC,
-                        PRECIO_UNIDAD};
+                        PRECIO_UNIDAD,
+                        CANTIDAD_INVERSION};
                 rowMATERIAS_PRIMAS_ABCRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMATERIAS_PRIMAS_ABCRow);
                 return rowMATERIAS_PRIMAS_ABCRow;
@@ -1744,6 +1754,7 @@ namespace GyCAP.Data {
                 this.columnPORCENTAJE_INVERSION = base.Columns["PORCENTAJE_INVERSION"];
                 this.columnCATEGORIA_ABC = base.Columns["CATEGORIA_ABC"];
                 this.columnPRECIO_UNIDAD = base.Columns["PRECIO_UNIDAD"];
+                this.columnCANTIDAD_INVERSION = base.Columns["CANTIDAD_INVERSION"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1760,6 +1771,8 @@ namespace GyCAP.Data {
                 base.Columns.Add(this.columnCATEGORIA_ABC);
                 this.columnPRECIO_UNIDAD = new global::System.Data.DataColumn("PRECIO_UNIDAD", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPRECIO_UNIDAD);
+                this.columnCANTIDAD_INVERSION = new global::System.Data.DataColumn("CANTIDAD_INVERSION", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCANTIDAD_INVERSION);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2459,6 +2472,22 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CANTIDAD_INVERSION {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableMATERIAS_PRIMAS_ABC.CANTIDAD_INVERSIONColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CANTIDAD_INVERSION\' de la tabla \'MATERIAS_PRIMAS_ABC\' es " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMATERIAS_PRIMAS_ABC.CANTIDAD_INVERSIONColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsCODIGO_MATERIA_PRIMA_ABCNull() {
                 return this.IsNull(this.tableMATERIAS_PRIMAS_ABC.CODIGO_MATERIA_PRIMA_ABCColumn);
             }
@@ -2516,6 +2545,16 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetPRECIO_UNIDADNull() {
                 this[this.tableMATERIAS_PRIMAS_ABC.PRECIO_UNIDADColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCANTIDAD_INVERSIONNull() {
+                return this.IsNull(this.tableMATERIAS_PRIMAS_ABC.CANTIDAD_INVERSIONColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCANTIDAD_INVERSIONNull() {
+                this[this.tableMATERIAS_PRIMAS_ABC.CANTIDAD_INVERSIONColumn] = global::System.Convert.DBNull;
             }
         }
         

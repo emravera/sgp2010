@@ -38,6 +38,10 @@ namespace GyCAP.BLL
         {
             DAL.MateriaPrimaDAL.ObtenerMP(dtMateriaPrima);
         }
-
+        //Metodo que devuelve el precio de una materia prima
+        public static decimal ObtenerPrecioMP(decimal codigoMP)
+        {
+            return DAL.MateriaPrimaDAL.ObtenerPrecioMP(codigoMP);
+        }
     }
 }

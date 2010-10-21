@@ -29,25 +29,26 @@
         private void InitializeComponent()
         {
             this.gbDatosPrincipales = new System.Windows.Forms.GroupBox();
+            this.cbAñoHistorico = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.rbHistorico = new System.Windows.Forms.RadioButton();
             this.rbNuevo = new System.Windows.Forms.RadioButton();
+            this.cbAñoInventario = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.btnGenerarInventario = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.gbDatosCocinas = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
+            this.btnCalcularABC = new System.Windows.Forms.Button();
             this.dgvModelos = new System.Windows.Forms.DataGridView();
             this.gbCargaPorcentaje = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.numPorcentaje = new System.Windows.Forms.NumericUpDown();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.cbCocinas = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label5 = new System.Windows.Forms.Label();
             this.txtCantAnual = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.gbMateriasPrimas = new System.Windows.Forms.GroupBox();
             this.dgvMP = new System.Windows.Forms.DataGridView();
-            this.cbCocinas = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbAñoHistorico = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbAñoInventario = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.gbDatosPrincipales.SuspendLayout();
             this.gbDatosCocinas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvModelos)).BeginInit();
@@ -67,10 +68,20 @@
             this.gbDatosPrincipales.Controls.Add(this.label3);
             this.gbDatosPrincipales.Location = new System.Drawing.Point(3, 9);
             this.gbDatosPrincipales.Name = "gbDatosPrincipales";
-            this.gbDatosPrincipales.Size = new System.Drawing.Size(718, 53);
+            this.gbDatosPrincipales.Size = new System.Drawing.Size(760, 53);
             this.gbDatosPrincipales.TabIndex = 16;
             this.gbDatosPrincipales.TabStop = false;
             this.gbDatosPrincipales.Text = "Datos Principales";
+            // 
+            // cbAñoHistorico
+            // 
+            this.cbAñoHistorico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAñoHistorico.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbAñoHistorico.FormattingEnabled = true;
+            this.cbAñoHistorico.Location = new System.Drawing.Point(495, 20);
+            this.cbAñoHistorico.Name = "cbAñoHistorico";
+            this.cbAñoHistorico.Size = new System.Drawing.Size(95, 21);
+            this.cbAñoHistorico.TabIndex = 31;
             // 
             // rbHistorico
             // 
@@ -96,14 +107,25 @@
             this.rbNuevo.UseVisualStyleBackColor = true;
             this.rbNuevo.CheckedChanged += new System.EventHandler(this.rbNuevo_CheckedChanged);
             // 
+            // cbAñoInventario
+            // 
+            this.cbAñoInventario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAñoInventario.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbAñoInventario.FormattingEnabled = true;
+            this.cbAñoInventario.Location = new System.Drawing.Point(123, 20);
+            this.cbAñoInventario.Name = "cbAñoInventario";
+            this.cbAñoInventario.Size = new System.Drawing.Size(95, 21);
+            this.cbAñoInventario.TabIndex = 28;
+            // 
             // btnGenerarInventario
             // 
-            this.btnGenerarInventario.Location = new System.Drawing.Point(624, 19);
+            this.btnGenerarInventario.Location = new System.Drawing.Point(670, 19);
             this.btnGenerarInventario.Name = "btnGenerarInventario";
             this.btnGenerarInventario.Size = new System.Drawing.Size(82, 23);
             this.btnGenerarInventario.TabIndex = 4;
             this.btnGenerarInventario.Text = "Generar";
             this.btnGenerarInventario.UseVisualStyleBackColor = true;
+            this.btnGenerarInventario.Click += new System.EventHandler(this.btnGenerarInventario_Click);
             // 
             // label3
             // 
@@ -116,7 +138,8 @@
             // 
             // gbDatosCocinas
             // 
-            this.gbDatosCocinas.Controls.Add(this.button1);
+            this.gbDatosCocinas.Controls.Add(this.btnVolver);
+            this.gbDatosCocinas.Controls.Add(this.btnCalcularABC);
             this.gbDatosCocinas.Controls.Add(this.dgvModelos);
             this.gbDatosCocinas.Controls.Add(this.gbCargaPorcentaje);
             this.gbDatosCocinas.Controls.Add(this.txtCantAnual);
@@ -128,14 +151,25 @@
             this.gbDatosCocinas.TabStop = false;
             this.gbDatosCocinas.Text = "Datos Cocinas a Producir";
             // 
-            // button1
+            // btnVolver
             // 
-            this.button1.Location = new System.Drawing.Point(253, 301);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 23);
-            this.button1.TabIndex = 29;
-            this.button1.Text = "Calcular ABC";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnVolver.Location = new System.Drawing.Point(156, 301);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(91, 23);
+            this.btnVolver.TabIndex = 30;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
+            // btnCalcularABC
+            // 
+            this.btnCalcularABC.Location = new System.Drawing.Point(253, 301);
+            this.btnCalcularABC.Name = "btnCalcularABC";
+            this.btnCalcularABC.Size = new System.Drawing.Size(91, 23);
+            this.btnCalcularABC.TabIndex = 29;
+            this.btnCalcularABC.Text = "Calcular ABC";
+            this.btnCalcularABC.UseVisualStyleBackColor = true;
+            this.btnCalcularABC.Click += new System.EventHandler(this.btnCalcularABC_Click);
             // 
             // dgvModelos
             // 
@@ -150,6 +184,7 @@
             this.dgvModelos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvModelos.Size = new System.Drawing.Size(335, 159);
             this.dgvModelos.TabIndex = 28;
+            this.dgvModelos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvModelos_CellFormatting);
             // 
             // gbCargaPorcentaje
             // 
@@ -190,6 +225,17 @@
             this.btnAgregar.TabIndex = 13;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // cbCocinas
+            // 
+            this.cbCocinas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCocinas.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbCocinas.FormattingEnabled = true;
+            this.cbCocinas.Location = new System.Drawing.Point(113, 18);
+            this.cbCocinas.Name = "cbCocinas";
+            this.cbCocinas.Size = new System.Drawing.Size(219, 21);
+            this.cbCocinas.TabIndex = 1;
             // 
             // label5
             // 
@@ -221,7 +267,7 @@
             this.gbMateriasPrimas.Controls.Add(this.dgvMP);
             this.gbMateriasPrimas.Location = new System.Drawing.Point(359, 68);
             this.gbMateriasPrimas.Name = "gbMateriasPrimas";
-            this.gbMateriasPrimas.Size = new System.Drawing.Size(361, 330);
+            this.gbMateriasPrimas.Size = new System.Drawing.Size(404, 330);
             this.gbMateriasPrimas.TabIndex = 18;
             this.gbMateriasPrimas.TabStop = false;
             this.gbMateriasPrimas.Text = "Materias Primas";
@@ -237,44 +283,14 @@
             this.dgvMP.ReadOnly = true;
             this.dgvMP.RowHeadersVisible = false;
             this.dgvMP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMP.Size = new System.Drawing.Size(337, 294);
+            this.dgvMP.Size = new System.Drawing.Size(383, 294);
             this.dgvMP.TabIndex = 29;
-            // 
-            // cbCocinas
-            // 
-            this.cbCocinas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCocinas.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbCocinas.FormattingEnabled = true;
-            this.cbCocinas.Location = new System.Drawing.Point(113, 18);
-            this.cbCocinas.Name = "cbCocinas";
-            this.cbCocinas.Size = new System.Drawing.Size(219, 21);
-            this.cbCocinas.TabIndex = 1;
-            // 
-            // cbAñoHistorico
-            // 
-            this.cbAñoHistorico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAñoHistorico.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbAñoHistorico.FormattingEnabled = true;
-            this.cbAñoHistorico.Location = new System.Drawing.Point(495, 21);
-            this.cbAñoHistorico.Name = "cbAñoHistorico";
-            this.cbAñoHistorico.Size = new System.Drawing.Size(95, 21);
-            this.cbAñoHistorico.TabIndex = 31;
-            // 
-            // cbAñoInventario
-            // 
-            this.cbAñoInventario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAñoInventario.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbAñoInventario.FormattingEnabled = true;
-            this.cbAñoInventario.Location = new System.Drawing.Point(123, 21);
-            this.cbAñoInventario.Name = "cbAñoInventario";
-            this.cbAñoInventario.Size = new System.Drawing.Size(95, 21);
-            this.cbAñoInventario.TabIndex = 28;
             // 
             // frmInventarioABC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(728, 405);
+            this.ClientSize = new System.Drawing.Size(767, 404);
             this.Controls.Add(this.gbMateriasPrimas);
             this.Controls.Add(this.gbDatosCocinas);
             this.Controls.Add(this.gbDatosPrincipales);
@@ -312,10 +328,11 @@
         private System.Windows.Forms.Button btnAgregar;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbCocinas;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCalcularABC;
         private System.Windows.Forms.DataGridView dgvModelos;
         private System.Windows.Forms.GroupBox gbMateriasPrimas;
         private System.Windows.Forms.DataGridView dgvMP;
+        private System.Windows.Forms.Button btnVolver;
 
     }
 }

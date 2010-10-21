@@ -158,11 +158,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
             //Cargo el combo de búqueda del plan Anual
             dvComboPlanAnual2 = new DataView(dsPlanSemanal.PLANES_ANUALES);
             cbPlanAnual2.SetDatos(dvComboPlanAnual2, "pan_codigo", "pan_anio", "Seleccione", false);
-
-
-
-
-
+            
             //Seteamos la interface
             SetInterface(estadoUI.inicio);
         }
