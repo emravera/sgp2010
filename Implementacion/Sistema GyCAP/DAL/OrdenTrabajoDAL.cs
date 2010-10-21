@@ -101,8 +101,10 @@ namespace GyCAP.DAL
                 movimiento.FechaPrevista = rowMVTO.MVTO_FECHAPREVISTA;
                 movimiento.Origen = new GyCAP.Entidades.UbicacionStock(Convert.ToInt32(rowMVTO.USTCK_ORIGEN));
                 movimiento.Destino = new GyCAP.Entidades.UbicacionStock(Convert.ToInt32(rowMVTO.USTCK_DESTINO));
-                movimiento.CantidadOrigen = rowMVTO.MVTO_CANTIDAD_ORIGEN;
-                movimiento.CantidadDestino = rowMVTO.MVTO_CANTIDAD_DESTINO;
+                movimiento.CantidadOrigenEstimada = rowMVTO.MVTO_CANTIDAD_ORIGEN_ESTIMADA;
+                movimiento.CantidadOrigenReal = 0;
+                movimiento.CantidadDestinoEstimada = rowMVTO.MVTO_CANTIDAD_DESTINO_ESTIMADA;
+                movimiento.CantidadDestinoReal = 0;
                 movimiento.Estado = new GyCAP.Entidades.EstadoMovimientoStock(Convert.ToInt32(rowMVTO.EMVTO_CODIGO));
                 movimiento.OrdenTrabajo = new GyCAP.Entidades.OrdenTrabajo(Convert.ToInt32(rowMVTO.ORDT_NUMERO));
                 MovimientoStockDAL.Insertar(movimiento, transaccion);
@@ -122,7 +124,7 @@ namespace GyCAP.DAL
             DB.executeNonQuery(sql, parametros, transaccion);
         }
         
-        public static void ObtenerOrdenesTrabajo(int numeroOrdenProduccion, DataTable dtOrdenTrabajo)
+        public static void ObtenerOrdenesTrabajo(int numeroOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo, bool obtenerCierresParciales)
         {
             string sql = @"SELECT ordt_numero, ordt_codigo, ordp_numero, eord_codigo, par_codigo, par_tipo, ordt_origen, ordt_cantidadestimada
                          , ordt_cantidadreal, ordt_fechainicioestimada, ordt_fechainicioreal, ordt_fechafinestimada, ordt_fechafinreal
@@ -134,9 +136,80 @@ namespace GyCAP.DAL
 
             try
             {
-                DB.FillDataTable(dtOrdenTrabajo, sql, parametros);
+                DB.FillDataTable(dsOrdenTrabajo.ORDENES_TRABAJO, sql, parametros);
+                foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOT in dsOrdenTrabajo.ORDENES_TRABAJO.Rows)
+                {
+                    if (obtenerCierresParciales) { CierreParcialOrdenTrabajoDAL.ObtenerCierresParcialesOrdenTrabajo(Convert.ToInt32(rowOT.ORDT_NUMERO), dsOrdenTrabajo.CIERRE_ORDEN_TRABAJO); }
+                }
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+        
+        public static void RegistrarCierreParcial(int numeroOrdenTrabajo, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsStock dsStock)
+        {
+            string sql = "UPDATE ORDENES_TRABAJO SET ordt_cantidadreal = ordt_cantidadreal + @p0 WHERE ordt_numero = @p1";
+            Data.dsOrdenTrabajo.CIERRE_ORDEN_TRABAJORow rowCierre = dsOrdenTrabajo.CIERRE_ORDEN_TRABAJO.GetChanges(DataRowState.Added).Rows[0] as Data.dsOrdenTrabajo.CIERRE_ORDEN_TRABAJORow;
+
+            object[] parametros = { rowCierre.CORD_CANTIDAD, numeroOrdenTrabajo };
+
+
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                transaccion = DB.IniciarTransaccion();
+                //Insertamos el cierre parcial
+                Entidades.CierreParcialOrdenTrabajo cierre = new GyCAP.Entidades.CierreParcialOrdenTrabajo();
+                cierre.OrdenTrabajo = new GyCAP.Entidades.OrdenTrabajo(Convert.ToInt32(rowCierre.ORDT_NUMERO));
+                cierre.Empleado = new GyCAP.Entidades.Empleado();
+                cierre.Empleado.Codigo = long.Parse(rowCierre.E_CODIGO.ToString());
+                if (!rowCierre.IsMAQ_CODIGONull()) 
+                {
+                    cierre.Maquina = new GyCAP.Entidades.Maquina();
+                    cierre.Maquina.Codigo = Convert.ToInt32(rowCierre.MAQ_CODIGO); 
+                }
+                cierre.Cantidad = rowCierre.CORD_CANTIDAD;
+                cierre.Fecha = rowCierre.CORD_FECHACIERRE;
+                cierre.Hora = rowCierre.CORD_HORACIERRE;
+                cierre.Observaciones = rowCierre.CORD_OBSERVACIONES;                
+                CierreParcialOrdenTrabajoDAL.Insertar(cierre, transaccion);
+                rowCierre.BeginEdit();
+                rowCierre.CORD_CODIGO = cierre.Codigo;
+                rowCierre.EndEdit();
+                
+                //Actualizamos las cantidades de la OT
+                DB.executeNonQuery(sql, parametros, transaccion);
+                dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_CANTIDADREAL += rowCierre.CORD_CANTIDAD;
+
+                //Obtenemos los movimientos de stock de la orden de trabajo, actualizamos cantidades y las ubicaciones de origen
+                MovimientoStockDAL.ObtenerMovimientosStockOrdenTrabajo(Convert.ToInt32(numeroOrdenTrabajo), dsStock.MOVIMIENTOS_STOCK);
+                decimal cantidadOrigen = 0, ubicacionDestino = 0;
+                foreach (Data.dsStock.MOVIMIENTOS_STOCKRow rowMVTO in (Data.dsStock.MOVIMIENTOS_STOCKRow[])dsStock.MOVIMIENTOS_STOCK.Select("ORDT_NUMERO = " + rowCierre.ORDT_NUMERO))
+                {
+                    cantidadOrigen = (rowMVTO.MVTO_CANTIDAD_ORIGEN_ESTIMADA / rowMVTO.MVTO_CANTIDAD_DESTINO_ESTIMADA) * rowCierre.CORD_CANTIDAD;
+                    MovimientoStockDAL.ActualizarCantidadesParciales(Convert.ToInt32(rowMVTO.MVTO_NUMERO), cantidadOrigen, rowCierre.CORD_CANTIDAD, transaccion);
+                    UbicacionStockDAL.ActualizarCantidadesStock(Convert.ToInt32(rowMVTO.USTCK_ORIGEN), (cantidadOrigen * -1), 0, transaccion);
+                    ubicacionDestino = rowMVTO.USTCK_DESTINO;
+                    rowMVTO.MVTO_CANTIDAD_ORIGEN_REAL += cantidadOrigen;
+                    rowMVTO.MVTO_CANTIDAD_DESTINO_REAL = rowCierre.CORD_CANTIDAD;
+                    dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(rowMVTO.USTCK_ORIGEN).USTCK_CANTIDADREAL -= cantidadOrigen;
+                }
+
+                //Actualizamos la ubicación de stock destino
+                UbicacionStockDAL.ActualizarCantidadesStock(Convert.ToInt32(ubicacionDestino), rowCierre.CORD_CANTIDAD, 0, transaccion);
+                dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(ubicacionDestino).USTCK_CANTIDADREAL += rowCierre.CORD_CANTIDAD;
+
+                transaccion.Commit();
+            }
+            catch (SqlException ex)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
+            }
+            finally
+            {
+                DB.FinalizarTransaccion();
+            }       
         }
     }
 }

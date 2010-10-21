@@ -1060,9 +1060,9 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void dgvEstructuras_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.Value.ToString() != string.Empty)
+            if (!string.IsNullOrEmpty(e.Value.ToString()))
             {
-                string nombre; //tira error despues de guardar - gonzalo
+                string nombre = string.Empty; //tira error despues de guardar - gonzalo
                 switch (dgvEstructuras.Columns[e.ColumnIndex].Name)
                 {
                     case "COC_CODIGO":

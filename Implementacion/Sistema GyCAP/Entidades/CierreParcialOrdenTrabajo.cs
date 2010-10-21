@@ -35,9 +35,9 @@ namespace GyCAP.Entidades
             get { return maquina; }
             set { maquina = value; }
         }
-        private int cantidad;
+        private decimal cantidad;
 
-        public int Cantidad
+        public decimal Cantidad
         {
             get { return cantidad; }
             set { cantidad = value; }

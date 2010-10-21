@@ -282,9 +282,14 @@ namespace GyCAP.BLL
             }            
         }
 
-        public static void ObtenerOrdenesTrabajo(int numeroOrdenProduccion, DataTable dtOrdenTrabajo)
+        public static void ObtenerOrdenesTrabajo(int numeroOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo, bool obtenerCierresParciales)
         {
-            DAL.OrdenTrabajoDAL.ObtenerOrdenesTrabajo(numeroOrdenProduccion, dtOrdenTrabajo);
+            DAL.OrdenTrabajoDAL.ObtenerOrdenesTrabajo(numeroOrdenProduccion, dsOrdenTrabajo, obtenerCierresParciales);
+        }
+
+        public static void RegistrarCierreParcial(int numeroOrdenTrabajo, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsStock dsStock)
+        {
+            DAL.OrdenTrabajoDAL.RegistrarCierreParcial(numeroOrdenTrabajo, dsOrdenTrabajo, dsStock);
         }
     }
 }

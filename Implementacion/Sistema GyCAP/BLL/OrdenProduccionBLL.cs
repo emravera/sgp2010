@@ -42,7 +42,7 @@ namespace GyCAP.BLL
             DAL.OrdenProduccionDAL.ObtenerOrdenesProduccion(codigo, estado, modo, fechaGeneracion, fechaDesde, fechaHasta, dsOrdenTrabajo);
             foreach (Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow row in dsOrdenTrabajo.ORDENES_PRODUCCION)
             {
-                OrdenTrabajoBLL.ObtenerOrdenesTrabajo(Convert.ToInt32(row.ORDP_NUMERO), dsOrdenTrabajo.ORDENES_TRABAJO);
+                OrdenTrabajoBLL.ObtenerOrdenesTrabajo(Convert.ToInt32(row.ORDP_NUMERO), dsOrdenTrabajo, true);
             }
 
             foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow row in dsOrdenTrabajo.ORDENES_TRABAJO)
@@ -58,7 +58,7 @@ namespace GyCAP.BLL
 
         public static void Eliminar(int numeroOrdenProduccion)
         {
-            //revisar que condiciones hacen faltan pra poder elimiarse - gonzalo
+            //revisar que condiciones hacen faltan para poder elimiarse - gonzalo
             BLL.OrdenProduccionBLL.Eliminar(numeroOrdenProduccion);
         }
 
@@ -461,18 +461,20 @@ namespace GyCAP.BLL
                                 }
                                 rowMovimiento.USTCK_DESTINO = rowOTTemp.ORDENES_TRABAJORowParent.USTCK_DESTINO;
                             }
-                            rowMovimiento.MVTO_CANTIDAD_ORIGEN = rowMPxP.MPXP_CANTIDAD * rowOT.ORDT_CANTIDADESTIMADA;
-                            rowMovimiento.MVTO_CANTIDAD_DESTINO = rowOT.ORDT_CANTIDADESTIMADA;
+                            rowMovimiento.MVTO_CANTIDAD_ORIGEN_ESTIMADA = rowMPxP.MPXP_CANTIDAD * rowOT.ORDT_CANTIDADESTIMADA;
+                            rowMovimiento.MVTO_CANTIDAD_DESTINO_ESTIMADA = rowOT.ORDT_CANTIDADESTIMADA;
+                            rowMovimiento.MVTO_CANTIDAD_ORIGEN_REAL = 0;
+                            rowMovimiento.MVTO_CANTIDAD_DESTINO_REAL = 0;
                             rowMovimiento.ORDT_NUMERO = rowOT.ORDT_NUMERO;
                             rowMovimiento.EndEdit();
                             dsStock.MOVIMIENTOS_STOCK.AddMOVIMIENTOS_STOCKRow(rowMovimiento);
 
                             //Actualizamos los datos de la ubicación de stock origen
-                            dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(rowMovimiento.USTCK_ORIGEN).USTCK_CANTIDADVIRTUAL -= rowMovimiento.MVTO_CANTIDAD_ORIGEN;
+                            dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(rowMovimiento.USTCK_ORIGEN).USTCK_CANTIDADVIRTUAL -= rowMovimiento.MVTO_CANTIDAD_ORIGEN_ESTIMADA;
                             if (!rowMovimiento.IsUSTCK_DESTINONull())
                             {
                                 stockDestino = rowMovimiento.USTCK_DESTINO;
-                                cantidadDestino = rowMovimiento.MVTO_CANTIDAD_DESTINO;
+                                cantidadDestino = rowMovimiento.MVTO_CANTIDAD_DESTINO_ESTIMADA;
                             }
                         }
                     }
@@ -488,7 +490,7 @@ namespace GyCAP.BLL
                 if (row.EORD_CODIGO == EstadoGenerado) { row.EORD_CODIGO = EstadoEnEspera; }
             }
             
-            //Ahora mandamos todo a la BD, si la OP es para un pedido actualizar el estado del pedido a EnCurso - gonzalo
+            //Ahora mandamos todo a la BD
             DAL.OrdenProduccionDAL.IniciarOrdenProduccion(numeroOrdenProduccion, dsOrdenTrabajo, dsStock);
         }
     }
