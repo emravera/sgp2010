@@ -68,6 +68,12 @@ namespace Principal
             GyCAP.UI.ProcesoFabricacion.frmProcesoFabricacion.Instancia.MdiParent = this;
             GyCAP.UI.ProcesoFabricacion.frmProcesoFabricacion.Instancia.Show();
         }
+
+        private void menuItemMA_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Mantenimiento.frmMantenimiento.Instancia.MdiParent = this;
+            GyCAP.UI.Mantenimiento.frmMantenimiento.Instancia.Show();
+        }
         
         #endregion
 
@@ -271,8 +277,6 @@ namespace Principal
             GyCAP.UI.GestionStock.frmInventarioABC.Instancia.Show();
         }
 
-        
-        
         
     }
 }
