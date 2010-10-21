@@ -195,6 +195,46 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void btnGuardarCierre_Click(object sender, EventArgs e)
         {
+            string datosOK = string.Empty;
+            if (cboEmpleadoCierre.GetSelectedIndex() == -1) { datosOK = "\n* Empleado"; }
+            if (nudCantidadCierre.Value == 0) { datosOK += "\n* Cantidad"; }
+            if (dtpFechaCierre.EsFechaNull()) { datosOK += "\n* Fecha"; }
+            if (dtpHoraCierre.Value.Hour == 0 && dtpHoraCierre.Value.Minute == 0) { datosOK += "\n* Hora"; }
+            if (datosOK == string.Empty)
+            {
+                try
+                {                    
+                    Data.dsOrdenTrabajo.CIERRE_ORDEN_TRABAJORow rowCierre = dsOrdenTrabajo.CIERRE_ORDEN_TRABAJO.NewCIERRE_ORDEN_TRABAJORow();
+                    rowCierre.BeginEdit();
+                    rowCierre.CORD_CODIGO = -1;
+                    rowCierre.ORDT_NUMERO = Convert.ToInt32(dvOrdenTrabajo[dgvOrdenesTrabajo.SelectedRows[0].Index]["ordt_numero"]);
+                    rowCierre.E_CODIGO = cboEmpleadoCierre.GetSelectedValueInt();
+                    if (cboMaquinaCierre.GetSelectedIndex() == -1) { rowCierre.SetMAQ_CODIGONull(); }
+                    else { rowCierre.MAQ_CODIGO = cboMaquinaCierre.GetSelectedValueInt(); }                    
+                    rowCierre.CORD_CANTIDAD = nudCantidadCierre.Value;                    
+                    rowCierre.CORD_FECHACIERRE = DateTime.Parse(dtpFechaCierre.GetFecha().ToString());                    
+                    rowCierre.CORD_HORACIERRE = Sistema.FuncionesAuxiliares.StringHourToDecimal(dtpHoraCierre.Value.ToShortTimeString());                    
+                    rowCierre.CORD_OBSERVACIONES = txtObservacionesCierre.Text;
+                    rowCierre.EndEdit();
+                    dsOrdenTrabajo.CIERRE_ORDEN_TRABAJO.AddCIERRE_ORDEN_TRABAJORow(rowCierre);
+                    BLL.OrdenTrabajoBLL.RegistrarCierreParcial(Convert.ToInt32(rowCierre.ORDT_NUMERO), dsOrdenTrabajo, dsStock);                    
+                    dsOrdenTrabajo.CIERRE_ORDEN_TRABAJO.AcceptChanges();
+                    dsStock.MOVIMIENTOS_STOCK.AcceptChanges();
+                    dsStock.UBICACIONES_STOCK.AcceptChanges();
+                }
+                catch (Entidades.Excepciones.BaseDeDatosException ex)
+                {
+                    dsOrdenTrabajo.CIERRE_ORDEN_TRABAJO.RejectChanges();
+                    dsStock.UBICACIONES_STOCK.RejectChanges();
+                    dsStock.MOVIMIENTOS_STOCK.RejectChanges();
+                    MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe completar los datos:\n\n" + datosOK, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
             gbAgregarCierreParcial.Enabled = false;
         }
 
@@ -340,6 +380,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvCierresParciales.Columns.Add("CORD_CANTIDAD", "Cantidad");
             dgvCierresParciales.Columns.Add("CORD_FECHACIERRE", "Fecha");
             dgvCierresParciales.Columns.Add("CORD_HORACIERRE", "Hora");
+            dgvCierresParciales.Columns.Add("CORD_OBSERVACIONES", "Observaciones");
             dgvCierresParciales.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvCierresParciales.AutoGenerateColumns = false;
             dgvCierresParciales.Columns["ORDT_NUMERO"].DataPropertyName = "ORDT_NUMERO";
@@ -348,9 +389,11 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvCierresParciales.Columns["CORD_CANTIDAD"].DataPropertyName = "CORD_CANTIDAD";
             dgvCierresParciales.Columns["CORD_FECHACIERRE"].DataPropertyName = "CORD_FECHACIERRE";
             dgvCierresParciales.Columns["CORD_HORACIERRE"].DataPropertyName = "CORD_HORACIERRE";
+            dgvCierresParciales.Columns["CORD_OBSERVACIONES"].DataPropertyName = "CORD_OBSERVACIONES";
             dgvCierresParciales.Columns["CORD_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvCierresParciales.Columns["CORD_FECHACIERRE"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvCierresParciales.Columns["CORD_HORACIERRE"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvCierresParciales.Columns["CORD_OBSERVACIONES"].Resizable = DataGridViewTriState.True;
 
             //Carga de datos iniciales desde la BD
             try
@@ -372,8 +415,9 @@ namespace GyCAP.UI.PlanificacionProduccion
                 MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
-            //Dataviews - ordenar grillas, agregar routing y umed a ordenes - gonzalo
+            //Dataviews
             dvOrdenProduccion = new DataView(dsOrdenTrabajo.ORDENES_PRODUCCION);
+            dvOrdenProduccion.Sort = "ORDP_FECHAINICIOESTIMADA ASC";
             dgvOrdenesProduccion.DataSource = dvOrdenProduccion;
             dvOrdenTrabajo = new DataView(dsOrdenTrabajo.ORDENES_TRABAJO);
             dvOrdenTrabajo.Sort = "ORDT_FECHAINICIOESTIMADA ASC";

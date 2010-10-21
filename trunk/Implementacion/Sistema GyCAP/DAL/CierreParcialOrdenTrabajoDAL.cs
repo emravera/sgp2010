@@ -9,7 +9,7 @@ namespace GyCAP.DAL
 {
     public class CierreParcialOrdenTrabajoDAL
     {
-        public static void Insertar(Entidades.CierreParcialOrdenTrabajo cierreOrdenTrabajo)
+        public static void Insertar(Entidades.CierreParcialOrdenTrabajo cierreOrdenTrabajo, SqlTransaction transaccion)
         {
             string sql = @"INSERT INTO [CIERRE_ORDEN_TRABAJO] 
                         ([ordt_numero]
@@ -21,19 +21,17 @@ namespace GyCAP.DAL
                         ,[cord_observaciones]) 
                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6) SELECT @@Identity";
 
+            object maquina = DBNull.Value;
+            if (cierreOrdenTrabajo.Maquina != null) { maquina = cierreOrdenTrabajo.Maquina.Codigo; }
             object[] parametros = { cierreOrdenTrabajo.OrdenTrabajo.Numero,
                                       cierreOrdenTrabajo.Empleado.Codigo,
-                                      cierreOrdenTrabajo.Maquina.Codigo,
+                                      maquina,
                                       cierreOrdenTrabajo.Cantidad,
                                       cierreOrdenTrabajo.Fecha,
                                       cierreOrdenTrabajo.Hora,
                                       cierreOrdenTrabajo.Observaciones };
 
-            try
-            {
-                cierreOrdenTrabajo.Codigo = Convert.ToInt32(DB.executeScalar(sql, parametros, null));
-            }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            cierreOrdenTrabajo.Codigo = Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion));
         }
 
         public static void Eliminar(int codigoCierre)

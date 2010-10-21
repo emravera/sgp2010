@@ -1929,9 +1929,13 @@ namespace GyCAP.Data {
             
             private global::System.Data.DataColumn columnUSTCK_DESTINO;
             
-            private global::System.Data.DataColumn columnMVTO_CANTIDAD_ORIGEN;
+            private global::System.Data.DataColumn columnMVTO_CANTIDAD_ORIGEN_ESTIMADA;
             
-            private global::System.Data.DataColumn columnMVTO_CANTIDAD_DESTINO;
+            private global::System.Data.DataColumn columnMVTO_CANTIDAD_DESTINO_ESTIMADA;
+            
+            private global::System.Data.DataColumn columnMVTO_CANTIDAD_ORIGEN_REAL;
+            
+            private global::System.Data.DataColumn columnMVTO_CANTIDAD_DESTINO_REAL;
             
             private global::System.Data.DataColumn columnEMVTO_CODIGO;
             
@@ -2024,16 +2028,30 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MVTO_CANTIDAD_ORIGENColumn {
+            public global::System.Data.DataColumn MVTO_CANTIDAD_ORIGEN_ESTIMADAColumn {
                 get {
-                    return this.columnMVTO_CANTIDAD_ORIGEN;
+                    return this.columnMVTO_CANTIDAD_ORIGEN_ESTIMADA;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MVTO_CANTIDAD_DESTINOColumn {
+            public global::System.Data.DataColumn MVTO_CANTIDAD_DESTINO_ESTIMADAColumn {
                 get {
-                    return this.columnMVTO_CANTIDAD_DESTINO;
+                    return this.columnMVTO_CANTIDAD_DESTINO_ESTIMADA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MVTO_CANTIDAD_ORIGEN_REALColumn {
+                get {
+                    return this.columnMVTO_CANTIDAD_ORIGEN_REAL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MVTO_CANTIDAD_DESTINO_REALColumn {
+                get {
+                    return this.columnMVTO_CANTIDAD_DESTINO_REAL;
                 }
             }
             
@@ -2080,7 +2098,7 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MOVIMIENTOS_STOCKRow AddMOVIMIENTOS_STOCKRow(string MVTO_CODIGO, string MVTO_DESCRIPCION, System.DateTime MVTO_FECHAALTA, System.DateTime MVTO_FECHAPREVISTA, System.DateTime MVTO_FECHAREAL, UBICACIONES_STOCKRow parentUBICACIONES_STOCKRowByFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK, UBICACIONES_STOCKRow parentUBICACIONES_STOCKRowByFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1, decimal MVTO_CANTIDAD_ORIGEN, decimal MVTO_CANTIDAD_DESTINO, ESTADO_MOVIMIENTOS_STOCKRow parentESTADO_MOVIMIENTOS_STOCKRowByFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK, decimal ORDT_NUMERO) {
+            public MOVIMIENTOS_STOCKRow AddMOVIMIENTOS_STOCKRow(string MVTO_CODIGO, string MVTO_DESCRIPCION, System.DateTime MVTO_FECHAALTA, System.DateTime MVTO_FECHAPREVISTA, System.DateTime MVTO_FECHAREAL, UBICACIONES_STOCKRow parentUBICACIONES_STOCKRowByFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK, UBICACIONES_STOCKRow parentUBICACIONES_STOCKRowByFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1, decimal MVTO_CANTIDAD_ORIGEN_ESTIMADA, decimal MVTO_CANTIDAD_DESTINO_ESTIMADA, decimal MVTO_CANTIDAD_ORIGEN_REAL, decimal MVTO_CANTIDAD_DESTINO_REAL, ESTADO_MOVIMIENTOS_STOCKRow parentESTADO_MOVIMIENTOS_STOCKRowByFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK, decimal ORDT_NUMERO) {
                 MOVIMIENTOS_STOCKRow rowMOVIMIENTOS_STOCKRow = ((MOVIMIENTOS_STOCKRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2091,8 +2109,10 @@ namespace GyCAP.Data {
                         MVTO_FECHAREAL,
                         null,
                         null,
-                        MVTO_CANTIDAD_ORIGEN,
-                        MVTO_CANTIDAD_DESTINO,
+                        MVTO_CANTIDAD_ORIGEN_ESTIMADA,
+                        MVTO_CANTIDAD_DESTINO_ESTIMADA,
+                        MVTO_CANTIDAD_ORIGEN_REAL,
+                        MVTO_CANTIDAD_DESTINO_REAL,
                         null,
                         ORDT_NUMERO};
                 if ((parentUBICACIONES_STOCKRowByFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK != null)) {
@@ -2102,7 +2122,7 @@ namespace GyCAP.Data {
                     columnValuesArray[7] = parentUBICACIONES_STOCKRowByFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1[0];
                 }
                 if ((parentESTADO_MOVIMIENTOS_STOCKRowByFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK != null)) {
-                    columnValuesArray[10] = parentESTADO_MOVIMIENTOS_STOCKRowByFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK[0];
+                    columnValuesArray[12] = parentESTADO_MOVIMIENTOS_STOCKRowByFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK[0];
                 }
                 rowMOVIMIENTOS_STOCKRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMOVIMIENTOS_STOCKRow);
@@ -2137,8 +2157,10 @@ namespace GyCAP.Data {
                 this.columnMVTO_FECHAREAL = base.Columns["MVTO_FECHAREAL"];
                 this.columnUSTCK_ORIGEN = base.Columns["USTCK_ORIGEN"];
                 this.columnUSTCK_DESTINO = base.Columns["USTCK_DESTINO"];
-                this.columnMVTO_CANTIDAD_ORIGEN = base.Columns["MVTO_CANTIDAD_ORIGEN"];
-                this.columnMVTO_CANTIDAD_DESTINO = base.Columns["MVTO_CANTIDAD_DESTINO"];
+                this.columnMVTO_CANTIDAD_ORIGEN_ESTIMADA = base.Columns["MVTO_CANTIDAD_ORIGEN_ESTIMADA"];
+                this.columnMVTO_CANTIDAD_DESTINO_ESTIMADA = base.Columns["MVTO_CANTIDAD_DESTINO_ESTIMADA"];
+                this.columnMVTO_CANTIDAD_ORIGEN_REAL = base.Columns["MVTO_CANTIDAD_ORIGEN_REAL"];
+                this.columnMVTO_CANTIDAD_DESTINO_REAL = base.Columns["MVTO_CANTIDAD_DESTINO_REAL"];
                 this.columnEMVTO_CODIGO = base.Columns["EMVTO_CODIGO"];
                 this.columnORDT_NUMERO = base.Columns["ORDT_NUMERO"];
             }
@@ -2161,10 +2183,14 @@ namespace GyCAP.Data {
                 base.Columns.Add(this.columnUSTCK_ORIGEN);
                 this.columnUSTCK_DESTINO = new global::System.Data.DataColumn("USTCK_DESTINO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUSTCK_DESTINO);
-                this.columnMVTO_CANTIDAD_ORIGEN = new global::System.Data.DataColumn("MVTO_CANTIDAD_ORIGEN", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMVTO_CANTIDAD_ORIGEN);
-                this.columnMVTO_CANTIDAD_DESTINO = new global::System.Data.DataColumn("MVTO_CANTIDAD_DESTINO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMVTO_CANTIDAD_DESTINO);
+                this.columnMVTO_CANTIDAD_ORIGEN_ESTIMADA = new global::System.Data.DataColumn("MVTO_CANTIDAD_ORIGEN_ESTIMADA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMVTO_CANTIDAD_ORIGEN_ESTIMADA);
+                this.columnMVTO_CANTIDAD_DESTINO_ESTIMADA = new global::System.Data.DataColumn("MVTO_CANTIDAD_DESTINO_ESTIMADA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMVTO_CANTIDAD_DESTINO_ESTIMADA);
+                this.columnMVTO_CANTIDAD_ORIGEN_REAL = new global::System.Data.DataColumn("MVTO_CANTIDAD_ORIGEN_REAL", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMVTO_CANTIDAD_ORIGEN_REAL);
+                this.columnMVTO_CANTIDAD_DESTINO_REAL = new global::System.Data.DataColumn("MVTO_CANTIDAD_DESTINO_REAL", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMVTO_CANTIDAD_DESTINO_REAL);
                 this.columnEMVTO_CODIGO = new global::System.Data.DataColumn("EMVTO_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnEMVTO_CODIGO);
                 this.columnORDT_NUMERO = new global::System.Data.DataColumn("ORDT_NUMERO", typeof(decimal), null, global::System.Data.MappingType.Element);
@@ -2179,8 +2205,10 @@ namespace GyCAP.Data {
                 this.columnMVTO_CODIGO.MaxLength = 80;
                 this.columnMVTO_DESCRIPCION.MaxLength = 200;
                 this.columnMVTO_FECHAALTA.AllowDBNull = false;
-                this.columnMVTO_CANTIDAD_ORIGEN.AllowDBNull = false;
-                this.columnMVTO_CANTIDAD_DESTINO.AllowDBNull = false;
+                this.columnMVTO_CANTIDAD_ORIGEN_ESTIMADA.AllowDBNull = false;
+                this.columnMVTO_CANTIDAD_DESTINO_ESTIMADA.AllowDBNull = false;
+                this.columnMVTO_CANTIDAD_ORIGEN_REAL.AllowDBNull = false;
+                this.columnMVTO_CANTIDAD_DESTINO_REAL.AllowDBNull = false;
                 this.columnEMVTO_CODIGO.AllowDBNull = false;
             }
             
@@ -3036,22 +3064,42 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal MVTO_CANTIDAD_ORIGEN {
+            public decimal MVTO_CANTIDAD_ORIGEN_ESTIMADA {
                 get {
-                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_ORIGENColumn]));
+                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_ORIGEN_ESTIMADAColumn]));
                 }
                 set {
-                    this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_ORIGENColumn] = value;
+                    this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_ORIGEN_ESTIMADAColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal MVTO_CANTIDAD_DESTINO {
+            public decimal MVTO_CANTIDAD_DESTINO_ESTIMADA {
                 get {
-                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_DESTINOColumn]));
+                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_DESTINO_ESTIMADAColumn]));
                 }
                 set {
-                    this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_DESTINOColumn] = value;
+                    this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_DESTINO_ESTIMADAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal MVTO_CANTIDAD_ORIGEN_REAL {
+                get {
+                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_ORIGEN_REALColumn]));
+                }
+                set {
+                    this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_ORIGEN_REALColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal MVTO_CANTIDAD_DESTINO_REAL {
+                get {
+                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_DESTINO_REALColumn]));
+                }
+                set {
+                    this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_DESTINO_REALColumn] = value;
                 }
             }
             
@@ -5410,14 +5458,16 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
             tableMapping.ColumnMappings.Add("MVTO_FECHAREAL", "MVTO_FECHAREAL");
             tableMapping.ColumnMappings.Add("USTCK_ORIGEN", "USTCK_ORIGEN");
             tableMapping.ColumnMappings.Add("USTCK_DESTINO", "USTCK_DESTINO");
-            tableMapping.ColumnMappings.Add("MVTO_CANTIDAD_ORIGEN", "MVTO_CANTIDAD_ORIGEN");
-            tableMapping.ColumnMappings.Add("MVTO_CANTIDAD_DESTINO", "MVTO_CANTIDAD_DESTINO");
+            tableMapping.ColumnMappings.Add("MVTO_CANTIDAD_ORIGEN_ESTIMADA", "MVTO_CANTIDAD_ORIGEN_ESTIMADA");
+            tableMapping.ColumnMappings.Add("MVTO_CANTIDAD_DESTINO_ESTIMADA", "MVTO_CANTIDAD_DESTINO_ESTIMADA");
+            tableMapping.ColumnMappings.Add("MVTO_CANTIDAD_ORIGEN_REAL", "MVTO_CANTIDAD_ORIGEN_REAL");
+            tableMapping.ColumnMappings.Add("MVTO_CANTIDAD_DESTINO_REAL", "MVTO_CANTIDAD_DESTINO_REAL");
             tableMapping.ColumnMappings.Add("EMVTO_CODIGO", "EMVTO_CODIGO");
             tableMapping.ColumnMappings.Add("ORDT_NUMERO", "ORDT_NUMERO");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[MOVIMIENTOS_STOCK] WHERE (([MVTO_NUMERO] = @Original_MVTO_NUMERO) AND ((@IsNull_MVTO_CODIGO = 1 AND [MVTO_CODIGO] IS NULL) OR ([MVTO_CODIGO] = @Original_MVTO_CODIGO)) AND ((@IsNull_MVTO_DESCRIPCION = 1 AND [MVTO_DESCRIPCION] IS NULL) OR ([MVTO_DESCRIPCION] = @Original_MVTO_DESCRIPCION)) AND ([MVTO_FECHAALTA] = @Original_MVTO_FECHAALTA) AND ((@IsNull_MVTO_FECHAPREVISTA = 1 AND [MVTO_FECHAPREVISTA] IS NULL) OR ([MVTO_FECHAPREVISTA] = @Original_MVTO_FECHAPREVISTA)) AND ((@IsNull_MVTO_FECHAREAL = 1 AND [MVTO_FECHAREAL] IS NULL) OR ([MVTO_FECHAREAL] = @Original_MVTO_FECHAREAL)) AND ((@IsNull_USTCK_ORIGEN = 1 AND [USTCK_ORIGEN] IS NULL) OR ([USTCK_ORIGEN] = @Original_USTCK_ORIGEN)) AND ((@IsNull_USTCK_DESTINO = 1 AND [USTCK_DESTINO] IS NULL) OR ([USTCK_DESTINO] = @Original_USTCK_DESTINO)) AND ([MVTO_CANTIDAD_ORIGEN] = @Original_MVTO_CANTIDAD_ORIGEN) AND ([MVTO_CANTIDAD_DESTINO] = @Original_MVTO_CANTIDAD_DESTINO) AND ([EMVTO_CODIGO] = @Original_EMVTO_CODIGO) AND ((@IsNull_ORDT_NUMERO = 1 AND [ORDT_NUMERO] IS NULL) OR ([ORDT_NUMERO] = @Original_ORDT_NUMERO)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[MOVIMIENTOS_STOCK] WHERE (([MVTO_NUMERO] = @Original_MVTO_NUMERO) AND ((@IsNull_MVTO_CODIGO = 1 AND [MVTO_CODIGO] IS NULL) OR ([MVTO_CODIGO] = @Original_MVTO_CODIGO)) AND ((@IsNull_MVTO_DESCRIPCION = 1 AND [MVTO_DESCRIPCION] IS NULL) OR ([MVTO_DESCRIPCION] = @Original_MVTO_DESCRIPCION)) AND ([MVTO_FECHAALTA] = @Original_MVTO_FECHAALTA) AND ((@IsNull_MVTO_FECHAPREVISTA = 1 AND [MVTO_FECHAPREVISTA] IS NULL) OR ([MVTO_FECHAPREVISTA] = @Original_MVTO_FECHAPREVISTA)) AND ((@IsNull_MVTO_FECHAREAL = 1 AND [MVTO_FECHAREAL] IS NULL) OR ([MVTO_FECHAREAL] = @Original_MVTO_FECHAREAL)) AND ((@IsNull_USTCK_ORIGEN = 1 AND [USTCK_ORIGEN] IS NULL) OR ([USTCK_ORIGEN] = @Original_USTCK_ORIGEN)) AND ((@IsNull_USTCK_DESTINO = 1 AND [USTCK_DESTINO] IS NULL) OR ([USTCK_DESTINO] = @Original_USTCK_DESTINO)) AND ([MVTO_CANTIDAD_ORIGEN_ESTIMADA] = @Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA) AND ([MVTO_CANTIDAD_DESTINO_ESTIMADA] = @Original_MVTO_CANTIDAD_DESTINO_ESTIMADA) AND ([MVTO_CANTIDAD_ORIGEN_REAL] = @Original_MVTO_CANTIDAD_ORIGEN_REAL) AND ([MVTO_CANTIDAD_DESTINO_REAL] = @Original_MVTO_CANTIDAD_DESTINO_REAL) AND ([EMVTO_CODIGO] = @Original_EMVTO_CODIGO) AND ((@IsNull_ORDT_NUMERO = 1 AND [ORDT_NUMERO] IS NULL) OR ([ORDT_NUMERO] = @Original_ORDT_NUMERO)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MVTO_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MVTO_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -5433,15 +5483,17 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_ORIGEN", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_ORIGEN", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_DESTINO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_DESTINO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_DESTINO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_DESTINO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_ORIGEN", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_DESTINO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EMVTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EMVTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDT_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDT_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[MOVIMIENTOS_STOCK] ([MVTO_CODIGO], [MVTO_DESCRIPCION], [MVTO_FECHAALTA], [MVTO_FECHAPREVISTA], [MVTO_FECHAREAL], [USTCK_ORIGEN], [USTCK_DESTINO], [MVTO_CANTIDAD_ORIGEN], [MVTO_CANTIDAD_DESTINO], [EMVTO_CODIGO], [ORDT_NUMERO]) VALUES (@MVTO_CODIGO, @MVTO_DESCRIPCION, @MVTO_FECHAALTA, @MVTO_FECHAPREVISTA, @MVTO_FECHAREAL, @USTCK_ORIGEN, @USTCK_DESTINO, @MVTO_CANTIDAD_ORIGEN, @MVTO_CANTIDAD_DESTINO, @EMVTO_CODIGO, @ORDT_NUMERO);
-SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPREVISTA, MVTO_FECHAREAL, USTCK_ORIGEN, USTCK_DESTINO, MVTO_CANTIDAD_ORIGEN, MVTO_CANTIDAD_DESTINO, EMVTO_CODIGO, ORDT_NUMERO FROM MOVIMIENTOS_STOCK WHERE (MVTO_NUMERO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[MOVIMIENTOS_STOCK] ([MVTO_CODIGO], [MVTO_DESCRIPCION], [MVTO_FECHAALTA], [MVTO_FECHAPREVISTA], [MVTO_FECHAREAL], [USTCK_ORIGEN], [USTCK_DESTINO], [MVTO_CANTIDAD_ORIGEN_ESTIMADA], [MVTO_CANTIDAD_DESTINO_ESTIMADA], [MVTO_CANTIDAD_ORIGEN_REAL], [MVTO_CANTIDAD_DESTINO_REAL], [EMVTO_CODIGO], [ORDT_NUMERO]) VALUES (@MVTO_CODIGO, @MVTO_DESCRIPCION, @MVTO_FECHAALTA, @MVTO_FECHAPREVISTA, @MVTO_FECHAREAL, @USTCK_ORIGEN, @USTCK_DESTINO, @MVTO_CANTIDAD_ORIGEN_ESTIMADA, @MVTO_CANTIDAD_DESTINO_ESTIMADA, @MVTO_CANTIDAD_ORIGEN_REAL, @MVTO_CANTIDAD_DESTINO_REAL, @EMVTO_CODIGO, @ORDT_NUMERO);
+SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPREVISTA, MVTO_FECHAREAL, USTCK_ORIGEN, USTCK_DESTINO, MVTO_CANTIDAD_ORIGEN_ESTIMADA, MVTO_CANTIDAD_DESTINO_ESTIMADA, MVTO_CANTIDAD_ORIGEN_REAL, MVTO_CANTIDAD_DESTINO_REAL, EMVTO_CODIGO, ORDT_NUMERO FROM MOVIMIENTOS_STOCK WHERE (MVTO_NUMERO = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -5450,8 +5502,10 @@ SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPRE
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_FECHAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_ORIGEN", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_ORIGEN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_DESTINO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_DESTINO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_ORIGEN", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_DESTINO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EMVTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EMVTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDT_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
@@ -5459,25 +5513,31 @@ SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPRE
             this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[MOVIMIENTOS_STOCK] SET [MVTO_CODIGO] = @MVTO_CODIGO, [MVTO_DESCRIPC" +
                 "ION] = @MVTO_DESCRIPCION, [MVTO_FECHAALTA] = @MVTO_FECHAALTA, [MVTO_FECHAPREVIST" +
                 "A] = @MVTO_FECHAPREVISTA, [MVTO_FECHAREAL] = @MVTO_FECHAREAL, [USTCK_ORIGEN] = @" +
-                "USTCK_ORIGEN, [USTCK_DESTINO] = @USTCK_DESTINO, [MVTO_CANTIDAD_ORIGEN] = @MVTO_C" +
-                "ANTIDAD_ORIGEN, [MVTO_CANTIDAD_DESTINO] = @MVTO_CANTIDAD_DESTINO, [EMVTO_CODIGO]" +
-                " = @EMVTO_CODIGO, [ORDT_NUMERO] = @ORDT_NUMERO WHERE (([MVTO_NUMERO] = @Original" +
-                "_MVTO_NUMERO) AND ((@IsNull_MVTO_CODIGO = 1 AND [MVTO_CODIGO] IS NULL) OR ([MVTO" +
-                "_CODIGO] = @Original_MVTO_CODIGO)) AND ((@IsNull_MVTO_DESCRIPCION = 1 AND [MVTO_" +
-                "DESCRIPCION] IS NULL) OR ([MVTO_DESCRIPCION] = @Original_MVTO_DESCRIPCION)) AND " +
-                "([MVTO_FECHAALTA] = @Original_MVTO_FECHAALTA) AND ((@IsNull_MVTO_FECHAPREVISTA =" +
-                " 1 AND [MVTO_FECHAPREVISTA] IS NULL) OR ([MVTO_FECHAPREVISTA] = @Original_MVTO_F" +
-                "ECHAPREVISTA)) AND ((@IsNull_MVTO_FECHAREAL = 1 AND [MVTO_FECHAREAL] IS NULL) OR" +
-                " ([MVTO_FECHAREAL] = @Original_MVTO_FECHAREAL)) AND ((@IsNull_USTCK_ORIGEN = 1 A" +
-                "ND [USTCK_ORIGEN] IS NULL) OR ([USTCK_ORIGEN] = @Original_USTCK_ORIGEN)) AND ((@" +
-                "IsNull_USTCK_DESTINO = 1 AND [USTCK_DESTINO] IS NULL) OR ([USTCK_DESTINO] = @Ori" +
-                "ginal_USTCK_DESTINO)) AND ([MVTO_CANTIDAD_ORIGEN] = @Original_MVTO_CANTIDAD_ORIG" +
-                "EN) AND ([MVTO_CANTIDAD_DESTINO] = @Original_MVTO_CANTIDAD_DESTINO) AND ([EMVTO_" +
-                "CODIGO] = @Original_EMVTO_CODIGO) AND ((@IsNull_ORDT_NUMERO = 1 AND [ORDT_NUMERO" +
-                "] IS NULL) OR ([ORDT_NUMERO] = @Original_ORDT_NUMERO)));\r\nSELECT MVTO_NUMERO, MV" +
-                "TO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPREVISTA, MVTO_FECHAREAL," +
-                " USTCK_ORIGEN, USTCK_DESTINO, MVTO_CANTIDAD_ORIGEN, MVTO_CANTIDAD_DESTINO, EMVTO" +
-                "_CODIGO, ORDT_NUMERO FROM MOVIMIENTOS_STOCK WHERE (MVTO_NUMERO = @MVTO_NUMERO)";
+                "USTCK_ORIGEN, [USTCK_DESTINO] = @USTCK_DESTINO, [MVTO_CANTIDAD_ORIGEN_ESTIMADA] " +
+                "= @MVTO_CANTIDAD_ORIGEN_ESTIMADA, [MVTO_CANTIDAD_DESTINO_ESTIMADA] = @MVTO_CANTI" +
+                "DAD_DESTINO_ESTIMADA, [MVTO_CANTIDAD_ORIGEN_REAL] = @MVTO_CANTIDAD_ORIGEN_REAL, " +
+                "[MVTO_CANTIDAD_DESTINO_REAL] = @MVTO_CANTIDAD_DESTINO_REAL, [EMVTO_CODIGO] = @EM" +
+                "VTO_CODIGO, [ORDT_NUMERO] = @ORDT_NUMERO WHERE (([MVTO_NUMERO] = @Original_MVTO_" +
+                "NUMERO) AND ((@IsNull_MVTO_CODIGO = 1 AND [MVTO_CODIGO] IS NULL) OR ([MVTO_CODIG" +
+                "O] = @Original_MVTO_CODIGO)) AND ((@IsNull_MVTO_DESCRIPCION = 1 AND [MVTO_DESCRI" +
+                "PCION] IS NULL) OR ([MVTO_DESCRIPCION] = @Original_MVTO_DESCRIPCION)) AND ([MVTO" +
+                "_FECHAALTA] = @Original_MVTO_FECHAALTA) AND ((@IsNull_MVTO_FECHAPREVISTA = 1 AND" +
+                " [MVTO_FECHAPREVISTA] IS NULL) OR ([MVTO_FECHAPREVISTA] = @Original_MVTO_FECHAPR" +
+                "EVISTA)) AND ((@IsNull_MVTO_FECHAREAL = 1 AND [MVTO_FECHAREAL] IS NULL) OR ([MVT" +
+                "O_FECHAREAL] = @Original_MVTO_FECHAREAL)) AND ((@IsNull_USTCK_ORIGEN = 1 AND [US" +
+                "TCK_ORIGEN] IS NULL) OR ([USTCK_ORIGEN] = @Original_USTCK_ORIGEN)) AND ((@IsNull" +
+                "_USTCK_DESTINO = 1 AND [USTCK_DESTINO] IS NULL) OR ([USTCK_DESTINO] = @Original_" +
+                "USTCK_DESTINO)) AND ([MVTO_CANTIDAD_ORIGEN_ESTIMADA] = @Original_MVTO_CANTIDAD_O" +
+                "RIGEN_ESTIMADA) AND ([MVTO_CANTIDAD_DESTINO_ESTIMADA] = @Original_MVTO_CANTIDAD_" +
+                "DESTINO_ESTIMADA) AND ([MVTO_CANTIDAD_ORIGEN_REAL] = @Original_MVTO_CANTIDAD_ORI" +
+                "GEN_REAL) AND ([MVTO_CANTIDAD_DESTINO_REAL] = @Original_MVTO_CANTIDAD_DESTINO_RE" +
+                "AL) AND ([EMVTO_CODIGO] = @Original_EMVTO_CODIGO) AND ((@IsNull_ORDT_NUMERO = 1 " +
+                "AND [ORDT_NUMERO] IS NULL) OR ([ORDT_NUMERO] = @Original_ORDT_NUMERO)));\r\nSELECT" +
+                " MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPREVISTA," +
+                " MVTO_FECHAREAL, USTCK_ORIGEN, USTCK_DESTINO, MVTO_CANTIDAD_ORIGEN_ESTIMADA, MVT" +
+                "O_CANTIDAD_DESTINO_ESTIMADA, MVTO_CANTIDAD_ORIGEN_REAL, MVTO_CANTIDAD_DESTINO_RE" +
+                "AL, EMVTO_CODIGO, ORDT_NUMERO FROM MOVIMIENTOS_STOCK WHERE (MVTO_NUMERO = @MVTO_" +
+                "NUMERO)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -5486,8 +5546,10 @@ SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPRE
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_FECHAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_ORIGEN", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_ORIGEN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_DESTINO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_DESTINO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_ORIGEN", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_DESTINO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EMVTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EMVTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDT_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MVTO_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -5504,8 +5566,10 @@ SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPRE
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_ORIGEN", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_ORIGEN", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_DESTINO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_DESTINO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_DESTINO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_DESTINO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_ORIGEN", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_DESTINO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EMVTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EMVTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDT_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDT_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -5523,9 +5587,7 @@ SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPRE
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPREV" +
-                "ISTA, MVTO_FECHAREAL, USTCK_ORIGEN, USTCK_DESTINO, MVTO_CANTIDAD_ORIGEN, MVTO_CA" +
-                "NTIDAD_DESTINO, EMVTO_CODIGO, ORDT_NUMERO FROM dbo.MOVIMIENTOS_STOCK";
+            this._commandCollection[0].CommandText = @"SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPREVISTA, MVTO_FECHAREAL, USTCK_ORIGEN, USTCK_DESTINO, MVTO_CANTIDAD_ORIGEN_ESTIMADA, MVTO_CANTIDAD_DESTINO_ESTIMADA, MVTO_CANTIDAD_ORIGEN_REAL, MVTO_CANTIDAD_DESTINO_REAL, EMVTO_CODIGO, ORDT_NUMERO FROM dbo.MOVIMIENTOS_STOCK";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -5579,7 +5641,7 @@ SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPRE
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_MVTO_NUMERO, string Original_MVTO_CODIGO, string Original_MVTO_DESCRIPCION, System.DateTime Original_MVTO_FECHAALTA, global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAPREVISTA, global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAREAL, global::System.Nullable<decimal> Original_USTCK_ORIGEN, global::System.Nullable<decimal> Original_USTCK_DESTINO, decimal Original_MVTO_CANTIDAD_ORIGEN, decimal Original_MVTO_CANTIDAD_DESTINO, decimal Original_EMVTO_CODIGO, global::System.Nullable<decimal> Original_ORDT_NUMERO) {
+        public virtual int Delete(decimal Original_MVTO_NUMERO, string Original_MVTO_CODIGO, string Original_MVTO_DESCRIPCION, System.DateTime Original_MVTO_FECHAALTA, global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAPREVISTA, global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAREAL, global::System.Nullable<decimal> Original_USTCK_ORIGEN, global::System.Nullable<decimal> Original_USTCK_DESTINO, decimal Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA, decimal Original_MVTO_CANTIDAD_DESTINO_ESTIMADA, decimal Original_MVTO_CANTIDAD_ORIGEN_REAL, decimal Original_MVTO_CANTIDAD_DESTINO_REAL, decimal Original_EMVTO_CODIGO, global::System.Nullable<decimal> Original_ORDT_NUMERO) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_MVTO_NUMERO));
             if ((Original_MVTO_CODIGO == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
@@ -5630,16 +5692,18 @@ SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPRE
                 this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
-            this.Adapter.DeleteCommand.Parameters[14].Value = ((decimal)(Original_MVTO_CANTIDAD_ORIGEN));
-            this.Adapter.DeleteCommand.Parameters[15].Value = ((decimal)(Original_MVTO_CANTIDAD_DESTINO));
-            this.Adapter.DeleteCommand.Parameters[16].Value = ((decimal)(Original_EMVTO_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[14].Value = ((decimal)(Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA));
+            this.Adapter.DeleteCommand.Parameters[15].Value = ((decimal)(Original_MVTO_CANTIDAD_DESTINO_ESTIMADA));
+            this.Adapter.DeleteCommand.Parameters[16].Value = ((decimal)(Original_MVTO_CANTIDAD_ORIGEN_REAL));
+            this.Adapter.DeleteCommand.Parameters[17].Value = ((decimal)(Original_MVTO_CANTIDAD_DESTINO_REAL));
+            this.Adapter.DeleteCommand.Parameters[18].Value = ((decimal)(Original_EMVTO_CODIGO));
             if ((Original_ORDT_NUMERO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[18].Value = ((decimal)(Original_ORDT_NUMERO.Value));
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[20].Value = ((decimal)(Original_ORDT_NUMERO.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -5660,7 +5724,7 @@ SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPRE
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string MVTO_CODIGO, string MVTO_DESCRIPCION, System.DateTime MVTO_FECHAALTA, global::System.Nullable<global::System.DateTime> MVTO_FECHAPREVISTA, global::System.Nullable<global::System.DateTime> MVTO_FECHAREAL, global::System.Nullable<decimal> USTCK_ORIGEN, global::System.Nullable<decimal> USTCK_DESTINO, decimal MVTO_CANTIDAD_ORIGEN, decimal MVTO_CANTIDAD_DESTINO, decimal EMVTO_CODIGO, global::System.Nullable<decimal> ORDT_NUMERO) {
+        public virtual int Insert(string MVTO_CODIGO, string MVTO_DESCRIPCION, System.DateTime MVTO_FECHAALTA, global::System.Nullable<global::System.DateTime> MVTO_FECHAPREVISTA, global::System.Nullable<global::System.DateTime> MVTO_FECHAREAL, global::System.Nullable<decimal> USTCK_ORIGEN, global::System.Nullable<decimal> USTCK_DESTINO, decimal MVTO_CANTIDAD_ORIGEN_ESTIMADA, decimal MVTO_CANTIDAD_DESTINO_ESTIMADA, decimal MVTO_CANTIDAD_ORIGEN_REAL, decimal MVTO_CANTIDAD_DESTINO_REAL, decimal EMVTO_CODIGO, global::System.Nullable<decimal> ORDT_NUMERO) {
             if ((MVTO_CODIGO == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -5698,14 +5762,16 @@ SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPRE
             else {
                 this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            this.Adapter.InsertCommand.Parameters[7].Value = ((decimal)(MVTO_CANTIDAD_ORIGEN));
-            this.Adapter.InsertCommand.Parameters[8].Value = ((decimal)(MVTO_CANTIDAD_DESTINO));
-            this.Adapter.InsertCommand.Parameters[9].Value = ((decimal)(EMVTO_CODIGO));
+            this.Adapter.InsertCommand.Parameters[7].Value = ((decimal)(MVTO_CANTIDAD_ORIGEN_ESTIMADA));
+            this.Adapter.InsertCommand.Parameters[8].Value = ((decimal)(MVTO_CANTIDAD_DESTINO_ESTIMADA));
+            this.Adapter.InsertCommand.Parameters[9].Value = ((decimal)(MVTO_CANTIDAD_ORIGEN_REAL));
+            this.Adapter.InsertCommand.Parameters[10].Value = ((decimal)(MVTO_CANTIDAD_DESTINO_REAL));
+            this.Adapter.InsertCommand.Parameters[11].Value = ((decimal)(EMVTO_CODIGO));
             if ((ORDT_NUMERO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[10].Value = ((decimal)(ORDT_NUMERO.Value));
+                this.Adapter.InsertCommand.Parameters[12].Value = ((decimal)(ORDT_NUMERO.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -5734,8 +5800,10 @@ SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPRE
                     global::System.Nullable<global::System.DateTime> MVTO_FECHAREAL, 
                     global::System.Nullable<decimal> USTCK_ORIGEN, 
                     global::System.Nullable<decimal> USTCK_DESTINO, 
-                    decimal MVTO_CANTIDAD_ORIGEN, 
-                    decimal MVTO_CANTIDAD_DESTINO, 
+                    decimal MVTO_CANTIDAD_ORIGEN_ESTIMADA, 
+                    decimal MVTO_CANTIDAD_DESTINO_ESTIMADA, 
+                    decimal MVTO_CANTIDAD_ORIGEN_REAL, 
+                    decimal MVTO_CANTIDAD_DESTINO_REAL, 
                     decimal EMVTO_CODIGO, 
                     global::System.Nullable<decimal> ORDT_NUMERO, 
                     decimal Original_MVTO_NUMERO, 
@@ -5746,8 +5814,10 @@ SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPRE
                     global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAREAL, 
                     global::System.Nullable<decimal> Original_USTCK_ORIGEN, 
                     global::System.Nullable<decimal> Original_USTCK_DESTINO, 
-                    decimal Original_MVTO_CANTIDAD_ORIGEN, 
-                    decimal Original_MVTO_CANTIDAD_DESTINO, 
+                    decimal Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA, 
+                    decimal Original_MVTO_CANTIDAD_DESTINO_ESTIMADA, 
+                    decimal Original_MVTO_CANTIDAD_ORIGEN_REAL, 
+                    decimal Original_MVTO_CANTIDAD_DESTINO_REAL, 
                     decimal Original_EMVTO_CODIGO, 
                     global::System.Nullable<decimal> Original_ORDT_NUMERO, 
                     decimal MVTO_NUMERO) {
@@ -5788,77 +5858,81 @@ SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPRE
             else {
                 this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(MVTO_CANTIDAD_ORIGEN));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(MVTO_CANTIDAD_DESTINO));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(EMVTO_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(MVTO_CANTIDAD_ORIGEN_ESTIMADA));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(MVTO_CANTIDAD_DESTINO_ESTIMADA));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(MVTO_CANTIDAD_ORIGEN_REAL));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(MVTO_CANTIDAD_DESTINO_REAL));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(EMVTO_CODIGO));
             if ((ORDT_NUMERO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(ORDT_NUMERO.Value));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(ORDT_NUMERO.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_MVTO_NUMERO));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_MVTO_NUMERO));
             if ((Original_MVTO_CODIGO == null)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_MVTO_CODIGO));
-            }
-            if ((Original_MVTO_DESCRIPCION == null)) {
                 this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_MVTO_DESCRIPCION));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_MVTO_CODIGO));
             }
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((System.DateTime)(Original_MVTO_FECHAALTA));
-            if ((Original_MVTO_FECHAPREVISTA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((System.DateTime)(Original_MVTO_FECHAPREVISTA.Value));
+            if ((Original_MVTO_DESCRIPCION == null)) {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_MVTO_DESCRIPCION));
             }
-            if ((Original_MVTO_FECHAREAL.HasValue == true)) {
+            this.Adapter.UpdateCommand.Parameters[18].Value = ((System.DateTime)(Original_MVTO_FECHAALTA));
+            if ((Original_MVTO_FECHAPREVISTA.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((System.DateTime)(Original_MVTO_FECHAREAL.Value));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((System.DateTime)(Original_MVTO_FECHAPREVISTA.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
-            if ((Original_USTCK_ORIGEN.HasValue == true)) {
+            if ((Original_MVTO_FECHAREAL.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((decimal)(Original_USTCK_ORIGEN.Value));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((System.DateTime)(Original_MVTO_FECHAREAL.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
             }
-            if ((Original_USTCK_DESTINO.HasValue == true)) {
+            if ((Original_USTCK_ORIGEN.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((decimal)(Original_USTCK_DESTINO.Value));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((decimal)(Original_USTCK_ORIGEN.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[25].Value = ((decimal)(Original_MVTO_CANTIDAD_ORIGEN));
-            this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(Original_MVTO_CANTIDAD_DESTINO));
-            this.Adapter.UpdateCommand.Parameters[27].Value = ((decimal)(Original_EMVTO_CODIGO));
-            if ((Original_ORDT_NUMERO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((decimal)(Original_ORDT_NUMERO.Value));
+            if ((Original_USTCK_DESTINO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(Original_USTCK_DESTINO.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[29].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[30].Value = ((decimal)(MVTO_NUMERO));
+            this.Adapter.UpdateCommand.Parameters[27].Value = ((decimal)(Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA));
+            this.Adapter.UpdateCommand.Parameters[28].Value = ((decimal)(Original_MVTO_CANTIDAD_DESTINO_ESTIMADA));
+            this.Adapter.UpdateCommand.Parameters[29].Value = ((decimal)(Original_MVTO_CANTIDAD_ORIGEN_REAL));
+            this.Adapter.UpdateCommand.Parameters[30].Value = ((decimal)(Original_MVTO_CANTIDAD_DESTINO_REAL));
+            this.Adapter.UpdateCommand.Parameters[31].Value = ((decimal)(Original_EMVTO_CODIGO));
+            if ((Original_ORDT_NUMERO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((decimal)(Original_ORDT_NUMERO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[33].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[34].Value = ((decimal)(MVTO_NUMERO));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -5886,8 +5960,10 @@ SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPRE
                     global::System.Nullable<global::System.DateTime> MVTO_FECHAREAL, 
                     global::System.Nullable<decimal> USTCK_ORIGEN, 
                     global::System.Nullable<decimal> USTCK_DESTINO, 
-                    decimal MVTO_CANTIDAD_ORIGEN, 
-                    decimal MVTO_CANTIDAD_DESTINO, 
+                    decimal MVTO_CANTIDAD_ORIGEN_ESTIMADA, 
+                    decimal MVTO_CANTIDAD_DESTINO_ESTIMADA, 
+                    decimal MVTO_CANTIDAD_ORIGEN_REAL, 
+                    decimal MVTO_CANTIDAD_DESTINO_REAL, 
                     decimal EMVTO_CODIGO, 
                     global::System.Nullable<decimal> ORDT_NUMERO, 
                     decimal Original_MVTO_NUMERO, 
@@ -5898,11 +5974,13 @@ SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPRE
                     global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAREAL, 
                     global::System.Nullable<decimal> Original_USTCK_ORIGEN, 
                     global::System.Nullable<decimal> Original_USTCK_DESTINO, 
-                    decimal Original_MVTO_CANTIDAD_ORIGEN, 
-                    decimal Original_MVTO_CANTIDAD_DESTINO, 
+                    decimal Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA, 
+                    decimal Original_MVTO_CANTIDAD_DESTINO_ESTIMADA, 
+                    decimal Original_MVTO_CANTIDAD_ORIGEN_REAL, 
+                    decimal Original_MVTO_CANTIDAD_DESTINO_REAL, 
                     decimal Original_EMVTO_CODIGO, 
                     global::System.Nullable<decimal> Original_ORDT_NUMERO) {
-            return this.Update(MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPREVISTA, MVTO_FECHAREAL, USTCK_ORIGEN, USTCK_DESTINO, MVTO_CANTIDAD_ORIGEN, MVTO_CANTIDAD_DESTINO, EMVTO_CODIGO, ORDT_NUMERO, Original_MVTO_NUMERO, Original_MVTO_CODIGO, Original_MVTO_DESCRIPCION, Original_MVTO_FECHAALTA, Original_MVTO_FECHAPREVISTA, Original_MVTO_FECHAREAL, Original_USTCK_ORIGEN, Original_USTCK_DESTINO, Original_MVTO_CANTIDAD_ORIGEN, Original_MVTO_CANTIDAD_DESTINO, Original_EMVTO_CODIGO, Original_ORDT_NUMERO, Original_MVTO_NUMERO);
+            return this.Update(MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPREVISTA, MVTO_FECHAREAL, USTCK_ORIGEN, USTCK_DESTINO, MVTO_CANTIDAD_ORIGEN_ESTIMADA, MVTO_CANTIDAD_DESTINO_ESTIMADA, MVTO_CANTIDAD_ORIGEN_REAL, MVTO_CANTIDAD_DESTINO_REAL, EMVTO_CODIGO, ORDT_NUMERO, Original_MVTO_NUMERO, Original_MVTO_CODIGO, Original_MVTO_DESCRIPCION, Original_MVTO_FECHAALTA, Original_MVTO_FECHAPREVISTA, Original_MVTO_FECHAREAL, Original_USTCK_ORIGEN, Original_USTCK_DESTINO, Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA, Original_MVTO_CANTIDAD_DESTINO_ESTIMADA, Original_MVTO_CANTIDAD_ORIGEN_REAL, Original_MVTO_CANTIDAD_DESTINO_REAL, Original_EMVTO_CODIGO, Original_ORDT_NUMERO, Original_MVTO_NUMERO);
         }
     }
     

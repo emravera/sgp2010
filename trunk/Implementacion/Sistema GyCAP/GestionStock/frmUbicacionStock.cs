@@ -370,24 +370,9 @@ namespace GyCAP.UI.GestionStock
             dgvLista.Columns.Add("USTCK_CANTIDADVIRTUAL", "Cantidad virtual");
             dgvLista.Columns.Add("UMED_CODIGO", "Unidad medida");
             dgvLista.Columns.Add("USTCK_ACTIVO", "Estado");
-            dgvLista.Columns["USTCK_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["USTCK_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["TUS_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["USTCK_CANTIDADVIRTUAL"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["UMED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["USTCK_CANTIDADREAL"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvLista.Columns["USTCK_CANTIDADREAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvLista.Columns["USTCK_CANTIDADVIRTUAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvLista.Columns["USTCK_ACTIVO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
-            dgvLista.Columns["USTCK_CODIGO"].MinimumWidth = 86;
-            dgvLista.Columns["USTCK_NOMBRE"].MinimumWidth = 86;
-            dgvLista.Columns["TUS_CODIGO"].MinimumWidth = 70;
-            dgvLista.Columns["USTCK_CANTIDADVIRTUAL"].MinimumWidth = 70;
-            dgvLista.Columns["USTCK_CANTIDADREAL"].MinimumWidth = 70;
-            dgvLista.Columns["UMED_CODIGO"].MinimumWidth = 70;
-            dgvLista.Columns["USTCK_ACTIVO"].MinimumWidth = 70;
-
+            dgvLista.Columns["USTCK_CANTIDADVIRTUAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;            
             dgvLista.Columns["USTCK_CODIGO"].DataPropertyName = "USTCK_CODIGO";
             dgvLista.Columns["USTCK_NOMBRE"].DataPropertyName = "USTCK_NOMBRE";
             dgvLista.Columns["TUS_CODIGO"].DataPropertyName = "TUS_CODIGO";

@@ -33,26 +33,19 @@
             this.tcOrdenTrabajo = new System.Windows.Forms.TabControl();
             this.tpOrdenesProduccion = new System.Windows.Forms.TabPage();
             this.gbBuscarOtros = new System.Windows.Forms.GroupBox();
-            this.dtpFechaHastaOPBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.dtpFechaDesdeOPBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dtpFechaGeneracionOPBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.btnBuscarOP = new System.Windows.Forms.Button();
             this.txtCodigoOPBuscar = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.cboModoOPBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label8 = new System.Windows.Forms.Label();
-            this.cboEstadoOPBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvOrdenesProduccion = new System.Windows.Forms.DataGridView();
             this.tpOrdenesTrabajo = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnFiltrarOT = new System.Windows.Forms.Button();
-            this.dtpFechaInicioOTFiltrar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.cboEstadoOTFiltrar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.txtCodigoOTFiltrar = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -65,10 +58,7 @@
             this.btnGuardarCierre = new System.Windows.Forms.Button();
             this.txtObservacionesCierre = new System.Windows.Forms.RichTextBox();
             this.nudCantidadCierre = new System.Windows.Forms.NumericUpDown();
-            this.cboMaquinaCierre = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.dtpHoraCierre = new System.Windows.Forms.DateTimePicker();
-            this.cboEmpleadoCierre = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.dtpFechaCierre = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -97,6 +87,16 @@
             this.cmsCierres = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiBloquearCierre = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDesbloquearCierre = new System.Windows.Forms.ToolStripMenuItem();
+            this.dtpFechaHastaOPBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.dtpFechaDesdeOPBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.dtpFechaGeneracionOPBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.cboModoOPBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboEstadoOPBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.dtpFechaInicioOTFiltrar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.cboEstadoOTFiltrar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboMaquinaCierre = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboEmpleadoCierre = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.dtpFechaCierre = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcOrdenTrabajo.SuspendLayout();
             this.tpOrdenesProduccion.SuspendLayout();
@@ -181,24 +181,6 @@
             this.gbBuscarOtros.TabIndex = 3;
             this.gbBuscarOtros.TabStop = false;
             // 
-            // dtpFechaHastaOPBuscar
-            // 
-            this.dtpFechaHastaOPBuscar.CustomFormat = " ";
-            this.dtpFechaHastaOPBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaHastaOPBuscar.Location = new System.Drawing.Point(405, 86);
-            this.dtpFechaHastaOPBuscar.Name = "dtpFechaHastaOPBuscar";
-            this.dtpFechaHastaOPBuscar.Size = new System.Drawing.Size(200, 21);
-            this.dtpFechaHastaOPBuscar.TabIndex = 23;
-            // 
-            // dtpFechaDesdeOPBuscar
-            // 
-            this.dtpFechaDesdeOPBuscar.CustomFormat = " ";
-            this.dtpFechaDesdeOPBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaDesdeOPBuscar.Location = new System.Drawing.Point(405, 55);
-            this.dtpFechaDesdeOPBuscar.Name = "dtpFechaDesdeOPBuscar";
-            this.dtpFechaDesdeOPBuscar.Size = new System.Drawing.Size(200, 21);
-            this.dtpFechaDesdeOPBuscar.TabIndex = 22;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -226,15 +208,6 @@
             this.label1.TabIndex = 19;
             this.label1.Text = "Fecha generación:";
             // 
-            // dtpFechaGeneracionOPBuscar
-            // 
-            this.dtpFechaGeneracionOPBuscar.CustomFormat = " ";
-            this.dtpFechaGeneracionOPBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaGeneracionOPBuscar.Location = new System.Drawing.Point(405, 24);
-            this.dtpFechaGeneracionOPBuscar.Name = "dtpFechaGeneracionOPBuscar";
-            this.dtpFechaGeneracionOPBuscar.Size = new System.Drawing.Size(200, 21);
-            this.dtpFechaGeneracionOPBuscar.TabIndex = 18;
-            // 
             // btnBuscarOP
             // 
             this.btnBuscarOP.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.lupa_20;
@@ -242,7 +215,7 @@
             this.btnBuscarOP.Location = new System.Drawing.Point(649, 52);
             this.btnBuscarOP.Name = "btnBuscarOP";
             this.btnBuscarOP.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscarOP.TabIndex = 2;
+            this.btnBuscarOP.TabIndex = 7;
             this.btnBuscarOP.Text = "&Buscar";
             this.btnBuscarOP.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscarOP.UseVisualStyleBackColor = true;
@@ -253,7 +226,7 @@
             this.txtCodigoOPBuscar.Location = new System.Drawing.Point(72, 25);
             this.txtCodigoOPBuscar.Name = "txtCodigoOPBuscar";
             this.txtCodigoOPBuscar.Size = new System.Drawing.Size(193, 21);
-            this.txtCodigoOPBuscar.TabIndex = 17;
+            this.txtCodigoOPBuscar.TabIndex = 1;
             // 
             // label10
             // 
@@ -264,16 +237,6 @@
             this.label10.TabIndex = 16;
             this.label10.Text = "Código:";
             // 
-            // cboModoOPBuscar
-            // 
-            this.cboModoOPBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboModoOPBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboModoOPBuscar.FormattingEnabled = true;
-            this.cboModoOPBuscar.Location = new System.Drawing.Point(72, 87);
-            this.cboModoOPBuscar.Name = "cboModoOPBuscar";
-            this.cboModoOPBuscar.Size = new System.Drawing.Size(193, 21);
-            this.cboModoOPBuscar.TabIndex = 13;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -282,16 +245,6 @@
             this.label8.Size = new System.Drawing.Size(37, 13);
             this.label8.TabIndex = 12;
             this.label8.Text = "Modo:";
-            // 
-            // cboEstadoOPBuscar
-            // 
-            this.cboEstadoOPBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEstadoOPBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboEstadoOPBuscar.FormattingEnabled = true;
-            this.cboEstadoOPBuscar.Location = new System.Drawing.Point(72, 56);
-            this.cboEstadoOPBuscar.Name = "cboEstadoOPBuscar";
-            this.cboEstadoOPBuscar.Size = new System.Drawing.Size(193, 21);
-            this.cboEstadoOPBuscar.TabIndex = 11;
             // 
             // label7
             // 
@@ -326,7 +279,7 @@
             this.dgvOrdenesProduccion.RowHeadersVisible = false;
             this.dgvOrdenesProduccion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvOrdenesProduccion.Size = new System.Drawing.Size(765, 325);
-            this.dgvOrdenesProduccion.TabIndex = 0;
+            this.dgvOrdenesProduccion.TabIndex = 8;
             this.dgvOrdenesProduccion.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrdenesProduccion_RowEnter);
             this.dgvOrdenesProduccion.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvOrdenesProduccion_ColumnHeaderMouseClick);
             this.dgvOrdenesProduccion.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvOrdenesProduccion_CellFormatting);
@@ -364,36 +317,17 @@
             this.btnFiltrarOT.Location = new System.Drawing.Point(672, 22);
             this.btnFiltrarOT.Name = "btnFiltrarOT";
             this.btnFiltrarOT.Size = new System.Drawing.Size(75, 25);
-            this.btnFiltrarOT.TabIndex = 6;
+            this.btnFiltrarOT.TabIndex = 13;
             this.btnFiltrarOT.Text = "Filtrar";
             this.btnFiltrarOT.UseVisualStyleBackColor = true;
             this.btnFiltrarOT.Click += new System.EventHandler(this.btnFiltrarOT_Click);
-            // 
-            // dtpFechaInicioOTFiltrar
-            // 
-            this.dtpFechaInicioOTFiltrar.CustomFormat = " ";
-            this.dtpFechaInicioOTFiltrar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaInicioOTFiltrar.Location = new System.Drawing.Point(533, 24);
-            this.dtpFechaInicioOTFiltrar.Name = "dtpFechaInicioOTFiltrar";
-            this.dtpFechaInicioOTFiltrar.Size = new System.Drawing.Size(110, 21);
-            this.dtpFechaInicioOTFiltrar.TabIndex = 5;
-            // 
-            // cboEstadoOTFiltrar
-            // 
-            this.cboEstadoOTFiltrar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEstadoOTFiltrar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboEstadoOTFiltrar.FormattingEnabled = true;
-            this.cboEstadoOTFiltrar.Location = new System.Drawing.Point(273, 25);
-            this.cboEstadoOTFiltrar.Name = "cboEstadoOTFiltrar";
-            this.cboEstadoOTFiltrar.Size = new System.Drawing.Size(182, 21);
-            this.cboEstadoOTFiltrar.TabIndex = 4;
             // 
             // txtCodigoOTFiltrar
             // 
             this.txtCodigoOTFiltrar.Location = new System.Drawing.Point(59, 25);
             this.txtCodigoOTFiltrar.Name = "txtCodigoOTFiltrar";
             this.txtCodigoOTFiltrar.Size = new System.Drawing.Size(158, 21);
-            this.txtCodigoOTFiltrar.TabIndex = 3;
+            this.txtCodigoOTFiltrar.TabIndex = 10;
             // 
             // label15
             // 
@@ -446,7 +380,7 @@
             this.dgvOrdenesTrabajo.RowHeadersVisible = false;
             this.dgvOrdenesTrabajo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvOrdenesTrabajo.Size = new System.Drawing.Size(768, 388);
-            this.dgvOrdenesTrabajo.TabIndex = 0;
+            this.dgvOrdenesTrabajo.TabIndex = 9;
             this.dgvOrdenesTrabajo.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrdenesTrabajo_RowEnter);
             this.dgvOrdenesTrabajo.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvOrdenesTrabajo_ColumnHeaderMouseClick);
             this.dgvOrdenesTrabajo.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvOrdenesTrabajo_CellFormatting);
@@ -490,7 +424,7 @@
             this.btnCancelarCierre.Location = new System.Drawing.Point(672, 117);
             this.btnCancelarCierre.Name = "btnCancelarCierre";
             this.btnCancelarCierre.Size = new System.Drawing.Size(75, 25);
-            this.btnCancelarCierre.TabIndex = 29;
+            this.btnCancelarCierre.TabIndex = 25;
             this.btnCancelarCierre.Text = "Cancelar";
             this.btnCancelarCierre.UseVisualStyleBackColor = true;
             this.btnCancelarCierre.Click += new System.EventHandler(this.btnCancelarCierre_Click);
@@ -500,7 +434,7 @@
             this.btnGuardarCierre.Location = new System.Drawing.Point(672, 71);
             this.btnGuardarCierre.Name = "btnGuardarCierre";
             this.btnGuardarCierre.Size = new System.Drawing.Size(75, 25);
-            this.btnGuardarCierre.TabIndex = 28;
+            this.btnGuardarCierre.TabIndex = 24;
             this.btnGuardarCierre.Text = "Guardar";
             this.btnGuardarCierre.UseVisualStyleBackColor = true;
             this.btnGuardarCierre.Click += new System.EventHandler(this.btnGuardarCierre_Click);
@@ -508,27 +442,25 @@
             // txtObservacionesCierre
             // 
             this.txtObservacionesCierre.Location = new System.Drawing.Point(347, 46);
+            this.txtObservacionesCierre.MaxLength = 300;
             this.txtObservacionesCierre.Name = "txtObservacionesCierre";
             this.txtObservacionesCierre.Size = new System.Drawing.Size(281, 129);
-            this.txtObservacionesCierre.TabIndex = 27;
+            this.txtObservacionesCierre.TabIndex = 23;
             this.txtObservacionesCierre.Text = "";
             // 
             // nudCantidadCierre
             // 
+            this.nudCantidadCierre.DecimalPlaces = 3;
             this.nudCantidadCierre.Location = new System.Drawing.Point(84, 92);
+            this.nudCantidadCierre.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.nudCantidadCierre.Name = "nudCantidadCierre";
             this.nudCantidadCierre.Size = new System.Drawing.Size(200, 21);
-            this.nudCantidadCierre.TabIndex = 25;
-            // 
-            // cboMaquinaCierre
-            // 
-            this.cboMaquinaCierre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboMaquinaCierre.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboMaquinaCierre.FormattingEnabled = true;
-            this.cboMaquinaCierre.Location = new System.Drawing.Point(84, 59);
-            this.cboMaquinaCierre.Name = "cboMaquinaCierre";
-            this.cboMaquinaCierre.Size = new System.Drawing.Size(200, 21);
-            this.cboMaquinaCierre.TabIndex = 24;
+            this.nudCantidadCierre.TabIndex = 20;
+            this.nudCantidadCierre.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // dtpHoraCierre
             // 
@@ -538,27 +470,8 @@
             this.dtpHoraCierre.Name = "dtpHoraCierre";
             this.dtpHoraCierre.ShowUpDown = true;
             this.dtpHoraCierre.Size = new System.Drawing.Size(200, 21);
-            this.dtpHoraCierre.TabIndex = 23;
+            this.dtpHoraCierre.TabIndex = 22;
             this.dtpHoraCierre.Value = new System.DateTime(2010, 10, 16, 0, 0, 0, 0);
-            // 
-            // cboEmpleadoCierre
-            // 
-            this.cboEmpleadoCierre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEmpleadoCierre.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboEmpleadoCierre.FormattingEnabled = true;
-            this.cboEmpleadoCierre.Location = new System.Drawing.Point(84, 27);
-            this.cboEmpleadoCierre.Name = "cboEmpleadoCierre";
-            this.cboEmpleadoCierre.Size = new System.Drawing.Size(200, 21);
-            this.cboEmpleadoCierre.TabIndex = 22;
-            // 
-            // dtpFechaCierre
-            // 
-            this.dtpFechaCierre.CustomFormat = " ";
-            this.dtpFechaCierre.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaCierre.Location = new System.Drawing.Point(84, 122);
-            this.dtpFechaCierre.Name = "dtpFechaCierre";
-            this.dtpFechaCierre.Size = new System.Drawing.Size(200, 21);
-            this.dtpFechaCierre.TabIndex = 21;
             // 
             // label12
             // 
@@ -632,7 +545,7 @@
             this.btnEliminarCierre.Location = new System.Drawing.Point(689, 254);
             this.btnEliminarCierre.Name = "btnEliminarCierre";
             this.btnEliminarCierre.Size = new System.Drawing.Size(75, 25);
-            this.btnEliminarCierre.TabIndex = 28;
+            this.btnEliminarCierre.TabIndex = 17;
             this.btnEliminarCierre.Text = "Eliminar";
             this.btnEliminarCierre.UseVisualStyleBackColor = true;
             this.btnEliminarCierre.Click += new System.EventHandler(this.btnEliminarCierre_Click);
@@ -642,7 +555,7 @@
             this.btnModificarCierre.Location = new System.Drawing.Point(608, 254);
             this.btnModificarCierre.Name = "btnModificarCierre";
             this.btnModificarCierre.Size = new System.Drawing.Size(75, 25);
-            this.btnModificarCierre.TabIndex = 27;
+            this.btnModificarCierre.TabIndex = 16;
             this.btnModificarCierre.Text = "Modificar";
             this.btnModificarCierre.UseVisualStyleBackColor = true;
             this.btnModificarCierre.Click += new System.EventHandler(this.btnModificarCierre_Click);
@@ -659,7 +572,7 @@
             this.dgvCierresParciales.RowHeadersVisible = false;
             this.dgvCierresParciales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCierresParciales.Size = new System.Drawing.Size(758, 228);
-            this.dgvCierresParciales.TabIndex = 1;
+            this.dgvCierresParciales.TabIndex = 14;
             this.dgvCierresParciales.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCierresParciales_RowEnter);
             this.dgvCierresParciales.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCierresParciales_ColumnHeaderMouseClick);
             this.dgvCierresParciales.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCierresParciales_CellFormatting);
@@ -669,7 +582,7 @@
             this.btnAgregarCierre.Location = new System.Drawing.Point(527, 254);
             this.btnAgregarCierre.Name = "btnAgregarCierre";
             this.btnAgregarCierre.Size = new System.Drawing.Size(75, 25);
-            this.btnAgregarCierre.TabIndex = 26;
+            this.btnAgregarCierre.TabIndex = 15;
             this.btnAgregarCierre.Text = "Agregar";
             this.btnAgregarCierre.UseVisualStyleBackColor = true;
             this.btnAgregarCierre.Click += new System.EventHandler(this.btnAgregarCierre_Click);
@@ -836,6 +749,101 @@
             this.tsmiDesbloquearCierre.Size = new System.Drawing.Size(187, 22);
             this.tsmiDesbloquearCierre.Text = "Desbloquear columna";
             this.tsmiDesbloquearCierre.Click += new System.EventHandler(this.tsmiDesbloquearCierre_Click);
+            // 
+            // dtpFechaHastaOPBuscar
+            // 
+            this.dtpFechaHastaOPBuscar.CustomFormat = " ";
+            this.dtpFechaHastaOPBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaHastaOPBuscar.Location = new System.Drawing.Point(405, 86);
+            this.dtpFechaHastaOPBuscar.Name = "dtpFechaHastaOPBuscar";
+            this.dtpFechaHastaOPBuscar.Size = new System.Drawing.Size(200, 21);
+            this.dtpFechaHastaOPBuscar.TabIndex = 6;
+            // 
+            // dtpFechaDesdeOPBuscar
+            // 
+            this.dtpFechaDesdeOPBuscar.CustomFormat = " ";
+            this.dtpFechaDesdeOPBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaDesdeOPBuscar.Location = new System.Drawing.Point(405, 55);
+            this.dtpFechaDesdeOPBuscar.Name = "dtpFechaDesdeOPBuscar";
+            this.dtpFechaDesdeOPBuscar.Size = new System.Drawing.Size(200, 21);
+            this.dtpFechaDesdeOPBuscar.TabIndex = 5;
+            // 
+            // dtpFechaGeneracionOPBuscar
+            // 
+            this.dtpFechaGeneracionOPBuscar.CustomFormat = " ";
+            this.dtpFechaGeneracionOPBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaGeneracionOPBuscar.Location = new System.Drawing.Point(405, 24);
+            this.dtpFechaGeneracionOPBuscar.Name = "dtpFechaGeneracionOPBuscar";
+            this.dtpFechaGeneracionOPBuscar.Size = new System.Drawing.Size(200, 21);
+            this.dtpFechaGeneracionOPBuscar.TabIndex = 4;
+            // 
+            // cboModoOPBuscar
+            // 
+            this.cboModoOPBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboModoOPBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboModoOPBuscar.FormattingEnabled = true;
+            this.cboModoOPBuscar.Location = new System.Drawing.Point(72, 87);
+            this.cboModoOPBuscar.Name = "cboModoOPBuscar";
+            this.cboModoOPBuscar.Size = new System.Drawing.Size(193, 21);
+            this.cboModoOPBuscar.TabIndex = 3;
+            // 
+            // cboEstadoOPBuscar
+            // 
+            this.cboEstadoOPBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEstadoOPBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboEstadoOPBuscar.FormattingEnabled = true;
+            this.cboEstadoOPBuscar.Location = new System.Drawing.Point(72, 56);
+            this.cboEstadoOPBuscar.Name = "cboEstadoOPBuscar";
+            this.cboEstadoOPBuscar.Size = new System.Drawing.Size(193, 21);
+            this.cboEstadoOPBuscar.TabIndex = 2;
+            // 
+            // dtpFechaInicioOTFiltrar
+            // 
+            this.dtpFechaInicioOTFiltrar.CustomFormat = " ";
+            this.dtpFechaInicioOTFiltrar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaInicioOTFiltrar.Location = new System.Drawing.Point(533, 24);
+            this.dtpFechaInicioOTFiltrar.Name = "dtpFechaInicioOTFiltrar";
+            this.dtpFechaInicioOTFiltrar.Size = new System.Drawing.Size(110, 21);
+            this.dtpFechaInicioOTFiltrar.TabIndex = 12;
+            // 
+            // cboEstadoOTFiltrar
+            // 
+            this.cboEstadoOTFiltrar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEstadoOTFiltrar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboEstadoOTFiltrar.FormattingEnabled = true;
+            this.cboEstadoOTFiltrar.Location = new System.Drawing.Point(273, 25);
+            this.cboEstadoOTFiltrar.Name = "cboEstadoOTFiltrar";
+            this.cboEstadoOTFiltrar.Size = new System.Drawing.Size(182, 21);
+            this.cboEstadoOTFiltrar.TabIndex = 11;
+            // 
+            // cboMaquinaCierre
+            // 
+            this.cboMaquinaCierre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboMaquinaCierre.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboMaquinaCierre.FormattingEnabled = true;
+            this.cboMaquinaCierre.Location = new System.Drawing.Point(84, 59);
+            this.cboMaquinaCierre.Name = "cboMaquinaCierre";
+            this.cboMaquinaCierre.Size = new System.Drawing.Size(200, 21);
+            this.cboMaquinaCierre.TabIndex = 19;
+            // 
+            // cboEmpleadoCierre
+            // 
+            this.cboEmpleadoCierre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEmpleadoCierre.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboEmpleadoCierre.FormattingEnabled = true;
+            this.cboEmpleadoCierre.Location = new System.Drawing.Point(84, 27);
+            this.cboEmpleadoCierre.Name = "cboEmpleadoCierre";
+            this.cboEmpleadoCierre.Size = new System.Drawing.Size(200, 21);
+            this.cboEmpleadoCierre.TabIndex = 18;
+            // 
+            // dtpFechaCierre
+            // 
+            this.dtpFechaCierre.CustomFormat = " ";
+            this.dtpFechaCierre.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaCierre.Location = new System.Drawing.Point(84, 122);
+            this.dtpFechaCierre.Name = "dtpFechaCierre";
+            this.dtpFechaCierre.Size = new System.Drawing.Size(200, 21);
+            this.dtpFechaCierre.TabIndex = 21;
             // 
             // frmOrdenTrabajo
             // 

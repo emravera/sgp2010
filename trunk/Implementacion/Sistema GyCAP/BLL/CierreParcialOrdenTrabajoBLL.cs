@@ -8,11 +8,6 @@ namespace GyCAP.BLL
 {
     public class CierreParcialOrdenTrabajoBLL
     {
-        public static void Insertar(Entidades.CierreParcialOrdenTrabajo cierreOrdenTrabajo)
-        {
-            DAL.CierreParcialOrdenTrabajoDAL.Insertar(cierreOrdenTrabajo);
-        }
-
         public static void Actualizar(Entidades.CierreParcialOrdenTrabajo cierreOrdenTrabajo)
         {
             DAL.CierreParcialOrdenTrabajoDAL.Actualizar(cierreOrdenTrabajo);
