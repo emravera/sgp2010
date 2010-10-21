@@ -124,9 +124,9 @@
             this.menuItemGS,
             this.menuItemMA,
             this.menuItemPP,
+            this.menuItemPF,
             this.menuItemRF,
-            this.menuItemSO,
-            this.menuItemPF});
+            this.menuItemSO});
             this.menuModulos.ImageTransparentColor = System.Drawing.SystemColors.ActiveBorder;
             this.menuModulos.Name = "menuModulos";
             this.menuModulos.ShortcutKeyDisplayString = "Ctrl + M";
