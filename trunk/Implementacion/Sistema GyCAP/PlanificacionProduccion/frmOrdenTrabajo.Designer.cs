@@ -82,7 +82,7 @@
             this.btnAgregarCierre = new System.Windows.Forms.Button();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnIniciar = new System.Windows.Forms.ToolStripButton();
-            this.btnCierreParcial = new System.Windows.Forms.ToolStripButton();
+            this.btnPausar = new System.Windows.Forms.ToolStripButton();
             this.btnFinalizar = new System.Windows.Forms.ToolStripButton();
             this.btnCancelar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
@@ -690,7 +690,7 @@
             this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnIniciar,
-            this.btnCierreParcial,
+            this.btnPausar,
             this.btnFinalizar,
             this.btnCancelar,
             this.btnEliminar,
@@ -713,16 +713,16 @@
             this.btnIniciar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnIniciar.Click += new System.EventHandler(this.btnIniciar_Click);
             // 
-            // btnCierreParcial
+            // btnPausar
             // 
-            this.btnCierreParcial.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Cierre_Parcial_25;
-            this.btnCierreParcial.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCierreParcial.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCierreParcial.Name = "btnCierreParcial";
-            this.btnCierreParcial.Size = new System.Drawing.Size(74, 47);
-            this.btnCierreParcial.Text = "&Cierre parcial";
-            this.btnCierreParcial.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCierreParcial.Click += new System.EventHandler(this.btnCierreParcial_Click);
+            this.btnPausar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Cierre_Parcial_25;
+            this.btnPausar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnPausar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPausar.Name = "btnPausar";
+            this.btnPausar.Size = new System.Drawing.Size(44, 47);
+            this.btnPausar.Text = "&Pausar";
+            this.btnPausar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPausar.Click += new System.EventHandler(this.btnCierreParcial_Click);
             // 
             // btnFinalizar
             // 
@@ -752,7 +752,7 @@
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(47, 47);
-            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.Text = "&Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // toolStripSeparator1
@@ -897,7 +897,7 @@
         private System.Windows.Forms.TabPage tpOrdenesTrabajo;
         private System.Windows.Forms.GroupBox gbDatos;
         private System.Windows.Forms.ToolStrip tsMenu;
-        private System.Windows.Forms.ToolStripButton btnCierreParcial;
+        private System.Windows.Forms.ToolStripButton btnPausar;
         private System.Windows.Forms.ToolStripButton btnFinalizar;
         private System.Windows.Forms.ToolStripButton btnCancelar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
