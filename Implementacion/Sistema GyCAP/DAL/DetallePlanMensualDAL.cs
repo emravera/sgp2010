@@ -54,5 +54,14 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        public static void SumarCantidadFinalizada(int codigoMes, int codigoCocina, int cantidad, SqlTransaction transaccion)
+        {
+            string sql = @"UPDATE DETALLE_PLANES_MENSUALES SET dpmes_cantidadreal = dpmes_cantidadreal + @p0 
+                         WHERE pmes_codigo = @p1 AND coc_codigo = @p2";
+
+            object[] parametros = { cantidad, codigoMes, codigoCocina };
+            DB.executeNonQuery(sql, parametros, transaccion);
+        }
+
     }
 }

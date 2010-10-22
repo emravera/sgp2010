@@ -211,5 +211,59 @@ namespace GyCAP.DAL
                 DB.FinalizarTransaccion();
             }       
         }
+
+        public static void FinalizarOrdenTrabajo(int numeroOrdenTrabajo, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsStock dsStock, SqlTransaction transaccion)
+        {
+            string sql = @"UPDATE ORDENES_TRABAJO SET 
+                         eord_codigo = @p0
+                        ,ordt_fechainicioreal = ordt_fechainicioestimada
+                        ,ordt_cantidadreal = ordt_cantidadestimada
+                        ,ordt_fechafinreal = ordt_fechafinestimada 
+                        WHERE ordt_numero = @p1";
+
+            object[] parametros = { EstadoFinalizado, numeroOrdenTrabajo };
+
+            //Finalizo la orden de trabajo
+            DB.executeNonQuery(sql, parametros, transaccion);
+
+            if (dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).EORD_CODIGO == EstadoEnProceso)
+            {
+                //*************FINALIZACIÓN ÓRDENES INICIADAS*************************************************
+
+                dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).EORD_CODIGO = EstadoFinalizado;
+                dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_CANTIDADREAL = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_CANTIDADESTIMADA;
+                dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_FECHAFINREAL = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_FECHAFINESTIMADA;
+                                
+                //Actualizo los movimientos generados para cada orden de trabajo
+                MovimientoStockDAL.ObtenerMovimientosStockOrdenTrabajo(Convert.ToInt32(numeroOrdenTrabajo), dsStock.MOVIMIENTOS_STOCK);
+                decimal cantidadOrigen = 0, cantidadDestino = 0, ubicacionDestino = 0;
+                foreach (Data.dsStock.MOVIMIENTOS_STOCKRow rowMVTO in (Data.dsStock.MOVIMIENTOS_STOCKRow[])dsStock.MOVIMIENTOS_STOCK.Select("ordt_numero = " + numeroOrdenTrabajo))
+                {
+                    cantidadDestino = rowMVTO.MVTO_CANTIDAD_DESTINO_ESTIMADA - rowMVTO.MVTO_CANTIDAD_DESTINO_REAL;
+                    cantidadOrigen = rowMVTO.MVTO_CANTIDAD_ORIGEN_ESTIMADA - rowMVTO.MVTO_CANTIDAD_ORIGEN_REAL;
+                    MovimientoStockDAL.FinalizarMovimiento(Convert.ToInt32(rowMVTO.MVTO_NUMERO), transaccion);
+                    rowMVTO.MVTO_CANTIDAD_DESTINO_REAL = rowMVTO.MVTO_CANTIDAD_DESTINO_ESTIMADA;
+                    rowMVTO.MVTO_CANTIDAD_ORIGEN_REAL = rowMVTO.MVTO_CANTIDAD_ORIGEN_ESTIMADA;
+                    rowMVTO.MVTO_FECHAREAL = rowMVTO.MVTO_FECHAPREVISTA;
+                    rowMVTO.EMVTO_CODIGO = MovimientoStockDAL.EstadoFinalizado;
+                    ubicacionDestino = rowMVTO.USTCK_DESTINO;
+                    UbicacionStockDAL.ActualizarCantidadesStock(Convert.ToInt32(rowMVTO.USTCK_ORIGEN), (cantidadOrigen * -1), 0, transaccion);
+                    dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(rowMVTO.USTCK_ORIGEN).USTCK_CANTIDADREAL -= cantidadOrigen;
+                }
+
+                //Actualizo las ubicaciones de stock afectadas por la orden de trabajo
+                cantidadDestino = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(ubicacionDestino).USTCK_CANTIDADREAL * -1;
+                dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(ubicacionDestino).USTCK_CANTIDADREAL = 0;
+                UbicacionStockDAL.ActualizarCantidadesStock(Convert.ToInt32(ubicacionDestino), cantidadDestino, 0, transaccion);
+            }
+            else
+            {
+                //*************FINALIZACIÓN ÓRDENES EN ESPERA****************************************************
+                dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).EORD_CODIGO = EstadoFinalizado;
+                dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_CANTIDADREAL = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_CANTIDADESTIMADA;
+                dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_FECHAFINREAL = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_FECHAFINESTIMADA;
+                dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_FECHAINICIOREAL = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_FECHAINICIOESTIMADA;
+            }
+        }
     }
 }

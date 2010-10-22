@@ -42,9 +42,9 @@ namespace GyCAP.DAL
 
             Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow rowOrdenP = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion);
             object ordpm = DBNull.Value, dpsem = DBNull.Value, cocina = DBNull.Value, stock = DBNull.Value;
-            if (rowOrdenP.IsORDPM_NUMERONull()) { dpsem = rowOrdenP.DPSEM_CODIGO; }
+            if (!rowOrdenP.IsDPSEM_CODIGONull()) { dpsem = rowOrdenP.DPSEM_CODIGO; }
             else { ordpm = rowOrdenP.ORDPM_NUMERO; }
-            if (!rowOrdenP.IsORDPM_NUMERONull()) { cocina = rowOrdenP.COC_CODIGO; }
+            if (!rowOrdenP.IsCOC_CODIGONull()) { cocina = rowOrdenP.COC_CODIGO; }
             if (!rowOrdenP.IsUSTCK_DESTINONull()) { stock = rowOrdenP.USTCK_DESTINO; }
             object[] valoresParametros = {   rowOrdenP.ORDP_CODIGO,
                                              rowOrdenP.EORD_CODIGO,
@@ -176,10 +176,10 @@ namespace GyCAP.DAL
                 //Si la orden de trabajo es por un pedido actualizamos su estado
                 if (!dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).IsDPSEM_CODIGONull())
                 {
-                    object pedido = DetallePlanSemanalDAL.ObtenerPedidoClienteDeDetalle(Convert.ToInt32(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).DPSEM_CODIGO));
-                    if (pedido != null)
+                    object pedido = DetallePlanSemanalDAL.ObtenerPedidoClienteDeDetalle(Convert.ToInt32(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).DPSEM_CODIGO), transaccion);
+                    if (pedido != null && pedido != DBNull.Value)
                     {
-                        DetallePedidoDAL.ActualizarEstadoAEnCurso(Convert.ToInt32(pedido), transaccion);
+                        PedidoDAL.ActualizarDetallePedidoAEnCurso(Convert.ToInt32(pedido), transaccion);
                     }
                 }
 
@@ -196,7 +196,7 @@ namespace GyCAP.DAL
             {
                 //En cualquier caso finalizamos la transaccion para que se cierre la conexion
                 DB.FinalizarTransaccion();
-            }            
+            }
         }
         
         public static void ObtenerOrdenesProduccion(object codigo, object estado, object modo, object fechaGeneracion, object fechaDesde, object fechaHasta, Data.dsOrdenTrabajo dsOrdenTrabajo)
@@ -287,6 +287,73 @@ namespace GyCAP.DAL
                     DB.FillDataSet(dsOrdenTrabajo, "ORDENES_PRODUCCION", sql, null);
                 }
                 catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            }
+        }
+
+        public static void FinalizarOrdenProduccion(int numeroOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsStock dsStock)
+        {
+            string sql = @"UPDATE ORDENES_PRODUCCION SET 
+                        eord_codigo = @p0, 
+                        ordp_fechafinreal = ordp_fechafinestimada, 
+                        ordp_cantidadreal = ordp_cantidadestimada 
+                        WHERE ordp_numero = @p1;";
+
+            object[] parametros = { EstadoFinalizado, numeroOrdenProduccion };
+
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                transaccion = DB.IniciarTransaccion();
+                //Finalizo la orden de producción
+                DB.executeNonQuery(sql, parametros, transaccion);
+                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).EORD_CODIGO = EstadoFinalizado;
+                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_CANTIDADREAL = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_CANTIDADESTIMADA;
+                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_FECHAFINREAL = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_FECHAFINESTIMADA;
+
+                //Finalizo las ordenes de trabajo
+                foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOT in dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).GetORDENES_TRABAJORows())
+                {
+                    OrdenTrabajoDAL.FinalizarOrdenTrabajo(Convert.ToInt32(rowOT.ORDT_NUMERO), dsOrdenTrabajo, dsStock, transaccion);
+                }
+
+                //Actualizar stock de la cocina de la orden de producción
+                if (!dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).IsUSTCK_DESTINONull())
+                {
+                    int ubicacion = Convert.ToInt32(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).USTCK_DESTINO);
+                    decimal cantidadReal = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_CANTIDADREAL;
+                    UbicacionStockDAL.ActualizarCantidadesStock(ubicacion, cantidadReal, 0, transaccion);
+                }
+
+                //Actualizamos la planificación en que estaba basada la orden de producción
+                //También si la orden de producción es por un pedido actualizamos su estado
+                if (!dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).IsDPSEM_CODIGONull())
+                {
+                    int codigoPlan = Convert.ToInt32(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).DPSEM_CODIGO);
+                    int cantidad = Convert.ToInt32(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_CANTIDADREAL);
+                    int cocina = Convert.ToInt32(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).COC_CODIGO);
+
+                    //Planificación
+                    DetallePlanSemanalDAL.SumarCantidadFinalizada(codigoPlan, cocina, cantidad, transaccion);
+                    
+                    //Pedido
+                    object pedido = DetallePlanSemanalDAL.ObtenerPedidoClienteDeDetalle(codigoPlan, transaccion);
+                    if (pedido != null && pedido != DBNull.Value)
+                    {
+                        PedidoDAL.ActualizarDetallePedidoAFinalizado(Convert.ToInt32(pedido), transaccion);
+                    }
+                }
+
+                transaccion.Commit();
+            }
+            catch (SqlException ex)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
+            }
+            finally
+            {
+                DB.FinalizarTransaccion();
             }
         }
     }

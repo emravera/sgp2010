@@ -335,5 +335,10 @@ namespace GyCAP.DAL
             return cantidad;
         }
 
+        public static void SumarCantidadFinalizada(int codigoPlanMensual, int cantidad, int codigoCocina, SqlTransaction transaccion)
+        {
+            DetallePlanMensualDAL.SumarCantidadFinalizada(codigoPlanMensual, codigoCocina, cantidad, transaccion);
+        }
+
     }
 }

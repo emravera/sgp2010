@@ -9,6 +9,9 @@ namespace GyCAP.DAL
 {
     public class MovimientoStockDAL
     {
+        public static readonly int EstadoPlanificado = 1;
+        public static readonly int EstadoFinalizado = 2;
+        
         public static void Insertar(Entidades.MovimientoStock movimientoStock, SqlTransaction transaccion)
         {
             string sql = @"INSERT INTO [MOVIMIENTOS_STOCK] 
@@ -73,8 +76,25 @@ namespace GyCAP.DAL
         
         public static void ActualizarCantidadesParciales(int numeroMovimiento, decimal cantidadOrigenReal, decimal cantidadDestinoReal, SqlTransaction transaccion)
         {
-            string sql = "UPDATE MOVIMIENTOS_STOCK SET mvto_cantidad_origen_real  = @p0, mvto_cantidad_destino_real = @p1 WHERE mvto_numero = @p2";
+            string sql = @"UPDATE MOVIMIENTOS_STOCK SET 
+                         mvto_cantidad_origen_real  = mvto_cantidad_origen_real + @p0 
+                        ,mvto_cantidad_destino_real = mvto_cantidad_destino_real + @p1 
+                         WHERE mvto_numero = @p2";
+
             object[] parametros = { cantidadOrigenReal, cantidadDestinoReal, numeroMovimiento };
+            DB.executeNonQuery(sql, parametros, transaccion);
+        }
+
+        public static void FinalizarMovimiento(int numeroMovimiento, SqlTransaction transaccion)
+        {
+            string sql = @"UPDATE MOVIMIENTOS_STOCK SET 
+                         mvto_cantidad_origen_real  = mvto_cantidad_origen_estimada 
+                        ,mvto_cantidad_destino_real = mvto_cantidad_destino_estimada 
+                        ,mvto_fechareal = mvto_fechaprevista 
+                        ,emvto_codigo = @p0
+                         WHERE mvto_numero = @p1";
+
+            object[] parametros = { EstadoFinalizado, numeroMovimiento };
             DB.executeNonQuery(sql, parametros, transaccion);
         }
     }
