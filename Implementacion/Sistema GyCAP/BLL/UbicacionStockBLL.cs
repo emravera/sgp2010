@@ -18,21 +18,14 @@ namespace GyCAP.BLL
 
         public static void Insertar(Entidades.UbicacionStock ubicacion)
         {
-            //Controlar si ya existe ???? - gonzalo
+            if (DAL.UbicacionStockDAL.EsUbicacionStock(ubicacion.Codigo, ubicacion.Nombre)) { throw new Entidades.Excepciones.ElementoExistenteException(); }
             DAL.UbicacionStockDAL.Insertar(ubicacion);
         }
         
         public static void Eliminar(int numeroUbicacionStock)
         {
-            if (DAL.UbicacionStockDAL.PuedeEliminarse(numeroUbicacionStock))
-            {
-                DAL.UbicacionStockDAL.Eliminar(numeroUbicacionStock);
-            }
-            else
-            {
-                //No puede eliminarse, lanzamos nuestra excepción
-                throw new Entidades.Excepciones.ElementoEnTransaccionException();
-            }
+            if (DAL.UbicacionStockDAL.PuedeEliminarse(numeroUbicacionStock)) { DAL.UbicacionStockDAL.Eliminar(numeroUbicacionStock); }
+            else { throw new Entidades.Excepciones.ElementoEnTransaccionException(); }
         }
     }
 }

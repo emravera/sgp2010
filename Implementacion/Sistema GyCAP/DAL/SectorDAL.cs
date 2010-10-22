@@ -100,9 +100,6 @@ namespace GyCAP.DAL
 
         }
                 
-        //ELIMINACION
-        //Metodos que verifica que no este usado en otro lugar - reprogramar - gonzalo
-
         public static bool PuedeEliminarse(int codigo)
         {
             string sql1 = "SELECT count(sec_codigo) FROM EMPLEADOS WHERE sec_codigo = @p0";
@@ -117,75 +114,13 @@ namespace GyCAP.DAL
                 int resultadoSql2 = Convert.ToInt32(DB.executeScalar(sql2, valorParametros, null));
                 int resultadoSql3 = Convert.ToInt32(DB.executeScalar(sql3, valorParametros, null));
                 int resultadoSql4 = Convert.ToInt32(DB.executeScalar(sql4, valorParametros, null));
-                if (resultadoSql1 == 0 && resultadoSql2 == 0 && resultadoSql3 == 0 && resultadoSql4 == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                
+                if (resultadoSql1 + resultadoSql2 + resultadoSql3 + resultadoSql4 == 0) { return true; }
+                else { return false; }
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
-        
-        public static bool PuedeEliminarseValidacion1(int codigo)
-        {
-            string sql1 = "SELECT count(sec_codigo) FROM EMPLEADOS WHERE sec_codigo = @p0";
-            string sql2 = "SELECT count(sec_codigo) FROM CENTROS_TRABAJOS WHERE sec_codigo = @p0";
-            object[] valorParametros = { codigo };
-            try
-            {
-                int resultadoSql1 = Convert.ToInt32(DB.executeScalar(sql1, valorParametros, null));
-                int resultadoSql2 = Convert.ToInt32(DB.executeScalar(sql2, valorParametros, null));
-                if (resultadoSql1 == 0 && resultadoSql2 == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
+        }        
 
-        public static bool PuedeEliminarseValidacion2(int codigo)
-        {
-            string sql = "SELECT count(sec_codigo) FROM PROCESOS WHERE sec_codigo = @p0";
-            object[] valorParametros = { codigo };
-            try
-            {
-                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
-        public static bool PuedeEliminarseValidacion3(int codigo)
-        {
-            string sql = "SELECT count(sec_codigo) FROM PROVEEDORES WHERE sec_codigo = @p0";
-            object[] valorParametros = { codigo };
-            try
-            {
-                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
-
-       
         //Metodo que elimina de la base de datos
         public static void Eliminar(int codigo)
         {

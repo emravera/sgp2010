@@ -70,7 +70,43 @@ namespace GyCAP.DAL
         
         public static bool PuedeEliminarse(int numeroUbicacionStock)
         {
-            return true;
+            string sqlMovimiento = "SELECT count(mvto_numero) FROM MOVIMIENTOS_STOCK WHERE ustck_origen = @p0 OR ustck_destino = @p0";
+            string sqlProduccion = "SELECT count(ordp_numero) FROM ORDENES_PRODUCCION WHERE ustck_destino = @p0";
+            string sqlTrabajo = "SELECT count(ordt_numero) FROM ORDENES_TRABAJO WHERE ustck_origen = @p0 OR ustck_destino = @p0";
+            string sqlMP = "SELECT count(mp_codigo) FROM MATERIAS_PRIMAS WHERE ustck_numero = @p0";
+            string sqlHR = "SELECT count(hr_codigo) FROM HOJAS_RUTA WHERE ustck_numero = @p0";
+            string sqlDHR = "SELECT count(dhr_codigo) FROM DETALLE_HOJARUTA WHERE ustck_origen = @p0 OR ustck_destino = @p0";
+            string sqlPadre = "SELECT count(ustck_numero) FROM UBICACIONES_STOCK WHERE ustck_padre = @p0";
+            object[] parametros = { numeroUbicacionStock };
+
+            try
+            {
+                int mvto = Convert.ToInt32(DB.executeScalar(sqlMovimiento, parametros, null));
+                int produccion = Convert.ToInt32(DB.executeScalar(sqlProduccion, parametros, null));
+                int trabajo = Convert.ToInt32(DB.executeScalar(sqlTrabajo, parametros, null));
+                int mp = Convert.ToInt32(DB.executeScalar(sqlMP, parametros, null));
+                int hr = Convert.ToInt32(DB.executeScalar(sqlHR, parametros, null));
+                int dhr = Convert.ToInt32(DB.executeScalar(sqlDHR, parametros, null));
+                int padre = Convert.ToInt32(DB.executeScalar(sqlPadre, parametros, null));
+
+                if (mvto + produccion + trabajo + mp + hr + dhr + padre == 0) { return true; }
+                else { return false; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static bool EsUbicacionStock(string codigo, string nombre)
+        {
+            string sql = "SELECT count(ustck_numero) FROM UBICACIONES_STOCK WHERE ustck_codigo = @p0 AND ustck_nombre = @p1";
+            object[] parametros = { codigo, nombre };
+
+            try
+            {
+                int resultado = Convert.ToInt32(DB.executeScalar(sql, parametros, null));
+                if (resultado == 0) { return false; }
+                else { return true; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void ActualizarCantidadesStock(int numeroUbicacion, decimal cantidadReal, decimal cantidadVirtual, SqlTransaction transaccion)
