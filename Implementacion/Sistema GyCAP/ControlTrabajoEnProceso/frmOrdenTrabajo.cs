@@ -119,6 +119,11 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                 BLL.OrdenProduccionBLL.ObtenerOrdenesProduccion(txtCodigoOPBuscar.Text, cboEstadoOPBuscar.GetSelectedValueInt(), cboModoOPBuscar.GetSelectedValueInt(), dtpFechaGeneracionOPBuscar.GetFecha(), dtpFechaDesdeOPBuscar.GetFecha(), dtpFechaHastaOPBuscar.GetFecha(), dsOrdenTrabajo);
 
                 SetInterface(estadoUI.pestañaProduccion);
+
+                if (dsOrdenTrabajo.ORDENES_PRODUCCION.Rows.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron Órdenes de Producción con los criterios ingresados.", "Información: Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+                }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -269,6 +274,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                     btnEliminar.Enabled = hayDatos;
                     estadoInterface = estadoUI.pestañaProduccion;
                     tcOrdenTrabajo.SelectedTab = tpOrdenesProduccion;
+                    txtCodigoOPBuscar.Focus();
                     break;
                 case estadoUI.pestañaTrabajo:
                     if (dsOrdenTrabajo.ORDENES_TRABAJO.Rows.Count == 0)
@@ -738,7 +744,12 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
             dtpHoraCierre.Value = new DateTime(2000, 1, 1, 0, 0, 0);
         }
 
-        
+        private void control_Enter(object sender, EventArgs e)
+        {
+            if (sender.GetType().Equals(txtCodigoOPBuscar.GetType())) { (sender as TextBox).SelectAll(); }
+            if (sender.GetType().Equals(txtObservacionesCierre.GetType())) { (sender as RichTextBox).SelectAll(); }
+            if (sender.GetType().Equals(nudCantidadCierre.GetType())) { (sender as NumericUpDown).Select(0, 20); }
+        }
 
         #endregion Servicios
 

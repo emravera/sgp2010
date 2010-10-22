@@ -31,7 +31,6 @@
             this.btnConsultarOrdenTrabajo = new System.Windows.Forms.Button();
             this.scUp = new System.Windows.Forms.SplitContainer();
             this.btnMenu = new System.Windows.Forms.Button();
-            this.btnConsultarOrdenProduccion = new System.Windows.Forms.Button();
             this.btnOrdenProduccion = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnConsultarPlanificacion = new System.Windows.Forms.Button();
@@ -62,13 +61,14 @@
             this.btnConsultarOrdenTrabajo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarOrdenTrabajo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConsultarOrdenTrabajo.Image = global::GyCAP.UI.ControlTrabajoEnProceso.Properties.Resources.Find_48;
-            this.btnConsultarOrdenTrabajo.Location = new System.Drawing.Point(48, 70);
+            this.btnConsultarOrdenTrabajo.Location = new System.Drawing.Point(48, 8);
             this.btnConsultarOrdenTrabajo.Name = "btnConsultarOrdenTrabajo";
             this.btnConsultarOrdenTrabajo.Size = new System.Drawing.Size(63, 71);
             this.btnConsultarOrdenTrabajo.TabIndex = 3;
             this.btnConsultarOrdenTrabajo.Text = "Consultar";
             this.btnConsultarOrdenTrabajo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarOrdenTrabajo.UseVisualStyleBackColor = true;
+            this.btnConsultarOrdenTrabajo.Click += new System.EventHandler(this.btnConsultarPlanificacion_Click);
             this.btnConsultarOrdenTrabajo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnConsultarOrdenTrabajo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
@@ -110,26 +110,6 @@
             this.btnMenu.UseVisualStyleBackColor = true;
             this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
             // 
-            // btnConsultarOrdenProduccion
-            // 
-            this.btnConsultarOrdenProduccion.AutoSize = true;
-            this.btnConsultarOrdenProduccion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnConsultarOrdenProduccion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConsultarOrdenProduccion.FlatAppearance.BorderSize = 0;
-            this.btnConsultarOrdenProduccion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnConsultarOrdenProduccion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.btnConsultarOrdenProduccion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarOrdenProduccion.Image = global::GyCAP.UI.ControlTrabajoEnProceso.Properties.Resources.New_48;
-            this.btnConsultarOrdenProduccion.Location = new System.Drawing.Point(52, 0);
-            this.btnConsultarOrdenProduccion.Name = "btnConsultarOrdenProduccion";
-            this.btnConsultarOrdenProduccion.Size = new System.Drawing.Size(54, 71);
-            this.btnConsultarOrdenProduccion.TabIndex = 2;
-            this.btnConsultarOrdenProduccion.Text = " Nuevo";
-            this.btnConsultarOrdenProduccion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnConsultarOrdenProduccion.UseVisualStyleBackColor = true;
-            this.btnConsultarOrdenProduccion.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnConsultarOrdenProduccion.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
             // btnOrdenProduccion
             // 
             this.btnOrdenProduccion.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -140,7 +120,7 @@
             this.btnOrdenProduccion.Name = "btnOrdenProduccion";
             this.btnOrdenProduccion.Size = new System.Drawing.Size(158, 25);
             this.btnOrdenProduccion.TabIndex = 0;
-            this.btnOrdenProduccion.Text = "Orden de Producción";
+            this.btnOrdenProduccion.Text = "Producción";
             this.btnOrdenProduccion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnOrdenProduccion.UseVisualStyleBackColor = true;
             this.btnOrdenProduccion.Click += new System.EventHandler(this.btn_Click);
@@ -163,6 +143,7 @@
             this.btnSalir.Text = " Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             this.btnSalir.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnSalir.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
@@ -176,13 +157,14 @@
             this.btnConsultarPlanificacion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnConsultarPlanificacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConsultarPlanificacion.Image = global::GyCAP.UI.ControlTrabajoEnProceso.Properties.Resources.Find_48;
-            this.btnConsultarPlanificacion.Location = new System.Drawing.Point(48, 3);
+            this.btnConsultarPlanificacion.Location = new System.Drawing.Point(48, 5);
             this.btnConsultarPlanificacion.Name = "btnConsultarPlanificacion";
             this.btnConsultarPlanificacion.Size = new System.Drawing.Size(63, 71);
             this.btnConsultarPlanificacion.TabIndex = 1;
             this.btnConsultarPlanificacion.Text = "Consultar";
             this.btnConsultarPlanificacion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarPlanificacion.UseVisualStyleBackColor = true;
+            this.btnConsultarPlanificacion.Click += new System.EventHandler(this.btnConsultarOrdenProduccion_Click);
             this.btnConsultarPlanificacion.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnConsultarPlanificacion.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
@@ -266,7 +248,6 @@
             this.panelPlanificacion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelPlanificacion.BackColor = System.Drawing.Color.Silver;
             this.panelPlanificacion.Controls.Add(this.btnConsultarOrdenTrabajo);
-            this.panelPlanificacion.Controls.Add(this.btnConsultarOrdenProduccion);
             this.panelPlanificacion.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelPlanificacion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelPlanificacion.Location = new System.Drawing.Point(0, 204);
@@ -285,7 +266,7 @@
             this.Name = "frmControlTrabajoEnProceso";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "GyCAP - Control de Trabajo En Proceso";
+            this.Text = "GyCAP - Control de Trabajos En Proceso";
             this.Load += new System.EventHandler(this.frmControlTrabajoEnProceso_Load);
             this.scUp.Panel1.ResumeLayout(false);
             this.scUp.ResumeLayout(false);
@@ -308,7 +289,6 @@
         private System.Windows.Forms.Button btnConsultarOrdenTrabajo;
         private System.Windows.Forms.SplitContainer scUp;
         private System.Windows.Forms.Button btnMenu;
-        private System.Windows.Forms.Button btnConsultarOrdenProduccion;
         private System.Windows.Forms.Button btnOrdenProduccion;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnConsultarPlanificacion;
