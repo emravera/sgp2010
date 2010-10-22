@@ -254,6 +254,7 @@
             this.txtCodigoOPBuscar.Name = "txtCodigoOPBuscar";
             this.txtCodigoOPBuscar.Size = new System.Drawing.Size(193, 21);
             this.txtCodigoOPBuscar.TabIndex = 1;
+            this.txtCodigoOPBuscar.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label10
             // 
@@ -394,6 +395,7 @@
             this.txtCodigoOTFiltrar.Name = "txtCodigoOTFiltrar";
             this.txtCodigoOTFiltrar.Size = new System.Drawing.Size(158, 21);
             this.txtCodigoOTFiltrar.TabIndex = 10;
+            this.txtCodigoOTFiltrar.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label15
             // 
@@ -513,6 +515,7 @@
             this.txtObservacionesCierre.Size = new System.Drawing.Size(281, 129);
             this.txtObservacionesCierre.TabIndex = 23;
             this.txtObservacionesCierre.Text = "";
+            this.txtObservacionesCierre.Enter += new System.EventHandler(this.control_Enter);
             // 
             // nudCantidadCierre
             // 
@@ -527,6 +530,7 @@
             this.nudCantidadCierre.Size = new System.Drawing.Size(200, 21);
             this.nudCantidadCierre.TabIndex = 20;
             this.nudCantidadCierre.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudCantidadCierre.Enter += new System.EventHandler(this.control_Enter);
             // 
             // cboMaquinaCierre
             // 

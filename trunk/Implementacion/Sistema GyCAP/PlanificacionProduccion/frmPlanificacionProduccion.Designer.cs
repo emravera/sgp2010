@@ -253,7 +253,7 @@
             this.btnOrdenTrabajo.Name = "btnOrdenTrabajo";
             this.btnOrdenTrabajo.Size = new System.Drawing.Size(158, 25);
             this.btnOrdenTrabajo.TabIndex = 18;
-            this.btnOrdenTrabajo.Text = "Orden de Trabajo";
+            this.btnOrdenTrabajo.Text = "Orden de Producción";
             this.btnOrdenTrabajo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnOrdenTrabajo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnOrdenTrabajo.UseVisualStyleBackColor = true;
