@@ -263,7 +263,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     }
 
                     btnIniciar.Enabled = hayDatos;
-                    btnCierreParcial.Enabled = false;
+                    btnPausar.Enabled = false;
                     btnFinalizar.Enabled = hayDatos;
                     btnCancelar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
@@ -280,7 +280,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                         hayDatos = true;
                     }
                     btnIniciar.Enabled = hayDatos;
-                    btnCierreParcial.Enabled = hayDatos;
+                    btnPausar.Enabled = hayDatos;
                     btnFinalizar.Enabled = hayDatos;
                     btnCancelar.Enabled = hayDatos;
                     btnEliminar.Enabled = false;
