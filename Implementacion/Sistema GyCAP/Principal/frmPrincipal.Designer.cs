@@ -150,6 +150,7 @@
             this.menuItemCP.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
             this.menuItemCP.Size = new System.Drawing.Size(307, 22);
             this.menuItemCP.Text = "Control de &Trabajos en Proceso";
+            this.menuItemCP.Click += new System.EventHandler(this.menuItemCP_Click);
             // 
             // menuItemEP
             // 

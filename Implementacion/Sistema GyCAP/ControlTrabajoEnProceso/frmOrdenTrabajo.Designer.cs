@@ -1,4 +1,4 @@
-﻿namespace GyCAP.UI.PlanificacionProduccion
+﻿namespace GyCAP.UI.ControlTrabajoEnProceso
 {
     partial class frmOrdenTrabajo
     {
@@ -237,7 +237,7 @@
             // 
             // btnBuscarOP
             // 
-            this.btnBuscarOP.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.lupa_20;
+            this.btnBuscarOP.Image = global::GyCAP.UI.ControlTrabajoEnProceso.Properties.Resources.lupa_20;
             this.btnBuscarOP.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBuscarOP.Location = new System.Drawing.Point(649, 52);
             this.btnBuscarOP.Name = "btnBuscarOP";
@@ -704,7 +704,7 @@
             // 
             // btnIniciar
             // 
-            this.btnIniciar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Iniciar_25;
+            this.btnIniciar.Image = global::GyCAP.UI.ControlTrabajoEnProceso.Properties.Resources.Iniciar_25;
             this.btnIniciar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnIniciar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnIniciar.Name = "btnIniciar";
@@ -715,7 +715,7 @@
             // 
             // btnPausar
             // 
-            this.btnPausar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Cierre_Parcial_25;
+            this.btnPausar.Image = global::GyCAP.UI.ControlTrabajoEnProceso.Properties.Resources.Pausa_25;
             this.btnPausar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnPausar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPausar.Name = "btnPausar";
@@ -726,7 +726,7 @@
             // 
             // btnFinalizar
             // 
-            this.btnFinalizar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Finalizar_25;
+            this.btnFinalizar.Image = global::GyCAP.UI.ControlTrabajoEnProceso.Properties.Resources.Finalizar_25;
             this.btnFinalizar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnFinalizar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnFinalizar.Name = "btnFinalizar";
@@ -737,7 +737,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Cancelar_25;
+            this.btnCancelar.Image = global::GyCAP.UI.ControlTrabajoEnProceso.Properties.Resources.Cancel_25;
             this.btnCancelar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCancelar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCancelar.Name = "btnCancelar";
@@ -747,7 +747,7 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Delete_25;
+            this.btnEliminar.Image = global::GyCAP.UI.ControlTrabajoEnProceso.Properties.Resources.Delete_25;
             this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
@@ -762,7 +762,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Salir_25;
+            this.btnSalir.Image = global::GyCAP.UI.ControlTrabajoEnProceso.Properties.Resources.Salir_25;
             this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";
