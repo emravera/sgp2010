@@ -74,6 +74,12 @@ namespace Principal
             GyCAP.UI.Mantenimiento.frmMantenimiento.Instancia.MdiParent = this;
             GyCAP.UI.Mantenimiento.frmMantenimiento.Instancia.Show();
         }
+
+        private void menuItemCP_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.ControlTrabajoEnProceso.frmControlTrabajoEnProceso.Instancia.MdiParent = this;
+            GyCAP.UI.ControlTrabajoEnProceso.frmControlTrabajoEnProceso.Instancia.Show();
+        }
         
         #endregion
 
@@ -160,8 +166,7 @@ namespace Principal
         //ELIMINAR LO QUE SIGUE
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            GyCAP.UI.PlanificacionProduccion.frmOrdenTrabajo.Instancia.MdiParent = this;
-            GyCAP.UI.PlanificacionProduccion.frmOrdenTrabajo.Instancia.Show();
+            
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -276,6 +281,8 @@ namespace Principal
             GyCAP.UI.GestionStock.frmInventarioABC.Instancia.MdiParent = this;
             GyCAP.UI.GestionStock.frmInventarioABC.Instancia.Show();
         }
+
+        
 
         
     }

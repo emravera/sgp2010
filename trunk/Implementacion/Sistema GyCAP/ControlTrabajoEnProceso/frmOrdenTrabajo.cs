@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace GyCAP.UI.PlanificacionProduccion
+namespace GyCAP.UI.ControlTrabajoEnProceso
 {
     public partial class frmOrdenTrabajo : Form
     {

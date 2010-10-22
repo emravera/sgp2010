@@ -78,10 +78,30 @@
     <Compile Include="frmControlPlanificacion.Designer.cs">
       <DependentUpon>frmControlPlanificacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmControlTrabajoEnProceso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmControlTrabajoEnProceso.Designer.cs">
+      <DependentUpon>frmControlTrabajoEnProceso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmOrdenTrabajo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOrdenTrabajo.Designer.cs">
+      <DependentUpon>frmOrdenTrabajo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmControlPlanificacion.resx">
       <DependentUpon>frmControlPlanificacion.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmControlTrabajoEnProceso.resx">
+      <DependentUpon>frmControlTrabajoEnProceso.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOrdenTrabajo.resx">
+      <DependentUpon>frmOrdenTrabajo.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -123,6 +143,102 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\New-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pausa-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\abajo1-15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Apply-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arbol-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arriba1-15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calculadora-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cancel-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cancelar-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cierre-Parcial-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delete-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\derecha1-15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Finalizar-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Find-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Find-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Floppy-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Information-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Iniciar-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Listados-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lupa-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lupa-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Open-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Page-Setup-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Password-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printer-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Question-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\System-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\System.Set-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Text-Editor-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Warning-25.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
