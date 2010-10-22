@@ -329,5 +329,14 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        //Método para actualizar las cantidades fabricadas una vez finalizadas las órdenes de producción correspondientes
+        public static void SumarCantidadFinalizada(int codigoPlanSemanal, int cantidad, int codigoCocina, SqlTransaction transaccion)
+        {
+            string sql = "SELECT pmes_codigo FROM PLANES_SEMANALES WHERE psem_codigo = @p0";
+            object[] parametros = { codigoPlanSemanal };
+
+            PlanMensualDAL.SumarCantidadFinalizada(Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion)), cantidad, codigoCocina, transaccion);
+        }
+
     }
 }

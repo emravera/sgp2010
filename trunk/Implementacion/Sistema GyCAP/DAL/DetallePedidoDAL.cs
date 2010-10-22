@@ -10,6 +10,7 @@ namespace GyCAP.DAL
     public class DetallePedidoDAL
     {
         public static readonly int EstadoEnCurso = 2;
+        public static readonly int EstadoFinalizado = 5;
         
         public static void Insertar(Entidades.DetallePedido detalle, SqlTransaction transaccion)
         {
@@ -50,16 +51,20 @@ namespace GyCAP.DAL
         public static void ActualizarEstadoAEnCurso(int codigoDetalle, SqlTransaction transaccion)
         {
             ActualizarEstado(codigoDetalle, EstadoEnCurso, transaccion);
-            string sql = "SELECT ped_codigo FROM DETALLE_PEDIDOS WHERE dped_codigo = @p0";
-            object[] parametros = { codigoDetalle };
-            PedidoDAL.ActualizarEstadoAEnCurso(Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion)), transaccion);
         }
-        
+
+        public static void ActualizarEstadoAFinalizado(int codigoDetalle, SqlTransaction transaccion)
+        {
+            ActualizarEstado(codigoDetalle, EstadoFinalizado, transaccion);
+        }
+
         public static void ActualizarEstado(int codigoDetalle, int codigoEstado, SqlTransaction transaccion)
         {
             string sql = "UPDATE DETALLE_PEDIDOS SET edped_codigo = @p0 WHERE dped_codigo = @p1";
             object[] parametros = { codigoEstado, codigoDetalle };
             DB.executeNonQuery(sql, parametros, transaccion);
         }
+
+
     }
 }

@@ -43,10 +43,11 @@
             this.btnGenerarOrdenP = new System.Windows.Forms.Button();
             this.tvDetallePlan = new System.Windows.Forms.TreeView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnGenerarOrdenT = new System.Windows.Forms.Button();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.btnAsignarCantidad = new System.Windows.Forms.Button();
             this.nudCantidadOrdenP = new System.Windows.Forms.NumericUpDown();
+            this.btnGenerarOrdenT = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnBajarPrioridad = new System.Windows.Forms.Button();
             this.btnSubirPrioridad = new System.Windows.Forms.Button();
             this.dgvListaOrdenProduccion = new System.Windows.Forms.DataGridView();
@@ -59,14 +60,30 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cbSemanaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.tpManual = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.btnAsignarCantidadManual = new System.Windows.Forms.Button();
+            this.nudCantidadModificarManual = new System.Windows.Forms.NumericUpDown();
+            this.btnGenerarOrdenTrabajoManual = new System.Windows.Forms.Button();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.btnBajarPrioridadManual = new System.Windows.Forms.Button();
+            this.btnSubirPrioridadManual = new System.Windows.Forms.Button();
+            this.dgvOrdenProduccionManual = new System.Windows.Forms.DataGridView();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.label40 = new System.Windows.Forms.Label();
+            this.btnGenerarOrdenProduccionManual = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label37 = new System.Windows.Forms.Label();
+            this.dropDownList3 = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.dropDownList2 = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.dropDownList1 = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.tpOrdenProduccion = new System.Windows.Forms.TabPage();
             this.gbFechas = new System.Windows.Forms.GroupBox();
-            this.cbModoStock = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.label28 = new System.Windows.Forms.Label();
-            this.cbModoInicio = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.btnCalcularFechas = new System.Windows.Forms.Button();
             this.dtpFechaPlanear = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.label19 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
             this.cbModoFecha = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
@@ -88,8 +105,6 @@
             this.txtCocinaOrdenP = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.txtEstadoOrdenP = new System.Windows.Forms.TextBox();
-            this.txtNumeroOrdenP = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.txtOrigenOrdenP = new System.Windows.Forms.TextBox();
             this.txtCodigoOrdenP = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
@@ -147,37 +162,27 @@
             this.cmsGrillaOrdenesProduccion = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiBloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDesbloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.dropDownList1 = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.dropDownList2 = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.dropDownList3 = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.label37 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.btnGenerarOrdenProduccionManual = new System.Windows.Forms.Button();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.btnGenerarOrdenTrabajoManual = new System.Windows.Forms.Button();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.btnAsignarCantidadManual = new System.Windows.Forms.Button();
-            this.nudCantidadModificarManual = new System.Windows.Forms.NumericUpDown();
-            this.btnBajarPrioridadManual = new System.Windows.Forms.Button();
-            this.btnSubirPrioridadManual = new System.Windows.Forms.Button();
-            this.dgvOrdenProduccionManual = new System.Windows.Forms.DataGridView();
-            this.label40 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.lblStock = new System.Windows.Forms.Label();
+            this.cboStockDestino = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.tcOrdenTrabajo.SuspendLayout();
             this.tpAutomatico.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox6.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidadOrdenP)).BeginInit();
+            this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaOrdenProduccion)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.tpManual.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadModificarManual)).BeginInit();
+            this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenProduccionManual)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tpOrdenProduccion.SuspendLayout();
             this.gbFechas.SuspendLayout();
             this.gbOpcionesOP.SuspendLayout();
@@ -190,15 +195,6 @@
             this.tsMenu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.cmsGrillaOrdenesProduccion.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            this.groupBox7.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadModificarManual)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenProduccionManual)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            this.groupBox9.SuspendLayout();
-            this.groupBox10.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcOrdenTrabajo
@@ -351,33 +347,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Listado de órdenes de producción";
             // 
-            // btnGenerarOrdenT
+            // groupBox10
             // 
-            this.btnGenerarOrdenT.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnGenerarOrdenT.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnGenerarOrdenT.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnGenerarOrdenT.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.System_25;
-            this.btnGenerarOrdenT.Location = new System.Drawing.Point(588, 184);
-            this.btnGenerarOrdenT.Name = "btnGenerarOrdenT";
-            this.btnGenerarOrdenT.Size = new System.Drawing.Size(180, 36);
-            this.btnGenerarOrdenT.TabIndex = 11;
-            this.btnGenerarOrdenT.Text = "Generar órdenes de &trabajo";
-            this.btnGenerarOrdenT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnGenerarOrdenT.UseVisualStyleBackColor = true;
-            this.btnGenerarOrdenT.Click += new System.EventHandler(this.btnGenerarOrdenT_Click);
-            this.btnGenerarOrdenT.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnGenerarOrdenT.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.btnBajarPrioridad);
-            this.groupBox6.Controls.Add(this.btnSubirPrioridad);
-            this.groupBox6.Location = new System.Drawing.Point(588, 15);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(180, 89);
-            this.groupBox6.TabIndex = 9;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Prioridad";
+            this.groupBox10.Controls.Add(this.btnAsignarCantidad);
+            this.groupBox10.Controls.Add(this.nudCantidadOrdenP);
+            this.groupBox10.Location = new System.Drawing.Point(589, 110);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(179, 68);
+            this.groupBox10.TabIndex = 12;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Cantidad";
             // 
             // btnAsignarCantidad
             // 
@@ -409,6 +388,34 @@
             this.nudCantidadOrdenP.Size = new System.Drawing.Size(75, 21);
             this.nudCantidadOrdenP.TabIndex = 4;
             this.nudCantidadOrdenP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // btnGenerarOrdenT
+            // 
+            this.btnGenerarOrdenT.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGenerarOrdenT.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnGenerarOrdenT.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnGenerarOrdenT.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.System_25;
+            this.btnGenerarOrdenT.Location = new System.Drawing.Point(588, 184);
+            this.btnGenerarOrdenT.Name = "btnGenerarOrdenT";
+            this.btnGenerarOrdenT.Size = new System.Drawing.Size(180, 36);
+            this.btnGenerarOrdenT.TabIndex = 11;
+            this.btnGenerarOrdenT.Text = "Generar órdenes de &trabajo";
+            this.btnGenerarOrdenT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnGenerarOrdenT.UseVisualStyleBackColor = true;
+            this.btnGenerarOrdenT.Click += new System.EventHandler(this.btnGenerarOrdenT_Click);
+            this.btnGenerarOrdenT.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnGenerarOrdenT.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.btnBajarPrioridad);
+            this.groupBox6.Controls.Add(this.btnSubirPrioridad);
+            this.groupBox6.Location = new System.Drawing.Point(588, 15);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(180, 89);
+            this.groupBox6.TabIndex = 9;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Prioridad";
             // 
             // btnBajarPrioridad
             // 
@@ -572,6 +579,251 @@
             this.tpManual.Text = "Generar";
             this.tpManual.UseVisualStyleBackColor = true;
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.groupBox9);
+            this.groupBox7.Controls.Add(this.btnGenerarOrdenTrabajoManual);
+            this.groupBox7.Controls.Add(this.groupBox8);
+            this.groupBox7.Controls.Add(this.dgvOrdenProduccionManual);
+            this.groupBox7.Location = new System.Drawing.Point(5, 243);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(770, 247);
+            this.groupBox7.TabIndex = 14;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Listado de órdenes de producción";
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.btnAsignarCantidadManual);
+            this.groupBox9.Controls.Add(this.nudCantidadModificarManual);
+            this.groupBox9.Location = new System.Drawing.Point(588, 107);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(180, 92);
+            this.groupBox9.TabIndex = 12;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Cantidad";
+            // 
+            // btnAsignarCantidadManual
+            // 
+            this.btnAsignarCantidadManual.AutoSize = true;
+            this.btnAsignarCantidadManual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAsignarCantidadManual.FlatAppearance.BorderSize = 0;
+            this.btnAsignarCantidadManual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnAsignarCantidadManual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnAsignarCantidadManual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAsignarCantidadManual.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Apply_25;
+            this.btnAsignarCantidadManual.Location = new System.Drawing.Point(124, 33);
+            this.btnAsignarCantidadManual.Name = "btnAsignarCantidadManual";
+            this.btnAsignarCantidadManual.Size = new System.Drawing.Size(31, 31);
+            this.btnAsignarCantidadManual.TabIndex = 5;
+            this.btnAsignarCantidadManual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAsignarCantidadManual.UseVisualStyleBackColor = true;
+            // 
+            // nudCantidadModificarManual
+            // 
+            this.nudCantidadModificarManual.Location = new System.Drawing.Point(43, 39);
+            this.nudCantidadModificarManual.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudCantidadModificarManual.Name = "nudCantidadModificarManual";
+            this.nudCantidadModificarManual.Size = new System.Drawing.Size(75, 21);
+            this.nudCantidadModificarManual.TabIndex = 4;
+            this.nudCantidadModificarManual.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // btnGenerarOrdenTrabajoManual
+            // 
+            this.btnGenerarOrdenTrabajoManual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGenerarOrdenTrabajoManual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnGenerarOrdenTrabajoManual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnGenerarOrdenTrabajoManual.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.System_25;
+            this.btnGenerarOrdenTrabajoManual.Location = new System.Drawing.Point(588, 205);
+            this.btnGenerarOrdenTrabajoManual.Name = "btnGenerarOrdenTrabajoManual";
+            this.btnGenerarOrdenTrabajoManual.Size = new System.Drawing.Size(180, 36);
+            this.btnGenerarOrdenTrabajoManual.TabIndex = 11;
+            this.btnGenerarOrdenTrabajoManual.Text = "Generar órdenes &trabajo";
+            this.btnGenerarOrdenTrabajoManual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnGenerarOrdenTrabajoManual.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.btnBajarPrioridadManual);
+            this.groupBox8.Controls.Add(this.btnSubirPrioridadManual);
+            this.groupBox8.Location = new System.Drawing.Point(588, 15);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(180, 86);
+            this.groupBox8.TabIndex = 9;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Prioridad";
+            // 
+            // btnBajarPrioridadManual
+            // 
+            this.btnBajarPrioridadManual.AutoSize = true;
+            this.btnBajarPrioridadManual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnBajarPrioridadManual.FlatAppearance.BorderSize = 0;
+            this.btnBajarPrioridadManual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnBajarPrioridadManual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnBajarPrioridadManual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBajarPrioridadManual.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.abajo1_15;
+            this.btnBajarPrioridadManual.Location = new System.Drawing.Point(37, 50);
+            this.btnBajarPrioridadManual.Name = "btnBajarPrioridadManual";
+            this.btnBajarPrioridadManual.Size = new System.Drawing.Size(83, 23);
+            this.btnBajarPrioridadManual.TabIndex = 2;
+            this.btnBajarPrioridadManual.Text = "   Disminuir";
+            this.btnBajarPrioridadManual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBajarPrioridadManual.UseVisualStyleBackColor = true;
+            // 
+            // btnSubirPrioridadManual
+            // 
+            this.btnSubirPrioridadManual.AutoSize = true;
+            this.btnSubirPrioridadManual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSubirPrioridadManual.FlatAppearance.BorderSize = 0;
+            this.btnSubirPrioridadManual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSubirPrioridadManual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSubirPrioridadManual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubirPrioridadManual.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.arriba1_15;
+            this.btnSubirPrioridadManual.Location = new System.Drawing.Point(37, 23);
+            this.btnSubirPrioridadManual.Name = "btnSubirPrioridadManual";
+            this.btnSubirPrioridadManual.Size = new System.Drawing.Size(88, 23);
+            this.btnSubirPrioridadManual.TabIndex = 1;
+            this.btnSubirPrioridadManual.Text = "   Aumentar";
+            this.btnSubirPrioridadManual.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSubirPrioridadManual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubirPrioridadManual.UseVisualStyleBackColor = true;
+            // 
+            // dgvOrdenProduccionManual
+            // 
+            this.dgvOrdenProduccionManual.AllowUserToAddRows = false;
+            this.dgvOrdenProduccionManual.AllowUserToDeleteRows = false;
+            this.dgvOrdenProduccionManual.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.dgvOrdenProduccionManual.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOrdenProduccionManual.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dgvOrdenProduccionManual.Location = new System.Drawing.Point(3, 17);
+            this.dgvOrdenProduccionManual.MultiSelect = false;
+            this.dgvOrdenProduccionManual.Name = "dgvOrdenProduccionManual";
+            this.dgvOrdenProduccionManual.RowHeadersVisible = false;
+            this.dgvOrdenProduccionManual.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvOrdenProduccionManual.Size = new System.Drawing.Size(574, 227);
+            this.dgvOrdenProduccionManual.TabIndex = 8;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.numericUpDown2);
+            this.groupBox4.Controls.Add(this.label40);
+            this.groupBox4.Controls.Add(this.btnGenerarOrdenProduccionManual);
+            this.groupBox4.Controls.Add(this.numericUpDown1);
+            this.groupBox4.Controls.Add(this.label37);
+            this.groupBox4.Controls.Add(this.dropDownList3);
+            this.groupBox4.Controls.Add(this.dropDownList2);
+            this.groupBox4.Controls.Add(this.dropDownList1);
+            this.groupBox4.Controls.Add(this.radioButton2);
+            this.groupBox4.Controls.Add(this.radioButton1);
+            this.groupBox4.Location = new System.Drawing.Point(5, 3);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(770, 234);
+            this.groupBox4.TabIndex = 0;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Seleccione el producto a fabricar";
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(125, 152);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(120, 21);
+            this.numericUpDown2.TabIndex = 9;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(38, 154);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(53, 13);
+            this.label40.TabIndex = 8;
+            this.label40.Text = "Prioridad:";
+            // 
+            // btnGenerarOrdenProduccionManual
+            // 
+            this.btnGenerarOrdenProduccionManual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGenerarOrdenProduccionManual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnGenerarOrdenProduccionManual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnGenerarOrdenProduccionManual.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.System_25;
+            this.btnGenerarOrdenProduccionManual.Location = new System.Drawing.Point(312, 176);
+            this.btnGenerarOrdenProduccionManual.Name = "btnGenerarOrdenProduccionManual";
+            this.btnGenerarOrdenProduccionManual.Size = new System.Drawing.Size(180, 36);
+            this.btnGenerarOrdenProduccionManual.TabIndex = 7;
+            this.btnGenerarOrdenProduccionManual.Text = "Generar orden de &producción";
+            this.btnGenerarOrdenProduccionManual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnGenerarOrdenProduccionManual.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(125, 108);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 21);
+            this.numericUpDown1.TabIndex = 6;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(38, 116);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(54, 13);
+            this.label37.TabIndex = 5;
+            this.label37.Text = "Cantidad:";
+            // 
+            // dropDownList3
+            // 
+            this.dropDownList3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropDownList3.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.dropDownList3.FormattingEnabled = true;
+            this.dropDownList3.Location = new System.Drawing.Point(291, 75);
+            this.dropDownList3.Name = "dropDownList3";
+            this.dropDownList3.Size = new System.Drawing.Size(121, 21);
+            this.dropDownList3.TabIndex = 4;
+            // 
+            // dropDownList2
+            // 
+            this.dropDownList2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropDownList2.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.dropDownList2.FormattingEnabled = true;
+            this.dropDownList2.Location = new System.Drawing.Point(125, 75);
+            this.dropDownList2.Name = "dropDownList2";
+            this.dropDownList2.Size = new System.Drawing.Size(121, 21);
+            this.dropDownList2.TabIndex = 3;
+            // 
+            // dropDownList1
+            // 
+            this.dropDownList1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropDownList1.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.dropDownList1.FormattingEnabled = true;
+            this.dropDownList1.Location = new System.Drawing.Point(125, 34);
+            this.dropDownList1.Name = "dropDownList1";
+            this.dropDownList1.Size = new System.Drawing.Size(121, 21);
+            this.dropDownList1.TabIndex = 2;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(38, 75);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(51, 17);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Parte";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(38, 38);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(57, 17);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Cocina";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
             // tpOrdenProduccion
             // 
             this.tpOrdenProduccion.Controls.Add(this.gbFechas);
@@ -587,12 +839,8 @@
             // 
             // gbFechas
             // 
-            this.gbFechas.Controls.Add(this.cbModoStock);
-            this.gbFechas.Controls.Add(this.label28);
-            this.gbFechas.Controls.Add(this.cbModoInicio);
             this.gbFechas.Controls.Add(this.btnCalcularFechas);
             this.gbFechas.Controls.Add(this.dtpFechaPlanear);
-            this.gbFechas.Controls.Add(this.label19);
             this.gbFechas.Controls.Add(this.label34);
             this.gbFechas.Controls.Add(this.label35);
             this.gbFechas.Controls.Add(this.cbModoFecha);
@@ -602,35 +850,6 @@
             this.gbFechas.TabIndex = 3;
             this.gbFechas.TabStop = false;
             this.gbFechas.Text = "Fechas";
-            // 
-            // cbModoStock
-            // 
-            this.cbModoStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbModoStock.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbModoStock.FormattingEnabled = true;
-            this.cbModoStock.Location = new System.Drawing.Point(20, 97);
-            this.cbModoStock.Name = "cbModoStock";
-            this.cbModoStock.Size = new System.Drawing.Size(157, 21);
-            this.cbModoStock.TabIndex = 24;
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(20, 81);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(77, 13);
-            this.label28.TabIndex = 23;
-            this.label28.Text = "Modo de Stock";
-            // 
-            // cbModoInicio
-            // 
-            this.cbModoInicio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbModoInicio.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbModoInicio.FormattingEnabled = true;
-            this.cbModoInicio.Location = new System.Drawing.Point(236, 40);
-            this.cbModoInicio.Name = "cbModoInicio";
-            this.cbModoInicio.Size = new System.Drawing.Size(155, 21);
-            this.cbModoInicio.TabIndex = 22;
             // 
             // btnCalcularFechas
             // 
@@ -652,24 +871,15 @@
             // 
             this.dtpFechaPlanear.CustomFormat = " ";
             this.dtpFechaPlanear.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaPlanear.Location = new System.Drawing.Point(236, 97);
+            this.dtpFechaPlanear.Location = new System.Drawing.Point(224, 73);
             this.dtpFechaPlanear.Name = "dtpFechaPlanear";
             this.dtpFechaPlanear.Size = new System.Drawing.Size(157, 21);
             this.dtpFechaPlanear.TabIndex = 19;
             // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(235, 24);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(74, 13);
-            this.label19.TabIndex = 21;
-            this.label19.Text = "Modo de inicio";
-            // 
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(20, 24);
+            this.label34.Location = new System.Drawing.Point(18, 58);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(102, 13);
             this.label34.TabIndex = 16;
@@ -678,7 +888,7 @@
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(235, 81);
+            this.label35.Location = new System.Drawing.Point(223, 57);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(36, 13);
             this.label35.TabIndex = 17;
@@ -689,7 +899,7 @@
             this.cbModoFecha.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbModoFecha.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbModoFecha.FormattingEnabled = true;
-            this.cbModoFecha.Location = new System.Drawing.Point(20, 40);
+            this.cbModoFecha.Location = new System.Drawing.Point(18, 74);
             this.cbModoFecha.Name = "cbModoFecha";
             this.cbModoFecha.Size = new System.Drawing.Size(157, 21);
             this.cbModoFecha.TabIndex = 18;
@@ -831,18 +1041,18 @@
             // 
             // gbDatosOrdenP
             // 
+            this.gbDatosOrdenP.Controls.Add(this.cboStockDestino);
             this.gbDatosOrdenP.Controls.Add(this.txtFechaInicioOrdenP);
             this.gbDatosOrdenP.Controls.Add(this.txtFechaAltaOrdenP);
             this.gbDatosOrdenP.Controls.Add(this.txtFechaFinOrdenP);
             this.gbDatosOrdenP.Controls.Add(this.txtCantidadOrdenP);
             this.gbDatosOrdenP.Controls.Add(this.txtObservacionesOrdenP);
+            this.gbDatosOrdenP.Controls.Add(this.lblStock);
             this.gbDatosOrdenP.Controls.Add(this.label7);
             this.gbDatosOrdenP.Controls.Add(this.label14);
             this.gbDatosOrdenP.Controls.Add(this.txtCocinaOrdenP);
             this.gbDatosOrdenP.Controls.Add(this.label13);
             this.gbDatosOrdenP.Controls.Add(this.txtEstadoOrdenP);
-            this.gbDatosOrdenP.Controls.Add(this.txtNumeroOrdenP);
-            this.gbDatosOrdenP.Controls.Add(this.label6);
             this.gbDatosOrdenP.Controls.Add(this.txtOrigenOrdenP);
             this.gbDatosOrdenP.Controls.Add(this.txtCodigoOrdenP);
             this.gbDatosOrdenP.Controls.Add(this.label24);
@@ -943,26 +1153,9 @@
             this.txtEstadoOrdenP.Size = new System.Drawing.Size(160, 21);
             this.txtEstadoOrdenP.TabIndex = 18;
             // 
-            // txtNumeroOrdenP
-            // 
-            this.txtNumeroOrdenP.Location = new System.Drawing.Point(78, 25);
-            this.txtNumeroOrdenP.Name = "txtNumeroOrdenP";
-            this.txtNumeroOrdenP.ReadOnly = true;
-            this.txtNumeroOrdenP.Size = new System.Drawing.Size(160, 21);
-            this.txtNumeroOrdenP.TabIndex = 15;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(11, 28);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(48, 13);
-            this.label6.TabIndex = 40;
-            this.label6.Text = "Número:";
-            // 
             // txtOrigenOrdenP
             // 
-            this.txtOrigenOrdenP.Location = new System.Drawing.Point(602, 25);
+            this.txtOrigenOrdenP.Location = new System.Drawing.Point(325, 25);
             this.txtOrigenOrdenP.MaxLength = 100;
             this.txtOrigenOrdenP.Name = "txtOrigenOrdenP";
             this.txtOrigenOrdenP.Size = new System.Drawing.Size(160, 21);
@@ -970,7 +1163,7 @@
             // 
             // txtCodigoOrdenP
             // 
-            this.txtCodigoOrdenP.Location = new System.Drawing.Point(325, 25);
+            this.txtCodigoOrdenP.Location = new System.Drawing.Point(78, 25);
             this.txtCodigoOrdenP.MaxLength = 100;
             this.txtCodigoOrdenP.Name = "txtCodigoOrdenP";
             this.txtCodigoOrdenP.ReadOnly = true;
@@ -1016,7 +1209,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(253, 28);
+            this.label15.Location = new System.Drawing.Point(11, 28);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(44, 13);
             this.label15.TabIndex = 13;
@@ -1025,7 +1218,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(501, 28);
+            this.label9.Location = new System.Drawing.Point(253, 28);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(43, 13);
             this.label9.TabIndex = 7;
@@ -1514,261 +1707,24 @@
             this.tsmiDesbloquearColumna.Text = "Desbloquear columna";
             this.tsmiDesbloquearColumna.Click += new System.EventHandler(this.tsmiDesbloquearColumna_Click);
             // 
-            // groupBox4
+            // lblStock
             // 
-            this.groupBox4.Controls.Add(this.numericUpDown2);
-            this.groupBox4.Controls.Add(this.label40);
-            this.groupBox4.Controls.Add(this.btnGenerarOrdenProduccionManual);
-            this.groupBox4.Controls.Add(this.numericUpDown1);
-            this.groupBox4.Controls.Add(this.label37);
-            this.groupBox4.Controls.Add(this.dropDownList3);
-            this.groupBox4.Controls.Add(this.dropDownList2);
-            this.groupBox4.Controls.Add(this.dropDownList1);
-            this.groupBox4.Controls.Add(this.radioButton2);
-            this.groupBox4.Controls.Add(this.radioButton1);
-            this.groupBox4.Location = new System.Drawing.Point(5, 3);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(770, 234);
-            this.groupBox4.TabIndex = 0;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Seleccione el producto a fabricar";
+            this.lblStock.AutoSize = true;
+            this.lblStock.Location = new System.Drawing.Point(501, 28);
+            this.lblStock.Name = "lblStock";
+            this.lblStock.Size = new System.Drawing.Size(75, 13);
+            this.lblStock.TabIndex = 40;
+            this.lblStock.Text = "Stock destino:";
             // 
-            // radioButton1
+            // cboStockDestino
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(38, 38);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(57, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Cocina";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(38, 75);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(51, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Parte";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // dropDownList1
-            // 
-            this.dropDownList1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropDownList1.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.dropDownList1.FormattingEnabled = true;
-            this.dropDownList1.Location = new System.Drawing.Point(125, 34);
-            this.dropDownList1.Name = "dropDownList1";
-            this.dropDownList1.Size = new System.Drawing.Size(121, 21);
-            this.dropDownList1.TabIndex = 2;
-            // 
-            // dropDownList2
-            // 
-            this.dropDownList2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropDownList2.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.dropDownList2.FormattingEnabled = true;
-            this.dropDownList2.Location = new System.Drawing.Point(125, 75);
-            this.dropDownList2.Name = "dropDownList2";
-            this.dropDownList2.Size = new System.Drawing.Size(121, 21);
-            this.dropDownList2.TabIndex = 3;
-            // 
-            // dropDownList3
-            // 
-            this.dropDownList3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropDownList3.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.dropDownList3.FormattingEnabled = true;
-            this.dropDownList3.Location = new System.Drawing.Point(291, 75);
-            this.dropDownList3.Name = "dropDownList3";
-            this.dropDownList3.Size = new System.Drawing.Size(121, 21);
-            this.dropDownList3.TabIndex = 4;
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(38, 116);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(54, 13);
-            this.label37.TabIndex = 5;
-            this.label37.Text = "Cantidad:";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(125, 108);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 21);
-            this.numericUpDown1.TabIndex = 6;
-            // 
-            // btnGenerarOrdenProduccionManual
-            // 
-            this.btnGenerarOrdenProduccionManual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnGenerarOrdenProduccionManual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnGenerarOrdenProduccionManual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnGenerarOrdenProduccionManual.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.System_25;
-            this.btnGenerarOrdenProduccionManual.Location = new System.Drawing.Point(312, 176);
-            this.btnGenerarOrdenProduccionManual.Name = "btnGenerarOrdenProduccionManual";
-            this.btnGenerarOrdenProduccionManual.Size = new System.Drawing.Size(180, 36);
-            this.btnGenerarOrdenProduccionManual.TabIndex = 7;
-            this.btnGenerarOrdenProduccionManual.Text = "Generar orden de &producción";
-            this.btnGenerarOrdenProduccionManual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnGenerarOrdenProduccionManual.UseVisualStyleBackColor = true;
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.groupBox9);
-            this.groupBox7.Controls.Add(this.btnGenerarOrdenTrabajoManual);
-            this.groupBox7.Controls.Add(this.groupBox8);
-            this.groupBox7.Controls.Add(this.dgvOrdenProduccionManual);
-            this.groupBox7.Location = new System.Drawing.Point(5, 243);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(770, 247);
-            this.groupBox7.TabIndex = 14;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Listado de órdenes de producción";
-            // 
-            // btnGenerarOrdenTrabajoManual
-            // 
-            this.btnGenerarOrdenTrabajoManual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnGenerarOrdenTrabajoManual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnGenerarOrdenTrabajoManual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnGenerarOrdenTrabajoManual.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.System_25;
-            this.btnGenerarOrdenTrabajoManual.Location = new System.Drawing.Point(588, 205);
-            this.btnGenerarOrdenTrabajoManual.Name = "btnGenerarOrdenTrabajoManual";
-            this.btnGenerarOrdenTrabajoManual.Size = new System.Drawing.Size(180, 36);
-            this.btnGenerarOrdenTrabajoManual.TabIndex = 11;
-            this.btnGenerarOrdenTrabajoManual.Text = "Generar órdenes &trabajo";
-            this.btnGenerarOrdenTrabajoManual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnGenerarOrdenTrabajoManual.UseVisualStyleBackColor = true;
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.btnBajarPrioridadManual);
-            this.groupBox8.Controls.Add(this.btnSubirPrioridadManual);
-            this.groupBox8.Location = new System.Drawing.Point(588, 15);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(180, 86);
-            this.groupBox8.TabIndex = 9;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Prioridad";
-            // 
-            // btnAsignarCantidadManual
-            // 
-            this.btnAsignarCantidadManual.AutoSize = true;
-            this.btnAsignarCantidadManual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnAsignarCantidadManual.FlatAppearance.BorderSize = 0;
-            this.btnAsignarCantidadManual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnAsignarCantidadManual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnAsignarCantidadManual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAsignarCantidadManual.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Apply_25;
-            this.btnAsignarCantidadManual.Location = new System.Drawing.Point(124, 33);
-            this.btnAsignarCantidadManual.Name = "btnAsignarCantidadManual";
-            this.btnAsignarCantidadManual.Size = new System.Drawing.Size(31, 31);
-            this.btnAsignarCantidadManual.TabIndex = 5;
-            this.btnAsignarCantidadManual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAsignarCantidadManual.UseVisualStyleBackColor = true;
-            // 
-            // nudCantidadModificarManual
-            // 
-            this.nudCantidadModificarManual.Location = new System.Drawing.Point(43, 39);
-            this.nudCantidadModificarManual.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.nudCantidadModificarManual.Name = "nudCantidadModificarManual";
-            this.nudCantidadModificarManual.Size = new System.Drawing.Size(75, 21);
-            this.nudCantidadModificarManual.TabIndex = 4;
-            this.nudCantidadModificarManual.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // btnBajarPrioridadManual
-            // 
-            this.btnBajarPrioridadManual.AutoSize = true;
-            this.btnBajarPrioridadManual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnBajarPrioridadManual.FlatAppearance.BorderSize = 0;
-            this.btnBajarPrioridadManual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnBajarPrioridadManual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnBajarPrioridadManual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBajarPrioridadManual.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.abajo1_15;
-            this.btnBajarPrioridadManual.Location = new System.Drawing.Point(37, 50);
-            this.btnBajarPrioridadManual.Name = "btnBajarPrioridadManual";
-            this.btnBajarPrioridadManual.Size = new System.Drawing.Size(83, 23);
-            this.btnBajarPrioridadManual.TabIndex = 2;
-            this.btnBajarPrioridadManual.Text = "   Disminuir";
-            this.btnBajarPrioridadManual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnBajarPrioridadManual.UseVisualStyleBackColor = true;
-            // 
-            // btnSubirPrioridadManual
-            // 
-            this.btnSubirPrioridadManual.AutoSize = true;
-            this.btnSubirPrioridadManual.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSubirPrioridadManual.FlatAppearance.BorderSize = 0;
-            this.btnSubirPrioridadManual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnSubirPrioridadManual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnSubirPrioridadManual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSubirPrioridadManual.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.arriba1_15;
-            this.btnSubirPrioridadManual.Location = new System.Drawing.Point(37, 23);
-            this.btnSubirPrioridadManual.Name = "btnSubirPrioridadManual";
-            this.btnSubirPrioridadManual.Size = new System.Drawing.Size(88, 23);
-            this.btnSubirPrioridadManual.TabIndex = 1;
-            this.btnSubirPrioridadManual.Text = "   Aumentar";
-            this.btnSubirPrioridadManual.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSubirPrioridadManual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSubirPrioridadManual.UseVisualStyleBackColor = true;
-            // 
-            // dgvOrdenProduccionManual
-            // 
-            this.dgvOrdenProduccionManual.AllowUserToAddRows = false;
-            this.dgvOrdenProduccionManual.AllowUserToDeleteRows = false;
-            this.dgvOrdenProduccionManual.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.dgvOrdenProduccionManual.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvOrdenProduccionManual.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dgvOrdenProduccionManual.Location = new System.Drawing.Point(3, 17);
-            this.dgvOrdenProduccionManual.MultiSelect = false;
-            this.dgvOrdenProduccionManual.Name = "dgvOrdenProduccionManual";
-            this.dgvOrdenProduccionManual.RowHeadersVisible = false;
-            this.dgvOrdenProduccionManual.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrdenProduccionManual.Size = new System.Drawing.Size(574, 227);
-            this.dgvOrdenProduccionManual.TabIndex = 8;
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(38, 154);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(53, 13);
-            this.label40.TabIndex = 8;
-            this.label40.Text = "Prioridad:";
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(125, 152);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(120, 21);
-            this.numericUpDown2.TabIndex = 9;
-            // 
-            // groupBox9
-            // 
-            this.groupBox9.Controls.Add(this.btnAsignarCantidadManual);
-            this.groupBox9.Controls.Add(this.nudCantidadModificarManual);
-            this.groupBox9.Location = new System.Drawing.Point(588, 107);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(180, 92);
-            this.groupBox9.TabIndex = 12;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Cantidad";
-            // 
-            // groupBox10
-            // 
-            this.groupBox10.Controls.Add(this.btnAsignarCantidad);
-            this.groupBox10.Controls.Add(this.nudCantidadOrdenP);
-            this.groupBox10.Location = new System.Drawing.Point(589, 110);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(179, 68);
-            this.groupBox10.TabIndex = 12;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "Cantidad";
+            this.cboStockDestino.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboStockDestino.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboStockDestino.FormattingEnabled = true;
+            this.cboStockDestino.Location = new System.Drawing.Point(602, 25);
+            this.cboStockDestino.Name = "cboStockDestino";
+            this.cboStockDestino.Size = new System.Drawing.Size(160, 21);
+            this.cboStockDestino.TabIndex = 53;
             // 
             // frmGenerarOrdenTrabajo
             // 
@@ -1789,13 +1745,26 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadOrdenP)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadOrdenP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaOrdenProduccion)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tpManual.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadModificarManual)).EndInit();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenProduccionManual)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tpOrdenProduccion.ResumeLayout(false);
             this.gbFechas.ResumeLayout(false);
             this.gbFechas.PerformLayout();
@@ -1816,19 +1785,6 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.cmsGrillaOrdenesProduccion.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadModificarManual)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenProduccionManual)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1863,8 +1819,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtCodigoOrdenP;
         private System.Windows.Forms.TextBox txtOrigenOrdenP;
-        private System.Windows.Forms.TextBox txtNumeroOrdenP;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtEstadoOrdenP;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtCocinaOrdenP;
@@ -1930,16 +1884,12 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button btnBajarPrioridad;
         private System.Windows.Forms.Button btnSubirPrioridad;
-        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbModoInicio;
-        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.GroupBox gbFechas;
         private System.Windows.Forms.TextBox txtCantidadOrdenP;
         private System.Windows.Forms.TextBox txtFechaInicioOrdenP;
         private System.Windows.Forms.TextBox txtFechaAltaOrdenP;
         private System.Windows.Forms.TextBox txtFechaFinOrdenP;
         private System.Windows.Forms.Button btnGuardarTodo;
-        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbModoStock;
-        private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Button btnAsignarCantidad;
         private System.Windows.Forms.NumericUpDown nudCantidadOrdenP;
         private System.Windows.Forms.Button btnGenerarOrdenT;
@@ -1973,6 +1923,8 @@
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.GroupBox groupBox10;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboStockDestino;
+        private System.Windows.Forms.Label lblStock;
 
     }
 }

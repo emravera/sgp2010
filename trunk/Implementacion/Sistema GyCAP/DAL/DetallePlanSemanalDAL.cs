@@ -38,7 +38,7 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
-        public static object ObtenerPedidoClienteDeDetalle(int codigoDetalle)
+        public static object ObtenerPedidoClienteDeDetalle(int codigoDetalle, SqlTransaction transaccion)
         {
             string sql = @"SELECT dped_codigo FROM DETALLE_PLANES_SEMANALES WHERE dpsem_codigo = @p0";
 
@@ -46,9 +46,21 @@ namespace GyCAP.DAL
 
             try
             {
-                return DB.executeScalar(sql, parametros, null);
+                return DB.executeScalar(sql, parametros, transaccion);
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static void SumarCantidadFinalizada(int codigoDetalle, int codigoCocina, int cantidad, SqlTransaction transaccion)
+        {
+            string sql = "UPDATE DETALLE_PLANES_SEMANALES SET dpsem_cantidadreal = dpsem_cantidadreal  + @p0 WHERE dpsem_codigo = @p1";
+            object[] parametros = { cantidad, codigoDetalle };
+            DB.executeNonQuery(sql, parametros, transaccion);
+
+            sql = "SELECT diapsem_codigo FROM DETALLE_PLANES_SEMANALES WHERE dpsem_codigo = @p0";
+            parametros = new object[] { codigoDetalle };
+
+            DiasPlanSemanalDAL.SumarCantidadFinalizada(Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion)), codigoCocina, cantidad, transaccion);
         }
 
     }

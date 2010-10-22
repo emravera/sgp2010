@@ -10,6 +10,7 @@ namespace GyCAP.DAL
     public class PedidoDAL
     {
         public static readonly int EstadoEnCurso = 2;
+        public static readonly int EstadoFinalizado = 5;
         
         public static void Insertar(Data.dsCliente dsCliente)
         {
@@ -420,6 +421,38 @@ namespace GyCAP.DAL
             string sql = "UPDATE PEDIDOS SET eped_codigo = @p0 WHERE ped_codigo = @p1";
             object[] parametros = { codigoEstado, codigoPedido };
             DB.executeNonQuery(sql, parametros, transaccion);
+        }
+
+        public static void ActualizarDetallePedidoAEnCurso(int codigoDetalle, SqlTransaction transaccion)
+        {
+            DetallePedidoDAL.ActualizarEstadoAEnCurso(codigoDetalle, transaccion);
+
+            string sql = "SELECT ped_codigo FROM DETALLE_PEDIDOS WHERE dped_codigo = @p0";
+            object[] parametros = { codigoDetalle };
+            ActualizarEstadoAEnCurso(Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion)), transaccion);
+        }
+
+        public static void ActualizarDetallePedidoAFinalizado(int codigoDetalle, SqlTransaction transaccion)
+        {
+            DetallePedidoDAL.ActualizarEstadoAFinalizado(codigoDetalle, transaccion);
+
+            string sql = "SELECT ped_codigo FROM DETALLE_PEDIDOS WHERE dped_codigo = @p0";
+            object[] parametros = { codigoDetalle };
+            int pedido = Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion));
+
+            if (EsPedidoConDetalleFinalizado(pedido, transaccion))
+            {
+                ActualizarEstado(pedido, EstadoFinalizado, transaccion);
+            }
+        }
+
+        private static bool EsPedidoConDetalleFinalizado(int codigoPedido, SqlTransaction transaccion)
+        {
+            string sql = "SELECT COUNT(dped_codigo) FROM DETALLE_PEDIDOS WHERE ped_codigo = @p0 AND edped_codigo <> @p1";
+            object[] parametros = { codigoPedido, DetallePedidoDAL.EstadoFinalizado };
+
+            if (Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion)) == 0) { return true; }
+            else { return false; }
         }
     }
 }

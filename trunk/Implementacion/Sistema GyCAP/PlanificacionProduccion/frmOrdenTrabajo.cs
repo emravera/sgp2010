@@ -162,8 +162,13 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             if (dgvOrdenesTrabajo.SelectedRows.Count > 0)
             {
-                gbAgregarCierreParcial.Enabled = true;
-                LimpiarDatosCierre();
+                int numeroOT = Convert.ToInt32(dvOrdenTrabajo[dgvOrdenesTrabajo.SelectedRows[0].Index]["ORDT_NUMERO"]);
+                if (dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOT).EORD_CODIGO == BLL.OrdenTrabajoBLL.EstadoEnProceso)
+                {
+                    gbAgregarCierreParcial.Enabled = true;
+                    LimpiarDatosCierre();
+                }
+                else { MessageBox.Show("La Orden de Trabajo seleccionada no se encuentra En Proceso.", "Información: Estado incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Information); }
             }
             else { MessageBox.Show("Debe seleccionar una Orden de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
         }
@@ -736,6 +741,28 @@ namespace GyCAP.UI.PlanificacionProduccion
         
 
         #endregion Servicios
+
+        private void btnFinalizar_Click(object sender, EventArgs e)
+        {
+            if (dgvOrdenesProduccion.SelectedRows.Count > 0)
+            {
+                //Código temporal - gonzalo
+                try
+                {
+                    int numero = Convert.ToInt32(dvOrdenProduccion[dgvOrdenesProduccion.SelectedRows[0].Index]["ORDP_NUMERO"]);
+                    BLL.OrdenProduccionBLL.FinalizarOrdenProduccion(numero, dsOrdenTrabajo, dsStock);
+                    dsOrdenTrabajo.AcceptChanges();
+                    dsStock.AcceptChanges();
+                }
+                catch (Entidades.Excepciones.BaseDeDatosException ex)
+                {
+                    dsOrdenTrabajo.RejectChanges();
+                    dsStock.RejectChanges();
+                    MessageBox.Show(ex.Message, "Error: " + this.Text + " - Finalización de Orden de Producción", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else { MessageBox.Show("Debe seleccionar una Orden de Producción de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+        }
 
         
 
