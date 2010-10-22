@@ -254,7 +254,8 @@ namespace GyCAP.DAL
                 //Actualizo las ubicaciones de stock afectadas por la orden de trabajo
                 cantidadDestino = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(ubicacionDestino).USTCK_CANTIDADREAL * -1;
                 dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(ubicacionDestino).USTCK_CANTIDADREAL = 0;
-                UbicacionStockDAL.ActualizarCantidadesStock(Convert.ToInt32(ubicacionDestino), cantidadDestino, 0, transaccion);
+                decimal cantidadVirtual = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(ubicacionDestino).USTCK_CANTIDADVIRTUAL * -1;
+                UbicacionStockDAL.ActualizarCantidadesStock(Convert.ToInt32(ubicacionDestino), cantidadDestino, cantidadVirtual, transaccion);
             }
             else
             {
