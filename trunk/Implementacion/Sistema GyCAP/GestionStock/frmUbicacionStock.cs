@@ -16,7 +16,7 @@ namespace GyCAP.UI.GestionStock
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, };
         private estadoUI estadoInterface;
         private Data.dsStock dsStock = new GyCAP.Data.dsStock();
-        DataView dvUbicaciones, dvUnidadMedida, dvUbicacionPadre, dvTipoUbicacion;
+        DataView dvUbicaciones, dvUnidadMedida, dvUbicacionPadre, dvTipoUbicacion, dvTipoBuscar;
 
         #region Inicio
         public frmUbicacionStock()
@@ -54,35 +54,39 @@ namespace GyCAP.UI.GestionStock
         #region Botones menu y buscar
 
         private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            try
+        {            
+            string filtro = string.Empty;
+            if (!string.IsNullOrEmpty(txtNombreBuscar.Text))
             {
-                string filtro = string.Empty;
-                if (!string.IsNullOrEmpty(txtNombreBuscar.Text))
-                {
-                    filtro = "USTCK_NOMBRE LIKE '%" + txtNombreBuscar.Text + "%'";
-                }
-
-                if (cboEstadoBuscar.GetSelectedValueInt() != -1)
-                {
-                    if (string.IsNullOrEmpty(txtNombreBuscar.Text)) { filtro = "USTCK_ACTIVO = " + cboEstadoBuscar.GetSelectedValueInt(); }
-                    else { filtro += " AND USTCK_ACTIVO = " + cboEstadoBuscar.GetSelectedValueInt(); }
-                }
-
-                dvUbicaciones.RowFilter = filtro;
-
-                if (dvUbicaciones.Count == 0)
-                {
-                    MessageBox.Show("No se encontraron Ubicaciones de stock con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }                
-
-                SetInterface(estadoUI.inicio);
+                filtro = "USTCK_NOMBRE LIKE '%" + txtNombreBuscar.Text + "%'";
             }
-            catch (Entidades.Excepciones.BaseDeDatosException ex)
+
+            if (cboEstadoBuscar.GetSelectedValueInt() != -1)
             {
-                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                SetInterface(estadoUI.inicio);
+                if (string.IsNullOrEmpty(filtro)) { filtro = "USTCK_ACTIVO = " + cboEstadoBuscar.GetSelectedValueInt(); }
+                else { filtro += " AND USTCK_ACTIVO = " + cboEstadoBuscar.GetSelectedValueInt(); }
             }
+
+            if(!string.IsNullOrEmpty(txtCodigoBuscar.Text))
+            {
+                if (string.IsNullOrEmpty(filtro)) { filtro = "USTCK_NOMBRE LIKE '%" + txtCodigoBuscar.Text + "%'"; }
+                else { filtro += " AND USTCK_NOMBRE LIKE '%" + txtCodigoBuscar.Text + "%'"; }
+            }
+
+            if (cboTipoBuscar.GetSelectedValueInt() != -1)
+            {
+                if (string.IsNullOrEmpty(filtro)) { filtro = "TUS_CODIGO = " + cboTipoBuscar.GetSelectedValueInt(); }
+                else { filtro += " AND TUS_CODIGO = " + cboTipoBuscar.GetSelectedValueInt(); }
+            }
+            
+            dvUbicaciones.RowFilter = filtro;
+
+            if (dvUbicaciones.Count == 0)
+            {
+                MessageBox.Show("No se encontraron Ubicaciones de Stock con los criterios ingresados.", "Información: Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }                
+
+            SetInterface(estadoUI.inicio);
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -90,7 +94,7 @@ namespace GyCAP.UI.GestionStock
             if (dgvLista.SelectedRows.Count > 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la Ubicación de stock seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la Ubicación de Stock seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -105,17 +109,17 @@ namespace GyCAP.UI.GestionStock
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: Ubicación stock - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Message, "Error: Ubicación Stock - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: Ubicación stock - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Message, "Error: Ubicación Stock - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Ubicación de stock de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debe seleccionar una Ubicación de Stock de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
@@ -153,7 +157,7 @@ namespace GyCAP.UI.GestionStock
         {
             string mensaje = string.Empty;
             if (txtCodigo.Text == string.Empty) { mensaje = "* Código\n"; }
-            if (txtCodigo.Text == string.Empty) { mensaje = "* Nombre\n"; }
+            if (txtNombre.Text == string.Empty) { mensaje = "* Nombre\n"; }
             if (cboUnidadMedida.GetSelectedIndex() == -1) { mensaje = "* Unidad de medida\n"; }
             if (cboEstado.GetSelectedIndex() == -1) { mensaje = "* Estado\n"; }
             if (cboTipoUbicacion.GetSelectedIndex() == -1) { mensaje = "* Tipo\n"; }
@@ -409,6 +413,9 @@ namespace GyCAP.UI.GestionStock
             cboPadre.SetDatos(dvUbicacionPadre, "USTCK_NUMERO", "USTCK_NOMBRE", "Sin especificar", false);
             dvTipoUbicacion = new DataView(dsStock.TIPOS_UBICACIONES_STOCK);
             cboTipoUbicacion.SetDatos(dvTipoUbicacion, "TUS_CODIGO", "TUS_NOMBRE", "Seleccione", false);
+
+            dvTipoBuscar = new DataView(dsStock.TIPOS_UBICACIONES_STOCK);
+            cboTipoBuscar.SetDatos(dvTipoBuscar, "TUS_CODIGO", "TUS_NOMBRE", "--TODOS--", true);
         }
         
         private void frmUbicacionStock_Activated(object sender, EventArgs e)

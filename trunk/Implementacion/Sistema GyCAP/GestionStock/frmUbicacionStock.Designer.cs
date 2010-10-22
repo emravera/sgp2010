@@ -71,6 +71,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tcUbicacionStock = new System.Windows.Forms.TabControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.cboTipoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.txtCodigoBuscar = new System.Windows.Forms.TextBox();
             this.tsMenu.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.tpDatos.SuspendLayout();
@@ -91,7 +95,7 @@
             this.txtCodigo.MaxLength = 80;
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(185, 21);
-            this.txtCodigo.TabIndex = 5;
+            this.txtCodigo.TabIndex = 7;
             this.txtCodigo.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label6
@@ -117,7 +121,7 @@
             this.btnVolver.Location = new System.Drawing.Point(539, 20);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(64, 26);
-            this.btnVolver.TabIndex = 16;
+            this.btnVolver.TabIndex = 18;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -127,7 +131,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(469, 20);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(64, 26);
-            this.btnGuardar.TabIndex = 15;
+            this.btnGuardar.TabIndex = 17;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -138,7 +142,7 @@
             this.txtNombre.MaxLength = 80;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(185, 21);
-            this.txtNombre.TabIndex = 6;
+            this.txtNombre.TabIndex = 8;
             this.txtNombre.Enter += new System.EventHandler(this.control_Enter);
             // 
             // tsMenu
@@ -229,7 +233,7 @@
             this.gbGuardarCancelar.Controls.Add(this.btnVolver);
             this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
             this.gbGuardarCancelar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 288);
+            this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 323);
             this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
             this.gbGuardarCancelar.Name = "gbGuardarCancelar";
             this.gbGuardarCancelar.Size = new System.Drawing.Size(609, 57);
@@ -244,7 +248,7 @@
             this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDatos.Size = new System.Drawing.Size(615, 348);
+            this.tpDatos.Size = new System.Drawing.Size(615, 383);
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
@@ -296,7 +300,7 @@
             this.cboTipoUbicacion.Location = new System.Drawing.Point(417, 133);
             this.cboTipoUbicacion.Name = "cboTipoUbicacion";
             this.cboTipoUbicacion.Size = new System.Drawing.Size(174, 21);
-            this.cboTipoUbicacion.TabIndex = 12;
+            this.cboTipoUbicacion.TabIndex = 14;
             // 
             // cboUnidadMedida
             // 
@@ -306,7 +310,7 @@
             this.cboUnidadMedida.Location = new System.Drawing.Point(417, 98);
             this.cboUnidadMedida.Name = "cboUnidadMedida";
             this.cboUnidadMedida.Size = new System.Drawing.Size(174, 21);
-            this.cboUnidadMedida.TabIndex = 11;
+            this.cboUnidadMedida.TabIndex = 13;
             // 
             // txtUbicacionFisica
             // 
@@ -314,7 +318,7 @@
             this.txtUbicacionFisica.MaxLength = 200;
             this.txtUbicacionFisica.Name = "txtUbicacionFisica";
             this.txtUbicacionFisica.Size = new System.Drawing.Size(275, 88);
-            this.txtUbicacionFisica.TabIndex = 14;
+            this.txtUbicacionFisica.TabIndex = 16;
             this.txtUbicacionFisica.Text = "";
             this.txtUbicacionFisica.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -324,7 +328,7 @@
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(275, 88);
-            this.txtDescripcion.TabIndex = 13;
+            this.txtDescripcion.TabIndex = 15;
             this.txtDescripcion.Text = "";
             this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -344,7 +348,7 @@
             0});
             this.nudCantidadVirtual.Name = "nudCantidadVirtual";
             this.nudCantidadVirtual.Size = new System.Drawing.Size(174, 21);
-            this.nudCantidadVirtual.TabIndex = 10;
+            this.nudCantidadVirtual.TabIndex = 12;
             this.nudCantidadVirtual.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCantidadVirtual.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -364,7 +368,7 @@
             0});
             this.nudCantidadReal.Name = "nudCantidadReal";
             this.nudCantidadReal.Size = new System.Drawing.Size(174, 21);
-            this.nudCantidadReal.TabIndex = 9;
+            this.nudCantidadReal.TabIndex = 11;
             this.nudCantidadReal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCantidadReal.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -376,7 +380,7 @@
             this.cboPadre.Location = new System.Drawing.Point(105, 98);
             this.cboPadre.Name = "cboPadre";
             this.cboPadre.Size = new System.Drawing.Size(185, 21);
-            this.cboPadre.TabIndex = 7;
+            this.cboPadre.TabIndex = 9;
             // 
             // cboEstado
             // 
@@ -386,7 +390,7 @@
             this.cboEstado.Location = new System.Drawing.Point(105, 133);
             this.cboEstado.Name = "cboEstado";
             this.cboEstado.Size = new System.Drawing.Size(185, 21);
-            this.cboEstado.TabIndex = 8;
+            this.cboEstado.TabIndex = 10;
             // 
             // label12
             // 
@@ -455,7 +459,7 @@
             // 
             this.groupBox2.Controls.Add(this.dgvLista);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(3, 64);
+            this.groupBox2.Location = new System.Drawing.Point(3, 99);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(9);
             this.groupBox2.Size = new System.Drawing.Size(609, 281);
@@ -475,7 +479,7 @@
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(591, 249);
-            this.dgvLista.TabIndex = 4;
+            this.dgvLista.TabIndex = 6;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
@@ -487,12 +491,16 @@
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(615, 348);
+            this.tpBuscar.Size = new System.Drawing.Size(615, 383);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtCodigoBuscar);
+            this.groupBox1.Controls.Add(this.cboTipoBuscar);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.cboEstadoBuscar);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btnBuscar);
@@ -501,7 +509,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(609, 55);
+            this.groupBox1.Size = new System.Drawing.Size(609, 90);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
@@ -529,10 +537,10 @@
             // 
             this.btnBuscar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(525, 20);
+            this.btnBuscar.Location = new System.Drawing.Point(510, 35);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscar.TabIndex = 3;
+            this.btnBuscar.TabIndex = 5;
             this.btnBuscar.Text = "&Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -569,7 +577,7 @@
             this.tcUbicacionStock.Name = "tcUbicacionStock";
             this.tcUbicacionStock.Padding = new System.Drawing.Point(0, 0);
             this.tcUbicacionStock.SelectedIndex = 0;
-            this.tcUbicacionStock.Size = new System.Drawing.Size(623, 357);
+            this.tcUbicacionStock.Size = new System.Drawing.Size(623, 392);
             this.tcUbicacionStock.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcUbicacionStock.TabIndex = 8;
             // 
@@ -586,14 +594,50 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(627, 413);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(627, 448);
             this.tableLayoutPanel1.TabIndex = 10;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(22, 58);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(44, 13);
+            this.label13.TabIndex = 4;
+            this.label13.Text = "Código:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(244, 58);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(31, 13);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "Tipo:";
+            // 
+            // cboTipoBuscar
+            // 
+            this.cboTipoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTipoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboTipoBuscar.FormattingEnabled = true;
+            this.cboTipoBuscar.Location = new System.Drawing.Point(294, 55);
+            this.cboTipoBuscar.Name = "cboTipoBuscar";
+            this.cboTipoBuscar.Size = new System.Drawing.Size(169, 21);
+            this.cboTipoBuscar.TabIndex = 4;
+            // 
+            // txtCodigoBuscar
+            // 
+            this.txtCodigoBuscar.Location = new System.Drawing.Point(77, 55);
+            this.txtCodigoBuscar.MaxLength = 80;
+            this.txtCodigoBuscar.Name = "txtCodigoBuscar";
+            this.txtCodigoBuscar.Size = new System.Drawing.Size(161, 21);
+            this.txtCodigoBuscar.TabIndex = 3;
             // 
             // frmUbicacionStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(627, 413);
+            this.ClientSize = new System.Drawing.Size(627, 448);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -667,5 +711,9 @@
         public System.Windows.Forms.ToolStripButton btnNuevo;
         private System.Windows.Forms.Label label2;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboTipoUbicacion;
+        private System.Windows.Forms.TextBox txtCodigoBuscar;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboTipoBuscar;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
     }
 }

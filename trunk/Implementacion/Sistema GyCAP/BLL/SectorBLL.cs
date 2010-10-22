@@ -28,12 +28,8 @@ namespace GyCAP.BLL
         //Eliminacion
         public static void Eliminar(int codigo)
         {
-            //Se hacen las valiaciones de que no este referenciada en ninguna tabla
-            bool val1 = DAL.SectorDAL.PuedeEliminarseValidacion1(codigo);
-            bool val2 = DAL.SectorDAL.PuedeEliminarseValidacion2(codigo);
-            bool val3 = DAL.SectorDAL.PuedeEliminarseValidacion3(codigo);
             //Revisamos que no esté en alguna transacción
-            if (val1==true && val2==true && val3 == true)
+            if (DAL.SectorDAL.PuedeEliminarse(codigo))
             {
                 //Puede eliminarse
                 DAL.SectorDAL.Eliminar(codigo);
@@ -43,8 +39,8 @@ namespace GyCAP.BLL
                 //No puede eliminarse, lanzamos nuestra excepción
                 throw new Entidades.Excepciones.ElementoEnTransaccionException();
             }
-
         }
+        
         //Guardado de Datos
         public static int Insertar(Entidades.SectorTrabajo sector)
         {
