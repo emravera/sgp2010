@@ -64,6 +64,10 @@
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtCodigoBuscar = new System.Windows.Forms.TextBox();
+            this.cboTipoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.cboEstadoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -71,10 +75,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tcUbicacionStock = new System.Windows.Forms.TabControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.cboTipoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.txtCodigoBuscar = new System.Windows.Forms.TextBox();
             this.tsMenu.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.tpDatos.SuspendLayout();
@@ -278,7 +278,7 @@
             this.gbDatos.Location = new System.Drawing.Point(3, 3);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(609, 282);
+            this.gbDatos.Size = new System.Drawing.Size(609, 318);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos de la Unidad de Medida";
@@ -317,7 +317,7 @@
             this.txtUbicacionFisica.Location = new System.Drawing.Point(316, 188);
             this.txtUbicacionFisica.MaxLength = 200;
             this.txtUbicacionFisica.Name = "txtUbicacionFisica";
-            this.txtUbicacionFisica.Size = new System.Drawing.Size(275, 88);
+            this.txtUbicacionFisica.Size = new System.Drawing.Size(275, 112);
             this.txtUbicacionFisica.TabIndex = 16;
             this.txtUbicacionFisica.Text = "";
             this.txtUbicacionFisica.Enter += new System.EventHandler(this.control_Enter);
@@ -327,7 +327,7 @@
             this.txtDescripcion.Location = new System.Drawing.Point(15, 188);
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(275, 88);
+            this.txtDescripcion.Size = new System.Drawing.Size(275, 112);
             this.txtDescripcion.TabIndex = 15;
             this.txtDescripcion.Text = "";
             this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
@@ -514,6 +514,42 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
+            // txtCodigoBuscar
+            // 
+            this.txtCodigoBuscar.Location = new System.Drawing.Point(77, 55);
+            this.txtCodigoBuscar.MaxLength = 80;
+            this.txtCodigoBuscar.Name = "txtCodigoBuscar";
+            this.txtCodigoBuscar.Size = new System.Drawing.Size(161, 21);
+            this.txtCodigoBuscar.TabIndex = 3;
+            // 
+            // cboTipoBuscar
+            // 
+            this.cboTipoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTipoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboTipoBuscar.FormattingEnabled = true;
+            this.cboTipoBuscar.Location = new System.Drawing.Point(294, 55);
+            this.cboTipoBuscar.Name = "cboTipoBuscar";
+            this.cboTipoBuscar.Size = new System.Drawing.Size(169, 21);
+            this.cboTipoBuscar.TabIndex = 4;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(244, 58);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(31, 13);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "Tipo:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(22, 58);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(44, 13);
+            this.label13.TabIndex = 4;
+            this.label13.Text = "Código:";
+            // 
             // cboEstadoBuscar
             // 
             this.cboEstadoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -596,42 +632,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(627, 448);
             this.tableLayoutPanel1.TabIndex = 10;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(22, 58);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(44, 13);
-            this.label13.TabIndex = 4;
-            this.label13.Text = "Código:";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(244, 58);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(31, 13);
-            this.label14.TabIndex = 5;
-            this.label14.Text = "Tipo:";
-            // 
-            // cboTipoBuscar
-            // 
-            this.cboTipoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboTipoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboTipoBuscar.FormattingEnabled = true;
-            this.cboTipoBuscar.Location = new System.Drawing.Point(294, 55);
-            this.cboTipoBuscar.Name = "cboTipoBuscar";
-            this.cboTipoBuscar.Size = new System.Drawing.Size(169, 21);
-            this.cboTipoBuscar.TabIndex = 4;
-            // 
-            // txtCodigoBuscar
-            // 
-            this.txtCodigoBuscar.Location = new System.Drawing.Point(77, 55);
-            this.txtCodigoBuscar.MaxLength = 80;
-            this.txtCodigoBuscar.Name = "txtCodigoBuscar";
-            this.txtCodigoBuscar.Size = new System.Drawing.Size(161, 21);
-            this.txtCodigoBuscar.TabIndex = 3;
             // 
             // frmUbicacionStock
             // 
