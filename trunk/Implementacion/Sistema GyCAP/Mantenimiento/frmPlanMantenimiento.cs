@@ -109,7 +109,7 @@ namespace GyCAP.UI.Mantenimiento
                     estadoInterface = estadoUI.nuevo;
                     dvDetallePlanMantenimiento.RowFilter = "DPMAN_CODIGO < 0";
                     tcPlan.SelectedTab = tpDatos;
-                    cboEstado.Focus();
+                    txtDescripcion.Focus();
                     break;
                 case estadoUI.nuevoExterno:
                     setControles(false);
@@ -125,7 +125,7 @@ namespace GyCAP.UI.Mantenimiento
                     estadoInterface = estadoUI.nuevoExterno;
                     dvDetallePlanMantenimiento.RowFilter = "DPED_CODIGO < 0";
                     tcPlan.SelectedTab = tpDatos;
-                    cboEstado.Focus();
+                    txtDescripcion.Focus();
                     break;
                 case estadoUI.consultar:
                     setControles(true);
@@ -148,7 +148,7 @@ namespace GyCAP.UI.Mantenimiento
                     panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.modificar;
                     tcPlan.SelectedTab = tpDatos;
-                    cboEstado.Focus();
+                    txtDescripcion.Focus();
                     break;
                 default:
                     break;
@@ -158,6 +158,7 @@ namespace GyCAP.UI.Mantenimiento
         private void setControles(bool pValue)
         {
             txtNumero.ReadOnly = true;
+            txtDescripcion.ReadOnly = pValue;
             txtObservacion.ReadOnly = pValue;
             cboEstado.Enabled = pValue;
         }
@@ -165,6 +166,7 @@ namespace GyCAP.UI.Mantenimiento
         private void limpiarControles(bool pValue)
         {
             txtNumero.Text = string.Empty;
+            txtDescripcion.Text = string.Empty;
             txtObservacion.Text = string.Empty;
             cboEstado.SelectedIndex = -1;
 
@@ -370,8 +372,6 @@ namespace GyCAP.UI.Mantenimiento
             this.Dispose(true);
         }
 
-       
-
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             long codigo = Convert.ToInt64(dvPlanMantenimiento[e.RowIndex]["PMAN_NUMERO"]);
@@ -405,8 +405,6 @@ namespace GyCAP.UI.Mantenimiento
                 }
             }
         }
-
-        
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
@@ -563,158 +561,157 @@ namespace GyCAP.UI.Mantenimiento
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            ////Datos opcionales = descripcion
-            ////Revisamos que completó los datos obligatorios
-            //string datosFaltantes = string.Empty;
-            ////if (txtNumero.Text == string.Empty) { datosFaltantes += "* Numero\n"; }
-            //if (cboClientes.GetSelectedIndex() == -1) { datosFaltantes += "* Descripción\n"; }
-            //if (cboEstado.GetSelectedIndex() == -1) { datosFaltantes += "* Estado\n"; }
-            //if (dgvDetallePlan.Rows.Count == 0) { datosFaltantes += "* El detalle del Pedido\n"; }
-            //if (datosFaltantes == string.Empty)
-            //{
-            //    //Revisamos que está haciendo
-            //    if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
-            //    {
-            //        //Está cargando uno nuevo
-            //        try
-            //        {
-            //            //Como ahora tenemos más de una tabla y relacionadas vamos a trabajar diferente
-            //            //Primero lo agregamos a la tabla Piezas del dataset con código -1, luego la entidad 
-            //            //PiezaDAL se va a encargar de insertarle el código que corresponda y el stock inicial
-            //            Data.dsPlanMantenimiento.PEDIDOSRow rowPedido = dsPlanMantenimiento.PEDIDOS.NewPEDIDOSRow();
-            //            rowPedido.BeginEdit();
-            //            rowPedido.PMAN_NUMERO = -1;
-            //            rowPedido.PMAN_FECHA = DateTime.Parse(sfFechaPrevista.GetFecha().ToString());
-            //            rowPedido.PMAN_OBSERVACIONES = txtObservacion.Text.Trim();
-            //            rowPedido.EPMAN_CODIGO = cboEstado.GetSelectedValueInt();
-            //            rowPedido.PMAN_DESCRIPCION = long.Parse(cboClientes.GetSelectedValueInt().ToString());
-            //            rowPedido.PED_FECHA_ALTA = DBBLL.GetFechaServidor();
-            //            rowPedido.EndEdit();
+            //Datos opcionales = descripcion
+            //Revisamos que completó los datos obligatorios
+            string datosFaltantes = string.Empty;
+            //if (txtNumero.Text == string.Empty) { datosFaltantes += "* Numero\n"; }
+            if (cboEstado.GetSelectedIndex() == -1) { datosFaltantes += "* Estado\n"; }
+            if (dgvDetallePlan.Rows.Count == 0) { datosFaltantes += "* El detalle del Pedido\n"; }
+            if (datosFaltantes == string.Empty)
+            {
+                //Revisamos que está haciendo
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
+                {
+                    //Está cargando uno nuevo
+                    try
+                    {
+                        //Como ahora tenemos más de una tabla y relacionadas vamos a trabajar diferente
+                        //Primero lo agregamos a la tabla Piezas del dataset con código -1, luego la entidad 
+                        //PiezaDAL se va a encargar de insertarle el código que corresponda y el stock inicial
+                        Data.dsPlanMantenimiento.PLANES_MANTENIMIENTORow rowPlan = dsPlanMantenimiento.PLANES_MANTENIMIENTO.NewPLANES_MANTENIMIENTORow();
+                        rowPlan.BeginEdit();
+                        rowPlan.PMAN_NUMERO = -1;
+                        rowPlan.PMAN_FECHA = DBBLL.GetFechaServidor();
+                        rowPlan.PMAN_DESCRIPCION = txtDescripcion.Text.Trim();
+                        rowPlan.PMAN_OBSERVACIONES = txtObservacion.Text.Trim();
+                        rowPlan.EPMAN_CODIGO = cboEstado.GetSelectedValueInt();
+                        
+                        rowPlan.EndEdit();
 
-            //            dsPlanMantenimiento.PEDIDOS.AddPEDIDOSRow(rowPedido);
-            //            //Todavia no aceptamos los cambios porque necesitamos que queden marcadas como nuevas las filas
-            //            //para que la entidad PiezaBLL y PiezaDAL sepan cuales insertar
-            //            BLL.PedidoBLL.Insertar(dsPlanMantenimiento);
+                        dsPlanMantenimiento.PLANES_MANTENIMIENTO.AddPLANES_MANTENIMIENTORow(rowPlan);
+                        //Todavia no aceptamos los cambios porque necesitamos que queden marcadas como nuevas las filas
+                        //para que la entidad PiezaBLL y PiezaDAL sepan cuales insertar
+                        BLL.PlanMantenimientoBLL.Insertar(dsPlanMantenimiento);
 
-            //            //Ahora si aceptamos los cambios
-            //            dsPlanMantenimiento.PEDIDOS.AcceptChanges();
-            //            dsPlanMantenimiento.DETALLE_PLANES_MANTENIMIENTO.AcceptChanges();
-            //            //Y por último seteamos el estado de la interfaz
+                        //Ahora si aceptamos los cambios
+                        dsPlanMantenimiento.PLANES_MANTENIMIENTO.AcceptChanges();
+                        dsPlanMantenimiento.DETALLE_PLANES_MANTENIMIENTO.AcceptChanges();
+                        //Y por último seteamos el estado de la interfaz
 
-            //            //Vemos cómo se inició el formulario para determinar la acción a seguir
-            //            if (estadoInterface == estadoUI.nuevoExterno)
-            //            {
-            //                //Nuevo desde acceso directo, cerramos el formulario
-            //                btnSalir.PerformClick();
-            //            }
-            //            else
-            //            {
-            //                dgvLista.Refresh();
+                        //Vemos cómo se inició el formulario para determinar la acción a seguir
+                        if (estadoInterface == estadoUI.nuevoExterno)
+                        {
+                            //Nuevo desde acceso directo, cerramos el formulario
+                            btnSalir.PerformClick();
+                        }
+                        else
+                        {
+                            dgvLista.Refresh();
 
-            //                //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
-            //                SetInterface(estadoUI.inicio);
-            //            }
-            //        }
-            //        catch (Entidades.Excepciones.ElementoExistenteException ex)
-            //        {
-            //            //Ya existe la pieza, descartamos los cambios pero sólo de piezas ya que puede querer
-            //            //modificar el nombre y/o la terminación e intentar de nuevo con la estructura cargada
-            //            dsPlanMantenimiento.PEDIDOS.RejectChanges();
-            //            MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //        }
-            //        catch (Entidades.Excepciones.BaseDeDatosException ex)
-            //        {
-            //            //Hubo problemas con la BD, descartamos los cambios de piezas ya que puede intentar
-            //            //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
-            //            dsPlanMantenimiento.PEDIDOS.RejectChanges();
-            //            MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        //Está modificando
-            //        //Primero obtenemos su código del dataview que está relacionado a la fila seleccionada
-            //        long codigoPedido = Convert.ToInt64(dvPlanMantenimiento[dgvLista.SelectedRows[0].Index]["ped_codigo"]);
-            //        //Segundo obtenemos el resto de los datos que puede cambiar el usuario, el detalle se fué
-            //        //actualizando en el dataset a medida que el usuario ejecutaba una acción
-            //        dsPlanMantenimiento.PEDIDOS.FindByPED_CODIGO(codigoPedido).PED_NUMERO = txtNumero.Text;
-            //        dsPlanMantenimiento.PEDIDOS.FindByPED_CODIGO(codigoPedido).PMAN_DESCRIPCION = long.Parse(cboClientes.GetSelectedValueInt().ToString());
-            //        dsPlanMantenimiento.PEDIDOS.FindByPED_CODIGO(codigoPedido).EPMAN_CODIGO = cboEstado.GetSelectedValueInt();
-            //        dsPlanMantenimiento.PEDIDOS.FindByPED_CODIGO(codigoPedido).PMAN_OBSERVACIONES = txtObservacion.Text;
-            //        dsPlanMantenimiento.PEDIDOS.FindByPED_CODIGO(codigoPedido).PMAN_FECHA = DateTime.Parse(sfFechaPrevista.GetFecha().ToString());
+                            //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
+                            SetInterface(estadoUI.inicio);
+                        }
+                    }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        //Ya existe la pieza, descartamos los cambios pero sólo de piezas ya que puede querer
+                        //modificar el nombre y/o la terminación e intentar de nuevo con la estructura cargada
+                        dsPlanMantenimiento.PLANES_MANTENIMIENTO.RejectChanges();
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        //Hubo problemas con la BD, descartamos los cambios de piezas ya que puede intentar
+                        //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
+                        dsPlanMantenimiento.PLANES_MANTENIMIENTO.RejectChanges();
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    //Está modificando
+                    //Primero obtenemos su código del dataview que está relacionado a la fila seleccionada
+                    long codigoPlan = Convert.ToInt64(dvPlanMantenimiento[dgvLista.SelectedRows[0].Index]["PMAN_NUMERO"]);
+                    //Segundo obtenemos el resto de los datos que puede cambiar el usuario, el detalle se fué
+                    //actualizando en el dataset a medida que el usuario ejecutaba una acción
+                    dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigoPlan).PMAN_NUMERO = long.Parse(txtNumero.Text.ToString());
+                    dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigoPlan).PMAN_DESCRIPCION = txtDescripcion.Text; 
+                    dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigoPlan).EPMAN_CODIGO = cboEstado.GetSelectedValueInt();
+                    dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigoPlan).PMAN_OBSERVACIONES = txtObservacion.Text;
+                    //dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigoPlan).PMAN_FECHA = DateTime.Parse(sfFechaPrevista.GetFecha().ToString());
 
-            //        try
-            //        {
-            //            //Lo actualizamos en la DB
-            //            BLL.PedidoBLL.Actualizar(dsPlanMantenimiento);
-            //            //El dataset ya se actualizó en las capas DAL y BLL, aceptamos los cambios
-            //            dsPlanMantenimiento.PEDIDOS.AcceptChanges();
-            //            dsPlanMantenimiento.DETALLE_PLANES_MANTENIMIENTO.AcceptChanges();
-            //            //Avisamos que estuvo todo ok
-            //            MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //            //Y por último seteamos el estado de la interfaz
-            //            SetInterface(estadoUI.inicio);
-            //        }
-            //        catch (Entidades.Excepciones.BaseDeDatosException ex)
-            //        {
-            //            //Hubo problemas con la BD, descartamos los cambios de piezas ya que puede intentar
-            //            //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
-            //            dsPlanMantenimiento.PEDIDOS.RejectChanges();
-            //            MessageBox.Show(ex.Message, "Error: " + this.Text + " - Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        }
-            //        catch (Entidades.Excepciones.ErrorInesperadoException ex)
-            //        {
-            //            //Hubo problemas no esperados, descartamos los cambios de piezas ya que puede intentar
-            //            //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
-            //            dsPlanMantenimiento.PEDIDOS.RejectChanges();
-            //            MessageBox.Show(ex.Message, "Error: " + this.Text + " - Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        }
-            //    }
-            //    dgvLista.Refresh();
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Debe completar los datos:\n\n" + datosFaltantes, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
+                    try
+                    {
+                        //Lo actualizamos en la DB
+                        BLL.PlanMantenimientoBLL.Actualizar(dsPlanMantenimiento);
+                        //El dataset ya se actualizó en las capas DAL y BLL, aceptamos los cambios
+                        dsPlanMantenimiento.PLANES_MANTENIMIENTO.AcceptChanges();
+                        dsPlanMantenimiento.DETALLE_PLANES_MANTENIMIENTO.AcceptChanges();
+                        //Avisamos que estuvo todo ok
+                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //Y por último seteamos el estado de la interfaz
+                        SetInterface(estadoUI.inicio);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        //Hubo problemas con la BD, descartamos los cambios de piezas ya que puede intentar
+                        //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
+                        dsPlanMantenimiento.PLANES_MANTENIMIENTO.RejectChanges();
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    catch (Entidades.Excepciones.ErrorInesperadoException ex)
+                    {
+                        //Hubo problemas no esperados, descartamos los cambios de piezas ya que puede intentar
+                        //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
+                        dsPlanMantenimiento.PLANES_MANTENIMIENTO.RejectChanges();
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                dgvLista.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Debe completar los datos:\n\n" + datosFaltantes, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            ////Controlamos que esté seleccionado algo
-            //if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
-            //{
-            //    int estado = Convert.ToInt32(dvPlanMantenimiento[dgvLista.SelectedRows[0].Index]["EPMAN_CODIGO"]);
-            //    if (estado != 1) //Si no esta pendiente no lo puede eliminar PARAMETRIZAR
-            //    {
-            //        //Preguntamos si está seguro
-            //        DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Pedido Seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            //        if (respuesta == DialogResult.Yes)
-            //        {
-            //            try
-            //            {
-            //                //Obtenemos el codigo
-            //                long codigo = Convert.ToInt64(dvPlanMantenimiento[dgvLista.SelectedRows[0].Index]["ped_codigo"]);
-            //                //Lo eliminamos de la DB
-            //                BLL.PedidoBLL.Eliminar(codigo);
-            //                //Lo eliminamos de la tabla conjuntos del dataset
-            //                dsPlanMantenimiento.PEDIDOS.FindByPED_CODIGO(codigo).Delete();
-            //                dsPlanMantenimiento.PEDIDOS.AcceptChanges();
-            //            }
-            //            catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
-            //            {
-            //                MessageBox.Show(ex.Message, "Error: Pieza - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //            }
-            //            catch (Entidades.Excepciones.BaseDeDatosException ex)
-            //            {
-            //                MessageBox.Show(ex.Message, "Error: Pieza - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //            }
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Debe seleccionar un Plan de Mantenimiento de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
+            //Controlamos que esté seleccionado algo
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int estado = Convert.ToInt32(dvPlanMantenimiento[dgvLista.SelectedRows[0].Index]["EPMAN_CODIGO"]);
+                if (estado != 1) //Si no esta pendiente no lo puede eliminar PARAMETRIZAR
+                {
+                    //Preguntamos si está seguro
+                    DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Plan de Mantenimiento seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (respuesta == DialogResult.Yes)
+                    {
+                        try
+                        {
+                            //Obtenemos el codigo
+                            long codigo = Convert.ToInt64(dvPlanMantenimiento[dgvLista.SelectedRows[0].Index]["PMAN_CODIGO"]);
+                            //Lo eliminamos de la DB
+                            BLL.PlanMantenimientoBLL.Eliminar(codigo);
+                            //Lo eliminamos de la tabla conjuntos del dataset
+                            dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigo).Delete();
+                            dsPlanMantenimiento.PLANES_MANTENIMIENTO.AcceptChanges();
+                        }
+                        catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error: Pieza - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        catch (Entidades.Excepciones.BaseDeDatosException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error: Pieza - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Plan de Mantenimiento de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
   
         private void button_MouseDown(object sender, MouseEventArgs e)

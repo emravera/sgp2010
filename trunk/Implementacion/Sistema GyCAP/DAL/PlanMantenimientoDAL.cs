@@ -333,7 +333,7 @@ namespace GyCAP.DAL
                 try
                 {
                     DB.FillDataSet(ds, "PLANES_MANTENIMIENTO", sql, valorParametros);
-                    if (obtenerDetalle) { ObtenerPlanMantenimiento(ds); }
+                    if (obtenerDetalle) { ObtenerDetallePlanMantenimiento(ds); }
                 }
                 catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
@@ -343,7 +343,7 @@ namespace GyCAP.DAL
                 try
                 {
                     DB.FillDataSet(ds, "PLANES_MANTENIMIENTO", sql, null);
-                    if (obtenerDetalle) { ObtenerPlanMantenimiento(ds); }
+                    if (obtenerDetalle) { ObtenerDetallePlanMantenimiento(ds); }
                 }
                 catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
@@ -366,10 +366,11 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        private static void ObtenerPlanMantenimiento(Data.dsPlanMantenimiento ds)
+        private static void ObtenerDetallePlanMantenimiento(Data.dsPlanMantenimiento ds)
         {
-            string sql = @"SELECT PMAN_NUMERO, EPMAN_CODIGO, PMAN_FECHA, PMAN_OBSERVACIONES, PMAN_DESCRIPCION
-                          FROM PLANES_MANTENIMIENTO WHERE PMAN_NUMERO = @p0";
+            string sql = @"SELECT DPMAN_CODIGO, PMAN_NUMERO, EDPMAN_CODIGO, MAN_CODIGO, UMED_CODIGO
+                          , DPMAN_FRECUENCIA, DPMAN_DESCRIPCION
+                          FROM DETALLE_PLANES_MANTENIMIENTO WHERE PMAN_NUMERO = @p0";
 
             object[] valorParametros; ;
 
