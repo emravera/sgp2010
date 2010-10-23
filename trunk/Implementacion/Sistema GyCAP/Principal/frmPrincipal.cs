@@ -71,8 +71,8 @@ namespace Principal
 
         private void menuItemMA_Click(object sender, EventArgs e)
         {
-            //GyCAP.UI.Mantenimiento.frmMantenimiento.Instancia.MdiParent = this;
-            //GyCAP.UI.Mantenimiento.frmMantenimiento.Instancia.Show();
+            GyCAP.UI.Mantenimiento.frmModuloMantenimiento.Instancia.MdiParent = this;
+            GyCAP.UI.Mantenimiento.frmModuloMantenimiento.Instancia.Show();
         }
 
         private void menuItemCP_Click(object sender, EventArgs e)
@@ -115,6 +115,13 @@ namespace Principal
 
         #region Menú Sistema
 
+        private void itemMenuOpciones_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Principal.frmOpciones.Instancia.MdiParent = this;
+            GyCAP.UI.Principal.frmOpciones.Instancia.TopLevel = false;
+            GyCAP.UI.Principal.frmOpciones.Instancia.Show();
+        }
+
         #endregion
 
         #region Menú Ventana
@@ -155,120 +162,14 @@ namespace Principal
         }
         #endregion
 
-        private void itemMenuOpciones_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.Principal.frmOpciones.Instancia.MdiParent = this;
-            GyCAP.UI.Principal.frmOpciones.Instancia.TopLevel = false;
-            GyCAP.UI.Principal.frmOpciones.Instancia.Show();
-        }
-
-
-        //ELIMINAR LO QUE SIGUE
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void toolStripButton2_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.EstructuraProducto.frmTerminacion.Instancia.MdiParent = this;
-            GyCAP.UI.EstructuraProducto.frmTerminacion.Instancia.Show();
-        }
-
-        private void toolStripButton3_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.Soporte.frmTipoUnidadMedida.Instancia.MdiParent = this;
-            GyCAP.UI.Soporte.frmTipoUnidadMedida.Instancia.Show();
-        }
-
-        private void toolStripButton4_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.EstructuraProducto.frmUnidadMedida.Instancia.MdiParent = this;
-            GyCAP.UI.EstructuraProducto.frmUnidadMedida.Instancia.Show();
-
-        }
-
-        private void toolStripButton5_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.Soporte.frmMarca.Instancia.MdiParent = this;
-            GyCAP.UI.Soporte.frmMarca.Instancia.Show();
-        }
-
-        private void toolStripButton6_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.EstructuraProducto.frmDesignacion.Instancia.MdiParent = this;
-            GyCAP.UI.EstructuraProducto.frmDesignacion.Instancia.Show();
-        }
-
-        private void toolStripButton7_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void toolStripButton8_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.EstructuraProducto.frmMateriaPrimaPrincipal.Instancia.MdiParent = this;
-            GyCAP.UI.EstructuraProducto.frmMateriaPrimaPrincipal.Instancia.Show();
-        }
+        
+        //ELIMINAR LO QUE SIGUE - GONZALO
 
         private void t9_Click(object sender, EventArgs e)
         {
             GyCAP.UI.Soporte.frmCapacidadEmpleado.Instancia.MdiParent = this;
-            GyCAP.UI.Soporte.frmCapacidadEmpleado.Instancia.Show(); 
-        }
-
-        private void tLEmpleado_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.RecursosFabricacion.frmEmpleado.Instancia.MdiParent = this;
-            GyCAP.UI.RecursosFabricacion.frmEmpleado.Instancia.Show();
-        }
-
-        private void toolStripButton9_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.PlanificacionProduccion.frmEstimarDemandaAnual.Instancia.MdiParent = this;
-            GyCAP.UI.PlanificacionProduccion.frmEstimarDemandaAnual.Instancia.Show();
-        }
-
-        private void btnPlanAnual_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.PlanificacionProduccion.frmPlanAnual.Instancia.MdiParent = this;
-            GyCAP.UI.PlanificacionProduccion.frmPlanAnual.Instancia.Show();
-        }
-
-        private void tsMaquinas_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.RecursosFabricacion.frmRFMaquina.Instancia.MdiParent = this;
-            GyCAP.UI.RecursosFabricacion.frmRFMaquina.Instancia.Show();
-        }        
-
-        private void btnPlanMensual_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.PlanificacionProduccion.frmPlanMensual.Instancia.MdiParent = this;
-            GyCAP.UI.PlanificacionProduccion.frmPlanMensual.Instancia.Show();
-        }
-
-        private void btnPlanSemanal_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.PlanificacionProduccion.frmPlanSemanal.Instancia.MdiParent = this;
-            GyCAP.UI.PlanificacionProduccion.frmPlanSemanal.Instancia.Show();
-        }
-
-        private void toolCliente_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.GestionPedido.frmCliente.Instancia.MdiParent = this;
-            GyCAP.UI.GestionPedido.frmCliente.Instancia.Show();
-        }
-
-        private void btnOperaciones_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void toolPedidos_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.GestionPedido.frmPedidos.Instancia.MdiParent = this;
-            GyCAP.UI.GestionPedido.frmPedidos.Instancia.Show();
-        }        
+            GyCAP.UI.Soporte.frmCapacidadEmpleado.Instancia.Show();
+        }              
 
         private void btnControlPlan_Click(object sender, EventArgs e)
         {
