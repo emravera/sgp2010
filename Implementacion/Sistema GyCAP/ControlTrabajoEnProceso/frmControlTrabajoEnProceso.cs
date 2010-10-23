@@ -201,11 +201,11 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
         #region Orden Producción
         private void btnConsultarOrdenProduccion_Click(object sender, EventArgs e)
         {
-            frmOrdenTrabajo.Instancia.TopLevel = false;
-            frmOrdenTrabajo.Instancia.Parent = areaTrabajo;
-            frmOrdenTrabajo.Instancia.Location = PosicionarFormulario();
-            frmOrdenTrabajo.Instancia.Show();
-            frmOrdenTrabajo.Instancia.Focus();
+            frmControlProduccion.Instancia.TopLevel = false;
+            frmControlProduccion.Instancia.Parent = areaTrabajo;
+            frmControlProduccion.Instancia.Location = PosicionarFormulario();
+            frmControlProduccion.Instancia.Show();
+            frmControlProduccion.Instancia.Focus();
         }
 
         private void btnConsultarOrdenTrabajo_Click(object sender, EventArgs e)
