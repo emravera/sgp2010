@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace GyCAP.UI.ControlTrabajoEnProceso
 {
-    public partial class frmOrdenTrabajo : Form
+    public partial class frmControlProduccion : Form
     {
-        private static frmOrdenTrabajo _frmOrdenTrabajo = null;
+        private static frmControlProduccion _frmOrdenTrabajo = null;
         private enum estadoUI { pestañaProduccion, pestañaTrabajo, pestañaCierreParcial };
         private estadoUI estadoInterface;
         private Data.dsOrdenTrabajo dsOrdenTrabajo = new GyCAP.Data.dsOrdenTrabajo();
@@ -24,19 +24,19 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
 
         #region Inicio
 
-        public frmOrdenTrabajo()
+        public frmControlProduccion()
         {
             InitializeComponent();
             Inicializar();
         }
 
-        public static frmOrdenTrabajo Instancia
+        public static frmControlProduccion Instancia
         {
             get
             {
                 if (_frmOrdenTrabajo == null || _frmOrdenTrabajo.IsDisposed)
                 {
-                    _frmOrdenTrabajo = new frmOrdenTrabajo();
+                    _frmOrdenTrabajo = new frmControlProduccion();
                 }
                 else
                 {

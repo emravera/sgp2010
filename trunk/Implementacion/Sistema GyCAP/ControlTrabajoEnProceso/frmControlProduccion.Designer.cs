@@ -1,6 +1,6 @@
 ﻿namespace GyCAP.UI.ControlTrabajoEnProceso
 {
-    partial class frmOrdenTrabajo
+    partial class frmControlProduccion
     {
         /// <summary>
         /// Required designer variable.

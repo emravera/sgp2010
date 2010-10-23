@@ -84,11 +84,11 @@
     <Compile Include="frmControlTrabajoEnProceso.Designer.cs">
       <DependentUpon>frmControlTrabajoEnProceso.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmOrdenTrabajo.cs">
+    <Compile Include="frmControlProduccion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmOrdenTrabajo.Designer.cs">
-      <DependentUpon>frmOrdenTrabajo.cs</DependentUpon>
+    <Compile Include="frmControlProduccion.Designer.cs">
+      <DependentUpon>frmControlProduccion.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,8 +100,8 @@
       <DependentUpon>frmControlTrabajoEnProceso.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmOrdenTrabajo.resx">
-      <DependentUpon>frmOrdenTrabajo.cs</DependentUpon>
+    <EmbeddedResource Include="frmControlProduccion.resx">
+      <DependentUpon>frmControlProduccion.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
