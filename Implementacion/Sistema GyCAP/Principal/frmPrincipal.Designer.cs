@@ -69,28 +69,13 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.t9 = new System.Windows.Forms.ToolStripButton();
-            this.tLEmpleado = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
-            this.btnPlanAnual = new System.Windows.Forms.ToolStripButton();
-            this.tsMaquinas = new System.Windows.Forms.ToolStripButton();
-            this.btnPlanMensual = new System.Windows.Forms.ToolStripButton();
-            this.btnPlanSemanal = new System.Windows.Forms.ToolStripButton();
-            this.toolCliente = new System.Windows.Forms.ToolStripButton();
-            this.btnOperaciones = new System.Windows.Forms.ToolStripButton();
-            this.toolPedidos = new System.Windows.Forms.ToolStripButton();
             this.btnControlPlan = new System.Windows.Forms.ToolStripButton();
             this.btnInventarioABC = new System.Windows.Forms.ToolStripButton();
+            this.tsbPlanMantenimeinto = new System.Windows.Forms.ToolStripButton();
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.tsbPlanMantenimeinto = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -111,7 +96,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.MdiWindowListItem = this.menuVentana;
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1264, 24);
+            this.menuStrip.Size = new System.Drawing.Size(792, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -455,90 +440,15 @@
             // toolStrip
             // 
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2,
-            this.toolStripButton3,
-            this.toolStripButton5,
-            this.toolStripButton6,
-            this.toolStripButton8,
             this.t9,
-            this.tLEmpleado,
-            this.toolStripButton9,
-            this.btnPlanAnual,
-            this.tsMaquinas,
-            this.btnPlanMensual,
-            this.btnPlanSemanal,
-            this.toolCliente,
-            this.btnOperaciones,
-            this.toolPedidos,
             this.btnControlPlan,
             this.btnInventarioABC,
             this.tsbPlanMantenimeinto});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(1264, 36);
+            this.toolStrip.Size = new System.Drawing.Size(792, 36);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "ToolStrip";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(79, 33);
-            this.toolStripButton1.Text = "Orden trabajo";
-            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(68, 33);
-            this.toolStripButton2.Text = "Terminacion";
-            this.toolStripButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(43, 33);
-            this.toolStripButton3.Text = "Tumed";
-            this.toolStripButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
-            // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(40, 33);
-            this.toolStripButton5.Text = "Marca";
-            this.toolStripButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
-            // 
-            // toolStripButton6
-            // 
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(68, 33);
-            this.toolStripButton6.Text = "Designacion";
-            this.toolStripButton6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
-            // 
-            // toolStripButton8
-            // 
-            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton8.Name = "toolStripButton8";
-            this.toolStripButton8.Size = new System.Drawing.Size(78, 33);
-            this.toolStripButton8.Text = "MP Principales";
-            this.toolStripButton8.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton8.Visible = false;
-            this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click);
             // 
             // t9
             // 
@@ -549,96 +459,6 @@
             this.t9.Text = "Cap Empleado";
             this.t9.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.t9.Click += new System.EventHandler(this.t9_Click);
-            // 
-            // tLEmpleado
-            // 
-            this.tLEmpleado.Image = ((System.Drawing.Image)(resources.GetObject("tLEmpleado.Image")));
-            this.tLEmpleado.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tLEmpleado.Name = "tLEmpleado";
-            this.tLEmpleado.Size = new System.Drawing.Size(62, 33);
-            this.tLEmpleado.Text = "Empleados";
-            this.tLEmpleado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tLEmpleado.Click += new System.EventHandler(this.tLEmpleado_Click);
-            // 
-            // toolStripButton9
-            // 
-            this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
-            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton9.Name = "toolStripButton9";
-            this.toolStripButton9.Size = new System.Drawing.Size(94, 33);
-            this.toolStripButton9.Text = "Estimar Demanda";
-            this.toolStripButton9.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
-            // 
-            // btnPlanAnual
-            // 
-            this.btnPlanAnual.Image = ((System.Drawing.Image)(resources.GetObject("btnPlanAnual.Image")));
-            this.btnPlanAnual.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPlanAnual.Name = "btnPlanAnual";
-            this.btnPlanAnual.Size = new System.Drawing.Size(61, 33);
-            this.btnPlanAnual.Text = "Plan Anual";
-            this.btnPlanAnual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPlanAnual.Click += new System.EventHandler(this.btnPlanAnual_Click);
-            // 
-            // tsMaquinas
-            // 
-            this.tsMaquinas.Image = ((System.Drawing.Image)(resources.GetObject("tsMaquinas.Image")));
-            this.tsMaquinas.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsMaquinas.Name = "tsMaquinas";
-            this.tsMaquinas.Size = new System.Drawing.Size(56, 33);
-            this.tsMaquinas.Text = "Maquinas";
-            this.tsMaquinas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsMaquinas.Click += new System.EventHandler(this.tsMaquinas_Click);
-            // 
-            // btnPlanMensual
-            // 
-            this.btnPlanMensual.Image = ((System.Drawing.Image)(resources.GetObject("btnPlanMensual.Image")));
-            this.btnPlanMensual.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPlanMensual.Name = "btnPlanMensual";
-            this.btnPlanMensual.Size = new System.Drawing.Size(73, 33);
-            this.btnPlanMensual.Text = "Plan Mensual";
-            this.btnPlanMensual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPlanMensual.Click += new System.EventHandler(this.btnPlanMensual_Click);
-            // 
-            // btnPlanSemanal
-            // 
-            this.btnPlanSemanal.Image = ((System.Drawing.Image)(resources.GetObject("btnPlanSemanal.Image")));
-            this.btnPlanSemanal.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPlanSemanal.Name = "btnPlanSemanal";
-            this.btnPlanSemanal.Size = new System.Drawing.Size(74, 33);
-            this.btnPlanSemanal.Text = "Plan Semanal";
-            this.btnPlanSemanal.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPlanSemanal.Click += new System.EventHandler(this.btnPlanSemanal_Click);
-            // 
-            // toolCliente
-            // 
-            this.toolCliente.Image = ((System.Drawing.Image)(resources.GetObject("toolCliente.Image")));
-            this.toolCliente.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolCliente.Name = "toolCliente";
-            this.toolCliente.Size = new System.Drawing.Size(44, 33);
-            this.toolCliente.Text = "Cliente";
-            this.toolCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolCliente.Click += new System.EventHandler(this.toolCliente_Click);
-            // 
-            // btnOperaciones
-            // 
-            this.btnOperaciones.Image = ((System.Drawing.Image)(resources.GetObject("btnOperaciones.Image")));
-            this.btnOperaciones.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnOperaciones.Name = "btnOperaciones";
-            this.btnOperaciones.Size = new System.Drawing.Size(71, 33);
-            this.btnOperaciones.Text = "Operaciones";
-            this.btnOperaciones.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnOperaciones.Click += new System.EventHandler(this.btnOperaciones_Click);
-            // 
-            // toolPedidos
-            // 
-            this.toolPedidos.Image = ((System.Drawing.Image)(resources.GetObject("toolPedidos.Image")));
-            this.toolPedidos.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolPedidos.Name = "toolPedidos";
-            this.toolPedidos.Size = new System.Drawing.Size(48, 33);
-            this.toolPedidos.Text = "Pedidos";
-            this.toolPedidos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolPedidos.Click += new System.EventHandler(this.toolPedidos_Click);
             // 
             // btnControlPlan
             // 
@@ -660,22 +480,6 @@
             this.btnInventarioABC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnInventarioABC.Click += new System.EventHandler(this.btnInventarioABC_Click);
             // 
-            // barraEstado
-            // 
-            this.barraEstado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblEstado});
-            this.barraEstado.Location = new System.Drawing.Point(0, 548);
-            this.barraEstado.Name = "barraEstado";
-            this.barraEstado.Size = new System.Drawing.Size(1264, 22);
-            this.barraEstado.TabIndex = 2;
-            this.barraEstado.Text = "StatusStrip";
-            // 
-            // lblEstado
-            // 
-            this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(38, 17);
-            this.lblEstado.Text = "Status";
-            // 
             // tsbPlanMantenimeinto
             // 
             this.tsbPlanMantenimeinto.Image = ((System.Drawing.Image)(resources.GetObject("tsbPlanMantenimeinto.Image")));
@@ -686,11 +490,27 @@
             this.tsbPlanMantenimeinto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbPlanMantenimeinto.Click += new System.EventHandler(this.tsbPlanMantenimeinto_Click);
             // 
+            // barraEstado
+            // 
+            this.barraEstado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblEstado});
+            this.barraEstado.Location = new System.Drawing.Point(0, 548);
+            this.barraEstado.Name = "barraEstado";
+            this.barraEstado.Size = new System.Drawing.Size(792, 22);
+            this.barraEstado.TabIndex = 2;
+            this.barraEstado.Text = "StatusStrip";
+            // 
+            // lblEstado
+            // 
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(38, 17);
+            this.lblEstado.Text = "Status";
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 570);
+            this.ClientSize = new System.Drawing.Size(792, 570);
             this.Controls.Add(this.barraEstado);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip);
@@ -744,14 +564,7 @@
         private System.Windows.Forms.ToolStripMenuItem indexToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
-        private System.Windows.Forms.ToolStripButton toolStripButton8;
         private System.Windows.Forms.ToolStripButton t9;
-        private System.Windows.Forms.ToolStripButton tLEmpleado;
         private System.Windows.Forms.ToolStripMenuItem menuItemQA;
         private System.Windows.Forms.ToolStripMenuItem menuItemCP;
         private System.Windows.Forms.ToolStripMenuItem menuItemEP;
@@ -762,15 +575,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemRF;
         private System.Windows.Forms.ToolStripMenuItem menuItemSO;
         private System.Windows.Forms.ToolStripMenuItem menuSalir;
-        private System.Windows.Forms.ToolStripButton toolStripButton9;
         public System.Windows.Forms.StatusStrip barraEstado;
-        private System.Windows.Forms.ToolStripButton btnPlanAnual;
-        private System.Windows.Forms.ToolStripButton tsMaquinas;
-        private System.Windows.Forms.ToolStripButton btnPlanMensual;
-        private System.Windows.Forms.ToolStripButton btnPlanSemanal;
-        private System.Windows.Forms.ToolStripButton toolCliente;
-        private System.Windows.Forms.ToolStripButton btnOperaciones;
-        private System.Windows.Forms.ToolStripButton toolPedidos;
         private System.Windows.Forms.ToolStripButton btnControlPlan;
         private System.Windows.Forms.ToolStripButton btnInventarioABC;
         private System.Windows.Forms.ToolStripMenuItem menuItemPF;
