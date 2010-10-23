@@ -16,6 +16,11 @@ namespace GyCAP.BLL
             DAL.UbicacionStockDAL.ObtenerUbicacionesStock(dtUbicacionStock);
         }
 
+        public static void ObtenerUbicacionesStock(DataTable dtUbicacionesStock, int contenidoUbicacionStock)
+        {
+            DAL.UbicacionStockDAL.ObtenerUbicacionesStock(dtUbicacionesStock, contenidoUbicacionStock);
+        }
+        
         public static void Insertar(Entidades.UbicacionStock ubicacion)
         {
             if (DAL.UbicacionStockDAL.EsUbicacionStock(ubicacion.Codigo, ubicacion.Nombre)) { throw new Entidades.Excepciones.ElementoExistenteException(); }

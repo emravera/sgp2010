@@ -16,7 +16,7 @@ namespace GyCAP.UI.GestionStock
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, };
         private estadoUI estadoInterface;
         private Data.dsStock dsStock = new GyCAP.Data.dsStock();
-        DataView dvUbicaciones, dvUnidadMedida, dvUbicacionPadre, dvTipoUbicacion, dvTipoBuscar;
+        DataView dvUbicaciones, dvUnidadMedida, dvUbicacionPadre, dvTipoUbicacion, dvTipoBuscar, dvContenidoBuscar, dvContenido;
 
         #region Inicio
         public frmUbicacionStock()
@@ -77,6 +77,12 @@ namespace GyCAP.UI.GestionStock
             {
                 if (string.IsNullOrEmpty(filtro)) { filtro = "TUS_CODIGO = " + cboTipoBuscar.GetSelectedValueInt(); }
                 else { filtro += " AND TUS_CODIGO = " + cboTipoBuscar.GetSelectedValueInt(); }
+            }
+
+            if (cboContenidoBuscar.GetSelectedValueInt() != -1)
+            {
+                if (string.IsNullOrEmpty(filtro)) { filtro = "CON_CODIGO = " + cboContenidoBuscar.GetSelectedValueInt(); }
+                else { filtro += " AND CON_CODIGO = " + cboContenidoBuscar.GetSelectedValueInt(); }
             }
             
             dvUbicaciones.RowFilter = filtro;
@@ -156,11 +162,12 @@ namespace GyCAP.UI.GestionStock
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             string mensaje = string.Empty;
-            if (txtCodigo.Text == string.Empty) { mensaje = "* Código\n"; }
-            if (txtNombre.Text == string.Empty) { mensaje = "* Nombre\n"; }
-            if (cboUnidadMedida.GetSelectedIndex() == -1) { mensaje = "* Unidad de medida\n"; }
-            if (cboEstado.GetSelectedIndex() == -1) { mensaje = "* Estado\n"; }
-            if (cboTipoUbicacion.GetSelectedIndex() == -1) { mensaje = "* Tipo\n"; }
+            if (txtCodigo.Text == string.Empty) { mensaje += "* Código\n"; }
+            if (txtNombre.Text == string.Empty) { mensaje += "* Nombre\n"; }
+            if (cboUnidadMedida.GetSelectedIndex() == -1) { mensaje += "* Unidad de medida\n"; }
+            if (cboEstado.GetSelectedIndex() == -1) { mensaje += "* Estado\n"; }
+            if (cboTipoUbicacion.GetSelectedIndex() == -1) { mensaje += "* Tipo\n"; }
+            if (cboContenidoStock.GetSelectedIndex() == -1) { mensaje += "* Contenido\n"; }
 
             if (mensaje == string.Empty)
             {
@@ -181,6 +188,7 @@ namespace GyCAP.UI.GestionStock
                         ubicacion.UnidadMedida = new GyCAP.Entidades.UnidadMedida(cboUnidadMedida.GetSelectedValueInt());
                         ubicacion.Activo = cboEstado.GetSelectedValueInt();
                         ubicacion.TipoUbicacion = new GyCAP.Entidades.TipoUbicacionStock(cboTipoUbicacion.GetSelectedValueInt());
+                        ubicacion.Contenido = new GyCAP.Entidades.ContenidoUbicacionStock(cboContenidoStock.GetSelectedValueInt());
                         BLL.UbicacionStockBLL.Insertar(ubicacion);
                         Data.dsStock.UBICACIONES_STOCKRow row = dsStock.UBICACIONES_STOCK.NewUBICACIONES_STOCKRow();
                         row.BeginEdit();
@@ -196,6 +204,7 @@ namespace GyCAP.UI.GestionStock
                         row.USTCK_CANTIDADVIRTUAL = ubicacion.CantidadVirtual;
                         row.USTCK_ACTIVO = ubicacion.Activo;
                         row.TUS_CODIGO = ubicacion.TipoUbicacion.Codigo;
+                        row.CON_CODIGO = ubicacion.Contenido.Codigo;
                         row.EndEdit();
                         dsStock.UBICACIONES_STOCK.AddUBICACIONES_STOCKRow(row);
                         dsStock.UBICACIONES_STOCK.AcceptChanges();
@@ -272,6 +281,8 @@ namespace GyCAP.UI.GestionStock
                     cboEstado.Enabled = true;
                     cboTipoUbicacion.SetSelectedIndex(-1);
                     cboTipoUbicacion.Enabled = true;
+                    cboContenidoStock.SetSelectedIndex(-1);
+                    cboContenidoStock.Enabled = true;
                     nudCantidadReal.Value = 0;
                     nudCantidadReal.Enabled = true;
                     nudCantidadVirtual.Value = 0;
@@ -302,6 +313,8 @@ namespace GyCAP.UI.GestionStock
                     cboEstado.Enabled = true;
                     cboTipoUbicacion.SetSelectedIndex(-1);
                     cboTipoUbicacion.Enabled = true;
+                    cboContenidoStock.SetSelectedIndex(-1);
+                    cboContenidoStock.Enabled = true;
                     nudCantidadReal.Value = 0;
                     nudCantidadReal.Enabled = true;
                     nudCantidadVirtual.Value = 0;
@@ -326,6 +339,7 @@ namespace GyCAP.UI.GestionStock
                     cboEstado.Enabled = false;
                     cboUnidadMedida.Enabled = false;
                     cboTipoUbicacion.Enabled = false;
+                    cboContenidoStock.Enabled = false;
                     nudCantidadReal.Enabled = false;
                     nudCantidadVirtual.Enabled = false;
                     btnGuardar.Enabled = false;
@@ -347,6 +361,7 @@ namespace GyCAP.UI.GestionStock
                     cboEstado.Enabled = true;
                     cboUnidadMedida.Enabled = true;
                     cboTipoUbicacion.Enabled = true;
+                    cboContenidoStock.Enabled = true;
                     nudCantidadReal.Enabled = false;
                     nudCantidadVirtual.Enabled = false;
                     btnGuardar.Enabled = true;
@@ -374,6 +389,7 @@ namespace GyCAP.UI.GestionStock
             dgvLista.Columns.Add("USTCK_CANTIDADVIRTUAL", "Cantidad virtual");
             dgvLista.Columns.Add("UMED_CODIGO", "Unidad medida");
             dgvLista.Columns.Add("USTCK_ACTIVO", "Estado");
+            dgvLista.Columns.Add("CON_CODIGO", "Contenido");
             dgvLista.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvLista.Columns["USTCK_CANTIDADREAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvLista.Columns["USTCK_CANTIDADVIRTUAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;            
@@ -384,12 +400,14 @@ namespace GyCAP.UI.GestionStock
             dgvLista.Columns["USTCK_CANTIDADREAL"].DataPropertyName = "USTCK_CANTIDADREAL";
             dgvLista.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
             dgvLista.Columns["USTCK_ACTIVO"].DataPropertyName = "USTCK_ACTIVO";
+            dgvLista.Columns["CON_CODIGO"].DataPropertyName = "CON_CODIGO";
 
             try
             {
                 BLL.UnidadMedidaBLL.ObtenerTodos(dsStock.UNIDADES_MEDIDA);
                 BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsStock.UBICACIONES_STOCK);
                 BLL.TipoUbicacionStockBLL.ObtenerTiposUbicacionStock(dsStock.TIPOS_UBICACIONES_STOCK);
+                BLL.ContenidoUbicacionStockBLL.ObtenerContenidosUbicacionStock(dsStock.CONTENIDO_UBICACION_STOCK);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -413,9 +431,12 @@ namespace GyCAP.UI.GestionStock
             cboPadre.SetDatos(dvUbicacionPadre, "USTCK_NUMERO", "USTCK_NOMBRE", "Sin especificar", false);
             dvTipoUbicacion = new DataView(dsStock.TIPOS_UBICACIONES_STOCK);
             cboTipoUbicacion.SetDatos(dvTipoUbicacion, "TUS_CODIGO", "TUS_NOMBRE", "Seleccione", false);
-
             dvTipoBuscar = new DataView(dsStock.TIPOS_UBICACIONES_STOCK);
             cboTipoBuscar.SetDatos(dvTipoBuscar, "TUS_CODIGO", "TUS_NOMBRE", "--TODOS--", true);
+            dvContenidoBuscar = new DataView(dsStock.CONTENIDO_UBICACION_STOCK);
+            dvContenido = new DataView(dsStock.CONTENIDO_UBICACION_STOCK);
+            cboContenidoBuscar.SetDatos(dvContenidoBuscar, "CON_CODIGO", "CON_NOMBRE", "--TODOS--", true);
+            cboContenidoStock.SetDatos(dvContenido, "CON_CODIGO", "CON_NOMBRE", "Seleccione", false);
         }
         
         private void frmUbicacionStock_Activated(object sender, EventArgs e)
@@ -458,6 +479,10 @@ namespace GyCAP.UI.GestionStock
                         nombre = dsStock.TIPOS_UBICACIONES_STOCK.FindByTUS_CODIGO(Convert.ToInt32(e.Value)).TUS_NOMBRE;
                         e.Value = nombre;
                         break;
+                    case "CON_CODIGO":
+                        nombre = dsStock.CONTENIDO_UBICACION_STOCK.FindByCON_CODIGO(Convert.ToInt32(e.Value)).CON_NOMBRE;
+                        e.Value = nombre;
+                        break;
                     default:
                         break;
                 }
@@ -480,6 +505,7 @@ namespace GyCAP.UI.GestionStock
                 cboUnidadMedida.SetSelectedValue(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).UMED_CODIGO));
                 cboTipoUbicacion.SetSelectedValue(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).TUS_CODIGO));
                 cboEstado.SetSelectedValue(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_ACTIVO));
+                cboContenidoStock.SetSelectedValue(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).CON_CODIGO));
             }
         }
 

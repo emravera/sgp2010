@@ -85,6 +85,14 @@ namespace GyCAP.Entidades
             get { return tipoUbicacion; }
             set { tipoUbicacion = value; }
         }
+
+        private ContenidoUbicacionStock contenido;
+
+        public ContenidoUbicacionStock Contenido
+        {
+            get { return contenido; }
+            set { contenido = value; }
+        }
         
         public UbicacionStock() { }
         

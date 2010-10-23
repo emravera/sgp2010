@@ -56,6 +56,7 @@
     <Compile Include="CocinaBLL.cs" />
     <Compile Include="ColorBLL.cs" />
     <Compile Include="ConjuntoBLL.cs" />
+    <Compile Include="ContenidoUbicacionStockBLL.cs" />
     <Compile Include="DBBLL.cs" />
     <Compile Include="DemandaAnualBLL.cs" />
     <Compile Include="DesignacionBLL.cs" />

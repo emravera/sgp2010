@@ -12,12 +12,27 @@ namespace GyCAP.DAL
         public static void ObtenerUbicacionesStock(DataTable dtUbicacionesStock)
         {
             string sql = @"SELECT ustck_numero, ustck_codigo, ustck_nombre, ustck_descripcion, ustck_ubicacionfisica, 
-                            ustck_cantidadreal, ustck_cantidadvirtual, umed_codigo, ustck_padre, ustck_activo, tus_codigo 
+                            ustck_cantidadreal, ustck_cantidadvirtual, umed_codigo, ustck_padre, ustck_activo, tus_codigo, con_codigo  
                             FROM UBICACIONES_STOCK";
 
             try
             {
                 DB.FillDataTable(dtUbicacionesStock, sql, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static void ObtenerUbicacionesStock(DataTable dtUbicacionesStock, int contenidoUbicacionStock)
+        {
+            string sql = @"SELECT ustck_numero, ustck_codigo, ustck_nombre, ustck_descripcion, ustck_ubicacionfisica, 
+                            ustck_cantidadreal, ustck_cantidadvirtual, umed_codigo, ustck_padre, ustck_activo, tus_codigo, con_codigo 
+                            FROM UBICACIONES_STOCK WHERE con_codigo = @p0";
+
+            object[] parametros = { contenidoUbicacionStock };
+
+            try
+            {
+                DB.FillDataTable(dtUbicacionesStock, sql, parametros);
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
@@ -34,8 +49,9 @@ namespace GyCAP.DAL
                          [umed_codigo], 
                          [ustck_padre], 
                          [ustck_activo],
-                         [tus_codigo])
-                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9) SELECT @@Identity";
+                         [tus_codigo],
+                         [con_codigo])
+                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10) SELECT @@Identity";
 
             object padre = DBNull.Value;
             if (ubicacion.UbicacionPadre != null) { padre = ubicacion.UbicacionPadre.Numero; };
@@ -48,7 +64,8 @@ namespace GyCAP.DAL
                                       ubicacion.UnidadMedida.Codigo,
                                       padre,
                                       ubicacion.Activo,
-                                      ubicacion.TipoUbicacion.Codigo };
+                                      ubicacion.TipoUbicacion.Codigo,
+                                      ubicacion.Contenido.Codigo };
 
             try
             {
