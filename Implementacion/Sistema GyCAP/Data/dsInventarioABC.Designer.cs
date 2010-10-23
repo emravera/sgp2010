@@ -1443,6 +1443,12 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MODELOS_PRODUCIDOSRow FindByCODIGO_MODELO(decimal CODIGO_MODELO) {
+                return ((MODELOS_PRODUCIDOSRow)(this.Rows.Find(new object[] {
+                            CODIGO_MODELO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public override global::System.Data.DataTable Clone() {
                 MODELOS_PRODUCIDOSDataTable cln = ((MODELOS_PRODUCIDOSDataTable)(base.Clone()));
                 cln.InitVars();
@@ -1472,6 +1478,10 @@ namespace GyCAP.Data {
                 base.Columns.Add(this.columnMODELO_PORCENTAJE);
                 this.columnMODELO_CANTIDAD = new global::System.Data.DataColumn("MODELO_CANTIDAD", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMODELO_CANTIDAD);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnCODIGO_MODELO}, true));
+                this.columnCODIGO_MODELO.AllowDBNull = false;
+                this.columnCODIGO_MODELO.Unique = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1735,6 +1745,12 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MATERIAS_PRIMAS_ABCRow FindByCODIGO_MATERIA_PRIMA_ABC(decimal CODIGO_MATERIA_PRIMA_ABC) {
+                return ((MATERIAS_PRIMAS_ABCRow)(this.Rows.Find(new object[] {
+                            CODIGO_MATERIA_PRIMA_ABC})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public override global::System.Data.DataTable Clone() {
                 MATERIAS_PRIMAS_ABCDataTable cln = ((MATERIAS_PRIMAS_ABCDataTable)(base.Clone()));
                 cln.InitVars();
@@ -1773,6 +1789,10 @@ namespace GyCAP.Data {
                 base.Columns.Add(this.columnPRECIO_UNIDAD);
                 this.columnCANTIDAD_INVERSION = new global::System.Data.DataColumn("CANTIDAD_INVERSION", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCANTIDAD_INVERSION);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnCODIGO_MATERIA_PRIMA_ABC}, true));
+                this.columnCODIGO_MATERIA_PRIMA_ABC.AllowDBNull = false;
+                this.columnCODIGO_MATERIA_PRIMA_ABC.Unique = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2275,13 +2295,7 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public decimal CODIGO_MODELO {
                 get {
-                    try {
-                        return ((decimal)(this[this.tableMODELOS_PRODUCIDOS.CODIGO_MODELOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CODIGO_MODELO\' de la tabla \'MODELOS_PRODUCIDOS\' es DBNull" +
-                                ".", e);
-                    }
+                    return ((decimal)(this[this.tableMODELOS_PRODUCIDOS.CODIGO_MODELOColumn]));
                 }
                 set {
                     this[this.tableMODELOS_PRODUCIDOS.CODIGO_MODELOColumn] = value;
@@ -2331,16 +2345,6 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCODIGO_MODELONull() {
-                return this.IsNull(this.tableMODELOS_PRODUCIDOS.CODIGO_MODELOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCODIGO_MODELONull() {
-                this[this.tableMODELOS_PRODUCIDOS.CODIGO_MODELOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsMODELO_PORCENTAJENull() {
                 return this.IsNull(this.tableMODELOS_PRODUCIDOS.MODELO_PORCENTAJEColumn);
             }
@@ -2378,13 +2382,7 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public decimal CODIGO_MATERIA_PRIMA_ABC {
                 get {
-                    try {
-                        return ((decimal)(this[this.tableMATERIAS_PRIMAS_ABC.CODIGO_MATERIA_PRIMA_ABCColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CODIGO_MATERIA_PRIMA_ABC\' de la tabla \'MATERIAS_PRIMAS_AB" +
-                                "C\' es DBNull.", e);
-                    }
+                    return ((decimal)(this[this.tableMATERIAS_PRIMAS_ABC.CODIGO_MATERIA_PRIMA_ABCColumn]));
                 }
                 set {
                     this[this.tableMATERIAS_PRIMAS_ABC.CODIGO_MATERIA_PRIMA_ABCColumn] = value;
@@ -2485,16 +2483,6 @@ namespace GyCAP.Data {
                 set {
                     this[this.tableMATERIAS_PRIMAS_ABC.CANTIDAD_INVERSIONColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCODIGO_MATERIA_PRIMA_ABCNull() {
-                return this.IsNull(this.tableMATERIAS_PRIMAS_ABC.CODIGO_MATERIA_PRIMA_ABCColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCODIGO_MATERIA_PRIMA_ABCNull() {
-                this[this.tableMATERIAS_PRIMAS_ABC.CODIGO_MATERIA_PRIMA_ABCColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
