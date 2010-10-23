@@ -25,6 +25,26 @@ namespace GyCAP.DAL
 
             return cantidadAnual;
         }
+        public static object ObtenerTotalModelo(int codigoModelo, int codigoPA)
+        {
+            object cantidadAnual = 0;
+
+            string sql = @"SELECT sum (dps.dpsem_cantidadreal) 
+                           FROM PLANES_ANUALES as pa, PLANES_MENSUALES  as pm, PLANES_SEMANALES as ps,
+                                 DIAS_PLAN_SEMANAL as dia, DETALLE_PLANES_SEMANALES as dps, COCINAS as coc
+                           WHERE pa.pan_codigo=pm.pan_codigo and pm.pmes_codigo=ps.pmes_codigo and 
+                                ps.psem_codigo=dia.psem_codigo and dia.diapsem_codigo=dps.diapsem_codigo and coc.coc_codigo=dps.coc_codigo 
+                                and dps.coc_codigo = @p0  and  pa.pan_codigo=@p1";
+
+            object[] valorParametros = {codigoModelo, codigoPA };
+            try
+            {
+                cantidadAnual = DB.executeScalar(sql, valorParametros, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+            return cantidadAnual;
+        }
 
 
 

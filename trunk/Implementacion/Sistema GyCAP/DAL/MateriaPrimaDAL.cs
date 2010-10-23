@@ -123,7 +123,6 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
             return costo;
-
         }
     }
 }

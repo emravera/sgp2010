@@ -13,7 +13,11 @@ namespace GyCAP.BLL
             return DAL.StockMateriaPrimaDAL.ObtenerTotalAnual(codigoAnio);
 
         }
-
+        public static object ObtenerTotalModelo(int codigoAnio, int codigoModelo)
+        {
+            //Funcion que obtiene la cantidad producida de un modelo 
+            return DAL.StockMateriaPrimaDAL.ObtenerTotalModelo(codigoModelo, codigoAnio);
+        }
 
 
     }

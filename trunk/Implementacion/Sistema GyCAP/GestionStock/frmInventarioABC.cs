@@ -12,11 +12,12 @@ namespace GyCAP.UI.GestionStock
     public partial class frmInventarioABC : Form
     {
         private static frmInventarioABC _frmInventarioABC = null;
-        private enum estadoUI { inicio, CargaDetalle, generadoABC };
+        private enum estadoUI { inicio, CargaDetalle, generaHistorico, generadoABC };
         private DataView dvComboAño, dvComboAñoHistorico, dvComboCocinas, dvListaModelos, dvListaMP;
         private static estadoUI estadoActual;
         private Data.dsInventarioABC dsInventarioABC = new GyCAP.Data.dsInventarioABC();
-        private static int codigoModelo=0, codigoMatPrima=0;
+        private static int codigoModelo = 0; 
+        private static int codigoMatPrima=0;
         //Defino una lista generica
         private static List<Entidades.MateriaPrimaABC> materiasPrimas = new List<GyCAP.Entidades.MateriaPrimaABC>();
        
@@ -72,7 +73,7 @@ namespace GyCAP.UI.GestionStock
             dgvMP.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvMP.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvMP.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvMP.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvMP.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
@@ -167,11 +168,24 @@ namespace GyCAP.UI.GestionStock
                     gbDatosCocinas.Visible = true;
                     gbMateriasPrimas.Visible = false;
 
+                    //Escondo las columnas que no quiero que se vean
+                    dgvModelos.Columns["CODIGO_MODELO"].Visible = false;
+                    break;
+                case estadoUI.generaHistorico:
+                    gbDatosPrincipales.Enabled = false;
+                    gbDatosCocinas.Visible = true;
+                    gbMateriasPrimas.Visible = false;
+                   
+                    //Escondo las columnas que no quiero que se vean
+                    dgvModelos.Columns["CODIGO_MODELO"].Visible = false;
                     break;
                 case estadoUI.generadoABC:
                     gbDatosPrincipales.Enabled = false;
                     gbDatosCocinas.Visible = true;
                     gbMateriasPrimas.Visible = true;
+
+                    gbMateriasPrimas.Enabled = true;
+                    gbDatosCocinas.Enabled = false;
 
                     //Escondo las columnas que no quiero que se vean
                     dgvMP.Columns["CODIGO_MATERIA_PRIMA_ABC"].Visible = false;
@@ -250,6 +264,8 @@ namespace GyCAP.UI.GestionStock
         {
             try
             {
+                if (rbNuevo.Checked == true)
+                {
                     //Se busca el año del que hay que traer 
                     int codigoAnio = Convert.ToInt32(cbAñoInventario.GetSelectedValue());
 
@@ -258,7 +274,76 @@ namespace GyCAP.UI.GestionStock
 
                     //Seteamos la interface
                     SetInterface(estadoUI.CargaDetalle);
-               
+                }
+                else
+                {
+                    //Se buscan los porcentajes de cocinas producidas del año historico
+
+                    //Obtengo el plan anual
+                    int año = Convert.ToInt32(cbAñoInventario.GetSelectedValue());
+
+
+                    //Se trae el el total a producir en ese año desde la base de datos
+                    txtCantAnual.Text = BLL.StockMateriaPrimaBLL.ObtenerTotalAnual(año).ToString();
+
+                    //Defino la matriz donde voy a guardar los datos
+                    int cantidadModelos = Convert.ToInt32(dsInventarioABC.COCINAS.Rows.Count);
+                    decimal[,] modelos = new decimal[cantidadModelos, 2];
+                    int cont=0; decimal sum=0;
+
+                    foreach (Data.dsInventarioABC.COCINASRow cocina in dsInventarioABC.COCINAS.Rows)
+                    {
+                        //Obtengo el codigo de la cocina
+                        int codigoModelo = Convert.ToInt32(cocina["coc_codigo"]);
+                        modelos[cont,0] = codigoModelo;
+                        //Obtengo de ese modelo la cantidad de cocinas producidas en ese año
+                         object salida = BLL.StockMateriaPrimaBLL.ObtenerTotalModelo(año, codigoModelo);
+                         if (salida != DBNull.Value)
+                         {
+                             modelos[cont, 1] = Convert.ToInt32(salida);
+                         }
+                         else
+                         {
+                             modelos[cont, 1] = 0;
+                         }
+                        //Calculo el total
+                        sum += modelos[cont, 1];
+                        //Sumo uno mas al contador
+                        cont += 1;
+                    }
+
+                    //Le calculo los porcentajes a cada elemento de la matriz
+                    for (int i = 0; i < cantidadModelos; i++)
+                    {
+                        modelos[i, 1] = (modelos[i, 1] / sum) * 100;
+                    }
+
+                    //Asigno los valores a la datatable de modelos
+                    for (int j = 0; j < cantidadModelos; j++)
+                    {
+                        if (modelos[j, 1] > 0)
+                        {
+                            //Se crea una fila
+                            Data.dsInventarioABC.MODELOS_PRODUCIDOSRow row = dsInventarioABC.MODELOS_PRODUCIDOS.NewMODELOS_PRODUCIDOSRow();
+
+                            //Se comienza a editar la fila
+                            row.BeginEdit();
+                            codigoModelo = codigoModelo + 1;
+                            row.CODIGO_MODELO = codigoModelo;
+                            row.CODIGO_MODELO_PRODUCIDO = modelos[j, 0];
+                            row.MODELO_PORCENTAJE = Math.Round(modelos[j, 1], 2);
+                            row.MODELO_CANTIDAD = Math.Round(((modelos[j, 1] / 100) * Convert.ToInt32(txtCantAnual.Text)), 0);
+                            row.EndEdit();
+
+                            //Agregamos la Línea
+                            dsInventarioABC.MODELOS_PRODUCIDOS.AddMODELOS_PRODUCIDOSRow(row);
+                        }
+                    }
+
+                    //Seteamos la interface
+                    SetInterface(estadoUI.generaHistorico);
+
+                }               
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -286,8 +371,8 @@ namespace GyCAP.UI.GestionStock
                     codigoModelo = codigoModelo + 1;
                     row.CODIGO_MODELO = codigoModelo;
                     row.CODIGO_MODELO_PRODUCIDO = Convert.ToInt32(cbCocinas.GetSelectedValue());
-                    row.MODELO_PORCENTAJE = numPorcentaje.Value;
-                    row.MODELO_CANTIDAD = ((Convert.ToDecimal(numPorcentaje.Value) / 100) * Convert.ToInt32(txtCantAnual.Text));
+                    row.MODELO_PORCENTAJE =Math.Round(Convert.ToDecimal(numPorcentaje.Value),2);
+                    row.MODELO_CANTIDAD = Math.Round(((Convert.ToDecimal(numPorcentaje.Value) / 100) * Convert.ToInt32(txtCantAnual.Text)),0);
                     row.EndEdit();
 
                     //Agregamos la Línea
@@ -330,6 +415,7 @@ namespace GyCAP.UI.GestionStock
             dsInventarioABC.MODELOS_PRODUCIDOS.Clear();
             gbDatosPrincipales.Enabled = true;
             gbDatosCocinas.Visible = false;
+            gbMateriasPrimas.Visible = false;
             txtCantAnual.Text = "";            
         }
 
@@ -338,6 +424,9 @@ namespace GyCAP.UI.GestionStock
             string validacion = ValidarABC();
             if (validacion == string.Empty)
             {
+                //Limpiamos el Dataset de Materias Primas
+                dsInventarioABC.MATERIAS_PRIMAS_ABC.Clear();
+
                 //Contamos la cantidad de modelos
                 int cantidadModelos =Convert.ToInt32(dsInventarioABC.MODELOS_PRODUCIDOS.Rows.Count);
 
@@ -523,7 +612,8 @@ namespace GyCAP.UI.GestionStock
                 //Se crea una fila y se la agrega al dataset
                 Data.dsInventarioABC.MATERIAS_PRIMAS_ABCRow row = dsInventarioABC.MATERIAS_PRIMAS_ABC.NewMATERIAS_PRIMAS_ABCRow();
 
-                row.CODIGO_MATERIA_PRIMA_ABC = codigoMatPrima + 1;
+                codigoMatPrima += 1;
+                row.CODIGO_MATERIA_PRIMA_ABC = codigoMatPrima;
                 row.CODIGO_MATERIA_PRIMA = MP.CodigoMP;
                 row.CANTIDAD_ANUAL =Math.Round(MP.CantidadMP,2);
                 row.PRECIO_UNIDAD = MP.PrecioMP;
@@ -534,6 +624,82 @@ namespace GyCAP.UI.GestionStock
                 dsInventarioABC.MATERIAS_PRIMAS_ABC.AddMATERIAS_PRIMAS_ABCRow(row);                
             }
             
+        }
+
+        private void dgvMP_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value != null)
+            {
+                string nombre;
+
+                switch (dgvMP.Columns[e.ColumnIndex].Name)
+                {
+                    case "CODIGO_MATERIA_PRIMA":
+                        nombre = dsInventarioABC.MATERIAS_PRIMAS.FindByMP_CODIGO(Convert.ToInt32(e.Value)).MP_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            gbDatosCocinas.Enabled = true;
+            gbMateriasPrimas.Visible = false;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvModelos.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int codigo = Convert.ToInt32(dvListaModelos[dgvModelos.SelectedRows[0].Index]["codigo_modelo"]);
+                
+                //Elimino del dataset
+                dsInventarioABC.MODELOS_PRODUCIDOS.FindByCODIGO_MODELO(codigo).Delete();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un modelo de cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+        }
+
+        private void btnSumar_Click(object sender, EventArgs e)
+        {
+            if (dgvModelos.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Actualizo el porcentaje
+                int codigo = Convert.ToInt32(dvListaModelos[dgvModelos.SelectedRows[0].Index]["codigo_modelo"]);
+                dsInventarioABC.MODELOS_PRODUCIDOS.FindByCODIGO_MODELO(codigo).MODELO_PORCENTAJE +=Convert.ToDecimal(0.01);
+                
+                //Actualizo la cantidad
+                decimal porcentaje = Convert.ToDecimal(dvListaModelos[dgvModelos.SelectedRows[0].Index]["modelo_porcentaje"]);
+                decimal cantidad = Convert.ToDecimal(txtCantAnual.Text);
+                dsInventarioABC.MODELOS_PRODUCIDOS.FindByCODIGO_MODELO(codigo).MODELO_CANTIDAD =Math.Round(((porcentaje/100)*cantidad),0);
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un modelo de cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnRestar_Click(object sender, EventArgs e)
+        {
+            if (dgvModelos.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Actualizo el porcentaje
+                int codigo = Convert.ToInt32(dvListaModelos[dgvModelos.SelectedRows[0].Index]["codigo_modelo"]);
+                dsInventarioABC.MODELOS_PRODUCIDOS.FindByCODIGO_MODELO(codigo).MODELO_PORCENTAJE -=Convert.ToDecimal(0.01);
+
+                //Actualizo la cantidad
+                decimal porcentaje = Convert.ToDecimal(dvListaModelos[dgvModelos.SelectedRows[0].Index]["modelo_porcentaje"]);
+                decimal cantidad = Convert.ToDecimal(txtCantAnual.Text);
+                dsInventarioABC.MODELOS_PRODUCIDOS.FindByCODIGO_MODELO(codigo).MODELO_CANTIDAD = Math.Round(((porcentaje / 100) * cantidad), 0);
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un modelo de cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
 
