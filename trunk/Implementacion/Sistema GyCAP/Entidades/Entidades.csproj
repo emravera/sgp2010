@@ -55,6 +55,7 @@
     <Compile Include="Color.cs" />
     <Compile Include="Conjunto.cs" />
     <Compile Include="ConjuntoEstructura.cs" />
+    <Compile Include="ContenidoUbicacionStock.cs" />
     <Compile Include="DemandaAnual.cs" />
     <Compile Include="Designacion.cs" />
     <Compile Include="DetalleConjunto.cs" />
