@@ -71,8 +71,8 @@ namespace Principal
 
         private void menuItemMA_Click(object sender, EventArgs e)
         {
-            GyCAP.UI.Mantenimiento.frmMantenimiento.Instancia.MdiParent = this;
-            GyCAP.UI.Mantenimiento.frmMantenimiento.Instancia.Show();
+            //GyCAP.UI.Mantenimiento.frmMantenimiento.Instancia.MdiParent = this;
+            //GyCAP.UI.Mantenimiento.frmMantenimiento.Instancia.Show();
         }
 
         private void menuItemCP_Click(object sender, EventArgs e)
@@ -282,8 +282,11 @@ namespace Principal
             GyCAP.UI.GestionStock.frmInventarioABC.Instancia.Show();
         }
 
-        
+        private void tsbPlanMantenimeinto_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Mantenimiento.frmPlanMantenimiento.Instancia.MdiParent = this;
+            GyCAP.UI.Mantenimiento.frmPlanMantenimiento.Instancia.Show();
+        }
 
-        
     }
 }

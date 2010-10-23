@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace GyCAP.DAL
 {
@@ -99,6 +100,19 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
+        }
+
+        public static void ObtenerCapacidadEmpleado(DataTable dtCapacidadEmpleado)
+        {
+            string sql = @"SELECT CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION
+                              FROM CAPACIDAD_EMPLEADOS ";        
+
+            try
+            {
+                //Se llena el Dataset
+                DB.FillDataTable(dtCapacidadEmpleado, sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void ObtenerCapacidadPorEmpleado(int E_CODIGO, Data.dsEmpleado ds)

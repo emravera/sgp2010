@@ -12,21 +12,15 @@ namespace GyCAP.DAL
         {
             string sqlInsert = @"INSERT INTO [DETALLE_PLANES_MANTENIMIENTO] 
                                         ([PMAN_NUMERO]
-                                        ,[MAQ_CODIGO]
                                         ,[EDMAN_CODIGO]
-                                        ,[CF_NUMERO]
-                                        ,[E_CODIGO]
-                                        ,[REP_CODIGO]
                                         ,[MAN_CODIGO]
-                                        ,[DPMAN_FECHAREALIZACIONPREVISTA]
-                                        ,[DPMAN_FECHAREALIZACIONREAL]
-                                        ,[DPMAN_OBSERVACIONES])
-                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9) SELECT @@Identity";
+                                        ,[UMED_CODIGO]
+                                        ,[DPMAN_FRECUENCIA]
+                                        ,[DPMAN_DESCRIPCION])
+                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
 
-            object[] valorParametros = {detalle.Plan.Numero , detalle.Maquina.Codigo, detalle.Estado.Codigo 
-                                       ,detalle.CausaFallo.Codigo, detalle.Empleado.Codigo,detalle.Repuesto.Codigo
-                                       ,detalle.Mantenimiento.Codigo,detalle.FechaRealizacionPrevista
-                                       ,detalle.FechaRealizacionReal,detalle.Observaciones };
+            object[] valorParametros = {detalle.Plan.Numero, detalle.Estado.Codigo, detalle.Mantenimiento.Codigo
+                                        ,detalle.UnidadMedida.Codigo, detalle.Frecuencia, detalle.Descripcion };
             detalle.Codigo = Convert.ToInt64(DB.executeScalar(sqlInsert, valorParametros, transaccion));
         }
 
@@ -45,7 +39,7 @@ namespace GyCAP.DAL
 //            DB.executeNonQuery(sqlUpdate, valorParametros, transaccion);
         }
 
-        public static void EliminarDetallePedido(long codigoPlan, SqlTransaction transaccion)
+        public static void EliminarDetallePlanMantenimiento(long codigoPlan, SqlTransaction transaccion)
         {
             string sql = "DELETE FROM DETALLE_PLANES_MANTENIMIENTO WHERE PMAN_NUMERO = @p0";
             object[] valorParametros = { codigoPlan };

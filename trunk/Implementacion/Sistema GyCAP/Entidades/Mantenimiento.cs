@@ -8,26 +8,16 @@ namespace GyCAP.Entidades
     public class Mantenimiento
     {
         private long codigo;
-        private string nombre;
-        private string descripcion;
         private TipoMantenimiento tipo;
+        private string descripcion;
+        private CapacidadEmpleado capacidadEmpleado;
+        private string observacion;
+        private string requierePararPlanta;
 
         public long Codigo
         {
             get { return codigo; }
             set { codigo = value; }
-        }
-
-        public string Nombre
-        {
-            get { return nombre; }
-            set { nombre = value; }
-        }
-
-        public string Descripcion
-        {
-            get { return descripcion; }
-            set { descripcion = value; }
         }
 
         public TipoMantenimiento Tipo
@@ -36,6 +26,29 @@ namespace GyCAP.Entidades
             set { tipo = value; }
         }
 
+        public string Descripcion
+        {
+            get { return descripcion; }
+            set { descripcion = value; }
+        }
+
+        public CapacidadEmpleado CapacidadEmpleado
+        {
+            get { return capacidadEmpleado; }
+            set { capacidadEmpleado = value; }
+        }
+        
+        public string Observacion
+        {
+            get { return observacion; }
+            set { observacion = value; }
+        }
+
+        public string RequierePararPlanta
+        {
+            get { return requierePararPlanta; }
+            set { requierePararPlanta = value; }
+        }
 
     }
 }

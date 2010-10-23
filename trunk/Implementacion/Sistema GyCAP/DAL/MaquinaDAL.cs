@@ -87,7 +87,7 @@ namespace GyCAP.DAL
         //Metodo que verifica que no este usado en otro lugar
         public static bool PuedeEliminarse(long codigo)
         {
-            string sql = "SELECT count(DPMAN_CODIGO) FROM DETALLE_PLANES_MANTENIMIENTO WHERE MAQ_CODIGO = @p0";
+            string sql = "SELECT count(RMAN_CODIGO) FROM REGISTROS_MANTENIMIENTOS WHERE MAQ_CODIGO = @p0";
             object[] valorParametros = { codigo };
             try
             {

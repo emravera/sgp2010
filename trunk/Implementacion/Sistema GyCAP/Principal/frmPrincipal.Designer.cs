@@ -90,6 +90,7 @@
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.tsbPlanMantenimeinto = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -110,7 +111,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.MdiWindowListItem = this.menuVentana;
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(792, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1264, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -471,10 +472,11 @@
             this.btnOperaciones,
             this.toolPedidos,
             this.btnControlPlan,
-            this.btnInventarioABC});
+            this.btnInventarioABC,
+            this.tsbPlanMantenimeinto});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(792, 36);
+            this.toolStrip.Size = new System.Drawing.Size(1264, 36);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "ToolStrip";
             // 
@@ -664,7 +666,7 @@
             this.lblEstado});
             this.barraEstado.Location = new System.Drawing.Point(0, 548);
             this.barraEstado.Name = "barraEstado";
-            this.barraEstado.Size = new System.Drawing.Size(792, 22);
+            this.barraEstado.Size = new System.Drawing.Size(1264, 22);
             this.barraEstado.TabIndex = 2;
             this.barraEstado.Text = "StatusStrip";
             // 
@@ -674,11 +676,21 @@
             this.lblEstado.Size = new System.Drawing.Size(38, 17);
             this.lblEstado.Text = "Status";
             // 
+            // tsbPlanMantenimeinto
+            // 
+            this.tsbPlanMantenimeinto.Image = ((System.Drawing.Image)(resources.GetObject("tsbPlanMantenimeinto.Image")));
+            this.tsbPlanMantenimeinto.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbPlanMantenimeinto.Name = "tsbPlanMantenimeinto";
+            this.tsbPlanMantenimeinto.Size = new System.Drawing.Size(104, 33);
+            this.tsbPlanMantenimeinto.Text = "Plan Mantenimeinto";
+            this.tsbPlanMantenimeinto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsbPlanMantenimeinto.Click += new System.EventHandler(this.tsbPlanMantenimeinto_Click);
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 570);
+            this.ClientSize = new System.Drawing.Size(1264, 570);
             this.Controls.Add(this.barraEstado);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip);
@@ -762,6 +774,7 @@
         private System.Windows.Forms.ToolStripButton btnControlPlan;
         private System.Windows.Forms.ToolStripButton btnInventarioABC;
         private System.Windows.Forms.ToolStripMenuItem menuItemPF;
+        private System.Windows.Forms.ToolStripButton tsbPlanMantenimeinto;
     }
 }
 

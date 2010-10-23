@@ -11,6 +11,7 @@ namespace GyCAP.Entidades
         private DateTime fecha;
         private string observaciones;
         private EstadoPlanMantenimiento estado;
+        private string descripcion;
 
         public long Numero
         {
@@ -36,6 +37,10 @@ namespace GyCAP.Entidades
             set { estado = value; }
         }
 
-
+        public string Descripcion
+        {
+            get { return descripcion; }
+            set { descripcion = value; }
+        }
     }
 }

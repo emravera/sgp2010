@@ -8,24 +8,24 @@ namespace GyCAP.BLL
 {
     public class DetallePlanMantenimientoBLL
     {
-        public static void Insertar(Entidades.DetallePedido detalle, SqlTransaction transaccion)
+        public static void Insertar(Entidades.DetallePlanMantenimiento detalle, SqlTransaction transaccion)
         {
-            DAL.DetallePedidoDAL.Insertar(detalle, transaccion);
+            DAL.DetallePlanMantenimientoDAL.Insertar(detalle, transaccion);
         }
 
-        public static void Eliminar(Entidades.DetallePedido detalle, SqlTransaction transaccion)
+        public static void Eliminar(Entidades.DetallePlanMantenimiento detalle, SqlTransaction transaccion)
         {
-            DAL.DetallePedidoDAL.Eliminar(detalle, transaccion);
+            DAL.DetallePlanMantenimientoDAL.Eliminar(detalle, transaccion);
         }
 
-        public static void Actualizar(Entidades.DetallePedido detalle, SqlTransaction transaccion)
+        public static void Actualizar(Entidades.DetallePlanMantenimiento detalle, SqlTransaction transaccion)
         {
-            DAL.DetallePedidoDAL.Actualizar(detalle, transaccion);
+            DAL.DetallePlanMantenimientoDAL.Actualizar(detalle, transaccion);
         }
 
-        public static void EliminarDetallePedido(long codigoPedido, SqlTransaction transaccion)
+        public static void EliminarDetallePlanMantenimiento(long codigoPlanMantenimiento, SqlTransaction transaccion)
         {
-            DAL.DetallePedidoDAL.EliminarDetallePedido(codigoPedido, transaccion);
+            DAL.DetallePlanMantenimientoDAL.EliminarDetallePlanMantenimiento(codigoPlanMantenimiento, transaccion);
         }
 
     }
