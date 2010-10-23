@@ -27,5 +27,10 @@ namespace GyCAP.BLL
             if (DAL.UbicacionStockDAL.PuedeEliminarse(numeroUbicacionStock)) { DAL.UbicacionStockDAL.Eliminar(numeroUbicacionStock); }
             else { throw new Entidades.Excepciones.ElementoEnTransaccionException(); }
         }
+
+        public static void ActualizarCantidadesStock(int numeroUbicacion, decimal cantidadReal, decimal cantidadVirtual)
+        {
+            DAL.UbicacionStockDAL.ActualizarCantidadesStock(numeroUbicacion, cantidadReal, cantidadVirtual, null);
+        }
     }
 }
