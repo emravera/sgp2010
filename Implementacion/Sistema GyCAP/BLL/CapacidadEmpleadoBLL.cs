@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace GyCAP.BLL
 {
@@ -48,6 +49,11 @@ namespace GyCAP.BLL
         public static void ObtenerTodos(Data.dsEmpleado dsEmpleado)
         {
             DAL.CapacidadEmpleadoDAL.ObtenerCapacidadEmpleado(dsEmpleado);
+        }
+
+        public static void ObtenerTodos(DataTable dtCapacidadEmpleado)
+        {
+            DAL.CapacidadEmpleadoDAL.ObtenerCapacidadEmpleado(dtCapacidadEmpleado);
         }
 
         public static void ObtenerCapacidadPorEmpleado(int E_CODIGO, Data.dsEmpleado dsEmpleado)

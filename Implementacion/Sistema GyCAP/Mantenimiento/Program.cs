@@ -15,7 +15,7 @@ namespace GyCAP.UI.Mantenimiento
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMantenimiento());
+            //Application.Run(new frmMantenimiento());
         }
     }
 }
