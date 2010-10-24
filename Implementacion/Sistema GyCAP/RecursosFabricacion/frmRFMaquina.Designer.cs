@@ -546,6 +546,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmRFMaquina";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Maquinas";
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();

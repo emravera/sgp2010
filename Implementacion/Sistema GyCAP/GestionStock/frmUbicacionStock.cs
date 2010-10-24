@@ -90,7 +90,9 @@ namespace GyCAP.UI.GestionStock
             if (dvUbicaciones.Count == 0)
             {
                 MessageBox.Show("No se encontraron Ubicaciones de Stock con los criterios ingresados.", "Información: Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }                
+            }
+
+            CompletarDatos();
 
             SetInterface(estadoUI.inicio);
         }
@@ -507,6 +509,23 @@ namespace GyCAP.UI.GestionStock
                 cboEstado.SetSelectedValue(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_ACTIVO));
                 cboContenidoStock.SetSelectedValue(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).CON_CODIGO));
             }
+        }
+
+        private void CompletarDatos()
+        {
+            int numero = Convert.ToInt32(dvUbicaciones[dgvLista.SelectedRows[0].Index]["ustck_numero"]);
+            txtCodigo.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_CODIGO;
+            txtNombre.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_NOMBRE;
+            txtDescripcion.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_DESCRIPCION;
+            txtUbicacionFisica.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_UBICACIONFISICA;
+            if (!dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).IsUSTCK_PADRENull())
+            { cboPadre.SetSelectedValue(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_PADRE)); }
+            nudCantidadReal.Value = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_CANTIDADREAL;
+            nudCantidadVirtual.Value = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_CANTIDADVIRTUAL;
+            cboUnidadMedida.SetSelectedValue(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).UMED_CODIGO));
+            cboTipoUbicacion.SetSelectedValue(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).TUS_CODIGO));
+            cboEstado.SetSelectedValue(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_ACTIVO));
+            cboContenidoStock.SetSelectedValue(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).CON_CODIGO));
         }
 
         #endregion
