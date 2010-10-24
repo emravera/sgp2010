@@ -70,9 +70,7 @@ namespace GyCAP.UI.ProcesoFabricacion
             {
                 dsHojaRuta.HOJAS_RUTA.Clear();
                 dsHojaRuta.DETALLE_HOJARUTA.Clear();
-                dvHojasRuta.Table = null;
-                dvDetalleHoja.Table = null;
-
+                
                 //Busquemos, no importa si ingresó algo o no, ya se encargarán las otras clases de verificarlo
                 BLL.HojaRutaBLL.ObtenerHojasRuta(txtNombreBuscar.Text, cbActivaBuscar.GetSelectedValueInt(), dsHojaRuta, true);
 
@@ -80,11 +78,6 @@ namespace GyCAP.UI.ProcesoFabricacion
                 {
                     MessageBox.Show("No se encontraron Hojas de Ruta con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
-                //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
-                //por una consulta a la BD
-                dvHojasRuta.Table = dsHojaRuta.HOJAS_RUTA;
-                dvDetalleHoja.Table = dsHojaRuta.DETALLE_HOJARUTA;
 
                 SetInterface(estadoUI.inicio);
             }
