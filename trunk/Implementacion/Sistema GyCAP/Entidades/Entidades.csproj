@@ -120,6 +120,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedor.cs" />
     <Compile Include="Provincia.cs" />
+    <Compile Include="RegistrosMantenimientos.cs" />
     <Compile Include="Repuesto.cs" />
     <Compile Include="SectorTrabajo.cs" />
     <Compile Include="Sistema.cs" />

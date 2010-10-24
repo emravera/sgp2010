@@ -160,7 +160,7 @@ namespace GyCAP.UI.Mantenimiento
             txtNumero.ReadOnly = true;
             txtDescripcion.ReadOnly = pValue;
             txtObservacion.ReadOnly = pValue;
-            cboEstado.Enabled = pValue;
+            cboEstado.Enabled = !pValue;
         }
 
         private void limpiarControles(bool pValue)
@@ -209,7 +209,6 @@ namespace GyCAP.UI.Mantenimiento
             dgvLista.Columns["PMAN_FECHA"].MinimumWidth = 110;
             dgvLista.Columns["EPMAN_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["PMAN_OBSERVACIONES"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
             //Alineacion de los numeros y las fechas en la grilla
             dgvLista.Columns["PMAN_NUMERO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             //dgvLista.Columns["PMAN_NUMERO"].Visible = false;
@@ -227,12 +226,11 @@ namespace GyCAP.UI.Mantenimiento
             dgvDetallePlan.Columns["UMED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetallePlan.Columns["DPMAN_FRECUENCIA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetallePlan.Columns["DPMAN_FRECUENCIA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvDetallePlan.Columns["EDMAN_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            
+            dgvDetallePlan.Columns["EDMAN_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvDetallePlan.Columns["MAN_CODIGO"].Visible = false;
             //Alineacion de los numeros y las fechas en la grilla
             //dgvDetallePlan.Columns["DPED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             //dgvDetallePlan.Columns["DPED_CODIGO"].Visible = false;
-
             
             dgvMantenimientos.Columns.Add("MAN_CODIGO", "Código");
             dgvMantenimientos.Columns.Add("TMAN_CODIGO", "Tipo");
@@ -249,7 +247,6 @@ namespace GyCAP.UI.Mantenimiento
             dgvMantenimientos.Columns["MAN_REQUIERE_PARAR_PLANTA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvMantenimientos.Columns["MAN_OBSERVACION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvMantenimientos.Columns["MAN_OBSERVACION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvMantenimientos.Columns["MAN_CODIGO"].Visible = false;
 
             //Indicamos de dónde van a sacar los datos cada columna
             dgvLista.Columns["PMAN_NUMERO"].DataPropertyName = "PMAN_NUMERO";
@@ -272,6 +269,7 @@ namespace GyCAP.UI.Mantenimiento
             dgvMantenimientos.Columns["MAN_REQUIERE_PARAR_PLANTA"].DataPropertyName = "MAN_REQUIERE_PARAR_PLANTA";    
             //dgvCocinas.Columns["COC_ESTADO"].DataPropertyName = "COC_ESTADO";
             dgvMantenimientos.Columns["MAN_OBSERVACION"].DataPropertyName = "MAN_OBSERVACION";
+            dgvMantenimientos.Columns["MAN_CODIGO"].Visible = false;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvPlanMantenimiento = new DataView(dsPlanMantenimiento.PLANES_MANTENIMIENTO);
@@ -320,22 +318,25 @@ namespace GyCAP.UI.Mantenimiento
             cboUnidadMedida.SetDatos(dvUnidadMedida, "UMED_CODIGO", "UMED_ABREVIATURA", "Seleccione...", false);
 
         }
-
+        
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             try
             {
                 dsPlanMantenimiento.PLANES_MANTENIMIENTO.Clear();
                 dsPlanMantenimiento.DETALLE_PLANES_MANTENIMIENTO.Clear();
-
+                
                 //Busquemos, no importa si ingresó algo o no, ya se encargarán las otras clases de verificarlo
                 BLL.PlanMantenimientoBLL.ObtenerPlanMantenimiento(txtNombreBuscar.Text, txtNroPedidoBuscar.Text, cboEstadoBuscar.GetSelectedValueInt(), dsPlanMantenimiento, true);
 
                 if (dsPlanMantenimiento.PLANES_MANTENIMIENTO.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Planes de mantenimiento con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("No se encontraron planes de mantenimiento con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
+                else 
+                {
+                    //seleccionarCampos(0);
+                } 
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
                 dvPlanMantenimiento.Table = dsPlanMantenimiento.PLANES_MANTENIMIENTO;
@@ -374,15 +375,27 @@ namespace GyCAP.UI.Mantenimiento
 
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
+            //seleccionarCampos(e.RowIndex);
             long codigo = Convert.ToInt64(dvPlanMantenimiento[e.RowIndex]["PMAN_NUMERO"]);
-            txtNumero.Text = dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigo).PMAN_NUMERO.ToString();            
+            txtNumero.Text = dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigo).PMAN_NUMERO.ToString();
             cboEstado.SetSelectedValue(Convert.ToInt32(dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigo).EPMAN_CODIGO));
             txtObservacion.Text = dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigo).PMAN_OBSERVACIONES;
-
+            txtDescripcion.Text = dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigo).PMAN_DESCRIPCION;
             //Usemos el filtro del dataview para mostrar sólo las Detalles del Pedido seleccionado
             dvDetallePlanMantenimiento.RowFilter = "PMAN_NUMERO = " + codigo;
 
         }
+
+        //private void seleccionarCampos(int e) 
+        //{
+        //    long codigo = Convert.ToInt64(dvPlanMantenimiento[e]["PMAN_NUMERO"]);
+        //    txtNumero.Text = dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigo).PMAN_NUMERO.ToString();
+        //    cboEstado.SetSelectedValue(Convert.ToInt32(dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigo).EPMAN_CODIGO));
+        //    txtObservacion.Text = dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigo).PMAN_OBSERVACIONES;
+        //    txtDescripcion.Text = dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigo).PMAN_DESCRIPCION;
+        //    //Usemos el filtro del dataview para mostrar sólo las Detalles del Pedido seleccionado
+        //    dvDetallePlanMantenimiento.RowFilter = "PMAN_NUMERO = " + codigo;
+        //}
 
         private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -566,6 +579,7 @@ namespace GyCAP.UI.Mantenimiento
             string datosFaltantes = string.Empty;
             //if (txtNumero.Text == string.Empty) { datosFaltantes += "* Numero\n"; }
             if (cboEstado.GetSelectedIndex() == -1) { datosFaltantes += "* Estado\n"; }
+            if (txtDescripcion.Text == string.Empty) { datosFaltantes += "* Estado\n"; }
             if (dgvDetallePlan.Rows.Count == 0) { datosFaltantes += "* El detalle del Pedido\n"; }
             if (datosFaltantes == string.Empty)
             {

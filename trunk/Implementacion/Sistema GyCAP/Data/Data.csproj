@@ -240,6 +240,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsProveedor.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsRegistrarMantenimiento.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsRegistrarMantenimiento.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsSectorTrabajo.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -626,6 +631,17 @@
     </None>
     <None Include="dsProveedor.xss">
       <DependentUpon>dsProveedor.xsd</DependentUpon>
+    </None>
+    <None Include="dsRegistrarMantenimiento.xsc">
+      <DependentUpon>dsRegistrarMantenimiento.xsd</DependentUpon>
+    </None>
+    <None Include="dsRegistrarMantenimiento.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsRegistrarMantenimiento.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsRegistrarMantenimiento.xss">
+      <DependentUpon>dsRegistrarMantenimiento.xsd</DependentUpon>
     </None>
     <None Include="dsSectorTrabajo.xsc">
       <DependentUpon>dsSectorTrabajo.xsd</DependentUpon>

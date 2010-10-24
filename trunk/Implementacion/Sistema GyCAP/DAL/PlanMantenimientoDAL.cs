@@ -133,7 +133,8 @@ namespace GyCAP.DAL
             object[] valorParametros = { rowPlan.EPMAN_CODIGO, 
                                          rowPlan.PMAN_FECHA, 
                                          rowPlan.PMAN_OBSERVACIONES, 
-                                         rowPlan.PMAN_DESCRIPCION };
+                                         rowPlan.PMAN_DESCRIPCION,
+                                         rowPlan.PMAN_NUMERO };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
@@ -368,7 +369,7 @@ namespace GyCAP.DAL
 
         private static void ObtenerDetallePlanMantenimiento(Data.dsPlanMantenimiento ds)
         {
-            string sql = @"SELECT DPMAN_CODIGO, PMAN_NUMERO, EDPMAN_CODIGO, MAN_CODIGO, UMED_CODIGO
+            string sql = @"SELECT DPMAN_CODIGO, PMAN_NUMERO, EDMAN_CODIGO, MAN_CODIGO, UMED_CODIGO
                           , DPMAN_FRECUENCIA, DPMAN_DESCRIPCION
                           FROM DETALLE_PLANES_MANTENIMIENTO WHERE PMAN_NUMERO = @p0";
 
