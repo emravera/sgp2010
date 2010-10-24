@@ -57,6 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmRegistrarMantenimiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRegistrarMantenimiento.Designer.cs">
+      <DependentUpon>frmRegistrarMantenimiento.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmModuloMantenimiento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +83,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmRegistrarMantenimiento.resx">
+      <DependentUpon>frmRegistrarMantenimiento.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmModuloMantenimiento.resx">
       <DependentUpon>frmModuloMantenimiento.cs</DependentUpon>
       <SubType>Designer</SubType>

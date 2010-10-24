@@ -1,6 +1,6 @@
 ﻿namespace GyCAP.UI.Mantenimiento
 {
-    partial class frmPlanMantenimiento
+    partial class frmRegistrarMantenimiento
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.dgvDetallePlan = new System.Windows.Forms.DataGridView();
             this.panelAcciones = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -66,11 +65,15 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dropDownList2 = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.dropDownList1 = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.label14 = new System.Windows.Forms.Label();
+            this.sfFechaHasta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.label13 = new System.Windows.Forms.Label();
+            this.sfFechaDesde = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtNroPedidoBuscar = new System.Windows.Forms.TextBox();
             this.cboEstadoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbDatos = new System.Windows.Forms.GroupBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
@@ -87,7 +90,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcPlan = new System.Windows.Forms.TabControl();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePlan)).BeginInit();
             this.panelAcciones.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.tpMantenimientos.SuspendLayout();
@@ -108,29 +110,13 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.dgvDetallePlan);
             this.groupBox3.Controls.Add(this.panelAcciones);
             this.groupBox3.Location = new System.Drawing.Point(1, 199);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(560, 201);
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Detalle del Plan";
-            // 
-            // dgvDetallePlan
-            // 
-            this.dgvDetallePlan.AllowUserToAddRows = false;
-            this.dgvDetallePlan.AllowUserToDeleteRows = false;
-            this.dgvDetallePlan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetallePlan.Location = new System.Drawing.Point(3, 16);
-            this.dgvDetallePlan.MultiSelect = false;
-            this.dgvDetallePlan.Name = "dgvDetallePlan";
-            this.dgvDetallePlan.ReadOnly = true;
-            this.dgvDetallePlan.RowHeadersVisible = false;
-            this.dgvDetallePlan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetallePlan.Size = new System.Drawing.Size(462, 180);
-            this.dgvDetallePlan.TabIndex = 12;
-            this.dgvDetallePlan.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetallePlan_CellFormatting);
+            this.groupBox3.Text = "Detalle del pedido";
             // 
             // panelAcciones
             // 
@@ -430,7 +416,7 @@
             this.groupBox2.Size = new System.Drawing.Size(564, 306);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Listado de Planes";
+            this.groupBox2.Text = "Registros de Mantenimiento";
             // 
             // dgvLista
             // 
@@ -453,20 +439,20 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(256, 33);
+            this.label11.Location = new System.Drawing.Point(207, 23);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(44, 13);
+            this.label11.Size = new System.Drawing.Size(57, 13);
             this.label11.TabIndex = 7;
-            this.label11.Text = "Estado:";
+            this.label11.Text = "Empleado:";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(9, 76);
+            this.label10.Location = new System.Drawing.Point(160, 76);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(65, 13);
+            this.label10.Size = new System.Drawing.Size(104, 13);
             this.label10.TabIndex = 6;
-            this.label10.Text = "Descripción:";
+            this.label10.Text = "Tipo Mantenimiento:";
             // 
             // tsMenu
             // 
@@ -553,13 +539,17 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.dropDownList2);
+            this.groupBox1.Controls.Add(this.dropDownList1);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.sfFechaHasta);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.sfFechaDesde);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.txtNroPedidoBuscar);
             this.groupBox1.Controls.Add(this.cboEstadoBuscar);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.btnBuscar);
-            this.groupBox1.Controls.Add(this.txtNombreBuscar);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
@@ -568,31 +558,79 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
+            // dropDownList2
+            // 
+            this.dropDownList2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropDownList2.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.dropDownList2.FormattingEnabled = true;
+            this.dropDownList2.Location = new System.Drawing.Point(270, 73);
+            this.dropDownList2.Name = "dropDownList2";
+            this.dropDownList2.Size = new System.Drawing.Size(148, 21);
+            this.dropDownList2.TabIndex = 20;
+            // 
+            // dropDownList1
+            // 
+            this.dropDownList1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropDownList1.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.dropDownList1.FormattingEnabled = true;
+            this.dropDownList1.Location = new System.Drawing.Point(270, 46);
+            this.dropDownList1.Name = "dropDownList1";
+            this.dropDownList1.Size = new System.Drawing.Size(148, 21);
+            this.dropDownList1.TabIndex = 18;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(213, 49);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(51, 13);
+            this.label14.TabIndex = 19;
+            this.label14.Text = "Maquina:";
+            // 
+            // sfFechaHasta
+            // 
+            this.sfFechaHasta.CustomFormat = " ";
+            this.sfFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.sfFechaHasta.Location = new System.Drawing.Point(89, 45);
+            this.sfFechaHasta.Name = "sfFechaHasta";
+            this.sfFechaHasta.Size = new System.Drawing.Size(102, 20);
+            this.sfFechaHasta.TabIndex = 15;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(10, 49);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(71, 13);
+            this.label13.TabIndex = 17;
+            this.label13.Text = "Fecha Hasta:";
+            // 
+            // sfFechaDesde
+            // 
+            this.sfFechaDesde.CustomFormat = " ";
+            this.sfFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.sfFechaDesde.Location = new System.Drawing.Point(89, 19);
+            this.sfFechaDesde.Name = "sfFechaDesde";
+            this.sfFechaDesde.Size = new System.Drawing.Size(102, 20);
+            this.sfFechaDesde.TabIndex = 14;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 33);
+            this.label5.Location = new System.Drawing.Point(10, 23);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(48, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Número:";
-            // 
-            // txtNroPedidoBuscar
-            // 
-            this.txtNroPedidoBuscar.Location = new System.Drawing.Point(80, 30);
-            this.txtNroPedidoBuscar.MaxLength = 80;
-            this.txtNroPedidoBuscar.Name = "txtNroPedidoBuscar";
-            this.txtNroPedidoBuscar.Size = new System.Drawing.Size(131, 20);
-            this.txtNroPedidoBuscar.TabIndex = 2;
+            this.label5.Size = new System.Drawing.Size(73, 13);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "Fecha Desde:";
             // 
             // cboEstadoBuscar
             // 
             this.cboEstadoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboEstadoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboEstadoBuscar.FormattingEnabled = true;
-            this.cboEstadoBuscar.Location = new System.Drawing.Point(306, 30);
+            this.cboEstadoBuscar.Location = new System.Drawing.Point(270, 20);
             this.cboEstadoBuscar.Name = "cboEstadoBuscar";
-            this.cboEstadoBuscar.Size = new System.Drawing.Size(115, 21);
+            this.cboEstadoBuscar.Size = new System.Drawing.Size(148, 21);
             this.cboEstadoBuscar.TabIndex = 3;
             // 
             // btnBuscar
@@ -607,14 +645,6 @@
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // txtNombreBuscar
-            // 
-            this.txtNombreBuscar.Location = new System.Drawing.Point(80, 73);
-            this.txtNombreBuscar.MaxLength = 80;
-            this.txtNombreBuscar.Name = "txtNombreBuscar";
-            this.txtNombreBuscar.Size = new System.Drawing.Size(341, 20);
-            this.txtNombreBuscar.TabIndex = 4;
             // 
             // tpDatos
             // 
@@ -647,7 +677,7 @@
             this.gbDatos.Size = new System.Drawing.Size(558, 185);
             this.gbDatos.TabIndex = 16;
             this.gbDatos.TabStop = false;
-            this.gbDatos.Text = "Datos del Plan";
+            this.gbDatos.Text = "Datos del pedido";
             // 
             // txtDescripcion
             // 
@@ -782,7 +812,7 @@
             this.tcPlan.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcPlan.TabIndex = 8;
             // 
-            // frmPlanMantenimiento
+            // frmRegistrarMantenimiento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -791,12 +821,11 @@
             this.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "frmPlanMantenimiento";
+            this.Name = "frmRegistrarMantenimiento";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "Plan de Mantenimiento";
+            this.Text = "Registro de Mantenimiento";
             this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePlan)).EndInit();
             this.panelAcciones.ResumeLayout(false);
             this.panelAcciones.PerformLayout();
             this.gbGuardarCancelar.ResumeLayout(false);
@@ -827,7 +856,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.DataGridView dgvDetallePlan;
         private System.Windows.Forms.Panel panelAcciones;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
@@ -854,13 +882,10 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.TextBox txtNombreBuscar;
         private System.Windows.Forms.TabPage tpDatos;
         private System.Windows.Forms.TabPage tpBuscar;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TabControl tcPlan;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtNroPedidoBuscar;
         private System.Windows.Forms.GroupBox gbMantenimientos;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnAgregar;
@@ -884,5 +909,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Label label12;
+        private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha sfFechaHasta;
+        private System.Windows.Forms.Label label13;
+        private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha sfFechaDesde;
+        private System.Windows.Forms.Label label5;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList dropDownList2;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList dropDownList1;
+        private System.Windows.Forms.Label label14;
     }
 }
