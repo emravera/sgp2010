@@ -386,9 +386,10 @@ namespace GyCAP.UI.Mantenimiento
 
         }
 
-        //private void seleccionarCampos(int e) 
+        //private void seleccionarCampos(int e)
         //{
-        //    long codigo = Convert.ToInt64(dvPlanMantenimiento[e]["PMAN_NUMERO"]);
+        //    //long codigo = Convert.ToInt64(dvPlanMantenimiento[e]["PMAN_NUMERO"]);
+        //    long codigo = Convert.ToInt64(dvPlanMantenimiento[0]["PMAN_NUMERO"]);
         //    txtNumero.Text = dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigo).PMAN_NUMERO.ToString();
         //    cboEstado.SetSelectedValue(Convert.ToInt32(dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigo).EPMAN_CODIGO));
         //    txtObservacion.Text = dsPlanMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigo).PMAN_OBSERVACIONES;
