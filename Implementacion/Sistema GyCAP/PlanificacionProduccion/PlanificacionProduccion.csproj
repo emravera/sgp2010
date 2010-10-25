@@ -100,7 +100,6 @@
       <DependentUpon>frmPlanificarMateriasPrimas.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPlanMensual.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPlanMensual.Designer.cs">
       <DependentUpon>frmPlanMensual.cs</DependentUpon>
