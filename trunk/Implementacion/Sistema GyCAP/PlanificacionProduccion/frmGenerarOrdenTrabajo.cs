@@ -574,7 +574,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             columnaCheck.FalseValue = false;
             columnaCheck.MinimumWidth = 20;
             columnaCheck.Frozen = true;
-            DataGridViewHeaderCell algo = new DataGridViewHeaderCell();
+            
             dgvListaOrdenProduccion.AutoGenerateColumns = false;
             dgvListaOrdenProduccion.Columns.Add(columnaCheck);
             dgvListaOrdenProduccion.Columns.Add("ORDP_CODIGO", "Código");

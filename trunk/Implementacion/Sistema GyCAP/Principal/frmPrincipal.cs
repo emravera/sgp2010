@@ -80,6 +80,12 @@ namespace Principal
             GyCAP.UI.ControlTrabajoEnProceso.frmControlTrabajoEnProceso.Instancia.MdiParent = this;
             GyCAP.UI.ControlTrabajoEnProceso.frmControlTrabajoEnProceso.Instancia.Show();
         }
+
+        private void menuItemQA_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Calidad.frmModuloCalidad.Instancia.MdiParent = this;
+            GyCAP.UI.Calidad.frmModuloCalidad.Instancia.Show();
+        }
         
         #endregion
 
