@@ -128,6 +128,7 @@
             this.menuItemQA.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
             this.menuItemQA.Size = new System.Drawing.Size(307, 22);
             this.menuItemQA.Text = "Calida&d";
+            this.menuItemQA.Click += new System.EventHandler(this.menuItemQA_Click);
             // 
             // menuItemCP
             // 

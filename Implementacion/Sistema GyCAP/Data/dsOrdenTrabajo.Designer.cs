@@ -41,6 +41,8 @@ namespace GyCAP.Data {
         
         private ORDENES_PRODUCCIONDataTable tableORDENES_PRODUCCION;
         
+        private ReporteOrdenTrabajoDataTable tableReporteOrdenTrabajo;
+        
         private global::System.Data.DataRelation relationFK_CIERRE_ORDENTRABAJO_MAQUINAS;
         
         private global::System.Data.DataRelation relationFK_CIERRE_ORDENTRABAJO_EMPLEADOS;
@@ -110,6 +112,9 @@ namespace GyCAP.Data {
                 }
                 if ((ds.Tables["ORDENES_PRODUCCION"] != null)) {
                     base.Tables.Add(new ORDENES_PRODUCCIONDataTable(ds.Tables["ORDENES_PRODUCCION"]));
+                }
+                if ((ds.Tables["ReporteOrdenTrabajo"] != null)) {
+                    base.Tables.Add(new ReporteOrdenTrabajoDataTable(ds.Tables["ReporteOrdenTrabajo"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -202,6 +207,15 @@ namespace GyCAP.Data {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ReporteOrdenTrabajoDataTable ReporteOrdenTrabajo {
+            get {
+                return this.tableReporteOrdenTrabajo;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -284,6 +298,9 @@ namespace GyCAP.Data {
                 if ((ds.Tables["ORDENES_PRODUCCION"] != null)) {
                     base.Tables.Add(new ORDENES_PRODUCCIONDataTable(ds.Tables["ORDENES_PRODUCCION"]));
                 }
+                if ((ds.Tables["ReporteOrdenTrabajo"] != null)) {
+                    base.Tables.Add(new ReporteOrdenTrabajoDataTable(ds.Tables["ReporteOrdenTrabajo"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -362,6 +379,12 @@ namespace GyCAP.Data {
                     this.tableORDENES_PRODUCCION.InitVars();
                 }
             }
+            this.tableReporteOrdenTrabajo = ((ReporteOrdenTrabajoDataTable)(base.Tables["ReporteOrdenTrabajo"]));
+            if ((initTable == true)) {
+                if ((this.tableReporteOrdenTrabajo != null)) {
+                    this.tableReporteOrdenTrabajo.InitVars();
+                }
+            }
             this.relationFK_CIERRE_ORDENTRABAJO_MAQUINAS = this.Relations["FK_CIERRE_ORDENTRABAJO_MAQUINAS"];
             this.relationFK_CIERRE_ORDENTRABAJO_EMPLEADOS = this.Relations["FK_CIERRE_ORDENTRABAJO_EMPLEADOS"];
             this.relationFK_ORDENES_PRODUCCION_MANUAL_COCINAS = this.Relations["FK_ORDENES_PRODUCCION_MANUAL_COCINAS"];
@@ -397,6 +420,8 @@ namespace GyCAP.Data {
             base.Tables.Add(this.tableORDENES_TRABAJO);
             this.tableORDENES_PRODUCCION = new ORDENES_PRODUCCIONDataTable();
             base.Tables.Add(this.tableORDENES_PRODUCCION);
+            this.tableReporteOrdenTrabajo = new ReporteOrdenTrabajoDataTable();
+            base.Tables.Add(this.tableReporteOrdenTrabajo);
             this.relationFK_CIERRE_ORDENTRABAJO_MAQUINAS = new global::System.Data.DataRelation("FK_CIERRE_ORDENTRABAJO_MAQUINAS", new global::System.Data.DataColumn[] {
                         this.tableMAQUINAS.MAQ_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableCIERRE_ORDEN_TRABAJO.MAQ_CODIGOColumn}, false);
@@ -480,6 +505,11 @@ namespace GyCAP.Data {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeReporteOrdenTrabajo() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -547,6 +577,8 @@ namespace GyCAP.Data {
         public delegate void ORDENES_TRABAJORowChangeEventHandler(object sender, ORDENES_TRABAJORowChangeEvent e);
         
         public delegate void ORDENES_PRODUCCIONRowChangeEventHandler(object sender, ORDENES_PRODUCCIONRowChangeEvent e);
+        
+        public delegate void ReporteOrdenTrabajoRowChangeEventHandler(object sender, ReporteOrdenTrabajoRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -3635,6 +3667,326 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ReporteOrdenTrabajoDataTable : global::System.Data.TypedTableBase<ReporteOrdenTrabajoRow> {
+            
+            private global::System.Data.DataColumn columnCentroTrabajo;
+            
+            private global::System.Data.DataColumn columnOperacion;
+            
+            private global::System.Data.DataColumn columnCantidad;
+            
+            private global::System.Data.DataColumn columnCodigoOrdenTrabajo;
+            
+            private global::System.Data.DataColumn columnParteFabricada;
+            
+            private global::System.Data.DataColumn columnFecha;
+            
+            private global::System.Data.DataColumn columnNumero;
+            
+            private global::System.Data.DataColumn columnCodigoOrdenProduccion;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ReporteOrdenTrabajoDataTable() {
+                this.TableName = "ReporteOrdenTrabajo";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal ReporteOrdenTrabajoDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected ReporteOrdenTrabajoDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CentroTrabajoColumn {
+                get {
+                    return this.columnCentroTrabajo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OperacionColumn {
+                get {
+                    return this.columnOperacion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CantidadColumn {
+                get {
+                    return this.columnCantidad;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CodigoOrdenTrabajoColumn {
+                get {
+                    return this.columnCodigoOrdenTrabajo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ParteFabricadaColumn {
+                get {
+                    return this.columnParteFabricada;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn FechaColumn {
+                get {
+                    return this.columnFecha;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NumeroColumn {
+                get {
+                    return this.columnNumero;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CodigoOrdenProduccionColumn {
+                get {
+                    return this.columnCodigoOrdenProduccion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ReporteOrdenTrabajoRow this[int index] {
+                get {
+                    return ((ReporteOrdenTrabajoRow)(this.Rows[index]));
+                }
+            }
+            
+            public event ReporteOrdenTrabajoRowChangeEventHandler ReporteOrdenTrabajoRowChanging;
+            
+            public event ReporteOrdenTrabajoRowChangeEventHandler ReporteOrdenTrabajoRowChanged;
+            
+            public event ReporteOrdenTrabajoRowChangeEventHandler ReporteOrdenTrabajoRowDeleting;
+            
+            public event ReporteOrdenTrabajoRowChangeEventHandler ReporteOrdenTrabajoRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddReporteOrdenTrabajoRow(ReporteOrdenTrabajoRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ReporteOrdenTrabajoRow AddReporteOrdenTrabajoRow(string CentroTrabajo, string Operacion, string Cantidad, string CodigoOrdenTrabajo, string ParteFabricada, string Fecha, string CodigoOrdenProduccion) {
+                ReporteOrdenTrabajoRow rowReporteOrdenTrabajoRow = ((ReporteOrdenTrabajoRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        CentroTrabajo,
+                        Operacion,
+                        Cantidad,
+                        CodigoOrdenTrabajo,
+                        ParteFabricada,
+                        Fecha,
+                        null,
+                        CodigoOrdenProduccion};
+                rowReporteOrdenTrabajoRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowReporteOrdenTrabajoRow);
+                return rowReporteOrdenTrabajoRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                ReporteOrdenTrabajoDataTable cln = ((ReporteOrdenTrabajoDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ReporteOrdenTrabajoDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnCentroTrabajo = base.Columns["CentroTrabajo"];
+                this.columnOperacion = base.Columns["Operacion"];
+                this.columnCantidad = base.Columns["Cantidad"];
+                this.columnCodigoOrdenTrabajo = base.Columns["CodigoOrdenTrabajo"];
+                this.columnParteFabricada = base.Columns["ParteFabricada"];
+                this.columnFecha = base.Columns["Fecha"];
+                this.columnNumero = base.Columns["Numero"];
+                this.columnCodigoOrdenProduccion = base.Columns["CodigoOrdenProduccion"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnCentroTrabajo = new global::System.Data.DataColumn("CentroTrabajo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCentroTrabajo);
+                this.columnOperacion = new global::System.Data.DataColumn("Operacion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOperacion);
+                this.columnCantidad = new global::System.Data.DataColumn("Cantidad", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCantidad);
+                this.columnCodigoOrdenTrabajo = new global::System.Data.DataColumn("CodigoOrdenTrabajo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCodigoOrdenTrabajo);
+                this.columnParteFabricada = new global::System.Data.DataColumn("ParteFabricada", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnParteFabricada);
+                this.columnFecha = new global::System.Data.DataColumn("Fecha", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFecha);
+                this.columnNumero = new global::System.Data.DataColumn("Numero", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNumero);
+                this.columnCodigoOrdenProduccion = new global::System.Data.DataColumn("CodigoOrdenProduccion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCodigoOrdenProduccion);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnNumero}, false));
+                this.columnFecha.ReadOnly = true;
+                this.columnNumero.AutoIncrement = true;
+                this.columnNumero.AutoIncrementSeed = 1;
+                this.columnNumero.Unique = true;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ReporteOrdenTrabajoRow NewReporteOrdenTrabajoRow() {
+                return ((ReporteOrdenTrabajoRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ReporteOrdenTrabajoRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(ReporteOrdenTrabajoRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ReporteOrdenTrabajoRowChanged != null)) {
+                    this.ReporteOrdenTrabajoRowChanged(this, new ReporteOrdenTrabajoRowChangeEvent(((ReporteOrdenTrabajoRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ReporteOrdenTrabajoRowChanging != null)) {
+                    this.ReporteOrdenTrabajoRowChanging(this, new ReporteOrdenTrabajoRowChangeEvent(((ReporteOrdenTrabajoRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ReporteOrdenTrabajoRowDeleted != null)) {
+                    this.ReporteOrdenTrabajoRowDeleted(this, new ReporteOrdenTrabajoRowChangeEvent(((ReporteOrdenTrabajoRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ReporteOrdenTrabajoRowDeleting != null)) {
+                    this.ReporteOrdenTrabajoRowDeleting(this, new ReporteOrdenTrabajoRowChangeEvent(((ReporteOrdenTrabajoRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveReporteOrdenTrabajoRow(ReporteOrdenTrabajoRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsOrdenTrabajo ds = new dsOrdenTrabajo();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ReporteOrdenTrabajoDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -5974,6 +6326,222 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class ReporteOrdenTrabajoRow : global::System.Data.DataRow {
+            
+            private ReporteOrdenTrabajoDataTable tableReporteOrdenTrabajo;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal ReporteOrdenTrabajoRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableReporteOrdenTrabajo = ((ReporteOrdenTrabajoDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string CentroTrabajo {
+                get {
+                    if (this.IsCentroTrabajoNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableReporteOrdenTrabajo.CentroTrabajoColumn]));
+                    }
+                }
+                set {
+                    this[this.tableReporteOrdenTrabajo.CentroTrabajoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Operacion {
+                get {
+                    if (this.IsOperacionNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableReporteOrdenTrabajo.OperacionColumn]));
+                    }
+                }
+                set {
+                    this[this.tableReporteOrdenTrabajo.OperacionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Cantidad {
+                get {
+                    if (this.IsCantidadNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableReporteOrdenTrabajo.CantidadColumn]));
+                    }
+                }
+                set {
+                    this[this.tableReporteOrdenTrabajo.CantidadColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string CodigoOrdenTrabajo {
+                get {
+                    if (this.IsCodigoOrdenTrabajoNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableReporteOrdenTrabajo.CodigoOrdenTrabajoColumn]));
+                    }
+                }
+                set {
+                    this[this.tableReporteOrdenTrabajo.CodigoOrdenTrabajoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string ParteFabricada {
+                get {
+                    if (this.IsParteFabricadaNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableReporteOrdenTrabajo.ParteFabricadaColumn]));
+                    }
+                }
+                set {
+                    this[this.tableReporteOrdenTrabajo.ParteFabricadaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Fecha {
+                get {
+                    try {
+                        return ((string)(this[this.tableReporteOrdenTrabajo.FechaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Fecha\' in table \'ReporteOrdenTrabajo\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableReporteOrdenTrabajo.FechaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int Numero {
+                get {
+                    try {
+                        return ((int)(this[this.tableReporteOrdenTrabajo.NumeroColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Numero\' in table \'ReporteOrdenTrabajo\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableReporteOrdenTrabajo.NumeroColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string CodigoOrdenProduccion {
+                get {
+                    try {
+                        return ((string)(this[this.tableReporteOrdenTrabajo.CodigoOrdenProduccionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CodigoOrdenProduccion\' in table \'ReporteOrdenTrabajo\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tableReporteOrdenTrabajo.CodigoOrdenProduccionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCentroTrabajoNull() {
+                return this.IsNull(this.tableReporteOrdenTrabajo.CentroTrabajoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCentroTrabajoNull() {
+                this[this.tableReporteOrdenTrabajo.CentroTrabajoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOperacionNull() {
+                return this.IsNull(this.tableReporteOrdenTrabajo.OperacionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOperacionNull() {
+                this[this.tableReporteOrdenTrabajo.OperacionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCantidadNull() {
+                return this.IsNull(this.tableReporteOrdenTrabajo.CantidadColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCantidadNull() {
+                this[this.tableReporteOrdenTrabajo.CantidadColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCodigoOrdenTrabajoNull() {
+                return this.IsNull(this.tableReporteOrdenTrabajo.CodigoOrdenTrabajoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCodigoOrdenTrabajoNull() {
+                this[this.tableReporteOrdenTrabajo.CodigoOrdenTrabajoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsParteFabricadaNull() {
+                return this.IsNull(this.tableReporteOrdenTrabajo.ParteFabricadaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetParteFabricadaNull() {
+                this[this.tableReporteOrdenTrabajo.ParteFabricadaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsFechaNull() {
+                return this.IsNull(this.tableReporteOrdenTrabajo.FechaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetFechaNull() {
+                this[this.tableReporteOrdenTrabajo.FechaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNumeroNull() {
+                return this.IsNull(this.tableReporteOrdenTrabajo.NumeroColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNumeroNull() {
+                this[this.tableReporteOrdenTrabajo.NumeroColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCodigoOrdenProduccionNull() {
+                return this.IsNull(this.tableReporteOrdenTrabajo.CodigoOrdenProduccionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCodigoOrdenProduccionNull() {
+                this[this.tableReporteOrdenTrabajo.CodigoOrdenProduccionColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -6208,6 +6776,37 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public ORDENES_PRODUCCIONRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class ReporteOrdenTrabajoRowChangeEvent : global::System.EventArgs {
+            
+            private ReporteOrdenTrabajoRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ReporteOrdenTrabajoRowChangeEvent(ReporteOrdenTrabajoRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ReporteOrdenTrabajoRow Row {
                 get {
                     return this.eventRow;
                 }

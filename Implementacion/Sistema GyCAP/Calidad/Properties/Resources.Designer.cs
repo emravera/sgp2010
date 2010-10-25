@@ -59,5 +59,292 @@ namespace GyCAP.UI.Calidad.Properties {
                 resourceCulture = value;
             }
         }
+        
+        internal static System.Drawing.Bitmap Abrir_25 {
+            get {
+                object obj = ResourceManager.GetObject("Abrir_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Apply_25 {
+            get {
+                object obj = ResourceManager.GetObject("Apply_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap arriba1_15 {
+            get {
+                object obj = ResourceManager.GetObject("arriba1_15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap arriba3_20 {
+            get {
+                object obj = ResourceManager.GetObject("arriba3_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ARROW10B {
+            get {
+                object obj = ResourceManager.GetObject("ARROW10B", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Delete_25 {
+            get {
+                object obj = ResourceManager.GetObject("Delete_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap derecha1_15 {
+            get {
+                object obj = ResourceManager.GetObject("derecha1_15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap derecha1_20 {
+            get {
+                object obj = ResourceManager.GetObject("derecha1_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap derecha2_20 {
+            get {
+                object obj = ResourceManager.GetObject("derecha2_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap derecha3_20 {
+            get {
+                object obj = ResourceManager.GetObject("derecha3_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Exit_48 {
+            get {
+                object obj = ResourceManager.GetObject("Exit_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Find_25 {
+            get {
+                object obj = ResourceManager.GetObject("Find_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Find_48 {
+            get {
+                object obj = ResourceManager.GetObject("Find_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Floppy_25 {
+            get {
+                object obj = ResourceManager.GetObject("Floppy_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Information_25 {
+            get {
+                object obj = ResourceManager.GetObject("Information_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap izquierda1_15 {
+            get {
+                object obj = ResourceManager.GetObject("izquierda1_15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap izquierda3_20 {
+            get {
+                object obj = ResourceManager.GetObject("izquierda3_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Listados_48 {
+            get {
+                object obj = ResourceManager.GetObject("Listados_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap lupa_20 {
+            get {
+                object obj = ResourceManager.GetObject("lupa_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap lupa_25 {
+            get {
+                object obj = ResourceManager.GetObject("lupa_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Mas_25 {
+            get {
+                object obj = ResourceManager.GetObject("Mas_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Menos_25 {
+            get {
+                object obj = ResourceManager.GetObject("Menos_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap New_25 {
+            get {
+                object obj = ResourceManager.GetObject("New_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap New_48 {
+            get {
+                object obj = ResourceManager.GetObject("New_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Open_25 {
+            get {
+                object obj = ResourceManager.GetObject("Open_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Page_Setup_25 {
+            get {
+                object obj = ResourceManager.GetObject("Page_Setup_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Password_25 {
+            get {
+                object obj = ResourceManager.GetObject("Password_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Printer_25 {
+            get {
+                object obj = ResourceManager.GetObject("Printer_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Question_25 {
+            get {
+                object obj = ResourceManager.GetObject("Question_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Restar_Gris_25 {
+            get {
+                object obj = ResourceManager.GetObject("Restar_Gris_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Salir_25 {
+            get {
+                object obj = ResourceManager.GetObject("Salir_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap sinimagen {
+            get {
+                object obj = ResourceManager.GetObject("sinimagen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Sumar_Gris_25 {
+            get {
+                object obj = ResourceManager.GetObject("Sumar_Gris_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap System_25 {
+            get {
+                object obj = ResourceManager.GetObject("System_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap System_Set_25 {
+            get {
+                object obj = ResourceManager.GetObject("System_Set_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Text_Editor_25 {
+            get {
+                object obj = ResourceManager.GetObject("Text_Editor_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Volver_20 {
+            get {
+                object obj = ResourceManager.GetObject("Volver_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Volver_25 {
+            get {
+                object obj = ResourceManager.GetObject("Volver_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Warning_25 {
+            get {
+                object obj = ResourceManager.GetObject("Warning_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Zoom_In_25 {
+            get {
+                object obj = ResourceManager.GetObject("Zoom_In_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Zoom_Out_25 {
+            get {
+                object obj = ResourceManager.GetObject("Zoom_Out_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

@@ -49,6 +49,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvOrdenesProduccion = new System.Windows.Forms.DataGridView();
             this.tpOrdenesTrabajo = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnImprimir = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnFiltrarOT = new System.Windows.Forms.Button();
             this.dtpFechaInicioOTFiltrar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
@@ -82,7 +84,6 @@
             this.btnAgregarCierre = new System.Windows.Forms.Button();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnIniciar = new System.Windows.Forms.ToolStripButton();
-            this.btnPausar = new System.Windows.Forms.ToolStripButton();
             this.btnFinalizar = new System.Windows.Forms.ToolStripButton();
             this.btnCancelar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
@@ -104,6 +105,7 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenesProduccion)).BeginInit();
             this.tpOrdenesTrabajo.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.gbDatos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenesTrabajo)).BeginInit();
@@ -334,6 +336,7 @@
             // 
             // tpOrdenesTrabajo
             // 
+            this.tpOrdenesTrabajo.Controls.Add(this.groupBox4);
             this.tpOrdenesTrabajo.Controls.Add(this.groupBox3);
             this.tpOrdenesTrabajo.Controls.Add(this.gbDatos);
             this.tpOrdenesTrabajo.Location = new System.Drawing.Point(4, 22);
@@ -343,6 +346,29 @@
             this.tpOrdenesTrabajo.TabIndex = 1;
             this.tpOrdenesTrabajo.Text = "Órdenes de Trabajo";
             this.tpOrdenesTrabajo.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btnImprimir);
+            this.groupBox4.Location = new System.Drawing.Point(654, 417);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(120, 67);
+            this.groupBox4.TabIndex = 2;
+            this.groupBox4.TabStop = false;
+            // 
+            // btnImprimir
+            // 
+            this.btnImprimir.AutoSize = true;
+            this.btnImprimir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnImprimir.Image = global::GyCAP.UI.ControlTrabajoEnProceso.Properties.Resources.Printer_25;
+            this.btnImprimir.Location = new System.Drawing.Point(11, 13);
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(99, 48);
+            this.btnImprimir.TabIndex = 0;
+            this.btnImprimir.Text = "Imprimir Órdenes";
+            this.btnImprimir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnImprimir.UseVisualStyleBackColor = true;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
             // groupBox3
             // 
@@ -355,14 +381,14 @@
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Location = new System.Drawing.Point(6, 417);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(768, 68);
+            this.groupBox3.Size = new System.Drawing.Size(642, 68);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Filtrar órdenes";
             // 
             // btnFiltrarOT
             // 
-            this.btnFiltrarOT.Location = new System.Drawing.Point(672, 22);
+            this.btnFiltrarOT.Location = new System.Drawing.Point(558, 22);
             this.btnFiltrarOT.Name = "btnFiltrarOT";
             this.btnFiltrarOT.Size = new System.Drawing.Size(75, 25);
             this.btnFiltrarOT.TabIndex = 13;
@@ -374,7 +400,7 @@
             // 
             this.dtpFechaInicioOTFiltrar.CustomFormat = " ";
             this.dtpFechaInicioOTFiltrar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaInicioOTFiltrar.Location = new System.Drawing.Point(533, 24);
+            this.dtpFechaInicioOTFiltrar.Location = new System.Drawing.Point(442, 24);
             this.dtpFechaInicioOTFiltrar.Name = "dtpFechaInicioOTFiltrar";
             this.dtpFechaInicioOTFiltrar.Size = new System.Drawing.Size(110, 21);
             this.dtpFechaInicioOTFiltrar.TabIndex = 12;
@@ -384,23 +410,23 @@
             this.cboEstadoOTFiltrar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboEstadoOTFiltrar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboEstadoOTFiltrar.FormattingEnabled = true;
-            this.cboEstadoOTFiltrar.Location = new System.Drawing.Point(273, 25);
+            this.cboEstadoOTFiltrar.Location = new System.Drawing.Point(231, 25);
             this.cboEstadoOTFiltrar.Name = "cboEstadoOTFiltrar";
-            this.cboEstadoOTFiltrar.Size = new System.Drawing.Size(182, 21);
+            this.cboEstadoOTFiltrar.Size = new System.Drawing.Size(133, 21);
             this.cboEstadoOTFiltrar.TabIndex = 11;
             // 
             // txtCodigoOTFiltrar
             // 
-            this.txtCodigoOTFiltrar.Location = new System.Drawing.Point(59, 25);
+            this.txtCodigoOTFiltrar.Location = new System.Drawing.Point(53, 25);
             this.txtCodigoOTFiltrar.Name = "txtCodigoOTFiltrar";
-            this.txtCodigoOTFiltrar.Size = new System.Drawing.Size(158, 21);
+            this.txtCodigoOTFiltrar.Size = new System.Drawing.Size(122, 21);
             this.txtCodigoOTFiltrar.TabIndex = 10;
             this.txtCodigoOTFiltrar.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(461, 28);
+            this.label15.Location = new System.Drawing.Point(370, 28);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(66, 13);
             this.label15.TabIndex = 2;
@@ -409,7 +435,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(223, 28);
+            this.label14.Location = new System.Drawing.Point(181, 28);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(44, 13);
             this.label14.TabIndex = 1;
@@ -418,7 +444,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(9, 28);
+            this.label13.Location = new System.Drawing.Point(7, 28);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(44, 13);
             this.label13.TabIndex = 0;
@@ -444,7 +470,6 @@
             this.dgvOrdenesTrabajo.Location = new System.Drawing.Point(3, 17);
             this.dgvOrdenesTrabajo.MultiSelect = false;
             this.dgvOrdenesTrabajo.Name = "dgvOrdenesTrabajo";
-            this.dgvOrdenesTrabajo.ReadOnly = true;
             this.dgvOrdenesTrabajo.RowHeadersVisible = false;
             this.dgvOrdenesTrabajo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvOrdenesTrabajo.Size = new System.Drawing.Size(768, 388);
@@ -452,6 +477,7 @@
             this.dgvOrdenesTrabajo.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrdenesTrabajo_RowEnter);
             this.dgvOrdenesTrabajo.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvOrdenesTrabajo_ColumnHeaderMouseClick);
             this.dgvOrdenesTrabajo.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvOrdenesTrabajo_CellFormatting);
+            this.dgvOrdenesTrabajo.SelectionChanged += new System.EventHandler(this.dgvOrdenesTrabajo_SelectionChanged);
             // 
             // tpCierreParcial
             // 
@@ -694,7 +720,6 @@
             this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnIniciar,
-            this.btnPausar,
             this.btnFinalizar,
             this.btnCancelar,
             this.btnEliminar,
@@ -717,17 +742,6 @@
             this.btnIniciar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnIniciar.Click += new System.EventHandler(this.btnIniciar_Click);
             // 
-            // btnPausar
-            // 
-            this.btnPausar.Image = global::GyCAP.UI.ControlTrabajoEnProceso.Properties.Resources.Pausa_25;
-            this.btnPausar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnPausar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPausar.Name = "btnPausar";
-            this.btnPausar.Size = new System.Drawing.Size(44, 47);
-            this.btnPausar.Text = "&Pausar";
-            this.btnPausar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPausar.Click += new System.EventHandler(this.btnCierreParcial_Click);
-            // 
             // btnFinalizar
             // 
             this.btnFinalizar.Image = global::GyCAP.UI.ControlTrabajoEnProceso.Properties.Resources.Finalizar_25;
@@ -748,6 +762,7 @@
             this.btnCancelar.Size = new System.Drawing.Size(53, 47);
             this.btnCancelar.Text = "&Cancelar";
             this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnEliminar
             // 
@@ -850,7 +865,7 @@
             this.tsmiDesbloquearCierre.Text = "Desbloquear columna";
             this.tsmiDesbloquearCierre.Click += new System.EventHandler(this.tsmiDesbloquearCierre_Click);
             // 
-            // frmOrdenTrabajo
+            // frmControlProduccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -859,7 +874,7 @@
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "frmOrdenTrabajo";
+            this.Name = "frmControlProduccion";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Control de Órdenes de Producción";
@@ -872,6 +887,8 @@
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenesProduccion)).EndInit();
             this.tpOrdenesTrabajo.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.gbDatos.ResumeLayout(false);
@@ -901,7 +918,6 @@
         private System.Windows.Forms.TabPage tpOrdenesTrabajo;
         private System.Windows.Forms.GroupBox gbDatos;
         private System.Windows.Forms.ToolStrip tsMenu;
-        private System.Windows.Forms.ToolStripButton btnPausar;
         private System.Windows.Forms.ToolStripButton btnFinalizar;
         private System.Windows.Forms.ToolStripButton btnCancelar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -961,5 +977,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiDesbloquearCierre;
         private System.Windows.Forms.ToolStripMenuItem tsmiBloquearProduccion;
         private System.Windows.Forms.ToolStripMenuItem tsmiDesbloquearProduccion;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btnImprimir;
     }
 }
