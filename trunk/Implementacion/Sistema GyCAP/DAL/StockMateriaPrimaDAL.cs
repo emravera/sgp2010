@@ -31,7 +31,7 @@ namespace GyCAP.DAL
 
             string sql = @"SELECT sum (dps.dpsem_cantidadreal) 
                            FROM PLANES_ANUALES as pa, PLANES_MENSUALES  as pm, PLANES_SEMANALES as ps,
-                                 DIAS_PLAN_SEMANAL as dia, DETALLE_PLANES_SEMANALES as dps, COCINAS as coc
+                                DIAS_PLAN_SEMANAL as dia, DETALLE_PLANES_SEMANALES as dps, COCINAS as coc
                            WHERE pa.pan_codigo=pm.pan_codigo and pm.pmes_codigo=ps.pmes_codigo and 
                                 ps.psem_codigo=dia.psem_codigo and dia.diapsem_codigo=dps.diapsem_codigo and coc.coc_codigo=dps.coc_codigo 
                                 and dps.coc_codigo = @p0  and  pa.pan_codigo=@p1";

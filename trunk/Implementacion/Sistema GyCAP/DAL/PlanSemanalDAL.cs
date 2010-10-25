@@ -128,8 +128,8 @@ namespace GyCAP.DAL
                     {
                         if (row.DPED_CODIGO != 0)
                         {
-                            sql = "INSERT INTO [DETALLE_PLANES_SEMANALES] ([diapsem_codigo], [coc_codigo], [dpsem_cantidadestimada], [dpsem_estado], [dped_codigo]) VALUES (@p0, @p1, @p2, @p3, @p4) SELECT @@Identity";
-                            object[] valorParam = { diaPlanSemanal.Codigo, row.COC_CODIGO, row.DPSEM_CANTIDADESTIMADA, row.DPSEM_ESTADO, row.DPED_CODIGO };
+                            sql = "INSERT INTO [DETALLE_PLANES_SEMANALES] ([diapsem_codigo], [coc_codigo], [dpsem_cantidadestimada],[dpsem_cantidadreal], [dpsem_estado], [dped_codigo]) VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
+                            object[] valorParam = { diaPlanSemanal.Codigo, row.COC_CODIGO, row.DPSEM_CANTIDADESTIMADA, row.DPSEM_ESTADO,0, row.DPED_CODIGO };
                             row.BeginEdit();
                             row.DPSEM_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
                             row.DIAPSEM_CODIGO = diaPlanSemanal.Codigo;
@@ -137,8 +137,8 @@ namespace GyCAP.DAL
                         }
                         else
                         {
-                            sql = "INSERT INTO [DETALLE_PLANES_SEMANALES] ([diapsem_codigo], [coc_codigo], [dpsem_cantidadestimada], [dpsem_estado]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
-                            object[] valorParam = { diaPlanSemanal.Codigo, row.COC_CODIGO, row.DPSEM_CANTIDADESTIMADA, row.DPSEM_ESTADO };
+                            sql = "INSERT INTO [DETALLE_PLANES_SEMANALES] ([diapsem_codigo], [coc_codigo], [dpsem_cantidadestimada],[dpsem_cantidadreal],[dpsem_estado]) VALUES (@p0, @p1, @p2, @p3 ,@p4) SELECT @@Identity";
+                            object[] valorParam = { diaPlanSemanal.Codigo, row.COC_CODIGO, row.DPSEM_CANTIDADESTIMADA,0, row.DPSEM_ESTADO };
                             row.BeginEdit();
                             row.DPSEM_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
                             row.DIAPSEM_CODIGO = diaPlanSemanal.Codigo;

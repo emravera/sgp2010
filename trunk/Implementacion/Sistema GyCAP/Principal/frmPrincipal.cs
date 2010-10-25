@@ -189,5 +189,11 @@ namespace Principal
             GyCAP.UI.Mantenimiento.frmPlanMantenimiento.Instancia.Show();
         }
 
+        private void btnEntregaProducto_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionStock.frmEntregaProducto.Instancia.MdiParent = this;
+            GyCAP.UI.GestionStock.frmEntregaProducto.Instancia.Show();
+        }
+
     }
 }

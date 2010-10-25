@@ -76,6 +76,7 @@
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnEntregaProducto = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -443,7 +444,8 @@
             this.t9,
             this.btnControlPlan,
             this.btnInventarioABC,
-            this.tsbPlanMantenimeinto});
+            this.tsbPlanMantenimeinto,
+            this.btnEntregaProducto});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(792, 36);
@@ -505,6 +507,16 @@
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(38, 17);
             this.lblEstado.Text = "Status";
+            // 
+            // btnEntregaProducto
+            // 
+            this.btnEntregaProducto.Image = ((System.Drawing.Image)(resources.GetObject("btnEntregaProducto.Image")));
+            this.btnEntregaProducto.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEntregaProducto.Name = "btnEntregaProducto";
+            this.btnEntregaProducto.Size = new System.Drawing.Size(95, 33);
+            this.btnEntregaProducto.Text = "Entrega Producto";
+            this.btnEntregaProducto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEntregaProducto.Click += new System.EventHandler(this.btnEntregaProducto_Click);
             // 
             // frmPrincipal
             // 
@@ -580,6 +592,7 @@
         private System.Windows.Forms.ToolStripButton btnInventarioABC;
         private System.Windows.Forms.ToolStripMenuItem menuItemPF;
         private System.Windows.Forms.ToolStripButton tsbPlanMantenimeinto;
+        private System.Windows.Forms.ToolStripButton btnEntregaProducto;
     }
 }
 

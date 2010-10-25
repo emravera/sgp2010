@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace GyCAP.BLL
 {
@@ -56,5 +57,22 @@ namespace GyCAP.BLL
 
         }
 
+        //Metodo que obtiene los pedidos a partir de una fecha
+        public static void ObtenerPedido(DateTime fecha, Data.dsPlanMensual dsPlanMensual)
+        {
+            DAL.PedidoDAL.ObtenerPedido(fecha, dsPlanMensual);
+        }
+
+        //Metodo que cambia el estado del pedido
+        public static void CambiarEstadoPedido(int codigoPedido, int estado)
+        {
+            DAL.PedidoDAL.CambiarEstadoPedido(codigoPedido, estado);
+        }
+
+        //Metodo que obtiene un pedido a partir de una fecha y para un cliente determinado
+        public static void ObtenerPedidoCliente(int codigoCliente, int estadoPedido, DataTable dtPedido)
+        {
+            DAL.PedidoDAL.ObtenerPedidosCliente(codigoCliente,estadoPedido,dtPedido);
+        }
     }
 }

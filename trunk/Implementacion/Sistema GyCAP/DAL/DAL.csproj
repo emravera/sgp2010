@@ -50,7 +50,6 @@
     <Compile Include="CausaFalloDAL.cs" />
     <Compile Include="CentroTrabajoDAL.cs" />
     <Compile Include="CierreParcialOrdenTrabajoDAL.cs" />
-    <Compile Include="ClaseTemporalPedido.cs" />
     <Compile Include="ClienteDAL.cs" />
     <Compile Include="CocinaDAL.cs" />
     <Compile Include="ColorDAL.cs" />
@@ -62,6 +61,7 @@
     <Compile Include="DesignacionDAL.cs" />
     <Compile Include="DetalleConjuntoDAL.cs" />
     <Compile Include="DetalleDemandaAnualDAL.cs" />
+    <Compile Include="EntregaProductoDAL.cs" />
     <Compile Include="EstadoMovimientoStockDAL.cs" />
     <Compile Include="MovimientoStockDAL.cs" />
     <Compile Include="OrdenTrabajoDAL.cs" />

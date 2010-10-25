@@ -164,8 +164,8 @@ namespace GyCAP.DAL
                 {
                     if (row.DPED_CODIGO != 0)
                     {
-                        sql = "INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada], [dped_codigo]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
-                        object[] valorParam = { plan.Codigo, row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA, row.DPED_CODIGO };
+                        sql = "INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada], [dpmes_cantidadreal] [dped_codigo]) VALUES (@p0, @p1, @p2, @p3, @p4) SELECT @@Identity";
+                        object[] valorParam = { plan.Codigo, row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA, Convert.ToInt32(0), row.DPED_CODIGO };
                         row.BeginEdit();
                         row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
                         row.PMES_CODIGO = plan.Codigo;
@@ -173,8 +173,8 @@ namespace GyCAP.DAL
                     }
                     else
                     {
-                        sql = "INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
-                        object[] valorParam = { plan.Codigo, row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA };
+                        sql = "INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada], [dpmes_cantidadreal]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+                        object[] valorParam = { plan.Codigo, row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA, Convert.ToInt32(0) };
                         row.BeginEdit();
                         row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
                         row.PMES_CODIGO = plan.Codigo;
@@ -247,17 +247,17 @@ namespace GyCAP.DAL
                     if (Convert.ToInt32(row["DPED_CODIGO", System.Data.DataRowVersion.Original]) != 0)
                     {
                         //obtengo ese detalle
-                        DAL.ClaseTemporalPedido.ObtenerUnDetallePedido(planMensual.DETALLE_PEDIDOS, Convert.ToInt32(row["DPED_CODIGO", System.Data.DataRowVersion.Original]));
+                        DAL.DetallePedidoDAL.ObtenerUnDetallePedido(planMensual.DETALLE_PEDIDOS, Convert.ToInt32(row["DPED_CODIGO", System.Data.DataRowVersion.Original]));
 
                         foreach (Data.dsPlanMensual.DETALLE_PEDIDOSRow dped in planMensual.DETALLE_PEDIDOS.Rows)
                         {
                             if (Convert.ToInt32(row["DPED_CODIGO", System.Data.DataRowVersion.Original]) == Convert.ToInt32(dped["DPED_CODIGO", System.Data.DataRowVersion.Original]))
                             {
                                 //Le actualizo el estado al detalle
-                                DAL.ClaseTemporalPedido.CambiarEstado(Convert.ToInt32(dped["DPED_CODIGO", System.Data.DataRowVersion.Original]), 1);
+                                DAL.DetallePedidoDAL.CambiarEstado(Convert.ToInt32(dped["DPED_CODIGO", System.Data.DataRowVersion.Original]), 1);
 
                                 //Le actualizo el estado del pedido
-                                DAL.ClaseTemporalPedido.CambiarEstadoPedido(Convert.ToInt32(dped["DPED_CODIGO", System.Data.DataRowVersion.Original]), 1);
+                                DAL.PedidoDAL.CambiarEstadoPedido(Convert.ToInt32(dped["DPED_CODIGO", System.Data.DataRowVersion.Original]), 1);
                             }
                         }
 

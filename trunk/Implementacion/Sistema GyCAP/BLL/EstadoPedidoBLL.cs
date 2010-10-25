@@ -10,6 +10,7 @@ namespace GyCAP.BLL
     {
         public static readonly int EstadoEnCurso = 2;
         public static readonly int EstadoFinalizado = 5;
+        public static readonly int EstadoEntregado = 6;
         
         public static long Insertar(Entidades.EstadoPedido estadoPedido)
         {

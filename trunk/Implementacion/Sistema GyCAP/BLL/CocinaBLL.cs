@@ -90,5 +90,6 @@ namespace GyCAP.BLL
         {
             return DAL.CocinaDAL.ObtenerCodigoEstructuraActiva(codigoCocina);
         }
+        
     }
 }

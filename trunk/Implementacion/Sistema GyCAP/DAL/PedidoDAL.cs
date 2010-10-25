@@ -454,5 +454,65 @@ namespace GyCAP.DAL
             if (Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion)) == 0) { return true; }
             else { return false; }
         }
+
+        public static void CambiarEstadoPedido(int codigoPedido, int estado)
+        {
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                //Inserto la demanda
+                transaccion = DB.IniciarTransaccion();
+
+                string sql = string.Empty;
+
+
+                //Guardo las modificaciones
+                sql = "UPDATE [PEDIDOS] SET eped_codigo=@p0 WHERE ped_codigo=@p1";
+                object[] valorPar = { estado, codigoPedido };
+                DB.executeNonQuery(sql, valorPar, transaccion);
+
+                transaccion.Commit();
+                DB.FinalizarTransaccion();
+
+
+            }
+            catch (SqlException)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException();
+            }
+        }
+
+        //Metodo que obtiene el pedido
+        public static void ObtenerPedido(DateTime fecha, Data.dsPlanMensual dsPlanMensual)
+        {
+            string sql = @"SELECT ped_codigo, cli_codigo, eped_codigo, ped_fechaentregaprevista, ped_fechaentregareal, ped_fecha_alta, ped_numero
+                           FROM PEDIDOS WHERE ped_fechaentregaprevista >= @p0";
+            string dia = "'" + fecha.ToString() + "'";
+            object[] valorParametros = { fecha };
+            try
+            {
+                //Se llena el Dataset
+                DB.FillDataSet(dsPlanMensual, "PEDIDOS", sql, valorParametros);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+        }
+
+        //Metodo que obtiene los pedidos de un cliente determinado en una fecha determinada
+        public static void ObtenerPedidosCliente(int CodigoCliente, int estadoPedido, DataTable dtPedidos)
+        {
+            string sql = @"SELECT ped_codigo, cli_codigo, eped_codigo, ped_fechaentregaprevista, ped_numero                       
+                           FROM PEDIDOS WHERE cli_codigo=@p0 and eped_codigo=@p1";
+
+            object[] valorParametros = { CodigoCliente, estadoPedido };
+            try
+            {
+                DB.FillDataTable(dtPedidos, sql, valorParametros);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
     }
 }

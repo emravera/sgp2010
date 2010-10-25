@@ -52,6 +52,9 @@ namespace GyCAP.UI.GestionStock
             dgvModelos.Columns["MODELO_PORCENTAJE"].DataPropertyName = "MODELO_PORCENTAJE";
             dgvModelos.Columns["MODELO_CANTIDAD"].DataPropertyName = "MODELO_CANTIDAD";
 
+            //Indicamos la alineacion de los campos
+            dgvModelos.Columns["MODELO_PORCENTAJE"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
             //Creamos el dataview y lo asignamos a la grilla
             dvListaModelos = new DataView(dsInventarioABC.MODELOS_PRODUCIDOS);
             dgvModelos.DataSource = dvListaModelos;
@@ -84,6 +87,15 @@ namespace GyCAP.UI.GestionStock
             dgvMP.Columns["CANTIDAD_INVERSION"].DataPropertyName = "CANTIDAD_INVERSION";
             dgvMP.Columns["PORCENTAJE_INVERSION"].DataPropertyName = "PORCENTAJE_INVERSION";
             dgvMP.Columns["CATEGORIA_ABC"].DataPropertyName = "CATEGORIA_ABC";
+
+            //Indicamos la alineacion de los numeros
+            dgvMP.Columns["CODIGO_MATERIA_PRIMA_ABC"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvMP.Columns["CANTIDAD_ANUAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvMP.Columns["PRECIO_UNIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvMP.Columns["CANTIDAD_INVERSION"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvMP.Columns["PORCENTAJE_INVERSION"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+           
+
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListaMP = new DataView(dsInventarioABC.MATERIAS_PRIMAS_ABC);
@@ -264,86 +276,93 @@ namespace GyCAP.UI.GestionStock
         {
             try
             {
-                if (rbNuevo.Checked == true)
+                if (cbAñoInventario.GetSelectedIndex() != -1)
                 {
-                    //Se busca el año del que hay que traer 
-                    int codigoAnio = Convert.ToInt32(cbAñoInventario.GetSelectedValue());
+                    if (rbNuevo.Checked == true)
+                    {
+                        //Se busca el año del que hay que traer 
+                        int codigoAnio = Convert.ToInt32(cbAñoInventario.GetSelectedValue());
 
-                    //Se trae el el total a producir en ese año desde la base de datos
-                    txtCantAnual.Text = BLL.StockMateriaPrimaBLL.ObtenerTotalAnual(codigoAnio).ToString();
+                        //Se trae el el total a producir en ese año desde la base de datos
+                        txtCantAnual.Text = BLL.StockMateriaPrimaBLL.ObtenerTotalAnual(codigoAnio).ToString();
 
-                    //Seteamos la interface
-                    SetInterface(estadoUI.CargaDetalle);
+                        //Seteamos la interface
+                        SetInterface(estadoUI.CargaDetalle);
+                    }
+                    else
+                    {
+                        //Se buscan los porcentajes de cocinas producidas del año historico
+
+                        //Obtengo el plan anual
+                        int año = Convert.ToInt32(cbAñoInventario.GetSelectedValue());
+
+
+                        //Se trae el el total a producir en ese año desde la base de datos
+                        txtCantAnual.Text = BLL.StockMateriaPrimaBLL.ObtenerTotalAnual(año).ToString();
+
+                        //Defino la matriz donde voy a guardar los datos
+                        int cantidadModelos = Convert.ToInt32(dsInventarioABC.COCINAS.Rows.Count);
+                        decimal[,] modelos = new decimal[cantidadModelos, 2];
+                        int cont = 0; decimal sum = 0;
+
+                        foreach (Data.dsInventarioABC.COCINASRow cocina in dsInventarioABC.COCINAS.Rows)
+                        {
+                            //Obtengo el codigo de la cocina
+                            int codigoModelo = Convert.ToInt32(cocina["coc_codigo"]);
+                            modelos[cont, 0] = codigoModelo;
+                            //Obtengo de ese modelo la cantidad de cocinas producidas en ese año
+                            object salida = BLL.StockMateriaPrimaBLL.ObtenerTotalModelo(año, codigoModelo);
+                            if (salida != DBNull.Value)
+                            {
+                                modelos[cont, 1] = Convert.ToInt32(salida);
+                            }
+                            else
+                            {
+                                modelos[cont, 1] = 0;
+                            }
+                            //Calculo el total
+                            sum += modelos[cont, 1];
+                            //Sumo uno mas al contador
+                            cont += 1;
+                        }
+
+                        //Le calculo los porcentajes a cada elemento de la matriz
+                        for (int i = 0; i < cantidadModelos; i++)
+                        {
+                            modelos[i, 1] = (modelos[i, 1] / sum) * 100;
+                        }
+
+                        //Asigno los valores a la datatable de modelos
+                        for (int j = 0; j < cantidadModelos; j++)
+                        {
+                            if (modelos[j, 1] > 0)
+                            {
+                                //Se crea una fila
+                                Data.dsInventarioABC.MODELOS_PRODUCIDOSRow row = dsInventarioABC.MODELOS_PRODUCIDOS.NewMODELOS_PRODUCIDOSRow();
+
+                                //Se comienza a editar la fila
+                                row.BeginEdit();
+                                codigoModelo = codigoModelo + 1;
+                                row.CODIGO_MODELO = codigoModelo;
+                                row.CODIGO_MODELO_PRODUCIDO = modelos[j, 0];
+                                row.MODELO_PORCENTAJE = Math.Round(modelos[j, 1], 2);
+                                row.MODELO_CANTIDAD = Math.Round(((modelos[j, 1] / 100) * Convert.ToInt32(txtCantAnual.Text)), 0);
+                                row.EndEdit();
+
+                                //Agregamos la Línea
+                                dsInventarioABC.MODELOS_PRODUCIDOS.AddMODELOS_PRODUCIDOSRow(row);
+                            }
+                        }
+
+                        //Seteamos la interface
+                        SetInterface(estadoUI.generaHistorico);
+
+                    }
                 }
                 else
                 {
-                    //Se buscan los porcentajes de cocinas producidas del año historico
-
-                    //Obtengo el plan anual
-                    int año = Convert.ToInt32(cbAñoInventario.GetSelectedValue());
-
-
-                    //Se trae el el total a producir en ese año desde la base de datos
-                    txtCantAnual.Text = BLL.StockMateriaPrimaBLL.ObtenerTotalAnual(año).ToString();
-
-                    //Defino la matriz donde voy a guardar los datos
-                    int cantidadModelos = Convert.ToInt32(dsInventarioABC.COCINAS.Rows.Count);
-                    decimal[,] modelos = new decimal[cantidadModelos, 2];
-                    int cont=0; decimal sum=0;
-
-                    foreach (Data.dsInventarioABC.COCINASRow cocina in dsInventarioABC.COCINAS.Rows)
-                    {
-                        //Obtengo el codigo de la cocina
-                        int codigoModelo = Convert.ToInt32(cocina["coc_codigo"]);
-                        modelos[cont,0] = codigoModelo;
-                        //Obtengo de ese modelo la cantidad de cocinas producidas en ese año
-                         object salida = BLL.StockMateriaPrimaBLL.ObtenerTotalModelo(año, codigoModelo);
-                         if (salida != DBNull.Value)
-                         {
-                             modelos[cont, 1] = Convert.ToInt32(salida);
-                         }
-                         else
-                         {
-                             modelos[cont, 1] = 0;
-                         }
-                        //Calculo el total
-                        sum += modelos[cont, 1];
-                        //Sumo uno mas al contador
-                        cont += 1;
-                    }
-
-                    //Le calculo los porcentajes a cada elemento de la matriz
-                    for (int i = 0; i < cantidadModelos; i++)
-                    {
-                        modelos[i, 1] = (modelos[i, 1] / sum) * 100;
-                    }
-
-                    //Asigno los valores a la datatable de modelos
-                    for (int j = 0; j < cantidadModelos; j++)
-                    {
-                        if (modelos[j, 1] > 0)
-                        {
-                            //Se crea una fila
-                            Data.dsInventarioABC.MODELOS_PRODUCIDOSRow row = dsInventarioABC.MODELOS_PRODUCIDOS.NewMODELOS_PRODUCIDOSRow();
-
-                            //Se comienza a editar la fila
-                            row.BeginEdit();
-                            codigoModelo = codigoModelo + 1;
-                            row.CODIGO_MODELO = codigoModelo;
-                            row.CODIGO_MODELO_PRODUCIDO = modelos[j, 0];
-                            row.MODELO_PORCENTAJE = Math.Round(modelos[j, 1], 2);
-                            row.MODELO_CANTIDAD = Math.Round(((modelos[j, 1] / 100) * Convert.ToInt32(txtCantAnual.Text)), 0);
-                            row.EndEdit();
-
-                            //Agregamos la Línea
-                            dsInventarioABC.MODELOS_PRODUCIDOS.AddMODELOS_PRODUCIDOSRow(row);
-                        }
-                    }
-
-                    //Seteamos la interface
-                    SetInterface(estadoUI.generaHistorico);
-
-                }               
+                    MessageBox.Show("Debe seleccionar un año para el Inventario ABC" , "Error: Inventario ABC - Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
