@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace GyCAP.BLL
@@ -26,6 +27,15 @@ namespace GyCAP.BLL
         public static void EliminarDetallePedido(long codigoPedido, SqlTransaction transaccion)
         {
             DAL.DetallePedidoDAL.EliminarDetallePedido(codigoPedido, transaccion);    
+        }
+
+        public static void ObtenerDetallePedido(DataTable dtDetallePedido, int codigoPedido)
+        {
+            DAL.DetallePedidoDAL.ObtenerDetallePedido(dtDetallePedido, codigoPedido);
+        }
+        public static void CambiarEstado(int codigoDetallePedido, int estado)
+        {
+            DAL.DetallePedidoDAL.CambiarEstado(codigoDetallePedido, estado);
         }
     }
 }

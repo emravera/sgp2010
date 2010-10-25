@@ -51,7 +51,6 @@
     <Compile Include="CausaFalloBLL.cs" />
     <Compile Include="CentroTrabajoBLL.cs" />
     <Compile Include="CierreParcialOrdenTrabajoBLL.cs" />
-    <Compile Include="ClaseTemporalPedido.cs" />
     <Compile Include="ClienteBLL.cs" />
     <Compile Include="CocinaBLL.cs" />
     <Compile Include="ColorBLL.cs" />
@@ -61,6 +60,7 @@
     <Compile Include="DemandaAnualBLL.cs" />
     <Compile Include="DesignacionBLL.cs" />
     <Compile Include="DetalleDemandaAnualBLL.cs" />
+    <Compile Include="EntregaProductoBLL.cs" />
     <Compile Include="EstadoMovimientoStockBLL.cs" />
     <Compile Include="MovimientoStockBLL.cs" />
     <Compile Include="OrdenTrabajoBLL.cs" />

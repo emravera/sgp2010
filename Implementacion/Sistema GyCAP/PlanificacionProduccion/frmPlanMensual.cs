@@ -539,7 +539,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     DateTime fechaPedidos = Convert.ToDateTime("01/" + cont.ToString() + "/" + anio.ToString());
                     
                     //Busco los pedidos para esa fecha
-                    BLL.ClaseTemporalPedido.ObtenerPedido(fechaPedidos,dsPlanMensual);
+                    BLL.PedidoBLL.ObtenerPedido(fechaPedidos,dsPlanMensual);
 
                     if (dsPlanMensual.PEDIDOS.Rows.Count == 0)
                     {
@@ -896,11 +896,11 @@ namespace GyCAP.UI.PlanificacionProduccion
                         if (row["DPED_CODIGO"].ToString() != Convert.ToString(0))
                         {
                             //Actualizo el valor del estado en la BD
-                            BLL.ClaseTemporalPedido.CambiarEstado(Convert.ToInt32(row.DPED_CODIGO), 2);
+                            BLL.DetallePedidoBLL.CambiarEstado(Convert.ToInt32(row.DPED_CODIGO), BLL.EstadoPedidoBLL.EstadoEnCurso);
 
                             //lo actualizo el el dataset
                             dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).BeginEdit();
-                            dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).EDPED_CODIGO = 2;
+                            dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).EDPED_CODIGO = BLL.EstadoPedidoBLL.EstadoEnCurso;
                             dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).EndEdit();
                             dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).AcceptChanges();
                         }
@@ -911,7 +911,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     {
                         foreach (Data.dsPlanMensual.DETALLE_PEDIDOSRow row in (Data.dsPlanMensual.DETALLE_PEDIDOSRow[])dsPlanMensual.DETALLE_PEDIDOS.Select("ped_codigo=" + pm.PED_CODIGO.ToString()))
                         {
-                            if (Convert.ToInt32(row["EDPED_CODIGO"]) == 2)
+                            if (Convert.ToInt32(row["EDPED_CODIGO"]) == BLL.EstadoPedidoBLL.EstadoEnCurso)
                             {
                                 cont++;
                             }
@@ -921,11 +921,11 @@ namespace GyCAP.UI.PlanificacionProduccion
                         if (cont == cantfilas)
                         {
                             //Cambio el estado del pedido en la bd
-                            BLL.ClaseTemporalPedido.CambiarEstadoPedido(Convert.ToInt32(pm.PED_CODIGO), 2);
+                            BLL.PedidoBLL.CambiarEstadoPedido(Convert.ToInt32(pm.PED_CODIGO), BLL.EstadoPedidoBLL.EstadoEnCurso);
 
                             //lo actualizo el el dataset
                             pm.BeginEdit();
-                            pm.EPED_CODIGO = 2;
+                            pm.EPED_CODIGO = BLL.EstadoPedidoBLL.EstadoEnCurso;
                             pm.EndEdit();
                             pm.AcceptChanges();
                         }
@@ -980,7 +980,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     DateTime fechaPedidos = Convert.ToDateTime("01/" + cont.ToString() + "/" + anio.ToString());
 
                     //Busco los pedidos para esa fecha
-                    BLL.ClaseTemporalPedido.ObtenerPedido(fechaPedidos, dsPlanMensual);
+                    BLL.PedidoBLL.ObtenerPedido(fechaPedidos, dsPlanMensual);
 
                     if (dsPlanMensual.PEDIDOS.Rows.Count == 0)
                     {
@@ -1088,7 +1088,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 int codigoPedido = Convert.ToInt32(dvListaPedidos[dgvPedidos.SelectedRows[0].Index]["ped_codigo"]);
 
                 //Obtengo el detalle del pedido
-                BLL.ClaseTemporalPedido.ObtenerDetallePedido(dsPlanMensual.DETALLE_PEDIDOS, codigoPedido);
+                BLL.DetallePedidoBLL.ObtenerDetallePedido(dsPlanMensual.DETALLE_PEDIDOS, codigoPedido);
 
                 if (dsPlanMensual.DETALLE_PEDIDOS.Rows.Count > 0)
                 {

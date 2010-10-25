@@ -73,6 +73,7 @@
     <Compile Include="Domicilio.cs" />
     <Compile Include="EjemplarMaquina.cs" />
     <Compile Include="Empleado.cs" />
+    <Compile Include="EntregaProducto.cs" />
     <Compile Include="EstadoCocina.cs" />
     <Compile Include="EstadoDetalleMantenimiento.cs" />
     <Compile Include="EstadoDetallePedido.cs" />

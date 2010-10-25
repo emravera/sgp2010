@@ -99,6 +99,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsEmpleadosyCapacidades.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsEntregaProducto.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEntregaProducto.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsEstadoDetallePedido.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -378,6 +383,17 @@
     </None>
     <None Include="dsEmpleadosyCapacidades.xss">
       <DependentUpon>dsEmpleadosyCapacidades.xsd</DependentUpon>
+    </None>
+    <None Include="dsEntregaProducto.xsc">
+      <DependentUpon>dsEntregaProducto.xsd</DependentUpon>
+    </None>
+    <None Include="dsEntregaProducto.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEntregaProducto.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsEntregaProducto.xss">
+      <DependentUpon>dsEntregaProducto.xsd</DependentUpon>
     </None>
     <None Include="dsEstadoDetallePedido.xsc">
       <DependentUpon>dsEstadoDetallePedido.xsd</DependentUpon>
