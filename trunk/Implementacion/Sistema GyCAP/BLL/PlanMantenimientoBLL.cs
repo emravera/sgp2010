@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace GyCAP.BLL
 {
@@ -12,6 +13,11 @@ namespace GyCAP.BLL
         public static void ObtenerPlanMantenimiento(object descripcion, object numero, int idEstadoPlan, Data.dsPlanMantenimiento ds, bool obtenerDetalle)
         {
             DAL.PlanMantenimientoDAL.ObtenerPlanMantenimiento(descripcion, numero, idEstadoPlan, ds, obtenerDetalle);
+        }
+
+        public static void ObtenerPlanMantenimiento(DataTable dtPlanMantenimiento)
+        {
+            DAL.PlanMantenimientoDAL.ObtenerPlanMantenimiento(dtPlanMantenimiento);
         }
 
         public static void Insertar(Data.dsPlanMantenimiento dsPlanMantenimiento)

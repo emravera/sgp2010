@@ -123,6 +123,7 @@
     <Compile Include="Provincia.cs" />
     <Compile Include="RegistrosMantenimientos.cs" />
     <Compile Include="Repuesto.cs" />
+    <Compile Include="RepuestosRegistroMantenimiento.cs" />
     <Compile Include="SectorTrabajo.cs" />
     <Compile Include="Sistema.cs" />
     <Compile Include="Stock.cs" />

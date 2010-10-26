@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace GyCAP.DAL
 {
@@ -348,6 +349,14 @@ namespace GyCAP.DAL
                 }
                 catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
+        }
+
+        public static void ObtenerPlanMantenimiento(DataTable dtPlanMantenimiento)
+        {
+            string sql = @"SELECT PMAN_NUMERO, EPMAN_CODIGO, PMAN_FECHA, PMAN_OBSERVACIONES, PMAN_DESCRIPCION
+                          FROM PLANES_MANTENIMIENTO ";
+
+            DB.FillDataTable(dtPlanMantenimiento, sql, null);
         }
 
         public static bool PuedeEliminarse(long codigo)
