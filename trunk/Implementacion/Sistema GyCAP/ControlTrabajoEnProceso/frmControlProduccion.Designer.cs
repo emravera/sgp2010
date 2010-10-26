@@ -388,7 +388,7 @@
             // 
             // btnFiltrarOT
             // 
-            this.btnFiltrarOT.Location = new System.Drawing.Point(558, 22);
+            this.btnFiltrarOT.Location = new System.Drawing.Point(558, 26);
             this.btnFiltrarOT.Name = "btnFiltrarOT";
             this.btnFiltrarOT.Size = new System.Drawing.Size(75, 25);
             this.btnFiltrarOT.TabIndex = 13;
@@ -400,7 +400,7 @@
             // 
             this.dtpFechaInicioOTFiltrar.CustomFormat = " ";
             this.dtpFechaInicioOTFiltrar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaInicioOTFiltrar.Location = new System.Drawing.Point(442, 24);
+            this.dtpFechaInicioOTFiltrar.Location = new System.Drawing.Point(442, 28);
             this.dtpFechaInicioOTFiltrar.Name = "dtpFechaInicioOTFiltrar";
             this.dtpFechaInicioOTFiltrar.Size = new System.Drawing.Size(110, 21);
             this.dtpFechaInicioOTFiltrar.TabIndex = 12;
@@ -410,14 +410,14 @@
             this.cboEstadoOTFiltrar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboEstadoOTFiltrar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboEstadoOTFiltrar.FormattingEnabled = true;
-            this.cboEstadoOTFiltrar.Location = new System.Drawing.Point(231, 25);
+            this.cboEstadoOTFiltrar.Location = new System.Drawing.Point(231, 29);
             this.cboEstadoOTFiltrar.Name = "cboEstadoOTFiltrar";
             this.cboEstadoOTFiltrar.Size = new System.Drawing.Size(133, 21);
             this.cboEstadoOTFiltrar.TabIndex = 11;
             // 
             // txtCodigoOTFiltrar
             // 
-            this.txtCodigoOTFiltrar.Location = new System.Drawing.Point(53, 25);
+            this.txtCodigoOTFiltrar.Location = new System.Drawing.Point(53, 29);
             this.txtCodigoOTFiltrar.Name = "txtCodigoOTFiltrar";
             this.txtCodigoOTFiltrar.Size = new System.Drawing.Size(122, 21);
             this.txtCodigoOTFiltrar.TabIndex = 10;
@@ -426,7 +426,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(370, 28);
+            this.label15.Location = new System.Drawing.Point(370, 32);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(66, 13);
             this.label15.TabIndex = 2;
@@ -435,7 +435,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(181, 28);
+            this.label14.Location = new System.Drawing.Point(181, 32);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(44, 13);
             this.label14.TabIndex = 1;
@@ -444,7 +444,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(7, 28);
+            this.label13.Location = new System.Drawing.Point(7, 32);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(44, 13);
             this.label13.TabIndex = 0;
