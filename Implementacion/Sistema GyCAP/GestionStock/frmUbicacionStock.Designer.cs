@@ -44,6 +44,8 @@
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.cboContenidoStock = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label2 = new System.Windows.Forms.Label();
             this.cboTipoUbicacion = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cboUnidadMedida = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
@@ -64,6 +66,8 @@
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cboContenidoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.label16 = new System.Windows.Forms.Label();
             this.txtCodigoBuscar = new System.Windows.Forms.TextBox();
             this.cboTipoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label14 = new System.Windows.Forms.Label();
@@ -75,10 +79,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tcUbicacionStock = new System.Windows.Forms.TabControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cboContenidoStock = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.cboContenidoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.tsMenu.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.tpDatos.SuspendLayout();
@@ -125,7 +125,7 @@
             this.btnVolver.Location = new System.Drawing.Point(539, 20);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(64, 26);
-            this.btnVolver.TabIndex = 18;
+            this.btnVolver.TabIndex = 19;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -135,7 +135,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(469, 20);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(64, 26);
-            this.btnGuardar.TabIndex = 17;
+            this.btnGuardar.TabIndex = 18;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -289,6 +289,25 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos de la ubicación de stock";
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(12, 141);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(60, 13);
+            this.label15.TabIndex = 20;
+            this.label15.Text = "Contenido:";
+            // 
+            // cboContenidoStock
+            // 
+            this.cboContenidoStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboContenidoStock.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboContenidoStock.FormattingEnabled = true;
+            this.cboContenidoStock.Location = new System.Drawing.Point(105, 138);
+            this.cboContenidoStock.Name = "cboContenidoStock";
+            this.cboContenidoStock.Size = new System.Drawing.Size(185, 21);
+            this.cboContenidoStock.TabIndex = 11;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -306,7 +325,7 @@
             this.cboTipoUbicacion.Location = new System.Drawing.Point(417, 107);
             this.cboTipoUbicacion.Name = "cboTipoUbicacion";
             this.cboTipoUbicacion.Size = new System.Drawing.Size(174, 21);
-            this.cboTipoUbicacion.TabIndex = 14;
+            this.cboTipoUbicacion.TabIndex = 15;
             // 
             // cboUnidadMedida
             // 
@@ -316,7 +335,7 @@
             this.cboUnidadMedida.Location = new System.Drawing.Point(417, 78);
             this.cboUnidadMedida.Name = "cboUnidadMedida";
             this.cboUnidadMedida.Size = new System.Drawing.Size(174, 21);
-            this.cboUnidadMedida.TabIndex = 13;
+            this.cboUnidadMedida.TabIndex = 14;
             // 
             // txtUbicacionFisica
             // 
@@ -324,7 +343,7 @@
             this.txtUbicacionFisica.MaxLength = 200;
             this.txtUbicacionFisica.Name = "txtUbicacionFisica";
             this.txtUbicacionFisica.Size = new System.Drawing.Size(275, 112);
-            this.txtUbicacionFisica.TabIndex = 16;
+            this.txtUbicacionFisica.TabIndex = 17;
             this.txtUbicacionFisica.Text = "";
             this.txtUbicacionFisica.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -334,7 +353,7 @@
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(275, 112);
-            this.txtDescripcion.TabIndex = 15;
+            this.txtDescripcion.TabIndex = 16;
             this.txtDescripcion.Text = "";
             this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -354,7 +373,7 @@
             0});
             this.nudCantidadVirtual.Name = "nudCantidadVirtual";
             this.nudCantidadVirtual.Size = new System.Drawing.Size(174, 21);
-            this.nudCantidadVirtual.TabIndex = 12;
+            this.nudCantidadVirtual.TabIndex = 13;
             this.nudCantidadVirtual.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCantidadVirtual.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -374,7 +393,7 @@
             0});
             this.nudCantidadReal.Name = "nudCantidadReal";
             this.nudCantidadReal.Size = new System.Drawing.Size(174, 21);
-            this.nudCantidadReal.TabIndex = 11;
+            this.nudCantidadReal.TabIndex = 12;
             this.nudCantidadReal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCantidadReal.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -522,6 +541,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
+            // cboContenidoBuscar
+            // 
+            this.cboContenidoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboContenidoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboContenidoBuscar.FormattingEnabled = true;
+            this.cboContenidoBuscar.Location = new System.Drawing.Point(484, 22);
+            this.cboContenidoBuscar.Name = "cboContenidoBuscar";
+            this.cboContenidoBuscar.Size = new System.Drawing.Size(121, 21);
+            this.cboContenidoBuscar.TabIndex = 7;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(418, 25);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(60, 13);
+            this.label16.TabIndex = 6;
+            this.label16.Text = "Contenido:";
+            // 
             // txtCodigoBuscar
             // 
             this.txtCodigoBuscar.Location = new System.Drawing.Point(62, 56);
@@ -640,44 +678,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(627, 448);
             this.tableLayoutPanel1.TabIndex = 10;
-            // 
-            // cboContenidoStock
-            // 
-            this.cboContenidoStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboContenidoStock.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboContenidoStock.FormattingEnabled = true;
-            this.cboContenidoStock.Location = new System.Drawing.Point(105, 138);
-            this.cboContenidoStock.Name = "cboContenidoStock";
-            this.cboContenidoStock.Size = new System.Drawing.Size(185, 21);
-            this.cboContenidoStock.TabIndex = 19;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(12, 141);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(60, 13);
-            this.label15.TabIndex = 20;
-            this.label15.Text = "Contenido:";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(418, 25);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(60, 13);
-            this.label16.TabIndex = 6;
-            this.label16.Text = "Contenido:";
-            // 
-            // cboContenidoBuscar
-            // 
-            this.cboContenidoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboContenidoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboContenidoBuscar.FormattingEnabled = true;
-            this.cboContenidoBuscar.Location = new System.Drawing.Point(484, 22);
-            this.cboContenidoBuscar.Name = "cboContenidoBuscar";
-            this.cboContenidoBuscar.Size = new System.Drawing.Size(121, 21);
-            this.cboContenidoBuscar.TabIndex = 7;
             // 
             // frmUbicacionStock
             // 

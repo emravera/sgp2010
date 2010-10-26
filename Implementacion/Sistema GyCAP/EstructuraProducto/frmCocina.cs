@@ -203,7 +203,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (cbColor.GetSelectedIndex() == -1) { datosCompletar += "* Color"; }
             if (cbTerminacion.GetSelectedIndex() == -1) { datosCompletar += "* "; }
             if (cbEstado.GetSelectedIndex() == -1) { datosCompletar += "* Estado"; }
-            if (nudCosto.Value == 0) { datosCompletar += "* Costo"; }
+            //if (nudCosto.Value == 0) { datosCompletar += "* Costo"; }
 
             if (datosCompletar == string.Empty)
             {
@@ -518,6 +518,11 @@ namespace GyCAP.UI.EstructuraProducto
             dgvListaCocina.Columns["MCA_CODIGO"].DataPropertyName = "MCA_CODIGO";
             dgvListaCocina.Columns["COC_ESTADO"].DataPropertyName = "COC_ACTIVO";
             dgvListaCocina.Columns["COC_COSTO"].DataPropertyName = "COC_COSTO";
+            dgvListaCocina.Columns["COC_CODIGO_PRODUCTO"].MinimumWidth = 100;
+            dgvListaCocina.Columns["MOD_CODIGO"].MinimumWidth = 100;
+            dgvListaCocina.Columns["MCA_CODIGO"].MinimumWidth = 90;
+            dgvListaCocina.Columns["COC_ESTADO"].MinimumWidth = 90;
+            dgvListaCocina.Columns["COC_COSTO"].MinimumWidth = 80;
             
             //Dataviews
             dvMarcaBuscar = new DataView(dsCocina.MARCAS);
