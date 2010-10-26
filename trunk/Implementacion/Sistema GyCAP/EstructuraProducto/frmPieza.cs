@@ -676,6 +676,12 @@ namespace GyCAP.UI.EstructuraProducto
             dgvPiezas.Columns["PNO_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPiezas.Columns["PZA_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPiezas.Columns["PZA_COSTO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvPiezas.Columns["PZA_CODIGOPARTE"].MinimumWidth = 85;
+            dgvPiezas.Columns["PZA_NOMBRE"].MinimumWidth = 110;
+            dgvPiezas.Columns["TE_CODIGO"].MinimumWidth = 90;
+            dgvPiezas.Columns["PAR_CODIGO"].MinimumWidth = 85;
+            dgvPiezas.Columns["PNO_CODIGO"].MinimumWidth = 80;
+            dgvPiezas.Columns["PZA_COSTO"].MinimumWidth = 80;
            
             dgvDetallePieza.Columns.Add("MP_NOMBRE", "Nombre");
             dgvDetallePieza.Columns.Add("UMED_CODIGO", "Unidad Medida");
@@ -687,6 +693,10 @@ namespace GyCAP.UI.EstructuraProducto
             dgvDetallePieza.Columns["MPXP_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDetallePieza.Columns["COSTO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDetallePieza.Columns["COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDetallePieza.Columns["MP_NOMBRE"].MinimumWidth = 130;
+            dgvDetallePieza.Columns["UMED_CODIGO"].MinimumWidth = 110;
+            dgvDetallePieza.Columns["MPXP_CANTIDAD"].MinimumWidth = 110;
+            dgvDetallePieza.Columns["COSTO"].MinimumWidth = 105;
 
             dgvMPDisponibles.Columns.Add("MP_NOMBRE", "Nombre");
             dgvMPDisponibles.Columns.Add("UMED_CODIGO", "Unidad Medida");
