@@ -295,11 +295,11 @@ namespace GyCAP.DAL
                 //Elimino el detalle del plan mensual
                 string sql = "DELETE FROM DETALLE_PLANES_MENSUALES WHERE pmes_codigo = @p0";
                 object[] valorParametros = { codigoPlan };
-                DB.executeNonQuery(sql, valorParametros, null);
+                DB.executeNonQuery(sql, valorParametros, transaccion);
 
                 //Elimino la demanda
                 sql = "DELETE FROM PLANES_MENSUALES WHERE pmes_codigo = @p0";
-                DB.executeNonQuery(sql, valorParametros, null);
+                DB.executeNonQuery(sql, valorParametros, transaccion);
 
 
                 transaccion.Commit();

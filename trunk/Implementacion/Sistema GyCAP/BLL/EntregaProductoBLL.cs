@@ -39,6 +39,12 @@ namespace GyCAP.BLL
         {
             DAL.EntregaProductoDAL.GuardarEntregaModificada(entrega, dsEntregaProducto);
         }
+        //Metodo que elimina la entrega de la BD
+        public static void EliminarEntrega(int codigoEntrega)
+        {
+            DAL.EntregaProductoDAL.EliminarEntrega(codigoEntrega);
+        }
+
 
     }
 }

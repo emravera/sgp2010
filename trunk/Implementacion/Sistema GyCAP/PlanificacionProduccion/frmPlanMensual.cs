@@ -953,77 +953,77 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Selecciono el codigo de la demanda anual
             int codigo = Convert.ToInt32(dvListaPlanes[dgvLista.SelectedRows[0].Index]["pmes_codigo"]);
 
-                int codigoPlanAnual = Convert.ToInt32(dsPlanMensual.PLANES_MENSUALES.FindByPMES_CODIGO(codigo).PAN_CODIGO);
-                int anio = Convert.ToInt32(dsPlanMensual.PLANES_ANUALES.FindByPAN_CODIGO(codigoPlanAnual).PAN_ANIO);
+            int codigoPlanAnual = Convert.ToInt32(dsPlanMensual.PLANES_MENSUALES.FindByPMES_CODIGO(codigo).PAN_CODIGO);
+            int anio = Convert.ToInt32(dsPlanMensual.PLANES_ANUALES.FindByPAN_CODIGO(codigoPlanAnual).PAN_ANIO);
 
-                cbPlanAnual.SetSelectedValue(Convert.ToInt32(dsPlanMensual.PLANES_MENSUALES.FindByPMES_CODIGO(codigo).PAN_CODIGO));
+            cbPlanAnual.SetSelectedValue(Convert.ToInt32(dsPlanMensual.PLANES_MENSUALES.FindByPMES_CODIGO(codigo).PAN_CODIGO));
 
-                string mes = dsPlanMensual.PLANES_MENSUALES.FindByPMES_CODIGO(codigo).PMES_MES.ToString();
+            string mes = dsPlanMensual.PLANES_MENSUALES.FindByPMES_CODIGO(codigo).PMES_MES.ToString();
 
-                //Metodo que me busca el valuemember de un mes
-                string[] Meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
-                int cont = 0;
-                foreach (string l in Meses)
+            //Metodo que me busca el valuemember de un mes
+            string[] Meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
+            int cont = 0;
+            foreach (string l in Meses)
+            {
+                if (mes == Meses[cont]) break;
+                cont++;
+            }
+
+            cbMesDatos.SetSelectedIndex(cont);
+            
+            //Cargo lo que corresponde a los PEDIDOS
+           if (cbPlanAnual.SelectedIndex != -1 && cbMesDatos.SelectedIndex != -1)
+            {
+                cont += 1;
+
+                //Verifico si existen pedidos para ese mes
+                DateTime fechaPedidos = Convert.ToDateTime("01/" + cont.ToString() + "/" + anio.ToString());
+
+                //Busco los pedidos para esa fecha
+                BLL.PedidoBLL.ObtenerPedido(fechaPedidos, dsPlanMensual);
+
+                if (dsPlanMensual.PEDIDOS.Rows.Count == 0)
                 {
-                    if (mes == Meses[cont]) break;
-                    cont++;
+                    dgvPedidos.Visible = false;
+                    lblMensaje.Text = "No se encontraron pedidos";
+                    btnVerDetalle.Enabled = false;
                 }
-
-                cbMesDatos.SetSelectedIndex(cont);
-                
-                //Cargo lo que corresponde a los PEDIDOS
-               if (cbPlanAnual.SelectedIndex != -1 && cbMesDatos.SelectedIndex != -1)
+                else
                 {
-                    cont += 1;
-
-                    //Verifico si existen pedidos para ese mes
-                    DateTime fechaPedidos = Convert.ToDateTime("01/" + cont.ToString() + "/" + anio.ToString());
-
-                    //Busco los pedidos para esa fecha
-                    BLL.PedidoBLL.ObtenerPedido(fechaPedidos, dsPlanMensual);
-
-                    if (dsPlanMensual.PEDIDOS.Rows.Count == 0)
-                    {
-                        dgvPedidos.Visible = false;
-                        lblMensaje.Text = "No se encontraron pedidos";
-                        btnVerDetalle.Enabled = false;
-                    }
-                    else
-                    {
-                        dgvPedidos.Visible = true;
-                        lblMensaje.Text = string.Empty;
-                        btnVerDetalle.Enabled = true;
-                    }
+                    dgvPedidos.Visible = true;
+                    lblMensaje.Text = string.Empty;
+                    btnVerDetalle.Enabled = true;
                 }
+            }
 
-                //Pongo en 0 los null de los pedidos
-               foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in dsPlanMensual.DETALLE_PLANES_MENSUALES.Rows)
+            //Pongo en 0 los null de los pedidos
+           foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in dsPlanMensual.DETALLE_PLANES_MENSUALES.Rows)
+           {
+               try
                {
-                   try
-                   {
-                       decimal? pedido = row.DPED_CODIGO;
-                   }
-                   catch(Exception)
-                   {
-                       row.BeginEdit();
-                       row.DPED_CODIGO = 0;
-                       row.EndEdit();
-                       row.AcceptChanges();
-                   }
+                   decimal? pedido = row.DPED_CODIGO;
                }
-                //Seteo la interface al estado modificar
-                SetInterface(estadoUI.modificar);
+               catch(Exception)
+               {
+                   row.BeginEdit();
+                   row.DPED_CODIGO = 0;
+                   row.EndEdit();
+                   row.AcceptChanges();
+               }
+           }
+            //Seteo la interface al estado modificar
+            SetInterface(estadoUI.modificar);
 
-                //Datos calculados
-                //Cargo el valor que debe planificar para ese mes
-                int cantidad = BLL.PlanAnualBLL.ObtenerTodos(anio, mes);
-                txtCantAPlanificar.Text = cantidad.ToString();
-                txtCantPlanificada.Text = BLL.PlanMensualBLL.CalcularTotal(anio, mes).ToString();
-                cantidadPlanificada = Convert.ToInt32(txtCantPlanificada.Text) + cantidadPlanificada;
+            //Datos calculados
+            //Cargo el valor que debe planificar para ese mes
+            int cantidad = BLL.PlanAnualBLL.ObtenerTodos(anio, mes);
+            txtCantAPlanificar.Text = cantidad.ToString();
+            txtCantPlanificada.Text = BLL.PlanMensualBLL.CalcularTotal(anio, mes).ToString();
+            cantidadPlanificada = Convert.ToInt32(txtCantPlanificada.Text) + cantidadPlanificada;
 
-                int restaPlanificar = cantidad - Convert.ToInt32(txtCantPlanificada.Text);
-                if (restaPlanificar > 0) txtRestaPlanificar.Text = restaPlanificar.ToString();
-                else txtRestaPlanificar.Text = Convert.ToString(0);
+            int restaPlanificar = cantidad - Convert.ToInt32(txtCantPlanificada.Text);
+            if (restaPlanificar > 0) txtRestaPlanificar.Text = restaPlanificar.ToString();
+            else txtRestaPlanificar.Text = Convert.ToString(0);
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -1074,7 +1074,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Designación de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debe seleccionar un Plan Mensual de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
 

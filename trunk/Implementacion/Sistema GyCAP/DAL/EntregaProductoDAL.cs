@@ -55,7 +55,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerDetalleEntrega(int idEntrega, DataTable dtEntregas)
         {
-            string sql = @"SELECT dent_codigo, entrega_codigo,coc_codigo, dped_codigo, dent_cantidad
+            string sql = @"SELECT dent_codigo, entrega_codigo,dped_codigo, dent_cantidad, dent_contenido
                         FROM DETALLE_ENTREGA_PRODUCTO WHERE entrega_codigo=@p0";
 
 
@@ -79,7 +79,7 @@ namespace GyCAP.DAL
                 //Guardamos la cabecera
                 //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
                 string sql = "INSERT INTO [ENTREGA_PRODUCTO] ([entrega_fecha], [cli_codigo], [e_codigo]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
-                object[] valorParametros = { entrega.Fecha, entrega.Cliente, entrega.Empleado };
+                object[] valorParametros = { entrega.Fecha, entrega.Cliente.Codigo, entrega.Empleado.Codigo };
                 entrega.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, transaccion));
 
                 //Inserto el Detalle
@@ -96,7 +96,7 @@ namespace GyCAP.DAL
                     }
                     else
                     {
-                        sql = "INSERT INTO [DETALLE_ENTREGA_PRODUCTO] ([entrega_codigo], [dent_cantidad], [dent_contenido]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+                        sql = "INSERT INTO [DETALLE_ENTREGA_PRODUCTO] ([entrega_codigo], [dent_cantidad], [dent_contenido]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
                         object[] valorParam = { entrega.Codigo, row.DENT_CANTIDAD, row.DENT_CONTENIDO };
                         row.BeginEdit();
                         row.DENT_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
@@ -125,12 +125,14 @@ namespace GyCAP.DAL
             try
             {
                 transaccion = DB.IniciarTransaccion();
+                
+                string sql=string.Empty;
 
                 //Guardamos la cabecera
                 //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
-                string sql = "INSERT INTO [ENTREGA_PRODUCTO] ([entrega_fecha], [cli_codigo], [e_codigo]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
-                object[] valorParametros = { entrega.Fecha, entrega.Cliente, entrega.Empleado };
-                entrega.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, transaccion));
+                //string sql = "INSERT INTO [ENTREGA_PRODUCTO] ([entrega_fecha], [cli_codigo], [e_codigo]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
+                //object[] valorParametros = { entrega.Fecha, entrega.Cliente.Codigo, entrega.Empleado.Codigo };
+                //entrega.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, transaccion));
 
                 //Inserto al Detalle las filas agregadas
                 foreach (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow row in (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow[])dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO.Select(null, null, System.Data.DataViewRowState.Added))
@@ -146,7 +148,7 @@ namespace GyCAP.DAL
                     }
                     else
                     {
-                        sql = "INSERT INTO [DETALLE_ENTREGA_PRODUCTO] ([entrega_codigo], [dent_cantidad], [dent_contenido]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+                        sql = "INSERT INTO [DETALLE_ENTREGA_PRODUCTO] ([entrega_codigo], [dent_cantidad], [dent_contenido]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
                         object[] valorParam = { entrega.Codigo, row.DENT_CANTIDAD, row.DENT_CONTENIDO };
                         row.BeginEdit();
                         row.DENT_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
@@ -202,7 +204,37 @@ namespace GyCAP.DAL
                 transaccion.Rollback();
                 throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
             }
+        }
+
+        //METODO PARA ELIMINAR DATOS DE LA BASE DE DATOS
+        public static void EliminarEntrega(int codigoEntrega)
+        {
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                //Iniciamos la transaccion
+                transaccion = DB.IniciarTransaccion();
+
+                //Elimino el detalle del plan mensual
+                string sql = "DELETE FROM DETALLE_ENTREGA_PRODUCTO WHERE entrega_codigo = @p0";
+                object[] valorParametros = { codigoEntrega };
+                DB.executeNonQuery(sql, valorParametros, transaccion);
+
+                //Elimino la demanda
+                sql = "DELETE FROM ENTREGA_PRODUCTO WHERE entrega_codigo = @p0";
+                DB.executeNonQuery(sql, valorParametros, transaccion);
+
+                transaccion.Commit();
+                DB.FinalizarTransaccion();
+            }
+            catch (SqlException)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException();
+            }
 
         }
+        
     }
 }
