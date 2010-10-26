@@ -4020,10 +4020,8 @@ namespace GyCAP.Data {
                 this.columnDENT_CODIGO.AutoIncrementSeed = -1;
                 this.columnDENT_CODIGO.AutoIncrementStep = -1;
                 this.columnDENT_CODIGO.AllowDBNull = false;
-                this.columnDENT_CODIGO.ReadOnly = true;
                 this.columnDENT_CODIGO.Unique = true;
                 this.columnENTREGA_CODIGO.AllowDBNull = false;
-                this.columnDPED_CODIGO.AllowDBNull = false;
                 this.columnDENT_CANTIDAD.AllowDBNull = false;
             }
             
@@ -5727,7 +5725,13 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public decimal DPED_CODIGO {
                 get {
-                    return ((decimal)(this[this.tableDETALLE_ENTREGA_PRODUCTO.DPED_CODIGOColumn]));
+                    try {
+                        return ((decimal)(this[this.tableDETALLE_ENTREGA_PRODUCTO.DPED_CODIGOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DPED_CODIGO\' de la tabla \'DETALLE_ENTREGA_PRODUCTO\' es DB" +
+                                "Null.", e);
+                    }
                 }
                 set {
                     this[this.tableDETALLE_ENTREGA_PRODUCTO.DPED_CODIGOColumn] = value;
@@ -5778,6 +5782,16 @@ namespace GyCAP.Data {
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_DETALLE_ENTREGA_PRODUCTO_PEDIDO"]);
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDPED_CODIGONull() {
+                return this.IsNull(this.tableDETALLE_ENTREGA_PRODUCTO.DPED_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDPED_CODIGONull() {
+                this[this.tableDETALLE_ENTREGA_PRODUCTO.DPED_CODIGOColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10568,10 +10582,11 @@ SELECT UMED_CODIGO, TUMED_CODIGO, UMED_NOMBRE, UMED_ABREVIATURA FROM UNIDADES_ME
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[DETALLE_ENTREGA_PRODUCTO] WHERE (([DENT_CODIGO] = @Original_DENT_CODIGO) AND ([ENTREGA_CODIGO] = @Original_ENTREGA_CODIGO) AND ([DPED_CODIGO] = @Original_DPED_CODIGO) AND ([DENT_CANTIDAD] = @Original_DENT_CANTIDAD) AND ((@IsNull_DENT_CONTENIDO = 1 AND [DENT_CONTENIDO] IS NULL) OR ([DENT_CONTENIDO] = @Original_DENT_CONTENIDO)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[DETALLE_ENTREGA_PRODUCTO] WHERE (([DENT_CODIGO] = @Original_DENT_CODIGO) AND ([ENTREGA_CODIGO] = @Original_ENTREGA_CODIGO) AND ((@IsNull_DPED_CODIGO = 1 AND [DPED_CODIGO] IS NULL) OR ([DPED_CODIGO] = @Original_DPED_CODIGO)) AND ([DENT_CANTIDAD] = @Original_DENT_CANTIDAD) AND ((@IsNull_DENT_CONTENIDO = 1 AND [DENT_CONTENIDO] IS NULL) OR ([DENT_CONTENIDO] = @Original_DENT_CONTENIDO)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DENT_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "DENT_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ENTREGA_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "ENTREGA_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPED_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DENT_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DENT_CANTIDAD", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DENT_CONTENIDO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DENT_CONTENIDO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -10587,7 +10602,7 @@ SELECT DENT_CODIGO, ENTREGA_CODIGO, DPED_CODIGO, DENT_CANTIDAD, DENT_CONTENIDO F
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DENT_CONTENIDO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DENT_CONTENIDO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[DETALLE_ENTREGA_PRODUCTO] SET [ENTREGA_CODIGO] = @ENTREGA_CODIGO, [DPED_CODIGO] = @DPED_CODIGO, [DENT_CANTIDAD] = @DENT_CANTIDAD, [DENT_CONTENIDO] = @DENT_CONTENIDO WHERE (([DENT_CODIGO] = @Original_DENT_CODIGO) AND ([ENTREGA_CODIGO] = @Original_ENTREGA_CODIGO) AND ([DPED_CODIGO] = @Original_DPED_CODIGO) AND ([DENT_CANTIDAD] = @Original_DENT_CANTIDAD) AND ((@IsNull_DENT_CONTENIDO = 1 AND [DENT_CONTENIDO] IS NULL) OR ([DENT_CONTENIDO] = @Original_DENT_CONTENIDO)));
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[DETALLE_ENTREGA_PRODUCTO] SET [ENTREGA_CODIGO] = @ENTREGA_CODIGO, [DPED_CODIGO] = @DPED_CODIGO, [DENT_CANTIDAD] = @DENT_CANTIDAD, [DENT_CONTENIDO] = @DENT_CONTENIDO WHERE (([DENT_CODIGO] = @Original_DENT_CODIGO) AND ([ENTREGA_CODIGO] = @Original_ENTREGA_CODIGO) AND ((@IsNull_DPED_CODIGO = 1 AND [DPED_CODIGO] IS NULL) OR ([DPED_CODIGO] = @Original_DPED_CODIGO)) AND ([DENT_CANTIDAD] = @Original_DENT_CANTIDAD) AND ((@IsNull_DENT_CONTENIDO = 1 AND [DENT_CONTENIDO] IS NULL) OR ([DENT_CONTENIDO] = @Original_DENT_CONTENIDO)));
 SELECT DENT_CODIGO, ENTREGA_CODIGO, DPED_CODIGO, DENT_CANTIDAD, DENT_CONTENIDO FROM DETALLE_ENTREGA_PRODUCTO WHERE (DENT_CODIGO = @DENT_CODIGO)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ENTREGA_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "ENTREGA_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -10596,6 +10611,7 @@ SELECT DENT_CODIGO, ENTREGA_CODIGO, DPED_CODIGO, DENT_CANTIDAD, DENT_CONTENIDO F
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DENT_CONTENIDO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DENT_CONTENIDO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DENT_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "DENT_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ENTREGA_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "ENTREGA_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DPED_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DPED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DPED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DENT_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DENT_CANTIDAD", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DENT_CONTENIDO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DENT_CONTENIDO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -10669,18 +10685,25 @@ SELECT DENT_CODIGO, ENTREGA_CODIGO, DPED_CODIGO, DENT_CANTIDAD, DENT_CONTENIDO F
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_DENT_CODIGO, decimal Original_ENTREGA_CODIGO, decimal Original_DPED_CODIGO, decimal Original_DENT_CANTIDAD, global::System.Nullable<decimal> Original_DENT_CONTENIDO) {
+        public virtual int Delete(decimal Original_DENT_CODIGO, decimal Original_ENTREGA_CODIGO, global::System.Nullable<decimal> Original_DPED_CODIGO, decimal Original_DENT_CANTIDAD, global::System.Nullable<decimal> Original_DENT_CONTENIDO) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_DENT_CODIGO));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_ENTREGA_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_DPED_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[3].Value = ((decimal)(Original_DENT_CANTIDAD));
-            if ((Original_DENT_CONTENIDO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((decimal)(Original_DENT_CONTENIDO.Value));
+            if ((Original_DPED_CODIGO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((decimal)(Original_DPED_CODIGO.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((decimal)(Original_DENT_CANTIDAD));
+            if ((Original_DENT_CONTENIDO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((decimal)(Original_DENT_CONTENIDO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -10701,9 +10724,14 @@ SELECT DENT_CODIGO, ENTREGA_CODIGO, DPED_CODIGO, DENT_CANTIDAD, DENT_CONTENIDO F
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(decimal ENTREGA_CODIGO, decimal DPED_CODIGO, decimal DENT_CANTIDAD, global::System.Nullable<decimal> DENT_CONTENIDO) {
+        public virtual int Insert(decimal ENTREGA_CODIGO, global::System.Nullable<decimal> DPED_CODIGO, decimal DENT_CANTIDAD, global::System.Nullable<decimal> DENT_CONTENIDO) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ENTREGA_CODIGO));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(DPED_CODIGO));
+            if ((DPED_CODIGO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(DPED_CODIGO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
             this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(DENT_CANTIDAD));
             if ((DENT_CONTENIDO.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(DENT_CONTENIDO.Value));
@@ -10730,9 +10758,14 @@ SELECT DENT_CODIGO, ENTREGA_CODIGO, DPED_CODIGO, DENT_CANTIDAD, DENT_CONTENIDO F
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal ENTREGA_CODIGO, decimal DPED_CODIGO, decimal DENT_CANTIDAD, global::System.Nullable<decimal> DENT_CONTENIDO, decimal Original_DENT_CODIGO, decimal Original_ENTREGA_CODIGO, decimal Original_DPED_CODIGO, decimal Original_DENT_CANTIDAD, global::System.Nullable<decimal> Original_DENT_CONTENIDO, decimal DENT_CODIGO) {
+        public virtual int Update(decimal ENTREGA_CODIGO, global::System.Nullable<decimal> DPED_CODIGO, decimal DENT_CANTIDAD, global::System.Nullable<decimal> DENT_CONTENIDO, decimal Original_DENT_CODIGO, decimal Original_ENTREGA_CODIGO, global::System.Nullable<decimal> Original_DPED_CODIGO, decimal Original_DENT_CANTIDAD, global::System.Nullable<decimal> Original_DENT_CONTENIDO, decimal DENT_CODIGO) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(ENTREGA_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(DPED_CODIGO));
+            if ((DPED_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(DPED_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
             this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(DENT_CANTIDAD));
             if ((DENT_CONTENIDO.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(DENT_CONTENIDO.Value));
@@ -10742,17 +10775,24 @@ SELECT DENT_CODIGO, ENTREGA_CODIGO, DPED_CODIGO, DENT_CANTIDAD, DENT_CONTENIDO F
             }
             this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(Original_DENT_CODIGO));
             this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(Original_ENTREGA_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_DPED_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(Original_DENT_CANTIDAD));
-            if ((Original_DENT_CONTENIDO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(Original_DENT_CONTENIDO.Value));
+            if ((Original_DPED_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(Original_DPED_CODIGO.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(DENT_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_DENT_CANTIDAD));
+            if ((Original_DENT_CONTENIDO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(Original_DENT_CONTENIDO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(DENT_CODIGO));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -10772,7 +10812,7 @@ SELECT DENT_CODIGO, ENTREGA_CODIGO, DPED_CODIGO, DENT_CANTIDAD, DENT_CONTENIDO F
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal ENTREGA_CODIGO, decimal DPED_CODIGO, decimal DENT_CANTIDAD, global::System.Nullable<decimal> DENT_CONTENIDO, decimal Original_DENT_CODIGO, decimal Original_ENTREGA_CODIGO, decimal Original_DPED_CODIGO, decimal Original_DENT_CANTIDAD, global::System.Nullable<decimal> Original_DENT_CONTENIDO) {
+        public virtual int Update(decimal ENTREGA_CODIGO, global::System.Nullable<decimal> DPED_CODIGO, decimal DENT_CANTIDAD, global::System.Nullable<decimal> DENT_CONTENIDO, decimal Original_DENT_CODIGO, decimal Original_ENTREGA_CODIGO, global::System.Nullable<decimal> Original_DPED_CODIGO, decimal Original_DENT_CANTIDAD, global::System.Nullable<decimal> Original_DENT_CONTENIDO) {
             return this.Update(ENTREGA_CODIGO, DPED_CODIGO, DENT_CANTIDAD, DENT_CONTENIDO, Original_DENT_CODIGO, Original_ENTREGA_CODIGO, Original_DPED_CODIGO, Original_DENT_CANTIDAD, Original_DENT_CONTENIDO, Original_DENT_CODIGO);
         }
     }
