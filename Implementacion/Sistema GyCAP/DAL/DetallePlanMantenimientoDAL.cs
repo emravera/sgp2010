@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace GyCAP.DAL
 {
@@ -44,6 +45,34 @@ namespace GyCAP.DAL
             string sql = "DELETE FROM DETALLE_PLANES_MANTENIMIENTO WHERE PMAN_NUMERO = @p0";
             object[] valorParametros = { codigoPlan };
             DB.executeNonQuery(sql, valorParametros, transaccion);
+        }
+
+        public static void ObtenerDetallePlanMantenimiento(Data.dsRegistrarMantenimiento ds)
+        {
+            string sql = @"SELECT DPMAN_CODIGO, PMAN_NUMERO, EDMAN_CODIGO, MAN_CODIGO, UMED_CODIGO
+                          , DPMAN_FRECUENCIA, DPMAN_DESCRIPCION
+                          FROM DETALLE_PLANES_MANTENIMIENTO WHERE PMAN_NUMERO = @p0";
+
+            object[] valorParametros; ;
+
+            foreach (Data.dsRegistrarMantenimiento.PLANES_MANTENIMIENTORow rowPlan in ds.PLANES_MANTENIMIENTO)
+            {
+                valorParametros = new object[] { rowPlan.PMAN_NUMERO };
+                DB.FillDataTable(ds.DETALLE_PLANES_MANTENIMIENTO, sql, valorParametros);
+            }
+        }
+
+        public static void ObtenerDetallePlanMantenimiento(DataTable dtDetallePlanMantenimiento ,long PMAN_NUMERO)
+        {
+            string sql = @"SELECT DPMAN_CODIGO, PMAN_NUMERO, EDMAN_CODIGO, MAN_CODIGO, UMED_CODIGO
+                          , DPMAN_FRECUENCIA, DPMAN_DESCRIPCION
+                          FROM DETALLE_PLANES_MANTENIMIENTO WHERE PMAN_NUMERO = @p0";
+
+            object[] valorParametros; ;
+
+            valorParametros = new object[] { PMAN_NUMERO };
+            DB.FillDataTable(dtDetallePlanMantenimiento, sql, valorParametros);
+
         }
     }
 }

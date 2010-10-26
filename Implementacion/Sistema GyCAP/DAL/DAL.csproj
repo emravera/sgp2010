@@ -112,7 +112,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProveedorDAL.cs" />
     <Compile Include="ProvinciaDAL.cs" />
+    <Compile Include="RegistrosMantenimientoDAL.cs" />
     <Compile Include="RepuestoDAL.cs" />
+    <Compile Include="RepuestosRegistroMantenimientoDAL.cs" />
     <Compile Include="SectorDAL.cs" />
     <Compile Include="StockCocinaDAL.cs" />
     <Compile Include="StockConjuntoDAL.cs" />

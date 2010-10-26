@@ -76,7 +76,11 @@
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+<<<<<<< .mine
+            this.toolRegistrarMantenimiento = new System.Windows.Forms.ToolStripButton();
+=======
             this.btnEntregaProducto = new System.Windows.Forms.ToolStripButton();
+>>>>>>> .r544
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -445,8 +449,13 @@
             this.t9,
             this.btnControlPlan,
             this.btnInventarioABC,
+<<<<<<< .mine
+            this.tsbPlanMantenimeinto,
+            this.toolRegistrarMantenimiento});
+=======
             this.tsbPlanMantenimeinto,
             this.btnEntregaProducto});
+>>>>>>> .r544
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(792, 36);
@@ -509,6 +518,19 @@
             this.lblEstado.Size = new System.Drawing.Size(38, 17);
             this.lblEstado.Text = "Status";
             // 
+<<<<<<< .mine
+            // toolRegistrarMantenimiento
+            // 
+            this.toolRegistrarMantenimiento.Image = ((System.Drawing.Image)(resources.GetObject("toolRegistrarMantenimiento.Image")));
+            this.toolRegistrarMantenimiento.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolRegistrarMantenimiento.Name = "toolRegistrarMantenimiento";
+            this.toolRegistrarMantenimiento.Size = new System.Drawing.Size(128, 33);
+            this.toolRegistrarMantenimiento.Text = "Registrar Mantenimiento";
+            this.toolRegistrarMantenimiento.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolRegistrarMantenimiento.ToolTipText = "Reg Mantenimiento";
+            this.toolRegistrarMantenimiento.Click += new System.EventHandler(this.toolRegistrarMantenimiento_Click);
+            // 
+=======
             // btnEntregaProducto
             // 
             this.btnEntregaProducto.Image = ((System.Drawing.Image)(resources.GetObject("btnEntregaProducto.Image")));
@@ -519,6 +541,7 @@
             this.btnEntregaProducto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEntregaProducto.Click += new System.EventHandler(this.btnEntregaProducto_Click);
             // 
+>>>>>>> .r544
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -593,7 +616,11 @@
         private System.Windows.Forms.ToolStripButton btnInventarioABC;
         private System.Windows.Forms.ToolStripMenuItem menuItemPF;
         private System.Windows.Forms.ToolStripButton tsbPlanMantenimeinto;
+<<<<<<< .mine
+        private System.Windows.Forms.ToolStripButton toolRegistrarMantenimiento;
+=======
         private System.Windows.Forms.ToolStripButton btnEntregaProducto;
+>>>>>>> .r544
     }
 }
 

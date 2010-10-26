@@ -133,9 +133,9 @@ namespace GyCAP.DAL
 
         public static void ObtenerRepuesto(DataTable dtRepuesto)
         {
-            string sql = @"SELECT TREP_CODIGO, REP_NOMBRE, REP_DESCRIPCION
-                               REP_CANTIDADSTOCK, REP_COSTO 
-                              FROM REPUESTOS";
+            string sql = @"SELECT REP_CODIGO, TREP_CODIGO, REP_NOMBRE, REP_DESCRIPCION,
+                           REP_CANTIDADSTOCK, REP_COSTO 
+                           FROM REPUESTOS";
             try
             {
                 //Se llena el Dataset
