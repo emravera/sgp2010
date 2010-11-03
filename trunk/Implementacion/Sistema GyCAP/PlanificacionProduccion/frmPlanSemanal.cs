@@ -1385,5 +1385,17 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
         }
 
+        private void numUnidades_Enter(object sender, EventArgs e)
+        {
+            numUnidades.Select(0, 10);
+        }
+
+        private void numPorcentaje_Enter(object sender, EventArgs e)
+        {
+            numPorcentaje.Select(0, 10);
+        }
+
+       
+
     }
 }

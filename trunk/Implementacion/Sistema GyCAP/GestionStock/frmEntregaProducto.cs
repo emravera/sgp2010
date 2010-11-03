@@ -895,7 +895,7 @@ namespace GyCAP.UI.GestionStock
         private void btnEntregar_Click(object sender, EventArgs e)
         {
 
-            if (dgvDatosEntrega.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            if (dgvDetallePedido.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 if (cbUbicacionesStock.GetSelectedIndex() == -1)
                 {

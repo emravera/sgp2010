@@ -868,6 +868,8 @@
             this.ClientSize = new System.Drawing.Size(738, 463);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmEntregaProducto";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Entrega Producto";
             this.gbDetalleGrilla.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatosEntrega)).EndInit();

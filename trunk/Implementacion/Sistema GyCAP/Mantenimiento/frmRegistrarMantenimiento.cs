@@ -200,17 +200,19 @@ namespace GyCAP.UI.Mantenimiento
 
             //Agregamos las columnas y sus propiedades
             dgvLista.Columns.Add("RMAN_CODIGO", "Código");
-            dgvLista.Columns.Add("TMAN_CODIGO", "Descripción");
-            dgvLista.Columns.Add("PMAN_FECHA", "Fecha");
-            dgvLista.Columns.Add("EPMAN_CODIGO", "Estado");
+            dgvLista.Columns.Add("TMAN_CODIGO", "Tipo");
+            dgvLista.Columns.Add("RMAN_FECHA_REALIZACION", "Fecha");
+            dgvLista.Columns.Add("MAN_CODIGO", "Mantenimiento");
+            dgvLista.Columns.Add("E_CODIGO", "Empleado");
             dgvLista.Columns.Add("PMAN_OBSERVACIONES", "Observaciones");
             dgvLista.Columns["RMAN_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["RMAN_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvLista.Columns["TMAN_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["PMAN_FECHA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["PMAN_FECHA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvLista.Columns["PMAN_FECHA"].MinimumWidth = 110;
-            dgvLista.Columns["EPMAN_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["MAN_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["RMAN_FECHA_REALIZACION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["RMAN_FECHA_REALIZACION"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //dgvLista.Columns["RMAN_FECHA_REALIZACION"].MinimumWidth = 110;
+            dgvLista.Columns["E_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["PMAN_OBSERVACIONES"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             //Alineacion de los numeros y las fechas en la grilla
             dgvLista.Columns["RMAN_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -219,8 +221,9 @@ namespace GyCAP.UI.Mantenimiento
             //Indicamos de dónde van a sacar los datos cada columna
             dgvLista.Columns["RMAN_CODIGO"].DataPropertyName = "RMAN_CODIGO";
             dgvLista.Columns["TMAN_CODIGO"].DataPropertyName = "TMAN_CODIGO";
-            dgvLista.Columns["PMAN_FECHA"].DataPropertyName = "PMAN_FECHA";
-            dgvLista.Columns["EPMAN_CODIGO"].DataPropertyName = "EPMAN_CODIGO";
+            dgvLista.Columns["RMAN_FECHA_REALIZACION"].DataPropertyName = "RMAN_FECHA_REALIZACION";
+            dgvLista.Columns["MAN_CODIGO"].DataPropertyName = "MAN_CODIGO";
+            dgvLista.Columns["E_CODIGO"].DataPropertyName = "E_CODIGO";
             dgvLista.Columns["PMAN_OBSERVACIONES"].DataPropertyName = "PMAN_OBSERVACIONES";
 
 
@@ -338,9 +341,10 @@ namespace GyCAP.UI.Mantenimiento
             //dvEmpleadoBuscar = new DataView(dsRegistrarMantenimiento.EMPLEADOS);
 
             //cboEmpleadoBuscar.SetDatos(dvEmpleadoBuscar, "E_CODIGO", "E_APELLIDO, E_NOMBRE", "--TODOS--", true);
-            cboEmpleadoBuscar.SetDatos(dvEmpleadoBuscar, "E_CODIGO", "E_APELLIDO", "--TODOS--", true);
+            string[] nombres = { "E_APELLIDO" , "E_NOMBRE"};
+            cboEmpleadoBuscar.SetDatos(dvEmpleadoBuscar, "E_CODIGO", nombres, ", ", "--TODOS--", true);
             //cboEmpleado.SetDatos(dvEmpleado, "E_CODIGO", "E_APELLIDO, E_NOMBRE", "Seleccione...", true);
-            cboEmpleado.SetDatos(dvEmpleado, "E_CODIGO", "E_APELLIDO", "Seleccione...", true);
+            cboEmpleado.SetDatos(dvEmpleado, "E_CODIGO", nombres, ", ", "Seleccione...", true);
             cboTipoMantenimientoBuscar.SetDatos(dvTipoMantenimientoBuscar, "TMAN_CODIGO", "TMAN_NOMBRE", "--TODOS--", true);
             cboMaquinaBuscar.SetDatos(dvMaquinaBuscar, "MAQ_CODIGO", "MAQ_NOMBRE", "--TODOS--", true);
             cboMaquina.SetDatos(dvMaquina, "MAQ_CODIGO", "MAQ_NOMBRE", "Seleccione...", false);
@@ -412,15 +416,17 @@ namespace GyCAP.UI.Mantenimiento
             //txtNumero.Text = dsRegistrarMantenimiento.PLANES_MANTENIMIENTO.FindByPMAN_NUMERO(codigo).RMAN_CODIGO.ToString();
             if (tipo == 1)
             {//Preventivo
-
-
+                cboTipoMantenimiento.SetSelectedValue(1); 
+                cboMantenimiento.SetSelectedValue(Convert.ToInt32(dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOS.FindByRMAN_CODIGO(codigo).MAN_CODIGO));  
                 //cboPlanes.SetSelectedValue(Convert.ToInt32(dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOS.FindByRMAN_CODIGO(codigo).pman_CODIGO));
             }
             else 
             {//Correctivo
+                cboTipoMantenimiento.SetSelectedValue(2); 
                 cboMaquina.SetSelectedValue(Convert.ToInt32(dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOS.FindByRMAN_CODIGO(codigo).MAQ_CODIGO));
                 cboMantenimiento.SetSelectedValue(Convert.ToInt32(dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOS.FindByRMAN_CODIGO(codigo).MAN_CODIGO));  
             }
+            setearTipoMantenimiento();
             cboEmpleado.SetSelectedValue(Convert.ToInt32(dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOS.FindByRMAN_CODIGO(codigo).E_CODIGO));
             txtObservacion.Text = dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOS.FindByRMAN_CODIGO(codigo).RMAN_OBSERVACION;
             sfFechaRealizacion.SetFecha(dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOS.FindByRMAN_CODIGO(codigo).RMAN_FECHA_REALIZACION);
@@ -432,20 +438,28 @@ namespace GyCAP.UI.Mantenimiento
 
         private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.Value.ToString() != string.Empty)
+            if (e.Value != null && e.Value.ToString() != string.Empty)
             {
                 string nombre;
 
                 switch (dgvLista.Columns[e.ColumnIndex].Name)
                 {
-                    case "EPMAN_CODIGO":
-                        nombre = dsRegistrarMantenimiento.ESTADO_PLANES_MANTENIMIENTO.FindByEPMAN_CODIGO(Convert.ToInt64(e.Value.ToString())).EPMAN_NOMBRE;
+                    case "E_CODIGO":
+                        nombre = dsRegistrarMantenimiento.EMPLEADOS.FindByE_CODIGO(Convert.ToInt64(e.Value.ToString())).E_NOMBRE;
                         e.Value = nombre;
                         break;
                     case "TMAN_CODIGO":
                         nombre = dsRegistrarMantenimiento.TIPOS_MANTENIMIENTOS.FindByTMAN_CODIGO(Convert.ToInt64(e.Value.ToString())).TMAN_NOMBRE;
                         e.Value = nombre;
                         break;
+                    case "MAN_CODIGO":
+                        nombre = dsRegistrarMantenimiento.MANTENIMIENTOS.FindByMAN_CODIGO(Convert.ToInt64(e.Value.ToString())).MAN_DESCRIPCION;
+                        e.Value = nombre;
+                        break;
+                    //case "RMAN_FECHA_REALIZACION":
+                    //    nombre = DateTime.Parse(e.Value.ToString()).ToShortDateString();
+                    //    e.Value = nombre;
+                    //    break;
                     default:
                         break;
                 }
@@ -653,6 +667,7 @@ namespace GyCAP.UI.Mantenimiento
                         if (cboTipoMantenimiento.GetSelectedValueInt() == 1)
                         {
                             rowRegistro.DPMAN_CODIGO = decimal.Parse(dvDetallePlanMantenimiento[dgvDetallePlan.SelectedRows[0].Index]["DPMAN_CODIGO"].ToString());
+                            rowRegistro.MAN_CODIGO = long.Parse(dvDetallePlanMantenimiento[dgvDetallePlan.SelectedRows[0].Index]["MAN_CODIGO"].ToString());
                         }
                         else 
                         {

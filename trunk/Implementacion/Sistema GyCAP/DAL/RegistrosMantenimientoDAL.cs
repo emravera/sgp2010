@@ -26,15 +26,23 @@ namespace GyCAP.DAL
 
             //Así obtenemos el pedido nuevo del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOSRow rowRegistroMantenimiento = dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOSRow;
+            object maquina = DBNull.Value, mantenimiento = DBNull.Value, detalleP = DBNull.Value;
+            if (rowRegistroMantenimiento.TMAN_CODIGO == 1) { detalleP = rowRegistroMantenimiento.DPMAN_CODIGO; }
+            else
+            {
+                maquina = rowRegistroMantenimiento.MAQ_CODIGO;
+                mantenimiento = rowRegistroMantenimiento.MAN_CODIGO;
+            }
+            
             object[] valorParametros = { rowRegistroMantenimiento.TMAN_CODIGO, 
-                                         rowRegistroMantenimiento.MAN_CODIGO, 
-                                         rowRegistroMantenimiento.MAQ_CODIGO,
-                                         rowRegistroMantenimiento.DPMAN_CODIGO,
+                                         mantenimiento, 
+                                         maquina,
+                                         detalleP,
                                          rowRegistroMantenimiento.E_CODIGO,
                                          rowRegistroMantenimiento.RMAN_FECHA_REALIZACION,
                                          DB.GetFechaServidor(), 
                                          rowRegistroMantenimiento.RMAN_OBSERVACION, 
-                                         rowRegistroMantenimiento.CF_NUMERO };
+                                         DBNull.Value };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;

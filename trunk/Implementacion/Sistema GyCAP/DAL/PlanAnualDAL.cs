@@ -89,24 +89,27 @@ namespace GyCAP.DAL
 
                 //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
                 string sql = "INSERT INTO [PLANES_ANUALES] ([pan_anio], [pan_fechacreacion], [deman_codigo]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
-                object[] valorParametros = { planAnual.Anio, planAnual.FechaCreacion.ToShortDateString(), planAnual.Demanda.Codigo };
-                planAnual.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+                object[] valorParametros = { planAnual.Anio, planAnual.FechaCreacion.ToString("yyyyMMdd"), planAnual.Demanda.Codigo };
+                planAnual.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, transaccion));
 
                 //Inserto el Detalle de Pedido
                 foreach (Entidades.DetallePlanAnual det in detalle)
                 {
                     det.PlanAnual = planAnual;
-                    det.Codigo = DAL.DetallePlanAnualDAL.Insertar(det);
+                    det.Codigo = DAL.DetallePlanAnualDAL.Insertar(det, transaccion);
                 }
 
                 transaccion.Commit();
-                DB.FinalizarTransaccion();
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
                 transaccion.Rollback();
-                throw new Entidades.Excepciones.BaseDeDatosException();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
 
+            }
+            finally
+            {
+                DB.FinalizarTransaccion();
             }
             return detalle;
 

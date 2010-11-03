@@ -644,6 +644,8 @@
             this.ClientSize = new System.Drawing.Size(738, 492);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmControlPlanificacion";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Control Planificacion";
             this.tcPlanes.ResumeLayout(false);
             this.tpPlanSemanal.ResumeLayout(false);

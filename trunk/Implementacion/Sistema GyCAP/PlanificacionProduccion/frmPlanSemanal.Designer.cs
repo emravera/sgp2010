@@ -185,6 +185,7 @@
             this.numUnidades.Size = new System.Drawing.Size(120, 21);
             this.numUnidades.TabIndex = 7;
             this.numUnidades.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numUnidades.Enter += new System.EventHandler(this.numUnidades_Enter);
             // 
             // numPorcentaje
             // 
@@ -193,6 +194,7 @@
             this.numPorcentaje.Size = new System.Drawing.Size(120, 21);
             this.numPorcentaje.TabIndex = 8;
             this.numPorcentaje.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numPorcentaje.Enter += new System.EventHandler(this.numPorcentaje_Enter);
             // 
             // rbPorcentaje
             // 
@@ -214,7 +216,7 @@
             this.rbUnidades.Size = new System.Drawing.Size(103, 17);
             this.rbUnidades.TabIndex = 0;
             this.rbUnidades.TabStop = true;
-            this.rbUnidades.Text = "Unidades Fisicas";
+            this.rbUnidades.Text = "Unidades Físicas";
             this.rbUnidades.UseVisualStyleBackColor = true;
             this.rbUnidades.CheckedChanged += new System.EventHandler(this.rbUnidades_CheckedChanged);
             // 

@@ -340,7 +340,8 @@ namespace GyCAP.DAL
                     object pedido = DetallePlanSemanalDAL.ObtenerPedidoClienteDeDetalle(codigoPlan, transaccion);
                     if (pedido != null && pedido != DBNull.Value)
                     {
-                        PedidoDAL.ActualizarDetallePedidoAFinalizado(Convert.ToInt32(pedido), transaccion);
+                        //PedidoDAL.ActualizarDetallePedidoAFinalizado(Convert.ToInt32(pedido), transaccion);
+                        PedidoDAL.ActualizarEstado(Convert.ToInt32(pedido), 5, transaccion);
                     }
                 }
 
