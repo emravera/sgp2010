@@ -236,13 +236,14 @@
             this.btnNuevoMantenimiento.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.btnNuevoMantenimiento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNuevoMantenimiento.Image = global::GyCAP.UI.Mantenimiento.Properties.Resources.New_48;
-            this.btnNuevoMantenimiento.Location = new System.Drawing.Point(52, 3);
+            this.btnNuevoMantenimiento.Location = new System.Drawing.Point(10, 3);
             this.btnNuevoMantenimiento.Name = "btnNuevoMantenimiento";
-            this.btnNuevoMantenimiento.Size = new System.Drawing.Size(54, 71);
+            this.btnNuevoMantenimiento.Size = new System.Drawing.Size(134, 71);
             this.btnNuevoMantenimiento.TabIndex = 3;
-            this.btnNuevoMantenimiento.Text = " Nuevo";
+            this.btnNuevoMantenimiento.Text = "Registrar mantenimiento";
             this.btnNuevoMantenimiento.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoMantenimiento.UseVisualStyleBackColor = true;
+            this.btnNuevoMantenimiento.Click += new System.EventHandler(this.btnNuevoMantenimiento_Click);
             this.btnNuevoMantenimiento.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoMantenimiento.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 

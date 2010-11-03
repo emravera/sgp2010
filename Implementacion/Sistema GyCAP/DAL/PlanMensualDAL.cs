@@ -98,7 +98,7 @@ namespace GyCAP.DAL
         {
             string sql = @"SELECT count(pm.pmes_codigo)
                            FROM PLANES_MENSUALES as pm, PLANES_ANUALES as pa
-                           WHERE pa.pan_anio=@p0 and pm.pmes_mes LIKE @p1";
+                           WHERE pa.pan_codigo=pm.pan_codigo and pa.pan_anio=@p0 and pm.pmes_mes LIKE @p1";
             object[] valorParametros = { anio, mes};
             try
             {
@@ -164,7 +164,7 @@ namespace GyCAP.DAL
                 {
                     if (row.DPED_CODIGO != 0)
                     {
-                        sql = "INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada], [dpmes_cantidadreal] [dped_codigo]) VALUES (@p0, @p1, @p2, @p3, @p4) SELECT @@Identity";
+                        sql = "INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada], [dpmes_cantidadreal], [dped_codigo]) VALUES (@p0, @p1, @p2, @p3, @p4) SELECT @@Identity";
                         object[] valorParam = { plan.Codigo, row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA, Convert.ToInt32(0), row.DPED_CODIGO };
                         row.BeginEdit();
                         row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));

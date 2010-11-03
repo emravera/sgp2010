@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.numDiciembre = new System.Windows.Forms.NumericUpDown();
             this.tcPlanAnual = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
@@ -319,17 +319,17 @@
             this.gbGraficoEstimacion.Size = new System.Drawing.Size(399, 230);
             this.gbGraficoEstimacion.TabIndex = 11;
             this.gbGraficoEstimacion.TabStop = false;
-            this.gbGraficoEstimacion.Text = "Grafico Plan Propuesto";
+            this.gbGraficoEstimacion.Text = "Gráfico Plan Propuesto";
             // 
             // chartDemanda
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartDemanda.ChartAreas.Add(chartArea1);
+            chartArea2.Name = "ChartArea1";
+            this.chartDemanda.ChartAreas.Add(chartArea2);
             this.chartDemanda.Location = new System.Drawing.Point(17, 17);
             this.chartDemanda.Name = "chartDemanda";
-            series1.ChartArea = "ChartArea1";
-            series1.Name = "Series1";
-            this.chartDemanda.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Name = "Series1";
+            this.chartDemanda.Series.Add(series2);
             this.chartDemanda.Size = new System.Drawing.Size(375, 207);
             this.chartDemanda.TabIndex = 0;
             this.chartDemanda.Text = "chart1";
@@ -437,7 +437,7 @@
             this.gbEstimacionMes.Size = new System.Drawing.Size(300, 230);
             this.gbEstimacionMes.TabIndex = 12;
             this.gbEstimacionMes.TabStop = false;
-            this.gbEstimacionMes.Text = "Planificacion por Mes";
+            this.gbEstimacionMes.Text = "Planificación por Mes";
             // 
             // txtDemandaNoCubierta
             // 
@@ -788,7 +788,7 @@
             this.gbPuntoEquilibrio.Size = new System.Drawing.Size(385, 101);
             this.gbPuntoEquilibrio.TabIndex = 22;
             this.gbPuntoEquilibrio.TabStop = false;
-            this.gbPuntoEquilibrio.Text = "Calculo Punto de Equilibrio";
+            this.gbPuntoEquilibrio.Text = "Cálculo Punto de Equilibrio";
             // 
             // button1
             // 

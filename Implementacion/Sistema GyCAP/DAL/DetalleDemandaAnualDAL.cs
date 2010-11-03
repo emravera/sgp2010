@@ -50,7 +50,7 @@ namespace GyCAP.DAL
         }
 
 
-        public static int Insertar(Entidades.DetalleDemandaAnual detalle)
+        public static int Insertar(Entidades.DetalleDemandaAnual detalle, SqlTransaction transaccion)
         {
                       
                 //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
@@ -59,9 +59,9 @@ namespace GyCAP.DAL
 
                 try
                 {
-                    return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+                    return Convert.ToInt32(DB.executeScalar(sql, valorParametros, transaccion));
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
                        
         }
 

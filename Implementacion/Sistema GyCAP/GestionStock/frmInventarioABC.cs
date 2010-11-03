@@ -43,7 +43,7 @@ namespace GyCAP.UI.GestionStock
             dgvModelos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             //dgvModelos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvModelos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvModelos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvModelos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
@@ -300,6 +300,9 @@ namespace GyCAP.UI.GestionStock
                         //Se trae el el total a producir en ese año desde la base de datos
                         txtCantAnual.Text = BLL.StockMateriaPrimaBLL.ObtenerTotalAnual(año).ToString();
 
+                        //Se obtiene el año histórico
+                        int añoHistorico = Convert.ToInt32(cbAñoHistorico.GetSelectedValue());
+
                         //Defino la matriz donde voy a guardar los datos
                         int cantidadModelos = Convert.ToInt32(dsInventarioABC.COCINAS.Rows.Count);
                         decimal[,] modelos = new decimal[cantidadModelos, 2];
@@ -311,7 +314,7 @@ namespace GyCAP.UI.GestionStock
                             int codigoModelo = Convert.ToInt32(cocina["coc_codigo"]);
                             modelos[cont, 0] = codigoModelo;
                             //Obtengo de ese modelo la cantidad de cocinas producidas en ese año
-                            object salida = BLL.StockMateriaPrimaBLL.ObtenerTotalModelo(año, codigoModelo);
+                            object salida = BLL.StockMateriaPrimaBLL.ObtenerTotalModelo(añoHistorico, codigoModelo);
                             if (salida != DBNull.Value)
                             {
                                 modelos[cont, 1] = Convert.ToInt32(salida);
@@ -325,38 +328,43 @@ namespace GyCAP.UI.GestionStock
                             //Sumo uno mas al contador
                             cont += 1;
                         }
-
-                        //Le calculo los porcentajes a cada elemento de la matriz
-                        for (int i = 0; i < cantidadModelos; i++)
+                        if (sum == 0)
                         {
-                            modelos[i, 1] = (modelos[i, 1] / sum) * 100;
-                        }
-
-                        //Asigno los valores a la datatable de modelos
-                        for (int j = 0; j < cantidadModelos; j++)
-                        {
-                            if (modelos[j, 1] > 0)
+                            //Le calculo los porcentajes a cada elemento de la matriz
+                            for (int i = 0; i < cantidadModelos; i++)
                             {
-                                //Se crea una fila
-                                Data.dsInventarioABC.MODELOS_PRODUCIDOSRow row = dsInventarioABC.MODELOS_PRODUCIDOS.NewMODELOS_PRODUCIDOSRow();
-
-                                //Se comienza a editar la fila
-                                row.BeginEdit();
-                                codigoModelo = codigoModelo + 1;
-                                row.CODIGO_MODELO = codigoModelo;
-                                row.CODIGO_MODELO_PRODUCIDO = modelos[j, 0];
-                                row.MODELO_PORCENTAJE = Math.Round(modelos[j, 1], 2);
-                                row.MODELO_CANTIDAD = Math.Round(((modelos[j, 1] / 100) * Convert.ToInt32(txtCantAnual.Text)), 0);
-                                row.EndEdit();
-
-                                //Agregamos la Línea
-                                dsInventarioABC.MODELOS_PRODUCIDOS.AddMODELOS_PRODUCIDOSRow(row);
+                                modelos[i, 1] = (modelos[i, 1] / sum) * 100;
                             }
+
+                            //Asigno los valores a la datatable de modelos
+                            for (int j = 0; j < cantidadModelos; j++)
+                            {
+                                if (modelos[j, 1] > 0)
+                                {
+                                    //Se crea una fila
+                                    Data.dsInventarioABC.MODELOS_PRODUCIDOSRow row = dsInventarioABC.MODELOS_PRODUCIDOS.NewMODELOS_PRODUCIDOSRow();
+
+                                    //Se comienza a editar la fila
+                                    row.BeginEdit();
+                                    codigoModelo = codigoModelo + 1;
+                                    row.CODIGO_MODELO = codigoModelo;
+                                    row.CODIGO_MODELO_PRODUCIDO = modelos[j, 0];
+                                    row.MODELO_PORCENTAJE = Math.Round(modelos[j, 1], 2);
+                                    row.MODELO_CANTIDAD = Math.Round(((modelos[j, 1] / 100) * Convert.ToInt32(txtCantAnual.Text)), 0);
+                                    row.EndEdit();
+
+                                    //Agregamos la Línea
+                                    dsInventarioABC.MODELOS_PRODUCIDOS.AddMODELOS_PRODUCIDOSRow(row);
+                                }
+                            }
+
+                            //Seteamos la interface
+                            SetInterface(estadoUI.generaHistorico);
                         }
-
-                        //Seteamos la interface
-                        SetInterface(estadoUI.generaHistorico);
-
+                        else
+                        {
+                            MessageBox.Show("No existen datos para calcular el histórico", "Error: Inventario ABC - Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
                 else
@@ -720,6 +728,8 @@ namespace GyCAP.UI.GestionStock
                 MessageBox.Show("Debe seleccionar un modelo de cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+       
 
 
 

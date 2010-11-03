@@ -196,5 +196,15 @@ namespace GyCAP.UI.Mantenimiento
         }
 
         #endregion
+
+        private void btnNuevoMantenimiento_Click(object sender, EventArgs e)
+        {
+            frmRegistrarMantenimiento.Instancia.TopLevel = false;
+            frmRegistrarMantenimiento.Instancia.Location = PosicionarFormulario();
+            frmRegistrarMantenimiento.Instancia.Parent = areaTrabajo;
+            frmRegistrarMantenimiento.Instancia.SetEstadoInicial(frmRegistrarMantenimiento.estadoInicialNuevo);
+            frmRegistrarMantenimiento.Instancia.Show();
+            frmRegistrarMantenimiento.Instancia.Focus();
+        }
     }
 }
