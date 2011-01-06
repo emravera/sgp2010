@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AE7890FB-1E14-4037-BF00-F0406BA4364A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GyCAP.UI.Principal</RootNamespace>
+    <AssemblyName>Principal</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmFondoPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFondoPrincipal.Designer.cs">
+      <DependentUpon>frmFondoPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmOpciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOpciones.Designer.cs">
+      <DependentUpon>frmOpciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrincipal.Designer.cs">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmFondoPrincipal.resx">
+      <DependentUpon>frmFondoPrincipal.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOpciones.resx">
+      <DependentUpon>frmOpciones.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{A0EA0794-16BA-4988-BCFF-00204902B7AA}</Project>
+      <Name>BLL %28BLL\BLL%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Calidad\Calidad.csproj">
+      <Project>{A1DDD582-FAE2-46D8-A915-42013AA1DCB7}</Project>
+      <Name>Calidad</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ControlTrabajoEnProceso\ControlTrabajoEnProceso.csproj">
+      <Project>{BD64ACB7-2A4A-44E9-8183-11EFAFF4B518}</Project>
+      <Name>ControlTrabajoEnProceso</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{BF769C01-D311-4BC9-813A-C63DC3B89319}</Project>
+      <Name>Entidades %28Entidades\Entidades%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EstructuraProducto\EstructuraProducto.csproj">
+      <Project>{9102F252-4267-45D1-B148-DD3BE4D709E4}</Project>
+      <Name>EstructuraProducto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GestionPedido\GestionPedido.csproj">
+      <Project>{9260777F-2789-458E-924E-163DC946C9E1}</Project>
+      <Name>GestionPedido</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GestionStock\GestionStock.csproj">
+      <Project>{35A24B8F-C745-41C5-A681-39C1F9AAD906}</Project>
+      <Name>GestionStock</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mantenimiento\Mantenimiento.csproj">
+      <Project>{6A2EB4DA-E737-466E-A7A6-9FD238F0AF4E}</Project>
+      <Name>Mantenimiento</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PlanificacionProduccion\PlanificacionProduccion.csproj">
+      <Project>{959ABFBF-7696-414D-B0CA-8807851367E8}</Project>
+      <Name>PlanificacionProduccion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProcesoFabricacion\ProcesoFabricacion.csproj">
+      <Project>{6255860F-61F4-46AC-B845-FE988BD6F723}</Project>
+      <Name>ProcesoFabricacion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecursosFabricacion\RecursosFabricacion.csproj">
+      <Project>{3D17BB74-E9A2-435E-BED2-9C222B5F1DDD}</Project>
+      <Name>RecursosFabricacion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sistema\Sistema.csproj">
+      <Project>{9A02F786-F362-4FC0-A53D-83C51951D9DF}</Project>
+      <Name>Sistema</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Soporte\Soporte.csproj">
+      <Project>{E62237F2-4821-4526-BE7C-45263EE307C5}</Project>
+      <Name>Soporte</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\macoser.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo Florencia.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\estructura-producto.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stock-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pedido.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\soporte.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mantenimiento.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trabajoEnProceso.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\planificacion.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trabajoEnProceso2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calidad.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pedido2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\planificacion2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recursoFabricacion2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recursoFabricacion.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reporte.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\modulo.procesoFabricacion.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

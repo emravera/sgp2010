@@ -1,0 +1,753 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B288FFDF-AF2E-41DA-AB2F-C17A4944E272}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GyCAP.Data</RootNamespace>
+    <AssemblyName>Data</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Enterprise.Framework, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Enterprise.InfoStore, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="dsCapacidadEmpleado.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsCapacidadEmpleado.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsCentroTrabajo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsCentroTrabajo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsCliente.cs">
+      <DependentUpon>dsCliente.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dsCliente.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsCliente.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsCocina.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsCocina.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsColor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsColor.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsDesignacion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsDesignacion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsEmpleado.cs">
+      <DependentUpon>dsEmpleado.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dsEmpleado.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEmpleado.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsEmpleadosyCapacidades.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEmpleadosyCapacidades.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsEntregaProducto.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEntregaProducto.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsEstadoDetallePedido.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEstadoDetallePedido.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsEstadoEmpleado.cs">
+      <DependentUpon>dsEstadoEmpleado.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsEstadoEmpleado.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEstadoEmpleado.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsEstadoMaquina.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEstadoMaquina.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsEstadoPedidos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEstadoPedidos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsEstimarDemanda.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEstimarDemanda.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsEstructura.cs">
+      <DependentUpon>dsEstructura.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dsEstructura.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEstructura.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsFabricanteMaquina.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsFabricanteMaquina.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsHojaRuta.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsHojaRuta.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsInventarioABC.cs">
+      <DependentUpon>dsInventarioABC.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dsInventarioABC.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsInventarioABC.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsMantenimiento.cs">
+      <DependentUpon>dsMantenimiento.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dsMantenimiento.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsMantenimiento.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsMaquina.cs">
+      <DependentUpon>dsMaquina.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsMaquina.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsMaquina.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsMarca.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsMarca.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsMateriaPrima.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsMateriaPrima.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsModeloCocina.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsModeloCocina.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsModeloMaquina.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsModeloMaquina.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsOperacionesFabricacion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsOperacionesFabricacion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsOrdenTrabajo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsOrdenTrabajo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPlanAnual.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPlanAnual.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPlanMantenimiento.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPlanMantenimiento.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPlanMateriasPrimas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPlanMateriasPrimas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPlanMensual.cs">
+      <DependentUpon>dsPlanMensual.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dsPlanMensual.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPlanMensual.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPlanSemanal.cs">
+      <DependentUpon>dsPlanSemanal.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dsPlanSemanal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPlanSemanal.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsProveedor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsProveedor.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsRegistrarMantenimiento.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsRegistrarMantenimiento.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsSectorTrabajo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsSectorTrabajo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsStock.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsStock.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsTerminacion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsTerminacion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsTurnosTrabajo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsTurnosTrabajo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsUnidadMedida.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsUnidadMedida.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\crOrdenTrabajo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crOrdenTrabajo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\crPartesEstructura.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crPartesEstructura.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\crPartesEstructura2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crPartesEstructura2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="dsCapacidadEmpleado.xsc">
+      <DependentUpon>dsCapacidadEmpleado.xsd</DependentUpon>
+    </None>
+    <None Include="dsCapacidadEmpleado.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsCapacidadEmpleado.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsCapacidadEmpleado.xss">
+      <DependentUpon>dsCapacidadEmpleado.xsd</DependentUpon>
+    </None>
+    <None Include="dsCentroTrabajo.xsc">
+      <DependentUpon>dsCentroTrabajo.xsd</DependentUpon>
+    </None>
+    <None Include="dsCentroTrabajo.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsCentroTrabajo.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsCentroTrabajo.xss">
+      <DependentUpon>dsCentroTrabajo.xsd</DependentUpon>
+    </None>
+    <None Include="dsCliente.xsc">
+      <DependentUpon>dsCliente.xsd</DependentUpon>
+    </None>
+    <None Include="dsCliente.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsCliente.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsCliente.xss">
+      <DependentUpon>dsCliente.xsd</DependentUpon>
+    </None>
+    <None Include="dsCocina.xsc">
+      <DependentUpon>dsCocina.xsd</DependentUpon>
+    </None>
+    <None Include="dsCocina.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsCocina.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsCocina.xss">
+      <DependentUpon>dsCocina.xsd</DependentUpon>
+    </None>
+    <None Include="dsColor.xsc">
+      <DependentUpon>dsColor.xsd</DependentUpon>
+    </None>
+    <None Include="dsColor.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsColor.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsColor.xss">
+      <DependentUpon>dsColor.xsd</DependentUpon>
+    </None>
+    <None Include="dsDesignacion.xsc">
+      <DependentUpon>dsDesignacion.xsd</DependentUpon>
+    </None>
+    <None Include="dsDesignacion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsDesignacion.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsDesignacion.xss">
+      <DependentUpon>dsDesignacion.xsd</DependentUpon>
+    </None>
+    <None Include="dsEmpleado.xsc">
+      <DependentUpon>dsEmpleado.xsd</DependentUpon>
+    </None>
+    <None Include="dsEmpleado.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEmpleado.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsEmpleado.xss">
+      <DependentUpon>dsEmpleado.xsd</DependentUpon>
+    </None>
+    <None Include="dsEmpleadosyCapacidades.xsc">
+      <DependentUpon>dsEmpleadosyCapacidades.xsd</DependentUpon>
+    </None>
+    <None Include="dsEmpleadosyCapacidades.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEmpleadosyCapacidades.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsEmpleadosyCapacidades.xss">
+      <DependentUpon>dsEmpleadosyCapacidades.xsd</DependentUpon>
+    </None>
+    <None Include="dsEntregaProducto.xsc">
+      <DependentUpon>dsEntregaProducto.xsd</DependentUpon>
+    </None>
+    <None Include="dsEntregaProducto.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEntregaProducto.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsEntregaProducto.xss">
+      <DependentUpon>dsEntregaProducto.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstadoDetallePedido.xsc">
+      <DependentUpon>dsEstadoDetallePedido.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstadoDetallePedido.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEstadoDetallePedido.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsEstadoDetallePedido.xss">
+      <DependentUpon>dsEstadoDetallePedido.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstadoEmpleado.xsc">
+      <DependentUpon>dsEstadoEmpleado.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstadoEmpleado.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEstadoEmpleado.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsEstadoEmpleado.xss">
+      <DependentUpon>dsEstadoEmpleado.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstadoMaquina.xsc">
+      <DependentUpon>dsEstadoMaquina.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstadoMaquina.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEstadoMaquina.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsEstadoMaquina.xss">
+      <DependentUpon>dsEstadoMaquina.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstadoPedidos.xsc">
+      <DependentUpon>dsEstadoPedidos.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstadoPedidos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEstadoPedidos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsEstadoPedidos.xss">
+      <DependentUpon>dsEstadoPedidos.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstimarDemanda.xsc">
+      <DependentUpon>dsEstimarDemanda.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstimarDemanda.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEstimarDemanda.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsEstimarDemanda.xss">
+      <DependentUpon>dsEstimarDemanda.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstructura.xsc">
+      <DependentUpon>dsEstructura.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstructura.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEstructura.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsEstructura.xss">
+      <DependentUpon>dsEstructura.xsd</DependentUpon>
+    </None>
+    <None Include="dsFabricanteMaquina.xsc">
+      <DependentUpon>dsFabricanteMaquina.xsd</DependentUpon>
+    </None>
+    <None Include="dsFabricanteMaquina.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsFabricanteMaquina.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsFabricanteMaquina.xss">
+      <DependentUpon>dsFabricanteMaquina.xsd</DependentUpon>
+    </None>
+    <None Include="dsHojaRuta.xsc">
+      <DependentUpon>dsHojaRuta.xsd</DependentUpon>
+    </None>
+    <None Include="dsHojaRuta.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsHojaRuta.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsHojaRuta.xss">
+      <DependentUpon>dsHojaRuta.xsd</DependentUpon>
+    </None>
+    <None Include="dsInventarioABC.xsc">
+      <DependentUpon>dsInventarioABC.xsd</DependentUpon>
+    </None>
+    <None Include="dsInventarioABC.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsInventarioABC.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsInventarioABC.xss">
+      <DependentUpon>dsInventarioABC.xsd</DependentUpon>
+    </None>
+    <None Include="dsMantenimiento.xsc">
+      <DependentUpon>dsMantenimiento.xsd</DependentUpon>
+    </None>
+    <None Include="dsMantenimiento.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsMantenimiento.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsMantenimiento.xss">
+      <DependentUpon>dsMantenimiento.xsd</DependentUpon>
+    </None>
+    <None Include="dsMaquina.xsc">
+      <DependentUpon>dsMaquina.xsd</DependentUpon>
+    </None>
+    <None Include="dsMaquina.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsMaquina.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsMaquina.xss">
+      <DependentUpon>dsMaquina.xsd</DependentUpon>
+    </None>
+    <None Include="dsMarca.xsc">
+      <DependentUpon>dsMarca.xsd</DependentUpon>
+    </None>
+    <None Include="dsMarca.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsMarca.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsMarca.xss">
+      <DependentUpon>dsMarca.xsd</DependentUpon>
+    </None>
+    <None Include="dsMateriaPrima.xsc">
+      <DependentUpon>dsMateriaPrima.xsd</DependentUpon>
+    </None>
+    <None Include="dsMateriaPrima.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsMateriaPrima.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsMateriaPrima.xss">
+      <DependentUpon>dsMateriaPrima.xsd</DependentUpon>
+    </None>
+    <None Include="dsModeloCocina.xsc">
+      <DependentUpon>dsModeloCocina.xsd</DependentUpon>
+    </None>
+    <None Include="dsModeloCocina.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsModeloCocina.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsModeloCocina.xss">
+      <DependentUpon>dsModeloCocina.xsd</DependentUpon>
+    </None>
+    <None Include="dsModeloMaquina.xsc">
+      <DependentUpon>dsModeloMaquina.xsd</DependentUpon>
+    </None>
+    <None Include="dsModeloMaquina.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsModeloMaquina.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsModeloMaquina.xss">
+      <DependentUpon>dsModeloMaquina.xsd</DependentUpon>
+    </None>
+    <None Include="dsOperacionesFabricacion.xsc">
+      <DependentUpon>dsOperacionesFabricacion.xsd</DependentUpon>
+    </None>
+    <None Include="dsOperacionesFabricacion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsOperacionesFabricacion.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsOperacionesFabricacion.xss">
+      <DependentUpon>dsOperacionesFabricacion.xsd</DependentUpon>
+    </None>
+    <None Include="dsOrdenTrabajo.xsc">
+      <DependentUpon>dsOrdenTrabajo.xsd</DependentUpon>
+    </None>
+    <None Include="dsOrdenTrabajo.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsOrdenTrabajo.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsOrdenTrabajo.xss">
+      <DependentUpon>dsOrdenTrabajo.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanAnual.xsc">
+      <DependentUpon>dsPlanAnual.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanAnual.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPlanAnual.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsPlanAnual.xss">
+      <DependentUpon>dsPlanAnual.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanMantenimiento.xsc">
+      <DependentUpon>dsPlanMantenimiento.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanMantenimiento.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPlanMantenimiento.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsPlanMantenimiento.xss">
+      <DependentUpon>dsPlanMantenimiento.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanMateriasPrimas.xsc">
+      <DependentUpon>dsPlanMateriasPrimas.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanMateriasPrimas.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPlanMateriasPrimas.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsPlanMateriasPrimas.xss">
+      <DependentUpon>dsPlanMateriasPrimas.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanMensual.xsc">
+      <DependentUpon>dsPlanMensual.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanMensual.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPlanMensual.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsPlanMensual.xss">
+      <DependentUpon>dsPlanMensual.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanSemanal.xsc">
+      <DependentUpon>dsPlanSemanal.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanSemanal.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPlanSemanal.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsPlanSemanal.xss">
+      <DependentUpon>dsPlanSemanal.xsd</DependentUpon>
+    </None>
+    <None Include="dsProveedor.xsc">
+      <DependentUpon>dsProveedor.xsd</DependentUpon>
+    </None>
+    <None Include="dsProveedor.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsProveedor.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsProveedor.xss">
+      <DependentUpon>dsProveedor.xsd</DependentUpon>
+    </None>
+    <None Include="dsRegistrarMantenimiento.xsc">
+      <DependentUpon>dsRegistrarMantenimiento.xsd</DependentUpon>
+    </None>
+    <None Include="dsRegistrarMantenimiento.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsRegistrarMantenimiento.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsRegistrarMantenimiento.xss">
+      <DependentUpon>dsRegistrarMantenimiento.xsd</DependentUpon>
+    </None>
+    <None Include="dsSectorTrabajo.xsc">
+      <DependentUpon>dsSectorTrabajo.xsd</DependentUpon>
+    </None>
+    <None Include="dsSectorTrabajo.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsSectorTrabajo.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsSectorTrabajo.xss">
+      <DependentUpon>dsSectorTrabajo.xsd</DependentUpon>
+    </None>
+    <None Include="dsStock.xsc">
+      <DependentUpon>dsStock.xsd</DependentUpon>
+    </None>
+    <None Include="dsStock.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsStock.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsStock.xss">
+      <DependentUpon>dsStock.xsd</DependentUpon>
+    </None>
+    <None Include="dsTerminacion.xsc">
+      <DependentUpon>dsTerminacion.xsd</DependentUpon>
+    </None>
+    <None Include="dsTerminacion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsTerminacion.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsTerminacion.xss">
+      <DependentUpon>dsTerminacion.xsd</DependentUpon>
+    </None>
+    <None Include="dsTurnosTrabajo.xsc">
+      <DependentUpon>dsTurnosTrabajo.xsd</DependentUpon>
+    </None>
+    <None Include="dsTurnosTrabajo.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsTurnosTrabajo.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsTurnosTrabajo.xss">
+      <DependentUpon>dsTurnosTrabajo.xsd</DependentUpon>
+    </None>
+    <None Include="dsUnidadMedida.xsc">
+      <DependentUpon>dsUnidadMedida.xsd</DependentUpon>
+    </None>
+    <None Include="dsUnidadMedida.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsUnidadMedida.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsUnidadMedida.xss">
+      <DependentUpon>dsUnidadMedida.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reportes\crOrdenTrabajo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crOrdenTrabajo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\crPartesEstructura.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crPartesEstructura.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\crPartesEstructura2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crPartesEstructura2.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

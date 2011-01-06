@@ -1,0 +1,62 @@
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\PlanificacionProduccion.exe
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\PlanificacionProduccion.pdb
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\BLL.dll
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\Entidades.dll
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\DAL.dll
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\BLL.pdb
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\Entidades.pdb
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\DAL.pdb
+E:\Implementacion\GyCAP\PlanificacionProduccion\obj\Debug\ResolveAssemblyReference.cache
+E:\Implementacion\GyCAP\PlanificacionProduccion\obj\Debug\GyCAP.UI.PlanificacionProduccion.Properties.Resources.resources
+E:\Implementacion\GyCAP\PlanificacionProduccion\obj\Debug\PlanificacionProduccion.csproj.GenerateResource.Cache
+E:\Implementacion\GyCAP\PlanificacionProduccion\obj\Debug\PlanificacionProduccion.exe
+E:\Implementacion\GyCAP\PlanificacionProduccion\obj\Debug\PlanificacionProduccion.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\PlanificacionProduccion\bin\Debug\PlanificacionProduccion.exe
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\PlanificacionProduccion\bin\Debug\PlanificacionProduccion.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\PlanificacionProduccion\bin\Debug\BLL.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\PlanificacionProduccion\bin\Debug\Entidades.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\PlanificacionProduccion\bin\Debug\DAL.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\PlanificacionProduccion\bin\Debug\BLL.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\PlanificacionProduccion\bin\Debug\Entidades.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\PlanificacionProduccion\bin\Debug\DAL.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\PlanificacionProduccion\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\PlanificacionProduccion\obj\Debug\GyCAP.UI.PlanificacionProduccion.Properties.Resources.resources
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\PlanificacionProduccion\obj\Debug\PlanificacionProduccion.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\PlanificacionProduccion\obj\Debug\PlanificacionProduccion.exe
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\PlanificacionProduccion\obj\Debug\PlanificacionProduccion.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\PlanificacionProduccion\bin\Debug\Data.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\PlanificacionProduccion\bin\Debug\Data.pdb
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\Data.dll
+E:\Implementacion\GyCAP\PlanificacionProduccion\bin\Debug\Data.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\PlanificacionProduccion.exe
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\PlanificacionProduccion.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\BLL.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\Entidades.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\DAL.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\Data.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\BLL.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\Entidades.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\DAL.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\Data.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\PlanificacionProduccion\obj\Debug\ResolveAssemblyReference.cache
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\PlanificacionProduccion\obj\Debug\GyCAP.UI.PlanificacionProduccion.Properties.Resources.resources
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\PlanificacionProduccion\obj\Debug\PlanificacionProduccion.csproj.GenerateResource.Cache
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\PlanificacionProduccion\obj\Debug\PlanificacionProduccion.exe
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\PlanificacionProduccion\obj\Debug\PlanificacionProduccion.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\PlanificacionProduccion.exe
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\PlanificacionProduccion.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\BLL.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\Entidades.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\DAL.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\Data.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\BLL.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\Entidades.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\DAL.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\PlanificacionProduccion\bin\Debug\Data.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\PlanificacionProduccion\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\PlanificacionProduccion\obj\Debug\GyCAP.UI.PlanificacionProduccion.frmPlanAnual.resources
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\PlanificacionProduccion\obj\Debug\GyCAP.UI.PlanificacionProduccion.frmPlanificacionProduccion.resources
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\PlanificacionProduccion\obj\Debug\GyCAP.UI.PlanificacionProduccion.Properties.Resources.resources
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\PlanificacionProduccion\obj\Debug\PlanificacionProduccion.csproj.GenerateResource.Cache
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\PlanificacionProduccion\obj\Debug\PlanificacionProduccion.exe
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\PlanificacionProduccion\obj\Debug\PlanificacionProduccion.pdb

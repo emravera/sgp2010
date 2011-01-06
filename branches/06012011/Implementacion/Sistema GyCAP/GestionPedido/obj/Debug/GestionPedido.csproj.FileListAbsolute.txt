@@ -1,0 +1,60 @@
+E:\Implementacion\GyCAP\GestionPedido\bin\Debug\GestionPedido.exe
+E:\Implementacion\GyCAP\GestionPedido\bin\Debug\GestionPedido.pdb
+E:\Implementacion\GyCAP\GestionPedido\bin\Debug\BLL.dll
+E:\Implementacion\GyCAP\GestionPedido\bin\Debug\Entidades.dll
+E:\Implementacion\GyCAP\GestionPedido\bin\Debug\DAL.dll
+E:\Implementacion\GyCAP\GestionPedido\bin\Debug\BLL.pdb
+E:\Implementacion\GyCAP\GestionPedido\bin\Debug\Entidades.pdb
+E:\Implementacion\GyCAP\GestionPedido\bin\Debug\DAL.pdb
+E:\Implementacion\GyCAP\GestionPedido\obj\Debug\ResolveAssemblyReference.cache
+E:\Implementacion\GyCAP\GestionPedido\obj\Debug\GyCAP.UI.GestionPedido.Properties.Resources.resources
+E:\Implementacion\GyCAP\GestionPedido\obj\Debug\GestionPedido.csproj.GenerateResource.Cache
+E:\Implementacion\GyCAP\GestionPedido\obj\Debug\GestionPedido.exe
+E:\Implementacion\GyCAP\GestionPedido\obj\Debug\GestionPedido.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionPedido\bin\Debug\GestionPedido.exe
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionPedido\bin\Debug\GestionPedido.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionPedido\bin\Debug\BLL.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionPedido\bin\Debug\Entidades.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionPedido\bin\Debug\DAL.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionPedido\bin\Debug\BLL.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionPedido\bin\Debug\Entidades.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionPedido\bin\Debug\DAL.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionPedido\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionPedido\obj\Debug\GyCAP.UI.GestionPedido.Properties.Resources.resources
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionPedido\obj\Debug\GestionPedido.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionPedido\obj\Debug\GestionPedido.exe
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionPedido\obj\Debug\GestionPedido.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionPedido\bin\Debug\Data.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\GestionPedido\bin\Debug\Data.pdb
+E:\Implementacion\GyCAP\GestionPedido\bin\Debug\Data.dll
+E:\Implementacion\GyCAP\GestionPedido\bin\Debug\Data.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\GestionPedido.exe
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\GestionPedido.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\BLL.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\Entidades.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\DAL.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\Data.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\BLL.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\Entidades.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\DAL.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\Data.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionPedido\obj\Debug\ResolveAssemblyReference.cache
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionPedido\obj\Debug\GyCAP.UI.GestionPedido.Properties.Resources.resources
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionPedido\obj\Debug\GestionPedido.csproj.GenerateResource.Cache
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionPedido\obj\Debug\GestionPedido.exe
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\GestionPedido\obj\Debug\GestionPedido.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\GestionPedido.exe
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\GestionPedido.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\BLL.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\Entidades.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\DAL.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\Data.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\BLL.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\Entidades.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\DAL.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\GestionPedido\bin\Debug\Data.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\GestionPedido\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\GestionPedido\obj\Debug\GyCAP.UI.GestionPedido.Properties.Resources.resources
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\GestionPedido\obj\Debug\GestionPedido.csproj.GenerateResource.Cache
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\GestionPedido\obj\Debug\GestionPedido.exe
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\GestionPedido\obj\Debug\GestionPedido.pdb

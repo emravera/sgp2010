@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BD64ACB7-2A4A-44E9-8183-11EFAFF4B518}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GyCAP.UI.ControlTrabajoEnProceso</RootNamespace>
+    <AssemblyName>ControlTrabajoEnProceso</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\..\..\..\WINDOWS\assembly\GAC_MSIL\CrystalDecisions.CrystalReports.Engine\10.5.3700.0__692fbea5521e1304\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Enterprise.Framework, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Enterprise.InfoStore, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\..\..\..\WINDOWS\assembly\GAC_MSIL\CrystalDecisions.ReportSource\10.5.3700.0__692fbea5521e1304\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\..\..\..\WINDOWS\assembly\GAC_MSIL\CrystalDecisions.Shared\10.5.3700.0__692fbea5521e1304\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Sistema, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Sistema\obj\Debug\Sistema.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms.DataVisualization, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmControlPlanificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmControlPlanificacion.Designer.cs">
+      <DependentUpon>frmControlPlanificacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmControlTrabajoEnProceso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmControlTrabajoEnProceso.Designer.cs">
+      <DependentUpon>frmControlTrabajoEnProceso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmControlProduccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmControlProduccion.Designer.cs">
+      <DependentUpon>frmControlProduccion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmControlPlanificacion.resx">
+      <DependentUpon>frmControlPlanificacion.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmControlTrabajoEnProceso.resx">
+      <DependentUpon>frmControlTrabajoEnProceso.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmControlProduccion.resx">
+      <DependentUpon>frmControlProduccion.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{A0EA0794-16BA-4988-BCFF-00204902B7AA}</Project>
+      <Name>BLL %28BLL\BLL%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{B288FFDF-AF2E-41DA-AB2F-C17A4944E272}</Project>
+      <Name>Data %28Data\Data%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{BF769C01-D311-4BC9-813A-C63DC3B89319}</Project>
+      <Name>Entidades %28Entidades\Entidades%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Salir-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pausa-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\abajo1-15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Apply-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arbol-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arriba1-15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calculadora-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cancel-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cancelar-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cierre-Parcial-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delete-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\derecha1-15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Finalizar-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Find-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Find-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Floppy-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Information-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Iniciar-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Listados-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lupa-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lupa-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Open-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Page-Setup-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Password-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printer-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Question-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\System-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\System.Set-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Text-Editor-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Warning-25.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

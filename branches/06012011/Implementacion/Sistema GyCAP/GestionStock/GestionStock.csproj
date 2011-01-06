@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{35A24B8F-C745-41C5-A681-39C1F9AAD906}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GyCAP.UI.GestionStock</RootNamespace>
+    <AssemblyName>GestionStock</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Sistema, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Sistema\obj\Debug\Sistema.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmEntregaProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEntregaProducto.Designer.cs">
+      <DependentUpon>frmEntregaProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmGestionStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGestionStock.Designer.cs">
+      <DependentUpon>frmGestionStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInventarioABC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInventarioABC.Designer.cs">
+      <DependentUpon>frmInventarioABC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUbicacionStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUbicacionStock.Designer.cs">
+      <DependentUpon>frmUbicacionStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmEntregaProducto.resx">
+      <DependentUpon>frmEntregaProducto.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGestionStock.resx">
+      <DependentUpon>frmGestionStock.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInventarioABC.resx">
+      <DependentUpon>frmInventarioABC.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUbicacionStock.resx">
+      <DependentUpon>frmUbicacionStock.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{A0EA0794-16BA-4988-BCFF-00204902B7AA}</Project>
+      <Name>BLL %28BLL\BLL%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{B288FFDF-AF2E-41DA-AB2F-C17A4944E272}</Project>
+      <Name>Data %28Data\Data%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{BF769C01-D311-4BC9-813A-C63DC3B89319}</Project>
+      <Name>Entidades %28Entidades\Entidades%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Text-Editor-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delete-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Find-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lupa-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Salir-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Find-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Listados-48.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

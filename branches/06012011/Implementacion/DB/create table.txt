@@ -1,0 +1,891 @@
+/*==============================================================*/
+/* Table: CAPACIDAD_EMPLEADOS                                   */
+/*==============================================================*/
+create table CAPACIDAD_EMPLEADOS (
+   CEMP_CODIGO          numeric(10)          identity,
+   CEMP_NOMBRE          varchar(80)          null,
+   CEMP_DESCRIPCION     varchar(200)         null,
+   constraint PK_CAPACIDAD_EMPLEADOS primary key nonclustered (CEMP_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: CAPACIDADESXEMPLEADO                                  */
+/*==============================================================*/
+create table CAPACIDADESXEMPLEADO (
+   CXE_CODIGO           numeric(10)          identity,
+   E_CODIGO             numeric(10)          not null,
+   CEMP_CODIGO          numeric(10)          not null,
+   constraint PK_CAPACIDADESXEMPLEADO primary key nonclustered (CXE_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: CAUSAS_FALLO                                          */
+/*==============================================================*/
+create table CAUSAS_FALLO (
+   CF_CODIGO            numeric(10)          identity,
+   CF_NOMBRE            varchar(80)          null,
+   CF_DESCRPCION        varchar(200)         null,
+   constraint PK_CAUSAS_FALLO primary key nonclustered (CF_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: CLIENTES                                              */
+/*==============================================================*/
+create table CLIENTES (
+   CLI_CODIGO           numeric(10)          identity,
+   CLI_RAZONSOCIAL      varchar(50)          null,
+   CLI_TELEFONO         varchar(30)          null,
+   CLI_FECHAALTA        datetime             null,
+   CLI_FECHABAJA        datetime             null,
+   CLI_MOTIVOBAJA       varchar(200)         null,
+   constraint PK_CLIENTES primary key nonclustered (CLI_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: COCINAS                                               */
+/*==============================================================*/
+create table COCINAS (
+   COC_CODIGO           numeric(10)          identity,  /* Marce 07/07 antes varchar(10) */
+ /*ECOC_CODIGO          numeric(10)          not null,*/	/*-MODIFICACION 13/08/2010-*/
+   COL_CODIGO           numeric(3)           not null,	/*-MODIFICACION 23/07/2010-*/
+   MOD_CODIGO           numeric(10)          not null,	/*-MODIFICACION 23/07/2010-*/
+   MCA_CODIGO           numeric(10)          not null,	/*-MODIFICACION 23/07/2010-*/
+   TE_CODIGO            numeric(10)          not null,	/*-MODIFICACION 23/07/2010-*/
+   DESIG_CODIGO         numeric(10)          not null,	/*-MODIFICACION 23/07/2010-*/
+   COC_CODIGO_PRODUCTO  varchar(80)          not null,	/*-MODIFICACION 23/07/2010-*/
+   COC_CANTIDADSTOCK    int                  not null,	/*-MODIFICACION 23/07/2010-*/
+   COC_ACTIVO           numeric(1)           not null,	/*-MODIFICACION 23/07/2010-*/
+   COC_PRECIO           numeric(10,2)        null,  /* Marce 07/07 antes float(10) */
+   constraint PK_COCINAS primary key nonclustered (COC_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: COLORES                                               */
+/*==============================================================*/
+create table COLORES (
+   COL_CODIGO           numeric(3)           identity,
+   COL_NOMBRE           varchar(80)          null,
+   constraint PK_COLORES primary key nonclustered (COL_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: CONJUNTOS                                             */  /*-MODIFICACION 17/07/2010-*/
+/*==============================================================*/
+create table CONJUNTOS (
+   CONJ_CODIGO          numeric(10)          identity,
+   TE_CODIGO            numeric(10)          null,
+   CONJ_NOMBRE          varchar(50)          null,
+   CONJ_CANTIDADSTOCK   int                  null,
+   CONJ_DESCRIPCION     varchar(200)         null,            /*-MODIFICACION 17/07/2010-*/
+   PAR_CODIGO           numeric(10)          not null,	/*-MODIFICACION 17/07/2010-*/
+   PNO_CODIGO           numeric(10)          null,	/*-MODIFICACION 17/07/2010-*/
+   CONJ_CODIGOPARTE    varchar(80)          null,	/*-MODIFICACION 26/07/2010-*/
+   constraint PK_CONJUNTOS primary key nonclustered (CONJ_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: CONJUNTOSXESTRUCTURA                                  */ /*-MODIFICACION 23/07/2010-*/
+/*==============================================================*/
+create table CONJUNTOSXESTRUCTURA (
+   CXE_CODIGO           numeric(10)          identity,
+   ESTR_CODIGO          numeric(10)          not null, 
+   CONJ_CODIGO          numeric(10)          not null,
+   CXE_CANTIDAD         numeric(10)          not null,
+   GRP_CODIGO           numeric(10)          not null,
+   constraint PK_CONJUNTOSXESTRUCTURA primary key nonclustered (CXE_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: DEMANDAS_ANUALES                                      */
+/*==============================================================*/
+create table DEMANDAS_ANUALES (
+   DEMAN_ANIO           int                  null,
+   DEMAN_CODIGO         numeric(10)          identity,
+   DEMAN_FECHACREACION  datetime             null,
+   DEMAN_PARAMCRECIMIENTO numeric(10,3)      null,	/*MODIFICACION 24/07/2010*/
+   DEMAN_NOMBRE         varchar(80)          null,	/*MODIFICACION 24/07/2010*/
+   constraint PK_DEMANDA_ANUALES primary key nonclustered (DEMAN_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: DESIGNACIONES                                         */
+/*==============================================================*/
+create table DESIGNACIONES (
+   DESIG_CODIGO         numeric(10)          identity,
+   MCA_CODIGO           numeric(10)          null,
+   DESIG_NOMBRE         varchar(80)          null,
+   DESIG_DESCRIPCION    varchar(200)         null,
+   constraint PK_DESIGNACIONES primary key nonclustered (DESIG_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: DETALLE_DEMANDAS_ANUALES                              */
+/*==============================================================*/
+create table DETALLE_DEMANDAS_ANUALES (
+   DDEMAN_CODIGO        numeric(3)           identity,
+   DEMAN_CODIGO         numeric(10)          null,
+   DDEMAN_MES           varchar(10)          null,
+   DDEMAN_CANTIDADMES   int                  null,
+   constraint PK_DETALLE_DEMANDAS_ANUALES primary key nonclustered (DDEMAN_CODIGO)
+)
+
+/*-MODIFICACION 13/07/2010-*/
+
+/*==============================================================*/
+/* Table: DETALLE_PIEZA                                         */ /*-MODIFICACION 17/07/2010-*/
+/*==============================================================*/
+create table DETALLE_PIEZA (
+   DPZA_CODIGO          numeric(10)          identity,
+   MP_CODIGO            numeric(10)          null,
+   PZA_CODIGO           numeric(10)          null,
+   DPZA_CANTIDAD        numeric(10,3)        null,	/*-MODIFICACION 26/07/2010-*/
+   constraint PK_DETALLE_PIEZA primary key nonclustered (DPZA_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: DETALLE_ORDENES_TRABAJO                               */
+/*==============================================================*/
+create table DETALLE_ORDENES_TRABAJO (
+   DOTJO_CODIGO         numeric(10)          identity,
+   PROVE_CODIGO         numeric(10)          null,
+   E_CODIGO             numeric(10)          null,
+   TA_CODIGO            numeric(10)          null,
+   OTJO_NUMERO          numeric(10)          not null,
+   constraint PK_DETALLE_ORDENES_TRABAJO primary key nonclustered (DOTJO_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: DETALLE_PEDIDOS                                       */
+/*==============================================================*/
+create table DETALLE_PEDIDOS (
+   DPED_CODIGO          numeric(10)          identity,
+   PED_NUMERO           numeric(10)          not null,
+   EDPED_CODIGO         numeric(10)          not null,
+   DPED_CANTIDAD        int                  null,
+   DPED_CANTIDADREAL    int                  null,
+   constraint PK_DETALLE_PEDIDOS primary key nonclustered (DPED_CODIGO)
+)
+
+/*-MODIFICACION 12/07/2010-*/
+
+/*==============================================================*/
+/* Table: DETALLE_sUBCONJUNTO                                   */  /*-MODIFICACION 17/07/2010-*/
+/*==============================================================*/
+create table DETALLE_SUBCONJUNTO (
+   DSC_CODIGO           numeric(10)          identity,
+   PZA_CODIGO           numeric(10)          null,
+   SCONJ_CODIGO         numeric(10)          null,
+   DSC_CANTIDAD         numeric(10,3)        null,	/*-MODIFICACION 26/07/2010-*/
+   constraint PK_DETALLE_SUBCONJUNTO primary key nonclustered (DSC_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: DETALLE_PLANES_MANTENIMIENTO                          */
+/*==============================================================*/
+create table DETALLE_PLANES_MANTENIMIENTO (
+   DPMAN_CODIGO         numeric(10)          identity,
+   MAQ_CODIGO           numeric(10)          not null,
+   PMAN_NUMERO          numeric(10)          not null,
+   EDMAN_CODIGO         numeric(10)          not null,
+   CF_CODIGO            numeric(10)          null,
+   E_CODIGO             numeric(10)          not null,
+   REP_CODIGO           numeric(10)          null,
+   MAN_CODIGO           numeric(10)          not null,
+   DPMAN_FECHAREALIZACIONPREVISTA datetime             null,
+   DPMAN_FECHAREALIZACIONREAL datetime             null,
+   DPMAN_OBSERVACIONES  varchar(100)         null,
+   constraint PK_DETALLE_PLANES_MANTENIMIENTO primary key nonclustered (DPMAN_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: DETALLE_PLANES_MENSUALES                              */
+/*==============================================================*/
+create table DETALLE_PLANES_MENSUALES (
+   DPMES_CODIGO         numeric(10)          identity,
+   PMES_CODIGO          numeric(10)          not null,
+   COC_CODIGO           numeric(10)          not null,
+   DPMES_CANTIDADESTIMADA int                  null,
+   DPMES_CANTIDADREAL   int                  null,
+   constraint PK_DETALLE_PLANES_MENSUALES primary key nonclustered (DPMES_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: DETALLE_PLANES_SEMANALES                              */
+/*==============================================================*/
+create table DETALLE_PLANES_SEMANALES (
+   DPSEM_CODIGO         numeric(10)          identity,
+   COC_CODIGO           numeric(10)          not null,
+   OTJO_NUMERO          numeric(10)          null,
+   PSEM_CODIGO          numeric(10)          not null,
+   DPSEM_DIA            datetime             null,
+   DPSEM_CANTIDADESTIMADA int                null,
+   DPSEM_CANTIDADREAL   int                  null,
+   constraint PK_DETALLE_PLANES_SEMANALES primary key nonclustered (DPSEM_CODIGO)
+)
+
+/*-MODIFICACION 12/07/2010-*/
+
+/*==============================================================*/
+/* Table: DETALLE_CONJUNTO                                      */ /*-MODIFICACION 17/07/2010-*/
+/*==============================================================*/
+create table DETALLE_CONJUNTO (
+   DCJ_CODIGO           numeric(10)          identity,
+   CONJ_CODIGO          numeric(10)          null,
+   SCONJ_CODIGO         numeric(10)          null,
+   DCJ_CANTIDAD         numeric(10,3)        null,	/*-MODIFICACION 26/07/2010-*/
+   constraint PK_DETALLE_CONJUNTO primary key nonclustered (DCJ_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: DOMICILIOS                                            */
+/*==============================================================*/
+create table DOMICILIOS (
+   DOM_CODIGO           numeric(10)          identity,
+   LOC_CODIGO           numeric(10)          not null,
+   PROVE_CODIGO         numeric(10)          not null,
+   DOM_CALLE            varchar(80)          null,
+   DOM_NUMERO           varchar(10)          null,
+   DOM_PISO             varchar(10)          null,
+   DOM_DEPARTAMENTO     varchar(10)          null,
+   DOM_TELEFONOPRINCIPAL varchar(15)          null,
+   DOM_TELEFONOALTERNATIVO varchar(15)          null,
+   constraint PK_DOMICILIOS primary key nonclustered (DOM_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: EMPLEADOS                                             */
+/*==============================================================*/
+create table EMPLEADOS (
+   E_CODIGO             numeric(10)          identity,
+   E_LEGAJO             varchar(20)          unique,
+   EE_CODIGO            numeric(10)          not null,
+   SEC_CODIGO           numeric(10)          null,
+   E_APELLIDO           varchar(80)          null,
+   E_NOMBRE             varchar(80)          null,
+   E_FECHANACIMIENTO    datetime             null,
+   E_TELEFONO           varchar(15)          null,
+   E_FECHA_ALTA         datetime             null,
+   E_FECHA_BAJA         datetime             null,
+   constraint PK_EMPLEADOS primary key nonclustered (E_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: ESTADO_COCINAS                                        */
+/*==============================================================*/
+create table ESTADO_COCINAS (
+   ECOC_CODIGO          numeric(10)          identity,
+   ECOC_NOMBRE          varchar(80)          null,
+   ECOC_DESCRIPCION     varchar(200)         null,            /*-MODIFICACION 17/07/2010 VER-*/
+   constraint PK_ESTADO_COCINAS primary key nonclustered (ECOC_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: ESTADO_DETALLE_MANTENIMIENTOS                         */
+/*==============================================================*/
+create table ESTADO_DETALLE_MANTENIMIENTOS (
+   EDMAN_CODIGO         numeric(10)          identity,
+   EDMAN_NOMBRE         varchar(80)          null,
+   EDMAN_DESCRIPCION    varchar(200)         null,
+   constraint PK_ESTADO_DETALLE_MANTENIMIENTOS primary key nonclustered (EDMAN_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: ESTADO_DETALLE_PEDIDOS                                */
+/*==============================================================*/
+create table ESTADO_DETALLE_PEDIDOS (
+   EDPED_CODIGO         numeric(10)          identity,
+   EDPED_NOMBRE         varchar(80)          null,
+   EDPED_DESCRIPCION    varchar(200)         null,
+   constraint PK_ESTADO_DETALLE_PEDIDOS primary key nonclustered (EDPED_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: ESTADO_EMPLEADOS                                      */
+/*==============================================================*/
+create table ESTADO_EMPLEADOS (
+   EE_CODIGO            numeric(10)          identity,
+   EE_NOMBRE            varchar(80)          null,
+   EE_DESCRIPCION       varchar(200)         null,
+   constraint PK_ESTADO_EMPLEADOS primary key nonclustered (EE_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: ESTADO_MAQUINAS                                       */
+/*==============================================================*/
+create table ESTADO_MAQUINAS (
+   EMAQ_CODIGO          numeric(10)          identity,
+   EMAQ_NOMBRE          varchar(80)          null,
+   EMAQ_DESCRIPCION     varchar(200)         null,
+   constraint PK_ESTADO_MAQUINAS primary key nonclustered (EMAQ_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: ESTADO_ORDENES_TRABAJO                                */
+/*==============================================================*/
+create table ESTADO_ORDENES_TRABAJO (
+   EORD_CODIGO          numeric(10)          identity,
+   EORD_NOMBRE          varchar(80)          null,
+   EORD_DESCRIPCION     varchar(200)         null,
+   constraint PK_ESTADO_ORDENES_TRABAJO primary key nonclustered (EORD_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: ESTADO_PEDIDOS                                        */
+/*==============================================================*/
+create table ESTADO_PEDIDOS (
+   EPED_CODIGO          numeric(10)          identity,
+   EPED_NOMBRE          varchar(80)          null,
+   EPED_DESCRIPCION     varchar(200)         null,
+   constraint PK_ESTADO_PEDIDOS primary key nonclustered (EPED_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: ESTADO_PLANES_MANTENIMIENTO                           */
+/*==============================================================*/
+create table ESTADO_PLANES_MANTENIMIENTO (
+   EPMAN_CODIGO         numeric(10)          identity,
+   EPMAN_NOMBRE         varchar(80)          null,
+   EPMAN_DESCRIPCION    varchar(200)         null,
+   constraint PK_ESTADO_PLANES_MANTENIMIENTO primary key nonclustered (EPMAN_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: ESTADO_USUARIOS                                       */
+/*==============================================================*/
+create table ESTADO_USUARIOS (
+   EU_CODIGO            numeric(10)          identity,
+   EU_NOMBRE            varchar(80)          null,
+   EU_DESCRIPCION       varchar(200)         null,
+   constraint PK_ESTADO_USUARIOS primary key nonclustered (EU_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: ESTRUCTURAS                                           */
+/*==============================================================*/
+create table ESTRUCTURAS (
+   ESTR_CODIGO          numeric(10)          identity,
+   ESTR_NOMBRE          varchar(80)          null,
+   COC_CODIGO           numeric(10)          not null,            /*-MODIFICACION 09/07/2010-*/
+   PNO_CODIGO           numeric(10)          not null,            /*-MODIFICACION 05/07/2010-*/
+   ESTR_DESCRIPCION     varchar(200)         null,                /*-MODIFICACION 17/07/2010-*/
+   ESTR_ACTIVO          numeric(1)           not null,            /*-MODIFICACION 23/07/2010-*/
+   ESTR_FECHA_ALTA      datetime             not null,            /*-MODIFICACION 23/07/2010-*/
+   ESTR_FECHA_MODIFICACION      datetime             null,            /*-MODIFICACION 23/07/2010-*/
+   E_CODIGO             numeric(10)          null,                /*-MODIFICACION 23/07/2010-*/
+   constraint PK_ESTRUCTURAS primary key nonclustered (ESTR_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: FABRICANTE_MAQUINAS                                   */
+/*==============================================================*/
+create table FABRICANTE_MAQUINAS (
+   FAB_CODIGO           numeric(10)          identity,
+   FAB_RAZONSOCIAL      varchar(35)          null,
+   constraint PK_FABRICANTE_MAQUINAS primary key nonclustered (FAB_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: GRUPOS_ESTRUCTURA                                     */ /*-MODIFICACION 23/07/2010-*/
+/*==============================================================*/
+create table GRUPOS_ESTRUCTURA (
+   GRP_CODIGO           numeric(10)          identity,
+   GRP_NUMERO           numeric(10)          not null,
+   ESTR_CODIGO          numeric(10)          not null,
+   GRP_PADRE_CODIGO     numeric(10)          null,
+   GRP_NOMBRE           varchar(80)          null,
+   GRP_DESCRIPCION      varchar(200)         null,
+   GRP_CONCRETO         numeric(1)           not null,	/*-MODIFICACION 23/07/2010-*/
+   constraint PK_GRUPO_ESTRUCTURA primary key nonclustered (GRP_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: LOCALIDADES                                           */
+/*==============================================================*/
+create table LOCALIDADES (
+   LOC_CODIGO           numeric(10)          identity,
+   PCIA_CODIGO          numeric(2)           not null,
+   LOC_NOMBRE           varchar(80)          null,
+   constraint PK_LOCALIDADES primary key nonclustered (LOC_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: MANTENIMIENTOS                                        */
+/*==============================================================*/
+create table MANTENIMIENTOS (
+   MAN_CODIGO           numeric(10)          identity,
+   TMAN_CODIGO          numeric(10)          not null,
+   MAN_NOMBRE           varchar(80)          null,
+   constraint PK_MANTENIMIENTOS primary key nonclustered (MAN_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: MAQUINAS                                              */
+/*==============================================================*/
+create table MAQUINAS (
+   MAQ_CODIGO           numeric(10)          identity,
+   MODM_CODIGO          numeric(10)          not null,
+   EMAQ_CODIGO          numeric(10)          not null,
+   FAB_CODIGO           numeric(10)          not null,
+   MAQ_NOMBRE           varchar(80)          null,
+   MAQ_NUMEROSERIE      varchar(20)          null,
+   MAQ_FECHAALTA        datetime             null,
+   MAQ_MARCA            varchar(80)          null,
+   constraint PK_MAQUINAS primary key nonclustered (MAQ_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: MARCAS                                                */
+/*==============================================================*/
+create table MARCAS (
+   MCA_CODIGO           numeric(10)          identity,
+   CLI_CODIGO           numeric(10)          null,
+   MCA_NOMBRE           varchar(80)          null,
+   constraint PK_MARCAS primary key nonclustered (MCA_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: MATERIAS_PRIMAS                                       */
+/*==============================================================*/
+create table MATERIAS_PRIMAS (
+   MP_CODIGO            numeric(10)          identity,
+   UMED_CODIGO          numeric(10)          null,
+   MP_NOMBRE            varchar(80)          null,
+   MP_DESCRIPCION       varchar(200)         null,
+   MP_CANTIDADSTOCK     int                  null,
+   MP_PRECIO            numeric(10,2)        null,            /*-MODIFICACION 09/07/2010-*/
+   constraint PK_MATERIAS_PRIMAS primary key nonclustered (MP_CODIGO)
+)
+
+/*-----------MODIFICACIONES 09/07/2010-------------*/
+
+/*==============================================================*/
+/* Table: MATERIASPRIMASPRINCIPALES                             */
+/*==============================================================*/
+create table MATERIASPRIMASPRINCIPALES (
+   MPPR_CODIGO          numeric(10)          identity,
+   MP_CODIGO            numeric(10)          null,
+   MPPR_CANTIDAD        numeric(10,3)        null,
+   constraint PK_MATERIASPRIMASPRINCIPALES primary key nonclustered (MPPR_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: MATERIASPRIMASXESTRUCTURA                             */ /*-MODIFICACION 17/07/2010-*/
+/*==============================================================*/
+create table MATERIASPRIMASXESTRUCTURA (
+   MPXE_CODIGO          numeric(10)          identity,	/*-MODIFICACION 23/07/2010-*/
+   MP_CODIGO            numeric(10)          not null,
+   ESTR_CODIGO          numeric(10)          not null,
+   MPXE_CANTIDAD        numeric(10,3)        not null,  /*-MODIFICACION 31/07/2010-*/
+   GRP_CODIGO           numeric(10)          not null,     /*-MODIFICACION 23/07/2010-*/
+   constraint PK_MATERIASPRIMASXPIEZA primary key nonclustered (MPXE_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: MODELOS_COCINAS                                       */
+/*==============================================================*/
+create table MODELOS_COCINAS (
+   MOD_CODIGO           numeric(10)          identity,
+   MOD_NOMBRE           varchar(80)          null,
+   MOD_DESCRIPCION      varchar(200)         null,
+   constraint PK_MODELOS_COCINAS primary key nonclustered (MOD_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: MODELOS_MAQUINAS                                      */
+/*==============================================================*/
+create table MODELOS_MAQUINAS (
+   MODM_CODIGO          numeric(10)          identity,
+   MODM_NOMBRE          varchar(80)          null,
+   MODM_DESCRIPCION     varchar(200)         null,
+   constraint PK_MODELOS_MAQUINAS primary key nonclustered (MODM_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: ORDENES_TRABAJO                                       */
+/*==============================================================*/
+create table ORDENES_TRABAJO (
+   OTJO_NUMERO          numeric(10)          identity,
+   PROC_CODIGO          numeric(10)          not null,
+   EORD_CODIGO          numeric(10)          not null,
+   OTJO_FECHA           datetime             null,
+   constraint PK_ORDENES_TRABAJO primary key nonclustered (OTJO_NUMERO)
+)
+
+/*==============================================================*/
+/* Table: PEDIDOS                                               */
+/*==============================================================*/
+create table PEDIDOS (
+   PED_NUMERO           numeric(10)          identity,
+   CLI_CODIGO           numeric(10)          not null,
+   EPED_CODIGO          numeric(10)          not null,
+   PED_FECHAENTREGAPREVISTA datetime         null,
+   PED_FECHAENTREGAREAL datetime             null,
+   constraint PK_PEDIDOS primary key nonclustered (PED_NUMERO)
+)
+
+/*==============================================================*/
+/* Table: PIEZAS                                                */ /*-MODIFICACION 17/07/2010-*/
+/*==============================================================*/
+create table PIEZAS (
+   PZA_CODIGO           numeric(10)          identity,
+   TE_CODIGO            numeric(10)          null,
+   PZA_NOMBRE           varchar(80)          null,
+   PZA_CANTIDADSTOCK    int                  null,
+   PZA_DESCRIPCION      varchar(200)         null,            /*-MODIFICACION 17/07/2010-*/
+   PAR_CODIGO           numeric(10)          not null,	/*-MODIFICACION 17/07/2010-*/
+   PNO_CODIGO           numeric(10)          null,	/*-MODIFICACION 17/07/2010-*/
+   PZA_CODIGOPARTE     varchar(80)          null,	/*-MODIFICACION 26/07/2010-*/
+   constraint PK_PIEZAS primary key nonclustered (PZA_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: PIEZASXESTRUCTURA                                     */ /*-MODIFICACION 17/07/2010-*/
+/*==============================================================*/
+create table PIEZASXESTRUCTURA (
+   PXE_CODIGO           numeric(10)          identity,
+   ESTR_CODIGO          numeric(10)          not null,
+   PZA_CODIGO           numeric(10)          not null,
+   PXE_CANTIDAD         numeric(10)          not null,
+   GRP_CODIGO           numeric(10)          not null,   /*-MODIFICACION 23/07/2010-*/
+   constraint PK_PIEZASXESTRUCTURA primary key nonclustered (PXE_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: PLANES_ANUALES                                        */
+/*==============================================================*/
+create table PLANES_ANUALES (
+   PAN_CODIGO           numeric(10)          identity,
+   PAN_ANIO             numeric(4)           not null,
+   DEMAN_CODIGO         numeric(10)          not null,
+   PAN_FECHACREACION    datetime             null,
+   constraint PK_PLANES_ANUALES primary key nonclustered (PAN_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: PLANES_MANTENIMIENTO                                  */
+/*==============================================================*/
+create table PLANES_MANTENIMIENTO (
+   PMAN_NUMERO          numeric(10)          identity,
+   EPMAN_CODIGO         numeric(10)          not null,
+   PMAN_FECHA           datetime             null,
+   PMAN_OBSERVACIONES   varchar(200)         null,
+   constraint PK_PLANES_MANTENIMIENTO primary key nonclustered (PMAN_NUMERO)
+)
+
+/*==============================================================*/
+/* Table: PLANES_MENSUALES                                      */
+/*==============================================================*/
+create table PLANES_MENSUALES (
+   PMES_CODIGO          numeric(10)          identity,
+   PAN_CODIGO           numeric(10)          not null,
+   PMES_MES             numeric(10)          null,
+   PMES_FECHACREACION   datetime             null,
+   constraint PK_PLANES_MENSUALES primary key nonclustered (PMES_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: PLANES_SEMANALES                                      */
+/*==============================================================*/
+create table PLANES_SEMANALES (
+   PSEM_CODIGO          numeric(10)          identity,
+   PMES_CODIGO          numeric(10)          not null,
+   PSEM_SEMANA          numeric(1)           null,
+   PSEM_FECHACREACION   datetime             null,
+   constraint PK_PLANES_SEMANALES primary key nonclustered (PSEM_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: PROCESOS                                              */
+/*==============================================================*/
+create table PROCESOS (
+   PROC_CODIGO          numeric(10)          identity,
+   SEC_CODIGO           numeric(10)          null,
+   PROC_NOMBRE          varchar(80)          null,
+   PROC_DESCRIPCION     varchar(200)         null,            /*-MODIFICACION 17/07/2010-*/
+   constraint PK_PROCESOS primary key nonclustered (PROC_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: PROVEEDORES                                           */
+/*==============================================================*/
+create table PROVEEDORES (
+   PROVE_CODIGO         numeric(10)          identity,
+   SEC_CODIGO           numeric(10)          null,
+   PROVE_RAZONSOCIAL    varchar(80)          null,
+   constraint PK_PROVEEDORES primary key nonclustered (PROVE_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: PROVINCIAS                                            */
+/*==============================================================*/
+create table PROVINCIAS (
+   PCIA_CODIGO          numeric(2)           identity,
+   PCIA_NOMBRE          varchar(17)          null,
+   constraint PK_PROVINCIAS primary key nonclustered (PCIA_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: REPUESTOS                                             */
+/*==============================================================*/
+create table REPUESTOS (
+   REP_CODIGO           numeric(10)          identity,
+   TREP_CODIGO          numeric(10)          not null,
+   REP_NOMBRE           varchar(80)          null,
+   REP_DESCRIPCION      varchar(200)         null,
+   REP_CANTIDADSTOCK    int                  null,
+   REP_PRECIO           float(10)            null,
+   constraint PK_REPUESTOS primary key nonclustered (REP_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: ROLES                                                 */
+/*==============================================================*/
+create table ROLES (
+   ROL_CODIGO           numeric(10)          identity,
+   ROL_NOMBRE           varchar(80)          null,
+   ROL_DESCRIPCION      varchar(200)         null,
+   ROL_PERMISO          varchar(30)          null,
+   constraint PK_ROLES primary key nonclustered (ROL_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: SECTORES                                              */
+/*==============================================================*/
+create table SECTORES (
+   SEC_CODIGO           numeric(10)          identity,
+   SEC_NOMBRE           varchar(80)          null,
+   SEC_DESCRIPCION      varchar(200)         null,
+   SEC_ABREVIATURA      varchar(20)          null,
+   constraint PK_SECTORES primary key nonclustered (SEC_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: SUBCONJUNTOS                                          */ /*-MODIFICACION 17/07/2010-*/
+/*==============================================================*/
+create table SUBCONJUNTOS (
+   SCONJ_CODIGO         numeric(10)          identity,
+   TE_CODIGO            numeric(10)          null,
+   SCONJ_NOMBRE         varchar(80)          null,
+   SCONJ_CANTIDADSTOCK  int                  null,
+   SCONJ_DESCRIPCION    varchar(200)         null,            /*-MODIFICACION 17/07/2010-*/
+   PAR_CODIGO           numeric(10)          not null,	/*-MODIFICACION 17/07/2010-*/
+   PNO_CODIGO           numeric(10)          null,	/*-MODIFICACION 17/07/2010-*/
+   SCONJ_CODIGOPARTE   varchar(80)          null,	/*-MODIFICACION 26/07/2010-*/
+   constraint PK_SUBCONJUNTOS primary key nonclustered (SCONJ_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: SUBCONJUNTOSXESTRUCTURA                                */ /*-MODIFICACION 17/07/2010-*/
+/*==============================================================*/
+create table SUBCONJUNTOSXESTRUCTURA (
+   SCXE_CODIGO          numeric(10)          identity,
+   ESTR_CODIGO          numeric(10)          not null,
+   SCONJ_CODIGO         numeric(10)          not null,
+   SCXE_CANTIDAD        numeric(10)          not null,
+   GRP_CODIGO           numeric(10)          not null,   /*-MODIFICACION 23/07/2010-*/
+   constraint PK_SUBCONJUNTOSXESTRUCTURA primary key nonclustered (SCXE_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: TAREAS                                                */
+/*==============================================================*/
+create table TAREAS (
+   TA_CODIGO            numeric(10)          identity,
+   TA_NOMBRE            varchar(80)          null,
+   TA_DESCRIPCION       varchar(200)         null,
+   TA_SECUENCIA         int                  null,
+   TA_TIEMPOEJECUCION   int                  null,
+   constraint PK_TAREAS primary key nonclustered (TA_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: TAREASXPROCESOS                                       */
+/*==============================================================*/
+create table TAREASXPROCESOS (
+   TXP_CODIGO           numeric(10)          identity,
+   PROC_CODIGO          numeric(10)          not null,
+   TA_CODIGO            numeric(10)          not null,
+   constraint PK_TAREASXPROCESOS primary key nonclustered (TXP_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: TERMINACIONES                                         */
+/*==============================================================*/
+create table TERMINACIONES (
+   TE_CODIGO            numeric(10)          identity,
+   TE_NOMBRE            varchar(80)          null,
+   TE_DESCRIPCION       varchar(200)         null,
+   TE_ABREVIATURA       varchar(20)          not null,
+   constraint PK_TERMINACIONES primary key nonclustered (TE_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: TIPOS_MANTENIMIENTOS                                  */
+/*==============================================================*/
+create table TIPOS_MANTENIMIENTOS (
+   TMAN_CODIGO          numeric(10)          identity,
+   TMAN_NOMBRE          varchar(80)          null,
+   TMAN_DESCRIPCION     varchar(200)         null,
+   constraint PK_TIPOS_MANTENIMIENTOS primary key nonclustered (TMAN_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: TIPOS_REPUESTOS                                       */
+/*==============================================================*/
+create table TIPOS_REPUESTOS (
+   TREP_CODIGO          numeric(10)          identity,
+   TREP_NOMBRE          varchar(80)          null,
+   TREP_DESCRIPCION     varchar(200)         null,
+   constraint PK_TIPOS_REPUESTOS primary key nonclustered (TREP_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: TIPOS_UNIDADES_MEDIDA                                 */
+/*==============================================================*/
+create table TIPOS_UNIDADES_MEDIDA (
+   TUMED_CODIGO         numeric(10)          identity,
+   TUMED_NOMBRE         varchar(80)          null,
+   constraint PK_TIPOS_UNIDADES_MEDIDA primary key nonclustered (TUMED_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: UNIDADES_MEDIDA                                       */
+/*==============================================================*/
+create table UNIDADES_MEDIDA (
+   UMED_CODIGO          numeric(10)          identity,
+   TUMED_CODIGO         numeric(10)          null,
+   UMED_NOMBRE          varchar(80)          null,
+   UMED_ABREVIATURA     varchar(10)          null,
+   constraint PK_UNIDADES_MEDIDA primary key nonclustered (UMED_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: USUARIOS                                              */
+/*==============================================================*/
+create table USUARIOS (
+   U_CODIGO             numeric(10)          identity,
+   EU_CODIGO            numeric(10)          not null,
+   ROL_CODIGO           numeric(10)          not null,
+   E_CODIGO             numeric(10)          not null,
+   U_USUARIO            varchar(80)          null,
+   U_PASSWORD           varchar(80)          null,
+   constraint PK_USUARIOS primary key nonclustered (U_CODIGO)
+)
+
+/*-----------MODIFICACIONES 05/07/2010-------------*/
+
+/*==============================================================*/
+/* Table: PLANOS                                                */
+/*==============================================================*/
+create table PLANOS (
+   PNO_CODIGO           numeric(10)          identity,
+   PNO_FECHACREACION    datetime             null,
+   PNO_OBSERVACIONES    varchar(200)         null,
+   PNO_NOMBRE           varchar(80)          null,	/*-MODIFICACION 23/07/2010-*/
+   PNO_NUMERO           varchar(10)          not null,	/*-MODIFICACION 23/07/2010-*/
+   PNO_HABILITADO       numeric(1)           not null,	/*-MODIFICACION 23/07/2010-*/
+   PNO_FECHAHABILITADO  datetime             null,	/*-MODIFICACION 23/07/2010-*/
+   PNO_FECHADESHABILITADO datetime           null,	/*-MODIFICACION 23/07/2010-*/
+   PNO_FECHAMODIFICACION datetime            null,	/*-MODIFICACION 23/07/2010-*/
+   PNO_LETRACAMBIO      varchar(2)           null,	/*-MODIFICACION 23/07/2010-*/
+   constraint PK_PLANOS primary key nonclustered (PNO_CODIGO)
+)
+
+/*--------AGREGADO 17/07/2010--------*/
+
+/*==============================================================*/
+/* Table: PLANES_MATERIAS_PRIMAS_ANUALES                        */
+/*==============================================================*/
+create table PLANES_MATERIAS_PRIMAS_ANUALES (
+   PMPA_CODIGO          numeric(10)          identity,
+   PMPA_FECHACREACION   datetime             null,
+   PMPA_ANIO            numeric(4)           null,	/*-MODIFICACION 24/07/2010-*/
+   PMPA_NOMBRE          varchar              null,	/*-MODIFICACION 24/07/2010-*/
+   constraint PK_PLANES_MATERIA_PRIMA_ANUAL primary key nonclustered (PMPA_CODIGO)
+)
+
+
+/*==============================================================*/
+/* Table: DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL                    */
+/*==============================================================*/
+create table DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL (
+   DPMPA_CODIGO         numeric(10)          identity,
+   PMPA_CODIGO          numeric(10)          null,
+   MP_CODIGO            numeric(10)          null,	/*-MODIFICACION 24/07/2010-*/
+   DPMPA_CANTIDAD       numeric(10)          null,
+   PMPA_MES             varchar(10)          null,	/*-MODIFICACION 01/08/2010-*/
+   constraint PK_DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL primary key nonclustered (DPMPA_CODIGO)
+)
+
+
+/*--------AGREGADO 23/07/2010--------*/
+
+/*==============================================================*/
+/* Table: ESTADO_PARTES                                         */
+/*==============================================================*/
+create table ESTADO_PARTES (
+   PAR_CODIGO           numeric(10)          identity,
+   PAR_NOMBRE           varchar(80)          null,
+   PAR_DESCRIPCION      varchar(200)         null,
+   constraint PK_ESTADO_PARTES primary key nonclustered (PAR_CODIGO)
+)
+
+/*--------AGREGADO 26/07/2010--------*/
+
+/*==============================================================*/
+/* Table: DETALLE_PLAN_ANUAL                                    */
+/*==============================================================*/
+
+
+create table DETALLE_PLAN_ANUAL (
+   DPAN_CODIGO          numeric(10)          identity,
+   PAN_CODIGO           numeric(10)          not null,
+   DPAN_MES             varchar(10)          null,
+   DPAN_CANTIDADMES     numeric(10)          null,
+   constraint PK_DETALLE_PLAN_ANUAL primary key nonclustered (DPAN_CODIGO)
+)
+
+/*--------AGREGADO 13/08/2010--------*/
+
+/*==============================================================*/
+/* Table: EJEMPLARES_COCINA                                     */
+/*==============================================================*/
+
+
+create table EJEMPLARES_COCINA (
+   EJC_CODIGO           numeric(10)       identity,
+   COC_CODIGO           numeric(10)       not null,
+   EJC_NUMEROSERIE      varchar(80)       null,
+   ECOC_CODIGO          numeric(10)       null,
+   LOT_CODIGO           numeric(10)       null,
+   constraint PK_EJEMPLARES_COCINA primary key nonclustered (EJC_CODIGO)
+)
+
+/*--------AGREGADO 13/08/2010--------*/
+
+/*==============================================================*/
+/* Table: LOTES_COCINA                                          */
+/*==============================================================*/
+
+
+create table LOTES_COCINA (
+   LOT_CODIGO           numeric(10)       identity,
+   COC_CODIGO           numeric(10)       not null,
+   LOT_NOMBRE           varchar(80)       null,
+   LOT_DESDENUMEROSERIE varchar(80)       null,
+   LOT_HASTANUMEROSERIE varchar(80)       null,
+   constraint PK_LOTES_COCINA primary key nonclustered (LOT_CODIGO)
+)
+
+/*==============================================================*/
+/* Table: TURNOS_TRABAJO                                        */
+/*==============================================================*/
+
+
+create table TURNOS_TRABAJO(
+   TURNO_CODIGO         numeric(10)       identity,
+   TURNO_DENOMINACION   varchar(80)       not null,
+   TURNO_HORA_INICIO    numeric(10)       not null,
+   TURNO_HORA_FIN       numeric(10)       not null,
+   constraint PK_TURNOS_TRABAJO primary key nonclustered (TURNO_CODIGO)
+)

@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9102F252-4267-45D1-B148-DD3BE4D709E4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GyCAP.UI.EstructuraProducto</RootNamespace>
+    <AssemblyName>EstructuraProducto</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Enterprise.Framework, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Enterprise.InfoStore, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="SlickInterface, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Sistema\SlickInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\WINDOWS\assembly\GAC_MSIL\System.Web.Services\2.0.0.0__b03f5f7f11d50a3a\System.Web.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmCocina.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCocina.Designer.cs">
+      <DependentUpon>frmCocina.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmColor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmColor.Designer.cs">
+      <DependentUpon>frmColor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConjunto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConjunto.Designer.cs">
+      <DependentUpon>frmConjunto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDesignacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDesignacion.Designer.cs">
+      <DependentUpon>frmDesignacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEstructuraCocina.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEstructuraCocina.Designer.cs">
+      <DependentUpon>frmEstructuraCocina.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEstructuraProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEstructuraProducto.Designer.cs">
+      <DependentUpon>frmEstructuraProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmListadoEstructura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListadoEstructura.Designer.cs">
+      <DependentUpon>frmListadoEstructura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMateriaPrimaPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMateriaPrimaPrincipal.Designer.cs">
+      <DependentUpon>frmMateriaPrimaPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmModeloCocina.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmModeloCocina.Designer.cs">
+      <DependentUpon>frmModeloCocina.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPieza.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPieza.Designer.cs">
+      <DependentUpon>frmPieza.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSubconjunto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSubconjunto.Designer.cs">
+      <DependentUpon>frmSubconjunto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTerminacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTerminacion.designer.cs">
+      <DependentUpon>frmTerminacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUnidadMedida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUnidadMedida.Designer.cs">
+      <DependentUpon>frmUnidadMedida.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmCocina.resx">
+      <DependentUpon>frmCocina.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmColor.resx">
+      <DependentUpon>frmColor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConjunto.resx">
+      <DependentUpon>frmConjunto.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDesignacion.resx">
+      <DependentUpon>frmDesignacion.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEstructuraCocina.resx">
+      <DependentUpon>frmEstructuraCocina.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEstructuraProducto.resx">
+      <DependentUpon>frmEstructuraProducto.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListadoEstructura.resx">
+      <DependentUpon>frmListadoEstructura.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMateriaPrimaPrincipal.resx">
+      <DependentUpon>frmMateriaPrimaPrincipal.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmModeloCocina.resx">
+      <DependentUpon>frmModeloCocina.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPieza.resx">
+      <DependentUpon>frmPieza.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSubconjunto.resx">
+      <DependentUpon>frmSubconjunto.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTerminacion.resx">
+      <DependentUpon>frmTerminacion.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUnidadMedida.resx">
+      <DependentUpon>frmUnidadMedida.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{A0EA0794-16BA-4988-BCFF-00204902B7AA}</Project>
+      <Name>BLL %28BLL\BLL%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{B288FFDF-AF2E-41DA-AB2F-C17A4944E272}</Project>
+      <Name>Data %28Data\Data%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{BF769C01-D311-4BC9-813A-C63DC3B89319}</Project>
+      <Name>Entidades %28Entidades\Entidades%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sistema\Sistema.csproj">
+      <Project>{9A02F786-F362-4FC0-A53D-83C51951D9DF}</Project>
+      <Name>Sistema</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Warning-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Apply-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delete-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Find-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Floppy-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Information-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Open-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Page-Setup-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Password-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printer-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Question-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Salir-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\System-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\System.Set-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Text-Editor-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lupa-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Menos-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mas-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sinimagen.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Find-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Listados-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sumar-Gris-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Restar-Gris-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Volver-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lupa-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Volver-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ARROW10B.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\derecha3-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\derecha1-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\derecha2-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\izquierda3-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arriba3-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\izquierda1-15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arriba1-15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\derecha1-15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\abajo1-15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zoom-In-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Abrir-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zoom-Out-25.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

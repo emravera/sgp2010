@@ -1,0 +1,20 @@
+E:\Implementacion\GyCAP\Entidades\bin\Debug\Entidades.dll
+E:\Implementacion\GyCAP\Entidades\bin\Debug\Entidades.pdb
+E:\Implementacion\GyCAP\Entidades\obj\Debug\ResolveAssemblyReference.cache
+E:\Implementacion\GyCAP\Entidades\obj\Debug\Entidades.dll
+E:\Implementacion\GyCAP\Entidades\obj\Debug\Entidades.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Entidades\bin\Debug\Entidades.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Entidades\bin\Debug\Entidades.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Entidades\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Entidades\obj\Debug\Entidades.dll
+C:\Documents and Settings\Administrador\Mis documentos\Gonzalo\Universidad\5º Año\Proyecto\Implementación\GyCAP\Entidades\obj\Debug\Entidades.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Entidades\bin\Debug\Entidades.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Entidades\bin\Debug\Entidades.pdb
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Entidades\obj\Debug\ResolveAssemblyReference.cache
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Entidades\obj\Debug\Entidades.dll
+E:\--- FACU 2010 ---\Proyecto Final\Tesis\Implementacion\Sistema GyCAP\Entidades\obj\Debug\Entidades.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\Entidades\bin\Debug\Entidades.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\Entidades\bin\Debug\Entidades.pdb
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\Entidades\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\Entidades\obj\Debug\Entidades.dll
+C:\Documents and Settings\Emanuel\Mis documentos\Ema\Universidad\Quinto Año\Tesis\sgp\Implementacion\Sistema GyCAP\Entidades\obj\Debug\Entidades.pdb
