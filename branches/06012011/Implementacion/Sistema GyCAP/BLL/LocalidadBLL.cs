@@ -44,7 +44,7 @@ namespace GyCAP.BLL
         /// Determina si una localidad existe en base a su nombre y provincia.
         /// </summary>
         /// <param name="localidad">El objeto localidad con el nombre y código de la provincia.</param>
-        /// <returns>true si existe, false en caso contrario.</returns>
+        /// <returns>true si existe, false en caso contrario.</returns>        
         public static bool EsLocalidad(Entidades.Localidad localidad)
         {
             return DAL.LocalidadDAL.EsLocalidad(localidad);
