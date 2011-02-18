@@ -9,67 +9,8 @@ namespace GyCAP.DAL
 {
     public class LocalidadDAL
     {
-        public static void Insertar(Entidades.Localidad localidad)
-        {
-            string sql = "INSERT INTO [LOCALIDADES] ([pcia_codigo], [loc_nombre]) VALUES (@p0, @p1) SELECT @@Identity";
-            object[] valoresParametros = { localidad.Provincia.Codigo, localidad.Nombre };
 
-            try
-            {
-                localidad.Codigo = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, null));
-            }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-        }
-
-        public static void Actualizar(Entidades.Localidad localidad)
-        {
-            string sql = "UPDATE LOCALIDADES SET pcia_codigo = @p0, loc_nombre = @p1 WHERE loc_codigo = @p2";
-            object[] valoresParametros = { localidad.Provincia.Codigo, localidad.Nombre, localidad.Codigo };
-
-            try
-            {
-                DB.executeNonQuery(sql, valoresParametros, null);
-            }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-        }
-
-        public static void Eliminar(int codigo)
-        {
-            string sql = "DELETE FROM LOCALIDADES WHERE loc_codigo = @p0@";
-            object[] valoresParametros = { codigo };
-
-            try
-            {
-                DB.executeNonQuery(sql, valoresParametros, null);
-            }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-        }
-
-        public static bool PuedeEliminarse(int codigo)
-        {
-            string sql = "SELECT count(loc_codigo) FROM DOMICILIOS WHERE loc_codigo = @p0";
-            object[] valoresParametros = { codigo };
-
-            try
-            {
-                if (Convert.ToInt32(DB.executeScalar(sql, valoresParametros, null)) == 0) { return true; }
-                else { return false; }
-            }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-        }
-
-        public static bool EsLocalidad(Entidades.Localidad localidad)
-        {
-            string sql = "SELECT count(loc_codigo) FROM LOCALIDADES WHERE loc_nombre = @p0 AND pcia_codigo = @p1";
-            object[] valoresParametros = { localidad.Nombre, localidad.Provincia.Codigo };
-
-            try
-            {
-                if (Convert.ToInt32(DB.executeScalar(sql, valoresParametros, null)) == 0) { return false; }
-                else { return true; }
-            }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-        }
+        #region Busquedas
 
         public static void ObtenerLocalidades(DataTable dtLocalidades)
         {
@@ -132,5 +73,75 @@ namespace GyCAP.DAL
                 catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
         }
+        #endregion
+
+        #region Comandos
+
+        public static void Insertar(Entidades.Localidad localidad)
+        {
+            string sql = "INSERT INTO [LOCALIDADES] ([pcia_codigo], [loc_nombre]) VALUES (@p0, @p1) SELECT @@Identity";
+            object[] valoresParametros = { localidad.Provincia.Codigo, localidad.Nombre };
+
+            try
+            {
+                localidad.Codigo = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, null));
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static void Actualizar(Entidades.Localidad localidad)
+        {
+            string sql = "UPDATE LOCALIDADES SET pcia_codigo = @p0, loc_nombre = @p1 WHERE loc_codigo = @p2";
+            object[] valoresParametros = { localidad.Provincia.Codigo, localidad.Nombre, localidad.Codigo };
+
+            try
+            {
+                DB.executeNonQuery(sql, valoresParametros, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static void Eliminar(int codigo)
+        {
+            string sql = "DELETE FROM LOCALIDADES WHERE loc_codigo = @p0";
+            object[] valoresParametros = { codigo };
+
+            try
+            {
+                DB.executeNonQuery(sql, valoresParametros, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+        #endregion
+
+        #region Validaciones
+
+        public static bool PuedeEliminarse(int codigo)
+        {
+            string sql = "SELECT count(loc_codigo) FROM DOMICILIOS WHERE loc_codigo = @p0";
+            object[] valoresParametros = { codigo };
+
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valoresParametros, null)) == 0) { return true; }
+                else { return false; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static bool EsLocalidad(Entidades.Localidad localidad)
+        {
+            string sql = "SELECT count(loc_codigo) FROM LOCALIDADES WHERE loc_nombre = @p0 AND pcia_codigo = @p1";
+            object[] valoresParametros = { localidad.Nombre, localidad.Provincia.Codigo };
+
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valoresParametros, null)) == 0) { return false; }
+                else { return true; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+        #endregion
+
     }
 }

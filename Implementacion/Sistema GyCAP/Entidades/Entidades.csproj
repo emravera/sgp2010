@@ -36,6 +36,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -104,6 +105,7 @@
     <Compile Include="MateriaPrimaABC.cs" />
     <Compile Include="MateriaPrimaEstructura.cs" />
     <Compile Include="MateriaPrimaPrincipal.cs" />
+    <Compile Include="Mensajes\MensajesABM.cs" />
     <Compile Include="ModeloCocina.cs" />
     <Compile Include="ModeloMaquina.cs" />
     <Compile Include="MovimientoStock.cs" />
