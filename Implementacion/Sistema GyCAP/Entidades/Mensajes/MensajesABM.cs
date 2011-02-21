@@ -57,7 +57,7 @@ namespace GyCAP.Entidades.Mensajes
         /// <param name="msjExcepcion">Mensaje de la excepcion capturada (ex.Message)</param>
         /// <param name="nombreFormulario">El nombre del formulario (this.Name)</param>
         /// <param name="operacion">El nombre de la operacion que se esta realizando (Obtener de la enumeracion operaciones)</param>
-        public static void MsjExcepcion(string msjExcepcion, string nombreFormulario, operaciones operacion)
+        public static void MsjExcepcion(string msjExcepcion, string nombreFormulario, Operaciones operacion)
         {
             MessageBox.Show(msjExcepcion, "Error:" + nombreFormulario + " - " + operacion.ToString() , MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -107,13 +107,13 @@ namespace GyCAP.Entidades.Mensajes
         /// <param name="genero">Genero del elemento (Usar enumeracion generos de la clase)</param>
         /// <param name="nombreFormulario">El nombre del formulario (this.Name)</param>
         
-        public static void MsjSinSeleccion(string elemento, generos genero, string nombreFormulario)
+        public static void MsjSinSeleccion(string elemento, Generos genero, string nombreFormulario)
         {
-            if (genero == generos.Femenino)
+            if (genero ==  Generos.Femenino)
             {
                 MessageBox.Show("Debe seleccionar una " + elemento + " de la lista.", nombreFormulario + " - Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else if (genero == generos.Masculino)
+            else if (genero == Generos.Masculino)
             {
                 MessageBox.Show("Debe seleccionar un " + elemento + " de la lista.", nombreFormulario + " - Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -126,7 +126,7 @@ namespace GyCAP.Entidades.Mensajes
         /// <param name="nombreFormulario">El nombre del formulario (this.Name)</param>
         /// <param name="genero">Genero del elemento (Usar enumeracion genero de la clase)</param>
         
-        public static void MsjConfirmaGuardar(string elemento, string nombreFormulario, operaciones operacion)
+        public static void MsjConfirmaGuardar(string elemento, string nombreFormulario, Operaciones operacion)
         {
             MessageBox.Show("Elemento" + elemento + " guardado correctamente.",nombreFormulario + " - Información: " + operacion.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
