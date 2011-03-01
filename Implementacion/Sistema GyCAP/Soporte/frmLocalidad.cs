@@ -19,6 +19,7 @@ namespace GyCAP.UI.Soporte
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
+       
         #region Inicio_Pantalla
 
         public frmLocalidad()
@@ -42,7 +43,7 @@ namespace GyCAP.UI.Soporte
             {
                 BLL.ProvinciaBLL.ObtenerProvincias(dsLocalidad.PROVINCIAS);
             }
-            catch (Entidades.Excepciones.BaseDeDatosException ex) { MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Entidades.Excepciones.BaseDeDatosException ex) { Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Inicio); }
 
             //Dataviews
             dvLocalidad = new DataView(dsLocalidad.LOCALIDADES);
@@ -166,6 +167,33 @@ namespace GyCAP.UI.Soporte
             txtNombre.SelectAll();
         }
 
+        private string Validar()
+        {
+            string erroresValidacion=string.Empty;
+
+            string validacion = string.Empty;
+            
+            //Control de combos
+            List<string> combos = new List<string>();
+            if (cbProvincia.SelectedIndex == -1)
+            {
+                combos.Add("Provincia");
+                erroresValidacion= erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.Seleccion,combos);
+            }
+
+            //Control de los textbox
+            List<string> datos = new List<string>();
+            if (txtNombre.Text == string.Empty)
+            {
+                datos.Add("Nombre");
+                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
+            }
+
+            return erroresValidacion;
+        }
+
+
+
         public static frmLocalidad Instancia
         {
             get
@@ -193,7 +221,7 @@ namespace GyCAP.UI.Soporte
         }
         #endregion
 
-       #region Pestaña Buscar
+        #region Pestaña Buscar
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -205,13 +233,13 @@ namespace GyCAP.UI.Soporte
 
                 if (dsLocalidad.LOCALIDADES.Rows.Count == 0)
                 {
-                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Localidades", this.Name.ToString());
+                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Localidades", this.Text);
                 }
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Name.ToString(), GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }
         }
@@ -270,7 +298,7 @@ namespace GyCAP.UI.Soporte
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Localidad", Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Name.ToString());
+                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Localidad", Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -285,24 +313,24 @@ namespace GyCAP.UI.Soporte
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Name.ToString());
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Name.ToString(), GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Localidad", Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Name.ToString());
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Localidad", Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
             }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisamos que escribió algo y selecciono algo en el combo
-            if (txtNombre.Text != String.Empty && cbProvincia.GetSelectedIndex() != -1)
+            if (Validar() == string.Empty)
             {
                 Entidades.Localidad localidad = new GyCAP.Entidades.Localidad();
                 localidad.Provincia = new GyCAP.Entidades.Provincia();
@@ -336,7 +364,7 @@ namespace GyCAP.UI.Soporte
                         if (estadoInterface == estadoUI.nuevoExterno)
                         {
                             //Avisamos que estuvo todo ok
-                            Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Localidad", this.Name.ToString(), Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                            Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Localidad", this.Text, Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                             
                             //Nuevo desde acceso directo, cerramos el formulario
                             btnSalir.PerformClick();
@@ -349,11 +377,11 @@ namespace GyCAP.UI.Soporte
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Name.ToString());
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Name.ToString(), Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
@@ -380,20 +408,20 @@ namespace GyCAP.UI.Soporte
                         //Agregamos la fila al dataset y aceptamos los cambios
                         dsLocalidad.LOCALIDADES.AcceptChanges();
                         //Avisamos que estuvo todo ok
-                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Localidad", this.Name.ToString(), Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Localidad", this.Text, Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Name.ToString(), GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                 }
                 dvLocalidad.Table = dsLocalidad.LOCALIDADES;
             }
             else
             {
-                Entidades.Mensajes.MensajesABM.MsjErrorValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.Seleccion, this.Name.ToString());
+                Entidades.Mensajes.MensajesABM.MsjValidacion(Validar(), this.Text);
             }
         }
         
