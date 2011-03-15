@@ -7,15 +7,15 @@ Nomenclatura para codificar los issues.
 
 = Detalle =
 
-UC### + / + letra-categoría + número
+UC[CODIGO] + / + letra-categoría + número
 
 *UC:* poner UC seguido del código que tiene el caso de uso en el excel
 
 *Letras categoría*
 
-==_M_ : mejora
-==_B_ : bug, error, etc
-==_R_ : requerimiento
+_M_ : mejora
+_B_ : bug, error, etc
+_R_ : requerimiento
 
 *Número:* debe ser secuencial y de tres dígitos
 
