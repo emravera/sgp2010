@@ -13,8 +13,8 @@ UC### + / + letra-categoría + número
 
 *Letras categoría*
 
-M : mejora
-B : bug, error, etc
+_M_ : mejora
+_B_ : bug, error, etc
 
 *Número:* debe ser secuencial y de tres dígitos
 
