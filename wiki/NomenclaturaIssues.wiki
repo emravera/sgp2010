@@ -1,0 +1,22 @@
+#summary One-sentence summary of this page.
+#labels Phase-Design
+
+= Introduction =
+
+Nomenclatura para codificar los issues.
+
+= Details =
+
+UC### + / + letra-categoría + número
+
+*bold*UC: poner UC seguido del código que tiene el caso de uso en el excel
+
+*bold*Letras categoría
+
+* M : mejora
+* B : bug, error, etc
+
+*bold*Número: debe ser secuencial y de tres dígitos
+
+* bold*Ejemplo
+UCSO34/B001
