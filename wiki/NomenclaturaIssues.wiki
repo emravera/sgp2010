@@ -13,9 +13,9 @@ UC-CODIGO + / + letra-categoría + número
 
 *Letras categoría*
 
-#_M_ : mejora
-#_B_ : bug, error, etc
-#_R_ : requerimiento
+_M_ : mejora
+_B_ : bug, error, etc
+_R_ : requerimiento
 
 *Número:* debe ser secuencial y de tres dígitos
 
