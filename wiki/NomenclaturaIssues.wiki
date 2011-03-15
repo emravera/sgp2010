@@ -9,7 +9,7 @@ Nomenclatura para codificar los issues.
 
 UC-CODIGO + / + letra-categoría + número
 
-*UC: poner UC seguido del código que tiene el caso de uso en el excel
+*UC:* poner UC seguido del código que tiene el caso de uso en el excel
 
 *Letras categoría*
 
@@ -17,7 +17,7 @@ _M_ : mejora
 _B_ : bug, error, etc
 _R_ : requerimiento
 
-*Número: debe ser secuencial y de tres dígitos
+*Número:* debe ser secuencial y de tres dígitos
 
-*Ejemplo
+*Ejemplo*
 UCSO34/B001
