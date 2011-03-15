@@ -1,11 +1,11 @@
-#summary One-sentence summary of this page.
+#summary Nomenclatura para los Issues.
 #labels Phase-Design
 
-= Introduction =
+= Introducción =
 
 Nomenclatura para codificar los issues.
 
-= Details =
+= Detalle =
 
 UC### + / + letra-categoría + número
 
