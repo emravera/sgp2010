@@ -9,7 +9,7 @@ Nomenclatura para codificar los issues.
 
 UC-CODIGO + / + letra-categoría + número
 
-*UC:* poner UC seguido del código que tiene el caso de uso en el excel. Si no está relacionado a un uc omitirlo.
+*UC:* poner UC seguido del código que tiene el caso de uso en el excel. Si no está relacionado a un uc especifico poner ALL.
 
 *Letras categoría*
 
