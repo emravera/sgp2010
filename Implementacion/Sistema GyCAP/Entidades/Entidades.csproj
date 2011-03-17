@@ -54,6 +54,7 @@
     <Compile Include="Cliente.cs" />
     <Compile Include="Cocina.cs" />
     <Compile Include="Color.cs" />
+    <Compile Include="CompuestoParte.cs" />
     <Compile Include="Conjunto.cs" />
     <Compile Include="ConjuntoEstructura.cs" />
     <Compile Include="ContenidoUbicacionStock.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="EstadoMaquina.cs" />
     <Compile Include="EstadoMovimientoStock.cs" />
     <Compile Include="EstadoOrdenTrabajo.cs" />
+    <Compile Include="EstadoParte.cs" />
     <Compile Include="EstadoPedido.cs" />
     <Compile Include="EstadoPlanMantenimiento.cs" />
     <Compile Include="EstadoUsuario.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="MovimientoStock.cs" />
     <Compile Include="OperacionFabricacion.cs" />
     <Compile Include="OrdenTrabajo.cs" />
+    <Compile Include="Parte.cs" />
     <Compile Include="Pedido.cs" />
     <Compile Include="Pieza.cs" />
     <Compile Include="PiezaEstructura.cs" />
@@ -118,6 +121,7 @@
     <Compile Include="PlanMantenimiento.cs" />
     <Compile Include="PlanMateriaPrima.cs" />
     <Compile Include="PlanMensual.cs" />
+    <Compile Include="Plano.cs" />
     <Compile Include="PlanSemanal.cs" />
     <Compile Include="Proceso.cs" />
     <Compile Include="Producto.cs" />
@@ -141,6 +145,7 @@
     <Compile Include="Tarea.cs" />
     <Compile Include="Terminacion.cs" />
     <Compile Include="TipoMantenimiento.cs" />
+    <Compile Include="TipoParte.cs" />
     <Compile Include="TipoRepuesto.cs" />
     <Compile Include="TipoUbicacionStock.cs" />
     <Compile Include="TipoUnidadMedida.cs" />

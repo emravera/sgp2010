@@ -54,6 +54,7 @@
     <Compile Include="ClienteBLL.cs" />
     <Compile Include="CocinaBLL.cs" />
     <Compile Include="ColorBLL.cs" />
+    <Compile Include="CompuestoParteBLL.cs" />
     <Compile Include="ConjuntoBLL.cs" />
     <Compile Include="ContenidoUbicacionStockBLL.cs" />
     <Compile Include="DBBLL.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="ModeloMaquinaBLL.cs" />
     <Compile Include="OperacionBLL.cs" />
     <Compile Include="OrdenProduccionBLL.cs" />
+    <Compile Include="ParteBLL.cs" />
     <Compile Include="PedidoBLL.cs" />
     <Compile Include="PiezaBLL.cs" />
     <Compile Include="PlanAnualBLL.cs" />
@@ -128,6 +130,7 @@
     <Compile Include="TareaBLL.cs" />
     <Compile Include="TerminacionBLL.cs" />
     <Compile Include="TipoMantenimientoBLL.cs" />
+    <Compile Include="TipoParteBLL.cs" />
     <Compile Include="TipoRepuestoBLL.cs" />
     <Compile Include="TipoUbicacionStockBLL.cs" />
     <Compile Include="TipoUnidadMedidaBLL.cs" />
