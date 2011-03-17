@@ -141,6 +141,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsEstructura.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsEstructuraProducto.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEstructuraProducto.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsFabricanteMaquina.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -466,6 +471,17 @@
     </None>
     <None Include="dsEstructura.xss">
       <DependentUpon>dsEstructura.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstructuraProducto.xsc">
+      <DependentUpon>dsEstructuraProducto.xsd</DependentUpon>
+    </None>
+    <None Include="dsEstructuraProducto.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEstructuraProducto.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsEstructuraProducto.xss">
+      <DependentUpon>dsEstructuraProducto.xsd</DependentUpon>
     </None>
     <None Include="dsFabricanteMaquina.xsc">
       <DependentUpon>dsFabricanteMaquina.xsd</DependentUpon>
