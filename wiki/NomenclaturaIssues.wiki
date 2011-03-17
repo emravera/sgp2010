@@ -7,7 +7,7 @@ Nomenclatura para codificar los issues.
 
 = Detalle =
 
-UC-CODIGO + / + letra-categoría + número
+UC-CODIGO + / + letra-categoría + número - TITULO de la TAREA
 
 *UC:* poner UC seguido del código que tiene el caso de uso en el excel. Si no está relacionado a un uc especifico poner ALL.
 
