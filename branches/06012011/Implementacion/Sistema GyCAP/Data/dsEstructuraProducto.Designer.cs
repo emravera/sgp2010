@@ -3342,7 +3342,6 @@ namespace GyCAP.Data {
                 this.columnESTR_CODIGO.AutoIncrementSeed = -1;
                 this.columnESTR_CODIGO.AutoIncrementStep = -1;
                 this.columnESTR_CODIGO.AllowDBNull = false;
-                this.columnESTR_CODIGO.ReadOnly = true;
                 this.columnESTR_CODIGO.Unique = true;
                 this.columnESTR_NOMBRE.MaxLength = 80;
                 this.columnCOC_CODIGO.AllowDBNull = false;
@@ -4874,11 +4873,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string ESTR_NOMBRE {
                 get {
-                    try {
-                        return ((string)(this[this.tableESTRUCTURAS.ESTR_NOMBREColumn]));
+                    if (this.IsESTR_NOMBRENull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ESTR_NOMBRE\' in table \'ESTRUCTURAS\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableESTRUCTURAS.ESTR_NOMBREColumn]));
                     }
                 }
                 set {
@@ -4909,11 +4908,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string ESTR_DESCRIPCION {
                 get {
-                    try {
-                        return ((string)(this[this.tableESTRUCTURAS.ESTR_DESCRIPCIONColumn]));
+                    if (this.IsESTR_DESCRIPCIONNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ESTR_DESCRIPCION\' in table \'ESTRUCTURAS\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableESTRUCTURAS.ESTR_DESCRIPCIONColumn]));
                     }
                 }
                 set {
