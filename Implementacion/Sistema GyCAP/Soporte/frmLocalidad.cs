@@ -191,9 +191,7 @@ namespace GyCAP.UI.Soporte
 
             return erroresValidacion;
         }
-
-
-
+        
         public static frmLocalidad Instancia
         {
             get

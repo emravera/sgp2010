@@ -12,13 +12,14 @@ namespace GyCAP.UI.Soporte
     public partial class frmCapacidadEmpleado : Form
     {
         private static frmCapacidadEmpleado _frmABM = null;
-        private Data.dsCapacidadEmpleado dsCapacidadEmpleado = new GyCAP.Data.dsCapacidadEmpleado();
+        private Data.dsEmpleado dsCapacidadEmpleado = new GyCAP.Data.dsEmpleado();
         private DataView dvCapacidadEmpleado;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
 
+        #region Inicio_Pantalla
         public frmCapacidadEmpleado()
         {
             InitializeComponent();
@@ -71,6 +72,7 @@ namespace GyCAP.UI.Soporte
             if (estado == estadoInicialNuevo) { SetInterface(estadoUI.nuevoExterno); }
             if (estado == estadoInicialConsultar) { SetInterface(estadoUI.inicio); }
         }
+        #endregion
 
         #region Servicios
 
@@ -182,16 +184,57 @@ namespace GyCAP.UI.Soporte
             }
         }
 
-        //Evita que el formulario se cierre desde la cruz
-        //private void frmTerminacion_FormClosing(object sender, FormClosingEventArgs e)
-        //{
-        //    if (e.CloseReason == CloseReason.UserClosing)
-        //    {
-        //        e.Cancel = true;
-        //    }
-        //}
 
+        private string Validar()
+        {
+            string erroresValidacion = string.Empty;
+
+            string validacion = string.Empty;
+
+            //Control de los textbox
+            List<string> datos = new List<string>();
+            if (txtNombre.Text == string.Empty){datos.Add("Nombre");}
+            if (txtDescripcion.Text == string.Empty)
+            {
+                datos.Add("Descripción");
+                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
+            }
+            return erroresValidacion;
+
+        }
+        
+        private void dgvLista_DoubleClick(object sender, EventArgs e)
+        {
+            if (dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.Rows.Count != 0)
+            {
+                btnConsultar.PerformClick();
+            }
+        }
+
+        private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            int codigoCapacidadEmpleado = Convert.ToInt32(dvCapacidadEmpleado[e.RowIndex]["CEMP_CODIGO"]);
+            txtNombre.Text = dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.FindByCEMP_CODIGO(codigoCapacidadEmpleado).CEMP_NOMBRE;
+            txtDescripcion.Text = dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.FindByCEMP_CODIGO(codigoCapacidadEmpleado).CEMP_DESCRIPCION;
+        }
+
+        private void txtNombreBuscar_Enter(object sender, EventArgs e)
+        {
+            txtNombreBuscar.SelectAll();
+        }
+
+        private void txtNombre_Enter(object sender, EventArgs e)
+        {
+            txtNombre.SelectAll();
+        }
+
+        private void txtDescripcion_Enter(object sender, EventArgs e)
+        {
+            txtDescripcion.SelectAll();
+        }       
         #endregion
+
+        #region Formulario
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
@@ -214,7 +257,7 @@ namespace GyCAP.UI.Soporte
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la capacidad seleccionada?", "Confirmar eliminación", MessageBoxButtons.YesNo);
+                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Capacidad Empleado", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -229,19 +272,17 @@ namespace GyCAP.UI.Soporte
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        //MessageBox.Show(ex.Message);
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        //MessageBox.Show(ex.Message);
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una " + this.Text + " de la lista.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Capacidad Empleado", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
             }
         }
 
@@ -266,22 +307,24 @@ namespace GyCAP.UI.Soporte
                 dvCapacidadEmpleado.Table = dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS;
                 if (dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Capacidades de Empleado con el nombre ingresado.","Aviso",MessageBoxButtons.OK,MessageBoxIcon.Information );
+                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Capacidad Empleado", this.Text);
                 }
 
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }   
         }
-
+        
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            string validacion =Validar();
+
             //Revisamos que escribió algo
-            if (txtNombre.Text != String.Empty)
+            if ( validacion == String.Empty)
             {
                 Entidades.CapacidadEmpleado capacidadEmpleado = new GyCAP.Entidades.CapacidadEmpleado();
 
@@ -296,7 +339,7 @@ namespace GyCAP.UI.Soporte
                         //Primero lo creamos en la db
                         capacidadEmpleado.Codigo = BLL.CapacidadEmpleadoBLL.Insertar(capacidadEmpleado);
                         //Ahora lo agregamos al dataset
-                        Data.dsCapacidadEmpleado.CAPACIDAD_EMPLEADOSRow rowCapacidadEmpleado = dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.NewCAPACIDAD_EMPLEADOSRow();
+                        Data.dsEmpleado.CAPACIDAD_EMPLEADOSRow rowCapacidadEmpleado = dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.NewCAPACIDAD_EMPLEADOSRow();
                         //Indicamos que comienza la edición de la fila
                         rowCapacidadEmpleado.BeginEdit();
                         rowCapacidadEmpleado.CEMP_CODIGO = capacidadEmpleado.Codigo;
@@ -307,8 +350,11 @@ namespace GyCAP.UI.Soporte
                         //Agregamos la fila al dataset y aceptamos los cambios
                         dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.AddCAPACIDAD_EMPLEADOSRow(rowCapacidadEmpleado);
                         dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.AcceptChanges();
+                        
+                        //Avisamos que se guardo correctamente
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Capacidad Empleado", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                        
                         //Y por último seteamos el estado de la interfaz
-
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
                         if (estadoInterface == estadoUI.nuevoExterno)
                         {
@@ -323,11 +369,11 @@ namespace GyCAP.UI.Soporte
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
@@ -343,20 +389,22 @@ namespace GyCAP.UI.Soporte
                         //Lo actualizamos en la DB
                         BLL.CapacidadEmpleadoBLL.Actualizar(capacidadEmpleado);
                         //Lo actualizamos en el dataset y aceptamos los cambios
-                        Data.dsCapacidadEmpleado.CAPACIDAD_EMPLEADOSRow rowCapacidadEmpleado = dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.FindByCEMP_CODIGO(capacidadEmpleado.Codigo);
+                        Data.dsEmpleado.CAPACIDAD_EMPLEADOSRow rowCapacidadEmpleado = dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.FindByCEMP_CODIGO(capacidadEmpleado.Codigo);
                         rowCapacidadEmpleado.BeginEdit();
                         rowCapacidadEmpleado.CEMP_NOMBRE = txtNombre.Text;
                         rowCapacidadEmpleado.CEMP_DESCRIPCION = txtDescripcion.Text;
                         rowCapacidadEmpleado.EndEdit();
                         dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.AcceptChanges();
+                        
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Aviso");
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Capacidad Empleado", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
+                        
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
                     }
                 }
                 //recarga de la grilla
@@ -364,43 +412,9 @@ namespace GyCAP.UI.Soporte
             }
             else
             {
-                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
             }
         }
-
-        private void dgvLista_DoubleClick(object sender, EventArgs e)
-        {
-            if (dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.Rows.Count != 0)
-            {
-                btnConsultar.PerformClick();
-            }   
-        }
-
-        private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            int codigoCapacidadEmpleado = Convert.ToInt32(dvCapacidadEmpleado[e.RowIndex]["CEMP_CODIGO"]);
-            txtNombre.Text = dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.FindByCEMP_CODIGO(codigoCapacidadEmpleado).CEMP_NOMBRE ;
-            txtDescripcion.Text = dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.FindByCEMP_CODIGO(codigoCapacidadEmpleado).CEMP_DESCRIPCION;
-        }
-
-        private void txtNombreBuscar_Enter(object sender, EventArgs e)
-        {
-            txtNombreBuscar.SelectAll();
-        }
-
-        private void txtNombre_Enter(object sender, EventArgs e)
-        {
-            txtNombre.SelectAll();
-        }
-
-        private void txtDescripcion_Enter(object sender, EventArgs e)
-        {
-            txtDescripcion.SelectAll();
-        }
-
-        private void frmCapacidadEmpleado_Load(object sender, EventArgs e)
-        {
-
-        }
+        #endregion
     }
 }

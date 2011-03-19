@@ -11,7 +11,7 @@ namespace GyCAP.DAL
     {
         //BUSQUEDA
         //Trae todos los elementos
-        public static void ObtenerCliente(Data.dsMarca ds)
+        public static void ObtenerCliente(Data.dsCliente ds)
         {
             string sql = @"SELECT cli_codigo, cli_razonsocial, cli_telefono, cli_fechaalta, 
                            cli_fechabaja, cli_motivobaja, CLI_MAIL, CLI_ESTADO 
