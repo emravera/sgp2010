@@ -25,8 +25,6 @@ namespace GyCAP.Data {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class dsEstructuraProducto : global::System.Data.DataSet {
         
-        private PARTESDataTable tablePARTES;
-        
         private COMPUESTOS_PARTESDataTable tableCOMPUESTOS_PARTES;
         
         private ESTADO_PARTESDataTable tableESTADO_PARTES;
@@ -39,29 +37,31 @@ namespace GyCAP.Data {
         
         private MATERIAS_PRIMASDataTable tableMATERIAS_PRIMAS;
         
-        private TIPOS_PARTESDataTable tableTIPOS_PARTES;
-        
         private ESTRUCTURASDataTable tableESTRUCTURAS;
         
-        private global::System.Data.DataRelation relationFK_COMPUESTOS_PARTES_PARTES;
+        private PARTESDataTable tablePARTES;
         
-        private global::System.Data.DataRelation relationFK_COMPUESTOS_PARTES_PARTES1;
+        private TIPOS_PARTESDataTable tableTIPOS_PARTES;
+        
+        private global::System.Data.DataRelation relationFK_COMPUESTOS_PARTES_MATERIAS_PRIMAS;
+        
+        private global::System.Data.DataRelation relationestructura_plano_fk;
+        
+        private global::System.Data.DataRelation relationFK_COMPUESTOS_PARTES_PARTES_HIJO;
+        
+        private global::System.Data.DataRelation relationFK_COMPUESTOS_PARTES_PARTES_PADRE;
+        
+        private global::System.Data.DataRelation relationFK_ESTRUCTURAS_PARTES;
         
         private global::System.Data.DataRelation relationFK_PARTES_ESTADO_PARTES;
+        
+        private global::System.Data.DataRelation relationFK_PARTES_HOJAS_RUTA;
         
         private global::System.Data.DataRelation relationFK_PARTES_PLANOS;
         
         private global::System.Data.DataRelation relationFK_PARTES_TERMINACIONES;
         
-        private global::System.Data.DataRelation relationFK_PARTES_HOJAS_RUTA;
-        
-        private global::System.Data.DataRelation relationFK_COMPUESTOS_PARTES_MATERIAS_PRIMAS;
-        
         private global::System.Data.DataRelation relationFK_PARTES_TIPOS_PARTES;
-        
-        private global::System.Data.DataRelation relationestructura_plano_fk;
-        
-        private global::System.Data.DataRelation relationFK_ESTRUCTURAS_PARTES;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -89,9 +89,6 @@ namespace GyCAP.Data {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["PARTES"] != null)) {
-                    base.Tables.Add(new PARTESDataTable(ds.Tables["PARTES"]));
-                }
                 if ((ds.Tables["COMPUESTOS_PARTES"] != null)) {
                     base.Tables.Add(new COMPUESTOS_PARTESDataTable(ds.Tables["COMPUESTOS_PARTES"]));
                 }
@@ -110,11 +107,14 @@ namespace GyCAP.Data {
                 if ((ds.Tables["MATERIAS_PRIMAS"] != null)) {
                     base.Tables.Add(new MATERIAS_PRIMASDataTable(ds.Tables["MATERIAS_PRIMAS"]));
                 }
-                if ((ds.Tables["TIPOS_PARTES"] != null)) {
-                    base.Tables.Add(new TIPOS_PARTESDataTable(ds.Tables["TIPOS_PARTES"]));
-                }
                 if ((ds.Tables["ESTRUCTURAS"] != null)) {
                     base.Tables.Add(new ESTRUCTURASDataTable(ds.Tables["ESTRUCTURAS"]));
+                }
+                if ((ds.Tables["PARTES"] != null)) {
+                    base.Tables.Add(new PARTESDataTable(ds.Tables["PARTES"]));
+                }
+                if ((ds.Tables["TIPOS_PARTES"] != null)) {
+                    base.Tables.Add(new TIPOS_PARTESDataTable(ds.Tables["TIPOS_PARTES"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -132,15 +132,6 @@ namespace GyCAP.Data {
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
             base.Tables.CollectionChanged += schemaChangedHandler;
             this.Relations.CollectionChanged += schemaChangedHandler;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public PARTESDataTable PARTES {
-            get {
-                return this.tablePARTES;
-            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -200,18 +191,27 @@ namespace GyCAP.Data {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public TIPOS_PARTESDataTable TIPOS_PARTES {
+        public ESTRUCTURASDataTable ESTRUCTURAS {
             get {
-                return this.tableTIPOS_PARTES;
+                return this.tableESTRUCTURAS;
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public ESTRUCTURASDataTable ESTRUCTURAS {
+        public PARTESDataTable PARTES {
             get {
-                return this.tableESTRUCTURAS;
+                return this.tablePARTES;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public TIPOS_PARTESDataTable TIPOS_PARTES {
+            get {
+                return this.tableTIPOS_PARTES;
             }
         }
         
@@ -274,9 +274,6 @@ namespace GyCAP.Data {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["PARTES"] != null)) {
-                    base.Tables.Add(new PARTESDataTable(ds.Tables["PARTES"]));
-                }
                 if ((ds.Tables["COMPUESTOS_PARTES"] != null)) {
                     base.Tables.Add(new COMPUESTOS_PARTESDataTable(ds.Tables["COMPUESTOS_PARTES"]));
                 }
@@ -295,11 +292,14 @@ namespace GyCAP.Data {
                 if ((ds.Tables["MATERIAS_PRIMAS"] != null)) {
                     base.Tables.Add(new MATERIAS_PRIMASDataTable(ds.Tables["MATERIAS_PRIMAS"]));
                 }
-                if ((ds.Tables["TIPOS_PARTES"] != null)) {
-                    base.Tables.Add(new TIPOS_PARTESDataTable(ds.Tables["TIPOS_PARTES"]));
-                }
                 if ((ds.Tables["ESTRUCTURAS"] != null)) {
                     base.Tables.Add(new ESTRUCTURASDataTable(ds.Tables["ESTRUCTURAS"]));
+                }
+                if ((ds.Tables["PARTES"] != null)) {
+                    base.Tables.Add(new PARTESDataTable(ds.Tables["PARTES"]));
+                }
+                if ((ds.Tables["TIPOS_PARTES"] != null)) {
+                    base.Tables.Add(new TIPOS_PARTESDataTable(ds.Tables["TIPOS_PARTES"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -331,12 +331,6 @@ namespace GyCAP.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         internal void InitVars(bool initTable) {
-            this.tablePARTES = ((PARTESDataTable)(base.Tables["PARTES"]));
-            if ((initTable == true)) {
-                if ((this.tablePARTES != null)) {
-                    this.tablePARTES.InitVars();
-                }
-            }
             this.tableCOMPUESTOS_PARTES = ((COMPUESTOS_PARTESDataTable)(base.Tables["COMPUESTOS_PARTES"]));
             if ((initTable == true)) {
                 if ((this.tableCOMPUESTOS_PARTES != null)) {
@@ -373,28 +367,34 @@ namespace GyCAP.Data {
                     this.tableMATERIAS_PRIMAS.InitVars();
                 }
             }
-            this.tableTIPOS_PARTES = ((TIPOS_PARTESDataTable)(base.Tables["TIPOS_PARTES"]));
-            if ((initTable == true)) {
-                if ((this.tableTIPOS_PARTES != null)) {
-                    this.tableTIPOS_PARTES.InitVars();
-                }
-            }
             this.tableESTRUCTURAS = ((ESTRUCTURASDataTable)(base.Tables["ESTRUCTURAS"]));
             if ((initTable == true)) {
                 if ((this.tableESTRUCTURAS != null)) {
                     this.tableESTRUCTURAS.InitVars();
                 }
             }
-            this.relationFK_COMPUESTOS_PARTES_PARTES = this.Relations["FK_COMPUESTOS_PARTES_PARTES"];
-            this.relationFK_COMPUESTOS_PARTES_PARTES1 = this.Relations["FK_COMPUESTOS_PARTES_PARTES1"];
+            this.tablePARTES = ((PARTESDataTable)(base.Tables["PARTES"]));
+            if ((initTable == true)) {
+                if ((this.tablePARTES != null)) {
+                    this.tablePARTES.InitVars();
+                }
+            }
+            this.tableTIPOS_PARTES = ((TIPOS_PARTESDataTable)(base.Tables["TIPOS_PARTES"]));
+            if ((initTable == true)) {
+                if ((this.tableTIPOS_PARTES != null)) {
+                    this.tableTIPOS_PARTES.InitVars();
+                }
+            }
+            this.relationFK_COMPUESTOS_PARTES_MATERIAS_PRIMAS = this.Relations["FK_COMPUESTOS_PARTES_MATERIAS_PRIMAS"];
+            this.relationestructura_plano_fk = this.Relations["estructura_plano_fk"];
+            this.relationFK_COMPUESTOS_PARTES_PARTES_HIJO = this.Relations["FK_COMPUESTOS_PARTES_PARTES_HIJO"];
+            this.relationFK_COMPUESTOS_PARTES_PARTES_PADRE = this.Relations["FK_COMPUESTOS_PARTES_PARTES_PADRE"];
+            this.relationFK_ESTRUCTURAS_PARTES = this.Relations["FK_ESTRUCTURAS_PARTES"];
             this.relationFK_PARTES_ESTADO_PARTES = this.Relations["FK_PARTES_ESTADO_PARTES"];
+            this.relationFK_PARTES_HOJAS_RUTA = this.Relations["FK_PARTES_HOJAS_RUTA"];
             this.relationFK_PARTES_PLANOS = this.Relations["FK_PARTES_PLANOS"];
             this.relationFK_PARTES_TERMINACIONES = this.Relations["FK_PARTES_TERMINACIONES"];
-            this.relationFK_PARTES_HOJAS_RUTA = this.Relations["FK_PARTES_HOJAS_RUTA"];
-            this.relationFK_COMPUESTOS_PARTES_MATERIAS_PRIMAS = this.Relations["FK_COMPUESTOS_PARTES_MATERIAS_PRIMAS"];
             this.relationFK_PARTES_TIPOS_PARTES = this.Relations["FK_PARTES_TIPOS_PARTES"];
-            this.relationestructura_plano_fk = this.Relations["estructura_plano_fk"];
-            this.relationFK_ESTRUCTURAS_PARTES = this.Relations["FK_ESTRUCTURAS_PARTES"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -404,8 +404,6 @@ namespace GyCAP.Data {
             this.Namespace = "http://tempuri.org/dsEstructuraProducto.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tablePARTES = new PARTESDataTable();
-            base.Tables.Add(this.tablePARTES);
             this.tableCOMPUESTOS_PARTES = new COMPUESTOS_PARTESDataTable();
             base.Tables.Add(this.tableCOMPUESTOS_PARTES);
             this.tableESTADO_PARTES = new ESTADO_PARTESDataTable();
@@ -418,22 +416,40 @@ namespace GyCAP.Data {
             base.Tables.Add(this.tableHOJAS_RUTA);
             this.tableMATERIAS_PRIMAS = new MATERIAS_PRIMASDataTable();
             base.Tables.Add(this.tableMATERIAS_PRIMAS);
-            this.tableTIPOS_PARTES = new TIPOS_PARTESDataTable();
-            base.Tables.Add(this.tableTIPOS_PARTES);
             this.tableESTRUCTURAS = new ESTRUCTURASDataTable();
             base.Tables.Add(this.tableESTRUCTURAS);
-            this.relationFK_COMPUESTOS_PARTES_PARTES = new global::System.Data.DataRelation("FK_COMPUESTOS_PARTES_PARTES", new global::System.Data.DataColumn[] {
-                        this.tablePARTES.PART_NUMEROColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCOMPUESTOS_PARTES.PART_NUMERO_PADREColumn}, false);
-            this.Relations.Add(this.relationFK_COMPUESTOS_PARTES_PARTES);
-            this.relationFK_COMPUESTOS_PARTES_PARTES1 = new global::System.Data.DataRelation("FK_COMPUESTOS_PARTES_PARTES1", new global::System.Data.DataColumn[] {
+            this.tablePARTES = new PARTESDataTable();
+            base.Tables.Add(this.tablePARTES);
+            this.tableTIPOS_PARTES = new TIPOS_PARTESDataTable();
+            base.Tables.Add(this.tableTIPOS_PARTES);
+            this.relationFK_COMPUESTOS_PARTES_MATERIAS_PRIMAS = new global::System.Data.DataRelation("FK_COMPUESTOS_PARTES_MATERIAS_PRIMAS", new global::System.Data.DataColumn[] {
+                        this.tableMATERIAS_PRIMAS.MP_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCOMPUESTOS_PARTES.MP_CODIGOColumn}, false);
+            this.Relations.Add(this.relationFK_COMPUESTOS_PARTES_MATERIAS_PRIMAS);
+            this.relationestructura_plano_fk = new global::System.Data.DataRelation("estructura_plano_fk", new global::System.Data.DataColumn[] {
+                        this.tablePLANOS.PNO_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableESTRUCTURAS.PNO_CODIGOColumn}, false);
+            this.Relations.Add(this.relationestructura_plano_fk);
+            this.relationFK_COMPUESTOS_PARTES_PARTES_HIJO = new global::System.Data.DataRelation("FK_COMPUESTOS_PARTES_PARTES_HIJO", new global::System.Data.DataColumn[] {
                         this.tablePARTES.PART_NUMEROColumn}, new global::System.Data.DataColumn[] {
                         this.tableCOMPUESTOS_PARTES.PART_NUMERO_HIJOColumn}, false);
-            this.Relations.Add(this.relationFK_COMPUESTOS_PARTES_PARTES1);
+            this.Relations.Add(this.relationFK_COMPUESTOS_PARTES_PARTES_HIJO);
+            this.relationFK_COMPUESTOS_PARTES_PARTES_PADRE = new global::System.Data.DataRelation("FK_COMPUESTOS_PARTES_PARTES_PADRE", new global::System.Data.DataColumn[] {
+                        this.tablePARTES.PART_NUMEROColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCOMPUESTOS_PARTES.PART_NUMERO_PADREColumn}, false);
+            this.Relations.Add(this.relationFK_COMPUESTOS_PARTES_PARTES_PADRE);
+            this.relationFK_ESTRUCTURAS_PARTES = new global::System.Data.DataRelation("FK_ESTRUCTURAS_PARTES", new global::System.Data.DataColumn[] {
+                        this.tablePARTES.PART_NUMEROColumn}, new global::System.Data.DataColumn[] {
+                        this.tableESTRUCTURAS.PART_NUMEROColumn}, false);
+            this.Relations.Add(this.relationFK_ESTRUCTURAS_PARTES);
             this.relationFK_PARTES_ESTADO_PARTES = new global::System.Data.DataRelation("FK_PARTES_ESTADO_PARTES", new global::System.Data.DataColumn[] {
                         this.tableESTADO_PARTES.PAR_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tablePARTES.PAR_CODIGOColumn}, false);
             this.Relations.Add(this.relationFK_PARTES_ESTADO_PARTES);
+            this.relationFK_PARTES_HOJAS_RUTA = new global::System.Data.DataRelation("FK_PARTES_HOJAS_RUTA", new global::System.Data.DataColumn[] {
+                        this.tableHOJAS_RUTA.HR_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePARTES.HR_CODIGOColumn}, false);
+            this.Relations.Add(this.relationFK_PARTES_HOJAS_RUTA);
             this.relationFK_PARTES_PLANOS = new global::System.Data.DataRelation("FK_PARTES_PLANOS", new global::System.Data.DataColumn[] {
                         this.tablePLANOS.PNO_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tablePARTES.PNO_CODIGOColumn}, false);
@@ -442,31 +458,10 @@ namespace GyCAP.Data {
                         this.tableTERMINACIONES.TE_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tablePARTES.TE_CODIGOColumn}, false);
             this.Relations.Add(this.relationFK_PARTES_TERMINACIONES);
-            this.relationFK_PARTES_HOJAS_RUTA = new global::System.Data.DataRelation("FK_PARTES_HOJAS_RUTA", new global::System.Data.DataColumn[] {
-                        this.tableHOJAS_RUTA.HR_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePARTES.HR_CODIGOColumn}, false);
-            this.Relations.Add(this.relationFK_PARTES_HOJAS_RUTA);
-            this.relationFK_COMPUESTOS_PARTES_MATERIAS_PRIMAS = new global::System.Data.DataRelation("FK_COMPUESTOS_PARTES_MATERIAS_PRIMAS", new global::System.Data.DataColumn[] {
-                        this.tableMATERIAS_PRIMAS.MP_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCOMPUESTOS_PARTES.MP_CODIGOColumn}, false);
-            this.Relations.Add(this.relationFK_COMPUESTOS_PARTES_MATERIAS_PRIMAS);
             this.relationFK_PARTES_TIPOS_PARTES = new global::System.Data.DataRelation("FK_PARTES_TIPOS_PARTES", new global::System.Data.DataColumn[] {
                         this.tableTIPOS_PARTES.TPAR_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tablePARTES.TPAR_CODIGOColumn}, false);
             this.Relations.Add(this.relationFK_PARTES_TIPOS_PARTES);
-            this.relationestructura_plano_fk = new global::System.Data.DataRelation("estructura_plano_fk", new global::System.Data.DataColumn[] {
-                        this.tablePLANOS.PNO_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableESTRUCTURAS.PNO_CODIGOColumn}, false);
-            this.Relations.Add(this.relationestructura_plano_fk);
-            this.relationFK_ESTRUCTURAS_PARTES = new global::System.Data.DataRelation("FK_ESTRUCTURAS_PARTES", new global::System.Data.DataColumn[] {
-                        this.tablePARTES.PART_NUMEROColumn}, new global::System.Data.DataColumn[] {
-                        this.tableESTRUCTURAS.PART_NUMEROColumn}, false);
-            this.Relations.Add(this.relationFK_ESTRUCTURAS_PARTES);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializePARTES() {
-            return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -500,12 +495,17 @@ namespace GyCAP.Data {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeTIPOS_PARTES() {
+        private bool ShouldSerializeESTRUCTURAS() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeESTRUCTURAS() {
+        private bool ShouldSerializePARTES() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeTIPOS_PARTES() {
             return false;
         }
         
@@ -562,8 +562,6 @@ namespace GyCAP.Data {
             return type;
         }
         
-        public delegate void PARTESRowChangeEventHandler(object sender, PARTESRowChangeEvent e);
-        
         public delegate void COMPUESTOS_PARTESRowChangeEventHandler(object sender, COMPUESTOS_PARTESRowChangeEvent e);
         
         public delegate void ESTADO_PARTESRowChangeEventHandler(object sender, ESTADO_PARTESRowChangeEvent e);
@@ -576,395 +574,11 @@ namespace GyCAP.Data {
         
         public delegate void MATERIAS_PRIMASRowChangeEventHandler(object sender, MATERIAS_PRIMASRowChangeEvent e);
         
-        public delegate void TIPOS_PARTESRowChangeEventHandler(object sender, TIPOS_PARTESRowChangeEvent e);
-        
         public delegate void ESTRUCTURASRowChangeEventHandler(object sender, ESTRUCTURASRowChangeEvent e);
         
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class PARTESDataTable : global::System.Data.TypedTableBase<PARTESRow> {
-            
-            private global::System.Data.DataColumn columnPART_NUMERO;
-            
-            private global::System.Data.DataColumn columnPART_NOMBRE;
-            
-            private global::System.Data.DataColumn columnPART_DESCRIPCION;
-            
-            private global::System.Data.DataColumn columnPART_CODIGO;
-            
-            private global::System.Data.DataColumn columnPNO_CODIGO;
-            
-            private global::System.Data.DataColumn columnPART_COSTO;
-            
-            private global::System.Data.DataColumn columnPART_COSTOFIJO;
-            
-            private global::System.Data.DataColumn columnPAR_CODIGO;
-            
-            private global::System.Data.DataColumn columnTPAR_CODIGO;
-            
-            private global::System.Data.DataColumn columnTE_CODIGO;
-            
-            private global::System.Data.DataColumn columnHR_CODIGO;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PARTESDataTable() {
-                this.TableName = "PARTES";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal PARTESDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected PARTESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PART_NUMEROColumn {
-                get {
-                    return this.columnPART_NUMERO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PART_NOMBREColumn {
-                get {
-                    return this.columnPART_NOMBRE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PART_DESCRIPCIONColumn {
-                get {
-                    return this.columnPART_DESCRIPCION;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PART_CODIGOColumn {
-                get {
-                    return this.columnPART_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PNO_CODIGOColumn {
-                get {
-                    return this.columnPNO_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PART_COSTOColumn {
-                get {
-                    return this.columnPART_COSTO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PART_COSTOFIJOColumn {
-                get {
-                    return this.columnPART_COSTOFIJO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PAR_CODIGOColumn {
-                get {
-                    return this.columnPAR_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn TPAR_CODIGOColumn {
-                get {
-                    return this.columnTPAR_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn TE_CODIGOColumn {
-                get {
-                    return this.columnTE_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn HR_CODIGOColumn {
-                get {
-                    return this.columnHR_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PARTESRow this[int index] {
-                get {
-                    return ((PARTESRow)(this.Rows[index]));
-                }
-            }
-            
-            public event PARTESRowChangeEventHandler PARTESRowChanging;
-            
-            public event PARTESRowChangeEventHandler PARTESRowChanged;
-            
-            public event PARTESRowChangeEventHandler PARTESRowDeleting;
-            
-            public event PARTESRowChangeEventHandler PARTESRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddPARTESRow(PARTESRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PARTESRow AddPARTESRow(string PART_NOMBRE, string PART_DESCRIPCION, string PART_CODIGO, PLANOSRow parentPLANOSRowByFK_PARTES_PLANOS, decimal PART_COSTO, decimal PART_COSTOFIJO, ESTADO_PARTESRow parentESTADO_PARTESRowByFK_PARTES_ESTADO_PARTES, TIPOS_PARTESRow parentTIPOS_PARTESRowByFK_PARTES_TIPOS_PARTES, TERMINACIONESRow parentTERMINACIONESRowByFK_PARTES_TERMINACIONES, HOJAS_RUTARow parentHOJAS_RUTARowByFK_PARTES_HOJAS_RUTA) {
-                PARTESRow rowPARTESRow = ((PARTESRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        PART_NOMBRE,
-                        PART_DESCRIPCION,
-                        PART_CODIGO,
-                        null,
-                        PART_COSTO,
-                        PART_COSTOFIJO,
-                        null,
-                        null,
-                        null,
-                        null};
-                if ((parentPLANOSRowByFK_PARTES_PLANOS != null)) {
-                    columnValuesArray[4] = parentPLANOSRowByFK_PARTES_PLANOS[0];
-                }
-                if ((parentESTADO_PARTESRowByFK_PARTES_ESTADO_PARTES != null)) {
-                    columnValuesArray[7] = parentESTADO_PARTESRowByFK_PARTES_ESTADO_PARTES[0];
-                }
-                if ((parentTIPOS_PARTESRowByFK_PARTES_TIPOS_PARTES != null)) {
-                    columnValuesArray[8] = parentTIPOS_PARTESRowByFK_PARTES_TIPOS_PARTES[0];
-                }
-                if ((parentTERMINACIONESRowByFK_PARTES_TERMINACIONES != null)) {
-                    columnValuesArray[9] = parentTERMINACIONESRowByFK_PARTES_TERMINACIONES[0];
-                }
-                if ((parentHOJAS_RUTARowByFK_PARTES_HOJAS_RUTA != null)) {
-                    columnValuesArray[10] = parentHOJAS_RUTARowByFK_PARTES_HOJAS_RUTA[0];
-                }
-                rowPARTESRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowPARTESRow);
-                return rowPARTESRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PARTESRow FindByPART_NUMERO(decimal PART_NUMERO) {
-                return ((PARTESRow)(this.Rows.Find(new object[] {
-                            PART_NUMERO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                PARTESDataTable cln = ((PARTESDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new PARTESDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnPART_NUMERO = base.Columns["PART_NUMERO"];
-                this.columnPART_NOMBRE = base.Columns["PART_NOMBRE"];
-                this.columnPART_DESCRIPCION = base.Columns["PART_DESCRIPCION"];
-                this.columnPART_CODIGO = base.Columns["PART_CODIGO"];
-                this.columnPNO_CODIGO = base.Columns["PNO_CODIGO"];
-                this.columnPART_COSTO = base.Columns["PART_COSTO"];
-                this.columnPART_COSTOFIJO = base.Columns["PART_COSTOFIJO"];
-                this.columnPAR_CODIGO = base.Columns["PAR_CODIGO"];
-                this.columnTPAR_CODIGO = base.Columns["TPAR_CODIGO"];
-                this.columnTE_CODIGO = base.Columns["TE_CODIGO"];
-                this.columnHR_CODIGO = base.Columns["HR_CODIGO"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnPART_NUMERO = new global::System.Data.DataColumn("PART_NUMERO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPART_NUMERO);
-                this.columnPART_NOMBRE = new global::System.Data.DataColumn("PART_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPART_NOMBRE);
-                this.columnPART_DESCRIPCION = new global::System.Data.DataColumn("PART_DESCRIPCION", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPART_DESCRIPCION);
-                this.columnPART_CODIGO = new global::System.Data.DataColumn("PART_CODIGO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPART_CODIGO);
-                this.columnPNO_CODIGO = new global::System.Data.DataColumn("PNO_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPNO_CODIGO);
-                this.columnPART_COSTO = new global::System.Data.DataColumn("PART_COSTO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPART_COSTO);
-                this.columnPART_COSTOFIJO = new global::System.Data.DataColumn("PART_COSTOFIJO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPART_COSTOFIJO);
-                this.columnPAR_CODIGO = new global::System.Data.DataColumn("PAR_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPAR_CODIGO);
-                this.columnTPAR_CODIGO = new global::System.Data.DataColumn("TPAR_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTPAR_CODIGO);
-                this.columnTE_CODIGO = new global::System.Data.DataColumn("TE_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTE_CODIGO);
-                this.columnHR_CODIGO = new global::System.Data.DataColumn("HR_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnHR_CODIGO);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnPART_NUMERO}, true));
-                this.columnPART_NUMERO.AutoIncrement = true;
-                this.columnPART_NUMERO.AutoIncrementSeed = -1;
-                this.columnPART_NUMERO.AutoIncrementStep = -1;
-                this.columnPART_NUMERO.AllowDBNull = false;
-                this.columnPART_NUMERO.Unique = true;
-                this.columnPART_NOMBRE.AllowDBNull = false;
-                this.columnPART_NOMBRE.MaxLength = 80;
-                this.columnPART_DESCRIPCION.MaxLength = 200;
-                this.columnPART_CODIGO.MaxLength = 80;
-                this.columnTPAR_CODIGO.AllowDBNull = false;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PARTESRow NewPARTESRow() {
-                return ((PARTESRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new PARTESRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(PARTESRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.PARTESRowChanged != null)) {
-                    this.PARTESRowChanged(this, new PARTESRowChangeEvent(((PARTESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.PARTESRowChanging != null)) {
-                    this.PARTESRowChanging(this, new PARTESRowChangeEvent(((PARTESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.PARTESRowDeleted != null)) {
-                    this.PARTESRowDeleted(this, new PARTESRowChangeEvent(((PARTESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.PARTESRowDeleting != null)) {
-                    this.PARTESRowDeleting(this, new PARTESRowChangeEvent(((PARTESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemovePARTESRow(PARTESRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsEstructuraProducto ds = new dsEstructuraProducto();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "PARTESDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
+        public delegate void PARTESRowChangeEventHandler(object sender, PARTESRowChangeEvent e);
+        
+        public delegate void TIPOS_PARTESRowChangeEventHandler(object sender, TIPOS_PARTESRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1087,7 +701,7 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COMPUESTOS_PARTESRow AddCOMPUESTOS_PARTESRow(PARTESRow parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES, PARTESRow parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES1, MATERIAS_PRIMASRow parentMATERIAS_PRIMASRowByFK_COMPUESTOS_PARTES_MATERIAS_PRIMAS, decimal COMP_CANTIDAD, decimal UMED_CODIGO) {
+            public COMPUESTOS_PARTESRow AddCOMPUESTOS_PARTESRow(PARTESRow parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES_PADRE, PARTESRow parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO, MATERIAS_PRIMASRow parentMATERIAS_PRIMASRowByFK_COMPUESTOS_PARTES_MATERIAS_PRIMAS, decimal COMP_CANTIDAD, decimal UMED_CODIGO) {
                 COMPUESTOS_PARTESRow rowCOMPUESTOS_PARTESRow = ((COMPUESTOS_PARTESRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1096,11 +710,11 @@ namespace GyCAP.Data {
                         null,
                         COMP_CANTIDAD,
                         UMED_CODIGO};
-                if ((parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES != null)) {
-                    columnValuesArray[1] = parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES[0];
+                if ((parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES_PADRE != null)) {
+                    columnValuesArray[1] = parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES_PADRE[0];
                 }
-                if ((parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES1 != null)) {
-                    columnValuesArray[2] = parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES1[0];
+                if ((parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO != null)) {
+                    columnValuesArray[2] = parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO[0];
                 }
                 if ((parentMATERIAS_PRIMASRowByFK_COMPUESTOS_PARTES_MATERIAS_PRIMAS != null)) {
                     columnValuesArray[3] = parentMATERIAS_PRIMASRowByFK_COMPUESTOS_PARTES_MATERIAS_PRIMAS[0];
@@ -2802,285 +2416,6 @@ namespace GyCAP.Data {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class TIPOS_PARTESDataTable : global::System.Data.TypedTableBase<TIPOS_PARTESRow> {
-            
-            private global::System.Data.DataColumn columnTPAR_CODIGO;
-            
-            private global::System.Data.DataColumn columnTPAR_NOMBRE;
-            
-            private global::System.Data.DataColumn columnTPAR_DESCRIPCION;
-            
-            private global::System.Data.DataColumn columnTPAR_PRODUCTOTERMINADO;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TIPOS_PARTESDataTable() {
-                this.TableName = "TIPOS_PARTES";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal TIPOS_PARTESDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected TIPOS_PARTESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn TPAR_CODIGOColumn {
-                get {
-                    return this.columnTPAR_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn TPAR_NOMBREColumn {
-                get {
-                    return this.columnTPAR_NOMBRE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn TPAR_DESCRIPCIONColumn {
-                get {
-                    return this.columnTPAR_DESCRIPCION;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn TPAR_PRODUCTOTERMINADOColumn {
-                get {
-                    return this.columnTPAR_PRODUCTOTERMINADO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TIPOS_PARTESRow this[int index] {
-                get {
-                    return ((TIPOS_PARTESRow)(this.Rows[index]));
-                }
-            }
-            
-            public event TIPOS_PARTESRowChangeEventHandler TIPOS_PARTESRowChanging;
-            
-            public event TIPOS_PARTESRowChangeEventHandler TIPOS_PARTESRowChanged;
-            
-            public event TIPOS_PARTESRowChangeEventHandler TIPOS_PARTESRowDeleting;
-            
-            public event TIPOS_PARTESRowChangeEventHandler TIPOS_PARTESRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddTIPOS_PARTESRow(TIPOS_PARTESRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TIPOS_PARTESRow AddTIPOS_PARTESRow(string TPAR_NOMBRE, string TPAR_DESCRIPCION, decimal TPAR_PRODUCTOTERMINADO) {
-                TIPOS_PARTESRow rowTIPOS_PARTESRow = ((TIPOS_PARTESRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        TPAR_NOMBRE,
-                        TPAR_DESCRIPCION,
-                        TPAR_PRODUCTOTERMINADO};
-                rowTIPOS_PARTESRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowTIPOS_PARTESRow);
-                return rowTIPOS_PARTESRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TIPOS_PARTESRow FindByTPAR_CODIGO(decimal TPAR_CODIGO) {
-                return ((TIPOS_PARTESRow)(this.Rows.Find(new object[] {
-                            TPAR_CODIGO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                TIPOS_PARTESDataTable cln = ((TIPOS_PARTESDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new TIPOS_PARTESDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnTPAR_CODIGO = base.Columns["TPAR_CODIGO"];
-                this.columnTPAR_NOMBRE = base.Columns["TPAR_NOMBRE"];
-                this.columnTPAR_DESCRIPCION = base.Columns["TPAR_DESCRIPCION"];
-                this.columnTPAR_PRODUCTOTERMINADO = base.Columns["TPAR_PRODUCTOTERMINADO"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnTPAR_CODIGO = new global::System.Data.DataColumn("TPAR_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTPAR_CODIGO);
-                this.columnTPAR_NOMBRE = new global::System.Data.DataColumn("TPAR_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTPAR_NOMBRE);
-                this.columnTPAR_DESCRIPCION = new global::System.Data.DataColumn("TPAR_DESCRIPCION", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTPAR_DESCRIPCION);
-                this.columnTPAR_PRODUCTOTERMINADO = new global::System.Data.DataColumn("TPAR_PRODUCTOTERMINADO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTPAR_PRODUCTOTERMINADO);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnTPAR_CODIGO}, true));
-                this.columnTPAR_CODIGO.AutoIncrement = true;
-                this.columnTPAR_CODIGO.AutoIncrementSeed = -1;
-                this.columnTPAR_CODIGO.AutoIncrementStep = -1;
-                this.columnTPAR_CODIGO.AllowDBNull = false;
-                this.columnTPAR_CODIGO.ReadOnly = true;
-                this.columnTPAR_CODIGO.Unique = true;
-                this.columnTPAR_NOMBRE.MaxLength = 80;
-                this.columnTPAR_DESCRIPCION.MaxLength = 200;
-                this.columnTPAR_PRODUCTOTERMINADO.AllowDBNull = false;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TIPOS_PARTESRow NewTIPOS_PARTESRow() {
-                return ((TIPOS_PARTESRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new TIPOS_PARTESRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(TIPOS_PARTESRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.TIPOS_PARTESRowChanged != null)) {
-                    this.TIPOS_PARTESRowChanged(this, new TIPOS_PARTESRowChangeEvent(((TIPOS_PARTESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.TIPOS_PARTESRowChanging != null)) {
-                    this.TIPOS_PARTESRowChanging(this, new TIPOS_PARTESRowChangeEvent(((TIPOS_PARTESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.TIPOS_PARTESRowDeleted != null)) {
-                    this.TIPOS_PARTESRowDeleted(this, new TIPOS_PARTESRowChangeEvent(((TIPOS_PARTESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.TIPOS_PARTESRowDeleting != null)) {
-                    this.TIPOS_PARTESRowDeleting(this, new TIPOS_PARTESRowChangeEvent(((TIPOS_PARTESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveTIPOS_PARTESRow(TIPOS_PARTESRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsEstructuraProducto ds = new dsEstructuraProducto();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "TIPOS_PARTESDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class ESTRUCTURASDataTable : global::System.Data.TypedTableBase<ESTRUCTURASRow> {
             
             private global::System.Data.DataColumn columnESTR_CODIGO;
@@ -3467,327 +2802,718 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
-        ///Represents strongly named DataRow class.
+        ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class PARTESRow : global::System.Data.DataRow {
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class PARTESDataTable : global::System.Data.TypedTableBase<PARTESRow> {
             
-            private PARTESDataTable tablePARTES;
+            private global::System.Data.DataColumn columnPART_NUMERO;
+            
+            private global::System.Data.DataColumn columnPART_NOMBRE;
+            
+            private global::System.Data.DataColumn columnPART_DESCRIPCION;
+            
+            private global::System.Data.DataColumn columnPART_CODIGO;
+            
+            private global::System.Data.DataColumn columnPNO_CODIGO;
+            
+            private global::System.Data.DataColumn columnPART_COSTO;
+            
+            private global::System.Data.DataColumn columnPART_COSTOFIJO;
+            
+            private global::System.Data.DataColumn columnPAR_CODIGO;
+            
+            private global::System.Data.DataColumn columnTPAR_CODIGO;
+            
+            private global::System.Data.DataColumn columnTE_CODIGO;
+            
+            private global::System.Data.DataColumn columnHR_CODIGO;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal PARTESRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tablePARTES = ((PARTESDataTable)(this.Table));
+            public PARTESDataTable() {
+                this.TableName = "PARTES";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal PART_NUMERO {
-                get {
-                    return ((decimal)(this[this.tablePARTES.PART_NUMEROColumn]));
+            internal PARTESDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
                 }
-                set {
-                    this[this.tablePARTES.PART_NUMEROColumn] = value;
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected PARTESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PART_NUMEROColumn {
+                get {
+                    return this.columnPART_NUMERO;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string PART_NOMBRE {
+            public global::System.Data.DataColumn PART_NOMBREColumn {
                 get {
-                    return ((string)(this[this.tablePARTES.PART_NOMBREColumn]));
-                }
-                set {
-                    this[this.tablePARTES.PART_NOMBREColumn] = value;
+                    return this.columnPART_NOMBRE;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string PART_DESCRIPCION {
+            public global::System.Data.DataColumn PART_DESCRIPCIONColumn {
                 get {
-                    if (this.IsPART_DESCRIPCIONNull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tablePARTES.PART_DESCRIPCIONColumn]));
-                    }
-                }
-                set {
-                    this[this.tablePARTES.PART_DESCRIPCIONColumn] = value;
+                    return this.columnPART_DESCRIPCION;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string PART_CODIGO {
+            public global::System.Data.DataColumn PART_CODIGOColumn {
                 get {
+                    return this.columnPART_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PNO_CODIGOColumn {
+                get {
+                    return this.columnPNO_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PART_COSTOColumn {
+                get {
+                    return this.columnPART_COSTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PART_COSTOFIJOColumn {
+                get {
+                    return this.columnPART_COSTOFIJO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PAR_CODIGOColumn {
+                get {
+                    return this.columnPAR_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TPAR_CODIGOColumn {
+                get {
+                    return this.columnTPAR_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TE_CODIGOColumn {
+                get {
+                    return this.columnTE_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn HR_CODIGOColumn {
+                get {
+                    return this.columnHR_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PARTESRow this[int index] {
+                get {
+                    return ((PARTESRow)(this.Rows[index]));
+                }
+            }
+            
+            public event PARTESRowChangeEventHandler PARTESRowChanging;
+            
+            public event PARTESRowChangeEventHandler PARTESRowChanged;
+            
+            public event PARTESRowChangeEventHandler PARTESRowDeleting;
+            
+            public event PARTESRowChangeEventHandler PARTESRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddPARTESRow(PARTESRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PARTESRow AddPARTESRow(string PART_NOMBRE, string PART_DESCRIPCION, string PART_CODIGO, PLANOSRow parentPLANOSRowByFK_PARTES_PLANOS, decimal PART_COSTO, decimal PART_COSTOFIJO, ESTADO_PARTESRow parentESTADO_PARTESRowByFK_PARTES_ESTADO_PARTES, TIPOS_PARTESRow parentTIPOS_PARTESRowByFK_PARTES_TIPOS_PARTES, TERMINACIONESRow parentTERMINACIONESRowByFK_PARTES_TERMINACIONES, HOJAS_RUTARow parentHOJAS_RUTARowByFK_PARTES_HOJAS_RUTA) {
+                PARTESRow rowPARTESRow = ((PARTESRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        PART_NOMBRE,
+                        PART_DESCRIPCION,
+                        PART_CODIGO,
+                        null,
+                        PART_COSTO,
+                        PART_COSTOFIJO,
+                        null,
+                        null,
+                        null,
+                        null};
+                if ((parentPLANOSRowByFK_PARTES_PLANOS != null)) {
+                    columnValuesArray[4] = parentPLANOSRowByFK_PARTES_PLANOS[0];
+                }
+                if ((parentESTADO_PARTESRowByFK_PARTES_ESTADO_PARTES != null)) {
+                    columnValuesArray[7] = parentESTADO_PARTESRowByFK_PARTES_ESTADO_PARTES[0];
+                }
+                if ((parentTIPOS_PARTESRowByFK_PARTES_TIPOS_PARTES != null)) {
+                    columnValuesArray[8] = parentTIPOS_PARTESRowByFK_PARTES_TIPOS_PARTES[0];
+                }
+                if ((parentTERMINACIONESRowByFK_PARTES_TERMINACIONES != null)) {
+                    columnValuesArray[9] = parentTERMINACIONESRowByFK_PARTES_TERMINACIONES[0];
+                }
+                if ((parentHOJAS_RUTARowByFK_PARTES_HOJAS_RUTA != null)) {
+                    columnValuesArray[10] = parentHOJAS_RUTARowByFK_PARTES_HOJAS_RUTA[0];
+                }
+                rowPARTESRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowPARTESRow);
+                return rowPARTESRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PARTESRow FindByPART_NUMERO(decimal PART_NUMERO) {
+                return ((PARTESRow)(this.Rows.Find(new object[] {
+                            PART_NUMERO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                PARTESDataTable cln = ((PARTESDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new PARTESDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnPART_NUMERO = base.Columns["PART_NUMERO"];
+                this.columnPART_NOMBRE = base.Columns["PART_NOMBRE"];
+                this.columnPART_DESCRIPCION = base.Columns["PART_DESCRIPCION"];
+                this.columnPART_CODIGO = base.Columns["PART_CODIGO"];
+                this.columnPNO_CODIGO = base.Columns["PNO_CODIGO"];
+                this.columnPART_COSTO = base.Columns["PART_COSTO"];
+                this.columnPART_COSTOFIJO = base.Columns["PART_COSTOFIJO"];
+                this.columnPAR_CODIGO = base.Columns["PAR_CODIGO"];
+                this.columnTPAR_CODIGO = base.Columns["TPAR_CODIGO"];
+                this.columnTE_CODIGO = base.Columns["TE_CODIGO"];
+                this.columnHR_CODIGO = base.Columns["HR_CODIGO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnPART_NUMERO = new global::System.Data.DataColumn("PART_NUMERO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPART_NUMERO);
+                this.columnPART_NOMBRE = new global::System.Data.DataColumn("PART_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPART_NOMBRE);
+                this.columnPART_DESCRIPCION = new global::System.Data.DataColumn("PART_DESCRIPCION", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPART_DESCRIPCION);
+                this.columnPART_CODIGO = new global::System.Data.DataColumn("PART_CODIGO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPART_CODIGO);
+                this.columnPNO_CODIGO = new global::System.Data.DataColumn("PNO_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPNO_CODIGO);
+                this.columnPART_COSTO = new global::System.Data.DataColumn("PART_COSTO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPART_COSTO);
+                this.columnPART_COSTOFIJO = new global::System.Data.DataColumn("PART_COSTOFIJO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPART_COSTOFIJO);
+                this.columnPAR_CODIGO = new global::System.Data.DataColumn("PAR_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPAR_CODIGO);
+                this.columnTPAR_CODIGO = new global::System.Data.DataColumn("TPAR_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTPAR_CODIGO);
+                this.columnTE_CODIGO = new global::System.Data.DataColumn("TE_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTE_CODIGO);
+                this.columnHR_CODIGO = new global::System.Data.DataColumn("HR_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnHR_CODIGO);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnPART_NUMERO}, true));
+                this.columnPART_NUMERO.AutoIncrement = true;
+                this.columnPART_NUMERO.AutoIncrementSeed = -1;
+                this.columnPART_NUMERO.AutoIncrementStep = -1;
+                this.columnPART_NUMERO.AllowDBNull = false;
+                this.columnPART_NUMERO.Unique = true;
+                this.columnPART_NOMBRE.AllowDBNull = false;
+                this.columnPART_NOMBRE.MaxLength = 80;
+                this.columnPART_DESCRIPCION.MaxLength = 200;
+                this.columnPART_CODIGO.MaxLength = 80;
+                this.columnTPAR_CODIGO.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PARTESRow NewPARTESRow() {
+                return ((PARTESRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new PARTESRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(PARTESRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.PARTESRowChanged != null)) {
+                    this.PARTESRowChanged(this, new PARTESRowChangeEvent(((PARTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.PARTESRowChanging != null)) {
+                    this.PARTESRowChanging(this, new PARTESRowChangeEvent(((PARTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.PARTESRowDeleted != null)) {
+                    this.PARTESRowDeleted(this, new PARTESRowChangeEvent(((PARTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.PARTESRowDeleting != null)) {
+                    this.PARTESRowDeleting(this, new PARTESRowChangeEvent(((PARTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemovePARTESRow(PARTESRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsEstructuraProducto ds = new dsEstructuraProducto();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "PARTESDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
                     try {
-                        return ((string)(this[this.tablePARTES.PART_CODIGOColumn]));
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PART_CODIGO\' in table \'PARTES\' is DBNull.", e);
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
                     }
                 }
-                set {
-                    this[this.tablePARTES.PART_CODIGOColumn] = value;
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class TIPOS_PARTESDataTable : global::System.Data.TypedTableBase<TIPOS_PARTESRow> {
+            
+            private global::System.Data.DataColumn columnTPAR_CODIGO;
+            
+            private global::System.Data.DataColumn columnTPAR_NOMBRE;
+            
+            private global::System.Data.DataColumn columnTPAR_DESCRIPCION;
+            
+            private global::System.Data.DataColumn columnTPAR_PRODUCTOTERMINADO;
+            
+            private global::System.Data.DataColumn columnTPAR_FANTASMA;
+            
+            private global::System.Data.DataColumn columnTPAR_ORDENTRABAJO;
+            
+            private global::System.Data.DataColumn columnTPAR_ENSAMBLADO;
+            
+            private global::System.Data.DataColumn columnTPAR_ADQUIRIDO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_PARTESDataTable() {
+                this.TableName = "TIPOS_PARTES";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal TIPOS_PARTESDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected TIPOS_PARTESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TPAR_CODIGOColumn {
+                get {
+                    return this.columnTPAR_CODIGO;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal PNO_CODIGO {
+            public global::System.Data.DataColumn TPAR_NOMBREColumn {
                 get {
+                    return this.columnTPAR_NOMBRE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TPAR_DESCRIPCIONColumn {
+                get {
+                    return this.columnTPAR_DESCRIPCION;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TPAR_PRODUCTOTERMINADOColumn {
+                get {
+                    return this.columnTPAR_PRODUCTOTERMINADO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TPAR_FANTASMAColumn {
+                get {
+                    return this.columnTPAR_FANTASMA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TPAR_ORDENTRABAJOColumn {
+                get {
+                    return this.columnTPAR_ORDENTRABAJO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TPAR_ENSAMBLADOColumn {
+                get {
+                    return this.columnTPAR_ENSAMBLADO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TPAR_ADQUIRIDOColumn {
+                get {
+                    return this.columnTPAR_ADQUIRIDO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_PARTESRow this[int index] {
+                get {
+                    return ((TIPOS_PARTESRow)(this.Rows[index]));
+                }
+            }
+            
+            public event TIPOS_PARTESRowChangeEventHandler TIPOS_PARTESRowChanging;
+            
+            public event TIPOS_PARTESRowChangeEventHandler TIPOS_PARTESRowChanged;
+            
+            public event TIPOS_PARTESRowChangeEventHandler TIPOS_PARTESRowDeleting;
+            
+            public event TIPOS_PARTESRowChangeEventHandler TIPOS_PARTESRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddTIPOS_PARTESRow(TIPOS_PARTESRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_PARTESRow AddTIPOS_PARTESRow(string TPAR_NOMBRE, string TPAR_DESCRIPCION, decimal TPAR_PRODUCTOTERMINADO, decimal TPAR_FANTASMA, decimal TPAR_ORDENTRABAJO, decimal TPAR_ENSAMBLADO, decimal TPAR_ADQUIRIDO) {
+                TIPOS_PARTESRow rowTIPOS_PARTESRow = ((TIPOS_PARTESRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        TPAR_NOMBRE,
+                        TPAR_DESCRIPCION,
+                        TPAR_PRODUCTOTERMINADO,
+                        TPAR_FANTASMA,
+                        TPAR_ORDENTRABAJO,
+                        TPAR_ENSAMBLADO,
+                        TPAR_ADQUIRIDO};
+                rowTIPOS_PARTESRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowTIPOS_PARTESRow);
+                return rowTIPOS_PARTESRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_PARTESRow FindByTPAR_CODIGO(decimal TPAR_CODIGO) {
+                return ((TIPOS_PARTESRow)(this.Rows.Find(new object[] {
+                            TPAR_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                TIPOS_PARTESDataTable cln = ((TIPOS_PARTESDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new TIPOS_PARTESDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnTPAR_CODIGO = base.Columns["TPAR_CODIGO"];
+                this.columnTPAR_NOMBRE = base.Columns["TPAR_NOMBRE"];
+                this.columnTPAR_DESCRIPCION = base.Columns["TPAR_DESCRIPCION"];
+                this.columnTPAR_PRODUCTOTERMINADO = base.Columns["TPAR_PRODUCTOTERMINADO"];
+                this.columnTPAR_FANTASMA = base.Columns["TPAR_FANTASMA"];
+                this.columnTPAR_ORDENTRABAJO = base.Columns["TPAR_ORDENTRABAJO"];
+                this.columnTPAR_ENSAMBLADO = base.Columns["TPAR_ENSAMBLADO"];
+                this.columnTPAR_ADQUIRIDO = base.Columns["TPAR_ADQUIRIDO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnTPAR_CODIGO = new global::System.Data.DataColumn("TPAR_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTPAR_CODIGO);
+                this.columnTPAR_NOMBRE = new global::System.Data.DataColumn("TPAR_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTPAR_NOMBRE);
+                this.columnTPAR_DESCRIPCION = new global::System.Data.DataColumn("TPAR_DESCRIPCION", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTPAR_DESCRIPCION);
+                this.columnTPAR_PRODUCTOTERMINADO = new global::System.Data.DataColumn("TPAR_PRODUCTOTERMINADO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTPAR_PRODUCTOTERMINADO);
+                this.columnTPAR_FANTASMA = new global::System.Data.DataColumn("TPAR_FANTASMA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTPAR_FANTASMA);
+                this.columnTPAR_ORDENTRABAJO = new global::System.Data.DataColumn("TPAR_ORDENTRABAJO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTPAR_ORDENTRABAJO);
+                this.columnTPAR_ENSAMBLADO = new global::System.Data.DataColumn("TPAR_ENSAMBLADO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTPAR_ENSAMBLADO);
+                this.columnTPAR_ADQUIRIDO = new global::System.Data.DataColumn("TPAR_ADQUIRIDO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTPAR_ADQUIRIDO);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnTPAR_CODIGO}, true));
+                this.columnTPAR_CODIGO.AutoIncrement = true;
+                this.columnTPAR_CODIGO.AutoIncrementSeed = -1;
+                this.columnTPAR_CODIGO.AutoIncrementStep = -1;
+                this.columnTPAR_CODIGO.AllowDBNull = false;
+                this.columnTPAR_CODIGO.Unique = true;
+                this.columnTPAR_NOMBRE.MaxLength = 80;
+                this.columnTPAR_DESCRIPCION.MaxLength = 200;
+                this.columnTPAR_PRODUCTOTERMINADO.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_PARTESRow NewTIPOS_PARTESRow() {
+                return ((TIPOS_PARTESRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new TIPOS_PARTESRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(TIPOS_PARTESRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.TIPOS_PARTESRowChanged != null)) {
+                    this.TIPOS_PARTESRowChanged(this, new TIPOS_PARTESRowChangeEvent(((TIPOS_PARTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.TIPOS_PARTESRowChanging != null)) {
+                    this.TIPOS_PARTESRowChanging(this, new TIPOS_PARTESRowChangeEvent(((TIPOS_PARTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.TIPOS_PARTESRowDeleted != null)) {
+                    this.TIPOS_PARTESRowDeleted(this, new TIPOS_PARTESRowChangeEvent(((TIPOS_PARTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.TIPOS_PARTESRowDeleting != null)) {
+                    this.TIPOS_PARTESRowDeleting(this, new TIPOS_PARTESRowChangeEvent(((TIPOS_PARTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveTIPOS_PARTESRow(TIPOS_PARTESRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsEstructuraProducto ds = new dsEstructuraProducto();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "TIPOS_PARTESDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
                     try {
-                        return ((decimal)(this[this.tablePARTES.PNO_CODIGOColumn]));
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PNO_CODIGO\' in table \'PARTES\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePARTES.PNO_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal PART_COSTO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tablePARTES.PART_COSTOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PART_COSTO\' in table \'PARTES\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePARTES.PART_COSTOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal PART_COSTOFIJO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tablePARTES.PART_COSTOFIJOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PART_COSTOFIJO\' in table \'PARTES\' is DBNull.", e);
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
                     }
                 }
-                set {
-                    this[this.tablePARTES.PART_COSTOFIJOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal PAR_CODIGO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tablePARTES.PAR_CODIGOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PAR_CODIGO\' in table \'PARTES\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePARTES.PAR_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal TPAR_CODIGO {
-                get {
-                    return ((decimal)(this[this.tablePARTES.TPAR_CODIGOColumn]));
-                }
-                set {
-                    this[this.tablePARTES.TPAR_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal TE_CODIGO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tablePARTES.TE_CODIGOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'TE_CODIGO\' in table \'PARTES\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePARTES.TE_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal HR_CODIGO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tablePARTES.HR_CODIGOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'HR_CODIGO\' in table \'PARTES\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePARTES.HR_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ESTADO_PARTESRow ESTADO_PARTESRow {
-                get {
-                    return ((ESTADO_PARTESRow)(this.GetParentRow(this.Table.ParentRelations["FK_PARTES_ESTADO_PARTES"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_PARTES_ESTADO_PARTES"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PLANOSRow PLANOSRow {
-                get {
-                    return ((PLANOSRow)(this.GetParentRow(this.Table.ParentRelations["FK_PARTES_PLANOS"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_PARTES_PLANOS"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TERMINACIONESRow TERMINACIONESRow {
-                get {
-                    return ((TERMINACIONESRow)(this.GetParentRow(this.Table.ParentRelations["FK_PARTES_TERMINACIONES"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_PARTES_TERMINACIONES"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public HOJAS_RUTARow HOJAS_RUTARow {
-                get {
-                    return ((HOJAS_RUTARow)(this.GetParentRow(this.Table.ParentRelations["FK_PARTES_HOJAS_RUTA"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_PARTES_HOJAS_RUTA"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TIPOS_PARTESRow TIPOS_PARTESRow {
-                get {
-                    return ((TIPOS_PARTESRow)(this.GetParentRow(this.Table.ParentRelations["FK_PARTES_TIPOS_PARTES"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_PARTES_TIPOS_PARTES"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPART_DESCRIPCIONNull() {
-                return this.IsNull(this.tablePARTES.PART_DESCRIPCIONColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPART_DESCRIPCIONNull() {
-                this[this.tablePARTES.PART_DESCRIPCIONColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPART_CODIGONull() {
-                return this.IsNull(this.tablePARTES.PART_CODIGOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPART_CODIGONull() {
-                this[this.tablePARTES.PART_CODIGOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPNO_CODIGONull() {
-                return this.IsNull(this.tablePARTES.PNO_CODIGOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPNO_CODIGONull() {
-                this[this.tablePARTES.PNO_CODIGOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPART_COSTONull() {
-                return this.IsNull(this.tablePARTES.PART_COSTOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPART_COSTONull() {
-                this[this.tablePARTES.PART_COSTOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPART_COSTOFIJONull() {
-                return this.IsNull(this.tablePARTES.PART_COSTOFIJOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPART_COSTOFIJONull() {
-                this[this.tablePARTES.PART_COSTOFIJOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPAR_CODIGONull() {
-                return this.IsNull(this.tablePARTES.PAR_CODIGOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPAR_CODIGONull() {
-                this[this.tablePARTES.PAR_CODIGOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsTE_CODIGONull() {
-                return this.IsNull(this.tablePARTES.TE_CODIGOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetTE_CODIGONull() {
-                this[this.tablePARTES.TE_CODIGOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsHR_CODIGONull() {
-                return this.IsNull(this.tablePARTES.HR_CODIGOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetHR_CODIGONull() {
-                this[this.tablePARTES.HR_CODIGOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COMPUESTOS_PARTESRow[] GetCOMPUESTOS_PARTESRowsByFK_COMPUESTOS_PARTES_PARTES() {
-                if ((this.Table.ChildRelations["FK_COMPUESTOS_PARTES_PARTES"] == null)) {
-                    return new COMPUESTOS_PARTESRow[0];
-                }
-                else {
-                    return ((COMPUESTOS_PARTESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_COMPUESTOS_PARTES_PARTES"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COMPUESTOS_PARTESRow[] GetCOMPUESTOS_PARTESRowsByFK_COMPUESTOS_PARTES_PARTES1() {
-                if ((this.Table.ChildRelations["FK_COMPUESTOS_PARTES_PARTES1"] == null)) {
-                    return new COMPUESTOS_PARTESRow[0];
-                }
-                else {
-                    return ((COMPUESTOS_PARTESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_COMPUESTOS_PARTES_PARTES1"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ESTRUCTURASRow[] GetESTRUCTURASRows() {
-                if ((this.Table.ChildRelations["FK_ESTRUCTURAS_PARTES"] == null)) {
-                    return new ESTRUCTURASRow[0];
-                }
-                else {
-                    return ((ESTRUCTURASRow[])(base.GetChildRows(this.Table.ChildRelations["FK_ESTRUCTURAS_PARTES"])));
-                }
+                xs.Add(dsSchema);
+                return type;
             }
         }
         
@@ -3891,32 +3617,32 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PARTESRow PARTESRowByFK_COMPUESTOS_PARTES_PARTES {
-                get {
-                    return ((PARTESRow)(this.GetParentRow(this.Table.ParentRelations["FK_COMPUESTOS_PARTES_PARTES"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_COMPUESTOS_PARTES_PARTES"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PARTESRow PARTESRowByFK_COMPUESTOS_PARTES_PARTES1 {
-                get {
-                    return ((PARTESRow)(this.GetParentRow(this.Table.ParentRelations["FK_COMPUESTOS_PARTES_PARTES1"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_COMPUESTOS_PARTES_PARTES1"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public MATERIAS_PRIMASRow MATERIAS_PRIMASRow {
                 get {
                     return ((MATERIAS_PRIMASRow)(this.GetParentRow(this.Table.ParentRelations["FK_COMPUESTOS_PARTES_MATERIAS_PRIMAS"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_COMPUESTOS_PARTES_MATERIAS_PRIMAS"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PARTESRow PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO {
+                get {
+                    return ((PARTESRow)(this.GetParentRow(this.Table.ParentRelations["FK_COMPUESTOS_PARTES_PARTES_HIJO"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_COMPUESTOS_PARTES_PARTES_HIJO"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PARTESRow PARTESRowByFK_COMPUESTOS_PARTES_PARTES_PADRE {
+                get {
+                    return ((PARTESRow)(this.GetParentRow(this.Table.ParentRelations["FK_COMPUESTOS_PARTES_PARTES_PADRE"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_COMPUESTOS_PARTES_PARTES_PADRE"]);
                 }
             }
             
@@ -4276,22 +4002,22 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PARTESRow[] GetPARTESRows() {
-                if ((this.Table.ChildRelations["FK_PARTES_PLANOS"] == null)) {
-                    return new PARTESRow[0];
-                }
-                else {
-                    return ((PARTESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_PARTES_PLANOS"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public ESTRUCTURASRow[] GetESTRUCTURASRows() {
                 if ((this.Table.ChildRelations["estructura_plano_fk"] == null)) {
                     return new ESTRUCTURASRow[0];
                 }
                 else {
                     return ((ESTRUCTURASRow[])(base.GetChildRows(this.Table.ChildRelations["estructura_plano_fk"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PARTESRow[] GetPARTESRows() {
+                if ((this.Table.ChildRelations["FK_PARTES_PLANOS"] == null)) {
+                    return new PARTESRow[0];
+                }
+                else {
+                    return ((PARTESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_PARTES_PLANOS"])));
                 }
             }
         }
@@ -4755,101 +4481,6 @@ namespace GyCAP.Data {
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class TIPOS_PARTESRow : global::System.Data.DataRow {
-            
-            private TIPOS_PARTESDataTable tableTIPOS_PARTES;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal TIPOS_PARTESRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableTIPOS_PARTES = ((TIPOS_PARTESDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal TPAR_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableTIPOS_PARTES.TPAR_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableTIPOS_PARTES.TPAR_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string TPAR_NOMBRE {
-                get {
-                    try {
-                        return ((string)(this[this.tableTIPOS_PARTES.TPAR_NOMBREColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'TPAR_NOMBRE\' in table \'TIPOS_PARTES\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableTIPOS_PARTES.TPAR_NOMBREColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string TPAR_DESCRIPCION {
-                get {
-                    try {
-                        return ((string)(this[this.tableTIPOS_PARTES.TPAR_DESCRIPCIONColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'TPAR_DESCRIPCION\' in table \'TIPOS_PARTES\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableTIPOS_PARTES.TPAR_DESCRIPCIONColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal TPAR_PRODUCTOTERMINADO {
-                get {
-                    return ((decimal)(this[this.tableTIPOS_PARTES.TPAR_PRODUCTOTERMINADOColumn]));
-                }
-                set {
-                    this[this.tableTIPOS_PARTES.TPAR_PRODUCTOTERMINADOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsTPAR_NOMBRENull() {
-                return this.IsNull(this.tableTIPOS_PARTES.TPAR_NOMBREColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetTPAR_NOMBRENull() {
-                this[this.tableTIPOS_PARTES.TPAR_NOMBREColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsTPAR_DESCRIPCIONNull() {
-                return this.IsNull(this.tableTIPOS_PARTES.TPAR_DESCRIPCIONColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetTPAR_DESCRIPCIONNull() {
-                this[this.tableTIPOS_PARTES.TPAR_DESCRIPCIONColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PARTESRow[] GetPARTESRows() {
-                if ((this.Table.ChildRelations["FK_PARTES_TIPOS_PARTES"] == null)) {
-                    return new PARTESRow[0];
-                }
-                else {
-                    return ((PARTESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_PARTES_TIPOS_PARTES"])));
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public partial class ESTRUCTURASRow : global::System.Data.DataRow {
             
             private ESTRUCTURASDataTable tableESTRUCTURAS;
@@ -5107,32 +4738,521 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
-        ///Row event argument class
+        ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class PARTESRowChangeEvent : global::System.EventArgs {
+        public partial class PARTESRow : global::System.Data.DataRow {
             
-            private PARTESRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
+            private PARTESDataTable tablePARTES;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PARTESRowChangeEvent(PARTESRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
+            internal PARTESRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablePARTES = ((PARTESDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PARTESRow Row {
+            public decimal PART_NUMERO {
                 get {
-                    return this.eventRow;
+                    return ((decimal)(this[this.tablePARTES.PART_NUMEROColumn]));
+                }
+                set {
+                    this[this.tablePARTES.PART_NUMEROColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
+            public string PART_NOMBRE {
                 get {
-                    return this.eventAction;
+                    return ((string)(this[this.tablePARTES.PART_NOMBREColumn]));
+                }
+                set {
+                    this[this.tablePARTES.PART_NOMBREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PART_DESCRIPCION {
+                get {
+                    if (this.IsPART_DESCRIPCIONNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tablePARTES.PART_DESCRIPCIONColumn]));
+                    }
+                }
+                set {
+                    this[this.tablePARTES.PART_DESCRIPCIONColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PART_CODIGO {
+                get {
+                    try {
+                        return ((string)(this[this.tablePARTES.PART_CODIGOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PART_CODIGO\' in table \'PARTES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePARTES.PART_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal PNO_CODIGO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePARTES.PNO_CODIGOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PNO_CODIGO\' in table \'PARTES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePARTES.PNO_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal PART_COSTO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePARTES.PART_COSTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PART_COSTO\' in table \'PARTES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePARTES.PART_COSTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal PART_COSTOFIJO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePARTES.PART_COSTOFIJOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PART_COSTOFIJO\' in table \'PARTES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePARTES.PART_COSTOFIJOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal PAR_CODIGO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePARTES.PAR_CODIGOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PAR_CODIGO\' in table \'PARTES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePARTES.PAR_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal TPAR_CODIGO {
+                get {
+                    return ((decimal)(this[this.tablePARTES.TPAR_CODIGOColumn]));
+                }
+                set {
+                    this[this.tablePARTES.TPAR_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal TE_CODIGO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePARTES.TE_CODIGOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TE_CODIGO\' in table \'PARTES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePARTES.TE_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal HR_CODIGO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePARTES.HR_CODIGOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'HR_CODIGO\' in table \'PARTES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePARTES.HR_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ESTADO_PARTESRow ESTADO_PARTESRow {
+                get {
+                    return ((ESTADO_PARTESRow)(this.GetParentRow(this.Table.ParentRelations["FK_PARTES_ESTADO_PARTES"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_PARTES_ESTADO_PARTES"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public HOJAS_RUTARow HOJAS_RUTARow {
+                get {
+                    return ((HOJAS_RUTARow)(this.GetParentRow(this.Table.ParentRelations["FK_PARTES_HOJAS_RUTA"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_PARTES_HOJAS_RUTA"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PLANOSRow PLANOSRow {
+                get {
+                    return ((PLANOSRow)(this.GetParentRow(this.Table.ParentRelations["FK_PARTES_PLANOS"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_PARTES_PLANOS"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TERMINACIONESRow TERMINACIONESRow {
+                get {
+                    return ((TERMINACIONESRow)(this.GetParentRow(this.Table.ParentRelations["FK_PARTES_TERMINACIONES"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_PARTES_TERMINACIONES"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_PARTESRow TIPOS_PARTESRow {
+                get {
+                    return ((TIPOS_PARTESRow)(this.GetParentRow(this.Table.ParentRelations["FK_PARTES_TIPOS_PARTES"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_PARTES_TIPOS_PARTES"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPART_DESCRIPCIONNull() {
+                return this.IsNull(this.tablePARTES.PART_DESCRIPCIONColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPART_DESCRIPCIONNull() {
+                this[this.tablePARTES.PART_DESCRIPCIONColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPART_CODIGONull() {
+                return this.IsNull(this.tablePARTES.PART_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPART_CODIGONull() {
+                this[this.tablePARTES.PART_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPNO_CODIGONull() {
+                return this.IsNull(this.tablePARTES.PNO_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPNO_CODIGONull() {
+                this[this.tablePARTES.PNO_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPART_COSTONull() {
+                return this.IsNull(this.tablePARTES.PART_COSTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPART_COSTONull() {
+                this[this.tablePARTES.PART_COSTOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPART_COSTOFIJONull() {
+                return this.IsNull(this.tablePARTES.PART_COSTOFIJOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPART_COSTOFIJONull() {
+                this[this.tablePARTES.PART_COSTOFIJOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPAR_CODIGONull() {
+                return this.IsNull(this.tablePARTES.PAR_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPAR_CODIGONull() {
+                this[this.tablePARTES.PAR_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTE_CODIGONull() {
+                return this.IsNull(this.tablePARTES.TE_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTE_CODIGONull() {
+                this[this.tablePARTES.TE_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsHR_CODIGONull() {
+                return this.IsNull(this.tablePARTES.HR_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetHR_CODIGONull() {
+                this[this.tablePARTES.HR_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COMPUESTOS_PARTESRow[] GetCOMPUESTOS_PARTESRowsByFK_COMPUESTOS_PARTES_PARTES_HIJO() {
+                if ((this.Table.ChildRelations["FK_COMPUESTOS_PARTES_PARTES_HIJO"] == null)) {
+                    return new COMPUESTOS_PARTESRow[0];
+                }
+                else {
+                    return ((COMPUESTOS_PARTESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_COMPUESTOS_PARTES_PARTES_HIJO"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COMPUESTOS_PARTESRow[] GetCOMPUESTOS_PARTESRowsByFK_COMPUESTOS_PARTES_PARTES_PADRE() {
+                if ((this.Table.ChildRelations["FK_COMPUESTOS_PARTES_PARTES_PADRE"] == null)) {
+                    return new COMPUESTOS_PARTESRow[0];
+                }
+                else {
+                    return ((COMPUESTOS_PARTESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_COMPUESTOS_PARTES_PARTES_PADRE"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ESTRUCTURASRow[] GetESTRUCTURASRows() {
+                if ((this.Table.ChildRelations["FK_ESTRUCTURAS_PARTES"] == null)) {
+                    return new ESTRUCTURASRow[0];
+                }
+                else {
+                    return ((ESTRUCTURASRow[])(base.GetChildRows(this.Table.ChildRelations["FK_ESTRUCTURAS_PARTES"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class TIPOS_PARTESRow : global::System.Data.DataRow {
+            
+            private TIPOS_PARTESDataTable tableTIPOS_PARTES;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal TIPOS_PARTESRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableTIPOS_PARTES = ((TIPOS_PARTESDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal TPAR_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableTIPOS_PARTES.TPAR_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableTIPOS_PARTES.TPAR_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string TPAR_NOMBRE {
+                get {
+                    if (this.IsTPAR_NOMBRENull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableTIPOS_PARTES.TPAR_NOMBREColumn]));
+                    }
+                }
+                set {
+                    this[this.tableTIPOS_PARTES.TPAR_NOMBREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string TPAR_DESCRIPCION {
+                get {
+                    if (this.IsTPAR_DESCRIPCIONNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableTIPOS_PARTES.TPAR_DESCRIPCIONColumn]));
+                    }
+                }
+                set {
+                    this[this.tableTIPOS_PARTES.TPAR_DESCRIPCIONColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal TPAR_PRODUCTOTERMINADO {
+                get {
+                    return ((decimal)(this[this.tableTIPOS_PARTES.TPAR_PRODUCTOTERMINADOColumn]));
+                }
+                set {
+                    this[this.tableTIPOS_PARTES.TPAR_PRODUCTOTERMINADOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal TPAR_FANTASMA {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableTIPOS_PARTES.TPAR_FANTASMAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TPAR_FANTASMA\' in table \'TIPOS_PARTES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTIPOS_PARTES.TPAR_FANTASMAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal TPAR_ORDENTRABAJO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableTIPOS_PARTES.TPAR_ORDENTRABAJOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TPAR_ORDENTRABAJO\' in table \'TIPOS_PARTES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTIPOS_PARTES.TPAR_ORDENTRABAJOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal TPAR_ENSAMBLADO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableTIPOS_PARTES.TPAR_ENSAMBLADOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TPAR_ENSAMBLADO\' in table \'TIPOS_PARTES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTIPOS_PARTES.TPAR_ENSAMBLADOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal TPAR_ADQUIRIDO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableTIPOS_PARTES.TPAR_ADQUIRIDOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TPAR_ADQUIRIDO\' in table \'TIPOS_PARTES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTIPOS_PARTES.TPAR_ADQUIRIDOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTPAR_NOMBRENull() {
+                return this.IsNull(this.tableTIPOS_PARTES.TPAR_NOMBREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTPAR_NOMBRENull() {
+                this[this.tableTIPOS_PARTES.TPAR_NOMBREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTPAR_DESCRIPCIONNull() {
+                return this.IsNull(this.tableTIPOS_PARTES.TPAR_DESCRIPCIONColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTPAR_DESCRIPCIONNull() {
+                this[this.tableTIPOS_PARTES.TPAR_DESCRIPCIONColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTPAR_FANTASMANull() {
+                return this.IsNull(this.tableTIPOS_PARTES.TPAR_FANTASMAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTPAR_FANTASMANull() {
+                this[this.tableTIPOS_PARTES.TPAR_FANTASMAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTPAR_ORDENTRABAJONull() {
+                return this.IsNull(this.tableTIPOS_PARTES.TPAR_ORDENTRABAJOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTPAR_ORDENTRABAJONull() {
+                this[this.tableTIPOS_PARTES.TPAR_ORDENTRABAJOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTPAR_ENSAMBLADONull() {
+                return this.IsNull(this.tableTIPOS_PARTES.TPAR_ENSAMBLADOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTPAR_ENSAMBLADONull() {
+                this[this.tableTIPOS_PARTES.TPAR_ENSAMBLADOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTPAR_ADQUIRIDONull() {
+                return this.IsNull(this.tableTIPOS_PARTES.TPAR_ADQUIRIDOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTPAR_ADQUIRIDONull() {
+                this[this.tableTIPOS_PARTES.TPAR_ADQUIRIDOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PARTESRow[] GetPARTESRows() {
+                if ((this.Table.ChildRelations["FK_PARTES_TIPOS_PARTES"] == null)) {
+                    return new PARTESRow[0];
+                }
+                else {
+                    return ((PARTESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_PARTES_TIPOS_PARTES"])));
                 }
             }
         }
@@ -5327,37 +5447,6 @@ namespace GyCAP.Data {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class TIPOS_PARTESRowChangeEvent : global::System.EventArgs {
-            
-            private TIPOS_PARTESRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TIPOS_PARTESRowChangeEvent(TIPOS_PARTESRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TIPOS_PARTESRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public class ESTRUCTURASRowChangeEvent : global::System.EventArgs {
             
             private ESTRUCTURASRow eventRow;
@@ -5384,642 +5473,72 @@ namespace GyCAP.Data {
                 }
             }
         }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class PARTESRowChangeEvent : global::System.EventArgs {
+            
+            private PARTESRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PARTESRowChangeEvent(PARTESRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PARTESRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class TIPOS_PARTESRowChangeEvent : global::System.EventArgs {
+            
+            private TIPOS_PARTESRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_PARTESRowChangeEvent(TIPOS_PARTESRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_PARTESRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
     }
 }
 namespace GyCAP.Data.dsEstructuraProductoTableAdapters {
     
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class PARTESTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public PARTESTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "PARTES";
-            tableMapping.ColumnMappings.Add("PART_NUMERO", "PART_NUMERO");
-            tableMapping.ColumnMappings.Add("PART_NOMBRE", "PART_NOMBRE");
-            tableMapping.ColumnMappings.Add("PART_DESCRIPCION", "PART_DESCRIPCION");
-            tableMapping.ColumnMappings.Add("PART_CODIGO", "PART_CODIGO");
-            tableMapping.ColumnMappings.Add("PNO_CODIGO", "PNO_CODIGO");
-            tableMapping.ColumnMappings.Add("PART_COSTO", "PART_COSTO");
-            tableMapping.ColumnMappings.Add("PART_COSTOFIJO", "PART_COSTOFIJO");
-            tableMapping.ColumnMappings.Add("PAR_CODIGO", "PAR_CODIGO");
-            tableMapping.ColumnMappings.Add("TPAR_CODIGO", "TPAR_CODIGO");
-            tableMapping.ColumnMappings.Add("TE_CODIGO", "TE_CODIGO");
-            tableMapping.ColumnMappings.Add("HR_CODIGO", "HR_CODIGO");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[PARTES] WHERE (([PART_NUMERO] = @Original_PART_NUMERO) AND ([PART_NOMBRE] = @Original_PART_NOMBRE) AND ((@IsNull_PART_DESCRIPCION = 1 AND [PART_DESCRIPCION] IS NULL) OR ([PART_DESCRIPCION] = @Original_PART_DESCRIPCION)) AND ((@IsNull_PART_CODIGO = 1 AND [PART_CODIGO] IS NULL) OR ([PART_CODIGO] = @Original_PART_CODIGO)) AND ((@IsNull_PNO_CODIGO = 1 AND [PNO_CODIGO] IS NULL) OR ([PNO_CODIGO] = @Original_PNO_CODIGO)) AND ((@IsNull_PART_COSTO = 1 AND [PART_COSTO] IS NULL) OR ([PART_COSTO] = @Original_PART_COSTO)) AND ((@IsNull_PART_COSTOFIJO = 1 AND [PART_COSTOFIJO] IS NULL) OR ([PART_COSTOFIJO] = @Original_PART_COSTOFIJO)) AND ((@IsNull_PAR_CODIGO = 1 AND [PAR_CODIGO] IS NULL) OR ([PAR_CODIGO] = @Original_PAR_CODIGO)) AND ([TPAR_CODIGO] = @Original_TPAR_CODIGO) AND ((@IsNull_TE_CODIGO = 1 AND [TE_CODIGO] IS NULL) OR ([TE_CODIGO] = @Original_TE_CODIGO)) AND ((@IsNull_HR_CODIGO = 1 AND [HR_CODIGO] IS NULL) OR ([HR_CODIGO] = @Original_HR_CODIGO)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_COSTO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_COSTO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "PART_COSTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_COSTOFIJO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_COSTOFIJO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_COSTOFIJO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PART_COSTOFIJO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PAR_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PAR_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PAR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TPAR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TE_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_HR_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[PARTES] ([PART_NOMBRE], [PART_DESCRIPCION], [PART_CODIGO], [PNO_CODIGO], [PART_COSTO], [PART_COSTOFIJO], [PAR_CODIGO], [TPAR_CODIGO], [TE_CODIGO], [HR_CODIGO]) VALUES (@PART_NOMBRE, @PART_DESCRIPCION, @PART_CODIGO, @PNO_CODIGO, @PART_COSTO, @PART_COSTOFIJO, @PAR_CODIGO, @TPAR_CODIGO, @TE_CODIGO, @HR_CODIGO);
-SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART_COSTO, PART_COSTOFIJO, PAR_CODIGO, TPAR_CODIGO, TE_CODIGO, HR_CODIGO FROM PARTES WHERE (PART_NUMERO = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "PART_COSTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_COSTOFIJO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PART_COSTOFIJO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PAR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TPAR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[PARTES] SET [PART_NOMBRE] = @PART_NOMBRE, [PART_DESCRIPCION] = @PART_DESCRIPCION, [PART_CODIGO] = @PART_CODIGO, [PNO_CODIGO] = @PNO_CODIGO, [PART_COSTO] = @PART_COSTO, [PART_COSTOFIJO] = @PART_COSTOFIJO, [PAR_CODIGO] = @PAR_CODIGO, [TPAR_CODIGO] = @TPAR_CODIGO, [TE_CODIGO] = @TE_CODIGO, [HR_CODIGO] = @HR_CODIGO WHERE (([PART_NUMERO] = @Original_PART_NUMERO) AND ([PART_NOMBRE] = @Original_PART_NOMBRE) AND ((@IsNull_PART_DESCRIPCION = 1 AND [PART_DESCRIPCION] IS NULL) OR ([PART_DESCRIPCION] = @Original_PART_DESCRIPCION)) AND ((@IsNull_PART_CODIGO = 1 AND [PART_CODIGO] IS NULL) OR ([PART_CODIGO] = @Original_PART_CODIGO)) AND ((@IsNull_PNO_CODIGO = 1 AND [PNO_CODIGO] IS NULL) OR ([PNO_CODIGO] = @Original_PNO_CODIGO)) AND ((@IsNull_PART_COSTO = 1 AND [PART_COSTO] IS NULL) OR ([PART_COSTO] = @Original_PART_COSTO)) AND ((@IsNull_PART_COSTOFIJO = 1 AND [PART_COSTOFIJO] IS NULL) OR ([PART_COSTOFIJO] = @Original_PART_COSTOFIJO)) AND ((@IsNull_PAR_CODIGO = 1 AND [PAR_CODIGO] IS NULL) OR ([PAR_CODIGO] = @Original_PAR_CODIGO)) AND ([TPAR_CODIGO] = @Original_TPAR_CODIGO) AND ((@IsNull_TE_CODIGO = 1 AND [TE_CODIGO] IS NULL) OR ([TE_CODIGO] = @Original_TE_CODIGO)) AND ((@IsNull_HR_CODIGO = 1 AND [HR_CODIGO] IS NULL) OR ([HR_CODIGO] = @Original_HR_CODIGO)));
-SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART_COSTO, PART_COSTOFIJO, PAR_CODIGO, TPAR_CODIGO, TE_CODIGO, HR_CODIGO FROM PARTES WHERE (PART_NUMERO = @PART_NUMERO)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "PART_COSTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_COSTOFIJO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PART_COSTOFIJO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PAR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TPAR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_COSTO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_COSTO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "PART_COSTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_COSTOFIJO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_COSTOFIJO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_COSTOFIJO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PART_COSTOFIJO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PAR_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PAR_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PAR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TPAR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TE_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_HR_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_NUMERO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART_" +
-                "COSTO, PART_COSTOFIJO, PAR_CODIGO, TPAR_CODIGO, TE_CODIGO, HR_CODIGO FROM dbo.PA" +
-                "RTES";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsEstructuraProducto.PARTESDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsEstructuraProducto.PARTESDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsEstructuraProducto.PARTESDataTable dataTable = new dsEstructuraProducto.PARTESDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsEstructuraProducto.PARTESDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsEstructuraProducto dataSet) {
-            return this.Adapter.Update(dataSet, "PARTES");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_PART_NUMERO, string Original_PART_NOMBRE, string Original_PART_DESCRIPCION, string Original_PART_CODIGO, global::System.Nullable<decimal> Original_PNO_CODIGO, global::System.Nullable<decimal> Original_PART_COSTO, global::System.Nullable<decimal> Original_PART_COSTOFIJO, global::System.Nullable<decimal> Original_PAR_CODIGO, decimal Original_TPAR_CODIGO, global::System.Nullable<decimal> Original_TE_CODIGO, global::System.Nullable<decimal> Original_HR_CODIGO) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_PART_NUMERO));
-            if ((Original_PART_NOMBRE == null)) {
-                throw new global::System.ArgumentNullException("Original_PART_NOMBRE");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_PART_NOMBRE));
-            }
-            if ((Original_PART_DESCRIPCION == null)) {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_PART_DESCRIPCION));
-            }
-            if ((Original_PART_CODIGO == null)) {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_PART_CODIGO));
-            }
-            if ((Original_PNO_CODIGO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((decimal)(Original_PNO_CODIGO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PART_COSTO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((decimal)(Original_PART_COSTO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PART_COSTOFIJO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((decimal)(Original_PART_COSTOFIJO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PAR_CODIGO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((decimal)(Original_PAR_CODIGO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.DeleteCommand.Parameters[14].Value = ((decimal)(Original_TPAR_CODIGO));
-            if ((Original_TE_CODIGO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[16].Value = ((decimal)(Original_TE_CODIGO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
-            }
-            if ((Original_HR_CODIGO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[18].Value = ((decimal)(Original_HR_CODIGO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string PART_NOMBRE, string PART_DESCRIPCION, string PART_CODIGO, global::System.Nullable<decimal> PNO_CODIGO, global::System.Nullable<decimal> PART_COSTO, global::System.Nullable<decimal> PART_COSTOFIJO, global::System.Nullable<decimal> PAR_CODIGO, decimal TPAR_CODIGO, global::System.Nullable<decimal> TE_CODIGO, global::System.Nullable<decimal> HR_CODIGO) {
-            if ((PART_NOMBRE == null)) {
-                throw new global::System.ArgumentNullException("PART_NOMBRE");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(PART_NOMBRE));
-            }
-            if ((PART_DESCRIPCION == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(PART_DESCRIPCION));
-            }
-            if ((PART_CODIGO == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(PART_CODIGO));
-            }
-            if ((PNO_CODIGO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(PNO_CODIGO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((PART_COSTO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(PART_COSTO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((PART_COSTOFIJO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(PART_COSTOFIJO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((PAR_CODIGO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(PAR_CODIGO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.InsertCommand.Parameters[7].Value = ((decimal)(TPAR_CODIGO));
-            if ((TE_CODIGO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((decimal)(TE_CODIGO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((HR_CODIGO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[9].Value = ((decimal)(HR_CODIGO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string PART_NOMBRE, 
-                    string PART_DESCRIPCION, 
-                    string PART_CODIGO, 
-                    global::System.Nullable<decimal> PNO_CODIGO, 
-                    global::System.Nullable<decimal> PART_COSTO, 
-                    global::System.Nullable<decimal> PART_COSTOFIJO, 
-                    global::System.Nullable<decimal> PAR_CODIGO, 
-                    decimal TPAR_CODIGO, 
-                    global::System.Nullable<decimal> TE_CODIGO, 
-                    global::System.Nullable<decimal> HR_CODIGO, 
-                    decimal Original_PART_NUMERO, 
-                    string Original_PART_NOMBRE, 
-                    string Original_PART_DESCRIPCION, 
-                    string Original_PART_CODIGO, 
-                    global::System.Nullable<decimal> Original_PNO_CODIGO, 
-                    global::System.Nullable<decimal> Original_PART_COSTO, 
-                    global::System.Nullable<decimal> Original_PART_COSTOFIJO, 
-                    global::System.Nullable<decimal> Original_PAR_CODIGO, 
-                    decimal Original_TPAR_CODIGO, 
-                    global::System.Nullable<decimal> Original_TE_CODIGO, 
-                    global::System.Nullable<decimal> Original_HR_CODIGO, 
-                    decimal PART_NUMERO) {
-            if ((PART_NOMBRE == null)) {
-                throw new global::System.ArgumentNullException("PART_NOMBRE");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(PART_NOMBRE));
-            }
-            if ((PART_DESCRIPCION == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(PART_DESCRIPCION));
-            }
-            if ((PART_CODIGO == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(PART_CODIGO));
-            }
-            if ((PNO_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(PNO_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((PART_COSTO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(PART_COSTO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((PART_COSTOFIJO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(PART_COSTOFIJO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((PAR_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(PAR_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(TPAR_CODIGO));
-            if ((TE_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(TE_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((HR_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(HR_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(Original_PART_NUMERO));
-            if ((Original_PART_NOMBRE == null)) {
-                throw new global::System.ArgumentNullException("Original_PART_NOMBRE");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_PART_NOMBRE));
-            }
-            if ((Original_PART_DESCRIPCION == null)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_PART_DESCRIPCION));
-            }
-            if ((Original_PART_CODIGO == null)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_PART_CODIGO));
-            }
-            if ((Original_PNO_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((decimal)(Original_PNO_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PART_COSTO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((decimal)(Original_PART_COSTO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PART_COSTOFIJO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((decimal)(Original_PART_COSTOFIJO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PAR_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((decimal)(Original_PAR_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[24].Value = ((decimal)(Original_TPAR_CODIGO));
-            if ((Original_TE_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(Original_TE_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
-            }
-            if ((Original_HR_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((decimal)(Original_HR_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[29].Value = ((decimal)(PART_NUMERO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string PART_NOMBRE, 
-                    string PART_DESCRIPCION, 
-                    string PART_CODIGO, 
-                    global::System.Nullable<decimal> PNO_CODIGO, 
-                    global::System.Nullable<decimal> PART_COSTO, 
-                    global::System.Nullable<decimal> PART_COSTOFIJO, 
-                    global::System.Nullable<decimal> PAR_CODIGO, 
-                    decimal TPAR_CODIGO, 
-                    global::System.Nullable<decimal> TE_CODIGO, 
-                    global::System.Nullable<decimal> HR_CODIGO, 
-                    decimal Original_PART_NUMERO, 
-                    string Original_PART_NOMBRE, 
-                    string Original_PART_DESCRIPCION, 
-                    string Original_PART_CODIGO, 
-                    global::System.Nullable<decimal> Original_PNO_CODIGO, 
-                    global::System.Nullable<decimal> Original_PART_COSTO, 
-                    global::System.Nullable<decimal> Original_PART_COSTOFIJO, 
-                    global::System.Nullable<decimal> Original_PAR_CODIGO, 
-                    decimal Original_TPAR_CODIGO, 
-                    global::System.Nullable<decimal> Original_TE_CODIGO, 
-                    global::System.Nullable<decimal> Original_HR_CODIGO) {
-            return this.Update(PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART_COSTO, PART_COSTOFIJO, PAR_CODIGO, TPAR_CODIGO, TE_CODIGO, HR_CODIGO, Original_PART_NUMERO, Original_PART_NOMBRE, Original_PART_DESCRIPCION, Original_PART_CODIGO, Original_PNO_CODIGO, Original_PART_COSTO, Original_PART_COSTOFIJO, Original_PAR_CODIGO, Original_TPAR_CODIGO, Original_TE_CODIGO, Original_HR_CODIGO, Original_PART_NUMERO);
-        }
-    }
     
     /// <summary>
     ///Represents the connection and commands used to retrieve and save data.
@@ -8730,355 +8249,6 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_C
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class TIPOS_PARTESTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public TIPOS_PARTESTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "TIPOS_PARTES";
-            tableMapping.ColumnMappings.Add("TPAR_CODIGO", "TPAR_CODIGO");
-            tableMapping.ColumnMappings.Add("TPAR_NOMBRE", "TPAR_NOMBRE");
-            tableMapping.ColumnMappings.Add("TPAR_DESCRIPCION", "TPAR_DESCRIPCION");
-            tableMapping.ColumnMappings.Add("TPAR_PRODUCTOTERMINADO", "TPAR_PRODUCTOTERMINADO");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[TIPOS_PARTES] WHERE (([TPAR_CODIGO] = @Original_TPAR_CODIGO) AND ((@IsNull_TPAR_NOMBRE = 1 AND [TPAR_NOMBRE] IS NULL) OR ([TPAR_NOMBRE] = @Original_TPAR_NOMBRE)) AND ((@IsNull_TPAR_DESCRIPCION = 1 AND [TPAR_DESCRIPCION] IS NULL) OR ([TPAR_DESCRIPCION] = @Original_TPAR_DESCRIPCION)) AND ([TPAR_PRODUCTOTERMINADO] = @Original_TPAR_PRODUCTOTERMINADO))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TPAR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TPAR_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TPAR_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_PRODUCTOTERMINADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_PRODUCTOTERMINADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[TIPOS_PARTES] ([TPAR_NOMBRE], [TPAR_DESCRIPCION], [TPAR_PRODUCTOTERMINADO]) VALUES (@TPAR_NOMBRE, @TPAR_DESCRIPCION, @TPAR_PRODUCTOTERMINADO);
-SELECT TPAR_CODIGO, TPAR_NOMBRE, TPAR_DESCRIPCION, TPAR_PRODUCTOTERMINADO FROM TIPOS_PARTES WHERE (TPAR_CODIGO = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_PRODUCTOTERMINADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_PRODUCTOTERMINADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[TIPOS_PARTES] SET [TPAR_NOMBRE] = @TPAR_NOMBRE, [TPAR_DESCRIPCION] = @TPAR_DESCRIPCION, [TPAR_PRODUCTOTERMINADO] = @TPAR_PRODUCTOTERMINADO WHERE (([TPAR_CODIGO] = @Original_TPAR_CODIGO) AND ((@IsNull_TPAR_NOMBRE = 1 AND [TPAR_NOMBRE] IS NULL) OR ([TPAR_NOMBRE] = @Original_TPAR_NOMBRE)) AND ((@IsNull_TPAR_DESCRIPCION = 1 AND [TPAR_DESCRIPCION] IS NULL) OR ([TPAR_DESCRIPCION] = @Original_TPAR_DESCRIPCION)) AND ([TPAR_PRODUCTOTERMINADO] = @Original_TPAR_PRODUCTOTERMINADO));
-SELECT TPAR_CODIGO, TPAR_NOMBRE, TPAR_DESCRIPCION, TPAR_PRODUCTOTERMINADO FROM TIPOS_PARTES WHERE (TPAR_CODIGO = @TPAR_CODIGO)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_PRODUCTOTERMINADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_PRODUCTOTERMINADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TPAR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TPAR_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TPAR_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_PRODUCTOTERMINADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_PRODUCTOTERMINADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "TPAR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT TPAR_CODIGO, TPAR_NOMBRE, TPAR_DESCRIPCION, TPAR_PRODUCTOTERMINADO FROM db" +
-                "o.TIPOS_PARTES";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsEstructuraProducto.TIPOS_PARTESDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsEstructuraProducto.TIPOS_PARTESDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsEstructuraProducto.TIPOS_PARTESDataTable dataTable = new dsEstructuraProducto.TIPOS_PARTESDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsEstructuraProducto.TIPOS_PARTESDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsEstructuraProducto dataSet) {
-            return this.Adapter.Update(dataSet, "TIPOS_PARTES");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_TPAR_CODIGO, string Original_TPAR_NOMBRE, string Original_TPAR_DESCRIPCION, decimal Original_TPAR_PRODUCTOTERMINADO) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_TPAR_CODIGO));
-            if ((Original_TPAR_NOMBRE == null)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_TPAR_NOMBRE));
-            }
-            if ((Original_TPAR_DESCRIPCION == null)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_TPAR_DESCRIPCION));
-            }
-            this.Adapter.DeleteCommand.Parameters[5].Value = ((decimal)(Original_TPAR_PRODUCTOTERMINADO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string TPAR_NOMBRE, string TPAR_DESCRIPCION, decimal TPAR_PRODUCTOTERMINADO) {
-            if ((TPAR_NOMBRE == null)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(TPAR_NOMBRE));
-            }
-            if ((TPAR_DESCRIPCION == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(TPAR_DESCRIPCION));
-            }
-            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(TPAR_PRODUCTOTERMINADO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string TPAR_NOMBRE, string TPAR_DESCRIPCION, decimal TPAR_PRODUCTOTERMINADO, decimal Original_TPAR_CODIGO, string Original_TPAR_NOMBRE, string Original_TPAR_DESCRIPCION, decimal Original_TPAR_PRODUCTOTERMINADO, decimal TPAR_CODIGO) {
-            if ((TPAR_NOMBRE == null)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(TPAR_NOMBRE));
-            }
-            if ((TPAR_DESCRIPCION == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(TPAR_DESCRIPCION));
-            }
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(TPAR_PRODUCTOTERMINADO));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(Original_TPAR_CODIGO));
-            if ((Original_TPAR_NOMBRE == null)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_TPAR_NOMBRE));
-            }
-            if ((Original_TPAR_DESCRIPCION == null)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_TPAR_DESCRIPCION));
-            }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_TPAR_PRODUCTOTERMINADO));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(TPAR_CODIGO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string TPAR_NOMBRE, string TPAR_DESCRIPCION, decimal TPAR_PRODUCTOTERMINADO, decimal Original_TPAR_CODIGO, string Original_TPAR_NOMBRE, string Original_TPAR_DESCRIPCION, decimal Original_TPAR_PRODUCTOTERMINADO) {
-            return this.Update(TPAR_NOMBRE, TPAR_DESCRIPCION, TPAR_PRODUCTOTERMINADO, Original_TPAR_CODIGO, Original_TPAR_NOMBRE, Original_TPAR_DESCRIPCION, Original_TPAR_PRODUCTOTERMINADO, Original_TPAR_CODIGO);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class ESTRUCTURASTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
@@ -9688,6 +8858,1144 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class PARTESTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public PARTESTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "PARTES";
+            tableMapping.ColumnMappings.Add("PART_NUMERO", "PART_NUMERO");
+            tableMapping.ColumnMappings.Add("PART_NOMBRE", "PART_NOMBRE");
+            tableMapping.ColumnMappings.Add("PART_DESCRIPCION", "PART_DESCRIPCION");
+            tableMapping.ColumnMappings.Add("PART_CODIGO", "PART_CODIGO");
+            tableMapping.ColumnMappings.Add("PNO_CODIGO", "PNO_CODIGO");
+            tableMapping.ColumnMappings.Add("PART_COSTO", "PART_COSTO");
+            tableMapping.ColumnMappings.Add("PART_COSTOFIJO", "PART_COSTOFIJO");
+            tableMapping.ColumnMappings.Add("PAR_CODIGO", "PAR_CODIGO");
+            tableMapping.ColumnMappings.Add("TPAR_CODIGO", "TPAR_CODIGO");
+            tableMapping.ColumnMappings.Add("TE_CODIGO", "TE_CODIGO");
+            tableMapping.ColumnMappings.Add("HR_CODIGO", "HR_CODIGO");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[PARTES] WHERE (([PART_NUMERO] = @Original_PART_NUMERO) AND ([PART_NOMBRE] = @Original_PART_NOMBRE) AND ((@IsNull_PART_DESCRIPCION = 1 AND [PART_DESCRIPCION] IS NULL) OR ([PART_DESCRIPCION] = @Original_PART_DESCRIPCION)) AND ((@IsNull_PART_CODIGO = 1 AND [PART_CODIGO] IS NULL) OR ([PART_CODIGO] = @Original_PART_CODIGO)) AND ((@IsNull_PNO_CODIGO = 1 AND [PNO_CODIGO] IS NULL) OR ([PNO_CODIGO] = @Original_PNO_CODIGO)) AND ((@IsNull_PART_COSTO = 1 AND [PART_COSTO] IS NULL) OR ([PART_COSTO] = @Original_PART_COSTO)) AND ((@IsNull_PART_COSTOFIJO = 1 AND [PART_COSTOFIJO] IS NULL) OR ([PART_COSTOFIJO] = @Original_PART_COSTOFIJO)) AND ((@IsNull_PAR_CODIGO = 1 AND [PAR_CODIGO] IS NULL) OR ([PAR_CODIGO] = @Original_PAR_CODIGO)) AND ([TPAR_CODIGO] = @Original_TPAR_CODIGO) AND ((@IsNull_TE_CODIGO = 1 AND [TE_CODIGO] IS NULL) OR ([TE_CODIGO] = @Original_TE_CODIGO)) AND ((@IsNull_HR_CODIGO = 1 AND [HR_CODIGO] IS NULL) OR ([HR_CODIGO] = @Original_HR_CODIGO)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_COSTO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_COSTO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "PART_COSTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_COSTOFIJO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_COSTOFIJO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_COSTOFIJO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PART_COSTOFIJO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PAR_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PAR_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PAR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TPAR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TE_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_HR_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[PARTES] ([PART_NOMBRE], [PART_DESCRIPCION], [PART_CODIGO], [PNO_CODIGO], [PART_COSTO], [PART_COSTOFIJO], [PAR_CODIGO], [TPAR_CODIGO], [TE_CODIGO], [HR_CODIGO]) VALUES (@PART_NOMBRE, @PART_DESCRIPCION, @PART_CODIGO, @PNO_CODIGO, @PART_COSTO, @PART_COSTOFIJO, @PAR_CODIGO, @TPAR_CODIGO, @TE_CODIGO, @HR_CODIGO);
+SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART_COSTO, PART_COSTOFIJO, PAR_CODIGO, TPAR_CODIGO, TE_CODIGO, HR_CODIGO FROM PARTES WHERE (PART_NUMERO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "PART_COSTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_COSTOFIJO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PART_COSTOFIJO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PAR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TPAR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[PARTES] SET [PART_NOMBRE] = @PART_NOMBRE, [PART_DESCRIPCION] = @PART_DESCRIPCION, [PART_CODIGO] = @PART_CODIGO, [PNO_CODIGO] = @PNO_CODIGO, [PART_COSTO] = @PART_COSTO, [PART_COSTOFIJO] = @PART_COSTOFIJO, [PAR_CODIGO] = @PAR_CODIGO, [TPAR_CODIGO] = @TPAR_CODIGO, [TE_CODIGO] = @TE_CODIGO, [HR_CODIGO] = @HR_CODIGO WHERE (([PART_NUMERO] = @Original_PART_NUMERO) AND ([PART_NOMBRE] = @Original_PART_NOMBRE) AND ((@IsNull_PART_DESCRIPCION = 1 AND [PART_DESCRIPCION] IS NULL) OR ([PART_DESCRIPCION] = @Original_PART_DESCRIPCION)) AND ((@IsNull_PART_CODIGO = 1 AND [PART_CODIGO] IS NULL) OR ([PART_CODIGO] = @Original_PART_CODIGO)) AND ((@IsNull_PNO_CODIGO = 1 AND [PNO_CODIGO] IS NULL) OR ([PNO_CODIGO] = @Original_PNO_CODIGO)) AND ((@IsNull_PART_COSTO = 1 AND [PART_COSTO] IS NULL) OR ([PART_COSTO] = @Original_PART_COSTO)) AND ((@IsNull_PART_COSTOFIJO = 1 AND [PART_COSTOFIJO] IS NULL) OR ([PART_COSTOFIJO] = @Original_PART_COSTOFIJO)) AND ((@IsNull_PAR_CODIGO = 1 AND [PAR_CODIGO] IS NULL) OR ([PAR_CODIGO] = @Original_PAR_CODIGO)) AND ([TPAR_CODIGO] = @Original_TPAR_CODIGO) AND ((@IsNull_TE_CODIGO = 1 AND [TE_CODIGO] IS NULL) OR ([TE_CODIGO] = @Original_TE_CODIGO)) AND ((@IsNull_HR_CODIGO = 1 AND [HR_CODIGO] IS NULL) OR ([HR_CODIGO] = @Original_HR_CODIGO)));
+SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART_COSTO, PART_COSTOFIJO, PAR_CODIGO, TPAR_CODIGO, TE_CODIGO, HR_CODIGO FROM PARTES WHERE (PART_NUMERO = @PART_NUMERO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PNO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "PART_COSTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_COSTOFIJO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PART_COSTOFIJO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PAR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TPAR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PNO_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PNO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PNO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_COSTO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_COSTO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "PART_COSTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_COSTOFIJO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_COSTOFIJO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_COSTOFIJO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "PART_COSTOFIJO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PAR_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PAR_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PAR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TPAR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TE_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_HR_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "HR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_NUMERO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART_" +
+                "COSTO, PART_COSTOFIJO, PAR_CODIGO, TPAR_CODIGO, TE_CODIGO, HR_CODIGO FROM dbo.PA" +
+                "RTES";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsEstructuraProducto.PARTESDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsEstructuraProducto.PARTESDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsEstructuraProducto.PARTESDataTable dataTable = new dsEstructuraProducto.PARTESDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsEstructuraProducto.PARTESDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsEstructuraProducto dataSet) {
+            return this.Adapter.Update(dataSet, "PARTES");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_PART_NUMERO, string Original_PART_NOMBRE, string Original_PART_DESCRIPCION, string Original_PART_CODIGO, global::System.Nullable<decimal> Original_PNO_CODIGO, global::System.Nullable<decimal> Original_PART_COSTO, global::System.Nullable<decimal> Original_PART_COSTOFIJO, global::System.Nullable<decimal> Original_PAR_CODIGO, decimal Original_TPAR_CODIGO, global::System.Nullable<decimal> Original_TE_CODIGO, global::System.Nullable<decimal> Original_HR_CODIGO) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_PART_NUMERO));
+            if ((Original_PART_NOMBRE == null)) {
+                throw new global::System.ArgumentNullException("Original_PART_NOMBRE");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_PART_NOMBRE));
+            }
+            if ((Original_PART_DESCRIPCION == null)) {
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_PART_DESCRIPCION));
+            }
+            if ((Original_PART_CODIGO == null)) {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_PART_CODIGO));
+            }
+            if ((Original_PNO_CODIGO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((decimal)(Original_PNO_CODIGO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PART_COSTO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((decimal)(Original_PART_COSTO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PART_COSTOFIJO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((decimal)(Original_PART_COSTOFIJO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PAR_CODIGO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((decimal)(Original_PAR_CODIGO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.DeleteCommand.Parameters[14].Value = ((decimal)(Original_TPAR_CODIGO));
+            if ((Original_TE_CODIGO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((decimal)(Original_TE_CODIGO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            if ((Original_HR_CODIGO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[18].Value = ((decimal)(Original_HR_CODIGO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string PART_NOMBRE, string PART_DESCRIPCION, string PART_CODIGO, global::System.Nullable<decimal> PNO_CODIGO, global::System.Nullable<decimal> PART_COSTO, global::System.Nullable<decimal> PART_COSTOFIJO, global::System.Nullable<decimal> PAR_CODIGO, decimal TPAR_CODIGO, global::System.Nullable<decimal> TE_CODIGO, global::System.Nullable<decimal> HR_CODIGO) {
+            if ((PART_NOMBRE == null)) {
+                throw new global::System.ArgumentNullException("PART_NOMBRE");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(PART_NOMBRE));
+            }
+            if ((PART_DESCRIPCION == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(PART_DESCRIPCION));
+            }
+            if ((PART_CODIGO == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(PART_CODIGO));
+            }
+            if ((PNO_CODIGO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(PNO_CODIGO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((PART_COSTO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(PART_COSTO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((PART_COSTOFIJO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(PART_COSTOFIJO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((PAR_CODIGO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(PAR_CODIGO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.InsertCommand.Parameters[7].Value = ((decimal)(TPAR_CODIGO));
+            if ((TE_CODIGO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((decimal)(TE_CODIGO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((HR_CODIGO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[9].Value = ((decimal)(HR_CODIGO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string PART_NOMBRE, 
+                    string PART_DESCRIPCION, 
+                    string PART_CODIGO, 
+                    global::System.Nullable<decimal> PNO_CODIGO, 
+                    global::System.Nullable<decimal> PART_COSTO, 
+                    global::System.Nullable<decimal> PART_COSTOFIJO, 
+                    global::System.Nullable<decimal> PAR_CODIGO, 
+                    decimal TPAR_CODIGO, 
+                    global::System.Nullable<decimal> TE_CODIGO, 
+                    global::System.Nullable<decimal> HR_CODIGO, 
+                    decimal Original_PART_NUMERO, 
+                    string Original_PART_NOMBRE, 
+                    string Original_PART_DESCRIPCION, 
+                    string Original_PART_CODIGO, 
+                    global::System.Nullable<decimal> Original_PNO_CODIGO, 
+                    global::System.Nullable<decimal> Original_PART_COSTO, 
+                    global::System.Nullable<decimal> Original_PART_COSTOFIJO, 
+                    global::System.Nullable<decimal> Original_PAR_CODIGO, 
+                    decimal Original_TPAR_CODIGO, 
+                    global::System.Nullable<decimal> Original_TE_CODIGO, 
+                    global::System.Nullable<decimal> Original_HR_CODIGO, 
+                    decimal PART_NUMERO) {
+            if ((PART_NOMBRE == null)) {
+                throw new global::System.ArgumentNullException("PART_NOMBRE");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(PART_NOMBRE));
+            }
+            if ((PART_DESCRIPCION == null)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(PART_DESCRIPCION));
+            }
+            if ((PART_CODIGO == null)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(PART_CODIGO));
+            }
+            if ((PNO_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(PNO_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((PART_COSTO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(PART_COSTO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((PART_COSTOFIJO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(PART_COSTOFIJO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((PAR_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(PAR_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(TPAR_CODIGO));
+            if ((TE_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(TE_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((HR_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(HR_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(Original_PART_NUMERO));
+            if ((Original_PART_NOMBRE == null)) {
+                throw new global::System.ArgumentNullException("Original_PART_NOMBRE");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_PART_NOMBRE));
+            }
+            if ((Original_PART_DESCRIPCION == null)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_PART_DESCRIPCION));
+            }
+            if ((Original_PART_CODIGO == null)) {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_PART_CODIGO));
+            }
+            if ((Original_PNO_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((decimal)(Original_PNO_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PART_COSTO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((decimal)(Original_PART_COSTO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PART_COSTOFIJO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((decimal)(Original_PART_COSTOFIJO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PAR_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((decimal)(Original_PAR_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[24].Value = ((decimal)(Original_TPAR_CODIGO));
+            if ((Original_TE_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(Original_TE_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
+            }
+            if ((Original_HR_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((decimal)(Original_HR_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[29].Value = ((decimal)(PART_NUMERO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string PART_NOMBRE, 
+                    string PART_DESCRIPCION, 
+                    string PART_CODIGO, 
+                    global::System.Nullable<decimal> PNO_CODIGO, 
+                    global::System.Nullable<decimal> PART_COSTO, 
+                    global::System.Nullable<decimal> PART_COSTOFIJO, 
+                    global::System.Nullable<decimal> PAR_CODIGO, 
+                    decimal TPAR_CODIGO, 
+                    global::System.Nullable<decimal> TE_CODIGO, 
+                    global::System.Nullable<decimal> HR_CODIGO, 
+                    decimal Original_PART_NUMERO, 
+                    string Original_PART_NOMBRE, 
+                    string Original_PART_DESCRIPCION, 
+                    string Original_PART_CODIGO, 
+                    global::System.Nullable<decimal> Original_PNO_CODIGO, 
+                    global::System.Nullable<decimal> Original_PART_COSTO, 
+                    global::System.Nullable<decimal> Original_PART_COSTOFIJO, 
+                    global::System.Nullable<decimal> Original_PAR_CODIGO, 
+                    decimal Original_TPAR_CODIGO, 
+                    global::System.Nullable<decimal> Original_TE_CODIGO, 
+                    global::System.Nullable<decimal> Original_HR_CODIGO) {
+            return this.Update(PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART_COSTO, PART_COSTOFIJO, PAR_CODIGO, TPAR_CODIGO, TE_CODIGO, HR_CODIGO, Original_PART_NUMERO, Original_PART_NOMBRE, Original_PART_DESCRIPCION, Original_PART_CODIGO, Original_PNO_CODIGO, Original_PART_COSTO, Original_PART_COSTOFIJO, Original_PAR_CODIGO, Original_TPAR_CODIGO, Original_TE_CODIGO, Original_HR_CODIGO, Original_PART_NUMERO);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class TIPOS_PARTESTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public TIPOS_PARTESTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "TIPOS_PARTES";
+            tableMapping.ColumnMappings.Add("TPAR_CODIGO", "TPAR_CODIGO");
+            tableMapping.ColumnMappings.Add("TPAR_NOMBRE", "TPAR_NOMBRE");
+            tableMapping.ColumnMappings.Add("TPAR_DESCRIPCION", "TPAR_DESCRIPCION");
+            tableMapping.ColumnMappings.Add("TPAR_PRODUCTOTERMINADO", "TPAR_PRODUCTOTERMINADO");
+            tableMapping.ColumnMappings.Add("TPAR_FANTASMA", "TPAR_FANTASMA");
+            tableMapping.ColumnMappings.Add("TPAR_ORDENTRABAJO", "TPAR_ORDENTRABAJO");
+            tableMapping.ColumnMappings.Add("TPAR_ENSAMBLADO", "TPAR_ENSAMBLADO");
+            tableMapping.ColumnMappings.Add("TPAR_ADQUIRIDO", "TPAR_ADQUIRIDO");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[TIPOS_PARTES] WHERE (([TPAR_CODIGO] = @Original_TPAR_CODIGO) AND ((@IsNull_TPAR_NOMBRE = 1 AND [TPAR_NOMBRE] IS NULL) OR ([TPAR_NOMBRE] = @Original_TPAR_NOMBRE)) AND ((@IsNull_TPAR_DESCRIPCION = 1 AND [TPAR_DESCRIPCION] IS NULL) OR ([TPAR_DESCRIPCION] = @Original_TPAR_DESCRIPCION)) AND ([TPAR_PRODUCTOTERMINADO] = @Original_TPAR_PRODUCTOTERMINADO) AND ((@IsNull_TPAR_FANTASMA = 1 AND [TPAR_FANTASMA] IS NULL) OR ([TPAR_FANTASMA] = @Original_TPAR_FANTASMA)) AND ((@IsNull_TPAR_ORDENTRABAJO = 1 AND [TPAR_ORDENTRABAJO] IS NULL) OR ([TPAR_ORDENTRABAJO] = @Original_TPAR_ORDENTRABAJO)) AND ((@IsNull_TPAR_ENSAMBLADO = 1 AND [TPAR_ENSAMBLADO] IS NULL) OR ([TPAR_ENSAMBLADO] = @Original_TPAR_ENSAMBLADO)) AND ((@IsNull_TPAR_ADQUIRIDO = 1 AND [TPAR_ADQUIRIDO] IS NULL) OR ([TPAR_ADQUIRIDO] = @Original_TPAR_ADQUIRIDO)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TPAR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TPAR_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TPAR_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_PRODUCTOTERMINADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_PRODUCTOTERMINADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TPAR_FANTASMA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_FANTASMA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_FANTASMA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_FANTASMA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TPAR_ORDENTRABAJO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_ORDENTRABAJO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_ORDENTRABAJO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_ORDENTRABAJO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TPAR_ENSAMBLADO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_ENSAMBLADO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_ENSAMBLADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_ENSAMBLADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TPAR_ADQUIRIDO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_ADQUIRIDO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_ADQUIRIDO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_ADQUIRIDO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[TIPOS_PARTES] ([TPAR_NOMBRE], [TPAR_DESCRIPCION], [TPAR_PRODUCTOTERMINADO], [TPAR_FANTASMA], [TPAR_ORDENTRABAJO], [TPAR_ENSAMBLADO], [TPAR_ADQUIRIDO]) VALUES (@TPAR_NOMBRE, @TPAR_DESCRIPCION, @TPAR_PRODUCTOTERMINADO, @TPAR_FANTASMA, @TPAR_ORDENTRABAJO, @TPAR_ENSAMBLADO, @TPAR_ADQUIRIDO);
+SELECT TPAR_CODIGO, TPAR_NOMBRE, TPAR_DESCRIPCION, TPAR_PRODUCTOTERMINADO, TPAR_FANTASMA, TPAR_ORDENTRABAJO, TPAR_ENSAMBLADO, TPAR_ADQUIRIDO FROM TIPOS_PARTES WHERE (TPAR_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_PRODUCTOTERMINADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_PRODUCTOTERMINADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_FANTASMA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_FANTASMA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_ORDENTRABAJO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_ORDENTRABAJO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_ENSAMBLADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_ENSAMBLADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_ADQUIRIDO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_ADQUIRIDO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[TIPOS_PARTES] SET [TPAR_NOMBRE] = @TPAR_NOMBRE, [TPAR_DESCRIPCION] = @TPAR_DESCRIPCION, [TPAR_PRODUCTOTERMINADO] = @TPAR_PRODUCTOTERMINADO, [TPAR_FANTASMA] = @TPAR_FANTASMA, [TPAR_ORDENTRABAJO] = @TPAR_ORDENTRABAJO, [TPAR_ENSAMBLADO] = @TPAR_ENSAMBLADO, [TPAR_ADQUIRIDO] = @TPAR_ADQUIRIDO WHERE (([TPAR_CODIGO] = @Original_TPAR_CODIGO) AND ((@IsNull_TPAR_NOMBRE = 1 AND [TPAR_NOMBRE] IS NULL) OR ([TPAR_NOMBRE] = @Original_TPAR_NOMBRE)) AND ((@IsNull_TPAR_DESCRIPCION = 1 AND [TPAR_DESCRIPCION] IS NULL) OR ([TPAR_DESCRIPCION] = @Original_TPAR_DESCRIPCION)) AND ([TPAR_PRODUCTOTERMINADO] = @Original_TPAR_PRODUCTOTERMINADO) AND ((@IsNull_TPAR_FANTASMA = 1 AND [TPAR_FANTASMA] IS NULL) OR ([TPAR_FANTASMA] = @Original_TPAR_FANTASMA)) AND ((@IsNull_TPAR_ORDENTRABAJO = 1 AND [TPAR_ORDENTRABAJO] IS NULL) OR ([TPAR_ORDENTRABAJO] = @Original_TPAR_ORDENTRABAJO)) AND ((@IsNull_TPAR_ENSAMBLADO = 1 AND [TPAR_ENSAMBLADO] IS NULL) OR ([TPAR_ENSAMBLADO] = @Original_TPAR_ENSAMBLADO)) AND ((@IsNull_TPAR_ADQUIRIDO = 1 AND [TPAR_ADQUIRIDO] IS NULL) OR ([TPAR_ADQUIRIDO] = @Original_TPAR_ADQUIRIDO)));
+SELECT TPAR_CODIGO, TPAR_NOMBRE, TPAR_DESCRIPCION, TPAR_PRODUCTOTERMINADO, TPAR_FANTASMA, TPAR_ORDENTRABAJO, TPAR_ENSAMBLADO, TPAR_ADQUIRIDO FROM TIPOS_PARTES WHERE (TPAR_CODIGO = @TPAR_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_PRODUCTOTERMINADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_PRODUCTOTERMINADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_FANTASMA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_FANTASMA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_ORDENTRABAJO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_ORDENTRABAJO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_ENSAMBLADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_ENSAMBLADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_ADQUIRIDO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_ADQUIRIDO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TPAR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TPAR_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TPAR_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_PRODUCTOTERMINADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_PRODUCTOTERMINADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TPAR_FANTASMA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_FANTASMA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_FANTASMA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_FANTASMA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TPAR_ORDENTRABAJO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_ORDENTRABAJO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_ORDENTRABAJO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_ORDENTRABAJO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TPAR_ENSAMBLADO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_ENSAMBLADO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_ENSAMBLADO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_ENSAMBLADO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TPAR_ADQUIRIDO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TPAR_ADQUIRIDO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TPAR_ADQUIRIDO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "TPAR_ADQUIRIDO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TPAR_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "TPAR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT TPAR_CODIGO, TPAR_NOMBRE, TPAR_DESCRIPCION, TPAR_PRODUCTOTERMINADO, TPAR_F" +
+                "ANTASMA, TPAR_ORDENTRABAJO, TPAR_ENSAMBLADO, TPAR_ADQUIRIDO FROM dbo.TIPOS_PARTE" +
+                "S";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsEstructuraProducto.TIPOS_PARTESDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsEstructuraProducto.TIPOS_PARTESDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsEstructuraProducto.TIPOS_PARTESDataTable dataTable = new dsEstructuraProducto.TIPOS_PARTESDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsEstructuraProducto.TIPOS_PARTESDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsEstructuraProducto dataSet) {
+            return this.Adapter.Update(dataSet, "TIPOS_PARTES");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_TPAR_CODIGO, string Original_TPAR_NOMBRE, string Original_TPAR_DESCRIPCION, decimal Original_TPAR_PRODUCTOTERMINADO, global::System.Nullable<decimal> Original_TPAR_FANTASMA, global::System.Nullable<decimal> Original_TPAR_ORDENTRABAJO, global::System.Nullable<decimal> Original_TPAR_ENSAMBLADO, global::System.Nullable<decimal> Original_TPAR_ADQUIRIDO) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_TPAR_CODIGO));
+            if ((Original_TPAR_NOMBRE == null)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_TPAR_NOMBRE));
+            }
+            if ((Original_TPAR_DESCRIPCION == null)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_TPAR_DESCRIPCION));
+            }
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((decimal)(Original_TPAR_PRODUCTOTERMINADO));
+            if ((Original_TPAR_FANTASMA.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((decimal)(Original_TPAR_FANTASMA.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((Original_TPAR_ORDENTRABAJO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((decimal)(Original_TPAR_ORDENTRABAJO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((Original_TPAR_ENSAMBLADO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((decimal)(Original_TPAR_ENSAMBLADO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((Original_TPAR_ADQUIRIDO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((decimal)(Original_TPAR_ADQUIRIDO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string TPAR_NOMBRE, string TPAR_DESCRIPCION, decimal TPAR_PRODUCTOTERMINADO, global::System.Nullable<decimal> TPAR_FANTASMA, global::System.Nullable<decimal> TPAR_ORDENTRABAJO, global::System.Nullable<decimal> TPAR_ENSAMBLADO, global::System.Nullable<decimal> TPAR_ADQUIRIDO) {
+            if ((TPAR_NOMBRE == null)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(TPAR_NOMBRE));
+            }
+            if ((TPAR_DESCRIPCION == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(TPAR_DESCRIPCION));
+            }
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(TPAR_PRODUCTOTERMINADO));
+            if ((TPAR_FANTASMA.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(TPAR_FANTASMA.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((TPAR_ORDENTRABAJO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(TPAR_ORDENTRABAJO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((TPAR_ENSAMBLADO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(TPAR_ENSAMBLADO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((TPAR_ADQUIRIDO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(TPAR_ADQUIRIDO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string TPAR_NOMBRE, 
+                    string TPAR_DESCRIPCION, 
+                    decimal TPAR_PRODUCTOTERMINADO, 
+                    global::System.Nullable<decimal> TPAR_FANTASMA, 
+                    global::System.Nullable<decimal> TPAR_ORDENTRABAJO, 
+                    global::System.Nullable<decimal> TPAR_ENSAMBLADO, 
+                    global::System.Nullable<decimal> TPAR_ADQUIRIDO, 
+                    decimal Original_TPAR_CODIGO, 
+                    string Original_TPAR_NOMBRE, 
+                    string Original_TPAR_DESCRIPCION, 
+                    decimal Original_TPAR_PRODUCTOTERMINADO, 
+                    global::System.Nullable<decimal> Original_TPAR_FANTASMA, 
+                    global::System.Nullable<decimal> Original_TPAR_ORDENTRABAJO, 
+                    global::System.Nullable<decimal> Original_TPAR_ENSAMBLADO, 
+                    global::System.Nullable<decimal> Original_TPAR_ADQUIRIDO, 
+                    decimal TPAR_CODIGO) {
+            if ((TPAR_NOMBRE == null)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(TPAR_NOMBRE));
+            }
+            if ((TPAR_DESCRIPCION == null)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(TPAR_DESCRIPCION));
+            }
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(TPAR_PRODUCTOTERMINADO));
+            if ((TPAR_FANTASMA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(TPAR_FANTASMA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((TPAR_ORDENTRABAJO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(TPAR_ORDENTRABAJO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((TPAR_ENSAMBLADO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(TPAR_ENSAMBLADO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((TPAR_ADQUIRIDO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(TPAR_ADQUIRIDO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(Original_TPAR_CODIGO));
+            if ((Original_TPAR_NOMBRE == null)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_TPAR_NOMBRE));
+            }
+            if ((Original_TPAR_DESCRIPCION == null)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_TPAR_DESCRIPCION));
+            }
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(Original_TPAR_PRODUCTOTERMINADO));
+            if ((Original_TPAR_FANTASMA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((decimal)(Original_TPAR_FANTASMA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            if ((Original_TPAR_ORDENTRABAJO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((decimal)(Original_TPAR_ORDENTRABAJO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            if ((Original_TPAR_ENSAMBLADO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((decimal)(Original_TPAR_ENSAMBLADO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            if ((Original_TPAR_ADQUIRIDO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((decimal)(Original_TPAR_ADQUIRIDO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[21].Value = ((decimal)(TPAR_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string TPAR_NOMBRE, string TPAR_DESCRIPCION, decimal TPAR_PRODUCTOTERMINADO, global::System.Nullable<decimal> TPAR_FANTASMA, global::System.Nullable<decimal> TPAR_ORDENTRABAJO, global::System.Nullable<decimal> TPAR_ENSAMBLADO, global::System.Nullable<decimal> TPAR_ADQUIRIDO, decimal Original_TPAR_CODIGO, string Original_TPAR_NOMBRE, string Original_TPAR_DESCRIPCION, decimal Original_TPAR_PRODUCTOTERMINADO, global::System.Nullable<decimal> Original_TPAR_FANTASMA, global::System.Nullable<decimal> Original_TPAR_ORDENTRABAJO, global::System.Nullable<decimal> Original_TPAR_ENSAMBLADO, global::System.Nullable<decimal> Original_TPAR_ADQUIRIDO) {
+            return this.Update(TPAR_NOMBRE, TPAR_DESCRIPCION, TPAR_PRODUCTOTERMINADO, TPAR_FANTASMA, TPAR_ORDENTRABAJO, TPAR_ENSAMBLADO, TPAR_ADQUIRIDO, Original_TPAR_CODIGO, Original_TPAR_NOMBRE, Original_TPAR_DESCRIPCION, Original_TPAR_PRODUCTOTERMINADO, Original_TPAR_FANTASMA, Original_TPAR_ORDENTRABAJO, Original_TPAR_ENSAMBLADO, Original_TPAR_ADQUIRIDO, Original_TPAR_CODIGO);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -9699,8 +10007,6 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
     public partial class TableAdapterManager : global::System.ComponentModel.Component {
         
         private UpdateOrderOption _updateOrder;
-        
-        private PARTESTableAdapter _pARTESTableAdapter;
         
         private COMPUESTOS_PARTESTableAdapter _cOMPUESTOS_PARTESTableAdapter;
         
@@ -9714,9 +10020,11 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
         
         private MATERIAS_PRIMASTableAdapter _mATERIAS_PRIMASTableAdapter;
         
-        private TIPOS_PARTESTableAdapter _tIPOS_PARTESTableAdapter;
-        
         private ESTRUCTURASTableAdapter _eSTRUCTURASTableAdapter;
+        
+        private PARTESTableAdapter _pARTESTableAdapter;
+        
+        private TIPOS_PARTESTableAdapter _tIPOS_PARTESTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -9729,19 +10037,6 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
             }
             set {
                 this._updateOrder = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
-        public PARTESTableAdapter PARTESTableAdapter {
-            get {
-                return this._pARTESTableAdapter;
-            }
-            set {
-                this._pARTESTableAdapter = value;
             }
         }
         
@@ -9827,12 +10122,12 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
             "", "System.Drawing.Design.UITypeEditor")]
-        public TIPOS_PARTESTableAdapter TIPOS_PARTESTableAdapter {
+        public ESTRUCTURASTableAdapter ESTRUCTURASTableAdapter {
             get {
-                return this._tIPOS_PARTESTableAdapter;
+                return this._eSTRUCTURASTableAdapter;
             }
             set {
-                this._tIPOS_PARTESTableAdapter = value;
+                this._eSTRUCTURASTableAdapter = value;
             }
         }
         
@@ -9840,12 +10135,25 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
             "", "System.Drawing.Design.UITypeEditor")]
-        public ESTRUCTURASTableAdapter ESTRUCTURASTableAdapter {
+        public PARTESTableAdapter PARTESTableAdapter {
             get {
-                return this._eSTRUCTURASTableAdapter;
+                return this._pARTESTableAdapter;
             }
             set {
-                this._eSTRUCTURASTableAdapter = value;
+                this._pARTESTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public TIPOS_PARTESTableAdapter TIPOS_PARTESTableAdapter {
+            get {
+                return this._tIPOS_PARTESTableAdapter;
+            }
+            set {
+                this._tIPOS_PARTESTableAdapter = value;
             }
         }
         
@@ -9865,10 +10173,6 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
             get {
                 if ((this._connection != null)) {
                     return this._connection;
-                }
-                if (((this._pARTESTableAdapter != null) 
-                            && (this._pARTESTableAdapter.Connection != null))) {
-                    return this._pARTESTableAdapter.Connection;
                 }
                 if (((this._cOMPUESTOS_PARTESTableAdapter != null) 
                             && (this._cOMPUESTOS_PARTESTableAdapter.Connection != null))) {
@@ -9894,13 +10198,17 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
                             && (this._mATERIAS_PRIMASTableAdapter.Connection != null))) {
                     return this._mATERIAS_PRIMASTableAdapter.Connection;
                 }
-                if (((this._tIPOS_PARTESTableAdapter != null) 
-                            && (this._tIPOS_PARTESTableAdapter.Connection != null))) {
-                    return this._tIPOS_PARTESTableAdapter.Connection;
-                }
                 if (((this._eSTRUCTURASTableAdapter != null) 
                             && (this._eSTRUCTURASTableAdapter.Connection != null))) {
                     return this._eSTRUCTURASTableAdapter.Connection;
+                }
+                if (((this._pARTESTableAdapter != null) 
+                            && (this._pARTESTableAdapter.Connection != null))) {
+                    return this._pARTESTableAdapter.Connection;
+                }
+                if (((this._tIPOS_PARTESTableAdapter != null) 
+                            && (this._tIPOS_PARTESTableAdapter.Connection != null))) {
+                    return this._tIPOS_PARTESTableAdapter.Connection;
                 }
                 return null;
             }
@@ -9914,9 +10222,6 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
-                if ((this._pARTESTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._cOMPUESTOS_PARTESTableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -9935,10 +10240,13 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
                 if ((this._mATERIAS_PRIMASTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._tIPOS_PARTESTableAdapter != null)) {
+                if ((this._eSTRUCTURASTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._eSTRUCTURASTableAdapter != null)) {
+                if ((this._pARTESTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._tIPOS_PARTESTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -9951,6 +10259,24 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateUpdatedRows(dsEstructuraProducto dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._tERMINACIONESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.TERMINACIONES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._tERMINACIONESTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._tIPOS_PARTESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.TIPOS_PARTES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._tIPOS_PARTESTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._pLANOSTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.PLANOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -9978,21 +10304,12 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._tERMINACIONESTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.TERMINACIONES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._pARTESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.PARTES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._tERMINACIONESTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._tIPOS_PARTESTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.TIPOS_PARTES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._tIPOS_PARTESTableAdapter.Update(updatedRows));
+                    result = (result + this._pARTESTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -10005,12 +10322,12 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._pARTESTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.PARTES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._cOMPUESTOS_PARTESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.COMPUESTOS_PARTES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._pARTESTableAdapter.Update(updatedRows));
+                    result = (result + this._cOMPUESTOS_PARTESTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -10023,15 +10340,6 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._cOMPUESTOS_PARTESTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.COMPUESTOS_PARTES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._cOMPUESTOS_PARTESTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             return result;
         }
         
@@ -10041,6 +10349,22 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateInsertedRows(dsEstructuraProducto dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._tERMINACIONESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.TERMINACIONES.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._tERMINACIONESTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._tIPOS_PARTESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.TIPOS_PARTES.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._tIPOS_PARTESTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._pLANOSTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.PLANOS.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -10065,19 +10389,11 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._tERMINACIONESTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.TERMINACIONES.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._pARTESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.PARTES.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._tERMINACIONESTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._tIPOS_PARTESTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.TIPOS_PARTES.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._tIPOS_PARTESTableAdapter.Update(addedRows));
+                    result = (result + this._pARTESTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -10089,11 +10405,11 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._pARTESTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.PARTES.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._cOMPUESTOS_PARTESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.COMPUESTOS_PARTES.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._pARTESTableAdapter.Update(addedRows));
+                    result = (result + this._cOMPUESTOS_PARTESTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -10102,14 +10418,6 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._eSTRUCTURASTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._cOMPUESTOS_PARTESTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.COMPUESTOS_PARTES.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._cOMPUESTOS_PARTESTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -10122,14 +10430,6 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateDeletedRows(dsEstructuraProducto dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._cOMPUESTOS_PARTESTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.COMPUESTOS_PARTES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._cOMPUESTOS_PARTESTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._eSTRUCTURASTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.ESTRUCTURAS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -10138,11 +10438,11 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._pARTESTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.PARTES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._cOMPUESTOS_PARTESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.COMPUESTOS_PARTES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._pARTESTableAdapter.Update(deletedRows));
+                    result = (result + this._cOMPUESTOS_PARTESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -10154,19 +10454,11 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._tIPOS_PARTESTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.TIPOS_PARTES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._pARTESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.PARTES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._tIPOS_PARTESTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._tERMINACIONESTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.TERMINACIONES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._tERMINACIONESTableAdapter.Update(deletedRows));
+                    result = (result + this._pARTESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -10191,6 +10483,22 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._pLANOSTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._tIPOS_PARTESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.TIPOS_PARTES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._tIPOS_PARTESTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._tERMINACIONESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.TERMINACIONES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._tERMINACIONESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -10231,11 +10539,6 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
-            if (((this._pARTESTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._pARTESTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             if (((this._cOMPUESTOS_PARTESTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._cOMPUESTOS_PARTESTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
@@ -10266,13 +10569,18 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._tIPOS_PARTESTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._tIPOS_PARTESTableAdapter.Connection) == false))) {
+            if (((this._eSTRUCTURASTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._eSTRUCTURASTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._eSTRUCTURASTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._eSTRUCTURASTableAdapter.Connection) == false))) {
+            if (((this._pARTESTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._pARTESTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._tIPOS_PARTESTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._tIPOS_PARTESTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -10308,15 +10616,6 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
             try {
                 // ---- Prepare for update -----------
                 //
-                if ((this._pARTESTableAdapter != null)) {
-                    revertConnections.Add(this._pARTESTableAdapter, this._pARTESTableAdapter.Connection);
-                    this._pARTESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._pARTESTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._pARTESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._pARTESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._pARTESTableAdapter.Adapter);
-                    }
-                }
                 if ((this._cOMPUESTOS_PARTESTableAdapter != null)) {
                     revertConnections.Add(this._cOMPUESTOS_PARTESTableAdapter, this._cOMPUESTOS_PARTESTableAdapter.Connection);
                     this._cOMPUESTOS_PARTESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -10371,15 +10670,6 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
                         adaptersWithAcceptChangesDuringUpdate.Add(this._mATERIAS_PRIMASTableAdapter.Adapter);
                     }
                 }
-                if ((this._tIPOS_PARTESTableAdapter != null)) {
-                    revertConnections.Add(this._tIPOS_PARTESTableAdapter, this._tIPOS_PARTESTableAdapter.Connection);
-                    this._tIPOS_PARTESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._tIPOS_PARTESTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._tIPOS_PARTESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._tIPOS_PARTESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._tIPOS_PARTESTableAdapter.Adapter);
-                    }
-                }
                 if ((this._eSTRUCTURASTableAdapter != null)) {
                     revertConnections.Add(this._eSTRUCTURASTableAdapter, this._eSTRUCTURASTableAdapter.Connection);
                     this._eSTRUCTURASTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -10387,6 +10677,24 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
                     if (this._eSTRUCTURASTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._eSTRUCTURASTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._eSTRUCTURASTableAdapter.Adapter);
+                    }
+                }
+                if ((this._pARTESTableAdapter != null)) {
+                    revertConnections.Add(this._pARTESTableAdapter, this._pARTESTableAdapter.Connection);
+                    this._pARTESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._pARTESTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._pARTESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._pARTESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._pARTESTableAdapter.Adapter);
+                    }
+                }
+                if ((this._tIPOS_PARTESTableAdapter != null)) {
+                    revertConnections.Add(this._tIPOS_PARTESTableAdapter, this._tIPOS_PARTESTableAdapter.Connection);
+                    this._tIPOS_PARTESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._tIPOS_PARTESTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._tIPOS_PARTESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._tIPOS_PARTESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._tIPOS_PARTESTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -10447,10 +10755,6 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
                 if (workConnOpened) {
                     workConnection.Close();
                 }
-                if ((this._pARTESTableAdapter != null)) {
-                    this._pARTESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._pARTESTableAdapter]));
-                    this._pARTESTableAdapter.Transaction = null;
-                }
                 if ((this._cOMPUESTOS_PARTESTableAdapter != null)) {
                     this._cOMPUESTOS_PARTESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cOMPUESTOS_PARTESTableAdapter]));
                     this._cOMPUESTOS_PARTESTableAdapter.Transaction = null;
@@ -10475,13 +10779,17 @@ SELECT ESTR_CODIGO, ESTR_NOMBRE, COC_CODIGO, PNO_CODIGO, ESTR_DESCRIPCION, ESTR_
                     this._mATERIAS_PRIMASTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._mATERIAS_PRIMASTableAdapter]));
                     this._mATERIAS_PRIMASTableAdapter.Transaction = null;
                 }
-                if ((this._tIPOS_PARTESTableAdapter != null)) {
-                    this._tIPOS_PARTESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._tIPOS_PARTESTableAdapter]));
-                    this._tIPOS_PARTESTableAdapter.Transaction = null;
-                }
                 if ((this._eSTRUCTURASTableAdapter != null)) {
                     this._eSTRUCTURASTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._eSTRUCTURASTableAdapter]));
                     this._eSTRUCTURASTableAdapter.Transaction = null;
+                }
+                if ((this._pARTESTableAdapter != null)) {
+                    this._pARTESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._pARTESTableAdapter]));
+                    this._pARTESTableAdapter.Transaction = null;
+                }
+                if ((this._tIPOS_PARTESTableAdapter != null)) {
+                    this._tIPOS_PARTESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._tIPOS_PARTESTableAdapter]));
+                    this._tIPOS_PARTESTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

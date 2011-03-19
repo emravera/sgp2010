@@ -14,6 +14,7 @@ namespace GyCAP.Entidades
             get { return codigo; }
             set { codigo = value; }
         }
+
         string nombre;
 
         public string Nombre
@@ -21,6 +22,7 @@ namespace GyCAP.Entidades
             get { return nombre; }
             set { nombre = value; }
         }
+
         string descripcion;
 
         public string Descripcion
@@ -35,6 +37,38 @@ namespace GyCAP.Entidades
         {
             get { return productoTerminado; }
             set { productoTerminado = value; }
+        }
+
+        int fantasma;
+
+        public int Fantasma
+        {
+            get { return fantasma; }
+            set { fantasma = value; }
+        }
+
+        int ordentrabajo;
+
+        public int Ordentrabajo
+        {
+            get { return ordentrabajo; }
+            set { ordentrabajo = value; }
+        }
+
+        int ensamblado;
+
+        public int Ensamblado
+        {
+            get { return ensamblado; }
+            set { ensamblado = value; }
+        }
+
+        int adquirido;
+
+        public int Adquirido
+        {
+            get { return adquirido; }
+            set { adquirido = value; }
         }
     }
 }
