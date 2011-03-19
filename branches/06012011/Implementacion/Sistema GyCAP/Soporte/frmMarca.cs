@@ -12,7 +12,7 @@ namespace GyCAP.UI.Soporte
     public partial class frmMarca : Form
     {
         private static frmMarca _frmMarca = null;
-        private Data.dsMarca dsMarca = new GyCAP.Data.dsMarca();
+        private Data.dsCliente dsMarca = new GyCAP.Data.dsCliente();
         private DataView dvListaMarca, dvComboMarcaDatos, dvComboMarcaBuscar;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, };
         private estadoUI estadoInterface;
@@ -43,7 +43,7 @@ namespace GyCAP.UI.Soporte
             dgvLista.Columns["MCA_NOMBRE"].DataPropertyName = "MCA_NOMBRE";
             
             //Llena el Dataset con los clientes
-            BLL.ClienteBLL.ObtenerTodos(dsMarca);
+            BLL.ClienteBLL.ObtenerTodos(dsMarca.CLIENTES);
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListaMarca = new DataView(dsMarca.MARCAS);
@@ -77,35 +77,6 @@ namespace GyCAP.UI.Soporte
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
 
-        }
-
-        //Método para evitar la creación de más de una pantalla
-        public static frmMarca Instancia
-        {
-            get
-            {
-                if (_frmMarca == null || _frmMarca.IsDisposed)
-                {
-                    _frmMarca = new frmMarca();
-                }
-                else
-                {
-                    _frmMarca.BringToFront();
-                }
-                return _frmMarca;
-            }
-            set
-            {
-                _frmMarca = value;
-            }
-        }
-
-        private void frmMarca_Activated(object sender, EventArgs e)
-        {
-            if (txtNombreBuscar.Enabled == true)
-            {
-                txtNombreBuscar.Focus();
-            }
         }
 
         public void SetEstadoInicial(int estado)
@@ -146,8 +117,7 @@ namespace GyCAP.UI.Soporte
             btnConsultar.PerformClick();
         }
 #endregion
-
-
+        
         #region Pestaña Buscar
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -158,7 +128,7 @@ namespace GyCAP.UI.Soporte
                 dsMarca.MARCAS.Clear();
 
                 //Llamamos al método de búsqueda de datos
-                BLL.MarcaBLL.ObtenerTodos(txtNombreBuscar.Text, Convert.ToInt32(cbClienteBuscar.SelectedValue), dsMarca);
+                BLL.MarcaBLL.ObtenerTodos(txtNombreBuscar.Text, Convert.ToInt32(cbClienteBuscar.SelectedValue), dsMarca.MARCAS);
                 
              
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
@@ -167,14 +137,14 @@ namespace GyCAP.UI.Soporte
 
                 if (dsMarca.MARCAS.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Marcas con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Marca", this.Text);
                 }
                 //Seteamos el estado de la interfaz           
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Marcas - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }
         }
@@ -230,7 +200,7 @@ namespace GyCAP.UI.Soporte
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la Marca seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Marca", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -245,17 +215,17 @@ namespace GyCAP.UI.Soporte
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Marca de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Marca", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
             }
         }
 
@@ -263,8 +233,10 @@ namespace GyCAP.UI.Soporte
       //Guardado de los Datos  
       private void btnGuardar_Click(object sender, EventArgs e)
         {
+            string validacion = Validar();
+
             //Revisamos que escribió algo y selecciono algo en el combo
-            if (txtNombre.Text != String.Empty)
+            if (validacion==string.Empty)
             {
                 Entidades.Marca marca = new GyCAP.Entidades.Marca();
                 Entidades.Cliente cli = new GyCAP.Entidades.Cliente();
@@ -300,7 +272,7 @@ namespace GyCAP.UI.Soporte
                         //Primero lo creamos en la db
                         marca.Codigo = BLL.MarcaBLL.Insertar(marca);
                         //Ahora lo agregamos al dataset
-                        Data.dsMarca.MARCASRow rowMarcas = dsMarca.MARCAS.NewMARCASRow();
+                        Data.dsCliente.MARCASRow rowMarcas = dsMarca.MARCAS.NewMARCASRow();
                         //Indicamos que comienza la edición de la fila
                         rowMarcas.BeginEdit();
                         rowMarcas.MCA_CODIGO = marca.Codigo;
@@ -314,8 +286,11 @@ namespace GyCAP.UI.Soporte
                         //Agregamos la fila al dataset y aceptamos los cambios
                         dsMarca.MARCAS.AddMARCASRow(rowMarcas);
                         dsMarca.MARCAS.AcceptChanges();
-                        //Y por último seteamos el estado de la interfaz
+                        
+                        //Avisamos que se guargo correctamente
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Marca", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
 
+                        //Y por último seteamos el estado de la interfaz
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
                         if (estadoInterface == estadoUI.nuevoExterno)
                         {
@@ -330,11 +305,11 @@ namespace GyCAP.UI.Soporte
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
@@ -367,7 +342,7 @@ namespace GyCAP.UI.Soporte
                         //Lo actualizamos en la DB
                         BLL.MarcaBLL.Actualizar(marca);
                         //Lo actualizamos en el dataset y aceptamos los cambios
-                        Data.dsMarca.MARCASRow rowMarca = dsMarca.MARCAS.FindByMCA_CODIGO(marca.Codigo);
+                        Data.dsCliente.MARCASRow rowMarca = dsMarca.MARCAS.FindByMCA_CODIGO(marca.Codigo);
                         //Indicamos que comienza la edición de la fila
                         rowMarca.BeginEdit();
                         rowMarca.MCA_NOMBRE = marca.Nombre;
@@ -380,14 +355,16 @@ namespace GyCAP.UI.Soporte
                         rowMarca.EndEdit();
                         //Agregamos la fila al dataset y aceptamos los cambios
                         dsMarca.MARCAS.AcceptChanges();
+                        
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Marca", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
+                        
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
                     }
                 }
                 //Actualizamos la lista con las modificaciones
@@ -395,7 +372,7 @@ namespace GyCAP.UI.Soporte
             }
             else
             {
-                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
             }
         }
 
@@ -419,9 +396,7 @@ namespace GyCAP.UI.Soporte
 
      #endregion
 
-
-
-        #region Servicios
+#region Servicios
         private void SetInterface(estadoUI estado)
         {
             switch (estado)
@@ -521,6 +496,61 @@ namespace GyCAP.UI.Soporte
                     break;
             }
         }
+        //Método para evitar la creación de más de una pantalla
+        public static frmMarca Instancia
+        {
+            get
+            {
+                if (_frmMarca == null || _frmMarca.IsDisposed)
+                {
+                    _frmMarca = new frmMarca();
+                }
+                else
+                {
+                    _frmMarca.BringToFront();
+                }
+                return _frmMarca;
+            }
+            set
+            {
+                _frmMarca = value;
+            }
+        }
+
+        private string Validar()
+        {
+            string erroresValidacion = string.Empty;
+
+            string validacion = string.Empty;
+
+            //Control de combos
+            List<string> combos = new List<string>();
+            if (cbClienteDatos.SelectedIndex == -1 && chboxCliente.Checked == true)
+            {
+                combos.Add("Cliente");
+                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.Seleccion, combos);
+            }
+
+            //Control de los textbox
+            List<string> datos = new List<string>();
+            if (txtNombre.Text == string.Empty)
+            {
+                datos.Add("Nombre");
+                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
+            }
+
+            return erroresValidacion;
+        }
+
+
+        private void frmMarca_Activated(object sender, EventArgs e)
+        {
+            if (txtNombreBuscar.Enabled == true)
+            {
+                txtNombreBuscar.Focus();
+            }
+        }
+
         //Metodos que controlan el enter de los textbox
         private void txtNombreBuscar_Enter(object sender, EventArgs e)
         {

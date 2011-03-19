@@ -11,7 +11,7 @@ namespace GyCAP.DAL
     {
         //BUSQUEDA
         //Busqueda por nombre
-        public static void ObtenerMarca(string nombre, int idCliente, Data.dsMarca ds)
+        public static void ObtenerMarca(string nombre, int idCliente, DataTable dt)
         {
             string sql = @"SELECT mca_codigo, cli_codigo, mca_nombre
                               FROM MARCAS";
@@ -50,17 +50,17 @@ namespace GyCAP.DAL
                 if (valorParametros.GetValue(0) == null && valoresPram.GetValue(0) == null)
                 {
                     //Se ejcuta normalmente y por defecto trae todos los elementos de la DB
-                    DB.FillDataSet(ds, "MARCAS", sql, null);
+                    DB.FillDataTable(dt, sql, null);
                 }
                 else
                 {
                     if (valoresPram.GetValue(0) == null)
                     {
-                        DB.FillDataSet(ds, "MARCAS", sql, valorParametros);
+                        DB.FillDataTable(dt, sql, valorParametros);
                     }
                     else
                     {
-                        DB.FillDataSet(ds, "MARCAS", sql, valoresPram);
+                        DB.FillDataTable(dt,sql, valoresPram);
                     }
                 }
             }

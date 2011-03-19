@@ -10,9 +10,9 @@ namespace GyCAP.BLL
     {
         //Busqueda
         //Obtiene los datos de acuerdo a los criterios de busqueda
-        public static void ObtenerTodos(string nombre, int idCliente, Data.dsMarca ds)
+        public static void ObtenerTodos(string nombre, int idCliente, DataTable dt)
         {
-            DAL.MarcaDAL.ObtenerMarca(nombre, idCliente, ds);
+            DAL.MarcaDAL.ObtenerMarca(nombre, idCliente, dt);
         }
 
         public static void ObtenerTodos(DataTable dtMarca)
@@ -20,13 +20,6 @@ namespace GyCAP.BLL
             DAL.MarcaDAL.ObtenerMarca(dtMarca);
         }
        
-        //Metodo para usar desde el formulario de Designaciones (otro Dataset)
-        public static void ObtenerTodos(Data.dsDesignacion ds)
-        {
-            DAL.MarcaDAL.ObtenerMarca(ds);
-        }
-
-
         //Eliminacion
         public static void Eliminar(int codigo)
         {

@@ -50,7 +50,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             
             //Llena el Dataset con las marcas
-            BLL.MarcaBLL.ObtenerTodos(dsDesignacion);
+            BLL.MarcaBLL.ObtenerTodos(dsDesignacion.MARCAS);
             
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDesignacion = new DataView(dsDesignacion.DESIGNACIONES);

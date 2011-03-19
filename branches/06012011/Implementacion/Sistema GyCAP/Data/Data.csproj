@@ -51,11 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dsCapacidadEmpleado.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsCapacidadEmpleado.xsd</DependentUpon>
-    </Compile>
     <Compile Include="dsCentroTrabajo.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -93,11 +88,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsEmpleado.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="dsEmpleadosyCapacidades.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsEmpleadosyCapacidades.xsd</DependentUpon>
     </Compile>
     <Compile Include="dsEntregaProducto.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -181,11 +171,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsMaquina.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="dsMarca.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsMarca.xsd</DependentUpon>
     </Compile>
     <Compile Include="dsMateriaPrima.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -307,17 +292,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="dsCapacidadEmpleado.xsc">
-      <DependentUpon>dsCapacidadEmpleado.xsd</DependentUpon>
-    </None>
-    <None Include="dsCapacidadEmpleado.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsCapacidadEmpleado.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="dsCapacidadEmpleado.xss">
-      <DependentUpon>dsCapacidadEmpleado.xsd</DependentUpon>
-    </None>
     <None Include="dsCentroTrabajo.xsc">
       <DependentUpon>dsCentroTrabajo.xsd</DependentUpon>
     </None>
@@ -383,17 +357,6 @@
     </None>
     <None Include="dsEmpleado.xss">
       <DependentUpon>dsEmpleado.xsd</DependentUpon>
-    </None>
-    <None Include="dsEmpleadosyCapacidades.xsc">
-      <DependentUpon>dsEmpleadosyCapacidades.xsd</DependentUpon>
-    </None>
-    <None Include="dsEmpleadosyCapacidades.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsEmpleadosyCapacidades.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="dsEmpleadosyCapacidades.xss">
-      <DependentUpon>dsEmpleadosyCapacidades.xsd</DependentUpon>
     </None>
     <None Include="dsEntregaProducto.xsc">
       <DependentUpon>dsEntregaProducto.xsd</DependentUpon>
@@ -537,17 +500,6 @@
     </None>
     <None Include="dsMaquina.xss">
       <DependentUpon>dsMaquina.xsd</DependentUpon>
-    </None>
-    <None Include="dsMarca.xsc">
-      <DependentUpon>dsMarca.xsd</DependentUpon>
-    </None>
-    <None Include="dsMarca.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsMarca.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="dsMarca.xss">
-      <DependentUpon>dsMarca.xsd</DependentUpon>
     </None>
     <None Include="dsMateriaPrima.xsc">
       <DependentUpon>dsMateriaPrima.xsd</DependentUpon>

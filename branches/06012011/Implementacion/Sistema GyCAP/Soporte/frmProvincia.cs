@@ -109,11 +109,7 @@ namespace GyCAP.UI.Soporte
             txtNombre.SelectAll();
         }
 
-        #endregion
-        
-
-
-        
+        #endregion          
 
         #region Formulario
 
@@ -255,9 +251,6 @@ namespace GyCAP.UI.Soporte
         }
 
         #endregion
-
-        
-
-        
+     
     }
 }

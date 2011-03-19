@@ -61,7 +61,7 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static void ObtenerCapacidadEmpleado(string nombre, Data.dsCapacidadEmpleado ds)
+        public static void ObtenerCapacidadEmpleado(string nombre, Data.dsEmpleado ds)
         {
             if (nombre != String.Empty)
             {

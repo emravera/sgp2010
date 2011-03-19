@@ -9,7 +9,7 @@ namespace GyCAP.BLL
     {
         //Busqueda
         //Obtiene los datos de acuerdo a los criterios de busqueda (se debe sobrecargar)
-        public static void ObtenerTodos(Data.dsMarca ds)
+        public static void ObtenerTodos(Data.dsCliente ds)
         {
             DAL.ClienteDAL.ObtenerCliente(ds);
         }

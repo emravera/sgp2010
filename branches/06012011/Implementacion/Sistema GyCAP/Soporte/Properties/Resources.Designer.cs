@@ -67,6 +67,27 @@ namespace GyCAP.UI.Soporte.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap CapacidadEmpleado1 {
+            get {
+                object obj = ResourceManager.GetObject("CapacidadEmpleado1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap CapacidadEmpleado2 {
+            get {
+                object obj = ResourceManager.GetObject("CapacidadEmpleado2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap CapacidadEmpleado3 {
+            get {
+                object obj = ResourceManager.GetObject("CapacidadEmpleado3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Delete_25 {
             get {
                 object obj = ResourceManager.GetObject("Delete_25", resourceCulture);
@@ -133,6 +154,27 @@ namespace GyCAP.UI.Soporte.Properties {
         internal static System.Drawing.Bitmap mapa_argentina {
             get {
                 object obj = ResourceManager.GetObject("mapa_argentina", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Marcas1 {
+            get {
+                object obj = ResourceManager.GetObject("Marcas1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Marcas2 {
+            get {
+                object obj = ResourceManager.GetObject("Marcas2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Marcas3 {
+            get {
+                object obj = ResourceManager.GetObject("Marcas3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
