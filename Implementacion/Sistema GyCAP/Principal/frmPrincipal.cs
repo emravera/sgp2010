@@ -202,5 +202,11 @@ namespace Principal
             GyCAP.UI.GestionStock.frmEntregaProducto.Instancia.Show();
         }
 
+        private void tipoParte_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.EstructuraProducto.frmTipoParte.Instancia.MdiParent = this;
+            GyCAP.UI.EstructuraProducto.frmTipoParte.Instancia.Show();
+        }
+
     }
 }

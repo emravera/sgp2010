@@ -81,7 +81,7 @@ namespace GyCAP.Entidades.Mensajes
         /// <param name="operacion">El nombre de la operacion que se esta realizando (Obtener de la enumeracion operaciones)</param>
         public static void MsjExcepcion(string msjExcepcion, string nombreFormulario, Operaciones operacion)
         {
-            MessageBox.Show("Excepcion: " + msjExcepcion, "Error:" + nombreFormulario + " - " + operacion.ToString() , MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Excepcion: " + msjExcepcion, "Error: " + nombreFormulario + " - " + operacion.ToString() , MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         //Mensaje de la Pestaña de Datos
