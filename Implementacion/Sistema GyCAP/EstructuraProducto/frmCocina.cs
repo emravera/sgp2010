@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades.Mensajes;
 
 namespace GyCAP.UI.EstructuraProducto
 {
@@ -84,7 +85,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvListaCocina.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la Cocina seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = MensajesABM.MsjConfirmaEliminarDatos("Cocina", MensajesABM.Generos.Femenino, this.Text);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -99,17 +100,17 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Unidad de Medida de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Cocina", MensajesABM.Generos.Femenino, this.Text);
             }
         }
 
@@ -133,13 +134,15 @@ namespace GyCAP.UI.EstructuraProducto
 
                 if (dsCocina.COCINAS.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Cocinas con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MensajesABM.MsjBuscarNoEncontrado("Cocinas", this.Text);
                 }
-                SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Cocinas - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Búsqueda);
+            }
+            finally
+            {
                 SetInterface(estadoUI.inicio);
             }
         }
@@ -195,37 +198,35 @@ namespace GyCAP.UI.EstructuraProducto
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisamos los datos
-            string datosCompletar = string.Empty;
-            if (txtCodigo.Text == string.Empty) { datosCompletar += "* Código"; }
-            if (cbModelo.GetSelectedIndex() == -1) { datosCompletar += "* Modelo"; }
-            if (cbMarca.GetSelectedIndex() == -1) { datosCompletar += "* Marca"; }
-            if (cbDesignacion.GetSelectedIndex() == -1) { datosCompletar += "* Designación"; }
-            if (cbColor.GetSelectedIndex() == -1) { datosCompletar += "* Color"; }
-            if (cbTerminacion.GetSelectedIndex() == -1) { datosCompletar += "* "; }
-            if (cbEstado.GetSelectedIndex() == -1) { datosCompletar += "* Estado"; }
-            //if (nudCosto.Value == 0) { datosCompletar += "* Costo"; }
-
-            if (datosCompletar == string.Empty)
+            List<string> validacion = new List<string>();
+            if (txtCodigo.Text == string.Empty) { validacion.Add("Código"); }
+            if (cbModelo.GetSelectedIndex() == -1) { validacion.Add("Modelo"); }
+            if (cbMarca.GetSelectedIndex() == -1) { validacion.Add("Marca"); }
+            if (cbDesignacion.GetSelectedIndex() == -1) { validacion.Add("Designación"); }
+            if (cbColor.GetSelectedIndex() == -1) { validacion.Add("Color"); }
+            if (cbTerminacion.GetSelectedIndex() == -1) { validacion.Add("Terminación"); }
+            if (cbEstado.GetSelectedIndex() == -1) { validacion.Add("Estado"); }
+            
+            if (validacion.Count == 0)
             {
                 Entidades.Cocina cocina = new GyCAP.Entidades.Cocina();
+                cocina.CodigoProducto = txtCodigo.Text;
+                cocina.Modelo = new GyCAP.Entidades.ModeloCocina();
+                cocina.Modelo.Codigo = cbModelo.GetSelectedValueInt();
+                cocina.Marca = new GyCAP.Entidades.Marca();
+                cocina.Marca.Codigo = cbMarca.GetSelectedValueInt();
+                cocina.Designacion = new GyCAP.Entidades.Designacion();
+                cocina.Designacion.Codigo = cbDesignacion.GetSelectedValueInt();
+                cocina.Color = new GyCAP.Entidades.Color();
+                cocina.Color.Codigo = cbColor.GetSelectedValueInt();
+                cocina.TerminacionHorno = new GyCAP.Entidades.Terminacion();
+                cocina.TerminacionHorno.Codigo = cbTerminacion.GetSelectedValueInt();
+                cocina.Activo = cbEstado.GetSelectedValueInt();
+                cocina.Costo = nudCosto.Value;
 
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
-                    cocina.CodigoProducto = txtCodigo.Text;
-                    cocina.Modelo = new GyCAP.Entidades.ModeloCocina();
-                    cocina.Modelo.Codigo = cbModelo.GetSelectedValueInt();
-                    cocina.Marca = new GyCAP.Entidades.Marca();
-                    cocina.Marca.Codigo = cbMarca.GetSelectedValueInt();
-                    cocina.Designacion = new GyCAP.Entidades.Designacion();
-                    cocina.Designacion.Codigo = cbDesignacion.GetSelectedValueInt();
-                    cocina.Color = new GyCAP.Entidades.Color();
-                    cocina.Color.Codigo = cbColor.GetSelectedValueInt();
-                    cocina.TerminacionHorno = new GyCAP.Entidades.Terminacion();
-                    cocina.TerminacionHorno.Codigo = cbTerminacion.GetSelectedValueInt();
-                    cocina.Activo = cbEstado.GetSelectedValueInt();
-                    cocina.Costo = nudCosto.Value;
-
                     try
                     {
                         //Primero lo creamos en la db
@@ -264,29 +265,16 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
                 {
-                    cocina.CodigoCocina = Convert.ToInt32(dvCocinas[dgvListaCocina.SelectedRows[0].Index]["coc_codigo"]);
-                    cocina.CodigoProducto = txtCodigo.Text;
-                    cocina.Modelo = new GyCAP.Entidades.ModeloCocina();
-                    cocina.Modelo.Codigo = cbModelo.GetSelectedValueInt();
-                    cocina.Marca = new GyCAP.Entidades.Marca();
-                    cocina.Marca.Codigo = cbMarca.GetSelectedValueInt();
-                    cocina.Designacion = new GyCAP.Entidades.Designacion();
-                    cocina.Designacion.Codigo = cbDesignacion.GetSelectedValueInt();
-                    cocina.Color = new GyCAP.Entidades.Color();
-                    cocina.Color.Codigo = cbColor.GetSelectedValueInt();
-                    cocina.TerminacionHorno = new GyCAP.Entidades.Terminacion();
-                    cocina.TerminacionHorno.Codigo = cbTerminacion.GetSelectedValueInt();
-                    cocina.Activo = cbEstado.GetSelectedValueInt();
-                    cocina.Costo = nudCosto.Value;
+                    cocina.CodigoCocina = Convert.ToInt32(dvCocinas[dgvListaCocina.SelectedRows[0].Index]["coc_codigo"]);                    
 
                     try
                     {
@@ -313,14 +301,14 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
                     }
                 }
                 dgvListaCocina.Refresh();
             }
             else
             {
-                MessageBox.Show("Debe completar los datos:\n\n" + datosCompletar, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.CompletarDatos, validacion), this.Text);
             }
         }
 
@@ -496,7 +484,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
             }
 
 
