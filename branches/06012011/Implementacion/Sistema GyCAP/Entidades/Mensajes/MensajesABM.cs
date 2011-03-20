@@ -65,7 +65,7 @@ namespace GyCAP.Entidades.Mensajes
         /// MSJ: No se encontraron" + elemento + " con los datos ingresados.
         /// </summary>
         /// <param name="elemento">Nombre del elemento escrito en Plural</param>
-        /// <param name="nombreFormulario">El nombre del formulario (this.Name)</param>
+        /// <param name="nombreFormulario">El nombre del formulario (this.Text)</param>
         public static void MsjBuscarNoEncontrado(string elemento, string nombreFormulario)
         {
             MessageBox.Show("No se encontraron " + elemento + " con los datos ingresados.", nombreFormulario + " - Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -77,7 +77,7 @@ namespace GyCAP.Entidades.Mensajes
         /// MSJ: Excepcion: + msjExcepcion
         /// </summary>
         /// <param name="msjExcepcion">Mensaje de la excepcion capturada (ex.Message)</param>
-        /// <param name="nombreFormulario">El nombre del formulario (this.Name)</param>
+        /// <param name="nombreFormulario">El nombre del formulario (this.Text)</param>
         /// <param name="operacion">El nombre de la operacion que se esta realizando (Obtener de la enumeracion operaciones)</param>
         public static void MsjExcepcion(string msjExcepcion, string nombreFormulario, Operaciones operacion)
         {
@@ -93,7 +93,7 @@ namespace GyCAP.Entidades.Mensajes
         /// </summary>
         /// <param name="elemento">Nombre del elemento escrito en singular</param>
         /// <param name="genero">Genero del elemento (Usar enumeracion Generos de la clase)</param>
-        /// <param name="nombreFormulario">El nombre del formulario (this.Name)</param>
+        /// <param name="nombreFormulario">El nombre del formulario (this.Text)</param>
         /// <returns>El elemento de la enumeracion DialogResult correspondiente </returns>  
         public static DialogResult MsjConfirmaEliminarDatos(string elemento, Generos genero, string nombreFormulario)
         {
@@ -116,7 +116,7 @@ namespace GyCAP.Entidades.Mensajes
         /// "Excepcion: " + msjExcepcion
         /// </summary>
         /// <param name="msjExcepcion">Mensaje de la excepcion capturada (ex.Message)</param>
-        /// <param name="nombreFormulario">El nombre del formulario (this.Name)</param>
+        /// <param name="nombreFormulario">El nombre del formulario (this.Text)</param>
          
         public static void MsjElementoTransaccion(string msjExcepcion, string nombreFormulario)
         {
@@ -130,7 +130,7 @@ namespace GyCAP.Entidades.Mensajes
         /// </summary>
         /// <param name="elemento">Nombre del elemento escrito en singular</param>
         /// <param name="genero">Genero del elemento (Usar enumeracion generos de la clase)</param>
-        /// <param name="nombreFormulario">El nombre del formulario (this.Name)</param>
+        /// <param name="nombreFormulario">El nombre del formulario (this.Text)</param>
         
         public static void MsjSinSeleccion(string elemento, Generos genero, string nombreFormulario)
         {
@@ -149,7 +149,7 @@ namespace GyCAP.Entidades.Mensajes
         /// MSJ: "Elemento" + elemento + " guardado correctamente."
         /// </summary>
         /// <param name="elemento">Nombre del elemento escrito en singular</param>
-        /// <param name="nombreFormulario">El nombre del formulario (this.Name)</param>
+        /// <param name="nombreFormulario">El nombre del formulario (this.Text)</param>
         /// <param name="genero">Genero del elemento (Usar enumeracion genero de la clase)</param>
         
         public static void MsjConfirmaGuardar(string elemento, string nombreFormulario, Operaciones operacion)
@@ -162,7 +162,7 @@ namespace GyCAP.Entidades.Mensajes
         /// Mensaje fallo en la validacion (Con mensajes estándares)
         /// </summary>
         /// <param name="validacion">Elemento de las enumeraciones Validaciones de la clase Mensajes</param>
-        /// <param name="nombreFormulario">El nombre del formulario (this.Name)</param>
+        /// <param name="nombreFormulario">El nombre del formulario (this.Text)</param>
         /// 
         //public static void MsjErrorValidacion(Validaciones validacion, string nombreFormulario, string[] datos)
         //{
@@ -174,7 +174,7 @@ namespace GyCAP.Entidades.Mensajes
         /// Mensaje fallo en la validacion (Con mensajes estándares)
         /// </summary>
         /// <param name="validacion">String con el mensaje de los errores</param>
-        /// <param name="nombreFormulario">El nombre del formulario (this.Name)</param>
+        /// <param name="nombreFormulario">El nombre del formulario (this.Text)</param>
         /// <param name="datos">Array de errores de validacion cuando faltan datos </param>
         public static void MsjValidacion(string validacion, string nombreFormulario)
         {

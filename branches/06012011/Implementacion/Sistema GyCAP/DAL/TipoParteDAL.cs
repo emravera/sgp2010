@@ -18,7 +18,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataTable(dtTiposPartes, sql, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void Insertar(Entidades.TipoParte tipoParte)
@@ -26,20 +26,26 @@ namespace GyCAP.DAL
             string sql = @"INSERT INTO [TIPOS_PARTES] 
                        ([tpar_nombre],
                         [tpar_descripcion],
-                        [tpar_productoterminado]
+                        [tpar_productoterminado],
                         [tpar_fantasma], 
                         [tpar_ordentrabajo], 
                         [tpar_ensamblado], 
                         [tpar_adquirido]) 
                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6) SELECT @@Identity";
 
-            object[] parametros = { tipoParte.Nombre, tipoParte.Descripcion, tipoParte.ProductoTerminado };
+            object[] parametros = { tipoParte.Nombre, 
+                                      tipoParte.Descripcion, 
+                                      tipoParte.ProductoTerminado,
+                                      tipoParte.Fantasma,
+                                      tipoParte.Ordentrabajo,
+                                      tipoParte.Ensamblado,
+                                      tipoParte.Adquirido };
             
             try
             {
                 tipoParte.Codigo = Convert.ToInt32(DB.executeScalar(sql, parametros, null));
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void Actualizar(Entidades.TipoParte tipoParte)
@@ -67,7 +73,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, parametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void Eliminar(int codigoTipoParte)
@@ -79,7 +85,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, parametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static bool PuedeEliminarse(int codigoTipoParte)
@@ -98,7 +104,7 @@ namespace GyCAP.DAL
                     return false;
                 }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static bool EsTipoParte(Entidades.TipoParte tipoParte)
@@ -110,14 +116,14 @@ namespace GyCAP.DAL
             {
                 if (Convert.ToInt32(DB.executeScalar(sql, parametros, null)) == 0)
                 {
-                    return true;
+                    return false;
                 }
                 else
                 {
-                    return false;
+                    return true;
                 }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void ObtenerTiposPartes(object nombre, object fantasma, object orden, object ensamblado, object adquirido, object terminado, DataTable dtTiposPartes)
@@ -187,7 +193,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataTable(dtTiposPartes, sql, valorParametros);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
             else
             {
@@ -196,7 +202,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataTable(dtTiposPartes, sql, null);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
         }
     }

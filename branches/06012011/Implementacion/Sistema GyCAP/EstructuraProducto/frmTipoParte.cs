@@ -84,7 +84,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Tipo de parte", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, "Tipos de Partes");
+                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Tipo de parte", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -99,17 +99,17 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, "Tipos de Partes");
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, "Tipos de Partes", GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Tipo de parte", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, "Tipos de Partes");
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Tipo de parte", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
             }
         }
 
@@ -125,13 +125,15 @@ namespace GyCAP.UI.EstructuraProducto
                 BLL.TipoParteBLL.ObtenerTiposPartes(txtNombreBuscar.Text, chkFantasmaBuscar.Checked, chkOTSBuscar.Checked, chkEnsambladoBuscar.Checked, chkAdquiridoBuscar.Checked, chkTerminadoBuscar.Checked, dsTipoParte.TIPOS_PARTES);
                 if (dsTipoParte.TIPOS_PARTES.Rows.Count == 0)
                 {
-                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Tipos de partes", "Tipos de Partes");
+                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Tipos de partes", this.Text);
                 }
-                SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, "Tipos de Partes", GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);                
+            }
+            finally
+            {
                 SetInterface(estadoUI.inicio);
             }
         }
@@ -145,6 +147,96 @@ namespace GyCAP.UI.EstructuraProducto
             //Descartamos los cambios realizamos hasta el momento sin guardar
             dsTipoParte.TIPOS_PARTES.RejectChanges();
             SetInterface(estadoUI.inicio);
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            List<string> validacion = new List<string>();
+            if (string.IsNullOrEmpty(txtNombre.Text)) { validacion.Add("Nombre"); }
+            if (validacion.Count == 0)
+            {
+                Entidades.TipoParte tipoParte = new GyCAP.Entidades.TipoParte();
+                tipoParte.Nombre = txtNombre.Text;
+                tipoParte.Descripcion = txtDescripcion.Text;
+                tipoParte.Adquirido = (chkAdquirido.Checked) ? 1 : 0;
+                tipoParte.Ensamblado = (chkEnsamblado.Checked) ? 1 : 0;
+                tipoParte.Fantasma = (chkFantasma.Checked) ? 1 : 0;
+                tipoParte.Ordentrabajo = (chkOTS.Checked) ? 1 : 0;
+                tipoParte.ProductoTerminado = (chkTerminado.Checked) ? 1 : 0;
+
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
+                {
+                    try
+                    {
+                        BLL.TipoParteBLL.Insertar(tipoParte);
+                        Data.dsEstructuraProducto.TIPOS_PARTESRow row = dsTipoParte.TIPOS_PARTES.NewTIPOS_PARTESRow();
+                        row.TPAR_CODIGO = tipoParte.Codigo;
+                        row.TPAR_NOMBRE = tipoParte.Nombre;
+                        row.TPAR_DESCRIPCION = tipoParte.Descripcion;
+                        row.TPAR_ADQUIRIDO = tipoParte.Adquirido;
+                        row.TPAR_ENSAMBLADO = tipoParte.Ensamblado;
+                        row.TPAR_FANTASMA = tipoParte.Fantasma;
+                        row.TPAR_ORDENTRABAJO = tipoParte.Ordentrabajo;
+                        row.TPAR_PRODUCTOTERMINADO = tipoParte.ProductoTerminado;
+                        dsTipoParte.TIPOS_PARTES.AddTIPOS_PARTESRow(row);
+                        dsTipoParte.TIPOS_PARTES.AcceptChanges();
+
+                        //Vemos cómo se inició el formulario para determinar la acción a seguir
+                        if (estadoInterface == estadoUI.nuevoExterno)
+                        {
+                            //Nuevo desde acceso directo, cerramos el formulario
+                            btnSalir.PerformClick();
+                        }
+                        else
+                        {
+                            //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
+                            SetInterface(estadoUI.inicio);
+                        }
+                    }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                    }
+                }
+                else
+                {
+                    tipoParte.Codigo = Convert.ToInt32(dvTipoParte[dgvLista.SelectedRows[0].Index]["tpar_codigo"]);
+                    
+                    try
+                    {
+                        BLL.TipoParteBLL.Actualizar(tipoParte);
+                        dsTipoParte.TIPOS_PARTES.FindByTPAR_CODIGO(tipoParte.Codigo).BeginEdit();
+                        dsTipoParte.TIPOS_PARTES.FindByTPAR_CODIGO(tipoParte.Codigo).TPAR_NOMBRE = tipoParte.Nombre;
+                        dsTipoParte.TIPOS_PARTES.FindByTPAR_CODIGO(tipoParte.Codigo).TPAR_DESCRIPCION = tipoParte.Descripcion;
+                        dsTipoParte.TIPOS_PARTES.FindByTPAR_CODIGO(tipoParte.Codigo).TPAR_ADQUIRIDO = tipoParte.Adquirido;
+                        dsTipoParte.TIPOS_PARTES.FindByTPAR_CODIGO(tipoParte.Codigo).TPAR_ENSAMBLADO = tipoParte.Ensamblado;
+                        dsTipoParte.TIPOS_PARTES.FindByTPAR_CODIGO(tipoParte.Codigo).TPAR_FANTASMA = tipoParte.Fantasma;
+                        dsTipoParte.TIPOS_PARTES.FindByTPAR_CODIGO(tipoParte.Codigo).TPAR_ORDENTRABAJO = tipoParte.Ordentrabajo;
+                        dsTipoParte.TIPOS_PARTES.FindByTPAR_CODIGO(tipoParte.Codigo).TPAR_PRODUCTOTERMINADO = tipoParte.ProductoTerminado;
+                        dsTipoParte.TIPOS_PARTES.FindByTPAR_CODIGO(tipoParte.Codigo).EndEdit();
+                        dsTipoParte.TIPOS_PARTES.AcceptChanges();
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Tipo de Parte", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
+                        SetInterface(estadoUI.inicio);
+                    }
+                    catch (Entidades.Excepciones.ElementoInexistenteException ex)
+                    {
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                    }
+                }
+            }
+            else
+            {
+                string msg = Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, validacion);
+                Entidades.Mensajes.MensajesABM.MsjValidacion(msg, this.Text);
+            }
         }
 
         #endregion
@@ -273,7 +365,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, "Tipos de Partes", GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Inicio);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Inicio);
             }
 
             //Grilla 
@@ -319,7 +411,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             if (!string.IsNullOrEmpty(e.Value.ToString()))
             {
-                string nombre = string.Empty;
+                string nombre = "No";
 
                 switch (dgvLista.Columns[e.ColumnIndex].Name)
                 {
@@ -328,7 +420,6 @@ namespace GyCAP.UI.EstructuraProducto
                     case "TPAR_FANTASMA":
                     case "TPAR_ENSAMBLADO":
                     case "TPAR_ADQUIRIDO":
-                        nombre = "No";
                         if (Convert.ToInt32(e.Value) == 1) { nombre = "Si"; }
                         e.Value = nombre;    
                     break;
@@ -355,11 +446,37 @@ namespace GyCAP.UI.EstructuraProducto
             else { chkTerminado.Checked = true; }
         }
 
+        private void chkFantasma_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFantasma.Checked) 
+            { 
+                chkOTS.Checked = false;
+                chkTerminado.Checked = false;
+                chkAdquirido.Checked = false;
+                chkEnsamblado.Checked = false;
+            }
+        }
+
+        private void chkOTS_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkOTS.Checked) { chkFantasma.Checked = false; }
+        }
+
+        private void chkAdquirido_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAdquirido.Checked) { chkFantasma.Checked = false; }
+        }
+
+        private void chkTerminado_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkTerminado.Checked) { chkFantasma.Checked = false; }
+        }
+
+        private void chkEnsamblado_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkEnsamblado.Checked) { chkFantasma.Checked = false; }
+        }
+
         #endregion
-
-        
-
-        
-
     }
 }
