@@ -19,8 +19,8 @@ namespace GyCAP.DAL
         private static string conexionGonzaloD = "Data Source=DGA\\GONZALO;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionEmanuel = "Data Source=HP-EMA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionMarcelo = "Data Source=HOMERO;Initial Catalog=Proyecto;User ID=sa";
-        private static string conexionRaulD = "Data Source=DESKTOP\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
-        private static string conexionRaulN = "Data Source=NOTEBOOK\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
+        private static string conexionRaulD = "Data Source=DTR\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
+        private static string conexionRaulN = "Data Source=NBR\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionRemota = "Data Source=proyecto.dyndns.org,2555\\Proyecto;Initial Catalog=Proyecto;User ID=sa;Password=spg2010";
         private static string conexionInterna = "Data Source=Proyecto,2555;Initial Catalog=Proyecto;User ID=sa;Password=spg2010";
         private static string cadenaConexion;
@@ -57,10 +57,10 @@ namespace GyCAP.DAL
                         case "HOMERO": //pc - marcelo
                             cadenaConexion = conexionMarcelo;
                             break;
-                        case "DESKTOP": //desktop - raul
+                        case "DTR": //desktop - raul
                             cadenaConexion = conexionRaulD;
                             break;
-                        case "NOTEBOOK": //notebook - raul
+                        case "NBR": //notebook - raul
                             cadenaConexion = conexionRaulN;
                             break;
                         case "HP-EMA": //notebook - emanuel
