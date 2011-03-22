@@ -25,7 +25,8 @@ namespace GyCAP.BLL
 
         public static void Actualizar(Entidades.Provincia provincia)
         {
-            DAL.ProvinciaDAL.Actualizar(provincia);
+            if (!EsProvincia(provincia.Nombre)) { DAL.ProvinciaDAL.Actualizar(provincia); }
+            else { throw new Entidades.Excepciones.ElementoExistenteException(); }            
         }
 
         public static void ObtenerProvincias(DataTable dtProvincia)

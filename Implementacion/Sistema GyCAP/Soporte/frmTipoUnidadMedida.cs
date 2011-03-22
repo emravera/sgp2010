@@ -16,7 +16,8 @@ namespace GyCAP.UI.Soporte
         private DataView dvTipoUnidadMedida;
         private enum estadoUI { inicio, modificar };
         private estadoUI estadoInterface;
-        
+
+        #region Inicio
         public frmTipoUnidadMedida()
         {
             InitializeComponent();
@@ -36,35 +37,15 @@ namespace GyCAP.UI.Soporte
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
         }
+        #endregion
 
-        //Método para evitar la creación de más de una pantalla
-        public static frmTipoUnidadMedida Instancia
-        {
-            get
-            {
-                if (_frmTipoUnidadMedida == null || _frmTipoUnidadMedida.IsDisposed)
-                {
-                    _frmTipoUnidadMedida = new frmTipoUnidadMedida();
-                }
-                else
-                {
-                    _frmTipoUnidadMedida.BringToFront();
-                }
-                return _frmTipoUnidadMedida;
-            }
-            set
-            {
-                _frmTipoUnidadMedida = value;
-            }
-        }
+        #region Botones
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Dispose(true);
         }
-
-        #region Botones
-
+        
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
@@ -76,7 +57,7 @@ namespace GyCAP.UI.Soporte
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Tipo de Unidad de Medida de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Tipo unidad de medida", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
             } 
         }
 
@@ -86,7 +67,7 @@ namespace GyCAP.UI.Soporte
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Tipo de Unidad de Medida seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Tipo unidad de medida", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -98,29 +79,34 @@ namespace GyCAP.UI.Soporte
                         //Lo eliminamos del dataset
                         dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.FindByTUMED_CODIGO(codigo).Delete();
                         dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AcceptChanges();
+
+                        //Mensaje de confirmacion de eliminacion
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaEliminar(this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
                         dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.RejectChanges();
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.RejectChanges();
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Tipo de Unidad de Medida de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Tipo unidad de medida", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
             }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            string validacion = Validar();
+
             //Revisamos que escribió algo
-            if (txtNombre.Text != String.Empty)
+            if (validacion == String.Empty)
             {
                 Entidades.TipoUnidadMedida tipoUnidadMedida = new GyCAP.Entidades.TipoUnidadMedida();
 
@@ -144,18 +130,22 @@ namespace GyCAP.UI.Soporte
                         //Agregamos la fila al dataset y aceptamos los cambios
                         dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AddTIPOS_UNIDADES_MEDIDARow(rowTipoUnidadMedida);
                         dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AcceptChanges();
+
+                        //Avisamos que se guardo correctamente
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Tipo unidad de medida", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
                         dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.RejectChanges();
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.RejectChanges();
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
@@ -175,20 +165,22 @@ namespace GyCAP.UI.Soporte
                         rowTipoUnidadMedida.TUMED_NOMBRE = txtNombre.Text;
                         rowTipoUnidadMedida.EndEdit();
                         dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AcceptChanges();
+                        
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Tipo unidad de medida", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
+                        
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe completar el nombre.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
             }
         }
 
@@ -200,6 +192,26 @@ namespace GyCAP.UI.Soporte
         #endregion
 
         #region Servicios
+        //Método para evitar la creación de más de una pantalla
+        public static frmTipoUnidadMedida Instancia
+        {
+            get
+            {
+                if (_frmTipoUnidadMedida == null || _frmTipoUnidadMedida.IsDisposed)
+                {
+                    _frmTipoUnidadMedida = new frmTipoUnidadMedida();
+                }
+                else
+                {
+                    _frmTipoUnidadMedida.BringToFront();
+                }
+                return _frmTipoUnidadMedida;
+            }
+            set
+            {
+                _frmTipoUnidadMedida = value;
+            }
+        }
 
         private void SetInterface(estadoUI estado)
         {
@@ -235,7 +247,29 @@ namespace GyCAP.UI.Soporte
                 default:
                     break;
             }
-        }         
+        }
+
+        private string Validar()
+        {
+            string erroresValidacion = string.Empty;
+
+            //Control de los blancos de los textbox
+            List<string> datos = new List<string>();
+            if (txtNombre.Text == string.Empty)
+            {
+                datos.Add("Nombre");
+                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
+            }
+
+            //Control de espacios en textbox
+            List<string> espacios = new List<string>();
+            if (txtNombre.Text.Trim().Length == 0)
+            {
+                espacios.Add("Nombre");
+                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.SoloEspacios, espacios);
+            }
+            return erroresValidacion;
+        }
 
         private void frmTipoUnidadMedida_Activated(object sender, EventArgs e)
         {

@@ -19,35 +19,40 @@ namespace GyCAP.Entidades.Mensajes
         //***************************************************************************************
         public enum Operaciones { Inicio, Búsqueda, Eliminación, Guardado, Modificación }
         public enum Generos { Femenino, Masculino }
-        public enum Validaciones { Seleccion, CompletarDatos }
+        public enum Validaciones { Seleccion, CompletarDatos, SoloEspacios }
 
         public static string EscribirValidacion(Validaciones validacion, List<string> datos)
         {
-            string mensaje = "";
+            string mensaje = string.Empty;
+            string lista = string.Empty;
             
             switch(validacion)
                 {
                     case Validaciones.Seleccion:
-                        mensaje = "Debe seleccionar un elemento en los siguientes combos:\n";
-                        string listaCombos="";
-
                         foreach (string dato in datos)
                         {
-                            listaCombos = listaCombos + "-" + dato + "\n";
+                            lista = lista + "-" + dato + "\n";
                         }
                         
-                        mensaje= mensaje + listaCombos;
+                        mensaje= "Debe seleccionar un elemento en los siguientes combos:\n" + lista;
                         break;
 
                     case Validaciones.CompletarDatos:
-                        string listaDatos="";
-
                         foreach (string dato in datos)
                         {
-                            listaDatos = listaDatos + "-" + dato + "\n";
+                            lista = lista + "-" + dato + "\n";
                         }
-                        mensaje = mensaje + "Debe completar los siguientes datos:\n" + listaDatos;
+                        mensaje = mensaje + "Debe completar los siguientes datos:\n" + lista;
      
+                        break;
+
+                    case Validaciones.SoloEspacios:
+                        foreach (string dato in datos)
+                        {
+                            lista = lista + "-" + dato + "\n";
+                        }
+                        mensaje = mensaje + "Los siguientes campos estan completados sólo con espacios:\n" + lista;
+
                         break;
                 }
                         
@@ -150,32 +155,32 @@ namespace GyCAP.Entidades.Mensajes
         /// </summary>
         /// <param name="elemento">Nombre del elemento escrito en singular</param>
         /// <param name="nombreFormulario">El nombre del formulario (this.Text)</param>
-        /// <param name="genero">Genero del elemento (Usar enumeracion genero de la clase)</param>
+        /// <param name="operacion">Es un elemento de la enumeracion publica Operaciones de esta clase</param>
         
         public static void MsjConfirmaGuardar(string elemento, string nombreFormulario, Operaciones operacion)
         {
             MessageBox.Show("Elemento " + elemento + " guardado correctamente.",nombreFormulario + " - Información: " + operacion.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        //7-Mensaje fallo en la validacion (Con mensajes estándares)
+        //7-Mensaje eliminacion Correcta
         /// <summary>
-        /// Mensaje fallo en la validacion (Con mensajes estándares)
+        /// Mensaje que confirma que se elimino el lemento correctamente de la base de datos
         /// </summary>
         /// <param name="validacion">Elemento de las enumeraciones Validaciones de la clase Mensajes</param>
-        /// <param name="nombreFormulario">El nombre del formulario (this.Text)</param>
-        /// 
-        //public static void MsjErrorValidacion(Validaciones validacion, string nombreFormulario, string[] datos)
-        //{
-         //   MessageBox.Show(EscribirValidacion(validacion,datos),nombreFormulario + " - Información: Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //}
+        /// <param name="operacion">Es un elemento de la enumeracion publica Operaciones de esta clase</param>
+        
+        public static void MsjConfirmaEliminar(string nombreFormulario, Operaciones operacion)
+        {
+            MessageBox.Show("El elemento seleccionado ha sido eliminado correctamente.", nombreFormulario + " - Información: " + operacion.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
-        //7-Mensaje Multiples fallos en la validacion (Con mensajes estándares)
+        //8-Mensaje Multiples fallos en la validacion (Con mensajes estándares)
         /// <summary>
         /// Mensaje fallo en la validacion (Con mensajes estándares)
         /// </summary>
         /// <param name="validacion">String con el mensaje de los errores</param>
         /// <param name="nombreFormulario">El nombre del formulario (this.Text)</param>
-        /// <param name="datos">Array de errores de validacion cuando faltan datos </param>
+        
         public static void MsjValidacion(string validacion, string nombreFormulario)
         {
             MessageBox.Show(validacion, nombreFormulario + " - Información: Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Information);

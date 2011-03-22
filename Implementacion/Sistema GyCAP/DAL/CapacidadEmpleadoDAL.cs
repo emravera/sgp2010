@@ -18,7 +18,7 @@ namespace GyCAP.DAL
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void Eliminar(int codigo)

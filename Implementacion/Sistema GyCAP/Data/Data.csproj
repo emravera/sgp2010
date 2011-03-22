@@ -131,6 +131,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsEstructura.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsEstructuraProducto.cs">
+      <DependentUpon>dsEstructuraProducto.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="dsEstructuraProducto.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -259,6 +263,10 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsTurnosTrabajo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsUnidadMedida.cs">
+      <DependentUpon>dsUnidadMedida.xsd</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="dsUnidadMedida.Designer.cs">
       <AutoGen>True</AutoGen>

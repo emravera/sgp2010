@@ -1,0 +1,3 @@
+﻿namespace GyCAP.Data
+{
+}

@@ -189,6 +189,14 @@ namespace GyCAP.UI.Soporte
                 erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
             }
 
+            //Control de los textbox (ingreso de espacios)
+            List<string> espacios = new List<string>();
+            if (txtNombre.Text.Trim().Length == 0)
+            {
+                espacios.Add("Nombre");
+                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.SoloEspacios, espacios);
+            }
+
             return erroresValidacion;
         }
         
@@ -308,6 +316,9 @@ namespace GyCAP.UI.Soporte
                         dsLocalidad.LOCALIDADES.FindByLOC_CODIGO(codigo).Delete();
                         dsLocalidad.LOCALIDADES.AcceptChanges();
                         btnVolver.PerformClick();
+
+                        //Mensaje de eliminación correcta
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaEliminar(this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {

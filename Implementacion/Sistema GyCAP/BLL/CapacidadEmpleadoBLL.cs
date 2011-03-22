@@ -33,7 +33,8 @@ namespace GyCAP.BLL
 
         public static void Actualizar(Entidades.CapacidadEmpleado capacidadEmpleado)
         {
-            DAL.CapacidadEmpleadoDAL.Actualizar(capacidadEmpleado);
+            if (EsCapacidadEmpleado(capacidadEmpleado)) throw new Entidades.Excepciones.ElementoExistenteException();
+            else DAL.CapacidadEmpleadoDAL.Actualizar(capacidadEmpleado);
         }
 
         public static bool EsCapacidadEmpleado(Entidades.CapacidadEmpleado capacidadEmpleado)
