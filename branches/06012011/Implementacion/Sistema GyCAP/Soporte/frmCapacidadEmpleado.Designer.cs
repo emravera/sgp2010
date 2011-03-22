@@ -32,12 +32,17 @@
             this.gpbLista = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.tpDatos = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.gbDatos = new System.Windows.Forms.GroupBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -45,32 +50,27 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tcABM = new System.Windows.Forms.TabControl();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.btnConsultar = new System.Windows.Forms.ToolStripButton();
             this.btnModificar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tpBuscar.SuspendLayout();
             this.gpbLista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.tpDatos.SuspendLayout();
-            this.gbDatos.SuspendLayout();
-            this.tcABM.SuspendLayout();
-            this.tsMenu.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.gbDatos.SuspendLayout();
+            this.tcABM.SuspendLayout();
+            this.tsMenu.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tpBuscar
@@ -125,6 +125,19 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Image = global::GyCAP.UI.Soporte.Properties.Resources.lupa_20;
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscar.Location = new System.Drawing.Point(383, 20);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
+            this.btnBuscar.TabIndex = 1;
+            this.btnBuscar.Text = "&Buscar";
+            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // txtNombreBuscar
             // 
@@ -192,6 +205,47 @@
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox2.Controls.Add(this.pictureBox3);
+            this.groupBox2.Controls.Add(this.pictureBox2);
+            this.groupBox2.Controls.Add(this.pictureBox1);
+            this.groupBox2.Location = new System.Drawing.Point(6, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(183, 371);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::GyCAP.UI.Soporte.Properties.Resources.CapacidadEmpleado3;
+            this.pictureBox3.Location = new System.Drawing.Point(54, 230);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(123, 130);
+            this.pictureBox3.TabIndex = 2;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.ErrorImage = global::GyCAP.UI.Soporte.Properties.Resources.CapacidadEmpleado2;
+            this.pictureBox2.Image = global::GyCAP.UI.Soporte.Properties.Resources.CapacidadEmpleado2;
+            this.pictureBox2.Location = new System.Drawing.Point(2, 114);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(123, 130);
+            this.pictureBox2.TabIndex = 1;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::GyCAP.UI.Soporte.Properties.Resources.CapacidadEmpleado1;
+            this.pictureBox1.Location = new System.Drawing.Point(54, 20);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(123, 130);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // gbDatos
             // 
             this.gbDatos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -212,7 +266,7 @@
             // txtDescripcion
             // 
             this.txtDescripcion.Location = new System.Drawing.Point(80, 76);
-            this.txtDescripcion.MaxLength = 80;
+            this.txtDescripcion.MaxLength = 130;
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(313, 102);
@@ -286,81 +340,6 @@
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.tcABM, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tsMenu, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(634, 448);
-            this.tableLayoutPanel1.TabIndex = 10;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox2.Controls.Add(this.pictureBox3);
-            this.groupBox2.Controls.Add(this.pictureBox2);
-            this.groupBox2.Controls.Add(this.pictureBox1);
-            this.groupBox2.Location = new System.Drawing.Point(6, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(183, 371);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Image = global::GyCAP.UI.Soporte.Properties.Resources.lupa_20;
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(383, 20);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscar.TabIndex = 1;
-            this.btnBuscar.Text = "&Buscar";
-            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::GyCAP.UI.Soporte.Properties.Resources.CapacidadEmpleado3;
-            this.pictureBox3.Location = new System.Drawing.Point(54, 230);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(123, 130);
-            this.pictureBox3.TabIndex = 2;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.ErrorImage = global::GyCAP.UI.Soporte.Properties.Resources.CapacidadEmpleado2;
-            this.pictureBox2.Image = global::GyCAP.UI.Soporte.Properties.Resources.CapacidadEmpleado2;
-            this.pictureBox2.Location = new System.Drawing.Point(2, 114);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(123, 130);
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::GyCAP.UI.Soporte.Properties.Resources.CapacidadEmpleado1;
-            this.pictureBox1.Location = new System.Drawing.Point(54, 20);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(123, 130);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // btnNuevo
             // 
             this.btnNuevo.Image = global::GyCAP.UI.Soporte.Properties.Resources.New_25;
@@ -405,6 +384,11 @@
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
             // btnSalir
             // 
             this.btnSalir.Image = global::GyCAP.UI.Soporte.Properties.Resources.Salir_25;
@@ -415,6 +399,22 @@
             this.btnSalir.Text = "&Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.tcABM, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tsMenu, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(634, 448);
+            this.tableLayoutPanel1.TabIndex = 10;
             // 
             // frmCapacidadEmpleado
             // 
@@ -436,6 +436,10 @@
             this.groupBox1.PerformLayout();
             this.gbGuardarCancelar.ResumeLayout(false);
             this.tpDatos.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
             this.tcABM.ResumeLayout(false);
@@ -443,10 +447,6 @@
             this.tsMenu.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

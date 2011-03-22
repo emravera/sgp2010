@@ -19,7 +19,7 @@ namespace GyCAP.UI.Soporte
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
 
-        #region Inicio
+#region Inicio
         public frmMarca()
         {
             InitializeComponent();
@@ -87,38 +87,7 @@ namespace GyCAP.UI.Soporte
 
         #endregion
 
-        #region Botones
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            this.Dispose(true);
-        }
-        private void btnNuevo_Click(object sender, EventArgs e)
-        {
-            SetInterface(estadoUI.nuevo);
-        }
-
-        private void btnConsultar_Click(object sender, EventArgs e)
-        {
-            SetInterface(estadoUI.consultar);
-        }
-
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
-            SetInterface(estadoUI.inicio);
-        }
-
-        private void btnModificar_Click(object sender, EventArgs e)
-        {
-            SetInterface(estadoUI.modificar);
-        }
-
-        private void dgvLista_DoubleClick(object sender, EventArgs e)
-        {
-            btnConsultar.PerformClick();
-        }
-#endregion
-        
-        #region Pestaña Buscar
+#region Pestaña Buscar
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -130,7 +99,6 @@ namespace GyCAP.UI.Soporte
                 //Llamamos al método de búsqueda de datos
                 BLL.MarcaBLL.ObtenerTodos(txtNombreBuscar.Text, Convert.ToInt32(cbClienteBuscar.SelectedValue), dsMarca.MARCAS);
                 
-             
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
                 dvListaMarca.Table = dsMarca.MARCAS;
@@ -174,8 +142,37 @@ namespace GyCAP.UI.Soporte
 
         #endregion
 
-        #region Pestaña Datos
-        
+#region Pestaña Datos
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Dispose(true);
+        }
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.nuevo);
+        }
+
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.consultar);
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.inicio);
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.modificar);
+        }
+
+        private void dgvLista_DoubleClick(object sender, EventArgs e)
+        {
+            btnConsultar.PerformClick();
+        }
+
+
         //Metodo que carga los datos desde la grilla hacia a los controles 
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -211,9 +208,11 @@ namespace GyCAP.UI.Soporte
                         //Lo eliminamos del dataset
                         dsMarca.MARCAS.FindByMCA_CODIGO(codigo).Delete();
                         dsMarca.MARCAS.AcceptChanges();
-                        btnVolver.PerformClick();
+                        //Mensaje de eliminacion correcta
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaEliminar(this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
+                        SetInterface(estadoUI.inicio);
                     }
-                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
                         Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
@@ -539,6 +538,14 @@ namespace GyCAP.UI.Soporte
                 erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
             }
 
+            //Control de que no sean solo espacios
+            List<string> espacios = new List<string>();
+            if (txtNombre.Text.Trim().Length == 0)
+            {
+                datos.Add("Nombre");
+                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.SoloEspacios, espacios);
+            }
+
             return erroresValidacion;
         }
 
@@ -564,7 +571,6 @@ namespace GyCAP.UI.Soporte
         
         
 #endregion
-
        
     }
 }

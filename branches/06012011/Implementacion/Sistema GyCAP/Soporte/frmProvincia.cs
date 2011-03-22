@@ -96,6 +96,28 @@ namespace GyCAP.UI.Soporte
             }
         }
 
+        private string Validar()
+        {
+            string validacion = string.Empty;
+
+            //Escribimos la validación para los textbox que no esten vacíos
+            List<string> datos = new List<string>();
+            if (txtNombre.Text == string.Empty )
+            {
+                datos.Add("Nombre");
+                validacion = Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
+            }
+
+            //Escribimos la validación para los textbox no tengan solo espacios
+            List<string> espacios = new List<string>();
+            if (txtNombre.Text.Trim().Length == 0)
+            {
+                espacios.Add("Nombre");
+                validacion = Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.SoloEspacios, espacios);
+            }
+            
+            return validacion;
+        }
         private void frmProvincia_Activated(object sender, EventArgs e)
         {
             if (txtNombre.Enabled == true)
@@ -151,6 +173,9 @@ namespace GyCAP.UI.Soporte
                         //Lo eliminamos del dataset
                         dsProvincia.PROVINCIAS.FindByPCIA_CODIGO(codigo).Delete();
                         dsProvincia.PROVINCIAS.AcceptChanges();
+
+                        //Mensaje de eliminación correcta
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaEliminar(this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
@@ -170,8 +195,10 @@ namespace GyCAP.UI.Soporte
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            string validacion = Validar();
+
             //Revisamos que escribió algo
-            if (txtNombre.Text != String.Empty)
+            if (validacion == String.Empty)
             {
                 //Revisamos que está haciendo
                 if (estadoInterface != estadoUI.modificar)
@@ -237,11 +264,7 @@ namespace GyCAP.UI.Soporte
             }
             else
             {
-                //Escribimos la validación
-                List<string> datos = new List<string>();
-                datos.Add("Nombre");
-                string validacion = Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
-                Entidades.Mensajes.MensajesABM.MsjValidacion(validacion,this.Text);
+               Entidades.Mensajes.MensajesABM.MsjValidacion(validacion,this.Text);
             }
         }
 

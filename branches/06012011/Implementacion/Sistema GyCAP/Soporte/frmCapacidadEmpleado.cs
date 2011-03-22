@@ -59,7 +59,7 @@ namespace GyCAP.UI.Soporte
             dgvLista.DataSource = dvCapacidadEmpleado;
 
             //Seteo el maxlenght de los textbox para que no de error en la bd
-            txtDescripcion.MaxLength = 250;
+            txtDescripcion.MaxLength = 130;
             txtNombre.MaxLength = 80;
 
             //Seteamos el estado de la interfaz
@@ -199,8 +199,17 @@ namespace GyCAP.UI.Soporte
                 datos.Add("Descripción");
                 erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
             }
-            return erroresValidacion;
 
+            //Control de espacios en blanco
+            List<string> espacios = new List<string>();
+            if (txtNombre.Text.Trim().Length == 0) { datos.Add("Nombre"); }
+            if (txtDescripcion.Text.Trim().Length == 0)
+            {
+                datos.Add("Descripción");
+                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.SoloEspacios, espacios);
+            }
+
+            return erroresValidacion;
         }
         
         private void dgvLista_DoubleClick(object sender, EventArgs e)
@@ -269,8 +278,11 @@ namespace GyCAP.UI.Soporte
                         //Lo eliminamos del dataset
                         dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.FindByCEMP_CODIGO(codigo).Delete();
                         dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.AcceptChanges();
+
+                        //Mostramos un mensaje de correcta eliminacion
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaEliminar(this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
                     }
-                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
                         Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }

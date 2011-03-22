@@ -277,6 +277,27 @@ namespace GyCAP.UI.Soporte.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap TipoMedida1 {
+            get {
+                object obj = ResourceManager.GetObject("TipoMedida1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TipoMedida2 {
+            get {
+                object obj = ResourceManager.GetObject("TipoMedida2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TipoMedida3 {
+            get {
+                object obj = ResourceManager.GetObject("TipoMedida3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Volver_25 {
             get {
                 object obj = ResourceManager.GetObject("Volver_25", resourceCulture);

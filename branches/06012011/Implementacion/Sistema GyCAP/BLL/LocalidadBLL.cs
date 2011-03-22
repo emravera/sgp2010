@@ -16,7 +16,8 @@ namespace GyCAP.BLL
 
         public static void Actualizar(Entidades.Localidad localidad)
         {
-            DAL.LocalidadDAL.Actualizar(localidad);
+            if (!EsLocalidad(localidad)) { DAL.LocalidadDAL.Actualizar(localidad);}
+            else { throw new Entidades.Excepciones.ElementoExistenteException(); }
         }
 
         public static void Eliminar(int codigo)

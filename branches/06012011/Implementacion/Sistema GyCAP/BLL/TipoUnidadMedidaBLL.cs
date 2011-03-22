@@ -33,7 +33,8 @@ namespace GyCAP.BLL
 
         public static void Actualizar(Entidades.TipoUnidadMedida tipoUnidadMedida)
         {
-            DAL.TipoUnidadMedidaDAL.Actualizar(tipoUnidadMedida);
+            if (EsTipoUnidadMedida(tipoUnidadMedida)) throw new Entidades.Excepciones.ElementoExistenteException();
+            else DAL.TipoUnidadMedidaDAL.Actualizar(tipoUnidadMedida);
         }
 
         public static bool EsTipoUnidadMedida(Entidades.TipoUnidadMedida tipoUnidadMedida)

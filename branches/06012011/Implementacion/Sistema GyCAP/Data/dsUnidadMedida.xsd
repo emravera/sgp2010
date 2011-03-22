@@ -2,14 +2,15 @@
 <xs:schema id="dsUnidadMedida" targetNamespace="http://tempuri.org/dsUnidadMedida.xsd" xmlns:mstns="http://tempuri.org/dsUnidadMedida.xsd" xmlns="http://tempuri.org/dsUnidadMedida.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
-      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ProyectoConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ProyectoConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.GyCAP.Data.Properties.Settings.GlobalReference.Default.ProyectoConnectionString1" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ProyectoConnectionString1" IsAppSettingsProperty="true" Modifier="Assembly" Name="ProyectoConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.GyCAP.Data.Properties.Settings.GlobalReference.Default.ProyectoConnectionString1" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ProyectoConnectionString6" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ProyectoConnectionString6 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.GyCAP.Data.Properties.Settings.GlobalReference.Default.ProyectoConnectionString6" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="UNIDADES_MEDIDATableAdapter" GeneratorDataComponentClassName="UNIDADES_MEDIDATableAdapter" Name="UNIDADES_MEDIDA" UserDataComponentName="UNIDADES_MEDIDATableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="ProyectoConnectionString1 (Settings)" DbObjectName="Proyecto.dbo.UNIDADES_MEDIDA" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="ProyectoConnectionString6 (Settings)" DbObjectName="Proyecto.dbo.UNIDADES_MEDIDA" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[UNIDADES_MEDIDA] WHERE (([UMED_CODIGO] = @Original_UMED_CODIGO) AND ((@IsNull_TUMED_CODIGO = 1 AND [TUMED_CODIGO] IS NULL) OR ([TUMED_CODIGO] = @Original_TUMED_CODIGO)) AND ((@IsNull_UMED_NOMBRE = 1 AND [UMED_NOMBRE] IS NULL) OR ([UMED_NOMBRE] = @Original_UMED_NOMBRE)) AND ((@IsNull_UMED_ABREVIATURA = 1 AND [UMED_ABREVIATURA] IS NULL) OR ([UMED_ABREVIATURA] = @Original_UMED_ABREVIATURA)))</CommandText>
@@ -72,7 +73,7 @@ SELECT UMED_CODIGO, TUMED_CODIGO, UMED_NOMBRE, UMED_ABREVIATURA FROM UNIDADES_ME
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TIPOS_UNIDADES_MEDIDATableAdapter" GeneratorDataComponentClassName="TIPOS_UNIDADES_MEDIDATableAdapter" Name="TIPOS_UNIDADES_MEDIDA" UserDataComponentName="TIPOS_UNIDADES_MEDIDATableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="ProyectoConnectionString1 (Settings)" DbObjectName="Proyecto.dbo.TIPOS_UNIDADES_MEDIDA" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="ProyectoConnectionString6 (Settings)" DbObjectName="Proyecto.dbo.TIPOS_UNIDADES_MEDIDA" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[TIPOS_UNIDADES_MEDIDA] WHERE (([TUMED_CODIGO] = @Original_TUMED_CODIGO) AND ((@IsNull_TUMED_NOMBRE = 1 AND [TUMED_NOMBRE] IS NULL) OR ([TUMED_NOMBRE] = @Original_TUMED_NOMBRE)))</CommandText>
@@ -127,19 +128,19 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
   <xs:element name="dsUnidadMedida" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsUnidadMedida" msprop:Generator_DataSetName="dsUnidadMedida" msprop:EnableTableAdapterManager="true">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="UNIDADES_MEDIDA" msprop:Generator_UserTableName="UNIDADES_MEDIDA" msprop:Generator_RowDeletedName="UNIDADES_MEDIDARowDeleted" msprop:Generator_RowChangedName="UNIDADES_MEDIDARowChanged" msprop:Generator_RowClassName="UNIDADES_MEDIDARow" msprop:Generator_RowChangingName="UNIDADES_MEDIDARowChanging" msprop:Generator_RowEvArgName="UNIDADES_MEDIDARowChangeEvent" msprop:Generator_RowEvHandlerName="UNIDADES_MEDIDARowChangeEventHandler" msprop:Generator_TableClassName="UNIDADES_MEDIDADataTable" msprop:Generator_TableVarName="tableUNIDADES_MEDIDA" msprop:Generator_RowDeletingName="UNIDADES_MEDIDARowDeleting" msprop:Generator_TablePropName="UNIDADES_MEDIDA">
+        <xs:element name="UNIDADES_MEDIDA" msprop:Generator_UserTableName="UNIDADES_MEDIDA" msprop:Generator_RowDeletedName="UNIDADES_MEDIDARowDeleted" msprop:Generator_TableClassName="UNIDADES_MEDIDADataTable" msprop:Generator_RowChangedName="UNIDADES_MEDIDARowChanged" msprop:Generator_RowClassName="UNIDADES_MEDIDARow" msprop:Generator_RowChangingName="UNIDADES_MEDIDARowChanging" msprop:Generator_RowEvArgName="UNIDADES_MEDIDARowChangeEvent" msprop:Generator_RowEvHandlerName="UNIDADES_MEDIDARowChangeEventHandler" msprop:Generator_TablePropName="UNIDADES_MEDIDA" msprop:Generator_TableVarName="tableUNIDADES_MEDIDA" msprop:Generator_RowDeletingName="UNIDADES_MEDIDARowDeleting">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="UMED_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="UMED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnUMED_CODIGO" msprop:Generator_ColumnPropNameInRow="UMED_CODIGO" msprop:Generator_ColumnPropNameInTable="UMED_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="TUMED_CODIGO" msprop:Generator_UserColumnName="TUMED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnTUMED_CODIGO" msprop:Generator_ColumnPropNameInRow="TUMED_CODIGO" msprop:Generator_ColumnPropNameInTable="TUMED_CODIGOColumn" type="xs:decimal" minOccurs="0" />
-              <xs:element name="UMED_NOMBRE" msprop:Generator_UserColumnName="UMED_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnUMED_NOMBRE" msprop:Generator_ColumnPropNameInRow="UMED_NOMBRE" msprop:Generator_ColumnPropNameInTable="UMED_NOMBREColumn" minOccurs="0">
+              <xs:element name="UMED_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="UMED_CODIGO" msprop:Generator_ColumnPropNameInRow="UMED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnUMED_CODIGO" msprop:Generator_ColumnPropNameInTable="UMED_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="TUMED_CODIGO" msprop:Generator_UserColumnName="TUMED_CODIGO" msprop:Generator_ColumnPropNameInRow="TUMED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnTUMED_CODIGO" msprop:Generator_ColumnPropNameInTable="TUMED_CODIGOColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="UMED_NOMBRE" msprop:Generator_UserColumnName="UMED_NOMBRE" msprop:Generator_ColumnPropNameInRow="UMED_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnUMED_NOMBRE" msprop:Generator_ColumnPropNameInTable="UMED_NOMBREColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="25" />
+                    <xs:maxLength value="80" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="UMED_ABREVIATURA" msprop:Generator_UserColumnName="UMED_ABREVIATURA" msprop:Generator_ColumnVarNameInTable="columnUMED_ABREVIATURA" msprop:Generator_ColumnPropNameInRow="UMED_ABREVIATURA" msprop:Generator_ColumnPropNameInTable="UMED_ABREVIATURAColumn" minOccurs="0">
+              <xs:element name="UMED_ABREVIATURA" msprop:Generator_UserColumnName="UMED_ABREVIATURA" msprop:Generator_ColumnPropNameInRow="UMED_ABREVIATURA" msprop:Generator_ColumnVarNameInTable="columnUMED_ABREVIATURA" msprop:Generator_ColumnPropNameInTable="UMED_ABREVIATURAColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="10" />
@@ -149,14 +150,14 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="TIPOS_UNIDADES_MEDIDA" msprop:Generator_UserTableName="TIPOS_UNIDADES_MEDIDA" msprop:Generator_RowDeletedName="TIPOS_UNIDADES_MEDIDARowDeleted" msprop:Generator_RowChangedName="TIPOS_UNIDADES_MEDIDARowChanged" msprop:Generator_RowClassName="TIPOS_UNIDADES_MEDIDARow" msprop:Generator_RowChangingName="TIPOS_UNIDADES_MEDIDARowChanging" msprop:Generator_RowEvArgName="TIPOS_UNIDADES_MEDIDARowChangeEvent" msprop:Generator_RowEvHandlerName="TIPOS_UNIDADES_MEDIDARowChangeEventHandler" msprop:Generator_TableClassName="TIPOS_UNIDADES_MEDIDADataTable" msprop:Generator_TableVarName="tableTIPOS_UNIDADES_MEDIDA" msprop:Generator_RowDeletingName="TIPOS_UNIDADES_MEDIDARowDeleting" msprop:Generator_TablePropName="TIPOS_UNIDADES_MEDIDA">
+        <xs:element name="TIPOS_UNIDADES_MEDIDA" msprop:Generator_UserTableName="TIPOS_UNIDADES_MEDIDA" msprop:Generator_RowDeletedName="TIPOS_UNIDADES_MEDIDARowDeleted" msprop:Generator_TableClassName="TIPOS_UNIDADES_MEDIDADataTable" msprop:Generator_RowChangedName="TIPOS_UNIDADES_MEDIDARowChanged" msprop:Generator_RowClassName="TIPOS_UNIDADES_MEDIDARow" msprop:Generator_RowChangingName="TIPOS_UNIDADES_MEDIDARowChanging" msprop:Generator_RowEvArgName="TIPOS_UNIDADES_MEDIDARowChangeEvent" msprop:Generator_RowEvHandlerName="TIPOS_UNIDADES_MEDIDARowChangeEventHandler" msprop:Generator_TablePropName="TIPOS_UNIDADES_MEDIDA" msprop:Generator_TableVarName="tableTIPOS_UNIDADES_MEDIDA" msprop:Generator_RowDeletingName="TIPOS_UNIDADES_MEDIDARowDeleting">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="TUMED_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="TUMED_CODIGO" msprop:Generator_ColumnPropNameInRow="TUMED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnTUMED_CODIGO" msprop:Generator_ColumnPropNameInTable="TUMED_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="TUMED_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="TUMED_CODIGO" msprop:Generator_ColumnPropNameInRow="TUMED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnTUMED_CODIGO" msprop:Generator_ColumnPropNameInTable="TUMED_CODIGOColumn" type="xs:decimal" />
               <xs:element name="TUMED_NOMBRE" msprop:Generator_UserColumnName="TUMED_NOMBRE" msprop:Generator_ColumnPropNameInRow="TUMED_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnTUMED_NOMBRE" msprop:Generator_ColumnPropNameInTable="TUMED_NOMBREColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="25" />
+                    <xs:maxLength value="80" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
