@@ -53,8 +53,6 @@
             this.btnConjuntos = new System.Windows.Forms.Button();
             this.btnPiezas = new System.Windows.Forms.Button();
             this.gbVer = new System.Windows.Forms.GroupBox();
-            this.chkPieza = new System.Windows.Forms.CheckBox();
-            this.chkConjunto = new System.Windows.Forms.CheckBox();
             this.btnArbol = new System.Windows.Forms.Button();
             this.gbPartes = new System.Windows.Forms.GroupBox();
             this.dgvPartes = new System.Windows.Forms.DataGridView();
@@ -81,36 +79,6 @@
             this.gbGuardarVolver = new System.Windows.Forms.GroupBox();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.slideDatos = new SlickInterface.Slide();
-            this.slideControl = new SlickInterface.SlideControl();
-            this.tpConjuntos = new System.Windows.Forms.TabPage();
-            this.gbOC = new System.Windows.Forms.GroupBox();
-            this.btnRC = new System.Windows.Forms.Button();
-            this.btnSC = new System.Windows.Forms.Button();
-            this.btnEC = new System.Windows.Forms.Button();
-            this.gbAC = new System.Windows.Forms.GroupBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.btnAC = new System.Windows.Forms.Button();
-            this.nudC = new System.Windows.Forms.NumericUpDown();
-            this.gbCE = new System.Windows.Forms.GroupBox();
-            this.dgvCE = new System.Windows.Forms.DataGridView();
-            this.gbCD = new System.Windows.Forms.GroupBox();
-            this.dgvCD = new System.Windows.Forms.DataGridView();
-            this.slideConjuntos = new SlickInterface.Slide();
-            this.tpPiezas = new System.Windows.Forms.TabPage();
-            this.gbOP = new System.Windows.Forms.GroupBox();
-            this.btnRP = new System.Windows.Forms.Button();
-            this.btnSP = new System.Windows.Forms.Button();
-            this.btnEP = new System.Windows.Forms.Button();
-            this.gbAP = new System.Windows.Forms.GroupBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.btnAP = new System.Windows.Forms.Button();
-            this.nudP = new System.Windows.Forms.NumericUpDown();
-            this.gbPE = new System.Windows.Forms.GroupBox();
-            this.dgvPE = new System.Windows.Forms.DataGridView();
-            this.gbPD = new System.Windows.Forms.GroupBox();
-            this.dgvPD = new System.Windows.Forms.DataGridView();
-            this.slidePiezas = new SlickInterface.Slide();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.btnConsultar = new System.Windows.Forms.ToolStripButton();
@@ -132,22 +100,6 @@
             this.gbDatos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudcosto)).BeginInit();
             this.gbGuardarVolver.SuspendLayout();
-            this.tpConjuntos.SuspendLayout();
-            this.gbOC.SuspendLayout();
-            this.gbAC.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudC)).BeginInit();
-            this.gbCE.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCE)).BeginInit();
-            this.gbCD.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCD)).BeginInit();
-            this.tpPiezas.SuspendLayout();
-            this.gbOP.SuspendLayout();
-            this.gbAP.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudP)).BeginInit();
-            this.gbPE.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPE)).BeginInit();
-            this.gbPD.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPD)).BeginInit();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -171,8 +123,6 @@
             this.tcEstructuraCocina.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.tcEstructuraCocina.Controls.Add(this.tpBuscar);
             this.tcEstructuraCocina.Controls.Add(this.tpDatos);
-            this.tcEstructuraCocina.Controls.Add(this.tpConjuntos);
-            this.tcEstructuraCocina.Controls.Add(this.tpPiezas);
             this.tcEstructuraCocina.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcEstructuraCocina.ItemSize = new System.Drawing.Size(0, 1);
             this.tcEstructuraCocina.Location = new System.Drawing.Point(3, 53);
@@ -378,8 +328,6 @@
             this.tpDatos.Controls.Add(this.gbPartes);
             this.tpDatos.Controls.Add(this.gbDatos);
             this.tpDatos.Controls.Add(this.gbGuardarVolver);
-            this.tpDatos.Controls.Add(this.slideDatos);
-            this.tpDatos.Controls.Add(this.slideControl);
             this.tpDatos.Location = new System.Drawing.Point(4, 5);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
@@ -441,8 +389,6 @@
             // 
             // gbVer
             // 
-            this.gbVer.Controls.Add(this.chkPieza);
-            this.gbVer.Controls.Add(this.chkConjunto);
             this.gbVer.Controls.Add(this.btnArbol);
             this.gbVer.Location = new System.Drawing.Point(618, 177);
             this.gbVer.Name = "gbVer";
@@ -450,32 +396,6 @@
             this.gbVer.TabIndex = 10;
             this.gbVer.TabStop = false;
             this.gbVer.Text = "Ver";
-            // 
-            // chkPieza
-            // 
-            this.chkPieza.AutoSize = true;
-            this.chkPieza.Checked = true;
-            this.chkPieza.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPieza.Location = new System.Drawing.Point(29, 92);
-            this.chkPieza.Name = "chkPieza";
-            this.chkPieza.Size = new System.Drawing.Size(51, 17);
-            this.chkPieza.TabIndex = 7;
-            this.chkPieza.Text = "Pieza";
-            this.chkPieza.UseVisualStyleBackColor = true;
-            this.chkPieza.Click += new System.EventHandler(this.chkVer);
-            // 
-            // chkConjunto
-            // 
-            this.chkConjunto.AutoSize = true;
-            this.chkConjunto.Checked = true;
-            this.chkConjunto.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkConjunto.Location = new System.Drawing.Point(29, 68);
-            this.chkConjunto.Name = "chkConjunto";
-            this.chkConjunto.Size = new System.Drawing.Size(70, 17);
-            this.chkConjunto.TabIndex = 5;
-            this.chkConjunto.Text = "Conjunto";
-            this.chkConjunto.UseVisualStyleBackColor = true;
-            this.chkConjunto.Click += new System.EventHandler(this.chkVer);
             // 
             // btnArbol
             // 
@@ -536,8 +456,7 @@
             this.gbDatos.Controls.Add(this.txtNombre);
             this.gbDatos.Controls.Add(this.label4);
             this.gbDatos.Controls.Add(this.label3);
-            this.gbDatos.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbDatos.Location = new System.Drawing.Point(3, 3);
+            this.gbDatos.Location = new System.Drawing.Point(3, 6);
             this.gbDatos.Name = "gbDatos";
             this.gbDatos.Size = new System.Drawing.Size(772, 169);
             this.gbDatos.TabIndex = 5;
@@ -765,365 +684,6 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
-            // slideDatos
-            // 
-            this.slideDatos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.slideDatos.Location = new System.Drawing.Point(3, 3);
-            this.slideDatos.Name = "slideDatos";
-            this.slideDatos.Size = new System.Drawing.Size(772, 499);
-            this.slideDatos.SlideControl = null;
-            this.slideDatos.TabIndex = 1;
-            // 
-            // slideControl
-            // 
-            this.slideControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.slideControl.Location = new System.Drawing.Point(3, 3);
-            this.slideControl.Name = "slideControl";
-            this.slideControl.Selected = null;
-            this.slideControl.Size = new System.Drawing.Size(772, 499);
-            this.slideControl.SlideSpeed = 250;
-            this.slideControl.TabIndex = 0;
-            // 
-            // tpConjuntos
-            // 
-            this.tpConjuntos.Controls.Add(this.gbOC);
-            this.tpConjuntos.Controls.Add(this.gbAC);
-            this.tpConjuntos.Controls.Add(this.gbCE);
-            this.tpConjuntos.Controls.Add(this.gbCD);
-            this.tpConjuntos.Controls.Add(this.slideConjuntos);
-            this.tpConjuntos.Location = new System.Drawing.Point(4, 5);
-            this.tpConjuntos.Name = "tpConjuntos";
-            this.tpConjuntos.Size = new System.Drawing.Size(778, 505);
-            this.tpConjuntos.TabIndex = 2;
-            this.tpConjuntos.Text = "Conjuntos";
-            this.tpConjuntos.UseVisualStyleBackColor = true;
-            // 
-            // gbOC
-            // 
-            this.gbOC.Controls.Add(this.btnRC);
-            this.gbOC.Controls.Add(this.btnSC);
-            this.gbOC.Controls.Add(this.btnEC);
-            this.gbOC.Location = new System.Drawing.Point(615, 231);
-            this.gbOC.Name = "gbOC";
-            this.gbOC.Size = new System.Drawing.Size(155, 205);
-            this.gbOC.TabIndex = 0;
-            this.gbOC.TabStop = false;
-            // 
-            // btnRC
-            // 
-            this.btnRC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRC.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Restar_Gris_25;
-            this.btnRC.Location = new System.Drawing.Point(32, 141);
-            this.btnRC.Name = "btnRC";
-            this.btnRC.Size = new System.Drawing.Size(90, 50);
-            this.btnRC.TabIndex = 4;
-            this.btnRC.Text = "Disminuir\r\nCantidad";
-            this.btnRC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRC.UseVisualStyleBackColor = true;
-            this.btnRC.Click += new System.EventHandler(this.btnRC_Click);
-            // 
-            // btnSC
-            // 
-            this.btnSC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSC.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Sumar_Gris_25;
-            this.btnSC.Location = new System.Drawing.Point(32, 80);
-            this.btnSC.Name = "btnSC";
-            this.btnSC.Size = new System.Drawing.Size(90, 50);
-            this.btnSC.TabIndex = 3;
-            this.btnSC.Text = "Aumentar\r\ncantidad";
-            this.btnSC.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSC.UseVisualStyleBackColor = true;
-            this.btnSC.Click += new System.EventHandler(this.btnSC_Click);
-            // 
-            // btnEC
-            // 
-            this.btnEC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEC.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
-            this.btnEC.Location = new System.Drawing.Point(32, 20);
-            this.btnEC.Name = "btnEC";
-            this.btnEC.Size = new System.Drawing.Size(90, 50);
-            this.btnEC.TabIndex = 2;
-            this.btnEC.Text = "Eliminar";
-            this.btnEC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEC.UseVisualStyleBackColor = true;
-            this.btnEC.Click += new System.EventHandler(this.btnEC_Click);
-            // 
-            // gbAC
-            // 
-            this.gbAC.Controls.Add(this.label14);
-            this.gbAC.Controls.Add(this.btnAC);
-            this.gbAC.Controls.Add(this.nudC);
-            this.gbAC.Location = new System.Drawing.Point(615, 3);
-            this.gbAC.Name = "gbAC";
-            this.gbAC.Size = new System.Drawing.Size(155, 219);
-            this.gbAC.TabIndex = 3;
-            this.gbAC.TabStop = false;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(29, 58);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(50, 13);
-            this.label14.TabIndex = 2;
-            this.label14.Text = "Cantidad";
-            // 
-            // btnAC
-            // 
-            this.btnAC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAC.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_25;
-            this.btnAC.Location = new System.Drawing.Point(32, 115);
-            this.btnAC.Name = "btnAC";
-            this.btnAC.Size = new System.Drawing.Size(90, 50);
-            this.btnAC.TabIndex = 1;
-            this.btnAC.Text = "Agregar";
-            this.btnAC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAC.UseVisualStyleBackColor = true;
-            this.btnAC.Click += new System.EventHandler(this.btnAC_Click);
-            // 
-            // nudC
-            // 
-            this.nudC.Location = new System.Drawing.Point(32, 74);
-            this.nudC.Name = "nudC";
-            this.nudC.Size = new System.Drawing.Size(90, 20);
-            this.nudC.TabIndex = 0;
-            this.nudC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudC.Enter += new System.EventHandler(this.control_Enter);
-            // 
-            // gbCE
-            // 
-            this.gbCE.Controls.Add(this.dgvCE);
-            this.gbCE.Location = new System.Drawing.Point(5, 231);
-            this.gbCE.Name = "gbCE";
-            this.gbCE.Size = new System.Drawing.Size(600, 205);
-            this.gbCE.TabIndex = 2;
-            this.gbCE.TabStop = false;
-            this.gbCE.Text = "Conjuntos en Estructura";
-            // 
-            // dgvCE
-            // 
-            this.dgvCE.AllowUserToAddRows = false;
-            this.dgvCE.AllowUserToDeleteRows = false;
-            this.dgvCE.AllowUserToResizeRows = false;
-            this.dgvCE.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCE.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCE.Location = new System.Drawing.Point(3, 16);
-            this.dgvCE.MultiSelect = false;
-            this.dgvCE.Name = "dgvCE";
-            this.dgvCE.ReadOnly = true;
-            this.dgvCE.RowHeadersVisible = false;
-            this.dgvCE.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCE.Size = new System.Drawing.Size(594, 186);
-            this.dgvCE.TabIndex = 0;
-            this.dgvCE.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCE_CellFormatting);
-            // 
-            // gbCD
-            // 
-            this.gbCD.Controls.Add(this.dgvCD);
-            this.gbCD.Location = new System.Drawing.Point(5, 3);
-            this.gbCD.Name = "gbCD";
-            this.gbCD.Size = new System.Drawing.Size(600, 222);
-            this.gbCD.TabIndex = 1;
-            this.gbCD.TabStop = false;
-            this.gbCD.Text = "Conjuntos Disponibles";
-            // 
-            // dgvCD
-            // 
-            this.dgvCD.AllowUserToAddRows = false;
-            this.dgvCD.AllowUserToDeleteRows = false;
-            this.dgvCD.AllowUserToResizeRows = false;
-            this.dgvCD.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCD.Location = new System.Drawing.Point(3, 16);
-            this.dgvCD.MultiSelect = false;
-            this.dgvCD.Name = "dgvCD";
-            this.dgvCD.ReadOnly = true;
-            this.dgvCD.RowHeadersVisible = false;
-            this.dgvCD.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCD.Size = new System.Drawing.Size(594, 203);
-            this.dgvCD.TabIndex = 0;
-            this.dgvCD.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCD_CellFormatting);
-            // 
-            // slideConjuntos
-            // 
-            this.slideConjuntos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.slideConjuntos.Location = new System.Drawing.Point(0, 0);
-            this.slideConjuntos.Name = "slideConjuntos";
-            this.slideConjuntos.Size = new System.Drawing.Size(778, 505);
-            this.slideConjuntos.SlideControl = null;
-            this.slideConjuntos.TabIndex = 0;
-            // 
-            // tpPiezas
-            // 
-            this.tpPiezas.Controls.Add(this.gbOP);
-            this.tpPiezas.Controls.Add(this.gbAP);
-            this.tpPiezas.Controls.Add(this.gbPE);
-            this.tpPiezas.Controls.Add(this.gbPD);
-            this.tpPiezas.Controls.Add(this.slidePiezas);
-            this.tpPiezas.Location = new System.Drawing.Point(4, 5);
-            this.tpPiezas.Name = "tpPiezas";
-            this.tpPiezas.Size = new System.Drawing.Size(778, 505);
-            this.tpPiezas.TabIndex = 4;
-            this.tpPiezas.Text = "Piezas";
-            this.tpPiezas.UseVisualStyleBackColor = true;
-            // 
-            // gbOP
-            // 
-            this.gbOP.Controls.Add(this.btnRP);
-            this.gbOP.Controls.Add(this.btnSP);
-            this.gbOP.Controls.Add(this.btnEP);
-            this.gbOP.Location = new System.Drawing.Point(615, 231);
-            this.gbOP.Name = "gbOP";
-            this.gbOP.Size = new System.Drawing.Size(155, 205);
-            this.gbOP.TabIndex = 4;
-            this.gbOP.TabStop = false;
-            // 
-            // btnRP
-            // 
-            this.btnRP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRP.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Restar_Gris_25;
-            this.btnRP.Location = new System.Drawing.Point(32, 141);
-            this.btnRP.Name = "btnRP";
-            this.btnRP.Size = new System.Drawing.Size(90, 50);
-            this.btnRP.TabIndex = 4;
-            this.btnRP.Text = "Disminuir\r\nCantidad";
-            this.btnRP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRP.UseVisualStyleBackColor = true;
-            this.btnRP.Click += new System.EventHandler(this.btnRP_Click);
-            // 
-            // btnSP
-            // 
-            this.btnSP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSP.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Sumar_Gris_25;
-            this.btnSP.Location = new System.Drawing.Point(32, 80);
-            this.btnSP.Name = "btnSP";
-            this.btnSP.Size = new System.Drawing.Size(90, 50);
-            this.btnSP.TabIndex = 3;
-            this.btnSP.Text = "Aumentar\r\ncantidad";
-            this.btnSP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSP.UseVisualStyleBackColor = true;
-            this.btnSP.Click += new System.EventHandler(this.btnSP_Click);
-            // 
-            // btnEP
-            // 
-            this.btnEP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEP.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
-            this.btnEP.Location = new System.Drawing.Point(32, 20);
-            this.btnEP.Name = "btnEP";
-            this.btnEP.Size = new System.Drawing.Size(90, 50);
-            this.btnEP.TabIndex = 2;
-            this.btnEP.Text = "Eliminar";
-            this.btnEP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEP.UseVisualStyleBackColor = true;
-            this.btnEP.Click += new System.EventHandler(this.btnEP_Click);
-            // 
-            // gbAP
-            // 
-            this.gbAP.Controls.Add(this.label16);
-            this.gbAP.Controls.Add(this.btnAP);
-            this.gbAP.Controls.Add(this.nudP);
-            this.gbAP.Location = new System.Drawing.Point(615, 3);
-            this.gbAP.Name = "gbAP";
-            this.gbAP.Size = new System.Drawing.Size(155, 219);
-            this.gbAP.TabIndex = 7;
-            this.gbAP.TabStop = false;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(29, 60);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(50, 13);
-            this.label16.TabIndex = 3;
-            this.label16.Text = "Cantidad";
-            // 
-            // btnAP
-            // 
-            this.btnAP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAP.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_25;
-            this.btnAP.Location = new System.Drawing.Point(32, 117);
-            this.btnAP.Name = "btnAP";
-            this.btnAP.Size = new System.Drawing.Size(90, 50);
-            this.btnAP.TabIndex = 1;
-            this.btnAP.Text = "Agregar";
-            this.btnAP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAP.UseVisualStyleBackColor = true;
-            this.btnAP.Click += new System.EventHandler(this.btnAP_Click);
-            // 
-            // nudP
-            // 
-            this.nudP.Location = new System.Drawing.Point(32, 76);
-            this.nudP.Name = "nudP";
-            this.nudP.Size = new System.Drawing.Size(90, 20);
-            this.nudP.TabIndex = 0;
-            this.nudP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudP.Enter += new System.EventHandler(this.control_Enter);
-            // 
-            // gbPE
-            // 
-            this.gbPE.Controls.Add(this.dgvPE);
-            this.gbPE.Location = new System.Drawing.Point(5, 231);
-            this.gbPE.Name = "gbPE";
-            this.gbPE.Size = new System.Drawing.Size(600, 205);
-            this.gbPE.TabIndex = 6;
-            this.gbPE.TabStop = false;
-            this.gbPE.Text = "Piezas en Estructura";
-            // 
-            // dgvPE
-            // 
-            this.dgvPE.AllowUserToAddRows = false;
-            this.dgvPE.AllowUserToDeleteRows = false;
-            this.dgvPE.AllowUserToResizeRows = false;
-            this.dgvPE.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPE.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPE.Location = new System.Drawing.Point(3, 16);
-            this.dgvPE.MultiSelect = false;
-            this.dgvPE.Name = "dgvPE";
-            this.dgvPE.ReadOnly = true;
-            this.dgvPE.RowHeadersVisible = false;
-            this.dgvPE.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPE.Size = new System.Drawing.Size(594, 186);
-            this.dgvPE.TabIndex = 0;
-            this.dgvPE.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPE_CellFormatting);
-            // 
-            // gbPD
-            // 
-            this.gbPD.Controls.Add(this.dgvPD);
-            this.gbPD.Location = new System.Drawing.Point(5, 3);
-            this.gbPD.Name = "gbPD";
-            this.gbPD.Size = new System.Drawing.Size(600, 222);
-            this.gbPD.TabIndex = 5;
-            this.gbPD.TabStop = false;
-            this.gbPD.Text = "Piezas Disponibles";
-            // 
-            // dgvPD
-            // 
-            this.dgvPD.AllowUserToAddRows = false;
-            this.dgvPD.AllowUserToDeleteRows = false;
-            this.dgvPD.AllowUserToResizeRows = false;
-            this.dgvPD.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPD.Location = new System.Drawing.Point(3, 16);
-            this.dgvPD.MultiSelect = false;
-            this.dgvPD.Name = "dgvPD";
-            this.dgvPD.ReadOnly = true;
-            this.dgvPD.RowHeadersVisible = false;
-            this.dgvPD.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPD.Size = new System.Drawing.Size(594, 203);
-            this.dgvPD.TabIndex = 0;
-            this.dgvPD.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPD_CellFormatting);
-            // 
-            // slidePiezas
-            // 
-            this.slidePiezas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.slidePiezas.Location = new System.Drawing.Point(0, 0);
-            this.slidePiezas.Name = "slidePiezas";
-            this.slidePiezas.Size = new System.Drawing.Size(778, 505);
-            this.slidePiezas.SlideControl = null;
-            this.slidePiezas.TabIndex = 0;
-            // 
             // tsMenu
             // 
             this.tsMenu.BackColor = System.Drawing.Color.Silver;
@@ -1228,31 +788,12 @@
             this.tpDatos.ResumeLayout(false);
             this.gbCSCPMP.ResumeLayout(false);
             this.gbVer.ResumeLayout(false);
-            this.gbVer.PerformLayout();
             this.gbPartes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartes)).EndInit();
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudcosto)).EndInit();
             this.gbGuardarVolver.ResumeLayout(false);
-            this.tpConjuntos.ResumeLayout(false);
-            this.gbOC.ResumeLayout(false);
-            this.gbAC.ResumeLayout(false);
-            this.gbAC.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudC)).EndInit();
-            this.gbCE.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCE)).EndInit();
-            this.gbCD.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCD)).EndInit();
-            this.tpPiezas.ResumeLayout(false);
-            this.gbOP.ResumeLayout(false);
-            this.gbAP.ResumeLayout(false);
-            this.gbAP.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudP)).EndInit();
-            this.gbPE.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPE)).EndInit();
-            this.gbPD.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPD)).EndInit();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -1286,8 +827,6 @@
         private System.Windows.Forms.Button btnConjuntos;
         private System.Windows.Forms.Button btnPiezas;
         private System.Windows.Forms.GroupBox gbVer;
-        private System.Windows.Forms.CheckBox chkPieza;
-        private System.Windows.Forms.CheckBox chkConjunto;
         private System.Windows.Forms.Button btnArbol;
         private System.Windows.Forms.GroupBox gbPartes;
         private System.Windows.Forms.DataGridView dgvPartes;
@@ -1309,36 +848,6 @@
         private System.Windows.Forms.GroupBox gbGuardarVolver;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnVolver;
-        private SlickInterface.Slide slideDatos;
-        private SlickInterface.SlideControl slideControl;
-        private System.Windows.Forms.TabPage tpConjuntos;
-        private System.Windows.Forms.GroupBox gbOC;
-        private System.Windows.Forms.Button btnRC;
-        private System.Windows.Forms.Button btnSC;
-        private System.Windows.Forms.Button btnEC;
-        private System.Windows.Forms.GroupBox gbAC;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button btnAC;
-        private System.Windows.Forms.NumericUpDown nudC;
-        private System.Windows.Forms.GroupBox gbCE;
-        private System.Windows.Forms.DataGridView dgvCE;
-        private System.Windows.Forms.GroupBox gbCD;
-        private System.Windows.Forms.DataGridView dgvCD;
-        private SlickInterface.Slide slideConjuntos;
-        private System.Windows.Forms.TabPage tpPiezas;
-        private System.Windows.Forms.GroupBox gbOP;
-        private System.Windows.Forms.Button btnRP;
-        private System.Windows.Forms.Button btnSP;
-        private System.Windows.Forms.Button btnEP;
-        private System.Windows.Forms.GroupBox gbAP;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Button btnAP;
-        private System.Windows.Forms.NumericUpDown nudP;
-        private System.Windows.Forms.GroupBox gbPE;
-        private System.Windows.Forms.DataGridView dgvPE;
-        private System.Windows.Forms.GroupBox gbPD;
-        private System.Windows.Forms.DataGridView dgvPD;
-        private SlickInterface.Slide slidePiezas;
         private System.Windows.Forms.ToolStrip tsMenu;
         private System.Windows.Forms.ToolStripButton btnNuevo;
         private System.Windows.Forms.ToolStripButton btnConsultar;

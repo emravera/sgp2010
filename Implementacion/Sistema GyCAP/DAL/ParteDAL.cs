@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace GyCAP.DAL
 {
     public class ParteDAL
     {
+        public static readonly int CostoFijoChecked = 1;
+        public static readonly int CostoFijoUnChecked = 0;
+        
         public static void Insertar(Data.dsEstructuraProducto dsEstructura)
         {
             string sql = @"INSERT INTO [PARTES] 
@@ -21,13 +25,13 @@ namespace GyCAP.DAL
                         [tpar_codigo],
                         [te_codigo],
                         [hr_codigo]) 
-                        VALUES
-                       (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9) SELECT @@Identity";
+                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9) SELECT @@Identity";
 
-            object plano = DBNull.Value, terminacion = DBNull.Value;
+            object plano = DBNull.Value, terminacion = DBNull.Value, hojaRuta = DBNull.Value;
             Data.dsEstructuraProducto.PARTESRow rowParte = dsEstructura.PARTES.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructuraProducto.PARTESRow;
             if (!rowParte.IsPNO_CODIGONull()) { plano = rowParte.PNO_CODIGO; }
             if (!rowParte.IsTE_CODIGONull()) { terminacion = rowParte.TE_CODIGO; }
+            if (!rowParte.IsHR_CODIGONull()) { hojaRuta = rowParte.HR_CODIGO; }
 
             object[] parametros = { rowParte.PART_NOMBRE,
                                     rowParte.PART_DESCRIPCION,
@@ -38,43 +42,164 @@ namespace GyCAP.DAL
                                     rowParte.PAR_CODIGO,
                                     rowParte.TPAR_CODIGO,
                                     terminacion,
-                                    rowParte.HR_CODIGO };
+                                    hojaRuta };
+            
+            try
+            {
+                rowParte.BeginEdit();
+                rowParte.PART_NUMERO = Convert.ToInt32(DB.executeScalar(sql, parametros, null));
+                rowParte.EndEdit();                
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
 
-            SqlTransaction transaccion = null;
+        public static void Actualizar(Data.dsEstructuraProducto dsEstructura)
+        {
+            string sql = @"UPDATE PARTES SET
+                            part_nombre = @p0,
+                            part_descripcion = @p1,
+                            part_codigo = @p2,
+                            pno_codigo = @p3,
+                            part_costo = @p4,
+                            part_costofijo = @p5,
+                            par_codigo = @p6,
+                            tpar_codigo = @p7,
+                            te_codigo = @p8,
+                            hr_codigo = @p9 
+                            WHERE part_numero = @p10";
+
+            object plano = DBNull.Value, terminacion = DBNull.Value, hojaRuta = DBNull.Value;
+            Data.dsEstructuraProducto.PARTESRow rowParte = dsEstructura.PARTES.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructuraProducto.PARTESRow;
+            if (!rowParte.IsPNO_CODIGONull()) { plano = rowParte.PNO_CODIGO; }
+            if (!rowParte.IsTE_CODIGONull()) { terminacion = rowParte.TE_CODIGO; }
+            if (!rowParte.IsHR_CODIGONull()) { hojaRuta = rowParte.HR_CODIGO; }
+
+            object[] parametros = { rowParte.PART_NOMBRE,
+                                    rowParte.PART_DESCRIPCION,
+                                    rowParte.PART_CODIGO,
+                                    plano,
+                                    rowParte.PART_COSTO,
+                                    rowParte.PART_COSTOFIJO,
+                                    rowParte.PAR_CODIGO,
+                                    rowParte.TPAR_CODIGO,
+                                    terminacion,
+                                    hojaRuta,
+                                    rowParte.PART_NUMERO };
 
             try
             {
-                transaccion = DB.IniciarTransaccion();
-                //Insertamos la cabecera
-                rowParte.BeginEdit();
-                rowParte.PART_NUMERO = Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion));
-                rowParte.EndEdit();
-                //Insertamos los hijos
-                Entidades.CompuestoParte compuesto = new GyCAP.Entidades.CompuestoParte();
-                foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow row in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(null, null, System.Data.DataViewRowState.Added))
+                DB.executeNonQuery(sql, parametros, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static bool PuedeEliminarse(int numeroParte)
+        {
+            string sql1 = "SELECT count(estr_codigo) FROM ESTRUCTURAS WHERE part_numero = @p0";
+            string sql2 = "SELECT count(comp_codigo) FROM COMPUESTOS_PARTES WHERE part_numero_padre = @p0 OR part_numero_hijo = @p0";
+            object[] parametros = { numeroParte };
+
+            try
+            {
+                int r1 = Convert.ToInt32(DB.executeScalar(sql1, parametros, null));
+                int r2 = Convert.ToInt32(DB.executeScalar(sql2, parametros, null));
+                if (r1 + r2 == 0) { return true; }
+                else { return false; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static void Eliminar(int numeroParte)
+        {
+            string sql = "DELETE FROM PARTES WHERE part_numero = @p0";
+            object[] parametros = { numeroParte };
+
+            try
+            {
+                DB.executeNonQuery(sql, parametros, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static void ObtenerPartes(object nombre, object codigo, object terminacion, object tipo, object estado, object plano, DataTable dtPartes)
+        {
+            string sql = @"SELECT part_numero, part_nombre, part_descripcion, part_codigo, pno_codigo, part_costo,
+                            part_costofijo, par_codigo, tpar_codigo, te_codigo, hr_codigo FROM PARTES WHERE 1=1 ";
+
+            //Sirve para armar el nombre de los parámetros
+            int cantidadParametros = 0;
+            //Un array de object para ir guardando los valores de los filtros, con tamaño = cantidad de filtros disponibles
+            object[] valoresFiltros = new object[6];
+            //Empecemos a armar la consulta, revisemos que filtros aplican
+            if (nombre != null && nombre.ToString() != string.Empty)
+            {
+                //si aplica el filtro lo usamos
+                sql += " AND part_nombre LIKE @p" + cantidadParametros + " ";
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                nombre = "%" + nombre + "%";
+                valoresFiltros[cantidadParametros] = nombre;
+                cantidadParametros++;
+            }
+            if (codigo != null && codigo.ToString() != string.Empty)
+            {
+                //si aplica el filtro lo usamos
+                sql += " AND part_codigo LIKE @p" + cantidadParametros + " ";
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                codigo = "%" + codigo + "%";
+                valoresFiltros[cantidadParametros] = codigo;
+                cantidadParametros++;
+            }
+            //Revisamos si pasó algun valor y si es un integer
+            if (terminacion != null && terminacion.GetType() == cantidadParametros.GetType())
+            {
+                sql += " AND te_codigo = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(terminacion);
+                cantidadParametros++;
+            }
+            //Revisamos si pasó algun valor y si es un integer
+            if (tipo != null && tipo.GetType() == cantidadParametros.GetType())
+            {
+                sql += " AND tpar_codigo = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(tipo);
+                cantidadParametros++;
+            }
+            //Revisamos si pasó algun valor y si es un integer
+            if (estado != null && estado.GetType() == cantidadParametros.GetType())
+            {
+                sql += " AND par_codigo = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(estado);
+                cantidadParametros++;
+            }
+            //Revisamos si pasó algun valor y si es un integer
+            if (plano != null && plano.GetType() == cantidadParametros.GetType())
+            {
+                sql += " AND pno_codigo = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(plano);
+                cantidadParametros++;
+            }
+
+            if (cantidadParametros > 0)
+            {
+                //Buscamos con filtro, armemos el array de los valores de los parametros
+                object[] valorParametros = new object[cantidadParametros];
+                for (int i = 0; i < cantidadParametros; i++)
                 {
-                    //compuesto.PartePadre = Convert.ToInt32(rowParte.PART_NUMERO);
-                    //compuesto.
-                    
-                    //conjuntoE.CodigoEstructura = Convert.ToInt32(rowEstructura.ESTR_CODIGO);
-                    //conjuntoE.CodigoConjunto = Convert.ToInt32(row.CONJ_CODIGO);
-                    //conjuntoE.CantidadConjunto = Convert.ToInt32(row.CXE_CANTIDAD);
-                    //DAL.ConjuntoEstructuraDAL.Insertar(conjuntoE, transaccion);
-                    //row.BeginEdit();
-                    //row.CXE_CODIGO = conjuntoE.CodigoDetalle;
-                    //row.EndEdit();
+                    valorParametros[i] = valoresFiltros[i];
                 }
+                try
+                {
+                    DB.FillDataTable(dtPartes, sql, valorParametros);
+                }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
-            catch (SqlException ex)
+            else
             {
-                //Error en alguna consulta, descartamos los cambios
-                transaccion.Rollback();
-                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
-            }
-            finally
-            {
-                //En cualquier caso finalizamos la transaccion para que se cierre la conexion
-                DB.FinalizarTransaccion();
+                //Buscamos sin filtro
+                try
+                {
+                    DB.FillDataTable(dtPartes, sql, null);
+                }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
         }
     }

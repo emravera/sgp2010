@@ -11,7 +11,7 @@ namespace GyCAP.DAL
         public static readonly int EstructuraActiva = 1;
         public static readonly int EstructuraInactiva = 0;
         
-        public static void Insertar(Data.dsEstructura dsEstructura)
+        public static void Insertar(Data.dsEstructuraProducto dsEstructura)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
             string sqlInsert = @"INSERT INTO [ESTRUCTURAS]
@@ -29,7 +29,7 @@ namespace GyCAP.DAL
                                VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10) SELECT @@Identity";
 
             //obtenemos la estructura nueva del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
-            Data.dsEstructura.ESTRUCTURASRow rowEstructura = dsEstructura.ESTRUCTURAS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructura.ESTRUCTURASRow;
+            Data.dsEstructuraProducto.ESTRUCTURASRow rowEstructura = dsEstructura.ESTRUCTURAS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructuraProducto.ESTRUCTURASRow;
             //Controlemos los valores que pueden venir nulos
             object fechaModificacion = DBNull.Value, responsable = DBNull.Value, parte = DBNull.Value;
             if (!rowEstructura.IsESTR_FECHA_MODIFICACIONNull()) { fechaModificacion = rowEstructura.ESTR_FECHA_MODIFICACION.Date; }
@@ -61,34 +61,10 @@ namespace GyCAP.DAL
                 rowEstructura.EndEdit();
                 //Ahora insertamos su estructura, usamos el foreach para recorrer sólo los nuevos registros del dataset
 
-                #region InsertConjuntos
-                Entidades.ConjuntoEstructura conjuntoE = new GyCAP.Entidades.ConjuntoEstructura();
-                foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
-                {
-                    conjuntoE.CodigoEstructura = Convert.ToInt32(rowEstructura.ESTR_CODIGO);
-                    conjuntoE.CodigoConjunto = Convert.ToInt32(row.CONJ_CODIGO);
-                    conjuntoE.CantidadConjunto = Convert.ToInt32(row.CXE_CANTIDAD);
-                    DAL.ConjuntoEstructuraDAL.Insertar(conjuntoE, transaccion);                  
-                    row.BeginEdit();
-                    row.CXE_CODIGO = conjuntoE.CodigoDetalle;
-                    row.EndEdit();
-                }
+                #region InsertPartes
+                
                 #endregion
 
-                #region InsertPiezas
-                Entidades.PiezaEstructura piezaE = new GyCAP.Entidades.PiezaEstructura();
-                foreach (Data.dsEstructura.PIEZASXESTRUCTURARow row in (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
-                {
-                    piezaE.CodigoEstructura = Convert.ToInt32(rowEstructura.ESTR_CODIGO);
-                    piezaE.CodigoPieza = Convert.ToInt32(row.PZA_CODIGO);
-                    piezaE.CantidadPieza = Convert.ToInt32(row.PXE_CANTIDAD);
-                    PiezaEstructuraDAL.Insertar(piezaE, transaccion);
-                    row.BeginEdit();
-                    row.PXE_CODIGO = piezaE.CodigoDetalle;
-                    row.EndEdit();
-                }
-                #endregion
-                
                 //Todo ok, commit
                 transaccion.Commit();
             }
@@ -115,17 +91,14 @@ namespace GyCAP.DAL
             {
                 transaccion = DB.IniciarTransaccion();
                 //Primero los hijos
-                //MateriaPrimaEstructuraDAL.DeleteDetalleEstructura(codigoEstructura, transaccion); desactivado IT2
-                PiezaEstructuraDAL.DeleteDetalleEstructura(codigoEstructura, transaccion);
-                //SubconjuntoEstructuraDAL.DeleteDetalleEstructura(codigoEstructura, transaccion); desactivado IT2
-                ConjuntoEstructuraDAL.DeleteDetalleEstructura(codigoEstructura, transaccion);
+                
                 //Ahora el padre
                 DB.executeNonQuery(sql, valorParametros, transaccion);
             }
             catch(SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static void Actualizar(Data.dsEstructura dsEstructura)
+        public static void Actualizar(Data.dsEstructuraProducto dsEstructura)
         {
            string sql = @"UPDATE ESTRUCTURAS SET
                          coc_codigo = @p0
@@ -141,7 +114,7 @@ namespace GyCAP.DAL
                         ,part_numero = @p10
                         WHERE estr_codigo = @p11";
 
-           Data.dsEstructura.ESTRUCTURASRow rowEstructura = dsEstructura.ESTRUCTURAS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructura.ESTRUCTURASRow;
+           Data.dsEstructuraProducto.ESTRUCTURASRow rowEstructura = dsEstructura.ESTRUCTURAS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructuraProducto.ESTRUCTURASRow;
            //Controlemos los valores que pueden venir nulos
            object fechaModificacion = DBNull.Value, responsable = DBNull.Value, parte = DBNull.Value;
            if (!rowEstructura.IsESTR_FECHA_MODIFICACIONNull()) { fechaModificacion = rowEstructura.ESTR_FECHA_MODIFICACION.Date; }
@@ -175,66 +148,17 @@ namespace GyCAP.DAL
 
                 #region Inserts
                 
-                Entidades.ConjuntoEstructura cE = new GyCAP.Entidades.ConjuntoEstructura();
-                foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
-                {
-                    cE.CodigoEstructura = Convert.ToInt32(row.ESTR_CODIGO);
-                    cE.CodigoConjunto = Convert.ToInt32(row.CONJ_CODIGO);
-                    cE.CantidadConjunto = Convert.ToInt32(row.CXE_CANTIDAD);
-                    ConjuntoEstructuraDAL.Insertar(cE, transaccion);
-                    row.BeginEdit();
-                    row.CXE_CODIGO = cE.CodigoDetalle;
-                    row.EndEdit();
-                }
-
-                Entidades.PiezaEstructura pE = new GyCAP.Entidades.PiezaEstructura();
-                foreach (Data.dsEstructura.PIEZASXESTRUCTURARow row in (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Added))
-                {
-                    pE.CodigoEstructura = Convert.ToInt32(row.ESTR_CODIGO);
-                    pE.CodigoPieza = Convert.ToInt32(row.PZA_CODIGO);
-                    pE.CantidadPieza = Convert.ToInt32(row.PXE_CANTIDAD);
-                    PiezaEstructuraDAL.Insertar(pE, transaccion);
-                    row.BeginEdit();
-                    row.PXE_CODIGO = pE.CodigoDetalle;
-                    row.EndEdit();
-                }
-    
+                    
                 #endregion
 
                 #region Updates
                 
-                foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
-                {
-                    cE.CodigoDetalle = Convert.ToInt32(row.CXE_CODIGO);
-                    cE.CantidadConjunto = Convert.ToInt32(row.CXE_CANTIDAD);
-                    ConjuntoEstructuraDAL.Actualizar(cE, transaccion);
-                }
-
-                foreach (Data.dsEstructura.PIEZASXESTRUCTURARow row in (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
-                {
-                    pE.CodigoDetalle = Convert.ToInt32(row.PXE_CODIGO);
-                    pE.CantidadPieza = Convert.ToInt32(row.PXE_CANTIDAD);
-                    PiezaEstructuraDAL.Actualizar(pE, transaccion);
-                }
-
+               
                 #endregion
 
                 #region Deletes
 
-                foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow row in (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Deleted))
-                {
-                    //Como la fila está eliminada y no tiene datos, tenemos que acceder a la versión original
-                    cE.CodigoDetalle = Convert.ToInt32(row["cxe_codigo", System.Data.DataRowVersion.Original]);
-                    ConjuntoEstructuraDAL.Delete(cE, transaccion);
-                }
-
-                foreach (Data.dsEstructura.PIEZASXESTRUCTURARow row in (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select(null, null, System.Data.DataViewRowState.Deleted))
-                {
-                    //Como la fila está eliminada y no tiene datos, tenemos que acceder a la versión original
-                    pE.CodigoDetalle = Convert.ToInt32(row["pxe_codigo", System.Data.DataRowVersion.Original]);
-                    PiezaEstructuraDAL.Delete(pE, transaccion);
-                }
-
+                
                 #endregion
 
                 //Si todo resulto correcto, commit
@@ -254,7 +178,7 @@ namespace GyCAP.DAL
             }
         }
         
-        public static void ObtenerEstructuras(object nombre, object codPlano, object fechaCreacion, object codCocina, object codResponsable, object activoSiNo, Data.dsEstructura ds)
+        public static void ObtenerEstructuras(object nombre, object codPlano, object fechaCreacion, object codCocina, object codResponsable, object activoSiNo, Data.dsEstructuraProducto ds)
         {
             string sql = @"SELECT estr_codigo, estr_nombre, coc_codigo, pno_codigo, estr_descripcion, estr_activo, estr_fecha_alta, 
                            estr_fecha_modificacion, e_codigo, estr_costo, estr_costofijo, part_numero FROM ESTRUCTURAS WHERE 1=1 ";
@@ -328,7 +252,7 @@ namespace GyCAP.DAL
                 try
                 {
                     DB.FillDataSet(ds, "ESTRUCTURAS", sql, valorParametros);
-                    ObtenerDetalleEstructura(ds);
+                    //ObtenerDetalleEstructura(ds);
                 }
                 catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
@@ -338,7 +262,7 @@ namespace GyCAP.DAL
                 {
                     //Buscamos sin filtro
                     DB.FillDataSet(ds, "ESTRUCTURAS", sql, null);
-                    ObtenerDetalleEstructura(ds);
+                    //ObtenerDetalleEstructura(ds);
                 }
                 catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }

@@ -12,7 +12,7 @@ namespace GyCAP.UI.EstructuraProducto
     public partial class frmEstructuraCocina : Form
     {
         private static frmEstructuraCocina _frmEstructuraCocina = null;
-        private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
+        private Data.dsEstructuraProducto dsEstructura = new GyCAP.Data.dsEstructuraProducto();
         private Data.dsCocina dsCocina = new GyCAP.Data.dsCocina();
         private Data.dsEmpleado dsEmpleado = new GyCAP.Data.dsEmpleado();
         private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
@@ -23,7 +23,6 @@ namespace GyCAP.UI.EstructuraProducto
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
-        private int slideActual = 0; //0-Datos, 1-Conjuntos, 2-Piezas
         private int cxe = -1, pxe = -1; //Variables para el manejo de inserciones en los dataset con códigos unique
 
         #region Inicio
@@ -33,7 +32,6 @@ namespace GyCAP.UI.EstructuraProducto
             InitializeComponent();
 
             SetGrillasCombosVistas();
-            SetSlide();
             SetInterface(estadoUI.inicio);
         }
 
@@ -125,8 +123,8 @@ namespace GyCAP.UI.EstructuraProducto
         {
             try
             {                
-                dsEstructura.PIEZASXESTRUCTURA.Clear();                
-                dsEstructura.CONJUNTOSXESTRUCTURA.Clear();
+                dsEstructura.PARTES.Clear();                
+                dsEstructura.COMPUESTOS_PARTES.Clear();
                 dsEstructura.ESTRUCTURAS.Clear();
                 BLL.EstructuraBLL.ObtenerEstructuras(txtNombreBuscar.Text, cbPlanoBuscar.GetSelectedValue(), dtpFechaAltaBuscar.GetFecha(), cbCocinaBuscar.GetSelectedValue(), cbResponsableBuscar.GetSelectedValue(), ((Sistema.Item)cbActivoBuscar.SelectedItem).Value, dsEstructura);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
@@ -168,7 +166,7 @@ namespace GyCAP.UI.EstructuraProducto
                     //Creando uno nuevo
                     try
                     {
-                        Data.dsEstructura.ESTRUCTURASRow rowEstructura = dsEstructura.ESTRUCTURAS.NewESTRUCTURASRow();
+                        Data.dsEstructuraProducto.ESTRUCTURASRow rowEstructura = dsEstructura.ESTRUCTURAS.NewESTRUCTURASRow();
                         rowEstructura.BeginEdit();
                         rowEstructura.ESTR_CODIGO = -1;
                         rowEstructura.ESTR_NOMBRE = txtNombre.Text;
@@ -188,9 +186,7 @@ namespace GyCAP.UI.EstructuraProducto
                         dsEstructura.ESTRUCTURAS.AddESTRUCTURASRow(rowEstructura);
                         BLL.EstructuraBLL.Insertar(dsEstructura);
                         dsEstructura.ESTRUCTURAS.AcceptChanges();
-                        dsEstructura.CONJUNTOSXESTRUCTURA.AcceptChanges();
-                        dsEstructura.PIEZASXESTRUCTURA.AcceptChanges();
-
+                        
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
                         if (estadoInterface == estadoUI.nuevoExterno)
                         {
@@ -255,317 +251,28 @@ namespace GyCAP.UI.EstructuraProducto
         private void btnVolver_Click(object sender, EventArgs e)
         {
             //Descartamos los cambios realizamos hasta el momento sin guardar
-            dsEstructura.PIEZASXESTRUCTURA.RejectChanges();
-            dsEstructura.CONJUNTOSXESTRUCTURA.RejectChanges();
+            dsEstructura.COMPUESTOS_PARTES.RejectChanges();
+            dsEstructura.PARTES.RejectChanges();
             dsEstructura.ESTRUCTURAS.RejectChanges();
-            dsEstructura.LISTA_PARTES.Clear();
+            //dsEstructura.LISTA_PARTES.Clear();
             SetInterface(estadoUI.inicio);
-        }
+        }        
 
-        private void chkVer(object sender, EventArgs e)
-        {
-            string filtro = string.Empty, mostrar = string.Empty;
-            if (chkConjunto.Checked) { mostrar += "'Conjunto'"; }            
-            if (chkPieza.Checked && mostrar != string.Empty) { mostrar += ",'Pieza'"; }
-            else if (chkPieza.Checked && mostrar == string.Empty) { mostrar += "'Pieza'"; }           
-            filtro = "PAR_TIPO IN (" + mostrar + ")";
-            if (mostrar != string.Empty) { dvPartes.RowFilter = filtro; }
-            else { dvPartes.RowFilter = "PAR_TIPO = 'ocultar todo'"; }
-        }
-
-        #endregion
-
-        #region Conjuntos
-
-        private void btnAC_Click(object sender, EventArgs e)
-        {
-            if (dgvCD.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0 && nudC.Value > 0)
-            {
-                bool agregarConjunto; //variable que indica si se debe agregar el conjunto al listado
-                //Obtenemos el código del conjunto según sea nuevo o modificado, lo hacemos acá porque lo vamos a usar mucho
-                int codigoEstructura;
-                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { codigoEstructura = -1; }
-                else { codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]); }
-                //Obtenemos el código del conjunto, también lo vamos a usar mucho
-                int codigoConjunto = Convert.ToInt32(dvCD[dgvCD.SelectedRows[0].Index]["conj_codigo"]);
-
-                //Primero vemos si la estructura tiene algún conjunto cargado, como ya hemos filtrado el dataview
-                //esté sabrá decirnos cuantas filas tiene la estructura seleccionado                
-                if (dvCE.Count > 0)
-                {
-                    //Algo tiene, comprobemos que no intente agregar el mismo conjunto haciendo una consulta al dataset,
-                    //no usamos el dataview porque no queremos volver a filtrar los datos y perderlos
-                    string filtro = "estr_codigo = " + codigoEstructura + " AND conj_codigo = " + codigoConjunto;
-                    Data.dsEstructura.CONJUNTOSXESTRUCTURARow[] rows =
-                        (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select(filtro);
-                    if (rows.Length > 0)
-                    {
-                        //Ya lo ha agregado, preguntemos si quiere aumentar la cantidad existente o descartar
-                        DialogResult respuesta = MessageBox.Show("La estructura ya posee el conjunto seleccionado. ¿Desea sumar la cantidad ingresada?", "Pregunta: Confirmar acción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (respuesta == DialogResult.Yes)
-                        {
-                            //Sumemos la cantidad ingresada a la existente, como hay una sola fila seleccionamos la 0 del array
-                            rows[0].CXE_CANTIDAD += nudC.Value;
-                            if (!chkFijo.Checked)
-                            {
-                                nudcosto.Value += (nudC.Value * rows[0].CONJUNTOSRow.CONJ_COSTO);
-                            }
-                        }
-                        //Como ya existe marcamos que no debe agregarse
-                        agregarConjunto = false;
-                    }
-                    else
-                    {
-                        //No lo ha agregado, marcamos que debe agregarse
-                        agregarConjunto = true;
-                    }
-                }
-                else
-                {
-                    //No tiene ningún conjunto agregado, marcamos que debe agregarse
-                    agregarConjunto = true;
-                }
-
-                //Ahora comprobamos si debe agregarse el conjunto o no
-                if (agregarConjunto)
-                {
-                    Data.dsEstructura.CONJUNTOSXESTRUCTURARow row = dsEstructura.CONJUNTOSXESTRUCTURA.NewCONJUNTOSXESTRUCTURARow();
-                    row.BeginEdit();
-                    //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
-                    row.CXE_CODIGO = cxe--; //-- para que se vaya autodecrementando en cada inserción
-                    row.ESTR_CODIGO = codigoEstructura;
-                    row.CONJ_CODIGO = codigoConjunto;
-                    row.CXE_CANTIDAD = nudC.Value;
-                    row.EndEdit();
-                    //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
-                    //todavia no vamos a insertar en la db hasta que no haga Guardar
-                    dsEstructura.CONJUNTOSXESTRUCTURA.AddCONJUNTOSXESTRUCTURARow(row);
-                    if (!chkFijo.Checked)
-                    {
-                        nudcosto.Value += (row.CONJUNTOSRow.CONJ_COSTO * row.CXE_CANTIDAD);
-                    }
-                }
-                nudC.Value = 0;
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar un Conjunto de la lista y asignarle un valor mayor a 0.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void btnEC_Click(object sender, EventArgs e)
-        {
-            if (dgvCE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
-            {
-                //Obtenemos el código
-                int codigoC = Convert.ToInt32(dvCE[dgvCE.SelectedRows[0].Index]["cxe_codigo"]);
-                //Lo borramos pero sólo del dataset
-                if (!chkFijo.Checked)
-                {
-                    nudcosto.Value -= dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoC).CONJUNTOSRow.CONJ_COSTO * dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoC).CXE_CANTIDAD;
-                }
-                dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoC).Delete();                
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar un Conjunto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void btnSC_Click(object sender, EventArgs e)
-        {
-            if (dgvCE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
-            {
-                int codigoCXE = Convert.ToInt32(dvCE[dgvCE.SelectedRows[0].Index]["cxe_codigo"]);
-                dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CXE_CANTIDAD += 1;
-                if (!chkFijo.Checked)
-                {
-                    nudcosto.Value += dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CONJUNTOSRow.CONJ_COSTO;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar un Conjunto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void btnRC_Click(object sender, EventArgs e)
-        {
-            if (dgvCE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
-            {
-                int codigoCXE = Convert.ToInt32(dvCE[dgvCE.SelectedRows[0].Index]["cxe_codigo"]);
-                if (dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CXE_CANTIDAD > 1)
-                {
-                    dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CXE_CANTIDAD -= 1;
-                    if (!chkFijo.Checked)
-                    {
-                        nudcosto.Value -= dsEstructura.CONJUNTOSXESTRUCTURA.FindByCXE_CODIGO(codigoCXE).CONJUNTOSRow.CONJ_COSTO;
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar un Conjunto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        #endregion
-
-        #region Piezas
-
-        private void btnAP_Click(object sender, EventArgs e)
-        {
-            if (dgvPD.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0 && nudP.Value > 0)
-            {
-                bool agregarPieza;
-                int codigoEstructura;
-                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { codigoEstructura = -1; }
-                else { codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]); }
-                int codigoPieza = Convert.ToInt32(dvPD[dgvPD.SelectedRows[0].Index]["pza_codigo"]);
-
-                if (dvPE.Count > 0)
-                {
-                    string filtro = "estr_codigo = " + codigoEstructura + " AND pza_codigo = " + codigoPieza;
-                    Data.dsEstructura.PIEZASXESTRUCTURARow[] rows =
-                        (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select(filtro);
-                    if (rows.Length > 0)
-                    {
-                        DialogResult respuesta = MessageBox.Show("La estructura ya posee la pieza seleccionada. ¿Desea sumar la cantidad ingresada?", "Pregunta: Confirmar acción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (respuesta == DialogResult.Yes)
-                        {
-                            rows[0].PXE_CANTIDAD += nudP.Value;
-                            if (!chkFijo.Checked) { nudcosto.Value += (nudP.Value * rows[0].PXE_CANTIDAD); }
-                        }
-                        agregarPieza = false;
-                    }
-                    else
-                    {
-                        agregarPieza = true;
-                    }
-                }
-                else
-                {
-                    agregarPieza = true;
-                }
-
-                if (agregarPieza)
-                {
-                    Data.dsEstructura.PIEZASXESTRUCTURARow row = dsEstructura.PIEZASXESTRUCTURA.NewPIEZASXESTRUCTURARow();
-                    row.BeginEdit();
-                    row.PXE_CODIGO = pxe--;
-                    row.ESTR_CODIGO = codigoEstructura;
-                    row.PZA_CODIGO = codigoPieza;
-                    row.PXE_CANTIDAD = nudP.Value;
-                    row.EndEdit();
-                    dsEstructura.PIEZASXESTRUCTURA.AddPIEZASXESTRUCTURARow(row);
-                    if (!chkFijo.Checked)
-                    {
-                        nudcosto.Value += (row.PXE_CANTIDAD * row.PIEZASRow.PZA_COSTO);
-                    }
-                }
-                nudP.Value = 0;
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar una Pieza de la lista y asignarle un valor mayor a 0.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void btnEP_Click(object sender, EventArgs e)
-        {
-            if (dgvPE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
-            {
-                int codigoP = Convert.ToInt32(dvPE[dgvPE.SelectedRows[0].Index]["pxe_codigo"]);
-                if (!chkFijo.Checked)
-                {
-                    nudcosto.Value -= (dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoP).PIEZASRow.PZA_COSTO * dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoP).PXE_CANTIDAD);
-                }
-                dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoP).Delete();
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar una Pieza de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void btnSP_Click(object sender, EventArgs e)
-        {
-            if (dgvPE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
-            {
-                int codigoPXE = Convert.ToInt32(dvPE[dgvPE.SelectedRows[0].Index]["pxe_codigo"]);
-                dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoPXE).PXE_CANTIDAD += 1;
-                if (!chkFijo.Checked)
-                {
-                    nudcosto.Value += dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoPXE).PIEZASRow.PZA_COSTO;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar una Pieza de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void btnRP_Click(object sender, EventArgs e)
-        {
-            if (dgvPE.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
-            {
-                int codigoPXE = Convert.ToInt32(dvPE[dgvPE.SelectedRows[0].Index]["pxe_codigo"]);
-                if (dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoPXE).PXE_CANTIDAD > 1)
-                {
-                    dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoPXE).PXE_CANTIDAD -= 1;
-                    if (!chkFijo.Checked)
-                    {
-                        nudcosto.Value -= dsEstructura.PIEZASXESTRUCTURA.FindByPXE_CODIGO(codigoPXE).PIEZASRow.PZA_COSTO;
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar una Pieza de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        #endregion
-
-        #region SlideControl
+        #endregion    
 
         private void btnDatos_Click(object sender, EventArgs e)
         {
-            if (slideActual != 0)
-            {
-                slideControl.BackwardTo("slideDatos");
-                SetBotones(0, btnDatos);
-                SetBotones(1, btnConjuntos);
-                SetBotones(1, btnPiezas);
-                slideActual = 0;
-                CargarListaPartes();
-            }
+            
         }
 
         private void btnConjuntos_Click(object sender, EventArgs e)
         {
-            if (slideActual != 1)
-            {
-                if (slideActual > 1) { slideControl.BackwardTo("slideConjuntos"); }
-                else { slideControl.ForwardTo("slideConjuntos"); }
-                SetBotones(-1, btnDatos);
-                SetBotones(0, btnConjuntos);
-                SetBotones(1, btnPiezas);
-                slideActual = 1;
-            }
+            
         }
 
         private void btnPiezas_Click(object sender, EventArgs e)
         {
-            if (slideActual != 2)
-            {
-                if (slideActual > 2) { slideControl.BackwardTo("slidePiezas"); }
-                else { slideControl.ForwardTo("slidePiezas"); }
-                SetBotones(-1, btnDatos);
-                SetBotones(-1, btnConjuntos);
-                SetBotones(0, btnPiezas);
-                slideActual = 2;
-            }
+            
         }
 
         private void SetBotones(int orientacion, Button boton)
@@ -586,28 +293,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             boton.TextImageRelation = TextImageRelation.TextBeforeImage;
         }
-
-        private void SetSlide()
-        {
-            gbDatos.Parent = slideDatos;
-            gbPartes.Parent = slideDatos;
-            gbVer.Parent = slideDatos;
-            gbCD.Parent = slideConjuntos;
-            gbAC.Parent = slideConjuntos;
-            gbCE.Parent = slideConjuntos;
-            gbOC.Parent = slideConjuntos;
-            gbPD.Parent = slidePiezas;
-            gbAP.Parent = slidePiezas;
-            gbPE.Parent = slidePiezas;
-            gbOP.Parent = slidePiezas;
-            slideControl.AddSlide(slideDatos);
-            slideControl.AddSlide(slideConjuntos);
-            slideControl.AddSlide(slidePiezas);
-            slideControl.Selected = slideDatos;
-        }
-
-        #endregion SlideControl
-
+        
         #region Servicios
 
         //Setea la pantalla de acuerdo al estado en que se encuentre
@@ -632,7 +318,6 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = hayDatos;
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
-                    slideControl.Selected = slideDatos;
                     tcEstructuraCocina.SelectedTab = tpBuscar;
                     break;
                 case estadoUI.nuevo:
@@ -661,7 +346,7 @@ namespace GyCAP.UI.EstructuraProducto
                     chkFijo.Enabled = true;
                     chkFijo.Checked = false;
                     txtDescripcion.Clear();
-                    dsEstructura.LISTA_PARTES.Clear();
+                    //dsEstructura.LISTA_PARTES.Clear();
                     dvCE.RowFilter = "ESTR_CODIGO = -1";
                     dvPE.RowFilter = "ESTR_CODIGO = -1";
                     btnGuardar.Enabled = true;
@@ -670,13 +355,8 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
-                    gbAC.Enabled = true;
-                    gbAP.Enabled = true;
-                    gbOC.Enabled = true;
-                    gbOP.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
-                    CargarCSCPMP();
-                    slideControl.Selected = slideDatos;
+                    //CargarCSCPMP();
                     tcEstructuraCocina.SelectedTab = tpDatos;
                     btnDatos.PerformClick();
                     break;
@@ -705,7 +385,7 @@ namespace GyCAP.UI.EstructuraProducto
                     nudcosto.Value = 0;
                     chkFijo.Enabled = true;
                     chkFijo.Checked = false;
-                    dsEstructura.LISTA_PARTES.Clear();
+                    //dsEstructura.LISTA_PARTES.Clear();
                     dvCE.RowFilter = "ESTR_CODIGO = -1";
                     dvPE.RowFilter = "ESTR_CODIGO = -1";
                     btnGuardar.Enabled = true;
@@ -714,13 +394,8 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
-                    gbAC.Enabled = true;
-                    gbAP.Enabled = true;
-                    gbOC.Enabled = true;
-                    gbOP.Enabled = true;
                     estadoInterface = estadoUI.nuevoExterno;
-                    CargarCSCPMP();
-                    slideControl.Selected = slideDatos;
+                    //CargarCSCPMP();
                     tcEstructuraCocina.SelectedTab = tpDatos;
                     btnDatos.PerformClick();
                     break;
@@ -741,14 +416,9 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = true;
                     btnModificar.Enabled = true;
                     btnEliminar.Enabled = true;
-                    gbAC.Enabled = false;
-                    gbAP.Enabled = false;
-                    gbOC.Enabled = false;
-                    gbOP.Enabled = false;
                     estadoInterface = estadoUI.consultar;
-                    CargarCSCPMP();
-                    CargarListaPartes();
-                    slideControl.Selected = slideDatos;
+                    //CargarCSCPMP();
+                    //CargarListaPartes();
                     btnDatos.PerformClick();
                     tcEstructuraCocina.SelectedTab = tpDatos;
                     break;
@@ -769,14 +439,9 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
-                    gbAC.Enabled = true;
-                    gbAP.Enabled = true;
-                    gbOC.Enabled = true;
-                    gbOP.Enabled = true;
                     estadoInterface = estadoUI.modificar;
-                    CargarCSCPMP();
-                    CargarListaPartes();
-                    slideControl.Selected = slideDatos;
+                    //CargarCSCPMP();
+                    //CargarListaPartes();
                     btnDatos.PerformClick();
                     tcEstructuraCocina.SelectedTab = tpDatos;
                     break;
@@ -789,7 +454,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             if (sender.GetType().Equals(txtNombre.GetType())) { (sender as TextBox).SelectAll(); }
             if (sender.GetType().Equals(txtDescripcion.GetType())) { (sender as RichTextBox).SelectAll(); }
-            if (sender.GetType().Equals(nudC.GetType())) { (sender as NumericUpDown).Select(0, 20); }
+            //if (sender.GetType().Equals(nudC.GetType())) { (sender as NumericUpDown).Select(0, 20); }
         }
 
         private void SetGrillasCombosVistas()
@@ -875,7 +540,7 @@ namespace GyCAP.UI.EstructuraProducto
             dvResponsable.Sort = "E_APELLIDO ASC, E_NOMBRE ASC";
             dvPlano = new DataView(dsEstructura.PLANOS);
             dvPlano.Sort = "PNO_NOMBRE ASC";
-            dvPartes = new DataView(dsEstructura.LISTA_PARTES);
+            //dvPartes = new DataView(dsEstructura.LISTA_PARTES);
             dgvPartes.DataSource = dvPartes;
 
             //ComboBoxs
@@ -888,84 +553,10 @@ namespace GyCAP.UI.EstructuraProducto
 
             #endregion Datos
 
-            #region Conjuntos
-            //Grilla Listado Conjuntos Disponibles
-            dgvCD.AutoGenerateColumns = false;
-            dgvCD.Columns.Add("CONJ_CODIGOPARTE", "Código");
-            dgvCD.Columns.Add("CONJ_NOMBRE", "Nombre");
-            dgvCD.Columns.Add("CONJ_COSTO", "Costo");
-            dgvCD.Columns.Add("CONJ_DESCRIPCION", "Descripción");
-            dgvCD.Columns["CONJ_CODIGOPARTE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCD.Columns["CONJ_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCD.Columns["CONJ_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCD.Columns["CONJ_DESCRIPCION"].Resizable = DataGridViewTriState.True;
-            dgvCD.Columns["CONJ_CODIGOPARTE"].DataPropertyName = "CONJ_CODIGOPARTE";
-            dgvCD.Columns["CONJ_NOMBRE"].DataPropertyName = "CONJ_NOMBRE";
-            dgvCD.Columns["CONJ_COSTO"].DataPropertyName = "CONJ_COSTO";
-            dgvCD.Columns["CONJ_DESCRIPCION"].DataPropertyName = "CONJ_DESCRIPCION";
-
-            //Grilla Listado Conjuntos en Estructura
-            dgvCE.AutoGenerateColumns = false;
-            dgvCE.Columns.Add("CONJ_CODIGOPARTE", "Código");
-            dgvCE.Columns.Add("CONJ_NOMBRE", "Nombre");
-            dgvCE.Columns.Add("CXE_CANTIDAD", "Cantidad");
-            dgvCE.Columns["CXE_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvCE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dgvCE.Columns["CONJ_CODIGOPARTE"].DataPropertyName = "CONJ_CODIGO";
-            dgvCE.Columns["CONJ_NOMBRE"].DataPropertyName = "CONJ_CODIGO";
-            dgvCE.Columns["CXE_CANTIDAD"].DataPropertyName = "CXE_CANTIDAD";
-
-            //Dataviews
-            dvCD = new DataView(dsEstructura.CONJUNTOS);
-            dvCD.Sort = "CONJ_NOMBRE ASC";
-            dvCE = new DataView(dsEstructura.CONJUNTOSXESTRUCTURA);
-            dgvCD.DataSource = dvCD;
-            dgvCE.DataSource = dvCE;
-            #endregion Conjuntos
-
-            #region Piezas
-            //Grilla listado de piezas disponibles
-            dgvPD.AutoGenerateColumns = false;
-            dgvPD.Columns.Add("PZA_CODIGOPARTE", "Código");
-            dgvPD.Columns.Add("PZA_NOMBRE", "Nombre");
-            dgvPD.Columns.Add("TE_NOMBRE", "Terminación");
-            dgvPD.Columns.Add("PZA_COSTO", "Costo");
-            dgvPD.Columns.Add("PZA_DESCRIPCION", "Descripción");
-            dgvPD.Columns["PZA_CODIGOPARTE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPD.Columns["PZA_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPD.Columns["TE_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPD.Columns["PZA_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPD.Columns["PZA_DESCRIPCION"].Resizable = DataGridViewTriState.True;
-            dgvPD.Columns["PZA_CODIGOPARTE"].DataPropertyName = "PZA_CODIGOPARTE";
-            dgvPD.Columns["PZA_NOMBRE"].DataPropertyName = "PZA_NOMBRE";
-            dgvPD.Columns["TE_NOMBRE"].DataPropertyName = "TE_CODIGO";
-            dgvPD.Columns["PZA_COSTO"].DataPropertyName = "PZA_COSTO";
-            dgvPD.Columns["PZA_DESCRIPCION"].DataPropertyName = "PZA_DESCRIPCION";
-
-            //Grilla Listado piezas en Estructura
-            dgvPE.AutoGenerateColumns = false;
-            dgvPE.Columns.Add("PZA_CODIGOPARTE", "Código");
-            dgvPE.Columns.Add("PZA_NOMBRE", "Nombre");
-            dgvPE.Columns.Add("TE_NOMBRE", "Terminación");
-            dgvPE.Columns.Add("PXE_CANTIDAD", "Cantidad");
-            dgvPE.Columns["PXE_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvPE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dgvPE.Columns["PZA_CODIGOPARTE"].DataPropertyName = "PZA_CODIGO";
-            dgvPE.Columns["PZA_NOMBRE"].DataPropertyName = "PZA_CODIGO";
-            dgvPE.Columns["TE_NOMBRE"].DataPropertyName = "PZA_CODIGO";
-            dgvPE.Columns["PXE_CANTIDAD"].DataPropertyName = "PXE_CANTIDAD";
-
-            //Dataviews
-            dvPD = new DataView(dsEstructura.PIEZAS);
-            dvPD.Sort = "PZA_NOMBRE ASC";
-            dvPE = new DataView(dsEstructura.PIEZASXESTRUCTURA);
-            dgvPD.DataSource = dvPD;
-            dgvPE.DataSource = dvPE;
-            #endregion Piezas
-
+      
         }
 
-        private void CargarListaPartes()
+        /*private void CargarListaPartes()
         {
             dsEstructura.LISTA_PARTES.Clear();
             int codigoEstructura = 0;
@@ -1005,27 +596,13 @@ namespace GyCAP.UI.EstructuraProducto
             }
 
             dvPartes.Table = dsEstructura.LISTA_PARTES;
-        }
+        }*/
 
         private void frmEstructuraCocina_Activated(object sender, EventArgs e)
         {
             if (txtNombreBuscar.Enabled) { txtNombreBuscar.Focus(); }
         }
-
-        private void CargarCSCPMP()
-        {
-            try
-            {
-                BLL.ConjuntoBLL.ObtenerConjuntos(dsEstructura.CONJUNTOS, BLL.ConjuntoBLL.estadoActivo);
-                BLL.PiezaBLL.ObtenerPiezas(dsEstructura.PIEZAS, BLL.PiezaBLL.estadoActivo);
-                BLL.UnidadMedidaBLL.ObtenerTodos(dsUnidadMedida.UNIDADES_MEDIDA);
-            }
-            catch (Entidades.Excepciones.BaseDeDatosException ex)
-            {
-                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Carga de partes", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
+        
         private decimal CalcularCosto()
         {
             decimal costo = 0;
@@ -1033,7 +610,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { codigoEstructura = -1; }
             else { codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]); }
 
-            foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow row in
+            /*foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow row in
                 (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select("ESTR_CODIGO = " + codigoEstructura))
             {
                 costo += (row.CONJUNTOSRow.CONJ_COSTO * row.CXE_CANTIDAD);
@@ -1043,7 +620,7 @@ namespace GyCAP.UI.EstructuraProducto
                 (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select("ESTR_CODIGO = " + codigoEstructura))
             {
                 costo += (row.PIEZASRow.PZA_COSTO * row.PXE_CANTIDAD);
-            }
+            }*/
 
             return costo;
         }
@@ -1089,74 +666,6 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
-        private void dgvCD_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            
-        }
-
-        private void dgvCE_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.Value.ToString() != string.Empty)
-            {
-                string nombre;
-                int codigo;
-                switch (dgvCE.Columns[e.ColumnIndex].Name)
-                {
-                    case "CONJ_CODIGOPARTE":
-                        codigo = Convert.ToInt32(e.Value.ToString());
-                        nombre = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigo).CONJ_CODIGOPARTE;
-                        e.Value = nombre;
-                        break;
-                    case "CONJ_NOMBRE":
-                        codigo = Convert.ToInt32(e.Value.ToString());
-                        nombre = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigo).CONJ_NOMBRE;
-                        e.Value = nombre;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
-        private void dgvPD_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.Value.ToString() != string.Empty)
-            {
-                string nombre;
-                if (dgvPD.Columns[e.ColumnIndex].Name == "TE_NOMBRE")
-                {
-                    nombre = dsEstructura.TERMINACIONES.FindByTE_CODIGO(Convert.ToInt32(e.Value.ToString())).TE_NOMBRE;
-                    e.Value = nombre;
-                }
-            }
-        }
-
-        private void dgvPE_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            string nombre;
-            int codigo;
-            switch (dgvPE.Columns[e.ColumnIndex].Name)
-            {
-                case "PZA_CODIGOPARTE":
-                    codigo = Convert.ToInt32(e.Value.ToString());
-                    nombre = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigo).PZA_CODIGOPARTE;
-                    e.Value = nombre;
-                    break;
-                case "PZA_NOMBRE":
-                    codigo = Convert.ToInt32(e.Value.ToString());
-                    nombre = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigo).PZA_NOMBRE;
-                    e.Value = nombre;
-                    break;
-                case "TE_NOMBRE":
-                    codigo = Convert.ToInt32(e.Value.ToString());
-                    nombre = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigo).TERMINACIONESRow.TE_NOMBRE;
-                    e.Value = nombre;
-                    break;
-                default:
-                    break;
-            }
-        }
-
         private void dgvEstructuras_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             int codEstructura = Convert.ToInt32(dvEstructuras[e.RowIndex]["estr_codigo"]);
@@ -1178,9 +687,7 @@ namespace GyCAP.UI.EstructuraProducto
             txtDescripcion.Text = dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_DESCRIPCION;
             nudcosto.Value = dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_COSTO;
             if (dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_COSTOFIJO == 0) { chkFijo.Checked = false; }
-            else { chkFijo.Checked = true; }
-            dvCE.RowFilter = "ESTR_CODIGO = " + codEstructura;
-            dvPE.RowFilter = "ESTR_CODIGO = " + codEstructura;
+            else { chkFijo.Checked = true; }            
         }
 
         #endregion
