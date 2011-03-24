@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades.Mensajes;
 
 namespace GyCAP.UI.EstructuraProducto
 {
@@ -84,7 +85,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Tipo de parte", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
+                DialogResult respuesta = MensajesABM.MsjConfirmaEliminarDatos("Tipo de parte", MensajesABM.Generos.Masculino, this.Text);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -99,17 +100,17 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
+                        MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Tipo de parte", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
+                MensajesABM.MsjSinSeleccion("Tipo de parte", MensajesABM.Generos.Masculino, this.Text);
             }
         }
 
@@ -195,11 +196,11 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
@@ -219,23 +220,22 @@ namespace GyCAP.UI.EstructuraProducto
                         dsTipoParte.TIPOS_PARTES.FindByTPAR_CODIGO(tipoParte.Codigo).TPAR_PRODUCTOTERMINADO = tipoParte.ProductoTerminado;
                         dsTipoParte.TIPOS_PARTES.FindByTPAR_CODIGO(tipoParte.Codigo).EndEdit();
                         dsTipoParte.TIPOS_PARTES.AcceptChanges();
-                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Tipo de Parte", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
+                        MensajesABM.MsjConfirmaGuardar("Tipo de Parte", this.Text, MensajesABM.Operaciones.Modificación);
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.ElementoInexistenteException ex)
                     {
-                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
                     }
                 }
             }
             else
             {
-                string msg = Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, validacion);
-                Entidades.Mensajes.MensajesABM.MsjValidacion(msg, this.Text);
+                MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.CompletarDatos, validacion), this.Text);
             }
         }
 
@@ -365,7 +365,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Inicio);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
             }
 
             //Grilla 

@@ -74,10 +74,11 @@
             this.btnInventarioABC = new System.Windows.Forms.ToolStripButton();
             this.tsbPlanMantenimeinto = new System.Windows.Forms.ToolStripButton();
             this.btnEntregaProducto = new System.Windows.Forms.ToolStripButton();
+            this.tipoParte = new System.Windows.Forms.ToolStripButton();
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.tipoParte = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -448,7 +449,8 @@
             this.btnInventarioABC,
             this.tsbPlanMantenimeinto,
             this.btnEntregaProducto,
-            this.tipoParte});
+            this.tipoParte,
+            this.toolStripButton1});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(792, 36);
@@ -504,6 +506,16 @@
             this.btnEntregaProducto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEntregaProducto.Click += new System.EventHandler(this.btnEntregaProducto_Click);
             // 
+            // tipoParte
+            // 
+            this.tipoParte.Image = ((System.Drawing.Image)(resources.GetObject("tipoParte.Image")));
+            this.tipoParte.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tipoParte.Name = "tipoParte";
+            this.tipoParte.Size = new System.Drawing.Size(55, 33);
+            this.tipoParte.Text = "tipoParte";
+            this.tipoParte.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tipoParte.Click += new System.EventHandler(this.tipoParte_Click);
+            // 
             // barraEstado
             // 
             this.barraEstado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -520,14 +532,15 @@
             this.lblEstado.Size = new System.Drawing.Size(38, 17);
             this.lblEstado.Text = "Status";
             // 
-            // tipoParte
+            // toolStripButton1
             // 
-            this.tipoParte.Image = ((System.Drawing.Image)(resources.GetObject("tipoParte.Image")));
-            this.tipoParte.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tipoParte.Name = "tipoParte";
-            this.tipoParte.Size = new System.Drawing.Size(71, 33);
-            this.tipoParte.Text = "tipoParte";
-            this.tipoParte.Click += new System.EventHandler(this.tipoParte_Click);
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(42, 33);
+            this.toolStripButton1.Text = "partes";
+            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // frmPrincipal
             // 
@@ -605,6 +618,7 @@
         private System.Windows.Forms.ToolStripButton tsbPlanMantenimeinto;
         private System.Windows.Forms.ToolStripButton btnEntregaProducto;
         private System.Windows.Forms.ToolStripButton tipoParte;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 

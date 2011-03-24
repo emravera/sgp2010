@@ -10,7 +10,7 @@ namespace GyCAP.BLL
         public static readonly int EstructuraActiva = 1;
         public static readonly int EstructuraInactiva = 0;
         
-        public static void Insertar(Data.dsEstructura ds)
+        public static void Insertar(Data.dsEstructuraProducto ds)
         {
             DAL.EstructuraDAL.Insertar(ds);
         }
@@ -38,12 +38,12 @@ namespace GyCAP.BLL
             }*/
         }
 
-        public static void Actualizar(Data.dsEstructura ds)
+        public static void Actualizar(Data.dsEstructuraProducto ds)
         {
             DAL.EstructuraDAL.Actualizar(ds);
         }
         
-        public static void ObtenerEstructuras(object nombre, object codPlano, object fechaCreacion, object codCocina, object codResponsable, object activoSiNo, Data.dsEstructura ds)
+        public static void ObtenerEstructuras(object nombre, object codPlano, object fechaCreacion, object codCocina, object codResponsable, object activoSiNo, Data.dsEstructuraProducto ds)
         {
             object plano = null, cocina = null, responsable = null, activo = null;
             if (codPlano != null && Convert.ToInt32(codPlano.ToString()) > 0) { plano = codPlano; }

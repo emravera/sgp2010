@@ -12,7 +12,7 @@ namespace GyCAP.DAL
         public static void ObtenerTodos(DataTable dtTiposPartes)
         {
             string sql = @"SELECT tpar_codigo, tpar_nombre, tpar_descripcion, tpar_productoterminado, tpar_fantasma, 
-                                  tpar_ordentrabajo, tar_ensamblado, par_adquirido FROM TIPOS_PARTES";
+                                  tpar_ordentrabajo, tpar_ensamblado, tpar_adquirido FROM TIPOS_PARTES";
 
             try
             {
@@ -96,14 +96,8 @@ namespace GyCAP.DAL
 
             try
             {
-                if (Convert.ToInt32(DB.executeScalar(sql, parametros, null)) == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                if (Convert.ToInt32(DB.executeScalar(sql, parametros, null)) == 0) { return true; }
+                else { return false; }
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
