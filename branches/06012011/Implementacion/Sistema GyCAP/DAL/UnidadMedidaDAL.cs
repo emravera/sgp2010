@@ -94,11 +94,20 @@ namespace GyCAP.DAL
         //Metodo que verifica que no este usado en otro lugar
         public static bool PuedeEliminarse(int codigo)
         {
-            string sql = "SELECT count(umed_codigo) FROM MATERIAS_PRIMAS WHERE umed_codigo = @p0";
+            string sql1 = "SELECT count(umed_codigo) FROM MATERIAS_PRIMAS WHERE umed_codigo = @p0";
+            string sql2 = "SELECT count(umed_codigo) FROM PARTES WHERE umed_codigo = @p0";
+            string sql3 = "SELECT count(umed_codigo) FROM COMPUESTOS_PARTES WHERE umed_codigo = @p0";
+            string sql4 = "SELECT count(umed_codigo) FROM DETALLE_PLANES_MANTENIMIENTO WHERE umed_codigo = @p0";
+            string sql5 = "SELECT count(umed_codigo) FROM UBICACIONES_STOCK WHERE umed_codigo = @p0";
             object[] valorParametros = { codigo };
             try
             {
-                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
+                int r1 = Convert.ToInt32(DB.executeScalar(sql1, valorParametros, null));
+                int r2 = Convert.ToInt32(DB.executeScalar(sql2, valorParametros, null));
+                int r3 = Convert.ToInt32(DB.executeScalar(sql3, valorParametros, null));
+                int r4 = Convert.ToInt32(DB.executeScalar(sql4, valorParametros, null));
+                int r5 = Convert.ToInt32(DB.executeScalar(sql5, valorParametros, null));
+                if (r1 + r2 + r3 + r4 + r5 == 0)
                 {
                     return true;
                 }

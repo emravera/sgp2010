@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace GyCAP.DAL
 {
     public class CompuestoParteDAL
     {
+        public static readonly int HijoEsParte = 1;
+        public static readonly int HijoEsMP = 2;
+        
         public static void Insertar(Entidades.CompuestoParte compuesto, SqlTransaction transaccion)
         {
             string sql = @"INSERT INTO [COMPUESTOS_PARTES] 
@@ -45,6 +49,20 @@ namespace GyCAP.DAL
             DB.executeNonQuery(sql, parametros, transaccion);
         }
 
+        public static void ObtenerCompuestosEstructura(int codigoEstructura, DataTable dtCompuestos_Partes)
+        {
+            string sql = @"SELECT comp_codigo, part_numero_padre, part_numero_hijo, mp_codigo, comp_cantidad, umed_codigo, estr_codigo  
+                        FROM COMPUESTOS_PARTES WHERE estr_codigo = @p0";
+            object[] parametros = { codigoEstructura };
+
+            try
+            {
+                DB.FillDataTable(dtCompuestos_Partes, sql, parametros);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            
+        }
+        
         public static void ObtenerCompuestosParte(int codigoPartePadre, Data.dsEstructuraProducto dsEstructura)
         {
             string sql = @"SELECT comp_codigo, part_numero_padre, part_numero_hijo, mp_codigo, comp_cantidad, umed_codigo 
