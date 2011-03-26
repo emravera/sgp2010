@@ -49,5 +49,13 @@ namespace GyCAP.Entidades
             get { return unidadMedida; }
             set { unidadMedida = value; }
         }
+
+        private Estructura estructura;
+
+        public Estructura Estructura
+        {
+            get { return estructura; }
+            set { estructura = value; }
+        }
     }
 }

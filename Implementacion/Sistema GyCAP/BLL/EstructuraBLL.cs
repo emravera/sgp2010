@@ -45,12 +45,11 @@ namespace GyCAP.BLL
         
         public static void ObtenerEstructuras(object nombre, object codPlano, object fechaCreacion, object codCocina, object codResponsable, object activoSiNo, Data.dsEstructuraProducto ds)
         {
-            object plano = null, cocina = null, responsable = null, activo = null;
-            if (codPlano != null && Convert.ToInt32(codPlano.ToString()) > 0) { plano = codPlano; }
-            if (codCocina != null && Convert.ToInt32(codCocina.ToString()) > 0) { cocina = codCocina; }
-            if (codResponsable != null && Convert.ToInt32(codResponsable.ToString()) > 0) { responsable = codResponsable; }
-            if (activoSiNo != null && Convert.ToInt32(activoSiNo) > -1) { activo = activoSiNo; }
-            DAL.EstructuraDAL.ObtenerEstructuras(nombre, plano, fechaCreacion, cocina, responsable, activo, ds);
+            if (Convert.ToInt32(codPlano.ToString()) <= 0) { codPlano = null; }
+            if (Convert.ToInt32(codCocina.ToString()) <= 0) { codCocina = null; }
+            if (Convert.ToInt32(codResponsable.ToString()) <= 0) { codResponsable = null; }
+            if (Convert.ToInt32(activoSiNo) < 0) { activoSiNo = null; }
+            DAL.EstructuraDAL.ObtenerEstructuras(nombre, codPlano, fechaCreacion, codCocina, codResponsable, activoSiNo, ds);
         }
 
         public static void ObtenerEstructura(int codigoEstructura, Data.dsEstructura ds, bool detalle)
