@@ -22,7 +22,8 @@ namespace GyCAP.UI.EstructuraProducto
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
-        private int compId = -1; //Variables para el manejo de inserciones en los dataset con códigos unique
+        private int compId = -1; //Variable para el manejo de inserciones en los dataset con códigos unique
+        private int columnIndex = -1; //Variable para manejar el menu contextual para bloquear columnas
 
         #region Inicio
 
@@ -80,7 +81,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvEstructuras.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la Estructura seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = MensajesABM.MsjConfirmaEliminarDatos("Estructura", MensajesABM.Generos.Femenino, this.Text);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -90,16 +91,21 @@ namespace GyCAP.UI.EstructuraProducto
                         //Lo eliminamos de la DB
                         BLL.EstructuraBLL.Eliminar(codigo);
                         //Lo eliminamos del dataset
+                        foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow row in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codigo))
+                        {
+                            row.Delete();
+                        }
                         dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigo).Delete();
                         dsEstructura.ESTRUCTURAS.AcceptChanges();
+                        MensajesABM.MsjConfirmaEliminar(this.Text, MensajesABM.Operaciones.Eliminación);
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
@@ -147,15 +153,15 @@ namespace GyCAP.UI.EstructuraProducto
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisemos que completó todos los datos obligatorios          
-            string datosFaltantes = string.Empty;
-            if (txtNombre.Text == string.Empty) { datosFaltantes += "* Nombre\n"; }
-            if (cbPlano.GetSelectedIndex() == -1) { datosFaltantes += "* Plano\n"; }
-            if (cbCocina.GetSelectedIndex() == -1) { datosFaltantes += "* Cocina\n"; }
+            List<string> validacion = new List<string>();
+            if (txtNombre.Text == string.Empty) { validacion.Add("Nombre"); }
+            if (cbPlano.GetSelectedIndex() == -1) { validacion.Add("Plano"); }
+            if (cbCocina.GetSelectedIndex() == -1) { validacion.Add("Cocina"); }
             //if (cbResponsable.GetSelectedIndex() == -1) { datosOK = false; datosFaltantes += "\\n* Responsable"; } Por ahora opcional
             //if (dtpFechaAlta.IsValueNull()) { dtpFechaAlta.SetFecha(BLL.DBBLL.GetFechaServidor()); } Opcional por ahora
-            if (dgvPartesEstructura.Rows.Count == 0) { datosFaltantes += "* El detalle de la estructura\n"; } //que al menos haya cargado 1 parte
-            if (cbEstado.GetSelectedIndex() == -1) { datosFaltantes += "* Estado\n"; }
-            if (datosFaltantes == string.Empty)
+            if (dgvPartesEstructura.Rows.Count == 0) { validacion.Add("El detalle de la estructura"); } //que al menos haya cargado 1 parte
+            if (cbEstado.GetSelectedIndex() == -1) { validacion.Add("Estado"); }
+            if (validacion.Count == 0)
             {
                 //Datos OK, revisemos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
@@ -181,7 +187,7 @@ namespace GyCAP.UI.EstructuraProducto
                         rowEstructura.ESTR_COSTOFIJO = (chkFijo.Checked) ? 1 : 0;
                         rowEstructura.EndEdit();
                         dsEstructura.ESTRUCTURAS.AddESTRUCTURASRow(rowEstructura);
-                        BLL.EstructuraBLL.Insertar(dsEstructura);
+                        BLL.EstructuraBLL.Insertar(dsEstructura);                        
                         dsEstructura.ESTRUCTURAS.AcceptChanges();
                         
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
@@ -201,7 +207,7 @@ namespace GyCAP.UI.EstructuraProducto
                         //Hubo problemas con la BD, descartamos los cambios de estructuras ya que puede intentar
                         //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
                         dsEstructura.ESTRUCTURAS.RejectChanges();
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
                     }
                 }
                 else
@@ -224,7 +230,7 @@ namespace GyCAP.UI.EstructuraProducto
                         dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_COSTO = nudcosto.Value;
                         dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_COSTOFIJO = (chkFijo.Checked) ? 1 : 0;
                         BLL.EstructuraBLL.Actualizar(dsEstructura);
-                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MensajesABM.MsjConfirmaGuardar("Estructura", this.Text, MensajesABM.Operaciones.Modificación);
 
                         SetInterface(estadoUI.inicio);
                     }
@@ -233,14 +239,14 @@ namespace GyCAP.UI.EstructuraProducto
                         //Hubo problemas con la BD, descartamos los cambios de estructuras ya que puede intentar
                         //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
                         dsEstructura.ESTRUCTURAS.RejectChanges();
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
                     }
                 }
             }
             else
             {
                 //le faltan completar datos, avisemos
-                MessageBox.Show("Debe completar los datos:\n\n" + datosFaltantes, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.CompletarDatos, validacion), this.Text);
             }
 
         }
@@ -249,11 +255,31 @@ namespace GyCAP.UI.EstructuraProducto
         {
             //Descartamos los cambios realizamos hasta el momento sin guardar
             dsEstructura.COMPUESTOS_PARTES.RejectChanges();
-            dsEstructura.PARTES.RejectChanges();
             dsEstructura.ESTRUCTURAS.RejectChanges();
-            //dsEstructura.LISTA_PARTES.Clear();
             SetInterface(estadoUI.inicio);
-        }        
+        }
+
+        private decimal CalcularCosto()
+        {
+            decimal costo = 0;
+            int codigoEstructura = 0;
+            if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { codigoEstructura = -1; }
+            else { codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]); }
+
+            foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow row in
+                (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select("ESTR_CODIGO = " + codigoEstructura))
+            {
+                costo += row.COMP_CANTIDAD * ((row.IsMP_CODIGONull()) ? row.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_COSTO : row.MATERIAS_PRIMASRow.MP_COSTO);
+            }
+
+            return costo;
+        }
+
+        private void chkFijo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!chkFijo.Checked) { nudcosto.Value = CalcularCosto(); }
+            else { nudcosto.Value = 0; }
+        }
 
         #endregion    
 
@@ -261,6 +287,14 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnVolverDePartes_Click(object sender, EventArgs e)
         {
+            if (!chkFijo.Checked)
+            {
+                nudcosto.Value = CalcularCosto();
+                if (estadoInterface == estadoUI.modificar)
+                {
+                    dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"])).ESTR_COSTO = nudcosto.Value;
+                }
+            }
             tcEstructuraProducto.SelectedTab = tpDatos;
         }
 
@@ -274,6 +308,8 @@ namespace GyCAP.UI.EstructuraProducto
                     //Condiciones:
                     //              - que el padre no sea ella misma
                     //              - que el padre no sea una MP
+                    //              - si ya está, avisar y preguntar si quiere aumentar la cantidad ingresada
+                    //              - que ella misma no sea ancestro
                     int numeroParte = Convert.ToInt32(dvPartesDisponibles[dgvPartesDisponibles.SelectedRows[0].Index]["part_numero"]);
                     AgregarParteAArbol(dsEstructura.PARTES.FindByPART_NUMERO(numeroParte), null);
                 }
@@ -290,6 +326,7 @@ namespace GyCAP.UI.EstructuraProducto
                     //Condiciones:
                     //              - que no sea una raíz
                     //              - que no sea hija de otra MP
+                    //              - si ya está, avisar y preguntar si quiere aumentar la cantidad ingresada
                     int codigoMP = Convert.ToInt32(dvMPDisponibles[dgvMPDisponibles.SelectedRows[0].Index]["mp_codigo"]);
                     AgregarParteAArbol(null, dsEstructura.MATERIAS_PRIMAS.FindByMP_CODIGO(codigoMP));
                 }
@@ -306,51 +343,67 @@ namespace GyCAP.UI.EstructuraProducto
             if (tvEstructura.Nodes.Count != 0 && nudCantidadAgregar.Value == 0) { validacion.Add("Cantidad"); }
             if (tvEstructura.Nodes.Count != 0 && tvEstructura.SelectedNode == null) { validacion.Add("Parte padre"); }
             if (tvEstructura.Nodes.Count == 0 && rowParte == null) { validacion.Add("Una materia prima no puede ser raíz"); }
+            if (tvEstructura.SelectedNode != null && rowParte != null && Convert.ToInt32(tvEstructura.SelectedNode.Tag) == BLL.CompuestoParteBLL.HijoEsMP) { validacion.Add("Una parte no puede ser hijo de una materia prima"); }
             if (tvEstructura.SelectedNode != null && 
                 rowParte != null && 
                 Convert.ToInt32(tvEstructura.SelectedNode.Tag) == BLL.CompuestoParteBLL.HijoEsParte && 
                 tvEstructura.SelectedNode.Parent != null && 
-                rowParte.PART_NUMERO == dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToDecimal(tvEstructura.SelectedNode.Name)).PART_NUMERO_HIJO) { validacion.Add("Una parte no puede ser padre e hijo al mismo tiempo"); }
-            if (tvEstructura.SelectedNode != null && rowParte != null && Convert.ToInt32(tvEstructura.SelectedNode.Tag) == BLL.CompuestoParteBLL.HijoEsMP) { validacion.Add("Una parte no puede ser hijo de una materia prima"); }
+                EsMismoPadreHijo(rowParte, tvEstructura.SelectedNode)) { validacion.Add("Una parte no puede ser padre e hijo al mismo tiempo"); }
             if (tvEstructura.SelectedNode != null && rowMP != null && Convert.ToInt32(tvEstructura.SelectedNode.Tag) == BLL.CompuestoParteBLL.HijoEsMP) { validacion.Add("Una materia prima no puede ser hijo de una materia prima"); }
 
             if (validacion.Count == 0)
             {
-                TreeNode nodoHijo = null;
-                //Creamos el nodo hijo                
-                if (rowParte != null)
+                Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowComp = EstaAgregada(rowParte, rowMP, tvEstructura.SelectedNode);
+                if (rowComp == null)
                 {
-                    //Estoy agregando una parte
-                    nodoHijo = new TreeNode();
-                    nodoHijo.Name = compId.ToString();
-                    nodoHijo.Text = rowParte.PART_NOMBRE + " - " + rowParte.PART_CODIGO;
-                    if (tvEstructura.Nodes.Count != 0) { nodoHijo.Text += " / #" + nudCantidadAgregar.Value.ToString() + " " + rowParte.UNIDADES_MEDIDARow.UMED_ABREVIATURA; }
-                    nodoHijo.Tag = BLL.CompuestoParteBLL.HijoEsParte;
-                    AgregarParteADataset(rowParte, null, (tvEstructura.SelectedNode != null) ? tvEstructura.SelectedNode.Name : null);
-                }
-                else
-                {
-                    //Estoy agregando una mp
-                    nodoHijo = new TreeNode();
-                    nodoHijo.Name = compId.ToString();
-                    nodoHijo.Text = rowMP.MP_NOMBRE + " / #" + nudCantidadAgregar.Value.ToString() + " " + rowMP.UNIDADES_MEDIDARow.UMED_ABREVIATURA;
-                    nodoHijo.Tag = BLL.CompuestoParteBLL.HijoEsMP;
-                    AgregarParteADataset(null, rowMP, (tvEstructura.SelectedNode != null) ? tvEstructura.SelectedNode.Name : null);
-                }
+                    TreeNode nodoHijo = null;
+                    //Creamos el nodo hijo                
+                    if (rowParte != null)
+                    {
+                        //Estoy agregando una parte
+                        nodoHijo = new TreeNode();
+                        nodoHijo.Name = compId.ToString();
+                        nodoHijo.Text = rowParte.PART_NOMBRE + " - " + rowParte.PART_CODIGO;
+                        if (tvEstructura.Nodes.Count != 0) { nodoHijo.Text += " / #" + nudCantidadAgregar.Value.ToString() + " " + rowParte.UNIDADES_MEDIDARow.UMED_ABREVIATURA; }
+                        nodoHijo.Tag = BLL.CompuestoParteBLL.HijoEsParte;
+                        AgregarParteADataset(rowParte, null, (tvEstructura.SelectedNode != null) ? tvEstructura.SelectedNode.Name : null);
+                    }
+                    else
+                    {
+                        //Estoy agregando una mp
+                        nodoHijo = new TreeNode();
+                        nodoHijo.Name = compId.ToString();
+                        nodoHijo.Text = rowMP.MP_NOMBRE + " / #" + nudCantidadAgregar.Value.ToString() + " " + rowMP.UNIDADES_MEDIDARow.UMED_ABREVIATURA;
+                        nodoHijo.Tag = BLL.CompuestoParteBLL.HijoEsMP;
+                        AgregarParteADataset(null, rowMP, (tvEstructura.SelectedNode != null) ? tvEstructura.SelectedNode.Name : null);
+                    }
 
-                //Verificamos si es el primer nodo que se agrega o ya existe algo para determinar el padre
-                if (tvEstructura.Nodes.Count > 0)
-                {
-                    tvEstructura.SelectedNode.Nodes.Add(nodoHijo);
-                    tvEstructura.SelectedNode.Expand();
+                    //Verificamos si es el primer nodo que se agrega o ya existe algo para determinar el padre
+                    if (tvEstructura.Nodes.Count > 0)
+                    {
+                        tvEstructura.SelectedNode.Nodes.Add(nodoHijo);
+                        tvEstructura.SelectedNode.Expand();
+                    }
+                    else
+                    {
+                        tvEstructura.Nodes.Add(nodoHijo);
+                    }
+                    nudCantidadAgregar.Value = 0;
                 }
                 else
                 {
-                    tvEstructura.Nodes.Add(nodoHijo);
-                    AgregarParteADataset(rowParte, null, null);
+                    string pregunta = "La " + ((rowParte != null) ? "parte" : "materia prima") + " seleccionada ya se encuentra agregada.";
+                    pregunta += "\n\n¿Desea sumar la cantidad ingresada?";
+                    if (MensajesABM.MsjPreguntaAlUsuario(pregunta, this.Text) == DialogResult.Yes)
+                    {
+                        rowComp.COMP_CANTIDAD += nudCantidadAgregar.Value;
+                        string texto = ((rowComp.IsMP_CODIGONull()) ? rowComp.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE + " - " + rowComp.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_CODIGO : rowComp.MATERIAS_PRIMASRow.MP_NOMBRE);
+                        texto += " / #" + rowComp.COMP_CANTIDAD.ToString();
+                        texto += " " + rowComp.UNIDADES_MEDIDARow.UMED_ABREVIATURA;
+                        tvEstructura.Nodes.Find(rowComp.COMP_CODIGO.ToString(), true)[0].Text = texto;
+                        nudCantidadAgregar.Value = 0;
+                    }
                 }
-                nudCantidadAgregar.Value = 0;
-                tvEstructura.SelectedNode = null;
             }
             else
             {
@@ -360,36 +413,61 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void AgregarParteADataset(Data.dsEstructuraProducto.PARTESRow rowParte, Data.dsEstructuraProducto.MATERIAS_PRIMASRow rowMP, object padre)
         {
-            if (padre != null)
+            Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuesto = dsEstructura.COMPUESTOS_PARTES.NewCOMPUESTOS_PARTESRow();
+            rowCompuesto.BeginEdit();
+            rowCompuesto.COMP_CODIGO = compId;
+            compId--;
+            if (padre != null) { rowCompuesto.COMP_CANTIDAD = nudCantidadAgregar.Value; }
+            else { rowCompuesto.COMP_CANTIDAD = 1; }
+            if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { rowCompuesto.ESTR_CODIGO = -1; }
+            else { rowCompuesto.ESTR_CODIGO = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]); }
+            if (padre == null) { rowCompuesto.SetPART_NUMERO_PADRENull(); }
+            else { rowCompuesto.PART_NUMERO_PADRE = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(padre)).PART_NUMERO_HIJO; }
+            
+            if (rowParte != null)
             {
-                Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuesto = dsEstructura.COMPUESTOS_PARTES.NewCOMPUESTOS_PARTESRow();
-                rowCompuesto.BeginEdit();
-                rowCompuesto.COMP_CODIGO = compId;
-                compId--;
-                rowCompuesto.COMP_CANTIDAD = nudCantidadAgregar.Value;
-                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { rowCompuesto.ESTR_CODIGO = -1; }
-                else { rowCompuesto.ESTR_CODIGO = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]); }
-                rowCompuesto.PART_NUMERO_PADRE = Convert.ToInt32(padre);
-                if (rowParte != null)
-                {
-                    rowCompuesto.SetMP_CODIGONull();
-                    rowCompuesto.PART_NUMERO_HIJO = rowParte.PART_NUMERO;
-                    rowCompuesto.UMED_CODIGO = rowParte.UMED_CODIGO;
-                }
-                else
-                {
-                    rowCompuesto.SetPART_NUMERO_HIJONull();
-                    rowCompuesto.MP_CODIGO = rowMP.MP_CODIGO;
-                    rowCompuesto.UMED_CODIGO = rowMP.UMED_CODIGO;
-                }
-                rowCompuesto.EndEdit();
-                dsEstructura.COMPUESTOS_PARTES.AddCOMPUESTOS_PARTESRow(rowCompuesto);
+                rowCompuesto.SetMP_CODIGONull();
+                rowCompuesto.PART_NUMERO_HIJO = rowParte.PART_NUMERO;
+                rowCompuesto.UMED_CODIGO = rowParte.UMED_CODIGO;
             }
             else
             {
-                int codEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]);
-                dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).PART_NUMERO = rowParte.PART_NUMERO;
+                rowCompuesto.SetPART_NUMERO_HIJONull();
+                rowCompuesto.MP_CODIGO = rowMP.MP_CODIGO;
+                rowCompuesto.UMED_CODIGO = rowMP.UMED_CODIGO;
             }
+            rowCompuesto.EndEdit();
+            dsEstructura.COMPUESTOS_PARTES.AddCOMPUESTOS_PARTESRow(rowCompuesto);
+        }
+
+        private Data.dsEstructuraProducto.COMPUESTOS_PARTESRow EstaAgregada(Data.dsEstructuraProducto.PARTESRow rowParte, Data.dsEstructuraProducto.MATERIAS_PRIMASRow rowMP, TreeNode nodoPadre)
+        {
+            string filtro = string.Empty;
+            if (rowParte != null && nodoPadre != null)
+            {
+                filtro = "PART_NUMERO_PADRE = " + dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(nodoPadre.Name)).PART_NUMERO_HIJO.ToString();
+                filtro += " AND PART_NUMERO_HIJO = " + rowParte.PART_NUMERO.ToString();
+            }
+            if (rowMP != null && nodoPadre != null)
+            {
+                filtro = "PART_NUMERO_PADRE = " + dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(nodoPadre.Name)).PART_NUMERO_HIJO.ToString();
+                filtro += " AND MP_CODIGO = " + rowMP.MP_CODIGO.ToString();
+            }
+            Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[] parte = (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(filtro);
+            if (parte.Length > 0) { return parte[0]; }
+            return null;
+        }
+
+        private bool EsMismoPadreHijo(Data.dsEstructuraProducto.PARTESRow rowParte, TreeNode selectedNode)
+        {
+            bool encontrado = false;
+            TreeNode nodo = selectedNode;
+            while (nodo != null)
+            {
+                if (rowParte.PART_NUMERO == dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(nodo.Name)).PART_NUMERO_HIJO) { encontrado = true; }
+                nodo = nodo.Parent;
+            }
+            return encontrado;
         }
 
         private void btnDeleteParte_Click(object sender, EventArgs e)
@@ -398,25 +476,26 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 foreach (TreeNode nodo in tvEstructura.SelectedNode.Nodes)
                 {
-                    dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(nodo.Name)).Delete();
+                    EliminarNodos(nodo);
                 }
 
-                if (tvEstructura.SelectedNode.Parent != null)
-                {
-                    dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).Delete();
-                }
-                else
-                {
-                    int codEstr = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]);
-                    dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstr).SetPART_NUMERONull();
-                }
-
+                dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).Delete();
                 tvEstructura.SelectedNode.Remove();
             }
             else
             {
                 MensajesABM.MsjSinSeleccion("Parte", MensajesABM.Generos.Femenino, this.Text);
             }
+        }
+
+        private void EliminarNodos(TreeNode nodoSelected)
+        {
+            foreach (TreeNode nodo in nodoSelected.Nodes)
+            {
+                EliminarNodos(nodo);
+            }
+            dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(nodoSelected.Name)).Delete();
+            nodoSelected.Remove();
         }
 
         private void btnSumarParte_Click(object sender, EventArgs e)
@@ -505,12 +584,7 @@ namespace GyCAP.UI.EstructuraProducto
         private void btnPartes_Click(object sender, EventArgs e)
         {
             tcEstructuraProducto.SelectedTab = tpPartes;
-        }
-
-        private void btnPiezas_Click(object sender, EventArgs e)
-        {
-            
-        }
+        }        
 
         private void SetBotones(int orientacion, Button boton)
         {
@@ -591,9 +665,9 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    dvListaPartes.RowFilter = "estr_codigo = -1";
                     estadoInterface = estadoUI.nuevo;
                     tcEstructuraProducto.SelectedTab = tpDatos;
-                    btnDatos.PerformClick();
                     break;
                 case estadoUI.nuevoExterno:
                     txtNombre.ReadOnly = false;
@@ -628,9 +702,9 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    dvListaPartes.RowFilter = "estr_codigo = -1";
                     estadoInterface = estadoUI.nuevoExterno;
                     tcEstructuraProducto.SelectedTab = tpDatos;
-                    btnDatos.PerformClick();
                     break;
                 case estadoUI.consultar:
                     txtNombre.ReadOnly = true;
@@ -652,7 +726,6 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = true;
                     btnEliminar.Enabled = true;
                     estadoInterface = estadoUI.consultar;
-                    btnDatos.PerformClick();
                     tcEstructuraProducto.SelectedTab = tpDatos;
                     break;
                 case estadoUI.modificar:
@@ -675,7 +748,6 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.modificar;
-                    btnDatos.PerformClick();
                     tcEstructuraProducto.SelectedTab = tpDatos;
                     break;
                 default:
@@ -706,6 +778,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
 
             #region Buscar
+
             //Grilla Listado Estructuras
             dgvEstructuras.AutoGenerateColumns = false;
             dgvEstructuras.Columns.Add("ESTR_NOMBRE", "Nombre");
@@ -837,27 +910,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         }
         
-        private decimal CalcularCosto()
-        {
-            decimal costo = 0;
-            int codigoEstructura = 0;
-            if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { codigoEstructura = -1; }
-            else { codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]); }
-
-            foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow row in
-                (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select("ESTR_CODIGO = " + codigoEstructura))
-            {
-                costo += (row.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_COSTO * row.COMP_CANTIDAD);
-            }
-
-            return costo;
-        }
-
-        private void chkFijo_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!chkFijo.Checked) { nudcosto.Value = CalcularCosto(); }
-            else { nudcosto.Value = 0; }
-        }
+        
 
         private void CrearArbol(int codigoEstructura)
         {
@@ -1014,7 +1067,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         #endregion
 
-        #region Look & Feel
+        #region Efecto botones y control enter
 
         private void button_MouseDown(object sender, MouseEventArgs e)
         {
@@ -1040,6 +1093,10 @@ namespace GyCAP.UI.EstructuraProducto
             if (sender.GetType().Equals(txtDescripcion.GetType())) { (sender as RichTextBox).SelectAll(); }
             if (sender.GetType().Equals(nudcosto.GetType())) { (sender as NumericUpDown).Select(0, 20); }
         }
+
+        #endregion
+
+        #region Filtros grillas
 
         private void txtFiltroNombreMP_TextChanged(object sender, EventArgs e)
         {
@@ -1083,9 +1140,43 @@ namespace GyCAP.UI.EstructuraProducto
 
         #endregion
 
-        
+        #region Menú bloquear columnas
 
-        
+        private void tsmiBloquearColumna_Click(object sender, EventArgs e)
+        {
+            if (columnIndex != -1) { dgvPartesDisponibles.Columns[columnIndex].Frozen = true; }
+        }
+
+        private void tsmiDesbloquearColumna_Click(object sender, EventArgs e)
+        {
+            if (columnIndex != -1) { dgvPartesDisponibles.Columns[columnIndex].Frozen = false; }
+        }
+
+        private void dgvPartesDisponibles_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex > -1)
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    columnIndex = e.ColumnIndex;
+                    if (dgvPartesDisponibles.Columns[columnIndex].Frozen)
+                    {
+                        tsmiBloquearColumna.Checked = true;
+                        tsmiDesbloquearColumna.Checked = false;
+                    }
+                    else
+                    {
+                        tsmiBloquearColumna.Checked = false;
+                        tsmiDesbloquearColumna.Checked = true;
+                    }
+                    cmsGrillaOrdenesProduccion.Show(MousePosition);
+                }
+            }
+        }
+
+        #endregion
+
+
 
     }
 }
