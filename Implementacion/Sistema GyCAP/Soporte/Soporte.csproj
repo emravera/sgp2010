@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E62237F2-4821-4526-BE7C-45263EE307C5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -78,6 +78,12 @@
     <Compile Include="frmSoporte.Designer.cs">
       <DependentUpon>frmSoporte.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTipoRepuesto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTipoRepuesto.Designer.cs">
+      <DependentUpon>frmTipoRepuesto.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTipoUnidadMedida.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +111,9 @@
     <EmbeddedResource Include="frmSoporte.resx">
       <DependentUpon>frmSoporte.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTipoRepuesto.resx">
+      <DependentUpon>frmTipoRepuesto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTipoUnidadMedida.resx">
       <DependentUpon>frmTipoUnidadMedida.cs</DependentUpon>
