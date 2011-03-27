@@ -179,11 +179,22 @@ namespace GyCAP.Entidades.Mensajes
         /// Mensaje fallo en la validacion (Con mensajes estándares)
         /// </summary>
         /// <param name="validacion">String con el mensaje de los errores</param>
-        /// <param name="nombreFormulario">El nombre del formulario (this.Text)</param>
-        
+        /// <param name="nombreFormulario">El nombre del formulario (this.Text)</param>        
         public static void MsjValidacion(string validacion, string nombreFormulario)
         {
             MessageBox.Show(validacion, nombreFormulario + " - Información: Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        //9-Mensaje para efectuar una pregunta al usuario
+        /// <summary>
+        /// Mensaje para efectuar una pregunta al usuario, la pregunta es personalizable.
+        /// </summary>
+        /// <param name="pregunta">La pregunta que se desea realizar al usuario</param>
+        /// <param name="nombreFormulario">El nombre del formulario (this.Text)</param>
+        /// <returns>El elemento de la enumeracion DialogResult correspondiente </returns>  
+        public static DialogResult MsjPreguntaAlUsuario(string pregunta, string nombreFormulario)
+        {            
+            return MessageBox.Show(pregunta, nombreFormulario + " - Pregunta: Seleccionar opción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);            
         }
 
     }
