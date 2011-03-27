@@ -31,7 +31,7 @@ namespace GyCAP.Entidades.Mensajes
                     case Validaciones.Seleccion:
                         foreach (string dato in datos)
                         {
-                            lista = lista + "-" + dato + "\n";
+                            lista = lista + "- " + dato + "\n";
                         }
                         
                         mensaje= "Debe seleccionar un elemento en los siguientes combos:\n\n" + lista;
@@ -40,7 +40,7 @@ namespace GyCAP.Entidades.Mensajes
                     case Validaciones.CompletarDatos:
                         foreach (string dato in datos)
                         {
-                            lista = lista + "-" + dato + "\n";
+                            lista = lista + "- " + dato + "\n";
                         }
                         mensaje = mensaje + "Debe completar los siguientes datos:\n\n" + lista;
      
@@ -49,7 +49,7 @@ namespace GyCAP.Entidades.Mensajes
                     case Validaciones.SoloEspacios:
                         foreach (string dato in datos)
                         {
-                            lista = lista + "-" + dato + "\n";
+                            lista = lista + "- " + dato + "\n";
                         }
                         mensaje = mensaje + "Los siguientes campos están completados sólo con espacios:\n\n" + lista;
 
