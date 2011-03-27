@@ -12,40 +12,52 @@ namespace GyCAP.DAL
         public static readonly int HijoEsParte = 1;
         public static readonly int HijoEsMP = 2;
         
-        public static void Insertar(Entidades.CompuestoParte compuesto, SqlTransaction transaccion)
+        public static void Insertar(Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuesto, SqlTransaction transaccion)
         {
             string sql = @"INSERT INTO [COMPUESTOS_PARTES] 
                        ([part_numero_padre],
                         [part_numero_hijo],
                         [mp_codigo],
                         [comp_cantidad],
-                        [umed_codigo]) 
-                        VALUES (@p0, @p1, @p2, @p3, @p4) SELECT @@Identity";
+                        [estr_codigo],
+                        [umed_codigo])
+                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
 
-            object hijo = DBNull.Value, mp = DBNull.Value;
-            if (compuesto.ParteHijo != null) { hijo = compuesto.ParteHijo; }
-            else if (compuesto.MateriaPrima != null) { mp = compuesto.MateriaPrima; }
+            object hijo = DBNull.Value, mp = DBNull.Value, padre = DBNull.Value;
+            if (!rowCompuesto.IsPART_NUMERO_HIJONull()) { hijo = rowCompuesto.PART_NUMERO_HIJO; }
+            else if (!rowCompuesto.IsMP_CODIGONull()) { mp = rowCompuesto.MP_CODIGO; }
+            if (!rowCompuesto.IsPART_NUMERO_PADRENull()) { padre = rowCompuesto.PART_NUMERO_PADRE; }
 
-            object[] parametros = { compuesto.PartePadre,
+            object[] parametros = { padre,
                                     hijo,
                                     mp,
-                                    compuesto.Cantidad,
-                                    compuesto.UnidadMedida.Codigo };
+                                    rowCompuesto.COMP_CANTIDAD,
+                                    rowCompuesto.ESTR_CODIGO,
+                                    rowCompuesto.UMED_CODIGO };
 
-            compuesto.Codigo = Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion));
+            rowCompuesto.BeginEdit();
+            rowCompuesto.COMP_CODIGO = Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion));
+            rowCompuesto.EndEdit();
         }
 
-        public static void Actualizar(Entidades.CompuestoParte compuesto, SqlTransaction transaccion)
+        public static void Actualizar(Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuesto, SqlTransaction transaccion)
         {
-            string sql = "UPDATE COMPUESTOS_PARTES SET comp_cantidad = @p0, umed_codigo = @p1 WHERE comp_codigo = @p3";
-            object[] parametros = { compuesto.Cantidad, compuesto.UnidadMedida.Codigo, compuesto.Codigo };
+            string sql = "UPDATE COMPUESTOS_PARTES SET comp_cantidad = @p0 WHERE comp_codigo = @p1";
+            object[] parametros = { rowCompuesto.COMP_CANTIDAD, rowCompuesto.COMP_CODIGO };
             DB.executeNonQuery(sql, parametros, transaccion);
         }
 
-        public static void Eliminar(Entidades.CompuestoParte compuesto, SqlTransaction transaccion)
+        public static void Eliminar(int codCompuesto, SqlTransaction transaccion)
         {
             string sql = "DELETE FROM COMPUESTOS_PARTES WHERE comp_codigo = @p0";
-            object[] parametros = { compuesto.Codigo };
+            object[] parametros = { codCompuesto };
+            DB.executeNonQuery(sql, parametros, transaccion);
+        }
+
+        public static void EliminarCompuestosDeEstructura(int codigoEstructura, SqlTransaction transaccion)
+        {
+            string sql = "DELETE FROM COMPUESTOS_PARTES WHERE estr_codigo = @p0";
+            object[] parametros = { codigoEstructura };
             DB.executeNonQuery(sql, parametros, transaccion);
         }
 

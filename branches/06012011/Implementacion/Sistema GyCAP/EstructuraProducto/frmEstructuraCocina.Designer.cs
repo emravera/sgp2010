@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcEstructuraProducto = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
@@ -98,6 +99,9 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.cmsGrillaOrdenesProduccion = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiBloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDesbloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
             this.cboActivoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.dtpFechaAltaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.cbResponsableBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
@@ -136,6 +140,7 @@
             this.tpMPDisponibles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMPDisponibles)).BeginInit();
             this.tsMenu.SuspendLayout();
+            this.cmsGrillaOrdenesProduccion.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -847,6 +852,7 @@
             this.dgvPartesDisponibles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPartesDisponibles.Size = new System.Drawing.Size(413, 352);
             this.dgvPartesDisponibles.TabIndex = 0;
+            this.dgvPartesDisponibles.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPartesDisponibles_ColumnHeaderMouseClick);
             this.dgvPartesDisponibles.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPartesDisponibles_CellFormatting);
             // 
             // tpMPDisponibles
@@ -973,6 +979,31 @@
             this.btnSalir.Text = "&Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // cmsGrillaOrdenesProduccion
+            // 
+            this.cmsGrillaOrdenesProduccion.AllowMerge = false;
+            this.cmsGrillaOrdenesProduccion.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiBloquearColumna,
+            this.tsmiDesbloquearColumna});
+            this.cmsGrillaOrdenesProduccion.Name = "cmsGrillaOrdenesTrabajo";
+            this.cmsGrillaOrdenesProduccion.Size = new System.Drawing.Size(188, 48);
+            // 
+            // tsmiBloquearColumna
+            // 
+            this.tsmiBloquearColumna.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsmiBloquearColumna.Name = "tsmiBloquearColumna";
+            this.tsmiBloquearColumna.Size = new System.Drawing.Size(187, 22);
+            this.tsmiBloquearColumna.Text = "Bloquear columna";
+            this.tsmiBloquearColumna.Click += new System.EventHandler(this.tsmiBloquearColumna_Click);
+            // 
+            // tsmiDesbloquearColumna
+            // 
+            this.tsmiDesbloquearColumna.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsmiDesbloquearColumna.Name = "tsmiDesbloquearColumna";
+            this.tsmiDesbloquearColumna.Size = new System.Drawing.Size(187, 22);
+            this.tsmiDesbloquearColumna.Text = "Desbloquear columna";
+            this.tsmiDesbloquearColumna.Click += new System.EventHandler(this.tsmiDesbloquearColumna_Click);
             // 
             // cboActivoBuscar
             // 
@@ -1139,6 +1170,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvMPDisponibles)).EndInit();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
+            this.cmsGrillaOrdenesProduccion.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1227,5 +1259,8 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox txtFiltroNombreMP;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ContextMenuStrip cmsGrillaOrdenesProduccion;
+        private System.Windows.Forms.ToolStripMenuItem tsmiBloquearColumna;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDesbloquearColumna;
     }
 }

@@ -24,17 +24,15 @@ namespace GyCAP.DAL
                                ,[estr_fecha_modificacion]
                                ,[e_codigo]
                                ,[estr_costo]
-                               ,[estr_costofijo]
-                               ,[part_numero]) 
-                               VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10) SELECT @@Identity";
+                               ,[estr_costofijo]) 
+                               VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9) SELECT @@Identity";
 
             //obtenemos la estructura nueva del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsEstructuraProducto.ESTRUCTURASRow rowEstructura = dsEstructura.ESTRUCTURAS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructuraProducto.ESTRUCTURASRow;
             //Controlemos los valores que pueden venir nulos
-            object fechaModificacion = DBNull.Value, responsable = DBNull.Value, parte = DBNull.Value;
+            object fechaModificacion = DBNull.Value, responsable = DBNull.Value;
             if (!rowEstructura.IsESTR_FECHA_MODIFICACIONNull()) { fechaModificacion = rowEstructura.ESTR_FECHA_MODIFICACION.Date; }
-            if (!rowEstructura.IsE_CODIGONull()) { responsable = rowEstructura.E_CODIGO; }
-            if (!rowEstructura.IsPART_NUMERONull()) { parte = rowEstructura.PART_NUMERO; }
+            if (!rowEstructura.IsE_CODIGONull()) { responsable = rowEstructura.E_CODIGO; }            
             
             object[] valorParametros = { rowEstructura.ESTR_NOMBRE, 
                                          rowEstructura.COC_CODIGO,
@@ -43,10 +41,9 @@ namespace GyCAP.DAL
                                          rowEstructura.ESTR_ACTIVO,
                                          rowEstructura.ESTR_FECHA_ALTA.Date,
                                          fechaModificacion,
-                                         rowEstructura.E_CODIGO,
+                                         responsable,
                                          rowEstructura.ESTR_COSTO,
-                                         rowEstructura.ESTR_COSTOFIJO,
-                                         parte };
+                                         rowEstructura.ESTR_COSTOFIJO };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
@@ -60,10 +57,13 @@ namespace GyCAP.DAL
                 rowEstructura.ESTR_CODIGO = Convert.ToInt32(DB.executeScalar(sqlInsert, valorParametros, transaccion));
                 rowEstructura.EndEdit();
                 //Ahora insertamos su estructura, usamos el foreach para recorrer sólo los nuevos registros del dataset
-
-                #region InsertPartes
-                
-                #endregion
+                foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuesto in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(null, null, System.Data.DataViewRowState.Added))
+                {
+                    rowCompuesto.BeginEdit();
+                    rowCompuesto.ESTR_CODIGO = rowEstructura.ESTR_CODIGO;
+                    rowEstructura.EndEdit();
+                    CompuestoParteDAL.Insertar(rowCompuesto, transaccion);
+                }
 
                 //Todo ok, commit
                 transaccion.Commit();
@@ -91,11 +91,11 @@ namespace GyCAP.DAL
             {
                 transaccion = DB.IniciarTransaccion();
                 //Primero los hijos
-                
+                CompuestoParteDAL.EliminarCompuestosDeEstructura(codigoEstructura, transaccion);
                 //Ahora el padre
                 DB.executeNonQuery(sql, valorParametros, transaccion);
             }
-            catch(SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch(SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void Actualizar(Data.dsEstructuraProducto dsEstructura)
@@ -111,15 +111,13 @@ namespace GyCAP.DAL
                         ,e_codigo = @p7
                         ,estr_costo = @p8
                         ,estr_costofijo = @p9
-                        ,part_numero = @p10
-                        WHERE estr_codigo = @p11";
+                        WHERE estr_codigo = @p10";
 
            Data.dsEstructuraProducto.ESTRUCTURASRow rowEstructura = dsEstructura.ESTRUCTURAS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructuraProducto.ESTRUCTURASRow;
            //Controlemos los valores que pueden venir nulos
-           object fechaModificacion = DBNull.Value, responsable = DBNull.Value, parte = DBNull.Value;
+           object fechaModificacion = DBNull.Value, responsable = DBNull.Value;
            if (!rowEstructura.IsESTR_FECHA_MODIFICACIONNull()) { fechaModificacion = rowEstructura.ESTR_FECHA_MODIFICACION.Date; }
            if (!rowEstructura.IsE_CODIGONull()) { responsable = rowEstructura.E_CODIGO; }
-           if (!rowEstructura.IsPART_NUMERONull()) { parte = rowEstructura.PART_NUMERO; }
             
            object[] valorParametros = { rowEstructura.COC_CODIGO,
                                         rowEstructura.PNO_CODIGO,
@@ -131,7 +129,6 @@ namespace GyCAP.DAL
                                         responsable,
                                         rowEstructura.ESTR_COSTO,
                                         rowEstructura.ESTR_COSTOFIJO,
-                                        parte,
                                         rowEstructura.ESTR_CODIGO };
 
            //Declaramos el objeto transaccion
@@ -146,20 +143,22 @@ namespace GyCAP.DAL
                 DB.executeNonQuery(sql, valorParametros, transaccion);
                 //Actualizamos el resto, primero insertamos los nuevos, luego los updates y por último los deletes
 
-                #region Inserts
-                
-                    
-                #endregion
+                foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuesto in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(null, null, System.Data.DataViewRowState.Added))
+                {
+                    CompuestoParteDAL.Insertar(rowCompuesto, transaccion);
+                }
 
-                #region Updates
-                
-               
-                #endregion
+                foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuesto in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
+                {
+                    CompuestoParteDAL.Actualizar(rowCompuesto, transaccion);
+                }
 
-                #region Deletes
+                foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuesto in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(null, null, System.Data.DataViewRowState.Deleted))
+                {
 
-                
-                #endregion
+                    int codCompuesto = Convert.ToInt32(rowCompuesto["comp_codigo", System.Data.DataRowVersion.Original]);
+                    CompuestoParteDAL.Eliminar(codCompuesto, transaccion);
+                }
 
                 //Si todo resulto correcto, commit
                 transaccion.Commit();
@@ -181,7 +180,7 @@ namespace GyCAP.DAL
         public static void ObtenerEstructuras(object nombre, object codPlano, object fechaCreacion, object codCocina, object codResponsable, object activoSiNo, Data.dsEstructuraProducto ds)
         {
             string sql = @"SELECT estr_codigo, estr_nombre, coc_codigo, pno_codigo, estr_descripcion, estr_activo, estr_fecha_alta, 
-                           estr_fecha_modificacion, e_codigo, estr_costo, estr_costofijo, part_numero FROM ESTRUCTURAS WHERE 1=1 ";
+                           estr_fecha_modificacion, e_codigo, estr_costo, estr_costofijo FROM ESTRUCTURAS WHERE 1=1 ";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
@@ -270,13 +269,17 @@ namespace GyCAP.DAL
         
         public static bool PuedeEliminarse(int codigoEstructura)
         {
-            //Determinar que condiciones necesita para poder eliminarse, de momento que no sea activa - gonzalo
-            string sql = "SELECT estr_activo FROM ESTRUCTURAS WHERE estr_codigo = @p0";
+            if (EsEstructuraActiva(codigoEstructura)) { return false; }
+            string sql1 = "SELECT count(ordp_numero) FROM ORDENES_PRODUCCION WHERE estr_codigo = @p0";
+            string sql2 = "SELECT count(ordpm_numero) FROM ORDENES_PRODUCCION_MANUAL WHERE estr_codigo = @p0";
             object[] valorParametros = { codigoEstructura };
 
             try
             {
-                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return true; }
+                int r1 = Convert.ToInt32(DB.executeScalar(sql1, valorParametros, null));
+                int r2 = Convert.ToInt32(DB.executeScalar(sql2, valorParametros, null));
+                
+                if (r1 + r2 == 0) { return true; }
                 else { return false; }
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
@@ -341,7 +344,7 @@ namespace GyCAP.DAL
         public static void ObtenerEstructura(int codigoEstructura, Data.dsEstructura ds, bool detalle)
         {
             string sql = @"SELECT estr_codigo, estr_nombre, coc_codigo, pno_codigo, estr_descripcion, estr_activo, 
-                          estr_fecha_alta, estr_fecha_modificacion, e_codigo, estr_costo, estr_costofijo, part_numero  
+                          estr_fecha_alta, estr_fecha_modificacion, e_codigo, estr_costo, estr_costofijo  
                           FROM ESTRUCTURAS WHERE estr_codigo = @p0";
 
             object[] valorParametros = { codigoEstructura };
