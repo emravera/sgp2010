@@ -7,11 +7,11 @@ namespace GyCAP.Entidades
 {
     public class TipoRepuesto
     {
-        private int codigo;
+        private long codigo;
         private string nombre;
         private string descripcion;
         
-        public int Codigo
+        public long Codigo
         {
             get { return codigo; }
             set { codigo = value; }

@@ -214,5 +214,11 @@ namespace Principal
             GyCAP.UI.EstructuraProducto.frmParte.Instancia.Show();
         }
 
+        private void tipoRepuesto_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Soporte.frmTipoRepuesto.Instancia.MdiParent = this;
+            GyCAP.UI.Soporte.frmTipoRepuesto.Instancia.Show();
+        }
+
     }
 }
