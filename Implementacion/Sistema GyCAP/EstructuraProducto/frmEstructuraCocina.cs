@@ -135,10 +135,12 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 dsEstructura.ESTRUCTURAS.Clear();
                 dsEstructura.COMPUESTOS_PARTES.Clear();
+                dgvEstructuras.DataSource = null;
                 BLL.EstructuraBLL.ObtenerEstructuras(txtNombreBuscar.Text, cbPlanoBuscar.GetSelectedValue(), dtpFechaAltaBuscar.GetFecha(), cbCocinaBuscar.GetSelectedValue(), cbResponsableBuscar.GetSelectedValue(), cboActivoBuscar.GetSelectedValue(), dsEstructura);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
                 //dvEstructuras.Table = dsEstructura.ESTRUCTURAS;
+                dgvEstructuras.DataSource = dvEstructuras;
                 if (dsEstructura.ESTRUCTURAS.Rows.Count == 0)
                 {
                     MensajesABM.MsjBuscarNoEncontrado("Estructuras", this.Text);
@@ -677,6 +679,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     dvListaPartes.RowFilter = "estr_codigo = -1";
+                    tvEstructura.Nodes.Clear();
                     estadoInterface = estadoUI.nuevo;
                     tcEstructuraProducto.SelectedTab = tpDatos;
                     break;
@@ -714,6 +717,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     dvListaPartes.RowFilter = "estr_codigo = -1";
+                    tvEstructura.Nodes.Clear();
                     estadoInterface = estadoUI.nuevoExterno;
                     tcEstructuraProducto.SelectedTab = tpDatos;
                     break;
@@ -1076,6 +1080,13 @@ namespace GyCAP.UI.EstructuraProducto
             else { chkFijo.Checked = true; }
             dvListaPartes.RowFilter = "ESTR_CODIGO = " + codEstructura;
             dgvPartesDisponibles.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            tvEstructura.BeginUpdate();
+            if (dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codEstructura).Length > 0) 
+            { 
+                BLL.EstructuraBLL.CrearArbolEstructura(codEstructura, dsEstructura, tvEstructura); 
+            }
+            else { tvEstructura.Nodes.Clear(); }
+            tvEstructura.EndUpdate();
         }        
 
         #endregion
