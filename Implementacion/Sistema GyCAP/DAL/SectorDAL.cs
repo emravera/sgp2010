@@ -76,20 +76,7 @@ namespace GyCAP.DAL
          
         }
 
-        public static void ObtenerSector(Data.dsEmpleado ds)
-        {
-            string sql = @"SELECT sec_codigo, sec_nombre, sec_descripcion, sec_abreviatura
-                              FROM SECTORES";
-            try
-            {
-                //Se llena el Dataset
-                DB.FillDataSet(ds, "SECTORES", sql, null);
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-         
-        }
-
-        public static void ObtenerSector(DataTable dtSectores)
+       public static void ObtenerSector(DataTable dtSectores)
         {
             string sql = @"SELECT sec_codigo, sec_nombre, sec_descripcion, sec_abreviatura FROM SECTORES";
             try

@@ -220,5 +220,12 @@ namespace Principal
             GyCAP.UI.Soporte.frmTipoRepuesto.Instancia.Show();
         }
 
+        private void btnProveedores_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionStock.frmProveedor.Instancia.MdiParent = this;
+            GyCAP.UI.GestionStock.frmProveedor.Instancia.Show();
+        }
+
+
     }
 }

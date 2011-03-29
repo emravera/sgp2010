@@ -78,7 +78,7 @@ namespace GyCAP.UI.RecursosFabricacion
             BLL.EstadoEmpleadoBLL.ObtenerTodos(dsEmpleado);
 
             //Llena el Dataset con los Sectores
-            BLL.SectorBLL.ObtenerTodos(dsEmpleado);
+            BLL.SectorBLL.ObtenerTodos(dsEmpleado.SECTORES);
 
             ////Llena el Dataset con las Capacidades
             //BLL.SectorBLL.ObtenerTodos(dsEmpleado);
