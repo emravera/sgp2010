@@ -15,11 +15,6 @@ namespace GyCAP.BLL
             DAL.SectorDAL.ObtenerSector(nombre, abrev,ds);
         }
 
-        public static void ObtenerTodos(Data.dsEmpleado ds)
-        {
-            DAL.SectorDAL.ObtenerSector(ds);
-        }
-
         public static void ObtenerTodos(DataTable dtSectores)
         {
             DAL.SectorDAL.ObtenerSector(dtSectores);

@@ -71,6 +71,12 @@
     <Compile Include="frmInventarioABC.Designer.cs">
       <DependentUpon>frmInventarioABC.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProveedor.Designer.cs">
+      <DependentUpon>frmProveedor.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmUbicacionStock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +95,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmInventarioABC.resx">
       <DependentUpon>frmInventarioABC.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProveedor.resx">
+      <DependentUpon>frmProveedor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUbicacionStock.resx">
@@ -158,6 +168,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Listados-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Industry-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Industry2-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Industry-128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FactoryYellow-128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Industry2-128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
