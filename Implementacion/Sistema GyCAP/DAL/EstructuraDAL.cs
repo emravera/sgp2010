@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace GyCAP.DAL
 {
@@ -11,7 +12,7 @@ namespace GyCAP.DAL
         public static readonly int EstructuraActiva = 1;
         public static readonly int EstructuraInactiva = 0;
         
-        public static void Insertar(Data.dsEstructuraProducto dsEstructura)
+        public static decimal Insertar(Data.dsEstructuraProducto dsEstructura)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
             string sqlInsert = @"INSERT INTO [ESTRUCTURAS]
@@ -61,12 +62,13 @@ namespace GyCAP.DAL
                 {
                     rowCompuesto.BeginEdit();
                     rowCompuesto.ESTR_CODIGO = rowEstructura.ESTR_CODIGO;
-                    rowEstructura.EndEdit();
+                    rowCompuesto.EndEdit();
                     CompuestoParteDAL.Insertar(rowCompuesto, transaccion);
                 }
 
                 //Todo ok, commit
                 transaccion.Commit();
+                return rowEstructura.ESTR_CODIGO;
             }
             catch (SqlException ex)
             {
@@ -94,8 +96,10 @@ namespace GyCAP.DAL
                 CompuestoParteDAL.EliminarCompuestosDeEstructura(codigoEstructura, transaccion);
                 //Ahora el padre
                 DB.executeNonQuery(sql, valorParametros, transaccion);
+                transaccion.Commit();
             }
-            catch(SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            finally { DB.FinalizarTransaccion(); }
         }
 
         public static void Actualizar(Data.dsEstructuraProducto dsEstructura)
@@ -251,7 +255,7 @@ namespace GyCAP.DAL
                 try
                 {
                     DB.FillDataSet(ds, "ESTRUCTURAS", sql, valorParametros);
-                    //ObtenerDetalleEstructura(ds);
+                    ObtenerDetalleEstructura(ds);
                 }
                 catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
@@ -261,7 +265,7 @@ namespace GyCAP.DAL
                 {
                     //Buscamos sin filtro
                     DB.FillDataSet(ds, "ESTRUCTURAS", sql, null);
-                    //ObtenerDetalleEstructura(ds);
+                    ObtenerDetalleEstructura(ds);
                 }
                 catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
@@ -298,11 +302,11 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
-        private static void ObtenerDetalleEstructura(Data.dsEstructura dsEstructura)
+        private static void ObtenerDetalleEstructura(Data.dsEstructuraProducto dsEstructura)
         {
             int[] codigosEstructuras = new int[dsEstructura.ESTRUCTURAS.Rows.Count];
             int i = 0;
-            foreach (Data.dsEstructura.ESTRUCTURASRow row in dsEstructura.ESTRUCTURAS)
+            foreach (Data.dsEstructuraProducto.ESTRUCTURASRow row in dsEstructura.ESTRUCTURAS)
             {
                 codigosEstructuras[i] = Convert.ToInt32(row.ESTR_CODIGO);
                 i++;
@@ -310,8 +314,7 @@ namespace GyCAP.DAL
 
             try
             {
-                ConjuntoEstructuraDAL.ObtenerConjuntosEstructura(codigosEstructuras, dsEstructura);
-                PiezaEstructuraDAL.ObtenerPiezasEstructura(codigosEstructuras, dsEstructura);
+                DAL.CompuestoParteDAL.ObtenerCcompuestosPartesEstructura(codigosEstructuras, dsEstructura.COMPUESTOS_PARTES);
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             

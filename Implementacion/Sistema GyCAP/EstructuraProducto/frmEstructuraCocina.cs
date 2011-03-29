@@ -97,7 +97,12 @@ namespace GyCAP.UI.EstructuraProducto
                         }
                         dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigo).Delete();
                         dsEstructura.ESTRUCTURAS.AcceptChanges();
+                        dsEstructura.COMPUESTOS_PARTES.AcceptChanges();
                         MensajesABM.MsjConfirmaEliminar(this.Text, MensajesABM.Operaciones.Eliminación);
+                    }
+                    catch (Entidades.Excepciones.ElementoActivoException)
+                    {
+                        MensajesABM.MsjValidacion("No se puede eliminar una estructura con estado activa.", this.Text);
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
@@ -111,7 +116,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Modelo de Cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Estructura", MensajesABM.Generos.Femenino, this.Text);
             }
         }
 
@@ -129,6 +134,7 @@ namespace GyCAP.UI.EstructuraProducto
             try
             {
                 dsEstructura.ESTRUCTURAS.Clear();
+                dsEstructura.COMPUESTOS_PARTES.Clear();
                 BLL.EstructuraBLL.ObtenerEstructuras(txtNombreBuscar.Text, cbPlanoBuscar.GetSelectedValue(), dtpFechaAltaBuscar.GetFecha(), cbCocinaBuscar.GetSelectedValue(), cbResponsableBuscar.GetSelectedValue(), cboActivoBuscar.GetSelectedValue(), dsEstructura);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
@@ -157,6 +163,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (txtNombre.Text == string.Empty) { validacion.Add("Nombre"); }
             if (cbPlano.GetSelectedIndex() == -1) { validacion.Add("Plano"); }
             if (cbCocina.GetSelectedIndex() == -1) { validacion.Add("Cocina"); }
+            else if (BLL.CocinaBLL.TieneEstructuraActiva(cbCocina.GetSelectedValueInt())) { validacion.Add("La cocina seleccionada ya posee una estructura activa"); }
             //if (cbResponsable.GetSelectedIndex() == -1) { datosOK = false; datosFaltantes += "\\n* Responsable"; } Por ahora opcional
             //if (dtpFechaAlta.IsValueNull()) { dtpFechaAlta.SetFecha(BLL.DBBLL.GetFechaServidor()); } Opcional por ahora
             if (dgvPartesEstructura.Rows.Count == 0) { validacion.Add("El detalle de la estructura"); } //que al menos haya cargado 1 parte
@@ -187,8 +194,12 @@ namespace GyCAP.UI.EstructuraProducto
                         rowEstructura.ESTR_COSTOFIJO = (chkFijo.Checked) ? 1 : 0;
                         rowEstructura.EndEdit();
                         dsEstructura.ESTRUCTURAS.AddESTRUCTURASRow(rowEstructura);
-                        BLL.EstructuraBLL.Insertar(dsEstructura);                        
+                        decimal cod = BLL.EstructuraBLL.Insertar(dsEstructura);
+                        rowEstructura.BeginEdit();
+                        rowEstructura.ESTR_CODIGO = cod;
+                        rowEstructura.EndEdit();
                         dsEstructura.ESTRUCTURAS.AcceptChanges();
+                        dsEstructura.COMPUESTOS_PARTES.AcceptChanges();
                         
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
                         if (estadoInterface == estadoUI.nuevoExterno)
@@ -757,7 +768,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void SetGrillasCombosVistas()
         {
-            //Obtenemos los datos iniciales necesarios: terminaciones, empleados, cocinas
+            //Obtenemos los datos iniciales necesarios
             try
             {
                 BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsEstructura.TERMINACIONES);
@@ -819,6 +830,7 @@ namespace GyCAP.UI.EstructuraProducto
             #endregion Buscar
 
             #region Datos
+
             //Grilla Listado Partes
             dgvPartesEstructura.AutoGenerateColumns = false;
             dgvPartesEstructura.Columns.Add("PART_NOMBRE", "Parte");
@@ -1063,6 +1075,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_COSTOFIJO == 0) { chkFijo.Checked = false; }
             else { chkFijo.Checked = true; }
             dvListaPartes.RowFilter = "ESTR_CODIGO = " + codEstructura;
+            dgvPartesDisponibles.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
         }        
 
         #endregion
