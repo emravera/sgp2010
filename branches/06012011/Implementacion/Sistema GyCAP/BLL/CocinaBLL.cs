@@ -56,6 +56,11 @@ namespace GyCAP.BLL
             DAL.CocinaDAL.ObtenerCocinas(codigo, marca, terminacion, estado, dtCocina);
         }
 
+        public static bool TieneEstructuraActiva(int codigoCocina)
+        {
+            return DAL.CocinaDAL.TieneEstructuraActiva(codigoCocina);
+        }
+
         /// <summary>
         /// Guarda una imagen de una cocina, si ya tiene una almacenada ésta se reemplaza.
         /// Si se llama al método sin pasar la imagen, se guarda una por defecto con la leyenda

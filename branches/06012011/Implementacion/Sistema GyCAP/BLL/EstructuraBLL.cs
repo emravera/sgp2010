@@ -10,9 +10,9 @@ namespace GyCAP.BLL
         public static readonly int EstructuraActiva = 1;
         public static readonly int EstructuraInactiva = 0;
         
-        public static void Insertar(Data.dsEstructuraProducto ds)
+        public static decimal Insertar(Data.dsEstructuraProducto ds)
         {
-            DAL.EstructuraDAL.Insertar(ds);
+            return DAL.EstructuraDAL.Insertar(ds);
         }
         
         public static void Eliminar(int codigoEstructura)

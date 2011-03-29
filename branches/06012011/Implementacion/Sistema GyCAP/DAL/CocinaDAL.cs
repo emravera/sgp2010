@@ -199,6 +199,7 @@ namespace GyCAP.DAL
 
         public static int ObtenerCodigoEstructuraActiva(int codigoCocina)
         {
+            //Cambiar este codigo para que quede una sola consulta - gonzalo
             string sql = "SELECT count(estr_codigo) FROM ESTRUCTURAS WHERE coc_codigo = @p0 AND estr_activo = @p1";
             object[] valorParametros = { codigoCocina, EstructuraDAL.EstructuraActiva };
             int codigo = 0;
@@ -211,6 +212,18 @@ namespace GyCAP.DAL
                 }
 
                 return codigo;
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static bool TieneEstructuraActiva(int codigoCocina)
+        {
+            string sql = "SELECT count(estr_codigo) FROM ESTRUCTURAS WHERE coc_codigo = @p0 AND estr_activo = @p1";
+            object[] valorParametros = { codigoCocina, EstructuraDAL.EstructuraActiva };
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return false; }
+                return true;
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
