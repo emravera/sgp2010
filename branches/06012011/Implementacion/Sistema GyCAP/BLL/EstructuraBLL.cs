@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace GyCAP.BLL
 {
@@ -115,6 +116,41 @@ namespace GyCAP.BLL
 
             return listaMateriasPrimas;
 
+        }
+
+        public static TreeView CrearArbolEstructura(int codigoEstructura, Data.dsEstructuraProducto dsEstructura, TreeView arbol)
+        {
+            arbol.Nodes.Clear();
+            //Obtenemos la parte padre de nivel 0 y la agregamos al árbol
+            string filtro = "estr_codigo = " + codigoEstructura + " AND part_numero_padre IS NULL";
+            Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuestoInicio = (dsEstructura.COMPUESTOS_PARTES.Select(filtro) as Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])[0];
+            TreeNode nodoInicio = new TreeNode();
+            nodoInicio.Name = rowCompuestoInicio.COMP_CODIGO.ToString();
+            nodoInicio.Text = rowCompuestoInicio.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE + " - " + rowCompuestoInicio.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_CODIGO;
+            nodoInicio.Tag = BLL.CompuestoParteBLL.HijoEsParte;
+            arbol.Nodes.Add(nodoInicio);
+
+            //Ahora creamos todas las ramas con sus hojas
+            foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowComp in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codigoEstructura + " AND part_numero_hijo <> " + rowCompuestoInicio.PART_NUMERO_HIJO.ToString()))
+            {
+                //ArmarRamas(codigoEstructura, rowComp.PART_NUMERO_HIJO, dsEstructura);
+                TreeNode nodo = new TreeNode();
+                nodo.Name = rowComp.COMP_CODIGO.ToString();
+                nodo.Text = ((rowComp.IsMP_CODIGONull()) ? (rowComp.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE + " - " + rowComp.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_CODIGO) : (rowComp.MATERIAS_PRIMASRow.MP_NOMBRE));
+                nodo.Text += " / #" + rowComp.COMP_CANTIDAD.ToString() + " " + rowComp.UNIDADES_MEDIDARow.UMED_ABREVIATURA;
+                nodo.Tag = ((rowComp.IsMP_CODIGONull()) ? BLL.CompuestoParteBLL.HijoEsParte : BLL.CompuestoParteBLL.HijoEsMP);
+                string key = (dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codigoEstructura + " AND part_numero_hijo = " + rowComp.PART_NUMERO_PADRE.ToString()) as Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])[0].COMP_CODIGO.ToString();
+                arbol.Nodes.Find(key, true)[0].Nodes.Add(nodo);
+            }
+
+            arbol.ExpandAll();
+            return arbol;
+        }
+
+        private static void ArmarRamas(int codigoEstructura, decimal codigoCompuesto, Data.dsEstructuraProducto dsEstructura)
+        {
+            //TreeNode nodoRama = new TreeNode();
+            //nodoRama.Name = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoCompuesto).PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO
         }
     }
 }
