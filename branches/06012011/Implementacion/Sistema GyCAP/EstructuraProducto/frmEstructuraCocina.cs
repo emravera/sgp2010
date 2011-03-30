@@ -17,7 +17,7 @@ namespace GyCAP.UI.EstructuraProducto
         private Data.dsCocina dsCocina = new GyCAP.Data.dsCocina();
         private Data.dsEmpleado dsEmpleado = new GyCAP.Data.dsEmpleado();
         private DataView dvCocinaBuscar, dvCocina, dvResponsableBuscar, dvResponsable, dvPlanoBuscar, dvPlano;
-        private DataView dvEstructuras, dvListaPartes, dvPartesDisponibles, dvMPDisponibles, dvFiltroTipo;
+        private DataView dvEstructuras, dvPartesDisponibles, dvMPDisponibles, dvFiltroTipo;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
@@ -33,6 +33,7 @@ namespace GyCAP.UI.EstructuraProducto
 
             SetGrillasCombosVistas();
             SetInterface(estadoUI.inicio);
+            SetSlide();
         }
 
         public static frmEstructuraCocina Instancia
@@ -168,7 +169,8 @@ namespace GyCAP.UI.EstructuraProducto
             else if (BLL.CocinaBLL.TieneEstructuraActiva(cbCocina.GetSelectedValueInt())) { validacion.Add("La cocina seleccionada ya posee una estructura activa"); }
             //if (cbResponsable.GetSelectedIndex() == -1) { datosOK = false; datosFaltantes += "\\n* Responsable"; } Por ahora opcional
             //if (dtpFechaAlta.IsValueNull()) { dtpFechaAlta.SetFecha(BLL.DBBLL.GetFechaServidor()); } Opcional por ahora
-            if (dgvPartesEstructura.Rows.Count == 0) { validacion.Add("El detalle de la estructura"); } //que al menos haya cargado 1 parte
+            if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno && dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = -1").Length == 0) { validacion.Add("El detalle de la estructura"); } //que al menos haya cargado 1 parte
+            else if (estadoInterface == estadoUI.modificar && dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estra_codigo"])).Length == 0) { validacion.Add("El detalle de la estructura"); } //que al menos haya cargado 1 parte
             if (cbEstado.GetSelectedIndex() == -1) { validacion.Add("Estado"); }
             if (validacion.Count == 0)
             {
@@ -193,7 +195,6 @@ namespace GyCAP.UI.EstructuraProducto
                         else { rowEstructura.ESTR_FECHA_MODIFICACION = (DateTime)dtpFechaModificacion.GetFecha(); }
                         rowEstructura.ESTR_COSTO = nudcosto.Value;
                         rowEstructura.ESTR_DESCRIPCION = txtDescripcion.Text;
-                        rowEstructura.ESTR_COSTOFIJO = (chkFijo.Checked) ? 1 : 0;
                         rowEstructura.EndEdit();
                         dsEstructura.ESTRUCTURAS.AddESTRUCTURASRow(rowEstructura);
                         decimal cod = BLL.EstructuraBLL.Insertar(dsEstructura);
@@ -241,7 +242,6 @@ namespace GyCAP.UI.EstructuraProducto
                         else { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_FECHA_MODIFICACION = (DateTime)dtpFechaModificacion.GetFecha(); }
                         dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_DESCRIPCION = txtDescripcion.Text;
                         dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_COSTO = nudcosto.Value;
-                        dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_COSTOFIJO = (chkFijo.Checked) ? 1 : 0;
                         BLL.EstructuraBLL.Actualizar(dsEstructura);
                         MensajesABM.MsjConfirmaGuardar("Estructura", this.Text, MensajesABM.Operaciones.Modificación);
 
@@ -286,28 +286,20 @@ namespace GyCAP.UI.EstructuraProducto
             }
 
             return costo;
-        }
-
-        private void chkFijo_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!chkFijo.Checked) { nudcosto.Value = CalcularCosto(); }
-            else { nudcosto.Value = 0; }
-        }
+        }        
 
         #endregion    
 
         #region Partes
 
         private void btnVolverDePartes_Click(object sender, EventArgs e)
-        {
-            if (!chkFijo.Checked)
+        {            
+            nudcosto.Value = CalcularCosto();
+            if (estadoInterface == estadoUI.modificar)
             {
-                nudcosto.Value = CalcularCosto();
-                if (estadoInterface == estadoUI.modificar)
-                {
-                    dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"])).ESTR_COSTO = nudcosto.Value;
-                }
+                dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"])).ESTR_COSTO = nudcosto.Value;
             }
+            
             tcEstructuraProducto.SelectedTab = tpDatos;
         }
 
@@ -466,9 +458,14 @@ namespace GyCAP.UI.EstructuraProducto
                 filtro = "PART_NUMERO_PADRE = " + dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(nodoPadre.Name)).PART_NUMERO_HIJO.ToString();
                 filtro += " AND MP_CODIGO = " + rowMP.MP_CODIGO.ToString();
             }
-            Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[] parte = (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(filtro);
-            if (parte.Length > 0) { return parte[0]; }
-            return null;
+            if (string.IsNullOrEmpty(filtro)) { return null; }
+            else 
+            {
+                filtro += " AND estr_codigo = " + ((estadoInterface == estadoUI.modificar) ? dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"].ToString() : "-1");
+                Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[] partes = (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(filtro);
+                if (partes.Length > 0) { return partes[0]; }
+                return null;
+            }
         }
 
         private bool EsMismoPadreHijo(Data.dsEstructuraProducto.PARTESRow rowParte, TreeNode selectedNode)
@@ -588,36 +585,7 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
-
-        private void btnDatos_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void btnPartes_Click(object sender, EventArgs e)
-        {
-            tcEstructuraProducto.SelectedTab = tpPartes;
-        }        
-
-        private void SetBotones(int orientacion, Button boton)
-        {
-            switch (orientacion)
-            {
-                case -1:
-                    boton.Image = Properties.Resources.izquierda1_15;
-                    break;
-                case 0:
-                    boton.Image = Properties.Resources.arriba1_15;
-                    break;
-                case 1:
-                    boton.Image = Properties.Resources.derecha1_15;
-                    break;
-                default:
-                    break;
-            }
-            boton.TextImageRelation = TextImageRelation.TextBeforeImage;
-        }
-        
+                
         #region Servicios
 
         //Setea la pantalla de acuerdo al estado en que se encuentre
@@ -667,8 +635,6 @@ namespace GyCAP.UI.EstructuraProducto
                     txtDescripcion.ReadOnly = false;
                     nudcosto.Value = 0;
                     nudcosto.Enabled = true;
-                    chkFijo.Enabled = true;
-                    chkFijo.Checked = false;
                     txtDescripcion.Clear();
                     panelAccionesArbol.Enabled = true;
                     gbAgregarParteMP.Enabled = true;
@@ -678,10 +644,11 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
-                    dvListaPartes.RowFilter = "estr_codigo = -1";
+                    gbBtnDatosPartes.Enabled = true;
                     tvEstructura.Nodes.Clear();
                     estadoInterface = estadoUI.nuevo;
                     tcEstructuraProducto.SelectedTab = tpDatos;
+                    slideControl1.Selected = slideDatos;
                     break;
                 case estadoUI.nuevoExterno:
                     txtNombre.ReadOnly = false;
@@ -706,8 +673,6 @@ namespace GyCAP.UI.EstructuraProducto
                     txtDescripcion.Clear();
                     nudcosto.Enabled = true;
                     nudcosto.Value = 0;
-                    chkFijo.Enabled = true;
-                    chkFijo.Checked = false;
                     panelAccionesArbol.Enabled = true;
                     gbAgregarParteMP.Enabled = true;
                     btnGuardar.Enabled = true;
@@ -716,10 +681,11 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
-                    dvListaPartes.RowFilter = "estr_codigo = -1";
+                    gbBtnDatosPartes.Enabled = true;
                     tvEstructura.Nodes.Clear();
                     estadoInterface = estadoUI.nuevoExterno;
                     tcEstructuraProducto.SelectedTab = tpDatos;
+                    slideControl1.Selected = slideDatos;
                     break;
                 case estadoUI.consultar:
                     txtNombre.ReadOnly = true;
@@ -731,7 +697,6 @@ namespace GyCAP.UI.EstructuraProducto
                     dtpFechaModificacion.Enabled = false;
                     txtDescripcion.ReadOnly = true;
                     nudcosto.Enabled = false;
-                    chkFijo.Enabled = false;
                     panelAccionesArbol.Enabled = false;
                     gbAgregarParteMP.Enabled = false;
                     btnGuardar.Enabled = false;
@@ -740,8 +705,10 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = true;
                     btnModificar.Enabled = true;
                     btnEliminar.Enabled = true;
+                    gbBtnDatosPartes.Enabled = false;
                     estadoInterface = estadoUI.consultar;
                     tcEstructuraProducto.SelectedTab = tpDatos;
+                    slideControl1.Selected = slideDatos;
                     break;
                 case estadoUI.modificar:
                     txtNombre.ReadOnly = false;
@@ -753,7 +720,6 @@ namespace GyCAP.UI.EstructuraProducto
                     dtpFechaModificacion.Enabled = true;
                     txtDescripcion.ReadOnly = false;
                     nudcosto.Enabled = true;
-                    chkFijo.Enabled = true;
                     panelAccionesArbol.Enabled = true;
                     gbAgregarParteMP.Enabled = true;
                     btnGuardar.Enabled = true;
@@ -762,8 +728,10 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    gbBtnDatosPartes.Enabled = true;
                     estadoInterface = estadoUI.modificar;
                     tcEstructuraProducto.SelectedTab = tpDatos;
+                    slideControl1.Selected = slideDatos;
                     break;
                 default:
                     break;
@@ -834,26 +802,7 @@ namespace GyCAP.UI.EstructuraProducto
             #endregion Buscar
 
             #region Datos
-
-            //Grilla Listado Partes
-            dgvPartesEstructura.AutoGenerateColumns = false;
-            dgvPartesEstructura.Columns.Add("PART_NOMBRE", "Parte");
-            dgvPartesEstructura.Columns.Add("PART_TIPO", "Tipo");
-            dgvPartesEstructura.Columns.Add("COMP_CANTIDAD", "Cantidad");
-            dgvPartesEstructura.Columns.Add("UMED_CODIGO", "Unidad medida");
-            dgvPartesEstructura.Columns["PART_NOMBRE"].DataPropertyName = "COMP_CODIGO";
-            dgvPartesEstructura.Columns["PART_TIPO"].DataPropertyName = "COMP_CODIGO";
-            dgvPartesEstructura.Columns["COMP_CANTIDAD"].DataPropertyName = "COMP_CANTIDAD";
-            dgvPartesEstructura.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
-            dgvPartesEstructura.Columns["COMP_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvPartesEstructura.Columns["PART_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPartesEstructura.Columns["PART_TIPO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPartesEstructura.Columns["COMP_CANTIDAD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPartesEstructura.Columns["UMED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
-            dvListaPartes = new DataView(dsEstructura.COMPUESTOS_PARTES);
-            dgvPartesEstructura.DataSource = dvListaPartes;
-
+            
             //Dataviews
             dvCocina = new DataView(dsCocina.COCINAS);
             dvCocina.Sort = "COC_CODIGO_PRODUCTO ASC";
@@ -926,15 +875,6 @@ namespace GyCAP.UI.EstructuraProducto
 
         }
         
-        
-
-        private void CrearArbol(int codigoEstructura)
-        {
-            
-
-
-        }
-
         #endregion Servicios
 
         #region Cell_Formatting y RowEnter
@@ -968,37 +908,7 @@ namespace GyCAP.UI.EstructuraProducto
                         break;
                 }
             }
-        }
-
-        private void dgvPartesEstructura_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(e.Value.ToString()))
-            {
-                string nombre = string.Empty;
-                
-                switch (dgvPartesEstructura.Columns[e.ColumnIndex].Name)
-                {
-                    case "PART_NOMBRE":
-                        if (dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(e.Value)).IsPART_NUMERO_HIJONull())
-                            { nombre = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(e.Value)).MATERIAS_PRIMASRow.MP_NOMBRE; }
-                        else { nombre = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(e.Value)).PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE; }
-                        e.Value = nombre;
-                        break;
-                    case "PART_TIPO":
-                        if (!dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(e.Value)).IsPART_NUMERO_HIJONull())
-                            { nombre = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(e.Value)).PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.TIPOS_PARTESRow.TPAR_NOMBRE; }
-                        else { nombre = "Materia Prima"; }
-                        e.Value = nombre;
-                        break;
-                    case "UMED_CODIGO":
-                        nombre = dsEstructura.UNIDADES_MEDIDA.FindByUMED_CODIGO(Convert.ToInt32(e.Value)).UMED_NOMBRE;
-                        e.Value = nombre;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
+        }        
 
         private void dgvMPDisponibles_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -1076,10 +986,6 @@ namespace GyCAP.UI.EstructuraProducto
             else { dtpFechaModificacion.SetFechaNull(); }
             txtDescripcion.Text = dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_DESCRIPCION;
             nudcosto.Value = dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_COSTO;
-            if (dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_COSTOFIJO == 0) { chkFijo.Checked = false; }
-            else { chkFijo.Checked = true; }
-            dvListaPartes.RowFilter = "ESTR_CODIGO = " + codEstructura;
-            dgvPartesDisponibles.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             tvEstructura.BeginUpdate();
             if (dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codEstructura).Length > 0) 
             { 
@@ -1193,14 +1099,45 @@ namespace GyCAP.UI.EstructuraProducto
                         tsmiBloquearColumna.Checked = false;
                         tsmiDesbloquearColumna.Checked = true;
                     }
-                    cmsGrillaOrdenesProduccion.Show(MousePosition);
+                    cmsGrillaPartesDisponibles.Show(MousePosition);
                 }
             }
         }
 
         #endregion
 
+        #region Slide
 
+        private void SetSlide()
+        {
+            slideControl1.AddSlide(slidePartes);
+            slideControl1.AddSlide(slideDatos);
+            gbAgregarParteMP.Parent = slidePartes;
+            gbDatos.Parent = slideDatos;
+            slideControl1.Selected = slideDatos;
+        }        
+
+        private void btnDatos_Click(object sender, EventArgs e)
+        {
+            if (slideControl1.Selected == slidePartes)
+            {
+                slideControl1.BackwardTo("slideDatos");
+                btnDatos.Image = Properties.Resources.arriba1_15;
+                btnPartes.Image = Properties.Resources.derecha1_15;
+            }
+        }
+
+        private void btnPartes_Click(object sender, EventArgs e)
+        {
+            if (slideControl1.Selected == slideDatos)
+            {
+                slideControl1.ForwardTo("slidePartes");
+                btnDatos.Image = Properties.Resources.izquierda1_15;
+                btnPartes.Image = Properties.Resources.arriba1_15;
+            }
+        }
+
+        #endregion
 
     }
 }

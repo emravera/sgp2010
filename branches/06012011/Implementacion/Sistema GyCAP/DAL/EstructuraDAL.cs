@@ -44,7 +44,7 @@ namespace GyCAP.DAL
                                          fechaModificacion,
                                          responsable,
                                          rowEstructura.ESTR_COSTO,
-                                         rowEstructura.ESTR_COSTOFIJO };
+                                         0 };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
