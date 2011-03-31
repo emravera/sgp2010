@@ -167,10 +167,6 @@ namespace GyCAP.UI.EstructuraProducto
                         if (Convert.ToInt32(e.Value) == 1) { e.Value = "Activa"; }
                         else if (Convert.ToInt32(e.Value) == 0) { e.Value = "Inactiva"; }
                         break;
-                    case "COC_COSTO":
-                        nombre = "$ " + e.Value.ToString();
-                        e.Value = nombre;
-                        break;
                     default:
                         break;
                 }
@@ -187,7 +183,6 @@ namespace GyCAP.UI.EstructuraProducto
             cbColor.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COL_CODIGO));
             cbTerminacion.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).TE_CODIGO));
             cbEstado.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COC_ACTIVO));
-            nudCosto.Value = dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COC_COSTO;
             pbImagen.Image = BLL.CocinaBLL.ObtenerImagen(codigoCocina);
         }
 
@@ -222,7 +217,6 @@ namespace GyCAP.UI.EstructuraProducto
                 cocina.TerminacionHorno = new GyCAP.Entidades.Terminacion();
                 cocina.TerminacionHorno.Codigo = cbTerminacion.GetSelectedValueInt();
                 cocina.Activo = cbEstado.GetSelectedValueInt();
-                cocina.Costo = nudCosto.Value;
 
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
@@ -241,8 +235,6 @@ namespace GyCAP.UI.EstructuraProducto
                         rowCocina.COC_CODIGO_PRODUCTO = cocina.CodigoProducto;
                         rowCocina.TE_CODIGO = cocina.TerminacionHorno.Codigo;
                         rowCocina.DESIG_CODIGO = cocina.Designacion.Codigo;
-                        rowCocina.COC_COSTO = cocina.Costo;
-                        rowCocina.COC_CANTIDADSTOCK = 0;
                         rowCocina.COC_ACTIVO = cocina.Activo;
                         rowCocina.EndEdit();
                         dsCocina.COCINAS.AddCOCINASRow(rowCocina);
@@ -291,7 +283,6 @@ namespace GyCAP.UI.EstructuraProducto
                         rowCocina.TE_CODIGO = cocina.TerminacionHorno.Codigo;
                         rowCocina.DESIG_CODIGO = cocina.Designacion.Codigo;
                         rowCocina.COC_ACTIVO = cocina.Activo;
-                        rowCocina.COC_COSTO = cocina.Costo;
                         rowCocina.EndEdit();
                         dsCocina.COCINAS.AcceptChanges();
                         //Actualizamos la imagen
@@ -371,7 +362,6 @@ namespace GyCAP.UI.EstructuraProducto
                     cbColor.Enabled = true;
                     cbTerminacion.Enabled = true;
                     cbEstado.Enabled = true;
-                    nudCosto.Enabled = true;
                     btnAbrirImagen.Enabled = true;
                     btnQuitarImagen.Enabled = true;                   
                     cbModelo.SetTexto("Seleccione");
@@ -380,7 +370,6 @@ namespace GyCAP.UI.EstructuraProducto
                     cbColor.SetTexto("Seleccione");
                     cbTerminacion.SetTexto("Seleccione");
                     cbEstado.SetTexto("Seleccione");
-                    nudCosto.Value = 0;
                     pbImagen.Image = EstructuraProducto.Properties.Resources.sinimagen;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -402,7 +391,6 @@ namespace GyCAP.UI.EstructuraProducto
                     cbColor.Enabled = true;
                     cbTerminacion.Enabled = true;
                     cbEstado.Enabled = true;
-                    nudCosto.Enabled = true;
                     btnAbrirImagen.Enabled = true;
                     btnQuitarImagen.Enabled = true;
                     cbModelo.SetTexto("Seleccione");
@@ -411,7 +399,6 @@ namespace GyCAP.UI.EstructuraProducto
                     cbColor.SetTexto("Seleccione");
                     cbTerminacion.SetTexto("Seleccione");
                     cbEstado.SetTexto("Seleccione");
-                    nudCosto.Value = 0;
                     pbImagen.Image = EstructuraProducto.Properties.Resources.sinimagen;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
@@ -432,7 +419,6 @@ namespace GyCAP.UI.EstructuraProducto
                     cbColor.Enabled = false;
                     cbTerminacion.Enabled = false;
                     cbEstado.Enabled = false;
-                    nudCosto.Enabled = false;
                     btnAbrirImagen.Enabled = false;
                     btnQuitarImagen.Enabled = false;
                     btnGuardar.Enabled = false;
@@ -452,7 +438,6 @@ namespace GyCAP.UI.EstructuraProducto
                     cbColor.Enabled = true;
                     cbTerminacion.Enabled = true;
                     cbEstado.Enabled = true;
-                    nudCosto.Enabled = true;
                     btnAbrirImagen.Enabled = true;
                     btnQuitarImagen.Enabled = true;
                     btnGuardar.Enabled = true;
@@ -494,24 +479,20 @@ namespace GyCAP.UI.EstructuraProducto
             dgvListaCocina.Columns.Add("MOD_CODIGO", "Modelo");
             dgvListaCocina.Columns.Add("MCA_CODIGO", "Marca");
             dgvListaCocina.Columns.Add("COC_ESTADO", "Estado");
-            dgvListaCocina.Columns.Add("COC_COSTO", "Costo");
             dgvListaCocina.Columns["COC_CODIGO_PRODUCTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListaCocina.Columns["MOD_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListaCocina.Columns["MCA_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListaCocina.Columns["COC_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvListaCocina.Columns["COC_COSTO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvListaCocina.Columns["COC_ESTADO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListaCocina.Columns["COC_CODIGO_PRODUCTO"].DataPropertyName = "COC_CODIGO_PRODUCTO";
             dgvListaCocina.Columns["MOD_CODIGO"].DataPropertyName = "MOD_CODIGO";
             dgvListaCocina.Columns["MCA_CODIGO"].DataPropertyName = "MCA_CODIGO";
             dgvListaCocina.Columns["COC_ESTADO"].DataPropertyName = "COC_ACTIVO";
-            dgvListaCocina.Columns["COC_COSTO"].DataPropertyName = "COC_COSTO";
             dgvListaCocina.Columns["COC_CODIGO_PRODUCTO"].MinimumWidth = 100;
             dgvListaCocina.Columns["MOD_CODIGO"].MinimumWidth = 100;
             dgvListaCocina.Columns["MCA_CODIGO"].MinimumWidth = 90;
             dgvListaCocina.Columns["COC_ESTADO"].MinimumWidth = 90;
-            dgvListaCocina.Columns["COC_COSTO"].MinimumWidth = 80;
-            
+                        
             //Dataviews
             dvMarcaBuscar = new DataView(dsCocina.MARCAS);
             dvTerminacionBuscar = new DataView(dsCocina.TERMINACIONES);
@@ -555,11 +536,6 @@ namespace GyCAP.UI.EstructuraProducto
         private void txtCodigo_Enter(object sender, EventArgs e)
         {
             txtCodigo.SelectAll();
-        }
-
-        private void nudCosto_Enter(object sender, EventArgs e)
-        {
-            nudCosto.Select(0, 20);
         }
 
         private void btnZoomIn_Click(object sender, EventArgs e)

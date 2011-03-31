@@ -29,8 +29,6 @@ namespace GyCAP.Data {
         
         private PLANES_ANUALESDataTable tablePLANES_ANUALES;
         
-        private COCINASDataTable tableCOCINAS;
-        
         private DIAS_PLAN_SEMANALDataTable tableDIAS_PLAN_SEMANAL;
         
         private DETALLE_PLANES_SEMANALESDataTable tableDETALLE_PLANES_SEMANALES;
@@ -43,19 +41,15 @@ namespace GyCAP.Data {
         
         private PLANES_SEMANALESDataTable tablePLANES_SEMANALES;
         
-        private global::System.Data.DataRelation relationplanMensual_planAnual_fk;
+        private COCINASDataTable tableCOCINAS;
         
-        private global::System.Data.DataRelation relationdetallePlanSemanal_cocina_fk;
+        private global::System.Data.DataRelation relationplanMensual_planAnual_fk;
         
         private global::System.Data.DataRelation relationdiasPlanSemanal_DetallePlanSemanal_FK;
         
         private global::System.Data.DataRelation relationdetallePlanSemanal_DetallePedido_fk;
         
-        private global::System.Data.DataRelation relationdetallePedido_Cocina_fk;
-        
         private global::System.Data.DataRelation relationdetallePedido_pedido_fk;
-        
-        private global::System.Data.DataRelation relationdetallePlanMensual_cocina_fk;
         
         private global::System.Data.DataRelation relationdetallePlanmensual_DetallePedidos_fk;
         
@@ -64,6 +58,12 @@ namespace GyCAP.Data {
         private global::System.Data.DataRelation relationdiasPlanSemanal_PlanSemanal_FK;
         
         private global::System.Data.DataRelation relationplanSemanal_planMensual_fk;
+        
+        private global::System.Data.DataRelation relationCOCINAS_DETALLE_PLANES_MENSUALES;
+        
+        private global::System.Data.DataRelation relationCOCINAS_DETALLE_PLANES_SEMANALES;
+        
+        private global::System.Data.DataRelation relationCOCINAS_DETALLE_PEDIDOS;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -97,9 +97,6 @@ namespace GyCAP.Data {
                 if ((ds.Tables["PLANES_ANUALES"] != null)) {
                     base.Tables.Add(new PLANES_ANUALESDataTable(ds.Tables["PLANES_ANUALES"]));
                 }
-                if ((ds.Tables["COCINAS"] != null)) {
-                    base.Tables.Add(new COCINASDataTable(ds.Tables["COCINAS"]));
-                }
                 if ((ds.Tables["DIAS_PLAN_SEMANAL"] != null)) {
                     base.Tables.Add(new DIAS_PLAN_SEMANALDataTable(ds.Tables["DIAS_PLAN_SEMANAL"]));
                 }
@@ -117,6 +114,9 @@ namespace GyCAP.Data {
                 }
                 if ((ds.Tables["PLANES_SEMANALES"] != null)) {
                     base.Tables.Add(new PLANES_SEMANALESDataTable(ds.Tables["PLANES_SEMANALES"]));
+                }
+                if ((ds.Tables["COCINAS"] != null)) {
+                    base.Tables.Add(new COCINASDataTable(ds.Tables["COCINAS"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -151,15 +151,6 @@ namespace GyCAP.Data {
         public PLANES_ANUALESDataTable PLANES_ANUALES {
             get {
                 return this.tablePLANES_ANUALES;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public COCINASDataTable COCINAS {
-            get {
-                return this.tableCOCINAS;
             }
         }
         
@@ -214,6 +205,15 @@ namespace GyCAP.Data {
         public PLANES_SEMANALESDataTable PLANES_SEMANALES {
             get {
                 return this.tablePLANES_SEMANALES;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public COCINASDataTable COCINAS {
+            get {
+                return this.tableCOCINAS;
             }
         }
         
@@ -282,9 +282,6 @@ namespace GyCAP.Data {
                 if ((ds.Tables["PLANES_ANUALES"] != null)) {
                     base.Tables.Add(new PLANES_ANUALESDataTable(ds.Tables["PLANES_ANUALES"]));
                 }
-                if ((ds.Tables["COCINAS"] != null)) {
-                    base.Tables.Add(new COCINASDataTable(ds.Tables["COCINAS"]));
-                }
                 if ((ds.Tables["DIAS_PLAN_SEMANAL"] != null)) {
                     base.Tables.Add(new DIAS_PLAN_SEMANALDataTable(ds.Tables["DIAS_PLAN_SEMANAL"]));
                 }
@@ -302,6 +299,9 @@ namespace GyCAP.Data {
                 }
                 if ((ds.Tables["PLANES_SEMANALES"] != null)) {
                     base.Tables.Add(new PLANES_SEMANALESDataTable(ds.Tables["PLANES_SEMANALES"]));
+                }
+                if ((ds.Tables["COCINAS"] != null)) {
+                    base.Tables.Add(new COCINASDataTable(ds.Tables["COCINAS"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -345,12 +345,6 @@ namespace GyCAP.Data {
                     this.tablePLANES_ANUALES.InitVars();
                 }
             }
-            this.tableCOCINAS = ((COCINASDataTable)(base.Tables["COCINAS"]));
-            if ((initTable == true)) {
-                if ((this.tableCOCINAS != null)) {
-                    this.tableCOCINAS.InitVars();
-                }
-            }
             this.tableDIAS_PLAN_SEMANAL = ((DIAS_PLAN_SEMANALDataTable)(base.Tables["DIAS_PLAN_SEMANAL"]));
             if ((initTable == true)) {
                 if ((this.tableDIAS_PLAN_SEMANAL != null)) {
@@ -387,17 +381,23 @@ namespace GyCAP.Data {
                     this.tablePLANES_SEMANALES.InitVars();
                 }
             }
+            this.tableCOCINAS = ((COCINASDataTable)(base.Tables["COCINAS"]));
+            if ((initTable == true)) {
+                if ((this.tableCOCINAS != null)) {
+                    this.tableCOCINAS.InitVars();
+                }
+            }
             this.relationplanMensual_planAnual_fk = this.Relations["planMensual_planAnual_fk"];
-            this.relationdetallePlanSemanal_cocina_fk = this.Relations["detallePlanSemanal_cocina_fk"];
             this.relationdiasPlanSemanal_DetallePlanSemanal_FK = this.Relations["diasPlanSemanal_DetallePlanSemanal_FK"];
             this.relationdetallePlanSemanal_DetallePedido_fk = this.Relations["detallePlanSemanal_DetallePedido_fk"];
-            this.relationdetallePedido_Cocina_fk = this.Relations["detallePedido_Cocina_fk"];
             this.relationdetallePedido_pedido_fk = this.Relations["detallePedido_pedido_fk"];
-            this.relationdetallePlanMensual_cocina_fk = this.Relations["detallePlanMensual_cocina_fk"];
             this.relationdetallePlanmensual_DetallePedidos_fk = this.Relations["detallePlanmensual_DetallePedidos_fk"];
             this.relationdetallePlanMensual_planMensual_fk = this.Relations["detallePlanMensual_planMensual_fk"];
             this.relationdiasPlanSemanal_PlanSemanal_FK = this.Relations["diasPlanSemanal_PlanSemanal_FK"];
             this.relationplanSemanal_planMensual_fk = this.Relations["planSemanal_planMensual_fk"];
+            this.relationCOCINAS_DETALLE_PLANES_MENSUALES = this.Relations["COCINAS_DETALLE_PLANES_MENSUALES"];
+            this.relationCOCINAS_DETALLE_PLANES_SEMANALES = this.Relations["COCINAS_DETALLE_PLANES_SEMANALES"];
+            this.relationCOCINAS_DETALLE_PEDIDOS = this.Relations["COCINAS_DETALLE_PEDIDOS"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -411,8 +411,6 @@ namespace GyCAP.Data {
             base.Tables.Add(this.tablePLANES_MENSUALES);
             this.tablePLANES_ANUALES = new PLANES_ANUALESDataTable();
             base.Tables.Add(this.tablePLANES_ANUALES);
-            this.tableCOCINAS = new COCINASDataTable();
-            base.Tables.Add(this.tableCOCINAS);
             this.tableDIAS_PLAN_SEMANAL = new DIAS_PLAN_SEMANALDataTable();
             base.Tables.Add(this.tableDIAS_PLAN_SEMANAL);
             this.tableDETALLE_PLANES_SEMANALES = new DETALLE_PLANES_SEMANALESDataTable();
@@ -425,14 +423,12 @@ namespace GyCAP.Data {
             base.Tables.Add(this.tableDETALLE_PLANES_MENSUALES);
             this.tablePLANES_SEMANALES = new PLANES_SEMANALESDataTable();
             base.Tables.Add(this.tablePLANES_SEMANALES);
+            this.tableCOCINAS = new COCINASDataTable();
+            base.Tables.Add(this.tableCOCINAS);
             this.relationplanMensual_planAnual_fk = new global::System.Data.DataRelation("planMensual_planAnual_fk", new global::System.Data.DataColumn[] {
                         this.tablePLANES_ANUALES.PAN_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tablePLANES_MENSUALES.PAN_CODIGOColumn}, false);
             this.Relations.Add(this.relationplanMensual_planAnual_fk);
-            this.relationdetallePlanSemanal_cocina_fk = new global::System.Data.DataRelation("detallePlanSemanal_cocina_fk", new global::System.Data.DataColumn[] {
-                        this.tableCOCINAS.COC_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableDETALLE_PLANES_SEMANALES.COC_CODIGOColumn}, false);
-            this.Relations.Add(this.relationdetallePlanSemanal_cocina_fk);
             this.relationdiasPlanSemanal_DetallePlanSemanal_FK = new global::System.Data.DataRelation("diasPlanSemanal_DetallePlanSemanal_FK", new global::System.Data.DataColumn[] {
                         this.tableDIAS_PLAN_SEMANAL.DIAPSEM_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableDETALLE_PLANES_SEMANALES.DIAPSEM_CODIGOColumn}, false);
@@ -441,18 +437,10 @@ namespace GyCAP.Data {
                         this.tableDETALLE_PEDIDOS.DPED_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableDETALLE_PLANES_SEMANALES.DPED_CODIGOColumn}, false);
             this.Relations.Add(this.relationdetallePlanSemanal_DetallePedido_fk);
-            this.relationdetallePedido_Cocina_fk = new global::System.Data.DataRelation("detallePedido_Cocina_fk", new global::System.Data.DataColumn[] {
-                        this.tableCOCINAS.COC_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableDETALLE_PEDIDOS.COC_CODIGOColumn}, false);
-            this.Relations.Add(this.relationdetallePedido_Cocina_fk);
             this.relationdetallePedido_pedido_fk = new global::System.Data.DataRelation("detallePedido_pedido_fk", new global::System.Data.DataColumn[] {
                         this.tablePEDIDOS.PED_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableDETALLE_PEDIDOS.PED_CODIGOColumn}, false);
             this.Relations.Add(this.relationdetallePedido_pedido_fk);
-            this.relationdetallePlanMensual_cocina_fk = new global::System.Data.DataRelation("detallePlanMensual_cocina_fk", new global::System.Data.DataColumn[] {
-                        this.tableCOCINAS.COC_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableDETALLE_PLANES_MENSUALES.COC_CODIGOColumn}, false);
-            this.Relations.Add(this.relationdetallePlanMensual_cocina_fk);
             this.relationdetallePlanmensual_DetallePedidos_fk = new global::System.Data.DataRelation("detallePlanmensual_DetallePedidos_fk", new global::System.Data.DataColumn[] {
                         this.tableDETALLE_PEDIDOS.DPED_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableDETALLE_PLANES_MENSUALES.DPED_CODIGOColumn}, false);
@@ -469,6 +457,18 @@ namespace GyCAP.Data {
                         this.tablePLANES_MENSUALES.PMES_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tablePLANES_SEMANALES.PMES_CODIGOColumn}, false);
             this.Relations.Add(this.relationplanSemanal_planMensual_fk);
+            this.relationCOCINAS_DETALLE_PLANES_MENSUALES = new global::System.Data.DataRelation("COCINAS_DETALLE_PLANES_MENSUALES", new global::System.Data.DataColumn[] {
+                        this.tableCOCINAS.COC_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDETALLE_PLANES_MENSUALES.COC_CODIGOColumn}, false);
+            this.Relations.Add(this.relationCOCINAS_DETALLE_PLANES_MENSUALES);
+            this.relationCOCINAS_DETALLE_PLANES_SEMANALES = new global::System.Data.DataRelation("COCINAS_DETALLE_PLANES_SEMANALES", new global::System.Data.DataColumn[] {
+                        this.tableCOCINAS.COC_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDETALLE_PLANES_SEMANALES.COC_CODIGOColumn}, false);
+            this.Relations.Add(this.relationCOCINAS_DETALLE_PLANES_SEMANALES);
+            this.relationCOCINAS_DETALLE_PEDIDOS = new global::System.Data.DataRelation("COCINAS_DETALLE_PEDIDOS", new global::System.Data.DataColumn[] {
+                        this.tableCOCINAS.COC_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDETALLE_PEDIDOS.COC_CODIGOColumn}, false);
+            this.Relations.Add(this.relationCOCINAS_DETALLE_PEDIDOS);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -478,11 +478,6 @@ namespace GyCAP.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializePLANES_ANUALES() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeCOCINAS() {
             return false;
         }
         
@@ -513,6 +508,11 @@ namespace GyCAP.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializePLANES_SEMANALES() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeCOCINAS() {
             return false;
         }
         
@@ -573,8 +573,6 @@ namespace GyCAP.Data {
         
         public delegate void PLANES_ANUALESRowChangeEventHandler(object sender, PLANES_ANUALESRowChangeEvent e);
         
-        public delegate void COCINASRowChangeEventHandler(object sender, COCINASRowChangeEvent e);
-        
         public delegate void DIAS_PLAN_SEMANALRowChangeEventHandler(object sender, DIAS_PLAN_SEMANALRowChangeEvent e);
         
         public delegate void DETALLE_PLANES_SEMANALESRowChangeEventHandler(object sender, DETALLE_PLANES_SEMANALESRowChangeEvent e);
@@ -586,6 +584,8 @@ namespace GyCAP.Data {
         public delegate void DETALLE_PLANES_MENSUALESRowChangeEventHandler(object sender, DETALLE_PLANES_MENSUALESRowChangeEvent e);
         
         public delegate void PLANES_SEMANALESRowChangeEventHandler(object sender, PLANES_SEMANALESRowChangeEvent e);
+        
+        public delegate void COCINASRowChangeEventHandler(object sender, COCINASRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1152,369 +1152,6 @@ namespace GyCAP.Data {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class COCINASDataTable : global::System.Data.TypedTableBase<COCINASRow> {
-            
-            private global::System.Data.DataColumn columnCOC_CODIGO;
-            
-            private global::System.Data.DataColumn columnCOL_CODIGO;
-            
-            private global::System.Data.DataColumn columnMOD_CODIGO;
-            
-            private global::System.Data.DataColumn columnMCA_CODIGO;
-            
-            private global::System.Data.DataColumn columnTE_CODIGO;
-            
-            private global::System.Data.DataColumn columnDESIG_CODIGO;
-            
-            private global::System.Data.DataColumn columnCOC_CODIGO_PRODUCTO;
-            
-            private global::System.Data.DataColumn columnCOC_CANTIDADSTOCK;
-            
-            private global::System.Data.DataColumn columnCOC_ACTIVO;
-            
-            private global::System.Data.DataColumn columnCOC_COSTO;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COCINASDataTable() {
-                this.TableName = "COCINAS";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal COCINASDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected COCINASDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn COC_CODIGOColumn {
-                get {
-                    return this.columnCOC_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn COL_CODIGOColumn {
-                get {
-                    return this.columnCOL_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MOD_CODIGOColumn {
-                get {
-                    return this.columnMOD_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MCA_CODIGOColumn {
-                get {
-                    return this.columnMCA_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn TE_CODIGOColumn {
-                get {
-                    return this.columnTE_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn DESIG_CODIGOColumn {
-                get {
-                    return this.columnDESIG_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn COC_CODIGO_PRODUCTOColumn {
-                get {
-                    return this.columnCOC_CODIGO_PRODUCTO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn COC_CANTIDADSTOCKColumn {
-                get {
-                    return this.columnCOC_CANTIDADSTOCK;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn COC_ACTIVOColumn {
-                get {
-                    return this.columnCOC_ACTIVO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn COC_COSTOColumn {
-                get {
-                    return this.columnCOC_COSTO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COCINASRow this[int index] {
-                get {
-                    return ((COCINASRow)(this.Rows[index]));
-                }
-            }
-            
-            public event COCINASRowChangeEventHandler COCINASRowChanging;
-            
-            public event COCINASRowChangeEventHandler COCINASRowChanged;
-            
-            public event COCINASRowChangeEventHandler COCINASRowDeleting;
-            
-            public event COCINASRowChangeEventHandler COCINASRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddCOCINASRow(COCINASRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COCINASRow AddCOCINASRow(decimal COL_CODIGO, decimal MOD_CODIGO, decimal MCA_CODIGO, decimal TE_CODIGO, decimal DESIG_CODIGO, string COC_CODIGO_PRODUCTO, int COC_CANTIDADSTOCK, decimal COC_ACTIVO, decimal COC_COSTO) {
-                COCINASRow rowCOCINASRow = ((COCINASRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        COL_CODIGO,
-                        MOD_CODIGO,
-                        MCA_CODIGO,
-                        TE_CODIGO,
-                        DESIG_CODIGO,
-                        COC_CODIGO_PRODUCTO,
-                        COC_CANTIDADSTOCK,
-                        COC_ACTIVO,
-                        COC_COSTO};
-                rowCOCINASRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowCOCINASRow);
-                return rowCOCINASRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COCINASRow FindByCOC_CODIGO(decimal COC_CODIGO) {
-                return ((COCINASRow)(this.Rows.Find(new object[] {
-                            COC_CODIGO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                COCINASDataTable cln = ((COCINASDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new COCINASDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnCOC_CODIGO = base.Columns["COC_CODIGO"];
-                this.columnCOL_CODIGO = base.Columns["COL_CODIGO"];
-                this.columnMOD_CODIGO = base.Columns["MOD_CODIGO"];
-                this.columnMCA_CODIGO = base.Columns["MCA_CODIGO"];
-                this.columnTE_CODIGO = base.Columns["TE_CODIGO"];
-                this.columnDESIG_CODIGO = base.Columns["DESIG_CODIGO"];
-                this.columnCOC_CODIGO_PRODUCTO = base.Columns["COC_CODIGO_PRODUCTO"];
-                this.columnCOC_CANTIDADSTOCK = base.Columns["COC_CANTIDADSTOCK"];
-                this.columnCOC_ACTIVO = base.Columns["COC_ACTIVO"];
-                this.columnCOC_COSTO = base.Columns["COC_COSTO"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnCOC_CODIGO = new global::System.Data.DataColumn("COC_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCOC_CODIGO);
-                this.columnCOL_CODIGO = new global::System.Data.DataColumn("COL_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCOL_CODIGO);
-                this.columnMOD_CODIGO = new global::System.Data.DataColumn("MOD_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMOD_CODIGO);
-                this.columnMCA_CODIGO = new global::System.Data.DataColumn("MCA_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMCA_CODIGO);
-                this.columnTE_CODIGO = new global::System.Data.DataColumn("TE_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTE_CODIGO);
-                this.columnDESIG_CODIGO = new global::System.Data.DataColumn("DESIG_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDESIG_CODIGO);
-                this.columnCOC_CODIGO_PRODUCTO = new global::System.Data.DataColumn("COC_CODIGO_PRODUCTO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCOC_CODIGO_PRODUCTO);
-                this.columnCOC_CANTIDADSTOCK = new global::System.Data.DataColumn("COC_CANTIDADSTOCK", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCOC_CANTIDADSTOCK);
-                this.columnCOC_ACTIVO = new global::System.Data.DataColumn("COC_ACTIVO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCOC_ACTIVO);
-                this.columnCOC_COSTO = new global::System.Data.DataColumn("COC_COSTO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCOC_COSTO);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnCOC_CODIGO}, true));
-                this.columnCOC_CODIGO.AutoIncrement = true;
-                this.columnCOC_CODIGO.AutoIncrementSeed = -1;
-                this.columnCOC_CODIGO.AutoIncrementStep = -1;
-                this.columnCOC_CODIGO.AllowDBNull = false;
-                this.columnCOC_CODIGO.ReadOnly = true;
-                this.columnCOC_CODIGO.Unique = true;
-                this.columnCOL_CODIGO.AllowDBNull = false;
-                this.columnMOD_CODIGO.AllowDBNull = false;
-                this.columnMCA_CODIGO.AllowDBNull = false;
-                this.columnTE_CODIGO.AllowDBNull = false;
-                this.columnDESIG_CODIGO.AllowDBNull = false;
-                this.columnCOC_CODIGO_PRODUCTO.AllowDBNull = false;
-                this.columnCOC_CODIGO_PRODUCTO.MaxLength = 80;
-                this.columnCOC_CANTIDADSTOCK.AllowDBNull = false;
-                this.columnCOC_ACTIVO.AllowDBNull = false;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COCINASRow NewCOCINASRow() {
-                return ((COCINASRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new COCINASRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(COCINASRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.COCINASRowChanged != null)) {
-                    this.COCINASRowChanged(this, new COCINASRowChangeEvent(((COCINASRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.COCINASRowChanging != null)) {
-                    this.COCINASRowChanging(this, new COCINASRowChangeEvent(((COCINASRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.COCINASRowDeleted != null)) {
-                    this.COCINASRowDeleted(this, new COCINASRowChangeEvent(((COCINASRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.COCINASRowDeleting != null)) {
-                    this.COCINASRowDeleting(this, new COCINASRowChangeEvent(((COCINASRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveCOCINASRow(COCINASRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsPlanSemanal ds = new dsPlanSemanal();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "COCINASDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class DIAS_PLAN_SEMANALDataTable : global::System.Data.TypedTableBase<DIAS_PLAN_SEMANALRow> {
             
             private global::System.Data.DataColumn columnDIAPSEM_CODIGO;
@@ -1928,7 +1565,7 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PLANES_SEMANALESRow AddDETALLE_PLANES_SEMANALESRow(COCINASRow parentCOCINASRowBydetallePlanSemanal_cocina_fk, int DPSEM_CANTIDADESTIMADA, int DPSEM_CANTIDADREAL, DIAS_PLAN_SEMANALRow parentDIAS_PLAN_SEMANALRowBydiasPlanSemanal_DetallePlanSemanal_FK, decimal DPSEM_ESTADO, DETALLE_PEDIDOSRow parentDETALLE_PEDIDOSRowBydetallePlanSemanal_DetallePedido_fk, decimal DPSEM_CANTIDADENPROCESO) {
+            public DETALLE_PLANES_SEMANALESRow AddDETALLE_PLANES_SEMANALESRow(COCINASRow parentCOCINASRowByCOCINAS_DETALLE_PLANES_SEMANALES, int DPSEM_CANTIDADESTIMADA, int DPSEM_CANTIDADREAL, DIAS_PLAN_SEMANALRow parentDIAS_PLAN_SEMANALRowBydiasPlanSemanal_DetallePlanSemanal_FK, decimal DPSEM_ESTADO, DETALLE_PEDIDOSRow parentDETALLE_PEDIDOSRowBydetallePlanSemanal_DetallePedido_fk, decimal DPSEM_CANTIDADENPROCESO) {
                 DETALLE_PLANES_SEMANALESRow rowDETALLE_PLANES_SEMANALESRow = ((DETALLE_PLANES_SEMANALESRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1939,8 +1576,8 @@ namespace GyCAP.Data {
                         DPSEM_ESTADO,
                         null,
                         DPSEM_CANTIDADENPROCESO};
-                if ((parentCOCINASRowBydetallePlanSemanal_cocina_fk != null)) {
-                    columnValuesArray[1] = parentCOCINASRowBydetallePlanSemanal_cocina_fk[0];
+                if ((parentCOCINASRowByCOCINAS_DETALLE_PLANES_SEMANALES != null)) {
+                    columnValuesArray[1] = parentCOCINASRowByCOCINAS_DETALLE_PLANES_SEMANALES[0];
                 }
                 if ((parentDIAS_PLAN_SEMANALRowBydiasPlanSemanal_DetallePlanSemanal_FK != null)) {
                     columnValuesArray[4] = parentDIAS_PLAN_SEMANALRowBydiasPlanSemanal_DetallePlanSemanal_FK[0];
@@ -2248,7 +1885,7 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PEDIDOSRow AddDETALLE_PEDIDOSRow(PEDIDOSRow parentPEDIDOSRowBydetallePedido_pedido_fk, decimal EDPED_CODIGO, COCINASRow parentCOCINASRowBydetallePedido_Cocina_fk, int DPED_CANTIDAD, System.DateTime DPED_FECHA_CANCELACION) {
+            public DETALLE_PEDIDOSRow AddDETALLE_PEDIDOSRow(PEDIDOSRow parentPEDIDOSRowBydetallePedido_pedido_fk, decimal EDPED_CODIGO, COCINASRow parentCOCINASRowByCOCINAS_DETALLE_PEDIDOS, int DPED_CANTIDAD, System.DateTime DPED_FECHA_CANCELACION) {
                 DETALLE_PEDIDOSRow rowDETALLE_PEDIDOSRow = ((DETALLE_PEDIDOSRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2260,8 +1897,8 @@ namespace GyCAP.Data {
                 if ((parentPEDIDOSRowBydetallePedido_pedido_fk != null)) {
                     columnValuesArray[1] = parentPEDIDOSRowBydetallePedido_pedido_fk[0];
                 }
-                if ((parentCOCINASRowBydetallePedido_Cocina_fk != null)) {
-                    columnValuesArray[3] = parentCOCINASRowBydetallePedido_Cocina_fk[0];
+                if ((parentCOCINASRowByCOCINAS_DETALLE_PEDIDOS != null)) {
+                    columnValuesArray[3] = parentCOCINASRowByCOCINAS_DETALLE_PEDIDOS[0];
                 }
                 rowDETALLE_PEDIDOSRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDETALLE_PEDIDOSRow);
@@ -2901,7 +2538,7 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PLANES_MENSUALESRow AddDETALLE_PLANES_MENSUALESRow(decimal PMES_CODIGO, COCINASRow parentCOCINASRowBydetallePlanMensual_cocina_fk, int DPMES_CANTIDADESTIMADA, int DPMES_CANTIDADREAL, DETALLE_PEDIDOSRow parentDETALLE_PEDIDOSRowBydetallePlanmensual_DetallePedidos_fk, decimal DPMES_CANTPLANIFICADA) {
+            public DETALLE_PLANES_MENSUALESRow AddDETALLE_PLANES_MENSUALESRow(decimal PMES_CODIGO, COCINASRow parentCOCINASRowByCOCINAS_DETALLE_PLANES_MENSUALES, int DPMES_CANTIDADESTIMADA, int DPMES_CANTIDADREAL, DETALLE_PEDIDOSRow parentDETALLE_PEDIDOSRowBydetallePlanmensual_DetallePedidos_fk, decimal DPMES_CANTPLANIFICADA) {
                 DETALLE_PLANES_MENSUALESRow rowDETALLE_PLANES_MENSUALESRow = ((DETALLE_PLANES_MENSUALESRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2911,8 +2548,8 @@ namespace GyCAP.Data {
                         DPMES_CANTIDADREAL,
                         null,
                         DPMES_CANTPLANIFICADA};
-                if ((parentCOCINASRowBydetallePlanMensual_cocina_fk != null)) {
-                    columnValuesArray[2] = parentCOCINASRowBydetallePlanMensual_cocina_fk[0];
+                if ((parentCOCINASRowByCOCINAS_DETALLE_PLANES_MENSUALES != null)) {
+                    columnValuesArray[2] = parentCOCINASRowByCOCINAS_DETALLE_PLANES_MENSUALES[0];
                 }
                 if ((parentDETALLE_PEDIDOSRowBydetallePlanmensual_DetallePedidos_fk != null)) {
                     columnValuesArray[5] = parentDETALLE_PEDIDOSRowBydetallePlanmensual_DetallePedidos_fk[0];
@@ -3376,6 +3013,341 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class COCINASDataTable : global::System.Data.TypedTableBase<COCINASRow> {
+            
+            private global::System.Data.DataColumn columnCOC_CODIGO;
+            
+            private global::System.Data.DataColumn columnCOL_CODIGO;
+            
+            private global::System.Data.DataColumn columnMOD_CODIGO;
+            
+            private global::System.Data.DataColumn columnMCA_CODIGO;
+            
+            private global::System.Data.DataColumn columnTE_CODIGO;
+            
+            private global::System.Data.DataColumn columnDESIG_CODIGO;
+            
+            private global::System.Data.DataColumn columnCOC_CODIGO_PRODUCTO;
+            
+            private global::System.Data.DataColumn columnCOC_ACTIVO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COCINASDataTable() {
+                this.TableName = "COCINAS";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal COCINASDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected COCINASDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn COC_CODIGOColumn {
+                get {
+                    return this.columnCOC_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn COL_CODIGOColumn {
+                get {
+                    return this.columnCOL_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MOD_CODIGOColumn {
+                get {
+                    return this.columnMOD_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MCA_CODIGOColumn {
+                get {
+                    return this.columnMCA_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TE_CODIGOColumn {
+                get {
+                    return this.columnTE_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DESIG_CODIGOColumn {
+                get {
+                    return this.columnDESIG_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn COC_CODIGO_PRODUCTOColumn {
+                get {
+                    return this.columnCOC_CODIGO_PRODUCTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn COC_ACTIVOColumn {
+                get {
+                    return this.columnCOC_ACTIVO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COCINASRow this[int index] {
+                get {
+                    return ((COCINASRow)(this.Rows[index]));
+                }
+            }
+            
+            public event COCINASRowChangeEventHandler COCINASRowChanging;
+            
+            public event COCINASRowChangeEventHandler COCINASRowChanged;
+            
+            public event COCINASRowChangeEventHandler COCINASRowDeleting;
+            
+            public event COCINASRowChangeEventHandler COCINASRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddCOCINASRow(COCINASRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COCINASRow AddCOCINASRow(decimal COL_CODIGO, decimal MOD_CODIGO, decimal MCA_CODIGO, decimal TE_CODIGO, decimal DESIG_CODIGO, string COC_CODIGO_PRODUCTO, decimal COC_ACTIVO) {
+                COCINASRow rowCOCINASRow = ((COCINASRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        COL_CODIGO,
+                        MOD_CODIGO,
+                        MCA_CODIGO,
+                        TE_CODIGO,
+                        DESIG_CODIGO,
+                        COC_CODIGO_PRODUCTO,
+                        COC_ACTIVO};
+                rowCOCINASRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowCOCINASRow);
+                return rowCOCINASRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COCINASRow FindByCOC_CODIGO(decimal COC_CODIGO) {
+                return ((COCINASRow)(this.Rows.Find(new object[] {
+                            COC_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                COCINASDataTable cln = ((COCINASDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new COCINASDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnCOC_CODIGO = base.Columns["COC_CODIGO"];
+                this.columnCOL_CODIGO = base.Columns["COL_CODIGO"];
+                this.columnMOD_CODIGO = base.Columns["MOD_CODIGO"];
+                this.columnMCA_CODIGO = base.Columns["MCA_CODIGO"];
+                this.columnTE_CODIGO = base.Columns["TE_CODIGO"];
+                this.columnDESIG_CODIGO = base.Columns["DESIG_CODIGO"];
+                this.columnCOC_CODIGO_PRODUCTO = base.Columns["COC_CODIGO_PRODUCTO"];
+                this.columnCOC_ACTIVO = base.Columns["COC_ACTIVO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnCOC_CODIGO = new global::System.Data.DataColumn("COC_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOC_CODIGO);
+                this.columnCOL_CODIGO = new global::System.Data.DataColumn("COL_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOL_CODIGO);
+                this.columnMOD_CODIGO = new global::System.Data.DataColumn("MOD_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMOD_CODIGO);
+                this.columnMCA_CODIGO = new global::System.Data.DataColumn("MCA_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMCA_CODIGO);
+                this.columnTE_CODIGO = new global::System.Data.DataColumn("TE_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTE_CODIGO);
+                this.columnDESIG_CODIGO = new global::System.Data.DataColumn("DESIG_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDESIG_CODIGO);
+                this.columnCOC_CODIGO_PRODUCTO = new global::System.Data.DataColumn("COC_CODIGO_PRODUCTO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOC_CODIGO_PRODUCTO);
+                this.columnCOC_ACTIVO = new global::System.Data.DataColumn("COC_ACTIVO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOC_ACTIVO);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnCOC_CODIGO}, true));
+                this.columnCOC_CODIGO.AutoIncrement = true;
+                this.columnCOC_CODIGO.AutoIncrementSeed = -1;
+                this.columnCOC_CODIGO.AutoIncrementStep = -1;
+                this.columnCOC_CODIGO.AllowDBNull = false;
+                this.columnCOC_CODIGO.Unique = true;
+                this.columnCOL_CODIGO.AllowDBNull = false;
+                this.columnMOD_CODIGO.AllowDBNull = false;
+                this.columnMCA_CODIGO.AllowDBNull = false;
+                this.columnTE_CODIGO.AllowDBNull = false;
+                this.columnDESIG_CODIGO.AllowDBNull = false;
+                this.columnCOC_CODIGO_PRODUCTO.AllowDBNull = false;
+                this.columnCOC_CODIGO_PRODUCTO.MaxLength = 80;
+                this.columnCOC_ACTIVO.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COCINASRow NewCOCINASRow() {
+                return ((COCINASRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new COCINASRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(COCINASRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.COCINASRowChanged != null)) {
+                    this.COCINASRowChanged(this, new COCINASRowChangeEvent(((COCINASRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.COCINASRowChanging != null)) {
+                    this.COCINASRowChanging(this, new COCINASRowChangeEvent(((COCINASRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.COCINASRowDeleted != null)) {
+                    this.COCINASRowDeleted(this, new COCINASRowChangeEvent(((COCINASRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.COCINASRowDeleting != null)) {
+                    this.COCINASRowDeleting(this, new COCINASRowChangeEvent(((COCINASRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveCOCINASRow(COCINASRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsPlanSemanal ds = new dsPlanSemanal();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "COCINASDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -3566,166 +3538,6 @@ namespace GyCAP.Data {
                 }
                 else {
                     return ((PLANES_MENSUALESRow[])(base.GetChildRows(this.Table.ChildRelations["planMensual_planAnual_fk"])));
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class COCINASRow : global::System.Data.DataRow {
-            
-            private COCINASDataTable tableCOCINAS;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal COCINASRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableCOCINAS = ((COCINASDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal COC_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableCOCINAS.COC_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableCOCINAS.COC_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal COL_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableCOCINAS.COL_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableCOCINAS.COL_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal MOD_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableCOCINAS.MOD_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableCOCINAS.MOD_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal MCA_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableCOCINAS.MCA_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableCOCINAS.MCA_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal TE_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableCOCINAS.TE_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableCOCINAS.TE_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal DESIG_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableCOCINAS.DESIG_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableCOCINAS.DESIG_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string COC_CODIGO_PRODUCTO {
-                get {
-                    return ((string)(this[this.tableCOCINAS.COC_CODIGO_PRODUCTOColumn]));
-                }
-                set {
-                    this[this.tableCOCINAS.COC_CODIGO_PRODUCTOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int COC_CANTIDADSTOCK {
-                get {
-                    return ((int)(this[this.tableCOCINAS.COC_CANTIDADSTOCKColumn]));
-                }
-                set {
-                    this[this.tableCOCINAS.COC_CANTIDADSTOCKColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal COC_ACTIVO {
-                get {
-                    return ((decimal)(this[this.tableCOCINAS.COC_ACTIVOColumn]));
-                }
-                set {
-                    this[this.tableCOCINAS.COC_ACTIVOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal COC_COSTO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCOCINAS.COC_COSTOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'COC_COSTO\' in table \'COCINAS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCOCINAS.COC_COSTOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCOC_COSTONull() {
-                return this.IsNull(this.tableCOCINAS.COC_COSTOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCOC_COSTONull() {
-                this[this.tableCOCINAS.COC_COSTOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PLANES_SEMANALESRow[] GetDETALLE_PLANES_SEMANALESRows() {
-                if ((this.Table.ChildRelations["detallePlanSemanal_cocina_fk"] == null)) {
-                    return new DETALLE_PLANES_SEMANALESRow[0];
-                }
-                else {
-                    return ((DETALLE_PLANES_SEMANALESRow[])(base.GetChildRows(this.Table.ChildRelations["detallePlanSemanal_cocina_fk"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PEDIDOSRow[] GetDETALLE_PEDIDOSRows() {
-                if ((this.Table.ChildRelations["detallePedido_Cocina_fk"] == null)) {
-                    return new DETALLE_PEDIDOSRow[0];
-                }
-                else {
-                    return ((DETALLE_PEDIDOSRow[])(base.GetChildRows(this.Table.ChildRelations["detallePedido_Cocina_fk"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PLANES_MENSUALESRow[] GetDETALLE_PLANES_MENSUALESRows() {
-                if ((this.Table.ChildRelations["detallePlanMensual_cocina_fk"] == null)) {
-                    return new DETALLE_PLANES_MENSUALESRow[0];
-                }
-                else {
-                    return ((DETALLE_PLANES_MENSUALESRow[])(base.GetChildRows(this.Table.ChildRelations["detallePlanMensual_cocina_fk"])));
                 }
             }
         }
@@ -3960,16 +3772,6 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COCINASRow COCINASRow {
-                get {
-                    return ((COCINASRow)(this.GetParentRow(this.Table.ParentRelations["detallePlanSemanal_cocina_fk"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["detallePlanSemanal_cocina_fk"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public DIAS_PLAN_SEMANALRow DIAS_PLAN_SEMANALRow {
                 get {
                     return ((DIAS_PLAN_SEMANALRow)(this.GetParentRow(this.Table.ParentRelations["diasPlanSemanal_DetallePlanSemanal_FK"])));
@@ -3986,6 +3788,16 @@ namespace GyCAP.Data {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["detallePlanSemanal_DetallePedido_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COCINASRow COCINASRow {
+                get {
+                    return ((COCINASRow)(this.GetParentRow(this.Table.ParentRelations["COCINAS_DETALLE_PLANES_SEMANALES"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["COCINAS_DETALLE_PLANES_SEMANALES"]);
                 }
             }
             
@@ -4121,22 +3933,22 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COCINASRow COCINASRow {
-                get {
-                    return ((COCINASRow)(this.GetParentRow(this.Table.ParentRelations["detallePedido_Cocina_fk"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["detallePedido_Cocina_fk"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public PEDIDOSRow PEDIDOSRow {
                 get {
                     return ((PEDIDOSRow)(this.GetParentRow(this.Table.ParentRelations["detallePedido_pedido_fk"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["detallePedido_pedido_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COCINASRow COCINASRow {
+                get {
+                    return ((COCINASRow)(this.GetParentRow(this.Table.ParentRelations["COCINAS_DETALLE_PEDIDOS"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["COCINAS_DETALLE_PEDIDOS"]);
                 }
             }
             
@@ -4460,16 +4272,6 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COCINASRow COCINASRow {
-                get {
-                    return ((COCINASRow)(this.GetParentRow(this.Table.ParentRelations["detallePlanMensual_cocina_fk"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["detallePlanMensual_cocina_fk"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public DETALLE_PEDIDOSRow DETALLE_PEDIDOSRow {
                 get {
                     return ((DETALLE_PEDIDOSRow)(this.GetParentRow(this.Table.ParentRelations["detallePlanmensual_DetallePedidos_fk"])));
@@ -4486,6 +4288,16 @@ namespace GyCAP.Data {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["detallePlanMensual_planMensual_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COCINASRow COCINASRow {
+                get {
+                    return ((COCINASRow)(this.GetParentRow(this.Table.ParentRelations["COCINAS_DETALLE_PLANES_MENSUALES"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["COCINAS_DETALLE_PLANES_MENSUALES"]);
                 }
             }
             
@@ -4636,6 +4448,131 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class COCINASRow : global::System.Data.DataRow {
+            
+            private COCINASDataTable tableCOCINAS;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal COCINASRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableCOCINAS = ((COCINASDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal COC_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableCOCINAS.COC_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableCOCINAS.COC_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal COL_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableCOCINAS.COL_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableCOCINAS.COL_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal MOD_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableCOCINAS.MOD_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableCOCINAS.MOD_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal MCA_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableCOCINAS.MCA_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableCOCINAS.MCA_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal TE_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableCOCINAS.TE_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableCOCINAS.TE_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal DESIG_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableCOCINAS.DESIG_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableCOCINAS.DESIG_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string COC_CODIGO_PRODUCTO {
+                get {
+                    return ((string)(this[this.tableCOCINAS.COC_CODIGO_PRODUCTOColumn]));
+                }
+                set {
+                    this[this.tableCOCINAS.COC_CODIGO_PRODUCTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal COC_ACTIVO {
+                get {
+                    return ((decimal)(this[this.tableCOCINAS.COC_ACTIVOColumn]));
+                }
+                set {
+                    this[this.tableCOCINAS.COC_ACTIVOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PLANES_MENSUALESRow[] GetDETALLE_PLANES_MENSUALESRows() {
+                if ((this.Table.ChildRelations["COCINAS_DETALLE_PLANES_MENSUALES"] == null)) {
+                    return new DETALLE_PLANES_MENSUALESRow[0];
+                }
+                else {
+                    return ((DETALLE_PLANES_MENSUALESRow[])(base.GetChildRows(this.Table.ChildRelations["COCINAS_DETALLE_PLANES_MENSUALES"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PLANES_SEMANALESRow[] GetDETALLE_PLANES_SEMANALESRows() {
+                if ((this.Table.ChildRelations["COCINAS_DETALLE_PLANES_SEMANALES"] == null)) {
+                    return new DETALLE_PLANES_SEMANALESRow[0];
+                }
+                else {
+                    return ((DETALLE_PLANES_SEMANALESRow[])(base.GetChildRows(this.Table.ChildRelations["COCINAS_DETALLE_PLANES_SEMANALES"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_PEDIDOSRow[] GetDETALLE_PEDIDOSRows() {
+                if ((this.Table.ChildRelations["COCINAS_DETALLE_PEDIDOS"] == null)) {
+                    return new DETALLE_PEDIDOSRow[0];
+                }
+                else {
+                    return ((DETALLE_PEDIDOSRow[])(base.GetChildRows(this.Table.ChildRelations["COCINAS_DETALLE_PEDIDOS"])));
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -4684,37 +4621,6 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public PLANES_ANUALESRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class COCINASRowChangeEvent : global::System.EventArgs {
-            
-            private COCINASRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COCINASRowChangeEvent(COCINASRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COCINASRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -4901,6 +4807,37 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public PLANES_SEMANALESRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class COCINASRowChangeEvent : global::System.EventArgs {
+            
+            private COCINASRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COCINASRowChangeEvent(COCINASRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COCINASRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -5587,442 +5524,6 @@ SELECT PAN_CODIGO, PAN_ANIO, DEMAN_CODIGO, PAN_FECHACREACION FROM PLANES_ANUALES
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(decimal PAN_ANIO, decimal DEMAN_CODIGO, global::System.Nullable<global::System.DateTime> PAN_FECHACREACION, decimal Original_PAN_CODIGO, decimal Original_PAN_ANIO, decimal Original_DEMAN_CODIGO, global::System.Nullable<global::System.DateTime> Original_PAN_FECHACREACION) {
             return this.Update(PAN_ANIO, DEMAN_CODIGO, PAN_FECHACREACION, Original_PAN_CODIGO, Original_PAN_ANIO, Original_DEMAN_CODIGO, Original_PAN_FECHACREACION, Original_PAN_CODIGO);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class COCINASTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public COCINASTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "COCINAS";
-            tableMapping.ColumnMappings.Add("COC_CODIGO", "COC_CODIGO");
-            tableMapping.ColumnMappings.Add("COL_CODIGO", "COL_CODIGO");
-            tableMapping.ColumnMappings.Add("MOD_CODIGO", "MOD_CODIGO");
-            tableMapping.ColumnMappings.Add("MCA_CODIGO", "MCA_CODIGO");
-            tableMapping.ColumnMappings.Add("TE_CODIGO", "TE_CODIGO");
-            tableMapping.ColumnMappings.Add("DESIG_CODIGO", "DESIG_CODIGO");
-            tableMapping.ColumnMappings.Add("COC_CODIGO_PRODUCTO", "COC_CODIGO_PRODUCTO");
-            tableMapping.ColumnMappings.Add("COC_CANTIDADSTOCK", "COC_CANTIDADSTOCK");
-            tableMapping.ColumnMappings.Add("COC_ACTIVO", "COC_ACTIVO");
-            tableMapping.ColumnMappings.Add("COC_COSTO", "COC_COSTO");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[COCINAS] WHERE (([COC_CODIGO] = @Original_COC_CODIGO) AND ([COL_CODIGO] = @Original_COL_CODIGO) AND ([MOD_CODIGO] = @Original_MOD_CODIGO) AND ([MCA_CODIGO] = @Original_MCA_CODIGO) AND ([TE_CODIGO] = @Original_TE_CODIGO) AND ([DESIG_CODIGO] = @Original_DESIG_CODIGO) AND ([COC_CODIGO_PRODUCTO] = @Original_COC_CODIGO_PRODUCTO) AND ([COC_CANTIDADSTOCK] = @Original_COC_CANTIDADSTOCK) AND ([COC_ACTIVO] = @Original_COC_ACTIVO) AND ((@IsNull_COC_COSTO = 1 AND [COC_COSTO] IS NULL) OR ([COC_COSTO] = @Original_COC_COSTO)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COL_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "COL_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MOD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MOD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MCA_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MCA_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DESIG_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DESIG_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO_PRODUCTO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CODIGO_PRODUCTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CANTIDADSTOCK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CANTIDADSTOCK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "COC_ACTIVO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_COC_COSTO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_COSTO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "COC_COSTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[COCINAS] ([COL_CODIGO], [MOD_CODIGO], [MCA_CODIGO], [TE_CODIGO], [DESIG_CODIGO], [COC_CODIGO_PRODUCTO], [COC_CANTIDADSTOCK], [COC_ACTIVO], [COC_COSTO]) VALUES (@COL_CODIGO, @MOD_CODIGO, @MCA_CODIGO, @TE_CODIGO, @DESIG_CODIGO, @COC_CODIGO_PRODUCTO, @COC_CANTIDADSTOCK, @COC_ACTIVO, @COC_COSTO);
-SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, COC_CODIGO_PRODUCTO, COC_CANTIDADSTOCK, COC_ACTIVO, COC_COSTO FROM COCINAS WHERE (COC_CODIGO = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COL_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "COL_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MOD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MOD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MCA_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MCA_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DESIG_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DESIG_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO_PRODUCTO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CODIGO_PRODUCTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CANTIDADSTOCK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CANTIDADSTOCK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "COC_ACTIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "COC_COSTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[COCINAS] SET [COL_CODIGO] = @COL_CODIGO, [MOD_CODIGO] = @MOD_CODIGO, [MCA_CODIGO] = @MCA_CODIGO, [TE_CODIGO] = @TE_CODIGO, [DESIG_CODIGO] = @DESIG_CODIGO, [COC_CODIGO_PRODUCTO] = @COC_CODIGO_PRODUCTO, [COC_CANTIDADSTOCK] = @COC_CANTIDADSTOCK, [COC_ACTIVO] = @COC_ACTIVO, [COC_COSTO] = @COC_COSTO WHERE (([COC_CODIGO] = @Original_COC_CODIGO) AND ([COL_CODIGO] = @Original_COL_CODIGO) AND ([MOD_CODIGO] = @Original_MOD_CODIGO) AND ([MCA_CODIGO] = @Original_MCA_CODIGO) AND ([TE_CODIGO] = @Original_TE_CODIGO) AND ([DESIG_CODIGO] = @Original_DESIG_CODIGO) AND ([COC_CODIGO_PRODUCTO] = @Original_COC_CODIGO_PRODUCTO) AND ([COC_CANTIDADSTOCK] = @Original_COC_CANTIDADSTOCK) AND ([COC_ACTIVO] = @Original_COC_ACTIVO) AND ((@IsNull_COC_COSTO = 1 AND [COC_COSTO] IS NULL) OR ([COC_COSTO] = @Original_COC_COSTO)));
-SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, COC_CODIGO_PRODUCTO, COC_CANTIDADSTOCK, COC_ACTIVO, COC_COSTO FROM COCINAS WHERE (COC_CODIGO = @COC_CODIGO)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COL_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "COL_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MOD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MOD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MCA_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MCA_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DESIG_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DESIG_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO_PRODUCTO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CODIGO_PRODUCTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CANTIDADSTOCK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CANTIDADSTOCK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "COC_ACTIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "COC_COSTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COL_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "COL_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MOD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MOD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MCA_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MCA_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DESIG_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DESIG_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO_PRODUCTO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CODIGO_PRODUCTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CANTIDADSTOCK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CANTIDADSTOCK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "COC_ACTIVO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_COC_COSTO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_COSTO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "COC_COSTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString6;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, C" +
-                "OC_CODIGO_PRODUCTO, COC_CANTIDADSTOCK, COC_ACTIVO, COC_COSTO FROM dbo.COCINAS";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsPlanSemanal.COCINASDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsPlanSemanal.COCINASDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsPlanSemanal.COCINASDataTable dataTable = new dsPlanSemanal.COCINASDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsPlanSemanal.COCINASDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsPlanSemanal dataSet) {
-            return this.Adapter.Update(dataSet, "COCINAS");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_COC_CODIGO, decimal Original_COL_CODIGO, decimal Original_MOD_CODIGO, decimal Original_MCA_CODIGO, decimal Original_TE_CODIGO, decimal Original_DESIG_CODIGO, string Original_COC_CODIGO_PRODUCTO, int Original_COC_CANTIDADSTOCK, decimal Original_COC_ACTIVO, global::System.Nullable<decimal> Original_COC_COSTO) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_COC_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_COL_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_MOD_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[3].Value = ((decimal)(Original_MCA_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[4].Value = ((decimal)(Original_TE_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[5].Value = ((decimal)(Original_DESIG_CODIGO));
-            if ((Original_COC_CODIGO_PRODUCTO == null)) {
-                throw new global::System.ArgumentNullException("Original_COC_CODIGO_PRODUCTO");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_COC_CODIGO_PRODUCTO));
-            }
-            this.Adapter.DeleteCommand.Parameters[7].Value = ((int)(Original_COC_CANTIDADSTOCK));
-            this.Adapter.DeleteCommand.Parameters[8].Value = ((decimal)(Original_COC_ACTIVO));
-            if ((Original_COC_COSTO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((decimal)(Original_COC_COSTO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(decimal COL_CODIGO, decimal MOD_CODIGO, decimal MCA_CODIGO, decimal TE_CODIGO, decimal DESIG_CODIGO, string COC_CODIGO_PRODUCTO, int COC_CANTIDADSTOCK, decimal COC_ACTIVO, global::System.Nullable<decimal> COC_COSTO) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(COL_CODIGO));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(MOD_CODIGO));
-            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(MCA_CODIGO));
-            this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(TE_CODIGO));
-            this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(DESIG_CODIGO));
-            if ((COC_CODIGO_PRODUCTO == null)) {
-                throw new global::System.ArgumentNullException("COC_CODIGO_PRODUCTO");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(COC_CODIGO_PRODUCTO));
-            }
-            this.Adapter.InsertCommand.Parameters[6].Value = ((int)(COC_CANTIDADSTOCK));
-            this.Adapter.InsertCommand.Parameters[7].Value = ((decimal)(COC_ACTIVO));
-            if ((COC_COSTO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((decimal)(COC_COSTO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    decimal COL_CODIGO, 
-                    decimal MOD_CODIGO, 
-                    decimal MCA_CODIGO, 
-                    decimal TE_CODIGO, 
-                    decimal DESIG_CODIGO, 
-                    string COC_CODIGO_PRODUCTO, 
-                    int COC_CANTIDADSTOCK, 
-                    decimal COC_ACTIVO, 
-                    global::System.Nullable<decimal> COC_COSTO, 
-                    decimal Original_COC_CODIGO, 
-                    decimal Original_COL_CODIGO, 
-                    decimal Original_MOD_CODIGO, 
-                    decimal Original_MCA_CODIGO, 
-                    decimal Original_TE_CODIGO, 
-                    decimal Original_DESIG_CODIGO, 
-                    string Original_COC_CODIGO_PRODUCTO, 
-                    int Original_COC_CANTIDADSTOCK, 
-                    decimal Original_COC_ACTIVO, 
-                    global::System.Nullable<decimal> Original_COC_COSTO, 
-                    decimal COC_CODIGO) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(COL_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(MOD_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(MCA_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(TE_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(DESIG_CODIGO));
-            if ((COC_CODIGO_PRODUCTO == null)) {
-                throw new global::System.ArgumentNullException("COC_CODIGO_PRODUCTO");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(COC_CODIGO_PRODUCTO));
-            }
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(COC_CANTIDADSTOCK));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(COC_ACTIVO));
-            if ((COC_COSTO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(COC_COSTO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(Original_COC_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(Original_COL_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_MOD_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(Original_MCA_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_TE_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((decimal)(Original_DESIG_CODIGO));
-            if ((Original_COC_CODIGO_PRODUCTO == null)) {
-                throw new global::System.ArgumentNullException("Original_COC_CODIGO_PRODUCTO");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_COC_CODIGO_PRODUCTO));
-            }
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(Original_COC_CANTIDADSTOCK));
-            this.Adapter.UpdateCommand.Parameters[17].Value = ((decimal)(Original_COC_ACTIVO));
-            if ((Original_COC_COSTO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((decimal)(Original_COC_COSTO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[20].Value = ((decimal)(COC_CODIGO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    decimal COL_CODIGO, 
-                    decimal MOD_CODIGO, 
-                    decimal MCA_CODIGO, 
-                    decimal TE_CODIGO, 
-                    decimal DESIG_CODIGO, 
-                    string COC_CODIGO_PRODUCTO, 
-                    int COC_CANTIDADSTOCK, 
-                    decimal COC_ACTIVO, 
-                    global::System.Nullable<decimal> COC_COSTO, 
-                    decimal Original_COC_CODIGO, 
-                    decimal Original_COL_CODIGO, 
-                    decimal Original_MOD_CODIGO, 
-                    decimal Original_MCA_CODIGO, 
-                    decimal Original_TE_CODIGO, 
-                    decimal Original_DESIG_CODIGO, 
-                    string Original_COC_CODIGO_PRODUCTO, 
-                    int Original_COC_CANTIDADSTOCK, 
-                    decimal Original_COC_ACTIVO, 
-                    global::System.Nullable<decimal> Original_COC_COSTO) {
-            return this.Update(COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, COC_CODIGO_PRODUCTO, COC_CANTIDADSTOCK, COC_ACTIVO, COC_COSTO, Original_COC_CODIGO, Original_COL_CODIGO, Original_MOD_CODIGO, Original_MCA_CODIGO, Original_TE_CODIGO, Original_DESIG_CODIGO, Original_COC_CODIGO_PRODUCTO, Original_COC_CANTIDADSTOCK, Original_COC_ACTIVO, Original_COC_COSTO, Original_COC_CODIGO);
         }
     }
     
@@ -8366,6 +7867,375 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class COCINASTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public COCINASTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "COCINAS";
+            tableMapping.ColumnMappings.Add("COC_CODIGO", "COC_CODIGO");
+            tableMapping.ColumnMappings.Add("COL_CODIGO", "COL_CODIGO");
+            tableMapping.ColumnMappings.Add("MOD_CODIGO", "MOD_CODIGO");
+            tableMapping.ColumnMappings.Add("MCA_CODIGO", "MCA_CODIGO");
+            tableMapping.ColumnMappings.Add("TE_CODIGO", "TE_CODIGO");
+            tableMapping.ColumnMappings.Add("DESIG_CODIGO", "DESIG_CODIGO");
+            tableMapping.ColumnMappings.Add("COC_CODIGO_PRODUCTO", "COC_CODIGO_PRODUCTO");
+            tableMapping.ColumnMappings.Add("COC_ACTIVO", "COC_ACTIVO");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[COCINAS] WHERE (([COC_CODIGO] = @Original_COC_CODIGO) AND ([COL_CODIGO] = @Original_COL_CODIGO) AND ([MOD_CODIGO] = @Original_MOD_CODIGO) AND ([MCA_CODIGO] = @Original_MCA_CODIGO) AND ([TE_CODIGO] = @Original_TE_CODIGO) AND ([DESIG_CODIGO] = @Original_DESIG_CODIGO) AND ([COC_CODIGO_PRODUCTO] = @Original_COC_CODIGO_PRODUCTO) AND ([COC_ACTIVO] = @Original_COC_ACTIVO))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COL_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "COL_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MOD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MOD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MCA_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MCA_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DESIG_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DESIG_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO_PRODUCTO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CODIGO_PRODUCTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "COC_ACTIVO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[COCINAS] ([COL_CODIGO], [MOD_CODIGO], [MCA_CODIGO], [TE_CODIGO], [DESIG_CODIGO], [COC_CODIGO_PRODUCTO], [COC_ACTIVO]) VALUES (@COL_CODIGO, @MOD_CODIGO, @MCA_CODIGO, @TE_CODIGO, @DESIG_CODIGO, @COC_CODIGO_PRODUCTO, @COC_ACTIVO);
+SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, COC_CODIGO_PRODUCTO, COC_ACTIVO FROM COCINAS WHERE (COC_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COL_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "COL_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MOD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MOD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MCA_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MCA_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DESIG_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DESIG_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO_PRODUCTO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CODIGO_PRODUCTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "COC_ACTIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[COCINAS] SET [COL_CODIGO] = @COL_CODIGO, [MOD_CODIGO] = @MOD_CODIGO, [MCA_CODIGO] = @MCA_CODIGO, [TE_CODIGO] = @TE_CODIGO, [DESIG_CODIGO] = @DESIG_CODIGO, [COC_CODIGO_PRODUCTO] = @COC_CODIGO_PRODUCTO, [COC_ACTIVO] = @COC_ACTIVO WHERE (([COC_CODIGO] = @Original_COC_CODIGO) AND ([COL_CODIGO] = @Original_COL_CODIGO) AND ([MOD_CODIGO] = @Original_MOD_CODIGO) AND ([MCA_CODIGO] = @Original_MCA_CODIGO) AND ([TE_CODIGO] = @Original_TE_CODIGO) AND ([DESIG_CODIGO] = @Original_DESIG_CODIGO) AND ([COC_CODIGO_PRODUCTO] = @Original_COC_CODIGO_PRODUCTO) AND ([COC_ACTIVO] = @Original_COC_ACTIVO));
+SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, COC_CODIGO_PRODUCTO, COC_ACTIVO FROM COCINAS WHERE (COC_CODIGO = @COC_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COL_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "COL_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MOD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MOD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MCA_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MCA_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DESIG_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DESIG_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO_PRODUCTO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CODIGO_PRODUCTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "COC_ACTIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COL_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "COL_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MOD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MOD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MCA_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MCA_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DESIG_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DESIG_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO_PRODUCTO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CODIGO_PRODUCTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "COC_ACTIVO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, C" +
+                "OC_CODIGO_PRODUCTO, COC_ACTIVO FROM dbo.COCINAS";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsPlanSemanal.COCINASDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsPlanSemanal.COCINASDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsPlanSemanal.COCINASDataTable dataTable = new dsPlanSemanal.COCINASDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsPlanSemanal.COCINASDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsPlanSemanal dataSet) {
+            return this.Adapter.Update(dataSet, "COCINAS");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_COC_CODIGO, decimal Original_COL_CODIGO, decimal Original_MOD_CODIGO, decimal Original_MCA_CODIGO, decimal Original_TE_CODIGO, decimal Original_DESIG_CODIGO, string Original_COC_CODIGO_PRODUCTO, decimal Original_COC_ACTIVO) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_COC_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_COL_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_MOD_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((decimal)(Original_MCA_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((decimal)(Original_TE_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((decimal)(Original_DESIG_CODIGO));
+            if ((Original_COC_CODIGO_PRODUCTO == null)) {
+                throw new global::System.ArgumentNullException("Original_COC_CODIGO_PRODUCTO");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_COC_CODIGO_PRODUCTO));
+            }
+            this.Adapter.DeleteCommand.Parameters[7].Value = ((decimal)(Original_COC_ACTIVO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal COL_CODIGO, decimal MOD_CODIGO, decimal MCA_CODIGO, decimal TE_CODIGO, decimal DESIG_CODIGO, string COC_CODIGO_PRODUCTO, decimal COC_ACTIVO) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(COL_CODIGO));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(MOD_CODIGO));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(MCA_CODIGO));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(TE_CODIGO));
+            this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(DESIG_CODIGO));
+            if ((COC_CODIGO_PRODUCTO == null)) {
+                throw new global::System.ArgumentNullException("COC_CODIGO_PRODUCTO");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(COC_CODIGO_PRODUCTO));
+            }
+            this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(COC_ACTIVO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    decimal COL_CODIGO, 
+                    decimal MOD_CODIGO, 
+                    decimal MCA_CODIGO, 
+                    decimal TE_CODIGO, 
+                    decimal DESIG_CODIGO, 
+                    string COC_CODIGO_PRODUCTO, 
+                    decimal COC_ACTIVO, 
+                    decimal Original_COC_CODIGO, 
+                    decimal Original_COL_CODIGO, 
+                    decimal Original_MOD_CODIGO, 
+                    decimal Original_MCA_CODIGO, 
+                    decimal Original_TE_CODIGO, 
+                    decimal Original_DESIG_CODIGO, 
+                    string Original_COC_CODIGO_PRODUCTO, 
+                    decimal Original_COC_ACTIVO, 
+                    decimal COC_CODIGO) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(COL_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(MOD_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(MCA_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(TE_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(DESIG_CODIGO));
+            if ((COC_CODIGO_PRODUCTO == null)) {
+                throw new global::System.ArgumentNullException("COC_CODIGO_PRODUCTO");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(COC_CODIGO_PRODUCTO));
+            }
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(COC_ACTIVO));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(Original_COC_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_COL_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(Original_MOD_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(Original_MCA_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_TE_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(Original_DESIG_CODIGO));
+            if ((Original_COC_CODIGO_PRODUCTO == null)) {
+                throw new global::System.ArgumentNullException("Original_COC_CODIGO_PRODUCTO");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_COC_CODIGO_PRODUCTO));
+            }
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((decimal)(Original_COC_ACTIVO));
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((decimal)(COC_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(decimal COL_CODIGO, decimal MOD_CODIGO, decimal MCA_CODIGO, decimal TE_CODIGO, decimal DESIG_CODIGO, string COC_CODIGO_PRODUCTO, decimal COC_ACTIVO, decimal Original_COC_CODIGO, decimal Original_COL_CODIGO, decimal Original_MOD_CODIGO, decimal Original_MCA_CODIGO, decimal Original_TE_CODIGO, decimal Original_DESIG_CODIGO, string Original_COC_CODIGO_PRODUCTO, decimal Original_COC_ACTIVO) {
+            return this.Update(COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, COC_CODIGO_PRODUCTO, COC_ACTIVO, Original_COC_CODIGO, Original_COL_CODIGO, Original_MOD_CODIGO, Original_MCA_CODIGO, Original_TE_CODIGO, Original_DESIG_CODIGO, Original_COC_CODIGO_PRODUCTO, Original_COC_ACTIVO, Original_COC_CODIGO);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -8382,8 +8252,6 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
         
         private PLANES_ANUALESTableAdapter _pLANES_ANUALESTableAdapter;
         
-        private COCINASTableAdapter _cOCINASTableAdapter;
-        
         private DIAS_PLAN_SEMANALTableAdapter _dIAS_PLAN_SEMANALTableAdapter;
         
         private DETALLE_PLANES_SEMANALESTableAdapter _dETALLE_PLANES_SEMANALESTableAdapter;
@@ -8395,6 +8263,8 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
         private DETALLE_PLANES_MENSUALESTableAdapter _dETALLE_PLANES_MENSUALESTableAdapter;
         
         private PLANES_SEMANALESTableAdapter _pLANES_SEMANALESTableAdapter;
+        
+        private COCINASTableAdapter _cOCINASTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -8433,19 +8303,6 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
             }
             set {
                 this._pLANES_ANUALESTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
-        public COCINASTableAdapter COCINASTableAdapter {
-            get {
-                return this._cOCINASTableAdapter;
-            }
-            set {
-                this._cOCINASTableAdapter = value;
             }
         }
         
@@ -8528,6 +8385,19 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public COCINASTableAdapter COCINASTableAdapter {
+            get {
+                return this._cOCINASTableAdapter;
+            }
+            set {
+                this._cOCINASTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -8551,10 +8421,6 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
                 if (((this._pLANES_ANUALESTableAdapter != null) 
                             && (this._pLANES_ANUALESTableAdapter.Connection != null))) {
                     return this._pLANES_ANUALESTableAdapter.Connection;
-                }
-                if (((this._cOCINASTableAdapter != null) 
-                            && (this._cOCINASTableAdapter.Connection != null))) {
-                    return this._cOCINASTableAdapter.Connection;
                 }
                 if (((this._dIAS_PLAN_SEMANALTableAdapter != null) 
                             && (this._dIAS_PLAN_SEMANALTableAdapter.Connection != null))) {
@@ -8580,6 +8446,10 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
                             && (this._pLANES_SEMANALESTableAdapter.Connection != null))) {
                     return this._pLANES_SEMANALESTableAdapter.Connection;
                 }
+                if (((this._cOCINASTableAdapter != null) 
+                            && (this._cOCINASTableAdapter.Connection != null))) {
+                    return this._cOCINASTableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -8598,9 +8468,6 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
                 if ((this._pLANES_ANUALESTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._cOCINASTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._dIAS_PLAN_SEMANALTableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -8617,6 +8484,9 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
                     count = (count + 1);
                 }
                 if ((this._pLANES_SEMANALESTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._cOCINASTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -8647,21 +8517,21 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._pLANES_SEMANALESTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.PLANES_SEMANALES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._pLANES_SEMANALESTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._pEDIDOSTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.PEDIDOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._pEDIDOSTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._pLANES_SEMANALESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.PLANES_SEMANALES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._pLANES_SEMANALESTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -8735,19 +8605,19 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._pLANES_SEMANALESTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.PLANES_SEMANALES.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._pLANES_SEMANALESTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._pEDIDOSTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.PEDIDOS.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._pEDIDOSTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._pLANES_SEMANALESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.PLANES_SEMANALES.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._pLANES_SEMANALESTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -8840,19 +8710,19 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._pEDIDOSTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.PEDIDOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._pEDIDOSTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._pLANES_SEMANALESTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.PLANES_SEMANALES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._pLANES_SEMANALESTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._pEDIDOSTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.PEDIDOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._pEDIDOSTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -8919,11 +8789,6 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._cOCINASTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._cOCINASTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             if (((this._dIAS_PLAN_SEMANALTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._dIAS_PLAN_SEMANALTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
@@ -8951,6 +8816,11 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
             }
             if (((this._pLANES_SEMANALESTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._pLANES_SEMANALESTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._cOCINASTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._cOCINASTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -9002,15 +8872,6 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
                     if (this._pLANES_ANUALESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._pLANES_ANUALESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._pLANES_ANUALESTableAdapter.Adapter);
-                    }
-                }
-                if ((this._cOCINASTableAdapter != null)) {
-                    revertConnections.Add(this._cOCINASTableAdapter, this._cOCINASTableAdapter.Connection);
-                    this._cOCINASTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._cOCINASTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._cOCINASTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._cOCINASTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._cOCINASTableAdapter.Adapter);
                     }
                 }
                 if ((this._dIAS_PLAN_SEMANALTableAdapter != null)) {
@@ -9065,6 +8926,15 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
                     if (this._pLANES_SEMANALESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._pLANES_SEMANALESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._pLANES_SEMANALESTableAdapter.Adapter);
+                    }
+                }
+                if ((this._cOCINASTableAdapter != null)) {
+                    revertConnections.Add(this._cOCINASTableAdapter, this._cOCINASTableAdapter.Connection);
+                    this._cOCINASTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._cOCINASTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._cOCINASTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._cOCINASTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._cOCINASTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -9133,10 +9003,6 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
                     this._pLANES_ANUALESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._pLANES_ANUALESTableAdapter]));
                     this._pLANES_ANUALESTableAdapter.Transaction = null;
                 }
-                if ((this._cOCINASTableAdapter != null)) {
-                    this._cOCINASTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cOCINASTableAdapter]));
-                    this._cOCINASTableAdapter.Transaction = null;
-                }
                 if ((this._dIAS_PLAN_SEMANALTableAdapter != null)) {
                     this._dIAS_PLAN_SEMANALTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._dIAS_PLAN_SEMANALTableAdapter]));
                     this._dIAS_PLAN_SEMANALTableAdapter.Transaction = null;
@@ -9160,6 +9026,10 @@ SELECT PSEM_CODIGO, PMES_CODIGO, PSEM_SEMANA, PSEM_FECHACREACION FROM PLANES_SEM
                 if ((this._pLANES_SEMANALESTableAdapter != null)) {
                     this._pLANES_SEMANALESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._pLANES_SEMANALESTableAdapter]));
                     this._pLANES_SEMANALESTableAdapter.Transaction = null;
+                }
+                if ((this._cOCINASTableAdapter != null)) {
+                    this._cOCINASTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cOCINASTableAdapter]));
+                    this._cOCINASTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
