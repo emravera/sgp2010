@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades.Mensajes;
 
 namespace GyCAP.UI.ProcesoFabricacion
 {
@@ -76,14 +77,14 @@ namespace GyCAP.UI.ProcesoFabricacion
 
                 if (dsHojaRuta.HOJAS_RUTA.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Hojas de Ruta con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MensajesABM.MsjBuscarNoEncontrado("Hojas de Rutas", this.Text);
                 }
 
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Hoja de Ruta - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }
         }
@@ -109,8 +110,7 @@ namespace GyCAP.UI.ProcesoFabricacion
             if (dgvHojasRuta.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la Hoja de Ruta seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (respuesta == DialogResult.Yes)
+                if (MensajesABM.MsjConfirmaEliminarDatos("Hoja de Ruta", MensajesABM.Generos.Femenino, this.Text) == DialogResult.Yes)
                 {
                     try
                     {
@@ -124,17 +124,17 @@ namespace GyCAP.UI.ProcesoFabricacion
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: Hoja de Ruta - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: Hoja de Ruta - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Hoja de Ruta de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Hoja de Ruta", MensajesABM.Generos.Femenino, this.Text);
             }
         }
 
@@ -146,11 +146,11 @@ namespace GyCAP.UI.ProcesoFabricacion
         {
             //Datos opcionales = descripcion, 
             //Revisamos que completó los datos obligatorios
-            string datosFaltantes = string.Empty;
-            if (txtNombre.Text == string.Empty) { datosFaltantes += "* Nombre\n"; }
-            if (dtpFechaAlta.IsValueNull()) { datosFaltantes += "* Fecha de creación\n"; }            
-            if (dgvDetalleHoja.Rows.Count == 0) { datosFaltantes += "* El detalle de la Hoja de Ruta\n"; }
-            if (datosFaltantes == string.Empty)
+            List<string> validacion = new List<string>();
+            if (txtNombre.Text == string.Empty) { validacion.Add("Nombre"); }
+            if (dtpFechaAlta.IsValueNull()) { validacion.Add("Fecha de creación"); }            
+            if (dgvDetalleHoja.Rows.Count == 0) { validacion.Add("El detalle de la Hoja de Ruta"); }
+            if (validacion.Count == 0)
             {
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
@@ -198,7 +198,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                         //Hubo problemas con la BD, descartamos los cambios de hoja ruta ya que puede intentar
                         //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
                         dsHojaRuta.HOJAS_RUTA.RejectChanges();
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
@@ -223,7 +223,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                         dsHojaRuta.HOJAS_RUTA.AcceptChanges();
                         dsHojaRuta.DETALLE_HOJARUTA.AcceptChanges();
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MensajesABM.MsjConfirmaGuardar("Hoja de Ruta", this.Text, MensajesABM.Operaciones.Modificación);
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
@@ -232,21 +232,21 @@ namespace GyCAP.UI.ProcesoFabricacion
                         //Hubo problemas con la BD, descartamos los cambios de hoja ruta ya que puede intentar
                         //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
                         dsHojaRuta.HOJAS_RUTA.RejectChanges();
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
                     }
                     catch (Entidades.Excepciones.ErrorInesperadoException ex)
                     {
                         //Hubo problemas no esperados, descartamos los cambios de hoja ruta ya que puede intentar
                         //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
                         dsHojaRuta.HOJAS_RUTA.RejectChanges();
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
                     }
                 }
                 dgvHojasRuta.Refresh();
             }
             else
             {
-                MessageBox.Show("Debe completar los datos:\n\n" + datosFaltantes, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.CompletarDatos, validacion), this.Text);
             }
         }
         
@@ -267,7 +267,7 @@ namespace GyCAP.UI.ProcesoFabricacion
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un detalle de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Detalle", MensajesABM.Generos.Femenino, this.Text);
             }
         }
         
@@ -283,7 +283,7 @@ namespace GyCAP.UI.ProcesoFabricacion
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un detalle de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Detalle", MensajesABM.Generos.Femenino, this.Text);
             }
         }
 
@@ -302,7 +302,7 @@ namespace GyCAP.UI.ProcesoFabricacion
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un detalle de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Hoja de Ruta", MensajesABM.Generos.Femenino, this.Text);
             }
         }
 
@@ -328,7 +328,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                     if (rows.Length > 0)
                     {
                         //Ya lo ha agregado, avisemos
-                        MessageBox.Show("La Hoja de Ruta ya posee la Operación en el Centro de Trabajo seleccionado.", "Información: elemento duplicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MensajesABM.MsjValidacion("La Hoja de Ruta ya posee la Operación en el Centro de Trabajo seleccionado.", this.Text);
                         //Como ya existe marcamos que no debe agregarse
                         agregar = false;
                     }
@@ -372,7 +372,8 @@ namespace GyCAP.UI.ProcesoFabricacion
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Operación y un Centro de Trabajo.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.Seleccion, new List<string> { "Operación", "Centro de Trabajo" }), this.Text);
             }
         }
         
@@ -563,7 +564,7 @@ namespace GyCAP.UI.ProcesoFabricacion
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
             }
 
             dvCentrosTrabajo = new DataView(dsHojaRuta.CENTROS_TRABAJOS);
