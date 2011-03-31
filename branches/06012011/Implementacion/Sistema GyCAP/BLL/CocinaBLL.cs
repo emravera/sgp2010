@@ -40,12 +40,7 @@ namespace GyCAP.BLL
         public static void ObtenerCocinas(DataTable dtCocina)
         {
             DAL.CocinaDAL.ObtenerCocinas(dtCocina);
-        }
-
-        public static void ObtenerCocinasSinCosto(DataTable dtCocina)
-        {
-            DAL.CocinaDAL.ObtenerCocinaSinCosto(dtCocina);
-        }
+        }        
 
         public static void ObtenerCocinas(object codigo, object codMarca, object codTerminacion, object codEstado, DataTable dtCocina)
         {

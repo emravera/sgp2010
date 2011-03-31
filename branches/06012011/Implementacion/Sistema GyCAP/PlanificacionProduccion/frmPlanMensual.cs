@@ -186,7 +186,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             BLL.DetallePlanAnualBLL.ObtenerDetalle(dsPlanMensual);
 
             //Llenamos el dataset de Cocinas
-            BLL.CocinaBLL.ObtenerCocinasSinCosto(dsPlanMensual.COCINAS);
+            BLL.CocinaBLL.ObtenerCocinas(dsPlanMensual.COCINAS);
 
             //Llenamos el dataset de Clientes
             BLL.ClienteBLL.ObtenerTodos(dsPlanMensual.CLIENTES);

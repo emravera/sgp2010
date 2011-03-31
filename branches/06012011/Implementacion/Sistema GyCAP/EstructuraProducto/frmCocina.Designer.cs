@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -50,10 +49,11 @@
             this.cbMarca = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbModelo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.gbImagen = new System.Windows.Forms.GroupBox();
+            this.btnZoomOut = new System.Windows.Forms.Button();
+            this.btnZoomIn = new System.Windows.Forms.Button();
             this.btnQuitarImagen = new System.Windows.Forms.Button();
             this.btnAbrirImagen = new System.Windows.Forms.Button();
             this.pbImagen = new System.Windows.Forms.PictureBox();
-            this.nudCosto = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -76,15 +76,12 @@
             this.tcCocina = new System.Windows.Forms.TabControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
-            this.btnZoomIn = new System.Windows.Forms.Button();
-            this.btnZoomOut = new System.Windows.Forms.Button();
             this.tsMenu.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.tpDatos.SuspendLayout();
             this.gbDatos.SuspendLayout();
             this.gbImagen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCosto)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaCocina)).BeginInit();
             this.tpBuscar.SuspendLayout();
@@ -93,19 +90,10 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 297);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(48, 13);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Costo $:";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(18, 155);
+            this.label5.Location = new System.Drawing.Point(18, 135);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(68, 13);
             this.label5.TabIndex = 4;
@@ -133,7 +121,7 @@
             // 
             // txtCodigo
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(123, 43);
+            this.txtCodigo.Location = new System.Drawing.Point(123, 23);
             this.txtCodigo.MaxLength = 80;
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(201, 20);
@@ -228,7 +216,7 @@
             this.gbGuardarCancelar.Controls.Add(this.btnVolver);
             this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
             this.gbGuardarCancelar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 355);
+            this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 315);
             this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
             this.gbGuardarCancelar.Name = "gbGuardarCancelar";
             this.gbGuardarCancelar.Size = new System.Drawing.Size(579, 57);
@@ -243,7 +231,7 @@
             this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDatos.Size = new System.Drawing.Size(585, 415);
+            this.tpDatos.Size = new System.Drawing.Size(585, 375);
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
@@ -256,13 +244,11 @@
             this.gbDatos.Controls.Add(this.cbMarca);
             this.gbDatos.Controls.Add(this.cbModelo);
             this.gbDatos.Controls.Add(this.gbImagen);
-            this.gbDatos.Controls.Add(this.nudCosto);
             this.gbDatos.Controls.Add(this.label10);
             this.gbDatos.Controls.Add(this.label9);
             this.gbDatos.Controls.Add(this.label8);
             this.gbDatos.Controls.Add(this.label7);
             this.gbDatos.Controls.Add(this.label2);
-            this.gbDatos.Controls.Add(this.label6);
             this.gbDatos.Controls.Add(this.label5);
             this.gbDatos.Controls.Add(this.txtCodigo);
             this.gbDatos.Controls.Add(this.label3);
@@ -270,7 +256,7 @@
             this.gbDatos.Location = new System.Drawing.Point(3, 3);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(579, 351);
+            this.gbDatos.Size = new System.Drawing.Size(579, 310);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos de la Cocina";
@@ -280,7 +266,7 @@
             this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEstado.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(123, 260);
+            this.cbEstado.Location = new System.Drawing.Point(123, 240);
             this.cbEstado.Name = "cbEstado";
             this.cbEstado.Size = new System.Drawing.Size(201, 21);
             this.cbEstado.TabIndex = 13;
@@ -290,7 +276,7 @@
             this.cbTerminacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTerminacion.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbTerminacion.FormattingEnabled = true;
-            this.cbTerminacion.Location = new System.Drawing.Point(123, 224);
+            this.cbTerminacion.Location = new System.Drawing.Point(123, 204);
             this.cbTerminacion.Name = "cbTerminacion";
             this.cbTerminacion.Size = new System.Drawing.Size(201, 21);
             this.cbTerminacion.TabIndex = 12;
@@ -300,7 +286,7 @@
             this.cbColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbColor.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbColor.FormattingEnabled = true;
-            this.cbColor.Location = new System.Drawing.Point(123, 189);
+            this.cbColor.Location = new System.Drawing.Point(123, 169);
             this.cbColor.Name = "cbColor";
             this.cbColor.Size = new System.Drawing.Size(201, 21);
             this.cbColor.TabIndex = 11;
@@ -310,7 +296,7 @@
             this.cbDesignacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDesignacion.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbDesignacion.FormattingEnabled = true;
-            this.cbDesignacion.Location = new System.Drawing.Point(123, 152);
+            this.cbDesignacion.Location = new System.Drawing.Point(123, 132);
             this.cbDesignacion.Name = "cbDesignacion";
             this.cbDesignacion.Size = new System.Drawing.Size(201, 21);
             this.cbDesignacion.TabIndex = 10;
@@ -320,7 +306,7 @@
             this.cbMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMarca.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbMarca.FormattingEnabled = true;
-            this.cbMarca.Location = new System.Drawing.Point(123, 114);
+            this.cbMarca.Location = new System.Drawing.Point(123, 94);
             this.cbMarca.Name = "cbMarca";
             this.cbMarca.Size = new System.Drawing.Size(201, 21);
             this.cbMarca.TabIndex = 9;
@@ -330,7 +316,7 @@
             this.cbModelo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbModelo.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbModelo.FormattingEnabled = true;
-            this.cbModelo.Location = new System.Drawing.Point(123, 78);
+            this.cbModelo.Location = new System.Drawing.Point(123, 58);
             this.cbModelo.Name = "cbModelo";
             this.cbModelo.Size = new System.Drawing.Size(201, 21);
             this.cbModelo.TabIndex = 8;
@@ -343,12 +329,48 @@
             this.gbImagen.Controls.Add(this.btnAbrirImagen);
             this.gbImagen.Controls.Add(this.pbImagen);
             this.gbImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gbImagen.Location = new System.Drawing.Point(353, 43);
+            this.gbImagen.Location = new System.Drawing.Point(353, 23);
             this.gbImagen.Name = "gbImagen";
             this.gbImagen.Size = new System.Drawing.Size(214, 272);
             this.gbImagen.TabIndex = 21;
             this.gbImagen.TabStop = false;
             this.gbImagen.Text = "Imagen";
+            // 
+            // btnZoomOut
+            // 
+            this.btnZoomOut.AutoSize = true;
+            this.btnZoomOut.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnZoomOut.FlatAppearance.BorderSize = 0;
+            this.btnZoomOut.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnZoomOut.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnZoomOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZoomOut.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Zoom_Out_25;
+            this.btnZoomOut.Location = new System.Drawing.Point(170, 231);
+            this.btnZoomOut.Name = "btnZoomOut";
+            this.btnZoomOut.Size = new System.Drawing.Size(31, 31);
+            this.btnZoomOut.TabIndex = 18;
+            this.btnZoomOut.UseVisualStyleBackColor = true;
+            this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
+            this.btnZoomOut.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnZoomOut.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnZoomIn
+            // 
+            this.btnZoomIn.AutoSize = true;
+            this.btnZoomIn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnZoomIn.FlatAppearance.BorderSize = 0;
+            this.btnZoomIn.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnZoomIn.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnZoomIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZoomIn.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Zoom_In_25;
+            this.btnZoomIn.Location = new System.Drawing.Point(140, 231);
+            this.btnZoomIn.Name = "btnZoomIn";
+            this.btnZoomIn.Size = new System.Drawing.Size(31, 31);
+            this.btnZoomIn.TabIndex = 17;
+            this.btnZoomIn.UseVisualStyleBackColor = true;
+            this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+            this.btnZoomIn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnZoomIn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnQuitarImagen
             // 
@@ -397,30 +419,10 @@
             this.pbImagen.TabStop = false;
             this.pbImagen.LoadCompleted += new System.ComponentModel.AsyncCompletedEventHandler(this.pbImagen_LoadCompleted);
             // 
-            // nudCosto
-            // 
-            this.nudCosto.DecimalPlaces = 2;
-            this.nudCosto.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nudCosto.Location = new System.Drawing.Point(123, 295);
-            this.nudCosto.Maximum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            0});
-            this.nudCosto.Name = "nudCosto";
-            this.nudCosto.Size = new System.Drawing.Size(201, 20);
-            this.nudCosto.TabIndex = 14;
-            this.nudCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudCosto.Enter += new System.EventHandler(this.nudCosto_Enter);
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(18, 227);
+            this.label10.Location = new System.Drawing.Point(18, 207);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(99, 13);
             this.label10.TabIndex = 14;
@@ -429,7 +431,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(18, 117);
+            this.label9.Location = new System.Drawing.Point(18, 97);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(40, 13);
             this.label9.TabIndex = 13;
@@ -438,7 +440,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(18, 81);
+            this.label8.Location = new System.Drawing.Point(18, 61);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(45, 13);
             this.label8.TabIndex = 12;
@@ -447,7 +449,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(18, 192);
+            this.label7.Location = new System.Drawing.Point(18, 172);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(36, 13);
             this.label7.TabIndex = 11;
@@ -456,7 +458,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 263);
+            this.label2.Location = new System.Drawing.Point(18, 243);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 10;
@@ -465,7 +467,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 46);
+            this.label3.Location = new System.Drawing.Point(18, 26);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 1;
@@ -474,11 +476,11 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dgvListaCocina);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(3, 89);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox2.Location = new System.Drawing.Point(3, 77);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(9);
-            this.groupBox2.Size = new System.Drawing.Size(579, 323);
+            this.groupBox2.Size = new System.Drawing.Size(579, 292);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Listado de Cocinas";
@@ -494,7 +496,7 @@
             this.dgvListaCocina.ReadOnly = true;
             this.dgvListaCocina.RowHeadersVisible = false;
             this.dgvListaCocina.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvListaCocina.Size = new System.Drawing.Size(561, 292);
+            this.dgvListaCocina.Size = new System.Drawing.Size(561, 261);
             this.dgvListaCocina.TabIndex = 6;
             this.dgvListaCocina.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListaCocina_RowEnter);
             this.dgvListaCocina.DoubleClick += new System.EventHandler(this.dgvListaCocina_DoubleClick);
@@ -507,7 +509,7 @@
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(585, 415);
+            this.tpBuscar.Size = new System.Drawing.Size(585, 375);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
@@ -525,7 +527,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(579, 80);
+            this.groupBox1.Size = new System.Drawing.Size(579, 74);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
@@ -535,7 +537,7 @@
             this.cbMarcaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMarcaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbMarcaBuscar.FormattingEnabled = true;
-            this.cbMarcaBuscar.Location = new System.Drawing.Point(319, 22);
+            this.cbMarcaBuscar.Location = new System.Drawing.Point(319, 17);
             this.cbMarcaBuscar.Name = "cbMarcaBuscar";
             this.cbMarcaBuscar.Size = new System.Drawing.Size(143, 21);
             this.cbMarcaBuscar.TabIndex = 10;
@@ -545,7 +547,7 @@
             this.cbEstadoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEstadoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbEstadoBuscar.FormattingEnabled = true;
-            this.cbEstadoBuscar.Location = new System.Drawing.Point(319, 53);
+            this.cbEstadoBuscar.Location = new System.Drawing.Point(319, 42);
             this.cbEstadoBuscar.Name = "cbEstadoBuscar";
             this.cbEstadoBuscar.Size = new System.Drawing.Size(143, 21);
             this.cbEstadoBuscar.TabIndex = 9;
@@ -555,7 +557,7 @@
             this.cbTerminacionBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTerminacionBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbTerminacionBuscar.FormattingEnabled = true;
-            this.cbTerminacionBuscar.Location = new System.Drawing.Point(92, 53);
+            this.cbTerminacionBuscar.Location = new System.Drawing.Point(92, 42);
             this.cbTerminacionBuscar.Name = "cbTerminacionBuscar";
             this.cbTerminacionBuscar.Size = new System.Drawing.Size(151, 21);
             this.cbTerminacionBuscar.TabIndex = 8;
@@ -563,7 +565,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(22, 47);
+            this.label12.Location = new System.Drawing.Point(22, 36);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(64, 26);
             this.label12.TabIndex = 7;
@@ -572,7 +574,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(263, 56);
+            this.label11.Location = new System.Drawing.Point(263, 45);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(44, 13);
             this.label11.TabIndex = 6;
@@ -581,7 +583,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(263, 25);
+            this.label4.Location = new System.Drawing.Point(263, 20);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 3;
@@ -591,7 +593,7 @@
             // 
             this.btnBuscar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(492, 34);
+            this.btnBuscar.Location = new System.Drawing.Point(492, 26);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
             this.btnBuscar.TabIndex = 5;
@@ -602,7 +604,7 @@
             // 
             // txtCodigoBuscar
             // 
-            this.txtCodigoBuscar.Location = new System.Drawing.Point(92, 22);
+            this.txtCodigoBuscar.Location = new System.Drawing.Point(92, 17);
             this.txtCodigoBuscar.MaxLength = 80;
             this.txtCodigoBuscar.Name = "txtCodigoBuscar";
             this.txtCodigoBuscar.Size = new System.Drawing.Size(151, 20);
@@ -612,7 +614,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 25);
+            this.label1.Location = new System.Drawing.Point(22, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 1;
@@ -631,7 +633,7 @@
             this.tcCocina.Name = "tcCocina";
             this.tcCocina.Padding = new System.Drawing.Point(0, 0);
             this.tcCocina.SelectedIndex = 0;
-            this.tcCocina.Size = new System.Drawing.Size(593, 424);
+            this.tcCocina.Size = new System.Drawing.Size(593, 384);
             this.tcCocina.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcCocina.TabIndex = 8;
             // 
@@ -648,7 +650,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(597, 480);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(597, 440);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
             // ofdImagen
@@ -657,47 +659,11 @@
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk);
             // 
-            // btnZoomIn
-            // 
-            this.btnZoomIn.AutoSize = true;
-            this.btnZoomIn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnZoomIn.FlatAppearance.BorderSize = 0;
-            this.btnZoomIn.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnZoomIn.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnZoomIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnZoomIn.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Zoom_In_25;
-            this.btnZoomIn.Location = new System.Drawing.Point(140, 231);
-            this.btnZoomIn.Name = "btnZoomIn";
-            this.btnZoomIn.Size = new System.Drawing.Size(31, 31);
-            this.btnZoomIn.TabIndex = 17;
-            this.btnZoomIn.UseVisualStyleBackColor = true;
-            this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
-            this.btnZoomIn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnZoomIn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnZoomOut
-            // 
-            this.btnZoomOut.AutoSize = true;
-            this.btnZoomOut.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnZoomOut.FlatAppearance.BorderSize = 0;
-            this.btnZoomOut.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnZoomOut.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnZoomOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnZoomOut.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Zoom_Out_25;
-            this.btnZoomOut.Location = new System.Drawing.Point(170, 231);
-            this.btnZoomOut.Name = "btnZoomOut";
-            this.btnZoomOut.Size = new System.Drawing.Size(31, 31);
-            this.btnZoomOut.TabIndex = 18;
-            this.btnZoomOut.UseVisualStyleBackColor = true;
-            this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
-            this.btnZoomOut.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnZoomOut.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
             // frmCocina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(597, 480);
+            this.ClientSize = new System.Drawing.Size(597, 440);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -715,7 +681,6 @@
             this.gbImagen.ResumeLayout(false);
             this.gbImagen.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCosto)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaCocina)).EndInit();
             this.tpBuscar.ResumeLayout(false);
@@ -730,7 +695,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnGuardar;
@@ -763,7 +727,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox gbImagen;
         private System.Windows.Forms.PictureBox pbImagen;
-        private System.Windows.Forms.NumericUpDown nudCosto;
         private System.Windows.Forms.Button btnQuitarImagen;
         private System.Windows.Forms.Button btnAbrirImagen;
         private System.Windows.Forms.Label label12;
