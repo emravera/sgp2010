@@ -191,11 +191,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsModeloMaquina.xsd</DependentUpon>
     </Compile>
-    <Compile Include="dsOperacionesFabricacion.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsOperacionesFabricacion.xsd</DependentUpon>
-    </Compile>
     <Compile Include="dsOrdenTrabajo.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -541,17 +536,6 @@
     </None>
     <None Include="dsModeloMaquina.xss">
       <DependentUpon>dsModeloMaquina.xsd</DependentUpon>
-    </None>
-    <None Include="dsOperacionesFabricacion.xsc">
-      <DependentUpon>dsOperacionesFabricacion.xsd</DependentUpon>
-    </None>
-    <None Include="dsOperacionesFabricacion.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsOperacionesFabricacion.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="dsOperacionesFabricacion.xss">
-      <DependentUpon>dsOperacionesFabricacion.xsd</DependentUpon>
     </None>
     <None Include="dsOrdenTrabajo.xsc">
       <DependentUpon>dsOrdenTrabajo.xsd</DependentUpon>

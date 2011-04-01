@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades.Mensajes;
 
 
 namespace GyCAP.UI.GestionStock
@@ -89,7 +90,7 @@ namespace GyCAP.UI.GestionStock
 
             if (dvUbicaciones.Count == 0)
             {
-                MessageBox.Show("No se encontraron Ubicaciones de Stock con los criterios ingresados.", "Información: Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjBuscarNoEncontrado("Ubicaciones de Stock", this.Text);
             }
 
             CompletarDatos();
@@ -102,8 +103,7 @@ namespace GyCAP.UI.GestionStock
             if (dgvLista.SelectedRows.Count > 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la Ubicación de Stock seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (respuesta == DialogResult.Yes)
+                if (MensajesABM.MsjConfirmaEliminarDatos("Ubicación de Stock", MensajesABM.Generos.Femenino, this.Text) == DialogResult.Yes)
                 {
                     try
                     {
@@ -117,17 +117,17 @@ namespace GyCAP.UI.GestionStock
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: Ubicación Stock - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: Ubicación Stock - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Ubicación de Stock de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Ubicación de Stock", MensajesABM.Generos.Femenino, this.Text);
             }
 
         }
@@ -163,15 +163,15 @@ namespace GyCAP.UI.GestionStock
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            string mensaje = string.Empty;
-            if (txtCodigo.Text == string.Empty) { mensaje += "* Código\n"; }
-            if (txtNombre.Text == string.Empty) { mensaje += "* Nombre\n"; }
-            if (cboUnidadMedida.GetSelectedIndex() == -1) { mensaje += "* Unidad de medida\n"; }
-            if (cboEstado.GetSelectedIndex() == -1) { mensaje += "* Estado\n"; }
-            if (cboTipoUbicacion.GetSelectedIndex() == -1) { mensaje += "* Tipo\n"; }
-            if (cboContenidoStock.GetSelectedIndex() == -1) { mensaje += "* Contenido\n"; }
+            List<string> validacion = new List<string>();
+            if (txtCodigo.Text == string.Empty) { validacion.Add("Código"); }
+            if (txtNombre.Text == string.Empty) { validacion.Add("Nombre"); }
+            if (cboUnidadMedida.GetSelectedIndex() == -1) { validacion.Add("Unidad de medida"); }
+            if (cboEstado.GetSelectedIndex() == -1) { validacion.Add("Estado"); }
+            if (cboTipoUbicacion.GetSelectedIndex() == -1) { validacion.Add("Tipo"); }
+            if (cboContenidoStock.GetSelectedIndex() == -1) { validacion.Add("Contenido"); }
 
-            if (mensaje == string.Empty)
+            if (validacion.Count == 0)
             {
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
@@ -186,7 +186,7 @@ namespace GyCAP.UI.GestionStock
                         ubicacion.UbicacionFisica = txtUbicacionFisica.Text;
                         ubicacion.CantidadReal = nudCantidadReal.Value;
                         ubicacion.CantidadVirtual = nudCantidadReal.Value;
-                        if (cboPadre.GetSelectedIndex() != -1) { ubicacion.UbicacionPadre = new GyCAP.Entidades.UbicacionStock(cboPadre.GetSelectedValueInt()); }
+                        if (cboPadre.GetSelectedValueInt() != -1) { ubicacion.UbicacionPadre = new GyCAP.Entidades.UbicacionStock(cboPadre.GetSelectedValueInt()); }
                         ubicacion.UnidadMedida = new GyCAP.Entidades.UnidadMedida(cboUnidadMedida.GetSelectedValueInt());
                         ubicacion.Activo = cboEstado.GetSelectedValueInt();
                         ubicacion.TipoUbicacion = new GyCAP.Entidades.TipoUbicacionStock(cboTipoUbicacion.GetSelectedValueInt());
@@ -218,23 +218,69 @@ namespace GyCAP.UI.GestionStock
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
                         dsStock.UBICACIONES_STOCK.RejectChanges();
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         dsStock.UBICACIONES_STOCK.RejectChanges();
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
                 {
                     //Está modificando
-                    //falta terminar - gonzalo
+                    try
+                    {
+                        Entidades.UbicacionStock ubicacion = new GyCAP.Entidades.UbicacionStock();
+                        ubicacion.Numero = Convert.ToInt32(dvUbicaciones[dgvLista.SelectedRows[0].Index]["ustck_numero"]);
+                        ubicacion.Codigo = txtCodigo.Text;
+                        ubicacion.Nombre = txtNombre.Text;
+                        ubicacion.Descripcion = txtDescripcion.Text;
+                        ubicacion.UbicacionFisica = txtUbicacionFisica.Text;
+                        ubicacion.CantidadReal = nudCantidadReal.Value;
+                        ubicacion.CantidadVirtual = nudCantidadReal.Value;
+                        if (cboPadre.GetSelectedValueInt() != -1) { ubicacion.UbicacionPadre = new GyCAP.Entidades.UbicacionStock(cboPadre.GetSelectedValueInt()); }
+                        ubicacion.UnidadMedida = new GyCAP.Entidades.UnidadMedida(cboUnidadMedida.GetSelectedValueInt());
+                        ubicacion.Activo = cboEstado.GetSelectedValueInt();
+                        ubicacion.TipoUbicacion = new GyCAP.Entidades.TipoUbicacionStock(cboTipoUbicacion.GetSelectedValueInt());
+                        ubicacion.Contenido = new GyCAP.Entidades.ContenidoUbicacionStock(cboContenidoStock.GetSelectedValueInt());
+                        BLL.UbicacionStockBLL.Actualizar(ubicacion);
+                        Data.dsStock.UBICACIONES_STOCKRow row = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(ubicacion.Numero);
+                        row.BeginEdit();
+                        row.USTCK_CODIGO = ubicacion.Codigo;
+                        row.USTCK_NOMBRE = ubicacion.Nombre;
+                        row.USTCK_DESCRIPCION = ubicacion.Descripcion;
+                        row.USTCK_UBICACIONFISICA = ubicacion.UbicacionFisica;
+                        if (ubicacion.UbicacionPadre == null) { row.SetUSTCK_PADRENull(); }
+                        else { row.USTCK_PADRE = ubicacion.UbicacionPadre.Numero; }
+                        row.UMED_CODIGO = ubicacion.UnidadMedida.Codigo;
+                        row.USTCK_CANTIDADREAL = ubicacion.CantidadReal;
+                        row.USTCK_CANTIDADVIRTUAL = ubicacion.CantidadVirtual;
+                        row.USTCK_ACTIVO = ubicacion.Activo;
+                        row.TUS_CODIGO = ubicacion.TipoUbicacion.Codigo;
+                        row.CON_CODIGO = ubicacion.Contenido.Codigo;
+                        row.EndEdit();
+                        dsStock.UBICACIONES_STOCK.AcceptChanges();
+                        dvUbicaciones.Table = dsStock.UBICACIONES_STOCK;
+                        dgvLista.Refresh();
+                        MensajesABM.MsjConfirmaGuardar("Ubicación de Stock", this.Text, MensajesABM.Operaciones.Modificación);
+                        SetInterface(estadoUI.inicio);
+                    }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        dsStock.UBICACIONES_STOCK.RejectChanges();
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        dsStock.UBICACIONES_STOCK.RejectChanges();
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
+                    }
                 }
             }
             else
             {
-                MessageBox.Show("Debe completar los datos:\n\n" + mensaje, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.CompletarDatos, validacion), this.Text);
             }
         }
 
@@ -413,7 +459,7 @@ namespace GyCAP.UI.GestionStock
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
             }
 
             dvUbicaciones = new DataView(dsStock.UBICACIONES_STOCK);
@@ -430,7 +476,7 @@ namespace GyCAP.UI.GestionStock
             cboEstadoBuscar.SetDatos(nombres, valores, "--TODOS--", true);
             cboEstado.SetDatos(nombres, valores, "Seleccione", false);
             dvUbicacionPadre = new DataView(dsStock.UBICACIONES_STOCK);
-            cboPadre.SetDatos(dvUbicacionPadre, "USTCK_NUMERO", "USTCK_NOMBRE", "Sin especificar", false);
+            cboPadre.SetDatos(dvUbicacionPadre, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
             dvTipoUbicacion = new DataView(dsStock.TIPOS_UBICACIONES_STOCK);
             cboTipoUbicacion.SetDatos(dvTipoUbicacion, "TUS_CODIGO", "TUS_NOMBRE", "Seleccione", false);
             dvTipoBuscar = new DataView(dsStock.TIPOS_UBICACIONES_STOCK);
@@ -495,19 +541,7 @@ namespace GyCAP.UI.GestionStock
         {
             if (dgvLista.SelectedRows.Count > 0)
             {
-                int numero = Convert.ToInt32(dvUbicaciones[e.RowIndex]["ustck_numero"]);
-                txtCodigo.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_CODIGO;
-                txtNombre.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_NOMBRE;
-                txtDescripcion.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_DESCRIPCION;
-                txtUbicacionFisica.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_UBICACIONFISICA;
-                if (!dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).IsUSTCK_PADRENull())
-                { cboPadre.SetSelectedValue(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_PADRE)); }
-                nudCantidadReal.Value = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_CANTIDADREAL;
-                nudCantidadVirtual.Value = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_CANTIDADVIRTUAL;
-                cboUnidadMedida.SetSelectedValue(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).UMED_CODIGO));
-                cboTipoUbicacion.SetSelectedValue(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).TUS_CODIGO));
-                cboEstado.SetSelectedValue(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_ACTIVO));
-                cboContenidoStock.SetSelectedValue(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).CON_CODIGO));
+                CompletarDatos();
             }
         }
 
