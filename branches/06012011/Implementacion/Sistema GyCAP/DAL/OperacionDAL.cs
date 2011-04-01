@@ -35,7 +35,7 @@ namespace GyCAP.DAL
         }
         
         //Busqueda con filtros desde el formulario
-        public static void buscarOperacion(Data.dsOperacionesFabricacion dsOperaciones, string nombre, string codificacion)
+        public static void buscarOperacion(Data.dsHojaRuta dsOperaciones, string nombre, string codificacion)
         {
             string sql = @"SELECT opr_numero, opr_codigo, opr_nombre, opr_descripcion, opr_horasrequerida 
                            FROM OPERACIONES";
@@ -89,19 +89,19 @@ namespace GyCAP.DAL
                     }
                 }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         //METODO DE INSERCION
         //Metodo que inserta en la base de datos
-        public static int Insertar(Entidades.OperacionFabricacion operacion)
+        public static void Insertar(Entidades.OperacionFabricacion operacion)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
             string sql = @"INSERT INTO [OPERACIONES] 
                         ([opr_codigo], 
-                        [opr_nombre],
-                        [opr_descripcion],
-                        [opr_horasrequerida]) 
+                         [opr_nombre],
+                         [opr_descripcion],
+                         [opr_horasrequerida]) 
                         VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
             
             object[] valorParametros = { operacion.Codificacion, 
@@ -111,10 +111,11 @@ namespace GyCAP.DAL
             
             try
             {
-                return Convert.ToInt32(DB.executeNonQuery(sql, valorParametros, null));
+                operacion.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
+
         //Metodo de ACTUALIZACION
         public static void ModificarOperacion(Entidades.OperacionFabricacion operacion)
         {
@@ -131,8 +132,9 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
+
         //Metodo de Eliminacion
         public static void EliminarOperacion(int codigo)
         {
@@ -142,7 +144,23 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static bool PuedeEliminarse(int codigo)
+        {
+            string sql1 = "SELECT count(dhr_codigo) FROM DETALLE_HOJARUTA WHERE opr_codigo = @p0";
+            string sql2 = "SELECT count(ordt_numero) FROM ORDENES_TRABAJO WHERE opr_codigo = @p0";
+
+            object[] valorParametros = { codigo };
+            try
+            {
+                int r1 = Convert.ToInt32(DB.executeScalar(sql1, valorParametros, null));
+                int r2 = Convert.ToInt32(DB.executeScalar(sql1, valorParametros, null));
+                if (r1 + r2 == 0) { return true; }
+                else { return false; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
     }

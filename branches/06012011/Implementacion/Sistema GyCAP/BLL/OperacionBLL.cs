@@ -15,9 +15,9 @@ namespace GyCAP.BLL
             DAL.OperacionDAL.ObtenerOperaciones(dtOperaciones);
         }
         //Metodo de busqueda con filtro
-        public static void ObetenerOperaciones(Data.dsOperacionesFabricacion dsOperaciones, string nombre, string codificacion)
+        public static void ObetenerOperaciones(Data.dsHojaRuta dsOperaciones, string nombre, string codificacion)
         {
-            DAL.OperacionDAL.buscarOperacion(dsOperaciones,nombre,codificacion);
+            DAL.OperacionDAL.buscarOperacion(dsOperaciones, nombre, codificacion);
         }
         //METODO INSERCION
         public static void InsertarOperacion(Entidades.OperacionFabricacion operacion)
@@ -32,6 +32,7 @@ namespace GyCAP.BLL
         //METODO ELIMINACIÓN
         public static void EliminarOperacion(int codigoOperacion)
         {
+            if (!DAL.OperacionDAL.PuedeEliminarse(codigoOperacion)) { throw new Entidades.Excepciones.ElementoEnTransaccionException(); }
             DAL.OperacionDAL.EliminarOperacion(codigoOperacion);
         }
     }

@@ -73,6 +73,44 @@ namespace GyCAP.DAL
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
+
+        public static void Actualizar(Entidades.UbicacionStock ubicacion)
+        {
+            string sql = @"UPDATE UBICACIONES_STOCK SET 
+                         ustck_codigo = @p0,
+                         ustck_nombre = @p1,
+                         ustck_descripcion = @p2,
+                         ustck_ubicacionfisica = @p3,
+                         ustck_cantidadreal = @p4,
+                         ustck_cantidadvirtual = @p5,
+                         umed_codigo = @p6,
+                         ustck_padre = @p7,
+                         ustck_activo = @p8,
+                         tus_codigo = @p9,
+                         con_codigo = @p10 
+                         WHERE ustck_numero = @p11";
+
+            object padre = DBNull.Value;
+            if (ubicacion.UbicacionPadre != null) { padre = ubicacion.UbicacionPadre.Numero; };
+            object[] parametros = { ubicacion.Codigo,
+                                      ubicacion.Nombre,
+                                      ubicacion.Descripcion,
+                                      ubicacion.UbicacionFisica,
+                                      ubicacion.CantidadReal,
+                                      ubicacion.CantidadVirtual,
+                                      ubicacion.UnidadMedida.Codigo,
+                                      padre,
+                                      ubicacion.Activo,
+                                      ubicacion.TipoUbicacion.Codigo,
+                                      ubicacion.Contenido.Codigo,
+                                      ubicacion.Numero };
+
+            try
+            {
+                DB.executeNonQuery(sql, parametros, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
         
         public static void Eliminar(int numeroUbicacionStock)
         {

@@ -6,15 +6,16 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades.Mensajes;
 
 namespace GyCAP.UI.ProcesoFabricacion
 {
     public partial class frmOperacionesFabricacion : Form
     {
         private static frmOperacionesFabricacion _frmOperacionesFabricacion = null;
-        private Data.dsOperacionesFabricacion dsOperacionesFabricacion = new GyCAP.Data.dsOperacionesFabricacion();
+        private Data.dsHojaRuta dsOperacionesFabricacion = new GyCAP.Data.dsHojaRuta();
         private DataView dvListaOperaciones;
-        private enum estadoUI { inicio, nuevo, consultar, modificar, buscar };
+        private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, buscar };
         private estadoUI estadoInterface;
 
         public frmOperacionesFabricacion()
@@ -36,6 +37,10 @@ namespace GyCAP.UI.ProcesoFabricacion
             dgvLista.Columns["OPR_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["OPR_HORASREQUERIDA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvLista.Columns["OPR_HORASREQUERIDA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["OPR_CODIGO"].MinimumWidth = 100;
+            dgvLista.Columns["OPR_NOMBRE"].MinimumWidth = 120;
+            dgvLista.Columns["OPR_DESCRIPCION"].MinimumWidth = 160;
+            dgvLista.Columns["OPR_HORASREQUERIDA"].MinimumWidth = 100;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["OPR_CODIGO"].DataPropertyName = "OPR_CODIGO";
@@ -63,6 +68,7 @@ namespace GyCAP.UI.ProcesoFabricacion
             SetInterface(estadoUI.inicio);
 
         }
+
         #region Botones
         private void btnNuevo_Click(object sender, EventArgs e)
         {
@@ -88,7 +94,6 @@ namespace GyCAP.UI.ProcesoFabricacion
             SetInterface(estadoUI.inicio);
         }
         #endregion
-
 
         #region Servicios
 
@@ -122,12 +127,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                 case estadoUI.inicio:            
                     if (dsOperacionesFabricacion.OPERACIONES.Rows.Count == 0)
                     {
-                        hayDatos = false;
-                        //Seteo los controles de búsqueda
-                        txtNombreBuscar.Text = string.Empty;
-                        txtCodigoOperacionBuscar.Text = string.Empty;
-                        txtNombreBuscar.Focus();
-                        gbGrillaBuscar.Visible = false;
+                        hayDatos = false;                        
                     }
                     else
                     {
@@ -140,27 +140,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcMarca.SelectedTab = tpBuscar;
-                    break;
-                case estadoUI.buscar:                   
-                    if (dsOperacionesFabricacion.OPERACIONES.Rows.Count == 0)
-                    {
-                        hayDatos = false;
-                    }
-                    else
-                    {
-                        hayDatos = true;
-                    }
-
-                    btnModificar.Enabled = hayDatos;
-                    btnEliminar.Enabled = hayDatos;
-                    btnConsultar.Enabled = hayDatos;
-                    btnNuevo.Enabled = true;
-                    estadoInterface = estadoUI.inicio;
-                    tcMarca.SelectedTab = tpBuscar;
-
-                    //Seteo los controles de búsqueda
-                    gbGrillaBuscar.Visible = true;
-                    break; 
+                    break;                
                 case estadoUI.nuevo:
                     btnNuevo.Enabled = false;
                     btnConsultar.Enabled = false;
@@ -168,6 +148,29 @@ namespace GyCAP.UI.ProcesoFabricacion
                     btnModificar.Enabled = false;
                     btnGuardar.Enabled = true;
                     
+                    estadoInterface = estadoUI.nuevo;
+                    tcMarca.SelectedTab = tpDatos;
+
+                    //inicializo los componentes
+                    txtCodigoOperacion.Text = string.Empty;
+                    txtNombre.Text = string.Empty;
+                    txtDescripcion.Text = string.Empty;
+                    numHoras.Value = 0;
+                    txtCodigoOperacion.Focus();
+
+                    //Los habilito
+                    txtCodigoOperacion.ReadOnly = false;
+                    txtNombre.ReadOnly = false;
+                    txtDescripcion.ReadOnly = false;
+                    numHoras.Enabled = true;
+                    break;
+                case estadoUI.nuevoExterno:
+                    btnNuevo.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnGuardar.Enabled = true;
+
                     estadoInterface = estadoUI.nuevo;
                     tcMarca.SelectedTab = tpDatos;
 
@@ -231,7 +234,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                 dsOperacionesFabricacion.OPERACIONES.Clear();
 
                 //Llamamos al método de búsqueda de datos
-                BLL.OperacionBLL.ObetenerOperaciones(dsOperacionesFabricacion,txtNombreBuscar.Text,txtCodigoOperacionBuscar.Text);
+                BLL.OperacionBLL.ObetenerOperaciones(dsOperacionesFabricacion, txtNombreBuscar.Text, txtCodigoOperacionBuscar.Text);
                 
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
@@ -239,84 +242,108 @@ namespace GyCAP.UI.ProcesoFabricacion
 
                 if (dsOperacionesFabricacion.OPERACIONES.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Operaciones de Fabricación con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MensajesABM.MsjBuscarNoEncontrado("Operaciones de fabricación", this.Text);
                 }
                 //Seteamos el estado de la interfaz           
-                SetInterface(estadoUI.buscar);
+                SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Operaciones de Fabricación - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                SetInterface(estadoUI.inicio);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Búsqueda);
             }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
-        {
-
-            try
-            {
-               string validacion = ValidarGuardar();
-
-               if (validacion == string.Empty)
+        {            
+           List<string> validacion = new List<string>();
+           //Controlo los textbox
+           if (txtCodigoOperacion.Text == string.Empty) { validacion.Add("Código"); }
+           if (txtNombre.Text == string.Empty) { validacion.Add("Nombre"); }
+           if (numHoras.Value == 0) { validacion.Add("Horas requeridas"); }
+        
+           if (validacion.Count == 0)
+           {               
+               //Creo el objeto de operaciones
+               Entidades.OperacionFabricacion operacion = new GyCAP.Entidades.OperacionFabricacion();
+               operacion.Codificacion = txtCodigoOperacion.Text;
+               operacion.Nombre = txtNombre.Text;
+               operacion.Descripcion = txtDescripcion.Text;
+               operacion.HorasRequeridas = numHoras.Value;
+               
+               //Pregunto si se esta creando una nueva operacion
+               if(estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                {
-                   
-                   //Creo el objeto de operaciones
-                   Entidades.OperacionFabricacion operacion = new GyCAP.Entidades.OperacionFabricacion();
-                   operacion.Codificacion = txtCodigoOperacion.Text;
-                   operacion.Nombre = txtNombre.Text;
-                   operacion.Descripcion = txtDescripcion.Text;
-                   operacion.HorasRequeridas = numHoras.Value;
-
-                   //Pregunto si se esta creando una nueva operacion
-                   if(estadoInterface == estadoUI.nuevo)
+                   try
                    {
                        //Lo inserto en la base de datos
                        BLL.OperacionBLL.InsertarOperacion(operacion);
-                   }
-                   else if (estadoInterface == estadoUI.modificar)
-                   {
-                       operacion.Codigo = Convert.ToInt32(dvListaOperaciones[dgvLista.SelectedRows[0].Index]["opr_numero"]);
-                       BLL.OperacionBLL.ModificarOperacion(operacion);
-                   }
-                       //Informo que se guardo correctamente
-                       MessageBox.Show("Los datos se han almacenado correctamente", "Informacion: Operación de Fabricación - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                       Data.dsHojaRuta.OPERACIONESRow rowOP = dsOperacionesFabricacion.OPERACIONES.NewOPERACIONESRow();
+                       rowOP.BeginEdit();
+                       rowOP.OPR_NUMERO = operacion.Codigo;
+                       rowOP.OPR_NOMBRE = operacion.Nombre;
+                       rowOP.OPR_CODIGO = operacion.Codificacion;
+                       rowOP.OPR_HORASREQUERIDA = operacion.HorasRequeridas;
+                       rowOP.OPR_DESCRIPCION = operacion.Descripcion;
+                       rowOP.EndEdit();
+                       dsOperacionesFabricacion.OPERACIONES.AddOPERACIONESRow(rowOP);
+                       dsOperacionesFabricacion.OPERACIONES.AcceptChanges();
 
-                       //Vuelvo al estado inicial de la interface
-                       SetInterface(estadoUI.inicio);
-                                                       
+                       //Vemos cómo se inició el formulario para determinar la acción a seguir
+                       if (estadoInterface == estadoUI.nuevoExterno)
+                       {
+                           //Nuevo desde acceso directo, cerramos el formulario
+                           btnSalir.PerformClick();
+                       }
+                       else
+                       {
+                           //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
+                           SetInterface(estadoUI.inicio);
+                       }
+                   }
+                   catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+                   {
+                       MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
+                   }
+                   catch (Entidades.Excepciones.BaseDeDatosException ex)
+                   {
+                       MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
+                   }
                }
                else
                {
-                   MessageBox.Show(validacion, "Error: Operaciones de Fabricación - Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-               }
+                   try
+                   {
+                       operacion.Codigo = Convert.ToInt32(dvListaOperaciones[dgvLista.SelectedRows[0].Index]["opr_numero"]);
+                       BLL.OperacionBLL.ModificarOperacion(operacion);
+                       Data.dsHojaRuta.OPERACIONESRow rowOP = dsOperacionesFabricacion.OPERACIONES.FindByOPR_NUMERO(operacion.Codigo);
+                       rowOP.BeginEdit();
+                       rowOP.OPR_NOMBRE = operacion.Nombre;
+                       rowOP.OPR_CODIGO = operacion.Codificacion;
+                       rowOP.OPR_HORASREQUERIDA = operacion.HorasRequeridas;
+                       rowOP.OPR_DESCRIPCION = operacion.Descripcion;
+                       rowOP.EndEdit();                       
+                       dsOperacionesFabricacion.OPERACIONES.AcceptChanges();
 
+                       MensajesABM.MsjConfirmaGuardar("Operación de fabricación", this.Text, MensajesABM.Operaciones.Modificación);
+                   }
+                   catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+                   {
+                       MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
+                   }
+                   catch (Entidades.Excepciones.BaseDeDatosException ex)
+                   {
+                       MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
+                   }
+               }                   
 
-            }
-            catch (Entidades.Excepciones.BaseDeDatosException ex)
-            {
-                MessageBox.Show(ex.Message, "Error: Operaciones de Fabricación - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                SetInterface(estadoUI.inicio);
-            }
-        }
-
-        private string ValidarGuardar()
-        {
-            string msjerror = string.Empty;
-
-            //Controlo los textbox
-            if (txtCodigoOperacion.Text == string.Empty) msjerror = msjerror + "-El campo Codigo Operación no puede estar vacío\n";
-            if (txtDescripcion.Text == string.Empty) msjerror = msjerror + "-El campo Descripción no puede estar vacío\n";
-            if (txtNombre.Text == string.Empty) msjerror = msjerror + "-El campo Codigo Nombre no puede estar vacío\n";
-            if (numHoras.Value == 0) msjerror = msjerror + "-El campo Horas Requeridas no puede estar vacío\n";
-
-            if (msjerror != string.Empty)
-            {
-                msjerror = "Los errores de validación encontrados son:\n" + msjerror;
-            }
-
-            return msjerror;
-        }
+               //Vuelvo al estado inicial de la interface
+               SetInterface(estadoUI.inicio);
+           }
+           else
+           {
+               MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.CompletarDatos, validacion), this.Text);
+           }
+        }        
 
         private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -356,8 +383,7 @@ namespace GyCAP.UI.ProcesoFabricacion
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la Operación de Fabricación seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (respuesta == DialogResult.Yes)
+                if (MensajesABM.MsjConfirmaEliminarDatos("Operación de fabricación", MensajesABM.Generos.Femenino, this.Text) == DialogResult.Yes)
                 {
                     try
                     {
@@ -370,19 +396,19 @@ namespace GyCAP.UI.ProcesoFabricacion
                         dsOperacionesFabricacion.OPERACIONES.AcceptChanges();
                         SetInterface(estadoUI.inicio);
                     }
-                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una operación de Fabricación de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Operación de fabriación", MensajesABM.Generos.Femenino, this.Text);
             }
         }
 

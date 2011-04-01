@@ -33,6 +33,11 @@ namespace GyCAP.BLL
             else { throw new Entidades.Excepciones.ElementoEnTransaccionException(); }
         }
 
+        public static void Actualizar(Entidades.UbicacionStock ubicacionStock)
+        {
+            DAL.UbicacionStockDAL.Actualizar(ubicacionStock);
+        }
+
         public static void ActualizarCantidadesStock(int numeroUbicacion, decimal cantidadReal, decimal cantidadVirtual)
         {
             DAL.UbicacionStockDAL.ActualizarCantidadesStock(numeroUbicacion, cantidadReal, cantidadVirtual, null);
