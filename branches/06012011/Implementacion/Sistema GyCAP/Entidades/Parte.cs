@@ -49,13 +49,7 @@ namespace GyCAP.Entidades
             get { return costo; }
             set { costo = value; }
         }
-        int costoFijo;
-
-        public int CostoFijo
-        {
-            get { return costoFijo; }
-            set { costoFijo = value; }
-        }
+        
         EstadoParte estado;
 
         public EstadoParte Estado
@@ -83,6 +77,14 @@ namespace GyCAP.Entidades
         {
             get { return hojaRuta; }
             set { hojaRuta = value; }
+        }
+
+        Proveedor proveedor;
+
+        public Proveedor Proveedor
+        {
+            get { return proveedor; }
+            set { proveedor = value; }
         }
     }
 }

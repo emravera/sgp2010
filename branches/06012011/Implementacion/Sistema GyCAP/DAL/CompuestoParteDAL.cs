@@ -71,8 +71,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataTable(dtCompuestos_Partes, sql, parametros);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-            
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }            
         }
         
         public static void ObtenerCompuestosParte(int codigoPartePadre, Data.dsEstructuraProducto dsEstructura)

@@ -18,7 +18,7 @@ namespace GyCAP.UI.EstructuraProducto
         private Data.dsEmpleado dsEmpleado = new GyCAP.Data.dsEmpleado();
         private DataView dvCocinaBuscar, dvCocina, dvResponsableBuscar, dvResponsable, dvPlanoBuscar, dvPlano;
         private DataView dvEstructuras, dvPartesDisponibles, dvMPDisponibles, dvFiltroTipo;
-        private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
+        private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, clonar };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
@@ -65,6 +65,27 @@ namespace GyCAP.UI.EstructuraProducto
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             SetInterface(estadoUI.nuevo);
+        }
+
+        private void btnClonar_Click(object sender, EventArgs e)
+        {
+            if (dgvEstructuras.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                int codEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]);
+
+                tvEstructura.BeginUpdate();
+                if (dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codEstructura).Length > 0)
+                {
+                    BLL.EstructuraBLL.CrearArbolEstructura(codEstructura, dsEstructura, tvEstructura, true, out compId);
+                }
+                else { tvEstructura.Nodes.Clear(); }
+                tvEstructura.EndUpdate();
+                SetInterface(estadoUI.clonar);
+            }
+            else
+            {
+                MensajesABM.MsjSinSeleccion("Estructura", MensajesABM.Generos.Femenino, this.Text);
+            }
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)
@@ -169,13 +190,13 @@ namespace GyCAP.UI.EstructuraProducto
             else if (BLL.CocinaBLL.TieneEstructuraActiva(cbCocina.GetSelectedValueInt())) { validacion.Add("La cocina seleccionada ya posee una estructura activa"); }
             //if (cbResponsable.GetSelectedIndex() == -1) { datosOK = false; datosFaltantes += "\\n* Responsable"; } Por ahora opcional
             //if (dtpFechaAlta.IsValueNull()) { dtpFechaAlta.SetFecha(BLL.DBBLL.GetFechaServidor()); } Opcional por ahora
-            if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno && dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = -1").Length == 0) { validacion.Add("El detalle de la estructura"); } //que al menos haya cargado 1 parte
-            else if (estadoInterface == estadoUI.modificar && dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estra_codigo"])).Length == 0) { validacion.Add("El detalle de la estructura"); } //que al menos haya cargado 1 parte
+            if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno || estadoInterface == estadoUI.clonar && dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = -1").Length == 0) { validacion.Add("El detalle de la estructura"); } //que al menos haya cargado 1 parte
+            else if (estadoInterface == estadoUI.modificar && dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"])).Length == 0) { validacion.Add("El detalle de la estructura"); } //que al menos haya cargado 1 parte
             if (cbEstado.GetSelectedIndex() == -1) { validacion.Add("Estado"); }
             if (validacion.Count == 0)
             {
                 //Datos OK, revisemos que está haciendo
-                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno || estadoInterface == estadoUI.clonar)
                 {
                     //Creando uno nuevo
                     try
@@ -189,7 +210,7 @@ namespace GyCAP.UI.EstructuraProducto
                         if (dtpFechaAlta.IsValueNull()) { rowEstructura.ESTR_FECHA_ALTA = BLL.DBBLL.GetFechaServidor(); }
                         else { rowEstructura.ESTR_FECHA_ALTA = (DateTime)dtpFechaAlta.GetFecha(); }
                         rowEstructura.COC_CODIGO = cbCocina.GetSelectedValueInt();
-                        if (cbResponsable.GetSelectedIndex() == -1) rowEstructura.SetE_CODIGONull();
+                        if (cbResponsable.GetSelectedValueInt() == -1) rowEstructura.SetE_CODIGONull();
                         else { rowEstructura.E_CODIGO = cbResponsable.GetSelectedValueInt(); }
                         if (dtpFechaModificacion.IsValueNull()) { rowEstructura.SetESTR_FECHA_MODIFICACIONNull(); }
                         else { rowEstructura.ESTR_FECHA_MODIFICACION = (DateTime)dtpFechaModificacion.GetFecha(); }
@@ -608,6 +629,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
                     btnConsultar.Enabled = hayDatos;
+                    btnClonar.Enabled = hayDatos;
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcEstructuraProducto.SelectedTab = tpBuscar;
@@ -616,9 +638,9 @@ namespace GyCAP.UI.EstructuraProducto
                     txtNombre.ReadOnly = false;
                     txtNombre.Clear();
                     cbPlano.Enabled = true;
-                    cbPlano.SelectedIndex = -1;
+                    cbPlano.SetTexto("Seleccione...");
                     cbEstado.Enabled = true;
-                    cbEstado.SetTexto("Seleccione");
+                    cbEstado.SetTexto("Seleccione...");
                     dtpFechaAlta.Enabled = true;
                     dtpFechaAlta.SetFechaNull();
                     try
@@ -627,9 +649,9 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Exception) { dtpFechaAlta.Value = DateTime.Today; }
                     cbCocina.Enabled = true;
-                    cbCocina.SelectedIndex = -1;
+                    cbCocina.SetTexto("Seleccione...");
                     cbResponsable.Enabled = true;
-                    cbResponsable.SelectedIndex = -1;
+                    cbResponsable.SetSelectedValue(-1);
                     dtpFechaModificacion.Enabled = true;
                     dtpFechaModificacion.SetFechaNull();
                     txtDescripcion.ReadOnly = false;
@@ -641,6 +663,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
+                    btnClonar.Enabled = false;
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
@@ -654,9 +677,9 @@ namespace GyCAP.UI.EstructuraProducto
                     txtNombre.ReadOnly = false;
                     txtNombre.Clear();
                     cbPlano.Enabled = true;
-                    cbPlano.SelectedIndex = -1;
+                    cbPlano.SetTexto("Seleccione...");
                     cbEstado.Enabled = true;
-                    cbEstado.SetTexto("Seleccione");
+                    cbEstado.SetTexto("Seleccione...");
                     dtpFechaAlta.Enabled = true;
                     try
                     {
@@ -664,9 +687,9 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Exception) { dtpFechaAlta.Value = DateTime.Today; }
                     cbCocina.Enabled = true;
-                    cbCocina.SelectedIndex = -1;
+                    cbCocina.SetTexto("Seleccione...");
                     cbResponsable.Enabled = true;
-                    cbResponsable.SelectedIndex = -1;
+                    cbResponsable.SetSelectedValue(-1);
                     dtpFechaModificacion.Enabled = true;
                     dtpFechaModificacion.SetFechaNull();
                     txtDescripcion.ReadOnly = false;
@@ -678,6 +701,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
                     btnNuevo.Enabled = false;
+                    btnClonar.Enabled = false;
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
@@ -702,6 +726,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = true;
+                    btnClonar.Enabled = true;
                     btnConsultar.Enabled = true;
                     btnModificar.Enabled = true;
                     btnEliminar.Enabled = true;
@@ -725,11 +750,41 @@ namespace GyCAP.UI.EstructuraProducto
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
+                    btnClonar.Enabled = false;
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     gbBtnDatosPartes.Enabled = true;
                     estadoInterface = estadoUI.modificar;
+                    tcEstructuraProducto.SelectedTab = tpDatos;
+                    slideControl1.Selected = slideDatos;
+                    break;
+                case estadoUI.clonar:
+                    txtNombre.ReadOnly = false;
+                    cbPlano.Enabled = true;
+                    cbEstado.Enabled = true;
+                    dtpFechaAlta.Enabled = true;                    
+                    try
+                    {
+                        dtpFechaAlta.SetFecha(BLL.DBBLL.GetFechaServidor());
+                    }
+                    catch (Exception) { dtpFechaAlta.Value = DateTime.Today; }
+                    cbCocina.Enabled = true;
+                    cbResponsable.Enabled = true;
+                    dtpFechaModificacion.Enabled = true;
+                    txtDescripcion.ReadOnly = false;
+                    nudcosto.Enabled = true;
+                    panelAccionesArbol.Enabled = true;
+                    gbAgregarParteMP.Enabled = true;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = true;
+                    btnNuevo.Enabled = false;
+                    btnClonar.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    gbBtnDatosPartes.Enabled = true;
+                    estadoInterface = estadoUI.clonar;
                     tcEstructuraProducto.SelectedTab = tpDatos;
                     slideControl1.Selected = slideDatos;
                     break;
@@ -797,7 +852,7 @@ namespace GyCAP.UI.EstructuraProducto
             cbPlanoBuscar.SetDatos(dvPlanoBuscar, "PNO_CODIGO", "PNO_NOMBRE", "--TODOS--", true);
             string[] nombres = { "Activa", "Inactiva" };
             int[] valores = { BLL.EstructuraBLL.EstructuraActiva, BLL.EstructuraBLL.EstructuraInactiva };
-            cboActivoBuscar.SetDatos(nombres, valores, "TODOS", true);            
+            cboActivoBuscar.SetDatos(nombres, valores, "--TODOS--", true);            
 
             #endregion Buscar
 
@@ -812,10 +867,10 @@ namespace GyCAP.UI.EstructuraProducto
             dvPlano.Sort = "PNO_NOMBRE ASC";
 
             //ComboBoxs
-            cbCocina.SetDatos(dvCocina, "COC_CODIGO", "COC_CODIGO_PRODUCTO", "Seleccione", false);
-            cbResponsable.SetDatos(dvResponsable, "E_CODIGO", displaymember, ", ", "Seleccione", false);
-            cbPlano.SetDatos(dvPlano, "PNO_CODIGO", "PNO_NOMBRE", "Seleccione", false);
-            cbEstado.SetDatos(nombres, valores, "Seleccione", false);
+            cbCocina.SetDatos(dvCocina, "COC_CODIGO", "COC_CODIGO_PRODUCTO", "Seleccione...", false);
+            cbResponsable.SetDatos(dvResponsable, "E_CODIGO", displaymember, ", ", "--Sin especificar--", true);
+            cbPlano.SetDatos(dvPlano, "PNO_CODIGO", "PNO_NOMBRE", "Seleccione...", false);
+            cbEstado.SetDatos(nombres, valores, "Seleccione...", false);
 
             #endregion Datos
 
@@ -870,7 +925,7 @@ namespace GyCAP.UI.EstructuraProducto
 
             dvFiltroTipo = new DataView(dsEstructura.TIPOS_PARTES);
             dvFiltroTipo.Sort = "TPAR_NOMBRE ASC";
-            cboFiltroTipoParte.SetDatos(dvFiltroTipo, "TPAR_CODIGO", "TPAR_NOMBRE", "TODOS", true);
+            cboFiltroTipoParte.SetDatos(dvFiltroTipo, "TPAR_CODIGO", "TPAR_NOMBRE", "--TODOS--", true);
             #endregion
 
         }
@@ -978,7 +1033,7 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 cbResponsable.SetSelectedValue(Convert.ToInt32(dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).E_CODIGO));
             }
-            else { cbResponsable.SetSelectedIndex(-1); }
+            else { cbResponsable.SetSelectedValue(-1); }
             if (!dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).IsESTR_FECHA_MODIFICACIONNull())
             {
                 dtpFechaModificacion.SetFecha(dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_FECHA_MODIFICACION);
@@ -989,7 +1044,7 @@ namespace GyCAP.UI.EstructuraProducto
             tvEstructura.BeginUpdate();
             if (dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codEstructura).Length > 0) 
             { 
-                BLL.EstructuraBLL.CrearArbolEstructura(codEstructura, dsEstructura, tvEstructura); 
+                BLL.EstructuraBLL.CrearArbolEstructura(codEstructura, dsEstructura, tvEstructura, false, out compId); 
             }
             else { tvEstructura.Nodes.Clear(); }
             tvEstructura.EndUpdate();
@@ -1138,6 +1193,8 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
+
+        
 
     }
 }
