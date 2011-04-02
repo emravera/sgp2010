@@ -353,7 +353,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(18, 109);
+            this.label5.Location = new System.Drawing.Point(18, 80);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 13);
             this.label5.TabIndex = 20;
@@ -362,7 +362,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 80);
+            this.label4.Location = new System.Drawing.Point(18, 109);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(37, 13);
             this.label4.TabIndex = 19;
@@ -795,17 +795,19 @@
             this.cboTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTipo.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboTipo.FormattingEnabled = true;
-            this.cboTipo.Location = new System.Drawing.Point(105, 106);
+            this.cboTipo.Location = new System.Drawing.Point(105, 77);
             this.cboTipo.Name = "cboTipo";
             this.cboTipo.Size = new System.Drawing.Size(251, 21);
             this.cboTipo.TabIndex = 12;
+            this.cboTipo.SelectedIndexChanged += new System.EventHandler(this.cboTipo_SelectedIndexChanged);
+            this.cboTipo.SelectedValueChanged += new System.EventHandler(this.cboTipo_SelectedValueChanged);
             // 
             // cboPlano
             // 
             this.cboPlano.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPlano.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboPlano.FormattingEnabled = true;
-            this.cboPlano.Location = new System.Drawing.Point(105, 77);
+            this.cboPlano.Location = new System.Drawing.Point(105, 106);
             this.cboPlano.Name = "cboPlano";
             this.cboPlano.Size = new System.Drawing.Size(251, 21);
             this.cboPlano.TabIndex = 11;

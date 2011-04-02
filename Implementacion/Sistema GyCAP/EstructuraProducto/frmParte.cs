@@ -308,9 +308,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cboHojaRuta.SetTexto("Seleccione...");
                     cboHojaRuta.Enabled = true;
                     cboProveedor.SetSelectedValue(-1);
-                    cboProveedor.Enabled = true;
                     nudCosto.Value = 0;
-                    nudCosto.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -344,8 +342,6 @@ namespace GyCAP.UI.EstructuraProducto
                     cboHojaRuta.SetTexto("Seleccione...");
                     cboHojaRuta.Enabled = true;
                     cboProveedor.SetSelectedValue(-1);
-                    cboProveedor.Enabled = true;
-                    nudCosto.Value = 0;
                     nudCosto.Enabled = true;                   
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
@@ -393,8 +389,16 @@ namespace GyCAP.UI.EstructuraProducto
                     cboTerminacion.Enabled = true;
                     cboUnidadMedida.Enabled = true;
                     cboHojaRuta.Enabled = true;
-                    cboProveedor.Enabled = true;
-                    nudCosto.Enabled = true;                  
+
+                    cboProveedor.SetSelectedValue(-1);
+                    cboProveedor.Enabled = false;
+                    nudCosto.Enabled = false;
+                    if (dgvLista.SelectedRows.Count > 0 && !dsParte.PARTES.FindByPART_NUMERO(Convert.ToInt32(dvPartes[dgvLista.SelectedRows[0].Index]["part_numero"])).IsPROVE_CODIGONull())
+                    {
+                        cboProveedor.SetSelectedValue(Convert.ToInt32(dsParte.PARTES.FindByPART_NUMERO(Convert.ToInt32(dvPartes[dgvLista.SelectedRows[0].Index]["part_numero"])).PROVE_CODIGO));
+                        cboProveedor.Enabled = true;
+                        nudCosto.Enabled = true;
+                    }
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -619,5 +623,26 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
+
+        private void cboTipo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if ((estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno || estadoInterface == estadoUI.modificar) && BLL.TipoParteBLL.EsTipoAdquirido(cboTipo.GetSelectedValueInt()))
+            {
+                cboProveedor.Enabled = true;
+                nudCosto.Enabled = true;
+            }
+            else
+            {
+                cboProveedor.Enabled = false;
+                nudCosto.Enabled = false;
+                cboProveedor.SetSelectedValue(-1);
+                nudCosto.Value = 0;
+            }
+        }
+
+        private void cboTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
