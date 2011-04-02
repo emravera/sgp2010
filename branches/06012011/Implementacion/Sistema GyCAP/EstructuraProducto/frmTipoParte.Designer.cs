@@ -49,6 +49,11 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.RichTextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -68,11 +73,6 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -366,6 +366,56 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del tipo de parte";
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(180, 227);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(327, 13);
+            this.label13.TabIndex = 28;
+            this.label13.Text = "(Producto vendible, no utilizado para fabricación. Ejemplo: cocina.)";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(180, 193);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(216, 13);
+            this.label12.TabIndex = 27;
+            this.label12.Text = "(Parte adquirida de un proveedor externo.)";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(180, 157);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(47, 13);
+            this.label11.TabIndex = 26;
+            this.label11.Text = "????????";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(180, 122);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(342, 13);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "(Generar orden de trabajo, de servicio o compra según corresponda.)";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(180, 86);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(311, 13);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "(Agrupación lógica. No se genera orden ni se controla el stock.)";
+            // 
             // txtDescripcion
             // 
             this.txtDescripcion.Location = new System.Drawing.Point(143, 267);
@@ -565,56 +615,6 @@
             this.btnSalir.Text = "&Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(180, 86);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(311, 13);
-            this.label9.TabIndex = 24;
-            this.label9.Text = "(Agrupación lógica. No se genera orden ni se controla el stock.)";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(180, 122);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(342, 13);
-            this.label10.TabIndex = 25;
-            this.label10.Text = "(Generar orden de trabajo, de servicio o compra según corresponda.)";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(180, 157);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(47, 13);
-            this.label11.TabIndex = 26;
-            this.label11.Text = "????????";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(180, 193);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(216, 13);
-            this.label12.TabIndex = 27;
-            this.label12.Text = "(Parte adquirida de un proveedor externo.)";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(180, 227);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(327, 13);
-            this.label13.TabIndex = 28;
-            this.label13.Text = "(Producto vendible, no utilizado para fabricación. Ejemplo: cocina.)";
             // 
             // frmTipoParte
             // 

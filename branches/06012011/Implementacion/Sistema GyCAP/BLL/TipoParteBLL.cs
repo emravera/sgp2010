@@ -48,5 +48,25 @@ namespace GyCAP.BLL
             else { terminado = ValorNO; }
             DAL.TipoParteDAL.ObtenerTiposPartes(nombre, fantasma, orden, ensamblado, adquirido, terminado, dtTiposPartes);
         }
+
+        public static bool EsTipoFantasma(int codigoTipoParte)
+        {
+            return DAL.TipoParteDAL.EsTipoFantasma(codigoTipoParte);
+        }
+
+        public static bool EsProductoTerminado(int codigoTipoParte)
+        {
+            return DAL.TipoParteDAL.EsProductoTerminado(codigoTipoParte);
+        }
+
+        public static bool EsTipoAdquirido(int codigoTipoParte)
+        {
+            return DAL.TipoParteDAL.EsTipoAdquirido(codigoTipoParte);
+        }
+
+        public static bool EsTipoAdquiridoConOrden(int codigoTipoParte)
+        {
+            return DAL.TipoParteDAL.EsTipoAdquiridoConOrden(codigoTipoParte);
+        }
     }
 }

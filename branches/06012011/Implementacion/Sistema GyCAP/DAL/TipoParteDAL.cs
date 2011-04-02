@@ -200,5 +200,57 @@ namespace GyCAP.DAL
                 catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
         }
+
+        public static bool EsTipoFantasma(int codigoTipoParte)
+        {
+            string sql = "SELECT tpar_fantasma FROM TIPOS_PARTES WHERE tpar_codigo = @p0";
+            object[] parametros = { codigoTipoParte };
+
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, parametros, null)) == 0) { return false; }
+                else { return true; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static bool EsProductoTerminado(int codigoTipoParte)
+        {
+            string sql = "SELECT tpar_productoterminado FROM TIPOS_PARTES WHERE tpar_codigo = @p0";
+            object[] parametros = { codigoTipoParte };
+
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, parametros, null)) == 0) { return false; }
+                else { return true; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static bool EsTipoAdquirido(int codigoTipoParte)
+        {
+            string sql = "SELECT tpar_adquirido FROM TIPOS_PARTES WHERE tpar_codigo = @p0";
+            object[] parametros = { codigoTipoParte };
+
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, parametros, null)) == 0) { return false; }
+                else { return true; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+        
+        public static bool EsTipoAdquiridoConOrden(int codigoTipoParte)
+        {
+            string sql = "SELECT (tpar_adquirido + tpar_ordentrabajo) FROM TIPOS_PARTES WHERE tpar_codigo = @p0";
+            object[] parametros = { codigoTipoParte };
+
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, parametros, null)) == 2) { return true; }
+                else { return false; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
     }
 }
