@@ -184,10 +184,8 @@ namespace GyCAP.UI.EstructuraProducto
                         if (cboTerminacion.GetSelectedIndex() != -1) { row.TE_CODIGO = cboTerminacion.GetSelectedValueInt(); }
                         else { row.SetTE_CODIGONull(); }
                         row.PART_COSTO = nudCosto.Value;
-                        if (chkCostoFijo.Checked) { row.PART_COSTOFIJO = BLL.ParteBLL.CostoFijoChecked; }
-                        else { row.PART_COSTOFIJO = BLL.ParteBLL.CostoFijoUnChecked; }
                         row.UMED_CODIGO = cboUnidadMedida.GetSelectedValueInt();
-                        if (cboProveedor.GetSelectedIndex() != -1) { row.PROVE_CODIGO = cboProveedor.GetSelectedValueInt(); }
+                        if (cboProveedor.GetSelectedValueInt() != -1) { row.PROVE_CODIGO = cboProveedor.GetSelectedValueInt(); }
                         else { row.SetPROVE_CODIGONull(); }
                         row.EndEdit();
                         dsParte.PARTES.AddPARTESRow(row);
@@ -236,10 +234,8 @@ namespace GyCAP.UI.EstructuraProducto
                         else { dsParte.PARTES.FindByPART_NUMERO(numero).SetPNO_CODIGONull(); }
                         if (cboTerminacion.GetSelectedIndex() != -1) { dsParte.PARTES.FindByPART_NUMERO(numero).TE_CODIGO = cboTerminacion.GetSelectedValueInt(); }
                         else { dsParte.PARTES.FindByPART_NUMERO(numero).SetTE_CODIGONull(); }
-                        if (chkCostoFijo.Checked) { dsParte.PARTES.FindByPART_NUMERO(numero).PART_COSTOFIJO = BLL.ParteBLL.CostoFijoChecked; }
-                        else { dsParte.PARTES.FindByPART_NUMERO(numero).PART_COSTOFIJO = BLL.ParteBLL.CostoFijoUnChecked; }
                         dsParte.PARTES.FindByPART_NUMERO(numero).UMED_CODIGO = cboUnidadMedida.GetSelectedValueInt();
-                        if (cboProveedor.GetSelectedIndex() != -1) { dsParte.PARTES.FindByPART_NUMERO(numero).PROVE_CODIGO = cboProveedor.GetSelectedValueInt(); }
+                        if (cboProveedor.GetSelectedValueInt() != -1) { dsParte.PARTES.FindByPART_NUMERO(numero).PROVE_CODIGO = cboProveedor.GetSelectedValueInt(); }
                         else { dsParte.PARTES.FindByPART_NUMERO(numero).SetPROVE_CODIGONull(); }
                         dsParte.PARTES.FindByPART_NUMERO(numero).EndEdit();
                         BLL.ParteBLL.Actualizar(dsParte);
@@ -299,24 +295,22 @@ namespace GyCAP.UI.EstructuraProducto
                     txtCodigo.Clear();
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
-                    cboPlano.SetTexto("Seleccione");
+                    cboPlano.SetTexto("Seleccione...");
                     cboPlano.Enabled = true;
-                    cboTipo.SetTexto("Seleccione");
+                    cboTipo.SetTexto("Seleccione...");
                     cboTipo.Enabled = true;
-                    cboEstado.SetTexto("Seleccione");
+                    cboEstado.SetTexto("Seleccione...");
                     cboEstado.Enabled = true;
-                    cboTerminacion.SetTexto("Seleccione");
+                    cboTerminacion.SetTexto("Seleccione...");
                     cboTerminacion.Enabled = true;
                     cboUnidadMedida.Enabled = true;
-                    cboUnidadMedida.SetTexto("Seleccione");
-                    cboHojaRuta.SetTexto("Seleccione");
+                    cboUnidadMedida.SetTexto("Seleccione...");
+                    cboHojaRuta.SetTexto("Seleccione...");
                     cboHojaRuta.Enabled = true;
-                    cboProveedor.SetTexto("Seleccione");
+                    cboProveedor.SetSelectedValue(-1);
                     cboProveedor.Enabled = true;
                     nudCosto.Value = 0;
                     nudCosto.Enabled = true;
-                    chkCostoFijo.Checked = false;
-                    chkCostoFijo.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -337,24 +331,22 @@ namespace GyCAP.UI.EstructuraProducto
                     txtCodigo.Clear();
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
-                    cboPlano.SetTexto("Seleccione");
+                    cboPlano.SetTexto("Seleccione...");
                     cboPlano.Enabled = true;
-                    cboTipo.SetTexto("Seleccione");
+                    cboTipo.SetTexto("Seleccione...");
                     cboTipo.Enabled = true;
-                    cboEstado.SetTexto("Seleccione");
+                    cboEstado.SetTexto("Seleccione...");
                     cboEstado.Enabled = true;
-                    cboTerminacion.SetTexto("Seleccione");
+                    cboTerminacion.SetTexto("Seleccione...");
                     cboTerminacion.Enabled = true;
                     cboUnidadMedida.Enabled = true;
-                    cboUnidadMedida.SetTexto("Seleccione");
-                    cboHojaRuta.SetTexto("Seleccione");
+                    cboUnidadMedida.SetTexto("Seleccione...");
+                    cboHojaRuta.SetTexto("Seleccione...");
                     cboHojaRuta.Enabled = true;
-                    cboProveedor.SetTexto("Seleccione");
+                    cboProveedor.SetSelectedValue(-1);
                     cboProveedor.Enabled = true;
                     nudCosto.Value = 0;
-                    nudCosto.Enabled = true;
-                    chkCostoFijo.Checked = false;
-                    chkCostoFijo.Enabled = true;                    
+                    nudCosto.Enabled = true;                   
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
                     btnNuevo.Enabled = false;
@@ -380,7 +372,6 @@ namespace GyCAP.UI.EstructuraProducto
                     cboHojaRuta.Enabled = false;
                     cboProveedor.Enabled = false;
                     nudCosto.Enabled = false;
-                    chkCostoFijo.Enabled = false;
                     btnGuardar.Enabled = false;
                     btnModificar.Enabled = true;
                     btnEliminar.Enabled = true;
@@ -403,8 +394,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cboUnidadMedida.Enabled = true;
                     cboHojaRuta.Enabled = true;
                     cboProveedor.Enabled = true;
-                    nudCosto.Enabled = true;
-                    chkCostoFijo.Enabled = true;                    
+                    nudCosto.Enabled = true;                  
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -434,6 +424,7 @@ namespace GyCAP.UI.EstructuraProducto
                 BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsParte.TERMINACIONES);
                 BLL.HojaRutaBLL.ObtenerHojasRuta(dsParte.HOJAS_RUTA);
                 BLL.UnidadMedidaBLL.ObtenerTodos(dsParte.UNIDADES_MEDIDA);
+                BLL.ProveedorBLL.ObtenerProveedor(null, null, dsProveedor.PROVEEDORES);
                 //Obtener proveedores - gonzalo
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -485,17 +476,17 @@ namespace GyCAP.UI.EstructuraProducto
             dvHojaRutaBuscar = new DataView(dsParte.HOJAS_RUTA);
             dvProveedor = new DataView(dsProveedor.PROVEEDORES);
             
-            cboTipoBuscar.SetDatos(dvTipoPartesBuscar, "TPAR_CODIGO", "TPAR_NOMBRE", "TPAR_NOMBRE ASC", "TODOS", true);
-            cboEstadoBuscar.SetDatos(dvEstadoBuscar, "PAR_CODIGO", "PAR_NOMBRE", "PAR_NOMBRE ASC", "TODOS", true);
-            cboPlanoBuscar.SetDatos(dvPlanoBuscar, "PNO_CODIGO", "PNO_NOMBRE", "PNO_NOMBRE ASC", "TODOS", true);
-            cboTerminacionBuscar.SetDatos(dvTerminacionBuscar, "TE_CODIGO", "TE_NOMBRE", "TE_NOMBRE ASC", "TODOS", true);
-            cboTipo.SetDatos(dvTipoPartes, "TPAR_CODIGO", "TPAR_NOMBRE", "TPAR_NOMBRE ASC", "Seleccione", false);
-            cboEstado.SetDatos(dvEstado, "PAR_CODIGO", "PAR_NOMBRE", "PAR_NOMBRE ASC", "Seleccione", false);
-            cboPlano.SetDatos(dvPlano, "PNO_CODIGO", "PNO_NOMBRE", "PNO_NOMBRE ASC", "Seleccione", false);
-            cboTerminacion.SetDatos(dvTerminacion, "TE_CODIGO", "TE_NOMBRE", "TE_NOMBRE ASC", "Seleccione", false);
-            cboUnidadMedida.SetDatos(dvUnidadMedida, "UMED_CODIGO", "UMED_NOMBRE", "UMED_NOMBRE ASC", "Seleccione", false);
-            cboHojaRuta.SetDatos(dvHojaRuta, "HR_CODIGO", "HR_NOMBRE", "HR_NOMBRE ASC", "Seleccione", false);
-            cboProveedor.SetDatos(dvProveedor, "PROVE_CODIGO", "PROVE_RAZONSOCIAL", "PROVE_RAZONSOCIAL ASC", "Seleccione", false);
+            cboTipoBuscar.SetDatos(dvTipoPartesBuscar, "TPAR_CODIGO", "TPAR_NOMBRE", "TPAR_NOMBRE ASC", "--TODOS--", true);
+            cboEstadoBuscar.SetDatos(dvEstadoBuscar, "PAR_CODIGO", "PAR_NOMBRE", "PAR_NOMBRE ASC", "--TODOS--", true);
+            cboPlanoBuscar.SetDatos(dvPlanoBuscar, "PNO_CODIGO", "PNO_NOMBRE", "PNO_NOMBRE ASC", "--TODOS--", true);
+            cboTerminacionBuscar.SetDatos(dvTerminacionBuscar, "TE_CODIGO", "TE_NOMBRE", "TE_NOMBRE ASC", "--TODOS--", true);
+            cboTipo.SetDatos(dvTipoPartes, "TPAR_CODIGO", "TPAR_NOMBRE", "TPAR_NOMBRE ASC", "Seleccione...", false);
+            cboEstado.SetDatos(dvEstado, "PAR_CODIGO", "PAR_NOMBRE", "PAR_NOMBRE ASC", "Seleccione...", false);
+            cboPlano.SetDatos(dvPlano, "PNO_CODIGO", "PNO_NOMBRE", "PNO_NOMBRE ASC", "Seleccione...", false);
+            cboTerminacion.SetDatos(dvTerminacion, "TE_CODIGO", "TE_NOMBRE", "TE_NOMBRE ASC", "Seleccione...", false);
+            cboUnidadMedida.SetDatos(dvUnidadMedida, "UMED_CODIGO", "UMED_NOMBRE", "UMED_NOMBRE ASC", "Seleccione...", false);
+            cboHojaRuta.SetDatos(dvHojaRuta, "HR_CODIGO", "HR_NOMBRE", "HR_NOMBRE ASC", "Seleccione...", false);
+            cboProveedor.SetDatos(dvProveedor, "PROVE_CODIGO", "PROVE_RAZONSOCIAL", "PROVE_RAZONSOCIAL ASC", "--Sin especificar--", true);
         }
 
         private void control_Enter(object sender, EventArgs e)
@@ -557,11 +548,9 @@ namespace GyCAP.UI.EstructuraProducto
             if (dsParte.PARTES.FindByPART_NUMERO(numero).IsTE_CODIGONull()) { cboTerminacion.SetTexto(string.Empty); }
             else { cboTerminacion.SetSelectedValue(Convert.ToInt32(dsParte.PARTES.FindByPART_NUMERO(numero).TE_CODIGO)); }
             cboTipo.SetSelectedValue(Convert.ToInt32(dsParte.PARTES.FindByPART_NUMERO(numero).TPAR_CODIGO));
-            nudCosto.Value = dsParte.PARTES.FindByPART_NUMERO(numero).PART_COSTO;
-            if (dsParte.PARTES.FindByPART_NUMERO(numero).PART_COSTOFIJO == 0) { chkCostoFijo.Checked = false; }
-            else { chkCostoFijo.Checked = true; }
+            nudCosto.Value = dsParte.PARTES.FindByPART_NUMERO(numero).PART_COSTO;            
             cboUnidadMedida.SetSelectedValue(Convert.ToInt32(dsParte.PARTES.FindByPART_NUMERO(numero).UMED_CODIGO));
-            if (dsParte.PARTES.FindByPART_NUMERO(numero).IsPROVE_CODIGONull()) { cboProveedor.SetTexto(string.Empty); }
+            if (dsParte.PARTES.FindByPART_NUMERO(numero).IsPROVE_CODIGONull()) { cboProveedor.SetSelectedValue(-1); }
             else { cboProveedor.SetSelectedValue(Convert.ToInt32(dsParte.PARTES.FindByPART_NUMERO(numero).PROVE_CODIGO)); }
             //Falta agregar la imagen de la parte - gonzalo
         }

@@ -95,6 +95,13 @@ namespace GyCAP.UI.EstructuraProducto.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Copy_25 {
+            get {
+                object obj = ResourceManager.GetObject("Copy_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Delete_25 {
             get {
                 object obj = ResourceManager.GetObject("Delete_25", resourceCulture);

@@ -20,31 +20,32 @@ namespace GyCAP.DAL
                         [part_codigo],
                         [pno_codigo],
                         [part_costo],
-                        [part_costofijo],
                         [par_codigo],
                         [tpar_codigo],
                         [te_codigo],
                         [hr_codigo],
-                        [umed_codigo]) 
+                        [umed_codigo],
+                        [prove_codigo]) 
                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10) SELECT @@Identity";
 
-            object plano = DBNull.Value, terminacion = DBNull.Value, hojaRuta = DBNull.Value;
+            object plano = DBNull.Value, terminacion = DBNull.Value, hojaRuta = DBNull.Value, proveedor = DBNull.Value;
             Data.dsEstructuraProducto.PARTESRow rowParte = dsEstructura.PARTES.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructuraProducto.PARTESRow;
             if (!rowParte.IsPNO_CODIGONull()) { plano = rowParte.PNO_CODIGO; }
             if (!rowParte.IsTE_CODIGONull()) { terminacion = rowParte.TE_CODIGO; }
             if (!rowParte.IsHR_CODIGONull()) { hojaRuta = rowParte.HR_CODIGO; }
+            if (!rowParte.IsPROVE_CODIGONull()) { proveedor = rowParte.PROVE_CODIGO; }
 
             object[] parametros = { rowParte.PART_NOMBRE,
                                     rowParte.PART_DESCRIPCION,
                                     rowParte.PART_CODIGO,
                                     plano,
                                     rowParte.PART_COSTO,
-                                    rowParte.PART_COSTOFIJO,
                                     rowParte.PAR_CODIGO,
                                     rowParte.TPAR_CODIGO,
                                     terminacion,
                                     hojaRuta,
-                                    rowParte.UMED_CODIGO };
+                                    rowParte.UMED_CODIGO,
+                                    proveedor };
             
             try
             {
@@ -63,31 +64,32 @@ namespace GyCAP.DAL
                             part_codigo = @p2,
                             pno_codigo = @p3,
                             part_costo = @p4,
-                            part_costofijo = @p5,
-                            par_codigo = @p6,
-                            tpar_codigo = @p7,
-                            te_codigo = @p8,
-                            hr_codigo = @p9,
-                            umed_codigo = @p10
+                            par_codigo = @p5,
+                            tpar_codigo = @p6,
+                            te_codigo = @p7,
+                            hr_codigo = @p8,
+                            umed_codigo = @p9,
+                            prove_codigo = @p10 
                             WHERE part_numero = @p11";
 
-            object plano = DBNull.Value, terminacion = DBNull.Value, hojaRuta = DBNull.Value;
+            object plano = DBNull.Value, terminacion = DBNull.Value, hojaRuta = DBNull.Value, proveedor = DBNull.Value;
             Data.dsEstructuraProducto.PARTESRow rowParte = dsEstructura.PARTES.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructuraProducto.PARTESRow;
             if (!rowParte.IsPNO_CODIGONull()) { plano = rowParte.PNO_CODIGO; }
             if (!rowParte.IsTE_CODIGONull()) { terminacion = rowParte.TE_CODIGO; }
             if (!rowParte.IsHR_CODIGONull()) { hojaRuta = rowParte.HR_CODIGO; }
+            if (!rowParte.IsPROVE_CODIGONull()) { proveedor = rowParte.PROVE_CODIGO; }
 
             object[] parametros = { rowParte.PART_NOMBRE,
                                     rowParte.PART_DESCRIPCION,
                                     rowParte.PART_CODIGO,
                                     plano,
                                     rowParte.PART_COSTO,
-                                    rowParte.PART_COSTOFIJO,
                                     rowParte.PAR_CODIGO,
                                     rowParte.TPAR_CODIGO,
                                     terminacion,
                                     hojaRuta,
                                     rowParte.UMED_CODIGO,
+                                    proveedor,
                                     rowParte.PART_NUMERO };
 
             try
@@ -127,8 +129,9 @@ namespace GyCAP.DAL
 
         public static void ObtenerPartes(object nombre, object codigo, object terminacion, object tipo, object estado, object plano, DataTable dtPartes)
         {
-            string sql = @"SELECT part_numero, part_nombre, part_descripcion, part_codigo, pno_codigo, part_costo,
-                            part_costofijo, par_codigo, tpar_codigo, te_codigo, hr_codigo, umed_codigo FROM PARTES WHERE 1=1 ";
+            string sql = @"SELECT part_numero, part_nombre, part_descripcion, part_codigo, pno_codigo, part_costo, 
+                            par_codigo, tpar_codigo, te_codigo, hr_codigo, umed_codigo, prove_codigo 
+                           FROM PARTES WHERE 1=1 ";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
