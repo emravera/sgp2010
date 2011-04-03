@@ -313,7 +313,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             decimal costo = 0;
             int codigoEstructura = 0;
-            if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { codigoEstructura = -1; }
+            if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno || estadoInterface == estadoUI.clonar) { codigoEstructura = -1; }
             else { codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]); }
 
             foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow row in
@@ -339,7 +339,8 @@ namespace GyCAP.UI.EstructuraProducto
                     //Condiciones:
                     //              - que el padre no sea ella misma
                     //              - que el padre no sea una MP
-                    //              - si ya está, avisar y preguntar si quiere aumentar la cantidad ingresada
+                    //              - si ya está dentro del mismo padre, avisar y preguntar si quiere aumentar la cantidad ingresada
+                    //              - si ya está en otro padre, que no arme una estructura diferente para la misma parte
                     //              - que ella misma no sea ancestro
                     //              - solo una parte del tipo producto terminado puede ser raíz
                     int numeroParte = Convert.ToInt32(dvPartesDisponibles[dgvPartesDisponibles.SelectedRows[0].Index]["part_numero"]);
@@ -356,9 +357,9 @@ namespace GyCAP.UI.EstructuraProducto
                 {
                     //agrego la MP
                     //Condiciones:
-                    //              - que no sea una raíz
+                    //              - que no sea raíz
                     //              - que no sea hija de otra MP
-                    //              - si ya está, avisar y preguntar si quiere aumentar la cantidad ingresada
+                    //              - si ya está en el mismo padre, avisar y preguntar si quiere aumentar la cantidad ingresada
                     int codigoMP = Convert.ToInt32(dvMPDisponibles[dgvMPDisponibles.SelectedRows[0].Index]["mp_codigo"]);
                     AgregarParteAArbol(null, dsEstructura.MATERIAS_PRIMAS.FindByMP_CODIGO(codigoMP));
                 }
@@ -554,7 +555,7 @@ namespace GyCAP.UI.EstructuraProducto
                 }
                 else
                 {
-                    dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD += Convert.ToDecimal("0,1");
+                    dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD += Convert.ToDecimal("0,05");
                     nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).MATERIAS_PRIMASRow.MP_NOMBRE;
                     nodeText += " / #";
                     nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD.ToString();
@@ -592,9 +593,9 @@ namespace GyCAP.UI.EstructuraProducto
                 }
                 else
                 {
-                    if (dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD > Convert.ToDecimal("0,1"))
+                    if (dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD > Convert.ToDecimal("0,05"))
                     {
-                        dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD -= Convert.ToDecimal("0,1");
+                        dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD -= Convert.ToDecimal("0,05");
                         nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).MATERIAS_PRIMASRow.MP_NOMBRE;
                         nodeText += " / #";
                         nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD.ToString();

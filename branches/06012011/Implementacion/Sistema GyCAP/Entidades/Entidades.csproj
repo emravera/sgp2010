@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArbolEstructura\ArbolEstructura.cs" />
+    <Compile Include="ArbolEstructura\NodoEstructura.cs" />
     <Compile Include="CapacidadEmpleado.cs" />
     <Compile Include="CausaFallo.cs" />
     <Compile Include="CentroTrabajo.cs" />
