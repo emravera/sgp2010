@@ -93,7 +93,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(18, 135);
+            this.label5.Location = new System.Drawing.Point(18, 142);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(68, 13);
             this.label5.TabIndex = 4;
@@ -121,7 +121,7 @@
             // 
             // txtCodigo
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(123, 23);
+            this.txtCodigo.Location = new System.Drawing.Point(123, 30);
             this.txtCodigo.MaxLength = 80;
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(201, 20);
@@ -266,7 +266,7 @@
             this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEstado.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(123, 240);
+            this.cbEstado.Location = new System.Drawing.Point(123, 247);
             this.cbEstado.Name = "cbEstado";
             this.cbEstado.Size = new System.Drawing.Size(201, 21);
             this.cbEstado.TabIndex = 13;
@@ -276,7 +276,7 @@
             this.cbTerminacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTerminacion.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbTerminacion.FormattingEnabled = true;
-            this.cbTerminacion.Location = new System.Drawing.Point(123, 204);
+            this.cbTerminacion.Location = new System.Drawing.Point(123, 211);
             this.cbTerminacion.Name = "cbTerminacion";
             this.cbTerminacion.Size = new System.Drawing.Size(201, 21);
             this.cbTerminacion.TabIndex = 12;
@@ -286,7 +286,7 @@
             this.cbColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbColor.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbColor.FormattingEnabled = true;
-            this.cbColor.Location = new System.Drawing.Point(123, 169);
+            this.cbColor.Location = new System.Drawing.Point(123, 176);
             this.cbColor.Name = "cbColor";
             this.cbColor.Size = new System.Drawing.Size(201, 21);
             this.cbColor.TabIndex = 11;
@@ -296,7 +296,7 @@
             this.cbDesignacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDesignacion.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbDesignacion.FormattingEnabled = true;
-            this.cbDesignacion.Location = new System.Drawing.Point(123, 132);
+            this.cbDesignacion.Location = new System.Drawing.Point(123, 139);
             this.cbDesignacion.Name = "cbDesignacion";
             this.cbDesignacion.Size = new System.Drawing.Size(201, 21);
             this.cbDesignacion.TabIndex = 10;
@@ -306,7 +306,7 @@
             this.cbMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMarca.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbMarca.FormattingEnabled = true;
-            this.cbMarca.Location = new System.Drawing.Point(123, 94);
+            this.cbMarca.Location = new System.Drawing.Point(123, 101);
             this.cbMarca.Name = "cbMarca";
             this.cbMarca.Size = new System.Drawing.Size(201, 21);
             this.cbMarca.TabIndex = 9;
@@ -316,7 +316,7 @@
             this.cbModelo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbModelo.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbModelo.FormattingEnabled = true;
-            this.cbModelo.Location = new System.Drawing.Point(123, 58);
+            this.cbModelo.Location = new System.Drawing.Point(123, 65);
             this.cbModelo.Name = "cbModelo";
             this.cbModelo.Size = new System.Drawing.Size(201, 21);
             this.cbModelo.TabIndex = 8;
@@ -422,7 +422,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(18, 207);
+            this.label10.Location = new System.Drawing.Point(18, 214);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(99, 13);
             this.label10.TabIndex = 14;
@@ -431,7 +431,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(18, 97);
+            this.label9.Location = new System.Drawing.Point(18, 104);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(40, 13);
             this.label9.TabIndex = 13;
@@ -440,7 +440,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(18, 61);
+            this.label8.Location = new System.Drawing.Point(18, 68);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(45, 13);
             this.label8.TabIndex = 12;
@@ -449,7 +449,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(18, 172);
+            this.label7.Location = new System.Drawing.Point(18, 179);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(36, 13);
             this.label7.TabIndex = 11;
@@ -458,7 +458,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 243);
+            this.label2.Location = new System.Drawing.Point(18, 250);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 10;
@@ -467,7 +467,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 26);
+            this.label3.Location = new System.Drawing.Point(18, 33);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 1;
