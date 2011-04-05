@@ -482,7 +482,6 @@ namespace GyCAP.UI.EstructuraProducto
             dgvListaCocina.Columns["COC_CODIGO_PRODUCTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListaCocina.Columns["MOD_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListaCocina.Columns["MCA_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvListaCocina.Columns["COC_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListaCocina.Columns["COC_ESTADO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListaCocina.Columns["COC_CODIGO_PRODUCTO"].DataPropertyName = "COC_CODIGO_PRODUCTO";
             dgvListaCocina.Columns["MOD_CODIGO"].DataPropertyName = "MOD_CODIGO";
