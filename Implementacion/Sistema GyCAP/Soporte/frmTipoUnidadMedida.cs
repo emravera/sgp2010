@@ -172,6 +172,11 @@ namespace GyCAP.UI.Soporte
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.RejectChanges();
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
+                    }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
@@ -255,19 +260,12 @@ namespace GyCAP.UI.Soporte
 
             //Control de los blancos de los textbox
             List<string> datos = new List<string>();
-            if (txtNombre.Text == string.Empty)
+            if (txtNombre.Text.Trim().Length == 0)
             {
                 datos.Add("Nombre");
                 erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
             }
 
-            //Control de espacios en textbox
-            List<string> espacios = new List<string>();
-            if (txtNombre.Text.Trim().Length == 0)
-            {
-                espacios.Add("Nombre");
-                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.SoloEspacios, espacios);
-            }
             return erroresValidacion;
         }
 

@@ -7,7 +7,6 @@ namespace GyCAP.Entidades.Excepciones
 {
     public class ElementoEnTransaccionException : System.Exception
     {
-        public ElementoEnTransaccionException() : base(@"El elemento no se puede eliminar por estar asignado a 
-            una transacción.") {}
+        public ElementoEnTransaccionException() : base(@"El elemento no se puede eliminar por estar asignado.") {}
     }
 }

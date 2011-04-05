@@ -31,7 +31,6 @@
             this.gbDatos = new System.Windows.Forms.GroupBox();
             this.txtTelefonoAlt = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.cbSectorDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.txtRazonSocial = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtTelefonoPcipal = new System.Windows.Forms.TextBox();
@@ -82,6 +81,7 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.cbSectorDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.gbDatos.SuspendLayout();
             this.tcABM.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -106,9 +106,9 @@
             // 
             this.gbDatos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbDatos.Controls.Add(this.cbSectorDatos);
             this.gbDatos.Controls.Add(this.txtTelefonoAlt);
             this.gbDatos.Controls.Add(this.label7);
-            this.gbDatos.Controls.Add(this.cbSectorDatos);
             this.gbDatos.Controls.Add(this.txtRazonSocial);
             this.gbDatos.Controls.Add(this.label9);
             this.gbDatos.Controls.Add(this.txtTelefonoPcipal);
@@ -118,7 +118,7 @@
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
             this.gbDatos.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbDatos.Size = new System.Drawing.Size(479, 103);
+            this.gbDatos.Size = new System.Drawing.Size(479, 93);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Proveedor";
@@ -129,7 +129,7 @@
             this.txtTelefonoAlt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTelefonoAlt.Name = "txtTelefonoAlt";
             this.txtTelefonoAlt.Size = new System.Drawing.Size(146, 20);
-            this.txtTelefonoAlt.TabIndex = 17;
+            this.txtTelefonoAlt.TabIndex = 3;
             // 
             // label7
             // 
@@ -140,28 +140,18 @@
             this.label7.TabIndex = 18;
             this.label7.Text = "Tel. Alternativo:";
             // 
-            // cbSectorDatos
-            // 
-            this.cbSectorDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSectorDatos.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbSectorDatos.FormattingEnabled = true;
-            this.cbSectorDatos.Location = new System.Drawing.Point(89, 65);
-            this.cbSectorDatos.Name = "cbSectorDatos";
-            this.cbSectorDatos.Size = new System.Drawing.Size(146, 21);
-            this.cbSectorDatos.TabIndex = 11;
-            // 
             // txtRazonSocial
             // 
             this.txtRazonSocial.Location = new System.Drawing.Point(89, 14);
             this.txtRazonSocial.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtRazonSocial.Name = "txtRazonSocial";
             this.txtRazonSocial.Size = new System.Drawing.Size(382, 20);
-            this.txtRazonSocial.TabIndex = 6;
+            this.txtRazonSocial.TabIndex = 1;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(10, 17);
+            this.label9.Location = new System.Drawing.Point(5, 17);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(73, 13);
             this.label9.TabIndex = 16;
@@ -173,12 +163,12 @@
             this.txtTelefonoPcipal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTelefonoPcipal.Name = "txtTelefonoPcipal";
             this.txtTelefonoPcipal.Size = new System.Drawing.Size(146, 20);
-            this.txtTelefonoPcipal.TabIndex = 10;
+            this.txtTelefonoPcipal.TabIndex = 2;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(10, 43);
+            this.label8.Location = new System.Drawing.Point(5, 43);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(71, 13);
             this.label8.TabIndex = 14;
@@ -187,11 +177,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 68);
+            this.label5.Location = new System.Drawing.Point(5, 68);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.Size = new System.Drawing.Size(80, 13);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Sector:";
+            this.label5.Text = "Sector Trabajo:";
             // 
             // toolStripSeparator1
             // 
@@ -257,6 +247,7 @@
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(596, 271);
             this.dgvLista.TabIndex = 1;
+            this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
             // groupBox1
             // 
@@ -369,7 +360,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(2, 20);
+            this.label14.Location = new System.Drawing.Point(0, 20);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(43, 13);
             this.label14.TabIndex = 17;
@@ -383,11 +374,11 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Delete_25;
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(5, 34);
+            this.btnDelete.Location = new System.Drawing.Point(4, 30);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(30, 30);
-            this.btnDelete.TabIndex = 15;
+            this.btnDelete.TabIndex = 12;
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -406,6 +397,7 @@
             this.dgvDomicilios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDomicilios.Size = new System.Drawing.Size(412, 86);
             this.dgvDomicilios.TabIndex = 13;
+            this.dgvDomicilios.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDomicilios_CellFormatting);
             // 
             // groupBox3
             // 
@@ -465,11 +457,11 @@
             this.groupBox2.Controls.Add(this.txtNumero);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Location = new System.Drawing.Point(138, 108);
+            this.groupBox2.Location = new System.Drawing.Point(138, 97);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(478, 104);
+            this.groupBox2.Size = new System.Drawing.Size(478, 115);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Domicilio";
@@ -479,9 +471,10 @@
             this.btnAgregarDomicilio.Location = new System.Drawing.Point(396, 76);
             this.btnAgregarDomicilio.Name = "btnAgregarDomicilio";
             this.btnAgregarDomicilio.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregarDomicilio.TabIndex = 23;
+            this.btnAgregarDomicilio.TabIndex = 11;
             this.btnAgregarDomicilio.Text = "Agregar";
             this.btnAgregarDomicilio.UseVisualStyleBackColor = true;
+            this.btnAgregarDomicilio.Click += new System.EventHandler(this.btnAgregarDomicilio_Click);
             // 
             // cbLocalidad
             // 
@@ -491,7 +484,7 @@
             this.cbLocalidad.Location = new System.Drawing.Point(62, 76);
             this.cbLocalidad.Name = "cbLocalidad";
             this.cbLocalidad.Size = new System.Drawing.Size(146, 21);
-            this.cbLocalidad.TabIndex = 22;
+            this.cbLocalidad.TabIndex = 10;
             // 
             // label12
             // 
@@ -508,7 +501,7 @@
             this.txtDepto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDepto.Name = "txtDepto";
             this.txtDepto.Size = new System.Drawing.Size(47, 20);
-            this.txtDepto.TabIndex = 19;
+            this.txtDepto.TabIndex = 8;
             // 
             // label11
             // 
@@ -525,7 +518,7 @@
             this.txtPiso.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPiso.Name = "txtPiso";
             this.txtPiso.Size = new System.Drawing.Size(47, 20);
-            this.txtPiso.TabIndex = 17;
+            this.txtPiso.TabIndex = 7;
             // 
             // label10
             // 
@@ -544,7 +537,8 @@
             this.cbProvincia.Location = new System.Drawing.Point(276, 49);
             this.cbProvincia.Name = "cbProvincia";
             this.cbProvincia.Size = new System.Drawing.Size(146, 21);
-            this.cbProvincia.TabIndex = 11;
+            this.cbProvincia.TabIndex = 9;
+            this.cbProvincia.DropDownClosed += new System.EventHandler(this.cbProvincia_DropDownClosed);
             // 
             // txtCalle
             // 
@@ -552,7 +546,7 @@
             this.txtCalle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCalle.Name = "txtCalle";
             this.txtCalle.Size = new System.Drawing.Size(244, 20);
-            this.txtCalle.TabIndex = 6;
+            this.txtCalle.TabIndex = 5;
             // 
             // label2
             // 
@@ -569,7 +563,7 @@
             this.txtNumero.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(62, 20);
-            this.txtNumero.TabIndex = 10;
+            this.txtNumero.TabIndex = 6;
             // 
             // label3
             // 
@@ -612,6 +606,7 @@
             this.btnVolver.TabIndex = 15;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnGuardar
             // 
@@ -622,6 +617,7 @@
             this.btnGuardar.TabIndex = 14;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // tsMenu
             // 
@@ -676,6 +672,7 @@
             this.btnModificar.Size = new System.Drawing.Size(54, 47);
             this.btnModificar.Text = "&Modificar";
             this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar
             // 
@@ -714,6 +711,16 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(632, 446);
             this.tableLayoutPanel1.TabIndex = 13;
+            // 
+            // cbSectorDatos
+            // 
+            this.cbSectorDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSectorDatos.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbSectorDatos.FormattingEnabled = true;
+            this.cbSectorDatos.Location = new System.Drawing.Point(90, 68);
+            this.cbSectorDatos.Name = "cbSectorDatos";
+            this.cbSectorDatos.Size = new System.Drawing.Size(143, 21);
+            this.cbSectorDatos.TabIndex = 19;
             // 
             // frmProveedor
             // 
@@ -754,7 +761,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gbDatos;
-        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbSectorDatos;
         private System.Windows.Forms.TextBox txtRazonSocial;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtTelefonoPcipal;
@@ -807,5 +813,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbSectorDatos;
     }
 }

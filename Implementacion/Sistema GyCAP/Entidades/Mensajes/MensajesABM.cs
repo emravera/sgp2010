@@ -34,7 +34,7 @@ namespace GyCAP.Entidades.Mensajes
                             lista = lista + "- " + dato + "\n";
                         }
                         
-                        mensaje= "Debe seleccionar un elemento en los siguientes combos:\n\n" + lista;
+                        mensaje= mensaje + "\n Debe seleccionar un elemento en los siguientes combos:\n" + lista;
                         break;
 
                     case Validaciones.CompletarDatos:
@@ -42,19 +42,11 @@ namespace GyCAP.Entidades.Mensajes
                         {
                             lista = lista + "- " + dato + "\n";
                         }
-                        mensaje = mensaje + "Debe completar los siguientes datos:\n\n" + lista;
+                        mensaje = mensaje + "\n Los siguientes datos están vacios o completados con espacios en blanco:\n" + lista;
      
                         break;
 
-                    case Validaciones.SoloEspacios:
-                        foreach (string dato in datos)
-                        {
-                            lista = lista + "- " + dato + "\n";
-                        }
-                        mensaje = mensaje + "Los siguientes campos están completados sólo con espacios:\n\n" + lista;
-
-                        break;
-                }
+                  }
                         
             return mensaje;
         }
@@ -86,7 +78,7 @@ namespace GyCAP.Entidades.Mensajes
         /// <param name="operacion">El nombre de la operacion que se esta realizando (Obtener de la enumeracion operaciones)</param>
         public static void MsjExcepcion(string msjExcepcion, string nombreFormulario, Operaciones operacion)
         {
-            MessageBox.Show("Excepción: " + msjExcepcion, "Error: " + nombreFormulario + " - " + operacion.ToString() , MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Advertencia: " + msjExcepcion, "Error: " + nombreFormulario + " - " + operacion.ToString() , MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         //Mensaje de la Pestaña de Datos
@@ -125,7 +117,7 @@ namespace GyCAP.Entidades.Mensajes
          
         public static void MsjElementoTransaccion(string msjExcepcion, string nombreFormulario)
         {
-            MessageBox.Show("Excepción: " + msjExcepcion, nombreFormulario + " - Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Advertencia: " + msjExcepcion, nombreFormulario + " - Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         //5- Mensaje para cuando no hay seleción de elementos

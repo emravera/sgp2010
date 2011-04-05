@@ -171,9 +171,7 @@ namespace GyCAP.UI.Soporte
         {
             string erroresValidacion=string.Empty;
 
-            string validacion = string.Empty;
-            
-            //Control de combos
+           //Control de combos
             List<string> combos = new List<string>();
             if (cbProvincia.SelectedIndex == -1)
             {
@@ -183,18 +181,10 @@ namespace GyCAP.UI.Soporte
 
             //Control de los textbox
             List<string> datos = new List<string>();
-            if (txtNombre.Text == string.Empty)
+            if (txtNombre.Text.Trim().Length == 0)
             {
                 datos.Add("Nombre");
                 erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
-            }
-
-            //Control de los textbox (ingreso de espacios)
-            List<string> espacios = new List<string>();
-            if (txtNombre.Text.Trim().Length == 0)
-            {
-                espacios.Add("Nombre");
-                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.SoloEspacios, espacios);
             }
 
             return erroresValidacion;
@@ -420,6 +410,10 @@ namespace GyCAP.UI.Soporte
                         Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Localidad", this.Text, Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
+                    }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {

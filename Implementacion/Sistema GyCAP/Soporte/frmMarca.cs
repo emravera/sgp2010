@@ -55,20 +55,12 @@ namespace GyCAP.UI.Soporte
             //Creamos el Dataview y se lo asignamos al combo
             dvComboMarcaBuscar = new DataView(dsMarca.CLIENTES);
             cbClienteBuscar.DataSource = dvComboMarcaBuscar;
-            cbClienteBuscar.DisplayMember = "CLI_RAZONSOCIAL";
-            cbClienteBuscar.ValueMember = "CLI_CODIGO";
-            //Para que el combo no quede selecionado cuando arranca y que sea una lista
-            cbClienteBuscar.SelectedIndex = -1;
-            cbClienteBuscar.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbClienteBuscar.SetDatos(dvComboMarcaBuscar, "cli_codigo", "cli_razonsocial","-Seleccionar-", false);
 
             //Combo de Datos
             dvComboMarcaDatos = new DataView(dsMarca.CLIENTES);
             cbClienteDatos.DataSource = dvComboMarcaDatos;
-            cbClienteDatos.DisplayMember = "CLI_RAZONSOCIAL";
-            cbClienteDatos.ValueMember = "CLI_CODIGO";
-            //Para que el combo no quede selecionado cuando arranca y que sea una lista
-            cbClienteDatos.SelectedIndex = -1;
-            cbClienteDatos.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbClienteDatos.SetDatos(dvComboMarcaDatos, "cli_codigo", "cli_razonsocial","-Sin Selección-" ,true);
 
             //Seteo de los Maxlengt
             txtNombreBuscar.MaxLength = 30;
@@ -360,6 +352,10 @@ namespace GyCAP.UI.Soporte
                         
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
+                    }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {

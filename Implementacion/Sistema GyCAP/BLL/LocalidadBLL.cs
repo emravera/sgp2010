@@ -40,7 +40,17 @@ namespace GyCAP.BLL
             if (codProvincia != null && Convert.ToInt32(codProvincia.ToString()) > 0) { codigo = codProvincia; }
             DAL.LocalidadDAL.ObtenerLocalidades(nombre, codigo, dtLocalidades);
         }
-        
+
+        public static void ObtenerLocalidades(int codigoProvincia, DataTable dtLocalidades)
+        {
+            DAL.LocalidadDAL.ObtenerLocalidades(codigoProvincia, dtLocalidades);
+        }
+
+        public static void ObtenerLocalidades(DataTable dtLocalidades)
+        {
+            DAL.LocalidadDAL.ObtenerLocalidades(dtLocalidades);
+        }
+
         /// <summary>
         /// Determina si una localidad existe en base a su nombre y provincia.
         /// </summary>
