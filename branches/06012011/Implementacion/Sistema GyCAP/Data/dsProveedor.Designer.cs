@@ -25,23 +25,23 @@ namespace GyCAP.Data {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class dsProveedor : global::System.Data.DataSet {
         
+        private PROVEEDORESDataTable tablePROVEEDORES;
+        
         private DOMICILIOSDataTable tableDOMICILIOS;
+        
+        private SECTORESDataTable tableSECTORES;
         
         private LOCALIDADESDataTable tableLOCALIDADES;
         
         private PROVINCIASDataTable tablePROVINCIAS;
         
-        private SECTORESDataTable tableSECTORES;
+        private global::System.Data.DataRelation relationdomicilio_proveedor_fk;
         
-        private PROVEEDORESDataTable tablePROVEEDORES;
+        private global::System.Data.DataRelation relationproveedor_sector_fk;
         
         private global::System.Data.DataRelation relationdomicilio_localidad_fk;
         
         private global::System.Data.DataRelation relationlocalidad_provincia_fk;
-        
-        private global::System.Data.DataRelation relationdomicilio_proveedor_fk;
-        
-        private global::System.Data.DataRelation relationproveedor_sector_fk;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -69,20 +69,20 @@ namespace GyCAP.Data {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
+                if ((ds.Tables["PROVEEDORES"] != null)) {
+                    base.Tables.Add(new PROVEEDORESDataTable(ds.Tables["PROVEEDORES"]));
+                }
                 if ((ds.Tables["DOMICILIOS"] != null)) {
                     base.Tables.Add(new DOMICILIOSDataTable(ds.Tables["DOMICILIOS"]));
+                }
+                if ((ds.Tables["SECTORES"] != null)) {
+                    base.Tables.Add(new SECTORESDataTable(ds.Tables["SECTORES"]));
                 }
                 if ((ds.Tables["LOCALIDADES"] != null)) {
                     base.Tables.Add(new LOCALIDADESDataTable(ds.Tables["LOCALIDADES"]));
                 }
                 if ((ds.Tables["PROVINCIAS"] != null)) {
                     base.Tables.Add(new PROVINCIASDataTable(ds.Tables["PROVINCIAS"]));
-                }
-                if ((ds.Tables["SECTORES"] != null)) {
-                    base.Tables.Add(new SECTORESDataTable(ds.Tables["SECTORES"]));
-                }
-                if ((ds.Tables["PROVEEDORES"] != null)) {
-                    base.Tables.Add(new PROVEEDORESDataTable(ds.Tables["PROVEEDORES"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -105,9 +105,27 @@ namespace GyCAP.Data {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public PROVEEDORESDataTable PROVEEDORES {
+            get {
+                return this.tablePROVEEDORES;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public DOMICILIOSDataTable DOMICILIOS {
             get {
                 return this.tableDOMICILIOS;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public SECTORESDataTable SECTORES {
+            get {
+                return this.tableSECTORES;
             }
         }
         
@@ -126,24 +144,6 @@ namespace GyCAP.Data {
         public PROVINCIASDataTable PROVINCIAS {
             get {
                 return this.tablePROVINCIAS;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public SECTORESDataTable SECTORES {
-            get {
-                return this.tableSECTORES;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public PROVEEDORESDataTable PROVEEDORES {
-            get {
-                return this.tablePROVEEDORES;
             }
         }
         
@@ -206,20 +206,20 @@ namespace GyCAP.Data {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
+                if ((ds.Tables["PROVEEDORES"] != null)) {
+                    base.Tables.Add(new PROVEEDORESDataTable(ds.Tables["PROVEEDORES"]));
+                }
                 if ((ds.Tables["DOMICILIOS"] != null)) {
                     base.Tables.Add(new DOMICILIOSDataTable(ds.Tables["DOMICILIOS"]));
+                }
+                if ((ds.Tables["SECTORES"] != null)) {
+                    base.Tables.Add(new SECTORESDataTable(ds.Tables["SECTORES"]));
                 }
                 if ((ds.Tables["LOCALIDADES"] != null)) {
                     base.Tables.Add(new LOCALIDADESDataTable(ds.Tables["LOCALIDADES"]));
                 }
                 if ((ds.Tables["PROVINCIAS"] != null)) {
                     base.Tables.Add(new PROVINCIASDataTable(ds.Tables["PROVINCIAS"]));
-                }
-                if ((ds.Tables["SECTORES"] != null)) {
-                    base.Tables.Add(new SECTORESDataTable(ds.Tables["SECTORES"]));
-                }
-                if ((ds.Tables["PROVEEDORES"] != null)) {
-                    base.Tables.Add(new PROVEEDORESDataTable(ds.Tables["PROVEEDORES"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -251,10 +251,22 @@ namespace GyCAP.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         internal void InitVars(bool initTable) {
+            this.tablePROVEEDORES = ((PROVEEDORESDataTable)(base.Tables["PROVEEDORES"]));
+            if ((initTable == true)) {
+                if ((this.tablePROVEEDORES != null)) {
+                    this.tablePROVEEDORES.InitVars();
+                }
+            }
             this.tableDOMICILIOS = ((DOMICILIOSDataTable)(base.Tables["DOMICILIOS"]));
             if ((initTable == true)) {
                 if ((this.tableDOMICILIOS != null)) {
                     this.tableDOMICILIOS.InitVars();
+                }
+            }
+            this.tableSECTORES = ((SECTORESDataTable)(base.Tables["SECTORES"]));
+            if ((initTable == true)) {
+                if ((this.tableSECTORES != null)) {
+                    this.tableSECTORES.InitVars();
                 }
             }
             this.tableLOCALIDADES = ((LOCALIDADESDataTable)(base.Tables["LOCALIDADES"]));
@@ -269,22 +281,10 @@ namespace GyCAP.Data {
                     this.tablePROVINCIAS.InitVars();
                 }
             }
-            this.tableSECTORES = ((SECTORESDataTable)(base.Tables["SECTORES"]));
-            if ((initTable == true)) {
-                if ((this.tableSECTORES != null)) {
-                    this.tableSECTORES.InitVars();
-                }
-            }
-            this.tablePROVEEDORES = ((PROVEEDORESDataTable)(base.Tables["PROVEEDORES"]));
-            if ((initTable == true)) {
-                if ((this.tablePROVEEDORES != null)) {
-                    this.tablePROVEEDORES.InitVars();
-                }
-            }
-            this.relationdomicilio_localidad_fk = this.Relations["domicilio_localidad_fk"];
-            this.relationlocalidad_provincia_fk = this.Relations["localidad_provincia_fk"];
             this.relationdomicilio_proveedor_fk = this.Relations["domicilio_proveedor_fk"];
             this.relationproveedor_sector_fk = this.Relations["proveedor_sector_fk"];
+            this.relationdomicilio_localidad_fk = this.Relations["domicilio_localidad_fk"];
+            this.relationlocalidad_provincia_fk = this.Relations["localidad_provincia_fk"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -294,16 +294,24 @@ namespace GyCAP.Data {
             this.Namespace = "http://tempuri.org/dsProveedor.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
+            this.tablePROVEEDORES = new PROVEEDORESDataTable();
+            base.Tables.Add(this.tablePROVEEDORES);
             this.tableDOMICILIOS = new DOMICILIOSDataTable();
             base.Tables.Add(this.tableDOMICILIOS);
+            this.tableSECTORES = new SECTORESDataTable();
+            base.Tables.Add(this.tableSECTORES);
             this.tableLOCALIDADES = new LOCALIDADESDataTable();
             base.Tables.Add(this.tableLOCALIDADES);
             this.tablePROVINCIAS = new PROVINCIASDataTable();
             base.Tables.Add(this.tablePROVINCIAS);
-            this.tableSECTORES = new SECTORESDataTable();
-            base.Tables.Add(this.tableSECTORES);
-            this.tablePROVEEDORES = new PROVEEDORESDataTable();
-            base.Tables.Add(this.tablePROVEEDORES);
+            this.relationdomicilio_proveedor_fk = new global::System.Data.DataRelation("domicilio_proveedor_fk", new global::System.Data.DataColumn[] {
+                        this.tablePROVEEDORES.PROVE_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDOMICILIOS.PROVE_CODIGOColumn}, false);
+            this.Relations.Add(this.relationdomicilio_proveedor_fk);
+            this.relationproveedor_sector_fk = new global::System.Data.DataRelation("proveedor_sector_fk", new global::System.Data.DataColumn[] {
+                        this.tableSECTORES.SEC_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePROVEEDORES.SEC_CODIGOColumn}, false);
+            this.Relations.Add(this.relationproveedor_sector_fk);
             this.relationdomicilio_localidad_fk = new global::System.Data.DataRelation("domicilio_localidad_fk", new global::System.Data.DataColumn[] {
                         this.tableLOCALIDADES.LOC_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableDOMICILIOS.LOC_CODIGOColumn}, false);
@@ -312,18 +320,20 @@ namespace GyCAP.Data {
                         this.tablePROVINCIAS.PCIA_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableLOCALIDADES.PCIA_CODIGOColumn}, false);
             this.Relations.Add(this.relationlocalidad_provincia_fk);
-            this.relationdomicilio_proveedor_fk = new global::System.Data.DataRelation("domicilio_proveedor_fk", new global::System.Data.DataColumn[] {
-                        this.tablePROVEEDORES.PROVE_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableDOMICILIOS.PROV_CODIGOColumn}, false);
-            this.Relations.Add(this.relationdomicilio_proveedor_fk);
-            this.relationproveedor_sector_fk = new global::System.Data.DataRelation("proveedor_sector_fk", new global::System.Data.DataColumn[] {
-                        this.tableSECTORES.SEC_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePROVEEDORES.SEC_CODIGOColumn}, false);
-            this.Relations.Add(this.relationproveedor_sector_fk);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializePROVEEDORES() {
+            return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeDOMICILIOS() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeSECTORES() {
             return false;
         }
         
@@ -334,16 +344,6 @@ namespace GyCAP.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializePROVINCIAS() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeSECTORES() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializePROVEEDORES() {
             return false;
         }
         
@@ -400,15 +400,310 @@ namespace GyCAP.Data {
             return type;
         }
         
+        public delegate void PROVEEDORESRowChangeEventHandler(object sender, PROVEEDORESRowChangeEvent e);
+        
         public delegate void DOMICILIOSRowChangeEventHandler(object sender, DOMICILIOSRowChangeEvent e);
+        
+        public delegate void SECTORESRowChangeEventHandler(object sender, SECTORESRowChangeEvent e);
         
         public delegate void LOCALIDADESRowChangeEventHandler(object sender, LOCALIDADESRowChangeEvent e);
         
         public delegate void PROVINCIASRowChangeEventHandler(object sender, PROVINCIASRowChangeEvent e);
         
-        public delegate void SECTORESRowChangeEventHandler(object sender, SECTORESRowChangeEvent e);
-        
-        public delegate void PROVEEDORESRowChangeEventHandler(object sender, PROVEEDORESRowChangeEvent e);
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class PROVEEDORESDataTable : global::System.Data.TypedTableBase<PROVEEDORESRow> {
+            
+            private global::System.Data.DataColumn columnPROVE_CODIGO;
+            
+            private global::System.Data.DataColumn columnSEC_CODIGO;
+            
+            private global::System.Data.DataColumn columnPROVE_RAZONSOCIAL;
+            
+            private global::System.Data.DataColumn columnPROVE_TELPRINCIPAL;
+            
+            private global::System.Data.DataColumn columnPROVE_TELALTERNATIVO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PROVEEDORESDataTable() {
+                this.TableName = "PROVEEDORES";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal PROVEEDORESDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected PROVEEDORESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PROVE_CODIGOColumn {
+                get {
+                    return this.columnPROVE_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SEC_CODIGOColumn {
+                get {
+                    return this.columnSEC_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PROVE_RAZONSOCIALColumn {
+                get {
+                    return this.columnPROVE_RAZONSOCIAL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PROVE_TELPRINCIPALColumn {
+                get {
+                    return this.columnPROVE_TELPRINCIPAL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PROVE_TELALTERNATIVOColumn {
+                get {
+                    return this.columnPROVE_TELALTERNATIVO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PROVEEDORESRow this[int index] {
+                get {
+                    return ((PROVEEDORESRow)(this.Rows[index]));
+                }
+            }
+            
+            public event PROVEEDORESRowChangeEventHandler PROVEEDORESRowChanging;
+            
+            public event PROVEEDORESRowChangeEventHandler PROVEEDORESRowChanged;
+            
+            public event PROVEEDORESRowChangeEventHandler PROVEEDORESRowDeleting;
+            
+            public event PROVEEDORESRowChangeEventHandler PROVEEDORESRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddPROVEEDORESRow(PROVEEDORESRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PROVEEDORESRow AddPROVEEDORESRow(SECTORESRow parentSECTORESRowByproveedor_sector_fk, string PROVE_RAZONSOCIAL, string PROVE_TELPRINCIPAL, string PROVE_TELALTERNATIVO) {
+                PROVEEDORESRow rowPROVEEDORESRow = ((PROVEEDORESRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        PROVE_RAZONSOCIAL,
+                        PROVE_TELPRINCIPAL,
+                        PROVE_TELALTERNATIVO};
+                if ((parentSECTORESRowByproveedor_sector_fk != null)) {
+                    columnValuesArray[1] = parentSECTORESRowByproveedor_sector_fk[0];
+                }
+                rowPROVEEDORESRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowPROVEEDORESRow);
+                return rowPROVEEDORESRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PROVEEDORESRow FindByPROVE_CODIGO(decimal PROVE_CODIGO) {
+                return ((PROVEEDORESRow)(this.Rows.Find(new object[] {
+                            PROVE_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                PROVEEDORESDataTable cln = ((PROVEEDORESDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new PROVEEDORESDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnPROVE_CODIGO = base.Columns["PROVE_CODIGO"];
+                this.columnSEC_CODIGO = base.Columns["SEC_CODIGO"];
+                this.columnPROVE_RAZONSOCIAL = base.Columns["PROVE_RAZONSOCIAL"];
+                this.columnPROVE_TELPRINCIPAL = base.Columns["PROVE_TELPRINCIPAL"];
+                this.columnPROVE_TELALTERNATIVO = base.Columns["PROVE_TELALTERNATIVO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnPROVE_CODIGO = new global::System.Data.DataColumn("PROVE_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPROVE_CODIGO);
+                this.columnSEC_CODIGO = new global::System.Data.DataColumn("SEC_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSEC_CODIGO);
+                this.columnPROVE_RAZONSOCIAL = new global::System.Data.DataColumn("PROVE_RAZONSOCIAL", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPROVE_RAZONSOCIAL);
+                this.columnPROVE_TELPRINCIPAL = new global::System.Data.DataColumn("PROVE_TELPRINCIPAL", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPROVE_TELPRINCIPAL);
+                this.columnPROVE_TELALTERNATIVO = new global::System.Data.DataColumn("PROVE_TELALTERNATIVO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPROVE_TELALTERNATIVO);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnPROVE_CODIGO}, true));
+                this.columnPROVE_CODIGO.AutoIncrement = true;
+                this.columnPROVE_CODIGO.AutoIncrementSeed = -1;
+                this.columnPROVE_CODIGO.AutoIncrementStep = -1;
+                this.columnPROVE_CODIGO.AllowDBNull = false;
+                this.columnPROVE_CODIGO.ReadOnly = true;
+                this.columnPROVE_CODIGO.Unique = true;
+                this.columnPROVE_RAZONSOCIAL.MaxLength = 80;
+                this.columnPROVE_TELPRINCIPAL.MaxLength = 50;
+                this.columnPROVE_TELALTERNATIVO.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PROVEEDORESRow NewPROVEEDORESRow() {
+                return ((PROVEEDORESRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new PROVEEDORESRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(PROVEEDORESRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.PROVEEDORESRowChanged != null)) {
+                    this.PROVEEDORESRowChanged(this, new PROVEEDORESRowChangeEvent(((PROVEEDORESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.PROVEEDORESRowChanging != null)) {
+                    this.PROVEEDORESRowChanging(this, new PROVEEDORESRowChangeEvent(((PROVEEDORESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.PROVEEDORESRowDeleted != null)) {
+                    this.PROVEEDORESRowDeleted(this, new PROVEEDORESRowChangeEvent(((PROVEEDORESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.PROVEEDORESRowDeleting != null)) {
+                    this.PROVEEDORESRowDeleting(this, new PROVEEDORESRowChangeEvent(((PROVEEDORESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemovePROVEEDORESRow(PROVEEDORESRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsProveedor ds = new dsProveedor();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "PROVEEDORESDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -422,7 +717,7 @@ namespace GyCAP.Data {
             
             private global::System.Data.DataColumn columnLOC_CODIGO;
             
-            private global::System.Data.DataColumn columnPROV_CODIGO;
+            private global::System.Data.DataColumn columnPROVE_CODIGO;
             
             private global::System.Data.DataColumn columnDOM_CALLE;
             
@@ -477,9 +772,9 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PROV_CODIGOColumn {
+            public global::System.Data.DataColumn PROVE_CODIGOColumn {
                 get {
-                    return this.columnPROV_CODIGO;
+                    return this.columnPROVE_CODIGO;
                 }
             }
             
@@ -583,7 +878,7 @@ namespace GyCAP.Data {
             internal void InitVars() {
                 this.columnDOM_CODIGO = base.Columns["DOM_CODIGO"];
                 this.columnLOC_CODIGO = base.Columns["LOC_CODIGO"];
-                this.columnPROV_CODIGO = base.Columns["PROV_CODIGO"];
+                this.columnPROVE_CODIGO = base.Columns["PROVE_CODIGO"];
                 this.columnDOM_CALLE = base.Columns["DOM_CALLE"];
                 this.columnDOM_NUMERO = base.Columns["DOM_NUMERO"];
                 this.columnDOM_PISO = base.Columns["DOM_PISO"];
@@ -596,8 +891,8 @@ namespace GyCAP.Data {
                 base.Columns.Add(this.columnDOM_CODIGO);
                 this.columnLOC_CODIGO = new global::System.Data.DataColumn("LOC_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLOC_CODIGO);
-                this.columnPROV_CODIGO = new global::System.Data.DataColumn("PROV_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPROV_CODIGO);
+                this.columnPROVE_CODIGO = new global::System.Data.DataColumn("PROVE_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPROVE_CODIGO);
                 this.columnDOM_CALLE = new global::System.Data.DataColumn("DOM_CALLE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDOM_CALLE);
                 this.columnDOM_NUMERO = new global::System.Data.DataColumn("DOM_NUMERO", typeof(string), null, global::System.Data.MappingType.Element);
@@ -615,7 +910,7 @@ namespace GyCAP.Data {
                 this.columnDOM_CODIGO.ReadOnly = true;
                 this.columnDOM_CODIGO.Unique = true;
                 this.columnLOC_CODIGO.AllowDBNull = false;
-                this.columnPROV_CODIGO.AllowDBNull = false;
+                this.columnPROVE_CODIGO.AllowDBNull = false;
                 this.columnDOM_CALLE.MaxLength = 80;
                 this.columnDOM_NUMERO.MaxLength = 10;
                 this.columnDOM_PISO.MaxLength = 10;
@@ -697,6 +992,285 @@ namespace GyCAP.Data {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "DOMICILIOSDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class SECTORESDataTable : global::System.Data.TypedTableBase<SECTORESRow> {
+            
+            private global::System.Data.DataColumn columnSEC_CODIGO;
+            
+            private global::System.Data.DataColumn columnSEC_NOMBRE;
+            
+            private global::System.Data.DataColumn columnSEC_DESCRIPCION;
+            
+            private global::System.Data.DataColumn columnSEC_ABREVIATURA;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SECTORESDataTable() {
+                this.TableName = "SECTORES";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal SECTORESDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected SECTORESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SEC_CODIGOColumn {
+                get {
+                    return this.columnSEC_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SEC_NOMBREColumn {
+                get {
+                    return this.columnSEC_NOMBRE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SEC_DESCRIPCIONColumn {
+                get {
+                    return this.columnSEC_DESCRIPCION;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SEC_ABREVIATURAColumn {
+                get {
+                    return this.columnSEC_ABREVIATURA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SECTORESRow this[int index] {
+                get {
+                    return ((SECTORESRow)(this.Rows[index]));
+                }
+            }
+            
+            public event SECTORESRowChangeEventHandler SECTORESRowChanging;
+            
+            public event SECTORESRowChangeEventHandler SECTORESRowChanged;
+            
+            public event SECTORESRowChangeEventHandler SECTORESRowDeleting;
+            
+            public event SECTORESRowChangeEventHandler SECTORESRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddSECTORESRow(SECTORESRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SECTORESRow AddSECTORESRow(string SEC_NOMBRE, string SEC_DESCRIPCION, string SEC_ABREVIATURA) {
+                SECTORESRow rowSECTORESRow = ((SECTORESRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        SEC_NOMBRE,
+                        SEC_DESCRIPCION,
+                        SEC_ABREVIATURA};
+                rowSECTORESRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowSECTORESRow);
+                return rowSECTORESRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SECTORESRow FindBySEC_CODIGO(decimal SEC_CODIGO) {
+                return ((SECTORESRow)(this.Rows.Find(new object[] {
+                            SEC_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                SECTORESDataTable cln = ((SECTORESDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new SECTORESDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnSEC_CODIGO = base.Columns["SEC_CODIGO"];
+                this.columnSEC_NOMBRE = base.Columns["SEC_NOMBRE"];
+                this.columnSEC_DESCRIPCION = base.Columns["SEC_DESCRIPCION"];
+                this.columnSEC_ABREVIATURA = base.Columns["SEC_ABREVIATURA"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnSEC_CODIGO = new global::System.Data.DataColumn("SEC_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSEC_CODIGO);
+                this.columnSEC_NOMBRE = new global::System.Data.DataColumn("SEC_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSEC_NOMBRE);
+                this.columnSEC_DESCRIPCION = new global::System.Data.DataColumn("SEC_DESCRIPCION", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSEC_DESCRIPCION);
+                this.columnSEC_ABREVIATURA = new global::System.Data.DataColumn("SEC_ABREVIATURA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSEC_ABREVIATURA);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnSEC_CODIGO}, true));
+                this.columnSEC_CODIGO.AutoIncrement = true;
+                this.columnSEC_CODIGO.AutoIncrementSeed = -1;
+                this.columnSEC_CODIGO.AutoIncrementStep = -1;
+                this.columnSEC_CODIGO.AllowDBNull = false;
+                this.columnSEC_CODIGO.ReadOnly = true;
+                this.columnSEC_CODIGO.Unique = true;
+                this.columnSEC_NOMBRE.MaxLength = 80;
+                this.columnSEC_DESCRIPCION.MaxLength = 200;
+                this.columnSEC_ABREVIATURA.MaxLength = 20;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SECTORESRow NewSECTORESRow() {
+                return ((SECTORESRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new SECTORESRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(SECTORESRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.SECTORESRowChanged != null)) {
+                    this.SECTORESRowChanged(this, new SECTORESRowChangeEvent(((SECTORESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.SECTORESRowChanging != null)) {
+                    this.SECTORESRowChanging(this, new SECTORESRowChangeEvent(((SECTORESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.SECTORESRowDeleted != null)) {
+                    this.SECTORESRowDeleted(this, new SECTORESRowChangeEvent(((SECTORESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.SECTORESRowDeleting != null)) {
+                    this.SECTORESRowDeleting(this, new SECTORESRowChangeEvent(((SECTORESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveSECTORESRow(SECTORESRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsProveedor ds = new dsProveedor();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "SECTORESDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -1138,7 +1712,7 @@ namespace GyCAP.Data {
                 this.columnPCIA_CODIGO.AllowDBNull = false;
                 this.columnPCIA_CODIGO.ReadOnly = true;
                 this.columnPCIA_CODIGO.Unique = true;
-                this.columnPCIA_NOMBRE.MaxLength = 80;
+                this.columnPCIA_NOMBRE.MaxLength = 17;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1253,995 +1827,6 @@ namespace GyCAP.Data {
                 }
                 xs.Add(dsSchema);
                 return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class SECTORESDataTable : global::System.Data.TypedTableBase<SECTORESRow> {
-            
-            private global::System.Data.DataColumn columnSEC_CODIGO;
-            
-            private global::System.Data.DataColumn columnSEC_NOMBRE;
-            
-            private global::System.Data.DataColumn columnSEC_DESCRIPCION;
-            
-            private global::System.Data.DataColumn columnSEC_ABREVIATURA;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SECTORESDataTable() {
-                this.TableName = "SECTORES";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal SECTORESDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected SECTORESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn SEC_CODIGOColumn {
-                get {
-                    return this.columnSEC_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn SEC_NOMBREColumn {
-                get {
-                    return this.columnSEC_NOMBRE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn SEC_DESCRIPCIONColumn {
-                get {
-                    return this.columnSEC_DESCRIPCION;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn SEC_ABREVIATURAColumn {
-                get {
-                    return this.columnSEC_ABREVIATURA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SECTORESRow this[int index] {
-                get {
-                    return ((SECTORESRow)(this.Rows[index]));
-                }
-            }
-            
-            public event SECTORESRowChangeEventHandler SECTORESRowChanging;
-            
-            public event SECTORESRowChangeEventHandler SECTORESRowChanged;
-            
-            public event SECTORESRowChangeEventHandler SECTORESRowDeleting;
-            
-            public event SECTORESRowChangeEventHandler SECTORESRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddSECTORESRow(SECTORESRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SECTORESRow AddSECTORESRow(string SEC_NOMBRE, string SEC_DESCRIPCION, string SEC_ABREVIATURA) {
-                SECTORESRow rowSECTORESRow = ((SECTORESRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        SEC_NOMBRE,
-                        SEC_DESCRIPCION,
-                        SEC_ABREVIATURA};
-                rowSECTORESRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowSECTORESRow);
-                return rowSECTORESRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SECTORESRow FindBySEC_CODIGO(decimal SEC_CODIGO) {
-                return ((SECTORESRow)(this.Rows.Find(new object[] {
-                            SEC_CODIGO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                SECTORESDataTable cln = ((SECTORESDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new SECTORESDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnSEC_CODIGO = base.Columns["SEC_CODIGO"];
-                this.columnSEC_NOMBRE = base.Columns["SEC_NOMBRE"];
-                this.columnSEC_DESCRIPCION = base.Columns["SEC_DESCRIPCION"];
-                this.columnSEC_ABREVIATURA = base.Columns["SEC_ABREVIATURA"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnSEC_CODIGO = new global::System.Data.DataColumn("SEC_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSEC_CODIGO);
-                this.columnSEC_NOMBRE = new global::System.Data.DataColumn("SEC_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSEC_NOMBRE);
-                this.columnSEC_DESCRIPCION = new global::System.Data.DataColumn("SEC_DESCRIPCION", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSEC_DESCRIPCION);
-                this.columnSEC_ABREVIATURA = new global::System.Data.DataColumn("SEC_ABREVIATURA", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSEC_ABREVIATURA);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnSEC_CODIGO}, true));
-                this.columnSEC_CODIGO.AutoIncrement = true;
-                this.columnSEC_CODIGO.AutoIncrementSeed = -1;
-                this.columnSEC_CODIGO.AutoIncrementStep = -1;
-                this.columnSEC_CODIGO.AllowDBNull = false;
-                this.columnSEC_CODIGO.ReadOnly = true;
-                this.columnSEC_CODIGO.Unique = true;
-                this.columnSEC_NOMBRE.MaxLength = 80;
-                this.columnSEC_DESCRIPCION.MaxLength = 200;
-                this.columnSEC_ABREVIATURA.MaxLength = 20;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SECTORESRow NewSECTORESRow() {
-                return ((SECTORESRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new SECTORESRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(SECTORESRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.SECTORESRowChanged != null)) {
-                    this.SECTORESRowChanged(this, new SECTORESRowChangeEvent(((SECTORESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.SECTORESRowChanging != null)) {
-                    this.SECTORESRowChanging(this, new SECTORESRowChangeEvent(((SECTORESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.SECTORESRowDeleted != null)) {
-                    this.SECTORESRowDeleted(this, new SECTORESRowChangeEvent(((SECTORESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.SECTORESRowDeleting != null)) {
-                    this.SECTORESRowDeleting(this, new SECTORESRowChangeEvent(((SECTORESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveSECTORESRow(SECTORESRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsProveedor ds = new dsProveedor();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "SECTORESDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class PROVEEDORESDataTable : global::System.Data.TypedTableBase<PROVEEDORESRow> {
-            
-            private global::System.Data.DataColumn columnPROVE_CODIGO;
-            
-            private global::System.Data.DataColumn columnSEC_CODIGO;
-            
-            private global::System.Data.DataColumn columnPROVE_RAZONSOCIAL;
-            
-            private global::System.Data.DataColumn columnPROVE_TELPRINCIPAL;
-            
-            private global::System.Data.DataColumn columnPROVE_TELALTERNATIVO;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PROVEEDORESDataTable() {
-                this.TableName = "PROVEEDORES";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal PROVEEDORESDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected PROVEEDORESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PROVE_CODIGOColumn {
-                get {
-                    return this.columnPROVE_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn SEC_CODIGOColumn {
-                get {
-                    return this.columnSEC_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PROVE_RAZONSOCIALColumn {
-                get {
-                    return this.columnPROVE_RAZONSOCIAL;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PROVE_TELPRINCIPALColumn {
-                get {
-                    return this.columnPROVE_TELPRINCIPAL;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PROVE_TELALTERNATIVOColumn {
-                get {
-                    return this.columnPROVE_TELALTERNATIVO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PROVEEDORESRow this[int index] {
-                get {
-                    return ((PROVEEDORESRow)(this.Rows[index]));
-                }
-            }
-            
-            public event PROVEEDORESRowChangeEventHandler PROVEEDORESRowChanging;
-            
-            public event PROVEEDORESRowChangeEventHandler PROVEEDORESRowChanged;
-            
-            public event PROVEEDORESRowChangeEventHandler PROVEEDORESRowDeleting;
-            
-            public event PROVEEDORESRowChangeEventHandler PROVEEDORESRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddPROVEEDORESRow(PROVEEDORESRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PROVEEDORESRow AddPROVEEDORESRow(SECTORESRow parentSECTORESRowByproveedor_sector_fk, string PROVE_RAZONSOCIAL, string PROVE_TELPRINCIPAL, string PROVE_TELALTERNATIVO) {
-                PROVEEDORESRow rowPROVEEDORESRow = ((PROVEEDORESRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        null,
-                        PROVE_RAZONSOCIAL,
-                        PROVE_TELPRINCIPAL,
-                        PROVE_TELALTERNATIVO};
-                if ((parentSECTORESRowByproveedor_sector_fk != null)) {
-                    columnValuesArray[1] = parentSECTORESRowByproveedor_sector_fk[0];
-                }
-                rowPROVEEDORESRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowPROVEEDORESRow);
-                return rowPROVEEDORESRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PROVEEDORESRow FindByPROVE_CODIGO(decimal PROVE_CODIGO) {
-                return ((PROVEEDORESRow)(this.Rows.Find(new object[] {
-                            PROVE_CODIGO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                PROVEEDORESDataTable cln = ((PROVEEDORESDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new PROVEEDORESDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnPROVE_CODIGO = base.Columns["PROVE_CODIGO"];
-                this.columnSEC_CODIGO = base.Columns["SEC_CODIGO"];
-                this.columnPROVE_RAZONSOCIAL = base.Columns["PROVE_RAZONSOCIAL"];
-                this.columnPROVE_TELPRINCIPAL = base.Columns["PROVE_TELPRINCIPAL"];
-                this.columnPROVE_TELALTERNATIVO = base.Columns["PROVE_TELALTERNATIVO"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnPROVE_CODIGO = new global::System.Data.DataColumn("PROVE_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPROVE_CODIGO);
-                this.columnSEC_CODIGO = new global::System.Data.DataColumn("SEC_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSEC_CODIGO);
-                this.columnPROVE_RAZONSOCIAL = new global::System.Data.DataColumn("PROVE_RAZONSOCIAL", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPROVE_RAZONSOCIAL);
-                this.columnPROVE_TELPRINCIPAL = new global::System.Data.DataColumn("PROVE_TELPRINCIPAL", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPROVE_TELPRINCIPAL);
-                this.columnPROVE_TELALTERNATIVO = new global::System.Data.DataColumn("PROVE_TELALTERNATIVO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPROVE_TELALTERNATIVO);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnPROVE_CODIGO}, true));
-                this.columnPROVE_CODIGO.AutoIncrement = true;
-                this.columnPROVE_CODIGO.AutoIncrementSeed = -1;
-                this.columnPROVE_CODIGO.AutoIncrementStep = -1;
-                this.columnPROVE_CODIGO.AllowDBNull = false;
-                this.columnPROVE_CODIGO.ReadOnly = true;
-                this.columnPROVE_CODIGO.Unique = true;
-                this.columnPROVE_RAZONSOCIAL.MaxLength = 80;
-                this.columnPROVE_TELPRINCIPAL.MaxLength = 50;
-                this.columnPROVE_TELALTERNATIVO.MaxLength = 50;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PROVEEDORESRow NewPROVEEDORESRow() {
-                return ((PROVEEDORESRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new PROVEEDORESRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(PROVEEDORESRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.PROVEEDORESRowChanged != null)) {
-                    this.PROVEEDORESRowChanged(this, new PROVEEDORESRowChangeEvent(((PROVEEDORESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.PROVEEDORESRowChanging != null)) {
-                    this.PROVEEDORESRowChanging(this, new PROVEEDORESRowChangeEvent(((PROVEEDORESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.PROVEEDORESRowDeleted != null)) {
-                    this.PROVEEDORESRowDeleted(this, new PROVEEDORESRowChangeEvent(((PROVEEDORESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.PROVEEDORESRowDeleting != null)) {
-                    this.PROVEEDORESRowDeleting(this, new PROVEEDORESRowChangeEvent(((PROVEEDORESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemovePROVEEDORESRow(PROVEEDORESRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsProveedor ds = new dsProveedor();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "PROVEEDORESDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class DOMICILIOSRow : global::System.Data.DataRow {
-            
-            private DOMICILIOSDataTable tableDOMICILIOS;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal DOMICILIOSRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableDOMICILIOS = ((DOMICILIOSDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal DOM_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableDOMICILIOS.DOM_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableDOMICILIOS.DOM_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal LOC_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableDOMICILIOS.LOC_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableDOMICILIOS.LOC_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal PROV_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableDOMICILIOS.PROV_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableDOMICILIOS.PROV_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string DOM_CALLE {
-                get {
-                    try {
-                        return ((string)(this[this.tableDOMICILIOS.DOM_CALLEColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DOM_CALLE\' de la tabla \'DOMICILIOS\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDOMICILIOS.DOM_CALLEColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string DOM_NUMERO {
-                get {
-                    try {
-                        return ((string)(this[this.tableDOMICILIOS.DOM_NUMEROColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DOM_NUMERO\' de la tabla \'DOMICILIOS\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDOMICILIOS.DOM_NUMEROColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string DOM_PISO {
-                get {
-                    try {
-                        return ((string)(this[this.tableDOMICILIOS.DOM_PISOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DOM_PISO\' de la tabla \'DOMICILIOS\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDOMICILIOS.DOM_PISOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string DOM_DEPARTAMENTO {
-                get {
-                    try {
-                        return ((string)(this[this.tableDOMICILIOS.DOM_DEPARTAMENTOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DOM_DEPARTAMENTO\' de la tabla \'DOMICILIOS\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDOMICILIOS.DOM_DEPARTAMENTOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public LOCALIDADESRow LOCALIDADESRow {
-                get {
-                    return ((LOCALIDADESRow)(this.GetParentRow(this.Table.ParentRelations["domicilio_localidad_fk"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["domicilio_localidad_fk"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PROVEEDORESRow PROVEEDORESRow {
-                get {
-                    return ((PROVEEDORESRow)(this.GetParentRow(this.Table.ParentRelations["domicilio_proveedor_fk"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["domicilio_proveedor_fk"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsDOM_CALLENull() {
-                return this.IsNull(this.tableDOMICILIOS.DOM_CALLEColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetDOM_CALLENull() {
-                this[this.tableDOMICILIOS.DOM_CALLEColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsDOM_NUMERONull() {
-                return this.IsNull(this.tableDOMICILIOS.DOM_NUMEROColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetDOM_NUMERONull() {
-                this[this.tableDOMICILIOS.DOM_NUMEROColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsDOM_PISONull() {
-                return this.IsNull(this.tableDOMICILIOS.DOM_PISOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetDOM_PISONull() {
-                this[this.tableDOMICILIOS.DOM_PISOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsDOM_DEPARTAMENTONull() {
-                return this.IsNull(this.tableDOMICILIOS.DOM_DEPARTAMENTOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetDOM_DEPARTAMENTONull() {
-                this[this.tableDOMICILIOS.DOM_DEPARTAMENTOColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class LOCALIDADESRow : global::System.Data.DataRow {
-            
-            private LOCALIDADESDataTable tableLOCALIDADES;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal LOCALIDADESRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableLOCALIDADES = ((LOCALIDADESDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal LOC_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableLOCALIDADES.LOC_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableLOCALIDADES.LOC_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal PCIA_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableLOCALIDADES.PCIA_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableLOCALIDADES.PCIA_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string LOC_NOMBRE {
-                get {
-                    try {
-                        return ((string)(this[this.tableLOCALIDADES.LOC_NOMBREColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'LOC_NOMBRE\' de la tabla \'LOCALIDADES\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableLOCALIDADES.LOC_NOMBREColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PROVINCIASRow PROVINCIASRow {
-                get {
-                    return ((PROVINCIASRow)(this.GetParentRow(this.Table.ParentRelations["localidad_provincia_fk"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["localidad_provincia_fk"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsLOC_NOMBRENull() {
-                return this.IsNull(this.tableLOCALIDADES.LOC_NOMBREColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetLOC_NOMBRENull() {
-                this[this.tableLOCALIDADES.LOC_NOMBREColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DOMICILIOSRow[] GetDOMICILIOSRows() {
-                if ((this.Table.ChildRelations["domicilio_localidad_fk"] == null)) {
-                    return new DOMICILIOSRow[0];
-                }
-                else {
-                    return ((DOMICILIOSRow[])(base.GetChildRows(this.Table.ChildRelations["domicilio_localidad_fk"])));
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class PROVINCIASRow : global::System.Data.DataRow {
-            
-            private PROVINCIASDataTable tablePROVINCIAS;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal PROVINCIASRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tablePROVINCIAS = ((PROVINCIASDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal PCIA_CODIGO {
-                get {
-                    return ((decimal)(this[this.tablePROVINCIAS.PCIA_CODIGOColumn]));
-                }
-                set {
-                    this[this.tablePROVINCIAS.PCIA_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string PCIA_NOMBRE {
-                get {
-                    try {
-                        return ((string)(this[this.tablePROVINCIAS.PCIA_NOMBREColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'PCIA_NOMBRE\' de la tabla \'PROVINCIAS\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePROVINCIAS.PCIA_NOMBREColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPCIA_NOMBRENull() {
-                return this.IsNull(this.tablePROVINCIAS.PCIA_NOMBREColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPCIA_NOMBRENull() {
-                this[this.tablePROVINCIAS.PCIA_NOMBREColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public LOCALIDADESRow[] GetLOCALIDADESRows() {
-                if ((this.Table.ChildRelations["localidad_provincia_fk"] == null)) {
-                    return new LOCALIDADESRow[0];
-                }
-                else {
-                    return ((LOCALIDADESRow[])(base.GetChildRows(this.Table.ChildRelations["localidad_provincia_fk"])));
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class SECTORESRow : global::System.Data.DataRow {
-            
-            private SECTORESDataTable tableSECTORES;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal SECTORESRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableSECTORES = ((SECTORESDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal SEC_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableSECTORES.SEC_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableSECTORES.SEC_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string SEC_NOMBRE {
-                get {
-                    try {
-                        return ((string)(this[this.tableSECTORES.SEC_NOMBREColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'SEC_NOMBRE\' de la tabla \'SECTORES\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSECTORES.SEC_NOMBREColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string SEC_DESCRIPCION {
-                get {
-                    try {
-                        return ((string)(this[this.tableSECTORES.SEC_DESCRIPCIONColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'SEC_DESCRIPCION\' de la tabla \'SECTORES\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSECTORES.SEC_DESCRIPCIONColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string SEC_ABREVIATURA {
-                get {
-                    try {
-                        return ((string)(this[this.tableSECTORES.SEC_ABREVIATURAColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'SEC_ABREVIATURA\' de la tabla \'SECTORES\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSECTORES.SEC_ABREVIATURAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsSEC_NOMBRENull() {
-                return this.IsNull(this.tableSECTORES.SEC_NOMBREColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetSEC_NOMBRENull() {
-                this[this.tableSECTORES.SEC_NOMBREColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsSEC_DESCRIPCIONNull() {
-                return this.IsNull(this.tableSECTORES.SEC_DESCRIPCIONColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetSEC_DESCRIPCIONNull() {
-                this[this.tableSECTORES.SEC_DESCRIPCIONColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsSEC_ABREVIATURANull() {
-                return this.IsNull(this.tableSECTORES.SEC_ABREVIATURAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetSEC_ABREVIATURANull() {
-                this[this.tableSECTORES.SEC_ABREVIATURAColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PROVEEDORESRow[] GetPROVEEDORESRows() {
-                if ((this.Table.ChildRelations["proveedor_sector_fk"] == null)) {
-                    return new PROVEEDORESRow[0];
-                }
-                else {
-                    return ((PROVEEDORESRow[])(base.GetChildRows(this.Table.ChildRelations["proveedor_sector_fk"])));
-                }
             }
         }
         
@@ -2392,6 +1977,452 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class DOMICILIOSRow : global::System.Data.DataRow {
+            
+            private DOMICILIOSDataTable tableDOMICILIOS;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal DOMICILIOSRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableDOMICILIOS = ((DOMICILIOSDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal DOM_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableDOMICILIOS.DOM_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableDOMICILIOS.DOM_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal LOC_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableDOMICILIOS.LOC_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableDOMICILIOS.LOC_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal PROVE_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableDOMICILIOS.PROVE_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableDOMICILIOS.PROVE_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string DOM_CALLE {
+                get {
+                    try {
+                        return ((string)(this[this.tableDOMICILIOS.DOM_CALLEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DOM_CALLE\' de la tabla \'DOMICILIOS\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDOMICILIOS.DOM_CALLEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string DOM_NUMERO {
+                get {
+                    try {
+                        return ((string)(this[this.tableDOMICILIOS.DOM_NUMEROColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DOM_NUMERO\' de la tabla \'DOMICILIOS\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDOMICILIOS.DOM_NUMEROColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string DOM_PISO {
+                get {
+                    try {
+                        return ((string)(this[this.tableDOMICILIOS.DOM_PISOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DOM_PISO\' de la tabla \'DOMICILIOS\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDOMICILIOS.DOM_PISOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string DOM_DEPARTAMENTO {
+                get {
+                    try {
+                        return ((string)(this[this.tableDOMICILIOS.DOM_DEPARTAMENTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DOM_DEPARTAMENTO\' de la tabla \'DOMICILIOS\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDOMICILIOS.DOM_DEPARTAMENTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PROVEEDORESRow PROVEEDORESRow {
+                get {
+                    return ((PROVEEDORESRow)(this.GetParentRow(this.Table.ParentRelations["domicilio_proveedor_fk"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["domicilio_proveedor_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public LOCALIDADESRow LOCALIDADESRow {
+                get {
+                    return ((LOCALIDADESRow)(this.GetParentRow(this.Table.ParentRelations["domicilio_localidad_fk"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["domicilio_localidad_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDOM_CALLENull() {
+                return this.IsNull(this.tableDOMICILIOS.DOM_CALLEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDOM_CALLENull() {
+                this[this.tableDOMICILIOS.DOM_CALLEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDOM_NUMERONull() {
+                return this.IsNull(this.tableDOMICILIOS.DOM_NUMEROColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDOM_NUMERONull() {
+                this[this.tableDOMICILIOS.DOM_NUMEROColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDOM_PISONull() {
+                return this.IsNull(this.tableDOMICILIOS.DOM_PISOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDOM_PISONull() {
+                this[this.tableDOMICILIOS.DOM_PISOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDOM_DEPARTAMENTONull() {
+                return this.IsNull(this.tableDOMICILIOS.DOM_DEPARTAMENTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDOM_DEPARTAMENTONull() {
+                this[this.tableDOMICILIOS.DOM_DEPARTAMENTOColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class SECTORESRow : global::System.Data.DataRow {
+            
+            private SECTORESDataTable tableSECTORES;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal SECTORESRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableSECTORES = ((SECTORESDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal SEC_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableSECTORES.SEC_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableSECTORES.SEC_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string SEC_NOMBRE {
+                get {
+                    try {
+                        return ((string)(this[this.tableSECTORES.SEC_NOMBREColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'SEC_NOMBRE\' de la tabla \'SECTORES\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSECTORES.SEC_NOMBREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string SEC_DESCRIPCION {
+                get {
+                    try {
+                        return ((string)(this[this.tableSECTORES.SEC_DESCRIPCIONColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'SEC_DESCRIPCION\' de la tabla \'SECTORES\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSECTORES.SEC_DESCRIPCIONColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string SEC_ABREVIATURA {
+                get {
+                    try {
+                        return ((string)(this[this.tableSECTORES.SEC_ABREVIATURAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'SEC_ABREVIATURA\' de la tabla \'SECTORES\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSECTORES.SEC_ABREVIATURAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSEC_NOMBRENull() {
+                return this.IsNull(this.tableSECTORES.SEC_NOMBREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSEC_NOMBRENull() {
+                this[this.tableSECTORES.SEC_NOMBREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSEC_DESCRIPCIONNull() {
+                return this.IsNull(this.tableSECTORES.SEC_DESCRIPCIONColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSEC_DESCRIPCIONNull() {
+                this[this.tableSECTORES.SEC_DESCRIPCIONColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSEC_ABREVIATURANull() {
+                return this.IsNull(this.tableSECTORES.SEC_ABREVIATURAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSEC_ABREVIATURANull() {
+                this[this.tableSECTORES.SEC_ABREVIATURAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PROVEEDORESRow[] GetPROVEEDORESRows() {
+                if ((this.Table.ChildRelations["proveedor_sector_fk"] == null)) {
+                    return new PROVEEDORESRow[0];
+                }
+                else {
+                    return ((PROVEEDORESRow[])(base.GetChildRows(this.Table.ChildRelations["proveedor_sector_fk"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class LOCALIDADESRow : global::System.Data.DataRow {
+            
+            private LOCALIDADESDataTable tableLOCALIDADES;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal LOCALIDADESRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableLOCALIDADES = ((LOCALIDADESDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal LOC_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableLOCALIDADES.LOC_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableLOCALIDADES.LOC_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal PCIA_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableLOCALIDADES.PCIA_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableLOCALIDADES.PCIA_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string LOC_NOMBRE {
+                get {
+                    try {
+                        return ((string)(this[this.tableLOCALIDADES.LOC_NOMBREColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'LOC_NOMBRE\' de la tabla \'LOCALIDADES\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableLOCALIDADES.LOC_NOMBREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PROVINCIASRow PROVINCIASRow {
+                get {
+                    return ((PROVINCIASRow)(this.GetParentRow(this.Table.ParentRelations["localidad_provincia_fk"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["localidad_provincia_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsLOC_NOMBRENull() {
+                return this.IsNull(this.tableLOCALIDADES.LOC_NOMBREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetLOC_NOMBRENull() {
+                this[this.tableLOCALIDADES.LOC_NOMBREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DOMICILIOSRow[] GetDOMICILIOSRows() {
+                if ((this.Table.ChildRelations["domicilio_localidad_fk"] == null)) {
+                    return new DOMICILIOSRow[0];
+                }
+                else {
+                    return ((DOMICILIOSRow[])(base.GetChildRows(this.Table.ChildRelations["domicilio_localidad_fk"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class PROVINCIASRow : global::System.Data.DataRow {
+            
+            private PROVINCIASDataTable tablePROVINCIAS;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal PROVINCIASRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablePROVINCIAS = ((PROVINCIASDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal PCIA_CODIGO {
+                get {
+                    return ((decimal)(this[this.tablePROVINCIAS.PCIA_CODIGOColumn]));
+                }
+                set {
+                    this[this.tablePROVINCIAS.PCIA_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PCIA_NOMBRE {
+                get {
+                    try {
+                        return ((string)(this[this.tablePROVINCIAS.PCIA_NOMBREColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'PCIA_NOMBRE\' de la tabla \'PROVINCIAS\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePROVINCIAS.PCIA_NOMBREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPCIA_NOMBRENull() {
+                return this.IsNull(this.tablePROVINCIAS.PCIA_NOMBREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPCIA_NOMBRENull() {
+                this[this.tablePROVINCIAS.PCIA_NOMBREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public LOCALIDADESRow[] GetLOCALIDADESRows() {
+                if ((this.Table.ChildRelations["localidad_provincia_fk"] == null)) {
+                    return new LOCALIDADESRow[0];
+                }
+                else {
+                    return ((LOCALIDADESRow[])(base.GetChildRows(this.Table.ChildRelations["localidad_provincia_fk"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class PROVEEDORESRowChangeEvent : global::System.EventArgs {
+            
+            private PROVEEDORESRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PROVEEDORESRowChangeEvent(PROVEEDORESRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PROVEEDORESRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -2409,6 +2440,37 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public DOMICILIOSRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class SECTORESRowChangeEvent : global::System.EventArgs {
+            
+            private SECTORESRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SECTORESRowChangeEvent(SECTORESRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SECTORESRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -2483,72 +2545,420 @@ namespace GyCAP.Data {
                 }
             }
         }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class SECTORESRowChangeEvent : global::System.EventArgs {
-            
-            private SECTORESRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SECTORESRowChangeEvent(SECTORESRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SECTORESRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class PROVEEDORESRowChangeEvent : global::System.EventArgs {
-            
-            private PROVEEDORESRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PROVEEDORESRowChangeEvent(PROVEEDORESRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PROVEEDORESRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
     }
 }
 namespace GyCAP.Data.dsProveedorTableAdapters {
     
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class PROVEEDORESTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public PROVEEDORESTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "PROVEEDORES";
+            tableMapping.ColumnMappings.Add("PROVE_CODIGO", "PROVE_CODIGO");
+            tableMapping.ColumnMappings.Add("SEC_CODIGO", "SEC_CODIGO");
+            tableMapping.ColumnMappings.Add("PROVE_RAZONSOCIAL", "PROVE_RAZONSOCIAL");
+            tableMapping.ColumnMappings.Add("PROVE_TELPRINCIPAL", "PROVE_TELPRINCIPAL");
+            tableMapping.ColumnMappings.Add("PROVE_TELALTERNATIVO", "PROVE_TELALTERNATIVO");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[PROVEEDORES] WHERE (([PROVE_CODIGO] = @Original_PROVE_CODIGO) AND ((@IsNull_SEC_CODIGO = 1 AND [SEC_CODIGO] IS NULL) OR ([SEC_CODIGO] = @Original_SEC_CODIGO)) AND ((@IsNull_PROVE_RAZONSOCIAL = 1 AND [PROVE_RAZONSOCIAL] IS NULL) OR ([PROVE_RAZONSOCIAL] = @Original_PROVE_RAZONSOCIAL)) AND ((@IsNull_PROVE_TELPRINCIPAL = 1 AND [PROVE_TELPRINCIPAL] IS NULL) OR ([PROVE_TELPRINCIPAL] = @Original_PROVE_TELPRINCIPAL)) AND ((@IsNull_PROVE_TELALTERNATIVO = 1 AND [PROVE_TELALTERNATIVO] IS NULL) OR ([PROVE_TELALTERNATIVO] = @Original_PROVE_TELALTERNATIVO)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PROVE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PROVE_RAZONSOCIAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_RAZONSOCIAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_RAZONSOCIAL", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_RAZONSOCIAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PROVE_TELPRINCIPAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELPRINCIPAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_TELPRINCIPAL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELPRINCIPAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PROVE_TELALTERNATIVO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELALTERNATIVO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_TELALTERNATIVO", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELALTERNATIVO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[PROVEEDORES] ([SEC_CODIGO], [PROVE_RAZONSOCIAL], [PROVE_TELPRINCIPAL], [PROVE_TELALTERNATIVO]) VALUES (@SEC_CODIGO, @PROVE_RAZONSOCIAL, @PROVE_TELPRINCIPAL, @PROVE_TELALTERNATIVO);
+SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TELALTERNATIVO FROM PROVEEDORES WHERE (PROVE_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROVE_RAZONSOCIAL", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_RAZONSOCIAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROVE_TELPRINCIPAL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELPRINCIPAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROVE_TELALTERNATIVO", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELALTERNATIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[PROVEEDORES] SET [SEC_CODIGO] = @SEC_CODIGO, [PROVE_RAZONSOCIAL] = @PROVE_RAZONSOCIAL, [PROVE_TELPRINCIPAL] = @PROVE_TELPRINCIPAL, [PROVE_TELALTERNATIVO] = @PROVE_TELALTERNATIVO WHERE (([PROVE_CODIGO] = @Original_PROVE_CODIGO) AND ((@IsNull_SEC_CODIGO = 1 AND [SEC_CODIGO] IS NULL) OR ([SEC_CODIGO] = @Original_SEC_CODIGO)) AND ((@IsNull_PROVE_RAZONSOCIAL = 1 AND [PROVE_RAZONSOCIAL] IS NULL) OR ([PROVE_RAZONSOCIAL] = @Original_PROVE_RAZONSOCIAL)) AND ((@IsNull_PROVE_TELPRINCIPAL = 1 AND [PROVE_TELPRINCIPAL] IS NULL) OR ([PROVE_TELPRINCIPAL] = @Original_PROVE_TELPRINCIPAL)) AND ((@IsNull_PROVE_TELALTERNATIVO = 1 AND [PROVE_TELALTERNATIVO] IS NULL) OR ([PROVE_TELALTERNATIVO] = @Original_PROVE_TELALTERNATIVO)));
+SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TELALTERNATIVO FROM PROVEEDORES WHERE (PROVE_CODIGO = @PROVE_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROVE_RAZONSOCIAL", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_RAZONSOCIAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROVE_TELPRINCIPAL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELPRINCIPAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROVE_TELALTERNATIVO", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELALTERNATIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PROVE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PROVE_RAZONSOCIAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_RAZONSOCIAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_RAZONSOCIAL", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_RAZONSOCIAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PROVE_TELPRINCIPAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELPRINCIPAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_TELPRINCIPAL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELPRINCIPAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PROVE_TELALTERNATIVO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELALTERNATIVO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_TELALTERNATIVO", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELALTERNATIVO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROVE_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "PROVE_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString9;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TEL" +
+                "ALTERNATIVO FROM dbo.PROVEEDORES";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsProveedor.PROVEEDORESDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsProveedor.PROVEEDORESDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsProveedor.PROVEEDORESDataTable dataTable = new dsProveedor.PROVEEDORESDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsProveedor.PROVEEDORESDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsProveedor dataSet) {
+            return this.Adapter.Update(dataSet, "PROVEEDORES");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_PROVE_CODIGO, global::System.Nullable<decimal> Original_SEC_CODIGO, string Original_PROVE_RAZONSOCIAL, string Original_PROVE_TELPRINCIPAL, string Original_PROVE_TELALTERNATIVO) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_PROVE_CODIGO));
+            if ((Original_SEC_CODIGO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_SEC_CODIGO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PROVE_RAZONSOCIAL == null)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_PROVE_RAZONSOCIAL));
+            }
+            if ((Original_PROVE_TELPRINCIPAL == null)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_PROVE_TELPRINCIPAL));
+            }
+            if ((Original_PROVE_TELALTERNATIVO == null)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_PROVE_TELALTERNATIVO));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(global::System.Nullable<decimal> SEC_CODIGO, string PROVE_RAZONSOCIAL, string PROVE_TELPRINCIPAL, string PROVE_TELALTERNATIVO) {
+            if ((SEC_CODIGO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(SEC_CODIGO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((PROVE_RAZONSOCIAL == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(PROVE_RAZONSOCIAL));
+            }
+            if ((PROVE_TELPRINCIPAL == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(PROVE_TELPRINCIPAL));
+            }
+            if ((PROVE_TELALTERNATIVO == null)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(PROVE_TELALTERNATIVO));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(global::System.Nullable<decimal> SEC_CODIGO, string PROVE_RAZONSOCIAL, string PROVE_TELPRINCIPAL, string PROVE_TELALTERNATIVO, decimal Original_PROVE_CODIGO, global::System.Nullable<decimal> Original_SEC_CODIGO, string Original_PROVE_RAZONSOCIAL, string Original_PROVE_TELPRINCIPAL, string Original_PROVE_TELALTERNATIVO, decimal PROVE_CODIGO) {
+            if ((SEC_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(SEC_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((PROVE_RAZONSOCIAL == null)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(PROVE_RAZONSOCIAL));
+            }
+            if ((PROVE_TELPRINCIPAL == null)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(PROVE_TELPRINCIPAL));
+            }
+            if ((PROVE_TELALTERNATIVO == null)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(PROVE_TELALTERNATIVO));
+            }
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(Original_PROVE_CODIGO));
+            if ((Original_SEC_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_SEC_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((Original_PROVE_RAZONSOCIAL == null)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_PROVE_RAZONSOCIAL));
+            }
+            if ((Original_PROVE_TELPRINCIPAL == null)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_PROVE_TELPRINCIPAL));
+            }
+            if ((Original_PROVE_TELALTERNATIVO == null)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_PROVE_TELALTERNATIVO));
+            }
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(PROVE_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(global::System.Nullable<decimal> SEC_CODIGO, string PROVE_RAZONSOCIAL, string PROVE_TELPRINCIPAL, string PROVE_TELALTERNATIVO, decimal Original_PROVE_CODIGO, global::System.Nullable<decimal> Original_SEC_CODIGO, string Original_PROVE_RAZONSOCIAL, string Original_PROVE_TELPRINCIPAL, string Original_PROVE_TELALTERNATIVO) {
+            return this.Update(SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TELALTERNATIVO, Original_PROVE_CODIGO, Original_SEC_CODIGO, Original_PROVE_RAZONSOCIAL, Original_PROVE_TELPRINCIPAL, Original_PROVE_TELALTERNATIVO, Original_PROVE_CODIGO);
+        }
+    }
     
     /// <summary>
     ///Represents the connection and commands used to retrieve and save data.
@@ -2667,7 +3077,7 @@ namespace GyCAP.Data.dsProveedorTableAdapters {
             tableMapping.DataSetTable = "DOMICILIOS";
             tableMapping.ColumnMappings.Add("DOM_CODIGO", "DOM_CODIGO");
             tableMapping.ColumnMappings.Add("LOC_CODIGO", "LOC_CODIGO");
-            tableMapping.ColumnMappings.Add("PROV_CODIGO", "PROV_CODIGO");
+            tableMapping.ColumnMappings.Add("PROVE_CODIGO", "PROVE_CODIGO");
             tableMapping.ColumnMappings.Add("DOM_CALLE", "DOM_CALLE");
             tableMapping.ColumnMappings.Add("DOM_NUMERO", "DOM_NUMERO");
             tableMapping.ColumnMappings.Add("DOM_PISO", "DOM_PISO");
@@ -2675,11 +3085,11 @@ namespace GyCAP.Data.dsProveedorTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[DOMICILIOS] WHERE (([DOM_CODIGO] = @Original_DOM_CODIGO) AND ([LOC_CODIGO] = @Original_LOC_CODIGO) AND ([PROV_CODIGO] = @Original_PROV_CODIGO) AND ((@IsNull_DOM_CALLE = 1 AND [DOM_CALLE] IS NULL) OR ([DOM_CALLE] = @Original_DOM_CALLE)) AND ((@IsNull_DOM_NUMERO = 1 AND [DOM_NUMERO] IS NULL) OR ([DOM_NUMERO] = @Original_DOM_NUMERO)) AND ((@IsNull_DOM_PISO = 1 AND [DOM_PISO] IS NULL) OR ([DOM_PISO] = @Original_DOM_PISO)) AND ((@IsNull_DOM_DEPARTAMENTO = 1 AND [DOM_DEPARTAMENTO] IS NULL) OR ([DOM_DEPARTAMENTO] = @Original_DOM_DEPARTAMENTO)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[DOMICILIOS] WHERE (([DOM_CODIGO] = @Original_DOM_CODIGO) AND ([LOC_CODIGO] = @Original_LOC_CODIGO) AND ([PROVE_CODIGO] = @Original_PROVE_CODIGO) AND ((@IsNull_DOM_CALLE = 1 AND [DOM_CALLE] IS NULL) OR ([DOM_CALLE] = @Original_DOM_CALLE)) AND ((@IsNull_DOM_NUMERO = 1 AND [DOM_NUMERO] IS NULL) OR ([DOM_NUMERO] = @Original_DOM_NUMERO)) AND ((@IsNull_DOM_PISO = 1 AND [DOM_PISO] IS NULL) OR ([DOM_PISO] = @Original_DOM_PISO)) AND ((@IsNull_DOM_DEPARTAMENTO = 1 AND [DOM_DEPARTAMENTO] IS NULL) OR ([DOM_DEPARTAMENTO] = @Original_DOM_DEPARTAMENTO)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DOM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DOM_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LOC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "LOC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROV_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PROV_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PROVE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DOM_CALLE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOM_CALLE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DOM_CALLE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOM_CALLE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DOM_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOM_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -2690,29 +3100,29 @@ namespace GyCAP.Data.dsProveedorTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DOM_DEPARTAMENTO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOM_DEPARTAMENTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[DOMICILIOS] ([LOC_CODIGO], [PROV_CODIGO], [DOM_CALLE], [DOM_NUMERO], [DOM_PISO], [DOM_DEPARTAMENTO]) VALUES (@LOC_CODIGO, @PROV_CODIGO, @DOM_CALLE, @DOM_NUMERO, @DOM_PISO, @DOM_DEPARTAMENTO);
-SELECT DOM_CODIGO, LOC_CODIGO, PROV_CODIGO, DOM_CALLE, DOM_NUMERO, DOM_PISO, DOM_DEPARTAMENTO FROM DOMICILIOS WHERE (DOM_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[DOMICILIOS] ([LOC_CODIGO], [PROVE_CODIGO], [DOM_CALLE], [DOM_NUMERO], [DOM_PISO], [DOM_DEPARTAMENTO]) VALUES (@LOC_CODIGO, @PROVE_CODIGO, @DOM_CALLE, @DOM_NUMERO, @DOM_PISO, @DOM_DEPARTAMENTO);
+SELECT DOM_CODIGO, LOC_CODIGO, PROVE_CODIGO, DOM_CALLE, DOM_NUMERO, DOM_PISO, DOM_DEPARTAMENTO FROM DOMICILIOS WHERE (DOM_CODIGO = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LOC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "LOC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROV_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PROV_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROVE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PROVE_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DOM_CALLE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOM_CALLE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DOM_NUMERO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOM_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DOM_PISO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOM_PISO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DOM_DEPARTAMENTO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOM_DEPARTAMENTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[DOMICILIOS] SET [LOC_CODIGO] = @LOC_CODIGO, [PROV_CODIGO] = @PROV_CODIGO, [DOM_CALLE] = @DOM_CALLE, [DOM_NUMERO] = @DOM_NUMERO, [DOM_PISO] = @DOM_PISO, [DOM_DEPARTAMENTO] = @DOM_DEPARTAMENTO WHERE (([DOM_CODIGO] = @Original_DOM_CODIGO) AND ([LOC_CODIGO] = @Original_LOC_CODIGO) AND ([PROV_CODIGO] = @Original_PROV_CODIGO) AND ((@IsNull_DOM_CALLE = 1 AND [DOM_CALLE] IS NULL) OR ([DOM_CALLE] = @Original_DOM_CALLE)) AND ((@IsNull_DOM_NUMERO = 1 AND [DOM_NUMERO] IS NULL) OR ([DOM_NUMERO] = @Original_DOM_NUMERO)) AND ((@IsNull_DOM_PISO = 1 AND [DOM_PISO] IS NULL) OR ([DOM_PISO] = @Original_DOM_PISO)) AND ((@IsNull_DOM_DEPARTAMENTO = 1 AND [DOM_DEPARTAMENTO] IS NULL) OR ([DOM_DEPARTAMENTO] = @Original_DOM_DEPARTAMENTO)));
-SELECT DOM_CODIGO, LOC_CODIGO, PROV_CODIGO, DOM_CALLE, DOM_NUMERO, DOM_PISO, DOM_DEPARTAMENTO FROM DOMICILIOS WHERE (DOM_CODIGO = @DOM_CODIGO)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[DOMICILIOS] SET [LOC_CODIGO] = @LOC_CODIGO, [PROVE_CODIGO] = @PROVE_CODIGO, [DOM_CALLE] = @DOM_CALLE, [DOM_NUMERO] = @DOM_NUMERO, [DOM_PISO] = @DOM_PISO, [DOM_DEPARTAMENTO] = @DOM_DEPARTAMENTO WHERE (([DOM_CODIGO] = @Original_DOM_CODIGO) AND ([LOC_CODIGO] = @Original_LOC_CODIGO) AND ([PROVE_CODIGO] = @Original_PROVE_CODIGO) AND ((@IsNull_DOM_CALLE = 1 AND [DOM_CALLE] IS NULL) OR ([DOM_CALLE] = @Original_DOM_CALLE)) AND ((@IsNull_DOM_NUMERO = 1 AND [DOM_NUMERO] IS NULL) OR ([DOM_NUMERO] = @Original_DOM_NUMERO)) AND ((@IsNull_DOM_PISO = 1 AND [DOM_PISO] IS NULL) OR ([DOM_PISO] = @Original_DOM_PISO)) AND ((@IsNull_DOM_DEPARTAMENTO = 1 AND [DOM_DEPARTAMENTO] IS NULL) OR ([DOM_DEPARTAMENTO] = @Original_DOM_DEPARTAMENTO)));
+SELECT DOM_CODIGO, LOC_CODIGO, PROVE_CODIGO, DOM_CALLE, DOM_NUMERO, DOM_PISO, DOM_DEPARTAMENTO FROM DOMICILIOS WHERE (DOM_CODIGO = @DOM_CODIGO)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LOC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "LOC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROV_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PROV_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROVE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PROVE_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DOM_CALLE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOM_CALLE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DOM_NUMERO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOM_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DOM_PISO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOM_PISO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DOM_DEPARTAMENTO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOM_DEPARTAMENTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DOM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DOM_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LOC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "LOC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROV_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PROV_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PROVE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DOM_CALLE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOM_CALLE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DOM_CALLE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOM_CALLE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DOM_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOM_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -2727,7 +3137,7 @@ SELECT DOM_CODIGO, LOC_CODIGO, PROV_CODIGO, DOM_CALLE, DOM_NUMERO, DOM_PISO, DOM
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString6;
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString9;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2735,8 +3145,8 @@ SELECT DOM_CODIGO, LOC_CODIGO, PROV_CODIGO, DOM_CALLE, DOM_NUMERO, DOM_PISO, DOM
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT DOM_CODIGO, LOC_CODIGO, PROV_CODIGO, DOM_CALLE, DOM_NUMERO, DOM_PISO, DOM_" +
-                "DEPARTAMENTO FROM dbo.DOMICILIOS";
+            this._commandCollection[0].CommandText = "SELECT DOM_CODIGO, LOC_CODIGO, PROVE_CODIGO, DOM_CALLE, DOM_NUMERO, DOM_PISO, DOM" +
+                "_DEPARTAMENTO FROM dbo.DOMICILIOS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -2790,10 +3200,10 @@ SELECT DOM_CODIGO, LOC_CODIGO, PROV_CODIGO, DOM_CALLE, DOM_NUMERO, DOM_PISO, DOM
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_DOM_CODIGO, decimal Original_LOC_CODIGO, decimal Original_PROV_CODIGO, string Original_DOM_CALLE, string Original_DOM_NUMERO, string Original_DOM_PISO, string Original_DOM_DEPARTAMENTO) {
+        public virtual int Delete(decimal Original_DOM_CODIGO, decimal Original_LOC_CODIGO, decimal Original_PROVE_CODIGO, string Original_DOM_CALLE, string Original_DOM_NUMERO, string Original_DOM_PISO, string Original_DOM_DEPARTAMENTO) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_DOM_CODIGO));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_LOC_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_PROV_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_PROVE_CODIGO));
             if ((Original_DOM_CALLE == null)) {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
@@ -2845,9 +3255,9 @@ SELECT DOM_CODIGO, LOC_CODIGO, PROV_CODIGO, DOM_CALLE, DOM_NUMERO, DOM_PISO, DOM
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(decimal LOC_CODIGO, decimal PROV_CODIGO, string DOM_CALLE, string DOM_NUMERO, string DOM_PISO, string DOM_DEPARTAMENTO) {
+        public virtual int Insert(decimal LOC_CODIGO, decimal PROVE_CODIGO, string DOM_CALLE, string DOM_NUMERO, string DOM_PISO, string DOM_DEPARTAMENTO) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(LOC_CODIGO));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(PROV_CODIGO));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(PROVE_CODIGO));
             if ((DOM_CALLE == null)) {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
@@ -2891,9 +3301,9 @@ SELECT DOM_CODIGO, LOC_CODIGO, PROV_CODIGO, DOM_CALLE, DOM_NUMERO, DOM_PISO, DOM
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal LOC_CODIGO, decimal PROV_CODIGO, string DOM_CALLE, string DOM_NUMERO, string DOM_PISO, string DOM_DEPARTAMENTO, decimal Original_DOM_CODIGO, decimal Original_LOC_CODIGO, decimal Original_PROV_CODIGO, string Original_DOM_CALLE, string Original_DOM_NUMERO, string Original_DOM_PISO, string Original_DOM_DEPARTAMENTO, decimal DOM_CODIGO) {
+        public virtual int Update(decimal LOC_CODIGO, decimal PROVE_CODIGO, string DOM_CALLE, string DOM_NUMERO, string DOM_PISO, string DOM_DEPARTAMENTO, decimal Original_DOM_CODIGO, decimal Original_LOC_CODIGO, decimal Original_PROVE_CODIGO, string Original_DOM_CALLE, string Original_DOM_NUMERO, string Original_DOM_PISO, string Original_DOM_DEPARTAMENTO, decimal DOM_CODIGO) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(LOC_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(PROV_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(PROVE_CODIGO));
             if ((DOM_CALLE == null)) {
                 this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
@@ -2920,7 +3330,7 @@ SELECT DOM_CODIGO, LOC_CODIGO, PROV_CODIGO, DOM_CALLE, DOM_NUMERO, DOM_PISO, DOM
             }
             this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_DOM_CODIGO));
             this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(Original_LOC_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_PROV_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_PROVE_CODIGO));
             if ((Original_DOM_CALLE == null)) {
                 this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
@@ -2973,8 +3383,383 @@ SELECT DOM_CODIGO, LOC_CODIGO, PROV_CODIGO, DOM_CALLE, DOM_NUMERO, DOM_PISO, DOM
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal LOC_CODIGO, decimal PROV_CODIGO, string DOM_CALLE, string DOM_NUMERO, string DOM_PISO, string DOM_DEPARTAMENTO, decimal Original_DOM_CODIGO, decimal Original_LOC_CODIGO, decimal Original_PROV_CODIGO, string Original_DOM_CALLE, string Original_DOM_NUMERO, string Original_DOM_PISO, string Original_DOM_DEPARTAMENTO) {
-            return this.Update(LOC_CODIGO, PROV_CODIGO, DOM_CALLE, DOM_NUMERO, DOM_PISO, DOM_DEPARTAMENTO, Original_DOM_CODIGO, Original_LOC_CODIGO, Original_PROV_CODIGO, Original_DOM_CALLE, Original_DOM_NUMERO, Original_DOM_PISO, Original_DOM_DEPARTAMENTO, Original_DOM_CODIGO);
+        public virtual int Update(decimal LOC_CODIGO, decimal PROVE_CODIGO, string DOM_CALLE, string DOM_NUMERO, string DOM_PISO, string DOM_DEPARTAMENTO, decimal Original_DOM_CODIGO, decimal Original_LOC_CODIGO, decimal Original_PROVE_CODIGO, string Original_DOM_CALLE, string Original_DOM_NUMERO, string Original_DOM_PISO, string Original_DOM_DEPARTAMENTO) {
+            return this.Update(LOC_CODIGO, PROVE_CODIGO, DOM_CALLE, DOM_NUMERO, DOM_PISO, DOM_DEPARTAMENTO, Original_DOM_CODIGO, Original_LOC_CODIGO, Original_PROVE_CODIGO, Original_DOM_CALLE, Original_DOM_NUMERO, Original_DOM_PISO, Original_DOM_DEPARTAMENTO, Original_DOM_CODIGO);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class SECTORESTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public SECTORESTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "SECTORES";
+            tableMapping.ColumnMappings.Add("SEC_CODIGO", "SEC_CODIGO");
+            tableMapping.ColumnMappings.Add("SEC_NOMBRE", "SEC_NOMBRE");
+            tableMapping.ColumnMappings.Add("SEC_DESCRIPCION", "SEC_DESCRIPCION");
+            tableMapping.ColumnMappings.Add("SEC_ABREVIATURA", "SEC_ABREVIATURA");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[SECTORES] WHERE (([SEC_CODIGO] = @Original_SEC_CODIGO) AND ((@IsNull_SEC_NOMBRE = 1 AND [SEC_NOMBRE] IS NULL) OR ([SEC_NOMBRE] = @Original_SEC_NOMBRE)) AND ((@IsNull_SEC_DESCRIPCION = 1 AND [SEC_DESCRIPCION] IS NULL) OR ([SEC_DESCRIPCION] = @Original_SEC_DESCRIPCION)) AND ((@IsNull_SEC_ABREVIATURA = 1 AND [SEC_ABREVIATURA] IS NULL) OR ([SEC_ABREVIATURA] = @Original_SEC_ABREVIATURA)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_ABREVIATURA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_ABREVIATURA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_ABREVIATURA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_ABREVIATURA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[SECTORES] ([SEC_NOMBRE], [SEC_DESCRIPCION], [SEC_ABREVIATURA]) VALUES (@SEC_NOMBRE, @SEC_DESCRIPCION, @SEC_ABREVIATURA);
+SELECT SEC_CODIGO, SEC_NOMBRE, SEC_DESCRIPCION, SEC_ABREVIATURA FROM SECTORES WHERE (SEC_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_ABREVIATURA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_ABREVIATURA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[SECTORES] SET [SEC_NOMBRE] = @SEC_NOMBRE, [SEC_DESCRIPCION] = @SEC_DESCRIPCION, [SEC_ABREVIATURA] = @SEC_ABREVIATURA WHERE (([SEC_CODIGO] = @Original_SEC_CODIGO) AND ((@IsNull_SEC_NOMBRE = 1 AND [SEC_NOMBRE] IS NULL) OR ([SEC_NOMBRE] = @Original_SEC_NOMBRE)) AND ((@IsNull_SEC_DESCRIPCION = 1 AND [SEC_DESCRIPCION] IS NULL) OR ([SEC_DESCRIPCION] = @Original_SEC_DESCRIPCION)) AND ((@IsNull_SEC_ABREVIATURA = 1 AND [SEC_ABREVIATURA] IS NULL) OR ([SEC_ABREVIATURA] = @Original_SEC_ABREVIATURA)));
+SELECT SEC_CODIGO, SEC_NOMBRE, SEC_DESCRIPCION, SEC_ABREVIATURA FROM SECTORES WHERE (SEC_CODIGO = @SEC_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_ABREVIATURA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_ABREVIATURA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_ABREVIATURA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_ABREVIATURA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_ABREVIATURA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_ABREVIATURA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString9;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT SEC_CODIGO, SEC_NOMBRE, SEC_DESCRIPCION, SEC_ABREVIATURA FROM dbo.SECTORES" +
+                "";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsProveedor.SECTORESDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsProveedor.SECTORESDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsProveedor.SECTORESDataTable dataTable = new dsProveedor.SECTORESDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsProveedor.SECTORESDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsProveedor dataSet) {
+            return this.Adapter.Update(dataSet, "SECTORES");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_SEC_CODIGO, string Original_SEC_NOMBRE, string Original_SEC_DESCRIPCION, string Original_SEC_ABREVIATURA) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_SEC_CODIGO));
+            if ((Original_SEC_NOMBRE == null)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_SEC_NOMBRE));
+            }
+            if ((Original_SEC_DESCRIPCION == null)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_SEC_DESCRIPCION));
+            }
+            if ((Original_SEC_ABREVIATURA == null)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_SEC_ABREVIATURA));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string SEC_NOMBRE, string SEC_DESCRIPCION, string SEC_ABREVIATURA) {
+            if ((SEC_NOMBRE == null)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(SEC_NOMBRE));
+            }
+            if ((SEC_DESCRIPCION == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(SEC_DESCRIPCION));
+            }
+            if ((SEC_ABREVIATURA == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(SEC_ABREVIATURA));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string SEC_NOMBRE, string SEC_DESCRIPCION, string SEC_ABREVIATURA, decimal Original_SEC_CODIGO, string Original_SEC_NOMBRE, string Original_SEC_DESCRIPCION, string Original_SEC_ABREVIATURA, decimal SEC_CODIGO) {
+            if ((SEC_NOMBRE == null)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(SEC_NOMBRE));
+            }
+            if ((SEC_DESCRIPCION == null)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(SEC_DESCRIPCION));
+            }
+            if ((SEC_ABREVIATURA == null)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(SEC_ABREVIATURA));
+            }
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(Original_SEC_CODIGO));
+            if ((Original_SEC_NOMBRE == null)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_SEC_NOMBRE));
+            }
+            if ((Original_SEC_DESCRIPCION == null)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_SEC_DESCRIPCION));
+            }
+            if ((Original_SEC_ABREVIATURA == null)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_SEC_ABREVIATURA));
+            }
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(SEC_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string SEC_NOMBRE, string SEC_DESCRIPCION, string SEC_ABREVIATURA, decimal Original_SEC_CODIGO, string Original_SEC_NOMBRE, string Original_SEC_DESCRIPCION, string Original_SEC_ABREVIATURA) {
+            return this.Update(SEC_NOMBRE, SEC_DESCRIPCION, SEC_ABREVIATURA, Original_SEC_CODIGO, Original_SEC_NOMBRE, Original_SEC_DESCRIPCION, Original_SEC_ABREVIATURA, Original_SEC_CODIGO);
         }
     }
     
@@ -3132,7 +3917,7 @@ SELECT LOC_CODIGO, PCIA_CODIGO, LOC_NOMBRE FROM LOCALIDADES WHERE (LOC_CODIGO = 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString6;
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString9;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3442,7 +4227,7 @@ SELECT PCIA_CODIGO, PCIA_NOMBRE FROM PROVINCIAS WHERE (PCIA_CODIGO = @PCIA_CODIG
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString6;
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString9;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3601,791 +4386,6 @@ SELECT PCIA_CODIGO, PCIA_NOMBRE FROM PROVINCIAS WHERE (PCIA_CODIGO = @PCIA_CODIG
     }
     
     /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class SECTORESTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public SECTORESTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "SECTORES";
-            tableMapping.ColumnMappings.Add("SEC_CODIGO", "SEC_CODIGO");
-            tableMapping.ColumnMappings.Add("SEC_NOMBRE", "SEC_NOMBRE");
-            tableMapping.ColumnMappings.Add("SEC_DESCRIPCION", "SEC_DESCRIPCION");
-            tableMapping.ColumnMappings.Add("SEC_ABREVIATURA", "SEC_ABREVIATURA");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[SECTORES] WHERE (([SEC_CODIGO] = @Original_SEC_CODIGO) AND ((@IsNull_SEC_NOMBRE = 1 AND [SEC_NOMBRE] IS NULL) OR ([SEC_NOMBRE] = @Original_SEC_NOMBRE)) AND ((@IsNull_SEC_DESCRIPCION = 1 AND [SEC_DESCRIPCION] IS NULL) OR ([SEC_DESCRIPCION] = @Original_SEC_DESCRIPCION)) AND ((@IsNull_SEC_ABREVIATURA = 1 AND [SEC_ABREVIATURA] IS NULL) OR ([SEC_ABREVIATURA] = @Original_SEC_ABREVIATURA)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_ABREVIATURA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_ABREVIATURA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_ABREVIATURA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_ABREVIATURA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[SECTORES] ([SEC_NOMBRE], [SEC_DESCRIPCION], [SEC_ABREVIATURA]) VALUES (@SEC_NOMBRE, @SEC_DESCRIPCION, @SEC_ABREVIATURA);
-SELECT SEC_CODIGO, SEC_NOMBRE, SEC_DESCRIPCION, SEC_ABREVIATURA FROM SECTORES WHERE (SEC_CODIGO = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_ABREVIATURA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_ABREVIATURA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[SECTORES] SET [SEC_NOMBRE] = @SEC_NOMBRE, [SEC_DESCRIPCION] = @SEC_DESCRIPCION, [SEC_ABREVIATURA] = @SEC_ABREVIATURA WHERE (([SEC_CODIGO] = @Original_SEC_CODIGO) AND ((@IsNull_SEC_NOMBRE = 1 AND [SEC_NOMBRE] IS NULL) OR ([SEC_NOMBRE] = @Original_SEC_NOMBRE)) AND ((@IsNull_SEC_DESCRIPCION = 1 AND [SEC_DESCRIPCION] IS NULL) OR ([SEC_DESCRIPCION] = @Original_SEC_DESCRIPCION)) AND ((@IsNull_SEC_ABREVIATURA = 1 AND [SEC_ABREVIATURA] IS NULL) OR ([SEC_ABREVIATURA] = @Original_SEC_ABREVIATURA)));
-SELECT SEC_CODIGO, SEC_NOMBRE, SEC_DESCRIPCION, SEC_ABREVIATURA FROM SECTORES WHERE (SEC_CODIGO = @SEC_CODIGO)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_ABREVIATURA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_ABREVIATURA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_ABREVIATURA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_ABREVIATURA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_ABREVIATURA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_ABREVIATURA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString6;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT SEC_CODIGO, SEC_NOMBRE, SEC_DESCRIPCION, SEC_ABREVIATURA FROM dbo.SECTORES" +
-                "";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsProveedor.SECTORESDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsProveedor.SECTORESDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsProveedor.SECTORESDataTable dataTable = new dsProveedor.SECTORESDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsProveedor.SECTORESDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsProveedor dataSet) {
-            return this.Adapter.Update(dataSet, "SECTORES");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_SEC_CODIGO, string Original_SEC_NOMBRE, string Original_SEC_DESCRIPCION, string Original_SEC_ABREVIATURA) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_SEC_CODIGO));
-            if ((Original_SEC_NOMBRE == null)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_SEC_NOMBRE));
-            }
-            if ((Original_SEC_DESCRIPCION == null)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_SEC_DESCRIPCION));
-            }
-            if ((Original_SEC_ABREVIATURA == null)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_SEC_ABREVIATURA));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string SEC_NOMBRE, string SEC_DESCRIPCION, string SEC_ABREVIATURA) {
-            if ((SEC_NOMBRE == null)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(SEC_NOMBRE));
-            }
-            if ((SEC_DESCRIPCION == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(SEC_DESCRIPCION));
-            }
-            if ((SEC_ABREVIATURA == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(SEC_ABREVIATURA));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string SEC_NOMBRE, string SEC_DESCRIPCION, string SEC_ABREVIATURA, decimal Original_SEC_CODIGO, string Original_SEC_NOMBRE, string Original_SEC_DESCRIPCION, string Original_SEC_ABREVIATURA, decimal SEC_CODIGO) {
-            if ((SEC_NOMBRE == null)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(SEC_NOMBRE));
-            }
-            if ((SEC_DESCRIPCION == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(SEC_DESCRIPCION));
-            }
-            if ((SEC_ABREVIATURA == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(SEC_ABREVIATURA));
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(Original_SEC_CODIGO));
-            if ((Original_SEC_NOMBRE == null)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_SEC_NOMBRE));
-            }
-            if ((Original_SEC_DESCRIPCION == null)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_SEC_DESCRIPCION));
-            }
-            if ((Original_SEC_ABREVIATURA == null)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_SEC_ABREVIATURA));
-            }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(SEC_CODIGO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string SEC_NOMBRE, string SEC_DESCRIPCION, string SEC_ABREVIATURA, decimal Original_SEC_CODIGO, string Original_SEC_NOMBRE, string Original_SEC_DESCRIPCION, string Original_SEC_ABREVIATURA) {
-            return this.Update(SEC_NOMBRE, SEC_DESCRIPCION, SEC_ABREVIATURA, Original_SEC_CODIGO, Original_SEC_NOMBRE, Original_SEC_DESCRIPCION, Original_SEC_ABREVIATURA, Original_SEC_CODIGO);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class PROVEEDORESTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public PROVEEDORESTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "PROVEEDORES";
-            tableMapping.ColumnMappings.Add("PROVE_CODIGO", "PROVE_CODIGO");
-            tableMapping.ColumnMappings.Add("SEC_CODIGO", "SEC_CODIGO");
-            tableMapping.ColumnMappings.Add("PROVE_RAZONSOCIAL", "PROVE_RAZONSOCIAL");
-            tableMapping.ColumnMappings.Add("PROVE_TELPRINCIPAL", "PROVE_TELPRINCIPAL");
-            tableMapping.ColumnMappings.Add("PROVE_TELALTERNATIVO", "PROVE_TELALTERNATIVO");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[PROVEEDORES] WHERE (([PROVE_CODIGO] = @Original_PROVE_CODIGO) AND ((@IsNull_SEC_CODIGO = 1 AND [SEC_CODIGO] IS NULL) OR ([SEC_CODIGO] = @Original_SEC_CODIGO)) AND ((@IsNull_PROVE_RAZONSOCIAL = 1 AND [PROVE_RAZONSOCIAL] IS NULL) OR ([PROVE_RAZONSOCIAL] = @Original_PROVE_RAZONSOCIAL)) AND ((@IsNull_PROVE_TELPRINCIPAL = 1 AND [PROVE_TELPRINCIPAL] IS NULL) OR ([PROVE_TELPRINCIPAL] = @Original_PROVE_TELPRINCIPAL)) AND ((@IsNull_PROVE_TELALTERNATIVO = 1 AND [PROVE_TELALTERNATIVO] IS NULL) OR ([PROVE_TELALTERNATIVO] = @Original_PROVE_TELALTERNATIVO)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PROVE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PROVE_RAZONSOCIAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_RAZONSOCIAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_RAZONSOCIAL", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_RAZONSOCIAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PROVE_TELPRINCIPAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELPRINCIPAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_TELPRINCIPAL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELPRINCIPAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PROVE_TELALTERNATIVO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELALTERNATIVO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_TELALTERNATIVO", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELALTERNATIVO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[PROVEEDORES] ([SEC_CODIGO], [PROVE_RAZONSOCIAL], [PROVE_TELPRINCIPAL], [PROVE_TELALTERNATIVO]) VALUES (@SEC_CODIGO, @PROVE_RAZONSOCIAL, @PROVE_TELPRINCIPAL, @PROVE_TELALTERNATIVO);
-SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TELALTERNATIVO FROM PROVEEDORES WHERE (PROVE_CODIGO = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROVE_RAZONSOCIAL", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_RAZONSOCIAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROVE_TELPRINCIPAL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELPRINCIPAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROVE_TELALTERNATIVO", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELALTERNATIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[PROVEEDORES] SET [SEC_CODIGO] = @SEC_CODIGO, [PROVE_RAZONSOCIAL] = @PROVE_RAZONSOCIAL, [PROVE_TELPRINCIPAL] = @PROVE_TELPRINCIPAL, [PROVE_TELALTERNATIVO] = @PROVE_TELALTERNATIVO WHERE (([PROVE_CODIGO] = @Original_PROVE_CODIGO) AND ((@IsNull_SEC_CODIGO = 1 AND [SEC_CODIGO] IS NULL) OR ([SEC_CODIGO] = @Original_SEC_CODIGO)) AND ((@IsNull_PROVE_RAZONSOCIAL = 1 AND [PROVE_RAZONSOCIAL] IS NULL) OR ([PROVE_RAZONSOCIAL] = @Original_PROVE_RAZONSOCIAL)) AND ((@IsNull_PROVE_TELPRINCIPAL = 1 AND [PROVE_TELPRINCIPAL] IS NULL) OR ([PROVE_TELPRINCIPAL] = @Original_PROVE_TELPRINCIPAL)) AND ((@IsNull_PROVE_TELALTERNATIVO = 1 AND [PROVE_TELALTERNATIVO] IS NULL) OR ([PROVE_TELALTERNATIVO] = @Original_PROVE_TELALTERNATIVO)));
-SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TELALTERNATIVO FROM PROVEEDORES WHERE (PROVE_CODIGO = @PROVE_CODIGO)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROVE_RAZONSOCIAL", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_RAZONSOCIAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROVE_TELPRINCIPAL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELPRINCIPAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROVE_TELALTERNATIVO", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELALTERNATIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PROVE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PROVE_RAZONSOCIAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_RAZONSOCIAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_RAZONSOCIAL", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_RAZONSOCIAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PROVE_TELPRINCIPAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELPRINCIPAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_TELPRINCIPAL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELPRINCIPAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PROVE_TELALTERNATIVO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELALTERNATIVO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PROVE_TELALTERNATIVO", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PROVE_TELALTERNATIVO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PROVE_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "PROVE_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString6;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TEL" +
-                "ALTERNATIVO FROM dbo.PROVEEDORES";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsProveedor.PROVEEDORESDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsProveedor.PROVEEDORESDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsProveedor.PROVEEDORESDataTable dataTable = new dsProveedor.PROVEEDORESDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsProveedor.PROVEEDORESDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsProveedor dataSet) {
-            return this.Adapter.Update(dataSet, "PROVEEDORES");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_PROVE_CODIGO, global::System.Nullable<decimal> Original_SEC_CODIGO, string Original_PROVE_RAZONSOCIAL, string Original_PROVE_TELPRINCIPAL, string Original_PROVE_TELALTERNATIVO) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_PROVE_CODIGO));
-            if ((Original_SEC_CODIGO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_SEC_CODIGO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PROVE_RAZONSOCIAL == null)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_PROVE_RAZONSOCIAL));
-            }
-            if ((Original_PROVE_TELPRINCIPAL == null)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_PROVE_TELPRINCIPAL));
-            }
-            if ((Original_PROVE_TELALTERNATIVO == null)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_PROVE_TELALTERNATIVO));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<decimal> SEC_CODIGO, string PROVE_RAZONSOCIAL, string PROVE_TELPRINCIPAL, string PROVE_TELALTERNATIVO) {
-            if ((SEC_CODIGO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(SEC_CODIGO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((PROVE_RAZONSOCIAL == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(PROVE_RAZONSOCIAL));
-            }
-            if ((PROVE_TELPRINCIPAL == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(PROVE_TELPRINCIPAL));
-            }
-            if ((PROVE_TELALTERNATIVO == null)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(PROVE_TELALTERNATIVO));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<decimal> SEC_CODIGO, string PROVE_RAZONSOCIAL, string PROVE_TELPRINCIPAL, string PROVE_TELALTERNATIVO, decimal Original_PROVE_CODIGO, global::System.Nullable<decimal> Original_SEC_CODIGO, string Original_PROVE_RAZONSOCIAL, string Original_PROVE_TELPRINCIPAL, string Original_PROVE_TELALTERNATIVO, decimal PROVE_CODIGO) {
-            if ((SEC_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(SEC_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((PROVE_RAZONSOCIAL == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(PROVE_RAZONSOCIAL));
-            }
-            if ((PROVE_TELPRINCIPAL == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(PROVE_TELPRINCIPAL));
-            }
-            if ((PROVE_TELALTERNATIVO == null)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(PROVE_TELALTERNATIVO));
-            }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(Original_PROVE_CODIGO));
-            if ((Original_SEC_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_SEC_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PROVE_RAZONSOCIAL == null)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_PROVE_RAZONSOCIAL));
-            }
-            if ((Original_PROVE_TELPRINCIPAL == null)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_PROVE_TELPRINCIPAL));
-            }
-            if ((Original_PROVE_TELALTERNATIVO == null)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_PROVE_TELALTERNATIVO));
-            }
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(PROVE_CODIGO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<decimal> SEC_CODIGO, string PROVE_RAZONSOCIAL, string PROVE_TELPRINCIPAL, string PROVE_TELALTERNATIVO, decimal Original_PROVE_CODIGO, global::System.Nullable<decimal> Original_SEC_CODIGO, string Original_PROVE_RAZONSOCIAL, string Original_PROVE_TELPRINCIPAL, string Original_PROVE_TELALTERNATIVO) {
-            return this.Update(SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TELALTERNATIVO, Original_PROVE_CODIGO, Original_SEC_CODIGO, Original_PROVE_RAZONSOCIAL, Original_PROVE_TELPRINCIPAL, Original_PROVE_TELALTERNATIVO, Original_PROVE_CODIGO);
-        }
-    }
-    
-    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -4398,15 +4398,15 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
         
         private UpdateOrderOption _updateOrder;
         
+        private PROVEEDORESTableAdapter _pROVEEDORESTableAdapter;
+        
         private DOMICILIOSTableAdapter _dOMICILIOSTableAdapter;
+        
+        private SECTORESTableAdapter _sECTORESTableAdapter;
         
         private LOCALIDADESTableAdapter _lOCALIDADESTableAdapter;
         
         private PROVINCIASTableAdapter _pROVINCIASTableAdapter;
-        
-        private SECTORESTableAdapter _sECTORESTableAdapter;
-        
-        private PROVEEDORESTableAdapter _pROVEEDORESTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -4426,12 +4426,38 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
             "", "System.Drawing.Design.UITypeEditor")]
+        public PROVEEDORESTableAdapter PROVEEDORESTableAdapter {
+            get {
+                return this._pROVEEDORESTableAdapter;
+            }
+            set {
+                this._pROVEEDORESTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
         public DOMICILIOSTableAdapter DOMICILIOSTableAdapter {
             get {
                 return this._dOMICILIOSTableAdapter;
             }
             set {
                 this._dOMICILIOSTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public SECTORESTableAdapter SECTORESTableAdapter {
+            get {
+                return this._sECTORESTableAdapter;
+            }
+            set {
+                this._sECTORESTableAdapter = value;
             }
         }
         
@@ -4462,32 +4488,6 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
-        public SECTORESTableAdapter SECTORESTableAdapter {
-            get {
-                return this._sECTORESTableAdapter;
-            }
-            set {
-                this._sECTORESTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
-        public PROVEEDORESTableAdapter PROVEEDORESTableAdapter {
-            get {
-                return this._pROVEEDORESTableAdapter;
-            }
-            set {
-                this._pROVEEDORESTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -4504,9 +4504,17 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
                 if ((this._connection != null)) {
                     return this._connection;
                 }
+                if (((this._pROVEEDORESTableAdapter != null) 
+                            && (this._pROVEEDORESTableAdapter.Connection != null))) {
+                    return this._pROVEEDORESTableAdapter.Connection;
+                }
                 if (((this._dOMICILIOSTableAdapter != null) 
                             && (this._dOMICILIOSTableAdapter.Connection != null))) {
                     return this._dOMICILIOSTableAdapter.Connection;
+                }
+                if (((this._sECTORESTableAdapter != null) 
+                            && (this._sECTORESTableAdapter.Connection != null))) {
+                    return this._sECTORESTableAdapter.Connection;
                 }
                 if (((this._lOCALIDADESTableAdapter != null) 
                             && (this._lOCALIDADESTableAdapter.Connection != null))) {
@@ -4515,14 +4523,6 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
                 if (((this._pROVINCIASTableAdapter != null) 
                             && (this._pROVINCIASTableAdapter.Connection != null))) {
                     return this._pROVINCIASTableAdapter.Connection;
-                }
-                if (((this._sECTORESTableAdapter != null) 
-                            && (this._sECTORESTableAdapter.Connection != null))) {
-                    return this._sECTORESTableAdapter.Connection;
-                }
-                if (((this._pROVEEDORESTableAdapter != null) 
-                            && (this._pROVEEDORESTableAdapter.Connection != null))) {
-                    return this._pROVEEDORESTableAdapter.Connection;
                 }
                 return null;
             }
@@ -4536,19 +4536,19 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
+                if ((this._pROVEEDORESTableAdapter != null)) {
+                    count = (count + 1);
+                }
                 if ((this._dOMICILIOSTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._sECTORESTableAdapter != null)) {
                     count = (count + 1);
                 }
                 if ((this._lOCALIDADESTableAdapter != null)) {
                     count = (count + 1);
                 }
                 if ((this._pROVINCIASTableAdapter != null)) {
-                    count = (count + 1);
-                }
-                if ((this._sECTORESTableAdapter != null)) {
-                    count = (count + 1);
-                }
-                if ((this._pROVEEDORESTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -4561,15 +4561,6 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateUpdatedRows(dsProveedor dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._sECTORESTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SECTORES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._sECTORESTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._pROVINCIASTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.PROVINCIAS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -4579,12 +4570,12 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._pROVEEDORESTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.PROVEEDORES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._sECTORESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SECTORES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._pROVEEDORESTableAdapter.Update(updatedRows));
+                    result = (result + this._sECTORESTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -4594,6 +4585,15 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._lOCALIDADESTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._pROVEEDORESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.PROVEEDORES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._pROVEEDORESTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -4615,14 +4615,6 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateInsertedRows(dsProveedor dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._sECTORESTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SECTORES.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._sECTORESTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._pROVINCIASTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.PROVINCIAS.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -4631,11 +4623,11 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._pROVEEDORESTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.PROVEEDORES.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._sECTORESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SECTORES.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._pROVEEDORESTableAdapter.Update(addedRows));
+                    result = (result + this._sECTORESTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -4644,6 +4636,14 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._lOCALIDADESTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._pROVEEDORESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.PROVEEDORES.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._pROVEEDORESTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -4672,14 +4672,6 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._lOCALIDADESTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.LOCALIDADES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._lOCALIDADESTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._pROVEEDORESTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.PROVEEDORES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -4688,11 +4680,11 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._pROVINCIASTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.PROVINCIAS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._lOCALIDADESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.LOCALIDADES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._pROVINCIASTableAdapter.Update(deletedRows));
+                    result = (result + this._lOCALIDADESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -4701,6 +4693,14 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._sECTORESTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._pROVINCIASTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.PROVINCIAS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._pROVINCIASTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -4741,8 +4741,18 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
+            if (((this._pROVEEDORESTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._pROVEEDORESTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
+                        "sma cadena de conexión.");
+            }
             if (((this._dOMICILIOSTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._dOMICILIOSTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
+                        "sma cadena de conexión.");
+            }
+            if (((this._sECTORESTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._sECTORESTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
                         "sma cadena de conexión.");
             }
@@ -4753,16 +4763,6 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
             }
             if (((this._pROVINCIASTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._pROVINCIASTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
-                        "sma cadena de conexión.");
-            }
-            if (((this._sECTORESTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._sECTORESTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
-                        "sma cadena de conexión.");
-            }
-            if (((this._pROVEEDORESTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._pROVEEDORESTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
                         "sma cadena de conexión.");
             }
@@ -4798,6 +4798,15 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
             try {
                 // ---- Prepare for update -----------
                 //
+                if ((this._pROVEEDORESTableAdapter != null)) {
+                    revertConnections.Add(this._pROVEEDORESTableAdapter, this._pROVEEDORESTableAdapter.Connection);
+                    this._pROVEEDORESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._pROVEEDORESTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._pROVEEDORESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._pROVEEDORESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._pROVEEDORESTableAdapter.Adapter);
+                    }
+                }
                 if ((this._dOMICILIOSTableAdapter != null)) {
                     revertConnections.Add(this._dOMICILIOSTableAdapter, this._dOMICILIOSTableAdapter.Connection);
                     this._dOMICILIOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -4805,6 +4814,15 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
                     if (this._dOMICILIOSTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._dOMICILIOSTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._dOMICILIOSTableAdapter.Adapter);
+                    }
+                }
+                if ((this._sECTORESTableAdapter != null)) {
+                    revertConnections.Add(this._sECTORESTableAdapter, this._sECTORESTableAdapter.Connection);
+                    this._sECTORESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._sECTORESTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._sECTORESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._sECTORESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._sECTORESTableAdapter.Adapter);
                     }
                 }
                 if ((this._lOCALIDADESTableAdapter != null)) {
@@ -4823,24 +4841,6 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
                     if (this._pROVINCIASTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._pROVINCIASTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._pROVINCIASTableAdapter.Adapter);
-                    }
-                }
-                if ((this._sECTORESTableAdapter != null)) {
-                    revertConnections.Add(this._sECTORESTableAdapter, this._sECTORESTableAdapter.Connection);
-                    this._sECTORESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._sECTORESTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._sECTORESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._sECTORESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._sECTORESTableAdapter.Adapter);
-                    }
-                }
-                if ((this._pROVEEDORESTableAdapter != null)) {
-                    revertConnections.Add(this._pROVEEDORESTableAdapter, this._pROVEEDORESTableAdapter.Connection);
-                    this._pROVEEDORESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._pROVEEDORESTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._pROVEEDORESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._pROVEEDORESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._pROVEEDORESTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -4901,9 +4901,17 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
                 if (workConnOpened) {
                     workConnection.Close();
                 }
+                if ((this._pROVEEDORESTableAdapter != null)) {
+                    this._pROVEEDORESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._pROVEEDORESTableAdapter]));
+                    this._pROVEEDORESTableAdapter.Transaction = null;
+                }
                 if ((this._dOMICILIOSTableAdapter != null)) {
                     this._dOMICILIOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._dOMICILIOSTableAdapter]));
                     this._dOMICILIOSTableAdapter.Transaction = null;
+                }
+                if ((this._sECTORESTableAdapter != null)) {
+                    this._sECTORESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._sECTORESTableAdapter]));
+                    this._sECTORESTableAdapter.Transaction = null;
                 }
                 if ((this._lOCALIDADESTableAdapter != null)) {
                     this._lOCALIDADESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._lOCALIDADESTableAdapter]));
@@ -4912,14 +4920,6 @@ SELECT PROVE_CODIGO, SEC_CODIGO, PROVE_RAZONSOCIAL, PROVE_TELPRINCIPAL, PROVE_TE
                 if ((this._pROVINCIASTableAdapter != null)) {
                     this._pROVINCIASTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._pROVINCIASTableAdapter]));
                     this._pROVINCIASTableAdapter.Transaction = null;
-                }
-                if ((this._sECTORESTableAdapter != null)) {
-                    this._sECTORESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._sECTORESTableAdapter]));
-                    this._sECTORESTableAdapter.Transaction = null;
-                }
-                if ((this._pROVEEDORESTableAdapter != null)) {
-                    this._pROVEEDORESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._pROVEEDORESTableAdapter]));
-                    this._pROVEEDORESTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

@@ -193,20 +193,11 @@ namespace GyCAP.UI.Soporte
 
             //Control de los textbox
             List<string> datos = new List<string>();
-            if (txtNombre.Text == string.Empty){datos.Add("Nombre");}
-            if (txtDescripcion.Text == string.Empty)
-            {
-                datos.Add("Descripción");
-                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
-            }
-
-            //Control de espacios en blanco
-            List<string> espacios = new List<string>();
-            if (txtNombre.Text.Trim().Length == 0) { datos.Add("Nombre"); }
+            if (txtNombre.Text.Trim().Length == 0){datos.Add("Nombre");}
             if (txtDescripcion.Text.Trim().Length == 0)
             {
                 datos.Add("Descripción");
-                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.SoloEspacios, espacios);
+                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
             }
 
             return erroresValidacion;
@@ -413,6 +404,10 @@ namespace GyCAP.UI.Soporte
                         
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
+                    }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {

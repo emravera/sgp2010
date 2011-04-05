@@ -266,19 +266,12 @@ namespace GyCAP.UI.Soporte
 
             //Control de los blancos de los textbox
             List<string> datos = new List<string>();
-            if (txtNombre.Text == string.Empty)
+            if (txtNombre.Text.Trim().Length == 0)
             {
                 datos.Add("Nombre");
                 erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
             }
 
-            //Control de espacios en textbox
-            List<string> espacios = new List<string>();
-            if (txtNombre.Text.Trim().Length == 0)
-            {
-                espacios.Add("Nombre");
-                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.SoloEspacios, espacios);
-            }
             return erroresValidacion;
         }
 

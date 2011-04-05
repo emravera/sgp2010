@@ -23,6 +23,18 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
+        public static void ObtenerLocalidades(int codigoProvincia, DataTable dtLocalidades)
+        {
+            string sql = @"SELECT loc_codigo, pcia_codigo, loc_nombre FROM LOCALIDADES
+                           WHERE pcia_codigo=@p0";
+            object[] Parametros = { codigoProvincia };
+
+            try
+            {
+                DB.FillDataTable(dtLocalidades, sql, Parametros);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
         public static void ObtenerLocalidades(object nombre, object codProvincia, DataTable dtLocalidades)
         {
             string sql = "SELECT loc_codigo, pcia_codigo, loc_nombre FROM LOCALIDADES WHERE 1=1";
