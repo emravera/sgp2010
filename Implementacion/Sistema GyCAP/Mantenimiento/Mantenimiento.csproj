@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{6A2EB4DA-E737-466E-A7A6-9FD238F0AF4E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -57,6 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmAverias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAverias.Designer.cs">
+      <DependentUpon>frmAverias.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmRegistrarMantenimiento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +89,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAverias.resx">
+      <DependentUpon>frmAverias.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmRegistrarMantenimiento.resx">
       <DependentUpon>frmRegistrarMantenimiento.cs</DependentUpon>
       <SubType>Designer</SubType>
