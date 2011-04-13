@@ -305,6 +305,7 @@ namespace GyCAP.UI.GestionStock
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcUbicacionStock.SelectedTab = tpBuscar;
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
                     txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
