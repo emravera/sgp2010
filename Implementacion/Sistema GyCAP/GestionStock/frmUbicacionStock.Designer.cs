@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -79,6 +80,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tcUbicacionStock = new System.Windows.Forms.TabControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.tsMenu.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.tpDatos.SuspendLayout();
@@ -91,6 +93,7 @@
             this.groupBox1.SuspendLayout();
             this.tcUbicacionStock.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // txtCodigo
@@ -339,6 +342,7 @@
             // 
             // txtUbicacionFisica
             // 
+            this.txtUbicacionFisica.CausesValidation = false;
             this.txtUbicacionFisica.Location = new System.Drawing.Point(316, 188);
             this.txtUbicacionFisica.MaxLength = 200;
             this.txtUbicacionFisica.Name = "txtUbicacionFisica";
@@ -349,6 +353,7 @@
             // 
             // txtDescripcion
             // 
+            this.txtDescripcion.CausesValidation = false;
             this.txtDescripcion.Location = new System.Drawing.Point(15, 188);
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
@@ -359,6 +364,7 @@
             // 
             // nudCantidadVirtual
             // 
+            this.nudCantidadVirtual.CausesValidation = false;
             this.nudCantidadVirtual.DecimalPlaces = 3;
             this.nudCantidadVirtual.Increment = new decimal(new int[] {
             1,
@@ -379,6 +385,7 @@
             // 
             // nudCantidadReal
             // 
+            this.nudCantidadReal.CausesValidation = false;
             this.nudCantidadReal.DecimalPlaces = 3;
             this.nudCantidadReal.Increment = new decimal(new int[] {
             1,
@@ -399,6 +406,7 @@
             // 
             // cboPadre
             // 
+            this.cboPadre.CausesValidation = false;
             this.cboPadre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPadre.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboPadre.FormattingEnabled = true;
@@ -496,6 +504,7 @@
             // 
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
+            this.dgvLista.CausesValidation = false;
             this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLista.Location = new System.Drawing.Point(9, 23);
             this.dgvLista.MultiSelect = false;
@@ -506,7 +515,6 @@
             this.dgvLista.Size = new System.Drawing.Size(591, 249);
             this.dgvLista.TabIndex = 6;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
-            this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
             // tpBuscar
@@ -543,6 +551,7 @@
             // 
             // cboContenidoBuscar
             // 
+            this.cboContenidoBuscar.CausesValidation = false;
             this.cboContenidoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboContenidoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboContenidoBuscar.FormattingEnabled = true;
@@ -562,6 +571,7 @@
             // 
             // txtCodigoBuscar
             // 
+            this.txtCodigoBuscar.CausesValidation = false;
             this.txtCodigoBuscar.Location = new System.Drawing.Point(62, 56);
             this.txtCodigoBuscar.MaxLength = 80;
             this.txtCodigoBuscar.Name = "txtCodigoBuscar";
@@ -570,6 +580,7 @@
             // 
             // cboTipoBuscar
             // 
+            this.cboTipoBuscar.CausesValidation = false;
             this.cboTipoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTipoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboTipoBuscar.FormattingEnabled = true;
@@ -598,6 +609,7 @@
             // 
             // cboEstadoBuscar
             // 
+            this.cboEstadoBuscar.CausesValidation = false;
             this.cboEstadoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboEstadoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboEstadoBuscar.FormattingEnabled = true;
@@ -630,6 +642,7 @@
             // 
             // txtNombreBuscar
             // 
+            this.txtNombreBuscar.CausesValidation = false;
             this.txtNombreBuscar.Location = new System.Drawing.Point(62, 22);
             this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
@@ -679,6 +692,11 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(627, 448);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
+            // errorProvider
+            // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
+            // 
             // frmUbicacionStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -708,6 +726,7 @@
             this.tcUbicacionStock.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -765,5 +784,6 @@
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboContenidoStock;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboContenidoBuscar;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

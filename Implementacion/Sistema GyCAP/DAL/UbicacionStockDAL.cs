@@ -150,10 +150,24 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
-        public static bool EsUbicacionStock(string codigo, string nombre)
+        public static bool EsUbicacionStock(string codigo)
         {
-            string sql = "SELECT count(ustck_numero) FROM UBICACIONES_STOCK WHERE ustck_codigo = @p0 AND ustck_nombre = @p1";
-            object[] parametros = { codigo, nombre };
+            string sql = "SELECT count(ustck_numero) FROM UBICACIONES_STOCK WHERE ustck_codigo = @p0";
+            object[] parametros = { codigo };
+
+            try
+            {
+                int resultado = Convert.ToInt32(DB.executeScalar(sql, parametros, null));
+                if (resultado == 0) { return false; }
+                else { return true; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static bool EsUbicacionStock(string codigo, int numero)
+        {
+            string sql = "SELECT count(ustck_numero) FROM UBICACIONES_STOCK WHERE ustck_codigo = @p0 AND ustck_numero <> @p1";
+            object[] parametros = { codigo, numero };
 
             try
             {
