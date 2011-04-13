@@ -150,12 +150,7 @@ namespace GyCAP.UI.GestionStock
         private void btnModificar_Click(object sender, EventArgs e)
         {
             SetInterface(estadoUI.modificar);
-        }
-
-        private void dgvLista_DoubleClick(object sender, EventArgs e)
-        {
-            btnConsultar.PerformClick();
-        }
+        }        
 
         #endregion
 
@@ -163,15 +158,15 @@ namespace GyCAP.UI.GestionStock
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            List<string> validacion = new List<string>();
-            if (txtCodigo.Text == string.Empty) { validacion.Add("Código"); }
-            if (txtNombre.Text == string.Empty) { validacion.Add("Nombre"); }
-            if (cboUnidadMedida.GetSelectedIndex() == -1) { validacion.Add("Unidad de medida"); }
-            if (cboEstado.GetSelectedIndex() == -1) { validacion.Add("Estado"); }
-            if (cboTipoUbicacion.GetSelectedIndex() == -1) { validacion.Add("Tipo"); }
-            if (cboContenidoStock.GetSelectedIndex() == -1) { validacion.Add("Contenido"); }
+            /*List<ItemValidacion> validacion = new List<ItemValidacion>();
+            if (string.IsNullOrEmpty(txtCodigo.Text.Trim())) { validacion.Add(new ItemValidacion(MensajesABM.Validaciones.CompletarDatos, "Código")); }
+            if (string.IsNullOrEmpty(txtNombre.Text.Trim())) { validacion.Add(new ItemValidacion(MensajesABM.Validaciones.CompletarDatos, "Nombre")); }
+            if (cboUnidadMedida.GetSelectedIndex() == -1) { validacion.Add(new ItemValidacion(MensajesABM.Validaciones.Seleccion, "Unidad de medida")); }
+            if (cboEstado.GetSelectedIndex() == -1) { validacion.Add(new ItemValidacion(MensajesABM.Validaciones.Seleccion, "Estado")); }
+            if (cboTipoUbicacion.GetSelectedIndex() == -1) { validacion.Add(new ItemValidacion(MensajesABM.Validaciones.Seleccion, "Tipo")); }
+            if (cboContenidoStock.GetSelectedIndex() == -1) { validacion.Add(new ItemValidacion(MensajesABM.Validaciones.Seleccion, "Contenido")); }*/
 
-            if (validacion.Count == 0)
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))//validacion.Count == 0)
             {
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
@@ -280,7 +275,7 @@ namespace GyCAP.UI.GestionStock
             }
             else
             {
-                MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.CompletarDatos, validacion), this.Text);
+                //MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(validacion), this.Text);
             }
         }
 
@@ -295,7 +290,7 @@ namespace GyCAP.UI.GestionStock
                 case estadoUI.inicio:
                     bool hayDatos;
 
-                    if (dsStock.UBICACIONES_STOCK.Rows.Count == 0)
+                    if (dvUbicaciones.Count == 0)
                     {
                         hayDatos = false;
                     }

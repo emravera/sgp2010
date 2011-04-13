@@ -23,7 +23,7 @@ namespace GyCAP.BLL
         
         public static void Insertar(Entidades.UbicacionStock ubicacion)
         {
-            if (DAL.UbicacionStockDAL.EsUbicacionStock(ubicacion.Codigo, ubicacion.Nombre)) { throw new Entidades.Excepciones.ElementoExistenteException(); }
+            if (DAL.UbicacionStockDAL.EsUbicacionStock(ubicacion.Codigo)) { throw new Entidades.Excepciones.ElementoExistenteException(); }
             DAL.UbicacionStockDAL.Insertar(ubicacion);
         }
         
@@ -35,6 +35,7 @@ namespace GyCAP.BLL
 
         public static void Actualizar(Entidades.UbicacionStock ubicacionStock)
         {
+            if(DAL.UbicacionStockDAL.EsUbicacionStock(ubicacionStock.Codigo, ubicacionStock.Numero)) { throw new Entidades.Excepciones.ElementoExistenteException(); }
             DAL.UbicacionStockDAL.Actualizar(ubicacionStock);
         }
 

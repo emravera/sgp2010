@@ -9,6 +9,30 @@ using System.Windows.Forms;
 
 namespace GyCAP.Entidades.Mensajes
 {
+    public class ItemValidacion
+    {
+        private MensajesABM.Validaciones tipoValidacion;
+
+        public MensajesABM.Validaciones TipoValidacion
+        {
+            get { return tipoValidacion; }
+            set { tipoValidacion = value; }
+        }
+        private string dato;
+
+        public string Dato
+        {
+            get { return dato; }
+            set { dato = value; }
+        }
+
+        public ItemValidacion(MensajesABM.Validaciones validacion, string datoValidar)
+        {
+            tipoValidacion = validacion;
+            dato = datoValidar;
+        }
+    }
+    
     public class MensajesABM
     {
         //Los siguientes son metodos que muestran mensajes estandares para los formularios de ABM
@@ -27,27 +51,55 @@ namespace GyCAP.Entidades.Mensajes
             string lista = string.Empty;
             
             switch(validacion)
+            {
+                case Validaciones.Seleccion:
+                    foreach (string dato in datos)
+                    {
+                        lista = lista + "- " + dato + "\n";
+                    }
+                    
+                    mensaje= mensaje + "\nDebe seleccionar un elemento en las siguientes listas:\n" + lista;
+                    break;
+
+                case Validaciones.CompletarDatos:
+                    foreach (string dato in datos)
+                    {
+                        lista = lista + "- " + dato + "\n";
+                    }
+                    mensaje = mensaje + "\nLos siguientes datos están vacíos o completados con espacios en blanco:\n" + lista;     
+                    break;
+              }
+                        
+            return mensaje;
+        }
+
+        public static string EscribirValidacion(List<ItemValidacion> datos)
+        {
+            string mensaje = string.Empty;
+            string listaCompletar = string.Empty;
+            string listaSeleccionar = string.Empty;
+            string listaEspacios = string.Empty;
+
+            foreach (ItemValidacion item in datos)
+            {
+                switch (item.TipoValidacion)
                 {
                     case Validaciones.Seleccion:
-                        foreach (string dato in datos)
-                        {
-                            lista = lista + "- " + dato + "\n";
-                        }
-                        
-                        mensaje= mensaje + "\n Debe seleccionar un elemento en los siguientes combos:\n" + lista;
+                        listaSeleccionar += "- " + item.Dato + "\n";                        
                         break;
-
                     case Validaciones.CompletarDatos:
-                        foreach (string dato in datos)
-                        {
-                            lista = lista + "- " + dato + "\n";
-                        }
-                        mensaje = mensaje + "\n Los siguientes datos están vacios o completados con espacios en blanco:\n" + lista;
-     
+                        listaCompletar+= "- " + item.Dato + "\n";
                         break;
+                    case Validaciones.SoloEspacios:
+                        listaEspacios += "- " + item.Dato + "\n";
+                        break;
+                }
+            }
+            
+            if(!string.IsNullOrEmpty(listaSeleccionar)) { mensaje += "Debe seleccionar un elemento en las siguientes listas:\n" + listaSeleccionar; }
+            if(!string.IsNullOrEmpty(listaCompletar)) { mensaje += "\nLos siguientes datos están vacíos o completados con espacios en blanco:\n" + listaCompletar; }
+            if(!string.IsNullOrEmpty(listaEspacios)) { mensaje += "\nLos siguientes datos están completados con espacios en blanco:\n" + listaEspacios; }
 
-                  }
-                        
             return mensaje;
         }
 
