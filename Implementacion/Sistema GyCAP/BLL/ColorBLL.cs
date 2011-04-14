@@ -29,11 +29,11 @@ namespace GyCAP.BLL
                 //No puede eliminarse, lanzamos nuestra excepción
                 throw new Entidades.Excepciones.ElementoEnTransaccionException();
             }
-
         }
 
         public static void Actualizar(Entidades.Color color)
         {
+            if (EsColor(color)) throw new Entidades.Excepciones.ElementoExistenteException();
             DAL.ColorDAL.Actualizar(color);
         }
 
@@ -42,12 +42,12 @@ namespace GyCAP.BLL
             return DAL.ColorDAL.esColor(color);
         }
 
-        public static void ObtenerTodos(Data.dsColor ds)
+        public static void ObtenerTodos(Data.dsCocina ds)
         {
             DAL.ColorDAL.ObtenerColores(ds);
         }
         
-        public static void ObtenerTodos(string nombre, Data.dsColor ds)
+        public static void ObtenerTodos(string nombre, Data.dsCocina ds)
         {
             DAL.ColorDAL.ObtenerColores(nombre, ds);
         }

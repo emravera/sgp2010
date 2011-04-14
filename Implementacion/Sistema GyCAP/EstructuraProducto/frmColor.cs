@@ -6,13 +6,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades.Mensajes;
 
 namespace GyCAP.UI.EstructuraProducto
 {
     public partial class frmColor : Form
     {
         private static frmColor _frmColor = null;
-        private Data.dsColor dsColor = new GyCAP.Data.dsColor();
+        //private Data.dsColor dsColor = new GyCAP.Data.dsColor();
+        private Data.dsCocina dsColor = new GyCAP.Data.dsCocina();
         private DataView dvColor;
         private enum estadoUI {inicio, modificar, };
         private estadoUI estadoInterface;
@@ -36,7 +38,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
             }
             //Creamos el dataview y lo asignamos a la grilla
             dvColor = new DataView(dsColor.COLORES);
@@ -72,9 +74,6 @@ namespace GyCAP.UI.EstructuraProducto
             this.Dispose(true);
         }
 
-        //Usando el comando #region NOMBRE y #endregion, se puede agrupar código relacionado para mostrarlo
-        //u ocultarlo y hacer más fácil la lectura
-
         #region Botones Principales
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -88,7 +87,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Color de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Color", MensajesABM.Generos.Masculino, this.Text);
             }            
         }
 
@@ -98,8 +97,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Color seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (respuesta == DialogResult.Yes)
+                if (MensajesABM.MsjConfirmaEliminarDatos("Color", MensajesABM.Generos.Masculino, this.Text) == DialogResult.Yes)
                 {
                     try
                     {                         
@@ -112,24 +110,24 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Color de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Color", MensajesABM.Generos.Masculino, this.Text);
             }
         }       
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisamos que escribió algo
-            if (txtNombre.Text != String.Empty)
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
                 Entidades.Color color = new GyCAP.Entidades.Color();
                 
@@ -143,7 +141,7 @@ namespace GyCAP.UI.EstructuraProducto
                         //Primero lo creamos en la db
                         color.Codigo = BLL.ColorBLL.Insertar(color);
                         //Ahora lo agregamos al dataset
-                        Data.dsColor.COLORESRow rowColor = dsColor.COLORES.NewCOLORESRow();
+                        Data.dsCocina.COLORESRow rowColor = dsColor.COLORES.NewCOLORESRow();
                         //Indicamos que comienza la edición de la fila
                         rowColor.BeginEdit();
                         rowColor.COL_CODIGO = color.Codigo;
@@ -154,15 +152,15 @@ namespace GyCAP.UI.EstructuraProducto
                         dsColor.COLORES.AddCOLORESRow(rowColor);
                         dsColor.COLORES.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
-                        SetInterface(estadoUI.inicio);                        
+                        SetInterface(estadoUI.inicio);
                     }
-                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
@@ -177,26 +175,26 @@ namespace GyCAP.UI.EstructuraProducto
                         //Lo actualizamos en la DB
                         BLL.ColorBLL.Actualizar(color);
                         //Lo actualizamos en el dataset y aceptamos los cambios
-                        Data.dsColor.COLORESRow rowColor = dsColor.COLORES.FindByCOL_CODIGO(color.Codigo);
+                        Data.dsCocina.COLORESRow rowColor = dsColor.COLORES.FindByCOL_CODIGO(color.Codigo);
                         rowColor.BeginEdit();
                         rowColor.COL_NOMBRE = txtNombre.Text;
                         rowColor.EndEdit();
                         dsColor.COLORES.AcceptChanges();
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MensajesABM.MsjConfirmaGuardar("Color", this.Text, MensajesABM.Operaciones.Modificación);
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
+                    }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
                     }
                 }
                 dgvLista.Refresh();
-            }
-            else
-            {
-                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -232,6 +230,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnCancelar.Enabled = false;
                     dgvLista.Enabled = true;
                     estadoInterface = estadoUI.inicio;
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
                     txtNombre.Focus();
                     break;
                 case estadoUI.modificar:
