@@ -158,14 +158,6 @@ namespace GyCAP.UI.GestionStock
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            /*List<ItemValidacion> validacion = new List<ItemValidacion>();
-            if (string.IsNullOrEmpty(txtCodigo.Text.Trim())) { validacion.Add(new ItemValidacion(MensajesABM.Validaciones.CompletarDatos, "Código")); }
-            if (string.IsNullOrEmpty(txtNombre.Text.Trim())) { validacion.Add(new ItemValidacion(MensajesABM.Validaciones.CompletarDatos, "Nombre")); }
-            if (cboUnidadMedida.GetSelectedIndex() == -1) { validacion.Add(new ItemValidacion(MensajesABM.Validaciones.Seleccion, "Unidad de medida")); }
-            if (cboEstado.GetSelectedIndex() == -1) { validacion.Add(new ItemValidacion(MensajesABM.Validaciones.Seleccion, "Estado")); }
-            if (cboTipoUbicacion.GetSelectedIndex() == -1) { validacion.Add(new ItemValidacion(MensajesABM.Validaciones.Seleccion, "Tipo")); }
-            if (cboContenidoStock.GetSelectedIndex() == -1) { validacion.Add(new ItemValidacion(MensajesABM.Validaciones.Seleccion, "Contenido")); }*/
-
             if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))//validacion.Count == 0)
             {
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
@@ -272,10 +264,6 @@ namespace GyCAP.UI.GestionStock
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
-            }
-            else
-            {
-                //MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(validacion), this.Text);
             }
         }
 
