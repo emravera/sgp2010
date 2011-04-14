@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -80,7 +79,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tcUbicacionStock = new System.Windows.Forms.TabControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.tsMenu.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.tpDatos.SuspendLayout();
@@ -93,7 +91,6 @@
             this.groupBox1.SuspendLayout();
             this.tcUbicacionStock.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // txtCodigo
@@ -692,11 +689,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(627, 448);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
-            // errorProvider
-            // 
-            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.errorProvider.ContainerControl = this;
-            // 
             // frmUbicacionStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -726,7 +718,6 @@
             this.tcUbicacionStock.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -784,6 +775,5 @@
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboContenidoStock;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboContenidoBuscar;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }
