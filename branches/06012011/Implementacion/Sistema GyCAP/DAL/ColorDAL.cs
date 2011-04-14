@@ -18,7 +18,7 @@ namespace GyCAP.DAL
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void Eliminar(int codigo)
@@ -29,7 +29,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void Actualizar(Entidades.Color color)
@@ -40,35 +40,29 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
         
         public static bool esColor(Entidades.Color color)
         {
-            string sql = "SELECT count(col_codigo) FROM COLORES WHERE col_nombre = @p0";
-            object[] valorParametros = { color.Nombre };
+            string sql = "SELECT count(col_codigo) FROM COLORES WHERE col_nombre = @p0 AND col_codigo <> @p1";
+            object[] valorParametros = { color.Nombre, color.Codigo };
             try
             {
-                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return false; }
+                else { return true; }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
-        public static void ObtenerColores(Data.dsColor ds)
+        public static void ObtenerColores(Data.dsCocina ds)
         {
             string sql = "SELECT col_codigo, col_nombre FROM COLORES";
             try
             {
                 DB.FillDataSet(ds, "COLORES", sql, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }            
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }            
         }
 
         public static void ObtenerColores(DataTable dtColor)
@@ -78,10 +72,10 @@ namespace GyCAP.DAL
             {
                 DB.FillDataTable(dtColor, sql, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
         
-        public static void ObtenerColores(string nombre, Data.dsColor ds)
+        public static void ObtenerColores(string nombre, Data.dsCocina ds)
         {
             if (nombre != String.Empty)
             {
@@ -95,7 +89,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "COLORES", sql, valorParametros);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
             else
             {
@@ -104,7 +98,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "COLORES", sql, null);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }            
         }
 
@@ -123,7 +117,7 @@ namespace GyCAP.DAL
                     return false;
                 }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         

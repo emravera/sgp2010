@@ -70,11 +70,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsCocina.xsd</DependentUpon>
     </Compile>
-    <Compile Include="dsColor.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsColor.xsd</DependentUpon>
-    </Compile>
     <Compile Include="dsDesignacion.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -327,17 +322,6 @@
     </None>
     <None Include="dsCocina.xss">
       <DependentUpon>dsCocina.xsd</DependentUpon>
-    </None>
-    <None Include="dsColor.xsc">
-      <DependentUpon>dsColor.xsd</DependentUpon>
-    </None>
-    <None Include="dsColor.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsColor.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="dsColor.xss">
-      <DependentUpon>dsColor.xsd</DependentUpon>
     </None>
     <None Include="dsDesignacion.xsc">
       <DependentUpon>dsDesignacion.xsd</DependentUpon>

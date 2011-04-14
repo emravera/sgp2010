@@ -192,17 +192,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            //Revisamos los datos
-            List<string> validacion = new List<string>();
-            if (txtCodigo.Text == string.Empty) { validacion.Add("Código"); }
-            if (cbModelo.GetSelectedIndex() == -1) { validacion.Add("Modelo"); }
-            if (cbMarca.GetSelectedIndex() == -1) { validacion.Add("Marca"); }
-            if (cbDesignacion.GetSelectedIndex() == -1) { validacion.Add("Designación"); }
-            if (cbColor.GetSelectedIndex() == -1) { validacion.Add("Color"); }
-            if (cbTerminacion.GetSelectedIndex() == -1) { validacion.Add("Terminación"); }
-            if (cbEstado.GetSelectedIndex() == -1) { validacion.Add("Estado"); }
-            
-            if (validacion.Count == 0)
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
                 Entidades.Cocina cocina = new GyCAP.Entidades.Cocina();
                 cocina.CodigoProducto = txtCodigo.Text;
@@ -296,11 +286,7 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                 }
                 dgvListaCocina.Refresh();
-            }
-            else
-            {
-                MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.CompletarDatos, validacion), this.Text);
-            }
+            }            
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -351,6 +337,7 @@ namespace GyCAP.UI.EstructuraProducto
                     estadoInterface = estadoUI.inicio;
                     btnZoomOut.PerformClick();
                     tcCocina.SelectedTab = tpBuscar;
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
                     txtCodigoBuscar.Focus();
                     break;
                 case estadoUI.nuevo:

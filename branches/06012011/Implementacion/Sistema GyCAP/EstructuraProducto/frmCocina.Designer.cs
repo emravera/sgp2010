@@ -489,6 +489,7 @@
             // 
             this.dgvListaCocina.AllowUserToAddRows = false;
             this.dgvListaCocina.AllowUserToDeleteRows = false;
+            this.dgvListaCocina.CausesValidation = false;
             this.dgvListaCocina.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvListaCocina.Location = new System.Drawing.Point(9, 22);
             this.dgvListaCocina.MultiSelect = false;
@@ -534,6 +535,7 @@
             // 
             // cbMarcaBuscar
             // 
+            this.cbMarcaBuscar.CausesValidation = false;
             this.cbMarcaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMarcaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbMarcaBuscar.FormattingEnabled = true;
@@ -544,6 +546,7 @@
             // 
             // cbEstadoBuscar
             // 
+            this.cbEstadoBuscar.CausesValidation = false;
             this.cbEstadoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEstadoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbEstadoBuscar.FormattingEnabled = true;
@@ -554,6 +557,7 @@
             // 
             // cbTerminacionBuscar
             // 
+            this.cbTerminacionBuscar.CausesValidation = false;
             this.cbTerminacionBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTerminacionBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbTerminacionBuscar.FormattingEnabled = true;
@@ -604,6 +608,7 @@
             // 
             // txtCodigoBuscar
             // 
+            this.txtCodigoBuscar.CausesValidation = false;
             this.txtCodigoBuscar.Location = new System.Drawing.Point(92, 17);
             this.txtCodigoBuscar.MaxLength = 80;
             this.txtCodigoBuscar.Name = "txtCodigoBuscar";

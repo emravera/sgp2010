@@ -158,7 +158,7 @@ namespace GyCAP.UI.GestionStock
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))//validacion.Count == 0)
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
