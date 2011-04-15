@@ -32,6 +32,7 @@ namespace GyCAP.BLL
 
         public static void Actualizar(Entidades.Terminacion terminacion)
         {
+            if (EsTerminacion(terminacion)) throw new Entidades.Excepciones.ElementoExistenteException();
             DAL.TerminacionDAL.Actualizar(terminacion);
         }
 
@@ -45,7 +46,7 @@ namespace GyCAP.BLL
             DAL.TerminacionDAL.ObtenerTerminacion(nombre, dt);
         }
         
-        public static void ObtenerTodos(string nombre, Data.dsTerminacion dsTerminacion)
+        public static void ObtenerTodos(string nombre, Data.dsCocina dsTerminacion)
         {
             DAL.TerminacionDAL.ObtenerTerminacion(nombre, dsTerminacion);            
         }

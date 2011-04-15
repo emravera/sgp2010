@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades.Mensajes;
 
 namespace GyCAP.UI.EstructuraProducto
 {
@@ -47,7 +48,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
             }
             //Creamos el dataview y lo asignamos a la grilla
             dvListaUnidad = new DataView(dsUnidadMedida.UNIDADES_MEDIDA);
@@ -134,13 +135,13 @@ namespace GyCAP.UI.EstructuraProducto
                 
                 if (dsUnidadMedida.UNIDADES_MEDIDA.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Unidades de Medida con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MensajesABM.MsjBuscarNoEncontrado("Unidades de medida", this.Text);
                 }
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Unidades de Medida - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }
         }
@@ -174,29 +175,27 @@ namespace GyCAP.UI.EstructuraProducto
         }
         private void btnConsultar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.consultar);
+            if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.consultar); }
+            else { MensajesABM.MsjSinSeleccion("Unidad de medida", MensajesABM.Generos.Femenino, this.Text); }
         }
         private void btnVolver_Click(object sender, EventArgs e)
         {
+            if (dgvLista.SelectedRows.Count > 0) { dgvLista.SelectedRows[0].Selected = false; }
             SetInterface(estadoUI.inicio);
         }
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.modificar);
+            if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.modificar); }
+            else { MensajesABM.MsjSinSeleccion("Unidad de medida", MensajesABM.Generos.Femenino, this.Text); }
         }
-        private void dgvLista_DoubleClick(object sender, EventArgs e)
-        {
-            btnConsultar.PerformClick();
-        }
-
+        
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             //Controlamos que esté seleccionado algo
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la Unidad de Medida seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (respuesta == DialogResult.Yes)
+                if (MensajesABM.MsjConfirmaEliminarDatos("Unidad de medida", MensajesABM.Generos.Femenino, this.Text) == DialogResult.Yes)
                 {
                     try
                     {
@@ -210,17 +209,17 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Unidad de Medida de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Unidad de medida", MensajesABM.Generos.Femenino, this.Text);
             }
         }
         //Metodo que carga los datos desde la grilla hacia a los controles 
@@ -235,7 +234,7 @@ namespace GyCAP.UI.EstructuraProducto
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisamos que escribió algo y selecciono algo en el combo
-            if (txtNombre.Text != String.Empty && txtAbreviatura.Text !=String.Empty && cbTipoUnidadDatos.SelectedIndex != -1)
+            if(Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
                 Entidades.UnidadMedida unidadMedida = new GyCAP.Entidades.UnidadMedida();
                 Entidades.TipoUnidadMedida tipoUnidad = new GyCAP.Entidades.TipoUnidadMedida();
@@ -283,11 +282,11 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
@@ -322,15 +321,15 @@ namespace GyCAP.UI.EstructuraProducto
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
+                    }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
                     }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -360,6 +359,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcUnidadMedida.SelectedTab = tpBuscar;
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
                     txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
@@ -434,20 +434,11 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
-        private void txtNombreBuscar_Enter(object sender, EventArgs e)
+        private void control_Enter(object sender, EventArgs e)
         {
-            txtNombreBuscar.SelectAll();
+            if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
         }
-        private void txtNombre_Enter(object sender, EventArgs e)
-        {
-            txtNombre.SelectAll();
-        }
-
-        private void txtAbreviatura_Enter(object sender, EventArgs e)
-        {
-            txtAbreviatura.SelectAll();
-        }
-       
+               
         #endregion
 
         

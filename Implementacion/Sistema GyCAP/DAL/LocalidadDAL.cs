@@ -73,7 +73,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataTable(dtLocalidades, sql, valorParametros);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
             else
             {
@@ -82,7 +82,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataTable(dtLocalidades, sql, null);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
         }
         #endregion

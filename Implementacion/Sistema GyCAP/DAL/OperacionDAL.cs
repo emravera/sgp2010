@@ -156,7 +156,7 @@ namespace GyCAP.DAL
             try
             {
                 int r1 = Convert.ToInt32(DB.executeScalar(sql1, valorParametros, null));
-                int r2 = Convert.ToInt32(DB.executeScalar(sql1, valorParametros, null));
+                int r2 = Convert.ToInt32(DB.executeScalar(sql2, valorParametros, null));
                 if (r1 + r2 == 0) { return true; }
                 else { return false; }
             }

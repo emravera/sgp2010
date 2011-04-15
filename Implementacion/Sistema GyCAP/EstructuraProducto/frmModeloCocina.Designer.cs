@@ -107,6 +107,7 @@
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
             this.dgvLista.AllowUserToResizeRows = false;
+            this.dgvLista.CausesValidation = false;
             this.dgvLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLista.Location = new System.Drawing.Point(3, 17);
@@ -118,7 +119,6 @@
             this.dgvLista.Size = new System.Drawing.Size(410, 165);
             this.dgvLista.TabIndex = 0;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
-            this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
             // 
             // groupBox1
             // 
@@ -148,12 +148,13 @@
             // 
             // txtNombreBuscar
             // 
+            this.txtNombreBuscar.CausesValidation = false;
             this.txtNombreBuscar.Location = new System.Drawing.Point(74, 24);
             this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(181, 21);
             this.txtNombreBuscar.TabIndex = 1;
-            this.txtNombreBuscar.Enter += new System.EventHandler(this.txtNombreBuscar_Enter);
+            this.txtNombreBuscar.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label1
             // 
@@ -223,13 +224,14 @@
             // txtDescripcion
             // 
             this.txtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDescripcion.CausesValidation = false;
             this.txtDescripcion.Location = new System.Drawing.Point(87, 84);
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(248, 90);
             this.txtDescripcion.TabIndex = 4;
             this.txtDescripcion.Text = "";
-            this.txtDescripcion.Enter += new System.EventHandler(this.txtDescripcion_Enter);
+            this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
             // 
             // txtNombre
             // 
@@ -238,7 +240,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(248, 21);
             this.txtNombre.TabIndex = 3;
-            this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
+            this.txtNombre.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label4
             // 

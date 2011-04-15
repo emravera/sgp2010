@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades.Mensajes;
 
 namespace GyCAP.UI.EstructuraProducto
 {
@@ -14,7 +15,7 @@ namespace GyCAP.UI.EstructuraProducto
         private static frmModeloCocina _frmModeloCocina = null;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
         private estadoUI estadoInterface;
-        private Data.dsModeloCocina dsModeloCocina = new GyCAP.Data.dsModeloCocina();
+        private Data.dsCocina dsModeloCocina = new GyCAP.Data.dsCocina();
         private DataView dvModeloCocina;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
@@ -90,13 +91,13 @@ namespace GyCAP.UI.EstructuraProducto
                 dvModeloCocina.Table = dsModeloCocina.MODELOS_COCINAS;
                 if (dsModeloCocina.MODELOS_COCINAS.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Modelos de Cocina con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MensajesABM.MsjBuscarNoEncontrado("Modelos de cocina", this.Text);
                 }
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Modelos de Cocina - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }            
         }
@@ -108,12 +109,14 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.consultar);
+            if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.consultar); }
+            else { MensajesABM.MsjSinSeleccion("Modelo de cocina", MensajesABM.Generos.Masculino, this.Text); }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.modificar);
+            if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.modificar); }
+            else { MensajesABM.MsjSinSeleccion("Modelo de cocina", MensajesABM.Generos.Masculino, this.Text); }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -122,8 +125,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Modelo de Cocina seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (respuesta == DialogResult.Yes)
+                if (MensajesABM.MsjConfirmaEliminarDatos("Modelo de cocina", MensajesABM.Generos.Masculino, this.Text) == DialogResult.Yes)
                 {
                     try
                     {
@@ -137,17 +139,17 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Modelo de Cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Modelo de cocina", MensajesABM.Generos.Masculino, this.Text);
             }
         }
 
@@ -158,7 +160,7 @@ namespace GyCAP.UI.EstructuraProducto
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisamos que escribió algo
-            if (txtNombre.Text != String.Empty)
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
                 Entidades.ModeloCocina modeloCocina = new GyCAP.Entidades.ModeloCocina();
 
@@ -173,7 +175,7 @@ namespace GyCAP.UI.EstructuraProducto
                         //Primero lo creamos en la db
                         modeloCocina.Codigo = BLL.ModeloCocinaBLL.Insertar(modeloCocina);
                         //Ahora lo agregamos al dataset
-                        Data.dsModeloCocina.MODELOS_COCINASRow rowModeloCocina = dsModeloCocina.MODELOS_COCINAS.NewMODELOS_COCINASRow();
+                        Data.dsCocina.MODELOS_COCINASRow rowModeloCocina = dsModeloCocina.MODELOS_COCINAS.NewMODELOS_COCINASRow();
                         //Indicamos que comienza la edición de la fila
                         rowModeloCocina.BeginEdit();
                         rowModeloCocina.MOD_CODIGO = modeloCocina.Codigo;
@@ -200,11 +202,11 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
@@ -220,32 +222,33 @@ namespace GyCAP.UI.EstructuraProducto
                         //Lo actualizamos en la DB
                         BLL.ModeloCocinaBLL.Actualizar(modeloCocina);
                         //Lo actualizamos en el dataset y aceptamos los cambios
-                        Data.dsModeloCocina.MODELOS_COCINASRow rowModeloCocina = dsModeloCocina.MODELOS_COCINAS.FindByMOD_CODIGO(modeloCocina.Codigo);
+                        Data.dsCocina.MODELOS_COCINASRow rowModeloCocina = dsModeloCocina.MODELOS_COCINAS.FindByMOD_CODIGO(modeloCocina.Codigo);
                         rowModeloCocina.BeginEdit();
                         rowModeloCocina.MOD_NOMBRE = txtNombre.Text;
                         rowModeloCocina.MOD_DESCRIPCION = txtDescripcion.Text;
                         rowModeloCocina.EndEdit();
                         dsModeloCocina.MODELOS_COCINAS.AcceptChanges();
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MensajesABM.MsjConfirmaGuardar("Modelo de cocina", this.Text, MensajesABM.Operaciones.Modificación);
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
+                    }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
                     }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
             dsModeloCocina.MODELOS_COCINAS.RejectChanges();
+            if (dgvLista.SelectedRows.Count > 0) { dgvLista.SelectedRows[0].Selected = false; }
             SetInterface(estadoUI.inicio);
         }
 
@@ -275,6 +278,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnConsultar.Enabled = hayDatos;
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
                     tcModeloCocina.SelectedTab = tpBuscar;
                     break;
                 case estadoUI.nuevo:
@@ -337,13 +341,7 @@ namespace GyCAP.UI.EstructuraProducto
             int codigoModeloCocina = Convert.ToInt32(dvModeloCocina[e.RowIndex]["mod_codigo"]);
             txtNombre.Text = dsModeloCocina.MODELOS_COCINAS.FindByMOD_CODIGO(codigoModeloCocina).MOD_NOMBRE;
             txtDescripcion.Text = dsModeloCocina.MODELOS_COCINAS.FindByMOD_CODIGO(codigoModeloCocina).MOD_DESCRIPCION;
-        }
-
-        //Evento doble clic en la grilla, es igual que si hiciera clic en Consultar
-        private void dgvLista_DoubleClick(object sender, EventArgs e)
-        {
-            btnConsultar.PerformClick();
-        }
+        }              
 
         private void frmModeloCocina_Activated(object sender, EventArgs e)
         {
@@ -353,20 +351,9 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
-        private void txtNombreBuscar_Enter(object sender, EventArgs e)
+        private void control_Enter(object sender, EventArgs e)
         {
-            txtNombreBuscar.SelectAll();
-        }
-
-
-        private void txtNombre_Enter(object sender, EventArgs e)
-        {
-            txtNombre.SelectAll();
-        }
-
-        private void txtDescripcion_Enter(object sender, EventArgs e)
-        {
-            txtDescripcion.SelectAll();
+            if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
         }
 
         #endregion       
