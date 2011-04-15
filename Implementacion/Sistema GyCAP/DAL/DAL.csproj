@@ -119,6 +119,7 @@
     <Compile Include="RepuestoDAL.cs" />
     <Compile Include="RepuestosRegistroMantenimientoDAL.cs" />
     <Compile Include="SectorDAL.cs" />
+    <Compile Include="StockMateriaPrimaDAL.cs" />
     <Compile Include="SubConjuntoDAL.cs" />
     <Compile Include="TareaDAL.cs" />
     <Compile Include="TerminacionDAL.cs" />
