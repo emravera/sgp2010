@@ -19,9 +19,9 @@ namespace GyCAP.DAL
             object[] valorParametros = { codigoPA };
             try
             {
-               cantidadAnual =Convert.ToInt32(DB.executeScalar(sql, valorParametros,null));
+               cantidadAnual = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
 
             return cantidadAnual;
         }
@@ -41,7 +41,7 @@ namespace GyCAP.DAL
             {
                 cantidadAnual = DB.executeScalar(sql, valorParametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
 
             return cantidadAnual;
         }
