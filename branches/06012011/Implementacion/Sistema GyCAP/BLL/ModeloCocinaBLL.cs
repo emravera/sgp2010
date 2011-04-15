@@ -34,6 +34,7 @@ namespace GyCAP.BLL
 
         public static void Actualizar(Entidades.ModeloCocina modeloCocina)
         {
+            if (EsModeloCocina(modeloCocina)) throw new Entidades.Excepciones.ElementoExistenteException();
             DAL.ModeloCocinaDAL.Actualizar(modeloCocina);
         }
 
@@ -42,7 +43,7 @@ namespace GyCAP.BLL
             return DAL.ModeloCocinaDAL.EsModeloCocina(modeloCocina);
         }
 
-        public static void ObtenerTodos(string nombre, Data.dsModeloCocina ds)
+        public static void ObtenerTodos(string nombre, Data.dsCocina ds)
         {
             DAL.ModeloCocinaDAL.ObtenerModeloCocina(nombre, ds);
         }

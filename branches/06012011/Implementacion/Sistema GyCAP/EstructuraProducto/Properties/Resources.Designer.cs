@@ -305,6 +305,13 @@ namespace GyCAP.UI.EstructuraProducto.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap unidades_medida {
+            get {
+                object obj = ResourceManager.GetObject("unidades_medida", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Volver_20 {
             get {
                 object obj = ResourceManager.GetObject("Volver_20", resourceCulture);

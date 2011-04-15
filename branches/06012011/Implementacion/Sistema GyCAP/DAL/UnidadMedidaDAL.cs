@@ -62,7 +62,7 @@ namespace GyCAP.DAL
                     }
                 }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
         //Metodo para llenar desde materia primas principales
         public static void ObtenerTodos(Data.dsMateriaPrima ds)
@@ -73,7 +73,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataSet(ds, "UNIDADES_MEDIDA", sql, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
 
         }
 
@@ -86,7 +86,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataSet(ds, "UNIDADES_MEDIDA", sql, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
 
         }
         
@@ -116,7 +116,7 @@ namespace GyCAP.DAL
                     return false;
                 }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
         //Metodo que elimina de la base de datos
         public static void Eliminar(int codigo)
@@ -127,27 +127,21 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         //INSERTAR
         //Metodo que valida que no se intente guardar algo que ya esta en la BD
         public static bool esUnidadMedida(Entidades.UnidadMedida unidadMedida)
         {
-            string sql = "SELECT count(umed_codigo) FROM UNIDADES_MEDIDA WHERE umed_nombre = @p0";
-            object[] valorParametros = { unidadMedida.Nombre };
+            string sql = "SELECT count(umed_codigo) FROM UNIDADES_MEDIDA WHERE umed_nombre = @p0 AND umed_codigo <> @p1";
+            object[] valorParametros = { unidadMedida.Nombre, unidadMedida.Codigo };
             try
             {
-                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return false; }
+                else { return true; }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         //Metodo que inserta en la base de datos
@@ -160,7 +154,7 @@ namespace GyCAP.DAL
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         //MODIFICAR 
@@ -173,7 +167,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void ObtenerTodos(System.Data.DataTable dtUnidadMedida)
@@ -184,7 +178,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataTable(dtUnidadMedida, sql, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
     }
 }

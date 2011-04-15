@@ -10,7 +10,7 @@ namespace GyCAP.BLL
     {
         //Busqueda
         //Obtiene los datos de acuerdo a los criterios de busqueda
-        public static void ObtenerTodos(string nombre, int idMarca, Data.dsDesignacion ds)
+        public static void ObtenerTodos(string nombre, int idMarca, Data.dsCocina ds)
         {
             DAL.DesignacionDAL.ObtenerDesignacion(nombre, idMarca, ds);
         }
@@ -49,7 +49,8 @@ namespace GyCAP.BLL
         //Actualización de los datos
         public static void Actualizar(Entidades.Designacion desig)
         {
-           DAL.DesignacionDAL.Actualizar(desig);
+            if (EsDesignacion(desig)) throw new Entidades.Excepciones.ElementoExistenteException();
+            DAL.DesignacionDAL.Actualizar(desig);
         }
 
         public static void ObtenerTodos(DataTable dtDesignacion)

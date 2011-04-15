@@ -70,11 +70,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsCocina.xsd</DependentUpon>
     </Compile>
-    <Compile Include="dsDesignacion.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsDesignacion.xsd</DependentUpon>
-    </Compile>
     <Compile Include="dsEmpleado.cs">
       <DependentUpon>dsEmpleado.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -176,11 +171,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsMateriaPrima.xsd</DependentUpon>
     </Compile>
-    <Compile Include="dsModeloCocina.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsModeloCocina.xsd</DependentUpon>
-    </Compile>
     <Compile Include="dsModeloMaquina.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -243,11 +233,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsStock.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="dsTerminacion.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsTerminacion.xsd</DependentUpon>
     </Compile>
     <Compile Include="dsTurnosTrabajo.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -322,17 +307,6 @@
     </None>
     <None Include="dsCocina.xss">
       <DependentUpon>dsCocina.xsd</DependentUpon>
-    </None>
-    <None Include="dsDesignacion.xsc">
-      <DependentUpon>dsDesignacion.xsd</DependentUpon>
-    </None>
-    <None Include="dsDesignacion.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsDesignacion.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="dsDesignacion.xss">
-      <DependentUpon>dsDesignacion.xsd</DependentUpon>
     </None>
     <None Include="dsEmpleado.xsc">
       <DependentUpon>dsEmpleado.xsd</DependentUpon>
@@ -499,17 +473,6 @@
     <None Include="dsMateriaPrima.xss">
       <DependentUpon>dsMateriaPrima.xsd</DependentUpon>
     </None>
-    <None Include="dsModeloCocina.xsc">
-      <DependentUpon>dsModeloCocina.xsd</DependentUpon>
-    </None>
-    <None Include="dsModeloCocina.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsModeloCocina.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="dsModeloCocina.xss">
-      <DependentUpon>dsModeloCocina.xsd</DependentUpon>
-    </None>
     <None Include="dsModeloMaquina.xsc">
       <DependentUpon>dsModeloMaquina.xsd</DependentUpon>
     </None>
@@ -630,17 +593,6 @@
     </None>
     <None Include="dsStock.xss">
       <DependentUpon>dsStock.xsd</DependentUpon>
-    </None>
-    <None Include="dsTerminacion.xsc">
-      <DependentUpon>dsTerminacion.xsd</DependentUpon>
-    </None>
-    <None Include="dsTerminacion.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsTerminacion.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="dsTerminacion.xss">
-      <DependentUpon>dsTerminacion.xsd</DependentUpon>
     </None>
     <None Include="dsTurnosTrabajo.xsc">
       <DependentUpon>dsTurnosTrabajo.xsd</DependentUpon>

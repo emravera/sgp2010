@@ -6,13 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades.Mensajes;
 
 namespace GyCAP.UI.EstructuraProducto
 {
     public partial class frmTerminacion : Form
     {
         private static frmTerminacion _frmABM = null;
-        private Data.dsTerminacion dsTerminacion = new GyCAP.Data.dsTerminacion();
+        private Data.dsCocina dsTerminacion = new GyCAP.Data.dsCocina();
         private DataView dvTerminacion;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, };
         private estadoUI estadoInterface;
@@ -101,6 +102,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcABM.SelectedTab = tpBuscar;
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
                     txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
@@ -191,18 +193,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
-        //Evita que el formulario se cierre desde la cruz
-        //private void frmTerminacion_FormClosing(object sender, FormClosingEventArgs e)
-        //{
-        //    if (e.CloseReason == CloseReason.UserClosing)
-        //    {
-        //        e.Cancel = true;
-        //    }
-        //}
-
         #endregion
-
-        
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
@@ -211,12 +202,14 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.consultar);
+            if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.consultar); }
+            else { MensajesABM.MsjSinSeleccion("Terminación", MensajesABM.Generos.Femenino, this.Text); }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.modificar);
+            if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.modificar); }
+            else { MensajesABM.MsjSinSeleccion("Terminación", MensajesABM.Generos.Femenino, this.Text); }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -230,8 +223,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la terminación seleccionada?", "Confirmar eliminación", MessageBoxButtons.YesNo);
-                if (respuesta == DialogResult.Yes)
+                if (MensajesABM.MsjConfirmaEliminarDatos("Terminación", MensajesABM.Generos.Femenino, this.Text) == DialogResult.Yes)
                 {
                     try
                     {
@@ -245,26 +237,24 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        //MessageBox.Show(ex.Message);
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        //MessageBox.Show(ex.Message);
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una " + this.Text + " de la lista.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Terminación", MensajesABM.Generos.Femenino, this.Text);
             }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisamos que escribió algo
-            if (txtNombre.Text != String.Empty && txtAbreviatura.Text != string.Empty)
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
                 Entidades.Terminacion terminacion = new GyCAP.Entidades.Terminacion();
 
@@ -280,7 +270,7 @@ namespace GyCAP.UI.EstructuraProducto
                         //Primero lo creamos en la db
                         terminacion.Codigo = BLL.TerminacionBLL.Insertar(terminacion);
                         //Ahora lo agregamos al dataset
-                        Data.dsTerminacion.TERMINACIONESRow rowTerminacion = dsTerminacion.TERMINACIONES.NewTERMINACIONESRow();
+                        Data.dsCocina.TERMINACIONESRow rowTerminacion = dsTerminacion.TERMINACIONES.NewTERMINACIONESRow();
                         //Indicamos que comienza la edición de la fila
                         rowTerminacion.BeginEdit();
                         rowTerminacion.TE_CODIGO = terminacion.Codigo;
@@ -308,11 +298,11 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
@@ -329,7 +319,7 @@ namespace GyCAP.UI.EstructuraProducto
                         //Lo actualizamos en la DB
                         BLL.TerminacionBLL.Actualizar(terminacion);
                         //Lo actualizamos en el dataset y aceptamos los cambios
-                        Data.dsTerminacion.TERMINACIONESRow rowTerminacion = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(terminacion.Codigo);
+                        Data.dsCocina.TERMINACIONESRow rowTerminacion = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(terminacion.Codigo);
                         rowTerminacion.BeginEdit();
                         rowTerminacion.TE_NOMBRE = txtNombre.Text;
                         rowTerminacion.TE_DESCRIPCION = txtDescripcion.Text;
@@ -337,26 +327,26 @@ namespace GyCAP.UI.EstructuraProducto
                         rowTerminacion.EndEdit();
                         dsTerminacion.TERMINACIONES.AcceptChanges();
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MensajesABM.MsjConfirmaGuardar("Terminación", this.Text, MensajesABM.Operaciones.Modificación);
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
+                    }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
-                //recarga de la grilla
                 dgvLista.Refresh();
-            }
-            else
-            {
-                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
+            if (dgvLista.SelectedRows.Count > 0) { dgvLista.SelectedRows[0].Selected = false; }
             SetInterface(estadoUI.inicio);
         }
 
@@ -371,14 +361,14 @@ namespace GyCAP.UI.EstructuraProducto
                 dvTerminacion.Table = dsTerminacion.TERMINACIONES;
                 if (dsTerminacion.TERMINACIONES.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron terminaciones con el nombre ingresado.","Aviso",MessageBoxButtons.OK ,MessageBoxIcon.Information );
+                    MensajesABM.MsjBuscarNoEncontrado("Terminaciones", this.Text);
                 }
 
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Terminación - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }   
         }
@@ -387,22 +377,10 @@ namespace GyCAP.UI.EstructuraProducto
         //hace clic en alguna fila de la grilla
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            //if (e.RowIndex > 0)
-            //{
-                long codigoTerminacion = Convert.ToInt64(dvTerminacion[e.RowIndex]["te_codigo"]);
-                txtNombre.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_NOMBRE;
-                txtDescripcion.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_DESCRIPCION;
-                txtAbreviatura.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_ABREVIATURA;
-            //}
-        }
-
-        //Evento doble clic en la grilla, es igual que si hiciera clic en Consultar
-        private void dgvLista_DoubleClick(object sender, EventArgs e)
-        {
-            if (dsTerminacion.TERMINACIONES.Rows.Count != 0)
-            {
-                btnConsultar.PerformClick();
-            }   
+            long codigoTerminacion = Convert.ToInt64(dvTerminacion[e.RowIndex]["te_codigo"]);
+            txtNombre.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_NOMBRE;
+            txtDescripcion.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_DESCRIPCION;
+            txtAbreviatura.Text = dsTerminacion.TERMINACIONES.FindByTE_CODIGO(codigoTerminacion).TE_ABREVIATURA;
         }
 
         private void frmTerminacion_Activated(object sender, EventArgs e)
@@ -413,25 +391,9 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
-        private void txtNombreBuscar_Enter(object sender, EventArgs e)
+        private void control_Enter(object sender, EventArgs e)
         {
-            txtNombreBuscar.SelectAll();
+            if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
         }
-
-        private void txtNombre_Enter(object sender, EventArgs e)
-        {
-            txtNombre.SelectAll();
-        }
-
-        private void txtDescripcion_Enter(object sender, EventArgs e)
-        {
-            txtDescripcion.SelectAll();
-        }
-
-        private void txtAbreviatura_Enter(object sender, EventArgs e)
-        {
-            txtAbreviatura.SelectAll();
-        }
-
     }
 }

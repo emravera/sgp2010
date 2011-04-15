@@ -18,7 +18,7 @@ namespace GyCAP.DAL
             {
                 return Convert.ToInt64(DB.executeScalar(sql, valorParametros, null));
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void Eliminar(int codigo)
@@ -29,7 +29,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void Actualizar(Entidades.Terminacion terminacion)
@@ -40,25 +40,19 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static bool EsTeminacion(Entidades.Terminacion terminacion)
         {
-            string sql = "SELECT count(TE_CODIGO) FROM TERMINACIONES WHERE TE_NOMBRE = @p0";
-            object[] valorParametros = { terminacion.Nombre };
+            string sql = "SELECT count(TE_CODIGO) FROM TERMINACIONES WHERE TE_NOMBRE = @p0 AND te_codigo <> @p1";
+            object[] valorParametros = { terminacion.Nombre, terminacion.Codigo };
             try
             {
-                if (Convert.ToInt64(DB.executeScalar(sql, valorParametros, null)) == 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                if (Convert.ToInt64(DB.executeScalar(sql, valorParametros, null)) == 0) { return false; }
+                else { return true; }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void ObtenerTerminacion(string nombre, System.Data.DataTable dt)
@@ -75,7 +69,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataTable(dt, sql, valorParametros);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
 
             }
             else
@@ -85,12 +79,12 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataTable(dt, sql, null);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
 
             }
         }
         
-        public static void ObtenerTerminacion(string nombre, Data.dsTerminacion ds)
+        public static void ObtenerTerminacion(string nombre, Data.dsCocina ds)
         {
             if (nombre != String.Empty)
             {
@@ -104,7 +98,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "TERMINACIONES", sql, valorParametros);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
                 
             }
             else
@@ -114,7 +108,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "TERMINACIONES", sql, null);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
                 
             }
         }
@@ -125,16 +119,10 @@ namespace GyCAP.DAL
             object[] valorParametros = { codigo };
             try
             {
-                if (Convert.ToInt64(DB.executeScalar(sql, valorParametros, null)) == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                if (Convert.ToInt64(DB.executeScalar(sql, valorParametros, null)) == 0) { return true; }
+                else { return false; }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
     }

@@ -12,7 +12,7 @@ namespace GyCAP.DAL
         //BUSQUEDA
         //Metodo sobrecargado (3 Sobrecargas)
         //Busqueda por nombre
-        public static void ObtenerDesignacion(string nombre, int idMarca, Data.dsDesignacion ds)
+        public static void ObtenerDesignacion(string nombre, int idMarca, Data.dsCocina ds)
         {
             string sql = @"SELECT desig_codigo, mca_codigo, desig_nombre, desig_descripcion
                               FROM DESIGNACIONES";
@@ -65,7 +65,7 @@ namespace GyCAP.DAL
                         }
                     }   
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
           }
             
 
@@ -86,7 +86,7 @@ namespace GyCAP.DAL
                     return false;
                 }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
         //Metodo que elimina de la base de datos
         public static void Eliminar(int codigo)
@@ -97,27 +97,21 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         //INSERTAR
         //Metodo que valida que no se intente guardar algo que ya esta en la BD
         public static bool esDesignacion(Entidades.Designacion desig)
         {
-            string sql = "SELECT count(desig_codigo) FROM DESIGNACIONES WHERE desig_nombre = @p0";
-            object[] valorParametros = { desig.Nombre };
+            string sql = "SELECT count(desig_codigo) FROM DESIGNACIONES WHERE desig_nombre = @p0 AND desig_codigo <> @p1";
+            object[] valorParametros = { desig.Nombre, desig.Codigo };
             try
             {
-                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return false; }
+                else { return true; }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         //Metodo que inserta en la base de datos
@@ -130,7 +124,7 @@ namespace GyCAP.DAL
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         //MODIFICAR 
@@ -144,7 +138,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void ObtenerTodos(DataTable dtDesignacion)
@@ -155,7 +149,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataTable(dtDesignacion, sql, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
     }

@@ -119,12 +119,6 @@
     <Compile Include="RepuestoDAL.cs" />
     <Compile Include="RepuestosRegistroMantenimientoDAL.cs" />
     <Compile Include="SectorDAL.cs" />
-    <Compile Include="StockCocinaDAL.cs" />
-    <Compile Include="StockConjuntoDAL.cs" />
-    <Compile Include="StockMateriaPrimaDAL.cs" />
-    <Compile Include="StockPiezaDAL.cs" />
-    <Compile Include="StockRepuestoDAL.cs" />
-    <Compile Include="StockSubConjuntoDAL.cs" />
     <Compile Include="SubConjuntoDAL.cs" />
     <Compile Include="TareaDAL.cs" />
     <Compile Include="TerminacionDAL.cs" />

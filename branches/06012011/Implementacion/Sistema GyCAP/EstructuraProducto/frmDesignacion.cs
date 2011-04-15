@@ -6,13 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades.Mensajes;
 
 namespace GyCAP.UI.EstructuraProducto
 {
     public partial class frmDesignacion : Form
     {
         private static frmDesignacion _frmDesignacion = null;
-        private Data.dsDesignacion dsDesignacion = new GyCAP.Data.dsDesignacion();
+        private Data.dsCocina dsDesignacion = new GyCAP.Data.dsCocina();
         private DataView dvListaDesignacion, dvComboDesignacion, dvComboDesignacionBuscar;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, };
         private estadoUI estadoInterface;
@@ -50,7 +51,14 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             
             //Llena el Dataset con las marcas
-            BLL.MarcaBLL.ObtenerTodos(dsDesignacion.MARCAS);
+            try
+            {
+                BLL.MarcaBLL.ObtenerTodos(dsDesignacion.MARCAS);
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
+            }
             
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDesignacion = new DataView(dsDesignacion.DESIGNACIONES);
@@ -78,8 +86,7 @@ namespace GyCAP.UI.EstructuraProducto
 
             //Seteo el maxlenght de los textbox para que no de error en la bd
             txtDescripcion.MaxLength = 200;
-            txtNombre.MaxLength = 30;
-
+            txtNombre.MaxLength = 80;
 
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
@@ -125,7 +132,6 @@ namespace GyCAP.UI.EstructuraProducto
 
                 //Se llama a la funcion de busqueda con todos los parametros
                 BLL.DesignacionBLL.ObtenerTodos(txtNombreBuscar.Text,Convert.ToInt32(cbMarcaBuscar.SelectedValue), dsDesignacion);
-
                                
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
@@ -133,21 +139,21 @@ namespace GyCAP.UI.EstructuraProducto
 
                 if (dsDesignacion.DESIGNACIONES.Rows.Count == 0)
                 {
-                   MessageBox.Show("No se encontraron Designaciones con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MensajesABM.MsjBuscarNoEncontrado("Designaciones", this.Text);
                 }
 
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Designacion - Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }
         }
         //Metodo para formatear la grilla que cambia las foreign keys por el nombre
         private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.Value.ToString() != String.Empty)
+            if (e.Value != null && e.Value.ToString() != String.Empty)
             {
                 string nombre;
                 switch (dgvLista.Columns[e.ColumnIndex].Name)
@@ -159,40 +165,41 @@ namespace GyCAP.UI.EstructuraProducto
                     default:
                         break;
                 }
-
             }
         }
+
        #endregion
 
         #region Botones
+
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Dispose(true);
         }
+
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.nuevo);
-            
+            SetInterface(estadoUI.nuevo);            
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.consultar);
+            if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.consultar); }
+            else { MensajesABM.MsjSinSeleccion("Designación", MensajesABM.Generos.Femenino, this.Text); }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.modificar);
+            if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.modificar); }
+            else { MensajesABM.MsjSinSeleccion("Designación", MensajesABM.Generos.Femenino, this.Text); }
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
+            if (dgvLista.SelectedRows.Count > 0) { dgvLista.SelectedRows[0].Selected = false; }
             SetInterface(estadoUI.inicio);
         }
-        private void dgvLista_DoubleClick(object sender, EventArgs e)
-        {
-            btnConsultar.PerformClick();
-        }
+
         #endregion
 
         #region Servicios
@@ -221,6 +228,7 @@ namespace GyCAP.UI.EstructuraProducto
                     txtNombreBuscar.Text = string.Empty;
                     cbMarcaBuscar.SelectedIndex = -1;
                     tcDesignacion.SelectedTab = tpBuscar;
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
                     txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
@@ -287,31 +295,11 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
-        private void frmDesignacion_Activated(object sender, EventArgs e)
-        {
-            if (txtNombreBuscar.Enabled == true)
-            {
-                txtNombreBuscar.Focus();
-            }
-        }
-
         //Metodos que seleccionan lo que esta en los textbox
-        private void txtNombreBuscar_Enter(object sender, EventArgs e)
+        private void control_Enter(object sender, EventArgs e)
         {
-            txtNombreBuscar.SelectAll();
+            if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
         }
-
-        private void txtNombre_Enter(object sender, EventArgs e)
-        {
-            txtNombre.SelectAll();
-        }
-
-        private void txtDescripcion_Enter(object sender, EventArgs e)
-        {
-            txtDescripcion.SelectAll();
-        }
-
-
 
         #endregion
 
@@ -325,6 +313,7 @@ namespace GyCAP.UI.EstructuraProducto
             txtDescripcion.Text = dsDesignacion.DESIGNACIONES.FindByDESIG_CODIGO(codigoDesignacion).DESIG_DESCRIPCION;
             cbMarcaDatos.SelectedValue = dsDesignacion.DESIGNACIONES.FindByDESIG_CODIGO(codigoDesignacion).MCA_CODIGO;
         }
+
         //Metodo para eliminar
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -332,8 +321,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la Designación seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (respuesta == DialogResult.Yes)
+                if (MensajesABM.MsjConfirmaEliminarDatos("Designación", MensajesABM.Generos.Femenino, this.Text) == DialogResult.Yes)
                 {
                     try
                     {
@@ -347,28 +335,28 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text  + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Designación de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information );
+                MensajesABM.MsjSinSeleccion("Designación", MensajesABM.Generos.Femenino, this.Text);
             }
         }
+
         //Metodo que guarda los datos
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisamos que escribió algo y selecciono algo en el combo
-           if (txtNombre.Text != String.Empty && cbMarcaDatos.SelectedIndex != -1 && txtDescripcion.Text != String.Empty)
+           if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
                 Entidades.Designacion desig = new GyCAP.Entidades.Designacion();
-                Entidades.Marca marca = new GyCAP.Entidades.Marca();
-                
+                Entidades.Marca marca = new GyCAP.Entidades.Marca();                
 
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
@@ -380,18 +368,17 @@ namespace GyCAP.UI.EstructuraProducto
                     //Creo el objeto Marca y despues lo asigno
                     //Busco el codigo de la marca
                     int idMArca = Convert.ToInt32(cbMarcaDatos.SelectedValue);
-                    marca.Codigo = Convert.ToInt32(dsDesignacion.MARCAS.FindByMCA_CODIGO(idMArca).MCA_CODIGO);
-                    
+                    marca.Codigo = Convert.ToInt32(dsDesignacion.MARCAS.FindByMCA_CODIGO(idMArca).MCA_CODIGO);                    
 
                     //Asigno la marca creada a la designacion correspondiente
-                    desig.Marca=marca;
+                    desig.Marca = marca;
 
                     try
                     {
                         //Primero lo creamos en la db
                         desig.Codigo = BLL.DesignacionBLL.Insertar(desig);
                         //Ahora lo agregamos al dataset
-                        Data.dsDesignacion.DESIGNACIONESRow rowDesig = dsDesignacion.DESIGNACIONES.NewDESIGNACIONESRow();
+                        Data.dsCocina.DESIGNACIONESRow rowDesig = dsDesignacion.DESIGNACIONES.NewDESIGNACIONESRow();
                         //Indicamos que comienza la edición de la fila
                         rowDesig.BeginEdit();
                         rowDesig.DESIG_CODIGO = desig.Codigo;
@@ -419,11 +406,11 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
@@ -437,8 +424,7 @@ namespace GyCAP.UI.EstructuraProducto
 
                     //Creo el objeto marca
                     int idMArca = Convert.ToInt32(cbMarcaDatos.SelectedValue);
-                    marca.Codigo = Convert.ToInt32(dsDesignacion.MARCAS.FindByMCA_CODIGO(idMArca).MCA_CODIGO);
-                    
+                    marca.Codigo = Convert.ToInt32(dsDesignacion.MARCAS.FindByMCA_CODIGO(idMArca).MCA_CODIGO);                    
 
                     //Asigno el cliente creado a cliente de la marca
                     desig.Marca = marca;
@@ -448,7 +434,7 @@ namespace GyCAP.UI.EstructuraProducto
                         //Lo actualizamos en la DB
                         BLL.DesignacionBLL.Actualizar(desig);
                         //Lo actualizamos en el dataset y aceptamos los cambios
-                        Data.dsDesignacion.DESIGNACIONESRow rowDesig = dsDesignacion.DESIGNACIONES.FindByDESIG_CODIGO(desig.Codigo);
+                        Data.dsCocina.DESIGNACIONESRow rowDesig = dsDesignacion.DESIGNACIONES.FindByDESIG_CODIGO(desig.Codigo);
                         //Indicamos que comienza la edición de la fila
                         rowDesig.BeginEdit();
                         rowDesig.DESIG_DESCRIPCION = desig.Descripcion;
@@ -459,50 +445,25 @@ namespace GyCAP.UI.EstructuraProducto
                         //Agregamos la fila al dataset y aceptamos los cambios
                         dsDesignacion.DESIGNACIONES.AcceptChanges();
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización " , MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MensajesABM.MsjConfirmaGuardar("Designación", this.Text, MensajesABM.Operaciones.Modificación);
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
+                    }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
-
                //recarga de la grilla
                dgvLista.Refresh();
-            }
-            else
-            {
-                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         
         #endregion
-
-        
-        
-        
-
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 }

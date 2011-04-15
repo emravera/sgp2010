@@ -19,7 +19,7 @@ namespace GyCAP.DAL
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void Eliminar(int codigo)
@@ -31,7 +31,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void Actualizar(Entidades.ModeloCocina modeloCocina)
@@ -45,28 +45,22 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static bool EsModeloCocina(Entidades.ModeloCocina modeloCocina)
         {
-            string sql = "SELECT count(mod_codigo) FROM MODELOS_COCINAS WHERE mod_nombre = @p0";
-            object[] valorParametros = { modeloCocina.Nombre };
+            string sql = "SELECT count(mod_codigo) FROM MODELOS_COCINAS WHERE mod_nombre = @p0 AND mod_codigo <> @p1";
+            object[] valorParametros = { modeloCocina.Nombre, modeloCocina.Codigo };
             try
             {
-                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return false; }
+                else { return true; }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
-        public static void ObtenerModeloCocina(string nombre, Data.dsModeloCocina ds)
+        public static void ObtenerModeloCocina(string nombre, Data.dsCocina ds)
         {
             if (nombre != String.Empty)
             {
@@ -80,7 +74,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "MODELOS_COCINAS", sql, valorParametros);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
             else
             {
@@ -89,7 +83,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "MODELOS_COCINAS", sql, null);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
         }
 
@@ -99,16 +93,10 @@ namespace GyCAP.DAL
             object[] valorParametros = { codigo };
             try
             {
-                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return true; }
+                else { return false; }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void ObtenerModeloCocina(DataTable dtModelos)
@@ -118,7 +106,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataTable(dtModelos, sql, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }            
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }            
         }
     }
 }
