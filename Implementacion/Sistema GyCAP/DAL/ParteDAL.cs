@@ -209,5 +209,17 @@ namespace GyCAP.DAL
                 catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
         }
+
+        public static bool EsParte(string nombre, string codigo, int numero)
+        {
+            string sql = "SELECT count(part_numero) FROM PARTES WHERE part_nombre = @p0 AND part_codigo = @p1 AND part_numero <> @p2";
+            object[] parametros = { nombre, codigo, numero };
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, parametros, null)) == 0) { return false; }
+                else { return true; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
     }
 }
