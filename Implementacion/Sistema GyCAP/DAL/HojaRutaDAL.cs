@@ -215,7 +215,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataTable(dtHojas, sql, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void ObtenerHojaRuta(int codigoHoja, bool detalle, Data.dsHojaRuta dsHojaRuta)
@@ -230,7 +230,7 @@ namespace GyCAP.DAL
                     ObtenerDetalleHoja(codigoHoja, dsHojaRuta);
                 }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
         
         private static void ObtenerDetalleHoja(Data.dsHojaRuta ds)
