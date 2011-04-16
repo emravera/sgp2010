@@ -94,7 +94,8 @@ namespace GyCAP.UI.Soporte
                         hayDatos = true;
                         dgvLista.Focus();
                     }
-
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
+                    
                     btnModificar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
                     btnConsultar.Enabled = hayDatos;
@@ -183,26 +184,7 @@ namespace GyCAP.UI.Soporte
                 _frmABM = value;
             }
         }
-
-
-        private string Validar()
-        {
-            string erroresValidacion = string.Empty;
-
-            string validacion = string.Empty;
-
-            //Control de los textbox
-            List<string> datos = new List<string>();
-            if (txtNombre.Text.Trim().Length == 0){datos.Add("Nombre");}
-            if (txtDescripcion.Text.Trim().Length == 0)
-            {
-                datos.Add("Descripción");
-                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
-            }
-
-            return erroresValidacion;
-        }
-        
+               
         private void dgvLista_DoubleClick(object sender, EventArgs e)
         {
             if (dsCapacidadEmpleado.CAPACIDAD_EMPLEADOS.Rows.Count != 0)
@@ -324,10 +306,10 @@ namespace GyCAP.UI.Soporte
         
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            string validacion =Validar();
+            
 
             //Revisamos que escribió algo
-            if ( validacion == String.Empty)
+            if ( Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
                 Entidades.CapacidadEmpleado capacidadEmpleado = new GyCAP.Entidades.CapacidadEmpleado();
 
@@ -416,10 +398,6 @@ namespace GyCAP.UI.Soporte
                 }
                 //recarga de la grilla
                 dgvLista.Refresh();
-            }
-            else
-            {
-                Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
             }
         }
         #endregion

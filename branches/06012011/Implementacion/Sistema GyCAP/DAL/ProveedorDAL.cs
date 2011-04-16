@@ -11,6 +11,7 @@ namespace GyCAP.DAL
     public class ProveedorDAL
     {
 
+        //Metodo para la búsqueda de Proveedores
         public static void ObtenerProveedores(object razonSocial, object codigoSector, DataTable dtProveedor)
         {        
             string sql = @"SELECT prove_codigo, sec_codigo, prove_razonsocial, prove_telprincipal, prove_telalternativo
@@ -64,6 +65,7 @@ namespace GyCAP.DAL
         
         }
 
+        //Metodo para guardar un proveedor nuevo
         public static void GuardarProveedor(Entidades.Proveedor proveedor, Data.dsProveedor dsProveedor)
         {
             SqlTransaction transaccion = null;
@@ -72,39 +74,61 @@ namespace GyCAP.DAL
             {
                 transaccion = DB.IniciarTransaccion();
                 string sql = string.Empty;
-                
-                //Inserto la cabexera con el proveedor
-                if (proveedor.TelSecundario == null)
+
+                //Inserto la cabecera
+                sql = "INSERT INTO [PROVEEDORES] ([sec_codigo], [prove_razonsocial], [prove_telprincipal], [prove_telalternativo])VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+
+
+                if (proveedor.TelSecundario == string.Empty)
                 {
-                    proveedor.TelSecundario =Convert.ToString(0);
+                    object[] valoresParametros = { proveedor.Sector.Codigo, proveedor.RazonSocial, proveedor.TelPrincipal, DBNull.Value };
+                    proveedor.Codigo = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
                 }
-                    sql = "INSERT INTO [PROVEEDORES] ([sec_codigo], [prove_razonsocial], [prove_telprincipal], [prove_telalternativo])VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+                else
+                {
                     object[] valoresParametros = { proveedor.Sector.Codigo, proveedor.RazonSocial, proveedor.TelPrincipal, proveedor.TelSecundario };
                     proveedor.Codigo = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
+                }
                 
                 //Inserto el Detalle con los domicilios
                 foreach (Data.dsProveedor.DOMICILIOSRow row in (Data.dsProveedor.DOMICILIOSRow[])dsProveedor.DOMICILIOS.Select(null, null, System.Data.DataViewRowState.Added))
                 {
-                                        
-                    if (row.DOM_PISO == null)
-                    {
-                        row.BeginEdit();
-                        row.DOM_PISO =Convert.ToString(0);
-                        row.EndEdit();
-                    }
-                    if (row.DOM_DEPARTAMENTO == null)
-                    {
-                        row.BeginEdit();
-                        row.DOM_DEPARTAMENTO =Convert.ToString(0);
-                        row.EndEdit();
-                    }
                     sql = @"INSERT INTO [DOMICILIOS] ([loc_codigo], [prove_codigo], [dom_calle], [dom_numero], [dom_piso], [dom_departamento]) 
                            VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
+                                        
+                    if (row.DOM_PISO == string.Empty && row.DOM_DEPARTAMENTO != string.Empty)
+                    {
+                        object[] valorParam = { row.LOC_CODIGO, proveedor.Codigo, row.DOM_CALLE, row.DOM_NUMERO, DBNull.Value, row.DOM_DEPARTAMENTO };
+                        row.BeginEdit();
+                        row.DOM_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
+                        row.PROVE_CODIGO = proveedor.Codigo;
+                        row.EndEdit();  
+                    }
+                    if (row.DOM_DEPARTAMENTO == string.Empty && row.DOM_PISO != string.Empty)
+                    {
+                        object[] valorParam = { row.LOC_CODIGO, proveedor.Codigo, row.DOM_CALLE, row.DOM_NUMERO, row.DOM_PISO, DBNull.Value };
+                        row.BeginEdit();
+                        row.DOM_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
+                        row.PROVE_CODIGO = proveedor.Codigo;
+                        row.EndEdit();  
+                    }
+                    if (row.DOM_DEPARTAMENTO == string.Empty && row.DOM_PISO == string.Empty)
+                    {
+                        object[] valorParam = { row.LOC_CODIGO, proveedor.Codigo, row.DOM_CALLE, row.DOM_NUMERO, DBNull.Value, DBNull.Value };
+                        row.BeginEdit();
+                        row.DOM_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
+                        row.PROVE_CODIGO = proveedor.Codigo;
+                        row.EndEdit();
+                    }
+                    if (row.DOM_DEPARTAMENTO != string.Empty && row.DOM_PISO != string.Empty)
+                    {
                         object[] valorParam = { row.LOC_CODIGO, proveedor.Codigo, row.DOM_CALLE, row.DOM_NUMERO, row.DOM_PISO, row.DOM_DEPARTAMENTO };
                         row.BeginEdit();
                         row.DOM_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
                         row.PROVE_CODIGO = proveedor.Codigo;
-                        row.EndEdit();                                        
+                        row.EndEdit();
+                    }
+                                                            
                 }
 
                 transaccion.Commit();
@@ -116,6 +140,118 @@ namespace GyCAP.DAL
                 transaccion.Rollback();
                 throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
             } 
+        }
+
+        //Metodo para guardar un proveedor nuevo
+        public static void ModificarProveedor(Entidades.Proveedor proveedor, Data.dsProveedor dsProveedor)
+        {
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                transaccion = DB.IniciarTransaccion();
+                string sql = string.Empty;
+
+                //Modifico la cabecera del Proveedor
+                sql = @"UPDATE [PROVEEDORES] SET 
+                            sec_codigo=@p0,
+                            prove_razonsocial=@p1, 
+                            prove_telprincipal=@p2, 
+                            prove_telalternativo=@p3 
+                        WHERE prove_codigo=@p4";
+
+                if (proveedor.TelSecundario == string.Empty)
+                {
+                    object[] valoresParametros = { proveedor.Sector.Codigo, proveedor.RazonSocial, proveedor.TelPrincipal, DBNull.Value, proveedor.Codigo };
+                    DB.executeNonQuery(sql, valoresParametros, transaccion);
+                }
+                else
+                {
+                    object[] valoresParametros = { proveedor.Sector.Codigo, proveedor.RazonSocial, proveedor.TelPrincipal, proveedor.TelSecundario, proveedor.Codigo};
+                    DB.executeNonQuery(sql, valoresParametros, transaccion);
+                }
+
+                //Inserto los domicilios que hayan sido agregados
+                foreach (Data.dsProveedor.DOMICILIOSRow row in (Data.dsProveedor.DOMICILIOSRow[])dsProveedor.DOMICILIOS.Select(null, null, System.Data.DataViewRowState.Added))
+                {
+                    sql = @"INSERT INTO [DOMICILIOS] ([loc_codigo], [prove_codigo], [dom_calle], [dom_numero], [dom_piso], [dom_departamento]) 
+                           VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
+
+                    if (row.DOM_PISO == string.Empty && row.DOM_DEPARTAMENTO != string.Empty)
+                    {
+                        object[] valorParam = { row.LOC_CODIGO, proveedor.Codigo, row.DOM_CALLE, row.DOM_NUMERO, DBNull.Value, row.DOM_DEPARTAMENTO };
+                        row.BeginEdit();
+                        row.DOM_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
+                        row.PROVE_CODIGO = proveedor.Codigo;
+                        row.EndEdit();
+                    }
+                    if (row.DOM_DEPARTAMENTO == string.Empty && row.DOM_PISO != string.Empty)
+                    {
+                        object[] valorParam = { row.LOC_CODIGO, proveedor.Codigo, row.DOM_CALLE, row.DOM_NUMERO, row.DOM_PISO, DBNull.Value };
+                        row.BeginEdit();
+                        row.DOM_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
+                        row.PROVE_CODIGO = proveedor.Codigo;
+                        row.EndEdit();
+                    }
+                    if (row.DOM_DEPARTAMENTO == string.Empty && row.DOM_PISO == string.Empty)
+                    {
+                        object[] valorParam = { row.LOC_CODIGO, proveedor.Codigo, row.DOM_CALLE, row.DOM_NUMERO, DBNull.Value, DBNull.Value };
+                        row.BeginEdit();
+                        row.DOM_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
+                        row.PROVE_CODIGO = proveedor.Codigo;
+                        row.EndEdit();
+                    }
+                    if (row.DOM_DEPARTAMENTO != string.Empty && row.DOM_PISO != string.Empty)
+                    {
+                        object[] valorParam = { row.LOC_CODIGO, proveedor.Codigo, row.DOM_CALLE, row.DOM_NUMERO, row.DOM_PISO, row.DOM_DEPARTAMENTO };
+                        row.BeginEdit();
+                        row.DOM_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
+                        row.PROVE_CODIGO = proveedor.Codigo;
+                        row.EndEdit();
+                    }
+
+                }
+
+                transaccion.Commit();
+                DB.FinalizarTransaccion();
+                
+            }
+            catch (SqlException ex)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
+            } 
+
+        }
+
+        //Metodo para eliminar un proveedor de la BD
+        public static void EliminarProveedor(int codigoProveedor)
+        {
+            SqlTransaction transaccion = null;
+
+            transaccion = DB.IniciarTransaccion();
+            string sql = string.Empty;
+            
+            try
+            {
+                sql = "DELETE FROM PROVEEDORES WHERE prove_codigo = @p0";
+                object[] valorParametros = { codigoProveedor };
+
+                //Eliminamos los domicilios del proveedor
+                DAL.DomicilioDAL.EliminarDomicilio(codigoProveedor, transaccion);
+
+                //Eliminamos el proveedor
+                DB.executeNonQuery(sql, valorParametros, transaccion);
+
+                transaccion.Commit();
+                DB.FinalizarTransaccion();
+            }          
+            catch (SqlException ex)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
+            } 
+
         }
 
     }

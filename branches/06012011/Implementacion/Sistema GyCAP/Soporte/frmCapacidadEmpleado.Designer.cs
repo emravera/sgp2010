@@ -141,6 +141,7 @@
             // 
             // txtNombreBuscar
             // 
+            this.txtNombreBuscar.CausesValidation = false;
             this.txtNombreBuscar.Location = new System.Drawing.Point(61, 24);
             this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
@@ -265,6 +266,7 @@
             // 
             // txtDescripcion
             // 
+            this.txtDescripcion.CausesValidation = false;
             this.txtDescripcion.Location = new System.Drawing.Point(80, 76);
             this.txtDescripcion.MaxLength = 130;
             this.txtDescripcion.Multiline = true;

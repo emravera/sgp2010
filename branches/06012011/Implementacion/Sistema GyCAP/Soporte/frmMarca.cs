@@ -224,10 +224,8 @@ namespace GyCAP.UI.Soporte
       //Guardado de los Datos  
       private void btnGuardar_Click(object sender, EventArgs e)
         {
-            string validacion = Validar();
-
-            //Revisamos que escribió algo y selecciono algo en el combo
-            if (validacion==string.Empty)
+           //Revisamos que escribió algo y selecciono algo en el combo
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
                 Entidades.Marca marca = new GyCAP.Entidades.Marca();
                 Entidades.Cliente cli = new GyCAP.Entidades.Cliente();
@@ -364,11 +362,7 @@ namespace GyCAP.UI.Soporte
                 }
                 //Actualizamos la lista con las modificaciones
                 dgvLista.Refresh();
-            }
-            else
-            {
-                Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
-            }
+            }            
         }
 
 
@@ -407,6 +401,8 @@ namespace GyCAP.UI.Soporte
                     {
                         hayDatos = true;
                     }
+
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
 
                     btnModificar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
@@ -512,41 +508,7 @@ namespace GyCAP.UI.Soporte
             }
         }
 
-        private string Validar()
-        {
-            string erroresValidacion = string.Empty;
-
-            string validacion = string.Empty;
-
-            //Control de combos
-            List<string> combos = new List<string>();
-            if (cbClienteDatos.SelectedIndex == -1 && chboxCliente.Checked == true)
-            {
-                combos.Add("Cliente");
-                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.Seleccion, combos);
-            }
-
-            //Control de los textbox
-            List<string> datos = new List<string>();
-            if (txtNombre.Text == string.Empty)
-            {
-                datos.Add("Nombre");
-                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
-            }
-
-            //Control de que no sean solo espacios
-            List<string> espacios = new List<string>();
-            if (txtNombre.Text.Trim().Length == 0)
-            {
-                datos.Add("Nombre");
-                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.SoloEspacios, espacios);
-            }
-
-            return erroresValidacion;
-        }
-
-
-        private void frmMarca_Activated(object sender, EventArgs e)
+       private void frmMarca_Activated(object sender, EventArgs e)
         {
             if (txtNombreBuscar.Enabled == true)
             {

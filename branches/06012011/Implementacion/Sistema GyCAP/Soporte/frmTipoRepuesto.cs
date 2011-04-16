@@ -108,10 +108,8 @@ namespace GyCAP.UI.Soporte
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            string validacion = Validar();
-
             //Revisamos que escribió algo
-            if (validacion == String.Empty)
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
                 Entidades.TipoRepuesto tipoRepuesto = new GyCAP.Entidades.TipoRepuesto();
 
@@ -186,11 +184,7 @@ namespace GyCAP.UI.Soporte
                         Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                 }
-            }
-            else
-            {
-                Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
-            }
+            }    
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -238,6 +232,8 @@ namespace GyCAP.UI.Soporte
                         hayDatos = true;
                     }
 
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
+
                     btnModificar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
                     txtNombre.Text = String.Empty;
@@ -260,22 +256,7 @@ namespace GyCAP.UI.Soporte
             }
         }
 
-        private string Validar()
-        {
-            string erroresValidacion = string.Empty;
-
-            //Control de los blancos de los textbox
-            List<string> datos = new List<string>();
-            if (txtNombre.Text.Trim().Length == 0)
-            {
-                datos.Add("Nombre");
-                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
-            }
-
-            return erroresValidacion;
-        }
-
-        private void frmtipoRepuesto_Activated(object sender, EventArgs e)
+       private void frmtipoRepuesto_Activated(object sender, EventArgs e)
         {
             if (txtNombre.Enabled == true)
             {

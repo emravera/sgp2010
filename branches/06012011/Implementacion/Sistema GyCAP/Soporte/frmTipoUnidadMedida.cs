@@ -103,10 +103,8 @@ namespace GyCAP.UI.Soporte
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            string validacion = Validar();
-
             //Revisamos que escribió algo
-            if (validacion == String.Empty)
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
                 Entidades.TipoUnidadMedida tipoUnidadMedida = new GyCAP.Entidades.TipoUnidadMedida();
 
@@ -182,10 +180,6 @@ namespace GyCAP.UI.Soporte
                         Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                 }
-            }
-            else
-            {
-                Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
             }
         }
 

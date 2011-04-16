@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.cbSectorDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.txtTelefonoAlt = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtRazonSocial = new System.Windows.Forms.TextBox();
@@ -81,7 +82,7 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cbSectorDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.btnNuevaLocalidad = new System.Windows.Forms.Button();
             this.gbDatos.SuspendLayout();
             this.tcABM.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -122,6 +123,16 @@
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Proveedor";
+            // 
+            // cbSectorDatos
+            // 
+            this.cbSectorDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSectorDatos.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbSectorDatos.FormattingEnabled = true;
+            this.cbSectorDatos.Location = new System.Drawing.Point(90, 68);
+            this.cbSectorDatos.Name = "cbSectorDatos";
+            this.cbSectorDatos.Size = new System.Drawing.Size(143, 21);
+            this.cbSectorDatos.TabIndex = 19;
             // 
             // txtTelefonoAlt
             // 
@@ -444,6 +455,7 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.btnNuevaLocalidad);
             this.groupBox2.Controls.Add(this.btnAgregarDomicilio);
             this.groupBox2.Controls.Add(this.cbLocalidad);
             this.groupBox2.Controls.Add(this.label12);
@@ -471,7 +483,7 @@
             this.btnAgregarDomicilio.Location = new System.Drawing.Point(396, 76);
             this.btnAgregarDomicilio.Name = "btnAgregarDomicilio";
             this.btnAgregarDomicilio.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregarDomicilio.TabIndex = 11;
+            this.btnAgregarDomicilio.TabIndex = 12;
             this.btnAgregarDomicilio.Text = "Agregar";
             this.btnAgregarDomicilio.UseVisualStyleBackColor = true;
             this.btnAgregarDomicilio.Click += new System.EventHandler(this.btnAgregarDomicilio_Click);
@@ -594,7 +606,7 @@
             this.gbGuardarCancelar.Name = "gbGuardarCancelar";
             this.gbGuardarCancelar.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbGuardarCancelar.Size = new System.Drawing.Size(479, 54);
-            this.gbGuardarCancelar.TabIndex = 1;
+            this.gbGuardarCancelar.TabIndex = 56;
             this.gbGuardarCancelar.TabStop = false;
             // 
             // btnVolver
@@ -662,6 +674,7 @@
             this.btnConsultar.Size = new System.Drawing.Size(57, 47);
             this.btnConsultar.Text = "&Consultar";
             this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
             // btnModificar
             // 
@@ -683,6 +696,7 @@
             this.btnEliminar.Size = new System.Drawing.Size(47, 47);
             this.btnEliminar.Text = "&Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnSalir
             // 
@@ -712,15 +726,15 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(632, 446);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
-            // cbSectorDatos
+            // btnNuevaLocalidad
             // 
-            this.cbSectorDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSectorDatos.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbSectorDatos.FormattingEnabled = true;
-            this.cbSectorDatos.Location = new System.Drawing.Point(90, 68);
-            this.cbSectorDatos.Name = "cbSectorDatos";
-            this.cbSectorDatos.Size = new System.Drawing.Size(143, 21);
-            this.cbSectorDatos.TabIndex = 19;
+            this.btnNuevaLocalidad.Location = new System.Drawing.Point(214, 76);
+            this.btnNuevaLocalidad.Name = "btnNuevaLocalidad";
+            this.btnNuevaLocalidad.Size = new System.Drawing.Size(35, 21);
+            this.btnNuevaLocalidad.TabIndex = 11;
+            this.btnNuevaLocalidad.Text = "+";
+            this.btnNuevaLocalidad.UseVisualStyleBackColor = true;
+            this.btnNuevaLocalidad.Click += new System.EventHandler(this.btnNuevaLocalidad_Click);
             // 
             // frmProveedor
             // 
@@ -814,5 +828,6 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox2;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbSectorDatos;
+        private System.Windows.Forms.Button btnNuevaLocalidad;
     }
 }

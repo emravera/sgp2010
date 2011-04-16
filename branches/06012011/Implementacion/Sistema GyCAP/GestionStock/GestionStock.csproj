@@ -138,6 +138,10 @@
       <Project>{BF769C01-D311-4BC9-813A-C63DC3B89319}</Project>
       <Name>Entidades %28Entidades\Entidades%29</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Soporte\Soporte.csproj">
+      <Project>{E62237F2-4821-4526-BE7C-45263EE307C5}</Project>
+      <Name>Soporte</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Text-Editor-25.png" />

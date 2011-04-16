@@ -56,6 +56,8 @@ namespace GyCAP.UI.Soporte
                         hayDatos = true;
                     }
 
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
+
                     btnModificar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
                     txtNombre.Text = String.Empty;
@@ -96,20 +98,6 @@ namespace GyCAP.UI.Soporte
             }
         }
 
-        private string Validar()
-        {
-            string validacion = string.Empty;
-
-            //Escribimos la validación para los textbox que no esten vacíos
-            List<string> datos = new List<string>();
-            if (txtNombre.Text.Trim().Length == 0 )
-            {
-                datos.Add("Nombre");
-                validacion = Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
-            }
-                                   
-            return validacion;
-        }
         private void frmProvincia_Activated(object sender, EventArgs e)
         {
             if (txtNombre.Enabled == true)
@@ -187,11 +175,10 @@ namespace GyCAP.UI.Soporte
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            string validacion = Validar();
             try
             {
                 //Revisamos que escribió algo
-                if (validacion == String.Empty)
+                if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
                 {
                     //Revisamos que está haciendo
                     if (estadoInterface != estadoUI.modificar)
@@ -212,8 +199,6 @@ namespace GyCAP.UI.Soporte
                         dsProvincia.PROVINCIAS.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
-
-
                     }
                     else
                     {
@@ -239,10 +224,6 @@ namespace GyCAP.UI.Soporte
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
-                }
-                else
-                {
-                    Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
                 }
             }
             catch (Entidades.Excepciones.ElementoExistenteException ex)
