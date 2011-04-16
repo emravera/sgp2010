@@ -144,13 +144,7 @@ namespace GyCAP.UI.ProcesoFabricacion
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            //Datos opcionales = descripcion, 
-            //Revisamos que completó los datos obligatorios
-            List<string> validacion = new List<string>();
-            if (txtNombre.Text == string.Empty) { validacion.Add("Nombre"); }
-            if (dtpFechaAlta.IsValueNull()) { validacion.Add("Fecha de creación"); }            
-            if (dgvDetalleHoja.Rows.Count == 0) { validacion.Add("El detalle de la Hoja de Ruta"); }
-            if (validacion.Count == 0)
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this, GyCAP.UI.Sistema.Validaciones.FormValidator.GrillaOptions.FilaAgregada))
             {
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
@@ -243,10 +237,6 @@ namespace GyCAP.UI.ProcesoFabricacion
                     }
                 }
                 dgvHojasRuta.Refresh();
-            }
-            else
-            {
-                MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.CompletarDatos, validacion), this.Text);
             }
         }
         
@@ -419,6 +409,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.inicio;
                     tcHojaRuta.SelectedTab = tpBuscar;
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
                     txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
@@ -575,11 +566,11 @@ namespace GyCAP.UI.ProcesoFabricacion
 
             dvStockOrigen = new DataView(dsHojaRuta.UBICACIONES_STOCK);
             dvStockDestino = new DataView(dsHojaRuta.UBICACIONES_STOCK);
-            cboStockOrigen.SetDatos(dvStockOrigen, "USTCK_NUMERO", "USTCK_NOMBRE", "Sin especificar...", true);
-            cboStockDestino.SetDatos(dvStockDestino, "USTCK_NUMERO", "USTCK_NOMBRE", "Sin especificar...", true);
+            cboStockOrigen.SetDatos(dvStockOrigen, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
+            cboStockDestino.SetDatos(dvStockDestino, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
 
             dvUbicacionStock = new DataView(dsHojaRuta.UBICACIONES_STOCK);
-            cboUbicacionStock.SetDatos(dvUbicacionStock, "USTCK_NUMERO", "USTCK_NOMBRE", "Sin especificar...", true);
+            cboUbicacionStock.SetDatos(dvUbicacionStock, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
         }        
 
         private void dgvHojasRuta_RowEnter(object sender, DataGridViewCellEventArgs e)

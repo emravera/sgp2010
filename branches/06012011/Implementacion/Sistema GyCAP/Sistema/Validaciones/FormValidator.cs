@@ -8,6 +8,9 @@ namespace GyCAP.UI.Sistema.Validaciones
 {
     public class FormValidator
     {
+        private static GrillaOptions opcion;
+        public enum GrillaOptions { FilaSeleccionada, FilaAgregada };
+        
         /// <summary>
         /// Valida los siguientes controles que tengan su propiedad CausesValidation = true
         ///     - Textbox no vacíos ni sólo espacios en blanco
@@ -15,12 +18,14 @@ namespace GyCAP.UI.Sistema.Validaciones
         ///     - Combobox (.NET) con SelectedIndex -1
         ///     - seleccionadorFecha (GyCAP) sin fecha seleccionada
         ///     - DataGridView (.NET) con al menos una fila seleccionada
+        ///     - DataGridView (.NET) con al menos una fila agregada (default)
         ///     - NumericUpDown (.NET) con value > 0
         /// </summary>
         /// <param name="formulario">El formulario a validar</param>
         /// <returns>true si es válido, false en caso contrario</returns>
         public static bool ValidarFormulario(Form formulario)
         {
+            opcion = GrillaOptions.FilaAgregada;
             ErrorProvider errProvider;
             if (formulario.Tag != null) { errProvider = (ErrorProvider)formulario.Tag; }
             else
@@ -33,6 +38,39 @@ namespace GyCAP.UI.Sistema.Validaciones
             errProvider.Tag = true;
             foreach (Control ctrl in formulario.Controls)
             {                
+                ProcessChildControls(ctrl, errProvider);
+                ValidarControl(ctrl, errProvider);
+            }
+
+            return (bool)errProvider.Tag;
+        }
+
+        /// <summary>
+        /// Valida los siguientes controles que tengan su propiedad CausesValidation = true
+        ///     - Textbox no vacíos ni sólo espacios en blanco
+        ///     - DropDownList (GyCAP) con GetSelectedIndex o GetSelectedValue -1
+        ///     - Combobox (.NET) con SelectedIndex -1
+        ///     - seleccionadorFecha (GyCAP) sin fecha seleccionada
+        ///     - DataGridView (.NET) con al menos una fila seleccionada
+        ///     - NumericUpDown (.NET) con value > 0
+        /// </summary>
+        /// <param name="formulario">El formulario a validar</param>
+        /// <returns>true si es válido, false en caso contrario</returns>
+        public static bool ValidarFormulario(Form formulario, GrillaOptions option)
+        {
+            opcion = option;
+            ErrorProvider errProvider;
+            if (formulario.Tag != null) { errProvider = (ErrorProvider)formulario.Tag; }
+            else
+            {
+                errProvider = new ErrorProvider();
+                errProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+                errProvider.ContainerControl = formulario;
+                formulario.Tag = errProvider;
+            }
+            errProvider.Tag = true;
+            foreach (Control ctrl in formulario.Controls)
+            {
                 ProcessChildControls(ctrl, errProvider);
                 ValidarControl(ctrl, errProvider);
             }
@@ -94,10 +132,18 @@ namespace GyCAP.UI.Sistema.Validaciones
             else if (ctrl.GetType().Equals(typeof(DataGridView)))
             {
                 DataGridView dgv = (DataGridView)ctrl;
-                if (dgv.CausesValidation && dgv.SelectedRows.Count == 0)
+                if (dgv.CausesValidation)                
                 {
-                    provider.SetError(ctrl, "Debe seleccionar un elemento de la grilla.");
-                    provider.Tag = false;
+                    if (opcion == GrillaOptions.FilaSeleccionada && dgv.SelectedRows.Count == 0) 
+                    {
+                        provider.SetError(ctrl, "Debe seleccionar un elemento de la grilla.");
+                        provider.Tag = false;
+                    }
+                    else if(opcion == GrillaOptions.FilaAgregada && dgv.Rows.Count == 0) 
+                    {
+                        provider.SetError(ctrl, "Debe agregar un elemento a la grilla.");
+                        provider.Tag = false;
+                    }                    
                 }
                 else { provider.SetError(ctrl, string.Empty); }
             }
