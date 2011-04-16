@@ -15,6 +15,7 @@ namespace GyCAP.UI.Sistema.Validaciones
         ///     - Combobox (.NET) con SelectedIndex -1
         ///     - seleccionadorFecha (GyCAP) sin fecha seleccionada
         ///     - DataGridView (.NET) con al menos una fila seleccionada
+        ///     - NumericUpDown (.NET) con value > 0
         /// </summary>
         /// <param name="formulario">El formulario a validar</param>
         /// <returns>true si es válido, false en caso contrario</returns>
@@ -96,6 +97,16 @@ namespace GyCAP.UI.Sistema.Validaciones
                 if (dgv.CausesValidation && dgv.SelectedRows.Count == 0)
                 {
                     provider.SetError(ctrl, "Debe seleccionar un elemento de la grilla.");
+                    provider.Tag = false;
+                }
+                else { provider.SetError(ctrl, string.Empty); }
+            }
+            else if (ctrl.GetType().Equals(typeof(NumericUpDown)))
+            {
+                NumericUpDown nud = (NumericUpDown)ctrl;
+                if (nud.CausesValidation && nud.Value == 0)
+                {
+                    provider.SetError(ctrl, "Debe ingresar un valor mayor que 0.");
                     provider.Tag = false;
                 }
                 else { provider.SetError(ctrl, string.Empty); }
