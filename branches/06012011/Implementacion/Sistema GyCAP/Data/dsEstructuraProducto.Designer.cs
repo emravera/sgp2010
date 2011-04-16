@@ -1853,8 +1853,6 @@ namespace GyCAP.Data {
             
             private global::System.Data.DataColumn columnMP_DESCRIPCION;
             
-            private global::System.Data.DataColumn columnMP_CANTIDADSTOCK;
-            
             private global::System.Data.DataColumn columnMP_COSTO;
             
             private global::System.Data.DataColumn columnUSTCK_NUMERO;
@@ -1918,13 +1916,6 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MP_CANTIDADSTOCKColumn {
-                get {
-                    return this.columnMP_CANTIDADSTOCK;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn MP_COSTOColumn {
                 get {
                     return this.columnMP_COSTO;
@@ -1967,14 +1958,13 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MATERIAS_PRIMASRow AddMATERIAS_PRIMASRow(UNIDADES_MEDIDARow parentUNIDADES_MEDIDARowBymateriaPrima_unidadMedida_fk, string MP_NOMBRE, string MP_DESCRIPCION, int MP_CANTIDADSTOCK, decimal MP_COSTO, decimal USTCK_NUMERO) {
+            public MATERIAS_PRIMASRow AddMATERIAS_PRIMASRow(UNIDADES_MEDIDARow parentUNIDADES_MEDIDARowBymateriaPrima_unidadMedida_fk, string MP_NOMBRE, string MP_DESCRIPCION, decimal MP_COSTO, decimal USTCK_NUMERO) {
                 MATERIAS_PRIMASRow rowMATERIAS_PRIMASRow = ((MATERIAS_PRIMASRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
                         MP_NOMBRE,
                         MP_DESCRIPCION,
-                        MP_CANTIDADSTOCK,
                         MP_COSTO,
                         USTCK_NUMERO};
                 if ((parentUNIDADES_MEDIDARowBymateriaPrima_unidadMedida_fk != null)) {
@@ -2009,7 +1999,6 @@ namespace GyCAP.Data {
                 this.columnUMED_CODIGO = base.Columns["UMED_CODIGO"];
                 this.columnMP_NOMBRE = base.Columns["MP_NOMBRE"];
                 this.columnMP_DESCRIPCION = base.Columns["MP_DESCRIPCION"];
-                this.columnMP_CANTIDADSTOCK = base.Columns["MP_CANTIDADSTOCK"];
                 this.columnMP_COSTO = base.Columns["MP_COSTO"];
                 this.columnUSTCK_NUMERO = base.Columns["USTCK_NUMERO"];
             }
@@ -2024,8 +2013,6 @@ namespace GyCAP.Data {
                 base.Columns.Add(this.columnMP_NOMBRE);
                 this.columnMP_DESCRIPCION = new global::System.Data.DataColumn("MP_DESCRIPCION", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMP_DESCRIPCION);
-                this.columnMP_CANTIDADSTOCK = new global::System.Data.DataColumn("MP_CANTIDADSTOCK", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMP_CANTIDADSTOCK);
                 this.columnMP_COSTO = new global::System.Data.DataColumn("MP_COSTO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMP_COSTO);
                 this.columnUSTCK_NUMERO = new global::System.Data.DataColumn("USTCK_NUMERO", typeof(decimal), null, global::System.Data.MappingType.Element);
@@ -4526,21 +4513,6 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int MP_CANTIDADSTOCK {
-                get {
-                    try {
-                        return ((int)(this[this.tableMATERIAS_PRIMAS.MP_CANTIDADSTOCKColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MP_CANTIDADSTOCK\' in table \'MATERIAS_PRIMAS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMATERIAS_PRIMAS.MP_CANTIDADSTOCKColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public decimal MP_COSTO {
                 get {
                     try {
@@ -4608,16 +4580,6 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetMP_DESCRIPCIONNull() {
                 this[this.tableMATERIAS_PRIMAS.MP_DESCRIPCIONColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsMP_CANTIDADSTOCKNull() {
-                return this.IsNull(this.tableMATERIAS_PRIMAS.MP_CANTIDADSTOCKColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetMP_CANTIDADSTOCKNull() {
-                this[this.tableMATERIAS_PRIMAS.MP_CANTIDADSTOCKColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7908,58 +7870,47 @@ SELECT HR_CODIGO, HR_NOMBRE, HR_DESCRIPCION, HR_ACTIVO, HR_FECHAALTA, USTCK_NUME
             tableMapping.ColumnMappings.Add("UMED_CODIGO", "UMED_CODIGO");
             tableMapping.ColumnMappings.Add("MP_NOMBRE", "MP_NOMBRE");
             tableMapping.ColumnMappings.Add("MP_DESCRIPCION", "MP_DESCRIPCION");
-            tableMapping.ColumnMappings.Add("MP_CANTIDADSTOCK", "MP_CANTIDADSTOCK");
             tableMapping.ColumnMappings.Add("MP_COSTO", "MP_COSTO");
             tableMapping.ColumnMappings.Add("USTCK_NUMERO", "USTCK_NUMERO");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[MATERIAS_PRIMAS] WHERE (([MP_CODIGO] = @Original_MP_CODIGO) AND ((@IsNull_UMED_CODIGO = 1 AND [UMED_CODIGO] IS NULL) OR ([UMED_CODIGO] = @Original_UMED_CODIGO)) AND ((@IsNull_MP_NOMBRE = 1 AND [MP_NOMBRE] IS NULL) OR ([MP_NOMBRE] = @Original_MP_NOMBRE)) AND ((@IsNull_MP_DESCRIPCION = 1 AND [MP_DESCRIPCION] IS NULL) OR ([MP_DESCRIPCION] = @Original_MP_DESCRIPCION)) AND ((@IsNull_MP_CANTIDADSTOCK = 1 AND [MP_CANTIDADSTOCK] IS NULL) OR ([MP_CANTIDADSTOCK] = @Original_MP_CANTIDADSTOCK)) AND ((@IsNull_MP_COSTO = 1 AND [MP_COSTO] IS NULL) OR ([MP_COSTO] = @Original_MP_COSTO)) AND ((@IsNull_USTCK_NUMERO = 1 AND [USTCK_NUMERO] IS NULL) OR ([USTCK_NUMERO] = @Original_USTCK_NUMERO)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [MATERIAS_PRIMAS] WHERE (([MP_CODIGO] = @Original_MP_CODIGO) AND ([UMED_CODIGO] = @Original_UMED_CODIGO) AND ([MP_NOMBRE] = @Original_MP_NOMBRE) AND ((@IsNull_MP_DESCRIPCION = 1 AND [MP_DESCRIPCION] IS NULL) OR ([MP_DESCRIPCION] = @Original_MP_DESCRIPCION)) AND ((@IsNull_MP_COSTO = 1 AND [MP_COSTO] IS NULL) OR ([MP_COSTO] = @Original_MP_COSTO)) AND ((@IsNull_USTCK_NUMERO = 1 AND [USTCK_NUMERO] IS NULL) OR ([USTCK_NUMERO] = @Original_USTCK_NUMERO)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UMED_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_CANTIDADSTOCK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_CANTIDADSTOCK", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_CANTIDADSTOCK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_CANTIDADSTOCK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_COSTO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_COSTO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "MP_COSTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[MATERIAS_PRIMAS] ([UMED_CODIGO], [MP_NOMBRE], [MP_DESCRIPCION], [MP_CANTIDADSTOCK], [MP_COSTO], [USTCK_NUMERO]) VALUES (@UMED_CODIGO, @MP_NOMBRE, @MP_DESCRIPCION, @MP_CANTIDADSTOCK, @MP_COSTO, @USTCK_NUMERO);
-SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_COSTO, USTCK_NUMERO FROM MATERIAS_PRIMAS WHERE (MP_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [MATERIAS_PRIMAS] ([UMED_CODIGO], [MP_NOMBRE], [MP_DESCRIPCION], [MP_COSTO], [USTCK_NUMERO]) VALUES (@UMED_CODIGO, @MP_NOMBRE, @MP_DESCRIPCION, @MP_COSTO, @USTCK_NUMERO);
+SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_COSTO, USTCK_NUMERO FROM MATERIAS_PRIMAS WHERE (MP_CODIGO = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_CANTIDADSTOCK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_CANTIDADSTOCK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "MP_COSTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[MATERIAS_PRIMAS] SET [UMED_CODIGO] = @UMED_CODIGO, [MP_NOMBRE] = @MP_NOMBRE, [MP_DESCRIPCION] = @MP_DESCRIPCION, [MP_CANTIDADSTOCK] = @MP_CANTIDADSTOCK, [MP_COSTO] = @MP_COSTO, [USTCK_NUMERO] = @USTCK_NUMERO WHERE (([MP_CODIGO] = @Original_MP_CODIGO) AND ((@IsNull_UMED_CODIGO = 1 AND [UMED_CODIGO] IS NULL) OR ([UMED_CODIGO] = @Original_UMED_CODIGO)) AND ((@IsNull_MP_NOMBRE = 1 AND [MP_NOMBRE] IS NULL) OR ([MP_NOMBRE] = @Original_MP_NOMBRE)) AND ((@IsNull_MP_DESCRIPCION = 1 AND [MP_DESCRIPCION] IS NULL) OR ([MP_DESCRIPCION] = @Original_MP_DESCRIPCION)) AND ((@IsNull_MP_CANTIDADSTOCK = 1 AND [MP_CANTIDADSTOCK] IS NULL) OR ([MP_CANTIDADSTOCK] = @Original_MP_CANTIDADSTOCK)) AND ((@IsNull_MP_COSTO = 1 AND [MP_COSTO] IS NULL) OR ([MP_COSTO] = @Original_MP_COSTO)) AND ((@IsNull_USTCK_NUMERO = 1 AND [USTCK_NUMERO] IS NULL) OR ([USTCK_NUMERO] = @Original_USTCK_NUMERO)));
-SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_COSTO, USTCK_NUMERO FROM MATERIAS_PRIMAS WHERE (MP_CODIGO = @MP_CODIGO)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [MATERIAS_PRIMAS] SET [UMED_CODIGO] = @UMED_CODIGO, [MP_NOMBRE] = @MP_NOMBRE, [MP_DESCRIPCION] = @MP_DESCRIPCION, [MP_COSTO] = @MP_COSTO, [USTCK_NUMERO] = @USTCK_NUMERO WHERE (([MP_CODIGO] = @Original_MP_CODIGO) AND ([UMED_CODIGO] = @Original_UMED_CODIGO) AND ([MP_NOMBRE] = @Original_MP_NOMBRE) AND ((@IsNull_MP_DESCRIPCION = 1 AND [MP_DESCRIPCION] IS NULL) OR ([MP_DESCRIPCION] = @Original_MP_DESCRIPCION)) AND ((@IsNull_MP_COSTO = 1 AND [MP_COSTO] IS NULL) OR ([MP_COSTO] = @Original_MP_COSTO)) AND ((@IsNull_USTCK_NUMERO = 1 AND [USTCK_NUMERO] IS NULL) OR ([USTCK_NUMERO] = @Original_USTCK_NUMERO)));
+SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_COSTO, USTCK_NUMERO FROM MATERIAS_PRIMAS WHERE (MP_CODIGO = @MP_CODIGO)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_CANTIDADSTOCK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_CANTIDADSTOCK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "MP_COSTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UMED_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_CANTIDADSTOCK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_CANTIDADSTOCK", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_CANTIDADSTOCK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_CANTIDADSTOCK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_COSTO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_COSTO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "MP_COSTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -7978,8 +7929,8 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_C
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_CO" +
-                "STO, USTCK_NUMERO FROM dbo.MATERIAS_PRIMAS";
+            this._commandCollection[0].CommandText = "SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_COSTO, USTCK_NUMERO " +
+                "FROM MATERIAS_PRIMAS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -8033,55 +7984,38 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_C
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_MP_CODIGO, global::System.Nullable<decimal> Original_UMED_CODIGO, string Original_MP_NOMBRE, string Original_MP_DESCRIPCION, global::System.Nullable<int> Original_MP_CANTIDADSTOCK, global::System.Nullable<decimal> Original_MP_COSTO, global::System.Nullable<decimal> Original_USTCK_NUMERO) {
+        public virtual int Delete(decimal Original_MP_CODIGO, decimal Original_UMED_CODIGO, string Original_MP_NOMBRE, string Original_MP_DESCRIPCION, global::System.Nullable<decimal> Original_MP_COSTO, global::System.Nullable<decimal> Original_USTCK_NUMERO) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_MP_CODIGO));
-            if ((Original_UMED_CODIGO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_UMED_CODIGO.Value));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_UMED_CODIGO));
+            if ((Original_MP_NOMBRE == null)) {
+                throw new global::System.ArgumentNullException("Original_MP_NOMBRE");
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_MP_NOMBRE));
             }
-            if ((Original_MP_NOMBRE == null)) {
+            if ((Original_MP_DESCRIPCION == null)) {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_MP_NOMBRE));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_MP_DESCRIPCION));
             }
-            if ((Original_MP_DESCRIPCION == null)) {
+            if ((Original_MP_COSTO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((decimal)(Original_MP_COSTO.Value));
+            }
+            else {
                 this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_MP_DESCRIPCION));
-            }
-            if ((Original_MP_CANTIDADSTOCK.HasValue == true)) {
+            if ((Original_USTCK_NUMERO.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((int)(Original_MP_CANTIDADSTOCK.Value));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((decimal)(Original_USTCK_NUMERO.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((Original_MP_COSTO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((decimal)(Original_MP_COSTO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((Original_USTCK_NUMERO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((decimal)(Original_USTCK_NUMERO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -8102,15 +8036,10 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_C
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<decimal> UMED_CODIGO, string MP_NOMBRE, string MP_DESCRIPCION, global::System.Nullable<int> MP_CANTIDADSTOCK, global::System.Nullable<decimal> MP_COSTO, global::System.Nullable<decimal> USTCK_NUMERO) {
-            if ((UMED_CODIGO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(UMED_CODIGO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
+        public virtual int Insert(decimal UMED_CODIGO, string MP_NOMBRE, string MP_DESCRIPCION, global::System.Nullable<decimal> MP_COSTO, global::System.Nullable<decimal> USTCK_NUMERO) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(UMED_CODIGO));
             if ((MP_NOMBRE == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("MP_NOMBRE");
             }
             else {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((string)(MP_NOMBRE));
@@ -8121,23 +8050,17 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_C
             else {
                 this.Adapter.InsertCommand.Parameters[2].Value = ((string)(MP_DESCRIPCION));
             }
-            if ((MP_CANTIDADSTOCK.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(MP_CANTIDADSTOCK.Value));
+            if ((MP_COSTO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(MP_COSTO.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
-            if ((MP_COSTO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(MP_COSTO.Value));
+            if ((USTCK_NUMERO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(USTCK_NUMERO.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((USTCK_NUMERO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(USTCK_NUMERO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -8158,15 +8081,10 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_C
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<decimal> UMED_CODIGO, string MP_NOMBRE, string MP_DESCRIPCION, global::System.Nullable<int> MP_CANTIDADSTOCK, global::System.Nullable<decimal> MP_COSTO, global::System.Nullable<decimal> USTCK_NUMERO, decimal Original_MP_CODIGO, global::System.Nullable<decimal> Original_UMED_CODIGO, string Original_MP_NOMBRE, string Original_MP_DESCRIPCION, global::System.Nullable<int> Original_MP_CANTIDADSTOCK, global::System.Nullable<decimal> Original_MP_COSTO, global::System.Nullable<decimal> Original_USTCK_NUMERO, decimal MP_CODIGO) {
-            if ((UMED_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(UMED_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
+        public virtual int Update(decimal UMED_CODIGO, string MP_NOMBRE, string MP_DESCRIPCION, global::System.Nullable<decimal> MP_COSTO, global::System.Nullable<decimal> USTCK_NUMERO, decimal Original_MP_CODIGO, decimal Original_UMED_CODIGO, string Original_MP_NOMBRE, string Original_MP_DESCRIPCION, global::System.Nullable<decimal> Original_MP_COSTO, global::System.Nullable<decimal> Original_USTCK_NUMERO, decimal MP_CODIGO) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(UMED_CODIGO));
             if ((MP_NOMBRE == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("MP_NOMBRE");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(MP_NOMBRE));
@@ -8177,74 +8095,51 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_C
             else {
                 this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(MP_DESCRIPCION));
             }
-            if ((MP_CANTIDADSTOCK.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(MP_CANTIDADSTOCK.Value));
+            if ((MP_COSTO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(MP_COSTO.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
-            if ((MP_COSTO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(MP_COSTO.Value));
+            if ((USTCK_NUMERO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(USTCK_NUMERO.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            if ((USTCK_NUMERO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(USTCK_NUMERO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_MP_CODIGO));
-            if ((Original_UMED_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_UMED_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(Original_MP_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_UMED_CODIGO));
             if ((Original_MP_NOMBRE == null)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Original_MP_NOMBRE");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_MP_NOMBRE));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_MP_NOMBRE));
             }
             if ((Original_MP_DESCRIPCION == null)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_MP_DESCRIPCION));
-            }
-            if ((Original_MP_CANTIDADSTOCK.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_MP_CANTIDADSTOCK.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_MP_DESCRIPCION));
             }
             if ((Original_MP_COSTO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((decimal)(Original_MP_COSTO.Value));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_MP_COSTO.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
             if ((Original_USTCK_NUMERO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((decimal)(Original_USTCK_NUMERO.Value));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_USTCK_NUMERO.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[19].Value = ((decimal)(MP_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((decimal)(MP_CODIGO));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8264,8 +8159,8 @@ SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_C
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<decimal> UMED_CODIGO, string MP_NOMBRE, string MP_DESCRIPCION, global::System.Nullable<int> MP_CANTIDADSTOCK, global::System.Nullable<decimal> MP_COSTO, global::System.Nullable<decimal> USTCK_NUMERO, decimal Original_MP_CODIGO, global::System.Nullable<decimal> Original_UMED_CODIGO, string Original_MP_NOMBRE, string Original_MP_DESCRIPCION, global::System.Nullable<int> Original_MP_CANTIDADSTOCK, global::System.Nullable<decimal> Original_MP_COSTO, global::System.Nullable<decimal> Original_USTCK_NUMERO) {
-            return this.Update(UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_COSTO, USTCK_NUMERO, Original_MP_CODIGO, Original_UMED_CODIGO, Original_MP_NOMBRE, Original_MP_DESCRIPCION, Original_MP_CANTIDADSTOCK, Original_MP_COSTO, Original_USTCK_NUMERO, Original_MP_CODIGO);
+        public virtual int Update(decimal UMED_CODIGO, string MP_NOMBRE, string MP_DESCRIPCION, global::System.Nullable<decimal> MP_COSTO, global::System.Nullable<decimal> USTCK_NUMERO, decimal Original_MP_CODIGO, decimal Original_UMED_CODIGO, string Original_MP_NOMBRE, string Original_MP_DESCRIPCION, global::System.Nullable<decimal> Original_MP_COSTO, global::System.Nullable<decimal> Original_USTCK_NUMERO) {
+            return this.Update(UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_COSTO, USTCK_NUMERO, Original_MP_CODIGO, Original_UMED_CODIGO, Original_MP_NOMBRE, Original_MP_DESCRIPCION, Original_MP_COSTO, Original_USTCK_NUMERO, Original_MP_CODIGO);
         }
     }
     

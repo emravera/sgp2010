@@ -2,10 +2,11 @@
 <xs:schema id="dsMateriaPrima" targetNamespace="http://tempuri.org/dsMateriaPrima.xsd" xmlns:mstns="http://tempuri.org/dsMateriaPrima.xsd" xmlns="http://tempuri.org/dsMateriaPrima.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
-      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="2" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ProyectoConnectionString3" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ProyectoConnectionString3 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.GyCAP.Data.Properties.Settings.GlobalReference.Default.ProyectoConnectionString3" Provider="System.Data.SqlClient" />
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ProyectoConnectionString5" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ProyectoConnectionString5 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.GyCAP.Data.Properties.Settings.GlobalReference.Default.ProyectoConnectionString5" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ProyectoConnectionString3" IsAppSettingsProperty="true" Modifier="Assembly" Name="ProyectoConnectionString3 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.GyCAP.Data.Properties.Settings.GlobalReference.Default.ProyectoConnectionString3" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ProyectoConnectionString5" IsAppSettingsProperty="true" Modifier="Assembly" Name="ProyectoConnectionString5 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.GyCAP.Data.Properties.Settings.GlobalReference.Default.ProyectoConnectionString5" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ProyectoConnectionString2" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ProyectoConnectionString2 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.GyCAP.Data.Properties.Settings.GlobalReference.Default.ProyectoConnectionString2" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="MATERIASPRIMASPRINCIPALESTableAdapter" GeneratorDataComponentClassName="MATERIASPRIMASPRINCIPALESTableAdapter" Name="MATERIASPRIMASPRINCIPALES" UserDataComponentName="MATERIASPRIMASPRINCIPALESTableAdapter">
@@ -61,83 +62,6 @@ SELECT MPPR_CODIGO, MP_CODIGO, MPPR_CANTIDAD FROM MATERIASPRIMASPRINCIPALES WHER
               <Mapping SourceColumn="MPPR_CODIGO" DataSetColumn="MPPR_CODIGO" />
               <Mapping SourceColumn="MP_CODIGO" DataSetColumn="MP_CODIGO" />
               <Mapping SourceColumn="MPPR_CANTIDAD" DataSetColumn="MPPR_CANTIDAD" />
-            </Mappings>
-            <Sources />
-          </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="MATERIAS_PRIMASTableAdapter" GeneratorDataComponentClassName="MATERIAS_PRIMASTableAdapter" Name="MATERIAS_PRIMAS" UserDataComponentName="MATERIAS_PRIMASTableAdapter">
-            <MainSource>
-              <DbSource ConnectionRef="ProyectoConnectionString3 (Settings)" DbObjectName="Proyecto.dbo.MATERIAS_PRIMAS" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
-                <DeleteCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>DELETE FROM [dbo].[MATERIAS_PRIMAS] WHERE (([MP_CODIGO] = @Original_MP_CODIGO) AND ((@IsNull_UMED_CODIGO = 1 AND [UMED_CODIGO] IS NULL) OR ([UMED_CODIGO] = @Original_UMED_CODIGO)) AND ((@IsNull_MP_NOMBRE = 1 AND [MP_NOMBRE] IS NULL) OR ([MP_NOMBRE] = @Original_MP_NOMBRE)) AND ((@IsNull_MP_DESCRIPCION = 1 AND [MP_DESCRIPCION] IS NULL) OR ([MP_DESCRIPCION] = @Original_MP_DESCRIPCION)) AND ((@IsNull_MP_CANTIDADSTOCK = 1 AND [MP_CANTIDADSTOCK] IS NULL) OR ([MP_CANTIDADSTOCK] = @Original_MP_CANTIDADSTOCK)) AND ((@IsNull_MP_PRECIO = 1 AND [MP_PRECIO] IS NULL) OR ([MP_PRECIO] = @Original_MP_PRECIO)))</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_MP_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="MP_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_UMED_CODIGO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="UMED_CODIGO" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_UMED_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="UMED_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_MP_NOMBRE" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MP_NOMBRE" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_MP_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="MP_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_MP_DESCRIPCION" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MP_DESCRIPCION" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_MP_DESCRIPCION" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="MP_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_MP_CANTIDADSTOCK" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MP_CANTIDADSTOCK" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_MP_CANTIDADSTOCK" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MP_CANTIDADSTOCK" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_MP_PRECIO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MP_PRECIO" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_MP_PRECIO" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="MP_PRECIO" SourceColumnNullMapping="false" SourceVersion="Original" />
-                    </Parameters>
-                  </DbCommand>
-                </DeleteCommand>
-                <InsertCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>INSERT INTO [dbo].[MATERIAS_PRIMAS] ([UMED_CODIGO], [MP_NOMBRE], [MP_DESCRIPCION], [MP_CANTIDADSTOCK], [MP_PRECIO]) VALUES (@UMED_CODIGO, @MP_NOMBRE, @MP_DESCRIPCION, @MP_CANTIDADSTOCK, @MP_PRECIO);
-SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_PRECIO FROM MATERIAS_PRIMAS WHERE (MP_CODIGO = SCOPE_IDENTITY())</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@UMED_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="UMED_CODIGO" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@MP_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="MP_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@MP_DESCRIPCION" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="MP_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@MP_CANTIDADSTOCK" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MP_CANTIDADSTOCK" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@MP_PRECIO" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="MP_PRECIO" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </InsertCommand>
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_PRECIO FROM dbo.MATERIAS_PRIMAS</CommandText>
-                    <Parameters />
-                  </DbCommand>
-                </SelectCommand>
-                <UpdateCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>UPDATE [dbo].[MATERIAS_PRIMAS] SET [UMED_CODIGO] = @UMED_CODIGO, [MP_NOMBRE] = @MP_NOMBRE, [MP_DESCRIPCION] = @MP_DESCRIPCION, [MP_CANTIDADSTOCK] = @MP_CANTIDADSTOCK, [MP_PRECIO] = @MP_PRECIO WHERE (([MP_CODIGO] = @Original_MP_CODIGO) AND ((@IsNull_UMED_CODIGO = 1 AND [UMED_CODIGO] IS NULL) OR ([UMED_CODIGO] = @Original_UMED_CODIGO)) AND ((@IsNull_MP_NOMBRE = 1 AND [MP_NOMBRE] IS NULL) OR ([MP_NOMBRE] = @Original_MP_NOMBRE)) AND ((@IsNull_MP_DESCRIPCION = 1 AND [MP_DESCRIPCION] IS NULL) OR ([MP_DESCRIPCION] = @Original_MP_DESCRIPCION)) AND ((@IsNull_MP_CANTIDADSTOCK = 1 AND [MP_CANTIDADSTOCK] IS NULL) OR ([MP_CANTIDADSTOCK] = @Original_MP_CANTIDADSTOCK)) AND ((@IsNull_MP_PRECIO = 1 AND [MP_PRECIO] IS NULL) OR ([MP_PRECIO] = @Original_MP_PRECIO)));
-SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_PRECIO FROM MATERIAS_PRIMAS WHERE (MP_CODIGO = @MP_CODIGO)</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@UMED_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="UMED_CODIGO" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@MP_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="MP_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@MP_DESCRIPCION" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="MP_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@MP_CANTIDADSTOCK" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MP_CANTIDADSTOCK" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@MP_PRECIO" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="MP_PRECIO" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_MP_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="MP_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_UMED_CODIGO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="UMED_CODIGO" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_UMED_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="UMED_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_MP_NOMBRE" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MP_NOMBRE" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_MP_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="MP_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_MP_DESCRIPCION" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MP_DESCRIPCION" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_MP_DESCRIPCION" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="MP_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_MP_CANTIDADSTOCK" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MP_CANTIDADSTOCK" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_MP_CANTIDADSTOCK" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MP_CANTIDADSTOCK" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_MP_PRECIO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MP_PRECIO" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_MP_PRECIO" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="MP_PRECIO" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="MP_CODIGO" ColumnName="MP_CODIGO" DataSourceName="" DataTypeServer="numeric" DbType="Decimal" Direction="Input" ParameterName="@MP_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="9" SourceColumn="MP_CODIGO" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </UpdateCommand>
-              </DbSource>
-            </MainSource>
-            <Mappings>
-              <Mapping SourceColumn="MP_CODIGO" DataSetColumn="MP_CODIGO" />
-              <Mapping SourceColumn="UMED_CODIGO" DataSetColumn="UMED_CODIGO" />
-              <Mapping SourceColumn="MP_NOMBRE" DataSetColumn="MP_NOMBRE" />
-              <Mapping SourceColumn="MP_DESCRIPCION" DataSetColumn="MP_DESCRIPCION" />
-              <Mapping SourceColumn="MP_CANTIDADSTOCK" DataSetColumn="MP_CANTIDADSTOCK" />
-              <Mapping SourceColumn="MP_PRECIO" DataSetColumn="MP_PRECIO" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -253,6 +177,79 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="MATERIAS_PRIMASTableAdapter" GeneratorDataComponentClassName="MATERIAS_PRIMASTableAdapter" Name="MATERIAS_PRIMAS" UserDataComponentName="MATERIAS_PRIMASTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ProyectoConnectionString2 (Settings)" DbObjectName="Proyecto.dbo.MATERIAS_PRIMAS" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [dbo].[MATERIAS_PRIMAS] WHERE (([MP_CODIGO] = @Original_MP_CODIGO) AND ([UMED_CODIGO] = @Original_UMED_CODIGO) AND ([MP_NOMBRE] = @Original_MP_NOMBRE) AND ((@IsNull_MP_DESCRIPCION = 1 AND [MP_DESCRIPCION] IS NULL) OR ([MP_DESCRIPCION] = @Original_MP_DESCRIPCION)) AND ((@IsNull_MP_COSTO = 1 AND [MP_COSTO] IS NULL) OR ([MP_COSTO] = @Original_MP_COSTO)) AND ((@IsNull_USTCK_NUMERO = 1 AND [USTCK_NUMERO] IS NULL) OR ([USTCK_NUMERO] = @Original_USTCK_NUMERO)))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_MP_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="MP_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_UMED_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="UMED_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_MP_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="MP_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_MP_DESCRIPCION" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MP_DESCRIPCION" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_MP_DESCRIPCION" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="MP_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_MP_COSTO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MP_COSTO" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_MP_COSTO" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="MP_COSTO" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_USTCK_NUMERO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="USTCK_NUMERO" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_USTCK_NUMERO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="USTCK_NUMERO" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [dbo].[MATERIAS_PRIMAS] ([UMED_CODIGO], [MP_NOMBRE], [MP_DESCRIPCION], [MP_COSTO], [USTCK_NUMERO]) VALUES (@UMED_CODIGO, @MP_NOMBRE, @MP_DESCRIPCION, @MP_COSTO, @USTCK_NUMERO);
+SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_COSTO, USTCK_NUMERO FROM MATERIAS_PRIMAS WHERE (MP_CODIGO = SCOPE_IDENTITY())</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@UMED_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="UMED_CODIGO" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@MP_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="MP_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@MP_DESCRIPCION" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="MP_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@MP_COSTO" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="MP_COSTO" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@USTCK_NUMERO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="USTCK_NUMERO" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_COSTO, USTCK_NUMERO FROM dbo.MATERIAS_PRIMAS</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [dbo].[MATERIAS_PRIMAS] SET [UMED_CODIGO] = @UMED_CODIGO, [MP_NOMBRE] = @MP_NOMBRE, [MP_DESCRIPCION] = @MP_DESCRIPCION, [MP_COSTO] = @MP_COSTO, [USTCK_NUMERO] = @USTCK_NUMERO WHERE (([MP_CODIGO] = @Original_MP_CODIGO) AND ([UMED_CODIGO] = @Original_UMED_CODIGO) AND ([MP_NOMBRE] = @Original_MP_NOMBRE) AND ((@IsNull_MP_DESCRIPCION = 1 AND [MP_DESCRIPCION] IS NULL) OR ([MP_DESCRIPCION] = @Original_MP_DESCRIPCION)) AND ((@IsNull_MP_COSTO = 1 AND [MP_COSTO] IS NULL) OR ([MP_COSTO] = @Original_MP_COSTO)) AND ((@IsNull_USTCK_NUMERO = 1 AND [USTCK_NUMERO] IS NULL) OR ([USTCK_NUMERO] = @Original_USTCK_NUMERO)));
+SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_COSTO, USTCK_NUMERO FROM MATERIAS_PRIMAS WHERE (MP_CODIGO = @MP_CODIGO)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@UMED_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="UMED_CODIGO" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@MP_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="MP_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@MP_DESCRIPCION" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="MP_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@MP_COSTO" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="MP_COSTO" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@USTCK_NUMERO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="USTCK_NUMERO" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_MP_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="MP_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_UMED_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="UMED_CODIGO" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_MP_NOMBRE" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="MP_NOMBRE" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_MP_DESCRIPCION" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MP_DESCRIPCION" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_MP_DESCRIPCION" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="MP_DESCRIPCION" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_MP_COSTO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MP_COSTO" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_MP_COSTO" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="MP_COSTO" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_USTCK_NUMERO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="USTCK_NUMERO" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_USTCK_NUMERO" Precision="10" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="USTCK_NUMERO" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="MP_CODIGO" ColumnName="MP_CODIGO" DataSourceName="" DataTypeServer="numeric" DbType="Decimal" Direction="Input" ParameterName="@MP_CODIGO" Precision="10" ProviderType="Decimal" Scale="0" Size="9" SourceColumn="MP_CODIGO" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="MP_CODIGO" DataSetColumn="MP_CODIGO" />
+              <Mapping SourceColumn="UMED_CODIGO" DataSetColumn="UMED_CODIGO" />
+              <Mapping SourceColumn="MP_NOMBRE" DataSetColumn="MP_NOMBRE" />
+              <Mapping SourceColumn="MP_DESCRIPCION" DataSetColumn="MP_DESCRIPCION" />
+              <Mapping SourceColumn="MP_COSTO" DataSetColumn="MP_COSTO" />
+              <Mapping SourceColumn="USTCK_NUMERO" DataSetColumn="USTCK_NUMERO" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -264,49 +261,25 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
         <xs:element name="MATERIASPRIMASPRINCIPALES" msprop:Generator_UserTableName="MATERIASPRIMASPRINCIPALES" msprop:Generator_RowDeletedName="MATERIASPRIMASPRINCIPALESRowDeleted" msprop:Generator_RowChangedName="MATERIASPRIMASPRINCIPALESRowChanged" msprop:Generator_RowClassName="MATERIASPRIMASPRINCIPALESRow" msprop:Generator_RowChangingName="MATERIASPRIMASPRINCIPALESRowChanging" msprop:Generator_RowEvArgName="MATERIASPRIMASPRINCIPALESRowChangeEvent" msprop:Generator_RowEvHandlerName="MATERIASPRIMASPRINCIPALESRowChangeEventHandler" msprop:Generator_TableClassName="MATERIASPRIMASPRINCIPALESDataTable" msprop:Generator_TableVarName="tableMATERIASPRIMASPRINCIPALES" msprop:Generator_RowDeletingName="MATERIASPRIMASPRINCIPALESRowDeleting" msprop:Generator_TablePropName="MATERIASPRIMASPRINCIPALES">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="MPPR_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="MPPR_CODIGO" msprop:Generator_ColumnPropNameInRow="MPPR_CODIGO" msprop:Generator_ColumnVarNameInTable="columnMPPR_CODIGO" msprop:Generator_ColumnPropNameInTable="MPPR_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="MP_CODIGO" msprop:Generator_UserColumnName="MP_CODIGO" msprop:Generator_ColumnPropNameInRow="MP_CODIGO" msprop:Generator_ColumnVarNameInTable="columnMP_CODIGO" msprop:Generator_ColumnPropNameInTable="MP_CODIGOColumn" type="xs:decimal" minOccurs="0" />
-              <xs:element name="MPPR_CANTIDAD" msprop:Generator_UserColumnName="MPPR_CANTIDAD" msprop:Generator_ColumnPropNameInRow="MPPR_CANTIDAD" msprop:Generator_ColumnVarNameInTable="columnMPPR_CANTIDAD" msprop:Generator_ColumnPropNameInTable="MPPR_CANTIDADColumn" type="xs:decimal" minOccurs="0" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="MATERIAS_PRIMAS" msprop:Generator_UserTableName="MATERIAS_PRIMAS" msprop:Generator_RowDeletedName="MATERIAS_PRIMASRowDeleted" msprop:Generator_RowChangedName="MATERIAS_PRIMASRowChanged" msprop:Generator_RowClassName="MATERIAS_PRIMASRow" msprop:Generator_RowChangingName="MATERIAS_PRIMASRowChanging" msprop:Generator_RowEvArgName="MATERIAS_PRIMASRowChangeEvent" msprop:Generator_RowEvHandlerName="MATERIAS_PRIMASRowChangeEventHandler" msprop:Generator_TableClassName="MATERIAS_PRIMASDataTable" msprop:Generator_TableVarName="tableMATERIAS_PRIMAS" msprop:Generator_RowDeletingName="MATERIAS_PRIMASRowDeleting" msprop:Generator_TablePropName="MATERIAS_PRIMAS">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="MP_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="MP_CODIGO" msprop:Generator_ColumnPropNameInRow="MP_CODIGO" msprop:Generator_ColumnVarNameInTable="columnMP_CODIGO" msprop:Generator_ColumnPropNameInTable="MP_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="UMED_CODIGO" msprop:Generator_UserColumnName="UMED_CODIGO" msprop:Generator_ColumnPropNameInRow="UMED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnUMED_CODIGO" msprop:Generator_ColumnPropNameInTable="UMED_CODIGOColumn" type="xs:decimal" minOccurs="0" />
-              <xs:element name="MP_NOMBRE" msprop:Generator_UserColumnName="MP_NOMBRE" msprop:Generator_ColumnPropNameInRow="MP_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnMP_NOMBRE" msprop:Generator_ColumnPropNameInTable="MP_NOMBREColumn" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="30" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="MP_DESCRIPCION" msprop:Generator_UserColumnName="MP_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="MP_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnMP_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="MP_DESCRIPCIONColumn" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="80" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="MP_CANTIDADSTOCK" msprop:Generator_UserColumnName="MP_CANTIDADSTOCK" msprop:Generator_ColumnPropNameInRow="MP_CANTIDADSTOCK" msprop:Generator_ColumnVarNameInTable="columnMP_CANTIDADSTOCK" msprop:Generator_ColumnPropNameInTable="MP_CANTIDADSTOCKColumn" type="xs:int" minOccurs="0" />
-              <xs:element name="MP_PRECIO" msprop:Generator_UserColumnName="MP_PRECIO" msprop:Generator_ColumnPropNameInRow="MP_PRECIO" msprop:Generator_ColumnVarNameInTable="columnMP_PRECIO" msprop:Generator_ColumnPropNameInTable="MP_PRECIOColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="MPPR_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="MPPR_CODIGO" msprop:Generator_ColumnVarNameInTable="columnMPPR_CODIGO" msprop:Generator_ColumnPropNameInRow="MPPR_CODIGO" msprop:Generator_ColumnPropNameInTable="MPPR_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="MP_CODIGO" msprop:Generator_UserColumnName="MP_CODIGO" msprop:Generator_ColumnVarNameInTable="columnMP_CODIGO" msprop:Generator_ColumnPropNameInRow="MP_CODIGO" msprop:Generator_ColumnPropNameInTable="MP_CODIGOColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="MPPR_CANTIDAD" msprop:Generator_UserColumnName="MPPR_CANTIDAD" msprop:Generator_ColumnVarNameInTable="columnMPPR_CANTIDAD" msprop:Generator_ColumnPropNameInRow="MPPR_CANTIDAD" msprop:Generator_ColumnPropNameInTable="MPPR_CANTIDADColumn" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
         <xs:element name="UNIDADES_MEDIDA" msprop:Generator_UserTableName="UNIDADES_MEDIDA" msprop:Generator_RowDeletedName="UNIDADES_MEDIDARowDeleted" msprop:Generator_RowChangedName="UNIDADES_MEDIDARowChanged" msprop:Generator_RowClassName="UNIDADES_MEDIDARow" msprop:Generator_RowChangingName="UNIDADES_MEDIDARowChanging" msprop:Generator_RowEvArgName="UNIDADES_MEDIDARowChangeEvent" msprop:Generator_RowEvHandlerName="UNIDADES_MEDIDARowChangeEventHandler" msprop:Generator_TableClassName="UNIDADES_MEDIDADataTable" msprop:Generator_TableVarName="tableUNIDADES_MEDIDA" msprop:Generator_RowDeletingName="UNIDADES_MEDIDARowDeleting" msprop:Generator_TablePropName="UNIDADES_MEDIDA">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="UMED_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="UMED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnUMED_CODIGO" msprop:Generator_ColumnPropNameInRow="UMED_CODIGO" msprop:Generator_ColumnPropNameInTable="UMED_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="TUMED_CODIGO" msprop:Generator_UserColumnName="TUMED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnTUMED_CODIGO" msprop:Generator_ColumnPropNameInRow="TUMED_CODIGO" msprop:Generator_ColumnPropNameInTable="TUMED_CODIGOColumn" type="xs:decimal" minOccurs="0" />
-              <xs:element name="UMED_NOMBRE" msprop:Generator_UserColumnName="UMED_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnUMED_NOMBRE" msprop:Generator_ColumnPropNameInRow="UMED_NOMBRE" msprop:Generator_ColumnPropNameInTable="UMED_NOMBREColumn" minOccurs="0">
+              <xs:element name="UMED_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="UMED_CODIGO" msprop:Generator_ColumnPropNameInRow="UMED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnUMED_CODIGO" msprop:Generator_ColumnPropNameInTable="UMED_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="TUMED_CODIGO" msprop:Generator_UserColumnName="TUMED_CODIGO" msprop:Generator_ColumnPropNameInRow="TUMED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnTUMED_CODIGO" msprop:Generator_ColumnPropNameInTable="TUMED_CODIGOColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="UMED_NOMBRE" msprop:Generator_UserColumnName="UMED_NOMBRE" msprop:Generator_ColumnPropNameInRow="UMED_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnUMED_NOMBRE" msprop:Generator_ColumnPropNameInTable="UMED_NOMBREColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="25" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="UMED_ABREVIATURA" msprop:Generator_UserColumnName="UMED_ABREVIATURA" msprop:Generator_ColumnVarNameInTable="columnUMED_ABREVIATURA" msprop:Generator_ColumnPropNameInRow="UMED_ABREVIATURA" msprop:Generator_ColumnPropNameInTable="UMED_ABREVIATURAColumn" minOccurs="0">
+              <xs:element name="UMED_ABREVIATURA" msprop:Generator_UserColumnName="UMED_ABREVIATURA" msprop:Generator_ColumnPropNameInRow="UMED_ABREVIATURA" msprop:Generator_ColumnVarNameInTable="columnUMED_ABREVIATURA" msprop:Generator_ColumnPropNameInTable="UMED_ABREVIATURAColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="10" />
@@ -316,11 +289,11 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="TIPOS_UNIDADES_MEDIDA" msprop:Generator_UserTableName="TIPOS_UNIDADES_MEDIDA" msprop:Generator_RowDeletedName="TIPOS_UNIDADES_MEDIDARowDeleted" msprop:Generator_TableClassName="TIPOS_UNIDADES_MEDIDADataTable" msprop:Generator_RowChangedName="TIPOS_UNIDADES_MEDIDARowChanged" msprop:Generator_RowClassName="TIPOS_UNIDADES_MEDIDARow" msprop:Generator_RowChangingName="TIPOS_UNIDADES_MEDIDARowChanging" msprop:Generator_RowEvArgName="TIPOS_UNIDADES_MEDIDARowChangeEvent" msprop:Generator_RowEvHandlerName="TIPOS_UNIDADES_MEDIDARowChangeEventHandler" msprop:Generator_TablePropName="TIPOS_UNIDADES_MEDIDA" msprop:Generator_TableVarName="tableTIPOS_UNIDADES_MEDIDA" msprop:Generator_RowDeletingName="TIPOS_UNIDADES_MEDIDARowDeleting">
+        <xs:element name="TIPOS_UNIDADES_MEDIDA" msprop:Generator_UserTableName="TIPOS_UNIDADES_MEDIDA" msprop:Generator_RowDeletedName="TIPOS_UNIDADES_MEDIDARowDeleted" msprop:Generator_RowChangedName="TIPOS_UNIDADES_MEDIDARowChanged" msprop:Generator_RowClassName="TIPOS_UNIDADES_MEDIDARow" msprop:Generator_RowChangingName="TIPOS_UNIDADES_MEDIDARowChanging" msprop:Generator_RowEvArgName="TIPOS_UNIDADES_MEDIDARowChangeEvent" msprop:Generator_RowEvHandlerName="TIPOS_UNIDADES_MEDIDARowChangeEventHandler" msprop:Generator_TableClassName="TIPOS_UNIDADES_MEDIDADataTable" msprop:Generator_TableVarName="tableTIPOS_UNIDADES_MEDIDA" msprop:Generator_RowDeletingName="TIPOS_UNIDADES_MEDIDARowDeleting" msprop:Generator_TablePropName="TIPOS_UNIDADES_MEDIDA">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="TUMED_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="TUMED_CODIGO" msprop:Generator_ColumnPropNameInRow="TUMED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnTUMED_CODIGO" msprop:Generator_ColumnPropNameInTable="TUMED_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="TUMED_NOMBRE" msprop:Generator_UserColumnName="TUMED_NOMBRE" msprop:Generator_ColumnPropNameInRow="TUMED_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnTUMED_NOMBRE" msprop:Generator_ColumnPropNameInTable="TUMED_NOMBREColumn" minOccurs="0">
+              <xs:element name="TUMED_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="TUMED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnTUMED_CODIGO" msprop:Generator_ColumnPropNameInRow="TUMED_CODIGO" msprop:Generator_ColumnPropNameInTable="TUMED_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="TUMED_NOMBRE" msprop:Generator_UserColumnName="TUMED_NOMBRE" msprop:Generator_ColumnVarNameInTable="columnTUMED_NOMBRE" msprop:Generator_ColumnPropNameInRow="TUMED_NOMBRE" msprop:Generator_ColumnPropNameInTable="TUMED_NOMBREColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="80" />
@@ -330,15 +303,35 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="MATERIAS_PRIMAS" msprop:Generator_UserTableName="MATERIAS_PRIMAS" msprop:Generator_RowDeletedName="MATERIAS_PRIMASRowDeleted" msprop:Generator_TableClassName="MATERIAS_PRIMASDataTable" msprop:Generator_RowChangedName="MATERIAS_PRIMASRowChanged" msprop:Generator_RowClassName="MATERIAS_PRIMASRow" msprop:Generator_RowChangingName="MATERIAS_PRIMASRowChanging" msprop:Generator_RowEvArgName="MATERIAS_PRIMASRowChangeEvent" msprop:Generator_RowEvHandlerName="MATERIAS_PRIMASRowChangeEventHandler" msprop:Generator_TablePropName="MATERIAS_PRIMAS" msprop:Generator_TableVarName="tableMATERIAS_PRIMAS" msprop:Generator_RowDeletingName="MATERIAS_PRIMASRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MP_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="MP_CODIGO" msprop:Generator_ColumnPropNameInRow="MP_CODIGO" msprop:Generator_ColumnVarNameInTable="columnMP_CODIGO" msprop:Generator_ColumnPropNameInTable="MP_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="UMED_CODIGO" msprop:Generator_UserColumnName="UMED_CODIGO" msprop:Generator_ColumnPropNameInRow="UMED_CODIGO" msprop:Generator_ColumnVarNameInTable="columnUMED_CODIGO" msprop:Generator_ColumnPropNameInTable="UMED_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="MP_NOMBRE" msprop:Generator_UserColumnName="MP_NOMBRE" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnMP_NOMBRE" msprop:Generator_ColumnPropNameInTable="MP_NOMBREColumn" msprop:Generator_ColumnPropNameInRow="MP_NOMBRE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="80" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MP_DESCRIPCION" msprop:Generator_UserColumnName="MP_DESCRIPCION" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnMP_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="MP_DESCRIPCIONColumn" msprop:Generator_ColumnPropNameInRow="MP_DESCRIPCION" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MP_COSTO" msprop:Generator_UserColumnName="MP_COSTO" msprop:Generator_ColumnPropNameInRow="MP_COSTO" msprop:Generator_ColumnVarNameInTable="columnMP_COSTO" msprop:Generator_ColumnPropNameInTable="MP_COSTOColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="USTCK_NUMERO" msprop:Generator_UserColumnName="USTCK_NUMERO" msprop:Generator_ColumnPropNameInRow="USTCK_NUMERO" msprop:Generator_ColumnVarNameInTable="columnUSTCK_NUMERO" msprop:Generator_ColumnPropNameInTable="USTCK_NUMEROColumn" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:MATERIASPRIMASPRINCIPALES" />
       <xs:field xpath="mstns:MPPR_CODIGO" />
-    </xs:unique>
-    <xs:unique name="MATERIAS_PRIMAS_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:MATERIAS_PRIMAS" />
-      <xs:field xpath="mstns:MP_CODIGO" />
     </xs:unique>
     <xs:unique name="UNIDADES_MEDIDA_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:UNIDADES_MEDIDA" />
@@ -348,12 +341,16 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
       <xs:selector xpath=".//mstns:TIPOS_UNIDADES_MEDIDA" />
       <xs:field xpath="mstns:TUMED_CODIGO" />
     </xs:unique>
+    <xs:unique name="MATERIAS_PRIMAS_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:MATERIAS_PRIMAS" />
+      <xs:field xpath="mstns:MP_CODIGO" />
+    </xs:unique>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="materiaPrimaPrincipal_materiaPrima_fk" msdata:parent="MATERIAS_PRIMAS" msdata:child="MATERIASPRIMASPRINCIPALES" msdata:parentkey="MP_CODIGO" msdata:childkey="MP_CODIGO" msprop:Generator_UserRelationName="materiaPrimaPrincipal_materiaPrima_fk" msprop:Generator_RelationVarName="relationmateriaPrimaPrincipal_materiaPrima_fk" msprop:Generator_UserChildTable="MATERIASPRIMASPRINCIPALES" msprop:Generator_UserParentTable="MATERIAS_PRIMAS" msprop:Generator_ParentPropName="MATERIAS_PRIMASRow" msprop:Generator_ChildPropName="GetMATERIASPRIMASPRINCIPALESRows" />
-      <msdata:Relationship name="materiaPrima_unidadMedida_fk" msdata:parent="UNIDADES_MEDIDA" msdata:child="MATERIAS_PRIMAS" msdata:parentkey="UMED_CODIGO" msdata:childkey="UMED_CODIGO" msprop:Generator_UserRelationName="materiaPrima_unidadMedida_fk" msprop:Generator_RelationVarName="relationmateriaPrima_unidadMedida_fk" msprop:Generator_UserChildTable="MATERIAS_PRIMAS" msprop:Generator_UserParentTable="UNIDADES_MEDIDA" msprop:Generator_ParentPropName="UNIDADES_MEDIDARow" msprop:Generator_ChildPropName="GetMATERIAS_PRIMASRows" />
       <msdata:Relationship name="unidadMedida_tipoUnidad_fk" msdata:parent="TIPOS_UNIDADES_MEDIDA" msdata:child="UNIDADES_MEDIDA" msdata:parentkey="TUMED_CODIGO" msdata:childkey="TUMED_CODIGO" msprop:Generator_UserRelationName="unidadMedida_tipoUnidad_fk" msprop:Generator_RelationVarName="relationunidadMedida_tipoUnidad_fk" msprop:Generator_UserChildTable="UNIDADES_MEDIDA" msprop:Generator_UserParentTable="TIPOS_UNIDADES_MEDIDA" msprop:Generator_ParentPropName="TIPOS_UNIDADES_MEDIDARow" msprop:Generator_ChildPropName="GetUNIDADES_MEDIDARows" />
+      <msdata:Relationship name="MATERIAS_PRIMAS_MATERIASPRIMASPRINCIPALES" msdata:parent="MATERIAS_PRIMAS" msdata:child="MATERIASPRIMASPRINCIPALES" msdata:parentkey="MP_CODIGO" msdata:childkey="MP_CODIGO" msprop:Generator_UserRelationName="MATERIAS_PRIMAS_MATERIASPRIMASPRINCIPALES" msprop:Generator_RelationVarName="relationMATERIAS_PRIMAS_MATERIASPRIMASPRINCIPALES" msprop:Generator_UserChildTable="MATERIASPRIMASPRINCIPALES" msprop:Generator_UserParentTable="MATERIAS_PRIMAS" msprop:Generator_ParentPropName="MATERIAS_PRIMASRow" msprop:Generator_ChildPropName="GetMATERIASPRIMASPRINCIPALESRows" />
+      <msdata:Relationship name="UNIDADES_MEDIDA_MATERIAS_PRIMAS" msdata:parent="UNIDADES_MEDIDA" msdata:child="MATERIAS_PRIMAS" msdata:parentkey="UMED_CODIGO" msdata:childkey="UMED_CODIGO" msprop:Generator_UserRelationName="UNIDADES_MEDIDA_MATERIAS_PRIMAS" msprop:Generator_RelationVarName="relationUNIDADES_MEDIDA_MATERIAS_PRIMAS" msprop:Generator_UserChildTable="MATERIAS_PRIMAS" msprop:Generator_UserParentTable="UNIDADES_MEDIDA" msprop:Generator_ParentPropName="UNIDADES_MEDIDARow" msprop:Generator_ChildPropName="GetMATERIAS_PRIMASRows" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

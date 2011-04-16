@@ -27,17 +27,17 @@ namespace GyCAP.Data {
         
         private MATERIASPRIMASPRINCIPALESDataTable tableMATERIASPRIMASPRINCIPALES;
         
-        private MATERIAS_PRIMASDataTable tableMATERIAS_PRIMAS;
-        
         private UNIDADES_MEDIDADataTable tableUNIDADES_MEDIDA;
         
         private TIPOS_UNIDADES_MEDIDADataTable tableTIPOS_UNIDADES_MEDIDA;
         
-        private global::System.Data.DataRelation relationmateriaPrimaPrincipal_materiaPrima_fk;
-        
-        private global::System.Data.DataRelation relationmateriaPrima_unidadMedida_fk;
+        private MATERIAS_PRIMASDataTable tableMATERIAS_PRIMAS;
         
         private global::System.Data.DataRelation relationunidadMedida_tipoUnidad_fk;
+        
+        private global::System.Data.DataRelation relationMATERIAS_PRIMAS_MATERIASPRIMASPRINCIPALES;
+        
+        private global::System.Data.DataRelation relationUNIDADES_MEDIDA_MATERIAS_PRIMAS;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -68,14 +68,14 @@ namespace GyCAP.Data {
                 if ((ds.Tables["MATERIASPRIMASPRINCIPALES"] != null)) {
                     base.Tables.Add(new MATERIASPRIMASPRINCIPALESDataTable(ds.Tables["MATERIASPRIMASPRINCIPALES"]));
                 }
-                if ((ds.Tables["MATERIAS_PRIMAS"] != null)) {
-                    base.Tables.Add(new MATERIAS_PRIMASDataTable(ds.Tables["MATERIAS_PRIMAS"]));
-                }
                 if ((ds.Tables["UNIDADES_MEDIDA"] != null)) {
                     base.Tables.Add(new UNIDADES_MEDIDADataTable(ds.Tables["UNIDADES_MEDIDA"]));
                 }
                 if ((ds.Tables["TIPOS_UNIDADES_MEDIDA"] != null)) {
                     base.Tables.Add(new TIPOS_UNIDADES_MEDIDADataTable(ds.Tables["TIPOS_UNIDADES_MEDIDA"]));
+                }
+                if ((ds.Tables["MATERIAS_PRIMAS"] != null)) {
+                    base.Tables.Add(new MATERIAS_PRIMASDataTable(ds.Tables["MATERIAS_PRIMAS"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -107,15 +107,6 @@ namespace GyCAP.Data {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public MATERIAS_PRIMASDataTable MATERIAS_PRIMAS {
-            get {
-                return this.tableMATERIAS_PRIMAS;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public UNIDADES_MEDIDADataTable UNIDADES_MEDIDA {
             get {
                 return this.tableUNIDADES_MEDIDA;
@@ -128,6 +119,15 @@ namespace GyCAP.Data {
         public TIPOS_UNIDADES_MEDIDADataTable TIPOS_UNIDADES_MEDIDA {
             get {
                 return this.tableTIPOS_UNIDADES_MEDIDA;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public MATERIAS_PRIMASDataTable MATERIAS_PRIMAS {
+            get {
+                return this.tableMATERIAS_PRIMAS;
             }
         }
         
@@ -193,14 +193,14 @@ namespace GyCAP.Data {
                 if ((ds.Tables["MATERIASPRIMASPRINCIPALES"] != null)) {
                     base.Tables.Add(new MATERIASPRIMASPRINCIPALESDataTable(ds.Tables["MATERIASPRIMASPRINCIPALES"]));
                 }
-                if ((ds.Tables["MATERIAS_PRIMAS"] != null)) {
-                    base.Tables.Add(new MATERIAS_PRIMASDataTable(ds.Tables["MATERIAS_PRIMAS"]));
-                }
                 if ((ds.Tables["UNIDADES_MEDIDA"] != null)) {
                     base.Tables.Add(new UNIDADES_MEDIDADataTable(ds.Tables["UNIDADES_MEDIDA"]));
                 }
                 if ((ds.Tables["TIPOS_UNIDADES_MEDIDA"] != null)) {
                     base.Tables.Add(new TIPOS_UNIDADES_MEDIDADataTable(ds.Tables["TIPOS_UNIDADES_MEDIDA"]));
+                }
+                if ((ds.Tables["MATERIAS_PRIMAS"] != null)) {
+                    base.Tables.Add(new MATERIAS_PRIMASDataTable(ds.Tables["MATERIAS_PRIMAS"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -238,12 +238,6 @@ namespace GyCAP.Data {
                     this.tableMATERIASPRIMASPRINCIPALES.InitVars();
                 }
             }
-            this.tableMATERIAS_PRIMAS = ((MATERIAS_PRIMASDataTable)(base.Tables["MATERIAS_PRIMAS"]));
-            if ((initTable == true)) {
-                if ((this.tableMATERIAS_PRIMAS != null)) {
-                    this.tableMATERIAS_PRIMAS.InitVars();
-                }
-            }
             this.tableUNIDADES_MEDIDA = ((UNIDADES_MEDIDADataTable)(base.Tables["UNIDADES_MEDIDA"]));
             if ((initTable == true)) {
                 if ((this.tableUNIDADES_MEDIDA != null)) {
@@ -256,9 +250,15 @@ namespace GyCAP.Data {
                     this.tableTIPOS_UNIDADES_MEDIDA.InitVars();
                 }
             }
-            this.relationmateriaPrimaPrincipal_materiaPrima_fk = this.Relations["materiaPrimaPrincipal_materiaPrima_fk"];
-            this.relationmateriaPrima_unidadMedida_fk = this.Relations["materiaPrima_unidadMedida_fk"];
+            this.tableMATERIAS_PRIMAS = ((MATERIAS_PRIMASDataTable)(base.Tables["MATERIAS_PRIMAS"]));
+            if ((initTable == true)) {
+                if ((this.tableMATERIAS_PRIMAS != null)) {
+                    this.tableMATERIAS_PRIMAS.InitVars();
+                }
+            }
             this.relationunidadMedida_tipoUnidad_fk = this.Relations["unidadMedida_tipoUnidad_fk"];
+            this.relationMATERIAS_PRIMAS_MATERIASPRIMASPRINCIPALES = this.Relations["MATERIAS_PRIMAS_MATERIASPRIMASPRINCIPALES"];
+            this.relationUNIDADES_MEDIDA_MATERIAS_PRIMAS = this.Relations["UNIDADES_MEDIDA_MATERIAS_PRIMAS"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -270,33 +270,28 @@ namespace GyCAP.Data {
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableMATERIASPRIMASPRINCIPALES = new MATERIASPRIMASPRINCIPALESDataTable();
             base.Tables.Add(this.tableMATERIASPRIMASPRINCIPALES);
-            this.tableMATERIAS_PRIMAS = new MATERIAS_PRIMASDataTable();
-            base.Tables.Add(this.tableMATERIAS_PRIMAS);
             this.tableUNIDADES_MEDIDA = new UNIDADES_MEDIDADataTable();
             base.Tables.Add(this.tableUNIDADES_MEDIDA);
             this.tableTIPOS_UNIDADES_MEDIDA = new TIPOS_UNIDADES_MEDIDADataTable();
             base.Tables.Add(this.tableTIPOS_UNIDADES_MEDIDA);
-            this.relationmateriaPrimaPrincipal_materiaPrima_fk = new global::System.Data.DataRelation("materiaPrimaPrincipal_materiaPrima_fk", new global::System.Data.DataColumn[] {
-                        this.tableMATERIAS_PRIMAS.MP_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableMATERIASPRIMASPRINCIPALES.MP_CODIGOColumn}, false);
-            this.Relations.Add(this.relationmateriaPrimaPrincipal_materiaPrima_fk);
-            this.relationmateriaPrima_unidadMedida_fk = new global::System.Data.DataRelation("materiaPrima_unidadMedida_fk", new global::System.Data.DataColumn[] {
-                        this.tableUNIDADES_MEDIDA.UMED_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableMATERIAS_PRIMAS.UMED_CODIGOColumn}, false);
-            this.Relations.Add(this.relationmateriaPrima_unidadMedida_fk);
+            this.tableMATERIAS_PRIMAS = new MATERIAS_PRIMASDataTable();
+            base.Tables.Add(this.tableMATERIAS_PRIMAS);
             this.relationunidadMedida_tipoUnidad_fk = new global::System.Data.DataRelation("unidadMedida_tipoUnidad_fk", new global::System.Data.DataColumn[] {
                         this.tableTIPOS_UNIDADES_MEDIDA.TUMED_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableUNIDADES_MEDIDA.TUMED_CODIGOColumn}, false);
             this.Relations.Add(this.relationunidadMedida_tipoUnidad_fk);
+            this.relationMATERIAS_PRIMAS_MATERIASPRIMASPRINCIPALES = new global::System.Data.DataRelation("MATERIAS_PRIMAS_MATERIASPRIMASPRINCIPALES", new global::System.Data.DataColumn[] {
+                        this.tableMATERIAS_PRIMAS.MP_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMATERIASPRIMASPRINCIPALES.MP_CODIGOColumn}, false);
+            this.Relations.Add(this.relationMATERIAS_PRIMAS_MATERIASPRIMASPRINCIPALES);
+            this.relationUNIDADES_MEDIDA_MATERIAS_PRIMAS = new global::System.Data.DataRelation("UNIDADES_MEDIDA_MATERIAS_PRIMAS", new global::System.Data.DataColumn[] {
+                        this.tableUNIDADES_MEDIDA.UMED_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMATERIAS_PRIMAS.UMED_CODIGOColumn}, false);
+            this.Relations.Add(this.relationUNIDADES_MEDIDA_MATERIAS_PRIMAS);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeMATERIASPRIMASPRINCIPALES() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeMATERIAS_PRIMAS() {
             return false;
         }
         
@@ -307,6 +302,11 @@ namespace GyCAP.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeTIPOS_UNIDADES_MEDIDA() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeMATERIAS_PRIMAS() {
             return false;
         }
         
@@ -365,11 +365,11 @@ namespace GyCAP.Data {
         
         public delegate void MATERIASPRIMASPRINCIPALESRowChangeEventHandler(object sender, MATERIASPRIMASPRINCIPALESRowChangeEvent e);
         
-        public delegate void MATERIAS_PRIMASRowChangeEventHandler(object sender, MATERIAS_PRIMASRowChangeEvent e);
-        
         public delegate void UNIDADES_MEDIDARowChangeEventHandler(object sender, UNIDADES_MEDIDARowChangeEvent e);
         
         public delegate void TIPOS_UNIDADES_MEDIDARowChangeEventHandler(object sender, TIPOS_UNIDADES_MEDIDARowChangeEvent e);
+        
+        public delegate void MATERIAS_PRIMASRowChangeEventHandler(object sender, MATERIAS_PRIMASRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -465,14 +465,14 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MATERIASPRIMASPRINCIPALESRow AddMATERIASPRIMASPRINCIPALESRow(MATERIAS_PRIMASRow parentMATERIAS_PRIMASRowBymateriaPrimaPrincipal_materiaPrima_fk, decimal MPPR_CANTIDAD) {
+            public MATERIASPRIMASPRINCIPALESRow AddMATERIASPRIMASPRINCIPALESRow(MATERIAS_PRIMASRow parentMATERIAS_PRIMASRowByMATERIAS_PRIMAS_MATERIASPRIMASPRINCIPALES, decimal MPPR_CANTIDAD) {
                 MATERIASPRIMASPRINCIPALESRow rowMATERIASPRIMASPRINCIPALESRow = ((MATERIASPRIMASPRINCIPALESRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
                         MPPR_CANTIDAD};
-                if ((parentMATERIAS_PRIMASRowBymateriaPrimaPrincipal_materiaPrima_fk != null)) {
-                    columnValuesArray[1] = parentMATERIAS_PRIMASRowBymateriaPrimaPrincipal_materiaPrima_fk[0];
+                if ((parentMATERIAS_PRIMASRowByMATERIAS_PRIMAS_MATERIASPRIMASPRINCIPALES != null)) {
+                    columnValuesArray[1] = parentMATERIAS_PRIMASRowByMATERIAS_PRIMAS_MATERIASPRIMASPRINCIPALES[0];
                 }
                 rowMATERIASPRIMASPRINCIPALESRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMATERIASPRIMASPRINCIPALESRow);
@@ -597,313 +597,6 @@ namespace GyCAP.Data {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "MATERIASPRIMASPRINCIPALESDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class MATERIAS_PRIMASDataTable : global::System.Data.TypedTableBase<MATERIAS_PRIMASRow> {
-            
-            private global::System.Data.DataColumn columnMP_CODIGO;
-            
-            private global::System.Data.DataColumn columnUMED_CODIGO;
-            
-            private global::System.Data.DataColumn columnMP_NOMBRE;
-            
-            private global::System.Data.DataColumn columnMP_DESCRIPCION;
-            
-            private global::System.Data.DataColumn columnMP_CANTIDADSTOCK;
-            
-            private global::System.Data.DataColumn columnMP_PRECIO;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MATERIAS_PRIMASDataTable() {
-                this.TableName = "MATERIAS_PRIMAS";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal MATERIAS_PRIMASDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected MATERIAS_PRIMASDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MP_CODIGOColumn {
-                get {
-                    return this.columnMP_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn UMED_CODIGOColumn {
-                get {
-                    return this.columnUMED_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MP_NOMBREColumn {
-                get {
-                    return this.columnMP_NOMBRE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MP_DESCRIPCIONColumn {
-                get {
-                    return this.columnMP_DESCRIPCION;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MP_CANTIDADSTOCKColumn {
-                get {
-                    return this.columnMP_CANTIDADSTOCK;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MP_PRECIOColumn {
-                get {
-                    return this.columnMP_PRECIO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MATERIAS_PRIMASRow this[int index] {
-                get {
-                    return ((MATERIAS_PRIMASRow)(this.Rows[index]));
-                }
-            }
-            
-            public event MATERIAS_PRIMASRowChangeEventHandler MATERIAS_PRIMASRowChanging;
-            
-            public event MATERIAS_PRIMASRowChangeEventHandler MATERIAS_PRIMASRowChanged;
-            
-            public event MATERIAS_PRIMASRowChangeEventHandler MATERIAS_PRIMASRowDeleting;
-            
-            public event MATERIAS_PRIMASRowChangeEventHandler MATERIAS_PRIMASRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddMATERIAS_PRIMASRow(MATERIAS_PRIMASRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MATERIAS_PRIMASRow AddMATERIAS_PRIMASRow(UNIDADES_MEDIDARow parentUNIDADES_MEDIDARowBymateriaPrima_unidadMedida_fk, string MP_NOMBRE, string MP_DESCRIPCION, int MP_CANTIDADSTOCK, decimal MP_PRECIO) {
-                MATERIAS_PRIMASRow rowMATERIAS_PRIMASRow = ((MATERIAS_PRIMASRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        null,
-                        MP_NOMBRE,
-                        MP_DESCRIPCION,
-                        MP_CANTIDADSTOCK,
-                        MP_PRECIO};
-                if ((parentUNIDADES_MEDIDARowBymateriaPrima_unidadMedida_fk != null)) {
-                    columnValuesArray[1] = parentUNIDADES_MEDIDARowBymateriaPrima_unidadMedida_fk[0];
-                }
-                rowMATERIAS_PRIMASRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowMATERIAS_PRIMASRow);
-                return rowMATERIAS_PRIMASRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MATERIAS_PRIMASRow FindByMP_CODIGO(decimal MP_CODIGO) {
-                return ((MATERIAS_PRIMASRow)(this.Rows.Find(new object[] {
-                            MP_CODIGO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                MATERIAS_PRIMASDataTable cln = ((MATERIAS_PRIMASDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new MATERIAS_PRIMASDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnMP_CODIGO = base.Columns["MP_CODIGO"];
-                this.columnUMED_CODIGO = base.Columns["UMED_CODIGO"];
-                this.columnMP_NOMBRE = base.Columns["MP_NOMBRE"];
-                this.columnMP_DESCRIPCION = base.Columns["MP_DESCRIPCION"];
-                this.columnMP_CANTIDADSTOCK = base.Columns["MP_CANTIDADSTOCK"];
-                this.columnMP_PRECIO = base.Columns["MP_PRECIO"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnMP_CODIGO = new global::System.Data.DataColumn("MP_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMP_CODIGO);
-                this.columnUMED_CODIGO = new global::System.Data.DataColumn("UMED_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUMED_CODIGO);
-                this.columnMP_NOMBRE = new global::System.Data.DataColumn("MP_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMP_NOMBRE);
-                this.columnMP_DESCRIPCION = new global::System.Data.DataColumn("MP_DESCRIPCION", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMP_DESCRIPCION);
-                this.columnMP_CANTIDADSTOCK = new global::System.Data.DataColumn("MP_CANTIDADSTOCK", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMP_CANTIDADSTOCK);
-                this.columnMP_PRECIO = new global::System.Data.DataColumn("MP_PRECIO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMP_PRECIO);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnMP_CODIGO}, true));
-                this.columnMP_CODIGO.AutoIncrement = true;
-                this.columnMP_CODIGO.AutoIncrementSeed = -1;
-                this.columnMP_CODIGO.AutoIncrementStep = -1;
-                this.columnMP_CODIGO.AllowDBNull = false;
-                this.columnMP_CODIGO.ReadOnly = true;
-                this.columnMP_CODIGO.Unique = true;
-                this.columnMP_NOMBRE.MaxLength = 30;
-                this.columnMP_DESCRIPCION.MaxLength = 80;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MATERIAS_PRIMASRow NewMATERIAS_PRIMASRow() {
-                return ((MATERIAS_PRIMASRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new MATERIAS_PRIMASRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(MATERIAS_PRIMASRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.MATERIAS_PRIMASRowChanged != null)) {
-                    this.MATERIAS_PRIMASRowChanged(this, new MATERIAS_PRIMASRowChangeEvent(((MATERIAS_PRIMASRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.MATERIAS_PRIMASRowChanging != null)) {
-                    this.MATERIAS_PRIMASRowChanging(this, new MATERIAS_PRIMASRowChangeEvent(((MATERIAS_PRIMASRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.MATERIAS_PRIMASRowDeleted != null)) {
-                    this.MATERIAS_PRIMASRowDeleted(this, new MATERIAS_PRIMASRowChangeEvent(((MATERIAS_PRIMASRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.MATERIAS_PRIMASRowDeleting != null)) {
-                    this.MATERIAS_PRIMASRowDeleting(this, new MATERIAS_PRIMASRowChangeEvent(((MATERIAS_PRIMASRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveMATERIAS_PRIMASRow(MATERIAS_PRIMASRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsMateriaPrima ds = new dsMateriaPrima();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "MATERIAS_PRIMASDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -1477,6 +1170,314 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class MATERIAS_PRIMASDataTable : global::System.Data.TypedTableBase<MATERIAS_PRIMASRow> {
+            
+            private global::System.Data.DataColumn columnMP_CODIGO;
+            
+            private global::System.Data.DataColumn columnUMED_CODIGO;
+            
+            private global::System.Data.DataColumn columnMP_NOMBRE;
+            
+            private global::System.Data.DataColumn columnMP_DESCRIPCION;
+            
+            private global::System.Data.DataColumn columnMP_COSTO;
+            
+            private global::System.Data.DataColumn columnUSTCK_NUMERO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MATERIAS_PRIMASDataTable() {
+                this.TableName = "MATERIAS_PRIMAS";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal MATERIAS_PRIMASDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected MATERIAS_PRIMASDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MP_CODIGOColumn {
+                get {
+                    return this.columnMP_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn UMED_CODIGOColumn {
+                get {
+                    return this.columnUMED_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MP_NOMBREColumn {
+                get {
+                    return this.columnMP_NOMBRE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MP_DESCRIPCIONColumn {
+                get {
+                    return this.columnMP_DESCRIPCION;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MP_COSTOColumn {
+                get {
+                    return this.columnMP_COSTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn USTCK_NUMEROColumn {
+                get {
+                    return this.columnUSTCK_NUMERO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MATERIAS_PRIMASRow this[int index] {
+                get {
+                    return ((MATERIAS_PRIMASRow)(this.Rows[index]));
+                }
+            }
+            
+            public event MATERIAS_PRIMASRowChangeEventHandler MATERIAS_PRIMASRowChanging;
+            
+            public event MATERIAS_PRIMASRowChangeEventHandler MATERIAS_PRIMASRowChanged;
+            
+            public event MATERIAS_PRIMASRowChangeEventHandler MATERIAS_PRIMASRowDeleting;
+            
+            public event MATERIAS_PRIMASRowChangeEventHandler MATERIAS_PRIMASRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddMATERIAS_PRIMASRow(MATERIAS_PRIMASRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MATERIAS_PRIMASRow AddMATERIAS_PRIMASRow(UNIDADES_MEDIDARow parentUNIDADES_MEDIDARowByUNIDADES_MEDIDA_MATERIAS_PRIMAS, string MP_NOMBRE, string MP_DESCRIPCION, decimal MP_COSTO, decimal USTCK_NUMERO) {
+                MATERIAS_PRIMASRow rowMATERIAS_PRIMASRow = ((MATERIAS_PRIMASRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        MP_NOMBRE,
+                        MP_DESCRIPCION,
+                        MP_COSTO,
+                        USTCK_NUMERO};
+                if ((parentUNIDADES_MEDIDARowByUNIDADES_MEDIDA_MATERIAS_PRIMAS != null)) {
+                    columnValuesArray[1] = parentUNIDADES_MEDIDARowByUNIDADES_MEDIDA_MATERIAS_PRIMAS[0];
+                }
+                rowMATERIAS_PRIMASRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowMATERIAS_PRIMASRow);
+                return rowMATERIAS_PRIMASRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MATERIAS_PRIMASRow FindByMP_CODIGO(decimal MP_CODIGO) {
+                return ((MATERIAS_PRIMASRow)(this.Rows.Find(new object[] {
+                            MP_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                MATERIAS_PRIMASDataTable cln = ((MATERIAS_PRIMASDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new MATERIAS_PRIMASDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnMP_CODIGO = base.Columns["MP_CODIGO"];
+                this.columnUMED_CODIGO = base.Columns["UMED_CODIGO"];
+                this.columnMP_NOMBRE = base.Columns["MP_NOMBRE"];
+                this.columnMP_DESCRIPCION = base.Columns["MP_DESCRIPCION"];
+                this.columnMP_COSTO = base.Columns["MP_COSTO"];
+                this.columnUSTCK_NUMERO = base.Columns["USTCK_NUMERO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnMP_CODIGO = new global::System.Data.DataColumn("MP_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMP_CODIGO);
+                this.columnUMED_CODIGO = new global::System.Data.DataColumn("UMED_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUMED_CODIGO);
+                this.columnMP_NOMBRE = new global::System.Data.DataColumn("MP_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMP_NOMBRE);
+                this.columnMP_DESCRIPCION = new global::System.Data.DataColumn("MP_DESCRIPCION", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMP_DESCRIPCION);
+                this.columnMP_COSTO = new global::System.Data.DataColumn("MP_COSTO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMP_COSTO);
+                this.columnUSTCK_NUMERO = new global::System.Data.DataColumn("USTCK_NUMERO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUSTCK_NUMERO);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnMP_CODIGO}, true));
+                this.columnMP_CODIGO.AutoIncrement = true;
+                this.columnMP_CODIGO.AutoIncrementSeed = -1;
+                this.columnMP_CODIGO.AutoIncrementStep = -1;
+                this.columnMP_CODIGO.AllowDBNull = false;
+                this.columnMP_CODIGO.Unique = true;
+                this.columnUMED_CODIGO.AllowDBNull = false;
+                this.columnMP_NOMBRE.AllowDBNull = false;
+                this.columnMP_NOMBRE.MaxLength = 80;
+                this.columnMP_DESCRIPCION.MaxLength = 200;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MATERIAS_PRIMASRow NewMATERIAS_PRIMASRow() {
+                return ((MATERIAS_PRIMASRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new MATERIAS_PRIMASRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(MATERIAS_PRIMASRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.MATERIAS_PRIMASRowChanged != null)) {
+                    this.MATERIAS_PRIMASRowChanged(this, new MATERIAS_PRIMASRowChangeEvent(((MATERIAS_PRIMASRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.MATERIAS_PRIMASRowChanging != null)) {
+                    this.MATERIAS_PRIMASRowChanging(this, new MATERIAS_PRIMASRowChangeEvent(((MATERIAS_PRIMASRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.MATERIAS_PRIMASRowDeleted != null)) {
+                    this.MATERIAS_PRIMASRowDeleted(this, new MATERIAS_PRIMASRowChangeEvent(((MATERIAS_PRIMASRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.MATERIAS_PRIMASRowDeleting != null)) {
+                    this.MATERIAS_PRIMASRowDeleting(this, new MATERIAS_PRIMASRowChangeEvent(((MATERIAS_PRIMASRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveMATERIAS_PRIMASRow(MATERIAS_PRIMASRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsMateriaPrima ds = new dsMateriaPrima();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "MATERIAS_PRIMASDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -1534,10 +1535,10 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public MATERIAS_PRIMASRow MATERIAS_PRIMASRow {
                 get {
-                    return ((MATERIAS_PRIMASRow)(this.GetParentRow(this.Table.ParentRelations["materiaPrimaPrincipal_materiaPrima_fk"])));
+                    return ((MATERIAS_PRIMASRow)(this.GetParentRow(this.Table.ParentRelations["MATERIAS_PRIMAS_MATERIASPRIMASPRINCIPALES"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["materiaPrimaPrincipal_materiaPrima_fk"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["MATERIAS_PRIMAS_MATERIASPRIMASPRINCIPALES"]);
                 }
             }
             
@@ -1559,176 +1560,6 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetMPPR_CANTIDADNull() {
                 this[this.tableMATERIASPRIMASPRINCIPALES.MPPR_CANTIDADColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class MATERIAS_PRIMASRow : global::System.Data.DataRow {
-            
-            private MATERIAS_PRIMASDataTable tableMATERIAS_PRIMAS;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal MATERIAS_PRIMASRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableMATERIAS_PRIMAS = ((MATERIAS_PRIMASDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal MP_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableMATERIAS_PRIMAS.MP_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableMATERIAS_PRIMAS.MP_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal UMED_CODIGO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableMATERIAS_PRIMAS.UMED_CODIGOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'UMED_CODIGO\' in table \'MATERIAS_PRIMAS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMATERIAS_PRIMAS.UMED_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string MP_NOMBRE {
-                get {
-                    try {
-                        return ((string)(this[this.tableMATERIAS_PRIMAS.MP_NOMBREColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MP_NOMBRE\' in table \'MATERIAS_PRIMAS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMATERIAS_PRIMAS.MP_NOMBREColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string MP_DESCRIPCION {
-                get {
-                    try {
-                        return ((string)(this[this.tableMATERIAS_PRIMAS.MP_DESCRIPCIONColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MP_DESCRIPCION\' in table \'MATERIAS_PRIMAS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMATERIAS_PRIMAS.MP_DESCRIPCIONColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int MP_CANTIDADSTOCK {
-                get {
-                    try {
-                        return ((int)(this[this.tableMATERIAS_PRIMAS.MP_CANTIDADSTOCKColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MP_CANTIDADSTOCK\' in table \'MATERIAS_PRIMAS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMATERIAS_PRIMAS.MP_CANTIDADSTOCKColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal MP_PRECIO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableMATERIAS_PRIMAS.MP_PRECIOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MP_PRECIO\' in table \'MATERIAS_PRIMAS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMATERIAS_PRIMAS.MP_PRECIOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public UNIDADES_MEDIDARow UNIDADES_MEDIDARow {
-                get {
-                    return ((UNIDADES_MEDIDARow)(this.GetParentRow(this.Table.ParentRelations["materiaPrima_unidadMedida_fk"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["materiaPrima_unidadMedida_fk"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsUMED_CODIGONull() {
-                return this.IsNull(this.tableMATERIAS_PRIMAS.UMED_CODIGOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetUMED_CODIGONull() {
-                this[this.tableMATERIAS_PRIMAS.UMED_CODIGOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsMP_NOMBRENull() {
-                return this.IsNull(this.tableMATERIAS_PRIMAS.MP_NOMBREColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetMP_NOMBRENull() {
-                this[this.tableMATERIAS_PRIMAS.MP_NOMBREColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsMP_DESCRIPCIONNull() {
-                return this.IsNull(this.tableMATERIAS_PRIMAS.MP_DESCRIPCIONColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetMP_DESCRIPCIONNull() {
-                this[this.tableMATERIAS_PRIMAS.MP_DESCRIPCIONColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsMP_CANTIDADSTOCKNull() {
-                return this.IsNull(this.tableMATERIAS_PRIMAS.MP_CANTIDADSTOCKColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetMP_CANTIDADSTOCKNull() {
-                this[this.tableMATERIAS_PRIMAS.MP_CANTIDADSTOCKColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsMP_PRECIONull() {
-                return this.IsNull(this.tableMATERIAS_PRIMAS.MP_PRECIOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetMP_PRECIONull() {
-                this[this.tableMATERIAS_PRIMAS.MP_PRECIOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MATERIASPRIMASPRINCIPALESRow[] GetMATERIASPRIMASPRINCIPALESRows() {
-                if ((this.Table.ChildRelations["materiaPrimaPrincipal_materiaPrima_fk"] == null)) {
-                    return new MATERIASPRIMASPRINCIPALESRow[0];
-                }
-                else {
-                    return ((MATERIASPRIMASPRINCIPALESRow[])(base.GetChildRows(this.Table.ChildRelations["materiaPrimaPrincipal_materiaPrima_fk"])));
-                }
             }
         }
         
@@ -1843,11 +1674,11 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public MATERIAS_PRIMASRow[] GetMATERIAS_PRIMASRows() {
-                if ((this.Table.ChildRelations["materiaPrima_unidadMedida_fk"] == null)) {
+                if ((this.Table.ChildRelations["UNIDADES_MEDIDA_MATERIAS_PRIMAS"] == null)) {
                     return new MATERIAS_PRIMASRow[0];
                 }
                 else {
-                    return ((MATERIAS_PRIMASRow[])(base.GetChildRows(this.Table.ChildRelations["materiaPrima_unidadMedida_fk"])));
+                    return ((MATERIAS_PRIMASRow[])(base.GetChildRows(this.Table.ChildRelations["UNIDADES_MEDIDA_MATERIAS_PRIMAS"])));
                 }
             }
         }
@@ -1913,6 +1744,146 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class MATERIAS_PRIMASRow : global::System.Data.DataRow {
+            
+            private MATERIAS_PRIMASDataTable tableMATERIAS_PRIMAS;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal MATERIAS_PRIMASRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableMATERIAS_PRIMAS = ((MATERIAS_PRIMASDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal MP_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableMATERIAS_PRIMAS.MP_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableMATERIAS_PRIMAS.MP_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal UMED_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableMATERIAS_PRIMAS.UMED_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableMATERIAS_PRIMAS.UMED_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string MP_NOMBRE {
+                get {
+                    return ((string)(this[this.tableMATERIAS_PRIMAS.MP_NOMBREColumn]));
+                }
+                set {
+                    this[this.tableMATERIAS_PRIMAS.MP_NOMBREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string MP_DESCRIPCION {
+                get {
+                    if (this.IsMP_DESCRIPCIONNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableMATERIAS_PRIMAS.MP_DESCRIPCIONColumn]));
+                    }
+                }
+                set {
+                    this[this.tableMATERIAS_PRIMAS.MP_DESCRIPCIONColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal MP_COSTO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableMATERIAS_PRIMAS.MP_COSTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MP_COSTO\' in table \'MATERIAS_PRIMAS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMATERIAS_PRIMAS.MP_COSTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal USTCK_NUMERO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableMATERIAS_PRIMAS.USTCK_NUMEROColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'USTCK_NUMERO\' in table \'MATERIAS_PRIMAS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMATERIAS_PRIMAS.USTCK_NUMEROColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UNIDADES_MEDIDARow UNIDADES_MEDIDARow {
+                get {
+                    return ((UNIDADES_MEDIDARow)(this.GetParentRow(this.Table.ParentRelations["UNIDADES_MEDIDA_MATERIAS_PRIMAS"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["UNIDADES_MEDIDA_MATERIAS_PRIMAS"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMP_DESCRIPCIONNull() {
+                return this.IsNull(this.tableMATERIAS_PRIMAS.MP_DESCRIPCIONColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMP_DESCRIPCIONNull() {
+                this[this.tableMATERIAS_PRIMAS.MP_DESCRIPCIONColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMP_COSTONull() {
+                return this.IsNull(this.tableMATERIAS_PRIMAS.MP_COSTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMP_COSTONull() {
+                this[this.tableMATERIAS_PRIMAS.MP_COSTOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsUSTCK_NUMERONull() {
+                return this.IsNull(this.tableMATERIAS_PRIMAS.USTCK_NUMEROColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetUSTCK_NUMERONull() {
+                this[this.tableMATERIAS_PRIMAS.USTCK_NUMEROColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MATERIASPRIMASPRINCIPALESRow[] GetMATERIASPRIMASPRINCIPALESRows() {
+                if ((this.Table.ChildRelations["MATERIAS_PRIMAS_MATERIASPRIMASPRINCIPALES"] == null)) {
+                    return new MATERIASPRIMASPRINCIPALESRow[0];
+                }
+                else {
+                    return ((MATERIASPRIMASPRINCIPALESRow[])(base.GetChildRows(this.Table.ChildRelations["MATERIAS_PRIMAS_MATERIASPRIMASPRINCIPALES"])));
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -1930,37 +1901,6 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public MATERIASPRIMASPRINCIPALESRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class MATERIAS_PRIMASRowChangeEvent : global::System.EventArgs {
-            
-            private MATERIAS_PRIMASRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MATERIAS_PRIMASRowChangeEvent(MATERIAS_PRIMASRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MATERIAS_PRIMASRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -2023,6 +1963,37 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public TIPOS_UNIDADES_MEDIDARow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class MATERIAS_PRIMASRowChangeEvent : global::System.EventArgs {
+            
+            private MATERIAS_PRIMASRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MATERIAS_PRIMASRowChangeEvent(MATERIAS_PRIMASRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MATERIAS_PRIMASRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -2377,451 +2348,6 @@ SELECT MPPR_CODIGO, MP_CODIGO, MPPR_CANTIDAD FROM MATERIASPRIMASPRINCIPALES WHER
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(global::System.Nullable<decimal> MP_CODIGO, global::System.Nullable<decimal> MPPR_CANTIDAD, decimal Original_MPPR_CODIGO, global::System.Nullable<decimal> Original_MP_CODIGO, global::System.Nullable<decimal> Original_MPPR_CANTIDAD) {
             return this.Update(MP_CODIGO, MPPR_CANTIDAD, Original_MPPR_CODIGO, Original_MP_CODIGO, Original_MPPR_CANTIDAD, Original_MPPR_CODIGO);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class MATERIAS_PRIMASTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public MATERIAS_PRIMASTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "MATERIAS_PRIMAS";
-            tableMapping.ColumnMappings.Add("MP_CODIGO", "MP_CODIGO");
-            tableMapping.ColumnMappings.Add("UMED_CODIGO", "UMED_CODIGO");
-            tableMapping.ColumnMappings.Add("MP_NOMBRE", "MP_NOMBRE");
-            tableMapping.ColumnMappings.Add("MP_DESCRIPCION", "MP_DESCRIPCION");
-            tableMapping.ColumnMappings.Add("MP_CANTIDADSTOCK", "MP_CANTIDADSTOCK");
-            tableMapping.ColumnMappings.Add("MP_PRECIO", "MP_PRECIO");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[MATERIAS_PRIMAS] WHERE (([MP_CODIGO] = @Original_MP_CODIGO) AND ((@IsNull_UMED_CODIGO = 1 AND [UMED_CODIGO] IS NULL) OR ([UMED_CODIGO] = @Original_UMED_CODIGO)) AND ((@IsNull_MP_NOMBRE = 1 AND [MP_NOMBRE] IS NULL) OR ([MP_NOMBRE] = @Original_MP_NOMBRE)) AND ((@IsNull_MP_DESCRIPCION = 1 AND [MP_DESCRIPCION] IS NULL) OR ([MP_DESCRIPCION] = @Original_MP_DESCRIPCION)) AND ((@IsNull_MP_CANTIDADSTOCK = 1 AND [MP_CANTIDADSTOCK] IS NULL) OR ([MP_CANTIDADSTOCK] = @Original_MP_CANTIDADSTOCK)) AND ((@IsNull_MP_PRECIO = 1 AND [MP_PRECIO] IS NULL) OR ([MP_PRECIO] = @Original_MP_PRECIO)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UMED_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_CANTIDADSTOCK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_CANTIDADSTOCK", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_CANTIDADSTOCK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_CANTIDADSTOCK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_PRECIO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_PRECIO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_PRECIO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "MP_PRECIO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[MATERIAS_PRIMAS] ([UMED_CODIGO], [MP_NOMBRE], [MP_DESCRIPCION], [MP_CANTIDADSTOCK], [MP_PRECIO]) VALUES (@UMED_CODIGO, @MP_NOMBRE, @MP_DESCRIPCION, @MP_CANTIDADSTOCK, @MP_PRECIO);
-SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_PRECIO FROM MATERIAS_PRIMAS WHERE (MP_CODIGO = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_CANTIDADSTOCK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_CANTIDADSTOCK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_PRECIO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "MP_PRECIO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[MATERIAS_PRIMAS] SET [UMED_CODIGO] = @UMED_CODIGO, [MP_NOMBRE] = @MP_NOMBRE, [MP_DESCRIPCION] = @MP_DESCRIPCION, [MP_CANTIDADSTOCK] = @MP_CANTIDADSTOCK, [MP_PRECIO] = @MP_PRECIO WHERE (([MP_CODIGO] = @Original_MP_CODIGO) AND ((@IsNull_UMED_CODIGO = 1 AND [UMED_CODIGO] IS NULL) OR ([UMED_CODIGO] = @Original_UMED_CODIGO)) AND ((@IsNull_MP_NOMBRE = 1 AND [MP_NOMBRE] IS NULL) OR ([MP_NOMBRE] = @Original_MP_NOMBRE)) AND ((@IsNull_MP_DESCRIPCION = 1 AND [MP_DESCRIPCION] IS NULL) OR ([MP_DESCRIPCION] = @Original_MP_DESCRIPCION)) AND ((@IsNull_MP_CANTIDADSTOCK = 1 AND [MP_CANTIDADSTOCK] IS NULL) OR ([MP_CANTIDADSTOCK] = @Original_MP_CANTIDADSTOCK)) AND ((@IsNull_MP_PRECIO = 1 AND [MP_PRECIO] IS NULL) OR ([MP_PRECIO] = @Original_MP_PRECIO)));
-SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_PRECIO FROM MATERIAS_PRIMAS WHERE (MP_CODIGO = @MP_CODIGO)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_CANTIDADSTOCK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_CANTIDADSTOCK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_PRECIO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "MP_PRECIO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UMED_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_CANTIDADSTOCK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_CANTIDADSTOCK", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_CANTIDADSTOCK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_CANTIDADSTOCK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_PRECIO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_PRECIO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_PRECIO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "MP_PRECIO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString3;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_PR" +
-                "ECIO FROM dbo.MATERIAS_PRIMAS";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsMateriaPrima.MATERIAS_PRIMASDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsMateriaPrima.MATERIAS_PRIMASDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsMateriaPrima.MATERIAS_PRIMASDataTable dataTable = new dsMateriaPrima.MATERIAS_PRIMASDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsMateriaPrima.MATERIAS_PRIMASDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsMateriaPrima dataSet) {
-            return this.Adapter.Update(dataSet, "MATERIAS_PRIMAS");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_MP_CODIGO, global::System.Nullable<decimal> Original_UMED_CODIGO, string Original_MP_NOMBRE, string Original_MP_DESCRIPCION, global::System.Nullable<int> Original_MP_CANTIDADSTOCK, global::System.Nullable<decimal> Original_MP_PRECIO) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_MP_CODIGO));
-            if ((Original_UMED_CODIGO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_UMED_CODIGO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((Original_MP_NOMBRE == null)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_MP_NOMBRE));
-            }
-            if ((Original_MP_DESCRIPCION == null)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_MP_DESCRIPCION));
-            }
-            if ((Original_MP_CANTIDADSTOCK.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((int)(Original_MP_CANTIDADSTOCK.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((Original_MP_PRECIO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((decimal)(Original_MP_PRECIO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<decimal> UMED_CODIGO, string MP_NOMBRE, string MP_DESCRIPCION, global::System.Nullable<int> MP_CANTIDADSTOCK, global::System.Nullable<decimal> MP_PRECIO) {
-            if ((UMED_CODIGO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(UMED_CODIGO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((MP_NOMBRE == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(MP_NOMBRE));
-            }
-            if ((MP_DESCRIPCION == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(MP_DESCRIPCION));
-            }
-            if ((MP_CANTIDADSTOCK.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(MP_CANTIDADSTOCK.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((MP_PRECIO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(MP_PRECIO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<decimal> UMED_CODIGO, string MP_NOMBRE, string MP_DESCRIPCION, global::System.Nullable<int> MP_CANTIDADSTOCK, global::System.Nullable<decimal> MP_PRECIO, decimal Original_MP_CODIGO, global::System.Nullable<decimal> Original_UMED_CODIGO, string Original_MP_NOMBRE, string Original_MP_DESCRIPCION, global::System.Nullable<int> Original_MP_CANTIDADSTOCK, global::System.Nullable<decimal> Original_MP_PRECIO, decimal MP_CODIGO) {
-            if ((UMED_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(UMED_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((MP_NOMBRE == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(MP_NOMBRE));
-            }
-            if ((MP_DESCRIPCION == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(MP_DESCRIPCION));
-            }
-            if ((MP_CANTIDADSTOCK.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(MP_CANTIDADSTOCK.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((MP_PRECIO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(MP_PRECIO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(Original_MP_CODIGO));
-            if ((Original_UMED_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(Original_UMED_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((Original_MP_NOMBRE == null)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_MP_NOMBRE));
-            }
-            if ((Original_MP_DESCRIPCION == null)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_MP_DESCRIPCION));
-            }
-            if ((Original_MP_CANTIDADSTOCK.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_MP_CANTIDADSTOCK.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            if ((Original_MP_PRECIO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((decimal)(Original_MP_PRECIO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((decimal)(MP_CODIGO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<decimal> UMED_CODIGO, string MP_NOMBRE, string MP_DESCRIPCION, global::System.Nullable<int> MP_CANTIDADSTOCK, global::System.Nullable<decimal> MP_PRECIO, decimal Original_MP_CODIGO, global::System.Nullable<decimal> Original_UMED_CODIGO, string Original_MP_NOMBRE, string Original_MP_DESCRIPCION, global::System.Nullable<int> Original_MP_CANTIDADSTOCK, global::System.Nullable<decimal> Original_MP_PRECIO) {
-            return this.Update(UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_CANTIDADSTOCK, MP_PRECIO, Original_MP_CODIGO, Original_UMED_CODIGO, Original_MP_NOMBRE, Original_MP_DESCRIPCION, Original_MP_CANTIDADSTOCK, Original_MP_PRECIO, Original_MP_CODIGO);
         }
     }
     
@@ -3508,6 +3034,419 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class MATERIAS_PRIMASTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public MATERIAS_PRIMASTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "MATERIAS_PRIMAS";
+            tableMapping.ColumnMappings.Add("MP_CODIGO", "MP_CODIGO");
+            tableMapping.ColumnMappings.Add("UMED_CODIGO", "UMED_CODIGO");
+            tableMapping.ColumnMappings.Add("MP_NOMBRE", "MP_NOMBRE");
+            tableMapping.ColumnMappings.Add("MP_DESCRIPCION", "MP_DESCRIPCION");
+            tableMapping.ColumnMappings.Add("MP_COSTO", "MP_COSTO");
+            tableMapping.ColumnMappings.Add("USTCK_NUMERO", "USTCK_NUMERO");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[MATERIAS_PRIMAS] WHERE (([MP_CODIGO] = @Original_MP_CODIGO) AND ([UMED_CODIGO] = @Original_UMED_CODIGO) AND ([MP_NOMBRE] = @Original_MP_NOMBRE) AND ((@IsNull_MP_DESCRIPCION = 1 AND [MP_DESCRIPCION] IS NULL) OR ([MP_DESCRIPCION] = @Original_MP_DESCRIPCION)) AND ((@IsNull_MP_COSTO = 1 AND [MP_COSTO] IS NULL) OR ([MP_COSTO] = @Original_MP_COSTO)) AND ((@IsNull_USTCK_NUMERO = 1 AND [USTCK_NUMERO] IS NULL) OR ([USTCK_NUMERO] = @Original_USTCK_NUMERO)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_COSTO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_COSTO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "MP_COSTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[MATERIAS_PRIMAS] ([UMED_CODIGO], [MP_NOMBRE], [MP_DESCRIPCION], [MP_COSTO], [USTCK_NUMERO]) VALUES (@UMED_CODIGO, @MP_NOMBRE, @MP_DESCRIPCION, @MP_COSTO, @USTCK_NUMERO);
+SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_COSTO, USTCK_NUMERO FROM MATERIAS_PRIMAS WHERE (MP_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "MP_COSTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[MATERIAS_PRIMAS] SET [UMED_CODIGO] = @UMED_CODIGO, [MP_NOMBRE] = @MP_NOMBRE, [MP_DESCRIPCION] = @MP_DESCRIPCION, [MP_COSTO] = @MP_COSTO, [USTCK_NUMERO] = @USTCK_NUMERO WHERE (([MP_CODIGO] = @Original_MP_CODIGO) AND ([UMED_CODIGO] = @Original_UMED_CODIGO) AND ([MP_NOMBRE] = @Original_MP_NOMBRE) AND ((@IsNull_MP_DESCRIPCION = 1 AND [MP_DESCRIPCION] IS NULL) OR ([MP_DESCRIPCION] = @Original_MP_DESCRIPCION)) AND ((@IsNull_MP_COSTO = 1 AND [MP_COSTO] IS NULL) OR ([MP_COSTO] = @Original_MP_COSTO)) AND ((@IsNull_USTCK_NUMERO = 1 AND [USTCK_NUMERO] IS NULL) OR ([USTCK_NUMERO] = @Original_USTCK_NUMERO)));
+SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_COSTO, USTCK_NUMERO FROM MATERIAS_PRIMAS WHERE (MP_CODIGO = @MP_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "MP_COSTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_COSTO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_COSTO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_COSTO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "MP_COSTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT MP_CODIGO, UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_COSTO, USTCK_NUMERO " +
+                "FROM dbo.MATERIAS_PRIMAS";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsMateriaPrima.MATERIAS_PRIMASDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsMateriaPrima.MATERIAS_PRIMASDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsMateriaPrima.MATERIAS_PRIMASDataTable dataTable = new dsMateriaPrima.MATERIAS_PRIMASDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsMateriaPrima.MATERIAS_PRIMASDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsMateriaPrima dataSet) {
+            return this.Adapter.Update(dataSet, "MATERIAS_PRIMAS");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_MP_CODIGO, decimal Original_UMED_CODIGO, string Original_MP_NOMBRE, string Original_MP_DESCRIPCION, global::System.Nullable<decimal> Original_MP_COSTO, global::System.Nullable<decimal> Original_USTCK_NUMERO) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_MP_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_UMED_CODIGO));
+            if ((Original_MP_NOMBRE == null)) {
+                throw new global::System.ArgumentNullException("Original_MP_NOMBRE");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_MP_NOMBRE));
+            }
+            if ((Original_MP_DESCRIPCION == null)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_MP_DESCRIPCION));
+            }
+            if ((Original_MP_COSTO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((decimal)(Original_MP_COSTO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((Original_USTCK_NUMERO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((decimal)(Original_USTCK_NUMERO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal UMED_CODIGO, string MP_NOMBRE, string MP_DESCRIPCION, global::System.Nullable<decimal> MP_COSTO, global::System.Nullable<decimal> USTCK_NUMERO) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(UMED_CODIGO));
+            if ((MP_NOMBRE == null)) {
+                throw new global::System.ArgumentNullException("MP_NOMBRE");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(MP_NOMBRE));
+            }
+            if ((MP_DESCRIPCION == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(MP_DESCRIPCION));
+            }
+            if ((MP_COSTO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(MP_COSTO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((USTCK_NUMERO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(USTCK_NUMERO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(decimal UMED_CODIGO, string MP_NOMBRE, string MP_DESCRIPCION, global::System.Nullable<decimal> MP_COSTO, global::System.Nullable<decimal> USTCK_NUMERO, decimal Original_MP_CODIGO, decimal Original_UMED_CODIGO, string Original_MP_NOMBRE, string Original_MP_DESCRIPCION, global::System.Nullable<decimal> Original_MP_COSTO, global::System.Nullable<decimal> Original_USTCK_NUMERO, decimal MP_CODIGO) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(UMED_CODIGO));
+            if ((MP_NOMBRE == null)) {
+                throw new global::System.ArgumentNullException("MP_NOMBRE");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(MP_NOMBRE));
+            }
+            if ((MP_DESCRIPCION == null)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(MP_DESCRIPCION));
+            }
+            if ((MP_COSTO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(MP_COSTO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((USTCK_NUMERO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(USTCK_NUMERO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(Original_MP_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_UMED_CODIGO));
+            if ((Original_MP_NOMBRE == null)) {
+                throw new global::System.ArgumentNullException("Original_MP_NOMBRE");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_MP_NOMBRE));
+            }
+            if ((Original_MP_DESCRIPCION == null)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_MP_DESCRIPCION));
+            }
+            if ((Original_MP_COSTO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_MP_COSTO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((Original_USTCK_NUMERO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_USTCK_NUMERO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((decimal)(MP_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(decimal UMED_CODIGO, string MP_NOMBRE, string MP_DESCRIPCION, global::System.Nullable<decimal> MP_COSTO, global::System.Nullable<decimal> USTCK_NUMERO, decimal Original_MP_CODIGO, decimal Original_UMED_CODIGO, string Original_MP_NOMBRE, string Original_MP_DESCRIPCION, global::System.Nullable<decimal> Original_MP_COSTO, global::System.Nullable<decimal> Original_USTCK_NUMERO) {
+            return this.Update(UMED_CODIGO, MP_NOMBRE, MP_DESCRIPCION, MP_COSTO, USTCK_NUMERO, Original_MP_CODIGO, Original_UMED_CODIGO, Original_MP_NOMBRE, Original_MP_DESCRIPCION, Original_MP_COSTO, Original_USTCK_NUMERO, Original_MP_CODIGO);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -3522,11 +3461,11 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
         
         private MATERIASPRIMASPRINCIPALESTableAdapter _mATERIASPRIMASPRINCIPALESTableAdapter;
         
-        private MATERIAS_PRIMASTableAdapter _mATERIAS_PRIMASTableAdapter;
-        
         private UNIDADES_MEDIDATableAdapter _uNIDADES_MEDIDATableAdapter;
         
         private TIPOS_UNIDADES_MEDIDATableAdapter _tIPOS_UNIDADES_MEDIDATableAdapter;
+        
+        private MATERIAS_PRIMASTableAdapter _mATERIAS_PRIMASTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -3559,19 +3498,6 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
             "", "System.Drawing.Design.UITypeEditor")]
-        public MATERIAS_PRIMASTableAdapter MATERIAS_PRIMASTableAdapter {
-            get {
-                return this._mATERIAS_PRIMASTableAdapter;
-            }
-            set {
-                this._mATERIAS_PRIMASTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
         public UNIDADES_MEDIDATableAdapter UNIDADES_MEDIDATableAdapter {
             get {
                 return this._uNIDADES_MEDIDATableAdapter;
@@ -3591,6 +3517,19 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
             }
             set {
                 this._tIPOS_UNIDADES_MEDIDATableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public MATERIAS_PRIMASTableAdapter MATERIAS_PRIMASTableAdapter {
+            get {
+                return this._mATERIAS_PRIMASTableAdapter;
+            }
+            set {
+                this._mATERIAS_PRIMASTableAdapter = value;
             }
         }
         
@@ -3615,10 +3554,6 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
                             && (this._mATERIASPRIMASPRINCIPALESTableAdapter.Connection != null))) {
                     return this._mATERIASPRIMASPRINCIPALESTableAdapter.Connection;
                 }
-                if (((this._mATERIAS_PRIMASTableAdapter != null) 
-                            && (this._mATERIAS_PRIMASTableAdapter.Connection != null))) {
-                    return this._mATERIAS_PRIMASTableAdapter.Connection;
-                }
                 if (((this._uNIDADES_MEDIDATableAdapter != null) 
                             && (this._uNIDADES_MEDIDATableAdapter.Connection != null))) {
                     return this._uNIDADES_MEDIDATableAdapter.Connection;
@@ -3626,6 +3561,10 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
                 if (((this._tIPOS_UNIDADES_MEDIDATableAdapter != null) 
                             && (this._tIPOS_UNIDADES_MEDIDATableAdapter.Connection != null))) {
                     return this._tIPOS_UNIDADES_MEDIDATableAdapter.Connection;
+                }
+                if (((this._mATERIAS_PRIMASTableAdapter != null) 
+                            && (this._mATERIAS_PRIMASTableAdapter.Connection != null))) {
+                    return this._mATERIAS_PRIMASTableAdapter.Connection;
                 }
                 return null;
             }
@@ -3642,13 +3581,13 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
                 if ((this._mATERIASPRIMASPRINCIPALESTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._mATERIAS_PRIMASTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._uNIDADES_MEDIDATableAdapter != null)) {
                     count = (count + 1);
                 }
                 if ((this._tIPOS_UNIDADES_MEDIDATableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._mATERIAS_PRIMASTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -3821,11 +3760,6 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._mATERIAS_PRIMASTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._mATERIAS_PRIMASTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             if (((this._uNIDADES_MEDIDATableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._uNIDADES_MEDIDATableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
@@ -3833,6 +3767,11 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
             }
             if (((this._tIPOS_UNIDADES_MEDIDATableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._tIPOS_UNIDADES_MEDIDATableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._mATERIAS_PRIMASTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._mATERIAS_PRIMASTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -3877,15 +3816,6 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
                         adaptersWithAcceptChangesDuringUpdate.Add(this._mATERIASPRIMASPRINCIPALESTableAdapter.Adapter);
                     }
                 }
-                if ((this._mATERIAS_PRIMASTableAdapter != null)) {
-                    revertConnections.Add(this._mATERIAS_PRIMASTableAdapter, this._mATERIAS_PRIMASTableAdapter.Connection);
-                    this._mATERIAS_PRIMASTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._mATERIAS_PRIMASTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._mATERIAS_PRIMASTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._mATERIAS_PRIMASTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._mATERIAS_PRIMASTableAdapter.Adapter);
-                    }
-                }
                 if ((this._uNIDADES_MEDIDATableAdapter != null)) {
                     revertConnections.Add(this._uNIDADES_MEDIDATableAdapter, this._uNIDADES_MEDIDATableAdapter.Connection);
                     this._uNIDADES_MEDIDATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -3902,6 +3832,15 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
                     if (this._tIPOS_UNIDADES_MEDIDATableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._tIPOS_UNIDADES_MEDIDATableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._tIPOS_UNIDADES_MEDIDATableAdapter.Adapter);
+                    }
+                }
+                if ((this._mATERIAS_PRIMASTableAdapter != null)) {
+                    revertConnections.Add(this._mATERIAS_PRIMASTableAdapter, this._mATERIAS_PRIMASTableAdapter.Connection);
+                    this._mATERIAS_PRIMASTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._mATERIAS_PRIMASTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._mATERIAS_PRIMASTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._mATERIAS_PRIMASTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._mATERIAS_PRIMASTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -3966,10 +3905,6 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
                     this._mATERIASPRIMASPRINCIPALESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._mATERIASPRIMASPRINCIPALESTableAdapter]));
                     this._mATERIASPRIMASPRINCIPALESTableAdapter.Transaction = null;
                 }
-                if ((this._mATERIAS_PRIMASTableAdapter != null)) {
-                    this._mATERIAS_PRIMASTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._mATERIAS_PRIMASTableAdapter]));
-                    this._mATERIAS_PRIMASTableAdapter.Transaction = null;
-                }
                 if ((this._uNIDADES_MEDIDATableAdapter != null)) {
                     this._uNIDADES_MEDIDATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._uNIDADES_MEDIDATableAdapter]));
                     this._uNIDADES_MEDIDATableAdapter.Transaction = null;
@@ -3977,6 +3912,10 @@ SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO
                 if ((this._tIPOS_UNIDADES_MEDIDATableAdapter != null)) {
                     this._tIPOS_UNIDADES_MEDIDATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._tIPOS_UNIDADES_MEDIDATableAdapter]));
                     this._tIPOS_UNIDADES_MEDIDATableAdapter.Transaction = null;
+                }
+                if ((this._mATERIAS_PRIMASTableAdapter != null)) {
+                    this._mATERIAS_PRIMASTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._mATERIAS_PRIMASTableAdapter]));
+                    this._mATERIAS_PRIMASTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
