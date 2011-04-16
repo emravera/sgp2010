@@ -88,6 +88,20 @@ namespace GyCAP.UI.Soporte.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap City_128 {
+            get {
+                object obj = ResourceManager.GetObject("City_128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Company_128 {
+            get {
+                object obj = ResourceManager.GetObject("Company_128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Delete_25 {
             get {
                 object obj = ResourceManager.GetObject("Delete_25", resourceCulture);
@@ -126,13 +140,6 @@ namespace GyCAP.UI.Soporte.Properties {
         internal static System.Drawing.Bitmap Information_25 {
             get {
                 object obj = ResourceManager.GetObject("Information_25", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap Localidades_256 {
-            get {
-                object obj = ResourceManager.GetObject("Localidades_256", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

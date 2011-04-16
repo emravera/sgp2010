@@ -83,6 +83,8 @@ namespace GyCAP.UI.Soporte
                         hayDatos = true;
                     }
 
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
+
                     btnModificar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
                     btnConsultar.Enabled = hayDatos;
@@ -167,29 +169,7 @@ namespace GyCAP.UI.Soporte
             txtNombre.SelectAll();
         }
 
-        private string Validar()
-        {
-            string erroresValidacion=string.Empty;
-
-           //Control de combos
-            List<string> combos = new List<string>();
-            if (cbProvincia.SelectedIndex == -1)
-            {
-                combos.Add("Provincia");
-                erroresValidacion= erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.Seleccion,combos);
-            }
-
-            //Control de los textbox
-            List<string> datos = new List<string>();
-            if (txtNombre.Text.Trim().Length == 0)
-            {
-                datos.Add("Nombre");
-                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
-            }
-
-            return erroresValidacion;
-        }
-        
+               
         public static frmLocalidad Instancia
         {
             get
@@ -329,7 +309,7 @@ namespace GyCAP.UI.Soporte
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisamos que escribió algo y selecciono algo en el combo
-            if (Validar() == string.Empty)
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
                 Entidades.Localidad localidad = new GyCAP.Entidades.Localidad();
                 localidad.Provincia = new GyCAP.Entidades.Provincia();
@@ -421,11 +401,7 @@ namespace GyCAP.UI.Soporte
                     }
                 }
                 dvLocalidad.Table = dsLocalidad.LOCALIDADES;
-            }
-            else
-            {
-                Entidades.Mensajes.MensajesABM.MsjValidacion(Validar(), this.Text);
-            }
+            }            
         }
         
         //Metodo que carga los datos desde la grilla hacia a los controles 

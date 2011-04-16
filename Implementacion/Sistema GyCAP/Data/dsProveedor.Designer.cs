@@ -907,7 +907,6 @@ namespace GyCAP.Data {
                 this.columnDOM_CODIGO.AutoIncrementSeed = -1;
                 this.columnDOM_CODIGO.AutoIncrementStep = -1;
                 this.columnDOM_CODIGO.AllowDBNull = false;
-                this.columnDOM_CODIGO.ReadOnly = true;
                 this.columnDOM_CODIGO.Unique = true;
                 this.columnLOC_CODIGO.AllowDBNull = false;
                 this.columnPROVE_CODIGO.AllowDBNull = false;
@@ -1902,12 +1901,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string PROVE_TELALTERNATIVO {
                 get {
-                    try {
-                        return ((string)(this[this.tablePROVEEDORES.PROVE_TELALTERNATIVOColumn]));
+                    if (this.IsPROVE_TELALTERNATIVONull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'PROVE_TELALTERNATIVO\' de la tabla \'PROVEEDORES\' es DBNull" +
-                                ".", e);
+                    else {
+                        return ((string)(this[this.tablePROVEEDORES.PROVE_TELALTERNATIVOColumn]));
                     }
                 }
                 set {
@@ -2053,11 +2051,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string DOM_PISO {
                 get {
-                    try {
-                        return ((string)(this[this.tableDOMICILIOS.DOM_PISOColumn]));
+                    if (this.IsDOM_PISONull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DOM_PISO\' de la tabla \'DOMICILIOS\' es DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableDOMICILIOS.DOM_PISOColumn]));
                     }
                 }
                 set {
@@ -2068,11 +2066,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string DOM_DEPARTAMENTO {
                 get {
-                    try {
-                        return ((string)(this[this.tableDOMICILIOS.DOM_DEPARTAMENTOColumn]));
+                    if (this.IsDOM_DEPARTAMENTONull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DOM_DEPARTAMENTO\' de la tabla \'DOMICILIOS\' es DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableDOMICILIOS.DOM_DEPARTAMENTOColumn]));
                     }
                 }
                 set {

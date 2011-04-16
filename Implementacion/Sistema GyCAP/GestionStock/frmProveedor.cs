@@ -109,7 +109,7 @@ namespace GyCAP.UI.GestionStock
 
             //Creamos el Dataview y se lo asignamos al combo de Sectores en los datos
             dvComboSectorDatos = new DataView(dsProveedor.SECTORES);
-            cbSectorDatos.SetDatos(dvComboSectorDatos, "sec_codigo", "sec_nombre", "Seleccionar", false);
+            cbSectorDatos.SetDatos(dvComboSectorDatos, "sec_codigo", "sec_nombre", "Seleccionar", true);
 
             //Creamos el Dataview y se lo asignamos al combo de Provincias
             dvComboProvincia = new DataView(dsProveedor.PROVINCIAS);
@@ -146,10 +146,17 @@ namespace GyCAP.UI.GestionStock
                         hayDatos = true;
                         dgvLista.Focus();
                     }
+
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
+
                     btnModificar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
                     btnConsultar.Enabled = hayDatos;
                     btnNuevo.Enabled = true;
+                    
+                    //Limpio la tabla de domicilios
+                    dsProveedor.DOMICILIOS.Clear();
+
                     tcABM.SelectedTab = tpBuscar;
                     estadoInterface = estadoUI.inicio;
                     break;
@@ -166,6 +173,22 @@ namespace GyCAP.UI.GestionStock
                     cbLocalidad.Enabled = false;
                     cbProvincia.SelectedIndex = -1;
 
+                    //Ponemos readonly al resto de los textbox
+                    txtRazonSocial.ReadOnly = false;
+                    txtTelefonoAlt.ReadOnly = false;
+                    txtTelefonoPcipal.ReadOnly = false;
+                    cbSectorDatos.Enabled = true;
+
+                    //Parte del domicilio
+                    txtCalle.ReadOnly = false;
+                    txtDepto.ReadOnly = false;
+                    txtNumero.ReadOnly = false;
+                    txtPiso.ReadOnly = false;
+                    cbProvincia.Enabled = true;
+                    btnNuevaLocalidad.Enabled = true;
+                    btnAgregarDomicilio.Enabled = true;
+
+
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -180,11 +203,25 @@ namespace GyCAP.UI.GestionStock
                     txtNumero.Text = string.Empty;
                     txtPiso.Text = string.Empty;
                     txtDepto.Text = string.Empty;
-                    cbSectorDatos.SelectedIndex = -1;
                     cbLocalidad.SelectedIndex = -1;
                     cbLocalidad.Enabled = false;
                     cbProvincia.SelectedIndex = -1;
 
+                    //Ponemos readonly al resto de los textbox
+                    txtRazonSocial.ReadOnly = false;
+                    txtTelefonoAlt.ReadOnly = false;
+                    txtTelefonoPcipal.ReadOnly = false;
+                    cbSectorDatos.Enabled = true;
+
+                    //Parte del domicilio
+                    txtCalle.ReadOnly = false;
+                    txtDepto.ReadOnly = false;
+                    txtNumero.ReadOnly = false;
+                    txtPiso.ReadOnly = false;
+                    cbProvincia.Enabled = true;
+                    btnAgregarDomicilio.Enabled = true;
+                    btnNuevaLocalidad.Enabled = true;
+                    
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = true;
@@ -194,6 +231,41 @@ namespace GyCAP.UI.GestionStock
                     tcABM.SelectedTab = tpDatos;
                     estadoInterface = estadoUI.modificar;
                     break;
+                case estadoUI.consultar:
+                    txtCalle.Text = string.Empty;
+                    txtNumero.Text = string.Empty;
+                    txtPiso.Text = string.Empty;
+                    txtDepto.Text = string.Empty;
+                    cbLocalidad.SelectedIndex = -1;
+                    cbLocalidad.Enabled = false;
+                    cbProvincia.SelectedIndex = -1;
+                    cbProvincia.Enabled = false;
+
+                    //Ponemos readonly al resto de los textbox
+                    txtRazonSocial.ReadOnly = true;
+                    txtTelefonoAlt.ReadOnly = true;
+                    txtTelefonoPcipal.ReadOnly = true;
+                    cbSectorDatos.Enabled = false;
+                    btnAgregarDomicilio.Enabled = false;
+                    btnNuevaLocalidad.Enabled = false;
+
+                    //Parte del domicilio
+                    txtCalle.ReadOnly = true;
+                    txtDepto.ReadOnly = true;
+                    txtNumero.ReadOnly = true;
+                    txtPiso.ReadOnly = true;
+                    cbProvincia.Enabled = false;
+
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = true;
+                    btnNuevo.Enabled = true;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    tcABM.SelectedTab = tpDatos;
+                    estadoInterface = estadoUI.consultar;
+                    break;
+
 
             }
         }
@@ -206,79 +278,41 @@ namespace GyCAP.UI.GestionStock
 
             //Control de combos
             List<string> combos = new List<string>();
-            if (cbLocalidad.SelectedIndex == -1)
+            if (cbLocalidad.GetSelectedIndex() == 0)
             {
                 combos.Add("Localidad");               
             }
-            if (cbProvincia.SelectedIndex == -1)
+            if (cbProvincia.GetSelectedIndex() == 0)
             {
                 combos.Add("Provincia");
+            }
+            //Mensaje de Combos
+            if (combos.Count > 0)
+            {
                 erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.Seleccion, combos);
             }
-
-            //Control de los textbox
+                       
+            //Control de los textbox 
             List<string> datos = new List<string>();
-            if (txtCalle.Text == string.Empty)
+            if (txtCalle.Text.Trim().Length == 0)
             {
                 datos.Add("Calle");
             }
-            if (txtNumero.Text == string.Empty)
-            {
-                datos.Add("Numero");
-                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
-            }
-            
-            //Control de los textbox (ingreso de espacios)
-            List<string> espacios = new List<string>();
-            if (txtCalle.Text.Trim().Length == 0)
-            {
-                espacios.Add("Calle");
-            }
             if (txtNumero.Text.Trim().Length == 0)
             {
-                espacios.Add("Numero");
-                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.SoloEspacios, espacios);
+                datos.Add("Numero");
             }
+            //Mensaje de error de los textbox
+            if (datos.Count > 0)
+            {
+                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
+            }
+
             
             return erroresValidacion;
         }
 
-        private string ValidarGuardar()
-        {
-            string erroresValidacion = string.Empty;
-
-            //Control de combos
-            List<string> combos = new List<string>();
-            if (cbSectorDatos.SelectedIndex == -1)
-            {
-                combos.Add("Sector de Trabajo");
-            }
-
-            //Control de los textbox
-            List<string> datos = new List<string>();
-            if (txtRazonSocial.Text == string.Empty)
-            {
-                datos.Add("Razón Social");
-            }
-            if (txtTelefonoPcipal.Text == string.Empty)
-            {
-                datos.Add("Telefono Principal");
-            }
-            if (txtTelefonoAlt.Text == string.Empty)
-            {
-                datos.Add("Telefono Alternativo");
-                erroresValidacion = erroresValidacion + Entidades.Mensajes.MensajesABM.EscribirValidacion(GyCAP.Entidades.Mensajes.MensajesABM.Validaciones.CompletarDatos, datos);
-            }
-
-            //Control de validación sobre el domicilio
-            if (dsProveedor.DOMICILIOS.Rows.Count == 0)
-            {
-                erroresValidacion = erroresValidacion + "\n Error de Domicilio: \n -Debe generarle al menos un domicilio al proveedor";
-            }
-
-            return erroresValidacion;
-        }
-        
+                
         //Método para evitar la creación de más de una pantalla
         public static frmProveedor Instancia
         {
@@ -304,11 +338,19 @@ namespace GyCAP.UI.GestionStock
         {
             if (dgvDomicilios.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
-                //Obtengo el código del domicilio
-                int codigo = Convert.ToInt32(dvListaDomicilios[dgvDomicilios.SelectedRows[0].Index]["dom_codigo"]);
-                                
-                //Elimino del dataset el domicilio
-                dsProveedor.DOMICILIOS.FindByDOM_CODIGO(codigo).Delete();
+                //Preguntamos si está seguro
+               DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Proveedor", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
+               if (respuesta == DialogResult.Yes)
+               {
+                   //Obtengo el código del domicilio
+                   int codigo = Convert.ToInt32(dvListaDomicilios[dgvDomicilios.SelectedRows[0].Index]["dom_codigo"]);
+
+                   //Elimino el Domicilio de la BD
+                   BLL.DomicilioBLL.EliminarDomicilios(codigo);
+
+                   //Elimino del dataset el domicilio
+                   dsProveedor.DOMICILIOS.FindByDOM_CODIGO(codigo).Delete();                   
+               }
             }
             else
             {
@@ -427,12 +469,6 @@ namespace GyCAP.UI.GestionStock
                        string nombre = dsProveedor.LOCALIDADES.FindByLOC_CODIGO(Convert.ToInt32(e.Value)).LOC_NOMBRE;
                        e.Value = nombre;
                        break;
-                   case "DOM_DEPARTAMENTO":
-                       if (Convert.ToString(e.Value) == Convert.ToString(0)) { e.Value = ""; }
-                       break;
-                   case "DOM_PISO":
-                       if (Convert.ToString(e.Value) == Convert.ToString(0)) { e.Value = ""; }
-                       break;
                    default:
                        break;
                }
@@ -441,13 +477,11 @@ namespace GyCAP.UI.GestionStock
 
        private void btnGuardar_Click(object sender, EventArgs e)
        {
-           string validarGuardar = ValidarGuardar();
-
-           try
+          try
            {
-               if (validarGuardar == string.Empty)
+               if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
                {
-
+                  
                    //Creamos los objetos a utilizar
                    Entidades.Proveedor proveedor = new GyCAP.Entidades.Proveedor();
                    Entidades.SectorTrabajo sector = new GyCAP.Entidades.SectorTrabajo();
@@ -466,11 +500,13 @@ namespace GyCAP.UI.GestionStock
                    if (estadoInterface == estadoUI.nuevo)
                    {
                        //Se guarda el proveedor nuevo
-                       BLL.ProveedorBLL.GuardarProveedor(proveedor,dsProveedor);
+                       BLL.ProveedorBLL.GuardarProveedor(proveedor, dsProveedor);
                    }
                    else if (estadoInterface == estadoUI.modificar)
                    {
                        //Se modifica el proveedor
+                       proveedor.Codigo= Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["prove_codigo"]);
+                       BLL.ProveedorBLL.ModificarProveedor(proveedor, dsProveedor);
                    }
 
                    //Si esta todo bien aceptamos los cambios que se le hacen al dataset
@@ -478,10 +514,10 @@ namespace GyCAP.UI.GestionStock
 
                    //Mostramos el mensaje que se guardo correctamente
                    Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Proveedor", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
-               }
-               else
-               {
-                   Entidades.Mensajes.MensajesABM.MsjValidacion(validarGuardar, this.Text);
+
+                   //Seteamos la interfaz al comienzo
+                   SetInterface(estadoUI.inicio);             
+                   
                }
            }
            catch(Entidades.Excepciones.BaseDeDatosException ex)
@@ -500,12 +536,8 @@ namespace GyCAP.UI.GestionStock
                        string nombre = dsProveedor.SECTORES.FindBySEC_CODIGO(Convert.ToInt32(e.Value)).SEC_NOMBRE;
                        e.Value = nombre;
                        break;
-                   case "PROVE_TELALTERNATIVO":
-                       if (Convert.ToString(e.Value) == Convert.ToString(0)) { e.Value = ""; }
-                       break;
                    default:
                        break;
-
                }
            }
        }
@@ -527,13 +559,66 @@ namespace GyCAP.UI.GestionStock
                dsProveedor.DOMICILIOS.Clear();
                BLL.DomicilioBLL.ObtenerDomicilios(codigo, dsProveedor.DOMICILIOS);
 
-               SetInterface(estadoUI.modificar);
+               
+               if (sender.ToString() == "&Consultar")
+               {
+                   SetInterface(estadoUI.consultar);
+               }
+               else
+               {
+                   SetInterface(estadoUI.modificar);
+               }
            }
            catch (Entidades.Excepciones.BaseDeDatosException ex)
            {
                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
            }
 
+       }
+
+       private void btnConsultar_Click(object sender, EventArgs e)
+       {
+           this.btnModificar_Click(sender,e);
+       }
+
+       private void btnNuevaLocalidad_Click(object sender, EventArgs e)
+       {
+           //Abrimos el formulario de localidades
+           GyCAP.UI.Soporte.frmLocalidad.Instancia.Show();
+           
+           //Recargamos el combo de localidades
+           BLL.LocalidadBLL.ObtenerLocalidades(dsProveedor.LOCALIDADES);
+       }
+
+       private void btnEliminar_Click(object sender, EventArgs e)
+       {
+           //Controlamos que esté seleccionado algo
+           if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+           {
+               //Preguntamos si está seguro
+               DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Proveedor", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
+               if (respuesta == DialogResult.Yes)
+               {
+                   try
+                   {
+                       //Datos de la cabecera
+                       int codigoProveedor = Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["prove_codigo"]);
+
+                       //Elimino el Proveedor de la BD
+                       BLL.ProveedorBLL.EliminarProveedor(codigoProveedor);
+
+                       //Mensaje que fue eliminado correctamente
+                       Entidades.Mensajes.MensajesABM.MsjConfirmaEliminar(this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
+                                              
+                       //Seteo el estado de la interfaz
+                       SetInterface(estadoUI.inicio);
+                   }
+                   catch (Entidades.Excepciones.BaseDeDatosException ex)
+                   {
+                       Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                   }
+               }
+           }
        }
 
     }

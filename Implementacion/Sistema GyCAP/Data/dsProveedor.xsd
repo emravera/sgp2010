@@ -333,7 +333,7 @@ SELECT PCIA_CODIGO, PCIA_NOMBRE FROM PROVINCIAS WHERE (PCIA_CODIGO = @PCIA_CODIG
   <xs:element name="dsProveedor" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsProveedor" msprop:Generator_DataSetName="dsProveedor" msprop:EnableTableAdapterManager="true">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="PROVEEDORES" msprop:Generator_UserTableName="PROVEEDORES" msprop:Generator_RowDeletedName="PROVEEDORESRowDeleted" msprop:Generator_TableClassName="PROVEEDORESDataTable" msprop:Generator_RowChangedName="PROVEEDORESRowChanged" msprop:Generator_RowClassName="PROVEEDORESRow" msprop:Generator_RowChangingName="PROVEEDORESRowChanging" msprop:Generator_RowEvArgName="PROVEEDORESRowChangeEvent" msprop:Generator_RowEvHandlerName="PROVEEDORESRowChangeEventHandler" msprop:Generator_TablePropName="PROVEEDORES" msprop:Generator_TableVarName="tablePROVEEDORES" msprop:Generator_RowDeletingName="PROVEEDORESRowDeleting">
+        <xs:element name="PROVEEDORES" msprop:Generator_UserTableName="PROVEEDORES" msprop:Generator_RowDeletedName="PROVEEDORESRowDeleted" msprop:Generator_RowChangedName="PROVEEDORESRowChanged" msprop:Generator_RowClassName="PROVEEDORESRow" msprop:Generator_RowChangingName="PROVEEDORESRowChanging" msprop:Generator_RowEvArgName="PROVEEDORESRowChangeEvent" msprop:Generator_RowEvHandlerName="PROVEEDORESRowChangeEventHandler" msprop:Generator_TableClassName="PROVEEDORESDataTable" msprop:Generator_TableVarName="tablePROVEEDORES" msprop:Generator_RowDeletingName="PROVEEDORESRowDeleting" msprop:Generator_TablePropName="PROVEEDORES">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="PROVE_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="PROVE_CODIGO" msprop:Generator_ColumnPropNameInRow="PROVE_CODIGO" msprop:Generator_ColumnVarNameInTable="columnPROVE_CODIGO" msprop:Generator_ColumnPropNameInTable="PROVE_CODIGOColumn" type="xs:decimal" />
@@ -352,7 +352,7 @@ SELECT PCIA_CODIGO, PCIA_NOMBRE FROM PROVINCIAS WHERE (PCIA_CODIGO = @PCIA_CODIG
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="PROVE_TELALTERNATIVO" msprop:Generator_UserColumnName="PROVE_TELALTERNATIVO" msprop:Generator_ColumnPropNameInRow="PROVE_TELALTERNATIVO" msprop:Generator_ColumnVarNameInTable="columnPROVE_TELALTERNATIVO" msprop:Generator_ColumnPropNameInTable="PROVE_TELALTERNATIVOColumn" minOccurs="0">
+              <xs:element name="PROVE_TELALTERNATIVO" msprop:Generator_UserColumnName="PROVE_TELALTERNATIVO" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnPROVE_TELALTERNATIVO" msprop:Generator_ColumnPropNameInTable="PROVE_TELALTERNATIVOColumn" msprop:Generator_ColumnPropNameInRow="PROVE_TELALTERNATIVO" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
@@ -362,10 +362,10 @@ SELECT PCIA_CODIGO, PCIA_NOMBRE FROM PROVINCIAS WHERE (PCIA_CODIGO = @PCIA_CODIG
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="DOMICILIOS" msprop:Generator_UserTableName="DOMICILIOS" msprop:Generator_RowDeletedName="DOMICILIOSRowDeleted" msprop:Generator_TableClassName="DOMICILIOSDataTable" msprop:Generator_RowChangedName="DOMICILIOSRowChanged" msprop:Generator_RowClassName="DOMICILIOSRow" msprop:Generator_RowChangingName="DOMICILIOSRowChanging" msprop:Generator_RowEvArgName="DOMICILIOSRowChangeEvent" msprop:Generator_RowEvHandlerName="DOMICILIOSRowChangeEventHandler" msprop:Generator_TablePropName="DOMICILIOS" msprop:Generator_TableVarName="tableDOMICILIOS" msprop:Generator_RowDeletingName="DOMICILIOSRowDeleting">
+        <xs:element name="DOMICILIOS" msprop:Generator_UserTableName="DOMICILIOS" msprop:Generator_RowDeletedName="DOMICILIOSRowDeleted" msprop:Generator_RowChangedName="DOMICILIOSRowChanged" msprop:Generator_RowClassName="DOMICILIOSRow" msprop:Generator_RowChangingName="DOMICILIOSRowChanging" msprop:Generator_RowEvArgName="DOMICILIOSRowChangeEvent" msprop:Generator_RowEvHandlerName="DOMICILIOSRowChangeEventHandler" msprop:Generator_TableClassName="DOMICILIOSDataTable" msprop:Generator_TableVarName="tableDOMICILIOS" msprop:Generator_RowDeletingName="DOMICILIOSRowDeleting" msprop:Generator_TablePropName="DOMICILIOS">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="DOM_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="DOM_CODIGO" msprop:Generator_ColumnPropNameInRow="DOM_CODIGO" msprop:Generator_ColumnVarNameInTable="columnDOM_CODIGO" msprop:Generator_ColumnPropNameInTable="DOM_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="DOM_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="DOM_CODIGO" msprop:Generator_ColumnPropNameInRow="DOM_CODIGO" msprop:Generator_ColumnVarNameInTable="columnDOM_CODIGO" msprop:Generator_ColumnPropNameInTable="DOM_CODIGOColumn" type="xs:decimal" />
               <xs:element name="LOC_CODIGO" msprop:Generator_UserColumnName="LOC_CODIGO" msprop:Generator_ColumnPropNameInRow="LOC_CODIGO" msprop:Generator_ColumnVarNameInTable="columnLOC_CODIGO" msprop:Generator_ColumnPropNameInTable="LOC_CODIGOColumn" type="xs:decimal" />
               <xs:element name="PROVE_CODIGO" msprop:Generator_UserColumnName="PROVE_CODIGO" msprop:Generator_ColumnPropNameInRow="PROVE_CODIGO" msprop:Generator_ColumnVarNameInTable="columnPROVE_CODIGO" msprop:Generator_ColumnPropNameInTable="PROVE_CODIGOColumn" type="xs:decimal" />
               <xs:element name="DOM_CALLE" msprop:Generator_UserColumnName="DOM_CALLE" msprop:Generator_ColumnPropNameInRow="DOM_CALLE" msprop:Generator_ColumnVarNameInTable="columnDOM_CALLE" msprop:Generator_ColumnPropNameInTable="DOM_CALLEColumn" minOccurs="0">
@@ -382,14 +382,14 @@ SELECT PCIA_CODIGO, PCIA_NOMBRE FROM PROVINCIAS WHERE (PCIA_CODIGO = @PCIA_CODIG
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="DOM_PISO" msprop:Generator_UserColumnName="DOM_PISO" msprop:Generator_ColumnPropNameInRow="DOM_PISO" msprop:Generator_ColumnVarNameInTable="columnDOM_PISO" msprop:Generator_ColumnPropNameInTable="DOM_PISOColumn" minOccurs="0">
+              <xs:element name="DOM_PISO" msprop:Generator_UserColumnName="DOM_PISO" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnDOM_PISO" msprop:Generator_ColumnPropNameInTable="DOM_PISOColumn" msprop:Generator_ColumnPropNameInRow="DOM_PISO" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="10" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="DOM_DEPARTAMENTO" msprop:Generator_UserColumnName="DOM_DEPARTAMENTO" msprop:Generator_ColumnPropNameInRow="DOM_DEPARTAMENTO" msprop:Generator_ColumnVarNameInTable="columnDOM_DEPARTAMENTO" msprop:Generator_ColumnPropNameInTable="DOM_DEPARTAMENTOColumn" minOccurs="0">
+              <xs:element name="DOM_DEPARTAMENTO" msprop:Generator_UserColumnName="DOM_DEPARTAMENTO" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnDOM_DEPARTAMENTO" msprop:Generator_ColumnPropNameInTable="DOM_DEPARTAMENTOColumn" msprop:Generator_ColumnPropNameInRow="DOM_DEPARTAMENTO" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="10" />
@@ -399,7 +399,7 @@ SELECT PCIA_CODIGO, PCIA_NOMBRE FROM PROVINCIAS WHERE (PCIA_CODIGO = @PCIA_CODIG
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SECTORES" msprop:Generator_UserTableName="SECTORES" msprop:Generator_RowDeletedName="SECTORESRowDeleted" msprop:Generator_TableClassName="SECTORESDataTable" msprop:Generator_RowChangedName="SECTORESRowChanged" msprop:Generator_RowClassName="SECTORESRow" msprop:Generator_RowChangingName="SECTORESRowChanging" msprop:Generator_RowEvArgName="SECTORESRowChangeEvent" msprop:Generator_RowEvHandlerName="SECTORESRowChangeEventHandler" msprop:Generator_TablePropName="SECTORES" msprop:Generator_TableVarName="tableSECTORES" msprop:Generator_RowDeletingName="SECTORESRowDeleting">
+        <xs:element name="SECTORES" msprop:Generator_UserTableName="SECTORES" msprop:Generator_RowDeletedName="SECTORESRowDeleted" msprop:Generator_RowChangedName="SECTORESRowChanged" msprop:Generator_RowClassName="SECTORESRow" msprop:Generator_RowChangingName="SECTORESRowChanging" msprop:Generator_RowEvArgName="SECTORESRowChangeEvent" msprop:Generator_RowEvHandlerName="SECTORESRowChangeEventHandler" msprop:Generator_TableClassName="SECTORESDataTable" msprop:Generator_TableVarName="tableSECTORES" msprop:Generator_RowDeletingName="SECTORESRowDeleting" msprop:Generator_TablePropName="SECTORES">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SEC_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="SEC_CODIGO" msprop:Generator_ColumnPropNameInRow="SEC_CODIGO" msprop:Generator_ColumnVarNameInTable="columnSEC_CODIGO" msprop:Generator_ColumnPropNameInTable="SEC_CODIGOColumn" type="xs:decimal" />
@@ -427,7 +427,7 @@ SELECT PCIA_CODIGO, PCIA_NOMBRE FROM PROVINCIAS WHERE (PCIA_CODIGO = @PCIA_CODIG
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="LOCALIDADES" msprop:Generator_UserTableName="LOCALIDADES" msprop:Generator_RowDeletedName="LOCALIDADESRowDeleted" msprop:Generator_TableClassName="LOCALIDADESDataTable" msprop:Generator_RowChangedName="LOCALIDADESRowChanged" msprop:Generator_RowClassName="LOCALIDADESRow" msprop:Generator_RowChangingName="LOCALIDADESRowChanging" msprop:Generator_RowEvArgName="LOCALIDADESRowChangeEvent" msprop:Generator_RowEvHandlerName="LOCALIDADESRowChangeEventHandler" msprop:Generator_TablePropName="LOCALIDADES" msprop:Generator_TableVarName="tableLOCALIDADES" msprop:Generator_RowDeletingName="LOCALIDADESRowDeleting">
+        <xs:element name="LOCALIDADES" msprop:Generator_UserTableName="LOCALIDADES" msprop:Generator_RowDeletedName="LOCALIDADESRowDeleted" msprop:Generator_RowChangedName="LOCALIDADESRowChanged" msprop:Generator_RowClassName="LOCALIDADESRow" msprop:Generator_RowChangingName="LOCALIDADESRowChanging" msprop:Generator_RowEvArgName="LOCALIDADESRowChangeEvent" msprop:Generator_RowEvHandlerName="LOCALIDADESRowChangeEventHandler" msprop:Generator_TableClassName="LOCALIDADESDataTable" msprop:Generator_TableVarName="tableLOCALIDADES" msprop:Generator_RowDeletingName="LOCALIDADESRowDeleting" msprop:Generator_TablePropName="LOCALIDADES">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="LOC_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="LOC_CODIGO" msprop:Generator_ColumnPropNameInRow="LOC_CODIGO" msprop:Generator_ColumnVarNameInTable="columnLOC_CODIGO" msprop:Generator_ColumnPropNameInTable="LOC_CODIGOColumn" type="xs:decimal" />
@@ -442,7 +442,7 @@ SELECT PCIA_CODIGO, PCIA_NOMBRE FROM PROVINCIAS WHERE (PCIA_CODIGO = @PCIA_CODIG
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="PROVINCIAS" msprop:Generator_UserTableName="PROVINCIAS" msprop:Generator_RowDeletedName="PROVINCIASRowDeleted" msprop:Generator_TableClassName="PROVINCIASDataTable" msprop:Generator_RowChangedName="PROVINCIASRowChanged" msprop:Generator_RowClassName="PROVINCIASRow" msprop:Generator_RowChangingName="PROVINCIASRowChanging" msprop:Generator_RowEvArgName="PROVINCIASRowChangeEvent" msprop:Generator_RowEvHandlerName="PROVINCIASRowChangeEventHandler" msprop:Generator_TablePropName="PROVINCIAS" msprop:Generator_TableVarName="tablePROVINCIAS" msprop:Generator_RowDeletingName="PROVINCIASRowDeleting">
+        <xs:element name="PROVINCIAS" msprop:Generator_UserTableName="PROVINCIAS" msprop:Generator_RowDeletedName="PROVINCIASRowDeleted" msprop:Generator_RowChangedName="PROVINCIASRowChanged" msprop:Generator_RowClassName="PROVINCIASRow" msprop:Generator_RowChangingName="PROVINCIASRowChanging" msprop:Generator_RowEvArgName="PROVINCIASRowChangeEvent" msprop:Generator_RowEvHandlerName="PROVINCIASRowChangeEventHandler" msprop:Generator_TableClassName="PROVINCIASDataTable" msprop:Generator_TableVarName="tablePROVINCIAS" msprop:Generator_RowDeletingName="PROVINCIASRowDeleting" msprop:Generator_TablePropName="PROVINCIAS">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="PCIA_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="PCIA_CODIGO" msprop:Generator_ColumnPropNameInRow="PCIA_CODIGO" msprop:Generator_ColumnVarNameInTable="columnPCIA_CODIGO" msprop:Generator_ColumnPropNameInTable="PCIA_CODIGOColumn" type="xs:decimal" />
