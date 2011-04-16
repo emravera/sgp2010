@@ -42,6 +42,7 @@ namespace GyCAP.UI.Sistema.Validaciones
                 ValidarControl(ctrl, errProvider);
             }
 
+            if (!(bool)errProvider.Tag) { Entidades.Mensajes.MensajesABM.MsjValidacion("Debe completar todos los datos obligatorios.", formulario.Text); }
             return (bool)errProvider.Tag;
         }
 
