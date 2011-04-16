@@ -226,7 +226,7 @@ namespace GyCAP.Entidades.Mensajes
         /// <param name="nombreFormulario">El nombre del formulario (this.Text)</param>        
         public static void MsjValidacion(string validacion, string nombreFormulario)
         {
-            MessageBox.Show(validacion, nombreFormulario + " - Información: Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(validacion, nombreFormulario + " - Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         //9-Mensaje para efectuar una pregunta al usuario
