@@ -10,7 +10,7 @@
     <Shape ID="DesignTable:PLANOS" ZOrder="16" X="118" Y="439" Height="222" Width="188" AdapterExpanded="false" DataTableExpanded="true" OldAdapterHeight="41" OldDataTableHeight="0" SplitterPosition="194" />
     <Shape ID="DesignTable:TERMINACIONES" ZOrder="22" X="601" Y="532" Height="137" Width="240" AdapterExpanded="false" DataTableExpanded="true" OldAdapterHeight="41" OldDataTableHeight="0" SplitterPosition="109" />
     <Shape ID="DesignTable:HOJAS_RUTA" ZOrder="17" X="716" Y="320" Height="154" Width="218" AdapterExpanded="false" DataTableExpanded="true" OldAdapterHeight="41" OldDataTableHeight="0" SplitterPosition="126" />
-    <Shape ID="DesignTable:MATERIAS_PRIMAS" ZOrder="23" X="1053" Y="119" Height="171" Width="255" AdapterExpanded="false" DataTableExpanded="true" OldAdapterHeight="41" OldDataTableHeight="0" SplitterPosition="143" />
+    <Shape ID="DesignTable:MATERIAS_PRIMAS" ZOrder="23" X="1053" Y="119" Height="154" Width="255" AdapterExpanded="false" DataTableExpanded="true" OldAdapterHeight="41" OldDataTableHeight="0" SplitterPosition="126" />
     <Shape ID="DesignTable:TIPOS_PARTES" ZOrder="19" X="346" Y="443" Height="188" Width="229" AdapterExpanded="false" DataTableExpanded="true" OldAdapterHeight="41" OldDataTableHeight="0" SplitterPosition="160" />
     <Shape ID="DesignTable:UNIDADES_MEDIDA" ZOrder="21" X="1008" Y="344" Height="120" Width="258" AdapterExpanded="false" DataTableExpanded="true" OldAdapterHeight="41" OldDataTableHeight="0" SplitterPosition="92" />
     <Shape ID="DesignTable:COMPUESTOS_PARTES" ZOrder="15" X="700" Y="92" Height="171" Width="272" AdapterExpanded="false" DataTableExpanded="true" OldAdapterHeight="41" OldDataTableHeight="0" SplitterPosition="143" />
@@ -26,7 +26,7 @@
         </Point>
         <Point>
           <X>1111</X>
-          <Y>290</Y>
+          <Y>273</Y>
         </Point>
       </RoutePoints>
     </Connector>

@@ -18,8 +18,8 @@ namespace GyCAP.DAL
         /// <exception cref="BaseDeDatosException">En caso de problemas con la base de datos.</exception>
         public static Entidades.MateriaPrima ObtenerMateriaPrima(int codigoMateriaPrima)
         {
-            string sql = @"SELECT mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_costo, ustck_numero 
-                        FROM MATERIAS_PRIMAS WHERE pza_codigo = @p0";
+            string sql = @"SELECT mp_nombre, umed_codigo, mp_descripcion, mp_costo, ustck_numero 
+                        FROM MATERIAS_PRIMAS WHERE mp_codigo = @p0";
             object[] valorParametros = { codigoMateriaPrima };
             SqlDataReader rdr = DB.GetReader(sql, valorParametros, null);
             Entidades.MateriaPrima materiaPrima = new GyCAP.Entidades.MateriaPrima();
@@ -31,11 +31,10 @@ namespace GyCAP.DAL
                 materiaPrima.Nombre = rdr["mp_nombre"].ToString();
                 materiaPrima.CodigoUnidadMedida = Convert.ToInt32(rdr["umed_codigo"].ToString());
                 materiaPrima.Descripcion = rdr["mp_descripcion"].ToString();
-                materiaPrima.CantidadStock = Convert.ToInt32(rdr["mp_cantidadstock"].ToString());
                 materiaPrima.Costo = Convert.ToDecimal(rdr["mp_costo"].ToString());
                 materiaPrima.UbicacionStock = new GyCAP.Entidades.UbicacionStock(Convert.ToInt32(rdr["ustck_numero"].ToString()));
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             finally
             {
                 if (rdr != null) { rdr.Close(); }
@@ -47,33 +46,33 @@ namespace GyCAP.DAL
         //Metodo que obtiene todas las materias primas
         public static void ObtenerTodos(Data.dsMateriaPrima ds)
         {
-            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_costo, ustck_numero 
+            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_costo, ustck_numero 
                         FROM MATERIAS_PRIMAS";
             try
             {
                 DB.FillDataSet(ds, "MATERIAS_PRIMAS", sql, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
 
         }
 
         //Metodo que obtiene todas las materias primas
         public static void ObtenerMP(Data.dsPlanMateriasPrimas ds)
         {
-            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_costo, ustck_numero 
+            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_costo, ustck_numero 
                         FROM MATERIAS_PRIMAS";
             try
             {
                 DB.FillDataSet(ds, "MATERIAS_PRIMAS", sql, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
 
         }
         
         //Metodo que obtiene todas las materias primas (con datatable)
         public static void ObtenerMP(DataTable dtMateriasPrimas)
         {
-            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_costo
+            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_costo
                         FROM MATERIAS_PRIMAS";
             try
             {
@@ -84,19 +83,19 @@ namespace GyCAP.DAL
         }
         public static void ObtenerTodos(System.Data.DataTable dt)
         {
-            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_costo, ustck_numero 
+            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_costo, ustck_numero 
                         FROM MATERIAS_PRIMAS";
             try
             {
                 DB.FillDataTable(dt, sql, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
 
         }
 
         public static void ObtenerMateriaPrima(int codigoMP, Data.dsEstructura ds)
         {
-            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_cantidadstock, mp_costo, ustck_numero 
+            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_costo, ustck_numero 
                         FROM MATERIAS_PRIMAS WHERE mp_codigo = @p0";
             object[] valoresParametros = { codigoMP };
             
@@ -104,7 +103,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataTable(ds.MATERIAS_PRIMAS, sql, valoresParametros);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         //Metodo que obtiene el precio de una materia prima
@@ -112,15 +111,14 @@ namespace GyCAP.DAL
         {
             decimal costo = 0;
 
-            string sql = @"SELECT  mp_costo
-                        FROM MATERIAS_PRIMAS where mp_codigo=@p0";
+            string sql = @"SELECT  mp_costo FROM MATERIAS_PRIMAS where mp_codigo = @p0";
           
             object[] valoresParametros = { codigoMP };
             try
             {
-                costo=Convert.ToDecimal(DB.executeScalar(sql, valoresParametros, null));
+                costo = Convert.ToDecimal(DB.executeScalar(sql, valoresParametros, null));
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
 
             return costo;
         }

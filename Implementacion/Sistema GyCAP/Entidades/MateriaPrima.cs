@@ -43,13 +43,7 @@ namespace GyCAP.Entidades
         {
             get { return descripcion; }
             set { descripcion = value; }
-        }
-        
-        public int CantidadStock
-        {
-            get { return cantidadStock; }
-            set { cantidadStock = value; }
-        }
+        }       
   
         public decimal Costo
         {
