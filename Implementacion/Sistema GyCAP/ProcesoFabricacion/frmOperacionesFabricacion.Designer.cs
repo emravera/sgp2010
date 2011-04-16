@@ -86,6 +86,7 @@
             // 
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
+            this.dgvLista.CausesValidation = false;
             this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLista.Location = new System.Drawing.Point(9, 23);
             this.dgvLista.MultiSelect = false;
@@ -96,7 +97,6 @@
             this.dgvLista.Size = new System.Drawing.Size(484, 160);
             this.dgvLista.TabIndex = 0;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
-            this.dgvLista.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellContentDoubleClick);
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
             // gbGrillaBuscar
@@ -128,16 +128,17 @@
             // 
             // txtCodigoOperacionBuscar
             // 
-            this.txtCodigoOperacionBuscar.Location = new System.Drawing.Point(271, 21);
+            this.txtCodigoOperacionBuscar.CausesValidation = false;
+            this.txtCodigoOperacionBuscar.Location = new System.Drawing.Point(291, 21);
             this.txtCodigoOperacionBuscar.MaxLength = 80;
             this.txtCodigoOperacionBuscar.Name = "txtCodigoOperacionBuscar";
-            this.txtCodigoOperacionBuscar.Size = new System.Drawing.Size(97, 21);
+            this.txtCodigoOperacionBuscar.Size = new System.Drawing.Size(118, 21);
             this.txtCodigoOperacionBuscar.TabIndex = 8;
             // 
             // lblClienteBuscar
             // 
             this.lblClienteBuscar.AutoSize = true;
-            this.lblClienteBuscar.Location = new System.Drawing.Point(170, 24);
+            this.lblClienteBuscar.Location = new System.Drawing.Point(190, 24);
             this.lblClienteBuscar.Name = "lblClienteBuscar";
             this.lblClienteBuscar.Size = new System.Drawing.Size(96, 13);
             this.lblClienteBuscar.TabIndex = 3;
@@ -147,7 +148,7 @@
             // 
             this.btnBuscar.Image = global::GyCAP.UI.ProcesoFabricacion.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(415, 17);
+            this.btnBuscar.Location = new System.Drawing.Point(418, 17);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
             this.btnBuscar.TabIndex = 9;
@@ -158,10 +159,11 @@
             // 
             // txtNombreBuscar
             // 
+            this.txtNombreBuscar.CausesValidation = false;
             this.txtNombreBuscar.Location = new System.Drawing.Point(66, 21);
             this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
-            this.txtNombreBuscar.Size = new System.Drawing.Size(97, 21);
+            this.txtNombreBuscar.Size = new System.Drawing.Size(118, 21);
             this.txtNombreBuscar.TabIndex = 7;
             // 
             // label1
@@ -252,7 +254,7 @@
             this.gbDatos.Size = new System.Drawing.Size(502, 195);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
-            this.gbDatos.Text = "Datos Operaciones Fabricación";
+            this.gbDatos.Text = "Datos Operación Fabricación";
             // 
             // numHoras
             // 
@@ -284,10 +286,11 @@
             // 
             // txtDescripcion
             // 
+            this.txtDescripcion.CausesValidation = false;
             this.txtDescripcion.Location = new System.Drawing.Point(164, 121);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(314, 58);
+            this.txtDescripcion.Size = new System.Drawing.Size(314, 68);
             this.txtDescripcion.TabIndex = 4;
             // 
             // label2

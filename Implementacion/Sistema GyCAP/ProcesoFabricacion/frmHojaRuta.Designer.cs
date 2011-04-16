@@ -39,9 +39,7 @@
             this.slideDatos = new SlickInterface.Slide();
             this.gbDatos = new System.Windows.Forms.GroupBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.cboUbicacionStock = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label1 = new System.Windows.Forms.Label();
-            this.dtpFechaAlta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.label9 = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.RichTextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
@@ -62,10 +60,6 @@
             this.gbAgregar = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.cboStockDestino = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cboStockOrigen = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbCentroTrabajo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbOperacion = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tpAgregar = new System.Windows.Forms.TabPage();
@@ -74,7 +68,6 @@
             this.dgvHojasRuta = new System.Windows.Forms.DataGridView();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbActivaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -88,6 +81,13 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.cbActivaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboUbicacionStock = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.dtpFechaAlta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.cboStockDestino = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboStockOrigen = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbCentroTrabajo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbOperacion = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.panelAcciones.SuspendLayout();
             this.gbDatos.SuspendLayout();
             this.tpDatos.SuspendLayout();
@@ -217,6 +217,7 @@
             // chkActivo
             // 
             this.chkActivo.AutoSize = true;
+            this.chkActivo.CausesValidation = false;
             this.chkActivo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkActivo.Location = new System.Drawing.Point(97, 82);
             this.chkActivo.Name = "chkActivo";
@@ -262,16 +263,6 @@
             this.label14.TabIndex = 32;
             this.label14.Text = "Ubicación stock:";
             // 
-            // cboUbicacionStock
-            // 
-            this.cboUbicacionStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboUbicacionStock.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboUbicacionStock.FormattingEnabled = true;
-            this.cboUbicacionStock.Location = new System.Drawing.Point(97, 102);
-            this.cboUbicacionStock.Name = "cboUbicacionStock";
-            this.cboUbicacionStock.Size = new System.Drawing.Size(200, 21);
-            this.cboUbicacionStock.TabIndex = 31;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -280,15 +271,6 @@
             this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 30;
             this.label1.Text = "Activa:";
-            // 
-            // dtpFechaAlta
-            // 
-            this.dtpFechaAlta.CustomFormat = " ";
-            this.dtpFechaAlta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaAlta.Location = new System.Drawing.Point(97, 53);
-            this.dtpFechaAlta.Name = "dtpFechaAlta";
-            this.dtpFechaAlta.Size = new System.Drawing.Size(200, 21);
-            this.dtpFechaAlta.TabIndex = 6;
             // 
             // label9
             // 
@@ -301,6 +283,7 @@
             // 
             // txtDescripcion
             // 
+            this.txtDescripcion.CausesValidation = false;
             this.txtDescripcion.Location = new System.Drawing.Point(97, 129);
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
@@ -429,8 +412,6 @@
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            this.btnAgregar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnAgregar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // slideAgregar
             // 
@@ -465,6 +446,7 @@
             // nudSecuencia
             // 
             this.nudSecuencia.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.nudSecuencia.CausesValidation = false;
             this.nudSecuencia.Location = new System.Drawing.Point(165, 78);
             this.nudSecuencia.Maximum = new decimal(new int[] {
             10000,
@@ -513,46 +495,6 @@
             this.label13.Size = new System.Drawing.Size(117, 13);
             this.label13.TabIndex = 19;
             this.label13.Text = "Ubicación stock origen:";
-            // 
-            // cboStockDestino
-            // 
-            this.cboStockDestino.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboStockDestino.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboStockDestino.FormattingEnabled = true;
-            this.cboStockDestino.Location = new System.Drawing.Point(165, 132);
-            this.cboStockDestino.Name = "cboStockDestino";
-            this.cboStockDestino.Size = new System.Drawing.Size(252, 21);
-            this.cboStockDestino.TabIndex = 18;
-            // 
-            // cboStockOrigen
-            // 
-            this.cboStockOrigen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboStockOrigen.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboStockOrigen.FormattingEnabled = true;
-            this.cboStockOrigen.Location = new System.Drawing.Point(165, 105);
-            this.cboStockOrigen.Name = "cboStockOrigen";
-            this.cboStockOrigen.Size = new System.Drawing.Size(252, 21);
-            this.cboStockOrigen.TabIndex = 17;
-            // 
-            // cbCentroTrabajo
-            // 
-            this.cbCentroTrabajo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCentroTrabajo.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbCentroTrabajo.FormattingEnabled = true;
-            this.cbCentroTrabajo.Location = new System.Drawing.Point(165, 51);
-            this.cbCentroTrabajo.Name = "cbCentroTrabajo";
-            this.cbCentroTrabajo.Size = new System.Drawing.Size(252, 21);
-            this.cbCentroTrabajo.TabIndex = 15;
-            // 
-            // cbOperacion
-            // 
-            this.cbOperacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbOperacion.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbOperacion.FormattingEnabled = true;
-            this.cbOperacion.Location = new System.Drawing.Point(165, 24);
-            this.cbOperacion.Name = "cbOperacion";
-            this.cbOperacion.Size = new System.Drawing.Size(252, 21);
-            this.cbOperacion.TabIndex = 14;
             // 
             // label5
             // 
@@ -610,6 +552,7 @@
             this.dgvHojasRuta.AllowUserToAddRows = false;
             this.dgvHojasRuta.AllowUserToDeleteRows = false;
             this.dgvHojasRuta.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvHojasRuta.CausesValidation = false;
             this.dgvHojasRuta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHojasRuta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvHojasRuta.Location = new System.Drawing.Point(9, 23);
@@ -649,16 +592,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
-            // cbActivaBuscar
-            // 
-            this.cbActivaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbActivaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbActivaBuscar.FormattingEnabled = true;
-            this.cbActivaBuscar.Location = new System.Drawing.Point(280, 27);
-            this.cbActivaBuscar.Name = "cbActivaBuscar";
-            this.cbActivaBuscar.Size = new System.Drawing.Size(150, 21);
-            this.cbActivaBuscar.TabIndex = 2;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -692,6 +625,7 @@
             // 
             // txtNombreBuscar
             // 
+            this.txtNombreBuscar.CausesValidation = false;
             this.txtNombreBuscar.Location = new System.Drawing.Point(60, 27);
             this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
@@ -815,6 +749,81 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(586, 570);
             this.tableLayoutPanel1.TabIndex = 11;
+            // 
+            // cbActivaBuscar
+            // 
+            this.cbActivaBuscar.CausesValidation = false;
+            this.cbActivaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbActivaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbActivaBuscar.FormattingEnabled = true;
+            this.cbActivaBuscar.Location = new System.Drawing.Point(280, 27);
+            this.cbActivaBuscar.Name = "cbActivaBuscar";
+            this.cbActivaBuscar.Size = new System.Drawing.Size(150, 21);
+            this.cbActivaBuscar.TabIndex = 2;
+            // 
+            // cboUbicacionStock
+            // 
+            this.cboUbicacionStock.CausesValidation = false;
+            this.cboUbicacionStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboUbicacionStock.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboUbicacionStock.FormattingEnabled = true;
+            this.cboUbicacionStock.Location = new System.Drawing.Point(97, 102);
+            this.cboUbicacionStock.Name = "cboUbicacionStock";
+            this.cboUbicacionStock.Size = new System.Drawing.Size(200, 21);
+            this.cboUbicacionStock.TabIndex = 31;
+            // 
+            // dtpFechaAlta
+            // 
+            this.dtpFechaAlta.CustomFormat = " ";
+            this.dtpFechaAlta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaAlta.Location = new System.Drawing.Point(97, 53);
+            this.dtpFechaAlta.Name = "dtpFechaAlta";
+            this.dtpFechaAlta.Size = new System.Drawing.Size(200, 21);
+            this.dtpFechaAlta.TabIndex = 6;
+            // 
+            // cboStockDestino
+            // 
+            this.cboStockDestino.CausesValidation = false;
+            this.cboStockDestino.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboStockDestino.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboStockDestino.FormattingEnabled = true;
+            this.cboStockDestino.Location = new System.Drawing.Point(165, 132);
+            this.cboStockDestino.Name = "cboStockDestino";
+            this.cboStockDestino.Size = new System.Drawing.Size(252, 21);
+            this.cboStockDestino.TabIndex = 18;
+            // 
+            // cboStockOrigen
+            // 
+            this.cboStockOrigen.CausesValidation = false;
+            this.cboStockOrigen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboStockOrigen.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboStockOrigen.FormattingEnabled = true;
+            this.cboStockOrigen.Location = new System.Drawing.Point(165, 105);
+            this.cboStockOrigen.Name = "cboStockOrigen";
+            this.cboStockOrigen.Size = new System.Drawing.Size(252, 21);
+            this.cboStockOrigen.TabIndex = 17;
+            // 
+            // cbCentroTrabajo
+            // 
+            this.cbCentroTrabajo.CausesValidation = false;
+            this.cbCentroTrabajo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCentroTrabajo.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbCentroTrabajo.FormattingEnabled = true;
+            this.cbCentroTrabajo.Location = new System.Drawing.Point(165, 51);
+            this.cbCentroTrabajo.Name = "cbCentroTrabajo";
+            this.cbCentroTrabajo.Size = new System.Drawing.Size(252, 21);
+            this.cbCentroTrabajo.TabIndex = 15;
+            // 
+            // cbOperacion
+            // 
+            this.cbOperacion.CausesValidation = false;
+            this.cbOperacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbOperacion.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbOperacion.FormattingEnabled = true;
+            this.cbOperacion.Location = new System.Drawing.Point(165, 24);
+            this.cbOperacion.Name = "cbOperacion";
+            this.cbOperacion.Size = new System.Drawing.Size(252, 21);
+            this.cbOperacion.TabIndex = 14;
             // 
             // frmHojaRuta
             // 

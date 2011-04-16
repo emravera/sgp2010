@@ -28,8 +28,7 @@ namespace GyCAP.UI.ProcesoFabricacion
             dgvLista.Columns.Add("OPR_CODIGO", "Código");
             dgvLista.Columns.Add("OPR_NOMBRE", "Nombre");
             dgvLista.Columns.Add("OPR_HORASREQUERIDA", "Tiempo (hs)");
-            dgvLista.Columns.Add("OPR_DESCRIPCION", "Descripción");
-            
+            dgvLista.Columns.Add("OPR_DESCRIPCION", "Descripción");            
 
             //Se setean los valores de las columnas 
             dgvLista.Columns["OPR_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -139,6 +138,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                     btnConsultar.Enabled = hayDatos;
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
                     tcMarca.SelectedTab = tpBuscar;
                     break;                
                 case estadoUI.nuevo:
@@ -255,13 +255,7 @@ namespace GyCAP.UI.ProcesoFabricacion
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {            
-           List<string> validacion = new List<string>();
-           //Controlo los textbox
-           if (txtCodigoOperacion.Text == string.Empty) { validacion.Add("Código"); }
-           if (txtNombre.Text == string.Empty) { validacion.Add("Nombre"); }
-           if (numHoras.Value == 0) { validacion.Add("Horas requeridas"); }
-        
-           if (validacion.Count == 0)
+           if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
            {               
                //Creo el objeto de operaciones
                Entidades.OperacionFabricacion operacion = new GyCAP.Entidades.OperacionFabricacion();
@@ -334,14 +328,9 @@ namespace GyCAP.UI.ProcesoFabricacion
                    {
                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
                    }
-               }                   
-
+               }
                //Vuelvo al estado inicial de la interface
                SetInterface(estadoUI.inicio);
-           }
-           else
-           {
-               MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.CompletarDatos, validacion), this.Text);
            }
         }        
 
@@ -351,7 +340,6 @@ namespace GyCAP.UI.ProcesoFabricacion
 
             if (!string.IsNullOrEmpty(e.Value.ToString()))
             {
-
                 switch (dgvLista.Columns[e.ColumnIndex].Name)
                 {
                    case "OPR_HORASREQUERIDA":
@@ -361,7 +349,6 @@ namespace GyCAP.UI.ProcesoFabricacion
                     default:
                         break;
                 }
-
             }
         }
 
@@ -408,18 +395,9 @@ namespace GyCAP.UI.ProcesoFabricacion
             }
             else
             {
-                MensajesABM.MsjSinSeleccion("Operación de fabriación", MensajesABM.Generos.Femenino, this.Text);
+                MensajesABM.MsjSinSeleccion("Operación de fabricación", MensajesABM.Generos.Femenino, this.Text);
             }
-        }
-
-        private void dgvLista_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            btnConsultar.PerformClick();
-        }
-       
-       
-
-               
+        }   
         
     }
 }
