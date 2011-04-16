@@ -37,24 +37,24 @@
             this.panelUbicacionStock = new System.Windows.Forms.Panel();
             this.btnConsultarUbicacionStock = new System.Windows.Forms.Button();
             this.btnNuevoUbicacionStock = new System.Windows.Forms.Button();
-            this.scUp = new System.Windows.Forms.SplitContainer();
-            this.btnMenu = new System.Windows.Forms.Button();
             this.btnEntregaProducto = new System.Windows.Forms.Button();
             this.panelEntregaProducto = new System.Windows.Forms.Panel();
             this.btnConsultarEntregaProducto = new System.Windows.Forms.Button();
             this.btnNuevoEntregaProducto = new System.Windows.Forms.Button();
             this.panelSalir = new System.Windows.Forms.Panel();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.scUp = new System.Windows.Forms.SplitContainer();
+            this.btnMenu = new System.Windows.Forms.Button();
             this.scDown.Panel1.SuspendLayout();
             this.scDown.Panel2.SuspendLayout();
             this.scDown.SuspendLayout();
             this.flpMenu.SuspendLayout();
             this.panelInventarioABC.SuspendLayout();
             this.panelUbicacionStock.SuspendLayout();
-            this.scUp.Panel1.SuspendLayout();
-            this.scUp.SuspendLayout();
             this.panelEntregaProducto.SuspendLayout();
             this.panelSalir.SuspendLayout();
+            this.scUp.Panel1.SuspendLayout();
+            this.scUp.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnInventarioAbc
@@ -217,44 +217,6 @@
             this.btnNuevoUbicacionStock.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoUbicacionStock.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
-            // scUp
-            // 
-            this.scUp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scUp.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.scUp.IsSplitterFixed = true;
-            this.scUp.Location = new System.Drawing.Point(0, 0);
-            this.scUp.Name = "scUp";
-            // 
-            // scUp.Panel1
-            // 
-            this.scUp.Panel1.AutoScroll = true;
-            this.scUp.Panel1.Controls.Add(this.btnMenu);
-            this.scUp.Panel1MinSize = 20;
-            // 
-            // scUp.Panel2
-            // 
-            this.scUp.Panel2.AutoScroll = true;
-            this.scUp.Panel2.AutoScrollMargin = new System.Drawing.Size(1000, 1000);
-            this.scUp.Panel2.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.scUp_Panel2_ControlRemoved);
-            this.scUp.Size = new System.Drawing.Size(624, 566);
-            this.scUp.SplitterDistance = 20;
-            this.scUp.SplitterWidth = 3;
-            this.scUp.TabIndex = 0;
-            // 
-            // btnMenu
-            // 
-            this.btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
-            this.btnMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMenu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
-            this.btnMenu.Location = new System.Drawing.Point(0, 0);
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(13, 566);
-            this.btnMenu.TabIndex = 0;
-            this.btnMenu.Text = "Menú";
-            this.btnMenu.UseVisualStyleBackColor = true;
-            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
-            // 
             // btnEntregaProducto
             // 
             this.btnEntregaProducto.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -354,6 +316,46 @@
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            this.btnSalir.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnSalir.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // scUp
+            // 
+            this.scUp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scUp.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.scUp.IsSplitterFixed = true;
+            this.scUp.Location = new System.Drawing.Point(0, 0);
+            this.scUp.Name = "scUp";
+            // 
+            // scUp.Panel1
+            // 
+            this.scUp.Panel1.AutoScroll = true;
+            this.scUp.Panel1.Controls.Add(this.btnMenu);
+            this.scUp.Panel1MinSize = 20;
+            // 
+            // scUp.Panel2
+            // 
+            this.scUp.Panel2.AutoScroll = true;
+            this.scUp.Panel2.AutoScrollMargin = new System.Drawing.Size(1000, 1000);
+            this.scUp.Panel2.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.scUp_Panel2_ControlRemoved);
+            this.scUp.Size = new System.Drawing.Size(624, 566);
+            this.scUp.SplitterDistance = 20;
+            this.scUp.SplitterWidth = 3;
+            this.scUp.TabIndex = 0;
+            // 
+            // btnMenu
+            // 
+            this.btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
+            this.btnMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMenu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+            this.btnMenu.Location = new System.Drawing.Point(0, 0);
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(13, 566);
+            this.btnMenu.TabIndex = 0;
+            this.btnMenu.Text = "Menú";
+            this.btnMenu.UseVisualStyleBackColor = true;
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
             // 
             // frmGestionStock
             // 
@@ -375,12 +377,12 @@
             this.panelInventarioABC.PerformLayout();
             this.panelUbicacionStock.ResumeLayout(false);
             this.panelUbicacionStock.PerformLayout();
-            this.scUp.Panel1.ResumeLayout(false);
-            this.scUp.ResumeLayout(false);
             this.panelEntregaProducto.ResumeLayout(false);
             this.panelEntregaProducto.PerformLayout();
             this.panelSalir.ResumeLayout(false);
             this.panelSalir.PerformLayout();
+            this.scUp.Panel1.ResumeLayout(false);
+            this.scUp.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
