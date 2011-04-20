@@ -120,7 +120,7 @@
             this.txtNombre.Location = new System.Drawing.Point(99, 23);
             this.txtNombre.MaxLength = 80;
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(185, 21);
+            this.txtNombre.Size = new System.Drawing.Size(174, 21);
             this.txtNombre.TabIndex = 7;
             this.txtNombre.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -181,6 +181,7 @@
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
             this.dgvLista.AllowUserToResizeRows = false;
+            this.dgvLista.CausesValidation = false;
             this.dgvLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLista.Location = new System.Drawing.Point(3, 17);
@@ -215,6 +216,7 @@
             // 
             // cbActivoBuscar
             // 
+            this.cbActivoBuscar.CausesValidation = false;
             this.cbActivoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbActivoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbActivoBuscar.FormattingEnabled = true;
@@ -225,6 +227,7 @@
             // 
             // cbTipoBuscar
             // 
+            this.cbTipoBuscar.CausesValidation = false;
             this.cbTipoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbTipoBuscar.FormattingEnabled = true;
@@ -235,6 +238,7 @@
             // 
             // cbSectorBuscar
             // 
+            this.cbSectorBuscar.CausesValidation = false;
             this.cbSectorBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSectorBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbSectorBuscar.FormattingEnabled = true;
@@ -285,6 +289,7 @@
             // 
             // txtNombreBuscar
             // 
+            this.txtNombreBuscar.CausesValidation = false;
             this.txtNombreBuscar.Location = new System.Drawing.Point(96, 23);
             this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
@@ -329,6 +334,7 @@
             // 
             // nudCostoCiclo
             // 
+            this.nudCostoCiclo.CausesValidation = false;
             this.nudCostoCiclo.DecimalPlaces = 2;
             this.nudCostoCiclo.Increment = new decimal(new int[] {
             1,
@@ -349,6 +355,7 @@
             // 
             // nudCostoHora
             // 
+            this.nudCostoHora.CausesValidation = false;
             this.nudCostoHora.DecimalPlaces = 2;
             this.nudCostoHora.Increment = new decimal(new int[] {
             1,
@@ -408,6 +415,7 @@
             // 
             // nudCapacidadUnidadHora
             // 
+            this.nudCapacidadUnidadHora.CausesValidation = false;
             this.nudCapacidadUnidadHora.DecimalPlaces = 2;
             this.nudCapacidadUnidadHora.Increment = new decimal(new int[] {
             1,
@@ -421,7 +429,7 @@
             0,
             0});
             this.nudCapacidadUnidadHora.Name = "nudCapacidadUnidadHora";
-            this.nudCapacidadUnidadHora.Size = new System.Drawing.Size(120, 21);
+            this.nudCapacidadUnidadHora.Size = new System.Drawing.Size(107, 21);
             this.nudCapacidadUnidadHora.TabIndex = 16;
             this.nudCapacidadUnidadHora.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -436,6 +444,7 @@
             // 
             // nudTiempoDespues
             // 
+            this.nudTiempoDespues.CausesValidation = false;
             this.nudTiempoDespues.DecimalPlaces = 2;
             this.nudTiempoDespues.Increment = new decimal(new int[] {
             1,
@@ -449,13 +458,14 @@
             0,
             0});
             this.nudTiempoDespues.Name = "nudTiempoDespues";
-            this.nudTiempoDespues.Size = new System.Drawing.Size(120, 21);
+            this.nudTiempoDespues.Size = new System.Drawing.Size(107, 21);
             this.nudTiempoDespues.TabIndex = 20;
             this.nudTiempoDespues.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudTiempoDespues.Enter += new System.EventHandler(this.control_Enter);
             // 
             // nudTiempoAntes
             // 
+            this.nudTiempoAntes.CausesValidation = false;
             this.nudTiempoAntes.DecimalPlaces = 2;
             this.nudTiempoAntes.Increment = new decimal(new int[] {
             1,
@@ -469,13 +479,14 @@
             0,
             0});
             this.nudTiempoAntes.Name = "nudTiempoAntes";
-            this.nudTiempoAntes.Size = new System.Drawing.Size(120, 21);
+            this.nudTiempoAntes.Size = new System.Drawing.Size(107, 21);
             this.nudTiempoAntes.TabIndex = 18;
             this.nudTiempoAntes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudTiempoAntes.Enter += new System.EventHandler(this.control_Enter);
             // 
             // nudCapacidadCiclo
             // 
+            this.nudCapacidadCiclo.CausesValidation = false;
             this.nudCapacidadCiclo.DecimalPlaces = 2;
             this.nudCapacidadCiclo.Increment = new decimal(new int[] {
             1,
@@ -496,6 +507,7 @@
             // 
             // nudEficiencia
             // 
+            this.nudEficiencia.CausesValidation = false;
             this.nudEficiencia.DecimalPlaces = 2;
             this.nudEficiencia.Increment = new decimal(new int[] {
             1,
@@ -516,6 +528,7 @@
             // 
             // nudTiempoCiclo
             // 
+            this.nudTiempoCiclo.CausesValidation = false;
             this.nudTiempoCiclo.DecimalPlaces = 2;
             this.nudTiempoCiclo.Increment = new decimal(new int[] {
             1,
@@ -645,7 +658,7 @@
             this.cbActivo.FormattingEnabled = true;
             this.cbActivo.Location = new System.Drawing.Point(401, 80);
             this.cbActivo.Name = "cbActivo";
-            this.cbActivo.Size = new System.Drawing.Size(151, 21);
+            this.cbActivo.Size = new System.Drawing.Size(140, 21);
             this.cbActivo.TabIndex = 12;
             // 
             // lvTurnos
@@ -656,10 +669,11 @@
             this.lvTurnos.Location = new System.Drawing.Point(299, 126);
             this.lvTurnos.Name = "lvTurnos";
             this.lvTurnos.ShowGroups = false;
-            this.lvTurnos.Size = new System.Drawing.Size(253, 60);
+            this.lvTurnos.Size = new System.Drawing.Size(242, 60);
             this.lvTurnos.TabIndex = 14;
             this.lvTurnos.UseCompatibleStateImageBehavior = false;
             this.lvTurnos.View = System.Windows.Forms.View.Details;
+            this.lvTurnos.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvTurnos_ItemCheck);
             // 
             // label13
             // 
@@ -715,7 +729,7 @@
             this.cbSector.FormattingEnabled = true;
             this.cbSector.Location = new System.Drawing.Point(98, 80);
             this.cbSector.Name = "cbSector";
-            this.cbSector.Size = new System.Drawing.Size(186, 21);
+            this.cbSector.Size = new System.Drawing.Size(175, 21);
             this.cbSector.TabIndex = 11;
             // 
             // cbTipo
@@ -725,7 +739,7 @@
             this.cbTipo.FormattingEnabled = true;
             this.cbTipo.Location = new System.Drawing.Point(98, 52);
             this.cbTipo.Name = "cbTipo";
-            this.cbTipo.Size = new System.Drawing.Size(186, 21);
+            this.cbTipo.Size = new System.Drawing.Size(175, 21);
             this.cbTipo.TabIndex = 9;
             // 
             // label6
@@ -758,10 +772,11 @@
             // txtDescripcion
             // 
             this.txtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDescripcion.CausesValidation = false;
             this.txtDescripcion.Location = new System.Drawing.Point(13, 125);
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(271, 62);
+            this.txtDescripcion.Size = new System.Drawing.Size(260, 62);
             this.txtDescripcion.TabIndex = 13;
             this.txtDescripcion.Text = "";
             this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
@@ -799,7 +814,7 @@
             0,
             0});
             this.nudHorasNormal.Name = "nudHorasNormal";
-            this.nudHorasNormal.Size = new System.Drawing.Size(151, 21);
+            this.nudHorasNormal.Size = new System.Drawing.Size(140, 21);
             this.nudHorasNormal.TabIndex = 8;
             // 
             // nudHorasExtendido
@@ -817,7 +832,7 @@
             0,
             0});
             this.nudHorasExtendido.Name = "nudHorasExtendido";
-            this.nudHorasExtendido.Size = new System.Drawing.Size(151, 21);
+            this.nudHorasExtendido.Size = new System.Drawing.Size(140, 21);
             this.nudHorasExtendido.TabIndex = 10;
             // 
             // tsMenu

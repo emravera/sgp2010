@@ -13,10 +13,10 @@ namespace GyCAP.BLL
         public static readonly int CentroInactivo = 0;
         public static readonly int CentroActivo = 1;
         
-        public static void Insertar(Data.dsCentroTrabajo ds)
+        public static void Insertar(Data.dsHojaRuta ds)
         {
             Entidades.CentroTrabajo centro = new GyCAP.Entidades.CentroTrabajo();
-            Data.dsCentroTrabajo.CENTROS_TRABAJOSRow row = ds.CENTROS_TRABAJOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsCentroTrabajo.CENTROS_TRABAJOSRow;
+            Data.dsHojaRuta.CENTROS_TRABAJOSRow row = ds.CENTROS_TRABAJOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsHojaRuta.CENTROS_TRABAJOSRow;
             centro.Nombre = row.CTO_NOMBRE;
             centro.Sector = new GyCAP.Entidades.SectorTrabajo();
             centro.Sector.Codigo = Convert.ToInt32(row.SEC_CODIGO);
@@ -24,8 +24,14 @@ namespace GyCAP.BLL
             DAL.CentroTrabajoDAL.Insertar(ds);
         }
 
-        public static void Actualizar(Data.dsCentroTrabajo ds)
+        public static void Actualizar(Data.dsHojaRuta ds)
         {
+            Entidades.CentroTrabajo centro = new GyCAP.Entidades.CentroTrabajo();
+            Data.dsHojaRuta.CENTROS_TRABAJOSRow row = ds.CENTROS_TRABAJOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsHojaRuta.CENTROS_TRABAJOSRow;
+            centro.Nombre = row.CTO_NOMBRE;
+            centro.Sector = new GyCAP.Entidades.SectorTrabajo();
+            centro.Sector.Codigo = Convert.ToInt32(row.SEC_CODIGO);
+            if (DAL.CentroTrabajoDAL.EsCentroTrabajo(centro)) { throw new Entidades.Excepciones.ElementoExistenteException(); }
             DAL.CentroTrabajoDAL.Actualizar(ds);
         }
 
@@ -43,7 +49,7 @@ namespace GyCAP.BLL
             DAL.CentroTrabajoDAL.ObetenerCentrosTrabajo(nombre, tipo, sector, estado, dtCentrosTrabajo);
         }
 
-        public static void ObetenerCentrosTrabajo(object nombre, object tipo, object sector, object estado, Data.dsCentroTrabajo ds)
+        public static void ObetenerCentrosTrabajo(object nombre, object tipo, object sector, object estado, Data.dsHojaRuta ds)
         {
             if (tipo != null && Convert.ToInt32(tipo.ToString()) <= 0) { tipo = null; }
             if (sector != null && Convert.ToInt32(sector.ToString()) <= 0) { sector = null; }

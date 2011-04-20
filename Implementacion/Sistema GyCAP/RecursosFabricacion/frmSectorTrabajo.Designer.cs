@@ -71,12 +71,13 @@
             // 
             // txtDescripcion
             // 
+            this.txtDescripcion.CausesValidation = false;
             this.txtDescripcion.Location = new System.Drawing.Point(85, 98);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(305, 63);
             this.txtDescripcion.TabIndex = 3;
-            this.txtDescripcion.Enter += new System.EventHandler(this.txtDescripcion_Enter);
+            this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label5
             // 
@@ -93,7 +94,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(190, 21);
             this.txtNombre.TabIndex = 1;
-            this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
+            this.txtNombre.Enter += new System.EventHandler(this.control_Enter);
             // 
             // gbGuardarCancelar
             // 
@@ -111,9 +112,9 @@
             // 
             this.btnVolver.Location = new System.Drawing.Point(418, 20);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(64, 25);
+            this.btnVolver.Size = new System.Drawing.Size(64, 26);
             this.btnVolver.TabIndex = 5;
-            this.btnVolver.Text = "Volver";
+            this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
@@ -121,9 +122,9 @@
             // 
             this.btnGuardar.Location = new System.Drawing.Point(349, 20);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(64, 25);
+            this.btnGuardar.Size = new System.Drawing.Size(64, 26);
             this.btnGuardar.TabIndex = 4;
-            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
@@ -171,6 +172,7 @@
             // 
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
+            this.dgvLista.CausesValidation = false;
             this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLista.Location = new System.Drawing.Point(9, 23);
             this.dgvLista.MultiSelect = false;
@@ -181,7 +183,6 @@
             this.dgvLista.Size = new System.Drawing.Size(471, 153);
             this.dgvLista.TabIndex = 0;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
-            this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
             // 
             // groupBox1
             // 
@@ -200,11 +201,12 @@
             // 
             // txtAbreviaturaBuscar
             // 
+            this.txtAbreviaturaBuscar.CausesValidation = false;
             this.txtAbreviaturaBuscar.Location = new System.Drawing.Point(255, 23);
             this.txtAbreviaturaBuscar.Name = "txtAbreviaturaBuscar";
             this.txtAbreviaturaBuscar.Size = new System.Drawing.Size(97, 21);
             this.txtAbreviaturaBuscar.TabIndex = 2;
-            this.txtAbreviaturaBuscar.Enter += new System.EventHandler(this.txtAbreviaturaBuscar_Enter);
+            this.txtAbreviaturaBuscar.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label4
             // 
@@ -230,11 +232,12 @@
             // 
             // txtNombreBuscar
             // 
+            this.txtNombreBuscar.CausesValidation = false;
             this.txtNombreBuscar.Location = new System.Drawing.Point(60, 22);
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(97, 21);
             this.txtNombreBuscar.TabIndex = 1;
-            this.txtNombreBuscar.Enter += new System.EventHandler(this.txtNombreBuscar_Enter);
+            this.txtNombreBuscar.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label1
             // 
@@ -280,7 +283,7 @@
             this.txtAbreviatura.Name = "txtAbreviatura";
             this.txtAbreviatura.Size = new System.Drawing.Size(190, 21);
             this.txtAbreviatura.TabIndex = 2;
-            this.txtAbreviatura.Enter += new System.EventHandler(this.txtAbreviatura_Enter);
+            this.txtAbreviatura.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label6
             // 
@@ -412,7 +415,6 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Sectores de Trabajo";
-            this.Activated += new System.EventHandler(this.frmSectorTrabajo_Activated);
             this.gbGuardarCancelar.ResumeLayout(false);
             this.tcSectorTrabajo.ResumeLayout(false);
             this.tpBuscar.ResumeLayout(false);

@@ -10,7 +10,7 @@ namespace GyCAP.BLL
     {
         //Busqueda
         //Obtiene los datos de acuerdo a los criterios de busqueda
-        public static void ObtenerTodos(string nombre, string abrev, Data.dsSectorTrabajo ds)
+        public static void ObtenerTodos(string nombre, string abrev, Data.dsHojaRuta ds)
         {
             DAL.SectorDAL.ObtenerSector(nombre, abrev,ds);
         }
