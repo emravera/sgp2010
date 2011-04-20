@@ -12,7 +12,7 @@ namespace GyCAP.DAL
         //BUSQUEDA
         //Metodo sobrecargado (3 Sobrecargas)
         //Busqueda por nombre o por abreviatura
-        public static void ObtenerSector(string nombre, string abrev, Data.dsSectorTrabajo ds)
+        public static void ObtenerSector(string nombre, string abrev, Data.dsHojaRuta ds)
         {
            string sql, dato;
 
@@ -29,7 +29,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "SECTORES", sql, valorParametros);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
            
             if (abrev != string.Empty && nombre == string.Empty)
@@ -45,7 +45,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "SECTORES", sql, valorParametros);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
             if (abrev != string.Empty && nombre != string.Empty)
             {
@@ -61,7 +61,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "SECTORES", sql, valorParametros);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
             else
             {
@@ -71,7 +71,7 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataSet(ds, "SECTORES", sql, null);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
          
         }
@@ -83,7 +83,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataTable(dtSectores, sql, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
 
         }
                 
@@ -105,7 +105,7 @@ namespace GyCAP.DAL
                 if (resultadoSql1 + resultadoSql2 + resultadoSql3 + resultadoSql4 == 0) { return true; }
                 else { return false; }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }        
 
         //Metodo que elimina de la base de datos
@@ -117,27 +117,21 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         //INSERTAR
         //Metodo que valida que no se intente guardar algo que ya esta en la BD
         public static bool esSector(Entidades.SectorTrabajo sector)
         {
-            string sql = "SELECT count(sec_codigo) FROM SECTORES WHERE sec_nombre = @p0";
-            object[] valorParametros = { sector.Nombre };
+            string sql = "SELECT count(sec_codigo) FROM SECTORES WHERE sec_nombre = @p0 AND sec_codigo <> @p1";
+            object[] valorParametros = { sector.Nombre, sector.Codigo };
             try
             {
-                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return false; }
+                else { return true; }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         //Metodo que inserta en la base de datos
@@ -150,7 +144,7 @@ namespace GyCAP.DAL
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         //MODIFICAR 
@@ -164,7 +158,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
     }
 }

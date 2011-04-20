@@ -6,13 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades.Mensajes;
 
 namespace GyCAP.UI.RecursosFabricacion
 {
     public partial class frmTurnoTrabajo : Form
     {
         private static frmTurnoTrabajo _frmTurnoTrabajo = null;
-        private Data.dsCentroTrabajo dsTurnos = new GyCAP.Data.dsCentroTrabajo();
+        private Data.dsHojaRuta dsTurnos = new GyCAP.Data.dsHojaRuta();
         DataView dvTurnos;
         private enum estadoUI { inicio, modificar };
         private estadoUI estadoInterface;
@@ -64,7 +65,7 @@ namespace GyCAP.UI.RecursosFabricacion
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Turno de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Turno de trabajo", MensajesABM.Generos.Masculino, this.Text);
             }
         }
 
@@ -74,8 +75,7 @@ namespace GyCAP.UI.RecursosFabricacion
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Turno de Trabajo seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (respuesta == DialogResult.Yes)
+                if (MensajesABM.MsjConfirmaEliminarDatos("Turno de trabajo", MensajesABM.Generos.Masculino, this.Text) == DialogResult.Yes)
                 {
                     try
                     {
@@ -90,29 +90,25 @@ namespace GyCAP.UI.RecursosFabricacion
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
                         dsTurnos.TURNOS_TRABAJO.RejectChanges();
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         dsTurnos.TURNOS_TRABAJO.RejectChanges();
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Turno de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Turno de trabajo", MensajesABM.Generos.Masculino, this.Text);
             }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisamos que escribió algo
-            string datosFaltantes = string.Empty;
-            if (txtNombre.Text == string.Empty) { datosFaltantes += "\n* Nombre"; }
-            if (dtpHoraInicio.Value.ToShortTimeString() == "00:00") { datosFaltantes += "\n* Hora inicio"; }
-            if (dtpHoraFin.Value.ToShortTimeString() == "00:00") { datosFaltantes += "\n* hora fin"; }
-            if (datosFaltantes == String.Empty)
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
                 Entidades.TurnoTrabajo turno = new GyCAP.Entidades.TurnoTrabajo();
 
@@ -128,7 +124,7 @@ namespace GyCAP.UI.RecursosFabricacion
                         //Primero lo creamos en la db
                         BLL.TurnoTrabajoBLL.Insertar(turno);
                         //Ahora lo agregamos al dataset
-                        Data.dsCentroTrabajo.TURNOS_TRABAJORow row = dsTurnos.TURNOS_TRABAJO.NewTURNOS_TRABAJORow();
+                        Data.dsHojaRuta.TURNOS_TRABAJORow row = dsTurnos.TURNOS_TRABAJO.NewTURNOS_TRABAJORow();
                         row.BeginEdit();
                         row.TUR_CODIGO = turno.Codigo;
                         row.TUR_NOMBRE = turno.Nombre;
@@ -143,12 +139,12 @@ namespace GyCAP.UI.RecursosFabricacion
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
                         dsTurnos.TURNOS_TRABAJO.RejectChanges();
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         dsTurnos.TURNOS_TRABAJO.RejectChanges();
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
@@ -163,7 +159,7 @@ namespace GyCAP.UI.RecursosFabricacion
                         //Lo actualizamos en la DB
                         BLL.TurnoTrabajoBLL.Actualizar(turno);
                         //Lo actualizamos en el dataset y aceptamos los cambios
-                        Data.dsCentroTrabajo.TURNOS_TRABAJORow row = dsTurnos.TURNOS_TRABAJO.FindByTUR_CODIGO(turno.Codigo);
+                        Data.dsHojaRuta.TURNOS_TRABAJORow row = dsTurnos.TURNOS_TRABAJO.FindByTUR_CODIGO(turno.Codigo);
                         row.BeginEdit();
                         row.TUR_NOMBRE = turno.Nombre;
                         row.TUR_HORAINICIO = turno.HoraInicio;
@@ -175,16 +171,17 @@ namespace GyCAP.UI.RecursosFabricacion
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        dsTurnos.TURNOS_TRABAJO.RejectChanges();
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
+                    }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         dsTurnos.TURNOS_TRABAJO.RejectChanges();
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
                     }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Debe completar los datos:\n" + datosFaltantes, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -220,6 +217,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     dtpHoraInicio.Value = new DateTime(2000, 1, 1, 0, 0, 0);
                     btnCancelar.Enabled = false;
                     dgvLista.Enabled = true;
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
                     estadoInterface = estadoUI.inicio;
                     break;
                 case estadoUI.modificar:
@@ -271,7 +269,7 @@ namespace GyCAP.UI.RecursosFabricacion
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
             }
 
             //Dataview

@@ -14,7 +14,7 @@ namespace GyCAP.DAL
         public static readonly int CentroInactivo = 0;
         public static readonly int CentroActivo = 1;
         
-        public static void Insertar(Data.dsCentroTrabajo ds)
+        public static void Insertar(Data.dsHojaRuta ds)
         {
             string sql = @"INSERT INTO [CENTROS_TRABAJOS] 
                            ([cto_nombre], 
@@ -34,7 +34,7 @@ namespace GyCAP.DAL
                             [cto_capacidadunidadhora])
                             VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14) SELECT @@Identity";
 
-            Data.dsCentroTrabajo.CENTROS_TRABAJOSRow row = ds.CENTROS_TRABAJOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsCentroTrabajo.CENTROS_TRABAJOSRow;
+            Data.dsHojaRuta.CENTROS_TRABAJOSRow row = ds.CENTROS_TRABAJOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsHojaRuta.CENTROS_TRABAJOSRow;
             object[] valoresParametros = { row.CTO_NOMBRE,
                                            row.SEC_CODIGO,
                                            row.CTO_TIPO,
@@ -60,7 +60,7 @@ namespace GyCAP.DAL
                 row.BeginEdit();
                 row.CTO_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
                 row.EndEdit();
-                foreach (Data.dsCentroTrabajo.TURNOSXCENTROTRABAJORow rows in (Data.dsCentroTrabajo.TURNOSXCENTROTRABAJORow[])ds.TURNOSXCENTROTRABAJO.Select(null, null, DataViewRowState.Added))
+                foreach (Data.dsHojaRuta.TURNOSXCENTROTRABAJORow rows in (Data.dsHojaRuta.TURNOSXCENTROTRABAJORow[])ds.TURNOSXCENTROTRABAJO.Select(null, null, DataViewRowState.Added))
                 {
                     valoresParametros = new object[] { rows.TUR_CODIGO, row.CTO_CODIGO };
                     rows.BeginEdit();
@@ -82,7 +82,7 @@ namespace GyCAP.DAL
             }
         }
 
-        public static void Actualizar(Data.dsCentroTrabajo ds)
+        public static void Actualizar(Data.dsHojaRuta ds)
         {
             string sqlCentro = @"UPDATE CENTROS_TRABAJOS SET 
                                 cto_nombre = @p0, 
@@ -102,7 +102,7 @@ namespace GyCAP.DAL
                                 cto_capacidadunidadhora = @p14  
                                 WHERE cto_codigo = @p15";
 
-            Data.dsCentroTrabajo.CENTROS_TRABAJOSRow row = ds.CENTROS_TRABAJOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsCentroTrabajo.CENTROS_TRABAJOSRow;
+            Data.dsHojaRuta.CENTROS_TRABAJOSRow row = ds.CENTROS_TRABAJOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsHojaRuta.CENTROS_TRABAJOSRow;
             object[] valorParametros = { row.CTO_NOMBRE, 
                                            row.SEC_CODIGO,
                                            row.CTO_TIPO,
@@ -130,13 +130,13 @@ namespace GyCAP.DAL
                 transaccion = DB.IniciarTransaccion();
                 DB.executeNonQuery(sqlCentro, valorParametros, transaccion);                
 
-                foreach (Data.dsCentroTrabajo.TURNOSXCENTROTRABAJORow rows in (Data.dsCentroTrabajo.TURNOSXCENTROTRABAJORow[])ds.TURNOSXCENTROTRABAJO.Select(null, null, DataViewRowState.Deleted))
+                foreach (Data.dsHojaRuta.TURNOSXCENTROTRABAJORow rows in (Data.dsHojaRuta.TURNOSXCENTROTRABAJORow[])ds.TURNOSXCENTROTRABAJO.Select(null, null, DataViewRowState.Deleted))
                 {
                     valorParametros = new object[] { Convert.ToInt32(rows["txct_codigo", System.Data.DataRowVersion.Original]) };
                     DB.executeNonQuery(sqlDTurnos, valorParametros, transaccion);
                 }
 
-                foreach (Data.dsCentroTrabajo.TURNOSXCENTROTRABAJORow rows in (Data.dsCentroTrabajo.TURNOSXCENTROTRABAJORow[])ds.TURNOSXCENTROTRABAJO.Select(null, null, DataViewRowState.Added))
+                foreach (Data.dsHojaRuta.TURNOSXCENTROTRABAJORow rows in (Data.dsHojaRuta.TURNOSXCENTROTRABAJORow[])ds.TURNOSXCENTROTRABAJO.Select(null, null, DataViewRowState.Added))
                 {
                     valorParametros = new object[] { rows.TUR_CODIGO, rows.CTO_CODIGO };
                     rows.BeginEdit();
@@ -193,18 +193,12 @@ namespace GyCAP.DAL
         //Determikna si existe un centro de trabajo dado su nombre y sector
         public static bool EsCentroTrabajo(Entidades.CentroTrabajo centro)
         {
-            string sql = "SELECT count(cto_codigo) FROM CENTROS_TRABAJOS WHERE cto_nombre = @p0 AND sec_codigo = @p1";
-            object[] valoresParametros = { centro.Nombre, centro.Sector.Codigo };
+            string sql = "SELECT count(cto_codigo) FROM CENTROS_TRABAJOS WHERE cto_nombre = @p0 AND sec_codigo = @p1 AND cto_codigo <> @p2";
+            object[] valoresParametros = { centro.Nombre, centro.Sector.Codigo, centro.Codigo };
             try
             {
-                if (Convert.ToInt32(DB.executeScalar(sql, valoresParametros, null)) == 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                if (Convert.ToInt32(DB.executeScalar(sql, valoresParametros, null)) == 0) { return false; }
+                else { return true; }
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
@@ -276,11 +270,11 @@ namespace GyCAP.DAL
                 {
                     DB.FillDataTable(dtCentrosTrabajo, sql, null);                    
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
         }
 
-        public static void ObetenerCentrosTrabajo(object nombre, object tipo, object sector, object estado, Data.dsCentroTrabajo ds)
+        public static void ObetenerCentrosTrabajo(object nombre, object tipo, object sector, object estado, Data.dsHojaRuta ds)
         {
             string sql = @"SELECT cto_codigo, cto_nombre, sec_codigo, cto_tipo, cto_horastrabajonormal, cto_horastrabajoextendido,
                                   cto_activo, cto_descripcion, cto_capacidadciclo, cto_horasciclo, cto_tiempoantes, cto_tiempodespues, 
@@ -348,7 +342,7 @@ namespace GyCAP.DAL
                     DB.FillDataSet(ds, "CENTROS_TRABAJOS", sql, null);
                     ObtenerTurnosCentro(ds);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
         }
 
@@ -371,11 +365,11 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
         
-        private static void ObtenerTurnosCentro(Data.dsCentroTrabajo ds)
+        private static void ObtenerTurnosCentro(Data.dsHojaRuta ds)
         {
             string sql = "SELECT txct_codigo, tur_codigo, cto_codigo FROM TURNOSXCENTROTRABAJO WHERE cto_codigo = @p0";
             object[] valorParametros;
-            foreach (Data.dsCentroTrabajo.CENTROS_TRABAJOSRow row in ds.CENTROS_TRABAJOS)
+            foreach (Data.dsHojaRuta.CENTROS_TRABAJOSRow row in ds.CENTROS_TRABAJOS)
             {
                 valorParametros = new object[] { row.CTO_CODIGO };
                 DB.FillDataTable(ds.TURNOSXCENTROTRABAJO, sql, valorParametros);

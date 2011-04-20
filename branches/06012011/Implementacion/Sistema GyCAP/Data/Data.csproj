@@ -51,11 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dsCentroTrabajo.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsCentroTrabajo.xsd</DependentUpon>
-    </Compile>
     <Compile Include="dsCliente.cs">
       <DependentUpon>dsCliente.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -224,20 +219,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsRegistrarMantenimiento.xsd</DependentUpon>
     </Compile>
-    <Compile Include="dsSectorTrabajo.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsSectorTrabajo.xsd</DependentUpon>
-    </Compile>
     <Compile Include="dsStock.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsStock.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="dsTurnosTrabajo.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsTurnosTrabajo.xsd</DependentUpon>
     </Compile>
     <Compile Include="dsUnidadMedida.cs">
       <DependentUpon>dsUnidadMedida.xsd</DependentUpon>
@@ -275,17 +260,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="dsCentroTrabajo.xsc">
-      <DependentUpon>dsCentroTrabajo.xsd</DependentUpon>
-    </None>
-    <None Include="dsCentroTrabajo.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsCentroTrabajo.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="dsCentroTrabajo.xss">
-      <DependentUpon>dsCentroTrabajo.xsd</DependentUpon>
-    </None>
     <None Include="dsCliente.xsc">
       <DependentUpon>dsCliente.xsd</DependentUpon>
     </None>
@@ -572,17 +546,6 @@
     <None Include="dsRegistrarMantenimiento.xss">
       <DependentUpon>dsRegistrarMantenimiento.xsd</DependentUpon>
     </None>
-    <None Include="dsSectorTrabajo.xsc">
-      <DependentUpon>dsSectorTrabajo.xsd</DependentUpon>
-    </None>
-    <None Include="dsSectorTrabajo.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsSectorTrabajo.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="dsSectorTrabajo.xss">
-      <DependentUpon>dsSectorTrabajo.xsd</DependentUpon>
-    </None>
     <None Include="dsStock.xsc">
       <DependentUpon>dsStock.xsd</DependentUpon>
     </None>
@@ -593,17 +556,6 @@
     </None>
     <None Include="dsStock.xss">
       <DependentUpon>dsStock.xsd</DependentUpon>
-    </None>
-    <None Include="dsTurnosTrabajo.xsc">
-      <DependentUpon>dsTurnosTrabajo.xsd</DependentUpon>
-    </None>
-    <None Include="dsTurnosTrabajo.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsTurnosTrabajo.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="dsTurnosTrabajo.xss">
-      <DependentUpon>dsTurnosTrabajo.xsd</DependentUpon>
     </None>
     <None Include="dsUnidadMedida.xsc">
       <DependentUpon>dsUnidadMedida.xsd</DependentUpon>

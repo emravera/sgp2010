@@ -6,19 +6,22 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades.Mensajes;
 
 namespace GyCAP.UI.RecursosFabricacion
 {
     public partial class frmCentroTrabajo : Form
     {
+        //resolver que no se puede scrollear cuando el listview esta disabled en consultar - gonzalo
         private static frmCentroTrabajo _frmCentroTrabajo = null;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
-        Data.dsCentroTrabajo dsCentroTrabajo = new GyCAP.Data.dsCentroTrabajo();
+        Data.dsHojaRuta dsCentroTrabajo = new GyCAP.Data.dsHojaRuta();
         DataView dvCentrosTrabajo, dvSectorBuscar, dvSector, dvTurnoTrabajo;
         int txct = -1;
+        bool autoChecking = false;
 
         #region Inicio
 
@@ -78,8 +81,7 @@ namespace GyCAP.UI.RecursosFabricacion
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Centro de Trabajo seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (respuesta == DialogResult.Yes)
+                if (MensajesABM.MsjConfirmaEliminarDatos("Centro de trabajo", MensajesABM.Generos.Masculino, this.Text) == DialogResult.Yes)
                 {
                     try
                     {
@@ -89,7 +91,7 @@ namespace GyCAP.UI.RecursosFabricacion
                         BLL.CentroTrabajoBLL.Eliminar(codigo);
                         //Lo eliminamos del dataset
                         dsCentroTrabajo.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigo).Delete();
-                        foreach (Data.dsCentroTrabajo.TURNOSXCENTROTRABAJORow row in (Data.dsCentroTrabajo.TURNOSXCENTROTRABAJORow[])dsCentroTrabajo.TURNOSXCENTROTRABAJO.Select("cto_codigo = " + codigo))
+                        foreach (Data.dsHojaRuta.TURNOSXCENTROTRABAJORow row in (Data.dsHojaRuta.TURNOSXCENTROTRABAJORow[])dsCentroTrabajo.TURNOSXCENTROTRABAJO.Select("cto_codigo = " + codigo))
                         {
                             row.Delete();
                         }
@@ -98,17 +100,17 @@ namespace GyCAP.UI.RecursosFabricacion
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Centro de Trabajo de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Centro de trabajo", MensajesABM.Generos.Masculino, this.Text);
             }
         }
         
@@ -134,13 +136,13 @@ namespace GyCAP.UI.RecursosFabricacion
                 dvCentrosTrabajo.Table = dsCentroTrabajo.CENTROS_TRABAJOS;
                 if (dsCentroTrabajo.CENTROS_TRABAJOS.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Centros de Trabajo con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MensajesABM.MsjBuscarNoEncontrado("Centros de trabajo", this.Text);
                 }
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Centros de Trabajo - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }
         }
@@ -197,14 +199,16 @@ namespace GyCAP.UI.RecursosFabricacion
             nudCapacidadUnidadHora.Value = dsCentroTrabajo.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigoCentro).CTO_CAPACIDADUNIDADHORA;
 
             //Turnos
+            autoChecking = true;
             foreach (ListViewItem item in lvTurnos.Items)
-            {
-                item.Checked = false;
+            {                
+                item.Checked = false;                
             }
-            foreach (Data.dsCentroTrabajo.TURNOSXCENTROTRABAJORow row in (Data.dsCentroTrabajo.TURNOSXCENTROTRABAJORow[])dsCentroTrabajo.TURNOSXCENTROTRABAJO.Select("CTO_CODIGO = " + codigoCentro))
+            foreach (Data.dsHojaRuta.TURNOSXCENTROTRABAJORow row in (Data.dsHojaRuta.TURNOSXCENTROTRABAJORow[])dsCentroTrabajo.TURNOSXCENTROTRABAJO.Select("CTO_CODIGO = " + codigoCentro))
             {
                 lvTurnos.Items.Find(row.TUR_CODIGO.ToString(), false)[0].Checked = true;
             }
+            autoChecking = false;
         }
 
         #endregion
@@ -213,16 +217,7 @@ namespace GyCAP.UI.RecursosFabricacion
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            string datosFaltantes = string.Empty;
-            //Revisamos que completó los datos
-            if (txtNombre.Text == string.Empty) { datosFaltantes += "* Nombre\n"; }
-            if (cbTipo.GetSelectedIndex() == -1) { datosFaltantes += "* Tipo\n"; }
-            if (nudHorasNormal.Value == 0) { datosFaltantes += "* Horas de trabajo normal\n"; }
-            if (nudHorasExtendido.Value == 0) { datosFaltantes += "* Horas de trabajo extendido\n"; }
-            if (cbActivo.GetSelectedIndex() == -1) { datosFaltantes += "* Estado\n"; }
-            if (cbSector.GetSelectedIndex() == -1) { datosFaltantes += "* Sector de trabajo\n"; }
-            //revisar demas datos obligatorios - gonzalo
-            if (datosFaltantes == string.Empty)
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
@@ -231,7 +226,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     try
                     {
                         //Creamos el centro de trabajo
-                        Data.dsCentroTrabajo.CENTROS_TRABAJOSRow rowCentro = dsCentroTrabajo.CENTROS_TRABAJOS.NewCENTROS_TRABAJOSRow();
+                        Data.dsHojaRuta.CENTROS_TRABAJOSRow rowCentro = dsCentroTrabajo.CENTROS_TRABAJOS.NewCENTROS_TRABAJOSRow();
                         rowCentro.BeginEdit();
                         rowCentro.CTO_CODIGO = -1;
                         rowCentro.SEC_CODIGO = cbSector.GetSelectedValueInt();
@@ -255,7 +250,7 @@ namespace GyCAP.UI.RecursosFabricacion
                         //Creamos los turnosxcentro
                         foreach (ListViewItem item in lvTurnos.CheckedItems)
                         {
-                            Data.dsCentroTrabajo.TURNOSXCENTROTRABAJORow row = dsCentroTrabajo.TURNOSXCENTROTRABAJO.NewTURNOSXCENTROTRABAJORow();
+                            Data.dsHojaRuta.TURNOSXCENTROTRABAJORow row = dsCentroTrabajo.TURNOSXCENTROTRABAJO.NewTURNOSXCENTROTRABAJORow();
                             row.BeginEdit();
                             row.TXCT_CODIGO = txct--;
                             row.TUR_CODIGO = Convert.ToDecimal(item.Name);
@@ -289,14 +284,14 @@ namespace GyCAP.UI.RecursosFabricacion
                         //Ya existe descartamos los cambios
                         dsCentroTrabajo.CENTROS_TRABAJOS.RejectChanges();
                         dsCentroTrabajo.TURNOSXCENTROTRABAJO.RejectChanges();
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         //Hubo problemas con la BD, descartamos los cambios
                         dsCentroTrabajo.CENTROS_TRABAJOS.RejectChanges();
                         dsCentroTrabajo.TURNOSXCENTROTRABAJO.RejectChanges();
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
@@ -321,13 +316,13 @@ namespace GyCAP.UI.RecursosFabricacion
                     dsCentroTrabajo.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigoCentro).CTO_TIPO = cbTipo.GetSelectedValueInt();
                     dsCentroTrabajo.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigoCentro).CTO_CAPACIDADUNIDADHORA = nudCapacidadUnidadHora.Value;
                     //los turnos
-                    foreach (Data.dsCentroTrabajo.TURNOSXCENTROTRABAJORow row in dsCentroTrabajo.TURNOSXCENTROTRABAJO)
+                    foreach (Data.dsHojaRuta.TURNOSXCENTROTRABAJORow row in dsCentroTrabajo.TURNOSXCENTROTRABAJO)
                     {
                         row.Delete();
                     }
                     foreach (ListViewItem item in lvTurnos.CheckedItems)
                     {
-                        Data.dsCentroTrabajo.TURNOSXCENTROTRABAJORow row = dsCentroTrabajo.TURNOSXCENTROTRABAJO.NewTURNOSXCENTROTRABAJORow();
+                        Data.dsHojaRuta.TURNOSXCENTROTRABAJORow row = dsCentroTrabajo.TURNOSXCENTROTRABAJO.NewTURNOSXCENTROTRABAJORow();
                         row.BeginEdit();
                         row.TXCT_CODIGO = txct--;
                         row.TUR_CODIGO = Convert.ToDecimal(item.Name);
@@ -347,20 +342,23 @@ namespace GyCAP.UI.RecursosFabricacion
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        //Ya existe descartamos los cambios
+                        dsCentroTrabajo.CENTROS_TRABAJOS.RejectChanges();
+                        dsCentroTrabajo.TURNOSXCENTROTRABAJO.RejectChanges();
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
+                    }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         //Hubo problemas con la BD, descartamos los cambios de conjuntos ya que puede intentar
                         //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
                         dsCentroTrabajo.CENTROS_TRABAJOS.RejectChanges();
                         dsCentroTrabajo.TURNOSXCENTROTRABAJO.RejectChanges();
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
                 dgvLista.Refresh();
-            }
-            else
-            {
-                MessageBox.Show("Debe completar los datos:\n\n" + datosFaltantes, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -397,7 +395,9 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnConsultar.Enabled = hayDatos;
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
                     tcCentroTrabajo.SelectedTab = tpBuscar;
+                    txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
                     txtNombre.ReadOnly = false;
@@ -410,10 +410,10 @@ namespace GyCAP.UI.RecursosFabricacion
                                                  nudTiempoDespues, nudEficiencia, nudCostoHora, nudCostoCiclo, nudCapacidadUnidadHora };
                     SetearNuds(nuds, true, true);
                     txtNombre.Text = String.Empty;
-                    cbTipo.SetTexto("Seleccione");
-                    cbSector.SetTexto("Seleccione");
+                    cbTipo.SetTexto("Seleccione...");
+                    cbSector.SetTexto("Seleccione...");
                     txtDescripcion.Text = String.Empty;
-                    cbActivo.SetTexto("Seleccione");
+                    cbActivo.SetTexto("Seleccione...");
                     DeseleccionarTurnos();
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -423,6 +423,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
                     tcCentroTrabajo.SelectedTab = tpDatos;
+                    txtNombre.Focus();
                     break;
                 case estadoUI.nuevoExterno:
                     txtNombre.ReadOnly = false;
@@ -435,10 +436,10 @@ namespace GyCAP.UI.RecursosFabricacion
                                                 nudCapacidadUnidadHora, nudTiempoDespues, nudEficiencia, nudCostoHora, nudCostoCiclo };
                     SetearNuds(nuds, true, true);
                     txtNombre.Text = String.Empty;
-                    cbTipo.SetTexto("Seleccione");
-                    cbSector.SetTexto("Seleccione");
+                    cbTipo.SetTexto("Seleccione...");
+                    cbSector.SetTexto("Seleccione...");
                     txtDescripcion.Text = String.Empty;
-                    cbActivo.SetTexto("Seleccione");
+                    cbActivo.SetTexto("Seleccione...");
                     DeseleccionarTurnos();
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -448,6 +449,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.nuevoExterno;
                     tcCentroTrabajo.SelectedTab = tpDatos;
+                    txtNombre.Focus();
                     break;
                 case estadoUI.consultar:
                     txtNombre.ReadOnly = true;
@@ -455,7 +457,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     cbSector.Enabled = false;
                     txtDescripcion.ReadOnly = true;
                     cbActivo.Enabled = false;
-                    lvTurnos.Enabled = false;
+                    //lvTurnos.Enabled = false;
                     nuds = new NumericUpDown[] { nudHorasNormal, nudHorasExtendido, nudCapacidadCiclo, nudTiempoCiclo, nudTiempoAntes,
                                                 nudCapacidadUnidadHora, nudTiempoDespues, nudEficiencia, nudCostoHora, nudCostoCiclo };
                     SetearNuds(nuds, false, false);
@@ -482,6 +484,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.modificar;
                     tcCentroTrabajo.SelectedTab = tpDatos;
+                    txtNombre.Focus();
                     break;
                 default:
                     break;
@@ -509,9 +512,9 @@ namespace GyCAP.UI.RecursosFabricacion
 
         private void control_Enter(object sender, EventArgs e)
         {
-            if (sender.GetType().Equals(txtNombre.GetType())) { (sender as TextBox).SelectAll(); }
-            if (sender.GetType().Equals(txtDescripcion.GetType())) { (sender as RichTextBox).SelectAll(); }
-            if (sender.GetType().Equals(nudCostoHora.GetType())) { (sender as NumericUpDown).Select(0, 20); }
+            if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
+            if (sender.GetType().Equals(typeof(RichTextBox))) { (sender as RichTextBox).SelectAll(); }
+            if (sender.GetType().Equals(typeof(NumericUpDown))) { (sender as NumericUpDown).Select(0, 20); }
         }
 
         private void InicializarDatos()
@@ -545,7 +548,7 @@ namespace GyCAP.UI.RecursosFabricacion
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
             }
 
             CargarTurnos();
@@ -584,7 +587,7 @@ namespace GyCAP.UI.RecursosFabricacion
             lvTurnos.Columns.Add("Inicio", 50, HorizontalAlignment.Right);
             lvTurnos.Columns.Add("Fin", 50, HorizontalAlignment.Right);
 
-            foreach (Data.dsCentroTrabajo.TURNOS_TRABAJORow turno in dsCentroTrabajo.TURNOS_TRABAJO)
+            foreach (Data.dsHojaRuta.TURNOS_TRABAJORow turno in dsCentroTrabajo.TURNOS_TRABAJO)
             {
                 item = new ListViewItem();
                 item.Name = turno.TUR_CODIGO.ToString();
@@ -597,21 +600,31 @@ namespace GyCAP.UI.RecursosFabricacion
 
         private void DeseleccionarTurnos()
         {
+            autoChecking = true;
             foreach (ListViewItem item in lvTurnos.CheckedItems)
             {
                 item.Checked = false;
             }
+            autoChecking = false;
         }
 
         private void SeleccionarTurnos(int[] codigo)
         {
+            autoChecking = true;
             foreach (int item in codigo)
             {
                 lvTurnos.Items.Find(item.ToString(), false)[0].Checked = true;
             }
+            autoChecking = false;
         }
 
         #endregion
+
+        private void lvTurnos_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (estadoInterface == estadoUI.consultar && !autoChecking) { e.NewValue = CheckState.Unchecked; }
+        }
+
 
 
     }

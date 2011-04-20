@@ -17,6 +17,7 @@ namespace GyCAP.UI.Sistema.Validaciones
         ///     - DropDownList (GyCAP) con GetSelectedIndex o GetSelectedValue -1
         ///     - Combobox (.NET) con SelectedIndex -1
         ///     - seleccionadorFecha (GyCAP) sin fecha seleccionada
+        ///     - dateTimePicker (.NET) sin fecha seleccionada o una hora seleccionada
         ///     - DataGridView (.NET) con al menos una fila seleccionada
         ///     - DataGridView (.NET) con al menos una fila agregada (default)
         ///     - NumericUpDown (.NET) con value > 0
@@ -54,6 +55,7 @@ namespace GyCAP.UI.Sistema.Validaciones
         ///     - seleccionadorFecha (GyCAP) sin fecha seleccionada
         ///     - DataGridView (.NET) con al menos una fila seleccionada
         ///     - NumericUpDown (.NET) con value > 0
+        ///     - ListView (.NET) con itemcheckbox con al menos uno seleccionado
         /// </summary>
         /// <param name="formulario">El formulario a validar</param>
         /// <returns>true si es válido, false en caso contrario</returns>
@@ -89,7 +91,7 @@ namespace GyCAP.UI.Sistema.Validaciones
         }
 
         private static void ValidarControl(Control ctrl, ErrorProvider provider)
-        {            
+        {
             if (ctrl.GetType().Equals(typeof(TextBox)))
             {
                 TextBox txt = (TextBox)ctrl;
@@ -154,6 +156,29 @@ namespace GyCAP.UI.Sistema.Validaciones
                 if (nud.CausesValidation && nud.Value == 0)
                 {
                     provider.SetError(ctrl, "Debe ingresar un valor mayor que 0.");
+                    provider.Tag = false;
+                }
+                else { provider.SetError(ctrl, string.Empty); }
+            }
+            else if (ctrl.GetType().Equals(typeof(System.Windows.Forms.DateTimePicker)))
+            {
+                if (ctrl.CausesValidation)
+                {
+                    DateTimePicker dtp = (DateTimePicker)ctrl;
+                    if ((dtp.Format == DateTimePickerFormat.Custom || dtp.Format == DateTimePickerFormat.Time) && dtp.Value.ToShortTimeString().Equals("0:00"))
+                    {
+                        provider.SetError(ctrl, "Debe ingresar una hora mayor que 0.");
+                        provider.Tag = false;
+                    }
+                    else { provider.SetError(ctrl, string.Empty); }
+                }
+            }
+            else if (ctrl.GetType().Equals(typeof(ListView)))
+            {
+                ListView lv = (ListView)ctrl;
+                if (lv.CausesValidation && lv.CheckBoxes && lv.CheckedItems.Count == 0)
+                {
+                    provider.SetError(ctrl, "Debe sleccionar al menos un elemento de la lista.");
                     provider.Tag = false;
                 }
                 else { provider.SetError(ctrl, string.Empty); }

@@ -50,7 +50,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataTable(dtTurnos, sql, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static bool PuedeEliminarse(int codigo)
@@ -63,7 +63,7 @@ namespace GyCAP.DAL
                 if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return true; }
                 else { return false; }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void ObtenerTurno(int codigoTurno, Data.dsHojaRuta ds)
@@ -73,6 +73,18 @@ namespace GyCAP.DAL
             try
             {
                 DB.FillDataTable(ds.TURNOS_TRABAJO, sql, valoresParametros);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static bool EsTurno(Entidades.TurnoTrabajo turno)
+        {
+            string sql = "SELECT count(tur_codigo) FROM TURNOS_TRABAJO WHERE tur_nombre = @p0 AND tur_codigo <> @p1";
+            object[] parametros = { turno.Nombre, turno.Codigo };
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, parametros, null)) == 0) { return false; }
+                else { return true; }
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }

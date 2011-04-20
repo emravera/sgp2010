@@ -10,11 +10,13 @@ namespace GyCAP.BLL
     {
         public static int Insertar(Entidades.TurnoTrabajo turno)
         {
+            if (DAL.TurnoTrabajoDAL.EsTurno(turno)) { throw new Entidades.Excepciones.ElementoExistenteException(); }
             return DAL.TurnoTrabajoDAL.Insertar(turno);
         }
 
         public static void Actualizar(Entidades.TurnoTrabajo turno)
         {
+            if (DAL.TurnoTrabajoDAL.EsTurno(turno)) { throw new Entidades.Excepciones.ElementoExistenteException(); }
             DAL.TurnoTrabajoDAL.Actualizar(turno);
         }
 
