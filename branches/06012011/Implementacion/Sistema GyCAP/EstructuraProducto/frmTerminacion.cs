@@ -63,7 +63,7 @@ namespace GyCAP.UI.EstructuraProducto
             //Seteo el maxlenght de los textbox para que no de error en la bd
             txtDescripcion.MaxLength = 250;
             txtNombre.MaxLength = 80;
-            txtAbreviatura.MaxLength = 80;
+            txtAbreviatura.MaxLength = 20;
             
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);

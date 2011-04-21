@@ -49,6 +49,7 @@ namespace GyCAP.BLL
         //Actualización de los datos
         public static void Actualizar(Entidades.Maquina maquina)
         {
+            if (EsMaquina(maquina)) throw new Entidades.Excepciones.ElementoExistenteException();
             DAL.MaquinaDAL.Actualizar(maquina);
         }
 

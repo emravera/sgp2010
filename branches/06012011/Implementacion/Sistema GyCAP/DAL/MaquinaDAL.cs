@@ -80,7 +80,7 @@ namespace GyCAP.DAL
                     DB.FillDataSet(ds, "MAQUINAS", sql, null);
                 }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         //ELIMINACION
@@ -100,7 +100,7 @@ namespace GyCAP.DAL
                 //    return false;
                 //}
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         //Metodo que elimina de la base de datos
@@ -112,27 +112,22 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         //INSERTAR
         //Metodo que valida que no se intente guardar algo que ya esta en la BD
         public static bool esMaquina(Entidades.Maquina maquina)
         {
-            string sql = "SELECT count(MAQ_codigo) FROM MAQUINAS WHERE MAQ_NOMBRE = @p0";
-            object[] valorParametros = { maquina.Nombre };
+            string sql = @"SELECT count(MAQ_codigo) FROM MAQUINAS WHERE MAQ_NOMBRE = @p0 AND maq_marca = @p1 AND 
+                            maq_numeroserie = @p2 AND maq_codigo <> @p3";
+            object[] valorParametros = { maquina.Nombre, maquina.Marca, maquina.NumeroSerie, maquina.Codigo };
             try
             {
-                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return false; }
+                else { return true; }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         //Metodo que inserta en la base de datos
@@ -167,7 +162,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         /// <summary>
@@ -180,7 +175,11 @@ namespace GyCAP.DAL
                            MAQ_NUMEROSERIE, MAQ_FECHAALTA, MAQ_MARCA, MAQ_ES_CRITICA 
                            FROM MAQUINAS ";
 
-            DB.FillDataTable(dtMaquina, sql, null);
+            try
+            {
+                DB.FillDataTable(dtMaquina, sql, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         public static void ObtenerMaquinas(Data.dsMantenimiento ds)
@@ -193,7 +192,7 @@ namespace GyCAP.DAL
                 //Se llena el Dataset
                 DB.FillDataSet(ds, "MAQUINAS", sql, null);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
     }
 }

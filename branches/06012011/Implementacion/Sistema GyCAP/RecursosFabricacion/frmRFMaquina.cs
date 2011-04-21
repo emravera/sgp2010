@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GyCAP.Data;
+using GyCAP.Entidades.Mensajes;
 
 namespace GyCAP.UI.RecursosFabricacion
 {
@@ -70,17 +71,24 @@ namespace GyCAP.UI.RecursosFabricacion
             dvMaquina.Sort = "MAQ_NOMBRE ASC";
             dgvLista.DataSource = dvMaquina;
 
-            //Llena el Dataset con los fabricantes
-            BLL.FabricanteMaquinaBLL.ObtenerTodos(dsMaquina);
+            try
+            {
+                //Llena el Dataset con los fabricantes
+                BLL.FabricanteMaquinaBLL.ObtenerTodos(dsMaquina);
 
-            //Llena el Dataset con los Sectores
-            BLL.ModeloMaquinaBLL.ObtenerTodos(dsMaquina);
+                //Llena el Dataset con los Sectores
+                BLL.ModeloMaquinaBLL.ObtenerTodos(dsMaquina);
 
-            //Llena el Dataset con los estados
-            BLL.EstadoMaquinaBLL.ObtenerTodos(dsMaquina);
+                //Llena el Dataset con los estados
+                BLL.EstadoMaquinaBLL.ObtenerTodos(dsMaquina);
 
-            //Carga de la Lista de Modelos
-            dvListaModelos = new DataView(dsMaquina.MODELOS_MAQUINAS);
+                //Carga de la Lista de Modelos
+                dvListaModelos = new DataView(dsMaquina.MODELOS_MAQUINAS);
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
+            }
 
             lvModelos.View = View.Details;
             lvModelos.FullRowSelect = true;
@@ -147,7 +155,6 @@ namespace GyCAP.UI.RecursosFabricacion
 
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
-
         }
 
         public void SetEstadoInicial(int estado)
@@ -183,6 +190,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcABM.SelectedTab = tpBuscar;
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
                     txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
@@ -295,12 +303,14 @@ namespace GyCAP.UI.RecursosFabricacion
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.consultar);
+            if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.consultar); }
+            else { MensajesABM.MsjSinSeleccion("Máquina", MensajesABM.Generos.Femenino, this.Text); }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.modificar);
+            if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.modificar); }
+            else { MensajesABM.MsjSinSeleccion("Máquina", MensajesABM.Generos.Femenino, this.Text); }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -311,8 +321,7 @@ namespace GyCAP.UI.RecursosFabricacion
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisamos que escribió algo y selecciono algo en el combo
-            if (txtNombre.Text != String.Empty && txtMarca.Text != String.Empty && txtNroSerie.Text != String.Empty &&
-                cboModelo.SelectedIndex != -1 && cboFabricante.SelectedIndex != -1 && cboEstado.SelectedIndex != -1)
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
                 Entidades.Maquina maquina = new GyCAP.Entidades.Maquina();
                 Entidades.ModeloMaquina modelo = new GyCAP.Entidades.ModeloMaquina();
@@ -329,7 +338,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     maquina.FechaAlta = BLL.DBBLL.GetFechaServidor();
 
                     //Creo el objeto Modelo y despues lo asigno
-                    //Busco el codigo de la Modelo
+                    //Busco el codigo del Modelo
                     int idModelo = Convert.ToInt32(cboModelo.GetSelectedValueInt());
                     modelo.Codigo = Convert.ToInt32(dsMaquina.MODELOS_MAQUINAS.FindByMODM_CODIGO(idModelo).MODM_CODIGO);
                     //Asigno el Modelo creada a la Maquina correspondiente
@@ -387,11 +396,11 @@ namespace GyCAP.UI.RecursosFabricacion
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
@@ -445,27 +454,28 @@ namespace GyCAP.UI.RecursosFabricacion
                         //Agregamos la fila al dataset y aceptamos los cambios
                         dsMaquina.MAQUINAS.AcceptChanges();
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MensajesABM.MsjConfirmaGuardar("Máquina", this.Text, MensajesABM.Operaciones.Modificación);
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
+                    }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
 
                 //recarga de la grilla
                 dgvLista.Refresh();
             }
-            else
-            {
-                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
+            if (dgvLista.SelectedRows.Count > 0) { dgvLista.SelectedRows[0].Selected = false; }
             SetInterface(estadoUI.inicio);
         }
 
@@ -483,7 +493,7 @@ namespace GyCAP.UI.RecursosFabricacion
 
                 if (FabricanteChequeados.Count == 0)
                 {
-                    MessageBox.Show("Seleccione al menos un Fabricante.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MensajesABM.MsjSinSeleccion("Fabricante", MensajesABM.Generos.Masculino, this.Text);
                 }
                 else
                 {
@@ -502,7 +512,7 @@ namespace GyCAP.UI.RecursosFabricacion
 
                 if (ModelosChequeados.Count == 0)
                 {
-                    MessageBox.Show("Seleccione al menos un Modelo.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MensajesABM.MsjSinSeleccion("Modelo", MensajesABM.Generos.Masculino, this.Text);
                 }
                 else
                 {
@@ -529,7 +539,7 @@ namespace GyCAP.UI.RecursosFabricacion
 
                     if (dsMaquina.MAQUINAS.Rows.Count == 0)
                     {
-                        MessageBox.Show("No se encontraron Maquinas con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MensajesABM.MsjBuscarNoEncontrado("Máquinas", this.Text);
                     }
                     SetInterface(estadoUI.inicio);
                 }
@@ -537,7 +547,7 @@ namespace GyCAP.UI.RecursosFabricacion
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Maquinas - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }
         }
@@ -574,11 +584,6 @@ namespace GyCAP.UI.RecursosFabricacion
             }
         }
 
-        private void dgvLista_DoubleClick(object sender, EventArgs e)
-        {
-            btnConsultar.PerformClick();
-        }
-
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             int codigoMaquina = Convert.ToInt32(dvMaquina[e.RowIndex]["MAQ_CODIGO"]);
@@ -599,8 +604,7 @@ namespace GyCAP.UI.RecursosFabricacion
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la Maquina seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (respuesta == DialogResult.Yes)
+                if (MensajesABM.MsjConfirmaEliminarDatos("Máquina", MensajesABM.Generos.Femenino, this.Text) == DialogResult.Yes)
                 {
                     try
                     {
@@ -612,35 +616,26 @@ namespace GyCAP.UI.RecursosFabricacion
                         dsMaquina.MAQUINAS.AcceptChanges();
                         btnVolver.PerformClick();
                     }
-                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Maquina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Máquina", MensajesABM.Generos.Femenino, this.Text);
             }
         }
 
-        private void txtNombre_Enter(object sender, EventArgs e)
+        private void control_Enter(object sender, EventArgs e)
         {
-            txtNombre.SelectAll();
+            if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
         }
 
-        private void txtMarca_Enter(object sender, EventArgs e)
-        {
-            txtMarca.SelectAll();
-        }
-
-        private void txtNroSerie_Enter(object sender, EventArgs e)
-        {
-            txtNroSerie.SelectAll();
-        }
     }
 }
