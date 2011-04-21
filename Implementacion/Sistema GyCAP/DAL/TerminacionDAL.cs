@@ -115,7 +115,7 @@ namespace GyCAP.DAL
 
         public static bool PuedeEliminarse(int codigo)
         {
-            string sql = "SELECT count(PZA_CODIGO) FROM COCINA WHERE TE_CODIGO = @p0";
+            string sql = "SELECT count(COC_CODIGO) FROM COCINA WHERE TE_CODIGO = @p0";
             object[] valorParametros = { codigo };
             try
             {
