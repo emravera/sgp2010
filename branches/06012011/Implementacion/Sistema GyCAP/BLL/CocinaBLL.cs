@@ -45,9 +45,9 @@ namespace GyCAP.BLL
         public static void ObtenerCocinas(object codigo, object codMarca, object codTerminacion, object codEstado, DataTable dtCocina)
         {
             object marca = null, terminacion = null, estado = null;
-            if (codMarca != null && Convert.ToInt32(codMarca.ToString()) > 0) { marca = codMarca; }
-            if (codTerminacion != null && Convert.ToInt32(codTerminacion.ToString()) > 0) { terminacion = codTerminacion; }
-            if (codEstado != null && Convert.ToInt32(codEstado.ToString()) > -1) { estado = codEstado; }
+            if (codMarca != null && Convert.ToInt32(codMarca) > 0) { marca = codMarca; }
+            if (codTerminacion != null && Convert.ToInt32(codTerminacion) > 0) { terminacion = codTerminacion; }
+            if (codEstado != null && Convert.ToInt32(codEstado) > -1) { estado = codEstado; }
             DAL.CocinaDAL.ObtenerCocinas(codigo, marca, terminacion, estado, dtCocina);
         }
 

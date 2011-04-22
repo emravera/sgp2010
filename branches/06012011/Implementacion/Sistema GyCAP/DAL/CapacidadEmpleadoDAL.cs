@@ -45,8 +45,8 @@ namespace GyCAP.DAL
 
         public static bool EsCapacidadEmpleado(Entidades.CapacidadEmpleado capacidadEmpleado)
         {
-            string sql = "SELECT count(CEMP_CODIGO) FROM CAPACIDAD_EMPLEADOS WHERE CEMP_NOMBRE = @p0";
-            object[] valorParametros = { capacidadEmpleado.Nombre };
+            string sql = "SELECT count(CEMP_CODIGO) FROM CAPACIDAD_EMPLEADOS WHERE CEMP_NOMBRE = @p0 AND cemp_codigo <> @p1";
+            object[] valorParametros = { capacidadEmpleado.Nombre, capacidadEmpleado.Codigo };
             try
             {
                 if (Convert.ToInt64(DB.executeScalar(sql, valorParametros, null)) == 0)

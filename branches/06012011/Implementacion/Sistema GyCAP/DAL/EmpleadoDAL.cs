@@ -9,80 +9,50 @@ namespace GyCAP.DAL
 {
     public class EmpleadoDAL : UsuarioDAL
     {
+        public static readonly int BuscarPorLegajo = 1;
+        public static readonly int BuscarPorApellido = 2;
+        public static readonly int BuscarPorNombre = 3;
+        
         //BUSQUEDA
         //Metodo sobrecargado (3 Sobrecargas)
         //Busqueda por nombre
-        public static void ObtenerEmpleado(string buscarPor, object nombre, int idEstadoEmpleado,string cadSectores, Data.dsEmpleado ds)
+        public static void ObtenerEmpleado(object buscarPor, object nombre, object estado, object sector, Data.dsEmpleado ds)
         {
             string sql = @"SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE,
-                           E_FECHANACIMIENTO, E_TELEFONO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA 
-                           FROM EMPLEADOS
-                           WHERE 1 = 1 ";
+                           E_FECHANACIMIENTO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA 
+                           FROM EMPLEADOS WHERE 1 = 1 ";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
             //Un array de object para ir guardando los valores de los filtros, con tamaño = cantidad de filtros disponibles
             object[] valoresFiltros = new object[3];
             //Empecemos a armar la consulta, revisemos que filtros aplican
-
-            switch (buscarPor)
+            
+            // LEGAJO
+            if (nombre != null && nombre.ToString() != string.Empty)
             {
-                case "Legajo":
-                    // LEGAJO
-                    if (nombre != null && nombre.ToString() != string.Empty)
-                    {
-                        //Si aplica el filtro lo usamos
-                        sql += " AND E_LEGAJO LIKE @p" + cantidadParametros;
-                        //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
-                        nombre = "%" + nombre + "%";
-                        valoresFiltros[cantidadParametros] = nombre;
-                        cantidadParametros++;
-                    }
-                    break;
-                case "Nombre":
-                    // NOMBRE
-                    if (nombre != null && nombre.ToString() != string.Empty)
-                    {
-                        //Si aplica el filtro lo usamos
-                        sql += " AND E_NOMBRE LIKE @p" + cantidadParametros;
-                        //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
-                        nombre = "%" + nombre + "%";
-                        valoresFiltros[cantidadParametros] = nombre;
-                        cantidadParametros++;
-                    }
-                    break;
-                case "Apellido":
-                    // APELLIDO
-                    if (nombre != null && nombre.ToString() != string.Empty)
-                    {
-                        //Si aplica el filtro lo usamos
-                        sql += " AND E_APELLIDO LIKE @p" + cantidadParametros;
-                        //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
-                        nombre = "%" + nombre + "%";
-                        valoresFiltros[cantidadParametros] = nombre;
-                        cantidadParametros++;
-                    }
-                    break;
-                default:
-                    break;
-            }
-
-            //ESTADO - Revisamos si es distinto de 0, o sea "todos"
-            if (idEstadoEmpleado != -1 )
-            {
-                sql += " AND EE_CODIGO = @p" + cantidadParametros;
-                valoresFiltros[cantidadParametros] = Convert.ToInt32(idEstadoEmpleado);
+                if (Convert.ToInt32(buscarPor) == BuscarPorLegajo) { sql += " AND E_LEGAJO LIKE @p" + cantidadParametros; }
+                else if (Convert.ToInt32(buscarPor) == BuscarPorApellido) { sql += " AND E_APELLIDO LIKE @p" + cantidadParametros; }
+                else { sql += " AND E_NOMBRE LIKE @p" + cantidadParametros; }
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                nombre = "%" + nombre + "%";
+                valoresFiltros[cantidadParametros] = nombre;
                 cantidadParametros++;
             }
 
-            if (cadSectores != string.Empty) 
-            {   //Ver como seria con parametros
-                //sql += " AND SEC_CODIGO IN (@p" + cantidadParametros + ")";
-                //valoresFiltros[cantidadParametros] = cadSectores;
-                //cantidadParametros++;
+            //ESTADO - Revisamos si es distinto de 0, o sea "todos"
+            if (estado != null && estado.GetType().Equals(typeof(int)))
+            {
+                sql += " AND EE_CODIGO = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(estado);
+                cantidadParametros++;
+            }
 
-                sql += " AND SEC_CODIGO IN (" + cadSectores + ")";
-
+            if (sector != null && sector.GetType().Equals(typeof(int)))
+            {
+                sql += " AND SEC_CODIGO = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(estado);
+                cantidadParametros++;
             }
 
             try
@@ -103,7 +73,7 @@ namespace GyCAP.DAL
                     DB.FillDataSet(ds, "EMPLEADOS", sql, null);
                 }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         //ELIMINACION

@@ -554,7 +554,6 @@ namespace GyCAP.Data {
                 this.columnCEMP_CODIGO.AutoIncrementSeed = -1;
                 this.columnCEMP_CODIGO.AutoIncrementStep = -1;
                 this.columnCEMP_CODIGO.AllowDBNull = false;
-                this.columnCEMP_CODIGO.ReadOnly = true;
                 this.columnCEMP_CODIGO.Unique = true;
                 this.columnCEMP_NOMBRE.MaxLength = 80;
                 this.columnCEMP_DESCRIPCION.MaxLength = 2147483647;
@@ -825,7 +824,6 @@ namespace GyCAP.Data {
                 this.columnCXE_CODIGO.AutoIncrementSeed = -1;
                 this.columnCXE_CODIGO.AutoIncrementStep = -1;
                 this.columnCXE_CODIGO.AllowDBNull = false;
-                this.columnCXE_CODIGO.ReadOnly = true;
                 this.columnCXE_CODIGO.Unique = true;
                 this.columnE_CODIGO.AllowDBNull = false;
                 this.columnCEMP_CODIGO.AllowDBNull = false;
@@ -1174,7 +1172,6 @@ namespace GyCAP.Data {
                 this.columnE_CODIGO.AutoIncrementSeed = -1;
                 this.columnE_CODIGO.AutoIncrementStep = -1;
                 this.columnE_CODIGO.AllowDBNull = false;
-                this.columnE_CODIGO.ReadOnly = true;
                 this.columnE_CODIGO.Unique = true;
                 this.columnE_LEGAJO.MaxLength = 20;
                 this.columnEE_CODIGO.AllowDBNull = false;
@@ -1454,7 +1451,6 @@ namespace GyCAP.Data {
                 this.columnSEC_CODIGO.AutoIncrementSeed = -1;
                 this.columnSEC_CODIGO.AutoIncrementStep = -1;
                 this.columnSEC_CODIGO.AllowDBNull = false;
-                this.columnSEC_CODIGO.ReadOnly = true;
                 this.columnSEC_CODIGO.Unique = true;
                 this.columnSEC_NOMBRE.MaxLength = 80;
                 this.columnSEC_DESCRIPCION.MaxLength = 200;
@@ -1720,7 +1716,6 @@ namespace GyCAP.Data {
                 this.columnEE_CODIGO.AutoIncrementSeed = -1;
                 this.columnEE_CODIGO.AutoIncrementStep = -1;
                 this.columnEE_CODIGO.AllowDBNull = false;
-                this.columnEE_CODIGO.ReadOnly = true;
                 this.columnEE_CODIGO.Unique = true;
                 this.columnEE_NOMBRE.MaxLength = 80;
                 this.columnEE_DESCRIPCION.MaxLength = 200;
@@ -1868,11 +1863,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string CEMP_NOMBRE {
                 get {
-                    try {
-                        return ((string)(this[this.tableCAPACIDAD_EMPLEADOS.CEMP_NOMBREColumn]));
+                    if (this.IsCEMP_NOMBRENull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CEMP_NOMBRE\' in table \'CAPACIDAD_EMPLEADOS\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableCAPACIDAD_EMPLEADOS.CEMP_NOMBREColumn]));
                     }
                 }
                 set {
@@ -1883,12 +1878,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string CEMP_DESCRIPCION {
                 get {
-                    try {
-                        return ((string)(this[this.tableCAPACIDAD_EMPLEADOS.CEMP_DESCRIPCIONColumn]));
+                    if (this.IsCEMP_DESCRIPCIONNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CEMP_DESCRIPCION\' in table \'CAPACIDAD_EMPLEADOS\' is DBNull." +
-                                "", e);
+                    else {
+                        return ((string)(this[this.tableCAPACIDAD_EMPLEADOS.CEMP_DESCRIPCIONColumn]));
                     }
                 }
                 set {
@@ -2019,11 +2013,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string E_LEGAJO {
                 get {
-                    try {
-                        return ((string)(this[this.tableEMPLEADOS.E_LEGAJOColumn]));
+                    if (this.IsE_LEGAJONull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'E_LEGAJO\' in table \'EMPLEADOS\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableEMPLEADOS.E_LEGAJOColumn]));
                     }
                 }
                 set {
@@ -2059,11 +2053,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string E_APELLIDO {
                 get {
-                    try {
-                        return ((string)(this[this.tableEMPLEADOS.E_APELLIDOColumn]));
+                    if (this.IsE_APELLIDONull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'E_APELLIDO\' in table \'EMPLEADOS\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableEMPLEADOS.E_APELLIDOColumn]));
                     }
                 }
                 set {
@@ -2074,11 +2068,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string E_NOMBRE {
                 get {
-                    try {
-                        return ((string)(this[this.tableEMPLEADOS.E_NOMBREColumn]));
+                    if (this.IsE_NOMBRENull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'E_NOMBRE\' in table \'EMPLEADOS\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableEMPLEADOS.E_NOMBREColumn]));
                     }
                 }
                 set {
@@ -2259,11 +2253,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string SEC_NOMBRE {
                 get {
-                    try {
-                        return ((string)(this[this.tableSECTORES.SEC_NOMBREColumn]));
+                    if (this.IsSEC_NOMBRENull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SEC_NOMBRE\' in table \'SECTORES\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableSECTORES.SEC_NOMBREColumn]));
                     }
                 }
                 set {
@@ -2274,11 +2268,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string SEC_DESCRIPCION {
                 get {
-                    try {
-                        return ((string)(this[this.tableSECTORES.SEC_DESCRIPCIONColumn]));
+                    if (this.IsSEC_DESCRIPCIONNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SEC_DESCRIPCION\' in table \'SECTORES\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableSECTORES.SEC_DESCRIPCIONColumn]));
                     }
                 }
                 set {
@@ -2289,11 +2283,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string SEC_ABREVIATURA {
                 get {
-                    try {
-                        return ((string)(this[this.tableSECTORES.SEC_ABREVIATURAColumn]));
+                    if (this.IsSEC_ABREVIATURANull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SEC_ABREVIATURA\' in table \'SECTORES\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableSECTORES.SEC_ABREVIATURAColumn]));
                     }
                 }
                 set {
@@ -2369,11 +2363,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string EE_NOMBRE {
                 get {
-                    try {
-                        return ((string)(this[this.tableESTADO_EMPLEADOS.EE_NOMBREColumn]));
+                    if (this.IsEE_NOMBRENull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EE_NOMBRE\' in table \'ESTADO_EMPLEADOS\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableESTADO_EMPLEADOS.EE_NOMBREColumn]));
                     }
                 }
                 set {
@@ -2384,11 +2378,11 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string EE_DESCRIPCION {
                 get {
-                    try {
-                        return ((string)(this[this.tableESTADO_EMPLEADOS.EE_DESCRIPCIONColumn]));
+                    if (this.IsEE_DESCRIPCIONNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EE_DESCRIPCION\' in table \'ESTADO_EMPLEADOS\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableESTADO_EMPLEADOS.EE_DESCRIPCIONColumn]));
                     }
                 }
                 set {

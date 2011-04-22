@@ -13,9 +13,9 @@ namespace GyCAP.UI.RecursosFabricacion
     public partial class frmEmpleado : Form
     {
         private static frmEmpleado _frmEmpleado = null;
-        private Data.dsEmpleado dsEmpleado = new GyCAP.Data.dsEmpleado(); 
-        private DataView dvEmpleado, dvEstadoEmpleado,dvEstadoEmpleadoBuscar, 
-                         dvListaSectores, dvSectores, dvCapacidadEmpleado;
+        private Data.dsEmpleado dsEmpleado = new GyCAP.Data.dsEmpleado();
+        private DataView dvEmpleado, dvEstadoEmpleado, dvEstadoEmpleadoBuscar, dvSectoresBuscar, dvSectores;
+        private DataView dvCapacidadEmpleado, dvCapacidadAgregar;
         private enum estadoUI { inicio, nuevo, consultar, modificar, nuevoExterno};
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
@@ -31,7 +31,28 @@ namespace GyCAP.UI.RecursosFabricacion
 
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
-        }        
+        }
+
+        //Método para evitar la creación de más de una pantalla
+        public static frmEmpleado Instancia
+        {
+            get
+            {
+                if (_frmEmpleado == null || _frmEmpleado.IsDisposed)
+                {
+                    _frmEmpleado = new frmEmpleado();
+                }
+                else
+                {
+                    _frmEmpleado.BringToFront();
+                }
+                return _frmEmpleado;
+            }
+            set
+            {
+                _frmEmpleado = value;
+            }
+        }
 
         public void SetEstadoInicial(int estado)
         {
@@ -68,17 +89,22 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcABM.SelectedTab = tpBuscar;
+                    txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
-                    setControles(false);
+                    txtLegajo.Text = string.Empty;
                     txtNombre.Text = string.Empty;
                     txtApellido.Text = string.Empty;
-                    txtLegajo.Text = string.Empty;
                     sfFechaNac.SetFechaNull();
-                    cboEstado.SelectedIndex = -1;
-                    cboSector.SelectedIndex = -1;
-                    
-                    //gbGuardarCancelar.Enabled = true;
+                    cboEstado.SetSelectedIndex(-1);
+                    cboSector.SetSelectedIndex(-1);
+                    txtLegajo.ReadOnly = false;
+                    txtApellido.ReadOnly = false;
+                    txtNombre.ReadOnly = false;
+                    sfFechaNac.Enabled = true;                    
+                    cboEstado.Enabled = true;
+                    cboSector.Enabled = true;                    
+                    dvCapacidadEmpleado.RowFilter = "E_CODIGO = " + -1;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -90,28 +116,40 @@ namespace GyCAP.UI.RecursosFabricacion
                     txtLegajo.Focus();
                     break;
                 case estadoUI.nuevoExterno:
-                    setControles(false);
+                    txtLegajo.Text = string.Empty;
                     txtNombre.Text = string.Empty;
                     txtApellido.Text = string.Empty;
-                    txtLegajo.Text = string.Empty;
                     sfFechaNac.SetFechaNull();
-                    cboEstado.SelectedIndex = -1;
-                    cboSector.SelectedIndex = -1;
-
-                    //gbGuardarCancelar.Enabled = true;
+                    cboEstado.SetSelectedIndex(-1);
+                    cboSector.SetSelectedIndex(-1);
+                    txtLegajo.ReadOnly = false;
+                    txtApellido.ReadOnly = false;
+                    txtNombre.ReadOnly = false;
+                    sfFechaNac.Enabled = true;
+                    cboEstado.Enabled = true;
+                    cboSector.Enabled = true;
+                    dvCapacidadEmpleado.RowFilter = "E_CODIGO = " + -1;
                     btnGuardar.Enabled = true;
-                    btnVolver.Enabled = false;
+                    btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
-                    estadoInterface = estadoUI.nuevoExterno;
+                    estadoInterface = estadoUI.nuevo;
                     tcABM.SelectedTab = tpDatos;
                     txtLegajo.Focus();
                     break;
                 case estadoUI.consultar:
-                    setControles(true);
-                    //gbGuardarCancelar.Enabled = false;
+                    txtLegajo.ReadOnly = true;
+                    txtApellido.ReadOnly = true;
+                    txtNombre.ReadOnly = true;
+                    sfFechaNac.Enabled = false;
+                    cboEstado.Enabled = false;
+                    cboSector.Enabled = false;
+                    btnNuevo.Enabled = true;
+                    btnConsultar.Enabled = true;
+                    btnModificar.Enabled = true;
+                    btnEliminar.Enabled = true;
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
                     estadoInterface = estadoUI.consultar;
@@ -119,8 +157,12 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnVolver.Focus();
                     break;
                 case estadoUI.modificar:
-                    setControles(false);
-                    //gbGuardarCancelar.Enabled = true;
+                    txtLegajo.ReadOnly = false;
+                    txtApellido.ReadOnly = false;
+                    txtNombre.ReadOnly = false;
+                    sfFechaNac.Enabled = true;
+                    cboEstado.Enabled = true;
+                    cboSector.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -134,48 +176,15 @@ namespace GyCAP.UI.RecursosFabricacion
                 default:
                     break;
             }
-        }
-
-        private void setControles(bool pValue) 
-        {
-            txtApellido.ReadOnly = pValue;
-            txtNombre.ReadOnly = pValue;
-            sfFechaNac.Enabled = !pValue;
-            //txtFechaNac.ReadOnly = pValue;
-            txtLegajo.ReadOnly = pValue;
-            cboEstado.Enabled = !pValue;
-            cboSector.Enabled = !pValue;
-        }
-
-        //Método para evitar la creación de más de una pantalla
-        public static frmEmpleado Instancia
-        {
-            get
-            {
-                if (_frmEmpleado == null || _frmEmpleado.IsDisposed)
-                {
-                    _frmEmpleado = new frmEmpleado();
-                }
-                else
-                {
-                    _frmEmpleado.BringToFront();
-                }
-                return _frmEmpleado;
-            }
-            set
-            {
-                _frmEmpleado = value;
-            }
-        }
+        }              
 
         private void InicializarDatos()
         {
             //Setea el nombre de la Lista
             gpbLista.Text = "Listado de " + this.Text;
 
-            //Para que no genere las columnas automáticamente
+            //Grilla busqueda
             dgvLista.AutoGenerateColumns = false;
-            //Agregamos las columnas
             dgvLista.Columns.Add("E_CODIGO", "Código");
             dgvLista.Columns.Add("E_LEGAJO", "Legajo");
             dgvLista.Columns.Add("E_APELLIDO", "Apellido");
@@ -183,7 +192,6 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvLista.Columns.Add("SEC_CODIGO", "Sector");
             dgvLista.Columns.Add("EE_CODIGO", "Estado");
 
-            //Seteamos el modo de tamaño de las columnas
             dgvLista.Columns["E_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["E_LEGAJO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["E_APELLIDO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -191,7 +199,6 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvLista.Columns["SEC_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["EE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-            //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["E_CODIGO"].DataPropertyName = "E_CODIGO";
             dgvLista.Columns["E_LEGAJO"].DataPropertyName = "E_LEGAJO";
             dgvLista.Columns["E_APELLIDO"].DataPropertyName = "E_APELLIDO";
@@ -199,14 +206,26 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvLista.Columns["SEC_CODIGO"].DataPropertyName = "SEC_CODIGO";
             dgvLista.Columns["EE_CODIGO"].DataPropertyName = "EE_CODIGO";
 
-            //Alineacion de los numeros y las fechas en la grilla
             dgvLista.Columns["E_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvLista.Columns["E_CODIGO"].Visible = false;
 
-            //Creamos el dataview y lo asignamos a la grilla
-            dvEmpleado = new DataView(dsEmpleado.EMPLEADOS);
-            dvEmpleado.Sort = "E_APELLIDO, E_NOMBRE ASC";
-            dgvLista.DataSource = dvEmpleado;
+            //Grilla capacidades asignadas a empleado
+            dgvCapacidades.AutoGenerateColumns = false;
+            dgvCapacidades.Columns.Add("CEMP_CODIGO", "Capacidades del empleado");
+            dgvCapacidades.Columns.Add("CEMP_DESCRIPCION", "Descripción");
+            dgvCapacidades.Columns["CEMP_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvCapacidades.Columns["CEMP_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvCapacidades.Columns["CEMP_DESCRIPCION"].DataPropertyName = "CEMP_DESCRIPCION";
+            dgvCapacidades.Columns["CEMP_CODIGO"].DataPropertyName = "CEMP_CODIGO";
+            
+            //Grilla Capacidades a agregar
+            dgvListaCapacidadesAgregar.AutoGenerateColumns = false;
+            dgvListaCapacidadesAgregar.Columns.Add("CEMP_CODIGO", "Capacidad");
+            dgvListaCapacidadesAgregar.Columns.Add("CEMP_DESCRIPCION", "Descripción");
+            dgvListaCapacidadesAgregar.Columns["CEMP_CODIGO"].DataPropertyName = "CEMP_CODIGO";
+            dgvListaCapacidadesAgregar.Columns["CEMP_DESCRIPCION"].DataPropertyName = "CEMP_DESCRIPCION";
+            dgvListaCapacidadesAgregar.Columns["CEMP_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvListaCapacidadesAgregar.Columns["CEMP_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;            
 
             try
             {
@@ -214,78 +233,34 @@ namespace GyCAP.UI.RecursosFabricacion
                 BLL.EstadoEmpleadoBLL.ObtenerTodos(dsEmpleado);
                 BLL.SectorBLL.ObtenerTodos(dsEmpleado.SECTORES);
                 BLL.CapacidadEmpleadoBLL.ObtenerTodos(dsEmpleado.CAPACIDAD_EMPLEADOS);
+                BLL.CapacidadEmpleadoBLL.ObtenerCapacidadPorEmpleado(dsEmpleado);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex) { MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio); }
 
-            //Carga de la Lista de Sectores
-            dvListaSectores = new DataView(dsEmpleado.SECTORES);
-
-            lvSectores.View = View.Details;
-            lvSectores.FullRowSelect = true;
-            lvSectores.MultiSelect = false;
-            lvSectores.CheckBoxes = true;
-            lvSectores.GridLines = true;
-            lvSectores.Columns.Add("Sectores", 120);
-            lvSectores.Columns.Add("Codigo", 0);
-            if (dvListaSectores.Count != 0)
-            {
-                foreach (DataRowView dr in dvListaSectores)
-                {
-                    ListViewItem li = new ListViewItem(dr["SEC_NOMBRE"].ToString());
-                    li.SubItems.Add(dr["SEC_CODIGO"].ToString());
-                    li.Checked = true;
-                    lvSectores.Items.Add(li);
-                }
-            }
-
-            //Para que no genere las columnas automáticamente
-            dgvCapacidades.AutoGenerateColumns = false;
-            //Agregamos las columnas
-            dgvCapacidades.Columns.Add("E_CODIGO", "Código");
-            dgvCapacidades.Columns.Add("CEMP_CODIGO", "Capacidades del empleado");
-
-            //Seteamos el modo de tamaño de las columnas
-            dgvCapacidades.Columns["E_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCapacidades.Columns["CEMP_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-            //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            dgvCapacidades.Columns["E_CODIGO"].DataPropertyName = "E_CODIGO";
-            dgvCapacidades.Columns["CEMP_CODIGO"].DataPropertyName = "CEMP_CODIGO";
-
-            //Alineacion de los numeros y las fechas en la grilla
-            dgvCapacidades.Columns["E_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvCapacidades.Columns["E_CODIGO"].Visible = false;
-
-
+            //Creamos los dataview y los asignamos a las grillas
+            dvEmpleado = new DataView(dsEmpleado.EMPLEADOS);
+            dvEmpleado.Sort = "E_APELLIDO ASC, E_NOMBRE ASC";            
+            dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDADESXEMPLEADO);
+            dvCapacidadAgregar = new DataView(dsEmpleado.CAPACIDAD_EMPLEADOS);
+            dvCapacidadAgregar.Sort = "CEMP_NOMBRE ASC";
+            dgvLista.DataSource = dvEmpleado;
+            dgvCapacidades.DataSource = dvCapacidadEmpleado;
+            dgvListaCapacidadesAgregar.DataSource = dvCapacidadAgregar;
+                        
             //CARGA DE COMBOS
             //Creamos el Dataview y se lo asignamos al combo
-            dvEstadoEmpleadoBuscar = new DataView(dsEmpleado.ESTADO_EMPLEADOS);
-            cboBuscarEstado.SetDatos(dvEstadoEmpleadoBuscar, "ee_codigo", "ee_nombre", "-- TODOS --", true);
-
-            cboBuscarPor.Items.Add("Legajo");
-            cboBuscarPor.Items.Add("Nombre");
-            cboBuscarPor.Items.Add("Apellido");
-            cboBuscarPor.SelectedIndex = 0;
-
-            //Combo de Datos
             dvEstadoEmpleado = new DataView(dsEmpleado.ESTADO_EMPLEADOS);
-            cboEstado.SetDatos(dvEstadoEmpleado, "EE_CODIGO", "EE_NOMBRE", "Seleccione un Estado...", false);
-
+            dvEstadoEmpleadoBuscar = new DataView(dsEmpleado.ESTADO_EMPLEADOS);            
             dvSectores = new DataView(dsEmpleado.SECTORES);
-            cboSector.SetDatos(dvSectores, "SEC_CODIGO", "SEC_NOMBRE", "Seleccione un Sector...", false);
-
-            BLL.CapacidadEmpleadoBLL.ObtenerTodos(dsEmpleado);
-
-            BLL.CapacidadEmpleadoBLL.ObtenerCapacidadPorEmpleado(dsEmpleado);
-
-            //Creamos el dataview y lo asignamos a la grilla
-            //dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDAD_EMPLEADOS);
-            //dvCapacidadEmpleado.Sort = "CEMP_NOMBRE ASC";
-            //dgvCapacidades.DataSource = dvCapacidadEmpleado;
-
-            //Llenar listView
-            //dvListaSectores = new DataView(dsEmpleado.SECTORES);
-
+            dvSectoresBuscar = new DataView(dsEmpleado.SECTORES);
+            string[] nombres = { "Legajo", "Nombre", "Apellido" };
+            int[] valores = { BLL.EmpleadoBLL.BuscarPorLegajo, BLL.EmpleadoBLL.BuscarPorNombre, BLL.EmpleadoBLL.BuscarPorApellido };
+            cboEstado.SetDatos(dvEstadoEmpleado, "EE_CODIGO", "EE_NOMBRE", "Seleccione...", false);
+            cboBuscarEstado.SetDatos(dvEstadoEmpleadoBuscar, "ee_codigo", "ee_nombre", "--TODOS--", true);
+            cboBuscarPor.SetDatos(nombres, valores, "Seleccione...", false);
+            cboBuscarPor.SetSelectedValue(BLL.EmpleadoBLL.BuscarPorLegajo);
+            cboSector.SetDatos(dvSectores, "SEC_CODIGO", "SEC_NOMBRE", "Seleccione...", false);
+            cboSectorBuscar.SetDatos(dvSectoresBuscar, "SEC_CODIGO", "SEC_NOMBRE", "--TODOS--", true);
             //Seteo el maxlenght de los textbox para que no de error en la bd
             txtApellido.MaxLength = 80;
             txtNombre.MaxLength = 80;
@@ -481,6 +456,41 @@ namespace GyCAP.UI.RecursosFabricacion
             }
         }
 
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            //Controlamos que esté seleccionado algo
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Preguntamos si está seguro
+                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Empleado seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (respuesta == DialogResult.Yes)
+                {
+                    try
+                    {
+                        //Obtenemos el codigo
+                        long codigo = Convert.ToInt64(dvEmpleado[dgvLista.SelectedRows[0].Index]["e_codigo"]);
+                        //Lo eliminamos de la DB
+                        BLL.EmpleadoBLL.Eliminar(codigo);
+                        //Lo eliminamos de la tabla conjuntos del dataset
+                        dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).Delete();
+                        dsEmpleado.EMPLEADOS.AcceptChanges();
+                    }
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error: Empleado - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error: Empleado - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un Empleado de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         #endregion
 
         #region Buscar
@@ -488,49 +498,24 @@ namespace GyCAP.UI.RecursosFabricacion
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             try
-            {
-                ListView.CheckedListViewItemCollection chequeados = lvSectores.CheckedItems;
-                string cadSectores = string.Empty;
+            {       
+                dsEmpleado.EMPLEADOS.Clear();
+                dsEmpleado.CAPACIDADESXEMPLEADO.Clear();
+                BLL.EmpleadoBLL.ObtenerTodos(cboBuscarPor.GetSelectedValue(), txtNombreBuscar.Text, cboBuscarEstado.GetSelectedValue(), cboSectorBuscar.GetSelectedValue(), dsEmpleado);
+                BLL.CapacidadEmpleadoBLL.ObtenerCapacidadPorEmpleado(dsEmpleado);
+                
+                dvEmpleado.Table = dsEmpleado.EMPLEADOS;
 
-                if (chequeados.Count == 0)
+                if (dsEmpleado.EMPLEADOS.Rows.Count == 0)
                 {
-                    MessageBox.Show("Seleccione al menos un Sector.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MensajesABM.MsjBuscarNoEncontrado("Empleados", this.Text);
                 }
-                else
-                {
-                    foreach (ListViewItem item in chequeados)
-                    {
-                        if (cadSectores == string.Empty)
-                        {
-                            cadSectores = item.SubItems[1].Text;
-                        }
-                        else
-                        {
-                            cadSectores += ", " + item.SubItems[1].Text;
-                        }
-                    }
-
-                    dsEmpleado.EMPLEADOS.Clear();
-                    BLL.EmpleadoBLL.ObtenerTodos(cboBuscarPor.Text, txtNombreBuscar.Text, cboBuscarEstado.GetSelectedValueInt(), cadSectores, dsEmpleado);
-                    //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
-                    //por una consulta a la BD
-                    dvEmpleado.Table = dsEmpleado.EMPLEADOS;
-
-                    //Creamos el dataview y lo asignamos a la grilla
-                    dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDADESXEMPLEADO);
-                    //dvCapacidadEmpleado.Sort = "CEMP_NOMBRE ASC";
-                    dgvCapacidades.DataSource = dvCapacidadEmpleado;
-
-                    if (dsEmpleado.EMPLEADOS.Rows.Count == 0)
-                    {
-                        MessageBox.Show("No se encontraron Empleados con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    SetInterface(estadoUI.inicio);
-                }
+                SetInterface(estadoUI.inicio);
+                
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Empleados - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }
         }
@@ -569,11 +554,6 @@ namespace GyCAP.UI.RecursosFabricacion
             }
         }
 
-        private void dgvLista_DoubleClick(object sender, EventArgs e)
-        {
-            btnConsultar.PerformClick();
-        }
-
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             int codigoEmpleado = Convert.ToInt32(dvEmpleado[e.RowIndex]["e_codigo"]);
@@ -583,19 +563,14 @@ namespace GyCAP.UI.RecursosFabricacion
             cboSector.SetSelectedValue(int.Parse(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).SEC_CODIGO.ToString()));
             cboEstado.SetSelectedValue(int.Parse(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).EE_CODIGO.ToString()));
             sfFechaNac.SetFecha(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_FECHANACIMIENTO);
-
-            //Creamos el dataview y lo asignamos a la grilla
-            dvCapacidadEmpleado = new DataView(dsEmpleado.CAPACIDADESXEMPLEADO);
-            dvCapacidadEmpleado.RowFilter = " E_CODIGO = " + codigoEmpleado;
-            dgvCapacidades.DataSource = dvCapacidadEmpleado;
-            
+            dvCapacidadEmpleado.RowFilter = "E_CODIGO = " + codigoEmpleado;
         }
 
         private void dgvCapacidades_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value != null && e.Value.ToString() != String.Empty)
             {
-                string nombre;
+                string nombre = string.Empty;
                 switch (dgvCapacidades.Columns[e.ColumnIndex].Name)
                 {
                     case "CEMP_CODIGO":
@@ -608,81 +583,29 @@ namespace GyCAP.UI.RecursosFabricacion
             }
         }        
 
-        private void txtLegajo_Enter(object sender, EventArgs e)
+        private void control_Enter(object sender, EventArgs e)
         {
-            txtLegajo.SelectAll(); 
+            if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
         }
 
-        private void txtApellido_Enter(object sender, EventArgs e)
+        private void dgvListaCapacidadesAgregar_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            txtApellido.SelectAll();
-        }
-
-        private void txtNombre_Enter(object sender, EventArgs e)
-        {
-            txtNombre.SelectAll();
-        }
-
-        #endregion        
-
-        private void frmEmpleado_Activated(object sender, EventArgs e)
-        {
-            if (tcABM.SelectedTab == tpBuscar)
+            if (e.Value != null && e.Value.ToString() != String.Empty)
             {
-                btnBuscar.Focus();
-            }
-            else
-            {
-                txtLegajo.Focus();
-            }
-        }
-
-        private void frmEmpleado_Load(object sender, EventArgs e)
-        {
-            if (tcABM.SelectedTab == tpBuscar)
-            {
-                btnBuscar.Focus();
-            }
-            else
-            {
-                txtLegajo.Focus();
-            }
-        }
-
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            //Controlamos que esté seleccionado algo
-            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
-            {
-                //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Empleado seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (respuesta == DialogResult.Yes)
+                string nombre = string.Empty;
+                switch (dgvListaCapacidadesAgregar.Columns[e.ColumnIndex].Name)
                 {
-                    try
-                    {
-                        //Obtenemos el codigo
-                        long codigo = Convert.ToInt64(dvEmpleado[dgvLista.SelectedRows[0].Index]["e_codigo"]);
-                        //Lo eliminamos de la DB
-                        BLL.EmpleadoBLL.Eliminar(codigo);
-                        //Lo eliminamos de la tabla conjuntos del dataset
-                        dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).Delete();
-                        dsEmpleado.EMPLEADOS.AcceptChanges();
-                    }
-                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
-                    {
-                        MessageBox.Show(ex.Message, "Error: Empleado - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    catch (Entidades.Excepciones.BaseDeDatosException ex)
-                    {
-                        MessageBox.Show(ex.Message, "Error: Empleado - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    case "CEMP_CODIGO":
+                        nombre = dsEmpleado.CAPACIDAD_EMPLEADOS.FindByCEMP_CODIGO(Convert.ToInt32(e.Value)).CEMP_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
                 }
             }
-            else
-            {
-                MessageBox.Show("Debe seleccionar un Empleado de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
+
+        #endregion
 
     }
 
