@@ -8,11 +8,18 @@ namespace GyCAP.BLL
 {
     public class EmpleadoBLL : UsuarioBLL
     {
+        public static readonly int BuscarPorLegajo = 1;
+        public static readonly int BuscarPorApellido = 2;
+        public static readonly int BuscarPorNombre = 3;
+        
         //Busqueda
         //Obtiene los datos de acuerdo a los criterios de busqueda
-        public static void ObtenerTodos(string buscarPor, object nombre, int idEstadoEmpleado,string cadSectores, Data.dsEmpleado ds)
+        public static void ObtenerTodos(object buscarPor, object nombre, object codEstado, object codSector, Data.dsEmpleado ds)
         {
-            DAL.EmpleadoDAL.ObtenerEmpleado(buscarPor, nombre, idEstadoEmpleado, cadSectores, ds);
+            object estado = null, sector = null;
+            if (codEstado != null && Convert.ToInt32(codEstado) > 0) { estado = codEstado; }
+            if (codSector != null && Convert.ToInt32(codSector) > 0) { sector = codSector; }
+            DAL.EmpleadoDAL.ObtenerEmpleado(buscarPor, nombre, estado, sector, ds);
         }
 
         //Eliminacion

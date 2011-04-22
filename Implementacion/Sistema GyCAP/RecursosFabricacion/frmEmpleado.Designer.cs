@@ -33,9 +33,10 @@
             this.gpbLista = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cboSectorBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboBuscarPor = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cboBuscarEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.lvSectores = new System.Windows.Forms.ListView();
-            this.cboBuscarPor = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
@@ -58,6 +59,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.slideControl1 = new SlickInterface.SlideControl();
+            this.slide1 = new SlickInterface.Slide();
+            this.tpAgregarCapacidad = new System.Windows.Forms.TabPage();
+            this.btnHecho = new System.Windows.Forms.Button();
+            this.btnAgregarCapacidad = new System.Windows.Forms.Button();
+            this.dgvListaCapacidadesAgregar = new System.Windows.Forms.DataGridView();
+            this.slide2 = new SlickInterface.Slide();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
@@ -66,13 +74,6 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.slideControl1 = new SlickInterface.SlideControl();
-            this.slide1 = new SlickInterface.Slide();
-            this.tpAgregarCapacidad = new System.Windows.Forms.TabPage();
-            this.slide2 = new SlickInterface.Slide();
-            this.dgvListaCapacidadesAgregar = new System.Windows.Forms.DataGridView();
-            this.btnAgregarCapacidad = new System.Windows.Forms.Button();
-            this.btnHecho = new System.Windows.Forms.Button();
             this.tcABM.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.gpbLista.SuspendLayout();
@@ -82,10 +83,10 @@
             this.gbGuardarCancelar.SuspendLayout();
             this.gbDatos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCapacidades)).BeginInit();
-            this.tsMenu.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.tpAgregarCapacidad.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaCapacidadesAgregar)).BeginInit();
+            this.tsMenu.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcABM
@@ -122,11 +123,11 @@
             // 
             this.gpbLista.Controls.Add(this.dgvLista);
             this.gpbLista.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gpbLista.Location = new System.Drawing.Point(3, 107);
+            this.gpbLista.Location = new System.Drawing.Point(3, 90);
             this.gpbLista.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gpbLista.Name = "gpbLista";
             this.gpbLista.Padding = new System.Windows.Forms.Padding(9);
-            this.gpbLista.Size = new System.Drawing.Size(544, 193);
+            this.gpbLista.Size = new System.Drawing.Size(544, 282);
             this.gpbLista.TabIndex = 1;
             this.gpbLista.TabStop = false;
             this.gpbLista.Text = "Listado";
@@ -135,24 +136,25 @@
             // 
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
-            this.dgvLista.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgvLista.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLista.Location = new System.Drawing.Point(9, 22);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(526, 156);
+            this.dgvLista.Size = new System.Drawing.Size(526, 251);
             this.dgvLista.TabIndex = 1;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
-            this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.cboBuscarEstado);
-            this.groupBox1.Controls.Add(this.lvSectores);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.cboSectorBuscar);
             this.groupBox1.Controls.Add(this.cboBuscarPor);
+            this.groupBox1.Controls.Add(this.cboBuscarEstado);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.txtNombreBuscar);
@@ -162,48 +164,55 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(544, 105);
+            this.groupBox1.Size = new System.Drawing.Size(544, 88);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
-            // cboBuscarEstado
+            // label8
             // 
-            this.cboBuscarEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboBuscarEstado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboBuscarEstado.FormattingEnabled = true;
-            this.cboBuscarEstado.Location = new System.Drawing.Point(222, 45);
-            this.cboBuscarEstado.Name = "cboBuscarEstado";
-            this.cboBuscarEstado.Size = new System.Drawing.Size(85, 21);
-            this.cboBuscarEstado.TabIndex = 2;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(240, 55);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(42, 13);
+            this.label8.TabIndex = 8;
+            this.label8.Text = "Sector:";
             // 
-            // lvSectores
+            // cboSectorBuscar
             // 
-            this.lvSectores.CheckBoxes = true;
-            this.lvSectores.FullRowSelect = true;
-            this.lvSectores.GridLines = true;
-            this.lvSectores.Location = new System.Drawing.Point(6, 17);
-            this.lvSectores.MultiSelect = false;
-            this.lvSectores.Name = "lvSectores";
-            this.lvSectores.Size = new System.Drawing.Size(138, 76);
-            this.lvSectores.TabIndex = 1;
-            this.lvSectores.UseCompatibleStateImageBehavior = false;
-            this.lvSectores.View = System.Windows.Forms.View.Details;
+            this.cboSectorBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSectorBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboSectorBuscar.FormattingEnabled = true;
+            this.cboSectorBuscar.Location = new System.Drawing.Point(288, 52);
+            this.cboSectorBuscar.Name = "cboSectorBuscar";
+            this.cboSectorBuscar.Size = new System.Drawing.Size(121, 21);
+            this.cboSectorBuscar.TabIndex = 7;
             // 
             // cboBuscarPor
             // 
             this.cboBuscarPor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboBuscarPor.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboBuscarPor.FormattingEnabled = true;
-            this.cboBuscarPor.Location = new System.Drawing.Point(222, 72);
-            this.cboBuscarPor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboBuscarPor.Location = new System.Drawing.Point(86, 23);
             this.cboBuscarPor.Name = "cboBuscarPor";
-            this.cboBuscarPor.Size = new System.Drawing.Size(85, 21);
-            this.cboBuscarPor.TabIndex = 3;
+            this.cboBuscarPor.Size = new System.Drawing.Size(148, 21);
+            this.cboBuscarPor.TabIndex = 6;
+            // 
+            // cboBuscarEstado
+            // 
+            this.cboBuscarEstado.CausesValidation = false;
+            this.cboBuscarEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboBuscarEstado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboBuscarEstado.FormattingEnabled = true;
+            this.cboBuscarEstado.Location = new System.Drawing.Point(86, 52);
+            this.cboBuscarEstado.Name = "cboBuscarEstado";
+            this.cboBuscarEstado.Size = new System.Drawing.Size(148, 21);
+            this.cboBuscarEstado.TabIndex = 2;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(159, 48);
+            this.label4.Location = new System.Drawing.Point(18, 55);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 3;
@@ -213,7 +222,7 @@
             // 
             this.btnBuscar.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(460, 68);
+            this.btnBuscar.Location = new System.Drawing.Point(453, 36);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
@@ -225,16 +234,18 @@
             // 
             // txtNombreBuscar
             // 
-            this.txtNombreBuscar.Location = new System.Drawing.Point(313, 72);
+            this.txtNombreBuscar.CausesValidation = false;
+            this.txtNombreBuscar.Location = new System.Drawing.Point(240, 23);
             this.txtNombreBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNombreBuscar.Name = "txtNombreBuscar";
-            this.txtNombreBuscar.Size = new System.Drawing.Size(126, 20);
+            this.txtNombreBuscar.Size = new System.Drawing.Size(169, 20);
             this.txtNombreBuscar.TabIndex = 4;
+            this.txtNombreBuscar.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(159, 75);
+            this.label1.Location = new System.Drawing.Point(18, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 1;
@@ -343,7 +354,7 @@
             this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboEstado.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboEstado.FormattingEnabled = true;
-            this.cboEstado.Location = new System.Drawing.Point(83, 95);
+            this.cboEstado.Location = new System.Drawing.Point(337, 56);
             this.cboEstado.Name = "cboEstado";
             this.cboEstado.Size = new System.Drawing.Size(146, 21);
             this.cboEstado.TabIndex = 12;
@@ -360,7 +371,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(17, 98);
+            this.label6.Location = new System.Drawing.Point(266, 60);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 13);
             this.label6.TabIndex = 18;
@@ -373,7 +384,7 @@
             this.txtLegajo.Name = "txtLegajo";
             this.txtLegajo.Size = new System.Drawing.Size(146, 20);
             this.txtLegajo.TabIndex = 6;
-            this.txtLegajo.Enter += new System.EventHandler(this.txtLegajo_Enter);
+            this.txtLegajo.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label9
             // 
@@ -395,17 +406,17 @@
             // 
             // txtApellido
             // 
-            this.txtApellido.Location = new System.Drawing.Point(320, 57);
+            this.txtApellido.Location = new System.Drawing.Point(83, 85);
             this.txtApellido.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(146, 20);
             this.txtApellido.TabIndex = 7;
-            this.txtApellido.Enter += new System.EventHandler(this.txtApellido_Enter);
+            this.txtApellido.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(266, 60);
+            this.label2.Location = new System.Drawing.Point(13, 90);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 13);
             this.label2.TabIndex = 10;
@@ -427,7 +438,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(146, 20);
             this.txtNombre.TabIndex = 8;
-            this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
+            this.txtNombre.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label3
             // 
@@ -437,6 +448,72 @@
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "Nombre:";
+            // 
+            // slideControl1
+            // 
+            this.slideControl1.Location = new System.Drawing.Point(3, 18);
+            this.slideControl1.Name = "slideControl1";
+            this.slideControl1.Selected = null;
+            this.slideControl1.Size = new System.Drawing.Size(532, 150);
+            this.slideControl1.SlideSpeed = 250;
+            this.slideControl1.TabIndex = 20;
+            // 
+            // slide1
+            // 
+            this.slide1.Location = new System.Drawing.Point(6, 18);
+            this.slide1.Name = "slide1";
+            this.slide1.Size = new System.Drawing.Size(532, 150);
+            this.slide1.SlideControl = null;
+            this.slide1.TabIndex = 21;
+            // 
+            // tpAgregarCapacidad
+            // 
+            this.tpAgregarCapacidad.Controls.Add(this.btnHecho);
+            this.tpAgregarCapacidad.Controls.Add(this.btnAgregarCapacidad);
+            this.tpAgregarCapacidad.Controls.Add(this.dgvListaCapacidadesAgregar);
+            this.tpAgregarCapacidad.Controls.Add(this.slide2);
+            this.tpAgregarCapacidad.Location = new System.Drawing.Point(4, 5);
+            this.tpAgregarCapacidad.Name = "tpAgregarCapacidad";
+            this.tpAgregarCapacidad.Size = new System.Drawing.Size(550, 377);
+            this.tpAgregarCapacidad.TabIndex = 2;
+            this.tpAgregarCapacidad.UseVisualStyleBackColor = true;
+            // 
+            // btnHecho
+            // 
+            this.btnHecho.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnHecho.Location = new System.Drawing.Point(439, 76);
+            this.btnHecho.Name = "btnHecho";
+            this.btnHecho.Size = new System.Drawing.Size(75, 23);
+            this.btnHecho.TabIndex = 3;
+            this.btnHecho.Text = "Finalizar";
+            this.btnHecho.UseVisualStyleBackColor = true;
+            // 
+            // btnAgregarCapacidad
+            // 
+            this.btnAgregarCapacidad.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAgregarCapacidad.Location = new System.Drawing.Point(439, 31);
+            this.btnAgregarCapacidad.Name = "btnAgregarCapacidad";
+            this.btnAgregarCapacidad.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregarCapacidad.TabIndex = 2;
+            this.btnAgregarCapacidad.Text = "Agregar";
+            this.btnAgregarCapacidad.UseVisualStyleBackColor = true;
+            // 
+            // dgvListaCapacidadesAgregar
+            // 
+            this.dgvListaCapacidadesAgregar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListaCapacidadesAgregar.Location = new System.Drawing.Point(16, 3);
+            this.dgvListaCapacidadesAgregar.Name = "dgvListaCapacidadesAgregar";
+            this.dgvListaCapacidadesAgregar.Size = new System.Drawing.Size(398, 150);
+            this.dgvListaCapacidadesAgregar.TabIndex = 1;
+            this.dgvListaCapacidadesAgregar.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvListaCapacidadesAgregar_CellFormatting);
+            // 
+            // slide2
+            // 
+            this.slide2.Location = new System.Drawing.Point(6, 3);
+            this.slide2.Name = "slide2";
+            this.slide2.Size = new System.Drawing.Size(538, 150);
+            this.slide2.SlideControl = null;
+            this.slide2.TabIndex = 0;
             // 
             // toolStripSeparator1
             // 
@@ -538,71 +615,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(562, 442);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
-            // slideControl1
-            // 
-            this.slideControl1.Location = new System.Drawing.Point(3, 18);
-            this.slideControl1.Name = "slideControl1";
-            this.slideControl1.Selected = null;
-            this.slideControl1.Size = new System.Drawing.Size(532, 150);
-            this.slideControl1.SlideSpeed = 250;
-            this.slideControl1.TabIndex = 20;
-            // 
-            // slide1
-            // 
-            this.slide1.Location = new System.Drawing.Point(6, 18);
-            this.slide1.Name = "slide1";
-            this.slide1.Size = new System.Drawing.Size(532, 150);
-            this.slide1.SlideControl = null;
-            this.slide1.TabIndex = 21;
-            // 
-            // tpAgregarCapacidad
-            // 
-            this.tpAgregarCapacidad.Controls.Add(this.btnHecho);
-            this.tpAgregarCapacidad.Controls.Add(this.btnAgregarCapacidad);
-            this.tpAgregarCapacidad.Controls.Add(this.dgvListaCapacidadesAgregar);
-            this.tpAgregarCapacidad.Controls.Add(this.slide2);
-            this.tpAgregarCapacidad.Location = new System.Drawing.Point(4, 5);
-            this.tpAgregarCapacidad.Name = "tpAgregarCapacidad";
-            this.tpAgregarCapacidad.Size = new System.Drawing.Size(550, 377);
-            this.tpAgregarCapacidad.TabIndex = 2;
-            this.tpAgregarCapacidad.UseVisualStyleBackColor = true;
-            // 
-            // slide2
-            // 
-            this.slide2.Location = new System.Drawing.Point(6, 3);
-            this.slide2.Name = "slide2";
-            this.slide2.Size = new System.Drawing.Size(538, 150);
-            this.slide2.SlideControl = null;
-            this.slide2.TabIndex = 0;
-            // 
-            // dgvListaCapacidadesAgregar
-            // 
-            this.dgvListaCapacidadesAgregar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvListaCapacidadesAgregar.Location = new System.Drawing.Point(16, 3);
-            this.dgvListaCapacidadesAgregar.Name = "dgvListaCapacidadesAgregar";
-            this.dgvListaCapacidadesAgregar.Size = new System.Drawing.Size(398, 150);
-            this.dgvListaCapacidadesAgregar.TabIndex = 1;
-            // 
-            // btnAgregarCapacidad
-            // 
-            this.btnAgregarCapacidad.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAgregarCapacidad.Location = new System.Drawing.Point(439, 31);
-            this.btnAgregarCapacidad.Name = "btnAgregarCapacidad";
-            this.btnAgregarCapacidad.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregarCapacidad.TabIndex = 2;
-            this.btnAgregarCapacidad.Text = "Agregar";
-            this.btnAgregarCapacidad.UseVisualStyleBackColor = true;
-            // 
-            // btnHecho
-            // 
-            this.btnHecho.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnHecho.Location = new System.Drawing.Point(439, 76);
-            this.btnHecho.Name = "btnHecho";
-            this.btnHecho.Size = new System.Drawing.Size(75, 23);
-            this.btnHecho.TabIndex = 3;
-            this.btnHecho.Text = "Finalizar";
-            this.btnHecho.UseVisualStyleBackColor = true;
-            // 
             // frmEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -618,8 +630,6 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Empleados";
-            this.Load += new System.EventHandler(this.frmEmpleado_Load);
-            this.Activated += new System.EventHandler(this.frmEmpleado_Activated);
             this.tcABM.ResumeLayout(false);
             this.tpBuscar.ResumeLayout(false);
             this.gpbLista.ResumeLayout(false);
@@ -631,12 +641,12 @@
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCapacidades)).EndInit();
+            this.tpAgregarCapacidad.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListaCapacidadesAgregar)).EndInit();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.tpAgregarCapacidad.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvListaCapacidadesAgregar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -667,14 +677,12 @@
         private System.Windows.Forms.ToolStripButton btnConsultar;
         private System.Windows.Forms.ToolStripButton btnModificar;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ComboBox cboBuscarPor;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtLegajo;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ListView lvSectores;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboBuscarEstado;
         private System.Windows.Forms.DataGridView dgvLista;
         private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha sfFechaNac;
@@ -688,5 +696,8 @@
         private System.Windows.Forms.Button btnAgregarCapacidad;
         private System.Windows.Forms.DataGridView dgvListaCapacidadesAgregar;
         private SlickInterface.Slide slide2;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboBuscarPor;
+        private System.Windows.Forms.Label label8;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboSectorBuscar;
     }
 }
