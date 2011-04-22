@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades.Mensajes;
 
 namespace GyCAP.UI.RecursosFabricacion
 {
@@ -20,10 +21,155 @@ namespace GyCAP.UI.RecursosFabricacion
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
 
+        #region Inicio
+
         public frmEmpleado()
         {
             InitializeComponent();
 
+            InicializarDatos();            
+
+            //Seteamos el estado de la interfaz
+            SetInterface(estadoUI.inicio);
+        }        
+
+        public void SetEstadoInicial(int estado)
+        {
+            if (estado == estadoInicialNuevo) { SetInterface(estadoUI.nuevoExterno); }
+            if (estado == estadoInicialConsultar) { SetInterface(estadoUI.inicio); }
+        }
+
+        #endregion
+
+        #region Servicios
+
+        //Setea la pantalla de acuerdo al estado en que se encuentre
+        private void SetInterface(estadoUI estado)
+        {
+            switch (estado)
+            {
+                case estadoUI.inicio:
+                    bool hayDatos;
+
+                    if (dsEmpleado.EMPLEADOS.Rows.Count == 0)
+                    {
+                        hayDatos = false;
+                        btnBuscar.Focus();
+                    }
+                    else
+                    {
+                        hayDatos = true;
+                        dgvLista.Focus();
+                    }
+
+                    btnModificar.Enabled = hayDatos;
+                    btnEliminar.Enabled = hayDatos;
+                    btnConsultar.Enabled = hayDatos;
+                    btnNuevo.Enabled = true;
+                    estadoInterface = estadoUI.inicio;
+                    tcABM.SelectedTab = tpBuscar;
+                    break;
+                case estadoUI.nuevo:
+                    setControles(false);
+                    txtNombre.Text = string.Empty;
+                    txtApellido.Text = string.Empty;
+                    txtLegajo.Text = string.Empty;
+                    sfFechaNac.SetFechaNull();
+                    cboEstado.SelectedIndex = -1;
+                    cboSector.SelectedIndex = -1;
+                    
+                    //gbGuardarCancelar.Enabled = true;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = true;
+                    btnNuevo.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    estadoInterface = estadoUI.nuevo;
+                    tcABM.SelectedTab = tpDatos;
+                    txtLegajo.Focus();
+                    break;
+                case estadoUI.nuevoExterno:
+                    setControles(false);
+                    txtNombre.Text = string.Empty;
+                    txtApellido.Text = string.Empty;
+                    txtLegajo.Text = string.Empty;
+                    sfFechaNac.SetFechaNull();
+                    cboEstado.SelectedIndex = -1;
+                    cboSector.SelectedIndex = -1;
+
+                    //gbGuardarCancelar.Enabled = true;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = false;
+                    btnNuevo.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    estadoInterface = estadoUI.nuevoExterno;
+                    tcABM.SelectedTab = tpDatos;
+                    txtLegajo.Focus();
+                    break;
+                case estadoUI.consultar:
+                    setControles(true);
+                    //gbGuardarCancelar.Enabled = false;
+                    btnGuardar.Enabled = false;
+                    btnVolver.Enabled = true;
+                    estadoInterface = estadoUI.consultar;
+                    tcABM.SelectedTab = tpDatos;
+                    btnVolver.Focus();
+                    break;
+                case estadoUI.modificar:
+                    setControles(false);
+                    //gbGuardarCancelar.Enabled = true;
+                    btnGuardar.Enabled = true;
+                    btnVolver.Enabled = true;
+                    btnNuevo.Enabled = false;
+                    btnConsultar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    estadoInterface = estadoUI.modificar;
+                    tcABM.SelectedTab = tpDatos;
+                    txtLegajo.Focus();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void setControles(bool pValue) 
+        {
+            txtApellido.ReadOnly = pValue;
+            txtNombre.ReadOnly = pValue;
+            sfFechaNac.Enabled = !pValue;
+            //txtFechaNac.ReadOnly = pValue;
+            txtLegajo.ReadOnly = pValue;
+            cboEstado.Enabled = !pValue;
+            cboSector.Enabled = !pValue;
+        }
+
+        //Método para evitar la creación de más de una pantalla
+        public static frmEmpleado Instancia
+        {
+            get
+            {
+                if (_frmEmpleado == null || _frmEmpleado.IsDisposed)
+                {
+                    _frmEmpleado = new frmEmpleado();
+                }
+                else
+                {
+                    _frmEmpleado.BringToFront();
+                }
+                return _frmEmpleado;
+            }
+            set
+            {
+                _frmEmpleado = value;
+            }
+        }
+
+        private void InicializarDatos()
+        {
             //Setea el nombre de la Lista
             gpbLista.Text = "Listado de " + this.Text;
 
@@ -57,35 +203,23 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvLista.Columns["E_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvLista.Columns["E_CODIGO"].Visible = false;
 
-            ////Agregamos las columnas
-            //ColumnasGrillas columnas = new ColumnasGrillas();
-
-            //columnas.Add("E_CODIGO", "Código",true);
-            //columnas.Add("E_LEGAJO", "Legajo");
-            //columnas.Add("E_APELLIDO", "Apellido");
-            //columnas.Add("E_NOMBRE", "Nombre");
-            //columnas.Add("SEC_CODIGO", "Sector");
-            //columnas.Add("EE_CODIGO", "Estado");
-
-            //dgvLista.Columnas = columnas;
-
             //Creamos el dataview y lo asignamos a la grilla
             dvEmpleado = new DataView(dsEmpleado.EMPLEADOS);
             dvEmpleado.Sort = "E_APELLIDO, E_NOMBRE ASC";
             dgvLista.DataSource = dvEmpleado;
 
-            //Llena el Dataset con los estados
-            BLL.EstadoEmpleadoBLL.ObtenerTodos(dsEmpleado);
-
-            //Llena el Dataset con los Sectores
-            BLL.SectorBLL.ObtenerTodos(dsEmpleado.SECTORES);
-
-            ////Llena el Dataset con las Capacidades
-            //BLL.SectorBLL.ObtenerTodos(dsEmpleado);
+            try
+            {
+                //Llena el Dataset con los estados, sectores y capacidades
+                BLL.EstadoEmpleadoBLL.ObtenerTodos(dsEmpleado);
+                BLL.SectorBLL.ObtenerTodos(dsEmpleado.SECTORES);
+                BLL.CapacidadEmpleadoBLL.ObtenerTodos(dsEmpleado.CAPACIDAD_EMPLEADOS);
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex) { MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio); }
 
             //Carga de la Lista de Sectores
             dvListaSectores = new DataView(dsEmpleado.SECTORES);
-      
+
             lvSectores.View = View.Details;
             lvSectores.FullRowSelect = true;
             lvSectores.MultiSelect = false;
@@ -104,24 +238,6 @@ namespace GyCAP.UI.RecursosFabricacion
                 }
             }
 
-
-            ////Para que no genere las columnas automáticamente
-            //dgvCapacidades.AutoGenerateColumns = false;
-            ////Agregamos las columnas
-            //dgvCapacidades.Columns.Add("CEMP_CODIGO", "Código");
-            //dgvCapacidades.Columns.Add("CEMP_NOMBRE", "Capacidades del empleado");
-
-            ////Seteamos el modo de tamaño de las columnas
-            //dgvCapacidades.Columns["CEMP_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            //dgvCapacidades.Columns["CEMP_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-            ////Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            //dgvCapacidades.Columns["CEMP_CODIGO"].DataPropertyName = "E_CODIGO";
-            //dgvCapacidades.Columns["CEMP_NOMBRE"].DataPropertyName = "E_NOMBRE";
-
-            ////Alineacion de los numeros y las fechas en la grilla
-            //dgvCapacidades.Columns["CEMP_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            //dgvCapacidades.Columns["CEMP_CODIGO"].Visible = false;
             //Para que no genere las columnas automáticamente
             dgvCapacidades.AutoGenerateColumns = false;
             //Agregamos las columnas
@@ -144,7 +260,7 @@ namespace GyCAP.UI.RecursosFabricacion
             //CARGA DE COMBOS
             //Creamos el Dataview y se lo asignamos al combo
             dvEstadoEmpleadoBuscar = new DataView(dsEmpleado.ESTADO_EMPLEADOS);
-            cboBuscarEstado.SetDatos(dvEstadoEmpleadoBuscar, "ee_codigo", "ee_nombre", "-- TODOS --",true);
+            cboBuscarEstado.SetDatos(dvEstadoEmpleadoBuscar, "ee_codigo", "ee_nombre", "-- TODOS --", true);
 
             cboBuscarPor.Items.Add("Legajo");
             cboBuscarPor.Items.Add("Nombre");
@@ -174,160 +290,17 @@ namespace GyCAP.UI.RecursosFabricacion
             txtApellido.MaxLength = 80;
             txtNombre.MaxLength = 80;
             txtLegajo.MaxLength = 20;
-            txtTelefono.MaxLength = 15;            
-
-            //Seteamos el estado de la interfaz
-            SetInterface(estadoUI.inicio);
-        }
-
-        public void SetEstadoInicial(int estado)
-        {
-            if (estado == estadoInicialNuevo) { SetInterface(estadoUI.nuevoExterno); }
-            if (estado == estadoInicialConsultar) { SetInterface(estadoUI.inicio); }
-        }
-
-        #region Servicios
-
-        //Setea la pantalla de acuerdo al estado en que se encuentre
-        private void SetInterface(estadoUI estado)
-        {
-            switch (estado)
-            {
-                case estadoUI.inicio:
-                    bool hayDatos;
-
-                    if (dsEmpleado.EMPLEADOS.Rows.Count == 0)
-                    {
-                        hayDatos = false;
-                        btnBuscar.Focus();
-                    }
-                    else
-                    {
-                        hayDatos = true;
-                        dgvLista.Focus();
-                    }
-
-                    btnModificar.Enabled = hayDatos;
-                    btnEliminar.Enabled = hayDatos;
-                    btnConsultar.Enabled = hayDatos;
-                    btnAsignarCapacidad.Enabled = hayDatos; 
-                    btnNuevo.Enabled = true;
-                    estadoInterface = estadoUI.inicio;
-                    tcABM.SelectedTab = tpBuscar;
-                    break;
-                case estadoUI.nuevo:
-                    setControles(false);
-                    txtNombre.Text = string.Empty;
-                    txtApellido.Text = string.Empty;
-                    txtLegajo.Text = string.Empty;
-                    txtTelefono.Text = string.Empty;
-                    sfFechaNac.SetFechaNull();
-                    cboEstado.SelectedIndex = -1;
-                    cboSector.SelectedIndex = -1;
-                    
-                    //gbGuardarCancelar.Enabled = true;
-                    btnGuardar.Enabled = true;
-                    btnVolver.Enabled = true;
-                    btnNuevo.Enabled = false;
-                    btnConsultar.Enabled = false;
-                    btnModificar.Enabled = false;
-                    btnEliminar.Enabled = false;
-                    btnAsignarCapacidad.Enabled = false;
-                    estadoInterface = estadoUI.nuevo;
-                    tcABM.SelectedTab = tpDatos;
-                    txtLegajo.Focus();
-                    break;
-                case estadoUI.nuevoExterno:
-                    setControles(false);
-                    txtNombre.Text = string.Empty;
-                    txtApellido.Text = string.Empty;
-                    txtLegajo.Text = string.Empty;
-                    txtTelefono.Text = string.Empty;
-                    sfFechaNac.SetFechaNull();
-                    cboEstado.SelectedIndex = -1;
-                    cboSector.SelectedIndex = -1;
-
-                    //gbGuardarCancelar.Enabled = true;
-                    btnGuardar.Enabled = true;
-                    btnVolver.Enabled = false;
-                    btnNuevo.Enabled = false;
-                    btnConsultar.Enabled = false;
-                    btnModificar.Enabled = false;
-                    btnEliminar.Enabled = false;
-                    btnAsignarCapacidad.Enabled = false;
-                    estadoInterface = estadoUI.nuevoExterno;
-                    tcABM.SelectedTab = tpDatos;
-                    txtLegajo.Focus();
-                    break;
-                case estadoUI.consultar:
-                    setControles(true);
-                    //gbGuardarCancelar.Enabled = false;
-                    btnGuardar.Enabled = false;
-                    btnVolver.Enabled = true;
-                    estadoInterface = estadoUI.consultar;
-                    tcABM.SelectedTab = tpDatos;
-                    btnVolver.Focus();
-                    break;
-                case estadoUI.modificar:
-                    setControles(false);
-                    //gbGuardarCancelar.Enabled = true;
-                    btnGuardar.Enabled = true;
-                    btnVolver.Enabled = true;
-                    btnNuevo.Enabled = false;
-                    btnConsultar.Enabled = false;
-                    btnModificar.Enabled = false;
-                    btnEliminar.Enabled = false;
-                    btnAsignarCapacidad.Enabled = false;
-                    estadoInterface = estadoUI.modificar;
-                    tcABM.SelectedTab = tpDatos;
-                    txtLegajo.Focus();
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void setControles(bool pValue) 
-        {
-            txtApellido.ReadOnly = pValue;
-            txtNombre.ReadOnly = pValue;
-            sfFechaNac.Enabled = !pValue;
-            //txtFechaNac.ReadOnly = pValue;
-            txtLegajo.ReadOnly = pValue;
-            txtTelefono.ReadOnly = pValue;
-            cboEstado.Enabled = !pValue;
-            cboSector.Enabled = !pValue;
-        }
-
-        //Método para evitar la creación de más de una pantalla
-        public static frmEmpleado Instancia
-        {
-            get
-            {
-                if (_frmEmpleado == null || _frmEmpleado.IsDisposed)
-                {
-                    _frmEmpleado = new frmEmpleado();
-                }
-                else
-                {
-                    _frmEmpleado.BringToFront();
-                }
-                return _frmEmpleado;
-            }
-            set
-            {
-                _frmEmpleado = value;
-            }
         }
 
         #endregion
+
+        #region Botones menu
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             SetInterface(estadoUI.nuevo);
             dvCapacidadEmpleado = new DataView();
-            dgvCapacidades.DataSource = dvCapacidadEmpleado;
-            
+            dgvCapacidades.DataSource = dvCapacidadEmpleado;            
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)
@@ -364,7 +337,6 @@ namespace GyCAP.UI.RecursosFabricacion
                     empleado.FechaNacimiento = DateTime.Parse(sfFechaNac.GetFecha().ToString()); //DateTime.Parse("03/11/1980");
                     empleado.Legajo = txtLegajo.Text.Trim();
                     empleado.Nombre = txtNombre.Text.Trim();
-                    empleado.Telefono = txtTelefono.Text.Trim();
                     empleado.FechaAlta = BLL.DBBLL.GetFechaServidor();
 
                     //Creo el objeto Sector y despues lo asigno
@@ -402,7 +374,6 @@ namespace GyCAP.UI.RecursosFabricacion
                             rowEmpleado.E_FECHANACIMIENTO = DateTime.Parse(empleado.FechaNacimiento.ToString());
                         }
                         rowEmpleado.E_LEGAJO = empleado.Legajo;
-                        rowEmpleado.E_TELEFONO = empleado.Telefono;
                         rowEmpleado.SEC_CODIGO = empleado.Sector.Codigo;
                         rowEmpleado.EE_CODIGO = empleado.Estado.Codigo;
                         rowEmpleado.E_FECHA_ALTA = empleado.FechaAlta;
@@ -448,8 +419,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     empleado.FechaNacimiento = DateTime.Parse("03/11/1980");
                     empleado.Legajo = txtLegajo.Text.Trim();
                     empleado.Nombre = txtNombre.Text.Trim();
-                    empleado.Telefono = txtTelefono.Text.Trim();
-
+                    
                     //Creo el objeto Sector y despues lo asigno
                     int idSector = Convert.ToInt32(cboSector.SelectedValue);
                     sector.Codigo = Convert.ToInt32(dsEmpleado.SECTORES.FindBySEC_CODIGO(idSector).SEC_CODIGO);
@@ -484,7 +454,6 @@ namespace GyCAP.UI.RecursosFabricacion
                             rowEmpleado.E_FECHANACIMIENTO = DateTime.Parse(empleado.FechaNacimiento.ToString());
                         }
                         rowEmpleado.E_LEGAJO = empleado.Legajo;
-                        rowEmpleado.E_TELEFONO = empleado.Telefono;
                         rowEmpleado.SEC_CODIGO = empleado.Sector.Codigo;
                         rowEmpleado.EE_CODIGO = empleado.Estado.Codigo;
                         //Termina la edición de la fila
@@ -511,6 +480,10 @@ namespace GyCAP.UI.RecursosFabricacion
                 MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        #endregion
+
+        #region Buscar
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -562,10 +535,18 @@ namespace GyCAP.UI.RecursosFabricacion
             }
         }
 
+        #endregion
+
+        #region Datos
+
         private void btnVolver_Click(object sender, EventArgs e)
         {
             SetInterface(estadoUI.inicio);
         }
+
+        #endregion
+
+        #region CellFormatting, RowEnter y control_enter
 
         private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -585,7 +566,6 @@ namespace GyCAP.UI.RecursosFabricacion
                     default:
                         break;
                 }
-
             }
         }
 
@@ -600,7 +580,6 @@ namespace GyCAP.UI.RecursosFabricacion
             txtApellido.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_APELLIDO;
             txtLegajo.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_LEGAJO;
             txtNombre.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_NOMBRE;
-            txtTelefono.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_TELEFONO;
             cboSector.SetSelectedValue(int.Parse(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).SEC_CODIGO.ToString()));
             cboEstado.SetSelectedValue(int.Parse(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).EE_CODIGO.ToString()));
             sfFechaNac.SetFecha(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_FECHANACIMIENTO);
@@ -627,7 +606,7 @@ namespace GyCAP.UI.RecursosFabricacion
                         break;
                 }
             }
-        }
+        }        
 
         private void txtLegajo_Enter(object sender, EventArgs e)
         {
@@ -641,15 +620,10 @@ namespace GyCAP.UI.RecursosFabricacion
 
         private void txtNombre_Enter(object sender, EventArgs e)
         {
-            txtNombre.SelectAll(); 
+            txtNombre.SelectAll();
         }
 
-        private void btnAsignarCapacidad_Click(object sender, EventArgs e)
-        {
-            //GyCAP.UI.RecursosFabricacion.frmRFAsignarCapacidad.Instancia.MdiParent = GyCAP.UI;
-            //GyCAP.UI.RecursosFabricacion.frmRFAsignarCapacidad.Instancia.Show();
-            frmRFAsignarCapacidad.Instancia.Show();
-        }
+        #endregion        
 
         private void frmEmpleado_Activated(object sender, EventArgs e)
         {
