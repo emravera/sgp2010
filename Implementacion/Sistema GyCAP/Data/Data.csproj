@@ -65,10 +65,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsCocina.xsd</DependentUpon>
     </Compile>
-    <Compile Include="dsEmpleado.cs">
-      <DependentUpon>dsEmpleado.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="dsEmpleado.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
