@@ -181,13 +181,34 @@ namespace GyCAP.DAL
         public static void ActualizarCantidadesStock(int numeroUbicacion, decimal cantidadReal, decimal cantidadVirtual, SqlTransaction transaccion)
         {
             string sql = @"UPDATE UBICACIONES_STOCK SET 
-                         ustck_cantidadreal = ustck_cantidadreal + @p0 
-                        ,ustck_cantidadvirtual = ustck_cantidadvirtual + @p1 
+                         ustck_cantidadreal = 
+                                            ( 
+                                              CASE 
+                                                WHEN ((ustck_cantidadreal + @p0) < 0) THEN 0 
+                                                ELSE (ustck_cantidadreal + @p0)
+                                              END
+                                            ) 
+                        ,ustck_cantidadvirtual = 
+                                            ( 
+                                              CASE 
+                                                WHEN ((ustck_cantidadvirtual + @p1) < 0) THEN 0 
+                                                ELSE (ustck_cantidadvirtual + @p1)
+                                              END
+                                            ) 
                         WHERE ustck_numero = @p2";
             
             object[] parametros = { cantidadReal, cantidadVirtual, numeroUbicacion };
 
-            DB.executeNonQuery(sql, parametros, transaccion);
+            if (transaccion != null) { DB.executeNonQuery(sql, parametros, transaccion); }
+            else
+            {
+                try
+                {
+                    DB.executeNonQuery(sql, parametros, null);
+                }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            }
+            
         }
     }
 }

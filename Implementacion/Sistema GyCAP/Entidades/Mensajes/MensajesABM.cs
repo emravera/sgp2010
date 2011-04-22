@@ -43,7 +43,7 @@ namespace GyCAP.Entidades.Mensajes
         //***************************************************************************************
         public enum Operaciones { Inicio, Búsqueda, Eliminación, Guardado, Modificación }
         public enum Generos { Femenino, Masculino }
-        public enum Validaciones { Seleccion, CompletarDatos, SoloEspacios }
+        public enum Validaciones { Seleccion, CompletarDatos, SoloEspacios, Logica }
 
         public static string EscribirValidacion(Validaciones validacion, List<string> datos)
         {
@@ -58,7 +58,7 @@ namespace GyCAP.Entidades.Mensajes
                         lista = lista + "- " + dato + "\n";
                     }
                     
-                    mensaje= mensaje + "\nDebe seleccionar un elemento en las siguientes listas:\n" + lista;
+                    mensaje= mensaje + "\nDebe seleccionar un elemento en las siguientes listas:\n\n" + lista;
                     break;
 
                 case Validaciones.CompletarDatos:
@@ -66,7 +66,7 @@ namespace GyCAP.Entidades.Mensajes
                     {
                         lista = lista + "- " + dato + "\n";
                     }
-                    mensaje = mensaje + "\nLos siguientes datos están vacíos o completados con espacios en blanco:\n" + lista;     
+                    mensaje = mensaje + "\nLos siguientes datos están vacíos o completados con espacios en blanco:\n\n" + lista;     
                     break;
               }
                         
@@ -79,6 +79,7 @@ namespace GyCAP.Entidades.Mensajes
             string listaCompletar = string.Empty;
             string listaSeleccionar = string.Empty;
             string listaEspacios = string.Empty;
+            string listaLogica = string.Empty;
 
             foreach (ItemValidacion item in datos)
             {
@@ -93,12 +94,16 @@ namespace GyCAP.Entidades.Mensajes
                     case Validaciones.SoloEspacios:
                         listaEspacios += "- " + item.Dato + "\n";
                         break;
+                    case Validaciones.Logica:
+                        listaLogica += "- " + item.Dato + "\n";
+                        break;
                 }
             }
             
-            if(!string.IsNullOrEmpty(listaSeleccionar)) { mensaje += "Debe seleccionar un elemento en las siguientes listas:\n" + listaSeleccionar; }
-            if(!string.IsNullOrEmpty(listaCompletar)) { mensaje += "\nLos siguientes datos están vacíos o completados con espacios en blanco:\n" + listaCompletar; }
-            if(!string.IsNullOrEmpty(listaEspacios)) { mensaje += "\nLos siguientes datos están completados con espacios en blanco:\n" + listaEspacios; }
+            if(!string.IsNullOrEmpty(listaSeleccionar)) { mensaje += "\nDebe seleccionar un elemento en las siguientes listas:\n\n" + listaSeleccionar; }
+            if(!string.IsNullOrEmpty(listaCompletar)) { mensaje += "\nLos siguientes datos están vacíos o completados con espacios en blanco:\n\n" + listaCompletar; }
+            if(!string.IsNullOrEmpty(listaEspacios)) { mensaje += "\nLos siguientes datos están completados con espacios en blanco:\n\n" + listaEspacios; }
+            if (!string.IsNullOrEmpty(listaLogica)) { mensaje += "\nVerifique lo siguiente:\n\n" + listaLogica; }
 
             return mensaje;
         }
