@@ -56,7 +56,7 @@ namespace GyCAP.UI.Soporte
 
             //Combos
             cbProvinciaBuscar.SetDatos(dvProvinciasBuscar, "PCIA_CODIGO", "PCIA_NOMBRE", "--TODOS--", true);
-            cbProvincia.SetDatos(dvProvincias, "PCIA_CODIGO", "PCIA_NOMBRE", "Seleccione", false);
+            cbProvincia.SetDatos(dvProvincias, "PCIA_CODIGO", "PCIA_NOMBRE", "Seleccione...", false);
 
             //Definicion de Maxlengh de los controles
             txtNombre.MaxLength = 80;
@@ -97,7 +97,7 @@ namespace GyCAP.UI.Soporte
                     txtNombre.ReadOnly = false;
                     txtNombre.Text = String.Empty;
                     cbProvincia.Enabled = true;
-                    cbProvincia.SetTexto("Seleccione");
+                    cbProvincia.SetTexto("Seleccione...");
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -112,7 +112,7 @@ namespace GyCAP.UI.Soporte
                     txtNombre.ReadOnly = false;
                     txtNombre.Text = String.Empty;
                     cbProvincia.Enabled = true;
-                    cbProvincia.SetTexto("Seleccione");
+                    cbProvincia.SetTexto("Seleccione...");
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
                     btnNuevo.Enabled = false;
