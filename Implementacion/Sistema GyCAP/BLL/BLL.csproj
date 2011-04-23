@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A0EA0794-16BA-4988-BCFF-00204902B7AA}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AveriasBLL.cs" />
     <Compile Include="CapacidadEmpleadoBLL.cs" />
     <Compile Include="CausaFalloBLL.cs" />
     <Compile Include="CentroTrabajoBLL.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="EntregaProductoBLL.cs" />
     <Compile Include="EstadoMovimientoStockBLL.cs" />
     <Compile Include="MovimientoStockBLL.cs" />
+    <Compile Include="NivelCriticidadBLL.cs" />
     <Compile Include="OrdenTrabajoBLL.cs" />
     <Compile Include="DetallePedidoBLL.cs" />
     <Compile Include="DetallePlanAnualBLL.cs" />

@@ -226,6 +226,12 @@ namespace Principal
             GyCAP.UI.GestionStock.frmProveedor.Instancia.Show();
         }
 
+        private void toolAveria_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Mantenimiento.frmAverias.Instancia.MdiParent = this;
+            GyCAP.UI.Mantenimiento.frmAverias.Instancia.Show();
+        }
+
 
     }
 }
