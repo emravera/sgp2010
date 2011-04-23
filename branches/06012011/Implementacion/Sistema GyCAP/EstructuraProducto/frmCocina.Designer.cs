@@ -126,7 +126,7 @@
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(201, 20);
             this.txtCodigo.TabIndex = 7;
-            this.txtCodigo.Enter += new System.EventHandler(this.txtCodigo_Enter);
+            this.txtCodigo.Enter += new System.EventHandler(this.control_Enter);
             // 
             // tsMenu
             // 
@@ -500,7 +500,6 @@
             this.dgvListaCocina.Size = new System.Drawing.Size(561, 261);
             this.dgvListaCocina.TabIndex = 6;
             this.dgvListaCocina.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListaCocina_RowEnter);
-            this.dgvListaCocina.DoubleClick += new System.EventHandler(this.dgvListaCocina_DoubleClick);
             this.dgvListaCocina.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvListaCocina_CellFormatting);
             // 
             // tpBuscar
@@ -614,7 +613,7 @@
             this.txtCodigoBuscar.Name = "txtCodigoBuscar";
             this.txtCodigoBuscar.Size = new System.Drawing.Size(151, 20);
             this.txtCodigoBuscar.TabIndex = 1;
-            this.txtCodigoBuscar.Enter += new System.EventHandler(this.txtCodigoBuscar_Enter);
+            this.txtCodigoBuscar.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label1
             // 

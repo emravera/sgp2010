@@ -115,32 +115,12 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static void ObtenerCapacidadPorEmpleado(int E_CODIGO, Data.dsEmpleado ds)
+        public static void ObtenerCapacidadPorEmpleado(int[] codigosEmpleados, Data.dsEmpleado ds)
         {
-            string sql = @"SELECT CAPACIDAD_EMPLEADOS.CEMP_CODIGO, CEMP_NOMBRE, CEMP_DESCRIPCION
-                           FROM CAPACIDAD_EMPLEADOS,CAPACIDADESXEMPLEADO 
-                           WHERE CAPACIDAD_EMPLEADOS.CEMP_CODIGO = CAPACIDADESXEMPLEADO.CEMP_CODIGO ";
+            string sql = @"SELECT cxe_codigo, e_codigo, cemp_codigo FROM CAPACIDADESXEMPLEADO WHERE e_codigo IN (@p0)";
 
-            if (E_CODIGO != 0)
-            {
-                sql += " AND E_CODIGO = @p0";
-
-                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
-                object[] valorParametros = { E_CODIGO };
-                try
-                {
-                    DB.FillDataSet(ds, "CAPACIDAD_EMPLEADOS", sql, valorParametros);
-                }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-            }
-            else
-            {
-                try
-                {
-                    DB.FillDataSet(ds, "CAPACIDAD_EMPLEADOS", sql, null);
-                }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-            }
+            object[] valorParametros = { codigosEmpleados };
+            DB.FillDataTable(ds.CAPACIDADESXEMPLEADO, sql, valorParametros);           
         }
 
         public static void ObtenerCapacidadPorEmpleado(Data.dsEmpleado ds)
@@ -174,5 +154,29 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+
+        public static void InsertarCapacidadDeEmpleado(Data.dsEmpleado.CAPACIDADESXEMPLEADORow row, SqlTransaction transaccion)
+        {
+            string sql = "INSERT INTO [CAPACIDADESXEMPLEADO] ([e_codigo],[cemp_codigo]) VALUES (@p0, @p1) SELECT @@Identity";
+            object[] parametros = { row.E_CODIGO, row.CEMP_CODIGO };
+            row.BeginEdit();
+            row.CXE_CODIGO = Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion));
+            row.EndEdit();
+        }
+
+        public static void EliminarCapacidadDeEmpleado(int codigo, SqlTransaction transaccion)
+        {
+            string sql = "DELETE FROM CAPACIDADESXEMPLEADO WHERE cxe_codigo = @p0";
+            object[] parametros = { codigo };
+            DB.executeNonQuery(sql, parametros, transaccion);
+        }
+
+        public static void EliminarCapacidadesDeEmpleado(long codigoEmpleado, SqlTransaction transaccion)
+        {
+            string sql = "DELETE FROM CAPACIDADESXEMPLEADO WHERE e_codigo = @p0";
+            object[] parametros = { codigoEmpleado };
+            DB.executeNonQuery(sql, parametros, transaccion);
+        }
+
     }
 }

@@ -36,16 +36,19 @@ namespace GyCAP.BLL
                 //No puede eliminarse, lanzamos nuestra excepción
                 throw new Entidades.Excepciones.ElementoEnTransaccionException();
             }
-
         }
 
         //Guardado de Datos
-        public static int Insertar(Entidades.Empleado empleado)
+        public static int Insertar(Data.dsEmpleado dsEmpleado)
         {
             //Si existe lanzamos la excepción correspondiente
+            Entidades.Empleado empleado = new GyCAP.Entidades.Empleado();
+            Data.dsEmpleado.EMPLEADOSRow row = dsEmpleado.EMPLEADOS.GetChanges(DataRowState.Added).Rows[0] as Data.dsEmpleado.EMPLEADOSRow;
+            empleado.Codigo = Convert.ToInt32(row.E_CODIGO);
+            empleado.Legajo = row.E_LEGAJO;
             if (EsEmpleado(empleado)) throw new Entidades.Excepciones.ElementoExistenteException();
             //Como no existe lo creamos
-            return DAL.EmpleadoDAL.Insertar(empleado);
+            return DAL.EmpleadoDAL.Insertar(dsEmpleado);
         }
 
         //Metodo que valida que no se este guardando algo que ya existe
@@ -54,9 +57,15 @@ namespace GyCAP.BLL
             return DAL.EmpleadoDAL.esEmpleado(empleado);
         }
         //Actualización de los datos
-        public static void Actualizar(Entidades.Empleado empleado)
+        public static void Actualizar(Data.dsEmpleado dsEmpleado)
         {
-            DAL.EmpleadoDAL.Actualizar(empleado);
+            //Si existe lanzamos la excepción correspondiente
+            Entidades.Empleado empleado = new GyCAP.Entidades.Empleado();
+            Data.dsEmpleado.EMPLEADOSRow row = dsEmpleado.EMPLEADOS.GetChanges(DataRowState.Modified).Rows[0] as Data.dsEmpleado.EMPLEADOSRow;
+            empleado.Codigo = Convert.ToInt32(row.E_CODIGO);
+            empleado.Legajo = row.E_LEGAJO;
+            if (EsEmpleado(empleado)) throw new Entidades.Excepciones.ElementoExistenteException();
+            DAL.EmpleadoDAL.Actualizar(dsEmpleado);
         }
 
         /// <summary>

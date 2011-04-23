@@ -7,6 +7,8 @@ namespace GyCAP.BLL
 {
     public class EstadoEmpleadoBLL
     {
+        public static readonly int EstadoDeBaja = 3;
+        
         public static long Insertar(Entidades.EstadoEmpleado estadoEmpleado)
         {
             //Si existe lanzamos la excepción correspondiente

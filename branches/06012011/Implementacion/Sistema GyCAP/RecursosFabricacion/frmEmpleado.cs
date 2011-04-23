@@ -20,17 +20,16 @@ namespace GyCAP.UI.RecursosFabricacion
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
+        private Sistema.ControlesUsuarios.AnimadorFormulario animador = new GyCAP.UI.Sistema.ControlesUsuarios.AnimadorFormulario();
+        int codigoCxE = -1;
 
         #region Inicio
 
         public frmEmpleado()
         {
             InitializeComponent();
-
-            InicializarDatos();            
-
-            //Seteamos el estado de la interfaz
-            SetInterface(estadoUI.inicio);
+            SetSlide();
+            InicializarDatos();
         }
 
         //Método para evitar la creación de más de una pantalla
@@ -88,7 +87,10 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnConsultar.Enabled = hayDatos;
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
+                    slideControl.Selected = slideDatos;
+                    btnZoomOut.PerformClick();
                     tcABM.SelectedTab = tpBuscar;
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
                     txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
@@ -105,12 +107,15 @@ namespace GyCAP.UI.RecursosFabricacion
                     cboEstado.Enabled = true;
                     cboSector.Enabled = true;                    
                     dvCapacidadEmpleado.RowFilter = "E_CODIGO = " + -1;
+                    pbImagen.Image = RecursosFabricacion.Properties.Resources.sinimagen;
+                    btnZoomOut.PerformClick();
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
                     tcABM.SelectedTab = tpDatos;
                     txtLegajo.Focus();
@@ -129,12 +134,15 @@ namespace GyCAP.UI.RecursosFabricacion
                     cboEstado.Enabled = true;
                     cboSector.Enabled = true;
                     dvCapacidadEmpleado.RowFilter = "E_CODIGO = " + -1;
+                    pbImagen.Image = RecursosFabricacion.Properties.Resources.sinimagen;
+                    btnZoomOut.PerformClick();
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
                     tcABM.SelectedTab = tpDatos;
                     txtLegajo.Focus();
@@ -152,7 +160,9 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnEliminar.Enabled = true;
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
+                    panelAcciones.Enabled = false;
                     estadoInterface = estadoUI.consultar;
+                    btnZoomOut.PerformClick();
                     tcABM.SelectedTab = tpDatos;
                     btnVolver.Focus();
                     break;
@@ -169,7 +179,9 @@ namespace GyCAP.UI.RecursosFabricacion
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.modificar;
+                    btnZoomOut.PerformClick();
                     tcABM.SelectedTab = tpDatos;
                     txtLegajo.Focus();
                     break;
@@ -213,19 +225,19 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvCapacidades.AutoGenerateColumns = false;
             dgvCapacidades.Columns.Add("CEMP_CODIGO", "Capacidades del empleado");
             dgvCapacidades.Columns.Add("CEMP_DESCRIPCION", "Descripción");
-            dgvCapacidades.Columns["CEMP_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvCapacidades.Columns["CEMP_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvCapacidades.Columns["CEMP_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCapacidades.Columns["CEMP_DESCRIPCION"].DataPropertyName = "CEMP_DESCRIPCION";
+            dgvCapacidades.Columns["CEMP_DESCRIPCION"].DataPropertyName = "CEMP_CODIGO";
             dgvCapacidades.Columns["CEMP_CODIGO"].DataPropertyName = "CEMP_CODIGO";
             
             //Grilla Capacidades a agregar
             dgvListaCapacidadesAgregar.AutoGenerateColumns = false;
-            dgvListaCapacidadesAgregar.Columns.Add("CEMP_CODIGO", "Capacidad");
+            dgvListaCapacidadesAgregar.Columns.Add("CEMP_NOMBRE", "Nombre");
             dgvListaCapacidadesAgregar.Columns.Add("CEMP_DESCRIPCION", "Descripción");
-            dgvListaCapacidadesAgregar.Columns["CEMP_CODIGO"].DataPropertyName = "CEMP_CODIGO";
+            dgvListaCapacidadesAgregar.Columns["CEMP_NOMBRE"].DataPropertyName = "CEMP_NOMBRE";
             dgvListaCapacidadesAgregar.Columns["CEMP_DESCRIPCION"].DataPropertyName = "CEMP_DESCRIPCION";
-            dgvListaCapacidadesAgregar.Columns["CEMP_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvListaCapacidadesAgregar.Columns["CEMP_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;            
+            dgvListaCapacidadesAgregar.Columns["CEMP_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvListaCapacidadesAgregar.Columns["CEMP_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;          
 
             try
             {
@@ -265,6 +277,12 @@ namespace GyCAP.UI.RecursosFabricacion
             txtApellido.MaxLength = 80;
             txtNombre.MaxLength = 80;
             txtLegajo.MaxLength = 20;
+
+            //Seteos para los controles de la imagen
+            pbImagen.SizeMode = PictureBoxSizeMode.StretchImage;
+            ofdImagen.Filter = "Archivos de imágenes (*.bmp, *.gif , *.jpeg, *.png)|*.bmp;*.gif;*.jpg;*.png|Todos los archivos (*.*)|*.*";
+
+            SetInterface(estadoUI.inicio);
         }
 
         #endregion
@@ -273,94 +291,132 @@ namespace GyCAP.UI.RecursosFabricacion
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.nuevo);
-            dvCapacidadEmpleado = new DataView();
-            dgvCapacidades.DataSource = dvCapacidadEmpleado;            
+            SetInterface(estadoUI.nuevo);           
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.consultar);
+            if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.consultar); }
+            else { MensajesABM.MsjSinSeleccion("Empleado", MensajesABM.Generos.Masculino, this.Text); }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.modificar);
+            if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.modificar); }
+            else { MensajesABM.MsjSinSeleccion("Empleado", MensajesABM.Generos.Masculino, this.Text); }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Dispose(true);
+        }        
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            //Controlamos que esté seleccionado algo
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Preguntamos si está seguro
+                if (MensajesABM.MsjConfirmaEliminarDatos("Empleado", MensajesABM.Generos.Masculino, this.Text) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        //Obtenemos el codigo
+                        long codigo = Convert.ToInt64(dvEmpleado[dgvLista.SelectedRows[0].Index]["e_codigo"]);
+                        //Lo eliminamos de la DB
+                        BLL.EmpleadoBLL.Eliminar(codigo);
+                        //Lo eliminamos de la tabla conjuntos del dataset
+                        dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).Delete();
+                        foreach (Data.dsEmpleado.CAPACIDADESXEMPLEADORow rowCE in (Data.dsEmpleado.CAPACIDADESXEMPLEADORow[])dsEmpleado.CAPACIDADESXEMPLEADO.Select("e_codigo = " + codigo))
+                        {
+                            rowCE.Delete();
+                        }
+                        dsEmpleado.EMPLEADOS.AcceptChanges();
+                        dsEmpleado.CAPACIDADESXEMPLEADO.AcceptChanges();
+                    }
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+                    {
+                        dsEmpleado.EMPLEADOS.RejectChanges();
+                        dsEmpleado.CAPACIDADESXEMPLEADO.RejectChanges();
+                        MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        dsEmpleado.EMPLEADOS.RejectChanges();
+                        dsEmpleado.CAPACIDADESXEMPLEADO.RejectChanges();
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
+                    }
+                }
+            }
+            else
+            {
+                MensajesABM.MsjSinSeleccion("Empleado", MensajesABM.Generos.Masculino, this.Text);
+            }
         }
+
+        #endregion
+
+        #region Buscar
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dsEmpleado.EMPLEADOS.Clear();
+                dsEmpleado.CAPACIDADESXEMPLEADO.Clear();
+                BLL.EmpleadoBLL.ObtenerTodos(cboBuscarPor.GetSelectedValue(), txtNombreBuscar.Text, cboBuscarEstado.GetSelectedValue(), cboSectorBuscar.GetSelectedValue(), dsEmpleado);
+
+                dvEmpleado.Table = dsEmpleado.EMPLEADOS;
+
+                if (dsEmpleado.EMPLEADOS.Rows.Count == 0)
+                {
+                    MensajesABM.MsjBuscarNoEncontrado("Empleados", this.Text);
+                }
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Búsqueda);                
+            }
+            finally { SetInterface(estadoUI.inicio); }
+        }
+
+        #endregion
+
+        #region Datos
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisamos que escribió algo y selecciono algo en el combo
-            if (txtLegajo.Text != String.Empty && txtApellido.Text != String.Empty 
-                && cboSector.SelectedIndex != -1 && cboEstado.SelectedIndex != -1)
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this, GyCAP.UI.Sistema.Validaciones.FormValidator.GrillaOptions.FilaAgregada))
             {
-
-                Entidades.Empleado empleado = new GyCAP.Entidades.Empleado();
-                Entidades.SectorTrabajo sector = new GyCAP.Entidades.SectorTrabajo();
-                Entidades.EstadoEmpleado estadoEmpleado = new GyCAP.Entidades.EstadoEmpleado();
-
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
-                    //Está cargando un nuevo Empleado
-                    empleado.Apellido = txtApellido.Text.Trim();
-                    empleado.FechaNacimiento = DateTime.Parse(sfFechaNac.GetFecha().ToString()); //DateTime.Parse("03/11/1980");
-                    empleado.Legajo = txtLegajo.Text.Trim();
-                    empleado.Nombre = txtNombre.Text.Trim();
-                    empleado.FechaAlta = BLL.DBBLL.GetFechaServidor();
-
-                    //Creo el objeto Sector y despues lo asigno
-                    int idSector = Convert.ToInt32(cboSector.SelectedValue);
-                    sector.Codigo = Convert.ToInt32(dsEmpleado.SECTORES.FindBySEC_CODIGO(idSector).SEC_CODIGO);
-
-                    //Asigno el Sector creado al Empleado 
-                    empleado.Sector = sector;
-
-                    //Creo el objeto Estado y despues lo asigno
-                    int idEstado = Convert.ToInt32(cboEstado.SelectedValue);
-                    estadoEmpleado.Codigo = Convert.ToInt32(dsEmpleado.ESTADO_EMPLEADOS.FindByEE_CODIGO(idEstado).EE_CODIGO);
-
-                    //Asigno el Sector creado al Empleado 
-                    empleado.Estado = estadoEmpleado;
-                    
                     try
-                    {
-                        //Primero lo creamos en la db
-                        empleado.Codigo = BLL.EmpleadoBLL.Insertar(empleado);
-                        //Ahora lo agregamos al dataset
+                    {                        
                         Data.dsEmpleado.EMPLEADOSRow rowEmpleado = dsEmpleado.EMPLEADOS.NewEMPLEADOSRow();
-                        //Indicamos que comienza la edición de la fila
                         rowEmpleado.BeginEdit();
-                        //rowEmpleado.E_CODIGO = empleado.Codigo;
-                        rowEmpleado.E_NOMBRE = empleado.Nombre;
-                        rowEmpleado.E_APELLIDO = empleado.Apellido;
-
-                        if (empleado.FechaNacimiento == null)
-                        {
-                            rowEmpleado.SetE_FECHANACIMIENTONull();
-                        }
-                        else
-                        {
-                            rowEmpleado.E_FECHANACIMIENTO = DateTime.Parse(empleado.FechaNacimiento.ToString());
-                        }
-                        rowEmpleado.E_LEGAJO = empleado.Legajo;
-                        rowEmpleado.SEC_CODIGO = empleado.Sector.Codigo;
-                        rowEmpleado.EE_CODIGO = empleado.Estado.Codigo;
-                        rowEmpleado.E_FECHA_ALTA = empleado.FechaAlta;
-
-                        //Termina la edición de la fila
+                        rowEmpleado.E_CODIGO = -1;
+                        rowEmpleado.E_NOMBRE = txtNombre.Text;
+                        rowEmpleado.E_APELLIDO = txtApellido.Text;
+                        if (sfFechaNac.EsFechaNull()) { rowEmpleado.SetE_FECHANACIMIENTONull(); }
+                        else { rowEmpleado.E_FECHANACIMIENTO = DateTime.Parse(sfFechaNac.GetFecha().ToString()); }
+                        rowEmpleado.E_LEGAJO = txtLegajo.Text;
+                        rowEmpleado.SEC_CODIGO = cboSector.GetSelectedValueInt();
+                        rowEmpleado.EE_CODIGO = cboEstado.GetSelectedValueInt();
+                        if (cboEstado.GetSelectedValueInt() == BLL.EstadoEmpleadoBLL.EstadoDeBaja && rowEmpleado.IsE_FECHA_BAJANull()) { rowEmpleado.E_FECHA_BAJA = BLL.DBBLL.GetFechaServidor(); }
+                        else { rowEmpleado.SetE_FECHA_BAJANull(); }
+                        rowEmpleado.E_FECHA_ALTA = BLL.DBBLL.GetFechaServidor();
+                        rowEmpleado.SetE_FECHA_BAJANull();
                         rowEmpleado.EndEdit();
-                        //Agregamos la fila al dataset y aceptamos los cambios
                         dsEmpleado.EMPLEADOS.AddEMPLEADOSRow(rowEmpleado);
+                        int cod = BLL.EmpleadoBLL.Insertar(dsEmpleado);
+                        rowEmpleado.BeginEdit();
+                        rowEmpleado.E_CODIGO = cod;
+                        rowEmpleado.EndEdit();
                         dsEmpleado.EMPLEADOS.AcceptChanges();
-
-                        //Y por último seteamos el estado de la interfaz
-
+                        dsEmpleado.CAPACIDADESXEMPLEADO.AcceptChanges();
+                        //Falta guardar la foto - gonzalo
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
                         if (estadoInterface == estadoUI.nuevoExterno)
                         {
@@ -376,157 +432,101 @@ namespace GyCAP.UI.RecursosFabricacion
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        dsEmpleado.EMPLEADOS.RejectChanges();
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        dsEmpleado.EMPLEADOS.RejectChanges();
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
                 {
-                    //Está modificando una designacion
-                    //Primero obtenemos su código del dataview que está realacionado a la fila seleccionada                
-                    empleado.Codigo = Convert.ToInt32(dvEmpleado[dgvLista.SelectedRows[0].Index]["e_codigo"]);
-
-                    //Segundo obtenemos los nuevos datos que ingresó el usuario
-                    empleado.Apellido = txtApellido.Text.Trim();
-                    empleado.FechaNacimiento = DateTime.Parse("03/11/1980");
-                    empleado.Legajo = txtLegajo.Text.Trim();
-                    empleado.Nombre = txtNombre.Text.Trim();
-                    
-                    //Creo el objeto Sector y despues lo asigno
-                    int idSector = Convert.ToInt32(cboSector.SelectedValue);
-                    sector.Codigo = Convert.ToInt32(dsEmpleado.SECTORES.FindBySEC_CODIGO(idSector).SEC_CODIGO);
-
-                    //Asigno el Sector creado al Empleado 
-                    empleado.Sector = sector;
-
-                    //Creo el objeto Estado y despues lo asigno
-                    int idEstado = Convert.ToInt32(cboEstado.SelectedValue);
-                    estadoEmpleado.Codigo = Convert.ToInt32(dsEmpleado.ESTADO_EMPLEADOS.FindByEE_CODIGO(idEstado).EE_CODIGO);
-
-                    //Asigno el Sector creado al Empleado 
-                    empleado.Estado = estadoEmpleado;
-
                     try
                     {
+                        //Está modificando una designacion
+                        //Primero obtenemos su código del dataview que está realacionado a la fila seleccionada                
+                        int codigo = Convert.ToInt32(dvEmpleado[dgvLista.SelectedRows[0].Index]["e_codigo"]);
+                        
+                        //Segundo obtenemos los nuevos datos que ingresó el usuario
+                        dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).BeginEdit();
+                        dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).E_APELLIDO = txtApellido.Text.Trim();
+                        if (!sfFechaNac.EsFechaNull()) { dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).E_FECHANACIMIENTO = DateTime.Parse(sfFechaNac.GetFecha().ToString()); }
+                        else { dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).SetE_FECHANACIMIENTONull(); }
+                        dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).E_LEGAJO = txtLegajo.Text.Trim();
+                        dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).E_NOMBRE = txtNombre.Text.Trim();
+                        dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).SEC_CODIGO = cboSector.GetSelectedValueInt();
+                        dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).EE_CODIGO = cboEstado.GetSelectedValueInt();
+                        if (cboEstado.GetSelectedValueInt() != BLL.EstadoEmpleadoBLL.EstadoDeBaja && dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).IsE_FECHA_BAJANull()) { dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).SetE_FECHA_BAJANull(); }
+                        else { dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).E_FECHA_BAJA = BLL.DBBLL.GetFechaServidor(); }
+                        dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).EndEdit();
+
                         //Lo actualizamos en la DB
-                        BLL.EmpleadoBLL.Actualizar(empleado);
-                        //Lo actualizamos en el dataset y aceptamos los cambios
-                        Data.dsEmpleado.EMPLEADOSRow rowEmpleado = dsEmpleado.EMPLEADOS.FindByE_CODIGO(empleado.Codigo);
-                        //Indicamos que comienza la edición de la fila
-                        rowEmpleado.BeginEdit();
-                        //rowEmpleado.E_CODIGO = empleado.Codigo;
-                        rowEmpleado.E_NOMBRE = empleado.Nombre;
-                        rowEmpleado.E_APELLIDO = empleado.Apellido;
-                        if (empleado.FechaNacimiento == null)
-                        {
-                            rowEmpleado.SetE_FECHANACIMIENTONull();
-                        }
-                        else
-                        {
-                            rowEmpleado.E_FECHANACIMIENTO = DateTime.Parse(empleado.FechaNacimiento.ToString());
-                        }
-                        rowEmpleado.E_LEGAJO = empleado.Legajo;
-                        rowEmpleado.SEC_CODIGO = empleado.Sector.Codigo;
-                        rowEmpleado.EE_CODIGO = empleado.Estado.Codigo;
-                        //Termina la edición de la fila
-                        rowEmpleado.EndEdit();
-                        //Agregamos la fila al dataset y aceptamos los cambios
+                        BLL.EmpleadoBLL.Actualizar(dsEmpleado);
+                        MensajesABM.MsjConfirmaGuardar("Empleado", this.Text, MensajesABM.Operaciones.Modificación);
                         dsEmpleado.EMPLEADOS.AcceptChanges();
-                        //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        dsEmpleado.CAPACIDADESXEMPLEADO.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
+                        //Falta guardar la foto - gonzalo
+                    }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        dsEmpleado.EMPLEADOS.RejectChanges();
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        dsEmpleado.EMPLEADOS.RejectChanges();
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                 }
 
                 //recarga de la grilla
                 dgvLista.Refresh();
-
-            }
-            else
-            {
-                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            //Controlamos que esté seleccionado algo
-            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
-            {
-                //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Empleado seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (respuesta == DialogResult.Yes)
-                {
-                    try
-                    {
-                        //Obtenemos el codigo
-                        long codigo = Convert.ToInt64(dvEmpleado[dgvLista.SelectedRows[0].Index]["e_codigo"]);
-                        //Lo eliminamos de la DB
-                        BLL.EmpleadoBLL.Eliminar(codigo);
-                        //Lo eliminamos de la tabla conjuntos del dataset
-                        dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).Delete();
-                        dsEmpleado.EMPLEADOS.AcceptChanges();
-                    }
-                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
-                    {
-                        MessageBox.Show(ex.Message, "Error: Empleado - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    catch (Entidades.Excepciones.BaseDeDatosException ex)
-                    {
-                        MessageBox.Show(ex.Message, "Error: Empleado - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar un Empleado de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        #endregion
-
-        #region Buscar
-
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            try
-            {       
-                dsEmpleado.EMPLEADOS.Clear();
-                dsEmpleado.CAPACIDADESXEMPLEADO.Clear();
-                BLL.EmpleadoBLL.ObtenerTodos(cboBuscarPor.GetSelectedValue(), txtNombreBuscar.Text, cboBuscarEstado.GetSelectedValue(), cboSectorBuscar.GetSelectedValue(), dsEmpleado);
-                BLL.CapacidadEmpleadoBLL.ObtenerCapacidadPorEmpleado(dsEmpleado);
-                
-                dvEmpleado.Table = dsEmpleado.EMPLEADOS;
-
-                if (dsEmpleado.EMPLEADOS.Rows.Count == 0)
-                {
-                    MensajesABM.MsjBuscarNoEncontrado("Empleados", this.Text);
-                }
-                SetInterface(estadoUI.inicio);
-                
-            }
-            catch (Entidades.Excepciones.BaseDeDatosException ex)
-            {
-                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Búsqueda);
-                SetInterface(estadoUI.inicio);
-            }
-        }
-
-        #endregion
-
-        #region Datos
-
+        
         private void btnVolver_Click(object sender, EventArgs e)
         {
+            if (dgvLista.SelectedRows.Count > 0) { dgvLista.SelectedRows[0].Selected = false; }
+            dsEmpleado.EMPLEADOS.RejectChanges();
+            dsEmpleado.CAPACIDADESXEMPLEADO.RejectChanges();
             SetInterface(estadoUI.inicio);
+        }
+
+        #endregion
+
+        #region Agregar capacidad
+
+        private void btnAgregarCapacidad_Click(object sender, EventArgs e)
+        {
+            if (dgvListaCapacidadesAgregar.SelectedRows.Count > 0)
+            {
+                int codigoCapacidad = Convert.ToInt32(dvCapacidadAgregar[dgvListaCapacidadesAgregar.SelectedRows[0].Index]["cemp_codigo"]);
+                int codigoEmpleado = 0;
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { codigoEmpleado = -1; }
+                else { codigoEmpleado = Convert.ToInt32(dvEmpleado[dgvLista.SelectedRows[0].Index]["e_codigo"]); }
+                if (dsEmpleado.CAPACIDADESXEMPLEADO.Select("e_codigo = " + codigoEmpleado + " AND cemp_codigo = " + codigoCapacidad).Count() == 0)
+                {
+                    Data.dsEmpleado.CAPACIDADESXEMPLEADORow row = dsEmpleado.CAPACIDADESXEMPLEADO.NewCAPACIDADESXEMPLEADORow();
+                    row.BeginEdit();
+                    row.CXE_CODIGO = codigoCxE--;
+                    row.E_CODIGO = codigoEmpleado;
+                    row.CEMP_CODIGO = codigoCapacidad;
+                    row.EndEdit();
+                    dsEmpleado.CAPACIDADESXEMPLEADO.AddCAPACIDADESXEMPLEADORow(row);
+                }
+                else { MensajesABM.MsjValidacion("El empleado ya posee la capacidad seleccionada.", this.Text); }
+            }
+            else { MensajesABM.MsjSinSeleccion("Capacidad", MensajesABM.Generos.Femenino, this.Text); }
+        }
+        
+        private void btnHecho_Click(object sender, EventArgs e)
+        {
+            slideControl.BackwardTo("slideDatos");            
+            panelAcciones.Enabled = true;
         }
 
         #endregion
@@ -562,7 +562,8 @@ namespace GyCAP.UI.RecursosFabricacion
             txtNombre.Text = dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_NOMBRE;
             cboSector.SetSelectedValue(int.Parse(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).SEC_CODIGO.ToString()));
             cboEstado.SetSelectedValue(int.Parse(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).EE_CODIGO.ToString()));
-            sfFechaNac.SetFecha(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_FECHANACIMIENTO);
+            if (dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).IsE_FECHANACIMIENTONull()) { sfFechaNac.SetFechaNull(); }
+            else { sfFechaNac.SetFecha(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_FECHANACIMIENTO); }
             dvCapacidadEmpleado.RowFilter = "E_CODIGO = " + codigoEmpleado;
         }
 
@@ -577,6 +578,10 @@ namespace GyCAP.UI.RecursosFabricacion
                         nombre = dsEmpleado.CAPACIDAD_EMPLEADOS.FindByCEMP_CODIGO(Convert.ToInt32(e.Value)).CEMP_NOMBRE;
                         e.Value = nombre;
                         break;
+                    case "CEMP_DESCRIPCION":
+                        nombre = dsEmpleado.CAPACIDAD_EMPLEADOS.FindByCEMP_CODIGO(Convert.ToInt32(e.Value)).CEMP_DESCRIPCION;
+                        e.Value = nombre;
+                        break;
                     default:
                         break;
                 }
@@ -588,25 +593,103 @@ namespace GyCAP.UI.RecursosFabricacion
             if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
         }
 
-        private void dgvListaCapacidadesAgregar_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        #endregion
+
+        #region Foto empleado y Slide
+
+        private void btnZoomIn_Click(object sender, EventArgs e)
         {
-            if (e.Value != null && e.Value.ToString() != String.Empty)
+            Sistema.frmImagenZoom.Instancia.SetImagen(pbImagen.Image, "Foto del empleado");
+            animador.SetFormulario(Sistema.frmImagenZoom.Instancia, this, Sistema.ControlesUsuarios.AnimadorFormulario.animacionDerecha, 300, true);
+            animador.MostrarFormulario();
+        }
+
+        private void btnZoomOut_Click(object sender, EventArgs e)
+        {
+            animador.CerrarFormulario();
+        }
+
+        private void ActualizarImagen()
+        {
+            if (animador.EsVisible())
             {
-                string nombre = string.Empty;
-                switch (dgvListaCapacidadesAgregar.Columns[e.ColumnIndex].Name)
-                {
-                    case "CEMP_CODIGO":
-                        nombre = dsEmpleado.CAPACIDAD_EMPLEADOS.FindByCEMP_CODIGO(Convert.ToInt32(e.Value)).CEMP_NOMBRE;
-                        e.Value = nombre;
-                        break;
-                    default:
-                        break;
-                }
+                (animador.GetForm() as Sistema.frmImagenZoom).SetImagen(pbImagen.Image, "Foto del empleado");
             }
+        }
+
+        private void pbImagen_LoadCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            ActualizarImagen();
+        }
+
+        private void button_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
+                (sender as Button).Location = punto;
+            }
+        }
+
+        private void button_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
+                (sender as Button).Location = punto;
+            }
+        }
+
+        private void btnImagen_Click(object sender, EventArgs e)
+        {
+            ofdImagen.ShowDialog();
+        }
+
+        private void btnQuitar_Click(object sender, EventArgs e)
+        {
+            pbImagen.Image = RecursosFabricacion.Properties.Resources.sinimagen;
+            ActualizarImagen();
+        }
+
+        private void ofdImagen_FileOk(object sender, CancelEventArgs e)
+        {
+            pbImagen.ImageLocation = ofdImagen.FileName;
+        }
+
+        private void btnNewCapacidad_Click(object sender, EventArgs e)
+        {
+            slideControl.ForwardTo("slideAgregar");
+            panelAcciones.Enabled = false;
+        }
+
+        private void btnDeleteCapacidad_Click(object sender, EventArgs e)
+        {
+            if (dgvCapacidades.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Obtenemos el código
+                int codigo = Convert.ToInt32(dvCapacidadEmpleado[dgvCapacidades.SelectedRows[0].Index]["cxe_codigo"]);
+                //Lo borramos pero sólo del dataset
+                dsEmpleado.CAPACIDADESXEMPLEADO.FindByCXE_CODIGO(codigo).Delete();
+            }
+            else
+            {
+                MensajesABM.MsjSinSeleccion("Capacidad", MensajesABM.Generos.Femenino, this.Text);
+            }
+        }
+
+        private void SetSlide()
+        {
+            slideDatos.Parent = slideControl;
+            gbDatos.Parent = slideDatos;
+            gbAgregar.Parent = slideAgregar;
+            slideControl.AddSlide(slideAgregar);
+            slideControl.AddSlide(slideDatos);
+            slideControl.Selected = slideDatos;
         }
 
         #endregion
 
+        
     }
 
 

@@ -60,6 +60,13 @@ namespace GyCAP.UI.RecursosFabricacion.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Abrir_25 {
+            get {
+                object obj = ResourceManager.GetObject("Abrir_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Apply_25 {
             get {
                 object obj = ResourceManager.GetObject("Apply_25", resourceCulture);
@@ -193,6 +200,13 @@ namespace GyCAP.UI.RecursosFabricacion.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap sinimagen {
+            get {
+                object obj = ResourceManager.GetObject("sinimagen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap System_25 {
             get {
                 object obj = ResourceManager.GetObject("System_25", resourceCulture);
@@ -217,6 +231,20 @@ namespace GyCAP.UI.RecursosFabricacion.Properties {
         internal static System.Drawing.Bitmap Warning_25 {
             get {
                 object obj = ResourceManager.GetObject("Warning_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Zoom_In_25 {
+            get {
+                object obj = ResourceManager.GetObject("Zoom_In_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Zoom_Out_25 {
+            get {
+                object obj = ResourceManager.GetObject("Zoom_Out_25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -155,7 +155,6 @@ namespace GyCAP.DAL
 
                 foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuesto in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(null, null, System.Data.DataViewRowState.Deleted))
                 {
-
                     int codCompuesto = Convert.ToInt32(rowCompuesto["comp_codigo", System.Data.DataRowVersion.Original]);
                     CompuestoParteDAL.Eliminar(codCompuesto, transaccion);
                 }
@@ -310,7 +309,7 @@ namespace GyCAP.DAL
 
             try
             {
-                DAL.CompuestoParteDAL.ObtenerCcompuestosPartesEstructura(codigosEstructuras, dsEstructura.COMPUESTOS_PARTES);
+                DAL.CompuestoParteDAL.ObtenerCompuestosPartesEstructura(codigosEstructuras, dsEstructura.COMPUESTOS_PARTES);
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             

@@ -277,7 +277,7 @@ namespace GyCAP.UI.EstructuraProducto
                         dsCocina.COCINAS.AcceptChanges();
                         //Actualizamos la imagen
                         BLL.CocinaBLL.GuardarImagen(cocina.CodigoCocina, pbImagen.Image);
-                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);                        
+                        MensajesABM.MsjConfirmaGuardar("Cocina", this.Text, MensajesABM.Operaciones.Modificación);
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -351,12 +351,12 @@ namespace GyCAP.UI.EstructuraProducto
                     cbEstado.Enabled = true;
                     btnAbrirImagen.Enabled = true;
                     btnQuitarImagen.Enabled = true;                   
-                    cbModelo.SetTexto("Seleccione");
-                    cbMarca.SetTexto("Seleccione");
-                    cbDesignacion.SetTexto("Seleccione");
-                    cbColor.SetTexto("Seleccione");
-                    cbTerminacion.SetTexto("Seleccione");
-                    cbEstado.SetTexto("Seleccione");
+                    cbModelo.SetTexto("Seleccione...");
+                    cbMarca.SetTexto("Seleccione...");
+                    cbDesignacion.SetTexto("Seleccione...");
+                    cbColor.SetTexto("Seleccione...");
+                    cbTerminacion.SetTexto("Seleccione...");
+                    cbEstado.SetTexto("Seleccione...");
                     pbImagen.Image = EstructuraProducto.Properties.Resources.sinimagen;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -509,19 +509,9 @@ namespace GyCAP.UI.EstructuraProducto
             ofdImagen.Filter = "Archivos de imágenes (*.bmp, *.gif , *.jpeg, *.png)|*.bmp;*.gif;*.jpg;*.png|Todos los archivos (*.*)|*.*";
         }
 
-        private void dgvListaCocina_DoubleClick(object sender, EventArgs e)
+        private void control_Enter(object sender, EventArgs e)
         {
-            btnConsultar.PerformClick();
-        }
-
-        private void txtCodigoBuscar_Enter(object sender, EventArgs e)
-        {
-            txtCodigoBuscar.SelectAll();
-        }
-
-        private void txtCodigo_Enter(object sender, EventArgs e)
-        {
-            txtCodigo.SelectAll();
+            if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
         }
 
         private void btnZoomIn_Click(object sender, EventArgs e)
