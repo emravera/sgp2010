@@ -82,7 +82,7 @@ namespace GyCAP.DAL
             DB.FillDataSet(dsEstructura, "COMPUESTOS_PARTE", sql, parametros);
         }
 
-        public static void ObtenerCcompuestosPartesEstructura(int[] codigosEstructura, DataTable dtCompuestosPartes)
+        public static void ObtenerCompuestosPartesEstructura(int[] codigosEstructura, DataTable dtCompuestosPartes)
         {
             string sql = @"SELECT comp_codigo, part_numero_padre, part_numero_hijo, mp_codigo, comp_cantidad, estr_codigo, umed_codigo 
                             FROM COMPUESTOS_PARTES WHERE estr_codigo IN (@p0)";

@@ -16,6 +16,14 @@ namespace GyCAP.DAL
         //BUSQUEDA
         //Metodo sobrecargado (3 Sobrecargas)
         //Busqueda por nombre
+        /// <summary>
+        /// Obtiene todos los empleados que coincidan con los filtros, incluye las capacidades
+        /// </summary>
+        /// <param name="buscarPor"></param>
+        /// <param name="nombre"></param>
+        /// <param name="estado"></param>
+        /// <param name="sector"></param>
+        /// <param name="ds"></param>
         public static void ObtenerEmpleado(object buscarPor, object nombre, object estado, object sector, Data.dsEmpleado ds)
         {
             string sql = @"SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE,
@@ -28,7 +36,7 @@ namespace GyCAP.DAL
             object[] valoresFiltros = new object[3];
             //Empecemos a armar la consulta, revisemos que filtros aplican
             
-            // LEGAJO
+            // LEGAJO, NOMBRE O APELLIDO
             if (nombre != null && nombre.ToString() != string.Empty)
             {
                 if (Convert.ToInt32(buscarPor) == BuscarPorLegajo) { sql += " AND E_LEGAJO LIKE @p" + cantidadParametros; }
@@ -72,6 +80,15 @@ namespace GyCAP.DAL
                     //Buscamos sin filtro
                     DB.FillDataSet(ds, "EMPLEADOS", sql, null);
                 }
+
+                int[] codigos = new int[ds.EMPLEADOS.Count];
+                int fila = 0;
+                foreach (Data.dsEmpleado.EMPLEADOSRow row in ds.EMPLEADOS)
+                {
+                    codigos[fila] = Convert.ToInt32(row.E_CODIGO);
+                    fila++;
+                }
+                DAL.CapacidadEmpleadoDAL.ObtenerCapacidadPorEmpleado(codigos, ds);
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
@@ -80,27 +97,19 @@ namespace GyCAP.DAL
         //Metodo que verifica que no este usado en otro lugar
         public static bool PuedeEliminarse(long codigo)
         {
-            string sqlDPM = "SELECT count(DPMAN_CODIGO) FROM DETALLE_PLANES_MANTENIMIENTO WHERE E_codigo = @p0";
-            string sqlDOT = "SELECT count(MCA_CODIGO) FROM DETALLE_ORDENES_TRABAJO  WHERE E_codigo = @p0";
-            string sqlESTR = "SELECT count(ESTR_CODIGO) FROM ESTRUCTURAS WHERE E_codigo = @p0";
-            string sqlUSU = "SELECT count(U_CODIGO) FROM USUARIOS WHERE E_codigo = @p0";
-            string sqlCXE = "SELECT count(CXE_CODIGO) FROM CAPACIDADESXEMPLEADO WHERE E_codigo = @p0";
-
+            string sqlESTR = "SELECT count(ESTR_CODIGO) FROM ESTRUCTURAS WHERE e_codigo = @p0";
+            string sqlUSU = "SELECT count(U_CODIGO) FROM USUARIOS WHERE e_codigo = @p0";
 
             object[] valorParametros = { codigo };
             try
             {
-                int resultadoDPM = Convert.ToInt32(DB.executeScalar(sqlDPM, valorParametros, null));
-                int resultadoDOT = Convert.ToInt32(DB.executeScalar(sqlDOT, valorParametros, null));
                 int resultadoESTR = Convert.ToInt32(DB.executeScalar(sqlESTR, valorParametros, null));
                 int resultadoUSU = Convert.ToInt32(DB.executeScalar(sqlUSU, valorParametros, null));
-                int resultadoCXE = Convert.ToInt32(DB.executeScalar(sqlCXE, valorParametros, null));
-
-                if (resultadoDPM == 0 && resultadoDOT == 0 && resultadoESTR == 0 
-                    && resultadoUSU == 0 && resultadoCXE == 0) { return true; }
+                
+                if (resultadoESTR == 0 && resultadoUSU == 0) { return true; }
                 else { return false; }
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
         //Metodo que elimina de la base de datos
@@ -108,19 +117,28 @@ namespace GyCAP.DAL
         {
             string sql = "DELETE FROM EMPLEADOS WHERE E_codigo = @p0";
             object[] valorParametros = { codigo };
+            SqlTransaction transaccion = null;
             try
             {
-                DB.executeNonQuery(sql, valorParametros, null);
+                transaccion = DB.IniciarTransaccion();
+                CapacidadEmpleadoDAL.EliminarCapacidadesDeEmpleado(codigo, transaccion);
+                DB.executeNonQuery(sql, valorParametros, transaccion);
+                transaccion.Commit();
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
+            }
+            finally { DB.FinalizarTransaccion(); }
         }
 
         //INSERTAR
         //Metodo que valida que no se intente guardar algo que ya esta en la BD
         public static bool esEmpleado(Entidades.Empleado empleado)
         {
-            string sql = "SELECT count(e_codigo) FROM EMPLEADOS WHERE E_LEGAJO = @p0";
-            object[] valorParametros = { empleado.Legajo };
+            string sql = "SELECT count(e_codigo) FROM EMPLEADOS WHERE E_LEGAJO = @p0 AND e_codigo <> @p1";
+            object[] valorParametros = { empleado.Legajo, empleado.Codigo };
             try
             {
                 if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
@@ -136,41 +154,113 @@ namespace GyCAP.DAL
         }
 
         //Metodo que inserta en la base de datos
-        public static int Insertar(Entidades.Empleado empleado)
+        public static int Insertar(Data.dsEmpleado dsEmpleado)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
-            string sql = @"INSERT INTO [EMPLEADOS] ([EE_CODIGO], [SEC_CODIGO], [E_APELLIDO],
-                           [E_NOMBRE], [E_FECHANACIMIENTO], [E_TELEFONO],
-                           [E_LEGAJO], [E_FECHA_ALTA], [E_FECHA_BAJA]) 
-                          VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8) SELECT @@Identity";
+            string sql = @"INSERT INTO [EMPLEADOS] 
+                          ([EE_CODIGO], 
+                           [SEC_CODIGO], 
+                           [E_APELLIDO],
+                           [E_NOMBRE], 
+                           [E_FECHANACIMIENTO],
+                           [E_LEGAJO],
+                           [E_FECHA_ALTA], 
+                           [E_FECHA_BAJA]) 
+                          VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7) SELECT @@Identity";
 
-            object[] valorParametros = { empleado.Estado.Codigo, empleado.Sector.Codigo, empleado.Apellido, 
-                                         empleado.Nombre, empleado.FechaNacimiento, empleado.Telefono, 
-                                         empleado.Legajo, empleado.FechaAlta, DBNull.Value };
+            Data.dsEmpleado.EMPLEADOSRow row = dsEmpleado.EMPLEADOS.GetChanges(DataRowState.Added).Rows[0] as Data.dsEmpleado.EMPLEADOSRow;
+            object fechaNac = DBNull.Value, fechaBaja = DBNull.Value;
+            if (!row.IsE_FECHANACIMIENTONull()) { fechaNac = row.E_FECHANACIMIENTO.ToShortDateString(); }
+            if (!row.IsE_FECHA_BAJANull()) { fechaBaja = row.E_FECHA_BAJA.ToShortDateString(); }
+            object[] valorParametros = { 
+                                           row.EE_CODIGO,
+                                           row.SEC_CODIGO,
+                                           row.E_APELLIDO,
+                                           row.E_NOMBRE,
+                                           fechaNac,
+                                           row.E_LEGAJO,
+                                           row.E_FECHA_ALTA.ToShortDateString(),
+                                           fechaBaja
+                                       };
+            SqlTransaction transaccion = null;
+
             try
             {
-                return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+                transaccion = DB.IniciarTransaccion();
+                row.BeginEdit();
+                row.E_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParametros, transaccion));
+                row.EndEdit();
+
+                foreach (Data.dsEmpleado.CAPACIDADESXEMPLEADORow rowCxE in (Data.dsEmpleado.CAPACIDADESXEMPLEADORow[])dsEmpleado.CAPACIDADESXEMPLEADO.Select(null, null, DataViewRowState.Added))
+                {
+                    rowCxE.BeginEdit();
+                    rowCxE.E_CODIGO = row.E_CODIGO;
+                    rowCxE.EndEdit();
+                    DAL.CapacidadEmpleadoDAL.InsertarCapacidadDeEmpleado(rowCxE, transaccion);
+                }
+                transaccion.Commit();
+                return Convert.ToInt32(row.E_CODIGO);
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
+            }
+            finally { DB.FinalizarTransaccion(); }
         }
 
         //MODIFICAR 
         //Metodo que modifica en la base de datos
-        public static void Actualizar(Entidades.Empleado empleado)
+        public static void Actualizar(Data.dsEmpleado dsEmpleado)
          {
-            string sql = @"UPDATE EMPLEADOS SET EE_CODIGO = @p1, SEC_CODIGO = @p2, E_APELLIDO = @p3, 
-                           E_NOMBRE = @p4, E_FECHANACIMIENTO = @p5, E_TELEFONO = @p6, E_LEGAJO = @p7
-                          WHERE e_codigo = @p0";
+            string sql = @"UPDATE EMPLEADOS SET 
+                            e_legajo = @p0, 
+                            ee_codigo = @p1, 
+                            sec_codigo = @p2, 
+                            e_apellido = @p3, 
+                            e_nombre = @p4, 
+                            e_fechanacimiento = @p5,
+                            e_fecha_baja = @p6 
+                          WHERE e_codigo = @p7";
 
-            object[] valorParametros = { empleado.Codigo, 
-                                         empleado.Estado.Codigo, empleado.Sector.Codigo, empleado.Apellido, 
-                                         empleado.Nombre, empleado.FechaNacimiento, empleado.Telefono, 
-                                         empleado.Legajo};
+            //Si existe lanzamos la excepción correspondiente
+            Data.dsEmpleado.EMPLEADOSRow row = dsEmpleado.EMPLEADOS.GetChanges(DataRowState.Modified).Rows[0] as Data.dsEmpleado.EMPLEADOSRow;
+            object fecha = DBNull.Value, fechaBaja = DBNull.Value;
+            if (!row.IsE_FECHANACIMIENTONull()) { fecha = row.E_FECHANACIMIENTO.ToShortDateString(); }
+            if (!row.IsE_FECHA_BAJANull()) { fechaBaja = row.E_FECHA_BAJA.ToShortDateString(); }
+            object[] valorParametros = { 
+                                         row.E_LEGAJO,
+                                         row.EE_CODIGO,
+                                         row.SEC_CODIGO,
+                                         row.E_APELLIDO,
+                                         row.E_NOMBRE,
+                                         fecha,
+                                         fechaBaja,
+                                         row.E_CODIGO
+                                       };
+            SqlTransaction transaccion = null;
+
             try
             {
-                DB.executeNonQuery(sql, valorParametros, null);
+                transaccion = DB.IniciarTransaccion();
+                DB.executeNonQuery(sql, valorParametros, transaccion);
+                foreach (Data.dsEmpleado.CAPACIDADESXEMPLEADORow rowCxE in (Data.dsEmpleado.CAPACIDADESXEMPLEADORow[])dsEmpleado.CAPACIDADESXEMPLEADO.Select(null, null, DataViewRowState.Added))
+                {
+                    DAL.CapacidadEmpleadoDAL.InsertarCapacidadDeEmpleado(rowCxE, transaccion);
+                }
+                foreach (Data.dsEmpleado.CAPACIDADESXEMPLEADORow rowCxE in (Data.dsEmpleado.CAPACIDADESXEMPLEADORow[])dsEmpleado.CAPACIDADESXEMPLEADO.Select(null, null, DataViewRowState.Deleted))
+                {
+                    int cod = Convert.ToInt32(rowCxE["cxe_codigo", System.Data.DataRowVersion.Original]);
+                    DAL.CapacidadEmpleadoDAL.EliminarCapacidadDeEmpleado(cod, transaccion);
+                }
+                transaccion.Commit();
             }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            catch (SqlException ex)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
+            }
+            finally { DB.FinalizarTransaccion(); }
         }
 
         /// <summary>
@@ -186,6 +276,10 @@ namespace GyCAP.DAL
             DB.FillDataTable(dtEmpleado, sql, null);
         }
 
+        /// <summary>
+        /// Obtiene todos los empleados sin filtrar, no incluye capacidades
+        /// </summary>
+        /// <param name="ds"></param>
         public static void ObtenerEmpleados(Data.dsMantenimiento ds)
         {
             string sql = @"SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE,
