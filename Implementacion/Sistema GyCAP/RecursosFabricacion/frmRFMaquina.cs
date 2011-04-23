@@ -132,17 +132,17 @@ namespace GyCAP.UI.RecursosFabricacion
             //CARGA DE COMBOS
             //Creamos el Dataview y se lo asignamos al combo
             dvEstadoMaquinaBuscar = new DataView(dsMaquina.ESTADO_MAQUINAS);
-            cboBuscarEstado.SetDatos(dvEstadoMaquinaBuscar, "EMAQ_codigo", "EMAQ_nombre", "-- TODOS --", true);
+            cboBuscarEstado.SetDatos(dvEstadoMaquinaBuscar, "EMAQ_codigo", "EMAQ_nombre", "--TODOS--", true);
 
             //Combo de Datos
             dvEstadoMaquina = new DataView(dsMaquina.ESTADO_MAQUINAS);
-            cboEstado.SetDatos(dvEstadoMaquina, "EMAQ_CODIGO", "EMAQ_NOMBRE", "Seleccione un Estado...", false);
+            cboEstado.SetDatos(dvEstadoMaquina, "EMAQ_CODIGO", "EMAQ_NOMBRE", "Seleccione...", false);
 
             dvFabricante = new DataView(dsMaquina.FABRICANTE_MAQUINAS);
-            cboFabricante.SetDatos(dvFabricante, "FAB_CODIGO", "FAB_RAZONSOCIAL", "Seleccione un Fabricante...", false);
+            cboFabricante.SetDatos(dvFabricante, "FAB_CODIGO", "FAB_RAZONSOCIAL", "Seleccione...", false);
 
             dvModelo = new DataView(dsMaquina.MODELOS_MAQUINAS);
-            cboModelo.SetDatos(dvModelo, "MODM_CODIGO", "MODM_NOMBRE", "Seleccione un Modelo...", false);
+            cboModelo.SetDatos(dvModelo, "MODM_CODIGO", "MODM_NOMBRE", "Seleccione...", false);
 
             cboEsCritica.Items.Add("No");
             cboEsCritica.Items.Add("Si");
@@ -198,10 +198,10 @@ namespace GyCAP.UI.RecursosFabricacion
                     txtNombre.Text = string.Empty;
                     txtMarca.Text = string.Empty;
                     txtNroSerie.Text = string.Empty;
-                    cboEstado.SelectedIndex = -1;
-                    cboEsCritica.SelectedIndex = -1;
-                    cboFabricante.SelectedIndex = -1;
-                    cboModelo.SelectedIndex = -1;
+                    cboEstado.SetTexto("Seleccione...");
+                    cboEsCritica.SetTexto("Seleccione...");
+                    cboFabricante.SetTexto("Seleccione...");
+                    cboModelo.SetTexto("Seleccione...");
 
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
@@ -219,10 +219,10 @@ namespace GyCAP.UI.RecursosFabricacion
                     txtNombre.Text = string.Empty;
                     txtMarca.Text = string.Empty;
                     txtNroSerie.Text = string.Empty;
-                    cboEstado.SelectedIndex = -1;
-                    cboEsCritica.SelectedIndex = -1;
-                    cboFabricante.SelectedIndex = -1;
-                    cboModelo.SelectedIndex = -1;
+                    cboEstado.SetTexto("Seleccione...");
+                    cboEsCritica.SetTexto("Seleccione...");
+                    cboFabricante.SetTexto("Seleccione...");
+                    cboModelo.SetTexto("Seleccione...");
 
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
