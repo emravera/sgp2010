@@ -57,6 +57,17 @@ namespace GyCAP.UI.Mantenimiento
             dvAverias.Sort = "AVE_DESCRIPCION ASC";
             dgvLista.DataSource = dvAverias;
 
+            //Obtenemos los niveles
+            try
+            {
+                BLL.NivelCriticidadBLL.ObtenerTodos(dsMantenimiento);
+                BLL.MaquinaBLL.ObtenerMaquinas(dsMantenimiento);  
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             //CARGA DE COMBOS
             //Combo de la Busqueda
             //Creamos el Dataview y se lo asignamos al combo
@@ -258,33 +269,32 @@ namespace GyCAP.UI.Mantenimiento
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    int criticidad;
-            //    criticidad = 0;
-            //    if (cboCriticidadBuscar.SelectedIndex != -1)
-            //        criticidad = cboCriticidadBuscar.GetSelectedValueInt();  
-                
+            try
+            {
+                int criticidad;
+                criticidad = 0;
+                if (cboCriticidadBuscar.SelectedIndex != -1)
+                    criticidad = cboCriticidadBuscar.GetSelectedValueInt();
 
-            //    dsMantenimiento.AVERIAS.Clear();
-                
-            //    BLL.AveriasBLL.ObtenerTodos(txtDescripcionBuscar.Text, criticidad, dsMantenimiento);
-            //    //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
-            //    //por una consulta a la BD
-            //    dvAverias.Table = dsMantenimiento.AVERIAS;
+                dsMantenimiento.AVERIAS.Clear();
 
-            //    if (dsMantenimiento.AVERIAS.Rows.Count == 0)
-            //    {
-            //        MessageBox.Show("No se encontraron Averias con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    }
-            //    SetInterface(estadoUI.inicio);
+                BLL.AveriasBLL.ObtenerTodos(txtDescripcionBuscar.Text, criticidad, dsMantenimiento);
+                //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
+                //por una consulta a la BD
+                dvAverias.Table = dsMantenimiento.AVERIAS;
 
-            //}
-            //catch (Entidades.Excepciones.BaseDeDatosException ex)
-            //{
-            //    MessageBox.Show(ex.Message, "Error: Averias - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    SetInterface(estadoUI.inicio);
-            //}
+                if (dsMantenimiento.AVERIAS.Rows.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron Averias con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                SetInterface(estadoUI.inicio);
+
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                MessageBox.Show(ex.Message, "Error: Averias - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SetInterface(estadoUI.inicio);
+            }
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -430,37 +440,37 @@ namespace GyCAP.UI.Mantenimiento
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             //Controlamos que esté seleccionado algo
-            //if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
-            //{
-            //    //Preguntamos si está seguro
-            //    DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Cliente seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            //    if (respuesta == DialogResult.Yes)
-            //    {
-            //        try
-            //        {
-            //            //Lo eliminamos de la DB
-            //            long codigo = Convert.ToInt64(dvAverias[dgvLista.SelectedRows[0].Index]["CLI_CODIGO"]);
-            //            BLL.ClienteBLL.Eliminar(codigo);
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Preguntamos si está seguro
+                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar La avería seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (respuesta == DialogResult.Yes)
+                {
+                    try
+                    {
+                        //Lo eliminamos de la DB
+                        long codigo = Convert.ToInt64(dvAverias[dgvLista.SelectedRows[0].Index]["AVE_CODIGO"]);
+                        BLL.AveriasBLL.Eliminar(codigo);
 
-            //            //Lo eliminamos del dataset
-            //            dsMantenimiento.CLIENTES.FindByCLI_CODIGO(codigo).Delete();
-            //            dsMantenimiento.CLIENTES.AcceptChanges();
-            //            btnVolver.PerformClick();
-            //        }
-            //        catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
-            //        {
-            //            MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //        }
-            //        catch (Entidades.Excepciones.BaseDeDatosException ex)
-            //        {
-            //            MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Debe seleccionar un Cliente de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
+                        //Lo eliminamos del dataset
+                        dsMantenimiento.AVERIAS.FindByAVE_CODIGO(codigo).Delete();
+                        dsMantenimiento.AVERIAS.AcceptChanges();
+                        btnVolver.PerformClick();
+                    }
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una Avería de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         #endregion

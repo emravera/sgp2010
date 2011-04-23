@@ -451,7 +451,7 @@
             this.Name = "frmAverias";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "frmAverias";
+            this.Text = "Averias";
             this.Load += new System.EventHandler(this.frmAverias_Load);
             this.tpDatos.ResumeLayout(false);
             this.gbGuardarCancelar.ResumeLayout(false);
