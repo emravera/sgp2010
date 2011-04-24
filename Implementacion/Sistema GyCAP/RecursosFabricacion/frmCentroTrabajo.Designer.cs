@@ -349,7 +349,7 @@
             0});
             this.nudCostoCiclo.Name = "nudCostoCiclo";
             this.nudCostoCiclo.Size = new System.Drawing.Size(120, 21);
-            this.nudCostoCiclo.TabIndex = 22;
+            this.nudCostoCiclo.TabIndex = 21;
             this.nudCostoCiclo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCostoCiclo.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -370,7 +370,7 @@
             0});
             this.nudCostoHora.Name = "nudCostoHora";
             this.nudCostoHora.Size = new System.Drawing.Size(120, 21);
-            this.nudCostoHora.TabIndex = 21;
+            this.nudCostoHora.TabIndex = 22;
             this.nudCostoHora.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCostoHora.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -430,7 +430,7 @@
             0});
             this.nudCapacidadUnidadHora.Name = "nudCapacidadUnidadHora";
             this.nudCapacidadUnidadHora.Size = new System.Drawing.Size(107, 21);
-            this.nudCapacidadUnidadHora.TabIndex = 16;
+            this.nudCapacidadUnidadHora.TabIndex = 18;
             this.nudCapacidadUnidadHora.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label10
@@ -480,7 +480,7 @@
             0});
             this.nudTiempoAntes.Name = "nudTiempoAntes";
             this.nudTiempoAntes.Size = new System.Drawing.Size(107, 21);
-            this.nudTiempoAntes.TabIndex = 18;
+            this.nudTiempoAntes.TabIndex = 19;
             this.nudTiempoAntes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudTiempoAntes.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -522,7 +522,7 @@
             0});
             this.nudEficiencia.Name = "nudEficiencia";
             this.nudEficiencia.Size = new System.Drawing.Size(120, 21);
-            this.nudEficiencia.TabIndex = 19;
+            this.nudEficiencia.TabIndex = 17;
             this.nudEficiencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudEficiencia.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -543,7 +543,7 @@
             0});
             this.nudTiempoCiclo.Name = "nudTiempoCiclo";
             this.nudTiempoCiclo.Size = new System.Drawing.Size(120, 21);
-            this.nudTiempoCiclo.TabIndex = 17;
+            this.nudTiempoCiclo.TabIndex = 16;
             this.nudTiempoCiclo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudTiempoCiclo.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -659,7 +659,7 @@
             this.cbActivo.Location = new System.Drawing.Point(401, 80);
             this.cbActivo.Name = "cbActivo";
             this.cbActivo.Size = new System.Drawing.Size(140, 21);
-            this.cbActivo.TabIndex = 12;
+            this.cbActivo.TabIndex = 13;
             // 
             // lvTurnos
             // 
@@ -710,7 +710,7 @@
             this.lblHorasSemanaNormal.Location = new System.Drawing.Point(457, 27);
             this.lblHorasSemanaNormal.Name = "lblHorasSemanaNormal";
             this.lblHorasSemanaNormal.Size = new System.Drawing.Size(75, 13);
-            this.lblHorasSemanaNormal.TabIndex = 14;
+            this.lblHorasSemanaNormal.TabIndex = 11;
             this.lblHorasSemanaNormal.Text = "horas/semana";
             // 
             // label9
@@ -730,7 +730,7 @@
             this.cbSector.Location = new System.Drawing.Point(98, 80);
             this.cbSector.Name = "cbSector";
             this.cbSector.Size = new System.Drawing.Size(175, 21);
-            this.cbSector.TabIndex = 11;
+            this.cbSector.TabIndex = 9;
             // 
             // cbTipo
             // 
@@ -740,7 +740,7 @@
             this.cbTipo.Location = new System.Drawing.Point(98, 52);
             this.cbTipo.Name = "cbTipo";
             this.cbTipo.Size = new System.Drawing.Size(175, 21);
-            this.cbTipo.TabIndex = 9;
+            this.cbTipo.TabIndex = 8;
             // 
             // label6
             // 
@@ -777,7 +777,7 @@
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(260, 62);
-            this.txtDescripcion.TabIndex = 13;
+            this.txtDescripcion.TabIndex = 10;
             this.txtDescripcion.Text = "";
             this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -815,7 +815,7 @@
             0});
             this.nudHorasNormal.Name = "nudHorasNormal";
             this.nudHorasNormal.Size = new System.Drawing.Size(140, 21);
-            this.nudHorasNormal.TabIndex = 8;
+            this.nudHorasNormal.TabIndex = 11;
             // 
             // nudHorasExtendido
             // 
@@ -833,7 +833,7 @@
             0});
             this.nudHorasExtendido.Name = "nudHorasExtendido";
             this.nudHorasExtendido.Size = new System.Drawing.Size(140, 21);
-            this.nudHorasExtendido.TabIndex = 10;
+            this.nudHorasExtendido.TabIndex = 12;
             // 
             // tsMenu
             // 
