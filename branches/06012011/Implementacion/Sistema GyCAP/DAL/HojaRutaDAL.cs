@@ -119,6 +119,7 @@ namespace GyCAP.DAL
 
             try
             {
+                transaccion = DB.IniciarTransaccion();
                 DB.executeNonQuery(sqlDetalle, valorParametros, transaccion);
                 DB.executeNonQuery(sqlHoja, valorParametros, transaccion);
                 transaccion.Commit();

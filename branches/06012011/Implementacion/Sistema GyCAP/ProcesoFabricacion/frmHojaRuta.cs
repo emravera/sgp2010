@@ -418,6 +418,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                     dtpFechaAlta.SetFechaNull();
                     dtpFechaAlta.Enabled = true;
                     chkActivo.Enabled = true;
+                    chkActivo.Checked = false;
                     cboUbicacionStock.Enabled = true;
                     cboUbicacionStock.SetSelectedValue(-1);
                     txtDescripcion.ReadOnly = false;
@@ -442,6 +443,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                     dtpFechaAlta.SetFechaNull();
                     dtpFechaAlta.Enabled = true;
                     chkActivo.Enabled = true;
+                    chkActivo.Checked = false;
                     cboUbicacionStock.Enabled = true;
                     cboUbicacionStock.SetSelectedValue(-1);
                     txtDescripcion.ReadOnly = false;
@@ -566,6 +568,8 @@ namespace GyCAP.UI.ProcesoFabricacion
 
             dvStockOrigen = new DataView(dsHojaRuta.UBICACIONES_STOCK);
             dvStockDestino = new DataView(dsHojaRuta.UBICACIONES_STOCK);
+            dvStockOrigen.RowFilter = "TUS_CODIGO <> " + BLL.TipoUbicacionStockBLL.TipoVista;
+            dvStockDestino.RowFilter = "TUS_CODIGO <> " + BLL.TipoUbicacionStockBLL.TipoVista;
             cboStockOrigen.SetDatos(dvStockOrigen, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
             cboStockDestino.SetDatos(dvStockDestino, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
 
