@@ -341,7 +341,7 @@
             0,
             0,
             65536});
-            this.nudCostoCiclo.Location = new System.Drawing.Point(367, 27);
+            this.nudCostoCiclo.Location = new System.Drawing.Point(114, 27);
             this.nudCostoCiclo.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -362,7 +362,7 @@
             0,
             0,
             65536});
-            this.nudCostoHora.Location = new System.Drawing.Point(121, 27);
+            this.nudCostoHora.Location = new System.Drawing.Point(369, 27);
             this.nudCostoHora.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -377,7 +377,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(263, 29);
+            this.label18.Location = new System.Drawing.Point(10, 29);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(98, 13);
             this.label18.TabIndex = 1;
@@ -386,7 +386,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(10, 29);
+            this.label17.Location = new System.Drawing.Point(263, 29);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(100, 13);
             this.label17.TabIndex = 0;

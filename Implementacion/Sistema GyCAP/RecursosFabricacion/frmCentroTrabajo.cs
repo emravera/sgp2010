@@ -409,6 +409,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     nuds = new NumericUpDown[] { nudHorasNormal, nudHorasExtendido, nudCapacidadCiclo, nudTiempoCiclo, nudTiempoAntes,
                                                  nudTiempoDespues, nudEficiencia, nudCostoHora, nudCostoCiclo, nudCapacidadUnidadHora };
                     SetearNuds(nuds, true, true);
+                    nudEficiencia.Value = 1;
                     txtNombre.Text = String.Empty;
                     cbTipo.SetTexto("Seleccione...");
                     cbSector.SetTexto("Seleccione...");
@@ -435,6 +436,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     nuds = new NumericUpDown[] { nudHorasNormal, nudHorasExtendido, nudCapacidadCiclo, nudTiempoCiclo, nudTiempoAntes,
                                                 nudCapacidadUnidadHora, nudTiempoDespues, nudEficiencia, nudCostoHora, nudCostoCiclo };
                     SetearNuds(nuds, true, true);
+                    nudEficiencia.Value = 1;
                     txtNombre.Text = String.Empty;
                     cbTipo.SetTexto("Seleccione...");
                     cbSector.SetTexto("Seleccione...");
@@ -460,7 +462,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     //lvTurnos.Enabled = false;
                     nuds = new NumericUpDown[] { nudHorasNormal, nudHorasExtendido, nudCapacidadCiclo, nudTiempoCiclo, nudTiempoAntes,
                                                 nudCapacidadUnidadHora, nudTiempoDespues, nudEficiencia, nudCostoHora, nudCostoCiclo };
-                    SetearNuds(nuds, false, false);
+                    SetearNuds(nuds, false, false);                    
                     btnGuardar.Enabled = false;
                     btnVolver.Enabled = true;
                     estadoInterface = estadoUI.consultar;
