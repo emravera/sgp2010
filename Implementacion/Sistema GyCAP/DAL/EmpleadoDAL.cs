@@ -270,7 +270,7 @@ namespace GyCAP.DAL
         public static void ObtenerEmpleados(DataTable dtEmpleado)
         {
             string sql = @"SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE,
-                           E_FECHANACIMIENTO, E_TELEFONO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA 
+                           E_FECHANACIMIENTO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA 
                            FROM EMPLEADOS";
 
             DB.FillDataTable(dtEmpleado, sql, null);
@@ -283,7 +283,7 @@ namespace GyCAP.DAL
         public static void ObtenerEmpleados(Data.dsMantenimiento ds)
         {
             string sql = @"SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE,
-                           E_FECHANACIMIENTO, E_TELEFONO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA 
+                           E_FECHANACIMIENTO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA 
                            FROM EMPLEADOS";
 
             try
