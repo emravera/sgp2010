@@ -11,12 +11,24 @@ namespace GyCAP.Entidades.ArbolEstructura
         
         private int codigoNodo;
         private string text;
-        private IList<NodoEstructura> nodosHijos;
+        private List<NodoEstructura> nodosHijos;
         private NodoEstructura nodoPadre;
         private tipoContenido contenido;
         private object tag;
         private CompuestoParte compuesto;
 
+        public NodoEstructura() { }
+
+        public NodoEstructura(int codigoNode, string textoNode, NodoEstructura nodePadre, tipoContenido content, CompuestoParte comp)
+        {
+            this.codigoNodo = codigoNode;
+            this.text = textoNode;
+            this.NodosHijos = new List<NodoEstructura>();
+            this.NodoPadre = nodePadre;
+            this.contenido = content;
+            this.compuesto = comp;
+        }
+        
         public int CodigoNodo
         {
             get { return codigoNodo; }
@@ -28,8 +40,8 @@ namespace GyCAP.Entidades.ArbolEstructura
             get { return text; }
             set { text = value; }
         }        
-
-        public IList<NodoEstructura> NodosHijos
+        
+        public List<NodoEstructura> NodosHijos
         {
             get { return nodosHijos; }
             set { nodosHijos = value; }

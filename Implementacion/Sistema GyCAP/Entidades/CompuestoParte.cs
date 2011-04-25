@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GyCAP.Entidades;
 
 namespace GyCAP.Entidades
 {
@@ -9,6 +10,21 @@ namespace GyCAP.Entidades
     {
         int codigo;
 
+        public CompuestoParte()
+        {
+        }
+
+        public CompuestoParte(int cod, Parte partPadre, Parte partHijo, MateriaPrima mp, decimal cant, UnidadMedida umed, Estructura estr)
+        {
+            this.codigo = cod;
+            this.partePadre = partPadre;
+            this.parteHijo = partHijo;
+            this.materiaPrima = mp;
+            this.cantidad = cant;
+            this.unidadMedida = umed;
+            this.estructura = estr;
+        }
+        
         public int Codigo
         {
             get { return codigo; }

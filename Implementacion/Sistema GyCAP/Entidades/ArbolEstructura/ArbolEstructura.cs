@@ -7,6 +7,15 @@ namespace GyCAP.Entidades.ArbolEstructura
 {
     public class ArbolEstructura
     {
+        public ArbolEstructura() { }
+        
+        public ArbolEstructura(int codEstructura)
+        {
+            this.codigoEstructura = codEstructura;
+            this.nodoRaiz = new NodoEstructura();
+            this.nodoRaiz.NodosHijos = new List<NodoEstructura>();
+        }
+        
         private NodoEstructura nodoRaiz;
 
         public NodoEstructura NodoRaiz
@@ -22,7 +31,10 @@ namespace GyCAP.Entidades.ArbolEstructura
             set { codigoEstructura = value; }
         }
 
-
+        public void ClearAll()
+        {
+            if (nodoRaiz != null && nodoRaiz.NodosHijos != null) { nodoRaiz.NodosHijos.Clear(); }
+        }
 
 
         public decimal GetCostoEstructura()

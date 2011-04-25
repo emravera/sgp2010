@@ -24,6 +24,7 @@ namespace GyCAP.UI.EstructuraProducto
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
         private int compId = -1; //Variable para el manejo de inserciones en los dataset con códigos unique
         private int columnIndex = -1; //Variable para manejar el menu contextual para bloquear columnas
+        private Entidades.ArbolEstructura.ArbolEstructura arbolEstructura = new GyCAP.Entidades.ArbolEstructura.ArbolEstructura();
 
         #region Inicio
 
@@ -76,7 +77,7 @@ namespace GyCAP.UI.EstructuraProducto
                 tvEstructura.BeginUpdate();
                 if (dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codEstructura).Length > 0)
                 {
-                    BLL.EstructuraBLL.CrearArbolEstructura(codEstructura, dsEstructura, tvEstructura, true, out compId);
+                    BLL.EstructuraBLL.CrearArbolEstructura(codEstructura, dsEstructura, tvEstructura, true, arbolEstructura, out compId);
                 }
                 else { tvEstructura.Nodes.Clear(); }
                 tvEstructura.EndUpdate();
@@ -323,7 +324,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
 
             return costo;
-        }        
+        }
 
         #endregion    
 
@@ -1054,7 +1055,7 @@ namespace GyCAP.UI.EstructuraProducto
             tvEstructura.BeginUpdate();
             if (dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codEstructura).Length > 0) 
             { 
-                BLL.EstructuraBLL.CrearArbolEstructura(codEstructura, dsEstructura, tvEstructura, false, out compId); 
+                BLL.EstructuraBLL.CrearArbolEstructura(codEstructura, dsEstructura, tvEstructura, false, arbolEstructura, out compId); 
             }
             else { tvEstructura.Nodes.Clear(); }
             tvEstructura.EndUpdate();            
