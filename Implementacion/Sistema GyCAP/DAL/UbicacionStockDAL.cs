@@ -188,13 +188,7 @@ namespace GyCAP.DAL
                                                 ELSE (ustck_cantidadreal + @p0)
                                               END
                                             ) 
-                        ,ustck_cantidadvirtual = 
-                                            ( 
-                                              CASE 
-                                                WHEN ((ustck_cantidadvirtual + @p1) < 0) THEN 0 
-                                                ELSE (ustck_cantidadvirtual + @p1)
-                                              END
-                                            ) 
+                        ,ustck_cantidadvirtual = ustck_cantidadvirtual + @p1  
                         WHERE ustck_numero = @p2";
             
             object[] parametros = { cantidadReal, cantidadVirtual, numeroUbicacion };
