@@ -118,8 +118,9 @@ namespace GyCAP.BLL
 
         }
 
-        public static TreeView CrearArbolEstructura(int codigoEstructura, Data.dsEstructuraProducto dsEstructura, TreeView arbol, bool clonar, out int lastCompID)
+        public static TreeView CrearArbolEstructura(int codigoEstructura, Data.dsEstructuraProducto dsEstructura, TreeView arbol, bool clonar, Entidades.ArbolEstructura.ArbolEstructura arbolEstructura, out int lastCompID)
         {
+            arbolEstructura.ClearAll();
             arbol.Nodes.Clear();
             lastCompID = -1;
             //Obtenemos la parte padre de nivel 0 y la agregamos al árbol
@@ -129,6 +130,7 @@ namespace GyCAP.BLL
             if (clonar) 
             { 
                 nodoInicio.Name = lastCompID.ToString(); 
+                
                 Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompInicioCloned = dsEstructura.COMPUESTOS_PARTES.NewCOMPUESTOS_PARTESRow();
                 rowCompInicioCloned.BeginEdit();
                 rowCompInicioCloned.COMP_CODIGO = lastCompID;
