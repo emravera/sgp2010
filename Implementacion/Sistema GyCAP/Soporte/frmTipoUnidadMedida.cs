@@ -125,12 +125,13 @@ namespace GyCAP.UI.Soporte
                         rowTipoUnidadMedida.TUMED_NOMBRE = tipoUnidadMedida.Nombre;
                         //Termina la edición de la fila
                         rowTipoUnidadMedida.EndEdit();
+                        
+                        //Avisamos que se guardo correctamente
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Tipo unidad de medida", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+
                         //Agregamos la fila al dataset y aceptamos los cambios
                         dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AddTIPOS_UNIDADES_MEDIDARow(rowTipoUnidadMedida);
                         dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.AcceptChanges();
-
-                        //Avisamos que se guardo correctamente
-                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Tipo unidad de medida", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
 
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);

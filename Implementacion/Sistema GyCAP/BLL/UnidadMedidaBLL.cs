@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace GyCAP.BLL
 {
@@ -15,9 +16,9 @@ namespace GyCAP.BLL
             DAL.UnidadMedidaDAL.ObtenerUnidad(nombre, idTipo, ds);
         }
         //Metodo que se llama desde materias primas principales
-        public static void ObtenerTodos(Data.dsMateriaPrima ds)
+        public static void ObtenerTodos(DataTable dtUnidadMedida)
         {
-            DAL.UnidadMedidaDAL.ObtenerTodos(ds);
+            DAL.UnidadMedidaDAL.ObtenerTodos(dtUnidadMedida);
         }
         //Metodo que se llama desde planificacion de materias primas
         public static void ObtenerUnidades(Data.dsPlanMateriasPrimas ds)
@@ -63,11 +64,5 @@ namespace GyCAP.BLL
             if (EsUnidadMedida(unidadMedida)) throw new Entidades.Excepciones.ElementoExistenteException();
             DAL.UnidadMedidaDAL.Actualizar(unidadMedida);
         }
-
-        public static void ObtenerTodos(System.Data.DataTable dtUnidadMedida)
-        {
-            DAL.UnidadMedidaDAL.ObtenerTodos(dtUnidadMedida);
-        }
-
     }
 }

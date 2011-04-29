@@ -128,6 +128,7 @@
             // chboxCliente
             // 
             this.chboxCliente.AutoSize = true;
+            this.chboxCliente.CausesValidation = false;
             this.chboxCliente.Location = new System.Drawing.Point(80, 113);
             this.chboxCliente.Name = "chboxCliente";
             this.chboxCliente.Size = new System.Drawing.Size(15, 14);
@@ -285,6 +286,8 @@
             // 
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
+            this.dgvLista.AllowUserToResizeRows = false;
+            this.dgvLista.CausesValidation = false;
             this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLista.Location = new System.Drawing.Point(9, 23);
             this.dgvLista.MultiSelect = false;
