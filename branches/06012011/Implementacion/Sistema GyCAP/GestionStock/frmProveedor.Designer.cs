@@ -59,6 +59,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnNuevaLocalidad = new System.Windows.Forms.Button();
             this.btnAgregarDomicilio = new System.Windows.Forms.Button();
             this.cbLocalidad = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label12 = new System.Windows.Forms.Label();
@@ -82,7 +83,6 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnNuevaLocalidad = new System.Windows.Forms.Button();
             this.gbDatos.SuspendLayout();
             this.tcABM.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -166,7 +166,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(73, 13);
             this.label9.TabIndex = 16;
-            this.label9.Text = "Razon Social:";
+            this.label9.Text = "Razón Social:";
             // 
             // txtTelefonoPcipal
             // 
@@ -478,6 +478,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Domicilio";
             // 
+            // btnNuevaLocalidad
+            // 
+            this.btnNuevaLocalidad.Location = new System.Drawing.Point(214, 76);
+            this.btnNuevaLocalidad.Name = "btnNuevaLocalidad";
+            this.btnNuevaLocalidad.Size = new System.Drawing.Size(35, 21);
+            this.btnNuevaLocalidad.TabIndex = 11;
+            this.btnNuevaLocalidad.Text = "+";
+            this.btnNuevaLocalidad.UseVisualStyleBackColor = true;
+            this.btnNuevaLocalidad.Click += new System.EventHandler(this.btnNuevaLocalidad_Click);
+            // 
             // btnAgregarDomicilio
             // 
             this.btnAgregarDomicilio.Location = new System.Drawing.Point(396, 76);
@@ -584,7 +594,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
             this.label3.TabIndex = 14;
-            this.label3.Text = "Numero:";
+            this.label3.Text = "Número:";
             // 
             // label6
             // 
@@ -725,16 +735,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(632, 446);
             this.tableLayoutPanel1.TabIndex = 13;
-            // 
-            // btnNuevaLocalidad
-            // 
-            this.btnNuevaLocalidad.Location = new System.Drawing.Point(214, 76);
-            this.btnNuevaLocalidad.Name = "btnNuevaLocalidad";
-            this.btnNuevaLocalidad.Size = new System.Drawing.Size(35, 21);
-            this.btnNuevaLocalidad.TabIndex = 11;
-            this.btnNuevaLocalidad.Text = "+";
-            this.btnNuevaLocalidad.UseVisualStyleBackColor = true;
-            this.btnNuevaLocalidad.Click += new System.EventHandler(this.btnNuevaLocalidad_Click);
             // 
             // frmProveedor
             // 

@@ -302,7 +302,7 @@
             this.gbListadoBusqueda.Location = new System.Drawing.Point(3, 64);
             this.gbListadoBusqueda.Name = "gbListadoBusqueda";
             this.gbListadoBusqueda.Padding = new System.Windows.Forms.Padding(9);
-            this.gbListadoBusqueda.Size = new System.Drawing.Size(551, 211);
+            this.gbListadoBusqueda.Size = new System.Drawing.Size(554, 214);
             this.gbListadoBusqueda.TabIndex = 1;
             this.gbListadoBusqueda.TabStop = false;
             this.gbListadoBusqueda.Text = "Listado de Localidades";
@@ -311,6 +311,7 @@
             // 
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
+            this.dgvLista.AllowUserToResizeRows = false;
             this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLista.Location = new System.Drawing.Point(9, 22);
             this.dgvLista.MultiSelect = false;
@@ -318,7 +319,7 @@
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(533, 180);
+            this.dgvLista.Size = new System.Drawing.Size(536, 183);
             this.dgvLista.TabIndex = 0;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
@@ -346,7 +347,7 @@
             this.gbBusqueda.Controls.Add(this.label1);
             this.gbBusqueda.Location = new System.Drawing.Point(3, 3);
             this.gbBusqueda.Name = "gbBusqueda";
-            this.gbBusqueda.Size = new System.Drawing.Size(551, 55);
+            this.gbBusqueda.Size = new System.Drawing.Size(554, 55);
             this.gbBusqueda.TabIndex = 0;
             this.gbBusqueda.TabStop = false;
             this.gbBusqueda.Text = "Criterios de búsqueda";
@@ -358,7 +359,7 @@
             this.cbProvinciaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbProvinciaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbProvinciaBuscar.FormattingEnabled = true;
-            this.cbProvinciaBuscar.Location = new System.Drawing.Point(265, 21);
+            this.cbProvinciaBuscar.Location = new System.Drawing.Point(267, 21);
             this.cbProvinciaBuscar.Name = "cbProvinciaBuscar";
             this.cbProvinciaBuscar.Size = new System.Drawing.Size(138, 21);
             this.cbProvinciaBuscar.TabIndex = 6;
@@ -367,7 +368,7 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(205, 25);
+            this.label4.Location = new System.Drawing.Point(207, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(54, 13);
             this.label4.TabIndex = 3;
@@ -378,7 +379,7 @@
             this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBuscar.Image = global::GyCAP.UI.Soporte.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(467, 17);
+            this.btnBuscar.Location = new System.Drawing.Point(454, 19);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
             this.btnBuscar.TabIndex = 5;

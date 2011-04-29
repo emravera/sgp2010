@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace GyCAP.DAL
@@ -65,13 +66,13 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
         //Metodo para llenar desde materia primas principales
-        public static void ObtenerTodos(Data.dsMateriaPrima ds)
+        public static void ObtenerTodos(DataTable dtUnidadMedida)
         {
             string sql = @"SELECT umed_codigo,tumed_codigo, umed_nombre, umed_abreviatura
                               FROM UNIDADES_MEDIDA";
             try
             {
-                DB.FillDataSet(ds, "UNIDADES_MEDIDA", sql, null);
+                DB.FillDataTable(dtUnidadMedida, sql, null);
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
 
@@ -170,15 +171,5 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
-        public static void ObtenerTodos(System.Data.DataTable dtUnidadMedida)
-        {
-            string sql = "SELECT umed_codigo,tumed_codigo, umed_nombre, umed_abreviatura FROM UNIDADES_MEDIDA";
-
-            try
-            {
-                DB.FillDataTable(dtUnidadMedida, sql, null);
-            }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-        }
-    }
+   }
 }

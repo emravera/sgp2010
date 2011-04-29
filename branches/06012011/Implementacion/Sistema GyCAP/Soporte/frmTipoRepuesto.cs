@@ -25,19 +25,23 @@ namespace GyCAP.UI.Soporte
 
             //Para que no genere las columnas automáticamente
             dgvLista.AutoGenerateColumns = false;
+            
             //Agregamos las columnas
             dgvLista.Columns.Add("TREP_NOMBRE", "Nombre");
             dgvLista.Columns.Add("TREP_DESCRIPCION", "Descripción");
             dgvLista.Columns["TREP_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["TREP_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["TREP_NOMBRE"].DataPropertyName = "TREP_NOMBRE";
             dgvLista.Columns["TREP_DESCRIPCION"].DataPropertyName = "TREP_DESCRIPCION";
+            
             //Creamos el dataview y lo asignamos a la grilla
             BLL.TipoRepuestoBLL.ObtenerTodos(dsMantenimiento);
             dvTipoRepuesto = new DataView(dsMantenimiento.TIPOS_REPUESTOS);
             dvTipoRepuesto.Sort = "TREP_NOMBRE ASC";
             dgvLista.DataSource = dvTipoRepuesto;
+            
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
         }
@@ -132,12 +136,13 @@ namespace GyCAP.UI.Soporte
                         rowTipoRepuesto.TREP_DESCRIPCION  = tipoRepuesto.Descripcion ;
                         //Termina la edición de la fila
                         rowTipoRepuesto.EndEdit();
+                        
+                        //Avisamos que se guardo correctamente
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Tipo de repuesto", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                        
                         //Agregamos la fila al dataset y aceptamos los cambios
                         dsMantenimiento.TIPOS_REPUESTOS.AddTIPOS_REPUESTOSRow(rowTipoRepuesto);
                         dsMantenimiento.TIPOS_REPUESTOS.AcceptChanges();
-
-                        //Avisamos que se guardo correctamente
-                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Tipo de repuesto", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
 
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);

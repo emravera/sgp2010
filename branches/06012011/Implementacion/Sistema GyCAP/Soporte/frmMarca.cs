@@ -27,6 +27,7 @@ namespace GyCAP.UI.Soporte
 
             //Para que no genere las columnas automáticamente
             dgvLista.AutoGenerateColumns = false;
+            
             //Agregamos las columnas
             dgvLista.Columns.Add("MCA_CODIGO", "Código");
             dgvLista.Columns.Add("MCA_NOMBRE", "Nombre");
@@ -42,6 +43,9 @@ namespace GyCAP.UI.Soporte
             dgvLista.Columns["CLI_CODIGO"].DataPropertyName = "CLI_CODIGO";
             dgvLista.Columns["MCA_NOMBRE"].DataPropertyName = "MCA_NOMBRE";
             
+            //Escondemos la fila del codigo
+            dgvLista.Columns["MCA_CODIGO"].Visible = false;
+
             //Llena el Dataset con los clientes
             BLL.ClienteBLL.ObtenerTodos(dsMarca.CLIENTES);
 
@@ -272,12 +276,13 @@ namespace GyCAP.UI.Soporte
                         }
                         //Termina la edición de la fila
                         rowMarcas.EndEdit();
-                        //Agregamos la fila al dataset y aceptamos los cambios
-                        dsMarca.MARCAS.AddMARCASRow(rowMarcas);
-                        dsMarca.MARCAS.AcceptChanges();
-                        
+                                                                        
                         //Avisamos que se guargo correctamente
                         Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Marca", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+
+                        //Agregamos la fila al dataset y aceptamos los cambios
+                        dsMarca.MARCAS.AddMARCASRow(rowMarcas);
+                        dsMarca.MARCAS.AcceptChanges();                 
 
                         //Y por último seteamos el estado de la interfaz
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
@@ -410,9 +415,10 @@ namespace GyCAP.UI.Soporte
                     btnNuevo.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     tcMarca.SelectedTab = tpBuscar;
+
                     txtNombreBuscar.Text = "";
                     txtNombreBuscar.Focus();
-                    cbClienteBuscar.SelectedIndex = -1;
+                    cbClienteBuscar.SetSelectedIndex(-1);
                     break;
                 case estadoUI.nuevo:
                     txtNombre.ReadOnly = false;
