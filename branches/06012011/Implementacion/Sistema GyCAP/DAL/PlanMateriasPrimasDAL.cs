@@ -9,7 +9,7 @@ namespace GyCAP.DAL
     public class PlanMateriasPrimasDAL
     {
         //BUSQUEDA
-        public static void ObtenerTodos(int anio, Data.dsPlanMateriasPrimas ds)
+        public static void ObtenerTodos(int anio, Data.dsPlanMP ds)
         {
             string sql = @"SELECT pmpa_codigo, pmpa_anio, pmpa_mes, pmpa_fechacreacion
                         FROM PLANES_MATERIAS_PRIMAS_ANUALES WHERE pmpa_anio=@p0";
@@ -23,7 +23,7 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static void ObtenerTodos(Data.dsPlanMateriasPrimas ds)
+        public static void ObtenerTodos(Data.dsPlanMP ds)
         {
             string sql = @"SELECT pmpa_codigo, pmpa_anio, pmpa_mes, pmpa_fechacreacion
                         FROM PLANES_MATERIAS_PRIMAS_ANUALES";
@@ -97,7 +97,7 @@ namespace GyCAP.DAL
 
         }
 
-        public static void ObtenerDetalle(int idPlan, Data.dsPlanMateriasPrimas ds)
+        public static void ObtenerDetalle(int idPlan, Data.dsPlanMP ds)
         {
             string sql = @"SELECT dp.dpmpa_codigo, dp.pmpa_codigo, dp.mp_codigo, dp.dpmpa_cantidad, mp.umed_codigo
                         FROM DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL as dp, MATERIAS_PRIMAS AS mp

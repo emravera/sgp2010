@@ -81,6 +81,7 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
         }
+
         public static void ObtenerTodos(System.Data.DataTable dt)
         {
             string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_costo, ustck_numero 
@@ -121,6 +122,61 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
 
             return costo;
+        }
+
+        //Metodo de Busqueda de Materias Primas desde el ABM de Materias Primas
+        public static void ObtenerMP(string nombre, int esPrincipal, DataTable dtMateriasPrimas)
+        {
+            string sql = @"SELECT mp_codigo, umed_codigo, mp_nombre, mp_descripcion, mp_costo,
+                           ustck_numero, mp_esprincipal, mp_cantidad FROM MATERIAS_PRIMAS WHERE 1=1";
+
+            //Sirve para armar el nombre de los parámetros
+            int cantidadParametros = 0;
+            //Un array de object para ir guardando los valores de los filtros, con tamaño = cantidad de filtros disponibles
+            object[] valoresFiltros = new object[2];
+            
+            //Empecemos a armar la consulta, revisemos que filtros aplican
+            if (nombre != null && nombre.ToString() != string.Empty)
+            {
+                //Si aplica el filtro lo usamos
+                sql += " AND mp_nombre LIKE @p" + cantidadParametros;
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                nombre = "%" + nombre + "%";
+                valoresFiltros[cantidadParametros] = nombre;
+                cantidadParametros++;
+            }
+            
+            //Revisamos si pasó algun valor y si es un integer
+            if (esPrincipal != null && esPrincipal != 3 )
+            {
+                sql += " AND mp_esprincipal = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(esPrincipal);
+                cantidadParametros++;
+            }
+
+            if (cantidadParametros > 0)
+            {
+                //Buscamos con filtro, armemos el array de los valores de los parametros
+                object[] valorParametros = new object[cantidadParametros];
+                for (int i = 0; i < cantidadParametros; i++)
+                {
+                    valorParametros[i] = valoresFiltros[i];
+                }
+                try
+                {
+                    DB.FillDataTable(dtMateriasPrimas, sql, valorParametros);
+                }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            }
+            else
+            {
+                //Buscamos sin filtro
+                try
+                {
+                    DB.FillDataTable(dtMateriasPrimas, sql, null);
+                }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            }
         }
     }
 }

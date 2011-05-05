@@ -17,10 +17,6 @@ namespace GyCAP.BLL
         {
             DAL.PlanAnualDAL.ObtenerTodos(ds);
         }
-        public static void ObtenerTodos(Data.dsPlanMateriasPrimas ds)
-        {
-            DAL.PlanAnualDAL.ObtenerTodos(ds);
-        }
         public static void ObtenerTodos(DataTable dtPlanAnual)
         {
             DAL.PlanAnualDAL.ObtenerTodos(dtPlanAnual);

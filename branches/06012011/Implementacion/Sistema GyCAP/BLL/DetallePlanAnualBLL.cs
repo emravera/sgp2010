@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace GyCAP.BLL
 {
     public class DetallePlanAnualBLL
     {
         //metodo para traer el detalle de una cabecera
-        public static void ObtenerDetalle(int idPlan, Data.dsPlanAnual ds)
+        public static void ObtenerDetalle(int idPlan, DataTable dtDetallePlanAnual)
         {
-            DAL.DetallePlanAnualDAL.ObtenerDetalle(idPlan, ds);
+            DAL.DetallePlanAnualDAL.ObtenerDetalle(idPlan, dtDetallePlanAnual);
         }
         //Metodo que obtiene todos los detalles de los planes anuales
-        public static void ObtenerDetalle(Data.dsPlanMensual ds)
+        public static void ObtenerDetalle(DataTable dtDetallePlanAnual)
         {
-            DAL.DetallePlanAnualDAL.ObtenerDetalle(ds);
+            DAL.DetallePlanAnualDAL.ObtenerDetalle(dtDetallePlanAnual);
         }
 
         //Metodo para buscar el ID
@@ -25,9 +26,9 @@ namespace GyCAP.BLL
         }
 
         //Metodo que devuelve una fila del plan anual
-        public static void ObtenerFila(Data.dsPlanMateriasPrimas ds, int codigo)
+        public static void ObtenerFila(DataTable dtDetallePlanAnual, int codigo)
         {
-            DAL.DetallePlanAnualDAL.ObtenerDetalle(ds,codigo);
+            DAL.DetallePlanAnualDAL.ObtenerDetalle(dtDetallePlanAnual,codigo);
         }
 
         

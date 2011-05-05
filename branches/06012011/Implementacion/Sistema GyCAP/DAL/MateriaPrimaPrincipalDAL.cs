@@ -66,7 +66,7 @@ namespace GyCAP.DAL
 
 
         //Metodo que trae todos los datos 
-        public static void ObtenerTodos(Data.dsMateriaPrima ds)
+        public static void ObtenerTodos(Data.dsPlanMP ds)
         {
             string sql = @"SELECT pr.mppr_codigo, pr.mp_codigo, pr.mppr_cantidad, mp.umed_codigo
                         FROM MATERIASPRIMASPRINCIPALES as pr, MATERIAS_PRIMAS as mp
@@ -80,7 +80,7 @@ namespace GyCAP.DAL
         }
 
         //Metodo que trae todos los datos 
-        public static void ObtenerMPPrincipales(Data.dsPlanMateriasPrimas ds)
+        public static void ObtenerMPPrincipales(Data.dsPlanMP ds)
         {
             string sql = @"SELECT pr.mppr_codigo, pr.mp_codigo, pr.mppr_cantidad, mp.umed_codigo
                         FROM MATERIASPRIMASPRINCIPALES as pr, MATERIAS_PRIMAS as mp

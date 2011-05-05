@@ -8,16 +8,16 @@ namespace GyCAP.BLL
     public class PlanMateriaPrimaBLL
     {
         //Metodos de busqueda de datos
-        public static void ObtenerDetalle(int codigo, Data.dsPlanMateriasPrimas ds)
+        public static void ObtenerDetalle(int codigo, Data.dsPlanMP ds)
         {
             DAL.PlanMateriasPrimasDAL.ObtenerDetalle(codigo,ds);
         }
         //Metodos para la busqueda
-        public static void ObtenerTodos(int anio, Data.dsPlanMateriasPrimas ds)
+        public static void ObtenerTodos(int anio, Data.dsPlanMP ds)
         {
             DAL.PlanMateriasPrimasDAL.ObtenerTodos(anio, ds);
         }
-        public static void ObtenerTodos(Data.dsPlanMateriasPrimas ds)
+        public static void ObtenerTodos(Data.dsPlanMP ds)
         {
             DAL.PlanMateriasPrimasDAL.ObtenerTodos(ds);
         }

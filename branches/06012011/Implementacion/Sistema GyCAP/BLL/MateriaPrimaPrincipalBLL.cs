@@ -15,12 +15,12 @@ namespace GyCAP.BLL
            return DAL.MateriaPrimaPrincipalDAL.Insertar(materiaPrima);
        }
 
-        public static void ObtenerTodos(Data.dsMateriaPrima ds)
+        public static void ObtenerTodos(Data.dsPlanMP ds)
         {
             DAL.MateriaPrimaPrincipalDAL.ObtenerTodos(ds);
         }
         //MEtodo que se llama desde plan MP Anual
-        public static void ObtenerMPPrincipales(Data.dsPlanMateriasPrimas ds)
+        public static void ObtenerMPPrincipales(Data.dsPlanMP ds)
         {
             DAL.MateriaPrimaPrincipalDAL.ObtenerMPPrincipales(ds);
         }

@@ -182,6 +182,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPlanMantenimiento.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsPlanMateriasPrimas.cs">
+      <DependentUpon>dsPlanMateriasPrimas.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="dsPlanMateriasPrimas.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -195,6 +199,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPlanMensual.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPlanMP.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPlanMP.xsd</DependentUpon>
     </Compile>
     <Compile Include="dsPlanSemanal.cs">
       <DependentUpon>dsPlanSemanal.xsd</DependentUpon>
@@ -508,6 +517,17 @@
     </None>
     <None Include="dsPlanMensual.xss">
       <DependentUpon>dsPlanMensual.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanMP.xsc">
+      <DependentUpon>dsPlanMP.xsd</DependentUpon>
+    </None>
+    <None Include="dsPlanMP.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPlanMP.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsPlanMP.xss">
+      <DependentUpon>dsPlanMP.xsd</DependentUpon>
     </None>
     <None Include="dsPlanSemanal.xsc">
       <DependentUpon>dsPlanSemanal.xsd</DependentUpon>
