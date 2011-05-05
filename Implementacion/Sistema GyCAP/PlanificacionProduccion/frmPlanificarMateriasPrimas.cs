@@ -12,7 +12,7 @@ namespace GyCAP.UI.PlanificacionProduccion
     public partial class frmPlanificarMateriasPrimas : Form
     {
         private static frmPlanificarMateriasPrimas _frmPlanificarMateriasPrimas = null;
-        private Data.dsPlanMateriasPrimas dsPlanMP = new GyCAP.Data.dsPlanMateriasPrimas();
+        private Data.dsPlanMP dsPlanMP = new GyCAP.Data.dsPlanMP();
         private DataView dvListaPlanMP, dvListaDetalle, dvComboPlanificacion;
         private enum estadoUI { inicio, nuevo, buscar, calcular };
         private static estadoUI estadoActual;
@@ -77,13 +77,13 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.DataSource = dvListaDetalle;
 
             //Llenamos el dataset con las materias primas
-            BLL.MateriaPrimaBLL.ObtenerMP(dsPlanMP);
+            BLL.MateriaPrimaBLL.ObtenerMP(dsPlanMP.MATERIAS_PRIMAS);
 
             //Llenamos el dataset con las unidades de medida
-            BLL.UnidadMedidaBLL.ObtenerUnidades(dsPlanMP);
+            BLL.UnidadMedidaBLL.ObtenerTodos(dsPlanMP.UNIDADES_MEDIDA);
 
             //Llenamos el dataset con las estimaciones
-            BLL.PlanAnualBLL.ObtenerTodos(dsPlanMP);
+            BLL.PlanAnualBLL.ObtenerTodos(dsPlanMP.PLANES_ANUALES);
 
             //Cargamos el combo
             dvComboPlanificacion = new DataView(dsPlanMP.PLANES_ANUALES);
@@ -194,7 +194,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 int codigoPlanAnual =Convert.ToInt32(cbPlanificacion.GetSelectedValue());
 
                 //Cargo el dataset con el detalle 
-                BLL.DetallePlanAnualBLL.ObtenerFila(dsPlanMP,codigoPlanAnual);
+                BLL.DetallePlanAnualBLL.ObtenerFila(dsPlanMP.DETALLE_PLAN_ANUAL, codigoPlanAnual);
 
                 string[] Meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
                 
@@ -283,7 +283,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 foreach (Entidades.PlanMateriaPrima p in planesMP)
                 {
 
-                    Data.dsPlanMateriasPrimas.PLANES_MATERIAS_PRIMAS_ANUALESRow rowPlanMP = dsPlanMP.PLANES_MATERIAS_PRIMAS_ANUALES.NewPLANES_MATERIAS_PRIMAS_ANUALESRow();
+                    Data.dsPlanMP.PLANES_MATERIAS_PRIMAS_ANUALESRow rowPlanMP = dsPlanMP.PLANES_MATERIAS_PRIMAS_ANUALES.NewPLANES_MATERIAS_PRIMAS_ANUALESRow();
                     rowPlanMP.BeginEdit();
                     rowPlanMP.PMPA_ANIO = p.Anio;
                     rowPlanMP.PMPA_CODIGO = p.Codigo;
@@ -297,7 +297,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 //El detalle de la demanda anual
                 foreach (Entidades.DetallePlanMateriasPrimas obje in detalleplanMP)
                 {
-                    Data.dsPlanMateriasPrimas.DETALLE_PLAN_MATERIAS_PRIMAS_ANUALRow rowDPlanMP = dsPlanMP.DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL.NewDETALLE_PLAN_MATERIAS_PRIMAS_ANUALRow();
+                    Data.dsPlanMP.DETALLE_PLAN_MATERIAS_PRIMAS_ANUALRow rowDPlanMP = dsPlanMP.DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL.NewDETALLE_PLAN_MATERIAS_PRIMAS_ANUALRow();
                     rowDPlanMP.BeginEdit();
                     rowDPlanMP.DPMPA_CODIGO = obje.Codigo;
                     rowDPlanMP.DPMPA_CANTIDAD = obje.Cantidad;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace GyCAP.DAL
@@ -9,7 +10,7 @@ namespace GyCAP.DAL
     public class DetallePlanAnualDAL
     {
         //Metodo de Busqueda de un detalle
-        public static void ObtenerDetalle(int idCodigo, Data.dsPlanAnual ds)
+        public static void ObtenerDetalle(int idCodigo, DataTable dtDetallePlanAnual)
         {
             string sql = @"SELECT dpan_codigo, dpan_mes, dpan_cantidadmes, pan_codigo
                         FROM DETALLE_PLAN_ANUAL WHERE pan_codigo=@p0";
@@ -18,25 +19,25 @@ namespace GyCAP.DAL
 
             try
             {
-                DB.FillDataSet(ds, "DETALLE_PLAN_ANUAL", sql, parametros);
+                DB.FillDataTable(dtDetallePlanAnual, sql, parametros);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static void ObtenerDetalle(Data.dsPlanMensual ds)
+        public static void ObtenerDetalle(DataTable dtDetallePlanAnual)
         {
             string sql = @"SELECT dpan_codigo, dpan_mes, dpan_cantidadmes, pan_codigo
                         FROM DETALLE_PLAN_ANUAL";
 
             try
             {
-                DB.FillDataSet(ds, "DETALLE_PLAN_ANUAL", sql, null);
+                DB.FillDataTable(dtDetallePlanAnual, sql, null);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
 
-        public static void ObtenerDetalle(Data.dsPlanMateriasPrimas ds, int idCodigo)
+        public static void ObtenerDetalle(DataTable dtDetallePlanAnual, int idCodigo)
         {
             string sql = @"SELECT dpan_codigo, dpan_mes, dpan_cantidadmes, pan_codigo
                         FROM DETALLE_PLAN_ANUAL WHERE pan_codigo=@p0";
@@ -45,7 +46,7 @@ namespace GyCAP.DAL
 
             try
             {
-                DB.FillDataSet(ds, "DETALLE_PLAN_ANUAL", sql, parametros);
+                DB.FillDataTable(dtDetallePlanAnual, sql, parametros);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }

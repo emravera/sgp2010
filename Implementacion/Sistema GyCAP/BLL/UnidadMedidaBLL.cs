@@ -20,12 +20,7 @@ namespace GyCAP.BLL
         {
             DAL.UnidadMedidaDAL.ObtenerTodos(dtUnidadMedida);
         }
-        //Metodo que se llama desde planificacion de materias primas
-        public static void ObtenerUnidades(Data.dsPlanMateriasPrimas ds)
-        {
-            DAL.UnidadMedidaDAL.ObtenerUnidades(ds);
-        }
-
+        
         //Eliminacion
         public static void Eliminar(int codigo)
         {

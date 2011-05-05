@@ -478,7 +478,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 int codigo = Convert.ToInt32(dvListaPlanes[dgvLista.SelectedRows[0].Index]["pan_codigo"]);
 
                 //Se llama a la funcion de busqueda con todos los parametros
-                BLL.DetallePlanAnualBLL.ObtenerDetalle(codigo, dsPlanAnual);
+                BLL.DetallePlanAnualBLL.ObtenerDetalle(codigo, dsPlanAnual.DETALLE_PLAN_ANUAL);
 
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD

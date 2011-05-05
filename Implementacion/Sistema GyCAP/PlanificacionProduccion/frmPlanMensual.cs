@@ -183,7 +183,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             BLL.PlanAnualBLL.ObtenerTodos(dsPlanMensual.PLANES_ANUALES);
 
             //Llenamos el detalle del Plan Anual
-            BLL.DetallePlanAnualBLL.ObtenerDetalle(dsPlanMensual);
+            BLL.DetallePlanAnualBLL.ObtenerDetalle(dsPlanMensual.DETALLE_PLANES_MENSUALES);
 
             //Llenamos el dataset de Cocinas
             BLL.CocinaBLL.ObtenerCocinas(dsPlanMensual.COCINAS);
