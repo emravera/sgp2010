@@ -8,6 +8,11 @@ namespace GyCAP.BLL
 {
     public class MateriaPrimaBLL
     {
+
+        //*****************************************************************************************
+        //                              BUSQUEDA MATERIAS PRIMAS
+        //*****************************************************************************************
+
         /// <summary>
         /// Obtiene una materia prima por su código.
         /// </summary>
@@ -19,22 +24,11 @@ namespace GyCAP.BLL
         {
             return DAL.MateriaPrimaDAL.ObtenerMateriaPrima(codigoMateriaPrima);
         }
-        
-        public static void ObtenerTodos(Data.dsMateriaPrima ds)
-        {
-            DAL.MateriaPrimaDAL.ObtenerTodos(ds);
-        }
-        public static void ObtenerTodos(System.Data.DataTable dtMateriaPrima)
-        {
-            DAL.MateriaPrimaDAL.ObtenerTodos(dtMateriaPrima);
-        }
-       
-        //Metodo que acepta el Datatable
-        public static void ObtenerMP(DataTable dtMateriaPrima)
+        public static void ObtenerMP(System.Data.DataTable dtMateriaPrima)
         {
             DAL.MateriaPrimaDAL.ObtenerMP(dtMateriaPrima);
         }
-
+               
         //Metodo que busca la Materia Prima desde el ABM de materias primas
         public static void ObtenerMP(string nombreMP, int esPrincipal, DataTable dtMateriaPrima)
         {
@@ -46,5 +40,38 @@ namespace GyCAP.BLL
         {
             return DAL.MateriaPrimaDAL.ObtenerPrecioMP(codigoMP);
         }
+
+        //*****************************************************************************************
+        //                              INSERTAR MATERIAS PRIMAS
+        //*****************************************************************************************
+
+        public static int Insertar(Entidades.MateriaPrima materiaPrima)
+        {
+            if (DAL.MateriaPrimaDAL.EsMateriaPrima(materiaPrima)) throw new Entidades.Excepciones.ElementoExistenteException();
+            //Si no existe la inserta en la BAse de datos
+            return DAL.MateriaPrimaDAL.Insertar(materiaPrima);
+        }
+
+        //*****************************************************************************************
+        //                              ELIMINAR MATERIAS PRIMAS
+        //*****************************************************************************************
+        
+        public static void Eliminar(int codigo)
+        {
+            DAL.MateriaPrimaDAL.Eliminar(codigo);
+        }
+
+        //*****************************************************************************************
+        //                              MODIFICAR MATERIAS PRIMAS
+        //*****************************************************************************************
+
+        public static void Actualizar(Entidades.MateriaPrima materiaPrima)
+        {
+            if (DAL.MateriaPrimaDAL.ModificarMateriaPrima(materiaPrima)) throw new Entidades.Excepciones.ElementoExistenteException();
+            //Si no existe la modifica en la Base de datos
+            else DAL.MateriaPrimaDAL.Actualizar(materiaPrima);
+        }
+
+
     }
 }

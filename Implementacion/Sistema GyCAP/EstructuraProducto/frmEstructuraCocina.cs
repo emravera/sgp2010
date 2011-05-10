@@ -814,7 +814,7 @@ namespace GyCAP.UI.EstructuraProducto
                 BLL.CocinaBLL.ObtenerCocinas(dsCocina.COCINAS);
                 BLL.EmpleadoBLL.ObtenerEmpleados(dsEmpleado.EMPLEADOS);
                 BLL.ParteBLL.ObtenerPartes(null, null, null, null, null, null, dsEstructura.PARTES);
-                BLL.MateriaPrimaBLL.ObtenerTodos(dsEstructura.MATERIAS_PRIMAS);
+                BLL.MateriaPrimaBLL.ObtenerMP(dsEstructura.MATERIAS_PRIMAS);
                 BLL.UnidadMedidaBLL.ObtenerTodos(dsEstructura.UNIDADES_MEDIDA);
                 BLL.PlanoBLL.ObtenerTodos(dsEstructura.PLANOS);
                 BLL.TipoParteBLL.ObtenerTodos(dsEstructura.TIPOS_PARTES);

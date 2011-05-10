@@ -11,6 +11,9 @@ namespace GyCAP.UI.PlanificacionProduccion
 {
     public partial class frmPlanificarMateriasPrimas : Form
     {
+        //Reveer todo el formulario con los cambios realizados en la clase de Materia Prima
+
+        
         private static frmPlanificarMateriasPrimas _frmPlanificarMateriasPrimas = null;
         private Data.dsPlanMP dsPlanMP = new GyCAP.Data.dsPlanMP();
         private DataView dvListaPlanMP, dvListaDetalle, dvComboPlanificacion;
@@ -218,19 +221,18 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
 
                 //Cargo el dataset con las Materias Primas Principales
-                BLL.MateriaPrimaPrincipalBLL.ObtenerMPPrincipales(dsPlanMP);
+                BLL.MateriaPrimaBLL.ObtenerMP("",Convert.ToInt32("1"), dsPlanMP.MATERIAS_PRIMAS);
 
-                IList<Entidades.MateriaPrimaPrincipal> materiaPrimaPrincipal = new List<Entidades.MateriaPrimaPrincipal>();
+                IList<Entidades.MateriaPrima> materiaPrimaPrincipal = new List<Entidades.MateriaPrima>();
 
                 foreach (Data.dsPlanMateriasPrimas.MATERIASPRIMASPRINCIPALESRow row in dsPlanMP.MATERIASPRIMASPRINCIPALES.Rows)
                 {
-                    Entidades.MateriaPrimaPrincipal materiaPrima = new GyCAP.Entidades.MateriaPrimaPrincipal();
+                    Entidades.MateriaPrima materiaPrima = new GyCAP.Entidades.MateriaPrima();
 
                     Entidades.MateriaPrima mp = new GyCAP.Entidades.MateriaPrima();
 
                     mp.CodigoMateriaPrima =Convert.ToInt32(row.MP_CODIGO);
-                    materiaPrima.MateriaPrima = mp;
-                    materiaPrima.Codigo =Convert.ToInt32(row.MPPR_CODIGO);
+                    materiaPrima.CodigoMateriaPrima =Convert.ToInt32(row.MPPR_CODIGO);
                     materiaPrima.Cantidad = row.MPPR_CANTIDAD;
                     
                     materiaPrimaPrincipal.Add(materiaPrima);
@@ -259,13 +261,13 @@ namespace GyCAP.UI.PlanificacionProduccion
                     cont+=1;
                     decimal cantidadMensual = plan[cont].CantidadMes;
                     
-                    foreach (Entidades.MateriaPrimaPrincipal mpPrincipal in materiaPrimaPrincipal)
+                    foreach (Entidades.MateriaPrima mpPrincipal in materiaPrimaPrincipal)
                     {
                         Entidades.DetallePlanMateriasPrimas detalle = new GyCAP.Entidades.DetallePlanMateriasPrimas();
 
                         //Creo la materia prima y la asigno
                         Entidades.MateriaPrima  mp = new GyCAP.Entidades.MateriaPrima();
-                        mp.CodigoMateriaPrima= mpPrincipal.MateriaPrima.CodigoMateriaPrima;
+                        mp.CodigoMateriaPrima= mpPrincipal.CodigoMateriaPrima;
                         detalle.MateriaPrima = mp;
                         detalle.Plan = planesMP[cont];
                         detalle.Cantidad = mpPrincipal.Cantidad * cantidadMensual;
@@ -503,8 +505,5 @@ namespace GyCAP.UI.PlanificacionProduccion
         }
 
        
-
-
-
     }
 }

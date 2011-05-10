@@ -10,7 +10,7 @@ namespace GyCAP.DAL
     public class UnidadMedidaDAL
     {
        //BUSQUEDA
-        public static void ObtenerUnidad(string nombre, int idTipo, Data.dsUnidadMedida ds)
+        public static void ObtenerUnidad(string nombre, int idTipo, Data.dsPlanMP ds)
         {
             string sql = @"SELECT umed_codigo,tumed_codigo, umed_nombre, umed_abreviatura
                               FROM UNIDADES_MEDIDA";

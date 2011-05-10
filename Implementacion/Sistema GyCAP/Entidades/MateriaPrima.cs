@@ -14,7 +14,21 @@ namespace GyCAP.Entidades
         private int cantidadStock;
         private decimal costo;
         private UbicacionStock ubicacionStock;
+        private int esPrincipal;
+        private decimal cantidad;
 
+        public decimal Cantidad
+        {
+            get { return cantidad; }
+            set { cantidad = value; }
+        }
+        
+        public int EsPrincipal
+        {
+            get { return esPrincipal; }
+            set { esPrincipal = value; }
+        }
+        
         public UbicacionStock UbicacionStock
         {
             get { return ubicacionStock; }

@@ -116,6 +116,7 @@
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
             this.dgvLista.AllowUserToResizeRows = false;
+            this.dgvLista.CausesValidation = false;
             this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLista.Location = new System.Drawing.Point(9, 23);
             this.dgvLista.MultiSelect = false;
@@ -147,7 +148,9 @@
             // 
             // rbTodosBuscar
             // 
+            this.rbTodosBuscar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.rbTodosBuscar.AutoSize = true;
+            this.rbTodosBuscar.CausesValidation = false;
             this.rbTodosBuscar.Location = new System.Drawing.Point(408, 23);
             this.rbTodosBuscar.Name = "rbTodosBuscar";
             this.rbTodosBuscar.Size = new System.Drawing.Size(54, 17);
@@ -158,7 +161,9 @@
             // 
             // rbNOPcipalBuscar
             // 
+            this.rbNOPcipalBuscar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.rbNOPcipalBuscar.AutoSize = true;
+            this.rbNOPcipalBuscar.CausesValidation = false;
             this.rbNOPcipalBuscar.Location = new System.Drawing.Point(367, 23);
             this.rbNOPcipalBuscar.Name = "rbNOPcipalBuscar";
             this.rbNOPcipalBuscar.Size = new System.Drawing.Size(38, 17);
@@ -169,7 +174,9 @@
             // 
             // rbPcipalBuscar
             // 
+            this.rbPcipalBuscar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.rbPcipalBuscar.AutoSize = true;
+            this.rbPcipalBuscar.CausesValidation = false;
             this.rbPcipalBuscar.Location = new System.Drawing.Point(326, 23);
             this.rbPcipalBuscar.Name = "rbPcipalBuscar";
             this.rbPcipalBuscar.Size = new System.Drawing.Size(33, 17);
@@ -300,6 +307,7 @@
             this.btnGuardar.TabIndex = 10;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // gbDatos
             // 
@@ -349,10 +357,21 @@
             // 
             // numCosto
             // 
+            this.numCosto.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.numCosto.Location = new System.Drawing.Point(153, 145);
+            this.numCosto.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
             this.numCosto.Name = "numCosto";
             this.numCosto.Size = new System.Drawing.Size(79, 21);
             this.numCosto.TabIndex = 14;
+            this.numCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label7
             // 
@@ -412,7 +431,18 @@
             // 
             // numCantidad
             // 
+            this.numCantidad.CausesValidation = false;
+            this.numCantidad.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.numCantidad.Location = new System.Drawing.Point(314, 15);
+            this.numCantidad.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
             this.numCantidad.Name = "numCantidad";
             this.numCantidad.Size = new System.Drawing.Size(79, 21);
             this.numCantidad.TabIndex = 25;
@@ -429,6 +459,7 @@
             // rbNOPcipalDatos
             // 
             this.rbNOPcipalDatos.AutoSize = true;
+            this.rbNOPcipalDatos.CausesValidation = false;
             this.rbNOPcipalDatos.Location = new System.Drawing.Point(63, 16);
             this.rbNOPcipalDatos.Name = "rbNOPcipalDatos";
             this.rbNOPcipalDatos.Size = new System.Drawing.Size(38, 17);
@@ -436,10 +467,12 @@
             this.rbNOPcipalDatos.TabStop = true;
             this.rbNOPcipalDatos.Text = "No";
             this.rbNOPcipalDatos.UseVisualStyleBackColor = true;
+            this.rbNOPcipalDatos.CheckedChanged += new System.EventHandler(this.rbNOPcipalDatos_CheckedChanged);
             // 
             // rbPcipalDatos
             // 
             this.rbPcipalDatos.AutoSize = true;
+            this.rbPcipalDatos.CausesValidation = false;
             this.rbPcipalDatos.Location = new System.Drawing.Point(22, 16);
             this.rbPcipalDatos.Name = "rbPcipalDatos";
             this.rbPcipalDatos.Size = new System.Drawing.Size(35, 17);
@@ -447,6 +480,7 @@
             this.rbPcipalDatos.TabStop = true;
             this.rbPcipalDatos.Text = "SI";
             this.rbPcipalDatos.UseVisualStyleBackColor = true;
+            this.rbPcipalDatos.CheckedChanged += new System.EventHandler(this.rbPcipalDatos_CheckedChanged);
             // 
             // tsMenu
             // 
@@ -566,6 +600,7 @@
             // 
             // cbTipoUnMedida
             // 
+            this.cbTipoUnMedida.CausesValidation = false;
             this.cbTipoUnMedida.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoUnMedida.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbTipoUnMedida.FormattingEnabled = true;
@@ -573,6 +608,7 @@
             this.cbTipoUnMedida.Name = "cbTipoUnMedida";
             this.cbTipoUnMedida.Size = new System.Drawing.Size(155, 21);
             this.cbTipoUnMedida.TabIndex = 10;
+            this.cbTipoUnMedida.DropDownClosed += new System.EventHandler(this.cbTipoUnMedida_DropDownClosed);
             // 
             // frmMateriaPrimaPrincipal
             // 
