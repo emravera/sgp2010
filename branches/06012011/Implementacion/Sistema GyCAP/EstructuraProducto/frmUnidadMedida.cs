@@ -13,7 +13,7 @@ namespace GyCAP.UI.EstructuraProducto
     public partial class frmUnidadMedida : Form
     {
         private static frmUnidadMedida _frmUnidadMedida = null;
-        private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
+        private Data.dsPlanMP dsUnidadMedida = new GyCAP.Data.dsPlanMP();
         private DataView dvListaUnidad, dvComboUnidad, dvComboBuscarUnidad;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, };
         private estadoUI estadoInterface;
@@ -254,7 +254,7 @@ namespace GyCAP.UI.EstructuraProducto
                         //Primero lo creamos en la db
                         unidadMedida.Codigo = BLL.UnidadMedidaBLL.Insertar(unidadMedida);
                         //Ahora lo agregamos al dataset
-                        Data.dsUnidadMedida.UNIDADES_MEDIDARow rowUnidadMedida = dsUnidadMedida.UNIDADES_MEDIDA.NewUNIDADES_MEDIDARow();
+                        Data.dsPlanMP.UNIDADES_MEDIDARow rowUnidadMedida = dsUnidadMedida.UNIDADES_MEDIDA.NewUNIDADES_MEDIDARow();
                         //Indicamos que comienza la edición de la fila
                         rowUnidadMedida.BeginEdit();
                         rowUnidadMedida.UMED_CODIGO = unidadMedida.Codigo;
@@ -306,7 +306,7 @@ namespace GyCAP.UI.EstructuraProducto
                         //Lo actualizamos en la DB
                         BLL.UnidadMedidaBLL.Actualizar(unidadMedida);
                         //Lo actualizamos en el dataset y aceptamos los cambios
-                        Data.dsUnidadMedida.UNIDADES_MEDIDARow rowUnidadMedida = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(unidadMedida.Codigo);
+                        Data.dsPlanMP.UNIDADES_MEDIDARow rowUnidadMedida = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(unidadMedida.Codigo);
                         //Indicamos que comienza la edición de la fila
                         rowUnidadMedida.BeginEdit();
                         rowUnidadMedida.UMED_NOMBRE = unidadMedida.Nombre;

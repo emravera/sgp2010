@@ -17,6 +17,8 @@ namespace GyCAP.UI.EstructuraProducto
         private DataView dvListaBusqueda, dvCbUnidadMedida, dvCbTipoUnMedida, dvCbUbicacionStock;
         private static estadoUI estadoInterface;
 
+        #region Inicio Pantalla
+
         public frmMateriaPrimaPrincipal()
         {
             InitializeComponent();
@@ -42,7 +44,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns["MP_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["USTCK_NUMERO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["MP_ESPRINCIPAL"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["MP_CANTIDAD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["MP_CANTIDAD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
 
             //Habilito resize
@@ -78,9 +80,6 @@ namespace GyCAP.UI.EstructuraProducto
 
             //LLeno cada uno de los datatable con los datos
             
-            //Lleno el DataTable con las Unidades de Medida
-            BLL.UnidadMedidaBLL.ObtenerTodos(dsMateriaPrima.UNIDADES_MEDIDA);
-
             //Lleno el DataTable con los Tipos de Unidades de Medida
             BLL.TipoUnidadMedidaBLL.ObtenerTodos(dsMateriaPrima.TIPOS_UNIDADES_MEDIDA);
 
@@ -98,10 +97,12 @@ namespace GyCAP.UI.EstructuraProducto
             dvCbUbicacionStock = new DataView(dsMateriaPrima.UBICACIONES_STOCK);
             cbUbicacionStock.DataSource = dvCbUbicacionStock;
             cbUbicacionStock.SetDatos(dvCbUbicacionStock, "ustck_numero", "ustck_nombre", "-Seleccionar-", false);
-
+                   
             //Seteo la propiedad del Incremento de la cantidad
-            numCantidad.Increment=Convert.ToDecimal(0.01);
-            numCosto.Increment = Convert.ToDecimal(0.01);
+            numCosto.DecimalPlaces = 2;
+            numCantidad.DecimalPlaces = 2;
+            numCosto.Increment = Convert.ToDecimal("0,01");
+            numCantidad.Increment = Convert.ToDecimal("0,01");
 
             //Seteamos el estado de la interface
             SetInterface(estadoUI.inicio);                      
@@ -127,6 +128,8 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
+        #endregion
+
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Dispose(true);
@@ -145,6 +148,63 @@ namespace GyCAP.UI.EstructuraProducto
         {
             SetInterface(estadoUI.inicio);
         }
+               
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.modificar);
+        }
+        
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Busca por defecto todas las materias primas
+                int esPrincipal=3;
+                dsMateriaPrima.MATERIAS_PRIMAS.Clear();
+
+                if (rbPcipalBuscar.Checked) { esPrincipal = 1; }
+                if (rbNOPcipalBuscar.Checked) { esPrincipal = 0; }
+                if (rbTodosBuscar.Checked) { esPrincipal = 3; }
+
+                BLL.MateriaPrimaBLL.ObtenerMP(txtNombreBuscar.Text, esPrincipal , dsMateriaPrima.MATERIAS_PRIMAS);
+                
+                if (dsMateriaPrima.MATERIAS_PRIMAS.Rows.Count == 0)
+                {
+                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Materias Primas", this.Text);
+                }
+                SetInterface(estadoUI.inicio);
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
+                SetInterface(estadoUI.inicio);
+            }
+
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Validamos el formulario
+                if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
+                {
+                    //Creamos el objeto materia prima
+                    Entidades.MateriaPrima materiaPrima = new GyCAP.Entidades.MateriaPrima();
+
+                    
+
+                }
+
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
+            }
+        }
+
+        #region Servicios
+
         private void SetInterface(estadoUI estado)
         {
             switch (estado)
@@ -181,6 +241,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnModificar.Enabled = false;
 
                     rbNOPcipalDatos.Checked = true;
+                    numCantidad.Enabled = false;
                     tcMateriaPrima.SelectedTab = tpDatos;
                     estadoInterface = estadoUI.nuevo;
                     break;
@@ -195,40 +256,7 @@ namespace GyCAP.UI.EstructuraProducto
                     break;
             }
         }
-               
-        private void btnModificar_Click(object sender, EventArgs e)
-        {
-            SetInterface(estadoUI.modificar);
-        }
         
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int esPrincipal=3;
-                dsMateriaPrima.MATERIAS_PRIMAS.Clear();
-
-                if (rbPcipalBuscar.Checked) { esPrincipal = 1; }
-                if (rbNOPcipalBuscar.Checked) { esPrincipal = 0; }
-                if (rbTodosBuscar.Checked) { esPrincipal = 3; }
-
-                BLL.MateriaPrimaBLL.ObtenerMP(txtNombreBuscar.Text, esPrincipal , dsMateriaPrima.MATERIAS_PRIMAS);
-                
-                if (dsMateriaPrima.MATERIAS_PRIMAS.Rows.Count == 0)
-                {
-                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Localidades", this.Text);
-                }
-                SetInterface(estadoUI.inicio);
-            }
-            catch (Entidades.Excepciones.BaseDeDatosException ex)
-            {
-                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
-                SetInterface(estadoUI.inicio);
-            }
-
-
-        }
-
         private void dgvLista_CellFormatting_1(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value.ToString() != string.Empty)
@@ -254,10 +282,57 @@ namespace GyCAP.UI.EstructuraProducto
             }
         }
 
-        
+        private void cbTipoUnMedida_DropDownClosed(object sender, EventArgs e)
+        {
+            try
+            {
+                if(cbTipoUnMedida.GetSelectedIndex() != -1)
+                {
+                    //Obtengo el tipo de unidad de medida seleccionado
+                    int tipo =Convert.ToInt32(cbTipoUnMedida.GetSelectedValue());
 
-        
-    }
-        
+                    //Limpio el Datatable 
+                    dsMateriaPrima.UNIDADES_MEDIDA.Clear();
+                    
+                    //Llamo a la busqueda de unidades de medida
+                    BLL.UnidadMedidaBLL.ObtenerTodos("", tipo, dsMateriaPrima);
+                    
+                    //Checkeo que existan registros y cargo el combo
+                    if (dsMateriaPrima.UNIDADES_MEDIDA.Count > 0)
+                    {
+                        //Creamos el Dataview y se lo asignamos al combo de unidades de medida
+                        dvCbUnidadMedida = new DataView(dsMateriaPrima.UNIDADES_MEDIDA);
+                        cbUnidadMedida.DataSource = dvCbUnidadMedida;
+                        cbUnidadMedida.SetDatos(dvCbUnidadMedida, "umed_codigo", "umed_nombre", "-Seleccionar-", false);
+                    }
+                    else
+                    {
+                        Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Unidades de Medida", this.Text);
+                    }
+                   
+                }
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
+            }            
+        }
+
+        private void rbPcipalDatos_CheckedChanged(object sender, EventArgs e)
+        {
+            //Permito que se cargue la cantidad
+            numCantidad.Enabled = true;            
+        }
+
+        private void rbNOPcipalDatos_CheckedChanged(object sender, EventArgs e)
+        {
+            //Cuando no es principal no dejo que se cargue nada
+            numCantidad.Enabled = false;
+            numCantidad.Value = 0;
+        }
+
+        #endregion
+
+    }       
         
 }

@@ -15,7 +15,7 @@ namespace GyCAP.UI.EstructuraProducto
         private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
         private Data.dsCocina dsCocina = new GyCAP.Data.dsCocina();
         private Data.dsEmpleado dsEmpleado = new GyCAP.Data.dsEmpleado();
-        private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
+        private Data.dsPlanMP dsUnidadMedida = new GyCAP.Data.dsPlanMP();
         DataView dvPartes, dvCocinaBuscar, dvEstructuras;
         
         public frmListadoEstructura()
@@ -83,7 +83,7 @@ namespace GyCAP.UI.EstructuraProducto
                 BLL.ConjuntoBLL.ObtenerConjuntos(dsEstructura.CONJUNTOS);
                 BLL.SubConjuntoBLL.ObtenerSubconjuntos(dsEstructura.SUBCONJUNTOS);
                 BLL.PiezaBLL.ObtenerPiezas(dsEstructura.PIEZAS);
-                BLL.MateriaPrimaBLL.ObtenerTodos(dsEstructura.MATERIAS_PRIMAS);
+                BLL.MateriaPrimaBLL.ObtenerMP(dsEstructura.MATERIAS_PRIMAS);
                 BLL.UnidadMedidaBLL.ObtenerTodos(dsUnidadMedida.UNIDADES_MEDIDA);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)

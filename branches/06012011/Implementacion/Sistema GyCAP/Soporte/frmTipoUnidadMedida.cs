@@ -12,7 +12,7 @@ namespace GyCAP.UI.Soporte
     public partial class frmTipoUnidadMedida : Form
     {
         private static frmTipoUnidadMedida _frmTipoUnidadMedida = null;
-        private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
+        private Data.dsPlanMP dsUnidadMedida = new GyCAP.Data.dsPlanMP();
         private DataView dvTipoUnidadMedida;
         private enum estadoUI { inicio, modificar };
         private estadoUI estadoInterface;
@@ -118,7 +118,7 @@ namespace GyCAP.UI.Soporte
                         //Primero lo creamos en la db
                         tipoUnidadMedida.Codigo = BLL.TipoUnidadMedidaBLL.Insertar(tipoUnidadMedida);
                         //Ahora lo agregamos al dataset
-                        Data.dsUnidadMedida.TIPOS_UNIDADES_MEDIDARow rowTipoUnidadMedida = dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.NewTIPOS_UNIDADES_MEDIDARow();
+                        Data.dsPlanMP.TIPOS_UNIDADES_MEDIDARow rowTipoUnidadMedida = dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.NewTIPOS_UNIDADES_MEDIDARow();
                         //Indicamos que comienza la edición de la fila
                         rowTipoUnidadMedida.BeginEdit();
                         rowTipoUnidadMedida.TUMED_CODIGO = tipoUnidadMedida.Codigo;
@@ -159,7 +159,7 @@ namespace GyCAP.UI.Soporte
                         //Lo actualizamos en la DB
                         BLL.TipoUnidadMedidaBLL.Actualizar(tipoUnidadMedida);
                         //Lo actualizamos en el dataset y aceptamos los cambios
-                        Data.dsUnidadMedida.TIPOS_UNIDADES_MEDIDARow rowTipoUnidadMedida = dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.FindByTUMED_CODIGO(tipoUnidadMedida.Codigo);
+                        Data.dsPlanMP.TIPOS_UNIDADES_MEDIDARow rowTipoUnidadMedida = dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.FindByTUMED_CODIGO(tipoUnidadMedida.Codigo);
                         rowTipoUnidadMedida.BeginEdit();
                         rowTipoUnidadMedida.TUMED_NOMBRE = txtNombre.Text;
                         rowTipoUnidadMedida.EndEdit();

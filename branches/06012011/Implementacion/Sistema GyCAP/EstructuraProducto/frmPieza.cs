@@ -14,7 +14,7 @@ namespace GyCAP.UI.EstructuraProducto
         private Sistema.ControlesUsuarios.AnimadorFormulario animador = new GyCAP.UI.Sistema.ControlesUsuarios.AnimadorFormulario();
         private static frmPieza _frmPieza = null;
         private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
-        private Data.dsUnidadMedida dsUnidadMedida = new GyCAP.Data.dsUnidadMedida();
+        private Data.dsPlanMP dsUnidadMedida = new GyCAP.Data.dsPlanMP();
         private DataView dvPiezas, dvDetallePieza, dvMPDisponibles, dvUnidadMedida;
         private DataView dvTerminacionBuscar, dvTerminaciones, dvEstado, dvPlano, dvHojaRuta;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
@@ -749,7 +749,7 @@ namespace GyCAP.UI.EstructuraProducto
                 BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsEstructura.TERMINACIONES);
                 BLL.PlanoBLL.ObtenerTodos(dsEstructura.PLANOS);
                 BLL.EstadoParteBLL.ObtenerTodos(dsEstructura.ESTADO_PARTES);
-                BLL.MateriaPrimaBLL.ObtenerTodos(dsEstructura.MATERIAS_PRIMAS);
+                BLL.MateriaPrimaBLL.ObtenerMP(dsEstructura.MATERIAS_PRIMAS);
                 BLL.UnidadMedidaBLL.ObtenerTodos(dsUnidadMedida.UNIDADES_MEDIDA);
                 BLL.TipoUnidadMedidaBLL.ObtenerTodos(dsUnidadMedida.TIPOS_UNIDADES_MEDIDA);
                 BLL.HojaRutaBLL.ObtenerHojasRuta(dsEstructura.HOJAS_RUTA);

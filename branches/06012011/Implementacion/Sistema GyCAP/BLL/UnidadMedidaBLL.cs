@@ -11,11 +11,12 @@ namespace GyCAP.BLL
     {
         //Busqueda
         //Obtiene los datos de acuerdo a los criterios de busqueda
-        public static void ObtenerTodos(string nombre, int idTipo, Data.dsUnidadMedida ds)
+        public static void ObtenerTodos(string nombre, int idTipo, Data.dsPlanMP ds)
         {
             DAL.UnidadMedidaDAL.ObtenerUnidad(nombre, idTipo, ds);
         }
-        //Metodo que se llama desde materias primas principales
+        
+        //Metodo para buscar todos los valores pasandole el datatable
         public static void ObtenerTodos(DataTable dtUnidadMedida)
         {
             DAL.UnidadMedidaDAL.ObtenerTodos(dtUnidadMedida);

@@ -60,7 +60,7 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static void ObtenerTipoUnidadMedida(Data.dsUnidadMedida ds)
+        public static void ObtenerTipoUnidadMedida(Data.dsPlanMP ds)
         {          
             string sql = "SELECT tumed_codigo, tumed_nombre FROM TIPOS_UNIDADES_MEDIDA";
             try
@@ -71,7 +71,7 @@ namespace GyCAP.DAL
             
         }
         
-        public static void ObtenerTipoUnidadMedida(string nombre, Data.dsUnidadMedida ds)
+        public static void ObtenerTipoUnidadMedida(string nombre, Data.dsPlanMP ds)
         {
             if (nombre != String.Empty)
             {

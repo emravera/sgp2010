@@ -9,6 +9,10 @@ namespace GyCAP.DAL
 {
     public class MateriaPrimaDAL
     {
+        //*****************************************************************************************
+        //                              BUSQUEDA DE MATERIAS PRIMAS
+        //*****************************************************************************************
+
         /// <summary>
         /// Obtiene una materia prima por su código.
         /// </summary>
@@ -42,33 +46,7 @@ namespace GyCAP.DAL
             }
             return materiaPrima;
         }
-        
-        //Metodo que obtiene todas las materias primas
-        public static void ObtenerTodos(Data.dsMateriaPrima ds)
-        {
-            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_costo, ustck_numero 
-                        FROM MATERIAS_PRIMAS";
-            try
-            {
-                DB.FillDataSet(ds, "MATERIAS_PRIMAS", sql, null);
-            }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-
-        }
-
-        //Metodo que obtiene todas las materias primas
-        public static void ObtenerMP(Data.dsPlanMateriasPrimas ds)
-        {
-            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_costo, ustck_numero 
-                        FROM MATERIAS_PRIMAS";
-            try
-            {
-                DB.FillDataSet(ds, "MATERIAS_PRIMAS", sql, null);
-            }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-
-        }
-        
+                        
         //Metodo que obtiene todas las materias primas (con datatable)
         public static void ObtenerMP(DataTable dtMateriasPrimas)
         {
@@ -79,18 +57,6 @@ namespace GyCAP.DAL
                 DB.FillDataTable(dtMateriasPrimas, sql, null);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-
-        }
-
-        public static void ObtenerTodos(System.Data.DataTable dt)
-        {
-            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_costo, ustck_numero 
-                        FROM MATERIAS_PRIMAS";
-            try
-            {
-                DB.FillDataTable(dt, sql, null);
-            }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
 
         }
 
@@ -178,5 +144,99 @@ namespace GyCAP.DAL
                 catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
         }
+
+        //*****************************************************************************************
+        //                              INSERTAR MATERIAS PRIMAS
+        //*****************************************************************************************
+        
+        //Metodo para insertar elemento en la Base de Datos
+        public static int Insertar(Entidades.MateriaPrima materiaPrima)
+        {
+            //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
+            string sql = "INSERT INTO [MATERIASPRIMASPRINCIPALES] ([mp_codigo], [mppr_cantidad]) VALUES (@p0, @p1) SELECT @@Identity";
+            object[] valorParametros = { materiaPrima.CodigoMateriaPrima, materiaPrima.Cantidad };
+            try
+            {
+                return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+        }
+
+        //Metodo que valida que no se quiera insertar algo que ya existe
+        public static bool EsMateriaPrima(Entidades.MateriaPrima materiaPrima)
+        {
+            string sql = "SELECT count(mppr_codigo) FROM MATERIASPRIMASPRINCIPALES WHERE mp_codigo = @p0";
+
+
+            object[] valorParametros = { materiaPrima.CodigoMateriaPrima };
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+        }
+        //*****************************************************************************************
+        //                              MODIFICAR MATERIAS PRIMAS
+        //*****************************************************************************************
+
+        //Metodo que modifica en la base de datos
+        public static void Actualizar(Entidades.MateriaPrima materiaPrima)
+        {
+            string sql = @"UPDATE MATERIASPRIMASPRINCIPALES SET mp_codigo = @p0, mppr_cantidad = @p1
+                         WHERE mppr_codigo = @p2";
+            object[] valorParametros = { materiaPrima.CodigoMateriaPrima, materiaPrima.Cantidad, materiaPrima.CodigoMateriaPrima };
+            try
+            {
+                DB.executeNonQuery(sql, valorParametros, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+            
+        //Metodo que valida que no se quiera modificar algo que ya existe
+        public static bool ModificarMateriaPrima(Entidades.MateriaPrima materiaPrima)
+        {
+            string sql = "SELECT count(mppr_codigo) FROM MATERIASPRIMASPRINCIPALES WHERE mp_codigo = @p0 and mppr_cantidad=@p1";
+
+            object[] valorParametros = { materiaPrima.CodigoMateriaPrima, materiaPrima.Cantidad };
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+        }
+
+        //*****************************************************************************************
+        //                              ELIMINAR MATERIAS PRIMAS
+        //*****************************************************************************************
+
+        //Metodo que elimina de la base de datos
+        public static void Eliminar(int codigo)
+        {
+            string sql = "DELETE FROM MATERIASPRIMASPRINCIPALES WHERE mppr_codigo = @p0";
+            object[] valorParametros = { codigo };
+            try
+            {
+                DB.executeNonQuery(sql, valorParametros, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
     }
 }
