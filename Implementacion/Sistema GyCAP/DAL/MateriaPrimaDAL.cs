@@ -153,8 +153,13 @@ namespace GyCAP.DAL
         public static int Insertar(Entidades.MateriaPrima materiaPrima)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
-            string sql = "INSERT INTO [MATERIASPRIMASPRINCIPALES] ([mp_codigo], [mppr_cantidad]) VALUES (@p0, @p1) SELECT @@Identity";
-            object[] valorParametros = { materiaPrima.CodigoMateriaPrima, materiaPrima.Cantidad };
+            string sql = @"INSERT INTO [MATERIAS_PRIMAS] 
+                           ([mp_nombre], [mp_descripcion], [umed_codigo], [mp_costo], [ustck_numero], [mp_esprincipal], [mp_cantidad]) 
+                           VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6) SELECT @@Identity";
+            object[] valorParametros = { materiaPrima.Nombre, materiaPrima.Descripcion,  
+                                         materiaPrima.CodigoUnidadMedida, materiaPrima.Costo,
+                                         materiaPrima.UbicacionStock.Numero, materiaPrima.EsPrincipal,
+                                         materiaPrima.Cantidad};
             try
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
@@ -166,10 +171,10 @@ namespace GyCAP.DAL
         //Metodo que valida que no se quiera insertar algo que ya existe
         public static bool EsMateriaPrima(Entidades.MateriaPrima materiaPrima)
         {
-            string sql = "SELECT count(mppr_codigo) FROM MATERIASPRIMASPRINCIPALES WHERE mp_codigo = @p0";
+            string sql = "SELECT count(mp_codigo) FROM MATERIAS_PRIMAS WHERE mp_nombre = @p0";
 
 
-            object[] valorParametros = { materiaPrima.CodigoMateriaPrima };
+            object[] valorParametros = { materiaPrima.Nombre };
             try
             {
                 if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
@@ -191,9 +196,14 @@ namespace GyCAP.DAL
         //Metodo que modifica en la base de datos
         public static void Actualizar(Entidades.MateriaPrima materiaPrima)
         {
-            string sql = @"UPDATE MATERIASPRIMASPRINCIPALES SET mp_codigo = @p0, mppr_cantidad = @p1
-                         WHERE mppr_codigo = @p2";
-            object[] valorParametros = { materiaPrima.CodigoMateriaPrima, materiaPrima.Cantidad, materiaPrima.CodigoMateriaPrima };
+            string sql = @"UPDATE MATERIAS_PRIMAS 
+                           SET mp_nombre = @p0, mp_descripcion = @p1, umed_codigo = @p2, mp_costo = @p3,
+                           ustck_numero = @p4, mp_esprincipal = @p5, mp_cantidad = @p6
+                           WHERE mp_codigo = @p7";
+            object[] valorParametros = { materiaPrima.Nombre, materiaPrima.Descripcion,
+                                         materiaPrima.CodigoUnidadMedida, materiaPrima.Costo,
+                                         materiaPrima.UbicacionStock.Numero, materiaPrima.EsPrincipal,
+                                         materiaPrima.Cantidad, materiaPrima.CodigoMateriaPrima };
             try
             {
                 DB.executeNonQuery(sql, valorParametros, null);
@@ -204,9 +214,9 @@ namespace GyCAP.DAL
         //Metodo que valida que no se quiera modificar algo que ya existe
         public static bool ModificarMateriaPrima(Entidades.MateriaPrima materiaPrima)
         {
-            string sql = "SELECT count(mppr_codigo) FROM MATERIASPRIMASPRINCIPALES WHERE mp_codigo = @p0 and mppr_cantidad=@p1";
+            string sql = "SELECT count(mp_codigo) FROM MATERIAS_PRIMAS WHERE mp_nombre = @p0";
 
-            object[] valorParametros = { materiaPrima.CodigoMateriaPrima, materiaPrima.Cantidad };
+            object[] valorParametros = { materiaPrima.CodigoMateriaPrima };
             try
             {
                 if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
@@ -229,7 +239,7 @@ namespace GyCAP.DAL
         //Metodo que elimina de la base de datos
         public static void Eliminar(int codigo)
         {
-            string sql = "DELETE FROM MATERIASPRIMASPRINCIPALES WHERE mppr_codigo = @p0";
+            string sql = "DELETE FROM MATERIAS_PRIMAS WHERE mp_codigo = @p0";
             object[] valorParametros = { codigo };
             try
             {
