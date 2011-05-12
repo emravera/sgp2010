@@ -13,7 +13,7 @@ namespace GyCAP.UI.EstructuraProducto
     {
         private static frmMateriaPrimaPrincipal _frmMateriaPrima = null;
         private Data.dsPlanMP dsMateriaPrima = new GyCAP.Data.dsPlanMP();
-        private enum estadoUI { inicio, nuevo, modificar };
+        private enum estadoUI { inicio, nuevo, modificar, consultar };
         private DataView dvListaBusqueda, dvCbUnidadMedida, dvCbTipoUnMedida, dvCbUbicacionStock;
         private static estadoUI estadoInterface;
 
@@ -79,7 +79,10 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.DataSource = dvListaBusqueda;
 
             //LLeno cada uno de los datatable con los datos
-            
+
+            //Lleno el DataTable con las Unidades de Medida
+            BLL.UnidadMedidaBLL.ObtenerTodos(dsMateriaPrima.UNIDADES_MEDIDA);
+
             //Lleno el DataTable con los Tipos de Unidades de Medida
             BLL.TipoUnidadMedidaBLL.ObtenerTodos(dsMateriaPrima.TIPOS_UNIDADES_MEDIDA);
 
@@ -149,11 +152,6 @@ namespace GyCAP.UI.EstructuraProducto
             SetInterface(estadoUI.inicio);
         }
                
-        private void btnModificar_Click(object sender, EventArgs e)
-        {
-            SetInterface(estadoUI.modificar);
-        }
-        
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             try
@@ -182,6 +180,86 @@ namespace GyCAP.UI.EstructuraProducto
 
         }
 
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            //Controlamos que esté seleccionado algo
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Cargamos los datos a los controles 
+                txtNombre.Text = dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_nombre"].ToString();
+                txtDescripcion.Text = dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_descripcion"].ToString();
+
+                //Cargo todas las unidades de medida
+                BLL.UnidadMedidaBLL.ObtenerTodos(dsMateriaPrima.UNIDADES_MEDIDA);
+
+                //Creamos el Dataview y se lo asignamos al combo de unidades de medida
+                dvCbUnidadMedida = new DataView(dsMateriaPrima.UNIDADES_MEDIDA);
+                cbUnidadMedida.DataSource = dvCbUnidadMedida;
+                cbUnidadMedida.SetDatos(dvCbUnidadMedida, "umed_codigo", "umed_nombre", "-Seleccionar-", false);
+
+                cbUnidadMedida.SetSelectedValue(Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["umed_codigo"]));
+                cbUbicacionStock.SetSelectedValue(Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["ustck_numero"]));
+                numCosto.Value = Convert.ToDecimal(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["ustck_numero"]);
+
+                if (dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_esprincipal"].ToString() == "SI")
+                {
+                    rbPcipalBuscar.Checked = true;
+                    numCosto.Value = Convert.ToDecimal(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_costo"]);
+                }
+                else
+                {
+                    rbNOPcipalBuscar.Checked = true;
+                    numCosto.Value = 0;
+                }
+
+                SetInterface(estadoUI.consultar);
+            }
+            else
+            {
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Materia Prima", Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
+            }
+
+        }
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            //Controlamos que esté seleccionado algo
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Cargamos los datos a los controles 
+                txtNombre.Text = dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_nombre"].ToString();
+                txtDescripcion.Text = dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_descripcion"].ToString();
+
+                //Cargo todas las unidades de medida
+                BLL.UnidadMedidaBLL.ObtenerTodos(dsMateriaPrima.UNIDADES_MEDIDA);
+
+                //Creamos el Dataview y se lo asignamos al combo de unidades de medida
+                dvCbUnidadMedida = new DataView(dsMateriaPrima.UNIDADES_MEDIDA);
+                cbUnidadMedida.DataSource = dvCbUnidadMedida;
+                cbUnidadMedida.SetDatos(dvCbUnidadMedida, "umed_codigo", "umed_nombre", "-Seleccionar-", false);
+
+                cbUnidadMedida.SetSelectedValue(Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["umed_codigo"]));
+                cbUbicacionStock.SetSelectedValue(Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["ustck_numero"]));
+                numCosto.Value = Convert.ToDecimal(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["ustck_numero"]);
+
+                if (dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_esprincipal"].ToString() == "SI")
+                {
+                    rbPcipalBuscar.Checked = true;
+                    numCosto.Value = Convert.ToDecimal(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_costo"]);
+                }
+                else
+                {
+                    rbNOPcipalBuscar.Checked = true;
+                    numCosto.Value = 0;
+                }
+
+                SetInterface(estadoUI.modificar);
+            }
+            else
+            {
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Materia Prima", Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
+            }
+        }
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -191,16 +269,130 @@ namespace GyCAP.UI.EstructuraProducto
                 {
                     //Creamos el objeto materia prima
                     Entidades.MateriaPrima materiaPrima = new GyCAP.Entidades.MateriaPrima();
+                    Entidades.UbicacionStock ubicacion = new GyCAP.Entidades.UbicacionStock();
 
-                    
+                    materiaPrima.Nombre = txtNombre.Text;
+                    materiaPrima.Descripcion = txtDescripcion.Text;
+                    materiaPrima.CodigoUnidadMedida = Convert.ToInt32(cbUnidadMedida.GetSelectedValue());
+                    materiaPrima.Costo = numCosto.Value;
+                    ubicacion.Numero = Convert.ToInt32(cbUbicacionStock.GetSelectedValue());
+                    materiaPrima.UbicacionStock = ubicacion;
+                    if (rbPcipalDatos.Checked == true)
+                    {
+                        materiaPrima.EsPrincipal = 1;
+                        materiaPrima.Cantidad = numCantidad.Value;
+                    }
+                    else if (rbNOPcipalDatos.Checked == true)
+                    {
+                        materiaPrima.EsPrincipal = 0;
+                        materiaPrima.Cantidad = 0;
+                    }
+
+                    //Verificamos si esta guardando un registro nuevo
+                    if (estadoInterface == estadoUI.nuevo)
+                    {
+                        //Lo insertamos en la base de datos
+                        BLL.MateriaPrimaBLL.Insertar(materiaPrima);
+                        
+                        //Agregamos la fila al dataset
+                        Data.dsPlanMP.MATERIAS_PRIMASRow row = dsMateriaPrima.MATERIAS_PRIMAS.NewMATERIAS_PRIMASRow();
+
+                        //Editamos la fila
+                        row.BeginEdit();
+                        row.MP_NOMBRE = materiaPrima.Nombre;
+                        row.MP_DESCRIPCION = materiaPrima.Descripcion;
+                        row.UMED_CODIGO = materiaPrima.CodigoUnidadMedida;
+                        row.MP_COSTO = materiaPrima.Costo;
+                        row.USTCK_NUMERO =materiaPrima.UbicacionStock.Numero;
+                        row.MP_ESPRINCIPAL = materiaPrima.EsPrincipal;
+                        row.MP_CANTIDAD = materiaPrima.Cantidad;
+                        row.EndEdit();
+
+                        //Mostramos un mensaje que se guardo todo bien
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Materia Prima", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+
+                        //Recargamos la unidad de medida
+                        dsMateriaPrima.UNIDADES_MEDIDA.Clear();
+                        
+                        //Lleno el DataTable con las Unidades de Medida
+                        BLL.UnidadMedidaBLL.ObtenerTodos(dsMateriaPrima.UNIDADES_MEDIDA);
+                        
+                        //Ponemos la interfaz en el estado de inicio
+                        SetInterface(estadoUI.inicio);
+                    }
+                    else if (estadoInterface == estadoUI.modificar)
+                    {
+                        //Esta modificando un registro existente
+                        materiaPrima.CodigoMateriaPrima= Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_codigo"]);
+
+                        //Lo insertamos en la base de datos
+                        BLL.MateriaPrimaBLL.Actualizar(materiaPrima);
+
+                        //Agregamos la fila al dataset
+                        Data.dsPlanMP.MATERIAS_PRIMASRow row = dsMateriaPrima.MATERIAS_PRIMAS.FindByMP_CODIGO(materiaPrima.CodigoMateriaPrima);
+
+                        //Editamos la fila
+                        row.BeginEdit();
+                        row.MP_NOMBRE = materiaPrima.Nombre;
+                        row.MP_DESCRIPCION = materiaPrima.Descripcion;
+                        row.UMED_CODIGO = materiaPrima.CodigoUnidadMedida;
+                        row.MP_COSTO = materiaPrima.Costo;
+                        row.USTCK_NUMERO = materiaPrima.UbicacionStock.Numero;
+                        row.MP_ESPRINCIPAL = materiaPrima.EsPrincipal;
+                        row.MP_CANTIDAD = materiaPrima.Cantidad;
+                        row.EndEdit();
+
+                    }
 
                 }
 
+            }
+            catch (Entidades.Excepciones.ElementoExistenteException ex)
+            {
+                Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
                 Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
             }
+        }
+        
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            //Controlamos que esté seleccionado algo
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Preguntamos si está seguro
+                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Localidad", Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
+                if (respuesta == DialogResult.Yes)
+                {
+                    try
+                    {
+                        //Lo eliminamos de la DB
+                        int codigo = Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_codigo"]);
+                        BLL.MateriaPrimaBLL.Eliminar(codigo);
+                        
+                        //Lo eliminamos del dataset
+                        dsMateriaPrima.MATERIAS_PRIMAS.FindByMP_CODIGO(codigo).Delete();
+                        dsMateriaPrima.AcceptChanges();
+
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaEliminar(this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
+                    }
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+                    {
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
+                    }
+                }
+            }
+            else
+            {
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Materia Prima", Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
+            }
+
         }
 
         #region Servicios
@@ -229,12 +421,38 @@ namespace GyCAP.UI.EstructuraProducto
                     estadoInterface = estadoUI.inicio;
                     if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
                     
+                    //Cargo las unidades de medida por posibles errores
+                    dsMateriaPrima.UNIDADES_MEDIDA.Clear();
+                    BLL.UnidadMedidaBLL.ObtenerTodos(dsMateriaPrima.UNIDADES_MEDIDA);
+
+                    dsMateriaPrima.UBICACIONES_STOCK.Clear();
+                    BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsMateriaPrima.UBICACIONES_STOCK);
+
+                    //Bloqueos de los controles
+                    txtNombre.ReadOnly = false;
+                    txtDescripcion.ReadOnly = false;
+                    cbTipoUnMedida.Enabled = true;
+                    cbUnidadMedida.Enabled = true;
+                    cbUbicacionStock.Enabled = true;
+                    numCosto.Enabled = true;
+                    rbNOPcipalDatos.Enabled = true;
+                    rbPcipalDatos.Enabled = true;
+
                     //Manejo de controles
                     txtNombre.Text = String.Empty;
                     txtNombre.Focus();
                     rbTodosBuscar.Checked = true;
                     break;
                 case estadoUI.nuevo:
+                    txtNombre.ReadOnly = false;
+                    txtDescripcion.ReadOnly = false;
+                    cbTipoUnMedida.Enabled = true;
+                    cbUnidadMedida.Enabled = true;
+                    cbUbicacionStock.Enabled = true;
+                    numCosto.Enabled = true;
+                    rbNOPcipalDatos.Enabled = true;
+                    rbPcipalDatos.Enabled = true;
+                    
                     btnNuevo.Enabled = false;
                     btnConsultar.Enabled = false;
                     btnEliminar.Enabled = false;
@@ -247,11 +465,39 @@ namespace GyCAP.UI.EstructuraProducto
                     break;
                 case estadoUI.modificar:
                     txtNombre.ReadOnly = false;
+                    txtDescripcion.ReadOnly = false;
+                    cbTipoUnMedida.Enabled = true;
+                    cbUnidadMedida.Enabled = true;
+                    cbUbicacionStock.Enabled = true;
+                    numCosto.Enabled = true;
+                    rbNOPcipalDatos.Enabled = true;
+                    rbPcipalDatos.Enabled = true;
+                    
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     dgvLista.Enabled = false;
+                    
+                    tcMateriaPrima.SelectedTab = tpDatos;
                     estadoInterface = estadoUI.modificar;
                     break;
+                case estadoUI.consultar:
+                    txtNombre.ReadOnly = true;
+                    txtDescripcion.ReadOnly = true;
+                    cbTipoUnMedida.Enabled = false;
+                    cbUnidadMedida.Enabled = false;
+                    cbUbicacionStock.Enabled = false;
+                    numCosto.Enabled = false;
+                    rbNOPcipalDatos.Enabled = false;
+                    rbPcipalDatos.Enabled = false;
+                    
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    dgvLista.Enabled = false;
+
+                    tcMateriaPrima.SelectedTab = tpDatos;
+                    estadoInterface = estadoUI.modificar;
+                    break;
+
                 default:
                     break;
             }
@@ -268,7 +514,7 @@ namespace GyCAP.UI.EstructuraProducto
                         nombre = dsMateriaPrima.UNIDADES_MEDIDA.FindByUMED_CODIGO(Convert.ToInt32(e.Value)).UMED_NOMBRE;
                         e.Value = nombre;
                         break;
-                    case "USTCK_CODIGO":
+                    case "USTCK_NUMERO":
                         nombre = dsMateriaPrima.UBICACIONES_STOCK.FindByUSTCK_NUMERO(Convert.ToInt32(e.Value)).USTCK_NOMBRE;
                         e.Value = nombre;
                         break;
@@ -332,6 +578,8 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
+
+        
 
     }       
         
