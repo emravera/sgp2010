@@ -55,7 +55,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             //Lista de Detalles
             //Agregamos la columnas
-            //dgvDetalle.Columns.Add("DPMPA_CODIGO", "Código");
+            dgvDetalle.Columns.Add("DPMPA_CODIGO", "Código");
             dgvDetalle.Columns.Add("MP_CODIGO", "Materia Prima");
             dgvDetalle.Columns.Add("DPMPA_CANTIDAD", "Cantidad Mensual");
             dgvDetalle.Columns.Add("UMED_CODIGO", "Unidad Medida");
@@ -64,15 +64,17 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalle.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalle.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            //dgvDetalle.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvDetalle.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            //dgvDetalle.Columns["DPMPA_CODIGO"].DataPropertyName = "DPMPA_CODIGO";
+            dgvDetalle.Columns["DPMPA_CODIGO"].DataPropertyName = "DPMPA_CODIGO";
             dgvDetalle.Columns["MP_CODIGO"].DataPropertyName = "MP_CODIGO";
             dgvDetalle.Columns["DPMPA_CANTIDAD"].DataPropertyName = "DPMPA_CANTIDAD";
             dgvDetalle.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
 
+            //Seteamos las columnas que no queremos que se vean
             dgvLista.Columns["PMPA_CODIGO"].Visible = false;
+            dgvDetalle.Columns["DPMPA_CODIGO"].Visible = false;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDetalle = new DataView(dsPlanMP.DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL);
@@ -203,7 +205,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 
                 IList<Entidades.DetallePlanAnual> plan = new List<Entidades.DetallePlanAnual>();
 
-                foreach (Data.dsPlanMateriasPrimas.DETALLE_PLAN_ANUALRow row in dsPlanMP.DETALLE_PLAN_ANUAL.Rows)
+                foreach (Data.dsPlanMP.DETALLE_PLAN_ANUALRow row in dsPlanMP.DETALLE_PLAN_ANUAL.Rows)
                 {
                     Entidades.DetallePlanAnual detallePlanAnual = new GyCAP.Entidades.DetallePlanAnual();
 
@@ -221,21 +223,19 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
 
                 //Cargo el dataset con las Materias Primas Principales
-                BLL.MateriaPrimaBLL.ObtenerMP("",Convert.ToInt32("1"), dsPlanMP.MATERIAS_PRIMAS);
+                dsPlanMP.MATERIAS_PRIMAS.Clear();
+                BLL.MateriaPrimaBLL.ObtenerMP(string.Empty ,Convert.ToInt32("1"), dsPlanMP.MATERIAS_PRIMAS);
 
                 IList<Entidades.MateriaPrima> materiaPrimaPrincipal = new List<Entidades.MateriaPrima>();
 
-                foreach (Data.dsPlanMateriasPrimas.MATERIASPRIMASPRINCIPALESRow row in dsPlanMP.MATERIASPRIMASPRINCIPALES.Rows)
+                foreach (Data.dsPlanMP.MATERIAS_PRIMASRow row in dsPlanMP.MATERIAS_PRIMAS.Rows)
                 {
-                    Entidades.MateriaPrima materiaPrima = new GyCAP.Entidades.MateriaPrima();
-
                     Entidades.MateriaPrima mp = new GyCAP.Entidades.MateriaPrima();
 
                     mp.CodigoMateriaPrima =Convert.ToInt32(row.MP_CODIGO);
-                    materiaPrima.CodigoMateriaPrima =Convert.ToInt32(row.MPPR_CODIGO);
-                    materiaPrima.Cantidad = row.MPPR_CANTIDAD;
+                    mp.Cantidad = row.MP_CANTIDAD;
                     
-                    materiaPrimaPrincipal.Add(materiaPrima);
+                    materiaPrimaPrincipal.Add(mp);
                 }
 
                 //creo el plan y el detalle de las materias primas
@@ -279,9 +279,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
 
                 //Inserto todos los cambios en el dataset
-
-
-
                 foreach (Entidades.PlanMateriaPrima p in planesMP)
                 {
 
@@ -316,7 +313,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
             }
         }
 

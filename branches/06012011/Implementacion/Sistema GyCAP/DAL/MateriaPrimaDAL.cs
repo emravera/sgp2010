@@ -209,28 +209,8 @@ namespace GyCAP.DAL
                 DB.executeNonQuery(sql, valorParametros, null);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
-            
-        //Metodo que valida que no se quiera modificar algo que ya existe
-        public static bool ModificarMateriaPrima(Entidades.MateriaPrima materiaPrima)
-        {
-            string sql = "SELECT count(mp_codigo) FROM MATERIAS_PRIMAS WHERE mp_nombre = @p0";
-
-            object[] valorParametros = { materiaPrima.CodigoMateriaPrima };
-            try
-            {
-                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-
-        }
+        }           
+        
 
         //*****************************************************************************************
         //                              ELIMINAR MATERIAS PRIMAS

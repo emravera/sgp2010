@@ -67,9 +67,7 @@ namespace GyCAP.BLL
 
         public static void Actualizar(Entidades.MateriaPrima materiaPrima)
         {
-            if (DAL.MateriaPrimaDAL.ModificarMateriaPrima(materiaPrima)) throw new Entidades.Excepciones.ElementoExistenteException();
-            //Si no existe la modifica en la Base de datos
-            else DAL.MateriaPrimaDAL.Actualizar(materiaPrima);
+            DAL.MateriaPrimaDAL.Actualizar(materiaPrima);
         }
 
 
