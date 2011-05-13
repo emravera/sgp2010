@@ -47,52 +47,38 @@ namespace GyCAP.DAL
                 //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
                 string sql = "INSERT INTO [PLANES_MATERIAS_PRIMAS_ANUALES] ([pmpa_anio], [pmpa_fechacreacion], [pmpa_mes]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
                 object[] valorParametros = { plan.Anio, plan.FechaCreacion.ToShortDateString(), plan.Mes };
-                codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+                codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, transaccion));
                 
+                //HAgo commit de la transaccion
+                transaccion.Commit();
+                DB.FinalizarTransaccion();
                 
             }
             catch (SqlException)
             {
                 transaccion.Rollback();
                 throw new Entidades.Excepciones.BaseDeDatosException();
-
             }
-            finally
-            {
-                transaccion.Commit();
-                DB.FinalizarTransaccion();
-            }
+            
             return codigo;
 
         }
         public static int InsertarDetalle(Entidades.DetallePlanMateriasPrimas detallePlan)
-        {
-            SqlTransaction transaccion = null;
+        {          
             int codigo = 0;
 
             try
             {
-                //Inserto la demanda
-                transaccion = DB.IniciarTransaccion();
-
                 //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
                 string sql = "INSERT INTO [DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL] ([pmpa_codigo], [mp_codigo], [dpmpa_cantidad]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
                 object[] valorParametros = { detallePlan.Plan.Codigo, detallePlan.MateriaPrima.CodigoMateriaPrima, detallePlan.Cantidad };
                 codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
-
-
             }
             catch (SqlException)
             {
-                transaccion.Rollback();
                 throw new Entidades.Excepciones.BaseDeDatosException();
-
             }
-            finally
-            {
-                transaccion.Commit();
-                DB.FinalizarTransaccion();
-            }
+            
             return codigo;
 
         }
@@ -126,11 +112,11 @@ namespace GyCAP.DAL
                 //Elimino el detalle de la demanda
                 string sql = "DELETE FROM DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL WHERE pmpa_codigo = @p0";
                 object[] valorParametros = { codigo };
-                DB.executeNonQuery(sql, valorParametros, null);
+                DB.executeNonQuery(sql, valorParametros, transaccion);
 
                 //Elimino la demanda
                 sql = "DELETE FROM PLANES_MATERIAS_PRIMAS_ANUALES WHERE pmpa_codigo= @p0";
-                DB.executeNonQuery(sql, valorParametros, null);
+                DB.executeNonQuery(sql, valorParametros, transaccion);
 
 
                 transaccion.Commit();

@@ -44,7 +44,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns["MP_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["USTCK_NUMERO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["MP_ESPRINCIPAL"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["MP_CANTIDAD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLista.Columns["MP_CANTIDAD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
 
             //Habilito resize
@@ -87,7 +87,7 @@ namespace GyCAP.UI.EstructuraProducto
             BLL.TipoUnidadMedidaBLL.ObtenerTodos(dsMateriaPrima.TIPOS_UNIDADES_MEDIDA);
 
             //Lleno el Datatable de las Ubicaciones de Stock (El valor 5 esta en la tabla de ubicaciones que tienen MP)
-            BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsMateriaPrima.UBICACIONES_STOCK, Convert.ToInt16(5));
+            BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsMateriaPrima.UBICACIONES_STOCK);
 
             //CARGA DE COMBOS
             //Combo de Datos
@@ -188,6 +188,7 @@ namespace GyCAP.UI.EstructuraProducto
                 //Cargamos los datos a los controles 
                 txtNombre.Text = dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_nombre"].ToString();
                 txtDescripcion.Text = dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_descripcion"].ToString();
+                numCosto.Value = Convert.ToDecimal(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_costo"]);
 
                 //Cargo todas las unidades de medida
                 BLL.UnidadMedidaBLL.ObtenerTodos(dsMateriaPrima.UNIDADES_MEDIDA);
@@ -201,15 +202,15 @@ namespace GyCAP.UI.EstructuraProducto
                 cbUbicacionStock.SetSelectedValue(Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["ustck_numero"]));
                 numCosto.Value = Convert.ToDecimal(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["ustck_numero"]);
 
-                if (dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_esprincipal"].ToString() == "SI")
+                if (dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_esprincipal"].ToString() == "1")
                 {
-                    rbPcipalBuscar.Checked = true;
-                    numCosto.Value = Convert.ToDecimal(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_costo"]);
+                    rbPcipalDatos.Checked = true;
+                    numCantidad.Value = Convert.ToDecimal(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_cantidad"]);
                 }
                 else
                 {
-                    rbNOPcipalBuscar.Checked = true;
-                    numCosto.Value = 0;
+                    rbNOPcipalDatos.Checked = true;
+                    numCantidad.Value = 0;
                 }
 
                 SetInterface(estadoUI.consultar);
@@ -228,6 +229,7 @@ namespace GyCAP.UI.EstructuraProducto
                 //Cargamos los datos a los controles 
                 txtNombre.Text = dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_nombre"].ToString();
                 txtDescripcion.Text = dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_descripcion"].ToString();
+                numCosto.Value = Convert.ToDecimal(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_costo"]);
 
                 //Cargo todas las unidades de medida
                 BLL.UnidadMedidaBLL.ObtenerTodos(dsMateriaPrima.UNIDADES_MEDIDA);
@@ -241,15 +243,17 @@ namespace GyCAP.UI.EstructuraProducto
                 cbUbicacionStock.SetSelectedValue(Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["ustck_numero"]));
                 numCosto.Value = Convert.ToDecimal(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["ustck_numero"]);
 
-                if (dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_esprincipal"].ToString() == "SI")
+                if (dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_esprincipal"].ToString() == "1")
                 {
-                    rbPcipalBuscar.Checked = true;
-                    numCosto.Value = Convert.ToDecimal(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_costo"]);
+                    rbPcipalDatos.Checked = true;
+                    numCantidad.Enabled = true;
+                    numCantidad.Value = Convert.ToDecimal(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_cantidad"]);
                 }
                 else
                 {
-                    rbNOPcipalBuscar.Checked = true;
-                    numCosto.Value = 0;
+                    rbNOPcipalDatos.Checked = true;
+                    numCantidad.Enabled = false;
+                    numCantidad.Value = 0;
                 }
 
                 SetInterface(estadoUI.modificar);
@@ -342,6 +346,12 @@ namespace GyCAP.UI.EstructuraProducto
                         row.MP_CANTIDAD = materiaPrima.Cantidad;
                         row.EndEdit();
 
+                        //Mostramos un mensaje que se guardo todo bien
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Materia Prima", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+
+                        //Ponemos la interfaz en el estado de inicio
+                        SetInterface(estadoUI.inicio);
+                        
                     }
 
                 }
@@ -472,7 +482,7 @@ namespace GyCAP.UI.EstructuraProducto
                     numCosto.Enabled = true;
                     rbNOPcipalDatos.Enabled = true;
                     rbPcipalDatos.Enabled = true;
-                    
+                                        
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     dgvLista.Enabled = false;
@@ -489,6 +499,7 @@ namespace GyCAP.UI.EstructuraProducto
                     numCosto.Enabled = false;
                     rbNOPcipalDatos.Enabled = false;
                     rbPcipalDatos.Enabled = false;
+                    numCantidad.Enabled = false;
                     
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
