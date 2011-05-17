@@ -63,68 +63,56 @@ namespace GyCAP.DAL
 
         public static void ObtenerAverias(string nombre, int codNivelCriticidad, Data.dsMantenimiento ds)
         {
-            if (nombre != String.Empty)
+            string sql = @"SELECT *
+                          FROM AVERIAS
+                          WHERE 1 = 1 ";
+
+            //Sirve para armar el nombre de los parámetros
+            int cantidadParametros = 0;
+            //Un array de object para ir guardando los valores de los filtros, con tamaño = cantidad de filtros disponibles
+            object[] valoresFiltros = new object[1];
+            //Empecemos a armar la consulta, revisemos que filtros aplican
+
+            // NOMBRE
+            if (nombre != null && nombre.ToString() != string.Empty)
             {
-                string sql = @"SELECT *
-                              FROM AVERIAS
-                              WHERE 1 = 1 ";
-
-                //Sirve para armar el nombre de los parámetros
-                int cantidadParametros = 0;
-                //Un array de object para ir guardando los valores de los filtros, con tamaño = cantidad de filtros disponibles
-                object[] valoresFiltros = new object[1];
-                //Empecemos a armar la consulta, revisemos que filtros aplican
-
-                // NOMBRE
-                if (nombre != null && nombre.ToString() != string.Empty)
-                {
-                    //Si aplica el filtro lo usamos
-                    sql += " AND AVE_DESCRPCION LIKE @p" + cantidadParametros;
-                    //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
-                    nombre = "%" + nombre + "%";
-                    valoresFiltros[cantidadParametros] = nombre;
-                    cantidadParametros++;
-                }
-
-                //ESTADO - Revisamos si es distinto de 0, o sea "todos"
-                if (codNivelCriticidad != -1)
-                {
-                    sql += " AND NCRI_CODIGO = @p" + cantidadParametros;
-                    valoresFiltros[cantidadParametros] = Convert.ToInt32(codNivelCriticidad);
-                    cantidadParametros++;
-                }
-
-                try
-                {
-                    if (cantidadParametros > 0)
-                    {
-                        //Buscamos con filtro, armemos el array de los valores de los parametros
-                        object[] valorParametros = new object[cantidadParametros];
-                        for (int i = 0; i < cantidadParametros; i++)
-                        {
-                            valorParametros[i] = valoresFiltros[i];
-                        }
-                        DB.FillDataSet(ds, "AVERIAS", sql, valorParametros);
-                    }
-                    else
-                    {
-                        //Buscamos sin filtro
-                        DB.FillDataSet(ds, "AVERIAS", sql, null);
-                    }
-                }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-
+                //Si aplica el filtro lo usamos
+                sql += " AND AVE_DESCRPCION LIKE @p" + cantidadParametros;
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                nombre = "%" + nombre + "%";
+                valoresFiltros[cantidadParametros] = nombre;
+                cantidadParametros++;
             }
-            else
+
+            //ESTADO - Revisamos si es distinto de 0, o sea "todos"
+            if (codNivelCriticidad != -1)
             {
-                string sql = "SELECT * FROM AVERIAS ";
-                try
+                sql += " AND NCRI_CODIGO = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(codNivelCriticidad);
+                cantidadParametros++;
+            }
+
+            try
+            {
+                if (cantidadParametros > 0)
                 {
+                    //Buscamos con filtro, armemos el array de los valores de los parametros
+                    object[] valorParametros = new object[cantidadParametros];
+                    for (int i = 0; i < cantidadParametros; i++)
+                    {
+                        valorParametros[i] = valoresFiltros[i];
+                    }
+                    DB.FillDataSet(ds, "AVERIAS", sql, valorParametros);
+                }
+                else
+                {
+                    //Buscamos sin filtro
                     DB.FillDataSet(ds, "AVERIAS", sql, null);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-
             }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+        
         }
 
         public static void ObtenerAverias(Data.dsMantenimiento ds)

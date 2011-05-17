@@ -164,11 +164,11 @@ namespace GyCAP.UI.Soporte
         {
             txtNombreBuscar.SelectAll();
         }
+
         private void txtNombre_Enter(object sender, EventArgs e)
         {
             txtNombre.SelectAll();
         }
-
                
         public static frmLocalidad Instancia
         {
