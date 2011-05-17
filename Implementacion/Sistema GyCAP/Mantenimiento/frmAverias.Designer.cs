@@ -33,8 +33,6 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
-            this.cboMaquina = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cboCriticidad = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.gbImagenes = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -53,12 +51,14 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cboCriticidadBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.gpbLista = new System.Windows.Forms.GroupBox();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.tcABM = new System.Windows.Forms.TabControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.cboCriticidadBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboMaquina = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboCriticidad = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.tpDatos.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.gbDatos.SuspendLayout();
@@ -100,7 +100,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(546, 18);
+            this.btnVolver.Location = new System.Drawing.Point(523, 18);
             this.btnVolver.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(64, 26);
@@ -111,7 +111,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(476, 18);
+            this.btnGuardar.Location = new System.Drawing.Point(453, 18);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(64, 26);
@@ -137,27 +137,7 @@
             this.gbDatos.Size = new System.Drawing.Size(616, 324);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
-            this.gbDatos.Text = "Datos Empleado";
-            // 
-            // cboMaquina
-            // 
-            this.cboMaquina.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboMaquina.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboMaquina.FormattingEnabled = true;
-            this.cboMaquina.Location = new System.Drawing.Point(228, 29);
-            this.cboMaquina.Name = "cboMaquina";
-            this.cboMaquina.Size = new System.Drawing.Size(382, 21);
-            this.cboMaquina.TabIndex = 27;
-            // 
-            // cboCriticidad
-            // 
-            this.cboCriticidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboCriticidad.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboCriticidad.FormattingEnabled = true;
-            this.cboCriticidad.Location = new System.Drawing.Point(228, 56);
-            this.cboCriticidad.Name = "cboCriticidad";
-            this.cboCriticidad.Size = new System.Drawing.Size(132, 21);
-            this.cboCriticidad.TabIndex = 25;
+            this.gbDatos.Text = "Datos de la Averia";
             // 
             // gbImagenes
             // 
@@ -194,7 +174,7 @@
             this.txtDescripcion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(382, 230);
+            this.txtDescripcion.Size = new System.Drawing.Size(359, 230);
             this.txtDescripcion.TabIndex = 8;
             this.txtDescripcion.Enter += new System.EventHandler(this.txtDescripcion_Enter);
             // 
@@ -241,6 +221,7 @@
             // 
             // txtDescripcionBuscar
             // 
+            this.txtDescripcionBuscar.CausesValidation = false;
             this.txtDescripcionBuscar.Location = new System.Drawing.Point(76, 45);
             this.txtDescripcionBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDescripcionBuscar.Name = "txtDescripcionBuscar";
@@ -357,20 +338,11 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
-            // cboCriticidadBuscar
-            // 
-            this.cboCriticidadBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboCriticidadBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboCriticidadBuscar.FormattingEnabled = true;
-            this.cboCriticidadBuscar.Location = new System.Drawing.Point(76, 18);
-            this.cboCriticidadBuscar.Name = "cboCriticidadBuscar";
-            this.cboCriticidadBuscar.Size = new System.Drawing.Size(132, 21);
-            this.cboCriticidadBuscar.TabIndex = 1;
-            // 
             // dgvLista
             // 
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
+            this.dgvLista.CausesValidation = false;
             this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLista.Location = new System.Drawing.Point(9, 23);
             this.dgvLista.MultiSelect = false;
@@ -380,6 +352,8 @@
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(598, 271);
             this.dgvLista.TabIndex = 4;
+            this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
+            this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
             // gpbLista
             // 
@@ -439,6 +413,38 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(634, 452);
             this.tableLayoutPanel1.TabIndex = 14;
+            // 
+            // cboCriticidadBuscar
+            // 
+            this.cboCriticidadBuscar.CausesValidation = false;
+            this.cboCriticidadBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCriticidadBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboCriticidadBuscar.FormattingEnabled = true;
+            this.cboCriticidadBuscar.Location = new System.Drawing.Point(76, 18);
+            this.cboCriticidadBuscar.Name = "cboCriticidadBuscar";
+            this.cboCriticidadBuscar.Size = new System.Drawing.Size(132, 21);
+            this.cboCriticidadBuscar.TabIndex = 1;
+            // 
+            // cboMaquina
+            // 
+            this.cboMaquina.CausesValidation = false;
+            this.cboMaquina.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboMaquina.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboMaquina.FormattingEnabled = true;
+            this.cboMaquina.Location = new System.Drawing.Point(228, 29);
+            this.cboMaquina.Name = "cboMaquina";
+            this.cboMaquina.Size = new System.Drawing.Size(359, 21);
+            this.cboMaquina.TabIndex = 27;
+            // 
+            // cboCriticidad
+            // 
+            this.cboCriticidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCriticidad.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboCriticidad.FormattingEnabled = true;
+            this.cboCriticidad.Location = new System.Drawing.Point(228, 56);
+            this.cboCriticidad.Name = "cboCriticidad";
+            this.cboCriticidad.Size = new System.Drawing.Size(132, 21);
+            this.cboCriticidad.TabIndex = 25;
             // 
             // frmAverias
             // 

@@ -72,22 +72,34 @@ namespace GyCAP.UI.Mantenimiento
             //Combo de la Busqueda
             //Creamos el Dataview y se lo asignamos al combo
             dvComboCriticidadBuscar = new DataView(dsMantenimiento.NIVELES_CRITICIDAD);
-            cboCriticidadBuscar.DataSource = dvComboCriticidadBuscar;
-            cboCriticidadBuscar.DisplayMember = "NCRI_NOMBRE";
-            cboCriticidadBuscar.ValueMember = "NCRI_CODIGO";
-            //Para que el combo no quede selecionado cuando arranca y que sea una lista
-            cboCriticidadBuscar.SelectedIndex = -1;
-            cboCriticidadBuscar.DropDownStyle = ComboBoxStyle.DropDownList;
+            //cboCriticidadBuscar.DataSource = dvComboCriticidadBuscar;
+            //cboCriticidadBuscar.DisplayMember = "NCRI_NOMBRE";
+            //cboCriticidadBuscar.ValueMember = "NCRI_CODIGO";
+            ////Para que el combo no quede selecionado cuando arranca y que sea una lista
+            //cboCriticidadBuscar.SelectedIndex = -1;
+            //cboCriticidadBuscar.DropDownStyle = ComboBoxStyle.DropDownList;
 
             //Combos de Datos
             dvCboMaquina  = new DataView(dsMantenimiento.MAQUINAS);
-            cboMaquina.DataSource = dvCboMaquina;
-            cboMaquina.DisplayMember = "MAQ_NOMBRE";
-            cboMaquina.ValueMember = "MAQ_CODIGO";
-            //Para que el combo no quede selecionado cuando arranca y que sea una lista
-            cboMaquina.SelectedIndex = -1;
-            cboMaquina.DropDownStyle = ComboBoxStyle.DropDownList;
+            //cboMaquina.DataSource = dvCboMaquina;
+            //cboMaquina.DisplayMember = "MAQ_NOMBRE";
+            //cboMaquina.ValueMember = "MAQ_CODIGO";
+            ////Para que el combo no quede selecionado cuando arranca y que sea una lista
+            //cboMaquina.SelectedIndex = -1;
+            //cboMaquina.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            dvCboCriticidad = new DataView(dsMantenimiento.NIVELES_CRITICIDAD);
+            //cboCriticidad.DataSource = dvCboCriticidad;
+            //cboCriticidad.DisplayMember = "NCRI_NOMBRE";
+            //cboCriticidad.ValueMember = "NCRI_CODIGO";
+            ////Para que el combo no quede selecionado cuando arranca y que sea una lista
+            //cboCriticidad.SelectedIndex = -1;
+            //cboCriticidad.DropDownStyle = ComboBoxStyle.DropDownList;
+
+
+            cboCriticidadBuscar.SetDatos(dvComboCriticidadBuscar, "NCRI_CODIGO", "NCRI_NOMBRE", "--TODOS--", true);
+            cboCriticidad.SetDatos(dvCboCriticidad, "NCRI_CODIGO", "NCRI_NOMBRE", "Seleccione el nivel...", false);
+            cboMaquina.SetDatos(dvCboMaquina, "MAQ_CODIGO", "MAQ_NOMBRE", "[Seleccione una maquina...]", false);
 
             //Seteo el maxlenght de los textbox para que no de error en la bd
             txtDescripcion.MaxLength = 500;
@@ -130,7 +142,7 @@ namespace GyCAP.UI.Mantenimiento
                 case estadoUI.nuevo:
                     setControles(false);
                     cboMaquina.SelectedIndex = -1;
-                    cboCriticidadd.SelectedIndex = -1;
+                    cboCriticidad.SelectedIndex = -1;
                     txtDescripcion.Text = string.Empty; 
 
                     //gbGuardarCancelar.Enabled = true;
@@ -148,7 +160,7 @@ namespace GyCAP.UI.Mantenimiento
                     setControles(false);
                     txtDescripcion.Text = string.Empty;
                     cboMaquina.SelectedIndex = -1;
-                    cboCriticidadd.SelectedIndex = -1;    
+                    cboCriticidad.SelectedIndex = -1;    
 
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
@@ -198,7 +210,7 @@ namespace GyCAP.UI.Mantenimiento
         {
             txtDescripcion.ReadOnly = pValue;
             cboMaquina.Enabled = !pValue;
-            cboCriticidadd.Enabled = !pValue;
+            cboCriticidad.Enabled = !pValue;
         }
 
         //Método para evitar la creación de más de una pantalla
@@ -230,8 +242,16 @@ namespace GyCAP.UI.Mantenimiento
                 switch (dgvLista.Columns[e.ColumnIndex].Name)
                 {
                     case "MAQ_CODIGO":
-                        nombre = dsMantenimiento.MAQUINAS.FindByMAQ_CODIGO(Convert.ToInt64(e.Value)).MAQ_NOMBRE;
-                        e.Value = nombre;
+                        if ( int.Parse( e.Value.ToString())  != 0)
+                        {
+                            nombre = dsMantenimiento.MAQUINAS.FindByMAQ_CODIGO(Convert.ToInt32(e.Value)).MAQ_NOMBRE;
+                            e.Value = nombre;
+                        }
+                        else
+                        {
+                            nombre = string.Empty;
+                            e.Value = nombre;
+                        }
                         break;
                     case "NCRI_CODIGO":
                         nombre = dsMantenimiento.NIVELES_CRITICIDAD.FindByNCRI_CODIGO(Convert.ToInt32(e.Value)).NCRI_NOMBRE;
@@ -305,136 +325,124 @@ namespace GyCAP.UI.Mantenimiento
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisamos que escribió algo y selecciono algo en el combo
-            //if (txtRazonSocial.Text != String.Empty && cboEstado.SelectedIndex != -1)
-            //{
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
+            {
+                Entidades.Averia averia = new GyCAP.Entidades.Averia();
+                averia.Nivel = new GyCAP.Entidades.NivelCriticidad();
+                averia.Maquina = new GyCAP.Entidades.Maquina();
 
-            //    Entidades.Cliente cliente = new GyCAP.Entidades.Cliente();
+                int Codmaquina;
+                Codmaquina = 0;
+                if (cboMaquina.SelectedIndex != -1)
+                    Codmaquina = cboMaquina.GetSelectedValueInt();
 
-            //    //Revisamos que está haciendo
-            //    if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
-            //    {
-            //        //Está cargando un nuevo Empleado
-            //        cliente.RazonSocial = txtRazonSocial.Text.Trim();
-            //        cliente.Mail = txtMail.Text.Trim();
-            //        cliente.Telefono = txtTelefono.Text.Trim();
-            //        cliente.MotivoBaja = txtDescripcion.Text.Trim();
-            //        cliente.FechaAlta = BLL.DBBLL.GetFechaServidor();
-            //        if (cboEstado.SelectedItem.ToString().Substring(0, 1) == "A")
-            //        {
-            //            cliente.Estado = "A";
-            //            cliente.MotivoBaja = string.Empty;
-            //        }
-            //        else
-            //        {
-            //            cliente.Estado = "I";
-            //            cliente.MotivoBaja = txtDescripcion.Text.Trim();
-            //        }
+                //Revisamos que está haciendo
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
+                {
+                    //Está cargando un nuevo Empleado
+                    averia.Descripcion = txtDescripcion.Text.Trim();
+                    averia.FechaAlta = BLL.DBBLL.GetFechaServidor();
+                    averia.Nivel.Codigo = cboCriticidad.GetSelectedValueInt();
+                    if (cboMaquina.SelectedIndex != -1)
+                        averia.Maquina.Codigo = Codmaquina;
+                    
+                    try
+                    {
+                        //Primero lo creamos en la db
+                        averia.Codigo = BLL.AveriasBLL.Insertar(averia);
+                        //Ahora lo agregamos al dataset
+                        Data.dsMantenimiento.AVERIASRow rowAveria = dsMantenimiento.AVERIAS.NewAVERIASRow();
+                        //Indicamos que comienza la edición de la fila
+                        rowAveria.BeginEdit();
+                        rowAveria.AVE_DESCRIPCION = averia.Descripcion;
+                        rowAveria.AVE_FECHA_ALTA = averia.FechaAlta;
+                        rowAveria.AVE_USU_CODIGO = 0;
+                        rowAveria.MAQ_CODIGO = averia.Maquina.Codigo;
+                        rowAveria.NCRI_CODIGO = averia.Nivel.Codigo;
 
-            //        try
-            //        {
-            //            //Primero lo creamos en la db
-            //            cliente.Codigo = BLL.ClienteBLL.Insertar(cliente);
-            //            //Ahora lo agregamos al dataset
-            //            Data.dsCliente.CLIENTESRow rowCliente = dsMantenimiento.CLIENTES.NewCLIENTESRow();
-            //            //Indicamos que comienza la edición de la fila
-            //            rowCliente.BeginEdit();
-            //            rowCliente.CLI_CODIGO = cliente.Codigo;
-            //            rowCliente.CLI_RAZONSOCIAL = cliente.RazonSocial;
-            //            rowCliente.CLI_TELEFONO = cliente.Telefono;
-            //            rowCliente.CLI_MAIL = cliente.Mail;
-            //            rowCliente.CLI_MOTIVOBAJA = cliente.MotivoBaja;
-            //            rowCliente.CLI_ESTADO = cliente.Estado;
+                        //Termina la edición de la fila
+                        rowAveria.EndEdit();
+                        //Agregamos la fila al dataset y aceptamos los cambios
+                        dsMantenimiento.AVERIAS.AddAVERIASRow(rowAveria);
+                        dsMantenimiento.AVERIAS.AcceptChanges();
 
-            //            //Termina la edición de la fila
-            //            rowCliente.EndEdit();
-            //            //Agregamos la fila al dataset y aceptamos los cambios
-            //            dsMantenimiento.CLIENTES.AddCLIENTESRow(rowCliente);
-            //            dsMantenimiento.CLIENTES.AcceptChanges();
+                        //Y por último seteamos el estado de la interfaz
 
-            //            //Y por último seteamos el estado de la interfaz
+                        //Vemos cómo se inició el formulario para determinar la acción a seguir
+                        if (estadoInterface == estadoUI.nuevoExterno)
+                        {
+                            //Nuevo desde acceso directo, cerramos el formulario
+                            btnSalir.PerformClick();
+                        }
+                        else
+                        {
+                            dgvLista.Refresh();
 
-            //            //Vemos cómo se inició el formulario para determinar la acción a seguir
-            //            if (estadoInterface == estadoUI.nuevoExterno)
-            //            {
-            //                //Nuevo desde acceso directo, cerramos el formulario
+                            //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
+                            SetInterface(estadoUI.inicio);
+                        }
 
-            //                if (NuevoCliente != null)//preguntas si el evento esta manejado, si esta referenciado en algun otro form
-            //                {
-            //                    NuevoCliente(cliente); //llamas el evento
-            //                }
+                    }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    Codmaquina = 0;
+                    if (cboMaquina.SelectedIndex != -1)
+                        Codmaquina = cboMaquina.GetSelectedValueInt();
 
-            //                btnSalir.PerformClick();
-            //            }
-            //            else
-            //            {
-            //                //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
-            //                SetInterface(estadoUI.inicio);
-            //            }
+                    //Está modificando una designacion
+                    //Primero obtenemos su código del dataview que está realacionado a la fila seleccionada                
+                    averia.Codigo = Convert.ToInt64(dvAverias[dgvLista.SelectedRows[0].Index]["ave_codigo"]);
 
-            //        }
-            //        catch (Entidades.Excepciones.ElementoExistenteException ex)
-            //        {
-            //            MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //        }
-            //        catch (Entidades.Excepciones.BaseDeDatosException ex)
-            //        {
-            //            MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        //Está modificando una designacion
-            //        //Primero obtenemos su código del dataview que está realacionado a la fila seleccionada                
-            //        cliente.Codigo = Convert.ToInt32(dvAverias[dgvLista.SelectedRows[0].Index]["cli_codigo"]);
+                    //Segundo obtenemos los nuevos datos que ingresó el usuario
+                    averia.Descripcion = txtDescripcion.Text.Trim();
+                    averia.FechaAlta = BLL.DBBLL.GetFechaServidor();
+                    averia.Nivel.Codigo = cboCriticidad.GetSelectedValueInt();
 
-            //        //Segundo obtenemos los nuevos datos que ingresó el usuario
-            //        cliente.RazonSocial = txtRazonSocial.Text.Trim();
-            //        cliente.Mail = txtMail.Text.Trim();
-            //        cliente.Telefono = txtTelefono.Text.Trim();
-            //        cliente.MotivoBaja = txtDescripcion.Text.Trim();
-            //        if (cboEstado.SelectedItem.ToString().Substring(0, 1) == "A")
-            //            cliente.Estado = "A";
-            //        else
-            //            cliente.Estado = "I";
+                    if (cboMaquina.SelectedIndex != -1)
+                        averia.Maquina.Codigo = Codmaquina;
 
-            //        try
-            //        {
-            //            //Lo actualizamos en la DB
-            //            BLL.ClienteBLL.Actualizar(cliente);
-            //            //Lo actualizamos en el dataset y aceptamos los cambios
-            //            Data.dsCliente.CLIENTESRow rowCliente = dsMantenimiento.CLIENTES.FindByCLI_CODIGO(cliente.Codigo);
-            //            //Indicamos que comienza la edición de la fila
-            //            rowCliente.BeginEdit();
-            //            //rowEmpleado.E_CODIGO = empleado.Codigo;
-            //            rowCliente.CLI_RAZONSOCIAL = cliente.RazonSocial;
-            //            rowCliente.CLI_TELEFONO = cliente.Telefono;
-            //            rowCliente.CLI_MAIL = cliente.Mail;
-            //            rowCliente.CLI_MOTIVOBAJA = cliente.MotivoBaja;
-            //            rowCliente.CLI_ESTADO = cliente.Estado;
+                    try
+                    {
+                        //Lo actualizamos en la DB
+                        BLL.AveriasBLL.Actualizar(averia);
+                        //Lo actualizamos en el dataset y aceptamos los cambios
+                        Data.dsMantenimiento.AVERIASRow rowAveria = dsMantenimiento.AVERIAS.FindByAVE_CODIGO(averia.Codigo);
+                        //Indicamos que comienza la edición de la fila
+                        rowAveria.BeginEdit();
+                        rowAveria.AVE_DESCRIPCION = averia.Descripcion;
+                        rowAveria.AVE_FECHA_ALTA = averia.FechaAlta;
+                        rowAveria.AVE_USU_CODIGO = 0;
+                        rowAveria.MAQ_CODIGO = averia.Maquina.Codigo;
+                        rowAveria.NCRI_CODIGO = averia.Nivel.Codigo;
 
-            //            //Termina la edición de la fila
-            //            rowCliente.EndEdit();
-            //            //Agregamos la fila al dataset y aceptamos los cambios
-            //            dsMantenimiento.CLIENTES.AcceptChanges();
-            //            //Avisamos que estuvo todo ok
-            //            MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //            //Y por último seteamos el estado de la interfaz
-            //            SetInterface(estadoUI.inicio);
-            //        }
-            //        catch (Entidades.Excepciones.BaseDeDatosException ex)
-            //        {
-            //            MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        }
-            //    }
+                        //Termina la edición de la fila
+                        rowAveria.EndEdit();
+                        //Agregamos la fila al dataset y aceptamos los cambios
+                        dsMantenimiento.AVERIAS.AcceptChanges();
+                        //Avisamos que estuvo todo ok
+                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //Y por último seteamos el estado de la interfaz
+                        SetInterface(estadoUI.inicio);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
 
-            //    //recarga de la grilla
-            //    dgvLista.Refresh();
+                //recarga de la grilla
+                dgvLista.Refresh();
 
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -491,10 +499,10 @@ namespace GyCAP.UI.Mantenimiento
         
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            //long codigo = Convert.ToInt64(dvAverias[e.RowIndex]["ave_codigo"]);
-            //txtDescripcion.Text = dsMantenimiento.AVERIAS.FindByAVE_CODIGO(codigo).AVE_DESCRIPCION;
-            //cboMaquina.SetSelectedValue(int.Parse(dsMantenimiento.MAQUINAS.FindByMAQ_CODIGO(codigo).MAQ_NOMBRE.ToString()));
-            //cboCriticidad.SetSelectedValue(int.Parse(dsMantenimiento.NIVELES_CRITICIDAD.FindByNCRI_CODIGO(codigo).NCRI_OMBRE.ToString()));
+            long codigo = Convert.ToInt64(dvAverias[e.RowIndex]["ave_codigo"]);
+            txtDescripcion.Text = dsMantenimiento.AVERIAS.FindByAVE_CODIGO(codigo).AVE_DESCRIPCION;
+            cboCriticidad.SetSelectedValue(Convert.ToInt32(dsMantenimiento.AVERIAS.FindByAVE_CODIGO(codigo).NCRI_CODIGO));
+            cboMaquina.SetSelectedValue(Convert.ToInt32(dsMantenimiento.AVERIAS.FindByAVE_CODIGO(codigo).MAQ_CODIGO));    
         }
 
         private void txtDescripcion_Enter(object sender, EventArgs e)
@@ -509,9 +517,7 @@ namespace GyCAP.UI.Mantenimiento
 
         #endregion
 
-
-
-
+       
 
     }
 }
