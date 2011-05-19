@@ -285,7 +285,8 @@ namespace GyCAP.UI.Mantenimiento
                     try
                     {
                         //Primero lo creamos en la db
-                        BLL.CausaFalloBLL.Insertar(causaFallo);
+                        causaFallo.Numero = BLL.CausaFalloBLL.Insertar(causaFallo);
+
                         //Ahora lo agregamos al dataset
                         Data.dsMantenimiento.CAUSAS_FALLORow row = dsMantenimiento.CAUSAS_FALLO.NewCAUSAS_FALLORow();
                         //Indicamos que comienza la edición de la fila
