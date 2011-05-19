@@ -45,7 +45,7 @@ namespace GyCAP.DAL
                                                 REP_DESCRIPCION = @p3,
                                                 REP_CANTIDADSTOCK = @p4, 
                                                 REP_COSTO = @p5 
-                                                WHERE TREP_CODIGO = @p0";
+                                                WHERE REP_CODIGO = @p0";
 
             object[] valorParametros = { repuesto.Codigo, repuesto.Tipo.Codigo, repuesto.Nombre, repuesto.Descripcion,
                                          repuesto.CantidadStock, repuesto.Costo };

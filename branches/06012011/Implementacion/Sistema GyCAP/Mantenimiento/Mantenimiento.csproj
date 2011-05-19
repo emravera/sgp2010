@@ -63,6 +63,12 @@
     <Compile Include="frmAverias.Designer.cs">
       <DependentUpon>frmAverias.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCausasFallos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCausasFallos.Designer.cs">
+      <DependentUpon>frmCausasFallos.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmRegistrarMantenimiento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,9 @@
     <EmbeddedResource Include="frmAverias.resx">
       <DependentUpon>frmAverias.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCausasFallos.resx">
+      <DependentUpon>frmCausasFallos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmRegistrarMantenimiento.resx">
       <DependentUpon>frmRegistrarMantenimiento.cs</DependentUpon>
