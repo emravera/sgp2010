@@ -8,7 +8,7 @@ namespace GyCAP.BLL
 {
     public class TipoMantenimientoBLL
     {
-        public static long Insertar(Entidades.TipoMantenimiento tipoMantenimiento)
+        public static int Insertar(Entidades.TipoMantenimiento tipoMantenimiento)
         {
             //Si existe lanzamos la excepción correspondiente
             if (EsTipoMantenimiento(tipoMantenimiento)) throw new Entidades.Excepciones.ElementoExistenteException();
