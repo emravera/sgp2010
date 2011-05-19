@@ -9,25 +9,25 @@ namespace GyCAP.DAL
 {
     public class RepuestoDAL
     {
-        public static long Insertar(Entidades.Repuesto repuesto)
+        public static int Insertar(Entidades.Repuesto repuesto)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
-            string sql = @"INSERT INTO TIPOS_REPUESTOS (TREP_CODIGO,
-                                                        REP_NOMBRE, 
-                                                        TREP_DESCRIPCION,
-                                                        REP_CANTIDADSTOCK,
-                                                        REP_COSTO) VALUES (@p0,@p1,@p2,@p3,@p4) SELECT @@Identity";
+            string sql = @"INSERT INTO REPUESTOS (TREP_CODIGO,
+                                                    REP_NOMBRE, 
+                                                    REP_DESCRIPCION,
+                                                    REP_CANTIDADSTOCK,
+                                                    REP_COSTO) VALUES (@p0,@p1,@p2,@p3,@p4) SELECT @@Identity";
             
             object[] valorParametros = {repuesto.Tipo.Codigo, repuesto.Nombre, repuesto.Descripcion,
                                         repuesto.CantidadStock,repuesto.Costo };
             try
             {
-                return Convert.ToInt64(DB.executeScalar(sql, valorParametros, null));
+                return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static void Eliminar(long codigo)
+        public static void Eliminar(int codigo)
         {
             string sql = "DELETE FROM REPUESTOS WHERE REP_CODIGO = @p0";
             object[] valorParametros = { codigo };
@@ -41,8 +41,8 @@ namespace GyCAP.DAL
         public static void Actualizar(Entidades.Repuesto repuesto)
         {
             string sql = @"UPDATE REPUESTOS SET TREP_CODIGO = @p1, 
-                                                TREP_NOMBRE = @p2, 
-                                                TREP_DESCRIPCION = @p3,
+                                                REP_NOMBRE = @p2, 
+                                                REP_DESCRIPCION = @p3,
                                                 REP_CANTIDADSTOCK = @p4, 
                                                 REP_COSTO = @p5 
                                                 WHERE TREP_CODIGO = @p0";
@@ -74,43 +74,60 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static void ObtenerRepuesto(string nombre, Data.dsMantenimiento ds)
+        public static void ObtenerRepuesto(string nombre, int tipoRepuesto, Data.dsMantenimiento ds)
         {
-            if (nombre != String.Empty)
+            string sql = @"SELECT * FROM REPUESTOS WHERE 1 = 1 ";
+
+            //Sirve para armar el nombre de los parámetros
+            int cantidadParametros = 0;
+            //Un array de object para ir guardando los valores de los filtros, con tamaño = cantidad de filtros disponibles
+            object[] valoresFiltros = new object[2];
+            //Empecemos a armar la consulta, revisemos que filtros aplican
+
+            // NOMBRE
+            if (nombre != null && nombre.ToString() != string.Empty)
             {
-                string sql = @"SELECT TREP_CODIGO, REP_NOMBRE, REP_DESCRIPCION
-                               REP_CANTIDADSTOCK, REP_COSTO 
-                              FROM REPUESTOS
-                              WHERE REP_NOMBRE LIKE @p0";
+                //Si aplica el filtro lo usamos
+                sql += " AND REP_NOMBRE LIKE @p" + cantidadParametros;
                 //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
                 nombre = "%" + nombre + "%";
-                object[] valorParametros = { nombre };
-                try
+                valoresFiltros[cantidadParametros] = nombre;
+                cantidadParametros++;
+            }
+
+            //ESTADO - Revisamos si es distinto de 0, o sea "todos"
+            if (tipoRepuesto != -1)
+            {
+                sql += " AND TREP_CODIGO = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(tipoRepuesto);
+                cantidadParametros++;
+            }
+
+            try
+            {
+                if (cantidadParametros > 0)
                 {
+                    //Buscamos con filtro, armemos el array de los valores de los parametros
+                    object[] valorParametros = new object[cantidadParametros];
+                    for (int i = 0; i < cantidadParametros; i++)
+                    {
+                        valorParametros[i] = valoresFiltros[i];
+                    }
                     DB.FillDataSet(ds, "REPUESTOS", sql, valorParametros);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-
-            }
-            else
-            {
-                string sql = @"SELECT TREP_CODIGO, REP_NOMBRE, REP_DESCRIPCION
-                               REP_CANTIDADSTOCK, REP_COSTO 
-                               FROM REPUESTOS";
-                try
+                else
                 {
+                    //Buscamos sin filtro
                     DB.FillDataSet(ds, "REPUESTOS", sql, null);
                 }
-                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-
             }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
         }
 
         public static void ObtenerRepuesto(Data.dsMantenimiento ds)
         {
-            string sql = @"SELECT TREP_CODIGO, REP_NOMBRE, REP_DESCRIPCION
-                               REP_CANTIDADSTOCK, REP_COSTO 
-                              FROM REPUESTOS";
+            string sql = @"SELECT * FROM REPUESTOS";
             try
             {
                 //Se llena el Dataset
@@ -133,9 +150,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerRepuesto(DataTable dtRepuesto)
         {
-            string sql = @"SELECT REP_CODIGO, TREP_CODIGO, REP_NOMBRE, REP_DESCRIPCION,
-                           REP_CANTIDADSTOCK, REP_COSTO 
-                           FROM REPUESTOS";
+            string sql = @"SELECT * FROM REPUESTOS";
             try
             {
                 //Se llena el Dataset
@@ -144,20 +159,18 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static bool PuedeEliminarse(long codigo)
+        public static bool PuedeEliminarse(int codigo)
         {
-            string sql = "SELECT count(REP_CODIGO) FROM DETALLE_PLANES_MANTENIMIENTO WHERE DPMAN_CODIGO = @p0";
+            string sqlRRMAN = "SELECT count(RRMAN_CODIGO) FROM REPUESTOS_REGISTRO_MANTENIMIENTO  WHERE rep_codigo = @p0";
+            string sqlRDPMAN = "SELECT count(RDPMAN_CODIGO) FROM REPUESTOS_DETALLE_PLAN_MAN WHERE rep_codigo = @p0";
+
             object[] valorParametros = { codigo };
             try
             {
-                if (Convert.ToInt64(DB.executeScalar(sql, valorParametros, null)) == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                int resultadoRRMAN = Convert.ToInt32(DB.executeScalar(sqlRRMAN, valorParametros, null));
+                int resultadoRDPMAN = Convert.ToInt32(DB.executeScalar(sqlRDPMAN, valorParametros, null));
+                if (resultadoRRMAN == 0 && resultadoRDPMAN == 0) { return true; }
+                else { return false; }
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }

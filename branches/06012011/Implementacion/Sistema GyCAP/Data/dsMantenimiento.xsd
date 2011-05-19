@@ -1206,7 +1206,7 @@ SELECT NCRI_CODIGO, NCRI_NOMBRE FROM NIVELES_CRITICIDAD WHERE (NCRI_CODIGO = @NC
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="REP_DESCRIPCION" msprop:Generator_UserColumnName="REP_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="REP_DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnREP_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="REP_DESCRIPCIONColumn" minOccurs="0">
+              <xs:element name="REP_DESCRIPCION" msprop:Generator_UserColumnName="REP_DESCRIPCION" msprop:Generator_ColumnPropNameInRow="REP_DESCRIPCION" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnREP_DESCRIPCION" msprop:Generator_ColumnPropNameInTable="REP_DESCRIPCIONColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="200" />
@@ -1214,7 +1214,7 @@ SELECT NCRI_CODIGO, NCRI_NOMBRE FROM NIVELES_CRITICIDAD WHERE (NCRI_CODIGO = @NC
                 </xs:simpleType>
               </xs:element>
               <xs:element name="REP_CANTIDADSTOCK" msprop:Generator_UserColumnName="REP_CANTIDADSTOCK" msprop:Generator_ColumnPropNameInRow="REP_CANTIDADSTOCK" msprop:Generator_ColumnVarNameInTable="columnREP_CANTIDADSTOCK" msprop:Generator_ColumnPropNameInTable="REP_CANTIDADSTOCKColumn" type="xs:int" minOccurs="0" />
-              <xs:element name="REP_COSTO" msprop:Generator_UserColumnName="REP_COSTO" msprop:Generator_ColumnPropNameInRow="REP_COSTO" msprop:Generator_ColumnVarNameInTable="columnREP_COSTO" msprop:Generator_ColumnPropNameInTable="REP_COSTOColumn" type="xs:float" minOccurs="0" />
+              <xs:element name="REP_COSTO" msprop:Generator_UserColumnName="REP_COSTO" msprop:Generator_ColumnPropNameInRow="REP_COSTO" msprop:Generator_ColumnVarNameInTable="columnREP_COSTO" msprop:Generator_ColumnPropNameInTable="REP_COSTOColumn" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -1283,7 +1283,7 @@ SELECT NCRI_CODIGO, NCRI_NOMBRE FROM NIVELES_CRITICIDAD WHERE (NCRI_CODIGO = @NC
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="AVERIAS" msprop:Generator_UserTableName="AVERIAS" msprop:Generator_RowDeletedName="AVERIASRowDeleted" msprop:Generator_TableClassName="AVERIASDataTable" msprop:Generator_RowChangedName="AVERIASRowChanged" msprop:Generator_RowClassName="AVERIASRow" msprop:Generator_RowChangingName="AVERIASRowChanging" msprop:Generator_RowEvArgName="AVERIASRowChangeEvent" msprop:Generator_RowEvHandlerName="AVERIASRowChangeEventHandler" msprop:Generator_TablePropName="AVERIAS" msprop:Generator_TableVarName="tableAVERIAS" msprop:Generator_RowDeletingName="AVERIASRowDeleting">
+        <xs:element name="AVERIAS" msprop:Generator_UserTableName="AVERIAS" msprop:Generator_RowDeletedName="AVERIASRowDeleted" msprop:Generator_RowChangedName="AVERIASRowChanged" msprop:Generator_RowClassName="AVERIASRow" msprop:Generator_RowChangingName="AVERIASRowChanging" msprop:Generator_RowEvArgName="AVERIASRowChangeEvent" msprop:Generator_RowEvHandlerName="AVERIASRowChangeEventHandler" msprop:Generator_TableClassName="AVERIASDataTable" msprop:Generator_TableVarName="tableAVERIAS" msprop:Generator_RowDeletingName="AVERIASRowDeleting" msprop:Generator_TablePropName="AVERIAS">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="AVE_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="AVE_CODIGO" msprop:Generator_ColumnPropNameInRow="AVE_CODIGO" msprop:Generator_ColumnVarNameInTable="columnAVE_CODIGO" msprop:Generator_ColumnPropNameInTable="AVE_CODIGOColumn" type="xs:decimal" />
@@ -1301,7 +1301,7 @@ SELECT NCRI_CODIGO, NCRI_NOMBRE FROM NIVELES_CRITICIDAD WHERE (NCRI_CODIGO = @NC
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NIVELES_CRITICIDAD" msprop:Generator_UserTableName="NIVELES_CRITICIDAD" msprop:Generator_RowDeletedName="NIVELES_CRITICIDADRowDeleted" msprop:Generator_TableClassName="NIVELES_CRITICIDADDataTable" msprop:Generator_RowChangedName="NIVELES_CRITICIDADRowChanged" msprop:Generator_RowClassName="NIVELES_CRITICIDADRow" msprop:Generator_RowChangingName="NIVELES_CRITICIDADRowChanging" msprop:Generator_RowEvArgName="NIVELES_CRITICIDADRowChangeEvent" msprop:Generator_RowEvHandlerName="NIVELES_CRITICIDADRowChangeEventHandler" msprop:Generator_TablePropName="NIVELES_CRITICIDAD" msprop:Generator_TableVarName="tableNIVELES_CRITICIDAD" msprop:Generator_RowDeletingName="NIVELES_CRITICIDADRowDeleting">
+        <xs:element name="NIVELES_CRITICIDAD" msprop:Generator_UserTableName="NIVELES_CRITICIDAD" msprop:Generator_RowDeletedName="NIVELES_CRITICIDADRowDeleted" msprop:Generator_RowChangedName="NIVELES_CRITICIDADRowChanged" msprop:Generator_RowClassName="NIVELES_CRITICIDADRow" msprop:Generator_RowChangingName="NIVELES_CRITICIDADRowChanging" msprop:Generator_RowEvArgName="NIVELES_CRITICIDADRowChangeEvent" msprop:Generator_RowEvHandlerName="NIVELES_CRITICIDADRowChangeEventHandler" msprop:Generator_TableClassName="NIVELES_CRITICIDADDataTable" msprop:Generator_TableVarName="tableNIVELES_CRITICIDAD" msprop:Generator_RowDeletingName="NIVELES_CRITICIDADRowDeleting" msprop:Generator_TablePropName="NIVELES_CRITICIDAD">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="NCRI_CODIGO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="NCRI_CODIGO" msprop:Generator_ColumnPropNameInRow="NCRI_CODIGO" msprop:Generator_ColumnVarNameInTable="columnNCRI_CODIGO" msprop:Generator_ColumnPropNameInTable="NCRI_CODIGOColumn" type="xs:decimal" />

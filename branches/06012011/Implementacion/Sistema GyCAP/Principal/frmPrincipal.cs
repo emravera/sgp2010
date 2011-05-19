@@ -232,6 +232,12 @@ namespace Principal
             GyCAP.UI.Mantenimiento.frmAverias.Instancia.Show();
         }
 
+        private void toolStripRepuestos_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Mantenimiento.frmRepuestos.Instancia.MdiParent = this;
+            GyCAP.UI.Mantenimiento.frmRepuestos.Instancia.Show();
+        }
+
 
     }
 }

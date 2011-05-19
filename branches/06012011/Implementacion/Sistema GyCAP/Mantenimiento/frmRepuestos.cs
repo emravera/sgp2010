@@ -9,11 +9,11 @@ using System.Windows.Forms;
 
 namespace GyCAP.UI.Mantenimiento
 {
-    public partial class frmAverias : Form
+    public partial class frmRepuestos : Form
     {
-        private static frmAverias _frmAverias = null;
+        private static frmRepuestos _frmRepuestos = null;
         private Data.dsMantenimiento dsMantenimiento = new GyCAP.Data.dsMantenimiento();
-        private DataView dvAverias, dvComboCriticidadBuscar,dvCboCriticidad, dvCboMaquina;
+        private DataView dvRepuestos, dvComboTipoRepBuscar,dvCboTipoRep;
         private enum estadoUI { inicio, nuevo, consultar, modificar, nuevoExterno };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
@@ -21,7 +21,7 @@ namespace GyCAP.UI.Mantenimiento
 
         #region Inicio
 
-        public frmAverias()
+        public frmRepuestos()
         {
             InitializeComponent();
 
@@ -31,37 +31,42 @@ namespace GyCAP.UI.Mantenimiento
             //Para que no genere las columnas automáticamente
             dgvLista.AutoGenerateColumns = false;
             //Agregamos las columnas
-            dgvLista.Columns.Add("AVE_CODIGO", "Código");
-            dgvLista.Columns.Add("MAQ_CODIGO", "Maquina");
-            dgvLista.Columns.Add("NCRI_CODIGO", "Criticidad");
-            dgvLista.Columns.Add("AVE_DESCRIPCION", "Descripción");
+            dgvLista.Columns.Add("REP_CODIGO", "Código");
+            dgvLista.Columns.Add("TREP_CODIGO", "Tipo");
+            dgvLista.Columns.Add("REP_NOMBRE", "Repuesto");
+            dgvLista.Columns.Add("REP_CANTIDADSTOCK", "Stock");
+            dgvLista.Columns.Add("REP_COSTO", "Costo");
+            dgvLista.Columns.Add("REP_DESCRIPCION", "Descripción");
 
             //Seteamos el modo de tamaño de las columnas
-            dgvLista.Columns["AVE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["MAQ_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["NCRI_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["AVE_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLista.Columns["REP_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["TREP_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["REP_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["REP_CANTIDADSTOCK"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["REP_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns["REP_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            dgvLista.Columns["AVE_CODIGO"].DataPropertyName = "AVE_CODIGO";
-            dgvLista.Columns["MAQ_CODIGO"].DataPropertyName = "MAQ_CODIGO";
-            dgvLista.Columns["NCRI_CODIGO"].DataPropertyName = "NCRI_CODIGO";
-            dgvLista.Columns["AVE_DESCRIPCION"].DataPropertyName = "AVE_DESCRIPCION";
+            dgvLista.Columns["REP_CODIGO"].DataPropertyName = "REP_CODIGO";
+            dgvLista.Columns["TREP_CODIGO"].DataPropertyName = "TREP_CODIGO";
+            dgvLista.Columns["REP_NOMBRE"].DataPropertyName = "REP_NOMBRE";
+            dgvLista.Columns["REP_CANTIDADSTOCK"].DataPropertyName = "REP_CANTIDADSTOCK";
+            dgvLista.Columns["REP_COSTO"].DataPropertyName = "REP_COSTO";
+            dgvLista.Columns["REP_DESCRIPCION"].DataPropertyName = "REP_DESCRIPCION";
 
             //Alineacion de los numeros y las fechas en la grilla
-            dgvLista.Columns["AVE_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvLista.Columns["AVE_CODIGO"].Visible = false;
+            dgvLista.Columns["REP_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvLista.Columns["REP_CODIGO"].Visible = false;
 
             //Creamos el dataview y lo asignamos a la grilla
-            dvAverias = new DataView(dsMantenimiento.AVERIAS);
-            dvAverias.Sort = "AVE_DESCRIPCION ASC";
-            dgvLista.DataSource = dvAverias;
+            dvRepuestos = new DataView(dsMantenimiento.REPUESTOS);
+            dvRepuestos.Sort = "REP_NOMBRE ASC";
+            dgvLista.DataSource = dvRepuestos;
 
             //Obtenemos los niveles
             try
             {
-                BLL.NivelCriticidadBLL.ObtenerTodos(dsMantenimiento);
-                BLL.MaquinaBLL.ObtenerMaquinas(dsMantenimiento);  
+                BLL.TipoRepuestoBLL.ObtenerTodos(dsMantenimiento);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -71,20 +76,20 @@ namespace GyCAP.UI.Mantenimiento
             //CARGA DE COMBOS
             //Combo de la Busqueda
             //Creamos el Dataview y se lo asignamos al combo
-            dvComboCriticidadBuscar = new DataView(dsMantenimiento.NIVELES_CRITICIDAD);
+            dvComboTipoRepBuscar = new DataView(dsMantenimiento.TIPOS_REPUESTOS);
 
             //Combos de Datos
-            dvCboMaquina  = new DataView(dsMantenimiento.MAQUINAS);
-            dvCboCriticidad = new DataView(dsMantenimiento.NIVELES_CRITICIDAD);
+            dvCboTipoRep = new DataView(dsMantenimiento.TIPOS_REPUESTOS);
 
-            cboCriticidadBuscar.SetDatos(dvComboCriticidadBuscar, "NCRI_CODIGO", "NCRI_NOMBRE", "--TODOS--", true);
-            cboCriticidad.SetDatos(dvCboCriticidad, "NCRI_CODIGO", "NCRI_NOMBRE", "Seleccione el nivel...", false);
-            cboMaquina.SetDatos(dvCboMaquina, "MAQ_CODIGO", "MAQ_NOMBRE", "[Seleccione una maquina...]", false);
+            cboTipoRepBuscar.SetDatos(dvComboTipoRepBuscar, "TREP_CODIGO", "TREP_NOMBRE", "--TODOS--", true);
+            cboTipoRep.SetDatos(dvCboTipoRep, "TREP_CODIGO", "TREP_NOMBRE", "Seleccione el nivel...", false);
 
             //Seteo el maxlenght de los textbox para que no de error en la bd
-            txtDescripcion.MaxLength = 500;
-            txtDescripcionBuscar.MaxLength = 500; 
-            
+            txtDescripcion.MaxLength = 200;
+            txtDescripcionBuscar.MaxLength = 200;
+            txtNombre.MaxLength = 80;
+            txtCosto.MaxLength = 10;
+
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
         }
@@ -101,7 +106,7 @@ namespace GyCAP.UI.Mantenimiento
                 case estadoUI.inicio:
                     bool hayDatos;
 
-                    if (dsMantenimiento.AVERIAS.Rows.Count == 0)
+                    if (dsMantenimiento.REPUESTOS.Rows.Count == 0)
                     {
                         hayDatos = false;
                         btnBuscar.Focus();
@@ -121,10 +126,10 @@ namespace GyCAP.UI.Mantenimiento
                     break;
                 case estadoUI.nuevo:
                     setControles(false);
-                    cboMaquina.SelectedIndex = -1;
-                    cboCriticidad.SelectedIndex = -1;
-                    txtDescripcion.Text = string.Empty; 
-
+                    cboTipoRep.SelectedIndex = -1;
+                    txtDescripcion.Text = string.Empty;
+                    txtNombre.Text = string.Empty;
+                    txtCosto.Text = string.Empty;
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -134,14 +139,14 @@ namespace GyCAP.UI.Mantenimiento
                     btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.nuevo;
                     tcABM.SelectedTab = tpDatos;
-                    cboMaquina.Focus();
+                    cboTipoRep.Focus();
                     break;
                 case estadoUI.nuevoExterno:
                     setControles(false);
                     txtDescripcion.Text = string.Empty;
-                    cboMaquina.SelectedIndex = -1;
-                    cboCriticidad.SelectedIndex = -1;    
-
+                    cboTipoRep.SelectedIndex = -1;
+                    txtNombre.Text = string.Empty;
+                    txtCosto.Text = string.Empty;
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
@@ -151,7 +156,7 @@ namespace GyCAP.UI.Mantenimiento
                     btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.nuevoExterno;
                     tcABM.SelectedTab = tpDatos;
-                    cboMaquina.Focus();
+                    cboTipoRep.Focus();
                     break;
                 case estadoUI.consultar:
                     setControles(true);
@@ -173,7 +178,7 @@ namespace GyCAP.UI.Mantenimiento
                     btnEliminar.Enabled = false;
                     estadoInterface = estadoUI.modificar;
                     tcABM.SelectedTab = tpDatos;
-                    cboMaquina.Focus();
+                    cboTipoRep.Focus();
                     break;
                 default:
                     break;
@@ -189,28 +194,29 @@ namespace GyCAP.UI.Mantenimiento
         private void setControles(bool pValue)
         {
             txtDescripcion.ReadOnly = pValue;
-            cboMaquina.Enabled = !pValue;
-            cboCriticidad.Enabled = !pValue;
+            cboTipoRep.Enabled = !pValue;
+            txtNombre.ReadOnly = pValue;
+            txtCosto.ReadOnly = pValue;
         }
 
         //Método para evitar la creación de más de una pantalla
-        public static frmAverias Instancia
+        public static frmRepuestos Instancia
         {
             get
             {
-                if (_frmAverias == null || _frmAverias.IsDisposed )
+                if (_frmRepuestos == null || _frmRepuestos.IsDisposed )
                 {
-                    _frmAverias = new frmAverias();
+                    _frmRepuestos = new frmRepuestos();
                 }
                 else
                 {
-                    _frmAverias.BringToFront();
+                    _frmRepuestos.BringToFront();
                 }
-                return _frmAverias;
+                return _frmRepuestos;
             }
             set
             {
-                _frmAverias = value;
+                _frmRepuestos = value;
             }
         }
 
@@ -221,20 +227,8 @@ namespace GyCAP.UI.Mantenimiento
                 string nombre;
                 switch (dgvLista.Columns[e.ColumnIndex].Name)
                 {
-                    case "MAQ_CODIGO":
-                        if ( int.Parse( e.Value.ToString())  != 0)
-                        {
-                            nombre = dsMantenimiento.MAQUINAS.FindByMAQ_CODIGO(Convert.ToInt32(e.Value)).MAQ_NOMBRE;
-                            e.Value = nombre;
-                        }
-                        else
-                        {
-                            nombre = string.Empty;
-                            e.Value = nombre;
-                        }
-                        break;
-                    case "NCRI_CODIGO":
-                        nombre = dsMantenimiento.NIVELES_CRITICIDAD.FindByNCRI_CODIGO(Convert.ToInt32(e.Value)).NCRI_NOMBRE;
+                    case "TREP_CODIGO":
+                        nombre = dsMantenimiento.TIPOS_REPUESTOS.FindByTREP_CODIGO(Convert.ToInt32(e.Value)).TREP_NOMBRE;
                         e.Value = nombre;
                         break;
                     default:
@@ -271,28 +265,28 @@ namespace GyCAP.UI.Mantenimiento
         {
             try
             {
-                int criticidad;
-                criticidad = 0;
-                if (cboCriticidadBuscar.SelectedIndex != -1)
-                    criticidad = cboCriticidadBuscar.GetSelectedValueInt();
+                int tipoRepuesto;
+                tipoRepuesto = 0;
+                if (cboTipoRepBuscar.SelectedIndex != -1)
+                    tipoRepuesto = cboTipoRepBuscar.GetSelectedValueInt();
 
-                dsMantenimiento.AVERIAS.Clear();
+                dsMantenimiento.REPUESTOS.Clear();
 
-                BLL.AveriasBLL.ObtenerTodos(txtDescripcionBuscar.Text, criticidad, dsMantenimiento);
+                BLL.RepuestoBLL.ObtenerTodos(txtDescripcionBuscar.Text, tipoRepuesto, dsMantenimiento);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
-                dvAverias.Table = dsMantenimiento.AVERIAS;
+                dvRepuestos.Table = dsMantenimiento.REPUESTOS;
 
-                if (dsMantenimiento.AVERIAS.Rows.Count == 0)
+                if (dsMantenimiento.REPUESTOS.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Averias con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("No se encontraron repuestos con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 SetInterface(estadoUI.inicio);
 
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Averias - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error: repuestos - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetInterface(estadoUI.inicio);
             }
         }
@@ -307,45 +301,37 @@ namespace GyCAP.UI.Mantenimiento
             //Revisamos que escribió algo y selecciono algo en el combo
             if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
-                Entidades.Averia averia = new GyCAP.Entidades.Averia();
-                averia.Nivel = new GyCAP.Entidades.NivelCriticidad();
-                averia.Maquina = new GyCAP.Entidades.Maquina();
-
-                int Codmaquina;
-                Codmaquina = 0;
-                if (cboMaquina.SelectedIndex != -1)
-                    Codmaquina = cboMaquina.GetSelectedValueInt();
+                Entidades.Repuesto repuesto = new GyCAP.Entidades.Repuesto();
+                repuesto.Tipo = new GyCAP.Entidades.TipoRepuesto();
 
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
                     //Está cargando un nuevo Empleado
-                    averia.Descripcion = txtDescripcion.Text.Trim();
-                    averia.FechaAlta = BLL.DBBLL.GetFechaServidor();
-                    averia.Nivel.Codigo = cboCriticidad.GetSelectedValueInt();
-                    if (cboMaquina.SelectedIndex != -1)
-                        averia.Maquina.Codigo = Codmaquina;
+                    repuesto.Descripcion = txtDescripcion.Text.Trim();
+                    repuesto.Nombre = txtNombre.Text.Trim();
+                    repuesto.Costo = Convert.ToDecimal ( txtCosto.Text.Trim());
+                    repuesto.Tipo.Codigo = cboTipoRep.GetSelectedValueInt();
                     
                     try
                     {
                         //Primero lo creamos en la db
-                        averia.Codigo = BLL.AveriasBLL.Insertar(averia);
-                        //Ahora lo agregamos al dataset
-                        Data.dsMantenimiento.AVERIASRow rowAveria = dsMantenimiento.AVERIAS.NewAVERIASRow();
+                        repuesto.Codigo = BLL.RepuestoBLL.Insertar(repuesto);
+                        //Ahora lo agregamos al dataset 
+                        Data.dsMantenimiento.REPUESTOSRow rowRepuesto = dsMantenimiento.REPUESTOS.NewREPUESTOSRow();
                         //Indicamos que comienza la edición de la fila
-                        rowAveria.BeginEdit();
-                        rowAveria.AVE_CODIGO = averia.Codigo;
-                        rowAveria.AVE_DESCRIPCION = averia.Descripcion;
-                        rowAveria.AVE_FECHA_ALTA = averia.FechaAlta;
-                        rowAveria.AVE_USU_CODIGO = 0;
-                        rowAveria.MAQ_CODIGO = averia.Maquina.Codigo;
-                        rowAveria.NCRI_CODIGO = averia.Nivel.Codigo;
+                        rowRepuesto.BeginEdit();
+                        rowRepuesto.REP_CODIGO = repuesto.Codigo;
+                        rowRepuesto.REP_NOMBRE = repuesto.Nombre;
+                        rowRepuesto.REP_DESCRIPCION = repuesto.Descripcion;
+                        rowRepuesto.REP_COSTO = repuesto.Costo;
+                        rowRepuesto.TREP_CODIGO = repuesto.Tipo.Codigo;
 
                         //Termina la edición de la fila
-                        rowAveria.EndEdit();
+                        rowRepuesto.EndEdit();
                         //Agregamos la fila al dataset y aceptamos los cambios
-                        dsMantenimiento.AVERIAS.AddAVERIASRow(rowAveria);
-                        dsMantenimiento.AVERIAS.AcceptChanges();
+                        dsMantenimiento.REPUESTOS.AddREPUESTOSRow(rowRepuesto);
+                        dsMantenimiento.REPUESTOS.AcceptChanges();
 
                         //Y por último seteamos el estado de la interfaz
 
@@ -375,40 +361,33 @@ namespace GyCAP.UI.Mantenimiento
                 }
                 else
                 {
-                    Codmaquina = 0;
-                    if (cboMaquina.SelectedIndex != -1)
-                        Codmaquina = cboMaquina.GetSelectedValueInt();
-
                     //Está modificando una designacion
                     //Primero obtenemos su código del dataview que está realacionado a la fila seleccionada                
-                    averia.Codigo = Convert.ToInt64(dvAverias[dgvLista.SelectedRows[0].Index]["ave_codigo"]);
+                    repuesto.Codigo = Convert.ToInt32(dvRepuestos[dgvLista.SelectedRows[0].Index]["rep_codigo"]);
 
                     //Segundo obtenemos los nuevos datos que ingresó el usuario
-                    averia.Descripcion = txtDescripcion.Text.Trim();
-                    averia.FechaAlta = BLL.DBBLL.GetFechaServidor();
-                    averia.Nivel.Codigo = cboCriticidad.GetSelectedValueInt();
-
-                    if (cboMaquina.SelectedIndex != -1)
-                        averia.Maquina.Codigo = Codmaquina;
+                    repuesto.Descripcion = txtDescripcion.Text.Trim();
+                    repuesto.Nombre = txtNombre.Text.Trim();
+                    repuesto.Costo = Convert.ToDecimal(txtCosto.Text.Trim());
+                    repuesto.Tipo.Codigo = cboTipoRep.GetSelectedValueInt();
 
                     try
                     {
                         //Lo actualizamos en la DB
-                        BLL.AveriasBLL.Actualizar(averia);
+                        BLL.RepuestoBLL.Actualizar(repuesto);
                         //Lo actualizamos en el dataset y aceptamos los cambios
-                        Data.dsMantenimiento.AVERIASRow rowAveria = dsMantenimiento.AVERIAS.FindByAVE_CODIGO(averia.Codigo);
+                        Data.dsMantenimiento.REPUESTOSRow rowRepuesto = dsMantenimiento.REPUESTOS.FindByREP_CODIGO(repuesto.Codigo);
                         //Indicamos que comienza la edición de la fila
-                        rowAveria.BeginEdit();
-                        rowAveria.AVE_DESCRIPCION = averia.Descripcion;
-                        rowAveria.AVE_FECHA_ALTA = averia.FechaAlta;
-                        rowAveria.AVE_USU_CODIGO = 0;
-                        rowAveria.MAQ_CODIGO = averia.Maquina.Codigo;
-                        rowAveria.NCRI_CODIGO = averia.Nivel.Codigo;
+                        rowRepuesto.BeginEdit();
+                        rowRepuesto.REP_NOMBRE = repuesto.Nombre;
+                        rowRepuesto.REP_DESCRIPCION = repuesto.Descripcion;
+                        rowRepuesto.REP_COSTO = repuesto.Costo;
+                        rowRepuesto.TREP_CODIGO = repuesto.Tipo.Codigo;
 
                         //Termina la edición de la fila
-                        rowAveria.EndEdit();
+                        rowRepuesto.EndEdit();
                         //Agregamos la fila al dataset y aceptamos los cambios
-                        dsMantenimiento.AVERIAS.AcceptChanges();
+                        dsMantenimiento.REPUESTOS.AcceptChanges();
                         //Avisamos que estuvo todo ok
                         MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //Y por último seteamos el estado de la interfaz
@@ -432,18 +411,18 @@ namespace GyCAP.UI.Mantenimiento
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar La avería seleccionada?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el repuesto seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
                     {
                         //Lo eliminamos de la DB
-                        long codigo = Convert.ToInt64(dvAverias[dgvLista.SelectedRows[0].Index]["AVE_CODIGO"]);
-                        BLL.AveriasBLL.Eliminar(codigo);
+                        int codigo = Convert.ToInt32(dvRepuestos[dgvLista.SelectedRows[0].Index]["REP_CODIGO"]);
+                        BLL.RepuestoBLL.Eliminar(codigo);
 
                         //Lo eliminamos del dataset
-                        dsMantenimiento.AVERIAS.FindByAVE_CODIGO(codigo).Delete();
-                        dsMantenimiento.AVERIAS.AcceptChanges();
+                        dsMantenimiento.REPUESTOS.FindByREP_CODIGO(codigo).Delete();
+                        dsMantenimiento.REPUESTOS.AcceptChanges();
                         btnVolver.PerformClick();
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
@@ -458,7 +437,7 @@ namespace GyCAP.UI.Mantenimiento
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Avería de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debe seleccionar un repusto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -474,16 +453,18 @@ namespace GyCAP.UI.Mantenimiento
             }
             else
             {
-                cboMaquina.Focus();
+                cboTipoRep.Focus();
             }
         }
         
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            long codigo = Convert.ToInt64(dvAverias[e.RowIndex]["ave_codigo"]);
-            txtDescripcion.Text = dsMantenimiento.AVERIAS.FindByAVE_CODIGO(codigo).AVE_DESCRIPCION;
-            cboCriticidad.SetSelectedValue(Convert.ToInt32(dsMantenimiento.AVERIAS.FindByAVE_CODIGO(codigo).NCRI_CODIGO));
-            cboMaquina.SetSelectedValue(Convert.ToInt32(dsMantenimiento.AVERIAS.FindByAVE_CODIGO(codigo).MAQ_CODIGO));    
+            long codigo = Convert.ToInt64(dvRepuestos[e.RowIndex]["rep_codigo"]);
+            txtNombre.Text = dsMantenimiento.REPUESTOS.FindByREP_CODIGO(codigo).REP_NOMBRE;
+            cboTipoRep.SetSelectedValue(Convert.ToInt32(dsMantenimiento.REPUESTOS.FindByREP_CODIGO(codigo).TREP_CODIGO));
+            txtCosto.Text = dsMantenimiento.REPUESTOS.FindByREP_CODIGO(codigo).REP_COSTO.ToString();
+            txtDescripcion.Text = dsMantenimiento.REPUESTOS.FindByREP_CODIGO(codigo).REP_DESCRIPCION;
+
         }
 
         private void txtDescripcion_Enter(object sender, EventArgs e)
@@ -496,9 +477,17 @@ namespace GyCAP.UI.Mantenimiento
             txtDescripcionBuscar.SelectAll();
         }
 
-        #endregion
+        private void txtNombre_Enter(object sender, EventArgs e)
+        {
+            txtNombre.SelectAll();
+        }
 
-       
+        private void txtCosto_Enter(object sender, EventArgs e)
+        {
+            txtCosto.SelectAll();
+        }
+
+        #endregion
 
     }
 }

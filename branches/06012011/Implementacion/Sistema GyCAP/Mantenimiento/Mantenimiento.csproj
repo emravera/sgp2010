@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{6A2EB4DA-E737-466E-A7A6-9FD238F0AF4E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -81,6 +81,12 @@
     <Compile Include="frmPlanMantenimiento.Designer.cs">
       <DependentUpon>frmPlanMantenimiento.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmRepuestos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRepuestos.Designer.cs">
+      <DependentUpon>frmRepuestos.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTipoMantenimiento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +110,9 @@
     <EmbeddedResource Include="frmPlanMantenimiento.resx">
       <DependentUpon>frmPlanMantenimiento.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRepuestos.resx">
+      <DependentUpon>frmRepuestos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTipoMantenimiento.resx">
       <DependentUpon>frmTipoMantenimiento.cs</DependentUpon>
