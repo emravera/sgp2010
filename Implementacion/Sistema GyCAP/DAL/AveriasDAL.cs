@@ -70,7 +70,7 @@ namespace GyCAP.DAL
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
             //Un array de object para ir guardando los valores de los filtros, con tamaño = cantidad de filtros disponibles
-            object[] valoresFiltros = new object[1];
+            object[] valoresFiltros = new object[2];
             //Empecemos a armar la consulta, revisemos que filtros aplican
 
             // NOMBRE

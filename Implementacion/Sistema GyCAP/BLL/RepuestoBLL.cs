@@ -8,7 +8,7 @@ namespace GyCAP.BLL
 {
     public class RepuestoBLL
     {
-        public static long Insertar(Entidades.Repuesto repuesto)
+        public static int Insertar(Entidades.Repuesto repuesto)
         {
             //Si existe lanzamos la excepción correspondiente
             if (EsRepuesto(repuesto)) throw new Entidades.Excepciones.ElementoExistenteException();
@@ -16,7 +16,7 @@ namespace GyCAP.BLL
             return DAL.RepuestoDAL.Insertar(repuesto);
         }
 
-        public static void Eliminar(long codigo)
+        public static void Eliminar(int codigo)
         {
             //Revisamos que no esté en alguna transacción
             if (DAL.RepuestoDAL.PuedeEliminarse(codigo))
@@ -41,9 +41,9 @@ namespace GyCAP.BLL
             return DAL.RepuestoDAL.EsRepuesto(repuesto);
         }
 
-        public static void ObtenerTodos(string nombre, Data.dsMantenimiento dsMantenimiento)
+        public static void ObtenerTodos(string nombre,int tipoRepuesto, Data.dsMantenimiento dsMantenimiento)
         {
-            DAL.RepuestoDAL.ObtenerRepuesto(nombre, dsMantenimiento);
+            DAL.RepuestoDAL.ObtenerRepuesto(nombre,tipoRepuesto, dsMantenimiento);
         }
 
         public static void ObtenerTodos(Data.dsMantenimiento dsMantenimiento)

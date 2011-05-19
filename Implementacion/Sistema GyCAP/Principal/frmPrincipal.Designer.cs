@@ -77,9 +77,10 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.tipoRepuesto = new System.Windows.Forms.ToolStripButton();
             this.btnProveedores = new System.Windows.Forms.ToolStripButton();
+            this.toolAveria = new System.Windows.Forms.ToolStripButton();
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolAveria = new System.Windows.Forms.ToolStripButton();
+            this.toolStripRepuestos = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -454,7 +455,8 @@
             this.toolStripButton1,
             this.tipoRepuesto,
             this.btnProveedores,
-            this.toolAveria});
+            this.toolAveria,
+            this.toolStripRepuestos});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(792, 38);
@@ -550,6 +552,16 @@
             this.btnProveedores.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnProveedores.Click += new System.EventHandler(this.btnProveedores_Click);
             // 
+            // toolAveria
+            // 
+            this.toolAveria.Image = ((System.Drawing.Image)(resources.GetObject("toolAveria.Image")));
+            this.toolAveria.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolAveria.Name = "toolAveria";
+            this.toolAveria.Size = new System.Drawing.Size(49, 35);
+            this.toolAveria.Text = "Averias";
+            this.toolAveria.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolAveria.Click += new System.EventHandler(this.toolAveria_Click);
+            // 
             // barraEstado
             // 
             this.barraEstado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -566,15 +578,15 @@
             this.lblEstado.Size = new System.Drawing.Size(39, 17);
             this.lblEstado.Text = "Status";
             // 
-            // toolAveria
+            // toolStripRepuestos
             // 
-            this.toolAveria.Image = ((System.Drawing.Image)(resources.GetObject("toolAveria.Image")));
-            this.toolAveria.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolAveria.Name = "toolAveria";
-            this.toolAveria.Size = new System.Drawing.Size(49, 35);
-            this.toolAveria.Text = "Averias";
-            this.toolAveria.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolAveria.Click += new System.EventHandler(this.toolAveria_Click);
+            this.toolStripRepuestos.Image = ((System.Drawing.Image)(resources.GetObject("toolStripRepuestos.Image")));
+            this.toolStripRepuestos.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripRepuestos.Name = "toolStripRepuestos";
+            this.toolStripRepuestos.Size = new System.Drawing.Size(65, 35);
+            this.toolStripRepuestos.Text = "Repuestos";
+            this.toolStripRepuestos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripRepuestos.Click += new System.EventHandler(this.toolStripRepuestos_Click);
             // 
             // frmPrincipal
             // 
@@ -656,6 +668,7 @@
         private System.Windows.Forms.ToolStripButton tipoRepuesto;
         private System.Windows.Forms.ToolStripButton btnProveedores;
         private System.Windows.Forms.ToolStripButton toolAveria;
+        private System.Windows.Forms.ToolStripButton toolStripRepuestos;
     }
 }
 
