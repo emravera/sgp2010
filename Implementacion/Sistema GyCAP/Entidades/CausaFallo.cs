@@ -7,12 +7,12 @@ namespace GyCAP.Entidades
 {
     public class CausaFallo
     {
-        private long numero;
+        private int numero;
         private string codigo;
         private string nombre;
         private string descripcion;
 
-        public long Numero
+        public int Numero
         {
             get { return numero; }
             set { numero = value; }

@@ -79,9 +79,10 @@
             this.btnProveedores = new System.Windows.Forms.ToolStripButton();
             this.toolAveria = new System.Windows.Forms.ToolStripButton();
             this.toolStripRepuestos = new System.Windows.Forms.ToolStripButton();
+            this.toolStripTipoMantenimiento = new System.Windows.Forms.ToolStripButton();
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripTipoMantenimiento = new System.Windows.Forms.ToolStripButton();
+            this.toolStripCausaFallo = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -458,7 +459,8 @@
             this.btnProveedores,
             this.toolAveria,
             this.toolStripRepuestos,
-            this.toolStripTipoMantenimiento});
+            this.toolStripTipoMantenimiento,
+            this.toolStripCausaFallo});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(792, 38);
@@ -574,6 +576,16 @@
             this.toolStripRepuestos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripRepuestos.Click += new System.EventHandler(this.toolStripRepuestos_Click);
             // 
+            // toolStripTipoMantenimiento
+            // 
+            this.toolStripTipoMantenimiento.Image = ((System.Drawing.Image)(resources.GetObject("toolStripTipoMantenimiento.Image")));
+            this.toolStripTipoMantenimiento.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripTipoMantenimiento.Name = "toolStripTipoMantenimiento";
+            this.toolStripTipoMantenimiento.Size = new System.Drawing.Size(136, 35);
+            this.toolStripTipoMantenimiento.Text = "Tipo de Mantenimiento";
+            this.toolStripTipoMantenimiento.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripTipoMantenimiento.Click += new System.EventHandler(this.toolStripTipoMantenimiento_Click);
+            // 
             // barraEstado
             // 
             this.barraEstado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -590,15 +602,15 @@
             this.lblEstado.Size = new System.Drawing.Size(39, 17);
             this.lblEstado.Text = "Status";
             // 
-            // toolStripTipoMantenimiento
+            // toolStripCausaFallo
             // 
-            this.toolStripTipoMantenimiento.Image = ((System.Drawing.Image)(resources.GetObject("toolStripTipoMantenimiento.Image")));
-            this.toolStripTipoMantenimiento.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripTipoMantenimiento.Name = "toolStripTipoMantenimiento";
-            this.toolStripTipoMantenimiento.Size = new System.Drawing.Size(136, 35);
-            this.toolStripTipoMantenimiento.Text = "Tipo de Mantenimiento";
-            this.toolStripTipoMantenimiento.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripTipoMantenimiento.Click += new System.EventHandler(this.toolStripTipoMantenimiento_Click);
+            this.toolStripCausaFallo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripCausaFallo.Image")));
+            this.toolStripCausaFallo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripCausaFallo.Name = "toolStripCausaFallo";
+            this.toolStripCausaFallo.Size = new System.Drawing.Size(92, 35);
+            this.toolStripCausaFallo.Text = "Causas de Fallo";
+            this.toolStripCausaFallo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripCausaFallo.Click += new System.EventHandler(this.toolStripCausaFallo_Click);
             // 
             // frmPrincipal
             // 
@@ -682,6 +694,7 @@
         private System.Windows.Forms.ToolStripButton toolAveria;
         private System.Windows.Forms.ToolStripButton toolStripRepuestos;
         private System.Windows.Forms.ToolStripButton toolStripTipoMantenimiento;
+        private System.Windows.Forms.ToolStripButton toolStripCausaFallo;
     }
 }
 

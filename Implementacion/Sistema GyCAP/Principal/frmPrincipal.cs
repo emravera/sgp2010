@@ -244,6 +244,12 @@ namespace Principal
             GyCAP.UI.Mantenimiento.frmTipoMantenimiento.Instancia.Show();
         }
 
+        private void toolStripCausaFallo_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Mantenimiento.frmCausasFallos.Instancia.MdiParent = this;
+            GyCAP.UI.Mantenimiento.frmCausasFallos.Instancia.Show();
+        }
+
 
     }
 }
