@@ -9,14 +9,14 @@ namespace GyCAP.DAL
 {
     public class TipoMantenimientoDAL
     {
-        public static long Insertar(Entidades.TipoMantenimiento tipoMantenimiento)
+        public static int Insertar(Entidades.TipoMantenimiento tipoMantenimiento)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
             string sql = "INSERT INTO TIPOS_MANTENIMIENTOS (TMAN_NOMBRE, TMAN_DESCRIPCION) VALUES (@p0,@p1) SELECT @@Identity";
             object[] valorParametros = { tipoMantenimiento.Nombre, tipoMantenimiento.Descripcion };
             try
             {
-                return Convert.ToInt64(DB.executeScalar(sql, valorParametros, null));
+                return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
