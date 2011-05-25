@@ -10,7 +10,6 @@ namespace ImageRepositoryService
 {
     public enum ElementType { Cocina, Parte, Empleado, Repuesto };
 
-    // NOTE: If you change the interface name "IService1" here, you must also update the reference to "IService1" in Web.config.
     [ServiceContract]
     public interface IImageRepositoryService
     {
