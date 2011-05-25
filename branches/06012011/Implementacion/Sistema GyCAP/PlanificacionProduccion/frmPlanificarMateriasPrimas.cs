@@ -18,7 +18,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         private Data.dsPlanMP dsPlanMP = new GyCAP.Data.dsPlanMP();
         private DataView dvListaPlanMP, dvListaDetalle, dvComboPlanificacion;
         private enum estadoUI { inicio, nuevo, buscar, calcular };
-        private static estadoUI estadoActual;
+        
 
         public frmPlanificarMateriasPrimas()
         {
@@ -72,14 +72,14 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns["DPMPA_CANTIDAD"].DataPropertyName = "DPMPA_CANTIDAD";
             dgvDetalle.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
 
-            //Seteamos las columnas que no queremos que se vean
-            dgvLista.Columns["PMPA_CODIGO"].Visible = false;
-            dgvDetalle.Columns["DPMPA_CODIGO"].Visible = false;
-
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDetalle = new DataView(dsPlanMP.DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL);
             dvListaDetalle.Sort = "DPMPA_CODIGO ASC";
             dgvDetalle.DataSource = dvListaDetalle;
+
+            //Seteamos las columnas que no queremos que se vean
+            dgvLista.Columns["PMPA_CODIGO"].Visible = false;
+            dgvDetalle.Columns["DPMPA_CODIGO"].Visible = false;
 
             //Llenamos el dataset con las materias primas
             BLL.MateriaPrimaBLL.ObtenerMP(dsPlanMP.MATERIAS_PRIMAS);
@@ -96,7 +96,6 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             //Seteo el estado de inicio de la pantalla
             SetInterface(estadoUI.inicio);
-
         }
 
         //Método para evitar la creación de más de una pantalla
@@ -134,7 +133,10 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnNuevo.Enabled = true;
                     btnConsultar.Enabled = false;
                     btnEliminar.Enabled = false;
-                    estadoActual = estadoUI.inicio;
+                    
+                    //Seteamos las columnas que no queremos que se vean
+                    dgvLista.Columns["PMPA_CODIGO"].Visible = false;
+                    dgvDetalle.Columns["DPMPA_CODIGO"].Visible = false;
                     break;
                 case estadoUI.nuevo:
                     txtAnioBuscar.Text = string.Empty;
@@ -145,7 +147,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnNuevo.Enabled = true;
                     btnConsultar.Enabled = true;
                     btnEliminar.Enabled = false;
-                    estadoActual = estadoUI.inicio;
                     break;
                 case estadoUI.buscar:
                     txtAnioBuscar.Text = string.Empty;
@@ -162,7 +163,10 @@ namespace GyCAP.UI.PlanificacionProduccion
                     else hayDatos = false;
                     btnConsultar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
-                    estadoActual = estadoUI.inicio;
+
+                    //Seteamos las columnas que no queremos que se vean
+                    dgvLista.Columns["PMPA_CODIGO"].Visible = false;
+                    dgvDetalle.Columns["DPMPA_CODIGO"].Visible = false;
                     break;
                 case estadoUI.calcular:
                     txtAnioBuscar.Text = string.Empty;
@@ -173,7 +177,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnNuevo.Enabled = true;
                     btnConsultar.Enabled = true;
                     btnEliminar.Enabled = false;
-                    estadoActual = estadoUI.inicio;
                     break;
 
                 default:
@@ -350,15 +353,12 @@ namespace GyCAP.UI.PlanificacionProduccion
                 MessageBox.Show(ex.Message, "Error: Plan Anual de Materias Primas - Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetInterface(estadoUI.inicio);
             }
-
-
         }
 
         private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value.ToString() != String.Empty)
             {
-
                 switch (dgvLista.Columns[e.ColumnIndex].Name)
                 {
                     case "PMPA_FECHACREACION":
@@ -368,7 +368,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                     default:
                         break;
                 }
-
             }
         }
 
@@ -450,12 +449,10 @@ namespace GyCAP.UI.PlanificacionProduccion
                         MessageBox.Show("No se encontraron Planes anuales con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         SetInterface(estadoUI.inicio);
                     }
-
                 }
                 else
                 {
-                    MessageBox.Show("Es necesario que se ingrese un año para traer el plan anual de materias Primas Correspondiente", "Información: Validación - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
+                    MessageBox.Show("Es necesario que se ingrese un año para traer el plan anual de materias Primas Correspondiente", "Información: Validación - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);                    
                 }
                 
             }
@@ -468,13 +465,10 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 MessageBox.Show("El año no tiene el formato Correcto", "Error: Demanda Anual - Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
         }
 
         private void dgvDetalle_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            
+        {            
             if (e.Value.ToString() != String.Empty)
             {
                 switch (dgvDetalle.Columns[e.ColumnIndex].Name)
@@ -491,9 +485,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                    default:
                         break;
                 }
-
-            }
-           
+            }           
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)
