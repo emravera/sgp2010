@@ -384,7 +384,7 @@
             131072});
             this.numCosto.Location = new System.Drawing.Point(153, 145);
             this.numCosto.Maximum = new decimal(new int[] {
-            100000000,
+            1000000,
             0,
             0,
             0});
@@ -430,6 +430,7 @@
             this.cbTipoUnMedida.Name = "cbTipoUnMedida";
             this.cbTipoUnMedida.Size = new System.Drawing.Size(155, 21);
             this.cbTipoUnMedida.TabIndex = 3;
+            this.cbTipoUnMedida.SelectedIndexChanged += new System.EventHandler(this.cbTipoUnMedida_DropDownClosed);
             this.cbTipoUnMedida.DropDownClosed += new System.EventHandler(this.cbTipoUnMedida_DropDownClosed);
             // 
             // label2
@@ -471,7 +472,7 @@
             131072});
             this.numCantidad.Location = new System.Drawing.Point(314, 15);
             this.numCantidad.Maximum = new decimal(new int[] {
-            1000000000,
+            1000000,
             0,
             0,
             0});
