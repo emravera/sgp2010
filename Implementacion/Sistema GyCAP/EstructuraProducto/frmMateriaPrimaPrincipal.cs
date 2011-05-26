@@ -373,7 +373,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Localidad", Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
+                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Materia Prima", Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -543,30 +543,33 @@ namespace GyCAP.UI.EstructuraProducto
         {
             try
             {
-                if(cbTipoUnMedida.GetSelectedIndex() != -1)
+                if (estadoInterface == estadoUI.nuevo)
                 {
-                    //Obtengo el tipo de unidad de medida seleccionado
-                    int tipo =Convert.ToInt32(cbTipoUnMedida.GetSelectedValue());
+                    if (cbTipoUnMedida.GetSelectedIndex() != -1)
+                    {
+                        //Obtengo el tipo de unidad de medida seleccionado
+                        int tipo = Convert.ToInt32(cbTipoUnMedida.GetSelectedValue());
 
-                    //Limpio el Datatable 
-                    dsMateriaPrima.UNIDADES_MEDIDA.Clear();
-                    
-                    //Llamo a la busqueda de unidades de medida
-                    BLL.UnidadMedidaBLL.ObtenerTodos("", tipo, dsMateriaPrima);
-                    
-                    //Checkeo que existan registros y cargo el combo
-                    if (dsMateriaPrima.UNIDADES_MEDIDA.Count > 0)
-                    {
-                        //Creamos el Dataview y se lo asignamos al combo de unidades de medida
-                        dvCbUnidadMedida = new DataView(dsMateriaPrima.UNIDADES_MEDIDA);
-                        cbUnidadMedida.DataSource = dvCbUnidadMedida;
-                        cbUnidadMedida.SetDatos(dvCbUnidadMedida, "umed_codigo", "umed_nombre", "-Seleccionar-", false);
+                        //Limpio el Datatable 
+                        dsMateriaPrima.UNIDADES_MEDIDA.Clear();
+
+                        //Llamo a la busqueda de unidades de medida
+                        BLL.UnidadMedidaBLL.ObtenerTodos("", tipo, dsMateriaPrima);
+
+                        //Checkeo que existan registros y cargo el combo
+                        if (dsMateriaPrima.UNIDADES_MEDIDA.Count > 0)
+                        {
+                            //Creamos el Dataview y se lo asignamos al combo de unidades de medida
+                            dvCbUnidadMedida = new DataView(dsMateriaPrima.UNIDADES_MEDIDA);
+                            cbUnidadMedida.DataSource = dvCbUnidadMedida;
+                            cbUnidadMedida.SetDatos(dvCbUnidadMedida, "umed_codigo", "umed_nombre", "-Seleccionar-", false);
+                        }
+                        else
+                        {
+                            Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Unidades de Medida", this.Text);
+                        }
+
                     }
-                    else
-                    {
-                        Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Unidades de Medida", this.Text);
-                    }
-                   
                 }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)

@@ -444,16 +444,19 @@ namespace GyCAP.UI.GestionStock
 
       private void cbProvincia_DropDownClosed(object sender, EventArgs e)
        {
-           //Limpiamos el datatable de localidades
-           dsProveedor.LOCALIDADES.Clear();
+           if (estadoInterface == estadoUI.nuevo)
+           {
+               //Limpiamos el datatable de localidades
+               dsProveedor.LOCALIDADES.Clear();
 
-           //Cargamos las localidades de la provincia
-           BLL.LocalidadBLL.ObtenerLocalidades(Convert.ToInt32(cbProvincia.GetSelectedValue()), dsProveedor.LOCALIDADES);
+               //Cargamos las localidades de la provincia
+               BLL.LocalidadBLL.ObtenerLocalidades(Convert.ToInt32(cbProvincia.GetSelectedValue()), dsProveedor.LOCALIDADES);
 
-           //Creamos el Dataview y se lo asignamos al combo de Localidades
-           dvComboLocalidades = new DataView(dsProveedor.LOCALIDADES);
-           cbLocalidad.SetDatos(dvComboLocalidades, "loc_codigo", "loc_nombre", "Seleccionar", true);
-           cbLocalidad.Enabled = true;
+               //Creamos el Dataview y se lo asignamos al combo de Localidades
+               dvComboLocalidades = new DataView(dsProveedor.LOCALIDADES);
+               cbLocalidad.SetDatos(dvComboLocalidades, "loc_codigo", "loc_nombre", "Seleccionar", true);
+               cbLocalidad.Enabled = true;
+           }
        }
 
        private void dgvDomicilios_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

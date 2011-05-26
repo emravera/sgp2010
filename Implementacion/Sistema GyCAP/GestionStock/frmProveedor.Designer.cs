@@ -136,7 +136,8 @@
             // 
             // txtTelefonoAlt
             // 
-            this.txtTelefonoAlt.Location = new System.Drawing.Point(325, 40);
+            this.txtTelefonoAlt.CausesValidation = false;
+            this.txtTelefonoAlt.Location = new System.Drawing.Point(313, 40);
             this.txtTelefonoAlt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTelefonoAlt.Name = "txtTelefonoAlt";
             this.txtTelefonoAlt.Size = new System.Drawing.Size(146, 20);
@@ -145,18 +146,18 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(241, 43);
+            this.label7.Location = new System.Drawing.Point(261, 43);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(81, 13);
+            this.label7.Size = new System.Drawing.Size(46, 13);
             this.label7.TabIndex = 18;
-            this.label7.Text = "Tel. Alternativo:";
+            this.label7.Text = "Tel. Alt.:";
             // 
             // txtRazonSocial
             // 
             this.txtRazonSocial.Location = new System.Drawing.Point(89, 14);
             this.txtRazonSocial.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtRazonSocial.Name = "txtRazonSocial";
-            this.txtRazonSocial.Size = new System.Drawing.Size(382, 20);
+            this.txtRazonSocial.Size = new System.Drawing.Size(370, 20);
             this.txtRazonSocial.TabIndex = 1;
             // 
             // label9
@@ -250,6 +251,7 @@
             this.dgvLista.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvLista.CausesValidation = false;
             this.dgvLista.Location = new System.Drawing.Point(9, 22);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
@@ -280,6 +282,7 @@
             // 
             // cbSectorBusqueda
             // 
+            this.cbSectorBusqueda.CausesValidation = false;
             this.cbSectorBusqueda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSectorBusqueda.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbSectorBusqueda.FormattingEnabled = true;
@@ -314,6 +317,7 @@
             // 
             // txtRazonBuscar
             // 
+            this.txtRazonBuscar.CausesValidation = false;
             this.txtRazonBuscar.Location = new System.Drawing.Point(85, 28);
             this.txtRazonBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtRazonBuscar.Name = "txtRazonBuscar";
@@ -406,7 +410,7 @@
             this.dgvDomicilios.ReadOnly = true;
             this.dgvDomicilios.RowHeadersVisible = false;
             this.dgvDomicilios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDomicilios.Size = new System.Drawing.Size(412, 86);
+            this.dgvDomicilios.Size = new System.Drawing.Size(400, 86);
             this.dgvDomicilios.TabIndex = 13;
             this.dgvDomicilios.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDomicilios_CellFormatting);
             // 
@@ -500,6 +504,7 @@
             // 
             // cbLocalidad
             // 
+            this.cbLocalidad.CausesValidation = false;
             this.cbLocalidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLocalidad.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbLocalidad.FormattingEnabled = true;
@@ -519,6 +524,7 @@
             // 
             // txtDepto
             // 
+            this.txtDepto.CausesValidation = false;
             this.txtDepto.Location = new System.Drawing.Point(162, 48);
             this.txtDepto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDepto.Name = "txtDepto";
@@ -536,6 +542,7 @@
             // 
             // txtPiso
             // 
+            this.txtPiso.CausesValidation = false;
             this.txtPiso.Location = new System.Drawing.Point(62, 48);
             this.txtPiso.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPiso.Name = "txtPiso";
@@ -553,17 +560,20 @@
             // 
             // cbProvincia
             // 
+            this.cbProvincia.CausesValidation = false;
             this.cbProvincia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbProvincia.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbProvincia.FormattingEnabled = true;
-            this.cbProvincia.Location = new System.Drawing.Point(276, 49);
+            this.cbProvincia.Location = new System.Drawing.Point(289, 49);
             this.cbProvincia.Name = "cbProvincia";
             this.cbProvincia.Size = new System.Drawing.Size(146, 21);
             this.cbProvincia.TabIndex = 9;
+            this.cbProvincia.SelectedIndexChanged += new System.EventHandler(this.cbProvincia_DropDownClosed);
             this.cbProvincia.DropDownClosed += new System.EventHandler(this.cbProvincia_DropDownClosed);
             // 
             // txtCalle
             // 
+            this.txtCalle.CausesValidation = false;
             this.txtCalle.Location = new System.Drawing.Point(63, 18);
             this.txtCalle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCalle.Name = "txtCalle";
@@ -581,7 +591,8 @@
             // 
             // txtNumero
             // 
-            this.txtNumero.Location = new System.Drawing.Point(360, 18);
+            this.txtNumero.CausesValidation = false;
+            this.txtNumero.Location = new System.Drawing.Point(373, 18);
             this.txtNumero.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(62, 20);
@@ -590,7 +601,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(313, 21);
+            this.label3.Location = new System.Drawing.Point(326, 21);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
             this.label3.TabIndex = 14;
@@ -599,7 +610,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(223, 52);
+            this.label6.Location = new System.Drawing.Point(236, 52);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(54, 13);
             this.label6.TabIndex = 4;
