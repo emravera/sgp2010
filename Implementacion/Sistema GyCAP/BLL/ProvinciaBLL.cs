@@ -8,9 +8,9 @@ namespace GyCAP.BLL
 {
     public class ProvinciaBLL
     {
-        public static int Insertar(string nombre)
+        public static int Insertar(Entidades.Provincia provincia)
         {
-            if (!EsProvincia(nombre)) { return DAL.ProvinciaDAL.Insertar(nombre); }
+            if (DAL.ProvinciaDAL.EsProvinciaNuevo(provincia)) { return DAL.ProvinciaDAL.Insertar(provincia); }
             else { throw new Entidades.Excepciones.ElementoExistenteException(); }
         }
 
@@ -25,18 +25,13 @@ namespace GyCAP.BLL
 
         public static void Actualizar(Entidades.Provincia provincia)
         {
-            if (!EsProvincia(provincia.Nombre)) { DAL.ProvinciaDAL.Actualizar(provincia); }
+            if (DAL.ProvinciaDAL.EsProvinciaActualizar(provincia) == false ) { DAL.ProvinciaDAL.Actualizar(provincia); }
             else { throw new Entidades.Excepciones.ElementoExistenteException(); }            
         }
 
         public static void ObtenerProvincias(DataTable dtProvincia)
         {
             DAL.ProvinciaDAL.ObtenerProvincias(dtProvincia);
-        }
-
-        public static bool EsProvincia(string nombre)
-        {
-            return DAL.ProvinciaDAL.EsProvincia(nombre);
-        }
+        }       
     }
 }

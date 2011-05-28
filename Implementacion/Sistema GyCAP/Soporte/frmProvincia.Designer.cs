@@ -232,7 +232,6 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(167, 20);
             this.txtNombre.TabIndex = 1;
-            this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
             // 
             // label1
             // 
@@ -255,7 +254,6 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Provincias";
-            this.Activated += new System.EventHandler(this.frmProvincia_Activated);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tsMenu.ResumeLayout(false);

@@ -37,19 +37,14 @@ namespace GyCAP.BLL
         {
             return DAL.DemandaAnualDAL.Validar(demanda);
         }
-
         //Eliminacion
         public static void Eliminar(int codigo)
         {
-          DAL.DemandaAnualDAL.Eliminar(codigo);
+            DAL.DemandaAnualDAL.Eliminar(codigo);
         }
-
         public static bool PuedeEliminarse(int codigo)
         {
-            return DAL.DemandaAnualDAL.PuedeEliminarse(codigo);  
-
-        }     
-
-
+            return DAL.DemandaAnualDAL.PuedeEliminarse(codigo); 
+        }
     }
 }

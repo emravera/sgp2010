@@ -9,10 +9,10 @@ namespace GyCAP.DAL
 {
     public class ProvinciaDAL
     {
-        public static int Insertar(string nombre)
+        public static int Insertar(Entidades.Provincia provincia)
         {
             string sql = "INSERT INTO [PROVINCIAS] ([pcia_nombre]) VALUES (@p0) SELECT @@Identity";
-            object[] valoresParametros = { nombre };
+            object[] valoresParametros = { provincia.Nombre };
 
             try
             {
@@ -72,10 +72,23 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
-        public static bool EsProvincia(string nombre)
+        public static bool EsProvinciaActualizar(Entidades.Provincia provincia)
+        {
+            string sql = "SELECT count(pcia_codigo) FROM PROVINCIAS WHERE pcia_nombre = @p0 and pcia_codigo <> @p1";
+            object[] valoresParametros = { provincia.Nombre, provincia.Codigo };
+
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valoresParametros, null)) == 0) { return false; }
+                else { return true; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static bool EsProvinciaNuevo(Entidades.Provincia provincia)
         {
             string sql = "SELECT count(pcia_codigo) FROM PROVINCIAS WHERE pcia_nombre = @p0";
-            object[] valoresParametros = { nombre };
+            object[] valoresParametros = { provincia.Nombre };
 
             try
             {

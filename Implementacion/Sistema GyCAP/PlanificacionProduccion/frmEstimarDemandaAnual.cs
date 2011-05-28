@@ -196,7 +196,6 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                     default:
                     break;
-
             }
 
         }
@@ -233,21 +232,19 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                 if (dsEstimarDemanda.DEMANDAS_ANUALES.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Demandas Anuales con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Estimación de Demanda Anual", this.Text);
                 }
 
                 SetInterface(estadoUI.buscar);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Demanda Anual - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                SetInterface(estadoUI.inicio);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
             }
             catch (Exception)
             {
-                MessageBox.Show("El año no tiene el formato Correcto", "Error: Demanda Anual - Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
+                Entidades.Mensajes.MensajesABM.MsjExcepcion("El año no tiene el formato correcto", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
+            }            
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -279,7 +276,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                 if (dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Detalles para esa demanda.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Detalle de Estimación de Demanda Anual", this.Text);                    
                 }
                 else
                 {
@@ -290,8 +287,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Demanda Anual - Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                SetInterface(estadoUI.inicio);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
             }
         }
 
@@ -460,8 +456,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                             //Se debe recargar el control de los años base
                             CargarAñosBase();
 
-                            MessageBox.Show("Los datos se han almacenado correctamente", "Informacion: Demanda Anual - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                            Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Estimacion de Demanda Anual", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                            
                             //Seteo el estado de la interface a nuevo
                             SetInterface(estadoUI.nuevo);
                         }
@@ -490,26 +486,25 @@ namespace GyCAP.UI.PlanificacionProduccion
                                 rowDDemanda.EndEdit();
                                 dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.AcceptChanges();
                             }
-
-                            MessageBox.Show("Los datos se han Actualizado correctamente", "Informacion: Demanda Anual - Actualizacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                            
+                            Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Estimacion de Demanda Anual", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
+                            
                             //Pongo la interface en el estado de busqueda
                             SetInterface(estadoUI.buscar);
                         }
                     }
                 else 
                     {
-                        MessageBox.Show(validacion, "Error: Demanda Anual - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text); 
                     }
-
-                }
+            }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Demanda Anual - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Advertencia: Demanda Anual - Modificación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
             }
         }
 
@@ -597,10 +592,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             else
             {
-                MessageBox.Show(errorValidacion, "Error: Demanda Anual - Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjValidacion(errorValidacion, this.Text); 
             }
-        }
-        
+        }       
 
         private void btnModificarEstimacion_Click(object sender, EventArgs e)
         {
@@ -962,7 +956,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la Demanda Anual seleccionada y todo su detalle ?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Estimación de Demanda Anual", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -984,7 +978,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                             dsEstimarDemanda.DEMANDAS_ANUALES.AcceptChanges();
 
                             //Avisamos que se elimino 
-                            MessageBox.Show("Se han eliminado los datos correctamente" , "Información: Elemento Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Entidades.Mensajes.MensajesABM.MsjConfirmaEliminar("Estimación de Demanda Anual", GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
 
                             //Ponemos la ventana en el estado inicial
                             SetInterface(estadoUI.inicio);
@@ -994,17 +988,17 @@ namespace GyCAP.UI.PlanificacionProduccion
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Designación de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Estimación de Demanda Anual", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
             }
 
         }
@@ -1013,26 +1007,5 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             LlenarDetalle();
         }
-
-        
-       
-
-       
-       
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

@@ -177,7 +177,6 @@ namespace GyCAP.UI.EstructuraProducto
                 Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }
-
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)
