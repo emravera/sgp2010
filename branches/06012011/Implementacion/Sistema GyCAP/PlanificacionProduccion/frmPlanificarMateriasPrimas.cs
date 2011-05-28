@@ -11,15 +11,11 @@ namespace GyCAP.UI.PlanificacionProduccion
 {
     public partial class frmPlanificarMateriasPrimas : Form
     {
-        //Reveer todo el formulario con los cambios realizados en la clase de Materia Prima
-
-        
         private static frmPlanificarMateriasPrimas _frmPlanificarMateriasPrimas = null;
         private Data.dsPlanMP dsPlanMP = new GyCAP.Data.dsPlanMP();
         private DataView dvListaPlanMP, dvListaDetalle, dvComboPlanificacion;
         private enum estadoUI { inicio, nuevo, buscar, calcular };
         
-
         public frmPlanificarMateriasPrimas()
         {
             InitializeComponent();
@@ -259,8 +255,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                 int cont=-1;
                 foreach (Entidades.PlanMateriaPrima pm in planesMP)
-                {
-                    
+                {                    
                     cont+=1;
                     decimal cantidadMensual = plan[cont].CantidadMes;
                     
@@ -339,7 +334,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                 if (dsPlanMP.DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Detalles para esa demanda.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Detalle Plan Anual Materia Primas", this.Text);
                 }
                 else
                 {
@@ -350,8 +345,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Plan Anual de Materias Primas - Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                SetInterface(estadoUI.inicio);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);                
             }
         }
 
@@ -377,13 +371,11 @@ namespace GyCAP.UI.PlanificacionProduccion
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Plan de Materias Primas seleccionado y todo su detalle ?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Plan Anual de Materias Primas", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
-                    {
-                        
-                        
+                    {                   
                         foreach (DataRowView dr in dvListaPlanMP)
                         {
 
@@ -401,7 +393,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                             dsPlanMP.DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL.Clear();
 
                             //Avisamos que se elimino 
-                            MessageBox.Show("Se han eliminado los datos correctamente", "Información: Elemento Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Entidades.Mensajes.MensajesABM.MsjConfirmaEliminar(this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
 
                             //Ponemos la ventana en el estado inicial
                             SetInterface(estadoUI.inicio);
@@ -409,13 +401,13 @@ namespace GyCAP.UI.PlanificacionProduccion
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Plan Anual de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Plan Anual de Materias Primas", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
             }
 
         }
@@ -446,24 +438,23 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                     if (dsPlanMP.PLANES_MATERIAS_PRIMAS_ANUALES.Rows.Count == 0)
                     {
-                        MessageBox.Show("No se encontraron Planes anuales con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Plan Anual de Materias Primas", this.Text);
                         SetInterface(estadoUI.inicio);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Es necesario que se ingrese un año para traer el plan anual de materias Primas Correspondiente", "Información: Validación - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);                    
+                    Entidades.Mensajes.MensajesABM.MsjValidacion("Debe ingresar el año del Plan Anual de Materias Primas a buscar", this.Text);
                 }
-                
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Demanda Anual - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }
             catch (Exception)
             {
-                MessageBox.Show("El año no tiene el formato Correcto", "Error: Demanda Anual - Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjValidacion("El año no tiene el formato correcto", this.Text);
             }
         }
 
@@ -491,8 +482,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         private void btnConsultar_Click(object sender, EventArgs e)
         {
             SetInterface(estadoUI.inicio);
-        }
-
+        }       
        
     }
 }
