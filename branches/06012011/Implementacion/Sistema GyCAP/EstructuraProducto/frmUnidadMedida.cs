@@ -58,24 +58,10 @@ namespace GyCAP.UI.EstructuraProducto
             //CARGA DE COMBOS
             //Creamos el Dataview y se lo asignamos al combo
             dvComboUnidad = new DataView(dsUnidadMedida.TIPOS_UNIDADES_MEDIDA);
-            dvComboUnidad.Sort = "TUMED_NOMBRE ASC";
-            cbTipo.DataSource = dvComboUnidad;
-            cbTipo.DisplayMember = "TUMED_NOMBRE";
-            cbTipo.ValueMember = "TUMED_CODIGO";
-            //Para que el combo no quede selecionado cuando arranca y que sea una lista
-            cbTipo.SelectedIndex = -1;
-            cbTipo.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            //Combo de Datos
             dvComboBuscarUnidad = new DataView(dsUnidadMedida.TIPOS_UNIDADES_MEDIDA);
-            dvComboBuscarUnidad.Sort = "TUMED_NOMBRE ASC";
-            cbTipoUnidadDatos.DataSource = dvComboBuscarUnidad;
-            cbTipoUnidadDatos.DisplayMember = "TUMED_NOMBRE";
-            cbTipoUnidadDatos.ValueMember = "TUMED_CODIGO";
-            //Para que el combo no quede selecionado cuando arranca y que sea una lista
-            cbTipoUnidadDatos.SelectedIndex = -1;
-            cbTipoUnidadDatos.DropDownStyle = ComboBoxStyle.DropDownList;
-
+            cbTipo.SetDatos(dvComboBuscarUnidad, "TUMED_CODIGO", "TUMED_NOMBRE", "--TODOS--", true);
+            cbTipoUnidadDatos.SetDatos(dvComboUnidad, "TUMED_CODIGO", "TUMED_NOMBRE", "Seleccione...", false);
+            
             //Se setean las caracteristicas de los textbox
             txtNombre.MaxLength = 80;
             txtAbreviatura.MaxLength = 10;
@@ -127,7 +113,7 @@ namespace GyCAP.UI.EstructuraProducto
                 dsUnidadMedida.UNIDADES_MEDIDA.Clear();
 
                 //Metodo para la busqueda con todos los parámetros
-                BLL.UnidadMedidaBLL.ObtenerTodos(txtNombreBuscar.Text, Convert.ToInt32(cbTipo.SelectedValue) ,dsUnidadMedida);
+                BLL.UnidadMedidaBLL.ObtenerTodos(txtNombreBuscar.Text, cbTipo.GetSelectedValueInt() ,dsUnidadMedida);
                 
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
@@ -228,7 +214,7 @@ namespace GyCAP.UI.EstructuraProducto
             int codigoUnidad = Convert.ToInt32(dvListaUnidad[e.RowIndex]["umed_codigo"]);
             txtNombre.Text = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigoUnidad).UMED_NOMBRE;
             txtAbreviatura.Text = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigoUnidad).UMED_ABREVIATURA;
-            cbTipoUnidadDatos.SelectedValue = dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigoUnidad).TUMED_CODIGO;
+            cbTipoUnidadDatos.SetSelectedValue(Convert.ToInt32(dsUnidadMedida.UNIDADES_MEDIDA.FindByUMED_CODIGO(codigoUnidad).TUMED_CODIGO));
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -246,7 +232,7 @@ namespace GyCAP.UI.EstructuraProducto
                     unidadMedida.Nombre = txtNombre.Text;
                     unidadMedida.Abreviatura = txtAbreviatura.Text;
                     //Creo el objeto tipo unidad de medida y despues lo asigno
-                    tipoUnidad.Codigo = Convert.ToInt32(cbTipoUnidadDatos.SelectedValue);
+                    tipoUnidad.Codigo = cbTipoUnidadDatos.GetSelectedValueInt();
                     tipoUnidad.Nombre = cbTipoUnidadDatos.SelectedText.ToString();
                     unidadMedida.Tipo = tipoUnidad;
                     try
@@ -297,8 +283,7 @@ namespace GyCAP.UI.EstructuraProducto
                     //Segundo obtenemos los nuevos datos que ingresó el usuario
                     unidadMedida.Nombre = txtNombre.Text;
                     unidadMedida.Abreviatura = txtAbreviatura.Text;
-                    tipoUnidad.Codigo = Convert.ToInt32(cbTipoUnidadDatos.SelectedValue);
-                    tipoUnidad.Nombre = cbTipoUnidadDatos.SelectedText.ToString();
+                    tipoUnidad.Codigo = cbTipoUnidadDatos.GetSelectedValueInt();                    
                     unidadMedida.Tipo = tipoUnidad;
 
                     try
@@ -368,7 +353,7 @@ namespace GyCAP.UI.EstructuraProducto
                     txtAbreviatura.Text = String.Empty;
                     txtAbreviatura.ReadOnly = false;
                     cbTipoUnidadDatos.Enabled = true;
-                    cbTipoUnidadDatos.SelectedIndex = -1;
+                    cbTipoUnidadDatos.SetTexto("Seleccione...");
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -385,7 +370,7 @@ namespace GyCAP.UI.EstructuraProducto
                     txtAbreviatura.Text = String.Empty;
                     txtAbreviatura.ReadOnly = false;
                     cbTipoUnidadDatos.Enabled = true;
-                    cbTipoUnidadDatos.SelectedIndex = -1;
+                    cbTipoUnidadDatos.SetTexto("Seleccione...");
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
                     btnNuevo.Enabled = false;

@@ -22,11 +22,13 @@ namespace GyCAP.BLL
         //METODO INSERCION
         public static void InsertarOperacion(Entidades.OperacionFabricacion operacion)
         {
+            if (DAL.OperacionDAL.EsOperacion(operacion.Codigo, operacion.Codificacion)) { throw new Entidades.Excepciones.ElementoExistenteException(); }
             DAL.OperacionDAL.Insertar(operacion);
         }
         //METODO MODIFICACIÓN
         public static void ModificarOperacion(Entidades.OperacionFabricacion operacion)
         {
+            if (DAL.OperacionDAL.EsOperacion(operacion.Codigo, operacion.Codificacion)) { throw new Entidades.Excepciones.ElementoExistenteException(); }
             DAL.OperacionDAL.ModificarOperacion(operacion);
         }
         //METODO ELIMINACIÓN

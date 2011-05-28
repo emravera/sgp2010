@@ -36,7 +36,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbTipo = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
@@ -50,7 +49,6 @@
             this.gbDatos = new System.Windows.Forms.GroupBox();
             this.txtAbreviatura = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.cbTipoUnidadDatos = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
@@ -59,6 +57,8 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.cbTipo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbTipoUnidadDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcUnidadMedida.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -179,16 +179,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
-            // cbTipo
-            // 
-            this.cbTipo.CausesValidation = false;
-            this.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTipo.FormattingEnabled = true;
-            this.cbTipo.Location = new System.Drawing.Point(242, 23);
-            this.cbTipo.Name = "cbTipo";
-            this.cbTipo.Size = new System.Drawing.Size(137, 21);
-            this.cbTipo.TabIndex = 4;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -298,9 +288,9 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.cbTipoUnidadDatos);
             this.gbDatos.Controls.Add(this.txtAbreviatura);
             this.gbDatos.Controls.Add(this.label6);
-            this.gbDatos.Controls.Add(this.cbTipoUnidadDatos);
             this.gbDatos.Controls.Add(this.label5);
             this.gbDatos.Controls.Add(this.txtNombre);
             this.gbDatos.Controls.Add(this.label3);
@@ -329,15 +319,6 @@
             this.label6.Size = new System.Drawing.Size(68, 13);
             this.label6.TabIndex = 6;
             this.label6.Text = "Abreviatura:";
-            // 
-            // cbTipoUnidadDatos
-            // 
-            this.cbTipoUnidadDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTipoUnidadDatos.FormattingEnabled = true;
-            this.cbTipoUnidadDatos.Location = new System.Drawing.Point(91, 88);
-            this.cbTipoUnidadDatos.Name = "cbTipoUnidadDatos";
-            this.cbTipoUnidadDatos.Size = new System.Drawing.Size(179, 21);
-            this.cbTipoUnidadDatos.TabIndex = 8;
             // 
             // label5
             // 
@@ -431,6 +412,27 @@
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // cbTipo
+            // 
+            this.cbTipo.CausesValidation = false;
+            this.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTipo.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbTipo.FormattingEnabled = true;
+            this.cbTipo.Location = new System.Drawing.Point(243, 22);
+            this.cbTipo.Name = "cbTipo";
+            this.cbTipo.Size = new System.Drawing.Size(141, 21);
+            this.cbTipo.TabIndex = 6;
+            // 
+            // cbTipoUnidadDatos
+            // 
+            this.cbTipoUnidadDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTipoUnidadDatos.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbTipoUnidadDatos.FormattingEnabled = true;
+            this.cbTipoUnidadDatos.Location = new System.Drawing.Point(92, 88);
+            this.cbTipoUnidadDatos.Name = "cbTipoUnidadDatos";
+            this.cbTipoUnidadDatos.Size = new System.Drawing.Size(178, 21);
+            this.cbTipoUnidadDatos.TabIndex = 10;
+            // 
             // frmUnidadMedida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -490,13 +492,13 @@
         private System.Windows.Forms.ToolStripButton btnEliminar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnSalir;
-        private System.Windows.Forms.ComboBox cbTipo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtAbreviatura;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox cbTipoUnidadDatos;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbTipo;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbTipoUnidadDatos;
     }
 }

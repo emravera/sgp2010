@@ -30,7 +30,6 @@ namespace GyCAP.UI.EstructuraProducto
             //Para que no genere las columnas automáticamente
             dgvLista.AutoGenerateColumns = false;
             //Agregamos las columnas
-            dgvLista.Columns.Add("DESIG_CODIGO", "Código");
             dgvLista.Columns.Add("MCA_CODIGO", "Marca");
             dgvLista.Columns.Add("DESIG_NOMBRE", "Nombre");
             dgvLista.Columns.Add("DESIG_DESCRIPCION", "Descripcion");
@@ -38,17 +37,12 @@ namespace GyCAP.UI.EstructuraProducto
             //Seteamos el modo de tamaño de las columnas
             dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;            
 
-            //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            dgvLista.Columns["DESIG_CODIGO"].DataPropertyName = "DESIG_CODIGO";
+            //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB            
             dgvLista.Columns["MCA_CODIGO"].DataPropertyName = "MCA_CODIGO";
             dgvLista.Columns["DESIG_NOMBRE"].DataPropertyName = "DESIG_NOMBRE";
             dgvLista.Columns["DESIG_DESCRIPCION"].DataPropertyName = "DESIG_DESCRIPCION";
-            
-            //Alineacion de los numeros y las fechas en la grilla
-            dgvLista.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             
             //Llena el Dataset con las marcas
             try
@@ -333,7 +327,7 @@ namespace GyCAP.UI.EstructuraProducto
                         dsDesignacion.DESIGNACIONES.AcceptChanges();
                         btnVolver.PerformClick();
                     }
-                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }

@@ -149,8 +149,8 @@ namespace GyCAP.DAL
 
         public static bool PuedeEliminarse(int codigo)
         {
-            string sql1 = "SELECT count(dhr_codigo) FROM DETALLE_HOJARUTA WHERE opr_codigo = @p0";
-            string sql2 = "SELECT count(ordt_numero) FROM ORDENES_TRABAJO WHERE opr_codigo = @p0";
+            string sql1 = "SELECT count(dhr_codigo) FROM DETALLE_HOJARUTA WHERE opr_numero = @p0";
+            string sql2 = "SELECT count(ordt_numero) FROM ORDENES_TRABAJO WHERE opr_numero = @p0";
 
             object[] valorParametros = { codigo };
             try
@@ -159,6 +159,19 @@ namespace GyCAP.DAL
                 int r2 = Convert.ToInt32(DB.executeScalar(sql2, valorParametros, null));
                 if (r1 + r2 == 0) { return true; }
                 else { return false; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static bool EsOperacion(int numero, string codigo)
+        {
+            string sql = "SELECT count(opr_numero) FROM OPERACIONES WHERE opr_codigo = @p0 AND opr_numero <> @p1";
+            object[] parametros = { codigo, numero };
+
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, parametros, null)) == 0) { return false; }
+                else { return true; }
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }

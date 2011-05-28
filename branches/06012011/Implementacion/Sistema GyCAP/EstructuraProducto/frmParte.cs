@@ -76,12 +76,14 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.consultar);
+            if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.consultar); }
+            else { MensajesABM.MsjSinSeleccion("Parte", MensajesABM.Generos.Femenino, this.Text); }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.modificar);
+            if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.modificar); }
+            else { MensajesABM.MsjSinSeleccion("Parte", MensajesABM.Generos.Femenino, this.Text); }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -151,6 +153,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             dsParte.PARTES.RejectChanges();
             //Seteamos la interfaz
+            if (dgvLista.SelectedRows.Count > 0) { dgvLista.SelectedRows[0].Selected = false; }
             SetInterface(estadoUI.inicio);
         }
 
