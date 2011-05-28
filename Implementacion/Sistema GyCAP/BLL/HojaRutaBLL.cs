@@ -23,9 +23,9 @@ namespace GyCAP.BLL
             DAL.HojaRutaDAL.ObtenerHojasRuta(dtHojasRuta);
         }
 
-        public static void Insertar(Data.dsHojaRuta dsHojaRuta)
+        public static int Insertar(Data.dsHojaRuta dsHojaRuta)
         {
-            DAL.HojaRutaDAL.Insertar(dsHojaRuta);
+            return DAL.HojaRutaDAL.Insertar(dsHojaRuta);
         }
         
         public static void Actualizar(Data.dsHojaRuta dsHojaRuta)
