@@ -165,7 +165,7 @@ namespace GyCAP.UI.EstructuraProducto
                 {
                     try
                     {
-                        
+
                         Data.dsEstructuraProducto.PARTESRow row = dsParte.PARTES.NewPARTESRow();
                         row.BeginEdit();
                         row.PART_NOMBRE = txtNombre.Text;
@@ -202,6 +202,10 @@ namespace GyCAP.UI.EstructuraProducto
                             SetInterface(estadoUI.inicio);
                         }
                     }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
+                    }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
@@ -234,7 +238,11 @@ namespace GyCAP.UI.EstructuraProducto
                         dsParte.PARTES.AcceptChanges();
                         MensajesABM.MsjConfirmaGuardar("Parte", this.Text, MensajesABM.Operaciones.Modificación);
                         SetInterface(estadoUI.inicio);
-                    }                    
+                    }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
+                    }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);

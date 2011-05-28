@@ -22,11 +22,15 @@ namespace GyCAP.BLL
 
         public static void Insertar(Data.dsEstructuraProducto dsParte)
         {
+            Data.dsEstructuraProducto.PARTESRow rowParte = dsParte.PARTES.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructuraProducto.PARTESRow;
+            if (DAL.ParteDAL.EsParte(rowParte.PART_NOMBRE, rowParte.PART_CODIGO, Convert.ToInt32(rowParte.PART_NUMERO))) { throw new Entidades.Excepciones.ElementoExistenteException(); }
             DAL.ParteDAL.Insertar(dsParte);
         }
 
         public static void Actualizar(Data.dsEstructuraProducto dsParte)
         {
+            Data.dsEstructuraProducto.PARTESRow rowParte = dsParte.PARTES.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructuraProducto.PARTESRow;
+            if (DAL.ParteDAL.EsParte(rowParte.PART_NOMBRE, rowParte.PART_CODIGO, Convert.ToInt32(rowParte.PART_NUMERO))) { throw new Entidades.Excepciones.ElementoExistenteException(); }
             DAL.ParteDAL.Actualizar(dsParte);
         }
 

@@ -554,27 +554,32 @@ namespace GyCAP.UI.ProcesoFabricacion
                 BLL.SectorBLL.ObtenerTodos(dsHojaRuta.SECTORES);
                 BLL.OperacionBLL.ObetenerOperaciones(dsHojaRuta.OPERACIONES);
                 BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsHojaRuta.UBICACIONES_STOCK);
+
+                dvCentrosTrabajo = new DataView(dsHojaRuta.CENTROS_TRABAJOS);
+                dvOperaciones = new DataView(dsHojaRuta.OPERACIONES);
+                string[] display = { "OPR_CODIGO", "OPR_NOMBRE" };
+                cbOperacion.SetDatos(dvOperaciones, "OPR_NUMERO", display, " - ", "Seleccione", false);
+                cbCentroTrabajo.SetDatos(dvCentrosTrabajo, "CTO_CODIGO", "CTO_NOMBRE", "Seleccione", false);
+
+                dvStockOrigen = new DataView(dsHojaRuta.UBICACIONES_STOCK);
+                dvStockDestino = new DataView(dsHojaRuta.UBICACIONES_STOCK);
+                dvStockOrigen.RowFilter = "TUS_CODIGO <> " + BLL.TipoUbicacionStockBLL.TipoVista;
+                dvStockDestino.RowFilter = "TUS_CODIGO <> " + BLL.TipoUbicacionStockBLL.TipoVista;
+                cboStockOrigen.SetDatos(dvStockOrigen, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
+                cboStockDestino.SetDatos(dvStockDestino, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
+
+                dvUbicacionStock = new DataView(dsHojaRuta.UBICACIONES_STOCK);
+                cboUbicacionStock.SetDatos(dvUbicacionStock, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
                 MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
             }
-
-            dvCentrosTrabajo = new DataView(dsHojaRuta.CENTROS_TRABAJOS);
-            dvOperaciones = new DataView(dsHojaRuta.OPERACIONES);
-            string[] display = { "OPR_CODIGO", "OPR_NOMBRE" };
-            cbOperacion.SetDatos(dvOperaciones, "OPR_NUMERO", display, " - ", "Seleccione", false);
-            cbCentroTrabajo.SetDatos(dvCentrosTrabajo, "CTO_CODIGO", "CTO_NOMBRE", "Seleccione", false);
-
-            dvStockOrigen = new DataView(dsHojaRuta.UBICACIONES_STOCK);
-            dvStockDestino = new DataView(dsHojaRuta.UBICACIONES_STOCK);
-            dvStockOrigen.RowFilter = "TUS_CODIGO <> " + BLL.TipoUbicacionStockBLL.TipoVista;
-            dvStockDestino.RowFilter = "TUS_CODIGO <> " + BLL.TipoUbicacionStockBLL.TipoVista;
-            cboStockOrigen.SetDatos(dvStockOrigen, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
-            cboStockDestino.SetDatos(dvStockDestino, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
-
-            dvUbicacionStock = new DataView(dsHojaRuta.UBICACIONES_STOCK);
-            cboUbicacionStock.SetDatos(dvUbicacionStock, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
+            catch (Exception ex)
+            {
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
+            }
+            finally { SetInterface(estadoUI.inicio); }
         }        
 
         private void dgvHojasRuta_RowEnter(object sender, DataGridViewCellEventArgs e)
