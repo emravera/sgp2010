@@ -12,19 +12,37 @@ namespace ImageRepositoryService
     {
         #region IImageRepositoryService Members
 
-        public Image GetElementImage(int codigoElemento, ElementType elementType)
+        public Image GetElementImage(int codigoElemento, Library.ImageRepository.ElementType elementType)
         {
-            return Image.FromFile("e:\\Imagenes\\Varios\\calidad.jpg");
+            Image imagen;
+            using (Library.ImageRepository repository = new Library.ImageRepository())
+            {
+                imagen = repository.GetElementImage(codigoElemento, elementType);
+            }
+
+            return imagen;
         }
 
-        public bool SaveElementImage(int codigoElemento, ElementType elementType, Image imagen)
+        public bool SaveElementImage(int codigoElemento, Library.ImageRepository.ElementType elementType, Image imagen)
         {
-            return true;
+            bool result;
+            using (Library.ImageRepository repository = new Library.ImageRepository())
+            {
+                result = repository.SaveElementImage(codigoElemento, elementType, imagen);
+            }           
+            
+            return result;
         }
 
-        public bool DeleteElementImage(int codigoElemento, ElementType elementType)
+        public bool DeleteElementImage(int codigoElemento, Library.ImageRepository.ElementType elementType)
         {
-            return true;
+            bool result;
+            using (Library.ImageRepository repository = new Library.ImageRepository())
+            {
+                result = repository.DeleteElementImage(codigoElemento, elementType);
+            }
+
+            return result;
         }
 
         #endregion
