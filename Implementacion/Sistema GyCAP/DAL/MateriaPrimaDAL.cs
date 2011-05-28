@@ -228,5 +228,33 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        //Metodo para validar que la materia prima no este asignada
+        public static bool ValidarEliminar(int codigo)
+        {
+            //Verificamos que no haya materia primas en la estructura
+            string sql = "SELECT count(*) FROM COMPUESTOS_PARTES WHERE mp_codigo = @p0";
+            
+            object[] valorParametros = { codigo };
+            
+            int mp_estructura = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+
+            //Validamos que o haya materias primas en el plan de materias primas
+            sql = "SELECT count(*) FROM DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL WHERE mp_codigo = @p0";
+
+             int mp_plan = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+  
+            try
+            {
+                if ( mp_estructura == 0 && mp_plan == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
     }
 }

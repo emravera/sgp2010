@@ -71,6 +71,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.estadO_PEDIDOSTableAdapter1 = new GyCAP.Data.dsEntregaProductoTableAdapters.ESTADO_PEDIDOSTableAdapter();
             this.tpBuscar.SuspendLayout();
             this.gbListadoBusqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
@@ -405,7 +406,7 @@
             // txtDescripcion
             // 
             this.txtDescripcion.Location = new System.Drawing.Point(153, 58);
-            this.txtDescripcion.MaxLength = 80;
+            this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(398, 51);
@@ -614,6 +615,10 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(634, 418);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
+            // estadO_PEDIDOSTableAdapter1
+            // 
+            this.estadO_PEDIDOSTableAdapter1.ClearBeforeFill = true;
+            // 
             // frmMateriaPrimaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -693,6 +698,7 @@
         private System.Windows.Forms.RadioButton rbNOPcipalDatos;
         private System.Windows.Forms.RadioButton rbPcipalDatos;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbUnidadMedida;
+        private GyCAP.Data.dsEntregaProductoTableAdapters.ESTADO_PEDIDOSTableAdapter estadO_PEDIDOSTableAdapter1;
 
     }
 }
