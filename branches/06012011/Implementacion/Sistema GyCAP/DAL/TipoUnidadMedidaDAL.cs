@@ -42,7 +42,7 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static bool EsTipoUnidadMedida(Entidades.TipoUnidadMedida tipoUnidadMedida)
+        public static bool EsTipoUnidadMedidaNuevo(Entidades.TipoUnidadMedida tipoUnidadMedida)
         {
             string sql = "SELECT count(tumed_codigo) FROM TIPOS_UNIDADES_MEDIDA WHERE tumed_nombre = @p0";
             object[] valorParametros = { tipoUnidadMedida.Nombre };
@@ -60,6 +60,24 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        public static bool EsTipoUnidadMedidaActualizar(Entidades.TipoUnidadMedida tipoUnidadMedida)
+        {
+            string sql = "SELECT count(*) FROM TIPOS_UNIDADES_MEDIDA WHERE tumed_nombre = @p0 and tumed_codigo = @p1";
+
+            object[] valorParametros = { tipoUnidadMedida.Nombre, tipoUnidadMedida.Codigo };
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
         public static void ObtenerTipoUnidadMedida(Data.dsPlanMP ds)
         {          
             string sql = "SELECT tumed_codigo, tumed_nombre FROM TIPOS_UNIDADES_MEDIDA";

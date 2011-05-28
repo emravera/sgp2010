@@ -10,7 +10,7 @@ namespace GyCAP.BLL
         public static int Insertar(Entidades.TipoUnidadMedida tipoUnidadMedida)
         {
             //Si existe lanzamos la excepción correspondiente
-            if (EsTipoUnidadMedida(tipoUnidadMedida)) throw new Entidades.Excepciones.ElementoExistenteException();
+            if (DAL.TipoUnidadMedidaDAL.EsTipoUnidadMedidaNuevo(tipoUnidadMedida)) throw new Entidades.Excepciones.ElementoExistenteException();
             //Como no existe lo creamos
             return DAL.TipoUnidadMedidaDAL.Insertar(tipoUnidadMedida);
         }
@@ -33,13 +33,8 @@ namespace GyCAP.BLL
 
         public static void Actualizar(Entidades.TipoUnidadMedida tipoUnidadMedida)
         {
-            if (EsTipoUnidadMedida(tipoUnidadMedida)) throw new Entidades.Excepciones.ElementoExistenteException();
+            if (DAL.TipoUnidadMedidaDAL.EsTipoUnidadMedidaActualizar(tipoUnidadMedida)) throw new Entidades.Excepciones.ElementoExistenteException();
             else DAL.TipoUnidadMedidaDAL.Actualizar(tipoUnidadMedida);
-        }
-
-        public static bool EsTipoUnidadMedida(Entidades.TipoUnidadMedida tipoUnidadMedida)
-        {
-            return DAL.TipoUnidadMedidaDAL.EsTipoUnidadMedida(tipoUnidadMedida);
         }
 
         public static void ObtenerTodos(Data.dsPlanMP ds)

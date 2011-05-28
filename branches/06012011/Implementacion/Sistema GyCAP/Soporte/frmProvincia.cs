@@ -96,21 +96,8 @@ namespace GyCAP.UI.Soporte
             {
                 _frmProvincia = value;
             }
-        }
-
-        private void frmProvincia_Activated(object sender, EventArgs e)
-        {
-            if (txtNombre.Enabled == true)
-            {
-                txtNombre.Focus();
-            }
-        }
-
-        private void txtNombre_Enter(object sender, EventArgs e)
-        {
-            txtNombre.SelectAll();
-        }
-
+        }   
+        
         #endregion          
 
         #region Formulario
@@ -184,19 +171,26 @@ namespace GyCAP.UI.Soporte
                     if (estadoInterface != estadoUI.modificar)
                     {
                         //Está cargando uno nuevo
+                        Entidades.Provincia provincia = new GyCAP.Entidades.Provincia();
+                        
+                        //Obtenemos el nuevo nombre que ingresó el usuario
+                        provincia.Nombre = txtNombre.Text;
+                        
                         //Primero lo creamos en la db
-                        int codigo = BLL.ProvinciaBLL.Insertar(txtNombre.Text);
+                        provincia.Codigo = BLL.ProvinciaBLL.Insertar(provincia);
+
                         //Ahora lo agregamos al dataset
                         Data.dsProveedor.PROVINCIASRow row = dsProvincia.PROVINCIAS.NewPROVINCIASRow();
                         //Indicamos que comienza la edición de la fila
                         row.BeginEdit();
-                        row.PCIA_CODIGO = codigo;
+                        row.PCIA_CODIGO = provincia.Codigo;
                         row.PCIA_NOMBRE = txtNombre.Text;
                         //Termina la edición de la fila
                         row.EndEdit();
                         //Agregamos la fila al dataset y aceptamos los cambios
                         dsProvincia.PROVINCIAS.AddPROVINCIASRow(row);
                         dsProvincia.PROVINCIAS.AcceptChanges();
+                        
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
@@ -219,7 +213,7 @@ namespace GyCAP.UI.Soporte
                         dsProvincia.PROVINCIAS.AcceptChanges();
 
                         //Avisamos que estuvo todo ok
-                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Provincia", this.Name, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Provincia", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
 
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
@@ -228,11 +222,11 @@ namespace GyCAP.UI.Soporte
             }
             catch (Entidades.Excepciones.ElementoExistenteException ex)
             {
-                Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Name);
+                Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Name, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
             }
         }
 
