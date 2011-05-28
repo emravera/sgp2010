@@ -9,7 +9,7 @@ namespace GyCAP.DAL
 {
     public class HojaRutaDAL
     {
-        public static void Insertar(Data.dsHojaRuta dsHojaRuta)
+        public static int Insertar(Data.dsHojaRuta dsHojaRuta)
         {
             string sqlHoja = @"INSERT INTO [HOJAS_RUTA] ([hr_nombre], [hr_descripcion], [hr_activo], [hr_fechaAlta], [ustck_numero]) 
                               VALUES (@p0, @p1, @p2, @p3, @p4) SELECT @@Identity";
@@ -17,6 +17,7 @@ namespace GyCAP.DAL
             string sqlDetalle = @"INSERT INTO [DETALLE_HOJARUTA] ([cto_codigo], [hr_codigo], [dhr_secuencia], [opr_numero], [ustck_origen], [ustck_destino]) 
                                   VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
 
+            int codigo = 0;
             object stockHR = DBNull.Value;            
             Data.dsHojaRuta.HOJAS_RUTARow rowhoja = dsHojaRuta.HOJAS_RUTA.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsHojaRuta.HOJAS_RUTARow;
             if (!rowhoja.IsUSTCK_NUMERONull()) { stockHR = rowhoja.USTCK_NUMERO; }
@@ -27,8 +28,9 @@ namespace GyCAP.DAL
             {
                 transaccion = DB.IniciarTransaccion();
                 rowhoja.BeginEdit();
-                rowhoja.HR_CODIGO = Convert.ToInt32(DB.executeScalar(sqlHoja, valorParametros, transaccion));
+                rowhoja.HR_CODIGO = Convert.ToInt32(DB.executeScalar(sqlHoja, valorParametros, transaccion));                
                 rowhoja.EndEdit();
+                codigo = Convert.ToInt32(rowhoja.HR_CODIGO);
 
                 object stockOrigen = DBNull.Value, stockDestino = DBNull.Value;
                 foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow row in (Data.dsHojaRuta.DETALLE_HOJARUTARow[])dsHojaRuta.DETALLE_HOJARUTA.Select(null, null, DataViewRowState.Added))
@@ -44,6 +46,7 @@ namespace GyCAP.DAL
                 }
 
                 transaccion.Commit();
+                return codigo;
             }
             catch (SqlException ex)
             {

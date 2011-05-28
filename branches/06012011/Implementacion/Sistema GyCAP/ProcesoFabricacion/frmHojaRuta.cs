@@ -169,8 +169,11 @@ namespace GyCAP.UI.ProcesoFabricacion
                         dsHojaRuta.HOJAS_RUTA.AddHOJAS_RUTARow(rowHoja);
                         //Todavia no aceptamos los cambios porque necesitamos que queden marcadas como nuevas las filas
                         //para que la entidad BLL y DAL sepan cuales insertar
-                        BLL.HojaRutaBLL.Insertar(dsHojaRuta);
+                        int codigo = BLL.HojaRutaBLL.Insertar(dsHojaRuta);
                         //Ahora si aceptamos los cambios
+                        rowHoja.BeginEdit();
+                        rowHoja.HR_CODIGO = codigo;
+                        rowHoja.EndEdit();
                         dsHojaRuta.HOJAS_RUTA.AcceptChanges();
                         dsHojaRuta.DETALLE_HOJARUTA.AcceptChanges();
                         //Y por último seteamos el estado de la interfaz
@@ -354,8 +357,8 @@ namespace GyCAP.UI.ProcesoFabricacion
                     //todavia no vamos a insertar en la db hasta que no haga Guardar
                     dsHojaRuta.DETALLE_HOJARUTA.AddDETALLE_HOJARUTARow(row);
                 }
-                cbOperacion.SetTexto("Seleccione");
-                cbCentroTrabajo.SetTexto("Seleccione");
+                cbOperacion.SetTexto("Seleccione...");
+                cbCentroTrabajo.SetTexto("Seleccione...");
                 cboStockOrigen.SetSelectedValue(-1);
                 cboStockDestino.SetSelectedValue(-1);
                 nudSecuencia.Value = 0;
@@ -558,8 +561,8 @@ namespace GyCAP.UI.ProcesoFabricacion
                 dvCentrosTrabajo = new DataView(dsHojaRuta.CENTROS_TRABAJOS);
                 dvOperaciones = new DataView(dsHojaRuta.OPERACIONES);
                 string[] display = { "OPR_CODIGO", "OPR_NOMBRE" };
-                cbOperacion.SetDatos(dvOperaciones, "OPR_NUMERO", display, " - ", "Seleccione", false);
-                cbCentroTrabajo.SetDatos(dvCentrosTrabajo, "CTO_CODIGO", "CTO_NOMBRE", "Seleccione", false);
+                cbOperacion.SetDatos(dvOperaciones, "OPR_NUMERO", display, " - ", "Seleccione...", false);
+                cbCentroTrabajo.SetDatos(dvCentrosTrabajo, "CTO_CODIGO", "CTO_NOMBRE", "Seleccione...", false);
 
                 dvStockOrigen = new DataView(dsHojaRuta.UBICACIONES_STOCK);
                 dvStockDestino = new DataView(dsHojaRuta.UBICACIONES_STOCK);
@@ -629,7 +632,7 @@ namespace GyCAP.UI.ProcesoFabricacion
             gbBotonesAgregar.Parent = slideAgregar;
             slideControl.AddSlide(slideAgregar);
             slideControl.AddSlide(slideDatos);
-            slideControl.Selected = slideDatos;
+            //slideControl.Selected = slideDatos;
         }
 
         private void control_Enter(object sender, EventArgs e)
