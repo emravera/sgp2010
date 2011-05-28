@@ -17,8 +17,9 @@ namespace Library
         }
 
         public Image GetElementImage(int codigoElemento, ElementType elementType)
-        {            
-            return Image.FromFile("e:\\Imagenes\\Varios\\calidad.jpg");
+        {
+            string directorio = elementType.ToString() + "\\" + codigoElemento.ToString() + ".jpg" ;
+            return Image.FromFile(directorio);
         }
 
         public bool SaveElementImage(int codigoElemento, ElementType elementType, Image imagen)
