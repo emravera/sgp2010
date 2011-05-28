@@ -58,10 +58,6 @@ namespace GyCAP.UI.ProcesoFabricacion
             txtCodigoOperacion.MaxLength = 80;
             txtNombre.MaxLength = 80;
             txtDescripcion.MaxLength = 300;
-    
-            //Seteamos la configuracion del numeric UP-down
-            numHoras.DecimalPlaces = 2;
-            numHoras.Value = 0;
 
             //Seteamos el estado de la interface
             SetInterface(estadoUI.inicio);
@@ -294,7 +290,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                            SetInterface(estadoUI.inicio);
                        }
                    }
-                   catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+                   catch (Entidades.Excepciones.ElementoExistenteException ex)
                    {
                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                    }
@@ -319,8 +315,9 @@ namespace GyCAP.UI.ProcesoFabricacion
                        dsOperacionesFabricacion.OPERACIONES.AcceptChanges();
 
                        MensajesABM.MsjConfirmaGuardar("Operación de fabricación", this.Text, MensajesABM.Operaciones.Modificación);
+                       SetInterface(estadoUI.inicio);
                    }
-                   catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+                   catch (Entidades.Excepciones.ElementoExistenteException ex)
                    {
                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                    }
@@ -329,8 +326,6 @@ namespace GyCAP.UI.ProcesoFabricacion
                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
                    }
                }
-               //Vuelvo al estado inicial de la interface
-               SetInterface(estadoUI.inicio);
            }
         }        
 

@@ -101,15 +101,12 @@ namespace GyCAP.DAL
 
         public static bool PuedeEliminarse(int numeroParte)
         {
-            string sql1 = "SELECT count(estr_codigo) FROM ESTRUCTURAS WHERE part_numero = @p0";
-            string sql2 = "SELECT count(comp_codigo) FROM COMPUESTOS_PARTES WHERE part_numero_padre = @p0 OR part_numero_hijo = @p0";
+            string sql1 = "SELECT count(comp_codigo) FROM COMPUESTOS_PARTES WHERE part_numero_padre = @p0 OR part_numero_hijo = @p0";
             object[] parametros = { numeroParte };
 
             try
             {
-                int r1 = Convert.ToInt32(DB.executeScalar(sql1, parametros, null));
-                int r2 = Convert.ToInt32(DB.executeScalar(sql2, parametros, null));
-                if (r1 + r2 == 0) { return true; }
+                if (Convert.ToInt32(DB.executeScalar(sql1, parametros, null)) == 0) { return true; }
                 else { return false; }
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }

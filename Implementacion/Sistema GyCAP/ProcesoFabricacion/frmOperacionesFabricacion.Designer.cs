@@ -142,7 +142,7 @@
             this.lblClienteBuscar.Name = "lblClienteBuscar";
             this.lblClienteBuscar.Size = new System.Drawing.Size(44, 13);
             this.lblClienteBuscar.TabIndex = 3;
-            this.lblClienteBuscar.Text = "Codigo:";
+            this.lblClienteBuscar.Text = "Código:";
             // 
             // btnBuscar
             // 
@@ -266,10 +266,10 @@
             65536});
             this.numHoras.Location = new System.Drawing.Point(164, 88);
             this.numHoras.Maximum = new decimal(new int[] {
-            10000,
+            99999,
             0,
             0,
-            0});
+            131072});
             this.numHoras.Name = "numHoras";
             this.numHoras.Size = new System.Drawing.Size(193, 21);
             this.numHoras.TabIndex = 3;
@@ -300,7 +300,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(94, 13);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Codigo operación:";
+            this.label2.Text = "Código operación:";
             // 
             // txtNombre
             // 

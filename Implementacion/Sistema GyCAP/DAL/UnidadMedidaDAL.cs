@@ -19,7 +19,7 @@ namespace GyCAP.DAL
             object[] valoresPram = { null, null };
 
             //Si busca solo por el nombre
-            if (nombre != String.Empty && idTipo == 0)
+            if (nombre != String.Empty && idTipo == -1)
             {
                 //Agrego la busqueda por nombre
                 sql = sql + " WHERE umed_nombre LIKE @p0";
@@ -27,13 +27,13 @@ namespace GyCAP.DAL
                 nombre = "%" + nombre + "%";
                 valorParametros.SetValue(nombre, 0);
             }
-            else if (nombre == string.Empty && idTipo != 0)
+            else if (nombre == string.Empty && idTipo != -1)
             {
                 //Agrego la busqueda por marca
                 sql = sql + " WHERE tumed_codigo=@p0";
                 valorParametros.SetValue(idTipo, 0);
             }
-            else if (nombre != string.Empty && idTipo != 0)
+            else if (nombre != string.Empty && idTipo != -1)
             {
                 //Agrego la busqueda por marca
                 sql = sql + " WHERE tumed_codigo=@p0 and umed_nombre LIKE @p1";
