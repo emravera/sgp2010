@@ -177,11 +177,11 @@ namespace GyCAP.UI.Soporte
 
             try
             {
-                cbClienteDatos.SelectedValue = dsMarca.MARCAS.FindByMCA_CODIGO(codigoMarca).CLI_CODIGO;
+                cbClienteDatos.SetSelectedValue(Convert.ToInt32(dsMarca.MARCAS.FindByMCA_CODIGO(codigoMarca).CLI_CODIGO));
             }
             catch 
             {
-                cbClienteDatos.SelectedIndex = -1;
+                cbClienteDatos.SetSelectedIndex(-1);
             }
             
         }
@@ -240,7 +240,7 @@ namespace GyCAP.UI.Soporte
                     //Está cargando una marca nueva
                     marca.Nombre = txtNombre.Text;
 
-                    if (cbClienteDatos.SelectedIndex != -1)
+                    if (cbClienteDatos.GetSelectedIndex() != -1)
                     {
                         //Es una marca con el cliente asociado
                         //Creo el objeto cliente y despues lo asigno
@@ -314,7 +314,7 @@ namespace GyCAP.UI.Soporte
                     //Segundo obtenemos los nuevos datos que ingresó el usuario
                     marca.Nombre = txtNombre.Text;
 
-                    if (cbClienteDatos.SelectedIndex != -1 && chboxCliente.Checked == true)
+                    if (cbClienteDatos.GetSelectedIndex() != -1 && chboxCliente.Checked == true)
                     {
                         //Creo el objeto cliente
                         int idCliente = Convert.ToInt32(cbClienteDatos.SelectedValue);
@@ -382,7 +382,7 @@ namespace GyCAP.UI.Soporte
               cbClienteDatos.Enabled = false;
               if (estadoInterface != estadoUI.modificar)
               {
-                  cbClienteDatos.SelectedIndex = -1;
+                  cbClienteDatos.SetSelectedIndex(-1);
               }
           }
       }
@@ -424,7 +424,7 @@ namespace GyCAP.UI.Soporte
                     txtNombre.ReadOnly = false;
                     txtNombre.Text = String.Empty;
                     cbClienteDatos.Enabled = false;
-                    cbClienteDatos.SelectedIndex = -1;
+                    cbClienteDatos.SetSelectedIndex(-1);
                     chboxCliente.Visible = true;
                     chboxCliente.Checked = false;
                     btnGuardar.Enabled = true;
@@ -441,7 +441,7 @@ namespace GyCAP.UI.Soporte
                     txtNombre.ReadOnly = false;
                     txtNombre.Text = String.Empty;
                     cbClienteDatos.Enabled = false;
-                    cbClienteDatos.SelectedIndex = -1;
+                    cbClienteDatos.SetSelectedIndex(-1);
                     chboxCliente.Visible = true;
                     chboxCliente.Checked = false;
                     btnGuardar.Enabled = true;
@@ -478,7 +478,7 @@ namespace GyCAP.UI.Soporte
                     estadoInterface = estadoUI.modificar;
                     tcMarca.SelectedTab = tpDatos;
 
-                    if (cbClienteDatos.SelectedIndex != -1)
+                    if (cbClienteDatos.GetSelectedIndex() != -1)
                     {
                         chboxCliente.Checked = true;
                         cbClienteDatos.Enabled = true;

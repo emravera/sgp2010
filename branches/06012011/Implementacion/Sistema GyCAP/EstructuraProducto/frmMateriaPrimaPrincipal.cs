@@ -198,6 +198,7 @@ namespace GyCAP.UI.EstructuraProducto
                 cbUnidadMedida.DataSource = dvCbUnidadMedida;
                 cbUnidadMedida.SetDatos(dvCbUnidadMedida, "umed_codigo", "umed_nombre", "-Seleccionar-", false);
 
+                cbTipoUnMedida.SetSelectedValue(Convert.ToInt32(dsMateriaPrima.UNIDADES_MEDIDA.FindByUMED_CODIGO(Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["umed_codigo"])).TUMED_CODIGO));
                 cbUnidadMedida.SetSelectedValue(Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["umed_codigo"]));
                 cbUbicacionStock.SetSelectedValue(Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["ustck_numero"]));
                 numCosto.Value = Convert.ToDecimal(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["ustck_numero"]);
@@ -239,6 +240,7 @@ namespace GyCAP.UI.EstructuraProducto
                 cbUnidadMedida.DataSource = dvCbUnidadMedida;
                 cbUnidadMedida.SetDatos(dvCbUnidadMedida, "umed_codigo", "umed_nombre", "-Seleccionar-", false);
 
+                cbTipoUnMedida.SetSelectedValue(Convert.ToInt32(dsMateriaPrima.UNIDADES_MEDIDA.FindByUMED_CODIGO(Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["umed_codigo"])).TUMED_CODIGO));
                 cbUnidadMedida.SetSelectedValue(Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["umed_codigo"]));
                 cbUbicacionStock.SetSelectedValue(Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["ustck_numero"]));
                 numCosto.Value = Convert.ToDecimal(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["ustck_numero"]);
@@ -289,7 +291,7 @@ namespace GyCAP.UI.EstructuraProducto
                     else if (rbNOPcipalDatos.Checked == true)
                     {
                         materiaPrima.EsPrincipal = 0;
-                        materiaPrima.Cantidad = 0;
+                        materiaPrima.Cantidad = Convert.ToDecimal(0.00);
                     }
 
                     //Verificamos si esta guardando un registro nuevo
@@ -350,12 +352,9 @@ namespace GyCAP.UI.EstructuraProducto
                         Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Materia Prima", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
 
                         //Ponemos la interfaz en el estado de inicio
-                        SetInterface(estadoUI.inicio);
-                        
+                        SetInterface(estadoUI.inicio);                       
                     }
-
                 }
-
             }
             catch (Entidades.Excepciones.ElementoExistenteException ex)
             {
@@ -425,6 +424,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnNuevo.Enabled = true;
                     btnModificar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
+                    btnConsultar.Enabled = hayDatos;
                     dgvLista.Enabled = true;
                     tcMateriaPrima.SelectedTab = tpBuscar;
 
@@ -448,9 +448,6 @@ namespace GyCAP.UI.EstructuraProducto
                     rbNOPcipalDatos.Enabled = true;
                     rbPcipalDatos.Enabled = true;
 
-                    //Manejo de controles
-                    txtNombre.Text = String.Empty;
-                    txtNombre.Focus();
                     rbTodosBuscar.Checked = true;
                     break;
                 case estadoUI.nuevo:
@@ -470,6 +467,17 @@ namespace GyCAP.UI.EstructuraProducto
 
                     rbNOPcipalDatos.Checked = true;
                     numCantidad.Enabled = false;
+
+                    //Manejo de controles
+                    txtNombre.Text = String.Empty;
+                    txtNombre.Focus();
+                    txtDescripcion.Text = string.Empty;
+                    cbTipoUnMedida.SetSelectedIndex(-1);
+                    cbUbicacionStock.SetSelectedIndex(-1);
+                    cbUnidadMedida.SetSelectedIndex(-1);
+                    numCantidad.Value = 0;
+                    numCosto.Value = 0;
+                    rbNOPcipalDatos.Checked = true;
                     tcMateriaPrima.SelectedTab = tpDatos;
                     estadoInterface = estadoUI.nuevo;
                     break;
@@ -482,7 +490,8 @@ namespace GyCAP.UI.EstructuraProducto
                     numCosto.Enabled = true;
                     rbNOPcipalDatos.Enabled = true;
                     rbPcipalDatos.Enabled = true;
-                                        
+
+                    btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     dgvLista.Enabled = false;
