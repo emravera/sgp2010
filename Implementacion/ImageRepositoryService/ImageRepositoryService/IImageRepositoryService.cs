@@ -8,17 +8,16 @@ using System.Drawing;
 
 namespace ImageRepositoryService
 {
-    public enum ElementType { Cocina, Parte, Empleado, Repuesto };
-
+    
     [ServiceContract]
     public interface IImageRepositoryService
     {
         [OperationContract]
-        Image GetElementImage(int codigoElemento, ElementType elementType);
+        Image GetElementImage(int codigoElemento, Library.ImageRepository.ElementType elementType);
         [OperationContract]
-        bool SaveElementImage(int codigoElemento, ElementType elementType, Image imagen);
+        bool SaveElementImage(int codigoElemento, Library.ImageRepository.ElementType elementType, Image imagen);
         [OperationContract]
-        bool DeleteElementImage(int codigoElemento, ElementType elementType);
+        bool DeleteElementImage(int codigoElemento, Library.ImageRepository.ElementType elementType);
     }
 
     
@@ -28,7 +27,7 @@ namespace ImageRepositoryService
         [DataMember]
         public int codigoElemento { get; set; }
         [DataMember]
-        public ElementType elementType { get; set; }
+        public Library.ImageRepository.ElementType elementType { get; set; }
     }
 
     [DataContract]
@@ -37,7 +36,7 @@ namespace ImageRepositoryService
         [DataMember]
         public int codigoElemento { get; set; }
         [DataMember]
-        public ElementType elementType { get; set; }
+        public Library.ImageRepository.ElementType elementType { get; set; }
         [DataMember]
         public Image imagen { get; set; }
     }
@@ -48,6 +47,6 @@ namespace ImageRepositoryService
         [DataMember]
         public int codigoElemento { get; set; }
         [DataMember]
-        public ElementType elementType { get; set; }
+        public Library.ImageRepository.ElementType elementType { get; set; }
     }
 }
