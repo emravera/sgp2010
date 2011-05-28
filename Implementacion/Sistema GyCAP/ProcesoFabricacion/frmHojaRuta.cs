@@ -29,6 +29,7 @@ namespace GyCAP.UI.ProcesoFabricacion
             InitializeComponent(); 
             InicializarDatos();
             SetSlide();
+            SetInterface(estadoUI.inicio);
         }
 
         public static frmHojaRuta Instancia
@@ -96,12 +97,14 @@ namespace GyCAP.UI.ProcesoFabricacion
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.consultar);
+            if (dgvHojasRuta.SelectedRows.Count > 0) { SetInterface(estadoUI.consultar); }
+            else { MensajesABM.MsjSinSeleccion("Hoja de Ruta", MensajesABM.Generos.Femenino, this.Text); }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.modificar);
+            if (dgvHojasRuta.SelectedRows.Count > 0) { SetInterface(estadoUI.modificar); }
+            else { MensajesABM.MsjSinSeleccion("Hoja de Ruta", MensajesABM.Generos.Femenino, this.Text); }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -382,6 +385,7 @@ namespace GyCAP.UI.ProcesoFabricacion
             //Descartamos los cambios realizamos hasta el momento sin guardar
             dsHojaRuta.HOJAS_RUTA.RejectChanges();
             dsHojaRuta.DETALLE_HOJARUTA.RejectChanges();
+            if (dgvHojasRuta.SelectedRows.Count > 0) { dgvHojasRuta.SelectedRows[0].Selected = false; }
             SetInterface(estadoUI.inicio);
         }
 
@@ -411,7 +415,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                     btnNuevo.Enabled = true;
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.inicio;
-                    tcHojaRuta.SelectedTab = tpBuscar;
+                    tcHojaRuta.SelectedTab = tpBuscar;                    
                     if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
                     txtNombreBuscar.Focus();
                     break;
@@ -582,7 +586,6 @@ namespace GyCAP.UI.ProcesoFabricacion
             {
                 MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
             }
-            finally { SetInterface(estadoUI.inicio); }
         }        
 
         private void dgvHojasRuta_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -626,13 +629,13 @@ namespace GyCAP.UI.ProcesoFabricacion
         }
 
         private void SetSlide()
-        {
-            gbDatos.Parent = slideDatos;
-            gbAgregar.Parent = slideAgregar;
-            gbBotonesAgregar.Parent = slideAgregar;
+        {            
             slideControl.AddSlide(slideAgregar);
             slideControl.AddSlide(slideDatos);
-            //slideControl.Selected = slideDatos;
+            gbDatos.Parent = slideDatos;
+            gbAgregar.Parent = slideAgregar;
+            gbBotonesAgregar.Parent = slideAgregar;                       
+            slideControl.Selected = slideDatos;
         }
 
         private void control_Enter(object sender, EventArgs e)
@@ -688,12 +691,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                         break;
                 }
             }
-        }
-
-        private void frmHojaRuta_Activated(object sender, EventArgs e)
-        {
-            txtNombre.Focus();
-        }
+        }        
 
         #endregion
     }

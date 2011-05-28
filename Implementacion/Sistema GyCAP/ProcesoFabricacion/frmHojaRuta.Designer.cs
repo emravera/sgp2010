@@ -838,7 +838,6 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Hoja de Ruta";
-            this.Activated += new System.EventHandler(this.frmHojaRuta_Activated);
             this.panelAcciones.ResumeLayout(false);
             this.panelAcciones.PerformLayout();
             this.gbDatos.ResumeLayout(false);
