@@ -20,7 +20,7 @@ namespace GyCAP.DAL
         private static string conexionEmanuel = "Data Source=HP-EMA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionMarcelo = "Data Source=HOMERO;Initial Catalog=Proyecto;User ID=sa";
         private static string conexionRaulD = "Data Source=DTR\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
-        private static string conexionRaulN = "Data Source=NBR\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
+        private static string conexionRaulN = "Data Source=NBR;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionRemota = "Data Source=proyecto.dyndns.org,2555\\Proyecto;Initial Catalog=Proyecto;User ID=sa;Password=spg2010";
         private static string conexionInterna = "Data Source=Proyecto,2555;Initial Catalog=Proyecto;User ID=sa;Password=spg2010";
         private static string cadenaConexion;
