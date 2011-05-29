@@ -54,8 +54,8 @@ namespace GyCAP.UI.Sistema.Validaciones
         ///     - Combobox (.NET) con SelectedIndex -1
         ///     - seleccionadorFecha (GyCAP) sin fecha seleccionada
         ///     - DataGridView (.NET) con al menos una fila seleccionada
+        ///     - DataGridView (.NET) con al menos una fila agregada (default)
         ///     - NumericUpDown (.NET) con value > 0
-        ///     - ListView (.NET) con itemcheckbox con al menos uno seleccionado
         /// </summary>
         /// <param name="formulario">El formulario a validar</param>
         /// <returns>true si es válido, false en caso contrario</returns>
@@ -78,6 +78,7 @@ namespace GyCAP.UI.Sistema.Validaciones
                 ValidarControl(ctrl, errProvider);
             }
 
+            if (!(bool)errProvider.Tag) { Entidades.Mensajes.MensajesABM.MsjValidacion("Debe completar todos los datos obligatorios.", formulario.Text); }
             return (bool)errProvider.Tag;
         }
 

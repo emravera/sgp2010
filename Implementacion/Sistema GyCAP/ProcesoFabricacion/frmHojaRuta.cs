@@ -80,7 +80,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                 {
                     MensajesABM.MsjBuscarNoEncontrado("Hojas de Rutas", this.Text);
                 }
-
+                
                 SetInterface(estadoUI.inicio);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -242,7 +242,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
                     }
                 }
-                dgvHojasRuta.Refresh();
+                //dgvHojasRuta.Refresh();
             }
         }
         
@@ -516,18 +516,19 @@ namespace GyCAP.UI.ProcesoFabricacion
             dgvHojasRuta.Columns.Add("HR_NOMBRE", "Nombre");
             dgvHojasRuta.Columns.Add("HR_FECHAALTA", "Fecha Creación");
             dgvHojasRuta.Columns.Add("HR_ACTIVO", "Estado");
-            dgvHojasRuta.Columns.Add("USTCK_NUMERO", "Ubicación Stock");
-            dgvHojasRuta.Columns.Add("HR_DESCRIPCION", "Descripción");
+            dgvHojasRuta.Columns.Add("USTCK_NUMERO", "Ubicación Stock");            
             dgvHojasRuta.Columns["HR_NOMBRE"].DataPropertyName = "HR_NOMBRE";
             dgvHojasRuta.Columns["HR_FECHAALTA"].DataPropertyName = "HR_FECHAALTA";
             dgvHojasRuta.Columns["HR_ACTIVO"].DataPropertyName = "HR_ACTIVO";
-            dgvHojasRuta.Columns["USTCK_NUMERO"].DataPropertyName = "USTCK_NUMERO";
-            dgvHojasRuta.Columns["HR_DESCRIPCION"].DataPropertyName = "HR_DESCRIPCION";
-            dgvHojasRuta.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dgvHojasRuta.Columns["HR_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvHojasRuta.Columns["HR_DESCRIPCION"].Resizable = DataGridViewTriState.True;
-            dgvHojasRuta.Columns["HR_FECHAALTA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvHojasRuta.Columns["HR_FECHAALTA"].Width = 110;
+            dgvHojasRuta.Columns["USTCK_NUMERO"].DataPropertyName = "USTCK_NUMERO";            
+            dgvHojasRuta.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            dgvHojasRuta.Columns["HR_FECHAALTA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvHojasRuta.Columns["HR_ACTIVO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            //dgvHojasRuta.Columns["HR_NOMBRE"].Width = 120;
+            //dgvHojasRuta.Columns["HR_FECHAALTA"].Width = 130;
+            //dgvHojasRuta.Columns["HR_ACTIVO"].Width = 110;
+            //dgvHojasRuta.Columns["USTCK_NUMERO"].Width = 130;
+            dgvHojasRuta.AutoResizeColumns();
 
             dgvDetalleHoja.AutoGenerateColumns = false;
             dgvDetalleHoja.Columns.Add("DHR_SECUENCIA", "Secuencia");
@@ -694,5 +695,16 @@ namespace GyCAP.UI.ProcesoFabricacion
         }        
 
         #endregion
+
+        private void dgvHojasRuta_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize(dgvHojasRuta);
+            dgvHojasRuta.Columns[3].Resizable = DataGridViewTriState.True;
+        }
+
+        private void dgvDetalleHoja_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize(dgvDetalleHoja);
+        }
     }
 }

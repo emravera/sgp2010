@@ -185,6 +185,21 @@ namespace GyCAP.UI.Sistema
             SendMessage(treeview.Handle, TVM_SETITEM, IntPtr.Zero, lparam);
         }
 
+        public static void SetDataGridViewColumnsSize(DataGridView grilla)
+        {
+            if (grilla.RowCount == 0) { grilla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; }
+            else
+            {
+                grilla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                int size = grilla.Width / grilla.ColumnCount;
+                for (int i = 0; i < grilla.ColumnCount; i++)
+                {
+                    grilla.Columns[i].Width = size;
+                }
+
+            }
+        }
+
     }
 
 }
