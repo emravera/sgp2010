@@ -639,13 +639,6 @@ namespace GyCAP.UI.ProcesoFabricacion
             slideControl.Selected = slideDatos;
         }
 
-        private void control_Enter(object sender, EventArgs e)
-        {
-            if (sender.GetType().Equals(txtNombre.GetType())) { (sender as TextBox).SelectAll(); }
-            if (sender.GetType().Equals(txtDescripcion.GetType())) { (sender as RichTextBox).SelectAll(); }
-            if (sender.GetType().Equals(nudSecuencia.GetType())) { (sender as NumericUpDown).Select(0, 20); }
-        }
-
         private void button_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
