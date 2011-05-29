@@ -454,15 +454,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns.Add("TPAR_CODIGO", "Tipo de parte");
             dgvLista.Columns.Add("TE_CODIGO", "Terminación");
             dgvLista.Columns.Add("UMED_CODIGO", "Unidad medida");
-            dgvLista.Columns.Add("HR_CODIGO", "Hoja de ruta");
-            dgvLista.Columns["PART_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["PART_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["PNO_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["PAR_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["TPAR_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["TE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["UMED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["HR_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns.Add("HR_CODIGO", "Hoja de ruta");            
             dgvLista.Columns["PART_NOMBRE"].DataPropertyName = "PART_NOMBRE";
             dgvLista.Columns["PART_CODIGO"].DataPropertyName = "PART_CODIGO";
             dgvLista.Columns["PNO_CODIGO"].DataPropertyName = "PNO_CODIGO";
@@ -632,6 +624,11 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
+
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize(dgvLista);
+        }
 
         
 
