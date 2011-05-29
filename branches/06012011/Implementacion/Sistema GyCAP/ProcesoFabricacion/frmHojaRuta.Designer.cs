@@ -290,7 +290,6 @@
             this.txtDescripcion.Size = new System.Drawing.Size(371, 93);
             this.txtDescripcion.TabIndex = 9;
             this.txtDescripcion.Text = "";
-            this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
             // 
             // txtNombre
             // 
@@ -299,7 +298,6 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(200, 21);
             this.txtNombre.TabIndex = 5;
-            this.txtNombre.Enter += new System.EventHandler(this.control_Enter);
             // 
             // label2
             // 
@@ -458,7 +456,6 @@
             this.nudSecuencia.Size = new System.Drawing.Size(252, 21);
             this.nudSecuencia.TabIndex = 17;
             this.nudSecuencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudSecuencia.Enter += new System.EventHandler(this.control_Enter);
             // 
             // gbAgregar
             // 
@@ -634,7 +631,6 @@
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(167, 21);
             this.txtNombreBuscar.TabIndex = 1;
-            this.txtNombreBuscar.Enter += new System.EventHandler(this.control_Enter);
             // 
             // tcHojaRuta
             // 
