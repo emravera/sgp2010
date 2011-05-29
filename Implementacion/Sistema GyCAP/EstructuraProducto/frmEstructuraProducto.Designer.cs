@@ -564,7 +564,7 @@
             this.btnMPPrincipal.Name = "btnMPPrincipal";
             this.btnMPPrincipal.Size = new System.Drawing.Size(158, 25);
             this.btnMPPrincipal.TabIndex = 24;
-            this.btnMPPrincipal.Text = "Materia Prima Principal";
+            this.btnMPPrincipal.Text = "Materia Prima";
             this.btnMPPrincipal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMPPrincipal.UseVisualStyleBackColor = true;
             this.btnMPPrincipal.Click += new System.EventHandler(this.btn_Click);
