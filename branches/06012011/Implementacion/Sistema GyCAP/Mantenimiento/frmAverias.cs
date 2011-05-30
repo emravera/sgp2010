@@ -37,10 +37,14 @@ namespace GyCAP.UI.Mantenimiento
             dgvLista.Columns.Add("AVE_DESCRIPCION", "Descripción");
 
             //Seteamos el modo de tamaño de las columnas
-            dgvLista.Columns["AVE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["MAQ_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["NCRI_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["AVE_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLista.Columns["AVE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvLista.Columns["MAQ_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvLista.Columns["NCRI_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvLista.Columns["AVE_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvLista.Columns["AVE_CODIGO"].Width = 80;
+            dgvLista.Columns["MAQ_CODIGO"].Width = 180;
+            dgvLista.Columns["NCRI_CODIGO"].Width = 100;
+            dgvLista.Columns["AVE_DESCRIPCION"].Width = 315;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["AVE_CODIGO"].DataPropertyName = "AVE_CODIGO";

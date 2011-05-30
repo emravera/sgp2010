@@ -675,7 +675,6 @@ namespace GyCAP.UI.Mantenimiento
                             rowRegistro.MAN_CODIGO = cboMantenimiento.GetSelectedValueInt();
                         }
                         
-                        rowRegistro.TMAN_CODIGO = cboTipoMantenimiento.GetSelectedValueInt();
                         rowRegistro.RMAN_FECHA_REALIZACION = DateTime.Parse(sfFechaRealizacion.GetFecha().ToString());
                         rowRegistro.RMAN_OBSERVACION = txtObservacion.Text.Trim();
                         rowRegistro.CF_NUMERO = 0; 
@@ -733,7 +732,6 @@ namespace GyCAP.UI.Mantenimiento
                     dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOS.FindByRMAN_CODIGO(codigoRegistro).E_CODIGO = cboEmpleado.GetSelectedValueInt();
                     dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOS.FindByRMAN_CODIGO(codigoRegistro).MAN_CODIGO = cboMantenimiento.GetSelectedValueInt();
                     dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOS.FindByRMAN_CODIGO(codigoRegistro).MAQ_CODIGO = cboMaquina.GetSelectedValueInt();
-                    dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOS.FindByRMAN_CODIGO(codigoRegistro).TMAN_CODIGO = cboTipoMantenimiento.GetSelectedValueInt();
                     dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOS.FindByRMAN_CODIGO(codigoRegistro).RMAN_FECHA_REALIZACION = DateTime.Parse(sfFechaRealizacion.GetFecha().ToString());
                     dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOS.FindByRMAN_CODIGO(codigoRegistro).RMAN_OBSERVACION = txtObservacion.Text.Trim();
                     dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOS.FindByRMAN_CODIGO(codigoRegistro).CF_NUMERO = 0;

@@ -17,6 +17,7 @@ namespace GyCAP.Entidades
         private DateTime fechaRealizacion;
         private CausaFallo causaFallo;
         private string observacion;
+        private Averia averia;
 
         public long Codigo
         {
@@ -78,5 +79,10 @@ namespace GyCAP.Entidades
             set { observacion = value; }
         }
 
+        public Averia Averia
+        {
+            get { return averia; }
+            set { averia = value; }
+        }
     }
 }

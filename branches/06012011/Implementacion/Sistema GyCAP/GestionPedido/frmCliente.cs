@@ -38,11 +38,16 @@ namespace GyCAP.UI.GestionPedido
             dgvLista.Columns.Add("CLI_ESTADO", "Estado");
 
             //Seteamos el modo de tamaño de las columnas
-            dgvLista.Columns["CLI_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["CLI_RAZONSOCIAL"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["CLI_TELEFONO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["CLI_MAIL"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;            
-            dgvLista.Columns["CLI_ESTADO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLista.Columns["CLI_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvLista.Columns["CLI_RAZONSOCIAL"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvLista.Columns["CLI_TELEFONO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvLista.Columns["CLI_MAIL"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvLista.Columns["CLI_ESTADO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvLista.Columns["CLI_CODIGO"].Width = 100;
+            dgvLista.Columns["CLI_RAZONSOCIAL"].Width = 192;
+            dgvLista.Columns["CLI_TELEFONO"].Width = 90;
+            dgvLista.Columns["CLI_MAIL"].Width = 160;
+            dgvLista.Columns["CLI_ESTADO"].Width = 80;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["CLI_CODIGO"].DataPropertyName = "CLI_CODIGO";
