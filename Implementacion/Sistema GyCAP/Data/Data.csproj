@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{B288FFDF-AF2E-41DA-AB2F-C17A4944E272}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -161,6 +161,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsModeloMaquina.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsOrdenMantenimiento.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsOrdenMantenimiento.xsd</DependentUpon>
     </Compile>
     <Compile Include="dsOrdenTrabajo.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -437,6 +442,17 @@
     </None>
     <None Include="dsModeloMaquina.xss">
       <DependentUpon>dsModeloMaquina.xsd</DependentUpon>
+    </None>
+    <None Include="dsOrdenMantenimiento.xsc">
+      <DependentUpon>dsOrdenMantenimiento.xsd</DependentUpon>
+    </None>
+    <None Include="dsOrdenMantenimiento.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsOrdenMantenimiento.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsOrdenMantenimiento.xss">
+      <DependentUpon>dsOrdenMantenimiento.xsd</DependentUpon>
     </None>
     <None Include="dsOrdenTrabajo.xsc">
       <DependentUpon>dsOrdenTrabajo.xsd</DependentUpon>

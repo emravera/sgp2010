@@ -43,10 +43,14 @@ namespace GyCAP.UI.Mantenimiento
             dgvLista.Columns.Add("CF_DESCRPCION", "Descripción");
 
             //Seteamos el modo de tamaño de las columnas
-            dgvLista.Columns["CF_NUMERO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["CF_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["CF_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["CF_DESCRPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLista.Columns["CF_NUMERO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvLista.Columns["CF_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvLista.Columns["CF_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvLista.Columns["CF_DESCRPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvLista.Columns["CF_NUMERO"].Width = 80;
+            dgvLista.Columns["CF_CODIGO"].Width = 80;
+            dgvLista.Columns["CF_NOMBRE"].Width = 220;
+            dgvLista.Columns["CF_DESCRPCION"].Width = 242;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["CF_NUMERO"].DataPropertyName = "REP_CODIGO";
@@ -68,7 +72,7 @@ namespace GyCAP.UI.Mantenimiento
             txtNombreBuscar.MaxLength = 80;
             txtCodigo.MaxLength = 80;
             txtCodigoBuscar.MaxLength = 80;
-            txtDescripcion.MaxLength = 200;
+            txtDescripcion.MaxLength = 199;
             
         }
         #endregion
@@ -368,6 +372,7 @@ namespace GyCAP.UI.Mantenimiento
                 dvCausaFallo.Table = dsMantenimiento.CAUSAS_FALLO;
             }            
         }
+
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             try

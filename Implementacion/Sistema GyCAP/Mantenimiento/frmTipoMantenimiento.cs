@@ -18,6 +18,7 @@ namespace GyCAP.UI.Mantenimiento
         private estadoUI estadoInterface;
 
         #region Inicio
+
         public frmTipoMantenimiento()
         {
             InitializeComponent();
@@ -28,9 +29,11 @@ namespace GyCAP.UI.Mantenimiento
             //Agregamos las columnas
             dgvLista.Columns.Add("TMAN_NOMBRE", "Nombre");
             dgvLista.Columns.Add("TMAN_DESCRIPCION", "Descripción");
-            dgvLista.Columns["TMAN_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["TMAN_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            
+            dgvLista.Columns["TMAN_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvLista.Columns["TMAN_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvLista.Columns["TMAN_NOMBRE"].Width = 200;
+            dgvLista.Columns["TMAN_DESCRIPCION"].Width= 245;
+
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["TMAN_NOMBRE"].DataPropertyName = "TMAN_NOMBRE";
             dgvLista.Columns["TMAN_DESCRIPCION"].DataPropertyName = "TMAN_DESCRIPCION";
@@ -40,10 +43,14 @@ namespace GyCAP.UI.Mantenimiento
             dvTipoMantenimiento = new DataView(dsMantenimiento.TIPOS_MANTENIMIENTOS);
             dvTipoMantenimiento.Sort = "TMAN_NOMBRE ASC";
             dgvLista.DataSource = dvTipoMantenimiento;
-            
+
             //Seteamos el estado de la interfaz
+
+            btnGuardar.Enabled = false;
+            btnCancelar.Enabled = false;
             SetInterface(estadoUI.inicio);
         }
+
         #endregion
 
         #region Botones
@@ -183,17 +190,32 @@ namespace GyCAP.UI.Mantenimiento
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        dsMantenimiento.TIPOS_MANTENIMIENTOS.RejectChanges();
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
+                    }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                 }
-            }    
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             SetInterface(estadoUI.inicio);
+        }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+            setBotones();
+        }
+
+        private void txtDescripcion_TextChanged(object sender, EventArgs e)
+        {
+            setBotones();
         }
 
         #endregion
@@ -242,14 +264,12 @@ namespace GyCAP.UI.Mantenimiento
                     btnEliminar.Enabled = hayDatos;
                     txtNombre.Text = String.Empty;
                     txtDescripcion.Text = String.Empty;
-                    btnCancelar.Enabled = false;
                     dgvLista.Enabled = true;
                     estadoInterface = estadoUI.inicio;
                     break;
                 case estadoUI.modificar:
                     txtNombre.ReadOnly = false;
                     txtDescripcion.ReadOnly = false;
-                    btnCancelar.Enabled = true;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     dgvLista.Enabled = false;
@@ -260,7 +280,7 @@ namespace GyCAP.UI.Mantenimiento
             }
         }
 
-       private void frmTipoMantenimiento_Activated(object sender, EventArgs e)
+        private void frmTipoMantenimiento_Activated(object sender, EventArgs e)
         {
             if (txtNombre.Enabled == true)
             {
@@ -278,6 +298,19 @@ namespace GyCAP.UI.Mantenimiento
             txtDescripcion.SelectAll();
         }
 
+        private void setBotones() 
+        {
+            btnCancelar.Enabled=false;
+            btnGuardar.Enabled = false;
+
+            if ((txtNombre.Text != string.Empty ) || (txtDescripcion.Text != string.Empty ))
+            {
+                btnCancelar.Enabled=true;
+                btnGuardar.Enabled = true;
+            } 
+        }
+
         #endregion
+
     }
 }

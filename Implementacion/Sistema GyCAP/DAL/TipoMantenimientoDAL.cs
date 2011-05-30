@@ -45,8 +45,11 @@ namespace GyCAP.DAL
 
         public static bool EsTipoMantenimiento(Entidades.TipoMantenimiento tipoMantenimiento)
         {
-            string sql = "SELECT count(TMAN_CODIGO) FROM TIPOS_MANTENIMIENTOS WHERE TMAN_NOMBRE = @p0";
-            object[] valorParametros = { tipoMantenimiento.Nombre };
+            string sql = @"SELECT count(TMAN_CODIGO) 
+                            FROM TIPOS_MANTENIMIENTOS 
+                            WHERE TMAN_NOMBRE = @p0
+                            AND TMAN_CODIGO <> @p1";
+            object[] valorParametros = { tipoMantenimiento.Nombre,tipoMantenimiento.Codigo };
             try
             {
                 if (Convert.ToInt64(DB.executeScalar(sql, valorParametros, null)) == 0)

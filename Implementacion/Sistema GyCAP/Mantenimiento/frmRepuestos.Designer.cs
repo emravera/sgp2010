@@ -34,6 +34,10 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.nudCosto = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.cboTipoRep = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.gbImagenes = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -50,20 +54,17 @@
             this.gpbLista = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cboTipoRepBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.txtDescripcionBuscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tcABM = new System.Windows.Forms.TabControl();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.txtCosto = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cboTipoRepBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cboTipoRep = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.tpDatos.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.gbDatos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCosto)).BeginInit();
             this.gbImagenes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tpBuscar.SuspendLayout();
@@ -135,7 +136,7 @@
             // 
             // gbDatos
             // 
-            this.gbDatos.Controls.Add(this.txtCosto);
+            this.gbDatos.Controls.Add(this.nudCosto);
             this.gbDatos.Controls.Add(this.label6);
             this.gbDatos.Controls.Add(this.txtNombre);
             this.gbDatos.Controls.Add(this.cboTipoRep);
@@ -153,6 +154,52 @@
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del Repuesto";
+            // 
+            // nudCosto
+            // 
+            this.nudCosto.DecimalPlaces = 2;
+            this.nudCosto.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudCosto.Location = new System.Drawing.Point(228, 73);
+            this.nudCosto.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.nudCosto.Name = "nudCosto";
+            this.nudCosto.Size = new System.Drawing.Size(105, 21);
+            this.nudCosto.TabIndex = 7;
+            this.nudCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(157, 76);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(39, 13);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "Costo:";
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Location = new System.Drawing.Point(228, 46);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(359, 21);
+            this.txtNombre.TabIndex = 6;
+            this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
+            // 
+            // cboTipoRep
+            // 
+            this.cboTipoRep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTipoRep.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboTipoRep.FormattingEnabled = true;
+            this.cboTipoRep.Location = new System.Drawing.Point(228, 19);
+            this.cboTipoRep.Name = "cboTipoRep";
+            this.cboTipoRep.Size = new System.Drawing.Size(240, 21);
+            this.cboTipoRep.TabIndex = 5;
             // 
             // gbImagenes
             // 
@@ -332,6 +379,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
+            // cboTipoRepBuscar
+            // 
+            this.cboTipoRepBuscar.CausesValidation = false;
+            this.cboTipoRepBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTipoRepBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboTipoRepBuscar.FormattingEnabled = true;
+            this.cboTipoRepBuscar.Location = new System.Drawing.Point(76, 18);
+            this.cboTipoRepBuscar.Name = "cboTipoRepBuscar";
+            this.cboTipoRepBuscar.Size = new System.Drawing.Size(236, 21);
+            this.cboTipoRepBuscar.TabIndex = 1;
+            // 
             // txtDescripcionBuscar
             // 
             this.txtDescripcionBuscar.CausesValidation = false;
@@ -419,52 +477,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(634, 452);
             this.tableLayoutPanel1.TabIndex = 15;
             // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(228, 46);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(359, 21);
-            this.txtNombre.TabIndex = 6;
-            this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
-            // 
-            // txtCosto
-            // 
-            this.txtCosto.Location = new System.Drawing.Point(228, 73);
-            this.txtCosto.Name = "txtCosto";
-            this.txtCosto.Size = new System.Drawing.Size(98, 21);
-            this.txtCosto.TabIndex = 7;
-            this.txtCosto.Enter += new System.EventHandler(this.txtCosto_Enter);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(157, 76);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(39, 13);
-            this.label6.TabIndex = 26;
-            this.label6.Text = "Costo:";
-            // 
-            // cboTipoRepBuscar
-            // 
-            this.cboTipoRepBuscar.CausesValidation = false;
-            this.cboTipoRepBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboTipoRepBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboTipoRepBuscar.FormattingEnabled = true;
-            this.cboTipoRepBuscar.Location = new System.Drawing.Point(76, 18);
-            this.cboTipoRepBuscar.Name = "cboTipoRepBuscar";
-            this.cboTipoRepBuscar.Size = new System.Drawing.Size(236, 21);
-            this.cboTipoRepBuscar.TabIndex = 1;
-            // 
-            // cboTipoRep
-            // 
-            this.cboTipoRep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboTipoRep.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboTipoRep.FormattingEnabled = true;
-            this.cboTipoRep.Location = new System.Drawing.Point(228, 19);
-            this.cboTipoRep.Name = "cboTipoRep";
-            this.cboTipoRep.Size = new System.Drawing.Size(240, 21);
-            this.cboTipoRep.TabIndex = 5;
-            // 
             // frmRepuestos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -481,6 +493,7 @@
             this.gbGuardarCancelar.ResumeLayout(false);
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCosto)).EndInit();
             this.gbImagenes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tpBuscar.ResumeLayout(false);
@@ -529,8 +542,8 @@
         private System.Windows.Forms.TabControl tcABM;
         private System.Windows.Forms.ToolStrip tsMenu;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TextBox txtCosto;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.NumericUpDown nudCosto;
     }
 }

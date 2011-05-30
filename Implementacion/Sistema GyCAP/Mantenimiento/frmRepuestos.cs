@@ -46,6 +46,9 @@ namespace GyCAP.UI.Mantenimiento
             dgvLista.Columns["REP_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["REP_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
+            dgvLista.Columns["REP_CANTIDADSTOCK"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvLista.Columns["REP_COSTO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["REP_CODIGO"].DataPropertyName = "REP_CODIGO";
             dgvLista.Columns["TREP_CODIGO"].DataPropertyName = "TREP_CODIGO";
@@ -88,7 +91,7 @@ namespace GyCAP.UI.Mantenimiento
             txtDescripcion.MaxLength = 200;
             txtDescripcionBuscar.MaxLength = 200;
             txtNombre.MaxLength = 80;
-            txtCosto.MaxLength = 10;
+            //txtCosto.MaxLength = 10;
 
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
@@ -129,7 +132,7 @@ namespace GyCAP.UI.Mantenimiento
                     cboTipoRep.SelectedIndex = -1;
                     txtDescripcion.Text = string.Empty;
                     txtNombre.Text = string.Empty;
-                    txtCosto.Text = string.Empty;
+                    nudCosto.Text = string.Empty;
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -146,7 +149,7 @@ namespace GyCAP.UI.Mantenimiento
                     txtDescripcion.Text = string.Empty;
                     cboTipoRep.SelectedIndex = -1;
                     txtNombre.Text = string.Empty;
-                    txtCosto.Text = string.Empty;
+                    nudCosto.Text = string.Empty;
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
@@ -196,7 +199,7 @@ namespace GyCAP.UI.Mantenimiento
             txtDescripcion.ReadOnly = pValue;
             cboTipoRep.Enabled = !pValue;
             txtNombre.ReadOnly = pValue;
-            txtCosto.ReadOnly = pValue;
+            nudCosto.Enabled = !pValue;
         }
 
         //Método para evitar la creación de más de una pantalla
@@ -310,7 +313,7 @@ namespace GyCAP.UI.Mantenimiento
                     //Está cargando un nuevo Empleado
                     repuesto.Descripcion = txtDescripcion.Text.Trim();
                     repuesto.Nombre = txtNombre.Text.Trim();
-                    repuesto.Costo = Convert.ToDecimal ( txtCosto.Text.Trim());
+                    repuesto.Costo = nudCosto.Value;
                     repuesto.Tipo.Codigo = cboTipoRep.GetSelectedValueInt();
                     
                     try
@@ -368,7 +371,7 @@ namespace GyCAP.UI.Mantenimiento
                     //Segundo obtenemos los nuevos datos que ingresó el usuario
                     repuesto.Descripcion = txtDescripcion.Text.Trim();
                     repuesto.Nombre = txtNombre.Text.Trim();
-                    repuesto.Costo = Convert.ToDecimal(txtCosto.Text.Trim());
+                    repuesto.Costo = nudCosto.Value;
                     repuesto.Tipo.Codigo = cboTipoRep.GetSelectedValueInt();
 
                     try
@@ -437,7 +440,7 @@ namespace GyCAP.UI.Mantenimiento
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un repusto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debe seleccionar un repuesto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -462,7 +465,7 @@ namespace GyCAP.UI.Mantenimiento
             long codigo = Convert.ToInt64(dvRepuestos[e.RowIndex]["rep_codigo"]);
             txtNombre.Text = dsMantenimiento.REPUESTOS.FindByREP_CODIGO(codigo).REP_NOMBRE;
             cboTipoRep.SetSelectedValue(Convert.ToInt32(dsMantenimiento.REPUESTOS.FindByREP_CODIGO(codigo).TREP_CODIGO));
-            txtCosto.Text = dsMantenimiento.REPUESTOS.FindByREP_CODIGO(codigo).REP_COSTO.ToString();
+            nudCosto.Text = dsMantenimiento.REPUESTOS.FindByREP_CODIGO(codigo).REP_COSTO.ToString();
             txtDescripcion.Text = dsMantenimiento.REPUESTOS.FindByREP_CODIGO(codigo).REP_DESCRIPCION;
 
         }
@@ -482,12 +485,8 @@ namespace GyCAP.UI.Mantenimiento
             txtNombre.SelectAll();
         }
 
-        private void txtCosto_Enter(object sender, EventArgs e)
-        {
-            txtCosto.SelectAll();
-        }
-
         #endregion
+
 
     }
 }

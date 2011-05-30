@@ -13,36 +13,37 @@ namespace GyCAP.DAL
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
             string sqlInsert = @"INSERT INTO [REGISTROS_MANTENIMIENTOS]
-                               ([TMAN_CODIGO]
-                               ,[MAN_CODIGO]
+                               ([MAN_CODIGO]
                                ,[MAQ_CODIGO]
                                ,[DPMAN_CODIGO]
                                ,[E_CODIGO]
                                ,[RMAN_FECHA_REALIZACION]
                                ,[RMAN_FECHA]
                                ,[RMAN_OBSERVACION]
-                               ,[CF_NUMERO] ) 
-                               VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8) SELECT @@Identity";
+                               ,[CF_NUMERO]
+                               ,[AVE_CODIGO]) 
+                               VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9) SELECT @@Identity";
 
             //Así obtenemos el pedido nuevo del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
             Data.dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOSRow rowRegistroMantenimiento = dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOSRow;
+            Data.dsRegistrarMantenimiento.MANTENIMIENTOSRow rowMantenimiento = dsRegistrarMantenimiento.MANTENIMIENTOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsRegistrarMantenimiento.MANTENIMIENTOSRow;
             object maquina = DBNull.Value, mantenimiento = DBNull.Value, detalleP = DBNull.Value;
-            if (rowRegistroMantenimiento.TMAN_CODIGO == 1) { detalleP = rowRegistroMantenimiento.DPMAN_CODIGO; }
+            if (rowMantenimiento.TMAN_CODIGO == 1) { detalleP = rowRegistroMantenimiento.DPMAN_CODIGO; }
             else
             {
                 maquina = rowRegistroMantenimiento.MAQ_CODIGO;
                 mantenimiento = rowRegistroMantenimiento.MAN_CODIGO;
             }
             
-            object[] valorParametros = { rowRegistroMantenimiento.TMAN_CODIGO, 
-                                         mantenimiento, 
+            object[] valorParametros = { mantenimiento, 
                                          maquina,
                                          detalleP,
                                          rowRegistroMantenimiento.E_CODIGO,
                                          rowRegistroMantenimiento.RMAN_FECHA_REALIZACION,
                                          DB.GetFechaServidor(), 
                                          rowRegistroMantenimiento.RMAN_OBSERVACION, 
-                                         DBNull.Value };
+                                         DBNull.Value,
+                                         rowRegistroMantenimiento.AVE_CODIGO };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
@@ -123,21 +124,19 @@ namespace GyCAP.DAL
             //Primero actualizaremos la pieza y luego la estructura
             //Armemos todas las consultas
             string sqlUpdate = @"UPDATE REGISTROS_MANTENIMIENTOS SET
-                                TMAN_CODIGO = @p0
-                               ,MAN_CODIGO = @p1
-                               ,MAQ_CODIGO = @p2
-                               ,DPMAN_CODIGO = @p3
-                               ,E_CODIGO = @p4
-                               ,RMAN_FECHA_REALIZACION = @p5
-                               ,RMAN_FECHA = @p6
-                               ,RMAN_OBSERVACION = @p7
-                               ,CF_NUMERO = @p8                        
-                                WHERE RMAN_CODIGO = @p9";
+                               ,MAN_CODIGO = @p0
+                               ,MAQ_CODIGO = @p1
+                               ,DPMAN_CODIGO = @p2
+                               ,E_CODIGO = @p3
+                               ,RMAN_FECHA_REALIZACION = @p4
+                               ,RMAN_FECHA = @p5
+                               ,RMAN_OBSERVACION = @p
+                               ,CF_NUMERO = @p7                        
+                                WHERE RMAN_CODIGO = @p8";
 
             //Así obtenemos el pedido del dataset, indicamos la primer fila de las modificadas ya que es una sola y convertimos al tipo correcto
             Data.dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOSRow rowRegistroMantenimiento = dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsRegistrarMantenimiento.REGISTROS_MANTENIMIENTOSRow;
-            object[] valorParametros = { rowRegistroMantenimiento.TMAN_CODIGO, 
-                                         rowRegistroMantenimiento.MAN_CODIGO, 
+            object[] valorParametros = { rowRegistroMantenimiento.MAN_CODIGO, 
                                          rowRegistroMantenimiento.MAQ_CODIGO, 
                                          rowRegistroMantenimiento.DPMAN_CODIGO, 
                                          rowRegistroMantenimiento.E_CODIGO, 
@@ -217,8 +216,8 @@ namespace GyCAP.DAL
         //Determina si existe una pedido dado su nombre y terminación
         public static bool EsRegistroMantenimiento(Entidades.RegistrosMantenimientos registroMantenimiento)
         {
-            string sql = "SELECT count(RMAN_CODIGO) FROM REGISTROS_MANTENIMIENTOS WHERE TMAN_CODIGO = @p0 AND RMAN_OBSERVACION = @p1";
-            object[] valorParametros = { registroMantenimiento.Tipo.Codigo , registroMantenimiento.Observacion };
+            string sql = "SELECT count(RMAN_CODIGO) FROM REGISTROS_MANTENIMIENTOS WHERE RMAN_OBSERVACION = @p1";
+            object[] valorParametros = { registroMantenimiento.Observacion };
             try
             {
                 if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
@@ -275,9 +274,12 @@ namespace GyCAP.DAL
 
         public static void ObtenerRegistroMantenimiento(object fechaDesde, object fechaHasta, int idEmpleado,int idMaquina, int idTipoMantenimeinto, Data.dsRegistrarMantenimiento ds, bool obtenerDetalle)
         {
-            string sql = @"SELECT RMAN_CODIGO, TMAN_CODIGO, MAN_CODIGO, MAQ_CODIGO, DPMAN_CODIGO,E_CODIGO
-                           , RMAN_FECHA_REALIZACION, RMAN_FECHA, RMAN_OBSERVACION,CF_NUMERO
-                           FROM REGISTROS_MANTENIMIENTOS where 1 = 1 ";
+//            string sql = @"SELECT RMAN_CODIGO, MAN_CODIGO, MAQ_CODIGO, DPMAN_CODIGO,E_CODIGO
+//                           , RMAN_FECHA_REALIZACION, RMAN_FECHA, RMAN_OBSERVACION,CF_NUMERO
+//                           FROM REGISTROS_MANTENIMIENTOS where 1 = 1 ";
+            string sql = @"SELECT REGISTROS_MANTENIMIENTOS.*,MANTENIMIENTOS.TMAN_CODIGO
+                           FROM REGISTROS_MANTENIMIENTOS,MANTENIMIENTOS 
+                           where REGISTROS_MANTENIMIENTOS.MAN_CODIGO =  MANTENIMIENTOS.MAN_CODIGO ";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
@@ -295,7 +297,7 @@ namespace GyCAP.DAL
             //MAQUINA - Revisamos si es distinto de 0, o sea "todos"
             if (idMaquina != -1)
             {
-                sql += " AND MAN_CODIGO = @p" + cantidadParametros;
+                sql += " AND REGISTROS_MANTENIMIENTOS.MAN_CODIGO = @p" + cantidadParametros;
                 valoresFiltros[cantidadParametros] = Convert.ToInt32(idMaquina);
                 cantidadParametros++;
             }
@@ -307,8 +309,6 @@ namespace GyCAP.DAL
                 valoresFiltros[cantidadParametros] = Convert.ToInt32(idTipoMantenimeinto);
                 cantidadParametros++;
             }
-
-
 
             if (fechaDesde != null)
             {

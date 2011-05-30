@@ -62,39 +62,39 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cboTipoMantenimientoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboMaquinaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label14 = new System.Windows.Forms.Label();
+            this.sfFechaHasta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.label13 = new System.Windows.Forms.Label();
+            this.sfFechaDesde = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.label5 = new System.Windows.Forms.Label();
+            this.cboEmpleadoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbDatos = new System.Windows.Forms.GroupBox();
             this.groupPreventivo = new System.Windows.Forms.GroupBox();
             this.dgvDetallePlan = new System.Windows.Forms.DataGridView();
+            this.cboPlanes = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label18 = new System.Windows.Forms.Label();
             this.groupCorrectivo = new System.Windows.Forms.GroupBox();
+            this.cboMantenimiento = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label16 = new System.Windows.Forms.Label();
+            this.cboMaquina = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label12 = new System.Windows.Forms.Label();
+            this.sfFechaRealizacion = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.cboTipoMantenimiento = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label15 = new System.Windows.Forms.Label();
             this.txtObservacion = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.cboEmpleado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.slideDatos = new SlickInterface.Slide();
             this.slideControl = new SlickInterface.SlideControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcPlan = new System.Windows.Forms.TabControl();
-            this.cboTipoMantenimientoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cboMaquinaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.sfFechaHasta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.sfFechaDesde = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.cboEmpleadoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cboPlanes = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cboMantenimiento = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cboMaquina = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.sfFechaRealizacion = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.cboTipoMantenimiento = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cboEmpleado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
             this.panelAcciones.SuspendLayout();
@@ -542,6 +542,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
+            // cboTipoMantenimientoBuscar
+            // 
+            this.cboTipoMantenimientoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTipoMantenimientoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboTipoMantenimientoBuscar.FormattingEnabled = true;
+            this.cboTipoMantenimientoBuscar.Location = new System.Drawing.Point(270, 73);
+            this.cboTipoMantenimientoBuscar.Name = "cboTipoMantenimientoBuscar";
+            this.cboTipoMantenimientoBuscar.Size = new System.Drawing.Size(183, 21);
+            this.cboTipoMantenimientoBuscar.TabIndex = 20;
+            // 
+            // cboMaquinaBuscar
+            // 
+            this.cboMaquinaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboMaquinaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboMaquinaBuscar.FormattingEnabled = true;
+            this.cboMaquinaBuscar.Location = new System.Drawing.Point(270, 46);
+            this.cboMaquinaBuscar.Name = "cboMaquinaBuscar";
+            this.cboMaquinaBuscar.Size = new System.Drawing.Size(183, 21);
+            this.cboMaquinaBuscar.TabIndex = 18;
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -550,6 +570,15 @@
             this.label14.Size = new System.Drawing.Size(51, 13);
             this.label14.TabIndex = 19;
             this.label14.Text = "Maquina:";
+            // 
+            // sfFechaHasta
+            // 
+            this.sfFechaHasta.CustomFormat = " ";
+            this.sfFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.sfFechaHasta.Location = new System.Drawing.Point(89, 45);
+            this.sfFechaHasta.Name = "sfFechaHasta";
+            this.sfFechaHasta.Size = new System.Drawing.Size(102, 20);
+            this.sfFechaHasta.TabIndex = 15;
             // 
             // label13
             // 
@@ -560,6 +589,15 @@
             this.label13.TabIndex = 17;
             this.label13.Text = "Fecha Hasta:";
             // 
+            // sfFechaDesde
+            // 
+            this.sfFechaDesde.CustomFormat = " ";
+            this.sfFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.sfFechaDesde.Location = new System.Drawing.Point(89, 19);
+            this.sfFechaDesde.Name = "sfFechaDesde";
+            this.sfFechaDesde.Size = new System.Drawing.Size(102, 20);
+            this.sfFechaDesde.TabIndex = 14;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -568,6 +606,16 @@
             this.label5.Size = new System.Drawing.Size(73, 13);
             this.label5.TabIndex = 16;
             this.label5.Text = "Fecha Desde:";
+            // 
+            // cboEmpleadoBuscar
+            // 
+            this.cboEmpleadoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEmpleadoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboEmpleadoBuscar.FormattingEnabled = true;
+            this.cboEmpleadoBuscar.Location = new System.Drawing.Point(270, 20);
+            this.cboEmpleadoBuscar.Name = "cboEmpleadoBuscar";
+            this.cboEmpleadoBuscar.Size = new System.Drawing.Size(183, 21);
+            this.cboEmpleadoBuscar.TabIndex = 3;
             // 
             // btnBuscar
             // 
@@ -644,6 +692,17 @@
             this.dgvDetallePlan.TabIndex = 28;
             this.dgvDetallePlan.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetallePlan_CellFormatting);
             // 
+            // cboPlanes
+            // 
+            this.cboPlanes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPlanes.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboPlanes.FormattingEnabled = true;
+            this.cboPlanes.Location = new System.Drawing.Point(122, 19);
+            this.cboPlanes.Name = "cboPlanes";
+            this.cboPlanes.Size = new System.Drawing.Size(409, 21);
+            this.cboPlanes.TabIndex = 26;
+            this.cboPlanes.SelectionChangeCommitted += new System.EventHandler(this.cboPlanes_SelectionChangeCommitted);
+            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -666,6 +725,16 @@
             this.groupCorrectivo.TabStop = false;
             this.groupCorrectivo.Text = "Mantenimiento Correctivo";
             // 
+            // cboMantenimiento
+            // 
+            this.cboMantenimiento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboMantenimiento.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboMantenimiento.FormattingEnabled = true;
+            this.cboMantenimiento.Location = new System.Drawing.Point(122, 46);
+            this.cboMantenimiento.Name = "cboMantenimiento";
+            this.cboMantenimiento.Size = new System.Drawing.Size(408, 21);
+            this.cboMantenimiento.TabIndex = 28;
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -675,6 +744,16 @@
             this.label16.TabIndex = 29;
             this.label16.Text = "Mantenimiento:";
             // 
+            // cboMaquina
+            // 
+            this.cboMaquina.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboMaquina.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboMaquina.FormattingEnabled = true;
+            this.cboMaquina.Location = new System.Drawing.Point(122, 19);
+            this.cboMaquina.Name = "cboMaquina";
+            this.cboMaquina.Size = new System.Drawing.Size(284, 21);
+            this.cboMaquina.TabIndex = 26;
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -683,6 +762,26 @@
             this.label12.Size = new System.Drawing.Size(51, 13);
             this.label12.TabIndex = 27;
             this.label12.Text = "Maquina:";
+            // 
+            // sfFechaRealizacion
+            // 
+            this.sfFechaRealizacion.CustomFormat = " ";
+            this.sfFechaRealizacion.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.sfFechaRealizacion.Location = new System.Drawing.Point(135, 162);
+            this.sfFechaRealizacion.Name = "sfFechaRealizacion";
+            this.sfFechaRealizacion.Size = new System.Drawing.Size(102, 20);
+            this.sfFechaRealizacion.TabIndex = 27;
+            // 
+            // cboTipoMantenimiento
+            // 
+            this.cboTipoMantenimiento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTipoMantenimiento.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboTipoMantenimiento.FormattingEnabled = true;
+            this.cboTipoMantenimiento.Location = new System.Drawing.Point(135, 19);
+            this.cboTipoMantenimiento.Name = "cboTipoMantenimiento";
+            this.cboTipoMantenimiento.Size = new System.Drawing.Size(181, 21);
+            this.cboTipoMantenimiento.TabIndex = 22;
+            this.cboTipoMantenimiento.SelectionChangeCommitted += new System.EventHandler(this.cboTipoMantenimiento_SelectionChangeCommitted);
             // 
             // label15
             // 
@@ -728,6 +827,16 @@
             this.label9.Size = new System.Drawing.Size(96, 13);
             this.label9.TabIndex = 20;
             this.label9.Text = "Fecha Realizacion:";
+            // 
+            // cboEmpleado
+            // 
+            this.cboEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEmpleado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboEmpleado.FormattingEnabled = true;
+            this.cboEmpleado.Location = new System.Drawing.Point(135, 189);
+            this.cboEmpleado.Name = "cboEmpleado";
+            this.cboEmpleado.Size = new System.Drawing.Size(284, 21);
+            this.cboEmpleado.TabIndex = 22;
             // 
             // slideDatos
             // 
@@ -790,115 +899,6 @@
             this.tcPlan.Size = new System.Drawing.Size(578, 457);
             this.tcPlan.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcPlan.TabIndex = 8;
-            // 
-            // cboTipoMantenimientoBuscar
-            // 
-            this.cboTipoMantenimientoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboTipoMantenimientoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboTipoMantenimientoBuscar.FormattingEnabled = true;
-            this.cboTipoMantenimientoBuscar.Location = new System.Drawing.Point(270, 73);
-            this.cboTipoMantenimientoBuscar.Name = "cboTipoMantenimientoBuscar";
-            this.cboTipoMantenimientoBuscar.Size = new System.Drawing.Size(148, 21);
-            this.cboTipoMantenimientoBuscar.TabIndex = 20;
-            // 
-            // cboMaquinaBuscar
-            // 
-            this.cboMaquinaBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboMaquinaBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboMaquinaBuscar.FormattingEnabled = true;
-            this.cboMaquinaBuscar.Location = new System.Drawing.Point(270, 46);
-            this.cboMaquinaBuscar.Name = "cboMaquinaBuscar";
-            this.cboMaquinaBuscar.Size = new System.Drawing.Size(148, 21);
-            this.cboMaquinaBuscar.TabIndex = 18;
-            // 
-            // sfFechaHasta
-            // 
-            this.sfFechaHasta.CustomFormat = " ";
-            this.sfFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.sfFechaHasta.Location = new System.Drawing.Point(89, 45);
-            this.sfFechaHasta.Name = "sfFechaHasta";
-            this.sfFechaHasta.Size = new System.Drawing.Size(102, 20);
-            this.sfFechaHasta.TabIndex = 15;
-            // 
-            // sfFechaDesde
-            // 
-            this.sfFechaDesde.CustomFormat = " ";
-            this.sfFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.sfFechaDesde.Location = new System.Drawing.Point(89, 19);
-            this.sfFechaDesde.Name = "sfFechaDesde";
-            this.sfFechaDesde.Size = new System.Drawing.Size(102, 20);
-            this.sfFechaDesde.TabIndex = 14;
-            // 
-            // cboEmpleadoBuscar
-            // 
-            this.cboEmpleadoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEmpleadoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboEmpleadoBuscar.FormattingEnabled = true;
-            this.cboEmpleadoBuscar.Location = new System.Drawing.Point(270, 20);
-            this.cboEmpleadoBuscar.Name = "cboEmpleadoBuscar";
-            this.cboEmpleadoBuscar.Size = new System.Drawing.Size(148, 21);
-            this.cboEmpleadoBuscar.TabIndex = 3;
-            // 
-            // cboPlanes
-            // 
-            this.cboPlanes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboPlanes.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboPlanes.FormattingEnabled = true;
-            this.cboPlanes.Location = new System.Drawing.Point(122, 19);
-            this.cboPlanes.Name = "cboPlanes";
-            this.cboPlanes.Size = new System.Drawing.Size(409, 21);
-            this.cboPlanes.TabIndex = 26;
-            this.cboPlanes.SelectionChangeCommitted += new System.EventHandler(this.cboPlanes_SelectionChangeCommitted);
-            // 
-            // cboMantenimiento
-            // 
-            this.cboMantenimiento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboMantenimiento.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboMantenimiento.FormattingEnabled = true;
-            this.cboMantenimiento.Location = new System.Drawing.Point(122, 46);
-            this.cboMantenimiento.Name = "cboMantenimiento";
-            this.cboMantenimiento.Size = new System.Drawing.Size(408, 21);
-            this.cboMantenimiento.TabIndex = 28;
-            // 
-            // cboMaquina
-            // 
-            this.cboMaquina.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboMaquina.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboMaquina.FormattingEnabled = true;
-            this.cboMaquina.Location = new System.Drawing.Point(122, 19);
-            this.cboMaquina.Name = "cboMaquina";
-            this.cboMaquina.Size = new System.Drawing.Size(284, 21);
-            this.cboMaquina.TabIndex = 26;
-            // 
-            // sfFechaRealizacion
-            // 
-            this.sfFechaRealizacion.CustomFormat = " ";
-            this.sfFechaRealizacion.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.sfFechaRealizacion.Location = new System.Drawing.Point(135, 162);
-            this.sfFechaRealizacion.Name = "sfFechaRealizacion";
-            this.sfFechaRealizacion.Size = new System.Drawing.Size(102, 20);
-            this.sfFechaRealizacion.TabIndex = 27;
-            // 
-            // cboTipoMantenimiento
-            // 
-            this.cboTipoMantenimiento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboTipoMantenimiento.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboTipoMantenimiento.FormattingEnabled = true;
-            this.cboTipoMantenimiento.Location = new System.Drawing.Point(135, 19);
-            this.cboTipoMantenimiento.Name = "cboTipoMantenimiento";
-            this.cboTipoMantenimiento.Size = new System.Drawing.Size(181, 21);
-            this.cboTipoMantenimiento.TabIndex = 22;
-            this.cboTipoMantenimiento.SelectionChangeCommitted += new System.EventHandler(this.cboTipoMantenimiento_SelectionChangeCommitted);
-            // 
-            // cboEmpleado
-            // 
-            this.cboEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEmpleado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboEmpleado.FormattingEnabled = true;
-            this.cboEmpleado.Location = new System.Drawing.Point(135, 189);
-            this.cboEmpleado.Name = "cboEmpleado";
-            this.cboEmpleado.Size = new System.Drawing.Size(284, 21);
-            this.cboEmpleado.TabIndex = 22;
             // 
             // frmRegistrarMantenimiento
             // 

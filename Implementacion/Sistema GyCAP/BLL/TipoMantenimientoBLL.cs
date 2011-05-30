@@ -33,6 +33,8 @@ namespace GyCAP.BLL
 
         public static void Actualizar(Entidades.TipoMantenimiento tipoMantenimiento)
         {
+            //Si existe lanzamos la excepción correspondiente
+            if (EsTipoMantenimiento(tipoMantenimiento)) throw new Entidades.Excepciones.ElementoExistenteException();
             DAL.TipoMantenimientoDAL.Actualizar(tipoMantenimiento);
         }
 
