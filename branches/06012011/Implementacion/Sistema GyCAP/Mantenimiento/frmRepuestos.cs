@@ -396,6 +396,10 @@ namespace GyCAP.UI.Mantenimiento
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);

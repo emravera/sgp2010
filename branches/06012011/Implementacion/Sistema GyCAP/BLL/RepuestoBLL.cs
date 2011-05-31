@@ -33,6 +33,7 @@ namespace GyCAP.BLL
 
         public static void Actualizar(Entidades.Repuesto repuesto)
         {
+            if (EsRepuesto(repuesto)) throw new Entidades.Excepciones.ElementoExistenteException();
             DAL.RepuestoDAL.Actualizar(repuesto);
         }
 
