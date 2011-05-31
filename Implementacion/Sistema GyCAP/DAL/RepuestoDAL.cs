@@ -58,11 +58,16 @@ namespace GyCAP.DAL
 
         public static bool EsRepuesto(Entidades.Repuesto repuesto)
         {
-            string sql = "SELECT count(REP_CODIGO) FROM REPUESTOS WHERE REP_NOMBRE = @p0";
-            object[] valorParametros = { repuesto.Nombre };
+            string sql = @"SELECT count(REP_CODIGO) 
+                            FROM REPUESTOS 
+                            WHERE REP_NOMBRE = @p0
+                            AND TREP_CODIGO = @p2
+                            AND REP_CODIGO <> @p1 ";
+
+            object[] valorParametros = { repuesto.Nombre,repuesto.Codigo,repuesto.Tipo.Codigo };
             try
             {
-                if (Convert.ToInt64(DB.executeScalar(sql, valorParametros, null)) == 0)
+                if (Convert.ToInt64(DB.executeScalar(sql, valorParametros, null)) ==   0)
                 {
                     return false;
                 }
