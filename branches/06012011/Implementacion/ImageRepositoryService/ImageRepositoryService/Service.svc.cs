@@ -16,7 +16,7 @@ namespace ImageRepositoryService
         {
             Image imagen;
             using (Library.ImageRepository repository = new Library.ImageRepository())
-            {
+            {            
                 imagen = repository.GetElementImage(codigoElemento, elementType);
             }
 

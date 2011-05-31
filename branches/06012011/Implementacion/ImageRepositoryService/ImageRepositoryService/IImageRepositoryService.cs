@@ -5,10 +5,10 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using System.Drawing;
+using System.IO;
 
 namespace ImageRepositoryService
 {
-    
     [ServiceContract]
     public interface IImageRepositoryService
     {

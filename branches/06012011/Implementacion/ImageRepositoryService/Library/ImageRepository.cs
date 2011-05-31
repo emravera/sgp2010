@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.IO;
 
 namespace Library
 {
@@ -18,7 +19,10 @@ namespace Library
 
         public Image GetElementImage(int codigoElemento, ElementType elementType)
         {
-            string directorio = elementType.ToString() + "\\" + codigoElemento.ToString() + ".jpg" ;
+            string directorio = "E:\\Repositorio\\Implementacion\\ImageRepositoryService\\Library\\" + elementType.ToString() + "\\coc" + codigoElemento.ToString() + ".jpg" ;
+
+            //if (!File.Exists(directorio)) { throw new  }
+
             return Image.FromFile(directorio);
         }
 
