@@ -17,13 +17,13 @@ namespace Library
             Dispose();
         }
 
-        public Image GetElementImage(int codigoElemento, ElementType elementType)
+        public Stream GetElementImage(int codigoElemento, ElementType elementType)
         {
             string directorio = "E:\\Repositorio\\Implementacion\\ImageRepositoryService\\Library\\" + elementType.ToString() + "\\coc" + codigoElemento.ToString() + ".jpg" ;
 
             //if (!File.Exists(directorio)) { throw new  }
 
-            return Image.FromFile(directorio);
+            return new FileStream(directorio, FileMode.Open, FileAccess.Read);
         }
 
         public bool SaveElementImage(int codigoElemento, ElementType elementType, Image imagen)

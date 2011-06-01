@@ -13,7 +13,7 @@ namespace ImageRepositoryService
     public interface IImageRepositoryService
     {
         [OperationContract]
-        Image GetElementImage(int codigoElemento, Library.ImageRepository.ElementType elementType);
+        Stream GetElementImage(int codigoElemento, Library.ImageRepository.ElementType elementType);
         [OperationContract]
         bool SaveElementImage(int codigoElemento, Library.ImageRepository.ElementType elementType, Image imagen);
         [OperationContract]
