@@ -115,7 +115,7 @@
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(546, 192);
-            this.dgvLista.TabIndex = 0;
+            this.dgvLista.TabIndex = 4;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             // 
             // gbBusqueda
@@ -141,7 +141,7 @@
             this.txtCodigoBuscar.MaxLength = 80;
             this.txtCodigoBuscar.Name = "txtCodigoBuscar";
             this.txtCodigoBuscar.Size = new System.Drawing.Size(122, 21);
-            this.txtCodigoBuscar.TabIndex = 7;
+            this.txtCodigoBuscar.TabIndex = 2;
             this.txtCodigoBuscar.Enter += new System.EventHandler(this.txtCodigoBuscar_Enter);
             // 
             // label4
@@ -162,7 +162,7 @@
             this.btnBuscar.Location = new System.Drawing.Point(464, 19);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscar.TabIndex = 5;
+            this.btnBuscar.TabIndex = 3;
             this.btnBuscar.Text = "&Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -175,7 +175,7 @@
             this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
             this.txtNombreBuscar.Size = new System.Drawing.Size(148, 21);
-            this.txtNombreBuscar.TabIndex = 2;
+            this.txtNombreBuscar.TabIndex = 1;
             this.txtNombreBuscar.Enter += new System.EventHandler(this.txtNombreBuscar_Enter);
             // 
             // label1
@@ -390,7 +390,7 @@
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
             this.tsMenu.Size = new System.Drawing.Size(578, 50);
-            this.tsMenu.TabIndex = 7;
+            this.tsMenu.TabIndex = 0;
             this.tsMenu.Text = "toolStrip1";
             // 
             // btnConsultar

@@ -33,6 +33,8 @@ namespace GyCAP.BLL
 
         public static void Actualizar(Entidades.CausaFallo causaFallo)
         {
+            //Si existe lanzamos la excepción correspondiente
+            if (EsCausaFallo(causaFallo)) throw new Entidades.Excepciones.ElementoExistenteException();
             DAL.CausaFalloDAL.Actualizar(causaFallo);
         }
 
