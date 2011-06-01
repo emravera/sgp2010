@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using System.Drawing;
+using System.IO;
 
 namespace ImageRepositoryService
 {    
@@ -12,9 +13,9 @@ namespace ImageRepositoryService
     {
         #region IImageRepositoryService Members
 
-        public Image GetElementImage(int codigoElemento, Library.ImageRepository.ElementType elementType)
+        public Stream GetElementImage(int codigoElemento, Library.ImageRepository.ElementType elementType)
         {
-            Image imagen;
+            Stream imagen;
             using (Library.ImageRepository repository = new Library.ImageRepository())
             {            
                 imagen = repository.GetElementImage(codigoElemento, elementType);
