@@ -54,8 +54,12 @@ namespace GyCAP.DAL
 
         public static bool EsCausaFallo(Entidades.CausaFallo causaFallo)
         {
-            string sql = "SELECT count(CF_NUMERO) FROM CAUSAS_FALLO WHERE CF_NOMBRE = @p0";
-            object[] valorParametros = { causaFallo.Nombre };
+            string sql = @"SELECT count(CF_NUMERO) 
+                            FROM CAUSAS_FALLO 
+                            WHERE CF_CODIGO = @p0
+                            AND CF_NUMERO <> @p1 ";
+
+            object[] valorParametros = { causaFallo.Codigo, causaFallo.Numero };
             try
             {
                 if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
