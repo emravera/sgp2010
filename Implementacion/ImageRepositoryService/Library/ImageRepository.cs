@@ -10,6 +10,7 @@ namespace Library
     public class ImageRepository : IDisposable
     {
         private bool disposing;
+        private string directorio = string.Empty;
         public enum ElementType { Cocina, Parte, Empleado, Repuesto };
 
         ~ImageRepository()
@@ -19,16 +20,24 @@ namespace Library
 
         public Stream GetElementImage(int codigoElemento, ElementType elementType)
         {
-            string directorio = "E:\\Repositorio\\Implementacion\\ImageRepositoryService\\Library\\" + elementType.ToString() + "\\coc" + codigoElemento.ToString() + ".jpg" ;
+            directorio = "E:\\Repositorio\\Implementacion\\ImageRepositoryService\\Library\\" + elementType.ToString() + "\\coc" + codigoElemento.ToString() + ".jpg" ;
 
             //if (!File.Exists(directorio)) { throw new  }
 
             return new FileStream(directorio, FileMode.Open, FileAccess.Read);
         }
 
-        public bool SaveElementImage(int codigoElemento, ElementType elementType, Image imagen)
+        public void SaveElementImage(int codigoElemento, ElementType elementType, Stream imagen)
         {
-            return true;
+            
+            directorio = "E:\\Repositorio\\Implementacion\\ImageRepositoryService\\Library\\" + elementType.ToString() + "\\coc" + codigoElemento.ToString() + ".jpg";
+
+            if (!Directory.Exists(Path.GetDirectoryName(directorio))) { Directory.CreateDirectory(Path.GetDirectoryName(directorio)); }
+                        
+            using (FileStream outputStream = new FileStream(directorio, FileMode.Create))
+            {
+                imagen.CopyTo(outputStream);
+            }
         }
 
         public bool DeleteElementImage(int codigoElemento, ElementType elementType)

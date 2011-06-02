@@ -24,15 +24,12 @@ namespace ImageRepositoryService
             return imagen;
         }
 
-        public bool SaveElementImage(int codigoElemento, Library.ImageRepository.ElementType elementType, Image imagen)
-        {
-            bool result;
+        public void SaveElementImage(ImageUploadMessage msg)
+        {            
             using (Library.ImageRepository repository = new Library.ImageRepository())
             {
-                result = repository.SaveElementImage(codigoElemento, elementType, imagen);
-            }           
-            
-            return result;
+                repository.SaveElementImage(msg.codigoElemento, msg.ElementType, msg.DataStream);
+            }            
         }
 
         public bool DeleteElementImage(int codigoElemento, Library.ImageRepository.ElementType elementType)
@@ -47,5 +44,6 @@ namespace ImageRepositoryService
         }
 
         #endregion
+        
     }
 }

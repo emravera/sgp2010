@@ -15,7 +15,7 @@ namespace ImageRepositoryService
         [OperationContract]
         Stream GetElementImage(int codigoElemento, Library.ImageRepository.ElementType elementType);
         [OperationContract]
-        bool SaveElementImage(int codigoElemento, Library.ImageRepository.ElementType elementType, Image imagen);
+        void SaveElementImage(ImageUploadMessage msg);
         [OperationContract]
         bool DeleteElementImage(int codigoElemento, Library.ImageRepository.ElementType elementType);
     }
@@ -32,13 +32,9 @@ namespace ImageRepositoryService
 
     [DataContract]
     public class SaveElementImage
-    {
+    {        
         [DataMember]
-        public int codigoElemento { get; set; }
-        [DataMember]
-        public Library.ImageRepository.ElementType elementType { get; set; }
-        [DataMember]
-        public Image imagen { get; set; }
+        public ImageUploadMessage msg { get; set; }
     }
 
     [DataContract]
