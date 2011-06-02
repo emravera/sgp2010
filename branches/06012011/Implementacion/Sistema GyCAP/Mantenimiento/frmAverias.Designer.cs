@@ -137,7 +137,7 @@
             this.gbDatos.Size = new System.Drawing.Size(616, 324);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
-            this.gbDatos.Text = "Datos de la Averia";
+            this.gbDatos.Text = "Datos de la Avería";
             // 
             // cboMaquina
             // 
@@ -457,7 +457,7 @@
             this.Name = "frmAverias";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "Averias";
+            this.Text = "Averías";
             this.Load += new System.EventHandler(this.frmAverias_Load);
             this.tpDatos.ResumeLayout(false);
             this.gbGuardarCancelar.ResumeLayout(false);
