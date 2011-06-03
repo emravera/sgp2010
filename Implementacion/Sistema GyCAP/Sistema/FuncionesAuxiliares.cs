@@ -37,6 +37,30 @@ namespace GyCAP.UI.Sistema
         }
     }
 
+    public class DataGridViewState
+    {
+        public DataGridViewState()
+        {
+            this.wasProcessedForData = false;
+            this.columnsVisibleCount = 0;
+        }
+        
+        private bool wasProcessedForData;
+
+        public bool WasProcessedForData
+        {
+            get { return wasProcessedForData; }
+            set { wasProcessedForData = value; }
+        }
+        private int columnsVisibleCount;
+
+        public int ColumnsVisibleCount
+        {
+            get { return columnsVisibleCount; }
+            set { columnsVisibleCount = value; }
+        }
+    }
+
     public class FuncionesAuxiliares
     {
         #region Propiedades para el método que quita los checkbox de un TreeNode
@@ -188,27 +212,37 @@ namespace GyCAP.UI.Sistema
         public static void SetDataGridViewColumnsSize(DataGridView grilla)
         {
             grilla.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            if (grilla.Tag == null) { grilla.Tag = new DataGridViewState(); }
             if (grilla.RowCount == 0 || grilla.ColumnCount == 0) 
             { 
-                grilla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;                
+                grilla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                (grilla.Tag as DataGridViewState).WasProcessedForData = false;
             }
             else
             {
                 int divisor = 0;
-                grilla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                int visibleColumns = 0;
+                for (int i = 0; i < grilla.ColumnCount; i++) { if (grilla.Columns[i].Visible) { visibleColumns++; } }
 
-                for (int i = 0; i < grilla.ColumnCount; i++)
+                if (!(grilla.Tag as DataGridViewState).WasProcessedForData && (grilla.Tag as DataGridViewState).ColumnsVisibleCount != visibleColumns)
                 {
-                    if (grilla.Columns[i].Visible) { divisor++; }
+                    grilla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+
+                    for (int i = 0; i < grilla.ColumnCount; i++)
+                    {
+                        if (grilla.Columns[i].Visible) { divisor++; }
+                    }
+
+                    int size = (grilla.Width / divisor) + 1;
+
+                    for (int i = 0; i < grilla.ColumnCount; i++)
+                    {
+                        grilla.Columns[i].Width = size;
+                    }
+
+                    (grilla.Tag as DataGridViewState).WasProcessedForData = true;
+                    (grilla.Tag as DataGridViewState).ColumnsVisibleCount = visibleColumns;
                 }
-
-                int size = (grilla.Width / divisor) + 1;
-
-                for (int i = 0; i < grilla.ColumnCount; i++)
-                {
-                    grilla.Columns[i].Width = size;
-                }
-
             }
         }
 

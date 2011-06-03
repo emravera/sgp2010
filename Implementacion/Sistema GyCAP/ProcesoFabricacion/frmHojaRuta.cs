@@ -687,17 +687,11 @@ namespace GyCAP.UI.ProcesoFabricacion
             }
         }        
 
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
         #endregion
-
-        private void dgvHojasRuta_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize(dgvHojasRuta);
-            dgvHojasRuta.Columns[3].Resizable = DataGridViewTriState.True;
-        }
-
-        private void dgvDetalleHoja_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize(dgvDetalleHoja);
-        }
     }
 }
