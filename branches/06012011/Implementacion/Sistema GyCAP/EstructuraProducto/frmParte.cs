@@ -627,10 +627,8 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize(dgvLista);
-        }
-
-        
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }       
 
     }
 }
