@@ -212,6 +212,7 @@ namespace GyCAP.UI.Sistema
         public static void SetDataGridViewColumnsSize(DataGridView grilla)
         {
             grilla.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            grilla.AllowUserToResizeColumns = true;
             if (grilla.Tag == null) { grilla.Tag = new DataGridViewState(); }
             if (grilla.RowCount == 0 || grilla.ColumnCount == 0) 
             { 
