@@ -238,6 +238,7 @@ namespace GyCAP.UI.Sistema
 
                     for (int i = 0; i < grilla.ColumnCount; i++)
                     {
+                        grilla.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
                         grilla.Columns[i].Width = size;
                     }
 
