@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageRepositoryService", "I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "Library\Library.csproj", "{2CBF6288-21B9-49C0-BED5-4FC6E7D30A4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImgRepoWinService", "ImgRepoWinService\ImgRepoWinService.csproj", "{FFBAC513-6796-494D-B233-B3E3EB222FFB}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{F4863C47-70C2-42F9-9501-8D01FAC4BE57}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -23,6 +27,12 @@ Global
 		{2CBF6288-21B9-49C0-BED5-4FC6E7D30A4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CBF6288-21B9-49C0-BED5-4FC6E7D30A4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CBF6288-21B9-49C0-BED5-4FC6E7D30A4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFBAC513-6796-494D-B233-B3E3EB222FFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFBAC513-6796-494D-B233-B3E3EB222FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFBAC513-6796-494D-B233-B3E3EB222FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFBAC513-6796-494D-B233-B3E3EB222FFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4863C47-70C2-42F9-9501-8D01FAC4BE57}.Debug|Any CPU.ActiveCfg = Debug
+		{F4863C47-70C2-42F9-9501-8D01FAC4BE57}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

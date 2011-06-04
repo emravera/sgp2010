@@ -25,7 +25,7 @@ namespace ImageRepositoryService
         }
 
         public void SaveElementImage(ImageUploadMessage msg)
-        {            
+        {
             using (Library.ImageRepository repository = new Library.ImageRepository())
             {
                 repository.SaveElementImage(msg.codigoElemento, msg.ElementType, msg.DataStream);
