@@ -165,8 +165,9 @@ namespace GyCAP.DAL
                            [E_FECHANACIMIENTO],
                            [E_LEGAJO],
                            [E_FECHA_ALTA], 
-                           [E_FECHA_BAJA]) 
-                          VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7) SELECT @@Identity";
+                           [E_FECHA_BAJA],
+                           [E_HAS_IMAGE]) 
+                          VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8) SELECT @@Identity";
 
             Data.dsEmpleado.EMPLEADOSRow row = dsEmpleado.EMPLEADOS.GetChanges(DataRowState.Added).Rows[0] as Data.dsEmpleado.EMPLEADOSRow;
             object fechaNac = DBNull.Value, fechaBaja = DBNull.Value;
@@ -180,7 +181,8 @@ namespace GyCAP.DAL
                                            fechaNac,
                                            row.E_LEGAJO,
                                            row.E_FECHA_ALTA.ToShortDateString(),
-                                           fechaBaja
+                                           fechaBaja,
+                                           0
                                        };
             SqlTransaction transaccion = null;
 
@@ -220,8 +222,9 @@ namespace GyCAP.DAL
                             e_apellido = @p3, 
                             e_nombre = @p4, 
                             e_fechanacimiento = @p5,
-                            e_fecha_baja = @p6 
-                          WHERE e_codigo = @p7";
+                            e_fecha_baja = @p6,
+                            e_has_image = @p7 
+                          WHERE e_codigo = @p8";
 
             //Si existe lanzamos la excepción correspondiente
             Data.dsEmpleado.EMPLEADOSRow row = dsEmpleado.EMPLEADOS.GetChanges(DataRowState.Modified).Rows[0] as Data.dsEmpleado.EMPLEADOSRow;
@@ -236,7 +239,8 @@ namespace GyCAP.DAL
                                          row.E_NOMBRE,
                                          fecha,
                                          fechaBaja,
-                                         row.E_CODIGO
+                                         row.E_CODIGO,
+                                         0
                                        };
             SqlTransaction transaccion = null;
 
