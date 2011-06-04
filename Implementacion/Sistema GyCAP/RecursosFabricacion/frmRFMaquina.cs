@@ -40,17 +40,7 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvLista.Columns.Add("MODM_CODIGO", "Modelo");
             dgvLista.Columns.Add("FAB_CODIGO", "Fabricante");
             dgvLista.Columns.Add("MAQ_ES_CRITICA", "Es Crítica");
-            dgvLista.Columns.Add("EMAQ_CODIGO", "Estado");
-
-            //Seteamos el modo de tamaño de las columnas
-            dgvLista.Columns["MAQ_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["MAQ_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["MAQ_NUMEROSERIE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["MAQ_MARCA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["MODM_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["FAB_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["MAQ_ES_CRITICA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["EMAQ_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLista.Columns.Add("EMAQ_CODIGO", "Estado");            
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["MAQ_CODIGO"].DataPropertyName = "MAQ_CODIGO";
@@ -636,6 +626,11 @@ namespace GyCAP.UI.RecursosFabricacion
         {
             if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
         }
+
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        } 
 
     }
 }
