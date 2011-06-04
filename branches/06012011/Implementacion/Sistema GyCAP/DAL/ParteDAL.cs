@@ -25,8 +25,9 @@ namespace GyCAP.DAL
                         [te_codigo],
                         [hr_codigo],
                         [umed_codigo],
-                        [prove_codigo]) 
-                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10) SELECT @@Identity";
+                        [prove_codigo],
+                        [part_has_image]) 
+                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11) SELECT @@Identity";
 
             object plano = DBNull.Value, terminacion = DBNull.Value, hojaRuta = DBNull.Value, proveedor = DBNull.Value;
             Data.dsEstructuraProducto.PARTESRow rowParte = dsEstructura.PARTES.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructuraProducto.PARTESRow;
@@ -45,7 +46,9 @@ namespace GyCAP.DAL
                                     terminacion,
                                     hojaRuta,
                                     rowParte.UMED_CODIGO,
-                                    proveedor };
+                                    proveedor,
+                                    0
+                                  };
             
             try
             {
@@ -69,8 +72,9 @@ namespace GyCAP.DAL
                             te_codigo = @p7,
                             hr_codigo = @p8,
                             umed_codigo = @p9,
-                            prove_codigo = @p10 
-                            WHERE part_numero = @p11";
+                            prove_codigo = @p10,
+                            part_has_image = @p11 
+                            WHERE part_numero = @p12";
 
             object plano = DBNull.Value, terminacion = DBNull.Value, hojaRuta = DBNull.Value, proveedor = DBNull.Value;
             Data.dsEstructuraProducto.PARTESRow rowParte = dsEstructura.PARTES.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructuraProducto.PARTESRow;
@@ -90,7 +94,9 @@ namespace GyCAP.DAL
                                     hojaRuta,
                                     rowParte.UMED_CODIGO,
                                     proveedor,
-                                    rowParte.PART_NUMERO };
+                                    rowParte.PART_NUMERO,
+                                    0
+                                  };
 
             try
             {

@@ -21,8 +21,9 @@ namespace GyCAP.DAL
                         ,[te_codigo]
                         ,[desig_codigo]
                         ,[coc_codigo_producto]
-                        ,[coc_activo])
-                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6) SELECT @@Identity";
+                        ,[coc_activo]
+                        ,[coc_has_image])
+                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7) SELECT @@Identity";
 
             object[] valorParametros = { cocina.Color.Codigo,
                                          cocina.Modelo.Codigo,
@@ -30,7 +31,9 @@ namespace GyCAP.DAL
                                          cocina.TerminacionHorno.Codigo,
                                          cocina.Designacion.Codigo,
                                          cocina.CodigoProducto,
-                                         cocina.Activo }; //0-Inactivo , 1-Activo
+                                         cocina.Activo,
+                                         0 
+                                       };
 
             try
             {
@@ -49,7 +52,8 @@ namespace GyCAP.DAL
                         ,desig_codigo = @p4
                         ,coc_codigo_producto = @p5
                         ,coc_activo = @p6
-                        WHERE coc_codigo = @p7";
+                        ,coc_has_image = @p7
+                        WHERE coc_codigo = @p8";
 
             object[] valorParametros = { cocina.Color.Codigo,
                                          cocina.Modelo.Codigo,
@@ -57,8 +61,10 @@ namespace GyCAP.DAL
                                          cocina.TerminacionHorno.Codigo,
                                          cocina.Designacion.Codigo,
                                          cocina.CodigoProducto,
-                                         cocina.Activo, //0-Inactivo , 1-Activo
-                                         cocina.CodigoCocina };
+                                         cocina.Activo,
+                                         0,
+                                         cocina.CodigoCocina 
+                                       };
 
             try
             {
