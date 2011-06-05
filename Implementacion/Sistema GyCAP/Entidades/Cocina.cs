@@ -15,26 +15,19 @@ namespace GyCAP.Entidades
         private Marca marca;
         private ModeloCocina modelo;
         private Terminacion terminacionHorno;
-        private int activo;
-        private decimal costo;
-        private int cantidadStock;
+        private int activo;        
+        private int hasImage;
 
         public int Activo
         {
             get { return activo; }
             set { activo = value; }
-        }
+        }       
         
-        public decimal Costo
+        public int HasImage
         {
-            get { return costo; }
-            set { costo = value; }
-        }
-        
-        public int CantidadStock
-        {
-            get { return cantidadStock; }
-            set { cantidadStock = value; }
+            get { return hasImage; }
+            set { hasImage = value; }
         }
 
         public int CodigoCocina

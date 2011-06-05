@@ -31,6 +31,7 @@ namespace GyCAP.BLL
         {
             if(DAL.CocinaDAL.PuedeEliminarse(codigoCocina)) { DAL.CocinaDAL.Eliminar(codigoCocina); }
             else { throw new Entidades.Excepciones.ElementoEnTransaccionException(); }
+            //eliminar la imagen - gonzalo
         }
         
         /// <summary>
@@ -65,9 +66,7 @@ namespace GyCAP.BLL
         /// <param name="imagen">La imagen de la cocina.</param>
         public static void GuardarImagen(int codigoCocina, Image imagen)
         {
-            if (imagen == null) { imagen = BLL.Properties.Resources.sinimagen; }
-            string nombreImagen = "Coc" + codigoCocina + ".jpg";
-            imagen.Save(nombreImagen, System.Drawing.Imaging.ImageFormat.Jpeg);
+            ImageRepository.SaveImage(codigoCocina, ImageRepository.ElementType.Cocina, imagen);
         }
         
         /// <summary>
@@ -84,6 +83,10 @@ namespace GyCAP.BLL
                 return imagen;
             }
             catch (System.IO.FileNotFoundException) { return BLL.Properties.Resources.sinimagen; }
+        }
+
+        public static void EliminarImagen(int codigoCocina)
+        {
         }
 
         public static int ObtenerCodigoEstructuraActiva(int codigoCocina)

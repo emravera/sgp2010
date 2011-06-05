@@ -64,6 +64,7 @@
     <Compile Include="DetalleDemandaAnualBLL.cs" />
     <Compile Include="EntregaProductoBLL.cs" />
     <Compile Include="EstadoMovimientoStockBLL.cs" />
+    <Compile Include="ImageRepository.cs" />
     <Compile Include="MovimientoStockBLL.cs" />
     <Compile Include="NivelCriticidadBLL.cs" />
     <Compile Include="OrdenTrabajoBLL.cs" />

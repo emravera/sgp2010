@@ -183,7 +183,7 @@ namespace GyCAP.UI.EstructuraProducto
             cbColor.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COL_CODIGO));
             cbTerminacion.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).TE_CODIGO));
             cbEstado.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COC_ACTIVO));
-            pbImagen.Image = BLL.CocinaBLL.ObtenerImagen(codigoCocina);
+            //cargar imagen ?? - gonzalo
         }
 
         #endregion
@@ -207,7 +207,8 @@ namespace GyCAP.UI.EstructuraProducto
                 cocina.TerminacionHorno = new GyCAP.Entidades.Terminacion();
                 cocina.TerminacionHorno.Codigo = cbTerminacion.GetSelectedValueInt();
                 cocina.Activo = cbEstado.GetSelectedValueInt();
-
+                cocina.HasImage = (pbImagen.Image.Equals(EstructuraProducto.Properties.Resources.sinimagen)) ? 0 : 1;
+                //gonzalo - determinar si tiene imagen que no sea la sinimagen
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
@@ -226,11 +227,12 @@ namespace GyCAP.UI.EstructuraProducto
                         rowCocina.TE_CODIGO = cocina.TerminacionHorno.Codigo;
                         rowCocina.DESIG_CODIGO = cocina.Designacion.Codigo;
                         rowCocina.COC_ACTIVO = cocina.Activo;
+                        rowCocina.COC_HAS_IMAGE = cocina.HasImage;
                         rowCocina.EndEdit();
                         dsCocina.COCINAS.AddCOCINASRow(rowCocina);
                         dsCocina.COCINAS.AcceptChanges();
                         //Guardamos la imagen
-                        BLL.CocinaBLL.GuardarImagen(cocina.CodigoCocina, pbImagen.Image);
+                        if (cocina.HasImage == 1) { BLL.CocinaBLL.GuardarImagen(cocina.CodigoCocina, pbImagen.Image); }
                         //Y por último seteamos el estado de la interfaz
 
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
@@ -273,6 +275,7 @@ namespace GyCAP.UI.EstructuraProducto
                         rowCocina.TE_CODIGO = cocina.TerminacionHorno.Codigo;
                         rowCocina.DESIG_CODIGO = cocina.Designacion.Codigo;
                         rowCocina.COC_ACTIVO = cocina.Activo;
+                        rowCocina.COC_HAS_IMAGE = cocina.HasImage;
                         rowCocina.EndEdit();
                         dsCocina.COCINAS.AcceptChanges();
                         //Actualizamos la imagen
@@ -466,10 +469,6 @@ namespace GyCAP.UI.EstructuraProducto
             dgvListaCocina.Columns.Add("MOD_CODIGO", "Modelo");
             dgvListaCocina.Columns.Add("MCA_CODIGO", "Marca");
             dgvListaCocina.Columns.Add("COC_ESTADO", "Estado");
-            dgvListaCocina.Columns["COC_CODIGO_PRODUCTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvListaCocina.Columns["MOD_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvListaCocina.Columns["MCA_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvListaCocina.Columns["COC_ESTADO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListaCocina.Columns["COC_CODIGO_PRODUCTO"].DataPropertyName = "COC_CODIGO_PRODUCTO";
             dgvListaCocina.Columns["MOD_CODIGO"].DataPropertyName = "MOD_CODIGO";
             dgvListaCocina.Columns["MCA_CODIGO"].DataPropertyName = "MCA_CODIGO";
@@ -555,6 +554,11 @@ namespace GyCAP.UI.EstructuraProducto
                 Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
                 (sender as Button).Location = punto;
             }
+        }
+
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
         }
 
         #endregion Servicios

@@ -2787,6 +2787,8 @@ namespace GyCAP.Data {
             
             private global::System.Data.DataColumn columnCOC_ACTIVO;
             
+            private global::System.Data.DataColumn columnCOC_HAS_IMAGE;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public COCINASDataTable() {
                 this.TableName = "COCINAS";
@@ -2874,6 +2876,13 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn COC_HAS_IMAGEColumn {
+                get {
+                    return this.columnCOC_HAS_IMAGE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2902,7 +2911,7 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COCINASRow AddCOCINASRow(COLORESRow parentCOLORESRowBycocina_colores_fk, MODELOS_COCINASRow parentMODELOS_COCINASRowBycocina_modeloCocina_fk, MARCASRow parentMARCASRowBycocina_marca_fk, TERMINACIONESRow parentTERMINACIONESRowBycocina_terminaciones_fk, DESIGNACIONESRow parentDESIGNACIONESRowBycocina_designacion_fk, string COC_CODIGO_PRODUCTO, decimal COC_ACTIVO) {
+            public COCINASRow AddCOCINASRow(COLORESRow parentCOLORESRowBycocina_colores_fk, MODELOS_COCINASRow parentMODELOS_COCINASRowBycocina_modeloCocina_fk, MARCASRow parentMARCASRowBycocina_marca_fk, TERMINACIONESRow parentTERMINACIONESRowBycocina_terminaciones_fk, DESIGNACIONESRow parentDESIGNACIONESRowBycocina_designacion_fk, string COC_CODIGO_PRODUCTO, decimal COC_ACTIVO, decimal COC_HAS_IMAGE) {
                 COCINASRow rowCOCINASRow = ((COCINASRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2912,7 +2921,8 @@ namespace GyCAP.Data {
                         null,
                         null,
                         COC_CODIGO_PRODUCTO,
-                        COC_ACTIVO};
+                        COC_ACTIVO,
+                        COC_HAS_IMAGE};
                 if ((parentCOLORESRowBycocina_colores_fk != null)) {
                     columnValuesArray[1] = parentCOLORESRowBycocina_colores_fk[0];
                 }
@@ -2961,6 +2971,7 @@ namespace GyCAP.Data {
                 this.columnDESIG_CODIGO = base.Columns["DESIG_CODIGO"];
                 this.columnCOC_CODIGO_PRODUCTO = base.Columns["COC_CODIGO_PRODUCTO"];
                 this.columnCOC_ACTIVO = base.Columns["COC_ACTIVO"];
+                this.columnCOC_HAS_IMAGE = base.Columns["COC_HAS_IMAGE"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2981,6 +2992,8 @@ namespace GyCAP.Data {
                 base.Columns.Add(this.columnCOC_CODIGO_PRODUCTO);
                 this.columnCOC_ACTIVO = new global::System.Data.DataColumn("COC_ACTIVO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCOC_ACTIVO);
+                this.columnCOC_HAS_IMAGE = new global::System.Data.DataColumn("COC_HAS_IMAGE", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOC_HAS_IMAGE);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnCOC_CODIGO}, true));
                 this.columnCOC_CODIGO.AutoIncrement = true;
@@ -2996,6 +3009,7 @@ namespace GyCAP.Data {
                 this.columnCOC_CODIGO_PRODUCTO.AllowDBNull = false;
                 this.columnCOC_CODIGO_PRODUCTO.MaxLength = 80;
                 this.columnCOC_ACTIVO.AllowDBNull = false;
+                this.columnCOC_HAS_IMAGE.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4019,6 +4033,16 @@ namespace GyCAP.Data {
                 }
                 set {
                     this[this.tableCOCINAS.COC_ACTIVOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal COC_HAS_IMAGE {
+                get {
+                    return ((decimal)(this[this.tableCOCINAS.COC_HAS_IMAGEColumn]));
+                }
+                set {
+                    this[this.tableCOCINAS.COC_HAS_IMAGEColumn] = value;
                 }
             }
             
@@ -7335,10 +7359,11 @@ SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION, TE_ABREVIATURA FROM TERMINACIONES W
             tableMapping.ColumnMappings.Add("DESIG_CODIGO", "DESIG_CODIGO");
             tableMapping.ColumnMappings.Add("COC_CODIGO_PRODUCTO", "COC_CODIGO_PRODUCTO");
             tableMapping.ColumnMappings.Add("COC_ACTIVO", "COC_ACTIVO");
+            tableMapping.ColumnMappings.Add("COC_HAS_IMAGE", "COC_HAS_IMAGE");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[COCINAS] WHERE (([COC_CODIGO] = @Original_COC_CODIGO) AND ([COL_CODIGO] = @Original_COL_CODIGO) AND ([MOD_CODIGO] = @Original_MOD_CODIGO) AND ([MCA_CODIGO] = @Original_MCA_CODIGO) AND ([TE_CODIGO] = @Original_TE_CODIGO) AND ([DESIG_CODIGO] = @Original_DESIG_CODIGO) AND ([COC_CODIGO_PRODUCTO] = @Original_COC_CODIGO_PRODUCTO) AND ([COC_ACTIVO] = @Original_COC_ACTIVO))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[COCINAS] WHERE (([COC_CODIGO] = @Original_COC_CODIGO) AND ([COL_CODIGO] = @Original_COL_CODIGO) AND ([MOD_CODIGO] = @Original_MOD_CODIGO) AND ([MCA_CODIGO] = @Original_MCA_CODIGO) AND ([TE_CODIGO] = @Original_TE_CODIGO) AND ([DESIG_CODIGO] = @Original_DESIG_CODIGO) AND ([COC_CODIGO_PRODUCTO] = @Original_COC_CODIGO_PRODUCTO) AND ([COC_ACTIVO] = @Original_COC_ACTIVO) AND ([COC_HAS_IMAGE] = @Original_COC_HAS_IMAGE))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COL_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "COL_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -7348,10 +7373,11 @@ SELECT TE_CODIGO, TE_NOMBRE, TE_DESCRIPCION, TE_ABREVIATURA FROM TERMINACIONES W
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DESIG_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DESIG_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO_PRODUCTO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CODIGO_PRODUCTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "COC_ACTIVO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_HAS_IMAGE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "COC_HAS_IMAGE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[COCINAS] ([COL_CODIGO], [MOD_CODIGO], [MCA_CODIGO], [TE_CODIGO], [DESIG_CODIGO], [COC_CODIGO_PRODUCTO], [COC_ACTIVO]) VALUES (@COL_CODIGO, @MOD_CODIGO, @MCA_CODIGO, @TE_CODIGO, @DESIG_CODIGO, @COC_CODIGO_PRODUCTO, @COC_ACTIVO);
-SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, COC_CODIGO_PRODUCTO, COC_ACTIVO FROM COCINAS WHERE (COC_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[COCINAS] ([COL_CODIGO], [MOD_CODIGO], [MCA_CODIGO], [TE_CODIGO], [DESIG_CODIGO], [COC_CODIGO_PRODUCTO], [COC_ACTIVO], [COC_HAS_IMAGE]) VALUES (@COL_CODIGO, @MOD_CODIGO, @MCA_CODIGO, @TE_CODIGO, @DESIG_CODIGO, @COC_CODIGO_PRODUCTO, @COC_ACTIVO, @COC_HAS_IMAGE);
+SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, COC_CODIGO_PRODUCTO, COC_ACTIVO, COC_HAS_IMAGE FROM COCINAS WHERE (COC_CODIGO = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COL_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "COL_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MOD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MOD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -7360,10 +7386,11 @@ SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, 
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DESIG_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DESIG_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO_PRODUCTO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CODIGO_PRODUCTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "COC_ACTIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_HAS_IMAGE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "COC_HAS_IMAGE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[COCINAS] SET [COL_CODIGO] = @COL_CODIGO, [MOD_CODIGO] = @MOD_CODIGO, [MCA_CODIGO] = @MCA_CODIGO, [TE_CODIGO] = @TE_CODIGO, [DESIG_CODIGO] = @DESIG_CODIGO, [COC_CODIGO_PRODUCTO] = @COC_CODIGO_PRODUCTO, [COC_ACTIVO] = @COC_ACTIVO WHERE (([COC_CODIGO] = @Original_COC_CODIGO) AND ([COL_CODIGO] = @Original_COL_CODIGO) AND ([MOD_CODIGO] = @Original_MOD_CODIGO) AND ([MCA_CODIGO] = @Original_MCA_CODIGO) AND ([TE_CODIGO] = @Original_TE_CODIGO) AND ([DESIG_CODIGO] = @Original_DESIG_CODIGO) AND ([COC_CODIGO_PRODUCTO] = @Original_COC_CODIGO_PRODUCTO) AND ([COC_ACTIVO] = @Original_COC_ACTIVO));
-SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, COC_CODIGO_PRODUCTO, COC_ACTIVO FROM COCINAS WHERE (COC_CODIGO = @COC_CODIGO)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[COCINAS] SET [COL_CODIGO] = @COL_CODIGO, [MOD_CODIGO] = @MOD_CODIGO, [MCA_CODIGO] = @MCA_CODIGO, [TE_CODIGO] = @TE_CODIGO, [DESIG_CODIGO] = @DESIG_CODIGO, [COC_CODIGO_PRODUCTO] = @COC_CODIGO_PRODUCTO, [COC_ACTIVO] = @COC_ACTIVO, [COC_HAS_IMAGE] = @COC_HAS_IMAGE WHERE (([COC_CODIGO] = @Original_COC_CODIGO) AND ([COL_CODIGO] = @Original_COL_CODIGO) AND ([MOD_CODIGO] = @Original_MOD_CODIGO) AND ([MCA_CODIGO] = @Original_MCA_CODIGO) AND ([TE_CODIGO] = @Original_TE_CODIGO) AND ([DESIG_CODIGO] = @Original_DESIG_CODIGO) AND ([COC_CODIGO_PRODUCTO] = @Original_COC_CODIGO_PRODUCTO) AND ([COC_ACTIVO] = @Original_COC_ACTIVO) AND ([COC_HAS_IMAGE] = @Original_COC_HAS_IMAGE));
+SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, COC_CODIGO_PRODUCTO, COC_ACTIVO, COC_HAS_IMAGE FROM COCINAS WHERE (COC_CODIGO = @COC_CODIGO)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COL_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "COL_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MOD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MOD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -7372,6 +7399,7 @@ SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, 
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DESIG_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DESIG_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO_PRODUCTO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CODIGO_PRODUCTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "COC_ACTIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_HAS_IMAGE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "COC_HAS_IMAGE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COL_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "COL_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MOD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MOD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -7380,6 +7408,7 @@ SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, 
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DESIG_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "DESIG_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_CODIGO_PRODUCTO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COC_CODIGO_PRODUCTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "COC_ACTIVO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COC_HAS_IMAGE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "COC_HAS_IMAGE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COC_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "COC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -7395,7 +7424,7 @@ SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, 
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, C" +
-                "OC_CODIGO_PRODUCTO, COC_ACTIVO FROM dbo.COCINAS";
+                "OC_CODIGO_PRODUCTO, COC_ACTIVO, COC_HAS_IMAGE FROM dbo.COCINAS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -7449,7 +7478,7 @@ SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_COC_CODIGO, decimal Original_COL_CODIGO, decimal Original_MOD_CODIGO, decimal Original_MCA_CODIGO, decimal Original_TE_CODIGO, decimal Original_DESIG_CODIGO, string Original_COC_CODIGO_PRODUCTO, decimal Original_COC_ACTIVO) {
+        public virtual int Delete(decimal Original_COC_CODIGO, decimal Original_COL_CODIGO, decimal Original_MOD_CODIGO, decimal Original_MCA_CODIGO, decimal Original_TE_CODIGO, decimal Original_DESIG_CODIGO, string Original_COC_CODIGO_PRODUCTO, decimal Original_COC_ACTIVO, decimal Original_COC_HAS_IMAGE) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_COC_CODIGO));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_COL_CODIGO));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_MOD_CODIGO));
@@ -7463,6 +7492,7 @@ SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, 
                 this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_COC_CODIGO_PRODUCTO));
             }
             this.Adapter.DeleteCommand.Parameters[7].Value = ((decimal)(Original_COC_ACTIVO));
+            this.Adapter.DeleteCommand.Parameters[8].Value = ((decimal)(Original_COC_HAS_IMAGE));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -7482,7 +7512,7 @@ SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(decimal COL_CODIGO, decimal MOD_CODIGO, decimal MCA_CODIGO, decimal TE_CODIGO, decimal DESIG_CODIGO, string COC_CODIGO_PRODUCTO, decimal COC_ACTIVO) {
+        public virtual int Insert(decimal COL_CODIGO, decimal MOD_CODIGO, decimal MCA_CODIGO, decimal TE_CODIGO, decimal DESIG_CODIGO, string COC_CODIGO_PRODUCTO, decimal COC_ACTIVO, decimal COC_HAS_IMAGE) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(COL_CODIGO));
             this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(MOD_CODIGO));
             this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(MCA_CODIGO));
@@ -7495,6 +7525,7 @@ SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, 
                 this.Adapter.InsertCommand.Parameters[5].Value = ((string)(COC_CODIGO_PRODUCTO));
             }
             this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(COC_ACTIVO));
+            this.Adapter.InsertCommand.Parameters[7].Value = ((decimal)(COC_HAS_IMAGE));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -7522,6 +7553,7 @@ SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, 
                     decimal DESIG_CODIGO, 
                     string COC_CODIGO_PRODUCTO, 
                     decimal COC_ACTIVO, 
+                    decimal COC_HAS_IMAGE, 
                     decimal Original_COC_CODIGO, 
                     decimal Original_COL_CODIGO, 
                     decimal Original_MOD_CODIGO, 
@@ -7530,6 +7562,7 @@ SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, 
                     decimal Original_DESIG_CODIGO, 
                     string Original_COC_CODIGO_PRODUCTO, 
                     decimal Original_COC_ACTIVO, 
+                    decimal Original_COC_HAS_IMAGE, 
                     decimal COC_CODIGO) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(COL_CODIGO));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(MOD_CODIGO));
@@ -7543,20 +7576,22 @@ SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, 
                 this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(COC_CODIGO_PRODUCTO));
             }
             this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(COC_ACTIVO));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(Original_COC_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_COL_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(Original_MOD_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(Original_MCA_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_TE_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(Original_DESIG_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(COC_HAS_IMAGE));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_COC_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(Original_COL_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(Original_MOD_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_MCA_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(Original_TE_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_DESIG_CODIGO));
             if ((Original_COC_CODIGO_PRODUCTO == null)) {
                 throw new global::System.ArgumentNullException("Original_COC_CODIGO_PRODUCTO");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_COC_CODIGO_PRODUCTO));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_COC_CODIGO_PRODUCTO));
             }
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((decimal)(Original_COC_ACTIVO));
-            this.Adapter.UpdateCommand.Parameters[15].Value = ((decimal)(COC_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((decimal)(Original_COC_ACTIVO));
+            this.Adapter.UpdateCommand.Parameters[16].Value = ((decimal)(Original_COC_HAS_IMAGE));
+            this.Adapter.UpdateCommand.Parameters[17].Value = ((decimal)(COC_CODIGO));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -7576,8 +7611,25 @@ SELECT COC_CODIGO, COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal COL_CODIGO, decimal MOD_CODIGO, decimal MCA_CODIGO, decimal TE_CODIGO, decimal DESIG_CODIGO, string COC_CODIGO_PRODUCTO, decimal COC_ACTIVO, decimal Original_COC_CODIGO, decimal Original_COL_CODIGO, decimal Original_MOD_CODIGO, decimal Original_MCA_CODIGO, decimal Original_TE_CODIGO, decimal Original_DESIG_CODIGO, string Original_COC_CODIGO_PRODUCTO, decimal Original_COC_ACTIVO) {
-            return this.Update(COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, COC_CODIGO_PRODUCTO, COC_ACTIVO, Original_COC_CODIGO, Original_COL_CODIGO, Original_MOD_CODIGO, Original_MCA_CODIGO, Original_TE_CODIGO, Original_DESIG_CODIGO, Original_COC_CODIGO_PRODUCTO, Original_COC_ACTIVO, Original_COC_CODIGO);
+        public virtual int Update(
+                    decimal COL_CODIGO, 
+                    decimal MOD_CODIGO, 
+                    decimal MCA_CODIGO, 
+                    decimal TE_CODIGO, 
+                    decimal DESIG_CODIGO, 
+                    string COC_CODIGO_PRODUCTO, 
+                    decimal COC_ACTIVO, 
+                    decimal COC_HAS_IMAGE, 
+                    decimal Original_COC_CODIGO, 
+                    decimal Original_COL_CODIGO, 
+                    decimal Original_MOD_CODIGO, 
+                    decimal Original_MCA_CODIGO, 
+                    decimal Original_TE_CODIGO, 
+                    decimal Original_DESIG_CODIGO, 
+                    string Original_COC_CODIGO_PRODUCTO, 
+                    decimal Original_COC_ACTIVO, 
+                    decimal Original_COC_HAS_IMAGE) {
+            return this.Update(COL_CODIGO, MOD_CODIGO, MCA_CODIGO, TE_CODIGO, DESIG_CODIGO, COC_CODIGO_PRODUCTO, COC_ACTIVO, COC_HAS_IMAGE, Original_COC_CODIGO, Original_COL_CODIGO, Original_MOD_CODIGO, Original_MCA_CODIGO, Original_TE_CODIGO, Original_DESIG_CODIGO, Original_COC_CODIGO_PRODUCTO, Original_COC_ACTIVO, Original_COC_HAS_IMAGE, Original_COC_CODIGO);
         }
     }
     
