@@ -212,10 +212,12 @@ namespace GyCAP.UI.Sistema
         public static void SetDataGridViewColumnsSize(DataGridView grilla)
         {
             grilla.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            grilla.AllowUserToResizeColumns = true;
+            grilla.AllowUserToResizeColumns = true;            
+            
             if (grilla.Tag == null) { grilla.Tag = new DataGridViewState(); }
-            if (grilla.RowCount == 0 || grilla.ColumnCount == 0) 
-            { 
+            if (grilla.RowCount == 0) 
+            {
+                for (int i = 0; i < grilla.ColumnCount; i++) { grilla.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet; }
                 grilla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 (grilla.Tag as DataGridViewState).WasProcessedForData = false;
             }
@@ -236,9 +238,9 @@ namespace GyCAP.UI.Sistema
 
                     int size = (grilla.Width / divisor) + 1;
 
-                    for (int i = 0; i < grilla.ColumnCount; i++)
+                    for (int i = 0; i < grilla.ColumnCount; i++) 
                     {
-                        grilla.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                        grilla.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
                         grilla.Columns[i].Width = size;
                     }
 

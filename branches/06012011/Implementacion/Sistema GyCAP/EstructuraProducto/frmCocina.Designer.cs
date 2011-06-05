@@ -501,6 +501,7 @@
             this.dgvListaCocina.TabIndex = 6;
             this.dgvListaCocina.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListaCocina_RowEnter);
             this.dgvListaCocina.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvListaCocina_CellFormatting);
+            this.dgvListaCocina.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // tpBuscar
             // 

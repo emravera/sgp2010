@@ -11,6 +11,7 @@ namespace GyCAP.DAL
     {
         public static readonly int CocinaActiva = 1;
         public static readonly int CocinaInactiva = 0;
+        public enum ImagenStatus { SinImagen, ConImagen };
         
         public static int Insertar(Entidades.Cocina cocina)
         {
@@ -32,7 +33,7 @@ namespace GyCAP.DAL
                                          cocina.Designacion.Codigo,
                                          cocina.CodigoProducto,
                                          cocina.Activo,
-                                         0 
+                                         cocina.HasImage 
                                        };
 
             try
@@ -62,7 +63,7 @@ namespace GyCAP.DAL
                                          cocina.Designacion.Codigo,
                                          cocina.CodigoProducto,
                                          cocina.Activo,
-                                         0,
+                                         cocina.HasImage,
                                          cocina.CodigoCocina 
                                        };
 
@@ -89,7 +90,7 @@ namespace GyCAP.DAL
         public static void ObtenerCocinas(DataTable dtCocina)
         {
             string sql = @"SELECT coc_codigo, col_codigo, mod_codigo, mca_codigo, te_codigo, desig_codigo, 
-                         coc_codigo_producto, coc_activo FROM COCINAS";
+                         coc_codigo_producto, coc_activo, coc_has_image FROM COCINAS";
 
             try
             {
@@ -102,7 +103,7 @@ namespace GyCAP.DAL
         public static void ObtenerCocinas(object codigo, object codMarca, object codTerminacion, object codEstado, DataTable dtCocina)
         {
             string sql = @"SELECT coc_codigo, col_codigo, mod_codigo, mca_codigo, te_codigo, desig_codigo, 
-                        coc_codigo_producto, coc_activo FROM COCINAS WHERE 1=1 ";
+                        coc_codigo_producto, coc_activo, coc_has_image FROM COCINAS WHERE 1=1 ";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
@@ -215,5 +216,17 @@ namespace GyCAP.DAL
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
+
+        public static void SetImageStatus(int codigoCocina, ImagenStatus status)
+        {
+            string sql = "UPDATE COCINA SET coc_has_image = @p0 WHERE coc_codigo = @p1";
+            object[] valorParametros = { (status == ImagenStatus.ConImagen) ? 1 : 0 , codigoCocina };
+            try
+            {
+                DB.executeNonQuery(sql, valorParametros, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
     }
 }
