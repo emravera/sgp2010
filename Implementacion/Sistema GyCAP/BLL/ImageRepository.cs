@@ -11,6 +11,9 @@ namespace GyCAP.BLL
     {
         public enum ElementType { Cocina, Empleado, Parte };
         private static readonly string directorioImagenes = SistemaBLL.WorkingPath + "BLL\\Img\\";
+        public enum ImageStatus { NoImage, New, Changed, Deleted, Same };
+        public const int WithOutImage = 0;
+        public const int WithImage = 1;
 
         public static void SaveImage(int codigoElemento, ElementType elementType, Image imagen)
         {
