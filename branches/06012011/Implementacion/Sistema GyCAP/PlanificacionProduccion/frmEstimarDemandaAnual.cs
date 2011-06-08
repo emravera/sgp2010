@@ -19,7 +19,8 @@ namespace GyCAP.UI.PlanificacionProduccion
         private static estadoUI estadoActual;
         //Defino el valor total de la estimacion global para el formulario
         private static decimal totalsistema = 0, totalActual, seriesGraficos;
-        
+
+        #region Inicio
         public frmEstimarDemandaAnual()
         {
             InitializeComponent();
@@ -34,13 +35,13 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvLista.Columns.Add("DEMAN_CODIGO", "Código");
             dgvLista.Columns.Add("DEMAN_ANIO", "Año");
             dgvLista.Columns.Add("DEMAN_NOMBRE", "Denominación");
-            dgvLista.Columns.Add("DEMAN_FECHACREACION", "Fecha Creación Estimación");
+            dgvLista.Columns.Add("DEMAN_FECHACREACION", "Fecha Creación");
 
             //Seteamos el modo de tamaño de las columnas
             dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["DEMAN_CODIGO"].DataPropertyName = "DEMAN_CODIGO";
@@ -74,10 +75,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             dvListaDetalle = new DataView(dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES);
             dgvDetalle.DataSource = dvListaDetalle;
 
-            //Escondemos los codigos
-            dgvDetalle.Columns["DDEMAN_CODIGO"].Visible = false;
-            dgvLista.Columns["DEMAN_CODIGO"].Visible=false;
-
             //Seteo el maxlenght de los textbox
             txtAnioBuscar.MaxLength = 4;
             txtIdentificacion.MaxLength = 80;
@@ -85,25 +82,33 @@ namespace GyCAP.UI.PlanificacionProduccion
             txtAnio.MaxLength = 4;
             numCrecimiento.Increment =Convert.ToDecimal(0.01);
             numCrecimiento.DecimalPlaces = 2;
-
            
             //Seteo el estado de inicio de la pantalla
             SetInterface(estadoUI.inicio);
 
         }
+        #endregion
+
         #region Servicios
         private void SetInterface(estadoUI estado)
         {
             switch (estado)
             {
                 case estadoUI.inicio:
+                    //Seteo controles
                     txtAnioBuscar.Text = string.Empty;
-                    gbGrillaDemanda.Visible = false;
-                    gbGrillaDetalle.Visible = false;
+                    gbGrillaDemanda.Visible = true;
+                    gbGrillaDetalle.Visible = true;
                     btnNuevo.Enabled = true;
                     btnConsultar.Enabled = false;
                     btnEliminar.Enabled = false;
                     btnModificar.Enabled = false;
+
+                    //Seteo campos invisibles en las grillas
+                    dgvDetalle.Columns["DDEMAN_CODIGO"].Visible = false;
+                    dgvLista.Columns["DEMAN_CODIGO"].Visible = false;
+                                        
+                    estadoActual = estadoUI.inicio;
                     tcDemanda.SelectedTab= tpBuscar;
                     break;
                 case estadoUI.buscar:
@@ -117,7 +122,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnConsultar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
                     btnModificar.Enabled = hayDatos;
-                    gbGrillaDemanda.Visible = hayDatos;
+                    gbGrillaDemanda.Visible = hayDatos;                   
+
                     tcDemanda.SelectedTab = tpBuscar;
                     estadoActual = estadoUI.buscar;
                     break;
@@ -141,7 +147,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                     break;
                 case estadoUI.nuevo:
                     txtIdentificacion.Text = string.Empty;
-                    txtAnio.Focus();
                     txtAnio.Text = string.Empty;
                     numCrecimiento.Value = 0;
                     numCrecimiento.Enabled = true;
@@ -175,6 +180,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbDatosPrincipales.Enabled = false;
                     tcDemanda.SelectedTab = tpDatos;
                     LimpiarControles();
+                    DesactivaControles(false);
                     estadoActual = estadoUI.cargaHistorico;
                     break;
                 case estadoUI.calcularEstimacion:
@@ -200,6 +206,37 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         }
 
+        //Seteo los métodos para formatear las listas
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
+        private void dgvDetalle_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+        
+        //Método para evitar la creación de más de una pantalla
+        public static frmEstimarDemandaAnual Instancia
+        {
+            get
+            {
+                if (_frmEstimarDemandaAnual == null || _frmEstimarDemandaAnual.IsDisposed)
+                {
+                    _frmEstimarDemandaAnual = new frmEstimarDemandaAnual();
+                }
+                else
+                {
+                    _frmEstimarDemandaAnual.BringToFront();
+                }
+                return _frmEstimarDemandaAnual;
+            }
+            set
+            {
+                _frmEstimarDemandaAnual = value;
+            }
+        }
         #endregion
 
         #region Botones
@@ -256,41 +293,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             LlenarDetalle();
         }
-
-        private void LlenarDetalle()
-        {
-            try
-            {
-                //Se programa la busqueda del detalle
-                //Limpiamos el Dataset
-                dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Clear();
-
-                int codigo = Convert.ToInt32(dvListaDemanda[dgvLista.SelectedRows[0].Index]["deman_codigo"]);
-
-                //Se llama a la funcion de busqueda con todos los parametros
-                BLL.DetalleDemandaAnualBLL.ObtenerDetalle(codigo, dsEstimarDemanda);
-
-                //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
-                //por una consulta a la BD
-                dvListaDetalle.Table = dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES;
-
-                if (dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Rows.Count == 0)
-                {
-                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Detalle de Estimación de Demanda Anual", this.Text);                    
-                }
-                else
-                {
-                    SetInterface(estadoUI.buscar);
-                    gbGrillaDetalle.Visible = true;
-                }
-
-            }
-            catch (Entidades.Excepciones.BaseDeDatosException ex)
-            {
-                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
-            }
-        }
-
+              
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             //lleno el Dataset de demandas anuales
@@ -329,29 +332,27 @@ namespace GyCAP.UI.PlanificacionProduccion
                 //Creo el objeto de Demanda
                 Entidades.DemandaAnual demanda = new GyCAP.Entidades.DemandaAnual();
 
+                //Si esta cargando un valor historico
                 if (estadoActual == estadoUI.cargaHistorico)
                 {
                     validacion = Validar(estadoUI.cargaHistorico);
                     //Pregunto si esta todo escrito
-                    if ( validacion == string.Empty)
+                    if (validacion == string.Empty)
                     {
-
                         //Se definen los parámetros que se van a guardar
-
                         demanda.Anio = Convert.ToInt32(txtAnioHistorico.Text);
                         demanda.Nombre = txtDenominacionHistorico.Text;
                         demanda.ParametroCrecimiento = 0;
                         demanda.FechaCreacion = BLL.DBBLL.GetFechaServidor();
-
                      }
                 }
+                //Si esta calculando la estimacion
                 else if ( estadoActual == estadoUI.calcularEstimacion)
                 {
-                    validacion=string.Empty;
                     validacion = Validar(estadoUI.calcularEstimacion);
 
                     //Pregunto si esta todo escrito
-                    if ( validacion == string.Empty)
+                    if (validacion == string.Empty)
                     {
                         //Se definen los parámetros que se van a guardar
 
@@ -361,24 +362,21 @@ namespace GyCAP.UI.PlanificacionProduccion
                         demanda.FechaCreacion = BLL.DBBLL.GetFechaServidor();
                     }
                 }
-
+                //Se esta modificando la estimacion
                 else if (estadoActual == estadoUI.modificar)
                 {
-                    validacion = string.Empty;
                     validacion = Validar(estadoUI.modificar);
 
                     //Pregunto si esta todo escrito
                     if (validacion == string.Empty)
                     {
                         
-                            //Se definen los parámetros que se van a guardar
-                            
+                            //Se definen los parámetros que se van a guardar                            
                             demanda.Codigo= Convert.ToInt32(dvListaDemanda[dgvLista.SelectedRows[0].Index]["deman_codigo"]);
                             demanda.Anio = Convert.ToInt32(txtAnio.Text);
                             demanda.Nombre = txtIdentificacion.Text;
                     }
                 }
-
                 if (validacion== string.Empty)
                 {
                         //Meses
@@ -601,9 +599,144 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Se activan todos los controles que le permiten realizar modificaciones
             DesactivaControles(false);
         }
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            //Selecciono el codigo de la demanda anual
+            int codigo = Convert.ToInt32(dvListaDemanda[dgvLista.SelectedRows[0].Index]["deman_codigo"]);
+            txtAnio.Text = dsEstimarDemanda.DEMANDAS_ANUALES.FindByDEMAN_CODIGO(codigo).DEMAN_ANIO.ToString();
+            txtIdentificacion.Text = dsEstimarDemanda.DEMANDAS_ANUALES.FindByDEMAN_CODIGO(codigo).DEMAN_NOMBRE;
+            numCrecimiento.Value = dsEstimarDemanda.DEMANDAS_ANUALES.FindByDEMAN_CODIGO(codigo).DEMAN_PARAMCRECIMIENTO;
+
+
+            decimal[] promedio = new decimal[12];
+            int cont = 0;
+            foreach (Data.dsEstimarDemanda.DETALLE_DEMANDAS_ANUALESRow dr in dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Rows)
+            {
+                promedio[cont] = Convert.ToDecimal(dr.DDEMAN_CANTIDADMES);
+                cont += 1;
+            }
+            //Asigno los valores
+            //Se asignan los valores calculados a los textbox
+            numEnero.Value = promedio[0];
+            numFebrero.Value = promedio[1];
+            numMarzo.Value = promedio[2];
+            numAbril.Value = promedio[3];
+            numMayo.Value = promedio[4];
+            numJunio.Value = promedio[5];
+            numJulio.Value = promedio[6];
+            numAgosto.Value = promedio[7];
+            numSeptiembre.Value = promedio[8];
+            numOctubre.Value = promedio[9];
+            numNoviembre.Value = promedio[10];
+            numDiciembre.Value = promedio[11];
+
+            //Se genera el grafico
+            GenerarGrafico(promedio);
+
+            //se setea el estado
+            SetInterface(estadoUI.modificar);
+
+        }
+
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            //Seteo el estado al inicio
+            SetInterface(estadoUI.inicio);
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            //Controlamos que esté seleccionado algo
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Preguntamos si está seguro
+                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Estimación de Demanda Anual", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
+                if (respuesta == DialogResult.Yes)
+                {
+                    try
+                    {
+                        //Obtengo el Codigo de la demanda
+                        int codigo = Convert.ToInt32(dvListaDemanda[dgvLista.SelectedRows[0].Index]["deman_codigo"]);
+
+                        //Pregunto si se puede eliminar
+                        if (BLL.DemandaAnualBLL.PuedeEliminarse(codigo))
+                        {
+                            //Elimino la demanda anual y su detalle de la BD
+                            BLL.DemandaAnualBLL.Eliminar(codigo);
+
+                            //Limpio el dataset de detalles
+                            dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Clear();
+
+                            //Lo eliminamos del dataset
+                            dsEstimarDemanda.DEMANDAS_ANUALES.FindByDEMAN_CODIGO(codigo).Delete();
+                            dsEstimarDemanda.DEMANDAS_ANUALES.AcceptChanges();
+
+                            //Avisamos que se elimino 
+                            Entidades.Mensajes.MensajesABM.MsjConfirmaEliminar("Estimación de Demanda Anual", GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
+
+                            //Ponemos la ventana en el estado inicial
+                            SetInterface(estadoUI.inicio);
+                        }
+                        else { throw new Entidades.Excepciones.ElementoEnTransaccionException(); }
+
+                    }
+                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+                    {
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                    }
+                }
+            }
+            else
+            {
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Estimación de Demanda Anual", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
+            }
+
+        }
+
+        private void dgvLista_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            LlenarDetalle();
+        }
         #endregion
 
         #region Funciones Formulario
+        private void LlenarDetalle()
+        {
+            try
+            {
+                //Se programa la busqueda del detalle
+                //Limpiamos el Dataset
+                dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Clear();
+
+                int codigo = Convert.ToInt32(dvListaDemanda[dgvLista.SelectedRows[0].Index]["deman_codigo"]);
+
+                //Se llama a la funcion de busqueda con todos los parametros
+                BLL.DetalleDemandaAnualBLL.ObtenerDetalle(codigo, dsEstimarDemanda);
+
+                //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
+                //por una consulta a la BD
+                dvListaDetalle.Table = dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES;
+
+                if (dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Rows.Count == 0)
+                {
+                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Detalle de Estimación de Demanda Anual", this.Text);
+                }
+                else
+                {
+                    SetInterface(estadoUI.buscar);
+                    gbGrillaDetalle.Visible = true;
+                }
+
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
+            }
+        }
 
         private void CargarAñosBase()
         {
@@ -690,28 +823,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                 plotY = Convert.ToInt32(promedio[pointIndex]);
                 chartDemanda.Series[seriesGraficos.ToString()].Points.AddY(plotY);
             }
-
         }
-        //Método para evitar la creación de más de una pantalla
-        public static frmEstimarDemandaAnual Instancia
-        {
-            get
-            {
-                if (_frmEstimarDemandaAnual == null || _frmEstimarDemandaAnual.IsDisposed)
-                {
-                    _frmEstimarDemandaAnual = new frmEstimarDemandaAnual();
-                }
-                else
-                {
-                    _frmEstimarDemandaAnual.BringToFront();
-                }
-                return _frmEstimarDemandaAnual;
-            }
-            set
-            {
-                _frmEstimarDemandaAnual = value;
-            }
-        }
+        
         private void DesactivaControles(bool estado)
         {
             numEnero.ReadOnly = estado;
@@ -905,107 +1018,6 @@ namespace GyCAP.UI.PlanificacionProduccion
 
 
 
-        private void btnModificar_Click(object sender, EventArgs e)
-        {
-            //Selecciono el codigo de la demanda anual
-            int codigo = Convert.ToInt32(dvListaDemanda[dgvLista.SelectedRows[0].Index]["deman_codigo"]);
-            txtAnio.Text = dsEstimarDemanda.DEMANDAS_ANUALES.FindByDEMAN_CODIGO(codigo).DEMAN_ANIO.ToString();
-            txtIdentificacion.Text = dsEstimarDemanda.DEMANDAS_ANUALES.FindByDEMAN_CODIGO(codigo).DEMAN_NOMBRE;
-            numCrecimiento.Value = dsEstimarDemanda.DEMANDAS_ANUALES.FindByDEMAN_CODIGO(codigo).DEMAN_PARAMCRECIMIENTO;
-
-
-            decimal[] promedio= new decimal[12];
-            int cont=0;
-            foreach (Data.dsEstimarDemanda.DETALLE_DEMANDAS_ANUALESRow dr in dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Rows)
-            {
-                promedio[cont] =Convert.ToDecimal(dr.DDEMAN_CANTIDADMES);
-                cont += 1;
-            }
-            //Asigno los valores
-            //Se asignan los valores calculados a los textbox
-            numEnero.Value = promedio[0];
-            numFebrero.Value = promedio[1];
-            numMarzo.Value = promedio[2];
-            numAbril.Value = promedio[3];
-            numMayo.Value = promedio[4];
-            numJunio.Value = promedio[5];
-            numJulio.Value = promedio[6];
-            numAgosto.Value = promedio[7];
-            numSeptiembre.Value = promedio[8];
-            numOctubre.Value = promedio[9];
-            numNoviembre.Value = promedio[10];
-            numDiciembre.Value = promedio[11];
-
-            //Se genera el grafico
-            GenerarGrafico(promedio);
-
-            //se setea el estado
-            SetInterface(estadoUI.modificar);
-
-        }
-
-        private void btnConsultar_Click(object sender, EventArgs e)
-        {
-            //Seteo el estado al inicio
-            SetInterface(estadoUI.inicio);
-        }
-
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            //Controlamos que esté seleccionado algo
-            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
-            {
-                //Preguntamos si está seguro
-                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Estimación de Demanda Anual", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
-                if (respuesta == DialogResult.Yes)
-                {
-                    try
-                    {
-                        //Obtengo el Codigo de la demanda
-                        int codigo = Convert.ToInt32(dvListaDemanda[dgvLista.SelectedRows[0].Index]["deman_codigo"]);
-                        
-                        //Pregunto si se puede eliminar
-                        if (BLL.DemandaAnualBLL.PuedeEliminarse(codigo))
-                        {
-                            //Elimino la demanda anual y su detalle de la BD
-                            BLL.DemandaAnualBLL.Eliminar(codigo);
-
-                            //Limpio el dataset de detalles
-                            dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Clear();
-
-                           //Lo eliminamos del dataset
-                            dsEstimarDemanda.DEMANDAS_ANUALES.FindByDEMAN_CODIGO(codigo).Delete();
-                            dsEstimarDemanda.DEMANDAS_ANUALES.AcceptChanges();
-
-                            //Avisamos que se elimino 
-                            Entidades.Mensajes.MensajesABM.MsjConfirmaEliminar("Estimación de Demanda Anual", GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
-
-                            //Ponemos la ventana en el estado inicial
-                            SetInterface(estadoUI.inicio);
-                        }
-                        else { throw new Entidades.Excepciones.ElementoEnTransaccionException(); }
-                        
-                    }
-                    catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
-                    {
-                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
-                    }
-                    catch (Entidades.Excepciones.BaseDeDatosException ex)
-                    {
-                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
-                    }
-                }
-            }
-            else
-            {
-                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Estimación de Demanda Anual", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
-            }
-
-        }
-
-        private void dgvLista_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            LlenarDetalle();
-        }
+       
     }
 }

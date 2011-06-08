@@ -132,10 +132,13 @@ namespace GyCAP.UI.Soporte
                     default:
                         break;
                 }
-
             }
         }
 
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
         #endregion
 
 #region Pestaña Datos
@@ -168,7 +171,6 @@ namespace GyCAP.UI.Soporte
             btnConsultar.PerformClick();
         }
 
-
         //Metodo que carga los datos desde la grilla hacia a los controles 
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -182,8 +184,7 @@ namespace GyCAP.UI.Soporte
             catch 
             {
                 cbClienteDatos.SetSelectedIndex(-1);
-            }
-            
+            }            
         }
 
         //Metodo para eliminar
@@ -223,7 +224,6 @@ namespace GyCAP.UI.Soporte
                 Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Marca", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
             }
         }
-
 
       //Guardado de los Datos  
       private void btnGuardar_Click(object sender, EventArgs e)

@@ -273,6 +273,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.dgvLista);
             this.groupBox2.Location = new System.Drawing.Point(3, 64);
             this.groupBox2.Name = "groupBox2";
@@ -300,9 +303,12 @@
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
+            this.dgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.cbClienteBuscar);
             this.groupBox1.Controls.Add(this.lblClienteBuscar);
             this.groupBox1.Controls.Add(this.btnBuscar);
@@ -317,6 +323,7 @@
             // 
             // cbClienteBuscar
             // 
+            this.cbClienteBuscar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cbClienteBuscar.CausesValidation = false;
             this.cbClienteBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbClienteBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
@@ -328,6 +335,7 @@
             // 
             // lblClienteBuscar
             // 
+            this.lblClienteBuscar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblClienteBuscar.AutoSize = true;
             this.lblClienteBuscar.Location = new System.Drawing.Point(240, 24);
             this.lblClienteBuscar.Name = "lblClienteBuscar";
@@ -337,6 +345,7 @@
             // 
             // btnBuscar
             // 
+            this.btnBuscar.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnBuscar.Image = global::GyCAP.UI.Soporte.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBuscar.Location = new System.Drawing.Point(482, 18);

@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tcDemanda = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.gbGrillaDetalle = new System.Windows.Forms.GroupBox();
@@ -47,8 +47,6 @@
             this.txtAnioBuscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tpDatos = new System.Windows.Forms.TabPage();
-            this.gbGraficoEstimacion = new System.Windows.Forms.GroupBox();
-            this.chartDemanda = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.gbBotones = new System.Windows.Forms.GroupBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -95,6 +93,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtAnio = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.gbGraficoEstimacion = new System.Windows.Forms.GroupBox();
+            this.chartDemanda = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.gbDatosHistoricos = new System.Windows.Forms.GroupBox();
             this.txtDenominacionHistorico = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -116,8 +116,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tpDatos.SuspendLayout();
-            this.gbGraficoEstimacion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartDemanda)).BeginInit();
             this.gbBotones.SuspendLayout();
             this.gbModificacion.SuspendLayout();
             this.gbEstimacionMes.SuspendLayout();
@@ -135,6 +133,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numEnero)).BeginInit();
             this.gbDatosPrincipales.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCrecimiento)).BeginInit();
+            this.gbGraficoEstimacion.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartDemanda)).BeginInit();
             this.gbDatosHistoricos.SuspendLayout();
             this.tsMenu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -188,40 +188,42 @@
             this.dgvDetalle.AllowUserToDeleteRows = false;
             this.dgvDetalle.AllowUserToResizeColumns = false;
             this.dgvDetalle.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDetalle.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDetalle.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dgvDetalle.CausesValidation = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetalle.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDetalle.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDetalle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDetalle.Enabled = false;
             this.dgvDetalle.Location = new System.Drawing.Point(3, 16);
             this.dgvDetalle.MultiSelect = false;
             this.dgvDetalle.Name = "dgvDetalle";
             this.dgvDetalle.ReadOnly = true;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDetalle.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetalle.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDetalle.RowHeadersVisible = false;
             this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDetalle.Size = new System.Drawing.Size(334, 353);
             this.dgvDetalle.TabIndex = 1;
+            this.dgvDetalle.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDetalle_DataBindingComplete);
             // 
             // gbGrillaDemanda
             // 
@@ -240,35 +242,36 @@
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
             this.dgvLista.AllowUserToResizeRows = false;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLista.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLista.DefaultCellStyle = dataGridViewCellStyle11;
+            this.dgvLista.CausesValidation = false;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLista.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLista.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLista.Location = new System.Drawing.Point(3, 16);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.ReadOnly = true;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLista.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLista.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(398, 350);
@@ -276,6 +279,7 @@
             this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             this.dgvLista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellClick);
+            this.dgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // groupBox1
             // 
@@ -305,6 +309,7 @@
             // 
             // txtAnioBuscar
             // 
+            this.txtAnioBuscar.CausesValidation = false;
             this.txtAnioBuscar.Location = new System.Drawing.Point(65, 29);
             this.txtAnioBuscar.Name = "txtAnioBuscar";
             this.txtAnioBuscar.Size = new System.Drawing.Size(97, 20);
@@ -335,33 +340,6 @@
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
-            // gbGraficoEstimacion
-            // 
-            this.gbGraficoEstimacion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbGraficoEstimacion.Controls.Add(this.chartDemanda);
-            this.gbGraficoEstimacion.Location = new System.Drawing.Point(312, 108);
-            this.gbGraficoEstimacion.Name = "gbGraficoEstimacion";
-            this.gbGraficoEstimacion.Size = new System.Drawing.Size(444, 279);
-            this.gbGraficoEstimacion.TabIndex = 11;
-            this.gbGraficoEstimacion.TabStop = false;
-            this.gbGraficoEstimacion.Text = "Gráfico Estimación Propuesta";
-            // 
-            // chartDemanda
-            // 
-            chartArea2.Name = "ChartArea1";
-            this.chartDemanda.ChartAreas.Add(chartArea2);
-            this.chartDemanda.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chartDemanda.Location = new System.Drawing.Point(3, 16);
-            this.chartDemanda.Name = "chartDemanda";
-            series2.ChartArea = "ChartArea1";
-            series2.Name = "Series1";
-            this.chartDemanda.Series.Add(series2);
-            this.chartDemanda.Size = new System.Drawing.Size(438, 260);
-            this.chartDemanda.TabIndex = 0;
-            this.chartDemanda.Text = "chart1";
-            // 
             // gbBotones
             // 
             this.gbBotones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
@@ -376,9 +354,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnVolver.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnVolver.Location = new System.Drawing.Point(361, 18);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 23);
@@ -389,9 +365,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnGuardar.Location = new System.Drawing.Point(280, 18);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
@@ -478,6 +452,7 @@
             // 
             // numDiciembre
             // 
+            this.numDiciembre.CausesValidation = false;
             this.numDiciembre.Location = new System.Drawing.Point(207, 190);
             this.numDiciembre.Maximum = new decimal(new int[] {
             10000000,
@@ -493,6 +468,7 @@
             // 
             // numNoviembre
             // 
+            this.numNoviembre.CausesValidation = false;
             this.numNoviembre.Location = new System.Drawing.Point(207, 158);
             this.numNoviembre.Maximum = new decimal(new int[] {
             10000000,
@@ -508,6 +484,7 @@
             // 
             // numOctubre
             // 
+            this.numOctubre.CausesValidation = false;
             this.numOctubre.Location = new System.Drawing.Point(207, 127);
             this.numOctubre.Maximum = new decimal(new int[] {
             10000000,
@@ -523,6 +500,7 @@
             // 
             // numSeptiembre
             // 
+            this.numSeptiembre.CausesValidation = false;
             this.numSeptiembre.Location = new System.Drawing.Point(207, 97);
             this.numSeptiembre.Maximum = new decimal(new int[] {
             10000000,
@@ -538,6 +516,7 @@
             // 
             // numAgosto
             // 
+            this.numAgosto.CausesValidation = false;
             this.numAgosto.Location = new System.Drawing.Point(207, 67);
             this.numAgosto.Maximum = new decimal(new int[] {
             10000000,
@@ -553,6 +532,7 @@
             // 
             // numJunio
             // 
+            this.numJunio.CausesValidation = false;
             this.numJunio.Location = new System.Drawing.Point(51, 190);
             this.numJunio.Maximum = new decimal(new int[] {
             10000000,
@@ -568,6 +548,7 @@
             // 
             // numMayo
             // 
+            this.numMayo.CausesValidation = false;
             this.numMayo.Location = new System.Drawing.Point(51, 158);
             this.numMayo.Maximum = new decimal(new int[] {
             10000000,
@@ -583,6 +564,7 @@
             // 
             // numAbril
             // 
+            this.numAbril.CausesValidation = false;
             this.numAbril.Location = new System.Drawing.Point(51, 127);
             this.numAbril.Maximum = new decimal(new int[] {
             10000000,
@@ -598,6 +580,7 @@
             // 
             // numMarzo
             // 
+            this.numMarzo.CausesValidation = false;
             this.numMarzo.Location = new System.Drawing.Point(51, 97);
             this.numMarzo.Maximum = new decimal(new int[] {
             10000000,
@@ -613,6 +596,7 @@
             // 
             // numFebrero
             // 
+            this.numFebrero.CausesValidation = false;
             this.numFebrero.Location = new System.Drawing.Point(51, 67);
             this.numFebrero.Maximum = new decimal(new int[] {
             10000000,
@@ -628,6 +612,7 @@
             // 
             // numJulio
             // 
+            this.numJulio.CausesValidation = false;
             this.numJulio.Location = new System.Drawing.Point(207, 34);
             this.numJulio.Maximum = new decimal(new int[] {
             10000000,
@@ -643,6 +628,7 @@
             // 
             // numEnero
             // 
+            this.numEnero.CausesValidation = false;
             this.numEnero.Location = new System.Drawing.Point(51, 35);
             this.numEnero.Maximum = new decimal(new int[] {
             10000000,
@@ -658,6 +644,7 @@
             // 
             // txtTotal
             // 
+            this.txtTotal.CausesValidation = false;
             this.txtTotal.Location = new System.Drawing.Point(194, 244);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(100, 20);
@@ -852,6 +839,7 @@
             // 
             // numCrecimiento
             // 
+            this.numCrecimiento.CausesValidation = false;
             this.numCrecimiento.Location = new System.Drawing.Point(149, 72);
             this.numCrecimiento.Maximum = new decimal(new int[] {
             10000000,
@@ -882,6 +870,7 @@
             // chListAnios
             // 
             this.chListAnios.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chListAnios.CausesValidation = false;
             this.chListAnios.FormattingEnabled = true;
             this.chListAnios.Location = new System.Drawing.Point(403, 31);
             this.chListAnios.Name = "chListAnios";
@@ -913,6 +902,33 @@
             this.label17.TabIndex = 0;
             this.label17.Text = "Año de la Estimación:";
             // 
+            // gbGraficoEstimacion
+            // 
+            this.gbGraficoEstimacion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbGraficoEstimacion.Controls.Add(this.chartDemanda);
+            this.gbGraficoEstimacion.Location = new System.Drawing.Point(312, 108);
+            this.gbGraficoEstimacion.Name = "gbGraficoEstimacion";
+            this.gbGraficoEstimacion.Size = new System.Drawing.Size(444, 279);
+            this.gbGraficoEstimacion.TabIndex = 11;
+            this.gbGraficoEstimacion.TabStop = false;
+            this.gbGraficoEstimacion.Text = "Gráfico Estimación Propuesta";
+            // 
+            // chartDemanda
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chartDemanda.ChartAreas.Add(chartArea1);
+            this.chartDemanda.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartDemanda.Location = new System.Drawing.Point(3, 16);
+            this.chartDemanda.Name = "chartDemanda";
+            series1.ChartArea = "ChartArea1";
+            series1.Name = "Series1";
+            this.chartDemanda.Series.Add(series1);
+            this.chartDemanda.Size = new System.Drawing.Size(438, 260);
+            this.chartDemanda.TabIndex = 0;
+            this.chartDemanda.Text = "chart1";
+            // 
             // gbDatosHistoricos
             // 
             this.gbDatosHistoricos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -930,6 +946,7 @@
             // 
             // txtDenominacionHistorico
             // 
+            this.txtDenominacionHistorico.CausesValidation = false;
             this.txtDenominacionHistorico.Location = new System.Drawing.Point(146, 50);
             this.txtDenominacionHistorico.Name = "txtDenominacionHistorico";
             this.txtDenominacionHistorico.Size = new System.Drawing.Size(136, 20);
@@ -946,6 +963,7 @@
             // 
             // txtAnioHistorico
             // 
+            this.txtAnioHistorico.CausesValidation = false;
             this.txtAnioHistorico.Location = new System.Drawing.Point(146, 27);
             this.txtAnioHistorico.Name = "txtAnioHistorico";
             this.txtAnioHistorico.Size = new System.Drawing.Size(136, 20);
@@ -1079,8 +1097,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tpDatos.ResumeLayout(false);
-            this.gbGraficoEstimacion.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chartDemanda)).EndInit();
             this.gbBotones.ResumeLayout(false);
             this.gbModificacion.ResumeLayout(false);
             this.gbModificacion.PerformLayout();
@@ -1101,6 +1117,8 @@
             this.gbDatosPrincipales.ResumeLayout(false);
             this.gbDatosPrincipales.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCrecimiento)).EndInit();
+            this.gbGraficoEstimacion.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartDemanda)).EndInit();
             this.gbDatosHistoricos.ResumeLayout(false);
             this.gbDatosHistoricos.PerformLayout();
             this.tsMenu.ResumeLayout(false);
