@@ -27,7 +27,7 @@ namespace GyCAP.DAL
         public static void ObtenerEmpleado(object buscarPor, object nombre, object estado, object sector, Data.dsEmpleado ds)
         {
             string sql = @"SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE,
-                           E_FECHANACIMIENTO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA 
+                           E_FECHANACIMIENTO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA, E_HAS_IMAGE 
                            FROM EMPLEADOS WHERE 1 = 1 ";
 
             //Sirve para armar el nombre de los parámetros
@@ -182,7 +182,7 @@ namespace GyCAP.DAL
                                            row.E_LEGAJO,
                                            row.E_FECHA_ALTA.ToShortDateString(),
                                            fechaBaja,
-                                           0
+                                           row.E_HAS_IMAGE
                                        };
             SqlTransaction transaccion = null;
 
@@ -240,7 +240,7 @@ namespace GyCAP.DAL
                                          fecha,
                                          fechaBaja,
                                          row.E_CODIGO,
-                                         0
+                                         row.E_HAS_IMAGE
                                        };
             SqlTransaction transaccion = null;
 
@@ -274,7 +274,7 @@ namespace GyCAP.DAL
         public static void ObtenerEmpleados(DataTable dtEmpleado)
         {
             string sql = @"SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE,
-                           E_FECHANACIMIENTO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA 
+                           E_FECHANACIMIENTO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA, E_HAS_IMAGE  
                            FROM EMPLEADOS";
 
             DB.FillDataTable(dtEmpleado, sql, null);
@@ -287,7 +287,7 @@ namespace GyCAP.DAL
         public static void ObtenerEmpleados(Data.dsMantenimiento ds)
         {
             string sql = @"SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE,
-                           E_FECHANACIMIENTO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA 
+                           E_FECHANACIMIENTO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA, E_HAS_IMAGE  
                            FROM EMPLEADOS";
 
             try

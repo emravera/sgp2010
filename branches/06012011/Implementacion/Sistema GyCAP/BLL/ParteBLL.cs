@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using System.Drawing;
 
 namespace GyCAP.BLL
 {
@@ -20,11 +21,11 @@ namespace GyCAP.BLL
             DAL.ParteDAL.ObtenerPartes(nombre, codigo, terminacion, tipo, estado, plano, dtPartes);
         }
 
-        public static void Insertar(Data.dsEstructuraProducto dsParte)
+        public static int Insertar(Data.dsEstructuraProducto dsParte)
         {
             Data.dsEstructuraProducto.PARTESRow rowParte = dsParte.PARTES.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsEstructuraProducto.PARTESRow;
             if (DAL.ParteDAL.EsParte(rowParte.PART_NOMBRE, rowParte.PART_CODIGO, Convert.ToInt32(rowParte.PART_NUMERO))) { throw new Entidades.Excepciones.ElementoExistenteException(); }
-            DAL.ParteDAL.Insertar(dsParte);
+            return DAL.ParteDAL.Insertar(dsParte);
         }
 
         public static void Actualizar(Data.dsEstructuraProducto dsParte)
@@ -38,6 +39,38 @@ namespace GyCAP.BLL
         {
             if (!DAL.ParteDAL.PuedeEliminarse(numeroParte)) { throw new Entidades.Excepciones.ElementoEnTransaccionException(); }
             DAL.ParteDAL.Eliminar(numeroParte);
+        }
+
+        /// <summary>
+        /// Guarda una imagen de una parte, si ya tiene una almacenada ésta se reemplaza.
+        /// Si se llama al método sin pasar la imagen, se guarda una por defecto con la leyenda
+        /// imagen no disponible.
+        /// </summary>
+        /// <param name="numeroParte">El número de la parte cuya imagen se quiere guardar.</param>
+        /// <param name="imagen">La imagen de la parte.</param>
+        public static void GuardarImagen(int numeroParte, Image imagen)
+        {
+            ImageRepository.SaveImage(numeroParte, ImageRepository.ElementType.Parte, imagen);
+        }
+
+        /// <summary>
+        /// Obtiene la imagen de una parte, en caso de no tenerla retorna una imagen por defecto con
+        /// la leyenda sin imagen.
+        /// </summary>
+        /// <param name="numeroParte">El número de la parte cuya imagen se quiere obtener.</param>
+        /// <returns>La imagen de la parte si la tiene, caso contrario una imagen por defecto.</returns>
+        public static Image ObtenerImagen(int numeroParte)
+        {
+            return ImageRepository.GetImage(numeroParte, ImageRepository.ElementType.Parte);
+        }
+
+        /// <summary>
+        /// Elimina la imagen de una PARTE.
+        /// </summary>
+        /// <param name="numeroParte">El número de la parte.</param>
+        public static void EliminarImagen(int numeroParte)
+        {
+            ImageRepository.DeleteImage(numeroParte, ImageRepository.ElementType.Parte);
         }
     }
 }

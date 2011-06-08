@@ -209,7 +209,7 @@ namespace GyCAP.UI.EstructuraProducto
                 cocina.TerminacionHorno.Codigo = cbTerminacion.GetSelectedValueInt();
                 cocina.Activo = cbEstado.GetSelectedValueInt();
                 cocina.HasImage = BLL.ImageRepository.WithImage;
-                //gonzalo - determinar si tiene imagen que no sea la sinimagen - gonzalo
+                //determinar si tiene imagen que no sea la sinimagen - gonzalo
 
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
@@ -230,12 +230,11 @@ namespace GyCAP.UI.EstructuraProducto
                         rowCocina.COC_ACTIVO = cocina.Activo;
                         rowCocina.COC_HAS_IMAGE = cocina.HasImage;
                         rowCocina.EndEdit();
-
-                        BLL.CocinaBLL.GuardarImagen(cocina.CodigoCocina, pbImagen.Image);
-
+                        Image imagen = pbImagen.Image;
                         dsCocina.COCINAS.AddCOCINASRow(rowCocina);
                         dsCocina.COCINAS.AcceptChanges();
-                        
+                        BLL.CocinaBLL.GuardarImagen(cocina.CodigoCocina, imagen);
+                        imagen.Dispose();
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
                         if (estadoInterface == estadoUI.nuevoExterno)
                         {

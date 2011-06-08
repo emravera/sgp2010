@@ -408,15 +408,20 @@ namespace GyCAP.UI.RecursosFabricacion
                         else { rowEmpleado.SetE_FECHA_BAJANull(); }
                         rowEmpleado.E_FECHA_ALTA = BLL.DBBLL.GetFechaServidor();
                         rowEmpleado.SetE_FECHA_BAJANull();
+                        //determinar si tiene foto - gonzalo
+                        rowEmpleado.E_HAS_IMAGE = BLL.ImageRepository.WithImage;
                         rowEmpleado.EndEdit();
+                        Image imagen = pbImagen.Image;
                         dsEmpleado.EMPLEADOS.AddEMPLEADOSRow(rowEmpleado);
-                        int cod = BLL.EmpleadoBLL.Insertar(dsEmpleado);
+                        int codigo = BLL.EmpleadoBLL.Insertar(dsEmpleado);
+                        BLL.EmpleadoBLL.GuardarFoto(codigo, imagen);
                         rowEmpleado.BeginEdit();
-                        rowEmpleado.E_CODIGO = cod;
+                        rowEmpleado.E_CODIGO = codigo;
                         rowEmpleado.EndEdit();
                         dsEmpleado.EMPLEADOS.AcceptChanges();
                         dsEmpleado.CAPACIDADESXEMPLEADO.AcceptChanges();
-                        //Falta guardar la foto - gonzalo
+                        imagen.Dispose();
+
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
                         if (estadoInterface == estadoUI.nuevoExterno)
                         {
@@ -467,9 +472,11 @@ namespace GyCAP.UI.RecursosFabricacion
                         MensajesABM.MsjConfirmaGuardar("Empleado", this.Text, MensajesABM.Operaciones.Modificación);
                         dsEmpleado.EMPLEADOS.AcceptChanges();
                         dsEmpleado.CAPACIDADESXEMPLEADO.AcceptChanges();
+
+                        BLL.EmpleadoBLL.GuardarFoto(codigo, pbImagen.Image);
+                        
                         //Y por último seteamos el estado de la interfaz
-                        SetInterface(estadoUI.inicio);
-                        //Falta guardar la foto - gonzalo
+                        SetInterface(estadoUI.inicio);                        
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
@@ -565,6 +572,7 @@ namespace GyCAP.UI.RecursosFabricacion
             if (dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).IsE_FECHANACIMIENTONull()) { sfFechaNac.SetFechaNull(); }
             else { sfFechaNac.SetFecha(dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigoEmpleado).E_FECHANACIMIENTO); }
             dvCapacidadEmpleado.RowFilter = "E_CODIGO = " + codigoEmpleado;
+            pbImagen.Image = BLL.EmpleadoBLL.ObtenerFoto(codigoEmpleado);
         }
 
         private void dgvCapacidades_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
