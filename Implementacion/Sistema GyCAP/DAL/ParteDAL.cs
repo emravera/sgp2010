@@ -12,7 +12,7 @@ namespace GyCAP.DAL
         public static readonly int CostoFijoChecked = 1;
         public static readonly int CostoFijoUnChecked = 0;
         
-        public static void Insertar(Data.dsEstructuraProducto dsEstructura)
+        public static int Insertar(Data.dsEstructuraProducto dsEstructura)
         {
             string sql = @"INSERT INTO [PARTES] 
                        ([part_nombre],
@@ -47,14 +47,18 @@ namespace GyCAP.DAL
                                     hojaRuta,
                                     rowParte.UMED_CODIGO,
                                     proveedor,
-                                    0
+                                    rowParte.PART_HAS_IMAGE
                                   };
             
             try
             {
+                int numero = Convert.ToInt32(DB.executeScalar(sql, parametros, null));
+                
                 rowParte.BeginEdit();
-                rowParte.PART_NUMERO = Convert.ToInt32(DB.executeScalar(sql, parametros, null));
-                rowParte.EndEdit();                
+                rowParte.PART_NUMERO = numero;
+                rowParte.EndEdit();
+
+                return numero;
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
@@ -95,7 +99,7 @@ namespace GyCAP.DAL
                                     rowParte.UMED_CODIGO,
                                     proveedor,
                                     rowParte.PART_NUMERO,
-                                    0
+                                    rowParte.PART_HAS_IMAGE
                                   };
 
             try
@@ -133,7 +137,7 @@ namespace GyCAP.DAL
         public static void ObtenerPartes(object nombre, object codigo, object terminacion, object tipo, object estado, object plano, DataTable dtPartes)
         {
             string sql = @"SELECT part_numero, part_nombre, part_descripcion, part_codigo, pno_codigo, part_costo, 
-                            par_codigo, tpar_codigo, te_codigo, hr_codigo, umed_codigo, prove_codigo 
+                            par_codigo, tpar_codigo, te_codigo, hr_codigo, umed_codigo, prove_codigo, part_has_image  
                            FROM PARTES WHERE 1=1 ";
 
             //Sirve para armar el nombre de los parámetros

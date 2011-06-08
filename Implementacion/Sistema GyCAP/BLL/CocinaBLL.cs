@@ -69,12 +69,16 @@ namespace GyCAP.BLL
         /// la leyenda sin imagen.
         /// </summary>
         /// <param name="codigoCocina">El código de la cocina cuya imagen se quiere obtener.</param>
-        /// <returns>El objeto image con la imagen de la cocina si la tiene, caso contrario una imagen por defecto.</returns>
+        /// <returns>La imagen de la cocina si la tiene, caso contrario una imagen por defecto.</returns>
         public static Image ObtenerImagen(int codigoCocina)
         {
             return ImageRepository.GetImage(codigoCocina, ImageRepository.ElementType.Cocina);
         }
 
+        /// <summary>
+        /// Elimina la imagen de una cocina.
+        /// </summary>
+        /// <param name="codigoCocina">El código de la cocina.</param>
         public static void EliminarImagen(int codigoCocina)
         {
             ImageRepository.DeleteImage(codigoCocina, ImageRepository.ElementType.Cocina);

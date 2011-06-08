@@ -183,12 +183,21 @@ namespace GyCAP.UI.EstructuraProducto
                         row.UMED_CODIGO = cboUnidadMedida.GetSelectedValueInt();
                         if (cboProveedor.GetSelectedValueInt() != -1) { row.PROVE_CODIGO = cboProveedor.GetSelectedValueInt(); }
                         else { row.SetPROVE_CODIGONull(); }
+                        //determinar si tiene imagen o no - gonzalo
+                        row.PART_HAS_IMAGE = BLL.ImageRepository.WithImage;
                         row.EndEdit();
+
+                        Image imagen = pbImagen.Image;
+
                         dsParte.PARTES.AddPARTESRow(row);
-                        BLL.ParteBLL.Insertar(dsParte);
+                        int numero = BLL.ParteBLL.Insertar(dsParte);
+                        row.BeginEdit();
+                        row.PART_NUMERO = numero;
+                        row.EndEdit();
                         dsParte.PARTES.AcceptChanges();
 
-                        //Falta guardar la imagen - gonzalo
+                        BLL.ParteBLL.GuardarImagen(numero, imagen);
+                        imagen.Dispose();
 
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
                         if (estadoInterface == estadoUI.nuevoExterno)
@@ -236,7 +245,11 @@ namespace GyCAP.UI.EstructuraProducto
                         dsParte.PARTES.FindByPART_NUMERO(numero).EndEdit();
                         BLL.ParteBLL.Actualizar(dsParte);
                         dsParte.PARTES.AcceptChanges();
+                        
                         MensajesABM.MsjConfirmaGuardar("Parte", this.Text, MensajesABM.Operaciones.Modificación);
+
+                        BLL.ParteBLL.GuardarImagen(numero, pbImagen.Image);
+                        
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
@@ -318,6 +331,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cboHojaRuta.Enabled = true;
                     cboProveedor.SetSelectedValue(-1);
                     nudCosto.Value = 0;
+                    pbImagen.Image = EstructuraProducto.Properties.Resources.sinimagen;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
                     btnNuevo.Enabled = false;
@@ -351,6 +365,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cboHojaRuta.SetSelectedValue(-1);
                     cboHojaRuta.Enabled = true;
                     cboProveedor.SetSelectedValue(-1);
+                    pbImagen.Image = EstructuraProducto.Properties.Resources.sinimagen;
                     nudCosto.Enabled = true;                   
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
@@ -558,6 +573,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (dsParte.PARTES.FindByPART_NUMERO(numero).IsPROVE_CODIGONull()) { cboProveedor.SetSelectedValue(-1); }
             else { cboProveedor.SetSelectedValue(Convert.ToInt32(dsParte.PARTES.FindByPART_NUMERO(numero).PROVE_CODIGO)); }
             //Falta agregar la imagen de la parte - gonzalo
+            pbImagen.Image = BLL.ParteBLL.ObtenerImagen(numero);
         }
 
         #endregion

@@ -23,25 +23,21 @@ namespace GyCAP.UI.EstructuraProducto
             flpMenu.AutoScroll = false;
             btnCocina.Tag = panelCocina;
             btnColor.Tag = panelColor;
-            btnConjunto.Tag = panelConjunto;
             btnDesignacion.Tag = panelDesignacion;
             btnEstructuraProducto.Tag = panelEstructuraCocina;            
             btnMPPrincipal.Tag = panelMPPrincipal;
             btnModeloCocina.Tag = panelModeloCocina;            
-            btnPieza.Tag = panelPieza;
-            btnSubconjunto.Tag = panelSubconjunto;
+            btnParte.Tag = panelParte;
             btnTerminacion.Tag = panelTerminacion;
             btnUnidadMedida.Tag = panelUnidadMedida;
             Size size = new Size(panelCocina.Size.Width, 0);
             panelCocina.Size = size;
             panelColor.Size = size;
-            panelConjunto.Size = size;
             panelDesignacion.Size = size;
             panelEstructuraCocina.Size = size;            
             panelModeloCocina.Size = size;
             panelMPPrincipal.Size = size;            
-            panelPieza.Size = size;
-            panelSubconjunto.Size = size;
+            panelParte.Size = size;
             panelTerminacion.Size = size;
             panelUnidadMedida.Size = size;
         }
@@ -254,35 +250,6 @@ namespace GyCAP.UI.EstructuraProducto
 
         #endregion
         
-        #region Conjunto
-
-        private void btnNuevoConjunto_Click(object sender, EventArgs e)
-        {
-            frmConjunto.Instancia.TopLevel = false;
-            frmConjunto.Instancia.Parent = areaTrabajo;
-            frmConjunto.Instancia.Location = PosicionarFormulario();
-            frmConjunto.Instancia.SetEstadoInicial(frmConjunto.estadoInicialNuevo);
-            frmConjunto.Instancia.Show();
-            frmConjunto.Instancia.Focus();
-        }
-
-        private void btnConsultarConjunto_Click(object sender, EventArgs e)
-        {
-            frmConjunto.Instancia.TopLevel = false;
-            frmConjunto.Instancia.Parent = areaTrabajo;
-            frmConjunto.Instancia.Location = PosicionarFormulario();
-            frmConjunto.Instancia.SetEstadoInicial(frmConjunto.estadoInicialConsultar);
-            frmConjunto.Instancia.Show();
-            frmConjunto.Instancia.Focus();
-        }
-
-        private void btnListadoConjunto_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        #endregion
-
         #region Designación
 
         private void btnNuevoDesignacion_Click(object sender, EventArgs e)
@@ -377,26 +344,26 @@ namespace GyCAP.UI.EstructuraProducto
 
         #endregion
 
-        #region Pieza
+        #region Parte
 
         private void btnNuevoPieza_Click(object sender, EventArgs e)
         {
-            frmPieza.Instancia.TopLevel = false;
-            frmPieza.Instancia.Parent = areaTrabajo;
-            frmPieza.Instancia.Location = PosicionarFormulario();
-            frmPieza.Instancia.SetEstadoInicial(frmPieza.estadoInicialNuevo);
-            frmPieza.Instancia.Show();
-            frmPieza.Instancia.Focus();
+            frmParte.Instancia.TopLevel = false;            
+            frmParte.Instancia.Parent = areaTrabajo;
+            frmParte.Instancia.Location = PosicionarFormulario();
+            frmParte.Instancia.SetEstadoInicial(frmParte.estadoInicialNuevo);
+            frmParte.Instancia.Show();
+            frmParte.Instancia.Focus();
         }
 
         private void btnConsultarPieza_Click(object sender, EventArgs e)
         {
-            frmPieza.Instancia.TopLevel = false;
-            frmPieza.Instancia.Parent = areaTrabajo;
-            frmPieza.Instancia.Location = PosicionarFormulario();
-            frmPieza.Instancia.SetEstadoInicial(frmPieza.estadoInicialConsultar);
-            frmPieza.Instancia.Show();
-            frmPieza.Instancia.Focus();
+            frmParte.Instancia.TopLevel = false;
+            frmParte.Instancia.Parent = areaTrabajo;
+            frmParte.Instancia.Location = PosicionarFormulario();
+            frmParte.Instancia.SetEstadoInicial(frmPieza.estadoInicialConsultar);
+            frmParte.Instancia.Show();
+            frmParte.Instancia.Focus();
         }
 
         private void btnListadoPieza_Click(object sender, EventArgs e)
@@ -405,36 +372,7 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
-
-        #region Subconjunto
-
-        private void btnNuevoSubconjunto_Click(object sender, EventArgs e)
-        {
-            frmSubconjunto.Instancia.TopLevel = false;
-            frmSubconjunto.Instancia.Parent = areaTrabajo;
-            frmSubconjunto.Instancia.Location = PosicionarFormulario();
-            frmSubconjunto.Instancia.SetEstadoInicial(frmSubconjunto.estadoInicialNuevo);
-            frmSubconjunto.Instancia.Show();
-            frmSubconjunto.Instancia.Focus();
-        }
-
-        private void btnConsultarSubconjunto_Click(object sender, EventArgs e)
-        {
-            frmSubconjunto.Instancia.TopLevel = false;
-            frmSubconjunto.Instancia.Parent = areaTrabajo;
-            frmSubconjunto.Instancia.Location = PosicionarFormulario();
-            frmSubconjunto.Instancia.SetEstadoInicial(frmSubconjunto.estadoInicialConsultar);
-            frmSubconjunto.Instancia.Show();
-            frmSubconjunto.Instancia.Focus();
-        }
-
-        private void btnListadoSubconjunto_Click(object sender, EventArgs e)
-        {
-            //frmSubconjunto.Instancia.Location = PosicionarFormulario();
-        }
-
-        #endregion
-
+        
         #region Terminación
 
         private void btnNuevoTerminacion_Click(object sender, EventArgs e)

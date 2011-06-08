@@ -29,19 +29,19 @@ namespace GyCAP.Data {
         
         private CAPACIDADESXEMPLEADODataTable tableCAPACIDADESXEMPLEADO;
         
-        private EMPLEADOSDataTable tableEMPLEADOS;
-        
         private SECTORESDataTable tableSECTORES;
         
         private ESTADO_EMPLEADOSDataTable tableESTADO_EMPLEADOS;
+        
+        private EMPLEADOSDataTable tableEMPLEADOS;
         
         private global::System.Data.DataRelation relationcapacidadXEmpleado_capacidadEmpleado_fk;
         
         private global::System.Data.DataRelation relationcapacidadXEmpleado_empleado_fk;
         
-        private global::System.Data.DataRelation relationempleado_sector_fk;
-        
         private global::System.Data.DataRelation relationempleado_estadoEmpleado_fk;
+        
+        private global::System.Data.DataRelation relationempleado_sector_fk;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -75,14 +75,14 @@ namespace GyCAP.Data {
                 if ((ds.Tables["CAPACIDADESXEMPLEADO"] != null)) {
                     base.Tables.Add(new CAPACIDADESXEMPLEADODataTable(ds.Tables["CAPACIDADESXEMPLEADO"]));
                 }
-                if ((ds.Tables["EMPLEADOS"] != null)) {
-                    base.Tables.Add(new EMPLEADOSDataTable(ds.Tables["EMPLEADOS"]));
-                }
                 if ((ds.Tables["SECTORES"] != null)) {
                     base.Tables.Add(new SECTORESDataTable(ds.Tables["SECTORES"]));
                 }
                 if ((ds.Tables["ESTADO_EMPLEADOS"] != null)) {
                     base.Tables.Add(new ESTADO_EMPLEADOSDataTable(ds.Tables["ESTADO_EMPLEADOS"]));
+                }
+                if ((ds.Tables["EMPLEADOS"] != null)) {
+                    base.Tables.Add(new EMPLEADOSDataTable(ds.Tables["EMPLEADOS"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -123,15 +123,6 @@ namespace GyCAP.Data {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public EMPLEADOSDataTable EMPLEADOS {
-            get {
-                return this.tableEMPLEADOS;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public SECTORESDataTable SECTORES {
             get {
                 return this.tableSECTORES;
@@ -144,6 +135,15 @@ namespace GyCAP.Data {
         public ESTADO_EMPLEADOSDataTable ESTADO_EMPLEADOS {
             get {
                 return this.tableESTADO_EMPLEADOS;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public EMPLEADOSDataTable EMPLEADOS {
+            get {
+                return this.tableEMPLEADOS;
             }
         }
         
@@ -212,14 +212,14 @@ namespace GyCAP.Data {
                 if ((ds.Tables["CAPACIDADESXEMPLEADO"] != null)) {
                     base.Tables.Add(new CAPACIDADESXEMPLEADODataTable(ds.Tables["CAPACIDADESXEMPLEADO"]));
                 }
-                if ((ds.Tables["EMPLEADOS"] != null)) {
-                    base.Tables.Add(new EMPLEADOSDataTable(ds.Tables["EMPLEADOS"]));
-                }
                 if ((ds.Tables["SECTORES"] != null)) {
                     base.Tables.Add(new SECTORESDataTable(ds.Tables["SECTORES"]));
                 }
                 if ((ds.Tables["ESTADO_EMPLEADOS"] != null)) {
                     base.Tables.Add(new ESTADO_EMPLEADOSDataTable(ds.Tables["ESTADO_EMPLEADOS"]));
+                }
+                if ((ds.Tables["EMPLEADOS"] != null)) {
+                    base.Tables.Add(new EMPLEADOSDataTable(ds.Tables["EMPLEADOS"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -263,12 +263,6 @@ namespace GyCAP.Data {
                     this.tableCAPACIDADESXEMPLEADO.InitVars();
                 }
             }
-            this.tableEMPLEADOS = ((EMPLEADOSDataTable)(base.Tables["EMPLEADOS"]));
-            if ((initTable == true)) {
-                if ((this.tableEMPLEADOS != null)) {
-                    this.tableEMPLEADOS.InitVars();
-                }
-            }
             this.tableSECTORES = ((SECTORESDataTable)(base.Tables["SECTORES"]));
             if ((initTable == true)) {
                 if ((this.tableSECTORES != null)) {
@@ -281,10 +275,16 @@ namespace GyCAP.Data {
                     this.tableESTADO_EMPLEADOS.InitVars();
                 }
             }
+            this.tableEMPLEADOS = ((EMPLEADOSDataTable)(base.Tables["EMPLEADOS"]));
+            if ((initTable == true)) {
+                if ((this.tableEMPLEADOS != null)) {
+                    this.tableEMPLEADOS.InitVars();
+                }
+            }
             this.relationcapacidadXEmpleado_capacidadEmpleado_fk = this.Relations["capacidadXEmpleado_capacidadEmpleado_fk"];
             this.relationcapacidadXEmpleado_empleado_fk = this.Relations["capacidadXEmpleado_empleado_fk"];
-            this.relationempleado_sector_fk = this.Relations["empleado_sector_fk"];
             this.relationempleado_estadoEmpleado_fk = this.Relations["empleado_estadoEmpleado_fk"];
+            this.relationempleado_sector_fk = this.Relations["empleado_sector_fk"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -298,12 +298,12 @@ namespace GyCAP.Data {
             base.Tables.Add(this.tableCAPACIDAD_EMPLEADOS);
             this.tableCAPACIDADESXEMPLEADO = new CAPACIDADESXEMPLEADODataTable();
             base.Tables.Add(this.tableCAPACIDADESXEMPLEADO);
-            this.tableEMPLEADOS = new EMPLEADOSDataTable();
-            base.Tables.Add(this.tableEMPLEADOS);
             this.tableSECTORES = new SECTORESDataTable();
             base.Tables.Add(this.tableSECTORES);
             this.tableESTADO_EMPLEADOS = new ESTADO_EMPLEADOSDataTable();
             base.Tables.Add(this.tableESTADO_EMPLEADOS);
+            this.tableEMPLEADOS = new EMPLEADOSDataTable();
+            base.Tables.Add(this.tableEMPLEADOS);
             this.relationcapacidadXEmpleado_capacidadEmpleado_fk = new global::System.Data.DataRelation("capacidadXEmpleado_capacidadEmpleado_fk", new global::System.Data.DataColumn[] {
                         this.tableCAPACIDAD_EMPLEADOS.CEMP_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableCAPACIDADESXEMPLEADO.CEMP_CODIGOColumn}, false);
@@ -312,14 +312,14 @@ namespace GyCAP.Data {
                         this.tableEMPLEADOS.E_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableCAPACIDADESXEMPLEADO.E_CODIGOColumn}, false);
             this.Relations.Add(this.relationcapacidadXEmpleado_empleado_fk);
-            this.relationempleado_sector_fk = new global::System.Data.DataRelation("empleado_sector_fk", new global::System.Data.DataColumn[] {
-                        this.tableSECTORES.SEC_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableEMPLEADOS.SEC_CODIGOColumn}, false);
-            this.Relations.Add(this.relationempleado_sector_fk);
             this.relationempleado_estadoEmpleado_fk = new global::System.Data.DataRelation("empleado_estadoEmpleado_fk", new global::System.Data.DataColumn[] {
                         this.tableESTADO_EMPLEADOS.EE_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableEMPLEADOS.EE_CODIGOColumn}, false);
             this.Relations.Add(this.relationempleado_estadoEmpleado_fk);
+            this.relationempleado_sector_fk = new global::System.Data.DataRelation("empleado_sector_fk", new global::System.Data.DataColumn[] {
+                        this.tableSECTORES.SEC_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableEMPLEADOS.SEC_CODIGOColumn}, false);
+            this.Relations.Add(this.relationempleado_sector_fk);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -333,17 +333,17 @@ namespace GyCAP.Data {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeEMPLEADOS() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeSECTORES() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeESTADO_EMPLEADOS() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeEMPLEADOS() {
             return false;
         }
         
@@ -404,11 +404,11 @@ namespace GyCAP.Data {
         
         public delegate void CAPACIDADESXEMPLEADORowChangeEventHandler(object sender, CAPACIDADESXEMPLEADORowChangeEvent e);
         
-        public delegate void EMPLEADOSRowChangeEventHandler(object sender, EMPLEADOSRowChangeEvent e);
-        
         public delegate void SECTORESRowChangeEventHandler(object sender, SECTORESRowChangeEvent e);
         
         public delegate void ESTADO_EMPLEADOSRowChangeEventHandler(object sender, ESTADO_EMPLEADOSRowChangeEvent e);
+        
+        public delegate void EMPLEADOSRowChangeEventHandler(object sender, EMPLEADOSRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -904,356 +904,6 @@ namespace GyCAP.Data {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "CAPACIDADESXEMPLEADODataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class EMPLEADOSDataTable : global::System.Data.TypedTableBase<EMPLEADOSRow> {
-            
-            private global::System.Data.DataColumn columnE_CODIGO;
-            
-            private global::System.Data.DataColumn columnE_LEGAJO;
-            
-            private global::System.Data.DataColumn columnEE_CODIGO;
-            
-            private global::System.Data.DataColumn columnSEC_CODIGO;
-            
-            private global::System.Data.DataColumn columnE_APELLIDO;
-            
-            private global::System.Data.DataColumn columnE_NOMBRE;
-            
-            private global::System.Data.DataColumn columnE_FECHANACIMIENTO;
-            
-            private global::System.Data.DataColumn columnE_FECHA_ALTA;
-            
-            private global::System.Data.DataColumn columnE_FECHA_BAJA;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public EMPLEADOSDataTable() {
-                this.TableName = "EMPLEADOS";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal EMPLEADOSDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected EMPLEADOSDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn E_CODIGOColumn {
-                get {
-                    return this.columnE_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn E_LEGAJOColumn {
-                get {
-                    return this.columnE_LEGAJO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn EE_CODIGOColumn {
-                get {
-                    return this.columnEE_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn SEC_CODIGOColumn {
-                get {
-                    return this.columnSEC_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn E_APELLIDOColumn {
-                get {
-                    return this.columnE_APELLIDO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn E_NOMBREColumn {
-                get {
-                    return this.columnE_NOMBRE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn E_FECHANACIMIENTOColumn {
-                get {
-                    return this.columnE_FECHANACIMIENTO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn E_FECHA_ALTAColumn {
-                get {
-                    return this.columnE_FECHA_ALTA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn E_FECHA_BAJAColumn {
-                get {
-                    return this.columnE_FECHA_BAJA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public EMPLEADOSRow this[int index] {
-                get {
-                    return ((EMPLEADOSRow)(this.Rows[index]));
-                }
-            }
-            
-            public event EMPLEADOSRowChangeEventHandler EMPLEADOSRowChanging;
-            
-            public event EMPLEADOSRowChangeEventHandler EMPLEADOSRowChanged;
-            
-            public event EMPLEADOSRowChangeEventHandler EMPLEADOSRowDeleting;
-            
-            public event EMPLEADOSRowChangeEventHandler EMPLEADOSRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddEMPLEADOSRow(EMPLEADOSRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public EMPLEADOSRow AddEMPLEADOSRow(string E_LEGAJO, ESTADO_EMPLEADOSRow parentESTADO_EMPLEADOSRowByempleado_estadoEmpleado_fk, SECTORESRow parentSECTORESRowByempleado_sector_fk, string E_APELLIDO, string E_NOMBRE, System.DateTime E_FECHANACIMIENTO, System.DateTime E_FECHA_ALTA, System.DateTime E_FECHA_BAJA) {
-                EMPLEADOSRow rowEMPLEADOSRow = ((EMPLEADOSRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        E_LEGAJO,
-                        null,
-                        null,
-                        E_APELLIDO,
-                        E_NOMBRE,
-                        E_FECHANACIMIENTO,
-                        E_FECHA_ALTA,
-                        E_FECHA_BAJA};
-                if ((parentESTADO_EMPLEADOSRowByempleado_estadoEmpleado_fk != null)) {
-                    columnValuesArray[2] = parentESTADO_EMPLEADOSRowByempleado_estadoEmpleado_fk[0];
-                }
-                if ((parentSECTORESRowByempleado_sector_fk != null)) {
-                    columnValuesArray[3] = parentSECTORESRowByempleado_sector_fk[0];
-                }
-                rowEMPLEADOSRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowEMPLEADOSRow);
-                return rowEMPLEADOSRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public EMPLEADOSRow FindByE_CODIGO(decimal E_CODIGO) {
-                return ((EMPLEADOSRow)(this.Rows.Find(new object[] {
-                            E_CODIGO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                EMPLEADOSDataTable cln = ((EMPLEADOSDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new EMPLEADOSDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnE_CODIGO = base.Columns["E_CODIGO"];
-                this.columnE_LEGAJO = base.Columns["E_LEGAJO"];
-                this.columnEE_CODIGO = base.Columns["EE_CODIGO"];
-                this.columnSEC_CODIGO = base.Columns["SEC_CODIGO"];
-                this.columnE_APELLIDO = base.Columns["E_APELLIDO"];
-                this.columnE_NOMBRE = base.Columns["E_NOMBRE"];
-                this.columnE_FECHANACIMIENTO = base.Columns["E_FECHANACIMIENTO"];
-                this.columnE_FECHA_ALTA = base.Columns["E_FECHA_ALTA"];
-                this.columnE_FECHA_BAJA = base.Columns["E_FECHA_BAJA"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnE_CODIGO = new global::System.Data.DataColumn("E_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnE_CODIGO);
-                this.columnE_LEGAJO = new global::System.Data.DataColumn("E_LEGAJO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnE_LEGAJO);
-                this.columnEE_CODIGO = new global::System.Data.DataColumn("EE_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnEE_CODIGO);
-                this.columnSEC_CODIGO = new global::System.Data.DataColumn("SEC_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSEC_CODIGO);
-                this.columnE_APELLIDO = new global::System.Data.DataColumn("E_APELLIDO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnE_APELLIDO);
-                this.columnE_NOMBRE = new global::System.Data.DataColumn("E_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnE_NOMBRE);
-                this.columnE_FECHANACIMIENTO = new global::System.Data.DataColumn("E_FECHANACIMIENTO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnE_FECHANACIMIENTO);
-                this.columnE_FECHA_ALTA = new global::System.Data.DataColumn("E_FECHA_ALTA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnE_FECHA_ALTA);
-                this.columnE_FECHA_BAJA = new global::System.Data.DataColumn("E_FECHA_BAJA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnE_FECHA_BAJA);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnE_CODIGO}, true));
-                this.columnE_CODIGO.AutoIncrement = true;
-                this.columnE_CODIGO.AutoIncrementSeed = -1;
-                this.columnE_CODIGO.AutoIncrementStep = -1;
-                this.columnE_CODIGO.AllowDBNull = false;
-                this.columnE_CODIGO.Unique = true;
-                this.columnE_LEGAJO.MaxLength = 20;
-                this.columnEE_CODIGO.AllowDBNull = false;
-                this.columnE_APELLIDO.MaxLength = 80;
-                this.columnE_NOMBRE.MaxLength = 80;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public EMPLEADOSRow NewEMPLEADOSRow() {
-                return ((EMPLEADOSRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new EMPLEADOSRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(EMPLEADOSRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.EMPLEADOSRowChanged != null)) {
-                    this.EMPLEADOSRowChanged(this, new EMPLEADOSRowChangeEvent(((EMPLEADOSRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.EMPLEADOSRowChanging != null)) {
-                    this.EMPLEADOSRowChanging(this, new EMPLEADOSRowChangeEvent(((EMPLEADOSRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.EMPLEADOSRowDeleted != null)) {
-                    this.EMPLEADOSRowDeleted(this, new EMPLEADOSRowChangeEvent(((EMPLEADOSRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.EMPLEADOSRowDeleting != null)) {
-                    this.EMPLEADOSRowDeleting(this, new EMPLEADOSRowChangeEvent(((EMPLEADOSRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveEMPLEADOSRow(EMPLEADOSRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsEmpleado ds = new dsEmpleado();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "EMPLEADOSDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -1837,6 +1487,370 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class EMPLEADOSDataTable : global::System.Data.TypedTableBase<EMPLEADOSRow> {
+            
+            private global::System.Data.DataColumn columnE_CODIGO;
+            
+            private global::System.Data.DataColumn columnE_LEGAJO;
+            
+            private global::System.Data.DataColumn columnEE_CODIGO;
+            
+            private global::System.Data.DataColumn columnSEC_CODIGO;
+            
+            private global::System.Data.DataColumn columnE_APELLIDO;
+            
+            private global::System.Data.DataColumn columnE_NOMBRE;
+            
+            private global::System.Data.DataColumn columnE_FECHANACIMIENTO;
+            
+            private global::System.Data.DataColumn columnE_FECHA_ALTA;
+            
+            private global::System.Data.DataColumn columnE_FECHA_BAJA;
+            
+            private global::System.Data.DataColumn columnE_HAS_IMAGE;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public EMPLEADOSDataTable() {
+                this.TableName = "EMPLEADOS";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal EMPLEADOSDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected EMPLEADOSDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn E_CODIGOColumn {
+                get {
+                    return this.columnE_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn E_LEGAJOColumn {
+                get {
+                    return this.columnE_LEGAJO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EE_CODIGOColumn {
+                get {
+                    return this.columnEE_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SEC_CODIGOColumn {
+                get {
+                    return this.columnSEC_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn E_APELLIDOColumn {
+                get {
+                    return this.columnE_APELLIDO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn E_NOMBREColumn {
+                get {
+                    return this.columnE_NOMBRE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn E_FECHANACIMIENTOColumn {
+                get {
+                    return this.columnE_FECHANACIMIENTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn E_FECHA_ALTAColumn {
+                get {
+                    return this.columnE_FECHA_ALTA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn E_FECHA_BAJAColumn {
+                get {
+                    return this.columnE_FECHA_BAJA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn E_HAS_IMAGEColumn {
+                get {
+                    return this.columnE_HAS_IMAGE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public EMPLEADOSRow this[int index] {
+                get {
+                    return ((EMPLEADOSRow)(this.Rows[index]));
+                }
+            }
+            
+            public event EMPLEADOSRowChangeEventHandler EMPLEADOSRowChanging;
+            
+            public event EMPLEADOSRowChangeEventHandler EMPLEADOSRowChanged;
+            
+            public event EMPLEADOSRowChangeEventHandler EMPLEADOSRowDeleting;
+            
+            public event EMPLEADOSRowChangeEventHandler EMPLEADOSRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddEMPLEADOSRow(EMPLEADOSRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public EMPLEADOSRow AddEMPLEADOSRow(string E_LEGAJO, ESTADO_EMPLEADOSRow parentESTADO_EMPLEADOSRowByempleado_estadoEmpleado_fk, SECTORESRow parentSECTORESRowByempleado_sector_fk, string E_APELLIDO, string E_NOMBRE, System.DateTime E_FECHANACIMIENTO, System.DateTime E_FECHA_ALTA, System.DateTime E_FECHA_BAJA, decimal E_HAS_IMAGE) {
+                EMPLEADOSRow rowEMPLEADOSRow = ((EMPLEADOSRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        E_LEGAJO,
+                        null,
+                        null,
+                        E_APELLIDO,
+                        E_NOMBRE,
+                        E_FECHANACIMIENTO,
+                        E_FECHA_ALTA,
+                        E_FECHA_BAJA,
+                        E_HAS_IMAGE};
+                if ((parentESTADO_EMPLEADOSRowByempleado_estadoEmpleado_fk != null)) {
+                    columnValuesArray[2] = parentESTADO_EMPLEADOSRowByempleado_estadoEmpleado_fk[0];
+                }
+                if ((parentSECTORESRowByempleado_sector_fk != null)) {
+                    columnValuesArray[3] = parentSECTORESRowByempleado_sector_fk[0];
+                }
+                rowEMPLEADOSRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowEMPLEADOSRow);
+                return rowEMPLEADOSRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public EMPLEADOSRow FindByE_CODIGO(decimal E_CODIGO) {
+                return ((EMPLEADOSRow)(this.Rows.Find(new object[] {
+                            E_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                EMPLEADOSDataTable cln = ((EMPLEADOSDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new EMPLEADOSDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnE_CODIGO = base.Columns["E_CODIGO"];
+                this.columnE_LEGAJO = base.Columns["E_LEGAJO"];
+                this.columnEE_CODIGO = base.Columns["EE_CODIGO"];
+                this.columnSEC_CODIGO = base.Columns["SEC_CODIGO"];
+                this.columnE_APELLIDO = base.Columns["E_APELLIDO"];
+                this.columnE_NOMBRE = base.Columns["E_NOMBRE"];
+                this.columnE_FECHANACIMIENTO = base.Columns["E_FECHANACIMIENTO"];
+                this.columnE_FECHA_ALTA = base.Columns["E_FECHA_ALTA"];
+                this.columnE_FECHA_BAJA = base.Columns["E_FECHA_BAJA"];
+                this.columnE_HAS_IMAGE = base.Columns["E_HAS_IMAGE"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnE_CODIGO = new global::System.Data.DataColumn("E_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnE_CODIGO);
+                this.columnE_LEGAJO = new global::System.Data.DataColumn("E_LEGAJO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnE_LEGAJO);
+                this.columnEE_CODIGO = new global::System.Data.DataColumn("EE_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEE_CODIGO);
+                this.columnSEC_CODIGO = new global::System.Data.DataColumn("SEC_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSEC_CODIGO);
+                this.columnE_APELLIDO = new global::System.Data.DataColumn("E_APELLIDO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnE_APELLIDO);
+                this.columnE_NOMBRE = new global::System.Data.DataColumn("E_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnE_NOMBRE);
+                this.columnE_FECHANACIMIENTO = new global::System.Data.DataColumn("E_FECHANACIMIENTO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnE_FECHANACIMIENTO);
+                this.columnE_FECHA_ALTA = new global::System.Data.DataColumn("E_FECHA_ALTA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnE_FECHA_ALTA);
+                this.columnE_FECHA_BAJA = new global::System.Data.DataColumn("E_FECHA_BAJA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnE_FECHA_BAJA);
+                this.columnE_HAS_IMAGE = new global::System.Data.DataColumn("E_HAS_IMAGE", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnE_HAS_IMAGE);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnE_CODIGO}, true));
+                this.columnE_CODIGO.AutoIncrement = true;
+                this.columnE_CODIGO.AutoIncrementSeed = -1;
+                this.columnE_CODIGO.AutoIncrementStep = -1;
+                this.columnE_CODIGO.AllowDBNull = false;
+                this.columnE_CODIGO.Unique = true;
+                this.columnE_LEGAJO.MaxLength = 20;
+                this.columnEE_CODIGO.AllowDBNull = false;
+                this.columnE_APELLIDO.MaxLength = 80;
+                this.columnE_NOMBRE.MaxLength = 80;
+                this.columnE_HAS_IMAGE.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public EMPLEADOSRow NewEMPLEADOSRow() {
+                return ((EMPLEADOSRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new EMPLEADOSRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(EMPLEADOSRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.EMPLEADOSRowChanged != null)) {
+                    this.EMPLEADOSRowChanged(this, new EMPLEADOSRowChangeEvent(((EMPLEADOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.EMPLEADOSRowChanging != null)) {
+                    this.EMPLEADOSRowChanging(this, new EMPLEADOSRowChangeEvent(((EMPLEADOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.EMPLEADOSRowDeleted != null)) {
+                    this.EMPLEADOSRowDeleted(this, new EMPLEADOSRowChangeEvent(((EMPLEADOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.EMPLEADOSRowDeleting != null)) {
+                    this.EMPLEADOSRowDeleting(this, new EMPLEADOSRowChangeEvent(((EMPLEADOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveEMPLEADOSRow(EMPLEADOSRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsEmpleado ds = new dsEmpleado();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "EMPLEADOSDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -1982,246 +1996,6 @@ namespace GyCAP.Data {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["capacidadXEmpleado_empleado_fk"]);
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class EMPLEADOSRow : global::System.Data.DataRow {
-            
-            private EMPLEADOSDataTable tableEMPLEADOS;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal EMPLEADOSRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableEMPLEADOS = ((EMPLEADOSDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal E_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableEMPLEADOS.E_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableEMPLEADOS.E_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string E_LEGAJO {
-                get {
-                    if (this.IsE_LEGAJONull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tableEMPLEADOS.E_LEGAJOColumn]));
-                    }
-                }
-                set {
-                    this[this.tableEMPLEADOS.E_LEGAJOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal EE_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableEMPLEADOS.EE_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableEMPLEADOS.EE_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal SEC_CODIGO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableEMPLEADOS.SEC_CODIGOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SEC_CODIGO\' in table \'EMPLEADOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableEMPLEADOS.SEC_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string E_APELLIDO {
-                get {
-                    if (this.IsE_APELLIDONull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tableEMPLEADOS.E_APELLIDOColumn]));
-                    }
-                }
-                set {
-                    this[this.tableEMPLEADOS.E_APELLIDOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string E_NOMBRE {
-                get {
-                    if (this.IsE_NOMBRENull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tableEMPLEADOS.E_NOMBREColumn]));
-                    }
-                }
-                set {
-                    this[this.tableEMPLEADOS.E_NOMBREColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime E_FECHANACIMIENTO {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableEMPLEADOS.E_FECHANACIMIENTOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'E_FECHANACIMIENTO\' in table \'EMPLEADOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableEMPLEADOS.E_FECHANACIMIENTOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime E_FECHA_ALTA {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableEMPLEADOS.E_FECHA_ALTAColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'E_FECHA_ALTA\' in table \'EMPLEADOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableEMPLEADOS.E_FECHA_ALTAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime E_FECHA_BAJA {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableEMPLEADOS.E_FECHA_BAJAColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'E_FECHA_BAJA\' in table \'EMPLEADOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableEMPLEADOS.E_FECHA_BAJAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SECTORESRow SECTORESRow {
-                get {
-                    return ((SECTORESRow)(this.GetParentRow(this.Table.ParentRelations["empleado_sector_fk"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["empleado_sector_fk"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ESTADO_EMPLEADOSRow ESTADO_EMPLEADOSRow {
-                get {
-                    return ((ESTADO_EMPLEADOSRow)(this.GetParentRow(this.Table.ParentRelations["empleado_estadoEmpleado_fk"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["empleado_estadoEmpleado_fk"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsE_LEGAJONull() {
-                return this.IsNull(this.tableEMPLEADOS.E_LEGAJOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetE_LEGAJONull() {
-                this[this.tableEMPLEADOS.E_LEGAJOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsSEC_CODIGONull() {
-                return this.IsNull(this.tableEMPLEADOS.SEC_CODIGOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetSEC_CODIGONull() {
-                this[this.tableEMPLEADOS.SEC_CODIGOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsE_APELLIDONull() {
-                return this.IsNull(this.tableEMPLEADOS.E_APELLIDOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetE_APELLIDONull() {
-                this[this.tableEMPLEADOS.E_APELLIDOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsE_NOMBRENull() {
-                return this.IsNull(this.tableEMPLEADOS.E_NOMBREColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetE_NOMBRENull() {
-                this[this.tableEMPLEADOS.E_NOMBREColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsE_FECHANACIMIENTONull() {
-                return this.IsNull(this.tableEMPLEADOS.E_FECHANACIMIENTOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetE_FECHANACIMIENTONull() {
-                this[this.tableEMPLEADOS.E_FECHANACIMIENTOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsE_FECHA_ALTANull() {
-                return this.IsNull(this.tableEMPLEADOS.E_FECHA_ALTAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetE_FECHA_ALTANull() {
-                this[this.tableEMPLEADOS.E_FECHA_ALTAColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsE_FECHA_BAJANull() {
-                return this.IsNull(this.tableEMPLEADOS.E_FECHA_BAJAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetE_FECHA_BAJANull() {
-                this[this.tableEMPLEADOS.E_FECHA_BAJAColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CAPACIDADESXEMPLEADORow[] GetCAPACIDADESXEMPLEADORows() {
-                if ((this.Table.ChildRelations["capacidadXEmpleado_empleado_fk"] == null)) {
-                    return new CAPACIDADESXEMPLEADORow[0];
-                }
-                else {
-                    return ((CAPACIDADESXEMPLEADORow[])(base.GetChildRows(this.Table.ChildRelations["capacidadXEmpleado_empleado_fk"])));
                 }
             }
         }
@@ -2422,6 +2196,256 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class EMPLEADOSRow : global::System.Data.DataRow {
+            
+            private EMPLEADOSDataTable tableEMPLEADOS;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal EMPLEADOSRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableEMPLEADOS = ((EMPLEADOSDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal E_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableEMPLEADOS.E_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableEMPLEADOS.E_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string E_LEGAJO {
+                get {
+                    if (this.IsE_LEGAJONull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableEMPLEADOS.E_LEGAJOColumn]));
+                    }
+                }
+                set {
+                    this[this.tableEMPLEADOS.E_LEGAJOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal EE_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableEMPLEADOS.EE_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableEMPLEADOS.EE_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal SEC_CODIGO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableEMPLEADOS.SEC_CODIGOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SEC_CODIGO\' in table \'EMPLEADOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEMPLEADOS.SEC_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string E_APELLIDO {
+                get {
+                    if (this.IsE_APELLIDONull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableEMPLEADOS.E_APELLIDOColumn]));
+                    }
+                }
+                set {
+                    this[this.tableEMPLEADOS.E_APELLIDOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string E_NOMBRE {
+                get {
+                    if (this.IsE_NOMBRENull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableEMPLEADOS.E_NOMBREColumn]));
+                    }
+                }
+                set {
+                    this[this.tableEMPLEADOS.E_NOMBREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime E_FECHANACIMIENTO {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableEMPLEADOS.E_FECHANACIMIENTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'E_FECHANACIMIENTO\' in table \'EMPLEADOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEMPLEADOS.E_FECHANACIMIENTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime E_FECHA_ALTA {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableEMPLEADOS.E_FECHA_ALTAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'E_FECHA_ALTA\' in table \'EMPLEADOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEMPLEADOS.E_FECHA_ALTAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime E_FECHA_BAJA {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableEMPLEADOS.E_FECHA_BAJAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'E_FECHA_BAJA\' in table \'EMPLEADOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEMPLEADOS.E_FECHA_BAJAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal E_HAS_IMAGE {
+                get {
+                    return ((decimal)(this[this.tableEMPLEADOS.E_HAS_IMAGEColumn]));
+                }
+                set {
+                    this[this.tableEMPLEADOS.E_HAS_IMAGEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ESTADO_EMPLEADOSRow ESTADO_EMPLEADOSRow {
+                get {
+                    return ((ESTADO_EMPLEADOSRow)(this.GetParentRow(this.Table.ParentRelations["empleado_estadoEmpleado_fk"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["empleado_estadoEmpleado_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SECTORESRow SECTORESRow {
+                get {
+                    return ((SECTORESRow)(this.GetParentRow(this.Table.ParentRelations["empleado_sector_fk"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["empleado_sector_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsE_LEGAJONull() {
+                return this.IsNull(this.tableEMPLEADOS.E_LEGAJOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetE_LEGAJONull() {
+                this[this.tableEMPLEADOS.E_LEGAJOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSEC_CODIGONull() {
+                return this.IsNull(this.tableEMPLEADOS.SEC_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSEC_CODIGONull() {
+                this[this.tableEMPLEADOS.SEC_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsE_APELLIDONull() {
+                return this.IsNull(this.tableEMPLEADOS.E_APELLIDOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetE_APELLIDONull() {
+                this[this.tableEMPLEADOS.E_APELLIDOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsE_NOMBRENull() {
+                return this.IsNull(this.tableEMPLEADOS.E_NOMBREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetE_NOMBRENull() {
+                this[this.tableEMPLEADOS.E_NOMBREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsE_FECHANACIMIENTONull() {
+                return this.IsNull(this.tableEMPLEADOS.E_FECHANACIMIENTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetE_FECHANACIMIENTONull() {
+                this[this.tableEMPLEADOS.E_FECHANACIMIENTOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsE_FECHA_ALTANull() {
+                return this.IsNull(this.tableEMPLEADOS.E_FECHA_ALTAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetE_FECHA_ALTANull() {
+                this[this.tableEMPLEADOS.E_FECHA_ALTAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsE_FECHA_BAJANull() {
+                return this.IsNull(this.tableEMPLEADOS.E_FECHA_BAJAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetE_FECHA_BAJANull() {
+                this[this.tableEMPLEADOS.E_FECHA_BAJAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CAPACIDADESXEMPLEADORow[] GetCAPACIDADESXEMPLEADORows() {
+                if ((this.Table.ChildRelations["capacidadXEmpleado_empleado_fk"] == null)) {
+                    return new CAPACIDADESXEMPLEADORow[0];
+                }
+                else {
+                    return ((CAPACIDADESXEMPLEADORow[])(base.GetChildRows(this.Table.ChildRelations["capacidadXEmpleado_empleado_fk"])));
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -2487,37 +2511,6 @@ namespace GyCAP.Data {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class EMPLEADOSRowChangeEvent : global::System.EventArgs {
-            
-            private EMPLEADOSRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public EMPLEADOSRowChangeEvent(EMPLEADOSRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public EMPLEADOSRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public class SECTORESRowChangeEvent : global::System.EventArgs {
             
             private SECTORESRow eventRow;
@@ -2563,6 +2556,37 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public ESTADO_EMPLEADOSRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class EMPLEADOSRowChangeEvent : global::System.EventArgs {
+            
+            private EMPLEADOSRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public EMPLEADOSRowChangeEvent(EMPLEADOSRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public EMPLEADOSRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -3189,565 +3213,6 @@ SELECT CXE_CODIGO, E_CODIGO, CEMP_CODIGO FROM CAPACIDADESXEMPLEADO WHERE (CXE_CO
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(decimal E_CODIGO, decimal CEMP_CODIGO, decimal Original_CXE_CODIGO, decimal Original_E_CODIGO, decimal Original_CEMP_CODIGO) {
             return this.Update(E_CODIGO, CEMP_CODIGO, Original_CXE_CODIGO, Original_E_CODIGO, Original_CEMP_CODIGO, Original_CXE_CODIGO);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class EMPLEADOSTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public EMPLEADOSTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "EMPLEADOS";
-            tableMapping.ColumnMappings.Add("E_CODIGO", "E_CODIGO");
-            tableMapping.ColumnMappings.Add("E_LEGAJO", "E_LEGAJO");
-            tableMapping.ColumnMappings.Add("EE_CODIGO", "EE_CODIGO");
-            tableMapping.ColumnMappings.Add("SEC_CODIGO", "SEC_CODIGO");
-            tableMapping.ColumnMappings.Add("E_APELLIDO", "E_APELLIDO");
-            tableMapping.ColumnMappings.Add("E_NOMBRE", "E_NOMBRE");
-            tableMapping.ColumnMappings.Add("E_FECHANACIMIENTO", "E_FECHANACIMIENTO");
-            tableMapping.ColumnMappings.Add("E_FECHA_ALTA", "E_FECHA_ALTA");
-            tableMapping.ColumnMappings.Add("E_FECHA_BAJA", "E_FECHA_BAJA");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[EMPLEADOS] WHERE (([E_CODIGO] = @Original_E_CODIGO) AND ((@IsNull_E_LEGAJO = 1 AND [E_LEGAJO] IS NULL) OR ([E_LEGAJO] = @Original_E_LEGAJO)) AND ([EE_CODIGO] = @Original_EE_CODIGO) AND ((@IsNull_SEC_CODIGO = 1 AND [SEC_CODIGO] IS NULL) OR ([SEC_CODIGO] = @Original_SEC_CODIGO)) AND ((@IsNull_E_APELLIDO = 1 AND [E_APELLIDO] IS NULL) OR ([E_APELLIDO] = @Original_E_APELLIDO)) AND ((@IsNull_E_NOMBRE = 1 AND [E_NOMBRE] IS NULL) OR ([E_NOMBRE] = @Original_E_NOMBRE)) AND ((@IsNull_E_FECHANACIMIENTO = 1 AND [E_FECHANACIMIENTO] IS NULL) OR ([E_FECHANACIMIENTO] = @Original_E_FECHANACIMIENTO)) AND ((@IsNull_E_FECHA_ALTA = 1 AND [E_FECHA_ALTA] IS NULL) OR ([E_FECHA_ALTA] = @Original_E_FECHA_ALTA)) AND ((@IsNull_E_FECHA_BAJA = 1 AND [E_FECHA_BAJA] IS NULL) OR ([E_FECHA_BAJA] = @Original_E_FECHA_BAJA)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "E_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_LEGAJO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_LEGAJO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_LEGAJO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_LEGAJO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_APELLIDO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_APELLIDO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_APELLIDO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_APELLIDO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_FECHANACIMIENTO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHANACIMIENTO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_FECHANACIMIENTO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHANACIMIENTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_FECHA_ALTA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_ALTA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_FECHA_ALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_ALTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_FECHA_BAJA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_BAJA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_FECHA_BAJA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_BAJA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[EMPLEADOS] ([E_LEGAJO], [EE_CODIGO], [SEC_CODIGO], [E_APELLIDO], [E_NOMBRE], [E_FECHANACIMIENTO], [E_FECHA_ALTA], [E_FECHA_BAJA]) VALUES (@E_LEGAJO, @EE_CODIGO, @SEC_CODIGO, @E_APELLIDO, @E_NOMBRE, @E_FECHANACIMIENTO, @E_FECHA_ALTA, @E_FECHA_BAJA);
-SELECT E_CODIGO, E_LEGAJO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHANACIMIENTO, E_FECHA_ALTA, E_FECHA_BAJA FROM EMPLEADOS WHERE (E_CODIGO = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_LEGAJO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_LEGAJO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EE_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_APELLIDO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_APELLIDO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_FECHANACIMIENTO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHANACIMIENTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_FECHA_ALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_ALTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_FECHA_BAJA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_BAJA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[EMPLEADOS] SET [E_LEGAJO] = @E_LEGAJO, [EE_CODIGO] = @EE_CODIGO, [SEC_CODIGO] = @SEC_CODIGO, [E_APELLIDO] = @E_APELLIDO, [E_NOMBRE] = @E_NOMBRE, [E_FECHANACIMIENTO] = @E_FECHANACIMIENTO, [E_FECHA_ALTA] = @E_FECHA_ALTA, [E_FECHA_BAJA] = @E_FECHA_BAJA WHERE (([E_CODIGO] = @Original_E_CODIGO) AND ((@IsNull_E_LEGAJO = 1 AND [E_LEGAJO] IS NULL) OR ([E_LEGAJO] = @Original_E_LEGAJO)) AND ([EE_CODIGO] = @Original_EE_CODIGO) AND ((@IsNull_SEC_CODIGO = 1 AND [SEC_CODIGO] IS NULL) OR ([SEC_CODIGO] = @Original_SEC_CODIGO)) AND ((@IsNull_E_APELLIDO = 1 AND [E_APELLIDO] IS NULL) OR ([E_APELLIDO] = @Original_E_APELLIDO)) AND ((@IsNull_E_NOMBRE = 1 AND [E_NOMBRE] IS NULL) OR ([E_NOMBRE] = @Original_E_NOMBRE)) AND ((@IsNull_E_FECHANACIMIENTO = 1 AND [E_FECHANACIMIENTO] IS NULL) OR ([E_FECHANACIMIENTO] = @Original_E_FECHANACIMIENTO)) AND ((@IsNull_E_FECHA_ALTA = 1 AND [E_FECHA_ALTA] IS NULL) OR ([E_FECHA_ALTA] = @Original_E_FECHA_ALTA)) AND ((@IsNull_E_FECHA_BAJA = 1 AND [E_FECHA_BAJA] IS NULL) OR ([E_FECHA_BAJA] = @Original_E_FECHA_BAJA)));
-SELECT E_CODIGO, E_LEGAJO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHANACIMIENTO, E_FECHA_ALTA, E_FECHA_BAJA FROM EMPLEADOS WHERE (E_CODIGO = @E_CODIGO)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_LEGAJO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_LEGAJO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EE_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_APELLIDO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_APELLIDO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_FECHANACIMIENTO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHANACIMIENTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_FECHA_ALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_ALTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_FECHA_BAJA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_BAJA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "E_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_LEGAJO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_LEGAJO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_LEGAJO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_LEGAJO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_APELLIDO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_APELLIDO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_APELLIDO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_APELLIDO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_FECHANACIMIENTO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHANACIMIENTO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_FECHANACIMIENTO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHANACIMIENTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_FECHA_ALTA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_ALTA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_FECHA_ALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_ALTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_FECHA_BAJA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_BAJA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_FECHA_BAJA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_BAJA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "E_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT E_CODIGO, E_LEGAJO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHANA" +
-                "CIMIENTO, E_FECHA_ALTA, E_FECHA_BAJA FROM dbo.EMPLEADOS";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsEmpleado.EMPLEADOSDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsEmpleado.EMPLEADOSDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsEmpleado.EMPLEADOSDataTable dataTable = new dsEmpleado.EMPLEADOSDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsEmpleado.EMPLEADOSDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsEmpleado dataSet) {
-            return this.Adapter.Update(dataSet, "EMPLEADOS");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_E_CODIGO, string Original_E_LEGAJO, decimal Original_EE_CODIGO, global::System.Nullable<decimal> Original_SEC_CODIGO, string Original_E_APELLIDO, string Original_E_NOMBRE, global::System.Nullable<global::System.DateTime> Original_E_FECHANACIMIENTO, global::System.Nullable<global::System.DateTime> Original_E_FECHA_ALTA, global::System.Nullable<global::System.DateTime> Original_E_FECHA_BAJA) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_E_CODIGO));
-            if ((Original_E_LEGAJO == null)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_E_LEGAJO));
-            }
-            this.Adapter.DeleteCommand.Parameters[3].Value = ((decimal)(Original_EE_CODIGO));
-            if ((Original_SEC_CODIGO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((decimal)(Original_SEC_CODIGO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((Original_E_APELLIDO == null)) {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((string)(Original_E_APELLIDO));
-            }
-            if ((Original_E_NOMBRE == null)) {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((string)(Original_E_NOMBRE));
-            }
-            if ((Original_E_FECHANACIMIENTO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((System.DateTime)(Original_E_FECHANACIMIENTO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            if ((Original_E_FECHA_ALTA.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((System.DateTime)(Original_E_FECHA_ALTA.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            if ((Original_E_FECHA_BAJA.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((System.DateTime)(Original_E_FECHA_BAJA.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string E_LEGAJO, decimal EE_CODIGO, global::System.Nullable<decimal> SEC_CODIGO, string E_APELLIDO, string E_NOMBRE, global::System.Nullable<global::System.DateTime> E_FECHANACIMIENTO, global::System.Nullable<global::System.DateTime> E_FECHA_ALTA, global::System.Nullable<global::System.DateTime> E_FECHA_BAJA) {
-            if ((E_LEGAJO == null)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(E_LEGAJO));
-            }
-            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(EE_CODIGO));
-            if ((SEC_CODIGO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(SEC_CODIGO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((E_APELLIDO == null)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(E_APELLIDO));
-            }
-            if ((E_NOMBRE == null)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(E_NOMBRE));
-            }
-            if ((E_FECHANACIMIENTO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((System.DateTime)(E_FECHANACIMIENTO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((E_FECHA_ALTA.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((System.DateTime)(E_FECHA_ALTA.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((E_FECHA_BAJA.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((System.DateTime)(E_FECHA_BAJA.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string E_LEGAJO, 
-                    decimal EE_CODIGO, 
-                    global::System.Nullable<decimal> SEC_CODIGO, 
-                    string E_APELLIDO, 
-                    string E_NOMBRE, 
-                    global::System.Nullable<global::System.DateTime> E_FECHANACIMIENTO, 
-                    global::System.Nullable<global::System.DateTime> E_FECHA_ALTA, 
-                    global::System.Nullable<global::System.DateTime> E_FECHA_BAJA, 
-                    decimal Original_E_CODIGO, 
-                    string Original_E_LEGAJO, 
-                    decimal Original_EE_CODIGO, 
-                    global::System.Nullable<decimal> Original_SEC_CODIGO, 
-                    string Original_E_APELLIDO, 
-                    string Original_E_NOMBRE, 
-                    global::System.Nullable<global::System.DateTime> Original_E_FECHANACIMIENTO, 
-                    global::System.Nullable<global::System.DateTime> Original_E_FECHA_ALTA, 
-                    global::System.Nullable<global::System.DateTime> Original_E_FECHA_BAJA, 
-                    decimal E_CODIGO) {
-            if ((E_LEGAJO == null)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(E_LEGAJO));
-            }
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(EE_CODIGO));
-            if ((SEC_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(SEC_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((E_APELLIDO == null)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(E_APELLIDO));
-            }
-            if ((E_NOMBRE == null)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(E_NOMBRE));
-            }
-            if ((E_FECHANACIMIENTO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(E_FECHANACIMIENTO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((E_FECHA_ALTA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(E_FECHA_ALTA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((E_FECHA_BAJA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(E_FECHA_BAJA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_E_CODIGO));
-            if ((Original_E_LEGAJO == null)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_E_LEGAJO));
-            }
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_EE_CODIGO));
-            if ((Original_SEC_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_SEC_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            if ((Original_E_APELLIDO == null)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_E_APELLIDO));
-            }
-            if ((Original_E_NOMBRE == null)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_E_NOMBRE));
-            }
-            if ((Original_E_FECHANACIMIENTO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((System.DateTime)(Original_E_FECHANACIMIENTO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
-            }
-            if ((Original_E_FECHA_ALTA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((System.DateTime)(Original_E_FECHA_ALTA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
-            }
-            if ((Original_E_FECHA_BAJA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((System.DateTime)(Original_E_FECHA_BAJA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[24].Value = ((decimal)(E_CODIGO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string E_LEGAJO, 
-                    decimal EE_CODIGO, 
-                    global::System.Nullable<decimal> SEC_CODIGO, 
-                    string E_APELLIDO, 
-                    string E_NOMBRE, 
-                    global::System.Nullable<global::System.DateTime> E_FECHANACIMIENTO, 
-                    global::System.Nullable<global::System.DateTime> E_FECHA_ALTA, 
-                    global::System.Nullable<global::System.DateTime> E_FECHA_BAJA, 
-                    decimal Original_E_CODIGO, 
-                    string Original_E_LEGAJO, 
-                    decimal Original_EE_CODIGO, 
-                    global::System.Nullable<decimal> Original_SEC_CODIGO, 
-                    string Original_E_APELLIDO, 
-                    string Original_E_NOMBRE, 
-                    global::System.Nullable<global::System.DateTime> Original_E_FECHANACIMIENTO, 
-                    global::System.Nullable<global::System.DateTime> Original_E_FECHA_ALTA, 
-                    global::System.Nullable<global::System.DateTime> Original_E_FECHA_BAJA) {
-            return this.Update(E_LEGAJO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHANACIMIENTO, E_FECHA_ALTA, E_FECHA_BAJA, Original_E_CODIGO, Original_E_LEGAJO, Original_EE_CODIGO, Original_SEC_CODIGO, Original_E_APELLIDO, Original_E_NOMBRE, Original_E_FECHANACIMIENTO, Original_E_FECHA_ALTA, Original_E_FECHA_BAJA, Original_E_CODIGO);
         }
     }
     
@@ -4467,6 +3932,578 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class EMPLEADOSTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public EMPLEADOSTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "EMPLEADOS";
+            tableMapping.ColumnMappings.Add("E_CODIGO", "E_CODIGO");
+            tableMapping.ColumnMappings.Add("E_LEGAJO", "E_LEGAJO");
+            tableMapping.ColumnMappings.Add("EE_CODIGO", "EE_CODIGO");
+            tableMapping.ColumnMappings.Add("SEC_CODIGO", "SEC_CODIGO");
+            tableMapping.ColumnMappings.Add("E_APELLIDO", "E_APELLIDO");
+            tableMapping.ColumnMappings.Add("E_NOMBRE", "E_NOMBRE");
+            tableMapping.ColumnMappings.Add("E_FECHANACIMIENTO", "E_FECHANACIMIENTO");
+            tableMapping.ColumnMappings.Add("E_FECHA_ALTA", "E_FECHA_ALTA");
+            tableMapping.ColumnMappings.Add("E_FECHA_BAJA", "E_FECHA_BAJA");
+            tableMapping.ColumnMappings.Add("E_HAS_IMAGE", "E_HAS_IMAGE");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[EMPLEADOS] WHERE (([E_CODIGO] = @Original_E_CODIGO) AND ((@IsNull_E_LEGAJO = 1 AND [E_LEGAJO] IS NULL) OR ([E_LEGAJO] = @Original_E_LEGAJO)) AND ([EE_CODIGO] = @Original_EE_CODIGO) AND ((@IsNull_SEC_CODIGO = 1 AND [SEC_CODIGO] IS NULL) OR ([SEC_CODIGO] = @Original_SEC_CODIGO)) AND ((@IsNull_E_APELLIDO = 1 AND [E_APELLIDO] IS NULL) OR ([E_APELLIDO] = @Original_E_APELLIDO)) AND ((@IsNull_E_NOMBRE = 1 AND [E_NOMBRE] IS NULL) OR ([E_NOMBRE] = @Original_E_NOMBRE)) AND ((@IsNull_E_FECHANACIMIENTO = 1 AND [E_FECHANACIMIENTO] IS NULL) OR ([E_FECHANACIMIENTO] = @Original_E_FECHANACIMIENTO)) AND ((@IsNull_E_FECHA_ALTA = 1 AND [E_FECHA_ALTA] IS NULL) OR ([E_FECHA_ALTA] = @Original_E_FECHA_ALTA)) AND ((@IsNull_E_FECHA_BAJA = 1 AND [E_FECHA_BAJA] IS NULL) OR ([E_FECHA_BAJA] = @Original_E_FECHA_BAJA)) AND ([E_HAS_IMAGE] = @Original_E_HAS_IMAGE))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "E_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_LEGAJO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_LEGAJO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_LEGAJO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_LEGAJO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_APELLIDO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_APELLIDO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_APELLIDO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_APELLIDO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_FECHANACIMIENTO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHANACIMIENTO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_FECHANACIMIENTO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHANACIMIENTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_FECHA_ALTA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_ALTA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_FECHA_ALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_ALTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_FECHA_BAJA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_BAJA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_FECHA_BAJA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_BAJA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_HAS_IMAGE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "E_HAS_IMAGE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[EMPLEADOS] ([E_LEGAJO], [EE_CODIGO], [SEC_CODIGO], [E_APELLIDO], [E_NOMBRE], [E_FECHANACIMIENTO], [E_FECHA_ALTA], [E_FECHA_BAJA], [E_HAS_IMAGE]) VALUES (@E_LEGAJO, @EE_CODIGO, @SEC_CODIGO, @E_APELLIDO, @E_NOMBRE, @E_FECHANACIMIENTO, @E_FECHA_ALTA, @E_FECHA_BAJA, @E_HAS_IMAGE);
+SELECT E_CODIGO, E_LEGAJO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHANACIMIENTO, E_FECHA_ALTA, E_FECHA_BAJA, E_HAS_IMAGE FROM EMPLEADOS WHERE (E_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_LEGAJO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_LEGAJO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EE_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_APELLIDO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_APELLIDO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_FECHANACIMIENTO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHANACIMIENTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_FECHA_ALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_ALTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_FECHA_BAJA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_BAJA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_HAS_IMAGE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "E_HAS_IMAGE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[EMPLEADOS] SET [E_LEGAJO] = @E_LEGAJO, [EE_CODIGO] = @EE_CODIGO, [SEC_CODIGO] = @SEC_CODIGO, [E_APELLIDO] = @E_APELLIDO, [E_NOMBRE] = @E_NOMBRE, [E_FECHANACIMIENTO] = @E_FECHANACIMIENTO, [E_FECHA_ALTA] = @E_FECHA_ALTA, [E_FECHA_BAJA] = @E_FECHA_BAJA, [E_HAS_IMAGE] = @E_HAS_IMAGE WHERE (([E_CODIGO] = @Original_E_CODIGO) AND ((@IsNull_E_LEGAJO = 1 AND [E_LEGAJO] IS NULL) OR ([E_LEGAJO] = @Original_E_LEGAJO)) AND ([EE_CODIGO] = @Original_EE_CODIGO) AND ((@IsNull_SEC_CODIGO = 1 AND [SEC_CODIGO] IS NULL) OR ([SEC_CODIGO] = @Original_SEC_CODIGO)) AND ((@IsNull_E_APELLIDO = 1 AND [E_APELLIDO] IS NULL) OR ([E_APELLIDO] = @Original_E_APELLIDO)) AND ((@IsNull_E_NOMBRE = 1 AND [E_NOMBRE] IS NULL) OR ([E_NOMBRE] = @Original_E_NOMBRE)) AND ((@IsNull_E_FECHANACIMIENTO = 1 AND [E_FECHANACIMIENTO] IS NULL) OR ([E_FECHANACIMIENTO] = @Original_E_FECHANACIMIENTO)) AND ((@IsNull_E_FECHA_ALTA = 1 AND [E_FECHA_ALTA] IS NULL) OR ([E_FECHA_ALTA] = @Original_E_FECHA_ALTA)) AND ((@IsNull_E_FECHA_BAJA = 1 AND [E_FECHA_BAJA] IS NULL) OR ([E_FECHA_BAJA] = @Original_E_FECHA_BAJA)) AND ([E_HAS_IMAGE] = @Original_E_HAS_IMAGE));
+SELECT E_CODIGO, E_LEGAJO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHANACIMIENTO, E_FECHA_ALTA, E_FECHA_BAJA, E_HAS_IMAGE FROM EMPLEADOS WHERE (E_CODIGO = @E_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_LEGAJO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_LEGAJO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EE_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_APELLIDO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_APELLIDO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_FECHANACIMIENTO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHANACIMIENTO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_FECHA_ALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_ALTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_FECHA_BAJA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_BAJA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_HAS_IMAGE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "E_HAS_IMAGE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "E_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_LEGAJO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_LEGAJO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_LEGAJO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_LEGAJO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EE_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EE_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_APELLIDO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_APELLIDO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_APELLIDO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_APELLIDO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_FECHANACIMIENTO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHANACIMIENTO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_FECHANACIMIENTO", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHANACIMIENTO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_FECHA_ALTA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_ALTA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_FECHA_ALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_ALTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_E_FECHA_BAJA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_BAJA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_FECHA_BAJA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "E_FECHA_BAJA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_HAS_IMAGE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "E_HAS_IMAGE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "E_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT E_CODIGO, E_LEGAJO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHANA" +
+                "CIMIENTO, E_FECHA_ALTA, E_FECHA_BAJA, E_HAS_IMAGE FROM dbo.EMPLEADOS";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsEmpleado.EMPLEADOSDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsEmpleado.EMPLEADOSDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsEmpleado.EMPLEADOSDataTable dataTable = new dsEmpleado.EMPLEADOSDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsEmpleado.EMPLEADOSDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsEmpleado dataSet) {
+            return this.Adapter.Update(dataSet, "EMPLEADOS");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_E_CODIGO, string Original_E_LEGAJO, decimal Original_EE_CODIGO, global::System.Nullable<decimal> Original_SEC_CODIGO, string Original_E_APELLIDO, string Original_E_NOMBRE, global::System.Nullable<global::System.DateTime> Original_E_FECHANACIMIENTO, global::System.Nullable<global::System.DateTime> Original_E_FECHA_ALTA, global::System.Nullable<global::System.DateTime> Original_E_FECHA_BAJA, decimal Original_E_HAS_IMAGE) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_E_CODIGO));
+            if ((Original_E_LEGAJO == null)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_E_LEGAJO));
+            }
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((decimal)(Original_EE_CODIGO));
+            if ((Original_SEC_CODIGO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((decimal)(Original_SEC_CODIGO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((Original_E_APELLIDO == null)) {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((string)(Original_E_APELLIDO));
+            }
+            if ((Original_E_NOMBRE == null)) {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((string)(Original_E_NOMBRE));
+            }
+            if ((Original_E_FECHANACIMIENTO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((System.DateTime)(Original_E_FECHANACIMIENTO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((Original_E_FECHA_ALTA.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((System.DateTime)(Original_E_FECHA_ALTA.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            if ((Original_E_FECHA_BAJA.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((System.DateTime)(Original_E_FECHA_BAJA.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.DeleteCommand.Parameters[16].Value = ((decimal)(Original_E_HAS_IMAGE));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string E_LEGAJO, decimal EE_CODIGO, global::System.Nullable<decimal> SEC_CODIGO, string E_APELLIDO, string E_NOMBRE, global::System.Nullable<global::System.DateTime> E_FECHANACIMIENTO, global::System.Nullable<global::System.DateTime> E_FECHA_ALTA, global::System.Nullable<global::System.DateTime> E_FECHA_BAJA, decimal E_HAS_IMAGE) {
+            if ((E_LEGAJO == null)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(E_LEGAJO));
+            }
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(EE_CODIGO));
+            if ((SEC_CODIGO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(SEC_CODIGO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((E_APELLIDO == null)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(E_APELLIDO));
+            }
+            if ((E_NOMBRE == null)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(E_NOMBRE));
+            }
+            if ((E_FECHANACIMIENTO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((System.DateTime)(E_FECHANACIMIENTO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((E_FECHA_ALTA.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((System.DateTime)(E_FECHA_ALTA.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((E_FECHA_BAJA.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((System.DateTime)(E_FECHA_BAJA.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.InsertCommand.Parameters[8].Value = ((decimal)(E_HAS_IMAGE));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string E_LEGAJO, 
+                    decimal EE_CODIGO, 
+                    global::System.Nullable<decimal> SEC_CODIGO, 
+                    string E_APELLIDO, 
+                    string E_NOMBRE, 
+                    global::System.Nullable<global::System.DateTime> E_FECHANACIMIENTO, 
+                    global::System.Nullable<global::System.DateTime> E_FECHA_ALTA, 
+                    global::System.Nullable<global::System.DateTime> E_FECHA_BAJA, 
+                    decimal E_HAS_IMAGE, 
+                    decimal Original_E_CODIGO, 
+                    string Original_E_LEGAJO, 
+                    decimal Original_EE_CODIGO, 
+                    global::System.Nullable<decimal> Original_SEC_CODIGO, 
+                    string Original_E_APELLIDO, 
+                    string Original_E_NOMBRE, 
+                    global::System.Nullable<global::System.DateTime> Original_E_FECHANACIMIENTO, 
+                    global::System.Nullable<global::System.DateTime> Original_E_FECHA_ALTA, 
+                    global::System.Nullable<global::System.DateTime> Original_E_FECHA_BAJA, 
+                    decimal Original_E_HAS_IMAGE, 
+                    decimal E_CODIGO) {
+            if ((E_LEGAJO == null)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(E_LEGAJO));
+            }
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(EE_CODIGO));
+            if ((SEC_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(SEC_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((E_APELLIDO == null)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(E_APELLIDO));
+            }
+            if ((E_NOMBRE == null)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(E_NOMBRE));
+            }
+            if ((E_FECHANACIMIENTO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(E_FECHANACIMIENTO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((E_FECHA_ALTA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(E_FECHA_ALTA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((E_FECHA_BAJA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(E_FECHA_BAJA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(E_HAS_IMAGE));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(Original_E_CODIGO));
+            if ((Original_E_LEGAJO == null)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_E_LEGAJO));
+            }
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(Original_EE_CODIGO));
+            if ((Original_SEC_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((decimal)(Original_SEC_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            if ((Original_E_APELLIDO == null)) {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_E_APELLIDO));
+            }
+            if ((Original_E_NOMBRE == null)) {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_E_NOMBRE));
+            }
+            if ((Original_E_FECHANACIMIENTO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((System.DateTime)(Original_E_FECHANACIMIENTO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
+            if ((Original_E_FECHA_ALTA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((System.DateTime)(Original_E_FECHA_ALTA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
+            }
+            if ((Original_E_FECHA_BAJA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((System.DateTime)(Original_E_FECHA_BAJA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[25].Value = ((decimal)(Original_E_HAS_IMAGE));
+            this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(E_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string E_LEGAJO, 
+                    decimal EE_CODIGO, 
+                    global::System.Nullable<decimal> SEC_CODIGO, 
+                    string E_APELLIDO, 
+                    string E_NOMBRE, 
+                    global::System.Nullable<global::System.DateTime> E_FECHANACIMIENTO, 
+                    global::System.Nullable<global::System.DateTime> E_FECHA_ALTA, 
+                    global::System.Nullable<global::System.DateTime> E_FECHA_BAJA, 
+                    decimal E_HAS_IMAGE, 
+                    decimal Original_E_CODIGO, 
+                    string Original_E_LEGAJO, 
+                    decimal Original_EE_CODIGO, 
+                    global::System.Nullable<decimal> Original_SEC_CODIGO, 
+                    string Original_E_APELLIDO, 
+                    string Original_E_NOMBRE, 
+                    global::System.Nullable<global::System.DateTime> Original_E_FECHANACIMIENTO, 
+                    global::System.Nullable<global::System.DateTime> Original_E_FECHA_ALTA, 
+                    global::System.Nullable<global::System.DateTime> Original_E_FECHA_BAJA, 
+                    decimal Original_E_HAS_IMAGE) {
+            return this.Update(E_LEGAJO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHANACIMIENTO, E_FECHA_ALTA, E_FECHA_BAJA, E_HAS_IMAGE, Original_E_CODIGO, Original_E_LEGAJO, Original_EE_CODIGO, Original_SEC_CODIGO, Original_E_APELLIDO, Original_E_NOMBRE, Original_E_FECHANACIMIENTO, Original_E_FECHA_ALTA, Original_E_FECHA_BAJA, Original_E_HAS_IMAGE, Original_E_CODIGO);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -4483,11 +4520,11 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
         
         private CAPACIDADESXEMPLEADOTableAdapter _cAPACIDADESXEMPLEADOTableAdapter;
         
-        private EMPLEADOSTableAdapter _eMPLEADOSTableAdapter;
-        
         private SECTORESTableAdapter _sECTORESTableAdapter;
         
         private ESTADO_EMPLEADOSTableAdapter _eSTADO_EMPLEADOSTableAdapter;
+        
+        private EMPLEADOSTableAdapter _eMPLEADOSTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -4533,19 +4570,6 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
             "", "System.Drawing.Design.UITypeEditor")]
-        public EMPLEADOSTableAdapter EMPLEADOSTableAdapter {
-            get {
-                return this._eMPLEADOSTableAdapter;
-            }
-            set {
-                this._eMPLEADOSTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
         public SECTORESTableAdapter SECTORESTableAdapter {
             get {
                 return this._sECTORESTableAdapter;
@@ -4565,6 +4589,19 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
             }
             set {
                 this._eSTADO_EMPLEADOSTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public EMPLEADOSTableAdapter EMPLEADOSTableAdapter {
+            get {
+                return this._eMPLEADOSTableAdapter;
+            }
+            set {
+                this._eMPLEADOSTableAdapter = value;
             }
         }
         
@@ -4593,10 +4630,6 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
                             && (this._cAPACIDADESXEMPLEADOTableAdapter.Connection != null))) {
                     return this._cAPACIDADESXEMPLEADOTableAdapter.Connection;
                 }
-                if (((this._eMPLEADOSTableAdapter != null) 
-                            && (this._eMPLEADOSTableAdapter.Connection != null))) {
-                    return this._eMPLEADOSTableAdapter.Connection;
-                }
                 if (((this._sECTORESTableAdapter != null) 
                             && (this._sECTORESTableAdapter.Connection != null))) {
                     return this._sECTORESTableAdapter.Connection;
@@ -4604,6 +4637,10 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
                 if (((this._eSTADO_EMPLEADOSTableAdapter != null) 
                             && (this._eSTADO_EMPLEADOSTableAdapter.Connection != null))) {
                     return this._eSTADO_EMPLEADOSTableAdapter.Connection;
+                }
+                if (((this._eMPLEADOSTableAdapter != null) 
+                            && (this._eMPLEADOSTableAdapter.Connection != null))) {
+                    return this._eMPLEADOSTableAdapter.Connection;
                 }
                 return null;
             }
@@ -4623,13 +4660,13 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
                 if ((this._cAPACIDADESXEMPLEADOTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._eMPLEADOSTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._sECTORESTableAdapter != null)) {
                     count = (count + 1);
                 }
                 if ((this._eSTADO_EMPLEADOSTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._eMPLEADOSTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -4642,15 +4679,6 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateUpdatedRows(dsEmpleado dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._sECTORESTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SECTORES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._sECTORESTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._eSTADO_EMPLEADOSTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.ESTADO_EMPLEADOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -4660,12 +4688,12 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._cAPACIDAD_EMPLEADOSTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.CAPACIDAD_EMPLEADOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._sECTORESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SECTORES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._cAPACIDAD_EMPLEADOSTableAdapter.Update(updatedRows));
+                    result = (result + this._sECTORESTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -4675,6 +4703,15 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._eMPLEADOSTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._cAPACIDAD_EMPLEADOSTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.CAPACIDAD_EMPLEADOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._cAPACIDAD_EMPLEADOSTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -4696,14 +4733,6 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateInsertedRows(dsEmpleado dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._sECTORESTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SECTORES.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._sECTORESTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._eSTADO_EMPLEADOSTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.ESTADO_EMPLEADOS.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -4712,11 +4741,11 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._cAPACIDAD_EMPLEADOSTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.CAPACIDAD_EMPLEADOS.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._sECTORESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SECTORES.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._cAPACIDAD_EMPLEADOSTableAdapter.Update(addedRows));
+                    result = (result + this._sECTORESTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -4725,6 +4754,14 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._eMPLEADOSTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._cAPACIDAD_EMPLEADOSTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.CAPACIDAD_EMPLEADOS.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._cAPACIDAD_EMPLEADOSTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -4753,14 +4790,6 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._eMPLEADOSTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.EMPLEADOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._eMPLEADOSTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._cAPACIDAD_EMPLEADOSTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.CAPACIDAD_EMPLEADOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -4769,11 +4798,11 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._eSTADO_EMPLEADOSTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.ESTADO_EMPLEADOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._eMPLEADOSTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.EMPLEADOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._eSTADO_EMPLEADOSTableAdapter.Update(deletedRows));
+                    result = (result + this._eMPLEADOSTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -4782,6 +4811,14 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._sECTORESTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._eSTADO_EMPLEADOSTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.ESTADO_EMPLEADOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._eSTADO_EMPLEADOSTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -4832,11 +4869,6 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._eMPLEADOSTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._eMPLEADOSTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             if (((this._sECTORESTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._sECTORESTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
@@ -4844,6 +4876,11 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
             }
             if (((this._eSTADO_EMPLEADOSTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._eSTADO_EMPLEADOSTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._eMPLEADOSTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._eMPLEADOSTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -4897,15 +4934,6 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
                         adaptersWithAcceptChangesDuringUpdate.Add(this._cAPACIDADESXEMPLEADOTableAdapter.Adapter);
                     }
                 }
-                if ((this._eMPLEADOSTableAdapter != null)) {
-                    revertConnections.Add(this._eMPLEADOSTableAdapter, this._eMPLEADOSTableAdapter.Connection);
-                    this._eMPLEADOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._eMPLEADOSTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._eMPLEADOSTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._eMPLEADOSTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._eMPLEADOSTableAdapter.Adapter);
-                    }
-                }
                 if ((this._sECTORESTableAdapter != null)) {
                     revertConnections.Add(this._sECTORESTableAdapter, this._sECTORESTableAdapter.Connection);
                     this._sECTORESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -4922,6 +4950,15 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
                     if (this._eSTADO_EMPLEADOSTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._eSTADO_EMPLEADOSTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._eSTADO_EMPLEADOSTableAdapter.Adapter);
+                    }
+                }
+                if ((this._eMPLEADOSTableAdapter != null)) {
+                    revertConnections.Add(this._eMPLEADOSTableAdapter, this._eMPLEADOSTableAdapter.Connection);
+                    this._eMPLEADOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._eMPLEADOSTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._eMPLEADOSTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._eMPLEADOSTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._eMPLEADOSTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -4990,10 +5027,6 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
                     this._cAPACIDADESXEMPLEADOTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cAPACIDADESXEMPLEADOTableAdapter]));
                     this._cAPACIDADESXEMPLEADOTableAdapter.Transaction = null;
                 }
-                if ((this._eMPLEADOSTableAdapter != null)) {
-                    this._eMPLEADOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._eMPLEADOSTableAdapter]));
-                    this._eMPLEADOSTableAdapter.Transaction = null;
-                }
                 if ((this._sECTORESTableAdapter != null)) {
                     this._sECTORESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._sECTORESTableAdapter]));
                     this._sECTORESTableAdapter.Transaction = null;
@@ -5001,6 +5034,10 @@ SELECT EE_CODIGO, EE_NOMBRE, EE_DESCRIPCION FROM ESTADO_EMPLEADOS WHERE (EE_CODI
                 if ((this._eSTADO_EMPLEADOSTableAdapter != null)) {
                     this._eSTADO_EMPLEADOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._eSTADO_EMPLEADOSTableAdapter]));
                     this._eSTADO_EMPLEADOSTableAdapter.Transaction = null;
+                }
+                if ((this._eMPLEADOSTableAdapter != null)) {
+                    this._eMPLEADOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._eMPLEADOSTableAdapter]));
+                    this._eMPLEADOSTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
