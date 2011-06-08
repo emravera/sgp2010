@@ -10,7 +10,7 @@ namespace GyCAP.BLL
     public class ImageRepository
     {
         public enum ElementType { Cocina, Empleado, Parte };
-        private static readonly string directorioImagenes = SistemaBLL.WorkingPath + "BLL\\Img\\";
+        private static readonly string directorioImagenes = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory.Replace("Principal\\bin\\Debug", ""), "BLL\\Imagenes");
         public enum ImageStatus { NoImage, New, Changed, Deleted, Same };
         public const int WithOutImage = 0;
         public const int WithImage = 1;
@@ -18,40 +18,43 @@ namespace GyCAP.BLL
         public static void SaveImage(int codigoElemento, ElementType elementType, Image imagen)
         {
             if (imagen == null) { imagen = BLL.Properties.Resources.sinimagen; }
-            string nombreImagen = string.Empty;
-            
-            switch (elementType)
+            string nombreImagen = GetFileName(codigoElemento, elementType);
+
+            if (!Directory.Exists(directorioImagenes)) { Directory.CreateDirectory(directorioImagenes); }
+            if (!Directory.Exists(Path.GetDirectoryName(nombreImagen))) { Directory.CreateDirectory(Path.GetDirectoryName(nombreImagen)); }            
+
+            using (FileStream file = new FileStream(nombreImagen, FileMode.Create))
             {
-                case ElementType.Cocina:
-                    if (!Directory.Exists(directorioImagenes + "Coc")) { Directory.CreateDirectory("Coc"); }
-                    nombreImagen = "Coc" + codigoElemento + ".jpg";
-                    break;
-                case ElementType.Empleado:
-                    if (!Directory.Exists(directorioImagenes + "Emp")) { Directory.CreateDirectory("Emp"); }
-                    nombreImagen = "Emp" + codigoElemento + ".jpg";
-                    break;
-                case ElementType.Parte:
-                    if (!Directory.Exists(directorioImagenes + "Part")) { Directory.CreateDirectory("Part"); }
-                    nombreImagen = "Part" + codigoElemento + ".jpg";
-                    break;
-                default:
-                    break;
-            }
-            
-            imagen.Save(directorioImagenes + nombreImagen, System.Drawing.Imaging.ImageFormat.Jpeg);
+                imagen.Save(file, System.Drawing.Imaging.ImageFormat.Jpeg);
+            }            
         }
 
-        public static void GetImage(int codigoElemento, ElementType elementType)
+        public static Image GetImage(int codigoElemento, ElementType elementType)
         {
-
+            try
+            {
+                string archivo = GetFileName(codigoElemento, elementType);                              
+                
+                return Image.FromFile(archivo);
+            }
+            catch (System.IO.FileNotFoundException) { return BLL.Properties.Resources.sinimagen; }
         }
 
         public static void DeleteImage(int codigoElemento, ElementType elementType)
         {
         }
 
-        //private static string GetDirectory(int codigoElemento, ElementType elementType)
-        //{
-        //}
+        private static string GetFileName(int codigoElemento, ElementType elementType)
+        {
+            StringBuilder directorio = new StringBuilder(directorioImagenes);
+            directorio.Append("\\");
+            directorio.Append(elementType.ToString());
+            directorio.Append("\\");
+            directorio.Append(elementType.ToString());
+            directorio.Append(codigoElemento);
+            directorio.Append(".jpg");
+            
+            return directorio.ToString();            
+        }
     }
 }

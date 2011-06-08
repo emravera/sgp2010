@@ -660,7 +660,7 @@
             // 
             // ofdImagen
             // 
-            this.ofdImagen.InitialDirectory = "d:\\";
+            this.ofdImagen.InitialDirectory = "e:\\";
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk);
             // 

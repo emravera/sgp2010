@@ -8,12 +8,7 @@ using System.Drawing;
 namespace GyCAP.BLL
 {
     public class CocinaBLL
-    {
-        /// <summary>
-        /// Setea el directorio que contiene las imágenes de las cocinas en base al directorio en que
-        /// se está ejecutando la aplicación.
-        /// </summary>
-        private static readonly string directorioImagenes = SistemaBLL.WorkingPath + "BLL\\Img\\CocImg\\";
+    {        
         public static readonly int CocinaActiva = 1;
         public static readonly int CocinaInactiva = 0;
 
@@ -77,16 +72,12 @@ namespace GyCAP.BLL
         /// <returns>El objeto image con la imagen de la cocina si la tiene, caso contrario una imagen por defecto.</returns>
         public static Image ObtenerImagen(int codigoCocina)
         {
-            try
-            {
-                Image imagen = Image.FromFile(directorioImagenes + "Coc" + codigoCocina + ".jpg");
-                return imagen;
-            }
-            catch (System.IO.FileNotFoundException) { return BLL.Properties.Resources.sinimagen; }
+            return ImageRepository.GetImage(codigoCocina, ImageRepository.ElementType.Cocina);
         }
 
         public static void EliminarImagen(int codigoCocina)
         {
+            ImageRepository.DeleteImage(codigoCocina, ImageRepository.ElementType.Cocina);
         }
 
         public static int ObtenerCodigoEstructuraActiva(int codigoCocina)

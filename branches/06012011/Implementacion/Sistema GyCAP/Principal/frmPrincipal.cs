@@ -16,9 +16,7 @@ namespace Principal
         public frmPrincipal()
         {
             InitializeComponent();
-            //Setea el directorio local de trabajo del sistema.
-            //Usado para las imagenes, hay que hacerlo en el servidor - gonzalo
-            GyCAP.BLL.SistemaBLL.WorkingPath = Application.StartupPath;
+            
             //GyCAP.UI.Principal.frmFondoPrincipal fondo = new GyCAP.UI.Principal.frmFondoPrincipal();
             //fondo.MdiParent = this;
             //fondo.WindowState = FormWindowState.Maximized;

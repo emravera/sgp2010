@@ -183,7 +183,8 @@ namespace GyCAP.UI.EstructuraProducto
             cbColor.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COL_CODIGO));
             cbTerminacion.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).TE_CODIGO));
             cbEstado.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COC_ACTIVO));
-            //cargar imagen ?? - gonzalo
+            //cargar imagen solo al consultar con WCF - gonzalo
+            pbImagen.Image = BLL.CocinaBLL.ObtenerImagen(codigoCocina);
         }
 
         #endregion
@@ -207,16 +208,16 @@ namespace GyCAP.UI.EstructuraProducto
                 cocina.TerminacionHorno = new GyCAP.Entidades.Terminacion();
                 cocina.TerminacionHorno.Codigo = cbTerminacion.GetSelectedValueInt();
                 cocina.Activo = cbEstado.GetSelectedValueInt();
-                cocina.HasImage = (pbImagen.Image.Equals(EstructuraProducto.Properties.Resources.sinimagen)) ? 0 : 1;
-                //gonzalo - determinar si tiene imagen que no sea la sinimagen
-                //Revisamos que está haciendo
+                cocina.HasImage = BLL.ImageRepository.WithImage;
+                //gonzalo - determinar si tiene imagen que no sea la sinimagen - gonzalo
+
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
                     try
                     {
                         //Primero lo creamos en la db
                         cocina.CodigoCocina = BLL.CocinaBLL.Insertar(cocina);
-                        //Ahora lo agregamos al dataset
+                        //Ahora lo agregamos al dataset                        
                         Data.dsCocina.COCINASRow rowCocina = dsCocina.COCINAS.NewCOCINASRow();
                         rowCocina.BeginEdit();
                         rowCocina.COC_CODIGO = cocina.CodigoCocina;
@@ -229,12 +230,12 @@ namespace GyCAP.UI.EstructuraProducto
                         rowCocina.COC_ACTIVO = cocina.Activo;
                         rowCocina.COC_HAS_IMAGE = cocina.HasImage;
                         rowCocina.EndEdit();
+
+                        BLL.CocinaBLL.GuardarImagen(cocina.CodigoCocina, pbImagen.Image);
+
                         dsCocina.COCINAS.AddCOCINASRow(rowCocina);
                         dsCocina.COCINAS.AcceptChanges();
-                        //Guardamos la imagen
-                        if (cocina.HasImage == 1) { BLL.CocinaBLL.GuardarImagen(cocina.CodigoCocina, pbImagen.Image); }
-                        //Y por último seteamos el estado de la interfaz
-
+                        
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
                         if (estadoInterface == estadoUI.nuevoExterno)
                         {
@@ -310,7 +311,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void ofdImagen_FileOk(object sender, CancelEventArgs e)
         {
-            pbImagen.ImageLocation = ofdImagen.FileName;
+            pbImagen.Image = Image.FromFile(ofdImagen.FileName);
         }
 
         #endregion
@@ -515,7 +516,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnZoomIn_Click(object sender, EventArgs e)
         {
-            Sistema.frmImagenZoom.Instancia.SetImagen(pbImagen.Image, "Imagen de la Pieza");
+            Sistema.frmImagenZoom.Instancia.SetImagen(pbImagen.Image, "Imagen de la Cocina");
             animador.SetFormulario(Sistema.frmImagenZoom.Instancia, this, Sistema.ControlesUsuarios.AnimadorFormulario.animacionDerecha, 300, true);
             animador.MostrarFormulario();
         }
@@ -529,7 +530,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             if (animador.EsVisible())
             {
-                (animador.GetForm() as Sistema.frmImagenZoom).SetImagen(pbImagen.Image, "Imagen de la Pieza");
+                (animador.GetForm() as Sistema.frmImagenZoom).SetImagen(pbImagen.Image, "Imagen de la Cocina");
             }
         }
 

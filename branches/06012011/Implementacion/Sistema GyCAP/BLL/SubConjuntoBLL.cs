@@ -12,7 +12,7 @@ namespace GyCAP.BLL
         /// Setea el directorio que contiene las imágenes de los subconjuntos en base al directorio en que
         /// se está ejecutando la aplicación.
         /// </summary>
-        private static readonly string directorioImagenes = SistemaBLL.WorkingPath + "BLL\\Img\\SCImg\\";
+        private static readonly string directorioImagenes = "BLL\\Img\\SCImg\\";
         public static readonly int estadoActivo = 1;
         public static readonly int estadoInactivo = 0;
 
