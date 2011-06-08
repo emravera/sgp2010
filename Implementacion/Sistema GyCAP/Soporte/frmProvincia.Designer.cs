@@ -165,6 +165,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.dgvLista);
             this.groupBox2.Location = new System.Drawing.Point(172, 68);
             this.groupBox2.Name = "groupBox2";
@@ -193,6 +196,8 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbDatos.Controls.Add(this.btnCancelar);
             this.gbDatos.Controls.Add(this.btnGuardar);
             this.gbDatos.Controls.Add(this.txtNombre);
@@ -206,6 +211,7 @@
             // 
             // btnCancelar
             // 
+            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnCancelar.Location = new System.Drawing.Point(339, 19);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(64, 25);
@@ -216,6 +222,7 @@
             // 
             // btnGuardar
             // 
+            this.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGuardar.Location = new System.Drawing.Point(269, 19);
             this.btnGuardar.Name = "btnGuardar";

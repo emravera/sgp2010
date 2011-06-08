@@ -190,6 +190,11 @@ namespace GyCAP.UI.Soporte
             }
         }
 
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
         public void SetEstadoInicial(int estado)
         {
             if (estado == estadoInicialNuevo) { SetInterface(estadoUI.nuevoExterno); }

@@ -184,6 +184,12 @@ namespace GyCAP.UI.Soporte
                 _frmABM = value;
             }
         }
+
+        //Seteo los métodos para formatear las listas
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
                
         private void dgvLista_DoubleClick(object sender, EventArgs e)
         {

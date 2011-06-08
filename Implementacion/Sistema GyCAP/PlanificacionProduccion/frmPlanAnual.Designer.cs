@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.numDiciembre = new System.Windows.Forms.NumericUpDown();
             this.tcPlanAnual = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
@@ -204,10 +204,13 @@
             // 
             // gbGrillaDetalle
             // 
+            this.gbGrillaDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbGrillaDetalle.Controls.Add(this.dgvDetalle);
             this.gbGrillaDetalle.Location = new System.Drawing.Point(416, 75);
             this.gbGrillaDetalle.Name = "gbGrillaDetalle";
-            this.gbGrillaDetalle.Size = new System.Drawing.Size(308, 320);
+            this.gbGrillaDetalle.Size = new System.Drawing.Size(308, 390);
             this.gbGrillaDetalle.TabIndex = 2;
             this.gbGrillaDetalle.TabStop = false;
             this.gbGrillaDetalle.Text = "Listado Detalle Planes Anual";
@@ -218,22 +221,25 @@
             this.dgvDetalle.AllowUserToDeleteRows = false;
             this.dgvDetalle.AllowUserToResizeColumns = false;
             this.dgvDetalle.AllowUserToResizeRows = false;
+            this.dgvDetalle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDetalle.Enabled = false;
-            this.dgvDetalle.Location = new System.Drawing.Point(11, 22);
+            this.dgvDetalle.Location = new System.Drawing.Point(3, 17);
             this.dgvDetalle.MultiSelect = false;
             this.dgvDetalle.Name = "dgvDetalle";
             this.dgvDetalle.ReadOnly = true;
             this.dgvDetalle.RowHeadersVisible = false;
             this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetalle.Size = new System.Drawing.Size(291, 290);
+            this.dgvDetalle.Size = new System.Drawing.Size(302, 370);
             this.dgvDetalle.TabIndex = 1;
             // 
             // gbGrillaDemanda
             // 
+            this.gbGrillaDemanda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.gbGrillaDemanda.Controls.Add(this.dgvLista);
             this.gbGrillaDemanda.Location = new System.Drawing.Point(6, 75);
             this.gbGrillaDemanda.Name = "gbGrillaDemanda";
-            this.gbGrillaDemanda.Size = new System.Drawing.Size(404, 320);
+            this.gbGrillaDemanda.Size = new System.Drawing.Size(404, 390);
             this.gbGrillaDemanda.TabIndex = 1;
             this.gbGrillaDemanda.TabStop = false;
             this.gbGrillaDemanda.Text = "Listado de Planes Anuales";
@@ -243,23 +249,26 @@
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
             this.dgvLista.AllowUserToResizeRows = false;
-            this.dgvLista.Location = new System.Drawing.Point(10, 19);
+            this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvLista.Location = new System.Drawing.Point(3, 17);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(376, 290);
+            this.dgvLista.Size = new System.Drawing.Size(398, 370);
             this.dgvLista.TabIndex = 1;
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             this.dgvLista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellClick);
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.txtAnioBuscar);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(724, 66);
@@ -323,13 +332,13 @@
             // 
             // chartDemanda
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartDemanda.ChartAreas.Add(chartArea2);
+            chartArea4.Name = "ChartArea1";
+            this.chartDemanda.ChartAreas.Add(chartArea4);
             this.chartDemanda.Location = new System.Drawing.Point(17, 17);
             this.chartDemanda.Name = "chartDemanda";
-            series2.ChartArea = "ChartArea1";
-            series2.Name = "Series1";
-            this.chartDemanda.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.Name = "Series1";
+            this.chartDemanda.Series.Add(series4);
             this.chartDemanda.Size = new System.Drawing.Size(375, 207);
             this.chartDemanda.TabIndex = 0;
             this.chartDemanda.Text = "chart1";
