@@ -16,7 +16,7 @@ namespace GyCAP.BLL
         /// Setea el directorio que contiene las imágenes de los conjuntos en base al directorio en que
         /// se está ejecutando la aplicación.
         /// </summary>
-        private static readonly string directorioImagenes = SistemaBLL.WorkingPath + "BLL\\Img\\CImg\\";
+        private static readonly string directorioImagenes = "BLL\\Img\\CImg\\";
         
         public static void Insertar(Data.dsEstructura dsEstructura)
         {

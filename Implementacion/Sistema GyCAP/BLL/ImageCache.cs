@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GyCAP.BLL
 {
-    public class ImageCaching
+    public class ImageCache
     {
 
     }
