@@ -202,14 +202,7 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvLista.Columns.Add("E_APELLIDO", "Apellido");
             dgvLista.Columns.Add("E_NOMBRE", "Nombre");
             dgvLista.Columns.Add("SEC_CODIGO", "Sector");
-            dgvLista.Columns.Add("EE_CODIGO", "Estado");
-
-            dgvLista.Columns["E_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["E_LEGAJO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["E_APELLIDO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["E_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["SEC_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["EE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLista.Columns.Add("EE_CODIGO", "Estado");            
 
             dgvLista.Columns["E_CODIGO"].DataPropertyName = "E_CODIGO";
             dgvLista.Columns["E_LEGAJO"].DataPropertyName = "E_LEGAJO";
@@ -225,8 +218,6 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvCapacidades.AutoGenerateColumns = false;
             dgvCapacidades.Columns.Add("CEMP_CODIGO", "Capacidades del empleado");
             dgvCapacidades.Columns.Add("CEMP_DESCRIPCION", "Descripción");
-            dgvCapacidades.Columns["CEMP_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvCapacidades.Columns["CEMP_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCapacidades.Columns["CEMP_DESCRIPCION"].DataPropertyName = "CEMP_CODIGO";
             dgvCapacidades.Columns["CEMP_CODIGO"].DataPropertyName = "CEMP_CODIGO";
             
@@ -235,9 +226,7 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvListaCapacidadesAgregar.Columns.Add("CEMP_NOMBRE", "Nombre");
             dgvListaCapacidadesAgregar.Columns.Add("CEMP_DESCRIPCION", "Descripción");
             dgvListaCapacidadesAgregar.Columns["CEMP_NOMBRE"].DataPropertyName = "CEMP_NOMBRE";
-            dgvListaCapacidadesAgregar.Columns["CEMP_DESCRIPCION"].DataPropertyName = "CEMP_DESCRIPCION";
-            dgvListaCapacidadesAgregar.Columns["CEMP_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvListaCapacidadesAgregar.Columns["CEMP_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;          
+            dgvListaCapacidadesAgregar.Columns["CEMP_DESCRIPCION"].DataPropertyName = "CEMP_DESCRIPCION";        
 
             try
             {
@@ -693,6 +682,11 @@ namespace GyCAP.UI.RecursosFabricacion
             slideControl.AddSlide(slideAgregar);
             slideControl.AddSlide(slideDatos);
             slideControl.Selected = slideDatos;
+        }
+
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
         }
 
         #endregion
