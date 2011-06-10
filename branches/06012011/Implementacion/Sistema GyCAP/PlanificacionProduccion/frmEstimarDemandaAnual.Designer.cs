@@ -298,7 +298,7 @@
             // 
             this.btnBuscar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.lupa_25;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(241, 26);
+            this.btnBuscar.Location = new System.Drawing.Point(250, 25);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
             this.btnBuscar.TabIndex = 5;
@@ -389,7 +389,7 @@
             // lblTotalSistema
             // 
             this.lblTotalSistema.AutoSize = true;
-            this.lblTotalSistema.Location = new System.Drawing.Point(82, 16);
+            this.lblTotalSistema.Location = new System.Drawing.Point(79, 21);
             this.lblTotalSistema.Name = "lblTotalSistema";
             this.lblTotalSistema.Size = new System.Drawing.Size(0, 13);
             this.lblTotalSistema.TabIndex = 24;

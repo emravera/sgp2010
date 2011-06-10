@@ -12,11 +12,7 @@ namespace GyCAP.BLL
         public static void ObtenerTodos(int anio, Data.dsPlanAnual ds)
         {
             DAL.PlanAnualDAL.ObtenerTodos(anio, ds);
-        }
-        public static void ObtenerTodos(Data.dsPlanAnual ds)
-        {
-            DAL.PlanAnualDAL.ObtenerTodos(ds);
-        }
+        }        
         public static void ObtenerTodos(DataTable dtPlanAnual)
         {
             DAL.PlanAnualDAL.ObtenerTodos(dtPlanAnual);
@@ -38,10 +34,12 @@ namespace GyCAP.BLL
         {
             DAL.PlanAnualDAL.Actualizar(planAnual, detalle);
         }
+
         public static bool ValidarModificacion(Entidades.PlanAnual planAnual)
         {
             return DAL.PlanAnualDAL.Validar(planAnual);
         }
+
         //Eliminacion
         public static void Eliminar(int codigo)
         {
@@ -51,7 +49,6 @@ namespace GyCAP.BLL
         public static bool PuedeEliminarse(int codigo)
         {
             return DAL.PlanAnualDAL.PuedeEliminarse(codigo);
-
         }     
 
 

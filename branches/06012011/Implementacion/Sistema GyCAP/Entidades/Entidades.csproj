@@ -97,6 +97,7 @@
     <Compile Include="Excepciones\ElementoInexistenteException.cs" />
     <Compile Include="Excepciones\ElementoExistenteException.cs" />
     <Compile Include="Excepciones\ErrorInesperadoException.cs" />
+    <Compile Include="Excepciones\ErrorValidacionException.cs" />
     <Compile Include="Excepciones\ImageNotFoundException.cs" />
     <Compile Include="Excepciones\OrdenTrabajoException.cs" />
     <Compile Include="Excepciones\ValorNoNegativoException.cs" />

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.numDiciembre = new System.Windows.Forms.NumericUpDown();
             this.tcPlanAnual = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
@@ -50,7 +50,6 @@
             this.gbModificacion = new System.Windows.Forms.GroupBox();
             this.lblTotalSistema = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.btnModificarPlanificacion = new System.Windows.Forms.Button();
             this.gbEstimacionMes = new System.Windows.Forms.GroupBox();
             this.txtDemandaNoCubierta = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
@@ -81,7 +80,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.gbDatosPrincipales = new System.Windows.Forms.GroupBox();
             this.gbPuntoEquilibrio = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnPuntoEquilibrio = new System.Windows.Forms.Button();
             this.label30 = new System.Windows.Forms.Label();
             this.numPuntoEquilibrio = new System.Windows.Forms.NumericUpDown();
             this.label28 = new System.Windows.Forms.Label();
@@ -160,7 +159,7 @@
             // 
             // numDiciembre
             // 
-            this.numDiciembre.Location = new System.Drawing.Point(208, 159);
+            this.numDiciembre.Location = new System.Drawing.Point(208, 158);
             this.numDiciembre.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -186,7 +185,7 @@
             this.tcPlanAnual.Name = "tcPlanAnual";
             this.tcPlanAnual.Padding = new System.Drawing.Point(0, 0);
             this.tcPlanAnual.SelectedIndex = 0;
-            this.tcPlanAnual.Size = new System.Drawing.Size(738, 480);
+            this.tcPlanAnual.Size = new System.Drawing.Size(770, 476);
             this.tcPlanAnual.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcPlanAnual.TabIndex = 8;
             // 
@@ -198,7 +197,7 @@
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(730, 471);
+            this.tpBuscar.Size = new System.Drawing.Size(762, 467);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
@@ -208,12 +207,12 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.gbGrillaDetalle.Controls.Add(this.dgvDetalle);
-            this.gbGrillaDetalle.Location = new System.Drawing.Point(416, 75);
+            this.gbGrillaDetalle.Location = new System.Drawing.Point(393, 62);
             this.gbGrillaDetalle.Name = "gbGrillaDetalle";
-            this.gbGrillaDetalle.Size = new System.Drawing.Size(308, 390);
+            this.gbGrillaDetalle.Size = new System.Drawing.Size(363, 405);
             this.gbGrillaDetalle.TabIndex = 2;
             this.gbGrillaDetalle.TabStop = false;
-            this.gbGrillaDetalle.Text = "Listado Detalle Planes Anual";
+            this.gbGrillaDetalle.Text = "Detalle Plan Anual";
             // 
             // dgvDetalle
             // 
@@ -229,17 +228,18 @@
             this.dgvDetalle.ReadOnly = true;
             this.dgvDetalle.RowHeadersVisible = false;
             this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetalle.Size = new System.Drawing.Size(302, 370);
+            this.dgvDetalle.Size = new System.Drawing.Size(357, 385);
             this.dgvDetalle.TabIndex = 1;
+            this.dgvDetalle.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDetalle_DataBindingComplete);
             // 
             // gbGrillaDemanda
             // 
             this.gbGrillaDemanda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             this.gbGrillaDemanda.Controls.Add(this.dgvLista);
-            this.gbGrillaDemanda.Location = new System.Drawing.Point(6, 75);
+            this.gbGrillaDemanda.Location = new System.Drawing.Point(6, 62);
             this.gbGrillaDemanda.Name = "gbGrillaDemanda";
-            this.gbGrillaDemanda.Size = new System.Drawing.Size(404, 390);
+            this.gbGrillaDemanda.Size = new System.Drawing.Size(381, 405);
             this.gbGrillaDemanda.TabIndex = 1;
             this.gbGrillaDemanda.TabStop = false;
             this.gbGrillaDemanda.Text = "Listado de Planes Anuales";
@@ -256,22 +256,22 @@
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(398, 370);
+            this.dgvLista.Size = new System.Drawing.Size(375, 385);
             this.dgvLista.TabIndex = 1;
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             this.dgvLista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellClick);
+            this.dgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.txtAnioBuscar);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(724, 66);
+            this.groupBox1.Size = new System.Drawing.Size(756, 53);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
@@ -299,7 +299,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 25);
+            this.label1.Location = new System.Drawing.Point(30, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(30, 13);
             this.label1.TabIndex = 1;
@@ -316,48 +316,55 @@
             this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDatos.Size = new System.Drawing.Size(730, 471);
+            this.tpDatos.Size = new System.Drawing.Size(762, 467);
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
             // gbGraficoEstimacion
             // 
+            this.gbGraficoEstimacion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbGraficoEstimacion.Controls.Add(this.chartDemanda);
-            this.gbGraficoEstimacion.Location = new System.Drawing.Point(318, 189);
+            this.gbGraficoEstimacion.Location = new System.Drawing.Point(312, 189);
             this.gbGraficoEstimacion.Name = "gbGraficoEstimacion";
-            this.gbGraficoEstimacion.Size = new System.Drawing.Size(399, 230);
+            this.gbGraficoEstimacion.Size = new System.Drawing.Size(444, 230);
             this.gbGraficoEstimacion.TabIndex = 11;
             this.gbGraficoEstimacion.TabStop = false;
             this.gbGraficoEstimacion.Text = "Gráfico Plan Propuesto";
             // 
             // chartDemanda
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chartDemanda.ChartAreas.Add(chartArea4);
-            this.chartDemanda.Location = new System.Drawing.Point(17, 17);
+            chartArea1.Name = "ChartArea1";
+            this.chartDemanda.ChartAreas.Add(chartArea1);
+            this.chartDemanda.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartDemanda.Location = new System.Drawing.Point(3, 17);
             this.chartDemanda.Name = "chartDemanda";
-            series4.ChartArea = "ChartArea1";
-            series4.Name = "Series1";
-            this.chartDemanda.Series.Add(series4);
-            this.chartDemanda.Size = new System.Drawing.Size(375, 207);
+            series1.ChartArea = "ChartArea1";
+            series1.Name = "Series1";
+            this.chartDemanda.Series.Add(series1);
+            this.chartDemanda.Size = new System.Drawing.Size(438, 210);
             this.chartDemanda.TabIndex = 0;
             this.chartDemanda.Text = "chart1";
             // 
             // gbBotones
             // 
+            this.gbBotones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbBotones.Controls.Add(this.btnVolver);
             this.gbBotones.Controls.Add(this.btnGuardar);
-            this.gbBotones.Location = new System.Drawing.Point(318, 424);
+            this.gbBotones.Location = new System.Drawing.Point(312, 418);
             this.gbBotones.Name = "gbBotones";
-            this.gbBotones.Size = new System.Drawing.Size(399, 40);
+            this.gbBotones.Size = new System.Drawing.Size(444, 46);
             this.gbBotones.TabIndex = 13;
             this.gbBotones.TabStop = false;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(328, 12);
+            this.btnVolver.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnVolver.Location = new System.Drawing.Point(350, 12);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(64, 22);
+            this.btnVolver.Size = new System.Drawing.Size(80, 25);
             this.btnVolver.TabIndex = 22;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -365,9 +372,10 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(258, 12);
+            this.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnGuardar.Location = new System.Drawing.Point(263, 12);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(64, 22);
+            this.btnGuardar.Size = new System.Drawing.Size(80, 25);
             this.btnGuardar.TabIndex = 21;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -375,19 +383,19 @@
             // 
             // gbModificacion
             // 
+            this.gbModificacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.gbModificacion.Controls.Add(this.lblTotalSistema);
             this.gbModificacion.Controls.Add(this.label21);
-            this.gbModificacion.Controls.Add(this.btnModificarPlanificacion);
-            this.gbModificacion.Location = new System.Drawing.Point(6, 424);
+            this.gbModificacion.Location = new System.Drawing.Point(6, 418);
             this.gbModificacion.Name = "gbModificacion";
-            this.gbModificacion.Size = new System.Drawing.Size(302, 40);
+            this.gbModificacion.Size = new System.Drawing.Size(302, 46);
             this.gbModificacion.TabIndex = 15;
             this.gbModificacion.TabStop = false;
             // 
             // lblTotalSistema
             // 
             this.lblTotalSistema.AutoSize = true;
-            this.lblTotalSistema.Location = new System.Drawing.Point(82, 16);
+            this.lblTotalSistema.Location = new System.Drawing.Point(144, 21);
             this.lblTotalSistema.Name = "lblTotalSistema";
             this.lblTotalSistema.Size = new System.Drawing.Size(0, 13);
             this.lblTotalSistema.TabIndex = 24;
@@ -395,24 +403,16 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(2, 16);
+            this.label21.Location = new System.Drawing.Point(2, 21);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(75, 13);
+            this.label21.Size = new System.Drawing.Size(136, 13);
             this.label21.TabIndex = 23;
-            this.label21.Text = "Total Sistema:";
-            // 
-            // btnModificarPlanificacion
-            // 
-            this.btnModificarPlanificacion.Location = new System.Drawing.Point(180, 11);
-            this.btnModificarPlanificacion.Name = "btnModificarPlanificacion";
-            this.btnModificarPlanificacion.Size = new System.Drawing.Size(114, 22);
-            this.btnModificarPlanificacion.TabIndex = 23;
-            this.btnModificarPlanificacion.Text = "Modificar Planificacion";
-            this.btnModificarPlanificacion.UseVisualStyleBackColor = true;
-            this.btnModificarPlanificacion.Click += new System.EventHandler(this.btnModificarPlanificacion_Click);
+            this.label21.Text = "Total Planificación Sistema:";
             // 
             // gbEstimacionMes
             // 
+            this.gbEstimacionMes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.gbEstimacionMes.Controls.Add(this.txtDemandaNoCubierta);
             this.gbEstimacionMes.Controls.Add(this.label31);
             this.gbEstimacionMes.Controls.Add(this.numDiciembre);
@@ -451,15 +451,15 @@
             // txtDemandaNoCubierta
             // 
             this.txtDemandaNoCubierta.Enabled = false;
-            this.txtDemandaNoCubierta.Location = new System.Drawing.Point(20, 203);
+            this.txtDemandaNoCubierta.Location = new System.Drawing.Point(7, 204);
             this.txtDemandaNoCubierta.Name = "txtDemandaNoCubierta";
-            this.txtDemandaNoCubierta.Size = new System.Drawing.Size(100, 21);
+            this.txtDemandaNoCubierta.Size = new System.Drawing.Size(120, 21);
             this.txtDemandaNoCubierta.TabIndex = 25;
             // 
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(15, 188);
+            this.label31.Location = new System.Drawing.Point(11, 188);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(112, 13);
             this.label31.TabIndex = 26;
@@ -467,7 +467,7 @@
             // 
             // numNoviembre
             // 
-            this.numNoviembre.Location = new System.Drawing.Point(208, 134);
+            this.numNoviembre.Location = new System.Drawing.Point(208, 132);
             this.numNoviembre.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -482,7 +482,7 @@
             // 
             // numOctubre
             // 
-            this.numOctubre.Location = new System.Drawing.Point(208, 107);
+            this.numOctubre.Location = new System.Drawing.Point(208, 106);
             this.numOctubre.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -497,7 +497,7 @@
             // 
             // numSeptiembre
             // 
-            this.numSeptiembre.Location = new System.Drawing.Point(208, 81);
+            this.numSeptiembre.Location = new System.Drawing.Point(208, 80);
             this.numSeptiembre.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -512,7 +512,7 @@
             // 
             // numAgosto
             // 
-            this.numAgosto.Location = new System.Drawing.Point(208, 55);
+            this.numAgosto.Location = new System.Drawing.Point(208, 54);
             this.numAgosto.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -527,7 +527,7 @@
             // 
             // numJunio
             // 
-            this.numJunio.Location = new System.Drawing.Point(52, 159);
+            this.numJunio.Location = new System.Drawing.Point(52, 158);
             this.numJunio.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -542,7 +542,7 @@
             // 
             // numMayo
             // 
-            this.numMayo.Location = new System.Drawing.Point(52, 134);
+            this.numMayo.Location = new System.Drawing.Point(52, 132);
             this.numMayo.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -557,7 +557,7 @@
             // 
             // numAbril
             // 
-            this.numAbril.Location = new System.Drawing.Point(52, 107);
+            this.numAbril.Location = new System.Drawing.Point(52, 106);
             this.numAbril.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -572,7 +572,7 @@
             // 
             // numMarzo
             // 
-            this.numMarzo.Location = new System.Drawing.Point(52, 81);
+            this.numMarzo.Location = new System.Drawing.Point(52, 80);
             this.numMarzo.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -587,7 +587,7 @@
             // 
             // numFebrero
             // 
-            this.numFebrero.Location = new System.Drawing.Point(52, 55);
+            this.numFebrero.Location = new System.Drawing.Point(52, 54);
             this.numFebrero.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -602,7 +602,7 @@
             // 
             // numJulio
             // 
-            this.numJulio.Location = new System.Drawing.Point(208, 28);
+            this.numJulio.Location = new System.Drawing.Point(208, 27);
             this.numJulio.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -617,7 +617,7 @@
             // 
             // numEnero
             // 
-            this.numEnero.Location = new System.Drawing.Point(52, 29);
+            this.numEnero.Location = new System.Drawing.Point(52, 27);
             this.numEnero.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -632,15 +632,15 @@
             // 
             // txtTotal
             // 
-            this.txtTotal.Location = new System.Drawing.Point(192, 204);
+            this.txtTotal.Location = new System.Drawing.Point(166, 204);
             this.txtTotal.Name = "txtTotal";
-            this.txtTotal.Size = new System.Drawing.Size(100, 21);
+            this.txtTotal.Size = new System.Drawing.Size(128, 21);
             this.txtTotal.TabIndex = 18;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(224, 188);
+            this.label18.Location = new System.Drawing.Point(215, 188);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(31, 13);
             this.label18.TabIndex = 24;
@@ -649,7 +649,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(144, 161);
+            this.label16.Location = new System.Drawing.Point(144, 162);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(53, 13);
             this.label16.TabIndex = 22;
@@ -658,7 +658,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(144, 135);
+            this.label15.Location = new System.Drawing.Point(144, 136);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(58, 13);
             this.label15.TabIndex = 20;
@@ -667,7 +667,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(144, 109);
+            this.label14.Location = new System.Drawing.Point(144, 110);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(46, 13);
             this.label14.TabIndex = 18;
@@ -676,7 +676,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(144, 83);
+            this.label13.Location = new System.Drawing.Point(144, 84);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(61, 13);
             this.label13.TabIndex = 16;
@@ -685,7 +685,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(144, 57);
+            this.label12.Location = new System.Drawing.Point(144, 58);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(41, 13);
             this.label12.TabIndex = 14;
@@ -694,7 +694,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(144, 30);
+            this.label11.Location = new System.Drawing.Point(144, 31);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(28, 13);
             this.label11.TabIndex = 12;
@@ -756,6 +756,8 @@
             // 
             // gbDatosPrincipales
             // 
+            this.gbDatosPrincipales.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbDatosPrincipales.Controls.Add(this.gbPuntoEquilibrio);
             this.gbDatosPrincipales.Controls.Add(this.lblUnidad2);
             this.gbDatosPrincipales.Controls.Add(this.gbDemandaAñoSiguiente);
@@ -773,14 +775,15 @@
             this.gbDatosPrincipales.Controls.Add(this.label17);
             this.gbDatosPrincipales.Location = new System.Drawing.Point(3, 3);
             this.gbDatosPrincipales.Name = "gbDatosPrincipales";
-            this.gbDatosPrincipales.Size = new System.Drawing.Size(721, 180);
+            this.gbDatosPrincipales.Size = new System.Drawing.Size(753, 180);
             this.gbDatosPrincipales.TabIndex = 10;
             this.gbDatosPrincipales.TabStop = false;
             this.gbDatosPrincipales.Text = "Datos Principales";
             // 
             // gbPuntoEquilibrio
             // 
-            this.gbPuntoEquilibrio.Controls.Add(this.button1);
+            this.gbPuntoEquilibrio.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.gbPuntoEquilibrio.Controls.Add(this.btnPuntoEquilibrio);
             this.gbPuntoEquilibrio.Controls.Add(this.label30);
             this.gbPuntoEquilibrio.Controls.Add(this.numPuntoEquilibrio);
             this.gbPuntoEquilibrio.Controls.Add(this.label28);
@@ -792,27 +795,27 @@
             this.gbPuntoEquilibrio.Controls.Add(this.label25);
             this.gbPuntoEquilibrio.Controls.Add(this.numCostofijo);
             this.gbPuntoEquilibrio.Controls.Add(this.label24);
-            this.gbPuntoEquilibrio.Location = new System.Drawing.Point(323, 70);
+            this.gbPuntoEquilibrio.Location = new System.Drawing.Point(344, 70);
             this.gbPuntoEquilibrio.Name = "gbPuntoEquilibrio";
-            this.gbPuntoEquilibrio.Size = new System.Drawing.Size(385, 101);
+            this.gbPuntoEquilibrio.Size = new System.Drawing.Size(403, 101);
             this.gbPuntoEquilibrio.TabIndex = 22;
             this.gbPuntoEquilibrio.TabStop = false;
             this.gbPuntoEquilibrio.Text = "Cálculo Punto de Equilibrio";
             // 
-            // button1
+            // btnPuntoEquilibrio
             // 
-            this.button1.Location = new System.Drawing.Point(265, 67);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Calcular";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnPuntoEquilibrio.Location = new System.Drawing.Point(275, 65);
+            this.btnPuntoEquilibrio.Name = "btnPuntoEquilibrio";
+            this.btnPuntoEquilibrio.Size = new System.Drawing.Size(80, 25);
+            this.btnPuntoEquilibrio.TabIndex = 14;
+            this.btnPuntoEquilibrio.Text = "Calcular";
+            this.btnPuntoEquilibrio.UseVisualStyleBackColor = true;
+            this.btnPuntoEquilibrio.Click += new System.EventHandler(this.button1_Click);
             // 
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(254, 17);
+            this.label30.Location = new System.Drawing.Point(266, 17);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(99, 13);
             this.label30.TabIndex = 18;
@@ -820,14 +823,14 @@
             // 
             // numPuntoEquilibrio
             // 
-            this.numPuntoEquilibrio.Location = new System.Drawing.Point(265, 36);
+            this.numPuntoEquilibrio.Location = new System.Drawing.Point(269, 34);
             this.numPuntoEquilibrio.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
             this.numPuntoEquilibrio.Name = "numPuntoEquilibrio";
-            this.numPuntoEquilibrio.Size = new System.Drawing.Size(73, 21);
+            this.numPuntoEquilibrio.Size = new System.Drawing.Size(86, 21);
             this.numPuntoEquilibrio.TabIndex = 13;
             this.numPuntoEquilibrio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numPuntoEquilibrio.Enter += new System.EventHandler(this.numPuntoEquilibrio_Enter);
@@ -836,7 +839,7 @@
             // 
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(168, 71);
+            this.label28.Location = new System.Drawing.Point(180, 71);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(16, 13);
             this.label28.TabIndex = 16;
@@ -851,7 +854,7 @@
             0,
             0});
             this.numPrecioVenta.Name = "numPrecioVenta";
-            this.numPrecioVenta.Size = new System.Drawing.Size(73, 21);
+            this.numPrecioVenta.Size = new System.Drawing.Size(85, 21);
             this.numPrecioVenta.TabIndex = 12;
             this.numPrecioVenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numPrecioVenta.Enter += new System.EventHandler(this.numPrecioVenta_Enter);
@@ -869,7 +872,7 @@
             // 
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(168, 44);
+            this.label26.Location = new System.Drawing.Point(180, 44);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(50, 13);
             this.label26.TabIndex = 13;
@@ -884,7 +887,7 @@
             0,
             0});
             this.numCostoVariable.Name = "numCostoVariable";
-            this.numCostoVariable.Size = new System.Drawing.Size(73, 21);
+            this.numCostoVariable.Size = new System.Drawing.Size(85, 21);
             this.numCostoVariable.TabIndex = 11;
             this.numCostoVariable.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numCostoVariable.Enter += new System.EventHandler(this.numCostoVariable_Enter);
@@ -902,7 +905,7 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(168, 17);
+            this.label25.Location = new System.Drawing.Point(180, 17);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(60, 13);
             this.label25.TabIndex = 10;
@@ -917,7 +920,7 @@
             0,
             0});
             this.numCostofijo.Name = "numCostofijo";
-            this.numCostofijo.Size = new System.Drawing.Size(73, 21);
+            this.numCostofijo.Size = new System.Drawing.Size(85, 21);
             this.numCostofijo.TabIndex = 10;
             this.numCostofijo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numCostofijo.Enter += new System.EventHandler(this.numCostofijo_Enter);
@@ -935,7 +938,7 @@
             // 
             this.lblUnidad2.AutoSize = true;
             this.lblUnidad2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnidad2.Location = new System.Drawing.Point(245, 106);
+            this.lblUnidad2.Location = new System.Drawing.Point(262, 122);
             this.lblUnidad2.Name = "lblUnidad2";
             this.lblUnidad2.Size = new System.Drawing.Size(51, 13);
             this.lblUnidad2.TabIndex = 21;
@@ -943,12 +946,13 @@
             // 
             // gbDemandaAñoSiguiente
             // 
+            this.gbDemandaAñoSiguiente.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.gbDemandaAñoSiguiente.Controls.Add(this.rbDemandaActual);
             this.gbDemandaAñoSiguiente.Controls.Add(this.rbOtraDemanda);
             this.gbDemandaAñoSiguiente.Controls.Add(this.chListAnios);
-            this.gbDemandaAñoSiguiente.Location = new System.Drawing.Point(323, 15);
+            this.gbDemandaAñoSiguiente.Location = new System.Drawing.Point(344, 15);
             this.gbDemandaAñoSiguiente.Name = "gbDemandaAñoSiguiente";
-            this.gbDemandaAñoSiguiente.Size = new System.Drawing.Size(385, 49);
+            this.gbDemandaAñoSiguiente.Size = new System.Drawing.Size(403, 49);
             this.gbDemandaAñoSiguiente.TabIndex = 20;
             this.gbDemandaAñoSiguiente.TabStop = false;
             this.gbDemandaAñoSiguiente.Text = "Demanda Año Siguiente";
@@ -968,7 +972,7 @@
             // rbOtraDemanda
             // 
             this.rbOtraDemanda.AutoSize = true;
-            this.rbOtraDemanda.Location = new System.Drawing.Point(115, 20);
+            this.rbOtraDemanda.Location = new System.Drawing.Point(124, 20);
             this.rbOtraDemanda.Name = "rbOtraDemanda";
             this.rbOtraDemanda.Size = new System.Drawing.Size(95, 17);
             this.rbOtraDemanda.TabIndex = 7;
@@ -980,7 +984,7 @@
             // chListAnios
             // 
             this.chListAnios.FormattingEnabled = true;
-            this.chListAnios.Location = new System.Drawing.Point(212, 17);
+            this.chListAnios.Location = new System.Drawing.Point(225, 20);
             this.chListAnios.Name = "chListAnios";
             this.chListAnios.Size = new System.Drawing.Size(167, 20);
             this.chListAnios.TabIndex = 9;
@@ -989,7 +993,7 @@
             // 
             this.lblUnidad3.AutoSize = true;
             this.lblUnidad3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnidad3.Location = new System.Drawing.Point(245, 133);
+            this.lblUnidad3.Location = new System.Drawing.Point(262, 150);
             this.lblUnidad3.Name = "lblUnidad3";
             this.lblUnidad3.Size = new System.Drawing.Size(60, 13);
             this.lblUnidad3.TabIndex = 19;
@@ -1000,35 +1004,35 @@
             this.cbEstimacionDemanda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEstimacionDemanda.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbEstimacionDemanda.FormattingEnabled = true;
-            this.cbEstimacionDemanda.Location = new System.Drawing.Point(166, 47);
+            this.cbEstimacionDemanda.Location = new System.Drawing.Point(166, 61);
             this.cbEstimacionDemanda.Name = "cbEstimacionDemanda";
             this.cbEstimacionDemanda.Size = new System.Drawing.Size(137, 21);
             this.cbEstimacionDemanda.TabIndex = 2;
             // 
             // numCapacidadStock
             // 
-            this.numCapacidadStock.Location = new System.Drawing.Point(166, 102);
+            this.numCapacidadStock.Location = new System.Drawing.Point(166, 118);
             this.numCapacidadStock.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
             this.numCapacidadStock.Name = "numCapacidadStock";
-            this.numCapacidadStock.Size = new System.Drawing.Size(73, 21);
+            this.numCapacidadStock.Size = new System.Drawing.Size(93, 21);
             this.numCapacidadStock.TabIndex = 4;
             this.numCapacidadStock.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numCapacidadStock.Enter += new System.EventHandler(this.numCapacidadStock_Enter);
             // 
             // numCapacidadProducción
             // 
-            this.numCapacidadProducción.Location = new System.Drawing.Point(166, 129);
+            this.numCapacidadProducción.Location = new System.Drawing.Point(166, 146);
             this.numCapacidadProducción.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
             this.numCapacidadProducción.Name = "numCapacidadProducción";
-            this.numCapacidadProducción.Size = new System.Drawing.Size(73, 21);
+            this.numCapacidadProducción.Size = new System.Drawing.Size(93, 21);
             this.numCapacidadProducción.TabIndex = 5;
             this.numCapacidadProducción.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numCapacidadProducción.Enter += new System.EventHandler(this.numCapacidadProducción_Enter);
@@ -1036,7 +1040,7 @@
             // lblCapacidadStock
             // 
             this.lblCapacidadStock.AutoSize = true;
-            this.lblCapacidadStock.Location = new System.Drawing.Point(6, 110);
+            this.lblCapacidadStock.Location = new System.Drawing.Point(6, 122);
             this.lblCapacidadStock.Name = "lblCapacidadStock";
             this.lblCapacidadStock.Size = new System.Drawing.Size(129, 13);
             this.lblCapacidadStock.TabIndex = 15;
@@ -1045,7 +1049,7 @@
             // lblCapacidadProduccion
             // 
             this.lblCapacidadProduccion.AutoSize = true;
-            this.lblCapacidadProduccion.Location = new System.Drawing.Point(6, 135);
+            this.lblCapacidadProduccion.Location = new System.Drawing.Point(6, 150);
             this.lblCapacidadProduccion.Name = "lblCapacidadProduccion";
             this.lblCapacidadProduccion.Size = new System.Drawing.Size(155, 13);
             this.lblCapacidadProduccion.TabIndex = 13;
@@ -1055,7 +1059,7 @@
             // 
             this.lblUnidad1.AutoSize = true;
             this.lblUnidad1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnidad1.Location = new System.Drawing.Point(245, 80);
+            this.lblUnidad1.Location = new System.Drawing.Point(262, 94);
             this.lblUnidad1.Name = "lblUnidad1";
             this.lblUnidad1.Size = new System.Drawing.Size(50, 13);
             this.lblUnidad1.TabIndex = 9;
@@ -1064,7 +1068,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 55);
+            this.label4.Location = new System.Drawing.Point(6, 65);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(124, 13);
             this.label4.TabIndex = 8;
@@ -1072,14 +1076,14 @@
             // 
             // numAdelantamiento
             // 
-            this.numAdelantamiento.Location = new System.Drawing.Point(166, 74);
+            this.numAdelantamiento.Location = new System.Drawing.Point(166, 90);
             this.numAdelantamiento.Maximum = new decimal(new int[] {
             52,
             0,
             0,
             0});
             this.numAdelantamiento.Name = "numAdelantamiento";
-            this.numAdelantamiento.Size = new System.Drawing.Size(73, 21);
+            this.numAdelantamiento.Size = new System.Drawing.Size(93, 21);
             this.numAdelantamiento.TabIndex = 3;
             this.numAdelantamiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numAdelantamiento.Enter += new System.EventHandler(this.numAdelantamiento_Enter);
@@ -1087,7 +1091,7 @@
             // lblAdelantamiento
             // 
             this.lblAdelantamiento.AutoSize = true;
-            this.lblAdelantamiento.Location = new System.Drawing.Point(6, 83);
+            this.lblAdelantamiento.Location = new System.Drawing.Point(6, 94);
             this.lblAdelantamiento.Name = "lblAdelantamiento";
             this.lblAdelantamiento.Size = new System.Drawing.Size(141, 13);
             this.lblAdelantamiento.TabIndex = 2;
@@ -1095,15 +1099,15 @@
             // 
             // txtAnio
             // 
-            this.txtAnio.Location = new System.Drawing.Point(166, 20);
+            this.txtAnio.Location = new System.Drawing.Point(167, 32);
             this.txtAnio.Name = "txtAnio";
-            this.txtAnio.Size = new System.Drawing.Size(136, 21);
+            this.txtAnio.Size = new System.Drawing.Size(92, 21);
             this.txtAnio.TabIndex = 1;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(6, 27);
+            this.label17.Location = new System.Drawing.Point(6, 36);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(117, 13);
             this.label17.TabIndex = 0;
@@ -1189,7 +1193,7 @@
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.tsMenu.Size = new System.Drawing.Size(738, 50);
+            this.tsMenu.Size = new System.Drawing.Size(770, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
@@ -1217,14 +1221,14 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(742, 536);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(774, 532);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
             // frmPlanAnual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(742, 536);
+            this.ClientSize = new System.Drawing.Size(774, 532);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -1303,7 +1307,6 @@
         private System.Windows.Forms.GroupBox gbModificacion;
         private System.Windows.Forms.Label lblTotalSistema;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Button btnModificarPlanificacion;
         private System.Windows.Forms.GroupBox gbEstimacionMes;
         private System.Windows.Forms.NumericUpDown numNoviembre;
         private System.Windows.Forms.NumericUpDown numOctubre;
@@ -1356,7 +1359,7 @@
         private System.Windows.Forms.Label lblUnidad2;
         private System.Windows.Forms.GroupBox gbDemandaAñoSiguiente;
         private System.Windows.Forms.GroupBox gbPuntoEquilibrio;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnPuntoEquilibrio;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.NumericUpDown numPuntoEquilibrio;
         private System.Windows.Forms.Label label28;
