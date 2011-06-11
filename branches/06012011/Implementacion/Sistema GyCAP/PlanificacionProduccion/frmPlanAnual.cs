@@ -81,7 +81,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Cargamos el combo
             dvComboEstimaciones = new DataView(dsPlanAnual.DEMANDAS_ANUALES);
             string[] display = { "deman_anio" , "deman_nombre" };
-            cbEstimacionDemanda.SetDatos(dvComboEstimaciones, "deman_codigo", display,"-" , "Seleccione", false);
+            cbEstimacionDemanda.SetDatos(dvComboEstimaciones, "deman_codigo", display,"-", "Seleccione", false);
             
             //Seteamos los maxlength de los controles y los tipos de numeros
             txtAnio.MaxLength = 4;
@@ -150,12 +150,12 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnModificar.Enabled = false;
                     btnPlanificar.Enabled = false;
                     chListAnios.Visible = false;
+
                     gbModificacion.Visible = false;
                     gbGraficoEstimacion.Visible = true;
                     gbEstimacionMes.Visible = true;
                     gbBotones.Visible = true;
                     gbDatosPrincipales.Enabled = true;
-                    cbEstimacionDemanda.SelectedIndex = -1;
                     tcPlanAnual.SelectedTab = tpDatos;
                     estadoActual = estadoUI.modificar;
                     DesactivaControles(false);
@@ -391,7 +391,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             //Se lo asigno al texbox que lo muestra por pantalla
             txtTotal.Text = totalActual.ToString();
-            txtDemandaNoCubierta.Text = Convert.ToString(totalDemanda - totalActual); 
+            txtDemandaNoCubierta.Text = Convert.ToString(totalDemanda - totalActual);           
         }
 
         //Metodo para generar gráficos a partir de un array
@@ -967,7 +967,10 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             try
             {
-                numPuntoEquilibrio.Value = CalcularPuntoEquilibrio();
+                if (chPuntoEquilibrio.Checked = false)
+                {
+                    numPuntoEquilibrio.Value = CalcularPuntoEquilibrio();
+                }                
             }
             catch (Entidades.Excepciones.ErrorValidacionException ex)
             {
@@ -1190,7 +1193,13 @@ namespace GyCAP.UI.PlanificacionProduccion
             txtAnio.Text = dsPlanAnual.PLANES_ANUALES.FindByPAN_CODIGO(codigo).PAN_ANIO.ToString();
             cbEstimacionDemanda.SetSelectedValue(Convert.ToInt32(dsPlanAnual.PLANES_ANUALES.FindByPAN_CODIGO(codigo).DEMAN_CODIGO));
 
-
+            if (txtTotal.Text == string.Empty)
+            {
+                txtTotal.Text = "0";
+                //Muestro lo que no se pudo asignar
+                txtDemandaNoCubierta.Text = BLL.DetalleDemandaAnualBLL.ObtenerTotal(Convert.ToInt32(dsPlanAnual.PLANES_ANUALES.FindByPAN_CODIGO(codigo).DEMAN_CODIGO)).ToString();
+            }
+            
             int[] promedio= new int[12];
             int cont=0;
             foreach (Data.dsPlanAnual.DETALLE_PLAN_ANUALRow dr in dsPlanAnual.DETALLE_PLAN_ANUAL.Rows)
@@ -1412,7 +1421,27 @@ namespace GyCAP.UI.PlanificacionProduccion
                 GenerarGrafico(promedio);
             }
         }
-        #endregion
+
+        private void chPuntoEquilibrio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chPuntoEquilibrio.Checked == true)
+            {
+                numPuntoEquilibrio.Enabled = true;
+                numPrecioVenta.Enabled = false;
+                numCostofijo.Enabled = false;
+                numCostoVariable.Enabled = false;
+                btnPuntoEquilibrio.Enabled=false;
+            }
+            else
+            {
+                numPuntoEquilibrio.Enabled = false;
+                numPrecioVenta.Enabled = true;
+                numCostofijo.Enabled = true;
+                numCostoVariable.Enabled = true;
+                btnPuntoEquilibrio.Enabled = true;
+            }
+        }
+        #endregion              
         
     }
 }
