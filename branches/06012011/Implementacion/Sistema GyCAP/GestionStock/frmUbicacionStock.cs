@@ -142,7 +142,7 @@ namespace GyCAP.UI.GestionStock
         private void btnConsultar_Click(object sender, EventArgs e)
         {
             if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.consultar); }
-            else { MensajesABM.MsjSinSeleccion("Ubiación stock", MensajesABM.Generos.Femenino, this.Text); }
+            else { MensajesABM.MsjSinSeleccion("Ubicación stock", MensajesABM.Generos.Femenino, this.Text); }
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -154,7 +154,7 @@ namespace GyCAP.UI.GestionStock
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.modificar); }
-            else { MensajesABM.MsjSinSeleccion("Ubiación stock", MensajesABM.Generos.Femenino, this.Text); }
+            else { MensajesABM.MsjSinSeleccion("Ubicación stock", MensajesABM.Generos.Femenino, this.Text); }
         }        
 
         #endregion
@@ -475,8 +475,7 @@ namespace GyCAP.UI.GestionStock
             dgvLista.Columns.Add("USTCK_CANTIDADVIRTUAL", "Cantidad virtual");
             dgvLista.Columns.Add("UMED_CODIGO", "Unidad medida");
             dgvLista.Columns.Add("USTCK_ACTIVO", "Estado");
-            dgvLista.Columns.Add("CON_CODIGO", "Contenido");
-            dgvLista.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgvLista.Columns.Add("CON_CODIGO", "Contenido");            
             dgvLista.Columns["USTCK_CANTIDADREAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvLista.Columns["USTCK_CANTIDADVIRTUAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;            
             dgvLista.Columns["USTCK_CODIGO"].DataPropertyName = "USTCK_CODIGO";
@@ -628,6 +627,11 @@ namespace GyCAP.UI.GestionStock
                     cboContenidoStock.SetSelectedValue(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).CON_CODIGO));
                 }
             }
+        }
+
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
         }
 
         #endregion
