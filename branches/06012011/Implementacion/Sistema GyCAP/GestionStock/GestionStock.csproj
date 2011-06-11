@@ -53,6 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmActualizacionStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmActualizacionStock.Designer.cs">
+      <DependentUpon>frmActualizacionStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmEntregaProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmActualizacionStock.resx">
+      <DependentUpon>frmActualizacionStock.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEntregaProducto.resx">
       <DependentUpon>frmEntregaProducto.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -187,6 +197,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Industry2-128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calculator_25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calculator_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Go_Next_48.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1858,7 +1858,7 @@ namespace GyCAP.Data {
                 this.columnMVTO_NUMERO.AllowDBNull = false;
                 this.columnMVTO_NUMERO.Unique = true;
                 this.columnMVTO_CODIGO.MaxLength = 80;
-                this.columnMVTO_DESCRIPCION.MaxLength = 200;
+                this.columnMVTO_DESCRIPCION.MaxLength = 300;
                 this.columnMVTO_FECHAALTA.AllowDBNull = false;
                 this.columnMVTO_CANTIDAD_ORIGEN_ESTIMADA.AllowDBNull = false;
                 this.columnMVTO_CANTIDAD_DESTINO_ESTIMADA.AllowDBNull = false;

@@ -7,6 +7,13 @@ namespace GyCAP.Entidades
 {
     public class UbicacionStock
     {
+        public UbicacionStock() { }
+
+        public UbicacionStock(int numeroUbicacionStock)
+        {
+            numero = numeroUbicacionStock;
+        }
+        
         private int numero;
 
         public int Numero
@@ -94,11 +101,5 @@ namespace GyCAP.Entidades
             set { contenido = value; }
         }
         
-        public UbicacionStock() { }
-        
-        public UbicacionStock(int numeroUbicacionStock)
-        {
-            this.numero = numeroUbicacionStock;
-        }
     }
 }

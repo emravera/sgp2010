@@ -7,6 +7,13 @@ namespace GyCAP.Entidades
 {
     public class EstadoMovimientoStock
     {
+        public EstadoMovimientoStock() { }
+
+        public EstadoMovimientoStock(int codigoEstado) 
+        {
+            codigo = codigoEstado;
+        }
+        
         private int codigo;
 
         public int Codigo
@@ -27,13 +34,6 @@ namespace GyCAP.Entidades
         {
             get { return descripcion; }
             set { descripcion = value; }
-        }
-
-        public EstadoMovimientoStock() { }
-
-        public EstadoMovimientoStock(int codigoEstado)
-        {
-            this.codigo = codigoEstado;
         }
     }
 }
