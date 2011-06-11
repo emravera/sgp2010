@@ -27,7 +27,7 @@ namespace GyCAP.DAL
         private static string cadenaConexion;
         private static SqlTransaction transaccion = null;
         private static SqlCommand cmdReader = null;
-        private static int tipoConexion = 0;
+        private static int tipoConexion = -1;
         public static readonly int tipoLocal = 0;        
         public static readonly int tipoInterna = 1;
         public static readonly int tipoRemota = 2;
@@ -44,45 +44,70 @@ namespace GyCAP.DAL
         //Obtiene la cadena de conexión a la base de datos.
         private static SqlConnection GetConexion()
         {
-            switch (tipoConexion)
+            if (tipoConexion < 0)
             {
-                case 0: //Local
-                    switch (nombrePC)
-                    {
-                        case "NGA": //notebook - gonzalo
-                            cadenaConexion = conexionGonzaloN;
-                            break;
-                        case "DGA": //desktop - gonzalo
-                            cadenaConexion = conexionGonzaloD;
-                            break;
-                        case "HOMERO": //pc - marcelo
-                            cadenaConexion = conexionMarcelo;
-                            break;
-                        case "DTR": //desktop - raul
-                            cadenaConexion = conexionRaulD;
-                            break;
-                        case "NBR": //notebook - raul
-                            cadenaConexion = conexionRaulN;
-                            break;
-                        case "HP-EMA": //notebook - emanuel
-                            cadenaConexion = conexionEmanuel;
-                            break;
-                        case "SABRINA-PC":
-                            cadenaConexion = conexionSabrina;
-                            break;
-                        default:
-                            throw new Entidades.Excepciones.BaseDeDatosException();
-                    }
-                    break;
-                case 1: //Interna
-                    cadenaConexion = conexionInterna;
-                    break;
-                case 2: //Remota
-                    cadenaConexion = conexionRemota;
-                    break;
-                default:
-                    throw new Entidades.Excepciones.BaseDeDatosException();
+                switch (nombrePC)
+                {
+                    case "NGA": //notebook - gonzalo
+                        cadenaConexion = conexionInterna;
+                        break;
+                    case "DGA": //desktop - gonzalo
+                        cadenaConexion = conexionInterna;
+                        break;
+                    case "HOMERO": //pc - marcelo
+                        cadenaConexion = conexionRemota;
+                        break;
+                    case "DTR": //desktop - raul
+                        cadenaConexion = conexionRaulD;
+                        break;
+                    case "NBR": //notebook - raul
+                        cadenaConexion = conexionRaulN;
+                        break;
+                    case "HP-EMA": //notebook - emanuel
+                        cadenaConexion = conexionRemota;
+                        break;
+                    case "SABRINA-PC": //notebook - sabrina
+                        cadenaConexion = conexionSabrina;
+                        break;
+                    default:
+                        throw new Entidades.Excepciones.BaseDeDatosException();
+                }
             }
+            else if (tipoConexion == 0)
+            {
+                switch (nombrePC)
+                {
+                    case "NGA": //notebook - gonzalo
+                        cadenaConexion = conexionGonzaloN;
+                        break;
+                    case "DGA": //desktop - gonzalo
+                        cadenaConexion = conexionGonzaloD;
+                        break;
+                    case "HOMERO": //pc - marcelo
+                        cadenaConexion = conexionMarcelo;
+                        break;
+                    case "DTR": //desktop - raul
+                        cadenaConexion = conexionRaulD;
+                        break;
+                    case "NBR": //notebook - raul
+                        cadenaConexion = conexionRaulN;
+                        break;
+                    case "HP-EMA": //notebook - emanuel
+                        cadenaConexion = conexionEmanuel;
+                        break;
+                    case "SABRINA-PC": //notebook - sabrina
+                        cadenaConexion = conexionSabrina;
+                        break;
+                    default:
+                        throw new Entidades.Excepciones.BaseDeDatosException();
+                }
+            }
+            else
+            {
+                if (tipoConexion == 1) { cadenaConexion = conexionInterna; }
+                else { cadenaConexion = conexionRemota; }
+            }
+            
             return new SqlConnection(cadenaConexion);
         }
 
