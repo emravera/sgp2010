@@ -472,7 +472,9 @@ namespace GyCAP.UI.GestionStock
             dgvLista.Columns.Add("USTCK_NOMBRE", "Nombre");
             dgvLista.Columns.Add("TUS_CODIGO", "Tipo");            
             dgvLista.Columns.Add("USTCK_CANTIDADREAL", "Cantidad real");
+            dgvLista.Columns["USTCK_CANTIDADREAL"].DefaultCellStyle.Format = "N3";
             dgvLista.Columns.Add("USTCK_CANTIDADVIRTUAL", "Cantidad virtual");
+            dgvLista.Columns["USTCK_CANTIDADVIRTUAL"].DefaultCellStyle.Format = "N3";
             dgvLista.Columns.Add("UMED_CODIGO", "Unidad medida");
             dgvLista.Columns.Add("USTCK_ACTIVO", "Estado");
             dgvLista.Columns.Add("CON_CODIGO", "Contenido");            
