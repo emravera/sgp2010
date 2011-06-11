@@ -66,7 +66,7 @@ namespace GyCAP.BLL
         /// código y la segunda ([n,1]) es la cantidad necesaria de esa materia prima para fabricar la cocina dada.</returns>
         public static decimal[,] ObtenerMateriasPrimasYCantidades(int codigoCocina)
         {
-            int codigoEstructura = BLL.CocinaBLL.ObtenerCodigoEstructuraActiva(codigoCocina);
+            /*int codigoEstructura = BLL.CocinaBLL.ObtenerCodigoEstructuraActiva(codigoCocina);
             Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
             ObtenerEstructura(codigoEstructura, dsEstructura, true);
 
@@ -112,8 +112,19 @@ namespace GyCAP.BLL
                     while (listaMateriasPrimas[indice, 0] != rowMPxP.MATERIAS_PRIMASRow.MP_CODIGO) { indice++; }
                     listaMateriasPrimas[indice, 1] += rowPxE.PXE_CANTIDAD * rowMPxP.MPXP_CANTIDAD;
                 }
-            }
+            }*/
 
+            decimal[,] listaMateriasPrimas = new decimal[5, 2];
+            listaMateriasPrimas[0, 0] = 1;
+            listaMateriasPrimas[1, 0] = 2;
+            listaMateriasPrimas[2, 0] = 3;
+            listaMateriasPrimas[3, 0] = 4;
+            listaMateriasPrimas[4, 0] = 5;
+            listaMateriasPrimas[0, 1] = 10;
+            listaMateriasPrimas[1, 1] = 10;
+            listaMateriasPrimas[2, 1] = 10;
+            listaMateriasPrimas[3, 1] = 10;
+            listaMateriasPrimas[4, 1] = 10;
             return listaMateriasPrimas;
 
         }
