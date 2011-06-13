@@ -186,11 +186,24 @@ namespace GyCAP.DAL
 
         public static bool PuedeEliminarse(int codigoCentro)
         {
-            //ver condiciones - gonzalo
-            return false;
+            string sql1 = "SELECT count(cto_codigo) FROM DETALLE_HOJARUTA WHERE cto_codigo = @p0";
+            string sql2 = "SELECT count(cto_codigo) FROM TURNOSXCENTROTRABAJO WHERE cto_codigo = @p0";
+            string sql3 = "SELECT count(cto_codigo) FROM ORDENES_TRABAJO WHERE cto_codigo = @p0";
+            object[] parametros = { codigoCentro };
+
+            try
+            {
+                int r1 = Convert.ToInt32(DB.executeScalar(sql1, parametros, null));
+                int r2 = Convert.ToInt32(DB.executeScalar(sql2, parametros, null));
+                int r3 = Convert.ToInt32(DB.executeScalar(sql3, parametros, null));
+
+                if (r1 + r2 + r3 == 0) { return true; }
+                else { return false; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
-        //Determikna si existe un centro de trabajo dado su nombre y sector
+        //Determina si existe un centro de trabajo dado su nombre y sector
         public static bool EsCentroTrabajo(Entidades.CentroTrabajo centro)
         {
             string sql = "SELECT count(cto_codigo) FROM CENTROS_TRABAJOS WHERE cto_nombre = @p0 AND sec_codigo = @p1 AND cto_codigo <> @p2";
