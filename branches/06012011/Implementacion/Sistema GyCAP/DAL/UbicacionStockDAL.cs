@@ -202,7 +202,38 @@ namespace GyCAP.DAL
                 }
                 catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
-            
+        }
+
+        public static void ActualizarCantidadesStock(Entidades.UbicacionStock ubicacion, Entidades.MovimientoStock movimiento)
+        {
+            string sql = @"UPDATE UBICACIONES_STOCK SET 
+                         ustck_cantidadreal = 
+                                            ( 
+                                              CASE 
+                                                WHEN ((ustck_cantidadreal + @p0) < 0) THEN 0 
+                                                ELSE (ustck_cantidadreal + @p0)
+                                              END
+                                            ) 
+                        ,ustck_cantidadvirtual = ustck_cantidadvirtual + @p1  
+                        WHERE ustck_numero = @p2";
+
+            object[] parametros = { movimiento.CantidadDestinoReal, movimiento.CantidadDestinoReal, ubicacion.Numero };
+
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                transaccion = DB.IniciarTransaccion();
+
+                DB.executeNonQuery(sql, parametros, transaccion);
+                
+            }
+            catch (SqlException ex)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
+            }
+            finally { DB.FinalizarTransaccion(); }
         }
     }
 }

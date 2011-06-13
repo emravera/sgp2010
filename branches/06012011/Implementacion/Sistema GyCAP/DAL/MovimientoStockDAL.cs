@@ -11,6 +11,7 @@ namespace GyCAP.DAL
     {
         public static readonly int EstadoPlanificado = 1;
         public static readonly int EstadoFinalizado = 2;
+        public static readonly int EstadoCancelado = 3;
         
         public static void Insertar(Entidades.MovimientoStock movimientoStock, SqlTransaction transaccion)
         {
@@ -30,20 +31,26 @@ namespace GyCAP.DAL
                         ,[ordt_numero]) 
                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12) SELECT @@Identity";
 
-            
+            object fechaPrevista = DBNull.Value, fechaReal = DBNull.Value, origen = DBNull.Value, destino = DBNull.Value, ot = DBNull.Value;
+            if(movimientoStock.FechaPrevista != null) { fechaPrevista = movimientoStock.FechaPrevista; }
+            if(movimientoStock.FechaReal != null) { fechaReal = movimientoStock.FechaReal; }
+            if(movimientoStock.Origen != null) { origen = movimientoStock.Origen.Numero; }
+            if(movimientoStock.Destino != null) { destino = movimientoStock.Destino.Numero; }
+            if (movimientoStock.OrdenTrabajo != null) { ot = movimientoStock.OrdenTrabajo.Numero; }
+
             object[] parametros = { movimientoStock.Codigo,
                                       movimientoStock.Descripcion,
                                       movimientoStock.FechaAlta,
-                                      movimientoStock.FechaPrevista,
-                                      DBNull.Value,
-                                      movimientoStock.Origen.Numero,
-                                      movimientoStock.Destino.Numero,
+                                      fechaPrevista,
+                                      fechaReal,
+                                      origen,
+                                      destino,
                                       movimientoStock.CantidadOrigenEstimada,
                                       movimientoStock.CantidadDestinoEstimada,
                                       movimientoStock.CantidadOrigenReal,
                                       movimientoStock.CantidadDestinoReal,
                                       movimientoStock.Estado.Codigo,
-                                      movimientoStock.OrdenTrabajo.Numero };
+                                      ot };
 
             movimientoStock.Numero = Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion));
             //Actualizamos la ubicación de stock origen involucrada en el movimiento
