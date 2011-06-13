@@ -28,6 +28,7 @@ namespace GyCAP.BLL
         {
             Entidades.CentroTrabajo centro = new GyCAP.Entidades.CentroTrabajo();
             Data.dsHojaRuta.CENTROS_TRABAJOSRow row = ds.CENTROS_TRABAJOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsHojaRuta.CENTROS_TRABAJOSRow;
+            centro.Codigo = Convert.ToInt32(row.CTO_CODIGO);
             centro.Nombre = row.CTO_NOMBRE;
             centro.Sector = new GyCAP.Entidades.SectorTrabajo();
             centro.Sector.Codigo = Convert.ToInt32(row.SEC_CODIGO);

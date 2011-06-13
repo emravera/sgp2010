@@ -71,8 +71,6 @@
             this.lvTurnos = new System.Windows.Forms.ListView();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.lblHorasSemanaExtendido = new System.Windows.Forms.Label();
-            this.lblHorasSemanaNormal = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.cbSector = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbTipo = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
@@ -194,6 +192,7 @@
             this.dgvLista.TabIndex = 6;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
+            this.dgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // groupBox1
             // 
@@ -629,8 +628,6 @@
             this.gbDatos.Controls.Add(this.lvTurnos);
             this.gbDatos.Controls.Add(this.label13);
             this.gbDatos.Controls.Add(this.label12);
-            this.gbDatos.Controls.Add(this.lblHorasSemanaExtendido);
-            this.gbDatos.Controls.Add(this.lblHorasSemanaNormal);
             this.gbDatos.Controls.Add(this.label9);
             this.gbDatos.Controls.Add(this.cbSector);
             this.gbDatos.Controls.Add(this.cbTipo);
@@ -656,9 +653,9 @@
             this.cbActivo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbActivo.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbActivo.FormattingEnabled = true;
-            this.cbActivo.Location = new System.Drawing.Point(401, 80);
+            this.cbActivo.Location = new System.Drawing.Point(446, 80);
             this.cbActivo.Name = "cbActivo";
-            this.cbActivo.Size = new System.Drawing.Size(140, 21);
+            this.cbActivo.Size = new System.Drawing.Size(95, 21);
             this.cbActivo.TabIndex = 13;
             // 
             // lvTurnos
@@ -693,34 +690,14 @@
             this.label12.TabIndex = 16;
             this.label12.Text = "Estado:";
             // 
-            // lblHorasSemanaExtendido
-            // 
-            this.lblHorasSemanaExtendido.AutoSize = true;
-            this.lblHorasSemanaExtendido.BackColor = System.Drawing.Color.White;
-            this.lblHorasSemanaExtendido.Location = new System.Drawing.Point(457, 56);
-            this.lblHorasSemanaExtendido.Name = "lblHorasSemanaExtendido";
-            this.lblHorasSemanaExtendido.Size = new System.Drawing.Size(75, 13);
-            this.lblHorasSemanaExtendido.TabIndex = 15;
-            this.lblHorasSemanaExtendido.Text = "horas/semana";
-            // 
-            // lblHorasSemanaNormal
-            // 
-            this.lblHorasSemanaNormal.AutoSize = true;
-            this.lblHorasSemanaNormal.BackColor = System.Drawing.Color.White;
-            this.lblHorasSemanaNormal.Location = new System.Drawing.Point(457, 27);
-            this.lblHorasSemanaNormal.Name = "lblHorasSemanaNormal";
-            this.lblHorasSemanaNormal.Size = new System.Drawing.Size(75, 13);
-            this.lblHorasSemanaNormal.TabIndex = 11;
-            this.lblHorasSemanaNormal.Text = "horas/semana";
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(296, 55);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(99, 13);
+            this.label9.Size = new System.Drawing.Size(144, 13);
             this.label9.TabIndex = 12;
-            this.label9.Text = "Trabajo extendido:";
+            this.label9.Text = "Trabajo extendido (hs/sem):";
             // 
             // cbSector
             // 
@@ -756,9 +733,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(296, 26);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 13);
+            this.label5.Size = new System.Drawing.Size(128, 13);
             this.label5.TabIndex = 6;
-            this.label5.Text = "Trabajo normal:";
+            this.label5.Text = "Trabajo normal (hs/sem):";
             // 
             // label2
             // 
@@ -807,15 +784,16 @@
             0,
             0,
             65536});
-            this.nudHorasNormal.Location = new System.Drawing.Point(401, 24);
+            this.nudHorasNormal.Location = new System.Drawing.Point(446, 24);
             this.nudHorasNormal.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.nudHorasNormal.Name = "nudHorasNormal";
-            this.nudHorasNormal.Size = new System.Drawing.Size(140, 21);
+            this.nudHorasNormal.Size = new System.Drawing.Size(95, 21);
             this.nudHorasNormal.TabIndex = 11;
+            this.nudHorasNormal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // nudHorasExtendido
             // 
@@ -825,15 +803,16 @@
             0,
             0,
             65536});
-            this.nudHorasExtendido.Location = new System.Drawing.Point(401, 52);
+            this.nudHorasExtendido.Location = new System.Drawing.Point(446, 53);
             this.nudHorasExtendido.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.nudHorasExtendido.Name = "nudHorasExtendido";
-            this.nudHorasExtendido.Size = new System.Drawing.Size(140, 21);
+            this.nudHorasExtendido.Size = new System.Drawing.Size(95, 21);
             this.nudHorasExtendido.TabIndex = 12;
+            this.nudHorasExtendido.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tsMenu
             // 
@@ -995,8 +974,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label lblHorasSemanaExtendido;
-        private System.Windows.Forms.Label lblHorasSemanaNormal;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ListView lvTurnos;
         private System.Windows.Forms.Label label13;
