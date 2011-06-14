@@ -20,8 +20,10 @@ namespace GyCAP.UI.GestionStock
         private static int codigoMatPrima=0;
         //Defino una lista generica
         private static List<Entidades.MateriaPrimaABC> materiasPrimas = new List<GyCAP.Entidades.MateriaPrimaABC>();
-       
-        
+
+
+        #region Inicio
+
         public frmInventarioABC()
         {
             InitializeComponent();
@@ -34,16 +36,16 @@ namespace GyCAP.UI.GestionStock
             //Grilla de Modelos
             //Agregamos la columnas
             
-            dgvModelos.Columns.Add("CODIGO_MODELO", "Codigo");
+            dgvModelos.Columns.Add("CODIGO_MODELO", "Código");
             dgvModelos.Columns.Add("CODIGO_MODELO_PRODUCIDO", "Modelo");
             dgvModelos.Columns.Add("MODELO_PORCENTAJE", "Porcentaje");
             dgvModelos.Columns.Add("MODELO_CANTIDAD", "Cantidad");
 
             //Seteamos el modo de tamaño de las columnas
             dgvModelos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            //dgvModelos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvModelos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvModelos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvModelos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvModelos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
@@ -51,6 +53,8 @@ namespace GyCAP.UI.GestionStock
             dgvModelos.Columns["CODIGO_MODELO"].DataPropertyName = "CODIGO_MODELO";
             dgvModelos.Columns["MODELO_PORCENTAJE"].DataPropertyName = "MODELO_PORCENTAJE";
             dgvModelos.Columns["MODELO_CANTIDAD"].DataPropertyName = "MODELO_CANTIDAD";
+
+            dgvModelos.Columns["MODELO_PORCENTAJE"].DefaultCellStyle.Format = "N2";
 
             //Indicamos la alineacion de los campos
             dgvModelos.Columns["MODELO_PORCENTAJE"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -67,7 +71,7 @@ namespace GyCAP.UI.GestionStock
             dgvMP.Columns.Add("PRECIO_UNIDAD", "Precio");
             dgvMP.Columns.Add("CANTIDAD_INVERSION", "$ Inversion");
             dgvMP.Columns.Add("PORCENTAJE_INVERSION", "% Inv.");
-            dgvMP.Columns.Add("CATEGORIA_ABC", "Cat.");
+            dgvMP.Columns.Add("CATEGORIA_ABC", "Categoría");
 
             //Seteamos el modo de tamaño de las columnas
             dgvMP.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -87,21 +91,11 @@ namespace GyCAP.UI.GestionStock
             dgvMP.Columns["CANTIDAD_INVERSION"].DataPropertyName = "CANTIDAD_INVERSION";
             dgvMP.Columns["PORCENTAJE_INVERSION"].DataPropertyName = "PORCENTAJE_INVERSION";
             dgvMP.Columns["CATEGORIA_ABC"].DataPropertyName = "CATEGORIA_ABC";
-
-            //Indicamos la alineacion de los numeros
-            dgvMP.Columns["CODIGO_MATERIA_PRIMA_ABC"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvMP.Columns["CANTIDAD_ANUAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvMP.Columns["PRECIO_UNIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvMP.Columns["CANTIDAD_INVERSION"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvMP.Columns["PORCENTAJE_INVERSION"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-           
-
-
+                                   
             //Creamos el dataview y lo asignamos a la grilla
             dvListaMP = new DataView(dsInventarioABC.MATERIAS_PRIMAS_ABC);
             dgvMP.DataSource = dvListaMP;
-
-
+            
             //Traemos los datos para llenar Datatables 
             //Traigo los datos de MP
             BLL.MateriaPrimaBLL.ObtenerMP(dsInventarioABC.MATERIAS_PRIMAS);
@@ -131,10 +125,10 @@ namespace GyCAP.UI.GestionStock
             //Seteamos la interface
             SetInterface(estadoUI.inicio);
         }
-
+        #endregion
 
         #region Servicios
-        
+
         public static frmInventarioABC Instancia
         {
             get
@@ -172,13 +166,17 @@ namespace GyCAP.UI.GestionStock
 
                     //Escondo las columnas que no quiero que se vean
                     dgvModelos.Columns["CODIGO_MODELO"].Visible = false;
-
                     break;
 
                 case estadoUI.CargaDetalle:
                     gbDatosPrincipales.Enabled=false;
                     gbDatosCocinas.Visible = true;
-                    gbMateriasPrimas.Visible = false;
+                    gbMateriasPrimas.Visible = true;
+                    gbMateriasPrimas.Enabled = true;
+
+                    //Limpiamos los controles
+                    cbCocinas.SetSelectedIndex(-1);
+                    numPorcentaje.Value = Convert.ToDecimal(0.00);
 
                     //Escondo las columnas que no quiero que se vean
                     dgvModelos.Columns["CODIGO_MODELO"].Visible = false;
@@ -186,43 +184,33 @@ namespace GyCAP.UI.GestionStock
                 case estadoUI.generaHistorico:
                     gbDatosPrincipales.Enabled = false;
                     gbDatosCocinas.Visible = true;
-                    gbMateriasPrimas.Visible = false;
-                   
+                    gbMateriasPrimas.Visible = true;
+                    gbMateriasPrimas.Enabled = true;
+                                       
                     //Escondo las columnas que no quiero que se vean
                     dgvModelos.Columns["CODIGO_MODELO"].Visible = false;
                     break;
                 case estadoUI.generadoABC:
                     gbDatosPrincipales.Enabled = false;
                     gbDatosCocinas.Visible = true;
-                    gbMateriasPrimas.Visible = true;
-
-                    gbMateriasPrimas.Enabled = true;
-                    gbDatosCocinas.Enabled = false;
+                    gbDatosCocinas.Enabled = true;
 
                     //Escondo las columnas que no quiero que se vean
                     dgvMP.Columns["CODIGO_MATERIA_PRIMA_ABC"].Visible = false;
                     break;
-
             }
         }
-        private void rbNuevo_CheckedChanged(object sender, EventArgs e)
-        {
-            cbAñoHistorico.Visible = false;
-            cbAñoHistorico.SetSelectedIndex(-1);
-        }
+      
+        #endregion
 
-        private void rbHistorico_CheckedChanged(object sender, EventArgs e)
-        {
-            cbAñoHistorico.Visible = true;
-        }
-
+        #region Funciones Formulario
         private string ValidarDetalle()
         {
             string msjerror = string.Empty;
 
             if (cbCocinas.SelectedIndex == -1) msjerror = msjerror + "-Debe seleccionar un modelo de cocina\n";
             if (numPorcentaje.Value == 0) msjerror = msjerror + "-El porcentaje debe ser mayor a cero\n";
-            
+
             //Validamos que no se quiera agregar un modelo que ya está en el dataset
             foreach (Data.dsInventarioABC.MODELOS_PRODUCIDOSRow row in (Data.dsInventarioABC.MODELOS_PRODUCIDOSRow[])dsInventarioABC.MODELOS_PRODUCIDOS.Select(null, null, System.Data.DataViewRowState.Added))
             {
@@ -246,7 +234,7 @@ namespace GyCAP.UI.GestionStock
         {
             string msjerror = string.Empty;
 
-            int Porcentaje=0;
+            int Porcentaje = 0;
 
             //Validamos que no se quiera agregar un modelo que ya está en el dataset
             foreach (Data.dsInventarioABC.MODELOS_PRODUCIDOSRow row in dsInventarioABC.MODELOS_PRODUCIDOS.Rows)
@@ -256,8 +244,8 @@ namespace GyCAP.UI.GestionStock
                     Porcentaje = Porcentaje + Convert.ToInt32(row["MODELO_PORCENTAJE"]);
                 }
             }
-            
-            if (Porcentaje !=100)
+
+            if (Porcentaje != 100)
             {
                 msjerror = msjerror + "-El porcentaje debe ser igual 100\n";
             }
@@ -270,7 +258,89 @@ namespace GyCAP.UI.GestionStock
             return msjerror;
         }
 
+        //Funcion que pasa la lista generica al DataTable de materias primas
+        private void generarDataTable()
+        {
+            foreach (Entidades.MateriaPrimaABC MP in materiasPrimas)
+            {
+                //Se crea una fila y se la agrega al dataset
+                Data.dsInventarioABC.MATERIAS_PRIMAS_ABCRow row = dsInventarioABC.MATERIAS_PRIMAS_ABC.NewMATERIAS_PRIMAS_ABCRow();
+
+                codigoMatPrima += 1;
+                row.CODIGO_MATERIA_PRIMA_ABC = codigoMatPrima;
+                row.CODIGO_MATERIA_PRIMA = MP.CodigoMP;
+                row.CANTIDAD_ANUAL = Math.Round(MP.CantidadMP, 2);
+                row.PRECIO_UNIDAD = MP.PrecioMP;
+                row.CANTIDAD_INVERSION = Math.Round(MP.Inversion, 2);
+                row.PORCENTAJE_INVERSION = MP.PorcentajeMP;
+                row.CATEGORIA_ABC = MP.ClaseMP;
+
+                dsInventarioABC.MATERIAS_PRIMAS_ABC.AddMATERIAS_PRIMAS_ABCRow(row);
+            }
+
+        }
+
+        //Funcion que determina si ya existe una determinada MP en la Lista
+        private bool existeMPLista(decimal codigoMP, List<Entidades.MateriaPrimaABC> materiasPrimas)
+        {
+            foreach (Entidades.MateriaPrimaABC MP in materiasPrimas)
+            {
+                if (MP.CodigoMP == codigoMP)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        //Funcion que determina los porcentajes que representa la inversion de cada materia prima
+        private void calcularPorcentajes()
+        {
+            //Calculo el total de inversion necesario
+            decimal totalInversion = 0;
+
+            foreach (Entidades.MateriaPrimaABC MP in materiasPrimas)
+            {
+                totalInversion += MP.Inversion;
+            }
+
+            //Con el total ahora calculo el porcentaje para cada una de las materias primas
+            foreach (Entidades.MateriaPrimaABC mp in materiasPrimas)
+            {
+                mp.PorcentajeMP = Math.Round(((mp.Inversion / totalInversion) * 100), 2);
+            }
+
+        }
+        //Funcion que determina la Clase ABC de cada materia Prima
+        private void determinarABC()
+        {
+            decimal acumulador = 0;
+            int cantidad = 0;
+
+            foreach (Entidades.MateriaPrimaABC MP in materiasPrimas)
+            {
+                acumulador += MP.PorcentajeMP;
+
+                //Clasifico las materias primas en clases
+                if (acumulador <= 80 | cantidad==0)
+                {
+                    MP.ClaseMP = "A";
+                    cantidad = cantidad + 1;
+                }
+                else if (acumulador > 80 && acumulador <= 95)
+                {
+                    MP.ClaseMP = "B";
+                }
+                else if (acumulador > 95 && acumulador <= 100)
+                {
+                    MP.ClaseMP = "C";
+                }
+            }
+        }
+
         #endregion
+
+        #region Formulario
 
         private void btnGenerarInventario_Click(object sender, EventArgs e)
         {
@@ -292,11 +362,9 @@ namespace GyCAP.UI.GestionStock
                     else
                     {
                         //Se buscan los porcentajes de cocinas producidas del año historico
-
                         //Obtengo el plan anual
                         int año = Convert.ToInt32(cbAñoInventario.GetSelectedValue());
-
-
+                        
                         //Se trae el el total a producir en ese año desde la base de datos
                         txtCantAnual.Text = BLL.StockMateriaPrimaBLL.ObtenerTotalAnual(año).ToString();
 
@@ -363,26 +431,23 @@ namespace GyCAP.UI.GestionStock
                         }
                         else
                         {
-                            MessageBox.Show("No existen datos para calcular el histórico", "Error: Inventario ABC - Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            Entidades.Mensajes.MensajesABM.MsjValidacion("No existen datos para calcular el histórico", this.Text);
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Debe seleccionar un año para el Inventario ABC" , "Error: Inventario ABC - Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Entidades.Mensajes.MensajesABM.MsjValidacion("Debe seleccionar un año para poder calcular el Inventario ABC", this.Text);
                 }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Inventario ABC - Carga Detalle", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
             }
-
-
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-
             try
             {
                 string validacion = ValidarDetalle();
@@ -398,7 +463,7 @@ namespace GyCAP.UI.GestionStock
                     codigoModelo = codigoModelo + 1;
                     row.CODIGO_MODELO = codigoModelo;
                     row.CODIGO_MODELO_PRODUCIDO = Convert.ToInt32(cbCocinas.GetSelectedValue());
-                    row.MODELO_PORCENTAJE =Math.Round(Convert.ToDecimal(numPorcentaje.Value),2);
+                    row.MODELO_PORCENTAJE =Convert.ToDecimal(numPorcentaje.Value);
                     row.MODELO_CANTIDAD = Math.Round(((Convert.ToDecimal(numPorcentaje.Value) / 100) * Convert.ToInt32(txtCantAnual.Text)),0);
                     row.EndEdit();
 
@@ -411,29 +476,12 @@ namespace GyCAP.UI.GestionStock
                 }
                 else
                 {
-                    MessageBox.Show(validacion, "Error: Inventario ABC - Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
                 }
-
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Inventario ABC - Carga Detalle", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void dgvModelos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.Value != null)
-            {
-                string nombre;
-
-                switch (dgvModelos.Columns[e.ColumnIndex].Name)
-                {
-                    case "CODIGO_MODELO_PRODUCIDO":
-                        nombre = dsInventarioABC.COCINAS.FindByCOC_CODIGO(Convert.ToInt32(e.Value)).COC_CODIGO_PRODUCTO;
-                        e.Value = nombre;
-                        break;
-                }
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
             }
         }
 
@@ -449,6 +497,7 @@ namespace GyCAP.UI.GestionStock
         private void btnCalcularABC_Click(object sender, EventArgs e)
         {
             string validacion = ValidarABC();
+
             if (validacion == string.Empty)
             {
                 //Limpiamos el Dataset de Materias Primas
@@ -460,7 +509,6 @@ namespace GyCAP.UI.GestionStock
                 //Defino las materias primas
                 decimal[,] mpModelo = new decimal[1,1];
                 decimal[,] mpCostos ;
-
                               
                 //Buscamos las materias primas para cada modelo de cocina
                 foreach (Data.dsInventarioABC.MODELOS_PRODUCIDOSRow row in dsInventarioABC.MODELOS_PRODUCIDOS.Rows)
@@ -497,7 +545,6 @@ namespace GyCAP.UI.GestionStock
                         mpCostos[i,1] = (mpModelo[i,1] * precioMP);                        
                     }
 
-
                     //Me crea una matriz unica con el costo y la cantidad
                     decimal[,] mpUnica = new decimal[(mpModelo.Length / mpModelo.Rank), 3];
 
@@ -528,11 +575,10 @@ namespace GyCAP.UI.GestionStock
 
                 //Se muestra el groupbox donde esta la lista de clasificacion
                 SetInterface(estadoUI.generadoABC);
-
             }
             else
             {
-                MessageBox.Show(validacion, "Error: Inventario ABC - Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
             }            
         }
 
@@ -572,109 +618,8 @@ namespace GyCAP.UI.GestionStock
                     materiasPrimas.Add(mp);
                 }
             }
-
         }
-
-        //Funcion que determina si ya existe una determinada MP en la Lista
-        private bool existeMPLista(decimal codigoMP, List<Entidades.MateriaPrimaABC> materiasPrimas)
-        {
-            foreach (Entidades.MateriaPrimaABC MP in materiasPrimas)
-            {
-                if (MP.CodigoMP == codigoMP)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        //Funcion que determina los porcentajes que representa la inversion de cada materia prima
-        private void calcularPorcentajes()
-        {
-            //Calculo el total de inversion necesario
-            decimal totalInversion = 0;
-
-            foreach (Entidades.MateriaPrimaABC MP in materiasPrimas)
-            {
-                totalInversion += MP.Inversion;                                
-            }
-
-            //Con el total ahora calculo el porcentaje para cada una de las materias primas
-            foreach (Entidades.MateriaPrimaABC mp in materiasPrimas)
-            {
-                mp.PorcentajeMP =Math.Round(((mp.Inversion / totalInversion) *100),2);
-            }
-
-        }
-        //Funcion que determina la Clase ABC de cada materia Prima
-        private void determinarABC()
-        {
-            decimal acumulador = 0;
-
-            foreach (Entidades.MateriaPrimaABC MP in materiasPrimas)
-            {
-                acumulador += MP.PorcentajeMP;
-                
-                //Clasifico las materias primas en clases
-                if(acumulador <= 80)
-                {
-                    MP.ClaseMP= "A";
-                }
-                if (acumulador >80 && acumulador <= 95)
-                {
-                    MP.ClaseMP = "B";
-                }
-                if (acumulador > 95 && acumulador <= 100)
-                {
-                    MP.ClaseMP = "C";
-                }
-            }            
-        }
-
-        //Funcion que pasa la lista generica al DataTable de materias primas
-        private void generarDataTable()
-        {
-            foreach (Entidades.MateriaPrimaABC MP in materiasPrimas)
-            {
-                //Se crea una fila y se la agrega al dataset
-                Data.dsInventarioABC.MATERIAS_PRIMAS_ABCRow row = dsInventarioABC.MATERIAS_PRIMAS_ABC.NewMATERIAS_PRIMAS_ABCRow();
-
-                codigoMatPrima += 1;
-                row.CODIGO_MATERIA_PRIMA_ABC = codigoMatPrima;
-                row.CODIGO_MATERIA_PRIMA = MP.CodigoMP;
-                row.CANTIDAD_ANUAL =Math.Round(MP.CantidadMP,2);
-                row.PRECIO_UNIDAD = MP.PrecioMP;
-                row.CANTIDAD_INVERSION=Math.Round(MP.Inversion,2);
-                row.PORCENTAJE_INVERSION = MP.PorcentajeMP;
-                row.CATEGORIA_ABC = MP.ClaseMP;
-
-                dsInventarioABC.MATERIAS_PRIMAS_ABC.AddMATERIAS_PRIMAS_ABCRow(row);                
-            }
-            
-        }
-
-        private void dgvMP_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.Value != null)
-            {
-                string nombre;
-
-                switch (dgvMP.Columns[e.ColumnIndex].Name)
-                {
-                    case "CODIGO_MATERIA_PRIMA":
-                        nombre = dsInventarioABC.MATERIAS_PRIMAS.FindByMP_CODIGO(Convert.ToInt32(e.Value)).MP_NOMBRE;
-                        e.Value = nombre;
-                        break;
-                }
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            gbDatosCocinas.Enabled = true;
-            gbMateriasPrimas.Visible = false;
-        }
-
+        
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (dgvModelos.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
@@ -686,9 +631,8 @@ namespace GyCAP.UI.GestionStock
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un modelo de cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Modelo de Cocina", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
             }
-
         }
 
         private void btnSumar_Click(object sender, EventArgs e)
@@ -706,7 +650,7 @@ namespace GyCAP.UI.GestionStock
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un modelo de cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Modelo de Cocina", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
             }
         }
 
@@ -725,13 +669,72 @@ namespace GyCAP.UI.GestionStock
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un modelo de cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Modelo de Cocina", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
+            }
+        }
+        
+        #endregion
+
+        #region Controles
+
+        private void rbNuevo_CheckedChanged(object sender, EventArgs e)
+        {
+            cbAñoHistorico.Visible = false;
+            cbAñoHistorico.SetSelectedIndex(-1);
+        }
+
+        private void rbHistorico_CheckedChanged(object sender, EventArgs e)
+        {
+            cbAñoHistorico.Visible = true;
+        }
+
+        private void dgvModelos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
+        private void dgvMP_DataBindingComplete(object sender, EventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
+        private void dgvMP_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value != null)
+            {
+                string nombre;
+
+                switch (dgvMP.Columns[e.ColumnIndex].Name)
+                {
+                    case "CODIGO_MATERIA_PRIMA":
+                        nombre = dsInventarioABC.MATERIAS_PRIMAS.FindByMP_CODIGO(Convert.ToInt32(e.Value)).MP_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                }
             }
         }
 
+        private void dgvModelos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value != null)
+            {
+                string nombre;
+
+                switch (dgvModelos.Columns[e.ColumnIndex].Name)
+                {
+                    case "CODIGO_MODELO_PRODUCIDO":
+                        nombre = dsInventarioABC.COCINAS.FindByCOC_CODIGO(Convert.ToInt32(e.Value)).COC_CODIGO_PRODUCTO;
+                        e.Value = nombre;
+                        break;
+                }
+            }
+        }
+
+        #endregion
+
        
 
-
+       
 
     }
 }

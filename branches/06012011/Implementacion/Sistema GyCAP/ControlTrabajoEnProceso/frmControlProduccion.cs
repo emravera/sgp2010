@@ -860,11 +860,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
             if (sender.GetType().Equals(nudCantidadCierre.GetType())) { (sender as NumericUpDown).Select(0, 20); }
         }
 
-        #endregion Servicios
-
-        
-
-        
+        #endregion Servicios  
 
     }
 }
