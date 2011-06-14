@@ -485,7 +485,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                                 dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.AcceptChanges();
                             }
                             
-                            Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Estimacion de Demanda Anual", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
+                            Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Estimación de Demanda Anual", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
                             
                             //Pongo la interface en el estado de busqueda
                             SetInterface(estadoUI.buscar);
@@ -555,8 +555,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
 
                 //Se calcula el total de la estimacion
-                
-
+                totalsistema = 0;
                 for (int j = 0; j < 12; j++)
                 {
                     totalsistema = totalsistema + promedio[j];
@@ -768,16 +767,13 @@ namespace GyCAP.UI.PlanificacionProduccion
                 {
                     int anio = Convert.ToInt32(txtAnio.Text);
                 }
-                catch (Exception) { strError = strError + "-El año no es un numero\n"; }
+                catch (Exception) { strError = strError + "-El año no es un número\n"; }
 
                 //Validacion identificacion
                 if (txtIdentificacion.Text == string.Empty) strError = strError + "-El nombre de identificación no puede estar vacío\n";
                 
-                if (estadoActual == estadoUI.calcularEstimacion)
-                {
-                    //Verifico que haya seleccionado alguna estimacion anterior
-                    if (chListAnios.CheckedItems.Count == 0) strError = strError + "-En modo Calcular Estimacion por sistema se deben seleccionar datos anteriores para utilizar\n";
-                }
+               //Verifico que haya seleccionado alguna estimacion anterior
+               if (chListAnios.CheckedItems.Count == 0) strError = strError + "-En modo calcular estimación por sistema se deben seleccionar datos anteriores para utilizar\n";
             }
             if (estado == estadoUI.cargaHistorico)
             {
@@ -788,7 +784,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 {
                     int anio = Convert.ToInt32(txtAnioHistorico.Text);
                 }
-                catch (Exception) { strError = strError + "-El año no es un numero\n"; }
+                catch (Exception) { strError = strError + "-El año no es un número\n"; }
 
                 //Validacion identificacion
                 if (txtDenominacionHistorico.Text == string.Empty) strError = strError + "-El nombre de identificación no puede estar vacío\n";
@@ -1015,9 +1011,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             numCrecimiento.Select(0, 10);
         }
         #endregion 
-
-
-
-       
+               
     }
 }

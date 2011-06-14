@@ -55,7 +55,6 @@
             this.txtCantAnual = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.gbMateriasPrimas = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.dgvMP = new System.Windows.Forms.DataGridView();
             this.gbDatosPrincipales.SuspendLayout();
             this.gbDatosCocinas.SuspendLayout();
@@ -69,6 +68,8 @@
             // 
             // gbDatosPrincipales
             // 
+            this.gbDatosPrincipales.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbDatosPrincipales.Controls.Add(this.cbAñoHistorico);
             this.gbDatosPrincipales.Controls.Add(this.rbHistorico);
             this.gbDatosPrincipales.Controls.Add(this.rbNuevo);
@@ -77,7 +78,7 @@
             this.gbDatosPrincipales.Controls.Add(this.label3);
             this.gbDatosPrincipales.Location = new System.Drawing.Point(3, 9);
             this.gbDatosPrincipales.Name = "gbDatosPrincipales";
-            this.gbDatosPrincipales.Size = new System.Drawing.Size(760, 53);
+            this.gbDatosPrincipales.Size = new System.Drawing.Size(787, 53);
             this.gbDatosPrincipales.TabIndex = 16;
             this.gbDatosPrincipales.TabStop = false;
             this.gbDatosPrincipales.Text = "Datos Principales";
@@ -89,7 +90,7 @@
             this.cbAñoHistorico.FormattingEnabled = true;
             this.cbAñoHistorico.Location = new System.Drawing.Point(495, 20);
             this.cbAñoHistorico.Name = "cbAñoHistorico";
-            this.cbAñoHistorico.Size = new System.Drawing.Size(95, 21);
+            this.cbAñoHistorico.Size = new System.Drawing.Size(109, 21);
             this.cbAñoHistorico.TabIndex = 31;
             // 
             // rbHistorico
@@ -128,7 +129,8 @@
             // 
             // btnGenerarInventario
             // 
-            this.btnGenerarInventario.Location = new System.Drawing.Point(670, 19);
+            this.btnGenerarInventario.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnGenerarInventario.Location = new System.Drawing.Point(685, 19);
             this.btnGenerarInventario.Name = "btnGenerarInventario";
             this.btnGenerarInventario.Size = new System.Drawing.Size(82, 23);
             this.btnGenerarInventario.TabIndex = 4;
@@ -147,6 +149,8 @@
             // 
             // gbDatosCocinas
             // 
+            this.gbDatosCocinas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.gbDatosCocinas.Controls.Add(this.panelAcciones);
             this.gbDatosCocinas.Controls.Add(this.btnVolver);
             this.gbDatosCocinas.Controls.Add(this.btnCalcularABC);
@@ -156,7 +160,7 @@
             this.gbDatosCocinas.Controls.Add(this.label1);
             this.gbDatosCocinas.Location = new System.Drawing.Point(3, 68);
             this.gbDatosCocinas.Name = "gbDatosCocinas";
-            this.gbDatosCocinas.Size = new System.Drawing.Size(342, 330);
+            this.gbDatosCocinas.Size = new System.Drawing.Size(342, 384);
             this.gbDatosCocinas.TabIndex = 17;
             this.gbDatosCocinas.TabStop = false;
             this.gbDatosCocinas.Text = "Datos Cocinas a Producir";
@@ -169,16 +173,16 @@
             this.panelAcciones.Controls.Add(this.btnSumar);
             this.panelAcciones.Controls.Add(this.label6);
             this.panelAcciones.Controls.Add(this.btnDelete);
-            this.panelAcciones.Location = new System.Drawing.Point(9, 258);
+            this.panelAcciones.Location = new System.Drawing.Point(6, 295);
             this.panelAcciones.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelAcciones.Name = "panelAcciones";
-            this.panelAcciones.Size = new System.Drawing.Size(322, 37);
+            this.panelAcciones.Size = new System.Drawing.Size(325, 47);
             this.panelAcciones.TabIndex = 31;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(171, 7);
+            this.label7.Location = new System.Drawing.Point(170, 30);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(58, 13);
             this.label7.TabIndex = 20;
@@ -192,7 +196,7 @@
             this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestar.Image = ((System.Drawing.Image)(resources.GetObject("btnRestar.Image")));
             this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRestar.Location = new System.Drawing.Point(271, -2);
+            this.btnRestar.Location = new System.Drawing.Point(200, 1);
             this.btnRestar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRestar.Name = "btnRestar";
             this.btnRestar.Size = new System.Drawing.Size(30, 30);
@@ -209,7 +213,7 @@
             this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSumar.Image = ((System.Drawing.Image)(resources.GetObject("btnSumar.Image")));
             this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSumar.Location = new System.Drawing.Point(235, -2);
+            this.btnSumar.Location = new System.Drawing.Point(164, 1);
             this.btnSumar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSumar.Name = "btnSumar";
             this.btnSumar.Size = new System.Drawing.Size(30, 30);
@@ -221,7 +225,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 7);
+            this.label6.Location = new System.Drawing.Point(25, 30);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 13);
             this.label6.TabIndex = 17;
@@ -235,7 +239,7 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Delete_25;
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(61, -2);
+            this.btnDelete.Location = new System.Drawing.Point(28, -2);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(30, 30);
@@ -246,9 +250,9 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(143, 301);
+            this.btnVolver.Location = new System.Drawing.Point(144, 347);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(91, 23);
+            this.btnVolver.Size = new System.Drawing.Size(90, 25);
             this.btnVolver.TabIndex = 30;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -256,9 +260,9 @@
             // 
             // btnCalcularABC
             // 
-            this.btnCalcularABC.Location = new System.Drawing.Point(240, 301);
+            this.btnCalcularABC.Location = new System.Drawing.Point(241, 347);
             this.btnCalcularABC.Name = "btnCalcularABC";
-            this.btnCalcularABC.Size = new System.Drawing.Size(91, 23);
+            this.btnCalcularABC.Size = new System.Drawing.Size(90, 25);
             this.btnCalcularABC.TabIndex = 29;
             this.btnCalcularABC.Text = "Calcular ABC";
             this.btnCalcularABC.UseVisualStyleBackColor = true;
@@ -270,14 +274,15 @@
             this.dgvModelos.AllowUserToDeleteRows = false;
             this.dgvModelos.AllowUserToResizeRows = false;
             this.dgvModelos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvModelos.Location = new System.Drawing.Point(9, 136);
+            this.dgvModelos.Location = new System.Drawing.Point(6, 136);
             this.dgvModelos.Name = "dgvModelos";
             this.dgvModelos.ReadOnly = true;
             this.dgvModelos.RowHeadersVisible = false;
             this.dgvModelos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvModelos.Size = new System.Drawing.Size(322, 117);
+            this.dgvModelos.Size = new System.Drawing.Size(325, 154);
             this.dgvModelos.TabIndex = 28;
             this.dgvModelos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvModelos_CellFormatting);
+            this.dgvModelos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvModelos_DataBindingComplete);
             // 
             // gbCargaPorcentaje
             // 
@@ -296,7 +301,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 49);
+            this.label2.Location = new System.Drawing.Point(20, 49);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 13);
             this.label2.TabIndex = 16;
@@ -304,7 +309,7 @@
             // 
             // numPorcentaje
             // 
-            this.numPorcentaje.Location = new System.Drawing.Point(106, 46);
+            this.numPorcentaje.Location = new System.Drawing.Point(106, 45);
             this.numPorcentaje.Name = "numPorcentaje";
             this.numPorcentaje.Size = new System.Drawing.Size(99, 20);
             this.numPorcentaje.TabIndex = 15;
@@ -312,7 +317,7 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(240, 43);
+            this.btnAgregar.Location = new System.Drawing.Point(240, 44);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(76, 23);
             this.btnAgregar.TabIndex = 13;
@@ -325,7 +330,7 @@
             this.cbCocinas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCocinas.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbCocinas.FormattingEnabled = true;
-            this.cbCocinas.Location = new System.Drawing.Point(106, 18);
+            this.cbCocinas.Location = new System.Drawing.Point(106, 17);
             this.cbCocinas.Name = "cbCocinas";
             this.cbCocinas.Size = new System.Drawing.Size(210, 21);
             this.cbCocinas.TabIndex = 1;
@@ -341,40 +346,32 @@
             // 
             // txtCantAnual
             // 
-            this.txtCantAnual.Location = new System.Drawing.Point(176, 19);
+            this.txtCantAnual.Location = new System.Drawing.Point(195, 25);
             this.txtCantAnual.Name = "txtCantAnual";
-            this.txtCantAnual.Size = new System.Drawing.Size(100, 20);
+            this.txtCantAnual.Size = new System.Drawing.Size(136, 20);
             this.txtCantAnual.TabIndex = 26;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(43, 22);
+            this.label1.Location = new System.Drawing.Point(11, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(127, 13);
+            this.label1.Size = new System.Drawing.Size(178, 13);
             this.label1.TabIndex = 25;
-            this.label1.Text = "Cantidad Total a Producir";
+            this.label1.Text = "Cantidad Total a Producir en el Año:";
             // 
             // gbMateriasPrimas
             // 
-            this.gbMateriasPrimas.Controls.Add(this.button1);
+            this.gbMateriasPrimas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbMateriasPrimas.Controls.Add(this.dgvMP);
             this.gbMateriasPrimas.Location = new System.Drawing.Point(351, 68);
             this.gbMateriasPrimas.Name = "gbMateriasPrimas";
-            this.gbMateriasPrimas.Size = new System.Drawing.Size(412, 330);
+            this.gbMateriasPrimas.Size = new System.Drawing.Size(439, 384);
             this.gbMateriasPrimas.TabIndex = 18;
             this.gbMateriasPrimas.TabStop = false;
-            this.gbMateriasPrimas.Text = "Materias Primas";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(305, 301);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 23);
-            this.button1.TabIndex = 31;
-            this.button1.Text = "Volver";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.gbMateriasPrimas.Text = "Clasificación Inventario ABC";
             // 
             // dgvMP
             // 
@@ -382,25 +379,25 @@
             this.dgvMP.AllowUserToDeleteRows = false;
             this.dgvMP.AllowUserToResizeRows = false;
             this.dgvMP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMP.Location = new System.Drawing.Point(6, 19);
+            this.dgvMP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvMP.Location = new System.Drawing.Point(3, 16);
             this.dgvMP.Name = "dgvMP";
-            this.dgvMP.ReadOnly = true;
             this.dgvMP.RowHeadersVisible = false;
             this.dgvMP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMP.Size = new System.Drawing.Size(398, 276);
+            this.dgvMP.Size = new System.Drawing.Size(433, 365);
             this.dgvMP.TabIndex = 29;
+            this.dgvMP.DataMemberChanged += new System.EventHandler(this.dgvMP_DataBindingComplete);
             this.dgvMP.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvMP_CellFormatting);
             // 
             // frmInventarioABC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(767, 404);
+            this.ClientSize = new System.Drawing.Size(794, 464);
             this.Controls.Add(this.gbMateriasPrimas);
             this.Controls.Add(this.gbDatosCocinas);
             this.Controls.Add(this.gbDatosPrincipales);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
             this.Name = "frmInventarioABC";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -440,17 +437,16 @@
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbCocinas;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnCalcularABC;
-        private System.Windows.Forms.DataGridView dgvModelos;
         private System.Windows.Forms.GroupBox gbMateriasPrimas;
         private System.Windows.Forms.DataGridView dgvMP;
         private System.Windows.Forms.Button btnVolver;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panelAcciones;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnRestar;
         private System.Windows.Forms.Button btnSumar;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.DataGridView dgvModelos;
 
     }
 }
