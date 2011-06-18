@@ -15,6 +15,7 @@ namespace GyCAP.UI.ProcesoFabricacion
         private static frmHojaRuta _frmHojaRuta = null;
         private Data.dsHojaRuta dsHojaRuta = new GyCAP.Data.dsHojaRuta();
         private DataView dvHojasRuta, dvDetalleHoja, dvCentrosTrabajo, dvOperaciones, dvStockOrigen, dvStockDestino, dvUbicacionStock;
+        private DataView dvFiltroOrigen, dvFiltroDestino;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
@@ -364,6 +365,8 @@ namespace GyCAP.UI.ProcesoFabricacion
                 cbCentroTrabajo.SetTexto("Seleccione...");
                 cboStockOrigen.SetSelectedValue(-1);
                 cboStockDestino.SetSelectedValue(-1);
+                cboFiltroOrigen.SetSelectedValue(-1);
+                cboFiltroDestino.SetSelectedValue(-1);
                 nudSecuencia.Value = 0;
             }
             else
@@ -562,22 +565,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                 BLL.SectorBLL.ObtenerTodos(dsHojaRuta.SECTORES);
                 BLL.OperacionBLL.ObetenerOperaciones(dsHojaRuta.OPERACIONES);
                 BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsHojaRuta.UBICACIONES_STOCK);
-
-                dvCentrosTrabajo = new DataView(dsHojaRuta.CENTROS_TRABAJOS);
-                dvOperaciones = new DataView(dsHojaRuta.OPERACIONES);
-                string[] display = { "OPR_CODIGO", "OPR_NOMBRE" };
-                cbOperacion.SetDatos(dvOperaciones, "OPR_NUMERO", display, " - ", "Seleccione...", false);
-                cbCentroTrabajo.SetDatos(dvCentrosTrabajo, "CTO_CODIGO", "CTO_NOMBRE", "Seleccione...", false);
-
-                dvStockOrigen = new DataView(dsHojaRuta.UBICACIONES_STOCK);
-                dvStockDestino = new DataView(dsHojaRuta.UBICACIONES_STOCK);
-                dvStockOrigen.RowFilter = "TUS_CODIGO <> " + BLL.TipoUbicacionStockBLL.TipoVista;
-                dvStockDestino.RowFilter = "TUS_CODIGO <> " + BLL.TipoUbicacionStockBLL.TipoVista;
-                cboStockOrigen.SetDatos(dvStockOrigen, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
-                cboStockDestino.SetDatos(dvStockDestino, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
-
-                dvUbicacionStock = new DataView(dsHojaRuta.UBICACIONES_STOCK);
-                cboUbicacionStock.SetDatos(dvUbicacionStock, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
+                BLL.ContenidoUbicacionStockBLL.ObtenerContenidosUbicacionStock(dsHojaRuta.CONTENIDO_UBICACION_STOCK);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -587,6 +575,27 @@ namespace GyCAP.UI.ProcesoFabricacion
             {
                 MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
             }
+
+            dvCentrosTrabajo = new DataView(dsHojaRuta.CENTROS_TRABAJOS);
+            dvOperaciones = new DataView(dsHojaRuta.OPERACIONES);
+            string[] display = { "OPR_CODIGO", "OPR_NOMBRE" };
+            cbOperacion.SetDatos(dvOperaciones, "OPR_NUMERO", display, " - ", "Seleccione...", false);
+            cbCentroTrabajo.SetDatos(dvCentrosTrabajo, "CTO_CODIGO", "CTO_NOMBRE", "Seleccione...", false);
+
+            dvStockOrigen = new DataView(dsHojaRuta.UBICACIONES_STOCK);
+            dvStockDestino = new DataView(dsHojaRuta.UBICACIONES_STOCK);
+            dvStockOrigen.RowFilter = "TUS_CODIGO <> " + BLL.TipoUbicacionStockBLL.TipoVista;
+            dvStockDestino.RowFilter = "TUS_CODIGO <> " + BLL.TipoUbicacionStockBLL.TipoVista;
+            cboStockOrigen.SetDatos(dvStockOrigen, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
+            cboStockDestino.SetDatos(dvStockDestino, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
+
+            dvUbicacionStock = new DataView(dsHojaRuta.UBICACIONES_STOCK);
+            cboUbicacionStock.SetDatos(dvUbicacionStock, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
+
+            dvFiltroOrigen = new DataView(dsHojaRuta.CONTENIDO_UBICACION_STOCK);
+            dvFiltroDestino = new DataView(dsHojaRuta.CONTENIDO_UBICACION_STOCK);
+            cboFiltroOrigen.SetDatos(dvFiltroOrigen, "CON_CODIGO", "CON_NOMBRE", "Filtrar por contenido...", true);
+            cboFiltroDestino.SetDatos(dvFiltroDestino, "CON_CODIGO", "CON_NOMBRE", "Filtrar por contenido...", true);
         }        
 
         private void dgvHojasRuta_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -690,6 +699,38 @@ namespace GyCAP.UI.ProcesoFabricacion
         private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }        
+
+        private void cboFiltro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {                
+                if ((sender as Sistema.ControlesUsuarios.DropDownList).Equals(cboFiltroOrigen))
+                {
+                    if (cboFiltroOrigen.GetSelectedValueInt() != -1)
+                    {
+                        dvStockOrigen.RowFilter = "CON_CODIGO = " + cboFiltroOrigen.GetSelectedValueInt();
+                    }
+                    else
+                    {
+                        dvStockOrigen.RowFilter = string.Empty;
+                    }
+                    cboStockOrigen.SetDatos(dvStockOrigen, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
+                }
+                else
+                {
+                    if (cboFiltroDestino.GetSelectedValueInt() != -1)
+                    {
+                        dvStockDestino.RowFilter = "CON_CODIGO = " + cboFiltroDestino.GetSelectedValueInt();
+                    }
+                    else
+                    {
+                        dvStockDestino.RowFilter = string.Empty;
+                    }
+                    cboStockDestino.SetDatos(dvStockDestino, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
+                }
+            }
+            catch (Exception) { }
         }
 
         #endregion
