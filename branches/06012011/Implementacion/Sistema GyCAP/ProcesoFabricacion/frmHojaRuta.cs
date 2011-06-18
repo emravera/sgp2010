@@ -371,7 +371,6 @@ namespace GyCAP.UI.ProcesoFabricacion
             }
             else
             {
-
                 MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.Seleccion, new List<string> { "Operación", "Centro de Trabajo" }), this.Text);
             }
         }
@@ -379,6 +378,12 @@ namespace GyCAP.UI.ProcesoFabricacion
         private void btnHecho_Click(object sender, EventArgs e)
         {
             slideControl.BackwardTo("slideDatos");
+            cbOperacion.SetTexto("Seleccione...");
+            cbCentroTrabajo.SetTexto("Seleccione...");
+            cboStockOrigen.SetSelectedValue(-1);
+            cboStockDestino.SetSelectedValue(-1);
+            cboFiltroOrigen.SetSelectedValue(-1);
+            cboFiltroDestino.SetSelectedValue(-1);
             nudSecuencia.Value = 0;
             panelAcciones.Enabled = true;
         }
