@@ -326,6 +326,7 @@
             this.cboTipoUbicacion.Name = "cboTipoUbicacion";
             this.cboTipoUbicacion.Size = new System.Drawing.Size(174, 21);
             this.cboTipoUbicacion.TabIndex = 15;
+            this.cboTipoUbicacion.SelectedIndexChanged += new System.EventHandler(this.cboTipoUbicacion_SelectedIndexChanged);
             // 
             // cboUnidadMedida
             // 

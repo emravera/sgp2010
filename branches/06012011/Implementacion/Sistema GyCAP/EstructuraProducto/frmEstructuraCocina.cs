@@ -1085,9 +1085,9 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void control_Enter(object sender, EventArgs e)
         {
-            if (sender.GetType().Equals(txtNombre.GetType())) { (sender as TextBox).SelectAll(); }
-            if (sender.GetType().Equals(txtDescripcion.GetType())) { (sender as RichTextBox).SelectAll(); }
-            if (sender.GetType().Equals(nudcosto.GetType())) { (sender as NumericUpDown).Select(0, 20); }
+            //if (sender.GetType().Equals(txtNombre.GetType())) { (sender as TextBox).SelectAll(); }
+            //if (sender.GetType().Equals(txtDescripcion.GetType())) { (sender as RichTextBox).SelectAll(); }
+            //if (sender.GetType().Equals(nudcosto.GetType())) { (sender as NumericUpDown).Select(0, 20); }
         }
 
         #endregion
