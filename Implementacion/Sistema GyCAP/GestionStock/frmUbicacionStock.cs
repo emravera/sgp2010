@@ -634,9 +634,30 @@ namespace GyCAP.UI.GestionStock
         private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
-        }
+        }        
 
+        private void cboTipoUbicacion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (estadoInterface == estadoUI.nuevo)
+                {
+                    if (cboTipoUbicacion.GetSelectedValueInt() == BLL.TipoUbicacionStockBLL.TipoVista)
+                    {
+                        nudCantidadReal.Enabled = false;
+                        nudCantidadVirtual.Enabled = false;
+                        nudCantidadReal.Value = 0;
+                        nudCantidadVirtual.Value = 0;
+                    }
+                    else
+                    {
+                        nudCantidadReal.Enabled = true;
+                        nudCantidadVirtual.Enabled = true;
+                    }
+                }
+            }
+            catch (Exception) { }
+        }
         #endregion
-                
     }
 }

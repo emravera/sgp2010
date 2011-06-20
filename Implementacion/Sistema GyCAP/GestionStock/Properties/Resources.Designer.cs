@@ -151,6 +151,13 @@ namespace GyCAP.UI.GestionStock.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Refresh_25 {
+            get {
+                object obj = ResourceManager.GetObject("Refresh_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Salir_25 {
             get {
                 object obj = ResourceManager.GetObject("Salir_25", resourceCulture);

@@ -30,35 +30,39 @@
         {
             this.scDown = new System.Windows.Forms.SplitContainer();
             this.flpMenu = new System.Windows.Forms.FlowLayoutPanel();
-            this.scUp = new System.Windows.Forms.SplitContainer();
-            this.btnMenu = new System.Windows.Forms.Button();
             this.btnActualizacionStock = new System.Windows.Forms.Button();
             this.panelActualizacionStock = new System.Windows.Forms.Panel();
             this.btnConsultarActualizacionStock = new System.Windows.Forms.Button();
             this.btnInventarioAbc = new System.Windows.Forms.Button();
             this.panelInventarioABC = new System.Windows.Forms.Panel();
             this.btnConsultarInventarioAbc = new System.Windows.Forms.Button();
-            this.btnUbicacionStock = new System.Windows.Forms.Button();
-            this.panelUbicacionStock = new System.Windows.Forms.Panel();
-            this.btnConsultarUbicacionStock = new System.Windows.Forms.Button();
-            this.btnNuevoUbicacionStock = new System.Windows.Forms.Button();
             this.btnEntregaProducto = new System.Windows.Forms.Button();
             this.panelEntregaProducto = new System.Windows.Forms.Panel();
             this.btnConsultarEntregaProducto = new System.Windows.Forms.Button();
             this.btnNuevoEntregaProducto = new System.Windows.Forms.Button();
+            this.btnEstructuraStock = new System.Windows.Forms.Button();
+            this.panelEstructuraStock = new System.Windows.Forms.Panel();
+            this.btnConsultarEstructuraStock = new System.Windows.Forms.Button();
+            this.btnUbicacionStock = new System.Windows.Forms.Button();
+            this.panelUbicacionStock = new System.Windows.Forms.Panel();
+            this.btnConsultarUbicacionStock = new System.Windows.Forms.Button();
+            this.btnNuevoUbicacionStock = new System.Windows.Forms.Button();
             this.panelSalir = new System.Windows.Forms.Panel();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.scUp = new System.Windows.Forms.SplitContainer();
+            this.btnMenu = new System.Windows.Forms.Button();
             this.scDown.Panel1.SuspendLayout();
             this.scDown.Panel2.SuspendLayout();
             this.scDown.SuspendLayout();
             this.flpMenu.SuspendLayout();
-            this.scUp.Panel1.SuspendLayout();
-            this.scUp.SuspendLayout();
             this.panelActualizacionStock.SuspendLayout();
             this.panelInventarioABC.SuspendLayout();
-            this.panelUbicacionStock.SuspendLayout();
             this.panelEntregaProducto.SuspendLayout();
+            this.panelEstructuraStock.SuspendLayout();
+            this.panelUbicacionStock.SuspendLayout();
             this.panelSalir.SuspendLayout();
+            this.scUp.Panel1.SuspendLayout();
+            this.scUp.SuspendLayout();
             this.SuspendLayout();
             // 
             // scDown
@@ -91,10 +95,12 @@
             this.flpMenu.Controls.Add(this.panelActualizacionStock);
             this.flpMenu.Controls.Add(this.btnInventarioAbc);
             this.flpMenu.Controls.Add(this.panelInventarioABC);
-            this.flpMenu.Controls.Add(this.btnUbicacionStock);
-            this.flpMenu.Controls.Add(this.panelUbicacionStock);
             this.flpMenu.Controls.Add(this.btnEntregaProducto);
             this.flpMenu.Controls.Add(this.panelEntregaProducto);
+            this.flpMenu.Controls.Add(this.btnEstructuraStock);
+            this.flpMenu.Controls.Add(this.panelEstructuraStock);
+            this.flpMenu.Controls.Add(this.btnUbicacionStock);
+            this.flpMenu.Controls.Add(this.panelUbicacionStock);
             this.flpMenu.Controls.Add(this.panelSalir);
             this.flpMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpMenu.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -102,44 +108,6 @@
             this.flpMenu.Name = "flpMenu";
             this.flpMenu.Size = new System.Drawing.Size(157, 566);
             this.flpMenu.TabIndex = 0;
-            // 
-            // scUp
-            // 
-            this.scUp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scUp.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.scUp.IsSplitterFixed = true;
-            this.scUp.Location = new System.Drawing.Point(0, 0);
-            this.scUp.Name = "scUp";
-            // 
-            // scUp.Panel1
-            // 
-            this.scUp.Panel1.AutoScroll = true;
-            this.scUp.Panel1.Controls.Add(this.btnMenu);
-            this.scUp.Panel1MinSize = 20;
-            // 
-            // scUp.Panel2
-            // 
-            this.scUp.Panel2.AutoScroll = true;
-            this.scUp.Panel2.AutoScrollMargin = new System.Drawing.Size(1000, 1000);
-            this.scUp.Panel2.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.scUp_Panel2_ControlRemoved);
-            this.scUp.Size = new System.Drawing.Size(624, 566);
-            this.scUp.SplitterDistance = 20;
-            this.scUp.SplitterWidth = 3;
-            this.scUp.TabIndex = 0;
-            // 
-            // btnMenu
-            // 
-            this.btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
-            this.btnMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMenu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
-            this.btnMenu.Location = new System.Drawing.Point(0, 0);
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(13, 566);
-            this.btnMenu.TabIndex = 0;
-            this.btnMenu.Text = "Menú";
-            this.btnMenu.UseVisualStyleBackColor = true;
-            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
             // 
             // btnActualizacionStock
             // 
@@ -239,83 +207,12 @@
             this.btnConsultarInventarioAbc.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnConsultarInventarioAbc.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
-            // btnUbicacionStock
-            // 
-            this.btnUbicacionStock.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUbicacionStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUbicacionStock.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUbicacionStock.Location = new System.Drawing.Point(0, 358);
-            this.btnUbicacionStock.Margin = new System.Windows.Forms.Padding(0);
-            this.btnUbicacionStock.Name = "btnUbicacionStock";
-            this.btnUbicacionStock.Size = new System.Drawing.Size(158, 25);
-            this.btnUbicacionStock.TabIndex = 21;
-            this.btnUbicacionStock.Text = "Ubicación stock";
-            this.btnUbicacionStock.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUbicacionStock.UseVisualStyleBackColor = true;
-            this.btnUbicacionStock.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // panelUbicacionStock
-            // 
-            this.panelUbicacionStock.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelUbicacionStock.BackColor = System.Drawing.Color.Silver;
-            this.panelUbicacionStock.Controls.Add(this.btnConsultarUbicacionStock);
-            this.panelUbicacionStock.Controls.Add(this.btnNuevoUbicacionStock);
-            this.panelUbicacionStock.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelUbicacionStock.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelUbicacionStock.Location = new System.Drawing.Point(0, 383);
-            this.panelUbicacionStock.Margin = new System.Windows.Forms.Padding(0);
-            this.panelUbicacionStock.Name = "panelUbicacionStock";
-            this.panelUbicacionStock.Size = new System.Drawing.Size(158, 152);
-            this.panelUbicacionStock.TabIndex = 24;
-            // 
-            // btnConsultarUbicacionStock
-            // 
-            this.btnConsultarUbicacionStock.AutoSize = true;
-            this.btnConsultarUbicacionStock.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnConsultarUbicacionStock.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConsultarUbicacionStock.FlatAppearance.BorderSize = 0;
-            this.btnConsultarUbicacionStock.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnConsultarUbicacionStock.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.btnConsultarUbicacionStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarUbicacionStock.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Find_48;
-            this.btnConsultarUbicacionStock.Location = new System.Drawing.Point(48, 70);
-            this.btnConsultarUbicacionStock.Name = "btnConsultarUbicacionStock";
-            this.btnConsultarUbicacionStock.Size = new System.Drawing.Size(63, 71);
-            this.btnConsultarUbicacionStock.TabIndex = 3;
-            this.btnConsultarUbicacionStock.Text = "Consultar";
-            this.btnConsultarUbicacionStock.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnConsultarUbicacionStock.UseVisualStyleBackColor = true;
-            this.btnConsultarUbicacionStock.Click += new System.EventHandler(this.btnConsultarUbicacionStock_Click);
-            this.btnConsultarUbicacionStock.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnConsultarUbicacionStock.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnNuevoUbicacionStock
-            // 
-            this.btnNuevoUbicacionStock.AutoSize = true;
-            this.btnNuevoUbicacionStock.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnNuevoUbicacionStock.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNuevoUbicacionStock.FlatAppearance.BorderSize = 0;
-            this.btnNuevoUbicacionStock.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnNuevoUbicacionStock.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.btnNuevoUbicacionStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevoUbicacionStock.Image = global::GyCAP.UI.GestionStock.Properties.Resources.New_48;
-            this.btnNuevoUbicacionStock.Location = new System.Drawing.Point(52, 0);
-            this.btnNuevoUbicacionStock.Name = "btnNuevoUbicacionStock";
-            this.btnNuevoUbicacionStock.Size = new System.Drawing.Size(54, 71);
-            this.btnNuevoUbicacionStock.TabIndex = 2;
-            this.btnNuevoUbicacionStock.Text = " Nuevo";
-            this.btnNuevoUbicacionStock.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnNuevoUbicacionStock.UseVisualStyleBackColor = true;
-            this.btnNuevoUbicacionStock.Click += new System.EventHandler(this.btnNuevoUbicacionStock_Click);
-            this.btnNuevoUbicacionStock.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnNuevoUbicacionStock.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
             // btnEntregaProducto
             // 
             this.btnEntregaProducto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEntregaProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEntregaProducto.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEntregaProducto.Location = new System.Drawing.Point(158, 0);
+            this.btnEntregaProducto.Location = new System.Drawing.Point(0, 358);
             this.btnEntregaProducto.Margin = new System.Windows.Forms.Padding(0);
             this.btnEntregaProducto.Name = "btnEntregaProducto";
             this.btnEntregaProducto.Size = new System.Drawing.Size(158, 25);
@@ -333,7 +230,7 @@
             this.panelEntregaProducto.Controls.Add(this.btnNuevoEntregaProducto);
             this.panelEntregaProducto.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelEntregaProducto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelEntregaProducto.Location = new System.Drawing.Point(158, 25);
+            this.panelEntregaProducto.Location = new System.Drawing.Point(0, 383);
             this.panelEntregaProducto.Margin = new System.Windows.Forms.Padding(0);
             this.panelEntregaProducto.Name = "panelEntregaProducto";
             this.panelEntregaProducto.Size = new System.Drawing.Size(158, 152);
@@ -381,14 +278,134 @@
             this.btnNuevoEntregaProducto.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoEntregaProducto.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
+            // btnEstructuraStock
+            // 
+            this.btnEstructuraStock.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEstructuraStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEstructuraStock.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEstructuraStock.Location = new System.Drawing.Point(0, 535);
+            this.btnEstructuraStock.Margin = new System.Windows.Forms.Padding(0);
+            this.btnEstructuraStock.Name = "btnEstructuraStock";
+            this.btnEstructuraStock.Size = new System.Drawing.Size(158, 25);
+            this.btnEstructuraStock.TabIndex = 31;
+            this.btnEstructuraStock.Text = "Estructura Stock";
+            this.btnEstructuraStock.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEstructuraStock.UseVisualStyleBackColor = true;
+            this.btnEstructuraStock.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelEstructuraStock
+            // 
+            this.panelEstructuraStock.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelEstructuraStock.BackColor = System.Drawing.Color.Silver;
+            this.panelEstructuraStock.Controls.Add(this.btnConsultarEstructuraStock);
+            this.panelEstructuraStock.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelEstructuraStock.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelEstructuraStock.Location = new System.Drawing.Point(158, 0);
+            this.panelEstructuraStock.Margin = new System.Windows.Forms.Padding(0);
+            this.panelEstructuraStock.Name = "panelEstructuraStock";
+            this.panelEstructuraStock.Size = new System.Drawing.Size(158, 152);
+            this.panelEstructuraStock.TabIndex = 32;
+            // 
+            // btnConsultarEstructuraStock
+            // 
+            this.btnConsultarEstructuraStock.AutoSize = true;
+            this.btnConsultarEstructuraStock.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConsultarEstructuraStock.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConsultarEstructuraStock.FlatAppearance.BorderSize = 0;
+            this.btnConsultarEstructuraStock.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarEstructuraStock.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarEstructuraStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsultarEstructuraStock.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Find_48;
+            this.btnConsultarEstructuraStock.Location = new System.Drawing.Point(48, 6);
+            this.btnConsultarEstructuraStock.Name = "btnConsultarEstructuraStock";
+            this.btnConsultarEstructuraStock.Size = new System.Drawing.Size(63, 71);
+            this.btnConsultarEstructuraStock.TabIndex = 3;
+            this.btnConsultarEstructuraStock.Text = "Consultar";
+            this.btnConsultarEstructuraStock.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultarEstructuraStock.UseVisualStyleBackColor = true;
+            this.btnConsultarEstructuraStock.Click += new System.EventHandler(this.btnConsultarEstructuraStock_Click);
+            this.btnConsultarEstructuraStock.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnConsultarEstructuraStock.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnUbicacionStock
+            // 
+            this.btnUbicacionStock.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUbicacionStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUbicacionStock.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUbicacionStock.Location = new System.Drawing.Point(158, 152);
+            this.btnUbicacionStock.Margin = new System.Windows.Forms.Padding(0);
+            this.btnUbicacionStock.Name = "btnUbicacionStock";
+            this.btnUbicacionStock.Size = new System.Drawing.Size(158, 25);
+            this.btnUbicacionStock.TabIndex = 33;
+            this.btnUbicacionStock.Text = "Ubicación stock";
+            this.btnUbicacionStock.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnUbicacionStock.UseVisualStyleBackColor = true;
+            this.btnUbicacionStock.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // panelUbicacionStock
+            // 
+            this.panelUbicacionStock.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelUbicacionStock.BackColor = System.Drawing.Color.Silver;
+            this.panelUbicacionStock.Controls.Add(this.btnConsultarUbicacionStock);
+            this.panelUbicacionStock.Controls.Add(this.btnNuevoUbicacionStock);
+            this.panelUbicacionStock.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelUbicacionStock.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelUbicacionStock.Location = new System.Drawing.Point(158, 177);
+            this.panelUbicacionStock.Margin = new System.Windows.Forms.Padding(0);
+            this.panelUbicacionStock.Name = "panelUbicacionStock";
+            this.panelUbicacionStock.Size = new System.Drawing.Size(158, 152);
+            this.panelUbicacionStock.TabIndex = 34;
+            // 
+            // btnConsultarUbicacionStock
+            // 
+            this.btnConsultarUbicacionStock.AutoSize = true;
+            this.btnConsultarUbicacionStock.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConsultarUbicacionStock.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConsultarUbicacionStock.FlatAppearance.BorderSize = 0;
+            this.btnConsultarUbicacionStock.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarUbicacionStock.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnConsultarUbicacionStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsultarUbicacionStock.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Find_48;
+            this.btnConsultarUbicacionStock.Location = new System.Drawing.Point(48, 70);
+            this.btnConsultarUbicacionStock.Name = "btnConsultarUbicacionStock";
+            this.btnConsultarUbicacionStock.Size = new System.Drawing.Size(63, 71);
+            this.btnConsultarUbicacionStock.TabIndex = 3;
+            this.btnConsultarUbicacionStock.Text = "Consultar";
+            this.btnConsultarUbicacionStock.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultarUbicacionStock.UseVisualStyleBackColor = true;
+            this.btnConsultarUbicacionStock.Click += new System.EventHandler(this.btnConsultarUbicacionStock_Click);
+            this.btnConsultarUbicacionStock.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnConsultarUbicacionStock.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnNuevoUbicacionStock
+            // 
+            this.btnNuevoUbicacionStock.AutoSize = true;
+            this.btnNuevoUbicacionStock.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNuevoUbicacionStock.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNuevoUbicacionStock.FlatAppearance.BorderSize = 0;
+            this.btnNuevoUbicacionStock.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnNuevoUbicacionStock.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnNuevoUbicacionStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNuevoUbicacionStock.Image = global::GyCAP.UI.GestionStock.Properties.Resources.New_48;
+            this.btnNuevoUbicacionStock.Location = new System.Drawing.Point(52, 0);
+            this.btnNuevoUbicacionStock.Name = "btnNuevoUbicacionStock";
+            this.btnNuevoUbicacionStock.Size = new System.Drawing.Size(54, 71);
+            this.btnNuevoUbicacionStock.TabIndex = 2;
+            this.btnNuevoUbicacionStock.Text = " Nuevo";
+            this.btnNuevoUbicacionStock.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNuevoUbicacionStock.UseVisualStyleBackColor = true;
+            this.btnNuevoUbicacionStock.Click += new System.EventHandler(this.btnNuevoUbicacionStock_Click);
+            this.btnNuevoUbicacionStock.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnNuevoUbicacionStock.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
             // panelSalir
             // 
             this.panelSalir.Controls.Add(this.btnSalir);
-            this.panelSalir.Location = new System.Drawing.Point(158, 177);
+            this.panelSalir.Location = new System.Drawing.Point(158, 329);
             this.panelSalir.Margin = new System.Windows.Forms.Padding(0);
             this.panelSalir.Name = "panelSalir";
             this.panelSalir.Size = new System.Drawing.Size(158, 87);
-            this.panelSalir.TabIndex = 27;
+            this.panelSalir.TabIndex = 35;
             // 
             // btnSalir
             // 
@@ -412,6 +429,44 @@
             this.btnSalir.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnSalir.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
+            // scUp
+            // 
+            this.scUp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scUp.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.scUp.IsSplitterFixed = true;
+            this.scUp.Location = new System.Drawing.Point(0, 0);
+            this.scUp.Name = "scUp";
+            // 
+            // scUp.Panel1
+            // 
+            this.scUp.Panel1.AutoScroll = true;
+            this.scUp.Panel1.Controls.Add(this.btnMenu);
+            this.scUp.Panel1MinSize = 20;
+            // 
+            // scUp.Panel2
+            // 
+            this.scUp.Panel2.AutoScroll = true;
+            this.scUp.Panel2.AutoScrollMargin = new System.Drawing.Size(1000, 1000);
+            this.scUp.Panel2.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.scUp_Panel2_ControlRemoved);
+            this.scUp.Size = new System.Drawing.Size(624, 566);
+            this.scUp.SplitterDistance = 20;
+            this.scUp.SplitterWidth = 3;
+            this.scUp.TabIndex = 0;
+            // 
+            // btnMenu
+            // 
+            this.btnMenu.Cursor = System.Windows.Forms.Cursors.PanWest;
+            this.btnMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMenu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+            this.btnMenu.Location = new System.Drawing.Point(0, 0);
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(13, 566);
+            this.btnMenu.TabIndex = 0;
+            this.btnMenu.Text = "Menú";
+            this.btnMenu.UseVisualStyleBackColor = true;
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
+            // 
             // frmGestionStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -428,18 +483,20 @@
             this.scDown.Panel2.ResumeLayout(false);
             this.scDown.ResumeLayout(false);
             this.flpMenu.ResumeLayout(false);
-            this.scUp.Panel1.ResumeLayout(false);
-            this.scUp.ResumeLayout(false);
             this.panelActualizacionStock.ResumeLayout(false);
             this.panelActualizacionStock.PerformLayout();
             this.panelInventarioABC.ResumeLayout(false);
             this.panelInventarioABC.PerformLayout();
-            this.panelUbicacionStock.ResumeLayout(false);
-            this.panelUbicacionStock.PerformLayout();
             this.panelEntregaProducto.ResumeLayout(false);
             this.panelEntregaProducto.PerformLayout();
+            this.panelEstructuraStock.ResumeLayout(false);
+            this.panelEstructuraStock.PerformLayout();
+            this.panelUbicacionStock.ResumeLayout(false);
+            this.panelUbicacionStock.PerformLayout();
             this.panelSalir.ResumeLayout(false);
             this.panelSalir.PerformLayout();
+            this.scUp.Panel1.ResumeLayout(false);
+            this.scUp.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -456,14 +513,17 @@
         private System.Windows.Forms.Button btnInventarioAbc;
         private System.Windows.Forms.Panel panelInventarioABC;
         private System.Windows.Forms.Button btnConsultarInventarioAbc;
-        private System.Windows.Forms.Button btnUbicacionStock;
-        private System.Windows.Forms.Panel panelUbicacionStock;
-        private System.Windows.Forms.Button btnConsultarUbicacionStock;
-        private System.Windows.Forms.Button btnNuevoUbicacionStock;
         private System.Windows.Forms.Button btnEntregaProducto;
         private System.Windows.Forms.Panel panelEntregaProducto;
         private System.Windows.Forms.Button btnConsultarEntregaProducto;
         private System.Windows.Forms.Button btnNuevoEntregaProducto;
+        private System.Windows.Forms.Button btnEstructuraStock;
+        private System.Windows.Forms.Panel panelEstructuraStock;
+        private System.Windows.Forms.Button btnConsultarEstructuraStock;
+        private System.Windows.Forms.Button btnUbicacionStock;
+        private System.Windows.Forms.Panel panelUbicacionStock;
+        private System.Windows.Forms.Button btnConsultarUbicacionStock;
+        private System.Windows.Forms.Button btnNuevoUbicacionStock;
         private System.Windows.Forms.Panel panelSalir;
         private System.Windows.Forms.Button btnSalir;
     }

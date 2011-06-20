@@ -27,11 +27,13 @@ namespace GyCAP.UI.GestionStock
             btnUbicacionStock.Tag = panelUbicacionStock;
             btnEntregaProducto.Tag = panelEntregaProducto;
             btnActualizacionStock.Tag = panelActualizacionStock;
+            btnEstructuraStock.Tag = panelEstructuraStock;
             Size size = new Size(panelUbicacionStock.Size.Width, 0);
             panelInventarioABC.Size = size;
             panelUbicacionStock.Size = size;
             panelEntregaProducto.Size = size;
             panelActualizacionStock.Size = size;
+            panelEstructuraStock.Size = size;
         }
 
         public static frmGestionStock Instancia
@@ -263,6 +265,17 @@ namespace GyCAP.UI.GestionStock
             frmActualizacionStock.Instancia.Parent = areaTrabajo;
             frmActualizacionStock.Instancia.Show();
             frmActualizacionStock.Instancia.Focus();
+        }
+        #endregion
+
+        #region Estructura Stock
+        private void btnConsultarEstructuraStock_Click(object sender, EventArgs e)
+        {
+            frmEstructuraStock.Instancia.TopLevel = false;
+            frmEstructuraStock.Instancia.Location = PosicionarFormulario();
+            frmEstructuraStock.Instancia.Parent = areaTrabajo;
+            frmEstructuraStock.Instancia.Show();
+            frmEstructuraStock.Instancia.Focus();
         }
         #endregion
     }

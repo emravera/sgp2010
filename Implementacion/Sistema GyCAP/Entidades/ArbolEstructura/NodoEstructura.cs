@@ -69,20 +69,18 @@ namespace GyCAP.Entidades.ArbolEstructura
         {
             get { return compuesto; }
             set { compuesto = value; }
-        }
-
-        
+        }        
 
         public decimal GetCosto()
         {
+            if (this.contenido == tipoContenido.MateriaPrima) { return this.compuesto.MateriaPrima.Costo; }
+            
             decimal costo = 0;
             
             foreach (NodoEstructura nodo in nodosHijos)
             {
                 costo += nodo.GetCosto();
-            }
-
-            if (this.contenido == tipoContenido.MateriaPrima) { return this.compuesto.MateriaPrima.Costo; }
+            }            
 
             return costo;
         }

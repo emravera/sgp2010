@@ -36,7 +36,6 @@ namespace GyCAP.Entidades.ArbolEstructura
             if (nodoRaiz != null && nodoRaiz.NodosHijos != null) { nodoRaiz.NodosHijos.Clear(); }
         }
 
-
         public decimal GetCostoEstructura()
         {
             return nodoRaiz.GetCosto();
