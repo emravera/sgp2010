@@ -132,6 +132,8 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
+        
+        #region Botones Formulario
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
@@ -333,7 +335,7 @@ namespace GyCAP.UI.EstructuraProducto
                         //Lo insertamos en la base de datos
                         BLL.MateriaPrimaBLL.Actualizar(materiaPrima);
 
-                        //Agregamos la fila al dataset
+                        //Modificamos la fila del dataset
                         Data.dsPlanMP.MATERIAS_PRIMASRow row = dsMateriaPrima.MATERIAS_PRIMAS.FindByMP_CODIGO(materiaPrima.CodigoMateriaPrima);
 
                         //Editamos la fila
@@ -358,6 +360,10 @@ namespace GyCAP.UI.EstructuraProducto
             catch (Entidades.Excepciones.ElementoExistenteException ex)
             {
                 Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
+            }
+            catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
+            {
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -402,6 +408,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
 
         }
+        #endregion
 
         #region Servicios
 

@@ -64,9 +64,8 @@ namespace GyCAP.BLL
         {
             return DAL.PlanMensualDAL.ObtenerCantidad(anio, mes);
         }
-
-
         
+        //IMPLEMENTAR METODO PARA EXCEPCIONES
 
 
     }

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.numDiciembre = new System.Windows.Forms.NumericUpDown();
             this.tcPlanAnual = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
@@ -80,6 +80,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.gbDatosPrincipales = new System.Windows.Forms.GroupBox();
             this.gbPuntoEquilibrio = new System.Windows.Forms.GroupBox();
+            this.chPuntoEquilibrio = new System.Windows.Forms.CheckBox();
             this.btnPuntoEquilibrio = new System.Windows.Forms.Button();
             this.label30 = new System.Windows.Forms.Label();
             this.numPuntoEquilibrio = new System.Windows.Forms.NumericUpDown();
@@ -98,6 +99,7 @@
             this.rbOtraDemanda = new System.Windows.Forms.RadioButton();
             this.chListAnios = new System.Windows.Forms.CheckedListBox();
             this.lblUnidad3 = new System.Windows.Forms.Label();
+            this.cbEstimacionDemanda = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.numCapacidadStock = new System.Windows.Forms.NumericUpDown();
             this.numCapacidadProducción = new System.Windows.Forms.NumericUpDown();
             this.lblCapacidadStock = new System.Windows.Forms.Label();
@@ -117,8 +119,6 @@
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnPlanificar = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cbEstimacionDemanda = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.chPuntoEquilibrio = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numDiciembre)).BeginInit();
             this.tcPlanAnual.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -336,14 +336,14 @@
             // 
             // chartDemanda
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartDemanda.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.chartDemanda.ChartAreas.Add(chartArea1);
             this.chartDemanda.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartDemanda.Location = new System.Drawing.Point(3, 17);
             this.chartDemanda.Name = "chartDemanda";
-            series2.ChartArea = "ChartArea1";
-            series2.Name = "Series1";
-            this.chartDemanda.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Name = "Series1";
+            this.chartDemanda.Series.Add(series1);
             this.chartDemanda.Size = new System.Drawing.Size(438, 210);
             this.chartDemanda.TabIndex = 0;
             this.chartDemanda.Text = "chart1";
@@ -804,6 +804,16 @@
             this.gbPuntoEquilibrio.TabStop = false;
             this.gbPuntoEquilibrio.Text = "Cálculo Punto de Equilibrio";
             // 
+            // chPuntoEquilibrio
+            // 
+            this.chPuntoEquilibrio.AutoSize = true;
+            this.chPuntoEquilibrio.Location = new System.Drawing.Point(251, 37);
+            this.chPuntoEquilibrio.Name = "chPuntoEquilibrio";
+            this.chPuntoEquilibrio.Size = new System.Drawing.Size(15, 14);
+            this.chPuntoEquilibrio.TabIndex = 19;
+            this.chPuntoEquilibrio.UseVisualStyleBackColor = true;
+            this.chPuntoEquilibrio.CheckedChanged += new System.EventHandler(this.chPuntoEquilibrio_CheckedChanged);
+            // 
             // btnPuntoEquilibrio
             // 
             this.btnPuntoEquilibrio.Location = new System.Drawing.Point(275, 65);
@@ -1001,11 +1011,21 @@
             this.lblUnidad3.TabIndex = 19;
             this.lblUnidad3.Text = "Unid./Sem.";
             // 
+            // cbEstimacionDemanda
+            // 
+            this.cbEstimacionDemanda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstimacionDemanda.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbEstimacionDemanda.FormattingEnabled = true;
+            this.cbEstimacionDemanda.Location = new System.Drawing.Point(166, 61);
+            this.cbEstimacionDemanda.Name = "cbEstimacionDemanda";
+            this.cbEstimacionDemanda.Size = new System.Drawing.Size(137, 21);
+            this.cbEstimacionDemanda.TabIndex = 2;
+            // 
             // numCapacidadStock
             // 
             this.numCapacidadStock.Location = new System.Drawing.Point(166, 118);
             this.numCapacidadStock.Maximum = new decimal(new int[] {
-            10000000,
+            100000,
             0,
             0,
             0});
@@ -1019,7 +1039,7 @@
             // 
             this.numCapacidadProducción.Location = new System.Drawing.Point(166, 146);
             this.numCapacidadProducción.Maximum = new decimal(new int[] {
-            10000000,
+            100000,
             0,
             0,
             0});
@@ -1215,26 +1235,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(774, 532);
             this.tableLayoutPanel1.TabIndex = 13;
-            // 
-            // cbEstimacionDemanda
-            // 
-            this.cbEstimacionDemanda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEstimacionDemanda.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbEstimacionDemanda.FormattingEnabled = true;
-            this.cbEstimacionDemanda.Location = new System.Drawing.Point(166, 61);
-            this.cbEstimacionDemanda.Name = "cbEstimacionDemanda";
-            this.cbEstimacionDemanda.Size = new System.Drawing.Size(137, 21);
-            this.cbEstimacionDemanda.TabIndex = 2;
-            // 
-            // chPuntoEquilibrio
-            // 
-            this.chPuntoEquilibrio.AutoSize = true;
-            this.chPuntoEquilibrio.Location = new System.Drawing.Point(251, 37);
-            this.chPuntoEquilibrio.Name = "chPuntoEquilibrio";
-            this.chPuntoEquilibrio.Size = new System.Drawing.Size(15, 14);
-            this.chPuntoEquilibrio.TabIndex = 19;
-            this.chPuntoEquilibrio.UseVisualStyleBackColor = true;
-            this.chPuntoEquilibrio.CheckedChanged += new System.EventHandler(this.chPuntoEquilibrio_CheckedChanged);
             // 
             // frmPlanAnual
             // 
