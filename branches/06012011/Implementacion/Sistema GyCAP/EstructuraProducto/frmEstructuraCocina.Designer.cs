@@ -46,9 +46,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbBtnDatosPartes = new System.Windows.Forms.GroupBox();
+            this.btnDatos = new System.Windows.Forms.Button();
+            this.btnPartes = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
             this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label17 = new System.Windows.Forms.Label();
@@ -72,6 +75,9 @@
             this.slideControl1 = new SlickInterface.SlideControl();
             this.gbArbolEstructura = new System.Windows.Forms.GroupBox();
             this.panelAccionesArbol = new System.Windows.Forms.Panel();
+            this.btnRestarParte = new System.Windows.Forms.Button();
+            this.btnSumarParte = new System.Windows.Forms.Button();
+            this.btnDeleteParte = new System.Windows.Forms.Button();
             this.tvEstructura = new System.Windows.Forms.TreeView();
             this.gbGuardarVolver = new System.Windows.Forms.GroupBox();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -95,22 +101,16 @@
             this.dgvMPDisponibles = new System.Windows.Forms.DataGridView();
             this.slidePartes = new SlickInterface.Slide();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.cmsGrillaPartesDisponibles = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiBloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDesbloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.btnDatos = new System.Windows.Forms.Button();
-            this.btnPartes = new System.Windows.Forms.Button();
-            this.btnRestarParte = new System.Windows.Forms.Button();
-            this.btnSumarParte = new System.Windows.Forms.Button();
-            this.btnDeleteParte = new System.Windows.Forms.Button();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
+            this.btnClonar = new System.Windows.Forms.ToolStripButton();
             this.btnConsultar = new System.Windows.Forms.ToolStripButton();
             this.btnModificar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.btnClonar = new System.Windows.Forms.ToolStripButton();
+            this.cmsGrillaPartesDisponibles = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiBloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDesbloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcEstructuraProducto.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -335,6 +335,19 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Nombre:";
             // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.lupa_20;
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscar.Location = new System.Drawing.Point(684, 35);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(80, 30);
+            this.btnBuscar.TabIndex = 7;
+            this.btnBuscar.Text = "&Buscar";
+            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -369,6 +382,32 @@
             this.gbBtnDatosPartes.Size = new System.Drawing.Size(431, 50);
             this.gbBtnDatosPartes.TabIndex = 16;
             this.gbBtnDatosPartes.TabStop = false;
+            // 
+            // btnDatos
+            // 
+            this.btnDatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDatos.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.arriba1_15;
+            this.btnDatos.Location = new System.Drawing.Point(94, 17);
+            this.btnDatos.Name = "btnDatos";
+            this.btnDatos.Size = new System.Drawing.Size(100, 25);
+            this.btnDatos.TabIndex = 22;
+            this.btnDatos.Text = "Datos";
+            this.btnDatos.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnDatos.UseVisualStyleBackColor = true;
+            this.btnDatos.Click += new System.EventHandler(this.btnDatos_Click);
+            // 
+            // btnPartes
+            // 
+            this.btnPartes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPartes.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.derecha1_15;
+            this.btnPartes.Location = new System.Drawing.Point(218, 17);
+            this.btnPartes.Name = "btnPartes";
+            this.btnPartes.Size = new System.Drawing.Size(115, 25);
+            this.btnPartes.TabIndex = 23;
+            this.btnPartes.Text = "Modificar Partes";
+            this.btnPartes.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnPartes.UseVisualStyleBackColor = true;
+            this.btnPartes.Click += new System.EventHandler(this.btnPartes_Click);
             // 
             // gbDatos
             // 
@@ -612,6 +651,66 @@
             this.panelAccionesArbol.Name = "panelAccionesArbol";
             this.panelAccionesArbol.Size = new System.Drawing.Size(211, 43);
             this.panelAccionesArbol.TabIndex = 12;
+            // 
+            // btnRestarParte
+            // 
+            this.btnRestarParte.AutoSize = true;
+            this.btnRestarParte.FlatAppearance.BorderSize = 0;
+            this.btnRestarParte.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnRestarParte.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnRestarParte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRestarParte.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Restar_Gris_25;
+            this.btnRestarParte.Location = new System.Drawing.Point(134, -3);
+            this.btnRestarParte.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRestarParte.Name = "btnRestarParte";
+            this.btnRestarParte.Size = new System.Drawing.Size(60, 48);
+            this.btnRestarParte.TabIndex = 21;
+            this.btnRestarParte.Text = "Cantidad";
+            this.btnRestarParte.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRestarParte.UseVisualStyleBackColor = true;
+            this.btnRestarParte.Click += new System.EventHandler(this.btnSumarParte_Click);
+            this.btnRestarParte.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnRestarParte.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnSumarParte
+            // 
+            this.btnSumarParte.AutoSize = true;
+            this.btnSumarParte.FlatAppearance.BorderSize = 0;
+            this.btnSumarParte.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnSumarParte.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnSumarParte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSumarParte.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Sumar_Gris_25;
+            this.btnSumarParte.Location = new System.Drawing.Point(54, -3);
+            this.btnSumarParte.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSumarParte.Name = "btnSumarParte";
+            this.btnSumarParte.Size = new System.Drawing.Size(85, 48);
+            this.btnSumarParte.TabIndex = 20;
+            this.btnSumarParte.Text = "Cantidad";
+            this.btnSumarParte.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSumarParte.UseVisualStyleBackColor = true;
+            this.btnSumarParte.Click += new System.EventHandler(this.btnRestarParte_Click);
+            this.btnSumarParte.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnSumarParte.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnDeleteParte
+            // 
+            this.btnDeleteParte.AutoSize = true;
+            this.btnDeleteParte.FlatAppearance.BorderSize = 0;
+            this.btnDeleteParte.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnDeleteParte.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnDeleteParte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteParte.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
+            this.btnDeleteParte.Location = new System.Drawing.Point(9, -3);
+            this.btnDeleteParte.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDeleteParte.Name = "btnDeleteParte";
+            this.btnDeleteParte.Size = new System.Drawing.Size(53, 48);
+            this.btnDeleteParte.TabIndex = 19;
+            this.btnDeleteParte.Text = "Eliminar";
+            this.btnDeleteParte.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDeleteParte.UseVisualStyleBackColor = true;
+            this.btnDeleteParte.Click += new System.EventHandler(this.btnDeleteParte_Click);
+            this.btnDeleteParte.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnDeleteParte.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // tvEstructura
             // 
@@ -874,135 +973,6 @@
             this.tsMenu.TabIndex = 1;
             this.tsMenu.Text = "toolStrip1";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
-            // 
-            // cmsGrillaPartesDisponibles
-            // 
-            this.cmsGrillaPartesDisponibles.AllowMerge = false;
-            this.cmsGrillaPartesDisponibles.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiBloquearColumna,
-            this.tsmiDesbloquearColumna});
-            this.cmsGrillaPartesDisponibles.Name = "cmsGrillaOrdenesTrabajo";
-            this.cmsGrillaPartesDisponibles.Size = new System.Drawing.Size(188, 48);
-            // 
-            // tsmiBloquearColumna
-            // 
-            this.tsmiBloquearColumna.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsmiBloquearColumna.Name = "tsmiBloquearColumna";
-            this.tsmiBloquearColumna.Size = new System.Drawing.Size(187, 22);
-            this.tsmiBloquearColumna.Text = "Bloquear columna";
-            this.tsmiBloquearColumna.Click += new System.EventHandler(this.tsmiBloquearColumna_Click);
-            // 
-            // tsmiDesbloquearColumna
-            // 
-            this.tsmiDesbloquearColumna.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsmiDesbloquearColumna.Name = "tsmiDesbloquearColumna";
-            this.tsmiDesbloquearColumna.Size = new System.Drawing.Size(187, 22);
-            this.tsmiDesbloquearColumna.Text = "Desbloquear columna";
-            this.tsmiDesbloquearColumna.Click += new System.EventHandler(this.tsmiDesbloquearColumna_Click);
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.lupa_20;
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(684, 35);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(80, 30);
-            this.btnBuscar.TabIndex = 7;
-            this.btnBuscar.Text = "&Buscar";
-            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // btnDatos
-            // 
-            this.btnDatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDatos.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.arriba1_15;
-            this.btnDatos.Location = new System.Drawing.Point(94, 17);
-            this.btnDatos.Name = "btnDatos";
-            this.btnDatos.Size = new System.Drawing.Size(100, 25);
-            this.btnDatos.TabIndex = 22;
-            this.btnDatos.Text = "Datos";
-            this.btnDatos.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnDatos.UseVisualStyleBackColor = true;
-            this.btnDatos.Click += new System.EventHandler(this.btnDatos_Click);
-            // 
-            // btnPartes
-            // 
-            this.btnPartes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPartes.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.derecha1_15;
-            this.btnPartes.Location = new System.Drawing.Point(218, 17);
-            this.btnPartes.Name = "btnPartes";
-            this.btnPartes.Size = new System.Drawing.Size(115, 25);
-            this.btnPartes.TabIndex = 23;
-            this.btnPartes.Text = "Modificar Partes";
-            this.btnPartes.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnPartes.UseVisualStyleBackColor = true;
-            this.btnPartes.Click += new System.EventHandler(this.btnPartes_Click);
-            // 
-            // btnRestarParte
-            // 
-            this.btnRestarParte.AutoSize = true;
-            this.btnRestarParte.FlatAppearance.BorderSize = 0;
-            this.btnRestarParte.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnRestarParte.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnRestarParte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRestarParte.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Restar_Gris_25;
-            this.btnRestarParte.Location = new System.Drawing.Point(134, -3);
-            this.btnRestarParte.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnRestarParte.Name = "btnRestarParte";
-            this.btnRestarParte.Size = new System.Drawing.Size(60, 48);
-            this.btnRestarParte.TabIndex = 21;
-            this.btnRestarParte.Text = "Cantidad";
-            this.btnRestarParte.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnRestarParte.UseVisualStyleBackColor = true;
-            this.btnRestarParte.Click += new System.EventHandler(this.btnSumarParte_Click);
-            this.btnRestarParte.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnRestarParte.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnSumarParte
-            // 
-            this.btnSumarParte.AutoSize = true;
-            this.btnSumarParte.FlatAppearance.BorderSize = 0;
-            this.btnSumarParte.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnSumarParte.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnSumarParte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSumarParte.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Sumar_Gris_25;
-            this.btnSumarParte.Location = new System.Drawing.Point(54, -3);
-            this.btnSumarParte.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSumarParte.Name = "btnSumarParte";
-            this.btnSumarParte.Size = new System.Drawing.Size(85, 48);
-            this.btnSumarParte.TabIndex = 20;
-            this.btnSumarParte.Text = "Cantidad";
-            this.btnSumarParte.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSumarParte.UseVisualStyleBackColor = true;
-            this.btnSumarParte.Click += new System.EventHandler(this.btnRestarParte_Click);
-            this.btnSumarParte.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnSumarParte.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnDeleteParte
-            // 
-            this.btnDeleteParte.AutoSize = true;
-            this.btnDeleteParte.FlatAppearance.BorderSize = 0;
-            this.btnDeleteParte.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnDeleteParte.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnDeleteParte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteParte.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
-            this.btnDeleteParte.Location = new System.Drawing.Point(9, -3);
-            this.btnDeleteParte.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnDeleteParte.Name = "btnDeleteParte";
-            this.btnDeleteParte.Size = new System.Drawing.Size(53, 48);
-            this.btnDeleteParte.TabIndex = 19;
-            this.btnDeleteParte.Text = "Eliminar";
-            this.btnDeleteParte.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDeleteParte.UseVisualStyleBackColor = true;
-            this.btnDeleteParte.Click += new System.EventHandler(this.btnDeleteParte_Click);
-            this.btnDeleteParte.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnDeleteParte.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
             // btnNuevo
             // 
             this.btnNuevo.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.New_25;
@@ -1013,6 +983,17 @@
             this.btnNuevo.Text = "&Nuevo";
             this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
+            // 
+            // btnClonar
+            // 
+            this.btnClonar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Copy_25;
+            this.btnClonar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnClonar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnClonar.Name = "btnClonar";
+            this.btnClonar.Size = new System.Drawing.Size(42, 47);
+            this.btnClonar.Text = "Cl&onar";
+            this.btnClonar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnClonar.Click += new System.EventHandler(this.btnClonar_Click);
             // 
             // btnConsultar
             // 
@@ -1047,6 +1028,11 @@
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
             // btnSalir
             // 
             this.btnSalir.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Salir_25;
@@ -1058,16 +1044,30 @@
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // btnClonar
+            // cmsGrillaPartesDisponibles
             // 
-            this.btnClonar.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Copy_25;
-            this.btnClonar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnClonar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnClonar.Name = "btnClonar";
-            this.btnClonar.Size = new System.Drawing.Size(42, 47);
-            this.btnClonar.Text = "Cl&onar";
-            this.btnClonar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnClonar.Click += new System.EventHandler(this.btnClonar_Click);
+            this.cmsGrillaPartesDisponibles.AllowMerge = false;
+            this.cmsGrillaPartesDisponibles.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiBloquearColumna,
+            this.tsmiDesbloquearColumna});
+            this.cmsGrillaPartesDisponibles.Name = "cmsGrillaOrdenesTrabajo";
+            this.cmsGrillaPartesDisponibles.Size = new System.Drawing.Size(188, 48);
+            // 
+            // tsmiBloquearColumna
+            // 
+            this.tsmiBloquearColumna.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsmiBloquearColumna.Name = "tsmiBloquearColumna";
+            this.tsmiBloquearColumna.Size = new System.Drawing.Size(187, 22);
+            this.tsmiBloquearColumna.Text = "Bloquear columna";
+            this.tsmiBloquearColumna.Click += new System.EventHandler(this.tsmiBloquearColumna_Click);
+            // 
+            // tsmiDesbloquearColumna
+            // 
+            this.tsmiDesbloquearColumna.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsmiDesbloquearColumna.Name = "tsmiDesbloquearColumna";
+            this.tsmiDesbloquearColumna.Size = new System.Drawing.Size(187, 22);
+            this.tsmiDesbloquearColumna.Text = "Desbloquear columna";
+            this.tsmiDesbloquearColumna.Click += new System.EventHandler(this.tsmiDesbloquearColumna_Click);
             // 
             // frmEstructuraCocina
             // 

@@ -77,7 +77,7 @@ namespace GyCAP.UI.EstructuraProducto
                 tvEstructura.BeginUpdate();
                 if (dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codEstructura).Length > 0)
                 {
-                    BLL.EstructuraBLL.CrearArbolEstructura(codEstructura, dsEstructura, tvEstructura, true, arbolEstructura, out compId);
+                    BLL.EstructuraBLL.CrearArbolEstructura(codEstructura, dsEstructura, tvEstructura, true, out compId);
                 }
                 else { tvEstructura.Nodes.Clear(); }
                 tvEstructura.EndUpdate();
@@ -1055,7 +1055,9 @@ namespace GyCAP.UI.EstructuraProducto
             tvEstructura.BeginUpdate();
             if (dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codEstructura).Length > 0) 
             { 
-                BLL.EstructuraBLL.CrearArbolEstructura(codEstructura, dsEstructura, tvEstructura, false, arbolEstructura, out compId); 
+                BLL.EstructuraBLL.CrearArbolEstructura(codEstructura, dsEstructura, tvEstructura, false, out compId);
+                arbolEstructura = BLL.EstructuraBLL.ArmarArbol(codEstructura, dsEstructura);
+                nudcosto.Value = arbolEstructura.GetCostoEstructura();
             }
             else { tvEstructura.Nodes.Clear(); }
             tvEstructura.EndUpdate();            

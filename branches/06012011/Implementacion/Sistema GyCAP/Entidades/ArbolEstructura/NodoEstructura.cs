@@ -17,7 +17,10 @@ namespace GyCAP.Entidades.ArbolEstructura
         private object tag;
         private CompuestoParte compuesto;
 
-        public NodoEstructura() { }
+        public NodoEstructura() 
+        {
+            this.nodosHijos = new List<NodoEstructura>();
+        }
 
         public NodoEstructura(int codigoNode, string textoNode, NodoEstructura nodePadre, tipoContenido content, CompuestoParte comp)
         {
@@ -69,8 +72,8 @@ namespace GyCAP.Entidades.ArbolEstructura
         {
             get { return compuesto; }
             set { compuesto = value; }
-        }        
-
+        }       
+        
         public decimal GetCosto()
         {
             if (this.contenido == tipoContenido.MateriaPrima) { return this.compuesto.MateriaPrima.Costo; }

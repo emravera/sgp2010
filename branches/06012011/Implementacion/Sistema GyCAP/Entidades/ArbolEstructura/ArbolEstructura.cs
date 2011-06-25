@@ -7,13 +7,22 @@ namespace GyCAP.Entidades.ArbolEstructura
 {
     public class ArbolEstructura
     {
-        public ArbolEstructura() { }
+        public ArbolEstructura() { codigosNodo = 0; }
         
         public ArbolEstructura(int codEstructura)
         {
+            this.codigosNodo = 0;
             this.codigoEstructura = codEstructura;
             this.nodoRaiz = new NodoEstructura();
             this.nodoRaiz.NodosHijos = new List<NodoEstructura>();
+        }
+
+        private int codigosNodo;
+
+        public int GetNextCodigoNodo()
+        {
+            this.codigosNodo++;
+            return this.codigosNodo;
         }
         
         private NodoEstructura nodoRaiz;
@@ -34,33 +43,41 @@ namespace GyCAP.Entidades.ArbolEstructura
         public void ClearAll()
         {
             if (nodoRaiz != null && nodoRaiz.NodosHijos != null) { nodoRaiz.NodosHijos.Clear(); }
+            this.codigosNodo = 0;
         }
 
         public decimal GetCostoEstructura()
         {
             return nodoRaiz.GetCosto();
-        }
+        }        
 
-        public NodoEstructura FindNodo(int codigoNodo, bool searchChilds)
+        public NodoEstructura Find(int codigo)
         {
-            foreach (NodoEstructura nodo in nodoRaiz.NodosHijos)
-            {
-                if (nodo.CodigoNodo == codigoNodo) { return nodo; }
-                if (searchChilds) { return FindInChilds(nodo, codigoNodo); }
-            }
+            if (this.nodoRaiz != null) { return BuscarNodo(codigo); }
 
             return null;
         }
 
-        private NodoEstructura FindInChilds(NodoEstructura node, int codigoNodo)
+        private NodoEstructura BuscarNodo(int codigo)
         {
-            foreach (NodoEstructura nodo in node.NodosHijos)
+            NodoEstructura nodo = null;
+
+            List<NodoEstructura> abierta = new List<NodoEstructura>();
+            abierta.Add(this.NodoRaiz);
+
+            while (true)
             {
-                if (nodo.CodigoNodo == codigoNodo) { return nodo; }
-                return FindInChilds(nodo, codigoNodo);
+                if (abierta.Count == 0) { break; }
+                nodo = abierta.First();
+                abierta.RemoveAt(0);
+                if (nodo.CodigoNodo == codigo) { break; }
+                else
+                {
+                    abierta.AddRange(nodo.NodosHijos);
+                }
             }
 
-            return null;
+            return nodo;
         }
     }
 }

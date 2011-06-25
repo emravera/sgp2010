@@ -112,7 +112,7 @@ namespace GyCAP.DAL
                         ,estr_fecha_modificacion = @p6
                         ,e_codigo = @p7
                         ,estr_costo = @p8
-                        WHERE estr_codigo = @p09";
+                        WHERE estr_codigo = @p9";
 
            Data.dsEstructuraProducto.ESTRUCTURASRow rowEstructura = dsEstructura.ESTRUCTURAS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsEstructuraProducto.ESTRUCTURASRow;
            //Controlemos los valores que pueden venir nulos

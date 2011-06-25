@@ -73,7 +73,7 @@ namespace GyCAP.UI.GestionStock
                 MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
             }            
             
-            tvcEstructura.Columns.Add("ustck", "Ubicación de Stock");            
+            tvcEstructura.Columns.Add("ustck", "Ubicación de Stock");
             tvcEstructura.Columns.Add("cantidad_real", "Cantidad Real");
             tvcEstructura.Columns.Add("cantidad_virtual", "Cantidad Virtual");
             tvcEstructura.Columns[0].Width = 400;
