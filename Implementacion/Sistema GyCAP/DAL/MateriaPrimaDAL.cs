@@ -209,8 +209,29 @@ namespace GyCAP.DAL
                 DB.executeNonQuery(sql, valorParametros, null);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }           
-        
+        }
+
+        //Metodo que valida que no se modifique algo con referencias en hoja de ruta
+        public static bool EsMPHojaRuta(Entidades.MateriaPrima materiaPrima)
+        {
+            string sql = "SELECT count(ustck_origen) FROM DETALLE_HOJARUTA WHERE ustck_origen = @p0";
+
+
+            object[] valorParametros = { materiaPrima.UbicacionStock };
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+        }
 
         //*****************************************************************************************
         //                              ELIMINAR MATERIAS PRIMAS

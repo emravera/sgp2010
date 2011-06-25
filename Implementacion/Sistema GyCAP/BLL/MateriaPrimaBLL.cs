@@ -69,6 +69,7 @@ namespace GyCAP.BLL
         public static void Actualizar(Entidades.MateriaPrima materiaPrima)
         {
             if (DAL.MateriaPrimaDAL.EsMateriaPrima(materiaPrima)) throw new Entidades.Excepciones.ElementoExistenteException();
+            else if (DAL.MateriaPrimaDAL.EsMPHojaRuta(materiaPrima)) throw new Entidades.Excepciones.ElementoEnTransaccionException();
             else DAL.MateriaPrimaDAL.Actualizar(materiaPrima);
         }
     }

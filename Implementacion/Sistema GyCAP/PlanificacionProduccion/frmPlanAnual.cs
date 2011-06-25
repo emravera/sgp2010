@@ -190,13 +190,15 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbModificacion.Visible = false;
                     tcPlanAnual.SelectedTab = tpDatos;
                     estadoActual = estadoUI.nuevo;
-                    CargarAñosBase();
+                    CargarAñosBase();   
                     //Manejo los controles
                     txtAnio.Focus();
                     numPuntoEquilibrio.Enabled = false;
                     txtTotal.Enabled = false;
                     numPrecioVenta.Value = 0;
                     numPuntoEquilibrio.Value = 0;
+                    numPuntoEquilibrio.Enabled = false;
+                    chPuntoEquilibrio.Checked = false;
                     numCapacidadProducción.Value = 0;
                     numCapacidadStock.Value = 0;
                     numCostofijo.Value = 0;
@@ -644,8 +646,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                     {
                         if (demandaActCantSemana[i] - capacidadProduccion > 0)
                         {
-                            contPicos += 1;
                             semanaPicos[contPicos] = i;
+                            contPicos += 1;
                         }
                     }
 
@@ -807,10 +809,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                                     }
                                     Vieneminimo = true;
                                 }
-
                             }
                         }
-
                     }
 
                     #endregion
@@ -967,7 +967,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             try
             {
-                if (chPuntoEquilibrio.Checked = false)
+                if (chPuntoEquilibrio.Checked == false)
                 {
                     numPuntoEquilibrio.Value = CalcularPuntoEquilibrio();
                 }                
@@ -1188,45 +1188,54 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            //Selecciono el codigo de la demanda anual
-            int codigo = Convert.ToInt32(dvListaPlanes[dgvLista.SelectedRows[0].Index]["pan_codigo"]);
-            txtAnio.Text = dsPlanAnual.PLANES_ANUALES.FindByPAN_CODIGO(codigo).PAN_ANIO.ToString();
-            cbEstimacionDemanda.SetSelectedValue(Convert.ToInt32(dsPlanAnual.PLANES_ANUALES.FindByPAN_CODIGO(codigo).DEMAN_CODIGO));
-
-            if (txtTotal.Text == string.Empty)
+             //Controlamos que esté seleccionado algo
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
-                txtTotal.Text = "0";
-                //Muestro lo que no se pudo asignar
-                txtDemandaNoCubierta.Text = BLL.DetalleDemandaAnualBLL.ObtenerTotal(Convert.ToInt32(dsPlanAnual.PLANES_ANUALES.FindByPAN_CODIGO(codigo).DEMAN_CODIGO)).ToString();
+
+                //Selecciono el codigo de la demanda anual
+                int codigo = Convert.ToInt32(dvListaPlanes[dgvLista.SelectedRows[0].Index]["pan_codigo"]);
+                txtAnio.Text = dsPlanAnual.PLANES_ANUALES.FindByPAN_CODIGO(codigo).PAN_ANIO.ToString();
+                cbEstimacionDemanda.SetSelectedValue(Convert.ToInt32(dsPlanAnual.PLANES_ANUALES.FindByPAN_CODIGO(codigo).DEMAN_CODIGO));
+
+                if (txtTotal.Text == string.Empty)
+                {
+                    txtTotal.Text = "0";
+                    //Muestro lo que no se pudo asignar
+                    txtDemandaNoCubierta.Text = BLL.DetalleDemandaAnualBLL.ObtenerTotal(Convert.ToInt32(dsPlanAnual.PLANES_ANUALES.FindByPAN_CODIGO(codigo).DEMAN_CODIGO)).ToString();
+                }
+
+                int[] promedio = new int[12];
+                int cont = 0;
+                foreach (Data.dsPlanAnual.DETALLE_PLAN_ANUALRow dr in dsPlanAnual.DETALLE_PLAN_ANUAL.Rows)
+                {
+                    promedio[cont] = Convert.ToInt32(dr.DPAN_CANTIDADMES);
+                    cont += 1;
+                }
+                //Asigno los valores
+                //Se asignan los valores calculados a los textbox
+                numEnero.Value = promedio[0];
+                numFebrero.Value = promedio[1];
+                numMarzo.Value = promedio[2];
+                numAbril.Value = promedio[3];
+                numMayo.Value = promedio[4];
+                numJunio.Value = promedio[5];
+                numJulio.Value = promedio[6];
+                numAgosto.Value = promedio[7];
+                numSeptiembre.Value = promedio[8];
+                numOctubre.Value = promedio[9];
+                numNoviembre.Value = promedio[10];
+                numDiciembre.Value = promedio[11];
+
+                //Se genera el grafico
+                GenerarGrafico(promedio);
+
+                //se setea el estado
+                SetInterface(estadoUI.modificar);
             }
-            
-            int[] promedio= new int[12];
-            int cont=0;
-            foreach (Data.dsPlanAnual.DETALLE_PLAN_ANUALRow dr in dsPlanAnual.DETALLE_PLAN_ANUAL.Rows)
+            else
             {
-                promedio[cont] =Convert.ToInt32(dr.DPAN_CANTIDADMES);
-                cont += 1;
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Plan Anual", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
             }
-            //Asigno los valores
-            //Se asignan los valores calculados a los textbox
-            numEnero.Value = promedio[0];
-            numFebrero.Value = promedio[1];
-            numMarzo.Value = promedio[2];
-            numAbril.Value = promedio[3];
-            numMayo.Value = promedio[4];
-            numJunio.Value = promedio[5];
-            numJulio.Value = promedio[6];
-            numAgosto.Value = promedio[7];
-            numSeptiembre.Value = promedio[8];
-            numOctubre.Value = promedio[9];
-            numNoviembre.Value = promedio[10];
-            numDiciembre.Value = promedio[11];
-
-            //Se genera el grafico
-            GenerarGrafico(promedio);
-
-            //se setea el estado
-            SetInterface(estadoUI.modificar);
         }        
 
         private void btnEliminar_Click(object sender, EventArgs e)

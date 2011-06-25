@@ -91,6 +91,7 @@
     <Compile Include="EstadoPlanMantenimiento.cs" />
     <Compile Include="EstadoUsuario.cs" />
     <Compile Include="Estructura.cs" />
+    <Compile Include="ExcepcionesPlan.cs" />
     <Compile Include="Excepciones\BaseDeDatosException.cs" />
     <Compile Include="Excepciones\ElementoActivoException.cs" />
     <Compile Include="Excepciones\ElementoEnTransaccionException.cs" />
