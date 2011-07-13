@@ -15,7 +15,9 @@ namespace GyCAP.UI.PlanificacionProduccion
         private Data.dsPlanMP dsPlanMP = new GyCAP.Data.dsPlanMP();
         private DataView dvListaPlanMP, dvListaDetalle, dvComboPlanificacion;
         private enum estadoUI { inicio, nuevo, buscar, calcular };
-        
+
+        #region Inicio
+
         public frmPlanificarMateriasPrimas()
         {
             InitializeComponent();
@@ -36,7 +38,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["PMPA_CODIGO"].DataPropertyName = "PMPA_CODIGO";
@@ -44,6 +46,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvLista.Columns["PMPA_MES"].DataPropertyName = "PMPA_MES";
             dgvLista.Columns["PMPA_FECHACREACION"].DataPropertyName = "PMPA_FECHACREACION";
 
+            //Oculto las columnas que no se pueden
+            dgvLista.Columns["PMPA_CODIGO"].Visible = false;
+            
             //Creamos el dataview y lo asignamos a la grilla
             dvListaPlanMP = new DataView(dsPlanMP.PLANES_MATERIAS_PRIMAS_ANUALES);
             dvListaPlanMP.Sort = "PMPA_CODIGO ASC";
@@ -60,13 +65,16 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalle.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalle.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetalle.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvDetalle.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvDetalle.Columns["DPMPA_CODIGO"].DataPropertyName = "DPMPA_CODIGO";
             dgvDetalle.Columns["MP_CODIGO"].DataPropertyName = "MP_CODIGO";
             dgvDetalle.Columns["DPMPA_CANTIDAD"].DataPropertyName = "DPMPA_CANTIDAD";
             dgvDetalle.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
+
+            //Oculto las columnas que no se pueden
+            dgvDetalle.Columns["DPMPA_CODIGO"].Visible = false;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDetalle = new DataView(dsPlanMP.DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL);
@@ -93,6 +101,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Seteo el estado de inicio de la pantalla
             SetInterface(estadoUI.inicio);
         }
+        #endregion
+
+        #region Servicios
 
         //Método para evitar la creación de más de una pantalla
         public static frmPlanificarMateriasPrimas Instancia
@@ -122,8 +133,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                 //Cuando Arranca la pantalla
                 case estadoUI.inicio:
                     txtAnioBuscar.Text = string.Empty;
-                    gbGrillaDemanda.Visible = false;
-                    gbGrillaDetalle.Visible = false;
+                    gbGrillaDemanda.Visible = true;
+                    gbGrillaDetalle.Visible = true;
                     gbBuscar.Visible = true;
                     gbDatosPrincipales.Visible = false;
                     btnNuevo.Enabled = true;
@@ -136,8 +147,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                     break;
                 case estadoUI.nuevo:
                     txtAnioBuscar.Text = string.Empty;
-                    gbGrillaDemanda.Visible = false;
-                    gbGrillaDetalle.Visible = false;
+                    gbGrillaDemanda.Visible = true;
+                    gbGrillaDetalle.Visible = true;
                     gbBuscar.Visible = false;
                     gbDatosPrincipales.Visible = true;
                     btnNuevo.Enabled = true;
@@ -147,7 +158,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 case estadoUI.buscar:
                     txtAnioBuscar.Text = string.Empty;
                     gbGrillaDemanda.Visible = true;
-                    gbGrillaDetalle.Visible = false;
+                    gbGrillaDetalle.Visible = true;
                     gbBuscar.Visible = true;
                     gbDatosPrincipales.Visible = false;
                     btnNuevo.Enabled = true;
@@ -167,7 +178,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 case estadoUI.calcular:
                     txtAnioBuscar.Text = string.Empty;
                     gbGrillaDemanda.Visible = true;
-                    gbGrillaDetalle.Visible = false;
+                    gbGrillaDetalle.Visible = true;
                     gbBuscar.Visible = false;
                     gbDatosPrincipales.Visible = true;
                     btnNuevo.Enabled = true;
@@ -179,6 +190,9 @@ namespace GyCAP.UI.PlanificacionProduccion
                     break;
             }
         }
+        #endregion
+
+        #region Formulario Datos
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
@@ -214,7 +228,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                     Entidades.PlanAnual PlanAnual = new GyCAP.Entidades.PlanAnual();
                     PlanAnual.Codigo =Convert.ToInt32(row.PAN_CODIGO);
                     PlanAnual.Anio =Convert.ToInt32(dsPlanMP.PLANES_ANUALES.FindByPAN_CODIGO(PlanAnual.Codigo).PAN_ANIO);
-
 
                     detallePlanAnual.PlanAnual = PlanAnual;
                     detallePlanAnual.CantidadMes =Convert.ToInt32(row.DPAN_CANTIDADMES);
@@ -271,7 +284,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                         detalle.Cantidad = mpPrincipal.Cantidad * cantidadMensual;
                         detalle.Codigo = BLL.PlanMateriaPrimaBLL.GuardarDetalle(detalle);
                         detalleplanMP.Add(detalle);
-
                     }
 
                 }
@@ -347,23 +359,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);                
             }
-        }
-
-        private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.Value.ToString() != String.Empty)
-            {
-                switch (dgvLista.Columns[e.ColumnIndex].Name)
-                {
-                    case "PMPA_FECHACREACION":
-                        DateTime fecha = Convert.ToDateTime(e.Value);
-                        e.Value = fecha.ToString("dd/MM/yyyy");
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
+        }        
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -456,10 +452,17 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 Entidades.Mensajes.MensajesABM.MsjValidacion("El año no tiene el formato correcto", this.Text);
             }
+        }        
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.inicio);
         }
+        #endregion
+
+        #region Funciones Formulario
 
         private void dgvDetalle_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {            
+        {
             if (e.Value.ToString() != String.Empty)
             {
                 switch (dgvDetalle.Columns[e.ColumnIndex].Name)
@@ -473,16 +476,40 @@ namespace GyCAP.UI.PlanificacionProduccion
                         e.Value = nombreUMed;
                         break;
 
-                   default:
+                    default:
                         break;
                 }
-            }           
+
+            }
         }
 
-        private void btnConsultar_Click(object sender, EventArgs e)
+        private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            SetInterface(estadoUI.inicio);
-        }       
+            if (e.Value.ToString() != String.Empty)
+            {
+                switch (dgvLista.Columns[e.ColumnIndex].Name)
+                {
+                    case "PMPA_FECHACREACION":
+                        DateTime fecha = Convert.ToDateTime(e.Value);
+                        e.Value = fecha.ToString("dd/MM/yyyy");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
+        private void dgvDetalle_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
+        #endregion
+
        
     }
 }

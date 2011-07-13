@@ -63,6 +63,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmExcepcionesPlan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExcepcionesPlan.Designer.cs">
+      <DependentUpon>frmExcepcionesPlan.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmArbolOrdenesTrabajo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmExcepcionesPlan.resx">
+      <DependentUpon>frmExcepcionesPlan.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmArbolOrdenesTrabajo.resx">
       <DependentUpon>frmArbolOrdenesTrabajo.cs</DependentUpon>
       <SubType>Designer</SubType>

@@ -9,17 +9,10 @@ namespace GyCAP.Entidades
     {
         public enum TipoExcepcion { MateriaPrima, Capacidad, Fecha };
 
-        int codigo;
         string nombre;
         TipoExcepcion tipo;
         string descripcion;
-                
-        public int Codigo
-        {
-            get { return codigo; }
-            set { codigo = value; }
-        }        
-
+       
         public string Nombre
         {
             get { return nombre; }
