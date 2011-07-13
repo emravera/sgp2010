@@ -116,6 +116,7 @@
     <Compile Include="ModeloCocina.cs" />
     <Compile Include="ModeloMaquina.cs" />
     <Compile Include="MovimientoStock.cs" />
+    <Compile Include="MPEstructura.cs" />
     <Compile Include="NivelCriticidad.cs" />
     <Compile Include="OperacionFabricacion.cs" />
     <Compile Include="OrdenTrabajo.cs" />

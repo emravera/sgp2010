@@ -25,6 +25,7 @@ namespace GyCAP.DAL
 
             return cantidadAnual;
         }
+        
         public static object ObtenerTotalModelo(int codigoModelo, int codigoPA)
         {
             object cantidadAnual = 0;
@@ -44,9 +45,6 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
 
             return cantidadAnual;
-        }
-
-
-
+        }        
     }
 }

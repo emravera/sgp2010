@@ -231,6 +231,32 @@ namespace GyCAP.BLL
             return arbolEstructura;
         }
 
-        
+        //***********************************************************************
+        //                             NUEVOS METODOS -- (GONZALO)   
+        //***********************************************************************
+        public static List<Entidades.MPEstructura> MateriasPrimasCocina(int codigoCocina)
+        {
+            List<Entidades.MPEstructura> materiaPrimas = new List<MPEstructura>();
+
+            //Este método debe hacer lo siguiente
+            //1-A partir del codigo de la cocina debe obtener su estructura activa.
+            //2-Luego debe llenar una lista generica conteniendo las materias primas y su cantidad a partir de la estructura. 
+
+            Entidades.MPEstructura mpEstructura = new MPEstructura();
+            Entidades.MateriaPrima mp = new MateriaPrima();
+            int[] mpCodigos = {1,2,3,4};
+            decimal[] cantidades = { Convert.ToDecimal("3.65"),Convert.ToDecimal("7.85"),Convert.ToDecimal("8.99"),Convert.ToDecimal("4.78") };
+
+            foreach (int codigo in  mpCodigos)
+            {
+                //Metodo que devuleve un objeto materia prima a partir de su codigo
+                //Agrego a la lista de materias primas
+                mpEstructura.MateriaPrima = BLL.MateriaPrimaBLL.ObtenerMateriaPrima(codigo);
+                mpEstructura.Cantidad = cantidades[codigo];
+                materiaPrimas.Add(mpEstructura);
+            }
+
+            return materiaPrimas;            
+        }
     }
 }

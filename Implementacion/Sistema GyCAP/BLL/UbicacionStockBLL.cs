@@ -48,5 +48,9 @@ namespace GyCAP.BLL
         {
             DAL.UbicacionStockDAL.ActualizarCantidadesStock(ubicacion, movimiento);
         }
+        public static decimal CantidadMateriaPrima(Entidades.MateriaPrima materiaPrima)
+        {
+            return DAL.UbicacionStockDAL.CantidadMateriaPrima(materiaPrima);
+        }
     }
 }

@@ -235,5 +235,23 @@ namespace GyCAP.DAL
             }
             finally { DB.FinalizarTransaccion(); }
         }
+
+        public static decimal CantidadMateriaPrima (Entidades.MateriaPrima materiaPrima)
+        {
+            decimal cantidadMP = 0;
+
+            string sql = @"SELECT ustck_cantidadreal 
+                           FROM UBICACIONES_STOCK
+                           WHERE ustck_codigo = @p0";
+            object[] parametros = { materiaPrima.UbicacionStock.Codigo };
+
+            try
+            {
+                cantidadMP = Convert.ToDecimal(DB.executeScalar(sql, parametros,null));
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+
+            return cantidadMP;
+        }
     }
 }
