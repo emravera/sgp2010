@@ -98,12 +98,11 @@ namespace GyCAP.BLL
 
             foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in dtDetallePM.Rows)
             {
-                detalle.Codigo =Convert.ToInt32(row.DPED_CODIGO);
+                detalle.Codigo =Convert.ToInt32(row.DPMES_CODIGO);
                 cocina.CodigoCocina =Convert.ToInt32(row.COC_CODIGO);
                 detalle.Cocina = cocina;
                 planMes.Codigo = Convert.ToInt32(row.PMES_CODIGO);
                 detalle.PlanMensual = planMes;
-                detalle.CantidadReal =Convert.ToInt32(row.DPMES_CANTIDADREAL);
                 detalle.CantidadEstimada = Convert.ToInt32(row.DPMES_CANTIDADESTIMADA);
                 detalle.DetallePedido = Convert.ToInt32(row.DPED_CODIGO);
 
@@ -125,8 +124,10 @@ namespace GyCAP.BLL
             //Metodo que checkea que se tenga en cuenta las cantidades de materia prima
             foreach (Entidades.DetallePlanMensual pm in detallePlanMes)
             {
-                //Obtengo la lista de las cantidades de materias primas
-                listaMPEstructura.Concat(EstructuraBLL.MateriasPrimasCocina(pm.Cocina.CodigoCocina)); 
+                List<Entidades.MPEstructura> listaAuxiliar = new List<GyCAP.Entidades.MPEstructura>();
+                listaAuxiliar = EstructuraBLL.MateriasPrimasCocina(pm.Cocina.CodigoCocina, pm.CantidadEstimada);
+
+                listaMPEstructura = listaMPEstructura.Concat(listaAuxiliar).ToList();                
             }
             
             //Genero una lista unica de objetos que sume las cantidades de MP

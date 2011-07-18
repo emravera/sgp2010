@@ -242,8 +242,9 @@ namespace GyCAP.DAL
 
             string sql = @"SELECT ustck_cantidadreal 
                            FROM UBICACIONES_STOCK
-                           WHERE ustck_codigo = @p0";
-            object[] parametros = { materiaPrima.UbicacionStock.Codigo };
+                           WHERE ustck_numero = @p0";
+
+            object[] parametros = { materiaPrima.UbicacionStock.Numero };
 
             try
             {
