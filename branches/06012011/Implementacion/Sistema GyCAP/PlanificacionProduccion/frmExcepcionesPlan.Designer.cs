@@ -61,6 +61,7 @@
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(508, 258);
             this.dgvLista.TabIndex = 2;
+            this.dgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // groupBox1
             // 
@@ -82,14 +83,14 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
-            // ExcepcionesPlan
+            // frmExcepcionesPlan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(520, 339);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbExcepciones);
-            this.Name = "ExcepcionesPlan";
+            this.Name = "frmExcepcionesPlan";
             this.Text = "Excepciones Plan";
             this.gbExcepciones.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();

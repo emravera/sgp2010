@@ -15,7 +15,13 @@ namespace GyCAP.BLL
         {
             DAL.UnidadMedidaDAL.ObtenerUnidad(nombre, idTipo, ds);
         }
-        
+
+        //Obtiene una unidad de medida a partir de su codigo
+        public static string ObtenerUnidad(int codigoUnidad)
+        {
+            return DAL.UnidadMedidaDAL.ObtenerUnidad(codigoUnidad);
+        }
+                
         //Metodo para buscar todos los valores pasandole el datatable
         public static void ObtenerTodos(DataTable dtUnidadMedida)
         {

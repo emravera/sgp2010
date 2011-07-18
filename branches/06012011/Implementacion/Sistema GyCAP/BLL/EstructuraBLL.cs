@@ -234,7 +234,7 @@ namespace GyCAP.BLL
         //***********************************************************************
         //                             NUEVOS METODOS -- (GONZALO)   
         //***********************************************************************
-        public static List<Entidades.MPEstructura> MateriasPrimasCocina(int codigoCocina)
+        public static List<Entidades.MPEstructura> MateriasPrimasCocina(int codigoCocina, decimal cantidadCocina)
         {
             List<Entidades.MPEstructura> materiaPrimas = new List<MPEstructura>();
 
@@ -242,18 +242,21 @@ namespace GyCAP.BLL
             //1-A partir del codigo de la cocina debe obtener su estructura activa.
             //2-Luego debe llenar una lista generica conteniendo las materias primas y su cantidad a partir de la estructura. 
 
-            Entidades.MPEstructura mpEstructura = new MPEstructura();
-            Entidades.MateriaPrima mp = new MateriaPrima();
+            //Valores puestos a mano - Cambiar Gonzalo
             int[] mpCodigos = {1,2,3,4};
-            decimal[] cantidades = { Convert.ToDecimal("3.65"),Convert.ToDecimal("7.85"),Convert.ToDecimal("8.99"),Convert.ToDecimal("4.78") };
+            decimal[] cantidades = {Convert.ToDecimal("3,65"),Convert.ToDecimal("7,85"), Convert.ToDecimal("4,78"), Convert.ToDecimal("6,89") };
+            int cont = 0;
 
             foreach (int codigo in  mpCodigos)
             {
+                Entidades.MPEstructura mpEstructura = new MPEstructura();
+
                 //Metodo que devuleve un objeto materia prima a partir de su codigo
                 //Agrego a la lista de materias primas
-                mpEstructura.MateriaPrima = BLL.MateriaPrimaBLL.ObtenerMateriaPrima(codigo);
-                mpEstructura.Cantidad = cantidades[codigo];
+                mpEstructura.MateriaPrima = BLL.MateriaPrimaBLL.ObtenerMateriaPrima(mpCodigos[cont]);
+                mpEstructura.Cantidad = Convert.ToDecimal(cantidadCocina * cantidades[cont]);
                 materiaPrimas.Add(mpEstructura);
+                cont += 1;
             }
 
             return materiaPrimas;            

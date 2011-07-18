@@ -18,10 +18,12 @@ namespace GyCAP.BLL
         {
             //Creo el objeto excepcion 
             Entidades.ExcepcionesPlan excepcion = new GyCAP.Entidades.ExcepcionesPlan();
+            cantidad = cantidad * -1;
 
             excepcion.Nombre = "FALTA: " + materiaPrima.Nombre.ToString();
             excepcion.Tipo = Entidades.ExcepcionesPlan.TipoExcepcion.MateriaPrima;
-            excepcion.Descripcion = "Cantidad Faltante: " + cantidad.ToString() + "unidades";
+            string unidadMedida = BLL.UnidadMedidaBLL.ObtenerUnidad(Convert.ToInt32(materiaPrima.CodigoUnidadMedida));
+            excepcion.Descripcion = "Faltante: " + cantidad.ToString() + " " + unidadMedida;
 
             return excepcion;          
         }

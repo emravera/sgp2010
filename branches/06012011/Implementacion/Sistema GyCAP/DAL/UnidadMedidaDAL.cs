@@ -65,6 +65,7 @@ namespace GyCAP.DAL
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
+       
         //Metodo para llenar desde materia primas principales
         public static void ObtenerTodos(DataTable dtUnidadMedida)
         {
@@ -78,6 +79,22 @@ namespace GyCAP.DAL
 
         }
 
+        //Metodo que obtiene una unidad de medida a partir de su codigo
+        public static string ObtenerUnidad(int codigoUnidad)
+        {
+            string nombre =  string.Empty;
+            string sql = @"SELECT umed_nombre FROM UNIDADES_MEDIDA WHERE umed_codigo= @p0";
+
+            object[] valorParametros = { codigoUnidad };
+            try
+            {
+                nombre = DB.executeScalar(sql, valorParametros, null).ToString();
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+
+            return nombre;
+        }
+        
         //Metodo para llenar desde planificacion  materia primas principales
         public static void ObtenerUnidades(Data.dsPlanMateriasPrimas ds)
         {
