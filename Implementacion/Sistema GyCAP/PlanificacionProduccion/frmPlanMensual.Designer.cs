@@ -63,13 +63,13 @@
             this.cbCocinas = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label5 = new System.Windows.Forms.Label();
             this.tpPedidos = new System.Windows.Forms.TabPage();
-            this.gbPedidos = new System.Windows.Forms.GroupBox();
             this.btnVerDetalle = new System.Windows.Forms.Button();
+            this.gbPedidos = new System.Windows.Forms.GroupBox();
             this.dgvPedidos = new System.Windows.Forms.DataGridView();
             this.lblMensaje = new System.Windows.Forms.Label();
             this.tpDetallePedido = new System.Windows.Forms.TabPage();
-            this.gbDetallePedido = new System.Windows.Forms.GroupBox();
             this.btnPlanificar = new System.Windows.Forms.Button();
+            this.gbDetallePedido = new System.Windows.Forms.GroupBox();
             this.dgvDetallePedido = new System.Windows.Forms.DataGridView();
             this.label11 = new System.Windows.Forms.Label();
             this.lblMensajeDetalle = new System.Windows.Forms.Label();
@@ -479,6 +479,7 @@
             this.rbPorcentaje.TabStop = true;
             this.rbPorcentaje.Text = "Porcentaje (%)";
             this.rbPorcentaje.UseVisualStyleBackColor = true;
+            this.rbPorcentaje.CheckedChanged += new System.EventHandler(this.rbPorcentaje_CheckedChanged);
             // 
             // rbUnidades
             // 
@@ -490,6 +491,7 @@
             this.rbUnidades.TabStop = true;
             this.rbUnidades.Text = "Unidades Físicas";
             this.rbUnidades.UseVisualStyleBackColor = true;
+            this.rbUnidades.CheckedChanged += new System.EventHandler(this.rbUnidades_CheckedChanged);
             // 
             // cbCocinas
             // 
@@ -522,6 +524,16 @@
             this.tpPedidos.TabIndex = 1;
             this.tpPedidos.Text = "Pedidos Mes";
             // 
+            // btnVerDetalle
+            // 
+            this.btnVerDetalle.Location = new System.Drawing.Point(268, 218);
+            this.btnVerDetalle.Name = "btnVerDetalle";
+            this.btnVerDetalle.Size = new System.Drawing.Size(76, 23);
+            this.btnVerDetalle.TabIndex = 14;
+            this.btnVerDetalle.Text = "Ver Detalle";
+            this.btnVerDetalle.UseVisualStyleBackColor = true;
+            this.btnVerDetalle.Click += new System.EventHandler(this.btnVerDetalle_Click);
+            // 
             // gbPedidos
             // 
             this.gbPedidos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -535,16 +547,6 @@
             this.gbPedidos.TabIndex = 0;
             this.gbPedidos.TabStop = false;
             this.gbPedidos.Text = "Pedidos";
-            // 
-            // btnVerDetalle
-            // 
-            this.btnVerDetalle.Location = new System.Drawing.Point(268, 218);
-            this.btnVerDetalle.Name = "btnVerDetalle";
-            this.btnVerDetalle.Size = new System.Drawing.Size(76, 23);
-            this.btnVerDetalle.TabIndex = 14;
-            this.btnVerDetalle.Text = "Ver Detalle";
-            this.btnVerDetalle.UseVisualStyleBackColor = true;
-            this.btnVerDetalle.Click += new System.EventHandler(this.btnVerDetalle_Click);
             // 
             // dgvPedidos
             // 
@@ -580,6 +582,16 @@
             this.tpDetallePedido.TabIndex = 2;
             this.tpDetallePedido.Text = "DetallePedido";
             // 
+            // btnPlanificar
+            // 
+            this.btnPlanificar.Location = new System.Drawing.Point(268, 214);
+            this.btnPlanificar.Name = "btnPlanificar";
+            this.btnPlanificar.Size = new System.Drawing.Size(76, 23);
+            this.btnPlanificar.TabIndex = 14;
+            this.btnPlanificar.Text = "Planificar";
+            this.btnPlanificar.UseVisualStyleBackColor = true;
+            this.btnPlanificar.Click += new System.EventHandler(this.btnPlanificar_Click);
+            // 
             // gbDetallePedido
             // 
             this.gbDetallePedido.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -594,16 +606,6 @@
             this.gbDetallePedido.TabIndex = 1;
             this.gbDetallePedido.TabStop = false;
             this.gbDetallePedido.Text = "Detalle Pedido";
-            // 
-            // btnPlanificar
-            // 
-            this.btnPlanificar.Location = new System.Drawing.Point(268, 214);
-            this.btnPlanificar.Name = "btnPlanificar";
-            this.btnPlanificar.Size = new System.Drawing.Size(76, 23);
-            this.btnPlanificar.TabIndex = 14;
-            this.btnPlanificar.Text = "Planificar";
-            this.btnPlanificar.UseVisualStyleBackColor = true;
-            this.btnPlanificar.Click += new System.EventHandler(this.btnPlanificar_Click);
             // 
             // dgvDetallePedido
             // 
