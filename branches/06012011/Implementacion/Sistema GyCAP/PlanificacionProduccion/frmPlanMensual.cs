@@ -70,7 +70,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns.Add("COC_CODIGO", "Cocina Codigo");
             dgvDetalle.Columns.Add("DPMES_CANTIDADESTIMADA", "Cantidad Estimada");
             dgvDetalle.Columns.Add("DPMES_CANTIDADREAL", "Cantidad Real");
-            dgvDetalle.Columns.Add("DPED_CODIGO", "Pedido");
+            dgvDetalle.Columns.Add("DPED_CODIGO", "Detalle Pedido");
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvDetalle.Columns["DPMES_CODIGO"].DataPropertyName = "DPMES_CODIGO";
@@ -309,13 +309,14 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbCargaDetalle.Visible = true;
                     gbDetalleGrilla.Visible = true;
                     gbBotones.Visible = true;
+                    
                     //Textbox
                     txtCantAPlanificar.Text = string.Empty;
                     txtCantPlanificada.Text = string.Empty;
                     txtRestaPlanificar.Text = string.Empty;
-                    txtCantAPlanificar.Enabled = false;
-                    txtCantPlanificada.Enabled = false;
-                    txtRestaPlanificar.Enabled = false;
+                    txtCantAPlanificar.ReadOnly = true;
+                    txtCantPlanificada.ReadOnly=true;
+                    txtRestaPlanificar.ReadOnly=true;
                     //Combo
                     cbCocinas.SetSelectedIndex(-1);
                     //Numeric 
@@ -390,7 +391,6 @@ namespace GyCAP.UI.PlanificacionProduccion
         //Detalle de Planes Mensuales Busqueda
         private void dgvDetalle_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-
             if (e.Value.ToString() != String.Empty)
             {
                 switch (dgvDetalle.Columns[e.ColumnIndex].Name)
@@ -426,7 +426,6 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void dgvPedidos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-
             if (e.Value != null)
             {
                 string nombre;
@@ -448,7 +447,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                     default:
                         break;
                 }
-
             }
         }
         private void dgvDetallePedido_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -470,9 +468,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     default:
                         break;
                 }
-
             }
-
         }
 
         private void tcDatos_Selecting(object sender, TabControlCancelEventArgs e)
@@ -532,16 +528,16 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void rbUnidades_CheckedChanged(object sender, EventArgs e)
         {
-            numUnidades.Visible = true;
-            numPorcentaje.Visible = false;
+            numUnidades.Enabled = true;
+            numPorcentaje.Enabled = false;
             numPorcentaje.Value = 0;
             numUnidades.Value = 0;
         }
 
         private void rbPorcentaje_CheckedChanged(object sender, EventArgs e)
         {
-            numUnidades.Visible = false;
-            numPorcentaje.Visible = true;
+            numUnidades.Enabled = false;
+            numPorcentaje.Enabled = true;
             numPorcentaje.Value = 0;
             numUnidades.Value = 0;
         }
@@ -886,6 +882,9 @@ namespace GyCAP.UI.PlanificacionProduccion
                     PlanificacionProduccion.frmExcepcionesPlan frmExcepciones= new frmExcepcionesPlan();
                     frmExcepciones.CargarGrilla(excepciones);
                     frmExcepciones.Show();
+
+                    //Cambio el valor de checkeo excepciones a TRUE para que pase una vez
+                    checkeoExcepciones = true;
                 }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -1237,6 +1236,8 @@ namespace GyCAP.UI.PlanificacionProduccion
         }
 
         #endregion
+
+       
 
     }
 }
