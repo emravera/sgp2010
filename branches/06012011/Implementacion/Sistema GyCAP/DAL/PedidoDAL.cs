@@ -382,16 +382,20 @@ namespace GyCAP.DAL
 
         public static bool PuedeEliminarse(long codigo)
         {
-            string sqlDPM = "SELECT count(dped_codigo) FROM DETALLE_PLANES_MENSUALES WHERE dped_codigo = @p0";
-            string sqlDPS = "SELECT count(dped_codigo) FROM DETALLE_PLANES_SEMANALES WHERE dped_codigo = @p0";
+            string sqlDPM = "SELECT count(dped_codigo) FROM DETALLE_PEDIDOS WHERE ped_codigo = @p0";
 
             object[] valorParametros = { codigo };
             try
             {
                 int resultadoDPM = Convert.ToInt32(DB.executeScalar(sqlDPM, valorParametros, null));
-                int resultadoDPS = Convert.ToInt32(DB.executeScalar(sqlDPS, valorParametros, null));
 
-                if (resultadoDPS == 0 && resultadoDPM == 0) { return true; }
+                if (resultadoDPM == 0) 
+                { //AHORA VER LOS DETALLES SI SE PUEDEN BORRAR
+                       
+    
+
+                    return true; 
+                }
                 else { return false; }
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
