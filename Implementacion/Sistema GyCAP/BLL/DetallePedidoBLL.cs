@@ -33,9 +33,15 @@ namespace GyCAP.BLL
         {
             DAL.DetallePedidoDAL.ObtenerDetallePedido(dtDetallePedido, codigoPedido);
         }
+
         public static void CambiarEstado(int codigoDetallePedido, int estado)
         {
             DAL.DetallePedidoDAL.CambiarEstado(codigoDetallePedido, estado);
+        }
+
+        public static bool EsCliente(Entidades.Cliente cliente)
+        {
+            return DAL.ClienteDAL.esCliente(cliente);
         }
     }
 }

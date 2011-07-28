@@ -44,7 +44,7 @@ namespace GyCAP.BLL
         public static void Eliminar(long codigo)
         {
             //Revisamos que no esté en alguna transacción
-            if (DAL.PedidoDAL.PuedeEliminarse(codigo))
+            if (DAL.PedidoDAL.PuedeEliminarse(codigo) && DAL.DetallePedidoDAL.PuedeEliminarse(codigo) )
             {
                 //Puede eliminarse
                 DAL.PedidoDAL.Eliminar(codigo);

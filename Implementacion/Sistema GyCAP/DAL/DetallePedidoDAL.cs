@@ -10,6 +10,7 @@ namespace GyCAP.DAL
     public class DetallePedidoDAL
     {
         public static readonly int EstadoEnCurso = 2;
+
         public static readonly int EstadoFinalizado = 5;
         
         public static void Insertar(Entidades.DetallePedido detalle, SqlTransaction transaccion)
@@ -44,6 +45,7 @@ namespace GyCAP.DAL
         public static void EliminarDetallePedido(long codigoPedido, SqlTransaction transaccion)
         {
             string sql = "DELETE FROM DETALLE_PEDIDOS WHERE PED_CODIGO = @p0";
+
             object[] valorParametros = { codigoPedido };
             DB.executeNonQuery(sql, valorParametros, transaccion);
         }
@@ -93,6 +95,7 @@ namespace GyCAP.DAL
 
             }
         }
+
         public static void ObtenerUnDetallePedido(DataTable dtDetallePedidos, int codigoDetalle)
         {
             string sql = @"SELECT dped_codigo, ped_codigo, edped_codigo, coc_codigo, dped_cantidad, dped_fecha_cancelacion
@@ -121,6 +124,26 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
+        }
+
+        public static bool PuedeEliminarse(long codigo)
+        {
+            //Hacer un for para recorrer los detalles
+            string sqlDENT = "SELECT count(DENT_CODIGO) FROM DETALLE_ENTREGA_PRODUCTO WHERE DPED_codigo = @p0";
+            string sqlDPMES = "SELECT count(DPMES_CODIGO) FROM DETALLE_PLANES_MENSUALES WHERE DPED_codigo = @p0";
+            string sqlDPSEM = "SELECT count(DPSEM_CODIGO) FROM DETALLE_PLANES_SEMANALES WHERE DPED_codigo = @p0";
+
+            object[] valorParametros = { codigo };
+            try
+            {
+                int resultadoDENT = Convert.ToInt32(DB.executeScalar(sqlDENT, valorParametros, null));
+                int resultadoDPMES = Convert.ToInt32(DB.executeScalar(sqlDPMES, valorParametros, null));
+                int resultadoDPSEM = Convert.ToInt32(DB.executeScalar(sqlDPSEM, valorParametros, null));
+
+                if (resultadoDENT == 0 && resultadoDPMES == 0 && resultadoDPSEM == 0) { return true; }
+                else { return false; }
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
     }
 }

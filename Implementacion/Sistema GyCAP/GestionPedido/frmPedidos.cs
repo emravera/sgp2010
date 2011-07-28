@@ -243,19 +243,12 @@ namespace GyCAP.UI.GestionPedido
             //dgvDetallePedido.Columns["DPED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             //dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
 
-
             dgvCocinas.Columns.Add("COC_CODIGO_PRODUCTO", "Código");
             dgvCocinas.Columns.Add("MOD_CODIGO", "Modelo");
             dgvCocinas.Columns.Add("MCA_CODIGO", "Marca");
-            //dgvCocinas.Columns.Add("COC_ESTADO", "Estado");
-            dgvCocinas.Columns.Add("COC_COSTO", "Costo");
             dgvCocinas.Columns["COC_CODIGO_PRODUCTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCocinas.Columns["MOD_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCocinas.Columns["MCA_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCocinas.Columns["COC_COSTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCocinas.Columns["COC_COSTO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            //dgvCocinas.Columns["COC_ESTADO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
             
             //Indicamos de dónde van a sacar los datos cada columna
             dgvLista.Columns["PED_CODIGO"].DataPropertyName = "PED_CODIGO";
@@ -273,8 +266,6 @@ namespace GyCAP.UI.GestionPedido
             dgvCocinas.Columns["COC_CODIGO_PRODUCTO"].DataPropertyName = "COC_CODIGO_PRODUCTO";
             dgvCocinas.Columns["MOD_CODIGO"].DataPropertyName = "MOD_CODIGO";
             dgvCocinas.Columns["MCA_CODIGO"].DataPropertyName = "MCA_CODIGO";
-            //dgvCocinas.Columns["COC_ESTADO"].DataPropertyName = "COC_ESTADO";
-            dgvCocinas.Columns["COC_COSTO"].DataPropertyName = "COC_COSTO";
 
             //Creamos el dataview y lo asignamos a la grilla
             dvPedido = new DataView(dsCliente.PEDIDOS);
@@ -310,7 +301,8 @@ namespace GyCAP.UI.GestionPedido
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Inicio );
             }
             dvEstadoPedidoBuscar = new DataView(dsCliente.ESTADO_PEDIDOS);
 
@@ -332,7 +324,8 @@ namespace GyCAP.UI.GestionPedido
 
                 if (dsCliente.PEDIDOS.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Pedidos con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("No se encontraron Pedidos con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjExcepcion("No se encontraron Pedidos con los datos ingresados.", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda );
                 }
 
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
@@ -345,7 +338,8 @@ namespace GyCAP.UI.GestionPedido
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Pedido - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(ex.Message, "Error: Pedido - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }
         }
@@ -467,7 +461,8 @@ namespace GyCAP.UI.GestionPedido
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Debe seleccionar una Cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion("Debe seleccionar una Cocina de la lista.", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación );
             }
         }
 
@@ -483,7 +478,8 @@ namespace GyCAP.UI.GestionPedido
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Debe seleccionar una Cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion("Debe seleccionar una Cocina de la lista.", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
             }
         }
 
@@ -502,7 +498,8 @@ namespace GyCAP.UI.GestionPedido
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Debe seleccionar una Cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion("Debe seleccionar una Cocina de la lista.", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
             }
         }
 
@@ -587,7 +584,8 @@ namespace GyCAP.UI.GestionPedido
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Cocina de la lista y asignarle una cantidad mayor a 0.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Debe seleccionar una Cocina de la lista y asignarle una cantidad mayor a 0.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion("Debe seleccionar una Cocina de la lista y asignarle una cantidad mayor a 0.", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado );
             }
         }
 
@@ -651,14 +649,16 @@ namespace GyCAP.UI.GestionPedido
                         //Ya existe la pieza, descartamos los cambios pero sólo de piezas ya que puede querer
                         //modificar el nombre y/o la terminación e intentar de nuevo con la estructura cargada
                         dsCliente.PEDIDOS.RejectChanges();
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        //MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         //Hubo problemas con la BD, descartamos los cambios de piezas ya que puede intentar
                         //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
                         dsCliente.PEDIDOS.RejectChanges();
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
@@ -691,21 +691,24 @@ namespace GyCAP.UI.GestionPedido
                         //Hubo problemas con la BD, descartamos los cambios de piezas ya que puede intentar
                         //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
                         dsCliente.PEDIDOS.RejectChanges();
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //MessageBox.Show(ex.Message, "Error: " + this.Text + " - Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.ErrorInesperadoException ex)
                     {
                         //Hubo problemas no esperados, descartamos los cambios de piezas ya que puede intentar
                         //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
                         dsCliente.PEDIDOS.RejectChanges();
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //MessageBox.Show(ex.Message, "Error: " + this.Text + " - Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                 }
                 dgvLista.Refresh();
             }
             else
             {
-                MessageBox.Show("Debe completar los datos:\n\n" + datosFaltantes, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Debe completar los datos:\n\n" + datosFaltantes, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjPreguntaAlUsuario("Debe completar los datos:\n\n" + datosFaltantes, this.Text);
             }
         }
 
@@ -715,7 +718,7 @@ namespace GyCAP.UI.GestionPedido
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 int estado = Convert.ToInt32(dvPedido[dgvLista.SelectedRows[0].Index]["eped_codigo"]);
-                if (estado != 1) //Si no esta pendiente no lo puede eliminar PARAMETRIZAR
+                if (estado == 1) //Si no esta pendiente no lo puede eliminar PARAMETRIZAR
                 {
                     //Preguntamos si está seguro
                     DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Pedido Seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -733,18 +736,27 @@ namespace GyCAP.UI.GestionPedido
                         }
                         catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                         {
-                            MessageBox.Show(ex.Message, "Error: Pieza - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            //MessageBox.Show(ex.Message, "Error: Pieza - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
                         }
                         catch (Entidades.Excepciones.BaseDeDatosException ex)
                         {
-                            MessageBox.Show(ex.Message, "Error: Pieza - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            //MessageBox.Show(ex.Message, "Error: Pieza - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
                         }
                     }
+                }
+                else 
+                {
+                    string lEstado;
+                    lEstado = dsCliente.ESTADO_DETALLE_PEDIDOS.FindByEDPED_CODIGO(Convert.ToDecimal( dvPedido[dgvLista.SelectedRows[0].Index]["eped_codigo"])).EDPED_NOMBRE;
+                    Entidades.Mensajes.MensajesABM.MsjExcepcion("No puede eliminar un pedido con estado: " + lEstado, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Pedido de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Debe seleccionar un Pedido de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjPreguntaAlUsuario("Debe seleccionar un Pedido de la lista.", this.Text);
             }
         }
 
@@ -809,6 +821,21 @@ namespace GyCAP.UI.GestionPedido
                         break;
                 }
             }
+        }
+
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
+        private void dgvDetallePedido_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
+        private void dgvCocinas_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
         }
     }
 }

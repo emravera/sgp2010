@@ -134,6 +134,7 @@
             this.dgvDetallePedido.Size = new System.Drawing.Size(462, 180);
             this.dgvDetallePedido.TabIndex = 12;
             this.dgvDetallePedido.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetallePedido_CellFormatting);
+            this.dgvDetallePedido.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDetallePedido_DataBindingComplete);
             // 
             // panelAcciones
             // 
@@ -346,6 +347,7 @@
             // nudCantidad
             // 
             this.nudCantidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.nudCantidad.CausesValidation = false;
             this.nudCantidad.Location = new System.Drawing.Point(3, 30);
             this.nudCantidad.Maximum = new decimal(new int[] {
             1000,
@@ -362,6 +364,7 @@
             // 
             this.dgvCocinas.AllowUserToAddRows = false;
             this.dgvCocinas.AllowUserToDeleteRows = false;
+            this.dgvCocinas.CausesValidation = false;
             this.dgvCocinas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCocinas.Location = new System.Drawing.Point(6, 17);
             this.dgvCocinas.MultiSelect = false;
@@ -372,6 +375,7 @@
             this.dgvCocinas.Size = new System.Drawing.Size(441, 164);
             this.dgvCocinas.TabIndex = 0;
             this.dgvCocinas.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCocinas_CellFormatting);
+            this.dgvCocinas.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCocinas_DataBindingComplete);
             // 
             // slideAgregar
             // 
@@ -398,6 +402,7 @@
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
             this.dgvLista.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvLista.CausesValidation = false;
             this.dgvLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLista.Location = new System.Drawing.Point(9, 22);
@@ -411,6 +416,7 @@
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
+            this.dgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // label11
             // 
@@ -536,6 +542,7 @@
             // 
             // sfFechaHasta
             // 
+            this.sfFechaHasta.CausesValidation = false;
             this.sfFechaHasta.CustomFormat = " ";
             this.sfFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.sfFechaHasta.Location = new System.Drawing.Point(85, 46);
@@ -554,6 +561,7 @@
             // 
             // sfFechaDesde
             // 
+            this.sfFechaDesde.CausesValidation = false;
             this.sfFechaDesde.CustomFormat = " ";
             this.sfFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.sfFechaDesde.Location = new System.Drawing.Point(85, 20);
@@ -581,6 +589,7 @@
             // 
             // txtNroPedidoBuscar
             // 
+            this.txtNroPedidoBuscar.CausesValidation = false;
             this.txtNroPedidoBuscar.Location = new System.Drawing.Point(85, 72);
             this.txtNroPedidoBuscar.MaxLength = 80;
             this.txtNroPedidoBuscar.Name = "txtNroPedidoBuscar";
@@ -589,6 +598,7 @@
             // 
             // cboEstadoBuscar
             // 
+            this.cboEstadoBuscar.CausesValidation = false;
             this.cboEstadoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboEstadoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboEstadoBuscar.FormattingEnabled = true;
@@ -599,6 +609,7 @@
             // 
             // btnBuscar
             // 
+            this.btnBuscar.CausesValidation = false;
             this.btnBuscar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBuscar.Location = new System.Drawing.Point(480, 68);
@@ -612,6 +623,7 @@
             // 
             // txtNombreBuscar
             // 
+            this.txtNombreBuscar.CausesValidation = false;
             this.txtNombreBuscar.Location = new System.Drawing.Point(282, 72);
             this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
@@ -658,16 +670,18 @@
             // 
             this.btnNewCliente.AutoSize = true;
             this.btnNewCliente.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNewCliente.CausesValidation = false;
             this.btnNewCliente.FlatAppearance.BorderSize = 0;
             this.btnNewCliente.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.btnNewCliente.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnNewCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNewCliente.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNewCliente.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.New_25;
-            this.btnNewCliente.Location = new System.Drawing.Point(386, 38);
+            this.btnNewCliente.Location = new System.Drawing.Point(467, 38);
             this.btnNewCliente.Name = "btnNewCliente";
             this.btnNewCliente.Size = new System.Drawing.Size(85, 31);
             this.btnNewCliente.TabIndex = 20;
+            this.btnNewCliente.TabStop = false;
             this.btnNewCliente.Text = "Nuevo...";
             this.btnNewCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNewCliente.UseVisualStyleBackColor = true;
@@ -681,15 +695,16 @@
             this.sfFechaPrevista.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.sfFechaPrevista.Location = new System.Drawing.Point(96, 69);
             this.sfFechaPrevista.Name = "sfFechaPrevista";
-            this.sfFechaPrevista.Size = new System.Drawing.Size(284, 20);
+            this.sfFechaPrevista.Size = new System.Drawing.Size(153, 20);
             this.sfFechaPrevista.TabIndex = 9;
             // 
             // txtNumero
             // 
+            this.txtNumero.CausesValidation = false;
             this.txtNumero.Location = new System.Drawing.Point(96, 19);
             this.txtNumero.MaxLength = 20;
             this.txtNumero.Name = "txtNumero";
-            this.txtNumero.Size = new System.Drawing.Size(284, 20);
+            this.txtNumero.Size = new System.Drawing.Size(153, 20);
             this.txtNumero.TabIndex = 7;
             // 
             // label9
@@ -708,7 +723,7 @@
             this.cboEstado.FormattingEnabled = true;
             this.cboEstado.Location = new System.Drawing.Point(96, 94);
             this.cboEstado.Name = "cboEstado";
-            this.cboEstado.Size = new System.Drawing.Size(284, 21);
+            this.cboEstado.Size = new System.Drawing.Size(153, 21);
             this.cboEstado.TabIndex = 10;
             // 
             // cboClientes
@@ -718,7 +733,7 @@
             this.cboClientes.FormattingEnabled = true;
             this.cboClientes.Location = new System.Drawing.Point(96, 44);
             this.cboClientes.Name = "cboClientes";
-            this.cboClientes.Size = new System.Drawing.Size(284, 21);
+            this.cboClientes.Size = new System.Drawing.Size(342, 21);
             this.cboClientes.TabIndex = 8;
             // 
             // label4
@@ -732,10 +747,11 @@
             // 
             // txtObservacion
             // 
+            this.txtObservacion.CausesValidation = false;
             this.txtObservacion.Location = new System.Drawing.Point(96, 123);
             this.txtObservacion.MaxLength = 200;
             this.txtObservacion.Name = "txtObservacion";
-            this.txtObservacion.Size = new System.Drawing.Size(284, 50);
+            this.txtObservacion.Size = new System.Drawing.Size(342, 50);
             this.txtObservacion.TabIndex = 11;
             this.txtObservacion.Text = "";
             // 
