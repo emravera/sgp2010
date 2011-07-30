@@ -48,7 +48,7 @@ namespace GyCAP.Entidades.ArbolEstructura
         {
             get { return nodosHijos; }
             set { nodosHijos = value; }
-        }        
+        }
 
         public NodoEstructura NodoPadre
         {
@@ -76,16 +76,49 @@ namespace GyCAP.Entidades.ArbolEstructura
         
         public decimal GetCosto()
         {
-            if (this.contenido == tipoContenido.MateriaPrima) { return this.compuesto.MateriaPrima.Costo; }
+            if (this.contenido == tipoContenido.MateriaPrima) { return this.compuesto.MateriaPrima.Costo * this.compuesto.Cantidad; }
             
             decimal costo = 0;
             
             foreach (NodoEstructura nodo in nodosHijos)
             {
-                costo += nodo.GetCosto();
+                costo += nodo.GetCosto() * this.compuesto.Cantidad;
             }            
 
             return costo;
         }
+
+        public void SumarCantidad(decimal cantidad)
+        {
+            if (this.compuesto != null) { this.compuesto.Cantidad += cantidad; }
+        }
+
+        public void RestarCantidad(decimal cantidad)
+        {
+            if (this.compuesto != null) { this.compuesto.Cantidad -= cantidad; }
+        }
+
+        public bool AddChild(NodoEstructura nodo, bool allowDuplicated)
+        {
+            NodoEstructura finded = this.FindInChilds(nodo.codigoNodo);
+            
+            if (finded != null && !allowDuplicated) { return false; }
+
+            this.nodosHijos.Add(nodo);
+
+            return true;
+        }
+
+        public NodoEstructura FindInChilds(int codigo)
+        {
+            NodoEstructura nodo = null;
+            
+            if (this.nodosHijos.Count > 0)
+            {
+                nodo = this.nodosHijos.Find(p => p.codigoNodo == codigo);
+            }
+
+            return nodo;
+        }        
     }
 }

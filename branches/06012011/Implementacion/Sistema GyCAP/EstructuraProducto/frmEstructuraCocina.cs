@@ -157,6 +157,31 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 MensajesABM.MsjSinSeleccion("Estructura", MensajesABM.Generos.Femenino, this.Text);
             }
+
+            /*tcEstructuraProducto.SelectedTab = tpTemp;
+            tvTemp.Nodes.Clear();
+            tvTemp.BeginUpdate();
+            TreeNode nodoraiz = new TreeNode(arbolEstructura.NodoRaiz.Text);
+
+            foreach (Entidades.ArbolEstructura.NodoEstructura nodoEstr in arbolEstructura.NodoRaiz.NodosHijos)
+            {
+                TreeNode nodo = new TreeNode(nodoEstr.Text);
+                nodoraiz.Nodes.Add(nodo);
+                Add(nodoEstr, nodo);
+            }
+            tvTemp.Nodes.Add(nodoraiz);
+            tvTemp.EndUpdate();
+            tvTemp.ExpandAll();*/
+        }
+
+        private void Add(Entidades.ArbolEstructura.NodoEstructura nodoEstr, TreeNode nodoAdd)
+        {
+            foreach (Entidades.ArbolEstructura.NodoEstructura nodosEstr in nodoEstr.NodosHijos)
+            {
+                TreeNode nodo = new TreeNode(nodosEstr.Text);
+                nodoAdd.Nodes.Add(nodo);
+                Add(nodosEstr, nodo);
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -344,6 +369,7 @@ namespace GyCAP.UI.EstructuraProducto
                     //              - si ya está en otro padre, que no arme una estructura diferente para la misma parte
                     //              - que ella misma no sea ancestro
                     //              - solo una parte del tipo producto terminado puede ser raíz
+                    //              - un producto terminado no puede ser hijo de nadie
                     int numeroParte = Convert.ToInt32(dvPartesDisponibles[dgvPartesDisponibles.SelectedRows[0].Index]["part_numero"]);
                     AgregarParteAArbol(dsEstructura.PARTES.FindByPART_NUMERO(numeroParte), null);
                 }
@@ -378,6 +404,7 @@ namespace GyCAP.UI.EstructuraProducto
             if (tvEstructura.Nodes.Count != 0 && tvEstructura.SelectedNode == null) { validacion.Add("Parte padre"); }
             if (tvEstructura.Nodes.Count == 0 && rowParte != null && !BLL.TipoParteBLL.EsProductoTerminado(Convert.ToInt32(rowParte.TPAR_CODIGO))) { validacion.Add("Unicamente un producto terminado puede ser raíz"); }
             if (tvEstructura.Nodes.Count == 0 && rowParte == null) { validacion.Add("Unicamente un producto terminado puede ser raíz"); }
+            if (tvEstructura.SelectedNode != null && rowParte != null && rowParte.TIPOS_PARTESRow.TPAR_PRODUCTOTERMINADO == 1) { validacion.Add("Un producto terminado no puede ser hijo."); }
             if (tvEstructura.SelectedNode != null && rowParte != null && Convert.ToInt32(tvEstructura.SelectedNode.Tag) == BLL.CompuestoParteBLL.HijoEsMP) { validacion.Add("Una parte no puede ser hijo de una materia prima"); }
             if (tvEstructura.SelectedNode != null && 
                 rowParte != null && 
@@ -439,10 +466,26 @@ namespace GyCAP.UI.EstructuraProducto
                         nudCantidadAgregar.Value = 0;
                     }
                 }
+
+                int codigoEstructura = -1;
+                if (estadoInterface != estadoUI.nuevo && estadoInterface != estadoUI.nuevoExterno) 
+                {
+                    codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]);
+                }
+                
+                arbolEstructura = BLL.EstructuraBLL.ArmarArbol(codigoEstructura, dsEstructura);
+                nudcosto.Value = arbolEstructura.GetCostoEstructura();
             }
             else
             {
-                MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.CompletarDatos, validacion), this.Text);
+                bool validacionRaiz = false;
+                foreach (string mensaje in validacion)
+                {
+                    if (mensaje.Contains("terminado")) { validacionRaiz = true; }
+                }
+
+                if (validacionRaiz) { MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.Logica, validacion.FindAll(p => p.Contains("terminado"))), this.Text); }
+                else { MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.CompletarDatos, validacion), this.Text); }
             }
         }
 
@@ -540,77 +583,87 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnSumarParte_Click(object sender, EventArgs e)
         {
-            if (tvEstructura.SelectedNode != null)
+            if (tvEstructura.SelectedNode != null && tvEstructura.SelectedNode.Parent != null)
             {
-                string nodeText = string.Empty;
-                if (dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).IsMP_CODIGONull())
-                {
-                    dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD += 1;
-                    nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE;
+                string nodeText = tvEstructura.SelectedNode.Text;
+                int codigoComp = Convert.ToInt32(tvEstructura.SelectedNode.Name);
+                if (dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).IsMP_CODIGONull())
+                {                    
+                    dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD += 1;
+                    nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE;
                     nodeText += " - ";
-                    nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_CODIGO;
+                    nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_CODIGO;
                     nodeText += " / #";
-                    nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD.ToString();
+                    nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD.ToString();
                     nodeText += " ";
-                    nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).UNIDADES_MEDIDARow.UMED_ABREVIATURA;
+                    nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).UNIDADES_MEDIDARow.UMED_ABREVIATURA;
+                    arbolEstructura.Find(codigoComp).SumarCantidad(1);
                 }
                 else
-                {
-                    dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD += Convert.ToDecimal("0,05");
-                    nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).MATERIAS_PRIMASRow.MP_NOMBRE;
+                {                    
+                    dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD += Convert.ToDecimal("0,05");
+                    nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).MATERIAS_PRIMASRow.MP_NOMBRE;
                     nodeText += " / #";
-                    nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD.ToString();
+                    nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD.ToString();
                     nodeText += " ";
-                    nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).UNIDADES_MEDIDARow.UMED_ABREVIATURA;                    
+                    nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).UNIDADES_MEDIDARow.UMED_ABREVIATURA;
+                    arbolEstructura.Find(codigoComp).SumarCantidad(Convert.ToDecimal("0,05"));
                 }
                 tvEstructura.BeginUpdate();
                 tvEstructura.SelectedNode.Text = nodeText;
                 tvEstructura.EndUpdate();
+
+                nudcosto.Value = arbolEstructura.GetCostoEstructura();
             }
             else
             {
-                MensajesABM.MsjSinSeleccion("Parte", MensajesABM.Generos.Femenino, this.Text);
+                if (tvEstructura.SelectedNode == null) { MensajesABM.MsjSinSeleccion("Parte", MensajesABM.Generos.Femenino, this.Text); }
             }
         }
 
         private void btnRestarParte_Click(object sender, EventArgs e)
         {
-            if (tvEstructura.SelectedNode != null)
+            if (tvEstructura.SelectedNode != null && tvEstructura.SelectedNode.Parent != null)
             {
                 string nodeText = tvEstructura.SelectedNode.Text;
-                if (dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).IsMP_CODIGONull())
+                int codigoComp = Convert.ToInt32(tvEstructura.SelectedNode.Name);
+                if (dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).IsMP_CODIGONull())
                 {
-                    if (dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD > 1)
+                    if (dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD > 1)
                     {
-                        dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD -= 1;
-                        nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE;
+                        dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD -= 1;
+                        nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE;
                         nodeText += " - ";
-                        nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_CODIGO;
+                        nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_CODIGO;
                         nodeText += " / #";
-                        nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD.ToString();
+                        nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD.ToString();
                         nodeText += " ";
-                        nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).UNIDADES_MEDIDARow.UMED_ABREVIATURA;
+                        nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).UNIDADES_MEDIDARow.UMED_ABREVIATURA;
+                        arbolEstructura.Find(codigoComp).RestarCantidad(1);
                     }
                 }
                 else
                 {
-                    if (dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD > Convert.ToDecimal("0,05"))
+                    if (dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD > Convert.ToDecimal("0,05"))
                     {
-                        dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD -= Convert.ToDecimal("0,05");
-                        nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).MATERIAS_PRIMASRow.MP_NOMBRE;
+                        dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD -= Convert.ToDecimal("0,05");
+                        nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).MATERIAS_PRIMASRow.MP_NOMBRE;
                         nodeText += " / #";
-                        nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).COMP_CANTIDAD.ToString();
+                        nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD.ToString();
                         nodeText += " ";
-                        nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).UNIDADES_MEDIDARow.UMED_ABREVIATURA;
+                        nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).UNIDADES_MEDIDARow.UMED_ABREVIATURA;
+                        arbolEstructura.Find(codigoComp).RestarCantidad(Convert.ToDecimal("0,05"));
                     }
                 }
                 tvEstructura.BeginUpdate();
                 tvEstructura.SelectedNode.Text = nodeText;
                 tvEstructura.EndUpdate();
+
+                nudcosto.Value = arbolEstructura.GetCostoEstructura();
             }
             else
             {
-                MensajesABM.MsjSinSeleccion("Parte", MensajesABM.Generos.Femenino, this.Text);
+                if (tvEstructura.SelectedNode == null) { MensajesABM.MsjSinSeleccion("Parte", MensajesABM.Generos.Femenino, this.Text); }
             }
         }
 
@@ -667,7 +720,7 @@ namespace GyCAP.UI.EstructuraProducto
                     dtpFechaModificacion.SetFechaNull();
                     txtDescripcion.ReadOnly = false;
                     nudcosto.Value = 0;
-                    nudcosto.Enabled = true;
+                    //nudcosto.Enabled = true;
                     txtDescripcion.Clear();
                     panelAccionesArbol.Enabled = true;
                     gbAgregarParteMP.Enabled = true;
@@ -705,7 +758,7 @@ namespace GyCAP.UI.EstructuraProducto
                     dtpFechaModificacion.SetFechaNull();
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
-                    nudcosto.Enabled = true;
+                    //nudcosto.Enabled = true;
                     nudcosto.Value = 0;
                     panelAccionesArbol.Enabled = true;
                     gbAgregarParteMP.Enabled = true;
@@ -731,7 +784,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbResponsable.Enabled = false;
                     dtpFechaModificacion.Enabled = false;
                     txtDescripcion.ReadOnly = true;
-                    nudcosto.Enabled = false;
+                    //nudcosto.Enabled = false;
                     panelAccionesArbol.Enabled = false;
                     gbAgregarParteMP.Enabled = false;
                     btnGuardar.Enabled = false;
@@ -755,7 +808,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbResponsable.Enabled = true;
                     dtpFechaModificacion.Enabled = true;
                     txtDescripcion.ReadOnly = false;
-                    nudcosto.Enabled = true;
+                    //nudcosto.Enabled = true;
                     panelAccionesArbol.Enabled = true;
                     gbAgregarParteMP.Enabled = true;
                     btnGuardar.Enabled = true;
@@ -784,7 +837,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbResponsable.Enabled = true;
                     dtpFechaModificacion.Enabled = true;
                     txtDescripcion.ReadOnly = false;
-                    nudcosto.Enabled = true;
+                    //nudcosto.Enabled = true;
                     panelAccionesArbol.Enabled = true;
                     gbAgregarParteMP.Enabled = true;                    
                     btnGuardar.Enabled = true;
@@ -940,6 +993,11 @@ namespace GyCAP.UI.EstructuraProducto
             #endregion
 
         }
+
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }  
         
         #endregion Servicios
 

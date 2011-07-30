@@ -68,6 +68,13 @@ namespace GyCAP.Entidades.Mensajes
                     }
                     mensaje = mensaje + "\nLos siguientes datos están vacíos o completados con espacios en blanco:\n\n" + lista;     
                     break;
+                case Validaciones.Logica:
+                    foreach (string dato in datos)
+                    {
+                        lista = lista + "- " + dato + "\n";
+                    }
+                    mensaje = mensaje + "\nPor favor revise lo siguiente:\n\n" + lista;
+                    break;
               }
                         
             return mensaje;
