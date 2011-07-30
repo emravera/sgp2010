@@ -163,7 +163,7 @@ namespace GyCAP.BLL
             arbol.Nodes.Add(nodoInicio);
 
             //Ahora creamos todas las ramas con sus hojas
-            foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowComp in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codigoEstructura + " AND part_numero_hijo <> " + rowCompuestoInicio.PART_NUMERO_HIJO.ToString()))
+            foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowComp in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codigoEstructura + " AND (part_numero_hijo <> " + rowCompuestoInicio.PART_NUMERO_HIJO.ToString() + " OR part_numero_hijo IS NULL)"))
             {
                 TreeNode nodo = new TreeNode();
                 if (clonar) { nodo.Name = lastCompID.ToString(); }
@@ -214,17 +214,26 @@ namespace GyCAP.BLL
                                                 );
 
             arbolEstructura.NodoRaiz.Text = "Inicio";
-
-            foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowComp in 
-                (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select
-                    ("estr_codigo = " + codigoEstructura + " AND part_numero_hijo <> " + rowCompuestoInicio.PART_NUMERO_HIJO.ToString()))
+            
+            foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowComp in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select
+                    ("estr_codigo = " + codigoEstructura + " AND (part_numero_hijo <> " + rowCompuestoInicio.PART_NUMERO_HIJO.ToString() + " OR part_numero_hijo IS NULL)"))
             {
                 NodoEstructura nodo = new NodoEstructura();
                 nodo.CodigoNodo = Convert.ToInt32(rowComp.COMP_CODIGO);
                 nodo.Text = ((rowComp.IsMP_CODIGONull()) ? (rowComp.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE + " - " + rowComp.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_CODIGO) : (rowComp.MATERIAS_PRIMASRow.MP_NOMBRE));
                 nodo.Text += " / #" + rowComp.COMP_CANTIDAD.ToString() + " " + rowComp.UNIDADES_MEDIDARow.UMED_ABREVIATURA;
                 nodo.Contenido = ((rowComp.IsMP_CODIGONull()) ? NodoEstructura.tipoContenido.Parte : NodoEstructura.tipoContenido.MateriaPrima);
-                int key = Convert.ToInt32((dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codigoEstructura.ToString() + " AND part_numero_hijo = " + rowComp.PART_NUMERO_PADRE.ToString()) as Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])[0].COMP_CODIGO);
+                int key = Convert.ToInt32((dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codigoEstructura + "AND part_numero_hijo = " + rowComp.PART_NUMERO_PADRE) as Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])[0].COMP_CODIGO);
+                nodo.Compuesto = new CompuestoParte
+                                (
+                                    key,
+                                    new Parte(),
+                                    ((rowComp.IsMP_CODIGONull()) ? new Parte() : null),
+                                    ((rowComp.IsMP_CODIGONull()) ? null : new MateriaPrima() { Costo = rowComp.MATERIAS_PRIMASRow.MP_COSTO }),
+                                    rowComp.COMP_CANTIDAD,
+                                    new UnidadMedida(Convert.ToInt32(rowComp.UMED_CODIGO)),
+                                    new Estructura()
+                                );
                 arbolEstructura.Find(key).NodosHijos.Add(nodo);
             }
 
