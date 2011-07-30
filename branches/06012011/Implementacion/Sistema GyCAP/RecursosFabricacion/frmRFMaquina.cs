@@ -134,9 +134,9 @@ namespace GyCAP.UI.RecursosFabricacion
             dvModelo = new DataView(dsMaquina.MODELOS_MAQUINAS);
             cboModelo.SetDatos(dvModelo, "MODM_CODIGO", "MODM_NOMBRE", "Seleccione...", false);
 
-            cboEsCritica.Items.Add("No");
-            cboEsCritica.Items.Add("Si");
-            cboEsCritica.SelectedIndex = 0;
+            int[] valores = { 0, 1 };
+            string[] nombres = { "No", "Si" };
+            cboEsCritica.SetDatos(nombres, valores, "Seleccione...", false);
 
             //Limitamos el maximo de los controles
             txtMarca.MaxLength = 80;
